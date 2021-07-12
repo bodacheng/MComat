@@ -22,12 +22,12 @@ public static class PlayFabRead
                     switch (item.CatalogVersion)
                     {
                         case "Monsters":
-                            MonsterOfPlayerInfo info = new MonsterOfPlayerInfo
+                            UnitInfo info = new UnitInfo
                             {
                                 InstanceId = item.ItemInstanceId,
                                 monsterId = item.ItemId
                             };
-                            DicAdd<string, MonsterOfPlayerInfo>.Add(MyMonsters.Dic, item.ItemInstanceId, info);
+                            DicAdd<string, UnitInfo>.Add(MyMonsters.Dic, item.ItemInstanceId, info);
                             break;
                         case "stoneTest2":
                             StoneOfPlayerInfo Info = new StoneOfPlayerInfo

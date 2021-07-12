@@ -21,7 +21,7 @@ namespace mainMenu
             if (MemberDetail.target._focusing == null)
                 return;
 
-            MonsterOfPlayerInfo info = MemberDetail.target._focusing;
+            UnitInfo info = MemberDetail.target._focusing;
             StoneOfPlayerInfo originSkillInfo = Stones.GetOriginSkillOfMonster(info.InstanceId);
             foreach (SkillStoneSlot _slot in allSlot)
             {

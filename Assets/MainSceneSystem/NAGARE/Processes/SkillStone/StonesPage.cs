@@ -67,7 +67,7 @@ public class StonesPage : MainSceneProcess
     public override void ProcessEnter<T>(T t)
     {
         Account.GetUserReadOnlyData(UserReadOnlyDataLoadFinished);
-        ItemLoader.LoadAll(ItemsLoadFinished);
+        PlayFabRead.LoadItems(ItemsLoadFinished);
         
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {

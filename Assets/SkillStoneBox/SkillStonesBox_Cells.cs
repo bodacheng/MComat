@@ -109,7 +109,7 @@ namespace mainMenu
                 return;
             }
             
-            MonsterOfPlayerInfo _one = MyMonsters.Get(SSInfo.inUsingMonsterOfPlayerId);
+            UnitInfo _one = MyMonsters.Get(SSInfo.inUsingMonsterOfPlayerId);
             if (_one == null)
             {
                 targetIcon.gameObject.SetActive(false);

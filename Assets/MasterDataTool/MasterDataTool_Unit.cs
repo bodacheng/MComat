@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using dataAccess;
-using Api.Dto.Model;
 using Skill;
 
 public partial class MasterDataTool : MonoBehaviour
@@ -144,15 +142,5 @@ public partial class MasterDataTool : MonoBehaviour
                 MonstersConfigTable.rowList.Add(newRow);
         }
         MonstersConfigTable.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : "mst_monster");
-    }
-
-    public void GenerateTutorialUnitsFiles()
-    {
-        MonsterOfPlayerInfo Adam = new MonsterOfPlayerInfo
-        {
-            InstanceId = 1.ToString(),
-            monsterId = 1.ToString()
-        };
-        MyMonsters.generateStoryCharsIntoXMLFile(Adam);
     }
 }

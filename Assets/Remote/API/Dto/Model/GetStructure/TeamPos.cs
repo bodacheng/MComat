@@ -11,7 +11,7 @@ namespace Api.Dto.Model {
     /// バージョン：1.00 2019/07/01
     /// </summary>
     [Serializable]
-    public class MonsterOfPlayerInfo
+    public class UnitInfo
     {
         /// <summary>
         /// プレーヤ所有モンスターID
@@ -23,7 +23,7 @@ namespace Api.Dto.Model {
         /// </summary>
         public string monsterId { get; set; }
         
-        public static CharDataInfo GetCharDataInfo(MonsterOfPlayerInfo accountCharInfo)
+        public static CharDataInfo GetCharDataInfo(UnitInfo accountCharInfo)
         {
             try
             {

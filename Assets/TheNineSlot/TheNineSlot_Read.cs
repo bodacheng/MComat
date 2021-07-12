@@ -9,7 +9,7 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public void ReadANineAndTwo(MonsterOfPlayerInfo _AccCharInfo)
+        public void ReadANineAndTwo(UnitInfo _AccCharInfo)
         {
             ForceClearAll();
             

@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
-using mainMenu;
 using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
 using System;
+using mainMenu;
 
 namespace dataAccess
 {
     public partial class Account
     {
-        static void GetUserDataRemote(Action<int> finished)
+        public static PlayerAccountInfo _AccInfo;//本单例模式的处理对象,一个参照数据库来定值的变量。
+        
+        public static void GetUserData(Action<int> finished)
         {
             PlayFabClientAPI.GetUserData
             (
@@ -28,7 +30,7 @@ namespace dataAccess
             );
         }
 
-        static void GetUserReadOnlyDataRemote(Action<int> finished)
+        public static void GetUserReadOnlyData(Action<int> finished)
         {
             PlayFabClientAPI.GetUserReadOnlyData
             (
@@ -51,8 +53,8 @@ namespace dataAccess
                 }
             );
         }
-        
-        static void GetStatisticsRemote(Action<int> finished)
+
+        public static void GetStatistics(Action<int> finished)
         {
             PlayFabClientAPI.GetPlayerStatistics(
                 new GetPlayerStatisticsRequest(),
@@ -67,7 +69,7 @@ namespace dataAccess
                 }
             );
         }
-
+        
         static void OnGetStatistics(GetPlayerStatisticsResult result)
         {
             foreach(StatisticValue value in result.Statistics)
@@ -78,23 +80,6 @@ namespace dataAccess
                         break;
                 }
             }
-        }
-
-        static void SetUserData(Dictionary<string, string> values)
-        {
-            PlayFabClientAPI.UpdateUserData(
-                new UpdateUserDataRequest{
-                    Data = values
-                },
-                result =>
-                {
-                    Debug.Log("账户数据修改成功");
-                },
-                error =>
-                {
-                    Debug.Log(error.GenerateErrorReport());
-                }
-            );
         }
     }
 }

@@ -29,20 +29,9 @@ public class ConfigureOptions : MonoBehaviour
     public ResourceLoadMode bgmAndCvs;
 }
 
-
-
-
 public enum ResourceLoadMode
 {
     CachAB = 1,
     StreamingAssetAB = 2,
     Resource = 3
-}
-
-public enum PlayerInfoRefMode
-{
-    localTestSaveData = 1,
-    remoteTestPlayer = 2,
-    formalVersion = 3,
-    toBeSelect = 0
 }

@@ -1,9 +1,5 @@
-﻿using dataAccess;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using Api.Dto.Form;
-using Api.Common;
 using Api.Dto.Model;
 using System.Collections.Generic;
 
@@ -71,42 +67,5 @@ public class MailManager : MonoBehaviour {
             mailModel.transform.localPosition = Vector3.zero;
             mailModel.transform.localScale = Vector3.one;
         }
-    }
-    
-    public IEnumerator RequestMails(ApiLanguage apiLanguage)
-    {
-        yield return Request(
-            model => {
-                myMailList = model.myMailList;
-
-                /// test //
-                MailOfPlayerModel mail1 = new MailOfPlayerModel();
-                MailOfPlayerModel mail2 = new MailOfPlayerModel();
-                myMailList.Add(mail1);
-                myMailList.Add(mail2);
-                ///////////
-                
-                GenerateMailModels(myMailList);
-            },
-            model => {
-            
-            },
-            apiLanguage
-        );
-    }
-    
-    static IEnumerator Request(SuccessDelegate<GetMailsOfPlayerModel> success, FailDelegate<GetMailsOfPlayerModel> fail, ApiLanguage apiLanguage)
-    {
-        switch(Account.ReferenceMode)
-        {
-            case PlayerInfoRefMode.formalVersion:
-                break;
-            case PlayerInfoRefMode.remoteTestPlayer:
-                break;
-            case PlayerInfoRefMode.localTestSaveData:
-                success(new GetMailsOfPlayerModel());
-                break;
-        }
-        yield break;
     }
 }

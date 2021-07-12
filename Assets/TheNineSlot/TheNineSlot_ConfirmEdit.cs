@@ -9,7 +9,7 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public void UpdateStonesBaseOnSlots(MonsterOfPlayerInfo info)
+        public void UpdateStonesBaseOnSlots(UnitInfo info)
         {
             SkillSet.SkillEditError valR = target.CheckEditBasedOnCurrent();
             if (valR != SkillSet.SkillEditError.Perfect)
@@ -110,7 +110,7 @@ namespace mainMenu
                 MainSceneLogger.Logs.Add(skillConfirmLog);
             }
 
-            Stones.Update(ToEditStones, () => sucess(ToEditStones), error);
+            CloudScript.UpdateSkillEdit(ToEditStones, () => sucess(ToEditStones), error);
         }
 
 

@@ -1,53 +1,15 @@
 ﻿using dataAccess;
 using UnityEngine;
-using System.Collections;
 using UnityEngine.SceneManagement;
-using Json;
 using mainMenu;
+using System.Collections.Generic;
+using Api.Dto.Model;
+using Skill;
 
-public partial class Starter : MonoBehaviour
+public class Starter : MonoBehaviour
 {
-    public PlayerInfoRefMode ProjectPlayerInfoRefMode;
     public bool enterFrontPageFirst;
-
-    // 启动本地测试模式
-    public void BeginLocalTestMode()
-    {
-        Account.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
-        EnterFrontScene();
-    }
-
-    // 启动本地测试模式（新存档）
-    public void StartNewLocalTestMode()
-    {
-        PlayFabLogin.CustomIDLogin(
-            result =>
-            {
-                StartCoroutine(_StartNewLocalTestMode());
-            },
-            error =>
-            {
-                Debug.Log(error.GenerateErrorReport());
-            }
-        );
-    }
-
-    // 启动技能浏览器模式
-    public void ToSkillShowerMode()
-    {
-        StartCoroutine(SkillShowerMode());
-    }
-
-    IEnumerator SkillShowerMode()
-    {
-        DeleteLocalSaveDate();
-        Account.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
-        Stones.LocalSaveDataGetAllStones();
-        yield return MyMonsters.LocalSaveDataGetAllCharacters();
-        SceneManager.LoadScene(1);
-    }
-
-    // 进入开头画面
+    
     void EnterFrontScene()
     {
         if (enterFrontPageFirst)
@@ -60,58 +22,57 @@ public partial class Starter : MonoBehaviour
             SceneManager.LoadScene(1);
         }
     }
-
-    // 删除本地存档
-    public void DeleteLocalSaveDate()
+    
+    // 启动技能浏览器模式
+    public void ToSkillShowerMode()
     {
-        LocalJson.DeleteAllUnderFolder(Application.persistentDataPath);
-        LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/AccountCharacterInfos");
-        LocalJson.DeleteAllUnderFolder(Application.persistentDataPath + "/MyStones");
-    }
-
-    /// <summary>
-    /// 是否使用提前准备好的存档文件，即Resources/TestSaveData下的各本地存档
-    /// </summary>
-    bool UseBackUpData = false;
-    IEnumerator _StartNewLocalTestMode()
-    {
-        Account.ReferenceMode = PlayerInfoRefMode.localTestSaveData;
-        if (UseBackUpData)
+        SkillConfigTable.LoadAllSkillConfigs();
+        foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.SkillConfigRefDic)
         {
-            DeleteLocalSaveDate();
-
-            TextAsset arena3V3TeamSet = Resources.Load("TestSaveData/arena3V3TeamSet") as TextAsset;
-            TextAsset localAccountInfo = Resources.Load("TestSaveData/localAccountInfo") as TextAsset;
-            TextAsset TeamSet = Resources.Load("TestSaveData/TeamSet") as TextAsset;
-
-            Object[] stones = Resources.LoadAll("TestSaveData/MyStones", typeof(TextAsset));
-            Object[] units = Resources.LoadAll("TestSaveData/AccountCharacterInfos", typeof(TextAsset));
-
-            LocalJson.SaveToJsonFile_persistentDataPath(null, "arena3V3TeamSet.json", arena3V3TeamSet.text);
-            LocalJson.SaveToJsonFile_persistentDataPath(null, "localAccountInfo.json", localAccountInfo.text);
-            LocalJson.SaveToJsonFile_persistentDataPath(null, "TeamSet.json", TeamSet.text);
-
-            for (int i = 0; i < stones.Length; i++)
+            //Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
+            StoneOfPlayerInfo stoneInfo = new StoneOfPlayerInfo
             {
-                LocalJson.SaveToJsonFile_persistentDataPath("MyStones", stones[i].name + ".json", ((TextAsset)(stones[i])).text);
-            }
-
-            for (int i = 0; i < units.Length; i++)
-            {
-                LocalJson.SaveToJsonFile_persistentDataPath("AccountCharacterInfos", units[i].name + ".json", ((TextAsset)(units[i])).text);
-            }
+                InstanceId = (Stones.Dic.Count + 1).ToString(),
+                skillId = _pair.Value.RECORD_ID,
+                BreakThrough = 0,
+                EXP = 0,
+                Inherent = "false"
+            };
+            Stones.Add(stoneInfo);
         }
-        else
+        
+        List<CharConfig> charList = MonstersConfigTable.RowToConfigList(MonstersConfigTable.rowList);
+        int i = 0;
+        foreach (CharConfig _CharConfig in charList)
         {
-            DeleteLocalSaveDate();
-            Stones.LocalSaveDataGetAllStones();
-            yield return MyMonsters.LocalSaveDataGetAllCharacters();
+            UnitInfo _Char = new UnitInfo
+            {
+                monsterId = _CharConfig.RECORD_ID,
+                InstanceId = i.ToString()
+            };
+                
+            KeyValuePair<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(_CharConfig.RECORD_ID);
+            if (INHERENTSkills.Key != null)
+            {
+                StoneOfPlayerInfo stoneInfo = new StoneOfPlayerInfo
+                {
+                    InstanceId = (Stones.Dic.Count + 1).ToString(),
+                    skillId = INHERENTSkills.Key,
+                    EXP = 0,
+                    BreakThrough = 0,
+                    Inherent = "true",
+                    inUsingMonsterOfPlayerId = i.ToString(),
+                    inUsingSkillSlot = "1"
+                };
+                Stones.Add(stoneInfo);
+            }
+            Debug.Log("尝试将角色" + _CharConfig.REAL_NAME + "加入存档");
+            DicAdd<string, UnitInfo>.Add(MyMonsters.Dic, _Char.InstanceId, _Char);
+            i++;
         }
-        FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
-        stage.SetEventType(FightEventType.Screensaver);
-        FightLoad.Go(stage);
+        SceneManager.LoadScene(1);
     }
-
+    
     // 启动网络模式
     public void BeginNetMode()
     {
@@ -122,8 +83,6 @@ public partial class Starter : MonoBehaviour
                 {
                     playerID = result.PlayFabId
                 };
-                //CloudScript.GrantStonesTest();
-                Account.ReferenceMode = PlayerInfoRefMode.remoteTestPlayer;
                 EnterFrontScene();
             },
             fail => {

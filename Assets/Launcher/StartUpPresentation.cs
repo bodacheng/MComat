@@ -17,9 +17,7 @@ public class StartUpPresentation : MonoBehaviour
     [Header("ResourceLordSceneStarter")]
     public ResourceDownLoad ResourceDownLoad;
     
-    [Space(7)]
-    [Header("开发模式启动画面")]
-    public RectTransform DevT;
+
 
     [Space(7)]
     [Header("开发公司商标")]
@@ -48,7 +46,7 @@ public class StartUpPresentation : MonoBehaviour
         logo.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         logo.gameObject.SetActive(false);
-
+        
         // step2:主洁面
         SingleAssignmentDisposable Watershed = null;
         Watershed = new SingleAssignmentDisposable
@@ -64,19 +62,7 @@ public class StartUpPresentation : MonoBehaviour
                     
                     if (ResourceDownLoad.DProcessFinished)
                     {
-                        switch (Starter.ProjectPlayerInfoRefMode)
-                        {
-                            case PlayerInfoRefMode.toBeSelect:
-                                DevT.gameObject.SetActive(true);
-                                break;
-                            case PlayerInfoRefMode.formalVersion:
-                                break;
-                            case PlayerInfoRefMode.localTestSaveData:
-                                Starter.BeginLocalTestMode();
-                                break;
-                            case PlayerInfoRefMode.remoteTestPlayer:
-                                break;
-                        }
+                        Starter.BeginNetMode();
                         Watershed.Dispose();
                     }
                 }

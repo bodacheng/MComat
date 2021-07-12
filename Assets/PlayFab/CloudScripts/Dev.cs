@@ -57,7 +57,7 @@ public partial class CloudScript
                 object currentItemCount;
                 jsonResult.TryGetValue("currentItemCount", out currentItemCount); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
                 Debug.Log(currentItemCount);
-                ItemLoader.LoadAll(new Action<int>((x) => { }));
+                PlayFabRead.LoadItems(new Action<int>((x) => { }));
             },
             error => { Debug.Log(error.Error); });
     }

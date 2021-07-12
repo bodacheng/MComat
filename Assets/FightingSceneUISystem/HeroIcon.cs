@@ -114,7 +114,7 @@ public class HeroIcon : MonoBehaviour {
     {
         if (instanceId != null)
         {
-            MonsterOfPlayerInfo _one = MyMonsters.Get(instanceId);
+            UnitInfo _one = MyMonsters.Get(instanceId);
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
             ChangeHeroIconByRID(charConfig.RECORD_ID,Icon);
         }

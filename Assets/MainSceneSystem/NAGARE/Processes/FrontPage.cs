@@ -62,7 +62,7 @@ public class FrontPage : MainSceneProcess
         string focusLocalid = TeamSet.Default.GetMonsterOfPlayerIdOnPos(0);
         if (focusLocalid == null)
         {
-            foreach (KeyValuePair<string, MonsterOfPlayerInfo> keyValuePair in MyMonsters.Dic)
+            foreach (KeyValuePair<string, UnitInfo> keyValuePair in MyMonsters.Dic)
             {
                 focusLocalid = keyValuePair.Key;
                 break;
@@ -83,7 +83,7 @@ public class FrontPage : MainSceneProcess
         Account.GetStatistics(StatisticsLoadFinished);
 
         //AccountCharsSet.LoadTutorial();
-        ItemLoader.LoadAll(ItemsLoadFinished);
+        PlayFabRead.LoadItems(ItemsLoadFinished);
 
         TeamSet.LoadTeamSet("arena", ArenaTFinished);
         TeamSet.LoadTeamSet("arcade", ArcadeTFinished);

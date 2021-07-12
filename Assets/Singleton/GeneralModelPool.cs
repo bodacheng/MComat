@@ -79,7 +79,7 @@ public static class GeneralModelPool {
     
     public static IEnumerator GetMyModel(string localid)
     {
-        MonsterOfPlayerInfo targetInfo = MyMonsters.Get(localid);
+        UnitInfo targetInfo = MyMonsters.Get(localid);
         IEnumerator enumerator = GetModel(targetInfo.monsterId, true);
         yield return enumerator;
         yield return enumerator.Current;

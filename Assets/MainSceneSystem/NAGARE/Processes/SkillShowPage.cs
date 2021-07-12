@@ -12,7 +12,7 @@ public class SkillShowPage : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        CharDataInfo _CharDataInfo = MonsterOfPlayerInfo.GetCharDataInfo(MemberDetail.target._focusing);
+        CharDataInfo _CharDataInfo = UnitInfo.GetCharDataInfo(MemberDetail.target._focusing);
         MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh( _CharDataInfo);
         // 表现系
         CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.monsterId);

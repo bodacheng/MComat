@@ -87,79 +87,9 @@ public class StoneMergeManger : MonoBehaviour
     {
         void run()
         {
-            PreScene.target.mainProcessRunner.RunAsQueued(SubmitMergeRequest());
+            //
         }
         LoadingCanvas.target.ArrangeConfirmWindow(run, "确实要融合技能石？");
-    }
-    
-    public IEnumerator SubmitMergeRequest()
-    {
-        SkillStoneMergeForm skillStoneLevelUpForm = new SkillStoneMergeForm();
-        
-        SKStoneItem item1 = cell1.GetItem();
-        SKStoneItem item2 = cell2.GetItem();
-        SKStoneItem item3 = cell3.GetItem();
-        SKStoneItem item4 = cell4.GetItem();
-        SKStoneItem item5 = cell5.GetItem();
-        
-        skillStoneLevelUpForm.M1Stone = item1 != null ? item1.instanceId : null;
-        skillStoneLevelUpForm.M2Stone = item2 != null ? item2.instanceId : null;
-        skillStoneLevelUpForm.M3Stone = item3 != null ? item3.instanceId : null;
-        skillStoneLevelUpForm.M4Stone = item4 != null ? item4.instanceId : null;
-        skillStoneLevelUpForm.M5Stone = item5 != null ? item5.instanceId : null;
-                
-        yield return Merge(skillStoneLevelUpForm,
-             model =>
-             {
-                if (skillStoneLevelUpForm.M1Stone != null)
-                    Stones.RemoveStoneLocal(skillStoneLevelUpForm.M1Stone);
-                if (skillStoneLevelUpForm.M2Stone != null)
-                    Stones.RemoveStoneLocal(skillStoneLevelUpForm.M2Stone);
-                if (skillStoneLevelUpForm.M3Stone != null)
-                    Stones.RemoveStoneLocal(skillStoneLevelUpForm.M3Stone);
-                if (skillStoneLevelUpForm.M4Stone != null)
-                    Stones.RemoveStoneLocal(skillStoneLevelUpForm.M4Stone);
-                if (skillStoneLevelUpForm.M5Stone != null)
-                    Stones.RemoveStoneLocal(skillStoneLevelUpForm.M5Stone);
-                    
-                Stones.Add(model.stone);
-             },
-             model => {
-             
-             }
-             , Setting.Language
-        );
-    }
-    
-    // 技能石升级
-    // 该操作仍余留一个很大的问题：选择的技能石为装备中的情况。如何避免点数失衡
-    public IEnumerator Merge(SkillStoneMergeForm form, SuccessDelegate<GetMergedStoneModel> success, FailDelegate<GetMergedStoneModel> fail, ApiLanguage apiLanguage)
-    {
-        switch (Account.ReferenceMode)
-        {
-            case PlayerInfoRefMode.localTestSaveData:
-                bool succeed = false;
-                if (succeed)
-                {
-                    success(null);
-                }else{
-                    fail(null);
-                }
-            break;
-            case PlayerInfoRefMode.remoteTestPlayer:
-                yield return ApiCaller.Instance.Post<GetMergedStoneModel, SkillStoneMergeForm>("目前地址未定", form, ApiCaller.Instance.getHeader(apiLanguage), 
-                    model => {
-                        success(model.data);
-                    },
-                    model => {
-                        fail(model.data);
-                    }
-                );
-            break;
-            case PlayerInfoRefMode.formalVersion:
-            break;
-        }
-        yield break;
     }
     #endregion
 }

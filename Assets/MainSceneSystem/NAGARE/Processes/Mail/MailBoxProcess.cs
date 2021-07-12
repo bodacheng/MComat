@@ -22,7 +22,6 @@ public class MailBoxProcess : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        yield return MailManager.target.RequestMails(Setting.Language);
         MailManager.target.MailCanvas.gameObject.SetActive(true);
         MailManager.target.BoxPartT.gameObject.SetActive(true);
         yield break;

@@ -118,11 +118,6 @@ public class LocalMasterDataToolGUI : Editor {
                 }
             }
         }
-        
-        if (GUILayout.Button("生成剧情用临时角色存档文件"))
-        {
-            _ConfigManager.GenerateTutorialUnitsFiles();
-        }        
     }
 }
 #endif
