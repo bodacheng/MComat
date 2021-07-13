@@ -23,15 +23,15 @@ public class MobileInputsManager : MonoBehaviour {
     public Button Fire2;
     public Button Defend;
     public Button Dash;
-    
+
     public Camera fxCamera;
     public Transform effectsParent;
-    
+
     public static MobileInputsManager target;
     static IDictionary<Zokusei, zokuseiButtonEffectsGroup> zokuseiButtonEffects = new Dictionary<Zokusei, zokuseiButtonEffectsGroup>();
-    static zokuseiButtonEffectsGroup _focusingButtonEffectsGroup;
+    static zokuseiButtonEffectsGroup _focusing;
     public BehaviorRunner Observing_Runner;
-    
+
     public static bool playerMode;
     public static bool inputting;
     
@@ -61,18 +61,18 @@ public class MobileInputsManager : MonoBehaviour {
     public void Clear()
     {
         zokuseiButtonEffects.Clear();
-        _focusingButtonEffectsGroup = null;
+        _focusing = null;
     }
     
     // 切换输入按键表现层（红黄蓝绿）.这个函数使用的前提是所有用的上的控制器组都已经注册并初始化
     void SwitchZokuseiButtons(Zokusei zokusei)
     {
-        if (_focusingButtonEffectsGroup != null)
-            _focusingButtonEffectsGroup.Close();
+        if (_focusing != null)
+            _focusing.Close();
         if (zokuseiButtonEffects.ContainsKey(zokusei))
         {
-            _focusingButtonEffectsGroup = zokuseiButtonEffects[zokusei];
-            _focusingButtonEffectsGroup.Open(
+            _focusing = zokuseiButtonEffects[zokusei];
+            _focusing.Open(
                 ScreenPositionCal.Cal(2, target.fxCamera, Defend.GetComponent<RectTransform>(), 5), 
                 ScreenPositionCal.Cal(2, target.fxCamera, Dash.GetComponent<RectTransform>(), 5)
             );
@@ -100,16 +100,16 @@ public class MobileInputsManager : MonoBehaviour {
         switch(eX)
         {
             case 0:
-                targetexplode = _focusingButtonEffectsGroup.triggerExplosion0;
+                targetexplode = _focusing.triggerExplosion0;
             break;
             case 1:
-                targetexplode = _focusingButtonEffectsGroup.triggerExplosion1;
+                targetexplode = _focusing.triggerExplosion1;
             break;
             case 2:
-                targetexplode = _focusingButtonEffectsGroup.triggerExplosion2;
+                targetexplode = _focusing.triggerExplosion2;
             break;
             case 3:
-                targetexplode = _focusingButtonEffectsGroup.triggerExplosion3;
+                targetexplode = _focusing.triggerExplosion3;
             break;
             default:
                 return;
@@ -130,7 +130,7 @@ public class MobileInputsManager : MonoBehaviour {
         targetexplode.Play();
         
         //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
-        foreach (KeyValuePair<Button, ParticleSystem> keyValue in _focusingButtonEffectsGroup.buttonRefreshEffects)
+        foreach (KeyValuePair<Button, ParticleSystem> keyValue in _focusing.buttonRefreshEffects)
         {
             keyValue.Value.transform.position = ScreenPositionCal.Cal(2, target.fxCamera, keyValue.Key.GetComponent<RectTransform>(),4);
             keyValue.Value.Play(true);
@@ -144,17 +144,17 @@ public class MobileInputsManager : MonoBehaviour {
     void StartPressing(Button targetBUtton)
     {
         targetButtonPos = ScreenPositionCal.Cal(2, target.fxCamera, targetBUtton.GetComponent<RectTransform>(), 7);
-        if (_focusingButtonEffectsGroup != null)
+        if (_focusing != null)
         {
-            _focusingButtonEffectsGroup.pressingExplosion.transform.position = targetButtonPos;
-            _focusingButtonEffectsGroup.pressingExplosion.Play();
+            _focusing.pressingExplosion.transform.position = targetButtonPos;
+            _focusing.pressingExplosion.Play();
         }
     }
 
     void StopPressing()
     {
-        if (_focusingButtonEffectsGroup != null)
-            _focusingButtonEffectsGroup.pressingExplosion.Stop();
+        if (_focusing != null)
+            _focusing.pressingExplosion.Stop();
     }
     
     // 如果不是对准角色，不会跑。
@@ -205,15 +205,15 @@ public class MobileInputsManager : MonoBehaviour {
         
         if (Options_lastframe[InputKey.Attack1] != Behavior_preview_button1)
         {
-            ChangeButtonPatternNewTest(Attack, Behavior_preview_button1 != null ? Behavior_preview_button1.SP_LEVEL : -1);
+            RefreshPattern(Attack, Behavior_preview_button1 != null ? Behavior_preview_button1.SP_LEVEL : -1);
         }
         if (Options_lastframe[InputKey.Attack2] != Behavior_preview_button2)
         {
-            ChangeButtonPatternNewTest(Fire1, Behavior_preview_button2 != null ? Behavior_preview_button2.SP_LEVEL : -1);
+            RefreshPattern(Fire1, Behavior_preview_button2 != null ? Behavior_preview_button2.SP_LEVEL : -1);
         }
         if (Options_lastframe[InputKey.Attack3] != Behavior_preview_button3)
         {
-            ChangeButtonPatternNewTest(Fire2, Behavior_preview_button3 != null ? Behavior_preview_button3.SP_LEVEL : -1);
+            RefreshPattern(Fire2, Behavior_preview_button3 != null ? Behavior_preview_button3.SP_LEVEL : -1);
         }
         
         Options_lastframe[InputKey.Attack1] = Behavior_preview_button1;
@@ -332,9 +332,9 @@ public class MobileInputsManager : MonoBehaviour {
         }
         
         Observing_Runner = null;
-        if (_focusingButtonEffectsGroup != null)
+        if (_focusing != null)
         {
-            _focusingButtonEffectsGroup.Close();
+            _focusing.Close();
         }
     }
     
@@ -344,10 +344,10 @@ public class MobileInputsManager : MonoBehaviour {
     }
         
     Vector3 targetButtonPos;
-    void ChangeButtonPatternNewTest(Button button, int sp_level)//按钮切换也可以在这里做文章
+    void RefreshPattern(Button button, int sp_level)//按钮切换也可以在这里做文章
     {
         targetButtonPos = ScreenPositionCal.Cal(2, target.fxCamera, button.GetComponent<RectTransform>(), 5);
-        _focusingButtonEffectsGroup.Refreshforbutton(button, sp_level, targetButtonPos);
+        _focusing.Refreshforbutton(button, sp_level, targetButtonPos);
     }
 
     //void changeButtonPatternParticleVer(Button button,EX sp_level)//按钮切换也可以在这里做文章

@@ -286,29 +286,11 @@
  <Reference Include="UnityEditor.iOS.Extensions">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="POFX_Runtime">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
- </Reference>
- <Reference Include="log4netPlastic">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
- </Reference>
- <Reference Include="DOTween">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
- </Reference>
- <Reference Include="Newtonsoft.Json">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
- </Reference>
  <Reference Include="POFX_Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/POFX/Scripts/Editor/POFX_Editor.dll</HintPath>
  </Reference>
- <Reference Include="Unity.Analytics.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Plastic.Antlr3.Runtime">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+ <Reference Include="POFX_Runtime">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
  </Reference>
  <Reference Include="JMOAssets_MatCapWelcome">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Asstes/JMO Assets/Editor/JMOAssets_MatCapWelcome.dll</HintPath>
@@ -316,11 +298,29 @@
  <Reference Include="DOTweenEditor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
  </Reference>
- <Reference Include="Unity.Analytics.Tracker">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Tracker.dll</HintPath>
+ <Reference Include="DOTween">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="log4netPlastic">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Analytics.StandardEvents">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="unityplastic">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Plastic.Antlr3.Runtime">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Analytics.Tracker">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Tracker.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Analytics.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

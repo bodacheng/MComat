@@ -41,7 +41,7 @@ namespace FightScene
                             () => {Debug.Log("没能加分成功");}
                         );
                     }
-                    FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
+                    //FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
                 break;
                 case FightEventType.Quest:
                     FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
@@ -52,10 +52,9 @@ namespace FightScene
                 break;
                 case FightEventType.Self:
                     FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);//这里是要根据情况的。。
-                    List<string> stoneidss = RealTimeGameProcessManager.target.FightTeam1.GetAllUsingStoneOfAcc();
-                break;
+                    break;
                 case FightEventType.SkillTest:
-                    yield return SKillTestReload();
+                    yield return NetFightScene.target.SKillTestReload();
                 break;
             }
 
@@ -106,49 +105,6 @@ namespace FightScene
                 }
             }
             Time.timeScale = 1f;
-        }
-        
-        IEnumerator SKillTestReload()
-        {
-            int i = 0;
-            foreach (KeyValuePair<Data_Center,CharDataInfo> keyValuePair in RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef)
-            {
-                switch(i)
-                {
-                    case 0:
-                    case 1:
-                    case 2:
-                        keyValuePair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
-                        break;
-                    case 3:
-                        keyValuePair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
-                        break;
-                }
-                
-                CharConfig _CharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(keyValuePair.Value.r_id));
-                yield return keyValuePair.Key.Step2Initialize(_CharConfig.TYPE, keyValuePair.Value.set, _CharConfig._zokusei, _CharConfig.SPECIAL_ZOKUSEI);
-                i++;
-            }
-            i = 0;
-            foreach (KeyValuePair<Data_Center,CharDataInfo> keyValuePair in RealTimeGameProcessManager.target.FightTeam2.CharDataInfoRef)
-            {
-                switch(i)
-                {
-                    case 0:
-                    case 1:
-                    case 2:
-                        keyValuePair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
-                        break;
-                    case 3:
-                        keyValuePair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
-                        break;
-                }
-                
-                CharConfig _CharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(keyValuePair.Value.r_id));
-                yield return keyValuePair.Key.Step2Initialize(_CharConfig.TYPE, keyValuePair.Value.set, _CharConfig._zokusei, _CharConfig.SPECIAL_ZOKUSEI);
-                i++;
-            }
-            FightOverControl.target.LocalGameRestart();
         }
     }
 }

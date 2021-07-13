@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 using UnityEngine.Playables;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace FightScene
 {
@@ -20,10 +22,6 @@ namespace FightScene
         [Header("CountDownText")]
         public Text CountDown;
         #endregion
-        
-        [Space(11)]
-        [Header("战斗的最后一击时候的处理")]
-        public FightOverControl _FightOverControl;
         
         [Space(11)]
         [Header("战斗信息记录器")]
@@ -140,6 +138,49 @@ namespace FightScene
             }
             if (Fight.GetEventType() == FightEventType.Screensaver)
                 RealTimeGameProcessManager.target.ScreenSaverC(RealTimeGameProcessManager.playerTeam);
+        }
+        
+        public IEnumerator SKillTestReload()
+        {
+            int i = 0;
+            foreach (KeyValuePair<Data_Center,CharDataInfo> keyValuePair in RealTimeGameProcessManager.target.FightTeam1.CharDataInfoRef)
+            {
+                switch(i)
+                {
+                    case 0:
+                    case 1:
+                    case 2:
+                        keyValuePair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
+                        break;
+                    case 3:
+                        keyValuePair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
+                        break;
+                }
+                
+                CharConfig _CharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(keyValuePair.Value.r_id));
+                yield return keyValuePair.Key.Step2Initialize(_CharConfig.TYPE, keyValuePair.Value.set, _CharConfig._zokusei, _CharConfig.SPECIAL_ZOKUSEI);
+                i++;
+            }
+            i = 0;
+            foreach (KeyValuePair<Data_Center,CharDataInfo> keyValuePair in RealTimeGameProcessManager.target.FightTeam2.CharDataInfoRef)
+            {
+                switch(i)
+                {
+                    case 0:
+                    case 1:
+                    case 2:
+                        keyValuePair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
+                        break;
+                    case 3:
+                        keyValuePair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
+                        break;
+                }
+                
+                CharConfig _CharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(keyValuePair.Value.r_id));
+                yield return keyValuePair.Key.Step2Initialize(_CharConfig.TYPE, keyValuePair.Value.set, _CharConfig._zokusei, _CharConfig.SPECIAL_ZOKUSEI);
+                i++;
+            }
+            FightOverControl.target.LocalGameRestart();
         }
     }
 }
