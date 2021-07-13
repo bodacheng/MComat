@@ -37,7 +37,11 @@ namespace FightScene
                     if (FightLogger.target.GetWinner() == Team.player1)
                     {
                         CloudScript.ArenaPointUpBy1(
-                        () => {Debug.Log("胜利加分");},
+                            () =>
+                            {
+                                ArenaFightOver a = UILayerLoader.Load(FightOverControl.target.Step2, "ArenaFightOver") as ArenaFightOver;
+                                a.Initialise(FightOverControl.target.ReturnToFront);
+                            },
                             () => {Debug.Log("没能加分成功");}
                         );
                     }
@@ -57,7 +61,7 @@ namespace FightScene
                     yield return NetFightScene.target.SKillTestReload();
                 break;
             }
-
+            
             List<Data_Center> data_Centers = new List<Data_Center>();
             data_Centers.AddRange(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.GetValues());
             data_Centers.AddRange(RealTimeGameProcessManager.target.FightTeam2.TeamMembers.GetValues());

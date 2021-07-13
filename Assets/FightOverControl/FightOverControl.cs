@@ -37,7 +37,7 @@ namespace FightScene
         [Space(11)]
         [Header("战斗的最后一击时候的处理")]
         public Button NextLevelButton;
-                
+        
         [Space(11)]
         [Header("返回主页面")]
         public Button ReturnButton;

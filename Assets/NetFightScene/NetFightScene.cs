@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 using UnityEngine.Playables;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace FightScene
@@ -55,7 +54,7 @@ namespace FightScene
             target = this;
             Screen.SetResolution(1920, 1080, true);
         }
-
+        
         void Start()
         {
             //QualitySettings.vSyncCount = 1;
@@ -63,11 +62,6 @@ namespace FightScene
             Application.targetFrameRate = 60;
             FightGlobalSetting.scenestep = 1;
             SingleThreadProcesser.backup = mainProcessRunner;
-            mainProcessRunner.RunAsQueued(FightSceneStartUp());
-        }
-        
-        IEnumerator FightSceneStartUp()
-        {
             Time.timeScale = 1f;
             //Position_Set_Executor.Instance.P_sets.Clear();
             PreparingProcess preparingProcess = new PreparingProcess();
@@ -104,9 +98,8 @@ namespace FightScene
             
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
             HurtObjectManager.ConstructDPool();
-            yield break;
         }
-
+        
         void Update()
         {
             FSceneProcessesRunner.Main.ProcessNagare();
