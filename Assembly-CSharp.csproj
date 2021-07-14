@@ -376,6 +376,7 @@
      <Compile Include="Assets\POFX\Scripts\FX\POFX_ColorSwap.cs" />
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_StreamingAssets.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalk.cs" />
+     <Compile Include="Assets\Resources\DummyLayerSystem\UILayerLoader.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Rendering\UIParticleRenderer.cs" />
      <Compile Include="Assets\ShopManager\ShopManager.cs" />
      <Compile Include="Assets\TutorialManger\processes\OpenSkillEdit.cs" />
@@ -448,6 +449,7 @@
      <Compile Include="Assets\TheBlur\Blur.cs" />
      <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_light.cs" />
      <Compile Include="Assets\StagesManagement\ArcadeManager\Pages.cs" />
+     <Compile Include="Assets\Resources\DummyLayerSystem\ArenaFightOver\ArenaFightOver.cs" />
      <Compile Include="Assets\FPSLabel\FPSLabel.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\Sci-Fi Effects\Scripts\SciFiLightFlicker.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_selectBaseMonster.cs" />
@@ -457,9 +459,10 @@
      <Compile Include="Assets\Asstes\FloatingCombatText\DemoScene\DemoController.cs" />
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker_Manager.cs" />
      <Compile Include="Assets\SkillStoneBox\SkillStonesBox_EditMode.cs" />
-     <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\AutoDestroyPS.cs" />
+     <Compile Include="Assets\Resources\DummyLayerSystem\UILayer.cs" />
      <Compile Include="Assets\Language\LanguageConverterManger.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\ExpandBox.cs" />
+     <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\AutoDestroyPS.cs" />
      <Compile Include="Assets\JsonSupport\LocalJson.cs" />
      <Compile Include="Assets\AI\AI_states\states\G_Attack_State.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Panel\FriendsPanelManager.cs" />
@@ -642,9 +645,7 @@
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
      <Compile Include="Assets\FightingSceneUISystem\OutsideScreenIndicator.cs" />
      <Compile Include="Assets\Remote\API\Dto\Model\Common\BasicVoidModel.cs" />
-     <Compile Include="Assets\Resources\DummyLayerSystem\ArenaFightOver\ArenaFightOver.cs" />
-     <Compile Include="Assets\Resources\DummyLayerSystem\UILayer.cs" />
-     <Compile Include="Assets\Resources\DummyLayerSystem\UILayerLoader.cs" />
+     <Compile Include="Assets\Resources\DummyLayerSystem\CommonFightResult\CommonFightResult.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />

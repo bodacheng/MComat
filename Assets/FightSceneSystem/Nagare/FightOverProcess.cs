@@ -42,20 +42,32 @@ namespace FightScene
                                 ArenaFightOver a = UILayerLoader.Load(FightOverControl.target.Step2, "ArenaFightOver") as ArenaFightOver;
                                 a.Initialise(FightOverControl.target.ReturnToFront);
                             },
-                            () => {Debug.Log("没能加分成功");}
+                            () =>
+                            {
+                                Debug.Log("没能加分成功");
+                            }
                         );
+                    }
+                    else
+                    {
+                        ArenaFightOver a = UILayerLoader.Load(FightOverControl.target.Step2, "ArenaFightOver") as ArenaFightOver;
+                        a.Initialise(FightOverControl.target.ReturnToFront);
                     }
                     //FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
                 break;
                 case FightEventType.Quest:
-                    FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
                     if (FightLogger.target.GetWinner() == Team.player1)
                     {
                         FightOverControl.target.CheckNextArcadeLevel();
                     }
+                    CommonFightResult cc = UILayerLoader.Load(FightOverControl.target.Step2, "CommonFightResult") as CommonFightResult;
+                    cc.Initialise(FightOverControl.target.ReturnToFront, FightOverControl.target.LocalGameRestart);
+                    FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1,cc.GetIconAndSKillShowUISetT());
                 break;
                 case FightEventType.Self:
-                    FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);//这里是要根据情况的。。
+                    CommonFightResult c = UILayerLoader.Load(FightOverControl.target.Step2, "CommonFightResult") as CommonFightResult;
+                    c.Initialise(FightOverControl.target.ReturnToFront, FightOverControl.target.LocalGameRestart);
+                    FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1,c.GetIconAndSKillShowUISetT());
                     break;
                 case FightEventType.SkillTest:
                     yield return NetFightScene.target.SKillTestReload();

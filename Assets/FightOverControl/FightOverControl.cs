@@ -32,15 +32,7 @@ namespace FightScene
         
         [Space(11)]
         [Header("战斗的最后一击时候的处理")]
-        public Button ReStart;
-        
-        [Space(11)]
-        [Header("战斗的最后一击时候的处理")]
         public Button NextLevelButton;
-        
-        [Space(11)]
-        [Header("返回主页面")]
-        public Button ReturnButton;
         
         [Header("NineForShow")]
         public NineForShow NineForShowPretab;
@@ -53,10 +45,6 @@ namespace FightScene
         void Awake()
         {
             target = this;
-            ReStart.onClick.RemoveAllListeners();
-            ReStart.onClick.AddListener(LocalGameRestart);
-            ReturnButton.onClick.RemoveAllListeners();
-            ReturnButton.onClick.AddListener(ReturnToFront);
         }
         
         public void Clear()
@@ -72,7 +60,7 @@ namespace FightScene
         
         // 战斗结束后统计技能石升级情况时的画面显示
         List<NineForShow> NineForShows = new List<NineForShow>();
-        public void ShowSKillSets(FightTeam fightTeam)
+        public void ShowSKillSets(FightTeam fightTeam, RectTransform IconAndSKillShowUISetT)
         {
             NineForShows.Clear();
             foreach (Transform child in IconAndSKillShowUISetT) 

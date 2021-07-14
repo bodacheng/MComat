@@ -203,10 +203,10 @@
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Triggers\ObservableFixedUpdateTrigger.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Triggers\ObservablePointerEnterTrigger.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Schedulers\ImmediateScheduler.cs" />
-     <Compile Include="Assets\Plugins\UniRx\Scripts\Disposables\RefCountDisposable.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\Cast.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Observable.Concatenate.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\YieldInstructionCache.cs" />
+     <Compile Include="Assets\Plugins\UniRx\Scripts\Disposables\RefCountDisposable.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\Wait.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\Skip.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Triggers\ObservablePointerDownTrigger.cs" />
