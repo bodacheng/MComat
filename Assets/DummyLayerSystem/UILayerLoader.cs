@@ -5,9 +5,9 @@ public class UILayerLoader
 {
     private static readonly IDictionary<string, string> paths = new Dictionary<string, string>()
     {
-        {"ArenaFightOver", "DummyLayerSystem/ArenaFightOver/ArenaFightOver"},
-        {"CommonFightResult", "DummyLayerSystem/CommonFightResult/CommonFightResult"},
-        {"TitleScreenLayer", "DummyLayerSystem/TitleScreenLayer/TitleScreenLayer"},
+        {"ArenaFightOver", "DummyLayerSystem/ArenaFightOver"},
+        {"CommonFightResult", "DummyLayerSystem/CommonFightResult"},
+        {"TitleScreenLayer", "DummyLayerSystem/TitleScreenLayer"},
     };
 
     private static List<UILayer> Queues = new List<UILayer>();
