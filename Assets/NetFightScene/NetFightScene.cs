@@ -9,6 +9,8 @@ namespace FightScene
 {
     public class NetFightScene : MonoBehaviour
     {
+        [Space(11)] public RectTransform T;
+        
         [Space(11)]
         [Header("Canvas")]
         public Canvas PreparingCanvas, FightCanvas , ScreensaverCanvas;

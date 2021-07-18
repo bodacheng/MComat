@@ -22,11 +22,6 @@ namespace FightScene
         [Header("LOSE")]
         public GameObject lose_textanimation;
         
-        [Header("技能与角色头像T")]
-        public RectTransform Step1;
-        public RectTransform Step2;
-        public RectTransform IconAndSKillShowUISetT;
-        
         [Header("IconWithSkillShow")]
         public IconAndSKillShowUISet IconAndSKillShowUISetPretab;
         
@@ -37,11 +32,6 @@ namespace FightScene
         [Header("NineForShow")]
         public NineForShow NineForShowPretab;
         
-        [Header("Rewards")]
-        public RectTransform RewardsTransform;
-        public Text goldrewards;
-        public Text diamondrewards;
-
         void Awake()
         {
             target = this;
@@ -49,8 +39,6 @@ namespace FightScene
         
         public void Clear()
         {
-            Step1.gameObject.SetActive(false);
-            Step2.gameObject.SetActive(false);
             FightOverCanvas.gameObject.SetActive(false);
             foreach(NineForShow nineForShow in NineForShows)
             {
@@ -85,30 +73,17 @@ namespace FightScene
         // 胜利字幕与对应页面加载
         public IEnumerator WINProcess()
         {
-            Step1.gameObject.SetActive(true);
             win_textanimation.gameObject.SetActive(true);
             yield return new WaitForSeconds(3f);
             win_textanimation.gameObject.SetActive(false);
-            Step1.gameObject.SetActive(false);
-            Step2.gameObject.SetActive(true);
         }
         
         // 失败字幕与对应页面加载
         public IEnumerator LoseProcess()
         {
-            Step1.gameObject.SetActive(true);
             lose_textanimation.gameObject.SetActive(true);
             yield return new WaitForSeconds(3f);
             lose_textanimation.gameObject.SetActive(false);
-            Step1.gameObject.SetActive(false);
-            Step2.gameObject.SetActive(true);
-        }
-        
-        public void ShowRewards(int golds, int diamond)
-        {
-            goldrewards.text = golds.ToString();
-            diamondrewards.text = diamond.ToString();
-            RewardsTransform.gameObject.SetActive(true);
         }
         
         // ArcadeNext
