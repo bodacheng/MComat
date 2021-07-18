@@ -96,7 +96,7 @@
      <Compile Include="Assets\POS_Sys\Start_End_Processes.cs" />
      <Compile Include="Assets\LoadingCanvas\LoadingCanvas.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkLocalization.cs" />
-     <Compile Include="Assets\Resources\DummyLayerSystem\CommonFightResult\CommonFightResult.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\CommonFightResult.cs" />
      <Compile Include="Assets\Resources\effectsresource\Effect3FromJapanNet\eff_magiccircle_sample\UvScroll.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaAnim.cs" />
      <Compile Include="Assets\AnimControl\Animation_Manger_ResourceLoad.cs" />
@@ -129,7 +129,7 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Fix\UIElementInFront.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot_ConfirmEdit.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\BaseStarDataRenderer.cs" />
-     <Compile Include="Assets\Resources\DummyLayerSystem\TitleScreenLayer\TitleScreenLayer.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\TitleScreenLayer.cs" />
      <Compile Include="Assets\CSV2Table\Demo\SampleTable.cs" />
      <Compile Include="Assets\POS_Sys\Child_Label.cs" />
      <Compile Include="Assets\Camera\Modes\keepTargetLeftCamera.cs" />
@@ -378,7 +378,7 @@
      <Compile Include="Assets\POFX\Scripts\FX\POFX_ColorSwap.cs" />
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_StreamingAssets.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalk.cs" />
-     <Compile Include="Assets\Resources\DummyLayerSystem\UILayerLoader.cs" />
+     <Compile Include="Assets\DummyLayerSystem\UILayerLoader.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Rendering\UIParticleRenderer.cs" />
      <Compile Include="Assets\ShopManager\ShopManager.cs" />
      <Compile Include="Assets\TutorialManger\processes\OpenSkillEdit.cs" />
@@ -451,7 +451,7 @@
      <Compile Include="Assets\TheBlur\Blur.cs" />
      <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_light.cs" />
      <Compile Include="Assets\StagesManagement\ArcadeManager\Pages.cs" />
-     <Compile Include="Assets\Resources\DummyLayerSystem\ArenaFightOver\ArenaFightOver.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\ArenaFightOver.cs" />
      <Compile Include="Assets\FPSLabel\FPSLabel.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\Sci-Fi Effects\Scripts\SciFiLightFlicker.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_selectBaseMonster.cs" />
@@ -461,7 +461,7 @@
      <Compile Include="Assets\Asstes\FloatingCombatText\DemoScene\DemoController.cs" />
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker_Manager.cs" />
      <Compile Include="Assets\SkillStoneBox\SkillStonesBox_EditMode.cs" />
-     <Compile Include="Assets\Resources\DummyLayerSystem\UILayer.cs" />
+     <Compile Include="Assets\DummyLayerSystem\UILayer.cs" />
      <Compile Include="Assets\Language\LanguageConverterManger.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\ExpandBox.cs" />
      <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\AutoDestroyPS.cs" />
