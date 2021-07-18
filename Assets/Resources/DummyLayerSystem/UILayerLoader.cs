@@ -25,6 +25,19 @@ public class UILayerLoader
         Queues.Add(t);
         return t;
     }
+
+    public static void Pop()
+    {
+        if (Queues.Count > 0)
+        {
+            UILayer uiLayer = Queues[Queues.Count - 1];
+            if (uiLayer != null)
+            {
+                GameObject.Destroy(uiLayer);
+            }
+            Queues.RemoveAt(Queues.Count - 1);
+        }
+    }
     
     public static void Remove(string index)
     {
