@@ -129,6 +129,7 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Fix\UIElementInFront.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot_ConfirmEdit.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\BaseStarDataRenderer.cs" />
+     <Compile Include="Assets\Resources\DummyLayerSystem\TitleScreenLayer\TitleScreenLayer.cs" />
      <Compile Include="Assets\CSV2Table\Demo\SampleTable.cs" />
      <Compile Include="Assets\POS_Sys\Child_Label.cs" />
      <Compile Include="Assets\Camera\Modes\keepTargetLeftCamera.cs" />
@@ -186,8 +187,8 @@
      <Compile Include="Assets\AI\Soul\BehaviorRunner_newRunner.cs" />
      <Compile Include="Assets\Camera\Modes\GodPlayerCertainY.cs" />
      <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\UniqueProjectiles\SpawnProjectilesScript.cs" />
-     <Compile Include="Assets\Remote\API\Dto\Model\GetStructure\MonsterTeamOfPlayerModel.auto.cs" />
      <Compile Include="Assets\ShopManager\BoxExpandHelper.cs" />
+     <Compile Include="Assets\Remote\API\Dto\Model\GetStructure\MonsterTeamOfPlayerModel.auto.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\StoneMerge.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\SkillInfo.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkArea.cs" />
@@ -216,8 +217,8 @@
      <Compile Include="Assets\JsonSupport\UnityLitJson\Lexer.cs" />
      <Compile Include="Assets\Structure\MultiDictionary.cs" />
      <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\CombatTextController.cs" />
-     <Compile Include="Assets\AI\GUI\BehaviorRunnerGUI.cs" />
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\Marker.cs" />
+     <Compile Include="Assets\AI\GUI\BehaviorRunnerGUI.cs" />
      <Compile Include="Assets\UI\Oldscripts\SwapAllModelShader.cs" />
      <Compile Include="Assets\Structure\DicAdd.cs" />
      <Compile Include="Assets\ResourceLoading\UnitCreator\UnitCreator_Cach.cs" />

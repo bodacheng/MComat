@@ -62,8 +62,8 @@
      <Compile Include="Assets\PlayFabSDK\CloudScript\PlayFabCloudScriptInstanceAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Server\PlayFabEvents.cs" />
      <Compile Include="Assets\PlayFabSDK\Matchmaker\PlayFabMatchmakerAPI.cs" />
-     <Compile Include="Assets\PlayFabSDK\Authentication\PlayFabAuthenticationAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Authentication\PlayFabAuthenticationModels.cs" />
+     <Compile Include="Assets\PlayFabSDK\Authentication\PlayFabAuthenticationAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Groups\PlayFabGroupsModels.cs" />
      <Compile Include="Assets\PlayFabSDK\Shared\Public\PlayFabApiSettings.cs" />
      <Compile Include="Assets\PlayFabSDK\Data\PlayFabDataAPI.cs" />

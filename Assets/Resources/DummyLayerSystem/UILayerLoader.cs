@@ -6,7 +6,8 @@ public class UILayerLoader
     private static readonly IDictionary<string, string> paths = new Dictionary<string, string>()
     {
         {"ArenaFightOver", "DummyLayerSystem/ArenaFightOver/ArenaFightOver"},
-        {"CommonFightResult", "DummyLayerSystem/CommonFightResult/CommonFightResult"}
+        {"CommonFightResult", "DummyLayerSystem/CommonFightResult/CommonFightResult"},
+        {"TitleScreenLayer", "DummyLayerSystem/TitleScreenLayer/TitleScreenLayer"},
     };
 
     private static List<UILayer> Queues = new List<UILayer>();
@@ -51,8 +52,11 @@ public class UILayerLoader
             }
         }
 
-        UILayer layer = Queues[toremoveindex];
-        GameObject.Destroy(layer);
-        Queues.RemoveAt(toremoveindex);
+        if (toremoveindex >= 0)
+        {
+            UILayer layer = Queues[toremoveindex];
+            GameObject.Destroy(layer);
+            Queues.RemoveAt(toremoveindex);
+        }
     }
 }

@@ -1,13 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using mainMenu;
-using UnityEngine.SceneManagement;
-using Soul;
-using Log;
 using System;
-using FightScene;
 
 public class CommonFightResult : UILayer
 {

@@ -20,15 +20,15 @@
             //{
             //    DOTween.To(() => ((OneVOneMode)nowC).xzMax, (x) => ((OneVOneMode)nowC).xzMax = x, 16, 3f);
             //}
+            LoadingCanvas.target.Loading_Canvas.gameObject.SetActive(false);
             if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
             {
-                NetFightScene.target.ScreensaverCanvas.gameObject.SetActive(true);
-                NetFightScene.target.FightCanvas.gameObject.SetActive(false);
+                TitleScreenLayer TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T, "TitleScreenLayer") as TitleScreenLayer;
+                TitleScreenLayer.Initialise(FightOverControl.target.ReturnToFront);
             }else{
-                NetFightScene.target.ScreensaverCanvas.gameObject.SetActive(false);
                 NetFightScene.target.FightCanvas.gameObject.SetActive(true);
             }
-            NetFightScene.target.PreparingCanvas.gameObject.SetActive(false);            
+            NetFightScene.target.PreparingCanvas.gameObject.SetActive(false);
             FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
             FightScenePauseSupport.target.ControlCanvas.gameObject.SetActive(true);
             NetFightScene.target.PressedStartButton();
@@ -36,8 +36,16 @@
         
         public override void ProcessEnd()
         {
+            if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
+            {
+                UILayerLoader.Remove("TitleScreenLayer");
+            }
+            else
+            {
+                NetFightScene.target.FightCanvas.gameObject.SetActive(false);
+            }
+            
             FightLogger.target.WatchMissionsAbandon();
-            NetFightScene.target.FightCanvas.gameObject.SetActive(false);
         }
 
         public override void LocalUpdate()

@@ -17,8 +17,6 @@ public class StartUpPresentation : MonoBehaviour
     [Header("ResourceLordSceneStarter")]
     public ResourceDownLoad ResourceDownLoad;
     
-
-
     [Space(7)]
     [Header("开发公司商标")]
     public Image logo;

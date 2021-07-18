@@ -13,7 +13,7 @@ namespace FightScene
         
         [Space(11)]
         [Header("Canvas")]
-        public Canvas PreparingCanvas, FightCanvas , ScreensaverCanvas;
+        public Canvas PreparingCanvas, FightCanvas;
         
         #region before fight
         [Space(11)]
