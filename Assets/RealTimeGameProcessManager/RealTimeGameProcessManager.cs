@@ -10,10 +10,6 @@ namespace FightScene
     {
         [Header("Basic Element")]
         public CameraManager _CameraManager;
-                
-        [Header("Watch Mode")]
-        [Space(6)]
-        public Button WatchModeButton;
         
         [Header("Auto BUtton")]
         [Space(6)]
