@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using mainMenu;
 
 namespace FightScene
 {
@@ -58,10 +59,40 @@ namespace FightScene
                 case FightEventType.Quest:
                     if (FightLogger.target.GetWinner() == Team.player1)
                     {
-                        FightOverControl.target.CheckNextArcadeLevel();
+                        CloudScript.ArcadeProgress(NetFightScene.Fight.LocalFightID.ToString(),
+                            () =>
+                            {
+                                void LoadNextLevel()
+                                {
+                                    NetFightScene.Fight = ArcadeManager.ArcadeStages[NetFightScene.Fight.LocalFightID + 1].stageConfig;
+                                    FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
+                                }
+                                ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T, "ArcadeFightResult") as ArcadeFightResult;
+                                cc.Initialise(FightOverControl.target.ReturnToFront, FightOverControl.target.LocalGameRestart, LoadNextLevel);
+                            },
+                            () =>
+                            {
+                            }
+                        );
                     }
-                    ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T, "CommonFightResult") as ArcadeFightResult;
-                    cc.Initialise(FightOverControl.target.ReturnToFront, FightOverControl.target.LocalGameRestart);
+                    else
+                    {
+                        CloudScript.ArcadeProgress(NetFightScene.Fight.LocalFightID.ToString(),
+                            () =>
+                            {
+                                void LoadNextLevel()
+                                {
+                                    NetFightScene.Fight = ArcadeManager.ArcadeStages[NetFightScene.Fight.LocalFightID + 1].stageConfig;
+                                    FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
+                                }
+                                ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T, "ArcadeFightResult") as ArcadeFightResult;
+                                cc.Initialise(FightOverControl.target.ReturnToFront, FightOverControl.target.LocalGameRestart, LoadNextLevel);
+                            },
+                            () =>
+                            {
+                            }
+                        );
+                    }
                     break;
                 case FightEventType.Self:
                     CommonFightResult c = UILayerLoader.Load(NetFightScene.target.T, "CommonFightResult") as CommonFightResult;

@@ -387,7 +387,6 @@ handlers.handlePlayStreamEventAndProfile = function (args, context) {
 // award the player items from the game catalog based on their performance.
 handlers.completedLevel = function (args, context) {
     var level = args.levelName;
-    var monstersKilled = args.monstersKilled;
     
     var updateUserDataResult = server.UpdateUserInternalData({
         PlayFabId: currentPlayerId,
@@ -395,16 +394,8 @@ handlers.completedLevel = function (args, context) {
             lastLevelCompleted: level
         }
     });
-
     log.debug("Set lastLevelCompleted for player " + currentPlayerId + " to " + level);
-    var request = {
-        PlayFabId: currentPlayerId, Statistics: [{
-                StatisticName: "level_monster_kills",
-                Value: monstersKilled
-            }]
-    };
-    server.UpdatePlayerStatistics(request);
-    log.debug("Updated level_monster_kills stat for player " + currentPlayerId + " to " + monstersKilled);
+    return { result: updateUserDataResult };
 };
 
 

@@ -648,6 +648,7 @@
      <Compile Include="Assets\FightingSceneUISystem\OutsideScreenIndicator.cs" />
      <Compile Include="Assets\Remote\API\Dto\Model\Common\BasicVoidModel.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\ArcadeFightResult.cs" />
+     <Compile Include="Assets\PlayFab\CloudScripts\Arcade.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />

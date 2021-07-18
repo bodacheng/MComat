@@ -86,29 +86,6 @@ namespace FightScene
             lose_textanimation.gameObject.SetActive(false);
         }
         
-        // ArcadeNext
-        public void CheckNextArcadeLevel()
-        {
-            if (NetFightScene.Fight.GetEventType() == FightEventType.Quest)
-            {
-                if (ArcadeManager.ArcadeStages.ContainsKey(NetFightScene.Fight.LocalFightID + 1))
-                {
-                    NextLevelButton.onClick.RemoveAllListeners();
-                    void LoadNextLevel()
-                    {
-                        NetFightScene.Fight = ArcadeManager.ArcadeStages[NetFightScene.Fight.LocalFightID + 1].stageConfig;
-                        FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
-                    }
-                    NextLevelButton.onClick.AddListener(LoadNextLevel);
-                    NextLevelButton.gameObject.SetActive(true);
-                }else{
-                    NextLevelButton.gameObject.SetActive(false);
-                }
-            }else{
-                NextLevelButton.gameObject.SetActive(false);
-            }
-        }
-        
         // 这个函数应该包括一些更深层的考虑。
         public void ReturnToFront()
         {

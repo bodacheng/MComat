@@ -1,15 +1,26 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using mainMenu;
+using FightScene;
 
 public class ArcadeFightResult : UILayer
 {
     [SerializeField] private Button ReturnBtn;
     [SerializeField] private Button AgainBtn;
+    [SerializeField] private Button NextBtn;
     
-    public void Initialise(Action R, Action A)
+    public void Initialise(Action R, Action A, Action N)
     {
         ReturnBtn.onClick.AddListener(R.Invoke);
         AgainBtn.onClick.AddListener(A.Invoke);
+        
+        if (ArcadeManager.ArcadeStages.ContainsKey(NetFightScene.Fight.LocalFightID + 1))
+        {
+            NextBtn.onClick.AddListener(N.Invoke);
+            NextBtn.gameObject.SetActive(true);
+        }else{
+            NextBtn.gameObject.SetActive(false);
+        }
     }
 }
