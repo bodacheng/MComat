@@ -8,6 +8,8 @@ public class UILayerLoader
         {"ArenaFightOver", "DummyLayerSystem/ArenaFightOver/ArenaFightOver"},
         {"CommonFightResult", "DummyLayerSystem/CommonFightResult/CommonFightResult"}
     };
+
+    private static List<UILayer> Queues = new List<UILayer>();
     
     public static UILayer Load(RectTransform T, string layerName)
     {
@@ -20,6 +22,24 @@ public class UILayerLoader
         rt.offsetMax = Vector2.zero;
         rt.localPosition = Vector3.zero;
         rt.localScale = Vector3.one;
+        Queues.Add(t);
         return t;
+    }
+    
+    public static void Remove(string index)
+    {
+        int toremoveindex = -1;
+        for (int i = 0; i < Queues.Count; i++)
+        {
+            UILayer uiLayer = Queues[i];
+            if (uiLayer.Index == index)
+            {
+                toremoveindex = i;
+            }
+        }
+
+        UILayer layer = Queues[toremoveindex];
+        GameObject.Destroy(layer);
+        Queues.RemoveAt(toremoveindex);
     }
 }
