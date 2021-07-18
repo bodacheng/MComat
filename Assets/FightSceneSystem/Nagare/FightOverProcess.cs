@@ -60,10 +60,9 @@ namespace FightScene
                     {
                         FightOverControl.target.CheckNextArcadeLevel();
                     }
-                    CommonFightResult cc = UILayerLoader.Load(NetFightScene.target.T, "CommonFightResult") as CommonFightResult;
+                    ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T, "CommonFightResult") as ArcadeFightResult;
                     cc.Initialise(FightOverControl.target.ReturnToFront, FightOverControl.target.LocalGameRestart);
-                    FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1,cc.GetIconAndSKillShowUISetT());
-                break;
+                    break;
                 case FightEventType.Self:
                     CommonFightResult c = UILayerLoader.Load(NetFightScene.target.T, "CommonFightResult") as CommonFightResult;
                     c.Initialise(FightOverControl.target.ReturnToFront, FightOverControl.target.LocalGameRestart);

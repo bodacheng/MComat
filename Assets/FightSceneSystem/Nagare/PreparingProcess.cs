@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using FightScene;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 
 public class PreparingProcess : FSceneProcess
 {

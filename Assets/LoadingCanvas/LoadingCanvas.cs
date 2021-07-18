@@ -7,7 +7,7 @@ using System.Collections.Generic;
 // Loading_Canvas 会在不同方面的功能下被打开或关闭，这会让对该画布内容的显示产生很多混乱
 
 public partial class LoadingCanvas : MonoBehaviour {
-
+    
     public static LoadingCanvas target;
     
     public HollowOutMask hollowOutMask;
