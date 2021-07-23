@@ -111,34 +111,34 @@ namespace FightScene
         // 本地系函数
         public void PressedStartButton()
         {
-            RealTimeGameProcessManager.target.team1.ModeStart();
+            RTFightManager.target.team1.ModeStart();
             
             if (Fight.GetEventType() == FightEventType.Test)
             {
-                RealTimeGameProcessManager.target.team2.LetAllCharactersChangeToTestMode();
+                RTFightManager.target.team2.LetAllCharactersChangeToTestMode();
             }
             else
             {
-                RealTimeGameProcessManager.target.team2.ModeStart();
+                RTFightManager.target.team2.ModeStart();
             }
             
-            switch (RealTimeGameProcessManager.playerTeam)
+            switch (RTFightManager.playerTeam)
             {
                 case Team.player1:
-                    RealTimeGameProcessManager.target.SwitchToCMode(RealTimeGameProcessManager.target.team1.TeamMembers.GetValues()[0], false);
+                    RTFightManager.target.SwitchToCMode(RTFightManager.target.team1.TeamMembers.GetValues()[0], false);
                     break;
                 case Team.player2:
-                    RealTimeGameProcessManager.target.SwitchToCMode(RealTimeGameProcessManager.target.team2.TeamMembers.GetValues()[0], false);
+                    RTFightManager.target.SwitchToCMode(RTFightManager.target.team2.TeamMembers.GetValues()[0], false);
                     break;
             }
             if (Fight.GetEventType() == FightEventType.Screensaver)
-                RealTimeGameProcessManager.target.ScreenSaverC(RealTimeGameProcessManager.playerTeam);
+                RTFightManager.target.ScreenSaverC(RTFightManager.playerTeam);
         }
         
         public IEnumerator SKillTestReload()
         {
             int i = 0;
-            foreach (KeyValuePair<Data_Center,CharDataInfo> keyValuePair in RealTimeGameProcessManager.target.team1.CharDataInfoRef)
+            foreach (KeyValuePair<Data_Center,CharDataInfo> keyValuePair in RTFightManager.target.team1.CharDataInfoRef)
             {
                 switch(i)
                 {
@@ -157,7 +157,7 @@ namespace FightScene
                 i++;
             }
             i = 0;
-            foreach (KeyValuePair<Data_Center,CharDataInfo> keyValuePair in RealTimeGameProcessManager.target.team2.CharDataInfoRef)
+            foreach (KeyValuePair<Data_Center,CharDataInfo> keyValuePair in RTFightManager.target.team2.CharDataInfoRef)
             {
                 switch(i)
                 {

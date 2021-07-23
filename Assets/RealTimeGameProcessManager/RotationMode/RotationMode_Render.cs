@@ -8,7 +8,7 @@ namespace FightScene
         public override void Refresh()
         {
             base.Refresh();
-            rotationModeHitCombo.color = teamConfig.myTeam == RealTimeGameProcessManager.playerTeam ? Color.yellow : Color.blue;
+            rotationModeHitCombo.color = teamConfig.myTeam == RTFightManager.playerTeam ? Color.yellow : Color.blue;
             rotationModeHitCombo.gameObject.SetActive(true);
             if (rotationModeHitCombo.gameObject.transform.parent != _targetCanvas)
             {

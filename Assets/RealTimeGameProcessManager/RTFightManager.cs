@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 namespace FightScene
 {
     //角色列表的职责现在不光是负责两侧菜单中角色的icon，也负责被控制角色又上角血条和ex条
-    public class RealTimeGameProcessManager : MonoBehaviour
+    public class RTFightManager : MonoBehaviour
     {
         [Header("Basic Element")]
         public CameraManager _CameraManager;
@@ -32,7 +32,7 @@ namespace FightScene
         public TeamConfig heroTeamConfig = new TeamConfig(Team.player1, new List<Team>() { Team.player2 });
         public TeamConfig EnemyTeamConfig = new TeamConfig(Team.player2, new List<Team>() { Team.player1 });
         
-        public static RealTimeGameProcessManager target;
+        public static RTFightManager target;
         
         public static bool Auto;
         public static Data_Center focusingChar;

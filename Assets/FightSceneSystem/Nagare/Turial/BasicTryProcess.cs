@@ -57,8 +57,8 @@ public class BasicTryProcess : FSceneProcess
         
     public IEnumerator EnterProcess()
     {
-        AllMembers.Add(Team.player1,RealTimeGameProcessManager.target.team1.TeamMembers.GetValues());
-        AllMembers.Add(Team.player2,RealTimeGameProcessManager.target.team2.TeamMembers.GetValues());
+        AllMembers.Add(Team.player1,RTFightManager.target.team1.TeamMembers.GetValues());
+        AllMembers.Add(Team.player2,RTFightManager.target.team2.TeamMembers.GetValues());
         TeamDeadMemberDictionary.Clear();
         
         foreach (KeyValuePair<Team,List<Data_Center>> keyValuePair in AllMembers)
@@ -81,9 +81,9 @@ public class BasicTryProcess : FSceneProcess
         NetFightScene.target.PreparingCanvas.gameObject.SetActive(false);
         
         watchetargets.Clear();
-        if (RealTimeGameProcessManager.focusingChar.Sensor.GetEnemiesByDistance(true).Count > 0)
+        if (RTFightManager.focusingChar.Sensor.GetEnemiesByDistance(true).Count > 0)
         {
-            foreach (GameObject _G in RealTimeGameProcessManager.focusingChar.Sensor.GetEnemiesByDistance(false))
+            foreach (GameObject _G in RTFightManager.focusingChar.Sensor.GetEnemiesByDistance(false))
             {
                 watchetargets.Add(_G.transform);
             }
@@ -132,7 +132,7 @@ public class BasicTryProcess : FSceneProcess
             break; 
         }
 
-        if (RealTimeGameProcessManager.focusingChar != null)
+        if (RTFightManager.focusingChar != null)
         {
             //FightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watchetargets);
             //FightScene._CameraManager.CurrentMode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);

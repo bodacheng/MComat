@@ -53,7 +53,7 @@ namespace FightScene
             {
                 RefreshComboHitRotationMode(RotationMode_fightingMember);
             }
-            if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
+            if (teamConfig.myTeam != RTFightManager.playerTeam)
             {
                 BarsPositionUpdate();
             }
@@ -73,7 +73,7 @@ namespace FightScene
                     EffectsManager.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
                     memberchanged = true;
                     RotationMode_fightingMember.WholeT.gameObject.SetActive(true);
-                    if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
+                    if (teamConfig.myTeam != RTFightManager.playerTeam)
                         CharIconDic[RotationMode_fightingMember].gameObject.SetActive(true);
                 }
                 else
@@ -81,7 +81,7 @@ namespace FightScene
                     data_Center._MyBehaviorRunner.ChangeState("Empty");
                     //data_Center.WholeT.transform.position = new Vector3(9999, 600, 9999);
                     data_Center.WholeT.gameObject.SetActive(false);
-                    if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
+                    if (teamConfig.myTeam != RTFightManager.playerTeam)
                         CharIconDic[data_Center].gameObject.SetActive(false);
                 }
             }
@@ -113,12 +113,12 @@ namespace FightScene
                     {
                         _changeTo.FightDataRef._ComboHitCount.HitCount.Value = RotationMode_fightingMember.FightDataRef._ComboHitCount.HitCount.Value;
                     }
-                    RealTimeGameProcessManager.AddOrRemoveFightingMember(RotationMode_fightingMember, this.teamConfig.myTeam, false);
-                    RealTimeGameProcessManager.AddOrRemoveFightingMember(_changeTo, this.teamConfig.myTeam, true);
+                    RTFightManager.AddOrRemoveFightingMember(RotationMode_fightingMember, this.teamConfig.myTeam, false);
+                    RTFightManager.AddOrRemoveFightingMember(_changeTo, this.teamConfig.myTeam, true);
 
                     RotationMode_fightingMember = _changeTo;
                     RotationMode_fightingMember.WholeT.gameObject.SetActive(true);
-                    if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
+                    if (teamConfig.myTeam != RTFightManager.playerTeam)
                         CharIconDic[RotationMode_fightingMember].gameObject.SetActive(true);
                     RotationMode_fightingMember._MyBehaviorRunner.ChangeToWaitingState();
                     RotationMode_fightingMember.WholeT.transform.position = targetposition;
@@ -132,23 +132,23 @@ namespace FightScene
                         data_Center._MyBehaviorRunner.ChangeState("Empty");
                         //data_Center.WholeT.transform.position = new Vector3(9999, 600, 9999);
                         data_Center.WholeT.gameObject.SetActive(false);
-                        if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
+                        if (teamConfig.myTeam != RTFightManager.playerTeam)
                             CharIconDic[data_Center].gameObject.SetActive(false);
                     }
                 }
             }
-            if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
+            if (teamConfig.myTeam == RTFightManager.playerTeam)
             {
-                RealTimeGameProcessManager.target.SwitchToCMode(RotationMode_fightingMember, MobileInputsManager.playerMode);
+                RTFightManager.target.SwitchToCMode(RotationMode_fightingMember, MobileInputsManager.playerMode);
             }
-            RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
-            RealTimeGameProcessManager.target.Refresh();
+            RTFightManager.target.CameraParaAdjustment(RTFightManager.playerTeam);
+            RTFightManager.target.Refresh();
             return memberchanged;
         }
 
         public override void ModeStart()
         {
-            RealTimeGameProcessManager.AddOrRemoveFightingMember(RotationMode_fightingMember, this.teamConfig.myTeam, true);
+            RTFightManager.AddOrRemoveFightingMember(RotationMode_fightingMember, this.teamConfig.myTeam, true);
             RotationMode_fightingMember._MyBehaviorRunner.ChangeToWaitingState();
         }
 

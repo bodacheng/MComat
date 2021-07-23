@@ -204,11 +204,11 @@ public class Sensor
         {
             for (int i = 0; i < tags.Length; i++)
             {
-                if (RealTimeGameProcessManager.FightingMembers != null)
+                if (RTFightManager.FightingMembers != null)
                 {
                     for (int y = 0; y < tags.Length; y++)
                     {
-                        RealTimeGameProcessManager.FightingMembers.TryGetValue(tags[y], out searchingMembers);
+                        RTFightManager.FightingMembers.TryGetValue(tags[y], out searchingMembers);
                         if (searchingMembers != null)
                         {
                             for (int k = 0; k < searchingMembers.Count; k++)

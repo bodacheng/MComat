@@ -505,7 +505,7 @@
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\QuestInfoPage.cs" />
      <Compile Include="Assets\EffectsSystem\TrackControl.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerGameLogo.cs" />
-     <Compile Include="Assets\RealTimeGameProcessManager\RealTimeGameProcessManager.cs" />
+     <Compile Include="Assets\RealTimeGameProcessManager\RTFightManager.cs" />
      <Compile Include="Assets\Language\LanguageCodeTable.cs" />
      <Compile Include="Assets\ModelShower\ModelShower.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiFireProjectile.cs" />

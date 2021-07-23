@@ -97,7 +97,7 @@ namespace FightScene
                 case FightEventType.Self:
                     CommonFightResult c = UILayerLoader.Load(NetFightScene.target.T, "CommonFightResult") as CommonFightResult;
                     c.Initialise(FightOverControl.target.ReturnToFront, FightOverControl.target.LocalGameRestart);
-                    FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.team1,c.GetIconAndSKillShowUISetT());
+                    FightOverControl.target.ShowSKillSets(RTFightManager.target.team1,c.GetIconAndSKillShowUISetT());
                     break;
                 case FightEventType.SkillTest:
                     yield return NetFightScene.target.SKillTestReload();
@@ -105,8 +105,8 @@ namespace FightScene
             }
             
             List<Data_Center> data_Centers = new List<Data_Center>();
-            data_Centers.AddRange(RealTimeGameProcessManager.target.team1.TeamMembers.GetValues());
-            data_Centers.AddRange(RealTimeGameProcessManager.target.team2.TeamMembers.GetValues());
+            data_Centers.AddRange(RTFightManager.target.team1.TeamMembers.GetValues());
+            data_Centers.AddRange(RTFightManager.target.team2.TeamMembers.GetValues());
             FightOverControl.target.SkillLog(data_Centers);
             foreach (Data_Center one in data_Centers)
             {
@@ -137,11 +137,11 @@ namespace FightScene
             List<Data_Center> winners = new List<Data_Center>();
             if (winner == Team.player1)
             {
-                winners = RealTimeGameProcessManager.target.AllMembers[Team.player1];
+                winners = RTFightManager.target.AllMembers[Team.player1];
             }
             if (winner == Team.player2)
             {
-                winners = RealTimeGameProcessManager.target.AllMembers[Team.player2];
+                winners = RTFightManager.target.AllMembers[Team.player2];
             }
             foreach (Data_Center _one in winners)
             {

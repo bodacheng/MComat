@@ -122,9 +122,9 @@ namespace FightScene
             foreach (Data_Center _datacenter in TeamMembers.GetValues())
             {
                 CharIconDic.TryGetValue(_datacenter, out SideCharIcon3);
-                if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
+                if (teamConfig.myTeam == RTFightManager.playerTeam)
                 {
-                    SideCharIcon3.transform.localScale = _datacenter != RealTimeGameProcessManager.focusingChar ? Vector3.one : Vector3.one * 1.2f;
+                    SideCharIcon3.transform.localScale = _datacenter != RTFightManager.focusingChar ? Vector3.one : Vector3.one * 1.2f;
                     SideCharIcon3.transform.SetParent(sideIconsContainer.transform);
                     SideCharIcon3.focusingCharIcon.gameObject.SetActive(true);
                     SideCharIcon3.ExBar.gameObject.SetActive(true);
@@ -155,7 +155,7 @@ namespace FightScene
             foreach (Data_Center oneMember in TeamMembers.GetValues())
             {
                 oneMember._MyBehaviorRunner.controller.TestMode = false;
-                RealTimeGameProcessManager.AddOrRemoveFightingMember(oneMember, this.teamConfig.myTeam, true);
+                RTFightManager.AddOrRemoveFightingMember(oneMember, this.teamConfig.myTeam, true);
                 oneMember._MyBehaviorRunner.ChangeToWaitingState();
             }
         }
@@ -165,7 +165,7 @@ namespace FightScene
             foreach (Data_Center oneMember in TeamMembers.GetValues())
             {
                 oneMember._MyBehaviorRunner.controller.TestMode = true;
-                RealTimeGameProcessManager.AddOrRemoveFightingMember(oneMember, this.teamConfig.myTeam, true);
+                RTFightManager.AddOrRemoveFightingMember(oneMember, this.teamConfig.myTeam, true);
                 oneMember._MyBehaviorRunner.ChangeToTestMode();
             }
         }

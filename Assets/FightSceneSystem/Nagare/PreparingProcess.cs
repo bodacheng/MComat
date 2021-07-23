@@ -17,15 +17,15 @@ public class PreparingProcess : FSceneProcess
         //RealTimeGameProcessManager.target._CameraManager.Assign_SToEMode(NetFightScene.target.WatchTeam2.position, NetFightScene.target.Team2StandPoints[0], 3f, 50f);
         CameraManager._camera.transform.position = CameraManager._StartPosRef.transform.position;
         CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
-        RealTimeGameProcessManager.target._CameraManager.Assign_Camera(C_Mode.NULL, null);
+        RTFightManager.target._CameraManager.Assign_Camera(C_Mode.NULL, null);
         //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
         FightLoadError.Instance.FightLoadErrors.Clear();
-        yield return RealTimeGameProcessManager.target.LoadGame(NetFightScene.Fight);
-        RealTimeGameProcessManager.target.AllMembers.Clear();
-        DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player1, RealTimeGameProcessManager.target.team1.TeamMembers.GetValues());
-        DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player2, RealTimeGameProcessManager.target.team2.TeamMembers.GetValues());
-        RealTimeGameProcessManager.FightingMembers.Clear();
-        FightLogger.target.ReadyToLog(RealTimeGameProcessManager.target.AllMembers);
+        yield return RTFightManager.target.LoadGame(NetFightScene.Fight);
+        RTFightManager.target.AllMembers.Clear();
+        DicAdd<Team, List<Data_Center>>.Add(RTFightManager.target.AllMembers, Team.player1, RTFightManager.target.team1.TeamMembers.GetValues());
+        DicAdd<Team, List<Data_Center>>.Add(RTFightManager.target.AllMembers, Team.player2, RTFightManager.target.team2.TeamMembers.GetValues());
+        RTFightManager.FightingMembers.Clear();
+        FightLogger.target.ReadyToLog(RTFightManager.target.AllMembers);
         EffectsManager.INIEffectsPool("hit_ground", null, 3);
         EffectsManager.INIEffectsPool("wallCrack", null, 3);
         LoadingCanvas.target.LightUp();
@@ -55,7 +55,7 @@ public class PreparingProcess : FSceneProcess
     public override bool CanEnterOtherProcess()
     {
         return NetFightScene.target.LoadStageFinished.Value
-            && RealTimeGameProcessManager.target.team1.IfAllCharsPreparedForBattle() 
-            && RealTimeGameProcessManager.target.team2.IfAllCharsPreparedForBattle();
+            && RTFightManager.target.team1.IfAllCharsPreparedForBattle() 
+            && RTFightManager.target.team2.IfAllCharsPreparedForBattle();
     }
 }

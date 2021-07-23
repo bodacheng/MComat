@@ -17,7 +17,7 @@ namespace FightScene
             {
                 if (multiRaidHitComboDic.ContainsKey(_datacenter))
                 {
-                    multiRaidHitComboDic[_datacenter].color = teamConfig.myTeam == RealTimeGameProcessManager.playerTeam ? Color.yellow : Color.blue;
+                    multiRaidHitComboDic[_datacenter].color = teamConfig.myTeam == RTFightManager.playerTeam ? Color.yellow : Color.blue;
                     multiRaidHitComboDic[_datacenter].gameObject.SetActive(true);
                     if (multiRaidHitComboDic[_datacenter].gameObject.transform.parent != _targetCanvas)
                     {
@@ -64,7 +64,7 @@ namespace FightScene
         
         public void MultiRaid_LocalFightingUpdate()
         {
-            if (teamConfig.myTeam != RealTimeGameProcessManager.playerTeam)
+            if (teamConfig.myTeam != RTFightManager.playerTeam)
             {
                 BarsPositionUpdate();
             }
@@ -110,8 +110,8 @@ namespace FightScene
                 {
                     if (x == true)
                     {
-                        RealTimeGameProcessManager.AddOrRemoveFightingMember(a_char, this.teamConfig.myTeam, false);
-                        RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+                        RTFightManager.AddOrRemoveFightingMember(a_char, this.teamConfig.myTeam, false);
+                        RTFightManager.target.CameraParaAdjustment(RTFightManager.playerTeam);
                     }
                 });
             }
@@ -154,8 +154,8 @@ namespace FightScene
                 //  SideCharIcon整备
                 void Action1()
                 {
-                    RealTimeGameProcessManager.target.SwitchToCMode(a_char, RealTimeGameProcessManager.Auto);
-                    RealTimeGameProcessManager.target.CameraParaAdjustment(teamConfig.myTeam);
+                    RTFightManager.target.SwitchToCMode(a_char, RTFightManager.Auto);
+                    RTFightManager.target.CameraParaAdjustment(teamConfig.myTeam);
                 }
 
                 if (!(CharIconDic.ContainsKey(a_char) && CharIconDic[a_char] != null))
@@ -176,7 +176,7 @@ namespace FightScene
                 _SideCharIcon.INIHPShow(a_char, a_char.FightDataRef.CurrentHp.Value);
                 _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
 
-                if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
+                if (teamConfig.myTeam == RTFightManager.playerTeam)
                 {
                     _SideCharIcon.transform.SetParent(sideIconsContainer.transform);
                     _SideCharIcon.transform.localScale = Vector3.one;

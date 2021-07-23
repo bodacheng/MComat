@@ -27,7 +27,7 @@ namespace FightScene
                 a_char.IsDead.Subscribe(x => {
                     if (x == true) 
                     {
-                        RealTimeGameProcessManager.AddOrRemoveFightingMember(a_char, this.teamConfig.myTeam, false);
+                        RTFightManager.AddOrRemoveFightingMember(a_char, this.teamConfig.myTeam, false);
                         Invoke("RandomChangeAliveFightingMember", 2f);
                         CharIconDic[a_char].focusingCharIcon.CooldownCurtainUpdate(1);
                     }
@@ -83,7 +83,7 @@ namespace FightScene
                 _SideCharIcon.INIHPShow(a_char, a_char.FightDataRef.CurrentHp.Value);
                 _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
                 
-                if (teamConfig.myTeam == RealTimeGameProcessManager.playerTeam)
+                if (teamConfig.myTeam == RTFightManager.playerTeam)
                 {
                     _SideCharIcon.transform.SetParent(sideIconsContainer.transform);
                     _SideCharIcon.transform.localScale = Vector3.one;
