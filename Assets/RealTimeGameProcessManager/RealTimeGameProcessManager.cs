@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.Serialization;
 
 namespace FightScene
 {
@@ -20,10 +21,13 @@ namespace FightScene
         [Header("Messages")]
         [Space(6)]
         public Text Messages;
-        
-        public FightTeam FightTeam1, FightTeam2;
-        public FightTeam_MultiRaid FightTeam1_multi, FightTeam2_multi;
-        public FightTeam_RotationMode FightTeam1_rotation, FightTeam2_rotation;
+
+        [FormerlySerializedAs("FightTeam1")] public TeamUIManager team1;
+        [FormerlySerializedAs("FightTeam2")] public TeamUIManager team2;
+        [FormerlySerializedAs("FightTeam1_multi")] public TeamUIManagerMultiRaid team1UIManagerMulti;
+        [FormerlySerializedAs("FightTeam2_multi")] public TeamUIManagerMultiRaid team2UIManagerMulti;
+        [FormerlySerializedAs("FightTeam1_rotation")] public TeamUIManagerRotationMode team1UIManagerRotation;
+        [FormerlySerializedAs("FightTeam2_rotation")] public TeamUIManagerRotationMode team2UIManagerRotation;
         
         public TeamConfig heroTeamConfig = new TeamConfig(Team.player1, new List<Team>() { Team.player2 });
         public TeamConfig EnemyTeamConfig = new TeamConfig(Team.player2, new List<Team>() { Team.player1 });
@@ -93,8 +97,8 @@ namespace FightScene
             autoBUtton.onClick.RemoveAllListeners();
             autoBUtton.onClick.AddListener(SwitchAutoMode);
             
-            FightTeam1.Refresh();
-            FightTeam2.Refresh();
+            team1.Refresh();
+            team2.Refresh();
             
             if (focusingChar == null)
             {
@@ -128,53 +132,51 @@ namespace FightScene
             switch (stage.Team1Mode)
             {
                 case TeamMode.multiraid:
-                    target.FightTeam1 = FightTeam1_multi;
+                    target.team1 = team1UIManagerMulti;
                     break;
                 case TeamMode.rotation:
-                    target.FightTeam1 = FightTeam1_rotation;
+                    target.team1 = team1UIManagerRotation;
                     break;
             }
-            FightTeam1.TeamMode = stage.Team1Mode;
-            
+
             switch (stage.Team2Mode)
             {
                 case TeamMode.multiraid:
-                    target.FightTeam2 = FightTeam2_multi;
+                    target.team2 = team2UIManagerMulti;
                     break;
                 case TeamMode.rotation:
-                    target.FightTeam2 = FightTeam2_rotation;
+                    target.team2 = team2UIManagerRotation;
                     break;
             }
-            FightTeam2.TeamMode = stage.Team2Mode;
-            
-            FightTeam1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
-            FightTeam2.TeamStandPoints = NetFightScene.target.Team2StandPoints;
 
-            target.FightTeam1.teamConfig = heroTeamConfig;
-            target.FightTeam2.teamConfig = EnemyTeamConfig;
+            team1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
+            team2.TeamStandPoints = NetFightScene.target.Team2StandPoints;
+
+            target.team1.teamConfig = heroTeamConfig;
+            target.team2.teamConfig = EnemyTeamConfig;
             
-            yield return FightTeam1.Instantiate(stage.fightMembers.HeroSets, stage.Team1HpRate ,stage.team1CGMode);
-            yield return FightTeam2.Instantiate(stage.fightMembers.EnemySets, stage.Team2HpRate ,stage.team2CGMode);
+            yield return team1.Instantiate(stage.fightMembers.HeroSets, stage.Team1HpRate ,stage.team1CGMode);
+            yield return team2.Instantiate(stage.fightMembers.EnemySets, stage.Team2HpRate ,stage.team2CGMode);
             
             if (stage.GetEventType() == FightEventType.Screensaver)
             {
-                FightTeam1.TurnAllMembersInvincible(true);
-                FightTeam2.TurnAllMembersInvincible(true);
+                team1.TurnAllMembersInvincible(true);
+                team2.TurnAllMembersInvincible(true);
             }else{
-                FightTeam1.TurnAllMembersInvincible(false);
-                FightTeam2.TurnAllMembersInvincible(false);
+                team1.TurnAllMembersInvincible(false);
+                team2.TurnAllMembersInvincible(false);
             }
             
-            FightTeam1.ArrangeAllTeamMembersToPosition(FightTeam1.TeamMembers);
-            FightTeam2.ArrangeAllTeamMembersToPosition(FightTeam2.TeamMembers);
+            team1.ArrangeAllTeamMembersToPosition(team1.TeamMembers);
+            team2.ArrangeAllTeamMembersToPosition(team2.TeamMembers);
             
             switch (playerTeam)
             {
                 case Team.player1:
-                    SwitchToCMode(FightTeam1.TeamMembers.GetValues()[0], false);
+                    SwitchToCMode(team1.TeamMembers.GetValues()[0], false);
                     break;
                 case Team.player2:
-                    SwitchToCMode(FightTeam2.TeamMembers.GetValues()[0], false);
+                    SwitchToCMode(team2.TeamMembers.GetValues()[0], false);
                     break;
             }
             NetFightScene.target.LoadStageFinished.Value = true;
@@ -196,11 +198,11 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(c_Mode, focusingChar.WholeT, FightTeam2.TeamMemberTransforms());
+                    _CameraManager.Assign_Camera(c_Mode, focusingChar.WholeT, team2.TeamMemberTransforms());
                 }
                 else
                 {
-                    _CameraManager.Assign_Camera(c_Mode, focusingChar.WholeT, FightTeam1.TeamMemberTransforms());
+                    _CameraManager.Assign_Camera(c_Mode, focusingChar.WholeT, team1.TeamMemberTransforms());
                 }
             }
             else
@@ -216,11 +218,11 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, FightTeam2.TeamMemberTransforms());
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team2.TeamMemberTransforms());
                 }
                 else
                 {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, FightTeam1.TeamMemberTransforms());
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team1.TeamMemberTransforms());
                 }
                 _CameraManager.CurrentMode.SetMeCenter(focusingChar.WholeT);
             }
@@ -228,8 +230,8 @@ namespace FightScene
 
         public void Clear()// 这个我们还没有添加在合理的地方。
         {
-            FightTeam1.Clear();
-            FightTeam2.Clear();
+            team1.Clear();
+            team2.Clear();
             AllMembers.Clear();
             FightingMembers.Clear();
             MobileInputsManager.target.Clear();

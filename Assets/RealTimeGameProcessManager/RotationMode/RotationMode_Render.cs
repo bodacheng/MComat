@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FightScene
 {
-    public partial class FightTeam_RotationMode : FightTeam
+    public partial class TeamUIManagerRotationMode : TeamUIManager
     {
         public override void Refresh()
         {

@@ -50,8 +50,8 @@
 
         public override void LocalUpdate()
         {
-            RealTimeGameProcessManager.target.FightTeam1.localFightingUpdate();
-            RealTimeGameProcessManager.target.FightTeam2.localFightingUpdate();
+            RealTimeGameProcessManager.target.team1.localFightingUpdate();
+            RealTimeGameProcessManager.target.team2.localFightingUpdate();
         }
     }
 }

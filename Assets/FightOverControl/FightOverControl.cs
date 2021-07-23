@@ -48,7 +48,7 @@ namespace FightScene
         
         // 战斗结束后统计技能石升级情况时的画面显示
         List<NineForShow> NineForShows = new List<NineForShow>();
-        public void ShowSKillSets(FightTeam fightTeam, RectTransform IconAndSKillShowUISetT)
+        public void ShowSKillSets(TeamUIManager teamUIManager, RectTransform IconAndSKillShowUISetT)
         {
             NineForShows.Clear();
             foreach (Transform child in IconAndSKillShowUISetT) 
@@ -56,10 +56,10 @@ namespace FightScene
                 Destroy(child.gameObject);
             }
             
-            foreach (KeyValuePair<Data_Center, CharDataInfo> keyValuePair in fightTeam.CharDataInfoRef)
+            foreach (KeyValuePair<Data_Center, CharDataInfo> keyValuePair in teamUIManager.CharDataInfoRef)
             {
                 IconAndSKillShowUISet iconAndSKillShowUISet = Instantiate(IconAndSKillShowUISetPretab);
-                SideCharIcon sideCharIcon = fightTeam.GetSideIcon(keyValuePair.Key);
+                SideCharIcon sideCharIcon = teamUIManager.GetSideIcon(keyValuePair.Key);
                 NineForShow nineForShow = Instantiate(NineForShowPretab);
                 NineForShows.Add(nineForShow);
                 iconAndSKillShowUISet.Set(sideCharIcon, nineForShow);
@@ -91,8 +91,8 @@ namespace FightScene
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);
             List<Data_Center> data_Centers = new List<Data_Center>();
-            data_Centers.AddRange(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.GetValues());
-            data_Centers.AddRange(RealTimeGameProcessManager.target.FightTeam2.TeamMembers.GetValues());
+            data_Centers.AddRange(RealTimeGameProcessManager.target.team1.TeamMembers.GetValues());
+            data_Centers.AddRange(RealTimeGameProcessManager.target.team2.TeamMembers.GetValues());
             SkillLog(data_Centers);
             foreach (Data_Center one in data_Centers)
             {

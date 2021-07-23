@@ -6,7 +6,7 @@ using Cysharp.Threading.Tasks;
 
 namespace FightScene
 {
-    public partial class FightTeam_RotationMode : FightTeam
+    public partial class TeamUIManagerRotationMode : TeamUIManager
     {
         Data_Center RotationMode_fightingMember;
         Data_Center waitingMember;

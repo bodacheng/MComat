@@ -6,7 +6,7 @@ using UniRx;
 
 namespace FightScene
 {
-    public class FightTeam_MultiRaid : FightTeam
+    public class TeamUIManagerMultiRaid : TeamUIManager
     {
         IDictionary<Data_Center, Text> multiRaidHitComboDic = new Dictionary<Data_Center, Text>();
         

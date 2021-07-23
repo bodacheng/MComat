@@ -97,7 +97,7 @@ namespace FightScene
                 case FightEventType.Self:
                     CommonFightResult c = UILayerLoader.Load(NetFightScene.target.T, "CommonFightResult") as CommonFightResult;
                     c.Initialise(FightOverControl.target.ReturnToFront, FightOverControl.target.LocalGameRestart);
-                    FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1,c.GetIconAndSKillShowUISetT());
+                    FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.team1,c.GetIconAndSKillShowUISetT());
                     break;
                 case FightEventType.SkillTest:
                     yield return NetFightScene.target.SKillTestReload();
@@ -105,8 +105,8 @@ namespace FightScene
             }
             
             List<Data_Center> data_Centers = new List<Data_Center>();
-            data_Centers.AddRange(RealTimeGameProcessManager.target.FightTeam1.TeamMembers.GetValues());
-            data_Centers.AddRange(RealTimeGameProcessManager.target.FightTeam2.TeamMembers.GetValues());
+            data_Centers.AddRange(RealTimeGameProcessManager.target.team1.TeamMembers.GetValues());
+            data_Centers.AddRange(RealTimeGameProcessManager.target.team2.TeamMembers.GetValues());
             FightOverControl.target.SkillLog(data_Centers);
             foreach (Data_Center one in data_Centers)
             {

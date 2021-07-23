@@ -9,20 +9,19 @@ namespace FightScene
 {
     public delegate void LocalFightingUpdate();
 
-    public class FightTeam : MonoBehaviour
+    public class TeamUIManager : MonoBehaviour
     {
-        public TeamMode TeamMode;
         public MultiDict<int, int, Data_Center> TeamMembers = new MultiDict<int, int, Data_Center>();
         public IDictionary<Data_Center, CharDataInfo> CharDataInfoRef = new Dictionary<Data_Center, CharDataInfo>();
         public TeamConfig teamConfig;
         public RectTransform sideIconsContainer;
         public Canvas _targetCanvas;
         public SideCharIcon button_prefab;
-        public GameObject selectedFrame;
         public Text HitCombo;
-
+        
         [HideInInspector]
         public Transform[] TeamStandPoints;
+        
         protected IDictionary<Data_Center, SideCharIcon> CharIconDic = new Dictionary<Data_Center, SideCharIcon>();
 
         public SideCharIcon GetSideIcon(Data_Center d)

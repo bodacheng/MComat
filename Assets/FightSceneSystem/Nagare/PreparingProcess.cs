@@ -22,8 +22,8 @@ public class PreparingProcess : FSceneProcess
         FightLoadError.Instance.FightLoadErrors.Clear();
         yield return RealTimeGameProcessManager.target.LoadGame(NetFightScene.Fight);
         RealTimeGameProcessManager.target.AllMembers.Clear();
-        DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player1, RealTimeGameProcessManager.target.FightTeam1.TeamMembers.GetValues());
-        DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player2, RealTimeGameProcessManager.target.FightTeam2.TeamMembers.GetValues());
+        DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player1, RealTimeGameProcessManager.target.team1.TeamMembers.GetValues());
+        DicAdd<Team, List<Data_Center>>.Add(RealTimeGameProcessManager.target.AllMembers, Team.player2, RealTimeGameProcessManager.target.team2.TeamMembers.GetValues());
         RealTimeGameProcessManager.FightingMembers.Clear();
         FightLogger.target.ReadyToLog(RealTimeGameProcessManager.target.AllMembers);
         EffectsManager.INIEffectsPool("hit_ground", null, 3);
@@ -55,7 +55,7 @@ public class PreparingProcess : FSceneProcess
     public override bool CanEnterOtherProcess()
     {
         return NetFightScene.target.LoadStageFinished.Value
-            && RealTimeGameProcessManager.target.FightTeam1.IfAllCharsPreparedForBattle() 
-            && RealTimeGameProcessManager.target.FightTeam2.IfAllCharsPreparedForBattle();
+            && RealTimeGameProcessManager.target.team1.IfAllCharsPreparedForBattle() 
+            && RealTimeGameProcessManager.target.team2.IfAllCharsPreparedForBattle();
     }
 }

@@ -57,8 +57,8 @@ public class BasicTryProcess : FSceneProcess
         
     public IEnumerator EnterProcess()
     {
-        AllMembers.Add(Team.player1,RealTimeGameProcessManager.target.FightTeam1.TeamMembers.GetValues());
-        AllMembers.Add(Team.player2,RealTimeGameProcessManager.target.FightTeam2.TeamMembers.GetValues());
+        AllMembers.Add(Team.player1,RealTimeGameProcessManager.target.team1.TeamMembers.GetValues());
+        AllMembers.Add(Team.player2,RealTimeGameProcessManager.target.team2.TeamMembers.GetValues());
         TeamDeadMemberDictionary.Clear();
         
         foreach (KeyValuePair<Team,List<Data_Center>> keyValuePair in AllMembers)

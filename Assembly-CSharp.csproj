@@ -155,7 +155,7 @@
      <Compile Include="Assets\AI\AI_states\states\Counter_State.cs" />
      <Compile Include="Assets\CSV2Table\Demo\C2TDemo.cs" />
      <Compile Include="Assets\Asstes\JMO Assets\MatCap Shaders\Demo\Assets\MC_SwitchTexture.cs" />
-     <Compile Include="Assets\RealTimeGameProcessManager\RotationMode\FightTeam_RotationMode.cs" />
+     <Compile Include="Assets\RealTimeGameProcessManager\RotationMode\TeamUIManagerRotationMode.cs" />
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_Resource.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkDubSounds.cs" />
      <Compile Include="Assets\Prescene\PreScene.cs" />
@@ -217,11 +217,12 @@
      <Compile Include="Assets\JsonSupport\UnityLitJson\Lexer.cs" />
      <Compile Include="Assets\Structure\MultiDictionary.cs" />
      <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\CombatTextController.cs" />
-     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\Marker.cs" />
      <Compile Include="Assets\AI\GUI\BehaviorRunnerGUI.cs" />
+     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\Marker.cs" />
      <Compile Include="Assets\UI\Oldscripts\SwapAllModelShader.cs" />
      <Compile Include="Assets\Structure\DicAdd.cs" />
      <Compile Include="Assets\ResourceLoading\UnitCreator\UnitCreator_Cach.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\ArcadeFightResult.cs" />
      <Compile Include="Assets\MissionWatcher\MissionWatcher.cs" />
      <Compile Include="Assets\Remote\Account\Account.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot.cs" />
@@ -471,7 +472,7 @@
      <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Stable.cs" />
      <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\UniqueMagicAbilities\SpawnMagicAbilityScript.cs" />
      <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
-     <Compile Include="Assets\RealTimeGameProcessManager\MultiRaid\FightTeam_MultiRaid.cs" />
+     <Compile Include="Assets\RealTimeGameProcessManager\MultiRaid\TeamUIManagerMultiRaid.cs" />
      <Compile Include="Assets\Launcher\Starter.cs" />
      <Compile Include="Assets\AI\AI_states\states\Idle_State.cs" />
      <Compile Include="Assets\Asstes\JMO Assets\MatCap Shaders\Creator\Assets\MC_CreateMatCap.cs" />
@@ -585,6 +586,7 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerImage.cs" />
      <Compile Include="Assets\PlayFab\Defs\PFDefine.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\BasicState.cs" />
+     <Compile Include="Assets\PlayFab\CloudScripts\Arcade.cs" />
      <Compile Include="Assets\NetFightScene\NetFightScene.cs" />
      <Compile Include="Assets\BOWeaponSystem\Health System\BasicPhysicSupport.cs" />
      <Compile Include="Assets\MemberDetail\LevelManager.cs" />
@@ -626,7 +628,7 @@
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Desaturate.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot_Watch.cs" />
      <Compile Include="Assets\UI\BackGroundPS.cs" />
-     <Compile Include="Assets\RealTimeGameProcessManager\FightTeam.cs" />
+     <Compile Include="Assets\RealTimeGameProcessManager\TeamUIManager.cs" />
      <Compile Include="Assets\AI\buttons\zokuseiButtonEffectsGroup.cs" />
      <Compile Include="Assets\DynamicBone\Scripts\DynamicBone.cs" />
      <Compile Include="Assets\Camera\Modes\OneVOneMode_failed.cs" />
@@ -647,8 +649,6 @@
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
      <Compile Include="Assets\FightingSceneUISystem\OutsideScreenIndicator.cs" />
      <Compile Include="Assets\Remote\API\Dto\Model\Common\BasicVoidModel.cs" />
-     <Compile Include="Assets\DummyLayerSystem\LayerDefine\ArcadeFightResult.cs" />
-     <Compile Include="Assets\PlayFab\CloudScripts\Arcade.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />

@@ -3,7 +3,7 @@ using UniRx;
 
 namespace FightScene
 {
-    public partial class FightTeam_RotationMode : FightTeam
+    public partial class TeamUIManagerRotationMode : TeamUIManager
     {
         protected override void TeamsFightInitialize(float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
