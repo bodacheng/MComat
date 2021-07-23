@@ -347,7 +347,7 @@ public class MobileInputsManager : MonoBehaviour {
     void RefreshPattern(Button button, int sp_level)//按钮切换也可以在这里做文章
     {
         targetButtonPos = ScreenPositionCal.Cal(2, target.fxCamera, button.GetComponent<RectTransform>(), 5);
-        _focusing.Refreshforbutton(button, sp_level, targetButtonPos);
+        _focusing?.Refreshforbutton(button, sp_level, targetButtonPos);
     }
 
     //void changeButtonPatternParticleVer(Button button,EX sp_level)//按钮切换也可以在这里做文章

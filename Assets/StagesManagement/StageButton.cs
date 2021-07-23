@@ -30,6 +30,7 @@ public class StageInfo
             else 
                 stageButton.MemberIcons[i].Grey();
             stageButton.MemberIcons[i].iconButton.targetGraphic.raycastTarget = on;
+            stageButton.button.targetGraphic.raycastTarget = on;
         }
     }
 }
