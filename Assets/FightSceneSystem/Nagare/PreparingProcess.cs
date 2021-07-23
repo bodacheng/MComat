@@ -21,11 +21,16 @@ public class PreparingProcess : FSceneProcess
         //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
         FightLoadError.Instance.FightLoadErrors.Clear();
         yield return RTFightManager.target.LoadGame(NetFightScene.Fight);
-        RTFightManager.target.AllMembers.Clear();
-        DicAdd<Team, List<Data_Center>>.Add(RTFightManager.target.AllMembers, Team.player1, RTFightManager.target.team1.TeamMembers.GetValues());
-        DicAdd<Team, List<Data_Center>>.Add(RTFightManager.target.AllMembers, Team.player2, RTFightManager.target.team2.TeamMembers.GetValues());
+        RTFightManager.target.Team1Members = RTFightManager.target.team1.TeamMembers;
+        RTFightManager.target.Team2Members = RTFightManager.target.team2.TeamMembers;
+        
         RTFightManager.FightingMembers.Clear();
-        FightLogger.target.ReadyToLog(RTFightManager.target.AllMembers);
+
+        IDictionary<Team, List<Data_Center>> TeamMembers = new Dictionary<Team, List<Data_Center>>();
+        DicAdd<Team, List<Data_Center>>.Add(TeamMembers, Team.player1, RTFightManager.target.team1.TeamMembers.GetValues());
+        DicAdd<Team, List<Data_Center>>.Add(TeamMembers, Team.player2, RTFightManager.target.team2.TeamMembers.GetValues());
+        FightLogger.target.ReadyToLog(TeamMembers);
+        
         EffectsManager.INIEffectsPool("hit_ground", null, 3);
         EffectsManager.INIEffectsPool("wallCrack", null, 3);
         LoadingCanvas.target.LightUp();

@@ -9,7 +9,7 @@ namespace FightScene
         {
             foreach (Data_Center a_char in TeamMembers.GetValues())
             {
-                a_char.Step3Initialize(teamConfig, TeamHpRate * SkillSet.INI_Hp(CharDataInfoRef[a_char].set.SkillEntityList()), teamCGMode);
+                a_char.Step3Initialize(teamConfig, TeamHpRate * SkillSet.INI_Hp(RTFightManager.target.CharDataInfoRef[a_char].set.SkillEntityList()), teamCGMode);
 
                 float maxHp = a_char.FightDataRef.CurrentHp.Value;
                 a_char.FightDataRef.CurrentHp.Subscribe(x =>
@@ -70,7 +70,7 @@ namespace FightScene
                         ReadyForNextMember(a_char);
                     }
                     _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(action1);
-                    CharDataInfo charDInfo = CharDataInfoRef[a_char];
+                    CharDataInfo charDInfo = RTFightManager.target.CharDataInfoRef[a_char];
                     CharConfig _charConfig = MonstersConfigTable.GetCharConfig(charDInfo.r_id);
                     _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Get(charDInfo.r_id), _charConfig._zokusei);
                     _SideCharIcon.gameObject.SetActive(true);

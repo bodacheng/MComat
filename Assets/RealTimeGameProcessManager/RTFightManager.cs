@@ -37,8 +37,12 @@ namespace FightScene
         public static bool Auto;
         public static Data_Center focusingChar;
         public static Team playerTeam = Team.player1;
+
+        public MultiDict<int, int, Data_Center> Team1Members;
+        public MultiDict<int, int, Data_Center> Team2Members;
         
-        public readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();
+        public IDictionary<Data_Center, CharDataInfo> CharDataInfoRef = new Dictionary<Data_Center, CharDataInfo>();
+        //public readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();
         public static IDictionary<Team, List<Data_Center>> FightingMembers = new Dictionary<Team, List<Data_Center>>();
 
         FightInfo loadFight;
@@ -232,7 +236,8 @@ namespace FightScene
         {
             team1.Clear();
             team2.Clear();
-            AllMembers.Clear();
+            Team1Members.Clear();
+            Team2Members.Clear();
             FightingMembers.Clear();
             MobileInputsManager.target.Clear();
         }

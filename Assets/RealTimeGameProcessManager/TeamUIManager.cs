@@ -12,7 +12,6 @@ namespace FightScene
     public class TeamUIManager : MonoBehaviour
     {
         public MultiDict<int, int, Data_Center> TeamMembers = new MultiDict<int, int, Data_Center>();
-        public IDictionary<Data_Center, CharDataInfo> CharDataInfoRef = new Dictionary<Data_Center, CharDataInfo>();
         public TeamConfig teamConfig;
         public RectTransform sideIconsContainer;
         public Canvas _targetCanvas;
@@ -42,7 +41,7 @@ namespace FightScene
                     dcenter = (Data_Center)char_DC.Current;
                 }
                 TeamMembers.Set(kv.Key.Item1, kv.Key.Item2, dcenter);
-                DicAdd<Data_Center, CharDataInfo>.Add(CharDataInfoRef, dcenter, _one);
+                DicAdd<Data_Center, CharDataInfo>.Add(RTFightManager.target.CharDataInfoRef, dcenter, _one);
             }
         }
 
@@ -179,7 +178,7 @@ namespace FightScene
         public List<string> GetAllUsingStoneOfAcc()
         {
             List<string> stones = new List<string>();
-            foreach (KeyValuePair<Data_Center, CharDataInfo> keyValuePair in CharDataInfoRef)
+            foreach (KeyValuePair<Data_Center, CharDataInfo> keyValuePair in RTFightManager.target.CharDataInfoRef)
             {
                 List<StoneOfPlayerInfo> mystones = Stones.GetEquipingStones(keyValuePair.Value.id);
                 for (int i = 0; i < mystones.Count; i++)

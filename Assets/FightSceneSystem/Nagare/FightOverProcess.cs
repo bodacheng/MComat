@@ -137,11 +137,11 @@ namespace FightScene
             List<Data_Center> winners = new List<Data_Center>();
             if (winner == Team.player1)
             {
-                winners = RTFightManager.target.AllMembers[Team.player1];
+                winners = RTFightManager.target.Team1Members.GetValues();
             }
             if (winner == Team.player2)
             {
-                winners = RTFightManager.target.AllMembers[Team.player2];
+                winners = RTFightManager.target.Team2Members.GetValues();
             }
             foreach (Data_Center _one in winners)
             {
