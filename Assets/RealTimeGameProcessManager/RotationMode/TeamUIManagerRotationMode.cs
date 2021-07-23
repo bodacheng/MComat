@@ -32,7 +32,7 @@ namespace FightScene
             rotationModeHitCombo.text = "";
         }
         
-        public override void ArrangeAllTeamMembersToPosition(MultiDict<int, int, Data_Center> heromultiDictionary)
+        public override void ToStartPos(MultiDict<int, int, Data_Center> heromultiDictionary)
         {
             foreach (KeyValuePair<(int, int), Data_Center> kv in heromultiDictionary.mDict)
             {
@@ -55,7 +55,7 @@ namespace FightScene
             }
             if (teamConfig.myTeam != RTFightManager.playerTeam)
             {
-                BarsPositionUpdate();
+                BarsPosUpdate();
             }
         }
         

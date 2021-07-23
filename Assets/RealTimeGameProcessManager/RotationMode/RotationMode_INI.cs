@@ -48,7 +48,7 @@ namespace FightScene
             localFightingUpdate = Rotation_LocalFightingUpdate;
         }
         
-        protected override void InstantiateCharsIconsAndFloatHPBar()//这个环节应该能够同时把HP bar也适配好。
+        protected override void InsTeamUI()//这个环节应该能够同时把HP bar也适配好。
         {
             SideCharIcon _SideCharIcon;
             RefreshTimeDic.Clear();

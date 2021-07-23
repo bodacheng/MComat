@@ -22,7 +22,7 @@ namespace FightScene
         public Transform[] TeamStandPoints;
         
         protected IDictionary<Data_Center, SideCharIcon> CharIconDic = new Dictionary<Data_Center, SideCharIcon>();
-
+        
         public SideCharIcon GetSideIcon(Data_Center d)
         {
             return CharIconDic.ContainsKey(d) ? CharIconDic[d]: null;
@@ -50,14 +50,14 @@ namespace FightScene
         }
 
         public LocalFightingUpdate localFightingUpdate;
-
+        
         public virtual List<Transform> TeamMemberTransforms()
         {
             return null;
         }
 
         protected SideCharIcon _tempSI;
-        public void BarsPositionUpdate()
+        public void BarsPosUpdate()
         {
             foreach (Data_Center _one in TeamMembers.GetValues())
             {
@@ -66,7 +66,7 @@ namespace FightScene
             }
         }
 
-        protected virtual void InstantiateCharsIconsAndFloatHPBar()
+        protected virtual void InsTeamUI()
         {
         }
 
@@ -75,15 +75,15 @@ namespace FightScene
         }
 
         // for multiRaid
-        public virtual void ArrangeAllTeamMembersToPosition(MultiDict<int, int, Data_Center> heromultiDictionary)
+        public virtual void ToStartPos(MultiDict<int, int, Data_Center> heromultiDictionary)
         {
         }
         
         // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
-        public IEnumerator Instantiate(MultiDict<int, int, CharDataInfo> CharacterSets, float TeamHpRate, CriticalGaugeMode teamCGMode)
+        public IEnumerator Instantiate(MultiDict<int, int, CharDataInfo> UnitInfos, float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
-            yield return CharsLoad(CharacterSets);
-            InstantiateCharsIconsAndFloatHPBar();
+            yield return CharsLoad(UnitInfos);
+            InsTeamUI();
             TeamsFightInitialize(TeamHpRate, teamCGMode);
         }
         
@@ -95,46 +95,43 @@ namespace FightScene
                 a_char.FightDataRef.Invincible = _Invincible;
             }
         }
-
-        SideCharIcon SideCharIcon;
+        
         protected void RefreshResistanceBar(Data_Center data_Center)
         {
-            CharIconDic.TryGetValue(data_Center, out SideCharIcon);
-            SideCharIcon.RefreshResistanceBar();
+            CharIconDic.TryGetValue(data_Center, out _tempSI);
+            _tempSI.RefreshResistanceBar();
         }
         
         protected void RefreshHPBar(Data_Center data_Center, float current_hp, float wholeHP)
         {
-            CharIconDic.TryGetValue(data_Center, out SideCharIcon);
-            SideCharIcon.RefreshHpBar(current_hp, wholeHP);
+            CharIconDic.TryGetValue(data_Center, out _tempSI);
+            _tempSI.RefreshHpBar(current_hp, wholeHP);
         }
         protected void RefreshExBar(Data_Center data_Center, int current_ex, int wholeex)
         {
-            CharIconDic.TryGetValue(data_Center, out SideCharIcon);
-            SideCharIcon.RefreshExBar(current_ex, wholeex);
+            CharIconDic.TryGetValue(data_Center, out _tempSI);
+            _tempSI.RefreshExBar(current_ex, wholeex);
         }
-
-        //这个刷新是倾向于画面制御
-        SideCharIcon SideCharIcon3;
+        
         public virtual void Refresh()
         {
             foreach (Data_Center _datacenter in TeamMembers.GetValues())
             {
-                CharIconDic.TryGetValue(_datacenter, out SideCharIcon3);
+                CharIconDic.TryGetValue(_datacenter, out _tempSI);
                 if (teamConfig.myTeam == RTFightManager.playerTeam)
                 {
-                    SideCharIcon3.transform.localScale = _datacenter != RTFightManager.focusingChar ? Vector3.one : Vector3.one * 1.2f;
-                    SideCharIcon3.transform.SetParent(sideIconsContainer.transform);
-                    SideCharIcon3.focusingCharIcon.gameObject.SetActive(true);
-                    SideCharIcon3.ExBar.gameObject.SetActive(true);
-                    SideCharIcon3.ExBar.transform.SetSiblingIndex(4);
-                    SideCharIcon3.RecallBars();
+                    _tempSI.transform.localScale = _datacenter != RTFightManager.focusingChar ? Vector3.one : Vector3.one * 1.2f;
+                    _tempSI.transform.SetParent(sideIconsContainer.transform);
+                    _tempSI.focusingCharIcon.gameObject.SetActive(true);
+                    _tempSI.ExBar.gameObject.SetActive(true);
+                    _tempSI.ExBar.transform.SetSiblingIndex(4);
+                    _tempSI.RecallBars();
                 }
                 else
                 {
-                    SideCharIcon3.focusingCharIcon.gameObject.SetActive(false);
-                    SideCharIcon3.ExBar.gameObject.SetActive(false);
-                    SideCharIcon3.transform.SetParent(_targetCanvas.transform);
+                    _tempSI.focusingCharIcon.gameObject.SetActive(false);
+                    _tempSI.ExBar.gameObject.SetActive(false);
+                    _tempSI.transform.SetParent(_targetCanvas.transform);
                 }
             }
         }
@@ -149,7 +146,7 @@ namespace FightScene
             return true;
         }
         
-        public void LetAllCharactersStartOff()
+        public void AllUnitsStartOff()
         {
             foreach (Data_Center oneMember in TeamMembers.GetValues())
             {

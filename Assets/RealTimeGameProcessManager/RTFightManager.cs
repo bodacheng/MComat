@@ -171,8 +171,8 @@ namespace FightScene
                 team2.TurnAllMembersInvincible(false);
             }
             
-            team1.ArrangeAllTeamMembersToPosition(team1.TeamMembers);
-            team2.ArrangeAllTeamMembersToPosition(team2.TeamMembers);
+            team1.ToStartPos(team1.TeamMembers);
+            team2.ToStartPos(team2.TeamMembers);
             
             switch (playerTeam)
             {

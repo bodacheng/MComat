@@ -29,7 +29,7 @@ namespace FightScene
             }
         }
 
-        public override void ArrangeAllTeamMembersToPosition(MultiDict<int, int, Data_Center> heromultiDictionary)
+        public override void ToStartPos(MultiDict<int, int, Data_Center> heromultiDictionary)
         {
             foreach (KeyValuePair<(int, int), Data_Center> kv in heromultiDictionary.mDict)
             {
@@ -66,7 +66,7 @@ namespace FightScene
         {
             if (teamConfig.myTeam != RTFightManager.playerTeam)
             {
-                BarsPositionUpdate();
+                BarsPosUpdate();
             }
         }
 
@@ -146,7 +146,7 @@ namespace FightScene
             }
         }
 
-        protected override void InstantiateCharsIconsAndFloatHPBar()//这个环节应该能够同时把HP bar也适配好。
+        protected override void InsTeamUI()//这个环节应该能够同时把HP bar也适配好。
         {
             SideCharIcon _SideCharIcon;
             Text hitCombo;
@@ -208,7 +208,7 @@ namespace FightScene
 
         public override void ModeStart()
         {
-            LetAllCharactersStartOff();
+            AllUnitsStartOff();
         }
 
         public override List<Transform> TeamMemberTransforms()
