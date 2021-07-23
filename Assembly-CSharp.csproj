@@ -649,6 +649,7 @@
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
      <Compile Include="Assets\FightingSceneUISystem\OutsideScreenIndicator.cs" />
      <Compile Include="Assets\Remote\API\Dto\Model\Common\BasicVoidModel.cs" />
+     <Compile Include="Assets\FightSceneSystem\Nagare\FightResultAnim.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />

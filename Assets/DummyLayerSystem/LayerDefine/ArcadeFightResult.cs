@@ -15,7 +15,7 @@ public class ArcadeFightResult : UILayer
         ReturnBtn.onClick.AddListener(R.Invoke);
         AgainBtn.onClick.AddListener(A.Invoke);
         
-        if (ArcadeManager.ArcadeStages.ContainsKey(NetFightScene.Fight.LocalFightID + 1))
+        if (ArcadeManager.ArcadeStages.ContainsKey(NetFightScene.Fight.ID + 1))
         {
             NextBtn.onClick.AddListener(N.Invoke);
             NextBtn.gameObject.SetActive(true);

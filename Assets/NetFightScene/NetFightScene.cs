@@ -70,6 +70,7 @@ namespace FightScene
             FightingProcess fightingProcess = new FightingProcess();
             CountDownProcess countDownProcess = new CountDownProcess();
             StoryProcess storyProcess = new StoryProcess();
+            FightResultAnim fightResultAnim = new FightResultAnim();
             FightOverProcess fightOverProcess = new FightOverProcess();
             BasicTryProcess basicTryProcess = new BasicTryProcess();
             
@@ -82,6 +83,7 @@ namespace FightScene
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Preparing, preparingProcess);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.CountDown, countDownProcess);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Fighting, fightingProcess);
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightResultAnim, fightResultAnim);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightOver, fightOverProcess);
                     break;
                 case FightEventType.Quest:
@@ -89,6 +91,7 @@ namespace FightScene
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.StoryBeforeFight, storyProcess);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.CountDown, countDownProcess);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Fighting, fightingProcess);
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightResultAnim, fightResultAnim);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightOver, fightOverProcess);
                     break;
                 case FightEventType.Screensaver:

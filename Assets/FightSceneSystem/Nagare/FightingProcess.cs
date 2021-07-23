@@ -36,6 +36,7 @@
         
         public override void ProcessEnd()
         {
+            MobileInputsManager.target.TurnOffButtons();
             if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
             {
                 UILayerLoader.Remove("TitleScreenLayer");

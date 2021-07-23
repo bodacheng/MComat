@@ -50,20 +50,22 @@ namespace mainMenu
             foreach (Object _object in stageResources)
             {
                 FightInfo one = (FightInfo)_object;
+                one.ID = int.Parse(one.name);
+                Debug.Log("arcade loaded:"+ one.ID);
                 one.SetEventType(FightEventType.Quest);
-                if (!ArcadeStages.ContainsKey(one.LocalFightID))
+                if (!ArcadeStages.ContainsKey(one.ID))
                 {
                     one.LoadLocalFightFromScript();
                     StageButton newButton = Instantiate(pretab);
                     void LoadThisStage()
                     {
-                        ArcadeStages[one.LocalFightID].stageConfig.LoadMyTeam();
-                        PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, ArcadeStages[one.LocalFightID].stageConfig, true);
+                        ArcadeStages[one.ID].stageConfig.LoadMyTeam();
+                        PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, ArcadeStages[one.ID].stageConfig, true);
                     }
                     newButton.button.onClick.AddListener(LoadThisStage);
-                    newButton.ID = one.LocalFightID;
-                    newButton.text.text = "Stage" + one.LocalFightID;
-                    newButton.name = "Stage" + one.LocalFightID;
+                    newButton.ID = one.ID;
+                    newButton.text.text = "Stage" + one.ID;
+                    newButton.name = "Stage" + one.ID;
                     
                     for (int i = 0; i < one.fightMembers.EnemySets.GetValues().Count; i++)
                     {
@@ -87,11 +89,11 @@ namespace mainMenu
                         stageConfig = one,
                         stageButton = newButton
                     };
-                    ArcadeStages.Add(one.LocalFightID, stageInfo);
+                    ArcadeStages.Add(one.ID, stageInfo);
                 }
                 else
                 {
-                    Debug.Log("重复的Arcade模式关卡ID：" + one.LocalFightID);
+                    Debug.Log("重复的Arcade模式关卡ID：" + one.ID);
                 }
             }
             StageCount = ArcadeStages.Count;

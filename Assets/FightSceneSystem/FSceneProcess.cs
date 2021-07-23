@@ -18,6 +18,7 @@ namespace FightScene
         Fighting = 2,
         BasicTryTutorial = 7,
         
+        FightResultAnim = 5,
         FightOver = 3
     }
 }

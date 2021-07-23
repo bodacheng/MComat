@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Playables;
@@ -6,8 +7,15 @@ using dataAccess;
 
 public class FightInfo : ScriptableObject
 {
+    int LocalFightID;
     FightEventType eventType;
-
+    
+    public int ID
+    {
+        set { LocalFightID = value; }
+        get { return LocalFightID; }
+    }
+    
     public FightEventType GetEventType()
     {
         return eventType;
@@ -17,9 +25,7 @@ public class FightInfo : ScriptableObject
     {
         this.eventType = eventType;
     }
-
-    [SerializeField]
-    public int LocalFightID;
+    
     [SerializeField]
     public int BattleGroundID;
     

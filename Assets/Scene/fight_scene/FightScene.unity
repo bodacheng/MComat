@@ -230,14 +230,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe32e1c97a604b14ab4a4fbf2df6582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeamMode: 0
   TeamMembers:
     _SerializableSets: []
   sideIconsContainer: {fileID: 3000649884906219656}
   _targetCanvas: {fileID: 3000649885478218883}
   button_prefab: {fileID: 1163580101528835427, guid: 0ba39cc0e4997459fb7431ca6b5b03eb,
     type: 3}
-  selectedFrame: {fileID: 0}
   HitCombo: {fileID: 3000649885977066916}
   TeamStandPoints: []
 --- !u!224 &101819575
@@ -271,14 +269,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6e8a34d995c40f38cfad700fb050ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeamMode: 2
   TeamMembers:
     _SerializableSets: []
   sideIconsContainer: {fileID: 3000649884906219656}
   _targetCanvas: {fileID: 3000649885478218883}
   button_prefab: {fileID: 1163580101528835427, guid: 0ba39cc0e4997459fb7431ca6b5b03eb,
     type: 3}
-  selectedFrame: {fileID: 0}
   HitCombo: {fileID: 3000649885977066916}
   TeamStandPoints: []
 --- !u!114 &101819577
@@ -293,14 +289,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34f8122c903e42da90f54435f29eb9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeamMode: 1
   TeamMembers:
     _SerializableSets: []
   sideIconsContainer: {fileID: 3000649884906219656}
   _targetCanvas: {fileID: 3000649885478218883}
   button_prefab: {fileID: 1163580101528835427, guid: 0ba39cc0e4997459fb7431ca6b5b03eb,
     type: 3}
-  selectedFrame: {fileID: 0}
   HitCombo: {fileID: 3000649885977066916}
   TeamStandPoints: []
 --- !u!1001 &111738539
@@ -1648,7 +1642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &880353305
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6954,14 +6948,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe32e1c97a604b14ab4a4fbf2df6582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeamMode: 0
   TeamMembers:
     _SerializableSets: []
   sideIconsContainer: {fileID: 3000649884906219656}
   _targetCanvas: {fileID: 3000649885478218883}
   button_prefab: {fileID: 1163580101528835427, guid: 0ba39cc0e4997459fb7431ca6b5b03eb,
     type: 3}
-  selectedFrame: {fileID: 0}
   HitCombo: {fileID: 3000649885977066916}
   TeamStandPoints: []
 --- !u!224 &1118366191
@@ -6995,14 +6987,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6e8a34d995c40f38cfad700fb050ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeamMode: 2
   TeamMembers:
     _SerializableSets: []
   sideIconsContainer: {fileID: 3000649884906219656}
   _targetCanvas: {fileID: 3000649885478218883}
   button_prefab: {fileID: 1163580101528835427, guid: 0ba39cc0e4997459fb7431ca6b5b03eb,
     type: 3}
-  selectedFrame: {fileID: 0}
   HitCombo: {fileID: 3000649885977066916}
   TeamStandPoints: []
 --- !u!114 &1118366193
@@ -7017,14 +7007,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34f8122c903e42da90f54435f29eb9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeamMode: 1
   TeamMembers:
     _SerializableSets: []
   sideIconsContainer: {fileID: 3000649884906219656}
   _targetCanvas: {fileID: 3000649885478218883}
   button_prefab: {fileID: 1163580101528835427, guid: 0ba39cc0e4997459fb7431ca6b5b03eb,
     type: 3}
-  selectedFrame: {fileID: 0}
   HitCombo: {fileID: 3000649885977066916}
   TeamStandPoints: []
 --- !u!1 &1132959643
@@ -25694,12 +25682,16 @@ MonoBehaviour:
   _C_button: {fileID: 3000649885093480754}
   _AI_button: {fileID: 3000649885826334861}
   Messages: {fileID: 2002094916}
-  FightTeam1: {fileID: 1118366190}
-  FightTeam2: {fileID: 101819574}
-  FightTeam1_multi: {fileID: 1118366193}
-  FightTeam2_multi: {fileID: 101819577}
-  FightTeam1_rotation: {fileID: 1118366192}
-  FightTeam2_rotation: {fileID: 101819576}
+  team1: {fileID: 1118366190}
+  team2: {fileID: 101819574}
+  team1UIManagerMulti: {fileID: 1118366193}
+  team2UIManagerMulti: {fileID: 101819577}
+  team1UIManagerRotation: {fileID: 1118366192}
+  team2UIManagerRotation: {fileID: 101819576}
+  Team1Members:
+    _SerializableSets: []
+  Team2Members:
+    _SerializableSets: []
 --- !u!1 &3000649885632960530
 GameObject:
   m_ObjectHideFlags: 0
