@@ -13,21 +13,8 @@ namespace FightScene
     {
         public static FightOverControl target;
         
-        [Header("FightOverCanvas")]
-        public Canvas FightOverCanvas;
-        
-        [Header("WIN")]
-        public GameObject win_textanimation;
-        
-        [Header("LOSE")]
-        public GameObject lose_textanimation;
-        
         [Header("IconWithSkillShow")]
         public IconAndSKillShowUISet IconAndSKillShowUISetPretab;
-        
-        [Space(11)]
-        [Header("战斗的最后一击时候的处理")]
-        public Button NextLevelButton;
         
         [Header("NineForShow")]
         public NineForShow NineForShowPretab;
@@ -39,7 +26,6 @@ namespace FightScene
         
         public void Clear()
         {
-            FightOverCanvas.gameObject.SetActive(false);
             foreach(NineForShow nineForShow in NineForShows)
             {
                 nineForShow.ClearCurrent();
@@ -68,22 +54,6 @@ namespace FightScene
                 iconAndSKillShowUISet.transform.localScale = Vector3.one;
                 nineForShow.ShowStones_Acc(keyValuePair.Value.id);
             }
-        }
-        
-        // 胜利字幕与对应页面加载
-        public IEnumerator WINProcess()
-        {
-            win_textanimation.gameObject.SetActive(true);
-            yield return new WaitForSeconds(3f);
-            win_textanimation.gameObject.SetActive(false);
-        }
-        
-        // 失败字幕与对应页面加载
-        public IEnumerator LoseProcess()
-        {
-            lose_textanimation.gameObject.SetActive(true);
-            yield return new WaitForSeconds(3f);
-            lose_textanimation.gameObject.SetActive(false);
         }
         
         // 这个函数应该包括一些更深层的考虑。

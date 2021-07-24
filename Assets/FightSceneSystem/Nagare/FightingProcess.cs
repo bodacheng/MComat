@@ -29,7 +29,6 @@
                 NetFightScene.target.FightCanvas.gameObject.SetActive(true);
             }
             NetFightScene.target.PreparingCanvas.gameObject.SetActive(false);
-            FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
             FightScenePauseSupport.target.ControlCanvas.gameObject.SetActive(true);
             NetFightScene.target.PressedStartButton();
         }

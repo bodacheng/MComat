@@ -9,6 +9,7 @@ public class UILayerLoader
         {"CommonFightResult", "DummyLayerSystem/CommonFightResult"},
         {"TitleScreenLayer", "DummyLayerSystem/TitleScreenLayer"},
         {"ArcadeFightResult", "DummyLayerSystem/ArcadeFightResult"},
+        {"FightResultAnimLayer", "DummyLayerSystem/FightResultAnimLayer"}
     };
 
     private static List<UILayer> Queues = new List<UILayer>();
@@ -18,6 +19,7 @@ public class UILayerLoader
         string path = paths[layerName];
         UILayer UILayerPrefab = Resources.Load<UILayer>(path);
         UILayer t = GameObject.Instantiate(UILayerPrefab);
+        t.Index = layerName;
         t.transform.SetParent(T);
         RectTransform rt = t.GetComponent<RectTransform>();
         rt.offsetMin = Vector2.zero;
@@ -56,8 +58,9 @@ public class UILayerLoader
         if (toremoveindex >= 0)
         {
             UILayer layer = Queues[toremoveindex];
-            GameObject.Destroy(layer);
+            GameObject.Destroy(layer.gameObject);
             Queues.RemoveAt(toremoveindex);
+            Debug.Log("Layer destroied :" + index);
         }
     }
 }

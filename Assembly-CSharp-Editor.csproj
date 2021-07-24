@@ -52,89 +52,89 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\SaveSystem\ImportExportManager.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\ResourceManager.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\Node.cs" />
+     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_FlatColorEditor.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkInitialization.cs" />
+     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_ColorSwapEditor.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\ReflectionUtility.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Default\Calculation Base\CalculationCanvasType.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Default\Runtime Examples\RTCanvasCalculator.cs" />
+     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_HslEditor.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\SaveSystem\ImportExportFormat.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkSkipCutsceneEditor.cs" />
+     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_PixelateEditor.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\ConnectionPort.cs" />
+     <Compile Include="Assets\Asstes\Malbers Animations\Common\Scripts\Editor\Readme\ReadmeEditor.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\RPGTalk Nodes\Nodes\RPGTalkSaveNode.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Interface\NodeEditorInputControls.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\NodeCanvasTraversal.cs" />
+     <Compile Include="Assets\ImagineVR\Editor\ApplyPixelation.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkAreaEditor.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Interface\NodeEditorInterface.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\SaveSystem\NodeEditorSaveManager.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\CoreExtensions\NodeTypes.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\ConnectionPortManager.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\NodeCanvas.cs" />
      <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_RimEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Editor\Node_Editor\NodeInspector.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\SaveSystem\NodeCanvasSceneSave.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\CoreExtensions\ConnectionPortStyles.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\Node.cs" />
-     <Compile Include="Assets\DynamicStarrySky\Editor\EditorCoroutine.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Default\Runtime Examples\RTNodeEditor.cs" />
      <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_OutlineEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkConfig.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\GUI\GUIScaleUtility.cs" />
      <Compile Include="Assets\Ultimate Joystick\Editor\UltimateJoystickEditor.cs" />
-     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_FlatColorEditor.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\RPGTalkCinematic\Editor\RPGTalkCinematicDrawer.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\NodeGroup.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\SaveSystem\ImportExportStructure.cs" />
+     <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Editor\ContextMenu.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkLocalizationStringEditor.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\RPGTalk Nodes\Canvas\RPGTalkNodeCanvas.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\GUI\RTEditorGUI.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Interface\NodeEditorGUI.cs" />
+     <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Editor\UIManagerEditor.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\ConnectionKnob.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Default\IO Formats\XMLImportExport.cs" />
+     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_RefractionEditor.cs" />
+     <Compile Include="Assets\CSV2Table\Editor\CSVView.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\CoreExtensions\ConnectionPortStyles.cs" />
+     <Compile Include="Assets\DynamicStarrySky\Editor\EditorCoroutine.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\NodeEditor.cs" />
      <Compile Include="Assets\DynamicStarrySky\Editor\StarrySkyShaderEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\RPGTalk Nodes\Nodes\RPGTalkChoiceNode.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkInitialization.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\RPGTalkCinematic\Editor\RPGTalkCinematicDrawer.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Editor\Node_Editor\NodeEditorWindow.cs" />
-     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_ColorSwapEditor.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\ReflectionUtility.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Interface\NodeEditorInputSystem.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Default\Calculation Base\CalculationCanvasType.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Editor\Node_Editor\CanvasInspector.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Default\Runtime Examples\RTCanvasCalculator.cs" />
-     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_SobelEditor.cs" />
-     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_HslEditor.cs" />
      <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_MatcapEditor.cs" />
      <Compile Include="Assets\POFX\Scripts\Editor\Core\POFXLayerEditor.cs" />
      <Compile Include="Assets\CSV2Table\Editor\CSV2Table.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\SaveSystem\ImportExportFormat.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\NodeEditorState.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkLanguageEditor.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkLocalizationEditor.cs" />
+     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_EraserEditor.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Editor\Node_Editor\RTNodeEditorInspector.cs" />
+     <Compile Include="Assets\Ultimate Joystick\Editor\UltimateJoystickReadme.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\EditorLoadingControl.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Editor\Node_Editor\RTCanvasCalculatorEditor.cs" />
+     <Compile Include="Assets\Asstes\Malbers Animations\Common\Scripts\Editor\Menu\MalbersMenu.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Interface\NodeEditorCallbackReceiver.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\CoreExtensions\NodeCanvasTypes.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\SaveSystem\ImportExportManager.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\SaveSystem\NodeCanvasSceneSave.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Editor\Node_Editor\NodeEditorWindow.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Interface\NodeEditorInputSystem.cs" />
+     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Editor\Node_Editor\CanvasInspector.cs" />
+     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_SobelEditor.cs" />
      <Compile Include="Assets\POFX\Scripts\Editor\Core\POFXEditor.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\NodeGroup.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkSkipCutsceneEditor.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\SaveSystem\ImportExportStructure.cs" />
      <Compile Include="Assets\Ultimate Joystick\Editor\UltimateJoystickReadmeEditor.cs" />
      <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_DesaturateEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\RPGTalk Nodes\Nodes\RPGTalkNode.cs" />
-     <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Editor\ContextMenu.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkLocalizationStringEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\SaveSystem\NodeEditorUserCache.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Default\Calculation Base\CanvasCalculator.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\ValueConnectionKnob.cs" />
-     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_PixelateEditor.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\ConnectionPort.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\NodeEditorState.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkLanguageEditor.cs" />
-     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_EraserEditor.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkLocalizationEditor.cs" />
-     <Compile Include="Assets\Asstes\Malbers Animations\Common\Scripts\Editor\Readme\ReadmeEditor.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Editor\Node_Editor\RTNodeEditorInspector.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\RPGTalk Nodes\Canvas\RPGTalkNodeCanvas.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\RPGTalk Nodes\Nodes\RPGTalkSaveNode.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\GUI\OverlayGUI.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\GUI\RTEditorGUI.cs" />
-     <Compile Include="Assets\Ultimate Joystick\Editor\UltimateJoystickReadme.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Interface\NodeEditorInputControls.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\NodeCanvasTraversal.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\EditorLoadingControl.cs" />
-     <Compile Include="Assets\ImagineVR\Editor\ApplyPixelation.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Interface\NodeEditorGUI.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Editor\Node_Editor\RTCanvasCalculatorEditor.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkAreaEditor.cs" />
-     <Compile Include="Assets\Asstes\Malbers Animations\Common\Scripts\Editor\Menu\MalbersMenu.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Interface\NodeEditorInterface.cs" />
-     <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Editor\UIManagerEditor.cs" />
      <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_BlurEditor.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Editor\ExtendedColorPicker.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Default\Calculation Base\FloatCalculation.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\SaveSystem\NodeEditorSaveManager.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\CoreExtensions\NodeTypes.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Editor\InitShift.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Interface\NodeEditorCallbackReceiver.cs" />
      <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_EmbossEditor.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\ConnectionPortManager.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\ConnectionKnob.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Default\IO Formats\XMLImportExport.cs" />
-     <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_RefractionEditor.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\NodeCanvas.cs" />
-     <Compile Include="Assets\CSV2Table\Editor\CSVView.cs" />
-     <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\CoreExtensions\NodeCanvasTypes.cs" />
      <None Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\link.xml" />
      <None Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Resources\Shader\LineShader.shader" />
      <None Include="Assets\ImagineVR\Editor\Resources\Pixel.shader" />
@@ -369,11 +369,29 @@
  <Reference Include="UnityEditor.iOS.Extensions">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
  </Reference>
+ <Reference Include="POFX_Runtime">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Analytics.StandardEvents">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+ </Reference>
+ <Reference Include="log4netPlastic">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
+ </Reference>
  <Reference Include="POFX_Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/POFX/Scripts/Editor/POFX_Editor.dll</HintPath>
  </Reference>
- <Reference Include="POFX_Runtime">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
+ <Reference Include="Unity.Analytics.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Plastic.Antlr3.Runtime">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="JMOAssets_MatCapWelcome">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Asstes/JMO Assets/Editor/JMOAssets_MatCapWelcome.dll</HintPath>
@@ -381,29 +399,11 @@
  <Reference Include="DOTweenEditor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
  </Reference>
- <Reference Include="DOTween">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
- </Reference>
- <Reference Include="log4netPlastic">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
- </Reference>
- <Reference Include="unityplastic">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Plastic.Antlr3.Runtime">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
- </Reference>
  <Reference Include="Unity.Analytics.Tracker">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
- <Reference Include="Unity.Analytics.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Newtonsoft.Json">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
+ <Reference Include="unityplastic">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.collab-proxy@1.5.7/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
@@ -768,104 +768,104 @@
  <Reference Include="UnityEditor.TestRunner">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
  </Reference>
- <Reference Include="UnityEngine.SpatialTracking">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
- </Reference>
- <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.UI">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <Reference Include="Purchasing.Common">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Purchasing.Common.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
- <Reference Include="UnityEditor.XR.LegacyInputHelpers">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing.Stores">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.Stores.dll</HintPath>
- </Reference>
- <Reference Include="Unity.2D.Sprite.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
- </Reference>
- <Reference Include="com.unity.multiplayer-weaver.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.Purchasing">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
- </Reference>
- <Reference Include="Purchasing.Common">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Purchasing.Common.dll</HintPath>
- </Reference>
- <Reference Include="Unity.TextMeshPro">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
- </Reference>
- <Reference Include="com.unity.multiplayer-hlapi.Runtime">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Monetization">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Postprocessing.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Postprocessing.Runtime">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Rider.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing.SecurityStub">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityStub.dll</HintPath>
- </Reference>
  <Reference Include="Unity.2D.Tilemap.Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Timeline">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing.Codeless">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.Codeless.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Timeline.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
- </Reference>
- <Reference Include="Unity.VisualStudio.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.PlasticSCM.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.UI">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Advertisements.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.multiplayer-hlapi.Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
  </Reference>
- <Reference Include="UnityEditor.SpatialTracking">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+ <Reference Include="UnityEngine.Purchasing">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
- <Reference Include="UnityEngine.Purchasing.SecurityCore">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityCore.dll</HintPath>
+ <Reference Include="Unity.TextMeshPro.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.VisualStudio.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Timeline">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.TextMeshPro">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Purchasing.SecurityStub">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityStub.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Sprite.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Postprocessing.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.UI">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.PlasticSCM.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="com.unity.multiplayer-weaver.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Rider.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Analytics">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Analytics.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEngine.SpatialTracking">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Analytics.DataPrivacy">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ </Reference>
+ <Reference Include="com.unity.multiplayer-hlapi.Runtime">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Purchasing.SecurityCore">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityCore.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Postprocessing.Runtime">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Purchasing.Codeless">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.Codeless.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.XR.LegacyInputHelpers">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Timeline.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Purchasing.Stores">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.Stores.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.XR.LegacyInputHelpers">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Monetization">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Purchasing">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.SpatialTracking">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Advertisements.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -876,14 +876,6 @@
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{a742e4bb-cd28-21b5-9cc4-a2211d8896fc}</Project>
       <Name>Assembly-CSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniRx.csproj">
-      <Project>{4694d9cf-5020-9416-fb2c-565ad4e01465}</Project>
-      <Name>UniRx</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniTask.TextMeshPro.csproj">
-      <Project>{78d419d9-4997-0fe8-0a67-12c4b3915b3a}</Project>
-      <Name>UniTask.TextMeshPro</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFabSDKEditor.csproj">
       <Project>{b66bf6a6-bdbd-a406-4867-b5f5adf9847a}</Project>
@@ -904,6 +896,14 @@
     <ProjectReference Include="UniTask.Linq.csproj">
       <Project>{d43d52c5-06ee-9d6b-1c90-4bb9d85bdf21}</Project>
       <Name>UniTask.Linq</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniRx.csproj">
+      <Project>{4694d9cf-5020-9416-fb2c-565ad4e01465}</Project>
+      <Name>UniRx</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.TextMeshPro.csproj">
+      <Project>{78d419d9-4997-0fe8-0a67-12c4b3915b3a}</Project>
+      <Name>UniTask.TextMeshPro</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
       <Project>{ab868ac3-38db-93ce-b53a-1ed2bfb72e67}</Project>

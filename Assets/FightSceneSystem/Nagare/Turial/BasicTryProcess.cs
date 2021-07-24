@@ -77,7 +77,6 @@ public class BasicTryProcess : FSceneProcess
         loser = Team.none;
         NetFightScene.target.PressedStartButton();
         NetFightScene.target.FightCanvas.gameObject.SetActive(true);
-        FightOverControl.target.FightOverCanvas.gameObject.SetActive(false);
         NetFightScene.target.PreparingCanvas.gameObject.SetActive(false);
         
         watchetargets.Clear();

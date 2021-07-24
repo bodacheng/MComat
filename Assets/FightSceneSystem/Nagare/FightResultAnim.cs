@@ -50,16 +50,19 @@ public class FightResultAnim : FSceneProcess
             }
         }
         Time.timeScale = 1f;
+
+        FightResultAnimLayer fightResultAnimLayer = UILayerLoader.Load
+            (NetFightScene.target.T, "FightResultAnimLayer") as FightResultAnimLayer;
         
-        FightOverControl.target.FightOverCanvas.gameObject.SetActive(true);
         switch (FightLogger.target.GetWinner())
         {
             case Team.player1:
-                yield return FightOverControl.target.WINProcess();
+                yield return fightResultAnimLayer.WINProcess();
                 break;
             case Team.player2:
-                yield return FightOverControl.target.LoseProcess();
+                yield return fightResultAnimLayer.LoseProcess();
                 break;
         }
+        UILayerLoader.Remove("FightResultAnimLayer");
     }
 }
