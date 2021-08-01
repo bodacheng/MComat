@@ -47,7 +47,7 @@ namespace FightScene
                     if (FightLogger.target.GetWinner() == Team.player1)
                     {
                         CloudScript.ArcadeProgress(NetFightScene.Fight.ID.ToString(),
-                            () =>
+                            result =>
                             {
                                 void LoadNextLevel()
                                 {
@@ -65,7 +65,7 @@ namespace FightScene
                     else
                     {
                         CloudScript.ArcadeProgress(NetFightScene.Fight.ID.ToString(),
-                            () =>
+                            result =>
                             {
                                 void LoadNextLevel()
                                 {

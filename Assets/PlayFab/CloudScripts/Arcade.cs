@@ -6,7 +6,7 @@ using System;
 using Newtonsoft.Json;
 public partial class CloudScript
 {
-    public static void ArcadeProgress(string targetLevel ,Action success, Action fail)
+    public static void ArcadeProgress(string targetLevel ,Action<ExecuteCloudScriptResult> success, Action fail)
     {
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest()
@@ -17,9 +17,13 @@ public partial class CloudScript
             },
             (ExecuteCloudScriptResult result) => {
                 PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
-                string json = JsonConvert.SerializeObject(jsonResult.Values);
-                Debug.Log(json);
-                success.Invoke();
+                foreach (var  f in jsonResult.Values)
+                {
+                    Debug.Log(f);
+                }
+                
+                
+                success.Invoke(result);
             },
             error => {
                 Debug.Log(error.Error);

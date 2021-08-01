@@ -395,7 +395,7 @@ handlers.completedLevel = function (args, context) {
         }
     });
     log.debug("Set lastLevelCompleted for player " + currentPlayerId + " to " + level);
-    return { result: updateUserDataResult };
+    return updateUserDataResult;
 };
 
 
