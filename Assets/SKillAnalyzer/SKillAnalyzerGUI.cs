@@ -2,6 +2,9 @@
 using UnityEditor;
 using UnityEngine;
 using System;
+using PlayFab;
+using PlayFab.ClientModels;
+using System.Collections.Generic;
 
 [CustomEditor(typeof(SKillAnalyzer))]
 public class SKillAnalyzerGUI : Editor
@@ -57,7 +60,17 @@ public class SKillAnalyzerGUI : Editor
         GUILayout.Space(10);
         if (GUILayout.Button("任意函数测试"))
         {
-            TitleData.SetArcadeRewards();
+            //TitleData.SetArcadeRewards();
+            PlayFabClientAPI.WritePlayerEvent(new WriteClientPlayerEventRequest()
+            {
+                Body = new Dictionary<string, object>() {
+                    { "ChestType", "sdf" },
+                    { "LevelId", "sdf" }
+                },
+                EventName = "EveryThing"
+            },
+            result => Debug.Log("Success"),
+            error => Debug.LogError(error.GenerateErrorReport()));
         }
     }
 }

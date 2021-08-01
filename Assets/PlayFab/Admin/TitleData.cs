@@ -16,12 +16,15 @@ public class TitleData : MonoBehaviour
     {
         for (int i = 1; i < 101; i++)
         {
-            SetTitleDataRequest request = new SetTitleDataRequest();
-            request.Key = "stage_"+i;
-            ArcadeReward arcadeReward = new ArcadeReward(
-                );
-            arcadeReward.dia = 1;
-            arcadeReward.g = 2;
+            SetTitleDataRequest request = new SetTitleDataRequest
+            {
+                Key = "stage_" + i
+            };
+            ArcadeReward arcadeReward = new ArcadeReward
+            {
+                dia = 1,
+                g = 2
+            };
 
             request.Value = JsonConvert.SerializeObject(arcadeReward);
 
