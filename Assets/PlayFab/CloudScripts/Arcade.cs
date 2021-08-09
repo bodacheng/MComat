@@ -11,7 +11,7 @@ public partial class CloudScript
             new ExecuteCloudScriptRequest()
             {
                 FunctionName = "completedLevel",
-                FunctionParameter = new { levelName = targetLevel },
+                FunctionParameter = new { level = "2" },
                 GeneratePlayStreamEvent = true
             },
             (ExecuteCloudScriptResult result) => {

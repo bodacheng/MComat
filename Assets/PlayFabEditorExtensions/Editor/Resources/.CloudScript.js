@@ -386,19 +386,49 @@ handlers.handlePlayStreamEventAndProfile = function (args, context) {
 // A funtion like this could be extended to perform validation on the 
 // level completion data to detect cheating. It could also do things like 
 // award the player items from the game catalog based on their performance.
+
 handlers.completedLevel = function (args, context) {
-    var level = args.levelName;
-    
-    var updateUserDataResult = server.UpdateUserInternalData({
+
+    var playerData = server.GetUserInternalData({
         PlayFabId: currentPlayerId,
-        Data: {
-            lastLevelCompleted: level
-        }
+        Keys: ["lastLevelCompleted"]
     });
-    log.debug("Set lastLevelCompleted for player " + currentPlayerId + " to " + level);
+
+    var lastLevelCompleted = playerData.Data["lastLevelCompleted"];
+
+    var level = args.level;
+
+    log.debug(lastLevelCompleted.Value +" TO " + level);
+
+    // 通了的关卡是新关卡
+    if (level > lastLevelCompleted.Value)
+    {
+        var updateUserDataResult = server.UpdateUserInternalData({
+            PlayFabId: currentPlayerId,
+            Data: {
+                lastLevelCompleted: Number(lastLevelCompleted.Value) + 1
+            }
+        });
+        log.debug("Set lastLevelCompleted for player ");
+        
+        server.AddUserVirtualCurrency({
+            PlayFabID: currentPlayerId, 
+            VirtualCurrency: "DM", 
+            Amount: "10"
+        });
+
+        return {
+            success: true,
+            progressLevel: Number(lastLevelCompleted.Value) + 1,
+            reward: 10
+        };
+    }
+    
+    log.debug("Didnt Set lastLevelCompleted for player ");
+
     return {
         success: true,
-        progressLevel: level
+        progressLevel: Number(lastLevelCompleted.Value)
     };
 };
 

@@ -58,19 +58,50 @@ public class SKillAnalyzerGUI : Editor
         }
 
         GUILayout.Space(10);
+        if (GUILayout.Button("Login"))
+        {
+            PlayFabLogin.CustomIDLogin(
+                result => {
+                    Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
+                },
+                fail => {
+                    Debug.Log("login fail");
+                }
+            );
+        }
+        GUILayout.Space(10);
+
         if (GUILayout.Button("任意函数测试"))
         {
-            //TitleData.SetArcadeRewards();
-            PlayFabClientAPI.WritePlayerEvent(new WriteClientPlayerEventRequest()
+            PlayFabClientAPI.ExecuteCloudScript(
+            new ExecuteCloudScriptRequest()
             {
-                Body = new Dictionary<string, object>() {
-                    { "ChestType", "sdf" },
-                    { "LevelId", "sdf" }
-                },
-                EventName = "EveryThing"
+                FunctionName = "completedLevel",
+                FunctionParameter = new { level = "2" },
+                GeneratePlayStreamEvent = true
             },
-            result => Debug.Log("Success"),
-            error => Debug.LogError(error.GenerateErrorReport()));
+            (ExecuteCloudScriptResult result) => {
+                PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                object level;
+                jsonResult.TryGetValue("progressLevel", out level);
+
+                Debug.Log(level.ToString());
+            },
+            error => {
+                Debug.Log(error.Error);
+            });
+
+            //TitleData.SetArcadeRewards();
+            //PlayFabClientAPI.WritePlayerEvent(new WriteClientPlayerEventRequest()
+            //{
+            //    Body = new Dictionary<string, object>() {
+            //        { "ChestType", "sdf" },
+            //        { "LevelId", "sdf" }
+            //    },
+            //    EventName = "EveryThing"
+            //},
+            //result => Debug.Log("Success"),
+            //error => Debug.LogError(error.GenerateErrorReport()));
         }
     }
 }
