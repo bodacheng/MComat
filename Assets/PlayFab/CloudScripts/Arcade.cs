@@ -2,6 +2,7 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
+using dataAccess;
 
 public partial class CloudScript
 {
@@ -11,7 +12,7 @@ public partial class CloudScript
             new ExecuteCloudScriptRequest()
             {
                 FunctionName = "completedLevel",
-                FunctionParameter = new { level = "2" },
+                FunctionParameter = new { level = targetLevel },
                 GeneratePlayStreamEvent = true
             },
             (ExecuteCloudScriptResult result) => {
@@ -19,7 +20,9 @@ public partial class CloudScript
                 object level;
                 jsonResult.TryGetValue("progressLevel", out level);
 
+                Account._AccInfo.ArcadeProcess = (int)level;
                 Debug.Log(level.ToString());
+                
                 success.Invoke(result);
             },
             error => {

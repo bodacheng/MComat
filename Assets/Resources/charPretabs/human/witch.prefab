@@ -10933,7 +10933,6 @@ MonoBehaviour:
     RARITY_LEVEL: 0
     ForcedTransitions: []
   ConditionAndRespondPriority:
-    values: 
     _SerializableSets: []
   AllConditionCodes: []
   AI_States_path: 
@@ -50739,7 +50738,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.5, z: 0.5}
+  m_Size: {x: 0.7, y: 0.4, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3418353249271674932
 MonoBehaviour:
@@ -52453,7 +52452,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.1, z: 0.1}
+  m_Size: {x: 0.5, y: 0.3, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6335912418054266036
 MonoBehaviour:
@@ -52980,7 +52979,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.1, z: 0.1}
+  m_Size: {x: 0.5, y: 0.3, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7401739293861309545
 MonoBehaviour:

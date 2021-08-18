@@ -57,7 +57,7 @@ namespace mainMenu
                 OnComplete((() => {EndDragExtra.Invoke();}));
         }
         
-        void RefreshRender()
+        public void RefreshRender()
         {
             foreach (KeyValuePair<int, StageInfo> keyValuePair in ArcadeStages)
             {
