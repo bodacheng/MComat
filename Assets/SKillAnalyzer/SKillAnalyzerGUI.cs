@@ -74,22 +74,23 @@ public class SKillAnalyzerGUI : Editor
         if (GUILayout.Button("任意函数测试"))
         {
             PlayFabClientAPI.ExecuteCloudScript(
-            new ExecuteCloudScriptRequest()
-            {
-                FunctionName = "completedLevel",
-                FunctionParameter = new { level = "2" },
-                GeneratePlayStreamEvent = true
-            },
-            (ExecuteCloudScriptResult result) => {
-                PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                object level;
-                jsonResult.TryGetValue("progressLevel", out level);
+                new ExecuteCloudScriptRequest()
+                {
+                    FunctionName = "completedLevel",
+                    FunctionParameter = new { level = "2" },
+                    GeneratePlayStreamEvent = true
+                },
+                (ExecuteCloudScriptResult result) => {
+                    PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                    object level;
+                    jsonResult.TryGetValue("progressLevel", out level);
 
-                Debug.Log(level.ToString());
-            },
-            error => {
-                Debug.Log(error.Error);
-            });
+                    Debug.Log(level.ToString());
+                },
+                error => {
+                    Debug.Log(error.Error);
+                }
+            );
 
             //TitleData.SetArcadeRewards();
             //PlayFabClientAPI.WritePlayerEvent(new WriteClientPlayerEventRequest()

@@ -29,7 +29,7 @@ namespace dataAccess
                 }
             );
         }
-
+        
         public static void GetUserReadOnlyData(Action<int> finished)
         {
             PlayFabClientAPI.GetUserReadOnlyData
@@ -37,11 +37,28 @@ namespace dataAccess
                 new GetUserDataRequest()
                 {
                     PlayFabId = _AccInfo.playerID,
-                    Keys = new List<string>() { "ArcadeProcess", "StoneBoxSize" }
+                    Keys = new List<string>() { "lastLevelCompleted", "StoneBoxSize" }
                 },
                 (GetUserDataResult obj) => {
-                    _AccInfo.ArcadeProcess = int.Parse(obj.Data["ArcadeProcess"].Value);
-                    _AccInfo.Stoneboxsize = int.Parse(obj.Data["StoneBoxSize"].Value);
+                    if (obj.Data.ContainsKey("lastLevelCompleted"))
+                    {
+                        _AccInfo.ArcadeProcess = int.Parse(obj.Data["lastLevelCompleted"].Value);
+                    }
+                    else
+                    {
+                        _AccInfo.ArcadeProcess = 0;
+                    }
+
+                    if (obj.Data.ContainsKey("StoneBoxSize"))
+                    {
+                        _AccInfo.Stoneboxsize = int.Parse(obj.Data["StoneBoxSize"].Value);
+                    }
+                    else
+                    {
+                        _AccInfo.Stoneboxsize = 50;
+                        Debug.Log("玩家数据出错 boxsize");
+                    }
+                    
                     Debug.Log("读取的盒子容量是："+ _AccInfo.Stoneboxsize);
                     PreScene.target._SkillStonesBox_NineSlot.GenerateCells();
                     PreScene.target._SkillStonesBox_Show.GenerateCells();

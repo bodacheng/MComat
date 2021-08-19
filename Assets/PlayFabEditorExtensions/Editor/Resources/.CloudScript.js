@@ -389,13 +389,13 @@ handlers.handlePlayStreamEventAndProfile = function (args, context) {
 
 handlers.completedLevel = function (args, context) {
 
-    var playerData = server.GetUserInternalData({
+    var playerData = server.GetUserReadOnlyData({
         PlayFabId: currentPlayerId,
         Keys: ["lastLevelCompleted"]
     });
 
     var lastLevelCompleted = playerData.Data["lastLevelCompleted"];
-
+    
     var level = args.level;
 
     log.debug(lastLevelCompleted.Value +" TO " + level);
@@ -403,7 +403,7 @@ handlers.completedLevel = function (args, context) {
     // 通了的关卡是新关卡
     if (level > lastLevelCompleted.Value)
     {
-        var updateUserDataResult = server.UpdateUserInternalData({
+        var updateUserDataResult = server.UpdateUserReadOnlyData({
             PlayFabId: currentPlayerId,
             Data: {
                 lastLevelCompleted: Number(lastLevelCompleted.Value) + 1

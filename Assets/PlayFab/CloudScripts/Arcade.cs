@@ -20,9 +20,11 @@ public partial class CloudScript
                 object level;
                 jsonResult.TryGetValue("progressLevel", out level);
 
-                Account._AccInfo.ArcadeProcess = (int)level;
-                Debug.Log(level.ToString());
-                
+                string levelstring = level.ToString();
+                int le;
+                int.TryParse(levelstring, out le) ;
+                Account._AccInfo.ArcadeProcess = le;
+                Debug.Log("new progress:" + le);
                 success.Invoke(result);
             },
             error => {

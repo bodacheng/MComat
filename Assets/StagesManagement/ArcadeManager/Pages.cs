@@ -64,8 +64,8 @@ namespace mainMenu
                 Image buttonImage = keyValuePair.Value.stageButton.GetComponent<Image>();
                 Animator buttonAnimator = keyValuePair.Value.stageButton.GetComponent<Animator>();
                 if (buttonAnimator != null)
-                    buttonAnimator.enabled = Account._AccInfo.ArcadeProcess == keyValuePair.Key;
-                if (Account._AccInfo.ArcadeProcess >= keyValuePair.Key)
+                    buttonAnimator.enabled = Account._AccInfo.ArcadeProcess + 1 == keyValuePair.Key;
+                if (Account._AccInfo.ArcadeProcess + 1 >= keyValuePair.Key)
                 {
                     keyValuePair.Value.ChangeColorOfIcons(true);
                 }else{
