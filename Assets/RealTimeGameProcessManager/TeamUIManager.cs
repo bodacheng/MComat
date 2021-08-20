@@ -28,11 +28,11 @@ namespace FightScene
             return CharIconDic.ContainsKey(d) ? CharIconDic[d]: null;
         }
 
-        public IEnumerator CharsLoad(MultiDict<int, int, CharDataInfo> MembersSets)
+        public IEnumerator CharsLoad(MultiDict<int, int, UnitInfo> MembersSets)
         {
-            foreach (KeyValuePair<(int, int), CharDataInfo> kv in MembersSets.mDict)
+            foreach (KeyValuePair<(int, int), UnitInfo> kv in MembersSets.mDict)
             {
-                CharDataInfo _one = kv.Value;
+                UnitInfo _one = kv.Value;
                 Data_Center dcenter = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
                 if (dcenter == null)
                 {
@@ -41,7 +41,7 @@ namespace FightScene
                     dcenter = (Data_Center)char_DC.Current;
                 }
                 TeamMembers.Set(kv.Key.Item1, kv.Key.Item2, dcenter);
-                DicAdd<Data_Center, CharDataInfo>.Add(RTFightManager.target.CharDataInfoRef, dcenter, _one);
+                DicAdd<Data_Center, UnitInfo>.Add(RTFightManager.target.CharDataInfoRef, dcenter, _one);
             }
         }
 
@@ -80,7 +80,7 @@ namespace FightScene
         }
         
         // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
-        public IEnumerator Instantiate(MultiDict<int, int, CharDataInfo> UnitInfos, float TeamHpRate, CriticalGaugeMode teamCGMode)
+        public IEnumerator Instantiate(MultiDict<int, int, UnitInfo> UnitInfos, float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
             yield return CharsLoad(UnitInfos);
             InsTeamUI();
@@ -175,7 +175,7 @@ namespace FightScene
         public List<string> GetAllUsingStoneOfAcc()
         {
             List<string> stones = new List<string>();
-            foreach (KeyValuePair<Data_Center, CharDataInfo> keyValuePair in RTFightManager.target.CharDataInfoRef)
+            foreach (KeyValuePair<Data_Center, UnitInfo> keyValuePair in RTFightManager.target.CharDataInfoRef)
             {
                 List<StoneOfPlayerInfo> mystones = Stones.GetEquipingStones(keyValuePair.Value.id);
                 for (int i = 0; i < mystones.Count; i++)

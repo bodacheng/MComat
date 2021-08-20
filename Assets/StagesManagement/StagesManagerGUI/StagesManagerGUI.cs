@@ -14,7 +14,7 @@ public partial class StagesManagerGUI : Editor {
     
     string pathAndNameForLocalSave = "Resources/stageTemp/oneFight.json";
     IDictionary<string, string> CharIDsAndNames;
-    CharDataInfo focusingCharInfo;
+    UnitInfo focusingCharInfo;
     string focusingtype;
     
     public override void OnInspectorGUI()
@@ -39,7 +39,7 @@ public partial class StagesManagerGUI : Editor {
             if (GUILayout.Button("Add", AddDeleteMember))
             {
                 focusingPosID = focusingPosID ?? "0";
-                focusingCharInfo = new CharDataInfo
+                focusingCharInfo = new UnitInfo
                 {
                     id = focusingPosID
                 };

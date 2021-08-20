@@ -19,7 +19,7 @@ public partial class CloudScript
                 PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                 object level;
                 jsonResult.TryGetValue("progressLevel", out level);
-
+                
                 string levelstring = level.ToString();
                 int le;
                 int.TryParse(levelstring, out le) ;

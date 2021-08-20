@@ -17,7 +17,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         for (int index = 0; index < LInfo.Team.Length; index++)
         {
             int posNum = LInfo.Team[index].key2;
-            CharDataInfo charDataInfo = LInfo.Team[index].value;
+            UnitInfo unitInfo = LInfo.Team[index].value;
             HeroIcon target = null;
             switch (posNum)
             {
@@ -31,7 +31,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
                     target = member3;
                     break;
             }
-            HeroIcon.ChangeHeroIconByRID(charDataInfo.r_id, target);
+            HeroIcon.ChangeHeroIconByRID(unitInfo.r_id, target);
         }
         
         FightMembers fightMembers = new FightMembers();

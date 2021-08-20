@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using Api.Dto.Model;
 using System.Collections;
 using dataAccess;
+using UnityEngine.Serialization;
 
 public class HeroIcon : MonoBehaviour {
 
@@ -12,7 +13,7 @@ public class HeroIcon : MonoBehaviour {
     public Image frame;
     public Image cooldownCurtain;
     
-    public CharDataInfo CharDataInfo;
+    [FormerlySerializedAs("CharDataInfo")] public UnitInfo unitInfo;
     public CharConfig _CharConfig;
     
     static IDictionary<Zokusei, Sprite> frames = new Dictionary<Zokusei, Sprite>();
@@ -114,7 +115,7 @@ public class HeroIcon : MonoBehaviour {
     {
         if (instanceId != null)
         {
-            UnitInfo _one = MyMonsters.Get(instanceId);
+            Api.Dto.Model.UnitInfo _one = MyMonsters.Get(instanceId);
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
             ChangeHeroIconByRID(charConfig.RECORD_ID,Icon);
         }
@@ -147,16 +148,16 @@ public class HeroIcon : MonoBehaviour {
     }
     
     // 这个本身没问题但目前使用他的方式是有问题的。围绕SetParent(T);
-    public static HeroIcon ArrangeHeroIconToT(HeroIcon heroIconPretab, CharDataInfo CharDataInfo, RectTransform T)
+    public static HeroIcon ArrangeHeroIconToT(HeroIcon heroIconPretab, UnitInfo unitInfo, RectTransform T)
     {
         HeroIcon MyMemberIcon = Instantiate(heroIconPretab);
-        CharConfig charConfig = MonstersConfigTable.GetCharConfig(CharDataInfo.r_id);
+        CharConfig charConfig = MonstersConfigTable.GetCharConfig(unitInfo.r_id);
         if (charConfig == null)
         {
-            Debug.Log("?? : " + CharDataInfo.r_id);
+            Debug.Log("?? : " + unitInfo.r_id);
             return null;
         }
-        MyMemberIcon.CharDataInfo = CharDataInfo;
+        MyMemberIcon.unitInfo = unitInfo;
         MyMemberIcon._CharConfig = charConfig;
         MyMemberIcon.ChangeIcon(MonsterIconDic.Get(charConfig.RECORD_ID), charConfig._zokusei);
         MyMemberIcon.transform.SetParent(T);

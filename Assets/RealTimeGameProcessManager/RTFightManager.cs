@@ -41,7 +41,7 @@ namespace FightScene
         public MultiDict<int, int, Data_Center> Team1Members;
         public MultiDict<int, int, Data_Center> Team2Members;
         
-        public IDictionary<Data_Center, CharDataInfo> CharDataInfoRef = new Dictionary<Data_Center, CharDataInfo>();
+        public IDictionary<Data_Center, UnitInfo> CharDataInfoRef = new Dictionary<Data_Center, UnitInfo>();
         //public readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();
         public static IDictionary<Team, List<Data_Center>> FightingMembers = new Dictionary<Team, List<Data_Center>>();
 

@@ -264,7 +264,7 @@ namespace mainMenu
             string PositionMonsterOfPlayerId = positionLocalCharKey.GetMonsterOfPlayerIdOnPos(posNum);
             if (PositionMonsterOfPlayerId != null)
             {
-                UnitInfo _one = MyMonsters.Get(PositionMonsterOfPlayerId);
+                Api.Dto.Model.UnitInfo _one = MyMonsters.Get(PositionMonsterOfPlayerId);
                 CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
                 tar.ChangeIcon(charConfig == null ? null : MonsterIconDic.Get(charConfig.RECORD_ID),
                     charConfig == null ? Zokusei.Null : charConfig._zokusei);

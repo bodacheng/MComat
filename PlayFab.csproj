@@ -95,6 +95,7 @@
      <Compile Include="Assets\PlayFabSDK\Localization\PlayFabEvents.cs" />
      <Compile Include="Assets\PlayFabSDK\Data\PlayFabEvents.cs" />
      <Compile Include="Assets\PlayFabSDK\Shared\Internal\PlayFabHttp\IPlayFabHttp.cs" />
+     <Compile Include="Assets\PlayFabSDK\Server\PlayFabServerAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Client\PlayFabClientInstanceAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Shared\Public\PlayFabEvents.cs" />
      <Compile Include="Assets\PlayFabSDK\Shared\Internal\ISerializer.cs" />
@@ -135,7 +136,6 @@
      <Compile Include="Assets\PlayFabSDK\Data\PlayFabDataInstanceAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Authentication\PlayFabAuthenticationInstanceAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Insights\PlayFabInsightsAPI.cs" />
-     <Compile Include="Assets\PlayFabSDK\Server\PlayFabServerAPI.cs" />
      <None Include="Assets\PlayFabSDK\link.xml" />
      <None Include="Assets\PlayFabSDK\PlayFab.asmdef" />
  <Reference Include="UnityEngine">

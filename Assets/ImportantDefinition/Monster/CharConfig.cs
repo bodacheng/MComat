@@ -21,9 +21,9 @@ public class CharConfig
     public string InstructionJP;
     public int RARITY_LEVEL = 3;
 
-    public CharDataInfo GetTestCharConfig(string localID)
+    public UnitInfo GetTestCharConfig(string localID)
     {
-        CharDataInfo characterDataInfo = new CharDataInfo
+        UnitInfo characterDataInfo = new UnitInfo
         {
             id = localID,
             r_id = RECORD_ID, // 确切的说这个也就是角色的pretab编号，最后也就是数据库里master table的主key。

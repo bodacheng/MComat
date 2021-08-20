@@ -9,7 +9,7 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public void UpdateStonesBaseOnSlots(UnitInfo info)
+        public void UpdateStonesBaseOnSlots(Api.Dto.Model.UnitInfo info)
         {
             SkillSet.SkillEditError valR = target.CheckEditBasedOnCurrent();
             if (valR != SkillSet.SkillEditError.Perfect)

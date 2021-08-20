@@ -51,18 +51,18 @@ public class PosKeySet
         return model;
     }
     
-    public MultiDict<int, int, CharDataInfo> LoadTeamDic()
+    public MultiDict<int, int, UnitInfo> LoadTeamDic()
     {
-        MultiDict<int, int, CharDataInfo> multiDictionary = new MultiDict<int, int, CharDataInfo>();
+        MultiDict<int, int, UnitInfo> multiDictionary = new MultiDict<int, int, UnitInfo>();
         for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
         {
             if (PosNumsWithLocalKeys[i].instanceID != null)
             {
-                UnitInfo getUnitDetailModel = MyMonsters.Get(PosNumsWithLocalKeys[i].instanceID);
+                Api.Dto.Model.UnitInfo getUnitDetailModel = MyMonsters.Get(PosNumsWithLocalKeys[i].instanceID);
                 if (getUnitDetailModel != null)
                 {
-                    CharDataInfo charDataInfo = UnitInfo.GetCharDataInfo(getUnitDetailModel);
-                    multiDictionary.Set(0, PosNumsWithLocalKeys[i].posNum, charDataInfo);
+                    UnitInfo unitInfo = Api.Dto.Model.UnitInfo.GetCharDataInfo(getUnitDetailModel);
+                    multiDictionary.Set(0, PosNumsWithLocalKeys[i].posNum, unitInfo);
                 }
             }
         }

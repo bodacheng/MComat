@@ -45,7 +45,7 @@ public class Starter : MonoBehaviour
         int i = 0;
         foreach (CharConfig _CharConfig in charList)
         {
-            UnitInfo _Char = new UnitInfo
+            Api.Dto.Model.UnitInfo _Char = new Api.Dto.Model.UnitInfo
             {
                 monsterId = _CharConfig.RECORD_ID,
                 InstanceId = i.ToString()
@@ -67,7 +67,7 @@ public class Starter : MonoBehaviour
                 Stones.Add(stoneInfo);
             }
             Debug.Log("尝试将角色" + _CharConfig.REAL_NAME + "加入存档");
-            DicAdd<string, UnitInfo>.Add(MyMonsters.Dic, _Char.InstanceId, _Char);
+            DicAdd<string, Api.Dto.Model.UnitInfo>.Add(MyMonsters.Dic, _Char.InstanceId, _Char);
             i++;
         }
         SceneManager.LoadScene(1);

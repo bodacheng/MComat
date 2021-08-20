@@ -5,12 +5,12 @@ using System.Collections;
 // 抽卡技能石细节显示
 public partial class NineForShow : MonoBehaviour
 {
-    public void ShowStones_DataInfo(CharDataInfo _CharDataInfo)
+    public void ShowStones_DataInfo(UnitInfo unitInfo)
     {
         ShowStones(
-            _CharDataInfo.set.a1, _CharDataInfo.set.a2, _CharDataInfo.set.a3,
-            _CharDataInfo.set.b1, _CharDataInfo.set.b2, _CharDataInfo.set.b3,
-            _CharDataInfo.set.c1, _CharDataInfo.set.c2, _CharDataInfo.set.c3
+            unitInfo.set.a1, unitInfo.set.a2, unitInfo.set.a3,
+            unitInfo.set.b1, unitInfo.set.b2, unitInfo.set.b3,
+            unitInfo.set.c1, unitInfo.set.c2, unitInfo.set.c3
         );
     }
 

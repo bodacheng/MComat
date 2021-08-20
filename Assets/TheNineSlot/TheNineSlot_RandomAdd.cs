@@ -17,7 +17,7 @@ namespace mainMenu
 
         void FinishRemains()
         {
-            UnitInfo info = MemberDetail.target._focusing;
+            Api.Dto.Model.UnitInfo info = MemberDetail.target._focusing;
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(info.monsterId);
             SkillSet now = TheNineSlot.target.GetCurrentNineAndTwo();
             SkillSet targetSkillSet = SkillSet.FixSkillSet(charConfig.TYPE, now, 1, true);
@@ -45,7 +45,7 @@ namespace mainMenu
 
         void RandomAll()
         {
-            UnitInfo info = MemberDetail.target._focusing;
+            Api.Dto.Model.UnitInfo info = MemberDetail.target._focusing;
             CharConfig charConfig = MonstersConfigTable.GetCharConfig(info.monsterId);
             StoneOfPlayerInfo originSkillInfo = Stones.GetOriginSkillOfMonster(info.InstanceId);
             // 这一步仅仅是根据账户拥有技能石的情况来确定了可行的技能组，也就是说根据手上的石头这个技能组能拼出来，但没提供具体的石头，所以防重复工作在实际装备技能石的时候（AddRandomStoneToSlot）也要做

@@ -59,7 +59,7 @@ public partial class UnitCreator
     }
 
     /////////////// For Debug  //////////////
-    public IEnumerator CreateCharacterFromABByStreamingAssets(CharDataInfo _CharacterDataInfo,
+    public IEnumerator CreateCharacterFromABByStreamingAssets(UnitInfo _CharacterDataInfo,
                                                               string AIScriptName,
                                                               Zokusei _zokusei,
                                                               string personalMagic,

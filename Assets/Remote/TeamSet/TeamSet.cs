@@ -76,20 +76,20 @@ namespace dataAccess
             );
         }
         
-        public static MultiDict<int, int, CharDataInfo> ToDic(PosKeySet PosKeySet)
+        public static MultiDict<int, int, UnitInfo> ToDic(PosKeySet PosKeySet)
         {
-            MultiDict<int, int, CharDataInfo> teamMembers = new MultiDict<int, int, CharDataInfo>();
+            MultiDict<int, int, UnitInfo> teamMembers = new MultiDict<int, int, UnitInfo>();
             for (int i = 0; i < 3; i++)
             {
                 if (PosKeySet.GetMonsterOfPlayerIdOnPos(i) == null)
                 {
                     continue;
                 }
-                UnitInfo myfighter = MyMonsters.Get(PosKeySet.GetMonsterOfPlayerIdOnPos(i));
+                Api.Dto.Model.UnitInfo myfighter = MyMonsters.Get(PosKeySet.GetMonsterOfPlayerIdOnPos(i));
                 if (myfighter != null)
                 {
-                    CharDataInfo CharDataInfo = UnitInfo.GetCharDataInfo(myfighter);
-                    teamMembers.Set(0, i, CharDataInfo);
+                    UnitInfo unitInfo = Api.Dto.Model.UnitInfo.GetCharDataInfo(myfighter);
+                    teamMembers.Set(0, i, unitInfo);
                 }
                 else
                 {

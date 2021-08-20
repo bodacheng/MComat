@@ -3,7 +3,7 @@ using UnityEngine;
 
 public partial class UnitCreator {
     
-    public static IEnumerator CreateCharacter(CharDataInfo info)
+    public static IEnumerator CreateCharacter(UnitInfo info)
     {
         IEnumerator getproess = GeneralModelPool.GetModel(info.r_id, false);
         yield return getproess;

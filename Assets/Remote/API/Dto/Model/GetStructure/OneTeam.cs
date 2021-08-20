@@ -14,12 +14,12 @@ namespace Api.Dto.Model
             PosKeySet posKeySet = teamSetInfo.ToPosKeySet();
             for (int i = 0; i < membersInfo.Count; i++)
             {
-                CharDataInfo CharDataInfo = membersInfo[i].ToCharDataInfo();
+                global::UnitInfo unitInfo = membersInfo[i].ToCharDataInfo();
                 for (int y = 0; y < posKeySet.PosNumsWithLocalKeys.Length; y++)
                 {
-                    if (posKeySet.PosNumsWithLocalKeys[y].instanceID == CharDataInfo.id)
+                    if (posKeySet.PosNumsWithLocalKeys[y].instanceID == unitInfo.id)
                     {
-                        LocalFight.EnemySets.Set(0, posKeySet.PosNumsWithLocalKeys[y].posNum, CharDataInfo);
+                        LocalFight.EnemySets.Set(0, posKeySet.PosNumsWithLocalKeys[y].posNum, unitInfo);
                     }
                 }
             }

@@ -11,8 +11,8 @@ using UnityEditor;
 public class FightMembers
 {
     [NonSerialized]
-    public MultiDict<int, int, CharDataInfo> HeroSets = new MultiDict<int, int, CharDataInfo>();
-    public MultiDict<int, int, CharDataInfo> EnemySets = new MultiDict<int, int, CharDataInfo>();
+    public MultiDict<int, int, UnitInfo> HeroSets = new MultiDict<int, int, UnitInfo>();
+    public MultiDict<int, int, UnitInfo> EnemySets = new MultiDict<int, int, UnitInfo>();
     
     public FightMembers()
     {
@@ -29,10 +29,10 @@ public class FightMembers
     public static FightMembers LoadEnemies_Json(TextAsset Script)
     {
         FightMembers _localFight = new FightMembers();
-        MultiDict<int, int, CharDataInfo>.SerializableSet[] targetValue;
+        MultiDict<int, int, UnitInfo>.SerializableSet[] targetValue;
         try
         {
-            targetValue = JsonConvert.DeserializeObject<MultiDict<int, int, CharDataInfo>.SerializableSet[]>(Script.text);
+            targetValue = JsonConvert.DeserializeObject<MultiDict<int, int, UnitInfo>.SerializableSet[]>(Script.text);
             _localFight.EnemySets._SerializableSets = targetValue;
             _localFight.EnemySets.ConvertSerializableArrayToDictionary();
             return _localFight;

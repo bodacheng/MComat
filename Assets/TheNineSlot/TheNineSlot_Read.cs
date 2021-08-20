@@ -9,7 +9,7 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public void ReadANineAndTwo(UnitInfo _AccCharInfo)
+        public void ReadANineAndTwo(Api.Dto.Model.UnitInfo _AccCharInfo)
         {
             ForceClearAll();
             

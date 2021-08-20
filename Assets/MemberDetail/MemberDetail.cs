@@ -33,7 +33,7 @@ namespace mainMenu
         public Transform MemDetailTargetPos;
         public Transform MemDetailWatchPos;
         
-        public UnitInfo _focusing;
+        public Api.Dto.Model.UnitInfo _focusing;
         
         public static MemberDetail target;
         
@@ -146,10 +146,10 @@ namespace mainMenu
             //selfdefindtag.onValueChanged.AddListener(delegate { definemycharactertag(); });
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.RunAsQueued(CharModelRender(UnitInfo.GetCharDataInfo(_focusing)));
+            presentationProcessRunner.RunAsQueued(CharModelRender(Api.Dto.Model.UnitInfo.GetCharDataInfo(_focusing)));
         }
         
-        public IEnumerator CharModelRender(CharDataInfo info)
+        public IEnumerator CharModelRender(UnitInfo info)
         {
             if (info == null)
             {
@@ -189,7 +189,7 @@ namespace mainMenu
         }
 
         // 里面一个非常大的重点是执行了BO_Ani_E模块的初始化
-        public IEnumerator Step2INIForUIRefresh(UnitInfo accCharInfo)
+        public IEnumerator Step2INIForUIRefresh(Api.Dto.Model.UnitInfo accCharInfo)
         {
             if (accCharInfo != null)
             {
@@ -208,7 +208,7 @@ namespace mainMenu
                 }
 
                 CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(accCharInfo.monsterId);
-                CharDataInfo characterDataInfo = UnitInfo.GetCharDataInfo(accCharInfo);
+                UnitInfo characterDataInfo = Api.Dto.Model.UnitInfo.GetCharDataInfo(accCharInfo);
                 yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.TYPE, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
                 yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.TYPE, characterDataInfo.set, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);
                 

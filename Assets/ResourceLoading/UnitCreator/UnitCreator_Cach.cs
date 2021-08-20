@@ -52,7 +52,7 @@ public partial class UnitCreator
     }
 
     // 脚本信息式
-    public IEnumerator CreateCharacterFromABByCach(CharDataInfo _CharacterDataInfo,string AIScriptName,Zokusei _zokusei,string personalMagic,Team team,Vector3 pos, Quaternion Q)
+    public IEnumerator CreateCharacterFromABByCach(UnitInfo _CharacterDataInfo,string AIScriptName,Zokusei _zokusei,string personalMagic,Team team,Vector3 pos, Quaternion Q)
     {
         //yield return (this.CreateModelForShowingByCach(_CharacterDataInfo.monsterId));
         //GameObject IT;

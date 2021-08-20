@@ -13,10 +13,10 @@ public partial class StagesManager : MonoBehaviour
     {
         FightMembers _localFight = new FightMembers();
         
-        MultiDict<int, int, CharDataInfo>.SerializableSet[] targetValue;
+        MultiDict<int, int, UnitInfo>.SerializableSet[] targetValue;
         try
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(MultiDict<int, int, CharDataInfo>.SerializableSet[]));
+            XmlSerializer serializer = new XmlSerializer(typeof(MultiDict<int, int, UnitInfo>.SerializableSet[]));
             if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
             {
                 //FileStream FileStream = new FileStream(Application.dataPath + pathAndFileName, FileMode.Open);
@@ -24,14 +24,14 @@ public partial class StagesManager : MonoBehaviour
                 //FileStream.Close();
                 using (TextReader textReader = new StringReader(Script.text))
                 {
-                    targetValue = serializer.Deserialize(textReader) as MultiDict<int, int, CharDataInfo>.SerializableSet[];
+                    targetValue = serializer.Deserialize(textReader) as MultiDict<int, int, UnitInfo>.SerializableSet[];
                 }
                 Debug.Log("读取了敌人战斗信息");
             }
             else
             {
                 var reader = new StringReader(Script.text);
-                targetValue = serializer.Deserialize(reader) as MultiDict<int, int, CharDataInfo>.SerializableSet[];
+                targetValue = serializer.Deserialize(reader) as MultiDict<int, int, UnitInfo>.SerializableSet[];
                 Debug.Log("读取了敌人战斗信息");
             }
             
@@ -59,15 +59,15 @@ public partial class StagesManager : MonoBehaviour
         {
             return;
         }
-        MultiDict<int, int, CharDataInfo> UnNullDic = new MultiDict<int, int, CharDataInfo>();
-        foreach (MultiDict<int, int, CharDataInfo>.SerializableSet sets in localFight.EnemySets._SerializableSets)
+        MultiDict<int, int, UnitInfo> UnNullDic = new MultiDict<int, int, UnitInfo>();
+        foreach (MultiDict<int, int, UnitInfo>.SerializableSet sets in localFight.EnemySets._SerializableSets)
         {
             UnNullDic.Set(sets.key1, sets.key2 , sets.value);
         }
 
         try
         {
-            XmlSerializer XmlSerializer = new XmlSerializer(typeof(MultiDict<int, int, CharDataInfo>.SerializableSet[]));
+            XmlSerializer XmlSerializer = new XmlSerializer(typeof(MultiDict<int, int, UnitInfo>.SerializableSet[]));
             FileStream FileStream;
             FileStream = new FileStream(Application.dataPath + "/" + path, FileMode.Create);
             XmlSerializer.Serialize(FileStream, UnNullDic._SerializableSets);

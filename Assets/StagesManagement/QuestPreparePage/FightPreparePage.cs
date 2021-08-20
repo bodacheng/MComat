@@ -27,14 +27,14 @@ namespace mainMenu
             MemberInfosShow(stage.fightMembers.EnemySets.GetValues(), enemyTeamShowT);
         }
         
-        public static List<HeroIcon> MemberInfosShow(List<CharDataInfo> HeroSets, RectTransform _ShowT)
+        public static List<HeroIcon> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)
         {
             foreach (Transform transform in _ShowT)
             {
                 Destroy(transform.gameObject);
             }
             List<HeroIcon> icons = new List<HeroIcon>();
-            foreach(CharDataInfo oneMember in HeroSets)
+            foreach(UnitInfo oneMember in HeroSets)
             {
                 icons.Add(HeroIcon.ArrangeHeroIconToT(target.FighterIcon, oneMember, _ShowT));
             }

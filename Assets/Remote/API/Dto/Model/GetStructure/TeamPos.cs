@@ -23,11 +23,11 @@ namespace Api.Dto.Model {
         /// </summary>
         public string monsterId { get; set; }
         
-        public static CharDataInfo GetCharDataInfo(UnitInfo accountCharInfo)
+        public static global::UnitInfo GetCharDataInfo(UnitInfo accountCharInfo)
         {
             try
             {
-                CharDataInfo charDataInfo = new CharDataInfo
+                global::UnitInfo unitInfo = new global::UnitInfo
                 {
                     r_id = accountCharInfo.monsterId,
                     id = accountCharInfo.InstanceId
@@ -84,9 +84,9 @@ namespace Api.Dto.Model {
                     }
                 }
                 set.SetPassive(_CharConfigInfo.DEFENDABLE_FLAG, _CharConfigInfo.MoveType, _CharConfigInfo.RushType);
-                charDataInfo.set = set;
-                charDataInfo.set.SortNineAndTwo();
-                return charDataInfo;
+                unitInfo.set = set;
+                unitInfo.set.SortNineAndTwo();
+                return unitInfo;
             }
             catch (Exception e)
             {

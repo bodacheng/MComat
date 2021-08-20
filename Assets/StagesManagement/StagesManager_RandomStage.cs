@@ -14,17 +14,17 @@ public partial class StagesManager : MonoBehaviour
 
         FightMembers target = new FightMembers();
 
-        CharDataInfo char1 = new CharDataInfo
+        UnitInfo char1 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[0]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
-        CharDataInfo char2 = new CharDataInfo
+        UnitInfo char2 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[1]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
-        CharDataInfo char3 = new CharDataInfo
+        UnitInfo char3 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[2]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
@@ -52,33 +52,33 @@ public partial class StagesManager : MonoBehaviour
 
         FightMembers target = new FightMembers();
 
-        CharDataInfo char1 = new CharDataInfo
+        UnitInfo char1 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[0]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
-        CharDataInfo char2 = new CharDataInfo
+        UnitInfo char2 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[1]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
-        CharDataInfo char3 = new CharDataInfo
+        UnitInfo char3 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[2]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
 
-        CharDataInfo char4 = new CharDataInfo
+        UnitInfo char4 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[3]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
-        CharDataInfo char5 = new CharDataInfo
+        UnitInfo char5 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[4]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
-        CharDataInfo char6 = new CharDataInfo
+        UnitInfo char6 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[5]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)

@@ -11,10 +11,10 @@ namespace dataAccess
 {
     public partial class MyMonsters
     {
-        public static List<UnitInfo> LoadAll_Json(string filePath)
+        public static List<Api.Dto.Model.UnitInfo> LoadAll_Json(string filePath)
         {
-            List<UnitInfo> charList = new List<UnitInfo>();
-            UnitInfo info;
+            List<Api.Dto.Model.UnitInfo> charList = new List<Api.Dto.Model.UnitInfo>();
+            Api.Dto.Model.UnitInfo info;
             if (Directory.Exists(filePath))
             {
                 foreach (string file in Directory.GetFiles(filePath))
@@ -22,7 +22,7 @@ namespace dataAccess
                     try
                     {
                         string dataAsJson = File.ReadAllText(file);
-                        info = JsonConvert.DeserializeObject<UnitInfo>(dataAsJson);
+                        info = JsonConvert.DeserializeObject<Api.Dto.Model.UnitInfo>(dataAsJson);
                         charList.Add(info);
                     }
                     catch (Exception e)
@@ -37,10 +37,10 @@ namespace dataAccess
         
         public static void LoadTutorial()
         {
-            List<UnitInfo> charList = new List<UnitInfo>();
+            List<Api.Dto.Model.UnitInfo> charList = new List<Api.Dto.Model.UnitInfo>();
             charList = LoadAll_Json(Application.persistentDataPath + "/TutorialCharacterInfos");
             Dic.Clear();
-            foreach (UnitInfo one in charList)
+            foreach (Api.Dto.Model.UnitInfo one in charList)
             {
                 if (!Dic.ContainsKey(one.InstanceId))
                     Dic.Add(one.InstanceId, one);

@@ -40,7 +40,7 @@ public class BasicTryProcess : FSceneProcess
     IDictionary<Team, List<Data_Center>> TeamDeadMemberDictionary = new Dictionary<Team, List<Data_Center>>();
     List<Transform> watchetargets = new List<Transform>();
 
-    CharDataInfo adamInfo;
+    UnitInfo adamInfo;
     Data_Center Adam, Guard;
     readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();//双方队伍人员字典，和netfightscene模块里同名变量统一。
 
@@ -88,8 +88,8 @@ public class BasicTryProcess : FSceneProcess
             }
         }
 
-        UnitInfo before = MyMonsters.Get("1");
-        CharDataInfo characterDataInfo = UnitInfo.GetCharDataInfo(before);
+        Api.Dto.Model.UnitInfo before = MyMonsters.Get("1");
+        UnitInfo characterDataInfo = Api.Dto.Model.UnitInfo.GetCharDataInfo(before);
         adamInfo = characterDataInfo;
         yield break;
     }

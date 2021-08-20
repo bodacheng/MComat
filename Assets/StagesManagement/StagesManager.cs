@@ -11,7 +11,7 @@ public partial class StagesManager : MonoBehaviour
     public TextAsset FightScript;//存档文件。是我们拖给这个位置的一个东西，但如果说这个文件不存在，那应该要自动新建并指定到这个位置上
     public FightMembers EditoringFight;
     
-    public void SaveFightAsJson(string path, MultiDict<int, int, CharDataInfo> EnemySets)
+    public void SaveFightAsJson(string path, MultiDict<int, int, UnitInfo> EnemySets)
     {
         if (EnemySets == null)
             return;

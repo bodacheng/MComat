@@ -12,8 +12,8 @@ public class SkillShowPage : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        CharDataInfo _CharDataInfo = UnitInfo.GetCharDataInfo(MemberDetail.target._focusing);
-        MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh( _CharDataInfo);
+        UnitInfo unitInfo = Api.Dto.Model.UnitInfo.GetCharDataInfo(MemberDetail.target._focusing);
+        MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh( unitInfo);
         // 表现系
         CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.monsterId);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons

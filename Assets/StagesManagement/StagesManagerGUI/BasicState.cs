@@ -3,7 +3,7 @@ using UnityEditor;
 
 public partial class StagesManagerGUI : Editor {
 
-    void BasicStates(CharDataInfo CharInfo)
+    void BasicStates(UnitInfo CharInfo)
     {
         if (CharInfo == null || CharInfo.r_id == null)
             return;

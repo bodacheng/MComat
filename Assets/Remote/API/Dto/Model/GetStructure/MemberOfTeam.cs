@@ -9,19 +9,19 @@ namespace Api.Dto.Model
         readonly UnitInfo MonsterInfo;
         readonly List<StoneOfPlayerInfo> stones;
         
-        public CharDataInfo ToCharDataInfo()
+        public global::UnitInfo ToCharDataInfo()
         {
-            CharDataInfo charData = new CharDataInfo
+            global::UnitInfo unit = new global::UnitInfo
             {
                 r_id = MonsterInfo.monsterId,
                 id = MonsterInfo.InstanceId
             };
             List<StoneOfPlayerInfo> targets = stones;
             SkillSet nineAndTwo = new SkillSet();
-            CharConfig _CharConfigInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(charData.r_id));
+            CharConfig _CharConfigInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(unit.r_id));
             if (_CharConfigInfo == null)
             {
-                Debug.Log("角色定义信息错误。monsterId：" + charData.r_id);
+                Debug.Log("角色定义信息错误。monsterId：" + unit.r_id);
                 return null;
             }
             for (int i = 0; i < targets.Count; i++)
@@ -67,9 +67,9 @@ namespace Api.Dto.Model
                 }
             }
             nineAndTwo.SetPassive(_CharConfigInfo.DEFENDABLE_FLAG, _CharConfigInfo.MoveType, _CharConfigInfo.RushType);
-            charData.set = nineAndTwo;
-            charData.set.SortNineAndTwo();
-            return charData;
+            unit.set = nineAndTwo;
+            unit.set.SortNineAndTwo();
+            return unit;
         }
     }
 }

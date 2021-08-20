@@ -73,7 +73,7 @@ namespace mainMenu
 
         public static void AddOneNewIcon(string monsterOfPlayerId, bool clearButtonFeature)
         {
-            UnitInfo targetingCharInfo = MyMonsters.Get(monsterOfPlayerId);
+            Api.Dto.Model.UnitInfo targetingCharInfo = MyMonsters.Get(monsterOfPlayerId);
             CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(targetingCharInfo.monsterId);
             if (_CharConfig == null)
             {
@@ -113,7 +113,7 @@ namespace mainMenu
         public static void MonsterIconsGenerate(bool clearButtonFeature)
         {
             selectingAccID = null;
-            foreach (KeyValuePair<string, UnitInfo> keyValuePair in MyMonsters.Dic)
+            foreach (KeyValuePair<string, Api.Dto.Model.UnitInfo> keyValuePair in MyMonsters.Dic)
             {
                 AddOneNewIcon(keyValuePair.Value.InstanceId, clearButtonFeature);
             }

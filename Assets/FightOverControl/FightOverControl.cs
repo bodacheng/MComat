@@ -42,7 +42,7 @@ namespace FightScene
                 Destroy(child.gameObject);
             }
             
-            foreach (KeyValuePair<Data_Center, CharDataInfo> keyValuePair in RTFightManager.target.CharDataInfoRef)
+            foreach (KeyValuePair<Data_Center, UnitInfo> keyValuePair in RTFightManager.target.CharDataInfoRef)
             {
                 IconAndSKillShowUISet iconAndSKillShowUISet = Instantiate(IconAndSKillShowUISetPretab);
                 SideCharIcon sideCharIcon = teamUIManager.GetSideIcon(keyValuePair.Key);

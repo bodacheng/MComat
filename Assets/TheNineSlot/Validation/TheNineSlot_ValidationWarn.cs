@@ -9,7 +9,7 @@ namespace mainMenu
     {
         public void ValiationWarn(SkillSet.SkillEditError skillEditError, string monsterOfPlayerID)
         {
-            UnitInfo charInfo = MyMonsters.Get(monsterOfPlayerID);
+            Api.Dto.Model.UnitInfo charInfo = MyMonsters.Get(monsterOfPlayerID);
             switch(skillEditError)
             {
                 case SkillSet.SkillEditError.RepeatedSkill:

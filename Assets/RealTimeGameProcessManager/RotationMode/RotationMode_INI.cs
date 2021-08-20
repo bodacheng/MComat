@@ -70,7 +70,7 @@ namespace FightScene
                         ReadyForNextMember(a_char);
                     }
                     _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(action1);
-                    CharDataInfo charDInfo = RTFightManager.target.CharDataInfoRef[a_char];
+                    UnitInfo charDInfo = RTFightManager.target.CharDataInfoRef[a_char];
                     CharConfig _charConfig = MonstersConfigTable.GetCharConfig(charDInfo.r_id);
                     _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Get(charDInfo.r_id), _charConfig._zokusei);
                     _SideCharIcon.gameObject.SetActive(true);

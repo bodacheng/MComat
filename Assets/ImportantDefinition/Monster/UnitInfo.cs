@@ -1,28 +1,28 @@
 ﻿
 [System.Serializable]
-public class CharDataInfo
+public class UnitInfo
 {
     public string id;
     public string r_id;
     public SkillSet set = new SkillSet();
     
-    public CharDataInfo Clone()
+    public UnitInfo Clone()
     {
-        return (CharDataInfo)MemberwiseClone();
+        return (UnitInfo)MemberwiseClone();
     }
 
-    public CharDataInfo DeepCopy()
+    public UnitInfo DeepCopy()
     {
-        CharDataInfo Copy = this.Clone();
+        UnitInfo Copy = this.Clone();
         Copy.set = Copy.set.DeepCopy();
         return Copy;
     }
 
-    public CharDataInfo()
+    public UnitInfo()
     {
     }
 
-    public CharDataInfo(string localID, string ResourceID,SkillSet _NineAndTwo)
+    public UnitInfo(string localID, string ResourceID,SkillSet _NineAndTwo)
     {
         id = localID;
         this.r_id = ResourceID;
