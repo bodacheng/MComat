@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using dataAccess;
 using System.Collections.Generic;
 using UnityEngine;
 using mainMenu;
@@ -50,32 +50,32 @@ namespace FightScene
                             NetFightScene.Fight.ID.ToString(),
                             result =>
                             {
+                                PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                                object level, reward_GD, reward_DIA;
+                                jsonResult.TryGetValue("progressLevel", out level);
+                                jsonResult.TryGetValue("reward_GD", out reward_GD);
+                                jsonResult.TryGetValue("reward_DIA", out reward_DIA);
+                                
+                                string levelstring = level.ToString();
+                                string reward_GDstring = reward_GD != null ? reward_GD.ToString() : "0";
+                                string reward_DIAstring = reward_DIA != null ? reward_DIA.ToString() : "0";
+                                
+                                int levelInt, reward_GDInt, reward_DIAInt;
+                                int.TryParse(levelstring, out levelInt) ;
+                                Account._AccInfo.ArcadeProcess = levelInt;
+                                int.TryParse(reward_GDstring, out reward_GDInt) ;
+                                int.TryParse(reward_DIAstring, out reward_DIAInt) ;
+                                
                                 void LoadNextLevel()
                                 {
                                     NetFightScene.Fight = ArcadeManager.ArcadeStages[NetFightScene.Fight.ID + 1].stageConfig;
                                     FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
                                 }
                                 ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T, "ArcadeFightResult") as ArcadeFightResult;
-                                cc.Initialise(FightOverControl.target.ReturnToFront, FightOverControl.target.LocalGameRestart, LoadNextLevel);
-                            },
-                            () =>
-                            {
-                            }
-                        );
-                    }
-                    else
-                    {
-                        CloudScript.ArcadeProgress(
-                            NetFightScene.Fight.ID.ToString(),
-                            result =>
-                            {
-                                void LoadNextLevel()
-                                {
-                                    NetFightScene.Fight = ArcadeManager.ArcadeStages[NetFightScene.Fight.ID + 1].stageConfig;
-                                    FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
-                                }
-                                ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T, "ArcadeFightResult") as ArcadeFightResult;
-                                cc.Initialise(FightOverControl.target.ReturnToFront, FightOverControl.target.LocalGameRestart, LoadNextLevel);
+                                cc.Initialise(FightOverControl.target.ReturnToFront, 
+                                    FightOverControl.target.LocalGameRestart, 
+                                    LoadNextLevel,
+                                reward_GDInt, reward_DIAInt);
                             },
                             () =>
                             {

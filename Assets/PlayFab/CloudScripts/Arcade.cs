@@ -16,15 +16,6 @@ public partial class CloudScript
                 GeneratePlayStreamEvent = true
             },
             (ExecuteCloudScriptResult result) => {
-                PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                object level;
-                jsonResult.TryGetValue("progressLevel", out level);
-                
-                string levelstring = level.ToString();
-                int le;
-                int.TryParse(levelstring, out le) ;
-                Account._AccInfo.ArcadeProcess = le;
-                Debug.Log("new progress:" + le);
                 success.Invoke(result);
             },
             error => {

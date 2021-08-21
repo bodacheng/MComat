@@ -13,7 +13,7 @@ public class ArcadeFightResult : UILayer
     [SerializeField] private Button AgainBtn;
     [SerializeField] private Button NextBtn;
     
-    public void Initialise(Action R, Action A, Action N)
+    public void Initialise(Action R, Action A, Action N, int gold, int diamond)
     {
         ReturnBtn.onClick.AddListener(R.Invoke);
         AgainBtn.onClick.AddListener(A.Invoke);
@@ -25,5 +25,8 @@ public class ArcadeFightResult : UILayer
         }else{
             NextBtn.gameObject.SetActive(false);
         }
+
+        RewardGold.text = gold.ToString();
+        RewardDiamond.text = diamond.ToString();
     }
 }

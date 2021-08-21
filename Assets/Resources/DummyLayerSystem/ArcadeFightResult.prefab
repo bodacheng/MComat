@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f337fcf255c0441da962247d91ece301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RewardGold: {fileID: 1466445195731640121}
+  RewardDiamond: {fileID: 1466445195011477103}
   ReturnBtn: {fileID: 1466445196159419361}
   AgainBtn: {fileID: 1466445194840887037}
   NextBtn: {fileID: 1466445195429606052}
