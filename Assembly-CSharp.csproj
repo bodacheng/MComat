@@ -1100,6 +1100,7 @@
      <None Include="Assets\Asstes\JMO Assets\MatCap Shaders\Shaders\MatCap_TextureAdd_Bumped.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
      <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\AlphaBlended_EdgeSoft.shader" />
+     <None Include="Assets\Resources\title-data.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\304.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\362.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\267.json" />

@@ -77,14 +77,13 @@ public class SKillAnalyzerGUI : Editor
                 new ExecuteCloudScriptRequest()
                 {
                     FunctionName = "completedLevel",
-                    FunctionParameter = new { level = "2" },
+                    FunctionParameter = new { level = "5" },
                     GeneratePlayStreamEvent = true
                 },
                 (ExecuteCloudScriptResult result) => {
                     PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                     object level;
                     jsonResult.TryGetValue("progressLevel", out level);
-
                     Debug.Log(level.ToString());
                 },
                 error => {

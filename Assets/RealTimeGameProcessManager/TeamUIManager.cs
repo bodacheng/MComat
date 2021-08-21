@@ -21,14 +21,14 @@ namespace FightScene
         [HideInInspector]
         public Transform[] TeamStandPoints;
         
-        protected IDictionary<Data_Center, SideCharIcon> CharIconDic = new Dictionary<Data_Center, SideCharIcon>();
+        protected IDictionary<Data_Center, SideCharIcon> UnitIconDic = new Dictionary<Data_Center, SideCharIcon>();
         
         public SideCharIcon GetSideIcon(Data_Center d)
         {
-            return CharIconDic.ContainsKey(d) ? CharIconDic[d]: null;
+            return UnitIconDic.ContainsKey(d) ? UnitIconDic[d]: null;
         }
 
-        public IEnumerator CharsLoad(MultiDict<int, int, UnitInfo> MembersSets)
+        public IEnumerator UnitsLoad(MultiDict<int, int, UnitInfo> MembersSets)
         {
             foreach (KeyValuePair<(int, int), UnitInfo> kv in MembersSets.mDict)
             {
@@ -41,7 +41,7 @@ namespace FightScene
                     dcenter = (Data_Center)char_DC.Current;
                 }
                 TeamMembers.Set(kv.Key.Item1, kv.Key.Item2, dcenter);
-                DicAdd<Data_Center, UnitInfo>.Add(RTFightManager.target.CharDataInfoRef, dcenter, _one);
+                DicAdd<Data_Center, UnitInfo>.Add(RTFightManager.target.UnitInfoRef, dcenter, _one);
             }
         }
 
@@ -61,7 +61,7 @@ namespace FightScene
         {
             foreach (Data_Center _one in TeamMembers.GetValues())
             {
-                CharIconDic.TryGetValue(_one, out _tempSI);
+                UnitIconDic.TryGetValue(_one, out _tempSI);
                 _tempSI.transform.position = Vector3.Lerp(_tempSI.transform.position, CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 3f), Time.deltaTime * 20f);
             }
         }
@@ -82,7 +82,7 @@ namespace FightScene
         // 浮动HPBar和角色头像，共斗模式和轮番模式下头像按钮的作用不一样。一个是换focusing一个是直接切人
         public IEnumerator Instantiate(MultiDict<int, int, UnitInfo> UnitInfos, float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
-            yield return CharsLoad(UnitInfos);
+            yield return UnitsLoad(UnitInfos);
             InsTeamUI();
             TeamsFightInitialize(TeamHpRate, teamCGMode);
         }
@@ -98,18 +98,18 @@ namespace FightScene
         
         protected void RefreshResistanceBar(Data_Center data_Center)
         {
-            CharIconDic.TryGetValue(data_Center, out _tempSI);
+            UnitIconDic.TryGetValue(data_Center, out _tempSI);
             _tempSI.RefreshResistanceBar();
         }
         
         protected void RefreshHPBar(Data_Center data_Center, float current_hp, float wholeHP)
         {
-            CharIconDic.TryGetValue(data_Center, out _tempSI);
+            UnitIconDic.TryGetValue(data_Center, out _tempSI);
             _tempSI.RefreshHpBar(current_hp, wholeHP);
         }
         protected void RefreshExBar(Data_Center data_Center, int current_ex, int wholeex)
         {
-            CharIconDic.TryGetValue(data_Center, out _tempSI);
+            UnitIconDic.TryGetValue(data_Center, out _tempSI);
             _tempSI.RefreshExBar(current_ex, wholeex);
         }
         
@@ -117,7 +117,7 @@ namespace FightScene
         {
             foreach (Data_Center _datacenter in TeamMembers.GetValues())
             {
-                CharIconDic.TryGetValue(_datacenter, out _tempSI);
+                UnitIconDic.TryGetValue(_datacenter, out _tempSI);
                 if (teamConfig.myTeam == RTFightManager.playerTeam)
                 {
                     _tempSI.transform.localScale = _datacenter != RTFightManager.focusingChar ? Vector3.one : Vector3.one * 1.2f;
@@ -175,7 +175,7 @@ namespace FightScene
         public List<string> GetAllUsingStoneOfAcc()
         {
             List<string> stones = new List<string>();
-            foreach (KeyValuePair<Data_Center, UnitInfo> keyValuePair in RTFightManager.target.CharDataInfoRef)
+            foreach (KeyValuePair<Data_Center, UnitInfo> keyValuePair in RTFightManager.target.UnitInfoRef)
             {
                 List<StoneOfPlayerInfo> mystones = Stones.GetEquipingStones(keyValuePair.Value.id);
                 for (int i = 0; i < mystones.Count; i++)

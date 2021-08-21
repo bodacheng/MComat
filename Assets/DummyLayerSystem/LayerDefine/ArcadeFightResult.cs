@@ -6,6 +6,9 @@ using FightScene;
 
 public class ArcadeFightResult : UILayer
 {
+    [SerializeField] private Text RewardGold;
+    [SerializeField] private Text RewardDiamond;
+    
     [SerializeField] private Button ReturnBtn;
     [SerializeField] private Button AgainBtn;
     [SerializeField] private Button NextBtn;

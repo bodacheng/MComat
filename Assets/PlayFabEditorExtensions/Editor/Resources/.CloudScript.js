@@ -397,30 +397,81 @@ handlers.completedLevel = function (args, context) {
     var lastLevelCompleted = playerData.Data["lastLevelCompleted"];
     
     var level = args.level;
-
-    log.debug(lastLevelCompleted.Value +" TO " + level);
-
+    
     // 通了的关卡是新关卡
     if (level > lastLevelCompleted.Value)
     {
+        var newLevelCompleted = Number(lastLevelCompleted.Value) + 1;
+        
         var updateUserDataResult = server.UpdateUserReadOnlyData({
             PlayFabId: currentPlayerId,
             Data: {
-                lastLevelCompleted: Number(lastLevelCompleted.Value) + 1
+                lastLevelCompleted: newLevelCompleted
             }
         });
-        log.debug("Set lastLevelCompleted for player ");
         
-        server.AddUserVirtualCurrency({
-            PlayFabID: currentPlayerId, 
-            VirtualCurrency: "DM", 
-            Amount: "10"
-        });
+        var stageKey = "stage_" + newLevelCompleted;
 
+        var reward;
+        var arr_from_reward_json;
+        
+        //get title data
+        var TitleDataRequest = {"Keys":[stageKey]};
+        var TitleDataResponse = server.GetTitleData(TitleDataRequest);
+        if(!TitleDataResponse.Data.hasOwnProperty(stageKey))
+        {
+            log.debug("报酬信息未找到？ ..." + stageKey);
+        }
+        else
+        {
+            reward = TitleDataResponse.Data[stageKey];
+            // 这一步被确定有必要
+            arr_from_reward_json = JSON.parse( reward );
+        }
+        
+        var gold;
+        var diamond;
+
+        if (arr_from_reward_json !== null)
+        {
+            if(arr_from_reward_json.hasOwnProperty("dia")){
+                diamond = arr_from_reward_json.dia;
+                log.debug("dia" + arr_from_reward_json.dia);
+            }else{
+                diamond = 0;
+            }
+
+            if(arr_from_reward_json.hasOwnProperty("g")){
+                gold = arr_from_reward_json.g;
+                log.debug("g" + arr_from_reward_json.g);
+            }else{
+                gold = 0;
+            }
+            
+            if (diamond > 0)
+            {
+                server.AddUserVirtualCurrency({
+                    PlayFabID: currentPlayerId,
+                    VirtualCurrency: "DM",
+                    Amount: diamond
+                });
+            }
+            
+            if (gold > 0)
+            {
+                server.AddUserVirtualCurrency({
+                    PlayFabID: currentPlayerId,
+                    VirtualCurrency: "GD",
+                    Amount: gold
+                });
+            }
+        }
+        
         return {
             success: true,
-            progressLevel: Number(lastLevelCompleted.Value) + 1,
-            reward: 10
+            progressLevel: newLevelCompleted,
+            reward_GD: gold,
+            reward_DIA: diamond
         };
     }
     

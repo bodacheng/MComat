@@ -28,7 +28,7 @@ namespace FightScene
             {
                 one.FightDataRef.Clear();
             }
-            CharIconDic.Clear();
+            UnitIconDic.Clear();
             rotationModeHitCombo.text = "";
         }
         
@@ -74,7 +74,7 @@ namespace FightScene
                     memberchanged = true;
                     RotationMode_fightingMember.WholeT.gameObject.SetActive(true);
                     if (teamConfig.myTeam != RTFightManager.playerTeam)
-                        CharIconDic[RotationMode_fightingMember].gameObject.SetActive(true);
+                        UnitIconDic[RotationMode_fightingMember].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -82,7 +82,7 @@ namespace FightScene
                     //data_Center.WholeT.transform.position = new Vector3(9999, 600, 9999);
                     data_Center.WholeT.gameObject.SetActive(false);
                     if (teamConfig.myTeam != RTFightManager.playerTeam)
-                        CharIconDic[data_Center].gameObject.SetActive(false);
+                        UnitIconDic[data_Center].gameObject.SetActive(false);
                 }
             }
             return memberchanged;
@@ -119,7 +119,7 @@ namespace FightScene
                     RotationMode_fightingMember = _changeTo;
                     RotationMode_fightingMember.WholeT.gameObject.SetActive(true);
                     if (teamConfig.myTeam != RTFightManager.playerTeam)
-                        CharIconDic[RotationMode_fightingMember].gameObject.SetActive(true);
+                        UnitIconDic[RotationMode_fightingMember].gameObject.SetActive(true);
                     RotationMode_fightingMember._MyBehaviorRunner.ChangeToWaitingState();
                     RotationMode_fightingMember.WholeT.transform.position = targetposition;
                     EffectsManager.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
@@ -133,7 +133,7 @@ namespace FightScene
                         //data_Center.WholeT.transform.position = new Vector3(9999, 600, 9999);
                         data_Center.WholeT.gameObject.SetActive(false);
                         if (teamConfig.myTeam != RTFightManager.playerTeam)
-                            CharIconDic[data_Center].gameObject.SetActive(false);
+                            UnitIconDic[data_Center].gameObject.SetActive(false);
                     }
                 }
             }
@@ -160,7 +160,7 @@ namespace FightScene
                 if (RefreshTimeDic[TeamMembers.GetValues()[i]] > 0)
                 {
                     RefreshTimeDic[TeamMembers.GetValues()[i]] -= Time.deltaTime; // 角色切换倒计时;
-                    CharIconDic[TeamMembers.GetValues()[i]].focusingCharIcon.CooldownCurtainUpdate(RefreshTimeDic[TeamMembers.GetValues()[i]] / 10);
+                    UnitIconDic[TeamMembers.GetValues()[i]].focusingCharIcon.CooldownCurtainUpdate(RefreshTimeDic[TeamMembers.GetValues()[i]] / 10);
                 }
             }
             

@@ -12,7 +12,7 @@ namespace FightScene
             Step = SceneStep.FightOver;
         }
         
-        IEnumerator EnterProcess()
+        void EnterProcess()
         {
             // 不同模式下的战斗结束画面应该有个更加利索的分歧处理方式吧。。
             // 竞技场结束：显示排名变化？
@@ -46,7 +46,8 @@ namespace FightScene
                 case FightEventType.Quest:
                     if (FightLogger.target.GetWinner() == Team.player1)
                     {
-                        CloudScript.ArcadeProgress(NetFightScene.Fight.ID.ToString(),
+                        CloudScript.ArcadeProgress(
+                            NetFightScene.Fight.ID.ToString(),
                             result =>
                             {
                                 void LoadNextLevel()
@@ -64,7 +65,8 @@ namespace FightScene
                     }
                     else
                     {
-                        CloudScript.ArcadeProgress(NetFightScene.Fight.ID.ToString(),
+                        CloudScript.ArcadeProgress(
+                            NetFightScene.Fight.ID.ToString(),
                             result =>
                             {
                                 void LoadNextLevel()
@@ -87,8 +89,8 @@ namespace FightScene
                     FightOverControl.target.ShowSKillSets(RTFightManager.target.team1,c.GetIconAndSKillShowUISetT());
                     break;
                 case FightEventType.SkillTest:
-                    yield return NetFightScene.target.SKillTestReload();
-                break;
+                    NetFightScene.target.StartCoroutine(NetFightScene.target.SKillTestReload());
+                    break;
             }
             
             List<Data_Center> data_Centers = new List<Data_Center>();
@@ -107,7 +109,7 @@ namespace FightScene
         
         public override void ProcessEnter()
         {
-            SingleThreadProcesser.backup.RunAsQueued(EnterProcess());
+            EnterProcess();
         }
         
         public override void ProcessEnd()

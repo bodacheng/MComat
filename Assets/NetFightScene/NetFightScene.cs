@@ -141,7 +141,7 @@ namespace FightScene
         public IEnumerator SKillTestReload()
         {
             int i = 0;
-            foreach (KeyValuePair<Data_Center,UnitInfo> keyValuePair in RTFightManager.target.CharDataInfoRef)
+            foreach (KeyValuePair<Data_Center,UnitInfo> keyValuePair in RTFightManager.target.UnitInfoRef)
             {
                 switch(i)
                 {
