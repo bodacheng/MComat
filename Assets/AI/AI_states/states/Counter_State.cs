@@ -13,7 +13,7 @@ namespace Soul
         public override void Pre_process_before_enter()
         {
             base.Pre_process_before_enter();
-            nextAttackStateCanRushFirst = true;
+            nextAttackCanRushFirst = true;
         }
 
         Collider threat;

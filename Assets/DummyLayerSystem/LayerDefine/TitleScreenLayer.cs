@@ -7,7 +7,6 @@ public class TitleScreenLayer : UILayer
     
     public void Initialise(Action R)
     {
-        Debug.Log(R);
         TouchScreen.onClick.AddListener(R.Invoke);
     }
 }

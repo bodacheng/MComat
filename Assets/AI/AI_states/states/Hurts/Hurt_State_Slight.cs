@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using HittingDetection;
 using UniRx;
+
 namespace Soul
 {
     public partial class Hurt_State : Behavior

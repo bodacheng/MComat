@@ -159,7 +159,7 @@ namespace Soul
                     }
                 }
                 //也就是说能不能可不可能发生冲刺，完全取决于上一个状态了。如果我们想完全关闭这个功能，那确保所有状态nextAttackStateCanRushFirst是fale就行
-                if (_AIStateRunner.GetLastState().nextAttackStateCanRushFirst && StateType == BehaviorType.GR)
+                if (_AIStateRunner.GetLastState().nextAttackCanRushFirst && StateType == BehaviorType.GR)
                 {
                     _phase = Phase.needToRush;
                     if (Animation_Manger.TryAnimationClip(dash_clip_name) != null)

@@ -25,7 +25,7 @@ namespace Soul
         public BuffsRunner _BuffsRunner;
         public BlendShapeProxy blendShapeProxy;
         public Personality_events pEvents;
-
+        
         public float AT;
         public string StateKey;
         public int splevel;
@@ -33,7 +33,7 @@ namespace Soul
         public int triggerAtttackHeight;
         protected bool AbsorbEnergyFinished;
         public BehaviorType StateType;
-        public bool nextAttackStateCanRushFirst;
+        public bool nextAttackCanRushFirst;
         int temp;
 
         public void EnergyAbsorb(CriticalGaugeMode gaugeMode, FightAttriCalReference victim)

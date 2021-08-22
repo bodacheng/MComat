@@ -25,7 +25,7 @@ namespace Soul
             Move_State move = new Move_State(AIMoveMode.normal, 10f, 1f)
             {
                 StateType = BehaviorType.MV,
-                nextAttackStateCanRushFirst = false
+                nextAttackCanRushFirst = false
             };
             BehaviorDic.Add("Move", move);
 
@@ -34,21 +34,21 @@ namespace Soul
                 Defend_State defend = new Defend_State("block", "block_break")
                 {
                     StateType = BehaviorType.Def,
-                    nextAttackStateCanRushFirst = false
+                    nextAttackCanRushFirst = false
                 };
                 BehaviorDic.Add("Defend", defend);
             }
 
             Hurt_State hit = new Hurt_State()
             {
-                nextAttackStateCanRushFirst = false,
+                nextAttackCanRushFirst = false,
                 StateType = BehaviorType.Hit
             };
 
             Knock_Off_State knock_off = new Knock_Off_State()
             {
                 StateType = BehaviorType.KnockOff,
-                nextAttackStateCanRushFirst = true
+                nextAttackCanRushFirst = true
             };
             GetUp getUp = new GetUp("getup")
             {
@@ -75,7 +75,7 @@ namespace Soul
                                 case "RushBack":
                                     Dash_Back_State RushBack = new Dash_Back_State
                                     {
-                                        nextAttackStateCanRushFirst = false,
+                                        nextAttackCanRushFirst = false,
                                         StateType = BehaviorType.AC
                                     };
                                     BehaviorDic.Add("RushBack", RushBack);
@@ -83,7 +83,7 @@ namespace Soul
                                 case "Rush":
                                     G_Ani_MoveEscape_State Rush = new G_Ani_MoveEscape_State("rush")
                                     {
-                                        nextAttackStateCanRushFirst = true,
+                                        nextAttackCanRushFirst = true,
                                         StateType = BehaviorType.AC
                                     };
                                     BehaviorDic.Add("Rush", Rush);
@@ -95,7 +95,7 @@ namespace Soul
                             {
                                 StateType = BehaviorType.GI,
                                 AT = _set.AT,
-                                nextAttackStateCanRushFirst = false
+                                nextAttackCanRushFirst = false
                             };
                             BehaviorDic.Add(_set.REAL_NAME, _GI_Attack);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
@@ -105,7 +105,7 @@ namespace Soul
                             {
                                 StateType = BehaviorType.GM,
                                 AT = _set.AT,
-                                nextAttackStateCanRushFirst = false
+                                nextAttackCanRushFirst = false
                             };
                             BehaviorDic.Add(_set.REAL_NAME, _GM_Attack);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
@@ -115,7 +115,7 @@ namespace Soul
                             {
                                 StateType = BehaviorType.GR,
                                 AT = _set.AT,
-                                nextAttackStateCanRushFirst = false
+                                nextAttackCanRushFirst = false
                             };
                             BehaviorDic.Add(_set.REAL_NAME, _GR_Attack);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
@@ -125,7 +125,7 @@ namespace Soul
                             {
                                 StateType = BehaviorType.CT,
                                 AT = _set.AT,
-                                nextAttackStateCanRushFirst = false
+                                nextAttackCanRushFirst = false
                             };
                             BehaviorDic.Add(_set.REAL_NAME, _Counter);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
