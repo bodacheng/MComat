@@ -110,7 +110,7 @@ class OneVOneMode : CameraMode
 
             void ZoomOut()
             {
-                if (!zoomDirection && zoomcounter > zoomChangeInter)
+                if (!zoomDirection) //&& zoomcounter > zoomChangeInter) // 敌人超出屏幕范围的话立刻zoomout
                 {
                     zoomDirection = true;
                     ZoomAcc = 0;
@@ -122,7 +122,7 @@ class OneVOneMode : CameraMode
 
             void ZoomIn()
             {
-                if (zoomDirection && zoomcounter > zoomChangeInter)
+                if (zoomDirection && zoomcounter > zoomChangeInter) // zoomin的话需要确保zoomcounter > zoomChangeInter防止频繁zoomout或in从而画面过抖
                 {
                     zoomDirection = false;
                     ZoomAcc = 0;
@@ -177,7 +177,7 @@ class OneVOneMode : CameraMode
         // Slerp目标
         CameraTargetPos = meCenter.position + xzOff.normalized * XZ_distance;
         CameraTargetPos.y = temp;
-
+        
         // Slerp
         tempV3 = Vector3.Slerp(_camera.transform.position - SlerpCenter, CameraTargetPos - SlerpCenter, Time.deltaTime / (0.1f + Time.deltaTime));//分母里那个附加值越大，变得越慢。
 

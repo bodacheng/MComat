@@ -196,7 +196,7 @@ namespace FightScene
             }
             else
             {
-                c_Mode = C_Mode.OneVOne;
+                c_Mode = C_Mode.CertainYAntiVibration;
             }
             if (focusingChar != null)
             {

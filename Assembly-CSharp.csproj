@@ -503,6 +503,7 @@
      <Compile Include="Assets\UI\Oldscripts\NetWork\fightingSceneNetworkManager.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot_ConfirmEdit.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\BaseStarDataRenderer.cs" />
+     <Compile Include="Assets\Camera\Modes\New2021.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Event\HoldKeyEvent.cs" />
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\HitBoxesProcesser.cs" />
      <Compile Include="Assets\Language\LanguageConverter.cs" />
