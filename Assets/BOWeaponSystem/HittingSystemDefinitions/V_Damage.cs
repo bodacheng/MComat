@@ -6,13 +6,13 @@ namespace HittingDetection
     {
         public FightAttriCalReference attacker;
         public FightAttriCalReference victim;
-        public BO_Marker_Manager from_weapon;
+        public HitBoxManager from_weapon;
         public Marker from_weapon_marker;
         public Vector3 damageHappenPoint;
         public Quaternion CutRotation;
     
         public V_Damage() { }
-        public V_Damage(BO_Marker_Manager weapon, Marker weapon_marker, FightAttriCalReference _victim, FightAttriCalReference _attacker, Vector3 _damageHappenPoint, Quaternion _CutRotation)
+        public V_Damage(HitBoxManager weapon, Marker weapon_marker, FightAttriCalReference _victim, FightAttriCalReference _attacker, Vector3 _damageHappenPoint, Quaternion _CutRotation)
         {
             from_weapon = weapon;
             from_weapon_marker = weapon_marker;

@@ -5,7 +5,7 @@ using HittingDetection;
 public class HitBoxesProcesser : MonoBehaviour
 {
     public static HitBoxesProcesser Instance;
-    public static Dictionary<Collider, BO_Marker_Manager> ColliderHitBox = new Dictionary<Collider, BO_Marker_Manager>();
+    public static Dictionary<Collider, HitBoxManager> ColliderHitBox = new Dictionary<Collider, HitBoxManager>();
     public List<Decompositioner> processingDecompositioners = new List<Decompositioner>();
     
     void Awake()
@@ -20,7 +20,7 @@ public class HitBoxesProcesser : MonoBehaviour
     }
     
     // 用于靠collider索引对应的BO_Marker_Manager，与update内功能无关。
-    public static void AddToColliderHitBoxDic(Collider collider, BO_Marker_Manager bo_hitbox)
+    public static void AddToColliderHitBoxDic(Collider collider, HitBoxManager bo_hitbox)
     {
         if (!ColliderHitBox.ContainsKey(collider))
         {

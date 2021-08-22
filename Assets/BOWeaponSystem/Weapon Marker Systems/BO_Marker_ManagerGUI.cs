@@ -2,7 +2,7 @@
 using UnityEditor;
 using HittingDetection;
 
-[CustomEditor(typeof(BO_Marker_Manager))]
+[CustomEditor(typeof(HitBoxManager))]
 public class BO_Marker_ManagerGUI : Editor
 {        
     public override void OnInspectorGUI()

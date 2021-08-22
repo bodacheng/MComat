@@ -19,9 +19,9 @@ namespace HittingDetection
         public LayerMask enemyShieldLayer;
         
         protected SphereCollider myCollider;
-        protected BO_Marker_Manager owner;
+        protected HitBoxManager owner;
         
-        public void SetOwner(BO_Marker_Manager b)
+        public void SetOwner(HitBoxManager b)
         {
             this.owner = b;
         }

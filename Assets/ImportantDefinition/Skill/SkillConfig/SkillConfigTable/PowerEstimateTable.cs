@@ -194,7 +194,7 @@ public class PowerEstimateTable
             {
                 string magicobjectname = _clip.events[i].stringParameter;
                 GameObject hurtObject = Resources.Load("HurtObjects/defaultmagic/" + magicobjectname) as GameObject;
-                BO_Marker_Manager bO_Marker_Manager = hurtObject.GetComponent<BO_Marker_Manager>();
+                HitBoxManager bO_Marker_Manager = hurtObject.GetComponent<HitBoxManager>();
                 if (bO_Marker_Manager == null)
                 {
                     Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicobjectname);
@@ -212,7 +212,7 @@ public class PowerEstimateTable
                 for (int z = 0; z < decompositioner.Attachments.Length; z++)
                 {
                     GameObject attachment = Resources.Load("HurtObjects/defaultmagic/" + decompositioner.Attachments[z]) as GameObject;
-                    BO_Marker_Manager attachmentbo = attachment.GetComponent<BO_Marker_Manager>();
+                    HitBoxManager attachmentbo = attachment.GetComponent<HitBoxManager>();
                     if (attachmentbo == null)
                     {
                         Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicobjectname + "其附属物件资源"+ decompositioner.Attachments[z] + "不存在");
@@ -234,7 +234,7 @@ public class PowerEstimateTable
                 float oneDamege;
                 string magicobjectname = _clip.events[i].stringParameter;
                 GameObject hurtObject = Resources.Load("HurtObjects/defaultmagic/" + magicobjectname) as GameObject;
-                BO_Marker_Manager bO_Marker_Manager = hurtObject.GetComponent<BO_Marker_Manager>();
+                HitBoxManager bO_Marker_Manager = hurtObject.GetComponent<HitBoxManager>();
                 oneDamege = bO_Marker_Manager.AT_weight * skillATRef;
                 
                 Decompositioner decompositioner = hurtObject.GetComponent<Decompositioner>();
@@ -248,7 +248,7 @@ public class PowerEstimateTable
                 for (int z = 0; z < decompositioner.Attachments.Length; z++)
                 {
                     GameObject attachment = Resources.Load("HurtObjects/defaultmagic/" + decompositioner.Attachments[z]) as GameObject;
-                    BO_Marker_Manager attachmentbo = attachment.GetComponent<BO_Marker_Manager>();
+                    HitBoxManager attachmentbo = attachment.GetComponent<HitBoxManager>();
                     if (attachmentbo == null)
                     {
                         Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicobjectname + "其附属物件资源"+ decompositioner.Attachments[z] + "不存在");

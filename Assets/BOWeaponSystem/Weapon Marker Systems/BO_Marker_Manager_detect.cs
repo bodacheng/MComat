@@ -4,7 +4,7 @@ using Log;
 
 namespace HittingDetection
 {
-    public partial class BO_Marker_Manager : MonoBehaviour
+    public partial class HitBoxManager : MonoBehaviour
     {
         FightAttriCalReference _Raw_Target_Instance;//A single target which was hit.
         BO_Limb _BO_Hitbox;
@@ -91,7 +91,7 @@ namespace HittingDetection
                             {
                                 if ((teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | (1 << _hits[hit_target_index].collider.gameObject.layer))) && !_Used_Targets.Contains(_hits[hit_target_index].collider.transform))
                                 {
-                                    HitBoxesProcesser.ColliderHitBox.TryGetValue(_hits[hit_target_index].collider, out BO_Marker_Manager hit_hitbox);
+                                    HitBoxesProcesser.ColliderHitBox.TryGetValue(_hits[hit_target_index].collider, out HitBoxManager hit_hitbox);
                                     if (hit_hitbox != null && hit_hitbox.Enabled)
                                     {
                                         _Used_Targets.Add(_hits[hit_target_index].collider.transform);
@@ -240,7 +240,7 @@ namespace HittingDetection
                                     if ((teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | (1 << Hit_C.Key.gameObject.layer)))
                                         && !_Used_Targets.Contains(Hit_C.Key.transform))
                                     {
-                                        HitBoxesProcesser.ColliderHitBox.TryGetValue(Hit_C.Key, out BO_Marker_Manager hit_hitbox);
+                                        HitBoxesProcesser.ColliderHitBox.TryGetValue(Hit_C.Key, out HitBoxManager hit_hitbox);
                                         if (hit_hitbox != null && hit_hitbox.Enabled)
                                         {
                                             _Used_Targets.Add(Hit_C.Key.transform);

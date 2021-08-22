@@ -56,7 +56,7 @@ namespace HittingDetection
             BallDetectModeDetection(other);
         }
 
-        BO_Marker_Manager tempM;
+        HitBoxManager tempM;
         float tempWHpCost;
         void BallDetectModeDetection(Collider other)
         {
@@ -67,7 +67,7 @@ namespace HittingDetection
             {
                 if (!BallDetectHitPool.Keys.Contains(other))
                 {
-                    HitBoxesProcesser.ColliderHitBox.TryGetValue(other, out BO_Marker_Manager hit_hitbox);
+                    HitBoxesProcesser.ColliderHitBox.TryGetValue(other, out HitBoxManager hit_hitbox);
                     tempWHpCost = tempM != null ? V_Damage.WpHpCost(V_Damage.WeaponHeavyCal(owner.damage_type), V_Damage.WeaponHeavyCal(tempM.damage_type)) : 1;
                     HitPointPara hitPointPara = new HitPointPara
                     {

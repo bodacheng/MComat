@@ -2,7 +2,7 @@
 
 namespace HittingDetection
 {
-    public partial class BO_Marker_Manager : MonoBehaviour
+    public partial class HitBoxManager : MonoBehaviour
     {
         // 下面这个结构目前为止事关三大重要的索引作用
         // 1. 武器在击中敌人时，作为攻击力参考

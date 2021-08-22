@@ -4,7 +4,7 @@ using Log;
 
 namespace HittingDetection
 {
-    public partial class BO_Marker_Manager : MonoBehaviour
+    public partial class HitBoxManager : MonoBehaviour
     {
         #region settings
         [Tooltip("Should the Markers be active upon the Start of this weapon?")]

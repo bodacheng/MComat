@@ -89,7 +89,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         GameObject a = UnityEngine.Object.Instantiate(Prefab);
         a.transform.SetParent(Marker.transform);
         Decompositioner decompositioner = a.GetComponent<Decompositioner>();
-        BO_Marker_Manager BBMM = a.GetComponent<BO_Marker_Manager>();
+        HitBoxManager BBMM = a.GetComponent<HitBoxManager>();
         TrackControl danMuTest = a.GetComponent<TrackControl>();
         PositionConstraint PC = a.GetComponent<PositionConstraint>();
         if (PC == null)

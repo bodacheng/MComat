@@ -5,7 +5,7 @@ using UnityEngine.Animations;
 
 public partial class Decompositioner : MonoBehaviour {
 
-    public BO_Marker_Manager _HitBox;
+    public HitBoxManager _HitBox;
     public TrackControl TrackControl;
     
     public float DestructionDelay = 1.1f;//上面的值必须要大于下面的值
