@@ -36,7 +36,7 @@ namespace FightScene
                 Data_Center dcenter = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
                 if (dcenter == null)
                 {
-                    IEnumerator char_DC = UnitCreator.CreateCharacter(_one);
+                    IEnumerator char_DC = UnitCreator.CreateUnit(_one);
                     yield return char_DC;
                     dcenter = (Data_Center)char_DC.Current;
                 }

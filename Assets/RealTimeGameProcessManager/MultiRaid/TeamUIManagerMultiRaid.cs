@@ -112,7 +112,7 @@ namespace FightScene
                     if (x == true)
                     {
                         RTFightManager.AddOrRemoveFightingMember(a_char, this.teamConfig.myTeam, false);
-                        RTFightManager.target.CameraParaAdjustment(RTFightManager.playerTeam);
+                        RTFightManager.target.ParaAdjustment(RTFightManager.playerTeam);
                     }
                 });
             }
@@ -156,7 +156,7 @@ namespace FightScene
                 void Action1()
                 {
                     RTFightManager.target.SwitchToCMode(a_char, RTFightManager.Auto);
-                    RTFightManager.target.CameraParaAdjustment(teamConfig.myTeam);
+                    RTFightManager.target.ParaAdjustment(teamConfig.myTeam);
                 }
                 
                 if (!(UnitIconDic.ContainsKey(a_char) && UnitIconDic[a_char] != null))

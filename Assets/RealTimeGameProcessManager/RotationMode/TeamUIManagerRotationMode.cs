@@ -141,7 +141,7 @@ namespace FightScene
             {
                 RTFightManager.target.SwitchToCMode(RotationMode_fightingMember, MobileInputsManager.playerMode);
             }
-            RTFightManager.target.CameraParaAdjustment(RTFightManager.playerTeam);
+            RTFightManager.target.ParaAdjustment(RTFightManager.playerTeam);
             RTFightManager.target.Refresh();
             return memberchanged;
         }

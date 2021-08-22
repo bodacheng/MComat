@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine;
 using dataAccess;
-using Api.Dto.Model;
 using UniRx;
 
 public static class GeneralModelPool {

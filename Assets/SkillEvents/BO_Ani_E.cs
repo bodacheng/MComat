@@ -15,7 +15,7 @@ public partial class BO_Ani_E : MonoBehaviour
     List<Decompositioner> OnProcessEnergyFromBodyWeapons = new List<Decompositioner>();
     
     Decompositioner processingHitBox;
-
+    
     void Awake()
     {
         hiddenMethods = new HiddenMethods(this);
@@ -49,8 +49,7 @@ public partial class BO_Ani_E : MonoBehaviour
                 yield return (EffectsManager.PrepareMagicFromCach(ResourceDownLoad.BundleURL + "/Magics", FightGlobalSetting.EffectPathDefine(Zokusei.Null)));
             break;
             case ResourceLoadMode.Resource:
-
-            break;
+                break;
             case ResourceLoadMode.StreamingAssetAB:
                 if (myMagicForwardPath != null)
                     yield return (EffectsManager.PrepareMagicFromStreamingAssets(this.myMagicForwardPath));

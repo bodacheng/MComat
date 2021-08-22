@@ -6,6 +6,5 @@ public partial class EffectsManager
     {
         IEnumerator task = CachManager.Instance.DownloadAndCacheExactFile(Path,magicPackName);
         yield return task;
-        yield break;
     }    
 }

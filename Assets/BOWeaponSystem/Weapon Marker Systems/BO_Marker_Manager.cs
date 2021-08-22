@@ -38,7 +38,7 @@ namespace HittingDetection
         #region realtime param
         bool Enabled;
         public float CurrentHP { get; set; }
-        FightAttriCalReference _MyOwnerCalReference;
+        FightAttriCalReference _attackerRef;
         TeamConfig teamConfig = TeamConfig.defaultSet;
         Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
         bool HitFlesh;
@@ -123,12 +123,12 @@ namespace HittingDetection
 
         public void SetOwnerFACR(FightAttriCalReference myOwnerCalReference)
         {
-            _MyOwnerCalReference = myOwnerCalReference;
-            AT = _MyOwnerCalReference == null ? 0 : _MyOwnerCalReference.AT * AT_weight;
+            _attackerRef = myOwnerCalReference;
+            AT = _attackerRef == null ? 0 : _attackerRef.AT * AT_weight;
         }
         public FightAttriCalReference GetOwnerFACR()
         {
-            return _MyOwnerCalReference;
+            return _attackerRef;
         }
         public void SetDectionTargetsUnion(List<Transform> Used_Targets)
         {

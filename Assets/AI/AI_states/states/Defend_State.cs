@@ -115,7 +115,7 @@ namespace Soul
             _SkillCancelFlag.turn_off_flag();
             //this.AI_DATA_CENTER.turnShield(true);
 
-            fixDesPos = CalFixPosDestination(newValue.damageHappenPoint,
+            fixDesPos = CalFixPushPos(newValue.damageHappenPoint,
                                        newValue.attacker._Center.WholeT.forward,
                                            newValue.attacker._Center.WholeT.position,
                                                gameObject.transform.position,

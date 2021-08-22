@@ -21,7 +21,7 @@ namespace FightScene
         [Header("Messages")]
         [Space(6)]
         public Text Messages;
-
+        
         [FormerlySerializedAs("FightTeam1")] public TeamUIManager team1;
         [FormerlySerializedAs("FightTeam2")] public TeamUIManager team2;
         [FormerlySerializedAs("FightTeam1_multi")] public TeamUIManagerMultiRaid team1UIManagerMulti;
@@ -37,7 +37,7 @@ namespace FightScene
         public static bool Auto;
         public static Data_Center focusingChar;
         public static Team playerTeam = Team.player1;
-
+        
         public MultiDict<int, int, Data_Center> Team1Members;
         public MultiDict<int, int, Data_Center> Team2Members;
         
@@ -77,8 +77,7 @@ namespace FightScene
         public void SwitchToWatchMode() // button behaviour
         {
             SwitchToCMode(null, false);
-            CameraParaAdjustment(playerTeam);
-            Debug.Log(playerTeam);
+            ParaAdjustment(playerTeam);
         }
 
         public void Refresh()//这个刷新是倾向于画面制御
@@ -187,7 +186,7 @@ namespace FightScene
         }
         
         // 战斗模式相机。根据选择队伍做相应调整。
-        public void CameraParaAdjustment(Team myTeam)
+        public void ParaAdjustment(Team myTeam)
         {
             C_Mode c_Mode;
             if (loadFight.Team1Mode == TeamMode.multiraid)

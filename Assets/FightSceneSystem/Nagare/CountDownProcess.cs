@@ -36,7 +36,7 @@ namespace FightScene
                 NetFightScene.target.CountDown.text = "" + (1 + (int)(startTimestamp));
                 yield return null;
             }
-            RTFightManager.target.CameraParaAdjustment(RTFightManager.playerTeam);
+            RTFightManager.target.ParaAdjustment(RTFightManager.playerTeam);
             NetFightScene.target.CountDown.gameObject.SetActive(false);
             AutoMoveToNext = true;
         }
