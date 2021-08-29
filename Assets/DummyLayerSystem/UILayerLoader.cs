@@ -37,6 +37,7 @@ public class UILayerLoader
             UILayer uiLayer = Queues[Queues.Count - 1];
             if (uiLayer != null)
             {
+                uiLayer.OnDestroy();
                 GameObject.Destroy(uiLayer);
             }
             Queues.RemoveAt(Queues.Count - 1);

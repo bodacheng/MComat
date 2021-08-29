@@ -1356,7 +1356,7 @@ MonoBehaviour:
   heavyhit_lastingtime: 0.55
   superhit_lastingtime: 0.6
   highhit_lastingTime: 0.65
-  normalattackpositionfixingtime: 0.1
+  normalattackpositionfixingtime: 0
   knockoffextent: 7
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5

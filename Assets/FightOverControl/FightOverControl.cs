@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using mainMenu;
 using UnityEngine.SceneManagement;
 using Soul;
@@ -13,47 +11,9 @@ namespace FightScene
     {
         public static FightOverControl target;
         
-        [Header("IconWithSkillShow")]
-        public IconAndSKillShowUISet IconAndSKillShowUISetPretab;
-        
-        [Header("NineForShow")]
-        public NineForShow NineForShowPretab;
-        
         void Awake()
         {
             target = this;
-        }
-        
-        public void Clear()
-        {
-            foreach(NineForShow nineForShow in NineForShows)
-            {
-                nineForShow.ClearCurrent();
-            }
-        }
-        
-        // 战斗结束后统计技能石升级情况时的画面显示
-        List<NineForShow> NineForShows = new List<NineForShow>();
-        public void ShowSKillSets(TeamUIManager teamUIManager, RectTransform IconAndSKillShowUISetT)
-        {
-            NineForShows.Clear();
-            foreach (Transform child in IconAndSKillShowUISetT) 
-            {
-                Destroy(child.gameObject);
-            }
-            
-            foreach (KeyValuePair<Data_Center, UnitInfo> keyValuePair in RTFightManager.target.UnitInfoRef)
-            {
-                IconAndSKillShowUISet iconAndSKillShowUISet = Instantiate(IconAndSKillShowUISetPretab);
-                SideCharIcon sideCharIcon = teamUIManager.GetSideIcon(keyValuePair.Key);
-                NineForShow nineForShow = Instantiate(NineForShowPretab);
-                NineForShows.Add(nineForShow);
-                iconAndSKillShowUISet.Set(sideCharIcon, nineForShow);
-                iconAndSKillShowUISet.transform.SetParent(IconAndSKillShowUISetT);
-                iconAndSKillShowUISet.transform.localPosition = Vector3.zero;
-                iconAndSKillShowUISet.transform.localScale = Vector3.one;
-                nineForShow.ShowStones_Acc(keyValuePair.Value.id);
-            }
         }
         
         // 这个函数应该包括一些更深层的考虑。
@@ -93,7 +53,7 @@ namespace FightScene
                     singleFightLogs.Add(members[i]._MyBehaviorRunner.SingleFightLog);
                 }
             }
-
+            
             if (FightGlobalSetting.HitBoxLogger)
             {
                 HitBoxLogTable.Instance.Load(HitBoxLogger.Instance.LoadCurrentToString());

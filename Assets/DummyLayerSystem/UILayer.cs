@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,5 +11,10 @@ public class UILayer : MonoBehaviour
     {
         get => index;
         set => index = value;
+    }
+
+    public virtual void OnDestroy()
+    {
+        
     }
 }

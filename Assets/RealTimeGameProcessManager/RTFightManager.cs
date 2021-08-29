@@ -22,12 +22,12 @@ namespace FightScene
         [Space(6)]
         public Text Messages;
         
-        [FormerlySerializedAs("FightTeam1")] public TeamUIManager team1;
-        [FormerlySerializedAs("FightTeam2")] public TeamUIManager team2;
-        [FormerlySerializedAs("FightTeam1_multi")] public TeamUIManagerMultiRaid team1UIManagerMulti;
-        [FormerlySerializedAs("FightTeam2_multi")] public TeamUIManagerMultiRaid team2UIManagerMulti;
-        [FormerlySerializedAs("FightTeam1_rotation")] public TeamUIManagerRotationMode team1UIManagerRotation;
-        [FormerlySerializedAs("FightTeam2_rotation")] public TeamUIManagerRotationMode team2UIManagerRotation;
+        public TeamUIManager team1;
+        public TeamUIManager team2;
+        public TeamUIManagerMultiRaid team1UIManagerMulti;
+        public TeamUIManagerMultiRaid team2UIManagerMulti;
+        public TeamUIManagerRotationMode team1UIManagerRotation;
+        public TeamUIManagerRotationMode team2UIManagerRotation;
         
         public TeamConfig heroTeamConfig = new TeamConfig(Team.player1, new List<Team>() { Team.player2 });
         public TeamConfig EnemyTeamConfig = new TeamConfig(Team.player2, new List<Team>() { Team.player1 });

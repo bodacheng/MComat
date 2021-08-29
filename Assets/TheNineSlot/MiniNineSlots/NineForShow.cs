@@ -213,77 +213,24 @@ public partial class NineForShow : MonoBehaviour
     void Parent()
     {
         RectTransform slotRT = A1T.GetComponent<RectTransform>();
-        if (A1S != null)
+
+        void SS(SKStoneItem SK, Button BT)
         {
-            A1S.transform.SetParent(A1T.transform);
-            A1S.transform.localPosition = Vector3.zero;
-            A1S.transform.localScale = Vector3.one;
-            A1S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
-            A1S.gameObject.SetActive(true);
+            SK.transform.SetParent(BT.transform);
+            SK.transform.localPosition = Vector3.zero;
+            SK.transform.localScale = Vector3.one;
+            SK.GetComponent<RectTransform>().rect.Set(0, 0, slotRT.rect.width,slotRT.rect.height);
+            SK.gameObject.SetActive(true);
         }
-        if (A2S != null)
-        {
-            A2S.transform.SetParent(A2T.transform);
-            A2S.transform.localPosition = Vector3.zero;
-            A2S.transform.localScale = Vector3.one;
-            A2S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
-            A2S.gameObject.SetActive(true);
-        }
-        if (A3S != null)
-        {
-            A3S.transform.SetParent(A3T.transform);
-            A3S.transform.localPosition = Vector3.zero;
-            A3S.transform.localScale = Vector3.one;
-            A3S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
-            A3S.gameObject.SetActive(true);
-        }
-        if (B1S != null)
-        {
-            B1S.transform.SetParent(B1T.transform);
-            B1S.transform.localPosition = Vector3.zero;
-            B1S.transform.localScale = Vector3.one;
-            B1S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
-            B1S.gameObject.SetActive(true);
-        }
-        if (B2S != null)
-        {
-            B2S.transform.SetParent(B2T.transform);
-            B2S.transform.localPosition = Vector3.zero;
-            B2S.transform.localScale = Vector3.one;
-            B2S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
-            B2S.gameObject.SetActive(true);
-        }
-        if (B3S != null)
-        {
-            B3S.transform.SetParent(B3T.transform);
-            B3S.transform.localPosition = Vector3.zero;
-            B3S.transform.localScale = Vector3.one;
-            B3S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
-            B3S.gameObject.SetActive(true);
-        }
-        if (C1S != null)
-        {
-            C1S.transform.SetParent(C1T.transform);
-            C1S.transform.localPosition = Vector3.zero;
-            C1S.transform.localScale = Vector3.one;
-            C1S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
-            C1S.gameObject.SetActive(true);
-        }
-        if (C2S != null)
-        {
-            C2S.transform.SetParent(C2T.transform);
-            C2S.transform.localPosition = Vector3.zero;
-            C2S.transform.localScale = Vector3.one;
-            C2S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
-            C2S.gameObject.SetActive(true);
-        }
-        if (C3S != null)
-        {
-            C3S.transform.SetParent(C3T.transform);
-            C3S.transform.localPosition = Vector3.zero;
-            C3S.transform.localScale = Vector3.one;
-            C3S.GetComponent<RectTransform>().sizeDelta = new Vector2(slotRT.sizeDelta.x,slotRT.sizeDelta.y);
-            C3S.gameObject.SetActive(true);
-        }
+
+        SS(A1S, A1T);
+        SS(A2S, A2T);
+        SS(A3S, A3T);
+        SS(B1S, B1T);
+        SS(B2S, B2T);
+        SS(B3S, B3T);
+        SS(C1S, C1T);
+        SS(C2S, C2T);
+        SS(C3S, C3T);
     }
 }

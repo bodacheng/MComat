@@ -185,6 +185,10 @@ MonoBehaviour:
   ReturnBtn: {fileID: 1466445196159419361}
   AgainBtn: {fileID: 1466445194840887037}
   IconAndSKillShowUISetT: {fileID: 1466445195868110278}
+  IconAndSKillShowUISetPretab: {fileID: 1141114452479479291, guid: bc894853de9c14c4abed4bc8dc6ee131,
+    type: 3}
+  NineForShowPretab: {fileID: 7206657324930453451, guid: 5d285e5e2ebb44664bdddd925b53d8c3,
+    type: 3}
 --- !u!1 &1466445195011477102
 GameObject:
   m_ObjectHideFlags: 0

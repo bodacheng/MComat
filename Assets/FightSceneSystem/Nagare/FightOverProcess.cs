@@ -86,7 +86,7 @@ namespace FightScene
                 case FightEventType.Self:
                     CommonFightResult c = UILayerLoader.Load(NetFightScene.target.T, "CommonFightResult") as CommonFightResult;
                     c.Initialise(FightOverControl.target.ReturnToFront, FightOverControl.target.LocalGameRestart);
-                    FightOverControl.target.ShowSKillSets(RTFightManager.target.team1,c.GetIconAndSKillShowUISetT());
+                    c.ShowSKillSets(RTFightManager.target.team1, c.GetIconAndSKillShowUISetT());
                     break;
                 case FightEventType.SkillTest:
                     NetFightScene.target.StartCoroutine(NetFightScene.target.SKillTestReload());
@@ -115,7 +115,6 @@ namespace FightScene
         public override void ProcessEnd()
         {
             HurtObjectManager.ClearCurrent();
-            FightOverControl.target.Clear();
         }
     }
 }
