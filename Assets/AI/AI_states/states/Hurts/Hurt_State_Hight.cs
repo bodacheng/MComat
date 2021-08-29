@@ -7,7 +7,7 @@ namespace Soul
     {
         bool dropped;
         Vector3 _xz;
-
+        
         void HighDamgeStart(V_Damage newValue)
         {
             dropped = false;

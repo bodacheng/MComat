@@ -2,6 +2,7 @@
 using HittingDetection;
 using UniRx;
 using DG.Tweening;
+
 namespace Soul
 {
     public partial class Hurt_State : Behavior
@@ -12,7 +13,7 @@ namespace Soul
         V_Damage target;
         SingleAssignmentDisposable physicMissionDisposable;
         Tween tween;
-
+        
         public override void Pre_process_before_enter()
         {
             base.Pre_process_before_enter();
@@ -66,7 +67,6 @@ namespace Soul
             {
                 return;
             }
-            _Rigidbody.mass = 100;
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _BasicPhysicSupport.SetUsingGravity(true);
         }
@@ -82,7 +82,6 @@ namespace Soul
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             TimeCounter = 0f;
             pEvents.CloseAllPersonalityEffects();
-            _Rigidbody.mass = 80;
 
             if (_BuffsRunner.Freesing)
                 return;

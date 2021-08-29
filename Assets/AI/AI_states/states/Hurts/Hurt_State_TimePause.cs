@@ -8,14 +8,13 @@ namespace Soul
         UnityEngine.Events.UnityAction pasueend;
         CustomCoroutine pasueCoroutine;
         Color gold = new Color(1f, 1, 0.2f);
-
+        
         void TimePauseStart()
         {
             pasuestart = () =>
             {
                 _BuffsRunner.Freesing = true;
                 Animation_Manger.Speed = 0;
-                _Rigidbody.mass = 1000f;
                 _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                 shaderManager.FlatColor(0.5f, gold);
             };

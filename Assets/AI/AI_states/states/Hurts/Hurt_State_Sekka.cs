@@ -12,7 +12,6 @@ namespace Soul
             {
                 _BuffsRunner.Freesing = true;
                 Animation_Manger.Speed = 0;
-                _Rigidbody.mass = 1000f;
                 _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
             };
             pasueend = () =>

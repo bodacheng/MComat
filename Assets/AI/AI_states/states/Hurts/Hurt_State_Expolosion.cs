@@ -12,7 +12,7 @@ namespace Soul
             physicMissionDisposable = new SingleAssignmentDisposable();
             physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
-                    if (TimeCounter > 2 * used_dizzy_time / 3)
+                    if (TimeCounter > used_dizzy_time)
                     {
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                         physicMissionDisposable.Dispose();

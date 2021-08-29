@@ -63,6 +63,7 @@ public partial class Data_Center : MonoBehaviour
             FightDataRef._Center = this;
 
             _BasicPhysicSupport.Rigidbody.useGravity = false;
+            _BasicPhysicSupport.Rigidbody.mass = 500f;
             BodyElementTagAndLayerSet(TeamConfig.defaultSet);
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(FightDataRef,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
 
