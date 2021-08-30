@@ -83,6 +83,7 @@ public class Starter : MonoBehaviour
                 {
                     playerID = result.PlayFabId
                 };
+                PlayFabLogin.CheckIn();
                 EnterFrontScene();
             },
             fail => {
