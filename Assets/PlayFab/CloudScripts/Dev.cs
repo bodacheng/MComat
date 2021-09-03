@@ -1,8 +1,8 @@
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
-using dataAccess;
 using System;
+
 public partial class CloudScript
 {
     public static void GrantMonsterTest()
@@ -57,7 +57,7 @@ public partial class CloudScript
                 object currentItemCount;
                 jsonResult.TryGetValue("currentItemCount", out currentItemCount); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
                 Debug.Log(currentItemCount);
-                PlayFabRead.LoadItems(new Action<int>((x) => { }));
+                PlayFabReadClient.LoadItems(new Action<int>((x) => { }));
             },
             error => { Debug.Log(error.Error); });
     }

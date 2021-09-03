@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
-using Api.Dto.Model;
+using dataAccess;
 using DG.Tweening;
 using Skill;
 

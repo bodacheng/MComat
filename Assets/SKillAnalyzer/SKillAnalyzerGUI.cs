@@ -60,7 +60,7 @@ public class SKillAnalyzerGUI : Editor
         GUILayout.Space(10);
         if (GUILayout.Button("Login"))
         {
-            PlayFabLogin.CustomIDLogin(
+            PlayFabReadClient.CustomIDLogin(
                 result => {
                     Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
                 },

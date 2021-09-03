@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using mainMenu;
-using Api.Dto.Model;
+using dataAccess;
 
 public class SkillShowPage : MainSceneProcess
 {
@@ -12,10 +12,10 @@ public class SkillShowPage : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        UnitInfo unitInfo = Api.Dto.Model.UnitInfo.GetCharDataInfo(MemberDetail.target._focusing);
+        UnitInfo unitInfo = UnitInfo.GetCharDataInfo(MemberDetail.target._focusing);
         MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh( unitInfo);
         // 表现系
-        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.monsterId);
+        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.r_id);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
             ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(), 5f),

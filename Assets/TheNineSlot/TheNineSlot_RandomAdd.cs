@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using dataAccess;
-using Api.Dto.Model;
 using System.Collections.Generic;
 using System.Linq;
 using Skill;
@@ -17,27 +16,27 @@ namespace mainMenu
 
         void FinishRemains()
         {
-            Api.Dto.Model.UnitInfo info = MemberDetail.target._focusing;
-            CharConfig charConfig = MonstersConfigTable.GetCharConfig(info.monsterId);
+            UnitInfo info = MemberDetail.target._focusing;
+            CharConfig charConfig = MonstersConfigTable.GetCharConfig(info.r_id);
             SkillSet now = TheNineSlot.target.GetCurrentNineAndTwo();
             SkillSet targetSkillSet = SkillSet.FixSkillSet(charConfig.TYPE, now, 1, true);
 
             if (targetSkillSet == null)
             {
-                target.ValiationWarn(SkillSet.SkillEditError.UnableToFinish, MemberDetail.target._focusing.InstanceId);
+                target.ValiationWarn(SkillSet.SkillEditError.UnableToFinish, MemberDetail.target._focusing.id);
             }
             else
             {
                 // 如果角色有原生技能，则已经存在于targetSkillSet当中
-                AddRandomStoneToSlot(info.InstanceId, 1, targetSkillSet.a1);
-                AddRandomStoneToSlot(info.InstanceId, 2, targetSkillSet.a2);
-                AddRandomStoneToSlot(info.InstanceId, 3, targetSkillSet.a3);
-                AddRandomStoneToSlot(info.InstanceId, 4, targetSkillSet.b1);
-                AddRandomStoneToSlot(info.InstanceId, 5, targetSkillSet.b2);
-                AddRandomStoneToSlot(info.InstanceId, 6, targetSkillSet.b3);
-                AddRandomStoneToSlot(info.InstanceId, 7, targetSkillSet.c1);
-                AddRandomStoneToSlot(info.InstanceId, 8, targetSkillSet.c2);
-                AddRandomStoneToSlot(info.InstanceId, 9, targetSkillSet.c3);
+                AddRandomStoneToSlot(info.id, 1, targetSkillSet.a1);
+                AddRandomStoneToSlot(info.id, 2, targetSkillSet.a2);
+                AddRandomStoneToSlot(info.id, 3, targetSkillSet.a3);
+                AddRandomStoneToSlot(info.id, 4, targetSkillSet.b1);
+                AddRandomStoneToSlot(info.id, 5, targetSkillSet.b2);
+                AddRandomStoneToSlot(info.id, 6, targetSkillSet.b3);
+                AddRandomStoneToSlot(info.id, 7, targetSkillSet.c1);
+                AddRandomStoneToSlot(info.id, 8, targetSkillSet.c2);
+                AddRandomStoneToSlot(info.id, 9, targetSkillSet.c3);
                 NineSlotsStatusRefresh();
                 SkillStonesBox.target.RestFilter();
             }
@@ -45,23 +44,23 @@ namespace mainMenu
 
         void RandomAll()
         {
-            Api.Dto.Model.UnitInfo info = MemberDetail.target._focusing;
-            CharConfig charConfig = MonstersConfigTable.GetCharConfig(info.monsterId);
-            StoneOfPlayerInfo originSkillInfo = Stones.GetOriginSkillOfMonster(info.InstanceId);
+            UnitInfo info = MemberDetail.target._focusing;
+            CharConfig charConfig = MonstersConfigTable.GetCharConfig(info.r_id);
+            StoneOfPlayerInfo originSkillInfo = Stones.GetOriginSkillOfMonster(info.id);
             // 这一步仅仅是根据账户拥有技能石的情况来确定了可行的技能组，也就是说根据手上的石头这个技能组能拼出来，但没提供具体的石头，所以防重复工作在实际装备技能石的时候（AddRandomStoneToSlot）也要做
             SkillSet targetSkillSet = SkillSet.RandomSkillSet(charConfig.TYPE, originSkillInfo?.skillId, 1, true);
 
             ForceClearAll();
             // 如果角色有原生技能，则已经存在于targetSkillSet当中
-            AddRandomStoneToSlot(info.InstanceId, 1, targetSkillSet.a1);
-            AddRandomStoneToSlot(info.InstanceId, 2, targetSkillSet.a2);
-            AddRandomStoneToSlot(info.InstanceId, 3, targetSkillSet.a3);
-            AddRandomStoneToSlot(info.InstanceId, 4, targetSkillSet.b1);
-            AddRandomStoneToSlot(info.InstanceId, 5, targetSkillSet.b2);
-            AddRandomStoneToSlot(info.InstanceId, 6, targetSkillSet.b3);
-            AddRandomStoneToSlot(info.InstanceId, 7, targetSkillSet.c1);
-            AddRandomStoneToSlot(info.InstanceId, 8, targetSkillSet.c2);
-            AddRandomStoneToSlot(info.InstanceId, 9, targetSkillSet.c3);
+            AddRandomStoneToSlot(info.id, 1, targetSkillSet.a1);
+            AddRandomStoneToSlot(info.id, 2, targetSkillSet.a2);
+            AddRandomStoneToSlot(info.id, 3, targetSkillSet.a3);
+            AddRandomStoneToSlot(info.id, 4, targetSkillSet.b1);
+            AddRandomStoneToSlot(info.id, 5, targetSkillSet.b2);
+            AddRandomStoneToSlot(info.id, 6, targetSkillSet.b3);
+            AddRandomStoneToSlot(info.id, 7, targetSkillSet.c1);
+            AddRandomStoneToSlot(info.id, 8, targetSkillSet.c2);
+            AddRandomStoneToSlot(info.id, 9, targetSkillSet.c3);
             NineSlotsStatusRefresh();
             SkillStonesBox.target.RestFilter();
         }

@@ -5,7 +5,8 @@ using dataAccess;
 using DG.Tweening;
 using System.Collections.Generic;
 using UniRx;
-using Api.Dto.Model;
+using PlayFab;
+using PlayFab.ClientModels;
 
 public class FrontPage : MainSceneProcess
 {
@@ -62,7 +63,7 @@ public class FrontPage : MainSceneProcess
         string focusLocalid = TeamSet.Default.GetMonsterOfPlayerIdOnPos(0);
         if (focusLocalid == null)
         {
-            foreach (KeyValuePair<string, Api.Dto.Model.UnitInfo> keyValuePair in MyMonsters.Dic)
+            foreach (KeyValuePair<string, UnitInfo> keyValuePair in MyMonsters.Dic)
             {
                 focusLocalid = keyValuePair.Key;
                 break;
@@ -78,15 +79,20 @@ public class FrontPage : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        Account.GetUserData(UserDataLoadFinished);
-        Account.GetUserReadOnlyData(UserReadOnlyDataLoadFinished);
-        Account.GetStatistics(StatisticsLoadFinished);
+        PlayFabReadClient.GetUserData(
+            new GetUserDataRequest()
+            {
+                PlayFabId = Account._AccInfo.playerID,
+                Keys = new List<string>() { "PlayerName" }
+            },UserDataLoadFinished);
+        PlayFabReadClient.GetUserReadOnlyData(UserReadOnlyDataLoadFinished);
+        PlayFabReadClient.GetStatistics(StatisticsLoadFinished);
 
         //AccountCharsSet.LoadTutorial();
-        PlayFabRead.LoadItems(ItemsLoadFinished);
+        PlayFabReadClient.LoadItems(ItemsLoadFinished);
 
-        TeamSet.LoadTeamSet("arena", ArenaTFinished);
-        TeamSet.LoadTeamSet("arcade", ArcadeTFinished);
+        PlayFabReadClient.LoadTeamSet("arena", ArenaTFinished);
+        PlayFabReadClient.LoadTeamSet("arcade", ArcadeTFinished);
 
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {

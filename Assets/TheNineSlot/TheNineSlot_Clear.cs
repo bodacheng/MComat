@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using dataAccess;
-using Api.Dto.Model;
 
 namespace mainMenu
 {
@@ -21,8 +20,8 @@ namespace mainMenu
             if (MemberDetail.target._focusing == null)
                 return;
 
-            Api.Dto.Model.UnitInfo info = MemberDetail.target._focusing;
-            StoneOfPlayerInfo originSkillInfo = Stones.GetOriginSkillOfMonster(info.InstanceId);
+            UnitInfo info = MemberDetail.target._focusing;
+            StoneOfPlayerInfo originSkillInfo = Stones.GetOriginSkillOfMonster(info.id);
             foreach (SkillStoneSlot _slot in allSlot)
             {
                 SKStoneItem sK = _slot._DragAndDropCell.GetItem();

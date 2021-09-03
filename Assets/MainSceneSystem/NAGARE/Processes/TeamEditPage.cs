@@ -30,7 +30,7 @@ public class TeamEditPage : MainSceneProcess
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
         PreScene.target.TeamEditor.INITeamPosButtons(teammode);
         if (MemberDetail.target._focusing != null)
-            PreScene.target.TeamEditor._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.InstanceId);
+            PreScene.target.TeamEditor._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.id);
         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(true);
         MonsterBox.DisplayMonsterIcons(true);
         PreScene.target.TeamEditor.AddHeroIconFeaturesToMonsterBox(teammode);// 该处理紧随MonsterBox.DisplayMonsterIcons之后

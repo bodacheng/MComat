@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using dataAccess;
-using Api.Dto.Model;
 using System.Collections.Generic;
 using System;
 
@@ -9,15 +8,15 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public void UpdateStonesBaseOnSlots(Api.Dto.Model.UnitInfo info)
+        public void UpdateStonesBaseOnSlots(UnitInfo info)
         {
             SkillSet.SkillEditError valR = target.CheckEditBasedOnCurrent();
             if (valR != SkillSet.SkillEditError.Perfect)
             {
-                target.ValiationWarn(valR, info.InstanceId);
+                target.ValiationWarn(valR, info.id);
                 return;
             }
-            List<StoneOfPlayerInfo> equiping = Stones.GetEquipingStones(info.InstanceId);
+            List<StoneOfPlayerInfo> equiping = Stones.GetEquipingStones(info.id);
             // slot stoneid
             IDictionary<string, string> beforeDic = new Dictionary<string, string>();
             for (int i = 0; i < equiping.Count; i++)
@@ -66,7 +65,7 @@ namespace mainMenu
                 {
                     if (afterDic[i.ToString()] != null)
                     {
-                        ToEditStones.Add(afterDic[i.ToString()], Tuple.Create(info.InstanceId, i.ToString()));
+                        ToEditStones.Add(afterDic[i.ToString()], Tuple.Create(info.id, i.ToString()));
                     }
                 }
             }

@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
-using Api.Dto.Model;
 using dataAccess;
 using System;
 
-public static class PlayFabRead
+public partial class PlayFabReadClient
 {
     public static void LoadItems(Action<int> finished)
     {
@@ -22,12 +21,12 @@ public static class PlayFabRead
                     switch (item.CatalogVersion)
                     {
                         case "Monsters":
-                            Api.Dto.Model.UnitInfo info = new Api.Dto.Model.UnitInfo
+                            UnitInfo info = new UnitInfo
                             {
-                                InstanceId = item.ItemInstanceId,
-                                monsterId = item.ItemId
+                                id = item.ItemInstanceId,
+                                r_id = item.ItemId
                             };
-                            DicAdd<string, Api.Dto.Model.UnitInfo>.Add(MyMonsters.Dic, item.ItemInstanceId, info);
+                            DicAdd<string, UnitInfo>.Add(MyMonsters.Dic, item.ItemInstanceId, info);
                             break;
                         case "stoneTest2":
                             StoneOfPlayerInfo Info = new StoneOfPlayerInfo
@@ -40,9 +39,18 @@ public static class PlayFabRead
                             };
                             Stones.Add(Info);
                             break;
+                        case "BoxTest":
+                            Debug.Log("One mail:" + item.ItemInstanceId);
+                            MailOfPlayerModel maildata = new MailOfPlayerModel
+                            {
+                                mailId = item.ItemInstanceId,
+                                title = item.DisplayName
+                            };
+                            MailManager.target.AddMailData(maildata);
+                            break;
                     }
                 }
-                Debug.Log("目前技能石总数量："+ Stones.Dic.Count);
+                Debug.Log("目前技能石总数量：" + Stones.Dic.Count);
                 foreach (var kv in result.VirtualCurrency)
                 {
                     switch (kv.Key)
@@ -65,4 +73,16 @@ public static class PlayFabRead
             });
     }
 
+    void Claim(string itemId)
+    {
+        PlayFabClientAPI.UnlockContainerItem(
+            new UnlockContainerItemRequest
+            {
+                CatalogVersion = "BoxTest",
+                ContainerItemId = itemId
+            },
+            resultCallback => { },
+            errorCallback => { }
+        );
+    }
 }

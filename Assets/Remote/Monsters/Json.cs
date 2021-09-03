@@ -3,18 +3,15 @@ using UnityEngine;
 using System.IO;
 using System;
 using Newtonsoft.Json;
-using System.Collections;
-using Api.Dto.Model;
-using Json;
 
 namespace dataAccess
 {
     public partial class MyMonsters
     {
-        public static List<Api.Dto.Model.UnitInfo> LoadAll_Json(string filePath)
+        public static List<UnitInfo> LoadAll_Json(string filePath)
         {
-            List<Api.Dto.Model.UnitInfo> charList = new List<Api.Dto.Model.UnitInfo>();
-            Api.Dto.Model.UnitInfo info;
+            List<UnitInfo> charList = new List<UnitInfo>();
+            UnitInfo info;
             if (Directory.Exists(filePath))
             {
                 foreach (string file in Directory.GetFiles(filePath))
@@ -22,7 +19,7 @@ namespace dataAccess
                     try
                     {
                         string dataAsJson = File.ReadAllText(file);
-                        info = JsonConvert.DeserializeObject<Api.Dto.Model.UnitInfo>(dataAsJson);
+                        info = JsonConvert.DeserializeObject<UnitInfo>(dataAsJson);
                         charList.Add(info);
                     }
                     catch (Exception e)
@@ -37,15 +34,15 @@ namespace dataAccess
         
         public static void LoadTutorial()
         {
-            List<Api.Dto.Model.UnitInfo> charList = new List<Api.Dto.Model.UnitInfo>();
+            List<UnitInfo> charList = new List<UnitInfo>();
             charList = LoadAll_Json(Application.persistentDataPath + "/TutorialCharacterInfos");
             Dic.Clear();
-            foreach (Api.Dto.Model.UnitInfo one in charList)
+            foreach (UnitInfo one in charList)
             {
-                if (!Dic.ContainsKey(one.InstanceId))
-                    Dic.Add(one.InstanceId, one);
+                if (!Dic.ContainsKey(one.id))
+                    Dic.Add(one.id, one);
                 else
-                    Debug.Log("重复的角色存档id：" + one.InstanceId);
+                    Debug.Log("重复的角色存档id：" + one.id);
             }
         }
     }

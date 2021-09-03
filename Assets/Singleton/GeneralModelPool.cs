@@ -78,8 +78,8 @@ public static class GeneralModelPool {
     
     public static IEnumerator GetMyModel(string localid)
     {
-        Api.Dto.Model.UnitInfo targetInfo = MyMonsters.Get(localid);
-        IEnumerator enumerator = GetModel(targetInfo.monsterId, true);
+        UnitInfo targetInfo = MyMonsters.Get(localid);
+        IEnumerator enumerator = GetModel(targetInfo.r_id, true);
         yield return enumerator;
         yield return enumerator.Current;
     }

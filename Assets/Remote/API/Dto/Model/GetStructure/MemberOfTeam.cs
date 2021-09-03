@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Api.Dto.Model
+namespace dataAccess
 {
     // 这个信息组成了一个角色与其对应的技能   
     public class MemberOfTeam
@@ -13,8 +13,8 @@ namespace Api.Dto.Model
         {
             global::UnitInfo unit = new global::UnitInfo
             {
-                r_id = MonsterInfo.monsterId,
-                id = MonsterInfo.InstanceId
+                r_id = MonsterInfo.r_id,
+                id = MonsterInfo.id
             };
             List<StoneOfPlayerInfo> targets = stones;
             SkillSet nineAndTwo = new SkillSet();

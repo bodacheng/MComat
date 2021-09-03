@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using mainMenu;
-using Api.Dto.Model;
+﻿using mainMenu;
+using dataAccess;
 
 // 阅读邮件，获取邮件附带的礼物应该都属于远程更新
 // 礼物其实可以靠代码来代表，服务器记录代码和礼物内容的对应关系
@@ -12,24 +11,18 @@ using Api.Dto.Model;
 public class MailDetailProcess : MainSceneProcess
 {
     public static string targetMailID;
-
+    
     public MailDetailProcess()
     {
         Step = MainSceneStep.MailDetail;
         EelementsInherit(PreScene.target);
     }
     
-    public IEnumerator EnterProcess()
+    public override void ProcessEnter()
     {
         MailOfPlayerModel mail = MailManager.target.Get(targetMailID);
         MailManager.target.Read(mail);
         MailManager.target.detailPartT.gameObject.SetActive(true);
-        yield break;
-    }
-    
-    public override void ProcessEnter()
-    {
-        mainProcessRunner.RunAsQueued(EnterProcess());
     }
     
     public override void ProcessEnd()

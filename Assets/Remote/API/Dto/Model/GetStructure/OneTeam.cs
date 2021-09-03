@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Api.Dto.Model
+namespace dataAccess
 {
     public class OneTeam
     {

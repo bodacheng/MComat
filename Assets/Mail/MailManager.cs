@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Api.Dto.Model;
+using dataAccess;
 using System.Collections.Generic;
 
 public class MailManager : MonoBehaviour {
@@ -25,19 +25,24 @@ public class MailManager : MonoBehaviour {
     
     public static MailManager target;
     
-    List<MailOfPlayerModel> myMailList = new List<MailOfPlayerModel>();
+    List<MailOfPlayerModel> _myMailList = new List<MailOfPlayerModel>();
     
     void Awake()
     {
         target = this;
     }
+
+    public void AddMailData(MailOfPlayerModel mailData)
+    {
+        _myMailList.Add(mailData);
+    }
     
     public MailOfPlayerModel Get(string mailID)
     {
-        for (int i = 0; i < myMailList.Count; i++)
+        for (int i = 0; i < _myMailList.Count; i++)
         {
-            if (myMailList[i].mailId == mailID)
-                return myMailList[i];
+            if (_myMailList[i].mailId == mailID)
+                return _myMailList[i];
         }
         return null;
     }
@@ -49,7 +54,7 @@ public class MailManager : MonoBehaviour {
         presentlifeRemain.text = model.presentlifeRemain;
     }
     
-    public void GenerateMailModels(List<MailOfPlayerModel> _myMailList)
+    public void GenerateMailModels()
     {
         foreach (Transform t in MailBoxT)
         {

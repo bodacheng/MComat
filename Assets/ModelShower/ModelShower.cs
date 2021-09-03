@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using dataAccess;
-using Api.Dto.Model;
 
 public class ModelShower : MonoBehaviour
 {
@@ -37,8 +36,8 @@ public class ModelShower : MonoBehaviour
 
     public IEnumerator ShowMyModel(string localID)
     {
-        Api.Dto.Model.UnitInfo targetInfo = MyMonsters.Get(localID);
-        IEnumerator enumerator = ShowModel(targetInfo != null ? targetInfo.monsterId : null);
+        UnitInfo targetInfo = MyMonsters.Get(localID);
+        IEnumerator enumerator = ShowModel(targetInfo != null ? targetInfo.r_id : null);
         yield return enumerator;
         yield return enumerator.Current;
     }

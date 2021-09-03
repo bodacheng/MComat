@@ -1,5 +1,4 @@
-﻿using Api.Dto.Model;
-using UnityEngine;
+﻿using UnityEngine;
 using dataAccess;
 using System.Collections;
 
@@ -9,7 +8,7 @@ namespace mainMenu
     {
         public void ValiationWarn(SkillSet.SkillEditError skillEditError, string monsterOfPlayerID)
         {
-            Api.Dto.Model.UnitInfo charInfo = MyMonsters.Get(monsterOfPlayerID);
+            UnitInfo charInfo = MyMonsters.Get(monsterOfPlayerID);
             switch(skillEditError)
             {
                 case SkillSet.SkillEditError.RepeatedSkill:

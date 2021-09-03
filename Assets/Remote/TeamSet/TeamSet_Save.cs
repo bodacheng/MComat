@@ -42,7 +42,7 @@ namespace dataAccess
                     targetModeCode = "arena";
                     break;
             }
-            PlayFabClientAPI.UpdateUserData(
+            PlayFabReadClient.UpdateUserData(
                 new UpdateUserDataRequest()
                 {
                     Data = new Dictionary<string, string>()
@@ -50,15 +50,7 @@ namespace dataAccess
                         {targetModeCode, JsonConvert.SerializeObject(form) }
                     }
                 },
-                result =>
-                {
-                    Debug.Log("Successfully updated Team Data of :" + Mode);
-                    success.Invoke(1);
-                },
-                errorCallback => {
-                    Debug.Log(errorCallback.Error);
-                    success.Invoke(-1);
-                }
+                success
             );
         }
     }

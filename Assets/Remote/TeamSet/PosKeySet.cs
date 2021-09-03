@@ -1,5 +1,4 @@
-﻿using Api.Dto.Model;
-using dataAccess;
+﻿using dataAccess;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,10 +57,10 @@ public class PosKeySet
         {
             if (PosNumsWithLocalKeys[i].instanceID != null)
             {
-                Api.Dto.Model.UnitInfo getUnitDetailModel = MyMonsters.Get(PosNumsWithLocalKeys[i].instanceID);
+                UnitInfo getUnitDetailModel = MyMonsters.Get(PosNumsWithLocalKeys[i].instanceID);
                 if (getUnitDetailModel != null)
                 {
-                    UnitInfo unitInfo = Api.Dto.Model.UnitInfo.GetCharDataInfo(getUnitDetailModel);
+                    UnitInfo unitInfo = UnitInfo.GetCharDataInfo(getUnitDetailModel);
                     multiDictionary.Set(0, PosNumsWithLocalKeys[i].posNum, unitInfo);
                 }
             }

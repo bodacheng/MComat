@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
-using Api.Dto.Model;
 
 namespace mainMenu
 {
@@ -109,14 +108,14 @@ namespace mainMenu
                 return;
             }
             
-            Api.Dto.Model.UnitInfo _one = MyMonsters.Get(SSInfo.inUsingMonsterOfPlayerId);
+            UnitInfo _one = MyMonsters.Get(SSInfo.inUsingMonsterOfPlayerId);
             if (_one == null)
             {
                 targetIcon.gameObject.SetActive(false);
                 return;
             }
             targetIcon.gameObject.SetActive(true);
-            CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.monsterId);
+            CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.r_id);
             targetIcon.ChangeIcon(charConfig == null ? null : MonsterIconDic.Get(charConfig.RECORD_ID),
             charConfig == null ? Zokusei.Null : charConfig._zokusei);
         }

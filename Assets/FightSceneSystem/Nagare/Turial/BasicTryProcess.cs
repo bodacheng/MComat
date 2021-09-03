@@ -88,8 +88,8 @@ public class BasicTryProcess : FSceneProcess
             }
         }
 
-        Api.Dto.Model.UnitInfo before = MyMonsters.Get("1");
-        UnitInfo characterDataInfo = Api.Dto.Model.UnitInfo.GetCharDataInfo(before);
+        UnitInfo before = MyMonsters.Get("1");
+        UnitInfo characterDataInfo = UnitInfo.GetCharDataInfo(before);
         adamInfo = characterDataInfo;
         yield break;
     }

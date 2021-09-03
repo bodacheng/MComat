@@ -1,7 +1,7 @@
 ﻿using System;
-using dataAccess;
 
-namespace Api.Dto.Model {
+namespace dataAccess
+{
 
     /// <summary>
     /// プレーヤ所有スキルストーン情報モデル

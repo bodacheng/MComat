@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using mainMenu;
-using Api.Dto.Model;
 using System.Collections.Generic;
 using dataAccess;
 using UniRx;
@@ -33,10 +32,10 @@ public class MonsterEditPage : MainSceneProcess
         SkillStonesBox.target._skillStoneDetail.Clear();
 
         // 没这行的话从技能石升级画面返回的话角色模型加载不出来
-        yield return MemberDetail.target.CharModelRender(Api.Dto.Model.UnitInfo.GetCharDataInfo(MemberDetail.target._focusing));
+        yield return MemberDetail.target.CharModelRender(UnitInfo.GetCharDataInfo(MemberDetail.target._focusing));
         
         // 表现系
-        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.monsterId);
+        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.r_id);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
             ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(), 5f),
@@ -56,7 +55,7 @@ public class MonsterEditPage : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        PlayFabRead.LoadItems(ItemsLoadFinished);
+        PlayFabReadClient.LoadItems(ItemsLoadFinished);
         
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
@@ -98,15 +97,15 @@ public class MonsterEditPage : MainSceneProcess
     // 1. 每次进入一次技能编辑画面，代表技能石头盒子进入了一个针对特定type角色的锁定状态，从而应该只生成一次相应type的石头
     // 2. 除非切换画面，否则石头应该不会再重新生成，进一步说，这次生成石头所进行的石头本地id发配环节(numinbox)也只能进行一次
     // 3. 除非切换画面，生成的石头应该是数量守恒的，如果消耗就消耗，绝不能出现逻辑错误导致的复制情况
-    void SkillEditButtonFeature(Api.Dto.Model.UnitInfo _AccCharInfo)
+    void SkillEditButtonFeature(UnitInfo _AccCharInfo)
     {
-        if (_AccCharInfo == null || _AccCharInfo.monsterId == null)
+        if (_AccCharInfo == null || _AccCharInfo.r_id == null)
         {
             Debug.Log("到达了没道理到达的地方");
             return;
         }
         TheNineSlot.target.ReadANineAndTwo(_AccCharInfo);
-        CharConfig _CharInfo = MonstersConfigTable.GetCharConfig(_AccCharInfo.monsterId);
+        CharConfig _CharInfo = MonstersConfigTable.GetCharConfig(_AccCharInfo.r_id);
         SkillStonesBox.target.SetFocusingType(_CharInfo.TYPE);
         SkillStonesBox.target.RestFilter();
         SkillStonesBox.target.EXTabsFeatureRefresh(false);
@@ -120,7 +119,7 @@ public class MonsterEditPage : MainSceneProcess
             SkillSet.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent();
             if (valR != SkillSet.SkillEditError.Perfect)
             {
-                TheNineSlot.target.ValiationWarn(valR, MemberDetail.target._focusing.InstanceId);
+                TheNineSlot.target.ValiationWarn(valR, MemberDetail.target._focusing.id);
                 return;
             }
 
@@ -154,7 +153,7 @@ public class MonsterEditPage : MainSceneProcess
         SkillEditButtonFeature_SP(MemberDetail.target._focusing);
         
         // 表现系
-        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.monsterId);
+        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.r_id);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
             ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(),5f),
@@ -167,14 +166,14 @@ public class MonsterEditPage : MainSceneProcess
     }
     
     // 技能浏览器版本
-    static void SkillEditButtonFeature_SP(Api.Dto.Model.UnitInfo _AccCharInfo)
+    static void SkillEditButtonFeature_SP(UnitInfo _AccCharInfo)
     {
-        if (_AccCharInfo == null || _AccCharInfo.monsterId == null)
+        if (_AccCharInfo == null || _AccCharInfo.r_id == null)
         {
             Debug.Log("到达了没道理到达的地方");
             return;
         }
-        CharConfig _CharInfo = MonstersConfigTable.GetCharConfig(_AccCharInfo.monsterId);
+        CharConfig _CharInfo = MonstersConfigTable.GetCharConfig(_AccCharInfo.r_id);
         SkillStonesBox.target.SetFocusingType(_CharInfo.TYPE);
         SkillStonesBox.target.RestFilter();
         SkillStonesBox.target.EXTabsFeatureRefresh(false);

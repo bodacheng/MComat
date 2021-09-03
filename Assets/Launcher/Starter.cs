@@ -45,10 +45,10 @@ public class Starter : MonoBehaviour
         int i = 0;
         foreach (CharConfig _CharConfig in charList)
         {
-            Api.Dto.Model.UnitInfo _Char = new Api.Dto.Model.UnitInfo
+            UnitInfo _Char = new UnitInfo
             {
-                monsterId = _CharConfig.RECORD_ID,
-                InstanceId = i.ToString()
+                id = _CharConfig.RECORD_ID,
+                r_id = i.ToString()
             };
                 
             KeyValuePair<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(_CharConfig.RECORD_ID);
@@ -67,7 +67,7 @@ public class Starter : MonoBehaviour
                 Stones.Add(stoneInfo);
             }
             Debug.Log("尝试将角色" + _CharConfig.REAL_NAME + "加入存档");
-            DicAdd<string, Api.Dto.Model.UnitInfo>.Add(MyMonsters.Dic, _Char.InstanceId, _Char);
+            DicAdd<string, UnitInfo>.Add(MyMonsters.Dic, _Char.id, _Char);
             i++;
         }
         SceneManager.LoadScene(1);
@@ -76,14 +76,14 @@ public class Starter : MonoBehaviour
     // 启动网络模式
     public void BeginNetMode()
     {
-        PlayFabLogin.CustomIDLogin(
+        PlayFabReadClient.CustomIDLogin(
             result => {
                 Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
                 Account._AccInfo = new PlayerAccountInfo
                 {
                     playerID = result.PlayFabId
                 };
-                PlayFabLogin.CheckIn();
+                CloudScript.CheckIn();
                 EnterFrontScene();
             },
             fail => {

@@ -216,6 +216,8 @@ public partial class NineForShow : MonoBehaviour
 
         void SS(SKStoneItem SK, Button BT)
         {
+            if (SK == null)
+                return;
             SK.transform.SetParent(BT.transform);
             SK.transform.localPosition = Vector3.zero;
             SK.transform.localScale = Vector3.one;

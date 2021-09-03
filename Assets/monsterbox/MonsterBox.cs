@@ -73,11 +73,11 @@ namespace mainMenu
 
         public static void AddOneNewIcon(string monsterOfPlayerId, bool clearButtonFeature)
         {
-            Api.Dto.Model.UnitInfo targetingCharInfo = MyMonsters.Get(monsterOfPlayerId);
-            CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(targetingCharInfo.monsterId);
+            UnitInfo targetingCharInfo = MyMonsters.Get(monsterOfPlayerId);
+            CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(targetingCharInfo.r_id);
             if (_CharConfig == null)
             {
-                Debug.Log("MonsterID:"+ targetingCharInfo.monsterId + " doesnt exist in this version");
+                Debug.Log("MonsterID:"+ targetingCharInfo.r_id + " doesnt exist in this version");
                 return;
             }
 
@@ -113,9 +113,9 @@ namespace mainMenu
         public static void MonsterIconsGenerate(bool clearButtonFeature)
         {
             selectingAccID = null;
-            foreach (KeyValuePair<string, Api.Dto.Model.UnitInfo> keyValuePair in MyMonsters.Dic)
+            foreach (KeyValuePair<string, UnitInfo> keyValuePair in MyMonsters.Dic)
             {
-                AddOneNewIcon(keyValuePair.Value.InstanceId, clearButtonFeature);
+                AddOneNewIcon(keyValuePair.Value.id, clearButtonFeature);
             }
             target._monsterboxFilter.RefreshTypeDropDown(typeOfMonstersIhave);
         }

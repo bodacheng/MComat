@@ -20,16 +20,11 @@ public class MailBoxProcess : MainSceneProcess
         EelementsInherit(PreScene.target);
     }
     
-    public IEnumerator EnterProcess()
+    public override void ProcessEnter()
     {
         MailManager.target.MailCanvas.gameObject.SetActive(true);
         MailManager.target.BoxPartT.gameObject.SetActive(true);
-        yield break;
-    }
-        
-    public override void ProcessEnter()
-    {
-        mainProcessRunner.RunAsQueued(EnterProcess());
+        MailManager.target.GenerateMailModels();
     }
     
     public override void ProcessEnd()

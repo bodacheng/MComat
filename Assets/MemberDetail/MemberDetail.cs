@@ -33,7 +33,7 @@ namespace mainMenu
         public Transform MemDetailTargetPos;
         public Transform MemDetailWatchPos;
         
-        public Api.Dto.Model.UnitInfo _focusing;
+        public UnitInfo _focusing;
         
         public static MemberDetail target;
         
@@ -46,7 +46,7 @@ namespace mainMenu
         public void SwitchChar()
         {
             List<string> keys = MonsterBox.mainMenuIcons.Keys.ToList();
-            int index = keys.IndexOf(_focusing.InstanceId);
+            int index = keys.IndexOf(_focusing.id);
             index--;
             if (index == -1)
                 index = keys.Count - 1;
@@ -92,7 +92,7 @@ namespace mainMenu
         
         public void RefreshMemberDetailPageByFocusingChar()
         {
-            if (_focusing == null || _focusing.InstanceId == null || _focusing.monsterId == null)
+            if (_focusing == null || _focusing.id == null || _focusing.r_id == null)
             {
                 SkillShowButton.onClick.RemoveAllListeners();
                 SkillEditButton.onClick.RemoveAllListeners();
@@ -100,16 +100,16 @@ namespace mainMenu
                 return;
             }
             
-            CharConfig Ref = MonstersConfigTable.GetCharConfig(_focusing.monsterId);
+            CharConfig Ref = MonstersConfigTable.GetCharConfig(_focusing.r_id);
             if (Ref == null)
             {
-                Debug.Log("No this monster:" + _focusing.monsterId);
+                Debug.Log("No this monster:" + _focusing.r_id);
                 return;
             }
             BackGroundPS.target.ChangeBGByZokusei(Ref._zokusei);
             
             // mini nineslot show
-            _NineForShow.ShowStones_Acc(_focusing.InstanceId);
+            _NineForShow.ShowStones_Acc(_focusing.id);
             
             MemberInfoT.gameObject.SetActive(true);
             // show按钮功能加载
@@ -120,7 +120,7 @@ namespace mainMenu
             }
             void SkillShow()
             {
-                if (target._focusing.InstanceId != null)
+                if (target._focusing.id != null)
                     PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillShow, true);
             }
             SkillShowButton.onClick.AddListener(step2INI);
@@ -130,7 +130,7 @@ namespace mainMenu
             SkillEditButton.onClick.RemoveAllListeners();
             void SkillEdit()
             {
-                if (target._focusing.InstanceId != null)
+                if (target._focusing.id != null)
                     PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit, true);
             }
             SkillEditButton.onClick.AddListener(SkillEdit);
@@ -146,7 +146,7 @@ namespace mainMenu
             //selfdefindtag.onValueChanged.AddListener(delegate { definemycharactertag(); });
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.RunAsQueued(CharModelRender(Api.Dto.Model.UnitInfo.GetCharDataInfo(_focusing)));
+            presentationProcessRunner.RunAsQueued(CharModelRender(UnitInfo.GetCharDataInfo(_focusing)));
         }
         
         public IEnumerator CharModelRender(UnitInfo info)
@@ -183,17 +183,17 @@ namespace mainMenu
         // 纯表现系
         public void SkillEditConfirmAnimation()
         {
-            CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(_focusing.monsterId);
+            CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(_focusing.r_id);
             string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
             EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
         }
 
         // 里面一个非常大的重点是执行了BO_Ani_E模块的初始化
-        public IEnumerator Step2INIForUIRefresh(Api.Dto.Model.UnitInfo accCharInfo)
+        public IEnumerator Step2INIForUIRefresh(UnitInfo accCharInfo)
         {
             if (accCharInfo != null)
             {
-                IEnumerator focusingOneModel = GeneralModelPool.GetMyModel(accCharInfo.InstanceId);
+                IEnumerator focusingOneModel = GeneralModelPool.GetMyModel(accCharInfo.id);
                 yield return focusingOneModel;
                 if (focusingOneModel.Current == null)
                 {
@@ -207,8 +207,8 @@ namespace mainMenu
                     yield break;
                 }
 
-                CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(accCharInfo.monsterId);
-                UnitInfo characterDataInfo = Api.Dto.Model.UnitInfo.GetCharDataInfo(accCharInfo);
+                CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(accCharInfo.r_id);
+                UnitInfo characterDataInfo = UnitInfo.GetCharDataInfo(accCharInfo);
                 yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.TYPE, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
                 yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.TYPE, characterDataInfo.set, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);
                 

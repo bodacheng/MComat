@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Api.Dto.Model
+namespace dataAccess
 {
     /// <summary>
     /// プレーヤ所有出戦チームモデル

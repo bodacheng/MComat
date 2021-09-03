@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using dataAccess;
-using Api.Dto.Model;
 using UnityEngine.UI;
 
 namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public void ReadANineAndTwo(Api.Dto.Model.UnitInfo _AccCharInfo)
+        public void ReadANineAndTwo(UnitInfo _AccCharInfo)
         {
             ForceClearAll();
             
@@ -18,7 +16,7 @@ namespace mainMenu
                 Debug.Log("严重错误");
                 return;
             }
-            List<StoneOfPlayerInfo> equipingstones = Stones.GetEquipingStones(_AccCharInfo.InstanceId);
+            List<StoneOfPlayerInfo> equipingstones = Stones.GetEquipingStones(_AccCharInfo.id);
 
             for (int i = 1; i <= 9; i++)
             {
