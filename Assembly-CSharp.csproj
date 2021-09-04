@@ -204,6 +204,7 @@
     <Compile Include="Assets/JsonSupport/UnityLitJson/Extensions.cs" />
     <Compile Include="Assets/RPGTALK/Scripts/Helpers/TMP_Translator.cs" />
     <Compile Include="Assets/StagesManagement/StageButton.cs" />
+    <Compile Include="Assets/Setting/PlayfabSetting.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Panel/SplashScreenManager.cs" />
     <Compile Include="Assets/BOWeaponSystem/Decompositioner.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Buttons/ChapterButton.cs" />
@@ -658,7 +659,6 @@
     <Compile Include="Assets/EffectsSystem/HitBoxSubEventManger.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/UI Element/UIElementSound.cs" />
     <Compile Include="Assets/DynamicStarrySky/Scripts/StarPoint.cs" />
-    <Compile Include="Assets/PlayFab/PlayfabSetting.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Asstes/enviroments/Top-Down Dungeons2/Standard Assets/Effects/ImageEffects/Shaders/Tonemapper.shader" />

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using dataAccess;
 
-public class FightGlobalSetting : MonoBehaviour
+[CreateAssetMenu(fileName = "FightGlobalSetting", menuName = "ScriptableObjects/FightGlobalSetting", order = 1)]
+public class FightGlobalSetting : ScriptableObject
 {
     public ProgramMode programMode = ProgramMode.normal;
     public bool IgnoreStoneTexture = false;
@@ -105,7 +106,7 @@ public class FightGlobalSetting : MonoBehaviour
         skillShow = 1
     }
     
-    void Awake()
+    public void Initialise()
     {
         _programMode = programMode;
         _IgnoreStoneTexture = IgnoreStoneTexture;

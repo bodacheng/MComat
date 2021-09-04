@@ -3,15 +3,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using mainMenu;
 using System.Collections.Generic;
-using Api.Dto.Model;
 using Skill;
 
 public class Starter : MonoBehaviour
 {
     public bool enterFrontPageFirst;
-    
+    public PlayfabSetting PlayfabSetting;
+    public FightGlobalSetting FightGlobalSetting;
+
     void EnterFrontScene()
     {
+        FightGlobalSetting.Initialise();
+        PlayfabSetting.Initialise();
         if (enterFrontPageFirst)
         {
             FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);

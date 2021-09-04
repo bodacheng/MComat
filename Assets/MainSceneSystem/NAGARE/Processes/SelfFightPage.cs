@@ -1,35 +1,24 @@
 ﻿using mainMenu;
-using Cysharp.Threading.Tasks;
 
 public class SelfFightPage : MainSceneProcess
-{
-    public void temp()
-    {
-        _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
-        MonsterBox.target.MonsterBoxContainer.gameObject.SetActive(true);
-        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
-        _SelfFightManager.SwitchToRotationMode();
-        PageTo.Go(MainSceneStep.SelfFightFront);
-        MonsterBox.target.Open(true);
-    }
-    
+{    
     public SelfFightPage()
     {
         Step = MainSceneStep.SelfFightFront;
         EelementsInherit(PreScene.target);
     }
 
-    public async UniTask enter()
-    {
-        MonsterBox.DisplayMonsterIcons(true);
-        _SelfFightManager.AddHeroIconFeaturesToMonsterBox();
-        temp();
-    }
-
     public override void ProcessEnter()
     {
         mainProcessRunner.RunFreely(ModelShower.target.ShowMyModel(null));
-        mainProcessRunner.RunAsQueued(enter());        
+        MonsterBox.DisplayMonsterIcons(true);
+        _SelfFightManager.AddHeroIconFeaturesToMonsterBox();
+        _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
+        MonsterBox.target.MonsterBoxContainer.gameObject.SetActive(true);
+        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
+        _SelfFightManager.SwitchToRotationMode();
+        PageTo.Go(MainSceneStep.SelfFightFront);
+        MonsterBox.target.Open(true);
     }
     
     public override void ProcessEnd()
