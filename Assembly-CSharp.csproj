@@ -73,6 +73,7 @@
     <Compile Include="Assets/Singleton/TeamConfig.cs" />
     <Compile Include="Assets/Resources/effectsresource/MagicArsenal/Effects/Scripts/MagicLightFlicker.cs" />
     <Compile Include="Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/PowerEstimateTable.cs" />
+    <Compile Include="Assets/PlayFab/Client/Item.cs" />
     <Compile Include="Assets/MasterDataTool/MasterDataTool_Unit.cs" />
     <Compile Include="Assets/DummyLayerSystem/LayerDefine/TitleScreenLayer.cs" />
     <Compile Include="Assets/StagesManagement/StagesManagerGUI/SkillSetComment.cs" />
@@ -125,7 +126,7 @@
     <Compile Include="Assets/AI/AI_states/states/Hurts/Hurt_State_Hight.cs" />
     <Compile Include="Assets/Personality/Personality_events.cs" />
     <Compile Include="Assets/StagesManagement/StagesManagerGUI/SlotFocus.cs" />
-    <Compile Include="Assets/Scene/ABLoadScene/downloads/downloads_configs.cs" />
+    <Compile Include="Assets/CachLogic/downloads_configs.cs" />
     <Compile Include="Assets/POS_Sys/Parent_Label.cs" />
     <Compile Include="Assets/AI/AI_states/states/GetUp_State.cs" />
     <Compile Include="Assets/Remote/Item/Currencies.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="Assets/StagesManagement/StagesManagerGUI/StagesManagerGUI.cs" />
     <Compile Include="Assets/Remote/API/Dto/Model/Common/AbstractModel.cs" />
     <Compile Include="Assets/Asstes/JMO Assets/MatCap Shaders/Demo/Assets/MC_AutoRotate.cs" />
+    <Compile Include="Assets/PlayFab/Client/Login.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/SkillStone/StonesPage.cs" />
     <Compile Include="Assets/PlayFab/Defs/PFSKSTDefine.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Panel/MainPanelManager.cs" />
@@ -224,6 +226,7 @@
     <Compile Include="Assets/Asstes/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Scripts/UniqueProjectiles/RotateToMouseScript.cs" />
     <Compile Include="Assets/ResourceLoading/EffectsLoad/EffectsManager.cs" />
     <Compile Include="Assets/Remote/API/Dto/Model/Common/BasicVoidModel.cs" />
+    <Compile Include="Assets/PlayFab/Client/Purchase.cs" />
     <Compile Include="Assets/AI/AI_states/states/Hurts/Hurt_State.cs" />
     <Compile Include="Assets/DummyLayerSystem/LayerDefine/FightResultAnimLayer.cs" />
     <Compile Include="Assets/AnimControl/StateStartsRandom.cs" />
@@ -278,7 +281,7 @@
     <Compile Include="Assets/DummyLayerSystem/LayerDefine/ArcadeFightResult.cs" />
     <Compile Include="Assets/MissionWatcher/MissionWatcher.cs" />
     <Compile Include="Assets/Remote/Account/Account.cs" />
-    <Compile Include="Assets/Scene/ABLoadScene/downloads/downloads_anim.cs" />
+    <Compile Include="Assets/CachLogic/downloads_anim.cs" />
     <Compile Include="Assets/Monsterbox/SSLevelUpManager/LevelExpConfig.cs" />
     <Compile Include="Assets/Monsterbox/SkillStoneBoxTabEffectsManager.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/Shop/StoneBoxExpansion.cs" />
@@ -302,7 +305,7 @@
     <Compile Include="Assets/TheNineSlot/SkillStoneSlot.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Other/CanvasManager.cs" />
     <Compile Include="Assets/StagesManagement/StagesManagerGUI/UI_Ini.cs" />
-    <Compile Include="Assets/Scene/ABLoadScene/downloads/downloads_effects.cs" />
+    <Compile Include="Assets/CachLogic/downloads_effects.cs" />
     <Compile Include="Assets/SimpleDragAndDrop/Scripts/Cell/StoneCell_returnToBox.cs" />
     <Compile Include="Assets/AI/HitBoxLogger.cs" />
     <Compile Include="Assets/Remote/API/Dto/Model/GetStructure/SkillStoneGotchaInfoModel.auto.cs" />
@@ -326,6 +329,7 @@
     <Compile Include="Assets/UI/SciFic Icons/Scripts/IconScript.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Buttons/FavoriteButton.cs" />
     <Compile Include="Assets/SkillStoneBox/SkillStonesBox_ShowMode.cs" />
+    <Compile Include="Assets/PlayFab/Client/Statistics.cs" />
     <Compile Include="Assets/TutorialManger/TutorialLogger.cs" />
     <Compile Include="Assets/DummyLayerSystem/LayerDefine/ArenaFightOver.cs" />
     <Compile Include="Assets/Asstes/FloatingCombatText/DemoScene/DemoController.cs" />
@@ -346,7 +350,7 @@
     <Compile Include="Assets/Ultimate Joystick/_Examples/Spaceship Example/Scripts/GameManager.cs" />
     <Compile Include="Assets/StagesManagement/QuestPreparePage/FightPreparePage.cs" />
     <Compile Include="Assets/TutorialManger/processes/FillASlot/SkillEditTry_A3Filled.cs" />
-    <Compile Include="Assets/Scene/ABLoadScene/downloads/downloads_model.cs" />
+    <Compile Include="Assets/CachLogic/downloads_model.cs" />
     <Compile Include="Assets/Asstes/ErbGameArt/Sword slash FX/Demo scene/DemoToonVFX.cs" />
     <Compile Include="Assets/Asstes/Malbers Animations/Common/Scripts/Events/UnityEventRaiser.cs" />
     <Compile Include="Assets/AudioManager/AudioManager.cs" />
@@ -432,6 +436,7 @@
     <Compile Include="Assets/ImagineVR/CameraCensorship.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/SkillStone/StoneSell.cs" />
     <Compile Include="Assets/RPGTALK/Scripts/RPGTalkCinematic/RPGTalkCinematicTrack.cs" />
+    <Compile Include="Assets/PlayFab/CloudScripts/CheckIn.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Other/ExitToSystem.cs" />
     <Compile Include="Assets/AI/GUI/SkillOptions.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/SceneProcess.cs" />
@@ -454,7 +459,7 @@
     <Compile Include="Assets/DATA_CENTER/Chracter_DATA_CENTER/OutsideDataLink.cs" />
     <Compile Include="Assets/AI/Soul/SkillSet/SkillSet_Tools.cs" />
     <Compile Include="Assets/TheNineSlot/TheNineSlot_RandomAdd.cs" />
-    <Compile Include="Assets/Scene/ABLoadScene/downloads/DownLoad_CMM.cs" />
+    <Compile Include="Assets/CachLogic/DownLoad_CMM.cs" />
     <Compile Include="Assets/RPGTALK/Scripts/RPGTalkLocalizationString.cs" />
     <Compile Include="Assets/DynamicStarrySky/Demos/Space/Scripts/SpinPlanet.cs" />
     <Compile Include="Assets/AI/AI_states/AI_States_Blueprints/TriggerConditions/BehaviorTriggerCondition.cs" />
@@ -468,7 +473,7 @@
     <Compile Include="Assets/JsonSupport/UnityLitJson/JsonMapper.cs" />
     <Compile Include="Assets/AI/Soul/SkillSet/RandomSet/RandomSkillSet_Acc.cs" />
     <Compile Include="Assets/TutorialManger/processes/ConfirmQuest1.cs" />
-    <Compile Include="Assets/Scene/ABLoadScene/downloads/CachDownLoadMission.cs" />
+    <Compile Include="Assets/CachLogic/CachDownLoadMission.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/Mail/MailDetailProcess.cs" />
     <Compile Include="Assets/SKillAnalyzer/SKillAnalyzer.cs" />
     <Compile Include="Assets/Arena/ArenaFightTeamDisplay.cs" />
@@ -547,7 +552,7 @@
     <Compile Include="Assets/DATA_CENTER/Chracter_DATA_CENTER/Data_Center.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Buttons/SpotlightButton.cs" />
     <Compile Include="Assets/SkillStoneBox/SkillStonesBox_SKillShower.cs" />
-    <Compile Include="Assets/Scene/ABLoadScene/downloads/downloads_charcomponents.cs" />
+    <Compile Include="Assets/CachLogic/downloads_charcomponents.cs" />
     <Compile Include="Assets/RPGTALK/Scripts/Helpers/TextWithIcon.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/MonsterEditPage.cs" />
     <Compile Include="Assets/AI/Soul/BuffsRunner.cs" />
@@ -555,6 +560,7 @@
     <Compile Include="Assets/Mail/MailManager.cs" />
     <Compile Include="Assets/BOWeaponSystem/Health System/Health_BasicClasses.cs" />
     <Compile Include="Assets/UI/Oldscripts/PUNMenu.cs" />
+    <Compile Include="Assets/PlayFab/Client/UserData.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Event/PointerEnterEvents.cs" />
     <Compile Include="Assets/ResourceLoading/HurtObjectLoad/HurtObjectManager_Cach.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs" />
@@ -595,7 +601,7 @@
     <Compile Include="Assets/Asstes/Sci-Fi Arsenal/InteractiveDemo/Demo Scripts/SciFiDragMouseOrbit.cs" />
     <Compile Include="Assets/ResourceLoading/UnitCreator/UnitCreator_StreamingAssets.cs" />
     <Compile Include="Assets/JsonSupport/UnityLitJson/JsonAttribute.cs" />
-    <Compile Include="Assets/Scene/ABLoadScene/downloads/ResourceDownLoad.cs" />
+    <Compile Include="Assets/CachLogic/ResourceDownLoad.cs" />
     <Compile Include="Assets/MainSceneSystem/HollowOutMask.cs" />
     <Compile Include="Assets/Resources/effectsresource/MagicArsenal/Effects/Scripts/MagicLightFade.cs" />
     <Compile Include="Assets/FightingSceneUISystem/HeroIcon.cs" />
@@ -652,12 +658,7 @@
     <Compile Include="Assets/EffectsSystem/HitBoxSubEventManger.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/UI Element/UIElementSound.cs" />
     <Compile Include="Assets/DynamicStarrySky/Scripts/StarPoint.cs" />
-    <Compile Include="Assets/PlayFab/Client/Item.cs" />
-    <Compile Include="Assets/PlayFab/Client/UserData.cs" />
-    <Compile Include="Assets/PlayFab/Client/Statistics.cs" />
-    <Compile Include="Assets/PlayFab/Client/Login.cs" />
-    <Compile Include="Assets/PlayFab/CloudScripts/CheckIn.cs" />
-    <Compile Include="Assets/PlayFab/Client/Purchase.cs" />
+    <Compile Include="Assets/PlayFab/PlayfabSetting.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Asstes/enviroments/Top-Down Dungeons2/Standard Assets/Effects/ImageEffects/Shaders/Tonemapper.shader" />

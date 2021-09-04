@@ -44,6 +44,7 @@ public partial class PlayFabReadClient
                             MailOfPlayerModel maildata = new MailOfPlayerModel
                             {
                                 mailId = item.ItemInstanceId,
+                                itemId = item.ItemId,
                                 title = item.DisplayName
                             };
                             MailManager.target.AddMailData(maildata);
@@ -73,16 +74,21 @@ public partial class PlayFabReadClient
             });
     }
 
-    void Claim(string itemId)
+    public static void ClaimPresent(string itemId)
     {
+        Debug.Log("try open box:" + itemId);
         PlayFabClientAPI.UnlockContainerItem(
             new UnlockContainerItemRequest
             {
                 CatalogVersion = "BoxTest",
                 ContainerItemId = itemId
             },
-            resultCallback => { },
-            errorCallback => { }
+            resultCallback => {
+                Debug.Log(":"+ resultCallback.UnlockedItemInstanceId);
+            },
+            errorCallback => {
+                Debug.Log(errorCallback.Error);
+            }
         );
     }
 }

@@ -21,6 +21,7 @@ public class MailManager : MonoBehaviour {
     public Text title;
     public Text message;
     public Text presentlifeRemain;
+    public Button ClaimPresentBtn;
     #endregion
     
     public static MailManager target;
@@ -52,6 +53,8 @@ public class MailManager : MonoBehaviour {
         title.text = model.title;
         message.text = model.message;
         presentlifeRemain.text = model.presentlifeRemain;
+        ClaimPresentBtn.onClick.RemoveAllListeners();
+        ClaimPresentBtn.onClick.AddListener(()=> PlayFabReadClient.ClaimPresent(model.itemId));
     }
     
     public void GenerateMailModels()

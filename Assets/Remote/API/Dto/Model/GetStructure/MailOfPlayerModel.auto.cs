@@ -20,6 +20,8 @@ namespace dataAccess
         /// </summary>
         public string mailId { get; set; }
 
+        public string itemId { get; set; }
+
         public string title { get; set; }
 
         public string message { get; set; }
