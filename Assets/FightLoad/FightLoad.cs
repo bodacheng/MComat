@@ -34,7 +34,7 @@ public static class FightLoad
         NetFightScene.Fight = stage;
 
         Stones.PreventStonesFromDestroy();
-        ArcadeManager.ArcadeStages.Clear();
+        ArcadeTop.ArcadeStages.Clear();
         GeneralModelPool.Clear();
         SceneManager.LoadScene(2);
     }

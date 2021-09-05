@@ -52,7 +52,7 @@ public class FightResultAnim : FSceneProcess
         Time.timeScale = 1f;
 
         FightResultAnimLayer fightResultAnimLayer = UILayerLoader.Load
-            (NetFightScene.target.T, "FightResultAnimLayer") as FightResultAnimLayer;
+            (NetFightScene.target.T.gameObject, "FightResultAnimLayer") as FightResultAnimLayer;
         
         switch (FightLogger.target.GetWinner())
         {

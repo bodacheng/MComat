@@ -29,7 +29,6 @@ public class MailBoxProcess : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
         MailManager.target.BoxPartT.gameObject.SetActive(false);
     }
 }

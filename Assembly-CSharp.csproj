@@ -69,7 +69,6 @@
     <Compile Include="Assets/LoadingCanvas/LoadingCanvas.cs" />
     <Compile Include="Assets/TutorialManger/TutorialRunner.cs" />
     <Compile Include="Assets/AI/AI_states/states/Empty_State.cs" />
-    <Compile Include="Assets/StagesManagement/ArcadeManager/ArcadeManager.cs" />
     <Compile Include="Assets/Singleton/TeamConfig.cs" />
     <Compile Include="Assets/Resources/effectsresource/MagicArsenal/Effects/Scripts/MagicLightFlicker.cs" />
     <Compile Include="Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/PowerEstimateTable.cs" />
@@ -166,7 +165,6 @@
     <Compile Include="Assets/Asstes/Sci-Fi Arsenal/InteractiveDemo/Demo Scripts/SciFiLoadSceneOnClick2.cs" />
     <Compile Include="Assets/TutorialManger/processes/ClickTeamEditSlotOne.cs" />
     <Compile Include="Assets/AI/AI_states/states/Hurts/Hurt_State_light.cs" />
-    <Compile Include="Assets/StagesManagement/ArcadeManager/Pages.cs" />
     <Compile Include="Assets/Asstes/Sci-Fi Arsenal/Sci-Fi Effects/Scripts/SciFiLightFlicker.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/BoxOverLoadFix.cs" />
     <Compile Include="Assets/StagesManagement/StagesManagerGUI/ScriptRead.cs" />
@@ -449,7 +447,6 @@
     <Compile Include="Assets/FightSceneSystem/Nagare/PreparingProcess.cs" />
     <Compile Include="Assets/ImportantDefinition/Monster/MonstersConfigTable.cs" />
     <Compile Include="Assets/Remote/Stone/Remove.cs" />
-    <Compile Include="Assets/StagesManagement/ArcadeManager/Pages_Chapter.cs" />
     <Compile Include="Assets/POS_Sys/Position_Set_Executor.cs" />
     <Compile Include="Assets/Asstes/FloatingCombatText/Scripts/CombatTextAnchorController.cs" />
     <Compile Include="Assets/DynamicStarrySky/Scripts/MoonPositionHelper.cs" />
@@ -620,7 +617,6 @@
     <Compile Include="Assets/Asstes/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/Scripts/UniqueProjectiles/CameraShakeSimpleScript.cs" />
     <Compile Include="Assets/RPGTALK/Scripts/Snippets/RPGTalkSkipCutscene.cs" />
     <Compile Include="Assets/BOWeaponSystem/Health System/BO_Limb.cs" />
-    <Compile Include="Assets/StagesManagement/ArcadeManager/Pages_Mugen.cs" />
     <Compile Include="Assets/Remote/Stone/ShowAllMyStoneLevel.cs" />
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/ArcadeFrontPage.cs" />
     <Compile Include="Assets/PlayFab/CloudScripts/Gotcha.cs" />
@@ -659,6 +655,8 @@
     <Compile Include="Assets/EffectsSystem/HitBoxSubEventManger.cs" />
     <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/UI Element/UIElementSound.cs" />
     <Compile Include="Assets/DynamicStarrySky/Scripts/StarPoint.cs" />
+    <Compile Include="Assets/DummyLayerSystem/LayerDefine/MainTop.cs" />
+    <Compile Include="Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Asstes/enviroments/Top-Down Dungeons2/Standard Assets/Effects/ImageEffects/Shaders/Tonemapper.shader" />

@@ -10,6 +10,10 @@ namespace mainMenu
         public static PreScene target;
 
         [Space(7)]
+        [Header("T")]
+        public GameObject T;
+
+        [Space(7)]
         [Header("主进程处理器")]
         public SingleThreadProcesser mainProcessRunner;
 
@@ -43,7 +47,6 @@ namespace mainMenu
         
         [Space(7)]
         [Header("若干子画面的总RectTransfrom")]
-        public RectTransform MainMenuBottonsT;
         public RectTransform ArcadeTeamEditT;
         
         void Awake()
@@ -133,8 +136,6 @@ namespace mainMenu
             HeroIcon.INIFrames();
             SkillStonesBox.target = _SkillStonesBox_NineSlot;
             _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
-            // 关卡按钮一次生成就可以
-            ArcadeManager.target.INIArcadeStageButtons();
             TheNineSlot.target.StartUp();
             _SelfFightManager.INITeamPosButtons();
 

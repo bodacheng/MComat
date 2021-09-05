@@ -38,7 +38,6 @@ public class StonesPage : MainSceneProcess
     {
         LoadingCanvas.target.DarkOffDirectly(1f);
         PageTo.Go(MainSceneStep.SkillStoneList);
-        PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {

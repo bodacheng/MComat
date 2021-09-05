@@ -23,7 +23,7 @@
             LoadingCanvas.target.Loading_Canvas.gameObject.SetActive(false);
             if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
             {
-                TitleScreenLayer TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T, "TitleScreenLayer") as TitleScreenLayer;
+                TitleScreenLayer TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
                 TitleScreenLayer.Initialise(FightOverControl.target.ReturnToFront);
             }else{
                 NetFightScene.target.FightCanvas.gameObject.SetActive(true);

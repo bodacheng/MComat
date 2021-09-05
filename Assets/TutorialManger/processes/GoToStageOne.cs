@@ -33,7 +33,7 @@ public class GoToStageOne : TutorialProcess
         {
             if (_arcadeFrontPage.loadFinished)
             {
-                LoadingCanvas.target.HigtLightRect(ArcadeManager.target.GetStageButton(1).button.transform);
+                //LoadingCanvas.target.HigtLightRect(ArcadeManager.target.GetStageButton(1).button.transform);
                 missionCompleted = true;
             }
         }

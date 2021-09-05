@@ -52,9 +52,14 @@ public class FrontPage : MainSceneProcess
         EelementsInherit(PreScene.target);
     }
 
+    MainTop mainTop;
     public IEnumerator EnterProcess()
     {
         PageTo.Go(MainSceneStep.FrontPage);
+
+        mainTop = UILayerLoader.Load(PreScene.target.T, "MainTop") as MainTop;
+        mainTop.Initialise(PreScene.target);
+
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 2.2f, 0.1f);
         MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
@@ -72,7 +77,6 @@ public class FrontPage : MainSceneProcess
         MemberDetail.target.SetMemberDetailFocusingChar(focusLocalid);//确立focusing角色
         yield return ModelShower.target.ShowMyModel(focusLocalid);
         MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
-        PreScene.target.MainMenuBottonsT.gameObject.SetActive(true);
         UpperInfoBar.target.T.gameObject.SetActive(true);
         Debug.Log("front ended");
     }
@@ -108,6 +112,9 @@ public class FrontPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
+        if (mainTop != null)
+            GameObject.Destroy(mainTop.gameObject);
+
         missionWatcher.DisposeAll();
         UserDataLoadFinished(0);
         ItemsLoadFinished(0);
@@ -115,7 +122,6 @@ public class FrontPage : MainSceneProcess
         StatisticsLoadFinished(0);
 
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
-        PreScene.target.MainMenuBottonsT.gameObject.SetActive(false);
         UpperInfoBar.target.T.gameObject.SetActive(false);
         BigButtonRender.target.TestOff();
     }

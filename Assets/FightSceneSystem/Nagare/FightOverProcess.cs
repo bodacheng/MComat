@@ -27,7 +27,7 @@ namespace FightScene
                         CloudScript.ArenaPointUpBy1(
                             () =>
                             {
-                                ArenaFightOver a = UILayerLoader.Load(NetFightScene.target.T, "ArenaFightOver") as ArenaFightOver;
+                                ArenaFightOver a = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;
                                 a.Initialise(FightOverControl.target.ReturnToFront);
                             },
                             () =>
@@ -38,7 +38,7 @@ namespace FightScene
                     }
                     else
                     {
-                        ArenaFightOver a = UILayerLoader.Load(NetFightScene.target.T, "ArenaFightOver") as ArenaFightOver;
+                        ArenaFightOver a = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;
                         a.Initialise(FightOverControl.target.ReturnToFront);
                     }
                     //FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
@@ -68,10 +68,10 @@ namespace FightScene
                                 
                                 void LoadNextLevel()
                                 {
-                                    NetFightScene.Fight = ArcadeManager.ArcadeStages[NetFightScene.Fight.ID + 1].stageConfig;
+                                    NetFightScene.Fight = ArcadeTop.ArcadeStages[NetFightScene.Fight.ID + 1].stageConfig;
                                     FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
                                 }
-                                ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T, "ArcadeFightResult") as ArcadeFightResult;
+                                ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArcadeFightResult;
                                 cc.Initialise(FightOverControl.target.ReturnToFront, 
                                     FightOverControl.target.LocalGameRestart, 
                                     LoadNextLevel,
@@ -84,7 +84,7 @@ namespace FightScene
                     }
                     break;
                 case FightEventType.Self:
-                    CommonFightResult c = UILayerLoader.Load(NetFightScene.target.T, "CommonFightResult") as CommonFightResult;
+                    CommonFightResult c = UILayerLoader.Load(NetFightScene.target.T.gameObject, "CommonFightResult") as CommonFightResult;
                     c.Initialise(FightOverControl.target.ReturnToFront, FightOverControl.target.LocalGameRestart);
                     c.ShowSKillSets(RTFightManager.target.team1, c.GetIconAndSKillShowUISetT());
                     break;
