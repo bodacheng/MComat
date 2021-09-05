@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnitCatalog: Monsters
   StoneCatalog: stoneTest2
+  MailCatalog: BoxTest
   GoldCode: GD
   DiamondCode: DM

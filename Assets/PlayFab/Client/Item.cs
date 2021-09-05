@@ -71,7 +71,7 @@ public partial class PlayFabReadClient
             });
     }
 
-    public static void ClaimPresent(string itemId)
+    public static void ClaimPresent(string itemId, Action saveAsRead)
     {
         Debug.Log("try open box:" + itemId);
         PlayFabClientAPI.UnlockContainerItem(
@@ -82,6 +82,7 @@ public partial class PlayFabReadClient
             },
             resultCallback => {
                 Debug.Log(":"+ resultCallback.UnlockedItemInstanceId);
+                saveAsRead.Invoke();
             },
             errorCallback => {
                 Debug.Log(errorCallback.Error);

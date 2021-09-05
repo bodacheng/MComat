@@ -1,20 +1,24 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
+using System;
+using System.IO;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Json;
 
 public class MailManager : MonoBehaviour {
 
     public Canvas MailCanvas;
-    
+
     #region MailBox
     public RectTransform BoxPartT;
-    public MailModel mailModelPretab;   
+    public MailModel mailModelPretab;
     public RectTransform MailBoxT;
     public Button GetAll;
     public Button DeleteAllRead;
     #endregion
-    
+
     #region MailDetail
     public RectTransform detailPartT;
     public Image mailIcon;
@@ -23,11 +27,11 @@ public class MailManager : MonoBehaviour {
     public Text presentlifeRemain;
     public Button ClaimPresentBtn;
     #endregion
-    
+
     public static MailManager target;
-    
+
     List<MailOfPlayerModel> _myMailList = new List<MailOfPlayerModel>();
-    
+
     void Awake()
     {
         target = this;
@@ -37,7 +41,7 @@ public class MailManager : MonoBehaviour {
     {
         _myMailList.Add(mailData);
     }
-    
+
     public MailOfPlayerModel Get(string mailID)
     {
         for (int i = 0; i < _myMailList.Count; i++)
@@ -47,14 +51,42 @@ public class MailManager : MonoBehaviour {
         }
         return null;
     }
-    
+
     public void Read(MailOfPlayerModel model)
     {
         title.text = model.title;
         message.text = model.message;
         presentlifeRemain.text = model.presentlifeRemain;
         ClaimPresentBtn.onClick.RemoveAllListeners();
-        ClaimPresentBtn.onClick.AddListener(()=> PlayFabReadClient.ClaimPresent(model.itemId));
+        ClaimPresentBtn.onClick.AddListener(() => PlayFabReadClient.ClaimPresent(model.itemId, ()=> SaveReadMailAsJson(model)));
+    }
+
+    void SaveReadMailAsJson(MailOfPlayerModel mailOfPlayer)
+    {
+        string json = JsonConvert.SerializeObject(mailOfPlayer);
+        LocalJson.SaveToJsonFile_persistentDataPath("readmail", mailOfPlayer.mailId + ".json", json);
+    }
+
+    void LoadReadMails()
+    {
+        string path = Application.persistentDataPath + "/readmail";
+        if (Directory.Exists(path))
+        {
+            foreach (string file in Directory.GetFiles(path))
+            {
+                try
+                {
+                    string dataAsJson = File.ReadAllText(file);
+                    MailOfPlayerModel mailOfPlayerModel = JsonConvert.DeserializeObject<MailOfPlayerModel>(dataAsJson);
+                    _myMailList.Add(mailOfPlayerModel);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e.ToString());
+                }
+            }
+        }
+
     }
     
     public void GenerateMailModels()
@@ -69,7 +101,6 @@ public class MailManager : MonoBehaviour {
             mailModel.mailId = _myMailList[i].mailId;
             // 内容设置
             mailModel.title.text = _myMailList[i].title;
-            mailModel.message.text = _myMailList[i].message;
             mailModel.presentlifeRemain.text = _myMailList[i].presentlifeRemain;
             mailModel.transform.SetParent(MailBoxT);
             mailModel.transform.localPosition = Vector3.zero;
