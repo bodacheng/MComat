@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using UnityEngine;
 using mainMenu;
 
 // 邮件的获取应该是客户端向服务端请求应该能收获的邮件，
@@ -14,6 +14,7 @@ using mainMenu;
 // 邮箱top
 public class MailBoxProcess : MainSceneProcess
 {
+    MailBox mailBox;
     public MailBoxProcess()
     {
         Step = MainSceneStep.MailBox;
@@ -22,13 +23,13 @@ public class MailBoxProcess : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        MailManager.target.MailCanvas.gameObject.SetActive(true);
-        MailManager.target.BoxPartT.gameObject.SetActive(true);
-        MailManager.target.GenerateMailModels();
+        mailBox = UILayerLoader.Load(PreScene.target.T, "MailBox") as MailBox;
+        mailBox.GenerateMailModels();
     }
     
     public override void ProcessEnd()
     {
-        MailManager.target.BoxPartT.gameObject.SetActive(false);
+        if (mailBox != null)
+            GameObject.Destroy(mailBox.gameObject);
     }
 }

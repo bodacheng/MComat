@@ -29,9 +29,5 @@ public class MailModel : MonoBehaviour
 
     public void LoadPic(string itemId)
     {
-        switch (itemId)
-        {
-
-        }
     }
 }

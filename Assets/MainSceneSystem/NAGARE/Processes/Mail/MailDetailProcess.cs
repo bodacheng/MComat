@@ -1,5 +1,6 @@
-﻿using mainMenu;
+﻿using UnityEngine;
 using dataAccess;
+using mainMenu;
 
 // 阅读邮件，获取邮件附带的礼物应该都属于远程更新
 // 礼物其实可以靠代码来代表，服务器记录代码和礼物内容的对应关系
@@ -17,16 +18,18 @@ public class MailDetailProcess : MainSceneProcess
         Step = MainSceneStep.MailDetail;
         EelementsInherit(PreScene.target);
     }
-    
+
+    MailDetail mailDetail;
     public override void ProcessEnter()
     {
-        MailOfPlayerModel mail = MailManager.target.Get(targetMailID);
-        MailManager.target.Read(mail);
-        MailManager.target.detailPartT.gameObject.SetActive(true);
+        mailDetail = UILayerLoader.Load(PreScene.target.T, "MailDetail") as MailDetail;
+        MailOfPlayerModel mail = MailBox.Get(targetMailID);
+        mailDetail.Read(mail);
     }
     
     public override void ProcessEnd()
     {
-        MailManager.target.detailPartT.gameObject.SetActive(false);
+        if (mailDetail != null)
+            GameObject.Destroy(mailDetail.gameObject);
     }
 }

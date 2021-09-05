@@ -48,7 +48,7 @@ public partial class PlayFabReadClient
                             itemId = item.ItemId,
                             title = item.DisplayName
                         };
-                        MailManager.target.AddMailData(maildata);
+                        MailBox.AddMailData(maildata);
                     }
                 }
 

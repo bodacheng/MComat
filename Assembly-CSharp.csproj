@@ -555,7 +555,6 @@
     <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/MonsterEditPage.cs" />
     <Compile Include="Assets/AI/Soul/BuffsRunner.cs" />
     <Compile Include="Assets/FPSLabel/FPSLabelStarter.cs" />
-    <Compile Include="Assets/Mail/MailManager.cs" />
     <Compile Include="Assets/BOWeaponSystem/Health System/Health_BasicClasses.cs" />
     <Compile Include="Assets/UI/Oldscripts/PUNMenu.cs" />
     <Compile Include="Assets/PlayFab/Client/UserData.cs" />
@@ -657,6 +656,8 @@
     <Compile Include="Assets/DynamicStarrySky/Scripts/StarPoint.cs" />
     <Compile Include="Assets/DummyLayerSystem/LayerDefine/MainTop.cs" />
     <Compile Include="Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" />
+    <Compile Include="Assets/DummyLayerSystem/LayerDefine/MailBox.cs" />
+    <Compile Include="Assets/DummyLayerSystem/LayerDefine/MailDetail.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Asstes/enviroments/Top-Down Dungeons2/Standard Assets/Effects/ImageEffects/Shaders/Tonemapper.shader" />

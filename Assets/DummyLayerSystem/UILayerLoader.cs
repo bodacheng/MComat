@@ -7,6 +7,8 @@ public class UILayerLoader
     {
         {"MainTop", "DummyLayerSystem/MainTop"},
         {"ArcadeTop", "DummyLayerSystem/ArcadeTop"},
+        {"MailBox", "DummyLayerSystem/MailBox"},
+        {"MailDetail", "DummyLayerSystem/MailDetail"},
 
         {"ArenaFightOver", "DummyLayerSystem/ArenaFightOver"},
         {"CommonFightResult", "DummyLayerSystem/CommonFightResult"},
