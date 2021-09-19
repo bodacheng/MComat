@@ -1,15 +1,47 @@
 using UnityEngine;
 using PlayFab;
+using System.Collections.Generic;
 using PlayFab.ClientModels;
 using dataAccess;
 using System;
 
 public partial class PlayFabReadClient
 {
+    #region MAIL
+    static List<MailOfPlayerModel> _myMailList = new List<MailOfPlayerModel>();
+    public static List<MailOfPlayerModel> GetMailsData()
+    {
+        return _myMailList;
+    }
+    /// <summary>
+    /// 点击某邮件后打开邮件会使用此函数
+    /// </summary>
+    /// <param name="mailID"></param>
+    /// <returns></returns>
+    public static MailOfPlayerModel Get(string mailID)
+    {
+        for (int i = 0; i < _myMailList.Count; i++)
+        {
+            if (_myMailList[i].mailId == mailID)
+                return _myMailList[i];
+        }
+        return null;
+    }
+    /// <summary>
+    /// 添加实际邮件信息
+    /// </summary>
+    /// <param name="mailData"></param>
+    public static void AddMailData(MailOfPlayerModel mailData)
+    {
+        _myMailList.Add(mailData);
+    }
+    #endregion
+    
     public static void LoadItems(Action<int> finished)
     {
         MyMonsters.Dic.Clear();
         Stones.Clear();
+        _myMailList.Clear();
 
         PlayFabClientAPI.GetUserInventory(
             new GetUserInventoryRequest(),
@@ -48,9 +80,11 @@ public partial class PlayFabReadClient
                             itemId = item.ItemId,
                             title = item.DisplayName
                         };
-                        MailBox.AddMailData(maildata);
+                        AddMailData(maildata);
                     }
                 }
+                MailBox.LoadReadMails(); // 本地逻辑。读取已读邮件。放在这里是希望和远程读取未读邮件的动作保持步调一致
+
 
                 foreach (var kv in result.VirtualCurrency)
                 {
@@ -82,6 +116,14 @@ public partial class PlayFabReadClient
             },
             resultCallback => {
                 Debug.Log(":"+ resultCallback.UnlockedItemInstanceId);
+
+                foreach (var data in _myMailList)
+                {
+                    if (data.mailId == itemId)
+                    {
+                        data.read = true;
+                    }
+                }
                 saveAsRead.Invoke();
             },
             errorCallback => {

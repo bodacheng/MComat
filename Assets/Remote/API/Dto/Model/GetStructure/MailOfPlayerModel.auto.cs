@@ -31,6 +31,6 @@ namespace dataAccess
         /// <summary>
         /// 是否已读
         /// </summary>
-        public string read { get; set; }
+        public bool read { get; set; }
     }
 }
