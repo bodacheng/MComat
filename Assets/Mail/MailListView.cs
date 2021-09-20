@@ -2,6 +2,7 @@
 using UnityEngine;
 using mainMenu;
 using UnityEngine.Serialization;
+using PlayFab.ClientModels;
 
 /// <summary>
 /// 邮件ListView的开发主要有如下问题
@@ -16,35 +17,57 @@ using UnityEngine.Serialization;
 
 public class MailListView : MonoBehaviour
 {
-    public string ItemInstanceId;
-    public string ItemId;
-    public Image mailIcon;
-    public Text title;
-    public Text presentlifeRemain;
-    public GameObject ReadFlag;
-    public Image rayCastTarget;
-    public Button ReadMe;
-    
+    [SerializeField] Image bg;
+    [SerializeField] Image mailIcon;
+    [SerializeField] Text title;
+    [SerializeField] Text presentlifeRemain;
+    [SerializeField] GameObject ReadFlag;
+    [SerializeField] Button ReadMe;
+
+    string ItemInstanceId;
+    string ItemId;
+
     void Awake()
     {
         ReadMe.onClick.RemoveAllListeners();
         ReadMe.onClick.AddListener(ReadMail);
+    }
+
+    public void PassMailInfo(ItemInstance mailData)
+    {
+        ItemInstanceId = mailData.ItemInstanceId;
+        ItemId = mailData.ItemId;
+        title.text = mailData.DisplayName;
+        if (mailData.Expiration.HasValue)
+        {
+            presentlifeRemain.text = mailData.Expiration.Value.ToString("yyyy-MM-dd");
+        }
+        else
+        {
+            presentlifeRemain.gameObject.SetActive(false);
+        }
+
+        bool read = !(mailData.RemainingUses.HasValue && mailData.RemainingUses.Value > 0);
+        AsRead(read);
+    }
+
+    private Color unreadc = new Color(0.4f,0.4f,1, 1);
+    private Color readc = new Color(0.4f,0.4f,1, 0.6f); 
+    void AsRead(bool read)
+    {
+        ReadFlag.SetActive(read);
+        bg.color = read ? readc : unreadc;
     }
     
     void ReadMail()
     {
         PreScene.target.trySwitchToStep(MainSceneStep.MailDetail, ItemInstanceId, true);
     }
-
+    
     // 根据报酬不同显示不同的图片
     // 已经获取的话直接就显示个read标签
 
     public void LoadPic(string itemId)
     {
-    }
-
-    public void AsRead(bool isRead)
-    {
-        ReadFlag.SetActive(isRead);
     }
 }

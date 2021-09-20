@@ -2,6 +2,7 @@
 using dataAccess;
 using mainMenu;
 using System;
+using PlayFab.ClientModels;
 
 // 阅读邮件，获取邮件附带的礼物应该都属于远程更新
 // 礼物其实可以靠代码来代表，服务器记录代码和礼物内容的对应关系
@@ -22,7 +23,7 @@ public class MailDetailProcess : MainSceneProcess
     public override void ProcessEnter<String>(String id)
     {
         mailDetailLayer = UILayerLoader.Load(PreScene.target.T, "MailDetail") as MailDetail;
-        MailOfPlayerModel mail = PlayFabReadClient.Get(id.ToString());
+        ItemInstance mail = PlayFabReadClient.Get(id.ToString());
         mailDetailLayer.Read(mail);
     }
     

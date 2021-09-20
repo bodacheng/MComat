@@ -17,6 +17,7 @@ public class MailBoxProcess : MainSceneProcess
     {
         mailBox = UILayerLoader.Load(PreScene.target.T, "MailBox") as MailBox;
         mailBox.GenerateMailModels();
+        mailBox.AddButtonFeatures();
     }
     
     public override void ProcessEnd()

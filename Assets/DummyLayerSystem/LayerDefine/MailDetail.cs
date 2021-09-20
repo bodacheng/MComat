@@ -1,7 +1,8 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
-
+using PlayFab.ClientModels;
 
 public class MailDetail : UILayer
 {
@@ -14,10 +15,10 @@ public class MailDetail : UILayer
     public Button ClaimPresentBtn;
     #endregion
     
-    public void Read(MailOfPlayerModel model)
+    public void Read(ItemInstance model)
     {
-        title.text = model.title;
-        message.text = model.message;
+        title.text = model.DisplayName;
+        message.text = "temp";//model.CustomData.Contains("description") ? model.CustomData["description"] : 0;
         if (model.Expiration.HasValue)
             presentlifeRemain.text = model.Expiration.Value.ToString("yyyy-MM-dd");
         else

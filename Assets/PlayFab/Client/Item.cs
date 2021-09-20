@@ -11,8 +11,8 @@ using System.IO;
 public partial class PlayFabReadClient
 {
     #region MAIL
-    static List<MailOfPlayerModel> _myMailList = new List<MailOfPlayerModel>();
-    public static List<MailOfPlayerModel> GetMailsData()
+    static List<ItemInstance> _myMailList = new List<ItemInstance>();
+    public static List<ItemInstance> GetMailsData()
     {
         return _myMailList;
     }
@@ -21,7 +21,7 @@ public partial class PlayFabReadClient
     /// </summary>
     /// <param name="mailID"></param>
     /// <returns></returns>
-    public static MailOfPlayerModel Get(string itemInstanceId)
+    public static ItemInstance Get(string itemInstanceId)
     {
         for (int i = 0; i < _myMailList.Count; i++)
         {
@@ -34,13 +34,13 @@ public partial class PlayFabReadClient
     /// 添加实际邮件信息
     /// </summary>
     /// <param name="mailData"></param>
-    public static void AddMailData(MailOfPlayerModel mailData)
+    static void AddMailData(ItemInstance mailData)
     {
         _myMailList.Add(mailData);
         Debug.Log("邮件数量"+ _myMailList.Count);
     }
     
-    public static void SaveReadMailAsJson(MailOfPlayerModel mailOfPlayer)
+    public static void SaveReadMailAsJson(ItemInstance mailOfPlayer)
     {
         string json = JsonConvert.SerializeObject(mailOfPlayer);
         LocalJson.SaveToJsonFile_persistentDataPath("readmail", mailOfPlayer.ItemInstanceId + ".json", json);
@@ -60,7 +60,7 @@ public partial class PlayFabReadClient
                 {
                     string dataAsJson = File.ReadAllText(file);
                     Debug.Log("邮件信息已经读取："+ dataAsJson);
-                    MailOfPlayerModel mailOfPlayerModel = JsonConvert.DeserializeObject<MailOfPlayerModel>(dataAsJson);
+                    ItemInstance mailOfPlayerModel = JsonConvert.DeserializeObject<ItemInstance>(dataAsJson);
                     PlayFabReadClient.AddMailData(mailOfPlayerModel);
                 }
                 catch (Exception e)
@@ -70,6 +70,30 @@ public partial class PlayFabReadClient
             }
         }
     }
+    
+    public static void DeleteAllLocalMails()
+    {
+        string path = Application.persistentDataPath + "/readmail";
+        if (Directory.Exists(path))
+        {
+            foreach (string file in Directory.GetFiles(path))
+            {
+                try
+                {
+                    string dataAsJson = File.ReadAllText(file);
+                    ItemInstance mailOfPlayerModel = JsonConvert.DeserializeObject<ItemInstance>(dataAsJson);
+                    ItemInstance v = _myMailList.Find(x => x.ItemInstanceId == mailOfPlayerModel.ItemInstanceId);
+                    _myMailList.Remove(v);
+                    File.Delete(file);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e.ToString());
+                }
+            }
+        }
+    }
+    
     #endregion
     
     public static void LoadItems(Action<int> finished)
@@ -109,15 +133,7 @@ public partial class PlayFabReadClient
                     else if (item.CatalogVersion == PlayfabSetting._MailCatalog)
                     {
                         Debug.Log("One mail:" + item.ItemInstanceId);
-                        MailOfPlayerModel maildata = new MailOfPlayerModel
-                        {
-                            ItemId = item.ItemId,
-                            ItemInstanceId = item.ItemInstanceId,
-                            title = item.DisplayName,
-                            Expiration = item.Expiration,
-                            read = false
-                        };
-                        AddMailData(maildata);
+                        AddMailData(item);
                     }
                 }
                 LoadReadMails(); // 本地逻辑。读取已读邮件。放在这里是希望和远程读取未读邮件的动作保持步调一致
@@ -140,8 +156,8 @@ public partial class PlayFabReadClient
                 finished.Invoke(-1);
             });
     }
-
-    public static void ClaimPresent(string mailTypeId, Action<MailOfPlayerModel> saveAsRead)
+    
+    public static void ClaimPresent(string mailTypeId, Action<ItemInstance> saveAsRead)
     {
         Debug.Log("try open box:" + mailTypeId);
         PlayFabClientAPI.UnlockContainerItem(
@@ -152,12 +168,12 @@ public partial class PlayFabReadClient
             },
             resultCallback => {
                 Debug.Log(":"+ resultCallback.UnlockedItemInstanceId);
-                MailOfPlayerModel target = null;
+                ItemInstance target = null;
                 foreach (var data in _myMailList)
                 {
                     if (data.ItemInstanceId == resultCallback.UnlockedItemInstanceId)
                     {
-                        data.read = true;
+                        data.RemainingUses = 0;
                         target = data;
                     }
                 }

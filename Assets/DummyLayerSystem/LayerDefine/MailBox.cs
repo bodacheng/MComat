@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
 using System.Collections.Generic;
+using PlayFab.ClientModels;
 
 public class MailBox : UILayer
 {
@@ -21,25 +22,31 @@ public class MailBox : UILayer
         {
             Destroy(t.gameObject);
         }
-
-        List<MailOfPlayerModel> _myMailList = PlayFabReadClient.GetMailsData();
         
+        List<ItemInstance> _myMailList = PlayFabReadClient.GetMailsData();
+
+        float wholeheight = 0; 
         for (int i = 0; i < _myMailList.Count; i++)
         {
             MailListView mailListView = Instantiate(mailListViewPretab);
-            mailListView.ItemInstanceId = _myMailList[i].ItemInstanceId;
-            mailListView.ItemId = _myMailList[i].ItemId;
-            // 内容设置
-            mailListView.title.text = _myMailList[i].title;
-            if (_myMailList[i].Expiration.HasValue)
-            {
-                mailListView.presentlifeRemain.text = _myMailList[i].Expiration.Value.ToString("yyyy-MM-dd");
-            }
-            mailListView.AsRead(_myMailList[i].read);
+            mailListView.PassMailInfo(_myMailList[i]);
             mailListView.transform.SetParent(MailBoxT);
             mailListView.transform.localPosition = Vector3.zero;
             mailListView.transform.localScale = Vector3.one;
             mailListView.gameObject.SetActive(true);
+            wholeheight += mailListView.GetComponent<RectTransform>().rect.height;
         }
+        MailBoxT.sizeDelta = new Vector2(MailBoxT.sizeDelta.x, wholeheight);
+    }
+
+    public void AddButtonFeatures()
+    {
+        DeleteAllRead.onClick.AddListener(() =>
+            {
+                PlayFabReadClient.DeleteAllLocalMails();
+                GenerateMailModels();
+            }
+        );
+        
     }
 }

@@ -2397,6 +2397,12 @@ namespace PlayFab.AdminModels
         NotImplemented,
         PublisherNotFound,
         PublisherDeleted,
+        ApiDisabledForMigration,
+        ResourceNameUpdateNotAllowed,
+        ApiNotEnabledForTitle,
+        DuplicateTitleNameForPublisher,
+        AzureTitleCreationInProgress,
+        DuplicateAzureResourceId,
         MatchmakingEntityInvalid,
         MatchmakingPlayerAttributesInvalid,
         MatchmakingQueueNotFound,
@@ -2535,6 +2541,7 @@ namespace PlayFab.AdminModels
         LobbyCurrentOwnerStillConnected,
         LobbyMemberIsNotOwner,
         EventSamplingInvalidRatio,
+        EventSamplingInvalidEventNamespace,
         EventSamplingInvalidEventName,
         EventSamplingRatioNotFound
     }
