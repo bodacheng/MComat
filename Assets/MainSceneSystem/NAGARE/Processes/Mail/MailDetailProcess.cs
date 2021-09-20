@@ -11,7 +11,7 @@ using System;
 
 // 邮件详情
 public class MailDetailProcess : MainSceneProcess
-{    
+{
     public MailDetailProcess()
     {
         Step = MainSceneStep.MailDetail;

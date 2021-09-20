@@ -656,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee53179516a94f09a11901f33ae95b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mailModelPretab: {fileID: 4502776208294558316}
+  mailListViewPretab: {fileID: 4502776208294558316}
   MailBoxT: {fileID: 1682121644798879511}
   GetAll: {fileID: 1682121643858325303}
   DeleteAllRead: {fileID: 1682121645773248062}
@@ -1400,7 +1400,7 @@ MonoBehaviour:
   mailIcon: {fileID: 3627546285227533212}
   title: {fileID: 3233904866249527610}
   presentlifeRemain: {fileID: 2138691520726620225}
-  ReadFlag: {fileID: 0}
+  ReadFlag: {fileID: 8021558391946127657}
   rayCastTarget: {fileID: 3233904868214798080}
   ReadMe: {fileID: 3233904868214798083}
 --- !u!114 &3233904868214798080

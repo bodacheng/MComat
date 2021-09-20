@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using PlayFab.ClientModels;
 using dataAccess;
 using System;
+using Newtonsoft.Json;
+using Json;
+using System.IO;
 
 public partial class PlayFabReadClient
 {
@@ -18,11 +21,11 @@ public partial class PlayFabReadClient
     /// </summary>
     /// <param name="mailID"></param>
     /// <returns></returns>
-    public static MailOfPlayerModel Get(string mailID)
+    public static MailOfPlayerModel Get(string itemInstanceId)
     {
         for (int i = 0; i < _myMailList.Count; i++)
         {
-            if (_myMailList[i].mailId == mailID)
+            if (_myMailList[i].ItemInstanceId == itemInstanceId)
                 return _myMailList[i];
         }
         return null;
@@ -34,6 +37,38 @@ public partial class PlayFabReadClient
     public static void AddMailData(MailOfPlayerModel mailData)
     {
         _myMailList.Add(mailData);
+        Debug.Log("邮件数量"+ _myMailList.Count);
+    }
+    
+    public static void SaveReadMailAsJson(MailOfPlayerModel mailOfPlayer)
+    {
+        string json = JsonConvert.SerializeObject(mailOfPlayer);
+        LocalJson.SaveToJsonFile_persistentDataPath("readmail", mailOfPlayer.ItemInstanceId + ".json", json);
+    }
+    
+    /// <summary>
+    /// 已读取邮件的获取
+    /// </summary>
+    public static void LoadReadMails()
+    {
+        string path = Application.persistentDataPath + "/readmail";
+        if (Directory.Exists(path))
+        {
+            foreach (string file in Directory.GetFiles(path))
+            {
+                try
+                {
+                    string dataAsJson = File.ReadAllText(file);
+                    Debug.Log("邮件信息已经读取："+ dataAsJson);
+                    MailOfPlayerModel mailOfPlayerModel = JsonConvert.DeserializeObject<MailOfPlayerModel>(dataAsJson);
+                    PlayFabReadClient.AddMailData(mailOfPlayerModel);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e.ToString());
+                }
+            }
+        }
     }
     #endregion
     
@@ -76,16 +111,17 @@ public partial class PlayFabReadClient
                         Debug.Log("One mail:" + item.ItemInstanceId);
                         MailOfPlayerModel maildata = new MailOfPlayerModel
                         {
-                            mailId = item.ItemInstanceId,
-                            itemId = item.ItemId,
-                            title = item.DisplayName
+                            ItemId = item.ItemId,
+                            ItemInstanceId = item.ItemInstanceId,
+                            title = item.DisplayName,
+                            Expiration = item.Expiration,
+                            read = false
                         };
                         AddMailData(maildata);
                     }
                 }
-                MailBox.LoadReadMails(); // 本地逻辑。读取已读邮件。放在这里是希望和远程读取未读邮件的动作保持步调一致
-
-
+                LoadReadMails(); // 本地逻辑。读取已读邮件。放在这里是希望和远程读取未读邮件的动作保持步调一致
+                
                 foreach (var kv in result.VirtualCurrency)
                 {
                     if (kv.Key == PlayfabSetting._GoldCode)
@@ -105,26 +141,28 @@ public partial class PlayFabReadClient
             });
     }
 
-    public static void ClaimPresent(string itemId, Action saveAsRead)
+    public static void ClaimPresent(string mailTypeId, Action<MailOfPlayerModel> saveAsRead)
     {
-        Debug.Log("try open box:" + itemId);
+        Debug.Log("try open box:" + mailTypeId);
         PlayFabClientAPI.UnlockContainerItem(
             new UnlockContainerItemRequest
             {
                 CatalogVersion = PlayfabSetting._MailCatalog,
-                ContainerItemId = itemId
+                ContainerItemId = mailTypeId
             },
             resultCallback => {
                 Debug.Log(":"+ resultCallback.UnlockedItemInstanceId);
-
+                MailOfPlayerModel target = null;
                 foreach (var data in _myMailList)
                 {
-                    if (data.mailId == itemId)
+                    if (data.ItemInstanceId == resultCallback.UnlockedItemInstanceId)
                     {
                         data.read = true;
+                        target = data;
                     }
                 }
-                saveAsRead.Invoke();
+                if (target != null)
+                    saveAsRead.Invoke(target);
             },
             errorCallback => {
                 Debug.Log(errorCallback.Error);

@@ -1,6 +1,7 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
 using mainMenu;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// 邮件ListView的开发主要有如下问题
@@ -15,7 +16,8 @@ using mainMenu;
 
 public class MailListView : MonoBehaviour
 {
-    public string mailId;
+    public string ItemInstanceId;
+    public string ItemId;
     public Image mailIcon;
     public Text title;
     public Text presentlifeRemain;
@@ -31,7 +33,7 @@ public class MailListView : MonoBehaviour
     
     void ReadMail()
     {
-        PreScene.target.trySwitchToStep(MainSceneStep.MailDetail, mailId, true);
+        PreScene.target.trySwitchToStep(MainSceneStep.MailDetail, ItemInstanceId, true);
     }
 
     // 根据报酬不同显示不同的图片
@@ -39,5 +41,10 @@ public class MailListView : MonoBehaviour
 
     public void LoadPic(string itemId)
     {
+    }
+
+    public void AsRead(bool isRead)
+    {
+        ReadFlag.SetActive(isRead);
     }
 }

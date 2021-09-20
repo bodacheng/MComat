@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
-using Newtonsoft.Json;
-using Json;
+
 
 public class MailDetail : UILayer
 {
@@ -14,19 +13,21 @@ public class MailDetail : UILayer
     public Text presentlifeRemain;
     public Button ClaimPresentBtn;
     #endregion
-
+    
     public void Read(MailOfPlayerModel model)
     {
         title.text = model.title;
         message.text = model.message;
-        presentlifeRemain.text = model.presentlifeRemain;
+        if (model.Expiration.HasValue)
+            presentlifeRemain.text = model.Expiration.Value.ToString("yyyy-MM-dd");
+        else
+        {
+            presentlifeRemain.text = "无时间限制？";
+        }
         ClaimPresentBtn.onClick.RemoveAllListeners();
-        ClaimPresentBtn.onClick.AddListener(() => PlayFabReadClient.ClaimPresent(model.itemId, () => SaveReadMailAsJson(model)));
-    }
-
-    void SaveReadMailAsJson(MailOfPlayerModel mailOfPlayer)
-    {
-        string json = JsonConvert.SerializeObject(mailOfPlayer);
-        LocalJson.SaveToJsonFile_persistentDataPath("readmail", mailOfPlayer.mailId + ".json", json);
+        ClaimPresentBtn.onClick.AddListener(
+            () => PlayFabReadClient.ClaimPresent(model.ItemId, 
+                PlayFabReadClient.SaveReadMailAsJson)
+        );
     }
 }

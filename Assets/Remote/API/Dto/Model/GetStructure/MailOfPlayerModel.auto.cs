@@ -18,19 +18,19 @@ namespace dataAccess
         /// <summary>
         /// プレーヤレコードID
         /// </summary>
-        public string mailId { get; set; }
-
-        public string itemId { get; set; }
+        public string ItemId { get; set; }
+        
+        public string ItemInstanceId { get; set; }
 
         public string title { get; set; }
 
         public string message { get; set; }
 
-        public string presentlifeRemain { get; set; }
+        public DateTime? Expiration { get; set; }
 
         /// <summary>
         /// 是否已读
         /// </summary>
-        public bool read { get; set; }
+        public bool read { get; set; } = false;
     }
 }
