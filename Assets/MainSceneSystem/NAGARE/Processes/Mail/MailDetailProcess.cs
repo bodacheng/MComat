@@ -19,17 +19,17 @@ public class MailDetailProcess : MainSceneProcess
         EelementsInherit(PreScene.target);
     }
 
-    MailDetail mailDetailLayer;
+    MailDetailView _mailDetailViewLayer;
     public override void ProcessEnter<String>(String id)
     {
-        mailDetailLayer = UILayerLoader.Load(PreScene.target.T, "MailDetail") as MailDetail;
+        _mailDetailViewLayer = UILayerLoader.Load(PreScene.target.T, "MailDetail") as MailDetailView;
         ItemInstance mail = PlayFabReadClient.Get(id.ToString());
-        mailDetailLayer.Read(mail);
+        _mailDetailViewLayer.Read(mail);
     }
     
     public override void ProcessEnd()
     {
-        if (mailDetailLayer != null)
-            GameObject.Destroy(mailDetailLayer.gameObject);
+        if (_mailDetailViewLayer != null)
+            GameObject.Destroy(_mailDetailViewLayer.gameObject);
     }
 }

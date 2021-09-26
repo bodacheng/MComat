@@ -7,12 +7,13 @@ using System;
 using Newtonsoft.Json;
 using Json;
 using System.IO;
+using UniRx;
 
 public partial class PlayFabReadClient
 {
     #region MAIL
-    static List<ItemInstance> _myMailList = new List<ItemInstance>();
-    public static List<ItemInstance> GetMailsData()
+    static List<MailItemInstance> _myMailList = new List<MailItemInstance>();
+    public static List<MailItemInstance> GetMailsData()
     {
         return _myMailList;
     }
@@ -34,10 +35,9 @@ public partial class PlayFabReadClient
     /// 添加实际邮件信息
     /// </summary>
     /// <param name="mailData"></param>
-    static void AddMailData(ItemInstance mailData)
+    static void AddMailData(MailItemInstance mailData)
     {
         _myMailList.Add(mailData);
-        Debug.Log("邮件数量"+ _myMailList.Count);
     }
     
     public static void SaveReadMailAsJson(ItemInstance mailOfPlayer)
@@ -59,8 +59,8 @@ public partial class PlayFabReadClient
                 try
                 {
                     string dataAsJson = File.ReadAllText(file);
-                    Debug.Log("邮件信息已经读取："+ dataAsJson);
-                    ItemInstance mailOfPlayerModel = JsonConvert.DeserializeObject<ItemInstance>(dataAsJson);
+                    //Debug.Log("邮件信息已经读取："+ dataAsJson);
+                    MailItemInstance mailOfPlayerModel = JsonConvert.DeserializeObject<MailItemInstance>(dataAsJson);
                     PlayFabReadClient.AddMailData(mailOfPlayerModel);
                 }
                 catch (Exception e)
@@ -81,8 +81,8 @@ public partial class PlayFabReadClient
                 try
                 {
                     string dataAsJson = File.ReadAllText(file);
-                    ItemInstance mailOfPlayerModel = JsonConvert.DeserializeObject<ItemInstance>(dataAsJson);
-                    ItemInstance v = _myMailList.Find(x => x.ItemInstanceId == mailOfPlayerModel.ItemInstanceId);
+                    MailItemInstance mailOfPlayerModel = JsonConvert.DeserializeObject<MailItemInstance>(dataAsJson);
+                    MailItemInstance v = _myMailList.Find(x => x.ItemInstanceId == mailOfPlayerModel.ItemInstanceId);
                     _myMailList.Remove(v);
                     File.Delete(file);
                 }
@@ -92,6 +92,36 @@ public partial class PlayFabReadClient
                 }
             }
         }
+    }
+    
+    public static void ClaimPresent(string ItemId, Action<ItemInstance> Success)
+    {
+        PlayFabClientAPI.UnlockContainerItem(
+            new UnlockContainerItemRequest
+            {
+                CatalogVersion = PlayfabSetting._MailCatalog,
+                ContainerItemId = ItemId
+            },
+            resultCallback => {
+                Debug.Log(":"+ resultCallback.UnlockedItemInstanceId);
+                ItemInstance target = null;
+                foreach (var data in _myMailList)
+                {
+                    if (data.ItemInstanceId == resultCallback.UnlockedItemInstanceId)
+                    {
+                        Debug.Log(resultCallback.UnlockedItemInstanceId + " is unlocked");
+                        data.RemainingUses = 0;
+                        data.Set();
+                        target = data;
+                    }
+                }
+                if (target != null)
+                    Success.Invoke(target);
+            },
+            errorCallback => {
+                Debug.Log(errorCallback.Error);
+            }
+        );
     }
     
     #endregion
@@ -126,14 +156,14 @@ public partial class PlayFabReadClient
                             skillId = item.ItemId,
                             inUsingMonsterOfPlayerId = (item.CustomData != null && item.CustomData.ContainsKey("monsterid")) ? item.CustomData["monsterid"] : null,
                             inUsingSkillSlot = (item.CustomData != null && item.CustomData.ContainsKey("slot")) ? item.CustomData["slot"] : null
-
                         };
                         Stones.Add(Info);
                     }
                     else if (item.CatalogVersion == PlayfabSetting._MailCatalog)
                     {
-                        Debug.Log("One mail:" + item.ItemInstanceId);
-                        AddMailData(item);
+                        MailItemInstance maildata = new MailItemInstance();
+                        Copier<ItemInstance,MailItemInstance>.Copy(item, maildata);
+                        AddMailData(maildata);
                     }
                 }
                 LoadReadMails(); // 本地逻辑。读取已读邮件。放在这里是希望和远程读取未读邮件的动作保持步调一致
@@ -155,34 +185,5 @@ public partial class PlayFabReadClient
                 Debug.Log(errorCallback.Error);
                 finished.Invoke(-1);
             });
-    }
-    
-    public static void ClaimPresent(string mailTypeId, Action<ItemInstance> saveAsRead)
-    {
-        Debug.Log("try open box:" + mailTypeId);
-        PlayFabClientAPI.UnlockContainerItem(
-            new UnlockContainerItemRequest
-            {
-                CatalogVersion = PlayfabSetting._MailCatalog,
-                ContainerItemId = mailTypeId
-            },
-            resultCallback => {
-                Debug.Log(":"+ resultCallback.UnlockedItemInstanceId);
-                ItemInstance target = null;
-                foreach (var data in _myMailList)
-                {
-                    if (data.ItemInstanceId == resultCallback.UnlockedItemInstanceId)
-                    {
-                        data.RemainingUses = 0;
-                        target = data;
-                    }
-                }
-                if (target != null)
-                    saveAsRead.Invoke(target);
-            },
-            errorCallback => {
-                Debug.Log(errorCallback.Error);
-            }
-        );
     }
 }

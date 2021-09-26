@@ -1,6 +1,8 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
 using mainMenu;
+using System;
+using UniRx;
 using UnityEngine.Serialization;
 using PlayFab.ClientModels;
 
@@ -22,18 +24,15 @@ public class MailListView : MonoBehaviour
     [SerializeField] Text title;
     [SerializeField] Text presentlifeRemain;
     [SerializeField] GameObject ReadFlag;
+    [SerializeField] Button ClaimBtn;
     [SerializeField] Button ReadMe;
 
     string ItemInstanceId;
     string ItemId;
 
-    void Awake()
-    {
-        ReadMe.onClick.RemoveAllListeners();
-        ReadMe.onClick.AddListener(ReadMail);
-    }
-
-    public void PassMailInfo(ItemInstance mailData)
+    public bool claimed = false;
+    
+    public void PassMailInfo(MailItemInstance mailData, Action sort)
     {
         ItemInstanceId = mailData.ItemInstanceId;
         ItemId = mailData.ItemId;
@@ -46,15 +45,34 @@ public class MailListView : MonoBehaviour
         {
             presentlifeRemain.gameObject.SetActive(false);
         }
+        mailData.ReadObservable.Subscribe(AsRead).AddTo(this.gameObject);
 
-        bool read = !(mailData.RemainingUses.HasValue && mailData.RemainingUses.Value > 0);
-        AsRead(read);
+        ClaimBtn.onClick.RemoveAllListeners();
+        ClaimBtn.onClick.AddListener(
+            () => PlayFabReadClient.ClaimPresent(
+                mailData.ItemId,
+                x =>
+                {
+                    PlayFabReadClient.SaveReadMailAsJson(x);
+                    sort.Invoke();
+                }
+            )
+        );
+
+        //  暂不需要详细读取邮件功能
+        //ReadMe.onClick.RemoveAllListeners();
+        //ReadMe.onClick.AddListener(ReadMail);
+        
+        mailData.Set();
     }
 
     private Color unreadc = new Color(0.4f,0.4f,1, 1);
     private Color readc = new Color(0.4f,0.4f,1, 0.6f); 
     void AsRead(bool read)
     {
+        claimed = read;
+        presentlifeRemain.gameObject.SetActive(!read);
+        ClaimBtn.gameObject.SetActive(!read);
         ReadFlag.SetActive(read);
         bg.color = read ? readc : unreadc;
     }

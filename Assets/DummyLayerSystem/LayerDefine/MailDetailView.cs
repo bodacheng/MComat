@@ -1,10 +1,9 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using dataAccess;
 using PlayFab.ClientModels;
 
-public class MailDetail : UILayer
+public class MailDetailView : UILayer
 {
     #region MailDetail
     public RectTransform detailPartT;
