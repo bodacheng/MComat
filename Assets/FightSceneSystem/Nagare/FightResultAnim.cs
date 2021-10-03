@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using FightScene;
 using System.Collections.Generic;
+using dataAccess;
 
 public class FightResultAnim : FSceneProcess
 {
@@ -20,7 +21,7 @@ public class FightResultAnim : FSceneProcess
     IEnumerator EnterProcess()
     {
         animEnd = false;
-        yield return FinalMomentAnim(FightOverControl.target.logger.GetWinner());
+        yield return FinalMomentAnim();
         animEnd = true;
     }
     
@@ -29,19 +30,22 @@ public class FightResultAnim : FSceneProcess
         return animEnd;
     }
     
-    IEnumerator FinalMomentAnim(Team winner)
+    IEnumerator FinalMomentAnim()
     {
         Time.timeScale = 0.4f;
         yield return new WaitForSeconds(2f);
         List<Data_Center> winners = new List<Data_Center>();
-        if (winner == Team.player1)
+
+        switch (FightOverControl.target.logger.GetWinnerTeam())
         {
-            winners = RTFightManager.target.Team1Members.GetValues();
+            case Team.player1 :
+                winners = RTFightManager.target.Team1Members.GetValues();
+                break;
+            case Team.player2 :
+                winners = RTFightManager.target.Team2Members.GetValues();
+                break;
         }
-        if (winner == Team.player2)
-        {
-            winners = RTFightManager.target.Team2Members.GetValues();
-        }
+        
         foreach (Data_Center _one in winners)
         {
             if (!_one.IsDead.Value)
@@ -53,16 +57,16 @@ public class FightResultAnim : FSceneProcess
 
         FightResultAnimLayer fightResultAnimLayer = UILayerLoader.Load
             (NetFightScene.target.T.gameObject, "FightResultAnimLayer") as FightResultAnimLayer;
-        
-        switch (FightOverControl.target.logger.GetWinner())
+
+        if (FightOverControl.target.logger.GetWinnerId() == Account._AccInfo.playerID)
         {
-            case Team.player1:
-                yield return fightResultAnimLayer.WINProcess();
-                break;
-            case Team.player2:
-                yield return fightResultAnimLayer.LoseProcess();
-                break;
+            yield return fightResultAnimLayer.WINProcess();
         }
+        else
+        {
+            yield return fightResultAnimLayer.LoseProcess();
+        }
+        
         UILayerLoader.Remove("FightResultAnimLayer");
     }
 }

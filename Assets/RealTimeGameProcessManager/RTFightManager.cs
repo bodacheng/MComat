@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.Serialization;
 
 namespace FightScene
 {
@@ -29,8 +28,8 @@ namespace FightScene
         public TeamUIManagerRotationMode team1UIManagerRotation;
         public TeamUIManagerRotationMode team2UIManagerRotation;
         
-        public TeamConfig heroTeamConfig = new TeamConfig(Team.player1, new List<Team>() { Team.player2 });
-        public TeamConfig EnemyTeamConfig = new TeamConfig(Team.player2, new List<Team>() { Team.player1 });
+        public TeamConfig heroTeamConfig = new TeamConfig("1", Team.player1, new List<Team>() { Team.player2 });
+        public TeamConfig EnemyTeamConfig = new TeamConfig("2", Team.player2, new List<Team>() { Team.player1 });
         
         public static RTFightManager target;
         
@@ -130,7 +129,7 @@ namespace FightScene
         public IEnumerator LoadGame(FightInfo stage)
         {
             loadFight = stage;
-
+            
             BoundaryControllByGod.target.ChangeBackGround(stage.BattleGroundID);
             switch (stage.Team1Mode)
             {
@@ -141,7 +140,7 @@ namespace FightScene
                     target.team1 = team1UIManagerRotation;
                     break;
             }
-
+            
             switch (stage.Team2Mode)
             {
                 case TeamMode.multiraid:
@@ -151,12 +150,15 @@ namespace FightScene
                     target.team2 = team2UIManagerRotation;
                     break;
             }
-
+            
             team1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
             team2.TeamStandPoints = NetFightScene.target.Team2StandPoints;
-
+            
             target.team1.teamConfig = heroTeamConfig;
             target.team2.teamConfig = EnemyTeamConfig;
+
+            target.team1.teamConfig.playID = loadFight.team1ID;
+            target.team2.teamConfig.playID = loadFight.team2ID;
             
             yield return team1.Instantiate(stage.fightMembers.HeroSets, stage.Team1HpRate ,stage.team1CGMode);
             yield return team2.Instantiate(stage.fightMembers.EnemySets, stage.Team2HpRate ,stage.team2CGMode);

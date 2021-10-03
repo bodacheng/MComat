@@ -1,6 +1,5 @@
 ﻿using UnityEngine.SceneManagement;
 using dataAccess;
-using mainMenu;
 using FightScene;
 
 public static class FightLoad
@@ -13,6 +12,7 @@ public static class FightLoad
         if (loadWithMyTeam)
         {
             stage.LoadMyTeam();
+            stage.team1ID = Account._AccInfo.playerID;
         }
         
         if (stage.fightMembers.HeroSets.GetValues().Count < 1 || stage.fightMembers.EnemySets.GetValues().Count < 1)

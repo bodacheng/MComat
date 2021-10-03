@@ -15,7 +15,7 @@ public class TeamConfig
     public Team myTeam;
     public List<Team> myEnemies;
     
-    public string playID;
+    public string playID = "-1";
     
     public int mylayer;
     public int myWeaponLayer;
@@ -28,10 +28,11 @@ public class TeamConfig
     public LayerMask enemyShieldLayerMask;
     public LayerMask mySensorAndWeaponTargetLayerMask;//不管是我的武器还是我的Sensor都是用这个layermask决定去检测哪些战场上的敌人信息
 
-    public static TeamConfig defaultSet = new TeamConfig(Team.none,new List<Team>());
+    public static TeamConfig defaultSet = new TeamConfig( "-1", Team.none,new List<Team>());
     
-    public TeamConfig(Team myTeam, List<Team> myEnemies)
+    public TeamConfig(string id, Team myTeam, List<Team> myEnemies)
     {
+        this.playID = id;
         this.myTeam = myTeam;
         this.myEnemies = myEnemies;
         RefreshMyLayers();

@@ -23,12 +23,12 @@ public class PreparingProcess : FSceneProcess
         yield return RTFightManager.target.LoadGame(NetFightScene.Fight);
         RTFightManager.target.Team1Members = RTFightManager.target.team1.TeamMembers;
         RTFightManager.target.Team2Members = RTFightManager.target.team2.TeamMembers;
-        
         RTFightManager.FightingMembers.Clear();
-
-        IDictionary<Team, List<Data_Center>> TeamMembers = new Dictionary<Team, List<Data_Center>>();
-        DicAdd<Team, List<Data_Center>>.Add(TeamMembers, Team.player1, RTFightManager.target.team1.TeamMembers.GetValues());
-        DicAdd<Team, List<Data_Center>>.Add(TeamMembers, Team.player2, RTFightManager.target.team2.TeamMembers.GetValues());
+        
+        IDictionary<TeamConfig, List<Data_Center>> TeamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
+        
+        DicAdd<TeamConfig, List<Data_Center>>.Add(TeamMembers, RTFightManager.target.heroTeamConfig, RTFightManager.target.team1.TeamMembers.GetValues());
+        DicAdd<TeamConfig, List<Data_Center>>.Add(TeamMembers, RTFightManager.target.EnemyTeamConfig, RTFightManager.target.team2.TeamMembers.GetValues());
         FightOverControl.target.logger.ReadyToLog(TeamMembers);
         
         EffectsManager.INIEffectsPool("hit_ground", null, 3);

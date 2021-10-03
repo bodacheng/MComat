@@ -38,6 +38,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         fightMembers.EnemySets._SerializableSets = LInfo.Team;
         fightMembers.EnemySets.ConvertSerializableArrayToDictionary();
         FightInfo stage = FightInfo.ArenaStage(fightMembers);
+        stage.team2ID = LInfo.PlayerLeaderboardEntry.PlayFabId;
         stage.SetEventType(FightEventType.Arena);
 
         BigButton.onClick.RemoveAllListeners();

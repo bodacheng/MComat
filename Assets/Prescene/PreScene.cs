@@ -200,12 +200,14 @@ namespace mainMenu
         public void BeginSkillTest_Rotatiom()
         {
             FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
+            stage.team1ID = Account._AccInfo.playerID;
             FightLoad.Go(stage);
         }
 
         public void BeginSkillTest_Multi()
         {
             FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.multiraid);
+            stage.team1ID = Account._AccInfo.playerID;
             FightLoad.Go(stage);
         }
 

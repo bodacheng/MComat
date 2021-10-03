@@ -48,6 +48,7 @@ public class ArcadeTop : UILayer
                 void LoadThisStage()
                 {
                     ArcadeStages[one.ID].stageConfig.LoadMyTeam();
+                    ArcadeStages[one.ID].stageConfig.team1ID = Account._AccInfo.playerID;
                     PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, ArcadeStages[one.ID].stageConfig, true);
                 }
                 newButton.button.onClick.AddListener(LoadThisStage);

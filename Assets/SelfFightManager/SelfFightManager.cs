@@ -138,6 +138,8 @@ namespace mainMenu
         {
             MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
             ArrangeTeamBySelection();
+            stage.team1ID = Account._AccInfo.playerID;
+            stage.team2ID = Account._AccInfo.playerID + "_2";
             FightLoad.Go(stage);
         }
         

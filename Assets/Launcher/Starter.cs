@@ -19,6 +19,7 @@ public class Starter : MonoBehaviour
         {
             FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
             stage.SetEventType(FightEventType.Screensaver);
+            stage.team1ID = Account._AccInfo.playerID;
             FightLoad.Go(stage);
         }else{
             MainMenuNote.goingtostep = MainSceneStep.FrontPage;

@@ -17,10 +17,12 @@ namespace FightScene
             // quest结束：显示技能石经验获得情况和报酬信息？
             // 自我战斗结束：显示战斗分析？
             // 技能测试：显示战斗分析？
+            Debug.Log(" winner id " + FightOverControl.target.logger.GetWinnerId());
+
             switch (NetFightScene.Fight.GetEventType())
             {
                 case FightEventType.Arena:
-                    if (FightOverControl.target.logger.GetWinner() == Team.player1)
+                    if (FightOverControl.target.logger.GetWinnerId() == Account._AccInfo.playerID)
                     {
                         CloudScript.ArenaPointUpBy1(
                             () =>
@@ -42,7 +44,7 @@ namespace FightScene
                     //FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
                 break;
                 case FightEventType.Quest:
-                    if (FightOverControl.target.logger.GetWinner() == Team.player1)
+                    if (FightOverControl.target.logger.GetWinnerId() == Account._AccInfo.playerID)
                     {
                         CloudScript.ArcadeProgress(
                             NetFightScene.Fight.ID.ToString(),
@@ -71,7 +73,11 @@ namespace FightScene
                                 }
                                 ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArcadeFightResult;
                                 cc.Initialise(FightOverControl.target.ReturnToFront, 
-                                    FightOverControl.target.LocalGameRestart, 
+                                    ()=>
+                                    {
+                                        FightOverControl.target.LocalGameRestart();
+                                        UILayerLoader.Remove("ArcadeFightResult");
+                                    },  
                                     LoadNextLevel,
                                 reward_GDInt, reward_DIAInt);
                                 
@@ -87,14 +93,23 @@ namespace FightScene
                     {
                         ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArcadeFightResult;
                         cc.Initialise(FightOverControl.target.ReturnToFront, 
-                            FightOverControl.target.LocalGameRestart, 
+                             ()=>
+                             {
+                                 FightOverControl.target.LocalGameRestart();
+                                 UILayerLoader.Remove("ArcadeFightResult");
+                             }, 
                             null,
                             0, 0);
                     }
                     break;
                 case FightEventType.Self:
                     CommonFightResult c = UILayerLoader.Load(NetFightScene.target.T.gameObject, "CommonFightResult") as CommonFightResult;
-                    c.Initialise(FightOverControl.target.ReturnToFront, FightOverControl.target.LocalGameRestart);
+                    c.Initialise(FightOverControl.target.ReturnToFront, 
+                        () =>
+                        {
+                            FightOverControl.target.LocalGameRestart();
+                            UILayerLoader.Remove("CommonFightResult");
+                        });
                     c.ShowSKillSets(RTFightManager.target.team1, c.GetIconAndSKillShowUISetT());
                     break;
                 case FightEventType.SkillTest:
