@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Api.Dto.Model;
 using dataAccess;
 using Skill;
 
@@ -41,6 +40,17 @@ namespace mainMenu
         public Slider expValue;
         public Text StoneTargetLevel;
         
+        static GameObject Marker;
+
+        void Awake()
+        {
+            if (Marker == null)
+            {
+                Marker = new GameObject("Object Pools Container");
+                UnityEngine.Object.DontDestroyOnLoad(Marker);
+            }
+        }
+        
         // 额外生成一个技能石图像
         void IconForShow(string skillID)
         {
@@ -56,6 +66,10 @@ namespace mainMenu
                 item.transform.localPosition = Vector3.zero;
                 item.transform.localScale = Vector3.one;
                 item.transform.GetComponent<RectTransform>().sizeDelta = IconShowT.transform.GetComponent<RectTransform>().sizeDelta;
+            }
+            else
+            {
+                item.transform.SetParent(Marker.transform);
             }
         }
         

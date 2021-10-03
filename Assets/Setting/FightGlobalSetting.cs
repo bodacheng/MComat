@@ -5,7 +5,6 @@ using dataAccess;
 public class FightGlobalSetting : ScriptableObject
 {
     public ProgramMode programMode = ProgramMode.normal;
-    public bool IgnoreStoneTexture = false;
     public bool hasDefend;
     public bool skillStoneHasExp = false;
     public AnimationCurve knockOffyAnimationCurve;
@@ -44,7 +43,6 @@ public class FightGlobalSetting : ScriptableObject
     #endregion
     
     public static ProgramMode _programMode;
-    public static bool _IgnoreStoneTexture;
     public static int scenestep;//0 :mainmenu 1: fightscene
     public static bool _hasDefend;
     public static bool _skillStoneHasExp;
@@ -109,8 +107,7 @@ public class FightGlobalSetting : ScriptableObject
     public void Initialise()
     {
         _programMode = programMode;
-        _IgnoreStoneTexture = IgnoreStoneTexture;
-
+        
         _HurtObjectPreLoadCount = HurtObjectPreLoadCount;
         
         _hasDefend = hasDefend;

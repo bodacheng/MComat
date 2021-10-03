@@ -6,6 +6,8 @@ using System;
 using Newtonsoft.Json;
 using Json;
 using System.IO;
+using System.Linq;
+using Cysharp.Threading.Tasks;
 
 public partial class PlayFabReadClient
 {
@@ -29,6 +31,7 @@ public partial class PlayFabReadClient
         }
         return null;
     }
+    
     /// <summary>
     /// 添加实际邮件信息
     /// </summary>
@@ -71,6 +74,12 @@ public partial class PlayFabReadClient
     
     public static void DeleteAllLocalMails()
     {
+        List<MailItemInstance> ToDelete = _myMailList.FindAll(x => (x.RemainingUses.Value <= 0));
+        foreach (var d in ToDelete)
+        {
+            _myMailList.Remove(d);
+        }
+        
         string path = Application.persistentDataPath + "/readmail";
         if (Directory.Exists(path))
         {
@@ -78,10 +87,6 @@ public partial class PlayFabReadClient
             {
                 try
                 {
-                    string dataAsJson = File.ReadAllText(file);
-                    MailItemInstance mailOfPlayerModel = JsonConvert.DeserializeObject<MailItemInstance>(dataAsJson);
-                    MailItemInstance v = _myMailList.Find(x => x.ItemInstanceId == mailOfPlayerModel.ItemInstanceId);
-                    _myMailList.Remove(v);
                     File.Delete(file);
                 }
                 catch (Exception e)
@@ -92,7 +97,7 @@ public partial class PlayFabReadClient
         }
     }
     
-    public static void ClaimPresent(string ItemId, Action<ItemInstance> Success)
+    public static void ClaimPresent(string ItemId, Action<ItemInstance> saveToLocal)
     {
         PlayFabClientAPI.UnlockContainerItem(
             new UnlockContainerItemRequest
@@ -114,12 +119,17 @@ public partial class PlayFabReadClient
                     }
                 }
                 if (target != null)
-                    Success.Invoke(target);
+                    saveToLocal.Invoke(target);
             },
             errorCallback => {
                 Debug.Log(errorCallback.Error);
             }
         );
+    }
+    
+    public static void ClaimAllPresentMails(Action<ItemInstance> saveToLocal)
+    {
+        CloudScript.ClaimAllPresentMails(_myMailList, saveToLocal);
     }
     
     #endregion

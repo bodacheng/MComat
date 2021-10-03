@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using mainMenu;
-using Api.Dto.Model;
 using Skill;
 
 namespace dataAccess
@@ -44,17 +43,13 @@ namespace dataAccess
             {
                 return null;
             }
-            SKStoneItem item;
-            GameObject pretab = SkillIconsDic.Instance.Get(skillID);
-            if (pretab == null)
-            {
-                pretab = SkillIconsDic.Instance.FindSkillIconByResource_P(skillID);
-            }
-            GameObject newIcon = Object.Instantiate(pretab);
-            item = newIcon.GetComponent<SKStoneItem>();
+            
+            GameObject Icon = SkillIconsDic.Instance.FindSkillIconPrefabByResource(skillID);
+            GameObject ob = GameObject.Instantiate(Icon);
+            SKStoneItem item = ob.GetComponent<SKStoneItem>();
             if (item == null)
             {
-                item = newIcon.AddComponent<SKStoneItem>();
+                item = Icon.AddComponent<SKStoneItem>();
             }
             item._SkillConfig = skillConfig;
             item.enabled = openStoneFeature;

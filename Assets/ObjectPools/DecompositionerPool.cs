@@ -3,7 +3,6 @@ using UnityEngine;
 using UniRx.Toolkit;
 using HittingDetection;
 using System;
-using dataAccess;
 using System.Collections.Generic;
 using Log;
 

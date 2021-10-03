@@ -4,43 +4,34 @@ using Skill;
 
 public partial class SkillIconsDic
 {
-    public GameObject FindSkillIconByResource_P(string skillID)
+    public GameObject FindSkillIconPrefabByResource(string skillID)
     {
-        GameObject readingSprite;
-        SkillIconDic.TryGetValue(skillID, out readingSprite);
-        if (readingSprite != null)
+        GameObject prefab;
+        SkillIconDic.TryGetValue(skillID, out prefab);
+        
+        if (prefab == null)
         {
-            return readingSprite;
-        }
-        SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
-
-        // 图标可以是Sprite或其他格式，只要名字对上编号就可以
-        if (!FightGlobalSetting._IgnoreStoneTexture)
-        {
+            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
+            // 图标可以是Sprite或其他格式，只要名字对上编号就可以
             Sprite sprite = Resources.Load<Sprite>("Sprites/skillIcons/" + skillID);
             if (sprite != null)
             {
-                GameObject _base = Instance.GetDefaultSkillIconByResource(skillConfig.SP_LEVEL);
-                readingSprite = Object.Instantiate(_base);
-                readingSprite.GetComponent<Image>().sprite = sprite;
+                prefab = Instance.GetDefaultSkillIconByResource(skillConfig.SP_LEVEL);
+                prefab.GetComponent<Image>().sprite = sprite;
             }
             else
             {
-                GameObject ICON = Resources.Load("Sprites/skillIcons/" + skillID) as GameObject;
-                if (ICON != null)
-                {
-                    readingSprite = Object.Instantiate(ICON);
-                }
-                else
+                prefab = Resources.Load("Sprites/skillIcons/" + skillID) as GameObject;
+                if (prefab == null)
                 {
                     GameObject _base = Instance.GetDefaultSkillIconByResource(skillConfig.SP_LEVEL);
-                    readingSprite = Object.Instantiate(_base);
+                    prefab = Object.Instantiate(_base);
                 }
             }
         }
-
-        DicAdd<string, GameObject>.Add(SkillIconDic, skillID, readingSprite);
-        return readingSprite;
+        
+        DicAdd<string, GameObject>.Add(SkillIconDic, skillID, prefab);
+        return prefab;
     }
 
     GameObject d, ex1, ex2, ex3;
@@ -51,25 +42,25 @@ public partial class SkillIconsDic
             case 0:
                 if (d == null)
                 {
-                    d = Resources.Load<GameObject>("Sprites/skillIcons/normal_default") as GameObject;
+                    d = Resources.Load<GameObject>("Sprites/skillIcons/normal_default");
                 }
                 return d;
             case 1:
                 if (ex1 == null)
                 {
-                    ex1 = Resources.Load<GameObject>("Sprites/skillIcons/ex1_default") as GameObject;
+                    ex1 = Resources.Load<GameObject>("Sprites/skillIcons/ex1_default");
                 }
                 return ex1;
             case 2:
                 if (ex2 == null)
                 {
-                    ex2 = Resources.Load<GameObject>("Sprites/skillIcons/ex2_default") as GameObject;
+                    ex2 = Resources.Load<GameObject>("Sprites/skillIcons/ex2_default");
                 }
                 return ex2;
             case 3:
                 if (ex3 == null)
                 {
-                    ex3 = Resources.Load<GameObject>("Sprites/skillIcons/ex3_default") as GameObject;
+                    ex3 = Resources.Load<GameObject>("Sprites/skillIcons/ex3_default");
                 }
                 return ex3;
         }

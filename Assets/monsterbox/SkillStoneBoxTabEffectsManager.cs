@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace mainMenu
@@ -10,6 +9,17 @@ namespace mainMenu
         ZokuseiStoneTagsGroup _focusingButtonEffectsGroup;
         GameObject triggerExplosionPretab0;
         ParticleSystem triggerExplosion0;
+        
+        static GameObject Marker;
+
+        void Awake()
+        {
+            if (Marker == null)
+            {
+                Marker = new GameObject("Object Pools Container");
+                UnityEngine.Object.DontDestroyOnLoad(Marker);
+            }
+        }
         
         public void StartUp()
         {
@@ -36,6 +46,7 @@ namespace mainMenu
             
             triggerExplosionPretab0 = Resources.Load("essentialUIElements/buttonEffects/lightMagic/explosion0", typeof(GameObject)) as GameObject;
             triggerExplosion0 = Instantiate(triggerExplosionPretab0).GetComponent<ParticleSystem>();
+            triggerExplosion0.transform.SetParent(Marker.transform);
         }
         
         public void CloseShowingZokuseiTagEffects()

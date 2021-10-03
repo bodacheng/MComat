@@ -656,6 +656,7 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
+     <Compile Include="Assets\PlayFab\CloudScripts\Mail.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />
@@ -1930,17 +1931,9 @@
       <Project>{05318875-1897-527d-49be-8f73049faddb}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
-    <ProjectReference Include="PlayFabSDKEditor.csproj">
-      <Project>{b66bf6a6-bdbd-a406-4867-b5f5adf9847a}</Project>
-      <Name>PlayFabSDKEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="PlayFabEditorExtensions.csproj">
       <Project>{013bdff4-f5db-6280-902d-1d03b79d7515}</Project>
       <Name>PlayFabEditorExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="PlayFab.csproj">
-      <Project>{e0202ee9-9920-2c5f-cdc6-263f7b6d3a00}</Project>
-      <Name>PlayFab</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.DOTween.csproj">
       <Project>{3e044dcc-d241-df23-e1d3-661d83f799b1}</Project>
@@ -1965,6 +1958,14 @@
     <ProjectReference Include="UniTask.Addressables.csproj">
       <Project>{5d9a38dd-bc27-7387-6530-d1a0d7a6951b}</Project>
       <Name>UniTask.Addressables</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayFabSDKEditor.csproj">
+      <Project>{b66bf6a6-bdbd-a406-4867-b5f5adf9847a}</Project>
+      <Name>PlayFabSDKEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayFab.csproj">
+      <Project>{e0202ee9-9920-2c5f-cdc6-263f7b6d3a00}</Project>
+      <Name>PlayFab</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

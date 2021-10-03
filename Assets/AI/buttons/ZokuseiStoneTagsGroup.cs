@@ -37,7 +37,7 @@ public class ZokuseiStoneTagsGroup
         buttonEffectsSetsForSkillStoneBox.Add(2, ex2tab.GetComponent<ParticleSystem>());
         buttonEffectsSetsForSkillStoneBox.Add(3, ex3tab.GetComponent<ParticleSystem>());
 
-        LoadPressedEffect(zokusei);
+        LoadPressedEffect(zokusei, effectObjectParent);
     }
 
     public static GameObject CreateOneButtonIcon(Zokusei zokusei, int SpLevel)
@@ -61,7 +61,7 @@ public class ZokuseiStoneTagsGroup
         return null;
     }
     
-    public void LoadPressedEffect(Zokusei zokusei)
+    public void LoadPressedEffect(Zokusei zokusei, Transform T)
     {
         string buttoneffectspath = FightGlobalSetting.EffectPathDefine(zokusei);
         
@@ -74,6 +74,11 @@ public class ZokuseiStoneTagsGroup
         ParticleSystem triggerExplosion1 = Object.Instantiate(triggerExplosionPretab1).GetComponent<ParticleSystem>();
         ParticleSystem triggerExplosion2 = Object.Instantiate(triggerExplosionPretab2).GetComponent<ParticleSystem>();
         ParticleSystem triggerExplosion3 = Object.Instantiate(triggerExplosionPretab3).GetComponent<ParticleSystem>();
+        
+        triggerExplosion0.transform.SetParent(T);
+        triggerExplosion1.transform.SetParent(T);
+        triggerExplosion2.transform.SetParent(T);
+        triggerExplosion3.transform.SetParent(T);
         
         buttonPressedEffects.Add(0,triggerExplosion0);
         buttonPressedEffects.Add(1,triggerExplosion1);

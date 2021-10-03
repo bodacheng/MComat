@@ -18,15 +18,4 @@ public partial class SkillIconsDic {
     }
     
     IDictionary<string, GameObject> SkillIconDic = new Dictionary<string, GameObject>();
-
-    public GameObject Get(string skillID)
-    {
-        GameObject readingSprite;
-        SkillIconDic.TryGetValue(skillID, out readingSprite);
-        if (readingSprite != null)
-        {
-            return readingSprite;
-        }
-        return null;
-    }
 }

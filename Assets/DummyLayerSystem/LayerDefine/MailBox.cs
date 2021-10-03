@@ -8,6 +8,7 @@ public class MailBox : UILayer
     #region MailBox
     [SerializeField] MailListView mailListViewPretab;
     [SerializeField] RectTransform MailBoxT;
+    [SerializeField] Button ReadAll;
     [SerializeField] Button DeleteAllRead;
     #endregion
 
@@ -18,10 +19,11 @@ public class MailBox : UILayer
     /// </summary>
     public void GenerateMailModels()
     {
-        foreach (MailListView t in currentMailListViews)
+        foreach (Transform t in MailBoxT)
         {
             Destroy(t.gameObject);
         }
+        currentMailListViews.Clear();
         
         List<MailItemInstance> _myMailList = PlayFabReadClient.GetMailsData();
         
@@ -69,6 +71,11 @@ public class MailBox : UILayer
         {
             PlayFabReadClient.DeleteAllLocalMails();
             GenerateMailModels();
+        });
+        
+        ReadAll.onClick.AddListener(() =>
+        {
+            PlayFabReadClient.ClaimAllPresentMails(PlayFabReadClient.SaveReadMailAsJson);
         });
     }
 }

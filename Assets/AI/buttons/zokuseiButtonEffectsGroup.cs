@@ -23,6 +23,7 @@ public class zokuseiButtonEffectsGroup
     ParticleSystem arefresh;
     ParticleSystem fire1refresh;
     ParticleSystem fire2refresh;
+    
 
     public void Close()
     {
@@ -99,6 +100,10 @@ public class zokuseiButtonEffectsGroup
         ParticleSystem attackbuttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
         ParticleSystem fire1buttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
         ParticleSystem fire2buttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
+        
+        attackbuttonslot.transform.SetParent(targetRectT);
+        fire1buttonslot.transform.SetParent(targetRectT);
+        fire2buttonslot.transform.SetParent(targetRectT);
         
         buttonSlotEffects = new Dictionary<Button, ParticleSystem>
         {

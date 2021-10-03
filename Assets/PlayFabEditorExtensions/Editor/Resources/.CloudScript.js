@@ -141,6 +141,39 @@ handlers.getMonsterTest = function (args, context) {
     var playerStatResult = server.GrantItemsToUsers(request);
 };
 
+handlers.ClaimAllPresentMails = function (args, context) {
+    var request = {
+        "PlayFabId": currentPlayerId
+    };
+    var items = server.GetUserInventory(request);
+
+    let UnlockedList = [];
+    var allDM = 0;
+    var allGD = 0;
+    for (var i = 0; i < items.Inventory.length; i++) {
+        var item = items.Inventory[i];
+        if (item.CatalogVersion == "BoxTest")
+        {
+            var UnlockContainerItemRequest = {
+                "PlayFabId": currentPlayerId,
+                "CatalogVersion" : item.CatalogVersion,
+                "ContainerItemId" : item.ItemId
+            };
+            var result = server.UnlockContainerItem(UnlockContainerItemRequest);
+            if (result.VirtualCurrency.DM) {
+                allDM += result.VirtualCurrency.DM;
+            }
+            if (result.VirtualCurrency.GD) {
+                allGD += result.VirtualCurrency.GD;
+            }
+            UnlockedList.push(result.UnlockedItemInstanceId);
+        }
+    }
+    log.debug("ALL DM:", allDM);
+    log.debug("ALL GD:", allGD);
+    return { DM: allDM ,  GD: allGD , UnlockedItemInstanceIds : UnlockedList};
+}
+
 handlers.Remove25Stones = function (args, context) {
 
     var request = {

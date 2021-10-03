@@ -5,6 +5,7 @@ using System;
 using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 [CustomEditor(typeof(SKillAnalyzer))]
 public class SKillAnalyzerGUI : Editor
@@ -76,20 +77,48 @@ public class SKillAnalyzerGUI : Editor
             PlayFabClientAPI.ExecuteCloudScript(
                 new ExecuteCloudScriptRequest()
                 {
-                    FunctionName = "completedLevel",
-                    FunctionParameter = new { level = "5" },
+                    FunctionName = "ClaimAllPresentMails",
                     GeneratePlayStreamEvent = true
                 },
                 (ExecuteCloudScriptResult result) => {
                     PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                    object level;
-                    jsonResult.TryGetValue("progressLevel", out level);
-                    Debug.Log(level.ToString());
+                    object gd, dm, unlockedidlist;
+                    jsonResult.TryGetValue("DM", out dm);
+                    jsonResult.TryGetValue("GD", out gd);
+                    jsonResult.TryGetValue("UnlockedItemInstanceIds", out unlockedidlist);
+                    Debug.Log(
+                        " 获得黄金"+ gd.ToString()+
+                        " 宝石"+ dm.ToString()
+                        );
+                    List<string> ids =JsonConvert.DeserializeObject<List<string>>(unlockedidlist.ToString());
+                    for (int i = 0; i < ids.Count; i++)
+                    {
+                        Debug.Log("unlockedid" + ids[i]);
+                    }
+                    
                 },
                 error => {
                     Debug.Log(error.Error);
                 }
             );
+            
+            // PlayFabClientAPI.ExecuteCloudScript(
+            //     new ExecuteCloudScriptRequest()
+            //     {
+            //         FunctionName = "completedLevel",
+            //         FunctionParameter = new { level = "5" },
+            //         GeneratePlayStreamEvent = true
+            //     },
+            //     (ExecuteCloudScriptResult result) => {
+            //         PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+            //         object level;
+            //         jsonResult.TryGetValue("progressLevel", out level);
+            //         Debug.Log(level.ToString());
+            //     },
+            //     error => {
+            //         Debug.Log(error.Error);
+            //     }
+            // );
 
             //TitleData.SetArcadeRewards();
             //PlayFabClientAPI.WritePlayerEvent(new WriteClientPlayerEventRequest()
