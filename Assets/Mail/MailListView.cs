@@ -3,8 +3,6 @@ using UnityEngine;
 using mainMenu;
 using System;
 using UniRx;
-using UnityEngine.Serialization;
-using PlayFab.ClientModels;
 
 /// <summary>
 /// 邮件ListView的开发主要有如下问题
@@ -46,7 +44,7 @@ public class MailListView : MonoBehaviour
             presentlifeRemain.gameObject.SetActive(false);
         }
         mailData.ReadObservable.Subscribe(AsRead).AddTo(this.gameObject);
-
+        
         ClaimBtn.onClick.RemoveAllListeners();
         ClaimBtn.onClick.AddListener(
             () => PlayFabReadClient.ClaimPresent(
@@ -58,14 +56,14 @@ public class MailListView : MonoBehaviour
                 }
             )
         );
-
+        
         //  暂不需要详细读取邮件功能
         //ReadMe.onClick.RemoveAllListeners();
         //ReadMe.onClick.AddListener(ReadMail);
         
         mailData.Set();
     }
-
+    
     private Color unreadc = new Color(0.4f,0.4f,1, 1);
     private Color readc = new Color(0.4f,0.4f,1, 0.6f); 
     void AsRead(bool read)

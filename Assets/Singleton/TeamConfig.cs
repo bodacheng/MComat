@@ -14,9 +14,9 @@ public class TeamConfig
 {
     public Team myTeam;
     public List<Team> myEnemies;
-
-    public string my_tag;
-
+    
+    public string playID;
+    
     public int mylayer;
     public int myWeaponLayer;
     public int myShieldLayer;
@@ -29,12 +29,7 @@ public class TeamConfig
     public LayerMask mySensorAndWeaponTargetLayerMask;//不管是我的武器还是我的Sensor都是用这个layermask决定去检测哪些战场上的敌人信息
 
     public static TeamConfig defaultSet = new TeamConfig(Team.none,new List<Team>());
-
-    public TeamConfig()
-    {
-
-    }
-
+    
     public TeamConfig(Team myTeam, List<Team> myEnemies)
     {
         this.myTeam = myTeam;
@@ -47,27 +42,22 @@ public class TeamConfig
         switch (myTeam)
         {
             case Team.player1:
-                my_tag = "Player1";
                 mylayer = 9;
                 myTeamLayerMask =  (1 << 9);
                 myWeaponLayer = 11;
                 myShieldLayer = 15;
                 break;
             case Team.player2:
-                my_tag = "Player2";
                 mylayer = 10;
                 myTeamLayerMask =  (1 << 10);
                 myWeaponLayer = 12;
                 myShieldLayer = 16;
                 break;
             case Team.player3:
-                my_tag = "Player3";
                 break;
             case Team.player4:
-                my_tag = "Player4";
                 break;
             default:
-                my_tag = "Untagged";
                 mylayer = 0;
                 myWeaponLayer = 0;
                 myShieldLayer = 0;

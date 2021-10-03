@@ -10,7 +10,7 @@
         
         public override bool CanEnterOtherProcess()
         {
-            return FightLogger.target.GameOver.Value;
+            return FightOverControl.target.logger.GameOver.Value;
         }
         
         public override void ProcessEnter()
@@ -45,7 +45,7 @@
                 NetFightScene.target.FightCanvas.gameObject.SetActive(false);
             }
             
-            FightLogger.target.WatchMissionsAbandon();
+            FightOverControl.target.logger.WatchMissionsAbandon();
         }
 
         public override void LocalUpdate()

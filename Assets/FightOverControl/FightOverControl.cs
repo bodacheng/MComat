@@ -10,6 +10,8 @@ namespace FightScene
     public class FightOverControl : MonoBehaviour
     {
         public static FightOverControl target;
+
+        public FightLogger logger = new FightLogger();
         
         void Awake()
         {
@@ -29,7 +31,7 @@ namespace FightScene
                 one.CleanClear();
             }
             RTFightManager.target.Clear();
-            FightLogger.target.WatchMissionsAbandon();
+            logger.WatchMissionsAbandon();
             FSceneProcessesRunner.Main.Clear();
             MainMenuNote.goingtostep = MainSceneStep.FrontPage;
             HitBoxesProcesser.Instance.processingDecompositioners.Clear();

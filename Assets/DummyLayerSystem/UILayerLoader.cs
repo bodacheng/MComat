@@ -14,7 +14,7 @@ public class UILayerLoader
         {"CommonFightResult", "DummyLayerSystem/CommonFightResult"},
         {"TitleScreenLayer", "DummyLayerSystem/TitleScreenLayer"},
         {"ArcadeFightResult", "DummyLayerSystem/ArcadeFightResult"},
-        {"FightResultAnimLayer", "DummyLayerSystem/FightResultAnimLayer"}
+        {"FightResultAnimLayer", "DummyLayerSystem/FightResultAnimLayer"},
     };
 
     private static List<UILayer> Queues = new List<UILayer>();

@@ -1,7 +1,6 @@
 ﻿using dataAccess;
 using System.Collections.Generic;
 using UnityEngine;
-using mainMenu;
 
 namespace FightScene
 {
@@ -14,7 +13,6 @@ namespace FightScene
         
         void EnterProcess()
         {
-            // 不同模式下的战斗结束画面应该有个更加利索的分歧处理方式吧。。
             // 竞技场结束：显示排名变化？
             // quest结束：显示技能石经验获得情况和报酬信息？
             // 自我战斗结束：显示战斗分析？
@@ -22,7 +20,7 @@ namespace FightScene
             switch (NetFightScene.Fight.GetEventType())
             {
                 case FightEventType.Arena:
-                    if (FightLogger.target.GetWinner() == Team.player1)
+                    if (FightOverControl.target.logger.GetWinner() == Team.player1)
                     {
                         CloudScript.ArenaPointUpBy1(
                             () =>
@@ -44,7 +42,7 @@ namespace FightScene
                     //FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
                 break;
                 case FightEventType.Quest:
-                    if (FightLogger.target.GetWinner() == Team.player1)
+                    if (FightOverControl.target.logger.GetWinner() == Team.player1)
                     {
                         CloudScript.ArcadeProgress(
                             NetFightScene.Fight.ID.ToString(),
@@ -76,11 +74,22 @@ namespace FightScene
                                     FightOverControl.target.LocalGameRestart, 
                                     LoadNextLevel,
                                 reward_GDInt, reward_DIAInt);
+                                
+                                Debug.Log("hello"+ cc);
                             },
                             () =>
                             {
+
                             }
                         );
+                    }
+                    else
+                    {
+                        ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArcadeFightResult;
+                        cc.Initialise(FightOverControl.target.ReturnToFront, 
+                            FightOverControl.target.LocalGameRestart, 
+                            null,
+                            0, 0);
                     }
                     break;
                 case FightEventType.Self:
@@ -101,7 +110,7 @@ namespace FightScene
             {
                 one.CleanClear();
             }
-            FightLogger.target.WatchMissionsAbandon();
+            FightOverControl.target.logger.WatchMissionsAbandon();
             SingleAssignmentDisposableCleaner.Clear();
             LoadingCanvas.target.Loading_Canvas.gameObject.SetActive(false);
             FightScenePauseSupport.target.ControlCanvas.gameObject.SetActive(false);

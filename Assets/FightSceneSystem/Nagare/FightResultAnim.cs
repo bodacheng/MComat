@@ -20,7 +20,7 @@ public class FightResultAnim : FSceneProcess
     IEnumerator EnterProcess()
     {
         animEnd = false;
-        yield return FinalMomentAnim(FightLogger.target.GetWinner());
+        yield return FinalMomentAnim(FightOverControl.target.logger.GetWinner());
         animEnd = true;
     }
     
@@ -54,7 +54,7 @@ public class FightResultAnim : FSceneProcess
         FightResultAnimLayer fightResultAnimLayer = UILayerLoader.Load
             (NetFightScene.target.T.gameObject, "FightResultAnimLayer") as FightResultAnimLayer;
         
-        switch (FightLogger.target.GetWinner())
+        switch (FightOverControl.target.logger.GetWinner())
         {
             case Team.player1:
                 yield return fightResultAnimLayer.WINProcess();

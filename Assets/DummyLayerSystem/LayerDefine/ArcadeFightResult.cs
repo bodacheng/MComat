@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using mainMenu;
 using FightScene;
 
 public class ArcadeFightResult : UILayer

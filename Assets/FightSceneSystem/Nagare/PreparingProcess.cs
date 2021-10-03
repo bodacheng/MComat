@@ -29,7 +29,7 @@ public class PreparingProcess : FSceneProcess
         IDictionary<Team, List<Data_Center>> TeamMembers = new Dictionary<Team, List<Data_Center>>();
         DicAdd<Team, List<Data_Center>>.Add(TeamMembers, Team.player1, RTFightManager.target.team1.TeamMembers.GetValues());
         DicAdd<Team, List<Data_Center>>.Add(TeamMembers, Team.player2, RTFightManager.target.team2.TeamMembers.GetValues());
-        FightLogger.target.ReadyToLog(TeamMembers);
+        FightOverControl.target.logger.ReadyToLog(TeamMembers);
         
         EffectsManager.INIEffectsPool("hit_ground", null, 3);
         EffectsManager.INIEffectsPool("wallCrack", null, 3);
