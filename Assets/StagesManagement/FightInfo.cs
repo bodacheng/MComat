@@ -16,6 +16,8 @@ public class FightInfo : ScriptableObject
         get { return LocalFightID; }
     }
     
+    public string team1ID, team2ID;
+    
     public FightEventType GetEventType()
     {
         return eventType;
