@@ -6,10 +6,8 @@ public partial class SkillIconsDic
 {
     public GameObject FindSkillIconPrefabByResource(string skillID)
     {
-        GameObject prefab;
-        SkillIconDic.TryGetValue(skillID, out prefab);
-        
-        if (prefab == null)
+        GameObject prefab, returnValue;
+        if (!SkillIconDic.ContainsKey(skillID))
         {
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
             // 图标可以是Sprite或其他格式，只要名字对上编号就可以
@@ -17,25 +15,30 @@ public partial class SkillIconsDic
             if (sprite != null)
             {
                 prefab = Instance.GetDefaultSkillIconByResource(skillConfig.SP_LEVEL);
-                prefab.GetComponent<Image>().sprite = sprite;
+                returnValue = Object.Instantiate(prefab);
+                returnValue.GetComponent<Image>().sprite = sprite;
             }
             else
             {
                 prefab = Resources.Load("Sprites/skillIcons/" + skillID) as GameObject;
                 if (prefab == null)
                 {
-                    GameObject _base = Instance.GetDefaultSkillIconByResource(skillConfig.SP_LEVEL);
-                    prefab = Object.Instantiate(_base);
+                    prefab = Instance.GetDefaultSkillIconByResource(skillConfig.SP_LEVEL);
                 }
+                returnValue = Object.Instantiate(prefab);
             }
+            DicAdd<string, GameObject>.Add(SkillIconDic, skillID, returnValue);
+        }
+        else
+        {
+            SkillIconDic.TryGetValue(skillID, out returnValue);
         }
         
-        DicAdd<string, GameObject>.Add(SkillIconDic, skillID, prefab);
-        return prefab;
+        return returnValue;
     }
 
     GameObject d, ex1, ex2, ex3;
-    public GameObject GetDefaultSkillIconByResource(int spLevel)
+    GameObject GetDefaultSkillIconByResource(int spLevel)
     {
         switch (spLevel)
         {
