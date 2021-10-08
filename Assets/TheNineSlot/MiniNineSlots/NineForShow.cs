@@ -221,7 +221,13 @@ public partial class NineForShow : MonoBehaviour
             SK.transform.SetParent(BT.transform);
             SK.transform.localPosition = Vector3.zero;
             SK.transform.localScale = Vector3.one;
-            SK.GetComponent<RectTransform>().rect.Set(0, 0, slotRT.rect.width,slotRT.rect.height);
+
+            var targetRect = SK.GetComponent<RectTransform>();
+            targetRect.anchorMin = new Vector2(0, 0);
+            targetRect.anchorMax = new Vector2(1, 1);
+            targetRect.offsetMin = new Vector2(0, 0);
+            targetRect.offsetMax = new Vector2(0, 0);
+            //SK.GetComponent<RectTransform>().rect.Set(0, 0, slotRT.rect.width,slotRT.rect.height);
             SK.gameObject.SetActive(true);
         }
 
