@@ -75,7 +75,7 @@ public class MailBox : UILayer
         
         ReadAll.onClick.AddListener(() =>
         {
-            PlayFabReadClient.ClaimAllPresentMails(PlayFabReadClient.SaveReadMailAsJson);
+            PlayFabReadClient.claimAllPresentMails(PlayFabReadClient.SaveReadMailAsJson);
         });
     }
 }

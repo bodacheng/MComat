@@ -77,30 +77,45 @@ public class SKillAnalyzerGUI : Editor
             PlayFabClientAPI.ExecuteCloudScript(
                 new ExecuteCloudScriptRequest()
                 {
-                    FunctionName = "ClaimAllPresentMails",
+                    FunctionName = "arenaPointUpBy1",
                     GeneratePlayStreamEvent = true
                 },
                 (ExecuteCloudScriptResult result) => {
                     PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                    object gd, dm, unlockedidlist;
-                    jsonResult.TryGetValue("DM", out dm);
-                    jsonResult.TryGetValue("GD", out gd);
-                    jsonResult.TryGetValue("UnlockedItemInstanceIds", out unlockedidlist);
-                    Debug.Log(
-                        " 获得黄金"+ gd.ToString()+
-                        " 宝石"+ dm.ToString()
-                        );
-                    List<string> ids =JsonConvert.DeserializeObject<List<string>>(unlockedidlist.ToString());
-                    for (int i = 0; i < ids.Count; i++)
-                    {
-                        Debug.Log("unlockedid" + ids[i]);
-                    }
-                    
+                    Debug.Log(" 竞技场分数增加 返回：" + jsonResult);
                 },
                 error => {
                     Debug.Log(error.Error);
                 }
             );
+            
+            // PlayFabClientAPI.ExecuteCloudScript(
+            //     new ExecuteCloudScriptRequest()
+            //     {
+            //         FunctionName = "claimAllPresentMails",
+            //         GeneratePlayStreamEvent = true
+            //     },
+            //     (ExecuteCloudScriptResult result) => {
+            //         PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+            //         object gd, dm, unlockedidlist;
+            //         jsonResult.TryGetValue("DM", out dm);
+            //         jsonResult.TryGetValue("GD", out gd);
+            //         jsonResult.TryGetValue("UnlockedItemInstanceIds", out unlockedidlist);
+            //         Debug.Log(
+            //             " 获得黄金"+ gd.ToString()+
+            //             " 宝石"+ dm.ToString()
+            //         );
+            //         List<string> ids =JsonConvert.DeserializeObject<List<string>>(unlockedidlist.ToString());
+            //         for (int i = 0; i < ids.Count; i++)
+            //         {
+            //             Debug.Log("unlockedid" + ids[i]);
+            //         }
+            //         
+            //     },
+            //     error => {
+            //         Debug.Log(error.Error);
+            //     }
+            // );
             
             // PlayFabClientAPI.ExecuteCloudScript(
             //     new ExecuteCloudScriptRequest()

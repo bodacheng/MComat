@@ -98,6 +98,7 @@
      <Compile Include="Assets\CSV2Table\Editor\CSVView.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\CoreExtensions\ConnectionPortStyles.cs" />
      <Compile Include="Assets\DynamicStarrySky\Editor\EditorCoroutine.cs" />
+     <Compile Include="Assets\AppleAuthSample\Editor\SignInWithApplePostprocessor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\NodeEditor.cs" />
      <Compile Include="Assets\DynamicStarrySky\Editor\StarrySkyShaderEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\RPGTalk Nodes\Nodes\RPGTalkChoiceNode.cs" />
@@ -881,6 +882,10 @@
       <Project>{b66bf6a6-bdbd-a406-4867-b5f5adf9847a}</Project>
       <Name>PlayFabSDKEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="AppleAuth.Editor.csproj">
+      <Project>{0de3c25d-e596-b8f3-75a9-4b52183d8b1f}</Project>
+      <Name>AppleAuth.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="PlayFabEditorExtensions.csproj">
       <Project>{013bdff4-f5db-6280-902d-1d03b79d7515}</Project>
       <Name>PlayFabEditorExtensions</Name>
@@ -908,6 +913,10 @@
     <ProjectReference Include="UniTask.csproj">
       <Project>{ab868ac3-38db-93ce-b53a-1ed2bfb72e67}</Project>
       <Name>UniTask</Name>
+    </ProjectReference>
+    <ProjectReference Include="AppleAuth.csproj">
+      <Project>{11db2e7e-c1b9-9ea6-9ee4-9b1ead681c56}</Project>
+      <Name>AppleAuth</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Addressables.csproj">
       <Project>{5d9a38dd-bc27-7387-6530-d1a0d7a6951b}</Project>

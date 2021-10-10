@@ -28,7 +28,7 @@ public partial class CloudScript
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest()
             {
-                FunctionName = "SkillEdit", // Arbitrary function name (must exist in your uploaded cloud.js file)
+                FunctionName = "skillEdit", // Arbitrary function name (must exist in your uploaded cloud.js file)
                 FunctionParameter = new { inputValue = Items }, // The parameter provided to your function
                 GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
             },

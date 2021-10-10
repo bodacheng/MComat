@@ -98,21 +98,21 @@ public partial class PlayFabReadClient
             new GetUserDataRequest()
             {
                 PlayFabId = Account._AccInfo.playerID,
-                Keys = new List<string>() { "lastLevelCompleted", "StoneBoxSize" }
+                Keys = new List<string>() { "last_Level_completed", "stone_box_size" }
             },
             (GetUserDataResult obj) => {
-                if (obj.Data.ContainsKey("lastLevelCompleted"))
+                if (obj.Data.ContainsKey("last_Level_completed"))
                 {
-                    Account._AccInfo.ArcadeProcess = int.Parse(obj.Data["lastLevelCompleted"].Value);
+                    Account._AccInfo.ArcadeProcess = int.Parse(obj.Data["last_Level_completed"].Value);
                 }
                 else
                 {
                     Account._AccInfo.ArcadeProcess = 0;
                 }
 
-                if (obj.Data.ContainsKey("StoneBoxSize"))
+                if (obj.Data.ContainsKey("stone_box_size"))
                 {
-                    Account._AccInfo.Stoneboxsize = int.Parse(obj.Data["StoneBoxSize"].Value);
+                    Account._AccInfo.Stoneboxsize = int.Parse(obj.Data["stone_box_size"].Value);
                 }
                 else
                 {

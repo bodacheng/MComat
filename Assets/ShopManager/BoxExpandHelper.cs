@@ -29,7 +29,7 @@ public class BoxExpandHelper : MonoBehaviour
     {
         void expandFive()
         {
-            LoadingCanvas.target.ArrangeConfirmWindow(ChooseFive, "来他5个技能石格子？？");
+            //LoadingCanvas.target.ArrangeConfirmWindow(ChooseFive, "来他5个技能石格子？？");
         }
         Five.onClick.RemoveAllListeners();
         Five.onClick.AddListener(expandFive);
@@ -48,11 +48,6 @@ public class BoxExpandHelper : MonoBehaviour
         }
         ResultConfirmButton.onClick.RemoveAllListeners();
         ResultConfirmButton.onClick.AddListener(ConfirmButton);
-    }
-    
-    void ChooseFive()
-    {
-        CloudScript.ExpandBox5();
     }
     
     void ChooseTen()

@@ -6,19 +6,19 @@ using Newtonsoft.Json;
 using System;
 public partial class CloudScript
 {
-    public static void ClaimAllPresentMails(List<MailItemInstance> _myMailList, Action<ItemInstance> saveToLocal)
+    public static void claimAllPresentMails(List<MailItemInstance> _myMailList, Action<ItemInstance> saveToLocal)
     {
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest()
             {
-                FunctionName = "ClaimAllPresentMails",
+                FunctionName = "claimAllPresentMails",
                 GeneratePlayStreamEvent = true
             },
             (ExecuteCloudScriptResult result) => {
                 PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                 object gd, dm, unlockedidlist;
-                jsonResult.TryGetValue("DM", out dm);
-                jsonResult.TryGetValue("GD", out gd);
+                jsonResult.TryGetValue("diamond", out dm);
+                jsonResult.TryGetValue("gold", out gd);
                 jsonResult.TryGetValue("UnlockedItemInstanceIds", out unlockedidlist);
                 Debug.Log(" 获得黄金"+ gd.ToString()+" 宝石"+ dm.ToString());
                 List<string> unlockedids =JsonConvert.DeserializeObject<List<string>>(unlockedidlist.ToString());

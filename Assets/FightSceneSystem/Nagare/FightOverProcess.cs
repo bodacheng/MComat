@@ -53,8 +53,8 @@ namespace FightScene
                                 PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                                 object level, reward_GD, reward_DIA;
                                 jsonResult.TryGetValue("progressLevel", out level);
-                                jsonResult.TryGetValue("reward_GD", out reward_GD);
-                                jsonResult.TryGetValue("reward_DIA", out reward_DIA);
+                                jsonResult.TryGetValue("gold", out reward_GD);
+                                jsonResult.TryGetValue("diamond", out reward_DIA);
                                 
                                 string levelstring = level.ToString();
                                 string reward_GDstring = reward_GD != null ? reward_GD.ToString() : "0";
@@ -77,10 +77,9 @@ namespace FightScene
                                     {
                                         FightOverControl.target.LocalGameRestart();
                                         UILayerLoader.Remove("ArcadeFightResult");
-                                    },  
+                                    }, 
                                     LoadNextLevel,
                                 reward_GDInt, reward_DIAInt);
-                                
                                 Debug.Log("hello"+ cc);
                             },
                             () =>

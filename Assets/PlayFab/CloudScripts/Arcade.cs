@@ -2,11 +2,10 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
-using dataAccess;
 
 public partial class CloudScript
 {
-    public static void ArcadeProgress(string targetLevel ,Action<ExecuteCloudScriptResult> success, Action fail)
+    public static void ArcadeProgress(string targetLevel, Action<ExecuteCloudScriptResult> success, Action fail)
     {
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest()

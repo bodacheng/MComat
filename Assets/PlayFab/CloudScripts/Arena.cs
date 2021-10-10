@@ -12,7 +12,7 @@ public partial class CloudScript
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest()
             {
-                FunctionName = "ArenaDefendTeamSave",
+                FunctionName = "arenaDefendTeamSave",
                 FunctionParameter = new { inputValue = info._SerializableSets },
                 GeneratePlayStreamEvent = true
             },
