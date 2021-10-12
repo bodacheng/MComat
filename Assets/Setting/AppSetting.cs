@@ -7,14 +7,18 @@ using Json;
 public class AppSetting
 {
     public static AppSetting value = new AppSetting();
-
-    float bgmVolumn = 0.5f, effectsVolumn = 0.5f;
+    
+    float bgmVolumn = 0.5f, effectsVolumn = 0.5f, cvVolumn = 0.5f;
+    
+    public static AudioSource bgmSource;
+    
     public float BgmVolumn
     {
         get => bgmVolumn;
         set
         {
             bgmVolumn = Mathf.Clamp(value, 0, 1);
+            bgmSource.volume = bgmVolumn;
         }
     }
 
@@ -24,6 +28,15 @@ public class AppSetting
         set
         {
             effectsVolumn = Mathf.Clamp(value, 0, 1);
+        }
+    }
+    
+    public float CvVolumn
+    {
+        get => cvVolumn;
+        set
+        {
+            cvVolumn = Mathf.Clamp(value, 0, 1);
         }
     }
 

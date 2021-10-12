@@ -3,18 +3,15 @@ using UnityEngine;
 
 public class AudioManager
 {
-    public static float effectsVolumn = 1f;
-    public static float voiceVolumn = 1f;
-
     public static IDictionary<string, AudioClip> Bgms = new Dictionary<string, AudioClip>();
     public static IDictionary<int, IDictionary<string, AudioClip>> Cvs = new Dictionary<int, IDictionary<string, AudioClip>>();
     
-    public AudioClip LoadCharacterCVByResource(int charID, string clipname)
+    public AudioClip LoadCVByResource(int charID, string clipname)
     {
         if (CvDicGetSafe(charID,clipname) != null)
             return CvDicGetSafe(charID, clipname);
         AudioClip cv = Resources.Load("Audios/characterCV/" + charID.ToString() + "/" + clipname, typeof(AudioClip)) as AudioClip;
-        CvDicAddSafe(charID,clipname,cv);
+        CvDicAddSafe(charID, clipname,cv);
         return cv;
     }
     
@@ -29,7 +26,7 @@ public class AudioManager
         return Cvs[charID][clipname];
     }
     
-    public void CvDicAddSafe(int charID, string clipname,AudioClip _clip)
+    public void CvDicAddSafe(int charID, string clipname, AudioClip _clip)
     {
         if (Cvs.ContainsKey(charID))
         {
@@ -57,7 +54,7 @@ public class AudioManager
     {
         if (Bgms.ContainsKey(clipname))
             return Bgms[clipname];
-        AudioClip bgm = Resources.Load("Audios/bgm/" + clipname.ToString(), typeof(AudioClip)) as AudioClip;
+        AudioClip bgm = Resources.Load("Audios/bgm/" + clipname, typeof(AudioClip)) as AudioClip;
         Bgms.Add(clipname,bgm);
         return bgm;
     }

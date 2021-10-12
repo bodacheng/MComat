@@ -273,6 +273,7 @@ handlers.arenaPointUpBy1 = function (args, context) {
 };
 
 handlers.GetLeaderboardAroundUser = function (args, context) {
+    
     var request = {
         "PlayFabId": currentPlayerId,
         "MaxResultsCount": 4,

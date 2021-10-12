@@ -39,7 +39,6 @@ public class PreparingProcess : FSceneProcess
     public override void ProcessEnter()
     {
         LoadingCanvas.target.DarkOffDirectly(1f);
-        NetFightScene.target.PreparingCanvas.gameObject.SetActive(true);
         SingleThreadProcesser.backup.RunFreely(EnterProcess());
     }
     

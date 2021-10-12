@@ -18,7 +18,7 @@ public static class FightLoad
         if (stage.fightMembers.HeroSets.GetValues().Count < 1 || stage.fightMembers.EnemySets.GetValues().Count < 1)
         {
             string error;
-            switch (Setting.Language)
+            switch (SettingLayer.Language)
             {
                 case ApiLanguage.JaJp:
                     error = "チームメンバーは3人未満でステージに入場出来ません。";

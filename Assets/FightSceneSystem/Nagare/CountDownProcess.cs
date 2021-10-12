@@ -20,24 +20,21 @@ namespace FightScene
             //{
             //    ((OneVOneMode)nowC).xzMax = 100f;
             //}
-            startTimestamp = 3f;
-            AutoMoveToNext = false;
-            BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
-            NetFightScene.target.mainProcessRunner.RunAsQueued(BeforeFightCountDown());
+            SingleThreadProcesser.backup.RunAsQueued(BeforeFightCountDown());
         }
         
         IEnumerator BeforeFightCountDown()
         {
+            startTimestamp = 3f;
+            AutoMoveToNext = false;
+            BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
             //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
-            NetFightScene.target.CountDown.gameObject.SetActive(true);
-            while (startTimestamp > 0)
-            {
-                startTimestamp -= Time.deltaTime;
-                NetFightScene.target.CountDown.text = "" + (1 + (int)(startTimestamp));
-                yield return null;
-            }
+            CountDownLayer cd = UILayerLoader.Load
+                (NetFightScene.target.T.gameObject, "CountDownLayer") as CountDownLayer;
+            yield return cd.BeforeFightCountDown();
+            UILayerLoader.Remove("CountDownLayer");
+            
             RTFightManager.target.ParaAdjustment(RTFightManager.playerTeam);
-            NetFightScene.target.CountDown.gameObject.SetActive(false);
             AutoMoveToNext = true;
         }
         

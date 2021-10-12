@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using UniRx;
 using UnityEngine.Playables;
 using System.Collections.Generic;
@@ -13,20 +12,13 @@ namespace FightScene
         
         [Space(11)]
         [Header("Canvas")]
-        public Canvas PreparingCanvas, FightCanvas;
+        public Canvas FightCanvas;
         
         #region before fight
         [Space(11)]
         [Header("PlayableDirector")]
         public PlayableDirector playableDirector;
-        [Space(11)]
-        [Header("CountDownText")]
-        public Text CountDown;
         #endregion
-        
-        [Space(11)]
-        [Header("战斗信息记录器")]
-        public FightLogger fightLogger;
         
         [Space(11)]
         [Header("场地控制")]
@@ -45,6 +37,10 @@ namespace FightScene
         [Header("主进程处理器")]
         public SingleThreadProcesser mainProcessRunner;
         
+        [Space(7)]
+        [Header("AudioSource")]
+        public AudioSource audioSource;
+        
         public static NetFightScene target;
         
         public ReactiveProperty<bool> LoadStageFinished { get; set; } = new ReactiveProperty<bool>(false);
@@ -61,6 +57,10 @@ namespace FightScene
         {
             //QualitySettings.vSyncCount = 1;
             Screen.SetResolution(1920, 1080, true);
+            
+            AppSetting.bgmSource = audioSource;
+            AppSetting.Load();
+            
             Application.targetFrameRate = 60;
             FightGlobalSetting.scenestep = 1;
             SingleThreadProcesser.backup = mainProcessRunner;

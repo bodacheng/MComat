@@ -75,7 +75,7 @@ public partial class Decompositioner : MonoBehaviour {
             to_be_stop_emissions.Play(true);
         if (audioSource)
         {
-            audioSource.volume = AudioManager.effectsVolumn;
+            audioSource.volume = AppSetting.value.EffectsVolumn;
         }
         SetMaterialsAlpha(1f);
     }

@@ -7,7 +7,7 @@ public class FightScenePauseSupport : MonoBehaviour
 {
     [Space(11)]
     [Header("Settings")]
-    public Setting setting;
+    public SettingLayer settingLayer;
     
     [Space(11)]
     [Header("暂停菜单里的Resume")]
@@ -44,8 +44,8 @@ public class FightScenePauseSupport : MonoBehaviour
         ResumeButton.onClick.RemoveAllListeners();
         ResumeButton.onClick.AddListener(ResumeScene);
         
-        OptionsButton.onClick.RemoveAllListeners();
-        OptionsButton.onClick.AddListener(setting.Open);
+        //OptionsButton.onClick.RemoveAllListeners();
+        //OptionsButton.onClick.AddListener(settingLayer.Open);
         OptionsButton.onClick.AddListener(JumpToOptions);
     }
     

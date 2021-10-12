@@ -91,7 +91,7 @@ public class SkillNameTable
             };
             rowList.Add(row);
     	}
-        PrepareSkillNames(Setting.Language);
+        PrepareSkillNames(SettingLayer.Language);
     	isLoaded = true;
     }
     

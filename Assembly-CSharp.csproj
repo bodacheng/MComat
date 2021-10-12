@@ -321,7 +321,7 @@
      <Compile Include="Assets\FightSceneSystem\Nagare\StoryProcess.cs" />
      <Compile Include="Assets\TheNineSlot\Validation\SVCenter.cs" />
      <Compile Include="Assets\ImportantDefinition\PlayerAccountInfo.cs" />
-     <Compile Include="Assets\Setting\Setting.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\SettingLayer.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaResult.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Input\ScrollGamepadManager.cs" />
      <Compile Include="Assets\UI\SciFic Icons\Scripts\IconScript.cs" />
@@ -660,6 +660,7 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\CountDownLayer.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />

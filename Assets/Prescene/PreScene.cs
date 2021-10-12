@@ -49,6 +49,10 @@ namespace mainMenu
         [Header("若干子画面的总RectTransfrom")]
         public RectTransform ArcadeTeamEditT;
         
+        [Space(7)]
+        [Header("AudioSource")]
+        public AudioSource audioSource;
+        
         void Awake()
         {
             target = this;
@@ -58,20 +62,28 @@ namespace mainMenu
         void Start()
         {
             Screen.SetResolution(1920, 1080, true);
+
+            AppSetting.bgmSource = audioSource;
             AppSetting.Load();
             Time.timeScale = 1;
             FightGlobalSetting.scenestep = 0;
-
+            
             StartUp();
             BasicPhase();
             ToInitialPhase();
+        }
+
+        public void OpenSetting()
+        {
+            SettingLayer cc = UILayerLoader.Load(PreScene.target.T.gameObject, "SettingLayer") as SettingLayer;
+            cc.Initialise();
         }
         
         public static void ReturnToLobby(string error)
         {
             LoadingCanvas.target.ArrangeConfirmWindow((() => { SceneManager.LoadScene(1);}), error);
         }
-
+        
         void BasicPhase()
         {
             LoadingCanvas.target.TurnOnProcessDescription(false);
