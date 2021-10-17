@@ -10,9 +10,9 @@ namespace FightScene
     {
         [Space(11)] public RectTransform T;
         
-        [Space(11)]
-        [Header("Canvas")]
-        public Canvas FightCanvas;
+        //[Space(11)]
+        //[Header("Canvas")]
+        //public Canvas FightCanvas;
         
         #region before fight
         [Space(11)]

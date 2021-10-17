@@ -16,6 +16,7 @@ public class UILayerLoader
         {"ArcadeFightResult", "DummyLayerSystem/ArcadeFightResult"},
         {"FightResultAnimLayer", "DummyLayerSystem/FightResultAnimLayer"},
         {"CountDownLayer", "DummyLayerSystem/CountDownLayer"},
+        {"FightingStepLayer", "DummyLayerSystem/FightingStepLayer"},
         {"SettingLayer", "DummyLayerSystem/SettingLayer"},
     };
 

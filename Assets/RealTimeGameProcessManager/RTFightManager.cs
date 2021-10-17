@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -8,14 +9,10 @@ namespace FightScene
     //角色列表的职责现在不光是负责两侧菜单中角色的icon，也负责被控制角色又上角血条和ex条
     public class RTFightManager : MonoBehaviour
     {
+        public Camera FX;
+        
         [Header("Basic Element")]
         public CameraManager _CameraManager;
-        
-        [Header("Auto BUtton")]
-        [Space(6)]
-        public Button autoBUtton;
-        public Image _C_button;
-        public Image _AI_button;
         
         [Header("Messages")]
         [Space(6)]
@@ -74,26 +71,37 @@ namespace FightScene
             SwitchToCMode(null, false);
             ParaAdjustment(playerTeam);
         }
-
-        public void Refresh()//这个刷新是倾向于画面制御
+        
+        public void SwitchAutoMode()
         {
+            Auto = !Auto;
+            SwitchToCMode(focusingChar, Auto);
+            
             if (!Auto && focusingChar != null)
             {
-                _C_button.gameObject.SetActive(true);
-                _AI_button.gameObject.SetActive(false);
+                FightingStepLayer.target.RefreshAIFlag(false);
             }
             else
             {
-                _C_button.gameObject.SetActive(false);
-                _AI_button.gameObject.SetActive(true);
+                FightingStepLayer.target.RefreshAIFlag(true);
             }
-            void SwitchAutoMode()
-            {
-                Auto = !Auto;
-                SwitchToCMode(focusingChar, Auto);
-            }
-            autoBUtton.onClick.RemoveAllListeners();
-            autoBUtton.onClick.AddListener(SwitchAutoMode);
+        }
+
+        public void Refresh()//这个刷新是倾向于画面制御
+        {
+            // if (!Auto && focusingChar != null)
+            // {
+            //     _C_button.gameObject.SetActive(true);
+            //     _AI_button.gameObject.SetActive(false);
+            // }
+            // else
+            // {
+            //     _C_button.gameObject.SetActive(false);
+            //     _AI_button.gameObject.SetActive(true);
+            // }
+
+            //autoBUtton.onClick.RemoveAllListeners();
+            //autoBUtton.onClick.AddListener(SwitchAutoMode);
             
             team1.Refresh(Team1Members);
             team2.Refresh(Team2Members);
@@ -237,8 +245,6 @@ namespace FightScene
                 AllUnitsStartOff(Team2Members, heroTeamConfig.myTeam, true);
             }
         }
-        
-
         
         // 战斗模式相机。根据选择队伍做相应调整。
         public void ParaAdjustment(Team myTeam)

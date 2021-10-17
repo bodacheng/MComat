@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
+using UnityEngine.Serialization;
 
 namespace FightScene
 {
@@ -13,7 +14,7 @@ namespace FightScene
         public MultiDict<int, int, Data_Center> TeamMembers = new MultiDict<int, int, Data_Center>();
         public TeamConfig teamConfig;
         public RectTransform sideIconsContainer;
-        public Canvas _targetCanvas;
+        public RectTransform _targetCanvasT;
         public SideCharIcon button_prefab;
         public Text HitCombo;
         
@@ -171,7 +172,7 @@ namespace FightScene
                 {
                     _tempSI.focusingCharIcon.gameObject.SetActive(false);
                     _tempSI.ExBar.gameObject.SetActive(false);
-                    _tempSI.transform.SetParent(_targetCanvas.transform);
+                    _tempSI.transform.SetParent(_targetCanvasT.transform);
                 }
             }
             
@@ -184,9 +185,9 @@ namespace FightScene
                         {
                             multiRaidHitComboDic[_datacenter].color = teamConfig.myTeam == RTFightManager.playerTeam ? Color.yellow : Color.blue;
                             multiRaidHitComboDic[_datacenter].gameObject.SetActive(true);
-                            if (multiRaidHitComboDic[_datacenter].gameObject.transform.parent != _targetCanvas)
+                            if (multiRaidHitComboDic[_datacenter].gameObject.transform.parent != _targetCanvasT)
                             {
-                                multiRaidHitComboDic[_datacenter].gameObject.transform.SetParent(_targetCanvas.transform);
+                                multiRaidHitComboDic[_datacenter].gameObject.transform.SetParent(_targetCanvasT.transform);
                             }
                             multiRaidHitComboDic[_datacenter].transform.localScale = Vector3.one;
                             multiRaidHitComboDic[_datacenter].fontSize = 30;
@@ -196,9 +197,9 @@ namespace FightScene
                 case TeamMode.rotation:
                     rotationModeHitCombo.color = teamConfig.myTeam == RTFightManager.playerTeam ? Color.yellow : Color.blue;
                     rotationModeHitCombo.gameObject.SetActive(true);
-                    if (rotationModeHitCombo.gameObject.transform.parent != _targetCanvas)
+                    if (rotationModeHitCombo.gameObject.transform.parent != _targetCanvasT)
                     {
-                        rotationModeHitCombo.gameObject.transform.SetParent(_targetCanvas.transform);
+                        rotationModeHitCombo.gameObject.transform.SetParent(_targetCanvasT.transform);
                     }
                     rotationModeHitCombo.transform.localScale = Vector3.one;
                     rotationModeHitCombo.fontSize = 30;

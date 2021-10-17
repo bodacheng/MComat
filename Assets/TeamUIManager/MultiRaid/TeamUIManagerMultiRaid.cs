@@ -163,7 +163,7 @@ namespace FightScene
                 }
                 else
                 {
-                    _SideCharIcon.transform.SetParent(_targetCanvas.transform);
+                    _SideCharIcon.transform.SetParent(_targetCanvasT.transform);
                     _SideCharIcon.transform.localScale = Vector3.one;
                 }
                 DicAdd<Data_Center, SideCharIcon>.Add(UnitIconDic, a_char, _SideCharIcon);

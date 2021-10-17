@@ -76,7 +76,7 @@ public class BasicTryProcess : FSceneProcess
         }
         loser = Team.none;
         NetFightScene.target.PressedStartButton();
-        NetFightScene.target.FightCanvas.gameObject.SetActive(true);
+        //NetFightScene.target.FightCanvas.gameObject.SetActive(true);
 
         watchetargets.Clear();
         if (RTFightManager.focusingChar.Sensor.GetEnemiesByDistance(true).Count > 0)
@@ -100,7 +100,7 @@ public class BasicTryProcess : FSceneProcess
     
     public override void ProcessEnd()
     {
-        NetFightScene.target.FightCanvas.gameObject.SetActive(false);
+        //NetFightScene.target.FightCanvas.gameObject.SetActive(false);
         SingleThreadProcesser.backup.RunAsQueued(FinalMoment(finalSurviver, loser));
     }
     

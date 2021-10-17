@@ -21,11 +21,17 @@ public class PreparingProcess : FSceneProcess
         //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
         FightLoadError.Instance.FightLoadErrors.Clear();
         
+        BoundaryControllByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
+
+        FightingStepLayer FightingStepLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "FightingStepLayer") as FightingStepLayer;
+        FightingStepLayer.MobileInputsManager.fxCamera = RTFightManager.target.FX;
+        
+        FightingStepLayer.StartUp( RTFightManager.target.SwitchAutoMode, FightScenePauseSupport.target.PauseScene);
+        RTFightManager.target.team1 = FightingStepLayer.TeamUI1Manager;
+        RTFightManager.target.team2 = FightingStepLayer.TeamUI2Manager;
         RTFightManager.target.team1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
         RTFightManager.target.team2.TeamStandPoints = NetFightScene.target.Team2StandPoints;
         
-        BoundaryControllByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
-
         RTFightManager.target.team1.TeamMode = NetFightScene.Fight.Team1Mode;
         RTFightManager.target.team2.TeamMode = NetFightScene.Fight.Team2Mode;
         

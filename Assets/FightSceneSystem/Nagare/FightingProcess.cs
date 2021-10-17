@@ -26,7 +26,6 @@
                 TitleScreenLayer TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
                 TitleScreenLayer.Initialise(FightOverControl.target.ReturnToFront);
             }else{
-                NetFightScene.target.FightCanvas.gameObject.SetActive(true);
             }
             FightScenePauseSupport.target.ControlCanvas.gameObject.SetActive(true);
             NetFightScene.target.PressedStartButton();
@@ -41,7 +40,7 @@
             }
             else
             {
-                NetFightScene.target.FightCanvas.gameObject.SetActive(false);
+                UILayerLoader.Remove("FightingStepLayer");
             }
             
             FightOverControl.target.logger.WatchMissionsAbandon();
