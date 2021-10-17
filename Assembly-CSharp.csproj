@@ -73,7 +73,7 @@
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\TitleScreenLayer.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\SkillSetComment.cs" />
      <Compile Include="Assets\PlayFab\Server.cs" />
-     <Compile Include="Assets\RealTimeGameProcessManager\RotationMode\RotationMode_INI.cs" />
+     <Compile Include="Assets\TeamUIManager\RotationMode\RotationMode_INI.cs" />
      <Compile Include="Assets\RewardManager\RewardManager.cs" />
      <Compile Include="Assets\Camera\Modes\StartToEndMode.cs" />
      <Compile Include="Assets\AI\AI_states\states\Counter_State.cs" />
@@ -144,7 +144,7 @@
      <Compile Include="Assets\Singleton\SkillIconsDic\FromResource.cs" />
      <Compile Include="Assets\技能石合成\StoneMergeManger.cs" />
      <Compile Include="Assets\AI\SkillAIAttrs.cs" />
-     <Compile Include="Assets\RealTimeGameProcessManager\RotationMode\RotationMode_Render.cs" />
+     <Compile Include="Assets\TeamUIManager\RotationMode\RotationMode_Render.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\SettingsButton.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot_Read.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_ColorSwap.cs" />
@@ -375,7 +375,7 @@
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiBeamScript.cs" />
      <Compile Include="Assets\FightSceneSystem\FSceneProcessesRunner.cs" />
      <Compile Include="Assets\POFX\Scripts\POFX.cs" />
-     <Compile Include="Assets\RealTimeGameProcessManager\TeamUIManager.cs" />
+     <Compile Include="Assets\TeamUIManager\TeamUIManager.cs" />
      <Compile Include="Assets\AI\buttons\zokuseiButtonEffectsGroup.cs" />
      <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\OverlayCanvasController.cs" />
      <Compile Include="Assets\UI\Oldscripts\Save_Trans.cs" />
@@ -402,7 +402,7 @@
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker_Manager_treat.cs" />
      <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Filter.cs" />
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_GochaResult.cs" />
-     <Compile Include="Assets\RealTimeGameProcessManager\RotationMode\TeamUIManagerRotationMode.cs" />
+     <Compile Include="Assets\TeamUIManager\RotationMode\TeamUIManagerRotationMode.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkDubSounds.cs" />
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_Resource.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiButtonScript.cs" />
@@ -455,7 +455,7 @@
      <Compile Include="Assets\DynamicStarrySky\Scripts\MoonPositionHelper.cs" />
      <Compile Include="Assets\TutorialManger\processes\FillASlot\SkillEditTry_A1Filled.cs" />
      <Compile Include="Assets\AI\AI_states\states\G_Attack_State.cs" />
-     <Compile Include="Assets\RealTimeGameProcessManager\MultiRaid\TeamUIManagerMultiRaid.cs" />
+     <Compile Include="Assets\TeamUIManager\MultiRaid\TeamUIManagerMultiRaid.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Shop\ShopTop.cs" />
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\OutsideDataLink.cs" />
      <Compile Include="Assets\AI\Soul\SkillSet\SkillSet_Tools.cs" />

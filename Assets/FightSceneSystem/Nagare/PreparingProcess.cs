@@ -21,31 +21,13 @@ public class PreparingProcess : FSceneProcess
         //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
         FightLoadError.Instance.FightLoadErrors.Clear();
         
-        RTFightManager.target.team1UIManagerMulti.TeamStandPoints = NetFightScene.target.Team1StandPoints;
-        RTFightManager.target.team2UIManagerMulti.TeamStandPoints = NetFightScene.target.Team2StandPoints;
-        RTFightManager.target.team1UIManagerRotation.TeamStandPoints = NetFightScene.target.Team1StandPoints;
-        RTFightManager.target.team2UIManagerRotation.TeamStandPoints = NetFightScene.target.Team2StandPoints;
+        RTFightManager.target.team1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
+        RTFightManager.target.team2.TeamStandPoints = NetFightScene.target.Team2StandPoints;
         
         BoundaryControllByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
-        
-        switch (NetFightScene.Fight.Team1Mode)
-        {
-            case TeamMode.multiraid:
-                RTFightManager.target.team1 = RTFightManager.target.team1UIManagerMulti;
-                break;
-            case TeamMode.rotation:
-                RTFightManager.target.team1 = RTFightManager.target.team1UIManagerRotation;
-                break;
-        }
-        switch (NetFightScene.Fight.Team2Mode)
-        {
-            case TeamMode.multiraid:
-                RTFightManager.target.team2 = RTFightManager.target.team2UIManagerMulti;
-                break;
-            case TeamMode.rotation:
-                RTFightManager.target.team2 = RTFightManager.target.team2UIManagerRotation;
-                break;
-        }
+
+        RTFightManager.target.team1.TeamMode = NetFightScene.Fight.Team1Mode;
+        RTFightManager.target.team2.TeamMode = NetFightScene.Fight.Team2Mode;
         
         yield return RTFightManager.target.LoadGame(NetFightScene.Fight);
         

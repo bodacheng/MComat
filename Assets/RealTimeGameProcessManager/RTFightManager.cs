@@ -23,10 +23,6 @@ namespace FightScene
         
         public TeamUIManager team1;
         public TeamUIManager team2;
-        public TeamUIManagerMultiRaid team1UIManagerMulti;
-        public TeamUIManagerMultiRaid team2UIManagerMulti;
-        public TeamUIManagerRotationMode team1UIManagerRotation;
-        public TeamUIManagerRotationMode team2UIManagerRotation;
         
         public TeamConfig heroTeamConfig = new TeamConfig("1", Team.player1, new List<Team>() { Team.player2 });
         public TeamConfig EnemyTeamConfig = new TeamConfig("2", Team.player2, new List<Team>() { Team.player1 });
@@ -135,8 +131,14 @@ namespace FightScene
             team1.teamConfig.playID = loadFight.team1ID;
             team2.teamConfig.playID = loadFight.team2ID;
             
-            yield return team1.Instantiate(stage.fightMembers.HeroSets, stage.Team1HpRate ,stage.team1CGMode);
-            yield return team2.Instantiate(stage.fightMembers.EnemySets, stage.Team2HpRate ,stage.team2CGMode);
+            yield return team1.UnitsLoad(stage.fightMembers.HeroSets);
+            yield return team2.UnitsLoad(stage.fightMembers.EnemySets);
+
+            team1.InsTeamUI();
+            team2.InsTeamUI();
+
+            team1.TeamsFightInitialize(stage.Team1HpRate ,stage.team1CGMode);
+            team2.TeamsFightInitialize(stage.Team2HpRate ,stage.team2CGMode);
             
             if (stage.GetEventType() == FightEventType.Screensaver)
             {
