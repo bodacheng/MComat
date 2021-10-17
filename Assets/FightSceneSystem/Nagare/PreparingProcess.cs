@@ -69,7 +69,7 @@ public class PreparingProcess : FSceneProcess
     public override bool CanEnterOtherProcess()
     {
         return NetFightScene.target.LoadStageFinished.Value
-            && RTFightManager.target.team1.IfAllCharsPreparedForBattle() 
-            && RTFightManager.target.team2.IfAllCharsPreparedForBattle();
+            && RTFightManager.target.team1.IfAllCharsPreparedForBattle(RTFightManager.target.Team1Members) 
+            && RTFightManager.target.team2.IfAllCharsPreparedForBattle(RTFightManager.target.Team2Members);
     }
 }

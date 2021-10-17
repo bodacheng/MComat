@@ -43,11 +43,11 @@ namespace FightScene
             multiRaidHitComboDic.Clear();
         }
         
-        public void MultiRaid_LocalFightingUpdate()
+        public void MultiRaid_LocalFightingUpdate(MultiDict<int, int, Data_Center> TeamMembers)
         {
             if (teamConfig.myTeam != RTFightManager.playerTeam)
             {
-                BarsPosUpdate();
+                BarsPosUpdate(TeamMembers);
             }
         }
 

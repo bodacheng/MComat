@@ -40,20 +40,20 @@ namespace FightScene
             }
         }
 
-        public void localFightingUpdate()
+        public void localFightingUpdate(MultiDict<int, int, Data_Center> TeamMembers)
         {
             switch (TeamMode)
             {
                 case TeamMode.multiraid:
-                    MultiRaid_LocalFightingUpdate();
+                    MultiRaid_LocalFightingUpdate(TeamMembers);
                     break;
                 case TeamMode.rotation:
-                    Rotation_LocalFightingUpdate();
+                    Rotation_LocalFightingUpdate(TeamMembers);
                     break;
             }
         }
         
-        public List<Transform> TeamMemberTransforms()
+        public List<Transform> TeamMemberTransforms(MultiDict<int, int, Data_Center> TeamMembers)
         {
             List<Transform> transforms = new List<Transform>();
             switch (TeamMode)
@@ -70,7 +70,7 @@ namespace FightScene
                 case TeamMode.rotation:
                     transforms = new List<Transform>
                     {
-                        RotationMode_fightingMember.transform
+                        RMode_Unit.transform
                     };
                     return transforms;
             }
@@ -78,7 +78,7 @@ namespace FightScene
         }
 
         protected SideCharIcon _tempSI;
-        public void BarsPosUpdate()
+        public void BarsPosUpdate(MultiDict<int, int, Data_Center> TeamMembers)
         {
             foreach (Data_Center _one in TeamMembers.GetValues())
             {
@@ -128,7 +128,7 @@ namespace FightScene
         }
         
         // 全队无敌
-        public void TurnAllMembersInvincible(bool _Invincible)
+        public void TurnAllMembersInvincible(bool _Invincible, MultiDict<int, int, Data_Center> TeamMembers)
         {
             foreach (Data_Center a_char in TeamMembers.GetValues())
             {
@@ -153,7 +153,7 @@ namespace FightScene
             _tempSI.RefreshExBar(current_ex, wholeex);
         }
         
-        public void Refresh()
+        public void Refresh(MultiDict<int, int, Data_Center> TeamMembers)
         {
             foreach (Data_Center _datacenter in TeamMembers.GetValues())
             {
@@ -206,7 +206,7 @@ namespace FightScene
             }
         }
 
-        public bool IfAllCharsPreparedForBattle()
+        public bool IfAllCharsPreparedForBattle(MultiDict<int, int, Data_Center> TeamMembers)
         {
             foreach (Data_Center oneMember in TeamMembers.GetValues())
             {
@@ -214,41 +214,6 @@ namespace FightScene
                     return false;
             }
             return true;
-        }
-        
-        public void AllUnitsStartOff()
-        {
-            foreach (Data_Center oneMember in TeamMembers.GetValues())
-            {
-                oneMember._MyBehaviorRunner.controller.TestMode = false;
-                RTFightManager.AddOrRemoveFightingMember(oneMember, this.teamConfig.myTeam, true);
-                oneMember._MyBehaviorRunner.ChangeToWaitingState();
-            }
-        }
-        
-        public void LetAllCharactersChangeToTestMode()
-        {
-            foreach (Data_Center oneMember in TeamMembers.GetValues())
-            {
-                oneMember._MyBehaviorRunner.controller.TestMode = true;
-                RTFightManager.AddOrRemoveFightingMember(oneMember, this.teamConfig.myTeam, true);
-                oneMember._MyBehaviorRunner.ChangeToTestMode();
-            }
-        }
-        
-        // 队伍模式对应行为运行第一步。
-        public void ModeStart()
-        {
-            switch (TeamMode)
-            {
-                case TeamMode.multiraid:
-                    AllUnitsStartOff();
-                    break;
-                case TeamMode.rotation:
-                    RTFightManager.AddOrRemoveFightingMember(RotationMode_fightingMember, this.teamConfig.myTeam, true);
-                    RotationMode_fightingMember._MyBehaviorRunner.ChangeToWaitingState();
-                    break;
-            }
         }
         
         // 获取该队伍所有账户技能石id（只有在这个队伍是玩家账户队员组成情况下有效）

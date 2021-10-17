@@ -114,16 +114,7 @@ namespace FightScene
         // 本地系函数
         public void PressedStartButton()
         {
-            RTFightManager.target.team1.ModeStart();
-            
-            if (Fight.GetEventType() == FightEventType.Test)
-            {
-                RTFightManager.target.team2.LetAllCharactersChangeToTestMode();
-            }
-            else
-            {
-                RTFightManager.target.team2.ModeStart();
-            }
+            RTFightManager.target.ModeStart();
             
             switch (RTFightManager.playerTeam)
             {

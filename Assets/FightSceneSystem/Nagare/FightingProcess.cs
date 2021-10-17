@@ -49,8 +49,8 @@
 
         public override void LocalUpdate()
         {
-            RTFightManager.target.team1.localFightingUpdate();
-            RTFightManager.target.team2.localFightingUpdate();
+            RTFightManager.target.team1.localFightingUpdate(RTFightManager.target.Team1Members);
+            RTFightManager.target.team2.localFightingUpdate(RTFightManager.target.Team2Members);
         }
     }
 }

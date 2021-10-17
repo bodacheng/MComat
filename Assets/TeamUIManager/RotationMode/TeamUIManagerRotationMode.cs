@@ -6,7 +6,7 @@ namespace FightScene
 {
     public partial class TeamUIManager : MonoBehaviour
     {
-        Data_Center RotationMode_fightingMember;
+        Data_Center RMode_Unit;
         Data_Center waitingMember;
         IDictionary<Data_Center, float> RefreshTimeDic = new Dictionary<Data_Center, float>();
         Text rotationModeHitCombo;
@@ -32,19 +32,19 @@ namespace FightScene
                 kv.Value.WholeT.parent = null;
                 kv.Value.WholeT.gameObject.SetActive(true);
             }
-            ChangeFightingMember_ReadyToGo(heromultiDictionary.GetValues()[0], TeamStandPoints[0]);
+            ChangeFightingMember_ReadyToGo(heromultiDictionary.Get(0,0), TeamStandPoints[0]);
         }
         
-        public void Rotation_LocalFightingUpdate()
+        public void Rotation_LocalFightingUpdate(MultiDict<int, int, Data_Center> TeamMembers)
         {
             WaitToTriggerMemberChange();
-            if (RotationMode_fightingMember != null)
+            if (RMode_Unit != null)
             {
-                RefreshComboHitRotationMode(RotationMode_fightingMember);
+                RefreshComboHitRotationMode(RMode_Unit);
             }
             if (teamConfig.myTeam != RTFightManager.playerTeam)
             {
-                BarsPosUpdate();
+                BarsPosUpdate(TeamMembers);
             }
         }
         
@@ -56,14 +56,14 @@ namespace FightScene
             {
                 if (_changeTo == data_Center)
                 {
-                    RotationMode_fightingMember = _changeTo;
-                    RotationMode_fightingMember.WholeT.transform.position = IniStandPoint.position;
-                    RotationMode_fightingMember.WholeT.rotation = IniStandPoint.rotation;
-                    EffectsManager.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
+                    RMode_Unit = _changeTo;
+                    RMode_Unit.WholeT.transform.position = IniStandPoint.position;
+                    RMode_Unit.WholeT.rotation = IniStandPoint.rotation;
+                    EffectsManager.GenerateEffect("membershift", null, RMode_Unit.WholeT.transform.position, Quaternion.identity, RMode_Unit.geometryCenter);
                     memberchanged = true;
-                    RotationMode_fightingMember.WholeT.gameObject.SetActive(true);
+                    RMode_Unit.WholeT.gameObject.SetActive(true);
                     if (teamConfig.myTeam != RTFightManager.playerTeam)
-                        UnitIconDic[RotationMode_fightingMember].gameObject.SetActive(true);
+                        UnitIconDic[RMode_Unit].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -80,7 +80,7 @@ namespace FightScene
         // 切换队员
         bool ChangeFightingMember(Data_Center _changeTo)
         {
-            if (!(TeamMembers.GetValues().Count > 1) || RotationMode_fightingMember == _changeTo)
+            if (!(TeamMembers.GetValues().Count > 1) || RMode_Unit == _changeTo)
             {
                 return false;
             }
@@ -90,28 +90,28 @@ namespace FightScene
             }
             bool memberchanged = false;
             Vector3 targetposition = Vector3.zero;
-            if (RotationMode_fightingMember != null)
+            if (RMode_Unit != null)
             {
-                targetposition = RotationMode_fightingMember.transform.position;
+                targetposition = RMode_Unit.transform.position;
             }
             foreach (Data_Center data_Center in TeamMembers.GetValues())
             {
                 if (_changeTo == data_Center)
                 {
-                    if (RotationMode_fightingMember != null && _changeTo != null)//继承hit数
+                    if (RMode_Unit != null && _changeTo != null)//继承hit数
                     {
-                        _changeTo.FightDataRef._ComboHitCount.HitCount.Value = RotationMode_fightingMember.FightDataRef._ComboHitCount.HitCount.Value;
+                        _changeTo.FightDataRef._ComboHitCount.HitCount.Value = RMode_Unit.FightDataRef._ComboHitCount.HitCount.Value;
                     }
-                    RTFightManager.AddOrRemoveFightingMember(RotationMode_fightingMember, this.teamConfig.myTeam, false);
+                    RTFightManager.AddOrRemoveFightingMember(RMode_Unit, this.teamConfig.myTeam, false);
                     RTFightManager.AddOrRemoveFightingMember(_changeTo, this.teamConfig.myTeam, true);
 
-                    RotationMode_fightingMember = _changeTo;
-                    RotationMode_fightingMember.WholeT.gameObject.SetActive(true);
+                    RMode_Unit = _changeTo;
+                    RMode_Unit.WholeT.gameObject.SetActive(true);
                     if (teamConfig.myTeam != RTFightManager.playerTeam)
-                        UnitIconDic[RotationMode_fightingMember].gameObject.SetActive(true);
-                    RotationMode_fightingMember._MyBehaviorRunner.ChangeToWaitingState();
-                    RotationMode_fightingMember.WholeT.transform.position = targetposition;
-                    EffectsManager.GenerateEffect("membershift", null, RotationMode_fightingMember.WholeT.transform.position, Quaternion.identity, RotationMode_fightingMember.geometryCenter);
+                        UnitIconDic[RMode_Unit].gameObject.SetActive(true);
+                    RMode_Unit._MyBehaviorRunner.ChangeToWaitingState();
+                    RMode_Unit.WholeT.transform.position = targetposition;
+                    EffectsManager.GenerateEffect("membershift", null, RMode_Unit.WholeT.transform.position, Quaternion.identity, RMode_Unit.geometryCenter);
                     memberchanged = true;
                 }
                 else
@@ -128,7 +128,7 @@ namespace FightScene
             }
             if (teamConfig.myTeam == RTFightManager.playerTeam)
             {
-                RTFightManager.target.SwitchToCMode(RotationMode_fightingMember, MobileInputsManager.playerMode);
+                RTFightManager.target.SwitchToCMode(RMode_Unit, MobileInputsManager.playerMode);
             }
             RTFightManager.target.ParaAdjustment(RTFightManager.playerTeam);
             RTFightManager.target.Refresh();
@@ -149,7 +149,7 @@ namespace FightScene
             
             if (waitingMember != null && CanChangeToThisMember(waitingMember))
             {
-                RefreshTimeDic[RotationMode_fightingMember] = 10f;
+                RefreshTimeDic[RMode_Unit] = 10f;
                 ChangeFightingMember(waitingMember);
                 waitingMember = null;
             }
@@ -157,7 +157,7 @@ namespace FightScene
         
         bool CanChangeToThisMember(Data_Center targetMember)
         {
-            if (targetMember == RotationMode_fightingMember)
+            if (targetMember == RMode_Unit)
             {
                 return false;
             }
@@ -196,7 +196,7 @@ namespace FightScene
         public void TurnModeEnemySideAutoMemberShaft()
         {
             time_counter += Time.deltaTime;
-            if (RotationMode_fightingMember != null && RotationMode_fightingMember.IsDead.Value)
+            if (RMode_Unit != null && RMode_Unit.IsDead.Value)
             {
                 if (TeamMembers.GetValues().Count > 0)
                 {

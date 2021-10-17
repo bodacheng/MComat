@@ -95,8 +95,8 @@ namespace FightScene
             autoBUtton.onClick.RemoveAllListeners();
             autoBUtton.onClick.AddListener(SwitchAutoMode);
             
-            team1.Refresh();
-            team2.Refresh();
+            team1.Refresh(Team1Members);
+            team2.Refresh(Team2Members);
             
             if (focusingChar == null)
             {
@@ -165,11 +165,11 @@ namespace FightScene
             
             if (stage.GetEventType() == FightEventType.Screensaver)
             {
-                team1.TurnAllMembersInvincible(true);
-                team2.TurnAllMembersInvincible(true);
+                team1.TurnAllMembersInvincible(true, Team1Members);
+                team2.TurnAllMembersInvincible(true, Team2Members);
             }else{
-                team1.TurnAllMembersInvincible(false);
-                team2.TurnAllMembersInvincible(false);
+                team1.TurnAllMembersInvincible(false, Team1Members);
+                team2.TurnAllMembersInvincible(false, Team2Members);
             }
             
             team1.ToStartPos(team1.TeamMembers);
@@ -187,6 +187,59 @@ namespace FightScene
             NetFightScene.target.LoadStageFinished.Value = true;
         }
         
+        public void AllUnitsStartOff(MultiDict<int, int, Data_Center> TeamMembers, Team myTeam, bool TestMode = false)
+        {
+            foreach (Data_Center oneMember in TeamMembers.GetValues())
+            {
+                oneMember._MyBehaviorRunner.controller.TestMode = TestMode;
+                AddOrRemoveFightingMember(oneMember, myTeam, true);
+                if (!TestMode)
+                    oneMember._MyBehaviorRunner.ChangeToWaitingState();
+                else
+                {
+                    oneMember._MyBehaviorRunner.ChangeToTestMode();
+                }
+            }
+        }
+        
+        public void OneUnitStartOff(Data_Center dc, Team myTeam)
+        {
+            RTFightManager.AddOrRemoveFightingMember(dc, myTeam, true);
+            dc._MyBehaviorRunner.ChangeToWaitingState();
+        }
+        
+        public void ModeStart()
+        {
+            switch (loadFight.Team1Mode)
+            {
+                case TeamMode.multiraid:
+                    AllUnitsStartOff(Team1Members, heroTeamConfig.myTeam);
+                    break;
+                case TeamMode.rotation:
+                    OneUnitStartOff(Team1Members.Get(0,0), heroTeamConfig.myTeam);
+                    break;
+            }
+            
+            if (loadFight.GetEventType() != FightEventType.Test)
+            {
+                switch (loadFight.Team2Mode)
+                {
+                    case TeamMode.multiraid:
+                        AllUnitsStartOff(Team2Members, EnemyTeamConfig.myTeam);
+                        break;
+                    case TeamMode.rotation:
+                        OneUnitStartOff(Team2Members.Get(0,0), EnemyTeamConfig.myTeam);
+                        break;
+                }
+            }
+            else
+            {
+                AllUnitsStartOff(Team2Members, heroTeamConfig.myTeam, true);
+            }
+        }
+        
+
+        
         // 战斗模式相机。根据选择队伍做相应调整。
         public void ParaAdjustment(Team myTeam)
         {
@@ -203,11 +256,11 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(c_Mode, focusingChar.WholeT, team2.TeamMemberTransforms());
+                    _CameraManager.Assign_Camera(c_Mode, focusingChar.WholeT, team2.TeamMemberTransforms(Team1Members));
                 }
                 else
                 {
-                    _CameraManager.Assign_Camera(c_Mode, focusingChar.WholeT, team1.TeamMemberTransforms());
+                    _CameraManager.Assign_Camera(c_Mode, focusingChar.WholeT, team1.TeamMemberTransforms(Team2Members));
                 }
             }
             else
@@ -223,11 +276,11 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team2.TeamMemberTransforms());
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team2.TeamMemberTransforms(Team1Members));
                 }
                 else
                 {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team1.TeamMemberTransforms());
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team1.TeamMemberTransforms(Team2Members));
                 }
                 _CameraManager.CurrentMode.SetMeCenter(focusingChar.WholeT);
             }
