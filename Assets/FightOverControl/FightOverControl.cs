@@ -34,7 +34,7 @@ namespace FightScene
             logger.WatchMissionsAbandon();
             FSceneProcessesRunner.Main.Clear();
             MainMenuNote.goingtostep = MainSceneStep.FrontPage;
-            HitBoxesProcesser.Instance.processingDecompositioners.Clear();
+            HitBoxesProcesser.Instance.Clear();
             SingleAssignmentDisposableCleaner.Clear();
             SceneManager.LoadScene(1);
         }

@@ -26,7 +26,7 @@ public class MobileInputsManager : MonoBehaviour {
 
     public Camera fxCamera;
     public Transform effectsParent;
-
+    
     public static MobileInputsManager target;
     static IDictionary<Zokusei, zokuseiButtonEffectsGroup> zokuseiButtonEffects = new Dictionary<Zokusei, zokuseiButtonEffectsGroup>();
     static zokuseiButtonEffectsGroup _focusing;

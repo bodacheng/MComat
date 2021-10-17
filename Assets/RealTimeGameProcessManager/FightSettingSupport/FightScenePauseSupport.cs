@@ -6,10 +6,6 @@ using FightScene;
 public class FightScenePauseSupport : MonoBehaviour
 {
     [Space(11)]
-    [Header("Settings")]
-    public SettingLayer settingLayer;
-    
-    [Space(11)]
     [Header("暂停菜单里的Resume")]
     public Button ResumeButton;
     

@@ -67,7 +67,7 @@ namespace HittingDetection
             {
                 if (!BallDetectHitPool.Keys.Contains(other))
                 {
-                    HitBoxesProcesser.ColliderHitBox.TryGetValue(other, out HitBoxManager hit_hitbox);
+                    HitBoxManager hit_hitbox = HitBoxesProcesser.Instance.GetHitBox(other);
                     tempWHpCost = tempM != null ? V_Damage.WpHpCost(V_Damage.WeaponHeavyCal(owner.damage_type), V_Damage.WeaponHeavyCal(tempM.damage_type)) : 1;
                     HitPointPara hitPointPara = new HitPointPara
                     {

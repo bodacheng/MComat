@@ -5,14 +5,26 @@ using HittingDetection;
 public class HitBoxesProcesser : MonoBehaviour
 {
     public static HitBoxesProcesser Instance;
-    public static Dictionary<Collider, HitBoxManager> ColliderHitBox = new Dictionary<Collider, HitBoxManager>();
-    public List<Decompositioner> processingDecompositioners = new List<Decompositioner>();
+    
+    private static Dictionary<Collider, HitBoxManager> ColliderHitBox = new Dictionary<Collider, HitBoxManager>();
+    private List<Decompositioner> processingDecompositioners = new List<Decompositioner>();
     
     void Awake()
     {
         Instance = this;
     }
 
+    public void Clear()
+    {
+        processingDecompositioners.Clear();
+    }
+
+    public HitBoxManager GetHitBox(Collider c)
+    {
+        ColliderHitBox.TryGetValue(c, out HitBoxManager hit_hitbox);
+        return hit_hitbox;
+    }
+    
     public static void AddToDecompositionerProcesserList(Decompositioner _poolObject)
     {
         if (Instance != null)

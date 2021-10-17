@@ -5,7 +5,7 @@ public class FightResultAnimLayer : UILayer
 {
     [Header("WIN")]
     [SerializeField] private GameObject win_textanimation;
-        
+    
     [Header("LOSE")]
     [SerializeField] private GameObject lose_textanimation;
     
