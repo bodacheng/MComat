@@ -1,0 +1,108 @@
+﻿using UnityEngine;
+using UniRx;
+
+namespace FightScene
+{
+    public partial class TeamUIManager : MonoBehaviour
+    {
+        protected void TeamsFightInitialize_Rotate(float TeamHpRate, CriticalGaugeMode teamCGMode)
+        {
+            foreach (Data_Center a_char in TeamMembers.GetValues())
+            {
+                a_char.Step3Initialize(teamConfig, TeamHpRate * SkillSet.INI_Hp(RTFightManager.target.UnitInfoRef[a_char].set.SkillEntityList()), teamCGMode);
+
+                float maxHp = a_char.FightDataRef.CurrentHp.Value;
+                a_char.FightDataRef.CurrentHp.Subscribe(x =>
+                {
+                    RefreshHPBar(a_char, x, maxHp);
+                });
+                
+                a_char.FightDataRef.CriticalGauge = new ReactiveProperty<int>();
+                a_char.FightDataRef.CriticalGauge.Subscribe(x =>
+                {
+                    RefreshExBar(a_char, x, 120);
+                });
+                
+                a_char.IsDead = new ReactiveProperty<bool>(false);
+                a_char.IsDead.Subscribe(x => {
+                    if (x == true) 
+                    {
+                        RTFightManager.AddOrRemoveFightingMember(a_char, this.teamConfig.myTeam, false);
+                        Invoke("RandomChangeAliveFightingMember", 2f);
+                        UnitIconDic[a_char].focusingCharIcon.CooldownCurtainUpdate(1);
+                    }
+                });
+                
+                a_char._ResistanceManager.Resistance = new ReactiveProperty<int>
+                {
+                    Value = 0
+                };
+                a_char._ResistanceManager.OpenResistRender();
+                a_char._ResistanceManager.Resistance.Subscribe(x =>
+                {
+                    a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10);
+                    RefreshResistanceBar(a_char);
+                });
+            }
+        }
+        
+        protected void InsTeamUI_Rotate()//这个环节应该能够同时把HP bar也适配好。
+        {
+            SideCharIcon _SideCharIcon;
+            RefreshTimeDic.Clear();
+            foreach (Data_Center a_char in TeamMembers.GetValues())
+            {
+                //  时间刷新整备
+                if (!RefreshTimeDic.ContainsKey(a_char))
+                {
+                    RefreshTimeDic.Add(a_char, 0);
+                }
+                //  SideCharIcon整备
+                if (!(UnitIconDic.ContainsKey(a_char) && UnitIconDic[a_char] != null))
+                {
+                    _SideCharIcon = Instantiate(button_prefab);
+                    _SideCharIcon.name = a_char.name + " ICon";
+                    _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
+                    void action1()
+                    {
+                        ReadyForNextMember(a_char);
+                    }
+                    _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(action1);
+                    UnitInfo charDInfo = RTFightManager.target.UnitInfoRef[a_char];
+                    CharConfig _charConfig = MonstersConfigTable.GetCharConfig(charDInfo.r_id);
+                    _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Get(charDInfo.r_id), _charConfig._zokusei);
+                    _SideCharIcon.gameObject.SetActive(true);
+                }
+                else
+                {
+                    _SideCharIcon = UnitIconDic[a_char];
+                }
+                
+                _SideCharIcon.INIHPShow(a_char, a_char.FightDataRef.CurrentHp.Value);
+                _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
+                
+                if (teamConfig.myTeam == RTFightManager.playerTeam)
+                {
+                    _SideCharIcon.transform.SetParent(sideIconsContainer.transform);
+                    _SideCharIcon.transform.localScale = Vector3.one;
+                }
+                else
+                {
+                    _SideCharIcon.transform.SetParent(_targetCanvas.transform);
+                    _SideCharIcon.transform.localScale = Vector3.one;
+                }
+                DicAdd<Data_Center, SideCharIcon>.Add(UnitIconDic, a_char, _SideCharIcon);
+                
+                // hitCombo整备
+                if (rotationModeHitCombo == null)
+                {
+                    rotationModeHitCombo = Instantiate(HitCombo);
+                    rotationModeHitCombo.name = teamConfig.myTeam + "HitCombo";
+                }
+                
+                // 魔法按键
+                MobileInputsManager.target.ZokuseiButtonRegister(a_char.Zokusei);
+            }
+        }
+    }
+}
