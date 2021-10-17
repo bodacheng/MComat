@@ -122,6 +122,23 @@ namespace FightScene
             Refresh();
         }
         
+        public IEnumerator UnitsLoad(MultiDict<int, int, UnitInfo> MembersSets, MultiDict<int, int, Data_Center> TeamMembers)
+        {
+            foreach (KeyValuePair<(int, int), UnitInfo> kv in MembersSets.mDict)
+            {
+                UnitInfo _one = kv.Value;
+                Data_Center dcenter = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
+                if (dcenter == null)
+                {
+                    IEnumerator char_DC = UnitCreator.CreateUnit(_one);
+                    yield return char_DC;
+                    dcenter = (Data_Center)char_DC.Current;
+                }
+                TeamMembers.Set(kv.Key.Item1, kv.Key.Item2, dcenter);
+                DicAdd<Data_Center, UnitInfo>.Add(RTFightManager.target.UnitInfoRef, dcenter, _one);
+            }
+        }
+        
         public IEnumerator LoadGame(FightInfo stage)
         {
             loadFight = stage;
@@ -131,8 +148,14 @@ namespace FightScene
             team1.teamConfig.playID = loadFight.team1ID;
             team2.teamConfig.playID = loadFight.team2ID;
             
-            yield return team1.UnitsLoad(stage.fightMembers.HeroSets);
-            yield return team2.UnitsLoad(stage.fightMembers.EnemySets);
+            yield return UnitsLoad(stage.fightMembers.HeroSets, Team1Members);
+            yield return UnitsLoad(stage.fightMembers.EnemySets, Team2Members);
+            
+            //yield return team1.UnitsLoad(stage.fightMembers.HeroSets);
+            //yield return team2.UnitsLoad(stage.fightMembers.EnemySets);
+
+            team1.TeamMembers = Team1Members;
+            team2.TeamMembers = Team2Members;
 
             team1.InsTeamUI();
             team2.InsTeamUI();
