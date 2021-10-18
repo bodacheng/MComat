@@ -146,8 +146,14 @@ namespace FightScene
                 DicAdd<Data_Center, UnitInfo>.Add(RTFightManager.target.UnitInfoRef, dcenter, _one);
             }
         }
+
+        public IEnumerator LoadUnits(FightInfo stage)
+        {
+            yield return UnitsLoad(stage.fightMembers.HeroSets, Team1Members);
+            yield return UnitsLoad(stage.fightMembers.EnemySets, Team2Members);
+        }
         
-        public IEnumerator LoadGame(FightInfo stage)
+        public void SetGame(FightInfo stage)
         {
             loadFight = stage;
             
@@ -156,20 +162,11 @@ namespace FightScene
             team1.teamConfig.playID = loadFight.team1ID;
             team2.teamConfig.playID = loadFight.team2ID;
             
-            yield return UnitsLoad(stage.fightMembers.HeroSets, Team1Members);
-            yield return UnitsLoad(stage.fightMembers.EnemySets, Team2Members);
-            
-            //yield return team1.UnitsLoad(stage.fightMembers.HeroSets);
-            //yield return team2.UnitsLoad(stage.fightMembers.EnemySets);
+            team1.InsTeamUI(Team1Members);
+            team2.InsTeamUI(Team2Members);
 
-            team1.TeamMembers = Team1Members;
-            team2.TeamMembers = Team2Members;
-
-            team1.InsTeamUI();
-            team2.InsTeamUI();
-
-            team1.TeamsFightInitialize(stage.Team1HpRate ,stage.team1CGMode);
-            team2.TeamsFightInitialize(stage.Team2HpRate ,stage.team2CGMode);
+            team1.TeamsInit(Team1Members, stage.Team1HpRate ,stage.team1CGMode);
+            team2.TeamsInit(Team2Members, stage.Team2HpRate ,stage.team2CGMode);
             
             if (stage.GetEventType() == FightEventType.Screensaver)
             {
@@ -180,16 +177,16 @@ namespace FightScene
                 team2.TurnAllMembersInvincible(false, Team2Members);
             }
             
-            team1.ToStartPos(team1.TeamMembers);
-            team2.ToStartPos(team2.TeamMembers);
+            team1.ToStartPos(Team1Members);
+            team2.ToStartPos(Team2Members);
             
             switch (playerTeam)
             {
                 case Team.player1:
-                    SwitchToCMode(team1.TeamMembers.GetValues()[0], false);
+                    SwitchToCMode(Team1Members.GetValues()[0], false);
                     break;
                 case Team.player2:
-                    SwitchToCMode(team2.TeamMembers.GetValues()[0], false);
+                    SwitchToCMode(Team2Members.GetValues()[0], false);
                     break;
             }
             NetFightScene.target.LoadStageFinished.Value = true;
@@ -262,11 +259,11 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(c_Mode, focusingChar.WholeT, team2.TeamMemberTransforms(Team1Members));
+                    _CameraManager.Assign_Camera(c_Mode, focusingChar.WholeT, team2.GetFightingUnitTs(Team1Members));
                 }
                 else
                 {
-                    _CameraManager.Assign_Camera(c_Mode, focusingChar.WholeT, team1.TeamMemberTransforms(Team2Members));
+                    _CameraManager.Assign_Camera(c_Mode, focusingChar.WholeT, team1.GetFightingUnitTs(Team2Members));
                 }
             }
             else
@@ -282,11 +279,11 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team2.TeamMemberTransforms(Team1Members));
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team2.GetFightingUnitTs(Team1Members));
                 }
                 else
                 {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team1.TeamMemberTransforms(Team2Members));
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team1.GetFightingUnitTs(Team2Members));
                 }
                 _CameraManager.CurrentMode.SetMeCenter(focusingChar.WholeT);
             }
@@ -294,6 +291,14 @@ namespace FightScene
 
         public void Clear()// 这个我们还没有添加在合理的地方。
         {
+            foreach (Data_Center one in Team1Members.GetValues())
+            {
+                one.FightDataRef.Clear();
+            }
+            foreach (Data_Center one in Team2Members.GetValues())
+            {
+                one.FightDataRef.Clear();
+            }
             team1.Clear();
             team2.Clear();
             Team1Members.Clear();

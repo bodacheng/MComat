@@ -42,14 +42,14 @@
             {
                 UILayerLoader.Remove("FightingStepLayer");
             }
-            
+            RTFightManager.target.Clear();
             FightOverControl.target.logger.WatchMissionsAbandon();
         }
 
         public override void LocalUpdate()
         {
-            RTFightManager.target.team1.localFightingUpdate(RTFightManager.target.Team1Members);
-            RTFightManager.target.team2.localFightingUpdate(RTFightManager.target.Team2Members);
+            RTFightManager.target.team1.localUpdate(RTFightManager.target.Team1Members);
+            RTFightManager.target.team2.localUpdate(RTFightManager.target.Team2Members);
         }
     }
 }

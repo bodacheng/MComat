@@ -10,11 +10,11 @@ namespace FightScene
     {
         IDictionary<Data_Center, Text> multiRaidHitComboDic = new Dictionary<Data_Center, Text>();
         
-        public void ToStartPos_Multi(MultiDict<int, int, Data_Center> heromultiDictionary)
+        void ToStartPos_Multi(MultiDict<int, int, Data_Center> TeamMembers)
         {
-            foreach (KeyValuePair<(int, int), Data_Center> kv in heromultiDictionary.mDict)
+            foreach (KeyValuePair<(int, int), Data_Center> kv in TeamMembers.mDict)
             {
-                Data_Center _DataCenter = heromultiDictionary.Get(kv.Key.Item1, kv.Key.Item2);
+                Data_Center _DataCenter = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
                 if (_DataCenter == null)
                 {
                     continue;
@@ -35,15 +35,11 @@ namespace FightScene
 
         public void MultiClear()
         {
-            foreach (Data_Center one in TeamMembers.GetValues())
-            {
-                one.FightDataRef.Clear();
-            }
             UnitIconDic.Clear();
             multiRaidHitComboDic.Clear();
         }
         
-        public void MultiRaid_LocalFightingUpdate(MultiDict<int, int, Data_Center> TeamMembers)
+        void MultiRaid_LocalUpdate(MultiDict<int, int, Data_Center> TeamMembers)
         {
             if (teamConfig.myTeam != RTFightManager.playerTeam)
             {
@@ -51,81 +47,79 @@ namespace FightScene
             }
         }
 
-        protected void TeamsFightInitialize_Multi(float TeamHpRate, CriticalGaugeMode teamCGMode)
+        void Initialize_Multi(MultiDict<int, int, Data_Center> TeamMembers, float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
-            foreach (Data_Center a_char in TeamMembers.GetValues())
+            foreach (Data_Center dc in TeamMembers.GetValues())
             {
-                a_char.Step3Initialize
-                    (teamConfig, TeamHpRate * SkillSet.INI_Hp(RTFightManager.target.UnitInfoRef[a_char].set.SkillEntityList()), teamCGMode);
-
-                float maxHp = a_char.FightDataRef.CurrentHp.Value;
-                a_char.FightDataRef.CurrentHp.Subscribe(x =>
+                dc.Step3Initialize(teamConfig, TeamHpRate * SkillSet.INI_Hp(RTFightManager.target.UnitInfoRef[dc].set.SkillEntityList()), teamCGMode);
+                
+                float maxHp = dc.FightDataRef.CurrentHp.Value;
+                dc.FightDataRef.CurrentHp.Subscribe(x =>
                 {
-                    RefreshHPBar(a_char, x, maxHp);
+                    RefreshHPBar(dc, x, maxHp);
                 });
-
-                a_char.FightDataRef.CriticalGauge = new ReactiveProperty<int>();
-                a_char.FightDataRef.CriticalGauge.Subscribe(x =>
+                
+                dc.FightDataRef.CriticalGauge = new ReactiveProperty<int>();
+                dc.FightDataRef.CriticalGauge.Subscribe(x =>
                 {
-                    RefreshExBar(a_char, x, 120);
+                    RefreshExBar(dc, x, 120);
                 });
-
-                a_char._ResistanceManager.Resistance = new ReactiveProperty<int>
+                
+                dc._ResistanceManager.Resistance = new ReactiveProperty<int>
                 {
                     Value = 0
                 };
-                a_char._ResistanceManager.OpenResistRender();
-                a_char._ResistanceManager.Resistance.Subscribe(x =>
+                dc._ResistanceManager.OpenResistRender();
+                dc._ResistanceManager.Resistance.Subscribe(x =>
                 {
-                    a_char._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10);
-                    RefreshResistanceBar(a_char);
+                    dc._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10);
+                    RefreshResistanceBar(dc);
                 });
-
-                a_char.FightDataRef._ComboHitCount.HitCount.Value = 0;
-                a_char.FightDataRef._ComboHitCount.HitCount.Subscribe(x =>
+                
+                dc.FightDataRef._ComboHitCount.HitCount.Value = 0;
+                dc.FightDataRef._ComboHitCount.HitCount.Subscribe(x =>
                 {
-                    RefreshComboHitMultiRaid(a_char);
+                    RefreshComboHitMultiRaid(dc);
                 });
-
-                a_char.IsDead = new ReactiveProperty<bool>(false);
-                a_char.IsDead.Subscribe(x => 
+                
+                dc.IsDead = new ReactiveProperty<bool>(false);
+                dc.IsDead.Subscribe(x => 
                 {
-                    if (x == true)
+                    if (x)
                     {
-                        RTFightManager.AddOrRemoveFightingMember(a_char, this.teamConfig.myTeam, false);
+                        RTFightManager.AddOrRemoveFightingMember(dc, this.teamConfig.myTeam, false);
                         RTFightManager.target.ParaAdjustment(RTFightManager.playerTeam);
                     }
                 });
             }
         }
-
-        Text _hitcomboText;
+        
         void RefreshComboHitMultiRaid(Data_Center _datacenter)
         {
-            _hitcomboText = multiRaidHitComboDic[_datacenter];
+            Text comboText = multiRaidHitComboDic[_datacenter];
             if (_datacenter.FightDataRef._ComboHitCount.HitCount.Value > 1)
             {
-                _hitcomboText.text = _datacenter.FightDataRef._ComboHitCount.HitCount.Value.ToString() + "Hits!";
-                _hitcomboText.transform.DOMove(CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 3.2f), 0.2f);
+                comboText.text = _datacenter.FightDataRef._ComboHitCount.HitCount.Value.ToString() + "Hits!";
+                comboText.transform.DOMove(CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 3.2f), 0.2f);
             }
             else
             {
                 switch (teamConfig.myTeam)
                 {
                     case Team.player1:
-                        _hitcomboText.rectTransform.DOAnchorPos(new Vector2(-200, Screen.height + 100), 0.2f);
+                        comboText.rectTransform.DOAnchorPos(new Vector2(-200, Screen.height + 100), 0.2f);
                         break;
                     case Team.player2:
-                        _hitcomboText.rectTransform.DOAnchorPos(new Vector2(Screen.width + 200, Screen.height + 100), 0.2f);
+                        comboText.rectTransform.DOAnchorPos(new Vector2(Screen.width + 200, Screen.height + 100), 0.2f);
                         break;
                     default:
-                        _hitcomboText.rectTransform.DOAnchorPos(new Vector2(-100, -100), 0.2f);
+                        comboText.rectTransform.DOAnchorPos(new Vector2(-100, -100), 0.2f);
                         break;
                 }
             }
         }
 
-        protected void InsTeamUI_Multi()//这个环节应该能够同时把HP bar也适配好。
+        void InsTeamUI_Multi(MultiDict<int, int, Data_Center> TeamMembers)//这个环节应该能够同时把HP bar也适配好。
         {
             SideCharIcon _SideCharIcon;
             Text hitCombo;

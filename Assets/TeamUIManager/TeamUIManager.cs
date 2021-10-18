@@ -3,25 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
-using UnityEngine.Serialization;
 
 namespace FightScene
 {
     public partial class TeamUIManager : MonoBehaviour
     {
+        [SerializeField] RectTransform sideIconsContainer;
+        [SerializeField] RectTransform _targetCanvasT;
+        [SerializeField] SideCharIcon button_prefab;
+        [SerializeField] Text HitCombo;
+        
         public TeamMode TeamMode;
-        
-        public MultiDict<int, int, Data_Center> TeamMembers = new MultiDict<int, int, Data_Center>();
         public TeamConfig teamConfig;
-        public RectTransform sideIconsContainer;
-        public RectTransform _targetCanvasT;
-        public SideCharIcon button_prefab;
-        public Text HitCombo;
-        
         [HideInInspector]
         public Transform[] TeamStandPoints;
         
-        protected IDictionary<Data_Center, SideCharIcon> UnitIconDic = new Dictionary<Data_Center, SideCharIcon>();
+        public readonly IDictionary<Data_Center, SideCharIcon> UnitIconDic = new Dictionary<Data_Center, SideCharIcon>();
         
         public SideCharIcon GetSideIcon(Data_Center d)
         {
@@ -41,20 +38,20 @@ namespace FightScene
             }
         }
 
-        public void localFightingUpdate(MultiDict<int, int, Data_Center> TeamMembers)
+        public void localUpdate(MultiDict<int, int, Data_Center> TeamMembers)
         {
             switch (TeamMode)
             {
                 case TeamMode.multiraid:
-                    MultiRaid_LocalFightingUpdate(TeamMembers);
+                    MultiRaid_LocalUpdate(TeamMembers);
                     break;
                 case TeamMode.rotation:
-                    Rotation_LocalFightingUpdate(TeamMembers);
+                    Rotation_LocalUpdate(TeamMembers);
                     break;
             }
         }
         
-        public List<Transform> TeamMemberTransforms(MultiDict<int, int, Data_Center> TeamMembers)
+        public List<Transform> GetFightingUnitTs(MultiDict<int, int, Data_Center> TeamMembers)
         {
             List<Transform> transforms = new List<Transform>();
             switch (TeamMode)
@@ -77,53 +74,52 @@ namespace FightScene
             }
             return null;
         }
-
-        protected SideCharIcon _tempSI;
+        
         public void BarsPosUpdate(MultiDict<int, int, Data_Center> TeamMembers)
         {
+            SideCharIcon _tempSI;
             foreach (Data_Center _one in TeamMembers.GetValues())
             {
                 UnitIconDic.TryGetValue(_one, out _tempSI);
                 _tempSI.transform.position = Vector3.Lerp(_tempSI.transform.position, CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 3f), Time.deltaTime * 20f);
             }
         }
-
-        public void InsTeamUI()
+        
+        public void InsTeamUI(MultiDict<int, int, Data_Center> TeamMembers)
         {
             switch (TeamMode)
             {
                 case TeamMode.multiraid:
-                    InsTeamUI_Multi();
+                    InsTeamUI_Multi(TeamMembers);
                     break;
                 case TeamMode.rotation:
-                    InsTeamUI_Rotate();
+                    InsTeamUI_Rotate(TeamMembers);
                     break;
             }
         }
         
-        public void TeamsFightInitialize(float TeamHpRate, CriticalGaugeMode teamCGMode)
+        public void TeamsInit(MultiDict<int, int, Data_Center> TeamMembers, float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
             switch (TeamMode)
             {
                 case TeamMode.multiraid:
-                    TeamsFightInitialize_Multi(TeamHpRate, teamCGMode);
+                    Initialize_Multi(TeamMembers, TeamHpRate, teamCGMode);
                     break;
                 case TeamMode.rotation:
-                    TeamsFightInitialize_Rotate(TeamHpRate, teamCGMode);
+                    TeamsIni_Rotate(TeamMembers, TeamHpRate, teamCGMode);
                     break;
             }
         }
-
-        // for multiRaid
-        public void ToStartPos(MultiDict<int, int, Data_Center> heromultiDictionary)
+        
+        public void ToStartPos(MultiDict<int, int, Data_Center> TeamMembers)
         {
             switch (TeamMode)
             {
                 case TeamMode.multiraid:
-                    ToStartPos_Multi(heromultiDictionary);
+                    ToStartPos_Multi(TeamMembers);
                     break;
                 case TeamMode.rotation:
-                    ToStartPos_Rotate(heromultiDictionary);
+                    ToStartPos_Rotate(TeamMembers);
                     break;
             }
         }
@@ -137,31 +133,35 @@ namespace FightScene
             }
         }
         
-        protected void RefreshResistanceBar(Data_Center data_Center)
+        void RefreshResistanceBar(Data_Center data_Center)
         {
+            SideCharIcon _tempSI;
             UnitIconDic.TryGetValue(data_Center, out _tempSI);
             _tempSI.RefreshResistanceBar();
         }
         
-        protected void RefreshHPBar(Data_Center data_Center, float current_hp, float wholeHP)
+        void RefreshHPBar(Data_Center data_Center, float current_hp, float wholeHP)
         {
+            SideCharIcon _tempSI;
             UnitIconDic.TryGetValue(data_Center, out _tempSI);
             _tempSI.RefreshHpBar(current_hp, wholeHP);
         }
-        protected void RefreshExBar(Data_Center data_Center, int current_ex, int wholeex)
+        void RefreshExBar(Data_Center data_Center, int current_ex, int wholeex)
         {
+            SideCharIcon _tempSI;
             UnitIconDic.TryGetValue(data_Center, out _tempSI);
             _tempSI.RefreshExBar(current_ex, wholeex);
         }
         
         public void Refresh(MultiDict<int, int, Data_Center> TeamMembers)
         {
-            foreach (Data_Center _datacenter in TeamMembers.GetValues())
+            SideCharIcon _tempSI;
+            foreach (Data_Center _dt in TeamMembers.GetValues())
             {
-                UnitIconDic.TryGetValue(_datacenter, out _tempSI);
+                UnitIconDic.TryGetValue(_dt, out _tempSI);
                 if (teamConfig.myTeam == RTFightManager.playerTeam)
                 {
-                    _tempSI.transform.localScale = _datacenter != RTFightManager.focusingChar ? Vector3.one : Vector3.one * 1.2f;
+                    _tempSI.transform.localScale = _dt != RTFightManager.focusingChar ? Vector3.one : Vector3.one * 1.2f;
                     _tempSI.transform.SetParent(sideIconsContainer.transform);
                     _tempSI.focusingCharIcon.gameObject.SetActive(true);
                     _tempSI.ExBar.gameObject.SetActive(true);

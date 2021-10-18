@@ -26,17 +26,17 @@ public class CommonFightResult : UILayer
             Destroy(child.gameObject);
         }
         
-        foreach (Data_Center data in teamUIManager.TeamMembers.mDict.Values)
+        foreach (var kv in teamUIManager.UnitIconDic)
         {
             IconAndSKillShowUISet iassi = Instantiate(IconAndSKillShowUISetPretab);
-            SideCharIcon sideCharIcon = teamUIManager.GetSideIcon(data);
+            SideCharIcon sideCharIcon = teamUIManager.GetSideIcon(kv.Key);
             NineForShow nineForShow = Instantiate(NineForShowPretab);
             NineForShows.Add(nineForShow);
             iassi.Set(sideCharIcon, nineForShow);
             iassi.transform.SetParent(IconAndSKillShowUISetT);
             iassi.transform.localPosition = Vector3.zero;
             iassi.transform.localScale = Vector3.one;
-            nineForShow.ShowStones_Acc(RTFightManager.target.UnitInfoRef[data].id);
+            nineForShow.ShowStones_Acc(RTFightManager.target.UnitInfoRef[kv.Key].id);
         }
     }
     

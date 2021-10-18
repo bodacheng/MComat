@@ -22,11 +22,11 @@ public class PreparingProcess : FSceneProcess
         FightLoadError.Instance.FightLoadErrors.Clear();
         
         BoundaryControllByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
-
+        
         FightingStepLayer FightingStepLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "FightingStepLayer") as FightingStepLayer;
         FightingStepLayer.MobileInputsManager.fxCamera = RTFightManager.target.FX;
         
-        FightingStepLayer.StartUp( RTFightManager.target.SwitchAutoMode, FightScenePauseSupport.target.PauseScene);
+        FightingStepLayer.StartUp( RTFightManager.target.SwitchAutoMode, FightScenePauseSupport.target.PauseScene, RTFightManager.target.SwitchToWatchMode);
         RTFightManager.target.team1 = FightingStepLayer.TeamUI1Manager;
         RTFightManager.target.team2 = FightingStepLayer.TeamUI2Manager;
         RTFightManager.target.team1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
@@ -35,16 +35,12 @@ public class PreparingProcess : FSceneProcess
         RTFightManager.target.team1.TeamMode = NetFightScene.Fight.Team1Mode;
         RTFightManager.target.team2.TeamMode = NetFightScene.Fight.Team2Mode;
         
-        yield return RTFightManager.target.LoadGame(NetFightScene.Fight);
-        
-        RTFightManager.target.Team1Members = RTFightManager.target.team1.TeamMembers;
-        RTFightManager.target.Team2Members = RTFightManager.target.team2.TeamMembers;
-        RTFightManager.FightingMembers.Clear();
+        yield return RTFightManager.target.LoadUnits(NetFightScene.Fight);
+        RTFightManager.target.SetGame(NetFightScene.Fight);
         
         IDictionary<TeamConfig, List<Data_Center>> TeamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
-        
-        DicAdd<TeamConfig, List<Data_Center>>.Add(TeamMembers, RTFightManager.target.heroTeamConfig, RTFightManager.target.team1.TeamMembers.GetValues());
-        DicAdd<TeamConfig, List<Data_Center>>.Add(TeamMembers, RTFightManager.target.EnemyTeamConfig, RTFightManager.target.team2.TeamMembers.GetValues());
+        DicAdd<TeamConfig, List<Data_Center>>.Add(TeamMembers, RTFightManager.target.heroTeamConfig, RTFightManager.target.Team1Members.GetValues());
+        DicAdd<TeamConfig, List<Data_Center>>.Add(TeamMembers, RTFightManager.target.EnemyTeamConfig, RTFightManager.target.Team2Members.GetValues());
         FightOverControl.target.logger.ReadyToLog(TeamMembers);
         
         EffectsManager.INIEffectsPool("hit_ground", null, 3);

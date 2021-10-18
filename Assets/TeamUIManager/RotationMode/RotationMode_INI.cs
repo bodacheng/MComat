@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UniRx;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 namespace FightScene
 {
     public partial class TeamUIManager : MonoBehaviour
     {
-        protected void TeamsFightInitialize_Rotate(float TeamHpRate, CriticalGaugeMode teamCGMode)
+        protected void TeamsIni_Rotate(MultiDict<int, int, Data_Center> TeamMembers, float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
             foreach (Data_Center a_char in TeamMembers.GetValues())
             {
@@ -25,11 +27,15 @@ namespace FightScene
                 
                 a_char.IsDead = new ReactiveProperty<bool>(false);
                 a_char.IsDead.Subscribe(x => {
-                    if (x == true) 
+                    if (x) 
                     {
-                        RTFightManager.AddOrRemoveFightingMember(a_char, this.teamConfig.myTeam, false);
-                        Invoke("RandomChangeAliveFightingMember", 2f);
                         UnitIconDic[a_char].focusingCharIcon.CooldownCurtainUpdate(1);
+                        RTFightManager.AddOrRemoveFightingMember(a_char, teamConfig.myTeam, false);
+                        
+                        MultiDict<int, int, Data_Center> tteam = teamConfig.myTeam == Team.player1
+                            ? RTFightManager.target.Team1Members
+                            : RTFightManager.target.Team2Members;
+                        ToNewUnit(tteam);
                     }
                 });
                 
@@ -45,8 +51,14 @@ namespace FightScene
                 });
             }
         }
+
+        async void ToNewUnit(MultiDict<int, int, Data_Center> tteam)
+        {
+            await UniTask.DelayFrame(100);
+            RandomToAliveUnit(tteam);
+        }
         
-        protected void InsTeamUI_Rotate()//这个环节应该能够同时把HP bar也适配好。
+        protected void InsTeamUI_Rotate(MultiDict<int, int, Data_Center> TeamMembers)//这个环节应该能够同时把HP bar也适配好。
         {
             SideCharIcon _SideCharIcon;
             RefreshTimeDic.Clear();

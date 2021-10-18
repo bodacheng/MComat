@@ -119,10 +119,10 @@ namespace FightScene
             switch (RTFightManager.playerTeam)
             {
                 case Team.player1:
-                    RTFightManager.target.SwitchToCMode(RTFightManager.target.team1.TeamMembers.GetValues()[0], false);
+                    RTFightManager.target.SwitchToCMode(RTFightManager.target.Team1Members.GetValues()[0], false);
                     break;
                 case Team.player2:
-                    RTFightManager.target.SwitchToCMode(RTFightManager.target.team2.TeamMembers.GetValues()[0], false);
+                    RTFightManager.target.SwitchToCMode(RTFightManager.target.Team2Members.GetValues()[0], false);
                     break;
             }
             if (Fight.GetEventType() == FightEventType.Screensaver)

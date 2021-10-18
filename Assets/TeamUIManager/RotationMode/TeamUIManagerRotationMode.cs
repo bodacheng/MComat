@@ -13,17 +13,13 @@ namespace FightScene
         
         public void RotateClear()
         {
-            foreach (Data_Center one in TeamMembers.GetValues())
-            {
-                one.FightDataRef.Clear();
-            }
             UnitIconDic.Clear();
             rotationModeHitCombo.text = "";
         }
         
-        public void ToStartPos_Rotate(MultiDict<int, int, Data_Center> heromultiDictionary)
+        public void ToStartPos_Rotate(MultiDict<int, int, Data_Center> TeamMembers)
         {
-            foreach (KeyValuePair<(int, int), Data_Center> kv in heromultiDictionary.mDict)
+            foreach (KeyValuePair<(int, int), Data_Center> kv in TeamMembers.mDict)
             {
                 if (kv.Value == null)
                 {
@@ -32,12 +28,12 @@ namespace FightScene
                 kv.Value.WholeT.parent = null;
                 kv.Value.WholeT.gameObject.SetActive(true);
             }
-            ChangeFightingMember_ReadyToGo(heromultiDictionary.Get(0,0), TeamStandPoints[0]);
+            ChangeFightingMember_ReadyToGo(TeamMembers.Get(0,0), TeamMembers, TeamStandPoints[0]);
         }
         
-        public void Rotation_LocalFightingUpdate(MultiDict<int, int, Data_Center> TeamMembers)
+        public void Rotation_LocalUpdate(MultiDict<int, int, Data_Center> TeamMembers)
         {
-            WaitToTriggerMemberChange();
+            WaitToTriggerMemberChange(TeamMembers);
             if (RMode_Unit != null)
             {
                 RefreshComboHitRotationMode(RMode_Unit);
@@ -49,7 +45,7 @@ namespace FightScene
         }
         
         // 最初切换队员
-        public bool ChangeFightingMember_ReadyToGo(Data_Center _changeTo, Transform IniStandPoint)
+        bool ChangeFightingMember_ReadyToGo(Data_Center _changeTo, MultiDict<int, int, Data_Center> TeamMembers, Transform IniStandPoint)
         {
             bool memberchanged = false;
             foreach (Data_Center data_Center in TeamMembers.GetValues())
@@ -78,7 +74,7 @@ namespace FightScene
         }
         
         // 切换队员
-        bool ChangeFightingMember(Data_Center _changeTo)
+        bool ChangeFightingUnit(Data_Center _changeTo, MultiDict<int, int, Data_Center> TeamMembers)
         {
             if (!(TeamMembers.GetValues().Count > 1) || RMode_Unit == _changeTo)
             {
@@ -104,7 +100,7 @@ namespace FightScene
                     }
                     RTFightManager.AddOrRemoveFightingMember(RMode_Unit, this.teamConfig.myTeam, false);
                     RTFightManager.AddOrRemoveFightingMember(_changeTo, this.teamConfig.myTeam, true);
-
+                    
                     RMode_Unit = _changeTo;
                     RMode_Unit.WholeT.gameObject.SetActive(true);
                     if (teamConfig.myTeam != RTFightManager.playerTeam)
@@ -136,7 +132,7 @@ namespace FightScene
         }
         
         // 计算时间统计可上场角色，更新上场冷却图标UI
-        void WaitToTriggerMemberChange()
+        void WaitToTriggerMemberChange(MultiDict<int, int, Data_Center> TeamMembers)
         {
             for (int i = 0; i < TeamMembers.GetValues().Count; i++)
             {
@@ -150,7 +146,7 @@ namespace FightScene
             if (waitingMember != null && CanChangeToThisMember(waitingMember))
             {
                 RefreshTimeDic[RMode_Unit] = 10f;
-                ChangeFightingMember(waitingMember);
+                ChangeFightingUnit(waitingMember, TeamMembers);
                 waitingMember = null;
             }
         }
@@ -193,7 +189,7 @@ namespace FightScene
         /// 本质上这个函数是AI。。。而AI按理说应该和其他东西是分层的。。
         /// </summary>
         float time_counter;
-        public void TurnModeEnemySideAutoMemberShaft()
+        public void TurnModeEnemySideAutoMemberShaft(MultiDict<int, int, Data_Center> TeamMembers)
         {
             time_counter += Time.deltaTime;
             if (RMode_Unit != null && RMode_Unit.IsDead.Value)
@@ -223,13 +219,13 @@ namespace FightScene
             }
         }
         
-        public bool RandomChangeAliveFightingMember()
+        public bool RandomToAliveUnit(MultiDict<int, int, Data_Center> TeamMembers)
         {
             if (waitingMember != null && waitingMember.FightDataRef.CurrentHp.Value > 0)
             {
                 if (!waitingMember.IsDead.Value)
                 {
-                    if (ChangeFightingMember(waitingMember))
+                    if (ChangeFightingUnit(waitingMember, TeamMembers))
                     {
                         return true;
                     }
@@ -239,7 +235,7 @@ namespace FightScene
             {
                 if (!data_Center.IsDead.Value)
                 {
-                    if (ChangeFightingMember(data_Center))
+                    if (ChangeFightingUnit(data_Center, TeamMembers))
                     {
                         return true;
                     }

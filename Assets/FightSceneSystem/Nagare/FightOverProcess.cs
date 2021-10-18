@@ -117,8 +117,8 @@ namespace FightScene
             }
             
             List<Data_Center> data_Centers = new List<Data_Center>();
-            data_Centers.AddRange(RTFightManager.target.team1.TeamMembers.GetValues());
-            data_Centers.AddRange(RTFightManager.target.team2.TeamMembers.GetValues());
+            data_Centers.AddRange(RTFightManager.target.Team1Members.GetValues());
+            data_Centers.AddRange(RTFightManager.target.Team2Members.GetValues());
             FightOverControl.target.SkillLog(data_Centers);
             foreach (Data_Center one in data_Centers)
             {
