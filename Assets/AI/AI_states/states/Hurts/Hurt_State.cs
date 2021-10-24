@@ -145,8 +145,8 @@ namespace Soul
                 return;
             }
 
-            Animation_Manger.Animator.SetTrigger("face_reset");
-            Animation_Manger.Animator.SetTrigger("hurt");
+            Animation_Manger.SetTrigger("face_reset");
+            Animation_Manger.SetTrigger("hurt");
         }
 
         public override void _State_FixedUpdate1()

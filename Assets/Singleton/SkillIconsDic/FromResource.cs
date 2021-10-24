@@ -32,6 +32,11 @@ public partial class SkillIconsDic
         else
         {
             SkillIconDic.TryGetValue(skillID, out returnValue);
+            if (returnValue == null)
+            {
+                SkillIconDic.Remove(skillID);
+                return FindSkillIconPrefabByResource(skillID);
+            }
         }
         
         return returnValue;

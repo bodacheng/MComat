@@ -12,7 +12,7 @@ public partial class StagesManagerGUI : Editor {
         CharConfig focusingCharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(focusingCharInfo.r_id));
         focusingtype = focusingCharConfig != null ? EditorGUILayout.TextField("CharacerType", focusingCharConfig.TYPE) : EditorGUILayout.TextField("CharacerType", focusingtype);
         CharIDsAndNames = new Dictionary<string, string>() { { "-1", "空" } };
-        foreach(KeyValuePair<string,string> keyValuePair in MonstersConfigTable.GetMonsterRecordIDsAndNamesArrayDic(focusingtype))
+        foreach(KeyValuePair<string,string> keyValuePair in MonstersConfigTable.GetMonsterIDsAndNamesDic(focusingtype))
         {
             CharIDsAndNames.Add(keyValuePair.Key, keyValuePair.Value);
         }

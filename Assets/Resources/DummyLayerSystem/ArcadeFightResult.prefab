@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RewardGold: {fileID: 1466445195731640121}
-  RewardDiamond: {fileID: 0}
+  RewardDiamond: {fileID: 2262821832163313373}
   ReturnBtn: {fileID: 1466445196159419361}
   AgainBtn: {fileID: 1466445194840887037}
   NextBtn: {fileID: 1466445195429606052}

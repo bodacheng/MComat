@@ -2,53 +2,55 @@
 using dataAccess;
 using UnityEngine;
 using Skill;
-using Api.Dto.Model;
 using mainMenu;
 
 public partial class SkillSet
 {
     // 随机技能组
-    public static SkillSet RandomSkillSet(string type, string originSkill, int skilllevel, bool baseOnAcc)
+    public static SkillSet RandomSkillSet(string type, string originSkill, int skilllevel, bool baseOnAcc, SkillStonesBox.StoneFilterForm filterForm = null)
     {
         SkillSet nineAndTwo = new SkillSet();
         SkillConfig originSkillConfig = SkillConfigTable.GetSkillConfigByID(originSkill);
-        nineAndTwo = RandomSkillSetRec(type, nineAndTwo, 1, originSkillConfig, baseOnAcc);
-        nineAndTwo.SetSkillLevel(skilllevel);
-        nineAndTwo.SortNineAndTwo();
-        return nineAndTwo;
-    }
 
-    static SkillSet RandomSkillSetRec(string focusingtype, SkillSet nineAndTwo, int targetSlot, SkillConfig originSkillConfig, bool baseOnAcc)
-    {
-        SkillStonesBox.StoneFilterForm filterForm;
-        if (targetSlot == 1)
+        if (filterForm == null)
         {
-            if (originSkillConfig != null && originSkillConfig.SP_LEVEL == 0)
-            {
-                nineAndTwo.a1 = originSkillConfig.RECORD_ID;
-                return RandomSkillSetRec(focusingtype, nineAndTwo, targetSlot + 1, originSkillConfig, baseOnAcc);
-            }
-
             filterForm = new SkillStonesBox.StoneFilterForm
             {
-                type = focusingtype,
+                type = type,
                 exType = new int[1] { 0 },
                 close = false,
                 near = false,
                 far = false
             };
         }
+        
+        nineAndTwo = RandomSkillSetRec(type, nineAndTwo, filterForm, 1, originSkillConfig, baseOnAcc);
+        nineAndTwo.SetSkillLevel(skilllevel);
+        nineAndTwo.SortNineAndTwo();
+        return nineAndTwo;
+    }
+
+    static SkillSet RandomSkillSetRec(string focusingtype, SkillSet nineAndTwo, SkillStonesBox.StoneFilterForm filterForm, int targetSlot, SkillConfig origin, bool baseOnAcc)
+    {
+        if (targetSlot == 1)
+        {
+            if (origin != null && origin.SP_LEVEL == 0)
+            {
+                nineAndTwo.a1 = origin.RECORD_ID;
+                return RandomSkillSetRec(focusingtype, nineAndTwo, filterForm,targetSlot + 1, origin, baseOnAcc);
+            }
+        }
         else if (targetSlot == 2)
         {
-            if (originSkillConfig != null && originSkillConfig.SP_LEVEL != 0)
+            if (origin != null && origin.SP_LEVEL != 0)
             {
-                nineAndTwo.a2 = originSkillConfig.RECORD_ID;
-                return RandomSkillSetRec(focusingtype, nineAndTwo, targetSlot + 1, originSkillConfig, baseOnAcc);
+                nineAndTwo.a2 = origin.RECORD_ID;
+                return RandomSkillSetRec(focusingtype, nineAndTwo, filterForm, targetSlot + 1, origin, baseOnAcc);
             }
             filterForm = new SkillStonesBox.StoneFilterForm
             {
                 type = focusingtype,
-                exType = SkillSet.RemainSlotSPLevelCal(nineAndTwo).ToArray(),
+                exType = RemainSlotSPLevelCal(nineAndTwo).ToArray(),
                 close = false,
                 near = false,
                 far = false
@@ -59,7 +61,7 @@ public partial class SkillSet
             filterForm = new SkillStonesBox.StoneFilterForm
             {
                 type = focusingtype,
-                exType = SkillSet.RemainSlotSPLevelCal(nineAndTwo).ToArray(),
+                exType = RemainSlotSPLevelCal(nineAndTwo).ToArray(),
                 close = false,
                 near = false,
                 far = false
@@ -126,7 +128,7 @@ public partial class SkillSet
         }
         else
         {
-            return RandomSkillSetRec(focusingtype, nineAndTwo, targetSlot + 1, originSkillConfig, baseOnAcc);
+            return RandomSkillSetRec(focusingtype, nineAndTwo, filterForm, targetSlot + 1, origin, baseOnAcc);
         }
     }
 }

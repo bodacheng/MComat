@@ -51,16 +51,23 @@ namespace FightScene
                             result =>
                             {
                                 PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                                object level, reward_GD, reward_DIA;
-                                jsonResult.TryGetValue("progressLevel", out level);
-                                jsonResult.TryGetValue("gold", out reward_GD);
-                                jsonResult.TryGetValue("diamond", out reward_DIA);
-                                
-                                string levelstring = level.ToString();
-                                string reward_GDstring = reward_GD != null ? reward_GD.ToString() : "0";
-                                string reward_DIAstring = reward_DIA != null ? reward_DIA.ToString() : "0";
-                                
                                 int levelInt, reward_GDInt, reward_DIAInt;
+                                string levelstring = "0";
+                                string reward_GDstring = "0";
+                                string reward_DIAstring = "0";
+                                if (jsonResult != null)
+                                {
+                                    object level, reward_GD, reward_DIA;
+                                    
+                                    jsonResult.TryGetValue("progressLevel", out level);
+                                    jsonResult.TryGetValue("gold", out reward_GD);
+                                    jsonResult.TryGetValue("diamond", out reward_DIA);
+                                    
+                                    levelstring = level.ToString();
+                                    reward_GDstring = reward_GD != null ? reward_GD.ToString() : "0";
+                                    reward_DIAstring = reward_DIA != null ? reward_DIA.ToString() : "0";
+                                }
+                                
                                 int.TryParse(levelstring, out levelInt) ;
                                 Account._AccInfo.ArcadeProcess = levelInt;
                                 int.TryParse(reward_GDstring, out reward_GDInt) ;

@@ -13,8 +13,8 @@ public partial class Animation_Manger
             Animator.Update(0);
             if (clip != null)
             {
-                to_be_override_animation_name = "fullbody_empty1";
-                animatorOverride[to_be_override_animation_name] = clip;
+                to_be_override_anim_name = "fullbody_empty1";
+                animatorOverride[to_be_override_anim_name] = clip;
                 Animator.CrossFade("full_body_state1", Duration);
             }else{
 
@@ -27,7 +27,7 @@ public partial class Animation_Manger
             {
                 if (clip != null)
                 {
-                    to_be_override_animation_name = "fullbody_empty1";
+                    to_be_override_anim_name = "fullbody_empty1";
                 }
                 else
                 {
@@ -37,21 +37,21 @@ public partial class Animation_Manger
             }
             if (AnimatorStateInfo.IsName("Full Body.full_body_state1"))
             {
-                to_be_override_animation_name = clip != null ? "fullbody_empty2" : null;
+                to_be_override_anim_name = clip != null ? "fullbody_empty2" : null;
             }
             if (AnimatorStateInfo.IsName("Full Body.full_body_state2"))
             {
-                to_be_override_animation_name = clip != null ? "fullbody_empty1" : null;
+                to_be_override_anim_name = clip != null ? "fullbody_empty1" : null;
             }
             
             if (clip != null)
             {
-                animatorOverride[to_be_override_animation_name] = clip;                    
-                if (to_be_override_animation_name == "fullbody_empty2")
+                animatorOverride[to_be_override_anim_name] = clip;                    
+                if (to_be_override_anim_name == "fullbody_empty2")
                 {
                     Animator.CrossFade("full_body_state2", Duration);
                 }
-                if (to_be_override_animation_name == "fullbody_empty1")
+                if (to_be_override_anim_name == "fullbody_empty1")
                 {
                     Animator.CrossFade("full_body_state1", Duration);
                 }

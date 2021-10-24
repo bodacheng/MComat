@@ -7,14 +7,20 @@ using Skill;
 
 public class Starter : MonoBehaviour
 {
-    public bool enterFrontPageFirst;
-    public PlayfabSetting PlayfabSetting;
-    public FightGlobalSetting FightGlobalSetting;
+    [SerializeField] bool enterFrontPageFirst;
+    [SerializeField] PlayfabSetting PlayfabSetting;
+    [SerializeField] FightGlobalSetting FightGlobalSetting;
 
     void EnterFrontScene()
     {
         FightGlobalSetting.Initialise();
         PlayfabSetting.Initialise();
+        
+        // 这几个东西用不用执行待定
+        SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
+        MonstersConfigTable.LoadByResource();
+        MonstersConfigTable.RefreshDic();
+        
         if (enterFrontPageFirst)
         {
             FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);

@@ -25,8 +25,8 @@ namespace Soul
             base.AI_State_enter();
             _BasicPhysicSupport.OpenEnemyTouchingDrag(2);
             _Rigidbody.velocity = Vector3.zero;
-            Animation_Manger.Animator.SetTrigger("face_reset");
-            Animation_Manger.Animator.SetTrigger("confident");
+            Animation_Manger.SetTrigger("face_reset");
+            Animation_Manger.SetTrigger("confident");
             _Animator.SetFloat("speed", 0f);
             _SkillCancelFlag.turn_off_flag();
             _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);

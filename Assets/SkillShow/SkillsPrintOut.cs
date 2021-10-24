@@ -55,9 +55,9 @@ namespace mainMenu
         {
             if (focusingC != null)
             {
-                if (focusingC.Animation_Manger != null && focusingC.Animation_Manger.Animator != null && focusingC.WholeT.gameObject.activeSelf)
+                if (focusingC.Animation_Manger != null && focusingC.WholeT.gameObject.activeSelf)
                 {
-                    if (focusingC.Animation_Manger.Animator.GetBool("in_transition") == false && focusingC.Animation_Manger.Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
+                    if (focusingC.Animation_Manger.GetBool("in_transition") == false && focusingC.Animation_Manger.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
                     {
                         //SkillShowT.gameObject.SetActive(true);
                         focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.05f);
@@ -284,8 +284,8 @@ namespace mainMenu
             {
                 if (focusingC != null)
                 {
-                    focusingC.Animation_Manger.Animator.SetTrigger("face_reset");
-                    focusingC.Animation_Manger.Animator.SetTrigger("close_eye");
+                    focusingC.Animation_Manger.SetTrigger("face_reset");
+                    focusingC.Animation_Manger.SetTrigger("close_eye");
                 }
             }
         }
@@ -293,48 +293,48 @@ namespace mainMenu
         {
             if (focusingC != null)
             {
-                focusingC.Animation_Manger.Animator.SetTrigger("face_reset");
-                focusingC.Animation_Manger.Animator.SetTrigger("suprise");
+                focusingC.Animation_Manger.SetTrigger("face_reset");
+                focusingC.Animation_Manger.SetTrigger("suprise");
             }
         }
         public void Face_Angry()
         {
             if (focusingC != null)
             {
-                focusingC.Animation_Manger.Animator.SetTrigger("face_reset");
-                focusingC.Animation_Manger.Animator.SetTrigger("angry");
+                focusingC.Animation_Manger.SetTrigger("face_reset");
+                focusingC.Animation_Manger.SetTrigger("angry");
             }
         }
         public void Face_Pain()
         {
             if (focusingC != null)
             {
-                focusingC.Animation_Manger.Animator.SetTrigger("face_reset");
-                focusingC.Animation_Manger.Animator.SetTrigger("hurt");
+                focusingC.Animation_Manger.SetTrigger("face_reset");
+                focusingC.Animation_Manger.SetTrigger("hurt");
             }
         }
         public void Face_Smile()
         {
             if (focusingC != null)
             {
-                focusingC.Animation_Manger.Animator.SetTrigger("face_reset");
-                focusingC.Animation_Manger.Animator.SetTrigger("smile");
+                focusingC.Animation_Manger.SetTrigger("face_reset");
+                focusingC.Animation_Manger.SetTrigger("smile");
             }
         }
         public void Face_Evil()
         {
             if (focusingC != null)
             {
-                focusingC.Animation_Manger.Animator.SetTrigger("face_reset");
-                focusingC.Animation_Manger.Animator.SetTrigger("evil");
+                focusingC.Animation_Manger.SetTrigger("face_reset");
+                focusingC.Animation_Manger.SetTrigger("evil");
             }
         }
         public void Face_Ferocious()
         {
             if (focusingC != null)
             {
-                focusingC.Animation_Manger.Animator.SetTrigger("face_reset");
-                focusingC.Animation_Manger.Animator.SetTrigger("ferocious");
+                focusingC.Animation_Manger.SetTrigger("face_reset");
+                focusingC.Animation_Manger.SetTrigger("ferocious");
             }
         }
     }

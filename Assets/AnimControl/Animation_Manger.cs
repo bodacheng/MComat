@@ -12,29 +12,42 @@ using DG.Tweening;
 
 public partial class Animation_Manger
 {
-    public Animator Animator;
+    Animator Animator;
     public AnimationClip _toUse;
-    
+
+    List<string> parameters = new List<string>();
     IDictionary<string, AnimationClip> toLoadAnims;
-    string to_be_override_animation_name;
+    string to_be_override_anim_name;
 
     float speed = 1;
-    public float Speed { 
-        get => speed; 
+
+    public float Speed
+    {
+        get => speed;
         set
         {
             speed = value;
             Animator.speed = speed;
         }
     }
-    
+
+    public Animator AnimatorRef
+    {
+        get => Animator;
+        set => Animator = value;
+    }
+
     public void FrameFreeze()
     {
-        DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed - 1, 0.01f).OnComplete(() => { DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed, 0.1f).SetEase(Ease.InExpo); });
+        DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed - 1, 0.01f).OnComplete(() =>
+        {
+            DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed, 0.1f).SetEase(Ease.InExpo);
+        });
+        
     }
-    
-	public AnimationClip TryAnimationClip(string clip_name)
-	{
+
+    public AnimationClip TryAnimationClip(string clip_name)
+    {
         if (clip_name != null)
         {
             toLoadAnims.TryGetValue(clip_name, out _toUse);
@@ -42,11 +55,40 @@ public partial class Animation_Manger
             {
                 return _toUse;
             }
+
             Debug.Log("邪门了." + clip_name);
         }
+
         return null;
     }
+
+    // 模块启动时运行一次，从而确保模块了解自身能运行的trigger
+    public void GetAllParams()
+    {
+        foreach (AnimatorControllerParameter param in Animator.parameters)
+        {
+            parameters.Add(param.name);
+        }
+    }
     
+    public bool GetBool(string anim)
+    {
+        return Animator.GetBool(anim);
+    }
+
+    public AnimatorStateInfo GetCurrentAnimatorStateInfo(int layerIndex)
+    {
+        return Animator.GetCurrentAnimatorStateInfo(layerIndex);
+    }
+    
+    public void SetTrigger(string anim)
+    {
+        if (parameters.Contains(anim))
+        {
+            Animator.SetTrigger(anim);
+        }
+    }
+
     public void AnimationTrigger(string clip, bool in_Transition,float Duration)
     {
         PlayLayerAnim(clip,in_Transition, Duration);
@@ -70,8 +112,8 @@ public partial class Animation_Manger
             Animator.Update(0);
             if (!string.IsNullOrEmpty(clip_name))
             {
-                to_be_override_animation_name = "fullbody_empty1";
-                animatorOverride[to_be_override_animation_name] = TryAnimationClip(clip_name);
+                to_be_override_anim_name = "fullbody_empty1";
+                animatorOverride[to_be_override_anim_name] = TryAnimationClip(clip_name);
                 Animator.CrossFade("full_body_state1", Duration);
             }else{
             }
@@ -83,7 +125,7 @@ public partial class Animation_Manger
             {
                 if (!string.IsNullOrEmpty(clip_name))
                 {
-                    to_be_override_animation_name = "fullbody_empty1";
+                    to_be_override_anim_name = "fullbody_empty1";
                 }
                 else
                 {
@@ -93,21 +135,21 @@ public partial class Animation_Manger
             }
             if (AnimatorStateInfo.IsName("Full Body.full_body_state1"))
             {
-                to_be_override_animation_name = !string.IsNullOrEmpty(clip_name) ? "fullbody_empty2" : null;
+                to_be_override_anim_name = !string.IsNullOrEmpty(clip_name) ? "fullbody_empty2" : null;
             }
             if (AnimatorStateInfo.IsName("Full Body.full_body_state2"))
             {
-                to_be_override_animation_name = !string.IsNullOrEmpty(clip_name) ? "fullbody_empty1" : null;
+                to_be_override_anim_name = !string.IsNullOrEmpty(clip_name) ? "fullbody_empty1" : null;
             }
             
             if (!string.IsNullOrEmpty(clip_name))
             {
-                animatorOverride[to_be_override_animation_name] = TryAnimationClip(clip_name);                    
-                if (to_be_override_animation_name == "fullbody_empty2")
+                animatorOverride[to_be_override_anim_name] = TryAnimationClip(clip_name);                    
+                if (to_be_override_anim_name == "fullbody_empty2")
                 {
                     Animator.CrossFade("full_body_state2", Duration);
                 }
-                if (to_be_override_animation_name == "fullbody_empty1")
+                if (to_be_override_anim_name == "fullbody_empty1")
                 {
                     Animator.CrossFade("full_body_state1", Duration);
                 }

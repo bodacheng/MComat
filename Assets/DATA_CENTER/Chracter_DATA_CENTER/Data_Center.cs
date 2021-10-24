@@ -57,7 +57,7 @@ public partial class Data_Center : MonoBehaviour
     {
         if (!phase1Initialized)
         {
-            Animation_Manger.Animator =  WholeT.GetComponent<Animator>();
+            Animation_Manger.AnimatorRef =  WholeT.GetComponent<Animator>();
             this.Sensor.Center = this.geometryCenter;
             this.Sensor.sensor_radius = 15f;
             FightDataRef._Center = this;

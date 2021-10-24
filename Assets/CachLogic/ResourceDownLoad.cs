@@ -44,7 +44,7 @@ public partial class ResourceDownLoad : MonoBehaviour
         DProcessFinished = false;
         BundleURL = assetBundleURL;
     }
-
+    
     public IEnumerator ResourcePrepareProcess()
     {
         ResourceLoadingSetting.ConfigFileLoadingMode = _ResourceSetting.ConfigFileLoadingMode;

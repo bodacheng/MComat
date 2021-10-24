@@ -176,7 +176,7 @@ namespace mainMenu
                 }
                 Data_Center aI_DATA_CENTER = outsideDataLink._C;
                 _SkillsPrintOut.focusingC = aI_DATA_CENTER;
-                _SkillsPrintOut.focusingC.Animation_Manger.Animator.applyRootMotion = true;
+                _SkillsPrintOut.focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
             }
         }
 

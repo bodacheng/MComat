@@ -411,13 +411,13 @@ public static class MonstersConfigTable
 		return rowList.Count;
 	}
     
-    public static IDictionary<string,string> GetMonsterRecordIDsAndNamesArrayDic(string type) // close, near, far.rarelevel = -1代表全部，0代表无星级技能
+    public static IDictionary<string,string> GetMonsterIDsAndNamesDic(string type) // close, near, far.rarelevel = -1代表全部，0代表无星级技能
     {
         IDictionary<string, string> Mdic = new Dictionary<string, string>();
         List<Row> references = FindAll_MONSTER_TYPE(type);
         foreach (Row one in references)
         {
-            Mdic.Add(one.RECORD_ID,one.REAL_NAME);
+            Mdic.Add(one.RECORD_ID, one.REAL_NAME);
         }
         return Mdic;
     }
