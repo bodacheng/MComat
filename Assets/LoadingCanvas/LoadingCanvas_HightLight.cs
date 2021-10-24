@@ -44,5 +44,4 @@ public partial class LoadingCanvas : MonoBehaviour {
         hollowOutMask.gameObject.SetActive(false);
     }
     #endregion
-    
 }

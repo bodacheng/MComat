@@ -133,7 +133,6 @@ namespace FightScene
             }
             FightOverControl.target.logger.WatchMissionsAbandon();
             SingleAssignmentDisposableCleaner.Clear();
-            LoadingCanvas.target.Loading_Canvas.gameObject.SetActive(false);
             FightScenePauseSupport.target.ControlCanvas.gameObject.SetActive(false);
         }
         

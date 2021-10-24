@@ -6,10 +6,6 @@ using UniRx;
 public class StartUpPresentation : MonoBehaviour
 {
     [Space(7)]
-    [Header("runner")]
-    public SingleThreadProcesser runner;
-
-    [Space(7)]
     [Header("Starter")]
     public Starter Starter;
 
@@ -24,12 +20,7 @@ public class StartUpPresentation : MonoBehaviour
     // step1 商标显示
     // step2 可skip的小动画
     // step3 标题
-
-    void Awake()
-    {
-        SingleThreadProcesser.backup = runner;
-    }
-
+    
     void Start()
     {
         ResourceDownLoad.DProcessFinished = false;

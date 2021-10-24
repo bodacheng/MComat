@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // 该模块的最大待解决问题：
 // Loading_Canvas 会在不同方面的功能下被打开或关闭，这会让对该画布内容的显示产生很多混乱
@@ -11,7 +10,6 @@ public partial class LoadingCanvas : MonoBehaviour {
     public static LoadingCanvas target;
     
     public HollowOutMask hollowOutMask;
-    public Canvas Loading_Canvas;
     public Slider loadingBar;
     public Text processingDescrition;
     public Image LoadingCanvasBigCurtain;
@@ -24,15 +22,12 @@ public partial class LoadingCanvas : MonoBehaviour {
     public Button YesButton;
     public Button NoButton;
     
-    [Space(7)]
-    [Header("主进程处理器")]
-    public SingleThreadProcesser mainProcessRunner;
-    
     void Awake()
     {
         target = this;
     }
     
+    #region 进度条
     public void NowProcess(string desription, float percent)
     {
         processingDescrition.text = desription;
@@ -45,45 +40,35 @@ public partial class LoadingCanvas : MonoBehaviour {
         processingDescrition.gameObject.SetActive(_b);
     }
     
+    #endregion
+    
     #region 黑幕
-    public void LightUp()
-    {
-        mainProcessRunner.RunAsQueued(LightUpCanvas());
-    }
-    
-    public void DarkOff(float darkness)
-    {
-        mainProcessRunner.RunAsQueued(DarkOffCanvas(darkness));
-    }
-    
     public void DarkOffDirectly(float darkness)
     {
         LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, darkness);
     }
     
-    IEnumerator LightUpCanvas()
+    public async void LightUp()
     {
         float a = 1;
         LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
         while (a > 0)
         {
             a -= 0.05f;
+            await Task.Delay(1);
             LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
-            yield return null;
         }
     }
     
-    IEnumerator DarkOffCanvas(float toAlpha)
+    public async void DarkOff(float toAlpha)
     {
         float a = 0;
         LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
         while (a < toAlpha)
         {
             a += Time.deltaTime;
-            LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
-            yield return null;
+            await Task.Delay(1);
         }
-        yield break;
     }
     #endregion
     
@@ -98,12 +83,13 @@ public partial class LoadingCanvas : MonoBehaviour {
         
         ValidationIntro.text = intro;
         
-        IEnumerator closeWindow()
+        async void closeWindow()
         {
-            yield return new WaitForSeconds(1f);
+            await Task.Delay(1000);
             CloseValidationWindow();
         }
-        mainProcessRunner.RunAsQueued(closeWindow());
+        
+        closeWindow();
     }
     
     void CloseValidationWindow()

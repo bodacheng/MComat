@@ -20,13 +20,12 @@
             //{
             //    DOTween.To(() => ((OneVOneMode)nowC).xzMax, (x) => ((OneVOneMode)nowC).xzMax = x, 16, 3f);
             //}
-            LoadingCanvas.target.Loading_Canvas.gameObject.SetActive(false);
             if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
             {
                 TitleScreenLayer TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
                 TitleScreenLayer.Initialise(FightOverControl.target.ReturnToFront);
-            }else{
             }
+            
             FightScenePauseSupport.target.ControlCanvas.gameObject.SetActive(true);
             NetFightScene.target.PressedStartButton();
         }
