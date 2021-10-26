@@ -100,7 +100,7 @@
      <Compile Include="Assets\ResourceLoading\UnitCreator\UnitCreator_Cach.cs" />
      <Compile Include="Assets\Gotcha\GachaManager.cs" />
      <Compile Include="Assets\SkillShow\SkillsPrintOut.cs" />
-     <Compile Include="Assets\Arena\ArenaManager.cs" />
+     <Compile Include="Assets\Arena\ArenaLayer.cs" />
      <Compile Include="Assets\Remote\TeamSet\PosKeySet.cs" />
      <Compile Include="Assets\DynamicBone\Scripts\DynamicBonePlaneCollider.cs" />
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow.cs" />

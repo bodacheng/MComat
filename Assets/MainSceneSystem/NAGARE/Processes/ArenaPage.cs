@@ -1,12 +1,12 @@
 ﻿using mainMenu;
-using UnityEngine;
 
 public class ArenaPage : MainSceneProcess
 {
+    private ArenaLayer arenaLayer;
     void EnterProcess()
     {
-        ArenaManager.target.RefreshOpponent();
-        PageTo.Go(MainSceneStep.Arena);
+        arenaLayer = UILayerLoader.Load(PreScene.target.T, "ArenaLayer") as ArenaLayer;
+        arenaLayer.RefreshOpponent();
     }
     
     public ArenaPage()
@@ -22,5 +22,6 @@ public class ArenaPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
+        UILayerLoader.Remove("ArenaLayer");
     }
 }

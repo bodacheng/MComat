@@ -7,6 +7,7 @@ public class UILayerLoader
     {
         {"MainTop", "DummyLayerSystem/MainTop"},
         {"ArcadeTop", "DummyLayerSystem/ArcadeTop"},
+        {"ArenaLayer", "DummyLayerSystem/ArenaLayer"},
         {"MailBox", "DummyLayerSystem/MailBox"},
         {"MailDetail", "DummyLayerSystem/MailDetail"},
 

@@ -3,20 +3,13 @@ using System.Collections.Generic;
 using dataAccess;
 using mainMenu;
 
-public class ArenaManager : MonoBehaviour
+public class ArenaLayer : UILayer
 {
-    public static ArenaManager target;
-    
     public RectTransform ArenaCanvas;
     public ArenaFightTeamDisplay myTeam; // 玩家队伍显示
     
     public RectTransform EnemiesT;
     public ArenaFightTeamDisplay ArenaFightTeamDisplayPrefab;
-
-    void Awake()
-    {
-        target = this;
-    }
     
     public void RefreshOpponent()
     {
