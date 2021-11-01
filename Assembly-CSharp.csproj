@@ -261,6 +261,7 @@
      <Compile Include="Assets\Camera\Modes\keepTargetLeftCamera.cs" />
      <Compile Include="Assets\Structure\SingleAssignmentDisposableCleaner.cs" />
      <Compile Include="Assets\MasterDataTool\Skill_PF.cs" />
+     <Compile Include="Assets\PlayFab\CloudScripts\DisplayName.cs" />
      <Compile Include="Assets\ResourceLoading\UnitCreator\UnitCreator.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\Unity\UnityTypeBindings.cs" />
      <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\FrontAttack.cs" />

@@ -255,6 +255,7 @@ handlers.arenaPointUpBy1 = function (args, context) {
     };
     var playerStats = server.GetPlayerStatistics(getRequest).Statistics;
     var point = 0;
+    
     for (i = 0; i < playerStats.length; ++i) {
         if (playerStats[i].StatisticName === "arenapoint") {
             point = playerStats[i].Value + 1;
@@ -268,6 +269,26 @@ handlers.arenaPointUpBy1 = function (args, context) {
             Value: point
         }]
     });
+
+    var PlayerPosition;
+    
+    var resultleaderboard = server.GetLeaderboardAroundUser(
+        {
+            PlayFabID: currentPlayerId,
+            StatisticName : args.Leaderboardname,
+            MaxResultsCount : 1
+        });
+
+    if ((resultleaderboard != null) && (resultleaderboard.Error == null))
+    {
+        resultleaderboard.Leaderboard.forEach(element => {
+            if (element.PlayFabId == currentPlayerId)
+            {
+                PlayerPosition = element.Position;
+                return;
+            }
+        });
+    }
     
     return { "arena point" : point };
 };
@@ -277,7 +298,10 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     var request = {
         "PlayFabId": currentPlayerId,
         "MaxResultsCount": 4,
-        "StatisticName": "arenapoint"
+        "StatisticName": "arenapoint",
+        "ProfileConstraints" : {
+            "ShowDisplayName" : true
+        }
     };
     var Result = server.GetLeaderboardAroundUser(request);
 

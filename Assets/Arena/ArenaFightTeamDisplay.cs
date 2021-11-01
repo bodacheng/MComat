@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using mainMenu;
-using dataAccess;
 
 // 该模块只用于竞技场front画面的玩家队伍显示和挑战敌人队伍显示
 public class ArenaFightTeamDisplay : MonoBehaviour
 {
-    public Text RanKInfo;
+    public Text displayName;
+    public Text score;
     public HeroIcon member1, member2, member3;
     public Button BigButton;
         
     // 本函数唯一用途是竞技场的挑战玩家选择画面里每组敌人图标按钮的外观与功能加载
     public void AddFightToList(CloudScript.LeaderboardInfo LInfo)
     {
+        displayName.text = LInfo.PlayerLeaderboardEntry.DisplayName;
+        score.text = LInfo.PlayerLeaderboardEntry.StatValue.ToString();
+        
         // 竞技场模式下毫无考虑敌人“多组上场”的情况
         for (int index = 0; index < LInfo.Team.Length; index++)
         {
@@ -34,37 +37,23 @@ public class ArenaFightTeamDisplay : MonoBehaviour
             HeroIcon.ChangeHeroIconByRID(unitInfo.r_id, target);
         }
         
-        FightMembers fightMembers = new FightMembers();
-        fightMembers.EnemySets._SerializableSets = LInfo.Team;
+        FightMembers fightMembers = new FightMembers
+        {
+            EnemySets =
+            {
+                _SerializableSets = LInfo.Team
+            }
+        };
         fightMembers.EnemySets.ConvertSerializableArrayToDictionary();
         FightInfo stage = FightInfo.ArenaStage(fightMembers);
         stage.team2ID = LInfo.PlayerLeaderboardEntry.PlayFabId;
         stage.SetEventType(FightEventType.Arena);
-
+        
         BigButton.onClick.RemoveAllListeners();
         void PrepareForIt()
         {
             PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, true);
         }
         BigButton.onClick.AddListener(PrepareForIt);
-    }
-    
-    // myTeam 机能加载
-    public void ShowMyTeam()
-    {
-        string Pos1MonsterOfPlayerId = TeamSet.Arena3V3.GetMonsterOfPlayerIdOnPos(0);
-        string Pos2MonsterOfPlayerId = TeamSet.Arena3V3.GetMonsterOfPlayerIdOnPos(1);
-        string Pos3MonsterOfPlayerId = TeamSet.Arena3V3.GetMonsterOfPlayerIdOnPos(2);
-        
-        HeroIcon.ChangeHeroIconByInstanceId(Pos1MonsterOfPlayerId, member1);
-        HeroIcon.ChangeHeroIconByInstanceId(Pos2MonsterOfPlayerId, member2);
-        HeroIcon.ChangeHeroIconByInstanceId(Pos3MonsterOfPlayerId, member3);
-        
-        void GoToTeamEdit()
-        {
-            PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
-        }
-        BigButton.onClick.RemoveAllListeners();
-        BigButton.onClick.AddListener(GoToTeamEdit);
     }
 }
