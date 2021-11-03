@@ -5,6 +5,8 @@ using UniRx;
 
 public class StartUpPresentation : MonoBehaviour
 {
+    public GameObject T;
+    
     [Space(7)]
     [Header("Starter")]
     public Starter Starter;
@@ -13,29 +15,21 @@ public class StartUpPresentation : MonoBehaviour
     [Header("ResourceLordSceneStarter")]
     public ResourceDownLoad ResourceDownLoad;
     
-    [Space(7)]
-    [Header("开发公司商标")]
-    public Image logo;
-
     // step1 商标显示
     // step2 可skip的小动画
     // step3 标题
+    private LogoLayer LogoLayer;
     
     void Start()
     {
-        ResourceDownLoad.DProcessFinished = false;
+        LogoLayer =  UILayerLoader.Load(T,"LogoLayer") as LogoLayer;
+        LogoLayer.Nagare();
         StartCoroutine(ResourceDownLoad.ResourcePrepareProcess());
-        StartCoroutine(PresentationProcess());
+        PresentationProcess();
     }
 
-    public IEnumerator PresentationProcess()
+    void PresentationProcess()
     {
-        // step1 ：商标显示
-        LoadingCanvas.target.LightUp();
-        logo.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        logo.gameObject.SetActive(false);
-        
         // step2:主洁面
         SingleAssignmentDisposable Watershed = null;
         Watershed = new SingleAssignmentDisposable
@@ -49,7 +43,7 @@ public class StartUpPresentation : MonoBehaviour
                         return;
                     }
                     
-                    if (ResourceDownLoad.DProcessFinished)
+                    if (ResourceDownLoad.finished && LogoLayer.finished)
                     {
                         Starter.BeginNetMode();
                         Watershed.Dispose();

@@ -9,18 +9,18 @@ public partial class LoadingCanvas : MonoBehaviour {
     
     public static LoadingCanvas target;
     
-    public HollowOutMask hollowOutMask;
-    public Slider loadingBar;
-    public Text processingDescrition;
-    public Image LoadingCanvasBigCurtain;
+    [SerializeField] HollowOutMask hollowOutMask;
+    [SerializeField] Slider loadingBar;
+    [SerializeField] Text processingDescrition;
+    [SerializeField] Image bigCurtain;
     
     [Space(11)]
     [Header("Validation")]
-    public RectTransform ValidationWindow;
-    public RectTransform ValidationWindow_PosForMask;
-    public Text ValidationIntro;
-    public Button YesButton;
-    public Button NoButton;
+    [SerializeField] RectTransform ValidationWindow;
+    [SerializeField] RectTransform ValidationWindow_PosForMask;
+    [SerializeField] Text ValidationIntro;
+    [SerializeField] Button YesButton;
+    [SerializeField] Button NoButton;
     
     void Awake()
     {
@@ -45,25 +45,25 @@ public partial class LoadingCanvas : MonoBehaviour {
     #region 黑幕
     public void DarkOffDirectly(float darkness)
     {
-        LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, darkness);
+        bigCurtain.color = new Color(bigCurtain.color.r, bigCurtain.color.g, bigCurtain.color.b, darkness);
     }
     
     public async void LightUp()
     {
         float a = 1;
-        LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
+        bigCurtain.color = new Color(bigCurtain.color.r, bigCurtain.color.g, bigCurtain.color.b, a);
         while (a > 0)
         {
             a -= 0.05f;
             await Task.Delay(1);
-            LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
+            bigCurtain.color = new Color(bigCurtain.color.r, bigCurtain.color.g, bigCurtain.color.b, a);
         }
     }
     
     public async void DarkOff(float toAlpha)
     {
         float a = 0;
-        LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, a);
+        bigCurtain.color = new Color(bigCurtain.color.r, bigCurtain.color.g, bigCurtain.color.b, a);
         while (a < toAlpha)
         {
             a += Time.deltaTime;
@@ -96,7 +96,7 @@ public partial class LoadingCanvas : MonoBehaviour {
     {
         YesButton.onClick.RemoveAllListeners();
         NoButton.onClick.RemoveAllListeners();
-        LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 0);
+        bigCurtain.color = new Color(bigCurtain.color.r, bigCurtain.color.g, bigCurtain.color.b, 0);
         ValidationWindow.gameObject.SetActive(false);
         ClearHigtLight();
     }
@@ -127,7 +127,7 @@ public partial class LoadingCanvas : MonoBehaviour {
         {
             YesButton.onClick.RemoveAllListeners();
             NoButton.onClick.RemoveAllListeners();
-            LoadingCanvasBigCurtain.color = new Color(LoadingCanvasBigCurtain.color.r, LoadingCanvasBigCurtain.color.g, LoadingCanvasBigCurtain.color.b, 0);
+            bigCurtain.color = new Color(bigCurtain.color.r, bigCurtain.color.g, bigCurtain.color.b, 0);
             ValidationWindow.gameObject.SetActive(false);
             ClearHigtLight();
         }

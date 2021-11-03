@@ -11,9 +11,9 @@ public partial class LoadingCanvas : MonoBehaviour {
     public void HigtLightRect(List<Transform> Ts)
     {
         hollowOutMask.gameObject.SetActive(true);
-        if (LoadingCanvasBigCurtain != null)
+        if (bigCurtain != null)
         {
-            LoadingCanvasBigCurtain.color = Color.clear;
+            bigCurtain.color = Color.clear;
         }
         //Loading_Canvas.sortingOrder = 1;
         hollowOutMask.raycastTarget = true;
@@ -29,8 +29,8 @@ public partial class LoadingCanvas : MonoBehaviour {
     public void HigtLightRect(Transform _Transform)
     {
         hollowOutMask.gameObject.SetActive(true);
-        if (LoadingCanvasBigCurtain != null)
-            LoadingCanvasBigCurtain.color = Color.clear;
+        if (bigCurtain != null)
+            bigCurtain.color = Color.clear;
         //Loading_Canvas.sortingOrder = 1;
         hollowOutMask.raycastTarget = true;
         hollowOutMask.SetTarget(new List<RectTransform>{ _Transform.GetComponent<RectTransform>() });

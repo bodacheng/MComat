@@ -10,7 +10,7 @@ public class Starter : MonoBehaviour
     [SerializeField] bool enterFrontPageFirst;
     [SerializeField] PlayfabSetting PlayfabSetting;
     [SerializeField] FightGlobalSetting FightGlobalSetting;
-
+    
     void EnterFrontScene()
     {
         FightGlobalSetting.Initialise();

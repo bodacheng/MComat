@@ -4,7 +4,7 @@ using UnityEngine;
 
 public partial class ResourceDownLoad : MonoBehaviour
 {
-    private IEnumerator characterComponentsDownload()
+    private IEnumerator unitComponentsDownload()
     {
         ////////// 下面统计各个type角色的必要组件 ////////////
         foreach (KeyValuePair<string,List<string>> keyValuePair in CharTypeCodeAndBasicMoveSets)

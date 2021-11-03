@@ -37,16 +37,17 @@ public partial class ResourceDownLoad : MonoBehaviour
     CachDownLoadMission modelConfigFileMission;
     CachDownLoadMission animationConfigFileMission;
 
-    public bool DProcessFinished { get; set; }
+    public bool finished { get; set; }
 
     void Start()
     {
-        DProcessFinished = false;
         BundleURL = assetBundleURL;
     }
     
     public IEnumerator ResourcePrepareProcess()
     {
+        finished = false;
+        
         ResourceLoadingSetting.ConfigFileLoadingMode = _ResourceSetting.ConfigFileLoadingMode;
         ResourceLoadingSetting.AnimationLoadingMode = _ResourceSetting.AnimationLoadingMode;
         ResourceLoadingSetting.MagicLoadingMode = _ResourceSetting.MagicLoadingMode;
@@ -100,7 +101,7 @@ public partial class ResourceDownLoad : MonoBehaviour
         switch (ResourceLoadingSetting.AnimationLoadingMode)
         {
             case ResourceLoadMode.CachAB:
-                yield return characterComponentsDownload();
+                yield return unitComponentsDownload();
                 yield return AnimationResourceDownLoad();
                 break;
             case ResourceLoadMode.StreamingAssetAB:
@@ -130,6 +131,6 @@ public partial class ResourceDownLoad : MonoBehaviour
         }
         LoadingCanvas.target.NowProcess("正在加载资源", 1f);
         LoadingCanvas.target.TurnOnProcessDescription(false);
-        DProcessFinished = true;
+        finished = true;
     }
 }
