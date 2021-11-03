@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using dataAccess;
 using mainMenu;
-using TMPro;
 using UnityEngine.UI;
 
 public class ArenaLayer : UILayer

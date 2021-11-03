@@ -124,7 +124,7 @@ public class MonsterEditPage : MainSceneProcess
             }
 
             string warn;
-            switch (SettingLayer.Language)
+            switch (AppSetting.Language)
             {
                 case ApiLanguage.JaJp:
                     warn = "選択したスキルストーンでユニットの技を更新しますか？";

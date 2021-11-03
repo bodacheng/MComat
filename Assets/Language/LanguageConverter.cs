@@ -23,7 +23,7 @@ public class LanguageConverter : MonoBehaviour
             LanguageCodeTable.Row row = LanguageCodeTable.Find_RECORD_ID(languageCode);
             if (row != null)
             {
-                switch (SettingLayer.Language)
+                switch (AppSetting.Language)
                 {
                     case ApiLanguage.EnUs:
                         target.text = row.EN;

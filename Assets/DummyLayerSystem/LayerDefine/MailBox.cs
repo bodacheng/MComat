@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using PlayFab.ClientModels;
 
 public class MailBox : UILayer
 {
@@ -26,8 +25,6 @@ public class MailBox : UILayer
         currentMailListViews.Clear();
         
         List<MailItemInstance> _myMailList = PlayFabReadClient.GetMailsData();
-        
-        float wholeheight = 0; 
         for (int i = 0; i < _myMailList.Count; i++)
         {
             MailListView mailListView = Instantiate(mailListViewPretab);

@@ -12,6 +12,8 @@ public class AppSetting
     
     public static AudioSource bgmSource;
     
+    public static ApiLanguage Language = ApiLanguage.JaJp;
+    
     public float BgmVolumn
     {
         get => bgmVolumn;

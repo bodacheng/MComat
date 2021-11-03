@@ -3,10 +3,13 @@ using UnityEngine.UI;
 
 public class SettingLayer : UILayer {
     
-    public RectTransform SettingMenuT;
-    public Slider bgmSLider, CVSlider, effectsSoundsSlider;
-    
-    public static ApiLanguage Language = ApiLanguage.JaJp;
+    [SerializeField] RectTransform SettingMenuT;
+
+    #region Sound
+    [SerializeField] Slider bgmSLider;
+    [SerializeField] Slider cvSlider;
+    [SerializeField] Slider effectsSoundsSlider;
+    #endregion
     
     public void Initialise()
     {
@@ -29,7 +32,7 @@ public class SettingLayer : UILayer {
     {
         effectsSoundsSlider.value = AppSetting.value.EffectsVolumn;
         bgmSLider.value = AppSetting.value.BgmVolumn;
-        CVSlider.value = AppSetting.value.CvVolumn;
+        cvSlider.value = AppSetting.value.CvVolumn;
     }
     
     public void onBgmChange()
@@ -38,7 +41,7 @@ public class SettingLayer : UILayer {
     }
     public void onCVsChange()
     {
-        AppSetting.value.CvVolumn = CVSlider.value;        
+        AppSetting.value.CvVolumn = cvSlider.value;        
     }
     public void onEffectsSoundChange()
     {
