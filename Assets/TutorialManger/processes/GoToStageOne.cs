@@ -19,7 +19,7 @@ public class GoToStageOne : TutorialProcess
     
     public override void ProcessEnd()
     {
-        LoadingCanvas.target.ClearHigtLight();
+        PopupLayer.Close();
     }
     
     public override bool CanEnterOtherProcess()

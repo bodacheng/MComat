@@ -11,12 +11,13 @@ public class ChooseAdamToSlot1 : TutorialProcess
     public override void ProcessEnter()
     {
         UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
-        LoadingCanvas.target.HigtLightRect(unitsLayer.GetCharIcon("1").transform);
+        PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+        popupLayer.HigtLightRect(unitsLayer.GetCharIcon("1").transform);
     }
     
     public override void ProcessEnd()
     {
-        LoadingCanvas.target.ClearHigtLight();
+        PopupLayer.Close();
     }
     
     public override bool CanEnterOtherProcess()

@@ -10,12 +10,13 @@ public class GoToStages : TutorialProcess
     
     public override void ProcessEnter()
     {
-        LoadingCanvas.target.HigtLightRect(TutorialHelper.target.ArcadeMode.transform);
+        PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+        popupLayer.HigtLightRect(TutorialHelper.target.ArcadeMode.transform);
     }
     
     public override void ProcessEnd()
     {
-        LoadingCanvas.target.ClearHigtLight();
+        PopupLayer.Close();
     }
     
     public override bool CanEnterOtherProcess()

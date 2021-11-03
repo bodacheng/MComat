@@ -10,7 +10,8 @@ public class SkillEditA2Try : TutorialProcess
     
     public override void ProcessEnter()
     {
-        LoadingCanvas.target.HigtLightRect(TheNineSlot.target.A2DragAndDropCell.transform);
+        PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+        popupLayer.HigtLightRect(TheNineSlot.target.A2DragAndDropCell.transform);
     }
     
     public override bool CanEnterOtherProcess()

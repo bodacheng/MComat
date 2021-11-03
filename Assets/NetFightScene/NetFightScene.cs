@@ -50,13 +50,13 @@ namespace FightScene
         void Awake()
         {
             target = this;
-            Screen.SetResolution(1920, 1080, true);
         }
         
         void Start()
         {
             //QualitySettings.vSyncCount = 1;
             Screen.SetResolution(1920, 1080, true);
+            UILayerLoader.Clear();
             
             AppSetting.bgmSource = audioSource;
             AppSetting.Load();

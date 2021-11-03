@@ -23,7 +23,7 @@ public class FightScenePauseSupport : MonoBehaviour
     
     [Space(11)]
     [Header("战斗界面canvas")]
-    public Canvas FightCanvas, ControlCanvas;
+    public Canvas ControlCanvas;
     
     public static FightScenePauseSupport target;
 
@@ -49,7 +49,6 @@ public class FightScenePauseSupport : MonoBehaviour
     public void PauseScene()
     {
         PauseMenu.gameObject.SetActive(true);
-        FightCanvas.gameObject.SetActive(false);
         ControlCanvas.gameObject.SetActive(false);
         Time.timeScale = 0;
     }
@@ -58,7 +57,6 @@ public class FightScenePauseSupport : MonoBehaviour
     public void ResumeScene()
     {
         PauseMenu.gameObject.SetActive(false);
-        FightCanvas.gameObject.SetActive(true);
         ControlCanvas.gameObject.SetActive(true);
         Time.timeScale = 1;
     }

@@ -10,12 +10,13 @@ public class GoToTeamEdit : TutorialProcess
     
     public override void ProcessEnter()
     {
-        LoadingCanvas.target.HigtLightRect(PreScene.target.TeamEditor.StartToTeamEditButton.transform);
+        PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+        popupLayer.HigtLightRect(PreScene.target.TeamEditor.StartToTeamEditButton.transform);
     }
     
     public override void ProcessEnd()
     {
-        LoadingCanvas.target.ClearHigtLight();
+        PopupLayer.Close();
     }
     
     public override bool CanEnterOtherProcess()

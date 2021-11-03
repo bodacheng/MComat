@@ -13,12 +13,13 @@ public class ReturnOne : TutorialProcess
     public override void ProcessEnter()
     {
         nowstep = ProcessesRunner.Main.currentProcess.Step;
-        LoadingCanvas.target.HigtLightRect(ReturnButtonManager.ToUseReturnButton.transform);
+        PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+        popupLayer.HigtLightRect(ReturnButtonManager.ToUseReturnButton.transform);
     }
     
     public override void ProcessEnd()
     {
-        LoadingCanvas.target.ClearHigtLight();
+        PopupLayer.Close();
     }
     
     public override bool CanEnterOtherProcess()

@@ -62,7 +62,7 @@ namespace mainMenu
         void Start()
         {
             Screen.SetResolution(1920, 1080, true);
-
+            UILayerLoader.Clear();
             AppSetting.bgmSource = audioSource;
             AppSetting.Load();
             Time.timeScale = 1;
@@ -81,12 +81,12 @@ namespace mainMenu
         
         public static void ReturnToLobby(string error)
         {
-            LoadingCanvas.target.ArrangeConfirmWindow((() => { SceneManager.LoadScene(1);}), error);
+            PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+            popupLayer.ArrangeConfirmWindow((() => { SceneManager.LoadScene(1);}), error);
         }
         
         void BasicPhase()
         {
-            LoadingCanvas.target.TurnOnProcessDescription(false);
             Application.targetFrameRate = 60;
             UpperInfoBar.target.T.gameObject.SetActive(false);
             
@@ -203,7 +203,8 @@ namespace mainMenu
 
         public void AskIfLoadFight(FightInfo stage)
         {
-            LoadingCanvas.target.ArrangeConfirmWindow(
+            PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+            popupLayer.ArrangeConfirmWindow(
                 delegate {
                     FightLoad.Go(stage, true);
                 }, "开打？");

@@ -27,7 +27,8 @@ public class OpenSkillEdit : TutorialProcess
         {
             if (MemberDetailProcess.loadFinished)
             {
-                LoadingCanvas.target.HigtLightRect(TutorialHelper.target.SkillEditButton.transform);
+                PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+                popupLayer.HigtLightRect(TutorialHelper.target.SkillEditButton.transform);
                 waitCompleted = true;
             }
         }

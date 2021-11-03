@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public partial class LoadingCanvas : MonoBehaviour {
+public partial class PopupLayer : UILayer {
 
     #region 高亮显示
     /// <summary>

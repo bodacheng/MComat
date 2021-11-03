@@ -231,7 +231,8 @@ public partial class SSLevelUpManager : MonoBehaviour
         {
             void LevelUp()
             {
-                LoadingCanvas.target.ArrangeConfirmWindow(ConfirmSkillStoneLevelUp, "确实要升级技能石？");
+                PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+                popupLayer.ArrangeConfirmWindow(ConfirmSkillStoneLevelUp, "确实要升级技能石？");
             }
             confirmLevelUp.onClick.RemoveAllListeners();
             confirmLevelUp.onClick.AddListener(LevelUp);

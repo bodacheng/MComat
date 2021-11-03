@@ -5,7 +5,6 @@ namespace FightScene
 {
     public class CountDownProcess : FSceneProcess
     {
-        float startTimestamp = 3f;
         bool AutoMoveToNext;
         public CountDownProcess()
         {
@@ -25,7 +24,6 @@ namespace FightScene
         
         IEnumerator BeforeFightCountDown()
         {
-            startTimestamp = 3f;
             AutoMoveToNext = false;
             BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
             //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);

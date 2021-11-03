@@ -16,7 +16,7 @@ public class ConfirmQuest1 : TutorialProcess
     
     public override void ProcessEnd()
     {
-        LoadingCanvas.target.ClearHigtLight();
+        PopupLayer.Close();
     }
     
     public override bool CanEnterOtherProcess()

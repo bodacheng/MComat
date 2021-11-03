@@ -5,7 +5,8 @@ public class ALineConfirm : TutorialProcess
 {    
     public override void ProcessEnter()
     {
-        LoadingCanvas.target.HigtLightRect(TheNineSlot.target.ConfirmSkillChangeButton.transform);
+        PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+        popupLayer.HigtLightRect(TheNineSlot.target.ConfirmSkillChangeButton.transform);
     }
     
     public override void ProcessEnd()

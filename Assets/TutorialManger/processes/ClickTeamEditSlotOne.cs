@@ -10,12 +10,13 @@ public class ClickTeamEditSlotOne : TutorialProcess
     
     public override void ProcessEnter()
     {
-        LoadingCanvas.target.HigtLightRect(PreScene.target.TeamEditor.team1front.transform);
+        PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+        popupLayer.HigtLightRect(PreScene.target.TeamEditor.team1front.transform);
     }
     
     public override void ProcessEnd()
     {
-        LoadingCanvas.target.ClearHigtLight();
+        PopupLayer.Close();
     }
     
     public override bool CanEnterOtherProcess()

@@ -36,7 +36,8 @@ public class BoxExpandHelper : MonoBehaviour
         
         void expandTen()
         {
-            LoadingCanvas.target.ArrangeConfirmWindow(ChooseTen, "来他10个技能石格子？？");
+            PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+            popupLayer.ArrangeConfirmWindow(ChooseTen, "来他10个技能石格子？？");
         }
         Ten.onClick.RemoveAllListeners();
         Ten.onClick.AddListener(expandTen);

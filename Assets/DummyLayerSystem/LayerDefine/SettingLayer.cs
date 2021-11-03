@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using mainMenu;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingLayer : UILayer {
@@ -10,10 +11,13 @@ public class SettingLayer : UILayer {
     [SerializeField] Slider cvSlider;
     [SerializeField] Slider effectsSoundsSlider;
     #endregion
+
+    private PopupLayer _popupLayer;
     
     public void Initialise()
     {
-        LoadingCanvas.target.HigtLightRect(SettingMenuT);
+        _popupLayer = PopupLayer.Open(PreScene.target.T);
+        _popupLayer.HigtLightRect(SettingMenuT);
         onBgmChange();
         onCVsChange();
         onEffectsSoundChange();
@@ -24,7 +28,8 @@ public class SettingLayer : UILayer {
     public void Close()
     {
         AppSetting.Save();
-        LoadingCanvas.target.ClearHigtLight();
+        _popupLayer.ClearHigtLight();
+        PopupLayer.Close();
         UILayerLoader.Remove("SettingLayer");
     }
     

@@ -21,10 +21,21 @@ public class UILayerLoader
         {"SettingLayer", "DummyLayerSystem/SettingLayer"},
         {"UnitsLayer", "DummyLayerSystem/UnitsLayer"},
         {"LogoLayer", "DummyLayerSystem/LogoLayer"},
+        {"PopupLayer", "DummyLayerSystem/PopupLayer"},
     };
 
     private static List<UILayer> Queues = new List<UILayer>();
 
+    public static void Clear()
+    {
+        foreach (var queue in Queues)
+        {
+            if (queue != null && queue.gameObject != null)
+            GameObject.Destroy(queue.gameObject);
+        }
+        Queues.Clear();
+    }
+    
     public static UILayer Get(string key)
     {
         return Queues.Find(x => x.Index == key);

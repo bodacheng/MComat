@@ -89,7 +89,8 @@ public class StoneMergeManger : MonoBehaviour
         {
             //
         }
-        LoadingCanvas.target.ArrangeConfirmWindow(run, "确实要融合技能石？");
+        PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+        popupLayer.ArrangeConfirmWindow(run, "确实要融合技能石？");
     }
     #endregion
 }

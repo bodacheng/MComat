@@ -133,8 +133,8 @@ public class MonsterEditPage : MainSceneProcess
                     warn = "确实要进行技能更新？";
                 break;
             }
-
-            LoadingCanvas.target.ArrangeConfirmWindow(SkillEditConfirm, warn);
+            PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+            popupLayer.ArrangeConfirmWindow(SkillEditConfirm, warn);
         }
         TheNineSlot.target.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
         TheNineSlot.target.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);

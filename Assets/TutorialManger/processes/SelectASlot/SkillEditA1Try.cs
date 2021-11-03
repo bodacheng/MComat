@@ -31,7 +31,8 @@ public class SkillEditA1Try : TutorialProcess
         {
             if (MonsterEditPage.loadFinished)
             {
-                LoadingCanvas.target.HigtLightRect(TheNineSlot.target.A1DragAndDropCell.transform);
+                PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+                popupLayer.HigtLightRect(TheNineSlot.target.A1DragAndDropCell.transform);
                 waitCompleted = true;
             }
         }

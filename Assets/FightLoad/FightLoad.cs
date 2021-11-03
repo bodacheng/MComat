@@ -1,6 +1,7 @@
 ﻿using UnityEngine.SceneManagement;
 using dataAccess;
 using FightScene;
+using mainMenu;
 
 public static class FightLoad
 {
@@ -27,7 +28,8 @@ public static class FightLoad
                     error = "队伍人员不够。";
                     break;
             }
-            LoadingCanvas.target.ArrangeWarnWindow(error);
+            PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+            popupLayer.ArrangeWarnWindow(error);
             return;
         }
 

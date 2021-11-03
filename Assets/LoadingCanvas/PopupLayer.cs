@@ -2,19 +2,13 @@
 using UnityEngine.UI;
 using System.Threading.Tasks;
 
-// 该模块的最大待解决问题：
-// Loading_Canvas 会在不同方面的功能下被打开或关闭，这会让对该画布内容的显示产生很多混乱
-
-public partial class LoadingCanvas : MonoBehaviour {
-    
-    public static LoadingCanvas target;
+public partial class PopupLayer : UILayer {
     
     [SerializeField] HollowOutMask hollowOutMask;
     [SerializeField] Slider loadingBar;
     [SerializeField] Text processingDescrition;
     [SerializeField] Image bigCurtain;
     
-    [Space(11)]
     [Header("Validation")]
     [SerializeField] RectTransform ValidationWindow;
     [SerializeField] RectTransform ValidationWindow_PosForMask;
@@ -22,9 +16,19 @@ public partial class LoadingCanvas : MonoBehaviour {
     [SerializeField] Button YesButton;
     [SerializeField] Button NoButton;
     
-    void Awake()
+    public static PopupLayer Open(GameObject T)
     {
-        target = this;
+        UILayer l = UILayerLoader.Get("PopupLayer");
+        if (l != null)
+        {
+            return l as PopupLayer;
+        }
+        return UILayerLoader.Load(T,"PopupLayer") as PopupLayer;
+    }
+    
+    public static void Close()
+    {
+        UILayerLoader.Remove("PopupLayer");
     }
     
     #region 进度条
@@ -58,6 +62,7 @@ public partial class LoadingCanvas : MonoBehaviour {
             await Task.Delay(1);
             bigCurtain.color = new Color(bigCurtain.color.r, bigCurtain.color.g, bigCurtain.color.b, a);
         }
+        Close();
     }
     
     public async void DarkOff(float toAlpha)
@@ -87,6 +92,7 @@ public partial class LoadingCanvas : MonoBehaviour {
         {
             await Task.Delay(1000);
             CloseValidationWindow();
+            Close();
         }
         
         closeWindow();
@@ -130,6 +136,7 @@ public partial class LoadingCanvas : MonoBehaviour {
             bigCurtain.color = new Color(bigCurtain.color.r, bigCurtain.color.g, bigCurtain.color.b, 0);
             ValidationWindow.gameObject.SetActive(false);
             ClearHigtLight();
+            Close();
         }
         
         YesButton.gameObject.SetActive(true);

@@ -36,7 +36,8 @@ public class StonesPage : MainSceneProcess
     
     static void CommonEnterProcess()
     {
-        LoadingCanvas.target.DarkOffDirectly(1f);
+        PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+        popupLayer.DarkOffDirectly(1f);
         PageTo.Go(MainSceneStep.SkillStoneList);
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
@@ -54,7 +55,7 @@ public class StonesPage : MainSceneProcess
             ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(), 5f), 
             Zokusei.blueMagic
         );
-        LoadingCanvas.target.LightUp();
+        popupLayer.LightUp();
     }
 
     public StonesPage()

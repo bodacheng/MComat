@@ -62,7 +62,7 @@
      <Compile Include="Assets\BOWeaponSystem\Health System\ShaderManager.cs" />
      <Compile Include="Assets\POS_Sys\Start_End_Processes.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\CommonFightResult.cs" />
-     <Compile Include="Assets\LoadingCanvas\LoadingCanvas.cs" />
+     <Compile Include="Assets\LoadingCanvas\PopupLayer.cs" />
      <Compile Include="Assets\TutorialManger\TutorialRunner.cs" />
      <Compile Include="Assets\AI\AI_states\states\Empty_State.cs" />
      <Compile Include="Assets\Singleton\TeamConfig.cs" />
@@ -579,6 +579,7 @@
      <Compile Include="Assets\Camera\Modes\LerpToCertainDistance.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Event\PressKeyEvent.cs" />
      <Compile Include="Assets\Camera\linesShow\SkillShowLines.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\LogoLayer.cs" />
      <Compile Include="Assets\AI\Soul\BehaviorRunner_ScriptFileReading.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonException.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem_Render.cs" />
@@ -663,7 +664,6 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
-     <Compile Include="Assets\DummyLayerSystem\LayerDefine\LogoLayer.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />

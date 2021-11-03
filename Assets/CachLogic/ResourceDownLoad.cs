@@ -53,11 +53,7 @@ public partial class ResourceDownLoad : MonoBehaviour
         ResourceLoadingSetting.MagicLoadingMode = _ResourceSetting.MagicLoadingMode;
         ResourceLoadingSetting.ModelLoadingMode = _ResourceSetting.ModelLoadingMode;
         ResourceLoadingSetting.IconLoadingMode = _ResourceSetting.IconLoadingMode;
-
-        LoadingCanvas.target.DarkOff(0.5f);
-        LoadingCanvas.target.TurnOnProcessDescription(true);
-        LoadingCanvas.target.NowProcess("正在加载资源", 0);
-
+        
         switch (ResourceLoadingSetting.ConfigFileLoadingMode)
         {
             case ResourceLoadMode.CachAB:
@@ -70,7 +66,6 @@ public partial class ResourceDownLoad : MonoBehaviour
                 SkillConfigTable.LoadAllSkillConfigs();
                 PowerEstimateTable.Load();
                 LevelExpConfig.LoadLevelExpConfig();
-                LoadingCanvas.target.NowProcess("正在加载资源", 0.3f);
                 break;
         }
 
@@ -85,7 +80,6 @@ public partial class ResourceDownLoad : MonoBehaviour
                 //Resource模式下模型都是现加载。
                 break;
         }
-        LoadingCanvas.target.NowProcess("正在加载资源", 0.6f);
 
         // CharTypeCodeAndBasicMoveSets 记录了角色配置文件所出现的所有角色type以及出现的所有基础动画包的名字。
         foreach (MonstersConfigTable.Row row in MonstersConfigTable.rowList)
@@ -108,13 +102,9 @@ public partial class ResourceDownLoad : MonoBehaviour
                 break;
             case ResourceLoadMode.Resource:
                 // 测试版本要把所有动画片段全加载，不能像正式版那样按照角色技能分个加载，原因是动画片段地址机理不同。
-                int i = 0;
                 foreach (string type in _ConfigFileManager.chartypes)
                 {
                     AnimationResourceLoader.Instance.PrepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type);
-                    i++;
-                    LoadingCanvas.target.NowProcess("正在加载资源", i / _ConfigFileManager.chartypes.Length);
-                    yield return null;
                 }
                 break;
         }
@@ -129,8 +119,6 @@ public partial class ResourceDownLoad : MonoBehaviour
             case ResourceLoadMode.Resource:
                 break;
         }
-        LoadingCanvas.target.NowProcess("正在加载资源", 1f);
-        LoadingCanvas.target.TurnOnProcessDescription(false);
         finished = true;
     }
 }
