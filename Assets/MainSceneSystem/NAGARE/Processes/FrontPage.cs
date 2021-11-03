@@ -61,7 +61,7 @@ public class FrontPage : MainSceneProcess
         mainTop.Initialise(PreScene.target);
 
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 2.2f, 0.1f);
-        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
+        //MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
 

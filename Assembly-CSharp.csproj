@@ -612,7 +612,7 @@
      <Compile Include="Assets\FightingSceneUISystem\HeroIcon.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\Dev.cs" />
      <Compile Include="Assets\CSV2Table\Scripts\CsvParser2.cs" />
-     <Compile Include="Assets\Monsterbox\MonsterBox.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\UnitsLayer.cs" />
      <Compile Include="Assets\UI\ExBarBurn.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\MailBox.cs" />
      <Compile Include="Assets\TheBlur\Blur.cs" />

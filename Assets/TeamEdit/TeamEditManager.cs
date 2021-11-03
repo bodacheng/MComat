@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using mainMenu;
 using dataAccess;
@@ -21,10 +20,10 @@ public class TeamEditManager : MonoBehaviour
     [Space(7)]
     [Header("技能编辑按钮")]
     public Button SkillEditButton;
-
+    
     public int focusingPosNum = -1;
     readonly IDictionary<int, HeroIcon> teamButtonDic = new Dictionary<int, HeroIcon>();
-
+    
     void Awake()
     {
         // edit按钮功能加载
@@ -36,33 +35,26 @@ public class TeamEditManager : MonoBehaviour
         }
         SkillEditButton.onClick.AddListener(SkillEdit);
     }
-
-    #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行
-    public void AddHeroIconFeaturesToMonsterBox(string teamMode)
-    {
-        foreach (KeyValuePair<string, HeroIcon> keyValuePair in MonsterBox.mainMenuIcons)
-        {
-            AddHeroIconFeatureToMonsterBox(keyValuePair.Key, teamMode, keyValuePair.Value.iconButton);
-        }
-    }
-
+    
     void CancelSelect()
     {
         focusingPosNum = -1;
         HeroIcon.Seletedfeature(null, selectedFrame, 200f);
     }
 
-    void MonsterIconButton(string CharAccId, string teammode)
+    public void MonsterIconButton(string CharAccId, string teammode)
     {
+        UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+        
         if (focusingPosNum != -1)
         {
             ChangeTeamPos(CharAccId, focusingPosNum, teammode);
             CancelSelect();
-            MonsterBox.target.CancelSelect();
+            unitsLayer.CancelSelect();
         }
         else
         {
-            MonsterBox.target.Select(CharAccId);
+            unitsLayer.Select(CharAccId);
         }
 
         MemberDetail.target.SetMemberDetailFocusingChar(CharAccId);//确立focusing角色
@@ -70,16 +62,6 @@ public class TeamEditManager : MonoBehaviour
         _nineForShow.ShowStones_Acc(CharAccId);
         MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
     }
-
-    void AddHeroIconFeatureToMonsterBox(string CharAccId, string teammode, Button targetButton)
-    {
-        void Trigger()
-        {
-            MonsterIconButton(CharAccId, teammode);
-        }
-        targetButton.onClick.AddListener(Trigger);
-    }
-    #endregion
     
     // 修改对象队伍编程
     public void ChangeTeamPos(string instanceID, int targetPos, string teammode)
@@ -130,10 +112,12 @@ public class TeamEditManager : MonoBehaviour
         
         void SetPos(int posNum)
         {
-            if (MonsterBox.selectingAccID != null)
+            UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+            string unitsBoxSelect = unitsLayer.GetSelect();
+            if (unitsBoxSelect != null)
             {
                 Remove();
-                MonsterBox.target.CancelSelect();
+                unitsLayer.CancelSelect();
                 CancelSelect();
             }
             else

@@ -136,7 +136,6 @@ namespace mainMenu
 
         public void FightStart()
         {
-            MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
             ArrangeTeamBySelection();
             stage.team1ID = Account._AccInfo.playerID;
             stage.team2ID = Account._AccInfo.playerID + "_2";
@@ -146,32 +145,28 @@ namespace mainMenu
         #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行
         public void AddHeroIconFeaturesToMonsterBox()
         {
-            foreach (KeyValuePair<string, HeroIcon> keyValuePair in MonsterBox.mainMenuIcons)
+            IEnumerator MonsterIconButton(string CharAccID)
             {
-                AddHeroIconFeatureToMonsterBox(keyValuePair.Key,keyValuePair.Value.iconButton);
-            }
-        }
-        
-        void AddHeroIconFeatureToMonsterBox(string CharAccID, Button targetButton)
-        {
-            IEnumerator MonsterIconButton()
-            {
-                MonsterBox.target.Select(CharAccID);
+                UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+                unitsLayer.Select(CharAccID);
                 yield return MonsterIConButton(CharAccID);
             }
-            void Trigger()
+            void Trigger(string CharAccID)
             {
-                PreScene.target.mainProcessRunner.RunAsQueued(MonsterIconButton());
+                PreScene.target.mainProcessRunner.RunAsQueued(MonsterIconButton(CharAccID));
             }
-            targetButton.onClick.AddListener(Trigger);
+            
+            UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+            unitsLayer.SetUnitsIconOnClick(Trigger);
         }
         #endregion
         
-        public IEnumerator MonsterIConButton(string localID)
+        IEnumerator MonsterIConButton(string localID)
         {
+            UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
             if (focusingPosNum == -1)
             {
-                MonsterBox.target.Select(localID);
+                unitsLayer.Select(localID);
             }
             else
             {
@@ -205,7 +200,7 @@ namespace mainMenu
                         break;
                 }
                 CancelSelect();
-                MonsterBox.target.CancelSelect();
+                unitsLayer.CancelSelect();
             }
 
             //以下为防重复版本选人。
@@ -292,7 +287,7 @@ namespace mainMenu
                 }
                 void A()
                 {
-                    OneTeamPosButtonBehaviour(team, IconNumCheck[charIcon]);
+                    OnTeamPosBtn(team, IconNumCheck[charIcon]);
                 }
                 charIcon.iconButton.onClick.RemoveAllListeners();
                 charIcon.iconButton.onClick.AddListener(A);
@@ -315,7 +310,7 @@ namespace mainMenu
                 }
                 void A()
                 {
-                    OneTeamPosButtonBehaviour(team, IconNumCheck[charIcon]);
+                    OnTeamPosBtn(team, IconNumCheck[charIcon]);
                 }
                 charIcon.iconButton.onClick.RemoveAllListeners();
                 charIcon.iconButton.onClick.AddListener(A);
@@ -340,16 +335,18 @@ namespace mainMenu
             FightStartBUtton.onClick.AddListener(FightStart);
         }
 
-        void OneTeamPosButtonBehaviour(Team team, int pos)
+        void OnTeamPosBtn(Team team, int pos)
         {
             focusingTeam = team;
             focusingPosNum = pos;
-
-            if (MonsterBox.selectingAccID != null)
+            UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+            string unitsBoxSelect = unitsLayer.GetSelect();
+            
+            if (unitsBoxSelect != null)
             {
                 IEnumerator temp()
                 {
-                    yield return MonsterIConButton(MonsterBox.selectingAccID);
+                    yield return MonsterIConButton(unitsBoxSelect);
                 }
                 PreScene.target.mainProcessRunner.RunAsQueued(temp());
             }

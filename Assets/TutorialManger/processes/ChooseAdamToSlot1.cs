@@ -1,5 +1,4 @@
 ﻿using mainMenu;
-using dataAccess;
 
 // Tutorial 1 
 public class ChooseAdamToSlot1 : TutorialProcess
@@ -11,7 +10,8 @@ public class ChooseAdamToSlot1 : TutorialProcess
     
     public override void ProcessEnter()
     {
-        LoadingCanvas.target.HigtLightRect(MonsterBox.GetCharIcon("1").transform);
+        UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+        LoadingCanvas.target.HigtLightRect(unitsLayer.GetCharIcon("1").transform);
     }
     
     public override void ProcessEnd()

@@ -26,16 +26,15 @@ public class TeamEditPage : MainSceneProcess
     
     public void EnterProcess(string teammode)
     {
-        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(true);
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
         PreScene.target.TeamEditor.INITeamPosButtons(teammode);
         if (MemberDetail.target._focusing != null)
             PreScene.target.TeamEditor._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.id);
         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(true);
-        MonsterBox.DisplayMonsterIcons(true);
-        PreScene.target.TeamEditor.AddHeroIconFeaturesToMonsterBox(teammode);// 该处理紧随MonsterBox.DisplayMonsterIcons之后
+        UnitsLayer layer = UnitsLayer.Open();
+        layer.DisplayMonsterIcons(true);
+        layer.SetUnitsIconOnClick((x) => PreScene.target.TeamEditor.MonsterIconButton(x, teamMode));
         PageTo.Go(MainSceneStep.TeamEditFront);
-        MonsterBox.target.Open(true);
     }
     
     public override void ProcessEnter<T>(T mode)
@@ -46,7 +45,7 @@ public class TeamEditPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        MonsterBox.target.Open(false);
+        UnitsLayer.Close();
         TeamSet.SaveTeamSet(teamMode, TeamSaveFinished);
         switch (teamMode)
         {
@@ -61,7 +60,6 @@ public class TeamEditPage : MainSceneProcess
                         ArenaDefendSaved(0); 
                         missionWatcher.DisposeAll();
                         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(false);
-                        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
                     },
                     () => { PreScene.ReturnToLobby("返回大厅？"); }
                 );
@@ -76,7 +74,6 @@ public class TeamEditPage : MainSceneProcess
                         ArenaDefendSaved(0);
                         missionWatcher.DisposeAll();
                         PreScene.target.ArcadeTeamEditT.gameObject.SetActive(false);
-                        MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
                     },
                     () => { PreScene.ReturnToLobby("返回大厅？");}
                 );

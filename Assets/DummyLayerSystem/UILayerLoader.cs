@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UILayerLoader
 {
-    private static readonly IDictionary<string, string> paths = new Dictionary<string, string>()
+    static readonly IDictionary<string, string> paths = new Dictionary<string, string>()
     {
         {"MainTop", "DummyLayerSystem/MainTop"},
         {"ArcadeTop", "DummyLayerSystem/ArcadeTop"},
@@ -19,9 +19,15 @@ public class UILayerLoader
         {"CountDownLayer", "DummyLayerSystem/CountDownLayer"},
         {"FightingStepLayer", "DummyLayerSystem/FightingStepLayer"},
         {"SettingLayer", "DummyLayerSystem/SettingLayer"},
+        {"UnitsLayer", "DummyLayerSystem/UnitsLayer"},
     };
 
     private static List<UILayer> Queues = new List<UILayer>();
+
+    public static UILayer Get(string key)
+    {
+        return Queues.Find(x => x.Index == key);
+    }
     
     public static UILayer Load(GameObject T, string layerName)
     {

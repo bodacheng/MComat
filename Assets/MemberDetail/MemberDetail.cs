@@ -2,9 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
-using Api.Dto.Model;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace mainMenu
 {
@@ -41,54 +38,6 @@ namespace mainMenu
         {
             target = this;
         }
-        
-        #region 快捷切换角色
-        public void SwitchChar()
-        {
-            List<string> keys = MonsterBox.mainMenuIcons.Keys.ToList();
-            int index = keys.IndexOf(_focusing.id);
-            index--;
-            if (index == -1)
-                index = keys.Count - 1;
-            string targetMonsterOfPlayerID = keys[index];
-            void MonsterIconButton()
-            {
-                target.SetMemberDetailFocusingChar(targetMonsterOfPlayerID);//确立focusing角色
-                target.RefreshMemberDetailPageByFocusingChar();
-                MonsterEditPage.SkillShowSpEnterProcess();
-            }
-            MonsterIconButton();
-        }
-        #endregion
-        
-        #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行
-        public void AddHeroIconFeaturesToMonsterBox()
-        {
-            foreach (KeyValuePair<string, HeroIcon> keyValuePair in MonsterBox.mainMenuIcons)
-            {
-                AddHeroIconFeatureToMonsterBox(keyValuePair.Key,keyValuePair.Value.iconButton);
-            }
-        }
-        
-        void AddHeroIconFeatureToMonsterBox(string instanceId, Button targetButton)
-        {
-            void MonsterIconButton()
-            {
-                MonsterBox.target.Select(instanceId);
-                target.SetMemberDetailFocusingChar(instanceId);//确立focusing角色
-                target.RefreshMemberDetailPageByFocusingChar();
-            }
-            targetButton.onClick.AddListener(MonsterIconButton);
-        }
-        
-        public void ClearHeroIconsFeatures()
-        {
-            foreach (KeyValuePair<string, HeroIcon> keyValuePair in MonsterBox.mainMenuIcons)
-            {
-                keyValuePair.Value.iconButton.onClick.RemoveAllListeners();
-            }
-        }
-        #endregion
         
         public void RefreshMemberDetailPageByFocusingChar()
         {

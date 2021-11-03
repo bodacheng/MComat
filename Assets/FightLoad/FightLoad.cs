@@ -8,7 +8,7 @@ public static class FightLoad
     {
         if (stage.fightMembers == null)
             stage.fightMembers = new FightMembers();
-
+        
         if (loadWithMyTeam)
         {
             stage.LoadMyTeam();
