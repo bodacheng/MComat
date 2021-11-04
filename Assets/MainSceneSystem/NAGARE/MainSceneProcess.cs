@@ -7,14 +7,12 @@ namespace mainMenu
         public MainSceneStep nextProcessStep = MainSceneStep.None;//有的话代表本process存在一个注定会自然迁移到的下一个process。没的话代表本process不一定迁移到哪。
 
         public SingleThreadProcesser mainProcessRunner;
-        public SelfFightManager _SelfFightManager;
         public CameraManager _CameraManager;
         public ProcessesRunner SubProcessesRunner;
         public MissionWatcher missionWatcher;
 
         public void EelementsInherit(PreScene _preparingScene)
         {
-            _SelfFightManager = _preparingScene._SelfFightManager;
             _CameraManager = _preparingScene._CameraManager;
             mainProcessRunner = _preparingScene.mainProcessRunner;
         }

@@ -74,7 +74,7 @@ public class PosKeySet
         {
             if (PosNumsWithLocalKeys[i].posNum == posNum)
             {
-                Debug.Log(this + ":" + monsterofplayerid);
+                //Debug.Log(this + ":" + monsterofplayerid);
                 PosNumsWithLocalKeys[i].instanceID = monsterofplayerid;
                 return;
             }

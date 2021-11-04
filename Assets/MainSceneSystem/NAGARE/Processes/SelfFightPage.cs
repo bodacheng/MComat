@@ -8,20 +8,25 @@ public class SelfFightPage : MainSceneProcess
         EelementsInherit(PreScene.target);
     }
 
+    private SelfFightLayer selfFightLayer;
     public override void ProcessEnter()
     {
         mainProcessRunner.RunFreely(ModelShower.target.ShowMyModel(null));
         
         UnitsLayer layer = UnitsLayer.Open();
         layer.DisplayMonsterIcons(true);
-        _SelfFightManager.AddHeroIconFeaturesToMonsterBox();
+
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
-        _SelfFightManager.SwitchToRotationMode();
-        PageTo.Go(MainSceneStep.SelfFightFront);
+        
+        selfFightLayer = UILayerLoader.Load(PreScene.target.T,"SelfFightLayer") as SelfFightLayer;
+        selfFightLayer.INI();
+        selfFightLayer.AddHeroIconFeaturesToMonsterBox();
+        selfFightLayer.SwitchToRotationMode();
     }
     
     public override void ProcessEnd()
     {
         UnitsLayer.Close();
+        UILayerLoader.Remove("SelfFightLayer");
     }
 }

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class PageTo : MonoBehaviour
 {
     public Canvas
-        SelfFight,
         QuestShow,
         TeamEdit,
         ShopTop,
@@ -24,7 +23,6 @@ public class PageTo : MonoBehaviour
     {
         Dic = new Dictionary<MainSceneStep, Canvas>
         {
-            {MainSceneStep.SelfFightFront, SelfFight},
             {MainSceneStep.QuestInfo, QuestShow},
             {MainSceneStep.TeamEditFront, TeamEdit},
             {MainSceneStep.ShopTop, ShopTop},

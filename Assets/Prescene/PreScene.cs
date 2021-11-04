@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using dataAccess;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace mainMenu
 {
@@ -40,10 +41,6 @@ namespace mainMenu
         [Space(7)]
         [Header("Shader转换器")]
         public SwapAllModelShader _SwapAllModelShader;
-        
-        [Space(7)]
-        [Header("自我战斗管理模块")]
-        public SelfFightManager _SelfFightManager;
         
         [Space(7)]
         [Header("若干子画面的总RectTransfrom")]
@@ -149,7 +146,6 @@ namespace mainMenu
             SkillStonesBox.target = _SkillStonesBox_NineSlot;
             _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
             TheNineSlot.target.StartUp();
-            _SelfFightManager.INITeamPosButtons();
 
             HurtObjectManager.ConstructDPool();
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)

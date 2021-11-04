@@ -382,7 +382,7 @@
      <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\OverlayCanvasController.cs" />
      <Compile Include="Assets\UI\Oldscripts\Save_Trans.cs" />
      <Compile Include="Assets\TutorialManger\processes\SelectASlot\SkillEditA1Try.cs" />
-     <Compile Include="Assets\SelfFightManager\SelfFightManager.cs" />
+     <Compile Include="Assets\SelfFightManager\SelfFightLayer.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\SliderManager.cs" />
      <Compile Include="Assets\FightingSceneUISystem\OutsideScreenIndicator.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\Sci-Fi Effects\Scripts\SciFiLightFade.cs" />
