@@ -111,19 +111,6 @@ namespace FightScene
             }
         }
         
-        public void ToStartPos(MultiDict<int, int, Data_Center> TeamMembers)
-        {
-            switch (TeamMode)
-            {
-                case TeamMode.multiraid:
-                    ToStartPos_Multi(TeamMembers);
-                    break;
-                case TeamMode.rotation:
-                    ToStartPos_Rotate(TeamMembers);
-                    break;
-            }
-        }
-        
         // 全队无敌
         public void TurnAllMembersInvincible(bool _Invincible, MultiDict<int, int, Data_Center> TeamMembers)
         {

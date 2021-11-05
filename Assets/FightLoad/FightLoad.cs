@@ -32,9 +32,9 @@ public static class FightLoad
             popupLayer.ArrangeWarnWindow(error);
             return;
         }
-
+        
         NetFightScene.Fight = stage;
-
+        
         Stones.PreventStonesFromDestroy();
         ArcadeTop.ArcadeStages.Clear();
         GeneralModelPool.Clear();

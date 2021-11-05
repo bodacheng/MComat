@@ -51,7 +51,6 @@ public class FightLogger
         foreach (KeyValuePair<TeamConfig, List<Data_Center>> pair in TeamMembers)
         {
             IdDicRef.Add(pair.Key.myTeam, pair.Key.playID);
-            Debug.Log(pair.Key.myTeam+ " 我" + pair.Key.playID);
             
             TeamDeadMemberDic.Add(pair.Key.myTeam, new List<Data_Center>());
             wholeteamCount += 1;

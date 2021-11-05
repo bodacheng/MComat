@@ -10,8 +10,9 @@ namespace FightScene
     {
         IDictionary<Data_Center, Text> multiRaidHitComboDic = new Dictionary<Data_Center, Text>();
         
-        void ToStartPos_Multi(MultiDict<int, int, Data_Center> TeamMembers)
+        public Data_Center ToStartPos_Multi(MultiDict<int, int, Data_Center> TeamMembers)
         {
+            Data_Center startUnit = null;
             foreach (KeyValuePair<(int, int), Data_Center> kv in TeamMembers.mDict)
             {
                 Data_Center _DataCenter = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
@@ -19,6 +20,8 @@ namespace FightScene
                 {
                     continue;
                 }
+                if (startUnit == null)
+                    startUnit = kv.Value;
                 if (TeamStandPoints[kv.Key.Item2] != null)
                 {
                     _DataCenter.WholeT.transform.position = TeamStandPoints[kv.Key.Item2].position;
@@ -31,6 +34,8 @@ namespace FightScene
                     Debug.Log("站位逻辑错误。出现了系统未安排的站位点");
                 }
             }
+
+            return startUnit;
         }
 
         public void MultiClear()

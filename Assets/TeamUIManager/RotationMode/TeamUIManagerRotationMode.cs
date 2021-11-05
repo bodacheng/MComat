@@ -17,18 +17,23 @@ namespace FightScene
             rotationModeHitCombo.text = "";
         }
         
-        public void ToStartPos_Rotate(MultiDict<int, int, Data_Center> TeamMembers)
+        public Data_Center ToStartPos_Rotate(MultiDict<int, int, Data_Center> TeamMembers)
         {
+            Data_Center startUnit = null;
             foreach (KeyValuePair<(int, int), Data_Center> kv in TeamMembers.mDict)
             {
                 if (kv.Value == null)
                 {
                     continue;
                 }
+                
+                if (startUnit == null)
+                    startUnit = kv.Value;
                 kv.Value.WholeT.parent = null;
                 kv.Value.WholeT.gameObject.SetActive(true);
             }
-            ChangeFightingMember_ReadyToGo(TeamMembers.Get(0,0), TeamMembers, TeamStandPoints[0]);
+            ChangeUnit_ReadyToGo(startUnit, TeamMembers, TeamStandPoints[0]);
+            return startUnit;
         }
         
         public void Rotation_LocalUpdate(MultiDict<int, int, Data_Center> TeamMembers)
@@ -45,7 +50,7 @@ namespace FightScene
         }
         
         // 最初切换队员
-        bool ChangeFightingMember_ReadyToGo(Data_Center _changeTo, MultiDict<int, int, Data_Center> TeamMembers, Transform IniStandPoint)
+        bool ChangeUnit_ReadyToGo(Data_Center _changeTo, MultiDict<int, int, Data_Center> TeamMembers, Transform IniStandPoint)
         {
             bool memberchanged = false;
             foreach (Data_Center data_Center in TeamMembers.GetValues())

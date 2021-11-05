@@ -143,7 +143,7 @@ namespace FightScene
                     dcenter = (Data_Center)char_DC.Current;
                 }
                 TeamMembers.Set(kv.Key.Item1, kv.Key.Item2, dcenter);
-                DicAdd<Data_Center, UnitInfo>.Add(RTFightManager.target.UnitInfoRef, dcenter, _one);
+                DicAdd<Data_Center, UnitInfo>.Add(UnitInfoRef, dcenter, _one);
             }
         }
 
@@ -152,6 +152,8 @@ namespace FightScene
             yield return UnitsLoad(stage.fightMembers.HeroSets, Team1Members);
             yield return UnitsLoad(stage.fightMembers.EnemySets, Team2Members);
         }
+        
+        Data_Center team1StartUnit = null, team2StartUnit = null;
         
         public void SetGame(FightInfo stage)
         {
@@ -177,16 +179,33 @@ namespace FightScene
                 team2.TurnAllMembersInvincible(false, Team2Members);
             }
             
-            team1.ToStartPos(Team1Members);
-            team2.ToStartPos(Team2Members);
+            switch (team1.TeamMode)
+            {
+                case TeamMode.multiraid:
+                    team1StartUnit = team1.ToStartPos_Multi(Team1Members);
+                    break;
+                case TeamMode.rotation:
+                    team1StartUnit = team1.ToStartPos_Rotate(Team1Members);
+                    break;
+            }
+            
+            switch (team2.TeamMode)
+            {
+                case TeamMode.multiraid:
+                    team2StartUnit = team2.ToStartPos_Multi(Team2Members);
+                    break;
+                case TeamMode.rotation:
+                    team2StartUnit = team2.ToStartPos_Rotate(Team2Members);
+                    break;
+            }
             
             switch (playerTeam)
             {
                 case Team.player1:
-                    SwitchToCMode(Team1Members.GetValues()[0], false);
+                    SwitchToCMode(team1StartUnit, false);
                     break;
                 case Team.player2:
-                    SwitchToCMode(Team2Members.GetValues()[0], false);
+                    SwitchToCMode(team2StartUnit, false);
                     break;
             }
             NetFightScene.target.LoadStageFinished.Value = true;
@@ -221,7 +240,7 @@ namespace FightScene
                     AllUnitsStartOff(Team1Members, heroTeamConfig.myTeam);
                     break;
                 case TeamMode.rotation:
-                    OneUnitStartOff(Team1Members.Get(0,0), heroTeamConfig.myTeam);
+                    OneUnitStartOff(team1StartUnit, heroTeamConfig.myTeam);
                     break;
             }
             
@@ -233,7 +252,7 @@ namespace FightScene
                         AllUnitsStartOff(Team2Members, EnemyTeamConfig.myTeam);
                         break;
                     case TeamMode.rotation:
-                        OneUnitStartOff(Team2Members.Get(0,0), EnemyTeamConfig.myTeam);
+                        OneUnitStartOff(team2StartUnit, EnemyTeamConfig.myTeam);
                         break;
                 }
             }
