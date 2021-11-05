@@ -23,6 +23,8 @@ public class UILayerLoader
         {"LogoLayer", "DummyLayerSystem/LogoLayer"},
         {"PopupLayer", "DummyLayerSystem/PopupLayer"},
         {"SelfFightLayer", "DummyLayerSystem/SelfFightLayer"},
+        {"FightPrepareLayer", "DummyLayerSystem/FightPrepareLayer"},
+        {"TeamEditLayer", "DummyLayerSystem/TeamEditLayer"},
     };
 
     private static List<UILayer> Queues = new List<UILayer>();

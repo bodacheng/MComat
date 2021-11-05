@@ -106,7 +106,7 @@
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow.cs" />
      <Compile Include="Assets\TutorialManger\TutorialProcess.cs" />
      <Compile Include="Assets\AI\AI_states\states\Move_State.cs" />
-     <Compile Include="Assets\TeamEdit\TeamEditManager.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\TeamEditLayer.cs" />
      <Compile Include="Assets\BOWeaponSystem\Health System\FightAttriCalReference_CriticalGauge.cs" />
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\zokusei.cs" />
      <Compile Include="Assets\UI\SciFic Icons\Scripts\RotationAnimation.cs" />
@@ -349,7 +349,7 @@
      <Compile Include="Assets\Setting\ConfigureOptions.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\QuestInfoPage.cs" />
      <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\GameManager.cs" />
-     <Compile Include="Assets\StagesManagement\QuestPreparePage\FightPreparePage.cs" />
+     <Compile Include="Assets\StagesManagement\QuestPreparePage\FightPrepareLayer.cs" />
      <Compile Include="Assets\TutorialManger\processes\FillASlot\SkillEditTry_A3Filled.cs" />
      <Compile Include="Assets\CachLogic\downloads_model.cs" />
      <Compile Include="Assets\Asstes\ErbGameArt\Sword slash FX\Demo scene\DemoToonVFX.cs" />
@@ -382,7 +382,7 @@
      <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\OverlayCanvasController.cs" />
      <Compile Include="Assets\UI\Oldscripts\Save_Trans.cs" />
      <Compile Include="Assets\TutorialManger\processes\SelectASlot\SkillEditA1Try.cs" />
-     <Compile Include="Assets\SelfFightManager\SelfFightLayer.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\SelfFightLayer.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\SliderManager.cs" />
      <Compile Include="Assets\FightingSceneUISystem\OutsideScreenIndicator.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\Sci-Fi Effects\Scripts\SciFiLightFade.cs" />

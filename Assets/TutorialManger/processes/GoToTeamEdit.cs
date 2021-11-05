@@ -11,7 +11,7 @@ public class GoToTeamEdit : TutorialProcess
     public override void ProcessEnter()
     {
         PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-        popupLayer.HigtLightRect(PreScene.target.TeamEditor.StartToTeamEditButton.transform);
+        //popupLayer.HigtLightRect(PreScene.target.TeamEditor.StartToTeamEditButton.transform);
     }
     
     public override void ProcessEnd()

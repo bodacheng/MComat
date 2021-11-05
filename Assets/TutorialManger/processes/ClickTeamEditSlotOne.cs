@@ -11,7 +11,7 @@ public class ClickTeamEditSlotOne : TutorialProcess
     public override void ProcessEnter()
     {
         PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-        popupLayer.HigtLightRect(PreScene.target.TeamEditor.team1front.transform);
+        //popupLayer.HigtLightRect(PreScene.target.TeamEditor.team1front.transform);
     }
     
     public override void ProcessEnd()
@@ -21,6 +21,6 @@ public class ClickTeamEditSlotOne : TutorialProcess
     
     public override bool CanEnterOtherProcess()
     {
-        return PreScene.target.TeamEditor.focusingPosNum == 0;
+        return false; //PreScene.target.TeamEditor.focusingPosNum == 0;
     }
 }

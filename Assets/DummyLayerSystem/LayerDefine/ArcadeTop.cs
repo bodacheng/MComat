@@ -14,6 +14,7 @@ public class ArcadeTop : UILayer
     [SerializeField] ScrollRect _ScrollRect;
     [SerializeField] Scrollbar _Scrollbar;
     [SerializeField] StageButton pretab;
+    [SerializeField] HeroIcon UnitIconPrefab;
     [SerializeField] NineForShow _NineForShow;
 
     int StageCount;
@@ -60,7 +61,8 @@ public class ArcadeTop : UILayer
                 {
                     MonsterIconDic.Get(one.fightMembers.EnemySets.GetValues()[i].r_id);
                 }
-                List<HeroIcon> heroIcons = FightPreparePage.MemberInfosShow(one.fightMembers.EnemySets.GetValues(), newButton.IconsT);
+                
+                List<HeroIcon> heroIcons = MemberInfosShow(one.fightMembers.EnemySets.GetValues(), newButton.IconsT);
                 for (int i = 0; i < heroIcons.Count; i++)
                 {
                     HeroIcon heroIcon = heroIcons[i];
@@ -86,6 +88,24 @@ public class ArcadeTop : UILayer
             }
         }
         StageCount = ArcadeStages.Count;
+    }
+    
+    List<HeroIcon> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)
+    {
+        foreach (Transform transform in _ShowT)
+        {
+            Destroy(transform.gameObject);
+        }
+        List<HeroIcon> icons = new List<HeroIcon>();
+        foreach(UnitInfo oneMember in HeroSets)
+        {
+            icons.Add(HeroIcon.ArrangeHeroIconToT(UnitIconPrefab, oneMember, _ShowT));
+        }
+        for (int i = 0; i < icons.Count; i++)
+        {
+            icons[i].iconButton.targetGraphic.raycastTarget = true;
+        }
+        return icons;
     }
 
     private Action EndDragExtra;

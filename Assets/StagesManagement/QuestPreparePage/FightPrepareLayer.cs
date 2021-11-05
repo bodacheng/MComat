@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace mainMenu
 {
-    public class FightPreparePage : MonoBehaviour
+    public class FightPrepareLayer : UILayer
     {
         [Space(7)]
         [Header("UI elements")]
@@ -14,20 +14,14 @@ namespace mainMenu
         public RectTransform enemyTeamShowT;
         public Button EditTeamButton; // 根据进入战斗模式决定是否显示
         public Button BeginFight;
-        public static FightPreparePage target;
-              
-        void Awake()
-        {
-            target = this;
-        }
         
         public void StageMembersInfoShow(FightInfo stage)
-        {            
+        {
             MemberInfosShow(stage.fightMembers.HeroSets.GetValues(), myTeamShowT);
             MemberInfosShow(stage.fightMembers.EnemySets.GetValues(), enemyTeamShowT);
         }
         
-        public static List<HeroIcon> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)
+        List<HeroIcon> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)
         {
             foreach (Transform transform in _ShowT)
             {
@@ -36,7 +30,7 @@ namespace mainMenu
             List<HeroIcon> icons = new List<HeroIcon>();
             foreach(UnitInfo oneMember in HeroSets)
             {
-                icons.Add(HeroIcon.ArrangeHeroIconToT(target.FighterIcon, oneMember, _ShowT));
+                icons.Add(HeroIcon.ArrangeHeroIconToT(FighterIcon, oneMember, _ShowT));
             }
             for (int i = 0; i < icons.Count; i++)
             {

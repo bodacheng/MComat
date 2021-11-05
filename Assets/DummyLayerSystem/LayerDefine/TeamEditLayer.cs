@@ -4,7 +4,7 @@ using mainMenu;
 using dataAccess;
 using UnityEngine.UI;
 
-public class TeamEditManager : MonoBehaviour
+public class TeamEditLayer : UILayer
 {
     public Button StartToTeamEditButton;
     public Button RemoveButton;

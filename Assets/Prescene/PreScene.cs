@@ -21,11 +21,7 @@ namespace mainMenu
         [Space(11)]
         [Header("主相机")]
         public CameraManager _CameraManager;
-
-        [Space(11)]
-        [Header("TeamEdit")]
-        public TeamEditManager TeamEditor;
-
+        
         [Space(11)]
         [Header("技能展示器模式切换角色按钮")]
         public Button charSwitcher;

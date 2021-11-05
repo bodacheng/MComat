@@ -23,17 +23,20 @@ public class TeamEditPage : MainSceneProcess
         Step = MainSceneStep.TeamEditFront;
         EelementsInherit(PreScene.target);
     }
-    
+
+    private TeamEditLayer teamEditLayer;
     public void EnterProcess(string teammode)
     {
+        teamEditLayer =  UILayerLoader.Load(PreScene.target.T,"TeamEditLayer") as TeamEditLayer;
+        
         _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
-        PreScene.target.TeamEditor.INITeamPosButtons(teammode);
+        teamEditLayer.INITeamPosButtons(teammode);
         if (MemberDetail.target._focusing != null)
-            PreScene.target.TeamEditor._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.id);
-        PreScene.target.ArcadeTeamEditT.gameObject.SetActive(true);
+            teamEditLayer._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.id);
+        
         UnitsLayer layer = UnitsLayer.Open();
         layer.DisplayMonsterIcons(true);
-        layer.SetUnitsIconOnClick((x) => PreScene.target.TeamEditor.MonsterIconButton(x, teamMode));
+        layer.SetUnitsIconOnClick((x) => teamEditLayer.MonsterIconButton(x, teamMode));
         PageTo.Go(MainSceneStep.TeamEditFront);
     }
     
@@ -46,6 +49,7 @@ public class TeamEditPage : MainSceneProcess
     public override void ProcessEnd()
     {
         UnitsLayer.Close();
+        UILayerLoader.Remove("TeamEditLayer");
         TeamSet.SaveTeamSet(teamMode, TeamSaveFinished);
         switch (teamMode)
         {
@@ -59,7 +63,6 @@ public class TeamEditPage : MainSceneProcess
                         TeamSaveFinished(0);
                         ArenaDefendSaved(0); 
                         missionWatcher.DisposeAll();
-                        PreScene.target.ArcadeTeamEditT.gameObject.SetActive(false);
                     },
                     () => { PreScene.ReturnToLobby("返回大厅？"); }
                 );
@@ -73,7 +76,6 @@ public class TeamEditPage : MainSceneProcess
                         TeamSaveFinished(0);
                         ArenaDefendSaved(0);
                         missionWatcher.DisposeAll();
-                        PreScene.target.ArcadeTeamEditT.gameObject.SetActive(false);
                     },
                     () => { PreScene.ReturnToLobby("返回大厅？");}
                 );
