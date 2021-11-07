@@ -101,8 +101,8 @@ namespace mainMenu
             StoneBoxExpansion stoneBoxExpansion = new StoneBoxExpansion();
 
             // Gotcha
-            GachaFront gachaFront = new GachaFront();
-            GachaAnim gotchaAnim = new GachaAnim();
+            GotchaFront gotchaFront = new GotchaFront();
+            GotchaAnim gotchaAnim = new GotchaAnim();
             GachaResult gachaResult = new GachaResult();
             ArenaPage areanaPage = new ArenaPage();
 
@@ -128,7 +128,7 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.BoxExpansion, stoneBoxExpansion);
             ProcessesRunner.Main.Add(MainSceneStep.MailBox, mailBox);
             ProcessesRunner.Main.Add(MainSceneStep.MailDetail, mailDetail);
-            ProcessesRunner.Main.Add(MainSceneStep.GotchaFront, gachaFront);
+            ProcessesRunner.Main.Add(MainSceneStep.GotchaFront, gotchaFront);
             ProcessesRunner.Main.Add(MainSceneStep.GotchaAnim, gotchaAnim);
             ProcessesRunner.Main.Add(MainSceneStep.GotchaResult, gachaResult);
             #endregion

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using mainMenu;
 
-public class GachaAnim : MainSceneProcess
+public class GotchaAnim : MainSceneProcess
 {
+    private GotchaResultLayer gotchaResultLayer;
     public IEnumerator EnterProcess()
     {
         _CameraManager.Assign_Camera(C_Mode.NULL, null);
@@ -12,13 +13,12 @@ public class GachaAnim : MainSceneProcess
         PreScene.target.trySwitchToStep(MainSceneStep.GotchaResult, false);
     }
     
-    public GachaAnim()
+    public GotchaAnim()
     {
         Step = MainSceneStep.GotchaAnim;
         EelementsInherit(PreScene.target);
     }
-
-    private GotchaResultLayer gotchaResultLayer;
+    
     public override void ProcessEnter()
     {
         gotchaResultLayer = GotchaResultLayer.Open();
@@ -31,9 +31,5 @@ public class GachaAnim : MainSceneProcess
         PreScene.target.GotchaCamera.gameObject.SetActive(false);
         gotchaResultLayer.NineForShow.transform.gameObject.SetActive(true);
         gotchaResultLayer.Reset();
-    }
-    
-    public override void LocalUpdate()
-    {
     }
 }

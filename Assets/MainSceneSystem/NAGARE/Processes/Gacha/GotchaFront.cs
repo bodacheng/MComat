@@ -1,30 +1,11 @@
-﻿using System.Collections;
-using mainMenu;
+﻿using mainMenu;
 using System.Collections.Generic;
 
-public class GachaFront : MainSceneProcess
+public class GotchaFront : MainSceneProcess
 {
     private GotchaLayer gotchaLayer;
     
-    public IEnumerator EnterProcess()
-    {
-        _CameraManager.Assign_Camera(C_Mode.NULL, null);
-        CameraManager._camera.gameObject.SetActive(false);
-        PreScene.target.GotchaCamera.gameObject.SetActive(true);
-        
-        List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
-        if (CheckIfExceedLimit.Count > 0)
-        {
-            PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
-            yield break;
-        }
-        
-        BackGroundPS.target.Off();
-        PageTo.Go(MainSceneStep.GotchaFront);
-        gotchaLayer = GotchaLayer.Open();
-    }
-    
-    public GachaFront()
+    public GotchaFront()
     {
         Step = MainSceneStep.GotchaFront;
         EelementsInherit(PreScene.target);
@@ -32,7 +13,17 @@ public class GachaFront : MainSceneProcess
      
     public override void ProcessEnter()
     {
-        mainProcessRunner.RunAsQueued(EnterProcess());
+        _CameraManager.Assign_Camera(C_Mode.NULL, null);
+        CameraManager._camera.gameObject.SetActive(false);
+        PreScene.target.GotchaCamera.gameObject.SetActive(true);
+        List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
+        if (CheckIfExceedLimit.Count > 0)
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
+            return;
+        }
+        BackGroundPS.target.Off();
+        gotchaLayer = GotchaLayer.Open();
     }
     
     public override void ProcessEnd()
