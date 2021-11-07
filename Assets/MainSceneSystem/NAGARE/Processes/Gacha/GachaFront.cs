@@ -4,12 +4,13 @@ using System.Collections.Generic;
 
 public class GachaFront : MainSceneProcess
 {
+    private GotchaLayer gotchaLayer;
+    
     public IEnumerator EnterProcess()
     {
-        yield return ModelShower.target.ShowMyModel(null);
         _CameraManager.Assign_Camera(C_Mode.NULL, null);
         CameraManager._camera.gameObject.SetActive(false);
-        GachaRender.target.Camera.gameObject.SetActive(true);
+        PreScene.target.GotchaCamera.gameObject.SetActive(true);
         
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
@@ -20,9 +21,7 @@ public class GachaFront : MainSceneProcess
         
         BackGroundPS.target.Off();
         PageTo.Go(MainSceneStep.GotchaFront);
-        GachaManager.target.GotchaCanvas.gameObject.SetActive(true);
-        GachaManager.target.GotchaFrontT.gameObject.SetActive(true);
-        GachaManager.target.GotchaResultT.gameObject.SetActive(false);
+        gotchaLayer = GotchaLayer.Open();
     }
     
     public GachaFront()
@@ -38,10 +37,8 @@ public class GachaFront : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        //GachaManager.target.GotchaCanvas.gameObject.SetActive(false);
-        GachaManager.target.GotchaFrontT.gameObject.SetActive(false);
-        GachaManager.target.GotchaResultT.gameObject.SetActive(false);
         CameraManager._camera.gameObject.SetActive(true);
-        GachaRender.target.Camera.gameObject.SetActive(false);
+        PreScene.target.GotchaCamera.gameObject.SetActive(false);
+        GotchaLayer.Close();
     }
 }

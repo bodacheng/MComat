@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using mainMenu;
+using dataAccess;
 using System.Collections.Generic;
-using Api.Dto.Model;
-using UnityEngine;
 
 public class GachaResult : MainSceneProcess
 {
+    public static List<StoneOfPlayerInfo> Result;
+    
     public IEnumerator EnterProcess()
     {
         PageTo.Go(MainSceneStep.GotchaResult);
-        GachaManager.target.GotchaFrontT.gameObject.SetActive(false);
-        GachaManager.target.GotchaResultT.gameObject.SetActive(true);
+
+        GotchaResultLayer gotchaResultLayer = GotchaResultLayer.Open();
+        
         CameraManager._camera.gameObject.SetActive(false);
-        GachaRender.target.Camera.gameObject.SetActive(true);
+        PreScene.target.GotchaCamera.gameObject.SetActive(true);
+        
         //List<SkillStoneOfPlayerInfoModel> results = GachaManager.target.GetResult();
         //if (results.Count == 1)
         //{
@@ -38,10 +41,8 @@ public class GachaResult : MainSceneProcess
         //        results[8] != null ? results[8].skillId : null
         //    );
         //}
-        GachaManager.target._skillStoneDetail._T.SetParent(GachaManager.target.MemberDetailT);
-        GachaManager.target._skillStoneDetail._T.localScale = Vector3.one;
-        GachaManager.target._skillStoneDetail._T.localPosition = Vector3.zero;
-        GachaManager.target.NineForShow.LoadShowDetailFeature();
+        
+        gotchaResultLayer.NineForShow.LoadShowDetailFeature();
         yield break;
     }
     
@@ -58,12 +59,8 @@ public class GachaResult : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        GachaManager.target.GotchaCanvas.gameObject.SetActive(false);
         CameraManager._camera.gameObject.SetActive(true);
-        GachaRender.target.Camera.gameObject.SetActive(false);
-        GachaManager.target.NineForShow.ClearCurrent();
-        PreScene.target._SkillStonesBox_NineSlot._skillStoneDetail._T.SetParent(GachaManager.target.SKillEditStoneBoxT);
-        PreScene.target._SkillStonesBox_NineSlot._skillStoneDetail._T.localScale = Vector3.one;
-        PreScene.target._SkillStonesBox_NineSlot._skillStoneDetail._T.localPosition = Vector3.zero;
+        PreScene.target.GotchaCamera.gameObject.SetActive(false);
+        GotchaResultLayer.Close();
     }
 }

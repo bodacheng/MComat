@@ -3,7 +3,6 @@ using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
 using dataAccess;
-using Api.Dto.Model;
 using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

@@ -7,9 +7,9 @@ using mainMenu;
 using UnityEngine.UI;
 using Skill;
 
-public class GachaRender : MonoBehaviour
+public class GotchaResultLayer : UILayer
 {
-    public static GachaRender target;
+    public NineForShow NineForShow;
     
     #region 动画的跳过以及加速
     public Button Skip;
@@ -22,8 +22,7 @@ public class GachaRender : MonoBehaviour
     
     #region 星空球
     // 抽卡画面背景观摩用相机，在星空球内部
-    public Camera Camera;
-    public Transform SkyLightCenter;
+    public Vector3 SkyLightCenter;
     public float SkySphereRadius = 650;
     #endregion
     
@@ -39,7 +38,6 @@ public class GachaRender : MonoBehaviour
     
     void Awake()
     {
-        target = this;
         Skip.onClick.AddListener(SkipStarFallAnim);
         SpeedOnce.onClick.AddListener(SpeedOneGochaAnim);
         WaitPos.Clear();
@@ -54,19 +52,34 @@ public class GachaRender : MonoBehaviour
         WaitPos.Add(starWaitPos9);
     }
     
+    public static GotchaResultLayer Open()
+    {
+        UILayer l = UILayerLoader.Get("GotchaResultLayer");
+        if (l != null)
+        {
+            return l as GotchaResultLayer;
+        }
+        return UILayerLoader.Load(PreScene.target.T,"GotchaResultLayer") as GotchaResultLayer;
+    }
+
+    public static void Close()
+    {
+        UILayerLoader.Remove("GotchaResultLayer");
+    }
+    
     // 必须使用时候即时运行因为里面几个决定位置的运算要考虑当前相机位置等
     void PosDecide()
     {
         // 星星落入格子
-        Vector3 A1screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, GachaManager.target.NineForShow.A1T.GetComponent<RectTransform>(), 5f);
-        Vector3 A2screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, GachaManager.target.NineForShow.A2T.GetComponent<RectTransform>(), 5f);
-        Vector3 A3screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, GachaManager.target.NineForShow.A3T.GetComponent<RectTransform>(), 5f);
-        Vector3 B1screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, GachaManager.target.NineForShow.B1T.GetComponent<RectTransform>(), 5f);
-        Vector3 B2screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, GachaManager.target.NineForShow.B2T.GetComponent<RectTransform>(), 5f);
-        Vector3 B3screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, GachaManager.target.NineForShow.B3T.GetComponent<RectTransform>(), 5f);
-        Vector3 C1screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, GachaManager.target.NineForShow.C1T.GetComponent<RectTransform>(), 5f);
-        Vector3 C2screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, GachaManager.target.NineForShow.C2T.GetComponent<RectTransform>(), 5f);
-        Vector3 C3screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, GachaManager.target.NineForShow.C3T.GetComponent<RectTransform>(), 5f);
+        Vector3 A1screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.A1T.GetComponent<RectTransform>(), 5f);
+        Vector3 A2screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.A2T.GetComponent<RectTransform>(), 5f);
+        Vector3 A3screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.A3T.GetComponent<RectTransform>(), 5f);
+        Vector3 B1screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.B1T.GetComponent<RectTransform>(), 5f);
+        Vector3 B2screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.B2T.GetComponent<RectTransform>(), 5f);
+        Vector3 B3screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.B3T.GetComponent<RectTransform>(), 5f);
+        Vector3 C1screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.C1T.GetComponent<RectTransform>(), 5f);
+        Vector3 C2screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.C2T.GetComponent<RectTransform>(), 5f);
+        Vector3 C3screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.C3T.GetComponent<RectTransform>(), 5f);
         nineslotScreenPos.Clear();
         nineslotScreenPos.Add(A1screenpos);
         nineslotScreenPos.Add(A2screenpos);
@@ -94,12 +107,12 @@ public class GachaRender : MonoBehaviour
         }
         stoneFallingModels.Clear();
         stoneStartFlashModels.Clear();
-        GachaManager.target.NineForShow.ClearGochaEffects();
+        NineForShow.ClearGochaEffects();
     }
 
     #region 星星下落动画
     // 整个星星下落动画
-    public IEnumerator StarFallAnim(List<StoneOfPlayerInfo> results)
+    IEnumerator StarFallAnim(List<StoneOfPlayerInfo> results)
     {
         starfallAnimEnd = false;
         Reset();
@@ -113,7 +126,7 @@ public class GachaRender : MonoBehaviour
             void StarComing(StoneOfPlayerInfo stone)
             {
                 Vector3 targetPos = GetRandomStarPos();
-                Vector3 flashPos = ScreenPositionCal.Cal(3, Camera, targetPos, 300f);
+                Vector3 flashPos = ScreenPositionCal.Cal(3, PreScene.target.GotchaCamera, targetPos, 300f);
 
                 SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(stone.skillId);
                 string fallingstarname = "";
@@ -141,7 +154,7 @@ public class GachaRender : MonoBehaviour
                 Decompositioner flash = EffectsManager.GenerateEffect(fallingstarexplosionname, FightGlobalSetting.EffectPathDefine(Zokusei.Null), flashPos, Quaternion.identity, null);
                 stoneFallingModels.Add(Star);
                 stoneStartFlashModels.Add(flash);
-                Camera.transform.DOLookAt(Star.transform.position, 1f);
+                PreScene.target.GotchaCamera.transform.DOLookAt(Star.transform.position, 1f);
                 Star.transform.DOMoveY(-600, 30f);
             }
             StarComing(stoneinfo);
@@ -184,7 +197,7 @@ public class GachaRender : MonoBehaviour
     {
         for (int i = 0; i < results.Count; i++)
         {
-            IEnumerator enumerator = GachaManager.target.NineForShow.OneStoneGochaAnim(results[i], WaitPos[i].position, nineslotScreenPos[i]);
+            IEnumerator enumerator = NineForShow.OneStoneGochaAnim(results[i], WaitPos[i].position, nineslotScreenPos[i]);
             enumerators.Add(enumerator);
             StartCoroutine(enumerator);
         }
@@ -196,11 +209,10 @@ public class GachaRender : MonoBehaviour
     public IEnumerator GotchaAnimProcess(List<StoneOfPlayerInfo> results)
     {
         CameraManager._camera.gameObject.SetActive(false);
-        Camera.gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(0.5f);
         PosDecide();
         SpeedOnce.gameObject.SetActive(true);
-        GachaRender.target.Skip.gameObject.SetActive(true);
+        Skip.gameObject.SetActive(true);
         starFallAnimWholeProcess = StartCoroutine (StarFallAnim(results));
         
         while(!starfallAnimEnd)
@@ -208,17 +220,16 @@ public class GachaRender : MonoBehaviour
         
         SpeedOnce.gameObject.SetActive(false);
         Reset();
-        GachaRender.target.Skip.gameObject.SetActive(false);
+        Skip.gameObject.SetActive(false);
         yield return StarSortAnim(results);
-        GachaManager.target.NineForShow.GochaResultShow(results);
+        NineForShow.GochaResultShow(results);
         CameraManager._camera.gameObject.SetActive(true);
-        Camera.gameObject.SetActive(false);
     }
     
     Vector3 GetRandomStarPos()
     {
         float xzDisFromCenter = Random.Range(0, SkySphereRadius * 2 / 3);
-        Vector3 temp = SkyLightCenter.transform.position + (Vector3.forward * Random.Range(0, 100) + Vector3.right * Random.Range(0, 100)).normalized * xzDisFromCenter;
+        Vector3 temp = SkyLightCenter + (Vector3.forward * Random.Range(0, 100) + Vector3.right * Random.Range(0, 100)).normalized * xzDisFromCenter;
         float tempheight = Mathf.Sqrt(Mathf.Pow(SkySphereRadius, 2) - Mathf.Pow(xzDisFromCenter, 2));
         Vector3 finalPos = temp + (int)(tempheight - 10) * Vector3.up;
         return finalPos;

@@ -8,10 +8,6 @@ namespace mainMenu
     public class SkillStoneDetail : MonoBehaviour
     {
         [Space(2)]
-        [Header("BOXT")]
-        public RectTransform _T;
-        
-        [Space(2)]
         [Header("图标")]
         public RectTransform IconShowT;
         
@@ -75,7 +71,7 @@ namespace mainMenu
         
         public void Clear()
         {
-            _T.gameObject.SetActive(false);
+            transform.gameObject.SetActive(false);
             keyname.text = "";
             Showname.text = "";
             ShowSkillStoneExType(-1);
@@ -126,7 +122,7 @@ namespace mainMenu
             {
                 expValue.value = (float)current.expRemain / (current.expRemain + current.expToNextLevel);
             }
-            _T.gameObject.SetActive(true);
+            transform.gameObject.SetActive(true);
         }
         
         public void RefreshInfo(SkillConfig _ConfigOfStone)
@@ -136,7 +132,7 @@ namespace mainMenu
             Showname.text = _ConfigOfStone.RECORD_ID + ":" + SkillNameTable.GetSkillName(_ConfigOfStone.RECORD_ID);
             ShowSkillStoneExType(_ConfigOfStone.SP_LEVEL);
             ShowSKillRanges(_ConfigOfStone.AIAttrs.AI_MIN_DIS, _ConfigOfStone.AIAttrs.AI_MAX_DIS);
-            _T.gameObject.SetActive(true);
+            transform.gameObject.SetActive(true);
         }
         
         // 技能画面展示用
@@ -163,7 +159,7 @@ namespace mainMenu
             {
                 HP.text = "MaxHp = " + _SkillEntity.HP;
             }
-            _T.gameObject.SetActive(true);
+            transform.gameObject.SetActive(true);
         }
         
         void ShowSKillRanges(float dis_min, float float_max)

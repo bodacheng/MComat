@@ -21,6 +21,9 @@ namespace mainMenu
         [Space(11)]
         [Header("主相机")]
         public CameraManager _CameraManager;
+
+        [Space(11)] 
+        [Header("抽卡特殊相机")] public Camera GotchaCamera;
         
         [Space(11)]
         [Header("技能展示器模式切换角色按钮")]
@@ -37,10 +40,6 @@ namespace mainMenu
         [Space(7)]
         [Header("Shader转换器")]
         public SwapAllModelShader _SwapAllModelShader;
-        
-        [Space(7)]
-        [Header("若干子画面的总RectTransfrom")]
-        public RectTransform ArcadeTeamEditT;
         
         [Space(7)]
         [Header("AudioSource")]
