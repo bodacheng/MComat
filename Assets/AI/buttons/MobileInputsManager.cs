@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Soul;
 using Skill;
+using FightScene;
 
 public enum InputKey
 {
@@ -18,14 +19,12 @@ public enum InputKey
 
 public class MobileInputsManager : MonoBehaviour {
 
-    public Button Attack;
-    public Button Fire1;
-    public Button Fire2;
-    public Button Defend;
-    public Button Dash;
-
-    public Camera fxCamera;
-    public Transform effectsParent;
+    [SerializeField] Button Attack;
+    [SerializeField] Button Fire1;
+    [SerializeField] Button Fire2;
+    [SerializeField] Button Defend;
+    [SerializeField] Button Dash;
+    [SerializeField] Transform effectsParent;
     
     public static MobileInputsManager target;
     static IDictionary<Zokusei, zokuseiButtonEffectsGroup> zokuseiButtonEffects = new Dictionary<Zokusei, zokuseiButtonEffectsGroup>();
@@ -73,8 +72,8 @@ public class MobileInputsManager : MonoBehaviour {
         {
             _focusing = zokuseiButtonEffects[zokusei];
             _focusing.Open(
-                ScreenPositionCal.Cal(2, target.fxCamera, Defend.GetComponent<RectTransform>(), 5), 
-                ScreenPositionCal.Cal(2, target.fxCamera, Dash.GetComponent<RectTransform>(), 5)
+                ScreenPositionCal.Cal(2, NetFightScene.target.fxCamera, Defend.GetComponent<RectTransform>(), 5), 
+                ScreenPositionCal.Cal(2, NetFightScene.target.fxCamera, Dash.GetComponent<RectTransform>(), 5)
             );
         }else{
             Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
@@ -118,13 +117,13 @@ public class MobileInputsManager : MonoBehaviour {
         switch (inputs_Defined)
         {
             case InputKey.Attack1:
-                targetexplode.transform.position = ScreenPositionCal.Cal(2, target.fxCamera, target.Attack.GetComponent<RectTransform>(), 3);
+                targetexplode.transform.position = ScreenPositionCal.Cal(2, NetFightScene.target.fxCamera, target.Attack.GetComponent<RectTransform>(), 3);
                 break;
             case InputKey.Attack2:
-                targetexplode.transform.position = ScreenPositionCal.Cal(2, target.fxCamera, target.Fire1.GetComponent<RectTransform>(), 3);
+                targetexplode.transform.position = ScreenPositionCal.Cal(2, NetFightScene.target.fxCamera, target.Fire1.GetComponent<RectTransform>(), 3);
                 break;
             case InputKey.Attack3:
-                targetexplode.transform.position = ScreenPositionCal.Cal(2, target.fxCamera, target.Fire2.GetComponent<RectTransform>(), 3);
+                targetexplode.transform.position = ScreenPositionCal.Cal(2, NetFightScene.target.fxCamera, target.Fire2.GetComponent<RectTransform>(), 3);
                 break;
         }
         targetexplode.Play();
@@ -132,7 +131,7 @@ public class MobileInputsManager : MonoBehaviour {
         //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
         foreach (KeyValuePair<Button, ParticleSystem> keyValue in _focusing.buttonRefreshEffects)
         {
-            keyValue.Value.transform.position = ScreenPositionCal.Cal(2, target.fxCamera, keyValue.Key.GetComponent<RectTransform>(),4);
+            keyValue.Value.transform.position = ScreenPositionCal.Cal(2, NetFightScene.target.fxCamera, keyValue.Key.GetComponent<RectTransform>(),4);
             keyValue.Value.Play(true);
         }
     }
@@ -143,7 +142,7 @@ public class MobileInputsManager : MonoBehaviour {
     // 而防御与机动则是确定一直显示。
     void StartPressing(Button targetBUtton)
     {
-        targetButtonPos = ScreenPositionCal.Cal(2, target.fxCamera, targetBUtton.GetComponent<RectTransform>(), 7);
+        targetButtonPos = ScreenPositionCal.Cal(2, NetFightScene.target.fxCamera, targetBUtton.GetComponent<RectTransform>(), 7);
         if (_focusing != null)
         {
             _focusing.pressingExplosion.transform.position = targetButtonPos;
@@ -342,11 +341,11 @@ public class MobileInputsManager : MonoBehaviour {
     {
         CheckIfPlayerIsInputting();
     }
-        
+    
     Vector3 targetButtonPos;
     void RefreshPattern(Button button, int sp_level)//按钮切换也可以在这里做文章
     {
-        targetButtonPos = ScreenPositionCal.Cal(2, target.fxCamera, button.GetComponent<RectTransform>(), 5);
+        targetButtonPos = ScreenPositionCal.Cal(2, NetFightScene.target.fxCamera, button.GetComponent<RectTransform>(), 5);
         _focusing?.Refreshforbutton(button, sp_level, targetButtonPos);
     }
 

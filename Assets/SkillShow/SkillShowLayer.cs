@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Skill;
@@ -10,28 +9,26 @@ namespace mainMenu
 {
     // 这个模块首先要有对脚本进行分析的能力。
     // 如果一个九宫格存在相同技能重复登陆，本脚本的功能会出现问题，具体是因为analysisStatesSetDic的机制(以技能key寻找状态从而寻找按钮。)
-    public class SkillsPrintOut : MonoBehaviour
+    public class SkillShowLayer : UILayer
     {
-        public Button skillInfoGamenBackGroundButton;
-        public GameObject skillflowparticle;
-        List<GameObject> floatingMarks = new List<GameObject>();
-        
-        public Button SkillButton;
-        public RectTransform attacksT;
-        public RectTransform fire1T;
-        public RectTransform fire2T;
+        [SerializeField] Button PageBGBtn;
+        [SerializeField] GameObject flowParticle;
+        [SerializeField] Button SkillButton;
+        [SerializeField] RectTransform attacksT;
+        [SerializeField] RectTransform fire1T;
+        [SerializeField] RectTransform fire2T;
 
         [Space(11)]
         [Header("Runner")]
-        public SingleThreadProcesser runner;
+        [SerializeField] SingleThreadProcesser runner;
 
         [Space(11)]
         [Header("Skill Info")]
-        public SkillStoneDetail _skillStoneDetail;
+        [SerializeField] SkillStoneDetail _skillStoneDetail;
+
+        public Camera fx;
         
-        public string focusCharConfigID;
-        public Data_Center focusingC;
-        
+        List<GameObject> floatingMarks = new List<GameObject>();
         IDictionary<string, Button> StateButtonDic = new Dictionary<string, Button>();
         IDictionary<string, SkillEntity> analysisSKList = new Dictionary<string, SkillEntity>();
         
@@ -50,18 +47,18 @@ namespace mainMenu
             floatingMarks.Clear();
         }
         
-        public bool IfShowingSkill { get; private set; } = false;
-        public void SkillsPrintOutLateUpdate()
+        void SkillsPrintOutLateUpdate()
         {
-            if (focusingC != null)
+            if (SkillShowSupporter.focusingC != null)
             {
-                if (focusingC.Animation_Manger != null && focusingC.WholeT.gameObject.activeSelf)
+                if (SkillShowSupporter.focusingC.Animation_Manger != null && SkillShowSupporter.focusingC.WholeT.gameObject.activeSelf)
                 {
-                    if (focusingC.Animation_Manger.GetBool("in_transition") == false && focusingC.Animation_Manger.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
+                    if (SkillShowSupporter.focusingC.Animation_Manger.GetBool("in_transition") == false && 
+                        SkillShowSupporter.focusingC.Animation_Manger.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
                     {
                         //SkillShowT.gameObject.SetActive(true);
-                        focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.05f);
-                        IfShowingSkill = false;
+                        SkillShowSupporter.focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.05f);
+                        SkillShowSupporter.IfShowingSkill = false;
                         PreScene.target._CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
                     }
                 }
@@ -106,10 +103,9 @@ namespace mainMenu
                         }
                     }
                 }
-
                 //////// 超级功能 ////////
-                runner.RunAsQueued(SkillShowRunWithPrepare(_SE.REAL_NAME));                
-                IfShowingSkill = true;
+                runner.RunAsQueued(SkillShowSupporter.SkillShowRunWithPrepare(_SE.REAL_NAME));                
+                SkillShowSupporter.IfShowingSkill = true;
                 
                 // 这个就是强行把技能盒子附带的那个点击触效给拿过来用了。
                 SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(_SE.SP_LEVEL, _button.transform.position, transform);
@@ -117,34 +113,10 @@ namespace mainMenu
             _button.onClick.AddListener(showSkillInfo);
         }
         
-        // 九宫格内技能显示功能
-        public IEnumerator SkillShowRunWithPrepare(string keyname)
-        {
-            CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(focusCharConfigID);
-            //下面这一大片，在资源存在的情况下压根不应该运行            
-            if (focusingC.Animation_Manger != null)
-            {
-                switch (ResourceLoadingSetting.AnimationLoadingMode)
-                {
-                    case ResourceLoadMode.CachAB:
-                        yield return focusingC.Animation_Manger.PreloadPersonalAnim(ResourceDownLoad.BundleURL, _CharConfig.TYPE, keyname, _CharConfig.SPECIAL_ZOKUSEI, _CharConfig._zokusei);
-                    break;
-                    case ResourceLoadMode.StreamingAssetAB:
-                        yield return focusingC.Animation_Manger.PreloadPersonalAnimStreamingAssetMode(_CharConfig.TYPE, keyname, _CharConfig.SPECIAL_ZOKUSEI, _CharConfig._zokusei);
-                    break;
-                    case ResourceLoadMode.Resource:
-                        yield return focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(_CharConfig.TYPE, keyname, _CharConfig.SPECIAL_ZOKUSEI, _CharConfig._zokusei);
-                    break;
-                }
-                IfShowingSkill = true;
-                focusingC.Animation_Manger.AnimationTrigger(keyname, true, 0.05f);
-            }
-        }
-        
         // 生成技能迁移表示符
         void BuildSkillFlowParticle(Transform startT, Transform endT)
         {
-            GameObject particle = Instantiate(skillflowparticle);
+            GameObject particle = Instantiate(flowParticle);
             floatingMarks.Add(particle);
             particle.SetActive(true);
             particle.transform.SetParent(startT);
@@ -163,9 +135,10 @@ namespace mainMenu
             {
                 _t.gameObject.layer = 5;
             }
-            t.transform.position = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, button.GetComponent<RectTransform>(), 5f);
+            t.transform.position = ScreenPositionCal.Cal2(2, fx, button.GetComponent<RectTransform>(), 20f);
             renderPs.Add(t);
         }
+        
         // 离开技能展示画面的时候必须要清除掉不要的特效
         public void ClearRenderPs()
         {
@@ -177,19 +150,19 @@ namespace mainMenu
         }
         
         //根据锁定的技能组，角色，来打印出所有技能按钮，以及背景按钮。
-        public void SkillsPrintGamenRefresh(UnitInfo _watchingCharInfo)
+        public void SkillsPrintPageRefresh(UnitInfo _watchingCharInfo)
         {
             CharConfig CharConfig = MonstersConfigTable.GetCharConfig(_watchingCharInfo.r_id);
-            skillInfoGamenBackGroundButton.onClick.RemoveAllListeners();
+            PageBGBtn.onClick.RemoveAllListeners();
             if (_watchingCharInfo != null && _watchingCharInfo.set != null)
             {
                 SkillScriptReader(_watchingCharInfo.set, CharConfig._zokusei);
             }
-            void backGroundButtonforRefresh()
+            void BFBtnForRefresh()
             {
-                SkillsPrintGamenRefresh(_watchingCharInfo);
+                SkillsPrintPageRefresh(_watchingCharInfo);
             }
-            skillInfoGamenBackGroundButton.onClick.AddListener(backGroundButtonforRefresh);
+            PageBGBtn.onClick.AddListener(BFBtnForRefresh);
         }
 
         // 打印出技能显示画面
@@ -230,10 +203,11 @@ namespace mainMenu
                 AddShowSkillInfoFeature(newShow, attack_chuan[i]);
                 StateButtonDic.Add(attack_chuan[i].REAL_NAME, newShow);
                 newShow.name = attack_chuan[i].REAL_NAME;
-                newShow.transform.SetParent(attacksT);
-                newShow.transform.localScale = new Vector3(1, 1, 1);
-                newShow.transform.localPosition = Vector3.zero;
-                newShow.transform.localPosition = Vector3.zero + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
+                
+                newShow.transform.SetParent(transform);
+                Vector3 pos = attacksT.transform.position;
+                
+                newShow.transform.position = pos + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
                 newShow.gameObject.SetActive(true);
                 RenderButton(zokusei,newShow.gameObject,attack_chuan[i].SP_LEVEL);
             }
@@ -249,10 +223,10 @@ namespace mainMenu
                 AddShowSkillInfoFeature(newShow, Fire1_chuan[i]);
                 StateButtonDic.Add(Fire1_chuan[i].REAL_NAME, newShow);
                 newShow.name = Fire1_chuan[i].REAL_NAME;
-                newShow.transform.SetParent(fire1T);
-                newShow.transform.localScale = new Vector3(1, 1, 1);
-                newShow.transform.localPosition = Vector3.zero;
-                newShow.transform.localPosition = Vector3.zero + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
+                
+                newShow.transform.SetParent(transform);
+                Vector3 pos = fire1T.transform.position;
+                newShow.transform.position = pos + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
                 newShow.gameObject.SetActive(true);
                 RenderButton(zokusei,newShow.gameObject,Fire1_chuan[i].SP_LEVEL);
             }
@@ -268,74 +242,72 @@ namespace mainMenu
                 AddShowSkillInfoFeature(newShow, Fire2_chuan[i]);
                 StateButtonDic.Add(Fire2_chuan[i].REAL_NAME, newShow);
                 newShow.name = Fire2_chuan[i].REAL_NAME;
-                newShow.transform.SetParent(fire2T);
-                newShow.transform.localScale = new Vector3(1, 1, 1);
-                newShow.transform.localPosition = Vector3.zero;
-                newShow.transform.localPosition = Vector3.zero + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
+                
+                newShow.transform.SetParent(transform);
+                Vector3 pos = fire2T.transform.position;
+                newShow.transform.position = pos + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
                 newShow.gameObject.SetActive(true);
                 RenderButton(zokusei,newShow.gameObject,Fire2_chuan[i].SP_LEVEL);
             }
         }
-                
-        // 表情测试相关
+
+        #region 表情测试相关
         public void Face_CloseEye()
         {
-            if (focusingC != null)
+            if (SkillShowSupporter.focusingC != null)
             {
-                if (focusingC != null)
-                {
-                    focusingC.Animation_Manger.SetTrigger("face_reset");
-                    focusingC.Animation_Manger.SetTrigger("close_eye");
-                }
+                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("face_reset");
+                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("close_eye");
             }
         }
         public void Face_Suprise()
         {
-            if (focusingC != null)
+            if (SkillShowSupporter.focusingC != null)
             {
-                focusingC.Animation_Manger.SetTrigger("face_reset");
-                focusingC.Animation_Manger.SetTrigger("suprise");
+                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("face_reset");
+                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("suprise");
             }
         }
         public void Face_Angry()
         {
-            if (focusingC != null)
+            if (SkillShowSupporter.focusingC != null)
             {
-                focusingC.Animation_Manger.SetTrigger("face_reset");
-                focusingC.Animation_Manger.SetTrigger("angry");
+                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("face_reset");
+                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("angry");
             }
         }
         public void Face_Pain()
         {
-            if (focusingC != null)
+            if (SkillShowSupporter.focusingC != null)
             {
-                focusingC.Animation_Manger.SetTrigger("face_reset");
-                focusingC.Animation_Manger.SetTrigger("hurt");
+                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("face_reset");
+                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("hurt");
             }
         }
         public void Face_Smile()
         {
-            if (focusingC != null)
+            if (SkillShowSupporter.focusingC != null)
             {
-                focusingC.Animation_Manger.SetTrigger("face_reset");
-                focusingC.Animation_Manger.SetTrigger("smile");
+                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("face_reset");
+                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("smile");
             }
         }
         public void Face_Evil()
         {
-            if (focusingC != null)
+            if (SkillShowSupporter.focusingC != null)
             {
-                focusingC.Animation_Manger.SetTrigger("face_reset");
-                focusingC.Animation_Manger.SetTrigger("evil");
+                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("face_reset");
+                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("evil");
             }
         }
         public void Face_Ferocious()
         {
-            if (focusingC != null)
+            if (SkillShowSupporter.focusingC != null)
             {
-                focusingC.Animation_Manger.SetTrigger("face_reset");
-                focusingC.Animation_Manger.SetTrigger("ferocious");
+                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("face_reset");
+                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("ferocious");
             }
         }
+        #endregion
     }
 }

@@ -1,0 +1,31 @@
+using System.Collections;
+
+public static class SkillShowSupporter
+{
+    public static string focusRId;
+    public static Data_Center focusingC;
+    public static bool IfShowingSkill = false;
+    
+    public static IEnumerator SkillShowRunWithPrepare(string keyname)
+    {
+        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(focusRId);
+        //下面这一大片，在资源存在的情况下压根不应该运行            
+        if (focusingC.Animation_Manger != null)
+        {
+            switch (ResourceLoadingSetting.AnimationLoadingMode)
+            {
+                case ResourceLoadMode.CachAB:
+                    yield return focusingC.Animation_Manger.PreloadPersonalAnim(ResourceDownLoad.BundleURL, _CharConfig.TYPE, keyname, _CharConfig.SPECIAL_ZOKUSEI, _CharConfig._zokusei);
+                    break;
+                case ResourceLoadMode.StreamingAssetAB:
+                    yield return focusingC.Animation_Manger.PreloadPersonalAnimStreamingAssetMode(_CharConfig.TYPE, keyname, _CharConfig.SPECIAL_ZOKUSEI, _CharConfig._zokusei);
+                    break;
+                case ResourceLoadMode.Resource:
+                    yield return focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(_CharConfig.TYPE, keyname, _CharConfig.SPECIAL_ZOKUSEI, _CharConfig._zokusei);
+                    break;
+            }
+            IfShowingSkill = true;
+            focusingC.Animation_Manger.AnimationTrigger(keyname, true, 0.05f);
+        }
+    }
+}

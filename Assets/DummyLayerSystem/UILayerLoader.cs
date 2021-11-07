@@ -25,6 +25,7 @@ public class UILayerLoader
         {"SelfFightLayer", "DummyLayerSystem/SelfFightLayer"},
         {"FightPrepareLayer", "DummyLayerSystem/FightPrepareLayer"},
         {"TeamEditLayer", "DummyLayerSystem/TeamEditLayer"},
+        {"SkillShowLayer", "DummyLayerSystem/SkillShowLayer"},
     };
 
     private static List<UILayer> Queues = new List<UILayer>();

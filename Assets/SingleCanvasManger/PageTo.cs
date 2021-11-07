@@ -6,10 +6,8 @@ public class PageTo : MonoBehaviour
 {
     public Canvas
         ShopTop,
-        SK_Show,
         UnitOption,
         UnitSkillEdit,
-        UnitSkillShow,
         Gotcha,
         BoxExceedFixer,
         StoneBoxExpansion,
@@ -22,10 +20,8 @@ public class PageTo : MonoBehaviour
         Dic = new Dictionary<MainSceneStep, Canvas>
         {
             {MainSceneStep.ShopTop, ShopTop},
-            {MainSceneStep.SkillStoneList, SK_Show},
             {MainSceneStep.MonsterList, UnitOption},
             {MainSceneStep.UnitSkillEdit, UnitSkillEdit},
-            {MainSceneStep.UnitSkillShow, UnitSkillShow},
             {MainSceneStep.GotchaFront, Gotcha},
             {MainSceneStep.GotchaAnim, Gotcha},
             {MainSceneStep.GotchaResult, Gotcha},

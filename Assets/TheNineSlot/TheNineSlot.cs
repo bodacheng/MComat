@@ -21,10 +21,6 @@ namespace mainMenu
         public RectTransform NineSlotT;
         
         [Space(5)]
-        [Header("SKillPrintout")]
-        public SkillsPrintOut _SkillsPrintOut;
-        
-        [Space(5)]
         [Header("CurrentHp")]
         public Text _HP;
         
@@ -125,7 +121,7 @@ namespace mainMenu
                     if (_SkillStone != null && _SkillStone._SkillConfig != null)
                     {
                         _skillStoneDetail.RefreshInfo(_SkillStone.instanceId);
-                        mainProcessRunner.RunAsQueued(_SkillsPrintOut.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
+                        mainProcessRunner.RunAsQueued(SkillShowSupporter.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
                     }else{
                         _skillStoneDetail.Clear();
                     }

@@ -17,7 +17,7 @@ namespace mainMenu
                     if (_stone != null && _stone._SkillConfig != null)
                     {
                         _skillStoneDetail.RefreshInfo(_stone.instanceId);
-                        mainProcessRunner.RunAsQueued(MemberDetail.target._SkillsPrintOut.SkillShowRunWithPrepare(_stone._SkillConfig.REAL_NAME));
+                        mainProcessRunner.RunAsQueued(SkillShowSupporter.SkillShowRunWithPrepare(_stone._SkillConfig.REAL_NAME));
                     }else{
                         _skillStoneDetail.Clear();
                     }

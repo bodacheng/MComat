@@ -25,8 +25,7 @@ public class PreparingProcess : FSceneProcess
         BoundaryControllByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
         
         FightingStepLayer FightingStepLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "FightingStepLayer") as FightingStepLayer;
-        FightingStepLayer.MobileInputsManager.fxCamera = RTFightManager.target.FX;
-        
+
         FightingStepLayer.StartUp( RTFightManager.target.SwitchAutoMode, FightScenePauseSupport.target.PauseScene, RTFightManager.target.SwitchToWatchMode);
         RTFightManager.target.team1 = FightingStepLayer.TeamUI1Manager;
         RTFightManager.target.team2 = FightingStepLayer.TeamUI2Manager;

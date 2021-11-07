@@ -85,7 +85,7 @@ public class MonsterEditPage : MainSceneProcess
     Vector3 screenPos = new Vector3(0.23f, 0.3f, ModelShower._nearClipPlane);
     public override void LocalUpdate()
     {
-        if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
+        if (!SkillShowSupporter.IfShowingSkill)
         {
             ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
         }else{

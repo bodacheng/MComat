@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using mainMenu;
-using dataAccess;
 
 public class SkillShowPage : MainSceneProcess
 {
+    private SkillShowLayer SkillShowLayer;
     public SkillShowPage()
     {
         Step = MainSceneStep.UnitSkillShow;
@@ -13,7 +13,9 @@ public class SkillShowPage : MainSceneProcess
     public override void ProcessEnter()
     {
         UnitInfo unitInfo = UnitInfo.GetCharDataInfo(MemberDetail.target._focusing);
-        MemberDetail.target._SkillsPrintOut.SkillsPrintGamenRefresh( unitInfo);
+        SkillShowLayer = UILayerLoader.Load(PreScene.target.T,"SkillShowLayer") as SkillShowLayer;
+        SkillShowLayer.fx.transform.SetParent(null);
+        SkillShowLayer.SkillsPrintPageRefresh( unitInfo);
         // 表现系
         CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.r_id);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
@@ -31,13 +33,15 @@ public class SkillShowPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        MemberDetail.target._SkillsPrintOut.ClearRenderPs();
+        SkillShowLayer.ClearRenderPs();
+        GameObject.Destroy(SkillShowLayer.fx.gameObject);
+        UILayerLoader.Remove("SkillShowLayer");
     }
 
     readonly Vector3 screenPos = new Vector3(0.23f, 0.3f, ModelShower._nearClipPlane);
     public override void LocalUpdate()
     {
-        if (!MemberDetail.target._SkillsPrintOut.IfShowingSkill)
+        if (!SkillShowSupporter.IfShowingSkill)
         {
             ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
         }else{

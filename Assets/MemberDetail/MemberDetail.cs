@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
+using UnityEngine.Serialization;
 
 namespace mainMenu
 {
@@ -22,7 +23,6 @@ namespace mainMenu
         [Space(7)]
         [Header("部下详细")]
         public Text focusingCharName;
-        public SkillsPrintOut _SkillsPrintOut;
         public Button SkillShowButton, SkillEditButton;
         
         [Space(7)]
@@ -103,18 +103,18 @@ namespace mainMenu
             if (info == null)
             {
                 Debug.Log("角色详细信息读取错误.尝试将“对准”中的角色信息至空");
-                _SkillsPrintOut.focusingC = null;
+                SkillShowSupporter.focusingC = null;
                 IEnumerator readshowmodel = ModelShower.target.ShowMyModel(null);
                 yield return readshowmodel;
             }else{
-                _SkillsPrintOut.focusCharConfigID = info.r_id;
+                SkillShowSupporter.focusRId = info.r_id;
                 IEnumerator readshowmodel = ModelShower.target.ShowMyModel(info.id);
                 yield return readshowmodel;
                 GameObject focusingOneModel = (GameObject)readshowmodel.Current;
                 if (focusingOneModel == null)
                 {
                     Debug.Log("模型错误");
-                    _SkillsPrintOut.focusingC = null;
+                    SkillShowSupporter.focusingC = null;
                     yield break;
                 }
                 OutsideDataLink outsideDataLink = focusingOneModel.GetComponent<OutsideDataLink>();
@@ -124,8 +124,8 @@ namespace mainMenu
                     yield break;
                 }
                 Data_Center aI_DATA_CENTER = outsideDataLink._C;
-                _SkillsPrintOut.focusingC = aI_DATA_CENTER;
-                _SkillsPrintOut.focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
+                SkillShowSupporter.focusingC = aI_DATA_CENTER;
+                SkillShowSupporter.focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
             }
         }
 

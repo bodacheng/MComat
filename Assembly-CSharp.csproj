@@ -99,10 +99,11 @@
      <Compile Include="Assets\AI\GUI\BehaviorRunnerGUI.cs" />
      <Compile Include="Assets\ResourceLoading\UnitCreator\UnitCreator_Cach.cs" />
      <Compile Include="Assets\Gotcha\GachaManager.cs" />
-     <Compile Include="Assets\SkillShow\SkillsPrintOut.cs" />
+     <Compile Include="Assets\SkillShow\SkillShowLayer.cs" />
      <Compile Include="Assets\Arena\ArenaLayer.cs" />
      <Compile Include="Assets\Remote\TeamSet\PosKeySet.cs" />
      <Compile Include="Assets\DynamicBone\Scripts\DynamicBonePlaneCollider.cs" />
+     <Compile Include="Assets\SkillShowSupporter.cs" />
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow.cs" />
      <Compile Include="Assets\TutorialManger\TutorialProcess.cs" />
      <Compile Include="Assets\AI\AI_states\states\Move_State.cs" />

@@ -31,6 +31,10 @@ namespace FightScene
         [Space(11)]
         [Header("双方站位点_观看点")]
         public Transform WatchTeam1, WatchTeam2;
+
+        [Space(11)] 
+        [Header("FX")]
+        public Camera fxCamera;
         
         // 主进程
         [Space(7)]

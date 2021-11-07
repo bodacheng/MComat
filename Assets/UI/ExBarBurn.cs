@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using FightScene;
 
 public class ExBarBurn : MonoBehaviour
 {
@@ -14,11 +15,11 @@ public class ExBarBurn : MonoBehaviour
 
     public void Burn()
     {
-        if (MobileInputsManager.target.fxCamera != null)
+        if (NetFightScene.target.fxCamera != null)
         {
             EffectsManager.GenerateEffect(
             "ui_exbarburn", null, 
-            ScreenPositionCal.Cal(2, MobileInputsManager.target.fxCamera, transform.GetComponent<RectTransform>(), 3), 
+            ScreenPositionCal.Cal(2, NetFightScene.target.fxCamera, transform.GetComponent<RectTransform>(), 3), 
             Quaternion.identity, null);
         }
     }

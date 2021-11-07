@@ -21950,6 +21950,7 @@ MonoBehaviour:
   - {fileID: 306543132}
   WatchTeam1: {fileID: 888009360}
   WatchTeam2: {fileID: 1653577478}
+  fxCamera: {fileID: 1050871294}
   mainProcessRunner: {fileID: 1145277243}
   audioSource: {fileID: 3000649885118306805}
 --- !u!1 &3000649884765589351
