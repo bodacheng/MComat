@@ -119,8 +119,6 @@ public partial class PlayFabReadClient
                     Account._AccInfo.Stoneboxsize = 50;
                     Debug.Log("玩家数据出错 boxsize");
                 }
-                PreScene.target._SkillStonesBox_NineSlot.GenerateCells();
-                PreScene.target._SkillStonesBox_Show.GenerateCells();
                 finished.Invoke(1);
             },
             errorCallback => {

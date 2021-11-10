@@ -25,7 +25,6 @@ public class MonsterEditPage : MainSceneProcess
             yield break;
         }
         TheNineSlot.target.NineSlotT.gameObject.SetActive(true);
-        SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;
         PageTo.Go(MainSceneStep.UnitSkillEdit);
         SkillStonesBox.target.CellsFeatureLoad(2);
         SkillEditButtonFeature(MemberDetail.target._focusing);
@@ -53,9 +52,13 @@ public class MonsterEditPage : MainSceneProcess
         EelementsInherit(PreScene.target);
     }
     
+    //private StoneListSideLayer StoneListSideLayer;
     public override void ProcessEnter()
     {
         PlayFabReadClient.LoadItems(ItemsLoadFinished);
+        
+        //StoneListSideLayer = StoneListSideLayer.Open();
+        
         
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
@@ -146,8 +149,7 @@ public class MonsterEditPage : MainSceneProcess
     public static void SkillShowSpEnterProcess()
     {
         loadFinished = false;
-        TheNineSlot.target.NineSlotT.gameObject.SetActive(false);                
-        SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;        
+        TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
         PageTo.Go(MainSceneStep.UnitSkillEdit);
         SkillStonesBox.target.CellsFeatureLoad(3);
         SkillEditButtonFeature_SP(MemberDetail.target._focusing);

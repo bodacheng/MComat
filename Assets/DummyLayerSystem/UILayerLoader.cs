@@ -28,6 +28,7 @@ public class UILayerLoader
         {"SkillShowLayer", "DummyLayerSystem/SkillShowLayer"},
         {"GotchaLayer", "DummyLayerSystem/GotchaLayer"},
         {"GotchaResultLayer", "DummyLayerSystem/GotchaResultLayer"},
+        {"StoneListLayer", "DummyLayerSystem/StoneListLayer"},
     };
 
     private static List<UILayer> Queues = new List<UILayer>();

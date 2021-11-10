@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
@@ -11,7 +12,7 @@ namespace mainMenu
         public SingleThreadProcesser mainProcessRunner;
         
         [Header("画面主模块parent")]
-        public RectTransform BoxT, stonesTempContainer;
+        public RectTransform BoxT;
         
         [Space(7)]
         [Header("type按钮")]
@@ -43,15 +44,17 @@ namespace mainMenu
         
         string focusingtype = "human";
         int focusingExType;
-        public static RectTransform _stonesTempContainer;
-        
         public static SkillStonesBox target;
 
         void Awake()
         {
             _Selected = SelectedFrame;
-            _stonesTempContainer = stonesTempContainer;
             rares = new List<int> { 0, 1, 2, 3, 4, 5 };//否则其值会被inspector修改
+        }
+
+        void Start()
+        {
+            target = this;
         }
 
         public string GetFocusingType()

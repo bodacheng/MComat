@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
@@ -16,10 +15,6 @@ namespace mainMenu
         [Header("选中框")]
         public GameObject SelectedFrame;
         public static GameObject _Selected;
-        
-        [Space(7)]
-        [Header("石头滚动视窗")]
-        public ScrollRect stoneviewScrollRect;
         
         public IDictionary<int, StoneCell> CellsDic = new Dictionary<int, StoneCell>();
         

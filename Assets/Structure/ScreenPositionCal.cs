@@ -14,6 +14,7 @@ public static class ScreenPositionCal
     
     public static Vector3 Cal2(int ConvertMode, Camera refC, RectTransform rect, float z_offset)
     {
+        Debug.Log(rect.anchoredPosition);
         return Cal(ConvertMode, refC, rect.anchoredPosition, z_offset);
     }
     
@@ -28,8 +29,9 @@ public static class ScreenPositionCal
             case 2:
                 AnchorPos = rectPos;
                 true_AnchorPos = new Vector2(AnchorPos.x, AnchorPos.y);
-                refC.transform.SetParent(null);
+                //refC.transform.SetParent(null);
                 WorldPos = refC.ScreenToWorldPoint(true_AnchorPos);
+                Debug.Log("!"+ WorldPos);
                 WorldPos = new Vector3(WorldPos.x, WorldPos.y, refC.transform.position.z + z_offset);
                 return WorldPos;
             case 3:

@@ -29,7 +29,7 @@ namespace dataAccess
             item._SkillConfig = SkillConfigTable.GetSkillConfigByID(Dic[instanceId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
             item.instanceId = instanceId;
-            item.gameObject.transform.SetParent(SkillStonesBox._stonesTempContainer);
+            item.gameObject.transform.SetParent(PreScene.target.stonesTempContainer);
 
             DicAdd<string, SKStoneItem>.Add(RenderModelDic, instanceId, item);
         }

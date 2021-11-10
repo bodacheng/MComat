@@ -23,20 +23,15 @@ namespace mainMenu
         public CameraManager _CameraManager;
 
         [Space(11)] 
+        [Header("FX")] public Camera FxCamera;
+        
+        [Space(11)] 
         [Header("抽卡特殊相机")] public Camera GotchaCamera;
         
         [Space(11)]
         [Header("技能展示器模式切换角色按钮")]
         public Button charSwitcher;
-
-        [Space(11)]
-        [Header("SkillStonesBox")]
-        public SkillStonesBox _SkillStonesBox_NineSlot;
-
-        [Space(11)]
-        [Header("SkillStonesBox 技能石单独画面")]
-        public SkillStonesBox _SkillStonesBox_Show;
-
+        
         [Space(7)]
         [Header("Shader转换器")]
         public SwapAllModelShader _SwapAllModelShader;
@@ -44,6 +39,8 @@ namespace mainMenu
         [Space(7)]
         [Header("AudioSource")]
         public AudioSource audioSource;
+
+        public RectTransform stonesTempContainer;
         
         void Awake()
         {
@@ -138,10 +135,8 @@ namespace mainMenu
         {
             UpperInfoBar.target.Refresh();
             HeroIcon.INIFrames();
-            SkillStonesBox.target = _SkillStonesBox_NineSlot;
-            _SkillStonesBox_NineSlot._SkillStoneBoxTabEffectsManager.StartUp();
             TheNineSlot.target.StartUp();
-
+            
             HurtObjectManager.ConstructDPool();
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
             {

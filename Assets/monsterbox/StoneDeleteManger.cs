@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using mainMenu;
 using UnityEngine.UI;
-using Api.Dto.Model;
 using System.Collections.Generic;
 using dataAccess;
 using UniRx;

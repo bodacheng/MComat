@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace mainMenu
@@ -49,10 +50,15 @@ namespace mainMenu
             triggerExplosion0.transform.SetParent(Marker.transform);
         }
         
-        public void CloseShowingZokuseiTagEffects()
+        public async void CloseShowingZokuseiTagEffects()
         {
             if (_focusingButtonEffectsGroup != null)
                 _focusingButtonEffectsGroup.Close_skillstoneboxtageffects();
+            await UniTask.DelayFrame(100);
+            foreach (var VARIABLE in zokuseiButtonEffects)
+            {
+                VARIABLE.Value.Clear();
+            }
         }
         
         public void SwitchZokuseiButtons(Vector3 normaltagpos, Vector3 ex1tagpos, Vector3 ex2tagpos, Vector3 ex3tagpos, Zokusei zokusei)
@@ -81,8 +87,9 @@ namespace mainMenu
         
         public void SkillButtonExplosion(int splevel, Vector3 targetPOS, Transform parent)
         {
-            ParticleSystem pressedExplosion = _focusingButtonEffectsGroup.buttonPressedEffects.ContainsKey(splevel) ?
-            _focusingButtonEffectsGroup.buttonPressedEffects[splevel] : triggerExplosion0;
+            ParticleSystem pressedExplosion = _focusingButtonEffectsGroup.btnPressedEffects.ContainsKey(splevel) ?
+            _focusingButtonEffectsGroup.btnPressedEffects[splevel] : triggerExplosion0;
+            pressedExplosion.gameObject.name = "UIexplosion" + splevel;
             pressedExplosion.transform.position = targetPOS;
             pressedExplosion.Play();
             pressedExplosion.transform.SetParent(parent);

@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using mainMenu;
+﻿using mainMenu;
 using UnityEngine;
 
 public class StoneSell : MainSceneProcess
 {
     void EnterProcess()
     {
-        StonesPage.EnterProcess();
+        //StonesPage.EnterProcess();  １１。８　临时逻辑
         StoneDeleteManger.target.EnterDeleteMode();
     }
     
@@ -15,12 +14,13 @@ public class StoneSell : MainSceneProcess
         Step = MainSceneStep.SkillStones_Sell;
         EelementsInherit(PreScene.target);
     }
-    
+
+    private StoneListLayer StoneListLayer;
     public override void ProcessEnter()
     {
-        SkillStonesBox.target = PreScene.target._SkillStonesBox_Show;
+        StoneListLayer = StoneListLayer.Open();
         EnterProcess();
-        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
+        StoneListLayer.box._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
             ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(), 5f),
             ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(), 5f),

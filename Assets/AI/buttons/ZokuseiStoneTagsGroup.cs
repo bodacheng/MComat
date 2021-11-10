@@ -6,12 +6,13 @@ public class ZokuseiStoneTagsGroup
     public Zokusei zokusei;
     
     //技能石盒分类系成员
-    public IDictionary<int, ParticleSystem> buttonEffectsSetsForSkillStoneBox = new Dictionary<int, ParticleSystem>();
-    public IDictionary<int, ParticleSystem> buttonPressedEffects = new Dictionary<int, ParticleSystem>();
+    public IDictionary<int, ParticleSystem> btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
+    public IDictionary<int, ParticleSystem> btnPressedEffects = new Dictionary<int, ParticleSystem>();
+    public IDictionary<int, ParticleSystem> exTagEffects = new Dictionary<int, ParticleSystem>();
     
     public void Close_skillstoneboxtageffects()
     {
-        foreach(KeyValuePair<int, ParticleSystem> keyValuePair in buttonEffectsSetsForSkillStoneBox)
+        foreach(KeyValuePair<int, ParticleSystem> keyValuePair in btnEffectsSetsForStoneBox)
         {
             keyValuePair.Value.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }       
@@ -20,7 +21,7 @@ public class ZokuseiStoneTagsGroup
     public void INI_forSkillStoneBox(Zokusei zokusei,Transform effectObjectParent)
     {
         this.zokusei = zokusei;
-        buttonEffectsSetsForSkillStoneBox = new Dictionary<int, ParticleSystem>();
+        btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
         
         GameObject normaltab = CreateOneButtonIcon(zokusei, 0);
         GameObject ex1tab = CreateOneButtonIcon(zokusei, 1);
@@ -32,10 +33,10 @@ public class ZokuseiStoneTagsGroup
         ex2tab.transform.SetParent(effectObjectParent);
         ex3tab.transform.SetParent(effectObjectParent);
         
-        buttonEffectsSetsForSkillStoneBox.Add(0, normaltab.GetComponent<ParticleSystem>());
-        buttonEffectsSetsForSkillStoneBox.Add(1, ex1tab.GetComponent<ParticleSystem>());
-        buttonEffectsSetsForSkillStoneBox.Add(2, ex2tab.GetComponent<ParticleSystem>());
-        buttonEffectsSetsForSkillStoneBox.Add(3, ex3tab.GetComponent<ParticleSystem>());
+        btnEffectsSetsForStoneBox.Add(0, normaltab.GetComponent<ParticleSystem>());
+        btnEffectsSetsForStoneBox.Add(1, ex1tab.GetComponent<ParticleSystem>());
+        btnEffectsSetsForStoneBox.Add(2, ex2tab.GetComponent<ParticleSystem>());
+        btnEffectsSetsForStoneBox.Add(3, ex3tab.GetComponent<ParticleSystem>());
 
         LoadPressedEffect(zokusei, effectObjectParent);
     }
@@ -80,16 +81,44 @@ public class ZokuseiStoneTagsGroup
         triggerExplosion2.transform.SetParent(T);
         triggerExplosion3.transform.SetParent(T);
         
-        buttonPressedEffects.Add(0,triggerExplosion0);
-        buttonPressedEffects.Add(1,triggerExplosion1);
-        buttonPressedEffects.Add(2,triggerExplosion2);
-        buttonPressedEffects.Add(3,triggerExplosion3);
+        btnPressedEffects.Add(0,triggerExplosion0);
+        btnPressedEffects.Add(1,triggerExplosion1);
+        btnPressedEffects.Add(2,triggerExplosion2);
+        btnPressedEffects.Add(3,triggerExplosion3);
     }
     
     public void RefreshSTBoxEffects(int eX, Vector3 pos)
     {
-        ParticleSystem p = buttonEffectsSetsForSkillStoneBox[eX];
+        ParticleSystem p = btnEffectsSetsForStoneBox[eX];
+        p.gameObject.name = "UIExTag"+ eX;
+        exTagEffects.Add(eX,p);
+        
+        p.transform.SetParent(null);// 如果不这样的话会位置计算错误
         p.gameObject.transform.position = pos;
         p.Play(true);
+    }
+
+    public void Clear()
+    {
+        foreach (var VARIABLE in exTagEffects)
+        {
+            if (VARIABLE.Value != null)
+                GameObject.Destroy(VARIABLE.Value.gameObject);
+        }
+        exTagEffects.Clear();
+        
+        foreach (var VARIABLE in btnPressedEffects)
+        {
+            if (VARIABLE.Value != null)
+                GameObject.Destroy(VARIABLE.Value.gameObject);
+        }
+        btnPressedEffects.Clear();
+        
+        foreach (var VARIABLE in btnEffectsSetsForStoneBox)
+        {
+            if (VARIABLE.Value != null)
+                GameObject.Destroy(VARIABLE.Value.gameObject);
+        }
+        btnEffectsSetsForStoneBox.Clear();
     }
 }

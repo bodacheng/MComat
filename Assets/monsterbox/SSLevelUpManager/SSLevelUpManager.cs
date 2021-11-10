@@ -3,7 +3,6 @@ using dataAccess;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
-using Api.Dto.Model;
 using DG.Tweening;
 
 public partial class SSLevelUpManager : MonoBehaviour

@@ -14,7 +14,9 @@ public class StoneMerge : MainSceneProcess
     {
         yield return ModelShower.target.ShowMyModel(null);
         PageTo.Go(MainSceneStep.StoneMerge);
-        SkillStonesBox.target = PreScene.target._SkillStonesBox_NineSlot;
+        
+        //StoneListSideLayer StoneListSideLayer = StoneListSideLayer.Open();
+        
         StoneMergeManger.target._Canvas.gameObject.SetActive(true);
         TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
         SkillStonesBox.target.CellsFeatureLoad(-1);
