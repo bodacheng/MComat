@@ -93,13 +93,13 @@
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\MailDetailView.cs" />
      <Compile Include="Assets\ResourceLoading\HurtObjectLoad\HurtObjectManager_Local.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\FightingStepLayer.cs" />
-     <Compile Include="Assets\MemberDetail\MemberDetail.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\UnitOptionLayer.cs" />
      <Compile Include="Assets\FightSceneSystem\Nagare\FightOverProcess.cs" />
      <Compile Include="Assets\AppleAuthSample\GameMenuHandler.cs" />
      <Compile Include="Assets\AI\GUI\BehaviorRunnerGUI.cs" />
      <Compile Include="Assets\ResourceLoading\UnitCreator\UnitCreator_Cach.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaLayer.cs" />
-     <Compile Include="Assets\SkillShow\SkillShowLayer.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\SkillShowLayer.cs" />
      <Compile Include="Assets\Arena\ArenaLayer.cs" />
      <Compile Include="Assets\Remote\TeamSet\PosKeySet.cs" />
      <Compile Include="Assets\DynamicBone\Scripts\DynamicBonePlaneCollider.cs" />
@@ -666,6 +666,7 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\SkillEditLayer.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />

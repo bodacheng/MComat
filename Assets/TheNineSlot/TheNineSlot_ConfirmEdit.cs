@@ -10,10 +10,10 @@ namespace mainMenu
     {
         public void UpdateStonesBaseOnSlots(UnitInfo info)
         {
-            SkillSet.SkillEditError valR = target.CheckEditBasedOnCurrent();
+            SkillSet.SkillEditError valR = CheckEditBasedOnCurrent();
             if (valR != SkillSet.SkillEditError.Perfect)
             {
-                target.ValiationWarn(valR, info.id);
+                ValiationWarn(valR, info.id);
                 return;
             }
             List<StoneOfPlayerInfo> equiping = Stones.GetEquipingStones(info.id);
@@ -87,7 +87,7 @@ namespace mainMenu
                 ReadANineAndTwo(info);
                 SkillStonesBox.target.RestFilter();
                 SeletedRender(null);
-                MemberDetail.target.SkillEditConfirmAnimation();
+                SkillEditConfirmAnimation();
 
                 MainSceneLog skillConfirmLog = new MainSceneLog()
                 {
@@ -95,6 +95,20 @@ namespace mainMenu
                     description = "success"
                 };
                 MainSceneLogger.Logs.Add(skillConfirmLog);
+            }
+            
+            void SkillEditConfirmAnimation()
+            {
+                CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(PreScene.target._focusing.r_id);
+                string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
+                EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
+            }
+            
+            Vector3 tempV;
+            Vector3 CaculateShowModelPosition(Vector3 screenP)//这个环节要说有什么问题的话，你那个主界面场景怎么确保总是能把射线找到地面呢。。。
+            {
+                tempV = CameraManager._camera.ViewportToWorldPoint(screenP);
+                return tempV;
             }
 
             void error()

@@ -10,7 +10,7 @@ namespace mainMenu
         // 基于当前九宫格对技能编辑进行合法判断 包括首发技能检测
         public SkillSet.SkillEditError CheckEditBasedOnCurrent()
         {
-            List<string> nineskillids = target.GetCurrentNineSlotAllSkillIds();
+            List<string> nineskillids = GetCurrentNineSlotAllSkillIds();
             return SkillSet.CheckEdit(nineskillids[0], nineskillids[1], nineskillids[2], 
                                         nineskillids[3], nineskillids[4], nineskillids[5],
                                         nineskillids[6], nineskillids[7], nineskillids[8]);

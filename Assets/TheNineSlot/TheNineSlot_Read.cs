@@ -41,7 +41,7 @@ namespace mainMenu
         // 撤销编辑
         public void ResetNineSlot()
         {
-            target.ReadANineAndTwo(MemberDetail.target._focusing);
+            ReadANineAndTwo(PreScene.target._focusing);
         }
     }
 }

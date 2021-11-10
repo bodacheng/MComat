@@ -2,11 +2,11 @@
 using UnityEngine;
 using mainMenu;
 using System.Collections.Generic;
-using dataAccess;
 using UniRx;
 
 public class MonsterEditPage : MainSceneProcess
 {
+    private SkillEditLayer skillEditLayer;
     public static bool loadFinished;
 
     ReactiveProperty<int> itemsLoadFinished = new ReactiveProperty<int>(0);
@@ -18,29 +18,29 @@ public class MonsterEditPage : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         loadFinished = false;
+        
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
             yield break;
         }
-        TheNineSlot.target.NineSlotT.gameObject.SetActive(true);
-        PageTo.Go(MainSceneStep.UnitSkillEdit);
-        SkillStonesBox.target.CellsFeatureLoad(2);
-        SkillEditButtonFeature(MemberDetail.target._focusing);
-        SkillStonesBox.target._skillStoneDetail.Clear();
+        skillEditLayer.NineSlot.NineSlotT.gameObject.SetActive(true);
+        skillEditLayer.StonesBox.CellsFeatureLoad(2);
+        SkillEditButtonFeature(PreScene.target._focusing);
+        skillEditLayer.StonesBox._skillStoneDetail.Clear();
 
         // 没这行的话从技能石升级画面返回的话角色模型加载不出来
-        yield return MemberDetail.target.CharModelRender(UnitInfo.GetCharDataInfo(MemberDetail.target._focusing));
+        //yield return UnitOptionLayer.target.CharModelRender(UnitInfo.GetCharDataInfo(PreScene.target._focusing));
         
         // 表现系
-        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.r_id);
-        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
+        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(PreScene.target._focusing.r_id);
+        skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX2Tab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(), 5f), 
+            ScreenPositionCal.Cal(1, skillEditLayer.StonesBox.fxCamera, skillEditLayer.StonesBox.NormalTab.GetComponent<RectTransform>(), 10f),
+            ScreenPositionCal.Cal(1, skillEditLayer.StonesBox.fxCamera, skillEditLayer.StonesBox.EX1Tab.GetComponent<RectTransform>(), 10f),
+            ScreenPositionCal.Cal(1, skillEditLayer.StonesBox.fxCamera, skillEditLayer.StonesBox.EX2Tab.GetComponent<RectTransform>(), 10f),
+            ScreenPositionCal.Cal(1, skillEditLayer.StonesBox.fxCamera, skillEditLayer.StonesBox.EX3Tab.GetComponent<RectTransform>(), 10f), 
             _CharConfig._zokusei
         );
         loadFinished = true;
@@ -58,7 +58,7 @@ public class MonsterEditPage : MainSceneProcess
         PlayFabReadClient.LoadItems(ItemsLoadFinished);
         
         //StoneListSideLayer = StoneListSideLayer.Open();
-        
+        skillEditLayer = SkillEditLayer.Open();
         
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
@@ -80,9 +80,10 @@ public class MonsterEditPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
+        SkillEditLayer.Close();
         ItemsLoadFinished(0);
         missionWatcher.DisposeAll();
-        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
+        skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
 
     Vector3 screenPos = new Vector3(0.23f, 0.3f, ModelShower._nearClipPlane);
@@ -107,22 +108,22 @@ public class MonsterEditPage : MainSceneProcess
             Debug.Log("到达了没道理到达的地方");
             return;
         }
-        TheNineSlot.target.ReadANineAndTwo(_AccCharInfo);
+        skillEditLayer.NineSlot.ReadANineAndTwo(_AccCharInfo);
         CharConfig _CharInfo = MonstersConfigTable.GetCharConfig(_AccCharInfo.r_id);
-        SkillStonesBox.target.SetFocusingType(_CharInfo.TYPE);
-        SkillStonesBox.target.RestFilter();
-        SkillStonesBox.target.EXTabsFeatureRefresh(false);
+        skillEditLayer.StonesBox.SetFocusingType(_CharInfo.TYPE);
+        skillEditLayer.StonesBox.RestFilter();
+        skillEditLayer.StonesBox.EXTabsFeatureRefresh(false);
         void SkillEditConfirm()
         {
-            TheNineSlot.target.UpdateStonesBaseOnSlots(_AccCharInfo);
+            skillEditLayer.NineSlot.UpdateStonesBaseOnSlots(_AccCharInfo);
         }
         void SkillUpdateValidation()
         {
             // 第一列技能必须有普通技能
-            SkillSet.SkillEditError valR = TheNineSlot.target.CheckEditBasedOnCurrent();
+            SkillSet.SkillEditError valR = skillEditLayer.NineSlot.CheckEditBasedOnCurrent();
             if (valR != SkillSet.SkillEditError.Perfect)
             {
-                TheNineSlot.target.ValiationWarn(valR, MemberDetail.target._focusing.id);
+                skillEditLayer.NineSlot.ValiationWarn(valR, PreScene.target._focusing.id);
                 return;
             }
 
@@ -139,36 +140,36 @@ public class MonsterEditPage : MainSceneProcess
             PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
             popupLayer.ArrangeConfirmWindow(SkillEditConfirm, warn);
         }
-        TheNineSlot.target.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
-        TheNineSlot.target.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
-        TheNineSlot.target.ResetButton.onClick.RemoveAllListeners();
-        TheNineSlot.target.ResetButton.onClick.AddListener(TheNineSlot.target.ResetNineSlot);
+        skillEditLayer.NineSlot.ConfirmSkillChangeButton.onClick.RemoveAllListeners();
+        skillEditLayer.NineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
+        skillEditLayer.NineSlot.ResetButton.onClick.RemoveAllListeners();
+        skillEditLayer.NineSlot.ResetButton.onClick.AddListener(skillEditLayer.NineSlot.ResetNineSlot);
     }
     
     // 技能浏览器程序模式专用
-    public static void SkillShowSpEnterProcess()
+    void SkillShowSpEnterProcess()
     {
         loadFinished = false;
-        TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
-        PageTo.Go(MainSceneStep.UnitSkillEdit);
-        SkillStonesBox.target.CellsFeatureLoad(3);
-        SkillEditButtonFeature_SP(MemberDetail.target._focusing);
+        
+        skillEditLayer.NineSlot.NineSlotT.gameObject.SetActive(false);
+        skillEditLayer.StonesBox.CellsFeatureLoad(3);
+        SkillEditButtonFeature_SP(PreScene.target._focusing);
         
         // 表现系
-        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.r_id);
-        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
+        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(PreScene.target._focusing.r_id);
+        skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX2Tab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(),5f), 
+            ScreenPositionCal.Cal(1, skillEditLayer.StonesBox.fxCamera, skillEditLayer.StonesBox.NormalTab.GetComponent<RectTransform>(),5f),
+            ScreenPositionCal.Cal(1, skillEditLayer.StonesBox.fxCamera, skillEditLayer.StonesBox.EX1Tab.GetComponent<RectTransform>(),5f),
+            ScreenPositionCal.Cal(1, skillEditLayer.StonesBox.fxCamera, skillEditLayer.StonesBox.EX2Tab.GetComponent<RectTransform>(),5f),
+            ScreenPositionCal.Cal(1, skillEditLayer.StonesBox.fxCamera, skillEditLayer.StonesBox.EX3Tab.GetComponent<RectTransform>(),5f), 
             _CharConfig._zokusei
         );
         loadFinished = true;
     }
     
     // 技能浏览器版本
-    static void SkillEditButtonFeature_SP(UnitInfo _AccCharInfo)
+    void SkillEditButtonFeature_SP(UnitInfo _AccCharInfo)
     {
         if (_AccCharInfo == null || _AccCharInfo.r_id == null)
         {
@@ -176,8 +177,8 @@ public class MonsterEditPage : MainSceneProcess
             return;
         }
         CharConfig _CharInfo = MonstersConfigTable.GetCharConfig(_AccCharInfo.r_id);
-        SkillStonesBox.target.SetFocusingType(_CharInfo.TYPE);
-        SkillStonesBox.target.RestFilter();
-        SkillStonesBox.target.EXTabsFeatureRefresh(false);
+        skillEditLayer.StonesBox.SetFocusingType(_CharInfo.TYPE);
+        skillEditLayer.StonesBox.RestFilter();
+        skillEditLayer.StonesBox.EXTabsFeatureRefresh(false);
     }
 }

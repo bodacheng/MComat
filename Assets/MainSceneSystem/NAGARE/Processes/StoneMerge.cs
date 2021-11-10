@@ -18,7 +18,6 @@ public class StoneMerge : MainSceneProcess
         //StoneListSideLayer StoneListSideLayer = StoneListSideLayer.Open();
         
         StoneMergeManger.target._Canvas.gameObject.SetActive(true);
-        TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
         SkillStonesBox.target.CellsFeatureLoad(-1);
         SkillStonesBox.target.RestFilter();
         SkillStonesBox.target.EXTabsFeatureRefresh(false);

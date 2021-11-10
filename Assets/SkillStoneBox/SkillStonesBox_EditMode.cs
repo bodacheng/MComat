@@ -10,15 +10,18 @@ namespace mainMenu
         float lastclicktime;
         public void CellButtonBeheviour_EditCharSkill(StoneCell _SkillStoneCell)
         {
+            SkillEditLayer skillEditLayer;
+            skillEditLayer = SkillEditLayer.Open();
+            
             Button button = _SkillStoneCell.GetComponent<Button>();
             button.onClick.RemoveAllListeners();
             void buttonFeature()
             {
                 if (Time.time - lastclicktime < 0.25f) // double click
                 {
-                    if (TheNineSlot.target.GetFocusingStoneSlot() != null)
+                    if (skillEditLayer.NineSlot.GetFocusingStoneSlot() != null)
                     {
-                        StoneCell.Install(_SkillStoneCell, TheNineSlot.target.GetFocusingStoneSlot()._DragAndDropCell);
+                        StoneCell.Install(_SkillStoneCell, skillEditLayer.NineSlot.GetFocusingStoneSlot()._DragAndDropCell);
                     }
                 }
                 lastclicktime = Time.time;

@@ -12,12 +12,12 @@ public class SkillShowPage : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        UnitInfo unitInfo = UnitInfo.GetCharDataInfo(MemberDetail.target._focusing);
+        UnitInfo unitInfo = UnitInfo.GetCharDataInfo(PreScene.target._focusing);
         SkillShowLayer = UILayerLoader.Load(PreScene.target.T,"SkillShowLayer") as SkillShowLayer;
         SkillShowLayer.fx.transform.SetParent(null);
         SkillShowLayer.SkillsPrintPageRefresh( unitInfo);
         // 表现系
-        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(MemberDetail.target._focusing.r_id);
+        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(PreScene.target._focusing.r_id);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
             ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(), 5f),
@@ -28,7 +28,6 @@ public class SkillShowPage : MainSceneProcess
         );
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
         PageTo.Go(MainSceneStep.UnitSkillShow);
-        TheNineSlot.target.NineSlotT.gameObject.SetActive(false);
     }
     
     public override void ProcessEnd()

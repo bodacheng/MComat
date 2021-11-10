@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 using dataAccess;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace mainMenu
 {
@@ -28,9 +27,10 @@ namespace mainMenu
         [Space(11)] 
         [Header("抽卡特殊相机")] public Camera GotchaCamera;
         
-        [Space(11)]
-        [Header("技能展示器模式切换角色按钮")]
-        public Button charSwitcher;
+        [Space(7)]
+        [Header("Positions For Show")]
+        public Transform MemDetailTargetPos;
+        public Transform MemDetailWatchPos;
         
         [Space(7)]
         [Header("Shader转换器")]
@@ -41,6 +41,14 @@ namespace mainMenu
         public AudioSource audioSource;
 
         public RectTransform stonesTempContainer;
+        
+        public UnitInfo _focusing;
+        //下面这个函数总是建立在monsterbox函数运行在前，而monsterbox会部署好所有展示用模
+        public void SetMemberDetailFocusingChar(string localID)
+        {
+            PreScene.target._focusing = MyMonsters.Get(localID);
+        }
+        
         
         void Awake()
         {
@@ -135,13 +143,13 @@ namespace mainMenu
         {
             UpperInfoBar.target.Refresh();
             HeroIcon.INIFrames();
-            TheNineSlot.target.StartUp();
-            
+
             HurtObjectManager.ConstructDPool();
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
             {
-                MemberDetail.target.SetMemberDetailFocusingChar("1");//确立focusing角色
-                MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
+                UnitOptionLayer unitOptionLayer = UnitOptionLayer.Open();
+                SetMemberDetailFocusingChar("1");//确立focusing角色
+                unitOptionLayer.RefreshMemberDetailPageByFocusingChar();
             }
         }
 
@@ -149,12 +157,10 @@ namespace mainMenu
         {
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
             {
-                charSwitcher.gameObject.SetActive(true);
                 trySwitchToStep(MainSceneStep.UnitSkillEdit, false);
             }
             else
             {
-                charSwitcher.gameObject.SetActive(false);
                 if (ReturnButtonManager.ReturnMissionList.Count > 0)
                 {
                     ReturnButtonManager.AddFeatureToReturnButton();

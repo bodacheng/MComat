@@ -2,12 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
-using UnityEngine.Serialization;
 
 namespace mainMenu
 {
-    public class MemberDetail : MonoBehaviour
-    {        
+    public class UnitOptionLayer : UILayer
+    {
         [Space(7)]
         [Header("美术进程处理器")]
         public SingleThreadProcesser presentationProcessRunner;
@@ -25,23 +24,35 @@ namespace mainMenu
         public Text focusingCharName;
         public Button SkillShowButton, SkillEditButton;
         
-        [Space(7)]
-        [Header("Positions For Show")]
-        public Transform MemDetailTargetPos;
-        public Transform MemDetailWatchPos;
-        
-        public UnitInfo _focusing;
-        
-        public static MemberDetail target;
+        //public static UnitOptionLayer target;
         
         void Awake()
         {
-            target = this;
+            //target = this;
+        }
+        
+        public static UnitOptionLayer Open()
+        {
+            UILayer l = UILayerLoader.Get("UnitOptionLayer");
+            UnitOptionLayer returnValue;
+            if (l != null)
+            {
+                returnValue = l as UnitOptionLayer;
+                return returnValue;
+            }
+            l = UILayerLoader.Load(PreScene.target.T,"UnitOptionLayer") as UnitOptionLayer;
+            returnValue = l as UnitOptionLayer;
+            return returnValue;
+        }
+        
+        public static void Close()
+        {
+            UILayerLoader.Remove("UnitOptionLayer");
         }
         
         public void RefreshMemberDetailPageByFocusingChar()
         {
-            if (_focusing == null || _focusing.id == null || _focusing.r_id == null)
+            if (PreScene.target._focusing == null || PreScene.target._focusing.id == null || PreScene.target._focusing.r_id == null)
             {
                 SkillShowButton.onClick.RemoveAllListeners();
                 SkillEditButton.onClick.RemoveAllListeners();
@@ -49,27 +60,27 @@ namespace mainMenu
                 return;
             }
             
-            CharConfig Ref = MonstersConfigTable.GetCharConfig(_focusing.r_id);
+            CharConfig Ref = MonstersConfigTable.GetCharConfig(PreScene.target._focusing.r_id);
             if (Ref == null)
             {
-                Debug.Log("No this monster:" + _focusing.r_id);
+                Debug.Log("No this monster:" + PreScene.target._focusing.r_id);
                 return;
             }
             BackGroundPS.target.ChangeBGByZokusei(Ref._zokusei);
             
             // mini nineslot show
-            _NineForShow.ShowStones_Acc(_focusing.id);
+            _NineForShow.ShowStones_Acc(PreScene.target._focusing.id);
             
             MemberInfoT.gameObject.SetActive(true);
             // show按钮功能加载
             SkillShowButton.onClick.RemoveAllListeners();
             void step2INI()
             {
-                PreScene.target.mainProcessRunner.RunAsQueued(Step2INIForUIRefresh(_focusing));
+                PreScene.target.mainProcessRunner.RunAsQueued(Step2INIForUIRefresh(PreScene.target._focusing));
             }
             void SkillShow()
             {
-                if (target._focusing.id != null)
+                if (PreScene.target._focusing.id != null)
                     PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillShow, true);
             }
             SkillShowButton.onClick.AddListener(step2INI);
@@ -79,7 +90,7 @@ namespace mainMenu
             SkillEditButton.onClick.RemoveAllListeners();
             void SkillEdit()
             {
-                if (target._focusing.id != null)
+                if (PreScene.target._focusing.id != null)
                     PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit, true);
             }
             SkillEditButton.onClick.AddListener(SkillEdit);
@@ -95,7 +106,7 @@ namespace mainMenu
             //selfdefindtag.onValueChanged.AddListener(delegate { definemycharactertag(); });
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.RunAsQueued(CharModelRender(UnitInfo.GetCharDataInfo(_focusing)));
+            presentationProcessRunner.RunAsQueued(CharModelRender(UnitInfo.GetCharDataInfo(PreScene.target._focusing)));
         }
         
         public IEnumerator CharModelRender(UnitInfo info)
@@ -128,15 +139,7 @@ namespace mainMenu
                 SkillShowSupporter.focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
             }
         }
-
-        // 纯表现系
-        public void SkillEditConfirmAnimation()
-        {
-            CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(_focusing.r_id);
-            string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
-            EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
-        }
-
+        
         // 里面一个非常大的重点是执行了BO_Ani_E模块的初始化
         public IEnumerator Step2INIForUIRefresh(UnitInfo accCharInfo)
         {
@@ -167,18 +170,12 @@ namespace mainMenu
             else
                 yield break;
         }
-
-        //下面这个函数总是建立在monsterbox函数运行在前，而monsterbox会部署好所有展示用模
-        public void SetMemberDetailFocusingChar(string localID)
-        {
-            _focusing = MyMonsters.Get(localID);
-        }
-
+        
         Vector3 tempV;
         Vector3 CaculateShowModelPosition(Vector3 screenP)//这个环节要说有什么问题的话，你那个主界面场景怎么确保总是能把射线找到地面呢。。。
         {
             tempV = CameraManager._camera.ViewportToWorldPoint(screenP);
             return tempV;
-        }        
+        }
     }
 }

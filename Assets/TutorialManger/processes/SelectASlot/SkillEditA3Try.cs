@@ -11,11 +11,12 @@ public class SkillEditA3Try : TutorialProcess
     public override void ProcessEnter()
     {
         PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-        popupLayer.HigtLightRect(TheNineSlot.target.A3DragAndDropCell.transform);
+        //popupLayer.HigtLightRect(TheNineSlot.target.A3DragAndDropCell.transform);
     }
         
     public override bool CanEnterOtherProcess()
     {
-        return TheNineSlot.target.focusingSlot == TheNineSlot.target.A3DragAndDropCell._SkillStoneSlot;
+        return false;
+        //return TheNineSlot.target.focusingSlot == TheNineSlot.target.A3DragAndDropCell._SkillStoneSlot;
     }
 }

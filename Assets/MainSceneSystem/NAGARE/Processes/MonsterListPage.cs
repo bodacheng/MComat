@@ -5,6 +5,9 @@ using dataAccess;
 public class MonsterListPage : MainSceneProcess
 {
     public bool loadFinished;
+
+    private UnitsLayer layer;
+    private UnitOptionLayer unitOptionLayer;
     
     public MonsterListPage()
     {
@@ -27,29 +30,30 @@ public class MonsterListPage : MainSceneProcess
         }
         
         PageTo.Go(MainSceneStep.MonsterList);
-        UnitsLayer layer = UnitsLayer.Open();
+        layer = UnitsLayer.Open();
+        unitOptionLayer = UnitOptionLayer.Open();
         layer.DisplayMonsterIcons(true);
 
         void MonsterIconButton(string instanceId)
         {
             UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
             unitsLayer.Select(instanceId);
-            MemberDetail.target.SetMemberDetailFocusingChar(instanceId);//确立focusing角色
-            MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
+            PreScene.target.SetMemberDetailFocusingChar(instanceId);//确立focusing角色
+            unitOptionLayer.RefreshMemberDetailPageByFocusingChar();
         }
             
         UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
         unitsLayer.SetUnitsIconOnClick(MonsterIconButton);
         
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
-        _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
-        MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
+        _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
+        unitOptionLayer.RefreshMemberDetailPageByFocusingChar();
         loadFinished = true;
     }
     
     public override void ProcessEnd()
     {
-        MemberDetail.target.MemberInfoT.gameObject.SetActive(false);
+        UnitOptionLayer.Close();
         UnitsLayer.Close();
     }
     

@@ -17,10 +17,10 @@ namespace mainMenu
         // 清空角色技能编辑
         public void ClearSkillEquip()
         {
-            if (MemberDetail.target._focusing == null)
+            if (PreScene.target._focusing == null)
                 return;
 
-            UnitInfo info = MemberDetail.target._focusing;
+            UnitInfo info = PreScene.target._focusing;
             StoneOfPlayerInfo originSkillInfo = Stones.GetOriginSkillOfMonster(info.id);
             foreach (SkillStoneSlot _slot in allSlot)
             {
@@ -34,7 +34,7 @@ namespace mainMenu
                     _slot._DragAndDropCell.RemoveToTemp();
                 }
             }
-            target.UpdateStonesBaseOnSlots(info);
+            UpdateStonesBaseOnSlots(info);
         }
     }
 }

@@ -22,7 +22,8 @@ public class SkillEditA1Try : TutorialProcess
     
     public override bool CanEnterOtherProcess()
     {
-        return TheNineSlot.target.focusingSlot == TheNineSlot.target.A1DragAndDropCell._SkillStoneSlot;
+        return false;
+        //return TheNineSlot.target.focusingSlot == TheNineSlot.target.A1DragAndDropCell._SkillStoneSlot;
     }
     
     public override void LocalUpdate()
@@ -32,7 +33,7 @@ public class SkillEditA1Try : TutorialProcess
             if (MonsterEditPage.loadFinished)
             {
                 PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-                popupLayer.HigtLightRect(TheNineSlot.target.A1DragAndDropCell.transform);
+                //popupLayer.HigtLightRect(TheNineSlot.target.A1DragAndDropCell.transform);
                 waitCompleted = true;
             }
         }

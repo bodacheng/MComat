@@ -10,8 +10,6 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public static TheNineSlot target;
-        
         [Space(5)]
         [Header("进程器")]
         public SingleThreadProcesser mainProcessRunner;
@@ -76,7 +74,6 @@ namespace mainMenu
         void Awake()
         {
             _Selected = SelectedFrame;
-            target = this;
         }
         
         public static void SeletedRender(StoneCell cell)
@@ -244,7 +241,7 @@ namespace mainMenu
             RefreshCurrentHpBasedOnNineSlots();
             RefreshNineSlotColors();
             
-            SkillSet.SkillEditError valR = target.CheckEditBasedOnCurrent();
+            SkillSet.SkillEditError valR = CheckEditBasedOnCurrent();
             if (valR != SkillSet.SkillEditError.Perfect)
             {
                 // confirm 按钮颜色变化

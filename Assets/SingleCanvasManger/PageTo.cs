@@ -6,8 +6,6 @@ public class PageTo : MonoBehaviour
 {
     public Canvas
         ShopTop,
-        UnitOption,
-        UnitSkillEdit,
         BoxExceedFixer,
         StoneBoxExpansion,
         StoneMerge;
@@ -19,8 +17,6 @@ public class PageTo : MonoBehaviour
         Dic = new Dictionary<MainSceneStep, Canvas>
         {
             {MainSceneStep.ShopTop, ShopTop},
-            {MainSceneStep.MonsterList, UnitOption},
-            {MainSceneStep.UnitSkillEdit, UnitSkillEdit},
             {MainSceneStep.BoxOverLoadHelper, BoxExceedFixer},
             {MainSceneStep.BoxExpansion, StoneBoxExpansion},
             {MainSceneStep.StoneMerge, StoneMerge}

@@ -20,6 +20,7 @@ public class SkillEditTry_A2Filled : TutorialProcess
     
     public override bool CanEnterOtherProcess()
     {
-        return TheNineSlot.target.A2DragAndDropCell.GetItem() != null;
+        return false;
+        //return TheNineSlot.target.A2DragAndDropCell.GetItem() != null;
     }
 }

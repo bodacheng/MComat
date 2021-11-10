@@ -59,7 +59,7 @@ namespace mainMenu
                         //SkillShowT.gameObject.SetActive(true);
                         SkillShowSupporter.focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.05f);
                         SkillShowSupporter.IfShowingSkill = false;
-                        PreScene.target._CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
+                        PreScene.target._CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
                     }
                 }
             }

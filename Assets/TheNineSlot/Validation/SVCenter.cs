@@ -7,6 +7,8 @@ public static class SVCenter
 {
     public static void StoneRemoveFromSlotToCell(StoneCell sourceCell, StoneCell boxcell)
     {
+        SkillEditLayer skillEditLayer = SkillEditLayer.Open();
+        
         SKStoneItem stone = sourceCell.GetItem();
         if (stone != null && stone.Inherent)
         {
@@ -29,7 +31,7 @@ public static class SVCenter
         
         if (sourceCell.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
-            TheNineSlot.target.NineSlotsStatusRefresh();
+            skillEditLayer.NineSlot.NineSlotsStatusRefresh();
         }
         if (sourceCell.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
@@ -39,6 +41,7 @@ public static class SVCenter
     
     public static void MoveItemFromTo(StoneCell from, StoneCell to)
     {
+        SkillEditLayer skillEditLayer = SkillEditLayer.Open();
         SKStoneItem item = from.GetItem();
         if (item == null)
             return;
@@ -55,7 +58,7 @@ public static class SVCenter
         
         if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || to.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
-            TheNineSlot.target.NineSlotsStatusRefresh();
+            skillEditLayer.NineSlot.NineSlotsStatusRefresh();
         }
         
         if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
@@ -66,6 +69,7 @@ public static class SVCenter
     
     public static void SwapItemFromTo(StoneCell from, StoneCell to)
     {
+        SkillEditLayer skillEditLayer = SkillEditLayer.Open();
         SKStoneItem itemFromCell = from.GetItem();
         if (itemFromCell == null)
             return;
@@ -95,7 +99,7 @@ public static class SVCenter
         
         if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || to.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
-            TheNineSlot.target.NineSlotsStatusRefresh();
+            skillEditLayer.NineSlot.NineSlotsStatusRefresh();
         }
         
         if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
@@ -134,6 +138,7 @@ public static class SVCenter
     // 尝试装载的技能石正被其他角色使用时候，对那个其他角色进行validation检验
     static bool CheckIfOtherCharOkAfterStoneRemove(SKStoneItem item)
     {
+        SkillEditLayer skillEditLayer = SkillEditLayer.Open();
         if (item.Inherent)
         {
             Debug.Log("固有技能无法移出，返回");
@@ -142,10 +147,10 @@ public static class SVCenter
         if (MyMonsters.CheckExist(Stones.Get(item.instanceId).inUsingMonsterOfPlayerId))
         {
             string monsterPlayerID = Stones.Get(item.instanceId).inUsingMonsterOfPlayerId;
-            SkillSet.SkillEditError valR3 = TheNineSlot.target.CheckEditAfterOneStoneRemoved(monsterPlayerID, item._SkillConfig.RECORD_ID);
+            SkillSet.SkillEditError valR3 = skillEditLayer.NineSlot.CheckEditAfterOneStoneRemoved(monsterPlayerID, item._SkillConfig.RECORD_ID);
             if (valR3 != SkillSet.SkillEditError.Perfect)
             {
-                TheNineSlot.target.ValiationWarn(valR3, monsterPlayerID);
+                skillEditLayer.NineSlot.ValiationWarn(valR3, monsterPlayerID);
                 return false;
             }
         }

@@ -16,7 +16,7 @@ public class SelfFightPage : MainSceneProcess
         UnitsLayer layer = UnitsLayer.Open();
         layer.DisplayMonsterIcons(true);
 
-        _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
+        _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
         
         selfFightLayer = UILayerLoader.Load(PreScene.target.T,"SelfFightLayer") as SelfFightLayer;
         selfFightLayer.INI();

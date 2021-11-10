@@ -7,7 +7,7 @@ namespace mainMenu
     public class SkillStoneBoxTabEffectsManager : MonoBehaviour
     {
         IDictionary<Zokusei, ZokuseiStoneTagsGroup> zokuseiButtonEffects = new Dictionary<Zokusei, ZokuseiStoneTagsGroup>();
-        ZokuseiStoneTagsGroup _focusingButtonEffectsGroup;
+        ZokuseiStoneTagsGroup _focusingEffectsGroup;
         GameObject triggerExplosionPretab0;
         ParticleSystem triggerExplosion0;
         
@@ -52,8 +52,8 @@ namespace mainMenu
         
         public async void CloseShowingZokuseiTagEffects()
         {
-            if (_focusingButtonEffectsGroup != null)
-                _focusingButtonEffectsGroup.Close_skillstoneboxtageffects();
+            if (_focusingEffectsGroup != null)
+                _focusingEffectsGroup.Close_skillstoneboxtageffects();
             await UniTask.DelayFrame(100);
             foreach (var VARIABLE in zokuseiButtonEffects)
             {
@@ -63,14 +63,14 @@ namespace mainMenu
         
         public void SwitchZokuseiButtons(Vector3 normaltagpos, Vector3 ex1tagpos, Vector3 ex2tagpos, Vector3 ex3tagpos, Zokusei zokusei)
         {
-            if (_focusingButtonEffectsGroup != null)
+            if (_focusingEffectsGroup != null)
             {
-                _focusingButtonEffectsGroup.Close_skillstoneboxtageffects();
+                _focusingEffectsGroup.Close_skillstoneboxtageffects();
             }
             
             if (zokuseiButtonEffects.ContainsKey(zokusei))
             {
-                _focusingButtonEffectsGroup = zokuseiButtonEffects[zokusei];
+                _focusingEffectsGroup = zokuseiButtonEffects[zokusei];
                 RefreshTagEffect(normaltagpos,0);
                 RefreshTagEffect(ex1tagpos,1);
                 RefreshTagEffect(ex2tagpos,2);
@@ -82,13 +82,13 @@ namespace mainMenu
         
         void RefreshTagEffect(Vector3 pos, int sp_level)//按钮切换也可以在这里做文章
         {
-            _focusingButtonEffectsGroup.RefreshSTBoxEffects(sp_level, pos);
+            _focusingEffectsGroup.RefreshSTBoxEffects(sp_level, pos);
         }
         
         public void SkillButtonExplosion(int splevel, Vector3 targetPOS, Transform parent)
         {
-            ParticleSystem pressedExplosion = _focusingButtonEffectsGroup.btnPressedEffects.ContainsKey(splevel) ?
-            _focusingButtonEffectsGroup.btnPressedEffects[splevel] : triggerExplosion0;
+            ParticleSystem pressedExplosion = _focusingEffectsGroup.btnPressedEffects.ContainsKey(splevel) ?
+            _focusingEffectsGroup.btnPressedEffects[splevel] : triggerExplosion0;
             pressedExplosion.gameObject.name = "UIexplosion" + splevel;
             pressedExplosion.transform.position = targetPOS;
             pressedExplosion.Play();

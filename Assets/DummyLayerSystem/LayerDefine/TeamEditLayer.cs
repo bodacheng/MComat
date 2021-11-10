@@ -30,7 +30,7 @@ public class TeamEditLayer : UILayer
         SkillEditButton.onClick.RemoveAllListeners();
         void SkillEdit()
         {
-            if (MemberDetail.target._focusing.id != null)
+            if (PreScene.target._focusing.id != null)
                 PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit, true);
         }
         SkillEditButton.onClick.AddListener(SkillEdit);
@@ -57,10 +57,10 @@ public class TeamEditLayer : UILayer
             unitsLayer.Select(CharAccId);
         }
 
-        MemberDetail.target.SetMemberDetailFocusingChar(CharAccId);//确立focusing角色
+        PreScene.target.SetMemberDetailFocusingChar(CharAccId);//确立focusing角色
         // mini nineslot show
         _nineForShow.ShowStones_Acc(CharAccId);
-        MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
+        //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
     }
     
     // 修改对象队伍编程
@@ -138,10 +138,10 @@ public class TeamEditLayer : UILayer
                         HeroIcon.Seletedfeature(null, selectedFrame, 200f);
                         break;
                 }
-                MemberDetail.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet(teammode).GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
-                MemberDetail.target.RefreshMemberDetailPageByFocusingChar();
-                if (MemberDetail.target._focusing != null)
-                    _nineForShow.ShowStones_Acc(MemberDetail.target._focusing.id);
+                PreScene.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet(teammode).GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
+                //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
+                if (PreScene.target._focusing != null)
+                    _nineForShow.ShowStones_Acc(PreScene.target._focusing.id);
                 else
                 {
                     // empty slot

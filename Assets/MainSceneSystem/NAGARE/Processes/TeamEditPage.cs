@@ -29,10 +29,10 @@ public class TeamEditPage : MainSceneProcess
     {
         teamEditLayer =  UILayerLoader.Load(PreScene.target.T,"TeamEditLayer") as TeamEditLayer;
         
-        _CameraManager.Assign_SToEMode(MemberDetail.target.MemDetailWatchPos.position, MemberDetail.target.MemDetailTargetPos, 3f, 15f);
+        _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
         teamEditLayer.INITeamPosButtons(teammode);
-        if (MemberDetail.target._focusing != null)
-            teamEditLayer._nineForShow.ShowStones_Acc(MemberDetail.target._focusing.id);
+        if (PreScene.target._focusing != null)
+            teamEditLayer._nineForShow.ShowStones_Acc(PreScene.target._focusing.id);
         
         UnitsLayer layer = UnitsLayer.Open();
         layer.DisplayMonsterIcons(true);
