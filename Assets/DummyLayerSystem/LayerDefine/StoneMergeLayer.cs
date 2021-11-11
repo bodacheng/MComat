@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using mainMenu;
-using Api.Dto.Form;
-using System.Collections;
-using dataAccess;
-using Api.Common;
-using Api.Dto.Model;
 
-public class StoneMergeManger : MonoBehaviour
+public class StoneMergeLayer : UILayer
 {
-    [Space(7)]
-    [Header("对应画布")]
-    public Canvas _Canvas;
+    public SkillStonesBox stoneBox;
+    public Camera fxCamera;
     
     [Space(7)]
     [Header("融合技能槽")]
@@ -21,12 +15,21 @@ public class StoneMergeManger : MonoBehaviour
     public StoneCell cell3;
     public StoneCell cell4;
     public StoneCell cell5;
+    
     List<StoneCell> MaterialSlots;
-    public static StoneMergeManger target;
-
+    
+    public static StoneMergeLayer Open()
+    {
+        return UILayerLoader.Load(PreScene.target.T,"StoneMergeLayer") as StoneMergeLayer;
+    }
+    
+    public static void Close()
+    {
+        UILayerLoader.Remove("StoneMergeLayer");
+    }
+    
     void Awake()
     {
-        target = this;
         MaterialSlots = new List<StoneCell>
         {
             cell1,

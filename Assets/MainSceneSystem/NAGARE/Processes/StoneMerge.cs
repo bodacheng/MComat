@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StoneMerge : MainSceneProcess
 {
+    private StoneMergeLayer stoneMergeLayer;
     public StoneMerge()
     {
         Step = MainSceneStep.StoneMerge;
@@ -12,22 +13,20 @@ public class StoneMerge : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
+        stoneMergeLayer = StoneMergeLayer.Open();
+        
         yield return ModelShower.target.ShowMyModel(null);
-        PageTo.Go(MainSceneStep.StoneMerge);
         
-        //StoneListSideLayer StoneListSideLayer = StoneListSideLayer.Open();
-        
-        StoneMergeManger.target._Canvas.gameObject.SetActive(true);
-        SkillStonesBox.target.CellsFeatureLoad(-1);
-        SkillStonesBox.target.RestFilter();
-        SkillStonesBox.target.EXTabsFeatureRefresh(false);
-        SkillStonesBox.target._skillStoneDetail.Clear();
-        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
+        stoneMergeLayer.stoneBox.CellsFeatureLoad(-1);
+        stoneMergeLayer.stoneBox.RestFilter();
+        stoneMergeLayer.stoneBox.EXTabsFeatureRefresh(false);
+        stoneMergeLayer.stoneBox._skillStoneDetail.Clear();
+        stoneMergeLayer.stoneBox._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX2Tab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(),5f), 
+            ScreenPositionCal.Cal(1, stoneMergeLayer.fxCamera, stoneMergeLayer.stoneBox.NormalTab.GetComponent<RectTransform>(),5f),
+            ScreenPositionCal.Cal(1, stoneMergeLayer.fxCamera, stoneMergeLayer.stoneBox.EX1Tab.GetComponent<RectTransform>(),5f),
+            ScreenPositionCal.Cal(1, stoneMergeLayer.fxCamera, stoneMergeLayer.stoneBox.EX2Tab.GetComponent<RectTransform>(),5f),
+            ScreenPositionCal.Cal(1, stoneMergeLayer.fxCamera, stoneMergeLayer.stoneBox.EX3Tab.GetComponent<RectTransform>(),5f), 
             Zokusei.redMagic
         );
     }
@@ -39,8 +38,8 @@ public class StoneMerge : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        StoneMergeManger.target.ReturnAllMaterialsToBox();
-        StoneMergeManger.target._Canvas.gameObject.SetActive(false);
-        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
+        stoneMergeLayer.ReturnAllMaterialsToBox();
+        stoneMergeLayer.stoneBox._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
+        StoneMergeLayer.Close();
     }
 }

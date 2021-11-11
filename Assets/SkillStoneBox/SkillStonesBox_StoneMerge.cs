@@ -9,6 +9,7 @@ namespace mainMenu
         // 技能浏览器模式
         public void CellButtonBeheviour_StoneMergeMode(StoneCell _SkillStoneCell)
         {
+            StoneMergeLayer stoneMergeLayer = StoneMergeLayer.Open();
             Button button = _SkillStoneCell.GetComponent<Button>();
             if (button != null)
             {
@@ -19,14 +20,14 @@ namespace mainMenu
                 {
                     if (Time.time - lastclicktime < 0.25f) // double click
                     {
-                        StoneMergeManger.target.AddMaterial(_SkillStoneCell);
+                        stoneMergeLayer.AddMaterial(_SkillStoneCell);
                     }
                     lastclicktime = Time.time;
                 }
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(buttonFeature);
                 button.onClick.AddListener(delegate { StoneCell.SeletedRender(_SkillStoneCell, _Selected); });
-                StoneMergeManger.target.AddMSlotBehaviour(_SkillStoneCell);
+                stoneMergeLayer.AddMSlotBehaviour(_SkillStoneCell);
             }
         }
     }

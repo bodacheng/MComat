@@ -31,6 +31,10 @@ public class UILayerLoader
         {"StoneListLayer", "DummyLayerSystem/StoneListLayer"},
         {"SkillEditLayer", "DummyLayerSystem/SkillEditLayer"},
         {"UnitOptionLayer", "DummyLayerSystem/UnitOptionLayer"},
+        {"StoneMergeLayer", "DummyLayerSystem/StoneMergeLayer"},
+        {"ShopTopLayer", "DummyLayerSystem/ShopTopLayer"},
+        {"BoxExpandHelperLayer", "DummyLayerSystem/BoxExpandHelperLayer"},
+        {"BoxOverLoadFixLayer", "DummyLayerSystem/BoxOverLoadFixLayer"}
     };
 
     private static List<UILayer> Queues = new List<UILayer>();

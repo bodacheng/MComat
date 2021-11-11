@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using mainMenu;
-using System.Collections;
-using dataAccess;
-using System;
 
 // 贩卖过多的技能石？ 扩张技能石盒？
-public class BoxExpandHelper : MonoBehaviour
+public class BoxExpandHelperLayer : UILayer
 {
-    public Canvas ExpansionT;
-
     public RectTransform OptionT;
     public RectTransform ResultConfirmT;
     
@@ -17,14 +12,17 @@ public class BoxExpandHelper : MonoBehaviour
     public Button Ten; // 扩张10个格
     public Button ResultConfirmButton;
     public Text Result;
-
-    public static BoxExpandHelper target;
-
-    void Awake()
+    
+    public static BoxExpandHelperLayer Open()
     {
-        target = this;
+        return UILayerLoader.Load(PreScene.target.T,"BoxExpandHelperLayer") as BoxExpandHelperLayer;
     }
-
+    
+    public static void Close()
+    {
+        UILayerLoader.Remove("BoxExpandHelperLayer");
+    }
+    
     public void ArrangeButtonsFeature()
     {
         void expandFive()

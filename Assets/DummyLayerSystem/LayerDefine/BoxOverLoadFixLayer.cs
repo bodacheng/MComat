@@ -2,16 +2,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BoxOverLoadFixManager : MonoBehaviour
+public class BoxOverLoadFixLayer : UILayer
 {
-    public static BoxOverLoadFixManager target;
-    
-    public Canvas T;
     public Button SELL, Expand;
     
-    void Awake()
+    public static BoxOverLoadFixLayer Open()
     {
-        target = this;
+        return UILayerLoader.Load(PreScene.target.T,"BoxOverLoadFixLayer") as BoxOverLoadFixLayer;
+    }
+    
+    public static void Close()
+    {
+        UILayerLoader.Remove("BoxOverLoadFixLayer");
     }
     
     public void ArrangeButtonsFeature()

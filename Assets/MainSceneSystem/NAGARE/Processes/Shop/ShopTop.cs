@@ -2,6 +2,7 @@
 
 public class ShopTop : MainSceneProcess
 {
+    private ShopTopLayer shopTopLayer;
     public ShopTop()
     {
         Step = MainSceneStep.ShopTop;
@@ -10,12 +11,12 @@ public class ShopTop : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        ShopManager.target.ShopTop.gameObject.SetActive(true);
+        shopTopLayer = ShopTopLayer.Open();
     }
     
     public override void ProcessEnd()
     {
-        ShopManager.target.ShopTop.gameObject.SetActive(false);
+        ShopTopLayer.Close();
     }
     
     public override void LocalUpdate()

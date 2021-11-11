@@ -1,8 +1,8 @@
 ﻿using mainMenu;
-using UnityEngine;
 
 public class BoxOverLoadFix : MainSceneProcess
 {
+    private BoxOverLoadFixLayer boxOverLoadFixLayer;
     public BoxOverLoadFix()
     {
         Step = MainSceneStep.BoxOverLoadHelper;
@@ -11,12 +11,12 @@ public class BoxOverLoadFix : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        PageTo.Go(MainSceneStep.BoxOverLoadHelper);
-        BoxOverLoadFixManager.target.ArrangeButtonsFeature();
+        boxOverLoadFixLayer = BoxOverLoadFixLayer.Open();
+        boxOverLoadFixLayer.ArrangeButtonsFeature();
     }
     
     public override void ProcessEnd()
     {
-        BoxOverLoadFixManager.target.T.gameObject.SetActive(false);
+        BoxOverLoadFixLayer.Close();
     }
 }

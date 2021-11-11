@@ -86,7 +86,7 @@
      <Compile Include="Assets\Ultimate Joystick\Scripts\UltimateJoystick.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MonsterListPage.cs" />
      <Compile Include="Assets\AI\Soul\BehaviorRunner_newRunner.cs" />
-     <Compile Include="Assets\ShopManager\BoxExpandHelper.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\BoxExpandHelperLayer.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\StoneMerge.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\SkillInfo.cs" />
      <Compile Include="Assets\ResourceLoading\EffectsLoad\EffectsManager_Cach.cs" />
@@ -144,7 +144,7 @@
      <Compile Include="Assets\ImportantDefinition\Monster\CharConfig.cs" />
      <Compile Include="Assets\Resources\effectsresource\MagicArsenal\Effects\Scripts\MagicBeamScript.cs" />
      <Compile Include="Assets\Singleton\SkillIconsDic\FromResource.cs" />
-     <Compile Include="Assets\技能石合成\StoneMergeManger.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\StoneMergeLayer.cs" />
      <Compile Include="Assets\AI\SkillAIAttrs.cs" />
      <Compile Include="Assets\TeamUIManager\RotationMode\RotationMode_Render.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\SettingsButton.cs" />
@@ -240,7 +240,7 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Panel\ModalWindowManager.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_Utili.cs" />
      <Compile Include="Assets\OldUseless\OldDebugFightingProcess.cs" />
-     <Compile Include="Assets\SkillStoneBox\CellLimit\BoxOverLoadFixManager.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\BoxOverLoadFixLayer.cs" />
      <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\AsteroidController.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiProjectileScript.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkLocalization.cs" />
@@ -595,7 +595,7 @@
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_StreamingAssets.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalk.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Rendering\UIParticleRenderer.cs" />
-     <Compile Include="Assets\ShopManager\ShopManager.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\ShopTopLayer.cs" />
      <Compile Include="Assets\TutorialManger\processes\OpenSkillEdit.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerBackground.cs" />
      <Compile Include="Assets\AI\AI_states\states\Knock_Off_State.cs" />
@@ -648,6 +648,7 @@
      <Compile Include="Assets\AI\Soul\BehaviorRunner_Form.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Outline.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Rendering\BlurManager.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\SkillEditLayer.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Other\QualityManager.cs" />
      <Compile Include="Assets\BOWeaponSystem\HittingSystemDefinitions\HittingSystemDefinitions.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkCinematic\RPGTalkCinematicBehaviour.cs" />
@@ -666,7 +667,6 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
-     <Compile Include="Assets\DummyLayerSystem\LayerDefine\SkillEditLayer.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />

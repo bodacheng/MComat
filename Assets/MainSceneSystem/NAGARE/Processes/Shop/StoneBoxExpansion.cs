@@ -2,23 +2,25 @@
 
 public class StoneBoxExpansion : MainSceneProcess
 {
+    private BoxExpandHelperLayer boxExpandHelperLayer;
+    
     public StoneBoxExpansion()
     {
         Step = MainSceneStep.BoxExpansion;
         EelementsInherit(PreScene.target);
     }
-
+    
     public override void ProcessEnter()
     {
-        BoxExpandHelper.target.ExpansionT.gameObject.SetActive(true);
-        BoxExpandHelper.target.ArrangeButtonsFeature();
+        boxExpandHelperLayer = BoxExpandHelperLayer.Open();
+        boxExpandHelperLayer.ArrangeButtonsFeature();
     }
     
     public override void ProcessEnd()
     {
-        BoxExpandHelper.target.ExpansionT.gameObject.SetActive(false);    
+        BoxExpandHelperLayer.Close();
     }
-            
+    
     public override void LocalUpdate()
     {    
     }
