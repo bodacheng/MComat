@@ -28,21 +28,21 @@ namespace mainMenu
             ZokuseiStoneTagsGroup blue = new ZokuseiStoneTagsGroup();
             ZokuseiStoneTagsGroup green = new ZokuseiStoneTagsGroup();
             ZokuseiStoneTagsGroup dark = new ZokuseiStoneTagsGroup();
-            ZokuseiStoneTagsGroup _light = new ZokuseiStoneTagsGroup();
+            ZokuseiStoneTagsGroup light = new ZokuseiStoneTagsGroup();
             ZokuseiStoneTagsGroup _default = new ZokuseiStoneTagsGroup();
             
             red.INI_forSkillStoneBox(Zokusei.redMagic,transform);
             blue.INI_forSkillStoneBox(Zokusei.blueMagic,transform);
             green.INI_forSkillStoneBox(Zokusei.greenMagic,transform);
             dark.INI_forSkillStoneBox(Zokusei.darkMagic,transform);
-            _light.INI_forSkillStoneBox(Zokusei.lightMagic,transform);
+            light.INI_forSkillStoneBox(Zokusei.lightMagic,transform);
             _default.INI_forSkillStoneBox(Zokusei.Null,transform);
             
             zokuseiButtonEffects.Add(Zokusei.redMagic,red);
             zokuseiButtonEffects.Add(Zokusei.blueMagic,blue);
             zokuseiButtonEffects.Add(Zokusei.greenMagic,green);
             zokuseiButtonEffects.Add(Zokusei.darkMagic,dark);
-            zokuseiButtonEffects.Add(Zokusei.lightMagic,_light);
+            zokuseiButtonEffects.Add(Zokusei.lightMagic,light);
             zokuseiButtonEffects.Add(Zokusei.Null,_default);
             
             triggerExplosionPretab0 = Resources.Load("essentialUIElements/buttonEffects/lightMagic/explosion0", typeof(GameObject)) as GameObject;

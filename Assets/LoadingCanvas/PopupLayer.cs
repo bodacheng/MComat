@@ -60,6 +60,11 @@ public partial class PopupLayer : UILayer {
         {
             a -= 0.05f;
             await Task.Delay(1);
+            if (bigCurtain == null)
+            {
+                Close();
+                return;
+            }
             bigCurtain.color = new Color(bigCurtain.color.r, bigCurtain.color.g, bigCurtain.color.b, a);
         }
         Close();

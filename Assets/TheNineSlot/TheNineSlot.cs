@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -12,23 +11,19 @@ namespace mainMenu
     {
         [Space(5)]
         [Header("进程器")]
-        public SingleThreadProcesser mainProcessRunner;
-        
-        [Space(5)]
-        [Header("几个重要RectTransform")]
-        public RectTransform NineSlotT;
+        [SerializeField] SingleThreadProcesser mainProcessRunner;
         
         [Space(5)]
         [Header("CurrentHp")]
-        public Text _HP;
+        [SerializeField] Text _HP;
         
         [Space(5)]
         [Header("Validation Warning")]
-        public Text _ValiWarn;
+        [SerializeField] Text _ValiWarn;
         
         [Space(5)]
         [Header("九格")]
-        public StoneCell
+        [SerializeField] StoneCell
         A1DragAndDropCell, A2DragAndDropCell, A3DragAndDropCell,
         B1DragAndDropCell, B2DragAndDropCell, B3DragAndDropCell,
         C1DragAndDropCell, C2DragAndDropCell, C3DragAndDropCell;
@@ -55,8 +50,7 @@ namespace mainMenu
         [Space(5)]
         [Header("选中框")]
         public GameObject SelectedFrame;
-        public static GameObject _Selected;
-        
+
         [Space(5)]
         [Header("UIManager 就是有个UI插件自带的一套东西")]
         public UIManager uIManager;// 实时控制确认按钮颜色
@@ -71,25 +65,20 @@ namespace mainMenu
         float pressingSeconds;
         SingleAssignmentDisposable pressCount;
         
-        void Awake()
-        {
-            _Selected = SelectedFrame;
-        }
-        
-        public static void SeletedRender(StoneCell cell)
+        public void SeletedRender(StoneCell cell)
         {
             if (cell == null)
             {
-                _Selected.SetActive(false);
+                SelectedFrame.SetActive(false);
                 return;
             }
-            _Selected.SetActive(true);
-            _Selected.transform.SetParent(cell.GetComponent<RectTransform>());
-            _Selected.transform.localPosition = Vector3.zero;
-            _Selected.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-            _Selected.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-            _Selected.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-            _Selected.gameObject.SetActive(true);
+            SelectedFrame.SetActive(true);
+            SelectedFrame.transform.SetParent(cell.GetComponent<RectTransform>());
+            SelectedFrame.transform.localPosition = Vector3.zero;
+            SelectedFrame.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+            SelectedFrame.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+            SelectedFrame.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+            SelectedFrame.gameObject.SetActive(true);
         }
         
         public SkillStoneSlot GetFocusingStoneSlot()
@@ -138,7 +127,7 @@ namespace mainMenu
                     {
                         pressStart = true;
                         PressGoToLevelUpPage(skillStoneSlot._DragAndDropCell);
-                        StoneCell.SeletedRender(skillStoneSlot._DragAndDropCell, _Selected);
+                        StoneCell.SeletedRender(skillStoneSlot._DragAndDropCell, SelectedFrame);
                         buttonFeature();
                     }
 
@@ -188,9 +177,8 @@ namespace mainMenu
         
         public void StartUp()
         {
-            NineSlotT.gameObject.SetActive(false);
             SeletedRender(null);
-
+            
             A1Slot = new SkillStoneSlot(1, A1DragAndDropCell);
             A2Slot = new SkillStoneSlot(2, A2DragAndDropCell);
             A3Slot = new SkillStoneSlot(3, A3DragAndDropCell);

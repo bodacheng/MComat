@@ -125,9 +125,7 @@ namespace mainMenu
 
             CloudScript.UpdateSkillEdit(ToEditStones, () => sucess(ToEditStones), error);
         }
-
-
-
+        
         // 下面这个貌似还是有地方用。。。先别删
         IEnumerator RemoveStone(string stoneID)
         {

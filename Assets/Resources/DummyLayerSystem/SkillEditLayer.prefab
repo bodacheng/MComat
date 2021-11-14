@@ -256,7 +256,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainProcessRunner: {fileID: 2523835562998395634}
-  NineSlotT: {fileID: 2523835563065999395}
   _HP: {fileID: 2523835562735659410}
   _ValiWarn: {fileID: 2523835563039455519}
   A1DragAndDropCell: {fileID: 2523835563764239828}
@@ -6624,9 +6623,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d9799e9b8c3049768fc8c19a5334618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charSwitcher: {fileID: 2523835563921883631}
   NineSlot: {fileID: 2523835562718301726}
   StonesBox: {fileID: 2523835564590309945}
+  unitSwitcher: {fileID: 2523835563921883631}
 --- !u!1 &2523835564227256514
 GameObject:
   m_ObjectHideFlags: 0

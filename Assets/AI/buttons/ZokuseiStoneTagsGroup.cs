@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class ZokuseiStoneTagsGroup
 {
-    public Zokusei zokusei;
-    
     //技能石盒分类系成员
     public IDictionary<int, ParticleSystem> btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
     public IDictionary<int, ParticleSystem> btnPressedEffects = new Dictionary<int, ParticleSystem>();
@@ -20,7 +18,6 @@ public class ZokuseiStoneTagsGroup
     
     public void INI_forSkillStoneBox(Zokusei zokusei,Transform effectObjectParent)
     {
-        this.zokusei = zokusei;
         btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
         
         GameObject normaltab = CreateOneButtonIcon(zokusei, 0);
@@ -40,7 +37,7 @@ public class ZokuseiStoneTagsGroup
 
         LoadPressedEffect(zokusei, effectObjectParent);
     }
-
+    
     public static GameObject CreateOneButtonIcon(Zokusei zokusei, int SpLevel)
     {
         string buttoneffectspath = FightGlobalSetting.EffectPathDefine(zokusei);
@@ -66,15 +63,15 @@ public class ZokuseiStoneTagsGroup
     {
         string buttoneffectspath = FightGlobalSetting.EffectPathDefine(zokusei);
         
-        GameObject triggerExplosionPretab0 = Resources.Load("essentialUIElements/buttonEffects/" + buttoneffectspath + "/explosion0", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab1 = Resources.Load("essentialUIElements/buttonEffects/" + buttoneffectspath + "/explosion1", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab2 = Resources.Load("essentialUIElements/buttonEffects/" + buttoneffectspath + "/explosion2", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab3 = Resources.Load("essentialUIElements/buttonEffects/" + buttoneffectspath + "/explosion3", typeof(GameObject)) as GameObject;
+        GameObject triggerExplosionPrefab0 = Resources.Load("essentialUIElements/buttonEffects/" + buttoneffectspath + "/explosion0", typeof(GameObject)) as GameObject;
+        GameObject triggerExplosionPrefab1 = Resources.Load("essentialUIElements/buttonEffects/" + buttoneffectspath + "/explosion1", typeof(GameObject)) as GameObject;
+        GameObject triggerExplosionPrefab2 = Resources.Load("essentialUIElements/buttonEffects/" + buttoneffectspath + "/explosion2", typeof(GameObject)) as GameObject;
+        GameObject triggerExplosionPrefab3 = Resources.Load("essentialUIElements/buttonEffects/" + buttoneffectspath + "/explosion3", typeof(GameObject)) as GameObject;
         
-        ParticleSystem triggerExplosion0 = Object.Instantiate(triggerExplosionPretab0).GetComponent<ParticleSystem>();
-        ParticleSystem triggerExplosion1 = Object.Instantiate(triggerExplosionPretab1).GetComponent<ParticleSystem>();
-        ParticleSystem triggerExplosion2 = Object.Instantiate(triggerExplosionPretab2).GetComponent<ParticleSystem>();
-        ParticleSystem triggerExplosion3 = Object.Instantiate(triggerExplosionPretab3).GetComponent<ParticleSystem>();
+        ParticleSystem triggerExplosion0 = Object.Instantiate(triggerExplosionPrefab0).GetComponent<ParticleSystem>();
+        ParticleSystem triggerExplosion1 = Object.Instantiate(triggerExplosionPrefab1).GetComponent<ParticleSystem>();
+        ParticleSystem triggerExplosion2 = Object.Instantiate(triggerExplosionPrefab2).GetComponent<ParticleSystem>();
+        ParticleSystem triggerExplosion3 = Object.Instantiate(triggerExplosionPrefab3).GetComponent<ParticleSystem>();
         
         triggerExplosion0.transform.SetParent(T);
         triggerExplosion1.transform.SetParent(T);
