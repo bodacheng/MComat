@@ -89,9 +89,20 @@ public class ZokuseiStoneTagsGroup
         ParticleSystem p = btnEffectsSetsForStoneBox[eX];
         p.gameObject.name = "UIExTag"+ eX;
         exTagEffects.Add(eX,p);
-        
         p.transform.SetParent(null);// 如果不这样的话会位置计算错误
+        Debug.Log(pos);
         p.gameObject.transform.position = pos;
+        p.Play(true);
+    }
+    
+    public void RefreshSTBoxEffects(int eX, Transform pos)
+    {
+        ParticleSystem p = btnEffectsSetsForStoneBox[eX];
+        p.gameObject.name = "UIExTag"+ eX;
+        exTagEffects.Add(eX,p);
+        Debug.Log(pos);
+        p.gameObject.transform.SetParent(pos);
+        p.transform.localPosition = new Vector3(0, 0, -30);
         p.Play(true);
     }
 

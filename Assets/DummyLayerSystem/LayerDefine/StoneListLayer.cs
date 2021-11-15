@@ -6,6 +6,10 @@ public class StoneListLayer : UILayer
     public SkillStonesBox box;
     public SSLevelUpManager ssLevelUper;
     
+    [Space(10)] 
+    [Header("FX Camera")] 
+    public Camera fxCamera;
+    
     public static StoneListLayer Open()
     {
         UILayer l = UILayerLoader.Get("StoneListLayer");
@@ -18,10 +22,23 @@ public class StoneListLayer : UILayer
         }
         l = UILayerLoader.Load(PreScene.target.T,"StoneListLayer") as StoneListLayer;
         returnValue = l as StoneListLayer;
+        SkillStonesBox.target = returnValue.box;
         returnValue.box.GenerateCells();
         returnValue.box._SkillStoneBoxTabEffectsManager.StartUp();
+        returnValue.box.IniExTabs(returnValue.fxCamera);
+        returnValue.box.EXTabsFeatureRefresh(true);
+        returnValue.box.RestFilter();
+        returnValue.box._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
+        (
+            returnValue.box.NormalTab.transform,
+            returnValue.box.EX1Tab.transform,
+            returnValue.box.EX2Tab.transform,
+            returnValue.box.EX3Tab.transform, 
+            Zokusei.blueMagic
+        );
+        
         returnValue.box._skillStoneDetail.Clear();
-        SkillStonesBox.target = returnValue.box;
+        
         return returnValue;
     }
 
@@ -33,7 +50,7 @@ public class StoneListLayer : UILayer
         {
             returnValue = l as StoneListLayer;
             SkillStonesBox.target = returnValue.box;
-            GameObject.Destroy(returnValue.box.fxCamera);
+            GameObject.Destroy(returnValue.fxCamera);
             returnValue.box._skillStoneDetail.Clear();
             returnValue.box._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
         }

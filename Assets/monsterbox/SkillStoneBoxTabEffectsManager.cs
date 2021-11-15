@@ -80,7 +80,31 @@ namespace mainMenu
             }
         }
         
+        public void SwitchZokuseiButtons(Transform normaltagpos, Transform ex1tagpos, Transform ex2tagpos, Transform ex3tagpos, Zokusei zokusei)
+        {
+            if (_focusingEffectsGroup != null)
+            {
+                _focusingEffectsGroup.Close_skillstoneboxtageffects();
+            }
+            
+            if (zokuseiButtonEffects.ContainsKey(zokusei))
+            {
+                _focusingEffectsGroup = zokuseiButtonEffects[zokusei];
+                RefreshTagEffect(normaltagpos,0);
+                RefreshTagEffect(ex1tagpos,1);
+                RefreshTagEffect(ex2tagpos,2);
+                RefreshTagEffect(ex3tagpos,3);
+            }else{
+                Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
+            }
+        }
+        
         void RefreshTagEffect(Vector3 pos, int sp_level)//按钮切换也可以在这里做文章
+        {
+            _focusingEffectsGroup.RefreshSTBoxEffects(sp_level, pos);
+        }
+        
+        void RefreshTagEffect(Transform pos, int sp_level)//按钮切换也可以在这里做文章
         {
             _focusingEffectsGroup.RefreshSTBoxEffects(sp_level, pos);
         }

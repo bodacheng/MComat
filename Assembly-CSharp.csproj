@@ -463,7 +463,6 @@
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Shop\ShopTop.cs" />
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\OutsideDataLink.cs" />
      <Compile Include="Assets\AI\Soul\SkillSet\SkillSet_Tools.cs" />
-     <Compile Include="Assets\TheNineSlot\TheNineSlot_RandomAdd.cs" />
      <Compile Include="Assets\CachLogic\DownLoad_CMM.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkLocalizationString.cs" />
      <Compile Include="Assets\DynamicStarrySky\Demos\Space\Scripts\SpinPlanet.cs" />

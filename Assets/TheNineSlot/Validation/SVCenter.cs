@@ -15,7 +15,7 @@ public static class SVCenter
             Debug.Log("固有技能无法移出，返回");
             return;
         }
-                
+        
         // 如果把技能石从9宫格拖到技能背包的一个有石头的格子上，那么就直接把拖动中的技能石先从九宫格拔下来，接着让技能背包自动排序一下
         if (boxcell.GetItem() != null)
         {
@@ -50,7 +50,7 @@ public static class SVCenter
             if (!CheckIfOtherCharOkAfterStoneRemove(item))
                 return;
             SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(item._SkillConfig.SP_LEVEL, 
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, to.GetComponent<RectTransform>(), 3), 
+            ScreenPositionCal.Cal(1, skillEditLayer.fxCamera, to.GetComponent<RectTransform>(), 3), 
             SkillStonesBox.target._SkillStoneBoxTabEffectsManager.transform);
         }
         to.AddItem(item);
@@ -80,7 +80,7 @@ public static class SVCenter
             if (!CheckIfOtherCharOkAfterStoneRemove(itemFromCell))
                 return;
             SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(itemFromCell._SkillConfig.SP_LEVEL, 
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, to.GetComponent<RectTransform>(), 3), 
+            ScreenPositionCal.Cal(1, skillEditLayer.fxCamera, to.GetComponent<RectTransform>(), 3), 
             SkillStonesBox.target._SkillStoneBoxTabEffectsManager.transform);
         }
         

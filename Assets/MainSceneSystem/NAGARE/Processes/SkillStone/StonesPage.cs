@@ -75,17 +75,15 @@ public class StonesPage : MainSceneProcess
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
             return;
         }
-        stoneListLayer.box.EXTabsFeatureRefresh(true);
-        stoneListLayer.box.RestFilter();
-        stoneListLayer.box.fxCamera.transform.SetParent(null);
-        stoneListLayer.box._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
-        (
-    ScreenPositionCal.Cal2(2, stoneListLayer.box.fxCamera, stoneListLayer.box.NormalTab.GetComponent<RectTransform>(), 5f),
-    ScreenPositionCal.Cal2(2, stoneListLayer.box.fxCamera, stoneListLayer.box.EX1Tab.GetComponent<RectTransform>(), 5f),
-    ScreenPositionCal.Cal2(2, stoneListLayer.box.fxCamera, stoneListLayer.box.EX2Tab.GetComponent<RectTransform>(), 5f),
-    ScreenPositionCal.Cal2(2, stoneListLayer.box.fxCamera, stoneListLayer.box.EX3Tab.GetComponent<RectTransform>(), 5f), 
-            Zokusei.blueMagic
-        );
+        //stoneListLayer.fxCamera.transform.SetParent(null);
+    //     stoneListLayer.box._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
+    //     (
+    // ScreenPositionCal.Cal2(2, stoneListLayer.fxCamera, stoneListLayer.box.NormalTab.GetComponent<RectTransform>(), 5f),
+    // ScreenPositionCal.Cal2(2, stoneListLayer.fxCamera, stoneListLayer.box.EX1Tab.GetComponent<RectTransform>(), 5f),
+    // ScreenPositionCal.Cal2(2, stoneListLayer.fxCamera, stoneListLayer.box.EX2Tab.GetComponent<RectTransform>(), 5f),
+    // ScreenPositionCal.Cal2(2, stoneListLayer.fxCamera, stoneListLayer.box.EX3Tab.GetComponent<RectTransform>(), 5f), 
+    //         Zokusei.blueMagic
+    //     );
         popupLayer.LightUp();
     }
     

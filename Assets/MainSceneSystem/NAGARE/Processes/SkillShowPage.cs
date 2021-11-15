@@ -20,10 +20,10 @@ public class SkillShowPage : MainSceneProcess
         CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(PreScene.target._focusing.r_id);
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX2Tab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(), 5f), 
+            ScreenPositionCal.Cal(1, SkillShowLayer.fx, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(), 5f),
+            ScreenPositionCal.Cal(1, SkillShowLayer.fx, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(), 5f),
+            ScreenPositionCal.Cal(1, SkillShowLayer.fx, SkillStonesBox.target.EX2Tab.GetComponent<RectTransform>(), 5f),
+            ScreenPositionCal.Cal(1, SkillShowLayer.fx, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(), 5f), 
             _CharConfig._zokusei
         );
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();

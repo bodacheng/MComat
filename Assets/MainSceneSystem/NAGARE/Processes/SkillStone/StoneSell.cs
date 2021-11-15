@@ -22,10 +22,10 @@ public class StoneSell : MainSceneProcess
         EnterProcess();
         StoneListLayer.box._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX2Tab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(), 5f), 
+            ScreenPositionCal.Cal(1, StoneListLayer.fxCamera, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(), 5f),
+            ScreenPositionCal.Cal(1, StoneListLayer.fxCamera, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(), 5f),
+            ScreenPositionCal.Cal(1, StoneListLayer.fxCamera, SkillStonesBox.target.EX2Tab.GetComponent<RectTransform>(), 5f),
+            ScreenPositionCal.Cal(1, StoneListLayer.fxCamera, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(), 5f), 
             Zokusei.Null
         );
     }

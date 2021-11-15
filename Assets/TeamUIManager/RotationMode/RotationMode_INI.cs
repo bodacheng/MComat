@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UniRx;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 
 namespace FightScene

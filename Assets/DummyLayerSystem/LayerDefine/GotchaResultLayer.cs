@@ -11,6 +11,10 @@ public class GotchaResultLayer : UILayer
 {
     public NineForShow NineForShow;
     
+    [Space(10)] 
+    [Header("FX Camera")] 
+    [SerializeField] Camera fxCamera;
+    
     #region 动画的跳过以及加速
     public Button Skip;
     public Button SpeedOnce;
@@ -71,15 +75,15 @@ public class GotchaResultLayer : UILayer
     void PosDecide()
     {
         // 星星落入格子
-        Vector3 A1screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.A1T.GetComponent<RectTransform>(), 5f);
-        Vector3 A2screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.A2T.GetComponent<RectTransform>(), 5f);
-        Vector3 A3screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.A3T.GetComponent<RectTransform>(), 5f);
-        Vector3 B1screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.B1T.GetComponent<RectTransform>(), 5f);
-        Vector3 B2screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.B2T.GetComponent<RectTransform>(), 5f);
-        Vector3 B3screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.B3T.GetComponent<RectTransform>(), 5f);
-        Vector3 C1screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.C1T.GetComponent<RectTransform>(), 5f);
-        Vector3 C2screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.C2T.GetComponent<RectTransform>(), 5f);
-        Vector3 C3screenpos = ScreenPositionCal.Cal(1, SkillStonesBox.target.fxCamera, NineForShow.C3T.GetComponent<RectTransform>(), 5f);
+        Vector3 A1screenpos = ScreenPositionCal.Cal(1, fxCamera, NineForShow.A1T.GetComponent<RectTransform>(), 5f);
+        Vector3 A2screenpos = ScreenPositionCal.Cal(1, fxCamera, NineForShow.A2T.GetComponent<RectTransform>(), 5f);
+        Vector3 A3screenpos = ScreenPositionCal.Cal(1, fxCamera, NineForShow.A3T.GetComponent<RectTransform>(), 5f);
+        Vector3 B1screenpos = ScreenPositionCal.Cal(1, fxCamera, NineForShow.B1T.GetComponent<RectTransform>(), 5f);
+        Vector3 B2screenpos = ScreenPositionCal.Cal(1, fxCamera, NineForShow.B2T.GetComponent<RectTransform>(), 5f);
+        Vector3 B3screenpos = ScreenPositionCal.Cal(1, fxCamera, NineForShow.B3T.GetComponent<RectTransform>(), 5f);
+        Vector3 C1screenpos = ScreenPositionCal.Cal(1, fxCamera, NineForShow.C1T.GetComponent<RectTransform>(), 5f);
+        Vector3 C2screenpos = ScreenPositionCal.Cal(1, fxCamera, NineForShow.C2T.GetComponent<RectTransform>(), 5f);
+        Vector3 C3screenpos = ScreenPositionCal.Cal(1, fxCamera, NineForShow.C3T.GetComponent<RectTransform>(), 5f);
         nineslotScreenPos.Clear();
         nineslotScreenPos.Add(A1screenpos);
         nineslotScreenPos.Add(A2screenpos);

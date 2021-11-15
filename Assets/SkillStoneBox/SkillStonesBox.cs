@@ -39,9 +39,6 @@ namespace mainMenu
         [Header("技能石详细")]
         public SkillStoneDetail _skillStoneDetail;
         
-        [Header("fxcamera")]
-        public Camera fxCamera;
-        
         string focusingtype = "human";
         int focusingExType;
         public static SkillStonesBox target;
@@ -69,35 +66,58 @@ namespace mainMenu
         {
             return focusingExType;
         }
+
+        public void IniExTabs(Camera fxCamera)
+        {
+            NormalTab.onClick.AddListener(() =>
+            {
+                NormalTabFeature(ScreenPositionCal.Cal(1, fxCamera, NormalTab.GetComponent<RectTransform>(), 3));
+            });
+            
+            EX1Tab.onClick.AddListener(() =>
+            {
+                EX1TabFeature(ScreenPositionCal.Cal(1, fxCamera, EX1Tab.GetComponent<RectTransform>(), 3));
+            });
+        
+            EX2Tab.onClick.AddListener(() =>
+            {
+                EX2TabFeature(ScreenPositionCal.Cal(1, fxCamera, EX2Tab.GetComponent<RectTransform>(), 3));
+            });
+        
+            EX3Tab.onClick.AddListener(() =>
+            {
+                EX2TabFeature(ScreenPositionCal.Cal(1, fxCamera, EX3Tab.GetComponent<RectTransform>(), 3));
+            });
+        }
         
         // Button feature
-        public void NormalTabFeature(GameObject self)
+        void NormalTabFeature(Vector3 screenPos)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(0, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(0, screenPos, _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 0;
             RestFilter();
         }
         
         // Button feature
-        public void EX1TabFeature(GameObject self)
+        void EX1TabFeature(Vector3 screenPos)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(1, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(1, screenPos, _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 1;
             RestFilter();
         }
         
         // Button feature
-        public void EX2TabFeature(GameObject self)
+        void EX2TabFeature(Vector3 screenPos)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(2, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(2, screenPos, _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 2;
             RestFilter();
         }
         
         // Button feature
-        public void EX3TabFeature(GameObject self)
+        void EX3TabFeature(Vector3 screenPos)
         {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(3, ScreenPositionCal.Cal(1, fxCamera, self.GetComponent<RectTransform>(), 3), _SkillStoneBoxTabEffectsManager.transform);
+            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(3, screenPos, _SkillStoneBoxTabEffectsManager.transform);
             focusingExType = 3;
             RestFilter();
         }

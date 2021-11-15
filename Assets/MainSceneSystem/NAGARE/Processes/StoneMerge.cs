@@ -21,6 +21,7 @@ public class StoneMerge : MainSceneProcess
         stoneMergeLayer.stoneBox.RestFilter();
         stoneMergeLayer.stoneBox.EXTabsFeatureRefresh(false);
         stoneMergeLayer.stoneBox._skillStoneDetail.Clear();
+        stoneMergeLayer.stoneBox.IniExTabs(stoneMergeLayer.fxCamera);
         stoneMergeLayer.stoneBox._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
             ScreenPositionCal.Cal(1, stoneMergeLayer.fxCamera, stoneMergeLayer.stoneBox.NormalTab.GetComponent<RectTransform>(),5f),
