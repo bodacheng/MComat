@@ -33,10 +33,10 @@ public class ModelShower : MonoBehaviour
         target = this;
         pinchZoom.camera = _CameraManager.GetComponent<Camera>();
     }
-
-    public IEnumerator ShowMyModel(string localID)
+    
+    public IEnumerator ShowMyModel(string instanceID)
     {
-        UnitInfo targetInfo = MyMonsters.Get(localID);
+        UnitInfo targetInfo = MyMonsters.Get(instanceID);
         IEnumerator enumerator = ShowModel(targetInfo != null ? targetInfo.r_id : null);
         yield return enumerator;
         yield return enumerator.Current;
@@ -145,15 +145,15 @@ public class ModelShower : MonoBehaviour
             }
         }    
     }
-
+    
     Vector3 tempV;
-    public Vector3 CaculateShowModelPosition(Vector3 screenP)
+    Vector3 CaculateShowModelPosition(Vector3 screenP)
     {
         tempV = CameraManager._camera.ViewportToWorldPoint(screenP);
         return tempV;
     }
-    
-    public Vector3 CaculateShowModelViewportPoint(Vector3 now)
+
+    Vector3 CaculateShowModelViewportPoint(Vector3 now)
     {
         tempV = CameraManager._camera.WorldToScreenPoint(now);
         return tempV;

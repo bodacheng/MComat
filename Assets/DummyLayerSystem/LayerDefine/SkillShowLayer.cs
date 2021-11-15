@@ -50,7 +50,7 @@ namespace mainMenu
         
         void LateUpdate()
         {
-            SkillsPrintOutLateUpdate();
+            SkillShowSupporter.SkillsPrintOutLateUpdate();
         }
         
         // 清理技能迁移表示符
@@ -61,24 +61,6 @@ namespace mainMenu
                 Destroy(_particle);
             }
             floatingMarks.Clear();
-        }
-        
-        void SkillsPrintOutLateUpdate()
-        {
-            if (SkillShowSupporter.focusingC != null)
-            {
-                if (SkillShowSupporter.focusingC.Animation_Manger != null && SkillShowSupporter.focusingC.WholeT.gameObject.activeSelf)
-                {
-                    if (SkillShowSupporter.focusingC.Animation_Manger.GetBool("in_transition") == false && 
-                        SkillShowSupporter.focusingC.Animation_Manger.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
-                    {
-                        //SkillShowT.gameObject.SetActive(true);
-                        SkillShowSupporter.focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.05f);
-                        SkillShowSupporter.IfShowingSkill = false;
-                        PreScene.target._CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
-                    }
-                }
-            }
         }
         
         // 列表变字典

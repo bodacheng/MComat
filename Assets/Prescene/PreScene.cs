@@ -20,12 +20,10 @@ namespace mainMenu
         [Space(11)]
         [Header("主相机")]
         public CameraManager _CameraManager;
-
-        [Space(11)] 
-        [Header("FX")] public Camera FxCamera;
         
         [Space(11)] 
-        [Header("抽卡特殊相机")] public Camera GotchaCamera;
+        [Header("抽卡特殊相机")] 
+        public Camera GotchaCamera;
         
         [Space(7)]
         [Header("Positions For Show")]

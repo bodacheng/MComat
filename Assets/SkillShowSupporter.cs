@@ -1,4 +1,5 @@
 using System.Collections;
+using mainMenu;
 
 public static class SkillShowSupporter
 {
@@ -26,6 +27,23 @@ public static class SkillShowSupporter
             }
             IfShowingSkill = true;
             focusingC.Animation_Manger.AnimationTrigger(keyname, true, 0.05f);
+        }
+    }
+    
+    public static void SkillsPrintOutLateUpdate()
+    {
+        if (focusingC != null)
+        {
+            if (focusingC.Animation_Manger != null && focusingC.WholeT.gameObject.activeSelf)
+            {
+                if (focusingC.Animation_Manger.GetBool("in_transition") == false && 
+                    focusingC.Animation_Manger.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
+                {
+                    focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.05f);
+                    IfShowingSkill = false;
+                    PreScene.target._CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
+                }
+            }
         }
     }
 }

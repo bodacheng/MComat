@@ -41,7 +41,6 @@ public class MonsterEditPage : MainSceneProcess
         
         //StoneListSideLayer = StoneListSideLayer.Open();
         
-        
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
                 itemsLoadFinished
@@ -63,7 +62,6 @@ public class MonsterEditPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        GameObject.Destroy(skillEditLayer.fxCamera);
         SkillEditLayer.Close();
         ItemsLoadFinished(0);
         missionWatcher.DisposeAll();
@@ -73,6 +71,8 @@ public class MonsterEditPage : MainSceneProcess
     Vector3 screenPos = new Vector3(0.23f, 0.3f, ModelShower._nearClipPlane);
     public override void LocalUpdate()
     {
+        SkillShowSupporter.SkillsPrintOutLateUpdate();
+        
         if (!SkillShowSupporter.IfShowingSkill)
         {
             ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
