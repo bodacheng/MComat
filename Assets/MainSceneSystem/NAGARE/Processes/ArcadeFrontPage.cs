@@ -29,7 +29,6 @@ public class ArcadeFrontPage : MainSceneProcess
         }else{
             Debug.Log("巨大错误。玩家关卡进度值不对应任何关卡");
         }
-        PageTo.Go(MainSceneStep.ArcadeFront);
         loadFinished = true;
     }
     

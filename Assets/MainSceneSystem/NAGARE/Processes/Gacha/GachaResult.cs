@@ -9,8 +9,6 @@ public class GachaResult : MainSceneProcess
     
     public IEnumerator EnterProcess()
     {
-        PageTo.Go(MainSceneStep.GotchaResult);
-
         GotchaResultLayer gotchaResultLayer = GotchaResultLayer.Open();
         
         CameraManager._camera.gameObject.SetActive(false);

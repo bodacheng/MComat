@@ -29,7 +29,6 @@ public class MonsterListPage : MainSceneProcess
                 break;
         }
         
-        PageTo.Go(MainSceneStep.MonsterList);
         layer = UnitsLayer.Open();
         unitOptionLayer = UnitOptionLayer.Open();
         layer.DisplayMonsterIcons(true);

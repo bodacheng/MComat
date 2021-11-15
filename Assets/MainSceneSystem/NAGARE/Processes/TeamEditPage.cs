@@ -37,7 +37,6 @@ public class TeamEditPage : MainSceneProcess
         UnitsLayer layer = UnitsLayer.Open();
         layer.DisplayMonsterIcons(true);
         layer.SetUnitsIconOnClick((x) => teamEditLayer.MonsterIconButton(x, teamMode));
-        PageTo.Go(MainSceneStep.TeamEditFront);
     }
     
     public override void ProcessEnter<T>(T mode)

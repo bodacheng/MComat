@@ -27,7 +27,6 @@ public class SkillShowPage : MainSceneProcess
             _CharConfig._zokusei
         );
         SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
-        PageTo.Go(MainSceneStep.UnitSkillShow);
     }
     
     public override void ProcessEnd()

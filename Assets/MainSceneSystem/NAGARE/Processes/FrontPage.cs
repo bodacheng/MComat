@@ -55,8 +55,6 @@ public class FrontPage : MainSceneProcess
     MainTop mainTop;
     public IEnumerator EnterProcess()
     {
-        PageTo.Go(MainSceneStep.FrontPage);
-
         mainTop = UILayerLoader.Load(PreScene.target.T, "MainTop") as MainTop;
         mainTop.Initialise(PreScene.target);
 

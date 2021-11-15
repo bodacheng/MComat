@@ -372,7 +372,6 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerImage.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\Arcade.cs" />
      <Compile Include="Assets\Monsterbox\SSLevelUpManager\SSLevelUpManager.cs" />
-     <Compile Include="Assets\SingleCanvasManger\PageTo.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Other\ScrollForMore.cs" />
      <Compile Include="Assets\POS_Sys\E_Damage.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiBeamScript.cs" />
