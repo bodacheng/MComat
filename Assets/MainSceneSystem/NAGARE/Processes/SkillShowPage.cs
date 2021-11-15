@@ -13,13 +13,14 @@ public class SkillShowPage : MainSceneProcess
     public override void ProcessEnter()
     {
         UnitInfo unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
-        SkillShowLayer = UILayerLoader.Load(PreScene.target.T,"SkillShowLayer") as SkillShowLayer;
+        SkillShowLayer = SkillShowLayer.Open();
         SkillShowLayer.SkillsPrintPageRefresh( unitInfo);
     }
     
     public override void ProcessEnd()
     {
         SkillShowLayer.ClearRenderPs();
+        SkillShowLayer.EffectsManager.CloseShowingZokuseiTagEffects();
         UILayerLoader.Remove("SkillShowLayer");
     }
 

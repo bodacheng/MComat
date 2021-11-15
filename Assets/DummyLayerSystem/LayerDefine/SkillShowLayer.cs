@@ -28,7 +28,7 @@ namespace mainMenu
 
         public Camera fx;
 
-        [SerializeField] SkillStoneBoxTabEffectsManager EffectsManager;
+        public SkillStoneBoxTabEffectsManager EffectsManager;
         
         List<GameObject> floatingMarks = new List<GameObject>();
         IDictionary<string, Button> StateButtonDic = new Dictionary<string, Button>();

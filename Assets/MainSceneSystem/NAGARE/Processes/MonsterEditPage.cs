@@ -14,13 +14,13 @@ public class MonsterEditPage : MainSceneProcess
         itemsLoadFinished.Value = value;
     }
 
-    public IEnumerator EnterProcess()
+    void EnterProcess()
     {
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
-            yield break;
+            return;
         }
         skillEditLayer = SkillEditLayer.Open();
         
@@ -53,7 +53,7 @@ public class MonsterEditPage : MainSceneProcess
                 }
                 else
                 {
-                    mainProcessRunner.RunAsQueued(EnterProcess());
+                    EnterProcess();
                 }
             },
             () => { Debug.Log("failed"); }
