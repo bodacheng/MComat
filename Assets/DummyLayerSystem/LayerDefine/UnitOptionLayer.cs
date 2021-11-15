@@ -106,7 +106,7 @@ namespace mainMenu
             //selfdefindtag.onValueChanged.AddListener(delegate { definemycharactertag(); });
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.RunAsQueued(CharModelRender(UnitInfo.GetCharDataInfo(PreScene.target._focusing)));
+            presentationProcessRunner.RunAsQueued(CharModelRender(UnitInfo.GetUnitInfo(PreScene.target._focusing)));
         }
         
         public IEnumerator CharModelRender(UnitInfo info)
@@ -160,7 +160,7 @@ namespace mainMenu
                 }
 
                 CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(accCharInfo.r_id);
-                UnitInfo characterDataInfo = UnitInfo.GetCharDataInfo(accCharInfo);
+                UnitInfo characterDataInfo = UnitInfo.GetUnitInfo(accCharInfo);
                 yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.TYPE, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
                 yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.TYPE, characterDataInfo.set, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);
                 

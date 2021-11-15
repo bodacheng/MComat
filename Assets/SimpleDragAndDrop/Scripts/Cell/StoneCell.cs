@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using mainMenu;
 using DG.Tweening;
-using Cysharp.Threading.Tasks;
+using dataAccess;
 
 /// <summary>
 /// Every item's cell must contain this script
@@ -80,11 +80,38 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         {
             if (gameObject.activeSelf)
             {
-                SkillStonesBox.target.ShowUsingChar(myDadItem, _charIcon);
+                ShowUsingChar(myDadItem, _charIcon);
             }
         }
     }
-        
+    
+    // Show Character icon using this SkillStone
+    public void ShowUsingChar(SKStoneItem Item, HeroIcon targetIcon)
+    {
+        if (Item == null || Item.instanceId == null)
+        {
+            targetIcon.gameObject.SetActive(false);
+            return;
+        }
+        StoneOfPlayerInfo SSInfo = Stones.Get(Item.instanceId);
+        if (SSInfo == null || SSInfo.inUsingMonsterOfPlayerId == null)
+        {
+            targetIcon.gameObject.SetActive(false);
+            return;
+        }
+            
+        UnitInfo _one = MyMonsters.Get(SSInfo.inUsingMonsterOfPlayerId);
+        if (_one == null)
+        {
+            targetIcon.gameObject.SetActive(false);
+            return;
+        }
+        targetIcon.gameObject.SetActive(true);
+        CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.r_id);
+        targetIcon.ChangeIcon(charConfig == null ? null : MonsterIconDic.Get(charConfig.RECORD_ID),
+            charConfig == null ? Zokusei.Null : charConfig._zokusei);
+    }
+    
     /// <summary>
     /// Manualy add item into this cell
     /// </summary>

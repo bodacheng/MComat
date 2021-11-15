@@ -85,7 +85,8 @@ namespace mainMenu
             {
                 Stones.RefreshLocalStoneParams(ee);
                 ReadANineAndTwo(info);
-                SkillStonesBox.target.RestFilter();
+                SkillEditLayer skillEditLayer = SkillEditLayer.Open();
+                skillEditLayer.StonesBox.RestFilter();
                 SeletedRender(null);
                 SkillEditConfirmAnimation();
 

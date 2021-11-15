@@ -60,7 +60,7 @@ public class PosKeySet
                 UnitInfo getUnitDetailModel = MyMonsters.Get(PosNumsWithLocalKeys[i].instanceID);
                 if (getUnitDetailModel != null)
                 {
-                    UnitInfo unitInfo = UnitInfo.GetCharDataInfo(getUnitDetailModel);
+                    UnitInfo unitInfo = UnitInfo.GetUnitInfo(getUnitDetailModel);
                     multiDictionary.Set(0, PosNumsWithLocalKeys[i].posNum, unitInfo);
                 }
             }

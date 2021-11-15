@@ -6,13 +6,14 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
 {
     public void ReturnStoneToBox()
     {
+        SkillEditLayer skillEditLayer = SkillEditLayer.Open();
         UpdateMyItem();
         if (myDadItem)
         {
             //如果尝试归还背包的技能石必杀等级与显示中的一致，则找个当前的空格给放进去就可以。
-            if (myDadItem._SkillConfig.SP_LEVEL == SkillStonesBox.target.GetFocusingExType())
+            if (myDadItem._SkillConfig.SP_LEVEL == skillEditLayer.StonesBox.GetFocusingExType())
             {
-                StoneCell dragAndDropCell = SkillStonesBox.target.GetFirstEmptyCell();
+                StoneCell dragAndDropCell = skillEditLayer.StonesBox.GetFirstEmptyCell();
                 if (dragAndDropCell != null)
                 {
                     dragAndDropCell.AddItem(myDadItem);

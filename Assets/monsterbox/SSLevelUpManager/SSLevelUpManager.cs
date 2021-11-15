@@ -150,14 +150,14 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     public void OpenLevelUpPage(string skillstoneofplayer)
     {
+        StoneListLayer stoneListLayer = StoneListLayer.Open();
         stoneOfPlayerId = skillstoneofplayer;
-        
         focusingSSD.RefreshInfo(stoneOfPlayerId);
         SKStoneItem targetStone = Stones.GetRenderModel(stoneOfPlayerId);
         targetStone._using = true;
-        SkillStonesBox.target.RestFilter();
-        SkillStonesBox.target.rares = new List<int> { 0, 1, 2 };
-        SkillStonesBox.target.CellsFeatureLoad(0);
+        stoneListLayer.box.RestFilter();
+        stoneListLayer.box.rares = new List<int> { 0, 1, 2 };
+        stoneListLayer.box.CellsFeatureLoad(0);
         levelUpPageRect.gameObject.SetActive(true);
         RefreshSkillLevelUpModule();
         StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(false);
@@ -165,14 +165,15 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     public void CloseLevelUpPage()
     {
-        SkillStonesBox.target.rares = new List<int> { 0, 1, 2 ,3, 4, 5};
+        StoneListLayer stoneListLayer = StoneListLayer.Open();
+        stoneListLayer.box.rares = new List<int> { 0, 1, 2 ,3, 4, 5};
         SKStoneItem targetStone = Stones.GetRenderModel(stoneOfPlayerId);
         targetStone._using = false;
-        SkillStonesBox.target.RestFilter();
+        stoneListLayer.box.RestFilter();
         SKStoneItem.SeletedRender(targetStone, SkillStonesBox._Selected);
         focusingSSD.RefreshInfo(stoneOfPlayerId);
         ReturnAllMaterialsToBox();
-        SkillStonesBox.target.CellsFeatureLoad(1);
+        stoneListLayer.box.CellsFeatureLoad(1);
         levelUpPageRect.gameObject.SetActive(false);
         CurrentGoldExaust = 0;
         RefreshSkillLevelUpModule();

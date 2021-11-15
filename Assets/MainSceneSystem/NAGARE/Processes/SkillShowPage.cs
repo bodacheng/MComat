@@ -12,27 +12,14 @@ public class SkillShowPage : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        UnitInfo unitInfo = UnitInfo.GetCharDataInfo(PreScene.target._focusing);
+        UnitInfo unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
         SkillShowLayer = UILayerLoader.Load(PreScene.target.T,"SkillShowLayer") as SkillShowLayer;
-        SkillShowLayer.fx.transform.SetParent(null);
         SkillShowLayer.SkillsPrintPageRefresh( unitInfo);
-        // 表现系
-        CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(PreScene.target._focusing.r_id);
-        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
-        (
-            ScreenPositionCal.Cal(1, SkillShowLayer.fx, SkillStonesBox.target.NormalTab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, SkillShowLayer.fx, SkillStonesBox.target.EX1Tab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, SkillShowLayer.fx, SkillStonesBox.target.EX2Tab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, SkillShowLayer.fx, SkillStonesBox.target.EX3Tab.GetComponent<RectTransform>(), 5f), 
-            _CharConfig._zokusei
-        );
-        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
     
     public override void ProcessEnd()
     {
         SkillShowLayer.ClearRenderPs();
-        GameObject.Destroy(SkillShowLayer.fx.gameObject);
         UILayerLoader.Remove("SkillShowLayer");
     }
 

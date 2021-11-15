@@ -32,13 +32,11 @@ public class SkillEditLayer : UILayer
         if (l != null)
         {
             returnValue = l as SkillEditLayer;
-            SkillStonesBox.target = returnValue.StonesBox;
             return returnValue;
         }
         
         l = UILayerLoader.Load(PreScene.target.T,"SkillEditLayer") as SkillEditLayer;
         returnValue = l as SkillEditLayer;
-        SkillStonesBox.target = returnValue.StonesBox;
         returnValue.NineSlot.StartUp();
         returnValue.StonesBox.GenerateCells();
         returnValue.StonesBox._SkillStoneBoxTabEffectsManager.StartUp();
@@ -179,7 +177,7 @@ public class SkillEditLayer : UILayer
             AddRandomStoneToSlot(info.id, 8, targetSkillSet.c2);
             AddRandomStoneToSlot(info.id, 9, targetSkillSet.c3);
             NineSlot.NineSlotsStatusRefresh();
-            SkillStonesBox.target.RestFilter();
+            StonesBox.RestFilter();
         }
     }
     
@@ -203,7 +201,7 @@ public class SkillEditLayer : UILayer
         AddRandomStoneToSlot(info.id, 8, targetSkillSet.c2);
         AddRandomStoneToSlot(info.id, 9, targetSkillSet.c3);
         NineSlot.NineSlotsStatusRefresh();
-        SkillStonesBox.target.RestFilter();
+        StonesBox.RestFilter();
     }
     
     void ForceClearAll()
@@ -242,8 +240,8 @@ public class SkillEditLayer : UILayer
         }
 
         SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillid);
-        SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(skillConfig.SP_LEVEL,
+        StonesBox._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(skillConfig.SP_LEVEL,
             ScreenPositionCal.Cal(1, fxCamera, NineSlot.allSlot[targetSlot - 1]._DragAndDropCell.GetComponent<RectTransform>(), 3),
-            SkillStonesBox.target._SkillStoneBoxTabEffectsManager.transform);
+            StonesBox._SkillStoneBoxTabEffectsManager.transform);
     }
 }

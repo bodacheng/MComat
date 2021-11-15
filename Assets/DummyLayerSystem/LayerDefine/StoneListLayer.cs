@@ -17,12 +17,10 @@ public class StoneListLayer : UILayer
         if (l != null)
         {
             returnValue = l as StoneListLayer;
-            SkillStonesBox.target = returnValue.box;
             return returnValue;
         }
         l = UILayerLoader.Load(PreScene.target.T,"StoneListLayer") as StoneListLayer;
         returnValue = l as StoneListLayer;
-        SkillStonesBox.target = returnValue.box;
         returnValue.box.GenerateCells();
         returnValue.box._SkillStoneBoxTabEffectsManager.StartUp();
         returnValue.box.IniExTabs(returnValue.fxCamera);
@@ -49,7 +47,6 @@ public class StoneListLayer : UILayer
         if (l != null)
         {
             returnValue = l as StoneListLayer;
-            SkillStonesBox.target = returnValue.box;
             GameObject.Destroy(returnValue.fxCamera);
             returnValue.box._skillStoneDetail.Clear();
             returnValue.box._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();

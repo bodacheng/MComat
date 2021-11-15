@@ -31,7 +31,7 @@ namespace dataAccess
                 UnitInfo myfighter = MyMonsters.Get(PosKeySet.GetMonsterOfPlayerIdOnPos(i));
                 if (myfighter != null)
                 {
-                    UnitInfo unitInfo = UnitInfo.GetCharDataInfo(myfighter);
+                    UnitInfo unitInfo = UnitInfo.GetUnitInfo(myfighter);
                     teamMembers.Set(0, i, unitInfo);
                 }
                 else

@@ -33,22 +33,22 @@ public class UnitInfo
         this.set = _NineAndTwo;
     }
 
-    public static UnitInfo GetCharDataInfo(UnitInfo accountCharInfo)
+    public static UnitInfo GetUnitInfo(UnitInfo accUnitInfo)
     {
         try
         {
             global::UnitInfo unitInfo = new global::UnitInfo
             {
-                r_id = accountCharInfo.r_id,
-                id = accountCharInfo.id
+                r_id = accUnitInfo.r_id,
+                id = accUnitInfo.id
             };
 
-            List<StoneOfPlayerInfo> targets = Stones.GetEquipingStones(accountCharInfo.id);
+            List<StoneOfPlayerInfo> targets = Stones.GetEquipingStones(accUnitInfo.id);
             SkillSet set = new SkillSet();
-            CharConfig _CharConfigInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(accountCharInfo.r_id));
+            CharConfig _CharConfigInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(accUnitInfo.r_id));
             if (_CharConfigInfo == null)
             {
-                Debug.Log("角色定义信息错误。monsterId：" + accountCharInfo.r_id);
+                Debug.Log("角色定义信息错误。monsterId：" + accUnitInfo.r_id);
                 return null;
             }
             for (int i = 0; i < targets.Count; i++)

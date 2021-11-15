@@ -88,33 +88,6 @@ namespace mainMenu
             return null;
         }
         
-        // Show Character icon using this SkillStone
-        public void ShowUsingChar(SKStoneItem Item, HeroIcon targetIcon)
-        {
-            if (Item == null || Item.instanceId == null)
-            {
-                targetIcon.gameObject.SetActive(false);
-                return;
-            }
-            StoneOfPlayerInfo SSInfo = Stones.Get(Item.instanceId);
-            if (SSInfo == null || SSInfo.inUsingMonsterOfPlayerId == null)
-            {
-                targetIcon.gameObject.SetActive(false);
-                return;
-            }
-            
-            UnitInfo _one = MyMonsters.Get(SSInfo.inUsingMonsterOfPlayerId);
-            if (_one == null)
-            {
-                targetIcon.gameObject.SetActive(false);
-                return;
-            }
-            targetIcon.gameObject.SetActive(true);
-            CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.r_id);
-            targetIcon.ChangeIcon(charConfig == null ? null : MonsterIconDic.Get(charConfig.RECORD_ID),
-            charConfig == null ? Zokusei.Null : charConfig._zokusei);
-        }
-        
         public static List<string> CheckIfExceedCellLimit()
         {
             List<string> error_massegas = new List<string>();

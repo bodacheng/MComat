@@ -27,10 +27,26 @@ namespace mainMenu
         [SerializeField] SkillStoneDetail _skillStoneDetail;
 
         public Camera fx;
+
+        [SerializeField] SkillStoneBoxTabEffectsManager EffectsManager;
         
         List<GameObject> floatingMarks = new List<GameObject>();
         IDictionary<string, Button> StateButtonDic = new Dictionary<string, Button>();
         IDictionary<string, SkillEntity> analysisSKList = new Dictionary<string, SkillEntity>();
+        
+        public static SkillShowLayer Open()
+        {
+            UILayer l = UILayerLoader.Get("SkillShowLayer");
+            SkillShowLayer returnValue;
+            if (l != null)
+            {
+                returnValue = l as SkillShowLayer;
+                return returnValue;
+            }
+            l = UILayerLoader.Load(PreScene.target.T,"SkillShowLayer") as SkillShowLayer;
+            returnValue = l as SkillShowLayer;
+            return returnValue;
+        }
         
         void LateUpdate()
         {
@@ -108,7 +124,7 @@ namespace mainMenu
                 SkillShowSupporter.IfShowingSkill = true;
                 
                 // 这个就是强行把技能盒子附带的那个点击触效给拿过来用了。
-                SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(_SE.SP_LEVEL, _button.transform.position, transform);
+                EffectsManager.SkillButtonExplosion(_SE.SP_LEVEL, _button.transform.position, transform);
             }
             _button.onClick.AddListener(showSkillInfo);
         }
@@ -168,6 +184,7 @@ namespace mainMenu
         // 打印出技能显示画面
         public void SkillScriptReader(SkillSet nineAndTwo, Zokusei zokusei)
         {
+            EffectsManager.StartUp(zokusei);
             DestroyFloatingMarks();
             ClearRenderPs();
             _skillStoneDetail.RefreshInfo((SkillEntity)null);

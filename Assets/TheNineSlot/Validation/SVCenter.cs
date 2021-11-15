@@ -49,9 +49,9 @@ public static class SVCenter
         {
             if (!CheckIfOtherCharOkAfterStoneRemove(item))
                 return;
-            SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(item._SkillConfig.SP_LEVEL, 
+            skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(item._SkillConfig.SP_LEVEL, 
             ScreenPositionCal.Cal(1, skillEditLayer.fxCamera, to.GetComponent<RectTransform>(), 3), 
-            SkillStonesBox.target._SkillStoneBoxTabEffectsManager.transform);
+            skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.transform);
         }
         to.AddItem(item);
         from.UpdateMyItem();
@@ -79,9 +79,9 @@ public static class SVCenter
         {
             if (!CheckIfOtherCharOkAfterStoneRemove(itemFromCell))
                 return;
-            SkillStonesBox.target._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(itemFromCell._SkillConfig.SP_LEVEL, 
+            skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(itemFromCell._SkillConfig.SP_LEVEL, 
             ScreenPositionCal.Cal(1, skillEditLayer.fxCamera, to.GetComponent<RectTransform>(), 3), 
-            SkillStonesBox.target._SkillStoneBoxTabEffectsManager.transform);
+            skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.transform);
         }
         
         // 把技能石从技能槽拖回技能石盒，如果是固有技能石，连移动也不允许

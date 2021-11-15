@@ -41,7 +41,7 @@ namespace mainMenu
         
         string focusingtype = "human";
         int focusingExType;
-        public static SkillStonesBox target;
+        //public static SkillStonesBox target;
 
         void Awake()
         {
@@ -51,7 +51,7 @@ namespace mainMenu
 
         void Start()
         {
-            target = this;
+            //target = this;
         }
 
         public string GetFocusingType()
