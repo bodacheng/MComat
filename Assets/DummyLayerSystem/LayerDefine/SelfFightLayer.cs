@@ -8,9 +8,12 @@ namespace mainMenu
 {
     public class SelfFightLayer : UILayer
     {
+        [Header("Mode Buttons")] 
+        [SerializeField] Button RotationModeBtn, MultiModeBtn, TestModeBtn; 
+        
         [Space(7)]
         [Header("模式选中框")]
-        [SerializeField] GameObject RFrame, MFrame, TFrame;
+        [SerializeField] GameObject ModeFrame;
 
         [Space(7)]
         [Header("选中框")]
@@ -43,6 +46,22 @@ namespace mainMenu
         PosKeySet _team1PosKeySet_R = new PosKeySet();
         PosKeySet _team2PosKeySet_R = new PosKeySet();
         
+        public void INI()
+        {
+            stage = ScriptableObject.CreateInstance<FightInfo>();
+            stage.BattleGroundID = 0;
+            
+            IniMultiRaidModeUnitIcons(new List<HeroIcon> { team1back, team1left, team1front, team1right }, Team.player1);
+            IniMultiRaidModeUnitIcons(new List<HeroIcon> { team2back, team2left, team2front, team2right }, Team.player2);
+
+            IniRotationModeUnitIcons(new List<HeroIcon> { team11_R, team12_R, team13_R }, Team.player1);
+            IniRotationModeUnitIcons(new List<HeroIcon> { team21_R, team22_R, team23_R }, Team.player2);
+            
+            RotationModeBtn.onClick.AddListener(SwitchToRotationMode);
+            MultiModeBtn.onClick.AddListener(SwitchToMultiRaidMode);
+            TestModeBtn.onClick.AddListener(SwitchToTestMode);
+        }
+        
         public void Clear()
         {
             foreach (HeroIcon Icon in teamButtonDic_M.GetValues())
@@ -66,18 +85,22 @@ namespace mainMenu
             HeroIcon.Seletedfeature(null, selectedFrame, 200f);
         }
 
+        void ModeSelect(Transform t)
+        {
+            ModeFrame.transform.SetParent(t);
+            ModeFrame.transform.localPosition = Vector3.zero;
+        }
+
         public void SwitchToMultiRaidMode()
         {
             MuitiRaidTeam1T.gameObject.SetActive(true);
             MuitiRaidTeam2T.gameObject.SetActive(true);
             RotationTeam1T.gameObject.SetActive(false);
             RotationTeam2T.gameObject.SetActive(false);
-            RFrame.gameObject.SetActive(false);
-            MFrame.gameObject.SetActive(true);
-            TFrame.gameObject.SetActive(false);
             stage.SetEventType(FightEventType.Self);
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.multiraid;
+            ModeSelect(MultiModeBtn.transform);
         }
         
         public void SwitchToRotationMode()
@@ -86,12 +109,10 @@ namespace mainMenu
             MuitiRaidTeam2T.gameObject.SetActive(false);
             RotationTeam1T.gameObject.SetActive(true);
             RotationTeam2T.gameObject.SetActive(true);
-            RFrame.gameObject.SetActive(true);
-            MFrame.gameObject.SetActive(false);
-            TFrame.gameObject.SetActive(false);
             stage.SetEventType(FightEventType.Self);
             stage.Team1Mode = TeamMode.rotation;
             stage.Team2Mode = TeamMode.rotation;
+            ModeSelect(RotationModeBtn.transform);
         }
         
         public void SwitchToTestMode()
@@ -100,12 +121,10 @@ namespace mainMenu
             MuitiRaidTeam2T.gameObject.SetActive(true);
             RotationTeam1T.gameObject.SetActive(false);
             RotationTeam2T.gameObject.SetActive(false);
-            RFrame.gameObject.SetActive(false);
-            MFrame.gameObject.SetActive(false);
-            TFrame.gameObject.SetActive(true);
             stage.SetEventType(FightEventType.Test);
             stage.Team1Mode = TeamMode.multiraid;
             stage.Team2Mode = TeamMode.multiraid;
+            ModeSelect(TestModeBtn.transform);
         }
         
         public void FightStart()
@@ -134,7 +153,7 @@ namespace mainMenu
             {
                 UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
                 unitsLayer.Select(instanceID);
-                MonsterIConButton(instanceID);
+                UnitIconBtn(instanceID);
             }
             void Trigger(string instanceID)
             {
@@ -146,7 +165,7 @@ namespace mainMenu
         }
         #endregion
         
-        void MonsterIConButton(string instanceID)
+        void UnitIconBtn(string instanceID)
         {
             UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
             if (focusingPosNum == -1)
@@ -295,19 +314,7 @@ namespace mainMenu
         {
             HeroIcon.Seletedfeature(charIcon, selectedFrame, 110f);
         }
-
-        public void INI()
-        {
-            stage = ScriptableObject.CreateInstance<FightInfo>();
-            stage.BattleGroundID = 0;
-            
-            IniMultiRaidModeUnitIcons(new List<HeroIcon> { team1back, team1left, team1front, team1right }, Team.player1);
-            IniMultiRaidModeUnitIcons(new List<HeroIcon> { team2back, team2left, team2front, team2right }, Team.player2);
-
-            IniRotationModeUnitIcons(new List<HeroIcon> { team11_R, team12_R, team13_R }, Team.player1);
-            IniRotationModeUnitIcons(new List<HeroIcon> { team21_R, team22_R, team23_R }, Team.player2);
-        }
-
+        
         void OnTeamPosBtn(Team team, int pos)
         {
             focusingTeam = team;
@@ -317,7 +324,7 @@ namespace mainMenu
             
             if (unitsBoxSelect != null)
             {
-                MonsterIConButton(unitsBoxSelect);
+                UnitIconBtn(unitsBoxSelect);
             }
         }
     }
