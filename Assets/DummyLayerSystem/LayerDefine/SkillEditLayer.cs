@@ -1,4 +1,4 @@
-using System;
+using UnityEngine.EventSystems;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +6,7 @@ using dataAccess;
 using System.Collections.Generic;
 using System.Linq;
 using Skill;
+using UniRx;
 
 public class SkillEditLayer : UILayer
 {
@@ -43,7 +44,13 @@ public class SkillEditLayer : UILayer
         
         // 表现系
         CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(PreScene.target._focusing.r_id);
-        returnValue.StonesBox.CellsFeatureLoad(2);
+        if (FightGlobalSetting._programMode != FightGlobalSetting.ProgramMode.skillShow)
+            returnValue.StonesBox.AddFeatureToCells(returnValue.StoneCellFeature);
+        else
+        {
+            returnValue.StonesBox.AddFeatureToCells(returnValue.CellButtonBeheviour_SKillShowMode);
+        }
+        
         returnValue.StonesBox.IniExTabs(returnValue.fxCamera);
         returnValue.StonesBox.EXTabsFeatureRefresh(true);
         returnValue.StonesBox._skillStoneDetail.Clear();
@@ -80,7 +87,6 @@ public class SkillEditLayer : UILayer
         }
         NineSlot.ReadANineAndTwo(_UnitInfo);
         CharConfig _CharInfo = MonstersConfigTable.GetCharConfig(_UnitInfo.r_id);
-        Debug.Log(_CharInfo.TYPE + ":"+ _CharInfo.REAL_NAME);
         StonesBox.SetFocusingType(_CharInfo.TYPE);
         StonesBox.RestFilter();
         StonesBox.EXTabsFeatureRefresh(false);
@@ -118,7 +124,6 @@ public class SkillEditLayer : UILayer
     // 技能浏览器程序模式专用
     public void SkillShowSpEnterProcess()
     {
-        StonesBox.CellsFeatureLoad(3);
         SkillEditButtonFeature_SP(PreScene.target._focusing);
         
         // 表现系
@@ -244,4 +249,116 @@ public class SkillEditLayer : UILayer
             ScreenPositionCal.Cal(1, fxCamera, NineSlot.allSlot[targetSlot - 1]._DragAndDropCell.GetComponent<RectTransform>(), 3),
             StonesBox._SkillStoneBoxTabEffectsManager.transform);
     }
+    
+    
+        float lastclicktime;
+        bool pressStart;
+        void StoneCellFeature(StoneCell _SkillStoneCell)
+        {
+            Button button = _SkillStoneCell.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+            void buttonFeature()
+            {
+                if (Time.time - lastclicktime < 0.25f) // double click
+                {
+                    if (NineSlot.GetFocusingStoneSlot() != null)
+                    {
+                        StoneCell.Install(_SkillStoneCell, NineSlot.GetFocusingStoneSlot()._DragAndDropCell);
+                    }
+                }
+                lastclicktime = Time.time;
+                SKStoneItem _stone = _SkillStoneCell.GetItem();
+                if (_stone != null && _stone._SkillConfig != null)
+                {
+                    StonesBox._skillStoneDetail.RefreshInfo(_stone.instanceId);
+                }else{
+                    StonesBox._skillStoneDetail.Clear();
+                }
+            }
+            
+            EventTrigger trigger = button.GetComponent<EventTrigger>();
+            EventTrigger.Entry enter = new EventTrigger.Entry
+            {
+                eventID = EventTriggerType.PointerDown
+            };
+            EventTrigger.Entry up = new EventTrigger.Entry
+            {
+                eventID = EventTriggerType.PointerUp
+            };
+            enter.callback.AddListener((eventData) => {
+                if (!pressStart)
+                {
+                    pressStart = true;
+                    buttonFeature();
+                    PressGoToLevelUpPage(_SkillStoneCell);
+                    StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected);
+                }
+            } );
+            up.callback.AddListener( (eventData) => { pressStart = false; } );
+            
+            trigger.triggers.Clear();
+            trigger.triggers.Add(enter);
+            trigger.triggers.Add(up);
+        }
+        
+        float pressingSeconds;
+        SingleAssignmentDisposable pressCount;
+        
+        // 前往技能石升级画面
+        public void PressGoToLevelUpPage(StoneCell _SkillStoneCell)
+        {
+            pressCount = new SingleAssignmentDisposable
+            {
+                Disposable = Observable.EveryUpdate().Subscribe(_ =>
+                    {
+                        if (pressStart)
+                        {
+                            pressingSeconds += Time.deltaTime;
+                            if (pressingSeconds > 1f)
+                            {
+                                pressingSeconds = 0;
+                                pressStart = false;
+                                SKStoneItem _stone = _SkillStoneCell.GetItem();
+                                if (_stone != null && _stone._SkillConfig != null)
+                                {
+                                    if (FightGlobalSetting._skillStoneHasExp)
+                                        PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.instanceId, true);
+                                }
+                            }
+                        }
+                        if (!pressStart)
+                        {
+                            pressingSeconds = 0;
+                            if (!pressCount.IsDisposed)
+                            {
+                                pressCount.Dispose();
+                            }
+                        }
+                    }
+                )
+            };
+        }
+        
+        // 技能浏览器模式
+        public void CellButtonBeheviour_SKillShowMode(StoneCell _SkillStoneCell)
+        {
+            Button button = _SkillStoneCell.GetComponent<Button>();
+            if (button != null)
+            {
+                void buttonFeature()
+                {
+                    SKStoneItem _stone = _SkillStoneCell.GetItem();
+                    if (_stone != null && _stone._SkillConfig != null)
+                    {
+                        StonesBox._skillStoneDetail.RefreshInfo(_stone.instanceId);
+                         PreScene.target.mainProcessRunner.RunAsQueued(SkillShowSupporter.SkillShowRunWithPrepare(_stone._SkillConfig.REAL_NAME));
+                    }else{
+                        StonesBox._skillStoneDetail.Clear();
+                    }
+                }
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(buttonFeature);
+                button.onClick.AddListener(delegate { StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected); });
+            }
+        }
 }

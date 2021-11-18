@@ -72,7 +72,9 @@ public class StoneDeleteManger : MonoBehaviour
         EnterDeleteModeButton.gameObject.SetActive(true);
         CurrentSelectedCount.text = "";
         ClearSelect();
-        SkillStonesBox.CellsFeatureLoad(1);
+        
+        StoneListLayer StoneListLayer = StoneListLayer.Open();
+        SkillStonesBox.AddFeatureToCells(StoneListLayer.CellButtonBeheviour_STStoneShow);
         autoHide.Dispose();
     }
     

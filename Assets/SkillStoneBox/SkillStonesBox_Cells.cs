@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
@@ -50,30 +51,20 @@ namespace mainMenu
             BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (GridLayoutGroup.cellSize.x + GridLayoutGroup.spacing.x) * hangshu);
         }
         
-        // 加载技能石背包机能
-        // -1: 技能石合成 0:强化素材添加模式  1 : showMode 2: skilledit 3 : 技能展示器
-        public void CellsFeatureLoad(int mode)
+        public void AddFeatureToCells(Action<StoneCell> action)
         {
             for (int i = 0; i < CellsDic.Count; i++)
             {
-                switch(mode)
-                {
-                    case -1:
-                        CellButtonBeheviour_StoneMergeMode(CellsDic[i]);
-                    break;
-                    case 0:
-                        CellButtonBeheviour_MAdd(CellsDic[i]);
-                    break;
-                    case 1:
-                        CellButtonBeheviour_STStoneShow(CellsDic[i]);
-                    break;
-                    case 2:
-                        CellButtonBeheviour_EditCharSkill(CellsDic[i]);
-                    break;
-                    case 3:
-                        CellButtonBeheviour_SKillShowMode(CellsDic[i]);
-                    break;
-                }
+                Button button = CellsDic[i].GetComponent<Button>();
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(()=> action.Invoke(CellsDic[i]));
+            }
+
+            foreach (var cell in CellsDic)
+            {
+                Button button = cell.Value.GetComponent<Button>();
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(()=> action.Invoke(cell.Value));
             }
         }
         

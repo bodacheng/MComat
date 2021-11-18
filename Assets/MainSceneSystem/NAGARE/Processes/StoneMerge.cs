@@ -17,7 +17,7 @@ public class StoneMerge : MainSceneProcess
         
         yield return ModelShower.target.ShowMyModel(null);
         
-        stoneMergeLayer.stoneBox.CellsFeatureLoad(-1);
+        stoneMergeLayer.stoneBox.AddFeatureToCells(stoneMergeLayer.CellButtonBeheviour_StoneMergeMode);
         stoneMergeLayer.stoneBox.RestFilter();
         stoneMergeLayer.stoneBox.EXTabsFeatureRefresh(false);
         stoneMergeLayer.stoneBox._skillStoneDetail.Clear();

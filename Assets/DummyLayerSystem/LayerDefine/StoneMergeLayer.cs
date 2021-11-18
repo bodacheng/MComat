@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using mainMenu;
+using UnityEngine.EventSystems;
 
 public class StoneMergeLayer : UILayer
 {
@@ -96,4 +97,29 @@ public class StoneMergeLayer : UILayer
         popupLayer.ArrangeConfirmWindow(run, "确实要融合技能石？");
     }
     #endregion
+
+    private float lastclicktime;
+    public void CellButtonBeheviour_StoneMergeMode(StoneCell _SkillStoneCell)
+    {
+        StoneMergeLayer stoneMergeLayer = StoneMergeLayer.Open();
+        Button button = _SkillStoneCell.GetComponent<Button>();
+        if (button != null)
+        {
+            EventTrigger trigger = button.GetComponent<EventTrigger>();
+            trigger.triggers.Clear();
+                
+            void buttonFeature()
+            {
+                if (Time.time - lastclicktime < 0.25f) // double click
+                {
+                    stoneMergeLayer.AddMaterial(_SkillStoneCell);
+                }
+                lastclicktime = Time.time;
+            }
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(buttonFeature);
+            button.onClick.AddListener(delegate { StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected); });
+            stoneMergeLayer.AddMSlotBehaviour(_SkillStoneCell);
+        }
+    }
 }

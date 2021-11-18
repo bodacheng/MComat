@@ -329,13 +329,11 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Input\ScrollGamepadManager.cs" />
      <Compile Include="Assets\UI\SciFic Icons\Scripts\IconScript.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\FavoriteButton.cs" />
-     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_ShowMode.cs" />
      <Compile Include="Assets\PlayFab\Client\Statistics.cs" />
      <Compile Include="Assets\TutorialManger\TutorialLogger.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\ArenaFightOver.cs" />
      <Compile Include="Assets\Asstes\FloatingCombatText\DemoScene\DemoController.cs" />
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\HitBoxManager.cs" />
-     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_EditMode.cs" />
      <Compile Include="Assets\DummyLayerSystem\UILayer.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\ExpandBox.cs" />
      <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Stable.cs" />
@@ -362,7 +360,6 @@
      <Compile Include="Assets\FightSceneSystem\Nagare\CountDownProcess.cs" />
      <Compile Include="Assets\BoundaryControl\BoundaryControllByGod.cs" />
      <Compile Include="Assets\ResourceLoading\CachManager.cs" />
-     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_StoneMerge.cs" />
      <Compile Include="Assets\Remote\Monsters\Json.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Hsl.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\SelectInheretSkill.cs" />
@@ -409,7 +406,6 @@
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkDubSounds.cs" />
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_Resource.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiButtonScript.cs" />
-     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_MAdd.cs" />
      <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable.cs" />
      <Compile Include="Assets\EffectsSystem\HitBoxVarityEvents.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\QuickMatchButton.cs" />
@@ -557,7 +553,6 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\SwitchManager.cs" />
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\SpotlightButton.cs" />
-     <Compile Include="Assets\SkillStoneBox\SkillStonesBox_SKillShower.cs" />
      <Compile Include="Assets\CachLogic\downloads_charcomponents.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Helpers\TextWithIcon.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MonsterEditPage.cs" />

@@ -54,7 +54,7 @@ public class StonesPage : MainSceneProcess
     void EnterProcess()
     {
         CommonEnterProcess();
-        stoneListLayer.box.CellsFeatureLoad(1);
+        stoneListLayer.box.AddFeatureToCells(stoneListLayer.CellButtonBeheviour_STStoneShow);
     }
     
     //EnterProcess()内绝不能出现triggerMainProcess

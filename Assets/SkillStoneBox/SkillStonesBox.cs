@@ -48,12 +48,7 @@ namespace mainMenu
             _Selected = SelectedFrame;
             rares = new List<int> { 0, 1, 2, 3, 4, 5 };//否则其值会被inspector修改
         }
-
-        void Start()
-        {
-            //target = this;
-        }
-
+        
         public string GetFocusingType()
         {
             return focusingtype;
