@@ -14,7 +14,7 @@ public class SelfFightPage : MainSceneProcess
         mainProcessRunner.RunFreely(ModelShower.target.ShowMyModel(null));
         
         UnitsLayer layer = UnitsLayer.Open();
-        layer.DisplayMonsterIcons(true);
+        layer.DisplayUnitIcons(true);
 
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
         

@@ -31,7 +31,7 @@ public class MonsterListPage : MainSceneProcess
         
         layer = UnitsLayer.Open();
         unitOptionLayer = UnitOptionLayer.Open();
-        layer.DisplayMonsterIcons(true);
+        layer.DisplayUnitIcons(true);
 
         void MonsterIconButton(string instanceId)
         {

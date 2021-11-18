@@ -35,7 +35,7 @@ public class TeamEditPage : MainSceneProcess
             teamEditLayer._nineForShow.ShowStones_Acc(PreScene.target._focusing.id);
         
         UnitsLayer layer = UnitsLayer.Open();
-        layer.DisplayMonsterIcons(true);
+        layer.DisplayUnitIcons(true);
         layer.SetUnitsIconOnClick((x) => teamEditLayer.MonsterIconButton(x, teamMode));
     }
     

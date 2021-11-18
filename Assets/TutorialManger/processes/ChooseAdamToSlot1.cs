@@ -12,7 +12,7 @@ public class ChooseAdamToSlot1 : TutorialProcess
     {
         UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
         PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-        popupLayer.HigtLightRect(unitsLayer.GetCharIcon("1").transform);
+        popupLayer.HigtLightRect(unitsLayer.GetUnitIcon("1").transform);
     }
     
     public override void ProcessEnd()

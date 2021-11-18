@@ -38,14 +38,14 @@ namespace mainMenu
             UILayerLoader.Remove("UnitsLayer");
         }
         
-        public HeroIcon GetCharIcon(string instanceID)
+        public HeroIcon GetUnitIcon(string instanceID)
         {
             if (instanceID == null)
                 return null;
-            mainMenuIcons.TryGetValue(instanceID, out HeroIcon charIcon);
-            return charIcon;
+            mainMenuIcons.TryGetValue(instanceID, out HeroIcon unitIcon);
+            return unitIcon;
         }
-
+        
         public void SetUnitsIconOnClick(Action<string> a)
         {
             foreach (var kv in mainMenuIcons)
@@ -61,11 +61,11 @@ namespace mainMenu
             HeroIcon.Seletedfeature(null, selectedFrame, 150f);
         }
 
-        public void Select(string monsterOfPlayerId)
+        public void Select(string instanceID)
         {
-            HeroIcon targetingIcon = GetCharIcon(monsterOfPlayerId);
+            HeroIcon targetingIcon = GetUnitIcon(instanceID);
             HeroIcon.Seletedfeature(targetingIcon, selectedFrame, 150f);
-            selectingInstanceID = monsterOfPlayerId;
+            selectingInstanceID = instanceID;
         }
 
         public string GetSelect()
@@ -73,17 +73,17 @@ namespace mainMenu
             return selectingInstanceID;
         }
 
-        public void AddOneNewIcon(string instanceID, bool clearButtonFeature)
+        void AddOneNewIcon(string instanceID, bool clearButtonFeature)
         {
-            UnitInfo targetingCharInfo = MyMonsters.Get(instanceID);
-            CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(targetingCharInfo.r_id);
+            UnitInfo unitInfo = MyMonsters.Get(instanceID);
+            CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(unitInfo.r_id);
             if (_CharConfig == null)
             {
-                Debug.Log("MonsterID:"+ targetingCharInfo.r_id + " doesnt exist in this version");
+                Debug.Log("MonsterID:"+ unitInfo.r_id + " doesnt exist in this version");
                 return;
             }
 
-            HeroIcon targetingIcon = GetCharIcon(instanceID);
+            HeroIcon targetingIcon = GetUnitIcon(instanceID);
             if (targetingIcon == null)
             {
                 MonsterIconDic.Get(_CharConfig.RECORD_ID);
@@ -100,19 +100,14 @@ namespace mainMenu
                 typeOfUnitsIhave.Add(targetingIcon._CharConfig.TYPE);
             }
         }
-
+        
+        
         public void OnTypeChangeMyMonsterBox()
         {
-            DisplayMonsterIcons(false);
+            DisplayUnitIcons(false);
         }
-
-        // 从这个函数的名字来看，应该是个产生monsterbox内所有图标的东西。原则上这个玩意如果没有什么新宠物的添加，它是很少加载才对。
-        // 难点在于每个monstericon上给予一个什么样的按钮 ，并且这个按钮到底是什么时机下给予。
-        // 现在的模型循环利用机制决定：每次运行mymonsterbox，都要执行所有拥有角色的模型建立或确认工作
-        // 还有，monsterbox是所有角色CharacterDataInfo的由来，而这个信息现在记载了技能信息，从而可以说这个信息量现在非常大，逻辑出问题也会出现错误。
-        // 19.1.3 : monsterbox应该具备能力可以非常灵活的根据检索条件对所有monster进行分类显示，优先显示等等。
-        // 这个函数的生成本随着“type”选项卡的整理。
-        public void MonsterIconsGenerate(bool clearButtonFeature)
+        
+        void UnitIconsGenerate(bool clearButtonFeature)
         {
             selectingInstanceID = null;
             foreach (KeyValuePair<string, UnitInfo> keyValuePair in MyMonsters.Dic)
@@ -121,12 +116,12 @@ namespace mainMenu
             }
             _monsterboxFilter.RefreshTypeDropDown(typeOfUnitsIhave);
         }
-
+        
         //icon的排列，显示   
-        public void DisplayMonsterIcons(bool clearButtonFeature)
+        public void DisplayUnitIcons(bool clearButtonFeature)
         {
             MonsterBoxContainer.gameObject.SetActive(true);
-            MonsterIconsGenerate(clearButtonFeature);
+            UnitIconsGenerate(clearButtonFeature);
             foreach (KeyValuePair<string, HeroIcon> keyValuePair in mainMenuIcons)
             {
                 keyValuePair.Value.gameObject.SetActive(false);
