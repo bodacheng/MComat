@@ -34,10 +34,6 @@ namespace mainMenu
 
         // rare 度限定
         public List<int> rares = new List<int> { 0, 1, 2, 3, 4, 5 };
-
-        [Space(7)]
-        [Header("技能石详细")]
-        public SkillStoneDetail _skillStoneDetail;
         
         string focusingtype = "human";
         int focusingExType;

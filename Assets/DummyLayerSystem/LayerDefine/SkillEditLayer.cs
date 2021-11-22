@@ -22,6 +22,8 @@ public class SkillEditLayer : UILayer
     [Header("技能展示器模式切换角色按钮")]
     public Button unitSwitcher;
     
+    public SkillStoneDetail _skillStoneDetail;
+    
     [Space(10)] 
     [Header("FX Camera")] 
     public Camera fxCamera;
@@ -53,7 +55,7 @@ public class SkillEditLayer : UILayer
         
         returnValue.StonesBox.IniExTabs(returnValue.fxCamera);
         returnValue.StonesBox.EXTabsFeatureRefresh(true);
-        returnValue.StonesBox._skillStoneDetail.Clear();
+        returnValue._skillStoneDetail.Clear();
         returnValue.unitSwitcher.gameObject.SetActive(FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow);
         returnValue.SkillEditButtonFeature(PreScene.target._focusing);
         
@@ -270,9 +272,9 @@ public class SkillEditLayer : UILayer
                 SKStoneItem _stone = _SkillStoneCell.GetItem();
                 if (_stone != null && _stone._SkillConfig != null)
                 {
-                    StonesBox._skillStoneDetail.RefreshInfo(_stone.instanceId);
+                    _skillStoneDetail.RefreshInfo(_stone.instanceId);
                 }else{
-                    StonesBox._skillStoneDetail.Clear();
+                    _skillStoneDetail.Clear();
                 }
             }
             
@@ -350,10 +352,10 @@ public class SkillEditLayer : UILayer
                     SKStoneItem _stone = _SkillStoneCell.GetItem();
                     if (_stone != null && _stone._SkillConfig != null)
                     {
-                        StonesBox._skillStoneDetail.RefreshInfo(_stone.instanceId);
+                        _skillStoneDetail.RefreshInfo(_stone.instanceId);
                          PreScene.target.mainProcessRunner.RunAsQueued(SkillShowSupporter.SkillShowRunWithPrepare(_stone._SkillConfig.REAL_NAME));
                     }else{
-                        StonesBox._skillStoneDetail.Clear();
+                        _skillStoneDetail.Clear();
                     }
                 }
                 button.onClick.RemoveAllListeners();

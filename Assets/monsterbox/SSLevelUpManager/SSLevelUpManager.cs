@@ -158,7 +158,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         stoneListLayer.box.RestFilter();
         stoneListLayer.box.rares = new List<int> { 0, 1, 2 };
         
-        stoneListLayer.box.AddFeatureToCells(stoneListLayer.CellButtonBeheviour_MAdd);
+        stoneListLayer.box.AddFeatureToCells(stoneListLayer.CellFeature_MAdd);
 
         levelUpPageRect.gameObject.SetActive(true);
         RefreshSkillLevelUpModule();
@@ -175,7 +175,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         SKStoneItem.SeletedRender(targetStone, SkillStonesBox._Selected);
         focusingSSD.RefreshInfo(stoneOfPlayerId);
         ReturnAllMaterialsToBox();
-        stoneListLayer.box.AddFeatureToCells(stoneListLayer.CellButtonBeheviour_STStoneShow);
+        stoneListLayer.box.AddFeatureToCells(stoneListLayer.CellFeature_StoneShow);
         levelUpPageRect.gameObject.SetActive(false);
         CurrentGoldExaust = 0;
         RefreshSkillLevelUpModule();

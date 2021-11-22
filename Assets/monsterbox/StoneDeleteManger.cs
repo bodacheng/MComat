@@ -74,7 +74,7 @@ public class StoneDeleteManger : MonoBehaviour
         ClearSelect();
         
         StoneListLayer StoneListLayer = StoneListLayer.Open();
-        SkillStonesBox.AddFeatureToCells(StoneListLayer.CellButtonBeheviour_STStoneShow);
+        SkillStonesBox.AddFeatureToCells(StoneListLayer.CellFeature_StoneShow);
         autoHide.Dispose();
     }
     

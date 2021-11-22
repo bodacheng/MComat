@@ -9,7 +9,6 @@ public static class ScreenPositionCal
     // 1: canvas screen space 2: UI元素在左下角？忘了
     public static Vector3 Cal(int ConvertMode, Camera refC, RectTransform rect, float z_offset)
     {
-        Debug.Log(rect.transform.position);
         return Cal(ConvertMode, refC, rect.transform.position, z_offset);
     }
     

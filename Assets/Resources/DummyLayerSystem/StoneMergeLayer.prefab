@@ -1916,6 +1916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stoneBox: {fileID: 7776332510394724973}
   fxCamera: {fileID: 4515804630494432854}
+  _skillStoneDetail: {fileID: 5572609297012787716}
   cell1: {fileID: 2697728559281750158}
   cell2: {fileID: 5602520733591879268}
   cell3: {fileID: 5602520732768275822}
@@ -5920,6 +5921,7 @@ GameObject:
   - component: {fileID: 6174908766220250549}
   - component: {fileID: 6174908766220250551}
   - component: {fileID: 6174908766220250550}
+  - component: {fileID: 5572609297012787716}
   m_Layer: 5
   m_Name: SkillDetail
   m_TagString: Untagged
@@ -5938,7 +5940,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: -59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6174908766846116038}
   - {fileID: 6174908766770169115}
   - {fileID: 6174908767454151820}
   - {fileID: 6174908766623931807}
@@ -5989,6 +5990,31 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5572609297012787716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6174908766220250548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b558b0895934a1e9842677d9e6b35c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IconShowT: {fileID: 0}
+  keyname: {fileID: 6174908767451192224}
+  Showname: {fileID: 6174908767279231889}
+  Ex1Icon: {fileID: 2471656938758550294}
+  Ex2Icon: {fileID: 2621703365528809299}
+  Ex3Icon: {fileID: 2621703366771432562}
+  close: {fileID: 6025413327452296059}
+  near: {fileID: 6025413326603962149}
+  far: {fileID: 6025413327678507631}
+  AT: {fileID: 6174908767742750068}
+  HP: {fileID: 6174908768057954352}
+  expValue: {fileID: 6174908767050172158}
+  StoneTargetLevel: {fileID: 6174908767667443996}
 --- !u!1 &6174908766334561676
 GameObject:
   m_ObjectHideFlags: 0
@@ -6834,7 +6860,7 @@ RectTransform:
   - {fileID: 6174908768115856583}
   - {fileID: 6174908766508746370}
   m_Father: {fileID: 6174908766220250549}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -7045,7 +7071,6 @@ MonoBehaviour:
   nearCheckBox: {fileID: 6174908767982082142}
   farCheckBox: {fileID: 6174908767969262173}
   rares: 000000000100000002000000
-  _skillStoneDetail: {fileID: 6174908766846116037}
   Cellprefab: {fileID: 9087381990746991603, guid: b3795898c2a1b4eeaa126e66fe7de953,
     type: 3}
   SelectedFrame: {fileID: 2753387393542302295}
@@ -7553,7 +7578,7 @@ RectTransform:
   - {fileID: 6174908767894407449}
   - {fileID: 6174908767451192254}
   m_Father: {fileID: 6174908766220250549}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7687,62 +7712,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1 &6174908766846116036
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6174908766846116038}
-  - component: {fileID: 6174908766846116037}
-  m_Layer: 0
-  m_Name: SkillStoneBoxNineSkillSSDetail
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6174908766846116038
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6174908766846116036}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 452.50586, y: 362.9978, z: -0.0009689331}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 6174908766220250549}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6174908766846116037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6174908766846116036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90b558b0895934a1e9842677d9e6b35c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IconShowT: {fileID: 0}
-  keyname: {fileID: 6174908767451192224}
-  Showname: {fileID: 6174908767279231889}
-  Ex1Icon: {fileID: 2471656938758550294}
-  Ex2Icon: {fileID: 2621703365528809299}
-  Ex3Icon: {fileID: 2621703366771432562}
-  close: {fileID: 6025413327452296059}
-  near: {fileID: 6025413326603962149}
-  far: {fileID: 6025413327678507631}
-  AT: {fileID: 6174908767742750068}
-  HP: {fileID: 6174908768057954352}
-  expValue: {fileID: 6174908767050172158}
-  StoneTargetLevel: {fileID: 6174908767667443996}
 --- !u!1 &6174908766884520599
 GameObject:
   m_ObjectHideFlags: 0
@@ -9555,7 +9524,7 @@ RectTransform:
   - {fileID: 6174908766549515327}
   - {fileID: 6174908768109017099}
   m_Father: {fileID: 6174908766220250549}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -10296,7 +10265,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6174908766220250549}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -11117,7 +11086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.91764706, b: 1, a: 0.49019608}
+  m_Color: {r: 0, g: 1, b: 0, a: 0.49019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11233,8 +11202,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294961664
-  m_fontColor: {r: 0, g: 0.91764706, b: 1, a: 1}
+    rgba: 4278255360
+  m_fontColor: {r: 0, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -11440,7 +11409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.91764706, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11533,7 +11502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.91764706, b: 1, a: 0.78431374}
+  m_Color: {r: 0, g: 1, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

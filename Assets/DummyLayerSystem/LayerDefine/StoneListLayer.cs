@@ -8,6 +8,7 @@ public class StoneListLayer : UILayer
 {
     public SkillStonesBox box;
     public SSLevelUpManager ssLevelUper;
+    public SkillStoneDetail _skillStoneDetail;
     
     [Space(10)] 
     [Header("FX Camera")] 
@@ -38,8 +39,7 @@ public class StoneListLayer : UILayer
             Zokusei.blueMagic
         );
         
-        returnValue.box._skillStoneDetail.Clear();
-        
+        returnValue._skillStoneDetail.Clear();
         return returnValue;
     }
 
@@ -51,7 +51,7 @@ public class StoneListLayer : UILayer
         {
             returnValue = l as StoneListLayer;
             GameObject.Destroy(returnValue.fxCamera);
-            returnValue.box._skillStoneDetail.Clear();
+            returnValue._skillStoneDetail.Clear();
             returnValue.box._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
         }
         UILayerLoader.Remove("StoneListLayer");
@@ -60,19 +60,19 @@ public class StoneListLayer : UILayer
     float pressingSeconds;
     SingleAssignmentDisposable pressCount;
     bool pressStart = false;
-    public void CellButtonBeheviour_STStoneShow(StoneCell _SkillStoneCell)
+    public void CellFeature_StoneShow(StoneCell _Cell)
     {
-        Button button = _SkillStoneCell.GetComponent<Button>();                
+        Button button = _Cell.GetComponent<Button>();                
         button.onClick.RemoveAllListeners();
         void buttonFeature()
         {
-            SKStoneItem _stone = _SkillStoneCell.GetItem();
+            SKStoneItem _stone = _Cell.GetItem();
             if (_stone != null && _stone._SkillConfig != null)
             {
-                box._skillStoneDetail.RefreshInfo(_stone.instanceId);
-                SSLevelUpManager.target.SetTargetStoneID(_stone.instanceId);
+                _skillStoneDetail.RefreshInfo(_stone.instanceId);
+                ssLevelUper.SetTargetStoneID(_stone.instanceId);
             }else{
-                box._skillStoneDetail.Clear();
+                _skillStoneDetail.Clear();
             }
         }
         
@@ -89,10 +89,10 @@ public class StoneListLayer : UILayer
                             {
                                 pressingSeconds = 0;
                                 pressStart = false;
-                                SKStoneItem _stone = _SkillStoneCell.GetItem();
+                                SKStoneItem _stone = _Cell.GetItem();
                                 if (_stone != null && _stone._SkillConfig != null)
                                 {
-                                    SSLevelUpManager.target.OpenLevelUpPage(_stone.instanceId);
+                                    ssLevelUper.OpenLevelUpPage(_stone.instanceId);
                                 }
                             }
                         }
@@ -124,7 +124,7 @@ public class StoneListLayer : UILayer
                 pressStart = true;
                 buttonFeature();
                 PressGoToLevelUpPage2();
-                StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected);
+                StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected);
             }
         } );
         up.callback.AddListener( (eventData) => { pressStart = false; } );
@@ -137,7 +137,7 @@ public class StoneListLayer : UILayer
     }
     
     float lastclicktime;
-    public void CellButtonBeheviour_MAdd(StoneCell _SkillStoneCell)
+    public void CellFeature_MAdd(StoneCell _SkillStoneCell)
     {
         Button button = _SkillStoneCell.GetComponent<Button>();
         if (button != null)
@@ -149,14 +149,14 @@ public class StoneListLayer : UILayer
             {
                 if (Time.time - lastclicktime < 0.25f) // double click
                 {
-                    SSLevelUpManager.target.AddMaterial(_SkillStoneCell);
+                    ssLevelUper.AddMaterial(_SkillStoneCell);
                 }
                 lastclicktime = Time.time;
             }
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(buttonFeature);
             button.onClick.AddListener(delegate { StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected); });
-            SSLevelUpManager.target.AddMSlotBehaviour(_SkillStoneCell);
+            ssLevelUper.AddMSlotBehaviour(_SkillStoneCell);
         }
     }
 }

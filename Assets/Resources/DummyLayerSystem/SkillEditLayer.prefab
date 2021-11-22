@@ -6491,6 +6491,7 @@ MonoBehaviour:
   NineSlot: {fileID: 2523835562718301726}
   StonesBox: {fileID: 2523835564590309945}
   unitSwitcher: {fileID: 2523835563921883631}
+  _skillStoneDetail: {fileID: 2523835563348160046}
   fxCamera: {fileID: 5196175124310311101}
 --- !u!1 &2523835564227256514
 GameObject:
@@ -8133,7 +8134,6 @@ MonoBehaviour:
   nearCheckBox: {fileID: 2523835564484449973}
   farCheckBox: {fileID: 2523835564471563446}
   rares: 000000000100000002000000
-  _skillStoneDetail: {fileID: 2523835563348160046}
   Cellprefab: {fileID: 9087381990746991603, guid: b3795898c2a1b4eeaa126e66fe7de953,
     type: 3}
   SelectedFrame: {fileID: 2677751319738524578}

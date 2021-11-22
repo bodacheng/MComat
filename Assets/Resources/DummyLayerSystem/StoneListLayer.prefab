@@ -4996,7 +4996,7 @@ RectTransform:
   - {fileID: 5206352635014755012}
   - {fileID: 5206352635682982627}
   m_Father: {fileID: 5206352636481088926}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5869,7 +5869,7 @@ RectTransform:
   - {fileID: 5206352636568817929}
   - {fileID: 5206352635149906818}
   m_Father: {fileID: 5206352636481088926}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6025,7 +6025,7 @@ RectTransform:
   m_Children:
   - {fileID: 3424812506623486451}
   m_Father: {fileID: 5206352636481088926}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7743,7 +7743,7 @@ RectTransform:
   m_Children:
   - {fileID: 5206352634606613129}
   m_Father: {fileID: 5206352636481088926}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7812,62 +7812,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.00008773804}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
---- !u!1 &5206352635451388002
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5206352635451388004}
-  - component: {fileID: 5206352635451388003}
-  m_Layer: 0
-  m_Name: StoneShow_SSDetail
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5206352635451388004
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5206352635451388002}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -324, y: -504, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 5206352636481088926}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5206352635451388003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5206352635451388002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90b558b0895934a1e9842677d9e6b35c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IconShowT: {fileID: 5206352636620783571}
-  keyname: {fileID: 5206352635149906819}
-  Showname: {fileID: 5206352634608997995}
-  Ex1Icon: {fileID: 4592569970301039951}
-  Ex2Icon: {fileID: 6375928263343973574}
-  Ex3Icon: {fileID: 6375928263359841545}
-  close: {fileID: 5206352635244930291}
-  near: {fileID: 5206352635014755011}
-  far: {fileID: 5206352635682982626}
-  AT: {fileID: 3424812505556488447}
-  HP: {fileID: 3424812506623486448}
-  expValue: {fileID: 5206352635142670423}
-  StoneTargetLevel: {fileID: 5206352635282655065}
 --- !u!1 &5206352635479480605
 GameObject:
   m_ObjectHideFlags: 0
@@ -8033,7 +7977,7 @@ RectTransform:
   m_Children:
   - {fileID: 3424812506683997568}
   m_Father: {fileID: 5206352636481088926}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8382,7 +8326,7 @@ RectTransform:
   - {fileID: 5206352635142670422}
   - {fileID: 5206352635282655064}
   m_Father: {fileID: 5206352636481088926}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9118,7 +9062,7 @@ RectTransform:
   m_Children:
   - {fileID: 3424812505556488446}
   m_Father: {fileID: 5206352636481088926}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9491,7 +9435,7 @@ MonoBehaviour:
   StoneTargetLevel: {fileID: 5206352635282655065}
   CurrentExpToNextLevel: {fileID: 5206352635677083749}
   CurrentGoldExaustText: {fileID: 5206352635009287159}
-  focusingSSD: {fileID: 5206352635451388003}
+  focusingSSD: {fileID: 0}
   _MSkillStoneDetail: {fileID: 5206352634753529296}
   cell1: {fileID: 5206352635566656075}
   cell2: {fileID: 5206352636585073448}
@@ -10395,6 +10339,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5206352636481088926}
+  - component: {fileID: 800867096423162247}
   m_Layer: 5
   m_Name: SkillStoneInfoT
   m_TagString: Untagged
@@ -10413,7 +10358,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5206352635451388004}
   - {fileID: 5206352636620783571}
   - {fileID: 5206352634941917045}
   - {fileID: 5206352635940066776}
@@ -10430,6 +10374,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -11}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &800867096423162247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206352636481088925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b558b0895934a1e9842677d9e6b35c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IconShowT: {fileID: 5206352636620783571}
+  keyname: {fileID: 5206352635149906819}
+  Showname: {fileID: 5206352634608997995}
+  Ex1Icon: {fileID: 4592569970301039951}
+  Ex2Icon: {fileID: 6375928263343973574}
+  Ex3Icon: {fileID: 6375928263359841545}
+  close: {fileID: 5206352635244930291}
+  near: {fileID: 5206352635014755011}
+  far: {fileID: 5206352635682982626}
+  AT: {fileID: 3424812505556488447}
+  HP: {fileID: 3424812506623486448}
+  expValue: {fileID: 5206352635142670423}
+  StoneTargetLevel: {fileID: 5206352635282655065}
 --- !u!1 &5206352636514417947
 GameObject:
   m_ObjectHideFlags: 0
@@ -10555,7 +10524,6 @@ MonoBehaviour:
   nearCheckBox: {fileID: 5206352635659860177}
   farCheckBox: {fileID: 5206352635381506421}
   rares: 000000000100000002000000
-  _skillStoneDetail: {fileID: 5206352635451388003}
   Cellprefab: {fileID: 9087381990746991603, guid: b3795898c2a1b4eeaa126e66fe7de953,
     type: 3}
   SelectedFrame: {fileID: 5056399119111226684}
@@ -10869,7 +10837,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5206352636481088926}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11393,6 +11361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   box: {fileID: 7080503536421198422}
   ssLevelUper: {fileID: 4351209245200080267}
+  _skillStoneDetail: {fileID: 800867096423162247}
   fxCamera: {fileID: 2315270615730230788}
 --- !u!1 &5878224471481340608
 GameObject:

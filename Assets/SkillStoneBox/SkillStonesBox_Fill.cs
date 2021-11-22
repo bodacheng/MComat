@@ -37,7 +37,7 @@ namespace mainMenu
         }
 
         // stoneviewScrollRect 应该在这个函数里扮演一个作用。
-        public void PutSkillStonesToBox()
+        void PutSkillStonesToBox()
         {
             List<string> targetSKs = Stones.TargetStonesFromAccount_except(form, null, null, false);
             targetSKs = Order(targetSKs);

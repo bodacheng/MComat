@@ -8,6 +8,7 @@ public class StoneMergeLayer : UILayer
 {
     public SkillStonesBox stoneBox;
     public Camera fxCamera;
+    public SkillStoneDetail _skillStoneDetail;
     
     [Space(7)]
     [Header("融合技能槽")]

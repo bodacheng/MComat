@@ -20,7 +20,7 @@ public class StoneMerge : MainSceneProcess
         stoneMergeLayer.stoneBox.AddFeatureToCells(stoneMergeLayer.CellButtonBeheviour_StoneMergeMode);
         stoneMergeLayer.stoneBox.RestFilter();
         stoneMergeLayer.stoneBox.EXTabsFeatureRefresh(false);
-        stoneMergeLayer.stoneBox._skillStoneDetail.Clear();
+        stoneMergeLayer._skillStoneDetail.Clear();
         stoneMergeLayer.stoneBox.IniExTabs(stoneMergeLayer.fxCamera);
         stoneMergeLayer.stoneBox._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
