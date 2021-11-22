@@ -9,7 +9,7 @@ public class StoneListLayer : UILayer
     public SkillStonesBox box;
     public SSLevelUpManager ssLevelUper;
     public SkillStoneDetail _skillStoneDetail;
-    
+
     [Space(10)] 
     [Header("FX Camera")] 
     public Camera fxCamera;
@@ -60,6 +60,8 @@ public class StoneListLayer : UILayer
     float pressingSeconds;
     SingleAssignmentDisposable pressCount;
     bool pressStart = false;
+    
+    
     public void CellFeature_StoneShow(StoneCell _Cell)
     {
         Button button = _Cell.GetComponent<Button>();                
@@ -69,6 +71,8 @@ public class StoneListLayer : UILayer
             SKStoneItem _stone = _Cell.GetItem();
             if (_stone != null && _stone._SkillConfig != null)
             {
+                Debug.Log(_Cell);
+                StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected);
                 _skillStoneDetail.RefreshInfo(_stone.instanceId);
                 ssLevelUper.SetTargetStoneID(_stone.instanceId);
             }else{
@@ -76,7 +80,7 @@ public class StoneListLayer : UILayer
             }
         }
         
-        void PressGoToLevelUpPage2()
+        void PressGoToLevelUpPage()
         {
             pressCount = new SingleAssignmentDisposable
             {
@@ -119,14 +123,14 @@ public class StoneListLayer : UILayer
             eventID = EventTriggerType.PointerUp
         };
         enter.callback.AddListener((eventData) => {
+            Debug.Log("???? here");
+            buttonFeature();
             if (!pressStart)
             {
                 pressStart = true;
-                buttonFeature();
-                PressGoToLevelUpPage2();
-                StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected);
+                PressGoToLevelUpPage();
             }
-        } );
+        });
         up.callback.AddListener( (eventData) => { pressStart = false; } );
         
         trigger.triggers.Clear();

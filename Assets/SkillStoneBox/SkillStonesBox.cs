@@ -7,10 +7,6 @@ namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
     {
-        [Space(5)]
-        [Header("进程器")]
-        public SingleThreadProcesser mainProcessRunner;
-        
         [Header("画面主模块parent")]
         public RectTransform BoxT;
         
@@ -77,7 +73,7 @@ namespace mainMenu
         
             EX3Tab.onClick.AddListener(() =>
             {
-                EX2TabFeature(ScreenPositionCal.Cal(1, fxCamera, EX3Tab.GetComponent<RectTransform>(), 3));
+                EX3TabFeature(ScreenPositionCal.Cal(1, fxCamera, EX3Tab.GetComponent<RectTransform>(), 3));
             });
         }
         

@@ -100,7 +100,6 @@ public class ZokuseiStoneTagsGroup
         ParticleSystem p = btnEffectsSetsForStoneBox[eX];
         p.gameObject.name = "UIExTag"+ eX;
         exTagEffects.Add(eX,p);
-        Debug.Log(pos);
         p.gameObject.transform.SetParent(pos);
         p.transform.localPosition = new Vector3(0, 0, -30);
         p.Play(true);

@@ -184,7 +184,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     #endregion
     
     // 清除显示
-    public void Clear()
+    void Clear()
     {
         StoneTargetLevel.text = "";
         CurrentExpToNextLevel.text = "";

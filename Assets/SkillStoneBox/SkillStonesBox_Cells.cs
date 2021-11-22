@@ -19,7 +19,6 @@ namespace mainMenu
         
         public IDictionary<int, StoneCell> CellsDic = new Dictionary<int, StoneCell>();
         
-        // 当下这个函数貌似每次启动背包都运行一次也没什么大的问题，需要考虑cellsLimit发生变化瞬间的处理。
         public void GenerateCells()
         {
             int hangshu = 1;

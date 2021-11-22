@@ -50,7 +50,7 @@ public class SkillEditLayer : UILayer
             returnValue.StonesBox.AddFeatureToCells(returnValue.StoneCellFeature);
         else
         {
-            returnValue.StonesBox.AddFeatureToCells(returnValue.CellButtonBeheviour_SKillShowMode);
+            returnValue.StonesBox.AddFeatureToCells(returnValue.CellFeature_SkillShowMode);
         }
         
         returnValue.StonesBox.IniExTabs(returnValue.fxCamera);
@@ -342,7 +342,7 @@ public class SkillEditLayer : UILayer
         }
         
         // 技能浏览器模式
-        public void CellButtonBeheviour_SKillShowMode(StoneCell _SkillStoneCell)
+        void CellFeature_SkillShowMode(StoneCell _SkillStoneCell)
         {
             Button button = _SkillStoneCell.GetComponent<Button>();
             if (button != null)
