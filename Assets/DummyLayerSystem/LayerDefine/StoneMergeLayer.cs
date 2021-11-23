@@ -81,7 +81,7 @@ public class StoneMergeLayer : UILayer
             MaterialSlots[i].UpdateMyItem();
             if (MaterialSlots[i].GetItem() != null)
             {
-                MaterialSlots[i].ReturnStoneToBox();
+                stoneBox.ReturnStoneToBox(MaterialSlots[i].GetItem());
             }
         }
     }

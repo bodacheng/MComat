@@ -27,18 +27,6 @@ public partial class SSLevelUpManager : MonoBehaviour
             }
         }
     }
-    
-    void ReturnAllMaterialsToBox()
-    {
-        for (int i = 0; i < MaterialSlots.Count; i++)
-        {
-            MaterialSlots[i].UpdateMyItem();
-            if (MaterialSlots[i].GetItem() != null)
-            {
-                MaterialSlots[i].ReturnStoneToBox();
-            }
-        }
-    }
     #endregion
 
     int CalCurrentExpFromMaterialStone()

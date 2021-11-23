@@ -302,11 +302,11 @@
  <Reference Include="Unity.Analytics.Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
- <Reference Include="Unity.Analytics.Tracker">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Tracker.dll</HintPath>
- </Reference>
  <Reference Include="TUIOsharp">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/TouchScript/Modules/TUIO/Libraries/TUIOsharp.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Analytics.Tracker">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/PackageCache/com.unity.analytics@3.5.3/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="OSCsharp">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Assets/TouchScript/Modules/TUIO/Libraries/OSCsharp.dll</HintPath>

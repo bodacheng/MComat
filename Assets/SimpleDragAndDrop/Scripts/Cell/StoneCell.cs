@@ -80,7 +80,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     }
     
     // Show Character icon using this SkillStone
-    public void ShowUsingChar(SKStoneItem Item, HeroIcon targetIcon)
+    void ShowUsingChar(SKStoneItem Item, HeroIcon targetIcon)
     {
         if (Item == null || Item.instanceId == null)
         {

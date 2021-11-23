@@ -13,6 +13,17 @@ public class StoneListLayer : UILayer
     [Space(10)] 
     [Header("FX Camera")] 
     public Camera fxCamera;
+
+    public static StoneListLayer Get()
+    {
+        UILayer l = UILayerLoader.Get("StoneListLayer");
+        StoneListLayer returnValue = null;
+        if (l != null)
+        {
+            returnValue = l as StoneListLayer;
+        }
+        return returnValue;
+    }
     
     public static StoneListLayer Open()
     {

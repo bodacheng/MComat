@@ -67,6 +67,33 @@ namespace mainMenu
             }
             return null;
         }
+
+        public void ReturnStoneToBox(SKStoneItem item)
+        {
+            if (item._SkillConfig.SP_LEVEL == GetFocusingExType())
+            {
+                StoneCell dragAndDropCell = GetFirstEmptyCell();
+                if (dragAndDropCell != null)
+                {
+                    dragAndDropCell.AddItem(item);
+                }
+                else
+                {
+                    Debug.Log("走到这儿的话说明已经是bug了。");
+                    RemoveToTemp(item);
+                }
+            }
+            else{
+                //如果尝试归还背包的技能石必杀等级与显示中的不一致，则直接使其非显示。
+                RemoveToTemp(item);
+            }
+        }
+        
+        void RemoveToTemp(SKStoneItem item)
+        {
+            item._using = false;
+            item.gameObject.transform.SetParent(PreScene.target.stonesTempContainer);
+        }
         
         public static List<string> CheckIfExceedCellLimit()
         {

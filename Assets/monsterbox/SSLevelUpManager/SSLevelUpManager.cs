@@ -28,7 +28,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     [Space(7)]
     [Header("材料技能石参数")]
     public SkillStoneDetail _MSkillStoneDetail;
-        
+    
     [Space(7)]
     [Header("融合技能槽")]
     public StoneCell cell1;
@@ -38,7 +38,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     public StoneCell cell5;
     List<StoneCell> MaterialSlots;
     
-    public static SSLevelUpManager target;
+    //public static SSLevelUpManager target;
 
     int targetexp;
     public int TargetExp
@@ -87,7 +87,7 @@ public partial class SSLevelUpManager : MonoBehaviour
 
     void Awake()
     {
-        target = this;
+        //target = this;
         MaterialSlots = new List<StoneCell>
         {
             cell1,
@@ -169,7 +169,16 @@ public partial class SSLevelUpManager : MonoBehaviour
         stoneListLayer.box.RestFilter();
         SKStoneItem.SeletedRender(targetStone, SkillStonesBox._Selected);
         focusingSSD.RefreshInfo(targetInstanceId);
-        ReturnAllMaterialsToBox();
+        
+        for (int i = 0; i < MaterialSlots.Count; i++)
+        {
+            MaterialSlots[i].UpdateMyItem();
+            if (MaterialSlots[i].GetItem() != null)
+            {
+                stoneListLayer.box.ReturnStoneToBox(MaterialSlots[i].GetItem());
+            }
+        }
+        
         stoneListLayer.box.AddFeatureToCells(stoneListLayer.CellFeature_StoneShow);
         levelUpPageRect.gameObject.SetActive(false);
         CurrentGoldExaust = 0;

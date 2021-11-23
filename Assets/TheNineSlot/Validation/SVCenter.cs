@@ -7,6 +7,7 @@ public static class SVCenter
 {
     public static void StoneRemoveFromSlotToCell(StoneCell sourceCell, StoneCell boxcell)
     {
+        Debug.Log("from:"+ sourceCell);
         SkillEditLayer skillEditLayer = SkillEditLayer.Open();
         
         SKStoneItem stone = sourceCell.GetItem();
@@ -19,7 +20,7 @@ public static class SVCenter
         // 如果把技能石从9宫格拖到技能背包的一个有石头的格子上，那么就直接把拖动中的技能石先从九宫格拔下来，接着让技能背包自动排序一下
         if (boxcell.GetItem() != null)
         {
-            sourceCell.ReturnStoneToBox();
+            skillEditLayer.StonesBox.ReturnStoneToBox(sourceCell.GetItem());
         }
         else
         {
@@ -35,7 +36,8 @@ public static class SVCenter
         }
         if (sourceCell.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
-            SSLevelUpManager.target.RefreshSkillLevelUpModule();
+            StoneListLayer sl = StoneListLayer.Get();
+            sl.ssLevelUper.RefreshSkillLevelUpModule();
         }
     }
     
@@ -64,13 +66,13 @@ public static class SVCenter
         
         if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
-            SSLevelUpManager.target.RefreshSkillLevelUpModule();
+            StoneListLayer sl = StoneListLayer.Get();
+            sl.ssLevelUper.RefreshSkillLevelUpModule();
         }
     }
     
     public static void SwapItemFromTo(StoneCell from, StoneCell to)
     {
-        SkillEditLayer skillEditLayer = SkillEditLayer.Open();
         SKStoneItem itemFromCell = from.GetItem();
         if (itemFromCell == null)
             return;
@@ -78,6 +80,7 @@ public static class SVCenter
         // 从技能石盒子取出的石头安装到技能槽，要看如果这个技能石被其他角色使用中的话，那个角色会不会有问题
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
+            SkillEditLayer skillEditLayer = SkillEditLayer.Get();
             if (!CheckIfOtherCharOkAfterStoneRemove(itemFromCell))
                 return;
             skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(itemFromCell._SkillConfig.SP_LEVEL, 
@@ -100,12 +103,14 @@ public static class SVCenter
         
         if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || to.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
+            SkillEditLayer skillEditLayer = SkillEditLayer.Get();
             skillEditLayer.NineSlot.NineSlotsStatusRefresh();
         }
         
         if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
-            SSLevelUpManager.target.RefreshSkillLevelUpModule();
+            StoneListLayer sl = StoneListLayer.Get();
+            sl.ssLevelUper.RefreshSkillLevelUpModule();
         }
     }
     
