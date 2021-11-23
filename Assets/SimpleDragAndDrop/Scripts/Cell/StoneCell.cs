@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using mainMenu;
 using DG.Tweening;
 using dataAccess;
+using TouchScript.Gestures;
 
 /// <summary>
 /// Every item's cell must contain this script
@@ -19,6 +19,10 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         SKLevelUpMSlot,
         StoneMergeSlot
     }
+
+    public LongPressGesture lpGesture;
+    public PressGesture pGesture;
+    public TapGesture tGesture;
     
     [Tooltip("using Stone Character Icon")]
     public HeroIcon _charIcon;

@@ -101,13 +101,13 @@ namespace mainMenu
         {
             if (currentProcess != null)
                 currentProcess.ProcessEnd();
-            ReturnButtonManager.ReturnMissionList.Clear();
+            ReturnLayer.ReturnMissionList.Clear();
             MainSceneStep returnToStep = MainSceneStep.FrontPage;
             void returnTOCurrent()
             {
                 PreScene.target.trySwitchToStep(returnToStep, false);
             }
-            ReturnButtonManager.PUSH(returnTOCurrent);
+            ReturnLayer.PUSH(returnTOCurrent);
             Dic.TryGetValue(sceneStep, out currentProcess);
             if (currentProcess != null)
             {

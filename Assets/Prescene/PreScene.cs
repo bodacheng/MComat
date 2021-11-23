@@ -159,11 +159,11 @@ namespace mainMenu
             }
             else
             {
-                if (ReturnButtonManager.ReturnMissionList.Count > 0)
+                if (ReturnLayer.ReturnMissionList.Count > 0)
                 {
-                    ReturnButtonManager.AddFeatureToReturnButton();
+                    //ReturnLayer.AddFeatureToReturnButton();
                     //从战斗画面返回后，进入战斗前的菜单往上跳一节，指的是站前准备画面
-                    ReturnButtonManager.POP();
+                    ReturnLayer.POP();
                 }
                 else
                 {
@@ -231,7 +231,7 @@ namespace mainMenu
                     //Debug.Log("回到：" + returnToStep);
                     trySwitchToStep(returnToStep, false);
                 }
-                ReturnButtonManager.PUSH(returnTOCurrent);
+                ReturnLayer.PUSH(returnTOCurrent);
             }
             ProcessesRunner.Main.ChangeProcess(next_step);
         }
@@ -245,7 +245,7 @@ namespace mainMenu
                 {
                     trySwitchToStep(returnToStep, false);
                 }
-                ReturnButtonManager.PUSH(returnTOCurrent);
+                ReturnLayer.PUSH(returnTOCurrent);
             }
             ProcessesRunner.Main.ChangeProcess(next_step, t);
         }

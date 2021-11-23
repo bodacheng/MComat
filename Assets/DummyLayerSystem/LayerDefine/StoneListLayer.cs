@@ -1,8 +1,7 @@
 using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using UniRx;
+using TouchScript.Gestures;
 
 public class StoneListLayer : UILayer
 {
@@ -57,16 +56,11 @@ public class StoneListLayer : UILayer
         UILayerLoader.Remove("StoneListLayer");
     }
     
-    float pressingSeconds;
-    SingleAssignmentDisposable pressCount;
-    bool pressStart = false;
-    
-    
     public void CellFeature_StoneShow(StoneCell _Cell)
     {
         Button button = _Cell.GetComponent<Button>();                
         button.onClick.RemoveAllListeners();
-        void buttonFeature()
+        void buttonFeature(object sender, System.EventArgs e)
         {
             SKStoneItem _stone = _Cell.GetItem();
             if (_stone != null && _stone._SkillConfig != null)
@@ -80,87 +74,26 @@ public class StoneListLayer : UILayer
             }
         }
         
-        void PressGoToLevelUpPage()
+        void PressGoToLevelUpPage(object sender, GestureStateChangeEventArgs e)
         {
-            pressCount = new SingleAssignmentDisposable
+            SKStoneItem _stone = _Cell.GetItem();
+            if (_stone != null && _stone._SkillConfig != null)
             {
-                Disposable = Observable.EveryUpdate().Subscribe(_ =>
-                    {
-                        if (pressStart)
-                        {
-                            pressingSeconds += Time.deltaTime;
-                            if (pressingSeconds > 1f)
-                            {
-                                pressingSeconds = 0;
-                                pressStart = false;
-                                SKStoneItem _stone = _Cell.GetItem();
-                                if (_stone != null && _stone._SkillConfig != null)
-                                {
-                                    ssLevelUper.OpenLevelUpPage(_stone.instanceId);
-                                }
-                            }
-                        }
-                        if (!pressStart)
-                        {
-                            pressingSeconds = 0;
-                            if (!pressCount.IsDisposed)
-                            {
-                                pressCount.Dispose();
-                            }
-                        }
-                    }
-                )
-            };
-        }
-        
-        EventTrigger trigger = button.GetComponent<EventTrigger>();
-        EventTrigger.Entry enter = new EventTrigger.Entry
-        {
-            eventID = EventTriggerType.PointerDown
-        };
-        EventTrigger.Entry up = new EventTrigger.Entry
-        {
-            eventID = EventTriggerType.PointerUp
-        };
-        enter.callback.AddListener((eventData) => {
-            Debug.Log("???? here");
-            buttonFeature();
-            if (!pressStart)
-            {
-                pressStart = true;
-                PressGoToLevelUpPage();
+                ssLevelUper.OpenLevelUpPage(_stone.instanceId);
             }
-        });
-        up.callback.AddListener( (eventData) => { pressStart = false; } );
-        
-        trigger.triggers.Clear();
-        trigger.triggers.Add(enter);
-        trigger.triggers.Add(up);
-        
-        //button.onClick.AddListener(delegate { StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected); });
+        }
+        _Cell.lpGesture.StateChanged += PressGoToLevelUpPage;
+        _Cell.pGesture.Pressed += buttonFeature;
     }
     
-    float lastclicktime;
     public void CellFeature_MAdd(StoneCell _SkillStoneCell)
     {
-        Button button = _SkillStoneCell.GetComponent<Button>();
-        if (button != null)
+        void buttonFeature(object sender, System.EventArgs e)
         {
-            EventTrigger trigger = button.GetComponent<EventTrigger>();
-            trigger.triggers.Clear();
-                
-            void buttonFeature()
-            {
-                if (Time.time - lastclicktime < 0.25f) // double click
-                {
-                    ssLevelUper.AddMaterial(_SkillStoneCell);
-                }
-                lastclicktime = Time.time;
-            }
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(buttonFeature);
-            button.onClick.AddListener(delegate { StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected); });
-            ssLevelUper.AddMSlotBehaviour(_SkillStoneCell);
+            ssLevelUper.AddMaterial(_SkillStoneCell);
+            StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected);
         }
+        _SkillStoneCell.tGesture.Tapped += buttonFeature;
+        //ssLevelUper.AddMSlotBehaviour(_SkillStoneCell);??  这行代码是个谜
     }
 }

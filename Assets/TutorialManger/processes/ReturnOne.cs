@@ -14,7 +14,7 @@ public class ReturnOne : TutorialProcess
     {
         nowstep = ProcessesRunner.Main.currentProcess.Step;
         PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-        popupLayer.HigtLightRect(ReturnButtonManager.ToUseReturnButton.transform);
+        //popupLayer.HigtLightRect(ReturnLayer.ToUseReturnButton.transform);
     }
     
     public override void ProcessEnd()
