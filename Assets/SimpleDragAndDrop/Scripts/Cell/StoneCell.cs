@@ -38,16 +38,6 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     public Color full = new Color(); // Sprite color for filled cell
     
     SKStoneItem myDadItem;
-
-    public SkillStoneSlot _SkillStoneSlot;
-    SingleThreadProcesser _SingleThreadProcesser;
-    
-    void Awake()
-    {
-        _SingleThreadProcesser = transform.GetComponent<SingleThreadProcesser>();
-        if (_SingleThreadProcesser == null)
-            _SingleThreadProcesser = gameObject.AddComponent<SingleThreadProcesser>();
-    }
     
     /// <summary>
     /// Put item into this cell.(Keep old item in that cell safe)
@@ -165,7 +155,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     /// <returns> Item </returns>
     public SKStoneItem GetItem()
     {
-        //UpdateMyItem();
+        UpdateMyItem();
         return myDadItem;
     }
 }

@@ -78,14 +78,11 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
     }
     
-    string stoneOfPlayerId;
-    public void SetTargetStoneID(string value)
-    {
-        stoneOfPlayerId = value;
-    }
+    string targetInstanceId;
+
     public string GetTargetStoneID()
     {
-        return stoneOfPlayerId;
+        return targetInstanceId;
     }
 
     void Awake()
@@ -122,7 +119,7 @@ public partial class SSLevelUpManager : MonoBehaviour
             if (_stone != null && _stone._SkillConfig != null)
             {
                 // 如果点击的不是升级对象技能石
-                if (_stone.instanceId != stoneOfPlayerId)
+                if (_stone.instanceId != targetInstanceId)
                 {
                     _MSkillStoneDetail.RefreshInfo(_stone.instanceId);
                 }
@@ -136,7 +133,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     }
     
     // 显示当前所有技能石消耗与金币消耗两方面合起来把对象技能石升到了多少经验
-    public int CurrentAddExp()
+    int CurrentAddExp()
     {
         return StoneExpManager.GoldToExp(CurrentGoldExaust) + CalCurrentExpFromMaterialStone();
     }
@@ -145,21 +142,19 @@ public partial class SSLevelUpManager : MonoBehaviour
     // 长按技能石进入升级画面，也就是底下的函数。
     public void OpenLevelUpPage()
     {
-        OpenLevelUpPage(stoneOfPlayerId);
+        OpenLevelUpPage(targetInstanceId);
     }
     
-    public void OpenLevelUpPage(string skillstoneofplayer)
+    public void OpenLevelUpPage(string targetInstanceID)
     {
         StoneListLayer stoneListLayer = StoneListLayer.Open();
-        stoneOfPlayerId = skillstoneofplayer;
-        focusingSSD.RefreshInfo(stoneOfPlayerId);
-        SKStoneItem targetStone = Stones.GetRenderModel(stoneOfPlayerId);
+        targetInstanceId = targetInstanceID;
+        focusingSSD.RefreshInfo(targetInstanceId);
+        SKStoneItem targetStone = Stones.GetRenderModel(targetInstanceId);
         targetStone._using = true;
         stoneListLayer.box.RestFilter();
         stoneListLayer.box.rares = new List<int> { 0, 1, 2 };
-        
         stoneListLayer.box.AddFeatureToCells(stoneListLayer.CellFeature_MAdd);
-
         levelUpPageRect.gameObject.SetActive(true);
         RefreshSkillLevelUpModule();
         StoneDeleteManger.target.EnterDeleteModeButton.gameObject.SetActive(false);
@@ -169,11 +164,11 @@ public partial class SSLevelUpManager : MonoBehaviour
     {
         StoneListLayer stoneListLayer = StoneListLayer.Open();
         stoneListLayer.box.rares = new List<int> { 0, 1, 2 ,3, 4, 5};
-        SKStoneItem targetStone = Stones.GetRenderModel(stoneOfPlayerId);
+        SKStoneItem targetStone = Stones.GetRenderModel(targetInstanceId);
         targetStone._using = false;
         stoneListLayer.box.RestFilter();
         SKStoneItem.SeletedRender(targetStone, SkillStonesBox._Selected);
-        focusingSSD.RefreshInfo(stoneOfPlayerId);
+        focusingSSD.RefreshInfo(targetInstanceId);
         ReturnAllMaterialsToBox();
         stoneListLayer.box.AddFeatureToCells(stoneListLayer.CellFeature_StoneShow);
         levelUpPageRect.gameObject.SetActive(false);
@@ -203,13 +198,13 @@ public partial class SSLevelUpManager : MonoBehaviour
     public void RefreshSkillLevelUpModule()
     {
         _MSkillStoneDetail.Clear();
-        if (focusingSSD == null || stoneOfPlayerId == null)
+        if (focusingSSD == null || targetInstanceId == null)
         {
             Clear();
             return;
         }
         
-        StoneOfPlayerInfo StoneInfoModel = Stones.Get(stoneOfPlayerId);
+        StoneOfPlayerInfo StoneInfoModel = Stones.Get(targetInstanceId);
         
         #region 各数值文本刷新
         LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(CurrentAddExp() + StoneInfoModel.EXP);

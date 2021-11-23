@@ -30,7 +30,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     // 技能升级确认。
     public void ConfirmSkillStoneLevelUp()
     {
-        StoneOfPlayerInfo StoneInfoModel = Stones.Get(stoneOfPlayerId);
+        StoneOfPlayerInfo StoneInfoModel = Stones.Get(targetInstanceId);
         if (StoneInfoModel == null)
             return;
         LevelUpStone(StoneInfoModel.InstanceId);

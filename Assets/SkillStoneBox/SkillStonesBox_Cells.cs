@@ -30,7 +30,6 @@ namespace mainMenu
                     cell.empty = new Color(1, 1, 1, 0.6f);
                     cell.full = new Color(1, 1, 1, 1);
                     cell.cellPhase = StoneCell.CellPhase.SkillStoneBoxCell;
-                    cell._SkillStoneSlot = null;
                     CellsDic.Add(i, cell);
                 }
                 
@@ -52,18 +51,9 @@ namespace mainMenu
         
         public void AddFeatureToCells(Action<StoneCell> action)
         {
-            for (int i = 0; i < CellsDic.Count; i++)
-            {
-                Button button = CellsDic[i].GetComponent<Button>();
-                button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(()=> action.Invoke(CellsDic[i]));
-            }
-
             foreach (var cell in CellsDic)
             {
-                Button button = cell.Value.GetComponent<Button>();
-                button.onClick.RemoveAllListeners();
-                button.onClick.AddListener(()=> action.Invoke(cell.Value));
+                action.Invoke(cell.Value);
             }
         }
         

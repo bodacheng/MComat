@@ -41,12 +41,12 @@ public static class SVCenter
     
     public static void MoveItemFromTo(StoneCell from, StoneCell to)
     {
-        SkillEditLayer skillEditLayer = SkillEditLayer.Open();
         SKStoneItem item = from.GetItem();
         if (item == null)
             return;
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
+            SkillEditLayer skillEditLayer = SkillEditLayer.Open();
             if (!CheckIfOtherCharOkAfterStoneRemove(item))
                 return;
             skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(item._SkillConfig.SP_LEVEL, 
@@ -58,6 +58,7 @@ public static class SVCenter
         
         if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || to.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
+            SkillEditLayer skillEditLayer = SkillEditLayer.Open();
             skillEditLayer.NineSlot.NineSlotsStatusRefresh();
         }
         

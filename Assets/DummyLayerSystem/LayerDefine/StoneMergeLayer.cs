@@ -98,29 +98,22 @@ public class StoneMergeLayer : UILayer
         popupLayer.ArrangeConfirmWindow(run, "确实要融合技能石？");
     }
     #endregion
-
-    private float lastclicktime;
-    public void CellButtonBeheviour_StoneMergeMode(StoneCell _SkillStoneCell)
+    
+    public void CellFeature_MergeMode(StoneCell _Cell)
     {
         StoneMergeLayer stoneMergeLayer = StoneMergeLayer.Open();
-        Button button = _SkillStoneCell.GetComponent<Button>();
-        if (button != null)
-        {
-            EventTrigger trigger = button.GetComponent<EventTrigger>();
-            trigger.triggers.Clear();
-                
-            void buttonFeature()
+        
+            void buttonFeature(object sender, System.EventArgs e)
             {
-                if (Time.time - lastclicktime < 0.25f) // double click
-                {
-                    stoneMergeLayer.AddMaterial(_SkillStoneCell);
-                }
-                lastclicktime = Time.time;
+                StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected);
             }
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(buttonFeature);
-            button.onClick.AddListener(delegate { StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected); });
-            stoneMergeLayer.AddMSlotBehaviour(_SkillStoneCell);
+
+            void doubleClick(object sender, System.EventArgs e)
+            {
+                stoneMergeLayer.AddMaterial(_Cell);
+            }
+            _Cell.pGesture.Pressed += buttonFeature;
+            _Cell.tGesture.Tapped += doubleClick;
+            stoneMergeLayer.AddMSlotBehaviour(_Cell);//谜
         }
-    }
 }

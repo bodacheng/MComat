@@ -1,5 +1,6 @@
 using mainMenu;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 using TouchScript.Gestures;
 
@@ -58,23 +59,19 @@ public class StoneListLayer : UILayer
     
     public void CellFeature_StoneShow(StoneCell _Cell)
     {
-        Button button = _Cell.GetComponent<Button>();                
-        button.onClick.RemoveAllListeners();
         void buttonFeature(object sender, System.EventArgs e)
         {
             SKStoneItem _stone = _Cell.GetItem();
             if (_stone != null && _stone._SkillConfig != null)
             {
-                Debug.Log(_Cell);
                 StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected);
                 _skillStoneDetail.RefreshInfo(_stone.instanceId);
-                ssLevelUper.SetTargetStoneID(_stone.instanceId);
             }else{
                 _skillStoneDetail.Clear();
             }
         }
         
-        void PressGoToLevelUpPage(object sender, GestureStateChangeEventArgs e)
+        void PressGoToLevelUpPage( object sender, EventArgs e )
         {
             SKStoneItem _stone = _Cell.GetItem();
             if (_stone != null && _stone._SkillConfig != null)
@@ -82,7 +79,7 @@ public class StoneListLayer : UILayer
                 ssLevelUper.OpenLevelUpPage(_stone.instanceId);
             }
         }
-        _Cell.lpGesture.StateChanged += PressGoToLevelUpPage;
+        _Cell.lpGesture.LongPressed += PressGoToLevelUpPage;
         _Cell.pGesture.Pressed += buttonFeature;
     }
     
@@ -90,10 +87,17 @@ public class StoneListLayer : UILayer
     {
         void buttonFeature(object sender, System.EventArgs e)
         {
-            ssLevelUper.AddMaterial(_SkillStoneCell);
             StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected);
         }
-        _SkillStoneCell.tGesture.Tapped += buttonFeature;
+        
+        void doubleClick(object sender, System.EventArgs e)
+        {
+            Debug.Log(sender + "dj");
+            ssLevelUper.AddMaterial(_SkillStoneCell);
+        }
+        
+        _SkillStoneCell.pGesture.Pressed += buttonFeature;
+        _SkillStoneCell.tGesture.Tapped += doubleClick;
         //ssLevelUper.AddMSlotBehaviour(_SkillStoneCell);??  这行代码是个谜
     }
 }

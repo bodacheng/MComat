@@ -5789,6 +5789,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 2
@@ -8124,6 +8127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 2
@@ -9488,6 +9494,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 2
@@ -9977,6 +9986,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 2
@@ -10714,6 +10726,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 2
@@ -12315,6 +12330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5408700496502991004}
   - component: {fileID: 2315270615730230788}
+  - component: {fileID: 1504541130007122368}
   m_Layer: 5
   m_Name: FXCam
   m_TagString: Untagged
@@ -12379,6 +12395,30 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1504541130007122368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423690007506415245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e5768c36d1bb4acea50bd233372843a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: FXCam
+  basicEditor: 1
+  advancedProps: 0
+  hitProps: 0
+  hit3DObjects: 1
+  hit2DObjects: 1
+  hitWorldSpaceUI: 1
+  hitScreenSpaceUI: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  useHitFilters: 0
 --- !u!1 &7924579687248515758
 GameObject:
   m_ObjectHideFlags: 0

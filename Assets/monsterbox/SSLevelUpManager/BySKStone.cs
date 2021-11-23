@@ -8,15 +8,19 @@ public partial class SSLevelUpManager : MonoBehaviour
     #region 素材的添加与移除
     public void AddMaterial(StoneCell skillboxcell)
     {
-        StoneOfPlayerInfo StoneInfoModel = Stones.Get(stoneOfPlayerId);
+        StoneOfPlayerInfo steppingstone = Stones.Get(targetInstanceId);
+        Debug.Log("为"+ steppingstone);
         for (int i = 0; i < MaterialSlots.Count; i++)
         {
+            Debug.Log("slot"+ MaterialSlots[i]);
             MaterialSlots[i].UpdateMyItem();
             SKStoneItem Material = skillboxcell.GetItem();
             if (MaterialSlots[i].GetItem() == null && Material != null)
             {
-                if (Material.instanceId != StoneInfoModel.InstanceId)
+                Debug.Log(Material.instanceId + ":"+ steppingstone.InstanceId);
+                if (Material.instanceId != steppingstone.InstanceId)
                 {
+                    Debug.Log("dsds");
                     StoneCell.Install(skillboxcell, MaterialSlots[i]);
                     break;
                 }

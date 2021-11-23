@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2536207827391151653}
   - component: {fileID: 5196175124310311101}
+  - component: {fileID: 1268870737905093552}
   m_Layer: 5
   m_Name: FXCam
   m_TagString: Untagged
@@ -74,6 +75,30 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1268870737905093552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097687949072775220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e5768c36d1bb4acea50bd233372843a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: FXCam
+  basicEditor: 1
+  advancedProps: 0
+  hitProps: 0
+  hit3DObjects: 1
+  hit2DObjects: 1
+  hitWorldSpaceUI: 1
+  hitScreenSpaceUI: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  useHitFilters: 0
 --- !u!1 &2523835562621172271
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,6 +844,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
@@ -3311,6 +3339,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
@@ -4086,6 +4117,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 3
@@ -4611,6 +4645,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
@@ -5154,6 +5191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
@@ -6540,6 +6580,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
@@ -7032,6 +7075,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
@@ -7185,6 +7231,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
@@ -7338,6 +7387,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
@@ -8620,6 +8672,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8126d7f21ef4b14b4640c3cc6c0de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lpGesture: {fileID: 0}
+  pGesture: {fileID: 0}
+  tGesture: {fileID: 0}
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
@@ -11663,7 +11718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.91764706, b: 1, a: 0.49019608}
+  m_Color: {r: 0, g: 1, b: 0, a: 0.49019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11756,7 +11811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.91764706, b: 1, a: 0.78431374}
+  m_Color: {r: 0, g: 1, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11849,7 +11904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.91764706, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11965,8 +12020,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294961664
-  m_fontColor: {r: 0, g: 0.91764706, b: 1, a: 1}
+    rgba: 4278255360
+  m_fontColor: {r: 0, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

@@ -15,14 +15,11 @@ using Api.Dto.Model;
 
 public class SkillStoneSlot
 {
-    public int number;
     public StoneCell _DragAndDropCell;
     
     public SkillStoneSlot(int num, StoneCell _DragAndDropCell)
     {
-        number = num;
         this._DragAndDropCell = _DragAndDropCell;
-        this._DragAndDropCell._SkillStoneSlot = this;
     }
 
     public void TakeASkillStoneFromBoxToSlot(string stoneOfPlayerID, Color itemColor)
