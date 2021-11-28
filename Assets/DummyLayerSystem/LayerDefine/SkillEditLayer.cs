@@ -6,7 +6,6 @@ using dataAccess;
 using System.Collections.Generic;
 using System.Linq;
 using Skill;
-using UniRx;
 
 public class SkillEditLayer : UILayer
 {
@@ -31,13 +30,11 @@ public class SkillEditLayer : UILayer
     public static SkillEditLayer Get()
     {
         UILayer l = UILayerLoader.Get("SkillEditLayer");
-        SkillEditLayer returnValue;
         if (l != null)
         {
-            returnValue = l as SkillEditLayer;
+            var returnValue = l as SkillEditLayer;
             return returnValue;
         }
-
         return null;
     }
     
@@ -232,7 +229,7 @@ public class SkillEditLayer : UILayer
         }
     }
     
-    void AddRandomStoneToSlot(string monsterOfPlayerId, int targetSlot, string skillid)
+    void AddRandomStoneToSlot(string monsterOfPlayerId, int targetSlot, string skillID)
     {
         if (NineSlot.allSlot[targetSlot - 1]._DragAndDropCell.GetItem() != null)
         {
@@ -240,8 +237,8 @@ public class SkillEditLayer : UILayer
         }
         
         StoneOfPlayerInfo originSkillInfo = Stones.GetOriginSkillOfMonster(monsterOfPlayerId);
-        List<string> Options = Stones.GetMyStonesBySkillID(skillid);
-        if (originSkillInfo != null && skillid == originSkillInfo.skillId)
+        List<string> Options = Stones.GetMyStonesBySkillID(skillID);
+        if (originSkillInfo != null && skillID == originSkillInfo.skillId)
         {
             NineSlot.allSlot[targetSlot - 1]._DragAndDropCell.AddItem(Stones.GetRenderModel(originSkillInfo.InstanceId));
         }else{
@@ -259,7 +256,7 @@ public class SkillEditLayer : UILayer
             NineSlot.allSlot[targetSlot - 1]._DragAndDropCell.AddItem(Stones.GetRenderModel(targetStoneId));
         }
 
-        SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillid);
+        SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
         StonesBox._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(skillConfig.SP_LEVEL,
             ScreenPositionCal.Cal(1, fxCamera, NineSlot.allSlot[targetSlot - 1]._DragAndDropCell.GetComponent<RectTransform>(), 3),
             StonesBox._SkillStoneBoxTabEffectsManager.transform);
