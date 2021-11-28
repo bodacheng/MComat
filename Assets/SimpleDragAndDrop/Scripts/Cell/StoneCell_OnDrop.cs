@@ -1,8 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public partial class StoneCell : MonoBehaviour, IDropHandler
 {
+    private Action<StoneCell, StoneCell> OnDropAction;
+    
+    public void SetOnDropAction(Action<StoneCell, StoneCell> action)
+    {
+        OnDropAction = action;
+    }
+    
     /// <summary>
     /// Item is dropped in this cell
     /// </summary>
@@ -18,42 +26,9 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             sourceCell = SKStoneItem.sourceCell;
             if (sourceCell == this)
                 return;
-            // If icon inactive do not need to drop item into cell
-            if (SKStoneItem.icon.activeSelf == true)
+            if (SKStoneItem.icon.activeSelf)
             {
-                switch (cellPhase)//自身phase
-                {
-                    case CellPhase.NineSlotCell:
-                        switch (sourceCell.cellPhase)
-                        {
-                            case CellPhase.NineSlotCell:
-                            case CellPhase.SkillStoneBoxCell:
-                                Install(sourceCell, this);
-                            break;
-                        }
-                    break;
-                    case CellPhase.SkillStoneBoxCell:
-                        switch (sourceCell.cellPhase)
-                        {
-                            case CellPhase.NineSlotCell:// 已装备石头的卸载
-                                Install(sourceCell, this);
-                            break;
-                            case CellPhase.SKLevelUpMSlot:// 已装备石头的卸载                            
-                                Install(sourceCell, this);
-                            break;
-                        }
-                    break;
-                    case CellPhase.SKLevelUpMSlot:
-                        StoneListLayer sl = StoneListLayer.Get();
-                        if (item.instanceId != sl.ssLevelUper.GetTargetStoneID())
-                        {
-                            Install(sourceCell, this);
-                        }
-                    break;
-                    case CellPhase.StoneMergeSlot:
-                        Install(sourceCell, this);
-                    break;
-                }
+                OnDropAction.Invoke(sourceCell, this);
             }
             sourceCell.UpdateMyItem();
         }

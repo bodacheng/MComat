@@ -68,6 +68,11 @@ public class StoneListLayer : UILayer
         UILayerLoader.Remove("StoneListLayer");
     }
     
+    void OnDropAction(StoneCell source, StoneCell to)
+    {
+        StoneCell.Install(source, to);
+    }
+    
     public void CellFeature_StoneShow(StoneCell _Cell)
     {
         void buttonFeature(object sender, System.EventArgs e)
@@ -92,23 +97,27 @@ public class StoneListLayer : UILayer
         }
         _Cell.lpGesture.LongPressed += PressGoToLevelUpPage;
         _Cell.pGesture.Pressed += buttonFeature;
+        
+        _Cell.SetOnDropAction(OnDropAction);
     }
     
-    public void CellFeature_MAdd(StoneCell _SkillStoneCell)
+    public void CellFeature_MAdd(StoneCell _Cell)
     {
         void buttonFeature(object sender, System.EventArgs e)
         {
-            StoneCell.SeletedRender(_SkillStoneCell, SkillStonesBox._Selected);
+            StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected);
         }
         
         void doubleClick(object sender, System.EventArgs e)
         {
             Debug.Log(sender + "dj");
-            ssLevelUper.AddMaterial(_SkillStoneCell);
+            ssLevelUper.AddMaterial(_Cell);
         }
         
-        _SkillStoneCell.pGesture.Pressed += buttonFeature;
-        _SkillStoneCell.tGesture.Tapped += doubleClick;
+        _Cell.pGesture.Pressed += buttonFeature;
+        _Cell.tGesture.Tapped += doubleClick;
+        
+        _Cell.SetOnDropAction(OnDropAction);
         //ssLevelUper.AddMSlotBehaviour(_SkillStoneCell);??  这行代码是个谜
     }
 }

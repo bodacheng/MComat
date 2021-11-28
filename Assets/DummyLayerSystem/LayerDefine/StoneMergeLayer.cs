@@ -49,26 +49,27 @@ public class StoneMergeLayer : UILayer
     }
 
     #region 材料槽功能加载
-    public void AddMSlotBehaviour(StoneCell cell)
+    void AddMSlotBehaviour(StoneCell _Cell)
     {
-        Button button = cell.GetComponent<Button>();
+        Button button = _Cell.GetComponent<Button>();
         if (button != null)
         {
-            button.onClick.AddListener(delegate { StoneCell.SeletedRender(cell, SkillStonesBox._Selected); });
+            button.onClick.AddListener(delegate { StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected); });
         }
+        _Cell.SetOnDropAction(OnDropAction);
     }
     #endregion
 
     #region 素材的添加与移除
-    public void AddMaterial(StoneCell skillboxcell)
+    void AddMaterial(StoneCell @from)
     {
         for (int i = 0; i < MaterialSlots.Count; i++)
         {
             MaterialSlots[i].UpdateMyItem();
-            SKStoneItem Material = skillboxcell.GetItem();
+            SKStoneItem Material = @from.GetItem();
             if (MaterialSlots[i].GetItem() == null && Material != null)
             {
-                StoneCell.Install(skillboxcell, MaterialSlots[i]);
+                StoneCell.Install(@from, MaterialSlots[i]);
                 break;
             }
         }
@@ -101,19 +102,25 @@ public class StoneMergeLayer : UILayer
     
     public void CellFeature_MergeMode(StoneCell _Cell)
     {
-        StoneMergeLayer stoneMergeLayer = StoneMergeLayer.Open();
+        StoneMergeLayer stoneMergeLayer = Open();
         
-            void buttonFeature(object sender, System.EventArgs e)
-            {
-                StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected);
-            }
-
-            void doubleClick(object sender, System.EventArgs e)
-            {
-                stoneMergeLayer.AddMaterial(_Cell);
-            }
-            _Cell.pGesture.Pressed += buttonFeature;
-            _Cell.tGesture.Tapped += doubleClick;
-            stoneMergeLayer.AddMSlotBehaviour(_Cell);//谜
+        void buttonFeature(object sender, System.EventArgs e)
+        {
+            StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected);
         }
+
+        void doubleClick(object sender, System.EventArgs e)
+        {
+            stoneMergeLayer.AddMaterial(_Cell);
+        }
+        _Cell.pGesture.Pressed += buttonFeature;
+        _Cell.tGesture.Tapped += doubleClick;
+        
+        _Cell.SetOnDropAction(OnDropAction);
+    }
+    
+    void OnDropAction(StoneCell source, StoneCell to)
+    {
+        StoneCell.Install(source, to);
+    }
 }

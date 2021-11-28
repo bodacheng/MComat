@@ -301,6 +301,13 @@ public class SkillEditLayer : UILayer
         _Cell.pGesture.Pressed += buttonFeature;
         _Cell.lpGesture.StateChanged += PressGoToLevelUpPage;
         _Cell.tGesture.Tapped += doubleClick;
+        
+        _Cell.SetOnDropAction(OnDropAction);
+    }
+    
+    void OnDropAction(StoneCell source, StoneCell to)
+    {
+        StoneCell.Install(source, to);
     }
     
     // 技能浏览器模式
@@ -319,5 +326,7 @@ public class SkillEditLayer : UILayer
             StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected);
         }
         _Cell.pGesture.Pressed += buttonFeature;
+        
+        _Cell.SetOnDropAction(OnDropAction);
     }
 }

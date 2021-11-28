@@ -119,6 +119,13 @@ namespace mainMenu
             slot._DragAndDropCell.pGesture.Pressed += buttonFeature;
             slot._DragAndDropCell.tGesture.Tapped += doubleClick;
             slot._DragAndDropCell.lpGesture.StateChanged += PressGoToLevelUpPage;
+            
+            slot._DragAndDropCell.SetOnDropAction(OnDropAction);
+        }
+
+        void OnDropAction(StoneCell source, StoneCell to)
+        {
+            StoneCell.Install(source, to);
         }
         
         public void StartUp()

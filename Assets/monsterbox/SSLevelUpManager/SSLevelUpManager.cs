@@ -105,7 +105,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     }
     
     // 材料槽
-    public void AddMSlotBehaviour(StoneCell cell)
+    void AddMSlotBehaviour(StoneCell cell)
     {
         Button button = cell.GetComponent<Button>();
         if (button == null)
@@ -127,9 +127,25 @@ public partial class SSLevelUpManager : MonoBehaviour
             else{
                 _MSkillStoneDetail.Clear();
             }
+            StoneCell.SeletedRender(cell, SkillStonesBox._Selected);
         }
         button.onClick.AddListener(buttonFeature);
-        button.onClick.AddListener(delegate { StoneCell.SeletedRender(cell, SkillStonesBox._Selected); });
+        cell.SetOnDropAction(OnDropAction);
+    }
+    
+    void OnDropAction(StoneCell source, StoneCell to)
+    {
+        if (SKStoneItem.icon != null)
+        {
+            SKStoneItem item = SKStoneItem.draggedItem;
+            if (item == null)
+                return;
+            StoneListLayer sl = StoneListLayer.Get();
+            if (item.instanceId != sl.ssLevelUper.GetTargetStoneID())
+            {
+                StoneCell.Install(source, to);
+            }
+        }
     }
     
     // 显示当前所有技能石消耗与金币消耗两方面合起来把对象技能石升到了多少经验
