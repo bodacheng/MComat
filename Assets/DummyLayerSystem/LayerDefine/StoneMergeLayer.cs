@@ -56,7 +56,7 @@ public class StoneMergeLayer : UILayer
         {
             button.onClick.AddListener(delegate { StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected); });
         }
-        _Cell.SetOnDropAction(OnDropAction);
+        _Cell.SetOnDropAction(StoneCell.Install);
     }
     #endregion
 
@@ -116,11 +116,6 @@ public class StoneMergeLayer : UILayer
         _Cell.pGesture.Pressed += buttonFeature;
         _Cell.tGesture.Tapped += doubleClick;
         
-        _Cell.SetOnDropAction(OnDropAction);
-    }
-    
-    void OnDropAction(StoneCell source, StoneCell to)
-    {
-        StoneCell.Install(source, to);
+        _Cell.SetOnDropAction(StoneCell.Install);
     }
 }
