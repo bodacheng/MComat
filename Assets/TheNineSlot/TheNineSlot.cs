@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using Michsky.UI.Shift;
+using TouchScript.Gestures;
 using UniRx;
+using Michsky.UI.Shift;
 
 namespace mainMenu
 {
@@ -60,11 +60,7 @@ namespace mainMenu
         SkillStoneSlot C1Slot, C2Slot, C3Slot;
         public SkillStoneSlot focusingSlot;
         public readonly List<SkillStoneSlot> allSlot = new List<SkillStoneSlot>();
-        float last_clickTime;
-        bool pressStart;
-        float pressingSeconds;
-        SingleAssignmentDisposable pressCount;
-        
+
         public void SeletedRender(StoneCell cell)
         {
             if (cell == null)
@@ -86,93 +82,43 @@ namespace mainMenu
             return focusingSlot;
         }
         
-        public void SlotButtonBeheviour(SkillStoneSlot skillStoneSlot)
+        public void SlotButtonBeheviour(SkillStoneSlot slot)
         {
-            Button button = skillStoneSlot._DragAndDropCell.gameObject.GetComponent<Button>();
-            if (button != null)
+            void buttonFeature(object sender, System.EventArgs e)
             {
-                void buttonFeature()
+                focusingSlot = slot;
+                SeletedRender(focusingSlot._DragAndDropCell);
+                slot._DragAndDropCell.UpdateMyItem();
+                SKStoneItem _SkillStone = slot._DragAndDropCell.GetItem();
+                if (_SkillStone != null && _SkillStone._SkillConfig != null)
                 {
-                    if (Time.time - last_clickTime < 0.25f)
-                    {
-                        focusingSlot = null;
-                        SeletedRender(null);
-                    } else {
-                        focusingSlot = skillStoneSlot;
-                        SeletedRender(focusingSlot._DragAndDropCell);
-                    }
-                    last_clickTime = Time.time;
-                    skillStoneSlot._DragAndDropCell.UpdateMyItem();
-                    SKStoneItem _SkillStone = skillStoneSlot._DragAndDropCell.GetItem();
-                    if (_SkillStone != null && _SkillStone._SkillConfig != null)
-                    {
-                        _skillStoneDetail.RefreshInfo(_SkillStone.instanceId);
-                        mainProcessRunner.RunAsQueued(SkillShowSupporter.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
-                    }else{
-                        _skillStoneDetail.Clear();
-                    }
+                    _skillStoneDetail.RefreshInfo(_SkillStone.instanceId);
+                    mainProcessRunner.RunAsQueued(SkillShowSupporter.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
+                }else{
+                    _skillStoneDetail.Clear();
                 }
-                
-                EventTrigger trigger = button.GetComponent<EventTrigger>();
-                EventTrigger.Entry enter = new EventTrigger.Entry
-                {
-                    eventID = EventTriggerType.PointerDown
-                };
-                EventTrigger.Entry up = new EventTrigger.Entry
-                {
-                    eventID = EventTriggerType.PointerUp
-                };
-                enter.callback.AddListener((eventData) => {
-                    if (!pressStart)
-                    {
-                        pressStart = true;
-                        PressGoToLevelUpPage(skillStoneSlot._DragAndDropCell);
-                        StoneCell.SeletedRender(skillStoneSlot._DragAndDropCell, SelectedFrame);
-                        buttonFeature();
-                    }
-
-                } );
-                up.callback.AddListener( (eventData) => { pressStart = false; } );
-                
-                trigger.triggers.Clear();
-                trigger.triggers.Add(enter);
-                trigger.triggers.Add(up);
             }
-        }
-        
-        // 前往技能石升级画面
-        public void PressGoToLevelUpPage(StoneCell _SkillStoneCell)
-        {
-            pressCount = new SingleAssignmentDisposable
+
+            void doubleClick(object sender, System.EventArgs e)
             {
-                Disposable = Observable.EveryUpdate().Subscribe(_ =>
-                    {
-                        if (pressStart)
-                        {
-                            pressingSeconds += Time.deltaTime;
-                            if (pressingSeconds > 1f)
-                            {
-                                pressingSeconds = 0;
-                                pressStart = false;
-                                SKStoneItem _stone = _SkillStoneCell.GetItem();
-                                if (_stone != null && _stone._SkillConfig != null)
-                                {
-                                    if (FightGlobalSetting._skillStoneHasExp)
-                                        PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.instanceId, true);
-                                }
-                            }
-                        }
-                        if (!pressStart)
-                        {
-                            pressingSeconds = 0;
-                            if (!pressCount.IsDisposed)
-                            {
-                                pressCount.Dispose();
-                            }
-                        }
-                    }
-                )
-            };
+                focusingSlot = null;
+                SeletedRender(null);
+            }
+            
+            // 前往技能石升级画面
+            void PressGoToLevelUpPage(object sender, GestureStateChangeEventArgs e)
+            {
+                SKStoneItem _stone = slot._DragAndDropCell.GetItem();
+                if (_stone != null && _stone._SkillConfig != null)
+                {
+                    if (FightGlobalSetting._skillStoneHasExp)
+                        PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.instanceId, true);
+                }
+            }
+            
+            slot._DragAndDropCell.pGesture.Pressed += buttonFeature;
+            slot._DragAndDropCell.tGesture.Tapped += doubleClick;
+            slot._DragAndDropCell.lpGesture.StateChanged += PressGoToLevelUpPage;
         }
         
         public void StartUp()
