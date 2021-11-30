@@ -81,13 +81,13 @@ namespace mainMenu
                 }
             }
 
-            void sucess(IDictionary<string, Tuple<string, string>> ee)
+            void Success(IDictionary<string, Tuple<string, string>> ee)
             {
                 Stones.RefreshLocalStoneParams(ee);
                 ReadANineAndTwo(info);
                 SkillEditLayer skillEditLayer = SkillEditLayer.Open();
                 skillEditLayer.StonesBox.RestFilter();
-                SeletedRender(null);
+                SelectedRender(null);
                 SkillEditConfirmAnimation();
 
                 MainSceneLog skillConfirmLog = new MainSceneLog()
@@ -115,7 +115,7 @@ namespace mainMenu
             void error()
             {
                 ReadANineAndTwo(info);
-                SeletedRender(null);
+                SelectedRender(null);
                 MainSceneLog skillConfirmLog = new MainSceneLog()
                 {
                     step = ProcessesRunner.Main.currentProcess.Step,
@@ -124,7 +124,7 @@ namespace mainMenu
                 MainSceneLogger.Logs.Add(skillConfirmLog);
             }
 
-            CloudScript.UpdateSkillEdit(ToEditStones, () => sucess(ToEditStones), error);
+            CloudScript.UpdateSkillEdit(ToEditStones, () => Success(ToEditStones), error);
         }
         
         // 下面这个貌似还是有地方用。。。先别删

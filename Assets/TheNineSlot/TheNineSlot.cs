@@ -10,10 +10,6 @@ namespace mainMenu
     public partial class TheNineSlot : MonoBehaviour
     {
         [Space(5)]
-        [Header("进程器")]
-        [SerializeField] SingleThreadProcesser mainProcessRunner;
-        
-        [Space(5)]
         [Header("CurrentHp")]
         [SerializeField] Text _HP;
         
@@ -58,10 +54,9 @@ namespace mainMenu
         SkillStoneSlot A1Slot, A2Slot, A3Slot;
         SkillStoneSlot B1Slot, B2Slot, B3Slot;
         SkillStoneSlot C1Slot, C2Slot, C3Slot;
-        public SkillStoneSlot focusingSlot;
+        SkillStoneSlot focusingSlot;
         public readonly List<SkillStoneSlot> allSlot = new List<SkillStoneSlot>();
-
-        public void SeletedRender(StoneCell cell)
+        void SelectedRender(StoneCell cell)
         {
             if (cell == null)
             {
@@ -82,18 +77,18 @@ namespace mainMenu
             return focusingSlot;
         }
         
-        public void SlotButtonBeheviour(SkillStoneSlot slot)
+        void SlotButtonBehaviour(SkillStoneSlot slot)
         {
             void buttonFeature(object sender, System.EventArgs e)
             {
                 focusingSlot = slot;
-                SeletedRender(focusingSlot._DragAndDropCell);
+                SelectedRender(focusingSlot._DragAndDropCell);
                 slot._DragAndDropCell.UpdateMyItem();
                 SKStoneItem _SkillStone = slot._DragAndDropCell.GetItem();
                 if (_SkillStone != null && _SkillStone._SkillConfig != null)
                 {
                     _skillStoneDetail.RefreshInfo(_SkillStone.instanceId);
-                    mainProcessRunner.RunAsQueued(SkillShowSupporter.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
+                    PreScene.target.mainProcessRunner.RunAsQueued(SkillShowSupporter.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
                 }else{
                     _skillStoneDetail.Clear();
                 }
@@ -102,30 +97,31 @@ namespace mainMenu
             void doubleClick(object sender, System.EventArgs e)
             {
                 focusingSlot = null;
-                SeletedRender(null);
+                SelectedRender(null);
             }
             
             // 前往技能石升级画面
-            void PressGoToLevelUpPage(object sender, GestureStateChangeEventArgs e)
+            void GoToLevelUpPage(object sender, GestureStateChangeEventArgs e)
             {
+                if (!FightGlobalSetting._skillStoneHasExp)
+                    return;
                 SKStoneItem _stone = slot._DragAndDropCell.GetItem();
                 if (_stone != null && _stone._SkillConfig != null)
                 {
-                    if (FightGlobalSetting._skillStoneHasExp)
-                        PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.instanceId, true);
+                    PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.instanceId, true);
                 }
             }
             
             slot._DragAndDropCell.pGesture.Pressed += buttonFeature;
-            slot._DragAndDropCell.tGesture.Tapped += doubleClick;
-            slot._DragAndDropCell.lpGesture.StateChanged += PressGoToLevelUpPage;
+            //slot._DragAndDropCell.tGesture.Tapped += doubleClick;
+            //slot._DragAndDropCell.lpGesture.StateChanged += GoToLevelUpPage;
             
             slot._DragAndDropCell.SetOnDropAction(StoneCell.Install);
         }
         
         public void StartUp()
         {
-            SeletedRender(null);
+            SelectedRender(null);
             
             A1Slot = new SkillStoneSlot(1, A1DragAndDropCell);
             A2Slot = new SkillStoneSlot(2, A2DragAndDropCell);
@@ -150,7 +146,7 @@ namespace mainMenu
 
             foreach (SkillStoneSlot _slot in allSlot)
             {
-                SlotButtonBeheviour(_slot);
+                SlotButtonBehaviour(_slot);
             }
         }
         
