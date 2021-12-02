@@ -10,10 +10,8 @@ namespace mainMenu
     {
         public void UpdateStonesBaseOnSlots(UnitInfo info)
         {
-            SkillSet.SkillEditError valR = CheckEditBasedOnCurrent();
-            if (valR != SkillSet.SkillEditError.Perfect)
+            if (CheckEditBasedOnCurrent() != SkillSet.SkillEditError.Perfect)
             {
-                ValiationWarn(valR, info.id);
                 return;
             }
             List<StoneOfPlayerInfo> equiping = Stones.GetEquipingStones(info.id);

@@ -61,6 +61,9 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
 	/// <param name="eventData"></param>
 	public void OnBeginDrag(PointerEventData eventData)
 	{
+		if (icon != null)
+			return;
+		
         sourceCell = GetCell();                       							// Remember source cell
         draggedItem = this;                                                     // Set as dragged item
                                                                                 // Create item's icon
@@ -76,7 +79,7 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
         //iconImage.color = myImage.color;
         
         // version 2
-        icon = Instantiate(this.gameObject) as GameObject;
+        icon = Instantiate(this.gameObject);
         transform.GetComponent<Image>().color = new Color(transform.GetComponent<Image>().color.r, transform.GetComponent<Image>().color.g, transform.GetComponent<Image>().color.b,0);
         icon.transform.SetParent(canvas.transform);
         icon.name = "Icon";

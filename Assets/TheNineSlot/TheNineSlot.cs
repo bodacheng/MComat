@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TouchScript.Gestures;
-using UniRx;
 using Michsky.UI.Shift;
 
 namespace mainMenu
@@ -33,10 +33,6 @@ namespace mainMenu
         public Button ResetButton;
         
         [Space(7)]
-        [Header("技能石详细")]
-        public SkillStoneDetail _skillStoneDetail;
-        
-        [Space(7)]
         [Header("EXPoint+")]
         public List<GameObject> remainCharges;//固定是9个长度
         [Space(7)]
@@ -56,6 +52,9 @@ namespace mainMenu
         SkillStoneSlot C1Slot, C2Slot, C3Slot;
         SkillStoneSlot focusingSlot;
         public readonly List<SkillStoneSlot> allSlot = new List<SkillStoneSlot>();
+
+        public Action<string> PrintSkillInfo;
+        
         void SelectedRender(StoneCell cell)
         {
             if (cell == null)
@@ -87,10 +86,10 @@ namespace mainMenu
                 SKStoneItem _SkillStone = slot._DragAndDropCell.GetItem();
                 if (_SkillStone != null && _SkillStone._SkillConfig != null)
                 {
-                    _skillStoneDetail.RefreshInfo(_SkillStone.instanceId);
+                    PrintSkillInfo.Invoke(_SkillStone.instanceId);
                     PreScene.target.mainProcessRunner.RunAsQueued(SkillShowSupporter.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
                 }else{
-                    _skillStoneDetail.Clear();
+                    PrintSkillInfo.Invoke(null);
                 }
             }
 
@@ -115,8 +114,12 @@ namespace mainMenu
             slot._DragAndDropCell.pGesture.Pressed += buttonFeature;
             //slot._DragAndDropCell.tGesture.Tapped += doubleClick;
             //slot._DragAndDropCell.lpGesture.StateChanged += GoToLevelUpPage;
-            
-            slot._DragAndDropCell.SetOnDropAction(StoneCell.Install);
+
+            slot._DragAndDropCell.SetOnDropAction(((from, to) =>
+            {
+                StoneCell.Install(from, to);
+                ValidateWarn();
+            }));
         }
         
         public void StartUp()

@@ -44,6 +44,7 @@ namespace mainMenu
         public void ResetNineSlot()
         {
             ReadANineAndTwo(PreScene.target._focusing);
+            ValidateWarn();
         }
     }
 }

@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 using dataAccess;
-using mainMenu;
 using DG.Tweening;
 
 public static class SVCenter
 {
     public static void StoneRemoveFromSlotToCell(StoneCell sourceCell, StoneCell boxcell)
     {
-        Debug.Log("from:"+ sourceCell);
         SkillEditLayer skillEditLayer = SkillEditLayer.Open();
-        
         SKStoneItem stone = sourceCell.GetItem();
         if (stone != null && stone.Inherent)
         {
@@ -49,7 +46,7 @@ public static class SVCenter
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
             SkillEditLayer skillEditLayer = SkillEditLayer.Open();
-            if (!CheckIfOtherCharOkAfterStoneRemove(item))
+            if (!CheckIfOtherUnitOkAfterStoneRemove(item))
                 return;
             skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(item._SkillConfig.SP_LEVEL, 
             ScreenPositionCal.Cal(1, skillEditLayer.fxCamera, to.GetComponent<RectTransform>(), 3), 
@@ -81,7 +78,7 @@ public static class SVCenter
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
             SkillEditLayer skillEditLayer = SkillEditLayer.Get();
-            if (!CheckIfOtherCharOkAfterStoneRemove(itemFromCell))
+            if (!CheckIfOtherUnitOkAfterStoneRemove(itemFromCell))
                 return;
             skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(itemFromCell._SkillConfig.SP_LEVEL, 
             ScreenPositionCal.Cal(1, skillEditLayer.fxCamera, to.GetComponent<RectTransform>(), 3), 
@@ -137,12 +134,15 @@ public static class SVCenter
         {
             firstCell.AddItem(secondItem);
             secondItem.transform.position = secondCell.transform.position;
-            secondItem.transform.DOMove(firstCell.transform.position,0.5f);
+            secondItem.transform.DOMove(firstCell.transform.position,0.5f).OnComplete(() =>
+            {
+                secondItem.transform.localPosition = Vector3.zero;
+            });
         }
     }
     
     // 尝试装载的技能石正被其他角色使用时候，对那个其他角色进行validation检验
-    static bool CheckIfOtherCharOkAfterStoneRemove(SKStoneItem item)
+    static bool CheckIfOtherUnitOkAfterStoneRemove(SKStoneItem item)
     {
         SkillEditLayer skillEditLayer = SkillEditLayer.Open();
         if (item.Inherent)
@@ -156,7 +156,7 @@ public static class SVCenter
             SkillSet.SkillEditError valR3 = skillEditLayer.NineSlot.CheckEditAfterOneStoneRemoved(monsterPlayerID, item._SkillConfig.RECORD_ID);
             if (valR3 != SkillSet.SkillEditError.Perfect)
             {
-                skillEditLayer.NineSlot.ValiationWarn(valR3, monsterPlayerID);
+                skillEditLayer.NineSlot.ValidationWarn(valR3, monsterPlayerID);
                 return false;
             }
         }

@@ -92,7 +92,7 @@ namespace mainMenu
         }
         
         // 返回的是技能定义ID，长度固定为9
-        public List<string> GetCurrentNineSlotAllSkillIds()
+        List<string> GetCurrentNineSlotAllSkillIds()
         {
             List<string> NineSkillIDs = new List<string>();
             string A1 = A1DragAndDropCell.GetItem() != null ? A1DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";

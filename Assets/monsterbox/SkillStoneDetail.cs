@@ -90,9 +90,9 @@ namespace mainMenu
             }
         }
         
-        public void RefreshInfo(string skillStoneOfPlayerId)
+        public void RefreshInfo(string instanceID)
         {
-            StoneOfPlayerInfo currentstone = Stones.Get(skillStoneOfPlayerId);
+            StoneOfPlayerInfo currentstone = Stones.Get(instanceID);
             if (currentstone == null)
             {
                 Clear();

@@ -23,7 +23,6 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             SKStoneItem item = SKStoneItem.draggedItem;
             if (item == null)
                 return;
-            sourceCell = SKStoneItem.sourceCell;
             if (sourceCell == this)
                 return;
             if (SKStoneItem.icon.activeSelf)

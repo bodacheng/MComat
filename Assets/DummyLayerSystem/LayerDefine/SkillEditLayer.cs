@@ -50,6 +50,7 @@ public class SkillEditLayer : UILayer
         
         l = UILayerLoader.Load(PreScene.target.T,"SkillEditLayer") as SkillEditLayer;
         returnValue = l as SkillEditLayer;
+        returnValue.NineSlot.PrintSkillInfo = returnValue._skillStoneDetail.RefreshInfo;
         returnValue.NineSlot.StartUp();
         returnValue.StonesBox.GenerateCells();
         returnValue.StonesBox._SkillStoneBoxTabEffectsManager.StartUp();
@@ -86,10 +87,6 @@ public class SkillEditLayer : UILayer
         UILayerLoader.Remove("SkillEditLayer");
     }
     
-    // 技能编辑画面的进入按钮按下时候的处理。有这样几个逻辑上极其极其重要的点
-    // 1. 每次进入一次技能编辑画面，代表技能石头盒子进入了一个针对特定type角色的锁定状态，从而应该只生成一次相应type的石头
-    // 2. 除非切换画面，否则石头应该不会再重新生成，进一步说，这次生成石头所进行的石头本地id发配环节(numinbox)也只能进行一次
-    // 3. 除非切换画面，生成的石头应该是数量守恒的，如果消耗就消耗，绝不能出现逻辑错误导致的复制情况
     void SkillEditButtonFeature(UnitInfo _UnitInfo)
     {
         if (_UnitInfo == null || _UnitInfo.r_id == null)
@@ -108,14 +105,11 @@ public class SkillEditLayer : UILayer
         }
         void SkillUpdateValidation()
         {
-            // 第一列技能必须有普通技能
-            SkillSet.SkillEditError valR = NineSlot.CheckEditBasedOnCurrent();
-            if (valR != SkillSet.SkillEditError.Perfect)
+            if (NineSlot.CheckEditBasedOnCurrent() != SkillSet.SkillEditError.Perfect)
             {
-                NineSlot.ValiationWarn(valR, PreScene.target._focusing.id);
                 return;
             }
-
+            
             string warn;
             switch (AppSetting.Language)
             {
@@ -179,7 +173,7 @@ public class SkillEditLayer : UILayer
 
         if (targetSkillSet == null)
         {
-            NineSlot.ValiationWarn(SkillSet.SkillEditError.UnableToFinish, PreScene.target._focusing.id);
+            NineSlot.ValidationWarn(SkillSet.SkillEditError.UnableToFinish, PreScene.target._focusing.id);
         }
         else
         {
