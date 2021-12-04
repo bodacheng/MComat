@@ -58,13 +58,13 @@ namespace mainMenu
         public void CancelSelect()
         {
             selectingInstanceID = null;
-            HeroIcon.Seletedfeature(null, selectedFrame, 150f);
+            HeroIcon.SelectedFeature(null, selectedFrame, 150f);
         }
 
         public void Select(string instanceID)
         {
             HeroIcon targetingIcon = GetUnitIcon(instanceID);
-            HeroIcon.Seletedfeature(targetingIcon, selectedFrame, 150f);
+            HeroIcon.SelectedFeature(targetingIcon, selectedFrame, 150f);
             selectingInstanceID = instanceID;
         }
 

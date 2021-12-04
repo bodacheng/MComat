@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4599398632650404794}
   - component: {fileID: 147610238414042690}
   m_Layer: 5
-  m_Name: chariconpretab
+  m_Name: UnitIconPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

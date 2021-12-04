@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 397087526803126536}
   - component: {fileID: 397087526803126543}
   m_Layer: 5
-  m_Name: selectedframe
+  m_Name: selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -456,7 +456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b64822b218944cc8b599131a14206d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartToTeamEditButton: {fileID: 0}
   RemoveButton: {fileID: 397087525308293043}
   team1front: {fileID: 4203799848282718445}
   team1left: {fileID: 4203799846418772620}
@@ -464,7 +463,6 @@ MonoBehaviour:
   selectedFrame: {fileID: 397087526803126541}
   _nineForShow: {fileID: 4362441782267475170}
   SkillEditButton: {fileID: 915743133412191350}
-  focusingPosNum: -1
 --- !u!1 &4203799846418772616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: fbaa37cd5f9454710a0fdef876aefeff, type: 2}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1264,7 +1262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: fbaa37cd5f9454710a0fdef876aefeff, type: 2}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1339,7 +1337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: fbaa37cd5f9454710a0fdef876aefeff, type: 2}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1712,6 +1710,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490222825170406148, guid: c33785a0a0f404bec93eee5ee37434ac,
+        type: 3}
+      propertyPath: m_Name
+      value: SkillEditBtn
       objectReference: {fileID: 0}
     - target: {fileID: 8915285779473567531, guid: c33785a0a0f404bec93eee5ee37434ac,
         type: 3}

@@ -73,20 +73,16 @@ namespace FightScene
                                 int.TryParse(reward_GDstring, out reward_GDInt) ;
                                 int.TryParse(reward_DIAstring, out reward_DIAInt) ;
                                 
-                                void LoadNextLevel()
-                                {
-                                    NetFightScene.Fight = ArcadeTop.ArcadeStages[NetFightScene.Fight.ID + 1].stageConfig;
-                                    FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
-                                }
                                 ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArcadeFightResult;
-                                cc.Initialise(FightOverControl.target.ReturnToFront, 
+                                cc.Initialise(
+                                    FightOverControl.target.ReturnToFront, 
                                     ()=>
                                     {
                                         FightOverControl.target.LocalGameRestart();
                                         UILayerLoader.Remove("ArcadeFightResult");
-                                    }, 
-                                    LoadNextLevel,
-                                reward_GDInt, reward_DIAInt);
+                                    },
+                                    reward_GDInt, reward_DIAInt
+                                );
                                 Debug.Log("hello"+ cc);
                             },
                             () =>
@@ -103,9 +99,9 @@ namespace FightScene
                              {
                                  FightOverControl.target.LocalGameRestart();
                                  UILayerLoader.Remove("ArcadeFightResult");
-                             }, 
-                            null,
-                            0, 0);
+                             },
+                             0, 
+                             0);
                     }
                     break;
                 case FightEventType.Self:

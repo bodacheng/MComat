@@ -82,7 +82,7 @@ namespace mainMenu
         void CancelSelect()
         {
             focusingPosNum = -1;
-            HeroIcon.Seletedfeature(null, selectedFrame, 200f);
+            HeroIcon.SelectedFeature(null, selectedFrame, 200f);
         }
 
         void ModeSelect(Transform t)
@@ -284,7 +284,7 @@ namespace mainMenu
                 
                 void SelectedRender()
                 {
-                    HeroIcon.Seletedfeature(charIcon, selectedFrame, 110f);
+                    HeroIcon.SelectedFeature(charIcon, selectedFrame, 110f);
                 }
                 void A()
                 {
@@ -306,13 +306,13 @@ namespace mainMenu
                 charIcon.ChangeIcon(null, Zokusei.Null);
                 charIcon.iconButton.onClick.RemoveAllListeners();
                 charIcon.iconButton.onClick.AddListener(() => {OnTeamPosBtn(team, IconNumCheck[charIcon]);});
-                charIcon.iconButton.onClick.AddListener(() => HeroIcon.Seletedfeature(charIcon, selectedFrame, 110f));
+                charIcon.iconButton.onClick.AddListener(() => HeroIcon.SelectedFeature(charIcon, selectedFrame, 110f));
             }
         }
 
         void SelectedRender(HeroIcon charIcon)
         {
-            HeroIcon.Seletedfeature(charIcon, selectedFrame, 110f);
+            HeroIcon.SelectedFeature(charIcon, selectedFrame, 110f);
         }
         
         void OnTeamPosBtn(Team team, int pos)

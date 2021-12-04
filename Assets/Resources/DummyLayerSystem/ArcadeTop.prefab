@@ -699,7 +699,7 @@ MonoBehaviour:
   JumpToNewStage: {fileID: 2148228107022251843}
   _ScrollRect: {fileID: 2148228105718115909}
   _Scrollbar: {fileID: 2148228106211529846}
-  pretab: {fileID: 952904729559763101}
+  iconPrefab: {fileID: 952904729559763101}
   UnitIconPrefab: {fileID: 4599398632650404793, guid: ab04803d5c276457ea03841b256e73bf,
     type: 3}
   _NineForShow: {fileID: 5340505936988530625}

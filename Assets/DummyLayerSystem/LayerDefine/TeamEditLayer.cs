@@ -6,9 +6,8 @@ using UnityEngine.UI;
 
 public class TeamEditLayer : UILayer
 {
-    public Button StartToTeamEditButton;
     public Button RemoveButton;
-    public HeroIcon team1front, team1left, team1right; // 可能允许部分为null。。。来对应不同人数制的队伍编辑
+    public HeroIcon team1front, team1left, team1right;
     
     [Space(7)]
     [Header("选中框")]
@@ -21,66 +20,70 @@ public class TeamEditLayer : UILayer
     [Header("技能编辑按钮")]
     public Button SkillEditButton;
     
-    public int focusingPosNum = -1;
-    readonly IDictionary<int, HeroIcon> teamButtonDic = new Dictionary<int, HeroIcon>();
+    int focusingPos = -1;
+    readonly IDictionary<int, HeroIcon> teamBtnDic = new Dictionary<int, HeroIcon>();
     
-    void Awake()
+    public static TeamEditLayer Open(string teamMode)
     {
-        // edit按钮功能加载
-        SkillEditButton.onClick.RemoveAllListeners();
+        var returnValue = UILayerLoader.Load(PreScene.target.T,"TeamEditLayer") as TeamEditLayer;
+        returnValue.INITeamPosBtns(teamMode);
         void SkillEdit()
         {
             if (PreScene.target._focusing.id != null)
                 PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit, true);
         }
-        SkillEditButton.onClick.AddListener(SkillEdit);
+        returnValue.SkillEditButton.onClick.AddListener(SkillEdit);
+        return returnValue;
+    }
+
+    public static void Close()
+    {
+        UILayerLoader.Remove("TeamEditLayer");
     }
     
     void CancelSelect()
     {
-        focusingPosNum = -1;
-        HeroIcon.Seletedfeature(null, selectedFrame, 200f);
+        focusingPos = -1;
+        HeroIcon.SelectedFeature(null, selectedFrame, 200f);
     }
 
-    public void MonsterIconButton(string CharAccId, string teammode)
+    public void UnitIconClick(string instanceID, string teamMode)
     {
         UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
-        
-        if (focusingPosNum != -1)
+        if (focusingPos != -1)
         {
-            ChangeTeamPos(CharAccId, focusingPosNum, teammode);
+            ChangeTeamPos(instanceID, focusingPos, teamMode);
             CancelSelect();
             unitsLayer.CancelSelect();
         }
         else
         {
-            unitsLayer.Select(CharAccId);
+            unitsLayer.Select(instanceID);
         }
-
-        PreScene.target.SetMemberDetailFocusingChar(CharAccId);//确立focusing角色
-        // mini nineslot show
-        _nineForShow.ShowStones_Acc(CharAccId);
+        
+        PreScene.target.SetMemberDetailFocusingChar(instanceID);//确立focusing角色
+        _nineForShow.ShowStones_Acc(instanceID);
         //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
     }
     
     // 修改对象队伍编程
-    public void ChangeTeamPos(string instanceID, int targetPos, string teammode)
+    void ChangeTeamPos(string instanceID, int targetPos, string teamMode)
     {
-        List<PosKeySet.OneSet> returns = TeamSet.GetTargetSet(teammode).SetPosMemByMonsterOfPlayerID(targetPos, instanceID);
-        for (int i = 0; i < returns.Count;i++)
+        List<PosKeySet.OneSet> returns = TeamSet.GetTargetSet(teamMode).SetPosMemByMonsterOfPlayerID(targetPos, instanceID);
+        for (int i = 0; i < returns.Count; i++)
         {
-            ChangeIconOnPos(returns[i].posNum, teammode);
+            ChangeIconOnPos(returns[i].posNum, teamMode);
         }
     }
 
     // 纯渲染函数
-    void ChangeIconOnPos(int posNum, string teammode)
+    void ChangeIconOnPos(int posNum, string teamMode)
     {
-        if (teamButtonDic.ContainsKey(posNum))
+        if (teamBtnDic.ContainsKey(posNum))
         {
-            HeroIcon tar = teamButtonDic[posNum];
-            string PosMonsterOfPlayerId = TeamSet.GetTargetSet(teammode).GetMonsterOfPlayerIdOnPos(posNum);
-            HeroIcon.ChangeHeroIconByInstanceId(PosMonsterOfPlayerId, tar);
+            HeroIcon tar = teamBtnDic[posNum];
+            string Pos_instanceID = TeamSet.GetTargetSet(teamMode).GetMonsterOfPlayerIdOnPos(posNum);
+            HeroIcon.ChangeHeroIconByInstanceId(Pos_instanceID, tar);
         }
         else
         {
@@ -89,56 +92,56 @@ public class TeamEditLayer : UILayer
     }
 
     #region 初始化（显示目前队伍编辑，加载按钮功能）
-    public void INITeamPosButtons(string teammode)
+    void INITeamPosBtns(string teammode)
     {
-        teamButtonDic.Clear();
-        teamButtonDic.Add(0, team1front);
-        teamButtonDic.Add(1, team1left);
-        teamButtonDic.Add(2, team1right);
+        teamBtnDic.Clear();
+        teamBtnDic.Add(0, team1front);
+        teamBtnDic.Add(1, team1left);
+        teamBtnDic.Add(2, team1right);
         
         // 适配队伍编辑器各个位置初始头像
         ChangeIconOnPos(0, teammode);
         ChangeIconOnPos(1, teammode);
         ChangeIconOnPos(2, teammode);
         
-        RemoveButton.onClick.RemoveAllListeners();
         void Remove()
         {
-            ChangeTeamPos(null, focusingPosNum, teammode);
+            ChangeTeamPos(null, focusingPos, teammode);
             CancelSelect();
         }
         RemoveButton.onClick.AddListener(Remove);
-
         
         void SetPos(int posNum)
         {
             UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
-            string unitsBoxSelect = unitsLayer.GetSelect();
-            if (unitsBoxSelect != null)
+            string selected_instanceID = unitsLayer.GetSelect();
+            if (selected_instanceID != null)
             {
                 Remove();
                 unitsLayer.CancelSelect();
                 CancelSelect();
+                
+                ChangeTeamPos(selected_instanceID, posNum, teammode);
             }
             else
             {
-                focusingPosNum = posNum;
-                switch (focusingPosNum)
+                focusingPos = posNum;
+                switch (focusingPos)
                 {
                     case 0:
-                        HeroIcon.Seletedfeature(team1front, selectedFrame, 200f);
+                        HeroIcon.SelectedFeature(team1front, selectedFrame, 200f);
                         break;
                     case 1:
-                        HeroIcon.Seletedfeature(team1left, selectedFrame, 200f);
+                        HeroIcon.SelectedFeature(team1left, selectedFrame, 200f);
                         break;
                     case 2:
-                        HeroIcon.Seletedfeature(team1right, selectedFrame, 200f);
+                        HeroIcon.SelectedFeature(team1right, selectedFrame, 200f);
                         break;
                     default:
-                        HeroIcon.Seletedfeature(null, selectedFrame, 200f);
+                        HeroIcon.SelectedFeature(null, selectedFrame, 200f);
                         break;
                 }
-                PreScene.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet(teammode).GetMonsterOfPlayerIdOnPos(focusingPosNum));//确立focusing角色
+                PreScene.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet(teammode).GetMonsterOfPlayerIdOnPos(focusingPos));//确立focusing角色
                 //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
                 if (PreScene.target._focusing != null)
                     _nineForShow.ShowStones_Acc(PreScene.target._focusing.id);
@@ -148,27 +151,10 @@ public class TeamEditLayer : UILayer
                 };
             }
         }
-
-        team1front.iconButton.onClick.RemoveAllListeners();
-        void pos1F()
-        {
-            SetPos(0);
-        }
-        team1front.iconButton.onClick.AddListener(pos1F);
         
-        team1left.iconButton.onClick.RemoveAllListeners();
-        void pos1L()
-        {
-            SetPos(1);
-        }
-        team1left.iconButton.onClick.AddListener(pos1L);
-        
-        team1right.iconButton.onClick.RemoveAllListeners();
-        void pos1R()
-        {
-            SetPos(2);
-        }
-        team1right.iconButton.onClick.AddListener(pos1R);
+        team1front.iconButton.onClick.AddListener(() =>{SetPos(0);});
+        team1left.iconButton.onClick.AddListener(() =>{SetPos(1);});
+        team1right.iconButton.onClick.AddListener(() =>{SetPos(2);});
     }
     #endregion
 }

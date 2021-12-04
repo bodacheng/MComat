@@ -23,20 +23,18 @@ public class TeamEditPage : MainSceneProcess
         Step = MainSceneStep.TeamEditFront;
         EelementsInherit(PreScene.target);
     }
-
-    private TeamEditLayer teamEditLayer;
-    public void EnterProcess(string teammode)
+    
+    void EnterProcess(string teammode)
     {
-        teamEditLayer =  UILayerLoader.Load(PreScene.target.T,"TeamEditLayer") as TeamEditLayer;
-        
-        _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
-        teamEditLayer.INITeamPosButtons(teammode);
+        TeamEditLayer teamEditLayer = TeamEditLayer.Open(teammode);
         if (PreScene.target._focusing != null)
             teamEditLayer._nineForShow.ShowStones_Acc(PreScene.target._focusing.id);
         
-        UnitsLayer layer = UnitsLayer.Open();
-        layer.DisplayUnitIcons(true);
-        layer.SetUnitsIconOnClick((x) => teamEditLayer.MonsterIconButton(x, teamMode));
+        UnitsLayer unitsLayer = UnitsLayer.Open();
+        unitsLayer.DisplayUnitIcons(true);
+        unitsLayer.SetUnitsIconOnClick((x) => teamEditLayer.UnitIconClick(x, teamMode));
+        
+        _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
     }
     
     public override void ProcessEnter<T>(T mode)
@@ -48,7 +46,8 @@ public class TeamEditPage : MainSceneProcess
     public override void ProcessEnd()
     {
         UnitsLayer.Close();
-        UILayerLoader.Remove("TeamEditLayer");
+        TeamEditLayer.Close();
+        
         TeamSet.SaveTeamSet(teamMode, TeamSaveFinished);
         switch (teamMode)
         {

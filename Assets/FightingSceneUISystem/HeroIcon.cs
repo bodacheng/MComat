@@ -131,7 +131,7 @@ public class HeroIcon : MonoBehaviour {
         Icon.ChangeIcon(charConfig == null ? null : MonsterIconDic.Get(charConfig.RECORD_ID), charConfig == null ? Zokusei.Null : charConfig._zokusei);
     }
         
-    public static void Seletedfeature(HeroIcon _charIcon, GameObject selectedFrame, float size)
+    public static void SelectedFeature(HeroIcon _charIcon, GameObject selectedFrame, float size)
     {
         if (_charIcon == null)
         {
