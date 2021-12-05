@@ -29,6 +29,10 @@ namespace mainMenu
         [Header("Positions For Show")]
         public Transform MemDetailTargetPos;
         public Transform MemDetailWatchPos;
+
+        [Space(7)] 
+        [Header("角色3D展示器")] 
+        public ModelShower modelShower;
         
         [Space(7)]
         [Header("Shader转换器")]
@@ -82,7 +86,6 @@ namespace mainMenu
         void BasicPhase()
         {
             Application.targetFrameRate = 60;
-            UpperInfoBar.target.T.gameObject.SetActive(false);
             
             #region 主界面各大画面
             FrontPage frontPage = new FrontPage();
@@ -138,7 +141,6 @@ namespace mainMenu
 
         void StartUp()
         {
-            UpperInfoBar.target.Refresh();
             HeroIcon.INIFrames();
 
             HurtObjectManager.ConstructDPool();

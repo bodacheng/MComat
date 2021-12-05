@@ -3,9 +3,6 @@ using UnityEngine;
 using mainMenu;
 using dataAccess;
 using UnityEngine.UI;
-using System.Collections;           
-using UnityEngine;                  
-using dataAccess;                   
 
 public class TeamEditLayer : UILayer
 {
@@ -61,7 +58,7 @@ public class TeamEditLayer : UILayer
         PreScene.target.SetFocusingUnit(instanceID);//确立focusing角色
         _nineForShow.ShowStones_Acc(instanceID);
         
-        SingleThreadProcesser.backup.RunAsQueued(ModelShower.target.ShowMyModel(instanceID));
+        SingleThreadProcesser.backup.RunAsQueued(PreScene.target.modelShower.ShowMyModel(instanceID));
     }
     
     // 修改对象队伍编程
@@ -148,7 +145,7 @@ public class TeamEditLayer : UILayer
                 
                 string instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(focusingPos);
                 PreScene.target.SetFocusingUnit(instanceID);//确立focusing角色
-                SingleThreadProcesser.backup.RunAsQueued(ModelShower.target.ShowMyModel(instanceID));
+                SingleThreadProcesser.backup.RunAsQueued(PreScene.target.modelShower.ShowMyModel(instanceID));
                 if (PreScene.target._focusing != null)
                     _nineForShow.ShowStones_Acc(PreScene.target._focusing.id);
                 else

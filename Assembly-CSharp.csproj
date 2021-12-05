@@ -259,7 +259,7 @@
      <Compile Include="Assets\AnimControl\StateStartsRandom.cs" />
      <Compile Include="Assets\Remote\API\Dto\Model\GetSkillStoneGotchaModel.auto.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\Sci-Fi Effects\Scripts\SciFiRotation.cs" />
-     <Compile Include="Assets\UpperInfoBar\UpperInfoBar.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\UpperInfoBar.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\ShortcutButton.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
      <Compile Include="Assets\FightSceneSystem\FSceneProcess.cs" />

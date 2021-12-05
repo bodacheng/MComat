@@ -29,9 +29,9 @@ public class SkillShowPage : MainSceneProcess
     {
         if (!SkillShowSupporter.IfShowingSkill)
         {
-            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
+            PreScene.target.modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }else{
-            ModelShower.target.CFollowCharZ();
+            PreScene.target.modelShower.CFollowCharZ();
         }
     }
 }

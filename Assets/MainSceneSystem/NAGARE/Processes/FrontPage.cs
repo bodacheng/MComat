@@ -5,7 +5,6 @@ using dataAccess;
 using DG.Tweening;
 using System.Collections.Generic;
 using UniRx;
-using PlayFab;
 using PlayFab.ClientModels;
 
 public class FrontPage : MainSceneProcess
@@ -73,10 +72,9 @@ public class FrontPage : MainSceneProcess
             }
         }
         PreScene.target.SetFocusingUnit(focus_instanceID);//确立focusing角色
-        yield return ModelShower.target.ShowMyModel(focus_instanceID);
+        yield return PreScene.target.modelShower.ShowMyModel(focus_instanceID);
         //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
-        UpperInfoBar.target.T.gameObject.SetActive(true);
-        Debug.Log("front ended");
+        UpperInfoBar.Open(PreScene.target.OpenSetting, () => PreScene.target.trySwitchToStep(11));
     }
     
     public override void ProcessEnter()
@@ -120,7 +118,7 @@ public class FrontPage : MainSceneProcess
         StatisticsLoadFinished(0);
 
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
-        UpperInfoBar.target.T.gameObject.SetActive(false);
+        UpperInfoBar.Close();
         BigButtonRender.target.TestOff();
     }
 
@@ -129,9 +127,9 @@ public class FrontPage : MainSceneProcess
     {
         if (!SkillShowSupporter.IfShowingSkill)
         {
-            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
+            PreScene.target.modelShower.TranslateShowingCharToDefaultPos(screenPos);
         }else{
-            ModelShower.target.CFollowCharZ();
+            PreScene.target.modelShower.CFollowCharZ();
         }
     }
 }

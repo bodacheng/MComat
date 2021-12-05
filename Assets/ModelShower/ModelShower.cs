@@ -10,14 +10,11 @@ public class ModelShower : MonoBehaviour
 
     public static float _nearClipPlane = 10f;
     
-    public static ModelShower target;
-    
     PinchZoom pinchZoom = new PinchZoom();
     GameObject showingChar;
     
     void Awake()
     {
-        target = this;
         pinchZoom.camera = _CameraManager.GetComponent<Camera>();
     }
     

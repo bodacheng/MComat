@@ -115,11 +115,10 @@ namespace mainMenu
             {
                 Debug.Log("角色详细信息读取错误.尝试将“对准”中的角色信息至空");
                 SkillShowSupporter.focusingC = null;
-                IEnumerator readshowmodel = ModelShower.target.ShowMyModel(null);
-                yield return readshowmodel;
+                yield return PreScene.target.modelShower.ShowMyModel(null);
             }else{
                 SkillShowSupporter.focusRId = info.r_id;
-                IEnumerator readshowmodel = ModelShower.target.ShowMyModel(info.id);
+                IEnumerator readshowmodel = PreScene.target.modelShower.ShowMyModel(info.id);
                 yield return readshowmodel;
                 GameObject focusingOneModel = (GameObject)readshowmodel.Current;
                 if (focusingOneModel == null)
