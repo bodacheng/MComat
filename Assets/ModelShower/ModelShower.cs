@@ -10,19 +10,6 @@ public class ModelShower : MonoBehaviour
 
     public static float _nearClipPlane = 10f;
     
-    //[Header("Team Member Positions For Show")]
-    //public Transform MembersStandCenterPoint;
-    //public Transform TeamEditWatchPoint;
-    //public Transform Member0StandPoint;
-    //public Transform Member1StandPoint;
-    //public Transform Member2StandPoint;
-    //public Transform Member3StandPoint;
-    //IDictionary<int, Transform> myShowCharPositionDic = new Dictionary<int, Transform>();
-    //myShowCharPositionDic.Add(new KeyValuePair<int, Transform>(0, Member0StandPoint));
-    //myShowCharPositionDic.Add(new KeyValuePair<int, Transform>(1, Member1StandPoint));
-    //myShowCharPositionDic.Add(new KeyValuePair<int, Transform>(2, Member2StandPoint));
-    //myShowCharPositionDic.Add(new KeyValuePair<int, Transform>(3, Member3StandPoint));
-    
     public static ModelShower target;
     
     PinchZoom pinchZoom = new PinchZoom();
@@ -37,12 +24,12 @@ public class ModelShower : MonoBehaviour
     public IEnumerator ShowMyModel(string instanceID)
     {
         UnitInfo targetInfo = MyMonsters.Get(instanceID);
-        IEnumerator enumerator = ShowModel(targetInfo != null ? targetInfo.r_id : null);
+        IEnumerator enumerator = ShowModel(targetInfo?.r_id);
         yield return enumerator;
         yield return enumerator.Current;
     }
     
-    public IEnumerator ShowModel(string monsterID)
+    public IEnumerator ShowModel(string monsterID) 
     {
         if (showingChar != null)
         {
@@ -66,7 +53,7 @@ public class ModelShower : MonoBehaviour
         showingChar = aI_DATA_CENTER.WholeT.gameObject;
         showingChar.SetActive(true);
         showingChar.transform.parent = null;
-        showingChar.transform.position = CaculateShowModelPosition(new Vector3(0.2f, 0.4f, _nearClipPlane));//右
+        showingChar.transform.position = CalculateShowModelPosition(new Vector3(0.2f, 0.4f, _nearClipPlane));//右
         //showingChar.transform.LookAt(_CameraManager.transform, Vector3.up);
         showingChar.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
         yield return showingChar;
@@ -85,7 +72,7 @@ public class ModelShower : MonoBehaviour
     {
         if (showingChar != null)
         {
-            showingChar.transform.position = Vector3.Lerp(showingChar.transform.position, CaculateShowModelPosition(screenPos), Time.deltaTime * 20f);
+            showingChar.transform.position = Vector3.Lerp(showingChar.transform.position, CalculateShowModelPosition(screenPos), Time.deltaTime * 20f);
             if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
             {
                 //xAngle = Input.GetAxis("Mouse X");
@@ -99,7 +86,7 @@ public class ModelShower : MonoBehaviour
                 }
                 else if (Input.GetMouseButton(0))
                 {
-                    modelPOnScreen = CaculateShowModelViewportPoint(showingChar.transform.position);
+                    modelPOnScreen = CalculateShowModelViewportPoint(showingChar.transform.position);
                     fingertoshowmodelx = Mathf.Abs(FirstPoint.x - modelPOnScreen.x) / Screen.width;
                     fingertoshowmodely = (FirstPoint.y - modelPOnScreen.y) / Screen.height;
                     if (fingertoshowmodelx < 0.3f && fingertoshowmodely < 0.3f && fingertoshowmodely > 0)
@@ -119,7 +106,7 @@ public class ModelShower : MonoBehaviour
                 }
                 else if (Input.GetMouseButton(0))
                 {
-                    modelPOnScreen = CaculateShowModelViewportPoint(showingChar.transform.position);
+                    modelPOnScreen = CalculateShowModelViewportPoint(showingChar.transform.position);
                     fingertoshowmodelx = Mathf.Abs(FirstPoint.x - modelPOnScreen.x)/ Screen.width;
                     fingertoshowmodely = (FirstPoint.y - modelPOnScreen.y)/ Screen.height;
                     if (fingertoshowmodelx < 0.3f && fingertoshowmodely < 0.3f && fingertoshowmodely > 0)
@@ -138,27 +125,28 @@ public class ModelShower : MonoBehaviour
     {
         if (showingChar != null)
         {
-            if (Mathf.Abs(_CameraManager.transform.position.z - showingChar.transform.position.z) < ModelShower._nearClipPlane)
+            if (Mathf.Abs(_CameraManager.transform.position.z - showingChar.transform.position.z) < _nearClipPlane)
             {
                 _CameraManager.transform.position = Vector3.Lerp(_CameraManager.transform.position, _CameraManager.transform.position + Vector3.forward * 
                 (_nearClipPlane - Mathf.Abs(_CameraManager.transform.position.z - showingChar.transform.position.z)),Time.deltaTime * 10f);
             }
-        }    
+        }
     }
     
     Vector3 tempV;
-    Vector3 CaculateShowModelPosition(Vector3 screenP)
+    Vector3 CalculateShowModelPosition(Vector3 screenP)
     {
         tempV = CameraManager._camera.ViewportToWorldPoint(screenP);
         return tempV;
     }
-
-    Vector3 CaculateShowModelViewportPoint(Vector3 now)
+    
+    Vector3 CalculateShowModelViewportPoint(Vector3 now)
     {
         tempV = CameraManager._camera.WorldToScreenPoint(now);
         return tempV;
     }
-    
+}
+
     //void ArrangeShowModelOnTeam(string localID, int PositionNum)//所以这是个可能把某个阵容位置里加入null的函数。
     //{
     //    myShowCharPositionDic.TryGetValue(PositionNum, out Transform t);
@@ -286,4 +274,3 @@ public class ModelShower : MonoBehaviour
     //        }
     //    }
     //}
-}

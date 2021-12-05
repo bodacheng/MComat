@@ -3,6 +3,9 @@ using UnityEngine;
 using mainMenu;
 using dataAccess;
 using UnityEngine.UI;
+using System.Collections;           
+using UnityEngine;                  
+using dataAccess;                   
 
 public class TeamEditLayer : UILayer
 {
@@ -26,13 +29,7 @@ public class TeamEditLayer : UILayer
     public static TeamEditLayer Open(string teamMode)
     {
         var returnValue = UILayerLoader.Load(PreScene.target.T,"TeamEditLayer") as TeamEditLayer;
-        returnValue.INITeamPosBtns(teamMode);
-        void SkillEdit()
-        {
-            if (PreScene.target._focusing.id != null)
-                PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit, true);
-        }
-        returnValue.SkillEditButton.onClick.AddListener(SkillEdit);
+        returnValue.INI(teamMode);
         return returnValue;
     }
 
@@ -61,9 +58,10 @@ public class TeamEditLayer : UILayer
             unitsLayer.Select(instanceID);
         }
         
-        PreScene.target.SetMemberDetailFocusingChar(instanceID);//确立focusing角色
+        PreScene.target.SetFocusingUnit(instanceID);//确立focusing角色
         _nineForShow.ShowStones_Acc(instanceID);
-        //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
+        
+        SingleThreadProcesser.backup.RunAsQueued(ModelShower.target.ShowMyModel(instanceID));
     }
     
     // 修改对象队伍编程
@@ -82,7 +80,7 @@ public class TeamEditLayer : UILayer
         if (teamBtnDic.ContainsKey(posNum))
         {
             HeroIcon tar = teamBtnDic[posNum];
-            string Pos_instanceID = TeamSet.GetTargetSet(teamMode).GetMonsterOfPlayerIdOnPos(posNum);
+            string Pos_instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(posNum);
             HeroIcon.ChangeHeroIconByInstanceId(Pos_instanceID, tar);
         }
         else
@@ -92,7 +90,7 @@ public class TeamEditLayer : UILayer
     }
 
     #region 初始化（显示目前队伍编辑，加载按钮功能）
-    void INITeamPosBtns(string teammode)
+    void INI(string teamMode)
     {
         teamBtnDic.Clear();
         teamBtnDic.Add(0, team1front);
@@ -100,13 +98,20 @@ public class TeamEditLayer : UILayer
         teamBtnDic.Add(2, team1right);
         
         // 适配队伍编辑器各个位置初始头像
-        ChangeIconOnPos(0, teammode);
-        ChangeIconOnPos(1, teammode);
-        ChangeIconOnPos(2, teammode);
+        ChangeIconOnPos(0, teamMode);
+        ChangeIconOnPos(1, teamMode);
+        ChangeIconOnPos(2, teamMode);
+        
+        void SkillEdit()
+        {
+            if (PreScene.target._focusing.id != null)
+                PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit, true);
+        }
+        SkillEditButton.onClick.AddListener(SkillEdit);
         
         void Remove()
         {
-            ChangeTeamPos(null, focusingPos, teammode);
+            ChangeTeamPos(null, focusingPos, teamMode);
             CancelSelect();
         }
         RemoveButton.onClick.AddListener(Remove);
@@ -120,8 +125,7 @@ public class TeamEditLayer : UILayer
                 Remove();
                 unitsLayer.CancelSelect();
                 CancelSelect();
-                
-                ChangeTeamPos(selected_instanceID, posNum, teammode);
+                ChangeTeamPos(selected_instanceID, posNum, teamMode);
             }
             else
             {
@@ -141,8 +145,10 @@ public class TeamEditLayer : UILayer
                         HeroIcon.SelectedFeature(null, selectedFrame, 200f);
                         break;
                 }
-                PreScene.target.SetMemberDetailFocusingChar(TeamSet.GetTargetSet(teammode).GetMonsterOfPlayerIdOnPos(focusingPos));//确立focusing角色
-                //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
+                
+                string instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(focusingPos);
+                PreScene.target.SetFocusingUnit(instanceID);//确立focusing角色
+                SingleThreadProcesser.backup.RunAsQueued(ModelShower.target.ShowMyModel(instanceID));
                 if (PreScene.target._focusing != null)
                     _nineForShow.ShowStones_Acc(PreScene.target._focusing.id);
                 else

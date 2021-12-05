@@ -32,17 +32,17 @@ public class MonsterListPage : MainSceneProcess
         layer = UnitsLayer.Open();
         unitOptionLayer = UnitOptionLayer.Open();
         layer.DisplayUnitIcons(true);
-
-        void MonsterIconButton(string instanceId)
+        
+        void UnitIconBtn(string instanceId)
         {
             UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
             unitsLayer.Select(instanceId);
-            PreScene.target.SetMemberDetailFocusingChar(instanceId);//确立focusing角色
+            PreScene.target.SetFocusingUnit(instanceId);
             unitOptionLayer.RefreshMemberDetailPageByFocusingChar();
         }
-            
+        
         UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
-        unitsLayer.SetUnitsIconOnClick(MonsterIconButton);
+        unitsLayer.SetUnitsIconOnClick(UnitIconBtn);
         
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);

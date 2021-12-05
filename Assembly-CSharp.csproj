@@ -651,6 +651,7 @@
      <Compile Include="Assets\Launcher\StartUpPresentation.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonWriter.cs" />
      <Compile Include="Assets\AnimControl\Animation_Manger.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\ArcadeTop_Paging.cs" />
      <Compile Include="Assets\Remote\Monsters\MyMonsters.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\SwitchManager.cs" />
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center.cs" />
@@ -778,7 +779,6 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
-     <Compile Include="Assets\DummyLayerSystem\LayerDefine\ArcadeTop_Paging.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />

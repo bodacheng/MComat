@@ -17,18 +17,18 @@ namespace dataAccess
             switch (Mode)
             {
                 case "arcade":
-                    string F = Default.GetMonsterOfPlayerIdOnPos(0);
-                    string L = Default.GetMonsterOfPlayerIdOnPos(1);
-                    string R = Default.GetMonsterOfPlayerIdOnPos(2);
+                    string F = Default.GetInstanceIdOnPos(0);
+                    string L = Default.GetInstanceIdOnPos(1);
+                    string R = Default.GetInstanceIdOnPos(2);
                     
                     form.l = (L != null) ? L : null;
                     form.f = (F != null) ? F : null;
                     form.r = (R != null) ? R : null;
                     break;
                 case "arena":
-                    form.f = Arena3V3.GetMonsterOfPlayerIdOnPos(0);
-                    form.l = Arena3V3.GetMonsterOfPlayerIdOnPos(1);
-                    form.r = Arena3V3.GetMonsterOfPlayerIdOnPos(2);
+                    form.f = Arena3V3.GetInstanceIdOnPos(0);
+                    form.l = Arena3V3.GetInstanceIdOnPos(1);
+                    form.r = Arena3V3.GetInstanceIdOnPos(2);
                     break;
             }
 

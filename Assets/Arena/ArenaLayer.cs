@@ -71,9 +71,9 @@ public class ArenaLayer : UILayer
     
     void ShowMyTeam()
     {
-        string Pos1MonsterOfPlayerId = TeamSet.Arena3V3.GetMonsterOfPlayerIdOnPos(0);
-        string Pos2MonsterOfPlayerId = TeamSet.Arena3V3.GetMonsterOfPlayerIdOnPos(1);
-        string Pos3MonsterOfPlayerId = TeamSet.Arena3V3.GetMonsterOfPlayerIdOnPos(2);
+        string Pos1MonsterOfPlayerId = TeamSet.Arena3V3.GetInstanceIdOnPos(0);
+        string Pos2MonsterOfPlayerId = TeamSet.Arena3V3.GetInstanceIdOnPos(1);
+        string Pos3MonsterOfPlayerId = TeamSet.Arena3V3.GetInstanceIdOnPos(2);
         
         HeroIcon.ChangeHeroIconByInstanceId(Pos1MonsterOfPlayerId, member1);
         HeroIcon.ChangeHeroIconByInstanceId(Pos2MonsterOfPlayerId, member2);

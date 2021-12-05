@@ -24,11 +24,11 @@ namespace dataAccess
             MultiDict<int, int, UnitInfo> teamMembers = new MultiDict<int, int, UnitInfo>();
             for (int i = 0; i < 3; i++)
             {
-                if (PosKeySet.GetMonsterOfPlayerIdOnPos(i) == null)
+                if (PosKeySet.GetInstanceIdOnPos(i) == null)
                 {
                     continue;
                 }
-                UnitInfo myfighter = MyMonsters.Get(PosKeySet.GetMonsterOfPlayerIdOnPos(i));
+                UnitInfo myfighter = MyMonsters.Get(PosKeySet.GetInstanceIdOnPos(i));
                 if (myfighter != null)
                 {
                     UnitInfo unitInfo = UnitInfo.GetUnitInfo(myfighter);

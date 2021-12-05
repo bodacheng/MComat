@@ -122,7 +122,7 @@ public class PosKeySet
         return null;
     }
     
-    public string GetMonsterOfPlayerIdOnPos(int PosNum)
+    public string GetInstanceIdOnPos(int PosNum)
     {
         return GetPosMemInfo(PosNum) != null ? GetPosMemInfo(PosNum).instanceID ?? null : null;
     }

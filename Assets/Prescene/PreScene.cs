@@ -42,11 +42,10 @@ namespace mainMenu
         
         public UnitInfo _focusing;
         //下面这个函数总是建立在monsterbox函数运行在前，而monsterbox会部署好所有展示用模
-        public void SetMemberDetailFocusingChar(string localID)
+        public void SetFocusingUnit(string localID)
         {
-            PreScene.target._focusing = MyMonsters.Get(localID);
+            _focusing = MyMonsters.Get(localID);
         }
-        
         
         void Awake()
         {
@@ -146,7 +145,7 @@ namespace mainMenu
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
             {
                 UnitOptionLayer unitOptionLayer = UnitOptionLayer.Open();
-                SetMemberDetailFocusingChar("1");//确立focusing角色
+                SetFocusingUnit("1");//确立focusing角色
                 unitOptionLayer.RefreshMemberDetailPageByFocusingChar();
             }
         }

@@ -100,7 +100,7 @@ public static class GeneralModelPool {
         }
     }
     
-    public static IEnumerator CreateUnit(string rID)
+    static IEnumerator CreateUnit(string rID)
     {
         IEnumerator proess = null;
         switch(ResourceLoadingSetting.ModelLoadingMode)

@@ -63,17 +63,17 @@ public class FrontPage : MainSceneProcess
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
 
-        string focusLocalid = TeamSet.Default.GetMonsterOfPlayerIdOnPos(0);
-        if (focusLocalid == null)
+        string focus_instanceID = TeamSet.Default.GetInstanceIdOnPos(0);
+        if (focus_instanceID == null)
         {
             foreach (KeyValuePair<string, UnitInfo> keyValuePair in MyMonsters.Dic)
             {
-                focusLocalid = keyValuePair.Key;
+                focus_instanceID = keyValuePair.Key;
                 break;
             }
         }
-        PreScene.target.SetMemberDetailFocusingChar(focusLocalid);//确立focusing角色
-        yield return ModelShower.target.ShowMyModel(focusLocalid);
+        PreScene.target.SetFocusingUnit(focus_instanceID);//确立focusing角色
+        yield return ModelShower.target.ShowMyModel(focus_instanceID);
         //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
         UpperInfoBar.target.T.gameObject.SetActive(true);
         Debug.Log("front ended");

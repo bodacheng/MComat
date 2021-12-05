@@ -26,7 +26,7 @@ namespace mainMenu
 
         readonly List<string> typeOfUnitsIhave = new List<string>();
         readonly IDictionary<string, HeroIcon> mainMenuIcons = new Dictionary<string, HeroIcon>();
-        string selectingInstanceID;
+        string selected_InstanceID;
         
         public static UnitsLayer Open()
         {
@@ -57,7 +57,7 @@ namespace mainMenu
         
         public void CancelSelect()
         {
-            selectingInstanceID = null;
+            selected_InstanceID = null;
             HeroIcon.SelectedFeature(null, selectedFrame, 150f);
         }
 
@@ -65,12 +65,12 @@ namespace mainMenu
         {
             HeroIcon targetingIcon = GetUnitIcon(instanceID);
             HeroIcon.SelectedFeature(targetingIcon, selectedFrame, 150f);
-            selectingInstanceID = instanceID;
+            selected_InstanceID = instanceID;
         }
 
         public string GetSelect()
         {
-            return selectingInstanceID;
+            return selected_InstanceID;
         }
 
         void AddOneNewIcon(string instanceID, bool clearButtonFeature)
@@ -101,7 +101,6 @@ namespace mainMenu
             }
         }
         
-        
         public void OnTypeChangeMyMonsterBox()
         {
             DisplayUnitIcons(false);
@@ -109,7 +108,7 @@ namespace mainMenu
         
         void UnitIconsGenerate(bool clearButtonFeature)
         {
-            selectingInstanceID = null;
+            selected_InstanceID = null;
             foreach (KeyValuePair<string, UnitInfo> keyValuePair in MyMonsters.Dic)
             {
                 AddOneNewIcon(keyValuePair.Value.id, clearButtonFeature);

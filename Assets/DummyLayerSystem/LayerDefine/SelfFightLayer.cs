@@ -259,7 +259,7 @@ namespace mainMenu
                 Debug.Log("严重错误");
             }
             
-            string PosInstanceId = posKeySet.GetMonsterOfPlayerIdOnPos(posNum);
+            string PosInstanceId = posKeySet.GetInstanceIdOnPos(posNum);
             if (PosInstanceId != null)
             {
                 UnitInfo _one = MyMonsters.Get(PosInstanceId);
