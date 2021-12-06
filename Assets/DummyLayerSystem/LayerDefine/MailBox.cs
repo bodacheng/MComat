@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using mainMenu;
 
 public class MailBox : UILayer
 {
@@ -13,10 +14,32 @@ public class MailBox : UILayer
 
     private List<MailListView> currentMailListViews = new List<MailListView>();
     
+    public static MailBox Open()
+    {
+        var returnValue = UILayerLoader.Load(PreScene.target.T,"MailBox") as MailBox;
+        returnValue.GenerateMailModels();
+        returnValue.DeleteAllRead.onClick.AddListener(() =>
+        {
+            PlayFabReadClient.DeleteAllLocalMails();
+            returnValue.GenerateMailModels();
+        });
+        
+        returnValue.ReadAll.onClick.AddListener(() =>
+        {
+            PlayFabReadClient.claimAllPresentMails(PlayFabReadClient.SaveReadMailAsJson);
+        });
+        return returnValue;
+    }
+    
+    public static void Close()
+    {
+        UILayerLoader.Remove("MailBox");
+    }
+    
     /// <summary>
     /// 建立邮件的viewlist，运行次函数的时间点邮件已经读取至_myMailList
     /// </summary>
-    public void GenerateMailModels()
+    void GenerateMailModels()
     {
         foreach (Transform t in MailBoxT)
         {
@@ -34,7 +57,7 @@ public class MailBox : UILayer
         Sort();
     }
 
-    public void Sort()
+    void Sort()
     {
         float wholeheight = 0; 
         foreach (MailListView t in currentMailListViews)
@@ -64,15 +87,6 @@ public class MailBox : UILayer
 
     public void AddButtonFeatures()
     {
-        DeleteAllRead.onClick.AddListener(() =>
-        {
-            PlayFabReadClient.DeleteAllLocalMails();
-            GenerateMailModels();
-        });
-        
-        ReadAll.onClick.AddListener(() =>
-        {
-            PlayFabReadClient.claimAllPresentMails(PlayFabReadClient.SaveReadMailAsJson);
-        });
+
     }
 }

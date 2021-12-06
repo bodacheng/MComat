@@ -74,7 +74,7 @@ public class FrontPage : MainSceneProcess
         PreScene.target.SetFocusingUnit(focus_instanceID);//确立focusing角色
         yield return PreScene.target.modelShower.ShowMyModel(focus_instanceID);
         //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
-        UpperInfoBar.Open(PreScene.target.OpenSetting, () => PreScene.target.trySwitchToStep(11));
+        UpperInfoBar.Open(PreScene.target.OpenSetting, () => PreScene.target.trySwitchToStep(10));
     }
     
     public override void ProcessEnter()

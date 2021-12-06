@@ -15,14 +15,11 @@ public class MailBoxProcess : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        mailBox = UILayerLoader.Load(PreScene.target.T, "MailBox") as MailBox;
-        mailBox.GenerateMailModels();
-        mailBox.AddButtonFeatures();
+        mailBox = MailBox.Open();
     }
     
     public override void ProcessEnd()
     {
-        if (mailBox != null)
-            GameObject.Destroy(mailBox.gameObject);
+        MailBox.Close();
     }
 }

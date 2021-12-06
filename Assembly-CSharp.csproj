@@ -486,6 +486,7 @@
      <Compile Include="Assets\TouchScript\Scripts\Layers\ProjectionParams.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot.cs" />
      <Compile Include="Assets\EffectsSystem\bullet_GPS.cs" />
+     <Compile Include="Assets\经济模型\EconomicWorld.cs" />
      <Compile Include="Assets\PlayFab\Admin\TitleData.cs" />
      <Compile Include="Assets\BOWeaponSystem\Health System\ResistanceManager.cs" />
      <Compile Include="Assets\ImportantDefinition\Monster\UnitInfo.cs" />

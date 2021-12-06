@@ -41,10 +41,9 @@ public partial class CloudScript
                         {
                             stoneOfPlayerInfo.skillId = s.Value;
                         }
-                        //Debug.Log(s.Key + ":" + s.Value);
                     }
                 }
-
+                
                 Stones.Add(stoneOfPlayerInfo);
                 List<StoneOfPlayerInfo> stones = new List<StoneOfPlayerInfo> { stoneOfPlayerInfo };
                 action(stones);
