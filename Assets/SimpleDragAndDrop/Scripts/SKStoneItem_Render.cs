@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using EckTechGames.FloatingCombatText;
 
 public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -10,7 +9,7 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
         int aferlevel = LevelExpConfig.GetCurrentInfo((int)afterexp).currentLevel;
         if (aferlevel > beforeLevel)
         {
-            OverlayCanvasController.instance.ShowCombatText(gameObject, CombatTextType.LevelUp, aferlevel);
+            //OverlayCanvasController.instance.ShowCombatText(gameObject, CombatTextType.LevelUp, aferlevel);
         }
     }
 

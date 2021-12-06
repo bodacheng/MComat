@@ -18,14 +18,14 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData data)
     {
         StoneCell sourceCell = SKStoneItem.sourceCell;
-        if (SKStoneItem.icon != null)
+        if (SKStoneItem.dragging != null)
         {
             SKStoneItem item = SKStoneItem.draggedItem;
             if (item == null)
                 return;
             if (sourceCell == this)
                 return;
-            if (SKStoneItem.icon.activeSelf)
+            if (SKStoneItem.dragging.activeSelf)
             {
                 OnDropAction.Invoke(sourceCell, this);
             }

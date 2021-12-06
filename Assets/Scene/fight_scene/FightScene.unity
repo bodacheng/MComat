@@ -22785,7 +22785,6 @@ GameObject:
   - component: {fileID: 3000649885718481873}
   - component: {fileID: 3000649885718481872}
   - component: {fileID: 3000649885718481871}
-  - component: {fileID: 3000649885718481870}
   m_Layer: 0
   m_Name: CanvasT
   m_TagString: Untagged
@@ -22793,22 +22792,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &3000649885718481870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3000649885718481869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1740d8332f6be8646b811014ade4e557, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 3000649885118306575}
-  poolDamage: 1
-  combatTextAnchorPrefab: {fileID: 11400000, guid: 12d964613f7148b4297595720113559f,
-    type: 3}
 --- !u!114 &3000649885718481871
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ using Api.Dto.Model;
 public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 	public static SKStoneItem draggedItem;                                      // Item that is dragged now
-	public static GameObject icon;                                              // Icon of dragged item
+	public static GameObject dragging;                                              // Icon of dragged item
 	public static StoneCell sourceCell;                                         // From this cell dragged item is
     
     static Canvas canvas;                                                       // Canvas for item drag operation
@@ -61,7 +61,7 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
 	/// <param name="eventData"></param>
 	public void OnBeginDrag(PointerEventData eventData)
 	{
-		if (icon != null)
+		if (dragging != null)
 			return;
 		
         sourceCell = GetCell();                       							// Remember source cell
@@ -79,14 +79,14 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
         //iconImage.color = myImage.color;
         
         // version 2
-        icon = Instantiate(this.gameObject);
+        dragging = Instantiate(this.gameObject);
         transform.GetComponent<Image>().color = new Color(transform.GetComponent<Image>().color.r, transform.GetComponent<Image>().color.g, transform.GetComponent<Image>().color.b,0);
-        icon.transform.SetParent(canvas.transform);
-        icon.name = "Icon";
-        Image iconImage = icon.GetComponent<Image>();
+        dragging.transform.SetParent(canvas.transform);
+        dragging.name = "Icon";
+        Image iconImage = dragging.GetComponent<Image>();
         iconImage.raycastTarget = false;
         
-        RectTransform iconRect = icon.GetComponent<RectTransform>();
+        RectTransform iconRect = dragging.GetComponent<RectTransform>();
         // Set icon's dimensions
         RectTransform myRect = GetComponent<RectTransform>();
         iconRect.pivot = new Vector2(0.5f, 0.5f);
@@ -102,9 +102,9 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
 	/// <param name="data"></param>
 	public void OnDrag(PointerEventData data)
 	{
-		if (icon != null)
+		if (dragging != null)
 		{
-            icon.transform.position = Input.mousePosition;                          // Item's icon follows to cursor in screen pixels
+            dragging.transform.position = Input.mousePosition;                          // Item's icon follows to cursor in screen pixels
 		}
 	}
 
@@ -126,13 +126,13 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
     /// </summary>
     void ResetConditions()
     {
-        if (icon != null)
+        if (dragging != null)
         {
-            Destroy(icon);                                                          // Destroy icon on item drop
+            Destroy(dragging);                                                          // Destroy icon on item drop
         }
         //OnItemDragEndEvent?.Invoke(this);                                               // Notify all cells about item drag end
         draggedItem = null;
-        icon = null;
+        dragging = null;
         sourceCell = null;
     }
 

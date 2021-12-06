@@ -135,7 +135,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     void OnDropAction(StoneCell source, StoneCell to)
     {
-        if (SKStoneItem.icon != null)
+        if (SKStoneItem.dragging != null)
         {
             SKStoneItem item = SKStoneItem.draggedItem;
             if (item == null)

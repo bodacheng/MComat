@@ -381,7 +381,6 @@
      <Compile Include="Assets\TouchScript\Scripts\Debugging\Loggers\PointerLogger.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Base\TwoPointTransformGestureBase.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\ArenaFightOver.cs" />
-     <Compile Include="Assets\Asstes\FloatingCombatText\DemoScene\DemoController.cs" />
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\HitBoxManager.cs" />
      <Compile Include="Assets\DummyLayerSystem\UILayer.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\ExpandBox.cs" />
@@ -436,7 +435,6 @@
      <Compile Include="Assets\TouchScript\Scripts\Utils\Geom\ProjectionUtils.cs" />
      <Compile Include="Assets\TeamUIManager\TeamUIManager.cs" />
      <Compile Include="Assets\AI\buttons\zokuseiButtonEffectsGroup.cs" />
-     <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\OverlayCanvasController.cs" />
      <Compile Include="Assets\UI\Oldscripts\Save_Trans.cs" />
      <Compile Include="Assets\TutorialManger\processes\SelectASlot\SkillEditA1Try.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\StoneListLayer.cs" />
@@ -481,7 +479,6 @@
      <Compile Include="Assets\DynamicStarrySky\Scripts\SphereUtility.cs" />
      <Compile Include="Assets\FightSceneSystem\Nagare\Turial\BasicTryProcess.cs" />
      <Compile Include="Assets\BOWeaponSystem\BO_Weapon_Animation_Events.cs" />
-     <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\CombatTextController.cs" />
      <Compile Include="Assets\UI\Oldscripts\SwapAllModelShader.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Layers\ProjectionParams.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot.cs" />
@@ -533,7 +530,6 @@
      <Compile Include="Assets\TouchScript\Scripts\Devices\Display\IDisplayDevice.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Debugging\GL\GLDebug.cs" />
      <Compile Include="Assets\POS_Sys\Position_Set_Executor.cs" />
-     <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\CombatTextAnchorController.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Utils\Geom\TwoD.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Core\DebuggableMonoBehaviour.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\MoonPositionHelper.cs" />
@@ -619,7 +615,6 @@
      <Compile Include="Assets\AI\SoulConstruct\AIScriptReading.cs" />
      <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\PlayerController.cs" />
      <Compile Include="Assets\TouchScript\Scripts\TouchManager.cs" />
-     <Compile Include="Assets\Asstes\FloatingCombatText\Scripts\CombatTextType.cs" />
      <Compile Include="Assets\AnimControl\Animation_Manger_methodsGround2.cs" />
      <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable_Util.cs" />
      <Compile Include="Assets\CSV2Table\Scripts\CsvParser.cs" />
@@ -786,7 +781,6 @@
      <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
      <None Include="Assets\Resources\TestSaveData\AccountCharacterInfos\4.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\268.json" />
-     <None Include="Assets\Asstes\FloatingCombatText\ReadMe.txt" />
      <None Include="Assets\Resources\TestSaveData\MyStones\98.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\246.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\228.json" />
