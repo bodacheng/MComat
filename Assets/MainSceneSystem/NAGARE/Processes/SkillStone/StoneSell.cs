@@ -20,14 +20,6 @@ public class StoneSell : MainSceneProcess
     {
         StoneListLayer = StoneListLayer.Open();
         EnterProcess();
-        StoneListLayer.box._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
-        (
-            ScreenPositionCal.Cal(1, StoneListLayer.fxCamera, StoneListLayer.box.NormalTab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, StoneListLayer.fxCamera, StoneListLayer.box.EX1Tab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, StoneListLayer.fxCamera, StoneListLayer.box.EX2Tab.GetComponent<RectTransform>(), 5f),
-            ScreenPositionCal.Cal(1, StoneListLayer.fxCamera, StoneListLayer.box.EX3Tab.GetComponent<RectTransform>(), 5f), 
-            Zokusei.Null
-        );
     }
     
     public override void ProcessEnd()

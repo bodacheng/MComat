@@ -49,7 +49,7 @@ public static class SVCenter
             if (!CheckIfOtherUnitOkAfterStoneRemove(item))
                 return;
             skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(item._SkillConfig.SP_LEVEL, 
-            ScreenPositionCal.Cal(1, skillEditLayer.fxCamera, to.GetComponent<RectTransform>(), 3), 
+            ScreenPositionCal.Cal(2, skillEditLayer.fxCamera, to.GetComponent<RectTransform>(), 3), 
             skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.transform);
         }
         to.AddItem(item);
@@ -81,7 +81,7 @@ public static class SVCenter
             if (!CheckIfOtherUnitOkAfterStoneRemove(itemFromCell))
                 return;
             skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(itemFromCell._SkillConfig.SP_LEVEL, 
-            ScreenPositionCal.Cal(1, skillEditLayer.fxCamera, to.GetComponent<RectTransform>(), 3), 
+            ScreenPositionCal.Cal(2, skillEditLayer.fxCamera, to.GetComponent<RectTransform>(), 3), 
             skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.transform);
         }
         

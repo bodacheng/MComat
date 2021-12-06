@@ -73,7 +73,7 @@ namespace mainMenu
             }
         }
         
-        public void SwitchZokuseiButtons(Vector3 normaltagpos, Vector3 ex1tagpos, Vector3 ex2tagpos, Vector3 ex3tagpos, Zokusei zokusei)
+        public void SwitchZokuseiButtons(Zokusei zokusei)
         {
             if (_focusingEffectsGroup != null)
             {
@@ -83,42 +83,9 @@ namespace mainMenu
             if (zokuseiBtnEffects.ContainsKey(zokusei))
             {
                 _focusingEffectsGroup = zokuseiBtnEffects[zokusei];
-                RefreshTagEffect(normaltagpos,0);
-                RefreshTagEffect(ex1tagpos,1);
-                RefreshTagEffect(ex2tagpos,2);
-                RefreshTagEffect(ex3tagpos,3);
             }else{
                 Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
             }
-        }
-        
-        public void SwitchZokuseiButtons(Transform normaltagpos, Transform ex1tagpos, Transform ex2tagpos, Transform ex3tagpos, Zokusei zokusei)
-        {
-            if (_focusingEffectsGroup != null)
-            {
-                _focusingEffectsGroup.Close_skillstoneboxtageffects();
-            }
-            
-            if (zokuseiBtnEffects.ContainsKey(zokusei))
-            {
-                _focusingEffectsGroup = zokuseiBtnEffects[zokusei];
-                RefreshTagEffect(normaltagpos,0);
-                RefreshTagEffect(ex1tagpos,1);
-                RefreshTagEffect(ex2tagpos,2);
-                RefreshTagEffect(ex3tagpos,3);
-            }else{
-                Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
-            }
-        }
-        
-        void RefreshTagEffect(Vector3 pos, int sp_level)//按钮切换也可以在这里做文章
-        {
-            _focusingEffectsGroup.RefreshSTBoxEffects(sp_level, pos);
-        }
-        
-        void RefreshTagEffect(Transform pos, int sp_level)//按钮切换也可以在这里做文章
-        {
-            _focusingEffectsGroup.RefreshSTBoxEffects(sp_level, pos);
         }
         
         public void SkillButtonExplosion(int splevel, Vector3 targetPOS, Transform parent)

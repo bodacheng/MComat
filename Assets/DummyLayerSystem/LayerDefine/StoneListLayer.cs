@@ -43,10 +43,6 @@ public class StoneListLayer : UILayer
         returnValue.box.RestFilter();
         returnValue.box._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
-            returnValue.box.NormalTab.transform,
-            returnValue.box.EX1Tab.transform,
-            returnValue.box.EX2Tab.transform,
-            returnValue.box.EX3Tab.transform, 
             Zokusei.blueMagic
         );
         

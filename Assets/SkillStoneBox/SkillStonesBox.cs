@@ -58,22 +58,22 @@ namespace mainMenu
         {
             NormalTab.onClick.AddListener(() =>
             {
-                NormalTabFeature(ScreenPositionCal.Cal(1, fxCamera, NormalTab.GetComponent<RectTransform>(), 3));
+                NormalTabFeature(ScreenPositionCal.Cal(2, fxCamera, NormalTab.GetComponent<RectTransform>(), 3));
             });
             
             EX1Tab.onClick.AddListener(() =>
             {
-                EX1TabFeature(ScreenPositionCal.Cal(1, fxCamera, EX1Tab.GetComponent<RectTransform>(), 3));
+                EX1TabFeature(ScreenPositionCal.Cal(2, fxCamera, EX1Tab.GetComponent<RectTransform>(), 3));
             });
         
             EX2Tab.onClick.AddListener(() =>
             {
-                EX2TabFeature(ScreenPositionCal.Cal(1, fxCamera, EX2Tab.GetComponent<RectTransform>(), 3));
+                EX2TabFeature(ScreenPositionCal.Cal(2, fxCamera, EX2Tab.GetComponent<RectTransform>(), 3));
             });
         
             EX3Tab.onClick.AddListener(() =>
             {
-                EX3TabFeature(ScreenPositionCal.Cal(1, fxCamera, EX3Tab.GetComponent<RectTransform>(), 3));
+                EX3TabFeature(ScreenPositionCal.Cal(2, fxCamera, EX3Tab.GetComponent<RectTransform>(), 3));
             });
         }
         

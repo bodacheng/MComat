@@ -72,10 +72,6 @@ public class SkillEditLayer : UILayer
         
         returnValue.StonesBox._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
-            returnValue.StonesBox.NormalTab.transform,
-            returnValue.StonesBox.EX1Tab.transform,
-            returnValue.StonesBox.EX2Tab.transform,
-            returnValue.StonesBox.EX3Tab.transform, 
             _CharConfig._zokusei
         );
         
@@ -136,10 +132,6 @@ public class SkillEditLayer : UILayer
         CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(PreScene.target._focusing.r_id);
         StonesBox._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
         (
-            ScreenPositionCal.Cal(1, fxCamera, StonesBox.NormalTab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, fxCamera, StonesBox.EX1Tab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, fxCamera, StonesBox.EX2Tab.GetComponent<RectTransform>(),5f),
-            ScreenPositionCal.Cal(1, fxCamera, StonesBox.EX3Tab.GetComponent<RectTransform>(),5f), 
             _CharConfig._zokusei
         );
     }
@@ -252,7 +244,7 @@ public class SkillEditLayer : UILayer
 
         SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
         StonesBox._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(skillConfig.SP_LEVEL,
-            ScreenPositionCal.Cal(1, fxCamera, NineSlot.allSlot[targetSlot - 1]._DragAndDropCell.GetComponent<RectTransform>(), 3),
+            ScreenPositionCal.Cal(2, fxCamera, NineSlot.allSlot[targetSlot - 1]._DragAndDropCell.GetComponent<RectTransform>(), 3),
             StonesBox._SkillStoneBoxTabEffectsManager.transform);
     }
     
