@@ -19,7 +19,7 @@ public class ExBarBurn : MonoBehaviour
         {
             EffectsManager.GenerateEffect(
             "ui_exbarburn", null, 
-            ScreenPositionCal.Cal(2, NetFightScene.target.fxCamera, transform.GetComponent<RectTransform>(), 3), 
+            PosCal.GetWorldPos(NetFightScene.target.fxCamera, transform.GetComponent<RectTransform>(), 3), 
             Quaternion.identity, null);
         }
     }

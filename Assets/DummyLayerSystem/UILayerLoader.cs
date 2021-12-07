@@ -62,6 +62,7 @@ public class UILayerLoader
         UILayer t = GameObject.Instantiate(UILayerPrefab);
         t.Index = layerName;
         t.transform.SetParent(T.transform);
+        t.transform.localPosition = Vector3.zero;
         RectTransform rt = t.GetComponent<RectTransform>();
         rt.offsetMin = Vector2.zero;
         rt.offsetMax = Vector2.zero;

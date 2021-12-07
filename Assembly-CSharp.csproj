@@ -594,7 +594,7 @@
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\NineSlotSelect.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Core\LayerManagerInstance.cs" />
      <Compile Include="Assets\Camera\Modes\CenterSurroundCamera.cs" />
-     <Compile Include="Assets\Structure\ScreenPositionCal.cs" />
+     <Compile Include="Assets\Structure\PosCal.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_OnDrop.cs" />
      <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Super.cs" />
      <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Slight.cs" />

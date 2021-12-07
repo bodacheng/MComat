@@ -23,10 +23,6 @@ public class SkillEditLayer : UILayer
     
     public SkillStoneDetail _skillStoneDetail;
     
-    [Space(10)] 
-    [Header("FX Camera")] 
-    public Camera fxCamera;
-
     public static SkillEditLayer Get()
     {
         UILayer l = UILayerLoader.Get("SkillEditLayer");
@@ -53,7 +49,6 @@ public class SkillEditLayer : UILayer
         returnValue.NineSlot.PrintSkillInfo = returnValue._skillStoneDetail.RefreshInfo;
         returnValue.NineSlot.StartUp();
         returnValue.StonesBox.GenerateCells();
-        returnValue.StonesBox._SkillStoneBoxTabEffectsManager.StartUp();
         
         // 表现系
         CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(PreScene.target._focusing.r_id);
@@ -64,16 +59,15 @@ public class SkillEditLayer : UILayer
             returnValue.StonesBox.AddFeatureToCells(returnValue.CellFeature_SkillShowMode);
         }
         
-        returnValue.StonesBox.IniExTabs(returnValue.fxCamera);
+        returnValue.StonesBox._SkillStoneBoxTabEffectsManager.SwitchZokusei
+        (
+            _CharConfig._zokusei
+        );
+        returnValue.StonesBox.IniExTabs(PreScene.target.FxCamera);
         returnValue.StonesBox.EXTabsFeatureRefresh(true);
         returnValue._skillStoneDetail.Clear();
         returnValue.unitSwitcher.gameObject.SetActive(FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow);
         returnValue.SkillEditButtonFeature(PreScene.target._focusing);
-        
-        returnValue.StonesBox._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
-        (
-            _CharConfig._zokusei
-        );
         
         return returnValue;
     }
@@ -130,7 +124,7 @@ public class SkillEditLayer : UILayer
         
         // 表现系
         CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(PreScene.target._focusing.r_id);
-        StonesBox._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
+        StonesBox._SkillStoneBoxTabEffectsManager.SwitchZokusei
         (
             _CharConfig._zokusei
         );
@@ -244,7 +238,9 @@ public class SkillEditLayer : UILayer
 
         SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
         StonesBox._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(skillConfig.SP_LEVEL,
-            ScreenPositionCal.Cal(2, fxCamera, NineSlot.allSlot[targetSlot - 1]._DragAndDropCell.GetComponent<RectTransform>(), 3),
+            PosCal.GetWorldPos(PreScene.target.FxCamera, 
+                NineSlot.allSlot[targetSlot - 1]._DragAndDropCell.GetComponent<RectTransform>(), 
+                3),
             StonesBox._SkillStoneBoxTabEffectsManager.transform);
     }
     

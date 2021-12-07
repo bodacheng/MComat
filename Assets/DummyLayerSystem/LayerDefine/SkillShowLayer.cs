@@ -11,6 +11,7 @@ namespace mainMenu
     // 如果一个九宫格存在相同技能重复登陆，本脚本的功能会出现问题，具体是因为analysisStatesSetDic的机制(以技能key寻找状态从而寻找按钮。)
     public class SkillShowLayer : UILayer
     {
+        [SerializeField] private Canvas canvas;
         [SerializeField] Button PageBGBtn;
         [SerializeField] GameObject flowParticle;
         [SerializeField] Button SkillButton;
@@ -25,9 +26,7 @@ namespace mainMenu
         [Space(11)]
         [Header("Skill Info")]
         [SerializeField] SkillStoneDetail _skillStoneDetail;
-
-        public Camera fx;
-
+        
         public SkillStoneBoxTabEffectsManager EffectsManager;
         
         List<GameObject> floatingMarks = new List<GameObject>();
@@ -133,7 +132,11 @@ namespace mainMenu
             {
                 _t.gameObject.layer = 5;
             }
-            t.transform.position = ScreenPositionCal.Cal2(2, fx, button.GetComponent<RectTransform>(), 20f);
+
+            t.transform.position = 
+                PosCal.GetWorldPos(PreScene.target.FxCamera, 
+                    PosCal.ConvertAnchorPos(button.GetComponent<RectTransform>().anchoredPosition, Vector2.one, Vector2.zero )
+                    , 20f);
             renderPs.Add(t);
         }
         
@@ -164,7 +167,7 @@ namespace mainMenu
         }
 
         // 打印出技能显示画面
-        public void SkillScriptReader(SkillSet nineAndTwo, Zokusei zokusei)
+        void SkillScriptReader(SkillSet nineAndTwo, Zokusei zokusei)
         {
             EffectsManager.StartUp(zokusei);
             DestroyFloatingMarks();

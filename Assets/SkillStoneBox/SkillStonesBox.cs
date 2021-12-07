@@ -56,57 +56,26 @@ namespace mainMenu
 
         public void IniExTabs(Camera fxCamera)
         {
-            NormalTab.onClick.AddListener(() =>
+            void Temp(Button btn, int exLevel)
             {
-                NormalTabFeature(ScreenPositionCal.Cal(2, fxCamera, NormalTab.GetComponent<RectTransform>(), 3));
-            });
-            
-            EX1Tab.onClick.AddListener(() =>
-            {
-                EX1TabFeature(ScreenPositionCal.Cal(2, fxCamera, EX1Tab.GetComponent<RectTransform>(), 3));
-            });
-        
-            EX2Tab.onClick.AddListener(() =>
-            {
-                EX2TabFeature(ScreenPositionCal.Cal(2, fxCamera, EX2Tab.GetComponent<RectTransform>(), 3));
-            });
-        
-            EX3Tab.onClick.AddListener(() =>
-            {
-                EX3TabFeature(ScreenPositionCal.Cal(2, fxCamera, EX3Tab.GetComponent<RectTransform>(), 3));
-            });
-        }
-        
-        // Button feature
-        void NormalTabFeature(Vector3 screenPos)
-        {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(0, screenPos, _SkillStoneBoxTabEffectsManager.transform);
-            focusingExType = 0;
-            RestFilter();
-        }
-        
-        // Button feature
-        void EX1TabFeature(Vector3 screenPos)
-        {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(1, screenPos, _SkillStoneBoxTabEffectsManager.transform);
-            focusingExType = 1;
-            RestFilter();
-        }
-        
-        // Button feature
-        void EX2TabFeature(Vector3 screenPos)
-        {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(2, screenPos, _SkillStoneBoxTabEffectsManager.transform);
-            focusingExType = 2;
-            RestFilter();
-        }
-        
-        // Button feature
-        void EX3TabFeature(Vector3 screenPos)
-        {
-            _SkillStoneBoxTabEffectsManager.SkillButtonExplosion(3, screenPos, _SkillStoneBoxTabEffectsManager.transform);
-            focusingExType = 3;
-            RestFilter();
+                Vector3 worldPos = 
+                    PosCal.GetWorldPos(PreScene.target.FxCamera, 
+                    PosCal.ConvertAnchorPos(btn.GetComponent<RectTransform>().anchoredPosition, Vector2.one, Vector2.zero), 5f);
+                _SkillStoneBoxTabEffectsManager.RefreshTagEffect(worldPos, exLevel);
+                btn.onClick.AddListener(() =>
+                {
+                    //NormalTabFeature(PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 3));
+                    _SkillStoneBoxTabEffectsManager.SkillButtonExplosion
+                        (exLevel, PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 5f), null);//_SkillStoneBoxTabEffectsManager.transform
+                    focusingExType = exLevel;
+                    RestFilter();
+                });
+                Debug.Log(worldPos);
+            }
+            Temp(NormalTab,0);
+            Temp(EX1Tab,1);
+            Temp(EX2Tab,2);
+            Temp(EX3Tab,3);
         }
         
         // 功能系。刷新技能石陈列界面。这里应该包括一个特殊功能，就是展示Tutorial模式下临时可用的那些石头

@@ -22,6 +22,9 @@ namespace mainMenu
         public CameraManager _CameraManager;
         
         [Space(11)] 
+        [Header("FX 相机")] 
+        public Camera FxCamera;
+        [Space(11)] 
         [Header("抽卡特殊相机")] 
         public Camera GotchaCamera;
         

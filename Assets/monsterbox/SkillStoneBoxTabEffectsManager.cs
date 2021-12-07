@@ -21,21 +21,13 @@ namespace mainMenu
             }
         }
         
-        public void StartUp()
-        {
-            StartUp(Zokusei.blueMagic);
-            StartUp(Zokusei.darkMagic);
-            StartUp(Zokusei.greenMagic);
-            StartUp(Zokusei.lightMagic);
-            StartUp(Zokusei.redMagic);
-        }
-        
         public void StartUp(Zokusei zokusei)
         {
+            if (zokuseiBtnEffects.ContainsKey(zokusei))
+                return;
             ZokuseiStoneTagsGroup zt = new ZokuseiStoneTagsGroup();
             zt.INI_forSkillStoneBox(zokusei, transform);
             zokuseiBtnEffects.Add(zokusei, zt);
-
             string path = null;
             switch (zokusei)
             {
@@ -73,8 +65,9 @@ namespace mainMenu
             }
         }
         
-        public void SwitchZokuseiButtons(Zokusei zokusei)
+        public void SwitchZokusei(Zokusei zokusei)
         {
+            StartUp(zokusei);
             if (_focusingEffectsGroup != null)
             {
                 _focusingEffectsGroup.Close_skillstoneboxtageffects();
@@ -86,6 +79,11 @@ namespace mainMenu
             }else{
                 Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
             }
+        }
+        
+        public void RefreshTagEffect(Vector3 pos, int sp_level)//按钮切换也可以在这里做文章
+        {
+            _focusingEffectsGroup.RefreshSTBoxEffects(sp_level, pos);
         }
         
         public void SkillButtonExplosion(int splevel, Vector3 targetPOS, Transform parent)

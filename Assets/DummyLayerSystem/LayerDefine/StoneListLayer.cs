@@ -1,19 +1,13 @@
 using mainMenu;
 using UnityEngine;
 using System;
-using UnityEngine.UI;
-using TouchScript.Gestures;
 
 public class StoneListLayer : UILayer
 {
     public SkillStonesBox box;
     public SSLevelUpManager ssLevelUper;
     public SkillStoneDetail _skillStoneDetail;
-
-    [Space(10)] 
-    [Header("FX Camera")] 
-    public Camera fxCamera;
-
+    
     public static StoneListLayer Get()
     {
         UILayer l = UILayerLoader.Get("StoneListLayer");
@@ -37,15 +31,13 @@ public class StoneListLayer : UILayer
         l = UILayerLoader.Load(PreScene.target.T,"StoneListLayer") as StoneListLayer;
         returnValue = l as StoneListLayer;
         returnValue.box.GenerateCells();
-        returnValue.box._SkillStoneBoxTabEffectsManager.StartUp();
-        returnValue.box.IniExTabs(returnValue.fxCamera);
-        returnValue.box.EXTabsFeatureRefresh(true);
-        returnValue.box.RestFilter();
-        returnValue.box._SkillStoneBoxTabEffectsManager.SwitchZokuseiButtons
+        returnValue.box._SkillStoneBoxTabEffectsManager.SwitchZokusei
         (
             Zokusei.blueMagic
         );
-        
+        returnValue.box.IniExTabs(PreScene.target.FxCamera);
+        returnValue.box.EXTabsFeatureRefresh(true);
+        returnValue.box.RestFilter();
         returnValue._skillStoneDetail.Clear();
         return returnValue;
     }
@@ -57,7 +49,6 @@ public class StoneListLayer : UILayer
         if (l != null)
         {
             returnValue = l as StoneListLayer;
-            GameObject.Destroy(returnValue.fxCamera);
             returnValue._skillStoneDetail.Clear();
             returnValue.box._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
         }

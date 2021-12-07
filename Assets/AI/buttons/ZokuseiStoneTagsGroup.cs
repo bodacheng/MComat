@@ -84,6 +84,17 @@ public class ZokuseiStoneTagsGroup
         btnPressedEffects.Add(3,triggerExplosion3);
     }
     
+    public void RefreshSTBoxEffects(int eX, Vector3 pos)
+    {
+        if (exTagEffects.ContainsKey(eX))
+            return;
+        ParticleSystem p = btnEffectsSetsForStoneBox[eX];
+        p.gameObject.name = "UIExTag"+ eX;
+        exTagEffects.Add(eX,p);
+        p.gameObject.transform.position = pos;
+        p.Play(true);
+    }
+    
     public void Clear()
     {
         foreach (var VARIABLE in exTagEffects)

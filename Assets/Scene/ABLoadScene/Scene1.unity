@@ -851,7 +851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ca19901ea2e4398be37d6201e4f712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enterFrontPageFirst: 1
+  enterFrontPageFirst: 0
   PlayfabSetting: {fileID: 11400000, guid: ce076091f5876436790a16d502d758d7, type: 2}
   FightGlobalSetting: {fileID: 11400000, guid: 26bb3442a9a6b4908b2a162f148e49b0, type: 2}
 --- !u!4 &2075428156307059471
