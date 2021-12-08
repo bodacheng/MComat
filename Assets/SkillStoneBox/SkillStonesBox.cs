@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UniRx;
 
 namespace mainMenu
 {
@@ -54,24 +55,25 @@ namespace mainMenu
             return focusingExType;
         }
 
-        public void IniExTabs(Camera fxCamera)
+        public async void IniExTabs(Camera fxCamera)
         {
             void Temp(Button btn, int exLevel)
             {
-                Vector3 worldPos = 
-                    PosCal.GetWorldPos(PreScene.target.FxCamera, 
-                    PosCal.ConvertAnchorPos(btn.GetComponent<RectTransform>().anchoredPosition, Vector2.one, Vector2.zero), 5f);
+                Vector3 worldPos = PosCal.GetWorldPos(fxCamera, 
+                    PosCal.ConvertAnchorPos(btn.GetComponent<RectTransform>().anchoredPosition, Vector2.one, Vector2.zero),
+                    5f);
                 _SkillStoneBoxTabEffectsManager.RefreshTagEffect(worldPos, exLevel);
                 btn.onClick.AddListener(() =>
                 {
                     //NormalTabFeature(PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 3));
                     _SkillStoneBoxTabEffectsManager.SkillButtonExplosion
-                        (exLevel, PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 5f), null);//_SkillStoneBoxTabEffectsManager.transform
+                        (exLevel, PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 5f), _SkillStoneBoxTabEffectsManager.transform);
                     focusingExType = exLevel;
                     RestFilter();
                 });
                 Debug.Log(worldPos);
             }
+            await Observable.TimerFrame(5);
             Temp(NormalTab,0);
             Temp(EX1Tab,1);
             Temp(EX2Tab,2);

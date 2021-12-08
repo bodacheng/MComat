@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using Skill;
 using System.Linq;
 using DG.Tweening;
+using UniRx;
 
 namespace mainMenu
 {
@@ -124,8 +125,9 @@ namespace mainMenu
         
         // 技能按钮渲染与处理
         List<GameObject> renderPs = new List<GameObject>();
-        void RenderButton(Zokusei zokusei, GameObject button, int splevel)
+        async void RenderButton(Zokusei zokusei, GameObject button, int splevel)
         {
+            await Observable.TimerFrame(5);
             GameObject t = ZokuseiStoneTagsGroup.CreateOneButtonIcon(zokusei,splevel);
             t.layer = 5;//UI Layer
             foreach (Transform _t in t.transform)

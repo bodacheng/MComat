@@ -21,6 +21,8 @@ public class SkillEditLayer : UILayer
     [Header("技能展示器模式切换角色按钮")]
     public Button unitSwitcher;
     
+    [Space(10)]
+    [Header("SkillStoneDetail")]
     public SkillStoneDetail _skillStoneDetail;
     
     public static SkillEditLayer Get()
