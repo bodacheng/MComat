@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class GotchaFront : MainSceneProcess
 {
-    private GotchaLayer gotchaLayer;
+    private GotchaLayer layer;
     
     public GotchaFront()
     {
@@ -14,8 +14,8 @@ public class GotchaFront : MainSceneProcess
     public override void ProcessEnter()
     {
         _CameraManager.Assign_Camera(C_Mode.NULL, null);
-        CameraManager._camera.gameObject.SetActive(false);
-        PreScene.target.GotchaCamera.gameObject.SetActive(true);
+        //CameraManager._camera.gameObject.SetActive(false);
+        //PreScene.target.GotchaCamera.gameObject.SetActive(true);
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
@@ -23,13 +23,13 @@ public class GotchaFront : MainSceneProcess
             return;
         }
         BackGroundPS.target.Off();
-        gotchaLayer = GotchaLayer.Open();
+        layer = GotchaLayer.Open();
     }
     
     public override void ProcessEnd()
     {
         CameraManager._camera.gameObject.SetActive(true);
-        PreScene.target.GotchaCamera.gameObject.SetActive(false);
+        //PreScene.target.GotchaCamera.gameObject.SetActive(false);
         GotchaLayer.Close();
     }
 }

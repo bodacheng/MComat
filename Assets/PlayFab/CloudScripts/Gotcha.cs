@@ -10,12 +10,12 @@ using System.Linq;
 
 public partial class CloudScript
 {
-    public static void GachaTest(Action<List<StoneOfPlayerInfo>> action)
+    public static void GotchaX9(Action<List<StoneOfPlayerInfo>> action)
     {
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest()
             {
-                FunctionName = "Gacha", // Arbitrary function name (must exist in your uploaded cloud.js file)
+                FunctionName = "GotchaX9", // Arbitrary function name (must exist in your uploaded cloud.js file)
                 FunctionParameter = new {
                     CatalogVersion = PlayfabSetting._StoneCatalog,
                     tableName = "TestGotcha"

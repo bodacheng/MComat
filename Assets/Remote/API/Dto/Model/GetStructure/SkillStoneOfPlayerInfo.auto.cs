@@ -2,7 +2,6 @@
 
 namespace dataAccess
 {
-
     /// <summary>
     /// プレーヤ所有スキルストーン情報モデル
     /// 作成者：Auto Generated

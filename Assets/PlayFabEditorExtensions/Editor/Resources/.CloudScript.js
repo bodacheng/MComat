@@ -322,7 +322,7 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     return { teamInfos };
 }
 
-handlers.Gacha = function (args, context) {
+handlers.Gotcha = function (args, context) {
     var request = {
         "CatalogVersion": args.CatalogVersion,
         "TableId": args.tableName
@@ -331,6 +331,47 @@ handlers.Gacha = function (args, context) {
 
     let itemIds = [];
     itemIds.push(Result.ResultItemId);
+    var grantRequest = {
+        "PlayFabId": currentPlayerId,
+        "CatalogVersion": args.CatalogVersion,
+        "ItemIds": itemIds
+    };
+
+    var grantResult = server.GrantItemsToUser(grantRequest);
+    return { messageValue: grantResult["ItemGrantResults"] };
+}
+
+handlers.Gotcha = function (args, context) {
+    var request = {
+        "CatalogVersion": args.CatalogVersion,
+        "TableId": args.tableName
+    };
+    var Result = server.EvaluateRandomResultTable(request);
+
+    let itemIds = [];
+    itemIds.push(Result.ResultItemId);
+    var grantRequest = {
+        "PlayFabId": currentPlayerId,
+        "CatalogVersion": args.CatalogVersion,
+        "ItemIds": itemIds
+    };
+
+    var grantResult = server.GrantItemsToUser(grantRequest);
+    return { messageValue: grantResult["ItemGrantResults"] };
+}
+
+handlers.GotchaX9 = function (args, context) {
+    
+    let itemIds = [];
+    for (let i = 0; i < 10; i++) {
+        var request = {
+            "CatalogVersion": args.CatalogVersion,
+            "TableId": args.tableName
+        };
+        var Result = server.EvaluateRandomResultTable(request);
+        itemIds.push(Result.ResultItemId);
+    }
+    
     var grantRequest = {
         "PlayFabId": currentPlayerId,
         "CatalogVersion": args.CatalogVersion,

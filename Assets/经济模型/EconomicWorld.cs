@@ -1,12 +1,15 @@
 using System.Collections.Generic;
 
+// 程序目标
+// 1. 模拟我们赔了的钱是去哪里了，以及银行如何从散户的外汇交易中获得利益
+
 namespace FXKnowledge
 {
     class Country
     {
         private string key;
         private Bank bank;
-        private FXBank fxBank;
+        private CenterBank _centerBank;
         private List<Trader> traders;
     }
     
@@ -17,10 +20,11 @@ namespace FXKnowledge
         private float interest_rate;
     }
     
-    class FXBank
+    class CenterBank
     {
-        private IDictionary<string, double> wallet = new Dictionary<string, double>();
+        private IDictionary<string, double> fxWallet = new Dictionary<string, double>();
         private float interest_rate;
+        private float stock_rate;
         
         public float ExchangeRate(string useKey, string targetKey)
         {
@@ -35,11 +39,11 @@ namespace FXKnowledge
         /// </summary>
         private IDictionary<string, double> wallet = new Dictionary<string, double>();
         
-        void FXTrade(string useKey, string targetKey, double target_amount, FXBank fxBank)
+        void FXTrade(string useKey, string targetKey, double target_amount, CenterBank centerBank)
         {
             double CurrentM = wallet[useKey];
             double CurrentT = wallet[targetKey];
-            float exchangeRate = fxBank.ExchangeRate(useKey, targetKey);
+            float exchangeRate = centerBank.ExchangeRate(useKey, targetKey);
             double useMoneyM = target_amount / exchangeRate;
             wallet[useKey] = CurrentM - useMoneyM;
             wallet[targetKey] = CurrentT + target_amount;

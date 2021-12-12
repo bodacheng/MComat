@@ -12,7 +12,7 @@ public class GachaResult : MainSceneProcess
         GotchaResultLayer gotchaResultLayer = GotchaResultLayer.Open();
         
         CameraManager._camera.gameObject.SetActive(false);
-        PreScene.target.GotchaCamera.gameObject.SetActive(true);
+        PreScene.target.starsFall._camera.gameObject.SetActive(true);
         
         //List<SkillStoneOfPlayerInfoModel> results = GachaManager.target.GetResult();
         //if (results.Count == 1)
@@ -58,7 +58,7 @@ public class GachaResult : MainSceneProcess
     public override void ProcessEnd()
     {
         CameraManager._camera.gameObject.SetActive(true);
-        PreScene.target.GotchaCamera.gameObject.SetActive(false);
+        PreScene.target.starsFall._camera.gameObject.SetActive(false);
         GotchaResultLayer.Close();
     }
 }

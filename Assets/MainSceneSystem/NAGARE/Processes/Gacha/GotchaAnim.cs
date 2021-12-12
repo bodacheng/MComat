@@ -7,7 +7,7 @@ public class GotchaAnim : MainSceneProcess
     public IEnumerator EnterProcess()
     {
         _CameraManager.Assign_Camera(C_Mode.NULL, null);
-        PreScene.target.GotchaCamera.gameObject.SetActive(true);
+        PreScene.target.starsFall._camera.gameObject.SetActive(true);
         //EffectsManager.INIEffectsPool("gachastar", "defaultmagic", 3);
         yield return gotchaResultLayer.GotchaAnimProcess(GachaResult.Result);
         PreScene.target.trySwitchToStep(MainSceneStep.GotchaResult, false);
@@ -28,7 +28,7 @@ public class GotchaAnim : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        PreScene.target.GotchaCamera.gameObject.SetActive(false);
+        PreScene.target.starsFall._camera.gameObject.SetActive(false);
         gotchaResultLayer.NineForShow.transform.gameObject.SetActive(true);
         gotchaResultLayer.Reset();
     }

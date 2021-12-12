@@ -1,50 +1,61 @@
 ﻿using mainMenu;
 using dataAccess;
+using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GotchaLayer : UILayer
 {
-    public void OneTime()
+    [SerializeField] private Button Gotcha1;
+    [SerializeField] private Button Gotcha9;
+    [SerializeField] private Button GetAllSKBtn;
+    [SerializeField] private Button GetAllMBtn;
+    [SerializeField] private Button Remove25StonesBtn;
+    
+    public static GotchaLayer Open()
+    {
+        GotchaLayer layer;
+        layer = UILayerLoader.Load(PreScene.target.T, "GotchaLayer") as GotchaLayer;
+        layer.Gotcha1.onClick.AddListener(OneTime);
+        layer.Gotcha9.onClick.AddListener(NineTimes);
+        layer.GetAllSKBtn.onClick.AddListener(GetAllSK);
+        layer.GetAllMBtn.onClick.AddListener(GetAllM);
+        layer.Remove25StonesBtn.onClick.AddListener(Remove25Stones);
+        return layer;
+    }
+
+    public static void Close()
+    {
+        UILayerLoader.Remove("GotchaLayer");
+    }
+    
+    static void OneTime()
     {
     }
     
-    public void NineTimes()
+    static void NineTimes()
     {
-    }
-    
-    public void GachaTest()
-    {
-        //Server.RandomRemove25Items();
-        CloudScript.GachaTest(temp);
+        Debug.Log("clicked");
+        CloudScript.GotchaX9(temp);
         void temp(List<StoneOfPlayerInfo> stones)
         {
             GachaResult.Result = stones;
             PreScene.target.trySwitchToStep(MainSceneStep.GotchaAnim, true);
         }
     }
-
-    public void GetAllSK()
+    
+    static void GetAllSK()
     {
         CloudScript.GrantStonesTest();
     }
 
-    public void GetAllM()
+    static void GetAllM()
     {
         CloudScript.GrantMonsterTest();
     }
 
-    public void Remove25Stones()
+    static void Remove25Stones()
     {
         CloudScript.Remove25Stones();
-    }
-    
-    public static GotchaLayer Open()
-    {
-        return UILayerLoader.Load(PreScene.target.T,"GotchaLayer") as GotchaLayer;
-    }
-
-    public static void Close()
-    {
-        UILayerLoader.Remove("GotchaLayer");
     }
 }

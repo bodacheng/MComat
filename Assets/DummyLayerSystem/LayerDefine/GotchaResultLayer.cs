@@ -130,8 +130,8 @@ public class GotchaResultLayer : UILayer
             void StarComing(StoneOfPlayerInfo stone)
             {
                 Vector3 targetPos = GetRandomStarPos();
-                Vector3 forwardOfCamera = targetPos - PreScene.target.GotchaCamera.transform.position;
-                Vector3 flashPos = PreScene.target.GotchaCamera.transform.position + forwardOfCamera.normalized * 200;
+                Vector3 forwardOfCamera = targetPos - PreScene.target.starsFall._camera.transform.position;
+                Vector3 flashPos = PreScene.target.starsFall._camera.transform.position + forwardOfCamera.normalized * 200;
                 
                 SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(stone.skillId);
                 string fallingstarname = "";
@@ -159,7 +159,7 @@ public class GotchaResultLayer : UILayer
                 Decompositioner flash = EffectsManager.GenerateEffect(fallingstarexplosionname, FightGlobalSetting.EffectPathDefine(Zokusei.Null), flashPos, Quaternion.identity, null);
                 stoneFallingModels.Add(Star);
                 stoneStartFlashModels.Add(flash);
-                PreScene.target.GotchaCamera.transform.DOLookAt(Star.transform.position, 1f);
+                PreScene.target.starsFall._camera.transform.DOLookAt(Star.transform.position, 1f);
                 Star.transform.DOMoveY(-600, 30f);
             }
             StarComing(stoneinfo);
