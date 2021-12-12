@@ -1,0 +1,100 @@
+using System.Collections;
+using UnityEngine;
+using System.Collections.Generic;
+using dataAccess;
+using DG.Tweening;
+using Skill;
+using mainMenu;
+
+public partial class GotchaResultLayer : UILayer
+{
+    #region 屏幕星星飞入位置
+    public RectTransform starWaitPos1, starWaitPos2, starWaitPos3, starWaitPos4, starWaitPos5, starWaitPos6, starWaitPos7, starWaitPos8, starWaitPos9;
+    readonly List<RectTransform> waitPos = new List<RectTransform>();
+    #endregion
+    
+    readonly List<Decompositioner> stoneFallingModels = new List<Decompositioner>();
+    readonly List<Decompositioner> stoneStartFlashModels = new List<Decompositioner>();
+    List<Vector3> slotScreenPos = new List<Vector3>();
+    List<IEnumerator> enumerators = new List<IEnumerator>();
+    
+    #region 一颗星星从屏幕外移动向格子内的动画
+    List<Decompositioner> screenStarModels = new List<Decompositioner>();
+    List<Decompositioner> screenStarExplosionModels = new List<Decompositioner>();
+    
+    void StarSortAnim(List<StoneOfPlayerInfo> results)
+    {
+        for (int i = 0; i < results.Count; i++)
+        {
+            IEnumerator enumerator = StarScreenMoveAnim(results[i], PosCal.GetWorldPos(PreScene.target.FxCamera, waitPos[i], 5f), slotScreenPos[i]);
+            enumerators.Add(enumerator);
+            StartCoroutine(enumerator);
+        }
+    }
+    
+    /// <summary>
+    /// 一颗星星从屏幕外移动向格子内的动画
+    /// </summary>
+    /// <param name="info"></param>
+    /// <param name="waitPos"></param>
+    /// <param name="endPos"></param>
+    /// <returns></returns>
+    IEnumerator StarScreenMoveAnim(StoneOfPlayerInfo info, Vector3 waitPos, Vector3 endPos)
+    {
+        SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(info.skillId);
+        string screenstarname = "";
+        string explosionname = "";
+        switch(skillConfig.SP_LEVEL) // 这里应该是rarelevel
+        {
+            case 0:
+                screenstarname = "normal_test_screenstar0";
+                explosionname = "screenStarExplostionTest0";
+                break;
+            case 1:
+                screenstarname = "normal_test_screenstar1";
+                explosionname = "screenStarExplostionTest1";
+                break;
+            case 2:
+                screenstarname = "normal_test_screenstar2";
+                explosionname = "screenStarExplostionTest2";
+                break;
+            case 3:
+                screenstarname = "normal_test_screenstar3";
+                explosionname = "screenStarExplostionTest3";
+                break;
+        }
+        
+        Decompositioner screenStar = EffectsManager.GenerateEffect(screenstarname, FightGlobalSetting.EffectPathDefine(Zokusei.Null), waitPos, Quaternion.identity, null);
+        screenStarModels.Add(screenStar);
+        screenStar.transform.DOMove(endPos, 2f);
+        yield return new WaitForSeconds(2f);
+        Decompositioner effect = EffectsManager.GenerateEffect(explosionname, FightGlobalSetting.EffectPathDefine(Zokusei.Null), endPos, Quaternion.identity, null);
+        screenStarExplosionModels.Add(effect);
+    }
+    
+    // 必须使用时候即时运行因为里面几个决定位置的运算要考虑当前相机位置等
+    void PosDecide()
+    {
+        // 星星落入格子
+        Vector3 a1ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.A1T.GetComponent<RectTransform>(), 5f);
+        Vector3 a2ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.A2T.GetComponent<RectTransform>(), 5f);
+        Vector3 a3screenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.A3T.GetComponent<RectTransform>(), 5f);
+        Vector3 b1ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.B1T.GetComponent<RectTransform>(), 5f);
+        Vector3 b2ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.B2T.GetComponent<RectTransform>(), 5f);
+        Vector3 b3ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.B3T.GetComponent<RectTransform>(), 5f);
+        Vector3 c1ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.C1T.GetComponent<RectTransform>(), 5f);
+        Vector3 c2ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.C2T.GetComponent<RectTransform>(), 5f);
+        Vector3 c3ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.C3T.GetComponent<RectTransform>(), 5f);
+        slotScreenPos.Clear();
+        slotScreenPos.Add(a1ScreenPos);
+        slotScreenPos.Add(a2ScreenPos);
+        slotScreenPos.Add(a3screenPos);
+        slotScreenPos.Add(b1ScreenPos);
+        slotScreenPos.Add(b2ScreenPos);
+        slotScreenPos.Add(b3ScreenPos);
+        slotScreenPos.Add(c1ScreenPos);
+        slotScreenPos.Add(c2ScreenPos);
+        slotScreenPos.Add(c3ScreenPos);
+    }
+    #endregion
+}

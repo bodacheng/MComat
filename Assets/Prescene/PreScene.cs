@@ -23,8 +23,6 @@ namespace mainMenu
         [Space(11)] 
         [Header("FX 相机")] 
         public Camera FxCamera;
-
-        public StarsFall starsFall;
         
         [Space(7)]
         [Header("Positions For Show")]
@@ -108,8 +106,7 @@ namespace mainMenu
 
             // Gotcha
             GotchaFront gotchaFront = new GotchaFront();
-            GotchaAnim gotchaAnim = new GotchaAnim();
-            GachaResult gachaResult = new GachaResult();
+            GotchaResult gotchaResult = new GotchaResult();
             ArenaPage areanaPage = new ArenaPage();
 
             // mail
@@ -135,8 +132,7 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.MailBox, mailBox);
             ProcessesRunner.Main.Add(MainSceneStep.MailDetail, mailDetail);
             ProcessesRunner.Main.Add(MainSceneStep.GotchaFront, gotchaFront);
-            ProcessesRunner.Main.Add(MainSceneStep.GotchaAnim, gotchaAnim);
-            ProcessesRunner.Main.Add(MainSceneStep.GotchaResult, gachaResult);
+            ProcessesRunner.Main.Add(MainSceneStep.GotchaResult, gotchaResult);
             #endregion
         }
 

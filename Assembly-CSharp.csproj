@@ -284,7 +284,7 @@
      <Compile Include="Assets\Ultimate Joystick\Scripts\UltimateJoystickScreenSizeUpdater.cs" />
      <Compile Include="Assets\Remote\Stone\Util.cs" />
      <Compile Include="Assets\Remote\API\Dto\Form\SkillStoneLevelUpForm.cs" />
-     <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaResultLayer.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaResultLayer\GotchaResultLayer.cs" />
      <Compile Include="Assets\Camera\Modes\OneVOneModeNew.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Fix\UIElementInFront.cs" />
      <Compile Include="Assets\CSV2Table\Demo\SampleTable.cs" />
@@ -370,7 +370,7 @@
      <Compile Include="Assets\TheNineSlot\Validation\SVCenter.cs" />
      <Compile Include="Assets\ImportantDefinition\PlayerAccountInfo.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\SettingLayer.cs" />
-     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GachaResult.cs" />
+     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GotchaResult.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Input\ScrollGamepadManager.cs" />
      <Compile Include="Assets\UI\SciFic Icons\Scripts\IconScript.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\FavoriteButton.cs" />
@@ -465,7 +465,6 @@
      <Compile Include="Assets\TouchScript\Scripts\Gestures\MetaGesture.cs" />
      <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Filter.cs" />
      <Compile Include="Assets\TouchScript\Scripts\GestureManager.cs" />
-     <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_GochaResult.cs" />
      <Compile Include="Assets\TeamUIManager\RotationMode\TeamUIManagerRotationMode.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkDubSounds.cs" />
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_Resource.cs" />
@@ -600,7 +599,6 @@
      <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Slight.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\CustomInputField.cs" />
      <Compile Include="Assets\Resources\effectsresource\Effect3FromJapanNet\eff_magiccircle_sample\UvScroll.cs" />
-     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GotchaAnim.cs" />
      <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\FrontSpawner.cs" />
      <Compile Include="Assets\UI\Oldscripts\NetWork\fightingSceneNetworkManager.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot_ConfirmEdit.cs" />
@@ -776,6 +774,8 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
      <Compile Include="Assets\StarsFall.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaResultLayer\GotchaResultLayer_StarFall.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaResultLayer\GotchaResultLayer_StarScreenMove.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />

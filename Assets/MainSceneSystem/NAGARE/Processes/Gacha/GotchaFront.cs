@@ -13,9 +13,7 @@ public class GotchaFront : MainSceneProcess
      
     public override void ProcessEnter()
     {
-        _CameraManager.Assign_Camera(C_Mode.NULL, null);
-        //CameraManager._camera.gameObject.SetActive(false);
-        //PreScene.target.GotchaCamera.gameObject.SetActive(true);
+        StarsFall.target.gameObject.SetActive(true);
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
@@ -28,8 +26,7 @@ public class GotchaFront : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        CameraManager._camera.gameObject.SetActive(true);
-        //PreScene.target.GotchaCamera.gameObject.SetActive(false);
         GotchaLayer.Close();
+        StarsFall.target.gameObject.SetActive(false);
     }
 }

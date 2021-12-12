@@ -35,12 +35,11 @@ public class GotchaLayer : UILayer
     
     static void NineTimes()
     {
-        Debug.Log("clicked");
         CloudScript.GotchaX9(temp);
         void temp(List<StoneOfPlayerInfo> stones)
         {
-            GachaResult.Result = stones;
-            PreScene.target.trySwitchToStep(MainSceneStep.GotchaAnim, true);
+            GotchaResult.Result = stones;
+            PreScene.target.trySwitchToStep(MainSceneStep.GotchaResult, true);
         }
     }
     

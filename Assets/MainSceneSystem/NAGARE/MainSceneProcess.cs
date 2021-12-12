@@ -33,7 +33,6 @@ namespace mainMenu
         SkillStoneList = 15,
         SkillStones_Sell = 100,
         GotchaFront = 6,
-        GotchaAnim = 7,
         GotchaResult = 24,
         StoneMerge = 25,
         

@@ -9,7 +9,7 @@ public class CameraManager : MonoBehaviour
 
     public static Transform _StartPosRef;
 
-    public readonly IDictionary<C_Mode, CameraMode> CModeDic = new Dictionary<C_Mode, CameraMode>()
+    readonly IDictionary<C_Mode, CameraMode> CModeDic = new Dictionary<C_Mode, CameraMode>()
     {
         {C_Mode.GodPlayerCertainYCamera,new GodPlayerCertainY(5f, 5f)},
         {C_Mode.CertainYAntiVibration, new New2021(8.8f, 5f)},
