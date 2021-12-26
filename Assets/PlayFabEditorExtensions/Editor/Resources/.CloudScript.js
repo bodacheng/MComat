@@ -344,7 +344,7 @@ handlers.Gotcha = function (args, context) {
 handlers.GotchaX9 = function (args, context) {
     
     let itemIds = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 9; i++) {
         var request = {
             "CatalogVersion": args.CatalogVersion,
             "TableId": args.tableName

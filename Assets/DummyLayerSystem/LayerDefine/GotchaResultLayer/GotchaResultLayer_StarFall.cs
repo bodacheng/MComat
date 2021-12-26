@@ -15,48 +15,49 @@ public partial class GotchaResultLayer : UILayer
         if (results != null)
         foreach (StoneOfPlayerInfo info in results)
         {
+            Debug.Log("star"+ info.skillId);
+            StarFall(info);
             starFallAnimOneProcess = StartCoroutine(WaitForOneStarFall());
             while(!_oneStarFalled)
                 yield return new WaitForSeconds(0.1f);
-            
-            void StarFall(StoneOfPlayerInfo stone)
-            {
-                Vector3 targetPos = StarsFall.target.GetRandomStarPos();
-                Vector3 forwardOfCamera = targetPos - StarsFall.target._camera.transform.position;
-                Vector3 flashPos = StarsFall.target._camera.transform.position + forwardOfCamera.normalized * 200;
-                
-                SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(stone.skillId);
-                string fallingstarname = "";
-                string fallingstarexplosionname = "";
-                switch(skillConfig.SP_LEVEL) // 这里应该是rarelevel
-                {
-                    case 0:
-                        fallingstarname = "gachastar0";
-                        fallingstarexplosionname = "screenStarExplostionTest0";
-                    break;
-                    case 1:
-                        fallingstarname = "gachastar1";
-                        fallingstarexplosionname = "screenStarExplostionTest1";
-                    break;
-                    case 2:
-                        fallingstarname = "gachastar2";
-                        fallingstarexplosionname = "screenStarExplostionTest2";
-                    break;
-                    case 3:
-                        fallingstarname = "gachastar3";
-                        fallingstarexplosionname = "screenStarExplostionTest3";
-                    break;
-                }
-                Decompositioner Star = EffectsManager.GenerateEffect(fallingstarname, FightGlobalSetting.EffectPathDefine(Zokusei.Null), targetPos, Quaternion.identity, null);
-                Decompositioner flash = EffectsManager.GenerateEffect(fallingstarexplosionname, FightGlobalSetting.EffectPathDefine(Zokusei.Null), flashPos, Quaternion.identity, null);
-                stoneFallingModels.Add(Star);
-                stoneStartFlashModels.Add(flash);
-                StarsFall.target._camera.transform.DOLookAt(Star.transform.position, 1f);
-                Star.transform.DOMoveY(-600, 30f);
-            }
-            StarFall(info);
         }
         _starFalled = true;
+    }
+    
+    void StarFall(StoneOfPlayerInfo stone)
+    {
+        Vector3 targetPos = StarsFall.target.GetRandomStarPos();
+        Vector3 forwardOfCamera = targetPos - StarsFall.target._camera.transform.position;
+        Vector3 flashPos = StarsFall.target._camera.transform.position + forwardOfCamera.normalized * 200;
+        
+        SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(stone.skillId);
+        string fallingstarname = "";
+        string fallingstarexplosionname = "";
+        switch(skillConfig.SP_LEVEL) // 这里应该是rarelevel
+        {
+            case 0:
+                fallingstarname = "gachastar0";
+                fallingstarexplosionname = "screenStarExplostionTest0";
+            break;
+            case 1:
+                fallingstarname = "gachastar1";
+                fallingstarexplosionname = "screenStarExplostionTest1";
+            break;
+            case 2:
+                fallingstarname = "gachastar2";
+                fallingstarexplosionname = "screenStarExplostionTest2";
+            break;
+            case 3:
+                fallingstarname = "gachastar3";
+                fallingstarexplosionname = "screenStarExplostionTest3";
+            break;
+        }
+        Decompositioner Star = EffectsManager.GenerateEffect(fallingstarname, FightGlobalSetting.EffectPathDefine(Zokusei.Null), targetPos, Quaternion.identity, null);
+        Decompositioner flash = EffectsManager.GenerateEffect(fallingstarexplosionname, FightGlobalSetting.EffectPathDefine(Zokusei.Null), flashPos, Quaternion.identity, null);
+        stoneFallingModels.Add(Star);
+        stoneStartFlashModels.Add(flash);
+        StarsFall.target._camera.transform.DOLookAt(Star.transform.position, 1f);
+        Star.transform.DOMoveY(-600, 30f);
     }
     
     // 跳过整个星星下落动画

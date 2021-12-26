@@ -27,10 +27,12 @@ public partial class CloudScript
                 object messageValue;
                 jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
                 Debug.Log(messageValue);
-                StoneOfPlayerInfo stoneOfPlayerInfo = new StoneOfPlayerInfo();
+                
                 var list = JsonConvert.DeserializeObject<List<JObject>>(messageValue.ToString()).Select(x => x?.ToObject<Dictionary<string, string>>()).ToList();
+                List<StoneOfPlayerInfo> GotStones = new List<StoneOfPlayerInfo> ();
                 foreach (var v in list)
                 {
+                    StoneOfPlayerInfo stoneOfPlayerInfo = new StoneOfPlayerInfo();
                     foreach (var s in v)
                     {
                         if (s.Key == "ItemInstanceId")
@@ -40,13 +42,13 @@ public partial class CloudScript
                         if (s.Key == "ItemId")
                         {
                             stoneOfPlayerInfo.skillId = s.Value;
+                            Debug.Log("Got this:" + stoneOfPlayerInfo.skillId);
                         }
                     }
+                    Stones.Add(stoneOfPlayerInfo);
+                    GotStones.Add(stoneOfPlayerInfo);
                 }
-                
-                Stones.Add(stoneOfPlayerInfo);
-                List<StoneOfPlayerInfo> stones = new List<StoneOfPlayerInfo> { stoneOfPlayerInfo };
-                action(stones);
+                action(GotStones);
             },
             error => { Debug.Log(error.Error); });
     }
