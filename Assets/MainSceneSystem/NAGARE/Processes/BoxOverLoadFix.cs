@@ -2,7 +2,7 @@
 
 public class BoxOverLoadFix : MainSceneProcess
 {
-    private BoxOverLoadFixLayer boxOverLoadFixLayer;
+    private BoxOverLoadFixLayer layer;
     public BoxOverLoadFix()
     {
         Step = MainSceneStep.BoxOverLoadHelper;
@@ -11,7 +11,7 @@ public class BoxOverLoadFix : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        boxOverLoadFixLayer = BoxOverLoadFixLayer.Open();
+        layer = BoxOverLoadFixLayer.Open();
     }
     
     public override void ProcessEnd()

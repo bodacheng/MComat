@@ -4,12 +4,14 @@ using UnityEngine.UI;
 
 public class BoxOverLoadFixLayer : UILayer
 {
-    [SerializeField] private Button SELL, Expand, delete25;
+    [SerializeField] private Button SELL;
+    [SerializeField] private Button Expand;
+    [SerializeField] private Button delete25;
     
     public static BoxOverLoadFixLayer Open()
     {
         BoxOverLoadFixLayer b = UILayerLoader.Load(PreScene.target.T, "BoxOverLoadFixLayer") as BoxOverLoadFixLayer;
-        b.ArrangeButtonsFeature();
+        b.INI();
         return b;
     }
     
@@ -18,7 +20,7 @@ public class BoxOverLoadFixLayer : UILayer
         UILayerLoader.Remove("BoxOverLoadFixLayer");
     }
     
-    void ArrangeButtonsFeature()
+    void INI()
     {
         void ChooseToExpand()
         {
@@ -32,6 +34,9 @@ public class BoxOverLoadFixLayer : UILayer
         }
         SELL.onClick.AddListener(ChooseToSell);
         
+        #if Pre
+        delete25.gameObject.SetActive(true);
         delete25.onClick.AddListener(CloudScript.Remove25Stones);
+        #endif
     }
 }

@@ -106,7 +106,9 @@ public partial class GotchaResultLayer : UILayer
         StarSortAnim(results);
         yield return new WaitForSeconds(2f);
         
-        string A1skillid = null, A2skillid= null, A3skillid= null, B1skillid= null, B2skillid= null, B3skillid= null, C1skillid= null, C2skillid= null, C3skillid= null;
+        string A1skillid = null, A2skillid= null, A3skillid= null, 
+            B1skillid= null, B2skillid= null, B3skillid= null, 
+            C1skillid= null, C2skillid= null, C3skillid= null;
         for (int i = 0; i < results.Count; i++)
         {
             switch(i)
