@@ -2,7 +2,6 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
-using UniRx;
 
 public class SingleThreadProcesser : MonoBehaviour
 {
@@ -27,7 +26,7 @@ public class SingleThreadProcesser : MonoBehaviour
     /// <param name="_process"></param>
     public async void RunAsQueued(IEnumerator _process)
     {
-        UniTask origin = EnumeratorAsyncExtensions.ToUniTask(_process, this);
+        UniTask origin = _process.ToUniTask(this);
         await QueueRun(origin);
     }
 
@@ -52,7 +51,7 @@ public class SingleThreadProcesser : MonoBehaviour
         afterToDo();
     }
 
-    public async UniTask QueueRun(UniTask origin)
+    async UniTask QueueRun(UniTask origin)
     {
         UniTask whole = AsQueue(origin);
         processQueue.Add(origin);

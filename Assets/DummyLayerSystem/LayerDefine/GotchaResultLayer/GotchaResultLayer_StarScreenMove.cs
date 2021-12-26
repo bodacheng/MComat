@@ -42,33 +42,33 @@ public partial class GotchaResultLayer : UILayer
     IEnumerator StarScreenMoveAnim(StoneOfPlayerInfo info, Vector3 waitPos, Vector3 endPos)
     {
         SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(info.skillId);
-        string screenstarname = "";
-        string explosionname = "";
+        string screenStarName = "";
+        string explosionName = "";
         switch(skillConfig.SP_LEVEL) // 这里应该是rarelevel
         {
             case 0:
-                screenstarname = "normal_test_screenstar0";
-                explosionname = "screenStarExplostionTest0";
+                screenStarName = "normal_test_screenstar0";
+                explosionName = "screenStarExplostionTest0";
                 break;
             case 1:
-                screenstarname = "normal_test_screenstar1";
-                explosionname = "screenStarExplostionTest1";
+                screenStarName = "normal_test_screenstar1";
+                explosionName = "screenStarExplostionTest1";
                 break;
             case 2:
-                screenstarname = "normal_test_screenstar2";
-                explosionname = "screenStarExplostionTest2";
+                screenStarName = "normal_test_screenstar2";
+                explosionName = "screenStarExplostionTest2";
                 break;
             case 3:
-                screenstarname = "normal_test_screenstar3";
-                explosionname = "screenStarExplostionTest3";
+                screenStarName = "normal_test_screenstar3";
+                explosionName = "screenStarExplostionTest3";
                 break;
         }
         
-        Decompositioner screenStar = EffectsManager.GenerateEffect(screenstarname, FightGlobalSetting.EffectPathDefine(Zokusei.Null), waitPos, Quaternion.identity, null);
+        Decompositioner screenStar = EffectsManager.GenerateEffect(screenStarName, FightGlobalSetting.EffectPathDefine(Zokusei.Null), waitPos, Quaternion.identity, null);
         screenStarModels.Add(screenStar);
         screenStar.transform.DOMove(endPos, 2f);
         yield return new WaitForSeconds(2f);
-        Decompositioner effect = EffectsManager.GenerateEffect(explosionname, FightGlobalSetting.EffectPathDefine(Zokusei.Null), endPos, Quaternion.identity, null);
+        Decompositioner effect = EffectsManager.GenerateEffect(explosionName, FightGlobalSetting.EffectPathDefine(Zokusei.Null), endPos, Quaternion.identity, null);
         screenStarExplosionModels.Add(effect);
     }
     
