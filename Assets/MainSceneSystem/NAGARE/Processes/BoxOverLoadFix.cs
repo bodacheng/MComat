@@ -12,7 +12,6 @@ public class BoxOverLoadFix : MainSceneProcess
     public override void ProcessEnter()
     {
         boxOverLoadFixLayer = BoxOverLoadFixLayer.Open();
-        boxOverLoadFixLayer.ArrangeButtonsFeature();
     }
     
     public override void ProcessEnd()

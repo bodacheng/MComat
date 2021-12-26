@@ -354,6 +354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SELL: {fileID: 7678176486193083880}
   Expand: {fileID: 7678176486074414641}
+  delete25: {fileID: 7678176486528008585}
 --- !u!1 &7678176486074414670
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,7 +610,7 @@ GameObject:
   - component: {fileID: 7678176486528008584}
   - component: {fileID: 7678176486528008585}
   m_Layer: 5
-  m_Name: DeleteAll
+  m_Name: DeleteTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
