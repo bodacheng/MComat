@@ -53,6 +53,13 @@ public class StonesPage : MainSceneProcess
     //EnterProcess()内绝不能出现triggerMainProcess
     void EnterProcess()
     {
+        List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
+        if (CheckIfExceedLimit.Count > 0)
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
+            return;
+        }
+        
         CommonEnterProcess();
         stoneListLayer.box.AddFeatureToCells(stoneListLayer.CellFeature_StoneShow);
     }
@@ -60,6 +67,13 @@ public class StonesPage : MainSceneProcess
     //EnterProcess()内绝不能出现triggerMainProcess
     void EnterProcess<T>(T t)
     {
+        List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
+        if (CheckIfExceedLimit.Count > 0)
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
+            return;
+        }
+        
         CommonEnterProcess();
         stoneListLayer.ssLevelUper.OpenLevelUpPage(t as string);
     }
@@ -69,12 +83,6 @@ public class StonesPage : MainSceneProcess
         stoneListLayer = StoneListLayer.Open();
         PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
         popupLayer.DarkOffDirectly(1f);
-        List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
-        if (CheckIfExceedLimit.Count > 0)
-        {
-            PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
-            return;
-        }
         popupLayer.LightUp();
     }
     

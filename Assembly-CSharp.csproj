@@ -337,6 +337,7 @@
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkCinematic\RPGTalkCinematicClip.cs" />
      <Compile Include="Assets\Remote\API\Dto\Model\GetStructure\SkillStoneOfPlayerInfo.auto.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\LongPressGesture.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaResultLayer\GotchaResultLayer_StarScreenMove.cs" />
      <Compile Include="Assets\TouchScript\Scripts\InputSources\InputHandlers\WindowsPointerHandlers.cs" />
      <Compile Include="Assets\DynamicBone\Demo\DynamicBoneDemo1.cs" />
      <Compile Include="Assets\StagesManagement\StagesManager_RandomStage.cs" />
@@ -352,6 +353,7 @@
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_returnToBox.cs" />
      <Compile Include="Assets\AI\HitBoxLogger.cs" />
      <Compile Include="Assets\Remote\API\Dto\Model\GetStructure\SkillStoneGotchaInfoModel.auto.cs" />
+     <Compile Include="Assets\StarsFall.cs" />
      <Compile Include="Assets\AI\Soul\SkillCancelFlag.cs" />
      <Compile Include="Assets\TutorialManger\processes\ALineConfirm.cs" />
      <Compile Include="Assets\Monsterbox\MonsterboxFilter.cs" />
@@ -607,7 +609,7 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Event\HoldKeyEvent.cs" />
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\HitBoxesProcesser.cs" />
      <Compile Include="Assets\Language\LanguageConverter.cs" />
-     <Compile Include="Assets\Copier.cs" />
+     <Compile Include="Assets\Utils\Copier.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Input\VirtualCursor.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_waitForConfirm.cs" />
      <Compile Include="Assets\AI\SoulConstruct\AIScriptReading.cs" />
@@ -675,6 +677,7 @@
      <Compile Include="Assets\TouchScript\Scripts\Pointers\FakePointer.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Event\PressKeyEvent.cs" />
      <Compile Include="Assets\Camera\linesShow\SkillShowLines.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaResultLayer\GotchaResultLayer_StarFall.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\LogoLayer.cs" />
      <Compile Include="Assets\AI\Soul\BehaviorRunner_ScriptFileReading.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonException.cs" />
@@ -773,9 +776,6 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
-     <Compile Include="Assets\StarsFall.cs" />
-     <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaResultLayer\GotchaResultLayer_StarFall.cs" />
-     <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaResultLayer\GotchaResultLayer_StarScreenMove.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />

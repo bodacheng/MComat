@@ -65,7 +65,6 @@ public class MonsterEditPage : MainSceneProcess
         SkillEditLayer.Close();
         ItemsLoadFinished(0);
         missionWatcher.DisposeAll();
-        skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
 
     Vector3 screenPos = new Vector3(0.23f, 0.3f, ModelShower._nearClipPlane);

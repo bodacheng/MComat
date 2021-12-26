@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 7678176485979335066}
   - component: {fileID: 395512567654779033}
   m_Layer: 5
-  m_Name: BoxOverLoadFix
+  m_Name: BoxOverLoadFixLayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

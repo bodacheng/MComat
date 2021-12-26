@@ -76,6 +76,12 @@ public class SkillEditLayer : UILayer
     
     public static void Close()
     {
+        var layer = UILayerLoader.Get("SkillEditLayer");
+        if (layer != null)
+        {
+            SkillEditLayer se = (SkillEditLayer)layer;
+            se.StonesBox._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
+        }
         UILayerLoader.Remove("SkillEditLayer");
     }
     

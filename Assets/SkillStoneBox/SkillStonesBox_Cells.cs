@@ -97,7 +97,7 @@ namespace mainMenu
         
         public static List<string> CheckIfExceedCellLimit()
         {
-            List<string> error_massegas = new List<string>();
+            List<string> errorMessages = new List<string>();
             List<string> C_Types = MonstersConfigTable.GetTypeList();
             for (int i = 0; i < C_Types.Count; i++)
             {
@@ -129,22 +129,22 @@ namespace mainMenu
                 
                 if (SkillStonesOfType_normal.Count > Account._AccInfo.Stoneboxsize)
                 {
-                    error_massegas.Add(C_Types[i]+"类角色的普通技能石数量超过限制");
+                    errorMessages.Add(C_Types[i]+"类角色的普通技能石数量超过限制");
                 }
                 if (SkillStonesOfType_EX1.Count > Account._AccInfo.Stoneboxsize)
                 {
-                    error_massegas.Add(C_Types[i]+"类角色的一级必杀技能石数量超过限制");
+                    errorMessages.Add(C_Types[i]+"类角色的一级必杀技能石数量超过限制");
                 }
                 if (SkillStonesOfType_EX2.Count > Account._AccInfo.Stoneboxsize)
                 {
-                    error_massegas.Add(C_Types[i]+"类角色的二级必杀技能石数量超过限制");
+                    errorMessages.Add(C_Types[i]+"类角色的二级必杀技能石数量超过限制");
                 }
                 if (SkillStonesOfType_EX3.Count > Account._AccInfo.Stoneboxsize)
                 {
-                    error_massegas.Add(C_Types[i]+"类角色的三级必杀技能石数量超过限制");
+                    errorMessages.Add(C_Types[i]+"类角色的三级必杀技能石数量超过限制");
                 }
             }
-            return error_massegas;
+            return errorMessages;
         }
     }
 }
