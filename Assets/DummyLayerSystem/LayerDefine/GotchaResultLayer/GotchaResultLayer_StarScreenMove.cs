@@ -15,9 +15,6 @@ public partial class GotchaResultLayer : UILayer
     readonly List<Decompositioner> stoneFallingModels = new List<Decompositioner>();
     readonly List<Decompositioner> stoneStartFlashModels = new List<Decompositioner>();
     readonly List<Vector3> slotScreenPos = new List<Vector3>();
-
-    #region 一颗星星从屏幕外移动向格子内的动画
-
     readonly List<Decompositioner> screenStarModels = new List<Decompositioner>();
     readonly List<Decompositioner> screenStarExplosionModels = new List<Decompositioner>();
     
@@ -94,5 +91,4 @@ public partial class GotchaResultLayer : UILayer
         slotScreenPos.Add(c2ScreenPos);
         slotScreenPos.Add(c3ScreenPos);
     }
-    #endregion
 }

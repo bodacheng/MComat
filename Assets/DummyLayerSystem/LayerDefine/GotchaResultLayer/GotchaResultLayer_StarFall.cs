@@ -15,7 +15,6 @@ public partial class GotchaResultLayer : UILayer
         if (results != null)
         foreach (StoneOfPlayerInfo info in results)
         {
-            Debug.Log("star"+ info.skillId);
             StarFall(info);
             starFallAnimOneProcess = StartCoroutine(WaitForOneStarFall());
             while(!_oneStarFalled)

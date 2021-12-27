@@ -34,6 +34,12 @@ public partial class GotchaResultLayer : UILayer
 
     public static void Close()
     {
+        var layer = UILayerLoader.Get("GotchaResultLayer");
+        if (layer != null)
+        {
+            GotchaResultLayer gLayer = (GotchaResultLayer)layer;
+            gLayer.Reset();
+        }
         UILayerLoader.Remove("GotchaResultLayer");
     }
     

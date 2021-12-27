@@ -2,14 +2,13 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using dataAccess;
-using mainMenu;
-using UnityEngine.UI;
 
 public partial class GotchaResultLayer : UILayer
 {
-        // Gotcha总过程 点击画面的话进入下一个星星
-    public IEnumerator GotchaAnimProcess(List<StoneOfPlayerInfo> results)
+    // Gotcha总动画过程 点击画面的话进入下一个星星
+    public IEnumerator WholeAnimProcess(List<StoneOfPlayerInfo> results)
     {
+        Reset();
         NineForShow.transform.gameObject.SetActive(false);
         yield return new WaitForSecondsRealtime(0.5f);
         SpeedOnce.gameObject.SetActive(true);
@@ -20,13 +19,15 @@ public partial class GotchaResultLayer : UILayer
             yield return new WaitForSeconds(0.1f);
         
         SpeedOnce.gameObject.SetActive(false);
-        Reset();
         Skip.gameObject.SetActive(false);
         NineForShow.transform.gameObject.SetActive(true);
         
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
+        
         PosDecide();
         StarSortAnim(results);
+        
+        yield return new WaitForSeconds(2f);
         
         string A1skillid = null, A2skillid= null, A3skillid= null, 
             B1skillid= null, B2skillid= null, B3skillid= null, 

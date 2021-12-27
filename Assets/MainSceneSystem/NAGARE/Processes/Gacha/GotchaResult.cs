@@ -18,7 +18,7 @@ public class GotchaResult : MainSceneProcess
         layer = GotchaResultLayer.Open();
         StarsFall.target.gameObject.SetActive(true);
         layer.NineForShow.LoadShowDetailFeature();
-        mainProcessRunner.RunAsQueued(layer.GotchaAnimProcess(Result));
+        mainProcessRunner.RunAsQueued(layer.WholeAnimProcess(Result));
     }
     
     public override void ProcessEnd()
