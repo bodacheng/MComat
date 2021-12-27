@@ -41,8 +41,12 @@ public class GotchaLayer : UILayer
     {
     }
     
+    /// <summary>
+    /// 缺少消费关联处理
+    /// </summary>
     static void NineTimes()
     {
+        Close();// 点击按钮瞬间关闭layer。
         CloudScript.GotchaX9(temp);
         void temp(List<StoneOfPlayerInfo> stones)
         {

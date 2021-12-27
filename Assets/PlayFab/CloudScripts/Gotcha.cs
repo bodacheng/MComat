@@ -7,6 +7,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using mainMenu;
 
 public partial class CloudScript
 {
@@ -50,6 +51,11 @@ public partial class CloudScript
                 }
                 action(GotStones);
             },
-            error => { Debug.Log(error.Error); });
+            error =>
+            {
+                Debug.Log(error.Error);
+                // 缺失通信错误的提示
+                PreScene.target.trySwitchToStep(MainSceneStep.GotchaFront, true);
+            });
     }
 }

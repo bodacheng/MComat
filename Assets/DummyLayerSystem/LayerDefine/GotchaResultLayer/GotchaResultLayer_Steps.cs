@@ -17,6 +17,8 @@ public partial class GotchaResultLayer : UILayer
         
         while(!_starFalled)
             yield return new WaitForSeconds(0.1f);
+
+        ClearFallingStars();
         
         SpeedOnce.gameObject.SetActive(false);
         Skip.gameObject.SetActive(false);

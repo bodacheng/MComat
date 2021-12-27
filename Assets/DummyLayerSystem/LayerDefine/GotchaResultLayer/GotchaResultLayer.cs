@@ -62,17 +62,22 @@ public partial class GotchaResultLayer : UILayer
     {
         _starFalled = false;
         _oneStarFalled = false;
+        ClearFallingStars();
+        ClearGotchaEffects();
+    }
+
+    void ClearFallingStars()
+    {
         foreach (var t in stoneFallingModels)
         {
             t.EnergyRessolve();
         }
+        stoneFallingModels.Clear();
         foreach (var t in stoneStartFlashModels)
         {
             t.EnergyRessolve();
         }
-        stoneFallingModels.Clear();
         stoneStartFlashModels.Clear();
-        ClearGotchaEffects();
     }
     
     void ClearGotchaEffects()
