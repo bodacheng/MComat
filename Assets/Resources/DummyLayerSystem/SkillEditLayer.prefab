@@ -5078,6 +5078,8 @@ MonoBehaviour:
   C1DragAndDropCell: {fileID: 1418472471610959490}
   C2DragAndDropCell: {fileID: 4064848952930605353}
   C3DragAndDropCell: {fileID: 4139846491963652376}
+  removeAllBtn: {fileID: 2523835563899700567}
+  randomBtn: {fileID: 2523835563188808434}
   ConfirmSkillChangeButton: {fileID: 4470625909638136505}
   ResetButton: {fileID: 2523835564512666217}
   remainCharges:
@@ -6441,7 +6443,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

@@ -19,11 +19,11 @@ public class SkillEditLayer : UILayer
     
     [Space(10)]
     [Header("技能展示器模式切换角色按钮")]
-    public Button unitSwitcher;
+    [SerializeField] Button unitSwitcher;
     
     [Space(10)]
     [Header("SkillStoneDetail")]
-    public SkillStoneDetail _skillStoneDetail;
+    [SerializeField] SkillStoneDetail _skillStoneDetail;
     
     public static SkillEditLayer Get()
     {
@@ -123,6 +123,8 @@ public class SkillEditLayer : UILayer
         }
         NineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
         NineSlot.ResetButton.onClick.AddListener(NineSlot.ResetNineSlot);
+        NineSlot.removeAllBtn.onClick.AddListener(NineSlot.ClearSkillEquip);
+        NineSlot.randomBtn.onClick.AddListener(FinishRemains);
     }
     
     // 技能浏览器程序模式专用
@@ -150,12 +152,6 @@ public class SkillEditLayer : UILayer
         StonesBox.SetFocusingType(_CharInfo.TYPE);
         StonesBox.RestFilter();
         StonesBox.EXTabsFeatureRefresh(false);
-    }
-    
-    public void Random()
-    {
-        //RandomAll();
-        FinishRemains();
     }
     
     void FinishRemains()

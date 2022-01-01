@@ -122,7 +122,6 @@ namespace dataAccess
         public static List<StoneOfPlayerInfo> GetEquipingStones(string monsterOfPlayerId)
         {
             List<StoneOfPlayerInfo> targetStones = new List<StoneOfPlayerInfo>();
-            Debug.Log(Dic.Count);
             foreach(KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in Dic)
             {
                 if (keyValuePair.Value.inUsingMonsterOfPlayerId == monsterOfPlayerId)

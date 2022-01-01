@@ -6,7 +6,7 @@ namespace mainMenu
     public partial class TheNineSlot : MonoBehaviour
     {
         // 强制清空九宫槽 包括固有技能，用于程序处理
-        void ForceClearAll()
+        public void ForceClearAll()
         {
             foreach (SkillStoneSlot _slot in allSlot)
             {

@@ -18,12 +18,16 @@ public partial class PopupLayer : UILayer {
     
     public static PopupLayer Open(GameObject T)
     {
+        PopupLayer returnValue;
         UILayer l = UILayerLoader.Get("PopupLayer");
         if (l != null)
         {
-            return l as PopupLayer;
+            returnValue = l as PopupLayer;
+            return returnValue;
         }
-        return UILayerLoader.Load(T,"PopupLayer") as PopupLayer;
+        returnValue = UILayerLoader.Load(T,"PopupLayer") as PopupLayer;
+        returnValue.transform.SetSiblingIndex(0);
+        return returnValue;
     }
     
     public static void Close()

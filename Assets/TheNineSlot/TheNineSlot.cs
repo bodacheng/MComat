@@ -24,6 +24,12 @@ namespace mainMenu
         B1DragAndDropCell, B2DragAndDropCell, B3DragAndDropCell,
         C1DragAndDropCell, C2DragAndDropCell, C3DragAndDropCell;
         
+        [Header("Remove all")]
+        public Button removeAllBtn;
+    
+        [Header("Random all")]
+        public Button randomBtn;
+        
         [Space(1)]
         [Header("技能石编辑确认")]
         public Button ConfirmSkillChangeButton;

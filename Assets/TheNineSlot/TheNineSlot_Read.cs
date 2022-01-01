@@ -16,7 +16,6 @@ namespace mainMenu
                 Debug.Log("严重错误");
                 return;
             }
-            Debug.Log("sjadh" + _AccCharInfo.id);
             List<StoneOfPlayerInfo> equipingstones = Stones.GetEquipingStones(_AccCharInfo.id);
 
             for (int i = 1; i <= 9; i++)
