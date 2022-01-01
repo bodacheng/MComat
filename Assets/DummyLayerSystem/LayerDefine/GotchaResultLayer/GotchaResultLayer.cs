@@ -9,8 +9,8 @@ public partial class GotchaResultLayer : UILayer
     #region 动画的跳过以及加速
     [SerializeField] Button Skip;
     [SerializeField] Button SpeedOnce;
-    bool _starFalled;
-    bool _oneStarFalled;
+    bool _starFallen;
+    bool _oneStarFallen;
     Coroutine starFallAnimWholeProcess;
     Coroutine starFallAnimOneProcess;
     #endregion
@@ -60,10 +60,11 @@ public partial class GotchaResultLayer : UILayer
     // 清理相关特效等等
     public void Reset()
     {
-        _starFalled = false;
-        _oneStarFalled = false;
+        _starFallen = false;
+        _oneStarFallen = false;
         ClearFallingStars();
         ClearGotchaEffects();
+        ClearDetail();
     }
 
     void ClearFallingStars()

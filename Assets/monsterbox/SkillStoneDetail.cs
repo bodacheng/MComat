@@ -9,27 +9,27 @@ namespace mainMenu
     {
         [Space(2)]
         [Header("图标")]
-        public RectTransform IconShowT;
+        [SerializeField] RectTransform IconShowT;
         
         [Space(2)]
         [Header("技能名字")]
-        public Text keyname;
-        public Text Showname;
+        [SerializeField] Text keyname;
+        [SerializeField] Text Showname;
         
         [Space(7)]
         [Header("EXTypes")]
-        public GameObject Ex1Icon, Ex2Icon, Ex3Icon;
+        [SerializeField] GameObject Ex1Icon, Ex2Icon, Ex3Icon;
         
         [Space(7)]
         [Header("EXTypes")]
-        public GameObject close, near, far;
+        [SerializeField] GameObject close, near, far;
         
         [Space(7)]
         [Header("AT")]
-        public Text AT;
+        [SerializeField] Text AT;
         [Space(7)]
         [Header("HP")]
-        public Text HP;
+        [SerializeField] Text HP;
         
         [Space(7)]
         [Header("当前技能等级")]
@@ -37,13 +37,13 @@ namespace mainMenu
         public Text StoneTargetLevel;
         
         static GameObject Marker;
-
+        
         void Awake()
         {
             if (Marker == null)
             {
                 Marker = new GameObject("Object Pools Container");
-                UnityEngine.Object.DontDestroyOnLoad(Marker);
+                DontDestroyOnLoad(Marker);
             }
         }
         

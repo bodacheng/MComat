@@ -17,10 +17,10 @@ public partial class GotchaResultLayer : UILayer
         {
             StarFall(info);
             starFallAnimOneProcess = StartCoroutine(WaitForOneStarFall());
-            while(!_oneStarFalled)
+            while(!_oneStarFallen)
                 yield return new WaitForSeconds(0.1f);
         }
-        _starFalled = true;
+        _starFallen = true;
     }
     
     void StarFall(StoneOfPlayerInfo stone)
@@ -67,15 +67,15 @@ public partial class GotchaResultLayer : UILayer
             StopCoroutine(starFallAnimWholeProcess);
         }
         SpeedOnce.gameObject.SetActive(false);
-        _starFalled = true;
+        _starFallen = true;
     }
     
     // 一个星星下落动画
     IEnumerator WaitForOneStarFall()
     {
-        _oneStarFalled = false;
+        _oneStarFallen = false;
         yield return new WaitForSecondsRealtime(1f);
-        _oneStarFalled = true;
+        _oneStarFallen = true;
     }
     
     // 加速一个星星下落动画
@@ -85,6 +85,6 @@ public partial class GotchaResultLayer : UILayer
         {
             StopCoroutine(starFallAnimOneProcess);
         }
-        _oneStarFalled = true;
+        _oneStarFallen = true;
     }
 }

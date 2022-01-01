@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 // 抽卡技能石细节显示
 public partial class NineForShow : MonoBehaviour
@@ -14,73 +14,36 @@ public partial class NineForShow : MonoBehaviour
         );
     }
 
-    public void LoadShowDetailFeature()
+    public void LoadShowDetailFeature(Action<string> showDetail)
     {
         A1T.onClick.RemoveAllListeners();
-        A1T.onClick.AddListener(A1SlotDetail);
+        A1T.onClick.AddListener(() => { ShowDetailOfStone(A1T, showDetail);});
         A2T.onClick.RemoveAllListeners();
-        A2T.onClick.AddListener(A2SlotDetail);
+        A2T.onClick.AddListener(() => { ShowDetailOfStone(A2T, showDetail);});
         A3T.onClick.RemoveAllListeners();
-        A3T.onClick.AddListener(A3SlotDetail);
+        A3T.onClick.AddListener(() => { ShowDetailOfStone(A3T, showDetail);});
         
         B1T.onClick.RemoveAllListeners();
-        B1T.onClick.AddListener(B1SlotDetail);
+        B1T.onClick.AddListener(() => { ShowDetailOfStone(B1T, showDetail);});
         B2T.onClick.RemoveAllListeners();
-        B2T.onClick.AddListener(B2SlotDetail);
+        B2T.onClick.AddListener(() => { ShowDetailOfStone(B2T, showDetail);});
         B3T.onClick.RemoveAllListeners();
-        B3T.onClick.AddListener(B3SlotDetail);
+        B3T.onClick.AddListener(() => { ShowDetailOfStone(B3T, showDetail);});
         
         C1T.onClick.RemoveAllListeners();
-        C1T.onClick.AddListener(C1SlotDetail);
+        C1T.onClick.AddListener(() => { ShowDetailOfStone(C1T, showDetail);});
         C2T.onClick.RemoveAllListeners();
-        C2T.onClick.AddListener(C2SlotDetail);
+        C2T.onClick.AddListener(() => { ShowDetailOfStone(C2T, showDetail);});
         C3T.onClick.RemoveAllListeners();
-        C3T.onClick.AddListener(C3SlotDetail);
+        C3T.onClick.AddListener(() => { ShowDetailOfStone(C3T, showDetail);});
     }
     
-    void A1SlotDetail()
-    {
-        ShowDetailOfStone(A1T);
-    }
-    void A2SlotDetail()
-    {
-        ShowDetailOfStone(A2T);
-    }    
-    void A3SlotDetail()
-    {
-        ShowDetailOfStone(A3T);
-    }
-    void B1SlotDetail()
-    {
-        ShowDetailOfStone(B1T);
-    }
-    void B2SlotDetail()
-    {
-        ShowDetailOfStone(B2T);
-    }    
-    void B3SlotDetail()
-    {
-        ShowDetailOfStone(B3T);
-    }
-    void C1SlotDetail()
-    {
-        ShowDetailOfStone(C1T);
-    }
-    void C2SlotDetail()
-    {
-        ShowDetailOfStone(C2T);
-    }    
-    void C3SlotDetail()
-    {
-        ShowDetailOfStone(C3T);
-    }
-    
-    void ShowDetailOfStone(Button targetButton)
+    void ShowDetailOfStone(Button targetButton, Action<string> showDetail)
     {
         SKStoneItem item = targetButton.transform.GetComponentInChildren<SKStoneItem>();
         if (item != null)
         {
-            //GotchaLayer.target._skillStoneDetail.RefreshInfo(item._SkillConfig);
+            showDetail(item._SkillConfig.RECORD_ID);
         }
     }
 }

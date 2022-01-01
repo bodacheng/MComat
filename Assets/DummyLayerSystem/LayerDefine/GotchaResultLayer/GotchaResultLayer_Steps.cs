@@ -15,7 +15,7 @@ public partial class GotchaResultLayer : UILayer
         Skip.gameObject.SetActive(true);
         starFallAnimWholeProcess = StartCoroutine (StarFallAnim(results));
         
-        while(!_starFalled)
+        while(!_starFallen)
             yield return new WaitForSeconds(0.1f);
 
         ClearFallingStars();
