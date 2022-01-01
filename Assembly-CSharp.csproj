@@ -408,8 +408,8 @@
      <Compile Include="Assets\Asstes\ErbGameArt\Sword slash FX\Demo scene\DemoToonVFX.cs" />
      <Compile Include="Assets\Asstes\Malbers Animations\Common\Scripts\Events\UnityEventRaiser.cs" />
      <Compile Include="Assets\AudioManager\AudioManager.cs" />
-     <Compile Include="Assets\AI\Soul\BehaviorRunner_unused.cs" />
      <Compile Include="Assets\SkillEvents\BO_Ani_E.cs" />
+     <Compile Include="Assets\AI\Soul\BehaviorRunner_unused.cs" />
      <Compile Include="Assets\LoadingCanvas\LoadingCanvas_HightLight.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Pointers\ObjectPointer.cs" />
      <Compile Include="Assets\FightSceneSystem\Nagare\CountDownProcess.cs" />
@@ -679,7 +679,6 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Event\PressKeyEvent.cs" />
      <Compile Include="Assets\Camera\linesShow\SkillShowLines.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaResultLayer\GotchaResultLayer_StarFall.cs" />
-     <Compile Include="Assets\DummyLayerSystem\LayerDefine\LogoLayer.cs" />
      <Compile Include="Assets\AI\Soul\BehaviorRunner_ScriptFileReading.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonException.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem_Render.cs" />
@@ -738,6 +737,7 @@
      <Compile Include="Assets\Language\LanguageCodeTable.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiFireProjectile.cs" />
      <Compile Include="Assets\AI\AI_states\states\G_Ani_MoveEscape_State.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaResultLayer\GotchaResultLayer_Detail.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSaveInstance.cs" />
      <Compile Include="Assets\TouchScript\Modules\TUIO\Scripts\InputSources\TuioInput.cs" />
      <Compile Include="Assets\AI\Soul\SkillSet\SkillSet_Validation.cs" />
@@ -761,8 +761,8 @@
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkCinematic\RPGTalkCinematicBehaviour.cs" />
      <Compile Include="Assets\TouchScript\Scripts\InputSources\InputHandlers\MouseHandler.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Panel\MainPanelButtonParent.cs" />
-     <Compile Include="Assets\POFX\Scripts\FX\POFX_Refraction.cs" />
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_Util.cs" />
+     <Compile Include="Assets\POFX\Scripts\FX\POFX_Refraction.cs" />
      <Compile Include="Assets\TouchScript\Scripts\InputSources\InputHandlers\TouchHandler.cs" />
      <Compile Include="Assets\AI\Soul\Sensor.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Input\SliderGamepadManager.cs" />
@@ -777,7 +777,6 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
-     <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaResultLayer\GotchaResultLayer_Detail.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />
@@ -1966,17 +1965,56 @@
  <Reference Include="Unity.VSCode.Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
- <Reference Include="Unity.2D.Tilemap.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
- </Reference>
- <Reference Include="com.unity.multiplayer-hlapi.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.Purchasing">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Purchasing.SecurityStub">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityStub.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.UI">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Rider.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Analytics">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.SpatialTracking">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Analytics.DataPrivacy">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ </Reference>
+ <Reference Include="com.unity.multiplayer-hlapi.Runtime">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Purchasing.Codeless">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.Codeless.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.AdaptivePerformance.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.AdaptivePerformance.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Monetization">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.AdaptivePerformance">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.AdaptivePerformance.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Tilemap.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="com.unity.multiplayer-hlapi.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VisualStudio.Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
@@ -1987,20 +2025,17 @@
  <Reference Include="Unity.TextMeshPro">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
- <Reference Include="UnityEngine.Purchasing.SecurityStub">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityStub.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
+ <Reference Include="Unity.AdaptivePerformance.Simulator.Extension">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.AdaptivePerformance.Simulator.Extension.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Sprite.Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.Subsystem.Registration">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.Postprocessing.Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.UI">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PlasticSCM.Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
@@ -2008,32 +2043,14 @@
  <Reference Include="com.unity.multiplayer-weaver.Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
  </Reference>
- <Reference Include="Unity.Rider.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Analytics">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Analytics.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.SpatialTracking">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.UI">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
- </Reference>
- <Reference Include="com.unity.multiplayer-hlapi.Runtime">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+ <Reference Include="Unity.AdaptivePerformance.Simulator.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.AdaptivePerformance.Simulator.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing.SecurityCore">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityCore.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Postprocessing.Runtime">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing.Codeless">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Purchasing.Codeless.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.XR.LegacyInputHelpers">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
@@ -2047,9 +2064,6 @@
  <Reference Include="UnityEditor.XR.LegacyInputHelpers">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
  </Reference>
- <Reference Include="UnityEngine.Monetization">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.Purchasing">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
  </Reference>
@@ -2058,21 +2072,6 @@
  </Reference>
  <Reference Include="UnityEngine.Advertisements.Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.AdaptivePerformance.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.AdaptivePerformance.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.AdaptivePerformance">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.AdaptivePerformance.dll</HintPath>
- </Reference>
- <Reference Include="Unity.AdaptivePerformance.Simulator.Extension">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.AdaptivePerformance.Simulator.Extension.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Subsystem.Registration">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
- </Reference>
- <Reference Include="Unity.AdaptivePerformance.Simulator.Editor">
- <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.AdaptivePerformance.Simulator.Editor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -2087,6 +2086,14 @@
     <ProjectReference Include="AppleAuth.Editor.csproj">
       <Project>{0de3c25d-e596-b8f3-75a9-4b52183d8b1f}</Project>
       <Name>AppleAuth.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.TextMeshPro.csproj">
+      <Project>{78d419d9-4997-0fe8-0a67-12c4b3915b3a}</Project>
+      <Name>UniTask.TextMeshPro</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.Addressables.csproj">
+      <Project>{5d9a38dd-bc27-7387-6530-d1a0d7a6951b}</Project>
+      <Name>UniTask.Addressables</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFabEditorExtensions.csproj">
       <Project>{013bdff4-f5db-6280-902d-1d03b79d7515}</Project>
@@ -2108,10 +2115,6 @@
       <Project>{4694d9cf-5020-9416-fb2c-565ad4e01465}</Project>
       <Name>UniRx</Name>
     </ProjectReference>
-    <ProjectReference Include="UniTask.TextMeshPro.csproj">
-      <Project>{78d419d9-4997-0fe8-0a67-12c4b3915b3a}</Project>
-      <Name>UniTask.TextMeshPro</Name>
-    </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
       <Project>{ab868ac3-38db-93ce-b53a-1ed2bfb72e67}</Project>
       <Name>UniTask</Name>
@@ -2119,10 +2122,6 @@
     <ProjectReference Include="AppleAuth.csproj">
       <Project>{11db2e7e-c1b9-9ea6-9ee4-9b1ead681c56}</Project>
       <Name>AppleAuth</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniTask.Addressables.csproj">
-      <Project>{5d9a38dd-bc27-7387-6530-d1a0d7a6951b}</Project>
-      <Name>UniTask.Addressables</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

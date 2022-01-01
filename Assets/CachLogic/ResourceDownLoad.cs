@@ -36,9 +36,7 @@ public partial class ResourceDownLoad : MonoBehaviour
     IDictionary<string, List<string>> CharTypeCodeAndBasicMoveSets = new Dictionary<string, List<string>>();
     CachDownLoadMission modelConfigFileMission;
     CachDownLoadMission animationConfigFileMission;
-
-    public bool finished { get; set; }
-
+    
     void Start()
     {
         BundleURL = assetBundleURL;
@@ -46,8 +44,6 @@ public partial class ResourceDownLoad : MonoBehaviour
     
     public IEnumerator ResourcePrepareProcess()
     {
-        finished = false;
-        
         ResourceLoadingSetting.ConfigFileLoadingMode = _ResourceSetting.ConfigFileLoadingMode;
         ResourceLoadingSetting.AnimationLoadingMode = _ResourceSetting.AnimationLoadingMode;
         ResourceLoadingSetting.MagicLoadingMode = _ResourceSetting.MagicLoadingMode;
@@ -119,6 +115,5 @@ public partial class ResourceDownLoad : MonoBehaviour
             case ResourceLoadMode.Resource:
                 break;
         }
-        finished = true;
     }
 }

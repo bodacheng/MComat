@@ -20,7 +20,6 @@ public class UILayerLoader
         {"FightingStepLayer", "DummyLayerSystem/FightingStepLayer"},
         {"SettingLayer", "DummyLayerSystem/SettingLayer"},
         {"UnitsLayer", "DummyLayerSystem/UnitsLayer"},
-        {"LogoLayer", "DummyLayerSystem/LogoLayer"},
         {"PopupLayer", "DummyLayerSystem/PopupLayer"},
         {"SelfFightLayer", "DummyLayerSystem/SelfFightLayer"},
         {"FightPrepareLayer", "DummyLayerSystem/FightPrepareLayer"},
