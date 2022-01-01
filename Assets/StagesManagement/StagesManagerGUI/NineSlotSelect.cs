@@ -28,47 +28,47 @@ public partial class StagesManagerGUI : Editor {
             {
                 case 1:
                 nowSkillID = focusingCharInfo.set.a1;
-                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 A1ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 2:
                 nowSkillID = focusingCharInfo.set.a2;
-                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 A2ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 3:
                 nowSkillID = focusingCharInfo.set.a3;
-                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 A3ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 4:
                 nowSkillID = focusingCharInfo.set.b1;
-                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 B1ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 5:
                 nowSkillID = focusingCharInfo.set.b2;
-                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 B2ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 6:
                 nowSkillID = focusingCharInfo.set.b3;
-                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 B3ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 7:
                 nowSkillID = focusingCharInfo.set.c1;
-                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 C1ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 8:
                 nowSkillID = focusingCharInfo.set.c2;
-                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 C2ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 9:
                 nowSkillID = focusingCharInfo.set.c1;
-                defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(nowSkillID);
+                defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 C3ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
             }

@@ -49,7 +49,7 @@ namespace dataAccess
                 {
                     continue;//原生技能不显示在技能石盒子内
                 }
-                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(keyValuePair.Value.skillId);
+                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfig(keyValuePair.Value.skillId);
                 if (_SkillConfig == null)
                 {
                     Debug.Log("????"+ keyValuePair.Value.skillId);

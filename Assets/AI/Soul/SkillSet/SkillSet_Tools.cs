@@ -163,39 +163,39 @@ public partial class SkillSet
     
     public SkillConfig GetA1Config()
     {
-        return SkillConfigTable.GetSkillConfigByID(a1);
+        return SkillConfigTable.GetSkillConfig(a1);
     }
     public SkillConfig GetA2Config()
     {
-        return SkillConfigTable.GetSkillConfigByID(a2);
+        return SkillConfigTable.GetSkillConfig(a2);
     }
     public SkillConfig GetA3Config()
     {
-        return SkillConfigTable.GetSkillConfigByID(a3);
+        return SkillConfigTable.GetSkillConfig(a3);
     }
     public SkillConfig GetB1Config()
     {
-        return SkillConfigTable.GetSkillConfigByID(b1);
+        return SkillConfigTable.GetSkillConfig(b1);
     }
     public SkillConfig GetB2Config()
     {
-        return SkillConfigTable.GetSkillConfigByID(b2);
+        return SkillConfigTable.GetSkillConfig(b2);
     }
     public SkillConfig GetB3Config()
     {
-        return SkillConfigTable.GetSkillConfigByID(b3);
+        return SkillConfigTable.GetSkillConfig(b3);
     }
     public SkillConfig GetC1Config()
     {
-        return SkillConfigTable.GetSkillConfigByID(c1);
+        return SkillConfigTable.GetSkillConfig(c1);
     }
     public SkillConfig GetC2Config()
     {
-        return SkillConfigTable.GetSkillConfigByID(c2);
+        return SkillConfigTable.GetSkillConfig(c2);
     }
     public SkillConfig GetC3Config()
     {
-        return SkillConfigTable.GetSkillConfigByID(c3);
+        return SkillConfigTable.GetSkillConfig(c3);
     }
         
     public SkillEntity GetM_STS()

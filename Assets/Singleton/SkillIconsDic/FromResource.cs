@@ -9,7 +9,7 @@ public partial class SkillIconsDic
         GameObject prefab, returnValue;
         if (!SkillIconDic.ContainsKey(skillID))
         {
-            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
+            SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(skillID);
             // 图标可以是Sprite或其他格式，只要名字对上编号就可以
             Sprite sprite = Resources.Load<Sprite>("Sprites/skillIcons/" + skillID);
             if (sprite != null)

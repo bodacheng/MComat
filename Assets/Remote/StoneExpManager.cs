@@ -37,7 +37,7 @@ namespace dataAccess
             StoneOfPlayerInfo skillStoneOfPlayerInfoModel = Stones.Get(stoneID);
             point += skillStoneOfPlayerInfoModel.EXP;
 
-            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillStoneOfPlayerInfoModel.skillId);
+            SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(skillStoneOfPlayerInfoModel.skillId);
             switch (skillConfig.RARITY_LEVEL)
             {
                 case 1:

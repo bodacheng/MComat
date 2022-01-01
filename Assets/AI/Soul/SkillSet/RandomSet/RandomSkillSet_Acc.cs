@@ -10,7 +10,7 @@ public partial class SkillSet
     public static SkillSet RandomSkillSet(string type, string originSkill, int skilllevel, bool baseOnAcc, SkillStonesBox.StoneFilterForm filterForm = null)
     {
         SkillSet nineAndTwo = new SkillSet();
-        SkillConfig originSkillConfig = SkillConfigTable.GetSkillConfigByID(originSkill);
+        SkillConfig originSkillConfig = SkillConfigTable.GetSkillConfig(originSkill);
 
         if (filterForm == null)
         {

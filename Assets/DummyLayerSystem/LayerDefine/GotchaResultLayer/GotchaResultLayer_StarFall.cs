@@ -29,7 +29,7 @@ public partial class GotchaResultLayer : UILayer
         Vector3 forwardOfCamera = targetPos - StarsFall.target._camera.transform.position;
         Vector3 flashPos = StarsFall.target._camera.transform.position + forwardOfCamera.normalized * 200;
         
-        SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(stone.skillId);
+        SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(stone.skillId);
         string fallingstarname = "";
         string fallingstarexplosionname = "";
         switch(skillConfig.SP_LEVEL) // 这里应该是rarelevel

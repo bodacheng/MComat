@@ -164,7 +164,7 @@ namespace mainMenu
             float WholeHP = 0;
             for (int index = 0; index < skillIDs.Count; index++)
             {
-                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(skillIDs[index]);
+                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfig(skillIDs[index]);
                 WholeHP += SkillEntity.StoneHpCal(_SkillConfig.HP_WEIGHT, level[index]);
             }
             return WholeHP;

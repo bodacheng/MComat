@@ -24,50 +24,48 @@ public partial class GotchaResultLayer : UILayer
         Skip.gameObject.SetActive(false);
         NineForShow.transform.gameObject.SetActive(true);
         
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f);// 间隔这段时间才能确保PosDecide正常运算
         
         PosDecide();
         StarSortAnim(results);
         
         yield return new WaitForSeconds(2f);
         
-        string A1skillid = null, A2skillid= null, A3skillid= null, 
-            B1skillid= null, B2skillid= null, B3skillid= null, 
-            C1skillid= null, C2skillid= null, C3skillid= null;
+        string a1 = null, a2 = null, a3 = null, b1 = null, b2 = null, b3 = null, c1 = null, c2 = null, c3 = null;
         for (int i = 0; i < results.Count; i++)
         {
             switch(i)
             {
                 case 0:
-                    A1skillid = results[i].skillId;
+                    a1 = results[i].skillId;
                     break;
                 case 1:
-                    A2skillid = results[i].skillId;
+                    a2 = results[i].skillId;
                     break;
                 case 2:
-                    A3skillid = results[i].skillId;
+                    a3 = results[i].skillId;
                     break;
                 case 3:
-                    B1skillid = results[i].skillId;
+                    b1 = results[i].skillId;
                     break;
                 case 4:
-                    B2skillid = results[i].skillId;
+                    b2 = results[i].skillId;
                     break;
                 case 5:
-                    B3skillid = results[i].skillId;
+                    b3 = results[i].skillId;
                     break;
                 case 6:
-                    C1skillid = results[i].skillId;
+                    c1 = results[i].skillId;
                     break;
                 case 7:
-                    C2skillid = results[i].skillId;
+                    c2 = results[i].skillId;
                     break;
                 case 8:
-                    C3skillid = results[i].skillId;
+                    c3 = results[i].skillId;
                     break;
             }
         }
         
-        NineForShow.ShowStones(A1skillid, A2skillid, A3skillid, B1skillid, B2skillid, B3skillid, C1skillid, C2skillid, C3skillid);
+        NineForShow.ShowStones(a1, a2, a3, b1, b2, b3, c1, c2, c3);
     }
 }

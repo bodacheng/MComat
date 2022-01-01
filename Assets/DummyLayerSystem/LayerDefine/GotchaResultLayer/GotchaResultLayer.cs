@@ -43,20 +43,6 @@ public partial class GotchaResultLayer : UILayer
         UILayerLoader.Remove("GotchaResultLayer");
     }
     
-    void SetWaitPos()
-    {
-        waitPos.Clear();
-        waitPos.Add(starWaitPos1);
-        waitPos.Add(starWaitPos2);
-        waitPos.Add(starWaitPos3);
-        waitPos.Add(starWaitPos4);
-        waitPos.Add(starWaitPos5);
-        waitPos.Add(starWaitPos6);
-        waitPos.Add(starWaitPos7);
-        waitPos.Add(starWaitPos8);
-        waitPos.Add(starWaitPos9);
-    }
-    
     // 清理相关特效等等
     public void Reset()
     {

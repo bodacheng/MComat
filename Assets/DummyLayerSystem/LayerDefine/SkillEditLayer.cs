@@ -244,7 +244,7 @@ public class SkillEditLayer : UILayer
             NineSlot.allSlot[targetSlot - 1]._DragAndDropCell.AddItem(Stones.GetRenderModel(targetStoneId));
         }
 
-        SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
+        SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(skillID);
         StonesBox._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(skillConfig.SP_LEVEL,
             PosCal.GetWorldPos(PreScene.target.FxCamera, 
                 NineSlot.allSlot[targetSlot - 1]._DragAndDropCell.GetComponent<RectTransform>(), 

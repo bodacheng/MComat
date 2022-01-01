@@ -60,8 +60,8 @@ namespace mainMenu
                 {
                     StoneOfPlayerInfo myStone1 = Stones.Get(targets[j]);
                     StoneOfPlayerInfo myStone2 = Stones.Get(targets[j + 1]);
-                    SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfigByID(myStone1.skillId);
-                    SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfigByID(myStone2.skillId);
+                    SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfig(myStone1.skillId);
+                    SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfig(myStone2.skillId);
 
                     if (order == 1 ? int.Parse(skillConfig1.RECORD_ID) > int.Parse(skillConfig2.RECORD_ID) : int.Parse(skillConfig2.RECORD_ID) < int.Parse(skillConfig1.RECORD_ID))
                     {
@@ -104,8 +104,8 @@ namespace mainMenu
                 {
                     StoneOfPlayerInfo myStone1 = Stones.Get(targets[j]);
                     StoneOfPlayerInfo myStone2 = Stones.Get(targets[j+1]);
-                    SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfigByID(myStone1.skillId);
-                    SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfigByID(myStone2.skillId);
+                    SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfig(myStone1.skillId);
+                    SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfig(myStone2.skillId);
                     
                     if (order == 1 ? skillConfig1.RARITY_LEVEL > skillConfig2.RARITY_LEVEL : skillConfig2.RARITY_LEVEL < skillConfig1.RARITY_LEVEL)
                     {

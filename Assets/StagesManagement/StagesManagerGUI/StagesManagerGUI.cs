@@ -98,7 +98,7 @@ public partial class StagesManagerGUI : Editor {
             }
         }
                         
-        SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfigByID(GetFocusSkillId());
+        SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfig(GetFocusSkillId());
         if (defaultSkillConfig == null)
         {
             goto A;

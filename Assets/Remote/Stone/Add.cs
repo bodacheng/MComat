@@ -26,7 +26,7 @@ namespace dataAccess
             StoneOfPlayerInfo info = Get(instanceId);
             SKStoneItem item = GenerateStoneModel(info.skillId, true);
             item.Inherent = info.Inherent == "true";
-            item._SkillConfig = SkillConfigTable.GetSkillConfigByID(Dic[instanceId].skillId);
+            item._SkillConfig = SkillConfigTable.GetSkillConfig(Dic[instanceId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
             item.instanceId = instanceId;
             item.gameObject.transform.SetParent(PreScene.target.stonesTempContainer);
@@ -37,7 +37,7 @@ namespace dataAccess
         // 有两种模式，1: “账户技能石” 2 ：纯粹展示用技能石
         public static SKStoneItem GenerateStoneModel(string skillID, bool openStoneFeature)
         {
-            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(skillID);
+            SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(skillID);
             if (skillConfig == null)
             {
                 return null;

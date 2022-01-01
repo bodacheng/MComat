@@ -27,7 +27,7 @@ public class INHERENT_SkillTable
         List<Row> rows = FindAll_MONSTER_ID(monsterID);
         for (int i = 0; i < rows.Count; i++)
         {
-            SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(rows[i].SKILL_ID);
+            SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfig(rows[i].SKILL_ID);
             if (_SkillConfig == null)
             {
                 Debug.Log("严重问题：被动技能表里定义的技能在总技能表里没有对应ID");

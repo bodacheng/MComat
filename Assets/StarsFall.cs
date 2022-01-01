@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class StarsFall : MonoBehaviour
 {
-    [SerializeField] public Camera _camera;
+    public Camera _camera;
     [SerializeField] Transform center;
     [SerializeField] float SkySphereRadius = 650;
     

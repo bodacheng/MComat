@@ -63,7 +63,7 @@ namespace dataAccess
             RenderModelDic.Clear();
             foreach (KeyValuePair<string, StoneOfPlayerInfo> pair in Dic)
             {
-                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfigByID(pair.Value.skillId);
+                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfig(pair.Value.skillId);
                 if (_SkillConfig == null)
                 {
                     Debug.Log("巨大问题,技能id似乎未定义：" + pair.Value.skillId);

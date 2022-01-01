@@ -33,15 +33,15 @@ public partial class SkillSet
     // 当前总分。不问技能组是否合法
     public static int SkillBalancePoint(string A1skillid, string A2skillid, string A3skillid, string B1skillid, string B2skillid, string B3skillid, string C1skillid, string C2skillid, string C3skillid)
     {
-        SkillConfig _SkillConfigA1 = SkillConfigTable.GetSkillConfigByID(A1skillid);
-        SkillConfig _SkillConfigA2 = SkillConfigTable.GetSkillConfigByID(A2skillid);
-        SkillConfig _SkillConfigA3 = SkillConfigTable.GetSkillConfigByID(A3skillid);
-        SkillConfig _SkillConfigB1 = SkillConfigTable.GetSkillConfigByID(B1skillid);
-        SkillConfig _SkillConfigB2 = SkillConfigTable.GetSkillConfigByID(B2skillid);
-        SkillConfig _SkillConfigB3 = SkillConfigTable.GetSkillConfigByID(B3skillid);
-        SkillConfig _SkillConfigC1 = SkillConfigTable.GetSkillConfigByID(C1skillid);
-        SkillConfig _SkillConfigC2 = SkillConfigTable.GetSkillConfigByID(C2skillid);
-        SkillConfig _SkillConfigC3 = SkillConfigTable.GetSkillConfigByID(C3skillid);
+        SkillConfig _SkillConfigA1 = SkillConfigTable.GetSkillConfig(A1skillid);
+        SkillConfig _SkillConfigA2 = SkillConfigTable.GetSkillConfig(A2skillid);
+        SkillConfig _SkillConfigA3 = SkillConfigTable.GetSkillConfig(A3skillid);
+        SkillConfig _SkillConfigB1 = SkillConfigTable.GetSkillConfig(B1skillid);
+        SkillConfig _SkillConfigB2 = SkillConfigTable.GetSkillConfig(B2skillid);
+        SkillConfig _SkillConfigB3 = SkillConfigTable.GetSkillConfig(B3skillid);
+        SkillConfig _SkillConfigC1 = SkillConfigTable.GetSkillConfig(C1skillid);
+        SkillConfig _SkillConfigC2 = SkillConfigTable.GetSkillConfig(C2skillid);
+        SkillConfig _SkillConfigC3 = SkillConfigTable.GetSkillConfig(C3skillid);
         List<SkillConfig> allnineskill = new List<SkillConfig>();
         
         if (_SkillConfigA1 != null)
@@ -106,7 +106,7 @@ public partial class SkillSet
         
         for (int i = 0; i < checkSame.Count; i++)
         {
-            if (i != checkSame.Count - 1 && SkillConfigTable.GetSkillConfigByID(checkSame[i]) != null)
+            if (i != checkSame.Count - 1 && SkillConfigTable.GetSkillConfig(checkSame[i]) != null)
             {
                 for (int y = i + 1; y < checkSame.Count; y++)
                 {
@@ -124,9 +124,9 @@ public partial class SkillSet
     {
         // 第一列技能必须有普通技能
         List<string> NormalSkillsOfAList = new List<string>();            
-        SkillConfig _SkillConfigA1 = SkillConfigTable.GetSkillConfigByID(a1skill);
-        SkillConfig _SkillConfigB1 = SkillConfigTable.GetSkillConfigByID(a2skill);
-        SkillConfig _SkillConfigC1 = SkillConfigTable.GetSkillConfigByID(a3skill);
+        SkillConfig _SkillConfigA1 = SkillConfigTable.GetSkillConfig(a1skill);
+        SkillConfig _SkillConfigB1 = SkillConfigTable.GetSkillConfig(a2skill);
+        SkillConfig _SkillConfigC1 = SkillConfigTable.GetSkillConfig(a3skill);
         
         if (_SkillConfigA1 != null && _SkillConfigA1.SP_LEVEL == 0)
             NormalSkillsOfAList.Add(_SkillConfigA1.REAL_NAME);

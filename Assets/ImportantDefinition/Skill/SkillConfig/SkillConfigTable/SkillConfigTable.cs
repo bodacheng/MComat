@@ -78,7 +78,12 @@ public partial class SkillConfigTable
         SkillConfigRefDic = Dic;
     }
     
-    public static SkillConfig GetSkillConfigByID(string ID)
+    /// <summary>
+    /// 获取技能定义信息
+    /// </summary>
+    /// <param name="ID">SKill ID</param>
+    /// <returns></returns>
+    public static SkillConfig GetSkillConfig(string ID)
     {
         if (ID != null)
         {

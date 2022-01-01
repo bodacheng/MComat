@@ -98,7 +98,7 @@ namespace mainMenu
                 Clear();
                 return;
             }
-            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(currentstone.skillId);
+            SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(currentstone.skillId);
             IconForShow(skillConfig.RECORD_ID);
 
             keyname.text = skillConfig.REAL_NAME;
@@ -143,7 +143,7 @@ namespace mainMenu
                 Clear();
                 return;
             }
-            SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(_SkillEntity.SkillID);
+            SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(_SkillEntity.SkillID);
             keyname.text = _SkillEntity.REAL_NAME;
             Showname.text = skillConfig.SHOW_NAME;
             ShowSkillStoneExType(_SkillEntity.SP_LEVEL);

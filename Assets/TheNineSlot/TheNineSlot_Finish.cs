@@ -71,8 +71,8 @@ public partial class SkillSet
         if (targetSlot == 7)
         {
             // 第一列技能必须有普通技能
-            SkillConfig A1skillConfig = SkillConfigTable.GetSkillConfigByID(nineAndTwo.a1);
-            SkillConfig B1skillConfig = SkillConfigTable.GetSkillConfigByID(nineAndTwo.b1);
+            SkillConfig A1skillConfig = SkillConfigTable.GetSkillConfig(nineAndTwo.a1);
+            SkillConfig B1skillConfig = SkillConfigTable.GetSkillConfig(nineAndTwo.b1);
             if (A1skillConfig.SP_LEVEL != 0 && B1skillConfig.SP_LEVEL != 0)
             {
                 filterForm = new SkillStonesBox.StoneFilterForm

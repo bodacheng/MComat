@@ -18,6 +18,20 @@ public partial class GotchaResultLayer : UILayer
     readonly List<Decompositioner> screenStarModels = new List<Decompositioner>();
     readonly List<Decompositioner> screenStarExplosionModels = new List<Decompositioner>();
     
+    void SetWaitPos()
+    {
+        waitPos.Clear();
+        waitPos.Add(starWaitPos1);
+        waitPos.Add(starWaitPos2);
+        waitPos.Add(starWaitPos3);
+        waitPos.Add(starWaitPos4);
+        waitPos.Add(starWaitPos5);
+        waitPos.Add(starWaitPos6);
+        waitPos.Add(starWaitPos7);
+        waitPos.Add(starWaitPos8);
+        waitPos.Add(starWaitPos9);
+    }
+    
     void StarSortAnim(List<StoneOfPlayerInfo> results)
     {
         for (int i = 0; i < results.Count; i++)
@@ -35,7 +49,7 @@ public partial class GotchaResultLayer : UILayer
     /// <returns></returns>
     void StarScreenMoveAnim(StoneOfPlayerInfo info, Vector3 waitPos, Vector3 endPos)
     {
-        SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByID(info.skillId);
+        SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(info.skillId);
         string screenStarName = "";
         string explosionName = "";
         switch(skillConfig.SP_LEVEL) // 这里应该是rarelevel
