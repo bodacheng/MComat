@@ -761,6 +761,21 @@
  <Reference Include="UnityEngine.Advertisements.Editor">
  <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.AdaptivePerformance.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.AdaptivePerformance.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.AdaptivePerformance">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.AdaptivePerformance.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.AdaptivePerformance.Simulator.Extension">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.AdaptivePerformance.Simulator.Extension.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Subsystem.Registration">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.AdaptivePerformance.Simulator.Editor">
+ <HintPath>/Users/hakutaisei/AssetStoreFight_Client/Library/ScriptAssemblies/Unity.AdaptivePerformance.Simulator.Editor.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="PlayFabSDKEditor.csproj">
