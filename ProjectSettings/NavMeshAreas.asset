@@ -11,14 +11,14 @@ NavMeshProjectSettings:
     cost: 1
   - name: Jump
     cost: 2
-  - name: JumpOver
-    cost: 2
-  - name: StepUp
-    cost: 2
-  - name: ClimbUp
-    cost: 2
   - name: 
-    cost: 2
+    cost: 1
+  - name: 
+    cost: 1
+  - name: 
+    cost: 1
+  - name: 
+    cost: 1
   - name: 
     cost: 1
   - name: 

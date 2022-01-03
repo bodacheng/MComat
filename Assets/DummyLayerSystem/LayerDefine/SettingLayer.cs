@@ -17,7 +17,7 @@ public class SettingLayer : UILayer {
     public void Initialise()
     {
         _popupLayer = PopupLayer.Open(PreScene.target.T);
-        _popupLayer.HigtLightRect(SettingMenuT);
+        _popupLayer.HighLightRect(SettingMenuT);
         onBgmChange();
         onCVsChange();
         onEffectsSoundChange();
@@ -28,7 +28,7 @@ public class SettingLayer : UILayer {
     public void Close()
     {
         AppSetting.Save();
-        _popupLayer.ClearHigtLight();
+        _popupLayer.ClearHighLight();
         PopupLayer.Close();
         UILayerLoader.Remove("SettingLayer");
     }

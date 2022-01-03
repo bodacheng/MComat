@@ -3,25 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - JumpOver
-  - ClimbUp
-  - Ragdoll
-  - Enemy
-  - Weapon
-  - PlayerUI
-  - Boss
-  - explosion
-  - fire
-  - Enemy1
-  - Shield
-  - Wall
-  - Dead
-  - floor
-  - Player1
-  - Player2
-  - Water
-  - Animal
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -31,18 +13,6 @@ TagManager:
   - UI
   - 
   - 
-  - toBeDeleted
-  - Player1
-  - Player2
-  - Player1Weapon
-  - Player2Weapon
-  - Floor
-  - HitableNeutral
-  - Player1Shield
-  - Player2Shield
-  - Outline
-  - CustomPostEffectIgnore
-  - PostProcess
   - 
   - 
   - 
@@ -54,7 +24,19 @@ TagManager:
   - 
   - 
   - 
-  - None
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0

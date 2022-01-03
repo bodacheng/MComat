@@ -1,4 +1,5 @@
 ﻿using mainMenu;
+using UnityEngine;
 
 // Tutorial 1 
 public class GoToStages : TutorialProcess
@@ -11,7 +12,7 @@ public class GoToStages : TutorialProcess
     public override void ProcessEnter()
     {
         PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-        popupLayer.HigtLightRect(TutorialHelper.target.ArcadeMode.transform);
+        popupLayer.HighLightRect(TutorialHelper.target.ArcadeMode.GetComponent<RectTransform>());
     }
     
     public override void ProcessEnd()

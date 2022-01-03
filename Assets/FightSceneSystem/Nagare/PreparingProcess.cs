@@ -45,14 +45,14 @@ public class PreparingProcess : FSceneProcess
         
         EffectsManager.INIEffectsPool("hit_ground", null, 3);
         EffectsManager.INIEffectsPool("wallCrack", null, 3);
-        _popupLayer.LightUp();
+        _popupLayer.ClearHighLight();
     }
 
     private PopupLayer _popupLayer;
     public override void ProcessEnter()
     {
         _popupLayer = PopupLayer.Open(NetFightScene.target.T.gameObject);
-        _popupLayer.DarkOffDirectly(1f);
+        _popupLayer.DarkOff(1f, 0);
         SingleThreadProcesser.backup.RunFreely(EnterProcess());
     }
     

@@ -1,4 +1,5 @@
 ﻿using mainMenu;
+using UnityEngine;
 
 // Tutorial 1 
 public class ChooseAdamToSlot1 : TutorialProcess
@@ -12,7 +13,7 @@ public class ChooseAdamToSlot1 : TutorialProcess
     {
         UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
         PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-        popupLayer.HigtLightRect(unitsLayer.GetUnitIcon("1").transform);
+        popupLayer.HighLightRect(unitsLayer.GetUnitIcon("1").GetComponent<RectTransform>());
     }
     
     public override void ProcessEnd()

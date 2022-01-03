@@ -52,11 +52,12 @@ public class FrontPage : MainSceneProcess
     }
 
     MainTop mainTop;
-    public IEnumerator EnterProcess()
+    PopupLayer popupLayer;
+    IEnumerator EnterProcess()
     {
         mainTop = UILayerLoader.Load(PreScene.target.T, "MainTop") as MainTop;
         mainTop.Initialise(PreScene.target);
-
+        
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 2.2f, 0.1f);
         //MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
@@ -75,10 +76,14 @@ public class FrontPage : MainSceneProcess
         yield return PreScene.target.modelShower.ShowMyModel(focus_instanceID);
         //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
         UpperInfoBar.Open(PreScene.target.OpenSetting, () => PreScene.target.trySwitchToStep(10));
+        popupLayer.LoadingFinished();
     }
     
     public override void ProcessEnter()
     {
+        popupLayer = PopupLayer.Open(PreScene.target.T);
+        popupLayer.Loading(">");
+        
         PlayFabReadClient.GetUserData(
             new GetUserDataRequest()
             {
@@ -90,7 +95,6 @@ public class FrontPage : MainSceneProcess
 
         //AccountCharsSet.LoadTutorial();
         PlayFabReadClient.LoadItems(ItemsLoadFinished);
-
         PlayFabReadClient.LoadTeamSet("arena", ArenaTFinished);
         PlayFabReadClient.LoadTeamSet("arcade", ArcadeTFinished);
 

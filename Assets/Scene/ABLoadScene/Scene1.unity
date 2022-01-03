@@ -194,6 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 870660823}
   - component: {fileID: 870660822}
+  - component: {fileID: 870660824}
   m_Layer: 0
   m_Name: ResourceDownloader
   m_TagString: Untagged
@@ -213,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 637acbc36a0c54f6db9de48c6649a3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ResourceSetting: {fileID: 144245842945334449}
+  _ResourceSetting: {fileID: 870660824}
   _ConfigFileManager: {fileID: 1428483490221249642}
   assetBundleURL: http://18.218.70.129/ios
 --- !u!4 &870660823
@@ -226,11 +227,28 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 370.72, y: 0.46, z: 1733.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 144245842945334454}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &870660824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870660821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 722fc71c16dbf43f18a34cee30721221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConfigFileLoadingMode: 3
+  ModelLoadingMode: 3
+  AnimationLoadingMode: 3
+  MagicLoadingMode: 3
+  IconLoadingMode: 3
+  bgmAndCvs: 0
 --- !u!1001 &1786589807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -723,55 +741,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &144245842945334448
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 144245842945334454}
-  - component: {fileID: 144245842945334449}
-  m_Layer: 0
-  m_Name: Resourcesetting
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &144245842945334449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 144245842945334448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 722fc71c16dbf43f18a34cee30721221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConfigFileLoadingMode: 3
-  ModelLoadingMode: 3
-  AnimationLoadingMode: 3
-  MagicLoadingMode: 3
-  IconLoadingMode: 3
-  bgmAndCvs: 0
---- !u!4 &144245842945334454
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 144245842945334448}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -370.72, y: 0.53999996, z: -1733.77}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 870660823}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1428483490221249640
 GameObject:
@@ -5699,7 +5668,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccad5ed2f8b9641f48b196822dc8d068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  T: {fileID: 2069763914}
   Starter: {fileID: 2075428156307059470}
   ResourceDownLoad: {fileID: 870660822}
 --- !u!1 &7265332446000478266

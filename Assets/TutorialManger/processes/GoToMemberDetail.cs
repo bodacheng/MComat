@@ -1,5 +1,5 @@
 ﻿using mainMenu;
-
+using UnityEngine;
 // Tutorial 1 
 public class GoToMemberDetail : TutorialProcess
 {
@@ -11,7 +11,7 @@ public class GoToMemberDetail : TutorialProcess
     public override void ProcessEnter()
     {
         PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-        popupLayer.HigtLightRect(TutorialHelper.target.MemberEditButton.transform);
+        popupLayer.HighLightRect(TutorialHelper.target.MemberEditButton.GetComponent<RectTransform>());
     }
     
     public override void ProcessEnd()

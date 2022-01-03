@@ -1,5 +1,5 @@
 ﻿using mainMenu;
-
+using UnityEngine;
 // Tutorial 2
 public class OpenSkillEdit : TutorialProcess
 {
@@ -28,7 +28,7 @@ public class OpenSkillEdit : TutorialProcess
             if (MemberDetailProcess.loadFinished)
             {
                 PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-                popupLayer.HigtLightRect(TutorialHelper.target.SkillEditButton.transform);
+                popupLayer.HighLightRect(TutorialHelper.target.SkillEditButton.GetComponent<RectTransform>());
                 waitCompleted = true;
             }
         }
