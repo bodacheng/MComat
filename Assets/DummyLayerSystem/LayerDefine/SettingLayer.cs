@@ -28,7 +28,6 @@ public class SettingLayer : UILayer {
     public void Close()
     {
         AppSetting.Save();
-        _popupLayer.ClearHighLight();
         PopupLayer.Close();
         UILayerLoader.Remove("SettingLayer");
     }

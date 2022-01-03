@@ -81,9 +81,6 @@ public class StonesPage : MainSceneProcess
     void CommonEnterProcess()
     {
         stoneListLayer = StoneListLayer.Open();
-        PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-        popupLayer.DarkOff(1f, 0);
-        popupLayer.ClearHighLight();
     }
     
     public override void ProcessEnd()

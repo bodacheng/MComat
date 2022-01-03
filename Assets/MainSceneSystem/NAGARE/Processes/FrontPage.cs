@@ -52,7 +52,6 @@ public class FrontPage : MainSceneProcess
     }
 
     MainTop mainTop;
-    PopupLayer popupLayer;
     IEnumerator EnterProcess()
     {
         mainTop = UILayerLoader.Load(PreScene.target.T, "MainTop") as MainTop;
@@ -76,14 +75,12 @@ public class FrontPage : MainSceneProcess
         yield return PreScene.target.modelShower.ShowMyModel(focus_instanceID);
         //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
         UpperInfoBar.Open(PreScene.target.OpenSetting, () => PreScene.target.trySwitchToStep(10));
-        popupLayer.LoadingFinished();
+        PopupLayer.Close();
     }
     
     public override void ProcessEnter()
     {
-        popupLayer = PopupLayer.Open(PreScene.target.T);
-        popupLayer.Loading(">");
-        
+        PopupLayer.Loading(">", PreScene.target.T);
         PlayFabReadClient.GetUserData(
             new GetUserDataRequest()
             {

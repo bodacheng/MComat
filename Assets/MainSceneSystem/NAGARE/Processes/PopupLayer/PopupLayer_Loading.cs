@@ -1,21 +1,12 @@
-using System;
+using UnityEngine;
 
 public partial class PopupLayer : UILayer {
     
-    public void Loading(string desription)
+    public static void Loading(string description, GameObject hook)
     {
-        DarkOff(0.8f,0.5f);
-        info.text = desription;
-        loadingIcon.SetActive(true);
-        _canvas.sortingOrder = 101;// 比黑幕的100多1，确保loadingIcon高亮显示
-    }
-    
-    public void LoadingFinished()
-    {
-        bigCurtain.raycastTarget = false;
-        loadingIcon.SetActive(false);
-        info.text = String.Empty;
-        ClearHighLight();
-        Close();
+        PopupLayer layer = PopupLayer.Open(hook);
+        layer.DarkOff(0.8f,0.5f);
+        layer.info.text = description;
+        layer.loadingIcon.SetActive(true);
     }
 }

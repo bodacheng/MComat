@@ -133,6 +133,7 @@
      <Compile Include="Assets\TouchScript\Examples\Colors\Scripts\Circle.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\TeamEditPage.cs" />
      <Compile Include="Assets\MainSceneSystem\EnumActionAttribute.cs" />
+     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\Extentions\HighlightUIText.cs" />
      <Compile Include="Assets\AnimControl\readMe.cs" />
      <Compile Include="Assets\Personality\Personality_events.cs" />
      <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Hight.cs" />
@@ -171,6 +172,7 @@
      <Compile Include="Assets\TutorialManger\processes\GoToStages.cs" />
      <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\ParticleCollisionInstance.cs" />
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\FightOverShow\IconAndSKillShowUISet.cs" />
+     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\PopupLayer\PopupLayer_Loading.cs" />
      <Compile Include="Assets\MasterDataTool\MasterDataTool.cs" />
      <Compile Include="Assets\ResourceLoading\EffectsLoad\EffectsManager_Local.cs" />
      <Compile Include="Assets\TutorialManger\processes\ChooseAdamToSlot1.cs" />
@@ -180,6 +182,7 @@
      <Compile Include="Assets\SkillEvents\BO_Ani_E_special.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiLoadSceneOnClick2.cs" />
      <Compile Include="Assets\TutorialManger\processes\ClickTeamEditSlotOne.cs" />
+     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\ControlsSceneControlsManager.cs" />
      <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_light.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\Sci-Fi Effects\Scripts\SciFiLightFlicker.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\BoxOverLoadFix.cs" />
@@ -196,9 +199,11 @@
      <Compile Include="Assets\TouchScript\Examples\Checkers\Scripts\Exclusive.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\ParserToken.cs" />
      <Compile Include="Assets\ResourceLoading\ResourceLoadingSetting.cs" />
+     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\PointerDownHandler.cs" />
      <Compile Include="Assets\Structure\SingleThreadProcesser.cs" />
      <Compile Include="Assets\EffectsSystem\TrackControl.cs" />
      <Compile Include="Assets\TutorialManger\processes\GoToTeamEdit.cs" />
+     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\BasicSceneManager.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerGameLogo.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Clustered\ClusteredPinnedTransformGesture.cs" />
      <Compile Include="Assets\RealTimeGameProcessManager\RTFightManager.cs" />
@@ -220,6 +225,7 @@
      <Compile Include="Assets\TouchScript\Scripts\Utils\TimedSequence.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\IJsonWrapper.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSmartPointer.cs" />
+     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\ButtonSound.cs" />
      <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_TimePause.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\Extensions.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Helpers\TMP_Translator.cs" />
@@ -233,6 +239,7 @@
      <Compile Include="Assets\Prescene\BigButtonRender.cs" />
      <Compile Include="Assets\UI\ImageGliter.cs" />
      <Compile Include="Assets\UI\ReturnLayer.cs" />
+     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\Options.cs" />
      <Compile Include="Assets\NetFightScene\NetFightScene.cs" />
      <Compile Include="Assets\TouchScript\Examples\RawInput\Scripts\Ball.cs" />
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker_ManagerGUI.cs" />
@@ -271,6 +278,7 @@
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\BoxOverLoadFixLayer.cs" />
      <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\AsteroidController.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiProjectileScript.cs" />
+     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\RockClimberManager.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkLocalization.cs" />
      <Compile Include="Assets\AnimControl\Animation_Manger_ResourceLoad.cs" />
      <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Checker.cs" />
@@ -370,6 +378,7 @@
      <Compile Include="Assets\TouchScript\Scripts\Debugging\Filters\PointerLogFilter.cs" />
      <Compile Include="Assets\FightSceneSystem\Nagare\StoryProcess.cs" />
      <Compile Include="Assets\TheNineSlot\Validation\SVCenter.cs" />
+     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\ControlsSceneGameManager.cs" />
      <Compile Include="Assets\ImportantDefinition\PlayerAccountInfo.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\SettingLayer.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GotchaResult.cs" />
@@ -449,6 +458,7 @@
      <Compile Include="Assets\ObjectPools\DecompositionerPool.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_Install.cs" />
      <Compile Include="Assets\MasterDataTool\SK_Gotcha.cs" />
+     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\Padding.cs" />
      <Compile Include="Assets\ImportantDefinition\Monster\monster_nameTable.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonReader.cs" />
      <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\INHERENT_SKILLTable.cs" />
@@ -520,6 +530,7 @@
      <Compile Include="Assets\AI\GUI\SkillOptions.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\SceneProcess.cs" />
      <Compile Include="Assets\AnimControl\Animation_Manger_CachLoad.cs" />
+     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\HighlightUI.cs" />
      <Compile Include="Assets\DummyLayerSystem\UILayerLoader.cs" />
      <Compile Include="Assets\TouchScript\Scripts\IDebuggable.cs" />
      <Compile Include="Assets\UI\Oldscripts\FloatOnHead.cs" />
@@ -532,6 +543,7 @@
      <Compile Include="Assets\TouchScript\Scripts\Debugging\GL\GLDebug.cs" />
      <Compile Include="Assets\POS_Sys\Position_Set_Executor.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Utils\Geom\TwoD.cs" />
+     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\PopupLayer\PopupLayer_Confirm.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Core\DebuggableMonoBehaviour.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\MoonPositionHelper.cs" />
      <Compile Include="Assets\TutorialManger\processes\FillASlot\SkillEditTry_A1Filled.cs" />
@@ -564,6 +576,7 @@
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Mail\MailDetailProcess.cs" />
      <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\PinnedTransformGesture.cs" />
+     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\HighlightUIStatic.cs" />
      <Compile Include="Assets\Arena\ArenaFightTeamDisplay.cs" />
      <Compile Include="Assets\AnimControl\StateEnterd.cs" />
      <Compile Include="Assets\AI\AI_states\states\Dash_Back_State.cs" />
@@ -576,6 +589,7 @@
      <Compile Include="Assets\TouchScript\Scripts\Utils\TransformUtils.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Hit\HitTest.cs" />
      <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Highlight.cs" />
+     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\Extentions\HighlightUITextStatic.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Desaturate.cs" />
      <Compile Include="Assets\Remote\API\Common\ApiCaller.cs" />
      <Compile Include="Assets\TouchScript\Examples\Colors\Scripts\Colors.cs" />
@@ -585,8 +599,8 @@
      <Compile Include="Assets\ResourceLoading\AnimationResourceLoader.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Matcap.cs" />
      <Compile Include="Assets\AppleAuthSample\MainMenu.cs" />
-     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfig.cs" />
      <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_draw.cs" />
+     <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfig.cs" />
      <Compile Include="Assets\Remote\API\Dto\Model\GetStructure\MemberOfTeam.cs" />
      <Compile Include="Assets\ResourceKeeper\ResourceKeeper.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\PressGesture.cs" />
@@ -726,6 +740,7 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Panel\FriendsPanelManager.cs" />
      <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\UniqueMagicAbilities\SpawnMagicAbilityScript.cs" />
      <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\UniqueProjectiles\CameraShakeSimpleScript.cs" />
+     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\OptionsSO.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Pointers\IPointer.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSkipCutscene.cs" />
      <Compile Include="Assets\BOWeaponSystem\Health System\BO_Limb.cs" />
@@ -776,21 +791,6 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\RockClimberManager.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\HighlightUIStatic.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\Extentions\HighlightUIText.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\ControlsSceneGameManager.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\Padding.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\PointerDownHandler.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\BasicSceneManager.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\OptionsSO.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\Options.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\HighlightUI.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\ButtonSound.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\Extentions\HighlightUITextStatic.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\ControlsSceneControlsManager.cs" />
-     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\PopupLayer\PopupLayer_Confirm.cs" />
-     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\PopupLayer\PopupLayer_Loading.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />
@@ -1707,6 +1707,10 @@
       <Project>{05318875-1897-527d-49be-8f73049faddb}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
+    <ProjectReference Include="PlayFabSDKEditor.csproj">
+      <Project>{b66bf6a6-bdbd-a406-4867-b5f5adf9847a}</Project>
+      <Name>PlayFabSDKEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="AppleAuth.Editor.csproj">
       <Project>{0de3c25d-e596-b8f3-75a9-4b52183d8b1f}</Project>
       <Name>AppleAuth.Editor</Name>
@@ -1719,9 +1723,17 @@
       <Project>{5d9a38dd-bc27-7387-6530-d1a0d7a6951b}</Project>
       <Name>UniTask.Addressables</Name>
     </ProjectReference>
+    <ProjectReference Include="NoSuchLocalizationCore.csproj">
+      <Project>{da968d38-2cb2-5536-5f4a-50875d89885e}</Project>
+      <Name>NoSuchLocalizationCore</Name>
+    </ProjectReference>
     <ProjectReference Include="PlayFabEditorExtensions.csproj">
       <Project>{013bdff4-f5db-6280-902d-1d03b79d7515}</Project>
       <Name>PlayFabEditorExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayFab.csproj">
+      <Project>{e0202ee9-9920-2c5f-cdc6-263f7b6d3a00}</Project>
+      <Name>PlayFab</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.DOTween.csproj">
       <Project>{3e044dcc-d241-df23-e1d3-661d83f799b1}</Project>
@@ -1735,6 +1747,10 @@
       <Project>{4694d9cf-5020-9416-fb2c-565ad4e01465}</Project>
       <Name>UniRx</Name>
     </ProjectReference>
+    <ProjectReference Include="NoSuchLocalizationCore-Editor.csproj">
+      <Project>{b8f7eebb-20f2-3e93-3cc5-75ba215c304e}</Project>
+      <Name>NoSuchLocalizationCore-Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
       <Project>{ab868ac3-38db-93ce-b53a-1ed2bfb72e67}</Project>
       <Name>UniTask</Name>
@@ -1742,22 +1758,6 @@
     <ProjectReference Include="AppleAuth.csproj">
       <Project>{11db2e7e-c1b9-9ea6-9ee4-9b1ead681c56}</Project>
       <Name>AppleAuth</Name>
-    </ProjectReference>
-    <ProjectReference Include="PlayFabSDKEditor.csproj">
-      <Project>{b66bf6a6-bdbd-a406-4867-b5f5adf9847a}</Project>
-      <Name>PlayFabSDKEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="PlayFab.csproj">
-      <Project>{e0202ee9-9920-2c5f-cdc6-263f7b6d3a00}</Project>
-      <Name>PlayFab</Name>
-    </ProjectReference>
-    <ProjectReference Include="NoSuchLocalizationCore.csproj">
-      <Project>{da968d38-2cb2-5536-5f4a-50875d89885e}</Project>
-      <Name>NoSuchLocalizationCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="NoSuchLocalizationCore-Editor.csproj">
-      <Project>{b8f7eebb-20f2-3e93-3cc5-75ba215c304e}</Project>
-      <Name>NoSuchLocalizationCore-Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

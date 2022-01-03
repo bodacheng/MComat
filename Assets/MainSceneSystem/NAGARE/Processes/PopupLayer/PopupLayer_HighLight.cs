@@ -6,19 +6,20 @@ public partial class PopupLayer : UILayer {
 
     // canvasSortOrder = 100，这个数字无非是想让黑幕变成最上层，
     // 黑幕是靠缕空来实现空区域可点击。
-    // PopupLayer 有时候会把自身sortingOrder变成更上一层101，
-    // 目的是为了高亮显示那个读取信息中的图标
+    // PopupLayer 的 sortingOrder为更上一层101，
+    // 因为popup出来的东西原则都是高亮
     
     #region 高亮显示
     public async void HighLightRect(RectTransform r, Options options = null)
     {
-        bigCurtain.raycastTarget = true;
+        bigCurtain.raycastTarget = true;// 防止下面那点间隔里有点击画面的空间
         await Observable.TimerFrame(2);// 没有这个间隔ShowForUI的计算可能出错
         bigCurtain.raycastTarget = false;
         HighlightUI.ShowForUI( r, 
             options ?? new Options()
             {
                 padding = new Padding(0,0,0,0),
+                fadeDuration = 0.5f,
                 dismissOnClick = false,
                 color = new Color(0,0,0,0.7f),
                 canvasSortOrder = 100
@@ -34,6 +35,7 @@ public partial class PopupLayer : UILayer {
         await Observable.TimerFrame(2);// 没有这个间隔ShowForUI的计算可能出错
         HighLightRect(empty.GetComponent<RectTransform>(), new Options()
         {
+            padding = new Padding(0,0,0,0),
             fadeDuration = duration,
             dismissOnClick = false,
             color = new Color(0,0,0,darkness),
@@ -41,9 +43,4 @@ public partial class PopupLayer : UILayer {
         });
     }
     #endregion
-    
-    public void ClearHighLight()
-    {
-        HighlightUI.Dismiss();
-    }
 }

@@ -58,6 +58,7 @@
      <Compile Include="Assets\PlayFabSDK\Data\PlayFabDataAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Experimentation\PlayFabExperimentationAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Shared\Internal\PlayFabHttp\PlayFabHTTP.cs" />
+     <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEconomyAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Client\PlayFabClientModels.cs" />
      <Compile Include="Assets\PlayFabSDK\Shared\Public\PlayFabDataGatherer.cs" />
      <Compile Include="Assets\PlayFabSDK\Multiplayer\PlayFabEvents.cs" />
@@ -95,6 +96,7 @@
      <Compile Include="Assets\PlayFabSDK\Localization\PlayFabEvents.cs" />
      <Compile Include="Assets\PlayFabSDK\Data\PlayFabEvents.cs" />
      <Compile Include="Assets\PlayFabSDK\Shared\Internal\PlayFabHttp\IPlayFabHttp.cs" />
+     <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEconomyInstanceAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Server\PlayFabServerAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Client\PlayFabClientInstanceAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Shared\Public\PlayFabEvents.cs" />
@@ -102,7 +104,9 @@
      <Compile Include="Assets\PlayFabSDK\Groups\PlayFabGroupsModels.cs" />
      <Compile Include="Assets\PlayFabSDK\Events\PlayFabEventsModels.cs" />
      <Compile Include="Assets\PlayFabSDK\Shared\Internal\Util.cs" />
+     <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEconomyModels.cs" />
      <Compile Include="Assets\PlayFabSDK\Shared\Public\ISerializerPlugin.cs" />
+     <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEvents.cs" />
      <Compile Include="Assets\PlayFabSDK\Localization\PlayFabLocalizationAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Groups\PlayFabEvents.cs" />
      <Compile Include="Assets\PlayFabSDK\Shared\Models\SharedModels.cs" />
@@ -136,10 +140,6 @@
      <Compile Include="Assets\PlayFabSDK\Data\PlayFabDataInstanceAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Authentication\PlayFabAuthenticationInstanceAPI.cs" />
      <Compile Include="Assets\PlayFabSDK\Insights\PlayFabInsightsAPI.cs" />
-     <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEconomyModels.cs" />
-     <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEvents.cs" />
-     <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEconomyAPI.cs" />
-     <Compile Include="Assets\PlayFabSDK\Economy\PlayFabEconomyInstanceAPI.cs" />
      <None Include="Assets\PlayFabSDK\link.xml" />
      <None Include="Assets\PlayFabSDK\PlayFab.asmdef" />
  <Reference Include="UnityEngine">

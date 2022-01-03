@@ -13,7 +13,7 @@ public class PreparingProcess : FSceneProcess
         nextProcessStep = SceneStep.StoryBeforeFight;
     }
     
-    public IEnumerator EnterProcess()
+    IEnumerator EnterProcess()
     {
         //RealTimeGameProcessManager.target._CameraManager.Assign_SToEMode(NetFightScene.target.WatchTeam2.position, NetFightScene.target.Team2StandPoints[0], 3f, 50f);
         CameraManager._camera.transform.position = CameraManager._StartPosRef.transform.position;
@@ -45,7 +45,7 @@ public class PreparingProcess : FSceneProcess
         
         EffectsManager.INIEffectsPool("hit_ground", null, 3);
         EffectsManager.INIEffectsPool("wallCrack", null, 3);
-        _popupLayer.ClearHighLight();
+        PopupLayer.Close();
     }
 
     private PopupLayer _popupLayer;

@@ -1,28 +1,31 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using NoSuchStudio.UI.Highlight;
 
 public partial class PopupLayer : UILayer
 {
-    [SerializeField] Canvas _canvas;
     [SerializeField] GameObject loadingIcon;
     [SerializeField] TextMeshProUGUI info;
     [SerializeField] Image bigCurtain;
     [SerializeField] Image empty;// 为了黑化整个屏幕
     
-    [Header("Validation")]
-    [SerializeField] RectTransform ValidationWindow;
-    [SerializeField] Text ValidationIntro;
-    [SerializeField] Button YesButton;
-    [SerializeField] Button NoButton;
-    
-    public static PopupLayer Open(GameObject T)
+    static PopupLayer Get()
     {
-        PopupLayer returnValue;
+        PopupLayer returnValue = null;
         UILayer l = UILayerLoader.Get("PopupLayer");
         if (l != null)
         {
             returnValue = l as PopupLayer;
+        }
+        return returnValue;
+    }
+    
+    public static PopupLayer Open(GameObject T)
+    {
+        PopupLayer returnValue = Get();
+        if (returnValue != null)
+        {
             return returnValue;
         }
         returnValue = UILayerLoader.Load(T,"PopupLayer") as PopupLayer;
@@ -31,6 +34,7 @@ public partial class PopupLayer : UILayer
     
     public static void Close()
     {
+        HighlightUI.Dismiss();
         UILayerLoader.Remove("PopupLayer");
     }
 }
