@@ -21,15 +21,12 @@ public class StoneListLayer : UILayer
     
     public static StoneListLayer Open()
     {
-        UILayer l = UILayerLoader.Get("StoneListLayer");
-        StoneListLayer returnValue;
-        if (l != null)
+        StoneListLayer returnValue = Get();
+        if (returnValue != null)
         {
-            returnValue = l as StoneListLayer;
             return returnValue;
         }
-        l = UILayerLoader.Load(PreScene.target.T,"StoneListLayer") as StoneListLayer;
-        returnValue = l as StoneListLayer;
+        returnValue = UILayerLoader.Load(PreScene.target.T,"StoneListLayer") as StoneListLayer;
         returnValue.box.GenerateCells();
         returnValue.box._SkillStoneBoxTabEffectsManager.SwitchZokusei
         (
@@ -44,11 +41,9 @@ public class StoneListLayer : UILayer
 
     public static void Close()
     {
-        UILayer l = UILayerLoader.Get("StoneListLayer");
-        StoneListLayer returnValue;
-        if (l != null)
+        StoneListLayer returnValue = Get();
+        if (returnValue != null)
         {
-            returnValue = l as StoneListLayer;
             returnValue._skillStoneDetail.Clear();
             returnValue.box._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
         }
