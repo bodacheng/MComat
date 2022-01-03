@@ -93,7 +93,6 @@ public class StoneListLayer : UILayer
         
         _Cell.pGesture.Pressed += buttonFeature;
         _Cell.tGesture.Tapped += doubleClick;
-        
         _Cell.SetOnDropAction(StoneCell.Install);
         //ssLevelUper.AddMSlotBehaviour(_SkillStoneCell);??  这行代码是个谜
     }

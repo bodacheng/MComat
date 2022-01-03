@@ -9394,7 +9394,7 @@ MonoBehaviour:
   StoneTargetLevel: {fileID: 5206352635282655065}
   CurrentExpToNextLevel: {fileID: 5206352635677083749}
   CurrentGoldExaustText: {fileID: 5206352635009287159}
-  focusingSSD: {fileID: 0}
+  focusingSSD: {fileID: 1764983510227371885}
   _MSkillStoneDetail: {fileID: 5206352634753529296}
   cell1: {fileID: 5206352635566656075}
   cell2: {fileID: 5206352636585073448}
