@@ -53,11 +53,12 @@ namespace mainMenu
         {
             foreach (var cell in CellsDic)
             {
+                cell.Value.ClearGestureFeature();
                 action.Invoke(cell.Value);
             }
         }
         
-        public StoneCell GetFirstEmptyCell()
+        StoneCell GetFirstEmptyCell()
         {
             foreach (KeyValuePair<int, StoneCell> keyValuePair in CellsDic)
             {

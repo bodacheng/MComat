@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
@@ -36,8 +37,33 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     public Color empty = new Color(); // Sprite color for empty cell
     [Tooltip("Sprite color for filled cell")]
     public Color full = new Color(); // Sprite color for filled cell
+
+    [Tooltip("Level")] 
+    [SerializeField] Text level;
     
     SKStoneItem myDadItem;
+
+    void ShowLevel()
+    {
+        if (level == null)
+            return;
+        if (myDadItem)
+        {
+            StoneOfPlayerInfo info = Stones.Get(myDadItem.instanceId);
+            level.text = info.GetLevel().ToString();
+        }
+        else
+        {
+            level.text = string.Empty;
+        }
+    }
+
+    public void ClearGestureFeature()
+    {
+        lpGesture.Clear();
+        pGesture.Clear();
+        tGesture.Clear();
+    }
     
     /// <summary>
     /// Put item into this cell.(Keep old item in that cell safe)
@@ -77,6 +103,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                 ShowUsingChar(myDadItem, _charIcon);
             }
         }
+        ShowLevel();
     }
     
     // Show Character icon using this SkillStone

@@ -6,7 +6,7 @@ public class StoneSell : MainSceneProcess
     void EnterProcess()
     {
         //StonesPage.EnterProcess();  １１。８　临时逻辑
-        StoneDeleteManger.target.EnterDeleteMode();
+        //StoneDeleteManger.target.EnterDeleteMode();
     }
     
     public StoneSell()
@@ -24,7 +24,7 @@ public class StoneSell : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        StoneDeleteManger.target.ExitDeleteMode();
+        //StoneDeleteManger.target.ExitDeleteMode();
         StoneListLayer.box._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
     }
 }

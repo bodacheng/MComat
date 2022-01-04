@@ -54,7 +54,7 @@ public class StoneMergeLayer : UILayer
         Button button = _Cell.GetComponent<Button>();
         if (button != null)
         {
-            button.onClick.AddListener(delegate { StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected); });
+            button.onClick.AddListener(delegate { StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected); });
         }
         _Cell.SetOnDropAction(StoneCell.Install);
     }
@@ -106,7 +106,7 @@ public class StoneMergeLayer : UILayer
         
         void buttonFeature(object sender, System.EventArgs e)
         {
-            StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected);
+            StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
         }
 
         void doubleClick(object sender, System.EventArgs e)

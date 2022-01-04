@@ -1,14 +1,13 @@
 ﻿using dataAccess;
 using UnityEngine;
 using Api.Dto.Form;
-using Api.Dto.Model;
 
 // 执行
 public partial class SSLevelUpManager : MonoBehaviour
 {
-    public void LevelUpStone(string InstanceId)
+    void LevelUpStone(string InstanceId)
     {
-        SkillStoneLevelUpForm skillStoneLevelUpForm = new SkillStoneLevelUpForm();
+        SkillStoneLevelUpForm form = new SkillStoneLevelUpForm();
         
         SKStoneItem item1 = cell1.GetItem();
         SKStoneItem item2 = cell2.GetItem();
@@ -16,23 +15,21 @@ public partial class SSLevelUpManager : MonoBehaviour
         SKStoneItem item4 = cell4.GetItem();
         SKStoneItem item5 = cell5.GetItem();
         
-        skillStoneLevelUpForm.targetStoneID = InstanceId;
+        form.targetStoneID = InstanceId;
         
-        skillStoneLevelUpForm.M1Stone = item1 != null ? item1.instanceId : null;
-        skillStoneLevelUpForm.M2Stone = item2 != null ? item2.instanceId : null;
-        skillStoneLevelUpForm.M3Stone = item3 != null ? item3.instanceId : null;
-        skillStoneLevelUpForm.M4Stone = item4 != null ? item4.instanceId : null;
-        skillStoneLevelUpForm.M5Stone = item5 != null ? item5.instanceId : null;
-        
-        skillStoneLevelUpForm.UseGold = CurrentGoldExaust.ToString();
+        form.M1Stone = item1 != null ? item1.instanceId : null;
+        form.M2Stone = item2 != null ? item2.instanceId : null;
+        form.M3Stone = item3 != null ? item3.instanceId : null;
+        form.M4Stone = item4 != null ? item4.instanceId : null;
+        form.M5Stone = item5 != null ? item5.instanceId : null;
     }
     
     // 技能升级确认。
     public void ConfirmSkillStoneLevelUp()
     {
-        StoneOfPlayerInfo StoneInfoModel = Stones.Get(targetInstanceId);
-        if (StoneInfoModel == null)
+        StoneOfPlayerInfo target = Stones.Get(targetStoneID);
+        if (target == null)
             return;
-        LevelUpStone(StoneInfoModel.InstanceId);
+        LevelUpStone(target.InstanceId);
     }
 }

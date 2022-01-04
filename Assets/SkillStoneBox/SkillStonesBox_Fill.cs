@@ -73,8 +73,6 @@ namespace mainMenu
                     _Cell.UpdateMyItem();
                 }
             }
-            if (StoneDeleteManger.target != null)
-                StoneDeleteManger.target.RefreshSelectedRender();
         }
     }
 }

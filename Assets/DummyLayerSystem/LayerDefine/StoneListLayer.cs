@@ -1,12 +1,34 @@
 using mainMenu;
 using UnityEngine;
-using System;
+using dataAccess;
+using UnityEngine.UI;
 
 public class StoneListLayer : UILayer
 {
     public SkillStonesBox box;
     public SSLevelUpManager ssLevelUper;
-    public SkillStoneDetail _skillStoneDetail;
+    [SerializeField] SkillStoneDetail _skillStoneDetail;
+    [SerializeField] Button OpenBtn;
+    
+    string targetStoneID;
+    string TargetStoneID
+    {
+        get => targetStoneID; 
+        set
+        {
+            targetStoneID = value;
+            StoneOfPlayerInfo info = Stones.Get(targetStoneID);
+            OpenBtn.gameObject.SetActive(info != null);
+            if (info != null)
+            {
+                OpenBtn.onClick.RemoveAllListeners();
+                OpenBtn.onClick.AddListener(() =>
+                {
+                    ssLevelUper.OpenLevelUpPage(targetStoneID);
+                });
+            }
+        }
+    }
     
     public static StoneListLayer Get()
     {
@@ -32,10 +54,12 @@ public class StoneListLayer : UILayer
         (
             Zokusei.blueMagic
         );
+        returnValue.box.AddFeatureToCells(returnValue.CellFeature_StoneShow);
         returnValue.box.IniExTabs(PreScene.target.FxCamera);
         returnValue.box.EXTabsFeatureRefresh(true);
         returnValue.box.RestFilter();
         returnValue._skillStoneDetail.Clear();
+        returnValue.ssLevelUper.INI();
         return returnValue;
     }
 
@@ -57,24 +81,18 @@ public class StoneListLayer : UILayer
             SKStoneItem _stone = _Cell.GetItem();
             if (_stone != null && _stone._SkillConfig != null)
             {
-                StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected);
+                StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
                 _skillStoneDetail.RefreshInfo(_stone.instanceId);
+                TargetStoneID = _stone.instanceId;
             }else{
                 _skillStoneDetail.Clear();
+                Debug.Log("cleard");
+                TargetStoneID = null;
             }
+            Debug.Log(sender + ":"+ TargetStoneID);
         }
         
-        void PressGoToLevelUpPage( object sender, EventArgs e )
-        {
-            SKStoneItem _stone = _Cell.GetItem();
-            if (_stone != null && _stone._SkillConfig != null)
-            {
-                ssLevelUper.OpenLevelUpPage(_stone.instanceId);
-            }
-        }
-        _Cell.lpGesture.LongPressed += PressGoToLevelUpPage;
         _Cell.pGesture.Pressed += buttonFeature;
-        
         _Cell.SetOnDropAction(StoneCell.Install);
     }
     
@@ -82,18 +100,16 @@ public class StoneListLayer : UILayer
     {
         void buttonFeature(object sender, System.EventArgs e)
         {
-            StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected);
+            StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
         }
         
         void doubleClick(object sender, System.EventArgs e)
         {
-            Debug.Log(sender + "dj");
             ssLevelUper.AddMaterial(_Cell);
         }
         
         _Cell.pGesture.Pressed += buttonFeature;
         _Cell.tGesture.Tapped += doubleClick;
         _Cell.SetOnDropAction(StoneCell.Install);
-        //ssLevelUper.AddMSlotBehaviour(_SkillStoneCell);??  这行代码是个谜
     }
 }

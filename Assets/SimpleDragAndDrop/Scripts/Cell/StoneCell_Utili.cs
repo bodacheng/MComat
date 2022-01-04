@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Image))]
 public partial class StoneCell : MonoBehaviour, IDropHandler
 {
-    public static void SeletedRender(StoneCell cell, GameObject _Selected)
+    public static void SelectedRender(StoneCell cell, GameObject _Selected)
     {
         if (cell == null)
         {

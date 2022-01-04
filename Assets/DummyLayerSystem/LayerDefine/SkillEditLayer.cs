@@ -259,7 +259,7 @@ public class SkillEditLayer : UILayer
             }else{
                 _skillStoneDetail.Clear();
             }
-            StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected);
+            StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
         }
         
         void doubleClick(object sender, System.EventArgs e)
@@ -301,7 +301,7 @@ public class SkillEditLayer : UILayer
             }else{
                 _skillStoneDetail.Clear();
             }
-            StoneCell.SeletedRender(_Cell, SkillStonesBox._Selected);
+            StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
         }
         _Cell.pGesture.Pressed += buttonFeature;
         _Cell.SetOnDropAction(StoneCell.Install);

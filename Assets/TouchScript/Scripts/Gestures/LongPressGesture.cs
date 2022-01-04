@@ -43,6 +43,16 @@ namespace TouchScript.Gestures
         // Needed to overcome iOS AOT limitations
         private EventHandler<EventArgs> longPressedInvoker;
 
+        // 伯大成
+        public void Clear()
+        {
+            if (longPressedInvoker != null)
+            foreach(Delegate d in longPressedInvoker.GetInvocationList())
+            {
+                LongPressed -= (EventHandler<EventArgs>)d;
+            }
+        }
+
         /// <summary>
         /// Unity event, occurs when gesture is recognized.
         /// </summary>

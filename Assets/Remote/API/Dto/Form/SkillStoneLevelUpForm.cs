@@ -26,11 +26,6 @@ namespace Api.Dto.Form
         public string M4Stone { get; set; }
         public string M5Stone { get; set; }
         
-        /// <summary>
-        /// 消耗金币
-        /// </summary>
-        public string UseGold { get; set; }
-        
         // 可能显示错误信息的材料添加错误现在看就只有技能石总数不过30那一条。
         public List<string> LocalCheck()
         {

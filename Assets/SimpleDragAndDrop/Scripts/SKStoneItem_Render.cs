@@ -18,11 +18,11 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
         if (item != null)
         {
             StoneCell cell = item.GetCell();
-            StoneCell.SeletedRender(cell, _Selected);
+            StoneCell.SelectedRender(cell, _Selected);
         }
         else
         {
-            StoneCell.SeletedRender(null, _Selected);
+            StoneCell.SelectedRender(null, _Selected);
         }
     }
 }

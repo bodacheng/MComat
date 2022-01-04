@@ -1,35 +1,34 @@
 ﻿using UnityEngine;
 using dataAccess;
-using Api.Dto.Model;
+using System.Collections.Generic;
 
 // 技能石消耗
 public partial class SSLevelUpManager : MonoBehaviour
 {
-    #region 素材的添加与移除
-    public void AddMaterial(StoneCell skillboxcell)
+    List<StoneCell> MaterialSlots;
+    
+    public void AddMaterial(StoneCell boxCell)
     {
-        StoneOfPlayerInfo steppingstone = Stones.Get(targetInstanceId);
-        Debug.Log("为"+ steppingstone);
+        StoneOfPlayerInfo target = Stones.Get(targetStoneID);
         for (int i = 0; i < MaterialSlots.Count; i++)
         {
-            Debug.Log("slot"+ MaterialSlots[i]);
             MaterialSlots[i].UpdateMyItem();
-            SKStoneItem Material = skillboxcell.GetItem();
-            if (MaterialSlots[i].GetItem() == null && Material != null)
+            SKStoneItem Material = boxCell.GetItem();
+            if (MaterialSlots[i].GetItem() == null && Material != null &&
+                Material._SkillConfig.RECORD_ID == target.skillId) // 只能以同技能石为材料
             {
-                Debug.Log(Material.instanceId + ":"+ steppingstone.InstanceId);
-                if (Material.instanceId != steppingstone.InstanceId)
+                Debug.Log(Material.instanceId + ":"+ target.InstanceId);
+                if (Material.instanceId != target.InstanceId)
                 {
-                    Debug.Log("dsds");
-                    StoneCell.Install(skillboxcell, MaterialSlots[i]);
+                    StoneCell.Install(boxCell, MaterialSlots[i]);
                     break;
                 }
             }
         }
     }
-    #endregion
-
-    int CalCurrentExpFromMaterialStone()
+    
+    // 具体怎么换算再说吧。
+    int CalCurrentExpFromMaterials()
     {
         cell1.UpdateMyItem();
         cell2.UpdateMyItem();

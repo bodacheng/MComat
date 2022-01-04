@@ -7,35 +7,42 @@ public static class SVCenter
 {
     public static void StoneRemoveFromSlotToCell(StoneCell sourceCell, StoneCell boxcell)
     {
-        SkillEditLayer skillEditLayer = SkillEditLayer.Open();
-        SKStoneItem stone = sourceCell.GetItem();
-        if (stone != null && stone.Inherent)
-        {
-            Debug.Log("固有技能无法移出，返回");
-            return;
-        }
-        
-        // 如果把技能石从9宫格拖到技能背包的一个有石头的格子上，那么就直接把拖动中的技能石先从九宫格拔下来，接着让技能背包自动排序一下
-        if (boxcell.GetItem() != null)
-        {
-            skillEditLayer.StonesBox.ReturnStoneToBox(sourceCell.GetItem());
-        }
-        else
-        {
-            // 如果把技能石从9宫格拖到空技能背包格子上，那就让这个技能石在那个空格子上就可以。
-            // 的确这个瞬间可能产生这个技能石所在位置和当前背包显示类型不一致问题，但如果是进行了一个背包自动排序的话，
-            // 松手瞬间会有一个技能石“变图案”的错觉。
-            boxcell.AddItem(stone);
-        }
-        
         if (sourceCell.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
+            SkillEditLayer skillEditLayer = SkillEditLayer.Open();
+            SKStoneItem stone = sourceCell.GetItem();
+            if (stone != null && stone.Inherent)
+            {
+                Debug.Log("固有技能无法移出，返回");
+                return;
+            }
+            // 如果把技能石从9宫格拖到技能背包的一个有石头的格子上，那么就直接把拖动中的技能石先从九宫格拔下来，接着让技能背包自动排序一下
+            if (boxcell.GetItem() != null)
+            {
+                skillEditLayer.StonesBox.ReturnStoneToBox(stone);
+            }
+            else
+            {
+                // 如果把技能石从9宫格拖到空技能背包格子上，那就让这个技能石在那个空格子上就可以。
+                // 的确这个瞬间可能产生这个技能石所在位置和当前背包显示类型不一致问题，但如果是进行了一个背包自动排序的话，
+                // 松手瞬间会有一个技能石“变图案”的错觉。
+                boxcell.AddItem(stone);
+            }
             skillEditLayer.NineSlot.NineSlotsStatusRefresh();
         }
-        if (sourceCell.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
+        else if (sourceCell.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
+            SKStoneItem stone = sourceCell.GetItem();
             StoneListLayer sl = StoneListLayer.Get();
             sl.ssLevelUper.RefreshSkillLevelUpModule();
+            if (boxcell.GetItem() != null)
+            {
+                sl.box.ReturnStoneToBox(stone);
+            }            
+            else
+            {
+                boxcell.AddItem(stone);
+            }
         }
     }
     
@@ -53,6 +60,7 @@ public static class SVCenter
             PosCal.GetWorldPos(PreScene.target.FxCamera, to.GetComponent<RectTransform>(), 3), 
             skillEditLayer.StonesBox._SkillStoneBoxTabEffectsManager.transform);
         }
+        
         to.AddItem(item);
         from.UpdateMyItem();
         

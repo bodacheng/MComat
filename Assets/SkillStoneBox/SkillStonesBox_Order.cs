@@ -24,8 +24,6 @@ namespace mainMenu
                 ordertype = 0;
             }
             _Selected.gameObject.SetActive(false);
-            StoneListLayer sl = StoneListLayer.Get();
-            sl.ssLevelUper._MSkillStoneDetail.Clear();
             RestFilter();
         }
               

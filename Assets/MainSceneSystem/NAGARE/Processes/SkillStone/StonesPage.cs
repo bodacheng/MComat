@@ -61,7 +61,6 @@ public class StonesPage : MainSceneProcess
         }
         
         CommonEnterProcess();
-        stoneListLayer.box.AddFeatureToCells(stoneListLayer.CellFeature_StoneShow);
     }
     
     //EnterProcess()内绝不能出现triggerMainProcess
