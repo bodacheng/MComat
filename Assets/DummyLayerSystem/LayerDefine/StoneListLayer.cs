@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class StoneListLayer : UILayer
 {
     public SkillStonesBox box;
-    public SSLevelUpManager ssLevelUper;
+    public SSLevelUpManager levelManager;
     [SerializeField] SkillStoneDetail _skillStoneDetail;
     [SerializeField] Button OpenBtn;
     
@@ -24,7 +24,7 @@ public class StoneListLayer : UILayer
                 OpenBtn.onClick.RemoveAllListeners();
                 OpenBtn.onClick.AddListener(() =>
                 {
-                    ssLevelUper.OpenLevelUpPage(targetStoneID);
+                    levelManager.OpenLevelUpPage(targetStoneID);
                 });
             }
         }
@@ -59,7 +59,7 @@ public class StoneListLayer : UILayer
         returnValue.box.EXTabsFeatureRefresh(true);
         returnValue.box.RestFilter();
         returnValue._skillStoneDetail.Clear();
-        returnValue.ssLevelUper.INI();
+        returnValue.levelManager.INI();
         return returnValue;
     }
 
@@ -86,10 +86,8 @@ public class StoneListLayer : UILayer
                 TargetStoneID = _stone.instanceId;
             }else{
                 _skillStoneDetail.Clear();
-                Debug.Log("cleard");
                 TargetStoneID = null;
             }
-            Debug.Log(sender + ":"+ TargetStoneID);
         }
         
         _Cell.pGesture.Pressed += buttonFeature;
@@ -102,10 +100,9 @@ public class StoneListLayer : UILayer
         {
             StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
         }
-        
         void doubleClick(object sender, System.EventArgs e)
         {
-            ssLevelUper.AddMaterial(_Cell);
+            levelManager.AddMaterialFromCell(_Cell);
         }
         
         _Cell.pGesture.Pressed += buttonFeature;

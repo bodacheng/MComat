@@ -9,7 +9,7 @@ namespace mainMenu
     public partial class SkillStonesBox : MonoBehaviour
     {
         [Space(7)]
-        [Header("格子pretab")]
+        [Header("格子")]
         public StoneCell Cellprefab;
         
         [Space(5)]
@@ -17,11 +17,11 @@ namespace mainMenu
         public GameObject SelectedFrame;
         public static GameObject _Selected;
         
-        public IDictionary<int, StoneCell> CellsDic = new Dictionary<int, StoneCell>();
+        IDictionary<int, StoneCell> CellsDic = new Dictionary<int, StoneCell>();
         
         public void GenerateCells()
         {
-            int hangshu = 1;
+            var hangshu = 1;
             for (int i = 0; i < Account._AccInfo.Stoneboxsize; i++)
             {
                 if (!CellsDic.ContainsKey(i))

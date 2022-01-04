@@ -35,8 +35,7 @@ namespace mainMenu
             public bool far;
             public List<int> rare = new List<int> { 0, 1, 2, 3, 4, 5 };
         }
-
-        // stoneviewScrollRect 应该在这个函数里扮演一个作用。
+        
         void PutSkillStonesToBox()
         {
             List<string> targetSKs = Stones.TargetStonesFromAccount_except(form, null, null, false);
@@ -52,21 +51,21 @@ namespace mainMenu
                 cellPair.Value.RemoveToTemp();
             }
             
-            int cellindex = 0;
-            for (int i = 0; i < targetSKs.Count; i++)
+            int key = 0;
+            foreach (var t in targetSKs)
             {
-                CellsDic.TryGetValue(cellindex, out StoneCell _Cell);
+                CellsDic.TryGetValue(key, out StoneCell _Cell);
                 if (_Cell == null)
                 {
-                    Debug.Log("Stone box exceed："+ cellindex);
+                    Debug.Log("Stone box exceed："+ key);
                     Debug.Log("此时技能石头盒子的总容量：" + CellsDic.Count);
                     continue;
                 }
-
-                if (!Stones.GetRenderModel(targetSKs[i])._using)
+                
+                if (!Stones.GetRenderModel(t)._using)
                 {
-                    _Cell.AddItem(Stones.GetRenderModel(targetSKs[i]));
-                    cellindex++;
+                    _Cell.AddItem(Stones.GetRenderModel(t));
+                    key++;
                 }
                 else
                 {

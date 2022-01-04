@@ -34,7 +34,7 @@ public static class SVCenter
         {
             SKStoneItem stone = sourceCell.GetItem();
             StoneListLayer sl = StoneListLayer.Get();
-            sl.ssLevelUper.RefreshSkillLevelUpModule();
+            sl.levelManager.RefreshSkillLevelUpModule();
             if (boxcell.GetItem() != null)
             {
                 sl.box.ReturnStoneToBox(stone);
@@ -73,7 +73,7 @@ public static class SVCenter
         if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
             StoneListLayer sl = StoneListLayer.Get();
-            sl.ssLevelUper.RefreshSkillLevelUpModule();
+            sl.levelManager.RefreshSkillLevelUpModule();
         }
     }
     
@@ -116,7 +116,7 @@ public static class SVCenter
         if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
             StoneListLayer sl = StoneListLayer.Get();
-            sl.ssLevelUper.RefreshSkillLevelUpModule();
+            sl.levelManager.RefreshSkillLevelUpModule();
         }
     }
     

@@ -7801,6 +7801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cancelBtn: {fileID: 5206352636662834657}
+  autoAdd: {fileID: 2128225953260494182}
   confirmLevelUp: {fileID: 3599116897806000441}
   expValue: {fileID: 5206352635142670423}
   StoneTargetLevel: {fileID: 5206352635282655065}
@@ -8042,7 +8043,6 @@ MonoBehaviour:
   closeCheckBox: {fileID: 5206352635100197084}
   nearCheckBox: {fileID: 5206352635659860177}
   farCheckBox: {fileID: 5206352635381506421}
-  rares: 000000000100000002000000
   Cellprefab: {fileID: 9087381990746991603, guid: b3795898c2a1b4eeaa126e66fe7de953,
     type: 3}
   SelectedFrame: {fileID: 5056399119111226684}
@@ -8690,7 +8690,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -8724,7 +8724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   box: {fileID: 7080503536421198422}
-  ssLevelUper: {fileID: 5832295999211850545}
+  levelManager: {fileID: 5832295999211850545}
   _skillStoneDetail: {fileID: 1764983510227371885}
   OpenBtn: {fileID: 5206352635495377146}
 --- !u!1 &5409111768843243149

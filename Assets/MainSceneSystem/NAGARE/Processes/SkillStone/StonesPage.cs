@@ -74,7 +74,7 @@ public class StonesPage : MainSceneProcess
         }
         
         CommonEnterProcess();
-        stoneListLayer.ssLevelUper.OpenLevelUpPage(t as string);
+        stoneListLayer.levelManager.OpenLevelUpPage(t as string);
     }
     
     void CommonEnterProcess()

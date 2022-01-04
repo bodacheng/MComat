@@ -1,5 +1,4 @@
-﻿using Api.Dto.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Skill;
 using System;
@@ -8,9 +7,9 @@ namespace dataAccess
 {
     public partial class Stones
     {
-        public static IDictionary<string, StoneOfPlayerInfo> Dic = new Dictionary<string, StoneOfPlayerInfo>();
-        static IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();
-
+        public static readonly IDictionary<string, StoneOfPlayerInfo> Dic = new Dictionary<string, StoneOfPlayerInfo>();
+        static readonly IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();
+        
         public static void Clear()
         {
             Dic.Clear();
@@ -38,6 +37,32 @@ namespace dataAccess
         public static SKStoneItem GetRenderModel(string ItemId)
         {
             return ItemId == null ? null : RenderModelDic.ContainsKey(ItemId) ? RenderModelDic[ItemId] : null;
+        }
+        
+        public static void HighLight(string skillId)
+        {
+            foreach (var kv in RenderModelDic)
+            {
+                if (kv.Value._SkillConfig.RECORD_ID == skillId)
+                {
+                    kv.Value.image.color = Color.white;
+                    kv.Value.enabled = true;
+                }
+                else
+                {
+                    kv.Value.image.color = new Color(1,1,1,0.5f);
+                    kv.Value.enabled = false;
+                }
+            }
+        }
+
+        public static void ResetHighLight()
+        {
+            foreach (var kv in RenderModelDic)
+            {
+                kv.Value.image.color = Color.white;
+                kv.Value.enabled = true;
+            }
         }
 
         public static void RefreshLocalStoneParams(IDictionary<string, Tuple<string, string>> ToEditStones)

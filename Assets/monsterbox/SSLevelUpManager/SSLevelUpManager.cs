@@ -7,7 +7,8 @@ using DG.Tweening;
 
 public partial class SSLevelUpManager : MonoBehaviour
 {
-    [SerializeField] private Button cancelBtn;
+    [SerializeField] Button cancelBtn;
+    [SerializeField] Button autoAdd;
     [SerializeField] Button confirmLevelUp;
     
     [Header("目前各种参数显示")]
@@ -28,6 +29,11 @@ public partial class SSLevelUpManager : MonoBehaviour
     public void INI()
     {
         cancelBtn.onClick.AddListener(CloseLevelUpPage);
+        autoAdd.onClick.AddListener(() =>
+        {
+            var info = Stones.Get(targetStoneID);
+            AutoAddMaterials(info.skillId);
+        });
         //target = this;
         MaterialSlots = new List<StoneCell>
         {
@@ -63,12 +69,12 @@ public partial class SSLevelUpManager : MonoBehaviour
         set
         {
             LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo((int)value);
-            expValue.value = (float)current.expRemain / (float)(current.expRemain + current.expToNextLevel);
+            expValue.value = current.expRemain / (float)(current.expRemain + current.expToNextLevel);
             if (expValue.value >= 1)
                 expValue.value = 0;
-            StoneTargetLevel.text = "Level:" + current.currentLevel.ToString();
+            StoneTargetLevel.text = "Level:" + current.currentLevel;
             StoneTargetLevel.color = CalCurrentExpFromMaterials() > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
-            CurrentExpToNextLevel.text = "( " + (expValue.value * 100).ToString() + "% )";
+            CurrentExpToNextLevel.text = "( " + (expValue.value * 100) + "% )";
             dataForShow = (int)value;
         }
     }

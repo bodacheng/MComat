@@ -7,24 +7,40 @@ public partial class SSLevelUpManager : MonoBehaviour
 {
     List<StoneCell> MaterialSlots;
     
-    public void AddMaterial(StoneCell boxCell)
+    public void AddMaterialFromCell(StoneCell boxCell)
     {
         StoneOfPlayerInfo target = Stones.Get(targetStoneID);
-        for (int i = 0; i < MaterialSlots.Count; i++)
+        foreach (var t in MaterialSlots)
         {
-            MaterialSlots[i].UpdateMyItem();
             SKStoneItem Material = boxCell.GetItem();
-            if (MaterialSlots[i].GetItem() == null && Material != null &&
+            if (t.GetItem() == null && Material != null &&
                 Material._SkillConfig.RECORD_ID == target.skillId) // 只能以同技能石为材料
             {
-                Debug.Log(Material.instanceId + ":"+ target.InstanceId);
                 if (Material.instanceId != target.InstanceId)
                 {
-                    StoneCell.Install(boxCell, MaterialSlots[i]);
+                    StoneCell.Install(boxCell, t);
                     break;
                 }
             }
         }
+    }
+    
+    public void AutoAddMaterials(string skillId)
+    {
+        List<string> stones = Stones.GetMyStonesBySkillID(skillId);
+        for (var i = 0; i < Mathf.Min(stones.Count, MaterialSlots.Count); i++)
+        {
+            SKStoneItem alreadyThere = MaterialSlots[i].GetItem();
+            if (alreadyThere == null)
+            {
+                if (targetStoneID != stones[i])
+                {
+                    SKStoneItem itemModel = Stones.GetRenderModel(stones[i]);
+                    MaterialSlots[i].AddItem(itemModel);
+                }
+            }
+        }
+        RefreshSkillLevelUpModule();
     }
     
     // 具体怎么换算再说吧。

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UniRx;
@@ -9,15 +8,15 @@ namespace mainMenu
     public partial class SkillStonesBox : MonoBehaviour
     {
         [Header("画面主模块parent")]
-        public RectTransform BoxT;
+        [SerializeField] RectTransform BoxT;
         
         [Space(7)]
         [Header("type按钮")]
-        public Dropdown types;
-        public Button NormalTab;
-        public Button EX1Tab;
-        public Button EX2Tab;
-        public Button EX3Tab;
+        [SerializeField] Dropdown types;
+        [SerializeField] Button NormalTab;
+        [SerializeField] Button EX1Tab;
+        [SerializeField] Button EX2Tab;
+        [SerializeField] Button EX3Tab;
         
         [Space(7)]
         [Header("type特效管理")]
@@ -25,32 +24,30 @@ namespace mainMenu
         
         [Space(7)]
         [Header("攻击范围限定")]
-        public Toggle closeCheckBox;
-        public Toggle nearCheckBox;
-        public Toggle farCheckBox;
+        [SerializeField] Toggle closeCheckBox;
+        [SerializeField] Toggle nearCheckBox;
+        [SerializeField] Toggle farCheckBox;
 
         // rare 度限定
-        public List<int> rares = new List<int> { 0, 1, 2, 3, 4, 5 };
-        
-        string focusingtype = "human";
+        List<int> rares = new List<int> { 0, 1, 2, 3, 4, 5 };
+        string focusingType = "human";
         int focusingExType;
-        //public static SkillStonesBox target;
-
+        
         void Awake()
         {
             _Selected = SelectedFrame;
             rares = new List<int> { 0, 1, 2, 3, 4, 5 };//否则其值会被inspector修改
         }
         
-        public string GetFocusingType()
+        string GetFocusingType()
         {
-            return focusingtype;
+            return focusingType;
         }
         public void SetFocusingType(string type)
         {
-            focusingtype = type;
+            focusingType = type;
         }
-        public int GetFocusingExType()
+        int GetFocusingExType()
         {
             return focusingExType;
         }

@@ -24,6 +24,8 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
     public SkillConfig _SkillConfig;
     public bool Inherent;
     public string instanceId;
+    
+    // 指的不是被某个角色装备中，而是指在技能编辑页面等处，被box之外的模块使用中。
     public bool _using = false;
     
     /// <summary>
