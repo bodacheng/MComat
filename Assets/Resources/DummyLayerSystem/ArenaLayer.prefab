@@ -814,6 +814,7 @@ MonoBehaviour:
   EditMyTeamBtn: {fileID: 4549164827255056177}
   myScore: {fileID: 8098733855991587621}
   myRank: {fileID: 1234486643644859623}
+  RefreshBtn: {fileID: 4549164827824181004}
   EnemiesT: {fileID: 4549164827160355230}
   ArenaFightTeamDisplayPrefab: {fileID: 5034609537138417577}
 --- !u!223 &6863176314036883254

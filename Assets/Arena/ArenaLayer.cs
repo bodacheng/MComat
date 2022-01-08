@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 using dataAccess;
 using mainMenu;
@@ -13,11 +14,17 @@ public class ArenaLayer : UILayer
     [SerializeField] Text myRank;
     #endregion
     
+    [SerializeField] Button RefreshBtn;
     [SerializeField] RectTransform EnemiesT;
     [SerializeField] ArenaFightTeamDisplay ArenaFightTeamDisplayPrefab;
 
     CloudScript.LeaderboardInfo myLeaderboardInfo;
-    
+
+    void Awake()
+    {
+        RefreshBtn.onClick.AddListener(RefreshOpponent);
+    }
+
     public void RefreshOpponent()
     {
         PopupLayer.Loading(">", PreScene.target.T);
