@@ -11,41 +11,46 @@ public class ArenaLayer : UILayer
     [SerializeField] Button EditMyTeamBtn;
     [SerializeField] Text myScore;
     [SerializeField] Text myRank;
-    #endregion 
+    #endregion
     
     [SerializeField] RectTransform EnemiesT;
     [SerializeField] ArenaFightTeamDisplay ArenaFightTeamDisplayPrefab;
 
-    CloudScript.LeaderboardInfo myTeamLeaderboardInfo;
+    CloudScript.LeaderboardInfo myLeaderboardInfo;
     
     public void RefreshOpponent()
     {
+        PopupLayer.Loading(">", PreScene.target.T);
+        View(false);
         CloudScript.GetLeaderboardAroundUser(
-            (List<CloudScript.LeaderboardInfo> obj) =>
+            obj =>
             {
-                List<CloudScript.LeaderboardInfo> exceptSelf = new List<CloudScript.LeaderboardInfo>();
-                
-                for (int i = 0; i < obj.Count; i++)
+                var exceptSelf = new List<CloudScript.LeaderboardInfo>();
+                foreach (var t in obj)
                 {
-                    Debug.Log(i + ":" +obj[i].PlayerLeaderboardEntry.PlayFabId);
-                    if (obj[i].PlayerLeaderboardEntry.PlayFabId != Account._AccInfo.playerID)
+                    Debug.Log( "读取到以下玩家信息 : " +t.PlayerLeaderboardEntry.PlayFabId);
+                    if (t.PlayerLeaderboardEntry.PlayFabId != Account._AccInfo.playerID)
                     {
-                        exceptSelf.Add(obj[i]);
+                        exceptSelf.Add(t);
                     }
                     else
                     {
-                        myTeamLeaderboardInfo = obj[i];
+                        myLeaderboardInfo = t;
                     }
                 }
-                LoadArena(exceptSelf);
-                if (myTeamLeaderboardInfo != null)
+                if (myLeaderboardInfo != null)
                 {
-                    myScore.text = myTeamLeaderboardInfo.PlayerLeaderboardEntry.StatValue.ToString();
-                    myRank.text = "Rank :" + myTeamLeaderboardInfo.PlayerLeaderboardEntry.Position;
+                    myScore.text = myLeaderboardInfo.PlayerLeaderboardEntry.StatValue.ToString();
+                    myRank.text = "Rank :" + myLeaderboardInfo.PlayerLeaderboardEntry.Position;
                 }
+                ShowMyTeam();
+                LoadArena(exceptSelf);
+                View(true);
+                PopupLayer.Close();
             },
             () =>
             {
+                PopupLayer.Close();
                 PreScene.ReturnToLobby("通讯错误");
             }
         );
@@ -54,15 +59,14 @@ public class ArenaLayer : UILayer
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
     void LoadArena(List<CloudScript.LeaderboardInfo> leaderboards)
     {
-        ShowMyTeam();
         foreach (Transform c in EnemiesT)
         {
             Destroy(c.gameObject);
         }
-        for (int i = 0; i < leaderboards.Count; i++)
+        foreach (var t in leaderboards)
         {
             ArenaFightTeamDisplay o = Instantiate(ArenaFightTeamDisplayPrefab);
-            o.AddFightToList(leaderboards[i]);
+            o.AddFightToList(t);
             o.transform.SetParent(EnemiesT);
             o.transform.localPosition = Vector3.zero;
             o.transform.localScale = Vector3.one;
@@ -85,5 +89,12 @@ public class ArenaLayer : UILayer
         }
         EditMyTeamBtn.onClick.RemoveAllListeners();
         EditMyTeamBtn.onClick.AddListener(GoToTeamEdit);
+    }
+
+    void View(bool on)
+    {
+        member1.gameObject.SetActive(on);
+        member2.gameObject.SetActive(on);
+        member3.gameObject.SetActive(on);
     }
 }

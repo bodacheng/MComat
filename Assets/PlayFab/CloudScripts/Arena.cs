@@ -47,11 +47,10 @@ public partial class CloudScript
                 GeneratePlayStreamEvent = true
             },
             (ExecuteCloudScriptResult result) => {
-
                 try
                 {
                     PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
-
+                    
                     object teamInfos;
                     jsonResult.TryGetValue("teamInfos", out teamInfos); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
                     string json = JsonConvert.SerializeObject(teamInfos);
