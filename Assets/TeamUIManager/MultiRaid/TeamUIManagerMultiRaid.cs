@@ -144,8 +144,8 @@ namespace FightScene
                     _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
                     _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(Action1);
                     UnitInfo charDInfo = RTFightManager.target.UnitInfoRef[a_char];
-                    CharConfig _charConfig = Units.GetCharConfig(charDInfo.r_id);
-                    _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Get(charDInfo.r_id), _charConfig._zokusei);
+                    UnitConfig unitConfig = Units.GetUnitConfig(charDInfo.r_id);
+                    _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Get(charDInfo.r_id), unitConfig._zokusei);
                     _SideCharIcon.gameObject.SetActive(true);
                 }
                 else

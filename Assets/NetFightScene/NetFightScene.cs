@@ -150,8 +150,8 @@ namespace FightScene
                         break;
                 }
                 
-                CharConfig _CharConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(keyValuePair.Value.r_id));
-                yield return keyValuePair.Key.Step2Initialize(_CharConfig.TYPE, keyValuePair.Value.set, _CharConfig._zokusei, _CharConfig.SPECIAL_ZOKUSEI);
+                UnitConfig unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(keyValuePair.Value.r_id));
+                yield return keyValuePair.Key.Step2Initialize(unitConfig.TYPE, keyValuePair.Value.set, unitConfig._zokusei, unitConfig.SPECIAL_ZOKUSEI);
                 i++;
             }
             FightOverControl.target.LocalGameRestart();

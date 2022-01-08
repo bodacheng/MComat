@@ -19,13 +19,13 @@ public partial class MasterDataTool : MonoBehaviour
         }
         List<int> AllDeletedRecordsIDs = new List<int>();
         List<string> kisoonCharacterResourceInfoRID = new List<string>();
-        List<CharConfig> AllNewCharConfigsAllTypes = new List<CharConfig>();
+        List<UnitConfig> AllNewCharConfigsAllTypes = new List<UnitConfig>();
         foreach (string chartype in chartypes)
         {
             List<string> currentAllRealNamesOfResourceFolder = new List<string>();
-            List<CharConfig> CharConfigsOfOldConfigFileOFtype = Units.RowToConfigList(Units.FindAll_MONSTER_TYPE(chartype));
+            List<UnitConfig> CharConfigsOfOldConfigFileOFtype = Units.RowToConfigList(Units.FindAll_MONSTER_TYPE(chartype));
             List<string> keySonnCharacterRealNames = new List<string>();
-            foreach (CharConfig oneConfig in CharConfigsOfOldConfigFileOFtype)
+            foreach (UnitConfig oneConfig in CharConfigsOfOldConfigFileOFtype)
             {
                 if (!keySonnCharacterRealNames.Contains(oneConfig.REAL_NAME))
                 {
@@ -56,7 +56,7 @@ public partial class MasterDataTool : MonoBehaviour
                     continue;
                 }
 
-                CharConfig _CharConfig = new CharConfig
+                UnitConfig unitConfig = new UnitConfig
                 {
                     RECORD_ID = "-1",
                     TYPE = chartype,
@@ -70,32 +70,32 @@ public partial class MasterDataTool : MonoBehaviour
                 switch (outsideDataLink._C.Zokusei)
                 {
                     case Zokusei.blueMagic:
-                        _CharConfig._zokusei = Zokusei.blueMagic;
+                        unitConfig._zokusei = Zokusei.blueMagic;
                         break;
                     case Zokusei.redMagic:
-                        _CharConfig._zokusei = Zokusei.redMagic;
+                        unitConfig._zokusei = Zokusei.redMagic;
                         break;
                     case Zokusei.greenMagic:
-                        _CharConfig._zokusei = Zokusei.greenMagic;
+                        unitConfig._zokusei = Zokusei.greenMagic;
                         break;
                     case Zokusei.darkMagic:
-                        _CharConfig._zokusei = Zokusei.darkMagic;
+                        unitConfig._zokusei = Zokusei.darkMagic;
                         break;
                     case Zokusei.lightMagic:
-                        _CharConfig._zokusei = Zokusei.lightMagic;
+                        unitConfig._zokusei = Zokusei.lightMagic;
                         break;
                 }
-                _CharConfig.SPECIAL_ZOKUSEI = null; //这个只能后加把。。
-                _CharConfig.BASIC_MOVEMENT_PACK = "warrior";//我感觉这个应该起名字叫做basic。每个type起码有一个叫这个的。
-                _CharConfig.MoveType = MoveType.Move_normal;
-                _CharConfig.RushType = RushType.RushBack;
-                _CharConfig.DEFENDABLE_FLAG = true;
-                _CharConfig.InstructionCH = null;
-                _CharConfig.InstructionEN = null;
-                _CharConfig.InstructionJP = null;
-                _CharConfig.RARITY_LEVEL = 1;
+                unitConfig.SPECIAL_ZOKUSEI = null; //这个只能后加把。。
+                unitConfig.BASIC_MOVEMENT_PACK = "warrior";//我感觉这个应该起名字叫做basic。每个type起码有一个叫这个的。
+                unitConfig.MoveType = MoveType.Move_normal;
+                unitConfig.RushType = RushType.RushBack;
+                unitConfig.DEFENDABLE_FLAG = true;
+                unitConfig.InstructionCH = null;
+                unitConfig.InstructionEN = null;
+                unitConfig.InstructionJP = null;
+                unitConfig.RARITY_LEVEL = 1;
 
-                AllNewCharConfigsAllTypes.Add(_CharConfig);
+                AllNewCharConfigsAllTypes.Add(unitConfig);
             }
 
             //旧版本有的keyname可是Resource文件夹下没有的
@@ -123,7 +123,7 @@ public partial class MasterDataTool : MonoBehaviour
             }
         }
 
-        foreach (CharConfig characterResourceInfo in AllNewCharConfigsAllTypes)
+        foreach (UnitConfig characterResourceInfo in AllNewCharConfigsAllTypes)
         {
             if (AllDeletedRecordsIDs.Count > 0)
             {

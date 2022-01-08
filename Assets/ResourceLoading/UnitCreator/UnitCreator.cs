@@ -13,8 +13,8 @@ public partial class UnitCreator {
             Debug.Log("严重资源类错误");
             yield break;
         }
-        CharConfig charConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(info.r_id));
-        yield return _D.Step2Initialize (charConfig.TYPE, info.set, charConfig._zokusei, charConfig.SPECIAL_ZOKUSEI);
+        UnitConfig unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(info.r_id));
+        yield return _D.Step2Initialize (unitConfig.TYPE, info.set, unitConfig._zokusei, unitConfig.SPECIAL_ZOKUSEI);
         yield return _D;
     }
 }

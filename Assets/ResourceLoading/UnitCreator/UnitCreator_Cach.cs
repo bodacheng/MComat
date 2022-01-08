@@ -6,7 +6,7 @@ public partial class UnitCreator
     public static IEnumerator CreateRawUnit_Cach(string monsterId)
     {
         IEnumerator _loadingProcess;
-        CharConfig _TempCharacterResourceInfo = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(monsterId));
+        UnitConfig _TempCharacterResourceInfo = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(monsterId));
         if (_TempCharacterResourceInfo == null)
         {
             Debug.Log("资源号码错误");

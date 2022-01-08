@@ -9,8 +9,8 @@ public partial class StagesManagerGUI : Editor {
     string CharSelect()
     {
         // 角色选择
-        CharConfig focusingCharConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(focusingCharInfo.r_id));
-        focusingtype = focusingCharConfig != null ? EditorGUILayout.TextField("CharacerType", focusingCharConfig.TYPE) : EditorGUILayout.TextField("CharacerType", focusingtype);
+        UnitConfig focusingUnitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(focusingCharInfo.r_id));
+        focusingtype = focusingUnitConfig != null ? EditorGUILayout.TextField("CharacerType", focusingUnitConfig.TYPE) : EditorGUILayout.TextField("CharacerType", focusingtype);
         CharIDsAndNames = new Dictionary<string, string>() { { "-1", "空" } };
         foreach(KeyValuePair<string,string> keyValuePair in Units.GetMonsterIDsAndNamesDic(focusingtype))
         {

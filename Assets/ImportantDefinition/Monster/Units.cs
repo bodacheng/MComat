@@ -9,7 +9,7 @@ using Skill;
 
 public static class Units
 {
-    public static IDictionary<string, CharConfig> Dic = new Dictionary<string, CharConfig>();
+    public static IDictionary<string, UnitConfig> Dic = new Dictionary<string, UnitConfig>();
 
     [Serializable]
     public class Row
@@ -26,7 +26,7 @@ public static class Units
 		public string DEFENDABLE_FLAG;
 	}
             
-    public static CharConfig GetCharConfig(string resourceId)
+    public static UnitConfig GetUnitConfig(string resourceId)
     {
         return Dic.ContainsKey(resourceId) ? Dic[resourceId] : null;
     }
@@ -45,8 +45,8 @@ public static class Units
     public static void RefreshDic()
     {
         Dic.Clear();
-        List<CharConfig> characterResourceInfos = RowToConfigList(rowList);
-        foreach (CharConfig one in characterResourceInfos)            
+        List<UnitConfig> characterResourceInfos = RowToConfigList(rowList);
+        foreach (UnitConfig one in characterResourceInfos)            
         {
             Dic.Add(one.RECORD_ID,one);
         }
@@ -172,13 +172,13 @@ public static class Units
 
     // by haku 9.12
     // filePath的后面记得包括文件名和CSV后缀？
-    public static void Save(string filePath, List<CharConfig> characterResourceList)
+    public static void Save(string filePath, List<UnitConfig> characterResourceList)
     {
         try
         {
             rowList.Clear();
 
-            foreach (CharConfig Config in characterResourceList)
+            foreach (UnitConfig Config in characterResourceList)
             {
                 Debug.Log("尝试整理角色：" + Config.REAL_NAME);
                 Row row = new Row
@@ -276,12 +276,12 @@ public static class Units
         }
     }
 
-    public static List<CharConfig> RowToConfigList(List<Row> List)
+    public static List<UnitConfig> RowToConfigList(List<Row> List)
     {
-        List<CharConfig> ToReturn = new List<CharConfig>();
+        List<UnitConfig> ToReturn = new List<UnitConfig>();
         foreach (Row row in List)
         {
-            CharConfig _CharacterResourceInfo = RowToCharConfigInfo(row);
+            UnitConfig _CharacterResourceInfo = RowToCharConfigInfo(row);
             if (_CharacterResourceInfo != null)
                 ToReturn.Add(_CharacterResourceInfo);
             else
@@ -290,7 +290,7 @@ public static class Units
         return ToReturn;
     }
 
-    public static Row ConfigToRow(CharConfig config)
+    public static Row ConfigToRow(UnitConfig config)
     {
         if (config == null)
             return null;
@@ -333,11 +333,11 @@ public static class Units
         return row;
     }
 
-    public static CharConfig RowToCharConfigInfo(Row row)
+    public static UnitConfig RowToCharConfigInfo(Row row)
     {
         if (row == null)
             return null;
-        CharConfig _Config = new CharConfig
+        UnitConfig _Config = new UnitConfig
         {
             RECORD_ID = row.RECORD_ID,
             TYPE = row.MONSTER_TYPE,

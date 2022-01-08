@@ -155,7 +155,7 @@
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\MainTop.cs" />
      <Compile Include="Assets\Setting\AppSetting.cs" />
      <Compile Include="Assets\Monsterbox\StoneDeleteManger.cs" />
-     <Compile Include="Assets\ImportantDefinition\Monster\CharConfig.cs" />
+     <Compile Include="Assets\ImportantDefinition\Monster\UnitConfig.cs" />
      <Compile Include="Assets\TouchScript\Scripts\InputSources\InputSource.cs" />
      <Compile Include="Assets\Resources\effectsresource\MagicArsenal\Effects\Scripts\MagicBeamScript.cs" />
      <Compile Include="Assets\Singleton\SkillIconsDic\FromResource.cs" />

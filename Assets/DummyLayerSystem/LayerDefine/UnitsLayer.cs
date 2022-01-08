@@ -76,8 +76,8 @@ namespace mainMenu
         void AddOneNewIcon(string instanceID, bool clearButtonFeature)
         {
             UnitInfo unitInfo = MyMonsters.Get(instanceID);
-            CharConfig _CharConfig = Units.GetCharConfig(unitInfo.r_id);
-            if (_CharConfig == null)
+            UnitConfig unitConfig = Units.GetUnitConfig(unitInfo.r_id);
+            if (unitConfig == null)
             {
                 Debug.Log("MonsterID:"+ unitInfo.r_id + " doesnt exist in this version");
                 return;
@@ -86,18 +86,18 @@ namespace mainMenu
             HeroIcon targetingIcon = GetUnitIcon(instanceID);
             if (targetingIcon == null)
             {
-                MonsterIconDic.Get(_CharConfig.RECORD_ID);
+                MonsterIconDic.Get(unitConfig.RECORD_ID);
                 targetingIcon = Instantiate(noMagic);
-                targetingIcon.name = _CharConfig.REAL_NAME + "_icon";
-                targetingIcon._CharConfig = _CharConfig;
-                targetingIcon.ChangeIcon(MonsterIconDic.Get(_CharConfig.RECORD_ID), _CharConfig._zokusei);
+                targetingIcon.name = unitConfig.REAL_NAME + "_icon";
+                targetingIcon.unitConfig = unitConfig;
+                targetingIcon.ChangeIcon(MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig._zokusei);
                 DicAdd<string, HeroIcon>.Add(mainMenuIcons, instanceID, targetingIcon);
             }
             if (clearButtonFeature)
                 targetingIcon.iconButton.onClick.RemoveAllListeners();
-            if (!typeOfUnitsIhave.Contains(targetingIcon._CharConfig.TYPE))
+            if (!typeOfUnitsIhave.Contains(targetingIcon.unitConfig.TYPE))
             {
-                typeOfUnitsIhave.Add(targetingIcon._CharConfig.TYPE);
+                typeOfUnitsIhave.Add(targetingIcon.unitConfig.TYPE);
             }
         }
         

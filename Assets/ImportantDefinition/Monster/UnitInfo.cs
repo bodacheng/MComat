@@ -45,8 +45,8 @@ public class UnitInfo
 
             List<StoneOfPlayerInfo> targets = Stones.GetEquipingStones(accUnitInfo.id);
             SkillSet set = new SkillSet();
-            CharConfig _CharConfigInfo = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(accUnitInfo.r_id));
-            if (_CharConfigInfo == null)
+            UnitConfig unitConfigInfo = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(accUnitInfo.r_id));
+            if (unitConfigInfo == null)
             {
                 Debug.Log("角色定义信息错误。monsterId：" + accUnitInfo.r_id);
                 return null;
@@ -93,7 +93,7 @@ public class UnitInfo
                         break;
                 }
             }
-            set.SetPassive(_CharConfigInfo.DEFENDABLE_FLAG, _CharConfigInfo.MoveType, _CharConfigInfo.RushType);
+            set.SetPassive(unitConfigInfo.DEFENDABLE_FLAG, unitConfigInfo.MoveType, unitConfigInfo.RushType);
             unitInfo.set = set;
             unitInfo.set.SortNineAndTwo();
             return unitInfo;

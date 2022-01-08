@@ -18,8 +18,8 @@ namespace dataAccess
             };
             List<StoneOfPlayerInfo> targets = stones;
             SkillSet nineAndTwo = new SkillSet();
-            CharConfig _CharConfigInfo = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(unit.r_id));
-            if (_CharConfigInfo == null)
+            UnitConfig unitConfigInfo = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(unit.r_id));
+            if (unitConfigInfo == null)
             {
                 Debug.Log("角色定义信息错误。monsterId：" + unit.r_id);
                 return null;
@@ -66,7 +66,7 @@ namespace dataAccess
                     break;
                 }
             }
-            nineAndTwo.SetPassive(_CharConfigInfo.DEFENDABLE_FLAG, _CharConfigInfo.MoveType, _CharConfigInfo.RushType);
+            nineAndTwo.SetPassive(unitConfigInfo.DEFENDABLE_FLAG, unitConfigInfo.MoveType, unitConfigInfo.RushType);
             unit.set = nineAndTwo;
             unit.set.SortNineAndTwo();
             return unit;

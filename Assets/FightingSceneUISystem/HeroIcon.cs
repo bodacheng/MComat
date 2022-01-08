@@ -14,7 +14,7 @@ public class HeroIcon : MonoBehaviour {
     public Image cooldownCurtain;
     
     [FormerlySerializedAs("CharDataInfo")] public UnitInfo unitInfo;
-    public CharConfig _CharConfig;
+    public UnitConfig unitConfig;
     
     static IDictionary<Zokusei, Sprite> frames = new Dictionary<Zokusei, Sprite>();
     
@@ -116,8 +116,8 @@ public class HeroIcon : MonoBehaviour {
         if (instanceId != null)
         {
             UnitInfo _one = MyMonsters.Get(instanceId);
-            CharConfig charConfig = Units.GetCharConfig(_one.r_id);
-            ChangeHeroIconByRID(charConfig.RECORD_ID,Icon);
+            UnitConfig unitConfig = Units.GetUnitConfig(_one.r_id);
+            ChangeHeroIconByRID(unitConfig.RECORD_ID,Icon);
         }
         else
         {
@@ -127,8 +127,8 @@ public class HeroIcon : MonoBehaviour {
     
     public static void ChangeHeroIconByRID(string rID, HeroIcon Icon)
     {
-        CharConfig charConfig = Units.GetCharConfig(rID);
-        Icon.ChangeIcon(charConfig == null ? null : MonsterIconDic.Get(charConfig.RECORD_ID), charConfig == null ? Zokusei.Null : charConfig._zokusei);
+        UnitConfig unitConfig = Units.GetUnitConfig(rID);
+        Icon.ChangeIcon(unitConfig == null ? null : MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig == null ? Zokusei.Null : unitConfig._zokusei);
     }
         
     public static void SelectedFeature(HeroIcon _charIcon, GameObject selectedFrame, float size)
@@ -151,15 +151,15 @@ public class HeroIcon : MonoBehaviour {
     public static HeroIcon ArrangeHeroIconToT(HeroIcon heroIconPretab, UnitInfo unitInfo, RectTransform T)
     {
         HeroIcon MyMemberIcon = Instantiate(heroIconPretab);
-        CharConfig charConfig = Units.GetCharConfig(unitInfo.r_id);
-        if (charConfig == null)
+        UnitConfig unitConfig = Units.GetUnitConfig(unitInfo.r_id);
+        if (unitConfig == null)
         {
             Debug.Log("?? : " + unitInfo.r_id);
             return null;
         }
         MyMemberIcon.unitInfo = unitInfo;
-        MyMemberIcon._CharConfig = charConfig;
-        MyMemberIcon.ChangeIcon(MonsterIconDic.Get(charConfig.RECORD_ID), charConfig._zokusei);
+        MyMemberIcon.unitConfig = unitConfig;
+        MyMemberIcon.ChangeIcon(MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig._zokusei);
         MyMemberIcon.transform.SetParent(T);
         MyMemberIcon.transform.localPosition = Vector3.one;
         MyMemberIcon.transform.localScale = Vector3.one;

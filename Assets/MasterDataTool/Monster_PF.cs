@@ -14,7 +14,7 @@ public partial class MasterDataTool : MonoBehaviour
             CatalogVersion = "Monsters"
         };
         List<PFDefine.Item> items = new List<PFDefine.Item>();
-        List<CharConfig> charsConfigs = Units.Dic.Values.ToList();
+        List<UnitConfig> charsConfigs = Units.Dic.Values.ToList();
         for (int i = 0; i < charsConfigs.Count; i++)
         {
             PFDefine.Item item = new PFDefine.Item()
@@ -39,7 +39,7 @@ public partial class MasterDataTool : MonoBehaviour
         pFSKDefine.StoreId = "monster";
         List<PFStoreDefine.StoreItem> storeitems = new List<PFStoreDefine.StoreItem>();
 
-        List<CharConfig> charsConfigs = Units.Dic.Values.ToList();
+        List<UnitConfig> charsConfigs = Units.Dic.Values.ToList();
         for (int i = 0; i < charsConfigs.Count; i++)
         {
             PFStoreDefine.StoreItem storeitem = new PFStoreDefine.StoreItem()
@@ -72,7 +72,7 @@ public partial class MasterDataTool : MonoBehaviour
         "\"CatalogVersion\": \"Monsters\"," +
         "\"ItemGrants\": [";
 
-        List<CharConfig> charsConfigs = Units.Dic.Values.ToList();
+        List<UnitConfig> charsConfigs = Units.Dic.Values.ToList();
         for (int i = 0; i < charsConfigs.Count; i++)
         {
             text +=

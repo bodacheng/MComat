@@ -41,7 +41,7 @@ public partial class SkillEditLayer : UILayer
         returnValue.StonesBox.GenerateCells();
         
         // 表现系
-        var _CharConfig = Units.GetCharConfig(PreScene.target._focusing.r_id);
+        var _CharConfig = Units.GetUnitConfig(PreScene.target._focusing.r_id);
         if (FightGlobalSetting._programMode != FightGlobalSetting.ProgramMode.skillShow)
             returnValue.StonesBox.AddFeatureToCells(returnValue.StoneCellFeature);
         else
@@ -80,8 +80,8 @@ public partial class SkillEditLayer : UILayer
             return;
         }
         NineSlot.ReadANineAndTwo(_UnitInfo);
-        CharConfig _CharInfo = Units.GetCharConfig(_UnitInfo.r_id);
-        StonesBox.SetFocusingType(_CharInfo.TYPE);
+        UnitConfig unitInfo = Units.GetUnitConfig(_UnitInfo.r_id);
+        StonesBox.SetFocusingType(unitInfo.TYPE);
         StonesBox.RestFilter();
         StonesBox.EXTabsFeatureRefresh(false);
         void SkillEditConfirm()
@@ -120,10 +120,10 @@ public partial class SkillEditLayer : UILayer
         SkillEditButtonFeature_SP(PreScene.target._focusing);
         
         // 表现系
-        CharConfig _CharConfig = Units.GetCharConfig(PreScene.target._focusing.r_id);
+        UnitConfig unitConfig = Units.GetUnitConfig(PreScene.target._focusing.r_id);
         StonesBox._SkillStoneBoxTabEffectsManager.SwitchZokusei
         (
-            _CharConfig._zokusei
+            unitConfig._zokusei
         );
     }
     
@@ -135,8 +135,8 @@ public partial class SkillEditLayer : UILayer
             Debug.Log("到达了没道理到达的地方");
             return;
         }
-        CharConfig _CharInfo = Units.GetCharConfig(_UnitInfo.r_id);
-        StonesBox.SetFocusingType(_CharInfo.TYPE);
+        UnitConfig unitInfo = Units.GetUnitConfig(_UnitInfo.r_id);
+        StonesBox.SetFocusingType(unitInfo.TYPE);
         StonesBox.RestFilter();
         StonesBox.EXTabsFeatureRefresh(false);
     }

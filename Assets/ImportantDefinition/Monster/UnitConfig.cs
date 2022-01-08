@@ -2,7 +2,7 @@
 using Skill;
 
 [Serializable]
-public class CharConfig
+public class UnitConfig
 {
     public string RECORD_ID;
     public string TYPE;

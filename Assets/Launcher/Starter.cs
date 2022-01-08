@@ -51,9 +51,9 @@ public class Starter : MonoBehaviour
             Stones.Add(stoneInfo);
         }
         
-        List<CharConfig> charList = Units.RowToConfigList(Units.rowList);
+        List<UnitConfig> charList = Units.RowToConfigList(Units.rowList);
         int i = 0;
-        foreach (CharConfig _CharConfig in charList)
+        foreach (UnitConfig _CharConfig in charList)
         {
             UnitInfo _Char = new UnitInfo
             {

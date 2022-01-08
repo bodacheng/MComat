@@ -128,9 +128,9 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             return;
         }
         targetIcon.gameObject.SetActive(true);
-        CharConfig charConfig = Units.GetCharConfig(_one.r_id);
-        targetIcon.ChangeIcon(charConfig == null ? null : MonsterIconDic.Get(charConfig.RECORD_ID),
-            charConfig == null ? Zokusei.Null : charConfig._zokusei);
+        UnitConfig unitConfig = Units.GetUnitConfig(_one.r_id);
+        targetIcon.ChangeIcon(unitConfig == null ? null : MonsterIconDic.Get(unitConfig.RECORD_ID),
+            unitConfig == null ? Zokusei.Null : unitConfig._zokusei);
     }
     
     /// <summary>
