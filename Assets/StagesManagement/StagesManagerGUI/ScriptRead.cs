@@ -15,7 +15,7 @@ public partial class StagesManagerGUI : Editor {
                 _stagesManager.EditoringFight = FightMembers.LoadEnemies_Json(_stagesManager.FightScript);
                 foreach (var _one in _stagesManager.EditoringFight.EnemySets._SerializableSets)
                 {
-                    CharConfig _CharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(_one.value.r_id));
+                    CharConfig _CharConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(_one.value.r_id));
                     if (_CharConfig == null)
                     {
                         Debug.Log("检测到存档错误：ResourceID");

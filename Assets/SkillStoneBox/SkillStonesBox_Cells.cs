@@ -99,7 +99,7 @@ namespace mainMenu
         public static List<string> CheckIfExceedCellLimit()
         {
             List<string> errorMessages = new List<string>();
-            List<string> C_Types = MonstersConfigTable.GetTypeList();
+            List<string> C_Types = Units.GetTypeList();
             for (int i = 0; i < C_Types.Count; i++)
             {
                 StoneFilterForm filterForm0 = new StoneFilterForm

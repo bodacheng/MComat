@@ -150,7 +150,7 @@ namespace FightScene
                         break;
                 }
                 
-                CharConfig _CharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(keyValuePair.Value.r_id));
+                CharConfig _CharConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(keyValuePair.Value.r_id));
                 yield return keyValuePair.Key.Step2Initialize(_CharConfig.TYPE, keyValuePair.Value.set, _CharConfig._zokusei, _CharConfig.SPECIAL_ZOKUSEI);
                 i++;
             }

@@ -15,7 +15,7 @@ public partial class MasterDataTool : MonoBehaviour
     {
         if (textAsset != null)
         {
-            MonstersConfigTable.Load(textAsset);
+            Units.Load(textAsset);
         }
         List<int> AllDeletedRecordsIDs = new List<int>();
         List<string> kisoonCharacterResourceInfoRID = new List<string>();
@@ -23,7 +23,7 @@ public partial class MasterDataTool : MonoBehaviour
         foreach (string chartype in chartypes)
         {
             List<string> currentAllRealNamesOfResourceFolder = new List<string>();
-            List<CharConfig> CharConfigsOfOldConfigFileOFtype = MonstersConfigTable.RowToConfigList(MonstersConfigTable.FindAll_MONSTER_TYPE(chartype));
+            List<CharConfig> CharConfigsOfOldConfigFileOFtype = Units.RowToConfigList(Units.FindAll_MONSTER_TYPE(chartype));
             List<string> keySonnCharacterRealNames = new List<string>();
             foreach (CharConfig oneConfig in CharConfigsOfOldConfigFileOFtype)
             {
@@ -108,8 +108,8 @@ public partial class MasterDataTool : MonoBehaviour
 
             foreach (string keyname in ResourceNamesShouldDeletedFromConfig)
             {
-                List<MonstersConfigTable.Row> toDeleteRows = MonstersConfigTable.FindAll_TYPE_REALNAME(chartype, keyname);
-                foreach (MonstersConfigTable.Row row in toDeleteRows)
+                List<Units.Row> toDeleteRows = Units.FindAll_TYPE_REALNAME(chartype, keyname);
+                foreach (Units.Row row in toDeleteRows)
                 {
                     if (!AllDeletedRecordsIDs.Contains(int.Parse(row.RECORD_ID)))
                     {
@@ -118,7 +118,7 @@ public partial class MasterDataTool : MonoBehaviour
                     }
                     else
                         Debug.Log("原monstersConfigTable似乎有重复ID，而且似乎还是因为资源缺失要删除的条目。。");
-                    MonstersConfigTable.rowList.Remove(row);
+                    Units.rowList.Remove(row);
                 }
             }
         }
@@ -137,10 +137,10 @@ public partial class MasterDataTool : MonoBehaviour
                 characterResourceInfo.RECORD_ID = "new";
                 kisoonCharacterResourceInfoRID.Add(characterResourceInfo.RECORD_ID);
             }
-            MonstersConfigTable.Row newRow = MonstersConfigTable.ConfigToRow(characterResourceInfo);
+            Units.Row newRow = Units.ConfigToRow(characterResourceInfo);
             if (newRow != null && newRow.REAL_NAME != null)
-                MonstersConfigTable.rowList.Add(newRow);
+                Units.rowList.Add(newRow);
         }
-        MonstersConfigTable.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : "mst_monster");
+        Units.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : "mst_monster");
     }
 }

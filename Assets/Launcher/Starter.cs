@@ -18,8 +18,8 @@ public class Starter : MonoBehaviour
         
         // 这几个东西用不用执行待定
         SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
-        MonstersConfigTable.LoadByResource();
-        MonstersConfigTable.RefreshDic();
+        Units.LoadByResource();
+        Units.RefreshDic();
         
         if (enterFrontPageFirst)
         {
@@ -51,7 +51,7 @@ public class Starter : MonoBehaviour
             Stones.Add(stoneInfo);
         }
         
-        List<CharConfig> charList = MonstersConfigTable.RowToConfigList(MonstersConfigTable.rowList);
+        List<CharConfig> charList = Units.RowToConfigList(Units.rowList);
         int i = 0;
         foreach (CharConfig _CharConfig in charList)
         {

@@ -76,7 +76,7 @@ namespace mainMenu
         void AddOneNewIcon(string instanceID, bool clearButtonFeature)
         {
             UnitInfo unitInfo = MyMonsters.Get(instanceID);
-            CharConfig _CharConfig = MonstersConfigTable.GetCharConfig(unitInfo.r_id);
+            CharConfig _CharConfig = Units.GetCharConfig(unitInfo.r_id);
             if (_CharConfig == null)
             {
                 Debug.Log("MonsterID:"+ unitInfo.r_id + " doesnt exist in this version");

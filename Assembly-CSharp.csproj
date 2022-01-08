@@ -538,7 +538,7 @@
      <Compile Include="Assets\RPGTALK\Scripts\Helpers\TextWithIconSimpleText.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerText.cs" />
      <Compile Include="Assets\FightSceneSystem\Nagare\PreparingProcess.cs" />
-     <Compile Include="Assets\ImportantDefinition\Monster\MonstersConfigTable.cs" />
+     <Compile Include="Assets\ImportantDefinition\Monster\Units.cs" />
      <Compile Include="Assets\Remote\Stone\Remove.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Devices\Display\IDisplayDevice.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Debugging\GL\GLDebug.cs" />

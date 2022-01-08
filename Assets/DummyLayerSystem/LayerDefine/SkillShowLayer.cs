@@ -155,7 +155,7 @@ namespace mainMenu
         //根据锁定的技能组，角色，来打印出所有技能按钮，以及背景按钮。
         public void SkillsPrintPageRefresh(UnitInfo _watchingCharInfo)
         {
-            CharConfig CharConfig = MonstersConfigTable.GetCharConfig(_watchingCharInfo.r_id);
+            CharConfig CharConfig = Units.GetCharConfig(_watchingCharInfo.r_id);
             PageBGBtn.onClick.RemoveAllListeners();
             if (_watchingCharInfo != null && _watchingCharInfo.set != null)
             {

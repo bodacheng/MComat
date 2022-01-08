@@ -7,7 +7,7 @@ public partial class UnitCreator
     {
         //以上这个信息就包括了全部的“我的角色”信息，下面别的信息都是据此各种由此索引出来的。
         Data_Center _D;
-        CharConfig _CharConfig = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(monsterId));
+        CharConfig _CharConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(monsterId));
         if (_CharConfig == null)
         {
             Debug.Log("资源号码错误");

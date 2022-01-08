@@ -6,7 +6,7 @@ public partial class UnitCreator
     public static IEnumerator CreateRawUnit_StreamingAssets(string monsterId)
     {
         //主要就是上面这个环节不太舒服，考虑如果换成scriptableobject能不能简单些。如果换成那东西...比方说这个信息都是作为textasset保存在CharacterDataInfo里。。。这样就不会出现各种混乱的各平台地址写法问题                                                            
-        CharConfig _TempCharacterResourceInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(monsterId));
+        CharConfig _TempCharacterResourceInfo = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(monsterId));
         if (_TempCharacterResourceInfo == null)
         {
             Debug.Log("资源号码错误");

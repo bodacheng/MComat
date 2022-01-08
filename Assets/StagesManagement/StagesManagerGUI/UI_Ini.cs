@@ -64,8 +64,8 @@ public partial class StagesManagerGUI : Editor {
         
         // 关卡编辑器下，技能配置文件定走resource文件夹，所以不需要走SkillsConfigInfos.loadAllSkillConfigs(), 同理角色配置文件也是
         SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
-        MonstersConfigTable.LoadByResource();
-        MonstersConfigTable.RefreshDic();
+        Units.LoadByResource();
+        Units.RefreshDic();
         INHERENT_SkillTable.LoadINHERENTSkillsByLocalConfigFile();
     }
 }

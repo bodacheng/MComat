@@ -263,7 +263,7 @@ namespace mainMenu
             if (PosInstanceId != null)
             {
                 UnitInfo _one = MyMonsters.Get(PosInstanceId);
-                CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.r_id);
+                CharConfig charConfig = Units.GetCharConfig(_one.r_id);
                 tar.ChangeIcon(charConfig == null ? null : MonsterIconDic.Get(charConfig.RECORD_ID),
                     charConfig == null ? Zokusei.Null : charConfig._zokusei);
             }

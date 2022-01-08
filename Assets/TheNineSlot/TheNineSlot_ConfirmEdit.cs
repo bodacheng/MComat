@@ -98,7 +98,7 @@ namespace mainMenu
             
             void SkillEditConfirmAnimation()
             {
-                CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(PreScene.target._focusing.r_id);
+                CharConfig characterResourceInfo = Units.GetCharConfig(PreScene.target._focusing.r_id);
                 string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
                 EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
             }

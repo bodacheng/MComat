@@ -8,13 +8,13 @@ public partial class MasterDataTool : MonoBehaviour
 {
     public void OutputMonstersCatalog()
     {
-        MonstersConfigTable.LoadMonstersConfig();
+        Units.LoadMonstersConfig();
         PFDefine pFSKDefine = new PFDefine
         {
             CatalogVersion = "Monsters"
         };
         List<PFDefine.Item> items = new List<PFDefine.Item>();
-        List<CharConfig> charsConfigs = MonstersConfigTable.Dic.Values.ToList();
+        List<CharConfig> charsConfigs = Units.Dic.Values.ToList();
         for (int i = 0; i < charsConfigs.Count; i++)
         {
             PFDefine.Item item = new PFDefine.Item()
@@ -34,12 +34,12 @@ public partial class MasterDataTool : MonoBehaviour
 
     public void OutputMonsterStore()
     {
-        MonstersConfigTable.LoadMonstersConfig();
+        Units.LoadMonstersConfig();
         PFStoreDefine pFSKDefine = new PFStoreDefine();
         pFSKDefine.StoreId = "monster";
         List<PFStoreDefine.StoreItem> storeitems = new List<PFStoreDefine.StoreItem>();
 
-        List<CharConfig> charsConfigs = MonstersConfigTable.Dic.Values.ToList();
+        List<CharConfig> charsConfigs = Units.Dic.Values.ToList();
         for (int i = 0; i < charsConfigs.Count; i++)
         {
             PFStoreDefine.StoreItem storeitem = new PFStoreDefine.StoreItem()
@@ -65,14 +65,14 @@ public partial class MasterDataTool : MonoBehaviour
 
     public void OutputCloudScriptPart_GetAllMonsters()
     {
-        MonstersConfigTable.LoadMonstersConfig();
+        Units.LoadMonstersConfig();
         string text =
         "handlers.getMonsterTest = function (args, context) {" +
         "var request = {" +
         "\"CatalogVersion\": \"Monsters\"," +
         "\"ItemGrants\": [";
 
-        List<CharConfig> charsConfigs = MonstersConfigTable.Dic.Values.ToList();
+        List<CharConfig> charsConfigs = Units.Dic.Values.ToList();
         for (int i = 0; i < charsConfigs.Count; i++)
         {
             text +=

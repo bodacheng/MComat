@@ -83,7 +83,7 @@ namespace mainMenu
             if (viewingMode)
             {
                 types.ClearOptions();
-                foreach (string Rname in MonstersConfigTable.GetTypeList())
+                foreach (string Rname in Units.GetTypeList())
                 {
                     Dropdown.OptionData m_NewData = new Dropdown.OptionData
                     {

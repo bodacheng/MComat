@@ -45,7 +45,7 @@ public class UnitInfo
 
             List<StoneOfPlayerInfo> targets = Stones.GetEquipingStones(accUnitInfo.id);
             SkillSet set = new SkillSet();
-            CharConfig _CharConfigInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(accUnitInfo.r_id));
+            CharConfig _CharConfigInfo = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(accUnitInfo.r_id));
             if (_CharConfigInfo == null)
             {
                 Debug.Log("角色定义信息错误。monsterId：" + accUnitInfo.r_id);

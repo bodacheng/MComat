@@ -9,7 +9,7 @@ public partial class StagesManager : MonoBehaviour
     {
         string focusingtype = "human";
         
-        IDictionary<string, string> CharIDsAndNames = MonstersConfigTable.GetMonsterIDsAndNamesDic(focusingtype);
+        IDictionary<string, string> CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
         List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 3);
         List<string> charRecordIds = CharIDsAndNames.Keys.ToList();
 
@@ -42,7 +42,7 @@ public partial class StagesManager : MonoBehaviour
     {
         string focusingtype = "human";
         
-        IDictionary<string, string> CharIDsAndNames = MonstersConfigTable.GetMonsterIDsAndNamesDic(focusingtype);
+        IDictionary<string, string> CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
         List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 6);
         List<string> charRecordIds = CharIDsAndNames.Keys.ToList();
 
@@ -105,7 +105,7 @@ public partial class StagesManager : MonoBehaviour
     {
         string focusingtype = "human";
         
-        IDictionary<string, string> CharIDsAndNames = MonstersConfigTable.GetMonsterIDsAndNamesDic(focusingtype);
+        IDictionary<string, string> CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
         List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 6);
         List<string> monsterIds = CharIDsAndNames.Keys.ToList();
 

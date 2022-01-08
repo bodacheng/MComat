@@ -60,7 +60,7 @@ namespace mainMenu
                 return;
             }
             
-            CharConfig Ref = MonstersConfigTable.GetCharConfig(PreScene.target._focusing.r_id);
+            CharConfig Ref = Units.GetCharConfig(PreScene.target._focusing.r_id);
             if (Ref == null)
             {
                 Debug.Log("No this monster:" + PreScene.target._focusing.r_id);
@@ -158,7 +158,7 @@ namespace mainMenu
                     yield break;
                 }
 
-                CharConfig characterResourceInfo = MonstersConfigTable.GetCharConfig(accCharInfo.r_id);
+                CharConfig characterResourceInfo = Units.GetCharConfig(accCharInfo.r_id);
                 UnitInfo characterDataInfo = UnitInfo.GetUnitInfo(accCharInfo);
                 yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.TYPE, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
                 yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.TYPE, characterDataInfo.set, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);

@@ -18,7 +18,7 @@ namespace dataAccess
             };
             List<StoneOfPlayerInfo> targets = stones;
             SkillSet nineAndTwo = new SkillSet();
-            CharConfig _CharConfigInfo = MonstersConfigTable.RowToCharConfigInfo(MonstersConfigTable.Find_RECORD_ID(unit.r_id));
+            CharConfig _CharConfigInfo = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(unit.r_id));
             if (_CharConfigInfo == null)
             {
                 Debug.Log("角色定义信息错误。monsterId：" + unit.r_id);

@@ -116,7 +116,7 @@ public class HeroIcon : MonoBehaviour {
         if (instanceId != null)
         {
             UnitInfo _one = MyMonsters.Get(instanceId);
-            CharConfig charConfig = MonstersConfigTable.GetCharConfig(_one.r_id);
+            CharConfig charConfig = Units.GetCharConfig(_one.r_id);
             ChangeHeroIconByRID(charConfig.RECORD_ID,Icon);
         }
         else
@@ -127,7 +127,7 @@ public class HeroIcon : MonoBehaviour {
     
     public static void ChangeHeroIconByRID(string rID, HeroIcon Icon)
     {
-        CharConfig charConfig = MonstersConfigTable.GetCharConfig(rID);
+        CharConfig charConfig = Units.GetCharConfig(rID);
         Icon.ChangeIcon(charConfig == null ? null : MonsterIconDic.Get(charConfig.RECORD_ID), charConfig == null ? Zokusei.Null : charConfig._zokusei);
     }
         
@@ -151,7 +151,7 @@ public class HeroIcon : MonoBehaviour {
     public static HeroIcon ArrangeHeroIconToT(HeroIcon heroIconPretab, UnitInfo unitInfo, RectTransform T)
     {
         HeroIcon MyMemberIcon = Instantiate(heroIconPretab);
-        CharConfig charConfig = MonstersConfigTable.GetCharConfig(unitInfo.r_id);
+        CharConfig charConfig = Units.GetCharConfig(unitInfo.r_id);
         if (charConfig == null)
         {
             Debug.Log("?? : " + unitInfo.r_id);

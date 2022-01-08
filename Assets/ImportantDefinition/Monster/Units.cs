@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using Skill;
 
-public static class MonstersConfigTable
+public static class Units
 {
     public static IDictionary<string, CharConfig> Dic = new Dictionary<string, CharConfig>();
 

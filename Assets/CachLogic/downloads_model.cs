@@ -6,7 +6,7 @@ public partial class ResourceDownLoad : MonoBehaviour
 {
     private IEnumerator ModelResourceDownLoad()
     {
-        foreach (MonstersConfigTable.Row row in MonstersConfigTable.rowList)
+        foreach (Units.Row row in Units.rowList)
         {            
             //模型下载任务
             CachDownLoadMission _oneMission = new CachDownLoadMission( "CharPretabs/" + row.MONSTER_TYPE,row.REAL_NAME, 0f);

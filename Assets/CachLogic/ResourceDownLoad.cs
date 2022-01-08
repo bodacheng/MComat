@@ -58,7 +58,7 @@ public partial class ResourceDownLoad : MonoBehaviour
             case ResourceLoadMode.StreamingAssetAB:
                 break;
             case ResourceLoadMode.Resource:
-                MonstersConfigTable.LoadMonstersConfig();
+                Units.LoadMonstersConfig();
                 SkillConfigTable.LoadAllSkillConfigs();
                 PowerEstimateTable.Load();
                 LevelExpConfig.LoadLevelExpConfig();
@@ -78,7 +78,7 @@ public partial class ResourceDownLoad : MonoBehaviour
         }
 
         // CharTypeCodeAndBasicMoveSets 记录了角色配置文件所出现的所有角色type以及出现的所有基础动画包的名字。
-        foreach (MonstersConfigTable.Row row in MonstersConfigTable.rowList)
+        foreach (Units.Row row in Units.rowList)
         {
             if (!CharTypeCodeAndBasicMoveSets.ContainsKey(row.MONSTER_TYPE))
                 CharTypeCodeAndBasicMoveSets.Add(row.MONSTER_TYPE, new List<string>());
