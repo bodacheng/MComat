@@ -81,14 +81,14 @@ public class TeamEditPage : MainSceneProcess
         }
     }
     
-    readonly Vector3 screenPos = new Vector3(0.23f, 0.35f, ModelShower._nearClipPlane);
+    readonly Vector3 screenPos = new Vector3(0.23f, 0.35f, 10);
     public override void LocalUpdate()
     {
         if (!SkillShowSupporter.IfShowingSkill)
         {
-            PreScene.target.modelShower.TranslateShowingCharToDefaultPos(screenPos);
+            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
         }else{
-            PreScene.target.modelShower.CFollowCharZ();
+            ModelShower.target.CFollowCharZ();
         }
     }
 }

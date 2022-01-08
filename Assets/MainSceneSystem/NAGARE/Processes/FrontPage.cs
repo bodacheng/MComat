@@ -72,7 +72,7 @@ public class FrontPage : MainSceneProcess
             }
         }
         PreScene.target.SetFocusingUnit(focus_instanceID);//确立focusing角色
-        yield return PreScene.target.modelShower.ShowMyModel(focus_instanceID);
+        yield return ModelShower.target.ShowMyModel(focus_instanceID);
         //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
         UpperInfoBar.Open(PreScene.target.OpenSetting, () => PreScene.target.trySwitchToStep(10));
         PopupLayer.Close();
@@ -123,14 +123,14 @@ public class FrontPage : MainSceneProcess
         BigButtonRender.target.TestOff();
     }
 
-    readonly Vector3 screenPos = new Vector3(0.23f, 0.22f, ModelShower._nearClipPlane);
+    readonly Vector3 screenPos = new Vector3(0.23f, 0.22f, 10);
     public override void LocalUpdate()
     {
         if (!SkillShowSupporter.IfShowingSkill)
         {
-            PreScene.target.modelShower.TranslateShowingCharToDefaultPos(screenPos);
+            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
         }else{
-            PreScene.target.modelShower.CFollowCharZ();
+            ModelShower.target.CFollowCharZ();
         }
     }
 }

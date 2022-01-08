@@ -11,7 +11,7 @@ public class SelfFightPage : MainSceneProcess
     private SelfFightLayer selfFightLayer;
     public override void ProcessEnter()
     {
-        mainProcessRunner.RunFreely(PreScene.target.modelShower.ShowMyModel(null));
+        mainProcessRunner.RunFreely(ModelShower.target.ShowMyModel(null));
         
         UnitsLayer layer = UnitsLayer.Open();
         layer.DisplayUnitIcons(true);

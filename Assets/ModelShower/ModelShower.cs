@@ -4,56 +4,54 @@ using dataAccess;
 
 public class ModelShower : MonoBehaviour
 {
-    [Space(11)]
-    [Header("Essentials")]
-    public CameraManager _CameraManager;
+    [SerializeField] Camera _camera;
+    readonly PinchZoom pinchZoom = new PinchZoom();
+    GameObject model;
 
-    public static float _nearClipPlane = 10f;
-    
-    PinchZoom pinchZoom = new PinchZoom();
-    GameObject showingChar;
+    public static ModelShower target;
     
     void Awake()
     {
-        pinchZoom.camera = _CameraManager.GetComponent<Camera>();
+        pinchZoom.camera = _camera;
+        target = this;
     }
     
     public IEnumerator ShowMyModel(string instanceID)
     {
-        UnitInfo targetInfo = MyMonsters.Get(instanceID);
-        IEnumerator enumerator = ShowModel(targetInfo?.r_id);
-        yield return enumerator;
-        yield return enumerator.Current;
+        UnitInfo info = MyMonsters.Get(instanceID);
+        IEnumerator p = ShowModel(info?.r_id);
+        yield return p;
+        yield return p.Current;
     }
     
-    public IEnumerator ShowModel(string monsterID) 
+    public IEnumerator ShowModel(string recordID) 
     {
-        if (showingChar != null)
+        if (model != null)
         {
-            showingChar.SetActive(false);
+            model.SetActive(false);
         }
-        if (monsterID == null)
+        if (recordID == null)
         {
             yield break;
         }
         
-        IEnumerator focusingOneModel = GeneralModelPool.GetModel(monsterID, true);
-        yield return focusingOneModel;
-        if (focusingOneModel.Current == null)
+        IEnumerator p = GeneralModelPool.GetModel(recordID, true);
+        yield return p;
+        if (p.Current == null)
         {
             Debug.Log("模型错误");
             yield break;
         }
         
-        Data_Center aI_DATA_CENTER = (Data_Center)focusingOneModel.Current;        
+        Data_Center aI_DATA_CENTER = (Data_Center)p.Current;        
         aI_DATA_CENTER._ShaderManager.FlatColorForAShortTime(10f, 0, 0.5f, Color.black); // 这个短暂变色是为了掩盖一些模型刚加载瞬间有些渲染没到位的尴尬。比如裙子摇晃 
-        showingChar = aI_DATA_CENTER.WholeT.gameObject;
-        showingChar.SetActive(true);
-        showingChar.transform.parent = null;
-        showingChar.transform.position = CalculateShowModelPosition(new Vector3(0.2f, 0.4f, _nearClipPlane));//右
+        model = aI_DATA_CENTER.WholeT.gameObject;
+        model.SetActive(true);
+        model.transform.parent = null;
+        model.transform.position = CalculateShowModelPosition(new Vector3(0.2f, 0.4f, 10));//右
         //showingChar.transform.LookAt(_CameraManager.transform, Vector3.up);
-        showingChar.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
-        yield return showingChar;
+        model.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
+        yield return model;
     }
     
     Vector3 FirstPoint;
@@ -67,9 +65,9 @@ public class ModelShower : MonoBehaviour
     // 注意，整个模型的上下移动靠的是StartToEndMode相机
     public void TranslateShowingCharToDefaultPos(Vector3 screenPos)//new Vector3(0.23f, 0.3f, 3f)
     {
-        if (showingChar != null)
+        if (model != null)
         {
-            showingChar.transform.position = Vector3.Lerp(showingChar.transform.position, CalculateShowModelPosition(screenPos), Time.deltaTime * 20f);
+            model.transform.position = Vector3.Lerp(model.transform.position, CalculateShowModelPosition(screenPos), Time.deltaTime * 20f);
             if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
             {
                 //xAngle = Input.GetAxis("Mouse X");
@@ -83,14 +81,14 @@ public class ModelShower : MonoBehaviour
                 }
                 else if (Input.GetMouseButton(0))
                 {
-                    modelPOnScreen = CalculateShowModelViewportPoint(showingChar.transform.position);
+                    modelPOnScreen = CalculateShowModelViewportPoint(model.transform.position);
                     fingertoshowmodelx = Mathf.Abs(FirstPoint.x - modelPOnScreen.x) / Screen.width;
                     fingertoshowmodely = (FirstPoint.y - modelPOnScreen.y) / Screen.height;
                     if (fingertoshowmodelx < 0.3f && fingertoshowmodely < 0.3f && fingertoshowmodely > 0)
                     {
                         SecondPoint = Input.mousePosition;
                         xAngle = xAngleTemp + (FirstPoint.x - SecondPoint.x) * 180 / Screen.width;
-                        showingChar.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
+                        model.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
                     }
                 }
             }
@@ -103,14 +101,14 @@ public class ModelShower : MonoBehaviour
                 }
                 else if (Input.GetMouseButton(0))
                 {
-                    modelPOnScreen = CalculateShowModelViewportPoint(showingChar.transform.position);
+                    modelPOnScreen = CalculateShowModelViewportPoint(model.transform.position);
                     fingertoshowmodelx = Mathf.Abs(FirstPoint.x - modelPOnScreen.x)/ Screen.width;
                     fingertoshowmodely = (FirstPoint.y - modelPOnScreen.y)/ Screen.height;
                     if (fingertoshowmodelx < 0.3f && fingertoshowmodely < 0.3f && fingertoshowmodely > 0)
                     {
                         SecondPoint = Input.mousePosition;
                         xAngle = xAngleTemp + (FirstPoint.x - SecondPoint.x) * 180 / Screen.width;
-                        showingChar.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
+                        model.transform.rotation = Quaternion.Euler(0, xAngle, 0.0f);
                     }
                 }
             }
@@ -120,12 +118,12 @@ public class ModelShower : MonoBehaviour
     
     public void CFollowCharZ()
     {
-        if (showingChar != null)
+        if (model != null)
         {
-            if (Mathf.Abs(_CameraManager.transform.position.z - showingChar.transform.position.z) < _nearClipPlane)
+            if (Mathf.Abs(_camera.transform.position.z - model.transform.position.z) < 10)
             {
-                _CameraManager.transform.position = Vector3.Lerp(_CameraManager.transform.position, _CameraManager.transform.position + Vector3.forward * 
-                (_nearClipPlane - Mathf.Abs(_CameraManager.transform.position.z - showingChar.transform.position.z)),Time.deltaTime * 10f);
+                _camera.transform.position = Vector3.Lerp(_camera.transform.position, _camera.transform.position + Vector3.forward * 
+                (10 - Mathf.Abs(_camera.transform.position.z - model.transform.position.z)),Time.deltaTime * 10f);
             }
         }
     }

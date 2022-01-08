@@ -28,10 +28,6 @@ namespace mainMenu
         [Header("Positions For Show")]
         public Transform MemDetailTargetPos;
         public Transform MemDetailWatchPos;
-
-        [Space(7)] 
-        [Header("角色3D展示器")] 
-        public ModelShower modelShower;
         
         [Space(7)]
         [Header("Shader转换器")]

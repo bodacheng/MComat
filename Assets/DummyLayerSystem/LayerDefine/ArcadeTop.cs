@@ -37,7 +37,7 @@ public partial class ArcadeTop : UILayer
     public void IconButtonFeature(HeroIcon heroIcon)
     {
         // 显示模型
-        SingleThreadProcesser.backup.RunAsQueued(PreScene.target.modelShower.ShowModel(heroIcon._CharConfig.RECORD_ID));
+        SingleThreadProcesser.backup.RunAsQueued(ModelShower.target.ShowModel(heroIcon._CharConfig.RECORD_ID));
         // 显示技能组
         _NineForShow.ShowStones_DataInfo(heroIcon.unitInfo);
     }

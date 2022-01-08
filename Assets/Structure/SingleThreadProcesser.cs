@@ -1,7 +1,8 @@
 ﻿using System.Collections;
-using UnityEngine;
-using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class SingleThreadProcesser : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class SingleThreadProcesser : MonoBehaviour
         await QueueRun(origin);
     }
 
-    public async void RunAsQueued(UniTask origin, UnityEngine.Events.UnityAction afterToDo)
+    public async void RunAsQueued(UniTask origin, UnityAction afterToDo)
     {
         await QueueRun(origin);
         afterToDo();
@@ -38,11 +39,11 @@ public class SingleThreadProcesser : MonoBehaviour
     /// <returns></returns>
     public async UniTask RunAsQueued_UniTask(IEnumerator _process)
     {
-        UniTask origin = EnumeratorAsyncExtensions.ToUniTask(_process, this);
+        UniTask origin = _process.ToUniTask(this);
         await QueueRun(origin);
     }
 
-    public async UniTask RunAsQueued_UniTask(List<IEnumerator> _processes, UnityEngine.Events.UnityAction afterToDo)
+    public async UniTask RunAsQueued_UniTask(List<IEnumerator> _processes, UnityAction afterToDo)
     {
         for (int i = 0; i < _processes.Count; i++)
         {
@@ -81,7 +82,7 @@ public class SingleThreadProcesser : MonoBehaviour
 
     public void RunFreely(IEnumerator _process)
     {
-        UniTask task = EnumeratorAsyncExtensions.ToUniTask(_process, this);
+        UniTask task = _process.ToUniTask(this);
         task.Forget();
     }
 }

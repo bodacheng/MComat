@@ -11,11 +11,11 @@ public class StoneMerge : MainSceneProcess
         EelementsInherit(PreScene.target);
     }
     
-    public IEnumerator EnterProcess()
+    IEnumerator EnterProcess()
     {
         stoneMergeLayer = StoneMergeLayer.Open();
         
-        yield return PreScene.target.modelShower.ShowMyModel(null);
+        yield return ModelShower.target.ShowMyModel(null);
         
         stoneMergeLayer.stoneBox.AddFeatureToCells(stoneMergeLayer.CellFeature_MergeMode);
         stoneMergeLayer.stoneBox.RestFilter();
