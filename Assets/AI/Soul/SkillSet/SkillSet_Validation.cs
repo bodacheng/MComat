@@ -42,49 +42,49 @@ public partial class SkillSet
         SkillConfig _SkillConfigC1 = SkillConfigTable.GetSkillConfig(C1skillid);
         SkillConfig _SkillConfigC2 = SkillConfigTable.GetSkillConfig(C2skillid);
         SkillConfig _SkillConfigC3 = SkillConfigTable.GetSkillConfig(C3skillid);
-        List<SkillConfig> allnineskill = new List<SkillConfig>();
+        List<SkillConfig> skillConfigs = new List<SkillConfig>();
         
         if (_SkillConfigA1 != null)
-            allnineskill.Add(_SkillConfigA1);
+            skillConfigs.Add(_SkillConfigA1);
         if (_SkillConfigA2 != null)
-            allnineskill.Add(_SkillConfigA2);
+            skillConfigs.Add(_SkillConfigA2);
         if (_SkillConfigA3 != null)
-            allnineskill.Add(_SkillConfigA3);
+            skillConfigs.Add(_SkillConfigA3);
         if (_SkillConfigB1 != null)
-            allnineskill.Add(_SkillConfigB1);
+            skillConfigs.Add(_SkillConfigB1);
         if (_SkillConfigB2 != null)
-            allnineskill.Add(_SkillConfigB2);
+            skillConfigs.Add(_SkillConfigB2);
         if (_SkillConfigB3 != null)
-            allnineskill.Add(_SkillConfigB3);
+            skillConfigs.Add(_SkillConfigB3);
         if (_SkillConfigC1 != null)
-            allnineskill.Add(_SkillConfigC1);
+            skillConfigs.Add(_SkillConfigC1);
         if (_SkillConfigC2 != null)
-            allnineskill.Add(_SkillConfigC2);
+            skillConfigs.Add(_SkillConfigC2);
         if (_SkillConfigC3 != null)
-            allnineskill.Add(_SkillConfigC3);
+            skillConfigs.Add(_SkillConfigC3);
             
-        int wholeskillpoint = 0;
-        for (int i = 0; i < allnineskill.Count; i++)
+        int balancePoint = 0;
+        foreach (var t in skillConfigs)
         {
-            switch (allnineskill[i].SP_LEVEL)
+            switch (t.SP_LEVEL)
             {
                 case 0:
-                    wholeskillpoint += 10;
+                    balancePoint += 10;
                     break;
                 case 1:
-                    wholeskillpoint -= 10;
+                    balancePoint -= 10;
                     break;
                 case 2:
-                    wholeskillpoint -= 20;
+                    balancePoint -= 20;
                     break;
                 case 3:
-                    wholeskillpoint -= 30;
+                    balancePoint -= 30;
                     break;
                 case -1:
                     break;
             }
         }
-        return wholeskillpoint;
+        return balancePoint;
     }
     
     // 查看技能组内是否有重复 false :不合法，有重复  true：合法，无重复

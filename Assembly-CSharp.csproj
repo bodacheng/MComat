@@ -325,6 +325,7 @@
      <Compile Include="Assets\Structure\MultiDictionary.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\ArcadeFightResult.cs" />
      <Compile Include="Assets\MissionWatcher\MissionWatcher.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\SkillEditLayer\AutoEdit.cs" />
      <Compile Include="Assets\Remote\Account\Account.cs" />
      <Compile Include="Assets\CachLogic\downloads_anim.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\FlickGesture.cs" />
@@ -792,7 +793,6 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
-     <Compile Include="Assets\DummyLayerSystem\LayerDefine\SkillEditLayer\AutoEdit.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />
