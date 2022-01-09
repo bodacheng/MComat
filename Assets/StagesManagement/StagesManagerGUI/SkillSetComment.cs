@@ -6,7 +6,7 @@ public partial class StagesManagerGUI : Editor {
 
     SkillSet.SkillEditError se;
     
-    void SkillSetComent()
+    void SkillSetComment()
     {
         // 技能组评价
         GUILayout.BeginHorizontal();
@@ -33,6 +33,10 @@ public partial class StagesManagerGUI : Editor {
                 Title.normal.textColor = Color.red;
                 EditorGUILayout.LabelField("必杀普攻不平衡", Title);
             break;
+            case SkillSet.SkillEditError.NotFull:
+                Title.normal.textColor = Color.red;
+                EditorGUILayout.LabelField("不满", Title);
+                break;
         }
         Title.normal.textColor = Color.black;
         GUILayout.EndHorizontal();

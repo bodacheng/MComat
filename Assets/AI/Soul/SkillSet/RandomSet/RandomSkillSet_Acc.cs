@@ -125,9 +125,6 @@ public partial class SkillSet
         {
             return skillSet;
         }
-        else
-        {
-            return RandomSkillSetRec(type, skillSet, filterForm, targetSlot + 1, origin, baseOnAcc);
-        }
+        return RandomSkillSetRec(type, skillSet, filterForm, targetSlot + 1, origin, baseOnAcc);
     }
 }

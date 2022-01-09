@@ -75,7 +75,7 @@ public partial class StagesManagerGUI : Editor {
         }
                 
         // 技能组评价
-        SkillSetComent();
+        SkillSetComment();
         
         if (targetSlot == 0)
             goto A;

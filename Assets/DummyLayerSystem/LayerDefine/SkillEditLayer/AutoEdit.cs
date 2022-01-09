@@ -16,7 +16,7 @@ public partial class SkillEditLayer : UILayer
 
         if (targetSkillSet == null)
         {
-            NineSlot.ValidationWarn(SkillSet.SkillEditError.UnableToFinish, PreScene.target._focusing.id);
+            // 这里必须有某些其他处理（比如不让按钮显示？）
         }
         else
         {

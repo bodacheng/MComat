@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using dataAccess;
 using UnityEngine;
-using Api.Dto.Model;
 using mainMenu;
 using Skill;
 
@@ -21,51 +20,51 @@ public partial class SkillSet
         return nineAndTwo;
     }
 
-    static SkillSet SkillSetRandomFix(string focusingtype, SkillSet nineAndTwo, int targetSlot, bool baseOnAcc)
+    static SkillSet SkillSetRandomFix(string type, SkillSet nineAndTwo, int targetSlot, bool baseOnAcc)
     {
         if (targetSlot == 10)
         {
             return nineAndTwo;
         }
 
-        string skillid = null;
+        string skillId = null;
         switch (targetSlot)
         {
             case 1:
-                skillid = nineAndTwo.a1;
+                skillId = nineAndTwo.a1;
                 break;
             case 2:
-                skillid = nineAndTwo.a2;
+                skillId = nineAndTwo.a2;
                 break;
             case 3:
-                skillid = nineAndTwo.a3;
+                skillId = nineAndTwo.a3;
                 break;
             case 4:
-                skillid = nineAndTwo.b1;
+                skillId = nineAndTwo.b1;
                 break;
             case 5:
-                skillid = nineAndTwo.b2;
+                skillId = nineAndTwo.b2;
                 break;
             case 6:
-                skillid = nineAndTwo.b3;
+                skillId = nineAndTwo.b3;
                 break;
             case 7:
-                skillid = nineAndTwo.c1;
+                skillId = nineAndTwo.c1;
                 break;
             case 8:
-                skillid = nineAndTwo.c2;
+                skillId = nineAndTwo.c2;
                 break;
             case 9:
-                skillid = nineAndTwo.c3;
+                skillId = nineAndTwo.c3;
                 break;
         }
 
         // 已经有技能石的格子不做修改
-        if (skillid != null)
-            return SkillSetRandomFix(focusingtype, nineAndTwo, targetSlot + 1, baseOnAcc);
+        if (skillId != null)
+            return SkillSetRandomFix(type, nineAndTwo, targetSlot + 1, baseOnAcc);
 
-        skillid = null;
-
+        skillId = null;
+        
         SkillStonesBox.StoneFilterForm filterForm;
 
         if (targetSlot == 7)
@@ -77,7 +76,7 @@ public partial class SkillSet
             {
                 filterForm = new SkillStonesBox.StoneFilterForm
                 {
-                    type = focusingtype,
+                    type = type,
                     exType = new int[1] { 0 },
                     close = false,
                     near = false,
@@ -89,7 +88,7 @@ public partial class SkillSet
 
         filterForm = new SkillStonesBox.StoneFilterForm
         {
-            type = focusingtype,
+            type = type,
             exType = RemainSlotSPLevelCal(nineAndTwo).ToArray(),
             close = false,
             near = false,
@@ -108,7 +107,7 @@ public partial class SkillSet
                 Debug.Log("无法为" + targetSlot + "找到合适技能石");
                 return null;
             }
-            skillid = stoneInfoModel.skillId;
+            skillId = stoneInfoModel.skillId;
         }
         else
         {
@@ -118,53 +117,47 @@ public partial class SkillSet
                 Debug.Log("无法为" + targetSlot + "找到合适技能石");
                 return null;
             }
-            skillid = skid;
+            skillId = skid;
         }
 
         switch (targetSlot)
         {
             case 1:
-                nineAndTwo.a1 = skillid;
+                nineAndTwo.a1 = skillId;
                 break;
             case 2:
-                nineAndTwo.a2 = skillid;
+                nineAndTwo.a2 = skillId;
                 break;
             case 3:
-                nineAndTwo.a3 = skillid;
+                nineAndTwo.a3 = skillId;
                 break;
             case 4:
-                nineAndTwo.b1 = skillid;
+                nineAndTwo.b1 = skillId;
                 break;
             case 5:
-                nineAndTwo.b2 = skillid;
+                nineAndTwo.b2 = skillId;
                 break;
             case 6:
-                nineAndTwo.b3 = skillid;
+                nineAndTwo.b3 = skillId;
                 break;
             case 7:
-                nineAndTwo.c1 = skillid;
+                nineAndTwo.c1 = skillId;
                 break;
             case 8:
-                nineAndTwo.c2 = skillid;
+                nineAndTwo.c2 = skillId;
                 break;
             case 9:
-                nineAndTwo.c3 = skillid;
+                nineAndTwo.c3 = skillId;
                 break;
         }
         if (targetSlot == 9)
         {
-            SkillSet.SkillEditError valR = SkillSet.CheckEdit(
+            SkillEditError valR = CheckEdit(
                 nineAndTwo.a1, nineAndTwo.a2, nineAndTwo.a3,
                 nineAndTwo.b1, nineAndTwo.b2, nineAndTwo.b3,
                 nineAndTwo.c1, nineAndTwo.c2, nineAndTwo.c3);
-            if (valR == SkillEditError.Perfect)
-                return nineAndTwo;
-            else
-                return null;
+            return valR == SkillEditError.Perfect ? nineAndTwo : null;
         }
-        else
-        {
-            return SkillSetRandomFix(focusingtype, nineAndTwo, targetSlot + 1, baseOnAcc);
-        }
+        return SkillSetRandomFix(type, nineAndTwo, targetSlot + 1, baseOnAcc);
     }
 }

@@ -20,36 +20,36 @@ namespace mainMenu
         {
             List<StoneOfPlayerInfo> equipingStones = Stones.GetEquipingStones(monsterOfPlayerId);
             string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;
-            for (int i = 0; i < equipingStones.Count; i++)
+            foreach (var t in equipingStones)
             {
-                switch (equipingStones[i].inUsingSkillSlot)
+                switch (t.inUsingSkillSlot)
                 {
                     case "1":
-                        A1 = (equipingStones[i].skillId != SkillID) ? equipingStones[i].skillId : "-1";
+                        A1 = (t.skillId != SkillID) ? t.skillId : "-1";
                         break;
                     case "2":
-                        A2 = (equipingStones[i].skillId != SkillID) ? equipingStones[i].skillId : "-1";
+                        A2 = (t.skillId != SkillID) ? t.skillId : "-1";
                         break;
                     case "3":
-                        A3 = (equipingStones[i].skillId != SkillID) ? equipingStones[i].skillId : "-1";
+                        A3 = (t.skillId != SkillID) ? t.skillId : "-1";
                         break;
                     case "4":
-                        B1 = (equipingStones[i].skillId != SkillID) ? equipingStones[i].skillId : "-1";
+                        B1 = (t.skillId != SkillID) ? t.skillId : "-1";
                         break;
                     case "5":
-                        B2 = (equipingStones[i].skillId != SkillID) ? equipingStones[i].skillId : "-1";
+                        B2 = (t.skillId != SkillID) ? t.skillId : "-1";
                         break;
                     case "6":
-                        B3 = (equipingStones[i].skillId != SkillID) ? equipingStones[i].skillId : "-1";
+                        B3 = (t.skillId != SkillID) ? t.skillId : "-1";
                         break;
                     case "7":
-                        C1 = (equipingStones[i].skillId != SkillID) ? equipingStones[i].skillId : "-1";
+                        C1 = (t.skillId != SkillID) ? t.skillId : "-1";
                         break;
                     case "8":
-                        C2 = (equipingStones[i].skillId != SkillID) ? equipingStones[i].skillId : "-1";
+                        C2 = (t.skillId != SkillID) ? t.skillId : "-1";
                         break;
                     case "9":
-                        C3 = (equipingStones[i].skillId != SkillID) ? equipingStones[i].skillId : "-1";
+                        C3 = (t.skillId != SkillID) ? t.skillId : "-1";
                         break;
                 }
             }

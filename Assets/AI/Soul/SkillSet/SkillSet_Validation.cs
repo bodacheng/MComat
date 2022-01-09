@@ -8,13 +8,20 @@ public partial class SkillSet
         UnBalanced,
         RepeatedSkill,
         NoNormalStart,
-        UnableToFinish,
+        NotFull,
         Perfect
     }
     
     // 判断技能组是否合法。包括了首技能有无普攻，有无重复，总点数是否平衡 这三方面
     public static SkillEditError CheckEdit(string A1, string A2, string A3, string B1, string B2, string B3, string C1, string C2, string C3)
     {
+        if (A1 == null || A2 == null || A3 == null ||
+            B1 == null || B2 == null || B3 == null || 
+            C1 == null || C2 == null || C3 == null)
+        {
+            return SkillEditError.NotFull;
+        }
+        
         // 第一列技能必须有普通技能
         if (CheckStartSKills(A1, B1, C1) == SkillEditError.NoNormalStart)
         {
@@ -108,7 +115,7 @@ public partial class SkillSet
         {
             if (i != checkSame.Count - 1 && SkillConfigTable.GetSkillConfig(checkSame[i]) != null)
             {
-                for (int y = i + 1; y < checkSame.Count; y++)
+                for (var y = i + 1; y < checkSame.Count; y++)
                 {
                     if (checkSame[i] == checkSame[y])
                         return false;
@@ -134,7 +141,7 @@ public partial class SkillSet
             NormalSkillsOfAList.Add(_SkillConfigB1.REAL_NAME);
         if (_SkillConfigC1 != null && _SkillConfigC1.SP_LEVEL == 0)
             NormalSkillsOfAList.Add(_SkillConfigC1.REAL_NAME);
-            
+        
         return NormalSkillsOfAList.Count == 0 ? SkillEditError.NoNormalStart : SkillEditError.Perfect;
     }
 }
