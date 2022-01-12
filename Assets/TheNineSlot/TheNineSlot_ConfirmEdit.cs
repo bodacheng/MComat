@@ -10,14 +10,10 @@ namespace mainMenu
     {
         public void UpdateStonesBaseOnSlots(UnitInfo info)
         {
-            if (CheckEditBasedOnCurrent() != SkillSet.SkillEditError.Perfect)
-            {
-                return;
-            }
-            List<StoneOfPlayerInfo> equiping = Stones.GetEquipingStones(info.id);
+            var equiping = Stones.GetEquipingStones(info.id);
             // slot stoneid
             IDictionary<string, string> beforeDic = new Dictionary<string, string>();
-            for (int i = 0; i < equiping.Count; i++)
+            for (var i = 0; i < equiping.Count; i++)
             {
                 StoneOfPlayerInfo stone = Stones.Get(equiping[i].InstanceId);
                 if (stone.inUsingSkillSlot != null)
@@ -57,7 +53,7 @@ namespace mainMenu
             // k v : stoneid , equipingMonster, slot
             IDictionary<string, Tuple<string, string>> ToEditStones = new Dictionary<string, Tuple<string, string>>();
 
-            for (int i = 1; i < 10; i++)
+            for (var i = 1; i < 10; i++)
             {
                 if (beforeDic[i.ToString()] != afterDic[i.ToString()])
                 {
@@ -98,18 +94,18 @@ namespace mainMenu
             
             void SkillEditConfirmAnimation()
             {
-                UnitConfig characterResourceInfo = Units.GetUnitConfig(PreScene.target._focusing.r_id);
-                string personalEffectsPath = FightGlobalSetting.EffectPathDefine(characterResourceInfo._zokusei);
-                EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, CaculateShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
+                UnitConfig unitConfig = Units.GetUnitConfig(PreScene.target._focusing.r_id);
+                string personalEffectsPath = FightGlobalSetting.EffectPathDefine(unitConfig._zokusei);
+                EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, ShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
             }
             
             Vector3 tempV;
-            Vector3 CaculateShowModelPosition(Vector3 screenP)//这个环节要说有什么问题的话，你那个主界面场景怎么确保总是能把射线找到地面呢。。。
+            Vector3 ShowModelPosition(Vector3 screenP)//这个环节要说有什么问题的话，你那个主界面场景怎么确保总是能把射线找到地面呢。。。
             {
                 tempV = CameraManager._camera.ViewportToWorldPoint(screenP);
                 return tempV;
             }
-
+            
             void error()
             {
                 ReadANineAndTwo(info);

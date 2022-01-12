@@ -7,15 +7,15 @@ using Skill;
 public partial class SkillSet
 {
     // 根据账户内拥有的技能石来补完当前九宫格
-    public static SkillSet FixSkillSet(string type, SkillSet originSkillSet, int skilllevel, bool baseOnAcc)
+    public static SkillSet FixSkillSet(string type, SkillSet originSkillSet, int level, bool baseOnAcc)
     {
-        SkillSet nineAndTwo = SkillSetRandomFix(type, originSkillSet, 1, baseOnAcc);
+        var nineAndTwo = SkillSetRandomFix(type, originSkillSet, 1, baseOnAcc);
         if (nineAndTwo == null)
         {
             Debug.Log("无法根据现在的技能石安排合法补全九宫格");
             return null;
         }
-        nineAndTwo.SetSkillLevel(skilllevel);
+        nineAndTwo.SetSkillLevel(level);
         nineAndTwo.SortNineAndTwo();
         return nineAndTwo;
     }
@@ -60,13 +60,13 @@ public partial class SkillSet
         }
 
         // 已经有技能石的格子不做修改
-        if (skillId != null)
+        if (SkillConfigTable.GetSkillConfig(skillId) != null)
             return SkillSetRandomFix(type, nineAndTwo, targetSlot + 1, baseOnAcc);
 
         skillId = null;
         
         SkillStonesBox.StoneFilterForm filterForm;
-
+        
         if (targetSlot == 7)
         {
             // 第一列技能必须有普通技能
@@ -97,11 +97,10 @@ public partial class SkillSet
 
         A:
 
-        List<string> exceptSKIds = nineAndTwo.SkillIDList();
-
+        var exceptSKIds = nineAndTwo.SkillIDList();
         if (baseOnAcc)
         {
-            StoneOfPlayerInfo stoneInfoModel = Stones.SearchStoneForRandomSet(filterForm, exceptSKIds);
+            var stoneInfoModel = Stones.SearchStoneForRandomSet(filterForm, exceptSKIds);
             if (stoneInfoModel == null) // 如果账户已经没有符合要求的石头
             {
                 Debug.Log("无法为" + targetSlot + "找到合适技能石");
@@ -111,7 +110,7 @@ public partial class SkillSet
         }
         else
         {
-            string skid = RandomSkillIDOfStone(filterForm, exceptSKIds);
+            var skid = RandomSkillIDOfStone(filterForm, exceptSKIds);
             if (skid == null) // 如果账户已经没有符合要求的石头
             {
                 Debug.Log("无法为" + targetSlot + "找到合适技能石");
@@ -156,6 +155,9 @@ public partial class SkillSet
                 nineAndTwo.a1, nineAndTwo.a2, nineAndTwo.a3,
                 nineAndTwo.b1, nineAndTwo.b2, nineAndTwo.b3,
                 nineAndTwo.c1, nineAndTwo.c2, nineAndTwo.c3);
+            
+            Debug.Log(nineAndTwo + " ;" + valR);
+            
             return valR == SkillEditError.Perfect ? nineAndTwo : null;
         }
         return SkillSetRandomFix(type, nineAndTwo, targetSlot + 1, baseOnAcc);

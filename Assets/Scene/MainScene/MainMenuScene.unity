@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b763fdad06c4a899f0f2e39b2541ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _CameraManager: {fileID: 317512013}
+  _camera: {fileID: 317512011}
 --- !u!4 &85698364
 Transform:
   m_ObjectHideFlags: 0
@@ -23462,7 +23462,6 @@ MonoBehaviour:
   FxCamera: {fileID: 3333130315161903285}
   MemDetailTargetPos: {fileID: 2108180226}
   MemDetailWatchPos: {fileID: 580008789}
-  modelShower: {fileID: 85698363}
   _SwapAllModelShader: {fileID: 977937446}
   audioSource: {fileID: 3333130315161903288}
   stonesTempContainer: {fileID: 531992322}

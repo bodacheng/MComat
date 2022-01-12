@@ -15,13 +15,6 @@ public partial class SkillSet
     // 判断技能组是否合法。包括了首技能有无普攻，有无重复，总点数是否平衡 这三方面
     public static SkillEditError CheckEdit(string A1, string A2, string A3, string B1, string B2, string B3, string C1, string C2, string C3)
     {
-        if (A1 == null || A2 == null || A3 == null ||
-            B1 == null || B2 == null || B3 == null || 
-            C1 == null || C2 == null || C3 == null)
-        {
-            return SkillEditError.NotFull;
-        }
-        
         // 第一列技能必须有普通技能
         if (CheckStartSKills(A1, B1, C1) == SkillEditError.NoNormalStart)
         {
@@ -31,6 +24,19 @@ public partial class SkillSet
         if (!CheckRepeat(A1, A2, A3, B1, B2, B3, C1, C2, C3))
         {
             return SkillEditError.RepeatedSkill;
+        }
+        
+        bool hasStone(string skillID)
+        {
+            var skillConfig = SkillConfigTable.GetSkillConfig(skillID);
+            return skillConfig != null;
+        }
+        
+        if (!(hasStone(A1) && hasStone(A2) && hasStone(A3) &&
+              hasStone(B1) && hasStone(B2) && hasStone(B3) &&
+              hasStone(C1) && hasStone(C2) && hasStone(C3)))
+        {
+            return SkillEditError.NotFull;
         }
         
         int wholePoint = SkillBalancePoint(A1, A2, A3, B1, B2, B3, C1, C2, C3);

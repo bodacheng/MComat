@@ -13,7 +13,7 @@ public partial class SkillEditLayer : UILayer
         UnitConfig unitConfig = Units.GetUnitConfig(info.r_id);
         SkillSet now = NineSlot.GetCurrentNineAndTwo();
         SkillSet targetSkillSet = SkillSet.FixSkillSet(unitConfig.TYPE, now, 1, true);
-
+        
         if (targetSkillSet == null)
         {
             // 这里必须有某些其他处理（比如不让按钮显示？）

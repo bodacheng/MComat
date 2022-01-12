@@ -108,6 +108,7 @@ public partial class SkillEditLayer : UILayer
             var popupLayer = PopupLayer.Open(PreScene.target.T);
             popupLayer.ArrangeConfirmWindow(SkillEditConfirm, warn);
         }
+        
         NineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
         NineSlot.ResetButton.onClick.AddListener(NineSlot.ResetNineSlot);
         NineSlot.removeAllBtn.onClick.AddListener(NineSlot.ClearSkillEquip);

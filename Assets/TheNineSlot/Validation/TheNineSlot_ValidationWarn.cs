@@ -27,6 +27,9 @@ namespace mainMenu
                 case SkillSet.SkillEditError.NoNormalStart:
                     _ValiWarn.text = "第一竖列必须有一个非必杀技";
                     break;
+                case SkillSet.SkillEditError.NotFull:
+                    _ValiWarn.text = " 没填满";
+                    break;
             }
         }
     }
