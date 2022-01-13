@@ -1,5 +1,4 @@
-﻿using Api.Dto.Model;
-using Skill;
+﻿using Skill;
 using System.Collections.Generic;
 using UnityEngine;
 using dataAccess;
@@ -20,7 +19,7 @@ namespace mainMenu
         }
         
         // 获取当前九宫格内技能石存档id, 长度为当前九宫格内技能石数量
-        public List<string> GetUsingStonesId()
+        List<string> GetUsingStonesId()
         {
             A1DragAndDropCell.UpdateMyItem();
             A2DragAndDropCell.UpdateMyItem();
@@ -118,10 +117,11 @@ namespace mainMenu
         
         void ShowNineSlotExSurplus(int wholePoint)
         {
-            int pointremain = wholePoint / 10;
-            for (int i = 0; i < remainCharges.Count; i++)
+            int pointRemain = wholePoint / 10;
+            var i = 0;
+            for (i = 0; i < remainCharges.Count; i++)
             {
-                if (i + 1 <= pointremain)
+                if (i + 1 <= pointRemain)
                 {
                     remainCharges[i].SetActive(true);
                 }
@@ -131,20 +131,26 @@ namespace mainMenu
                 }
             }
             
-            for (int i = 0; i < burdenCharges.Count; i++)
+            var tempCount = 0;
+            for (i = 0; i < burdenCharges.Count; i++)
             {
-                if (-i - 1 >= pointremain)
+                if (-i - 1 >= pointRemain)
                 {
                     burdenCharges[i].SetActive(true);
+                    tempCount++;
                 }
                 else
                 {
                     burdenCharges[i].SetActive(false);
                 }
             }
+            
+            float temp = tempCount / (float)burdenCharges.Count;
+            overHeatBar.gameObject.SetActive(tempCount > 0);
+            overHeatBar.value = temp;
         }
 
-        public void RefreshCurrentHpBasedOnNineSlots()
+        void RefreshCurrentHpBasedOnNineSlots()
         {
             List<StoneOfPlayerInfo> stonelist = GetMyStonesOnNineSlot();
             List<int> level = new List<int>();
@@ -156,10 +162,10 @@ namespace mainMenu
                 skillIDs.Add(one.skillId);
             }
             
-            _HP.text = "HP:" + INI_Hp(skillIDs, level).ToString();
+            _HP.text = "HP:" + INI_Hp(skillIDs, level);
         }
                 
-        public static float INI_Hp(List<string> skillIDs, List<int> level)
+        static float INI_Hp(List<string> skillIDs, List<int> level)
         {
             float WholeHP = 0;
             for (int index = 0; index < skillIDs.Count; index++)

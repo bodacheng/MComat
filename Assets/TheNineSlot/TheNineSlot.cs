@@ -41,9 +41,10 @@ namespace mainMenu
         [Space(7)]
         [Header("EXPoint+")]
         public List<GameObject> remainCharges;//固定是9个长度
-        [Space(7)]
         [Header("EXPoint-")]
         public List<GameObject> burdenCharges;//固定是9个长度
+        [Header("over heat bar")] 
+        public Slider overHeatBar;
         
         [Space(5)]
         [Header("选中框")]
@@ -195,6 +196,7 @@ namespace mainMenu
         
          void RefreshNineSlotColors()
          {
+            return;
             foreach (SkillStoneSlot _slot in allSlot)
             {
                 SKStoneItem sKStoneItem = _slot._DragAndDropCell.GetItem();
