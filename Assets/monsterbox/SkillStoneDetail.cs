@@ -33,19 +33,10 @@ namespace mainMenu
         
         [Space(7)]
         [Header("当前技能等级")]
-        public Slider expValue;
-        public Text StoneTargetLevel;
-        
-        static GameObject Marker;
-        
-        void Awake()
-        {
-            if (Marker == null)
-            {
-                Marker = new GameObject("Object Pools Container");
-                DontDestroyOnLoad(Marker);
-            }
-        }
+        [SerializeField] Slider expValue;
+        [SerializeField] Text StoneTargetLevel;
+
+        [SerializeField] Transform tempT;
         
         // 额外生成一个技能石图像
         void IconForShow(string skillID)
@@ -65,7 +56,7 @@ namespace mainMenu
             }
             else
             {
-                item.transform.SetParent(Marker.transform);
+                item.transform.SetParent(tempT);
             }
         }
         

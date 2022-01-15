@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TouchScript.Gestures;
-using Michsky.UI.Shift;
 
 namespace mainMenu
 {
@@ -30,15 +29,12 @@ namespace mainMenu
         [Header("Random all")]
         public Button randomBtn;
         
-        [Space(1)]
         [Header("技能石编辑确认")]
         public Button ConfirmSkillChangeButton;
         
-        [Space(1)]
         [Header("技能石编辑确认")]
         public Button ResetButton;
         
-        [Space(7)]
         [Header("EXPoint+")]
         public List<GameObject> remainCharges;//固定是9个长度
         [Header("EXPoint-")]
@@ -46,13 +42,8 @@ namespace mainMenu
         [Header("over heat bar")] 
         public Slider overHeatBar;
         
-        [Space(5)]
         [Header("选中框")]
         public GameObject SelectedFrame;
-
-        [Space(5)]
-        [Header("UIManager 就是有个UI插件自带的一套东西")]
-        public UIManager uIManager;// 实时控制确认按钮颜色
         
         SkillStoneSlot A1Slot, A2Slot, A3Slot;
         SkillStoneSlot B1Slot, B2Slot, B3Slot;
@@ -184,13 +175,7 @@ namespace mainMenu
             RefreshNineSlotColors();
             
             SkillSet.SkillEditError valR = CheckEditBasedOnCurrent();
-            if (valR != SkillSet.SkillEditError.Perfect)
-            {
-                // confirm 按钮颜色变化
-                uIManager.primaryColor = new Color(1,0,0,1);
-            }else{
-                uIManager.primaryColor = new Color(0,1,0,1);
-            }
+            ConfirmSkillChangeButton.gameObject.SetActive(valR == SkillSet.SkillEditError.Perfect);
             return full;
         }
         
