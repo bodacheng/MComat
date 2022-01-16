@@ -17,7 +17,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     /// <param name="data"></param>
     public void OnDrop(PointerEventData data)
     {
-        StoneCell sourceCell = SKStoneItem.sourceCell;
+        var sourceCell = SKStoneItem.sourceCell;
         if (SKStoneItem.dragging != null)
         {
             SKStoneItem item = SKStoneItem.draggedItem;

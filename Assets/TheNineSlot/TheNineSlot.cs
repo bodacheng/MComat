@@ -8,15 +8,12 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        [Space(5)]
         [Header("CurrentHp")]
         [SerializeField] Text _HP;
         
-        [Space(5)]
         [Header("Validation Warning")]
         [SerializeField] Text _ValiWarn;
         
-        [Space(5)]
         [Header("九格")]
         [SerializeField] StoneCell
         A1DragAndDropCell, A2DragAndDropCell, A3DragAndDropCell,
@@ -44,6 +41,9 @@ namespace mainMenu
         
         [Header("选中框")]
         public GameObject SelectedFrame;
+        
+        [Header("type特效管理")]
+        public SkillStoneBoxTabEffectsManager _tabEffects;
         
         SkillStoneSlot A1Slot, A2Slot, A3Slot;
         SkillStoneSlot B1Slot, B2Slot, B3Slot;
@@ -181,6 +181,13 @@ namespace mainMenu
         
          void RefreshNineSlotColors()
          {
+            foreach (var _slot in allSlot)
+            {
+                var item = _slot._DragAndDropCell.GetItem();
+                var worldPos = PosCal.GetWorldPos(PreScene.target.FxCamera, _slot._DragAndDropCell.GetComponent<RectTransform>(), 5f);
+                _tabEffects.RefreshSlotEffect(_slot.num, worldPos, item != null ? item._SkillConfig.SP_LEVEL : -1);
+            }
+            
             return;
             foreach (SkillStoneSlot _slot in allSlot)
             {

@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Skill;
 using dataAccess;
-using Api.Dto.Model;
 
 /// <summary>
 /// Drag and Drop item.

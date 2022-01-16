@@ -15,10 +15,11 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                         if (to.myDadItem == null)
                         {
                             SVCenter.MoveItemFromTo(from, to);
+                            break;
                         }else{
                             SVCenter.SwapItemFromTo(from, to);
+                            break;
                         }
-                    break;
                 }
             break;
             case CellPhase.SKLevelUpMSlot:

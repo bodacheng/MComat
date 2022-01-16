@@ -49,7 +49,7 @@ public partial class SkillEditLayer : UILayer
             returnValue.StonesBox.AddFeatureToCells(returnValue.CellFeature_SkillShowMode);
         }
         
-        returnValue.StonesBox._SkillStoneBoxTabEffectsManager.SwitchZokusei
+        returnValue.StonesBox._tabEffects.SwitchZokusei
         (
             _CharConfig._zokusei
         );
@@ -67,7 +67,7 @@ public partial class SkillEditLayer : UILayer
         if (layer != null)
         {
             SkillEditLayer se = (SkillEditLayer)layer;
-            se.StonesBox._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
+            se.StonesBox._tabEffects.CloseShowingZokuseiTagEffects();
         }
         UILayerLoader.Remove("SkillEditLayer");
     }
@@ -122,7 +122,7 @@ public partial class SkillEditLayer : UILayer
         
         // 表现系
         UnitConfig unitConfig = Units.GetUnitConfig(PreScene.target._focusing.r_id);
-        StonesBox._SkillStoneBoxTabEffectsManager.SwitchZokusei
+        StonesBox._tabEffects.SwitchZokusei
         (
             unitConfig._zokusei
         );

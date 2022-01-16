@@ -50,7 +50,7 @@ public class StoneListLayer : UILayer
         }
         returnValue = UILayerLoader.Load(PreScene.target.T,"StoneListLayer") as StoneListLayer;
         returnValue.box.GenerateCells();
-        returnValue.box._SkillStoneBoxTabEffectsManager.SwitchZokusei
+        returnValue.box._tabEffects.SwitchZokusei
         (
             Zokusei.blueMagic
         );
@@ -69,7 +69,7 @@ public class StoneListLayer : UILayer
         if (returnValue != null)
         {
             returnValue._skillStoneDetail.Clear();
-            returnValue.box._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
+            returnValue.box._tabEffects.CloseShowingZokuseiTagEffects();
         }
         UILayerLoader.Remove("StoneListLayer");
     }

@@ -4482,7 +4482,7 @@ MonoBehaviour:
   EX1Tab: {fileID: 2523835564021365803}
   EX2Tab: {fileID: 2523835563178123597}
   EX3Tab: {fileID: 2523835563219932917}
-  _SkillStoneBoxTabEffectsManager: {fileID: 2523835562817921893}
+  _tabEffects: {fileID: 2523835562817921893}
   closeCheckBox: {fileID: 2523835563422896331}
   nearCheckBox: {fileID: 2523835564484449973}
   farCheckBox: {fileID: 2523835564471563446}
@@ -5187,6 +5187,7 @@ MonoBehaviour:
   - {fileID: 8916191561049305294}
   overHeatBar: {fileID: 5707396916600200279}
   SelectedFrame: {fileID: 2523835564432070104}
+  _tabEffects: {fileID: 2523835562817921893}
 --- !u!1 &2523835563641974155
 GameObject:
   m_ObjectHideFlags: 0

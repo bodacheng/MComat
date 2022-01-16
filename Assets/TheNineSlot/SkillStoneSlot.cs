@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using mainMenu;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
-using Api.Dto.Model;
 
 // 编辑技能的两种模式，归根结底是9宫格自身的两种模式，即SkillStoneSlot的两种模式。
 // 从我们使用那个插件开发这个环节至今，格子bug的根源其实是开始我们没有发现GetItem函数的正确发挥作用依赖于在那之前先运行updateMyItem函数，导致GetItem结果不正确。
@@ -16,9 +13,10 @@ using Api.Dto.Model;
 public class SkillStoneSlot
 {
     public StoneCell _DragAndDropCell;
-    
+    public int num;
     public SkillStoneSlot(int num, StoneCell _DragAndDropCell)
     {
+        this.num = num;
         this._DragAndDropCell = _DragAndDropCell;
     }
 

@@ -8,11 +8,9 @@ namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
     {
-        [Space(7)]
         [Header("格子")]
         public StoneCell Cellprefab;
         
-        [Space(5)]
         [Header("选中框")]
         public GameObject SelectedFrame;
         public static GameObject _Selected;

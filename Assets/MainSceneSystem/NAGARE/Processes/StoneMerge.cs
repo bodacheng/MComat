@@ -32,7 +32,7 @@ public class StoneMerge : MainSceneProcess
     public override void ProcessEnd()
     {
         stoneMergeLayer.ReturnAllMaterialsToBox();
-        stoneMergeLayer.stoneBox._SkillStoneBoxTabEffectsManager.CloseShowingZokuseiTagEffects();
+        stoneMergeLayer.stoneBox._tabEffects.CloseShowingZokuseiTagEffects();
         StoneMergeLayer.Close();
     }
 }

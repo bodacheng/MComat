@@ -58,7 +58,7 @@ namespace mainMenu
         public void CloseShowingZokuseiTagEffects()
         {
             if (_focusingEffectsGroup != null)
-                _focusingEffectsGroup.Close_skillstoneboxtageffects();
+                _focusingEffectsGroup.CloseTagEffects();
             foreach (var VARIABLE in zokuseiBtnEffects)
             {
                 VARIABLE.Value.Clear();
@@ -70,7 +70,7 @@ namespace mainMenu
             StartUp(zokusei);
             if (_focusingEffectsGroup != null)
             {
-                _focusingEffectsGroup.Close_skillstoneboxtageffects();
+                _focusingEffectsGroup.CloseTagEffects();
             }
             
             if (zokuseiBtnEffects.ContainsKey(zokusei))
@@ -84,6 +84,11 @@ namespace mainMenu
         public void RefreshTagEffect(Vector3 pos, int sp_level)//按钮切换也可以在这里做文章
         {
             _focusingEffectsGroup.RefreshSTBoxEffects(sp_level, pos);
+        }
+        
+        public void RefreshSlotEffect(int slotNum ,Vector3 pos, int sp_level)//按钮切换也可以在这里做文章
+        {
+            _focusingEffectsGroup.RefreshSlotEffects(slotNum, sp_level, pos);
         }
         
         public void SkillButtonExplosion(int splevel, Vector3 targetPOS, Transform parent)

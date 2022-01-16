@@ -78,10 +78,10 @@ public partial class SkillEditLayer : UILayer
         }
 
         SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(skillID);
-        StonesBox._SkillStoneBoxTabEffectsManager.SkillButtonExplosion(skillConfig.SP_LEVEL,
+        StonesBox._tabEffects.SkillButtonExplosion(skillConfig.SP_LEVEL,
             PosCal.GetWorldPos(PreScene.target.FxCamera, 
                 NineSlot.allSlot[targetSlot - 1]._DragAndDropCell.GetComponent<RectTransform>(), 
                 3),
-            StonesBox._SkillStoneBoxTabEffectsManager.transform);
+            StonesBox._tabEffects.transform);
     }
 }

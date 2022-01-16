@@ -10,7 +10,6 @@ namespace mainMenu
         [Header("画面主模块parent")]
         [SerializeField] RectTransform BoxT;
         
-        [Space(7)]
         [Header("type按钮")]
         [SerializeField] Dropdown types;
         [SerializeField] Button NormalTab;
@@ -18,11 +17,9 @@ namespace mainMenu
         [SerializeField] Button EX2Tab;
         [SerializeField] Button EX3Tab;
         
-        [Space(7)]
         [Header("type特效管理")]
-        public SkillStoneBoxTabEffectsManager _SkillStoneBoxTabEffectsManager;
+        public SkillStoneBoxTabEffectsManager _tabEffects;
         
-        [Space(7)]
         [Header("攻击范围限定")]
         [SerializeField] Toggle closeCheckBox;
         [SerializeField] Toggle nearCheckBox;
@@ -56,15 +53,15 @@ namespace mainMenu
         {
             void Temp(Button btn, int exLevel)
             {
-                Vector3 worldPos = PosCal.GetWorldPos(fxCamera, 
+                var worldPos = PosCal.GetWorldPos(fxCamera, 
                     PosCal.ConvertAnchorPos(btn.GetComponent<RectTransform>().anchoredPosition, Vector2.one, Vector2.zero),
                     5f);
-                _SkillStoneBoxTabEffectsManager.RefreshTagEffect(worldPos, exLevel);
+                _tabEffects.RefreshTagEffect(worldPos, exLevel);
                 btn.onClick.AddListener(() =>
                 {
                     //NormalTabFeature(PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 3));
-                    _SkillStoneBoxTabEffectsManager.SkillButtonExplosion
-                        (exLevel, PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 5f), _SkillStoneBoxTabEffectsManager.transform);
+                    _tabEffects.SkillButtonExplosion
+                        (exLevel, PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 5f), _tabEffects.transform);
                     focusingExType = exLevel;
                     RestFilter();
                 });

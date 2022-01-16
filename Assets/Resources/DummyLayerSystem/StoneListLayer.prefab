@@ -7356,6 +7356,7 @@ MonoBehaviour:
   HP: {fileID: 3424812506623486448}
   expValue: {fileID: 5206352635142670423}
   StoneTargetLevel: {fileID: 5206352635282655065}
+  tempT: {fileID: 0}
 --- !u!1 &5206352636048624673
 GameObject:
   m_ObjectHideFlags: 0
@@ -8039,7 +8040,7 @@ MonoBehaviour:
   EX1Tab: {fileID: 5206352636192745319}
   EX2Tab: {fileID: 5206352635089602919}
   EX3Tab: {fileID: 5206352635361754198}
-  _SkillStoneBoxTabEffectsManager: {fileID: 6927428563499935400}
+  _tabEffects: {fileID: 6927428563499935400}
   closeCheckBox: {fileID: 5206352635100197084}
   nearCheckBox: {fileID: 5206352635659860177}
   farCheckBox: {fileID: 5206352635381506421}

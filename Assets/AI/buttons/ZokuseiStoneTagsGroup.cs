@@ -4,13 +4,14 @@ using UnityEngine;
 public class ZokuseiStoneTagsGroup
 {
     //技能石盒分类系成员
-    public IDictionary<int, ParticleSystem> btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
-    public IDictionary<int, ParticleSystem> btnPressedEffects = new Dictionary<int, ParticleSystem>();
-    public IDictionary<int, ParticleSystem> exTagEffects = new Dictionary<int, ParticleSystem>();
+    IDictionary<int, ParticleSystem> btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
+    public readonly IDictionary<int, ParticleSystem> btnPressedEffects = new Dictionary<int, ParticleSystem>();
+    readonly IDictionary<int, ParticleSystem> exTagEffects = new Dictionary<int, ParticleSystem>();
+    readonly IDictionary<int, ParticleSystem> slotEffects = new Dictionary<int, ParticleSystem>();
     
-    public void Close_skillstoneboxtageffects()
+    public void CloseTagEffects()
     {
-        foreach(KeyValuePair<int, ParticleSystem> keyValuePair in btnEffectsSetsForStoneBox)
+        foreach(var keyValuePair in btnEffectsSetsForStoneBox)
         {
             keyValuePair.Value.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }       
@@ -20,10 +21,10 @@ public class ZokuseiStoneTagsGroup
     {
         btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
         
-        GameObject normaltab = CreateOneButtonIcon(zokusei, 0);
-        GameObject ex1tab = CreateOneButtonIcon(zokusei, 1);
-        GameObject ex2tab = CreateOneButtonIcon(zokusei, 2);
-        GameObject ex3tab = CreateOneButtonIcon(zokusei, 3);
+        var normaltab = CreateOneButtonIcon(zokusei, 0);
+        var ex1tab = CreateOneButtonIcon(zokusei, 1);
+        var ex2tab = CreateOneButtonIcon(zokusei, 2);
+        var ex3tab = CreateOneButtonIcon(zokusei, 3);
         
         normaltab.transform.SetParent(effectObjectParent);
         ex1tab.transform.SetParent(effectObjectParent);
@@ -88,11 +89,28 @@ public class ZokuseiStoneTagsGroup
     {
         if (exTagEffects.ContainsKey(eX))
             return;
-        ParticleSystem p = btnEffectsSetsForStoneBox[eX];
+        var p = btnEffectsSetsForStoneBox[eX];
         p.gameObject.name = "UIExTag"+ eX;
         exTagEffects.Add(eX,p);
         p.gameObject.transform.position = pos;
         p.Play(true);
+    }
+    
+    public void RefreshSlotEffects(int slotNum, int eX, Vector3 pos)
+    {
+        if (slotEffects.ContainsKey(slotNum) && slotEffects[slotNum] != null)
+        {
+            Debug.Log(slotEffects[slotNum]);
+            GameObject.Destroy(slotEffects[slotNum].gameObject);
+        }
+        
+        if (!btnEffectsSetsForStoneBox.ContainsKey(eX)) return;
+        var prefab = btnEffectsSetsForStoneBox[eX];
+        var slotEffect = GameObject.Instantiate(prefab);
+        DicAdd<int, ParticleSystem>.Add(slotEffects, slotNum, slotEffect);
+        slotEffect.gameObject.name = "slotEffect"+ slotNum;
+        slotEffect.gameObject.transform.position = pos;
+        slotEffect.Play(true);
     }
     
     public void Clear()
@@ -117,5 +135,12 @@ public class ZokuseiStoneTagsGroup
                 GameObject.Destroy(VARIABLE.Value.gameObject);
         }
         btnEffectsSetsForStoneBox.Clear();
+        
+        foreach (var VARIABLE in slotEffects)
+        {
+            if (VARIABLE.Value != null)
+                GameObject.Destroy(VARIABLE.Value.gameObject);
+        }
+        slotEffects.Clear();
     }
 }
