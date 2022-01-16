@@ -53,8 +53,17 @@ public static class SVCenter
         var item = from.GetItem();
         if (item == null)
             return;
+        
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
+            var info = Stones.Get(item.instanceId);
+            if (MyMonsters.Get(info.inUsingUnitInstanceId) != null)
+            {
+                var popupLayer = PopupLayer.Open(PreScene.target.T);
+                popupLayer.ArrangeWarnWindow("其他角色正在装备中！");
+                return;
+            }
+            
             var skillEditLayer = SkillEditLayer.Open();
             var currentSkillIds = skillEditLayer.NineSlot.GetCurrentNineSlotAllSkillIds();
             if (currentSkillIds.Contains(item._SkillConfig.RECORD_ID))
@@ -97,6 +106,14 @@ public static class SVCenter
         
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
+            var info = Stones.Get(fromItem.instanceId);
+            if (MyMonsters.Get(info.inUsingUnitInstanceId) != null)
+            {
+                var popupLayer = PopupLayer.Open(PreScene.target.T);
+                popupLayer.ArrangeWarnWindow("其他角色正在装备中！");
+                return;
+            }
+            
             var skillEditLayer = SkillEditLayer.Get();
             var currentSkillIds = skillEditLayer.NineSlot.GetCurrentNineSlotAllSkillIds();
             
@@ -189,10 +206,10 @@ public static class SVCenter
         if (MyMonsters.CheckExist(Stones.Get(item.instanceId).inUsingUnitInstanceId))
         {
             var unitInstanceID = Stones.Get(item.instanceId).inUsingUnitInstanceId;
-            var valR3 = skillEditLayer.NineSlot.CheckEditAfterOneStoneRemoved(unitInstanceID, item._SkillConfig.RECORD_ID);
-            if (valR3 != SkillSet.SkillEditError.Perfect)
+            var valR = skillEditLayer.NineSlot.CheckEditAfterOneStoneRemoved(unitInstanceID, item._SkillConfig.RECORD_ID);
+            if (valR != SkillSet.SkillEditError.Perfect)
             {
-                skillEditLayer.NineSlot.ValidationWarn(valR3);
+                skillEditLayer.NineSlot.ValidationWarn(valR);
                 return false;
             }
         }

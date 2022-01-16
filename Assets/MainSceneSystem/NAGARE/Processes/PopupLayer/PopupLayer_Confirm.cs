@@ -25,7 +25,7 @@ public partial class PopupLayer : UILayer {
         
         async void closeWindow()
         {
-            await Observable.TimerFrame(10);
+            await Observable.TimerFrame(20);
             Close();
         }
         closeWindow();
