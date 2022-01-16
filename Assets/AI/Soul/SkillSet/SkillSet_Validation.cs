@@ -15,6 +15,13 @@ public partial class SkillSet
     // 判断技能组是否合法。包括了首技能有无普攻，有无重复，总点数是否平衡 这三方面
     public static SkillEditError CheckEdit(string A1, string A2, string A3, string B1, string B2, string B3, string C1, string C2, string C3)
     {
+        if (!(hasStone(A1) && hasStone(A2) && hasStone(A3) &&
+              hasStone(B1) && hasStone(B2) && hasStone(B3) &&
+              hasStone(C1) && hasStone(C2) && hasStone(C3)))
+        {
+            return SkillEditError.NotFull;
+        }
+        
         // 第一列技能必须有普通技能
         if (CheckStartSKills(A1, B1, C1) == SkillEditError.NoNormalStart)
         {
@@ -32,30 +39,24 @@ public partial class SkillSet
             return skillConfig != null;
         }
         
-        if (!(hasStone(A1) && hasStone(A2) && hasStone(A3) &&
-              hasStone(B1) && hasStone(B2) && hasStone(B3) &&
-              hasStone(C1) && hasStone(C2) && hasStone(C3)))
-        {
-            return SkillEditError.NotFull;
-        }
-        
-        int wholePoint = SkillBalancePoint(A1, A2, A3, B1, B2, B3, C1, C2, C3);
+        var wholePoint = SkillBalancePoint(A1, A2, A3, B1, B2, B3, C1, C2, C3);
         return wholePoint < 0 ? SkillEditError.UnBalanced : SkillEditError.Perfect;
     }
     
     // 当前总分。不问技能组是否合法
     public static int SkillBalancePoint(string A1skillid, string A2skillid, string A3skillid, string B1skillid, string B2skillid, string B3skillid, string C1skillid, string C2skillid, string C3skillid)
     {
-        SkillConfig _SkillConfigA1 = SkillConfigTable.GetSkillConfig(A1skillid);
-        SkillConfig _SkillConfigA2 = SkillConfigTable.GetSkillConfig(A2skillid);
-        SkillConfig _SkillConfigA3 = SkillConfigTable.GetSkillConfig(A3skillid);
-        SkillConfig _SkillConfigB1 = SkillConfigTable.GetSkillConfig(B1skillid);
-        SkillConfig _SkillConfigB2 = SkillConfigTable.GetSkillConfig(B2skillid);
-        SkillConfig _SkillConfigB3 = SkillConfigTable.GetSkillConfig(B3skillid);
-        SkillConfig _SkillConfigC1 = SkillConfigTable.GetSkillConfig(C1skillid);
-        SkillConfig _SkillConfigC2 = SkillConfigTable.GetSkillConfig(C2skillid);
-        SkillConfig _SkillConfigC3 = SkillConfigTable.GetSkillConfig(C3skillid);
-        List<SkillConfig> skillConfigs = new List<SkillConfig>();
+        var _SkillConfigA1 = SkillConfigTable.GetSkillConfig(A1skillid);
+        var _SkillConfigA2 = SkillConfigTable.GetSkillConfig(A2skillid);
+        var _SkillConfigA3 = SkillConfigTable.GetSkillConfig(A3skillid);
+        var _SkillConfigB1 = SkillConfigTable.GetSkillConfig(B1skillid);
+        var _SkillConfigB2 = SkillConfigTable.GetSkillConfig(B2skillid);
+        var _SkillConfigB3 = SkillConfigTable.GetSkillConfig(B3skillid);
+        var _SkillConfigC1 = SkillConfigTable.GetSkillConfig(C1skillid);
+        var _SkillConfigC2 = SkillConfigTable.GetSkillConfig(C2skillid);
+        var _SkillConfigC3 = SkillConfigTable.GetSkillConfig(C3skillid);
+        
+        var skillConfigs = new List<SkillConfig>();
         
         if (_SkillConfigA1 != null)
             skillConfigs.Add(_SkillConfigA1);
@@ -76,7 +77,7 @@ public partial class SkillSet
         if (_SkillConfigC3 != null)
             skillConfigs.Add(_SkillConfigC3);
             
-        int balancePoint = 0;
+        var balancePoint = 0;
         foreach (var t in skillConfigs)
         {
             switch (t.SP_LEVEL)
@@ -104,7 +105,7 @@ public partial class SkillSet
     static bool CheckRepeat(string A1, string A2, string A3, string B1, string B2, string B3, string C1, string C2, string C3)
     {
         // 检查技能重复
-        List<string> checkSame = new List<string>
+        var checkSame = new List<string>
         {
             A1,
             A2,
@@ -117,7 +118,7 @@ public partial class SkillSet
             C3
         };
         
-        for (int i = 0; i < checkSame.Count; i++)
+        for (var i = 0; i < checkSame.Count; i++)
         {
             if (i != checkSame.Count - 1 && SkillConfigTable.GetSkillConfig(checkSame[i]) != null)
             {
@@ -136,10 +137,10 @@ public partial class SkillSet
     static SkillEditError CheckStartSKills(string a1skill, string a2skill, string a3skill)
     {
         // 第一列技能必须有普通技能
-        List<string> NormalSkillsOfAList = new List<string>();            
-        SkillConfig _SkillConfigA1 = SkillConfigTable.GetSkillConfig(a1skill);
-        SkillConfig _SkillConfigB1 = SkillConfigTable.GetSkillConfig(a2skill);
-        SkillConfig _SkillConfigC1 = SkillConfigTable.GetSkillConfig(a3skill);
+        var NormalSkillsOfAList = new List<string>();            
+        var _SkillConfigA1 = SkillConfigTable.GetSkillConfig(a1skill);
+        var _SkillConfigB1 = SkillConfigTable.GetSkillConfig(a2skill);
+        var _SkillConfigC1 = SkillConfigTable.GetSkillConfig(a3skill);
         
         if (_SkillConfigA1 != null && _SkillConfigA1.SP_LEVEL == 0)
             NormalSkillsOfAList.Add(_SkillConfigA1.REAL_NAME);

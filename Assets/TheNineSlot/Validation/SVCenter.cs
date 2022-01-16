@@ -192,7 +192,7 @@ public static class SVCenter
             var valR3 = skillEditLayer.NineSlot.CheckEditAfterOneStoneRemoved(unitInstanceID, item._SkillConfig.RECORD_ID);
             if (valR3 != SkillSet.SkillEditError.Perfect)
             {
-                skillEditLayer.NineSlot.ValidationWarn(valR3, unitInstanceID);
+                skillEditLayer.NineSlot.ValidationWarn(valR3);
                 return false;
             }
         }

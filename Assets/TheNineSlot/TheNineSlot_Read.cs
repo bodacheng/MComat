@@ -16,26 +16,26 @@ namespace mainMenu
                 Debug.Log("严重错误");
                 return;
             }
-            List<StoneOfPlayerInfo> equipingstones = Stones.GetEquipingStones(_AccCharInfo.id);
+            var equipments = Stones.GetEquipingStones(_AccCharInfo.id);
 
-            for (int i = 1; i <= 9; i++)
+            for (var i = 1; i <= 9; i++)
             {
                 allSlot[i - 1]._cell.RemoveToTemp();
             }
 
-            for (int i = 0; i < equipingstones.Count; i++)
+            for (var i = 0; i < equipments.Count; i++)
             {
-                int usingPosInt = int.Parse(equipingstones[i].inUsingSkillSlot);
-                if (equipingstones[i].InstanceId != null)
+                int usingPosInt = int.Parse(equipments[i].inUsingSkillSlot);
+                if (equipments[i].InstanceId != null)
                 {
                     
-                    allSlot[usingPosInt - 1].TakeASkillStoneFromBoxToSlot(equipingstones[i].InstanceId, Color.white);
+                    allSlot[usingPosInt - 1].TakeASkillStoneFromBoxToSlot(equipments[i].InstanceId, Color.white);
                 }
-
+                
                 allSlot[usingPosInt - 1]._cell.UpdateMyItem();
                 allSlot[usingPosInt - 1]._cell.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
             }
-
+            
             NineSlotsStatusRefresh();
         }
         

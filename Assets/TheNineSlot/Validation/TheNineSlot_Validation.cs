@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using dataAccess;
+﻿using dataAccess;
 using UnityEngine;
 
 namespace mainMenu

@@ -173,8 +173,7 @@ namespace mainMenu
             ShowNineSlotExSurplus(wholePoint);
             RefreshCurrentHpBasedOnNineSlots();
             RefreshNineSlotColors();
-            
-            var valR = CheckEditBasedOnCurrent();
+            var valR = ValidateWarn();
             ConfirmSkillChangeButton.gameObject.SetActive(valR == SkillSet.SkillEditError.Perfect);
             return full;
         }
