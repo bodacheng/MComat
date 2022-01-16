@@ -100,7 +100,6 @@ public class ZokuseiStoneTagsGroup
     {
         if (slotEffects.ContainsKey(slotNum) && slotEffects[slotNum] != null)
         {
-            Debug.Log(slotEffects[slotNum]);
             GameObject.Destroy(slotEffects[slotNum].gameObject);
         }
         

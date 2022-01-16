@@ -151,12 +151,10 @@ public partial class SkillSet
         }
         if (targetSlot == 9)
         {
-            SkillEditError valR = CheckEdit(
+            var valR = CheckEdit(
                 nineAndTwo.a1, nineAndTwo.a2, nineAndTwo.a3,
                 nineAndTwo.b1, nineAndTwo.b2, nineAndTwo.b3,
                 nineAndTwo.c1, nineAndTwo.c2, nineAndTwo.c3);
-            
-            Debug.Log(nineAndTwo + " ;" + valR);
             
             return valR == SkillEditError.Perfect ? nineAndTwo : null;
         }

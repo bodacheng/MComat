@@ -74,7 +74,7 @@ namespace mainMenu
             return focusingSlot;
         }
         
-        void SlotButtonBehaviour(SkillStoneSlot slot)
+        void SlotBehaviour(SkillStoneSlot slot)
         {
             void buttonFeature(object sender, System.EventArgs e)
             {
@@ -145,17 +145,17 @@ namespace mainMenu
             allSlot.Add(C2Slot);
             allSlot.Add(C3Slot);
 
-            foreach (SkillStoneSlot _slot in allSlot)
+            foreach (var _slot in allSlot)
             {
-                SlotButtonBehaviour(_slot);
+                SlotBehaviour(_slot);
             }
         }
         
         // 当前技能编辑形成的各项参数更新
         public bool NineSlotsStatusRefresh()
         {
-            bool full = true;
-            foreach (SkillStoneSlot _slot in allSlot)
+            var full = true;
+            foreach (var _slot in allSlot)
             {
                 _slot._cell.UpdateMyItem();
                 if (_slot._cell.GetItem() == null)
@@ -163,8 +163,8 @@ namespace mainMenu
                     full = false;
                 }
             }
-            List<string> skillIDsOnNineSlots = GetCurrentNineSlotAllSkillIds();
-            int wholePoint = SkillSet.SkillBalancePoint(
+            var skillIDsOnNineSlots = GetCurrentNineSlotAllSkillIds();
+            var wholePoint = SkillSet.SkillBalancePoint(
                 skillIDsOnNineSlots[0], skillIDsOnNineSlots[1], skillIDsOnNineSlots[2],
                 skillIDsOnNineSlots[3], skillIDsOnNineSlots[4], skillIDsOnNineSlots[5],
                 skillIDsOnNineSlots[6], skillIDsOnNineSlots[7], skillIDsOnNineSlots[8]
@@ -174,7 +174,7 @@ namespace mainMenu
             RefreshCurrentHpBasedOnNineSlots();
             RefreshNineSlotColors();
             
-            SkillSet.SkillEditError valR = CheckEditBasedOnCurrent();
+            var valR = CheckEditBasedOnCurrent();
             ConfirmSkillChangeButton.gameObject.SetActive(valR == SkillSet.SkillEditError.Perfect);
             return full;
         }

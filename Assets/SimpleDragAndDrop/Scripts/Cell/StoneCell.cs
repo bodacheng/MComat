@@ -114,13 +114,13 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             return;
         }
         StoneOfPlayerInfo SSInfo = Stones.Get(Item.instanceId);
-        if (SSInfo == null || SSInfo.inUsingMonsterOfPlayerId == null)
+        if (SSInfo == null || SSInfo.inUsingUnitInstanceId == null)
         {
             targetIcon.gameObject.SetActive(false);
             return;
         }
             
-        UnitInfo _one = MyMonsters.Get(SSInfo.inUsingMonsterOfPlayerId);
+        UnitInfo _one = MyMonsters.Get(SSInfo.inUsingUnitInstanceId);
         if (_one == null)
         {
             targetIcon.gameObject.SetActive(false);

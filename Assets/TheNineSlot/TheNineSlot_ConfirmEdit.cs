@@ -136,7 +136,7 @@ namespace mainMenu
                 if (!GetUsingStonesId().Contains(formerStoneInfo.InstanceId)) //代表原来那个位置上有个技能石，但现在它在技能背包，这轮技能编辑它是要被卸载到背包里去。
                 {
                     Debug.Log("技能石头："+ formerStoneInfo.InstanceId + "被卸下");
-                    formerStoneInfo.inUsingMonsterOfPlayerId = null;
+                    formerStoneInfo.inUsingUnitInstanceId = null;
                     formerStoneInfo.inUsingSkillSlot = null;
                     //yield return MySkillStones.Update(formerStoneInfo.InstanceId);
                 }else{

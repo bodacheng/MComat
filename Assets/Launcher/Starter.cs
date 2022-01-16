@@ -71,7 +71,7 @@ public class Starter : MonoBehaviour
                     EXP = 0,
                     BreakThrough = 0,
                     Inherent = "true",
-                    inUsingMonsterOfPlayerId = i.ToString(),
+                    inUsingUnitInstanceId = i.ToString(),
                     inUsingSkillSlot = "1"
                 };
                 Stones.Add(stoneInfo);

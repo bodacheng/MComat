@@ -93,7 +93,7 @@ namespace mainMenu
         
         public void SkillButtonExplosion(int splevel, Vector3 targetPOS, Transform parent)
         {
-            ParticleSystem pressedExplosion = _focusingEffectsGroup.btnPressedEffects.ContainsKey(splevel) ?
+            var pressedExplosion = _focusingEffectsGroup.btnPressedEffects.ContainsKey(splevel) ?
             _focusingEffectsGroup.btnPressedEffects[splevel] : triggerExplosion0;
             pressedExplosion.gameObject.name = "UIexplosion" + splevel;
             pressedExplosion.transform.position = targetPOS;

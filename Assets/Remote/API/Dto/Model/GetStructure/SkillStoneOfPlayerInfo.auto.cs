@@ -52,7 +52,7 @@ namespace dataAccess
         /// <summary>
         /// 使用中のプレーヤ所有モンスターID
         /// </summary>
-        public string inUsingMonsterOfPlayerId { get; set; }
+        public string inUsingUnitInstanceId { get; set; }
         
         /// <summary>
         /// 装备的位置槽。从1到9为A1到C3

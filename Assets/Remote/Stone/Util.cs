@@ -84,7 +84,7 @@ namespace dataAccess
                 StoneOfPlayerInfo infoModel = Get(origin[i]);
                 if (notUsing)
                 {
-                    if (MyMonsters.Get(infoModel.inUsingMonsterOfPlayerId) != null)
+                    if (MyMonsters.Get(infoModel.inUsingUnitInstanceId) != null)
                     {
                         continue;
                     }
@@ -124,7 +124,7 @@ namespace dataAccess
             List<StoneOfPlayerInfo> targetStones = new List<StoneOfPlayerInfo>();
             foreach(KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in Dic)
             {
-                if (keyValuePair.Value.inUsingMonsterOfPlayerId == monsterOfPlayerId)
+                if (keyValuePair.Value.inUsingUnitInstanceId == monsterOfPlayerId)
                 {
                     targetStones.Add(keyValuePair.Value);
                 }
@@ -138,7 +138,7 @@ namespace dataAccess
             StoneOfPlayerInfo targetStone = null;
             foreach(KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in Dic)
             {
-                if (keyValuePair.Value.inUsingMonsterOfPlayerId == monsterOfPlayerId && keyValuePair.Value.Inherent == "true")
+                if (keyValuePair.Value.inUsingUnitInstanceId == monsterOfPlayerId && keyValuePair.Value.Inherent == "true")
                 {
                     targetStone = keyValuePair.Value;
                 }

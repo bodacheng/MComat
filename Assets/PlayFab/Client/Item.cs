@@ -34,7 +34,7 @@ public partial class PlayFabReadClient
                         {
                             InstanceId = item.ItemInstanceId,
                             skillId = item.ItemId,
-                            inUsingMonsterOfPlayerId = (item.CustomData != null && item.CustomData.ContainsKey("monsterid")) ? item.CustomData["monsterid"] : null,
+                            inUsingUnitInstanceId = (item.CustomData != null && item.CustomData.ContainsKey("monsterid")) ? item.CustomData["monsterid"] : null,
                             inUsingSkillSlot = (item.CustomData != null && item.CustomData.ContainsKey("slot")) ? item.CustomData["slot"] : null
                         };
                         Stones.Add(Info);

@@ -75,7 +75,7 @@ namespace dataAccess
                     return;
                 }
                 StoneOfPlayerInfo ofPlayerInfo = Stones.Dic[kv.Key];
-                ofPlayerInfo.inUsingMonsterOfPlayerId = kv.Value.Item1;
+                ofPlayerInfo.inUsingUnitInstanceId = kv.Value.Item1;
                 ofPlayerInfo.inUsingSkillSlot = kv.Value.Item2;
             }
         }

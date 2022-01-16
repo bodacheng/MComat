@@ -9,11 +9,11 @@ namespace mainMenu
     {
         List<StoneOfPlayerInfo> GetMyStonesOnNineSlot()
         {
-            List<StoneOfPlayerInfo> returnValue = new List<StoneOfPlayerInfo>();
-            List<string> IDlist = GetUsingStonesId();
-            for (int i = 0; i < IDlist.Count; i++)
+            var returnValue = new List<StoneOfPlayerInfo>();
+            var instanceIds = GetUsingStonesId();
+            for (var i = 0; i < instanceIds.Count; i++)
             {
-                returnValue.Add(Stones.Get(IDlist[i]));
+                returnValue.Add(Stones.Get(instanceIds[i]));
             }
             return returnValue;
         }
@@ -31,7 +31,7 @@ namespace mainMenu
             C2DragAndDropCell.UpdateMyItem();
             C3DragAndDropCell.UpdateMyItem();
             
-            List<string> IDs = new List<string>();
+            var IDs = new List<string>();
             
             string A1 = A1DragAndDropCell.GetItem()?.instanceId;
             string A2 = A2DragAndDropCell.GetItem()?.instanceId;
@@ -66,7 +66,7 @@ namespace mainMenu
 
         public SkillSet GetCurrentNineAndTwo()
         {
-            SkillSet returnValue = new SkillSet();
+            var returnValue = new SkillSet();
             string A1 = A1DragAndDropCell.GetItem() != null ? A1DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
             string A2 = A2DragAndDropCell.GetItem() != null ? A2DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
             string A3 = A3DragAndDropCell.GetItem() != null ? A3DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : null;
@@ -86,14 +86,14 @@ namespace mainMenu
             returnValue.c1 = C1;
             returnValue.c2 = C2;
             returnValue.c3 = C3;
-
+            
             return returnValue;
         }
         
         // 返回的是技能定义ID，长度固定为9
-        List<string> GetCurrentNineSlotAllSkillIds()
+        public List<string> GetCurrentNineSlotAllSkillIds()
         {
-            List<string> NineSkillIDs = new List<string>();
+            var NineSkillIDs = new List<string>();
             string A1 = A1DragAndDropCell.GetItem() != null ? A1DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
             string A2 = A2DragAndDropCell.GetItem() != null ? A2DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
             string A3 = A3DragAndDropCell.GetItem() != null ? A3DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
@@ -103,6 +103,7 @@ namespace mainMenu
             string C1 = C1DragAndDropCell.GetItem() != null ? C1DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
             string C2 = C2DragAndDropCell.GetItem() != null ? C2DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
             string C3 = C3DragAndDropCell.GetItem() != null ? C3DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
+            
             NineSkillIDs.Add(A1);
             NineSkillIDs.Add(A2);
             NineSkillIDs.Add(A3);

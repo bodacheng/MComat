@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using dataAccess;
 using DG.Tweening;
 using mainMenu;
+using System.Collections.Generic;
 
 public static class SVCenter
 {
@@ -48,12 +50,20 @@ public static class SVCenter
     
     public static void MoveItemFromTo(StoneCell from, StoneCell to)
     {
-        SKStoneItem item = from.GetItem();
+        var item = from.GetItem();
         if (item == null)
             return;
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
-            SkillEditLayer skillEditLayer = SkillEditLayer.Open();
+            var skillEditLayer = SkillEditLayer.Open();
+            var currentSkillIds = skillEditLayer.NineSlot.GetCurrentNineSlotAllSkillIds();
+            if (currentSkillIds.Contains(item._SkillConfig.RECORD_ID))
+            {
+                // 不可出现相同技能
+                skillEditLayer.NineSlot.ValidationWarn(SkillSet.SkillEditError.RepeatedSkill);
+                return;
+            }
+            
             if (!CheckIfOtherUnitOkAfterStoneRemove(item))
                 return;
             skillEditLayer.StonesBox._tabEffects.SkillButtonExplosion(item._SkillConfig.SP_LEVEL, 
@@ -66,30 +76,47 @@ public static class SVCenter
         
         if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || to.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
-            SkillEditLayer skillEditLayer = SkillEditLayer.Open();
+            var skillEditLayer = SkillEditLayer.Open();
             skillEditLayer.NineSlot.NineSlotsStatusRefresh();
         }
         
         if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
-            StoneListLayer sl = StoneListLayer.Get();
+            var sl = StoneListLayer.Get();
             sl.levelManager.RefreshSkillLevelUpModule();
         }
     }
     
     public static void SwapItemFromTo(StoneCell from, StoneCell to)
     {
-        SKStoneItem itemFromCell = from.GetItem();
-        if (itemFromCell == null)
+        var fromItem = from.GetItem();
+        if (fromItem == null)
             return;
-            
-        // 从技能石盒子取出的石头安装到技能槽，要看如果这个技能石被其他角色使用中的话，那个角色会不会有问题
+        
+        var toItem = to.GetItem();
+        
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
-            SkillEditLayer skillEditLayer = SkillEditLayer.Get();
-            if (!CheckIfOtherUnitOkAfterStoneRemove(itemFromCell))
+            var skillEditLayer = SkillEditLayer.Get();
+            var currentSkillIds = skillEditLayer.NineSlot.GetCurrentNineSlotAllSkillIds();
+            
+            if (toItem != null)
+            {
+                if (toItem._SkillConfig.RECORD_ID != fromItem._SkillConfig.RECORD_ID)
+                {
+                    if (currentSkillIds.Contains(fromItem._SkillConfig.RECORD_ID))
+                    {
+                        // 不可出现相同技能
+                        skillEditLayer.NineSlot.ValidationWarn(SkillSet.SkillEditError.RepeatedSkill);
+                        return;
+                    }
+                }
+            }
+            
+            // 从技能石盒子取出的石头安装到技能槽，要看如果这个技能石被其他角色使用中的话，那个角色会不会有问题
+            if (!CheckIfOtherUnitOkAfterStoneRemove(fromItem))
                 return;
-            skillEditLayer.StonesBox._tabEffects.SkillButtonExplosion(itemFromCell._SkillConfig.SP_LEVEL, 
+            skillEditLayer.StonesBox._tabEffects.SkillButtonExplosion(fromItem._SkillConfig.SP_LEVEL, 
             PosCal.GetWorldPos(PreScene.target.FxCamera, to.GetComponent<RectTransform>(), 3), 
             skillEditLayer.StonesBox._tabEffects.transform);
         }
@@ -97,7 +124,7 @@ public static class SVCenter
         // 把技能石从技能槽拖回技能石盒，如果是固有技能石，连移动也不允许
         if (to.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell && from.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
-            SKStoneItem stone = to.GetItem();
+            var stone = to.GetItem();
             if (stone.Inherent)
             {
                 Debug.Log("固有技能无法移出，返回");
@@ -109,13 +136,13 @@ public static class SVCenter
         
         if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || to.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
-            SkillEditLayer skillEditLayer = SkillEditLayer.Get();
+            var skillEditLayer = SkillEditLayer.Get();
             skillEditLayer.NineSlot.NineSlotsStatusRefresh();
         }
         
         if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
-            StoneListLayer sl = StoneListLayer.Get();
+            var sl = StoneListLayer.Get();
             sl.levelManager.RefreshSkillLevelUpModule();
         }
     }
@@ -153,19 +180,19 @@ public static class SVCenter
     // 尝试装载的技能石正被其他角色使用时候，对那个其他角色进行validation检验
     static bool CheckIfOtherUnitOkAfterStoneRemove(SKStoneItem item)
     {
-        SkillEditLayer skillEditLayer = SkillEditLayer.Open();
+        var skillEditLayer = SkillEditLayer.Open();
         if (item.Inherent)
         {
             Debug.Log("固有技能无法移出，返回");
             return false;
         }
-        if (MyMonsters.CheckExist(Stones.Get(item.instanceId).inUsingMonsterOfPlayerId))
+        if (MyMonsters.CheckExist(Stones.Get(item.instanceId).inUsingUnitInstanceId))
         {
-            string monsterPlayerID = Stones.Get(item.instanceId).inUsingMonsterOfPlayerId;
-            SkillSet.SkillEditError valR3 = skillEditLayer.NineSlot.CheckEditAfterOneStoneRemoved(monsterPlayerID, item._SkillConfig.RECORD_ID);
+            var unitInstanceID = Stones.Get(item.instanceId).inUsingUnitInstanceId;
+            var valR3 = skillEditLayer.NineSlot.CheckEditAfterOneStoneRemoved(unitInstanceID, item._SkillConfig.RECORD_ID);
             if (valR3 != SkillSet.SkillEditError.Perfect)
             {
-                skillEditLayer.NineSlot.ValidationWarn(valR3, monsterPlayerID);
+                skillEditLayer.NineSlot.ValidationWarn(valR3, unitInstanceID);
                 return false;
             }
         }
