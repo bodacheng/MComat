@@ -146,7 +146,7 @@ public partial class SkillEditLayer : UILayer
     {
         foreach (SkillStoneSlot _slot in NineSlot.allSlot)
         {
-            _slot._DragAndDropCell.RemoveToTemp();
+            _slot._cell.RemoveToTemp();
         }
     }
     
@@ -168,7 +168,7 @@ public partial class SkillEditLayer : UILayer
         {
             if (NineSlot.GetFocusingStoneSlot() != null)
             {
-                StoneCell.Install(_Cell, NineSlot.GetFocusingStoneSlot()._DragAndDropCell);
+                StoneCell.Install(_Cell, NineSlot.GetFocusingStoneSlot()._cell);
             }
         }
         

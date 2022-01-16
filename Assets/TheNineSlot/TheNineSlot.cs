@@ -79,9 +79,9 @@ namespace mainMenu
             void buttonFeature(object sender, System.EventArgs e)
             {
                 focusingSlot = slot;
-                SelectedRender(focusingSlot._DragAndDropCell);
-                slot._DragAndDropCell.UpdateMyItem();
-                SKStoneItem _SkillStone = slot._DragAndDropCell.GetItem();
+                SelectedRender(focusingSlot._cell);
+                slot._cell.UpdateMyItem();
+                SKStoneItem _SkillStone = slot._cell.GetItem();
                 if (_SkillStone != null && _SkillStone._SkillConfig != null)
                 {
                     PrintSkillInfo.Invoke(_SkillStone.instanceId);
@@ -102,18 +102,18 @@ namespace mainMenu
             {
                 if (!FightGlobalSetting._skillStoneHasExp)
                     return;
-                SKStoneItem _stone = slot._DragAndDropCell.GetItem();
+                SKStoneItem _stone = slot._cell.GetItem();
                 if (_stone != null && _stone._SkillConfig != null)
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.instanceId, true);
                 }
             }
             
-            slot._DragAndDropCell.pGesture.Pressed += buttonFeature;
+            slot._cell.pGesture.Pressed += buttonFeature;
             //slot._DragAndDropCell.tGesture.Tapped += doubleClick;
             //slot._DragAndDropCell.lpGesture.StateChanged += GoToLevelUpPage;
 
-            slot._DragAndDropCell.SetOnDropAction(((from, to) =>
+            slot._cell.SetOnDropAction(((from, to) =>
             {
                 StoneCell.Install(from, to);
                 ValidateWarn();
@@ -157,8 +157,8 @@ namespace mainMenu
             bool full = true;
             foreach (SkillStoneSlot _slot in allSlot)
             {
-                _slot._DragAndDropCell.UpdateMyItem();
-                if (_slot._DragAndDropCell.GetItem() == null)
+                _slot._cell.UpdateMyItem();
+                if (_slot._cell.GetItem() == null)
                 {
                     full = false;
                 }
@@ -183,33 +183,33 @@ namespace mainMenu
          {
             foreach (var _slot in allSlot)
             {
-                var item = _slot._DragAndDropCell.GetItem();
-                var worldPos = PosCal.GetWorldPos(PreScene.target.FxCamera, _slot._DragAndDropCell.GetComponent<RectTransform>(), 5f);
+                var item = _slot._cell.GetItem();
+                var worldPos = PosCal.GetWorldPos(PreScene.target.FxCamera, _slot._cell.GetComponent<RectTransform>(), 5f);
                 _tabEffects.RefreshSlotEffect(_slot.num, worldPos, item != null ? item._SkillConfig.SP_LEVEL : -1);
             }
             
             return;
             foreach (SkillStoneSlot _slot in allSlot)
             {
-                SKStoneItem sKStoneItem = _slot._DragAndDropCell.GetItem();
+                SKStoneItem sKStoneItem = _slot._cell.GetItem();
                 if (sKStoneItem == null)
                 {
-                    _slot._DragAndDropCell.GetComponent<Image>().color = new Color(1f, 1f ,1f, 1f);
+                    _slot._cell.GetComponent<Image>().color = new Color(1f, 1f ,1f, 1f);
                     continue;
                 }
                 switch (sKStoneItem._SkillConfig.SP_LEVEL)
                 {
                     case 1:
-                        _slot._DragAndDropCell.GetComponent<Image>().color = new Color(1,0.2f,0.3f,1f);
+                        _slot._cell.GetComponent<Image>().color = new Color(1,0.2f,0.3f,1f);
                     break;
                     case 2:
-                        _slot._DragAndDropCell.GetComponent<Image>().color = new Color(0f,1f,0.1f,1f);
+                        _slot._cell.GetComponent<Image>().color = new Color(0f,1f,0.1f,1f);
                     break;
                     case 3:
-                        _slot._DragAndDropCell.GetComponent<Image>().color = new Color(0f,0.1f,1f,1f);
+                        _slot._cell.GetComponent<Image>().color = new Color(0f,0.1f,1f,1f);
                     break;
                     default:
-                        _slot._DragAndDropCell.GetComponent<Image>().color = new Color(1f, 1f ,1f, 1f);
+                        _slot._cell.GetComponent<Image>().color = new Color(1f, 1f ,1f, 1f);
                     break;
                 }
             }

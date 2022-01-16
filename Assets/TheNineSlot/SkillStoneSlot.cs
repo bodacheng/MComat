@@ -12,12 +12,12 @@ using dataAccess;
 
 public class SkillStoneSlot
 {
-    public StoneCell _DragAndDropCell;
-    public int num;
-    public SkillStoneSlot(int num, StoneCell _DragAndDropCell)
+    public readonly StoneCell _cell;
+    public readonly int num;
+    public SkillStoneSlot(int num, StoneCell cell)
     {
         this.num = num;
-        this._DragAndDropCell = _DragAndDropCell;
+        this._cell = cell;
     }
 
     public void TakeASkillStoneFromBoxToSlot(string stoneOfPlayerID, Color itemColor)
@@ -30,7 +30,7 @@ public class SkillStoneSlot
         }
 
         stoneModel.GetComponent<Image>().color = itemColor;
-        _DragAndDropCell.GetComponent<Image>().color = stoneModel._SkillConfig.SP_LEVEL == 0 ? new Color(0, 1, 1, 1f) : new Color(1, 0, 0, 1f);
-        _DragAndDropCell.AddItem(stoneModel);
+        _cell.GetComponent<Image>().color = stoneModel._SkillConfig.SP_LEVEL == 0 ? new Color(0, 1, 1, 1f) : new Color(1, 0, 0, 1f);
+        _cell.AddItem(stoneModel);
     }
 }

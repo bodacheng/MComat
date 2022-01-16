@@ -10,7 +10,7 @@ namespace mainMenu
         {
             foreach (SkillStoneSlot _slot in allSlot)
             {
-                _slot._DragAndDropCell.RemoveToTemp();
+                _slot._cell.RemoveToTemp();
             }
         }
         
@@ -24,14 +24,14 @@ namespace mainMenu
             StoneOfPlayerInfo originSkillInfo = Stones.GetOriginSkillOfMonster(info.id);
             foreach (SkillStoneSlot _slot in allSlot)
             {
-                SKStoneItem sK = _slot._DragAndDropCell.GetItem();
+                SKStoneItem sK = _slot._cell.GetItem();
                 if (sK == null)
                 {
                     continue;
                 }
                 if (originSkillInfo == null || (originSkillInfo != null && (sK.instanceId != originSkillInfo.InstanceId)))
                 {
-                    _slot._DragAndDropCell.RemoveToTemp();
+                    _slot._cell.RemoveToTemp();
                 }
             }
             UpdateStonesBaseOnSlots(info);

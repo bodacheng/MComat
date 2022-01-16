@@ -20,7 +20,7 @@ namespace mainMenu
 
             for (int i = 1; i <= 9; i++)
             {
-                allSlot[i - 1]._DragAndDropCell.RemoveToTemp();
+                allSlot[i - 1]._cell.RemoveToTemp();
             }
 
             for (int i = 0; i < equipingstones.Count; i++)
@@ -32,8 +32,8 @@ namespace mainMenu
                     allSlot[usingPosInt - 1].TakeASkillStoneFromBoxToSlot(equipingstones[i].InstanceId, Color.white);
                 }
 
-                allSlot[usingPosInt - 1]._DragAndDropCell.UpdateMyItem();
-                allSlot[usingPosInt - 1]._DragAndDropCell.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
+                allSlot[usingPosInt - 1]._cell.UpdateMyItem();
+                allSlot[usingPosInt - 1]._cell.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
             }
 
             NineSlotsStatusRefresh();
