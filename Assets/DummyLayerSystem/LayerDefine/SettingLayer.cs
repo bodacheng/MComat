@@ -13,8 +13,31 @@ public class SettingLayer : UILayer {
     #endregion
 
     private PopupLayer _popupLayer;
+
+    public static SettingLayer Get()
+    {
+        UILayer l = UILayerLoader.Get("SettingLayer");
+        SettingLayer returnValue = null;
+        if (l != null)
+        {
+            returnValue = l as SettingLayer;
+        }
+        return returnValue;
+    }
     
-    public void Initialise()
+    public static SettingLayer Open()
+    {
+        var returnValue = Get();
+        if (returnValue != null)
+        {
+            return returnValue;
+        }
+        returnValue = UILayerLoader.Load(PreScene.target.T,"SettingLayer") as SettingLayer;
+        returnValue.Initialise();
+        return returnValue;
+    }
+    
+    void Initialise()
     {
         _popupLayer = PopupLayer.Open(PreScene.target.T);
         _popupLayer.HighLightRect(SettingMenuT);

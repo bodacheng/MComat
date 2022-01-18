@@ -65,12 +65,6 @@ namespace mainMenu
             BasicPhase();
             ToInitialPhase();
         }
-
-        public void OpenSetting()
-        {
-            SettingLayer cc = UILayerLoader.Load(PreScene.target.T.gameObject, "SettingLayer") as SettingLayer;
-            cc.Initialise();
-        }
         
         public static void ReturnToLobby(string error)
         {
@@ -83,32 +77,32 @@ namespace mainMenu
             Application.targetFrameRate = 60;
             
             #region 主界面各大画面
-            FrontPage frontPage = new FrontPage();
-            TeamEditPage teamEditFront = new TeamEditPage();
-            StonesPage skillStones = new StonesPage();
-            StoneSell stoneSell = new StoneSell();
-            StoneMerge stoneMerge = new StoneMerge();
-            SelfFightPage selfFightFront = new SelfFightPage();
-            QuestInfoPage questInfo = new QuestInfoPage();
-            MonsterListPage memberDetail = new MonsterListPage();
-            MonsterEditPage memberDetail_edit = new MonsterEditPage();
-            SkillShowPage memberDetail_Skillshow = new SkillShowPage();
-            ArcadeFrontPage arcadeFrontPage = new ArcadeFrontPage();
-
+            var frontPage = new FrontPage();
+            var teamEditFront = new TeamEditPage();
+            var skillStones = new StonesPage();
+            var stoneSell = new StoneSell();
+            var stoneMerge = new StoneMerge();
+            var selfFightFront = new SelfFightPage();
+            var questInfo = new QuestInfoPage();
+            var memberDetail = new MonsterListPage();
+            var memberDetail_edit = new MonsterEditPage();
+            var memberDetail_SkillShow = new SkillShowPage();
+            var arcadeFrontPage = new ArcadeFrontPage();
+            
             // Shop
-            ShopTop shopTop = new ShopTop();
-            BoxOverLoadFix boxOverLoadFix = new BoxOverLoadFix();
-            StoneBoxExpansion stoneBoxExpansion = new StoneBoxExpansion();
+            var shopTop = new ShopTop();
+            var boxOverLoadFix = new BoxOverLoadFix();
+            var stoneBoxExpansion = new StoneBoxExpansion();
 
             // Gotcha
-            GotchaFront gotchaFront = new GotchaFront();
-            GotchaResult gotchaResult = new GotchaResult();
-            ArenaPage areanaPage = new ArenaPage();
+            var gotchaFront = new GotchaFront();
+            var gotchaResult = new GotchaResult();
+            var arenaPage = new ArenaPage();
 
             // mail
-            MailBoxProcess mailBox = new MailBoxProcess();
-            MailDetailProcess mailDetail = new MailDetailProcess();
-
+            var mailBox = new MailBoxProcess();
+            var mailDetail = new MailDetailProcess();
+            
             ProcessesRunner.Main.Clear();
             ProcessesRunner.Main.Add(MainSceneStep.TeamEditFront, teamEditFront);
             ProcessesRunner.Main.Add(MainSceneStep.SkillStoneList, skillStones);
@@ -118,10 +112,10 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.QuestInfo, questInfo);
             ProcessesRunner.Main.Add(MainSceneStep.MonsterList, memberDetail);
             ProcessesRunner.Main.Add(MainSceneStep.UnitSkillEdit, memberDetail_edit);
-            ProcessesRunner.Main.Add(MainSceneStep.UnitSkillShow, memberDetail_Skillshow);
+            ProcessesRunner.Main.Add(MainSceneStep.UnitSkillShow, memberDetail_SkillShow);
             ProcessesRunner.Main.Add(MainSceneStep.FrontPage, frontPage);
             ProcessesRunner.Main.Add(MainSceneStep.ArcadeFront, arcadeFrontPage);
-            ProcessesRunner.Main.Add(MainSceneStep.Arena, areanaPage);
+            ProcessesRunner.Main.Add(MainSceneStep.Arena, arenaPage);
             ProcessesRunner.Main.Add(MainSceneStep.ShopTop, shopTop);
             ProcessesRunner.Main.Add(MainSceneStep.BoxOverLoadHelper, boxOverLoadFix);
             ProcessesRunner.Main.Add(MainSceneStep.BoxExpansion, stoneBoxExpansion);
