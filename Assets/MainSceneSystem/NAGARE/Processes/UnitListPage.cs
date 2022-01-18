@@ -2,14 +2,14 @@
 using mainMenu;
 using dataAccess;
 
-public class MonsterListPage : MainSceneProcess
+public class UnitListPage : MainSceneProcess
 {
     public bool loadFinished;
 
     private UnitsLayer layer;
     private UnitOptionLayer unitOptionLayer;
     
-    public MonsterListPage()
+    public UnitListPage()
     {
         Step = MainSceneStep.MonsterList;
         EelementsInherit(PreScene.target);

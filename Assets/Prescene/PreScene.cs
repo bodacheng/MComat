@@ -84,7 +84,7 @@ namespace mainMenu
             var stoneMerge = new StoneMerge();
             var selfFightFront = new SelfFightPage();
             var questInfo = new QuestInfoPage();
-            var memberDetail = new MonsterListPage();
+            var memberDetail = new UnitListPage();
             var memberDetail_edit = new MonsterEditPage();
             var memberDetail_SkillShow = new SkillShowPage();
             var arcadeFrontPage = new ArcadeFrontPage();

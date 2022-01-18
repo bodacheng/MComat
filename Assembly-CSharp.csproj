@@ -91,7 +91,7 @@
      <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Rename.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Clustered\ClusteredScreenTransformGesture.cs" />
      <Compile Include="Assets\Ultimate Joystick\Scripts\UltimateJoystick.cs" />
-     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MonsterListPage.cs" />
+     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\UnitListPage.cs" />
      <Compile Include="Assets\AI\Soul\BehaviorRunner_newRunner.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\BoxExpandHelperLayer.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\StoneMerge.cs" />

@@ -10,8 +10,7 @@ public class GoToMemberDetail : TutorialProcess
     
     public override void ProcessEnter()
     {
-        PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-        popupLayer.HighLightRect(TutorialHelper.target.MemberEditButton.GetComponent<RectTransform>());
+        PopupLayer.HighLightRect(PreScene.target.T, TutorialHelper.target.MemberEditButton.GetComponent<RectTransform>());
     }
     
     public override void ProcessEnd()

@@ -23,7 +23,7 @@ public partial class PopupLayer : UILayer
     
     public static PopupLayer Open(GameObject T)
     {
-        PopupLayer returnValue = Get();
+        var returnValue = Get();
         if (returnValue != null)
         {
             return returnValue;

@@ -11,8 +11,7 @@ public class GoToStages : TutorialProcess
     
     public override void ProcessEnter()
     {
-        PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-        popupLayer.HighLightRect(TutorialHelper.target.ArcadeMode.GetComponent<RectTransform>());
+        PopupLayer.HighLightRect(PreScene.target.T, TutorialHelper.target.ArcadeMode.GetComponent<RectTransform>());
     }
     
     public override void ProcessEnd()

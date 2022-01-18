@@ -1,10 +1,11 @@
 ﻿using mainMenu;
 using UnityEngine;
+
 // Tutorial 2
 public class OpenSkillEdit : TutorialProcess
 {
     bool waitCompleted;
-    MonsterListPage MemberDetailProcess;
+    UnitListPage MemberDetailProcess;
     public OpenSkillEdit()
     {
         EelementsInherit(PreScene.target);
@@ -13,7 +14,7 @@ public class OpenSkillEdit : TutorialProcess
     public override void ProcessEnter()
     {
         waitCompleted = false;
-        MemberDetailProcess = (MonsterListPage)ProcessesRunner.Main.GetProcess(MainSceneStep.MonsterList);
+        MemberDetailProcess = (UnitListPage)ProcessesRunner.Main.GetProcess(MainSceneStep.MonsterList);
     }
     
     public override bool CanEnterOtherProcess()
@@ -27,8 +28,7 @@ public class OpenSkillEdit : TutorialProcess
         {
             if (MemberDetailProcess.loadFinished)
             {
-                PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-                popupLayer.HighLightRect(TutorialHelper.target.SkillEditButton.GetComponent<RectTransform>());
+                PopupLayer.HighLightRect(PreScene.target.T, TutorialHelper.target.SkillEditButton.GetComponent<RectTransform>());
                 waitCompleted = true;
             }
         }

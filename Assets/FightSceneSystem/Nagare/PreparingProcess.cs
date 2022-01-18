@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using FightScene;
 using System.Collections.Generic;
-using mainMenu;
 
 public class PreparingProcess : FSceneProcess
 {
@@ -47,12 +46,10 @@ public class PreparingProcess : FSceneProcess
         EffectsManager.INIEffectsPool("wallCrack", null, 3);
         PopupLayer.Close();
     }
-
-    private PopupLayer _popupLayer;
+    
     public override void ProcessEnter()
     {
-        _popupLayer = PopupLayer.Open(NetFightScene.target.T.gameObject);
-        _popupLayer.DarkOff(1f, 0);
+        PopupLayer.DarkOff(NetFightScene.target.T.gameObject, 1f, 0);
         SingleThreadProcesser.backup.RunFreely(EnterProcess());
     }
     

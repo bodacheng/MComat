@@ -10,7 +10,14 @@ public partial class PopupLayer : UILayer {
     // 因为popup出来的东西原则都是高亮
     
     #region 高亮显示
-    public async void HighLightRect(RectTransform r, Options options = null)
+
+    public static void HighLightRect(GameObject T, RectTransform r, Options options = null)
+    {
+        var popupLayer = Open(T);
+        popupLayer.HighLightRect(r, options);
+    }
+    
+    async void HighLightRect(RectTransform r, Options options = null)
     {
         bigCurtain.raycastTarget = true;// 防止下面那点间隔里有点击画面的空间
         await Observable.TimerFrame(2);// 没有这个间隔ShowForUI的计算可能出错
@@ -29,7 +36,14 @@ public partial class PopupLayer : UILayer {
     #endregion
     
     #region 黑幕
-    public async void DarkOff(float darkness, float duration)
+
+    public static void DarkOff(GameObject T, float darkness, float duration)
+    {
+        var popupLayer = Open(T);
+        popupLayer.DarkOff(darkness, duration);
+    }
+    
+    async void DarkOff(float darkness, float duration)
     {
         bigCurtain.raycastTarget = true;
         await Observable.TimerFrame(2);// 没有这个间隔ShowForUI的计算可能出错

@@ -11,9 +11,7 @@ public class SettingLayer : UILayer {
     [SerializeField] Slider cvSlider;
     [SerializeField] Slider effectsSoundsSlider;
     #endregion
-
-    private PopupLayer _popupLayer;
-
+    
     public static SettingLayer Get()
     {
         UILayer l = UILayerLoader.Get("SettingLayer");
@@ -39,8 +37,7 @@ public class SettingLayer : UILayer {
     
     void Initialise()
     {
-        _popupLayer = PopupLayer.Open(PreScene.target.T);
-        _popupLayer.HighLightRect(SettingMenuT);
+        PopupLayer.HighLightRect(PreScene.target.T, SettingMenuT);
         onBgmChange();
         onCVsChange();
         onEffectsSoundChange();
