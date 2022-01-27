@@ -6,19 +6,19 @@ using UniRx;
 
 public static class GeneralModelPool {
     
-    public static IDictionary<string, List<Data_Center>> ModelDic = new Dictionary<string, List<Data_Center>>();
-    static List<SingleAssignmentDisposable> AutoReturnMissions = new List<SingleAssignmentDisposable>();
+    static readonly IDictionary<string, List<Data_Center>> ModelDic = new Dictionary<string, List<Data_Center>>();
+    static readonly List<SingleAssignmentDisposable> AutoReturnMissions = new List<SingleAssignmentDisposable>();
     
     public static void Clear()
     {
-        for (int i = 0; i < AutoReturnMissions.Count; i++)
+        foreach (var t in AutoReturnMissions)
         {
-            AutoReturnMissions[i].Dispose();
+            t.Dispose();
         }
         ModelDic.Clear();
     }
     
-    static void AutoReturn(Data_Center data_Center, string resourceID)
+    static void AddAutoReturnMission(Data_Center data_Center, string resourceID)
     {
         SingleAssignmentDisposable one = null;
         one = new SingleAssignmentDisposable
@@ -38,84 +38,84 @@ public static class GeneralModelPool {
         AutoReturnMissions.Add(one);
     }
     
-    public static IEnumerator GetModel(string ModelID, bool FromPool)
+    public static IEnumerator GetModel(string rId, bool fromPool)
     {
         Data_Center target = null;
-        if (FromPool)
+        if (fromPool)
         {
-            if (!ModelDic.ContainsKey(ModelID))
+            if (!ModelDic.ContainsKey(rId))
             {
-                yield return ConstructPool(ModelID);
-                if (!ModelDic.ContainsKey(ModelID))
+                yield return ConstructPool(rId);
+                if (!ModelDic.ContainsKey(rId))
                 {
                     yield return null;
                     yield break;
                 }
             }
-            for (int i = 0; i < ModelDic[ModelID].Count; i++)
+            for (var i = 0; i < ModelDic[rId].Count; i++)
             {
-                if (!ModelDic[ModelID][i].WholeT.gameObject.activeSelf)
+                if (!ModelDic[rId][i].WholeT.gameObject.activeSelf)
                 {
-                    target = ModelDic[ModelID][i];
+                    target = ModelDic[rId][i];
                 }
             }
             if (target == null)
             {
-                IEnumerator buildmodelproess = CreateUnit(ModelID);
-                yield return buildmodelproess;
-                target = (Data_Center)buildmodelproess.Current;
-                ModelDic[ModelID].Add(target);
+                var process = CreateUnit(rId);
+                yield return process;
+                target = (Data_Center)process.Current;
+                ModelDic[rId].Add(target);
             }
             target.WholeT.gameObject.SetActive(true);
-            AutoReturn(target, ModelID);
-        }else{
-            IEnumerator buildmodelproess = CreateUnit(ModelID);
-            yield return buildmodelproess;
-            target = (Data_Center)buildmodelproess.Current;
+            AddAutoReturnMission(target, rId);
+        } else {
+            var process = CreateUnit(rId);
+            yield return process;
+            target = (Data_Center)process.Current;
         }
         yield return target;
     }
     
-    public static IEnumerator GetMyModel(string localid)
+    public static IEnumerator GetMyModel(string instanceId)
     {
-        UnitInfo targetInfo = MyMonsters.Get(localid);
-        IEnumerator enumerator = GetModel(targetInfo.r_id, true);
-        yield return enumerator;
-        yield return enumerator.Current;
+        var targetInfo = MyMonsters.Get(instanceId);
+        var get = GetModel(targetInfo.r_id, true);
+        yield return get;
+        yield return get.Current;
     }
     
-    public static IEnumerator ConstructPool(string rID)
+    static IEnumerator ConstructPool(string rId)
     {
-        IEnumerator proess = CreateUnit(rID);
-        yield return proess;
-        Data_Center _D = (Data_Center)proess.Current;
+        IEnumerator process = CreateUnit(rId);
+        yield return process;
+        var _D = (Data_Center)process.Current;
         if (_D != null)
         {
             _D.WholeT.gameObject.SetActive(false);
-            List<Data_Center> data_Centers = new List<Data_Center>() { _D };
-            DicAdd<string, List<Data_Center>>.Add(ModelDic, rID, data_Centers);
+            var data_Centers = new List<Data_Center>() { _D };
+            DicAdd<string, List<Data_Center>>.Add(ModelDic, rId, data_Centers);
         }else{
-            Debug.Log("角色"+rID+"构建失败");
+            Debug.Log("角色"+rId+"构建失败");
             yield return null;
         }
     }
     
     static IEnumerator CreateUnit(string rID)
     {
-        IEnumerator proess = null;
+        IEnumerator process = null;
         switch(ResourceLoadingSetting.ModelLoadingMode)
         {
             case ResourceLoadMode.CachAB:
-            yield return proess= (UnitCreator.CreateRawUnit_Cach(rID));
+                yield return process = (UnitCreator.CreateRawUnit_Cach(rID));
             break;
             case ResourceLoadMode.Resource:
-            yield return proess = (UnitCreator.CreateRawUnit_Resource(rID));
+                yield return process = (UnitCreator.CreateRawUnit_Resource(rID));
             break;
             case ResourceLoadMode.StreamingAssetAB:
-            yield return proess = (UnitCreator.CreateRawUnit_StreamingAssets(rID));
+                yield return process = (UnitCreator.CreateRawUnit_StreamingAssets(rID));
             break;
         }
-        Data_Center _Temp = (Data_Center)proess.Current;
+        var _Temp = (Data_Center)process.Current;
         yield return _Temp;
     }
 }

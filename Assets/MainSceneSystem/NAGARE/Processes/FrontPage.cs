@@ -51,11 +51,11 @@ public class FrontPage : MainSceneProcess
         EelementsInherit(PreScene.target);
     }
 
-    MainTop mainTop;
+    FrontLayer frontLayer;
     IEnumerator EnterProcess()
     {
-        mainTop = UILayerLoader.Load(PreScene.target.T, "MainTop") as MainTop;
-        mainTop.Initialise(PreScene.target);
+        frontLayer = UILayerLoader.Load(PreScene.target.T, "FrontLayer") as FrontLayer;
+        frontLayer.Initialise(PreScene.target);
         
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 2.2f, 0.1f);
         //MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
@@ -110,8 +110,8 @@ public class FrontPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        if (mainTop != null)
-            GameObject.Destroy(mainTop.gameObject);
+        if (frontLayer != null)
+            GameObject.Destroy(frontLayer.gameObject);
 
         missionWatcher.DisposeAll();
         UserDataLoadFinished(0);
@@ -121,7 +121,6 @@ public class FrontPage : MainSceneProcess
 
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
         UpperInfoBar.Close();
-        BigButtonRender.target.TestOff();
     }
 
     readonly Vector3 screenPos = new Vector3(0.23f, 0.22f, 10);

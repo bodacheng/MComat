@@ -152,7 +152,7 @@
      <Compile Include="Assets\FightOverControl\FightOverControl.cs" />
      <Compile Include="Assets\UI\SideCharIcon.cs" />
      <Compile Include="Assets\TouchScript\Examples\Portal\Scripts\Spawner.cs" />
-     <Compile Include="Assets\DummyLayerSystem\LayerDefine\MainTop.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\FrontLayer.cs" />
      <Compile Include="Assets\Setting\AppSetting.cs" />
      <Compile Include="Assets\Monsterbox\StoneDeleteManger.cs" />
      <Compile Include="Assets\ImportantDefinition\Monster\UnitConfig.cs" />
@@ -176,6 +176,7 @@
      <Compile Include="Assets\MasterDataTool\MasterDataTool.cs" />
      <Compile Include="Assets\ResourceLoading\EffectsLoad\EffectsManager_Local.cs" />
      <Compile Include="Assets\TutorialManger\processes\ChooseAdamToSlot1.cs" />
+     <Compile Include="Assets\P3\GradientColor.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\SkillSelect.cs" />
      <Compile Include="Assets\Structure\Sys.cs" />
      <Compile Include="Assets\MasterDataTool\Monster_PF.cs" />
@@ -236,7 +237,6 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\ChapterButton.cs" />
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_ByAcc.cs" />
      <Compile Include="Assets\MasterDataTool\MasterDataToolGUI.cs" />
-     <Compile Include="Assets\Prescene\BigButtonRender.cs" />
      <Compile Include="Assets\UI\ImageGliter.cs" />
      <Compile Include="Assets\UI\ReturnLayer.cs" />
      <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\Options.cs" />
@@ -403,6 +403,7 @@
      <Compile Include="Assets\Asstes\JMO Assets\MatCap Shaders\Creator\Assets\MC_CreateMatCap.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\Mail.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\ScreenTransformGesture.cs" />
+     <Compile Include="Assets\P3\UiEffectListPool.cs" />
      <Compile Include="Assets\Camera\Modes\GodplayerCamera.cs" />
      <Compile Include="Assets\TutorialManger\Tutorial\TutorialHelper.cs" />
      <Compile Include="Assets\UI\Oldscripts\RongLianGamen.cs" />
@@ -479,6 +480,7 @@
      <Compile Include="Assets\TouchScript\Scripts\Gestures\MetaGesture.cs" />
      <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Filter.cs" />
      <Compile Include="Assets\TouchScript\Scripts\GestureManager.cs" />
+     <Compile Include="Assets\P3\DedicatedCameraConnector.cs" />
      <Compile Include="Assets\TeamUIManager\RotationMode\TeamUIManagerRotationMode.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkDubSounds.cs" />
      <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_Resource.cs" />

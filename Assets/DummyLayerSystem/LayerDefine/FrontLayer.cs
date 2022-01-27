@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using mainMenu;
 
-public class MainTop : UILayer
+public class FrontLayer : UILayer
 {
     [SerializeField] private Button ArcadeBtn;
     [SerializeField] private Button ArenaBtn;
@@ -12,7 +12,35 @@ public class MainTop : UILayer
     [SerializeField] private Button GotchaBtn;
     [SerializeField] private Button SkillTestRBtn;
     [SerializeField] private Button SkillTestMBtn;
+    
+    static FrontLayer Get()
+    {
+        var l = UILayerLoader.Get("FrontLayer");
+        FrontLayer returnValue = null;
+        if (l != null)
+        {
+            returnValue = l as FrontLayer;
+        }
+        return returnValue;
+    }
+    
+    public static FrontLayer Open(PreScene pre)
+    {
+        var returnValue = Get();
+        if (returnValue != null)
+        {
+            return returnValue;
+        }
+        returnValue = UILayerLoader.Load(PreScene.target.T,"FrontLayer") as FrontLayer;
+        returnValue.Initialise(pre);
+        return returnValue;
+    }
 
+    public static void Close()
+    {
+        UILayerLoader.Remove("FrontLayer");
+    }
+    
     public void Initialise(PreScene pre)
     {
         ArcadeBtn.onClick.AddListener(()=> pre.trySwitchToStep(MainSceneStep.ArcadeFront,true));
@@ -21,7 +49,7 @@ public class MainTop : UILayer
         TrainBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SelfFightFront, true));
         StonesBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SkillStoneList, true));
         GotchaBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.GotchaFront, true));
-
+        
         SkillTestRBtn.onClick.AddListener(pre.BeginSkillTest_Rotatiom);
         SkillTestMBtn.onClick.AddListener(pre.BeginSkillTest_Multi);
     }

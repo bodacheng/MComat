@@ -6,7 +6,7 @@ public class UILayerLoader
     static readonly IDictionary<string, string> paths = new Dictionary<string, string>()
     {
         {"UpperInfoBar", "DummyLayerSystem/UpperInfoBar"},
-        {"MainTop", "DummyLayerSystem/MainTop"},
+        {"FrontLayer", "DummyLayerSystem/FrontLayer"},
         {"ArcadeTop", "DummyLayerSystem/ArcadeTop"},
         {"ArenaLayer", "DummyLayerSystem/ArenaLayer"},
         {"MailBox", "DummyLayerSystem/MailBox"},

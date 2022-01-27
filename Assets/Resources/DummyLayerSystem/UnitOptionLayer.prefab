@@ -870,7 +870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 336, y: 147}
+  m_AnchoredPosition: {x: 336, y: 94}
   m_SizeDelta: {x: 120, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7350828440521233061
@@ -951,7 +951,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 650, y: 276}
+  m_AnchoredPosition: {x: 650, y: 207}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7350828440633716044
@@ -2327,28 +2327,6 @@ MonoBehaviour:
   focusingCharName: {fileID: 7350828441181248025}
   SkillShowButton: {fileID: 7350828440633716043}
   SkillEditButton: {fileID: 140172873115886934}
-  _focusing:
-    id: 
-    r_id: 
-    set:
-      a1: 
-      a2: 
-      a3: 
-      b1: 
-      b2: 
-      b3: 
-      c1: 
-      c2: 
-      c3: 
-      A1lv: 0
-      A2lv: 0
-      A3lv: 0
-      B1lv: 0
-      B2lv: 0
-      B3lv: 0
-      C1lv: 0
-      C2lv: 0
-      C3lv: 0
 --- !u!1 &7350828441574993272
 GameObject:
   m_ObjectHideFlags: 0
@@ -3055,7 +3033,7 @@ PrefabInstance:
     - target: {fileID: 3834819590175514648, guid: c33785a0a0f404bec93eee5ee37434ac,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 276
+      value: 223
       objectReference: {fileID: 0}
     - target: {fileID: 3834819590175514648, guid: c33785a0a0f404bec93eee5ee37434ac,
         type: 3}
