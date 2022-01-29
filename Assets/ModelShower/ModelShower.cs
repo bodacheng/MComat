@@ -18,8 +18,8 @@ public class ModelShower : MonoBehaviour
     
     public IEnumerator ShowMyModel(string instanceID)
     {
-        UnitInfo info = MyMonsters.Get(instanceID);
-        IEnumerator p = ShowModel(info?.r_id);
+        var info = MyMonsters.Get(instanceID);
+        var p = ShowModel(info?.r_id);
         yield return p;
         yield return p.Current;
     }
@@ -35,7 +35,7 @@ public class ModelShower : MonoBehaviour
             yield break;
         }
         
-        IEnumerator p = GeneralModelPool.GetModel(recordID, true);
+        var p = GeneralModelPool.GetModel(recordID, true);
         yield return p;
         if (p.Current == null)
         {

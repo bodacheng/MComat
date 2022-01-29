@@ -113,6 +113,7 @@
      <Compile Include="Assets\SkillShowSupporter.cs" />
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow.cs" />
      <Compile Include="Assets\TutorialManger\TutorialProcess.cs" />
+     <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SettingPage.cs" />
      <Compile Include="Assets\AI\AI_states\states\Move_State.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Utils\Attributes\NullToggleAttribute.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\TeamEditLayer.cs" />
@@ -1711,10 +1712,6 @@
       <Project>{05318875-1897-527d-49be-8f73049faddb}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
-    <ProjectReference Include="PlayFabSDKEditor.csproj">
-      <Project>{b66bf6a6-bdbd-a406-4867-b5f5adf9847a}</Project>
-      <Name>PlayFabSDKEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="AppleAuth.Editor.csproj">
       <Project>{0de3c25d-e596-b8f3-75a9-4b52183d8b1f}</Project>
       <Name>AppleAuth.Editor</Name>
@@ -1734,10 +1731,6 @@
     <ProjectReference Include="PlayFabEditorExtensions.csproj">
       <Project>{013bdff4-f5db-6280-902d-1d03b79d7515}</Project>
       <Name>PlayFabEditorExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="PlayFab.csproj">
-      <Project>{e0202ee9-9920-2c5f-cdc6-263f7b6d3a00}</Project>
-      <Name>PlayFab</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.DOTween.csproj">
       <Project>{3e044dcc-d241-df23-e1d3-661d83f799b1}</Project>
@@ -1762,6 +1755,14 @@
     <ProjectReference Include="AppleAuth.csproj">
       <Project>{11db2e7e-c1b9-9ea6-9ee4-9b1ead681c56}</Project>
       <Name>AppleAuth</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayFabSDKEditor.csproj">
+      <Project>{b66bf6a6-bdbd-a406-4867-b5f5adf9847a}</Project>
+      <Name>PlayFabSDKEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayFab.csproj">
+      <Project>{e0202ee9-9920-2c5f-cdc6-263f7b6d3a00}</Project>
+      <Name>PlayFab</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

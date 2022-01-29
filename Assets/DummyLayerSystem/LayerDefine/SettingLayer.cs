@@ -4,17 +4,15 @@ using UnityEngine.UI;
 
 public class SettingLayer : UILayer {
     
-    [SerializeField] RectTransform SettingMenuT;
-
     #region Sound
     [SerializeField] Slider bgmSLider;
     [SerializeField] Slider cvSlider;
     [SerializeField] Slider effectsSoundsSlider;
     #endregion
     
-    public static SettingLayer Get()
+    static SettingLayer Get()
     {
-        UILayer l = UILayerLoader.Get("SettingLayer");
+        var l = UILayerLoader.Get("SettingLayer");
         SettingLayer returnValue = null;
         if (l != null)
         {
@@ -37,18 +35,15 @@ public class SettingLayer : UILayer {
     
     void Initialise()
     {
-        PopupLayer.HighLightRect(PreScene.target.T, SettingMenuT);
         onBgmChange();
         onCVsChange();
         onEffectsSoundChange();
         ResetSliders();
     }
     
-    // 按钮函数，置于Seting面板返回键上
-    public void Close()
+    public static void Close()
     {
         AppSetting.Save();
-        PopupLayer.Close();
         UILayerLoader.Remove("SettingLayer");
     }
     

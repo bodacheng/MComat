@@ -49,18 +49,16 @@ public partial class CloudScript
             (ExecuteCloudScriptResult result) => {
                 try
                 {
-                    PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
-                    
-                    object teamInfos;
-                    jsonResult.TryGetValue("teamInfos", out teamInfos); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
-                    string json = JsonConvert.SerializeObject(teamInfos);
+                    var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
+                    jsonResult.TryGetValue("teamInfos", out var teamInfos);
+                    var json = JsonConvert.SerializeObject(teamInfos);
                     Debug.Log(json);
-                    List<LeaderboardInfo> oo = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(json,
+                    List<LeaderboardInfo> opponents = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(json,
                         new JsonSerializerSettings
                         {
                             NullValueHandling = NullValueHandling.Ignore
                         });
-                    success.Invoke(oo);
+                    success.Invoke(opponents);
                 }
                 catch (Exception e)
                 {

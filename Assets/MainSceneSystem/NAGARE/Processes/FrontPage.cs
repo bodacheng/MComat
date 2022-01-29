@@ -61,8 +61,8 @@ public class FrontPage : MainSceneProcess
         //MonsterBox.target.MonsterBoxWholeT.gameObject.SetActive(false);
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
-
-        string focus_instanceID = TeamSet.Default.GetInstanceIdOnPos(0);
+        
+        var focus_instanceID = TeamSet.Default.GetInstanceIdOnPos(0);
         if (focus_instanceID == null)
         {
             foreach (KeyValuePair<string, UnitInfo> keyValuePair in MyMonsters.Dic)
@@ -74,7 +74,7 @@ public class FrontPage : MainSceneProcess
         PreScene.target.SetFocusingUnit(focus_instanceID);//确立focusing角色
         yield return ModelShower.target.ShowMyModel(focus_instanceID);
         //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
-        UpperInfoBar.Open(() => SettingLayer.Open(), 
+        UpperInfoBar.Open(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), 
             () => PreScene.target.trySwitchToStep(10));
         PopupLayer.Close();
     }
@@ -118,9 +118,11 @@ public class FrontPage : MainSceneProcess
         ItemsLoadFinished(0);
         UserReadOnlyDataLoadFinished(0);
         StatisticsLoadFinished(0);
-
+        
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
         UpperInfoBar.Close();
+        
+        SingleThreadProcesser.backup.RunAsQueued(ModelShower.target.ShowMyModel(null));
     }
 
     readonly Vector3 screenPos = new Vector3(0.23f, 0.22f, 10);

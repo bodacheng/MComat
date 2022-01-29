@@ -77,6 +77,7 @@ namespace mainMenu
             Application.targetFrameRate = 60;
             
             #region 主界面各大画面
+            var settingPage = new SettingPage();
             var frontPage = new FrontPage();
             var teamEditFront = new TeamEditPage();
             var skillStones = new StonesPage();
@@ -104,6 +105,7 @@ namespace mainMenu
             var mailDetail = new MailDetailProcess();
             
             ProcessesRunner.Main.Clear();
+            ProcessesRunner.Main.Add(MainSceneStep.Setting, settingPage);
             ProcessesRunner.Main.Add(MainSceneStep.TeamEditFront, teamEditFront);
             ProcessesRunner.Main.Add(MainSceneStep.SkillStoneList, skillStones);
             ProcessesRunner.Main.Add(MainSceneStep.SkillStones_Sell, stoneSell);
