@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
-public partial class StagesManagerGUI : Editor {
+public partial class StagesManagerGUI : EditorWindow {
     
     int selectedUnitIndex;
     string focusingPosID;

@@ -4,7 +4,7 @@ using UnityEditor;
 using Skill;
 using System.Collections.Generic;
 
-public partial class StagesManagerGUI : Editor {
+public partial class StagesManagerGUI : EditorWindow {
 
     string A1ButtonText = "A1";
     string A2ButtonText = "A2";

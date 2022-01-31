@@ -4,7 +4,7 @@ using UnityEditor;
 using System.Linq;
 using UniRx;
 
-public partial class StagesManagerGUI : Editor {
+public partial class StagesManagerGUI : EditorWindow {
     
     string CharSelect()
     {

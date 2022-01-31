@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public partial class StagesManagerGUI : Editor {
+public partial class StagesManagerGUI : EditorWindow {
 
     void LoadScript()
     {

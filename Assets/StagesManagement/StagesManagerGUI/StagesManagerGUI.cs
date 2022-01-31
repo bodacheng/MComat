@@ -7,24 +7,24 @@ using Skill;
 // 后排敌人——〉角色ID，
 // localID = 0，脚本ID，等级 前排中央敌人——〉角色ID，localID = 1，脚本ID，等级 前排左敌人——〉角色ID，localID = 2，脚本ID，等级 前排右敌人——〉角色ID，localID = 3，脚本ID，等级
 [CustomEditor(typeof(StagesManager))]
-public partial class StagesManagerGUI : Editor {
-
-    StagesManager _stagesManager;
+public partial class StagesManagerGUI : EditorWindow
+{
+    StagesManager _stagesManager = new StagesManager();
     
     string pathAndNameForLocalSave = "Resources/stageTemp/oneFight.json";
     IDictionary<string, string> UnitIDsAndNames;
     UnitInfo focusingUnitInfo;
     string focusingType;
     
-    public override void OnInspectorGUI()
+    void OnGUI()
     {
         if (!Initialized)
         {
+            _stagesManager.target = new FightMembers();
             UIparamIni();
             Initialized = true;
         }
-        _stagesManager = (StagesManager)target;
-        
+
         GUILayout.Space(10);
         LoadScript();       
         GUILayout.Space(10);
