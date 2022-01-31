@@ -413,7 +413,7 @@
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\QuestInfoPage.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Debugging\Filters\IPointerDataFilter.cs" />
      <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\GameManager.cs" />
-     <Compile Include="Assets\StagesManagement\QuestPreparePage\FightPrepareLayer.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\FightPrepareLayer.cs" />
      <Compile Include="Assets\TutorialManger\processes\FillASlot\SkillEditTry_A3Filled.cs" />
      <Compile Include="Assets\CachLogic\downloads_model.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Base\OnePointTrasformGestureBase.cs" />

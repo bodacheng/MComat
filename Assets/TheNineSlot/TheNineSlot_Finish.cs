@@ -24,7 +24,7 @@ public partial class SkillSet
         {
             return _skillSet;
         }
-
+        
         string skillId = null;
         switch (targetSlot)
         {
@@ -56,7 +56,7 @@ public partial class SkillSet
                 skillId = _skillSet.c3;
                 break;
         }
-
+        
         // 已经有技能石的格子不做修改
         if (SkillConfigTable.GetSkillConfig(skillId) != null)
             return SkillSetRandomFix(type, _skillSet, targetSlot + 1, baseOnAcc);
