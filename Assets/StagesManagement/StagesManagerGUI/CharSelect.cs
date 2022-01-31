@@ -21,13 +21,13 @@ public partial class StagesManagerGUI : Editor {
         {
             if (keyValuePair.Key == focusingUnitInfo.r_id)
             {
-                selectedmonsterindex = index;
+                selectedUnitIndex = index;
                 break;
             }
             index++;
         }
-        selectedmonsterindex = EditorGUILayout.Popup("角色名：", selectedmonsterindex, UnitIDsAndNames.Values.ToArray());
-        focusingUnitInfo.r_id =  UnitIDsAndNames.Count > selectedmonsterindex ? UnitIDsAndNames.ElementAt(selectedmonsterindex).Key : null;
+        selectedUnitIndex = EditorGUILayout.Popup("角色名：", selectedUnitIndex, UnitIDsAndNames.Values.ToArray());
+        focusingUnitInfo.r_id =  UnitIDsAndNames.Count > selectedUnitIndex ? UnitIDsAndNames.ElementAt(selectedUnitIndex).Key : null;
         return focusingUnitInfo.r_id;
     }
 }

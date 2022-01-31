@@ -4,7 +4,7 @@ using UnityEditor;
 
 public partial class StagesManagerGUI : Editor {
     
-    int selectedmonsterindex;
+    int selectedUnitIndex;
     string focusingPosID;
     
     void Members()
@@ -13,21 +13,21 @@ public partial class StagesManagerGUI : Editor {
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("left", (focusingPosID != 1.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {
-            selectedmonsterindex = 0;
+            selectedUnitIndex = 0;
             focusingPosID = 1.ToString();
             focusingUnitInfo = _stagesManager.target.EnemySets.Get(0, 1);
             targetSlot = 0;
         }
         if (GUILayout.Button("mid", (focusingPosID != 0.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {
-            selectedmonsterindex = 0;
+            selectedUnitIndex = 0;
             focusingPosID = 0.ToString();
             focusingUnitInfo = _stagesManager.target.EnemySets.Get(0, 0);
             targetSlot = 0;
         }
         if (GUILayout.Button("right", (focusingPosID != 2.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {
-            selectedmonsterindex = 0;
+            selectedUnitIndex = 0;
             focusingPosID = 2.ToString();
             focusingUnitInfo = _stagesManager.target.EnemySets.Get(0, 2);
             targetSlot = 0;

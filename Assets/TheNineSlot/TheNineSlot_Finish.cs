@@ -95,10 +95,10 @@ public partial class SkillSet
 
         A:
 
-        var exceptSKIds = _skillSet.SkillIDList();
+        var exceptSkIds = _skillSet.SkillIDList();
         if (baseOnAcc)
         {
-            var stoneInfoModel = Stones.SearchStoneForRandomSet(filterForm, exceptSKIds);
+            var stoneInfoModel = Stones.SearchStoneForRandomSet(filterForm, exceptSkIds);
             if (stoneInfoModel == null) // 如果账户已经没有符合要求的石头
             {
                 Debug.Log("无法为" + targetSlot + "找到合适技能石");
@@ -108,7 +108,7 @@ public partial class SkillSet
         }
         else
         {
-            var skid = RandomSkillIDOfStone(filterForm, exceptSKIds);
+            var skid = RandomSkillIDOfStone(filterForm, exceptSkIds);
             if (skid == null) // 如果账户已经没有符合要求的石头
             {
                 Debug.Log("无法为" + targetSlot + "找到合适技能石");
