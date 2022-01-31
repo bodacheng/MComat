@@ -9,8 +9,8 @@ public partial class SkillSet
     // 随机技能组
     public static SkillSet RandomSkillSet(string type, string originSkill, int skillLevel, bool baseOnAcc, SkillStonesBox.StoneFilterForm filterForm = null)
     {
-        SkillSet skillSet = new SkillSet();
-        SkillConfig originSkillConfig = SkillConfigTable.GetSkillConfig(originSkill);
+        var skillSet = new SkillSet();
+        var originSkillConfig = SkillConfigTable.GetSkillConfig(originSkill);
         
         if (filterForm == null)
         {
@@ -29,7 +29,17 @@ public partial class SkillSet
         skillSet.SortNineAndTwo();
         return skillSet;
     }
-
+    
+    /// <summary>
+    /// 递归适配技能组
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="skillSet"></param>
+    /// <param name="filterForm"></param>
+    /// <param name="targetSlot"></param>
+    /// <param name="origin"></param>
+    /// <param name="baseOnAcc"></param>
+    /// <returns></returns>
     static SkillSet RandomSkillSetRec(string type, SkillSet skillSet, SkillStonesBox.StoneFilterForm filterForm, int targetSlot, SkillConfig origin, bool baseOnAcc)
     {
         if (targetSlot == 1)

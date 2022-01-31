@@ -9,10 +9,10 @@ public partial class SkillEditLayer : UILayer
 {
     void FinishRemains()
     {
-        UnitInfo info = PreScene.target._focusing;
-        UnitConfig unitConfig = Units.GetUnitConfig(info.r_id);
-        SkillSet now = NineSlot.GetCurrentNineAndTwo();
-        SkillSet targetSkillSet = SkillSet.FixSkillSet(unitConfig.TYPE, now, 1, true);
+        var info = PreScene.target._focusing;
+        var unitConfig = Units.GetUnitConfig(info.r_id);
+        var now = NineSlot.GetCurrentNineAndTwo();
+        var targetSkillSet = SkillSet.FixSkillSet(unitConfig.TYPE, now, 1, true);
         
         if (targetSkillSet == null)
         {
@@ -26,11 +26,11 @@ public partial class SkillEditLayer : UILayer
     
     void RandomAll()
     {
-        UnitInfo info = PreScene.target._focusing;
-        UnitConfig unitConfig = Units.GetUnitConfig(info.r_id);
-        StoneOfPlayerInfo originSkillInfo = Stones.GetOriginSkillOfMonster(info.id);
+        var info = PreScene.target._focusing;
+        var unitConfig = Units.GetUnitConfig(info.r_id);
+        var originSkillInfo = Stones.GetOriginSkillOfMonster(info.id);
         // 这一步仅仅是根据账户拥有技能石的情况来确定了可行的技能组，也就是说根据手上的石头这个技能组能拼出来，但没提供具体的石头，所以防重复工作在实际装备技能石的时候（AddRandomStoneToSlot）也要做
-        SkillSet targetSkillSet = SkillSet.RandomSkillSet(unitConfig.TYPE, originSkillInfo?.skillId, 1, true);
+        var targetSkillSet = SkillSet.RandomSkillSet(unitConfig.TYPE, originSkillInfo?.skillId, 1, true);
         ForceClearAll();
         Finish(info, targetSkillSet);
     }
