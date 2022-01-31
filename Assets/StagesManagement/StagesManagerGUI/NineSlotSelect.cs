@@ -27,53 +27,53 @@ public partial class StagesManagerGUI : Editor {
             switch(_targetSlot)
             {
                 case 1:
-                nowSkillID = focusingCharInfo.set.a1;
+                nowSkillID = focusingUnitInfo.set.a1;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 A1ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 2:
-                nowSkillID = focusingCharInfo.set.a2;
+                nowSkillID = focusingUnitInfo.set.a2;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 A2ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 3:
-                nowSkillID = focusingCharInfo.set.a3;
+                nowSkillID = focusingUnitInfo.set.a3;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 A3ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 4:
-                nowSkillID = focusingCharInfo.set.b1;
+                nowSkillID = focusingUnitInfo.set.b1;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 B1ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 5:
-                nowSkillID = focusingCharInfo.set.b2;
+                nowSkillID = focusingUnitInfo.set.b2;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 B2ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 6:
-                nowSkillID = focusingCharInfo.set.b3;
+                nowSkillID = focusingUnitInfo.set.b3;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 B3ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 7:
-                nowSkillID = focusingCharInfo.set.c1;
+                nowSkillID = focusingUnitInfo.set.c1;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 C1ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 8:
-                nowSkillID = focusingCharInfo.set.c2;
+                nowSkillID = focusingUnitInfo.set.c2;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 C2ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 9:
-                nowSkillID = focusingCharInfo.set.c1;
+                nowSkillID = focusingUnitInfo.set.c1;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 C3ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
             }
-            KeyValuePair<string, string> kv = INHERENT_SkillTable.GetINHERENTSkill(focusingCharInfo.r_id);
-            GUI.backgroundColor = Repeated(focusingCharInfo.set, nowSkillID) ? Color.red : (defaultSkillConfig != null ? kv.Key == nowSkillID ? new Color(0.2f, 0.7f, 1) : Color.yellow : Color.white);
+            KeyValuePair<string, string> kv = INHERENT_SkillTable.GetINHERENTSkill(focusingUnitInfo.r_id);
+            GUI.backgroundColor = Repeated(focusingUnitInfo.set, nowSkillID) ? Color.red : (defaultSkillConfig != null ? kv.Key == nowSkillID ? new Color(0.2f, 0.7f, 1) : Color.yellow : Color.white);
         }
         
         SlotAnalyze(1);

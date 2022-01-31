@@ -15,21 +15,21 @@ public partial class StagesManagerGUI : Editor {
         {
             selectedmonsterindex = 0;
             focusingPosID = 1.ToString();
-            focusingCharInfo = _stagesManager.EditoringFight.EnemySets.Get(0, 1);
+            focusingUnitInfo = _stagesManager.target.EnemySets.Get(0, 1);
             targetSlot = 0;
         }
         if (GUILayout.Button("mid", (focusingPosID != 0.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {
             selectedmonsterindex = 0;
             focusingPosID = 0.ToString();
-            focusingCharInfo = _stagesManager.EditoringFight.EnemySets.Get(0, 0);
+            focusingUnitInfo = _stagesManager.target.EnemySets.Get(0, 0);
             targetSlot = 0;
         }
         if (GUILayout.Button("right", (focusingPosID != 2.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {
             selectedmonsterindex = 0;
             focusingPosID = 2.ToString();
-            focusingCharInfo = _stagesManager.EditoringFight.EnemySets.Get(0, 2);
+            focusingUnitInfo = _stagesManager.target.EnemySets.Get(0, 2);
             targetSlot = 0;
         }
         GUILayout.EndHorizontal();

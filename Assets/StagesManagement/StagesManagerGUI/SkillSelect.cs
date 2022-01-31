@@ -88,7 +88,7 @@ public partial class StagesManagerGUI : Editor {
         }
         SkillStonesBox.StoneFilterForm filterForm = new SkillStonesBox.StoneFilterForm
         {
-            type = focusingtype,
+            type = focusingType,
             close = skillrangeselectfilter[0],
             near = skillrangeselectfilter[1],
             far = skillrangeselectfilter[2],

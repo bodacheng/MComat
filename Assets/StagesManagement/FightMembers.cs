@@ -26,7 +26,7 @@ public class FightMembers
 
     public static FightMembers LoadEnemies_Json(TextAsset Script)
     {
-        FightMembers _localFight = new FightMembers();
+        var _localFight = new FightMembers();
         MultiDict<int, int, UnitInfo>.SerializableSet[] targetValue;
         try
         {

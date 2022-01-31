@@ -9,26 +9,26 @@ public partial class StagesManagerGUI : Editor {
     string CharSelect()
     {
         // 角色选择
-        UnitConfig focusingUnitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(focusingCharInfo.r_id));
-        focusingtype = focusingUnitConfig != null ? EditorGUILayout.TextField("CharacerType", focusingUnitConfig.TYPE) : EditorGUILayout.TextField("CharacerType", focusingtype);
-        CharIDsAndNames = new Dictionary<string, string>() { { "-1", "空" } };
-        foreach(KeyValuePair<string,string> keyValuePair in Units.GetMonsterIDsAndNamesDic(focusingtype))
+        UnitConfig focusingUnitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(focusingUnitInfo.r_id));
+        focusingType = focusingUnitConfig != null ? EditorGUILayout.TextField("CharacerType", focusingUnitConfig.TYPE) : EditorGUILayout.TextField("CharacerType", focusingType);
+        UnitIDsAndNames = new Dictionary<string, string>() { { "-1", "空" } };
+        foreach(KeyValuePair<string,string> keyValuePair in Units.GetMonsterIDsAndNamesDic(focusingType))
         {
-            CharIDsAndNames.Add(keyValuePair.Key, keyValuePair.Value);
+            UnitIDsAndNames.Add(keyValuePair.Key, keyValuePair.Value);
         }
         int index = 0;
-        foreach (KeyValuePair<string, string> keyValuePair in CharIDsAndNames)
+        foreach (KeyValuePair<string, string> keyValuePair in UnitIDsAndNames)
         {
-            if (keyValuePair.Key == focusingCharInfo.r_id)
+            if (keyValuePair.Key == focusingUnitInfo.r_id)
             {
                 selectedmonsterindex = index;
                 break;
             }
             index++;
         }
-        selectedmonsterindex = EditorGUILayout.Popup("角色名：", selectedmonsterindex, CharIDsAndNames.Values.ToArray());
-        focusingCharInfo.r_id =  CharIDsAndNames.Count > selectedmonsterindex ? CharIDsAndNames.ElementAt(selectedmonsterindex).Key : null;
-        return focusingCharInfo.r_id;
+        selectedmonsterindex = EditorGUILayout.Popup("角色名：", selectedmonsterindex, UnitIDsAndNames.Values.ToArray());
+        focusingUnitInfo.r_id =  UnitIDsAndNames.Count > selectedmonsterindex ? UnitIDsAndNames.ElementAt(selectedmonsterindex).Key : null;
+        return focusingUnitInfo.r_id;
     }
 }
 #endif

@@ -12,8 +12,8 @@ public partial class StagesManagerGUI : Editor {
         {
             if (_stagesManager.FightScript != null)
             {
-                _stagesManager.EditoringFight = FightMembers.LoadEnemies_Json(_stagesManager.FightScript);
-                foreach (var _one in _stagesManager.EditoringFight.EnemySets._SerializableSets)
+                _stagesManager.target = FightMembers.LoadEnemies_Json(_stagesManager.FightScript);
+                foreach (var _one in _stagesManager.target.EnemySets._SerializableSets)
                 {
                     UnitConfig unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(_one.value.r_id));
                     if (unitConfig == null)
