@@ -7,9 +7,9 @@ public partial class SkillSet {
     public string a1, a2, a3;
     public string b1, b2, b3;
     public string c1, c2, c3;
-
-    public int A1lv = 0, A2lv = 0, A3lv = 0, B1lv = 0, B2lv = 0, B3lv = 0, C1lv = 0, C2lv = 0, C3lv = 0;
-
+    
+    private float lv = 0;
+    
     private bool Def;
     private MoveType MoveType;
     private RushType RushType;
@@ -29,6 +29,11 @@ public partial class SkillSet {
         return RushType;
     }
 
+    public void SetLevel(float lv)
+    {
+        this.lv = lv;
+    }
+
     public SkillSet()
     {
         a1 = null; a2 = null; a3 = null;
@@ -38,16 +43,6 @@ public partial class SkillSet {
         MoveType = MoveType.Move_normal;
         Def = false;
         RushType = RushType.Rush;
-
-        A1lv = 0;
-        A2lv = 0;
-        A3lv = 0;
-        B1lv = 0;
-        B2lv = 0;
-        B3lv = 0;
-        C1lv = 0;
-        C2lv = 0;
-        C3lv = 0;
     }
 
     public SkillSet(MoveType moveType, bool canDefend, RushType rushType)

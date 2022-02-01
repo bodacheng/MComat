@@ -26,11 +26,11 @@ public class UnitInfo
     {
     }
 
-    public UnitInfo(string localID, string ResourceID,SkillSet _NineAndTwo)
+    public UnitInfo(string localID, string r_id, SkillSet skillSet)
     {
         id = localID;
-        this.r_id = ResourceID;
-        this.set = _NineAndTwo;
+        this.r_id = r_id;
+        set = skillSet;
     }
 
     public static UnitInfo GetUnitInfo(UnitInfo accUnitInfo)
@@ -43,56 +43,53 @@ public class UnitInfo
                 id = accUnitInfo.id
             };
 
-            List<StoneOfPlayerInfo> targets = Stones.GetEquipingStones(accUnitInfo.id);
-            SkillSet set = new SkillSet();
-            UnitConfig unitConfigInfo = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(accUnitInfo.r_id));
+            var targets = Stones.GetEquipingStones(accUnitInfo.id);
+            var set = new SkillSet();
+            var unitConfigInfo = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(accUnitInfo.r_id));
             if (unitConfigInfo == null)
             {
                 Debug.Log("角色定义信息错误。monsterId：" + accUnitInfo.r_id);
                 return null;
             }
-            for (int i = 0; i < targets.Count; i++)
+
+            var levels = new List<float>();
+            for (var i = 0; i < targets.Count; i++)
             {
                 switch (targets[i].inUsingSkillSlot)
                 {
                     case "1":
                         set.a1 = targets[i].skillId;
-                        set.A1lv = targets[i].GetLevel();
                         break;
                     case "2":
                         set.a2 = targets[i].skillId;
-                        set.A2lv = targets[i].GetLevel();
                         break;
                     case "3":
                         set.a3 = targets[i].skillId;
-                        set.A3lv = targets[i].GetLevel();
                         break;
                     case "4":
                         set.b1 = targets[i].skillId;
-                        set.B1lv = targets[i].GetLevel();
                         break;
                     case "5":
                         set.b2 = targets[i].skillId;
-                        set.B2lv = targets[i].GetLevel();
                         break;
                     case "6":
                         set.b3 = targets[i].skillId;
-                        set.B3lv = targets[i].GetLevel();
                         break;
                     case "7":
                         set.c1 = targets[i].skillId;
-                        set.C1lv = targets[i].GetLevel();
                         break;
                     case "8":
                         set.c2 = targets[i].skillId;
-                        set.C2lv = targets[i].GetLevel();
                         break;
                     case "9":
                         set.c3 = targets[i].skillId;
-                        set.C3lv = targets[i].GetLevel();
                         break;
                 }
+                levels.Add(targets[i].GetLevel());
             }
+            
+            var level = set.GetAerLevel(levels);
+            set.SetLevel(level);
             set.SetPassive(unitConfigInfo.DEFENDABLE_FLAG, unitConfigInfo.MoveType, unitConfigInfo.RushType);
             unitInfo.set = set;
             unitInfo.set.SortNineAndTwo();
@@ -108,7 +105,7 @@ public class UnitInfo
     // 这个是从角色存档来读取
     public int GetNineSlotWholePointOfMonster(string monsterOfPlayerId)
     {
-        List<StoneOfPlayerInfo> equipingstones = Stones.GetEquipingStones(monsterOfPlayerId);
+        var equipingstones = Stones.GetEquipingStones(monsterOfPlayerId);
         string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;
         for (int i = 0; i < equipingstones.Count; i++)
         {

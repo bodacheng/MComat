@@ -218,7 +218,6 @@
      <Compile Include="Assets\ResourceLoading\AudioResourceLoading.cs" />
      <Compile Include="Assets\TouchScript\Examples\Portal\Scripts\Planet.cs" />
      <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Fill.cs" />
-     <Compile Include="Assets\Remote\API\Dto\Model\GetStructure\OneTeam.cs" />
      <Compile Include="Assets\SkillStoneBox\SkillStonesBox_Cells.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Input\VirtualCursorAnimate.cs" />
      <Compile Include="Assets\UI\SciFic Icons\Scripts\ImageFadeIn.cs" />
@@ -606,7 +605,6 @@
      <Compile Include="Assets\AppleAuthSample\MainMenu.cs" />
      <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_draw.cs" />
      <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfig.cs" />
-     <Compile Include="Assets\Remote\API\Dto\Model\GetStructure\MemberOfTeam.cs" />
      <Compile Include="Assets\ResourceKeeper\ResourceKeeper.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\PressGesture.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Clustered\ClusteredTransformGesture.cs" />
@@ -755,6 +753,7 @@
      <Compile Include="Assets\TouchScript\Scripts\Pointers\MousePointer.cs" />
      <Compile Include="Assets\Language\LanguageCodeTable.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiFireProjectile.cs" />
+     <Compile Include="Assets\MyEditorWindow.cs" />
      <Compile Include="Assets\AI\AI_states\states\G_Ani_MoveEscape_State.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaResultLayer\GotchaResultLayer_Detail.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSaveInstance.cs" />
@@ -796,7 +795,6 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
-     <Compile Include="Assets\MyEditorWindow.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />

@@ -32,31 +32,8 @@ public partial class SkillSet
     }
     
     // 获取平均技能等级
-    float GetAerLevel()
+    public float GetAerLevel(List<float> levels)
     {
-        List<int> levels = new List<int>();
-
-        if (a1 != null)
-            levels.Add(A1lv);
-        if (a2 != null)
-            levels.Add(A2lv);
-        if (a3 != null)
-            levels.Add(A3lv);
-            
-        if (b1 != null)
-            levels.Add(B1lv);
-        if (b2 != null)
-            levels.Add(B2lv);
-        if (b3 != null)
-            levels.Add(B3lv);
-            
-        if (c1 != null)
-            levels.Add(C1lv);
-        if (c2 != null)
-            levels.Add(C2lv);
-        if (c3 != null)
-            levels.Add(C3lv);
-
         float aver = 0;
         for (int i = 0; i < levels.Count; i++)
         {
@@ -201,19 +178,5 @@ public partial class SkillSet
     public SkillEntity GetM_STS()
     {
         return M;
-    }
-    
-    // 平均设置所有技能的等级，只能用于关卡制作等等
-    public void SetSkillLevel(int level)
-    {
-        A1lv = level;
-        A2lv = level;
-        A3lv = level;
-        B1lv = level;
-        B2lv = level;
-        B3lv = level;
-        C1lv = level;
-        C2lv = level;
-        C3lv = level;
     }
 }

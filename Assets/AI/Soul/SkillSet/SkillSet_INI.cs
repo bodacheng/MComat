@@ -29,20 +29,18 @@ public partial class SkillSet
         SkillConfig CConfig1 = c1 != null ? SkillConfigTable.GetSkillConfig(c1) : new SkillConfig();
         SkillConfig CConfig2 = c2 != null ? SkillConfigTable.GetSkillConfig(c2) : new SkillConfig();
         SkillConfig CConfig3 = c3 != null ? SkillConfigTable.GetSkillConfig(c3) : new SkillConfig();
-
-        float level = GetAerLevel();
         
-        A1 = AConfig1 != null ? GetSE(a1, level) : null;
-        A2 = AConfig2 != null ? GetSE(a2, level) : null;
-        A3 = AConfig3 != null ? GetSE(a3, level) : null;
+        A1 = AConfig1 != null ? GetSE(a1, lv) : null;
+        A2 = AConfig2 != null ? GetSE(a2, lv) : null;
+        A3 = AConfig3 != null ? GetSE(a3, lv) : null;
         
-        B1 = BConfig1 != null ? GetSE(b1, level) : null;
-        B2 = BConfig2 != null ? GetSE(b2, level) : null;
-        B3 = BConfig3 != null ? GetSE(b3, level) : null;
+        B1 = BConfig1 != null ? GetSE(b1, lv) : null;
+        B2 = BConfig2 != null ? GetSE(b2, lv) : null;
+        B3 = BConfig3 != null ? GetSE(b3, lv) : null;
         
-        C1 = CConfig1 != null ? GetSE(c1, level) : null;
-        C2 = CConfig2 != null ? GetSE(c2, level) : null;
-        C3 = CConfig3 != null ? GetSE(c3, level) : null;
+        C1 = CConfig1 != null ? GetSE(c1, lv) : null;
+        C2 = CConfig2 != null ? GetSE(c2, lv) : null;
+        C3 = CConfig3 != null ? GetSE(c3, lv) : null;
         
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ////////////
         D = Def ? SkillEntity.GetD_SE() : null;

@@ -68,7 +68,7 @@ public class FightInfo : ScriptableObject
     {
         fightMembers = FightMembers.LoadEnemies_Json(Script);
         if (fightMembers != null)
-            fightMembers.SetEnemyLevel(stageLevel);
+            fightMembers.SetEnemyLevel((float)stageLevel);
     }
 
     public void LoadMyTeam()

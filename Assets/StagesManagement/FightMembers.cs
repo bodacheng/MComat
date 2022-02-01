@@ -16,11 +16,11 @@ public class FightMembers
     {
     }
 
-    public void SetEnemyLevel(int level)
+    public void SetEnemyLevel(float level)
     {
         foreach (var charData in EnemySets.GetValues())
         {
-            charData.set.SetSkillLevel(level);
+            charData.set.SetLevel(level);
         }
     }
 
