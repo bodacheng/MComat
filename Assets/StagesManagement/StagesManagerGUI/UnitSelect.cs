@@ -5,18 +5,18 @@ using System.Linq;
 
 public partial class StagesManager : EditorWindow {
     
-    string CharSelect()
+    string UnitSelect()
     {
         // 角色选择
-        UnitConfig focusingUnitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(focusingUnitInfo.r_id));
-        focusingType = focusingUnitConfig != null ? EditorGUILayout.TextField("CharacerType", focusingUnitConfig.TYPE) : EditorGUILayout.TextField("CharacerType", focusingType);
+        var focusingUnitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(focusingUnitInfo.r_id));
+        focusingType = focusingUnitConfig != null ? EditorGUILayout.TextField("Unit Type", focusingUnitConfig.TYPE) : EditorGUILayout.TextField("Unit Type", focusingType);
         UnitIDsAndNames = new Dictionary<string, string>() { { "-1", "空" } };
-        foreach(KeyValuePair<string,string> keyValuePair in Units.GetMonsterIDsAndNamesDic(focusingType))
+        foreach(var keyValuePair in Units.GetMonsterIDsAndNamesDic(focusingType))
         {
             UnitIDsAndNames.Add(keyValuePair.Key, keyValuePair.Value);
         }
-        int index = 0;
-        foreach (KeyValuePair<string, string> keyValuePair in UnitIDsAndNames)
+        var index = 0;
+        foreach (var keyValuePair in UnitIDsAndNames)
         {
             if (keyValuePair.Key == focusingUnitInfo.r_id)
             {

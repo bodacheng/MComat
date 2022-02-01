@@ -507,7 +507,7 @@
      <Compile Include="Assets\TouchScript\Examples\Camera\Scripts\CameraController.cs" />
      <Compile Include="Assets\AI\Soul\SkillSet\SkillSet.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\ArcadeTop.cs" />
-     <Compile Include="Assets\StagesManagement\StagesManagerGUI\CharSelect.cs" />
+     <Compile Include="Assets\StagesManagement\StagesManagerGUI\UnitSelect.cs" />
      <Compile Include="Assets\Setting\FightGlobalSetting.cs" />
      <Compile Include="Assets\TouchScript\Scripts\InputSources\ICoordinatesRemapper.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\TransformGesture.cs" />

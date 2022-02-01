@@ -59,7 +59,7 @@ public partial class StagesManager : EditorWindow
         if (focusingUnitInfo == null)
             goto A;
         
-        CharSelect();
+        UnitSelect();
             
         // 九宫格
         NineSlotPart();
