@@ -32,14 +32,14 @@ public class FightMembers
     
     public static FightMembers RandomFight()
     {
-        string focusingtype = "human";
+        var focusingtype = "human";
         
-        IDictionary<string, string> CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
-        List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 3);
-        List<string> charRecordIds = CharIDsAndNames.Keys.ToList();
-
+        var CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
+        var Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 3);
+        var charRecordIds = CharIDsAndNames.Keys.ToList();
+        
         FightMembers target = new FightMembers();
-
+        
         UnitInfo char1 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[0]],

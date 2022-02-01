@@ -24,9 +24,9 @@ public partial class StagesManager : EditorWindow
             UIparamIni();
             Initialized = true;
         }
-
+        
         GUILayout.Space(10);
-        LoadScript();       
+        LoadScript();
         GUILayout.Space(10);
         Members();
         GUILayout.Space(10);
@@ -112,7 +112,6 @@ public partial class StagesManager : EditorWindow
         GUILayout.Space(10);
         BasicStates(focusingUnitInfo);
         
-        GUILayout.BeginHorizontal();
         pathAndNameForLocalSave = EditorGUILayout.TextField("local Path For Saving", pathAndNameForLocalSave);
         if (GUILayout.Button("保存战斗关卡至本地文档json", ButtonStyle_save))
         {
@@ -131,7 +130,8 @@ public partial class StagesManager : EditorWindow
         //{
         //    _stagesManager.SaveFightAsXml(pathAndNameForLocalSave,_stagesManager.EditoringFight);
         //}
-        GUILayout.EndHorizontal();
+        GUILayout.Space(20);
+        GenerateArenaDummies();
     }
 }
 #endif

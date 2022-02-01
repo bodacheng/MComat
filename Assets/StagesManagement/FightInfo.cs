@@ -22,7 +22,7 @@ public class FightInfo : ScriptableObject
     {
         return eventType;
     }
-
+    
     public void SetEventType(FightEventType eventType)
     {
         this.eventType = eventType;
