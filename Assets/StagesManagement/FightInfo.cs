@@ -111,7 +111,7 @@ public class FightInfo : ScriptableObject
     public static FightInfo RandomStage()
     {
         FightInfo stage = CreateInstance<FightInfo>();
-        stage.fightMembers = StagesManager.RandomFight();
+        stage.fightMembers = FightMembers.RandomFight();
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
         stage.Team2Mode = TeamMode.rotation;
@@ -122,7 +122,7 @@ public class FightInfo : ScriptableObject
     public static FightInfo RandomSkillTestStage(TeamMode teamMode)
     {
         FightInfo stage = CreateInstance<FightInfo>();
-        stage.fightMembers = StagesManager.RandomSkillTest(teamMode);
+        stage.fightMembers = FightMembers.RandomSkillTest(teamMode);
         stage.BattleGroundID = 0;
         stage.Team1Mode = teamMode;
         stage.Team2Mode = teamMode;

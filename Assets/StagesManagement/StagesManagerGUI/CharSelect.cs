@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEditor;
 using System.Linq;
-using UniRx;
 
-public partial class StagesManagerGUI : EditorWindow {
+public partial class StagesManager : EditorWindow {
     
     string CharSelect()
     {

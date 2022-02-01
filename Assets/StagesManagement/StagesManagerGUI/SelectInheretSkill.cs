@@ -4,7 +4,7 @@ using UnityEditor;
 using System.Linq;
 using UniRx;
 
-public partial class StagesManagerGUI : EditorWindow {
+public partial class StagesManager : EditorWindow {
 
     KeyValuePair<string, string> InhereSks;
     IDictionary<string, string> SelectInhere;

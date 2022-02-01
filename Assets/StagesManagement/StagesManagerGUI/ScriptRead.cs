@@ -2,18 +2,18 @@
 using UnityEditor;
 using UnityEngine;
 
-public partial class StagesManagerGUI : EditorWindow {
+public partial class StagesManager : EditorWindow {
 
     void LoadScript()
     {
         GUILayout.BeginHorizontal();
-        _stagesManager.FightScript = EditorGUILayout.ObjectField("战斗脚本读取", _stagesManager.FightScript, typeof(TextAsset), true) as TextAsset;
+        FightScript = EditorGUILayout.ObjectField("战斗脚本读取", FightScript, typeof(TextAsset), true) as TextAsset;
         if (GUILayout.Button("read", ButtonStyle))
         {
-            if (_stagesManager.FightScript != null)
+            if (FightScript != null)
             {
-                _stagesManager.target = FightMembers.LoadEnemies_Json(_stagesManager.FightScript);
-                foreach (var _one in _stagesManager.target.EnemySets._SerializableSets)
+                target = FightMembers.LoadEnemies_Json(FightScript);
+                foreach (var _one in target.EnemySets._SerializableSets)
                 {
                     UnitConfig unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(_one.value.r_id));
                     if (unitConfig == null)

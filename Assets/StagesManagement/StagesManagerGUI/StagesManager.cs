@@ -6,10 +6,10 @@ using Skill;
 
 // 后排敌人——〉角色ID，
 // localID = 0，脚本ID，等级 前排中央敌人——〉角色ID，localID = 1，脚本ID，等级 前排左敌人——〉角色ID，localID = 2，脚本ID，等级 前排右敌人——〉角色ID，localID = 3，脚本ID，等级
-[CustomEditor(typeof(StagesManager))]
-public partial class StagesManagerGUI : EditorWindow
+public partial class StagesManager : EditorWindow
 {
-    StagesManager _stagesManager = new StagesManager();
+    public TextAsset FightScript;//存档文件。是我们拖给这个位置的一个东西，但如果说这个文件不存在，那应该要自动新建并指定到这个位置上
+    FightMembers target;
     
     string pathAndNameForLocalSave = "Resources/stageTemp/oneFight.json";
     IDictionary<string, string> UnitIDsAndNames;
@@ -20,7 +20,7 @@ public partial class StagesManagerGUI : EditorWindow
     {
         if (!Initialized)
         {
-            _stagesManager.target = new FightMembers();
+            target = new FightMembers();
             UIparamIni();
             Initialized = true;
         }
@@ -42,14 +42,14 @@ public partial class StagesManagerGUI : EditorWindow
                 {
                     id = focusingPosID
                 };
-                _stagesManager.target.EnemySets.Set(0, int.Parse(focusingPosID), focusingUnitInfo);
+                target.EnemySets.Set(0, int.Parse(focusingPosID), focusingUnitInfo);
             }
         }
         if (focusingUnitInfo != null)
         {
             if (GUILayout.Button("Delete", AddDeleteMember))
             {
-                _stagesManager.target.EnemySets.Set(0, int.Parse(focusingPosID), null);
+                target.EnemySets.Set(0, int.Parse(focusingPosID), null);
                 focusingUnitInfo = null;
                 targetSlot = 0;
             }
@@ -116,16 +116,16 @@ public partial class StagesManagerGUI : EditorWindow
         pathAndNameForLocalSave = EditorGUILayout.TextField("local Path For Saving", pathAndNameForLocalSave);
         if (GUILayout.Button("保存战斗关卡至本地文档json", ButtonStyle_save))
         {
-            for (int i = 0; i < _stagesManager.target.EnemySets.GetValues().Count; i++)
+            for (int i = 0; i < target.EnemySets.GetValues().Count; i++)
             {
-                if (_stagesManager.target.EnemySets.GetValues()[i].r_id == "-1")
+                if (target.EnemySets.GetValues()[i].r_id == "-1")
                 {
                     Debug.Log("未安排有效角色ID");
                     return;
                 }
-                _stagesManager.target.EnemySets.GetValues()[i].set.SortNineAndTwo();
+                target.EnemySets.GetValues()[i].set.SortNineAndTwo();
             }
-            _stagesManager.SaveFightAsJson(pathAndNameForLocalSave, _stagesManager.target.EnemySets);
+            target.SaveFightAsJson(pathAndNameForLocalSave, target.EnemySets);
         }
         //if (GUILayout.Button("保存战斗关卡至本地文档xml",ButtonStyle_save))
         //{

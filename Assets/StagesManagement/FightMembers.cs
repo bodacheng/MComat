@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using System;
+using System.Xml.Serialization;
 using Newtonsoft.Json;
+using System.IO;
+using mainMenu;
+using Json;
+using System.Collections.Generic;
+using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -18,9 +24,170 @@ public class FightMembers
 
     public void SetEnemyLevel(float level)
     {
-        foreach (var charData in EnemySets.GetValues())
+        foreach (var unitInfo in EnemySets.GetValues())
         {
-            charData.set.SetLevel(level);
+            unitInfo.set.SetLevel(level);
+        }
+    }
+    
+    public static FightMembers RandomFight()
+    {
+        string focusingtype = "human";
+        
+        IDictionary<string, string> CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
+        List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 3);
+        List<string> charRecordIds = CharIDsAndNames.Keys.ToList();
+
+        FightMembers target = new FightMembers();
+
+        UnitInfo char1 = new UnitInfo
+        {
+            r_id = charRecordIds[Indexes[0]],
+            set = SkillSet.RandomSkillSet("human", null, 1, false)
+        };
+        UnitInfo char2 = new UnitInfo
+        {
+            r_id = charRecordIds[Indexes[1]],
+            set = SkillSet.RandomSkillSet("human", null, 1, false)
+        };
+        UnitInfo char3 = new UnitInfo
+        {
+            r_id = charRecordIds[Indexes[2]],
+            set = SkillSet.RandomSkillSet("human", null, 1, false)
+        };
+
+        target.EnemySets.Set(0, 0, char1);
+        target.EnemySets.Set(0, 1, char2);
+        target.EnemySets.Set(0, 2, char3);
+
+        return target;
+    }
+    
+    public static FightMembers ScreenSaver(TeamMode teamMode)
+    {
+        string focusingtype = "human";
+        
+        IDictionary<string, string> CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
+        List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 6);
+        List<string> monsterIds = CharIDsAndNames.Keys.ToList();
+
+        FightMembers target = new FightMembers();
+        
+        SkillStonesBox.StoneFilterForm filterForm = new SkillStonesBox.StoneFilterForm
+        {
+            type = focusingtype,
+            exType = new int[1] { 0 },
+            rare = new List<int> { 0, 1, 2 },
+            close = false,
+            near = false,
+            far = false
+        };
+        
+        UnitInfo char1 = new UnitInfo
+        {
+            r_id = monsterIds[Indexes[0]],
+            set = SkillSet.RandomSkillSet(focusingtype, null, 1, false, filterForm)
+        };
+        UnitInfo char2 = new UnitInfo
+        {
+            r_id = monsterIds[Indexes[1]],
+            set = SkillSet.RandomSkillSet(focusingtype, null, 1, false, filterForm)
+        };
+        
+        switch (teamMode)
+        {
+            case TeamMode.multiraid:
+                target.EnemySets.Set(0, 0, char1);
+                target.HeroSets.Set(0, 0, char2);
+                break;
+            case TeamMode.rotation:
+                target.EnemySets.Set(0, 0, char1);
+                target.HeroSets.Set(0, 0, char2);
+                break;
+        }
+
+        return target;
+    }
+    
+    public static FightMembers RandomSkillTest(TeamMode teamMode)
+    {
+        string focusingtype = "human";
+        
+        IDictionary<string, string> CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
+        List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 6);
+        List<string> charRecordIds = CharIDsAndNames.Keys.ToList();
+
+        FightMembers target = new FightMembers();
+
+        UnitInfo char1 = new UnitInfo
+        {
+            r_id = charRecordIds[Indexes[0]],
+            set = SkillSet.RandomSkillSet("human", null, 1, false)
+        };
+        UnitInfo char2 = new UnitInfo
+        {
+            r_id = charRecordIds[Indexes[1]],
+            set = SkillSet.RandomSkillSet("human", null, 1, false)
+        };
+        UnitInfo char3 = new UnitInfo
+        {
+            r_id = charRecordIds[Indexes[2]],
+            set = SkillSet.RandomSkillSet("human", null, 1, false)
+        };
+
+        UnitInfo char4 = new UnitInfo
+        {
+            r_id = charRecordIds[Indexes[3]],
+            set = SkillSet.RandomSkillSet("human", null, 1, false)
+        };
+        UnitInfo char5 = new UnitInfo
+        {
+            r_id = charRecordIds[Indexes[4]],
+            set = SkillSet.RandomSkillSet("human", null, 1, false)
+        };
+        UnitInfo char6 = new UnitInfo
+        {
+            r_id = charRecordIds[Indexes[5]],
+            set = SkillSet.RandomSkillSet("human", null, 1, false)
+        };
+
+        switch (teamMode)
+        {
+            case TeamMode.multiraid:
+                target.EnemySets.Set(0, 0, char1);
+                target.EnemySets.Set(0, 1, char6);
+                target.HeroSets.Set(0, 0, char4);
+                target.HeroSets.Set(0, 1, char5);
+                break;
+            case TeamMode.rotation:
+                target.EnemySets.Set(0, 0, char1);
+                target.EnemySets.Set(0, 1, char2);
+                target.EnemySets.Set(0, 2, char3);
+                target.HeroSets.Set(0, 0, char4);
+                target.HeroSets.Set(0, 1, char5);
+                target.HeroSets.Set(0, 2, char6);
+                break;
+        }
+
+        return target;
+    }
+    
+    public void SaveFightAsJson(string path, MultiDict<int, int, UnitInfo> EnemySets)
+    {
+        if (EnemySets == null)
+            return;
+
+        EnemySets.ConvertDictionaryToSerializableArray();
+
+        try
+        {
+            string json = JsonConvert.SerializeObject(EnemySets._SerializableSets);
+            LocalJson.SaveInfoToJsonFile_dataPath(null, path, json);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("战斗信息保存失败");
+            Debug.Log(e.ToString());
         }
     }
 
@@ -31,6 +198,78 @@ public class FightMembers
         try
         {
             targetValue = JsonConvert.DeserializeObject<MultiDict<int, int, UnitInfo>.SerializableSet[]>(Script.text);
+            _localFight.EnemySets._SerializableSets = targetValue;
+            _localFight.EnemySets.ConvertSerializableArrayToDictionary();
+            return _localFight;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.ToString());
+            return null;
+        }
+    }
+    
+    public void SaveFightAsXml(string path, FightMembers localFight)
+    {
+        if (localFight == null)
+        {
+            return;
+        }
+        MultiDict<int, int, UnitInfo> UnNullDic = new MultiDict<int, int, UnitInfo>();
+        foreach (MultiDict<int, int, UnitInfo>.SerializableSet sets in localFight.EnemySets._SerializableSets)
+        {
+            UnNullDic.Set(sets.key1, sets.key2 , sets.value);
+        }
+
+        try
+        {
+            XmlSerializer XmlSerializer = new XmlSerializer(typeof(MultiDict<int, int, UnitInfo>.SerializableSet[]));
+            FileStream FileStream;
+            FileStream = new FileStream(Application.dataPath + "/" + path, FileMode.Create);
+            XmlSerializer.Serialize(FileStream, UnNullDic._SerializableSets);
+            Debug.Log(Application.dataPath + path + " 尝试进行关卡存储");
+            FileStream.Close();
+        }
+        catch (Exception e)
+        {
+            Debug.Log("战斗信息保存失败");
+            Debug.Log(e.ToString());
+        }
+    }
+    
+    public FightMembers LoadOneLocalFight_XML(TextAsset Script)
+    {
+        FightMembers _localFight = new FightMembers();
+        
+        MultiDict<int, int, UnitInfo>.SerializableSet[] targetValue;
+        try
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(MultiDict<int, int, UnitInfo>.SerializableSet[]));
+            if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor)
+            {
+                //FileStream FileStream = new FileStream(Application.dataPath + pathAndFileName, FileMode.Open);
+                //list = XmlSerializer.Deserialize(FileStream) as List<State_Transition_Set>;
+                //FileStream.Close();
+                using (TextReader textReader = new StringReader(Script.text))
+                {
+                    targetValue = serializer.Deserialize(textReader) as MultiDict<int, int, UnitInfo>.SerializableSet[];
+                }
+                Debug.Log("读取了敌人战斗信息");
+            }
+            else
+            {
+                var reader = new StringReader(Script.text);
+                targetValue = serializer.Deserialize(reader) as MultiDict<int, int, UnitInfo>.SerializableSet[];
+                Debug.Log("读取了敌人战斗信息");
+            }
+            
+#if UNITY_EDITOR
+            string _path = AssetDatabase.GetAssetPath(Script);
+            string[] pathsplit = _path.Split(new string[] { "Assets" }, StringSplitOptions.None);
+            _path = _path.Length > 1 ? pathsplit[1] : pathsplit[0];
+            Debug.Log("4V4模式文件" + _path);
+#endif
+            
             _localFight.EnemySets._SerializableSets = targetValue;
             _localFight.EnemySets.ConvertSerializableArrayToDictionary();
             return _localFight;

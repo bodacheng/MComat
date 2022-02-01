@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
-public partial class StagesManagerGUI : EditorWindow 
+public partial class StagesManager : EditorWindow 
 {
     int targetSlot = 0;
     void SetSkillId(string skillID)

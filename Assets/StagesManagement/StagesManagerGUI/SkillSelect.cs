@@ -6,7 +6,7 @@ using System.Linq;
 using UniRx;
 using mainMenu;
 
-public partial class StagesManagerGUI : EditorWindow {
+public partial class StagesManager : EditorWindow {
 
     int selectSkillExLevel = -1;
     List<int> rares = new List<int>();

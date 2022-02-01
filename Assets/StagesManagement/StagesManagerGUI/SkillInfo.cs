@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor;
 using Skill;
 
-public partial class StagesManagerGUI : EditorWindow {
+public partial class StagesManager : EditorWindow {
     
     readonly int[] exoptions = { 0, 1, 2, 3 };
     readonly string[] exoptions_display = {"normal","ex1","ex2","ex3"};

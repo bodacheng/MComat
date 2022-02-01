@@ -9,7 +9,7 @@ public static class MyEditorWindow
     [MenuItem("MCombat/StageManager", priority = 1)]
     static void StageManager()
     {
-        StagesManagerGUI window = (StagesManagerGUI)EditorWindow.GetWindow(typeof(StagesManagerGUI));
+        StagesManager window = (StagesManager)EditorWindow.GetWindow(typeof(StagesManager));
         window.titleContent = new GUIContent("关卡管理器");
         window.Show();
     }
