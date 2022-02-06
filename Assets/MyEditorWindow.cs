@@ -2,6 +2,8 @@ using System;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
 
 public static class MyEditorWindow
@@ -14,3 +16,4 @@ public static class MyEditorWindow
         window.Show();
     }
 }
+#endif

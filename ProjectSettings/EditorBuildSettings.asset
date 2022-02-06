@@ -14,4 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/fight_scene/FightScene.unity
     guid: 5e9f64f6037de4a24960d79b2373e525
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 859fce3beb2644a5fb5566f38b464e94,
+      type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
+      guid: 43e2f4723a5ab4bf79d26bcedd8950a4, type: 2}

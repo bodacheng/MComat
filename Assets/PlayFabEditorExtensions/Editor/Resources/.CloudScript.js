@@ -303,17 +303,16 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
             "ShowDisplayName" : true
         }
     };
-    
     var Result = server.GetLeaderboardAroundUser(request);
+
     let teamInfos = [];
-    
     for (let i = 0; i < Result.Leaderboard.length; i++) {
-        
+
         var playerTeamData = server.GetUserData({
             PlayFabId: Result.Leaderboard[i].PlayFabId,
             Keys: ["DefendTeam"]
         });
-        
+
         var item = {
             "PlayerLeaderboardEntry": Result.Leaderboard[i],
             "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value)
