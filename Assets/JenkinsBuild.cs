@@ -18,9 +18,9 @@ public static class JenkinsBuild
         PlayerSettings.companyName = "Graffity";
      
         //Splash Screenをオフにする(Personalだと動かないよ）
-        PlayerSettings.SplashScreen.show = false;
+        PlayerSettings.SplashScreen.show = true;
         PlayerSettings.SplashScreen.showUnityLogo = false;
-     
+        
         //AppBundleは使用しない（本番ビルドのときだけ使うイメージ）
         EditorUserBuildSettings.buildAppBundle = false;
 
@@ -33,10 +33,8 @@ public static class JenkinsBuild
 
         // リリースビルドではない場合Profiler等に繋げるようにする
         BuildOptions opt = BuildOptions.SymlinkLibraries;
-
         string[] scenes = CreateBuildTargetScenes().ToArray();
-        
-        BuildPipeline.BuildPlayer(scenes,"Buildios" , BuildTarget.iOS, BuildOptions.Development);
+        BuildPipeline.BuildPlayer(scenes,"BuildiOS" , BuildTarget.iOS, BuildOptions.Development);
     }
 
     #region Util
@@ -49,7 +47,6 @@ public static class JenkinsBuild
                 yield return scene.path;
         }
     }
-
     #endregion
 }
 #endif
