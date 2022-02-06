@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d0199c11aa6f514784c5c69cd8378d8, type: 3}
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
-  DevAccountEmail: hakuforwork@gmail.com
-  DevAccountToken: y3q9ihnzp7zjnm54xjtp68fpdr9of7wiwmhbzph84twafotmsqrpnnsgi8kouz5r18u5fyqqmj44xtbhoxgi8gcf1u9piaedtywgp9ye6d58h7qfzc69dakkgt1yr6boubtpy9gddj7enegueiowapzmkiymdeb91cyx1gr9je44hmsfjg6mapp5roedyn9zme6niokb
-  SelectedStudio: TEST
-  SdkPath: Assets/PlayFabSDK
+  DevAccountEmail: 
+  DevAccountToken: 
+  SelectedStudio: 
+  SdkPath: 
   EdExPath: 
-  LocalCloudScriptPath: /Users/hakutaisei/AssetStoreFight_Client/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js
+  LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 4
+  curMainMenuIdx: 0
   curSubMenuIdx: 0
