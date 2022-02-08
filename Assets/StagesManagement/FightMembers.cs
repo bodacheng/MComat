@@ -32,9 +32,9 @@ public class FightMembers
     
     public static FightMembers RandomFight()
     {
-        var focusingtype = "human";
+        var type = "human";
         
-        var CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
+        var CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(type);
         var Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 3);
         var charRecordIds = CharIDsAndNames.Keys.ToList();
         
