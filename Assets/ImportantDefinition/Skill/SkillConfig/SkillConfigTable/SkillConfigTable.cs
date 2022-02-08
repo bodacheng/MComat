@@ -106,8 +106,8 @@ public partial class SkillConfigTable
     
     public static void LoadAllSkillConfigFromLocalConfigFile()
     {
-        TextAsset csv = Resources.Load("Account/mst_skill") as TextAsset;
-        TextAsset aiCsv = Resources.Load("Account/skill_ai_attrs") as TextAsset;
+        var csv = Resources.Load("Account/mst_skill") as TextAsset;
+        var aiCsv = Resources.Load("Account/skill_ai_attrs") as TextAsset;
         Load(csv);
         SkillAIAttrs.Load(aiCsv);
         RefreshSkillConfigDicForReference();
