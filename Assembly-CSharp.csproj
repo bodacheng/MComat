@@ -13,7 +13,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{308d0f0e-0787-eb5e-80ed-265dd08366cc}</ProjectGuid>
+    <ProjectGuid>{b317e917-e5a6-f6ce-dbaa-38f130f58b97}</ProjectGuid>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -27,7 +27,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\Bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_2020_3_21;UNITY_2020_3;UNITY_2020;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_INCLUDE_TESTS;USE_SEARCH_ENGINE_API;SCENE_TEMPLATE_MODULE;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_ONSCREEN_KEYBOARD;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;ENABLE_VIDEO;PLATFORM_IOS;ENABLE_RUNTIME_GI;ENABLE_GAMECENTER;ENABLE_NETWORK;ENABLE_IOS_ON_DEMAND_RESOURCES;ENABLE_IOS_APP_SLICING;PLAYERCONNECTION_LISTENS_FIXED_PORT;DEBUGGER_LISTENS_FIXED_PORT;PLATFORM_SUPPORTS_ADS_ID;SUPPORT_ENVIRONMENT_VARIABLES;PLATFORM_SUPPORTS_PROFILER;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;UNITY_IOS;PLATFORM_IPHONE;UNITY_IPHONE;UNITY_IPHONE_API;UNITY_HAS_GOOGLEVR;ENABLE_SPATIALTRACKING;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;RPGTalk_TMP;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;DEVELOPMENT_BUILD</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_2020_3_21;UNITY_2020_3;UNITY_2020;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_INCLUDE_TESTS;USE_SEARCH_ENGINE_API;SCENE_TEMPLATE_MODULE;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_RUNTIME_PERMISSIONS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_ONSCREEN_KEYBOARD;INCLUDE_DYNAMIC_GI;ENABLE_MONO_BDWGC;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;ENABLE_VIDEO;PLATFORM_ANDROID;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;UNITY_CAN_SHOW_SPLASH_SCREEN;UNITY_HAS_GOOGLEVR;UNITY_HAS_TANGO;ENABLE_SPATIALTRACKING;PLATFORM_EXTENDS_VULKAN_DEVICE;PLATFORM_HAS_MULTIPLE_SWAPCHAINS;UNITY_ANDROID_SUPPORTS_SHADOWFILES;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;UNITY_POST_PROCESSING_STACK_V2;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn></NoWarn>
@@ -52,12 +52,12 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Behaviour\Defines\AI_States_Blueprints\Behavior.cs" />
+     <Compile Include="Assets\AI\AI_states\AI_States_Blueprints\Behavior.cs" />
      <Compile Include="Assets\TutorialManger\processes\SelectASlot\SkillEditA3Try.cs" />
      <Compile Include="Assets\TouchScript\Examples\Cube\Scripts\Init.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\HorizontalSelector.cs" />
-     <Compile Include="Assets\DATA_CENTER\Data_Center_Cach.cs" />
-     <Compile Include="Assets\Monsterbox\SSLevelUpManager\ByGold.cs" />
+     <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_Cach.cs" />
+     <Compile Include="Assets\monsterbox\SSLevelUpManager\ByGold.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_selectMaterialMonster.cs" />
      <Compile Include="Assets\Camera\Modes\OneVOneMode.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Hit\HitData.cs" />
@@ -69,7 +69,7 @@
      <Compile Include="Assets\TouchScript\Examples\Taps\Scripts\Spawn.cs" />
      <Compile Include="Assets\TutorialManger\TutorialRunner.cs" />
      <Compile Include="Assets\Arena\ArenaDummiesTable.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Empty_State.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Empty_State.cs" />
      <Compile Include="Assets\Singleton\TeamConfig.cs" />
      <Compile Include="Assets\Resources\effectsresource\MagicArsenal\Effects\Scripts\MagicLightFlicker.cs" />
      <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\PowerEstimateTable.cs" />
@@ -83,9 +83,9 @@
      <Compile Include="Assets\TeamUIManager\RotationMode\RotationMode_INI.cs" />
      <Compile Include="Assets\RewardManager\RewardManager.cs" />
      <Compile Include="Assets\Camera\Modes\StartToEndMode.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Counter_State.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Counter_State.cs" />
      <Compile Include="Assets\CSV2Table\Demo\C2TDemo.cs" />
-     <Compile Include="Assets\UI\Oldscripts\Debug_Char_Set.cs" />
+     <Compile Include="Assets\UI\oldscripts\Debug_Char_Set.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Debugging\Loggers\FileWriterLogger.cs" />
      <Compile Include="Assets\BOWeaponSystem\HittingSystemDefinitions\V_Damage.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonMockWrapper.cs" />
@@ -94,7 +94,7 @@
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Clustered\ClusteredScreenTransformGesture.cs" />
      <Compile Include="Assets\Ultimate Joystick\Scripts\UltimateJoystick.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\UnitListPage.cs" />
-     <Compile Include="Assets\Behaviour\Soul\BehaviorRunner_newRunner.cs" />
+     <Compile Include="Assets\AI\Soul\BehaviorRunner_newRunner.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\BoxExpandHelperLayer.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\StoneMerge.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\SkillInfo.cs" />
@@ -105,7 +105,7 @@
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\UnitOptionLayer.cs" />
      <Compile Include="Assets\FightSceneSystem\Nagare\FightOverProcess.cs" />
      <Compile Include="Assets\AppleAuthSample\GameMenuHandler.cs" />
-     <Compile Include="Assets\Behaviour\GUI\BehaviorRunnerGUI.cs" />
+     <Compile Include="Assets\AI\GUI\BehaviorRunnerGUI.cs" />
      <Compile Include="Assets\ResourceLoading\UnitCreator\UnitCreator_Cach.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaLayer.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\SkillShowLayer.cs" />
@@ -116,7 +116,7 @@
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow.cs" />
      <Compile Include="Assets\TutorialManger\TutorialProcess.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SettingPage.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Move_State.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Move_State.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Utils\Attributes\NullToggleAttribute.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\TeamEditLayer.cs" />
      <Compile Include="Assets\BOWeaponSystem\Health System\FightAttriCalReference_CriticalGauge.cs" />
@@ -128,7 +128,7 @@
      <Compile Include="Assets\Camera\Modes\CertainYAntiVabration.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Layers\TouchLayer.cs" />
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Shield.cs" />
-     <Compile Include="Assets\Behaviour\Soul\SkillSet\RandomSet\RandomSkillSet.cs" />
+     <Compile Include="Assets\AI\Soul\SkillSet\RandomSet\RandomSkillSet.cs" />
      <Compile Include="Assets\Singleton\FightLoadError.cs" />
      <Compile Include="Assets\MainSceneSystem\MainSceneLogger.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Layers\UI\TouchScriptInputModule.cs" />
@@ -139,17 +139,17 @@
      <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\Extentions\HighlightUIText.cs" />
      <Compile Include="Assets\AnimControl\readMe.cs" />
      <Compile Include="Assets\Personality\Personality_events.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Hurts\Hurt_State_Hight.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Hight.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\SlotFocus.cs" />
      <Compile Include="Assets\CachLogic\downloads_configs.cs" />
      <Compile Include="Assets\POS_Sys\Parent_Label.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\GetUp_State.cs" />
+     <Compile Include="Assets\AI\AI_states\states\GetUp_State.cs" />
      <Compile Include="Assets\Remote\Item\Currencies.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Eraser.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerParticle.cs" />
-     <Compile Include="Assets\Monsterbox\SSLevelUpManager\BySKStone.cs" />
+     <Compile Include="Assets\monsterbox\SSLevelUpManager\BySKStone.cs" />
      <Compile Include="Assets\TutorialManger\processes\GoToMemberDetail.cs" />
-     <Compile Include="Assets\DATA_CENTER\DATACENTERGUI.cs" />
+     <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\DATACENTERGUI.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\ProcessesRunner.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\Platform.cs" />
      <Compile Include="Assets\FightOverControl\FightOverControl.cs" />
@@ -157,13 +157,13 @@
      <Compile Include="Assets\TouchScript\Examples\Portal\Scripts\Spawner.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\FrontLayer.cs" />
      <Compile Include="Assets\Setting\AppSetting.cs" />
-     <Compile Include="Assets\Monsterbox\StoneDeleteManger.cs" />
+     <Compile Include="Assets\monsterbox\StoneDeleteManger.cs" />
      <Compile Include="Assets\ImportantDefinition\Monster\UnitConfig.cs" />
      <Compile Include="Assets\TouchScript\Scripts\InputSources\InputSource.cs" />
      <Compile Include="Assets\Resources\effectsresource\MagicArsenal\Effects\Scripts\MagicBeamScript.cs" />
      <Compile Include="Assets\Singleton\SkillIconsDic\FromResource.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\StoneMergeLayer.cs" />
-     <Compile Include="Assets\Behaviour\SkillAIAttrs.cs" />
+     <Compile Include="Assets\AI\SkillAIAttrs.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Core\TouchManagerInstance.cs" />
      <Compile Include="Assets\TeamUIManager\RotationMode\RotationMode_Render.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\SettingsButton.cs" />
@@ -176,6 +176,7 @@
      <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\ParticleCollisionInstance.cs" />
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\FightOverShow\IconAndSKillShowUISet.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\PopupLayer\PopupLayer_Loading.cs" />
+     <Compile Include="Assets\MasterDataTool\MasterDataTool.cs" />
      <Compile Include="Assets\ResourceLoading\EffectsLoad\EffectsManager_Local.cs" />
      <Compile Include="Assets\TutorialManger\processes\ChooseAdamToSlot1.cs" />
      <Compile Include="Assets\P3\GradientColor.cs" />
@@ -186,7 +187,7 @@
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiLoadSceneOnClick2.cs" />
      <Compile Include="Assets\TutorialManger\processes\ClickTeamEditSlotOne.cs" />
      <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\ControlsSceneControlsManager.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Hurts\Hurt_State_light.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_light.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\Sci-Fi Effects\Scripts\SciFiLightFlicker.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\BoxOverLoadFix.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\ScriptRead.cs" />
@@ -197,6 +198,7 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManager.cs" />
      <Compile Include="Assets\CSV2Table\Scripts\TableCodeGen.cs" />
      <Compile Include="Assets\Singleton\SkillIconsDic\FromCach.cs" />
+     <Compile Include="Assets\Asstes\Malbers Animations\Common\Scripts\Readme\Readme.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\Members.cs" />
      <Compile Include="Assets\TouchScript\Examples\Checkers\Scripts\Exclusive.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\ParserToken.cs" />
@@ -227,7 +229,7 @@
      <Compile Include="Assets\JsonSupport\UnityLitJson\IJsonWrapper.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSmartPointer.cs" />
      <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\ButtonSound.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Hurts\Hurt_State_TimePause.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_TimePause.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\Extensions.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Helpers\TMP_Translator.cs" />
      <Compile Include="Assets\StagesManagement\StageButton.cs" />
@@ -261,7 +263,7 @@
      <Compile Include="Assets\PlayFab\Client\Purchase.cs" />
      <Compile Include="Assets\PlayFab\Client\Mails.cs" />
      <Compile Include="Assets\TouchScript\Examples\RawInput\Scripts\Spawner.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Hurts\Hurt_State.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\FightResultAnimLayer.cs" />
      <Compile Include="Assets\AnimControl\StateStartsRandom.cs" />
      <Compile Include="Assets\Remote\API\Dto\Model\GetSkillStoneGotchaModel.auto.cs" />
@@ -283,7 +285,7 @@
      <Compile Include="Assets\AnimControl\Animation_Manger_ResourceLoad.cs" />
      <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Checker.cs" />
      <Compile Include="Assets\Singleton\TutorialNotes.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\G_M_Attack_State.cs" />
+     <Compile Include="Assets\AI\AI_states\states\G_M_Attack_State.cs" />
      <Compile Include="Assets\Remote\StoneExpManager.cs" />
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArenaPage.cs" />
@@ -329,8 +331,8 @@
      <Compile Include="Assets\Remote\Account\Account.cs" />
      <Compile Include="Assets\CachLogic\downloads_anim.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\FlickGesture.cs" />
-     <Compile Include="Assets\Monsterbox\SSLevelUpManager\LevelExpConfig.cs" />
-     <Compile Include="Assets\Monsterbox\SkillStoneBoxTabEffectsManager.cs" />
+     <Compile Include="Assets\monsterbox\SSLevelUpManager\LevelExpConfig.cs" />
+     <Compile Include="Assets\monsterbox\SkillStoneBoxTabEffectsManager.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Utils\PointerUtils.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Shop\StoneBoxExpansion.cs" />
      <Compile Include="Assets\Camera\Modes\TopDownWatchCamera.cs" />
@@ -338,8 +340,9 @@
      <Compile Include="Assets\Camera\Modes\TeamEditCamera.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\ReleaseGesture.cs" />
      <Compile Include="Assets\Camera\PinchZoom\PinchZoom.cs" />
-     <Compile Include="Assets\Behaviour\Control\Controller.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Death_State.cs" />
+     <Compile Include="Assets\AI\Control\Controller.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Death_State.cs" />
+     <Compile Include="Assets\Asstes\Malbers Animations\Common\Scripts\Utilities\UseTransform.cs" />
      <Compile Include="Assets\ResourceLoading\EffectsLoad\EffectsManager_StreamingAssets.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Rim.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkCinematic\RPGTalkCinematicClip.cs" />
@@ -358,14 +361,14 @@
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\UI_Ini.cs" />
      <Compile Include="Assets\CachLogic\downloads_effects.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_returnToBox.cs" />
-     <Compile Include="Assets\Behaviour\HitBoxLogger.cs" />
+     <Compile Include="Assets\AI\HitBoxLogger.cs" />
      <Compile Include="Assets\Remote\API\Dto\Model\GetStructure\SkillStoneGotchaInfoModel.auto.cs" />
      <Compile Include="Assets\StarsFall.cs" />
-     <Compile Include="Assets\Behaviour\Soul\SkillCancelFlag.cs" />
+     <Compile Include="Assets\AI\Soul\SkillCancelFlag.cs" />
      <Compile Include="Assets\TutorialManger\processes\ALineConfirm.cs" />
-     <Compile Include="Assets\Monsterbox\MonsterboxFilter.cs" />
+     <Compile Include="Assets\monsterbox\MonsterboxFilter.cs" />
      <Compile Include="Assets\Scene\TITLE_SCENE\Intro.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Hurts\Hurt_State_Sekka.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Sekka.cs" />
      <Compile Include="Assets\TouchScript\Examples\Cube\Scripts\LayerDelegate.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_FlatColor.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Utils\ObjectPool.cs" />
@@ -395,16 +398,16 @@
      <Compile Include="Assets\DummyLayerSystem\UILayer.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\ExpandBox.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Behaviors\Cursors\UI\GradientTexture.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Hurts\Hurt_State_Stable.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Stable.cs" />
      <Compile Include="Assets\Launcher\Starter.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Idle_State.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Idle_State.cs" />
      <Compile Include="Assets\Asstes\JMO Assets\MatCap Shaders\Creator\Assets\MC_CreateMatCap.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\Mail.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\ScreenTransformGesture.cs" />
      <Compile Include="Assets\P3\UiEffectListPool.cs" />
      <Compile Include="Assets\Camera\Modes\GodplayerCamera.cs" />
      <Compile Include="Assets\TutorialManger\Tutorial\TutorialHelper.cs" />
-     <Compile Include="Assets\UI\Oldscripts\RongLianGamen.cs" />
+     <Compile Include="Assets\UI\oldscripts\RongLianGamen.cs" />
      <Compile Include="Assets\TheNineSlot\Validation\TheNineSlot_ValidationWarn.cs" />
      <Compile Include="Assets\Setting\ConfigureOptions.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\QuestInfoPage.cs" />
@@ -415,8 +418,9 @@
      <Compile Include="Assets\CachLogic\downloads_model.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Base\OnePointTrasformGestureBase.cs" />
      <Compile Include="Assets\Asstes\ErbGameArt\Sword slash FX\Demo scene\DemoToonVFX.cs" />
+     <Compile Include="Assets\Asstes\Malbers Animations\Common\Scripts\Events\UnityEventRaiser.cs" />
      <Compile Include="Assets\AudioManager\AudioManager.cs" />
-     <Compile Include="Assets\Behaviour\Soul\BehaviorRunner_unused.cs" />
+     <Compile Include="Assets\AI\Soul\BehaviorRunner_unused.cs" />
      <Compile Include="Assets\SkillEvents\BO_Ani_E.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\PopupLayer\PopupLayer_HighLight.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Pointers\ObjectPointer.cs" />
@@ -425,7 +429,7 @@
      <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\ShowMe.cs" />
      <Compile Include="Assets\BoundaryControl\BoundaryControllByGod.cs" />
      <Compile Include="Assets\ResourceLoading\CachManager.cs" />
-     <Compile Include="Assets\Monsterbox\SSLevelUpManager\Open.cs" />
+     <Compile Include="Assets\monsterbox\SSLevelUpManager\Open.cs" />
      <Compile Include="Assets\Remote\Monsters\Json.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Hsl.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\SelectInheretSkill.cs" />
@@ -436,7 +440,7 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerImage.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\Arcade.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Utils\Attributes\ToggleLeftAttribute.cs" />
-     <Compile Include="Assets\Monsterbox\SSLevelUpManager\SSLevelUpManager.cs" />
+     <Compile Include="Assets\monsterbox\SSLevelUpManager\SSLevelUpManager.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Other\ScrollForMore.cs" />
      <Compile Include="Assets\POS_Sys\E_Damage.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Layers\FullscreenLayer.cs" />
@@ -445,8 +449,8 @@
      <Compile Include="Assets\POFX\Scripts\POFX.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Utils\Geom\ProjectionUtils.cs" />
      <Compile Include="Assets\TeamUIManager\TeamUIManager.cs" />
-     <Compile Include="Assets\Behaviour\BtnUI\zokuseiButtonEffectsGroup.cs" />
-     <Compile Include="Assets\UI\Oldscripts\Save_Trans.cs" />
+     <Compile Include="Assets\AI\buttons\zokuseiButtonEffectsGroup.cs" />
+     <Compile Include="Assets\UI\oldscripts\Save_Trans.cs" />
      <Compile Include="Assets\TutorialManger\processes\SelectASlot\SkillEditA1Try.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\StoneListLayer.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\SelfFightLayer.cs" />
@@ -457,6 +461,7 @@
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\Sci-Fi Effects\Scripts\SciFiLightFade.cs" />
      <Compile Include="Assets\ObjectPools\DecompositionerPool.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_Install.cs" />
+     <Compile Include="Assets\MasterDataTool\SK_Gotcha.cs" />
      <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\Padding.cs" />
      <Compile Include="Assets\ImportantDefinition\Monster\monster_nameTable.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonReader.cs" />
@@ -465,7 +470,7 @@
      <Compile Include="Assets\TouchScript\Scripts\Utils\Platform\WindowsUtils.cs" />
      <Compile Include="Assets\AnimControl\Animation_Manger_StreamingAssetsLoad.cs" />
      <Compile Include="Assets\TutorialManger\WaitProcess.cs" />
-     <Compile Include="Assets\Behaviour\Soul\SkillSet\SkillSet_INI.cs" />
+     <Compile Include="Assets\AI\Soul\SkillSet\SkillSet_INI.cs" />
      <Compile Include="Assets\SKillAnalyzer\SKillAnalyzerGUI.cs" />
      <Compile Include="Assets\Camera\Modes\ScreenSaverC.cs" />
      <Compile Include="Assets\Singleton\MonsterIconDic.cs" />
@@ -478,7 +483,7 @@
      <Compile Include="Assets\TouchScript\Scripts\GestureManager.cs" />
      <Compile Include="Assets\TeamUIManager\RotationMode\TeamUIManagerRotationMode.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkDubSounds.cs" />
-     <Compile Include="Assets\DATA_CENTER\Data_Center_Resource.cs" />
+     <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_Resource.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiButtonScript.cs" />
      <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable.cs" />
      <Compile Include="Assets\EffectsSystem\HitBoxVarityEvents.cs" />
@@ -489,7 +494,7 @@
      <Compile Include="Assets\DynamicStarrySky\Scripts\SphereUtility.cs" />
      <Compile Include="Assets\FightSceneSystem\Nagare\Turial\BasicTryProcess.cs" />
      <Compile Include="Assets\BOWeaponSystem\BO_Weapon_Animation_Events.cs" />
-     <Compile Include="Assets\UI\Oldscripts\SwapAllModelShader.cs" />
+     <Compile Include="Assets\UI\oldscripts\SwapAllModelShader.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Layers\ProjectionParams.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot.cs" />
      <Compile Include="Assets\EffectsSystem\bullet_GPS.cs" />
@@ -502,15 +507,15 @@
      <Compile Include="Assets\TouchScript\Scripts\Clusters\Clusters2D.cs" />
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\BO_Marker_Manager_detect.cs" />
      <Compile Include="Assets\TouchScript\Examples\Camera\Scripts\CameraController.cs" />
-     <Compile Include="Assets\Behaviour\Soul\SkillSet\SkillSet.cs" />
+     <Compile Include="Assets\AI\Soul\SkillSet\SkillSet.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\ArcadeTop.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\UnitSelect.cs" />
      <Compile Include="Assets\Setting\FightGlobalSetting.cs" />
      <Compile Include="Assets\TouchScript\Scripts\InputSources\ICoordinatesRemapper.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\TransformGesture.cs" />
-     <Compile Include="Assets\Behaviour\Defines\Behaviors_Dictionary.cs" />
+     <Compile Include="Assets\AI\AI_states\Behaviors_Dictionary.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Hurts\Hurt_State_PushMid.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_PushMid.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Devices\Display\DisplayDevice.cs" />
      <Compile Include="Assets\TouchScript\Scripts\LayerManager.cs" />
      <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\ProjectileMover.cs" />
@@ -525,13 +530,13 @@
      <Compile Include="Assets\TouchScript\Scripts\Debugging\TouchScriptDebugger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Other\ExitToSystem.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Utils\BinaryUtils.cs" />
-     <Compile Include="Assets\Behaviour\GUI\SkillOptions.cs" />
+     <Compile Include="Assets\AI\GUI\SkillOptions.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\SceneProcess.cs" />
      <Compile Include="Assets\AnimControl\Animation_Manger_CachLoad.cs" />
      <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\HighlightUI.cs" />
      <Compile Include="Assets\DummyLayerSystem\UILayerLoader.cs" />
      <Compile Include="Assets\TouchScript\Scripts\IDebuggable.cs" />
-     <Compile Include="Assets\UI\Oldscripts\FloatOnHead.cs" />
+     <Compile Include="Assets\UI\oldscripts\FloatOnHead.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Helpers\TextWithIconSimpleText.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerText.cs" />
      <Compile Include="Assets\FightSceneSystem\Nagare\PreparingProcess.cs" />
@@ -547,19 +552,19 @@
      <Compile Include="Assets\TutorialManger\processes\FillASlot\SkillEditTry_A1Filled.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Layers\StandardLayer.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Utils\EventHandlerExtensions.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\G_Attack_State.cs" />
+     <Compile Include="Assets\AI\AI_states\states\G_Attack_State.cs" />
      <Compile Include="Assets\TeamUIManager\MultiRaid\TeamUIManagerMultiRaid.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Behaviors\UI\OverHelper.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Shop\ShopTop.cs" />
-     <Compile Include="Assets\DATA_CENTER\OutsideDataLink.cs" />
-     <Compile Include="Assets\Behaviour\Soul\SkillSet\SkillSet_Tools.cs" />
+     <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\OutsideDataLink.cs" />
+     <Compile Include="Assets\AI\Soul\SkillSet\SkillSet_Tools.cs" />
      <Compile Include="Assets\CachLogic\DownLoad_CMM.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkLocalizationString.cs" />
      <Compile Include="Assets\DynamicStarrySky\Demos\Space\Scripts\SpinPlanet.cs" />
      <Compile Include="Assets\AppleAuthSample\LoginMenuHandler.cs" />
-     <Compile Include="Assets\Behaviour\Defines\AI_States_Blueprints\TriggerConditions\BehaviorTriggerCondition.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Hurts\Hurt_State_heavy.cs" />
-     <Compile Include="Assets\Monsterbox\SSLevelUpManager\Execution.cs" />
+     <Compile Include="Assets\AI\AI_states\AI_States_Blueprints\TriggerConditions\BehaviorTriggerCondition.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_heavy.cs" />
+     <Compile Include="Assets\monsterbox\SSLevelUpManager\Execution.cs" />
      <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\ExamplesList.cs" />
      <Compile Include="Assets\Camera\Modes\TouchTopDownCamera.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillShowPage.cs" />
@@ -567,7 +572,7 @@
      <Compile Include="Assets\DynamicStarrySky\Scripts\CPUStarDataRenderer.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Mail\MailBoxProcess.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonMapper.cs" />
-     <Compile Include="Assets\Behaviour\Soul\SkillSet\RandomSet\RandomSkillSet_Acc.cs" />
+     <Compile Include="Assets\AI\Soul\SkillSet\RandomSet\RandomSkillSet_Acc.cs" />
      <Compile Include="Assets\TutorialManger\processes\ConfirmQuest1.cs" />
      <Compile Include="Assets\TouchScript\Scripts\InputSources\StandardInput.cs" />
      <Compile Include="Assets\CachLogic\CachDownLoadMission.cs" />
@@ -577,11 +582,11 @@
      <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\HighlightUIStatic.cs" />
      <Compile Include="Assets\Arena\ArenaFightTeamDisplay.cs" />
      <Compile Include="Assets\AnimControl\StateEnterd.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Dash_Back_State.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Dash_Back_State.cs" />
      <Compile Include="Assets\PlayFab\Defs\PFDefine.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Pointers\PointerFactory.cs" />
      <Compile Include="Assets\Singleton\GeneralModelPool.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Hurts\Hurt_State_Expolosion.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Expolosion.cs" />
      <Compile Include="Assets\Resources\FaciaManager.cs" />
      <Compile Include="Assets\TheNineSlot\Validation\TheNineSlot_Validation.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Utils\TransformUtils.cs" />
@@ -597,7 +602,7 @@
      <Compile Include="Assets\ResourceLoading\AnimationResourceLoader.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Matcap.cs" />
      <Compile Include="Assets\AppleAuthSample\MainMenu.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Hurts\Hurt_State_draw.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_draw.cs" />
      <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfig.cs" />
      <Compile Include="Assets\ResourceKeeper\ResourceKeeper.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\PressGesture.cs" />
@@ -608,12 +613,12 @@
      <Compile Include="Assets\Camera\Modes\CenterSurroundCamera.cs" />
      <Compile Include="Assets\Structure\PosCal.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_OnDrop.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Hurts\Hurt_State_Slight.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Hurts\Hurt_State_Super.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Slight.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Hurts\Hurt_State_Super.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\CustomInputField.cs" />
      <Compile Include="Assets\Resources\effectsresource\Effect3FromJapanNet\eff_magiccircle_sample\UvScroll.cs" />
      <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\FrontSpawner.cs" />
-     <Compile Include="Assets\UI\Oldscripts\NetWork\fightingSceneNetworkManager.cs" />
+     <Compile Include="Assets\UI\oldscripts\NetWork\fightingSceneNetworkManager.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot_ConfirmEdit.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\BaseStarDataRenderer.cs" />
      <Compile Include="Assets\Camera\Modes\New2021.cs" />
@@ -623,7 +628,7 @@
      <Compile Include="Assets\Utils\Copier.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Input\VirtualCursor.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_waitForConfirm.cs" />
-     <Compile Include="Assets\Behaviour\SoulConstruct\AIScriptReading.cs" />
+     <Compile Include="Assets\AI\SoulConstruct\AIScriptReading.cs" />
      <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\PlayerController.cs" />
      <Compile Include="Assets\TouchScript\Scripts\TouchManager.cs" />
      <Compile Include="Assets\AnimControl\Animation_Manger_methodsGround2.cs" />
@@ -650,9 +655,9 @@
      <Compile Include="Assets\TheNineSlot\TheNineSlot_Clear.cs" />
      <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\Trail_Marker.cs" />
      <Compile Include="Assets\Remote\TeamSet\TeamSet_Save.cs" />
-     <Compile Include="Assets\Behaviour\SingleFightLog.cs" />
+     <Compile Include="Assets\AI\SingleFightLog.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\MainSceneProcess.cs" />
-     <Compile Include="Assets\Behaviour\BtnUI\MobileInputsManager.cs" />
+     <Compile Include="Assets\AI\buttons\MobileInputsManager.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Other\LaunchURL.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerBGMusic.cs" />
      <Compile Include="Assets\Launcher\StartUpPresentation.cs" />
@@ -661,17 +666,17 @@
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\ArcadeTop_Paging.cs" />
      <Compile Include="Assets\Remote\Monsters\MyMonsters.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\SwitchManager.cs" />
-     <Compile Include="Assets\DATA_CENTER\Data_Center.cs" />
+     <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center.cs" />
      <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Runner.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\SpotlightButton.cs" />
      <Compile Include="Assets\CachLogic\downloads_charcomponents.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Helpers\TextWithIcon.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\MonsterEditPage.cs" />
-     <Compile Include="Assets\Behaviour\Soul\BuffsRunner.cs" />
+     <Compile Include="Assets\AI\Soul\BuffsRunner.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Layers\ILayerDelegate.cs" />
      <Compile Include="Assets\FPSLabel\FPSLabelStarter.cs" />
      <Compile Include="Assets\BOWeaponSystem\Health System\Health_BasicClasses.cs" />
-     <Compile Include="Assets\UI\Oldscripts\PUNMenu.cs" />
+     <Compile Include="Assets\UI\oldscripts\PUNMenu.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Event\PointerEnterEvents.cs" />
      <Compile Include="Assets\ResourceLoading\HurtObjectLoad\HurtObjectManager_Cach.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
@@ -690,7 +695,7 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Event\PressKeyEvent.cs" />
      <Compile Include="Assets\Camera\linesShow\SkillShowLines.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaResultLayer\GotchaResultLayer_StarFall.cs" />
-     <Compile Include="Assets\Behaviour\Soul\BehaviorRunner_ScriptFileReading.cs" />
+     <Compile Include="Assets\AI\Soul\BehaviorRunner_ScriptFileReading.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonException.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\SKStoneItem_Render.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
@@ -698,16 +703,16 @@
      <Compile Include="Assets\DynamicBone\Scripts\DynamicBoneColliderBase.cs" />
      <Compile Include="Assets\TouchScript\Examples\Cube\Scripts\RedirectInput.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Fix\LayoutGroupPositionFix.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Defend_State.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Defend_State.cs" />
      <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\Rotator.cs" />
-     <Compile Include="Assets\TheBlur\CircularBuffer.cs" />
-     <Compile Include="Assets\DATA_CENTER\Data_Center_StreamingAssets.cs" />
+     <Compile Include="Assets\theBlur\CircularBuffer.cs" />
+     <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_StreamingAssets.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalk.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Rendering\UIParticleRenderer.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\ShopTopLayer.cs" />
      <Compile Include="Assets\TutorialManger\processes\OpenSkillEdit.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerBackground.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\Knock_Off_State.cs" />
+     <Compile Include="Assets\AI\AI_states\states\Knock_Off_State.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SelfFightPage.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot_Finish.cs" />
      <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillNameTable.cs" />
@@ -729,7 +734,7 @@
      <Compile Include="Assets\UI\ExBarBurn.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\MailBox.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Core\GestureManagerInstance.cs" />
-     <Compile Include="Assets\TheBlur\Blur.cs" />
+     <Compile Include="Assets\theBlur\Blur.cs" />
      <Compile Include="Assets\FPSLabel\FPSLabel.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_selectBaseMonster.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Pixelate.cs" />
@@ -748,23 +753,23 @@
      <Compile Include="Assets\Language\LanguageCodeTable.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiFireProjectile.cs" />
      <Compile Include="Assets\MyEditorWindow.cs" />
-     <Compile Include="Assets\Behaviour\Defines\states\G_Ani_MoveEscape_State.cs" />
+     <Compile Include="Assets\AI\AI_states\states\G_Ani_MoveEscape_State.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\GotchaResultLayer\GotchaResultLayer_Detail.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSaveInstance.cs" />
      <Compile Include="Assets\TouchScript\Modules\TUIO\Scripts\InputSources\TuioInput.cs" />
-     <Compile Include="Assets\Behaviour\Soul\SkillSet\SkillSet_Validation.cs" />
+     <Compile Include="Assets\AI\Soul\SkillSet\SkillSet_Validation.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
      <Compile Include="Assets\Personality\FaceControl\BlendShapeProxy.cs" />
      <Compile Include="Assets\TouchScript\Scripts\IGestureManager.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkFollowCharacter.cs" />
-     <Compile Include="Assets\Monsterbox\SkillStoneDetail.cs" />
+     <Compile Include="Assets\monsterbox\SkillStoneDetail.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\FrontPage.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Debugging\Loggers\FileReaderLogger.cs" />
-     <Compile Include="Assets\Behaviour\Defines\AI_States_Blueprints\SkillEntity.cs" />
+     <Compile Include="Assets\AI\AI_states\AI_States_Blueprints\SkillEntity.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\BasicState.cs" />
      <Compile Include="Assets\BOWeaponSystem\Health System\BasicPhysicSupport.cs" />
      <Compile Include="Assets\MemberDetail\LevelManager.cs" />
-     <Compile Include="Assets\Behaviour\Soul\BehaviorRunner_Form.cs" />
+     <Compile Include="Assets\AI\Soul\BehaviorRunner_Form.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Outline.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Rendering\BlurManager.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\SkillEditLayer\SkillEditLayer.cs" />
@@ -776,13 +781,13 @@
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Refraction.cs" />
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_Util.cs" />
      <Compile Include="Assets\TouchScript\Scripts\InputSources\InputHandlers\TouchHandler.cs" />
-     <Compile Include="Assets\Behaviour\Soul\Sensor.cs" />
+     <Compile Include="Assets\AI\Soul\Sensor.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Input\SliderGamepadManager.cs" />
-     <Compile Include="Assets\TheBlur\Blur_basicdata.cs" />
-     <Compile Include="Assets\Behaviour\BtnUI\ZokuseiStoneTagsGroup.cs" />
+     <Compile Include="Assets\theBlur\Blur_basicdata.cs" />
+     <Compile Include="Assets\AI\buttons\ZokuseiStoneTagsGroup.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot_Watch.cs" />
      <Compile Include="Assets\UI\BackGroundPS.cs" />
-     <Compile Include="Assets\Behaviour\Soul\BehaviorRunner.cs" />
+     <Compile Include="Assets\AI\Soul\BehaviorRunner.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Debugging\Loggers\IPointerLogger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Panel\ServerBrowserManager.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\MainButton.cs" />
@@ -793,18 +798,21 @@
      <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+     <None Include="Assets\Asstes\Malbers Animations\Common\Shaders\Mask8Toon.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\GlobalFog.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\VortexEffect.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\NoiseAndGrain.shader" />
      <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Readme.txt" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\DLAA.shader" />
+     <None Include="Assets\Asstes\Malbers Animations\Dragons\Eggs\Shader\DragonEggs_Shader.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\frag_ao.cginc" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset3.shader" />
      <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\Additive_Scroll01.shader" />
      <None Include="Assets\TouchScript\license.txt" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\LWRP\LWRP_Blend_CenterGlow.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlurDX11.shader" />
+     <None Include="Assets\Asstes\Malbers Animations\Common\Shaders\Color4x2.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Prefabs\Readme.txt" />
      <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Readme.txt" />
@@ -815,6 +823,7 @@
      <None Include="Assets\Asstes\JMO Assets\MatCap Shaders\Shaders\MatCap_Plain_Additive.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Particles\Shaders\MK4 Particle Add.shader" />
      <None Include="Assets\UI\Shift - Complete Sci-Fi UI\Shaders\Masked UI Blur.shader" />
+     <None Include="Assets\Asstes\Malbers Animations\Common\Shaders\Color4x4.shader" />
      <None Include="Assets\POFX\Shaders\Resources\Refraction.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MultiPassHollywoodFlares.shader" />
      <None Include="Assets\POFX\Shaders\Resources\Outline.shader" />
@@ -826,6 +835,7 @@
      <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\LWRP\LWRP_Blend_DistortTexture.shader" />
      <None Include="Assets\POFX\Shaders\Resources\Sobel.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\SSAA.shader" />
+     <None Include="Assets\Asstes\Malbers Animations\Common\Shaders\Mask4Realistic.shader" />
      <None Include="Assets\TouchScript\Examples\_misc\Shaders\BorderDiffuse.shader" />
      <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\FadeSlash.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
@@ -837,6 +847,7 @@
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\TwirlEffect.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down SF\Origin\Tools\Self_illum_reflective.shader" />
      <None Include="Assets\TouchScript\Shaders\DebugDepthTest.shader" />
+     <None Include="Assets\Asstes\Malbers Animations\Common\Shaders\Golem Shader.shader" />
      <None Include="Assets\Resources\Account\StoryChars.xml" />
      <None Include="Assets\TouchScript\Examples\_misc\Shaders\UnlitColor.shader" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Shaders\Add_DistortTexture.shader" />
@@ -857,6 +868,7 @@
      <None Include="Assets\Asstes\JMO Assets\MatCap Shaders\Shaders\MatCap_TextureMult.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\RadialBlur.shader" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Magic circles vol 2\Shaders\Distortion.shader" />
+     <None Include="Assets\Asstes\Malbers Animations\Common\Shaders\Color4x3.shader" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Magic circles vol 2\Shaders\Blend_TwoSides.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\VignetteShader.shader" />
      <None Include="Assets\UI\Shift - Complete Sci-Fi UI\Shaders\Fast UI Blur.shader" />
@@ -904,6 +916,7 @@
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfFieldDX11.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+     <None Include="Assets\Asstes\Malbers Animations\Common\Shaders\AnisotropicCircular.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Particles\Shaders\MK4 Particle Alpha.shader" />
      <None Include="Assets\POFX\Shaders\Resources\Hsl.shader" />
      <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\Blend_LinePath.shader" />
@@ -916,6 +929,7 @@
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BrightPassFilter2.shader" />
      <None Include="Assets\Asstes\JMO Assets\MatCap Shaders\Shaders\MatCap_TextureMult_Bumped.shader" />
      <None Include="Assets\TouchScript\Shaders\Cursor.shader" />
+     <None Include="Assets\Asstes\Malbers Animations\Common\Shaders\MWater2.shader" />
      <None Include="Assets\Asstes\JMO Assets\MatCap Shaders\Shaders\MatCap_Plain.shader" />
      <None Include="Assets\POFX\Shaders\Resources\Emboss.shader" />
      <None Include="Assets\TouchScript\Shaders\DebugMultiplyDepthTest.shader" />
@@ -951,6 +965,7 @@
      <None Include="Assets\Asstes\Hovl Studio\Procedural fire\Shaders\FireSphere.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\Asstes\JMO Assets\MatCap Shaders\_MatCap Shaders Readme.txt" />
+     <None Include="Assets\Asstes\Malbers Animations\Common\Shaders\Color4x2S Emmision.shader" />
      <None Include="Assets\POFX\Shaders\Resources\Blur.shader" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Magic circles vol 2\Shaders\Add_CenterGlow.shader" />
      <None Include="Assets\DynamicBone\ReadMe.txt" />
@@ -973,9 +988,11 @@
      <None Include="Assets\TouchScript\Shaders\DebugMultiplyNoDepthTest.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\Asstes\GabrielAguiarProductions\Unique_Projectiles_Volume_2\Shaders\IceShader01.shader" />
+     <None Include="Assets\Asstes\Malbers Animations\Common\Shaders\Mask8Realistic.shader" />
      <None Include="Assets\Asstes\JMO Assets\MatCap Shaders\Textures\Creator\_Creator.txt" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\TiltShiftHdrLensBlur.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+     <None Include="Assets\Asstes\Malbers Animations\Common\Fonts\OpenSans\License!.txt" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.21f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
@@ -1190,28 +1207,28 @@
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.21f1/Unity.app/Contents/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
  </Reference>
  <Reference Include="POFX_Runtime">
- <HintPath>/Users/hakutaisei/MCombat_ios/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
  </Reference>
  <Reference Include="DOTween">
- <HintPath>/Users/hakutaisei/MCombat_ios/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/PackageCache/com.unity.analytics@3.6.11/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/PackageCache/com.unity.analytics@3.6.11/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/PackageCache/com.unity.analytics@3.6.11/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/PackageCache/com.unity.analytics@3.6.11/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="TUIOsharp">
- <HintPath>/Users/hakutaisei/MCombat_ios/Assets/TouchScript/Modules/TUIO/Libraries/TUIOsharp.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Assets/TouchScript/Modules/TUIO/Libraries/TUIOsharp.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/PackageCache/com.unity.analytics@3.6.11/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/PackageCache/com.unity.analytics@3.6.11/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="OSCsharp">
- <HintPath>/Users/hakutaisei/MCombat_ios/Assets/TouchScript/Modules/TUIO/Libraries/OSCsharp.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Assets/TouchScript/Modules/TUIO/Libraries/OSCsharp.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.21f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -1565,160 +1582,160 @@
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.21f1/Unity.app/Contents/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
  </Reference>
  <Reference Include="Purchasing.Common">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Purchasing.Common.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Purchasing.Common.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Tilemap.Editor">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.multiplayer-hlapi.Editor">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VisualStudio.Editor">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing.SecurityStub">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityStub.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityStub.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="Unity.2D.Sprite.Editor">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Postprocessing.Editor">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PlasticSCM.Editor">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.multiplayer-weaver.Editor">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Analytics">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Analytics.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="com.unity.multiplayer-hlapi.Runtime">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing.SecurityCore">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityCore.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityCore.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Postprocessing.Runtime">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing.Codeless">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEngine.Purchasing.Codeless.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Purchasing.Codeless.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.XR.LegacyInputHelpers">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing.Stores">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEngine.Purchasing.Stores.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Purchasing.Stores.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.XR.LegacyInputHelpers">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Monetization">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Purchasing">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.SpatialTracking">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements.Editor">
- <HintPath>/Users/hakutaisei/MCombat_ios/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{e19c9874-56d2-28ab-4c11-9263deeea7c4}</Project>
+      <Project>{bfdc6ab2-925b-12c6-c7b3-4c8b18e891c6}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFabSDKEditor.csproj">
-      <Project>{f269e150-340f-5f98-a502-0b8969be072c}</Project>
+      <Project>{85e3dfbe-282a-6ec0-039d-df4b19a71058}</Project>
       <Name>PlayFabSDKEditor</Name>
     </ProjectReference>
     <ProjectReference Include="AppleAuth.Editor.csproj">
-      <Project>{dcd5a178-0bab-c7de-f184-14e2a7408139}</Project>
+      <Project>{4b1d8cee-db8b-791c-1968-e7840611f263}</Project>
       <Name>AppleAuth.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="NoSuchLocalizationCore.csproj">
-      <Project>{1457f3a0-f949-69cb-1956-cc1495ffda56}</Project>
+      <Project>{344be7e6-b996-15ff-bb8f-d454bd1f5019}</Project>
       <Name>NoSuchLocalizationCore</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFabEditorExtensions.csproj">
-      <Project>{caaf1954-66b6-4a85-3296-d43b04489d58}</Project>
+      <Project>{62a55c63-7617-3317-8c8f-3e959cdf245d}</Project>
       <Name>PlayFabEditorExtensions</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFab.csproj">
-      <Project>{c094a0f8-1df1-fec7-6eb0-12365a0911db}</Project>
+      <Project>{52cd54cf-a6fd-3561-aeaf-0d04da1943a8}</Project>
       <Name>PlayFab</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.DOTween.csproj">
-      <Project>{9b13236d-4cef-2bd0-2803-b0106ea7e24c}</Project>
+      <Project>{630e56dd-2581-1375-ea49-6b4890a18a86}</Project>
       <Name>UniTask.DOTween</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Linq.csproj">
-      <Project>{2693c968-b175-0179-9cc8-f75c25353f0c}</Project>
+      <Project>{f7337084-b769-db8f-6db1-efbdca501433}</Project>
       <Name>UniTask.Linq</Name>
     </ProjectReference>
     <ProjectReference Include="UniRx.csproj">
-      <Project>{a8853c6b-4956-cfc0-fd65-48d423179672}</Project>
+      <Project>{91b033c6-10a1-938f-0ff0-6aeb81d45caf}</Project>
       <Name>UniRx</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.TextMeshPro.csproj">
-      <Project>{d9b79fa4-4f0b-2820-0395-1892a3a684e1}</Project>
+      <Project>{523bc564-8840-3b55-d2ed-3ed1ed4058df}</Project>
       <Name>UniTask.TextMeshPro</Name>
     </ProjectReference>
     <ProjectReference Include="NoSuchLocalizationCore-Editor.csproj">
-      <Project>{96ff1aaa-5ca4-bb74-a144-c55193e6042f}</Project>
+      <Project>{882951a8-4d49-143d-0cb9-51ce383a2110}</Project>
       <Name>NoSuchLocalizationCore-Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{55f65307-e29b-d97c-f149-27499464ceb7}</Project>
+      <Project>{0faac9b5-0e62-69cd-dd6d-ce131ddf4f4b}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="AppleAuth.csproj">
-      <Project>{107bb162-df1d-9405-a8aa-c710024e0e71}</Project>
+      <Project>{30ff7479-1e76-2ac2-59eb-00679bae52b4}</Project>
       <Name>AppleAuth</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Addressables.csproj">
-      <Project>{4f21f4ee-b80e-c0ea-e266-8e78b5b0e10b}</Project>
+      <Project>{4fae4e08-8237-7f53-4681-c60a5d26323d}</Project>
       <Name>UniTask.Addressables</Name>
     </ProjectReference>
   </ItemGroup>
