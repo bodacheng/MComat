@@ -12,7 +12,7 @@ public partial class StagesManager : EditorWindow
             for (i = 0; i < 100; i++)
             {
                 target = FightMembers.RandomFight();
-                target.SaveFightAsJson(pathAndNameForLocalSave + "/"+ i, target.EnemySets);
+                target.SaveFightAsJson(pathAndNameForLocalSave + "/"+ i + ".json", target.EnemySets);
             }
         }
     }

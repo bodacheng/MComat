@@ -19,10 +19,16 @@ public class ArenaLayer : UILayer
     [SerializeField] ArenaFightTeamDisplay ArenaFightTeamDisplayPrefab;
 
     CloudScript.LeaderboardInfo myLeaderboardInfo;
-
+    ArenaDummiesTable table = new ArenaDummiesTable();
+    
     void Awake()
     {
         RefreshBtn.onClick.AddListener(RefreshOpponent);
+    }
+
+    void Start()
+    {
+        table.Load();
     }
 
     public void RefreshOpponent()
@@ -51,6 +57,21 @@ public class ArenaLayer : UILayer
                     myRank.text = "Rank :" + myLeaderboardInfo.PlayerLeaderboardEntry.Position;
                 }
                 ShowMyTeam();
+                
+                if (exceptSelf.Count < 3)
+                {
+                    int myPoint = myLeaderboardInfo.PlayerLeaderboardEntry.StatValue;
+                    var list = table.GetOpponentAroundPoint(myPoint);
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        exceptSelf.Add(list[i]);
+                        if (exceptSelf.Count == 3)
+                        {
+                            break;
+                        }
+                    }
+                }
+                
                 LoadArena(exceptSelf);
                 View(true);
                 PopupLayer.Close();
@@ -70,9 +91,10 @@ public class ArenaLayer : UILayer
         {
             Destroy(c.gameObject);
         }
+        
         foreach (var t in leaderboards)
         {
-            ArenaFightTeamDisplay o = Instantiate(ArenaFightTeamDisplayPrefab);
+            var o = Instantiate(ArenaFightTeamDisplayPrefab);
             o.AddFightToList(t);
             o.transform.SetParent(EnemiesT);
             o.transform.localPosition = Vector3.zero;

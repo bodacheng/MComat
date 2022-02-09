@@ -2,7 +2,7 @@
 
 using System;
 using UnityEngine;
-using System.Collections;
+using PlayFab.ClientModels;
 using System.Collections.Generic;
 
 public class ArenaDummiesTable
@@ -18,6 +18,8 @@ public class ArenaDummiesTable
 		{
 			fightMembers = f;
 		}
+		
+		public FightMembers GetFightMembers() => fightMembers;
 	}
 
 	List<Row> rowList = new List<Row>();
@@ -60,17 +62,56 @@ public class ArenaDummiesTable
 		return rowList.Count;
 	}
 
-	public List<Row> GetOpponentAroundPoint(int from, int to)
+	CloudScript.LeaderboardInfo RowToLeaderboardInfo(Row row)
 	{
-		List<FightMembers> list = new List<FightMembers>();
-		List<Row> target = rowList.FindAll(x => Int32.Parse(x.ARENA_POINT) >= from && Int32.Parse(x.ARENA_POINT) <=to);
-		foreach (var t in target)
+		CloudScript.LeaderboardInfo info = new CloudScript.LeaderboardInfo()
 		{
-			var file = Resources.Load("stageTemp/" + t.NICK_NAME) as TextAsset;
-			var fightMembers = FightMembers.LoadEnemies_Json(file);
-			t.SetFightMembers(fightMembers);
+			PlayerLeaderboardEntry = new PlayerLeaderboardEntry
+			{
+				DisplayName = row.NICK_NAME,
+				StatValue = Int32.Parse(row.ARENA_POINT)
+			},
+			Team = row.GetFightMembers().EnemySets._SerializableSets
+		};
+		return info;
+	}
+
+	public List<CloudScript.LeaderboardInfo> GetOpponentAroundPoint(int point)
+	{
+		Row startRow = null;
+		int startIndex;
+		for (startIndex = 0 ; startIndex < rowList.Count; startIndex++)
+		{
+			var row = rowList[startIndex];
+			if (Int32.Parse(row.ARENA_POINT) > point)
+			{
+				startRow = row;
+			}
 		}
-		return target;
+		
+		if (startRow == null)
+			return new List<CloudScript.LeaderboardInfo>();
+		
+		var s = Resources.Load("stageTemp/" + startRow.NICK_NAME) as TextAsset;
+		var f = FightMembers.LoadEnemies_Json(s);
+		startRow.SetFightMembers(f);
+		
+		var returnValue = new List<CloudScript.LeaderboardInfo>();
+		returnValue.Add(RowToLeaderboardInfo(startRow));
+		for (int i = startIndex + 1; i < startIndex + 3; i++)
+		{
+			if (i >= rowList.Count)
+			{
+				break;
+			}
+			var row = rowList[i];
+			var file = Resources.Load("stageTemp/" + row.NICK_NAME) as TextAsset;
+			var fightMembers = FightMembers.LoadEnemies_Json(file);
+			row.SetFightMembers(fightMembers);
+			returnValue.Add(RowToLeaderboardInfo(row));
+		}
+		
+		return returnValue;
 	}
 
 	public Row GetAt(int i)
