@@ -18,6 +18,6 @@ MonoBehaviour:
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: /Users/hakutaisei/MComat_android/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js
-  PanelIsShown: 1
-  curMainMenuIdx: 2
+  PanelIsShown: 0
+  curMainMenuIdx: 0
   curSubMenuIdx: 0
