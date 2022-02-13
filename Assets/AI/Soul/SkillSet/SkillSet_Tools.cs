@@ -35,15 +35,15 @@ public partial class SkillSet
     public int GetAerLevel(List<float> levels)
     {
         float aver = 0;
-        for (var i = 0; i < levels.Count; i++)
+        foreach (var t in levels)
         {
-            aver += (float)levels[i];
+            aver += t;
         }
-        aver = aver / levels.Count;
+        aver /= levels.Count;
         // 取小数点后一位
-        int intValue =(int)(aver * 10);
-        aver = (float)(intValue * 1.0)/10;
-        return (int)aver;
+        var intValue = (int)(aver * 10);
+        intValue /= 10;
+        return intValue;
     }
     
     public static float INI_Hp(List<SkillEntity> sklist)
