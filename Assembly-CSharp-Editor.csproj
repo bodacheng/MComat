@@ -72,7 +72,6 @@
      <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_PixelateEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\ConnectionPort.cs" />
      <Compile Include="Assets\TouchScript\Editor\InputSources\InputSourceEditor.cs" />
-     <Compile Include="Assets\Asstes\Malbers Animations\Common\Scripts\Editor\Readme\ReadmeEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\RPGTalk Nodes\Nodes\RPGTalkSaveNode.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Interface\NodeEditorInputControls.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Core\NodeCanvasTraversal.cs" />
@@ -136,7 +135,6 @@
      <Compile Include="Assets\Ultimate Joystick\Editor\UltimateJoystickReadme.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\EditorLoadingControl.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Editor\Node_Editor\RTCanvasCalculatorEditor.cs" />
-     <Compile Include="Assets\Asstes\Malbers Animations\Common\Scripts\Editor\Menu\MalbersMenu.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Interface\NodeEditorCallbackReceiver.cs" />
      <Compile Include="Assets\TouchScript\Editor\Gestures\LongPressGestureEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\CoreExtensions\NodeCanvasTypes.cs" />
