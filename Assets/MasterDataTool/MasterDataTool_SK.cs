@@ -5,7 +5,7 @@ using Skill;
 using Log;
 
 
-public partial class MasterDataTool : MonoBehaviour {
+public partial class MasterDataTool {
 
     // 以下这个函数对技能表的更新机制企划如下：
     // 首先读取现有配置文件，获取现有的所有条目。然后，读取resource文件夹，会按type顺序拿现有条目和resource进行比较。
@@ -24,7 +24,7 @@ public partial class MasterDataTool : MonoBehaviour {
     // 4. ID的“填补机制”是建立在原有条目对应资源缺失,并且在一次更新操作的前提下。只有那些找不到资源了的条目的旧ID才会被新资源对应的新条目代替ID。
     // 假设你在某资源存在的时候删了它条目，然后重新更新一次配置文件，会发现被补上的条目ID是最新（最大）值。这一点无论是角色Config还是SkillConfig都是一样的。
 
-    public void SkillConfigFileUpdate(string path, TextAsset textAsset)
+    public void SkillConfigFileUpdate(string path, TextAsset textAsset, string[] chartypes)
     {
         if (textAsset != null)
         {

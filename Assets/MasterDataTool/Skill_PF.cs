@@ -7,7 +7,7 @@ using Json;
 using Newtonsoft.Json;
 using System.Linq;
 
-public partial class MasterDataTool : MonoBehaviour
+public partial class MasterDataTool
 {
     /// <summary>
     /// 生成gs2 技能石master更新文件

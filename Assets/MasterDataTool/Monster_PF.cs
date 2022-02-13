@@ -4,7 +4,7 @@ using Json;
 using Newtonsoft.Json;
 using System.Linq;
 
-public partial class MasterDataTool : MonoBehaviour
+public partial class MasterDataTool
 {
     public void OutputMonstersCatalog()
     {

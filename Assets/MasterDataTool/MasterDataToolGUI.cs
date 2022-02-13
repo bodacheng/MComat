@@ -3,56 +3,67 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(MasterDataTool))]
-public class LocalMasterDataToolGUI : Editor {
+public class LocalMasterDataToolGUI : EditorWindow {
 
-    MasterDataTool _ConfigManager;
+    bool Initialized;
+    MasterDataTool tool;
     
-    public override void OnInspectorGUI()
+    public string[] unitTypes = {"human"};
+    public TextAsset unitConfigFile;
+    public string unitConfigFilePath;
+    public TextAsset SkillConfigFile;
+    public string SkillConfigPath;
+    
+    void OnGUI()
     {
-        _ConfigManager = (MasterDataTool)target;
-        DrawDefaultInspector();
+        if (!Initialized)
+        {
+            Initialized = true;
+        }
         
-        //_ConfigFileManager.SkillConfigTextFile = EditorGUILayout.ObjectField("SkillConfigFile", _ConfigFileManager.SkillConfigTextFile, typeof(TextAsset), true) as TextAsset;
-        
+        unitConfigFile = EditorGUILayout.ObjectField("角色定义文件", unitConfigFile, typeof(TextAsset), true) as TextAsset;
+        unitConfigFilePath = EditorGUILayout.TextField("角色定义文件路径",unitConfigFilePath);
+        SkillConfigFile = EditorGUILayout.ObjectField("技能定义文件", SkillConfigFile, typeof(TextAsset), true) as TextAsset;
+        SkillConfigPath = EditorGUILayout.TextField("技能定义文件",SkillConfigPath);
+
         if (GUILayout.Button("根据Resource文件夹生成所有角色配置文件"))
         {
-            _ConfigManager.UnitsConfigFileGenerate(_ConfigManager.CharConfigFilePath,_ConfigManager.CharConfigFile);
+            tool.UnitsConfigFileGenerate(unitConfigFilePath, unitConfigFile, unitTypes);
         }
         
         if (GUILayout.Button("根据Resource文件夹生成,更新技能配置文件"))
         {
-            _ConfigManager.SkillConfigFileUpdate(_ConfigManager.SkillConfigPath, _ConfigManager.SkillConfigFile);
+            tool.SkillConfigFileUpdate(SkillConfigPath, SkillConfigFile, unitTypes);
         }
 
         if (GUILayout.Button("(playFab)输出Json格式技能石定义文件(只能在程序启动状态下正常运行)"))
         {
-            _ConfigManager.OutputSKStonesCatalog();
+            tool.OutputSKStonesCatalog();
         }
 
         if (GUILayout.Button("(playFab)输出Json格式技能石商店文件(只能在程序启动状态下正常运行)"))
         {
-            _ConfigManager.OutputSKStonesStore();
+            tool.OutputSKStonesStore();
         }
 
         if (GUILayout.Button("(playFab)输出获取全部技能石的测试用cloudscript)"))
         {
-            _ConfigManager.OutputCloudScriptPart_GetAllStones();
+            tool.OutputCloudScriptPart_GetAllStones();
         }
 
         if (GUILayout.Button("(playFab)输出Json格式角色定义文件(只能在程序启动状态下正常运行)"))
         {
-            _ConfigManager.OutputMonstersCatalog();
+            tool.OutputMonstersCatalog();
         }
 
         if (GUILayout.Button("(playFab)输出Json格式角色商店文件(只能在程序启动状态下正常运行)"))
         {
-            _ConfigManager.OutputMonsterStore();
+            tool.OutputMonsterStore();
         }
 
         if (GUILayout.Button("(playFab)输出获取全部角色的测试用cloudscript)"))
         {
-            _ConfigManager.OutputCloudScriptPart_GetAllMonsters();
+            tool.OutputCloudScriptPart_GetAllMonsters();
         }
 
         if (GUILayout.Button("全项目所有贴图转换iphone格式"))

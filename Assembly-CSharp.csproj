@@ -176,7 +176,6 @@
      <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\ParticleCollisionInstance.cs" />
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\FightOverShow\IconAndSKillShowUISet.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\PopupLayer\PopupLayer_Loading.cs" />
-     <Compile Include="Assets\MasterDataTool\MasterDataTool.cs" />
      <Compile Include="Assets\ResourceLoading\EffectsLoad\EffectsManager_Local.cs" />
      <Compile Include="Assets\TutorialManger\processes\ChooseAdamToSlot1.cs" />
      <Compile Include="Assets\P3\GradientColor.cs" />
@@ -458,7 +457,6 @@
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\Sci-Fi Effects\Scripts\SciFiLightFade.cs" />
      <Compile Include="Assets\ObjectPools\DecompositionerPool.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_Install.cs" />
-     <Compile Include="Assets\MasterDataTool\SK_Gotcha.cs" />
      <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\Padding.cs" />
      <Compile Include="Assets\ImportantDefinition\Monster\monster_nameTable.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonReader.cs" />

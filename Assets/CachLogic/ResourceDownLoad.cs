@@ -21,7 +21,8 @@ public partial class ResourceDownLoad : MonoBehaviour
     [Space(7)]
     [Header("资源读取设置")]
     public ConfigureOptions _ResourceSetting;
-    public MasterDataTool _ConfigFileManager;
+
+    public string[] types;
 
     [Space(7)]
     [Header("assetBundleURL。根据服务器可能有变化")]
@@ -98,7 +99,7 @@ public partial class ResourceDownLoad : MonoBehaviour
                 break;
             case ResourceLoadMode.Resource:
                 // 测试版本要把所有动画片段全加载，不能像正式版那样按照角色技能分个加载，原因是动画片段地址机理不同。
-                foreach (string type in _ConfigFileManager.chartypes)
+                foreach (string type in types)
                 {
                     AnimationResourceLoader.Instance.PrepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type);
                 }

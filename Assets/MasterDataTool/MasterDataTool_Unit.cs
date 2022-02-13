@@ -2,7 +2,7 @@
 using UnityEngine;
 using Skill;
 
-public partial class MasterDataTool : MonoBehaviour
+public partial class MasterDataTool
 {
     // 由Resource文件夹更新角色配置文件信息所需要的工作应该有如下：
     // 首先，同prefabName 允许在数据库存在复数个条目。比如外观一样的红色魔法暴龙和蓝色魔法暴龙，他们可以prefabName一样但charResouceNum不同。
@@ -11,15 +11,15 @@ public partial class MasterDataTool : MonoBehaviour
     // 如果数据库里存在条目在Resource下检测不到对应资源。。。。那这样的条目会被删除。原先的ID会被新添加的资源对应的新条目补空档。
     // 系统不会对旧条目中自己手动填写的任何具体定义做更新，只会根据资源的有无来决定条目的追加与删除与否。
 
-    public void UnitsConfigFileGenerate(string path, TextAsset textAsset)
+    public void UnitsConfigFileGenerate(string path, TextAsset textAsset, string[] chartypes)
     {
         if (textAsset != null)
         {
             Units.Load(textAsset);
         }
         List<int> AllDeletedRecordsIDs = new List<int>();
-        List<string> kisoonCharacterResourceInfoRID = new List<string>();
-        List<UnitConfig> AllNewCharConfigsAllTypes = new List<UnitConfig>();
+        List<string> existedUnitUnitRID = new List<string>();
+        List<UnitConfig> AllNewUnitConfigsAllTypes = new List<UnitConfig>();
         foreach (string chartype in chartypes)
         {
             List<string> currentAllRealNamesOfResourceFolder = new List<string>();
@@ -35,7 +35,7 @@ public partial class MasterDataTool : MonoBehaviour
                 {
                     //什么也不做。允许。
                 }
-                kisoonCharacterResourceInfoRID.Add(oneConfig.RECORD_ID);
+                existedUnitUnitRID.Add(oneConfig.RECORD_ID);
             }
 
             Object[] pretabResources = Resources.LoadAll("CharPretabs/" + chartype);
@@ -95,7 +95,7 @@ public partial class MasterDataTool : MonoBehaviour
                 unitConfig.InstructionJP = null;
                 unitConfig.RARITY_LEVEL = 1;
 
-                AllNewCharConfigsAllTypes.Add(unitConfig);
+                AllNewUnitConfigsAllTypes.Add(unitConfig);
             }
 
             //旧版本有的keyname可是Resource文件夹下没有的
@@ -123,19 +123,19 @@ public partial class MasterDataTool : MonoBehaviour
             }
         }
 
-        foreach (UnitConfig characterResourceInfo in AllNewCharConfigsAllTypes)
+        foreach (UnitConfig characterResourceInfo in AllNewUnitConfigsAllTypes)
         {
             if (AllDeletedRecordsIDs.Count > 0)
             {
                 characterResourceInfo.RECORD_ID = "new";
                 Debug.Log(characterResourceInfo.REAL_NAME + "的 ID： " + characterResourceInfo.RECORD_ID);
                 AllDeletedRecordsIDs.RemoveAt(0);
-                kisoonCharacterResourceInfoRID.Add(characterResourceInfo.RECORD_ID);
+                existedUnitUnitRID.Add(characterResourceInfo.RECORD_ID);
             }
             else
             {
                 characterResourceInfo.RECORD_ID = "new";
-                kisoonCharacterResourceInfoRID.Add(characterResourceInfo.RECORD_ID);
+                existedUnitUnitRID.Add(characterResourceInfo.RECORD_ID);
             }
             Units.Row newRow = Units.ConfigToRow(characterResourceInfo);
             if (newRow != null && newRow.REAL_NAME != null)
