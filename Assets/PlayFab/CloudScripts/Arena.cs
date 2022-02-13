@@ -75,21 +75,19 @@ public partial class CloudScript
         });
     }
     
-    public static void ArenaPointUpBy1(Action success, Action fail)
+    public static void ArenaPointUp(Action success, Action fail)
     {
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest()
             {
-                FunctionName = "arenaPointUpBy1",
+                FunctionName = "ArenaPointUp",
                 GeneratePlayStreamEvent = true
             },
             (ExecuteCloudScriptResult result) => {
-                PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
+                var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
                 object playerStatResult;
-                jsonResult.TryGetValue("playerStatResult",
-                    out playerStatResult); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
-                string json = JsonConvert.SerializeObject(playerStatResult);
-                Debug.Log(json);
+                jsonResult.TryGetValue("arenapoint", out playerStatResult); 
+                Debug.Log(playerStatResult);
                 success.Invoke();
             },
             error => {

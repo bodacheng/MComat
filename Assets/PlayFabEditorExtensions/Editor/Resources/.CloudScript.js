@@ -280,7 +280,7 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
 
 // 竞技场分数+1
 // 这个绝不应该是让客户端主动运行而是应该由服务端建立在胜负基准上运行。
-handlers.arenaPointUpBy1 = function (args, context) {
+handlers.ArenaPointUp = function (args, context) {
     var getRequest = {
         PlayFabId: currentPlayerId
     };
@@ -321,7 +321,7 @@ handlers.arenaPointUpBy1 = function (args, context) {
         });
     }
     
-    return { "arena point" : point };
+    return { "arenapoint" : point };
 };
 
 handlers.Gotcha = function (args, context) {

@@ -24,7 +24,7 @@ namespace FightScene
                 case FightEventType.Arena:
                     if (FightOverControl.target.logger.GetWinnerId() == Account._AccInfo.playerID)
                     {
-                        CloudScript.ArenaPointUpBy1(
+                        CloudScript.ArenaPointUp(
                             () =>
                             {
                                 ArenaFightOver a = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;

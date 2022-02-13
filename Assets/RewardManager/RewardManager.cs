@@ -9,7 +9,7 @@ public static class RewardManager
         switch (NetFightScene.Fight.GetEventType())
         {
             case FightEventType.Arena:
-                CloudScript.ArenaPointUpBy1(
+                CloudScript.ArenaPointUp(
                     () => {Debug.Log("胜利加分");},
                     () => {Debug.Log("没能加分成功");}
                 );
