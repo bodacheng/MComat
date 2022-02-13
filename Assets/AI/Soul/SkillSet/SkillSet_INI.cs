@@ -18,7 +18,7 @@ public partial class SkillSet
     readonly List<string> H2_list = new List<string>();
     readonly List<string> H3_list = new List<string>();
     
-    public void SortNineAndTwo()
+    public void SortNineAndTwo(int lv)
     {
         SkillConfig AConfig1 = a1 != null ? SkillConfigTable.GetSkillConfig(a1) : new SkillConfig();
         SkillConfig AConfig2 = a2 != null ? SkillConfigTable.GetSkillConfig(a2) : new SkillConfig();

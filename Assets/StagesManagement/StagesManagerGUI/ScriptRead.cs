@@ -21,7 +21,7 @@ public partial class StagesManager : EditorWindow {
                         Debug.Log("检测到存档错误：ResourceID");
                         continue;
                     }
-                    _one.value.set.SortNineAndTwo();
+                    _one.value.set.SortNineAndTwo(_one.value.level);
                 }
             }
         }

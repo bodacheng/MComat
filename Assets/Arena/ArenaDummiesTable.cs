@@ -17,6 +17,10 @@ public class ArenaDummiesTable
 		public void SetFightMembers(FightMembers f)
 		{
 			fightMembers = f;
+			foreach (var member in fightMembers.EnemySets._SerializableSets)
+			{
+				member.value.level = Int32.Parse(LEVEL);
+			}
 		}
 		
 		public FightMembers GetFightMembers() => fightMembers;
@@ -41,7 +45,7 @@ public class ArenaDummiesTable
 		Load(csv);
 	}
 	
-	public void Load(TextAsset csv)
+	void Load(TextAsset csv)
 	{
 		rowList.Clear();
 		string[][] grid = CsvParser2.Parse(csv.text);
@@ -51,7 +55,7 @@ public class ArenaDummiesTable
 			row.NICK_NAME = grid[i][0];
 			row.ARENA_POINT = grid[i][1];
 			row.LEVEL = grid[i][2];
-
+			
 			rowList.Add(row);
 		}
 		isLoaded = true;
@@ -61,15 +65,15 @@ public class ArenaDummiesTable
 	{
 		return rowList.Count;
 	}
-
+	
 	CloudScript.LeaderboardInfo RowToLeaderboardInfo(Row row)
 	{
-		CloudScript.LeaderboardInfo info = new CloudScript.LeaderboardInfo()
+		var info = new CloudScript.LeaderboardInfo()
 		{
 			PlayerLeaderboardEntry = new PlayerLeaderboardEntry
 			{
 				DisplayName = row.NICK_NAME,
-				StatValue = Int32.Parse(row.ARENA_POINT)
+				StatValue = Int32.Parse(row.ARENA_POINT),
 			},
 			Team = row.GetFightMembers().EnemySets._SerializableSets
 		};
@@ -86,6 +90,7 @@ public class ArenaDummiesTable
 			if (Int32.Parse(row.ARENA_POINT) > point)
 			{
 				startRow = row;
+				break;
 			}
 		}
 		
@@ -93,12 +98,16 @@ public class ArenaDummiesTable
 			return new List<CloudScript.LeaderboardInfo>();
 		
 		var s = Resources.Load("stageTemp/" + startRow.NICK_NAME) as TextAsset;
+		if (s == null)
+		{
+			return new List<CloudScript.LeaderboardInfo>();
+		}
+		
 		var f = FightMembers.LoadEnemies_Json(s);
 		startRow.SetFightMembers(f);
 		
-		var returnValue = new List<CloudScript.LeaderboardInfo>();
-		returnValue.Add(RowToLeaderboardInfo(startRow));
-		for (int i = startIndex + 1; i < startIndex + 3; i++)
+		var returnValue = new List<CloudScript.LeaderboardInfo> { RowToLeaderboardInfo(startRow) };
+		for (var i = startIndex + 1; i < startIndex + 3; i++)
 		{
 			if (i >= rowList.Count)
 			{
@@ -106,11 +115,12 @@ public class ArenaDummiesTable
 			}
 			var row = rowList[i];
 			var file = Resources.Load("stageTemp/" + row.NICK_NAME) as TextAsset;
+			if (file == null)
+				continue;
 			var fightMembers = FightMembers.LoadEnemies_Json(file);
 			row.SetFightMembers(fightMembers);
 			returnValue.Add(RowToLeaderboardInfo(row));
 		}
-		
 		return returnValue;
 	}
 

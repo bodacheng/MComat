@@ -56,7 +56,7 @@
      <Compile Include="Assets\TutorialManger\processes\SelectASlot\SkillEditA3Try.cs" />
      <Compile Include="Assets\TouchScript\Examples\Cube\Scripts\Init.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\HorizontalSelector.cs" />
-     <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_Cach.cs" />
+     <Compile Include="Assets\DATA_CENTER\Data_Center_Cach.cs" />
      <Compile Include="Assets\Monsterbox\SSLevelUpManager\ByGold.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_selectMaterialMonster.cs" />
      <Compile Include="Assets\Camera\Modes\OneVOneMode.cs" />
@@ -149,7 +149,7 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerParticle.cs" />
      <Compile Include="Assets\Monsterbox\SSLevelUpManager\BySKStone.cs" />
      <Compile Include="Assets\TutorialManger\processes\GoToMemberDetail.cs" />
-     <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\DATACENTERGUI.cs" />
+     <Compile Include="Assets\DATA_CENTER\DATACENTERGUI.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\ProcessesRunner.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\Platform.cs" />
      <Compile Include="Assets\FightOverControl\FightOverControl.cs" />
@@ -484,7 +484,7 @@
      <Compile Include="Assets\P3\DedicatedCameraConnector.cs" />
      <Compile Include="Assets\TeamUIManager\RotationMode\TeamUIManagerRotationMode.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkDubSounds.cs" />
-     <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_Resource.cs" />
+     <Compile Include="Assets\DATA_CENTER\Data_Center_Resource.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiButtonScript.cs" />
      <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable.cs" />
      <Compile Include="Assets\EffectsSystem\HitBoxVarityEvents.cs" />
@@ -557,7 +557,7 @@
      <Compile Include="Assets\TeamUIManager\MultiRaid\TeamUIManagerMultiRaid.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Behaviors\UI\OverHelper.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Shop\ShopTop.cs" />
-     <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\OutsideDataLink.cs" />
+     <Compile Include="Assets\DATA_CENTER\OutsideDataLink.cs" />
      <Compile Include="Assets\AI\Soul\SkillSet\SkillSet_Tools.cs" />
      <Compile Include="Assets\CachLogic\DownLoad_CMM.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkLocalizationString.cs" />
@@ -667,7 +667,7 @@
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\ArcadeTop_Paging.cs" />
      <Compile Include="Assets\Remote\Monsters\MyMonsters.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\SwitchManager.cs" />
-     <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center.cs" />
+     <Compile Include="Assets\DATA_CENTER\Data_Center.cs" />
      <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Runner.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\SpotlightButton.cs" />
      <Compile Include="Assets\CachLogic\downloads_charcomponents.cs" />
@@ -707,7 +707,7 @@
      <Compile Include="Assets\AI\AI_states\states\Defend_State.cs" />
      <Compile Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Scripts\Rotator.cs" />
      <Compile Include="Assets\TheBlur\CircularBuffer.cs" />
-     <Compile Include="Assets\DATA_CENTER\Chracter_DATA_CENTER\Data_Center_StreamingAssets.cs" />
+     <Compile Include="Assets\DATA_CENTER\Data_Center_StreamingAssets.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalk.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Rendering\UIParticleRenderer.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\ShopTopLayer.cs" />

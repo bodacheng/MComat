@@ -12,13 +12,16 @@ public partial class CloudScript
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest()
             {
-                FunctionName = "arenaDefendTeamSave",
-                FunctionParameter = new { inputValue = info._SerializableSets },
+                FunctionName = "ArenaDefendTeamSave",
+                FunctionParameter = new
+                {
+                    Team = info._SerializableSets
+                },
                 GeneratePlayStreamEvent = true
             },
             (ExecuteCloudScriptResult result) =>
             {
-                PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
+                var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
                 object succeed;
                 jsonResult.TryGetValue("success", out succeed);
                 if ((bool)succeed)
@@ -52,8 +55,8 @@ public partial class CloudScript
                     var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
                     jsonResult.TryGetValue("teamInfos", out var teamInfos);
                     var json = JsonConvert.SerializeObject(teamInfos);
-                    Debug.Log(json);
-                    List<LeaderboardInfo> opponents = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(json,
+                    List<LeaderboardInfo> opponents = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(
+                        json,
                         new JsonSerializerSettings
                         {
                             NullValueHandling = NullValueHandling.Ignore

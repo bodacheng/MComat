@@ -32,10 +32,10 @@ public partial class SkillSet
     }
     
     // 获取平均技能等级
-    public float GetAerLevel(List<float> levels)
+    public int GetAerLevel(List<float> levels)
     {
         float aver = 0;
-        for (int i = 0; i < levels.Count; i++)
+        for (var i = 0; i < levels.Count; i++)
         {
             aver += (float)levels[i];
         }
@@ -43,7 +43,7 @@ public partial class SkillSet
         // 取小数点后一位
         int intValue =(int)(aver * 10);
         aver = (float)(intValue * 1.0)/10;
-        return aver;
+        return (int)aver;
     }
     
     public static float INI_Hp(List<SkillEntity> sklist)

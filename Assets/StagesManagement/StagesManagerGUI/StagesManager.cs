@@ -122,7 +122,7 @@ public partial class StagesManager : EditorWindow
                     Debug.Log("未安排有效角色ID");
                     return;
                 }
-                target.EnemySets.GetValues()[i].set.SortNineAndTwo();
+                target.EnemySets.GetValues()[i].set.SortNineAndTwo(target.EnemySets.GetValues()[i].level);
             }
             target.SaveFightAsJson(pathAndNameForLocalSave, target.EnemySets);
         }

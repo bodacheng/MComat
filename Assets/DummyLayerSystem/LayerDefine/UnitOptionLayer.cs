@@ -140,31 +140,31 @@ namespace mainMenu
         }
         
         // 里面一个非常大的重点是执行了BO_Ani_E模块的初始化
-        public IEnumerator Step2INIForUIRefresh(UnitInfo accCharInfo)
+        public IEnumerator Step2INIForUIRefresh(UnitInfo info)
         {
-            if (accCharInfo != null)
+            if (info != null)
             {
-                IEnumerator focusingOneModel = GeneralModelPool.GetMyModel(accCharInfo.id);
+                var focusingOneModel = GeneralModelPool.GetMyModel(info.id);
                 yield return focusingOneModel;
                 if (focusingOneModel.Current == null)
                 {
                     Debug.Log("模型错误");
                     yield break;
                 }
-                Data_Center aI_DATA_CENTER = (Data_Center)focusingOneModel.Current;
-                if (aI_DATA_CENTER == null)
+                Data_Center center = (Data_Center)focusingOneModel.Current;
+                if (center == null)
                 {
                     Debug.Log("角色pretab构成严重错误");
                     yield break;
                 }
 
-                UnitConfig characterResourceInfo = Units.GetUnitConfig(accCharInfo.r_id);
-                UnitInfo characterDataInfo = UnitInfo.GetUnitInfo(accCharInfo);
-                yield return aI_DATA_CENTER.Step1Initialize(characterResourceInfo.TYPE, characterResourceInfo.BASIC_MOVEMENT_PACK, characterResourceInfo.SPECIAL_ZOKUSEI);
-                yield return aI_DATA_CENTER.Step2Initialize(characterResourceInfo.TYPE, characterDataInfo.set, characterResourceInfo._zokusei, characterResourceInfo.SPECIAL_ZOKUSEI);
+                var config = Units.GetUnitConfig(info.r_id);
+                var unitInfo = UnitInfo.GetUnitInfo(info);
+                yield return center.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK, config.SPECIAL_ZOKUSEI);
+                yield return center.Step2Initialize(config.TYPE, unitInfo.set, unitInfo.level, config._zokusei, config.SPECIAL_ZOKUSEI);
                 
-                if (aI_DATA_CENTER._MyBehaviorRunner != null)
-                    aI_DATA_CENTER._MyBehaviorRunner.ChangeState("Empty");
+                if (center._MyBehaviorRunner != null)
+                    center._MyBehaviorRunner.ChangeState("Empty");
             }
             else
                 yield break;

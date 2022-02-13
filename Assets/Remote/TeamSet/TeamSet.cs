@@ -21,17 +21,17 @@ namespace dataAccess
 
         public static MultiDict<int, int, UnitInfo> ToDic(PosKeySet PosKeySet)
         {
-            MultiDict<int, int, UnitInfo> teamMembers = new MultiDict<int, int, UnitInfo>();
-            for (int i = 0; i < 3; i++)
+            var teamMembers = new MultiDict<int, int, UnitInfo>();
+            for (var i = 0; i < 3; i++)
             {
                 if (PosKeySet.GetInstanceIdOnPos(i) == null)
                 {
                     continue;
                 }
-                UnitInfo myfighter = MyMonsters.Get(PosKeySet.GetInstanceIdOnPos(i));
-                if (myfighter != null)
+                var info = MyMonsters.Get(PosKeySet.GetInstanceIdOnPos(i));
+                if (info != null)
                 {
-                    UnitInfo unitInfo = UnitInfo.GetUnitInfo(myfighter);
+                    var unitInfo = UnitInfo.GetUnitInfo(info);
                     teamMembers.Set(0, i, unitInfo);
                 }
                 else

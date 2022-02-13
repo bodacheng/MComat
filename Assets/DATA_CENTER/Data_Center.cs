@@ -110,14 +110,14 @@ public partial class Data_Center : MonoBehaviour
         }
     }
     
-    public IEnumerator Step2Initialize(string type, SkillSet _NineAndTwo, Zokusei _zokusei, string personalMagic)
+    public IEnumerator Step2Initialize(string type, SkillSet _NineAndTwo, int level, Zokusei _zokusei, string personalMagic)
     {
         if (!phase2Initialized)
         {
             phase2Initialized = true;
         }
         
-        _MyBehaviorRunner.FormFightingSetsByNineAndTwo(_NineAndTwo);
+        _MyBehaviorRunner.FormFightingSetsByNineAndTwo(_NineAndTwo, level);
         _MyBehaviorRunner.INIStates(this);
         
         EffectsManager.INIEffectsPool("short_effect", FightGlobalSetting.EffectPathDefine(_zokusei), 3);

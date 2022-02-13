@@ -8,8 +8,6 @@ public partial class SkillSet {
     public string b1, b2, b3;
     public string c1, c2, c3;
     
-    private float lv = 0;
-    
     private bool Def;
     private MoveType MoveType;
     private RushType RushType;
@@ -28,12 +26,7 @@ public partial class SkillSet {
     {
         return RushType;
     }
-
-    public void SetLevel(float lv)
-    {
-        this.lv = lv;
-    }
-
+    
     public SkillSet()
     {
         a1 = null; a2 = null; a3 = null;

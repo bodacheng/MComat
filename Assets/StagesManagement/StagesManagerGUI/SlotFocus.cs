@@ -37,7 +37,7 @@ public partial class StagesManager : EditorWindow
             focusingUnitInfo.set.c3 = skillID;
             break;
         }
-        focusingUnitInfo.set.SortNineAndTwo();
+        focusingUnitInfo.set.SortNineAndTwo(focusingUnitInfo.level);
     }
     
     string GetFocusSkillId()

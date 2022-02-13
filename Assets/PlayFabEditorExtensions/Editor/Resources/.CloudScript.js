@@ -223,10 +223,10 @@ handlers.skillEdit = function (args, context) {
     return { messageValue: log };
 }
 
-handlers.arenaDefendTeamSave = function (args, context) {
+handlers.ArenaDefendTeamSave = function (args, context) {
     let members = [];
-    for (let i = 0; i < args.inputValue.length; i++) {
-        var item = args.inputValue[i];
+    for (let i = 0; i < args.Team.length; i++) {
+        var item = args.Team[i];
         members.push(item);
     }
     
@@ -245,6 +245,37 @@ handlers.arenaDefendTeamSave = function (args, context) {
         success: true,
         messageValue: members
     };
+}
+
+handlers.GetLeaderboardAroundUser = function (args, context) {
+
+    var request = {
+        "PlayFabId": currentPlayerId,
+        "MaxResultsCount": 4,//自己，和三个对手
+        "StatisticName": "arenapoint",
+        "ProfileConstraints" : {
+            "ShowDisplayName" : true
+        }
+    };
+    var Result = server.GetLeaderboardAroundUser(request);
+
+    let teamInfos = [];
+    for (let i = 0; i < Result.Leaderboard.length; i++) {
+        
+        var playerTeamData = server.GetUserData(
+            {
+                PlayFabId: Result.Leaderboard[i].PlayFabId,
+                Keys: ["DefendTeam"]
+            }
+        );
+        
+        var item = {
+            "PlayerLeaderboardEntry": Result.Leaderboard[i],
+            "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value)
+        };
+        teamInfos.push(item);
+    }
+    return { teamInfos };
 }
 
 // 竞技场分数+1
@@ -292,35 +323,6 @@ handlers.arenaPointUpBy1 = function (args, context) {
     
     return { "arena point" : point };
 };
-
-handlers.GetLeaderboardAroundUser = function (args, context) {
-    
-    var request = {
-        "PlayFabId": currentPlayerId,
-        "MaxResultsCount": 4,
-        "StatisticName": "arenapoint",
-        "ProfileConstraints" : {
-            "ShowDisplayName" : true
-        }
-    };
-    var Result = server.GetLeaderboardAroundUser(request);
-
-    let teamInfos = [];
-    for (let i = 0; i < Result.Leaderboard.length; i++) {
-
-        var playerTeamData = server.GetUserData({
-            PlayFabId: Result.Leaderboard[i].PlayFabId,
-            Keys: ["DefendTeam"]
-        });
-
-        var item = {
-            "PlayerLeaderboardEntry": Result.Leaderboard[i],
-            "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value)
-        };
-        teamInfos.push(item);
-    }
-    return { teamInfos };
-}
 
 handlers.Gotcha = function (args, context) {
     var request = {

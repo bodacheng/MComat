@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using dataAccess;
 using mainMenu;
@@ -19,7 +18,7 @@ public class ArenaLayer : UILayer
     [SerializeField] ArenaFightTeamDisplay ArenaFightTeamDisplayPrefab;
 
     CloudScript.LeaderboardInfo myLeaderboardInfo;
-    ArenaDummiesTable table = new ArenaDummiesTable();
+    readonly ArenaDummiesTable table = new ArenaDummiesTable();
     
     void Awake()
     {
@@ -60,9 +59,9 @@ public class ArenaLayer : UILayer
                 
                 if (exceptSelf.Count < 3)
                 {
-                    int myPoint = myLeaderboardInfo.PlayerLeaderboardEntry.StatValue;
+                    var myPoint = myLeaderboardInfo.PlayerLeaderboardEntry.StatValue;
                     var list = table.GetOpponentAroundPoint(myPoint);
-                    for (int i = 0; i < list.Count; i++)
+                    for (var i = 0; i < list.Count; i++)
                     {
                         exceptSelf.Add(list[i]);
                         if (exceptSelf.Count == 3)

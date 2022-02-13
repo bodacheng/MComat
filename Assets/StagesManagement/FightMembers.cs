@@ -22,11 +22,11 @@ public class FightMembers
     {
     }
 
-    public void SetEnemyLevel(float level)
+    public void SetEnemyLevel(int level)
     {
         foreach (var unitInfo in EnemySets.GetValues())
         {
-            unitInfo.set.SetLevel(level);
+            unitInfo.level = level;
         }
     }
     

@@ -136,22 +136,22 @@ namespace FightScene
         public IEnumerator SKillTestReload()
         {
             int i = 0;
-            foreach (KeyValuePair<Data_Center,UnitInfo> keyValuePair in RTFightManager.target.UnitInfoRef)
+            foreach (KeyValuePair<Data_Center,UnitInfo> pair in RTFightManager.target.UnitInfoRef)
             {
                 switch(i)
                 {
                     case 0:
                     case 1:
                     case 2:
-                        keyValuePair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
+                        pair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
                         break;
                     case 3:
-                        keyValuePair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
+                        pair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
                         break;
                 }
                 
-                UnitConfig unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(keyValuePair.Value.r_id));
-                yield return keyValuePair.Key.Step2Initialize(unitConfig.TYPE, keyValuePair.Value.set, unitConfig._zokusei, unitConfig.SPECIAL_ZOKUSEI);
+                UnitConfig unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(pair.Value.r_id));
+                yield return pair.Key.Step2Initialize(unitConfig.TYPE, pair.Value.set, pair.Value.level, unitConfig._zokusei, unitConfig.SPECIAL_ZOKUSEI);
                 i++;
             }
             FightOverControl.target.LocalGameRestart();
