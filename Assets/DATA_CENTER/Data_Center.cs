@@ -1,19 +1,17 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using Soul;
 
 //Basically, Data_Center is a place where all parameter need applying to a character are initiazlized,
-//Those paremeters are sent to all parts of character from here.
+//Those paremeters are sent to all parts of unit from here.
 [RequireComponent(typeof(BehaviorRunner))]
 [RequireComponent(typeof(ShaderManager))]
 [RequireComponent(typeof(BlendShapeProxy))]
 public partial class Data_Center : MonoBehaviour
 {
     public TeamConfig _TeamConfig = TeamConfig.defaultSet;
-
-    public Zokusei Zokusei;
+    public Zokusei zokusei;
     public Transform geometryCenter;
     public Transform WholeT;
     public AudioSource _AudioSource;
@@ -33,11 +31,10 @@ public partial class Data_Center : MonoBehaviour
     
     public Transform right_hand_t, left_hand_t, right_foot_t, left_foot_t,tail_t, head_t;
     public Transform left_arm_hitbox_t, right_arm_hitbox_t, left_leg_hitbox_t, right_leg_hitbox_t, spine_hitbox_t;
-
+    
     protected bool phase1Initialized, phase2Initialized;
     
     [Header("传统防御盾。可能真的用不到了")]
-    [Space(1)]
     public BO_Shield Shield;
     
     public ReactiveProperty<bool> IsDead { get; set; } = new ReactiveProperty<bool>(false);
@@ -53,7 +50,7 @@ public partial class Data_Center : MonoBehaviour
             geometryCenter = gameObject.transform; 
     }
 
-    public IEnumerator Step1Initialize(string type, string basicPackName,string personalMagicPath)
+    public IEnumerator Step1Initialize(string type, string basicPackName, string personalMagicPath)
     {
         if (!phase1Initialized)
         {
@@ -80,7 +77,7 @@ public partial class Data_Center : MonoBehaviour
                     break;
             }
             Animation_Manger.PrepareHurtAndKnockOffAnimations(type);
-            yield return _BO_Ani_E.BasicMagicAndEffectsPathDefine(Zokusei, personalMagicPath);
+            yield return _BO_Ani_E.BasicMagicAndEffectsPathDefine(zokusei, personalMagicPath);
             //if (this.blendShapeProxy != null && this.blendShapeProxy.VRMBlendShapeProxy != null)
             //    this.blendShapeProxy.VRMBlendShapeProxy.AvaterRemerge(this.WholeT);
             //else
@@ -92,7 +89,7 @@ public partial class Data_Center : MonoBehaviour
         }
     }
 
-    public void BodyElementTagAndLayerSet(TeamConfig _TeamConfig)
+    void BodyElementTagAndLayerSet(TeamConfig _TeamConfig)
     {
         this._TeamConfig = _TeamConfig;
         gameObject.layer = this._TeamConfig.mylayer;
@@ -135,7 +132,7 @@ public partial class Data_Center : MonoBehaviour
         
         //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
         // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
-        List<string> toLoadSkillAnimsNames = _MyBehaviorRunner.PassSkillTypeKeys();
+        var toLoadSkillAnimsNames = _MyBehaviorRunner.PassSkillTypeKeys();
         switch (ResourceLoadingSetting.AnimationLoadingMode)
         {
             case ResourceLoadMode.CachAB:
@@ -191,6 +188,7 @@ public partial class Data_Center : MonoBehaviour
     {
         _BasicPhysicSupport.hiddenMethods.Grounded = true;
         _BasicPhysicSupport.SetUsingGravity(false);
+        _BasicPhysicSupport.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         _BasicPhysicSupport.Rigidbody.velocity = Vector3.zero;
         Sensor.Stop();
         bO_Weapon_Animation_Events.ClearMarkerManagers();

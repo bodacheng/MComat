@@ -4,11 +4,6 @@ namespace Soul
 {
     public class Empty_State : Behavior
     {
-        public override void Pre_process_before_enter()
-        {
-            base.Pre_process_before_enter();
-        }
-
         public override bool Capacity_Exit_Condition()
         {
             return false;

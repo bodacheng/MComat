@@ -67,7 +67,7 @@ public partial class MasterDataTool
                 };
 
                 OutsideDataLink outsideDataLink = character.GetComponent<OutsideDataLink>();
-                switch (outsideDataLink._C.Zokusei)
+                switch (outsideDataLink._C.zokusei)
                 {
                     case Zokusei.blueMagic:
                         unitConfig._zokusei = Zokusei.blueMagic;

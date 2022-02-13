@@ -11,7 +11,7 @@ namespace FightScene
         IDictionary<Data_Center, float> RefreshTimeDic = new Dictionary<Data_Center, float>();
         Text rotationModeHitCombo;
         
-        public void RotateClear()
+        void RotateClear()
         {
             UnitIconDic.Clear();
             rotationModeHitCombo.text = "";
@@ -36,7 +36,7 @@ namespace FightScene
             return startUnit;
         }
         
-        public void Rotation_LocalUpdate(MultiDict<int, int, Data_Center> TeamMembers)
+        void Rotation_LocalUpdate(MultiDict<int, int, Data_Center> TeamMembers)
         {
             WaitToTriggerMemberChange(TeamMembers);
             if (RMode_Unit != null)
@@ -52,16 +52,16 @@ namespace FightScene
         // 最初切换队员
         bool ChangeUnit_ReadyToGo(Data_Center _changeTo, MultiDict<int, int, Data_Center> TeamMembers, Transform IniStandPoint)
         {
-            bool memberchanged = false;
-            foreach (Data_Center data_Center in TeamMembers.GetValues())
+            bool unitChanged = false;
+            foreach (var data_Center in TeamMembers.GetValues())
             {
                 if (_changeTo == data_Center)
                 {
                     RMode_Unit = _changeTo;
                     RMode_Unit.WholeT.transform.position = IniStandPoint.position;
                     RMode_Unit.WholeT.rotation = IniStandPoint.rotation;
-                    EffectsManager.GenerateEffect("membershift", null, RMode_Unit.WholeT.transform.position, Quaternion.identity, RMode_Unit.geometryCenter);
-                    memberchanged = true;
+                    EffectsManager.GenerateEffect("memberShift", null, RMode_Unit.WholeT.transform.position, Quaternion.identity, RMode_Unit.geometryCenter);
+                    unitChanged = true;
                     RMode_Unit.WholeT.gameObject.SetActive(true);
                     if (teamConfig.myTeam != RTFightManager.playerTeam)
                         UnitIconDic[RMode_Unit].gameObject.SetActive(true);
@@ -69,13 +69,12 @@ namespace FightScene
                 else
                 {
                     data_Center._MyBehaviorRunner.ChangeState("Empty");
-                    //data_Center.WholeT.transform.position = new Vector3(9999, 600, 9999);
                     data_Center.WholeT.gameObject.SetActive(false);
                     if (teamConfig.myTeam != RTFightManager.playerTeam)
                         UnitIconDic[data_Center].gameObject.SetActive(false);
                 }
             }
-            return memberchanged;
+            return unitChanged;
         }
         
         // 切换队员
@@ -89,13 +88,13 @@ namespace FightScene
             {
                 return false;
             }
-            bool memberchanged = false;
-            Vector3 targetposition = Vector3.zero;
+            var unitChanged = false;
+            var targetPos = Vector3.zero;
             if (RMode_Unit != null)
             {
-                targetposition = RMode_Unit.transform.position;
+                targetPos = RMode_Unit.transform.position;
             }
-            foreach (Data_Center data_Center in TeamMembers.GetValues())
+            foreach (var data_Center in TeamMembers.GetValues())
             {
                 if (_changeTo == data_Center)
                 {
@@ -111,9 +110,9 @@ namespace FightScene
                     if (teamConfig.myTeam != RTFightManager.playerTeam)
                         UnitIconDic[RMode_Unit].gameObject.SetActive(true);
                     RMode_Unit._MyBehaviorRunner.ChangeToWaitingState();
-                    RMode_Unit.WholeT.transform.position = targetposition;
-                    EffectsManager.GenerateEffect("membershift", null, RMode_Unit.WholeT.transform.position, Quaternion.identity, RMode_Unit.geometryCenter);
-                    memberchanged = true;
+                    RMode_Unit.WholeT.transform.position = targetPos;
+                    EffectsManager.GenerateEffect("memberShift", null, RMode_Unit.WholeT.transform.position, Quaternion.identity, RMode_Unit.geometryCenter);
+                    unitChanged = true;
                 }
                 else
                 {
@@ -133,13 +132,13 @@ namespace FightScene
             }
             RTFightManager.target.ParaAdjustment(RTFightManager.playerTeam);
             RTFightManager.target.Refresh();
-            return memberchanged;
+            return unitChanged;
         }
         
         // 计算时间统计可上场角色，更新上场冷却图标UI
         void WaitToTriggerMemberChange(MultiDict<int, int, Data_Center> TeamMembers)
         {
-            for (int i = 0; i < TeamMembers.GetValues().Count; i++)
+            for (var i = 0; i < TeamMembers.GetValues().Count; i++)
             {
                 if (RefreshTimeDic[TeamMembers.GetValues()[i]] > 0)
                 {
@@ -236,7 +235,7 @@ namespace FightScene
                     }
                 }
             }
-            foreach (Data_Center data_Center in TeamMembers.GetValues())
+            foreach (var data_Center in TeamMembers.GetValues())
             {
                 if (!data_Center.IsDead.Value)
                 {

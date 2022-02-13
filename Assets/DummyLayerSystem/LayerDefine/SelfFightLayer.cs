@@ -98,8 +98,8 @@ namespace mainMenu
             RotationTeam1T.gameObject.SetActive(false);
             RotationTeam2T.gameObject.SetActive(false);
             stage.SetEventType(FightEventType.Self);
-            stage.Team1Mode = TeamMode.multiraid;
-            stage.Team2Mode = TeamMode.multiraid;
+            stage.Team1Mode = TeamMode.multiRaid;
+            stage.Team2Mode = TeamMode.multiRaid;
             ModeSelect(MultiModeBtn.transform);
         }
         
@@ -122,8 +122,8 @@ namespace mainMenu
             RotationTeam1T.gameObject.SetActive(false);
             RotationTeam2T.gameObject.SetActive(false);
             stage.SetEventType(FightEventType.Test);
-            stage.Team1Mode = TeamMode.multiraid;
-            stage.Team2Mode = TeamMode.multiraid;
+            stage.Team1Mode = TeamMode.multiRaid;
+            stage.Team2Mode = TeamMode.multiRaid;
             ModeSelect(TestModeBtn.transform);
         }
         
@@ -131,7 +131,7 @@ namespace mainMenu
         {
             switch (stage.Team1Mode)
             {
-                case TeamMode.multiraid:
+                case TeamMode.multiRaid:
                     _selfFight.HeroSets = _team1PosKeySet_M.LoadTeamDic();
                     _selfFight.EnemySets = _team2PosKeySet_M.LoadTeamDic();
                     break;
@@ -176,7 +176,7 @@ namespace mainMenu
             {
                 switch (stage.Team1Mode)
                 {
-                    case TeamMode.multiraid:
+                    case TeamMode.multiRaid:
                         switch (focusingTeam)
                         {
                             case Team.player1:

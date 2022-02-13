@@ -7,41 +7,30 @@ using System.Collections.Generic;
 namespace FightScene
 {
     public class NetFightScene : MonoBehaviour
-    {
-        [Space(11)] public RectTransform T;
-        
-        //[Space(11)]
-        //[Header("Canvas")]
-        //public Canvas FightCanvas;
+    { 
+        public RectTransform T;
         
         #region before fight
-        [Space(11)]
         [Header("PlayableDirector")]
         public PlayableDirector playableDirector;
         #endregion
         
-        [Space(11)]
         [Header("场地控制")]
         public BoundaryControllByGod _BoundaryControllByGod;
         
-        [Space(11)]
         [Header("双方站位点")]
         public Transform[] Team1StandPoints, Team2StandPoints;//这个也是应该按模式区分，能改名字现在就改名字吧。免得以后乱
         
-        [Space(11)]
         [Header("双方站位点_观看点")]
         public Transform WatchTeam1, WatchTeam2;
-
-        [Space(11)] 
+        
         [Header("FX")]
         public Camera fxCamera;
         
         // 主进程
-        [Space(7)]
         [Header("主进程处理器")]
         public SingleThreadProcesser mainProcessRunner;
         
-        [Space(7)]
         [Header("AudioSource")]
         public AudioSource audioSource;
         

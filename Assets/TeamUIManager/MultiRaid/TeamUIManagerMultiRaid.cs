@@ -180,7 +180,7 @@ namespace FightScene
                 DicAdd<Data_Center, Text>.Add(multiRaidHitComboDic, a_char, hitCombo);
 
                 // 魔法按键
-                MobileInputsManager.target.ZokuseiButtonRegister(a_char.Zokusei);
+                MobileInputsManager.target.ZokuseiButtonRegister(a_char.zokusei);
             }
         }
     }

@@ -198,7 +198,7 @@ namespace mainMenu
 
         public void BeginSkillTest_Multi()
         {
-            FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.multiraid);
+            FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.multiRaid);
             stage.team1ID = Account._AccInfo.playerID;
             FightLoad.Go(stage);
         }

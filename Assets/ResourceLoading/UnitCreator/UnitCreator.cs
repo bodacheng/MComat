@@ -5,9 +5,9 @@ public partial class UnitCreator {
     
     public static IEnumerator CreateUnit(UnitInfo info)
     {
-        IEnumerator get = GeneralModelPool.GetModel(info.r_id, false);
+        var get = GeneralModelPool.GetModel(info.r_id, false);
         yield return get;
-        Data_Center _D = (Data_Center)get.Current;
+        var _D = (Data_Center)get.Current;
         if (_D == null)
         {
             Debug.Log("严重资源类错误");

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Playables;
@@ -97,10 +96,10 @@ public class FightInfo : ScriptableObject
         return enterRingLocalIDs;
     }
 
-    public static FightInfo ArenaStage(FightMembers LocalFight)
+    public static FightInfo ArenaStage(FightMembers fightUnits)
     {
-        FightInfo stage = CreateInstance<FightInfo>();
-        stage.fightMembers = LocalFight;
+        var stage = CreateInstance<FightInfo>();
+        stage.fightMembers = fightUnits;
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
         stage.Team2Mode = TeamMode.rotation;
@@ -110,7 +109,7 @@ public class FightInfo : ScriptableObject
     
     public static FightInfo RandomStage()
     {
-        FightInfo stage = CreateInstance<FightInfo>();
+        var stage = CreateInstance<FightInfo>();
         stage.fightMembers = FightMembers.RandomFight();
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
@@ -121,7 +120,7 @@ public class FightInfo : ScriptableObject
     
     public static FightInfo RandomSkillTestStage(TeamMode teamMode)
     {
-        FightInfo stage = CreateInstance<FightInfo>();
+        var stage = CreateInstance<FightInfo>();
         stage.fightMembers = FightMembers.RandomSkillTest(teamMode);
         stage.BattleGroundID = 0;
         stage.Team1Mode = teamMode;
@@ -153,6 +152,6 @@ public enum FightEventType
 
 public enum TeamMode
 {
-    multiraid = 1,
+    multiRaid = 1,
     rotation = 2
 }

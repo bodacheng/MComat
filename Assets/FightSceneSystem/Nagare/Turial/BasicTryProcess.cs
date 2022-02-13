@@ -79,9 +79,9 @@ public class BasicTryProcess : FSceneProcess
         //NetFightScene.target.FightCanvas.gameObject.SetActive(true);
 
         watchetargets.Clear();
-        if (RTFightManager.focusingChar.Sensor.GetEnemiesByDistance(true).Count > 0)
+        if (RTFightManager.focusingUnit.Sensor.GetEnemiesByDistance(true).Count > 0)
         {
-            foreach (GameObject _G in RTFightManager.focusingChar.Sensor.GetEnemiesByDistance(false))
+            foreach (GameObject _G in RTFightManager.focusingUnit.Sensor.GetEnemiesByDistance(false))
             {
                 watchetargets.Add(_G.transform);
             }
@@ -129,7 +129,7 @@ public class BasicTryProcess : FSceneProcess
             break; 
         }
 
-        if (RTFightManager.focusingChar != null)
+        if (RTFightManager.focusingUnit != null)
         {
             //FightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watchetargets);
             //FightScene._CameraManager.CurrentMode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);

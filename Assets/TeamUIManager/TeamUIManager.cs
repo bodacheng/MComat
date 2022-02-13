@@ -29,7 +29,7 @@ namespace FightScene
         {
             switch (TeamMode)
             {
-                case TeamMode.multiraid:
+                case TeamMode.multiRaid:
                     MultiClear();
                     break;
                 case TeamMode.rotation:
@@ -42,7 +42,7 @@ namespace FightScene
         {
             switch (TeamMode)
             {
-                case TeamMode.multiraid:
+                case TeamMode.multiRaid:
                     MultiRaid_LocalUpdate(TeamMembers);
                     break;
                 case TeamMode.rotation:
@@ -56,7 +56,7 @@ namespace FightScene
             List<Transform> transforms = new List<Transform>();
             switch (TeamMode)
             {
-                case TeamMode.multiraid:
+                case TeamMode.multiRaid:
                     foreach (Data_Center a_char in TeamMembers.GetValues())
                     {
                         if (a_char._MyBehaviorRunner.GetNowState().StateKey != "Death")
@@ -89,7 +89,7 @@ namespace FightScene
         {
             switch (TeamMode)
             {
-                case TeamMode.multiraid:
+                case TeamMode.multiRaid:
                     InsTeamUI_Multi(TeamMembers);
                     break;
                 case TeamMode.rotation:
@@ -102,7 +102,7 @@ namespace FightScene
         {
             switch (TeamMode)
             {
-                case TeamMode.multiraid:
+                case TeamMode.multiRaid:
                     Initialize_Multi(TeamMembers, TeamHpRate, teamCGMode);
                     break;
                 case TeamMode.rotation:
@@ -148,7 +148,7 @@ namespace FightScene
                 UnitIconDic.TryGetValue(_dt, out _tempSI);
                 if (teamConfig.myTeam == RTFightManager.playerTeam)
                 {
-                    _tempSI.transform.localScale = _dt != RTFightManager.focusingChar ? Vector3.one : Vector3.one * 1.2f;
+                    _tempSI.transform.localScale = _dt != RTFightManager.focusingUnit ? Vector3.one : Vector3.one * 1.2f;
                     _tempSI.transform.SetParent(sideIconsContainer.transform);
                     _tempSI.focusingCharIcon.gameObject.SetActive(true);
                     _tempSI.ExBar.gameObject.SetActive(true);
@@ -165,7 +165,7 @@ namespace FightScene
             
             switch (TeamMode)
             {
-                case TeamMode.multiraid:
+                case TeamMode.multiRaid:
                     foreach (Data_Center _datacenter in TeamMembers.GetValues())
                     {
                         if (multiRaidHitComboDic.ContainsKey(_datacenter))

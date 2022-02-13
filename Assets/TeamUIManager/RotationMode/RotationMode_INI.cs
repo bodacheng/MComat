@@ -112,7 +112,7 @@ namespace FightScene
                 }
                 
                 // 魔法按键
-                MobileInputsManager.target.ZokuseiButtonRegister(a_char.Zokusei);
+                MobileInputsManager.target.ZokuseiButtonRegister(a_char.zokusei);
             }
         }
     }
