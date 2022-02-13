@@ -85,9 +85,9 @@ public partial class CloudScript
             },
             (ExecuteCloudScriptResult result) => {
                 var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
-                object playerStatResult;
-                jsonResult.TryGetValue("arenapoint", out playerStatResult); 
-                Debug.Log(playerStatResult);
+                object point;
+                jsonResult.TryGetValue("currentPoint", out point); 
+                Debug.Log(point);
                 success.Invoke();
             },
             error => {

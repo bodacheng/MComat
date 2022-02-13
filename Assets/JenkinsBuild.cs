@@ -14,12 +14,15 @@ public static class JenkinsBuild
 
         var scene_name_array = CreateBuildTargetScenes().ToArray();
         PlayerSettings.applicationIdentifier = "com.hogehoge.fugafuga";
-        PlayerSettings.productName = "jenkins test";
-        PlayerSettings.companyName = "Graffity";
-     
+        PlayerSettings.productName = "MCombat";
+        PlayerSettings.companyName = "BO";
+        
         //Splash Screenをオフにする(Personalだと動かないよ）
         PlayerSettings.SplashScreen.show = true;
         PlayerSettings.SplashScreen.showUnityLogo = false;
+
+        PlayerSettings.defaultScreenWidth = 1920;
+        PlayerSettings.defaultScreenHeight = 1080;
         
         //AppBundleは使用しない（本番ビルドのときだけ使うイメージ）
         EditorUserBuildSettings.buildAppBundle = false;

@@ -321,7 +321,7 @@ handlers.ArenaPointUp = function (args, context) {
         });
     }
     
-    return { "arenapoint" : point };
+    return { "currentPoint" : point };
 };
 
 handlers.Gotcha = function (args, context) {
