@@ -14,14 +14,14 @@ TagManager:
   - 
   - 
   - 
+  - Player1
+  - Player2
+  - Player1Weapon
+  - Player2Weapon
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player1Shield
+  - Player2Shield
   - 
   - 
   - 
