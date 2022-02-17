@@ -40,6 +40,15 @@ handlers.buildBasicData = function (args, context) {
             "last_Level_completed": 0
         }
     });
+
+    var playerStatResult = server.UpdatePlayerStatistics({
+        PlayFabId: currentPlayerId,
+        Statistics: [{
+            StatisticName: "arenapoint",
+            Value: 1000 // 初始值
+        }]
+    });
+    
     return { messageValue: updateUserDataResult };
 };
 

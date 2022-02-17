@@ -65,7 +65,7 @@ public class ArenaLayer : UILayer
                 
                 if (exceptSelf.Count < 3)
                 {
-                    var myPoint = myLeaderboardInfo.PlayerLeaderboardEntry.StatValue;
+                    var myPoint = (myLeaderboardInfo != null) ? myLeaderboardInfo.PlayerLeaderboardEntry.StatValue : 1000;
                     var list = table.GetOpponentAroundPoint(myPoint);
                     for (var i = 0; i < list.Count; i++)
                     {
