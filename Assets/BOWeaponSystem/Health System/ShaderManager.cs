@@ -93,17 +93,17 @@ public class ShaderManager : MonoBehaviour
         }
     }
     
-    public void FlatColorForAShortTime(float tartget_intensity, float addtime, float fadetime, Color targetColor)
+    public void FlatColorForAShortTime(float target_intensity, float addTime, float fadeTime, Color targetColor)
     {
-        for (int i = 0; i < pOFXes.Count; i++)
+        for (var i = 0; i < pOFXes.Count; i++)
         {
             RIMlayer.m_cParams.color = targetColor;
             pOFXes[i].enabled = true;
-            RIMlayer.m_cParams.intensity = tartget_intensity;
-            DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, tartget_intensity, addtime).
+            RIMlayer.m_cParams.intensity = target_intensity;
+            DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, target_intensity, addTime).
             OnComplete(() =>
             {
-                DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, 0, fadetime);
+                DOTween.To(() => RIMlayer.m_cParams.intensity, x => RIMlayer.m_cParams.intensity = x, 0, fadeTime);
                 pOFXes[i].enabled = false;
             });
         }

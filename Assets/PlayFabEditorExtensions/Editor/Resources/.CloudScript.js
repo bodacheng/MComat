@@ -251,30 +251,44 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
 
     var request = {
         "PlayFabId": currentPlayerId,
-        "MaxResultsCount": 4,//自己，和三个对手
+        "MaxResultsCount": 4, //自己，和三个对手
         "StatisticName": "arenapoint",
         "ProfileConstraints" : {
             "ShowDisplayName" : true
         }
     };
     var Result = server.GetLeaderboardAroundUser(request);
-
     let teamInfos = [];
-    for (let i = 0; i < Result.Leaderboard.length; i++) {
-        
-        var playerTeamData = server.GetUserData(
-            {
-                PlayFabId: Result.Leaderboard[i].PlayFabId,
-                Keys: ["DefendTeam"]
-            }
-        );
-        
-        var item = {
-            "PlayerLeaderboardEntry": Result.Leaderboard[i],
-            "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value)
-        };
-        teamInfos.push(item);
+    
+    if (Result == null) // 说明这个玩家的 arenapoint 信息不存在
+    {
+        var playerStatResult = server.UpdatePlayerStatistics({
+            PlayFabId: currentPlayerId,
+            Statistics: [{
+                StatisticName: "arenapoint",
+                Value: 1000 // 初始值
+            }]
+        });
+    } // 如果玩家没有arenapoint信息，那么返回空列表。让本地完成其他处理
+    else
+    {
+        for (let i = 0; i < Result.Leaderboard.length; i++) {
+
+            var playerTeamData = server.GetUserData(
+                {
+                    PlayFabId: Result.Leaderboard[i].PlayFabId,
+                    Keys: ["DefendTeam"]
+                }
+            );
+            
+            var item = {
+                "PlayerLeaderboardEntry": Result.Leaderboard[i],
+                "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value)
+            };
+            teamInfos.push(item);
+        }
     }
+    
     return { teamInfos };
 }
 
@@ -321,7 +335,7 @@ handlers.ArenaPointUp = function (args, context) {
         });
     }
     
-    return { "currentPoint" : point };
+    return { "arenapoint" : point };
 };
 
 handlers.Gotcha = function (args, context) {

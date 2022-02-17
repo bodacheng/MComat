@@ -55,6 +55,12 @@ public class ArenaLayer : UILayer
                     myScore.text = myLeaderboardInfo.PlayerLeaderboardEntry.StatValue.ToString();
                     myRank.text = "Rank :" + myLeaderboardInfo.PlayerLeaderboardEntry.Position;
                 }
+                else
+                {
+                    myScore.gameObject.SetActive(false);
+                    myRank.gameObject.SetActive(false);
+                }
+                
                 ShowMyTeam();
                 
                 if (exceptSelf.Count < 3)
@@ -103,13 +109,13 @@ public class ArenaLayer : UILayer
     
     void ShowMyTeam()
     {
-        string Pos1MonsterOfPlayerId = TeamSet.Arena3V3.GetInstanceIdOnPos(0);
-        string Pos2MonsterOfPlayerId = TeamSet.Arena3V3.GetInstanceIdOnPos(1);
-        string Pos3MonsterOfPlayerId = TeamSet.Arena3V3.GetInstanceIdOnPos(2);
+        string Pos1InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(0);
+        string Pos2InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(1);
+        string Pos3InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(2);
         
-        HeroIcon.ChangeHeroIconByInstanceId(Pos1MonsterOfPlayerId, member1);
-        HeroIcon.ChangeHeroIconByInstanceId(Pos2MonsterOfPlayerId, member2);
-        HeroIcon.ChangeHeroIconByInstanceId(Pos3MonsterOfPlayerId, member3);
+        HeroIcon.ChangeHeroIconByInstanceId(Pos1InstanceID, member1);
+        HeroIcon.ChangeHeroIconByInstanceId(Pos2InstanceID, member2);
+        HeroIcon.ChangeHeroIconByInstanceId(Pos3InstanceID, member3);
         
         void GoToTeamEdit()
         {
