@@ -28,7 +28,7 @@ public class ModelShower : MonoBehaviour
     {
         if (model != null)
         {
-            GameObject.Destroy(model);
+            Destroy(model);
         }
         if (recordID == null)
         {
@@ -64,7 +64,7 @@ public class ModelShower : MonoBehaviour
     float xAngleTemp;
     readonly float yAngle;
     readonly float yAngleTemp;
-    float fingertoshowmodelx, fingertoshowmodely;
+    float _fingerToShowModelX, _fingerToShowModelY;
     // 注意，整个模型的上下移动靠的是StartToEndMode相机
     public void TranslateShowingCharToDefaultPos(Vector3 screenPos)//new Vector3(0.23f, 0.3f, 3f)
     {
@@ -85,9 +85,9 @@ public class ModelShower : MonoBehaviour
                 else if (Input.GetMouseButton(0))
                 {
                     modelPOnScreen = CalculateShowModelViewportPoint(model.transform.position);
-                    fingertoshowmodelx = Mathf.Abs(FirstPoint.x - modelPOnScreen.x) / Screen.width;
-                    fingertoshowmodely = (FirstPoint.y - modelPOnScreen.y) / Screen.height;
-                    if (fingertoshowmodelx < 0.3f && fingertoshowmodely < 0.3f && fingertoshowmodely > 0)
+                    _fingerToShowModelX = Mathf.Abs(FirstPoint.x - modelPOnScreen.x) / Screen.width;
+                    _fingerToShowModelY = (FirstPoint.y - modelPOnScreen.y) / Screen.height;
+                    if (_fingerToShowModelX < 0.3f && _fingerToShowModelY < 0.3f && _fingerToShowModelY > 0)
                     {
                         SecondPoint = Input.mousePosition;
                         xAngle = xAngleTemp + (FirstPoint.x - SecondPoint.x) * 180 / Screen.width;
@@ -105,9 +105,9 @@ public class ModelShower : MonoBehaviour
                 else if (Input.GetMouseButton(0))
                 {
                     modelPOnScreen = CalculateShowModelViewportPoint(model.transform.position);
-                    fingertoshowmodelx = Mathf.Abs(FirstPoint.x - modelPOnScreen.x)/ Screen.width;
-                    fingertoshowmodely = (FirstPoint.y - modelPOnScreen.y)/ Screen.height;
-                    if (fingertoshowmodelx < 0.3f && fingertoshowmodely < 0.3f && fingertoshowmodely > 0)
+                    _fingerToShowModelX = Mathf.Abs(FirstPoint.x - modelPOnScreen.x)/ Screen.width;
+                    _fingerToShowModelY = (FirstPoint.y - modelPOnScreen.y)/ Screen.height;
+                    if (_fingerToShowModelX < 0.3f && _fingerToShowModelY < 0.3f && _fingerToShowModelY > 0)
                     {
                         SecondPoint = Input.mousePosition;
                         xAngle = xAngleTemp + (FirstPoint.x - SecondPoint.x) * 180 / Screen.width;

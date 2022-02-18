@@ -118,29 +118,29 @@ namespace mainMenu
                 yield return ModelShower.target.ShowMyModel(null);
             }else{
                 SkillShowSupporter.focusRId = info.r_id;
-                IEnumerator readshowmodel = ModelShower.target.ShowMyModel(info.id);
-                yield return readshowmodel;
-                GameObject focusingOneModel = (GameObject)readshowmodel.Current;
+                var showMyModel = ModelShower.target.ShowMyModel(info.id);
+                yield return showMyModel;
+                var focusingOneModel = (GameObject)showMyModel.Current;
                 if (focusingOneModel == null)
                 {
                     Debug.Log("模型错误");
                     SkillShowSupporter.focusingC = null;
                     yield break;
                 }
-                OutsideDataLink outsideDataLink = focusingOneModel.GetComponent<OutsideDataLink>();
+                var outsideDataLink = focusingOneModel.GetComponent<OutsideDataLink>();
                 if (outsideDataLink == null)
                 {
-                    Debug.Log("角色模型构成貌似有问题，monsterid：" + info.r_id);
+                    Debug.Log("角色模型构成貌似有问题，resource：" + info.r_id);
                     yield break;
                 }
-                Data_Center aI_DATA_CENTER = outsideDataLink._C;
+                var aI_DATA_CENTER = outsideDataLink._C;
                 SkillShowSupporter.focusingC = aI_DATA_CENTER;
                 SkillShowSupporter.focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
             }
         }
         
         // 里面一个非常大的重点是执行了BO_Ani_E模块的初始化
-        public IEnumerator Step2INIForUIRefresh(UnitInfo info)
+        IEnumerator Step2INIForUIRefresh(UnitInfo info)
         {
             if (info != null)
             {
@@ -151,10 +151,10 @@ namespace mainMenu
                     Debug.Log("模型错误");
                     yield break;
                 }
-                Data_Center center = (Data_Center)focusingOneModel.Current;
+                var center = (Data_Center)focusingOneModel.Current;
                 if (center == null)
                 {
-                    Debug.Log("角色pretab构成严重错误");
+                    Debug.Log("角色prefab构成严重错误");
                     yield break;
                 }
 
@@ -166,8 +166,6 @@ namespace mainMenu
                 if (center._MyBehaviorRunner != null)
                     center._MyBehaviorRunner.ChangeState("Empty");
             }
-            else
-                yield break;
         }
         
         Vector3 tempV;
