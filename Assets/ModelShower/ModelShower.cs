@@ -28,14 +28,14 @@ public class ModelShower : MonoBehaviour
     {
         if (model != null)
         {
-            model.SetActive(false);
+            GameObject.Destroy(model);
         }
         if (recordID == null)
         {
             yield break;
         }
         
-        var p = GeneralModelPool.GetModel(recordID, true);
+        var p = GeneralModelPool.GetModel(recordID);
         yield return p;
         if (p.Current == null)
         {
@@ -43,7 +43,7 @@ public class ModelShower : MonoBehaviour
             yield break;
         }
         
-        Data_Center dataCenter = (Data_Center)p.Current;
+        var dataCenter = (Data_Center)p.Current;
         // 这个短暂变色是为了掩盖一些模型刚加载瞬间有些渲染没到位的尴尬。比如裙子摇晃 
         // 但是这个不知道为什么报warning
         // dataCenter._ShaderManager.FlatColorForAShortTime(10f, 0, 0.5f, Color.black); 

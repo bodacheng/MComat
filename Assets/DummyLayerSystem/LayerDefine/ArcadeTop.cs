@@ -18,12 +18,11 @@ public partial class ArcadeTop : UILayer
     [SerializeField] NineForShow _NineForShow;
     
     int StageCount; 
-    public IDictionary<int, StageInfo> ArcadeStages = new Dictionary<int, StageInfo>();
+    public readonly IDictionary<int, StageInfo> ArcadeStages = new Dictionary<int, StageInfo>();
     
     public static ArcadeTop Open()
     {
-        ArcadeTop returnValue;
-        returnValue = UILayerLoader.Load(PreScene.target.T,"ArcadeTop") as ArcadeTop;
+        var returnValue = UILayerLoader.Load(PreScene.target.T,"ArcadeTop") as ArcadeTop;
         returnValue.INIArcadeStageButtons();
         returnValue.INIPagingSystem(2);
         return returnValue;
@@ -44,16 +43,16 @@ public partial class ArcadeTop : UILayer
 
     void INIArcadeStageButtons()
     {
-        List<UnityEngine.Object> stageResources = Resources.LoadAll("StageConfigFiles", typeof(FightInfo)).ToList();
-        foreach (UnityEngine.Object _object in stageResources)
+        var stageResources = Resources.LoadAll("StageConfigFiles", typeof(FightInfo)).ToList();
+        foreach (var _object in stageResources)
         {
-            FightInfo one = (FightInfo)_object;
+            var one = (FightInfo)_object;
             one.ID = int.Parse(one.name);
             one.SetEventType(FightEventType.Quest);
             if (!ArcadeStages.ContainsKey(one.ID))
             {
                 one.LoadLocalFightFromScript();
-                StageButton newButton = Instantiate(iconPrefab);
+                var newButton = Instantiate(iconPrefab);
                 void LoadThisStage()
                 {
                     ArcadeStages[one.ID].stageConfig.LoadMyTeam();
@@ -65,21 +64,24 @@ public partial class ArcadeTop : UILayer
                 newButton.text.text = "Stage" + one.ID;
                 newButton.name = "Stage" + one.ID;
 
-                for (int i = 0; i < one.fightMembers.EnemySets.GetValues().Count; i++)
+                if (one.fightMembers != null)
                 {
-                    MonsterIconDic.Get(one.fightMembers.EnemySets.GetValues()[i].r_id);
+                    for (int i = 0; i < one.fightMembers.EnemySets.GetValues().Count; i++)
+                    {
+                        MonsterIconDic.Get(one.fightMembers.EnemySets.GetValues()[i].r_id);
+                    }
+                    
+                    var heroIcons = MemberInfosShow(one.fightMembers.EnemySets.GetValues(), newButton.IconsT);
+                    for (var i = 0; i < heroIcons.Count; i++)
+                    {
+                        HeroIcon heroIcon = heroIcons[i];
+                        heroIcon.iconButton.onClick.RemoveAllListeners();
+                        heroIcon.iconButton.onClick.AddListener(() => { IconButtonFeature(heroIcon); });
+                    }
+                    newButton.MemberIcons = heroIcons;
                 }
                 
-                List<HeroIcon> heroIcons = MemberInfosShow(one.fightMembers.EnemySets.GetValues(), newButton.IconsT);
-                for (int i = 0; i < heroIcons.Count; i++)
-                {
-                    HeroIcon heroIcon = heroIcons[i];
-                    heroIcon.iconButton.onClick.RemoveAllListeners();
-                    heroIcon.iconButton.onClick.AddListener(() => { IconButtonFeature(heroIcon); });
-                }
-                newButton.MemberIcons = heroIcons;
-                
-                StageInfo stageInfo = new StageInfo
+                var stageInfo = new StageInfo
                 {
                     stageConfig = one,
                     stageButton = newButton

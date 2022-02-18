@@ -5,7 +5,7 @@ public partial class UnitCreator {
     
     public static IEnumerator CreateUnit(UnitInfo info)
     {
-        var get = GeneralModelPool.GetModel(info.r_id, false);
+        var get = GeneralModelPool.GetModel(info.r_id);
         yield return get;
         var _D = (Data_Center)get.Current;
         if (_D == null)
