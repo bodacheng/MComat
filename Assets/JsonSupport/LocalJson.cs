@@ -6,32 +6,34 @@ namespace Json
 {
     public static class LocalJson
     {
-        public static void SaveToJsonFile_persistentDataPath(string subpath, string filename, string json)
+        public static void SaveToJsonFile_persistentDataPath(string subPath, string filename, string json)
         {
-            //string wholepath = Path.Combine(Application.persistentDataPath, subpath);
-            string wholepath;
-            if (subpath != null)
+            //string wholePath = Path.Combine(Application.persistentDataPath, subPath);
+            string wholePath;
+            if (subPath != null)
             {
-                if (!Directory.Exists(Application.persistentDataPath + "/" + subpath))
+                if (!Directory.Exists(Application.persistentDataPath + "/" + subPath))
                 {
                     //if it doesn't, create it
-                    Directory.CreateDirectory(Application.persistentDataPath + "/" + subpath);
+                    Directory.CreateDirectory(Application.persistentDataPath + "/" + subPath);
                 }
-                wholepath = Application.persistentDataPath + "/" + subpath + "/" + filename;
+                wholePath = Application.persistentDataPath + "/" + subPath + "/" + filename;
             }
             else
             {
-                wholepath = Application.persistentDataPath + "/" + filename;
+                wholePath = Application.persistentDataPath + "/" + filename;
             }
-            Debug.Log("try:"+wholepath);
+            
+            Debug.Log("尝试建立本地文件 : "+wholePath);
+            
             try
             {
-                if (!File.Exists(wholepath))
+                if (!File.Exists(wholePath))
                 {
-                    File.Create(wholepath).Close();
+                    File.Create(wholePath).Close();
                 }
-                File.WriteAllText(wholepath, json, System.Text.Encoding.UTF8);
-                Debug.Log(wholepath);
+                File.WriteAllText(wholePath, json, System.Text.Encoding.UTF8);
+                Debug.Log(wholePath);
             }
             catch (Exception e)
             {
@@ -39,32 +41,32 @@ namespace Json
             }
         }
         
-        public static void SaveInfoToJsonFile_dataPath(string subpath, string filename, string json)
+        public static void SaveInfoToJsonFile_dataPath(string subPath, string filename, string json)
         {
-            //string wholepath = Path.Combine(Application.persistentDataPath, subpath);
-            string wholepath;
-            if (subpath != null)
+            //string wholePath = Path.Combine(Application.persistentDataPath, subPath);
+            string wholePath;
+            if (subPath != null)
             {
-                if (!Directory.Exists(Application.dataPath + "/" + subpath))
+                if (!Directory.Exists(Application.dataPath + "/" + subPath))
                 {
                     //if it doesn't, create it
-                    Directory.CreateDirectory(Application.dataPath + "/" + subpath);
+                    Directory.CreateDirectory(Application.dataPath + "/" + subPath);
                 }
-                wholepath = Application.dataPath + "/" + subpath + "/" + filename;
+                wholePath = Application.dataPath + "/" + subPath + "/" + filename;
             }
             else
             {
-                wholepath = Application.dataPath + "/" + filename;
+                wholePath = Application.dataPath + "/" + filename;
             }
             
             try
             {
-                if (!File.Exists(wholepath))
+                if (!File.Exists(wholePath))
                 {
-                    File.Create(wholepath).Close();
+                    File.Create(wholePath).Close();
                 }
-                Debug.Log("文件生成"+ wholepath);
-                File.WriteAllText(wholepath, json, System.Text.Encoding.UTF8);
+                Debug.Log("文件生成"+ wholePath);
+                File.WriteAllText(wholePath, json, System.Text.Encoding.UTF8);
             }
             catch (Exception e)
             {

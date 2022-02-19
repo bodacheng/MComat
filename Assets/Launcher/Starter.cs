@@ -23,7 +23,7 @@ public class Starter : MonoBehaviour
         
         if (enterFrontPageFirst)
         {
-            FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
+            var stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
             stage.SetEventType(FightEventType.Screensaver);
             stage.team1ID = Account._AccInfo.playerID;
             FightLoad.Go(stage);
@@ -37,10 +37,9 @@ public class Starter : MonoBehaviour
     public void ToSkillShowerMode()
     {
         SkillConfigTable.LoadAllSkillConfigs();
-        foreach (KeyValuePair<string, SkillConfig> _pair in SkillConfigTable.SkillConfigRefDic)
+        foreach (var _pair in SkillConfigTable.SkillConfigRefDic)
         {
-            //Debug.Log("尝试于本地存档追加石：" + _pair.Value.REAL_NAME);
-            StoneOfPlayerInfo stoneInfo = new StoneOfPlayerInfo
+            var stoneInfo = new StoneOfPlayerInfo
             {
                 InstanceId = (Stones.Dic.Count + 1).ToString(),
                 skillId = _pair.Value.RECORD_ID,
@@ -51,17 +50,17 @@ public class Starter : MonoBehaviour
             Stones.Add(stoneInfo);
         }
         
-        List<UnitConfig> charList = Units.RowToConfigList(Units.rowList);
+        var unitConfigs = Units.RowToConfigList(Units.rowList);
         int i = 0;
-        foreach (UnitConfig _CharConfig in charList)
+        foreach (var unitConfig in unitConfigs)
         {
-            UnitInfo _Char = new UnitInfo
+            var unitInfo = new UnitInfo
             {
-                id = _CharConfig.RECORD_ID,
+                id = unitConfig.RECORD_ID,
                 r_id = i.ToString()
             };
                 
-            KeyValuePair<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(_CharConfig.RECORD_ID);
+            KeyValuePair<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(unitConfig.RECORD_ID);
             if (INHERENTSkills.Key != null)
             {
                 StoneOfPlayerInfo stoneInfo = new StoneOfPlayerInfo
@@ -76,8 +75,8 @@ public class Starter : MonoBehaviour
                 };
                 Stones.Add(stoneInfo);
             }
-            Debug.Log("尝试将角色" + _CharConfig.REAL_NAME + "加入存档");
-            DicAdd<string, UnitInfo>.Add(MyMonsters.Dic, _Char.id, _Char);
+            Debug.Log("尝试将角色" + unitConfig.REAL_NAME + "加入存档");
+            DicAdd<string, UnitInfo>.Add(MyMonsters.Dic, unitInfo.id, unitInfo);
             i++;
         }
         SceneManager.LoadScene(1);
