@@ -29,7 +29,7 @@ public class UpperInfoBar : UILayer
 
     public void Refresh()
     {
-        UserID.text = Account._AccInfo.playerID; //SystemInfo.deviceUniqueIdentifier;
+        UserID.text = PlayerAccountInfo.Me.playerID; //SystemInfo.deviceUniqueIdentifier;
         accountDiamondCoin.text = Currencies.DiamondCount.ToString();
         accountIntelliCoin.text = Currencies.CoinCount.ToString();
     }

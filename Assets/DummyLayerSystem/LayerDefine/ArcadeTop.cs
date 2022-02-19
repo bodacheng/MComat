@@ -56,7 +56,7 @@ public partial class ArcadeTop : UILayer
                 void LoadThisStage()
                 {
                     ArcadeStages[one.ID].stageConfig.LoadMyTeam();
-                    ArcadeStages[one.ID].stageConfig.team1ID = Account._AccInfo.playerID;
+                    ArcadeStages[one.ID].stageConfig.team1ID = PlayerAccountInfo.Me.playerID;
                     PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, ArcadeStages[one.ID].stageConfig, true);
                 }
                 newButton.button.onClick.AddListener(LoadThisStage);
@@ -148,7 +148,7 @@ public partial class ArcadeTop : UILayer
         {
             JumpToBtnFeature = () =>
             {
-                JumpTo(PageD(Account._AccInfo.ArcadeProcess, StageCount));
+                JumpTo(PageD(PlayerAccountInfo.Me.ArcadeProcess, StageCount));
             };
             EndDragExtra = FiveSetAlignment;
         }
@@ -169,8 +169,8 @@ public partial class ArcadeTop : UILayer
         {
             Animator btnAnimator = keyValuePair.Value.stageButton.GetComponent<Animator>();
             if (btnAnimator != null)
-                btnAnimator.enabled = Account._AccInfo.ArcadeProcess + 1 == keyValuePair.Key;
-            if (Account._AccInfo.ArcadeProcess + 1 >= keyValuePair.Key)
+                btnAnimator.enabled = PlayerAccountInfo.Me.ArcadeProcess + 1 == keyValuePair.Key;
+            if (PlayerAccountInfo.Me.ArcadeProcess + 1 >= keyValuePair.Key)
             {
                 keyValuePair.Value.ChangeColorOfIcons(true);
             }

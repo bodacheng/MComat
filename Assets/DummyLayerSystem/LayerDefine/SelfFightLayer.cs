@@ -64,11 +64,11 @@ namespace mainMenu
         
         public void Clear()
         {
-            foreach (HeroIcon Icon in teamButtonDic_M.GetValues())
+            foreach (var Icon in teamButtonDic_M.GetValues())
             {
                 Icon.ChangeIcon(null, Zokusei.Null);
             }
-            foreach (HeroIcon Icon in teamButtonDic_R.GetValues())
+            foreach (var Icon in teamButtonDic_R.GetValues())
             {
                 Icon.ChangeIcon(null, Zokusei.Null);
             }
@@ -141,8 +141,8 @@ namespace mainMenu
                     break;
             }
             stage.fightMembers = _selfFight;
-            stage.team1ID = Account._AccInfo.playerID;
-            stage.team2ID = Account._AccInfo.playerID + "_2";
+            stage.team1ID = PlayerAccountInfo.Me.playerID;
+            stage.team2ID = PlayerAccountInfo.Me.playerID + "_2";
             FightLoad.Go(stage);
         }
         
@@ -167,7 +167,7 @@ namespace mainMenu
         
         void UnitIconBtn(string instanceID)
         {
-            UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+            var unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
             if (focusingPosNum == -1)
             {
                 unitsLayer.Select(instanceID);
@@ -259,11 +259,11 @@ namespace mainMenu
                 Debug.Log("严重错误");
             }
             
-            string PosInstanceId = posKeySet.GetInstanceIdOnPos(posNum);
+            var PosInstanceId = posKeySet.GetInstanceIdOnPos(posNum);
             if (PosInstanceId != null)
             {
-                UnitInfo _one = MyMonsters.Get(PosInstanceId);
-                UnitConfig unitConfig = Units.GetUnitConfig(_one.r_id);
+                var _one = MyMonsters.Get(PosInstanceId);
+                var unitConfig = Units.GetUnitConfig(_one.r_id);
                 tar.ChangeIcon(unitConfig == null ? null : MonsterIconDic.Get(unitConfig.RECORD_ID),
                     unitConfig == null ? Zokusei.Null : unitConfig._zokusei);
             }
@@ -275,38 +275,38 @@ namespace mainMenu
         
         void IniMultiRaidModeUnitIcons(List<HeroIcon> icons, Team team)
         {
-            for (int i = 0; i < icons.Count; i++)
+            for (var i = 0; i < icons.Count; i++)
             {
-                HeroIcon charIcon = icons[i];
-                teamButtonDic_M.Set(team, i, charIcon);
-                DicAdd<HeroIcon, int>.Add(IconNumCheck, charIcon, i);
-                charIcon.ChangeIcon(null, Zokusei.Null);
+                var heroIcon = icons[i];
+                teamButtonDic_M.Set(team, i, heroIcon);
+                DicAdd<HeroIcon, int>.Add(IconNumCheck, heroIcon, i);
+                heroIcon.ChangeIcon(null, Zokusei.Null);
                 
                 void SelectedRender()
                 {
-                    HeroIcon.SelectedFeature(charIcon, selectedFrame, 110f);
+                    HeroIcon.SelectedFeature(heroIcon, selectedFrame, 110f);
                 }
                 void A()
                 {
-                    OnTeamPosBtn(team, IconNumCheck[charIcon]);
+                    OnTeamPosBtn(team, IconNumCheck[heroIcon]);
                 }
-                charIcon.iconButton.onClick.RemoveAllListeners();
-                charIcon.iconButton.onClick.AddListener(A);
-                charIcon.iconButton.onClick.AddListener(SelectedRender);
+                heroIcon.iconButton.onClick.RemoveAllListeners();
+                heroIcon.iconButton.onClick.AddListener(A);
+                heroIcon.iconButton.onClick.AddListener(SelectedRender);
             }
         }
         
         void IniRotationModeUnitIcons(List<HeroIcon> icons, Team team)
         {
-            for (int i = 0; i < icons.Count; i++)
+            for (var i = 0; i < icons.Count; i++)
             {
-                HeroIcon charIcon = icons[i];
-                teamButtonDic_R.Set(team, i, charIcon);
-                DicAdd<HeroIcon, int>.Add(IconNumCheck, charIcon, i);
-                charIcon.ChangeIcon(null, Zokusei.Null);
-                charIcon.iconButton.onClick.RemoveAllListeners();
-                charIcon.iconButton.onClick.AddListener(() => {OnTeamPosBtn(team, IconNumCheck[charIcon]);});
-                charIcon.iconButton.onClick.AddListener(() => HeroIcon.SelectedFeature(charIcon, selectedFrame, 110f));
+                var heroIcon = icons[i];
+                teamButtonDic_R.Set(team, i, heroIcon);
+                DicAdd<HeroIcon, int>.Add(IconNumCheck, heroIcon, i);
+                heroIcon.ChangeIcon(null, Zokusei.Null);
+                heroIcon.iconButton.onClick.RemoveAllListeners();
+                heroIcon.iconButton.onClick.AddListener(() => {OnTeamPosBtn(team, IconNumCheck[heroIcon]);});
+                heroIcon.iconButton.onClick.AddListener(() => HeroIcon.SelectedFeature(heroIcon, selectedFrame, 110f));
             }
         }
 
@@ -319,8 +319,8 @@ namespace mainMenu
         {
             focusingTeam = team;
             focusingPosNum = pos;
-            UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
-            string unitsBoxSelect = unitsLayer.GetSelect();
+            var unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+            var unitsBoxSelect = unitsLayer.GetSelect();
             
             if (unitsBoxSelect != null)
             {

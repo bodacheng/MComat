@@ -18,7 +18,7 @@ public class UnitListPage : MainSceneProcess
     public override void ProcessEnter()
     {
         loadFinished = false;
-        switch (Account._AccInfo.accountprogress)
+        switch (PlayerAccountInfo.Me.progress)
         {
             case PlayerAccountProgressStep.Freedom:
                 break;

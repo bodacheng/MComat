@@ -41,7 +41,7 @@ public class ArenaLayer : UILayer
                 foreach (var t in obj)
                 {
                     Debug.Log( "读取到以下玩家信息 : " +t.PlayerLeaderboardEntry.PlayFabId);
-                    if (t.PlayerLeaderboardEntry.PlayFabId != Account._AccInfo.playerID)
+                    if (t.PlayerLeaderboardEntry.PlayFabId != PlayerAccountInfo.Me.playerID)
                     {
                         exceptSelf.Add(t);
                     }

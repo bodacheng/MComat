@@ -13,7 +13,7 @@ public static class FightLoad
         if (loadWithMyTeam)
         {
             stage.LoadMyTeam();
-            stage.team1ID = Account._AccInfo.playerID;
+            stage.team1ID = PlayerAccountInfo.Me.playerID;
         }
         
         if (stage.fightMembers.HeroSets.GetValues().Count < 1 || stage.fightMembers.EnemySets.GetValues().Count < 1)

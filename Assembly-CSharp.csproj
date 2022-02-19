@@ -325,7 +325,6 @@
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\ArcadeFightResult.cs" />
      <Compile Include="Assets\missionWatcher\MissionWatcher.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\SkillEditLayer\AutoEdit.cs" />
-     <Compile Include="Assets\Remote\Account\Account.cs" />
      <Compile Include="Assets\CachLogic\downloads_anim.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\FlickGesture.cs" />
      <Compile Include="Assets\Monsterbox\SSLevelUpManager\LevelExpConfig.cs" />

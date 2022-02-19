@@ -1,7 +1,6 @@
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
-using dataAccess;
 using System;
 
 public partial class CloudScript
@@ -15,8 +14,8 @@ public partial class CloudScript
             },
             (ExecuteCloudScriptResult result) => {
                 int newSize = Convert.ToInt32(result.FunctionResult);
-                Account._AccInfo.Stoneboxsize = newSize;
-                Debug.Log("盒子容量成功扩大到" + Account._AccInfo.Stoneboxsize);
+                PlayerAccountInfo.Me.StoneBoxSize = newSize;
+                Debug.Log("盒子容量成功扩大到" + PlayerAccountInfo.Me.StoneBoxSize);
             },
             error => { Debug.Log("failed"); });
     }

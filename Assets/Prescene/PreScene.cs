@@ -157,7 +157,7 @@ namespace mainMenu
                 else
                 {
                     // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
-                    switch (Account._AccInfo.accountprogress)
+                    switch (PlayerAccountInfo.Me.progress)
                     {
                         case PlayerAccountProgressStep.Freedom:
                             trySwitchToStep(MainMenuNote.goingtostep, false);
@@ -192,14 +192,14 @@ namespace mainMenu
         public void BeginSkillTest_Rotatiom()
         {
             FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
-            stage.team1ID = Account._AccInfo.playerID;
+            stage.team1ID = PlayerAccountInfo.Me.playerID;
             FightLoad.Go(stage);
         }
 
         public void BeginSkillTest_Multi()
         {
             FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.multiRaid);
-            stage.team1ID = Account._AccInfo.playerID;
+            stage.team1ID = PlayerAccountInfo.Me.playerID;
             FightLoad.Go(stage);
         }
 

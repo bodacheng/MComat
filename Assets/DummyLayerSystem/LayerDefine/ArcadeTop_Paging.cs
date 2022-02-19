@@ -13,7 +13,7 @@ public partial class ArcadeTop : UILayer
     float CurrentTargetScrollbarValue()
     {
         float targetScrollbarValue;
-        if (Account._AccInfo.ArcadeProcess <= 3)
+        if (PlayerAccountInfo.Me.ArcadeProcess <= 3)
         {
             targetScrollbarValue = 0;
         }
@@ -22,7 +22,7 @@ public partial class ArcadeTop : UILayer
             VerticalLayoutGroup verticalLayoutGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
             // 重点在于对Scrollbar.value的理解。这个值是scrollview边界目前超出框的长度与可能超出框框最大长度的比值
             targetScrollbarValue =
-                ((iconPrefab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * (Account._AccInfo.ArcadeProcess - 3)) // 分子。如果希望对象关卡不是出现在中间，可调整这个数字。
+                ((iconPrefab.button.GetComponent<RectTransform>().rect.height + verticalLayoutGroup.spacing) * (PlayerAccountInfo.Me.ArcadeProcess - 3)) // 分子。如果希望对象关卡不是出现在中间，可调整这个数字。
                 / (ButtonsContainer.sizeDelta.y - _ScrollRect.GetComponent<RectTransform>().rect.height); // 分母
         }
         return targetScrollbarValue;
@@ -31,21 +31,21 @@ public partial class ArcadeTop : UILayer
         void FiveSetAlignment()
     {
         // 不可拖向太超前的关卡
-        if (_Scrollbar.value > PageD(Account._AccInfo.ArcadeProcess, StageCount) + (float)0.5 / StageCount)
+        if (_Scrollbar.value > PageD(PlayerAccountInfo.Me.ArcadeProcess, StageCount) + (float)0.5 / StageCount)
         {
-            JumpTo(PageD(Account._AccInfo.ArcadeProcess, StageCount));
+            JumpTo(PageD(PlayerAccountInfo.Me.ArcadeProcess, StageCount));
         }
 
         if (!JumpToNewStage.gameObject.activeSelf)
         {
-            if (Mathf.Abs(PageD(Account._AccInfo.ArcadeProcess, StageCount) - _Scrollbar.value) > 0.2f)
+            if (Mathf.Abs(PageD(PlayerAccountInfo.Me.ArcadeProcess, StageCount) - _Scrollbar.value) > 0.2f)
             {
                 JumpToNewStage.gameObject.SetActive(true);
             }
         }
         else
         {
-            if (Mathf.Abs(PageD(Account._AccInfo.ArcadeProcess, StageCount) - _Scrollbar.value) <= 0.2f)
+            if (Mathf.Abs(PageD(PlayerAccountInfo.Me.ArcadeProcess, StageCount) - _Scrollbar.value) <= 0.2f)
             {
                 JumpToNewStage.gameObject.SetActive(false);
             }

@@ -3,9 +3,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
 using System;
-using mainMenu;
 using dataAccess;
-using Api.Dto.Model;
 using Newtonsoft.Json;
 
 public partial class PlayFabReadClient
@@ -47,7 +45,7 @@ public partial class PlayFabReadClient
         PlayFabClientAPI.GetUserData(
             new GetUserDataRequest()
             {
-                PlayFabId = Account._AccInfo.playerID,
+                PlayFabId = PlayerAccountInfo.Me.playerID,
                 Keys = new List<string>() { targetModeCode }
             },
             (GetUserDataResult obj) => {
@@ -97,26 +95,26 @@ public partial class PlayFabReadClient
         (
             new GetUserDataRequest()
             {
-                PlayFabId = Account._AccInfo.playerID,
+                PlayFabId = PlayerAccountInfo.Me.playerID,
                 Keys = new List<string>() { "last_Level_completed", "stone_box_size" }
             },
             (GetUserDataResult obj) => {
                 if (obj.Data.ContainsKey("last_Level_completed"))
                 {
-                    Account._AccInfo.ArcadeProcess = int.Parse(obj.Data["last_Level_completed"].Value);
+                    PlayerAccountInfo.Me.ArcadeProcess = int.Parse(obj.Data["last_Level_completed"].Value);
                 }
                 else
                 {
-                    Account._AccInfo.ArcadeProcess = 0;
+                    PlayerAccountInfo.Me.ArcadeProcess = 0;
                 }
 
                 if (obj.Data.ContainsKey("stone_box_size"))
                 {
-                    Account._AccInfo.Stoneboxsize = int.Parse(obj.Data["stone_box_size"].Value);
+                    PlayerAccountInfo.Me.StoneBoxSize = int.Parse(obj.Data["stone_box_size"].Value);
                 }
                 else
                 {
-                    Account._AccInfo.Stoneboxsize = 50;
+                    PlayerAccountInfo.Me.StoneBoxSize = 50;
                     Debug.Log("玩家数据出错 boxsize");
                 }
                 finished.Invoke(1);

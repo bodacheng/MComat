@@ -41,9 +41,9 @@ namespace mainMenu
             List<string> targetSKs = Stones.TargetStonesFromAccount_except(form, null, null, false);
             targetSKs = Order(targetSKs);
             
-            if (targetSKs.Count > Account._AccInfo.Stoneboxsize)
+            if (targetSKs.Count > PlayerAccountInfo.Me.StoneBoxSize)
             {
-                Debug.Log("错误：待显示技能石数量超过了盒子容量。盒子长度：" + Account._AccInfo.Stoneboxsize + " AND  技能石数：" + targetSKs.Count);
+                Debug.Log("错误：待显示技能石数量超过了盒子容量。盒子长度：" + PlayerAccountInfo.Me.StoneBoxSize + " AND  技能石数：" + targetSKs.Count);
             }
             
             foreach (KeyValuePair<int, StoneCell> cellPair in CellsDic)

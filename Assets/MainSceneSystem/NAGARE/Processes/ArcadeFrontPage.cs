@@ -19,9 +19,9 @@ public class ArcadeFrontPage : MainSceneProcess
         loadFinished = false;
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 2.5f, 0.1f);
         arcadeTop = ArcadeTop.Open();
-        if (arcadeTop.ArcadeStages.ContainsKey(Account._AccInfo.ArcadeProcess))
+        if (arcadeTop.ArcadeStages.ContainsKey(PlayerAccountInfo.Me.ArcadeProcess))
         {
-            StageInfo StageInfo = arcadeTop.ArcadeStages[Account._AccInfo.ArcadeProcess];
+            StageInfo StageInfo = arcadeTop.ArcadeStages[PlayerAccountInfo.Me.ArcadeProcess];
             arcadeTop.IconButtonFeature(StageInfo.stageButton.MemberIcons[0]);
         }else{
             Debug.Log("巨大错误。玩家关卡进度值不对应任何关卡");

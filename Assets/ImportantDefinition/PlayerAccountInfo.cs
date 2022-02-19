@@ -3,31 +3,27 @@
 [System.Serializable]
 public class PlayerAccountInfo
 {
+    public static PlayerAccountInfo Me;
+    
     public string playerID;
     public string PlayerName;
 
-    int stoneboxsize;
-    int arcadeProcess;
-
+    int _stoneBoxSize;
+    int _arcadeProcess;
+    
     public int ArcadeProcess
     {
-        get => arcadeProcess;
-        set
-        {
-            arcadeProcess = Mathf.Clamp(value, 1, 100);
-        }
+        get => _arcadeProcess;
+        set => _arcadeProcess = Mathf.Clamp(value, 1, 100);
     }
-
-    public int Stoneboxsize
+    
+    public int StoneBoxSize
     {
-        get => stoneboxsize;
-        set
-        {
-            stoneboxsize = Mathf.Clamp(value, 0, value);
-        }
+        get => _stoneBoxSize;
+        set => _stoneBoxSize = Mathf.Clamp(value, 0, value);
     }
 
-    public PlayerAccountProgressStep accountprogress = PlayerAccountProgressStep.Freedom;
+    public PlayerAccountProgressStep progress = PlayerAccountProgressStep.Freedom;
 
     public PlayerAccountInfo()
     {
