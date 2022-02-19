@@ -4,11 +4,56 @@ using UnityEngine.UI;
 
 public class SettingLayer : UILayer {
     
+    #region Btns
+    [SerializeField] Button volumeBtn;
+    [SerializeField] Button accountBtn;
+    [SerializeField] Button supportBtn;
+    #endregion
+    
+    #region Panels
+    [SerializeField] RectTransform volumePanel;
+    [SerializeField] RectTransform accountPanel;
+    [SerializeField] RectTransform supportPanel;
+    #endregion
+    
     #region Sound
-    [SerializeField] Slider bgmSLider;
+    [SerializeField] Slider bgmSlider;
     [SerializeField] Slider cvSlider;
     [SerializeField] Slider effectsSoundsSlider;
     #endregion
+    
+    void Initialise()
+    {
+        void CloseAllPanels()
+        {
+            volumePanel.gameObject.SetActive(false);
+            accountPanel.gameObject.SetActive(false);
+            supportPanel.gameObject.SetActive(false);
+        }
+        
+        volumeBtn.onClick.AddListener(() =>
+        {
+            CloseAllPanels();
+            volumePanel.gameObject.SetActive(true);
+        });
+        
+        accountBtn.onClick.AddListener(() =>
+        {
+            CloseAllPanels();
+            accountPanel.gameObject.SetActive(true);
+        });
+        
+        supportBtn.onClick.AddListener(() =>
+        {
+            CloseAllPanels();
+            supportPanel.gameObject.SetActive(true);
+        });
+        
+        onBgmChange();
+        onCVsChange();
+        onEffectsSoundChange();
+        ResetSliders();
+    }
     
     static SettingLayer Get()
     {
@@ -33,14 +78,6 @@ public class SettingLayer : UILayer {
         return returnValue;
     }
     
-    void Initialise()
-    {
-        onBgmChange();
-        onCVsChange();
-        onEffectsSoundChange();
-        ResetSliders();
-    }
-    
     public static void Close()
     {
         AppSetting.Save();
@@ -50,13 +87,13 @@ public class SettingLayer : UILayer {
     void ResetSliders()
     {
         effectsSoundsSlider.value = AppSetting.value.EffectsVolumn;
-        bgmSLider.value = AppSetting.value.BgmVolumn;
+        bgmSlider.value = AppSetting.value.BgmVolumn;
         cvSlider.value = AppSetting.value.CvVolumn;
     }
     
     public void onBgmChange()
     {
-        AppSetting.value.BgmVolumn = bgmSLider.value;
+        AppSetting.value.BgmVolumn = bgmSlider.value;
     }
     public void onCVsChange()
     {
