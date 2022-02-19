@@ -1,7 +1,6 @@
 ﻿using mainMenu;
 using UnityEngine;
 using DG.Tweening;
-using dataAccess;
 
 public class ArcadeFrontPage : MainSceneProcess
 {
@@ -21,7 +20,7 @@ public class ArcadeFrontPage : MainSceneProcess
         arcadeTop = ArcadeTop.Open();
         if (arcadeTop.ArcadeStages.ContainsKey(PlayerAccountInfo.Me.ArcadeProcess))
         {
-            StageInfo StageInfo = arcadeTop.ArcadeStages[PlayerAccountInfo.Me.ArcadeProcess];
+            var StageInfo = arcadeTop.ArcadeStages[PlayerAccountInfo.Me.ArcadeProcess];
             arcadeTop.IconButtonFeature(StageInfo.stageButton.MemberIcons[0]);
         }else{
             Debug.Log("巨大错误。玩家关卡进度值不对应任何关卡");

@@ -19,7 +19,7 @@ namespace mainMenu
         
         public void GenerateCells()
         {
-            var hangshu = 1;
+            var hang = 1;
             for (int i = 0; i < PlayerAccountInfo.Me.StoneBoxSize; i++)
             {
                 if (!CellsDic.ContainsKey(i))
@@ -43,8 +43,8 @@ namespace mainMenu
                 CellsDic[i]._selected.SetActive(false);
             }
             GridLayoutGroup GridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
-            hangshu = PlayerAccountInfo.Me.StoneBoxSize / GridLayoutGroup.constraintCount + 1;
-            BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (GridLayoutGroup.cellSize.x + GridLayoutGroup.spacing.x) * hangshu);
+            hang = PlayerAccountInfo.Me.StoneBoxSize / GridLayoutGroup.constraintCount + 1;
+            BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (GridLayoutGroup.cellSize.x + GridLayoutGroup.spacing.x) * hang);
         }
         
         public void AddFeatureToCells(Action<StoneCell> action)

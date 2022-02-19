@@ -2,8 +2,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using mainMenu;
-using System.Collections.Generic;
-using Skill;
 
 public class Starter : MonoBehaviour
 {
@@ -51,7 +49,7 @@ public class Starter : MonoBehaviour
         }
         
         var unitConfigs = Units.RowToConfigList(Units.rowList);
-        int i = 0;
+        var i = 0;
         foreach (var unitConfig in unitConfigs)
         {
             var unitInfo = new UnitInfo
@@ -59,11 +57,11 @@ public class Starter : MonoBehaviour
                 id = unitConfig.RECORD_ID,
                 r_id = i.ToString()
             };
-                
-            KeyValuePair<string, string> INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(unitConfig.RECORD_ID);
+            
+            var INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(unitConfig.RECORD_ID);
             if (INHERENTSkills.Key != null)
             {
-                StoneOfPlayerInfo stoneInfo = new StoneOfPlayerInfo
+                var stoneInfo = new StoneOfPlayerInfo
                 {
                     InstanceId = (Stones.Dic.Count + 1).ToString(),
                     skillId = INHERENTSkills.Key,

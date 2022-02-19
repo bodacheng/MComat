@@ -1,12 +1,5 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
-using mainMenu;
-using dataAccess;
-using System;
-using DG.Tweening;
-
 
 public partial class ArcadeTop : UILayer
 {

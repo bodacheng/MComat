@@ -47,7 +47,7 @@ public class AppSetting
         string json = JsonConvert.SerializeObject(value);
         LocalJson.SaveToJsonFile_persistentDataPath(null, "AppSetting.json", json);
     }
-
+    
     public static void Load()
     {
         try
