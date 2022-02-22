@@ -15,9 +15,15 @@ public partial class PlayFabReadClient
                 Password = pw,
                 TitleId = "MY GAME"
             },
-            success,
-            fail
-        );
+            (x)=>
+            {
+                LinkDevice();
+                success.Invoke(x);
+            },
+            (x)=>
+            {
+                fail.Invoke(x);
+            });
     }
     
     public static void CustomIDLogin(Action<LoginResult> success, Action<PlayFabError> fail)
@@ -46,22 +52,7 @@ public partial class PlayFabReadClient
                 },
                 (x) =>
                 {
-                    var guidValue = Guid.NewGuid();
-                    Debug.Log(guidValue.ToString());
-                    PlayFabClientAPI.AddUsernamePassword(new PlayFab.ClientModels.AddUsernamePasswordRequest
-                        {
-                            Username = x.PlayFabId,
-                            Email = "xxx@xxx.com",
-                            Password = guidValue.ToString()
-                        }, addUsernamePasswordResult =>
-                        {
-                            Debug.Log("我们把玩家的PlayFab username设置成了他的PlayFabId:" + addUsernamePasswordResult.Username);
-                        }, 
-                        (x) =>
-                        {
-                            Debug.Log(x.Error);
-                        }
-                    );
+                    AddUserNameAndPw(x.PlayFabId);
                     success.Invoke(x);
                 },
                 fail
@@ -70,13 +61,17 @@ public partial class PlayFabReadClient
             
             #if UNITY_ANDROID
             PlayFabClientAPI.LoginWithAndroidDeviceID(
-              new LoginWithAndroidDeviceIDRequest
-              {
-                  AndroidDeviceId = SystemInfo.deviceUniqueIdentifier,
-                  CreateAccount = true
-              },
-              success,
-              fail
+                new LoginWithAndroidDeviceIDRequest
+                {
+                    AndroidDeviceId = SystemInfo.deviceUniqueIdentifier,
+                    CreateAccount = true
+                },
+                (x) =>
+                {
+                    AddUserNameAndPw(x.PlayFabId);
+                    success.Invoke(x);
+                },
+                fail
             );
             #endif
         }
