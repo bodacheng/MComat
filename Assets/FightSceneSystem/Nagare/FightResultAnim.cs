@@ -58,7 +58,7 @@ public class FightResultAnim : FSceneProcess
         FightResultAnimLayer fightResultAnimLayer = UILayerLoader.Load
             (NetFightScene.target.T.gameObject, "FightResultAnimLayer") as FightResultAnimLayer;
 
-        if (FightOverControl.target.logger.GetWinnerId() == PlayerAccountInfo.Me.playerID)
+        if (FightOverControl.target.logger.GetWinnerId() == PlayerAccountInfo.Me.PlayFabUsername)
         {
             yield return fightResultAnimLayer.WINProcess();
         }

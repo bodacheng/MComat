@@ -9,9 +9,9 @@ public class PlayerAccountInfo
 {
     public static PlayerAccountInfo Me;
     
-    public string playerID;
+    public string PlayFabUsername;
     public string PlayerName;
-
+    
     int _stoneBoxSize;
     int _arcadeProcess;
     
@@ -49,6 +49,7 @@ public class PlayerAccountInfo
         try
         {
             var path = Application.persistentDataPath + "/account.json";
+            Debug.Log("从这里寻找存储于本地的账户信息："+ path);
             if (File.Exists(path))
             {
                 var dataAsJson = File.ReadAllText(path);

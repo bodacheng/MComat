@@ -23,7 +23,7 @@ public class Starter : MonoBehaviour
         {
             var stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
             stage.SetEventType(FightEventType.Screensaver);
-            stage.team1ID = PlayerAccountInfo.Me.playerID;
+            stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
             FightLoad.Go(stage);
         }else{
             MainMenuNote.goingtostep = MainSceneStep.FrontPage;
@@ -88,7 +88,7 @@ public class Starter : MonoBehaviour
                 Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
                 PlayerAccountInfo.Me = new PlayerAccountInfo
                 {
-                    playerID = result.PlayFabId
+                    PlayFabUsername = result.PlayFabId
                 };
                 CloudScript.CheckIn();
                 EnterFrontScene();

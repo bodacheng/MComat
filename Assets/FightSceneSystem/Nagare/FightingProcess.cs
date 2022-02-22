@@ -1,4 +1,8 @@
-﻿namespace FightScene
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using mainMenu;
+
+namespace FightScene
 {
     public class FightingProcess : FSceneProcess
     {
@@ -23,7 +27,25 @@
             if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
             {
                 TitleScreenLayer TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
-                TitleScreenLayer.Initialise(FightOverControl.target.ReturnToFront);
+                TitleScreenLayer.Initialise(FightOverControl.target.ReturnToFront, 
+                    () =>
+                    {
+                        LoginLayer LoginLayer = LoginLayer.Open(
+                            result => {
+                                Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
+                                PlayerAccountInfo.Me = new PlayerAccountInfo
+                                {
+                                    PlayFabUsername = result.PlayFabId
+                                };
+                                CloudScript.CheckIn();
+                                MainMenuNote.goingtostep = MainSceneStep.FrontPage;
+                                SceneManager.LoadScene(1);
+                            },
+                            fail => {
+                                Debug.Log("login fail");
+                            }
+                        );
+                    });
             }
             
             FightScenePauseSupport.target.ControlCanvas.gameObject.SetActive(true);

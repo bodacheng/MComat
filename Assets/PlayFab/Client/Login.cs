@@ -5,6 +5,21 @@ using System;
 
 public partial class PlayFabReadClient
 {
+    public static void PlayFabLogin(string userName, string pw,
+        Action<LoginResult> success, Action<PlayFabError> fail)
+    {
+        PlayFabClientAPI.LoginWithPlayFab(
+            new LoginWithPlayFabRequest
+            {
+                Username = userName,
+                Password = pw,
+                TitleId = "MY GAME"
+            },
+            success,
+            fail
+        );
+    }
+    
     public static void CustomIDLogin(Action<LoginResult> success, Action<PlayFabError> fail)
     {
         PlayerAccountInfo.Load();
@@ -13,7 +28,7 @@ public partial class PlayFabReadClient
             PlayFabClientAPI.LoginWithCustomID(
                 new LoginWithCustomIDRequest
                 {
-                    CustomId = PlayerAccountInfo.Me.playerID,
+                    CustomId = PlayerAccountInfo.Me.PlayFabUsername,
                     CreateAccount = false
                 },
                 success,
@@ -29,7 +44,26 @@ public partial class PlayFabReadClient
                     DeviceId = SystemInfo.deviceUniqueIdentifier,
                     CreateAccount = true
                 },
-                success,
+                (x) =>
+                {
+                    var guidValue = Guid.NewGuid();
+                    Debug.Log(guidValue.ToString());
+                    PlayFabClientAPI.AddUsernamePassword(new PlayFab.ClientModels.AddUsernamePasswordRequest
+                        {
+                            Username = x.PlayFabId,
+                            Email = "xxx@xxx.com",
+                            Password = guidValue.ToString()
+                        }, addUsernamePasswordResult =>
+                        {
+                            Debug.Log("我们把玩家的PlayFab username设置成了他的PlayFabId:" + addUsernamePasswordResult.Username);
+                        }, 
+                        (x) =>
+                        {
+                            Debug.Log(x.Error);
+                        }
+                    );
+                    success.Invoke(x);
+                },
                 fail
             );
             #endif

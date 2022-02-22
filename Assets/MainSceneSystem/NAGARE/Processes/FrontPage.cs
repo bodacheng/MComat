@@ -85,7 +85,7 @@ public class FrontPage : MainSceneProcess
         PlayFabReadClient.GetUserData(
             new GetUserDataRequest()
             {
-                PlayFabId = PlayerAccountInfo.Me.playerID,
+                PlayFabId = PlayerAccountInfo.Me.PlayFabUsername,
                 Keys = new List<string>() { "PlayerName" }
             },UserDataLoadFinished);
         PlayFabReadClient.GetUserReadOnlyData(UserReadOnlyDataLoadFinished);

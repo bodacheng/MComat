@@ -280,6 +280,7 @@
      <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\RockClimberManager.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkLocalization.cs" />
      <Compile Include="Assets\AnimControl\Animation_Manger_ResourceLoad.cs" />
+     <Compile Include="Assets\DummyLayerSystem\LayerDefine\LoginLayer.cs" />
      <Compile Include="Assets\TouchScript\Examples\_misc\Scripts\Checker.cs" />
      <Compile Include="Assets\Singleton\TutorialNotes.cs" />
      <Compile Include="Assets\Behaviour\Defines\states\G_M_Attack_State.cs" />

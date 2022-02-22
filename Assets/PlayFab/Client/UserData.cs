@@ -45,7 +45,7 @@ public partial class PlayFabReadClient
         PlayFabClientAPI.GetUserData(
             new GetUserDataRequest()
             {
-                PlayFabId = PlayerAccountInfo.Me.playerID,
+                PlayFabId = PlayerAccountInfo.Me.PlayFabUsername,
                 Keys = new List<string>() { targetModeCode }
             },
             (GetUserDataResult obj) => {
@@ -95,7 +95,7 @@ public partial class PlayFabReadClient
         (
             new GetUserDataRequest()
             {
-                PlayFabId = PlayerAccountInfo.Me.playerID,
+                PlayFabId = PlayerAccountInfo.Me.PlayFabUsername,
                 Keys = new List<string>() { "last_Level_completed", "stone_box_size" }
             },
             (GetUserDataResult obj) => {
