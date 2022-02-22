@@ -45,7 +45,7 @@ namespace Michsky.UI.Shift
                 isEmpty = false;
                 inputFieldAnimator.Play(inAnim);
             }
-
+            
             else if (isClicked == false)
                 inputFieldAnimator.Play(outAnim);
         }

@@ -26,7 +26,7 @@ public class SettingLayer : UILayer {
     #region Email
 
     [SerializeField] TextMeshProUGUI ID;
-    [SerializeField] TextMeshProUGUI EmailInput;
+    [SerializeField] InputField EmailInput;
     [SerializeField] Button SendEmail;
     #endregion
     
@@ -66,7 +66,7 @@ public class SettingLayer : UILayer {
         
         SendEmail.onClick.AddListener(() =>
         {
-            PlayFabReadClient.SendPwResetEmail(EmailInput.text.Trim());
+            PlayFabReadClient.SendPwResetEmail(EmailInput.text);
         });
     }
     

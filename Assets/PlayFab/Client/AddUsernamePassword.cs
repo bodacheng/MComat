@@ -29,34 +29,20 @@ public partial class PlayFabReadClient
 
     public static void SendPwResetEmail(string email)
     {
-        Debug.Log("send mail to this address" + email);
-        var request = new AddOrUpdateContactEmailRequest
-        {
-            EmailAddress = email,
-            
-        };
-        PlayFabClientAPI.AddOrUpdateContactEmail(
-            request, 
-            result =>
+        Debug.Log("send mail to this address:" + email.Trim() );
+        Debug.Log("titleID:" + PlayFabSettings.TitleId );
+
+        PlayFabClientAPI.SendAccountRecoveryEmail(
+            new SendAccountRecoveryEmailRequest
             {
-                Debug.Log("The player's account has been updated with a contact email");
-                PlayFabClientAPI.SendAccountRecoveryEmail(
-                    new SendAccountRecoveryEmailRequest
-                    {
-                        Email = email,
-                        TitleId = PlayFabSettings.TitleId
-                    },
-                    (x) =>
-                    {
-                        Debug.Log(x);
-                    },
-                    (x)=>
-                    {
-                        Debug.Log(x);
-                    }
-                );
-            }, 
+                Email = email.Trim(),
+                TitleId = PlayFabSettings.TitleId
+            },
             (x) =>
+            {
+                Debug.Log(x);
+            },
+            (x)=>
             {
                 Debug.Log(x);
             }
@@ -65,6 +51,20 @@ public partial class PlayFabReadClient
     
     void AddOrUpdateContactEmail(string playFabId, string emailAddress)
     {
-
+        var request = new AddOrUpdateContactEmailRequest
+        {
+            EmailAddress = emailAddress,
+        };
+        PlayFabClientAPI.AddOrUpdateContactEmail(
+            request, 
+            result =>
+            {
+                Debug.Log("The player's account has been updated with a contact email");
+            }, 
+            (x) =>
+            {
+                Debug.Log(x);
+            }
+        );
     }
 }
