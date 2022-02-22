@@ -1,5 +1,4 @@
-﻿using dataAccess;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace FightScene

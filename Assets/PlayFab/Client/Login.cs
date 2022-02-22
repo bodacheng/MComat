@@ -13,7 +13,7 @@ public partial class PlayFabReadClient
             {
                 Username = userName,
                 Password = pw,
-                TitleId = "MY GAME"
+                TitleId = PlayFabSettings.TitleId
             },
             (x)=>
             {
@@ -26,24 +26,9 @@ public partial class PlayFabReadClient
             });
     }
     
-    public static void CustomIDLogin(Action<LoginResult> success, Action<PlayFabError> fail)
+    public static void LoginByDevice(Action<LoginResult> success, Action<PlayFabError> fail)
     {
-        PlayerAccountInfo.Load();
-        if (PlayerAccountInfo.Me != null)
-        {
-            PlayFabClientAPI.LoginWithCustomID(
-                new LoginWithCustomIDRequest
-                {
-                    CustomId = PlayerAccountInfo.Me.PlayFabUsername,
-                    CreateAccount = false
-                },
-                success,
-                fail
-            );
-        }
-        else // 本地无信息
-        {
-            #if UNITY_IOS
+#if UNITY_IOS
             PlayFabClientAPI.LoginWithIOSDeviceID(
                 new LoginWithIOSDeviceIDRequest
                 {
@@ -52,14 +37,19 @@ public partial class PlayFabReadClient
                 },
                 (x) =>
                 {
+                    Debug.Log(x);
+                    PlayerAccountInfo.Me = new PlayerAccountInfo
+                    {
+                        PlayFabUsername = x.PlayFabId
+                    };
                     AddUserNameAndPw(x.PlayFabId);
                     success.Invoke(x);
                 },
                 fail
             );
-            #endif
-            
-            #if UNITY_ANDROID
+#endif
+
+#if UNITY_ANDROID
             PlayFabClientAPI.LoginWithAndroidDeviceID(
                 new LoginWithAndroidDeviceIDRequest
                 {
@@ -73,7 +63,6 @@ public partial class PlayFabReadClient
                 },
                 fail
             );
-            #endif
-        }
+#endif
     }
 }

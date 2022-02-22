@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine;
 using PlayFab;
-using PlayFab.ClientModels;
 using System;
+using PlayFab.ClientModels;
 
 public partial class PlayFabReadClient
 {
@@ -26,5 +23,48 @@ public partial class PlayFabReadClient
                 Debug.Log(x.Error);
             }
         );
+    }
+    
+    
+
+    public static void SendPwResetEmail(string email)
+    {
+        Debug.Log("send mail to this address" + email);
+        var request = new AddOrUpdateContactEmailRequest
+        {
+            EmailAddress = email,
+            
+        };
+        PlayFabClientAPI.AddOrUpdateContactEmail(
+            request, 
+            result =>
+            {
+                Debug.Log("The player's account has been updated with a contact email");
+                PlayFabClientAPI.SendAccountRecoveryEmail(
+                    new SendAccountRecoveryEmailRequest
+                    {
+                        Email = email,
+                        TitleId = PlayFabSettings.TitleId
+                    },
+                    (x) =>
+                    {
+                        Debug.Log(x);
+                    },
+                    (x)=>
+                    {
+                        Debug.Log(x);
+                    }
+                );
+            }, 
+            (x) =>
+            {
+                Debug.Log(x);
+            }
+        );
+    }
+    
+    void AddOrUpdateContactEmail(string playFabId, string emailAddress)
+    {
+
     }
 }

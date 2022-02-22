@@ -83,13 +83,8 @@ public class Starter : MonoBehaviour
     // 启动网络模式
     public void BeginNetMode()
     {
-        PlayFabReadClient.CustomIDLogin(
+        PlayFabReadClient.LoginByDevice(
             result => {
-                Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
-                PlayerAccountInfo.Me = new PlayerAccountInfo
-                {
-                    PlayFabUsername = result.PlayFabId
-                };
                 CloudScript.CheckIn();
                 EnterFrontScene();
             },

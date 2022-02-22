@@ -1,4 +1,5 @@
 ﻿using mainMenu;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,13 @@ public class SettingLayer : UILayer {
     [SerializeField] Slider bgmSlider;
     [SerializeField] Slider cvSlider;
     [SerializeField] Slider effectsSoundsSlider;
+    #endregion
+
+    #region Email
+
+    [SerializeField] TextMeshProUGUI ID;
+    [SerializeField] TextMeshProUGUI EmailInput;
+    [SerializeField] Button SendEmail;
     #endregion
     
     void Initialise()
@@ -53,6 +61,13 @@ public class SettingLayer : UILayer {
         onCVsChange();
         onEffectsSoundChange();
         ResetSliders();
+
+        ID.text = PlayerAccountInfo.Me.PlayFabUsername;
+        
+        SendEmail.onClick.AddListener(() =>
+        {
+            PlayFabReadClient.SendPwResetEmail(EmailInput.text.Trim());
+        });
     }
     
     static SettingLayer Get()
