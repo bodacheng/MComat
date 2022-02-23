@@ -8,39 +8,33 @@ namespace mainMenu
     public class PreScene : MonoBehaviour
     {
         public static PreScene target;
-
-        [Space(7)]
+        
         [Header("T")]
         public GameObject T;
-
-        [Space(7)]
+        
         [Header("主进程处理器")]
         public SingleThreadProcesser mainProcessRunner;
-
-        [Space(11)]
+        
         [Header("主相机")]
         public CameraManager _CameraManager;
         
-        [Space(11)] 
         [Header("FX 相机")] 
         public Camera FxCamera;
         
-        [Space(7)]
         [Header("Positions For Show")]
         public Transform MemDetailTargetPos;
         public Transform MemDetailWatchPos;
         
-        [Space(7)]
         [Header("Shader转换器")]
         public SwapAllModelShader _SwapAllModelShader;
         
-        [Space(7)]
         [Header("AudioSource")]
         public AudioSource audioSource;
 
         public RectTransform stonesTempContainer;
         
         public UnitInfo _focusing;
+        
         //下面这个函数总是建立在monsterbox函数运行在前，而monsterbox会部署好所有展示用模
         public void SetFocusingUnit(string localID)
         {
@@ -183,7 +177,7 @@ namespace mainMenu
 
         public void AskIfLoadFight(FightInfo stage)
         {
-            PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
+            var popupLayer = PopupLayer.Open(PreScene.target.T);
             popupLayer.ArrangeConfirmWindow(
                 delegate {
                     FightLoad.Go(stage, true);
@@ -192,14 +186,14 @@ namespace mainMenu
 
         public void BeginSkillTest_Rotatiom()
         {
-            FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
+            var stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
             stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
             FightLoad.Go(stage);
         }
 
         public void BeginSkillTest_Multi()
         {
-            FightInfo stage = FightInfo.RandomSkillTestStage(TeamMode.multiRaid);
+            var stage = FightInfo.RandomSkillTestStage(TeamMode.multiRaid);
             stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
             FightLoad.Go(stage);
         }
@@ -215,7 +209,7 @@ namespace mainMenu
         {
             if (foward && ProcessesRunner.Main.currentProcess != null)
             {
-                MainSceneStep returnToStep = ProcessesRunner.Main.currentProcess.Step;
+                var returnToStep = ProcessesRunner.Main.currentProcess.Step;
                 void returnTOCurrent()
                 {
                     //Debug.Log("回到：" + returnToStep);
@@ -230,7 +224,7 @@ namespace mainMenu
         {
             if (foward && ProcessesRunner.Main.currentProcess != null)
             {
-                MainSceneStep returnToStep = ProcessesRunner.Main.currentProcess.Step;
+                var returnToStep = ProcessesRunner.Main.currentProcess.Step;
                 void returnTOCurrent()
                 {
                     trySwitchToStep(returnToStep, false);

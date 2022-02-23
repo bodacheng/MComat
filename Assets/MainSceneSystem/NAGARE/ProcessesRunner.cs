@@ -61,7 +61,7 @@ namespace mainMenu
             if (currentProcess != null)
             {
                 currentProcess.ProcessEnd();
-                MainSceneLog Log = new MainSceneLog()
+                var Log = new MainSceneLog()
                 {
                     step = currentProcess.Step,
                     description = "end"
@@ -77,7 +77,7 @@ namespace mainMenu
                     currentProcess.ProcessEnter(t);
                 else
                     currentProcess.ProcessEnter();
-                MainSceneLog Log = new MainSceneLog()
+                var Log = new MainSceneLog()
                 {
                     step = currentProcess.Step,
                     description = "start"
@@ -102,7 +102,7 @@ namespace mainMenu
             if (currentProcess != null)
                 currentProcess.ProcessEnd();
             ReturnLayer.ReturnMissionList.Clear();
-            MainSceneStep returnToStep = MainSceneStep.FrontPage;
+            var returnToStep = MainSceneStep.FrontPage;
             void returnTOCurrent()
             {
                 PreScene.target.trySwitchToStep(returnToStep, false);
