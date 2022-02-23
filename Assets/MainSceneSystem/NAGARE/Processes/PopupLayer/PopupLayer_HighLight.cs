@@ -10,6 +10,10 @@ public partial class PopupLayer : UILayer {
     // PopupLayer 的 sortingOrder为更上一层101，
     // 因为popup出来的东西原则都是高亮
     
+    // 这个模块的黑幕系统分两种，一种是部分区域高亮显示，一种是全屏颜色
+    // 之所以不得不分两种是因为那么傻逼插件在计算高亮区域的时候不得不延迟两帧，否则计算不对
+    // 从而有些需要立刻让全屏变色的地方我们要准备另外一套
+    
     #region 高亮显示
     public static void HighLightRect(GameObject T, RectTransform r, Options options = null)
     {
@@ -51,5 +55,20 @@ public partial class PopupLayer : UILayer {
         bigCurtain.raycastTarget = true;
         bigCurtain.DOColor(new Color(0,0,0, darkness), duration);
     }
+
+    public static void LightUp(float duration)
+    {
+        var popupLayer = Get();
+        if (popupLayer != null)
+        {
+            Debug.Log("sdfhqp2");
+            popupLayer.bigCurtain.DOColor(new Color(0,0,0, 0), duration).OnComplete(() =>
+            {
+                popupLayer.bigCurtain.raycastTarget = false;
+                Close();
+            });
+        }
+    }
+        
     #endregion
 }

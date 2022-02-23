@@ -31,6 +31,9 @@ namespace FightScene
         
         [Header("AudioSource")]
         public AudioSource audioSource;
+
+        [Header("黑幕")] 
+        [SerializeField] PopupLayer PopupLayer;
         
         public static NetFightScene target;
         
@@ -45,6 +48,7 @@ namespace FightScene
         
         void Start()
         {
+            UILayerLoader.FixAdd("PopupLayer", PopupLayer);
             UILayerLoader.Clear("PopupLayer");
             
             //QualitySettings.vSyncCount = 1;

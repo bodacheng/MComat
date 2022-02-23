@@ -50,10 +50,11 @@ namespace FightScene
                             }
                         );
                     });
+                PopupLayer.LightUp(1f);
             }
             
             NetFightScene.target.PressedStartButton();
-            PopupLayer.Close();
+            
         }
         
         public override void ProcessEnd()

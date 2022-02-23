@@ -10,17 +10,6 @@ public partial class PopupLayer : UILayer
     [SerializeField] TextMeshProUGUI info;
     [SerializeField] Image bigCurtain;
     
-    void Start()
-    {
-        UILayerLoader.FixAdd("PopupLayer", this);
-    }
-
-    public override void OnDestroy()
-    {
-        Debug.Log("why?");
-        base.OnDestroy();
-    }
-
     static PopupLayer Get()
     {
         PopupLayer returnValue = null;

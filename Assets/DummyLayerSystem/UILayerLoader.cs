@@ -45,16 +45,20 @@ namespace DummyLayerSystem
         
         public static void Clear(string except = null)
         {
+            var toRemove = new List<UILayer>();
             foreach (var queue in Queues)
             {
-                if (except == queue.Index)
+                if (except != queue.Index)
                 {
-                    continue;
+                    toRemove.Add(queue);
                 }
-
-                Queues.Remove(queue);
-                if (queue != null && queue.gameObject != null)
-                    GameObject.Destroy(queue.gameObject);
+            }
+            
+            foreach (var layer in toRemove)
+            {
+                Queues.Remove(layer);
+                if (layer != null && layer.gameObject != null)
+                    Remove(layer.Index);
             }
         }
     
@@ -122,8 +126,6 @@ namespace DummyLayerSystem
                     toRemoveIndex = i;
                 }
             }
-
-            Debug.Log(toRemoveIndex);
             
             if (toRemoveIndex >= 0)
             {

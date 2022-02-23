@@ -60,6 +60,12 @@ public class PreparingProcess : FSceneProcess
             SceneManager.LoadScene(1);//也就是说这个地方是为了阻止进入下一步
         }
         FightLoadError.Instance.FightLoadErrors.Clear();
+        
+        if (NetFightScene.Fight.GetEventType() != FightEventType.Screensaver)
+        {
+            Debug.Log("jhslfs");
+            PopupLayer.LightUp(1f);
+        }
     }
     
     public override bool CanEnterOtherProcess()
