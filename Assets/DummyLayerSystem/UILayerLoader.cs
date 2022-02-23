@@ -82,6 +82,8 @@ namespace DummyLayerSystem
             t.transform.SetParent(T.transform);
             t.transform.localPosition = Vector3.zero;
             var rt = t.GetComponent<RectTransform>();
+            rt.anchorMax = Vector2.one;
+            rt.anchorMin = Vector2.zero;
             rt.offsetMin = Vector2.zero;
             rt.offsetMax = Vector2.zero;
             rt.localPosition = Vector3.zero;
@@ -90,12 +92,10 @@ namespace DummyLayerSystem
             return t;
         }
 
-        // 为了把需要从开始就存在于场景里的layer直接加入队列。
-        // 主要是针对FightScene开始的黑幕
+        // 为了把layer直接加入队列。
         public static void FixAdd(string layerName, UILayer t)
         {
             t.Index = layerName;
-            Debug.Log("here"+ t);
             Queues.Add(t);
         }
 
