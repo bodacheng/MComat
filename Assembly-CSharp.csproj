@@ -185,7 +185,6 @@
      <Compile Include="Assets\SkillEvents\BO_Ani_E_special.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiLoadSceneOnClick2.cs" />
      <Compile Include="Assets\TutorialManger\processes\ClickTeamEditSlotOne.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\ControlsSceneControlsManager.cs" />
      <Compile Include="Assets\Behaviour\Defines\states\Hurts\Hurt_State_light.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\Sci-Fi Effects\Scripts\SciFiLightFlicker.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\BoxOverLoadFix.cs" />
@@ -205,7 +204,6 @@
      <Compile Include="Assets\Structure\SingleThreadProcesser.cs" />
      <Compile Include="Assets\EffectsSystem\TrackControl.cs" />
      <Compile Include="Assets\TutorialManger\processes\GoToTeamEdit.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\BasicSceneManager.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerGameLogo.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Clustered\ClusteredPinnedTransformGesture.cs" />
      <Compile Include="Assets\RealTimeGameProcessManager\RTFightManager.cs" />
@@ -226,7 +224,6 @@
      <Compile Include="Assets\TouchScript\Scripts\Utils\TimedSequence.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\IJsonWrapper.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Snippets\RPGTalkSmartPointer.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\ButtonSound.cs" />
      <Compile Include="Assets\Behaviour\Defines\states\Hurts\Hurt_State_TimePause.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\Extensions.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Helpers\TMP_Translator.cs" />
@@ -277,7 +274,6 @@
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\BoxOverLoadFixLayer.cs" />
      <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\AsteroidController.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiProjectileScript.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\RockClimberManager.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkLocalization.cs" />
      <Compile Include="Assets\AnimControl\Animation_Manger_ResourceLoad.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\LoginLayer.cs" />
@@ -377,7 +373,6 @@
      <Compile Include="Assets\TouchScript\Scripts\Debugging\Filters\PointerLogFilter.cs" />
      <Compile Include="Assets\FightSceneSystem\Nagare\StoryProcess.cs" />
      <Compile Include="Assets\TheNineSlot\Validation\SVCenter.cs" />
-     <Compile Include="Assets\NoSuchStudio\HighlightUI\Examples\Scripts\ControlsSceneGameManager.cs" />
      <Compile Include="Assets\ImportantDefinition\PlayerAccountInfo.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\SettingLayer.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\Gacha\GotchaResult.cs" />

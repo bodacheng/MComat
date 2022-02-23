@@ -14,12 +14,10 @@ public class GotchaLayer : UILayer
     
     public static GotchaLayer Open()
     {
-        GotchaLayer layer;
-        layer = UILayerLoader.Load(PreScene.target.T, "GotchaLayer") as GotchaLayer;
+        var layer = UILayerLoader.Load(PreScene.target.T, "GotchaLayer") as GotchaLayer;
         layer.Gotcha1.onClick.AddListener(OneTime);
         layer.Gotcha9.onClick.AddListener(NineTimes);
         
-        #if Pre
         layer.GetAllSKBtn.gameObject.SetActive(true);
         layer.GetAllMBtn.gameObject.SetActive(true);
         layer.Remove25StonesBtn.gameObject.SetActive(true);
@@ -27,7 +25,6 @@ public class GotchaLayer : UILayer
         layer.GetAllSKBtn.onClick.AddListener(GetAllSK);
         layer.GetAllMBtn.onClick.AddListener(GetAllM);
         layer.Remove25StonesBtn.onClick.AddListener(Remove25Stones);
-        #endif
         
         return layer;
     }
