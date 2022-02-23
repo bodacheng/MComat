@@ -6,31 +6,51 @@ using FightScene;
 public class FightingStepLayer : UILayer
 {
     [Header("Auto Button")]
-    [Space(6)]
     public Button autoBUtton;
     public Image _C_flag;
     public Image _A_flag;
     
     [Header("Pause Button")]
-    [Space(6)]
     public Button pauseButton;
     
     [Header("Camera Switch Button")]
-    [Space(6)]
     public Button cameraSwitchBtn;
     
     [Header("TeamUIManager")]
-    [Space(6)]
     public TeamUIManager TeamUI1Manager;
     public TeamUIManager TeamUI2Manager;
     
-    [Header("MobileInputsManager")]
-    [Space(6)]
-    public MobileInputsManager MobileInputsManager;
-    
     public static FightingStepLayer target;
     
-    public void StartUp(Action autoAction, Action pauseAction, Action cameraSwitchAction)
+    static FightingStepLayer Get()
+    {
+        var l = UILayerLoader.Get("FightingStepLayer");
+        FightingStepLayer returnValue = null;
+        if (l != null)
+        {
+            returnValue = l as FightingStepLayer;
+        }
+        return returnValue;
+    }
+    
+    public static FightingStepLayer Open()
+    {
+        var returnValue = Get();
+        if (returnValue != null)
+        {
+            return returnValue;
+        }
+        returnValue = UILayerLoader.Load(NetFightScene.target.T.gameObject,"FightingStepLayer") as FightingStepLayer;
+        returnValue.StartUp(RTFightManager.target.SwitchAutoMode, FightScenePauseSupport.target.PauseScene, RTFightManager.target.SwitchToWatchMode);
+
+        if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
+        {
+            returnValue.gameObject.SetActive(false);
+        }
+        return returnValue;
+    }
+    
+    void StartUp(Action autoAction, Action pauseAction, Action cameraSwitchAction)
     {
         target = this;
         autoBUtton.onClick.AddListener(autoAction.Invoke);

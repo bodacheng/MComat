@@ -8,8 +8,8 @@ using FightScene;
 
 public class LoginLayer : UILayer
 {
-    [SerializeField] private TextMeshProUGUI ID;
-    [SerializeField] private TextMeshProUGUI PASSWORD;
+    [SerializeField] private InputField ID;
+    [SerializeField] private InputField PASSWORD;
     [SerializeField] private Button LoginBtn;
 
     Action<LoginResult> success;
@@ -49,7 +49,7 @@ public class LoginLayer : UILayer
     void TryLogin()
     {
         PlayFabReadClient.PlayFabLogin(
-            ID.text, PASSWORD.text, success, fail
+            ID.text.Trim(), PASSWORD.text.Trim(), success, fail
         );
     }
 }

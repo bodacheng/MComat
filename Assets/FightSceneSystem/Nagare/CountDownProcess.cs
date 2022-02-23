@@ -26,13 +26,15 @@ namespace FightScene
             AutoMoveToNext = false;
             BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
             //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
-            CountDownLayer cd = UILayerLoader.Load
-                (NetFightScene.target.T.gameObject, "CountDownLayer") as CountDownLayer;
+            var cd = UILayerLoader.Load(NetFightScene.target.T.gameObject, "CountDownLayer") as CountDownLayer;
             yield return cd.BeforeFightCountDown();
-            UILayerLoader.Remove("CountDownLayer");
             
-            RTFightManager.target.ParaAdjustment(RTFightManager.playerTeam);
             AutoMoveToNext = true;
+        }
+        
+        public override void ProcessEnd()
+        {
+            UILayerLoader.Remove("CountDownLayer");
         }
         
         public override bool CanEnterOtherProcess()

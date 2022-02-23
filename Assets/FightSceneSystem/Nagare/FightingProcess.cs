@@ -24,9 +24,12 @@ namespace FightScene
             //{
             //    DOTween.To(() => ((OneVOneMode)nowC).xzMax, (x) => ((OneVOneMode)nowC).xzMax = x, 16, 3f);
             //}
+            
+            RTFightManager.target.ParaAdjustment(RTFightManager.playerTeam);
+            
             if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
             {
-                TitleScreenLayer TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
+                var TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
                 TitleScreenLayer.Initialise(FightOverControl.target.ReturnToFront, 
                     () =>
                     {
