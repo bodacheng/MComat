@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UnityEditor;
 
-public partial class SKillAnalyzer : MonoBehaviour
+public partial class SKillAnalyzer
 {
     public void ReplaceAnimEventName(string type, string old_name, string new_name)
     {

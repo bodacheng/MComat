@@ -20,5 +20,13 @@ public static class MyEditorWindow
         window.titleContent = new GUIContent("Master Data 出力工具");
         window.Show();
     }
+    
+    [MenuItem("MCombat/Skill Analise", priority = 3)]
+    static void SKillAnalyzer()
+    {
+        SKillAnalyzerGUI window = (SKillAnalyzerGUI)EditorWindow.GetWindow(typeof(SKillAnalyzerGUI));
+        window.titleContent = new GUIContent("技能分析工具");
+        window.Show();
+    }
 }
 #endif

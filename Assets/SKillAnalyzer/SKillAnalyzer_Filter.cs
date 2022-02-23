@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Linq;
 
-public partial class SKillAnalyzer : MonoBehaviour
+public partial class SKillAnalyzer
 {
     public void SkillsAnalyzeByFrames(string type, string targetEventName, float start_min, float start_max, float end_min, float end_max)
     {

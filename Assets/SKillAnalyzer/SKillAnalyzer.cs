@@ -1,10 +1,8 @@
 ﻿#if UNITY_EDITOR
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using UnityEditor;
 
-public partial class SKillAnalyzer : MonoBehaviour
+public partial class SKillAnalyzer
 {
     // 技能的速度和范围这两个要素，我们合并理解为“时空优势度”。
     // 我们希望按这样的原则来安排技能：
@@ -23,67 +21,67 @@ public partial class SKillAnalyzer : MonoBehaviour
     public void EvaluateSKill(AnimationClip _clip)
     {
         // 所有攻击类事件的开始帧，包括了所有普通攻击类事件的开始帧和所有魔法攻击类事件的开始帧
-        List<EventNameAndAtFrame> allAttackFrames = new List<EventNameAndAtFrame>();
+        var allAttackFrames = new List<EventNameAndAtFrame>();
         // 所有普通攻击类事件的开始帧
-        List<EventNameAndAtFrame> allNormalAttackFrames = new List<EventNameAndAtFrame>();
+        var allNormalAttackFrames = new List<EventNameAndAtFrame>();
         // 所有魔法攻击类事件的开始帧
-        List<EventNameAndAtFrame> allMagicAttackFrames = new List<EventNameAndAtFrame>();
+        var allMagicAttackFrames = new List<EventNameAndAtFrame>();
         
         // 可迁移点的帧数
-        float cancelflagFrame = -1;
-
+        float cancelFlagFrame = -1;
+        
         // 最早的攻击帧，包括了普攻和魔法
-        EventNameAndAtFrame mostquick = new EventNameAndAtFrame
+        var mostQuick = new EventNameAndAtFrame
         {
             name = "",
-            startframe = 999
+            startFrame = 999
         };
         
         // 最晚的普通攻击结束帧
-        EventNameAndAtFrame lastestNormalAttackFrameClearEvent = new EventNameAndAtFrame // 最晚的攻击帧结束事件，可能是普工的“收手”事件也可能是最后一个魔法攻击 
+        var latestNormalAttackFrameClearEvent = new EventNameAndAtFrame // 最晚的攻击帧结束事件，可能是普工的“收手”事件也可能是最后一个魔法攻击 
         {
             name = "",
-            startframe = -1
+            startFrame = -1
         };
         // 最晚的魔法攻击开始帧 （魔法攻击没有结束帧）
-        EventNameAndAtFrame lastestSpecialAttackEvent = new EventNameAndAtFrame // 最晚的魔法攻击事件
+        var latestSpecialAttackEvent = new EventNameAndAtFrame // 最晚的魔法攻击事件
         {
             name = "",
-            startframe = -1
+            startFrame = -1
         };
         
-        foreach (AnimationEvent e in _clip.events)
+        foreach (var e in _clip.events)
         {
-            EventNameAndAtFrame set = new EventNameAndAtFrame()
+            var set = new EventNameAndAtFrame()
             {
                 name = e.functionName,
-                startframe = e.time
+                startFrame = e.time
             };
             if (EffectsAttackFrameStartMethodNames.Contains(e.functionName))
             {
-                if (e.time < mostquick.startframe)
-                    mostquick = set;
-                if (e.time > lastestSpecialAttackEvent.startframe)
-                    lastestSpecialAttackEvent = set;
+                if (e.time < mostQuick.startFrame)
+                    mostQuick = set;
+                if (e.time > latestSpecialAttackEvent.startFrame)
+                    latestSpecialAttackEvent = set;
                 allAttackFrames.Add(set);
                 allMagicAttackFrames.Add(set);
             }
             if ((AttackFrameStartMethodNames.Contains(e.functionName) && e.intParameter != 0) || e.functionName == "SetAllBodyMarkerManagersIn")
             {
-                if (e.time < mostquick.startframe)
-                    mostquick = set;
+                if (e.time < mostQuick.startFrame)
+                    mostQuick = set;
                 allAttackFrames.Add(set);
                 allNormalAttackFrames.Add(set);
             }
             if ((AttackClearMethodNames.Contains(e.functionName) && e.intParameter == 0) || e.functionName == "ClearMarkerManagers")
             {
-                if (e.time > lastestNormalAttackFrameClearEvent.startframe)
-                    lastestNormalAttackFrameClearEvent = set;
+                if (e.time > latestNormalAttackFrameClearEvent.startFrame)
+                    latestNormalAttackFrameClearEvent = set;
             }
             
             if (e.functionName == "turn_on_flag")
             {
-                cancelflagFrame = e.time;
+                cancelFlagFrame = e.time;
             }
         }
 
@@ -104,25 +102,25 @@ public partial class SKillAnalyzer : MonoBehaviour
             }
         }
         
-        if (lastestSpecialAttackEvent.startframe > 0 && lastestNormalAttackFrameClearEvent.startframe > 0)
+        if (latestSpecialAttackEvent.startFrame > 0 && latestNormalAttackFrameClearEvent.startFrame > 0)
         {
             Debug.Log("该技能同时拥有普通攻击和魔法攻击，难以进行机械评估，请进行主管判断");
             return;
         }
 
-        float attackinglastframe = -1;
-        if (lastestNormalAttackFrameClearEvent.startframe > 0)
+        float attackingLastFrame = -1;
+        if (latestNormalAttackFrameClearEvent.startFrame > 0)
         {
-            attackinglastframe = lastestNormalAttackFrameClearEvent.startframe;
+            attackingLastFrame = latestNormalAttackFrameClearEvent.startFrame;
             //Debug.Log("最晚的攻击帧清理事件是"+lastestNormalAttackFrameClearEvent.name +",start at :"+ lastestNormalAttackFrameClearEvent.startframe); 
         }
-        else if (lastestSpecialAttackEvent.startframe > 0)
+        else if (latestSpecialAttackEvent.startFrame > 0)
         {
-            attackinglastframe = lastestSpecialAttackEvent.startframe;
+            attackingLastFrame = latestSpecialAttackEvent.startFrame;
             //Debug.Log("最晚的魔法攻击事件是"+lastestSpecialAttackEvent.name +",start at :"+ lastestSpecialAttackEvent.startframe); 
         }
         
-        if (cancelflagFrame >= 0)
+        if (cancelFlagFrame >= 0)
         {
             //Debug.Log("该技能可在" + cancelflagFrame + "秒取消，");
         }
@@ -132,15 +130,15 @@ public partial class SKillAnalyzer : MonoBehaviour
             return;
         }
         
-        if (cancelflagFrame < attackinglastframe)
+        if (cancelFlagFrame < attackingLastFrame)
         {
             Debug.Log("该技能的取消帧在最后的攻击帧之前，没法继续进行机械分析");
             return;
         }else{
-            Debug.Log("该技能最早的攻击事件是："+ mostquick.name + ", start at:" + mostquick.startframe);
-            Debug.Log("最终攻击帧距离取消帧" + (cancelflagFrame-attackinglastframe).ToString());
-            Debug.Log("攻击延迟与后摆的总和是："+ (mostquick.startframe + (cancelflagFrame-attackinglastframe)));
-            Debug.Log("本技能的时间评分是："+ (100- 100 * (mostquick.startframe + (cancelflagFrame-attackinglastframe) * 1/2)));// 加那个1/2是因为技能后摆没有出手速度重要。
+            Debug.Log("该技能最早的攻击事件是："+ mostQuick.name + ", start at:" + mostQuick.startFrame);
+            Debug.Log("最终攻击帧距离取消帧" + (cancelFlagFrame-attackingLastFrame));
+            Debug.Log("攻击延迟与后摆的总和是："+ (mostQuick.startFrame + (cancelFlagFrame-attackingLastFrame)));
+            Debug.Log("本技能的时间评分是："+ (100- 100 * (mostQuick.startFrame + (cancelFlagFrame-attackingLastFrame) * 1/2)));// 加那个1/2是因为技能后摆没有出手速度重要。
         }
     }
 }
