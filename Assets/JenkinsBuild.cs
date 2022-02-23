@@ -10,7 +10,7 @@ public static class JenkinsBuild
     public static void BuildAndroid()
     {
         //AndroidにSwitch Platform
-        EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
+        //EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
         
         var scene_name_array = CreateBuildTargetScenes().ToArray();
         PlayerSettings.applicationIdentifier = "com.BO.MCombat";
