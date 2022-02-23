@@ -159,6 +159,7 @@
      <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_BlurEditor.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Editor\ExtendedColorPicker.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Default\Calculation Base\FloatCalculation.cs" />
+     <Compile Include="Assets\Editor\MyEditorWindow.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Editor\InitShift.cs" />
      <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_EmbossEditor.cs" />
      <Compile Include="Assets\TouchScript\Editor\Gestures\TransformGestures\Base\TransformGestureBaseEditor.cs" />
