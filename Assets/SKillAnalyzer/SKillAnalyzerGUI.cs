@@ -5,7 +5,6 @@ using System;
 using PlayFab;
 using PlayFab.ClientModels;
 
-[CustomEditor(typeof(SKillAnalyzer))]
 public class SKillAnalyzerGUI : EditorWindow
 {
     readonly SKillAnalyzer target = new SKillAnalyzer();
