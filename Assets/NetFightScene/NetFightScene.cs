@@ -3,6 +3,7 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.Playables;
 using System.Collections.Generic;
+using DummyLayerSystem;
 
 namespace FightScene
 {
@@ -14,9 +15,6 @@ namespace FightScene
         [Header("PlayableDirector")]
         public PlayableDirector playableDirector;
         #endregion
-        
-        [Header("场地控制")]
-        public BoundaryControllByGod _BoundaryControllByGod;
         
         [Header("双方站位点")]
         public Transform[] Team1StandPoints, Team2StandPoints;//这个也是应该按模式区分，能改名字现在就改名字吧。免得以后乱
@@ -47,9 +45,10 @@ namespace FightScene
         
         void Start()
         {
+            UILayerLoader.Clear("PopupLayer");
+            
             //QualitySettings.vSyncCount = 1;
             Screen.SetResolution(1920, 1080, true);
-            UILayerLoader.Clear();
             
             AppSetting.bgmSource = audioSource;
             AppSetting.Load();
@@ -59,13 +58,13 @@ namespace FightScene
             SingleThreadProcesser.backup = mainProcessRunner;
             Time.timeScale = 1f;
             //Position_Set_Executor.Instance.P_sets.Clear();
-            PreparingProcess preparingProcess = new PreparingProcess();
-            FightingProcess fightingProcess = new FightingProcess();
-            CountDownProcess countDownProcess = new CountDownProcess();
-            StoryProcess storyProcess = new StoryProcess();
-            FightResultAnim fightResultAnim = new FightResultAnim();
-            FightOverProcess fightOverProcess = new FightOverProcess();
-            BasicTryProcess basicTryProcess = new BasicTryProcess();
+            var preparingProcess = new PreparingProcess();
+            var fightingProcess = new FightingProcess();
+            var countDownProcess = new CountDownProcess();
+            var storyProcess = new StoryProcess();
+            var fightResultAnim = new FightResultAnim();
+            var fightOverProcess = new FightOverProcess();
+            var basicTryProcess = new BasicTryProcess();
             
             switch(Fight.GetEventType())
             {
@@ -92,8 +91,7 @@ namespace FightScene
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Fighting, fightingProcess);
                     break;
             }
-            FSceneProcessesRunner.Main.ArrangeProcessOrder();           
-            
+            FSceneProcessesRunner.Main.ArrangeProcessOrder();
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
             HurtObjectManager.ConstructDPool();
         }

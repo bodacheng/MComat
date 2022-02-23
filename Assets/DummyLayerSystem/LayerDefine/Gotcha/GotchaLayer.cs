@@ -2,6 +2,7 @@
 using dataAccess;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using DummyLayerSystem;
 using UnityEngine;
 
 public class GotchaLayer : UILayer

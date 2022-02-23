@@ -3,6 +3,7 @@ using UnityEngine;
 using FightScene;
 using System.Collections.Generic;
 using dataAccess;
+using DummyLayerSystem;
 
 public class FightResultAnim : FSceneProcess
 {

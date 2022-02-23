@@ -1,4 +1,5 @@
 using System;
+using DummyLayerSystem;
 using UnityEngine;
 using UnityEngine.UI;
 using FightScene;
@@ -41,7 +42,9 @@ public class FightingStepLayer : UILayer
             return returnValue;
         }
         returnValue = UILayerLoader.Load(NetFightScene.target.T.gameObject,"FightingStepLayer") as FightingStepLayer;
-        returnValue.StartUp(RTFightManager.target.SwitchAutoMode, FightScenePauseSupport.target.PauseScene, RTFightManager.target.SwitchToWatchMode);
+        returnValue.StartUp(RTFightManager.target.SwitchAutoMode, 
+            ()=> FightScenePauseSupport.Open(NetFightScene.target.T.gameObject), 
+            RTFightManager.target.SwitchToWatchMode);
 
         if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
         {

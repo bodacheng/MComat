@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DummyLayerSystem;
 using UnityEngine;
 
 namespace FightScene
@@ -128,7 +129,6 @@ namespace FightScene
             }
             FightOverControl.target.logger.WatchMissionsAbandon();
             SingleAssignmentDisposableCleaner.Clear();
-            FightScenePauseSupport.target.ControlCanvas.gameObject.SetActive(false);
         }
         
         public override void ProcessEnter()

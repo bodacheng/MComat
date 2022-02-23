@@ -1,6 +1,7 @@
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
+using UnityEngine;
 
 public partial class PlayFabReadClient
 {
@@ -57,6 +58,11 @@ public partial class PlayFabReadClient
                 },
                 (x) =>
                 {
+                    Debug.Log(x);
+                    PlayerAccountInfo.Me = new PlayerAccountInfo
+                    {
+                        PlayFabUsername = x.PlayFabId
+                    };
                     AddUserNameAndPw(x.PlayFabId);
                     success.Invoke(x);
                 },

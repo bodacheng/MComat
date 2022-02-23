@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using DummyLayerSystem;
 using mainMenu;
 
 public class MailBox : UILayer

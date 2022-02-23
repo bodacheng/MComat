@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DummyLayerSystem;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using mainMenu;
 
@@ -51,8 +52,8 @@ namespace FightScene
                     });
             }
             
-            FightScenePauseSupport.target.ControlCanvas.gameObject.SetActive(true);
             NetFightScene.target.PressedStartButton();
+            PopupLayer.Close();
         }
         
         public override void ProcessEnd()

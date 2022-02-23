@@ -1,29 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using FightScene;
+using DummyLayerSystem;
 
 // 战斗暂停相关。从暂停界面可以跳转至Setting界面，因此两个模块靠OptionsButton连接在一起
-public class FightScenePauseSupport : MonoBehaviour
+public class FightScenePauseSupport : UILayer
 {
-    [Space(11)]
     [Header("暂停菜单里的Resume")]
     public Button ResumeButton;
     
-    [Space(11)]
     [Header("暂停菜单里的Return")]
     public Button ReturnButton;
     
-    [Space(11)]
     [Header("暂停菜单里的Options")]
     public Button OptionsButton;
-    
-    [Space(11)]
-    [Header("战斗场景下点击暂停时弹出菜单的RectTransform")]
-    public Canvas PauseMenu;
-    
-    [Space(11)]
-    [Header("战斗界面canvas")]
-    public Canvas ControlCanvas;
     
     public static FightScenePauseSupport target;
 
@@ -38,31 +28,44 @@ public class FightScenePauseSupport : MonoBehaviour
         ReturnButton.onClick.AddListener(FightOverControl.target.ReturnToFront);
         
         ResumeButton.onClick.RemoveAllListeners();
-        ResumeButton.onClick.AddListener(ResumeScene);
+        ResumeButton.onClick.AddListener(Close);
         
         //OptionsButton.onClick.RemoveAllListeners();
         //OptionsButton.onClick.AddListener(settingLayer.Open);
-        OptionsButton.onClick.AddListener(JumpToOptions);
+        //OptionsButton.onClick.AddListener(JumpToOptions);
     }
     
-    // 按钮函数，至于战斗界面暂停按钮之上
-    public void PauseScene()
+    static FightScenePauseSupport Get()
     {
-        PauseMenu.gameObject.SetActive(true);
-        ControlCanvas.gameObject.SetActive(false);
+        FightScenePauseSupport returnValue = null;
+        var l = UILayerLoader.Get("FightScenePauseSupport");
+        if (l != null)
+        {
+            returnValue = l as FightScenePauseSupport;
+        }
+        return returnValue;
+    }
+    
+    public static FightScenePauseSupport Open(GameObject T)
+    {
+        var returnValue = Get();
+        if (returnValue != null)
+        {
+            return returnValue;
+        }
         Time.timeScale = 0;
+        returnValue = UILayerLoader.Load(T,"FightScenePauseSupport") as FightScenePauseSupport;
+        return returnValue;
     }
 
-    // 本地系函数 而且目前有逻辑问题
-    public void ResumeScene()
+    public static void Close()
     {
-        PauseMenu.gameObject.SetActive(false);
-        ControlCanvas.gameObject.SetActive(true);
-        Time.timeScale = 1;
+        UILayerLoader.Remove("FightScenePauseSupport");
     }
     
-    void JumpToOptions()
+    public override void OnDestroy()
     {
-        PauseMenu.gameObject.SetActive(false);
+        Time.timeScale = 1;
+        base.OnDestroy();
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using dataAccess;
 using UnityEngine;
 using System;
+using DummyLayerSystem;
 
 public class UpperInfoBar : UILayer
 {

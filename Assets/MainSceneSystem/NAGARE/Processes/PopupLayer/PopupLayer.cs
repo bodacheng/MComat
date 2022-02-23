@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using DummyLayerSystem;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using NoSuchStudio.UI.Highlight;
@@ -8,12 +9,22 @@ public partial class PopupLayer : UILayer
     [SerializeField] GameObject loadingIcon;
     [SerializeField] TextMeshProUGUI info;
     [SerializeField] Image bigCurtain;
-    [SerializeField] Image empty;// 为了黑化整个屏幕
     
+    void Start()
+    {
+        UILayerLoader.FixAdd("PopupLayer", this);
+    }
+
+    public override void OnDestroy()
+    {
+        Debug.Log("why?");
+        base.OnDestroy();
+    }
+
     static PopupLayer Get()
     {
         PopupLayer returnValue = null;
-        UILayer l = UILayerLoader.Get("PopupLayer");
+        var l = UILayerLoader.Get("PopupLayer");
         if (l != null)
         {
             returnValue = l as PopupLayer;

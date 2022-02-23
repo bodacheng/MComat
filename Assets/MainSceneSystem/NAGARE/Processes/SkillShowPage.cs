@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DummyLayerSystem;
+using UnityEngine;
 using mainMenu;
 
 public class SkillShowPage : MainSceneProcess

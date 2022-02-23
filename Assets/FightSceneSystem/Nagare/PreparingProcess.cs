@@ -34,19 +34,17 @@ public class PreparingProcess : FSceneProcess
         yield return RTFightManager.target.LoadUnits(NetFightScene.Fight);
         RTFightManager.target.SetGame(NetFightScene.Fight);
         
-        IDictionary<TeamConfig, List<Data_Center>> TeamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
+        var TeamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
         DicAdd<TeamConfig, List<Data_Center>>.Add(TeamMembers, RTFightManager.target.heroTeamConfig, RTFightManager.target.Team1Members.GetValues());
         DicAdd<TeamConfig, List<Data_Center>>.Add(TeamMembers, RTFightManager.target.EnemyTeamConfig, RTFightManager.target.Team2Members.GetValues());
         FightOverControl.target.logger.ReadyToLog(TeamMembers);
         
         EffectsManager.INIEffectsPool("hit_ground", null, 3);
         EffectsManager.INIEffectsPool("wallCrack", null, 3);
-        PopupLayer.Close();
     }
     
     public override void ProcessEnter()
     {
-        PopupLayer.DarkOff(NetFightScene.target.T.gameObject, 1f, 0);
         SingleThreadProcesser.backup.RunFreely(EnterProcess());
     }
     
