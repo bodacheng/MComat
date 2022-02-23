@@ -2,7 +2,6 @@ using PlayFab;
 using PlayFab.ClientModels;
 using System;
 using DummyLayerSystem;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using FightScene;
@@ -12,6 +11,7 @@ public class LoginLayer : UILayer
     [SerializeField] private InputField ID;
     [SerializeField] private InputField PASSWORD;
     [SerializeField] private Button LoginBtn;
+    [SerializeField] private Button cancelBtn;
 
     Action<LoginResult> success;
     Action<PlayFabError> fail;
@@ -40,17 +40,21 @@ public class LoginLayer : UILayer
         return returnValue;
     }
     
+    static void Close()
+    {
+        UILayerLoader.Remove("LoginLayer");
+    }
+    
     void Initialise(Action<LoginResult> success, Action<PlayFabError> fail)
     {
         this.success = success;
         this.fail = fail;
         LoginBtn.onClick.AddListener(TryLogin);
+        cancelBtn.onClick.AddListener(Close);
     }
     
     void TryLogin()
     {
-        PlayFabReadClient.PlayFabLogin(
-            ID.text.Trim(), PASSWORD.text.Trim(), success, fail
-        );
+        PlayFabReadClient.PlayFabLogin(ID.text.Trim(), PASSWORD.text.Trim(), success, fail);
     }
 }

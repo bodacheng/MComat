@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
   DevAccountEmail: hakuforwork@gmail.com
-  DevAccountToken: jpgjzhk76wmn8epatpe1cq1a8me4gk3m56w5up6tozzorzba88hfmbacsc1spjaoeqoujfmc8g96mu5zi44iad98716znzdnpi755cw8jscqrwxj3h5rp19ubdc1837gyijm9rprobjgs1bi6ne67x4mkfywm1m7x3pjtf1ti9w8uzrhna1yqwx5j8pksj4856dhojwm
-  SelectedStudio: TEST
+  DevAccountToken: gbhcjx8s6bp13mymb7wirnb3tfwha5h8uyw9urhn7tcrxgjtyiq1royxzqnu341pd7knndfj4c1o6cqwwba9cc3q7mmnkomapfe7bt5c3cbyr87b7ag7xxud63cczpw4agpx6uuzobe58emgfg73kmpjmidacs1yycqefbqoegkecfhmbbdnc9wykdwgz7fcmogwriij
+  SelectedStudio: 
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
