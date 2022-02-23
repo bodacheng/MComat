@@ -19,9 +19,6 @@ namespace FightScene
         [Header("双方站位点")]
         public Transform[] Team1StandPoints, Team2StandPoints;//这个也是应该按模式区分，能改名字现在就改名字吧。免得以后乱
         
-        [Header("双方站位点_观看点")]
-        public Transform WatchTeam1, WatchTeam2;
-        
         [Header("FX")]
         public Camera fxCamera;
         

@@ -115,12 +115,10 @@ namespace DummyLayerSystem
     
         public static void Remove(string index)
         {
-            Debug.Log(index);
             var toRemoveIndex = -1;
             for (var i = 0; i < Queues.Count; i++)
             {
                 var uiLayer = Queues[i];
-                Debug.Log("layername" + uiLayer.Index);
                 if (uiLayer.Index == index)
                 {
                     toRemoveIndex = i;
