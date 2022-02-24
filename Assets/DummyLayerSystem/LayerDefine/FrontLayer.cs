@@ -51,7 +51,7 @@ public class FrontLayer : UILayer
         StonesBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SkillStoneList, true));
         GotchaBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.GotchaFront, true));
         
-        SkillTestRBtn.onClick.AddListener(pre.BeginSkillTest_Rotatiom);
+        SkillTestRBtn.onClick.AddListener(pre.BeginSkillTest_Rotation);
         SkillTestMBtn.onClick.AddListener(pre.BeginSkillTest_Multi);
     }
 }

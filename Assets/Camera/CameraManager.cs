@@ -29,11 +29,6 @@ public class CameraManager : MonoBehaviour
         _camera.depthTextureMode = DepthTextureMode.Depth;
         _StartPosRef = StartPosRef;
     }
-
-    void Start()
-    {
-        //Screen.SetResolution(1080, 720, true, 60);
-    }
     
     void Update()
     {

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using DummyLayerSystem;
 using UnityEngine;
-using System.Collections;
 using Log;
 
 namespace FightScene
@@ -114,10 +113,10 @@ namespace FightScene
                             LocalGameRestart();
                             UILayerLoader.Remove("CommonFightResult");
                         });
-                    c.ShowSKillSets(RTFightManager.target.team1, c.GetIconAndSKillShowUISetT());
+                    c.ShowSKillSets(RTFightManager.target.team1UI, c.GetIconAndSKillShowUISetT());
                     break;
                 case FightEventType.SkillTest:
-                    NetFightScene.target.StartCoroutine(SkillTestReload());
+                    SkillTestReload();
                     break;
             }
             
@@ -148,14 +147,10 @@ namespace FightScene
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
         }
         
-        IEnumerator SkillTestReload()
+        void SkillTestReload()
         {
-            foreach (var pair in RTFightManager.target.UnitInfoRef)
-            {
-                pair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
-                var unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(pair.Value.r_id));
-                yield return pair.Key.Step2Initialize(unitConfig.TYPE, pair.Value.set, pair.Value.level, unitConfig._zokusei, unitConfig.SPECIAL_ZOKUSEI);
-            }
+            RTFightManager.target.ClearUnits();
+            NetFightScene.Fight = FightInfo.RandomSkillTestStage(TeamMode.rotation);
             LocalGameRestart();
         }
     }

@@ -12,11 +12,10 @@ namespace FightScene
         public CameraManager _CameraManager;
         
         [Header("Messages")]
-        [Space(6)]
         public Text Messages;
         
-        public TeamUIManager team1;
-        public TeamUIManager team2;
+        public TeamUIManager team1UI;
+        public TeamUIManager team2UI;
         
         public readonly TeamConfig heroTeamConfig = new TeamConfig("1", Team.player1, new List<Team>() { Team.player2 });
         public readonly TeamConfig EnemyTeamConfig = new TeamConfig("2", Team.player2, new List<Team>() { Team.player1 });
@@ -100,8 +99,8 @@ namespace FightScene
             //autoBUtton.onClick.RemoveAllListeners();
             //autoBUtton.onClick.AddListener(SwitchAutoMode);
             
-            team1.Refresh(Team1Members);
-            team2.Refresh(Team2Members);
+            team1UI.Refresh(Team1Members);
+            team2UI.Refresh(Team2Members);
             
             if (focusingUnit == null)
             {
@@ -157,45 +156,45 @@ namespace FightScene
         {
             loadFight = stage;
             
-            team1.teamConfig = heroTeamConfig;
-            team2.teamConfig = EnemyTeamConfig;
-            team1.teamConfig.playID = loadFight.team1ID;
-            team2.teamConfig.playID = loadFight.team2ID;
+            team1UI.teamConfig = heroTeamConfig;
+            team2UI.teamConfig = EnemyTeamConfig;
+            team1UI.teamConfig.playID = loadFight.team1ID;
+            team2UI.teamConfig.playID = loadFight.team2ID;
             
             // 角色第二次初始化在这之前已经结束
             
-            team1.InsTeamUI(Team1Members);
-            team2.InsTeamUI(Team2Members);
+            team1UI.InsTeamUI(Team1Members);
+            team2UI.InsTeamUI(Team2Members);
             
-            team1.TeamsInit(Team1Members, stage.Team1HpRate ,stage.team1CGMode);
-            team2.TeamsInit(Team2Members, stage.Team2HpRate ,stage.team2CGMode);
+            team1UI.TeamsInit(Team1Members, stage.Team1HpRate ,stage.team1CGMode);
+            team2UI.TeamsInit(Team2Members, stage.Team2HpRate ,stage.team2CGMode);
             
             if (stage.GetEventType() == FightEventType.Screensaver)
             {
-                team1.TurnAllMembersInvincible(true, Team1Members);
-                team2.TurnAllMembersInvincible(true, Team2Members);
+                team1UI.TurnAllMembersInvincible(true, Team1Members);
+                team2UI.TurnAllMembersInvincible(true, Team2Members);
             }else{
-                team1.TurnAllMembersInvincible(false, Team1Members);
-                team2.TurnAllMembersInvincible(false, Team2Members);
+                team1UI.TurnAllMembersInvincible(false, Team1Members);
+                team2UI.TurnAllMembersInvincible(false, Team2Members);
             }
             
-            switch (team1.TeamMode)
+            switch (team1UI.TeamMode)
             {
                 case TeamMode.multiRaid:
-                    team1StartUnit = team1.ToStartPos_Multi(Team1Members);
+                    team1StartUnit = team1UI.ToStartPos_Multi(Team1Members);
                     break;
                 case TeamMode.rotation:
-                    team1StartUnit = team1.ToStartPos_Rotate(Team1Members);
+                    team1StartUnit = team1UI.ToStartPos_Rotate(Team1Members);
                     break;
             }
             
-            switch (team2.TeamMode)
+            switch (team2UI.TeamMode)
             {
                 case TeamMode.multiRaid:
-                    team2StartUnit = team2.ToStartPos_Multi(Team2Members);
+                    team2StartUnit = team2UI.ToStartPos_Multi(Team2Members);
                     break;
                 case TeamMode.rotation:
-                    team2StartUnit = team2.ToStartPos_Rotate(Team2Members);
+                    team2StartUnit = team2UI.ToStartPos_Rotate(Team2Members);
                     break;
             }
             
@@ -278,11 +277,11 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, team2.GetFightingUnitTs(Team1Members));
+                    _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, team2UI.GetFightingUnitTs(Team1Members));
                 }
                 else
                 {
-                    _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, team1.GetFightingUnitTs(Team2Members));
+                    _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, team1UI.GetFightingUnitTs(Team2Members));
                 }
             }
             else
@@ -298,34 +297,40 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team2.GetFightingUnitTs(Team1Members));
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team2UI.GetFightingUnitTs(Team1Members));
                 }
                 else
                 {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team1.GetFightingUnitTs(Team2Members));
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team1UI.GetFightingUnitTs(Team2Members));
                 }
                 _CameraManager.CurrentMode.SetMeCenter(focusingUnit.WholeT);
             }
         }
 
-        public void Clear()// 这个我们还没有添加在合理的地方。
+        public void ClearUI()
         {
-            foreach (Data_Center one in Team1Members.GetValues())
-            {
-                one.FightDataRef.Clear();
-            }
-            foreach (Data_Center one in Team2Members.GetValues())
-            {
-                one.FightDataRef.Clear();
-            }
-            team1.Clear();
-            team2.Clear();
-            Team1Members.Clear();
-            Team2Members.Clear();
-            FightingMembers.Clear();
+            team1UI.Clear();
+            team2UI.Clear();
             MobileInputsManager.target.Clear();
         }
 
+        public void ClearUnits()
+        {
+            foreach (var one in Team1Members.GetValues())
+            {
+                one.FightDataRef.Clear();
+                Destroy(one.WholeT.gameObject);
+            }
+            foreach (var one in Team2Members.GetValues())
+            {
+                one.FightDataRef.Clear();
+                Destroy(one.WholeT.gameObject);
+            }
+            Team1Members.Clear();
+            Team2Members.Clear();
+            FightingMembers.Clear();
+        }
+        
         //void OnGUI()
         //{
         //    if (GUI.Button(new Rect(40, 40, 60, 30), "切换队伍"))

@@ -24,12 +24,12 @@ public class PreparingProcess : FSceneProcess
         BoundaryControllByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
         
         FightingStepLayer FightingStepLayer = FightingStepLayer.Open();
-        RTFightManager.target.team1 = FightingStepLayer.TeamUI1Manager;
-        RTFightManager.target.team2 = FightingStepLayer.TeamUI2Manager;
-        RTFightManager.target.team1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
-        RTFightManager.target.team2.TeamStandPoints = NetFightScene.target.Team2StandPoints;
-        RTFightManager.target.team1.TeamMode = NetFightScene.Fight.Team1Mode;
-        RTFightManager.target.team2.TeamMode = NetFightScene.Fight.Team2Mode;
+        RTFightManager.target.team1UI = FightingStepLayer.TeamUI1Manager;
+        RTFightManager.target.team2UI = FightingStepLayer.TeamUI2Manager;
+        RTFightManager.target.team1UI.TeamStandPoints = NetFightScene.target.Team1StandPoints;
+        RTFightManager.target.team2UI.TeamStandPoints = NetFightScene.target.Team2StandPoints;
+        RTFightManager.target.team1UI.TeamMode = NetFightScene.Fight.Team1Mode;
+        RTFightManager.target.team2UI.TeamMode = NetFightScene.Fight.Team2Mode;
         
         yield return RTFightManager.target.LoadUnits(NetFightScene.Fight);
         
@@ -71,7 +71,7 @@ public class PreparingProcess : FSceneProcess
     public override bool CanEnterOtherProcess()
     {
         return NetFightScene.target.LoadStageFinished.Value
-            && RTFightManager.target.team1.IfAllCharsPreparedForBattle(RTFightManager.target.Team1Members) 
-            && RTFightManager.target.team2.IfAllCharsPreparedForBattle(RTFightManager.target.Team2Members);
+            && RTFightManager.target.team1UI.IfAllCharsPreparedForBattle(RTFightManager.target.Team1Members) 
+            && RTFightManager.target.team2UI.IfAllCharsPreparedForBattle(RTFightManager.target.Team2Members);
     }
 }

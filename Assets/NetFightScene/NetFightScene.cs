@@ -127,12 +127,12 @@ namespace FightScene
             var data_Centers = new List<Data_Center>();
             data_Centers.AddRange(RTFightManager.target.Team1Members.GetValues());
             data_Centers.AddRange(RTFightManager.target.Team2Members.GetValues());
-            HitBoxLogTable.Instance.SkillLog(data_Centers);
             foreach (var one in data_Centers)
             {
                 one.CleanClear();
             }
-            RTFightManager.target.Clear();
+            RTFightManager.target.ClearUI();
+            RTFightManager.target.ClearUnits();
             FightLogger.value.WatchMissionsAbandon();
             FSceneProcessesRunner.Main.Clear();
             MainMenuNote.goingtostep = MainSceneStep.FrontPage;

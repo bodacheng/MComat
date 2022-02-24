@@ -184,13 +184,13 @@ namespace mainMenu
                 }, "开打？");
         }
 
-        public void BeginSkillTest_Rotatiom()
+        public void BeginSkillTest_Rotation()
         {
             var stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
             stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
             FightLoad.Go(stage);
         }
-
+        
         public void BeginSkillTest_Multi()
         {
             var stage = FightInfo.RandomSkillTestStage(TeamMode.multiRaid);
