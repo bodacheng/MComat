@@ -12,12 +12,12 @@ public class SingleThreadProcesser : MonoBehaviour
 
     public async void RunAsQueued(UniTask origin)
     {
-        await QueueRun(origin);
+        await WaitForTurn(origin);
     }
 
     public async void RunAsQueued(UniTask origin, UnityAction afterToDo)
     {
-        await QueueRun(origin);
+        await WaitForTurn(origin);
         afterToDo();
     }
 
@@ -28,7 +28,7 @@ public class SingleThreadProcesser : MonoBehaviour
     public async void RunAsQueued(IEnumerator _process)
     {
         UniTask origin = _process.ToUniTask(this);
-        await QueueRun(origin);
+        await WaitForTurn(origin);
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ public class SingleThreadProcesser : MonoBehaviour
     public async UniTask RunAsQueued_UniTask(IEnumerator _process)
     {
         UniTask origin = _process.ToUniTask(this);
-        await QueueRun(origin);
+        await WaitForTurn(origin);
     }
 
     public async UniTask RunAsQueued_UniTask(List<IEnumerator> _processes, UnityAction afterToDo)
@@ -52,23 +52,19 @@ public class SingleThreadProcesser : MonoBehaviour
         afterToDo();
     }
 
-    async UniTask QueueRun(UniTask origin)
-    {
-        UniTask whole = AsQueue(origin);
-        processQueue.Add(origin);
-        await whole;
-        processQueue.Remove(origin);
-    }
-
-    private async UniTask AsQueue(UniTask origin)
-    {
-        await WaitForTurn(origin);
-        await origin;
-    }
-
+    
     private async UniTask WaitForTurn(UniTask origin)
     {
-        await UniTask.WaitUntil(() => processQueue.IndexOf(origin) == 0);
+        processQueue.Add(origin);
+        await UniTask.WaitUntil(() => processQueue.IndexOf(origin) == 0).ContinueWith(
+            async () =>
+            {
+                await origin.ContinueWith(() =>
+                {
+                    Debug.Log(processQueue.IndexOf(origin) + ":"+ processQueue.Count);
+                    processQueue.Remove(origin);
+                });
+            });
     }
 
     /// <summary>

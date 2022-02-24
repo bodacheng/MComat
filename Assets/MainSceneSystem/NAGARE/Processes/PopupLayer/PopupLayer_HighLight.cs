@@ -61,7 +61,6 @@ public partial class PopupLayer : UILayer {
         var popupLayer = Get();
         if (popupLayer != null)
         {
-            Debug.Log("sdfhqp2");
             popupLayer.bigCurtain.DOColor(new Color(0,0,0, 0), duration).OnComplete(() =>
             {
                 popupLayer.bigCurtain.raycastTarget = false;
