@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SingleThreadProcesser : MonoBehaviour
+public partial class SingleThreadProcesser : MonoBehaviour
 {
     public static SingleThreadProcesser backup;
 
@@ -21,16 +21,7 @@ public class SingleThreadProcesser : MonoBehaviour
         afterToDo();
     }
 
-    /// <summary>
-    /// 执行一个コルーチン，严格按照前后顺序，前一个任务结束了后再执行下一个
-    /// </summary>
-    /// <param name="_process"></param>
-    public async void RunAsQueued(IEnumerator _process)
-    {
-        UniTask origin = _process.ToUniTask(this);
-        await WaitForTurn(origin);
-    }
-
+    
     /// <summary>
     /// 执行一个コルーチン，严格按照前后顺序，前一个任务结束了后再执行下一个
     /// 但函数本身可作为一个UniTask被创建，方便观察任务的执行情况。

@@ -200,7 +200,7 @@
      <Compile Include="Assets\JsonSupport\UnityLitJson\ParserToken.cs" />
      <Compile Include="Assets\ResourceLoading\ResourceLoadingSetting.cs" />
      <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\PointerDownHandler.cs" />
-     <Compile Include="Assets\Structure\SingleThreadProcesser.cs" />
+     <Compile Include="Assets\Structure\SingleThreadProcesser\SingleThreadProcesser.cs" />
      <Compile Include="Assets\EffectsSystem\TrackControl.cs" />
      <Compile Include="Assets\TutorialManger\processes\GoToTeamEdit.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerGameLogo.cs" />
@@ -783,6 +783,7 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
+     <Compile Include="Assets\Structure\SingleThreadProcesser\SingleThreadProcesser2.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />
