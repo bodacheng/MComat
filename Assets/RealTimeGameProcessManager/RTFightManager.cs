@@ -113,11 +113,11 @@ namespace FightScene
             }
         }
         
-        public void SwitchToCMode(Data_Center _char, bool playerControll) //要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
+        public void SwitchToCMode(Data_Center _char, bool playerControl) //要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
         {
             if (_char != null)
             {
-                MobileInputsManager.SetPlayerMode(playerControll);
+                MobileInputsManager.SetPlayerMode(playerControl);
             }
             else
             {
@@ -129,7 +129,7 @@ namespace FightScene
         
         IEnumerator _UnitsLoad(MultiDict<int, int, UnitInfo> MembersSets, MultiDict<int, int, Data_Center> TeamMembers)
         {
-            foreach (KeyValuePair<(int, int), UnitInfo> kv in MembersSets.mDict)
+            foreach (var kv in MembersSets.mDict)
             {
                 var _one = kv.Value;
                 var center = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
@@ -210,7 +210,7 @@ namespace FightScene
         
         void AllUnitsStartOff(MultiDict<int, int, Data_Center> TeamMembers, Team myTeam, bool TestMode = false)
         {
-            foreach (Data_Center oneMember in TeamMembers.GetValues())
+            foreach (var oneMember in TeamMembers.GetValues())
             {
                 oneMember._MyBehaviorRunner.controller.TestMode = TestMode;
                 AddOrRemoveFightingMember(oneMember, myTeam, true);

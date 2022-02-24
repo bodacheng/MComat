@@ -117,29 +117,5 @@ namespace FightScene
             if (Fight.GetEventType() == FightEventType.Screensaver)
                 RTFightManager.target.ScreenSaverC(RTFightManager.playerTeam);
         }
-        
-        public IEnumerator SKillTestReload()
-        {
-            int i = 0;
-            foreach (KeyValuePair<Data_Center,UnitInfo> pair in RTFightManager.target.UnitInfoRef)
-            {
-                switch(i)
-                {
-                    case 0:
-                    case 1:
-                    case 2:
-                        pair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
-                        break;
-                    case 3:
-                        pair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
-                        break;
-                }
-                
-                UnitConfig unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(pair.Value.r_id));
-                yield return pair.Key.Step2Initialize(unitConfig.TYPE, pair.Value.set, pair.Value.level, unitConfig._zokusei, unitConfig.SPECIAL_ZOKUSEI);
-                i++;
-            }
-            FightOverControl.target.LocalGameRestart();
-        }
     }
 }

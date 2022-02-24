@@ -63,7 +63,6 @@ public class PreparingProcess : FSceneProcess
         
         if (NetFightScene.Fight.GetEventType() != FightEventType.Screensaver)
         {
-            Debug.Log("jhslfs");
             PopupLayer.LightUp(1f);
         }
     }

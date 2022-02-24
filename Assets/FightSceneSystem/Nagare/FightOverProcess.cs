@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DummyLayerSystem;
 using UnityEngine;
+using System.Collections;
 
 namespace FightScene
 {
@@ -18,7 +19,7 @@ namespace FightScene
             // 自我战斗结束：显示战斗分析？
             // 技能测试：显示战斗分析？
             Debug.Log(" winner id " + FightOverControl.target.logger.GetWinnerId());
-
+            
             switch (NetFightScene.Fight.GetEventType())
             {
                 case FightEventType.Arena:
@@ -27,7 +28,7 @@ namespace FightScene
                         CloudScript.ArenaPointUp(
                             () =>
                             {
-                                ArenaFightOver a = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;
+                                var a = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;
                                 a.Initialise(FightOverControl.target.ReturnToFront);
                             },
                             () =>
@@ -38,7 +39,7 @@ namespace FightScene
                     }
                     else
                     {
-                        ArenaFightOver a = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;
+                        var a = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;
                         a.Initialise(FightOverControl.target.ReturnToFront);
                     }
                     //FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
@@ -115,15 +116,15 @@ namespace FightScene
                     c.ShowSKillSets(RTFightManager.target.team1, c.GetIconAndSKillShowUISetT());
                     break;
                 case FightEventType.SkillTest:
-                    NetFightScene.target.StartCoroutine(NetFightScene.target.SKillTestReload());
+                    NetFightScene.target.StartCoroutine(SkillTestReload());
                     break;
             }
             
-            List<Data_Center> data_Centers = new List<Data_Center>();
+            var data_Centers = new List<Data_Center>();
             data_Centers.AddRange(RTFightManager.target.Team1Members.GetValues());
             data_Centers.AddRange(RTFightManager.target.Team2Members.GetValues());
             FightOverControl.target.SkillLog(data_Centers);
-            foreach (Data_Center one in data_Centers)
+            foreach (var one in data_Centers)
             {
                 one.CleanClear();
             }
@@ -139,6 +140,17 @@ namespace FightScene
         public override void ProcessEnd()
         {
             HurtObjectManager.ClearCurrent();
+        }
+        
+        IEnumerator SkillTestReload()
+        {
+            foreach (var pair in RTFightManager.target.UnitInfoRef)
+            {
+                pair.Value.set = SkillSet.RandomSkillSet("human", null, 1, false);
+                var unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(pair.Value.r_id));
+                yield return pair.Key.Step2Initialize(unitConfig.TYPE, pair.Value.set, pair.Value.level, unitConfig._zokusei, unitConfig.SPECIAL_ZOKUSEI);
+            }
+            FightOverControl.target.LocalGameRestart();
         }
     }
 }

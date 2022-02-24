@@ -114,6 +114,8 @@ public partial class Data_Center : MonoBehaviour
             phase2Initialized = true;
         }
         
+        WholeT.gameObject.SetActive(true);// 动画模块的一些处理要求active状态下运行
+        
         _MyBehaviorRunner.FormFightingSetsByNineAndTwo(_NineAndTwo, level);
         _MyBehaviorRunner.INIStates(this);
         
