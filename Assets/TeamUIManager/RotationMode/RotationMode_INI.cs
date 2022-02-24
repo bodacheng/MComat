@@ -66,41 +66,41 @@ namespace FightScene
                     RefreshTimeDic.Add(center, 0);
                 }
                 //  SideCharIcon整备
-                SideCharIcon _SideCharIcon;
+                SideCharIcon sideCharIcon;
                 if (!(UnitIconDic.ContainsKey(center) && UnitIconDic[center] != null))
                 {
-                    _SideCharIcon = Instantiate(button_prefab);
-                    _SideCharIcon.name = center.name + " ICon";
-                    _SideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
+                    sideCharIcon = Instantiate(button_prefab);
+                    sideCharIcon.name = center.name + " ICon";
+                    sideCharIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
                     void action1()
                     {
                         ReadyForNextMember(center);
                     }
-                    _SideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(action1);
+                    sideCharIcon.focusingCharIcon.iconButton.onClick.AddListener(action1);
                     UnitInfo charDInfo = RTFightManager.target.UnitInfoRef[center];
                     UnitConfig unitConfig = Units.GetUnitConfig(charDInfo.r_id);
-                    _SideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Get(charDInfo.r_id), unitConfig._zokusei);
-                    _SideCharIcon.gameObject.SetActive(true);
+                    sideCharIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Get(charDInfo.r_id), unitConfig._zokusei);
+                    sideCharIcon.gameObject.SetActive(true);
                 }
                 else
                 {
-                    _SideCharIcon = UnitIconDic[center];
+                    sideCharIcon = UnitIconDic[center];
                 }
                 
-                _SideCharIcon.INIHPShow(center, center.FightDataRef.CurrentHp.Value);
-                _SideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
+                sideCharIcon.INIHPShow(center, center.FightDataRef.CurrentHp.Value);
+                sideCharIcon.focusingCharIcon.CooldownCurtainUpdate(0);
                 
                 if (teamConfig.myTeam == RTFightManager.playerTeam)
                 {
-                    _SideCharIcon.transform.SetParent(sideIconsContainer.transform);
-                    _SideCharIcon.transform.localScale = Vector3.one;
+                    sideCharIcon.transform.SetParent(sideIconsContainer.transform);
+                    sideCharIcon.transform.localScale = Vector3.one;
                 }
                 else
                 {
-                    _SideCharIcon.transform.SetParent(_targetCanvasT.transform);
-                    _SideCharIcon.transform.localScale = Vector3.one;
+                    sideCharIcon.transform.SetParent(_targetCanvasT.transform);
+                    sideCharIcon.transform.localScale = Vector3.one;
                 }
-                DicAdd<Data_Center, SideCharIcon>.Add(UnitIconDic, center, _SideCharIcon);
+                DicAdd<Data_Center, SideCharIcon>.Add(UnitIconDic, center, sideCharIcon);
                 
                 // hitCombo整备
                 if (rotationModeHitCombo == null)

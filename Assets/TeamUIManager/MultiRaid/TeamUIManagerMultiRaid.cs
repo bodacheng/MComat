@@ -54,45 +54,45 @@ namespace FightScene
 
         void Initialize_Multi(MultiDict<int, int, Data_Center> TeamMembers, float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
-            foreach (Data_Center dc in TeamMembers.GetValues())
+            foreach (var center in TeamMembers.GetValues())
             {
-                dc.Step3Initialize(teamConfig, TeamHpRate * SkillSet.INI_Hp(RTFightManager.target.UnitInfoRef[dc].set.SkillEntityList()), teamCGMode);
+                center.Step3Initialize(teamConfig, TeamHpRate * SkillSet.INI_Hp(RTFightManager.target.UnitInfoRef[center].set.SkillEntityList()), teamCGMode);
                 
-                float maxHp = dc.FightDataRef.CurrentHp.Value;
-                dc.FightDataRef.CurrentHp.Subscribe(x =>
+                var maxHp = center.FightDataRef.CurrentHp.Value;
+                center.FightDataRef.CurrentHp.Subscribe(x =>
                 {
-                    RefreshHPBar(dc, x, maxHp);
+                    RefreshHPBar(center, x, maxHp);
                 });
                 
-                dc.FightDataRef.CriticalGauge = new ReactiveProperty<int>();
-                dc.FightDataRef.CriticalGauge.Subscribe(x =>
+                center.FightDataRef.CriticalGauge = new ReactiveProperty<int>();
+                center.FightDataRef.CriticalGauge.Subscribe(x =>
                 {
-                    RefreshExBar(dc, x, 120);
+                    RefreshExBar(center, x, 120);
                 });
                 
-                dc._ResistanceManager.Resistance = new ReactiveProperty<int>
+                center._ResistanceManager.Resistance = new ReactiveProperty<int>
                 {
                     Value = 0
                 };
-                dc._ResistanceManager.OpenResistRender();
-                dc._ResistanceManager.Resistance.Subscribe(x =>
+                center._ResistanceManager.OpenResistRender();
+                center._ResistanceManager.Resistance.Subscribe(x =>
                 {
-                    dc._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10);
-                    RefreshResistanceBar(dc);
+                    center._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10);
+                    RefreshResistanceBar(center);
                 });
                 
-                dc.FightDataRef._ComboHitCount.HitCount.Value = 0;
-                dc.FightDataRef._ComboHitCount.HitCount.Subscribe(x =>
+                center.FightDataRef._ComboHitCount.HitCount.Value = 0;
+                center.FightDataRef._ComboHitCount.HitCount.Subscribe(x =>
                 {
-                    RefreshComboHitMultiRaid(dc);
+                    RefreshComboHitMultiRaid(center);
                 });
                 
-                dc.IsDead = new ReactiveProperty<bool>(false);
-                dc.IsDead.Subscribe(x => 
+                center.IsDead = new ReactiveProperty<bool>(false);
+                center.IsDead.Subscribe(x => 
                 {
                     if (x)
                     {
-                        RTFightManager.AddOrRemoveFightingMember(dc, this.teamConfig.myTeam, false);
+                        RTFightManager.AddOrRemoveFightingMember(center, teamConfig.myTeam, false);
                         RTFightManager.target.ParaAdjustment(RTFightManager.playerTeam);
                     }
                 });
@@ -126,8 +126,6 @@ namespace FightScene
 
         void InsTeamUI_Multi(MultiDict<int, int, Data_Center> TeamMembers)//这个环节应该能够同时把HP bar也适配好。
         {
-            SideCharIcon _SideCharIcon;
-            Text hitCombo;
             foreach (Data_Center a_char in TeamMembers.GetValues())
             {
                 //  SideCharIcon整备
@@ -136,7 +134,8 @@ namespace FightScene
                     RTFightManager.target.SwitchToCMode(a_char, RTFightManager.Auto);
                     RTFightManager.target.ParaAdjustment(teamConfig.myTeam);
                 }
-                
+
+                SideCharIcon _SideCharIcon;
                 if (!(UnitIconDic.ContainsKey(a_char) && UnitIconDic[a_char] != null))
                 {
                     _SideCharIcon = Instantiate(button_prefab);
@@ -168,6 +167,7 @@ namespace FightScene
                 DicAdd<Data_Center, SideCharIcon>.Add(UnitIconDic, a_char, _SideCharIcon);
 
                 // hitCombo整备
+                Text hitCombo;
                 if (multiRaidHitComboDic.ContainsKey(a_char) && multiRaidHitComboDic[a_char] != null)
                 {
                     hitCombo = multiRaidHitComboDic[a_char];

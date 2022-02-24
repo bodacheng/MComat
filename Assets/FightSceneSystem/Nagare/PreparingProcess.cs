@@ -32,6 +32,7 @@ public class PreparingProcess : FSceneProcess
         RTFightManager.target.team2.TeamMode = NetFightScene.Fight.Team2Mode;
         
         yield return RTFightManager.target.LoadUnits(NetFightScene.Fight);
+        
         RTFightManager.target.SetGame(NetFightScene.Fight);
         
         var TeamMembers = new Dictionary<TeamConfig, List<Data_Center>>();

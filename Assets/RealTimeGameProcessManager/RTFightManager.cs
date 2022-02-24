@@ -135,10 +135,11 @@ namespace FightScene
                 var center = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
                 if (center == null)
                 {
-                    var char_DC = UnitCreator.CreateUnit(_one);
-                    yield return char_DC;
-                    center = (Data_Center)char_DC.Current;
+                    var returnValue = UnitCreator.CreateUnit(_one);
+                    yield return returnValue;
+                    center = (Data_Center)returnValue.Current;
                 }
+                
                 TeamMembers.Set(kv.Key.Item1, kv.Key.Item2, center);
                 DicAdd<Data_Center, UnitInfo>.Add(UnitInfoRef, center, _one);
             }
@@ -160,6 +161,8 @@ namespace FightScene
             team2.teamConfig = EnemyTeamConfig;
             team1.teamConfig.playID = loadFight.team1ID;
             team2.teamConfig.playID = loadFight.team2ID;
+            
+            // 角色第二次初始化在这之前已经结束
             
             team1.InsTeamUI(Team1Members);
             team2.InsTeamUI(Team2Members);
