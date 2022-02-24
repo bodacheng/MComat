@@ -288,6 +288,14 @@ namespace FightScene
 
         public void ClearUI()
         {
+            foreach (var one in Team1Members.GetValues())
+            {
+                one.FightDataRef.Clear(); // 这一项也属于UI
+            }
+            foreach (var one in Team2Members.GetValues())
+            {
+                one.FightDataRef.Clear();
+            }
             team1UI.Clear();
             team2UI.Clear();
             MobileInputsManager.target.Clear();
@@ -297,12 +305,10 @@ namespace FightScene
         {
             foreach (var one in Team1Members.GetValues())
             {
-                one.FightDataRef.Clear();
                 Destroy(one.WholeT.gameObject);
             }
             foreach (var one in Team2Members.GetValues())
             {
-                one.FightDataRef.Clear();
                 Destroy(one.WholeT.gameObject);
             }
             Team1Members.Clear();

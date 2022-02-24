@@ -9,7 +9,7 @@ public static class SkillShowSupporter
     
     public static IEnumerator SkillShowRunWithPrepare(string keyname)
     {
-        UnitConfig unitConfig = Units.GetUnitConfig(focusRId);
+        var unitConfig = Units.GetUnitConfig(focusRId);
         //下面这一大片，在资源存在的情况下压根不应该运行            
         if (focusingC.Animation_Manger != null)
         {

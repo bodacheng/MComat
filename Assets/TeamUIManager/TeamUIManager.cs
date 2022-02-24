@@ -190,7 +190,7 @@ namespace FightScene
         
         public bool IfAllCharsPreparedForBattle(MultiDict<int, int, Data_Center> TeamMembers)
         {
-            foreach (Data_Center oneMember in TeamMembers.GetValues())
+            foreach (var oneMember in TeamMembers.GetValues())
             {
                 if (!oneMember.IfPreparedForBattle())
                     return false;
