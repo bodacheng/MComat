@@ -24,6 +24,7 @@ public class PreparingProcess : FSceneProcess
         BoundaryControllByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
         
         FightingStepLayer FightingStepLayer = FightingStepLayer.Open();
+        FightingStepLayer.gameObject.SetActive(false);
         RTFightManager.target.team1UI = FightingStepLayer.TeamUI1Manager;
         RTFightManager.target.team2UI = FightingStepLayer.TeamUI2Manager;
         RTFightManager.target.team1UI.TeamStandPoints = NetFightScene.target.Team1StandPoints;
@@ -47,6 +48,7 @@ public class PreparingProcess : FSceneProcess
     
     public override void ProcessEnter()
     {
+        PopupLayer.DarkOff(NetFightScene.target.T.gameObject, 1, 0);
         SingleThreadProcesser.backup.RunFreely(EnterProcess());
     }
     

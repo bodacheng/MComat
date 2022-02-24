@@ -52,9 +52,13 @@ namespace FightScene
                     });
                 PopupLayer.LightUp(1f);
             }
+            else
+            {
+                var fightingStepLayer = FightingStepLayer.Get();
+                fightingStepLayer.gameObject.SetActive(true);
+            }
             
             NetFightScene.target.PressedStartButton();
-            
         }
         
         public override void ProcessEnd()

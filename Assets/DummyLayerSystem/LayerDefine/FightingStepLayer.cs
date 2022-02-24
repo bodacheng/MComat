@@ -23,7 +23,7 @@ public class FightingStepLayer : UILayer
     
     public static FightingStepLayer target;
     
-    static FightingStepLayer Get()
+    public static FightingStepLayer Get()
     {
         var l = UILayerLoader.Get("FightingStepLayer");
         FightingStepLayer returnValue = null;

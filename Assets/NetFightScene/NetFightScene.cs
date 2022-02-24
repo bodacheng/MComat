@@ -45,7 +45,6 @@ namespace FightScene
         
         void Start()
         {
-            UILayerLoader.Clear();
             PopupLayer.DarkOff(T.gameObject, 1, 0);
             
             //QualitySettings.vSyncCount = 1;
