@@ -11,7 +11,7 @@ public class FightLogger
     
     readonly IDictionary<Team, List<Data_Center>> TeamDeadMemberDic = new Dictionary<Team, List<Data_Center>>();
     readonly List<Team> deadTeam = new List<Team>();
-    readonly List<SingleAssignmentDisposable> WatchPlayerers = new List<SingleAssignmentDisposable>();
+    readonly List<SingleAssignmentDisposable> WatchPlayers = new List<SingleAssignmentDisposable>();
     readonly Dictionary<Team, string> IdDicRef = new Dictionary<Team, string>();
     
     public string GetWinnerId()
@@ -27,14 +27,14 @@ public class FightLogger
     public void WatchMissionsAbandon()
     {
         deadTeam.Clear();
-        for (var i = 0; i < WatchPlayerers.Count; i++)
+        for (var i = 0; i < WatchPlayers.Count; i++)
         {
-            if (!WatchPlayerers[i].IsDisposed)
+            if (!WatchPlayers[i].IsDisposed)
             {
-                WatchPlayerers[i].Dispose();
+                WatchPlayers[i].Dispose();
             }
         }
-        WatchPlayerers.Clear();
+        WatchPlayers.Clear();
         GameOver.Value = false;
     }
     
@@ -77,7 +77,7 @@ public class FightLogger
                         disposable.Dispose();
                     }
                 });
-                WatchPlayerers.Add(disposable);
+                WatchPlayers.Add(disposable);
             }
         }
     }
