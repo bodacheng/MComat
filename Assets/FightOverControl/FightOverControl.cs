@@ -11,7 +11,7 @@ namespace FightScene
     {
         public static FightOverControl target;
 
-        public FightLogger logger = new FightLogger();
+        public readonly FightLogger logger = new FightLogger();
         
         void Awake()
         {
@@ -22,11 +22,11 @@ namespace FightScene
         public void ReturnToFront()
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);
-            List<Data_Center> data_Centers = new List<Data_Center>();
+            var data_Centers = new List<Data_Center>();
             data_Centers.AddRange(RTFightManager.target.Team1Members.GetValues());
             data_Centers.AddRange(RTFightManager.target.Team2Members.GetValues());
             SkillLog(data_Centers);
-            foreach (Data_Center one in data_Centers)
+            foreach (var one in data_Centers)
             {
                 one.CleanClear();
             }
@@ -47,8 +47,8 @@ namespace FightScene
         
         public void SkillLog(List<Data_Center> members)
         {
-            List<SingleFightLog> singleFightLogs = new List<SingleFightLog>();
-            for (int i = 0; i < members.Count; i++)
+            var singleFightLogs = new List<SingleFightLog>();
+            for (var i = 0; i < members.Count; i++)
             {
                 if (members[i] != null)
                 {
@@ -60,12 +60,12 @@ namespace FightScene
             {
                 HitBoxLogTable.Instance.Load(HitBoxLogger.Instance.LoadCurrentToString());
                 HitBoxLogger.Instance.LogSummit();
-                for (int i = 0; i < singleFightLogs.Count; i++)
+                for (var i = 0; i < singleFightLogs.Count; i++)
                 {
                     singleFightLogs[i].Summary();
                 }
                 HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv", HitBoxLogger.Instance, singleFightLogs);
-                for (int i = 0; i < singleFightLogs.Count; i++)
+                for (var i = 0; i < singleFightLogs.Count; i++)
                 {
                     singleFightLogs[i].Clear();
                 }
