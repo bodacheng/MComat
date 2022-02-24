@@ -102,8 +102,8 @@ namespace FightScene
                     {
                         _changeTo.FightDataRef._ComboHitCount.HitCount.Value = RMode_Unit.FightDataRef._ComboHitCount.HitCount.Value;
                     }
-                    RTFightManager.AddOrRemoveFightingMember(RMode_Unit, this.teamConfig.myTeam, false);
-                    RTFightManager.AddOrRemoveFightingMember(_changeTo, this.teamConfig.myTeam, true);
+                    Sensor.AddOrRemoveSharedUnits(RMode_Unit, this.teamConfig.myTeam, false);
+                    Sensor.AddOrRemoveSharedUnits(_changeTo, this.teamConfig.myTeam, true);
                     
                     RMode_Unit = _changeTo;
                     RMode_Unit.WholeT.gameObject.SetActive(true);

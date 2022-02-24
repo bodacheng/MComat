@@ -31,6 +31,7 @@ public class PreparingProcess : FSceneProcess
         RTFightManager.target.team1UI.TeamMode = NetFightScene.Fight.Team1Mode;
         RTFightManager.target.team2UI.TeamMode = NetFightScene.Fight.Team2Mode;
         
+        Sensor.ClearFightingMember();
         yield return RTFightManager.target.LoadUnits(NetFightScene.Fight);
         
         RTFightManager.target.SetGame(NetFightScene.Fight);

@@ -31,7 +31,6 @@ namespace FightScene
         
         public readonly IDictionary<Data_Center, UnitInfo> UnitInfoRef = new Dictionary<Data_Center, UnitInfo>();
         //public readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();
-        public static readonly IDictionary<Team, List<Data_Center>> FightingMembers = new Dictionary<Team, List<Data_Center>>();
         
         FightInfo loadFight;
         
@@ -40,27 +39,7 @@ namespace FightScene
             target = this;
         }
         
-        public static void AddOrRemoveFightingMember(Data_Center member, Team team, bool add) // add:true remove: false
-        {
-            if (!FightingMembers.ContainsKey(team))
-                FightingMembers.Add(team, new List<Data_Center>());
-            var fightingUnits = FightingMembers[team];
-            if (add)
-            {
-                if (!fightingUnits.Contains(member))
-                {
-                    fightingUnits.Add(member);
-                }
-            }
-            else
-            {
-                if (fightingUnits.Contains(member))
-                {
-                    fightingUnits.Remove(member);
-                }
-            }
-            FightingMembers[team] = fightingUnits;
-        }
+
         
         public void SwitchToWatchMode() // button behaviour
         {
@@ -215,7 +194,7 @@ namespace FightScene
             foreach (var oneMember in TeamMembers.GetValues())
             {
                 oneMember._MyBehaviorRunner.controller.TestMode = TestMode;
-                AddOrRemoveFightingMember(oneMember, myTeam, true);
+                Sensor.AddOrRemoveSharedUnits(oneMember, myTeam, true);
                 if (!TestMode)
                     oneMember._MyBehaviorRunner.ChangeToWaitingState();
                 else
@@ -227,7 +206,7 @@ namespace FightScene
         
         void OneUnitStartOff(Data_Center dc, Team myTeam)
         {
-            AddOrRemoveFightingMember(dc, myTeam, true);
+            Sensor.AddOrRemoveSharedUnits(dc, myTeam, true);
             dc._MyBehaviorRunner.ChangeToWaitingState();
         }
         
@@ -328,7 +307,6 @@ namespace FightScene
             }
             Team1Members.Clear();
             Team2Members.Clear();
-            FightingMembers.Clear();
         }
         
         //void OnGUI()

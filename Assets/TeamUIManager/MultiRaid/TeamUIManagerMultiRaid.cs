@@ -92,7 +92,7 @@ namespace FightScene
                 {
                     if (x)
                     {
-                        RTFightManager.AddOrRemoveFightingMember(center, teamConfig.myTeam, false);
+                        Sensor.AddOrRemoveSharedUnits(center, teamConfig.myTeam, false);
                         RTFightManager.target.ParaAdjustment(RTFightManager.playerTeam);
                     }
                 });

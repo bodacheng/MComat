@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using FightScene;
 
 public class Sensor
 {
@@ -14,20 +13,48 @@ public class Sensor
     RaycastHit[] _spherecastHits;
     TeamConfig _TeamConfig = TeamConfig.defaultSet;
     
-    int DetectionInterval;
-    bool DetectionLoopStarted;
-    int DetectionResultLastFrame;
-    bool continuousDetection;
-
+    int _detectionInterval;
+    bool _detectionLoopStarted;
+    int _detectionResultLastFrame;
+    bool _continuousDetection;
+    
+    static readonly IDictionary<Team, List<Data_Center>> sharedUnitDic = new Dictionary<Team, List<Data_Center>>();
     readonly List<Collider> detectedEnemies = new List<Collider>();
     Collider nearestEnemyCollider;
     readonly List<Collider> DamagingWeaponAround = new List<Collider>();
     Collider NearestDamagingWeapon;    
     Data_Center SelfDataCenter;
+
+    public static void ClearFightingMember()
+    {
+        sharedUnitDic.Clear();
+    }
+    
+    public static void AddOrRemoveSharedUnits(Data_Center member, Team team, bool add) // add:true remove: false
+    {
+        if (!sharedUnitDic.ContainsKey(team))
+            sharedUnitDic.Add(team, new List<Data_Center>());
+        var fightingUnits = sharedUnitDic[team];
+        if (add)
+        {
+            if (!fightingUnits.Contains(member))
+            {
+                fightingUnits.Add(member);
+            }
+        }
+        else
+        {
+            if (fightingUnits.Contains(member))
+            {
+                fightingUnits.Remove(member);
+            }
+        }
+        sharedUnitDic[team] = fightingUnits;
+    }
     
     public bool IFContinuousDetectionStarted()
     {
-        return continuousDetection;
+        return _continuousDetection;
     }
     
     public void SetDetectLayer(TeamConfig teamConfig,Data_Center _self)
@@ -43,9 +70,9 @@ public class Sensor
     
     public Collider GetTargetRangeEnemyCollider(float min, float max)
     {
-        for (int i = 0; i < detectedEnemies.Count; i++)
+        for (var i = 0; i < detectedEnemies.Count; i++)
         {
-            float to_me = Vector3.Distance(Center.position, detectedEnemies[i].transform.position);
+            var to_me = Vector3.Distance(Center.position, detectedEnemies[i].transform.position);
             if (to_me >= min && to_me <= max)
             {
                 return detectedEnemies[i];
@@ -66,8 +93,8 @@ public class Sensor
         {
             return null;
         }
-        var to_me = Vector3.Distance(Center.position, threat.transform.position);
-        if (to_me >= min && to_me <= max)
+        var toMe = Vector3.Distance(Center.position, threat.transform.position);
+        if (toMe >= min && toMe <= max)
         {
             return threat;
         }
@@ -81,26 +108,26 @@ public class Sensor
 
     public void SensorFixedUpdate()
     {
-        if (DetectionLoopStarted)
+        if (_detectionLoopStarted)
         {
-            if (DetectionInterval == 0)
+            if (_detectionInterval == 0)
             {
                 SensorDetectionResultClearProcess();
                 SensorDetectProcess();//检测
                 SensorDetectionResultSortProcess();//整理
                 SphereCastSortProcess();
             }
-            if (DetectionInterval > DetectionResultLastFrame)
+            if (_detectionInterval > _detectionResultLastFrame)
             {
-                DetectionInterval = 0;
-                if (!continuousDetection)
+                _detectionInterval = 0;
+                if (!_continuousDetection)
                 {
-                    DetectionLoopStarted = false;
+                    _detectionLoopStarted = false;
                     SensorDetectionResultClearProcess();
                 }
                 return;//否则下面的DetectionInterval++会导致其值立刻从0变到1，无法进入上面的if (DetectionInterval == 0)部分。
             }
-            DetectionInterval++;
+            _detectionInterval++;
         }
 	}
     
@@ -126,10 +153,10 @@ public class Sensor
         SensorDetectionResultSortProcess();//整理
         SphereCastSortProcess();
 
-        continuousDetection = true;
-        DetectionResultLastFrame = _DetectionResultLastFrame;
-        DetectionLoopStarted = true;
-        DetectionInterval = 1;//这个设置是为了在启动本函数瞬间进行检测活动，但不会在update里立刻再进行一次，形成间隔
+        _continuousDetection = true;
+        _detectionResultLastFrame = _DetectionResultLastFrame;
+        _detectionLoopStarted = true;
+        _detectionInterval = 1;//这个设置是为了在启动本函数瞬间进行检测活动，但不会在update里立刻再进行一次，形成间隔
     }
 
     public void OneRoundDetectionStart(int _DetectionResultLastFrame)
@@ -139,28 +166,28 @@ public class Sensor
         SensorDetectionResultSortProcess();//整理
         SphereCastSortProcess();
 
-        continuousDetection = false;
-        DetectionResultLastFrame = _DetectionResultLastFrame;
-        DetectionLoopStarted = false;
-        DetectionInterval = 1;
+        _continuousDetection = false;
+        _detectionResultLastFrame = _DetectionResultLastFrame;
+        _detectionLoopStarted = false;
+        _detectionInterval = 1;
     }
 
     public void Stop()
     {
         SensorDetectionResultClearProcess();
-        DetectionLoopStarted = false;
-        continuousDetection = false;
+        _detectionLoopStarted = false;
+        _continuousDetection = false;
     }
 
-    Collider jiamateammate; Collider nearestenemy;
+    Collider jiaMateAMMate; Collider nearestEnemy;
     public Collider[] EnemyAndTeammateBetweenMeAndEnemy()
     {
-        return jiamateammate != null && nearestenemy != null ? (new Collider[2] { jiamateammate, nearestenemy }) : null;
+        return jiaMateAMMate != null && nearestEnemy != null ? (new Collider[2] { jiaMateAMMate, nearestEnemy }) : null;
     }
 
     void SensorDetectProcess()
     {
-        _hits = Physics.OverlapSphere(Center.position, sensor_radius, _layers);//这个东西消耗太大，起码可以考虑减少运行次数 // FIXUPDATE
+        _hits = Physics.OverlapSphere(Center.position, sensor_radius, _layers);// 这个东西消耗太大，起码可以考虑减少运行次数 // FIXUPDATE
         _spherecastHits = Physics.SphereCastAll(Center.position, 1f, SelfDataCenter.WholeT.forward, sensor_radius, _meAndEnemyLayerMask, QueryTriggerInteraction.Collide);
     }
 
@@ -204,11 +231,11 @@ public class Sensor
         {
             for (var i = 0; i < tags.Length; i++)
             {
-                if (RTFightManager.FightingMembers != null)
+                if (sharedUnitDic != null)
                 {
                     for (var y = 0; y < tags.Length; y++)
                     {
-                        RTFightManager.FightingMembers.TryGetValue(tags[y], out searchingMembers);
+                        sharedUnitDic.TryGetValue(tags[y], out searchingMembers);
                         if (searchingMembers != null)
                         {
                             for (var k = 0; k < searchingMembers.Count; k++)
@@ -241,8 +268,8 @@ public class Sensor
         if (_spherecastHits == null)
             return;
         
-        float matetome = sensor_radius, enemytome = sensor_radius;
-        foreach (RaycastHit raycastHit in _spherecastHits)
+        float mateToMe = sensor_radius, enemyToMe = sensor_radius;
+        foreach (var raycastHit in _spherecastHits)
         {
             if (FightAttriCalReference.AllMeatColliders.Contains(raycastHit.collider))
             {
@@ -250,33 +277,33 @@ public class Sensor
                 {
                     if (!SelfDataCenter.FightDataRef.IfMyBody(raycastHit.collider))
                     {
-                        float to_me = Vector3.Distance(Center.position, raycastHit.collider.transform.position);
-                        if (to_me < matetome)
+                        var to_me = Vector3.Distance(Center.position, raycastHit.collider.transform.position);
+                        if (to_me < mateToMe)
                         {
-                            jiamateammate = raycastHit.collider;
-                            matetome = to_me;
+                            jiaMateAMMate = raycastHit.collider;
+                            mateToMe = to_me;
                         }
                     }
                 }
                 if (_TeamConfig.enemyLayerMask == (_TeamConfig.enemyLayerMask | (1 << raycastHit.collider.gameObject.layer)))
                 {
-                    float to_me = Vector3.Distance(Center.position, raycastHit.collider.transform.position);
-                    if (to_me < enemytome)
+                    var to_me = Vector3.Distance(Center.position, raycastHit.collider.transform.position);
+                    if (to_me < enemyToMe)
                     {
-                        nearestenemy = raycastHit.collider;
-                        enemytome = to_me;
+                        nearestEnemy = raycastHit.collider;
+                        enemyToMe = to_me;
                     }
                 }
             }
         }
 
-        if (jiamateammate != null && nearestenemy != null)
+        if (jiaMateAMMate != null && nearestEnemy != null)
         {
-            if (Vector3.Distance(Center.position, jiamateammate.transform.position) < Vector3.Distance(Center.position, nearestenemy.transform.position))
+            if (Vector3.Distance(Center.position, jiaMateAMMate.transform.position) < Vector3.Distance(Center.position, nearestEnemy.transform.position))
                 return;//意思就是说让jiamateammate和nearestenemy不为空
         }
-        jiamateammate = null;
-        nearestenemy = null;
+        jiaMateAMMate = null;
+        nearestEnemy = null;
     }
 
     void SensorDetectionResultSortProcess() //这个函数的调用必须要确保每次都在update函数之后
@@ -308,10 +335,10 @@ public class Sensor
     {
         p1.y = Center.position.y;
         p1_to_me = (p1 - Center.position).magnitude;
-
+        
         p2.y = Center.position.y;
         p2_to_me = (p2 - Center.position).magnitude;
-
+        
         return p1_to_me > p2_to_me ? 1 : p1_to_me < p2_to_me ? -1 : 0;
     }
 
@@ -330,7 +357,7 @@ public class Sensor
             return list[0];
 
         target = list[0];
-        for (int i = 1; i < list.Count; i++)
+        for (var i = 1; i < list.Count; i++)
         {
             if (list[i] == null)
                 continue;
@@ -348,9 +375,8 @@ public class Sensor
         GetAlliesAndSelfByDistance(true);
         if (EnemiesByDistance.Count > 0 && AlliesByDistance.Count > 1)
         {
-            float disToNearestEnemy2j, disToNearestAlly2j;
-            disToNearestEnemy2j = HorizontalDistanceCompare(EnemiesByDistance[0].transform.position, Center.position);
-            disToNearestAlly2j = HorizontalDistanceCompare(AlliesByDistance[1].transform.position, Center.position);
+            float disToNearestEnemy2j = HorizontalDistanceCompare(EnemiesByDistance[0].transform.position, Center.position);
+            float disToNearestAlly2j = HorizontalDistanceCompare(AlliesByDistance[1].transform.position, Center.position);
             return disToNearestEnemy2j >= disToNearestAlly2j && disToNearestEnemy2j < Mathf.Pow(judgmentRange, 2) && 
             Vector3.Angle((EnemiesByDistance[0].transform.position - Center.position), (AlliesByDistance[1].transform.position - Center.position)) < 40;
         }

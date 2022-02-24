@@ -29,7 +29,7 @@ namespace FightScene
                     if (x) 
                     {
                         UnitIconDic[center].focusingCharIcon.CooldownCurtainUpdate(1);
-                        RTFightManager.AddOrRemoveFightingMember(center, teamConfig.myTeam, false);
+                        Sensor.AddOrRemoveSharedUnits(center, teamConfig.myTeam, false);
                         
                         var team = teamConfig.myTeam == Team.player1 ? RTFightManager.target.Team1Members : RTFightManager.target.Team2Members;
                         ToNewUnit(team);
