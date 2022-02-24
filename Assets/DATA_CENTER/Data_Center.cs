@@ -94,7 +94,7 @@ public partial class Data_Center : MonoBehaviour
         this._TeamConfig = _TeamConfig;
         gameObject.layer = this._TeamConfig.mylayer;
 
-        Sensor.SetDectectLayer(_TeamConfig,this);
+        Sensor.SetDetectLayer(_TeamConfig,this);
         bO_Weapon_Animation_Events.hiddenMethods.AssignTeamFlag(_TeamConfig);
         if (Shield != null)
         {

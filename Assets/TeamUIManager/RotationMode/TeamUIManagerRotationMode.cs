@@ -8,7 +8,7 @@ namespace FightScene
     {
         Data_Center RMode_Unit;
         Data_Center waitingMember;
-        IDictionary<Data_Center, float> RefreshTimeDic = new Dictionary<Data_Center, float>();
+        readonly IDictionary<Data_Center, float> RefreshTimeDic = new Dictionary<Data_Center, float>();
         Text rotationModeHitCombo;
         
         void RotateClear()
@@ -20,7 +20,7 @@ namespace FightScene
         public Data_Center ToStartPos_Rotate(MultiDict<int, int, Data_Center> TeamMembers)
         {
             Data_Center startUnit = null;
-            foreach (KeyValuePair<(int, int), Data_Center> kv in TeamMembers.mDict)
+            foreach (var kv in TeamMembers.mDict)
             {
                 if (kv.Value == null)
                 {
@@ -52,7 +52,7 @@ namespace FightScene
         // 最初切换队员
         bool ChangeUnit_ReadyToGo(Data_Center _changeTo, MultiDict<int, int, Data_Center> TeamMembers, Transform IniStandPoint)
         {
-            bool unitChanged = false;
+            var unitChanged = false;
             foreach (var data_Center in TeamMembers.GetValues())
             {
                 if (_changeTo == data_Center)

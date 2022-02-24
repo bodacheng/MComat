@@ -9,7 +9,7 @@ public class Sensor
     public Transform Center;
 
     LayerMask _layers;
-    LayerMask meAndEnemyLayermask;
+    LayerMask _meAndEnemyLayerMask;
     Collider[] _hits; //What was hit in this frame?
     RaycastHit[] _spherecastHits;
     TeamConfig _TeamConfig = TeamConfig.defaultSet;
@@ -18,10 +18,10 @@ public class Sensor
     bool DetectionLoopStarted;
     int DetectionResultLastFrame;
     bool continuousDetection;
-    
-    List<Collider> detectedEnemies = new List<Collider>();
+
+    readonly List<Collider> detectedEnemies = new List<Collider>();
     Collider nearestEnemyCollider;
-    List<Collider> DamagingWeaponAround = new List<Collider>();
+    readonly List<Collider> DamagingWeaponAround = new List<Collider>();
     Collider NearestDamagingWeapon;    
     Data_Center SelfDataCenter;
     
@@ -30,13 +30,13 @@ public class Sensor
         return continuousDetection;
     }
     
-    public void SetDectectLayer(TeamConfig teamConfig,Data_Center _self)
+    public void SetDetectLayer(TeamConfig teamConfig,Data_Center _self)
     {
         _TeamConfig = teamConfig;
         if (_TeamConfig != null)
         {
             _layers = teamConfig.mySensorAndWeaponTargetLayerMask;
-            meAndEnemyLayermask = teamConfig.myTeamAndMyEnemy;
+            _meAndEnemyLayerMask = teamConfig.myTeamAndMyEnemy;
         }
         SelfDataCenter = _self;
     }
@@ -61,12 +61,12 @@ public class Sensor
     
     public Collider GetSuddenThreatInRange(float min,float max)
     {
-        Collider threat = GetClosestEnemyHitBoxColliderInSensorRange();
+        var threat = GetClosestEnemyHitBoxColliderInSensorRange();
         if (threat == null)
         {
             return null;
         }
-        float to_me = Vector3.Distance(Center.position, threat.transform.position);
+        var to_me = Vector3.Distance(Center.position, threat.transform.position);
         if (to_me >= min && to_me <= max)
         {
             return threat;
@@ -158,13 +158,13 @@ public class Sensor
         return jiamateammate != null && nearestenemy != null ? (new Collider[2] { jiamateammate, nearestenemy }) : null;
     }
 
-    public void SensorDetectProcess()
+    void SensorDetectProcess()
     {
         _hits = Physics.OverlapSphere(Center.position, sensor_radius, _layers);//这个东西消耗太大，起码可以考虑减少运行次数 // FIXUPDATE
-        _spherecastHits = Physics.SphereCastAll(Center.position, 1f, SelfDataCenter.WholeT.forward, sensor_radius, meAndEnemyLayermask, QueryTriggerInteraction.Collide);
+        _spherecastHits = Physics.SphereCastAll(Center.position, 1f, SelfDataCenter.WholeT.forward, sensor_radius, _meAndEnemyLayerMask, QueryTriggerInteraction.Collide);
     }
 
-    public void SensorDetectionResultClearProcess()
+    void SensorDetectionResultClearProcess()
     {
         detectedEnemies.Clear();
         DamagingWeaponAround.Clear();
@@ -184,7 +184,7 @@ public class Sensor
     }
 
     List<GameObject> AlliesByDistance = new List<GameObject>();
-    public List<GameObject> GetAlliesAndSelfByDistance(bool refresh)
+    List<GameObject> GetAlliesAndSelfByDistance(bool refresh)
     {
         if (_TeamConfig == null)
         {
@@ -197,21 +197,21 @@ public class Sensor
     }
 
     List<Data_Center> searchingMembers;
-    public List<GameObject> FindTargetsByDistance(Team[] tags) // 根据提供得目标标签获取一个以离自身距离为基准的gameobjects列表。有了这个显然FindClosestEnemy这个函数就很落后了
+    List<GameObject> FindTargetsByDistance(Team[] tags) // 根据提供得目标标签获取一个以离自身距离为基准的gameobjects列表。有了这个显然FindClosestEnemy这个函数就很落后了
     {
-        List<GameObject> target_list = new List<GameObject>();//貌似换成clear的话会减少GC,然而如果那样做，将产生一个极其严重的bug。你很可能在不知不觉中让两个使用了这个函数求列表的函数指向了同一地址。
+        var target_list = new List<GameObject>();//貌似换成clear的话会减少GC,然而如果那样做，将产生一个极其严重的bug。你很可能在不知不觉中让两个使用了这个函数求列表的函数指向了同一地址。
         if (tags != null)
         {
-            for (int i = 0; i < tags.Length; i++)
+            for (var i = 0; i < tags.Length; i++)
             {
                 if (RTFightManager.FightingMembers != null)
                 {
-                    for (int y = 0; y < tags.Length; y++)
+                    for (var y = 0; y < tags.Length; y++)
                     {
                         RTFightManager.FightingMembers.TryGetValue(tags[y], out searchingMembers);
                         if (searchingMembers != null)
                         {
-                            for (int k = 0; k < searchingMembers.Count; k++)
+                            for (var k = 0; k < searchingMembers.Count; k++)
                             {
                                 target_list.Add(searchingMembers[k].WholeT.gameObject);
                             }
@@ -236,11 +236,11 @@ public class Sensor
         return target_list;
     }
 
-    public void SphereCastSortProcess()
+    void SphereCastSortProcess()
     {
         if (_spherecastHits == null)
             return;
-
+        
         float matetome = sensor_radius, enemytome = sensor_radius;
         foreach (RaycastHit raycastHit in _spherecastHits)
         {
@@ -279,7 +279,7 @@ public class Sensor
         nearestenemy = null;
     }
 
-    public void SensorDetectionResultSortProcess() //这个函数的调用必须要确保每次都在update函数之后
+    void SensorDetectionResultSortProcess() //这个函数的调用必须要确保每次都在update函数之后
     {
         if (_hits == null)
         {
