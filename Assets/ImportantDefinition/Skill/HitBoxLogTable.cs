@@ -21,6 +21,34 @@ namespace Log
                 return instance;
             }
         }
+        
+        public void SkillLog(List<Data_Center> members)
+        {
+            var singleFightLogs = new List<SingleFightLog>();
+            for (var i = 0; i < members.Count; i++)
+            {
+                if (members[i] != null)
+                {
+                    singleFightLogs.Add(members[i]._MyBehaviorRunner.SingleFightLog);
+                }
+            }
+            
+            if (FightGlobalSetting.HitBoxLogger)
+            {
+                HitBoxLogTable.Instance.Load(HitBoxLogger.Instance.LoadCurrentToString());
+                HitBoxLogger.Instance.LogSummit();
+                for (var i = 0; i < singleFightLogs.Count; i++)
+                {
+                    singleFightLogs[i].Summary();
+                }
+                HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv", HitBoxLogger.Instance, singleFightLogs);
+                for (var i = 0; i < singleFightLogs.Count; i++)
+                {
+                    singleFightLogs[i].Clear();
+                }
+                HitBoxLogger.Instance.Clear();
+            }
+        }
 
         public class Row
         {

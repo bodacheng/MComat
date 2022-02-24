@@ -152,7 +152,6 @@
      <Compile Include="Assets\DATA_CENTER\DATACENTERGUI.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\ProcessesRunner.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\Platform.cs" />
-     <Compile Include="Assets\FightOverControl\FightOverControl.cs" />
      <Compile Include="Assets\UI\SideCharIcon.cs" />
      <Compile Include="Assets\TouchScript\Examples\Portal\Scripts\Spawner.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\FrontLayer.cs" />

@@ -4,6 +4,9 @@ using UniRx;
 using UnityEngine.Playables;
 using System.Collections.Generic;
 using DummyLayerSystem;
+using mainMenu;
+using UnityEngine.SceneManagement;
+using Log;
 
 namespace FightScene
 {
@@ -116,6 +119,26 @@ namespace FightScene
             }
             if (Fight.GetEventType() == FightEventType.Screensaver)
                 RTFightManager.target.ScreenSaverC(RTFightManager.playerTeam);
+        }
+        
+        public void ReturnToFront()
+        {
+            FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);
+            var data_Centers = new List<Data_Center>();
+            data_Centers.AddRange(RTFightManager.target.Team1Members.GetValues());
+            data_Centers.AddRange(RTFightManager.target.Team2Members.GetValues());
+            HitBoxLogTable.Instance.SkillLog(data_Centers);
+            foreach (var one in data_Centers)
+            {
+                one.CleanClear();
+            }
+            RTFightManager.target.Clear();
+            FightLogger.value.WatchMissionsAbandon();
+            FSceneProcessesRunner.Main.Clear();
+            MainMenuNote.goingtostep = MainSceneStep.FrontPage;
+            HitBoxesProcesser.Instance.Clear();
+            SingleAssignmentDisposableCleaner.Clear();
+            SceneManager.LoadScene(1);
         }
     }
 }

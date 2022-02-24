@@ -37,7 +37,7 @@ public class FightResultAnim : FSceneProcess
         yield return new WaitForSeconds(2f);
         List<Data_Center> winners = new List<Data_Center>();
 
-        switch (FightOverControl.target.logger.GetWinnerTeam())
+        switch (FightLogger.value.GetWinnerTeam())
         {
             case Team.player1 :
                 winners = RTFightManager.target.Team1Members.GetValues();
@@ -59,7 +59,7 @@ public class FightResultAnim : FSceneProcess
         FightResultAnimLayer fightResultAnimLayer = UILayerLoader.Load
             (NetFightScene.target.T.gameObject, "FightResultAnimLayer") as FightResultAnimLayer;
 
-        if (FightOverControl.target.logger.GetWinnerId() == PlayerAccountInfo.Me.PlayFabUsername)
+        if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabUsername)
         {
             yield return fightResultAnimLayer.WINProcess();
         }

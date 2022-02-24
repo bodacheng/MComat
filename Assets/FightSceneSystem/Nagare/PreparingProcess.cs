@@ -38,7 +38,7 @@ public class PreparingProcess : FSceneProcess
         var TeamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
         DicAdd<TeamConfig, List<Data_Center>>.Add(TeamMembers, RTFightManager.target.heroTeamConfig, RTFightManager.target.Team1Members.GetValues());
         DicAdd<TeamConfig, List<Data_Center>>.Add(TeamMembers, RTFightManager.target.EnemyTeamConfig, RTFightManager.target.Team2Members.GetValues());
-        FightOverControl.target.logger.ReadyToLog(TeamMembers);
+        FightLogger.value.ReadyToLog(TeamMembers);
         
         EffectsManager.INIEffectsPool("hit_ground", null, 3);
         EffectsManager.INIEffectsPool("wallCrack", null, 3);

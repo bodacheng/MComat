@@ -2,6 +2,7 @@
 using DummyLayerSystem;
 using UnityEngine;
 using System.Collections;
+using Log;
 
 namespace FightScene
 {
@@ -18,18 +19,18 @@ namespace FightScene
             // quest结束：显示技能石经验获得情况和报酬信息？
             // 自我战斗结束：显示战斗分析？
             // 技能测试：显示战斗分析？
-            Debug.Log(" winner id " + FightOverControl.target.logger.GetWinnerId());
+            Debug.Log(" winner id " + FightLogger.value.GetWinnerId());
             
             switch (NetFightScene.Fight.GetEventType())
             {
                 case FightEventType.Arena:
-                    if (FightOverControl.target.logger.GetWinnerId() == PlayerAccountInfo.Me.PlayFabUsername)
+                    if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabUsername)
                     {
                         CloudScript.ArenaPointUp(
                             () =>
                             {
                                 var a = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;
-                                a.Initialise(FightOverControl.target.ReturnToFront);
+                                a.Initialise(NetFightScene.target.ReturnToFront);
                             },
                             () =>
                             {
@@ -40,12 +41,12 @@ namespace FightScene
                     else
                     {
                         var a = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;
-                        a.Initialise(FightOverControl.target.ReturnToFront);
+                        a.Initialise(NetFightScene.target.ReturnToFront);
                     }
                     //FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
                 break;
                 case FightEventType.Quest:
-                    if (FightOverControl.target.logger.GetWinnerId() == PlayerAccountInfo.Me.PlayFabUsername)
+                    if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabUsername)
                     {
                         CloudScript.ArcadeProgress(
                             NetFightScene.Fight.ID.ToString(),
@@ -76,10 +77,10 @@ namespace FightScene
                                 
                                 ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArcadeFightResult;
                                 cc.Initialise(
-                                    FightOverControl.target.ReturnToFront, 
+                                    NetFightScene.target.ReturnToFront, 
                                     ()=>
                                     {
-                                        FightOverControl.target.LocalGameRestart();
+                                        LocalGameRestart();
                                         UILayerLoader.Remove("ArcadeFightResult");
                                     },
                                     reward_GDInt, reward_DIAInt
@@ -95,10 +96,10 @@ namespace FightScene
                     else
                     {
                         ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArcadeFightResult;
-                        cc.Initialise(FightOverControl.target.ReturnToFront, 
+                        cc.Initialise(NetFightScene.target.ReturnToFront, 
                              ()=>
                              {
-                                 FightOverControl.target.LocalGameRestart();
+                                 LocalGameRestart();
                                  UILayerLoader.Remove("ArcadeFightResult");
                              },
                              0, 
@@ -107,10 +108,10 @@ namespace FightScene
                     break;
                 case FightEventType.Self:
                     CommonFightResult c = UILayerLoader.Load(NetFightScene.target.T.gameObject, "CommonFightResult") as CommonFightResult;
-                    c.Initialise(FightOverControl.target.ReturnToFront, 
+                    c.Initialise(NetFightScene.target.ReturnToFront, 
                         () =>
                         {
-                            FightOverControl.target.LocalGameRestart();
+                            LocalGameRestart();
                             UILayerLoader.Remove("CommonFightResult");
                         });
                     c.ShowSKillSets(RTFightManager.target.team1, c.GetIconAndSKillShowUISetT());
@@ -123,12 +124,12 @@ namespace FightScene
             var data_Centers = new List<Data_Center>();
             data_Centers.AddRange(RTFightManager.target.Team1Members.GetValues());
             data_Centers.AddRange(RTFightManager.target.Team2Members.GetValues());
-            FightOverControl.target.SkillLog(data_Centers);
+            HitBoxLogTable.Instance.SkillLog(data_Centers);
             foreach (var one in data_Centers)
             {
                 one.CleanClear();
             }
-            FightOverControl.target.logger.WatchMissionsAbandon();
+            FightLogger.value.WatchMissionsAbandon();
             SingleAssignmentDisposableCleaner.Clear();
         }
         
@@ -142,6 +143,11 @@ namespace FightScene
             HurtObjectManager.ClearCurrent();
         }
         
+        void LocalGameRestart()
+        {
+            FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
+        }
+        
         IEnumerator SkillTestReload()
         {
             foreach (var pair in RTFightManager.target.UnitInfoRef)
@@ -150,7 +156,7 @@ namespace FightScene
                 var unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(pair.Value.r_id));
                 yield return pair.Key.Step2Initialize(unitConfig.TYPE, pair.Value.set, pair.Value.level, unitConfig._zokusei, unitConfig.SPECIAL_ZOKUSEI);
             }
-            FightOverControl.target.LocalGameRestart();
+            LocalGameRestart();
         }
     }
 }

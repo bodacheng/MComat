@@ -15,7 +15,7 @@ namespace FightScene
         
         public override bool CanEnterOtherProcess()
         {
-            return FightOverControl.target.logger.GameOver.Value;
+            return FightLogger.value.GameOver.Value;
         }
         
         public override void ProcessEnter()
@@ -31,7 +31,7 @@ namespace FightScene
             if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
             {
                 var TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
-                TitleScreenLayer.Initialise(FightOverControl.target.ReturnToFront, 
+                TitleScreenLayer.Initialise(NetFightScene.target.ReturnToFront, 
                     () =>
                     {
                         LoginLayer LoginLayer = LoginLayer.Open(
@@ -69,7 +69,7 @@ namespace FightScene
                 UILayerLoader.Remove("FightingStepLayer");
             }
             RTFightManager.target.Clear();
-            FightOverControl.target.logger.WatchMissionsAbandon();
+            FightLogger.value.WatchMissionsAbandon();
         }
 
         public override void LocalUpdate()
