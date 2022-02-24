@@ -53,11 +53,11 @@ namespace FightScene
         
         public List<Transform> GetFightingUnitTs(MultiDict<int, int, Data_Center> TeamMembers)
         {
-            List<Transform> transforms = new List<Transform>();
+            var transforms = new List<Transform>();
             switch (TeamMode)
             {
                 case TeamMode.multiRaid:
-                    foreach (Data_Center a_char in TeamMembers.GetValues())
+                    foreach (var a_char in TeamMembers.GetValues())
                     {
                         if (a_char._MyBehaviorRunner.GetNowState().StateKey != "Death")
                         {
@@ -75,12 +75,11 @@ namespace FightScene
             return null;
         }
         
-        public void BarsPosUpdate(MultiDict<int, int, Data_Center> TeamMembers)
+        void BarsPosUpdate(MultiDict<int, int, Data_Center> TeamMembers)
         {
-            SideCharIcon _tempSI;
-            foreach (Data_Center _one in TeamMembers.GetValues())
+            foreach (var _one in TeamMembers.GetValues())
             {
-                UnitIconDic.TryGetValue(_one, out _tempSI);
+                UnitIconDic.TryGetValue(_one, out var _tempSI);
                 _tempSI.transform.position = Vector3.Lerp(_tempSI.transform.position, CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 3f), Time.deltaTime * 20f);
             }
         }
@@ -122,30 +121,25 @@ namespace FightScene
         
         void RefreshResistanceBar(Data_Center data_Center)
         {
-            SideCharIcon _tempSI;
-            UnitIconDic.TryGetValue(data_Center, out _tempSI);
+            UnitIconDic.TryGetValue(data_Center, out var _tempSI);
             _tempSI.RefreshResistanceBar();
         }
-        
         void RefreshHPBar(Data_Center data_Center, float current_hp, float wholeHP)
         {
-            SideCharIcon _tempSI;
-            UnitIconDic.TryGetValue(data_Center, out _tempSI);
+            UnitIconDic.TryGetValue(data_Center, out var _tempSI);
             _tempSI.RefreshHpBar(current_hp, wholeHP);
         }
         void RefreshExBar(Data_Center data_Center, int current_ex, int wholeex)
         {
-            SideCharIcon _tempSI;
-            UnitIconDic.TryGetValue(data_Center, out _tempSI);
+            UnitIconDic.TryGetValue(data_Center, out var _tempSI);
             _tempSI.RefreshExBar(current_ex, wholeex);
         }
         
         public void Refresh(MultiDict<int, int, Data_Center> TeamMembers)
         {
-            SideCharIcon _tempSI;
-            foreach (Data_Center _dt in TeamMembers.GetValues())
+            foreach (var _dt in TeamMembers.GetValues())
             {
-                UnitIconDic.TryGetValue(_dt, out _tempSI);
+                UnitIconDic.TryGetValue(_dt, out var _tempSI);
                 if (teamConfig.myTeam == RTFightManager.playerTeam)
                 {
                     _tempSI.transform.localScale = _dt != RTFightManager.focusingUnit ? Vector3.one : Vector3.one * 1.2f;
@@ -166,7 +160,7 @@ namespace FightScene
             switch (TeamMode)
             {
                 case TeamMode.multiRaid:
-                    foreach (Data_Center _datacenter in TeamMembers.GetValues())
+                    foreach (var _datacenter in TeamMembers.GetValues())
                     {
                         if (multiRaidHitComboDic.ContainsKey(_datacenter))
                         {
@@ -193,7 +187,7 @@ namespace FightScene
                     break;
             }
         }
-
+        
         public bool IfAllCharsPreparedForBattle(MultiDict<int, int, Data_Center> TeamMembers)
         {
             foreach (Data_Center oneMember in TeamMembers.GetValues())
@@ -207,13 +201,13 @@ namespace FightScene
         // 获取该队伍所有账户技能石id（只有在这个队伍是玩家账户队员组成情况下有效）
         public List<string> GetAllUsingStoneOfAcc()
         {
-            List<string> stones = new List<string>();
-            foreach (KeyValuePair<Data_Center, UnitInfo> keyValuePair in RTFightManager.target.UnitInfoRef)
+            var stones = new List<string>();
+            foreach (var keyValuePair in RTFightManager.target.UnitInfoRef)
             {
-                List<StoneOfPlayerInfo> mystones = Stones.GetEquipingStones(keyValuePair.Value.id);
-                for (int i = 0; i < mystones.Count; i++)
+                var myStones = Stones.GetEquipingStones(keyValuePair.Value.id);
+                for (var i = 0; i < myStones.Count; i++)
                 {
-                    stones.Add(mystones[i].InstanceId);
+                    stones.Add(myStones[i].InstanceId);
                 }
             }
             return stones;
