@@ -130,7 +130,6 @@ namespace DummyLayerSystem
                 var layer = Queues[toRemoveIndex];
                 GameObject.Destroy(layer.gameObject);
                 Queues.RemoveAt(toRemoveIndex);
-                Debug.Log("Layer destroied :" + index);
             }
         }
     }

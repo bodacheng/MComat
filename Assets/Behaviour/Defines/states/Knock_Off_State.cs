@@ -31,7 +31,7 @@ namespace Soul
             dropped = false;
             canWakeUp = false;
             _BasicPhysicSupport.SetUsingGravity(false);
-            _FightAttriCalRef.Gettingdamage = true;
+            _FightAttriCalRef.GettingDamage = true;
             _Animator.SetFloat("speed", 0f);
             _Animator.applyRootMotion = false;
             _Weapon_Animation_Events.ClearMarkerManagers();
@@ -55,7 +55,7 @@ namespace Soul
             base.AI_State_exit();
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _BasicPhysicSupport.SetUsingGravity(true);
-            _FightAttriCalRef.Gettingdamage = false;
+            _FightAttriCalRef.GettingDamage = false;
             _SkillCancelFlag.turn_off_flag();
         }
 

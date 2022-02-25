@@ -73,7 +73,7 @@ public class SKillAnalyzerGUI : EditorWindow
             PlayFabClientAPI.ExecuteCloudScript(
                 new ExecuteCloudScriptRequest()
                 {
-                    FunctionName = "arenaPointUpBy1",
+                    FunctionName = "ArenaPointUp",
                     GeneratePlayStreamEvent = true
                 },
                 (ExecuteCloudScriptResult result) => {

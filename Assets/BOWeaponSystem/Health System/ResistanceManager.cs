@@ -8,7 +8,7 @@ public class ResistanceManager : MonoBehaviour
     public Data_Center data_Center;
     
     int temp;
-    readonly List<SingleAssignmentDisposable> disposabletasks = new List<SingleAssignmentDisposable>();
+    readonly List<SingleAssignmentDisposable> disposableTasks = new List<SingleAssignmentDisposable>();
 
     Color ResistColor;
     
@@ -40,10 +40,10 @@ public class ResistanceManager : MonoBehaviour
                     }
                 }
             }
-        );
+        ).AddTo(this.gameObject);
     }
     
-    Color speedbuff = new Color(0.2f, 0.2f, 1f);
+    Color speedBuff = new Color(0.2f, 0.2f, 1f);
     public void ResistanceUp(AnimationEvent R)
     {
         Resistance.Value += R.intParameter;                      
@@ -67,7 +67,7 @@ public class ResistanceManager : MonoBehaviour
                 }, eventEnd);
                 temp = Resistance.Value;
                 var disposable = new SingleAssignmentDisposable();
-                disposabletasks.Add(disposable);
+                disposableTasks.Add(disposable);
                 disposable.Disposable = Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
@@ -83,7 +83,7 @@ public class ResistanceManager : MonoBehaviour
                 {
                     data_Center._SkillCancelFlag.turn_on_flag();
                     Resistance.Value += 1;
-                    data_Center._ShaderManager.FlatColor(0.5f, speedbuff);
+                    data_Center._ShaderManager.FlatColor(0.5f, speedBuff);
                     data_Center.Animation_Manger.Speed = 2f;
                     EffectsManager.GenerateEffect("speedupbuff", "defaultmagic", data_Center.WholeT.position, data_Center.WholeT.rotation, data_Center.WholeT);
                 };
@@ -102,7 +102,7 @@ public class ResistanceManager : MonoBehaviour
                      }, eventEnd3);
                 temp = Resistance.Value;
                 var disposable3 = new SingleAssignmentDisposable();
-                disposabletasks.Add(disposable3);
+                disposableTasks.Add(disposable3);
                 disposable3.Disposable = Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
@@ -123,10 +123,10 @@ public class ResistanceManager : MonoBehaviour
                     data_Center._SkillCancelFlag.turn_on_flag();
                     Resistance.Value = 0;
                 };
-                CustomCoroutine eventCoroutine2 = new CustomCoroutine(eventStart2, 0.2f, eventEnd2);
+                var eventCoroutine2 = new CustomCoroutine(eventStart2, 0.2f, eventEnd2);
                 temp = Resistance.Value;
                 var disposable2 = new SingleAssignmentDisposable();
-                disposabletasks.Add(disposable2);
+                disposableTasks.Add(disposable2);
                 disposable2.Disposable = Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
@@ -142,16 +142,16 @@ public class ResistanceManager : MonoBehaviour
     
     public void ResistanceClear()
     {
-        if (disposabletasks.Count > 0)
+        if (disposableTasks.Count > 0)
         {
-            foreach (SingleAssignmentDisposable _d in disposabletasks)
+            foreach (SingleAssignmentDisposable _d in disposableTasks)
             {
                 if (!_d.IsDisposed)
                 {
                     _d.Dispose();
                 }
             }
-            disposabletasks.Clear();
+            disposableTasks.Clear();
         }
         Resistance.Value = 0;
     }

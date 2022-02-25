@@ -23,7 +23,6 @@ public partial class SingleThreadProcesser : MonoBehaviour
             yield break;
         }
         coroutineQueue.Add(origin);
-        Debug.Log(coroutineQueue.Count);
         while (coroutineQueue.IndexOf(origin) > 0)
         {
             yield return new WaitForSeconds(0.01f);

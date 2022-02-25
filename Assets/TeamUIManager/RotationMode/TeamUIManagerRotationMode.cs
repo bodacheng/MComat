@@ -100,7 +100,7 @@ namespace FightScene
                 {
                     if (RMode_Unit != null && _changeTo != null)//继承hit数
                     {
-                        _changeTo.FightDataRef._ComboHitCount.HitCount.Value = RMode_Unit.FightDataRef._ComboHitCount.HitCount.Value;
+                        _changeTo.FightDataRef.ComboHitCount.HitCount.Value = RMode_Unit.FightDataRef.ComboHitCount.HitCount.Value;
                     }
                     Sensor.AddOrRemoveSharedUnits(RMode_Unit, this.teamConfig.myTeam, false);
                     Sensor.AddOrRemoveSharedUnits(_changeTo, this.teamConfig.myTeam, true);

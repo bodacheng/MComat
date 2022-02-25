@@ -6,28 +6,28 @@ using Log;
 
 public partial class FightAttriCalReference
 {
-    public static List<Collider> AllMeatColliders = new List<Collider>();
+    public static readonly List<Collider> AllMeatColliders = new List<Collider>();
     
     public Data_Center _Center;
     public float AT = 10;
     public CriticalGaugeMode criticalGaugeMode;
     
     public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
-    public ComboHitCount _ComboHitCount = new ComboHitCount();
+    public readonly ComboHitCount ComboHitCount = new ComboHitCount();
     readonly KnockOffCount _knockOffCount = new KnockOffCount();
     readonly BeHitCount _BeHitCount = new BeHitCount();
     readonly List<BO_Limb> myLimbs = new List<BO_Limb>();
     readonly List<E_Damage> Event_Damage_List = new List<E_Damage>();
     readonly List<V_Damage> ICauseDamages = new List<V_Damage>();
     readonly List<Collider> myColliders = new List<Collider>();
-    readonly List<E_Damage> Event_Attack_Successed_List = new List<E_Damage>();
+    readonly List<E_Damage> _eventAttackSuccessList = new List<E_Damage>();
     
     // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
     
     public bool Invincible { get; set; }
-    public bool Gettingdamage { get; set; }
-
+    public bool GettingDamage { get; set; }
+    
     public void INI()
     {
         Clear();
@@ -44,7 +44,7 @@ public partial class FightAttriCalReference
     public void HealthBodyFixedUpdate()
     {
         _knockOffCount.Update();
-        _ComboHitCount.Update();
+        ComboHitCount.Update();
         _BeHitCount.Update();
     }
 
@@ -172,7 +172,7 @@ public partial class FightAttriCalReference
         }
         
         _dmg.attacker.HitCountPlus(this);
-        _ComboHitCount.HitCountInterrupt();
+        ComboHitCount.HitCountInterrupt();
         _BeHitCount.BeHitCountPlus();
         
         _d = _dmg.from_weapon.GetDamageAmount();
@@ -198,7 +198,7 @@ public partial class FightAttriCalReference
     // 打别人计数
     public void HitCountPlus(FightAttriCalReference victim)
     {
-        _ComboHitCount.HitCountPlus(_BeHitCount);
+        ComboHitCount.HitCountPlus(_BeHitCount);
         _Center._MyBehaviorRunner.SingleFightLog.WriteLog(
             new Soul.SingleFightLog.PositiveRecord
             {
@@ -223,7 +223,7 @@ public partial class FightAttriCalReference
     }
     public void EventAttackHitApprove(E_Damage e)
     {
-        Event_Attack_Successed_List.Add(e);
+        _eventAttackSuccessList.Add(e);
     }
     public void AddEventDamageList(E_Damage e)
     {
@@ -236,7 +236,7 @@ public partial class FightAttriCalReference
     }
     public List<E_Damage> ReturnApprovedEventAttackAttempts()
     {
-        return Event_Attack_Successed_List;
+        return _eventAttackSuccessList;
     }
     
     Color damagecolor;

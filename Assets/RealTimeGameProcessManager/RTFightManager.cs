@@ -39,8 +39,6 @@ namespace FightScene
             target = this;
         }
         
-
-        
         public void SwitchToWatchMode() // button behaviour
         {
             SwitchToCMode(null, false);
@@ -285,22 +283,22 @@ namespace FightScene
                 _CameraManager.CurrentMode.SetMeCenter(focusingUnit.WholeT);
             }
         }
-
-        public void ClearUI()
+        
+        public void ClearUIAndData()
         {
             foreach (var one in Team1Members.GetValues())
             {
-                one.FightDataRef.Clear(); // 这一项也属于UI
+                one.CleanClear();
             }
             foreach (var one in Team2Members.GetValues())
             {
-                one.FightDataRef.Clear();
+                one.CleanClear();
             }
             team1UI.Clear();
             team2UI.Clear();
             MobileInputsManager.target.Clear();
         }
-
+        
         public void ClearUnits()
         {
             foreach (var one in Team1Members.GetValues())

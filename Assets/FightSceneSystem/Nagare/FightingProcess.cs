@@ -72,7 +72,7 @@ namespace FightScene
             {
                 UILayerLoader.Remove("FightingStepLayer");
             }
-            RTFightManager.target.ClearUI();
+            RTFightManager.target.ClearUIAndData();
             FightLogger.value.WatchMissionsAbandon();
         }
 

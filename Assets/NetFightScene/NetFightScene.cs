@@ -130,7 +130,7 @@ namespace FightScene
             {
                 one.CleanClear();
             }
-            RTFightManager.target.ClearUI();
+            RTFightManager.target.ClearUIAndData();
             RTFightManager.target.ClearUnits();
             FightLogger.value.WatchMissionsAbandon();
             FSceneProcessesRunner.Main.Clear();

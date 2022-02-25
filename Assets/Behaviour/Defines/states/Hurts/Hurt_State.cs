@@ -60,7 +60,7 @@ namespace Soul
         public override void AI_State_exit()
         {
             base.AI_State_exit();
-            _FightAttriCalRef.Gettingdamage = false;
+            _FightAttriCalRef.GettingDamage = false;
             if (physicMissionDisposable != null && !physicMissionDisposable.IsDisposed)
                 physicMissionDisposable.Dispose();
             if (_BuffsRunner.Freesing)
@@ -77,7 +77,7 @@ namespace Soul
             base.AI_State_enter();
             _Animator.applyRootMotion = false;
             PlayHurtAnim(newValue);
-            _FightAttriCalRef.Gettingdamage = true;
+            _FightAttriCalRef.GettingDamage = true;
             _Weapon_Animation_Events.ClearMarkerManagers();
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             TimeCounter = 0f;

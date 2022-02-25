@@ -15,10 +15,10 @@ public partial class Data_Center : MonoBehaviour
     public Transform geometryCenter;
     public Transform WholeT;
     public AudioSource _AudioSource;
-    public Sensor Sensor = new Sensor();
-    public Animation_Manger Animation_Manger = new Animation_Manger();
-    public FightAttriCalReference FightDataRef = new FightAttriCalReference();
-    public BuffsRunner buffsRunner = new BuffsRunner();
+    public readonly Sensor Sensor = new Sensor();
+    public readonly Animation_Manger Animation_Manger = new Animation_Manger();
+    public readonly FightAttriCalReference FightDataRef = new FightAttriCalReference();
+    public readonly BuffsRunner buffsRunner = new BuffsRunner();
     public SkillCancelFlag _SkillCancelFlag;
     public BO_Ani_E _BO_Ani_E;
     public BO_Weapon_Animation_Events bO_Weapon_Animation_Events;
@@ -185,7 +185,7 @@ public partial class Data_Center : MonoBehaviour
             _SkillCancelFlag.hiddenMethods.SkillCancelFlagFixedUpdate();
         }
     }
-   
+    
     public void CleanClear()
     {
         _BasicPhysicSupport.hiddenMethods.Grounded = true;
@@ -195,10 +195,11 @@ public partial class Data_Center : MonoBehaviour
         Sensor.Stop();
         bO_Weapon_Animation_Events.ClearMarkerManagers();
         buffsRunner.EndAllCoroutines();
+        _ResistanceManager.Resistance.Dispose();
         _ResistanceManager.ResistanceClear();
         _BasicPhysicSupport.hiddenMethods.ResetAnimator();
-        Animation_Manger.PlayLayerAnim(null, false, 0f);
         Personality_events.CloseAllPersonalityEffects();
+        FightDataRef.Clear();
     }
 
     float p1_to_me, p2_to_me;

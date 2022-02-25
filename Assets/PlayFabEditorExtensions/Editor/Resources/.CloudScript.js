@@ -52,6 +52,16 @@ handlers.buildBasicData = function (args, context) {
     return { messageValue: updateUserDataResult };
 };
 
+handlers.sendPassResetMail = function(args, context) {
+
+    var email = args.email;
+    var result = server.SendAccountRecoveryEmail({
+            Email : email
+        });
+    
+    return {result};
+}
+
 handlers.completedLevel = function (args, context) {
 
     var playerData = server.GetUserReadOnlyData({
@@ -329,7 +339,7 @@ handlers.ArenaPointUp = function (args, context) {
     var resultleaderboard = server.GetLeaderboardAroundUser(
         {
             PlayFabID: currentPlayerId,
-            StatisticName : args.Leaderboardname,
+            StatisticName : "arenapoint",
             MaxResultsCount : 1
         });
 
@@ -339,12 +349,11 @@ handlers.ArenaPointUp = function (args, context) {
             if (element.PlayFabId == currentPlayerId)
             {
                 PlayerPosition = element.Position;
-                return;
             }
         });
     }
     
-    return { "arenapoint" : point };
+    return { "currentPoint" : point };
 };
 
 handlers.Gotcha = function (args, context) {

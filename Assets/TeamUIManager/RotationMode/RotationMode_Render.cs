@@ -7,9 +7,9 @@ namespace FightScene
     {
         void RefreshComboHitRotationMode(Data_Center _datacenter)
         {
-            if (_datacenter.FightDataRef._ComboHitCount.HitCount.Value > 1)
+            if (_datacenter.FightDataRef.ComboHitCount.HitCount.Value > 1)
             {
-                rotationModeHitCombo.text = _datacenter.FightDataRef._ComboHitCount.HitCount.Value.ToString() + "Hits!";
+                rotationModeHitCombo.text = _datacenter.FightDataRef.ComboHitCount.HitCount.Value.ToString() + "Hits!";
                 rotationModeHitCombo.transform.DOMove(CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 3.2f), 0.2f);
             }
             else

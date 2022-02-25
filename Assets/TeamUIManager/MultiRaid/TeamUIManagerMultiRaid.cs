@@ -81,8 +81,8 @@ namespace FightScene
                     RefreshResistanceBar(center);
                 });
                 
-                center.FightDataRef._ComboHitCount.HitCount.Value = 0;
-                center.FightDataRef._ComboHitCount.HitCount.Subscribe(x =>
+                center.FightDataRef.ComboHitCount.HitCount.Value = 0;
+                center.FightDataRef.ComboHitCount.HitCount.Subscribe(x =>
                 {
                     RefreshComboHitMultiRaid(center);
                 });
@@ -102,9 +102,9 @@ namespace FightScene
         void RefreshComboHitMultiRaid(Data_Center _datacenter)
         {
             Text comboText = multiRaidHitComboDic[_datacenter];
-            if (_datacenter.FightDataRef._ComboHitCount.HitCount.Value > 1)
+            if (_datacenter.FightDataRef.ComboHitCount.HitCount.Value > 1)
             {
-                comboText.text = _datacenter.FightDataRef._ComboHitCount.HitCount.Value.ToString() + "Hits!";
+                comboText.text = _datacenter.FightDataRef.ComboHitCount.HitCount.Value.ToString() + "Hits!";
                 comboText.transform.DOMove(CameraManager._camera.WorldToScreenPoint(_datacenter.transform.position + Vector3.up * 1f + Vector3.right * 3.2f), 0.2f);
             }
             else

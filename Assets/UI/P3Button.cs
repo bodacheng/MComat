@@ -11,6 +11,12 @@ using UnityEditor;
 using UnityEditor.UI;
 #endif
 
+public enum SeType
+{
+    // UI
+    None
+}
+
 public class P3Button : Button
 {
     static System.Action<string> playSe;
@@ -48,6 +54,9 @@ public class P3Button : Button
     private bool activateDoubleClick = false;
     [SerializeField]
     private bool activateHold = false;
+    [SerializeField]
+    private SeType sound = default;
+    
     [SerializeField]
     private Sprite disableSprite = default;
 

@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 630895818360624098}
   - component: {fileID: 7072365312884837822}
   m_Layer: 5
-  m_Name: charImage
+  m_Name: unitImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1a56609055c8b4decb05ef2a1df531f1, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 3279113425697876584}
   - component: {fileID: 1508132554999086653}
   m_Layer: 5
-  m_Name: CellPretab
+  m_Name: CellPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -252,6 +252,7 @@ MonoBehaviour:
   image: {fileID: 2362666687670186532}
   empty: {r: 0, g: 0, b: 0, a: 0}
   full: {r: 0, g: 0, b: 0, a: 0}
+  level: {fileID: 0}
 --- !u!114 &3833071541687767738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,10 +363,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 741206115235347104}
-  - component: {fileID: 7985370638110382876}
   - component: {fileID: 4338741685466584463}
+  - component: {fileID: 3103226496827703723}
   m_Layer: 5
-  m_Name: usingChar
+  m_Name: usingUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -392,16 +393,63 @@ RectTransform:
   m_AnchoredPosition: {x: 54, y: -55}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7985370638110382876
+--- !u!114 &4338741685466584463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4037095681978422865}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f5fc7666625b540648a213edfd751783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconButton: {fileID: 3103226496827703723}
+  Icon: {fileID: 7072365312884837822}
+  frame: {fileID: 5454514250545940457}
+  cooldownCurtain: {fileID: 0}
+  unitInfo:
+    id: 
+    r_id: 
+    level: 0
+    set:
+      a1: 
+      a2: 
+      a3: 
+      b1: 
+      b2: 
+      b3: 
+      c1: 
+      c2: 
+      c3: 
+  unitConfig:
+    RECORD_ID: 
+    TYPE: 
+    REAL_NAME: 
+    showNameEN: 
+    showNameCN: 
+    showNameJP: 
+    _zokusei: 2
+    SPECIAL_ZOKUSEI: 
+    BASIC_MOVEMENT_PACK: basic_anim
+    MoveType: 1
+    RushType: 2
+    DEFENDABLE_FLAG: 1
+    InstructionEN: 
+    InstructionCH: 
+    InstructionJP: 
+    RARITY_LEVEL: 3
+--- !u!114 &3103226496827703723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4037095681978422865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06d2816ba830496b87fa3769f55cfb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -436,61 +484,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4338741685466584463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4037095681978422865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5fc7666625b540648a213edfd751783, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconButton: {fileID: 7985370638110382876}
-  Icon: {fileID: 7072365312884837822}
-  frame: {fileID: 5454514250545940457}
-  cooldownCurtain: {fileID: 0}
-  unitInfo:
-    id: 
-    r_id: 
-    set:
-      a1: 
-      a2: 
-      a3: 
-      b1: 
-      b2: 
-      b3: 
-      c1: 
-      c2: 
-      c3: 
-      A1lv: 0
-      A2lv: 0
-      A3lv: 0
-      B1lv: 0
-      B2lv: 0
-      B3lv: 0
-      C1lv: 0
-      C2lv: 0
-      C3lv: 0
-  _CharConfig:
-    RECORD_ID: 
-    TYPE: 
-    REAL_NAME: 
-    showNameEN: 
-    showNameCN: 
-    showNameJP: 
-    _zokusei: 2
-    SPECIAL_ZOKUSEI: 
-    BASIC_MOVEMENT_PACK: basic_anim
-    MoveType: 1
-    RushType: 2
-    DEFENDABLE_FLAG: 1
-    InstructionEN: 
-    InstructionCH: 
-    InstructionJP: 
-    RARITY_LEVEL: 3
+  doubleClick:
+    m_PersistentCalls:
+      m_Calls: []
+  hold:
+    m_PersistentCalls:
+      m_Calls: []
+  disableTransitionOverride: 0
+  activateDoubleClick: 0
+  activateHold: 0
+  sound: 0
+  disableSprite: {fileID: 0}
+  text: {fileID: 0}
 --- !u!1 &8622753969618814232
 GameObject:
   m_ObjectHideFlags: 0
