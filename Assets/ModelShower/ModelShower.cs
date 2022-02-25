@@ -29,6 +29,7 @@ public class ModelShower : MonoBehaviour
         if (model != null)
         {
             DestroyImmediate(model);
+            model = null;
         }
         if (recordID == null)
         {

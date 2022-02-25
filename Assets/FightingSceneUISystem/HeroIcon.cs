@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Api.Dto.Model;
-using System.Collections;
 using dataAccess;
 using UnityEngine.Serialization;
 

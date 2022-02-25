@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Events;
 
 public partial class SingleThreadProcesser : MonoBehaviour
 {
@@ -19,12 +17,18 @@ public partial class SingleThreadProcesser : MonoBehaviour
     
     IEnumerator _RunAsQueued(IEnumerator origin)
     {
-        coroutineQueue.Add(origin);
-        while (coroutineQueue.IndexOf(origin) != 0)
+        if (coroutineQueue.Contains(origin))
         {
-            yield return null;
+            Debug.Log(":" + coroutineQueue.Count);
+            yield break;
         }
-        yield return origin;
-        coroutineQueue.Remove(origin);
+        coroutineQueue.Add(origin);
+        Debug.Log(coroutineQueue.Count);
+        while (coroutineQueue.IndexOf(origin) > 0)
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
+        yield return coroutineQueue[0];
+        coroutineQueue.RemoveAt(0);
     }
 }

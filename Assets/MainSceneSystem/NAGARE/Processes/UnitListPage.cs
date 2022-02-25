@@ -36,14 +36,12 @@ public class UnitListPage : MainSceneProcess
         
         void UnitIconBtn(string instanceId)
         {
-            UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
-            unitsLayer.Select(instanceId);
+            layer.Select(instanceId);
             PreScene.target.SetFocusingUnit(instanceId);
             unitOptionLayer.RefreshMemberDetailPageByFocusingChar();
         }
         
-        UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
-        unitsLayer.SetUnitsIconOnClick(UnitIconBtn);
+        layer.SetUnitsIconOnClick(UnitIconBtn);
         
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
