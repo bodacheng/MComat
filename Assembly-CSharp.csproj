@@ -290,6 +290,7 @@
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\Gotcha\GotchaResultLayer\GotchaResultLayer.cs" />
      <Compile Include="Assets\Camera\Modes\OneVOneModeNew.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Fix\UIElementInFront.cs" />
+     <Compile Include="Assets\UI\P3Button.cs" />
      <Compile Include="Assets\CSV2Table\Demo\SampleTable.cs" />
      <Compile Include="Assets\POS_Sys\Child_Label.cs" />
      <Compile Include="Assets\Camera\Modes\keepTargetLeftCamera.cs" />

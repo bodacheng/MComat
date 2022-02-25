@@ -44,7 +44,7 @@ namespace TouchScript.Gestures
         private EventHandler<EventArgs> tappedInvoker;
         
         // 伯大成
-        public void Clear()
+        public void ClearEvent()
         {
             if (tappedInvoker != null)
             foreach(Delegate d in tappedInvoker.GetInvocationList())

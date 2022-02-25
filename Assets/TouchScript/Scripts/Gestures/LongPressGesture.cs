@@ -44,7 +44,7 @@ namespace TouchScript.Gestures
         private EventHandler<EventArgs> longPressedInvoker;
 
         // 伯大成
-        public void Clear()
+        public void ClearEvent()
         {
             if (longPressedInvoker != null)
             foreach(Delegate d in longPressedInvoker.GetInvocationList())

@@ -59,9 +59,9 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
 
     public void ClearGestureFeature()
     {
-        lpGesture.Clear();
-        pGesture.Clear();
-        tGesture.Clear();
+        lpGesture.ClearEvent();
+        pGesture.ClearEvent();
+        tGesture.ClearEvent();
     }
     
     /// <summary>

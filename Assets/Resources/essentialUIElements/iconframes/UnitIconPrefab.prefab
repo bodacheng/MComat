@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4599398632650404798}
   - component: {fileID: 4599398632650404793}
-  - component: {fileID: 4599398632650404794}
   - component: {fileID: 147610238414042690}
+  - component: {fileID: 6501208325774646822}
   m_Layer: 5
   m_Name: UnitIconPrefab
   m_TagString: Untagged
@@ -52,36 +52,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fc7666625b540648a213edfd751783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconButton: {fileID: 4599398632650404794}
+  iconButton: {fileID: 6501208325774646822}
   Icon: {fileID: 4599398633655188732}
   frame: {fileID: 7186568799583915067}
   cooldownCurtain: {fileID: 0}
-  CharDataInfo:
-    monsterOfPlayerId: 
-    ResourceID: 
-    _NineAndTwo:
-      A1skillid: 
-      A2skillid: 
-      A3skillid: 
-      B1skillid: 
-      B2skillid: 
-      B3skillid: 
-      C1skillid: 
-      C2skillid: 
-      C3skillid: 
-      A1level: 0
-      A2level: 0
-      A3level: 0
-      B1level: 0
-      B2level: 0
-      B3level: 0
-      C1level: 0
-      C2level: 0
-      C3level: 0
-      canDefend: 0
-      moveType: 1
-      rushType: 3
-  _CharConfig:
+  unitInfo:
+    id: 
+    r_id: 
+    level: 0
+    set:
+      a1: 
+      a2: 
+      a3: 
+      b1: 
+      b2: 
+      b3: 
+      c1: 
+      c2: 
+      c3: 
+  unitConfig:
     RECORD_ID: 
     TYPE: 
     REAL_NAME: 
@@ -98,7 +87,15 @@ MonoBehaviour:
     InstructionCH: 
     InstructionJP: 
     RARITY_LEVEL: 3
---- !u!114 &4599398632650404794
+--- !u!222 &147610238414042690
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4599398632650404797}
+  m_CullTransparentMesh: 0
+--- !u!114 &6501208325774646822
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,11 +104,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4599398632650404797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f06d2816ba830496b87fa3769f55cfb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -134,21 +132,24 @@ MonoBehaviour:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
-    m_SelectedTrigger: Highlighted
+    m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 7186568799583915067}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!222 &147610238414042690
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4599398632650404797}
-  m_CullTransparentMesh: 0
+  doubleClick:
+    m_PersistentCalls:
+      m_Calls: []
+  hold:
+    m_PersistentCalls:
+      m_Calls: []
+  disableTransitionOverride: 0
+  activateDoubleClick: 0
+  activateHold: 0
+  disableSprite: {fileID: 0}
+  text: {fileID: 0}
 --- !u!1 &4599398633655188610
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +162,7 @@ GameObject:
   - component: {fileID: 4599398633655188733}
   - component: {fileID: 4599398633655188732}
   m_Layer: 5
-  m_Name: charimage
+  m_Name: unitImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,6 +210,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -283,6 +285,7 @@ MonoBehaviour:
   m_Material: {fileID: 2100000, guid: fbaa37cd5f9454710a0fdef876aefeff, type: 2}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

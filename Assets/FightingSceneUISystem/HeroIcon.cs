@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 public class HeroIcon : MonoBehaviour {
 
-    public Button iconButton;
+    public P3Button iconButton;
     public Image Icon;
     public Image frame;
     public Image cooldownCurtain;
