@@ -55,9 +55,6 @@ public class FrontPage : MainSceneProcess
     FrontLayer frontLayer;
     IEnumerator EnterProcess()
     {
-        HurtObjectManager.Clear();
-        EffectsManager.Clear();
-        
         frontLayer = UILayerLoader.Load(PreScene.target.T, "FrontLayer") as FrontLayer;
         frontLayer.Initialise(PreScene.target);
         

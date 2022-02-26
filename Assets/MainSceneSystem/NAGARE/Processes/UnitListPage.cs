@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using mainMenu;
 using dataAccess;
-using DummyLayerSystem;
 
 public class UnitListPage : MainSceneProcess
 {
@@ -18,6 +17,9 @@ public class UnitListPage : MainSceneProcess
 
     public override void ProcessEnter()
     {
+        HurtObjectManager.Clear();
+        EffectsManager.Clear();
+        
         loadFinished = false;
         switch (PlayerAccountInfo.Me.progress)
         {

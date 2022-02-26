@@ -14,9 +14,6 @@ public class PreparingProcess : FSceneProcess
     
     IEnumerator EnterProcess()
     {
-        HurtObjectManager.Clear();
-        EffectsManager.Clear();
-        
         //RealTimeGameProcessManager.target._CameraManager.Assign_SToEMode(NetFightScene.target.WatchTeam2.position, NetFightScene.target.Team2StandPoints[0], 3f, 50f);
         CameraManager._camera.transform.position = CameraManager._StartPosRef.transform.position;
         CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
