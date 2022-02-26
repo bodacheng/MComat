@@ -6,7 +6,17 @@ using UnityEngine.Animations;
 public partial class EffectsManager
 {
     // 以下的重点是主界面和战斗界面通用问题
-    static IDictionary<string, DecompositionerPool> EffectPoolsDic = new Dictionary<string, DecompositionerPool>();        
+    static readonly IDictionary<string, DecompositionerPool> EffectPoolsDic = new Dictionary<string, DecompositionerPool>();
+
+    public static void Clear()
+    {
+        foreach (var pool in EffectPoolsDic)
+        {
+            pool.Value.Clear();
+        }
+        EffectPoolsDic.Clear();
+    }
+    
     public static Decompositioner GenerateEffect(string resource_name, string EffectsPath, Vector3 Pos, Quaternion Qua, Transform parentsetT)
     {
         if (string.IsNullOrEmpty(resource_name))
@@ -33,11 +43,11 @@ public partial class EffectsManager
         return processingEffectObj;
     }
         
-    public static DecompositionerPool ConstructEffectPoolWithPrefabAndKey(GameObject prefab, string key, int ini_count)
+    static DecompositionerPool ConstructEffectPoolWithPrefabAndKey(GameObject prefab, string key, int ini_count)
     {
         if (prefab != null)
         {
-            DecompositionerPool poolToConstruct = new DecompositionerPool(prefab);
+            var poolToConstruct = new DecompositionerPool(prefab);
             poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => {});//Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件")
             if (EffectPoolsDic.ContainsKey(key))
                 EffectPoolsDic[key] = poolToConstruct;

@@ -139,7 +139,6 @@ namespace FightScene
         
         public override void ProcessEnd()
         {
-            HurtObjectManager.ClearCurrent();
         }
         
         void LocalGameRestart()

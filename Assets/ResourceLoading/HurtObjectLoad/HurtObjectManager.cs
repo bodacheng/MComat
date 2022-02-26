@@ -5,30 +5,32 @@ using UniRx;
 
 public partial class HurtObjectManager
 {
-    static DecompositionerPool default_hitboxPool;
-    static IDictionary<string, DecompositionerPool> HurtPoolDic = new Dictionary<string, DecompositionerPool>();
+    static DecompositionerPool default_hitBoxPool;
+    static readonly IDictionary<string, DecompositionerPool> HurtPoolDic = new Dictionary<string, DecompositionerPool>();
+    
     
     public static DecompositionerPool GetDPool()
     {
-        return default_hitboxPool;
+        return default_hitBoxPool;
     }
     
-    public static void ClearCurrent()
+    public static void Clear()
     {
-        foreach (KeyValuePair<string, DecompositionerPool> keyValuePair in HurtPoolDic)
+        foreach (var keyValuePair in HurtPoolDic)
         {
-            keyValuePair.Value.Clear(false);
+            keyValuePair.Value.Clear();
         }
+        HurtPoolDic.Clear();
     }
     
     // 默认攻击物件池的创建
     public static void ConstructDPool()
     {
-        if (default_hitboxPool == null)
+        if (default_hitBoxPool == null)
         {
-            GameObject hurtObject = Resources.Load("HurtObjects/defaultmagic/d_hitbox") as GameObject;
-            default_hitboxPool = new DecompositionerPool(hurtObject);
-            default_hitboxPool.PreloadAsync(20, 1).Subscribe(_ => Debug.Log("已经为对象池:d_hitbox预留物件"));
+            var hurtObject = Resources.Load("HurtObjects/defaultmagic/d_hitbox") as GameObject;
+            default_hitBoxPool = new DecompositionerPool(hurtObject);
+            default_hitBoxPool.PreloadAsync(20, 1).Subscribe(_ => Debug.Log("已经为对象池:d_hitbox预留物件"));
         }
     }
 
@@ -45,7 +47,6 @@ public partial class HurtObjectManager
             case ResourceLoadMode.StreamingAssetAB:
             break;
          }
-        yield break;
     }
     
     static DecompositionerPool HurtObjectPool;
@@ -92,11 +93,11 @@ public partial class HurtObjectManager
         return null;
     }
     
-    public static DecompositionerPool ConstructHitBoxPoolWithPrefabAndKey(GameObject prefab, string key, int ini_count)
+    static DecompositionerPool ConstructHitBoxPoolWithPrefabAndKey(GameObject prefab, string key, int ini_count)
     {
         if (prefab != null)
         {
-            DecompositionerPool poolToConstruct = new DecompositionerPool(prefab);
+            var poolToConstruct = new DecompositionerPool(prefab);
             poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => {});//Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件")
     
             if (HurtPoolDic.ContainsKey(key))

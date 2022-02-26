@@ -13,8 +13,8 @@ public partial class EffectsManager
                 if (EffectPool != null)
                     return EffectPool;
             }
-        
-            GameObject EffectPrefab = Resources.Load("Effects/" + EffectsPath + "/" + resource_name, typeof(GameObject)) as GameObject;
+            
+            var EffectPrefab = Resources.Load("Effects/" + EffectsPath + "/" + resource_name, typeof(GameObject)) as GameObject;
             if (EffectPrefab != null)
             {
                 EffectPool = ConstructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects/" + EffectsPath + "/" + resource_name,object_count);

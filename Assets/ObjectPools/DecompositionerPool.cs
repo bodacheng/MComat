@@ -16,7 +16,6 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         if (Marker == null)
         {
             Marker = new GameObject("Object Pools Container");
-            UnityEngine.Object.DontDestroyOnLoad(Marker);
         }
         Prefab = prefab;
     }
@@ -85,12 +84,12 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
     // オブジェクトが空のときにInstantiateする関数
     protected override Decompositioner CreateInstance()
     {
-        GameObject a = UnityEngine.Object.Instantiate(Prefab);
+        var a = UnityEngine.Object.Instantiate(Prefab);
         a.transform.SetParent(Marker.transform);
-        Decompositioner decompositioner = a.GetComponent<Decompositioner>();
-        HitBoxManager BBMM = a.GetComponent<HitBoxManager>();
-        TrackControl danMuTest = a.GetComponent<TrackControl>();
-        PositionConstraint PC = a.GetComponent<PositionConstraint>();
+        var decompositioner = a.GetComponent<Decompositioner>();
+        var BBMM = a.GetComponent<HitBoxManager>();
+        var danMuTest = a.GetComponent<TrackControl>();
+        var PC = a.GetComponent<PositionConstraint>();
         if (PC == null)
         {
             PC = a.AddComponent<PositionConstraint>();
@@ -98,7 +97,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
             PC.weight = 1;
         }
         
-        Rigidbody RG = a.GetComponent<Rigidbody>();//不加刚体的话很多情况下collider的检测类物理函数检测不到
+        var RG = a.GetComponent<Rigidbody>();//不加刚体的话很多情况下collider的检测类物理函数检测不到
         if (RG == null)
         {
             RG = a.AddComponent<Rigidbody>();

@@ -18,7 +18,7 @@ public partial class Decompositioner : MonoBehaviour {
     public string[] Attachments;
 
     #region realtime
-    DecompositionerPool _DecompositionerPool;
+    DecompositionerPool pool;
     PositionConstraint positionConstraint;
     BO_Ani_E BO_Ani_E;
     ParticleSystem to_be_stop_emissions;
@@ -34,9 +34,9 @@ public partial class Decompositioner : MonoBehaviour {
         hasParticle = to_be_stop_emissions != null;
     }
 
-    public void SetPool(DecompositionerPool _DecompositionerPool)
+    public void SetPool(DecompositionerPool pool)
     {
-        this._DecompositionerPool = _DecompositionerPool;
+        this.pool = pool;
     }
 
     public void SetPositionConstraint(PositionConstraint positionConstraint)
@@ -88,7 +88,7 @@ public partial class Decompositioner : MonoBehaviour {
     public void EnergyRessolve()
     {
         StopEmissions(true);
-        _DecompositionerPool.Return(this);
+        pool.Return(this);
     }
     
     public void CloseMarkers()
