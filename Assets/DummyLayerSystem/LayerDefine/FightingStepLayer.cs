@@ -107,13 +107,13 @@ public class FightingStepLayer : UILayer
             
         if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
         {
-            team1UI.TurnAllMembersInvincible(true, RTFightManager.target.Team1Members);
-            team2UI.TurnAllMembersInvincible(true, RTFightManager.target.Team2Members);
+            RTFightManager.target.TurnAllMembersInvincible(true, RTFightManager.target.Team1Members);
+            RTFightManager.target.TurnAllMembersInvincible(true, RTFightManager.target.Team2Members);
         }else{
-            team1UI.TurnAllMembersInvincible(false, RTFightManager.target.Team1Members);
-            team2UI.TurnAllMembersInvincible(false, RTFightManager.target.Team2Members);
+            RTFightManager.target.TurnAllMembersInvincible(false, RTFightManager.target.Team1Members);
+            RTFightManager.target.TurnAllMembersInvincible(false, RTFightManager.target.Team2Members);
         }
-            
+        
         switch (team1UI.TeamMode)
         {
             case TeamMode.multiRaid:

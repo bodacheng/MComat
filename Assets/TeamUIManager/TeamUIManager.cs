@@ -110,15 +110,6 @@ namespace FightScene
             }
         }
         
-        // 全队无敌
-        public void TurnAllMembersInvincible(bool _Invincible, MultiDict<int, int, Data_Center> TeamMembers)
-        {
-            foreach (Data_Center a_char in TeamMembers.GetValues())
-            {
-                a_char.FightDataRef.Invincible = _Invincible;
-            }
-        }
-        
         void RefreshResistanceBar(Data_Center data_Center)
         {
             UnitIconDic.TryGetValue(data_Center, out var _tempSI);

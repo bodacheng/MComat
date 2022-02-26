@@ -167,6 +167,15 @@ namespace FightScene
             }
         }
         
+        // 全队无敌
+        public void TurnAllMembersInvincible(bool _Invincible, MultiDict<int, int, Data_Center> TeamMembers)
+        {
+            foreach (Data_Center a_char in TeamMembers.GetValues())
+            {
+                a_char.FightDataRef.Invincible = _Invincible;
+            }
+        }
+        
         // 战斗模式相机。根据选择队伍做相应调整。
         public void ParaAdjustment(Team myTeam)
         {
