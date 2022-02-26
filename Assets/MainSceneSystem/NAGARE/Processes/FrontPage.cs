@@ -10,37 +10,37 @@ using PlayFab.ClientModels;
 
 public class FrontPage : MainSceneProcess
 {
-    ReactiveProperty<int> userDataLoadFinished = new ReactiveProperty<int>(0);
+    readonly ReactiveProperty<int> userDataLoadFinished = new ReactiveProperty<int>(0);
     void UserDataLoadFinished(int value)
     {
         userDataLoadFinished.Value = value;
     }
 
-    ReactiveProperty<int> userReadOnlyDataLoadLoaded = new ReactiveProperty<int>(0);
+    readonly ReactiveProperty<int> userReadOnlyDataLoadLoaded = new ReactiveProperty<int>(0);
     void UserReadOnlyDataLoadFinished(int value)
     {
         userReadOnlyDataLoadLoaded.Value = value;
     }
 
-    ReactiveProperty<int> statisticsFinished = new ReactiveProperty<int>(0);
+    readonly ReactiveProperty<int> statisticsFinished = new ReactiveProperty<int>(0);
     void StatisticsLoadFinished(int value)
     {
         statisticsFinished.Value = value;
     }
 
-    ReactiveProperty<int> itemsLoadFinished = new ReactiveProperty<int>(0);
+    readonly ReactiveProperty<int> itemsLoadFinished = new ReactiveProperty<int>(0);
     void ItemsLoadFinished(int value)
     {
         itemsLoadFinished.Value = value;
     }
 
-    ReactiveProperty<int> arenaTFinished = new ReactiveProperty<int>(0);
+    readonly ReactiveProperty<int> arenaTFinished = new ReactiveProperty<int>(0);
     void ArenaTFinished(int value)
     {
         arenaTFinished.Value = value;
     }
 
-    ReactiveProperty<int> arcadeTFinished = new ReactiveProperty<int>(0);
+    readonly ReactiveProperty<int> arcadeTFinished = new ReactiveProperty<int>(0);
     void ArcadeTFinished(int value)
     {
         arcadeTFinished.Value = value;
@@ -55,6 +55,9 @@ public class FrontPage : MainSceneProcess
     FrontLayer frontLayer;
     IEnumerator EnterProcess()
     {
+        HurtObjectManager.Clear();
+        EffectsManager.Clear();
+        
         frontLayer = UILayerLoader.Load(PreScene.target.T, "FrontLayer") as FrontLayer;
         frontLayer.Initialise(PreScene.target);
         
@@ -66,7 +69,7 @@ public class FrontPage : MainSceneProcess
         var focus_instanceID = TeamSet.Default.GetInstanceIdOnPos(0);
         if (focus_instanceID == null)
         {
-            foreach (KeyValuePair<string, UnitInfo> keyValuePair in MyMonsters.Dic)
+            foreach (var keyValuePair in MyMonsters.Dic)
             {
                 focus_instanceID = keyValuePair.Key;
                 break;
@@ -75,8 +78,7 @@ public class FrontPage : MainSceneProcess
         PreScene.target.SetFocusingUnit(focus_instanceID);//确立focusing角色
         yield return ModelShower.target.ShowMyModel(focus_instanceID);
         //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
-        UpperInfoBar.Open(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), 
-            () => PreScene.target.trySwitchToStep(10));
+        UpperInfoBar.Open(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), () => PreScene.target.trySwitchToStep(10));
         PopupLayer.Close();
     }
     
@@ -91,12 +93,12 @@ public class FrontPage : MainSceneProcess
             },UserDataLoadFinished);
         PlayFabReadClient.GetUserReadOnlyData(UserReadOnlyDataLoadFinished);
         PlayFabReadClient.GetStatistics(StatisticsLoadFinished);
-
+        
         //AccountCharsSet.LoadTutorial();
         PlayFabReadClient.LoadItems(ItemsLoadFinished);
         PlayFabReadClient.LoadTeamSet("arena", ArenaTFinished);
         PlayFabReadClient.LoadTeamSet("arcade", ArcadeTFinished);
-
+        
         missionWatcher = new MissionWatcher(
             new List<ReactiveProperty<int>>() {
                 userDataLoadFinished, itemsLoadFinished, statisticsFinished, userReadOnlyDataLoadLoaded, arcadeTFinished, arenaTFinished
