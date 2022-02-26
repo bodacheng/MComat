@@ -55,7 +55,7 @@ public partial class CloudScript
                     var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
                     jsonResult.TryGetValue("teamInfos", out var teamInfos);
                     var json = JsonConvert.SerializeObject(teamInfos);
-                    List<LeaderboardInfo> opponents = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(
+                    var opponents = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(
                         json,
                         new JsonSerializerSettings
                         {

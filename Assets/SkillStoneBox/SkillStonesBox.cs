@@ -65,7 +65,6 @@ namespace mainMenu
                     focusingExType = exLevel;
                     RestFilter();
                 });
-                Debug.Log(worldPos);
             }
             await Observable.TimerFrame(5);
             Temp(NormalTab,0);

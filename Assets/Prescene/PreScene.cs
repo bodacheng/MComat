@@ -197,32 +197,27 @@ namespace mainMenu
             stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
             FightLoad.Go(stage);
         }
-
+        
         [EnumAction(typeof(MainSceneStep))]
-        public void trySwitchToStep(int next_step)
+        public void trySwitchToStep(MainSceneStep next_step, bool forward = true)
         {
-            trySwitchToStep((MainSceneStep)next_step, true);
-        }
-
-        [EnumAction(typeof(MainSceneStep))]
-        public void trySwitchToStep(MainSceneStep next_step, bool foward)
-        {
-            if (foward && ProcessesRunner.Main.currentProcess != null)
+            if (forward && ProcessesRunner.Main.currentProcess != null)
             {
                 var returnToStep = ProcessesRunner.Main.currentProcess.Step;
-                void returnTOCurrent()
+                void returnToCurrent()
                 {
                     //Debug.Log("回到：" + returnToStep);
                     trySwitchToStep(returnToStep, false);
                 }
-                ReturnLayer.PUSH(returnTOCurrent);
+                ReturnLayer.PUSH(returnToCurrent);
             }
+            Debug.Log("迁移 ：" + next_step + " ，"+ forward);
             ProcessesRunner.Main.ChangeProcess(next_step);
         }
 
-        public void trySwitchToStep<T>(MainSceneStep next_step, T t, bool foward)
+        public void trySwitchToStep<T>(MainSceneStep next_step, T t, bool forward)
         {
-            if (foward && ProcessesRunner.Main.currentProcess != null)
+            if (forward && ProcessesRunner.Main.currentProcess != null)
             {
                 var returnToStep = ProcessesRunner.Main.currentProcess.Step;
                 void returnTOCurrent()
@@ -231,6 +226,7 @@ namespace mainMenu
                 }
                 ReturnLayer.PUSH(returnTOCurrent);
             }
+            Debug.Log("迁移 ：" + next_step + " ，"+ forward);
             ProcessesRunner.Main.ChangeProcess(next_step, t);
         }
     }

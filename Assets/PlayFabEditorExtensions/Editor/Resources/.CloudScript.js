@@ -244,6 +244,11 @@ handlers.skillEdit = function (args, context) {
 
 handlers.ArenaDefendTeamSave = function (args, context) {
     let members = [];
+    
+    if (args.Team == null) {
+        return { success: false };
+    }
+    
     for (let i = 0; i < args.Team.length; i++) {
         var item = args.Team[i];
         members.push(item);
@@ -285,14 +290,14 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
             PlayFabId: currentPlayerId,
             Statistics: [{
                 StatisticName: "arenapoint",
-                Value: 1000 // 初始值
+                Value: 1000
             }]
         });
     } // 如果玩家没有arenapoint信息，那么返回空列表。让本地完成其他处理
     else
     {
         for (let i = 0; i < Result.Leaderboard.length; i++) {
-
+            
             var playerTeamData = server.GetUserData(
                 {
                     PlayFabId: Result.Leaderboard[i].PlayFabId,
@@ -300,11 +305,14 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
                 }
             );
             
-            var item = {
-                "PlayerLeaderboardEntry": Result.Leaderboard[i],
-                "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value)
-            };
-            teamInfos.push(item);
+            // 玩家可能未曾保存过防御队伍阵容，对这种玩家不返回。
+            if (playerTeamData.Data["DefendTeam"] != null) {
+                var item = {
+                    "PlayerLeaderboardEntry": Result.Leaderboard[i],
+                    "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value)
+                };
+                teamInfos.push(item);
+            }
         }
     }
     

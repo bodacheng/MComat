@@ -204,10 +204,8 @@ public class P3Button : Button
             StopCoroutine(holdWaitCoroutine);
             holdWaitCoroutine = null;
         }
-
-        base.OnPointerUp(eventData);
         
-        Debug.Log("here :"+ eventData);
+        base.OnPointerUp(eventData);
     }
 
     private void ExecuteHold()

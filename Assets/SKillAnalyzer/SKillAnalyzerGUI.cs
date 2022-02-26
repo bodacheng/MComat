@@ -73,17 +73,32 @@ public class SKillAnalyzerGUI : EditorWindow
             PlayFabClientAPI.ExecuteCloudScript(
                 new ExecuteCloudScriptRequest()
                 {
-                    FunctionName = "ArenaPointUp",
+                    FunctionName = "GetLeaderboardAroundUser",
                     GeneratePlayStreamEvent = true
                 },
                 (ExecuteCloudScriptResult result) => {
-                    PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                    Debug.Log(" 竞技场分数增加 返回：" + jsonResult);
+                    var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
+                    Debug.Log(jsonResult);
                 },
                 error => {
                     Debug.Log(error.Error);
                 }
             );
+            
+            // PlayFabClientAPI.ExecuteCloudScript(
+            //     new ExecuteCloudScriptRequest()
+            //     {
+            //         FunctionName = "ArenaPointUp",
+            //         GeneratePlayStreamEvent = true
+            //     },
+            //     (ExecuteCloudScriptResult result) => {
+            //         PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+            //         Debug.Log(" 竞技场分数增加 返回：" + jsonResult);
+            //     },
+            //     error => {
+            //         Debug.Log(error.Error);
+            //     }
+            // );
             
             // PlayFabClientAPI.ExecuteCloudScript(
             //     new ExecuteCloudScriptRequest()

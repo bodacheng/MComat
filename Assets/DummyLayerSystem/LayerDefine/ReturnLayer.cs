@@ -6,29 +6,32 @@ using mainMenu;
 
 public class ReturnLayer : UILayer
 {
-    public Button ReturnButton;
-    static UnityEvent UnityEvent = new UnityEvent();
+    public P3Button ReturnButton;
+    static readonly UnityEvent UnityEvent = new UnityEvent();
     public static readonly List<UnityAction> ReturnMissionList = new List<UnityAction>();
     
-    static ReturnLayer Open()
+    static ReturnLayer Get()
     {
-        UILayer l = UILayerLoader.Get("ReturnLayer");
-        ReturnLayer returnValue;
+        var l = UILayerLoader.Get("ReturnLayer");
+        ReturnLayer returnValue = null;
         if (l != null)
         {
             returnValue = l as ReturnLayer;
+        }
+        return returnValue;
+    }
+    
+    static ReturnLayer Open()
+    {
+        ReturnLayer returnValue = Get();
+        if (returnValue != null)
+        {
             return returnValue;
         }
-        l = UILayerLoader.Load(PreScene.target.T,"ReturnLayer") as ReturnLayer;
-        returnValue = l as ReturnLayer;
+        returnValue = UILayerLoader.Load(PreScene.target.T,"ReturnLayer") as ReturnLayer;
         returnValue.ReturnButton.onClick.RemoveAllListeners();
         returnValue.ReturnButton.onClick.AddListener(POP);
         return returnValue;
-    }
-
-    static void Close()
-    {
-        UILayerLoader.Remove("ReturnLayer");
     }
     
     public static void POP()
@@ -41,13 +44,13 @@ public class ReturnLayer : UILayer
         ReturnMissionList.RemoveAt(ReturnMissionList.Count - 1);
         if (ReturnMissionList.Count == 0)
         {
-            Close();
+            UILayerLoader.Remove("ReturnLayer");
         }
     }
     
-    public static void PUSH(UnityAction onemission)
+    public static void PUSH(UnityAction returnAction)
     {
-        ReturnMissionList.Add(onemission);
+        ReturnMissionList.Add(returnAction);
         Open();
     }
 }

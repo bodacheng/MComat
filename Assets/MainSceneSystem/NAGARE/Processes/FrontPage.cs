@@ -74,8 +74,8 @@ public class FrontPage : MainSceneProcess
         }
         PreScene.target.SetFocusingUnit(focus_instanceID);//确立focusing角色
         yield return ModelShower.target.ShowMyModel(focus_instanceID);
-        //UnitOptionLayer.target.RefreshMemberDetailPageByFocusingChar();
-        UpperInfoBar.Open(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), () => PreScene.target.trySwitchToStep(10));
+        
+        UpperInfoBar.Open(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), () => PreScene.target.trySwitchToStep(MainSceneStep.Setting));
         PopupLayer.Close();
     }
     
