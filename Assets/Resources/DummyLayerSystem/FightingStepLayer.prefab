@@ -2746,8 +2746,8 @@ MonoBehaviour:
   _A_flag: {fileID: 5714480300894342352}
   pauseButton: {fileID: 7415628284172283046}
   cameraSwitchBtn: {fileID: 7415628284503521496}
-  TeamUI1Manager: {fileID: 7415628284493325747}
-  TeamUI2Manager: {fileID: 7415628285627410667}
+  team1UI: {fileID: 7415628284493325747}
+  team2UI: {fileID: 7415628285627410667}
 --- !u!222 &5825260218128078987
 CanvasRenderer:
   m_ObjectHideFlags: 0

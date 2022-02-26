@@ -7,6 +7,8 @@ namespace FightScene
 {
     public class FightingProcess : FSceneProcess
     {
+        FightingStepLayer _layer;
+        
         public FightingProcess()
         {
             Step = SceneStep.Fighting;
@@ -26,6 +28,8 @@ namespace FightScene
             //    DOTween.To(() => ((OneVOneMode)nowC).xzMax, (x) => ((OneVOneMode)nowC).xzMax = x, 16, 3f);
             //}
             
+            _layer = FightingStepLayer.Open();
+            RTFightManager.target.StartControlMode();
             RTFightManager.target.ParaAdjustment(RTFightManager.playerTeam);
             
             if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
@@ -78,8 +82,11 @@ namespace FightScene
 
         public override void LocalUpdate()
         {
-            RTFightManager.target.team1UI.localUpdate(RTFightManager.target.Team1Members);
-            RTFightManager.target.team2UI.localUpdate(RTFightManager.target.Team2Members);
+            if (_layer != null)
+            {
+                _layer.team1UI.localUpdate(RTFightManager.target.Team1Members);
+                _layer.team2UI.localUpdate(RTFightManager.target.Team2Members);
+            }
         }
     }
 }

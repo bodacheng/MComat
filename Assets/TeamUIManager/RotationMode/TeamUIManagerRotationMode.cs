@@ -131,7 +131,7 @@ namespace FightScene
                 RTFightManager.target.SwitchToCMode(RMode_Unit, MobileInputsManager.playerMode);
             }
             RTFightManager.target.ParaAdjustment(RTFightManager.playerTeam);
-            RTFightManager.target.Refresh();
+            Refresh(TeamMembers);
             return unitChanged;
         }
         

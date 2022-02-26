@@ -188,16 +188,6 @@ namespace FightScene
             }
         }
         
-        public bool IfAllCharsPreparedForBattle(MultiDict<int, int, Data_Center> TeamMembers)
-        {
-            foreach (var oneMember in TeamMembers.GetValues())
-            {
-                if (!oneMember.IfPreparedForBattle())
-                    return false;
-            }
-            return true;
-        }
-        
         // 获取该队伍所有账户技能石id（只有在这个队伍是玩家账户队员组成情况下有效）
         public List<string> GetAllUsingStoneOfAcc()
         {

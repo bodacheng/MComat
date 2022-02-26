@@ -14,9 +14,6 @@ namespace FightScene
         [Header("Messages")]
         public Text Messages;
         
-        public TeamUIManager team1UI;
-        public TeamUIManager team2UI;
-        
         public readonly TeamConfig heroTeamConfig = new TeamConfig("1", Team.player1, new List<Team>() { Team.player2 });
         public readonly TeamConfig EnemyTeamConfig = new TeamConfig("2", Team.player2, new List<Team>() { Team.player1 });
         
@@ -59,35 +56,6 @@ namespace FightScene
                 FightingStepLayer.target.RefreshAIFlag(true);
             }
         }
-
-        public void Refresh()//这个刷新是倾向于画面制御
-        {
-            // if (!Auto && focusingChar != null)
-            // {
-            //     _C_button.gameObject.SetActive(true);
-            //     _AI_button.gameObject.SetActive(false);
-            // }
-            // else
-            // {
-            //     _C_button.gameObject.SetActive(false);
-            //     _AI_button.gameObject.SetActive(true);
-            // }
-
-            //autoBUtton.onClick.RemoveAllListeners();
-            //autoBUtton.onClick.AddListener(SwitchAutoMode);
-            
-            team1UI.Refresh(Team1Members);
-            team2UI.Refresh(Team2Members);
-            
-            if (focusingUnit == null)
-            {
-                MobileInputsManager.target.TurnOffButtons();
-            }
-            else
-            {
-                MobileInputsManager.target.FocusCharInputs(focusingUnit._MyBehaviorRunner, focusingUnit.zokusei);
-            }
-        }
         
         public void SwitchToCMode(Data_Center _char, bool playerControl) //要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
         {
@@ -100,7 +68,7 @@ namespace FightScene
                 MobileInputsManager.SetPlayerMode(false);
             }
             focusingUnit = _char;
-            Refresh();
+            FightingStepLayer.target.Refresh();
         }
         
         IEnumerator _UnitsLoad(MultiDict<int, int, UnitInfo> MembersSets, MultiDict<int, int, Data_Center> TeamMembers)
@@ -127,54 +95,16 @@ namespace FightScene
             yield return _UnitsLoad(info.fightMembers.EnemySets, Team2Members);
         }
         
-        Data_Center team1StartUnit = null, team2StartUnit = null;
+        public Data_Center team1StartUnit = null, team2StartUnit = null;
         
         public void SetGame(FightInfo stage)
         {
             loadFight = stage;
-            
-            team1UI.teamConfig = heroTeamConfig;
-            team2UI.teamConfig = EnemyTeamConfig;
-            team1UI.teamConfig.playID = loadFight.team1ID;
-            team2UI.teamConfig.playID = loadFight.team2ID;
-            
-            // 角色第二次初始化在这之前已经结束
-            
-            team1UI.InsTeamUI(Team1Members);
-            team2UI.InsTeamUI(Team2Members);
-            
-            team1UI.TeamsInit(Team1Members, stage.Team1HpRate ,stage.team1CGMode);
-            team2UI.TeamsInit(Team2Members, stage.Team2HpRate ,stage.team2CGMode);
-            
-            if (stage.GetEventType() == FightEventType.Screensaver)
-            {
-                team1UI.TurnAllMembersInvincible(true, Team1Members);
-                team2UI.TurnAllMembersInvincible(true, Team2Members);
-            }else{
-                team1UI.TurnAllMembersInvincible(false, Team1Members);
-                team2UI.TurnAllMembersInvincible(false, Team2Members);
-            }
-            
-            switch (team1UI.TeamMode)
-            {
-                case TeamMode.multiRaid:
-                    team1StartUnit = team1UI.ToStartPos_Multi(Team1Members);
-                    break;
-                case TeamMode.rotation:
-                    team1StartUnit = team1UI.ToStartPos_Rotate(Team1Members);
-                    break;
-            }
-            
-            switch (team2UI.TeamMode)
-            {
-                case TeamMode.multiRaid:
-                    team2StartUnit = team2UI.ToStartPos_Multi(Team2Members);
-                    break;
-                case TeamMode.rotation:
-                    team2StartUnit = team2UI.ToStartPos_Rotate(Team2Members);
-                    break;
-            }
-            
+            NetFightScene.target.LoadStageFinished.Value = true;
+        }
+
+        public void StartControlMode()
+        {
             switch (playerTeam)
             {
                 case Team.player1:
@@ -184,7 +114,6 @@ namespace FightScene
                     SwitchToCMode(team2StartUnit, false);
                     break;
             }
-            NetFightScene.target.LoadStageFinished.Value = true;
         }
         
         void AllUnitsStartOff(MultiDict<int, int, Data_Center> TeamMembers, Team myTeam, bool TestMode = false)
@@ -254,11 +183,11 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, team2UI.GetFightingUnitTs(Team1Members));
+                    _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, FightingStepLayer.target.team2UI.GetFightingUnitTs(Team1Members));
                 }
                 else
                 {
-                    _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, team1UI.GetFightingUnitTs(Team2Members));
+                    _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, FightingStepLayer.target.team1UI.GetFightingUnitTs(Team2Members));
                 }
             }
             else
@@ -274,11 +203,11 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team2UI.GetFightingUnitTs(Team1Members));
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, FightingStepLayer.target.team2UI.GetFightingUnitTs(Team1Members));
                 }
                 else
                 {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, team1UI.GetFightingUnitTs(Team2Members));
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, FightingStepLayer.target.team1UI.GetFightingUnitTs(Team2Members));
                 }
                 _CameraManager.CurrentMode.SetMeCenter(focusingUnit.WholeT);
             }
@@ -294,8 +223,8 @@ namespace FightScene
             {
                 one.CleanClear();
             }
-            team1UI.Clear();
-            team2UI.Clear();
+            FightingStepLayer.target.team1UI.Clear();
+            FightingStepLayer.target.team2UI.Clear();
             MobileInputsManager.target.Clear();
         }
         
