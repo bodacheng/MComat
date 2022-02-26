@@ -1,19 +1,40 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using DummyLayerSystem;
 
 namespace mainMenu
 {
     public class FightPrepareLayer : UILayer
     {
-        [Space(7)]
-        [Header("UI elements")]
         public Text QuestName;
         public HeroIcon FighterIcon;
         public RectTransform myTeamShowT;
         public RectTransform enemyTeamShowT;
         public Button EditTeamButton; // 根据进入战斗模式决定是否显示
         public Button BeginFight;
+        
+        static FightPrepareLayer Get()
+        {
+            var l = UILayerLoader.Get("FightPrepareLayer");
+            FightPrepareLayer returnValue = null;
+            if (l != null)
+            {
+                returnValue = l as FightPrepareLayer;
+            }
+            return returnValue;
+        }
+        
+        public static FightPrepareLayer Open()
+        {
+            var returnValue = Get();
+            if (returnValue != null)
+            {
+                return returnValue;
+            }
+            returnValue = UILayerLoader.Load(PreScene.target.T,"FightPrepareLayer") as FightPrepareLayer;
+            return returnValue;
+        }
         
         public void StageMembersInfoShow(FightInfo stage)
         {
