@@ -1,8 +1,8 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using dataAccess;
+using UniRx;
 
 namespace FightScene
 {
@@ -15,9 +15,7 @@ namespace FightScene
         
         public TeamMode TeamMode;
         public TeamConfig teamConfig;
-        [HideInInspector]
-        public Transform[] TeamStandPoints;
-        
+
         public readonly IDictionary<Data_Center, SideCharIcon> UnitIconDic = new Dictionary<Data_Center, SideCharIcon>();
         
         public SideCharIcon GetSideIcon(Data_Center d)
@@ -40,39 +38,10 @@ namespace FightScene
 
         public void localUpdate(MultiDict<int, int, Data_Center> TeamMembers)
         {
-            switch (TeamMode)
+            if (teamConfig.myTeam != RTFightManager.playerTeam)
             {
-                case TeamMode.multiRaid:
-                    MultiRaid_LocalUpdate(TeamMembers);
-                    break;
-                case TeamMode.rotation:
-                    Rotation_LocalUpdate(TeamMembers);
-                    break;
+                BarsPosUpdate(TeamMembers);
             }
-        }
-        
-        public List<Transform> GetFightingUnitTs(MultiDict<int, int, Data_Center> TeamMembers)
-        {
-            var transforms = new List<Transform>();
-            switch (TeamMode)
-            {
-                case TeamMode.multiRaid:
-                    foreach (var a_char in TeamMembers.GetValues())
-                    {
-                        if (a_char._MyBehaviorRunner.GetNowState().StateKey != "Death")
-                        {
-                            transforms.Add(a_char.WholeT.transform);
-                        }
-                    }
-                    return transforms;
-                case TeamMode.rotation:
-                    transforms = new List<Transform>
-                    {
-                        RMode_Unit.transform
-                    };
-                    return transforms;
-            }
-            return null;
         }
         
         void BarsPosUpdate(MultiDict<int, int, Data_Center> TeamMembers)
@@ -84,7 +53,7 @@ namespace FightScene
             }
         }
         
-        public void InsTeamUI(MultiDict<int, int, Data_Center> TeamMembers)
+        public void InsTeamUI(MultiDict<int, int, Data_Center> TeamMembers, Action<Data_Center> changeUnit, ReactiveProperty<Data_Center> RMode_Unit)
         {
             switch (TeamMode)
             {
@@ -92,20 +61,13 @@ namespace FightScene
                     InsTeamUI_Multi(TeamMembers);
                     break;
                 case TeamMode.rotation:
-                    InsTeamUI_Rotate(TeamMembers);
-                    break;
-            }
-        }
-        
-        public void TeamsInit(MultiDict<int, int, Data_Center> TeamMembers, float TeamHpRate, CriticalGaugeMode teamCGMode)
-        {
-            switch (TeamMode)
-            {
-                case TeamMode.multiRaid:
-                    Initialize_Multi(TeamMembers, TeamHpRate, teamCGMode);
-                    break;
-                case TeamMode.rotation:
-                    TeamsIni_Rotate(TeamMembers, TeamHpRate, teamCGMode);
+                    IniTeamUI_Rotate(TeamMembers, changeUnit);
+                    IniComboHit(RMode_Unit);
+                    RMode_Unit.Subscribe(
+                        x =>
+                    {
+                        FightingStepLayer.target.Refresh();
+                    }).AddTo(gameObject);
                     break;
             }
         }
@@ -126,11 +88,13 @@ namespace FightScene
             _tempSI.RefreshExBar(current_ex, wholeex);
         }
         
-        public void Refresh(MultiDict<int, int, Data_Center> TeamMembers)
+        public void Refresh(MultiDict<int, int, Data_Center> TeamMembers, Data_Center fighting = null)
         {
             foreach (var _dt in TeamMembers.GetValues())
             {
                 UnitIconDic.TryGetValue(_dt, out var _tempSI);
+                if (_tempSI == null)
+                    continue;
                 if (teamConfig.myTeam == RTFightManager.playerTeam)
                 {
                     _tempSI.transform.localScale = _dt != RTFightManager.focusingUnit ? Vector3.one : Vector3.one * 1.2f;
@@ -142,56 +106,12 @@ namespace FightScene
                 }
                 else
                 {
+                    _tempSI.gameObject.SetActive(fighting == _dt);
                     _tempSI.focusingCharIcon.gameObject.SetActive(false);
                     _tempSI.ExBar.gameObject.SetActive(false);
                     _tempSI.transform.SetParent(_targetCanvasT.transform);
                 }
             }
-            
-            switch (TeamMode)
-            {
-                case TeamMode.multiRaid:
-                    foreach (var _datacenter in TeamMembers.GetValues())
-                    {
-                        if (multiRaidHitComboDic.ContainsKey(_datacenter))
-                        {
-                            multiRaidHitComboDic[_datacenter].color = teamConfig.myTeam == RTFightManager.playerTeam ? Color.yellow : Color.blue;
-                            multiRaidHitComboDic[_datacenter].gameObject.SetActive(true);
-                            if (multiRaidHitComboDic[_datacenter].gameObject.transform.parent != _targetCanvasT)
-                            {
-                                multiRaidHitComboDic[_datacenter].gameObject.transform.SetParent(_targetCanvasT.transform);
-                            }
-                            multiRaidHitComboDic[_datacenter].transform.localScale = Vector3.one;
-                            multiRaidHitComboDic[_datacenter].fontSize = 30;
-                        }
-                    }
-                    break;
-                case TeamMode.rotation:
-                    rotationModeHitCombo.color = teamConfig.myTeam == RTFightManager.playerTeam ? Color.yellow : Color.blue;
-                    rotationModeHitCombo.gameObject.SetActive(true);
-                    if (rotationModeHitCombo.gameObject.transform.parent != _targetCanvasT)
-                    {
-                        rotationModeHitCombo.gameObject.transform.SetParent(_targetCanvasT.transform);
-                    }
-                    rotationModeHitCombo.transform.localScale = Vector3.one;
-                    rotationModeHitCombo.fontSize = 30;
-                    break;
-            }
-        }
-        
-        // 获取该队伍所有账户技能石id（只有在这个队伍是玩家账户队员组成情况下有效）
-        public List<string> GetAllUsingStoneOfAcc()
-        {
-            var stones = new List<string>();
-            foreach (var keyValuePair in RTFightManager.target.UnitInfoRef)
-            {
-                var myStones = Stones.GetEquipingStones(keyValuePair.Value.id);
-                for (var i = 0; i < myStones.Count; i++)
-                {
-                    stones.Add(myStones[i].InstanceId);
-                }
-            }
-            return stones;
         }
     }
 }

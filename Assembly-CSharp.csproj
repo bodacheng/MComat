@@ -164,7 +164,6 @@
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\StoneMergeLayer.cs" />
      <Compile Include="Assets\Behaviour\SkillAIAttrs.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Core\TouchManagerInstance.cs" />
-     <Compile Include="Assets\TeamUIManager\RotationMode\RotationMode_Render.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\SettingsButton.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot_Read.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_ColorSwap.cs" />
@@ -649,6 +648,7 @@
      <Compile Include="Assets\Remote\TeamSet\TeamSet_Save.cs" />
      <Compile Include="Assets\Behaviour\SingleFightLog.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\MainSceneProcess.cs" />
+     <Compile Include="Assets\RealTimeGameProcessManager\UnitsManger.cs" />
      <Compile Include="Assets\Behaviour\BtnUI\MobileInputsManager.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Other\LaunchURL.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerBGMusic.cs" />
@@ -681,6 +681,7 @@
      <Compile Include="Assets\AnimControl\dontuse\NullStateProcess.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\Gotcha\GotchaResultLayer\GotchaResultLayer_Steps.cs" />
      <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
+     <Compile Include="Assets\RealTimeGameProcessManager\UnitsManger_mu.cs" />
      <Compile Include="Assets\StagesManagement\FightMembers.cs" />
      <Compile Include="Assets\Camera\Modes\LerpToCertainDistance.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Pointers\FakePointer.cs" />

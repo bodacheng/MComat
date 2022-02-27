@@ -26,8 +26,6 @@ public class PreparingProcess : FSceneProcess
         Sensor.ClearFightingMember();
         yield return RTFightManager.target.LoadUnits(NetFightScene.Fight);
         
-        RTFightManager.target.SetGame(NetFightScene.Fight);
-        
         var TeamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
         DicAdd<TeamConfig, List<Data_Center>>.Add(TeamMembers, RTFightManager.target.heroTeamConfig, RTFightManager.target.Team1Members.GetValues());
         DicAdd<TeamConfig, List<Data_Center>>.Add(TeamMembers, RTFightManager.target.EnemyTeamConfig, RTFightManager.target.Team2Members.GetValues());
@@ -35,6 +33,49 @@ public class PreparingProcess : FSceneProcess
         
         EffectsManager.INIEffectsPool("hit_ground", null, 3);
         EffectsManager.INIEffectsPool("wallCrack", null, 3);
+        
+        RTFightManager.target.team1.TeamMode = NetFightScene.Fight.Team1Mode;
+        RTFightManager.target.team2.TeamMode = NetFightScene.Fight.Team2Mode;
+        RTFightManager.target.team1.teamConfig = RTFightManager.target.heroTeamConfig;
+        RTFightManager.target.team2.teamConfig = RTFightManager.target.EnemyTeamConfig;
+        
+        RTFightManager.target.team1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
+        RTFightManager.target.team2.TeamStandPoints = NetFightScene.target.Team2StandPoints;
+        
+        if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
+        {
+            RTFightManager.target.TurnAllMembersInvincible(true, RTFightManager.target.Team1Members);
+            RTFightManager.target.TurnAllMembersInvincible(true, RTFightManager.target.Team2Members);
+        }else{
+            RTFightManager.target.TurnAllMembersInvincible(false, RTFightManager.target.Team1Members);
+            RTFightManager.target.TurnAllMembersInvincible(false, RTFightManager.target.Team2Members);
+        }
+        
+        switch (RTFightManager.target.team1.TeamMode)
+        {
+            case TeamMode.multiRaid:
+                RTFightManager.target.team1.Initialize_Multi(RTFightManager.target.Team1Members, NetFightScene.Fight.Team1HpRate, NetFightScene.Fight.team1CGMode);
+                RTFightManager.target.team1StartUnit = RTFightManager.target.team1.ToStartPos_Multi(RTFightManager.target.Team1Members);
+                break;
+            case TeamMode.rotation:
+                RTFightManager.target.team1.TeamsIni_Rotate(RTFightManager.target.Team1Members, NetFightScene.Fight.Team1HpRate, NetFightScene.Fight.team1CGMode);
+                RTFightManager.target.team1StartUnit = RTFightManager.target.team1.ToStartPos_Rotate(RTFightManager.target.Team1Members);
+                break;
+        }
+            
+        switch (RTFightManager.target.team2.TeamMode)
+        {
+            case TeamMode.multiRaid:
+                RTFightManager.target.team2.Initialize_Multi(RTFightManager.target.Team2Members, NetFightScene.Fight.Team2HpRate, NetFightScene.Fight.team2CGMode);
+                RTFightManager.target.team2StartUnit = RTFightManager.target.team2.ToStartPos_Multi(RTFightManager.target.Team2Members);
+                break;
+            case TeamMode.rotation:
+                RTFightManager.target.team2.TeamsIni_Rotate(RTFightManager.target.Team2Members, NetFightScene.Fight.Team2HpRate, NetFightScene.Fight.team2CGMode);
+                RTFightManager.target.team2StartUnit = RTFightManager.target.team2.ToStartPos_Rotate(RTFightManager.target.Team2Members);
+                break;
+        }
+        
+        RTFightManager.target.SetGame(NetFightScene.Fight);
     }
     
     public override void ProcessEnter()

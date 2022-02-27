@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 456541914112556001}
   - component: {fileID: 456541914112556000}
   m_Layer: 5
-  m_Name: charimage
+  m_Name: unitImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4291302044684218718}
   - component: {fileID: 4960303231517124737}
   m_Layer: 5
-  m_Name: chariconpretab
+  m_Name: unitIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,6 +224,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
 --- !u!1 &1163580099623231590
@@ -977,7 +978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1793,7 +1794,7 @@ PrefabInstance:
     - target: {fileID: 8645987888607893613, guid: 9ccba36de6af04cddb328c034351f42f,
         type: 3}
       propertyPath: m_Name
-      value: ExBar (2)
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8645987888607893613, guid: 9ccba36de6af04cddb328c034351f42f,
         type: 3}
@@ -1962,7 +1963,7 @@ PrefabInstance:
     - target: {fileID: 8645987888607893613, guid: 9ccba36de6af04cddb328c034351f42f,
         type: 3}
       propertyPath: m_Name
-      value: ExBar (1)
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8645987888607893613, guid: 9ccba36de6af04cddb328c034351f42f,
         type: 3}
@@ -2131,7 +2132,7 @@ PrefabInstance:
     - target: {fileID: 8645987888607893613, guid: 9ccba36de6af04cddb328c034351f42f,
         type: 3}
       propertyPath: m_Name
-      value: ExBar
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ccba36de6af04cddb328c034351f42f, type: 3}

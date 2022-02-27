@@ -2,12 +2,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UniRx;
 
 namespace FightScene
 {
     //角色列表的职责现在不光是负责两侧菜单中角色的icon，也负责被控制角色又上角血条和ex条
     public class RTFightManager : MonoBehaviour
     {
+        public UnitsManger team1, team2;
+        
         [Header("Basic Element")]
         public CameraManager _CameraManager;
         
@@ -27,8 +30,9 @@ namespace FightScene
         public MultiDict<int, int, Data_Center> Team2Members;
         
         public readonly IDictionary<Data_Center, UnitInfo> UnitInfoRef = new Dictionary<Data_Center, UnitInfo>();
-        //public readonly IDictionary<Team, List<Data_Center>> AllMembers = new Dictionary<Team, List<Data_Center>>();
         
+        public readonly static IDictionary<Data_Center, ReactiveProperty<float>> RefreshTimeDic = new Dictionary<Data_Center, ReactiveProperty<float>>();
+
         FightInfo loadFight;
         
         void Awake()
@@ -39,7 +43,7 @@ namespace FightScene
         public void SwitchToWatchMode() // button behaviour
         {
             SwitchToCMode(null, false);
-            ParaAdjustment(playerTeam);
+            CameraAdjustment(playerTeam);
         }
         
         public void SwitchAutoMode()
@@ -57,9 +61,9 @@ namespace FightScene
             }
         }
         
-        public void SwitchToCMode(Data_Center _char, bool playerControl) //要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
+        public void SwitchToCMode(Data_Center _center, bool playerControl) //要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
         {
-            if (_char != null)
+            if (_center != null)
             {
                 MobileInputsManager.SetPlayerMode(playerControl);
             }
@@ -67,8 +71,7 @@ namespace FightScene
             {
                 MobileInputsManager.SetPlayerMode(false);
             }
-            focusingUnit = _char;
-            FightingStepLayer.target.Refresh();
+            focusingUnit = _center;
         }
         
         IEnumerator _UnitsLoad(MultiDict<int, int, UnitInfo> MembersSets, MultiDict<int, int, Data_Center> TeamMembers)
@@ -177,7 +180,7 @@ namespace FightScene
         }
         
         // 战斗模式相机。根据选择队伍做相应调整。
-        public void ParaAdjustment(Team myTeam)
+        public void CameraAdjustment(Team myTeam)
         {
             C_Mode c_Mode;
             if (loadFight.Team1Mode == TeamMode.multiRaid)
@@ -192,11 +195,11 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, FightingStepLayer.target.team2UI.GetFightingUnitTs(Team1Members));
+                    _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, RTFightManager.target.team1.GetFightingUnitTs(Team1Members));
                 }
                 else
                 {
-                    _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, FightingStepLayer.target.team1UI.GetFightingUnitTs(Team2Members));
+                    _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, RTFightManager.target.team2.GetFightingUnitTs(Team2Members));
                 }
             }
             else
@@ -212,11 +215,11 @@ namespace FightScene
             {
                 if (myTeam == Team.player1)
                 {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, FightingStepLayer.target.team2UI.GetFightingUnitTs(Team1Members));
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, RTFightManager.target.team1.GetFightingUnitTs(Team1Members));
                 }
                 else
                 {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, FightingStepLayer.target.team1UI.GetFightingUnitTs(Team2Members));
+                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, RTFightManager.target.team2.GetFightingUnitTs(Team2Members));
                 }
                 _CameraManager.CurrentMode.SetMeCenter(focusingUnit.WholeT);
             }

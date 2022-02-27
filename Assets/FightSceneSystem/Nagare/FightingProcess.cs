@@ -30,7 +30,7 @@ namespace FightScene
             
             _layer = FightingStepLayer.Open();
             RTFightManager.target.StartControlMode();
-            RTFightManager.target.ParaAdjustment(RTFightManager.playerTeam);
+            RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
             
             if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
             {
@@ -84,6 +84,9 @@ namespace FightScene
         {
             if (_layer != null)
             {
+                RTFightManager.target.team1.localUpdate(RTFightManager.target.Team1Members);
+                RTFightManager.target.team2.localUpdate(RTFightManager.target.Team2Members);
+                
                 _layer.team1UI.localUpdate(RTFightManager.target.Team1Members);
                 _layer.team2UI.localUpdate(RTFightManager.target.Team2Members);
             }

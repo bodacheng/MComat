@@ -36,9 +36,9 @@ public class FightingStepLayer : UILayer
             _A_flag.gameObject.SetActive(true);
         }
         
-        team1UI.Refresh(RTFightManager.target.Team1Members);
-        team2UI.Refresh(RTFightManager.target.Team2Members);
-
+        team1UI.Refresh(RTFightManager.target.Team1Members, RTFightManager.target.team1.RMode_Unit.Value);
+        team2UI.Refresh(RTFightManager.target.Team2Members, RTFightManager.target.team2.RMode_Unit.Value);
+        
         if (RTFightManager.focusingUnit == null)
         {
             MobileInputsManager.target.TurnOffButtons();
@@ -87,8 +87,6 @@ public class FightingStepLayer : UILayer
         pauseButton.onClick.AddListener(pauseAction.Invoke);
         cameraSwitchBtn.onClick.AddListener(cameraSwitchAction.Invoke);
         
-        team1UI.TeamStandPoints = NetFightScene.target.Team1StandPoints;
-        team2UI.TeamStandPoints = NetFightScene.target.Team2StandPoints;
         team1UI.TeamMode = NetFightScene.Fight.Team1Mode;
         team2UI.TeamMode = NetFightScene.Fight.Team2Mode;
         
@@ -96,43 +94,10 @@ public class FightingStepLayer : UILayer
         team2UI.teamConfig = RTFightManager.target.EnemyTeamConfig;
         team1UI.teamConfig.playID = NetFightScene.Fight.team1ID;
         team2UI.teamConfig.playID = NetFightScene.Fight.team2ID;
-            
-        // 角色第二次初始化在这之前已经结束
-            
-        team1UI.InsTeamUI(RTFightManager.target.Team1Members);
-        team2UI.InsTeamUI(RTFightManager.target.Team2Members);
-            
-        team1UI.TeamsInit(RTFightManager.target.Team1Members, NetFightScene.Fight.Team1HpRate ,NetFightScene.Fight.team1CGMode);
-        team2UI.TeamsInit(RTFightManager.target.Team2Members, NetFightScene.Fight.Team2HpRate ,NetFightScene.Fight.team2CGMode);
-            
-        if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
-        {
-            RTFightManager.target.TurnAllMembersInvincible(true, RTFightManager.target.Team1Members);
-            RTFightManager.target.TurnAllMembersInvincible(true, RTFightManager.target.Team2Members);
-        }else{
-            RTFightManager.target.TurnAllMembersInvincible(false, RTFightManager.target.Team1Members);
-            RTFightManager.target.TurnAllMembersInvincible(false, RTFightManager.target.Team2Members);
-        }
         
-        switch (team1UI.TeamMode)
-        {
-            case TeamMode.multiRaid:
-                RTFightManager.target.team1StartUnit = team1UI.ToStartPos_Multi(RTFightManager.target.Team1Members);
-                break;
-            case TeamMode.rotation:
-                RTFightManager.target.team1StartUnit = team1UI.ToStartPos_Rotate(RTFightManager.target.Team1Members);
-                break;
-        }
-            
-        switch (team2UI.TeamMode)
-        {
-            case TeamMode.multiRaid:
-                RTFightManager.target.team2StartUnit = team2UI.ToStartPos_Multi(RTFightManager.target.Team2Members);
-                break;
-            case TeamMode.rotation:
-                RTFightManager.target.team2StartUnit = team2UI.ToStartPos_Rotate(RTFightManager.target.Team2Members);
-                break;
-        }
+        // 角色第二次初始化在这之前已经结束
+        team1UI.InsTeamUI(RTFightManager.target.Team1Members, RTFightManager.target.team1.ReadyForNextMember, RTFightManager.target.team1.RMode_Unit);
+        team2UI.InsTeamUI(RTFightManager.target.Team2Members, RTFightManager.target.team2.ReadyForNextMember, RTFightManager.target.team2.RMode_Unit);
     }
     
     public void RefreshAIFlag(bool ai)
