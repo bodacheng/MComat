@@ -28,7 +28,7 @@ class New2021 : CameraMode//  改编自CertainYAntiVabration
             if (targets != null && targets.Count > 0)
             {
                 enemiesCenter = Vector3.zero;
-                foreach (Transform o in targets)
+                foreach (var o in targets)
                 {
                     if (o != null)
                     {

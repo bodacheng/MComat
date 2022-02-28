@@ -193,35 +193,12 @@ namespace FightScene
             }
             if (focusingUnit != null)
             {
-                if (myTeam == Team.player1)
-                {
-                    _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, RTFightManager.target.team1.GetFightingUnitTs(Team1Members));
-                }
-                else
-                {
-                    _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, RTFightManager.target.team2.GetFightingUnitTs(Team2Members));
-                }
+                _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT,
+                    myTeam == Team.player1  ? team2.GetFightingUnitTs(Team2Members) : team1.GetFightingUnitTs(Team1Members));
             }
             else
             {
-                _CameraManager.Assign_Camera(C_Mode.TopDown, null);
-            }
-        }
-        
-        // 屏保模式相机。
-        public void ScreenSaverC(Team myTeam)
-        {
-            if (focusingUnit != null)
-            {
-                if (myTeam == Team.player1)
-                {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, RTFightManager.target.team1.GetFightingUnitTs(Team1Members));
-                }
-                else
-                {
-                    _CameraManager.Assign_Camera(C_Mode.ScreenSaver, RTFightManager.target.team2.GetFightingUnitTs(Team2Members));
-                }
-                _CameraManager.CurrentMode.SetMeCenter(focusingUnit.WholeT);
+                _CameraManager.Assign_Camera(C_Mode.TopDown, null,null);
             }
         }
         

@@ -166,6 +166,7 @@
      <Compile Include="Assets\TouchScript\Scripts\Core\TouchManagerInstance.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\SettingsButton.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot_Read.cs" />
+     <Compile Include="Assets\Camera\Modes\New2022.cs" />
      <Compile Include="Assets\POFX\Scripts\FX\POFX_ColorSwap.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiLoadSceneOnClick.cs" />
      <Compile Include="Assets\TutorialManger\processes\FillASlot\SkillEditTry_A2Filled.cs" />

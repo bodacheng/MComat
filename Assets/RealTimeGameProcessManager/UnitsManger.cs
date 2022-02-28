@@ -206,7 +206,7 @@ namespace FightScene
                 case TeamMode.rotation:
                     transforms = new List<Transform>
                     {
-                        RMode_Unit.Value.transform
+                        RMode_Unit.Value.WholeT
                     };
                     return transforms;
             }

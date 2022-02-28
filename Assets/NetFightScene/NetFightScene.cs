@@ -116,8 +116,6 @@ namespace FightScene
                     RTFightManager.target.SwitchToCMode(RTFightManager.target.Team2Members.GetValues()[0], false);
                     break;
             }
-            if (Fight.GetEventType() == FightEventType.Screensaver)
-                RTFightManager.target.ScreenSaverC(RTFightManager.playerTeam);
         }
         
         public void ReturnToFront()

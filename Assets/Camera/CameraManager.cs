@@ -12,7 +12,7 @@ public class CameraManager : MonoBehaviour
     readonly IDictionary<C_Mode, CameraMode> CModeDic = new Dictionary<C_Mode, CameraMode>()
     {
         {C_Mode.GodPlayerCertainYCamera,new GodPlayerCertainY(5f, 5f)},
-        {C_Mode.CertainYAntiVibration, new New2021(8.8f, 5f)},
+        {C_Mode.CertainYAntiVibration, new New2022(8.8f, 5f)},
         {C_Mode.OneVOne, new OneVOneMode(16f)},
         {C_Mode.ApproachToCertainDis,  new LerpToCertainDistance(5f, 1f)},
         {C_Mode.keepTargetLeft, new keepTargetLeftCamera()},
@@ -20,7 +20,7 @@ public class CameraManager : MonoBehaviour
         {C_Mode.StartAndEnd, new StartToEndMode()},
         {C_Mode.RoundBoundary, new CenterSurroundCamera(25f, 10f)},
         {C_Mode.TopDown, new TouchTopDownCamera(12f, 20f)},
-        {C_Mode.ScreenSaver, new New2021(8.8f, 5f)}//new ScreenSaverC(8.8f, 8.8f)}
+        {C_Mode.ScreenSaver, new New2022(8.8f, 5f)}//new ScreenSaverC(8.8f, 8.8f)}
     };
     
     void Awake()
@@ -37,20 +37,7 @@ public class CameraManager : MonoBehaviour
             CurrentMode.LocalUpdate(_camera);
         }
     }
-
-    public void Assign_Camera(C_Mode num, List<Transform> targets)
-    {
-        if (CurrentMode != null)
-            CurrentMode.Exit(_camera);
-        CModeDic.TryGetValue(num, out CurrentMode);
-        if (CurrentMode != null)
-        {
-            //有些相机模式的enter函数内处理需要根据targets来
-            CurrentMode.targets = targets;
-            CurrentMode.Enter(_camera);
-        }
-    }
-
+    
     public void Assign_Camera(C_Mode num, Transform me, List<Transform> targets)
     {
         if (CurrentMode != null)
