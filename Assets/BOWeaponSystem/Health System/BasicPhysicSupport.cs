@@ -93,7 +93,6 @@ public class BasicPhysicSupport : MonoBehaviour
             get => grounded;
             set {
                 grounded = value;
-                _BasicPhysicSupport.Rigidbody.useGravity = _BasicPhysicSupport.UsingGravity && !value;
             }
         }
         
@@ -105,9 +104,11 @@ public class BasicPhysicSupport : MonoBehaviour
                 if (floorY >= check.transform.position.y)
                 {
                     Grounded = true;
+                    _BasicPhysicSupport.Rigidbody.useGravity = false;
                     return;
                 }
             }
+            _BasicPhysicSupport.Rigidbody.useGravity = _BasicPhysicSupport.usingGravity;
             Grounded = false;
         }
         
@@ -173,10 +174,10 @@ public class BasicPhysicSupport : MonoBehaviour
         }
     }
 
-    bool UsingGravity = true;
+    private bool usingGravity;
     public void SetUsingGravity(bool _on)
     {
-        UsingGravity = _on;
+        usingGravity = _on;
     }
 
     public void OpenEnemyTouchingDrag(int open)

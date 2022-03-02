@@ -21,6 +21,7 @@ namespace Soul
         public override void AI_State_enter(V_Damage newValue)
         {
             base.AI_State_enter();
+            flyingStep = 0;
             time_counter = 0;
             touchedBoundary = false;
             dropped = false;
@@ -32,9 +33,12 @@ namespace Soul
             pEvents.CloseAllPersonalityEffects();
             _Rigidbody.velocity = Vector3.zero;
             Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.05f);
-            _xz = newValue.attacker._Center.WholeT.forward;
+            //_xz = newValue.attacker._Center.WholeT.forward;
+            _xz = _DATA_CENTER.WholeT.position - newValue.DamageHappenPoint;
+            _xz = _xz.normalized;
+            _xz.y = 0;
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
-            EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), newValue.damageHappenPoint, newValue.CutRotation, null);
+            EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), newValue.DamageHappenPoint, newValue.CutRotation, null);
             usedYCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageYAnimationCurve : FightGlobalSetting._knockOffyAnimationCurve;
             usedZCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageZAnimationCurve : FightGlobalSetting._knockOffzAnimationCurve;
         }
@@ -50,6 +54,7 @@ namespace Soul
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _FightAttriCalRef.GettingDamage = false;
             _SkillCancelFlag.turn_off_flag();
+            _BasicPhysicSupport.SetUsingGravity(false);
         }
 
         public override void _c_State_FixedUpdate1()
@@ -63,6 +68,7 @@ namespace Soul
         }
 
         Vector3 effectP, quaV;
+        private int flyingStep = 0;// 0 拔地 1 曲线 2 落地以及躺地昏迷
         void _State_FixedUpdate()
         {
             if (!touchedBoundary)
@@ -80,41 +86,66 @@ namespace Soul
                     EffectsManager.GenerateEffect("wallCrack", null, effectP, Quaternion.LookRotation(quaV, Vector3.up), null);
                 }
             }
-
-            if (!dropped)
+            
+            switch (flyingStep)
             {
-                if (time_counter > 0.2f && _BasicPhysicSupport.hiddenMethods.Grounded)
-                {
-                    dropped = true;
-                    effectP = gameObject.transform.position;
-                    effectP.y = 0;
-                    EffectsManager.GenerateEffect("hit_ground", null, effectP, Quaternion.LookRotation(Vector3.right), null);
-                    _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-                    time_counter = 0;//开始针对躺地时间记时
-                }
-                else
-                {
+                case 0:
                     gameObject.transform.position +=
-                    _xz * (usedZCurve.Evaluate(time_counter + Time.fixedDeltaTime) - usedZCurve.Evaluate(time_counter)) +
-                    Vector3.up * (usedYCurve.Evaluate(time_counter + Time.fixedDeltaTime) - usedYCurve.Evaluate(time_counter));
-                }
+                        _xz * (usedZCurve.Evaluate(time_counter + Time.fixedDeltaTime) - usedZCurve.Evaluate(time_counter)) +
+                        Vector3.up * (usedYCurve.Evaluate(time_counter + Time.fixedDeltaTime) - usedYCurve.Evaluate(time_counter));
+                    
+                    Debug.Log(flyingStep);
+                    if (!_BasicPhysicSupport.hiddenMethods.Grounded)
+                    {
+                        flyingStep = 1;
+                        Debug.Log(flyingStep);
+                    }
+                    
+                    if (time_counter > 1) // 1是曲线的x轴长度
+                    {
+                        flyingStep = 2;
+                    }
+                    break;
+                case 1:
+                    gameObject.transform.position +=
+                        _xz * (usedZCurve.Evaluate(time_counter + Time.fixedDeltaTime) - usedZCurve.Evaluate(time_counter)) +
+                        Vector3.up * (usedYCurve.Evaluate(time_counter + Time.fixedDeltaTime) - usedYCurve.Evaluate(time_counter));
+                    if (_BasicPhysicSupport.hiddenMethods.Grounded)
+                    {
+                        flyingStep = 2;
+                        Debug.Log(flyingStep);
+                    }
+                    break;
+                case 2 :
+                    if (!dropped)
+                    {
+                        dropped = true;
+                        _BasicPhysicSupport.SetUsingGravity(true);
+                        effectP = gameObject.transform.position;
+                        effectP.y = 0;
+                        EffectsManager.GenerateEffect("hit_ground", null, effectP, Quaternion.LookRotation(Vector3.right), null);
+                        _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+                        time_counter = 0;//开始针对躺地时间记时
+                        flyingStep = 3;
+                        Debug.Log(flyingStep);
+                    }
+                    break;
+                case 3:
+                    if (!canWakeUp)
+                    {
+                        if (dropped && time_counter > FightGlobalSetting._CanGetUpAfterKnockoffToGround)
+                        {
+                            canWakeUp = true;
+                            _SkillCancelFlag.turn_on_flag();
+                        }
+                    }
+                    if (time_counter > FightGlobalSetting._MaxKnockoffLaidGroundTime)
+                    {
+                        _AIStateRunner.ChangeState("getUp");
+                    }
+                    break;
             }
-            else
-            {
-                if (time_counter > FightGlobalSetting._MaxKnockoffLaidGroundTime)
-                {
-                    _AIStateRunner.ChangeState("getUp");
-                }
-            }
-
-            if (!canWakeUp)
-            {
-                if (dropped && time_counter > FightGlobalSetting._CanGetUpAfterKnockoffToGround)
-                {
-                    canWakeUp = true;
-                    _SkillCancelFlag.turn_on_flag();
-                }
-            }
+            
             time_counter += Time.fixedDeltaTime;
         }
     }
