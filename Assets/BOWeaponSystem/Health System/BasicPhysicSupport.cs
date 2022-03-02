@@ -100,7 +100,7 @@ public class BasicPhysicSupport : MonoBehaviour
         readonly float floorY = 0f;
         public void GroundedCal()
         {
-            foreach (Transform check in _BasicPhysicSupport.floorCheckers)
+            foreach (var check in _BasicPhysicSupport.floorCheckers)
             {
                 if (floorY >= check.transform.position.y)
                 {
