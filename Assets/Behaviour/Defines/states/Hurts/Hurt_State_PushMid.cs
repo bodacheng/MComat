@@ -18,7 +18,6 @@ namespace Soul
             else
             {
                 Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.1f);
-                _BasicPhysicSupport.SetUsingGravity(false);
             }
             tween = gameObject.transform.DOMove(MidDistanceFromMe, 0.3f);
             physicMissionDisposable = new SingleAssignmentDisposable();

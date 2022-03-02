@@ -13,7 +13,6 @@ namespace Soul
             dropped = false;
             _Animator.SetFloat("speed", 0f);
             _Rigidbody.velocity = Vector3.zero;
-            _BasicPhysicSupport.SetUsingGravity(false);
             used_dizzy_time = FightGlobalSetting._highhit_lastingTime;
             _xz = newValue.attacker._Center.WholeT.forward;
             _FightAttriCalRef.GetKnockOffCount().PlusTimeCounter(0.2f);

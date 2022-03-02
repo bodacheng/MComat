@@ -37,7 +37,6 @@ namespace Soul
             base.AI_State_enter();
             time_count = 0f;
             pEvents.CloseAllPersonalityEffects();
-            _BasicPhysicSupport.SetUsingGravity(false);
             _DATA_CENTER.IsDead.Value = true;
             _FightAttriCalRef.ChangeLayerForLimbs(14);
             _Rigidbody.velocity = Vector3.zero;
@@ -57,7 +56,6 @@ namespace Soul
             base.AI_State_exit();
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             time_count = 0f;
-            _BasicPhysicSupport.SetUsingGravity(true);
         }
 
         Vector3 effectP;

@@ -17,12 +17,7 @@ namespace Soul
         {
             StateType = BehaviorType.KnockOff;
         }
-
-        public override void Pre_process_before_enter()
-        {
-            base.Pre_process_before_enter();
-        }
-
+        
         public override void AI_State_enter(V_Damage newValue)
         {
             base.AI_State_enter();
@@ -30,7 +25,6 @@ namespace Soul
             touchedBoundary = false;
             dropped = false;
             canWakeUp = false;
-            _BasicPhysicSupport.SetUsingGravity(false);
             _FightAttriCalRef.GettingDamage = true;
             _Animator.SetFloat("speed", 0f);
             _Animator.applyRootMotion = false;
@@ -54,7 +48,6 @@ namespace Soul
         {
             base.AI_State_exit();
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-            _BasicPhysicSupport.SetUsingGravity(true);
             _FightAttriCalRef.GettingDamage = false;
             _SkillCancelFlag.turn_off_flag();
         }

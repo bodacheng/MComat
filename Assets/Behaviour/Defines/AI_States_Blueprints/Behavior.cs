@@ -144,7 +144,6 @@ namespace Soul
         public virtual void AI_State_exit()
         {
             Sensor.OneRoundDetectionStart(5);
-            _BasicPhysicSupport.SetUsingGravity(true);
             pEvents.CloseAllPersonalityEffects();
         }
         
