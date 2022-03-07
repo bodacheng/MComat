@@ -29,7 +29,7 @@ namespace Soul
                         return;
                     }
                     
-                    if (Vector3.Distance(MidDistanceFromMe, gameObject.transform.position) < 0.3f || _BasicPhysicSupport.hiddenMethods.onBattleGroundBundary)
+                    if (Vector3.Distance(MidDistanceFromMe, gameObject.transform.position) < 0.3f || _BasicPhysicSupport.atRing)
                     {
                         tween.Kill(false);
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;

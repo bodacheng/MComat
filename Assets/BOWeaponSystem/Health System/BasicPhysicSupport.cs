@@ -10,11 +10,16 @@ public class BasicPhysicSupport : MonoBehaviour
     public Transform floorCheckersT;
     Transform[] floorCheckers;
 
+    public bool atRing
+    {
+        get;
+        set;
+    }
+
     public class HiddenMethods
     {
         readonly BasicPhysicSupport _BasicPhysicSupport;
         
-        public bool onBattleGroundBundary;
         public HiddenMethods(BasicPhysicSupport _BasicPhysicSupport)
         {
             this._BasicPhysicSupport = _BasicPhysicSupport;
@@ -86,27 +91,27 @@ public class BasicPhysicSupport : MonoBehaviour
             touchingEnemyCs.Clear();
             _BasicPhysicSupport.Rigidbody.drag = 0f;
         }
-        
-        bool grounded;
-        public bool Grounded
-        {
-            get => grounded;
-            set {
-                grounded = value;
-            }
-        }
-        
+
+        public bool Grounded { get; set; }
+
         readonly float floorY = 0f;
         public void GroundedCal()
         {
-            foreach (var check in _BasicPhysicSupport.floorCheckers)
+            // foreach (var check in _BasicPhysicSupport.floorCheckers)
+            // {
+            //     if (floorY >= check.transform.position.y)
+            //     {
+            //         Grounded = true;
+            //         _BasicPhysicSupport.Rigidbody.useGravity = false;
+            //         return;
+            //     }
+            // }
+
+            if (_BasicPhysicSupport._DATA_CENTER.WholeT.position.y <= floorY)
             {
-                if (floorY >= check.transform.position.y)
-                {
-                    Grounded = true;
-                    _BasicPhysicSupport.Rigidbody.useGravity = false;
-                    return;
-                }
+                Grounded = true;
+                _BasicPhysicSupport.Rigidbody.useGravity = false;
+                return;
             }
             _BasicPhysicSupport.Rigidbody.useGravity = _BasicPhysicSupport.usingGravity;
             Grounded = false;
@@ -150,27 +155,7 @@ public class BasicPhysicSupport : MonoBehaviour
                 airCount = (!hiddenMethods.Grounded) ? airCount += Time.deltaTime : 0f;
             }
             
-            temp2 = transform.position;
-            temp2.y = 0;
-            dis_from_center = temp2.magnitude;
-            if (dis_from_center > BoundaryControllByGod._BattleRingRadius)
-            {
-                temp = temp2.normalized * BoundaryControllByGod._BattleRingRadius;
-                temp.y = transform.position.y;
-                transform.position = temp;
-                hiddenMethods.onBattleGroundBundary = true;
-            }
-            else
-            {
-                hiddenMethods.onBattleGroundBundary = false;
-            }
-            
-            temp = transform.position;
-            if (temp.y < 0)
-            {
-                temp.y = 0f;
-                transform.position = temp;
-            }
+            BoundaryControllByGod.LimitTargetToRange(_DATA_CENTER);
         }
     }
 

@@ -46,6 +46,11 @@ namespace FightScene
         void Start()
         {
             PopupLayer.DarkOff(T.gameObject, 1, 0);
+
+            if (Fight == null)
+            {
+                return;
+            }
             
             //QualitySettings.vSyncCount = 1;
             Screen.SetResolution(1920, 1080, true);

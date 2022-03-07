@@ -123,8 +123,8 @@ namespace mainMenu
             RotationTeam1T.gameObject.SetActive(false);
             RotationTeam2T.gameObject.SetActive(false);
             stage.SetEventType(FightEventType.Test);
-            stage.Team1Mode = TeamMode.multiRaid;
-            stage.Team2Mode = TeamMode.multiRaid;
+            stage.Team1Mode = TeamMode.rotation;
+            stage.Team2Mode = TeamMode.rotation;
             ModeSelect(TestModeBtn.transform);
         }
         

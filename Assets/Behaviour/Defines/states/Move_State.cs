@@ -119,7 +119,7 @@ namespace Soul
 
         void DecideDirection()
         {
-            if (_BasicPhysicSupport.hiddenMethods.onBattleGroundBundary && moveDirection == AIMoveDirection.RunToBattleGroundCenter)
+            if (_BasicPhysicSupport.atRing && moveDirection == AIMoveDirection.RunToBattleGroundCenter)
             {
                 // 非常粗糙的逻辑。意思是只要在边界并且已经是在往边界移动了，就不用再重新决策往哪跑了。和213行的逻辑相匹配
                 return;
@@ -128,7 +128,7 @@ namespace Soul
             switch (_AIMoveStyle)
             {
                 case AIMoveMode.normal:
-                    if (_BasicPhysicSupport.hiddenMethods.onBattleGroundBundary)
+                    if (_BasicPhysicSupport.atRing)
                     {
                         moveDirection = AIMoveDirection.RunToBattleGroundCenter;
                         use_direction = Vector3.zero - gameObject.transform.position;
@@ -212,7 +212,7 @@ namespace Soul
             {
                 Sensor.ContinuousDetectionStart(-1);//这个的真正目的是把检测关闭
             }
-            if (_BasicPhysicSupport.hiddenMethods.onBattleGroundBundary)
+            if (_BasicPhysicSupport.atRing)
             {
                 DecideDirection();
             }

@@ -63,7 +63,7 @@ namespace Soul
         {
             if (!touchedBoundary)
             {
-                if (_BasicPhysicSupport.hiddenMethods.onBattleGroundBundary)
+                if (_BasicPhysicSupport.atRing)
                 {
                     touchedBoundary = true;
                     _xz = Vector3.zero - gameObject.transform.position;

@@ -27,6 +27,7 @@ namespace Soul
             dropped = false;
             canWakeUp = false;
             _FightAttriCalRef.GettingDamage = true;
+            _BasicPhysicSupport.SetUsingGravity(false);
             _Animator.SetFloat("speed", 0f);
             _Animator.applyRootMotion = false;
             _Weapon_Animation_Events.ClearMarkerManagers();
@@ -54,26 +55,17 @@ namespace Soul
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _FightAttriCalRef.GettingDamage = false;
             _SkillCancelFlag.turn_off_flag();
-            _BasicPhysicSupport.SetUsingGravity(false);
+            _BasicPhysicSupport.SetUsingGravity(true);
         }
-
-        public override void _c_State_FixedUpdate1()
-        {
-            _State_FixedUpdate();
-        }
-
-        public override void _State_FixedUpdate1()
-        {
-            _State_FixedUpdate();
-        }
-
+        
         Vector3 effectP, quaV;
         private int flyingStep = 0;// 0 拔地 1 曲线 2 落地以及躺地昏迷
-        void _State_FixedUpdate()
+        public override void _State_Update()
         {
+            time_counter += Time.deltaTime;
             if (!touchedBoundary)
             {
-                if (_BasicPhysicSupport.hiddenMethods.onBattleGroundBundary)
+                if (_BasicPhysicSupport.atRing)
                 {
                     touchedBoundary = true;
                     _xz = Vector3.zero - gameObject.transform.position;
@@ -91,8 +83,8 @@ namespace Soul
             {
                 case 0:
                     gameObject.transform.position +=
-                        _xz * (usedZCurve.Evaluate(time_counter + Time.fixedDeltaTime) - usedZCurve.Evaluate(time_counter)) +
-                        Vector3.up * (usedYCurve.Evaluate(time_counter + Time.fixedDeltaTime) - usedYCurve.Evaluate(time_counter));
+                        _xz * (usedZCurve.Evaluate(time_counter + Time.deltaTime) - usedZCurve.Evaluate(time_counter)) +
+                        Vector3.up * (usedYCurve.Evaluate(time_counter + Time.deltaTime) - usedYCurve.Evaluate(time_counter));
                     
                     Debug.Log(flyingStep);
                     if (!_BasicPhysicSupport.hiddenMethods.Grounded)
@@ -101,15 +93,11 @@ namespace Soul
                         Debug.Log(flyingStep);
                     }
                     
-                    if (time_counter > 1) // 1是曲线的x轴长度
-                    {
-                        flyingStep = 2;
-                    }
                     break;
                 case 1:
                     gameObject.transform.position +=
-                        _xz * (usedZCurve.Evaluate(time_counter + Time.fixedDeltaTime) - usedZCurve.Evaluate(time_counter)) +
-                        Vector3.up * (usedYCurve.Evaluate(time_counter + Time.fixedDeltaTime) - usedYCurve.Evaluate(time_counter));
+                        _xz * (usedZCurve.Evaluate(time_counter + Time.deltaTime) - usedZCurve.Evaluate(time_counter)) +
+                        Vector3.up * (usedYCurve.Evaluate(time_counter + Time.deltaTime) - usedYCurve.Evaluate(time_counter));
                     if (_BasicPhysicSupport.hiddenMethods.Grounded)
                     {
                         flyingStep = 2;
@@ -120,12 +108,12 @@ namespace Soul
                     if (!dropped)
                     {
                         dropped = true;
+                        time_counter = 0;
                         _BasicPhysicSupport.SetUsingGravity(true);
                         effectP = gameObject.transform.position;
                         effectP.y = 0;
                         EffectsManager.GenerateEffect("hit_ground", null, effectP, Quaternion.LookRotation(Vector3.right), null);
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-                        time_counter = 0;//开始针对躺地时间记时
                         flyingStep = 3;
                         Debug.Log(flyingStep);
                     }
@@ -145,8 +133,6 @@ namespace Soul
                     }
                     break;
             }
-            
-            time_counter += Time.fixedDeltaTime;
         }
     }
 }

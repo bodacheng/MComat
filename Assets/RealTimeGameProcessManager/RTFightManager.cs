@@ -166,7 +166,7 @@ namespace FightScene
             }
             else
             {
-                AllUnitsStartOff(Team2Members, heroTeamConfig.myTeam, true);
+                OneUnitStartOff(team1StartUnit, heroTeamConfig.myTeam);
             }
         }
         
