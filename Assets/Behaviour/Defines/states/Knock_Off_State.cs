@@ -86,22 +86,25 @@ namespace Soul
                         _xz * (usedZCurve.Evaluate(time_counter + Time.deltaTime) - usedZCurve.Evaluate(time_counter)) +
                         Vector3.up * (usedYCurve.Evaluate(time_counter + Time.deltaTime) - usedYCurve.Evaluate(time_counter));
                     
-                    Debug.Log(flyingStep);
                     if (!_BasicPhysicSupport.hiddenMethods.Grounded)
                     {
                         flyingStep = 1;
-                        Debug.Log(flyingStep);
                     }
-                    
                     break;
                 case 1:
                     gameObject.transform.position +=
                         _xz * (usedZCurve.Evaluate(time_counter + Time.deltaTime) - usedZCurve.Evaluate(time_counter)) +
                         Vector3.up * (usedYCurve.Evaluate(time_counter + Time.deltaTime) - usedYCurve.Evaluate(time_counter));
-                    if (_BasicPhysicSupport.hiddenMethods.Grounded)
+                    if (_BasicPhysicSupport.hiddenMethods.Grounded && time_counter > 0.5f)
+                        // time_counter > 0.5f 这个数字是为了确保角色真能飞起来。
+                        // 否则很有可能因为动画本身等复杂缘故，刚飞起来就被判断落地
                     {
                         flyingStep = 2;
-                        Debug.Log(flyingStep);
+                    }
+
+                    if (time_counter > 2f)
+                    {
+                        flyingStep = 2;
                     }
                     break;
                 case 2 :
@@ -115,7 +118,6 @@ namespace Soul
                         EffectsManager.GenerateEffect("hit_ground", null, effectP, Quaternion.LookRotation(Vector3.right), null);
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                         flyingStep = 3;
-                        Debug.Log(flyingStep);
                     }
                     break;
                 case 3:
