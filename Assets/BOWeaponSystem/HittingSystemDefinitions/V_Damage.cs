@@ -8,17 +8,19 @@ namespace HittingDetection
         public readonly FightAttriCalReference victim;
         public readonly HitBoxManager from_weapon;
         public readonly Marker from_weapon_marker;
-        public Vector3 DamageHappenPoint;
+        public Vector3 DamageEffectPoint;
+        public Vector3 impactComingPoint;
         public Quaternion CutRotation;
         
         public V_Damage() { }
-        public V_Damage(HitBoxManager weapon, Marker weapon_marker, FightAttriCalReference _victim, FightAttriCalReference _attacker, Vector3 _damageHappenPoint, Quaternion _CutRotation)
+        public V_Damage(HitBoxManager weapon, Marker weapon_marker, FightAttriCalReference _victim, FightAttriCalReference _attacker, Vector3 damageEffectPoint, Vector3 impactComingPoint,Quaternion _CutRotation)
         {
             from_weapon = weapon;
             from_weapon_marker = weapon_marker;
             attacker = _attacker;
             victim = _victim;
-            DamageHappenPoint = _damageHappenPoint;
+            DamageEffectPoint = damageEffectPoint;
+            this.impactComingPoint = impactComingPoint;
             CutRotation = _CutRotation;
         }
     

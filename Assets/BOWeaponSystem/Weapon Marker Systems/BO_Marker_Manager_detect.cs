@@ -97,7 +97,7 @@ namespace HittingDetection
                                         _Used_Targets.Add(_hits[hit_target_index].collider.transform);
                                         HitPointPara hitPointPara = new HitPointPara()
                                         {
-                                            pos = _hits[hit_target_index].point,
+                                            onBodyPos = _hits[hit_target_index].point,
                                             qua = _hits[hit_target_index].collider.transform.rotation,
                                             WeaponHpCost = 1
                                         };
@@ -145,11 +145,11 @@ namespace HittingDetection
                                     _Targets_Raw_Hit.Add(_Raw_Target_Instance._Center.geometryCenter);
                                     _TrailModeStartPoint = _hits[hit_target_index].point;
                                     _TrailModeStartPoint = _TrailModeStartPoint + (_hits[hit_target_index].transform.position - _TrailModeStartPoint) * 0.3f;
-                                    hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _attackerRef, _TrailModeStartPoint, Quaternion.LookRotation(_Raw_Target_Instance._Center.geometryCenter.position-_TrailModeStartPoint,Vector3.up)));
+                                    hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _attackerRef, _TrailModeStartPoint,_TrailModeStartPoint, Quaternion.LookRotation(_Raw_Target_Instance._Center.geometryCenter.position-_TrailModeStartPoint,Vector3.up)));
                                     
                                     HitPointPara hitPointPara = new HitPointPara()
                                     {
-                                        pos = _hits[hit_target_index].point,
+                                        onBodyPos = _hits[hit_target_index].point,
                                         qua = _hits[hit_target_index].collider.transform.rotation,
                                         WeaponHpCost = 1
                                     };
@@ -283,7 +283,7 @@ namespace HittingDetection
                                     if (_Raw_Target_Instance != null)
                                     {
                                         _Targets_Raw_Hit.Add(_Raw_Target_Instance._Center.geometryCenter);
-                                        hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _attackerRef, Hit_C.Value.pos, Hit_C.Value.qua));
+                                        hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _attackerRef, Hit_C.Value.onBodyPos, Hit_C.Value.impactPos, Hit_C.Value.qua));
                                         AddWeaponEnergyExaust(Hit_C.Value);
                                         HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                     }
@@ -338,9 +338,9 @@ namespace HittingDetection
                 WeaponEnergyExaustMissions.Add(we_C);
             }
             if (!(zokusei == Zokusei.Null && _WeaponMode == WeaponMode.EnergyFromBodyWeapon)) // 不希望普攻hitbox有能量消逝火花
-                EffectsManager.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(zokusei), hitPointPara.pos, hitPointPara.qua, null);
+                EffectsManager.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(zokusei), hitPointPara.onBodyPos, hitPointPara.qua, null);
             else{
-                EffectsManager.GenerateEffect("hitwave", FightGlobalSetting.EffectPathDefine(zokusei), hitPointPara.pos, hitPointPara.qua, null);
+                EffectsManager.GenerateEffect("hitwave", FightGlobalSetting.EffectPathDefine(zokusei), hitPointPara.onBodyPos, hitPointPara.qua, null);
             }
         }
         

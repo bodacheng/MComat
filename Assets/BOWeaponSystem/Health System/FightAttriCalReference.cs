@@ -128,7 +128,7 @@ public partial class FightAttriCalReference
         {
             EffectsManager.GenerateEffect("shield_hit",
             FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
-            v_Damage.DamageHappenPoint,
+            v_Damage.DamageEffectPoint,
             v_Damage.CutRotation,
             null);
         }
@@ -147,7 +147,7 @@ public partial class FightAttriCalReference
                     break;
             }
             EffectsManager.GenerateEffect(temp, FightGlobalSetting.EffectPathDefine(v_Damage.from_weapon.zokusei),
-            v_Damage.DamageHappenPoint,
+            v_Damage.DamageEffectPoint,
             v_Damage.CutRotation,
             v_Damage.from_weapon.effectSpreadOnBody ? _Center.geometryCenter : null);
         }

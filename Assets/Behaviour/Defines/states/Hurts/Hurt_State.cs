@@ -27,31 +27,31 @@ namespace Soul
                 Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("lay"), true, 0.1f);
                 return;
             }
-            Vector3 point = newValue.DamageHappenPoint;
+            Vector3 point = newValue.DamageEffectPoint;
             point.y = 0;
             if (Vector3.Angle(_DATA_CENTER.WholeT.forward, point - _DATA_CENTER.WholeT.position) > 160)
             {
                 Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("back"), true, 0.1f);
-                RotateToTarget_Tween(_DATA_CENTER.WholeT.position + (_DATA_CENTER.WholeT.position - newValue.DamageHappenPoint), 0.1f);
+                RotateToTarget_Tween(_DATA_CENTER.WholeT.position + (_DATA_CENTER.WholeT.position - newValue.DamageEffectPoint), 0.1f);
             }
             else
             {
-                if (newValue.DamageHappenPoint.y > _DATA_CENTER.head_t.position.y)
+                if (newValue.DamageEffectPoint.y > _DATA_CENTER.head_t.position.y)
                 {
                     Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("press"), true, 0.1f);
-                    RotateToTarget_Tween(newValue.DamageHappenPoint, 0.1f);
+                    RotateToTarget_Tween(newValue.DamageEffectPoint, 0.1f);
                 }
                 else
                 {
-                    if (newValue.DamageHappenPoint.y > _DATA_CENTER.geometryCenter.position.y)
+                    if (newValue.DamageEffectPoint.y > _DATA_CENTER.geometryCenter.position.y)
                     {
                         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("high"), true, 0.1f);
-                        RotateToTarget_Tween(newValue.DamageHappenPoint, 0.1f);
+                        RotateToTarget_Tween(newValue.DamageEffectPoint, 0.1f);
                     }
                     else
                     {
                         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("low"), true, 0.1f);
-                        RotateToTarget_Tween(newValue.DamageHappenPoint, 0.1f);
+                        RotateToTarget_Tween(newValue.DamageEffectPoint, 0.1f);
                     }
                 }
             }

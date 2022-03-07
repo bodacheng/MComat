@@ -35,11 +35,11 @@ namespace Soul
             _Rigidbody.velocity = Vector3.zero;
             Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.05f);
             //_xz = newValue.attacker._Center.WholeT.forward;
-            _xz = _DATA_CENTER.WholeT.position - newValue.DamageHappenPoint;
+            _xz = _DATA_CENTER.WholeT.position  - newValue.impactComingPoint;
             _xz = _xz.normalized;
             _xz.y = 0;
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
-            EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), newValue.DamageHappenPoint, newValue.CutRotation, null);
+            EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), newValue.DamageEffectPoint, newValue.CutRotation, null);
             usedYCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageYAnimationCurve : FightGlobalSetting._knockOffyAnimationCurve;
             usedZCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageZAnimationCurve : FightGlobalSetting._knockOffzAnimationCurve;
         }

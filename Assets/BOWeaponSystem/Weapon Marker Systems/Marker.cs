@@ -7,7 +7,8 @@ namespace HittingDetection
 {
     public class HitPointPara
     {
-        public Vector3 pos;
+        public Vector3 onBodyPos;// 生成特效位置
+        public Vector3 impactPos;// 冲击来源点
         public Quaternion qua;
         public float WeaponHpCost;
     }

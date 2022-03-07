@@ -71,8 +71,9 @@ namespace HittingDetection
                     tempWHpCost = tempM != null ? V_Damage.WpHpCost(V_Damage.WeaponHeavyCal(owner.damage_type), V_Damage.WeaponHeavyCal(tempM.damage_type)) : 1;
                     HitPointPara hitPointPara = new HitPointPara
                     {
-                        pos = HitPointCal(other.transform.position),
-                        qua = Quaternion.LookRotation(other.transform.position - HitPointCal(other.transform.position), Vector3.up),
+                        onBodyPos = HitEffectPointCal(other.transform.position),
+                        impactPos = transform.position,
+                        qua = Quaternion.LookRotation(other.transform.position - HitEffectPointCal(other.transform.position), Vector3.up),
                         WeaponHpCost = tempWHpCost
                     };
                     BallDetectHitPool.Add(other, hitPointPara);
@@ -82,7 +83,7 @@ namespace HittingDetection
 
         float temp;
         Vector3 _temp;
-        public Vector3 HitPointCal(Vector3 colliderCenterPosition)
+        Vector3 HitEffectPointCal(Vector3 colliderCenterPosition)
         {
             temp = Mathf.Clamp((colliderCenterPosition - transform.position).magnitude,0,radius);
             _temp = transform.position + (colliderCenterPosition - transform.position).normalized * temp;

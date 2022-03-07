@@ -11,7 +11,7 @@ namespace Soul
             _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
             //fixDesPos = CalFixPushPos(newValue.damageHappenPoint, newValue.attacker._Center.WholeT.forward, newValue.attacker._Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
             //_Rigidbody.velocity = fixDesPos - gameObject.transform.position;
-            EffectsManager.GenerateEffect("electric_s_e", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), newValue.DamageHappenPoint, newValue.CutRotation, _DATA_CENTER.geometryCenter);
+            EffectsManager.GenerateEffect("electric_s_e", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), newValue.DamageEffectPoint, newValue.CutRotation, _DATA_CENTER.geometryCenter);
         }
     }
 }
