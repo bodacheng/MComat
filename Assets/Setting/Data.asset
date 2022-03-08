@@ -155,13 +155,13 @@ MonoBehaviour:
   Sp3SkillExGet: 0
   GetExAfterDamageBy: 20
   ExGetAfterDamage: 10
-  slighthit_lastingtime: 0.2
-  lighthit_lastingtime: 0.5
-  heavyhit_lastingtime: 0.55
-  superhit_lastingtime: 0.6
+  slighthit_lastingtime: 0.1
+  lighthit_lastingtime: 0.15
+  heavyhit_lastingtime: 0.2
+  superhit_lastingtime: 0.25
   highhit_lastingTime: 0.65
   normalattackpositionfixingtime: 0
-  knockoffextent: 1
+  knockoffextent: 7
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5
   GetupTime: 0.6

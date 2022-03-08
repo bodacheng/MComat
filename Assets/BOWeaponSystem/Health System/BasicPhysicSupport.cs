@@ -55,6 +55,20 @@ public class BasicPhysicSupport : MonoBehaviour
         }
 
         public int draglevel;
+
+        //弃用
+        private Vector3 keptEnemyPoint;
+        private Vector3 keptMePoint;
+        public bool lockedKept;
+        public Vector3 ClampPosBetweenMeAndE(Vector3 pos)
+        {
+            pos.y = 0;
+            float temp = Vector3.Dot(pos - keptMePoint, keptEnemyPoint - keptMePoint);
+            temp = Mathf.Clamp( temp, temp,0 );
+            pos = keptMePoint + ( keptEnemyPoint- keptMePoint).normalized * temp;
+            return pos;
+        }
+        
         public void AddTouchedEnemyBody(Collider C)
         {
             if (!EnemyTouchingDrag)
@@ -64,28 +78,41 @@ public class BasicPhysicSupport : MonoBehaviour
             switch (draglevel)
             {
                 case 1:
-                    _BasicPhysicSupport.Rigidbody.drag = 10f;
+                    _BasicPhysicSupport.Rigidbody.drag = 100f;
                     break;
                 case 2:
-                    _BasicPhysicSupport.Rigidbody.drag = 30f;
+                    _BasicPhysicSupport.Rigidbody.drag = 200f;
                     break;
                 case 3:
-                    _BasicPhysicSupport.Rigidbody.drag = 50f;
+                    _BasicPhysicSupport.Rigidbody.drag = 300f;
                     break;
             }
-            
+
+            // if (!lockedKept && touchingEnemyCs.Count > 0)
+            // {
+            //     lockedKept = true;
+            //     BO_Limb l = C.transform.GetComponent<BO_Limb>();
+            //     if (l != null)
+            //     {
+            //         keptEnemyPoint = l.Center.WholeT.position;
+            //         keptMePoint = _BasicPhysicSupport._DATA_CENTER.WholeT.position;
+            //         keptMePoint.y = 0;
+            //         keptEnemyPoint.y = 0;
+            //     }
+            // }
         }
         public void RemoveTouchedEnemyBody(Collider C)
         {
             if (!EnemyTouchingDrag)
+            {
+                touchingEnemyCs.Clear();
+                lockedKept = false;
                 return;
+            }
             if (touchingEnemyCs.Contains(C))
                 touchingEnemyCs.Remove(C);
-            if (touchingEnemyCs.Count == 0)
-            {
-                _BasicPhysicSupport.Rigidbody.drag = 0f;
-            }
         }
+        
         public void ClearTouchedEnemyBody()
         {
             touchingEnemyCs.Clear();
@@ -116,15 +143,6 @@ public class BasicPhysicSupport : MonoBehaviour
             _BasicPhysicSupport.Rigidbody.useGravity = _BasicPhysicSupport.usingGravity;
             Grounded = false;
         }
-        
-        public void ResetAnimator()
-        {
-            if (_BasicPhysicSupport.animator)
-            {
-                _BasicPhysicSupport.animator.SetBool("Grounded", true);
-                _BasicPhysicSupport.animator.SetFloat("groundedCount", 10);
-            }
-        }
     }
 
     void Awake()
@@ -139,22 +157,11 @@ public class BasicPhysicSupport : MonoBehaviour
     
     Vector3 temp,temp2;
     float dis_from_center;
-    float groundedCount;
-    float airCount;
     void Update()
     {
         if (FightGlobalSetting.scenestep == 1)
         {
-            if (_DATA_CENTER._MyBehaviorRunner.IfRunning())
-            {
-                hiddenMethods.GroundedCal();
-                animator.SetBool("Grounded", hiddenMethods.Grounded);
-                animator.SetFloat("airCount", airCount);
-                animator.SetFloat("groundedCount", groundedCount);
-                groundedCount = hiddenMethods.Grounded ? groundedCount += Time.deltaTime : 0f;
-                airCount = (!hiddenMethods.Grounded) ? airCount += Time.deltaTime : 0f;
-            }
-            
+            hiddenMethods.GroundedCal();
             BoundaryControllByGod.LimitTargetToRange(_DATA_CENTER);
         }
     }
@@ -168,6 +175,10 @@ public class BasicPhysicSupport : MonoBehaviour
     public void OpenEnemyTouchingDrag(int open)
     {
         hiddenMethods.draglevel = open;
+        if (open == 0)
+        {
+            Rigidbody.drag = 0;
+        }
         hiddenMethods.EnemyTouchingDrag = open != 0;
         if (hiddenMethods.EnemyTouchingDrag == false)
             hiddenMethods.ClearTouchedEnemyBody();

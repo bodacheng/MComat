@@ -197,7 +197,6 @@ public partial class Data_Center : MonoBehaviour
         buffsRunner.EndAllCoroutines();
         _ResistanceManager.Resistance.Dispose();
         _ResistanceManager.ResistanceClear();
-        _BasicPhysicSupport.hiddenMethods.ResetAnimator();
         Personality_events.CloseAllPersonalityEffects();
         FightDataRef.Clear();
     }
