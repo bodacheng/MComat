@@ -116,8 +116,7 @@ namespace Soul
             //this.AI_DATA_CENTER.turnShield(true);
 
             fixDesPos = CalFixPushPos(newValue.DamageEffectPoint,
-                                       newValue.attacker._Center.WholeT.forward,
-                                           newValue.attacker._Center.WholeT.position,
+                newValue.attacker._Center.WholeT.position,
                                                gameObject.transform.position,
                                                    newValue.from_weapon.damage_type);
             switch (newValue.from_weapon.damage_type)

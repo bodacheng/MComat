@@ -20,7 +20,7 @@ namespace Soul
                 }
             );
 
-            fixDesPos = CalFixPushPos(newValue.DamageEffectPoint, newValue.attacker._Center.WholeT.forward, newValue.attacker._Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
+            fixDesPos = CalFixPushPos(newValue.DamageEffectPoint,  newValue.attacker._Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
             _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
         }
     }

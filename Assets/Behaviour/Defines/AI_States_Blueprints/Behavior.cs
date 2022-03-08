@@ -367,7 +367,7 @@ namespace Soul
         /// </summary>
         float f_temp;
         Vector3 v_temp;
-        protected Vector3 CalFixPushPos(Vector3 damageHappenPoint, Vector3 attackerT_foward, Vector3 attackerT_pos, Vector3 victimT_pos, DamageType _DamageType)
+        protected Vector3 CalFixPushPos(Vector3 damageHappenPoint, Vector3 attackerT_pos, Vector3 victimT_pos, DamageType _DamageType)
         {
             if (_DamageType == DamageType.explosion)
             {
@@ -378,13 +378,13 @@ namespace Soul
             }
             
             damageHappenPoint.y = 0;
-            f_temp = Vector3.Dot(damageHappenPoint - attackerT_pos, attackerT_foward);
+            f_temp = Vector3.Dot(damageHappenPoint - attackerT_pos, attackerT_pos - victimT_pos);
             if (f_temp > 0 && Vector3.Distance(attackerT_pos, victimT_pos) < FightGlobalSetting._attackDrawingDistance)
             {
-                v_temp = f_temp * attackerT_foward + attackerT_pos;//+ (touchingEnemyBody ? attackerTransform_foward : Vector3.zero);
+                v_temp = f_temp * (attackerT_pos - victimT_pos) + attackerT_pos;//+ (touchingEnemyBody ? attackerTransform_foward : Vector3.zero);
                 return v_temp;
             }
-            return CalFixPushPos(damageHappenPoint, attackerT_foward, attackerT_pos, victimT_pos, DamageType.explosion);                
+            return CalFixPushPos(damageHappenPoint, attackerT_pos, victimT_pos, DamageType.explosion);                
         }
 
         Vector3 use_direction;

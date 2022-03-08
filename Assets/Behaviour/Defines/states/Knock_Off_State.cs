@@ -35,13 +35,13 @@ namespace Soul
             _Rigidbody.velocity = Vector3.zero;
             Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.05f);
             //_xz = newValue.attacker._Center.WholeT.forward;
-            _xz = _DATA_CENTER.WholeT.position  - newValue.impactComingPoint;
-            _xz = _xz.normalized;
-            _xz.y = 0;
+            _xz = CalFixPushPos(newValue.impactComingPoint,  newValue.attacker._Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
+            _xz = (_xz - gameObject.transform.position).normalized;
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), newValue.DamageEffectPoint, newValue.CutRotation, null);
             usedYCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageYAnimationCurve : FightGlobalSetting._knockOffyAnimationCurve;
             usedZCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageZAnimationCurve : FightGlobalSetting._knockOffzAnimationCurve;
+            _FightAttriCalRef.EnableAllLimbs(false);
         }
 
         public override bool Capacity_Exit_Condition()
@@ -52,6 +52,7 @@ namespace Soul
         public override void AI_State_exit()
         {
             base.AI_State_exit();
+            _FightAttriCalRef.EnableAllLimbs(true);
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _FightAttriCalRef.GettingDamage = false;
             _SkillCancelFlag.turn_off_flag();
@@ -89,6 +90,7 @@ namespace Soul
                     if (!_BasicPhysicSupport.hiddenMethods.Grounded)
                     {
                         flyingStep = 1;
+                        _FightAttriCalRef.EnableAllLimbs(true);
                     }
                     break;
                 case 1:

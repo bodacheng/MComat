@@ -46,7 +46,7 @@ namespace FightScene
         void Start()
         {
             PopupLayer.DarkOff(T.gameObject, 1, 0);
-
+            Time.timeScale = 1;
             if (Fight == null)
             {
                 return;
@@ -61,7 +61,6 @@ namespace FightScene
             Application.targetFrameRate = 60;
             FightGlobalSetting.scenestep = 1;
             SingleThreadProcesser.backup = mainProcessRunner;
-            Time.timeScale = 1f;
             //Position_Set_Executor.Instance.P_sets.Clear();
             var preparingProcess = new PreparingProcess();
             var fightingProcess = new FightingProcess();
