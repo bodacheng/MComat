@@ -53,6 +53,7 @@ public class FightGlobalSetting : ScriptableObject
     public static int _Sp2SkillExGet;
     public static int _Sp3SkillExGet;
     public static float _slighthit_lastingtime, _lighthit_lastingtime, _heavyhit_lastingtime, _superhit_lastingtime;
+    public static float _hitImpactLastingTime = 0.1f;
     public static float _knockoffextent;
     public static float _MaxKnockoffLaidGroundTime;
     public static float _CanGetUpAfterKnockoffToGround;

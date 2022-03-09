@@ -70,6 +70,20 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
+            
+            Vector3 GetVerticalDir(Vector3 _dir)
+            {
+                //（_dir.x,_dir.z）与（？，1）垂直，则_dir.x * ？ + _dir.z * 1 = 0
+                //return Mathf.Approximately(_dir.z, 0) ? new Vector3(0, 0, -1) : new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
+                //return new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
+
+                _dir.y = 0;
+                _dir = Quaternion.AngleAxis(90, Vector3.up) * _dir;
+                return _dir;
+            }
+            
+            Debug.Log(GetVerticalDir(new Vector3(3,0,4)));
+            
             PlayFabClientAPI.ExecuteCloudScript(
                 new ExecuteCloudScriptRequest()
                 {

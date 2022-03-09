@@ -21,34 +21,70 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 15.028867
-      outSlope: 15.028867
+      inSlope: 22.88202
+      outSlope: 22.88202
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.27794296
+      outWeight: 0.16640311
     - serializedVersion: 3
-      time: 0.2560919
-      value: 1.7368617
-      inSlope: 0.26109156
-      outSlope: 0.26109156
-      tangentMode: 0
+      time: 0.008183558
+      value: 0.9083524
+      inSlope: 58.032818
+      outSlope: 58.032818
+      tangentMode: 136
       weightedMode: 0
-      inWeight: 0.5065273
-      outWeight: 0.2203893
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.8170198
-      value: -4.0617046
-      inSlope: -16.972403
-      outSlope: -19.768433
+      time: 0.029317271
+      value: 1.7013638
+      inSlope: 24.10118
+      outSlope: 24.10118
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.06455918
+      value: 2.2670712
+      inSlope: 9.342522
+      outSlope: 9.342522
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.11377848
+      value: 2.836588
+      inSlope: 4.478429
+      outSlope: 3.235302
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.6055075
+    - serializedVersion: 3
+      time: 0.2229837
+      value: 3.188968
+      inSlope: -0.40642887
+      outSlope: -0.40642887
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8854712
+      value: -4.163789
+      inSlope: -21.653965
+      outSlope: -19.80093
       tangentMode: 65
       weightedMode: 0
-      inWeight: 0.30062786
+      inWeight: 0.065278545
       outWeight: 0
     - serializedVersion: 3
       time: 39.382317
       value: -766.43713
-      inSlope: -19.768433
+      inSlope: -19.80093
       outSlope: 0
       tangentMode: 69
       weightedMode: 0
@@ -148,19 +184,19 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AT_coefficient: 1
-  HP_coefficient: 0.1
-  NormalSkillExGet: 15
+  HP_coefficient: 1
+  NormalSkillExGet: 99
   Sp1SkillExGet: 0
   Sp2SkillExGet: 0
   Sp3SkillExGet: 0
   GetExAfterDamageBy: 20
   ExGetAfterDamage: 10
   slighthit_lastingtime: 0.1
-  lighthit_lastingtime: 0.15
-  heavyhit_lastingtime: 0.2
-  superhit_lastingtime: 0.25
+  lighthit_lastingtime: 0.3
+  heavyhit_lastingtime: 0.5
+  superhit_lastingtime: 0.6
   highhit_lastingTime: 0.65
-  normalattackpositionfixingtime: 0
+  normalattackpositionfixingtime: 0.1
   knockoffextent: 7
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5

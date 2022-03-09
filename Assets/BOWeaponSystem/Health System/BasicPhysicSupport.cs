@@ -106,7 +106,6 @@ public class BasicPhysicSupport : MonoBehaviour
             if (!EnemyTouchingDrag)
             {
                 touchingEnemyCs.Clear();
-                lockedKept = false;
                 return;
             }
             if (touchingEnemyCs.Contains(C))

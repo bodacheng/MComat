@@ -11,7 +11,7 @@ namespace Soul
             used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
             Vector3 vector3 = newValue.from_weapon_marker.transform.position;
             vector3.y = gameObject.transform.position.y;
-            gameObject.transform.DOMove(vector3, 0.1f).OnComplete(() =>
+            gameObject.transform.DOMove(vector3, FightGlobalSetting._normalattackpositionfixingtime).OnComplete(() =>
                  {
                      _Rigidbody.velocity = Vector3.zero;
                  });

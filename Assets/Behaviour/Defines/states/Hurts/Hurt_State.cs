@@ -93,16 +93,21 @@ namespace Soul
             switch (target.from_weapon.damage_type)
             {
                 case DamageType.slight_damage_forward:
-                    SlightDamgeStart(target);
+                    used_dizzy_time = FightGlobalSetting._slighthit_lastingtime;
+                    NormalStart(target);
                     break;
                 case DamageType.light_damage_forward:
-                    LightDamgeStart(target);
+                    used_dizzy_time = FightGlobalSetting._lighthit_lastingtime;
+                    NormalStart(target);
                     break;
                 case DamageType.heavy_damage_forward:
-                    HeavyDamgeStart(target);
+                    used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
+                    NormalStart(target);
                     break;
                 case DamageType.supper_damage_forward:
-                    SuperDamgeStart(target);
+                    used_dizzy_time = FightGlobalSetting._superhit_lastingtime;
+                    NormalStart(target);
+                    EffectsManager.GenerateEffect("electric_s_e", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), newValue.DamageEffectPoint, newValue.CutRotation, _DATA_CENTER.geometryCenter);
                     break;
                 case DamageType.draw:
                     DrawDamgeStart(target);
