@@ -259,7 +259,7 @@ namespace Soul
                 use_direction = Vector3.RotateTowards(use_direction, temp, 10 * Time.fixedDeltaTime, 0).normalized;//里面的参数都是些很微妙的东西
             }
         }
-
+        
         float h;
         float v;
         Vector3 vel;

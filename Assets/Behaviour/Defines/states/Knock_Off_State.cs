@@ -12,7 +12,11 @@ namespace Soul
         bool dropped, canWakeUp;
         AnimationCurve usedYCurve;
         AnimationCurve usedZCurve;
-
+        
+        private Decompositioner layBlocker;
+        
+        private float temp;
+        
         public Knock_Off_State()
         {
             StateType = BehaviorType.KnockOff;
@@ -48,7 +52,7 @@ namespace Soul
         {
             return false;
         }
-
+        
         public override void AI_State_exit()
         {
             base.AI_State_exit();
@@ -57,6 +61,9 @@ namespace Soul
             _FightAttriCalRef.GettingDamage = false;
             _SkillCancelFlag.turn_off_flag();
             _BasicPhysicSupport.SetUsingGravity(true);
+
+            if (layBlocker != null)
+                layBlocker.Phase = -1;
         }
         
         Vector3 effectP, quaV;
@@ -83,11 +90,11 @@ namespace Soul
             switch (flyingStep)
             {
                 case 0:
+                    temp = usedYCurve.Evaluate(time_counter + Time.deltaTime) - usedYCurve.Evaluate(time_counter);
                     gameObject.transform.position +=
-                        _xz * (usedZCurve.Evaluate(time_counter + Time.deltaTime) - usedZCurve.Evaluate(time_counter)) +
-                        Vector3.up * (usedYCurve.Evaluate(time_counter + Time.deltaTime) - usedYCurve.Evaluate(time_counter));
+                        _xz * (usedZCurve.Evaluate(time_counter + Time.deltaTime) - usedZCurve.Evaluate(time_counter)) + Vector3.up * temp;
                     
-                    if (!_BasicPhysicSupport.hiddenMethods.Grounded)
+                    if (!_BasicPhysicSupport.hiddenMethods.Grounded || temp <= 0) //着地，或都应该下落了的时候还在地上
                     {
                         flyingStep = 1;
                         _FightAttriCalRef.EnableAllLimbs(true);
@@ -120,6 +127,8 @@ namespace Soul
                         EffectsManager.GenerateEffect("hit_ground", null, effectP, Quaternion.LookRotation(Vector3.right), null);
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                         flyingStep = 3;
+                        
+                        layBlocker = EffectsManager.GenerateEffect("layBlocker", "defaultmagic", _DATA_CENTER.geometryCenter.position, _DATA_CENTER.geometryCenter.rotation, _DATA_CENTER.geometryCenter);
                     }
                     break;
                 case 3:

@@ -204,4 +204,10 @@ public class BasicPhysicSupport : MonoBehaviour
             }
         }
     }
+    
+    public void RecoverRootPostionChange( )
+    {
+        if (!hiddenMethods.ITouchedEnemyBody() && Rigidbody.velocity == Vector3.zero)
+            _DATA_CENTER.WholeT.transform.position += _DATA_CENTER.Animation_Manger.AnimatorRef.deltaPosition;
+    }
 }

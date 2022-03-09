@@ -55,5 +55,10 @@ namespace Soul
             return AnimationCasualFinishedFlag();
         }
         #endregion
+
+        public override void _State_Update()
+        {
+            _BasicPhysicSupport.RecoverRootPostionChange();
+        }
     }
 }

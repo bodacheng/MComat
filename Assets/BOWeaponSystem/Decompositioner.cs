@@ -88,6 +88,10 @@ public partial class Decompositioner : MonoBehaviour {
     public void EnergyRessolve()
     {
         StopEmissions(true);
+        if (pool == null)
+        {
+         Debug.Log("严重逻辑问题");   
+        }
         pool.Return(this);
     }
     
