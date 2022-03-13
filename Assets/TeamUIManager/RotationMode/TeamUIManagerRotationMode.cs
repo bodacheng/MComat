@@ -38,7 +38,7 @@ namespace FightScene
                     rotationModeHitCombo.transform.localScale = Vector3.one;
                     rotationModeHitCombo.fontSize = 30;
                     
-                    x.FightDataRef.ComboHitCount.HitCount.Subscribe(h =>
+                    x.FightDataRef._comboHitCount.HitCount.Subscribe(h =>
                     {
                         if (h > 1)
                         {

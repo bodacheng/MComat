@@ -49,7 +49,7 @@ namespace FightScene
                     center._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10);
                 }).AddTo(gameObject);
                 
-                center.FightDataRef.ComboHitCount.HitCount.Value = 0;
+                center.FightDataRef._comboHitCount.HitCount.Value = 0;
 
                 center.IsDead = new ReactiveProperty<bool>(false);
                 center.IsDead.Subscribe(x => 

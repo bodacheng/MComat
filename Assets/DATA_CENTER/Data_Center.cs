@@ -17,7 +17,7 @@ public partial class Data_Center : MonoBehaviour
     public AudioSource _AudioSource;
     public readonly Sensor Sensor = new Sensor();
     public readonly Animation_Manger Animation_Manger = new Animation_Manger();
-    public readonly FightAttriCalReference FightDataRef = new FightAttriCalReference();
+    public readonly FightParamsReference FightDataRef = new FightParamsReference();
     public readonly BuffsRunner buffsRunner = new BuffsRunner();
     public SkillCancelFlag _SkillCancelFlag;
     public BO_Ani_E _BO_Ani_E;
@@ -57,7 +57,7 @@ public partial class Data_Center : MonoBehaviour
             Animation_Manger.AnimatorRef =  WholeT.GetComponent<Animator>();
             this.Sensor.Center = this.geometryCenter;
             this.Sensor.sensor_radius = 15f;
-            FightDataRef._Center = this;
+            FightDataRef.Center = this;
 
             _BasicPhysicSupport.Rigidbody.useGravity = false;
             _BasicPhysicSupport.Rigidbody.mass = 500f;
@@ -156,9 +156,9 @@ public partial class Data_Center : MonoBehaviour
         FightDataRef.FindAllSelfCollidersAndIgnoreCollision();
         FightDataRef.ChangeLayerForLimbs(_TeamConfig.mylayer);
         FightDataRef.EnableAllLimbs(true);
-        FightDataRef.INI();
+        FightDataRef.Ini();
         FightDataRef.CurrentHp.Value = nineSkillHp;
-        FightDataRef.criticalGaugeMode = criticalGaugeMode;
+        FightDataRef.CriticalGaugeMode = criticalGaugeMode;
     }
 
     //我们希望datacenter是整个角色初始化的出发点，那么这个地方应该也可以做到根据情况决定一些组件加载还是不加载。

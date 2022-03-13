@@ -8,12 +8,11 @@ namespace Soul
     public abstract partial class Behavior
     {
         public GameObject gameObject;
-        public Transform GeoCenterT;
         public Rigidbody _Rigidbody;
         public BehaviorRunner _AIStateRunner;
         public Data_Center _DATA_CENTER;
         public BO_Ani_E _BO_Ani_E;
-        public FightAttriCalReference _FightAttriCalRef;
+        public FightParamsReference FightParamsRef;
         public ResistanceManager _ResistanceManager;
         public BasicPhysicSupport _BasicPhysicSupport;
         public Sensor Sensor;
@@ -36,7 +35,7 @@ namespace Soul
         public bool nextAttackCanRushFirst;
         int temp;
 
-        public void EnergyAbsorb(CriticalGaugeMode gaugeMode, FightAttriCalReference victim)
+        public void EnergyAbsorb(CriticalGaugeMode gaugeMode, FightParamsReference victim)
         {
             if (!AbsorbEnergyFinished)
             {
@@ -65,7 +64,7 @@ namespace Soul
                     default:
                         break;
                 }
-                _FightAttriCalRef.PlusEx(temp);
+                FightParamsRef.PlusEx(temp);
                 AbsorbEnergyFinished = true;
             }
         }
@@ -74,9 +73,8 @@ namespace Soul
         public virtual void Pre_process_before_enter()
         {
             this.gameObject = _DATA_CENTER.WholeT.gameObject;
-            this.GeoCenterT = _DATA_CENTER.geometryCenter;
             this.Sensor = _DATA_CENTER.Sensor;
-            this._FightAttriCalRef = _DATA_CENTER.FightDataRef;
+            this.FightParamsRef = _DATA_CENTER.FightDataRef;
             this.shaderManager = _DATA_CENTER._ShaderManager;
             this._AIStateRunner = _DATA_CENTER._MyBehaviorRunner;
             this.Animation_Manger = _DATA_CENTER.Animation_Manger;
@@ -105,7 +103,7 @@ namespace Soul
 
         public virtual bool Capacity_enter_condition()
         {
-            return _FightAttriCalRef.HasPlentyGauge(splevel);
+            return FightParamsRef.HasPlentyGauge(splevel);
         }
 
         // On what condition we have to enter this state
@@ -117,8 +115,8 @@ namespace Soul
         // Process when entering the state 
         public virtual void AI_State_enter()
         {
-            _FightAttriCalRef.AT = AT;
-            _FightAttriCalRef.CostCriticalGaugeBySPlevel(splevel);
+            FightParamsRef.AT = AT;
+            FightParamsRef.CostCriticalGaugeBySPlevel(splevel);
             BeheviourFrameCounter = 0;
             AbsorbEnergyFinished = false;
         }
@@ -126,8 +124,8 @@ namespace Soul
         // Process when entering the state 
         public virtual void AI_State_enter(V_Damage newValue)
         {
-            _FightAttriCalRef.AT = AT;
-            _FightAttriCalRef.CostCriticalGaugeBySPlevel(splevel);
+            FightParamsRef.AT = AT;
+            FightParamsRef.CostCriticalGaugeBySPlevel(splevel);
         }
 
         public virtual void C_State_enter()
@@ -181,13 +179,12 @@ namespace Soul
 
         protected bool DetectApprovedEventAttack()
         {
-
-            FightAttriCalReference BO_Health = gameObject.GetComponent<FightAttriCalReference>();
-            if (BO_Health.ReturnApprovedEventAttackAttempts().Count > 0)
+            var boHealth = gameObject.GetComponent<FightParamsReference>();
+            if (boHealth.ReturnApprovedEventAttackAttempts().Count > 0)
             {
-                BO_Health.SetManagingEventDamage(BO_Health.ReturnApprovedEventAttackAttempts()[0]);
-                BO_Health.ReturnApprovedEventAttackAttempts().Clear();
-                BO_Health.GetManagingEventDamage().Position_set.run();
+                boHealth.SetManagingEventDamage(boHealth.ReturnApprovedEventAttackAttempts()[0]);
+                boHealth.ReturnApprovedEventAttackAttempts().Clear();
+                boHealth.GetManagingEventDamage().Position_set.run();
                 return true;
             }
             else
@@ -201,32 +198,32 @@ namespace Soul
             return _Animator.GetBool("in_transition") == false && _Animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f;
         }
         
-        protected void EventAttackEnderProcess()
+        protected void EventAttackEnterProcess()
         {
-            FightAttriCalReference BO_Health = gameObject.GetComponent<FightAttriCalReference>();
+            var BO_Health = gameObject.GetComponent<FightParamsReference>();
             if (BO_Health.GetManagingEventDamage() != null)
             {
                 BO_Health.GetManagingEventDamage().Position_set.end();
             }
             BO_Health.SetManagingEventDamage(null);
         }
-
+        
         // Rotate to a target
-        Vector3 look_dir;
-        Quaternion dirQ;
+        Vector3 _lookDir;
+        Quaternion _dirQ;
         //返回带符号角度，用以判断往哪个方向摆头。
         protected float RotateToTarget(Vector3 target, float turnSpeed, bool ignoreY)
         {
-            look_dir = target - gameObject.transform.position;
+            _lookDir = target - gameObject.transform.position;
             if (ignoreY)
             {
-                look_dir.y = 0;
+                _lookDir.y = 0;
             }
-            dirQ = Quaternion.LookRotation(look_dir);
-            dirQ = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Quaternion.Angle(dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
-            _Rigidbody.MoveRotation(dirQ);
+            _dirQ = Quaternion.LookRotation(_lookDir);
+            _dirQ = Quaternion.Slerp(gameObject.transform.rotation, _dirQ, turnSpeed * Quaternion.Angle(_dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
+            _Rigidbody.MoveRotation(_dirQ);
             //gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Quaternion.Angle(dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
-            return Vector3.SignedAngle(_Rigidbody.transform.forward, look_dir, Vector3.up);
+            return Vector3.SignedAngle(_Rigidbody.transform.forward, _lookDir, Vector3.up);
         }
 
         public void RotateToTarget_Tween(Vector3 target, float duration)
@@ -243,7 +240,7 @@ namespace Soul
         //    _DATA_CENTER.WholeT.DORotate(direction, duration, RotateMode.Fast);
         //}
 
-        float angle;
+        float _angle;
         // Rotate to a direction
         protected bool RotateToDirection(Vector3 direction, float turnSpeed, bool ignoreY)
         {
@@ -251,11 +248,11 @@ namespace Soul
             {
                 direction.y = 0;
             }
-            dirQ = Quaternion.LookRotation(direction);
-            angle = Quaternion.Angle(dirQ, gameObject.transform.rotation);
-            dirQ = Quaternion.Slerp(gameObject.transform.rotation, dirQ, angle*(360-angle)/(180*180/turnSpeed) * Time.fixedDeltaTime);
-            _Rigidbody.MoveRotation(dirQ);
-            return Mathf.Approximately(Quaternion.Angle(dirQ, gameObject.transform.rotation), 0f);
+            _dirQ = Quaternion.LookRotation(direction);
+            _angle = Quaternion.Angle(_dirQ, gameObject.transform.rotation);
+            _dirQ = Quaternion.Slerp(gameObject.transform.rotation, _dirQ, _angle*(360-_angle)/(180*180/turnSpeed) * Time.fixedDeltaTime);
+            _Rigidbody.MoveRotation(_dirQ);
+            return Mathf.Approximately(Quaternion.Angle(_dirQ, gameObject.transform.rotation), 0f);
         }
 
         // Move to direction
@@ -267,7 +264,7 @@ namespace Soul
         //}
 
         Vector3 v;
-        public float Move(Vector3 relativePos, float acceleration, bool ignoreY)
+        protected float Move(Vector3 relativePos, float acceleration, bool ignoreY)
         {
             if (_Rigidbody == null)
                 return 0;
@@ -281,10 +278,10 @@ namespace Soul
             return _Rigidbody.velocity.magnitude;
         }
 
-        public float use_acc;
+        float use_acc;
         public float Move_AddForce(Vector3 forcedirection, float acceleration, bool ignoreY)//废函数。
         {
-            if (this._Rigidbody == null)
+            if (_Rigidbody == null)
                 return 0f;
             if (ignoreY)
                 forcedirection.y = 0;
@@ -294,7 +291,7 @@ namespace Soul
             return _Rigidbody.velocity.magnitude;
         }
 
-        public void MoveByChangePosition(Vector3 relativePos, float acceleration, bool ignoreY)
+        void MoveByChangePosition(Vector3 relativePos, float acceleration, bool ignoreY)
         {
             if (ignoreY)
             {
@@ -323,7 +320,7 @@ namespace Soul
         }
 
         float current_speed;
-        public void ClampVelocity(float max_speed)
+        void ClampVelocity(float max_speed)
         {
             current_speed = _Rigidbody.velocity.magnitude;
             if (current_speed > max_speed)
@@ -335,25 +332,25 @@ namespace Soul
 
         Vector3 dir;
         Quaternion slerp;
-        public void RotateToVelocity(float turnSpeed, bool ignoreY)
+        void RotateToVelocity(float turnSpeed, bool ignoreY)
         {
             dir = _Rigidbody.velocity;
             if (ignoreY)
                 dir.y = 0;
-            dirQ = Quaternion.LookRotation(dir);
-            dirQ = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Quaternion.Angle(dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
-            _Rigidbody.MoveRotation(dirQ);
+            _dirQ = Quaternion.LookRotation(dir);
+            _dirQ = Quaternion.Slerp(gameObject.transform.rotation, _dirQ, turnSpeed * Quaternion.Angle(_dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
+            _Rigidbody.MoveRotation(_dirQ);
         }
 
         // RotateToVelocity in reverse
-        public void RotateToVelocityNegative(float turnSpeed, bool ignoreY)
+        void RotateToVelocityNegative(float turnSpeed, bool ignoreY)
         {
             dir = ignoreY ? -new Vector3(this._Rigidbody.velocity.x, 0f, this._Rigidbody.velocity.z) : -this._Rigidbody.velocity;
 
             if (dir.magnitude > 0.1)
             {
-                dirQ = Quaternion.LookRotation(dir);
-                slerp = Quaternion.Slerp(gameObject.transform.rotation, dirQ, dir.magnitude * turnSpeed * Time.deltaTime);
+                _dirQ = Quaternion.LookRotation(dir);
+                slerp = Quaternion.Slerp(gameObject.transform.rotation, _dirQ, dir.magnitude * turnSpeed * Time.deltaTime);
                 _Rigidbody.MoveRotation(slerp);
             }
         }
@@ -365,6 +362,10 @@ namespace Soul
         /// victimT_pos 受害者点
         /// _DamageType 攻击种类
         /// </summary>
+        ///
+        // 点积的计算方式为:  a·b=|a|·|b|cos<a,b>  其中|a|和|b|表示向量的模，<a,b>表示两个向量的夹角。另外在 点积 中，<a,b>和<b,a> 夹角是不分顺序的。 
+        // 所以通过点积，我们其实是可以计算两个向量的夹角的。 
+        // 另外通过点积的计算我们可以简单粗略的判断当前物体是否朝向另外一个物体: 只需要计算当前物体的transform.forward向量与 (otherObj.transform.position – transform.position)的点积即可， 大于0则面对，否则则背对着。当然这个计算也会有一点误差，但大致够用。 
         float f_temp;
         Vector3 v_temp;
         protected Vector3 CalFixPushPos(Vector3 damageHappenPoint, Vector3 attackerT_pos, Vector3 victimT_pos, DamageType _DamageType)
@@ -388,7 +389,7 @@ namespace Soul
         }
 
         Vector3 use_direction;
-        protected void AttackApprocach(Vector3 P, float speed)
+        protected void AttackApproach(Vector3 P, float speed)
         {
             if (_SkillCancelFlag.hiddenMethods.GetAttackApproachingFlag())
             {

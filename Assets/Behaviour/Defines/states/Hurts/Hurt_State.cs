@@ -60,7 +60,7 @@ namespace Soul
         public override void AI_State_exit()
         {
             base.AI_State_exit();
-            _FightAttriCalRef.GettingDamage = false;
+            FightParamsRef.GettingDamage = false;
             if (physicMissionDisposable != null && !physicMissionDisposable.IsDisposed)
                 physicMissionDisposable.Dispose();
             if (_BuffsRunner.Freesing)
@@ -76,7 +76,7 @@ namespace Soul
             base.AI_State_enter();
             _Animator.applyRootMotion = false;
             PlayHurtAnim(newValue);
-            _FightAttriCalRef.GettingDamage = true;
+            FightParamsRef.GettingDamage = true;
             _Weapon_Animation_Events.ClearMarkerManagers();
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             TimeCounter = 0f;
@@ -87,7 +87,7 @@ namespace Soul
 
             if (target.from_weapon.effectSpreadOnBody)
             {
-                _FightAttriCalRef.RunShaderChangeProcess(target.from_weapon.zokusei, 0.1f);
+                FightParamsRef.RunShaderChangeProcess(target.from_weapon.zokusei, 0.1f);
             }
             
             switch (target.from_weapon.damage_type)
@@ -139,12 +139,12 @@ namespace Soul
                     return;
             }
 
-            _FightAttriCalRef.GetKnockOffCount().PlusGauge(1f);
-            _FightAttriCalRef.GetKnockOffCount().PlusTimeCounter(0.2f);
+            FightParamsRef.GetKnockOffCount().PlusGauge(1f);
+            FightParamsRef.GetKnockOffCount().PlusTimeCounter(0.2f);
 
-            if (_FightAttriCalRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent)
+            if (FightParamsRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent)
             {
-                _FightAttriCalRef.GetKnockOffCount().SetGauge(0f);
+                FightParamsRef.GetKnockOffCount().SetGauge(0f);
                 _AIStateRunner.ChangeState("KnockOff", target);
                 return;
             }

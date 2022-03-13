@@ -10,7 +10,7 @@ public class BO_Limb : MonoBehaviour
     void Start()
     {
         if (Center != null)
-            Center.FightDataRef.AddToBOHitBoxeComponent(this);
+            Center.FightDataRef.RegisterLimb(this);
         else
         {
             Debug.Log("存在未启用的BO_Limb"+ gameObject);

@@ -38,19 +38,19 @@ namespace HittingDetection
         #region realtime param
         bool Enabled;
         public float CurrentHP { get; set; }
-        FightAttriCalReference _attackerRef;
+        FightParamsReference _attackerRef;
         TeamConfig teamConfig = TeamConfig.defaultSet;
         Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
         bool HitFlesh;
         bool HitShield;
-        Marker[] _markers;
-        List<Transform> _Targets_Raw_Hit = new List<Transform>(); //Targets initialy hit by the blade (pre-check 这个是以一帧为单位处理，为了避免多个marker重复处理击中的bodyhealth。
-        List<Transform> _Used_Targets = new List<Transform>(); // 就是每一帧所碰撞到的所有collider的母体。所有collider。不论是否包含mainhealth什么的。是以武器启动周期为处理单位。处理过的单位才会加入至其中
-        List<Transform> _Shields_Hit = new List<Transform>();
-        List<Vector3> _ShiledHitPositions = new List<Vector3>();
-        List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
-        bool TraditionalDefendMode = false;
-        float AT;
+        List<Marker> _markers = new List<Marker>();
+        List<Transform> _usedTargets = new List<Transform>(); // 就是每一帧所碰撞到的所有collider的母体。所有collider。不论是否包含mainhealth什么的。是以武器启动周期为处理单位。处理过的单位才会加入至其中
+        readonly List<Transform> _Targets_Raw_Hit = new List<Transform>(); //Targets initialy hit by the blade (pre-check 这个是以一帧为单位处理，为了避免多个marker重复处理击中的bodyhealth。
+        readonly List<Transform> _shieldsHit = new List<Transform>();
+        readonly List<Vector3> _shieldHitPos = new List<Vector3>();
+        readonly List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
+        readonly bool _traditionalDefendMode = false;
+        
         public string GeneratedByStateKey { get; set; }
         HitBoxLifeEnding hitBoxLifeEnding = HitBoxLifeEnding.untouched;
         public HitBoxLifeEnding HitBoxLifeEnding
@@ -72,7 +72,8 @@ namespace HittingDetection
             }
         }
         #endregion
-
+        
+        float AT;
         public float GetDamageAmount()
         {
             return weaponHP > 0 ? AT / weaponHP : AT;
@@ -82,20 +83,20 @@ namespace HittingDetection
         {
             Transform _MarkersParent = transform;
             Transform[] children = new Transform[_MarkersParent.childCount];
-            List<BO_Marker> bms = new List<BO_Marker>();
-            for (int i = 0; i < children.Length; i++)
+            var bms = new List<Marker>();
+            for (var i = 0; i < children.Length; i++)
             {
-                BO_Marker bO_Marker = _MarkersParent.GetChild(i).gameObject.GetComponent<BO_Marker>();
+                var bO_Marker = _MarkersParent.GetChild(i).gameObject.GetComponent<BO_Marker>();
                 if (bO_Marker != null)
                 {
                     bO_Marker.LocalAwake();
                     bms.Add(bO_Marker);
                     bO_Marker.SetOwner(this);
-                    Collider colliderofmarker = _MarkersParent.GetChild(i).gameObject.GetComponent<Collider>();
-                    HitBoxesProcesser.AddToColliderHitBoxDic(colliderofmarker, this);
+                    var c = _MarkersParent.GetChild(i).gameObject.GetComponent<Collider>();
+                    HitBoxesProcesser.AddToColliderHitBoxDic(c, this);
                 }
             }
-            _markers = bms.ToArray();
+            _markers = bms;
         }
         
         public void MarkersEnablingStarts()
@@ -121,26 +122,26 @@ namespace HittingDetection
             _WeaponHolderCenter = centerT;
         }
 
-        public void SetOwnerFACR(FightAttriCalReference myOwnerCalReference)
+        public void SetOwnerFACR(FightParamsReference value)
         {
-            _attackerRef = myOwnerCalReference;
+            _attackerRef = value;
             AT = _attackerRef == null ? 0 : _attackerRef.AT * AT_weight;
         }
-        public FightAttriCalReference GetOwnerFACR()
+        public FightParamsReference GetOwnerFACR()
         {
             return _attackerRef;
         }
-        public void SetDectionTargetsUnion(List<Transform> Used_Targets)
+        public void SetDetectionTargetsUnion(List<Transform> Used_Targets)
         {
-            _Used_Targets = Used_Targets;
+            _usedTargets = Used_Targets;
         }
 
         public void SetTeamConfig(TeamConfig teamConfig)
         {
             this.teamConfig = teamConfig;
-            for (int i = 0; i < _markers.Length; i++)
+            for (var i = 0; i < _markers.Count; i++)
             {
-                Marker _Marker = _markers[i];
+                var _Marker = _markers[i];
                 _Marker._layers = teamConfig.mySensorAndWeaponTargetLayerMask;
                 _Marker.enemyShieldLayer = teamConfig.enemyShieldLayerMask;
                 _Marker.gameObject.layer = teamConfig.myWeaponLayer;
@@ -149,12 +150,12 @@ namespace HittingDetection
 
         public void EnableMarkers()
         {
-            if (_Used_Targets != null)
+            if (_usedTargets != null)
             {
-                _Used_Targets.Clear();
+                _usedTargets.Clear();
             }
-            _Shields_Hit.Clear();
-            for (int i = 0; i < _markers.Length; i++)
+            _shieldsHit.Clear();
+            for (var i = 0; i < _markers.Count; i++)
             {
                 _markers[i].EnableMarkerProcess(teamConfig.myWeaponLayer);
             }
@@ -164,36 +165,25 @@ namespace HittingDetection
         public void DisableMarkers()
         {
             Enabled = false;
-            if (_Used_Targets != null)
+            if (_usedTargets != null)
             {
-                _Used_Targets.Clear();
+                _usedTargets.Clear();
             }
-            _Shields_Hit.Clear();
-            if (_markers != null)
+            _shieldsHit.Clear();
+            for (var i = 0; i < _markers.Count; i++)
             {
-                for (int i = 0; i < _markers.Length; i++)
-                {
-                    _markers[i].DisableMarkerProcess();
-                }
+                _markers[i].DisableMarkerProcess();
             }
         }
-
-        public void ClearMarkersDectections()
-        {
-            for (int i = 0; i < _markers.Length; i++)
-            {
-                _markers[i].ClearMarkerProcess();
-            }
-        }
-
+        
         public void ClearTargets()
         {
-            if (_Used_Targets != null)
+            if (_usedTargets != null)
             {
-                _Used_Targets.Clear();
+                _usedTargets.Clear();
             }
-            _Shields_Hit.Clear();
-            for (int i = 0; i < _markers.Length; i++)
+            _shieldsHit.Clear();
+            for (int i = 0; i < _markers.Count; i++)
             {
                 _markers[i].ClearMarkerProcess();
             }
@@ -213,13 +203,21 @@ namespace HittingDetection
                 DetectProcess();
             }
         }
+        
+        void ClearMarkersDetections()
+        {
+            for (var i = 0; i < _markers.Count; i++)
+            {
+                _markers[i].ClearMarkerProcess();
+            }
+        }
 
         public void LocalLateUpdate()
         {
             if (Enabled)
             {
                 TreatProcess();
-                ClearMarkersDectections();
+                ClearMarkersDetections();
             }
         }
     }

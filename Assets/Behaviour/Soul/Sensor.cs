@@ -271,7 +271,7 @@ public class Sensor
         float mateToMe = sensor_radius, enemyToMe = sensor_radius;
         foreach (var raycastHit in _spherecastHits)
         {
-            if (FightAttriCalReference.AllMeatColliders.Contains(raycastHit.collider))
+            if (FightParamsReference.AllMeatColliders.Contains(raycastHit.collider))
             {
                 if (_TeamConfig.myTeamLayerMask == (_TeamConfig.myTeamLayerMask | (1 << raycastHit.collider.gameObject.layer)))
                 {

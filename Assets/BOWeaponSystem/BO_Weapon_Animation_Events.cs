@@ -15,7 +15,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
     IDictionary<Transform, Decompositioner> bodyPartsHitBoxRegisterDic;
     Transform right_hand, left_hand, right_foot, left_foot, head, tail;
     Transform geometryCenter;
-    FightAttriCalReference myownheath;
+    FightParamsReference myownheath;
 
     void Awake()
     {
@@ -36,7 +36,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             BEs._TeamConfig = teamConfig;
         }
         
-        public void AssignWeaponsFromDataCenter(FightAttriCalReference Ownheath, Transform geometryCenter, Transform right_hand, Transform left_hand, Transform right_foot, Transform left_foot, Transform head, Transform tail)
+        public void AssignWeaponsFromDataCenter(FightParamsReference Ownheath, Transform geometryCenter, Transform right_hand, Transform left_hand, Transform right_foot, Transform left_foot, Transform head, Transform tail)
         {
             BEs.myownheath = Ownheath;
             BEs.geometryCenter = geometryCenter;
@@ -96,12 +96,12 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             target_hitbox.GetPositionConstraint().locked = true;
             target_hitbox._HitBox.SetTeamConfig(BEs._TeamConfig);
             target_hitbox._HitBox.SetReferenceTransformInfo(BEs.geometryCenter);//第二个参数是因为BE本身就在wholeT上
-            target_hitbox._HitBox.SetDectionTargetsUnion(BEs._Used_Targets);
+            target_hitbox._HitBox.SetDetectionTargetsUnion(BEs._Used_Targets);
             target_hitbox._HitBox.MarkersEnablingStarts();
             
             if (FightGlobalSetting.HitBoxLogger)
             {
-                target_hitbox._HitBox.GeneratedByStateKey = BEs.myownheath._Center._MyBehaviorRunner.GetNowState().StateKey;
+                target_hitbox._HitBox.GeneratedByStateKey = BEs.myownheath.Center._MyBehaviorRunner.GetNowState().StateKey;
                 target_hitbox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
             }
         }
@@ -119,7 +119,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
                 BEs.bodyPartsHitBoxRegisterDic[t] = null;
                 target_hitbox.GetPositionConstraint().constraintActive = false;
                 target_hitbox.CloseMarkers();
-                target_hitbox._HitBox.SetDectionTargetsUnion(null);
+                target_hitbox._HitBox.SetDetectionTargetsUnion(null);
                 target_hitbox.Phase = -1;
             }
         }

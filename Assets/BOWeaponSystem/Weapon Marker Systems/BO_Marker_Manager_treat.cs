@@ -26,11 +26,11 @@ namespace HittingDetection
         
         void TreatProcess()
         {
-            if (HitShield && TraditionalDefendMode)//其实由上面的分析可以知道，对于来自一把武器的攻击，hitshield和hitflesh是不会同时为true的。但如果多把武器同时来攻击，如果被攻击方同时有被击中以及防御住的情况发生，肯定要先处理所受伤害，立刻转入受伤状态才对
+            if (HitShield && _traditionalDefendMode)//其实由上面的分析可以知道，对于来自一把武器的攻击，hitshield和hitflesh是不会同时为true的。但如果多把武器同时来攻击，如果被攻击方同时有被击中以及防御住的情况发生，肯定要先处理所受伤害，立刻转入受伤状态才对
             {
-                for (int i1 = 0; i1 < _Shields_Hit.Count; i1++)
+                for (int i1 = 0; i1 < _shieldsHit.Count; i1++)
                 {
-                    if (!_Used_Targets.Contains(_Shields_Hit[i1])) //无论对墙壁，盾牌，还是伤害对象，每一轮攻击只会造成一次影响
+                    if (!_usedTargets.Contains(_shieldsHit[i1])) //无论对墙壁，盾牌，还是伤害对象，每一轮攻击只会造成一次影响
                     {
                         //collision = Attack_And_Shield_Specification.Instance.Attack_On_Shield_Cal(damage_type, TheS.damage_type);
                         //_MyOwnerCalReference._Center._BasicPhysicSupport.hiddenMethods.ITouchedThisCollider(1);
@@ -67,7 +67,7 @@ namespace HittingDetection
                         //            break;
                         //    }
                         //}
-                        _Used_Targets.Add(_Shields_Hit[i1]);
+                        _usedTargets.Add(_shieldsHit[i1]);
                     }
                 }
             }
@@ -97,15 +97,5 @@ namespace HittingDetection
             }
             WeaponEnergyExaustMissions.Clear();
         }
-
-        Vector3 CalFixPosDestination(Vector3 damageHappenPoint, Transform attackerTransform)
-        {
-            damageHappenPoint.y = 0;
-            return (Vector3.Dot(damageHappenPoint - attackerTransform.position,attackerTransform.forward) * attackerTransform.forward + attackerTransform.position);
-        }
-        
-        // 点积的计算方式为:  a·b=|a|·|b|cos<a,b>  其中|a|和|b|表示向量的模，<a,b>表示两个向量的夹角。另外在 点积 中，<a,b>和<b,a> 夹角是不分顺序的。 
-        // 所以通过点积，我们其实是可以计算两个向量的夹角的。 
-        // 另外通过点积的计算我们可以简单粗略的判断当前物体是否朝向另外一个物体: 只需要计算当前物体的transform.forward向量与 (otherObj.transform.position – transform.position)的点积即可， 大于0则面对，否则则背对着。当然这个计算也会有一点误差，但大致够用。 
     }
 }

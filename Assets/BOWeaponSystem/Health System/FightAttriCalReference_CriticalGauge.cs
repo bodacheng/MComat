@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UniRx;
 
-public partial class FightAttriCalReference
+public partial class FightParamsReference
 {
     public ReactiveProperty<int> CriticalGauge { get; set; } = new ReactiveProperty<int>();
         
@@ -12,7 +12,7 @@ public partial class FightAttriCalReference
     
     public void CostCriticalGaugeBySPlevel(int level)
     {
-        if (criticalGaugeMode == CriticalGaugeMode.Unlimited)
+        if (CriticalGaugeMode == CriticalGaugeMode.Unlimited)
             return;
         switch (level)
         {

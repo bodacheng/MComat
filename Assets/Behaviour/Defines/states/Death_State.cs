@@ -39,16 +39,16 @@ namespace Soul
             pEvents.CloseAllPersonalityEffects();
             _DATA_CENTER.IsDead.Value = true;
             time_counter = 0;
-            _FightAttriCalRef.ChangeLayerForLimbs(14);
+            FightParamsRef.ChangeLayerForLimbs(14);
             _Rigidbody.velocity = Vector3.zero;
             _Animator.SetFloat("speed", 0f);
             _Animator.applyRootMotion = false;
             //进入击飞状态后这个动画的播放应该是没有前提的。这一下和的机理比较绕，可以看一下BO_health那边eatdamage怎么写的。
             Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.05f);
-            EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), newValue.DamageEffectPoint, gameObject.transform.rotation, _FightAttriCalRef._Center.geometryCenter);
+            EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), newValue.DamageEffectPoint, gameObject.transform.rotation, FightParamsRef.Center.geometryCenter);
             touchedBoundary = false;
             dropped = false;
-            _xz = CalFixPushPos(newValue.impactComingPoint,  newValue.attacker._Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
+            _xz = CalFixPushPos(newValue.impactComingPoint,  newValue.attacker.Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
             _xz = (_xz - gameObject.transform.position).normalized;
             pEvents.CloseAllPersonalityEffects();
             usedYCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageYAnimationCurve : FightGlobalSetting._knockOffyAnimationCurve;
@@ -95,7 +95,7 @@ namespace Soul
                     if (!_BasicPhysicSupport.hiddenMethods.Grounded)
                     {
                         flyingStep = 1;
-                        _FightAttriCalRef.EnableAllLimbs(true);
+                        FightParamsRef.EnableAllLimbs(true);
                     }
                     break;
                 case 1:

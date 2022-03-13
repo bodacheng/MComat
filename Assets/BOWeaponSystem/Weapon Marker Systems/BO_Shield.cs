@@ -13,7 +13,7 @@ public class BO_Shield : MonoBehaviour {
     public bool _AdvancedShieldDetection = true;
 
 	[Tooltip("Before we start, if you plan on using this Shield with a character or object equiped with the BS_Main_Health system, please, assign it here. Otherwise the hit detection may not work properly")]
-    public FightAttriCalReference _ownerFightAttriCalReference; //it's referenced in other scripts.
+    public FightParamsReference OwnerFightParamsReference; //it's referenced in other scripts.
 
 	[Tooltip("This fancy named GameObject is used in Advanced Shield Detection. It is a point behind the center of the shield (from the safe side, behind the shield's collider (so it's simply a point near the center of the Shield's Wielder, if it's humantoid, for scale). It's used to calculate if the attack was coming from the front or the back of the shield. [INFO:] Simply create an empty GameObject, set it as a child of your shield and place it accordingly around the shield. Then put it's reference into this variable. [INFO 2:] If you're experiencing that the shild is being hit though the attack was clearly coming from the back (like if the shield is quite big or the attack swipe is large), don't be affraid to pull this spot a bit further behind the shield wielder")]
 	public Transform _ShieldBackSpot;
@@ -85,7 +85,7 @@ public class BO_Shield : MonoBehaviour {
                 shieldbreaking.transform.LookAt(_ShieldCenterSpot.position - _ShieldBackSpot.position);
             }
         }
-        if (_ownerFightAttriCalReference != null)
+        if (OwnerFightParamsReference != null)
         {
             // 下面这些都是瞎写的
             //_ownerFightAttriCalReference.ApplyDamage(new V_Damage(0,
@@ -97,11 +97,11 @@ public class BO_Shield : MonoBehaviour {
         }
     }
 
-    public void IniShield(TeamConfig _TeamConfig,FightAttriCalReference bO_Health)
+    public void IniShield(TeamConfig _TeamConfig,FightParamsReference bO_Health)
     {
         if (_TeamConfig !=null)
             this.gameObject.layer = _TeamConfig.myShieldLayer;
-        this._ownerFightAttriCalReference = bO_Health;
+        this.OwnerFightParamsReference = bO_Health;
         bO_Health.SetShield(this);
     }
 

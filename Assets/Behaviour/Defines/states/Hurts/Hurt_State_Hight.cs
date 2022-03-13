@@ -14,8 +14,8 @@ namespace Soul
             _Animator.SetFloat("speed", 0f);
             _Rigidbody.velocity = Vector3.zero;
             used_dizzy_time = FightGlobalSetting._highhit_lastingTime;
-            _xz = newValue.attacker._Center.WholeT.forward;
-            _FightAttriCalRef.GetKnockOffCount().PlusTimeCounter(0.2f);
+            _xz = newValue.attacker.Center.WholeT.forward;
+            FightParamsRef.GetKnockOffCount().PlusTimeCounter(0.2f);
             Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.1f);
         }
 

@@ -7,7 +7,7 @@ namespace Soul
     {
         void StableDamgeStart(V_Damage newValue)
         {
-            _FightAttriCalRef.GetKnockOffCount().SetGauge(0f);
+            FightParamsRef.GetKnockOffCount().SetGauge(0f);
             used_dizzy_time = FightGlobalSetting._lighthit_lastingtime;
             _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
             //fixDesPos = CalFixPushPos(newValue.damageHappenPoint, newValue.attacker._Center.WholeT.forward, newValue.attacker._Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);

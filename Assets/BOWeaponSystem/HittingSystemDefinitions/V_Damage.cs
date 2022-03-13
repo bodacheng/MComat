@@ -4,8 +4,8 @@ namespace HittingDetection
 {
     public class V_Damage
     {
-        public readonly FightAttriCalReference attacker;
-        public readonly FightAttriCalReference victim;
+        public readonly FightParamsReference attacker;
+        public readonly FightParamsReference victim;
         public readonly HitBoxManager from_weapon;
         public readonly Marker from_weapon_marker;
         public Vector3 DamageEffectPoint;
@@ -13,7 +13,7 @@ namespace HittingDetection
         public Quaternion CutRotation;
         
         public V_Damage() { }
-        public V_Damage(HitBoxManager weapon, Marker weapon_marker, FightAttriCalReference _victim, FightAttriCalReference _attacker, Vector3 damageEffectPoint, Vector3 impactComingPoint,Quaternion _CutRotation)
+        public V_Damage(HitBoxManager weapon, Marker weapon_marker, FightParamsReference _victim, FightParamsReference _attacker, Vector3 damageEffectPoint, Vector3 impactComingPoint,Quaternion _CutRotation)
         {
             from_weapon = weapon;
             from_weapon_marker = weapon_marker;

@@ -674,7 +674,7 @@
      <Compile Include="Assets\TouchScript\Scripts\Gestures\Gesture.cs" />
      <Compile Include="Assets\FightLoad\FightLoad.cs" />
      <Compile Include="Assets\BOWeaponSystem\Decompositioner_Life.cs" />
-     <Compile Include="Assets\BOWeaponSystem\Health System\FightAttriCalReference.cs" />
+     <Compile Include="Assets\BOWeaponSystem\Health System\FightParamsReference.cs" />
      <Compile Include="Assets\FightLogger\FightLogger.cs" />
      <Compile Include="Assets\AnimControl\dontuse\NullStateProcess.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\Gotcha\GotchaResultLayer\GotchaResultLayer_Steps.cs" />

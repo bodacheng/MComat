@@ -71,7 +71,7 @@ public class DATACENTERGUI : Editor {
             myScript._AudioSource = myScript.WholeT.GetComponent<AudioSource>();
             myScript._SkillCancelFlag = myScript.WholeT.GetComponent<SkillCancelFlag>();
             myScript._SkillCancelFlag._C = myScript;
-            myScript.FightDataRef._Center = myScript;
+            myScript.FightDataRef.Center = myScript;
             myScript._BO_Ani_E = myScript.WholeT.GetComponent<BO_Ani_E>();
             myScript._BO_Ani_E._DATA_CENTER = myScript;
             myScript._MyBehaviorRunner = myScript.gameObject.GetComponent<BehaviorRunner>();            

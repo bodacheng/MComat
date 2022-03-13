@@ -9,7 +9,7 @@ namespace Soul
         void PushToMidStart(V_Damage newValue, float dis, bool Grounded)
         {
             used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
-            Vector3 MidDistanceFromMe = newValue.attacker._Center.geometryCenter.transform.position + newValue.attacker._Center.WholeT.transform.forward * dis;
+            Vector3 MidDistanceFromMe = newValue.attacker.Center.geometryCenter.transform.position + newValue.attacker.Center.WholeT.transform.forward * dis;
             if (Grounded)
             {
                 PlayHurtAnim(newValue);

@@ -91,13 +91,13 @@ namespace Soul
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             if (isEventAttackLaunchState)
             {
-                if (_FightAttriCalRef != null)
+                if (FightParamsRef != null)
                 {
-                    _FightAttriCalRef.ReturnApprovedEventAttackAttempts().Clear();
+                    FightParamsRef.ReturnApprovedEventAttackAttempts().Clear();
                 }
             }
             if (isEventAttackEndState)
-                EventAttackEnderProcess();
+                EventAttackEnterProcess();
         }
 
         Collider collider;
@@ -238,7 +238,7 @@ namespace Soul
                     if (Sensor.GetEnemiesByDistance(false).Count > 0)
                     {
                         if (Sensor.GetEnemiesByDistance(false)[0] != null)
-                            AttackApprocach(Sensor.GetEnemiesByDistance(false)[0].transform.position, approcahingSpeed);
+                            AttackApproach(Sensor.GetEnemiesByDistance(false)[0].transform.position, approcahingSpeed);
                     }
                     break;
                 case Phase.reachedFromThebeginning://reachedFromThebeginning现在其实是两种情况：1. 冲刺状态一开始内环就有敌人 2.非冲刺状态一开始外环有敌人
@@ -246,7 +246,7 @@ namespace Soul
                     {
                         if (Sensor.GetEnemiesByDistance(false)[0] != null)
                         {
-                            AttackApprocach(Sensor.GetEnemiesByDistance(false)[0].transform.position, approcahingSpeed);
+                            AttackApproach(Sensor.GetEnemiesByDistance(false)[0].transform.position, approcahingSpeed);
                         }
                     }
                     break;
