@@ -75,7 +75,6 @@ namespace FightScene
                 case FightEventType.SkillTest:
                 case FightEventType.Self:
                 case FightEventType.Arena:
-                case FightEventType.Test:
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Preparing, preparingProcess);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.CountDown, countDownProcess);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Fighting, fightingProcess);

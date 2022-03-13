@@ -44,11 +44,11 @@ public class PreparingProcess : FSceneProcess
         
         if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
         {
-            RTFightManager.target.TurnAllMembersInvincible(true, RTFightManager.target.Team1Members);
-            RTFightManager.target.TurnAllMembersInvincible(true, RTFightManager.target.Team2Members);
+            RTFightManager.target.TurnAllUnitsInvincible(true, RTFightManager.target.Team1Members);
+            RTFightManager.target.TurnAllUnitsInvincible(true, RTFightManager.target.Team2Members);
         }else{
-            RTFightManager.target.TurnAllMembersInvincible(false, RTFightManager.target.Team1Members);
-            RTFightManager.target.TurnAllMembersInvincible(false, RTFightManager.target.Team2Members);
+            RTFightManager.target.TurnAllUnitsInvincible(false, RTFightManager.target.Team1Members);
+            RTFightManager.target.TurnAllUnitsInvincible(false, RTFightManager.target.Team2Members);
         }
         
         switch (RTFightManager.target.team1.TeamMode)

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
@@ -10,37 +9,33 @@ namespace mainMenu
     public class SelfFightLayer : UILayer
     {
         [Header("Mode Buttons")] 
-        [SerializeField] Button RotationModeBtn, MultiModeBtn, TestModeBtn; 
+        [SerializeField] Button RotationModeBtn, MultiModeBtn;
+
+        [SerializeField] private Toggle testMode;
         
-        [Space(7)]
         [Header("模式选中框")]
         [SerializeField] GameObject ModeFrame;
-
-        [Space(7)]
+        
         [Header("选中框")]
         [SerializeField] GameObject selectedFrame;
         
-        [Space(7)]
         [Header("共同战斗式按钮")]
         [SerializeField] RectTransform MuitiRaidTeam1T, MuitiRaidTeam2T;
         [SerializeField] HeroIcon team1back, team1front, team1left, team1right;
         [SerializeField] HeroIcon team2back, team2front, team2left, team2right;
         
-        [Space(7)]
         [Header("轮番战斗式按钮")]
         [SerializeField] Transform RotationTeam1T, RotationTeam2T;
         [SerializeField] HeroIcon team11_R, team12_R, team13_R;
         [SerializeField] HeroIcon team21_R, team22_R, team23_R;
 
-        MultiDict<Team, int, HeroIcon> teamButtonDic_M = new MultiDict<Team, int, HeroIcon>();
-        MultiDict<Team, int, HeroIcon> teamButtonDic_R = new MultiDict<Team, int, HeroIcon>();
-
-        IDictionary<HeroIcon, int> IconNumCheck = new Dictionary<HeroIcon, int>();
-        
-        FightMembers _selfFight = new FightMembers { };
-        FightInfo stage;
-        Team focusingTeam;
-        int focusingPosNum = -1;
+        readonly MultiDict<Team, int, HeroIcon> teamButtonDic_M = new MultiDict<Team, int, HeroIcon>();
+        readonly MultiDict<Team, int, HeroIcon> teamButtonDic_R = new MultiDict<Team, int, HeroIcon>();
+        readonly IDictionary<HeroIcon, int> IconNumCheck = new Dictionary<HeroIcon, int>();
+        readonly FightMembers _selfFight = new FightMembers { };
+        FightInfo _stage;
+        Team _focusingTeam;
+        int _focusingPosNum = -1;
         
         PosKeySet _team1PosKeySet_M = new PosKeySet();
         PosKeySet _team2PosKeySet_M = new PosKeySet();
@@ -49,8 +44,8 @@ namespace mainMenu
         
         public void INI()
         {
-            stage = ScriptableObject.CreateInstance<FightInfo>();
-            stage.BattleGroundID = 0;
+            _stage = ScriptableObject.CreateInstance<FightInfo>();
+            _stage.BattleGroundID = 0;
             
             IniMultiRaidModeUnitIcons(new List<HeroIcon> { team1back, team1left, team1front, team1right }, Team.player1);
             IniMultiRaidModeUnitIcons(new List<HeroIcon> { team2back, team2left, team2front, team2right }, Team.player2);
@@ -60,7 +55,6 @@ namespace mainMenu
             
             RotationModeBtn.onClick.AddListener(SwitchToRotationMode);
             MultiModeBtn.onClick.AddListener(SwitchToMultiRaidMode);
-            TestModeBtn.onClick.AddListener(SwitchToTestMode);
         }
         
         public void Clear()
@@ -82,11 +76,11 @@ namespace mainMenu
         
         void CancelSelect()
         {
-            focusingPosNum = -1;
+            _focusingPosNum = -1;
             HeroIcon.SelectedFeature(null, selectedFrame, 200f);
         }
 
-        void ModeSelect(Transform t)
+        void FrameRefresh(Transform t)
         {
             ModeFrame.transform.SetParent(t);
             ModeFrame.transform.localPosition = Vector3.zero;
@@ -98,10 +92,10 @@ namespace mainMenu
             MuitiRaidTeam2T.gameObject.SetActive(true);
             RotationTeam1T.gameObject.SetActive(false);
             RotationTeam2T.gameObject.SetActive(false);
-            stage.SetEventType(FightEventType.Self);
-            stage.Team1Mode = TeamMode.multiRaid;
-            stage.Team2Mode = TeamMode.multiRaid;
-            ModeSelect(MultiModeBtn.transform);
+            _stage.SetEventType(FightEventType.Self);
+            _stage.Team1Mode = TeamMode.multiRaid;
+            _stage.Team2Mode = TeamMode.multiRaid;
+            FrameRefresh(MultiModeBtn.transform);
         }
         
         public void SwitchToRotationMode()
@@ -110,27 +104,15 @@ namespace mainMenu
             MuitiRaidTeam2T.gameObject.SetActive(false);
             RotationTeam1T.gameObject.SetActive(true);
             RotationTeam2T.gameObject.SetActive(true);
-            stage.SetEventType(FightEventType.Self);
-            stage.Team1Mode = TeamMode.rotation;
-            stage.Team2Mode = TeamMode.rotation;
-            ModeSelect(RotationModeBtn.transform);
-        }
-        
-        public void SwitchToTestMode()
-        {
-            MuitiRaidTeam1T.gameObject.SetActive(true);
-            MuitiRaidTeam2T.gameObject.SetActive(true);
-            RotationTeam1T.gameObject.SetActive(false);
-            RotationTeam2T.gameObject.SetActive(false);
-            stage.SetEventType(FightEventType.Test);
-            stage.Team1Mode = TeamMode.rotation;
-            stage.Team2Mode = TeamMode.rotation;
-            ModeSelect(TestModeBtn.transform);
+            _stage.SetEventType(FightEventType.Self);
+            _stage.Team1Mode = TeamMode.rotation;
+            _stage.Team2Mode = TeamMode.rotation;
+            FrameRefresh(RotationModeBtn.transform);
         }
         
         public void FightStart()
         {
-            switch (stage.Team1Mode)
+            switch (_stage.Team1Mode)
             {
                 case TeamMode.multiRaid:
                     _selfFight.HeroSets = _team1PosKeySet_M.LoadTeamDic();
@@ -141,10 +123,10 @@ namespace mainMenu
                     _selfFight.EnemySets = _team2PosKeySet_R.LoadTeamDic();
                     break;
             }
-            stage.fightMembers = _selfFight;
-            stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
-            stage.team2ID = PlayerAccountInfo.Me.PlayFabUsername + "_2";
-            FightLoad.Go(stage);
+            _stage.fightMembers = _selfFight;
+            _stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
+            _stage.team2ID = PlayerAccountInfo.Me.PlayFabUsername + "_2";
+            FightLoad.Go(_stage);
         }
         
         #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行
@@ -152,7 +134,7 @@ namespace mainMenu
         {
             void MonsterIconButton(string instanceID)
             {
-                UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+                var unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
                 unitsLayer.Select(instanceID);
                 UnitIconBtn(instanceID);
             }
@@ -161,7 +143,7 @@ namespace mainMenu
                 MonsterIconButton(instanceID);
             }
             
-            UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+            var unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
             unitsLayer.SetUnitsIconOnClick(Trigger);
         }
         #endregion
@@ -169,37 +151,37 @@ namespace mainMenu
         void UnitIconBtn(string instanceID)
         {
             var unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
-            if (focusingPosNum == -1)
+            if (_focusingPosNum == -1)
             {
                 unitsLayer.Select(instanceID);
             }
             else
             {
-                switch (stage.Team1Mode)
+                switch (_stage.Team1Mode)
                 {
                     case TeamMode.multiRaid:
-                        switch (focusingTeam)
+                        switch (_focusingTeam)
                         {
                             case Team.player1:
-                                _team1PosKeySet_M.SetPosMemInfoByLocalID(focusingPosNum, instanceID);
-                                ChangeIconOnPos(focusingPosNum, teamButtonDic_M, _team1PosKeySet_M);
+                                _team1PosKeySet_M.SetPosMemInfoByLocalID(_focusingPosNum, instanceID);
+                                ChangeIconOnPos(_focusingPosNum, teamButtonDic_M, _team1PosKeySet_M);
                                 break;
                             case Team.player2:
-                                _team2PosKeySet_M.SetPosMemInfoByLocalID(focusingPosNum, instanceID);
-                                ChangeIconOnPos(focusingPosNum, teamButtonDic_M, _team2PosKeySet_M);
+                                _team2PosKeySet_M.SetPosMemInfoByLocalID(_focusingPosNum, instanceID);
+                                ChangeIconOnPos(_focusingPosNum, teamButtonDic_M, _team2PosKeySet_M);
                                 break;
                         }
                         break;
                     case TeamMode.rotation:
-                        switch (focusingTeam)
+                        switch (_focusingTeam)
                         {
                             case Team.player1:
-                                _team1PosKeySet_R.SetPosMemInfoByLocalID(focusingPosNum, instanceID);
-                                ChangeIconOnPos(focusingPosNum, teamButtonDic_R, _team1PosKeySet_R);
+                                _team1PosKeySet_R.SetPosMemInfoByLocalID(_focusingPosNum, instanceID);
+                                ChangeIconOnPos(_focusingPosNum, teamButtonDic_R, _team1PosKeySet_R);
                                 break;
                             case Team.player2:
-                                _team2PosKeySet_R.SetPosMemInfoByLocalID(focusingPosNum, instanceID);
-                                ChangeIconOnPos(focusingPosNum, teamButtonDic_R, _team2PosKeySet_R);
+                                _team2PosKeySet_R.SetPosMemInfoByLocalID(_focusingPosNum, instanceID);
+                                ChangeIconOnPos(_focusingPosNum, teamButtonDic_R, _team2PosKeySet_R);
                                 break;
                         }
                         break;
@@ -254,7 +236,7 @@ namespace mainMenu
             {
                 Debug.Log("请检查changeIconOnPos函数执行顺序");
             }
-            HeroIcon tar = teamButtonDic.Get(focusingTeam, posNum);
+            HeroIcon tar = teamButtonDic.Get(_focusingTeam, posNum);
             if (tar == null)
             {
                 Debug.Log("严重错误");
@@ -318,8 +300,8 @@ namespace mainMenu
         
         void OnTeamPosBtn(Team team, int pos)
         {
-            focusingTeam = team;
-            focusingPosNum = pos;
+            _focusingTeam = team;
+            _focusingPosNum = pos;
             var unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
             var unitsBoxSelect = unitsLayer.GetSelect();
             

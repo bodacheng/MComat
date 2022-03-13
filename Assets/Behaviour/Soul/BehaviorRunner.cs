@@ -60,13 +60,10 @@ namespace Soul
                 BehaviourTransitionEngine();
                 
                 #region 决策制定
-                controller.PlayerControll(this, CanTranTo, !((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this));
+                controller.PlayerControl(this, CanTranTo, !((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this));
                 #endregion
                 
-                if (now_Behavior != null)
-                {
-                    now_Behavior._State_Update();
-                }
+                now_Behavior?._State_Update();
             }
         }
 

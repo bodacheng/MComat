@@ -152,30 +152,23 @@ namespace FightScene
                     break;
             }
             
-            if (loadFight.GetEventType() != FightEventType.Test)
+            switch (loadFight.Team2Mode)
             {
-                switch (loadFight.Team2Mode)
-                {
-                    case TeamMode.multiRaid:
-                        AllUnitsStartOff(Team2Members, EnemyTeamConfig.myTeam);
-                        break;
-                    case TeamMode.rotation:
-                        OneUnitStartOff(team2StartUnit, EnemyTeamConfig.myTeam);
-                        break;
-                }
-            }
-            else
-            {
-                OneUnitStartOff(team1StartUnit, heroTeamConfig.myTeam);
+                case TeamMode.multiRaid:
+                    AllUnitsStartOff(Team2Members, EnemyTeamConfig.myTeam);
+                    break;
+                case TeamMode.rotation:
+                    OneUnitStartOff(team2StartUnit, EnemyTeamConfig.myTeam);
+                    break;
             }
         }
         
         // 全队无敌
-        public void TurnAllMembersInvincible(bool _Invincible, MultiDict<int, int, Data_Center> TeamMembers)
+        public void TurnAllUnitsInvincible(bool _Invincible, MultiDict<int, int, Data_Center> TeamMembers)
         {
-            foreach (Data_Center a_char in TeamMembers.GetValues())
+            foreach (var center in TeamMembers.GetValues())
             {
-                a_char.FightDataRef.Invincible = _Invincible;
+                center.FightDataRef.Invincible = _Invincible;
             }
         }
         

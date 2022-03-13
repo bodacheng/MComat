@@ -6,16 +6,11 @@ using dataAccess;
 
 public class FightInfo : ScriptableObject
 {
-    int LocalFightID;
-    FightEventType eventType;
+    public int ID;
+    [SerializeField] FightEventType eventType;
     
-    public int ID
-    {
-        set { LocalFightID = value; }
-        get { return LocalFightID; }
-    }
-    
-    public string team1ID, team2ID;
+    public string team1ID{ set; get; }
+    public string team2ID{ set; get; }
     
     public FightEventType GetEventType()
     {
@@ -146,8 +141,7 @@ public enum FightEventType
     Quest = 1,
     Arena = 2,
     Self = 4,
-    SkillTest = 5,
-    Test = 6
+    SkillTest = 5
 }
 
 public enum TeamMode
