@@ -14,7 +14,7 @@ namespace Soul
         readonly SSIMultiDictionary Triggerd = new SSIMultiDictionary();
         public bool TestMode { get; set; } = false;
 
-        public void PlayerControl(BehaviorRunner behaviorRunner, List<SkillEntity> Options, bool AI_Active)
+        public void PlayerControl(BehaviorRunner behaviorRunner, List<SkillEntity> Options, bool Auto)
         {
             if (MobileInputsManager.target.Observing_Runner == behaviorRunner)
             {
@@ -126,7 +126,7 @@ namespace Soul
             }
             
             #region AI决策
-            if (AI_Active)
+            if (Auto)
             {
                 AI_RUNs(behaviorRunner, Options);
             }

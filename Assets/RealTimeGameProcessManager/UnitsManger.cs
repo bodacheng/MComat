@@ -122,6 +122,7 @@ namespace FightScene
                     data_Center.WholeT.gameObject.SetActive(false);
                 }
             }
+            RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
             return unitChanged;
         }
         
@@ -174,7 +175,7 @@ namespace FightScene
             {
                 RTFightManager.target.SetFocusUnit(RMode_Unit.Value);
             }
-            RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
+            
             switch (_changeTo._TeamConfig.myTeam)
             {
                 case Team.player1:
@@ -184,7 +185,7 @@ namespace FightScene
                     _changeTo._MyBehaviorRunner.AI = RTFightManager.target.team2.Auto;
                     break;
             }
-            
+            RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
             //Refresh(TeamMembers);
             return unitChanged;
         }
