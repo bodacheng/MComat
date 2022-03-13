@@ -27,22 +27,20 @@ public class MobileInputsManager : MonoBehaviour {
     [SerializeField] Transform effectsParent;
     
     public static MobileInputsManager target;
-    static IDictionary<Zokusei, zokuseiButtonEffectsGroup> zokuseiButtonEffects = new Dictionary<Zokusei, zokuseiButtonEffectsGroup>();
+    static readonly IDictionary<Zokusei, zokuseiButtonEffectsGroup> ZokuseiButtonEffects = new Dictionary<Zokusei, zokuseiButtonEffectsGroup>();
     static zokuseiButtonEffectsGroup _focusing;
     public BehaviorRunner Observing_Runner;
-
-    public static bool playerMode;
-    public static bool inputting;
+    
+    public static bool inputting = false;
     
     void Awake()
     {
         target = this;
     }
-    
-    public static void SetPlayerMode(bool result)
+
+    public bool BeingControl(BehaviorRunner runner)
     {
-        playerMode = result;
-        inputting = false;
+        return inputting && runner == Observing_Runner;
     }
     
     public void FocusCharInputs(BehaviorRunner focusingCharInputManger, Zokusei zokusei)
@@ -59,7 +57,7 @@ public class MobileInputsManager : MonoBehaviour {
     
     public void Clear()
     {
-        zokuseiButtonEffects.Clear();
+        ZokuseiButtonEffects.Clear();
         _focusing = null;
     }
     
@@ -68,9 +66,9 @@ public class MobileInputsManager : MonoBehaviour {
     {
         if (_focusing != null)
             _focusing.Close();
-        if (zokuseiButtonEffects.ContainsKey(zokusei))
+        if (ZokuseiButtonEffects.ContainsKey(zokusei))
         {
-            _focusing = zokuseiButtonEffects[zokusei];
+            _focusing = ZokuseiButtonEffects[zokusei];
             _focusing.Open(
                 PosCal.GetWorldPos(NetFightScene.target.fxCamera, Defend.GetComponent<RectTransform>(), 5), 
                 PosCal.GetWorldPos(NetFightScene.target.fxCamera, Dash.GetComponent<RectTransform>(), 5)
@@ -85,11 +83,11 @@ public class MobileInputsManager : MonoBehaviour {
         zokuseiButtonEffectsGroup zokuseiButtons = new zokuseiButtonEffectsGroup();
         zokuseiButtons.INI(effectsParent, zokusei, Attack, Fire1, Fire2);
         zokuseiButtons.Close();
-        if (!zokuseiButtonEffects.ContainsKey(zokusei))
+        if (!ZokuseiButtonEffects.ContainsKey(zokusei))
         {
-            zokuseiButtonEffects.Add(zokusei, zokuseiButtons);
+            ZokuseiButtonEffects.Add(zokusei, zokuseiButtons);
         } else {
-            zokuseiButtonEffects[zokusei] = zokuseiButtons;
+            ZokuseiButtonEffects[zokusei] = zokuseiButtons;
         }
     }
 
@@ -159,7 +157,7 @@ public class MobileInputsManager : MonoBehaviour {
     // 如果不是对准角色，不会跑。
     static float h;
     static float v;
-    public static void CheckIfPlayerIsInputting()
+    static void CheckIfPlayerIsInputting()
     {
         inputting = defendButtonHover || attack || fire1 || fire2;
         if (inputting)

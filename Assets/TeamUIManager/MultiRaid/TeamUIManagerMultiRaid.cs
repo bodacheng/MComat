@@ -15,13 +15,23 @@ namespace FightScene
         
         void InsTeamUI_Multi(MultiDict<int, int, Data_Center> TeamMembers)//这个环节应该能够同时把HP bar也适配好。
         {
-            foreach (Data_Center a_char in TeamMembers.GetValues())
+            foreach (var a_char in TeamMembers.GetValues())
             {
-                //  SideCharIcon整备
-                void Action1()
+                // SideCharIcon整备
+                void Action1(Data_Center c)
                 {
-                    RTFightManager.target.SwitchToCMode(a_char, RTFightManager.Auto);
-                    RTFightManager.target.CameraAdjustment(teamConfig.myTeam);
+                    if (teamConfig.myTeam == RTFightManager.playerTeam)
+                    {
+                        RTFightManager.target.SetFocusUnit(a_char);
+                        if (teamConfig.myTeam == Team.player1)
+                        {
+                            c._MyBehaviorRunner.AI = RTFightManager.target.team1.Auto;
+                        }
+                        if (teamConfig.myTeam == Team.player2)
+                        {
+                            c._MyBehaviorRunner.AI = RTFightManager.target.team2.Auto;
+                        }
+                    }
                 }
                 
                 SideCharIcon _SideIcon;
@@ -30,7 +40,10 @@ namespace FightScene
                     _SideIcon = Instantiate(button_prefab);
                     _SideIcon.name = a_char.name + " ICon";
                     _SideIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
-                    _SideIcon.focusingCharIcon.iconButton.onClick.AddListener(Action1);
+                    _SideIcon.focusingCharIcon.iconButton.onClick.AddListener(() =>
+                    {
+                        Action1(a_char);
+                    });
                     UnitInfo charDInfo = RTFightManager.target.UnitInfoRef[a_char];
                     UnitConfig unitConfig = Units.GetUnitConfig(charDInfo.r_id);
                     _SideIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Get(charDInfo.r_id), unitConfig._zokusei);
@@ -73,14 +86,6 @@ namespace FightScene
                 a_char._ResistanceManager.Resistance.Subscribe(x =>
                 {
                     RefreshResistanceBar(a_char);
-                }).AddTo(gameObject);
-                
-                a_char.IsDead.Subscribe(x => 
-                {
-                    if (x)
-                    {
-                        RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
-                    }
                 }).AddTo(gameObject);
             }
         }

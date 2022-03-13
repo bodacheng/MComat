@@ -17,9 +17,9 @@ namespace Soul
             ForcedTransitions.Clear();
             OptionsForButtonRefresh.Clear();
             
-            if (now_Behavior != null)
+            if (_nowBehavior != null)
             {
-                SkillEntityDic.TryGetValue(now_Behavior.StateKey, out CurrentSKillEntity);
+                SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out CurrentSKillEntity);
             }
                         
             #region Forced state transition 
@@ -27,8 +27,8 @@ namespace Soul
             {
                 for (int i = 0; i < CurrentSKillEntity.ForcedTransitions.Length; i++)
                 {
-                    BehaviourDic.TryGetValue(CurrentSKillEntity.ForcedTransitions[i], out try_Behavior);
-                    if (try_Behavior.Force_enter_condition())
+                    BehaviourDic.TryGetValue(CurrentSKillEntity.ForcedTransitions[i], out _tryBehavior);
+                    if (_tryBehavior.Force_enter_condition())
                     {
                         ForcedTransitions.Add(CurrentSKillEntity.ForcedTransitions[i]);
                     }
@@ -44,19 +44,19 @@ namespace Soul
             #region 查找已经可以触发的后续技能
             foreach (string _Key in CurrentSKillEntity.CasualTo)
             {
-                BehaviourDic.TryGetValue(_Key, out try_Behavior);
-                if (try_Behavior == null)
+                BehaviourDic.TryGetValue(_Key, out _tryBehavior);
+                if (_tryBehavior == null)
                 {
                     Debug.Log("没找到"+_Key);
                     return;
                 }
-                if (!try_Behavior.Capacity_enter_condition())
+                if (!_tryBehavior.Capacity_enter_condition())
                 {
                     continue;
                 }
                 SkillEntityDic.TryGetValue(_Key, out tempSKillEntity);
                 OptionsForButtonRefresh.Add(tempSKillEntity);
-                if ((tempSKillEntity.CANBECANCELLEDTO && _SkillCancelFlag.Cancel_Flag) || now_Behavior.Capacity_Exit_Condition())
+                if ((tempSKillEntity.CANBECANCELLEDTO && _SkillCancelFlag.Cancel_Flag) || _nowBehavior.Capacity_Exit_Condition())
                 {
                     CanTranTo.Add(tempSKillEntity);
                 }
@@ -76,21 +76,21 @@ namespace Soul
         {
             List<SkillEntity> List = new List<SkillEntity>();
             SkillEntity _CurrentSKillEntity = new SkillEntity();
-            if (now_Behavior != null)
+            if (_nowBehavior != null)
             {
-                SkillEntityDic.TryGetValue(now_Behavior.StateKey, out _CurrentSKillEntity);
+                SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out _CurrentSKillEntity);
             }
             if (_CurrentSKillEntity == null)
                 return List;
             foreach (string _Key in _CurrentSKillEntity.CasualTo)
             {
-                BehaviourDic.TryGetValue(_Key, out try_Behavior);
-                if (try_Behavior == null)
+                BehaviourDic.TryGetValue(_Key, out _tryBehavior);
+                if (_tryBehavior == null)
                 {
                     Debug.Log("没找到"+_Key);
                     continue;
                 }
-                if (!try_Behavior.Capacity_enter_condition())
+                if (!_tryBehavior.Capacity_enter_condition())
                 {
                     continue;
                 }

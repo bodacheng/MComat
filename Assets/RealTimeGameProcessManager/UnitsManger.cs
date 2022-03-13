@@ -1,12 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
-using System;
-using UniRx;
-using System.Collections;
 
 namespace FightScene
 {
@@ -14,7 +9,21 @@ namespace FightScene
     {
         public TeamMode TeamMode;
         public TeamConfig teamConfig;
-        
+
+        private bool auto;
+        public bool Auto
+        {
+            set
+            {
+                auto = value;
+                if (RMode_Unit != null)
+                {
+                    RMode_Unit.Value._MyBehaviorRunner.AI = auto;
+                }
+            }
+            get => auto;
+        }
+
         public ReactiveProperty<Data_Center> RMode_Unit;
 
         Data_Center waitingMember;
@@ -163,9 +172,19 @@ namespace FightScene
             }
             if (teamConfig.myTeam == RTFightManager.playerTeam)
             {
-                RTFightManager.target.SwitchToCMode(RMode_Unit.Value, MobileInputsManager.playerMode);
+                RTFightManager.target.SetFocusUnit(RMode_Unit.Value);
             }
             RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
+            switch (_changeTo._TeamConfig.myTeam)
+            {
+                case Team.player1:
+                    _changeTo._MyBehaviorRunner.AI = RTFightManager.target.team1.Auto;
+                    break;
+                case Team.player2:
+                    _changeTo._MyBehaviorRunner.AI = RTFightManager.target.team2.Auto;
+                    break;
+            }
+            
             //Refresh(TeamMembers);
             return unitChanged;
         }

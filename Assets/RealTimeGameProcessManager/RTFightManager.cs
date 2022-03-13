@@ -22,7 +22,6 @@ namespace FightScene
         
         public static RTFightManager target;
         
-        public static bool Auto;
         public static Data_Center focusingUnit;
         public static Team playerTeam = Team.player1;
         
@@ -30,8 +29,7 @@ namespace FightScene
         public MultiDict<int, int, Data_Center> Team2Members;
         
         public readonly IDictionary<Data_Center, UnitInfo> UnitInfoRef = new Dictionary<Data_Center, UnitInfo>();
-        
-        public readonly static IDictionary<Data_Center, ReactiveProperty<float>> RefreshTimeDic = new Dictionary<Data_Center, ReactiveProperty<float>>();
+        public static readonly IDictionary<Data_Center, ReactiveProperty<float>> RefreshTimeDic = new Dictionary<Data_Center, ReactiveProperty<float>>();
 
         FightInfo loadFight;
         
@@ -42,36 +40,22 @@ namespace FightScene
         
         public void SwitchToWatchMode() // button behaviour
         {
-            SwitchToCMode(null, false);
+            team1.Auto = false;
+            team2.Auto = false;
             CameraAdjustment(playerTeam);
         }
-        
-        public void SwitchAutoMode()
+
+        public void SwitchAuto(Team team, bool ai)
         {
-            Auto = !Auto;
-            SwitchToCMode(focusingUnit, Auto);
-            
-            if (!Auto && focusingUnit != null)
+            switch (team)
             {
-                FightingStepLayer.target.RefreshAIFlag(false);
+                case Team.player1:
+                    team1.Auto = ai;
+                    break;
+                case Team.player2:
+                    team2.Auto = ai;
+                    break;
             }
-            else
-            {
-                FightingStepLayer.target.RefreshAIFlag(true);
-            }
-        }
-        
-        public void SwitchToCMode(Data_Center _center, bool playerControl) //要转成控制模式的是哪个角色，如果括号里是null，意味着走向AI模式    
-        {
-            if (_center != null)
-            {
-                MobileInputsManager.SetPlayerMode(playerControl);
-            }
-            else
-            {
-                MobileInputsManager.SetPlayerMode(false);
-            }
-            focusingUnit = _center;
         }
         
         IEnumerator _UnitsLoad(MultiDict<int, int, UnitInfo> MembersSets, MultiDict<int, int, Data_Center> TeamMembers)
@@ -105,18 +89,11 @@ namespace FightScene
             loadFight = stage;
             NetFightScene.target.LoadStageFinished.Value = true;
         }
-
-        public void StartControlMode()
+        
+        public void SetFocusUnit(Data_Center unit)
         {
-            switch (playerTeam)
-            {
-                case Team.player1:
-                    SwitchToCMode(team1StartUnit, false);
-                    break;
-                case Team.player2:
-                    SwitchToCMode(team2StartUnit, false);
-                    break;
-            }
+            focusingUnit = unit;
+            CameraAdjustment(playerTeam);
         }
         
         void AllUnitsStartOff(MultiDict<int, int, Data_Center> TeamMembers, Team myTeam, bool TestMode = false)
@@ -175,19 +152,10 @@ namespace FightScene
         // 战斗模式相机。根据选择队伍做相应调整。
         public void CameraAdjustment(Team myTeam)
         {
-            C_Mode c_Mode;
-            if (loadFight.Team1Mode == TeamMode.multiRaid)
-            {
-                c_Mode = C_Mode.CertainYAntiVibration;
-            }
-            else
-            {
-                c_Mode = C_Mode.CertainYAntiVibration;
-            }
+            var c_Mode = C_Mode.CertainYAntiVibration;
             if (focusingUnit != null)
             {
-                _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT,
-                    myTeam == Team.player1  ? team2.GetFightingUnitTs(Team2Members) : team1.GetFightingUnitTs(Team1Members));
+                _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, myTeam == Team.player1  ? team2.GetFightingUnitTs(Team2Members) : team1.GetFightingUnitTs(Team1Members));
             }
             else
             {

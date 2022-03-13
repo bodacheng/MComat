@@ -29,7 +29,7 @@ namespace FightScene
             //}
             
             _layer = FightingStepLayer.Open();
-            RTFightManager.target.StartControlMode();
+            
             RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
             
             if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)

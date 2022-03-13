@@ -26,31 +26,33 @@ namespace Soul
         public IDictionary<string, SkillEntity> SkillEntityDic;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
         public SkillEntity CurrentSKillEntity;
         SkillEntity tempSKillEntity;
-        
-        Empty_State empty_State = new Empty_State();
-        Behavior now_Behavior;
-        Behavior last_Behavior;
-        Behavior try_Behavior;
-        public Behavior commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
+
+        readonly Empty_State empty_State = new Empty_State();
+        Behavior _nowBehavior;
+        Behavior _lastBehavior;
+        Behavior _tryBehavior;
+        Behavior _commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
         #endregion
 
         void Awake()
         {
-            now_Behavior = empty_State;   
+            _nowBehavior = empty_State;   
         }
+        
+        public bool AI { set; get; }
 
         public bool IfRunning()
         {
-            return now_Behavior != empty_State;
+            return _nowBehavior != empty_State;
         }
-
+        
         public Behavior GetNowState()
         {
-            return now_Behavior;
+            return _nowBehavior;
         }
         public Behavior GetLastState()
         {
-            return last_Behavior;
+            return _lastBehavior;
         }
 
         void Update()
@@ -60,10 +62,10 @@ namespace Soul
                 BehaviourTransitionEngine();
                 
                 #region 决策制定
-                controller.PlayerControl(this, CanTranTo, !((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this));
+                controller.PlayerControl(this, CanTranTo, AI && !MobileInputsManager.target.BeingControl(this));
                 #endregion
                 
-                now_Behavior?._State_Update();
+                _nowBehavior?._State_Update();
             }
         }
 
@@ -71,17 +73,17 @@ namespace Soul
         {
             if (IfRunning())
             {
-                if (now_Behavior != null)
+                if (_nowBehavior != null)
                 {
-                    if ((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this)
+                    if (AI && !MobileInputsManager.target.BeingControl(this))
                     {
-                        now_Behavior._c_State_FixedUpdate1();
-                        now_Behavior._c_State_FixedUpdate2();
+                        _nowBehavior._State_FixedUpdate1();
+                        _nowBehavior._State_FixedUpdate2();
                     }
                     else
                     {
-                        now_Behavior._State_FixedUpdate1();
-                        now_Behavior._State_FixedUpdate2();
+                        _nowBehavior._c_State_FixedUpdate1();
+                        _nowBehavior._c_State_FixedUpdate2();
                     }
                 }
             }
@@ -90,10 +92,10 @@ namespace Soul
         public void ChangeState(string num)
         {
             _SkillCancelFlag.turn_off_flag();
-            BehaviourDic.TryGetValue(num, out try_Behavior);
-            if (now_Behavior != null)
+            BehaviourDic.TryGetValue(num, out _tryBehavior);
+            if (_nowBehavior != null)
             {
-                now_Behavior.AI_State_exit();
+                _nowBehavior.AI_State_exit();
             }
 
             //注意看changeState环节，上一个状态的exit和下一个状态的enter是同一个帧执行的。
@@ -103,57 +105,65 @@ namespace Soul
             //就会产生bug：动画器无法正常播放攻击动画，角色会立在那里。这是我们动画模块的一个性质。
             // 我们把defend状态exit中的PlayLayerAnim(_animator_layer_index, null)删除了后就不再产生对应bug。
             // 关于动画模块的“技能动作清空”，我们是把它放在了move状态的开头，从而避免了清空函数与触发动画函数在同一帧执行。
-            last_Behavior = now_Behavior;
-            now_Behavior = try_Behavior;
+            _lastBehavior = _nowBehavior;
+            _nowBehavior = _tryBehavior;
 
-            if (now_Behavior == null)
+            if (_nowBehavior == null)
             {
                 Debug.Log("尝试读取未定义的状态" + num);
                 return;
             }
-            if ((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this)
+
+            if (MobileInputsManager.target != null)
             {
-                now_Behavior.C_State_enter();
+                if (AI && !MobileInputsManager.target.BeingControl(this))
+                {
+                    _nowBehavior.AI_State_enter();
+                }
+                else
+                {
+                    _nowBehavior.C_State_enter();
+                }
             }
             else
             {
-                now_Behavior.AI_State_enter();
+                _nowBehavior.AI_State_enter();
             }
         }
         
-        public void ChangeState(string num, V_Damage newvalue)
+        public void ChangeState(string num, V_Damage damage)
         {
-            BehaviourDic.TryGetValue(num, out try_Behavior);
-            if (now_Behavior != null)
-                now_Behavior.AI_State_exit();
+            BehaviourDic.TryGetValue(num, out _tryBehavior);
+            if (_nowBehavior != null)
+                _nowBehavior.AI_State_exit();
             
-            last_Behavior = now_Behavior;
-            now_Behavior = try_Behavior;
+            _lastBehavior = _nowBehavior;
+            _nowBehavior = _tryBehavior;
             
-            if (now_Behavior == null)
+            if (_nowBehavior == null)
             {
                 Debug.Log("尝试读取未定义的状态" + num);
                 return;
             }
-            if ((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this)
-                now_Behavior.C_State_enter(newvalue);
+            if (AI && !MobileInputsManager.target.BeingControl(this))
+                _nowBehavior.AI_State_enter(damage);
             else
-                now_Behavior.AI_State_enter(newvalue);
+                _nowBehavior.C_State_enter(damage);
         }
 
         public void ChangeToWaitingState()
         {
-            BehaviourDic.TryGetValue(commandWaitingState.StateKey, out try_Behavior);
-            if (try_Behavior != GetNowState())//避免战斗待机状态重复进入
+            BehaviourDic.TryGetValue(_commandWaitingState.StateKey, out _tryBehavior);
+            if (_tryBehavior != GetNowState())//避免战斗待机状态重复进入
             {
-                ChangeState(commandWaitingState.StateKey);
+                ChangeState(_commandWaitingState.StateKey);
             }
         }
         
         public void ChangeToTestMode()
         {
-            BehaviourDic.TryGetValue(commandWaitingState.StateKey, out try_Behavior);
-            Move_State move_State = (Move_State)try_Behavior;
+            BehaviourDic.TryGetValue(_commandWaitingState.StateKey, out _tryBehavior);
+            Move_State move_State = (Move_State)_tryBehavior;
             move_State._AIMoveStyle = AIMoveMode.test;
             ChangeToWaitingState();          
         }
@@ -171,14 +181,15 @@ namespace Soul
                 s.Value.Pre_process_before_enter();
             }
 
-            BehaviourDic.TryGetValue("Empty", out now_Behavior);
-            if ((MobileInputsManager.playerMode || MobileInputsManager.inputting) && MobileInputsManager.target.Observing_Runner == this)
+            BehaviourDic.TryGetValue("Empty", out _nowBehavior);
+            
+            if (!AI)
             {
-                now_Behavior.C_State_enter();
+                _nowBehavior.C_State_enter();
             }
             else
             {
-                now_Behavior.AI_State_enter();
+                _nowBehavior.AI_State_enter();
             }
         }       
     }

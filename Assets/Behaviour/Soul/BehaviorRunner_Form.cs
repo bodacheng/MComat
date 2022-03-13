@@ -135,7 +135,7 @@ namespace Soul
                 }
             }
             AllConditionCodes = ConditionAndRespond.Keys.ToList();
-            commandWaitingState = BehaviourDic[nineAndTwo.GetM_STS().REAL_NAME];
+            _commandWaitingState = BehaviourDic[nineAndTwo.GetM_STS().REAL_NAME];
         }
     }
 }

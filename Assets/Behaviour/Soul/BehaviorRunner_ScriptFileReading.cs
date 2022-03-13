@@ -152,9 +152,9 @@ namespace Soul
                 Debug.Log("脚本为空，返回");
                 return;
             }
-            if (now_Behavior != null)
+            if (_nowBehavior != null)
             {
-                now_Behavior.AI_State_exit();
+                _nowBehavior.AI_State_exit();
             }
             SkillEntity_List = AIScriptReading.ReadKongfuBook(this, Script); //这个是一个状态清单，生成状态的是States_Dictionary类。
             IDictionary<string, Behavior> Num_State_List = _States_Incubator.BehaviorDic; //理解整个系统的关键
