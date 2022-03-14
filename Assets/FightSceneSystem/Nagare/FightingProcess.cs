@@ -30,8 +30,6 @@ namespace FightScene
             
             _layer = FightingStepLayer.Open();
             
-            RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
-            
             if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
             {
                 var TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;

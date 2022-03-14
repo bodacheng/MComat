@@ -122,7 +122,6 @@ namespace FightScene
                     data_Center.WholeT.gameObject.SetActive(false);
                 }
             }
-            RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
             return unitChanged;
         }
         

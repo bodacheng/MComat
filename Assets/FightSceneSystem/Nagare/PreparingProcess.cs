@@ -14,11 +14,10 @@ public class PreparingProcess : FSceneProcess
     
     IEnumerator EnterProcess()
     {
-        //RealTimeGameProcessManager.target._CameraManager.Assign_SToEMode(NetFightScene.target.WatchTeam2.position, NetFightScene.target.Team2StandPoints[0], 3f, 50f);
+        RTFightManager.target._CameraManager.Assign_Camera(C_Mode.NULL, null,null);
         CameraManager._camera.transform.position = CameraManager._StartPosRef.transform.position;
         CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
-        RTFightManager.target._CameraManager.Assign_Camera(C_Mode.NULL, null,null);
-        //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
+        
         FightLoadError.Instance.FightLoadErrors.Clear();
         
         BoundaryControllByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
