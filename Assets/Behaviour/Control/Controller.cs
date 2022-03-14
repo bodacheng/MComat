@@ -123,13 +123,17 @@ namespace Soul
                 }
                 #endregion
             }
-            
+
+            bool changed = false;
             #region AI决策
             if (Auto)
             {
-                AI_RUNs(behaviorRunner, Options);
+                changed = AI_RUNs(behaviorRunner, Options);
             }
             #endregion
+            
+            if (!changed)
+                AutoReset(behaviorRunner);
         }
 
         // 状态的退出可以由特定的控制条件来决定时进行的判断。目前全项目只有防御这一种情况
@@ -161,13 +165,7 @@ namespace Soul
                             behaviorRunner.BehaviourDic.TryGetValue(options[x].REAL_NAME, out var try_behavior);
                             if (try_behavior.CheckTriggerCondition(Condition))
                             {
-                                if (!behaviorRunner.AI)
-                                {
-                                    if (options[x].StateType == BehaviorType.MV)
-                                        _triggerd.main.Set(Condition, options[x].REAL_NAME, behaviorRunner.ConditionAndRespondPriority.Get(Condition, options[x].REAL_NAME));
-                                }else{
-                                    _triggerd.main.Set(Condition, options[x].REAL_NAME, behaviorRunner.ConditionAndRespondPriority.Get(Condition, options[x].REAL_NAME));
-                                }
+                                _triggerd.main.Set(Condition, options[x].REAL_NAME, behaviorRunner.ConditionAndRespondPriority.Get(Condition, options[x].REAL_NAME));
                             }
                         }
                     }
@@ -204,6 +202,14 @@ namespace Soul
                 }
             }
             return false;
+        }
+
+        void AutoReset(BehaviorRunner behaviorRunner)
+        {
+            if (behaviorRunner.GetNowState().StateKey != behaviorRunner._commandWaitingState.StateKey && behaviorRunner.GetNowState().Capacity_Exit_Condition())
+            {
+                behaviorRunner.ChangeToWaitingState();
+            }
         }
     }
 }
