@@ -98,26 +98,39 @@ class New2022 : CameraMode//  改编自CertainYAntiVabration
         }
         
         rate = Vector2.Angle((backScreenPos - frontScreenPos), Vector2.right) / 180;
-
-        if (frontScreenPos.x > 0.2 && frontScreenPos.x < 0.8 && 
-            backScreenPos.x > 0.2 && backScreenPos.x < 0.8 && 
-            frontScreenPos.y > 0.1 && frontScreenPos.y < 0.9 &&
-            backScreenPos.y > 0.1 && backScreenPos.y < 0.9 && 
-            rate < 0.3 && rate > 0.7)
-        {
-            return;
-        }
         
-        if (!(frontScreenPos.x > 0.2 && frontScreenPos.x < 0.8 &&
-              backScreenPos.x > 0.2 && backScreenPos.x < 0.8 &&
-              frontScreenPos.y > 0.1 && frontScreenPos.y < 0.9 &&
-              backScreenPos.y > 0.1 && backScreenPos.y < 0.9))
+        if (frontScreenPos.x >= 0.3 && frontScreenPos.x <= 0.7 &&
+            backScreenPos.x >= 0.3 && backScreenPos.x <= 0.7 &&
+            frontScreenPos.y >= 0.3 && frontScreenPos.y <= 0.7 &&
+            backScreenPos.y >= 0.3 && backScreenPos.y <= 0.7)
         {
-            XZDistance += _changeSpeed;
+            XZDistance -= _changeSpeed;
+        }
+        else if (frontScreenPos.x > 0.2 && frontScreenPos.x < 0.8 &&
+                    backScreenPos.x > 0.2 && backScreenPos.x < 0.8 &&
+                    frontScreenPos.y > 0.1 && frontScreenPos.y < 0.9 &&
+                    backScreenPos.y > 0.1 && backScreenPos.y < 0.9)
+        {
         }
         else
         {
-            XZDistance -= _changeSpeed;
+            XZDistance += _changeSpeed;
+        }
+        
+        if ((frontScreenPos.x < 0.5 && backScreenPos.x < 0.5)
+            ||
+            (frontScreenPos.x > 0.5 && backScreenPos.x > 0.5)
+            ||
+            (frontScreenPos.y < 0.5 && backScreenPos.y < 0.5)
+            ||
+            (frontScreenPos.y > 0.5 && backScreenPos.y > 0.5)
+            )
+        {
+            // 双方偏向屏幕一边，则调整相机
+        }
+        else
+        {
+            return;
         }
 
         // 0，1的时候数值为0.5,意思为双方站位越水平，越看向他们中间点。

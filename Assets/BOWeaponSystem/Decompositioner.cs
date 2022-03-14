@@ -90,7 +90,8 @@ public partial class Decompositioner : MonoBehaviour {
         StopEmissions(true);
         if (pool == null)
         {
-         Debug.Log("严重逻辑问题");   
+            Debug.Log("严重逻辑问题"+ gameObject.name);
+            Destroy(gameObject);
         }
         pool.Return(this);
     }
