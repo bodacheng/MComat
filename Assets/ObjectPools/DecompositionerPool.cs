@@ -85,6 +85,19 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
     protected override Decompositioner CreateInstance()
     {
         var a = UnityEngine.Object.Instantiate(Prefab);
+        if (a == null)
+        {
+            Debug.Log("逻辑问题"+ Prefab);
+            return null;
+        }
+
+        if (Marker == null)
+        {
+            Debug.Log("??");
+            GameObject.Destroy(a);
+            return null;
+        }
+        
         a.transform.SetParent(Marker.transform);
         var decompositioner = a.GetComponent<Decompositioner>();
         var BBMM = a.GetComponent<HitBoxManager>();

@@ -155,7 +155,7 @@ namespace FightScene
             var c_Mode = C_Mode.CertainYAntiVibration;
             if (focusingUnit != null)
             {
-                _CameraManager.Assign_Camera(c_Mode, focusingUnit.WholeT, myTeam == Team.player1  ? team2.GetFightingUnitTs(Team2Members) : team1.GetFightingUnitTs(Team1Members));
+                _CameraManager.Assign_Camera(c_Mode, focusingUnit.geometryCenter, myTeam == Team.player1  ? team2.GetFightingUnitTs(Team2Members) : team1.GetFightingUnitTs(Team1Members));
             }
             else
             {

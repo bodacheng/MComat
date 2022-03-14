@@ -219,14 +219,14 @@ namespace FightScene
                     {
                         if (a_char._MyBehaviorRunner.GetNowState().StateKey != "Death")
                         {
-                            transforms.Add(a_char.WholeT.transform);
+                            transforms.Add(a_char.geometryCenter);
                         }
                     }
                     return transforms;
                 case TeamMode.rotation:
                     transforms = new List<Transform>
                     {
-                        RMode_Unit.Value.WholeT
+                        RMode_Unit.Value.geometryCenter
                     };
                     return transforms;
             }

@@ -12,7 +12,7 @@ public class CameraManager : MonoBehaviour
     readonly IDictionary<C_Mode, CameraMode> CModeDic = new Dictionary<C_Mode, CameraMode>()
     {
         {C_Mode.GodPlayerCertainYCamera,new GodPlayerCertainY(5f, 5f)},
-        {C_Mode.CertainYAntiVibration, new New2022(8.8f, 5f)},
+        {C_Mode.CertainYAntiVibration, new New2023(8.8f, 5f)},
         {C_Mode.OneVOne, new OneVOneMode(16f)},
         {C_Mode.ApproachToCertainDis,  new LerpToCertainDistance(5f, 1f)},
         {C_Mode.keepTargetLeft, new keepTargetLeftCamera()},
@@ -20,7 +20,7 @@ public class CameraManager : MonoBehaviour
         {C_Mode.StartAndEnd, new StartToEndMode()},
         {C_Mode.RoundBoundary, new CenterSurroundCamera(25f, 10f)},
         {C_Mode.TopDown, new TouchTopDownCamera(12f, 20f)},
-        {C_Mode.ScreenSaver, new New2022(8.8f, 5f)}//new ScreenSaverC(8.8f, 8.8f)}
+        {C_Mode.ScreenSaver, new New2023(8.8f, 5f)}//new ScreenSaverC(8.8f, 8.8f)}
     };
     
     void Awake()

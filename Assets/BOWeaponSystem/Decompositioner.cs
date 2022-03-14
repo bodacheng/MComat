@@ -92,6 +92,7 @@ public partial class Decompositioner : MonoBehaviour {
         {
             Debug.Log("严重逻辑问题"+ gameObject.name);
             Destroy(gameObject);
+            return;
         }
         pool.Return(this);
     }
