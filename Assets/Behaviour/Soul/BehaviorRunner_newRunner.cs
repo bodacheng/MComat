@@ -7,15 +7,15 @@ namespace Soul
     public partial class BehaviorRunner : MonoBehaviour
     {
         // 这个纯粹为了按钮效果 按钮刷新。预告作用
-        public List<SkillEntity> OptionsForButtonRefresh = new List<SkillEntity>();
-        List<SkillEntity> CanTranTo = new List<SkillEntity>(); //可以启动的技能的列表
-        List<string> ForcedTransitions = new List<string>();
+        public List<SkillEntity> optionsForButtonRefresh = new List<SkillEntity>();
+        readonly List<SkillEntity> _canTranTo = new List<SkillEntity>(); //可以启动的技能的列表
+        readonly List<string> _forcedTransitions = new List<string>();
         
-        public void BehaviourTransitionEngine()
+        void BehaviourTransitionEngine()
         {
-            CanTranTo.Clear();
-            ForcedTransitions.Clear();
-            OptionsForButtonRefresh.Clear();
+            _canTranTo.Clear();
+            _forcedTransitions.Clear();
+            optionsForButtonRefresh.Clear();
             
             if (_nowBehavior != null)
             {
@@ -30,13 +30,13 @@ namespace Soul
                     BehaviourDic.TryGetValue(CurrentSKillEntity.ForcedTransitions[i], out _tryBehavior);
                     if (_tryBehavior.Force_enter_condition())
                     {
-                        ForcedTransitions.Add(CurrentSKillEntity.ForcedTransitions[i]);
+                        _forcedTransitions.Add(CurrentSKillEntity.ForcedTransitions[i]);
                     }
                 }
             }
-            if (ForcedTransitions.Count > 0)
+            if (_forcedTransitions.Count > 0)
             {
-                ChangeState(ForcedTransitions[0]);
+                ChangeState(_forcedTransitions[0]);
                 return; // Once a state is forced to trigger, there is no need for the rest of codes to run at this frame
             }
             #endregion
@@ -55,17 +55,17 @@ namespace Soul
                     continue;
                 }
                 SkillEntityDic.TryGetValue(_Key, out tempSKillEntity);
-                OptionsForButtonRefresh.Add(tempSKillEntity);
+                optionsForButtonRefresh.Add(tempSKillEntity);
                 if ((tempSKillEntity.CANBECANCELLEDTO && _SkillCancelFlag.Cancel_Flag) || _nowBehavior.Capacity_Exit_Condition())
                 {
-                    CanTranTo.Add(tempSKillEntity);
+                    _canTranTo.Add(tempSKillEntity);
                 }
             }
             #endregion
             
             #region 按钮技能刷新
             if (MobileInputsManager.target.Observing_Runner == this)
-                MobileInputsManager.target.ButtonsFeatureLoad(OptionsForButtonRefresh);
+                MobileInputsManager.target.ButtonsFeatureLoad(optionsForButtonRefresh);
             #endregion
             
             CalAdviceDistanceFromEnemy();
@@ -105,12 +105,12 @@ namespace Soul
         {
             min = 9999f;
             max = 0f;
-            for (int index = 0; index < CanTranTo.Count; index++)
+            for (int index = 0; index < _canTranTo.Count; index++)
             {
-                if (min > CanTranTo[index].AIAttrs.AI_MIN_DIS)
-                    min = CanTranTo[index].AIAttrs.AI_MIN_DIS;
-                if (max < CanTranTo[index].AIAttrs.AI_MAX_DIS)
-                    max = CanTranTo[index].AIAttrs.AI_MAX_DIS;
+                if (min > _canTranTo[index].AIAttrs.AI_MIN_DIS)
+                    min = _canTranTo[index].AIAttrs.AI_MIN_DIS;
+                if (max < _canTranTo[index].AIAttrs.AI_MAX_DIS)
+                    max = _canTranTo[index].AIAttrs.AI_MAX_DIS;
             }
         }
         

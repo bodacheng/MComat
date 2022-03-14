@@ -100,7 +100,6 @@ namespace FightScene
         {
             foreach (var oneMember in TeamMembers.GetValues())
             {
-                oneMember._MyBehaviorRunner.controller.TestMode = TestMode;
                 Sensor.AddOrRemoveSharedUnits(oneMember, myTeam, true);
                 if (!TestMode)
                     oneMember._MyBehaviorRunner.ChangeToWaitingState();

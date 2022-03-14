@@ -1,29 +1,31 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
 
 class New2023 : CameraMode
 {
     Vector3 cameraTargetPos;
-    Vector3 enemiesCenter; //敌人的位置中心
-    Quaternion ToRotation; //目标相机旋角
+    Vector3 enemiesCenter;
     Vector3 rotateToDirection;
     Vector2 meScreenPos;
     Vector2 enemyScreenPos;
-    Vector3 xzOff = - Vector3.forward; //相机从focuscenter出发的角度
+    Vector3 xzOff;
     Vector3 lookPoint;
-    float lookPointHeight = 2.3f;
     Vector3 frontWPos, backWPos;
-    Vector2 frontScreenPos, backScreenPos;
+    Quaternion ToRotation;
+    float _changeSpeed;
+    float _transitionSpeedPara = 10f;
+    readonly float _lookPointHeight = 2.3f;
+    readonly float _minXZ;
 
-    private float _changeSpeed = 0.7f;
-    private readonly float minXZ;
-    
-    private float transitionSpeedPara = 10f;
+    float TransitionSpeedPara
+    {
+        get => _transitionSpeedPara;
+        set => _transitionSpeedPara = Mathf.Clamp(value, 0.2f, 5f);
+    }
     
     public New2023(float XZDis, float YDis)
     {
-        minXZ = XZDis;
+        _minXZ = XZDis;
         this.XZDis = XZDis;
         this.YDis = YDis;
     }
@@ -31,10 +33,7 @@ class New2023 : CameraMode
     private float XZDistance
     {
         get => XZDis;
-        set
-        {
-            XZDis = Mathf.Clamp(value, minXZ , minXZ + 20f);
-        }
+        set => XZDis = Mathf.Clamp(value, _minXZ , _minXZ + 20f);
     }
 
     public override void Enter(Camera _camera)
@@ -42,17 +41,16 @@ class New2023 : CameraMode
         LocalUpdate(_camera);
         xzOff = _camera.transform.position - lookPoint;
         xzOff.y = 0;
-        transitionSpeedPara = 10f;
-        DOTween.To(()=> transitionSpeedPara, (x) => transitionSpeedPara = x, 0.2f, 1f);
+        TransitionSpeedPara =5f;
+        DOTween.To(()=> TransitionSpeedPara, (x) => TransitionSpeedPara = x, 0.001f, 1f);
     }
 
-    float fixY, h;
-    private float c_offSet;//相机位置相对双方连线的偏移点，同时也是相机朝向的偏移变量，由rate计算而出，在rate为0和1时候，为0.5。
-
-    private float ePosX;
-    private float ePosY;
-    private float mPosX;
-    private float mPosY;
+    float h;
+    float ePosX;
+    float ePosY;
+    float mPosX;
+    float mPosY;
+    
     public override void LocalUpdate(Camera _camera)
     {
         h = UltimateJoystick.GetHorizontalAxis("RotateCamera");
@@ -62,8 +60,7 @@ class New2023 : CameraMode
             xzOff.y = 0;
         }
         
-        _changeSpeed = Time.deltaTime / (transitionSpeedPara + Time.deltaTime);//分母里那个附加值越大，变得越慢。
-        
+        _changeSpeed = Time.deltaTime / (TransitionSpeedPara + Time.deltaTime); //分母里那个附加值越大，变得越慢。
         enemiesCenter = Vector3.zero;
         if (targets != null && targets.Count > 0)
         {
@@ -97,16 +94,12 @@ class New2023 : CameraMode
         if (enemyScreenPos.y >= meScreenPos.y)
         {
             frontWPos = meCenter.position;
-            frontScreenPos = meScreenPos;
             backWPos = enemiesCenter;
-            backScreenPos = enemyScreenPos;
         }
         else
         {
             frontWPos = enemiesCenter;
-            frontScreenPos = enemyScreenPos;
             backWPos = meCenter.position;
-            backScreenPos = meScreenPos;
         }
         
         if (ePosX >= 0.3 && ePosX <= 0.7 &&
@@ -123,14 +116,14 @@ class New2023 : CameraMode
         {
             XZDistance += _changeSpeed;
         }
-        
+
         //Debug.Log(ePosX + ":"+ ePosY);
         //Debug.Log(mPosX + ":"+ mPosY);
         
         lookPoint = (backWPos - frontWPos) * 0.5f + frontWPos;
         cameraTargetPos = lookPoint + xzOff.normalized * XZDistance;
         cameraTargetPos.y = YDis;
-        lookPoint.y = lookPointHeight;
+        lookPoint.y = _lookPointHeight;
         
         _camera.transform.position = Vector3.Lerp(_camera.transform.position, cameraTargetPos, _changeSpeed);
         rotateToDirection = lookPoint - cameraTargetPos;

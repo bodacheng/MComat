@@ -11,9 +11,8 @@ namespace Soul
 {
     public class Controller
     {
-        readonly SSIMultiDictionary Triggerd = new SSIMultiDictionary();
-        public bool TestMode { get; set; } = false;
-
+        readonly SSIMultiDictionary _triggerd = new SSIMultiDictionary();
+        
         public void PlayerControl(BehaviorRunner behaviorRunner, List<SkillEntity> Options, bool Auto)
         {
             if (MobileInputsManager.target.Observing_Runner == behaviorRunner)
@@ -24,9 +23,9 @@ namespace Soul
                     return;
                 }
                 #endregion
-
+                
                 #region 按键触发
-                for (int i = 0; i < Options.Count; i++)
+                for (var i = 0; i < Options.Count; i++)
                 {
                     switch (Options[i].EnterInput)
                     {
@@ -149,25 +148,25 @@ namespace Soul
         List<(string, string)> finalConditionStateKeySet = new List<(string, string)>();
         bool AI_RUNs(BehaviorRunner behaviorRunner, List<SkillEntity> options) // AI根据目前可作出的行为作出选择
         {
-            Triggerd.main.Clear();
+            _triggerd.main.Clear();
             if (behaviorRunner.GetNowState().Strategic_exit_condition())
             {
-                for (int y = 0; y < behaviorRunner.AllConditionCodes.Count; y++)
+                for (var y = 0; y < behaviorRunner.AllConditionCodes.Count; y++)
                 {
                     Condition = behaviorRunner.AllConditionCodes[y];
-                    for (int x = 0; x < options.Count; x++)
+                    for (var x = 0; x < options.Count; x++)
                     {
                         if (behaviorRunner.ConditionAndRespond[Condition].Contains(options[x].REAL_NAME))
                         {
-                            behaviorRunner.BehaviourDic.TryGetValue(options[x].REAL_NAME, out Behavior try_behavior);
+                            behaviorRunner.BehaviourDic.TryGetValue(options[x].REAL_NAME, out var try_behavior);
                             if (try_behavior.CheckTriggerCondition(Condition))
                             {
-                                if (TestMode)
+                                if (!behaviorRunner.AI)
                                 {
                                     if (options[x].StateType == BehaviorType.MV)
-                                        Triggerd.main.Set(Condition, options[x].REAL_NAME, behaviorRunner.ConditionAndRespondPriority.Get(Condition, options[x].REAL_NAME));
+                                        _triggerd.main.Set(Condition, options[x].REAL_NAME, behaviorRunner.ConditionAndRespondPriority.Get(Condition, options[x].REAL_NAME));
                                 }else{
-                                    Triggerd.main.Set(Condition, options[x].REAL_NAME, behaviorRunner.ConditionAndRespondPriority.Get(Condition, options[x].REAL_NAME));
+                                    _triggerd.main.Set(Condition, options[x].REAL_NAME, behaviorRunner.ConditionAndRespondPriority.Get(Condition, options[x].REAL_NAME));
                                 }
                             }
                         }
@@ -175,9 +174,9 @@ namespace Soul
                 }
             }
             
-            if (Triggerd.main.GetValues().Count > 0)
+            if (_triggerd.main.GetValues().Count > 0)
             {
-                finalConditionStateKeySet = Triggerd.GiveOutMin();
+                finalConditionStateKeySet = _triggerd.GiveOutMin();
                 
                 if (finalConditionStateKeySet.Count > 0)
                 {

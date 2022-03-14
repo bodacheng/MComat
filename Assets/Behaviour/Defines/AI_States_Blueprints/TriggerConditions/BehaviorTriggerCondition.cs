@@ -144,8 +144,8 @@ namespace Soul
         
         public bool CheckTriggerCondition(string conditionFunctionName)
         {
-            System.Type T = typeof(Behavior);
-            MethodInfo theMethod = T.GetMethod(conditionFunctionName); //激活同名函数
+            var T = typeof(Behavior);
+            var theMethod = T.GetMethod(conditionFunctionName); //激活同名函数
             return theMethod != null && (bool)theMethod.Invoke(this, null);
         }
 

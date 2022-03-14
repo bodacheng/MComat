@@ -17,11 +17,11 @@ namespace Soul
         #endregion
         
         #region 辅助模块：控制器
-        public Controller controller = new Controller();
+        public readonly Controller controller = new Controller();
         #endregion
         
         #region 运行时活参数
-        public SingleFightLog SingleFightLog = new SingleFightLog();
+        public readonly SingleFightLog SingleFightLog = new SingleFightLog();
         public IDictionary<string, Behavior> BehaviourDic = new Dictionary<string, Behavior>();
         public IDictionary<string, SkillEntity> SkillEntityDic;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
         public SkillEntity CurrentSKillEntity;
@@ -62,13 +62,13 @@ namespace Soul
                 BehaviourTransitionEngine();
                 
                 #region 决策制定
-                controller.PlayerControl(this, CanTranTo, AI && !MobileInputsManager.target.BeingControl(this));
+                controller.PlayerControl(this, _canTranTo, AI && !MobileInputsManager.target.BeingControl(this));
                 #endregion
                 
                 _nowBehavior?._State_Update();
             }
         }
-
+        
         void FixedUpdate()
         {
             if (IfRunning())
@@ -163,9 +163,9 @@ namespace Soul
         public void ChangeToTestMode()
         {
             BehaviourDic.TryGetValue(_commandWaitingState.StateKey, out _tryBehavior);
-            Move_State move_State = (Move_State)_tryBehavior;
+            var move_State = (Move_State)_tryBehavior;
             move_State._AIMoveStyle = AIMoveMode.test;
-            ChangeToWaitingState();          
+            ChangeToWaitingState();
         }
       
         public void INIStates(Data_Center data_Center)
