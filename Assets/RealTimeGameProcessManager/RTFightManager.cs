@@ -44,19 +44,6 @@ namespace FightScene
             team2.Auto = false;
             CameraAdjustment(playerTeam);
         }
-
-        public void SwitchAuto(Team team, bool ai)
-        {
-            switch (team)
-            {
-                case Team.player1:
-                    team1.Auto = ai;
-                    break;
-                case Team.player2:
-                    team2.Auto = ai;
-                    break;
-            }
-        }
         
         IEnumerator _UnitsLoad(MultiDict<int, int, UnitInfo> MembersSets, MultiDict<int, int, Data_Center> TeamMembers)
         {

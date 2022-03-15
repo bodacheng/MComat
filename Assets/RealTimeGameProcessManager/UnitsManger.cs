@@ -16,7 +16,7 @@ namespace FightScene
             set
             {
                 auto = value;
-                if (RMode_Unit != null)
+                if (RMode_Unit != null && RMode_Unit.Value != null)
                 {
                     RMode_Unit.Value._MyBehaviorRunner.AI = auto;
                 }

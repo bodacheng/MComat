@@ -24,9 +24,6 @@ public class FightingStepLayer : UILayer
     
     public void Refresh()
     {
-        Team1Auto.isOn = RTFightManager.target.team1.Auto;
-        Team2Auto.isOn = RTFightManager.target.team2.Auto;
-        
         team1UI.Refresh(RTFightManager.target.Team1Members, RTFightManager.target.team1.RMode_Unit.Value);
         team2UI.Refresh(RTFightManager.target.Team2Members, RTFightManager.target.team2.RMode_Unit.Value);
         
@@ -61,13 +58,11 @@ public class FightingStepLayer : UILayer
         returnValue = UILayerLoader.Load(NetFightScene.target.T.gameObject,"FightingStepLayer") as FightingStepLayer;
         returnValue.StartUp((x) =>
             {
-                RTFightManager.target.SwitchAuto(RTFightManager.playerTeam == Team.player1 ? Team.player1 : Team.player2, x);
-                returnValue.Refresh();
+                RTFightManager.target.team1.Auto = x;
             },
             (x) =>
             {
-                RTFightManager.target.SwitchAuto(RTFightManager.playerTeam == Team.player1 ? Team.player2 : Team.player1, x);
-                returnValue.Refresh();
+                RTFightManager.target.team2.Auto = x;
             },
             ()=> FightScenePauseSupport.Open(NetFightScene.target.T.gameObject), 
             RTFightManager.target.SwitchToWatchMode);
@@ -76,6 +71,10 @@ public class FightingStepLayer : UILayer
         {
             returnValue.gameObject.SetActive(false);
         }
+        
+        returnValue.Team1Auto.isOn = RTFightManager.target.team1.Auto;
+        returnValue.Team2Auto.isOn = RTFightManager.target.team2.Auto;
+        
         return returnValue;
     }
     
@@ -86,8 +85,8 @@ public class FightingStepLayer : UILayer
         pauseButton.onClick.AddListener(pauseAction.Invoke);
         cameraSwitchBtn.onClick.AddListener(cameraSwitchAction.Invoke);
         
-        Team1Auto.onValueChanged.AddListener((x)=> switchTeam1Auto.Invoke(x));
-        Team2Auto.onValueChanged.AddListener((x)=> switchTeam2Auto.Invoke(x));
+        Team1Auto.onValueChanged.AddListener(switchTeam1Auto.Invoke);
+        Team2Auto.onValueChanged.AddListener(switchTeam2Auto.Invoke);
         
         team1UI.TeamMode = NetFightScene.Fight.Team1Mode;
         team2UI.TeamMode = NetFightScene.Fight.Team2Mode;

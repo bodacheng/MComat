@@ -45,6 +45,8 @@ public class PreparingProcess : FSceneProcess
         {
             RTFightManager.target.TurnAllUnitsInvincible(true, RTFightManager.target.Team1Members);
             RTFightManager.target.TurnAllUnitsInvincible(true, RTFightManager.target.Team2Members);
+            RTFightManager.target.team1.Auto = true;
+            RTFightManager.target.team2.Auto = true;
         }else{
             RTFightManager.target.TurnAllUnitsInvincible(false, RTFightManager.target.Team1Members);
             RTFightManager.target.TurnAllUnitsInvincible(false, RTFightManager.target.Team2Members);
