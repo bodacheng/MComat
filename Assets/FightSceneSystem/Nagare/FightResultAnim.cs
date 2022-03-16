@@ -40,10 +40,10 @@ public class FightResultAnim : FSceneProcess
         switch (FightLogger.value.GetWinnerTeam())
         {
             case Team.player1 :
-                winners = RTFightManager.target.Team1Members.GetValues();
+                winners = RTFightManager.target.team1.TeamMembers.GetValues();
                 break;
             case Team.player2 :
-                winners = RTFightManager.target.Team2Members.GetValues();
+                winners = RTFightManager.target.team2.TeamMembers.GetValues();
                 break;
         }
         

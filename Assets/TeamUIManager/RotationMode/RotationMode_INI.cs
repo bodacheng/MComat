@@ -6,7 +6,7 @@ namespace FightScene
 {
     public partial class TeamUIManager : MonoBehaviour
     {
-        void IniTeamUI_Rotate(MultiDict<int, int, Data_Center> TeamMembers, Action<Data_Center> ChangeUnit)
+        void IniTeamUI_Rotate(Action<Data_Center> ChangeUnit)
         {
             foreach (var center in TeamMembers.GetValues())
             {

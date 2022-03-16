@@ -7,7 +7,21 @@ namespace FightScene
 {
     public partial class UnitsManger : MonoBehaviour
     {
-        public Data_Center ToStartPos_Multi(MultiDict<int, int, Data_Center> TeamMembers)
+        public void AllUnitsStartOff(bool TestMode = false)
+        {
+            foreach (var oneMember in TeamMembers.GetValues())
+            {
+                Sensor.AddOrRemoveSharedUnits(oneMember, teamConfig.myTeam, true);
+                if (!TestMode)
+                    oneMember._MyBehaviorRunner.ChangeToWaitingState();
+                else
+                {
+                    oneMember._MyBehaviorRunner.ChangeToTestMode();
+                }
+            }
+        }
+        
+        public Data_Center ToStartPos_Multi()
         {
             Data_Center startUnit = null;
             foreach (KeyValuePair<(int, int), Data_Center> kv in TeamMembers.mDict)
@@ -35,7 +49,7 @@ namespace FightScene
             return startUnit;
         }
         
-        public void Initialize_Multi(MultiDict<int, int, Data_Center> TeamMembers, float TeamHpRate, CriticalGaugeMode teamCGMode)
+        public void Initialize_Multi(float TeamHpRate, CriticalGaugeMode teamCGMode)
         {
             foreach (var center in TeamMembers.GetValues())
             {

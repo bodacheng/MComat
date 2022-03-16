@@ -13,7 +13,7 @@ namespace FightScene
             UnitIconDic.Clear();
         }
         
-        void InsTeamUI_Multi(MultiDict<int, int, Data_Center> TeamMembers)//这个环节应该能够同时把HP bar也适配好。
+        void InsTeamUI_Multi()//这个环节应该能够同时把HP bar也适配好。
         {
             foreach (var a_char in TeamMembers.GetValues())
             {

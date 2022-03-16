@@ -32,6 +32,22 @@ public static class FightLoad
             popupLayer.ArrangeWarnWindow(error);
             return;
         }
+
+        switch (stage.GetEventType())
+        {
+            case FightEventType.Screensaver:
+                stage.team1Auto = true;
+                stage.team2Auto = true;
+                break;
+            case FightEventType.SkillTest:
+                stage.team1Auto = true;
+                stage.team2Auto = true;
+                break;
+            default:
+                stage.team1Auto = true;
+                stage.team2Auto = true;
+                break;
+        }
         
         NetFightScene.Fight = stage;
         Stones.PreventStonesFromDestroy();

@@ -113,10 +113,10 @@ namespace FightScene
             switch (RTFightManager.playerTeam)
             {
                 case Team.player1:
-                    RTFightManager.target.SetFocusUnit(RTFightManager.target.Team1Members.GetValues()[0]);
+                    RTFightManager.target.SetFocusUnit(RTFightManager.target.team1.TeamMembers.GetValues()[0]);
                     break;
                 case Team.player2:
-                    RTFightManager.target.SetFocusUnit(RTFightManager.target.Team2Members.GetValues()[0]);
+                    RTFightManager.target.SetFocusUnit(RTFightManager.target.team2.TeamMembers.GetValues()[0]);
                     break;
             }
         }
@@ -125,8 +125,8 @@ namespace FightScene
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);
             var data_Centers = new List<Data_Center>();
-            data_Centers.AddRange(RTFightManager.target.Team1Members.GetValues());
-            data_Centers.AddRange(RTFightManager.target.Team2Members.GetValues());
+            data_Centers.AddRange(RTFightManager.target.team1.TeamMembers.GetValues());
+            data_Centers.AddRange(RTFightManager.target.team2.TeamMembers.GetValues());
             foreach (var one in data_Centers)
             {
                 one.CleanClear();

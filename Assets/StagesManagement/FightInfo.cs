@@ -47,6 +47,18 @@ public class FightInfo : ScriptableObject
     public CriticalGaugeMode team2CGMode = CriticalGaugeMode.normal;
     public TeamMode Team1Mode;
     public TeamMode Team2Mode;
+
+    public bool team1Auto
+    {
+        get;
+        set;
+    }
+    
+    public bool team2Auto
+    {
+        get;
+        set;
+    }
     
     #if UNITY_EDITOR
     [MenuItem ("Stage/Create StageScriptEditor")]

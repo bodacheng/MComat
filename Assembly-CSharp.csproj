@@ -647,7 +647,7 @@
      <Compile Include="Assets\Remote\TeamSet\TeamSet_Save.cs" />
      <Compile Include="Assets\Behaviour\SingleFightLog.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\MainSceneProcess.cs" />
-     <Compile Include="Assets\RealTimeGameProcessManager\UnitsManger.cs" />
+     <Compile Include="Assets\RealTimeGameProcessManager\UnitsManger\UnitsManger.cs" />
      <Compile Include="Assets\Behaviour\BtnUI\MobileInputsManager.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Other\LaunchURL.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerBGMusic.cs" />
@@ -680,7 +680,7 @@
      <Compile Include="Assets\AnimControl\dontuse\NullStateProcess.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\Gotcha\GotchaResultLayer\GotchaResultLayer_Steps.cs" />
      <Compile Include="Assets\Asstes\GabrielAguiarProductions\Unique_MagicAbilities_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
-     <Compile Include="Assets\RealTimeGameProcessManager\UnitsManger_mu.cs" />
+     <Compile Include="Assets\RealTimeGameProcessManager\UnitsManger\UnitsManger_mu.cs" />
      <Compile Include="Assets\StagesManagement\FightMembers.cs" />
      <Compile Include="Assets\Camera\Modes\LerpToCertainDistance.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Pointers\FakePointer.cs" />
@@ -785,6 +785,7 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
+     <Compile Include="Assets\RealTimeGameProcessManager\UnitsManger\UnitsManger_r.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />

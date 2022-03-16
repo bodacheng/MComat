@@ -15,6 +15,8 @@ namespace FightScene
         
         public TeamMode TeamMode;
         public TeamConfig teamConfig;
+        
+        public MultiDict<int, int, Data_Center> TeamMembers;
 
         public readonly IDictionary<Data_Center, SideCharIcon> UnitIconDic = new Dictionary<Data_Center, SideCharIcon>();
         
@@ -36,15 +38,15 @@ namespace FightScene
             }
         }
 
-        public void localUpdate(MultiDict<int, int, Data_Center> TeamMembers)
+        public void localUpdate()
         {
             if (teamConfig.myTeam != RTFightManager.playerTeam)
             {
-                BarsPosUpdate(TeamMembers);
+                BarsPosUpdate();
             }
         }
         
-        void BarsPosUpdate(MultiDict<int, int, Data_Center> TeamMembers)
+        void BarsPosUpdate()
         {
             foreach (var _one in TeamMembers.GetValues())
             {
@@ -53,15 +55,15 @@ namespace FightScene
             }
         }
         
-        public void InsTeamUI(MultiDict<int, int, Data_Center> TeamMembers, Action<Data_Center> changeUnit, ReactiveProperty<Data_Center> RMode_Unit)
+        public void InsTeamUI(Action<Data_Center> changeUnit, ReactiveProperty<Data_Center> RMode_Unit)
         {
             switch (TeamMode)
             {
                 case TeamMode.multiRaid:
-                    InsTeamUI_Multi(TeamMembers);
+                    InsTeamUI_Multi();
                     break;
                 case TeamMode.rotation:
-                    IniTeamUI_Rotate(TeamMembers, changeUnit);
+                    IniTeamUI_Rotate(changeUnit);
                     IniComboHit(RMode_Unit);
                     RMode_Unit.Subscribe(
                         x =>
@@ -88,7 +90,7 @@ namespace FightScene
             _tempSI.RefreshExBar(current_ex, wholeex);
         }
         
-        public void Refresh(MultiDict<int, int, Data_Center> TeamMembers, Data_Center fighting = null)
+        public void Refresh(Data_Center fighting = null)
         {
             foreach (var _dt in TeamMembers.GetValues())
             {

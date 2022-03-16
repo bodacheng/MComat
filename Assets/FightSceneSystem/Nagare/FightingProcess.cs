@@ -82,11 +82,11 @@ namespace FightScene
         {
             if (_layer != null)
             {
-                RTFightManager.target.team1.localUpdate(RTFightManager.target.Team1Members);
-                RTFightManager.target.team2.localUpdate(RTFightManager.target.Team2Members);
+                RTFightManager.target.team1.localUpdate();
+                RTFightManager.target.team2.localUpdate();
                 
-                _layer.team1UI.localUpdate(RTFightManager.target.Team1Members);
-                _layer.team2UI.localUpdate(RTFightManager.target.Team2Members);
+                _layer.team1UI.localUpdate();
+                _layer.team2UI.localUpdate();
             }
         }
     }

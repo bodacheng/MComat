@@ -25,8 +25,8 @@ namespace FightScene
         public static Data_Center focusingUnit;
         public static Team playerTeam = Team.player1;
         
-        public MultiDict<int, int, Data_Center> Team1Members;
-        public MultiDict<int, int, Data_Center> Team2Members;
+        //public MultiDict<int, int, Data_Center> Team1Members;
+        //public MultiDict<int, int, Data_Center> Team2Members;
         
         public readonly IDictionary<Data_Center, UnitInfo> UnitInfoRef = new Dictionary<Data_Center, UnitInfo>();
         public static readonly IDictionary<Data_Center, ReactiveProperty<float>> RefreshTimeDic = new Dictionary<Data_Center, ReactiveProperty<float>>();
@@ -45,28 +45,10 @@ namespace FightScene
             CameraAdjustment(playerTeam);
         }
         
-        IEnumerator _UnitsLoad(MultiDict<int, int, UnitInfo> MembersSets, MultiDict<int, int, Data_Center> TeamMembers)
-        {
-            foreach (var kv in MembersSets.mDict)
-            {
-                var _one = kv.Value;
-                var center = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
-                if (center == null)
-                {
-                    var returnValue = UnitCreator.CreateUnit(_one);
-                    yield return returnValue;
-                    center = (Data_Center)returnValue.Current;
-                }
-                
-                TeamMembers.Set(kv.Key.Item1, kv.Key.Item2, center);
-                DicAdd<Data_Center, UnitInfo>.Add(UnitInfoRef, center, _one);
-            }
-        }
-
         public IEnumerator LoadUnits(FightInfo info)
         {
-            yield return _UnitsLoad(info.fightMembers.HeroSets, Team1Members);
-            yield return _UnitsLoad(info.fightMembers.EnemySets, Team2Members);
+            yield return team1._UnitsLoad(info.fightMembers.HeroSets, UnitInfoRef);
+            yield return team2._UnitsLoad(info.fightMembers.EnemySets, UnitInfoRef);
         }
         
         public Data_Center team1StartUnit = null, team2StartUnit = null;
@@ -83,55 +65,26 @@ namespace FightScene
             CameraAdjustment(playerTeam);
         }
         
-        void AllUnitsStartOff(MultiDict<int, int, Data_Center> TeamMembers, Team myTeam, bool TestMode = false)
-        {
-            foreach (var oneMember in TeamMembers.GetValues())
-            {
-                Sensor.AddOrRemoveSharedUnits(oneMember, myTeam, true);
-                if (!TestMode)
-                    oneMember._MyBehaviorRunner.ChangeToWaitingState();
-                else
-                {
-                    oneMember._MyBehaviorRunner.ChangeToTestMode();
-                }
-            }
-        }
-        
-        void OneUnitStartOff(Data_Center dc, Team myTeam)
-        {
-            Sensor.AddOrRemoveSharedUnits(dc, myTeam, true);
-            dc._MyBehaviorRunner.ChangeToWaitingState();
-        }
-        
         public void ModeStart()
         {
             switch (loadFight.Team1Mode)
             {
                 case TeamMode.multiRaid:
-                    AllUnitsStartOff(Team1Members, heroTeamConfig.myTeam);
+                    team1.AllUnitsStartOff();
                     break;
                 case TeamMode.rotation:
-                    OneUnitStartOff(team1StartUnit, heroTeamConfig.myTeam);
+                    team1.OneUnitStartOff(team1StartUnit);
                     break;
             }
             
             switch (loadFight.Team2Mode)
             {
                 case TeamMode.multiRaid:
-                    AllUnitsStartOff(Team2Members, EnemyTeamConfig.myTeam);
+                    team2.AllUnitsStartOff();
                     break;
                 case TeamMode.rotation:
-                    OneUnitStartOff(team2StartUnit, EnemyTeamConfig.myTeam);
+                    team2.OneUnitStartOff(team2StartUnit);
                     break;
-            }
-        }
-        
-        // 全队无敌
-        public void TurnAllUnitsInvincible(bool _Invincible, MultiDict<int, int, Data_Center> TeamMembers)
-        {
-            foreach (var center in TeamMembers.GetValues())
-            {
-                center.FightDataRef.Invincible = _Invincible;
             }
         }
         
@@ -141,7 +94,7 @@ namespace FightScene
             var c_Mode = C_Mode.CertainYAntiVibration;
             if (focusingUnit != null)
             {
-                _CameraManager.Assign_Camera(c_Mode, focusingUnit.geometryCenter, myTeam == Team.player1  ? team2.GetFightingUnitTs(Team2Members) : team1.GetFightingUnitTs(Team1Members));
+                _CameraManager.Assign_Camera(c_Mode, focusingUnit.geometryCenter, myTeam == Team.player1  ? team2.GetFightingUnitTs() : team1.GetFightingUnitTs());
             }
             else
             {
@@ -151,11 +104,11 @@ namespace FightScene
         
         public void ClearUIAndData()
         {
-            foreach (var one in Team1Members.GetValues())
+            foreach (var one in team1.TeamMembers.GetValues())
             {
                 one.CleanClear();
             }
-            foreach (var one in Team2Members.GetValues())
+            foreach (var one in team2.TeamMembers.GetValues())
             {
                 one.CleanClear();
             }
@@ -166,16 +119,16 @@ namespace FightScene
         
         public void ClearUnits()
         {
-            foreach (var one in Team1Members.GetValues())
+            foreach (var one in team1.TeamMembers.GetValues())
             {
                 Destroy(one.WholeT.gameObject);
             }
-            foreach (var one in Team2Members.GetValues())
+            foreach (var one in team2.TeamMembers.GetValues())
             {
                 Destroy(one.WholeT.gameObject);
             }
-            Team1Members.Clear();
-            Team2Members.Clear();
+            team1.TeamMembers.Clear();
+            team2.TeamMembers.Clear();
         }
         
         //void OnGUI()

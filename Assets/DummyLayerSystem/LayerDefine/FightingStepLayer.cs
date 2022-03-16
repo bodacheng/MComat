@@ -24,8 +24,8 @@ public class FightingStepLayer : UILayer
     
     public void Refresh()
     {
-        team1UI.Refresh(RTFightManager.target.Team1Members, RTFightManager.target.team1.RMode_Unit.Value);
-        team2UI.Refresh(RTFightManager.target.Team2Members, RTFightManager.target.team2.RMode_Unit.Value);
+        team1UI.Refresh(RTFightManager.target.team1.RMode_Unit.Value);
+        team2UI.Refresh(RTFightManager.target.team2.RMode_Unit.Value);
         
         if (RTFightManager.focusingUnit == null)
         {
@@ -95,9 +95,12 @@ public class FightingStepLayer : UILayer
         team2UI.teamConfig = RTFightManager.target.EnemyTeamConfig;
         team1UI.teamConfig.playID = NetFightScene.Fight.team1ID;
         team2UI.teamConfig.playID = NetFightScene.Fight.team2ID;
+
+        team1UI.TeamMembers = RTFightManager.target.team1.TeamMembers;
+        team2UI.TeamMembers = RTFightManager.target.team2.TeamMembers;
         
         // 角色第二次初始化在这之前已经结束
-        team1UI.InsTeamUI(RTFightManager.target.Team1Members, RTFightManager.target.team1.ReadyForNextMember, RTFightManager.target.team1.RMode_Unit);
-        team2UI.InsTeamUI(RTFightManager.target.Team2Members, RTFightManager.target.team2.ReadyForNextMember, RTFightManager.target.team2.RMode_Unit);
+        team1UI.InsTeamUI(RTFightManager.target.team1.ReadyForNextMember, RTFightManager.target.team1.RMode_Unit);
+        team2UI.InsTeamUI(RTFightManager.target.team2.ReadyForNextMember, RTFightManager.target.team2.RMode_Unit);
     }
 }
