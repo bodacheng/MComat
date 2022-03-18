@@ -6,13 +6,15 @@ namespace FightScene
 {
     public partial class UnitsManger : MonoBehaviour
     {
-        public ReactiveProperty<Data_Center> RMode_Unit;
+        public ReactiveProperty<Data_Center> RMode_Unit = new ReactiveProperty<Data_Center>();
         Data_Center waitingMember;
         
         public void OneUnitStartOff(Data_Center dc)
         {
             Sensor.AddOrRemoveSharedUnits(dc, teamConfig.myTeam, true);
+            InputsManager.FocusUnit(dc);
             dc._MyBehaviorRunner.ChangeToWaitingState();
+            RMode_Unit.Value = dc;
         }
         
         async void ToNewUnit()
@@ -36,7 +38,7 @@ namespace FightScene
                 kv.Value.WholeT.parent = null;
                 kv.Value.WholeT.gameObject.SetActive(true);
             }
-            ChangeUnit_ReadyToGo(startUnit, TeamStandPoints[0]);
+            ChangeFightingUnit(startUnit, true, TeamStandPoints[0]);
             return startUnit;
         }
         
@@ -72,27 +74,87 @@ namespace FightScene
             }
         }
         
-        // 最初切换队员
-        bool ChangeUnit_ReadyToGo(Data_Center _changeTo, Transform IniStandPoint)
+        // 切换队员
+        bool ChangeFightingUnit(Data_Center _changeTo, bool emptyState = false, Transform IniStandPoint = null)
         {
+            if (!(TeamMembers.GetValues().Count > 1) || RMode_Unit.Value == _changeTo)
+            {
+                return false;
+            }
+            if (_changeTo.IsDead.Value)
+            {
+                return false;
+            }
             var unitChanged = false;
+            var targetPos = Vector3.zero;
+            var targetRot = Quaternion.identity;
+            if (IniStandPoint != null)
+            {
+                targetPos = IniStandPoint.position;
+                targetRot = IniStandPoint.rotation;
+            }
+            else
+            {
+                if (RMode_Unit != null)
+                {
+                    targetPos = RMode_Unit.Value.transform.position;
+                    targetRot = RMode_Unit.Value.transform.rotation;
+                }
+            }
+
             foreach (var data_Center in TeamMembers.GetValues())
             {
                 if (_changeTo == data_Center)
                 {
+                    if (RMode_Unit.Value != null && _changeTo != null) //继承hit数
+                    {
+                        _changeTo.FightDataRef._comboHitCount.HitCount.Value = RMode_Unit.Value.FightDataRef._comboHitCount.HitCount.Value;
+                    }
+                    Sensor.AddOrRemoveSharedUnits(RMode_Unit.Value, this.teamConfig.myTeam, false);
+                    Sensor.AddOrRemoveSharedUnits(_changeTo, this.teamConfig.myTeam, true);
+                    
                     RMode_Unit.Value = _changeTo;
-                    RMode_Unit.Value.WholeT.transform.position = IniStandPoint.position;
-                    RMode_Unit.Value.WholeT.rotation = IniStandPoint.rotation;
+                    RMode_Unit.Value.WholeT.gameObject.SetActive(true);
+                    if (emptyState)
+                    {
+                        RMode_Unit.Value._MyBehaviorRunner.ChangeState("Empty");
+                    }
+                    else
+                    {
+                        RMode_Unit.Value._MyBehaviorRunner.ChangeToWaitingState();
+                    }
+                    RMode_Unit.Value.WholeT.transform.position = targetPos;
+                    RMode_Unit.Value.WholeT.transform.rotation = targetRot;
                     EffectsManager.GenerateEffect("memberShift", null, RMode_Unit.Value.WholeT.transform.position, Quaternion.identity, RMode_Unit.Value.geometryCenter);
                     unitChanged = true;
-                    RMode_Unit.Value.WholeT.gameObject.SetActive(true);
                 }
                 else
                 {
-                    data_Center._MyBehaviorRunner.ChangeState("Empty");
+                    if (data_Center._MyBehaviorRunner.GetNowState().StateKey != "Empty")
+                    {
+                        data_Center._MyBehaviorRunner.ChangeState("Empty");
+                        //data_Center.WholeT.transform.position = new Vector3(9999, 600, 9999);
+                    }
                     data_Center.WholeT.gameObject.SetActive(false);
                 }
             }
+            
+            if (teamConfig.myTeam == RTFightManager.playerTeam)
+            {
+                InputsManager?.FocusUnit(RMode_Unit.Value);
+            }
+            
+            switch (_changeTo._TeamConfig.myTeam)
+            {
+                case Team.player1:
+                    _changeTo._MyBehaviorRunner.AI = RTFightManager.target.team1.Auto;
+                    break;
+                case Team.player2:
+                    _changeTo._MyBehaviorRunner.AI = RTFightManager.target.team2.Auto;
+                    break;
+            }
+            RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
+            //Refresh(TeamMembers);
             return unitChanged;
         }
         
@@ -113,70 +175,6 @@ namespace FightScene
                 ChangeFightingUnit(waitingMember);
                 waitingMember = null;
             }
-        }
-        
-        // 切换队员
-        bool ChangeFightingUnit(Data_Center _changeTo)
-        {
-            if (!(TeamMembers.GetValues().Count > 1) || RMode_Unit.Value == _changeTo)
-            {
-                return false;
-            }
-            if (_changeTo.IsDead.Value)
-            {
-                return false;
-            }
-            var unitChanged = false;
-            var targetPos = Vector3.zero;
-            if (RMode_Unit != null)
-            {
-                targetPos = RMode_Unit.Value.transform.position;
-            }
-            foreach (var data_Center in TeamMembers.GetValues())
-            {
-                if (_changeTo == data_Center)
-                {
-                    if (RMode_Unit != null && _changeTo != null) //继承hit数
-                    {
-                        _changeTo.FightDataRef._comboHitCount.HitCount.Value = RMode_Unit.Value.FightDataRef._comboHitCount.HitCount.Value;
-                    }
-                    Sensor.AddOrRemoveSharedUnits(RMode_Unit.Value, this.teamConfig.myTeam, false);
-                    Sensor.AddOrRemoveSharedUnits(_changeTo, this.teamConfig.myTeam, true);
-                    
-                    RMode_Unit.Value = _changeTo;
-                    RMode_Unit.Value.WholeT.gameObject.SetActive(true);
-                    RMode_Unit.Value._MyBehaviorRunner.ChangeToWaitingState();
-                    RMode_Unit.Value.WholeT.transform.position = targetPos;
-                    EffectsManager.GenerateEffect("memberShift", null, RMode_Unit.Value.WholeT.transform.position, Quaternion.identity, RMode_Unit.Value.geometryCenter);
-                    unitChanged = true;
-                }
-                else
-                {
-                    if (data_Center._MyBehaviorRunner.GetNowState().StateKey != "Empty")
-                    {
-                        data_Center._MyBehaviorRunner.ChangeState("Empty");
-                        //data_Center.WholeT.transform.position = new Vector3(9999, 600, 9999);
-                        data_Center.WholeT.gameObject.SetActive(false);
-                    }
-                }
-            }
-            if (teamConfig.myTeam == RTFightManager.playerTeam)
-            {
-                RTFightManager.target.SetFocusUnit(RMode_Unit.Value);
-            }
-            
-            switch (_changeTo._TeamConfig.myTeam)
-            {
-                case Team.player1:
-                    _changeTo._MyBehaviorRunner.AI = RTFightManager.target.team1.Auto;
-                    break;
-                case Team.player2:
-                    _changeTo._MyBehaviorRunner.AI = RTFightManager.target.team2.Auto;
-                    break;
-            }
-            RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
-            //Refresh(TeamMembers);
-            return unitChanged;
         }
         
         bool CanChangeToThisMember(Data_Center targetMember)

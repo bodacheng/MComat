@@ -75,17 +75,17 @@ public class BasicTryProcess : FSceneProcess
             TeamDeadMemberDictionary.Add(keyValuePair.Key,new List<Data_Center>());//这个什么意思呢，就是说把所有队伍的Team值加进TeamDeadMemberDictionary，value是个空列表，谁死了谁加进入
         }
         loser = Team.none;
-        NetFightScene.target.PressedStartButton();
+        RTFightManager.target.ModeStart();
         //NetFightScene.target.FightCanvas.gameObject.SetActive(true);
 
         watchetargets.Clear();
-        if (RTFightManager.focusingUnit.Sensor.GetEnemiesByDistance(true).Count > 0)
-        {
-            foreach (GameObject _G in RTFightManager.focusingUnit.Sensor.GetEnemiesByDistance(false))
-            {
-                watchetargets.Add(_G.transform);
-            }
-        }
+        // if (RTFightManager.focusingUnit.Sensor.GetEnemiesByDistance(true).Count > 0)
+        // {
+        //     foreach (GameObject _G in RTFightManager.focusingUnit.Sensor.GetEnemiesByDistance(false))
+        //     {
+        //         watchetargets.Add(_G.transform);
+        //     }
+        // }
 
         UnitInfo before = MyMonsters.Get("1");
         UnitInfo characterDataInfo = UnitInfo.GetUnitInfo(before);
@@ -127,12 +127,6 @@ public class BasicTryProcess : FSceneProcess
             break;
             case 4:
             break; 
-        }
-
-        if (RTFightManager.focusingUnit != null)
-        {
-            //FightScene._CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, watchetargets);
-            //FightScene._CameraManager.CurrentMode.SetMeCenter(RealTimeGameProcessManager.focusingChar.WholeT);
         }
         
         TeamDeadMemberDictionary = TeamMemberDeathProcessing(AllMembers);

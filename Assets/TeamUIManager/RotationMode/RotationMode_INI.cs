@@ -34,7 +34,7 @@ namespace FightScene
                 DicAdd<Data_Center, SideCharIcon>.Add(UnitIconDic, center, sideIcon);
                 
                 // 魔法按键
-                MobileInputsManager.target.ZokuseiButtonRegister(center.zokusei);
+                _inputsManager.ZokuseiButtonRegister(center.zokusei);
                 
                 RTFightManager.RefreshTimeDic[center].Subscribe((x) =>
                 {

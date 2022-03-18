@@ -15,10 +15,10 @@ namespace Soul
         
         public void PlayerControl(BehaviorRunner behaviorRunner, List<SkillEntity> Options, bool Auto)
         {
-            if (MobileInputsManager.target.Observing_Runner == behaviorRunner)
+            if (behaviorRunner.InputsManager != null)
             {
                 #region 主动退出当前状态的控制类条件是否激活
-                if (!BehaviourExitInputTrigger(behaviorRunner.CurrentSKillEntity))
+                if (!BehaviourExitInputTrigger(behaviorRunner.CurrentSKillEntity, behaviorRunner.InputsManager))
                 {
                     return;
                 }
@@ -32,7 +32,7 @@ namespace Soul
                         case InputKey.Attack1:
                             if (MobileInputsManager.attack)
                             {
-                                MobileInputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
+                                behaviorRunner.InputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
                                 behaviorRunner.SingleFightLog.WriteLog(
                                     new SingleFightLog.BehaviourFightRecord
                                     {
@@ -49,7 +49,7 @@ namespace Soul
                         case InputKey.Attack2:
                             if (MobileInputsManager.fire1)
                             {
-                                MobileInputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
+                                behaviorRunner.InputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
                                 behaviorRunner.SingleFightLog.WriteLog(
                                     new SingleFightLog.BehaviourFightRecord
                                     {
@@ -66,7 +66,7 @@ namespace Soul
                         case InputKey.Attack3:
                             if (MobileInputsManager.fire2)
                             {
-                                MobileInputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
+                                behaviorRunner.InputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
                                 behaviorRunner.SingleFightLog.WriteLog(
                                     new SingleFightLog.BehaviourFightRecord
                                     {
@@ -137,12 +137,12 @@ namespace Soul
         }
 
         // 状态的退出可以由特定的控制条件来决定时进行的判断。目前全项目只有防御这一种情况
-        bool BehaviourExitInputTrigger(SkillEntity current_Behavior_Set)
+        bool BehaviourExitInputTrigger(SkillEntity current_Behavior_Set, MobileInputsManager _inputsManager)
         {
             switch(current_Behavior_Set.ExitInput)
             {
                 case InputKey.Defend_Cancel:
-                    return MobileInputsManager.target.DefendExitTrigger();
+                    return _inputsManager.DefendExitTrigger();
                 default:
                     return true;
             }
@@ -180,9 +180,9 @@ namespace Soul
                 {
                     int random = Random.Range(0, finalConditionStateKeySet.Count);//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。
                     SkillEntity _SE = behaviorRunner.SkillEntityDic[finalConditionStateKeySet[random].Item2];
-                    if (MobileInputsManager.target.Observing_Runner == behaviorRunner)
+                    if (behaviorRunner.InputsManager != null)
                     {
-                        MobileInputsManager.SkillButtonExplosion(_SE.EnterInput, _SE.SP_LEVEL);
+                        behaviorRunner.InputsManager.SkillButtonExplosion(_SE.EnterInput, _SE.SP_LEVEL);
                     }
                     if (_SE.StateType == BehaviorType.AC || _SE.StateType == BehaviorType.CT || _SE.StateType == BehaviorType.Def
                         || _SE.StateType == BehaviorType.GI || _SE.StateType == BehaviorType.GM || _SE.StateType == BehaviorType.GR)

@@ -14,6 +14,12 @@ namespace FightScene
         [HideInInspector]
         public Transform[] TeamStandPoints;
         
+        public MobileInputsManager InputsManager
+        {
+            set;
+            get;
+        }
+        
         private bool auto;
         public bool Auto
         {
@@ -83,11 +89,18 @@ namespace FightScene
                     }
                     return transforms;
                 case TeamMode.rotation:
-                    transforms = new List<Transform>
+                    if (RMode_Unit.Value != null)
                     {
-                        RMode_Unit.Value.geometryCenter
-                    };
-                    return transforms;
+                        transforms = new List<Transform>
+                        {
+                            RMode_Unit.Value.geometryCenter
+                        };
+                        return transforms;
+                    }
+                    else
+                    {
+                        return new List<Transform>();
+                    }
             }
             return null;
         }

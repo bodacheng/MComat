@@ -11,6 +11,8 @@ public class FightingStepLayer : UILayer
     
     [Header("Camera Switch Button")]
     public Button cameraSwitchBtn;
+
+    [SerializeField] MobileInputsManager InputsManager;
     
     [Header("TeamUIManager")]
     public TeamUIManager team1UI;
@@ -26,15 +28,6 @@ public class FightingStepLayer : UILayer
     {
         team1UI.Refresh(RTFightManager.target.team1.RMode_Unit.Value);
         team2UI.Refresh(RTFightManager.target.team2.RMode_Unit.Value);
-        
-        if (RTFightManager.focusingUnit == null)
-        {
-            MobileInputsManager.target.TurnOffButtons();
-        }
-        else
-        {
-            MobileInputsManager.target.FocusUnit(RTFightManager.focusingUnit._MyBehaviorRunner, RTFightManager.focusingUnit.zokusei);
-        }
     }
     
     public static FightingStepLayer Get()
@@ -81,6 +74,15 @@ public class FightingStepLayer : UILayer
     void StartUp(Action<bool> switchTeam1Auto, Action<bool> switchTeam2Auto, Action pauseAction, Action cameraSwitchAction)
     {
         target = this;
+        
+        InputsManager.ZokuseiButtonRegister(Zokusei.blueMagic);
+        InputsManager.ZokuseiButtonRegister(Zokusei.redMagic);
+        InputsManager.ZokuseiButtonRegister(Zokusei.greenMagic);
+        InputsManager.ZokuseiButtonRegister(Zokusei.darkMagic);
+        InputsManager.ZokuseiButtonRegister(Zokusei.lightMagic);
+        
+        RTFightManager.target.team1.InputsManager = InputsManager;
+        RTFightManager.target.team2.InputsManager = InputsManager;
         
         pauseButton.onClick.AddListener(pauseAction.Invoke);
         cameraSwitchBtn.onClick.AddListener(cameraSwitchAction.Invoke);

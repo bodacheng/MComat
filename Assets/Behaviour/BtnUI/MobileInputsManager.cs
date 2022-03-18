@@ -26,30 +26,25 @@ public class MobileInputsManager : MonoBehaviour {
     [SerializeField] Button Dash;
     [SerializeField] Transform effectsParent;
     
-    public static MobileInputsManager target;
     static readonly IDictionary<Zokusei, zokuseiButtonEffectsGroup> ZokuseiButtonEffects = new Dictionary<Zokusei, zokuseiButtonEffectsGroup>();
-    static zokuseiButtonEffectsGroup _focusing;
-    public BehaviorRunner Observing_Runner;
+    static Zokusei _focusing;
     
-    public static bool inputting = false;
+    public bool inputting = false;
     
-    void Awake()
-    {
-        target = this;
-    }
-
-    public bool BeingControl(BehaviorRunner runner)
-    {
-        return inputting && runner == Observing_Runner;
-    }
+    private BehaviorRunner watch;
     
-    public void FocusUnit(BehaviorRunner target, Zokusei zokusei)
+    public void FocusUnit(Data_Center center)
     {
-        Observing_Runner = target;
-        if (Observing_Runner != null)
+        if (watch != null)
         {
-            SwitchZokuseiButtons(zokusei);
-            SuddenRereshButtons(Observing_Runner);
+            watch.InputsManager = null;
+        }
+        if (center != null)
+        {
+            center._MyBehaviorRunner.InputsManager = this;
+            watch = center._MyBehaviorRunner;
+            SwitchZokuseiButtons(center.zokusei);
+            SuddenRefreshButtons(watch);
         }else{
             TurnOffButtons();
         }
@@ -58,18 +53,21 @@ public class MobileInputsManager : MonoBehaviour {
     public void Clear()
     {
         ZokuseiButtonEffects.Clear();
-        _focusing = null;
     }
     
     // 切换输入按键表现层（红黄蓝绿）.这个函数使用的前提是所有用的上的控制器组都已经注册并初始化
     void SwitchZokuseiButtons(Zokusei zokusei)
     {
-        if (_focusing != null)
-            _focusing.Close();
+        if (ZokuseiButtonEffects.ContainsKey(_focusing))
+        {
+            ZokuseiButtonEffects[_focusing].Close();
+        }
+        
         if (ZokuseiButtonEffects.ContainsKey(zokusei))
         {
-            _focusing = ZokuseiButtonEffects[zokusei];
-            _focusing.Open(
+            _focusing = zokusei;
+            
+            ZokuseiButtonEffects[zokusei].Open(
                 PosCal.GetWorldPos(NetFightScene.target.fxCamera, Defend.GetComponent<RectTransform>(), 5), 
                 PosCal.GetWorldPos(NetFightScene.target.fxCamera, Dash.GetComponent<RectTransform>(), 5)
             );
@@ -80,7 +78,7 @@ public class MobileInputsManager : MonoBehaviour {
 
     public void ZokuseiButtonRegister(Zokusei zokusei)
     {
-        zokuseiButtonEffectsGroup zokuseiButtons = new zokuseiButtonEffectsGroup();
+        var zokuseiButtons = new zokuseiButtonEffectsGroup();
         zokuseiButtons.INI(effectsParent, zokusei, Attack, Fire1, Fire2);
         zokuseiButtons.Close();
         if (!ZokuseiButtonEffects.ContainsKey(zokusei))
@@ -91,22 +89,22 @@ public class MobileInputsManager : MonoBehaviour {
         }
     }
 
-    static ParticleSystem targetexplode;
-    public static void SkillButtonExplosion(InputKey inputs_Defined, int eX)
+    ParticleSystem _targetexplode;
+    public void SkillButtonExplosion(InputKey inputs_Defined, int eX)
     {
         switch(eX)
         {
             case 0:
-                targetexplode = _focusing.triggerExplosion0;
+                _targetexplode = ZokuseiButtonEffects[_focusing].triggerExplosion0;
             break;
             case 1:
-                targetexplode = _focusing.triggerExplosion1;
+                _targetexplode = ZokuseiButtonEffects[_focusing].triggerExplosion1;
             break;
             case 2:
-                targetexplode = _focusing.triggerExplosion2;
+                _targetexplode = ZokuseiButtonEffects[_focusing].triggerExplosion2;
             break;
             case 3:
-                targetexplode = _focusing.triggerExplosion3;
+                _targetexplode = ZokuseiButtonEffects[_focusing].triggerExplosion3;
             break;
             default:
                 return;
@@ -115,19 +113,19 @@ public class MobileInputsManager : MonoBehaviour {
         switch (inputs_Defined)
         {
             case InputKey.Attack1:
-                targetexplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, target.Attack.GetComponent<RectTransform>(), 3);
+                _targetexplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, Attack.GetComponent<RectTransform>(), 3);
                 break;
             case InputKey.Attack2:
-                targetexplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, target.Fire1.GetComponent<RectTransform>(), 3);
+                _targetexplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, Fire1.GetComponent<RectTransform>(), 3);
                 break;
             case InputKey.Attack3:
-                targetexplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, target.Fire2.GetComponent<RectTransform>(), 3);
+                _targetexplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, Fire2.GetComponent<RectTransform>(), 3);
                 break;
         }
-        targetexplode.Play();
+        _targetexplode.Play();
         
         //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
-        foreach (KeyValuePair<Button, ParticleSystem> keyValue in _focusing.buttonRefreshEffects)
+        foreach (KeyValuePair<Button, ParticleSystem> keyValue in ZokuseiButtonEffects[_focusing].buttonRefreshEffects)
         {
             keyValue.Value.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, keyValue.Key.GetComponent<RectTransform>(),4);
             keyValue.Value.Play(true);
@@ -138,26 +136,28 @@ public class MobileInputsManager : MonoBehaviour {
     // 根据玩家的技能列表来决定防御，机动，三攻击键分别存在与否。
     // 然后，refresh button是要看情况的，攻击键要么是变成空按钮，要么应该是就没有按钮。。。？
     // 而防御与机动则是确定一直显示。
-    void StartPressing(Button targetBUtton)
+    void StartPressing(Button targetBtn)
     {
-        targetButtonPos = PosCal.GetWorldPos(NetFightScene.target.fxCamera, targetBUtton.GetComponent<RectTransform>(), 7);
-        if (_focusing != null)
+        targetButtonPos = PosCal.GetWorldPos(NetFightScene.target.fxCamera, targetBtn.GetComponent<RectTransform>(), 7);
+        if (ZokuseiButtonEffects.ContainsKey(_focusing))
         {
-            _focusing.pressingExplosion.transform.position = targetButtonPos;
-            _focusing.pressingExplosion.Play();
+            ZokuseiButtonEffects[_focusing].pressingExplosion.transform.position = targetButtonPos;
+            ZokuseiButtonEffects[_focusing].pressingExplosion.Play();
         }
     }
 
     void StopPressing()
     {
-        if (_focusing != null)
-            _focusing.pressingExplosion.Stop();
+        if (ZokuseiButtonEffects.ContainsKey(_focusing))
+        {
+            ZokuseiButtonEffects[_focusing].pressingExplosion.Stop();
+        }
     }
     
     // 如果不是对准角色，不会跑。
     static float h;
     static float v;
-    static void CheckIfPlayerIsInputting()
+    void CheckIfPlayerIsInputting()
     {
         inputting = defendButtonHover || attack || fire1 || fire2;
         if (inputting)
@@ -219,7 +219,7 @@ public class MobileInputsManager : MonoBehaviour {
     }
     
     // 直接根据角色状态刷新按钮。因为动态按钮系统是基于状态流动
-    public void SuddenRereshButtons(BehaviorRunner behaviorRunner)
+    void SuddenRefreshButtons(BehaviorRunner behaviorRunner)
     {
         Options_lastframe[InputKey.Attack1] = null;
         Options_lastframe[InputKey.Attack2] = null;
@@ -310,7 +310,7 @@ public class MobileInputsManager : MonoBehaviour {
         }
     }
 
-    public void TurnOffButtons()
+    void TurnOffButtons()
     {
         Attack.gameObject.SetActive(false);
         Fire1.gameObject.SetActive(false);
@@ -327,11 +327,10 @@ public class MobileInputsManager : MonoBehaviour {
             Defend.gameObject.SetActive(false);
             defendButtonHover = false;
         }
-        
-        Observing_Runner = null;
-        if (_focusing != null)
+
+        if (ZokuseiButtonEffects.ContainsKey(_focusing))
         {
-            _focusing.Close();
+            ZokuseiButtonEffects[_focusing].Close();
         }
     }
     
@@ -344,7 +343,10 @@ public class MobileInputsManager : MonoBehaviour {
     void RefreshPattern(Button button, int sp_level)//按钮切换也可以在这里做文章
     {
         targetButtonPos = PosCal.GetWorldPos(NetFightScene.target.fxCamera, button.GetComponent<RectTransform>(), 5);
-        _focusing?.Refreshforbutton(button, sp_level, targetButtonPos);
+        if (ZokuseiButtonEffects.ContainsKey(_focusing))
+        {
+            ZokuseiButtonEffects[_focusing].RefreshBtn(button, sp_level, targetButtonPos);
+        }
     }
 
     //void changeButtonPatternParticleVer(Button button,EX sp_level)//按钮切换也可以在这里做文章

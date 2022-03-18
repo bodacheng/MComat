@@ -60,12 +60,11 @@ namespace FightScene
                 fightingStepLayer.gameObject.SetActive(true);
             }
             
-            NetFightScene.target.PressedStartButton();
+            RTFightManager.target.ModeStart();
         }
         
         public override void ProcessEnd()
         {
-            MobileInputsManager.target.TurnOffButtons();
             if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
             {
                 UILayerLoader.Remove("TitleScreenLayer");

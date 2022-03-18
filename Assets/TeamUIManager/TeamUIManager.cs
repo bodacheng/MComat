@@ -8,6 +8,7 @@ namespace FightScene
 {
     public partial class TeamUIManager : MonoBehaviour
     {
+        [SerializeField] MobileInputsManager _inputsManager;
         [SerializeField] RectTransform sideIconsContainer;
         [SerializeField] RectTransform _targetCanvasT;
         [SerializeField] SideCharIcon button_prefab;
@@ -99,7 +100,7 @@ namespace FightScene
                     continue;
                 if (teamConfig.myTeam == RTFightManager.playerTeam)
                 {
-                    _tempSI.transform.localScale = _dt != RTFightManager.focusingUnit ? Vector3.one : Vector3.one * 1.2f;
+                    _tempSI.transform.localScale = Vector3.one;
                     _tempSI.transform.SetParent(sideIconsContainer.transform);
                     _tempSI.focusingCharIcon.gameObject.SetActive(true);
                     _tempSI.ExBar.gameObject.SetActive(true);

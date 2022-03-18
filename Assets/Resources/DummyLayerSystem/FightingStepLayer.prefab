@@ -2055,7 +2055,7 @@ MonoBehaviour:
   Defend: {fileID: 5714480301820124979}
   Dash: {fileID: 5714480301703364042}
   effectsParent: {fileID: 5788849479198898695}
-  Observing_Runner: {fileID: 0}
+  inputting: 0
 --- !u!1 &5714480302156832987
 GameObject:
   m_ObjectHideFlags: 0
@@ -2127,6 +2127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseButton: {fileID: 7415628284172283046}
   cameraSwitchBtn: {fileID: 7415628284503521496}
+  InputsManager: {fileID: 5714480302127526369}
   team1UI: {fileID: 7415628284493325747}
   team2UI: {fileID: 7415628285627410667}
   Team1Auto: {fileID: 2412695735467647692}
@@ -2458,6 +2459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe32e1c97a604b14ab4a4fbf2df6582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputsManager: {fileID: 5714480302127526369}
   sideIconsContainer: {fileID: 5714480301587981525}
   _targetCanvasT: {fileID: 5714480302156832991}
   button_prefab: {fileID: 1163580101528835427, guid: 0ba39cc0e4997459fb7431ca6b5b03eb,
@@ -2725,6 +2727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe32e1c97a604b14ab4a4fbf2df6582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputsManager: {fileID: 5714480302127526369}
   sideIconsContainer: {fileID: 5714480301587981525}
   _targetCanvasT: {fileID: 5714480302156832991}
   button_prefab: {fileID: 1163580101528835427, guid: 0ba39cc0e4997459fb7431ca6b5b03eb,

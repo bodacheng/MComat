@@ -64,8 +64,8 @@ namespace Soul
             #endregion
             
             #region 按钮技能刷新
-            if (MobileInputsManager.target.Observing_Runner == this)
-                MobileInputsManager.target.ButtonsFeatureLoad(optionsForButtonRefresh);
+            if (InputsManager != null)
+                InputsManager.ButtonsFeatureLoad(optionsForButtonRefresh);
             #endregion
             
             CalAdviceDistanceFromEnemy();

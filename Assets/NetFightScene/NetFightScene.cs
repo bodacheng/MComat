@@ -105,22 +105,6 @@ namespace FightScene
             TutorialRunner.Main.ProcessNagare();
         }
         
-        // 本地系函数
-        public void PressedStartButton()
-        {
-            RTFightManager.target.ModeStart();
-            
-            switch (RTFightManager.playerTeam)
-            {
-                case Team.player1:
-                    RTFightManager.target.SetFocusUnit(RTFightManager.target.team1.TeamMembers.GetValues()[0]);
-                    break;
-                case Team.player2:
-                    RTFightManager.target.SetFocusUnit(RTFightManager.target.team2.TeamMembers.GetValues()[0]);
-                    break;
-            }
-        }
-        
         public void ReturnToFront()
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);

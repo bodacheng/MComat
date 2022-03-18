@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using DG.Tweening;
+﻿using UnityEngine;
 using UniRx;
 
 namespace FightScene
@@ -22,7 +19,7 @@ namespace FightScene
                 {
                     if (teamConfig.myTeam == RTFightManager.playerTeam)
                     {
-                        RTFightManager.target.SetFocusUnit(a_char);
+                        _inputsManager.FocusUnit(a_char);
                         if (teamConfig.myTeam == Team.player1)
                         {
                             c._MyBehaviorRunner.AI = RTFightManager.target.team1.Auto;
@@ -69,7 +66,7 @@ namespace FightScene
                 DicAdd<Data_Center, SideCharIcon>.Add(UnitIconDic, a_char, _SideIcon);
                 
                 // 魔法按键
-                MobileInputsManager.target.ZokuseiButtonRegister(a_char.zokusei);
+                _inputsManager.ZokuseiButtonRegister(a_char.zokusei);
                 
                 var maxHp = a_char.FightDataRef.CurrentHp.Value;
                 a_char.FightDataRef.CurrentHp.Subscribe(x =>

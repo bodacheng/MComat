@@ -24,14 +24,18 @@ public class zokuseiButtonEffectsGroup
     ParticleSystem fire1refresh;
     ParticleSystem fire2refresh;
     
-
     public void Close()
     {
-        foreach(KeyValuePair<Button, IDictionary<int, ParticleSystem>> keyValuePair in buttonEffectsSets)
+        foreach(var keyValuePair in buttonEffectsSets)
         {
-            foreach(KeyValuePair<int, ParticleSystem> exPPair in keyValuePair.Value)
+            foreach(var exPPair in keyValuePair.Value)
             {
-                exPPair.Value.Stop(true);
+                if (exPPair.Value != null)
+                    exPPair.Value.Stop(true);
+                else
+                {
+                    Debug.Log("错误"+keyValuePair.Value );
+                }
             }
         }
         triggerExplosion0.Stop(true);
@@ -214,7 +218,7 @@ public class zokuseiButtonEffectsGroup
     }
     
     IDictionary<int, ParticleSystem> tartget;
-    public void Refreshforbutton(Button button, int eX, Vector3 pos)
+    public void RefreshBtn(Button button, int eX, Vector3 pos)
     {
         tartget = buttonEffectsSets[button];
         if (eX == -1)

@@ -293,7 +293,7 @@ namespace Soul
         {
             _c_State_Update_SP();
             use_direction = use_direction.normalized;
-            if (!MobileInputsManager.target.BeingControl(_AIStateRunner))
+            if (!_AIStateRunner.BeingControl())
             {
                 use_direction = Vector3.zero;
             }

@@ -21,12 +21,7 @@ namespace FightScene
         public readonly TeamConfig EnemyTeamConfig = new TeamConfig("2", Team.player2, new List<Team>() { Team.player1 });
         
         public static RTFightManager target;
-        
-        public static Data_Center focusingUnit;
         public static Team playerTeam = Team.player1;
-        
-        //public MultiDict<int, int, Data_Center> Team1Members;
-        //public MultiDict<int, int, Data_Center> Team2Members;
         
         public readonly IDictionary<Data_Center, UnitInfo> UnitInfoRef = new Dictionary<Data_Center, UnitInfo>();
         public static readonly IDictionary<Data_Center, ReactiveProperty<float>> RefreshTimeDic = new Dictionary<Data_Center, ReactiveProperty<float>>();
@@ -59,12 +54,6 @@ namespace FightScene
             NetFightScene.target.LoadStageFinished.Value = true;
         }
         
-        public void SetFocusUnit(Data_Center unit)
-        {
-            focusingUnit = unit;
-            CameraAdjustment(playerTeam);
-        }
-        
         public void ModeStart()
         {
             switch (loadFight.Team1Mode)
@@ -92,9 +81,10 @@ namespace FightScene
         public void CameraAdjustment(Team myTeam)
         {
             var c_Mode = C_Mode.CertainYAntiVibration;
-            if (focusingUnit != null)
+            var ts = myTeam == Team.player1 ? team1.GetFightingUnitTs() : team2.GetFightingUnitTs();
+            if (ts.Count > 0)
             {
-                _CameraManager.Assign_Camera(c_Mode, focusingUnit.geometryCenter, myTeam == Team.player1  ? team2.GetFightingUnitTs() : team1.GetFightingUnitTs());
+                _CameraManager.Assign_Camera(c_Mode, ts[0], myTeam == Team.player1  ? team2.GetFightingUnitTs() : team1.GetFightingUnitTs());
             }
             else
             {
@@ -114,7 +104,6 @@ namespace FightScene
             }
             FightingStepLayer.target.team1UI.Clear();
             FightingStepLayer.target.team2UI.Clear();
-            MobileInputsManager.target.Clear();
         }
         
         public void ClearUnits()
