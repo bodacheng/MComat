@@ -92,7 +92,7 @@
      <Compile Include="Assets\RPGTALK\Scripts\Helpers\RPGTalkLanguage.cs" />
      <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Rename.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Clustered\ClusteredScreenTransformGesture.cs" />
-     <Compile Include="Assets\Ultimate Joystick\Scripts\UltimateJoystick.cs" />
+     <Compile Include="Assets\Tank &amp; Healer Studio\Ultimate Joystick\Scripts\UltimateJoystick.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\UnitListPage.cs" />
      <Compile Include="Assets\Behaviour\Soul\BehaviorRunner_newRunner.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\BoxExpandHelperLayer.cs" />
@@ -271,7 +271,7 @@
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell_Utili.cs" />
      <Compile Include="Assets\OldUseless\OldDebugFightingProcess.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\BoxOverLoadFixLayer.cs" />
-     <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\AsteroidController.cs" />
+     <Compile Include="Assets\Tank &amp; Healer Studio\Ultimate Joystick\_Examples\Spaceship Example\Scripts\AsteroidController.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiProjectileScript.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkLocalization.cs" />
      <Compile Include="Assets\AnimControl\Animation_Manger_ResourceLoad.cs" />
@@ -284,7 +284,7 @@
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\ArenaPage.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Debugging\Filters\IPointerLogFilter.cs" />
      <Compile Include="Assets\Mail\MailListView.cs" />
-     <Compile Include="Assets\Ultimate Joystick\Scripts\UltimateJoystickScreenSizeUpdater.cs" />
+     <Compile Include="Assets\Tank &amp; Healer Studio\Ultimate Joystick\Scripts\UltimateJoystickScreenSizeUpdater.cs" />
      <Compile Include="Assets\Remote\Stone\Util.cs" />
      <Compile Include="Assets\Remote\API\Dto\Form\SkillStoneLevelUpForm.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\Gotcha\GotchaResultLayer\GotchaResultLayer.cs" />
@@ -404,7 +404,7 @@
      <Compile Include="Assets\Setting\ConfigureOptions.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\QuestInfoPage.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Debugging\Filters\IPointerDataFilter.cs" />
-     <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Tank &amp; Healer Studio\Ultimate Joystick\_Examples\Spaceship Example\Scripts\GameManager.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\FightPrepareLayer.cs" />
      <Compile Include="Assets\TutorialManger\processes\FillASlot\SkillEditTry_A3Filled.cs" />
      <Compile Include="Assets\CachLogic\downloads_model.cs" />
@@ -619,7 +619,7 @@
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Input\VirtualCursor.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\notusinganymore\JiNengRongLian_waitForConfirm.cs" />
      <Compile Include="Assets\Behaviour\SoulConstruct\AIScriptReading.cs" />
-     <Compile Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Tank &amp; Healer Studio\Ultimate Joystick\_Examples\Spaceship Example\Scripts\PlayerController.cs" />
      <Compile Include="Assets\TouchScript\Scripts\TouchManager.cs" />
      <Compile Include="Assets\AnimControl\Animation_Manger_methodsGround2.cs" />
      <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\SkillConfigTable_Util.cs" />
@@ -780,12 +780,13 @@
      <Compile Include="Assets\UI\BackGroundPS.cs" />
      <Compile Include="Assets\Behaviour\Soul\BehaviorRunner.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Debugging\Loggers\IPointerLogger.cs" />
+     <Compile Include="Assets\RealTimeGameProcessManager\UnitsManger\UnitsManger_r.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Panel\ServerBrowserManager.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Buttons\MainButton.cs" />
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
-     <Compile Include="Assets\RealTimeGameProcessManager\UnitsManger\UnitsManger_r.cs" />
+     <Compile Include="Assets\UI\CameraSwipe.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />
@@ -826,7 +827,7 @@
      <None Include="Assets\TouchScript\Examples\_misc\Shaders\BorderDiffuse.shader" />
      <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\FadeSlash.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
-     <None Include="Assets\Ultimate Joystick\_Examples\Spaceship Example\README_Spaceship.txt" />
+     <None Include="Assets\Tank &amp; Healer Studio\Ultimate Joystick\_Examples\Spaceship Example\README_Spaceship.txt" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\ConvertDepth.shader" />
      <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\DissolveNoise.shader" />
      <None Include="Assets\TouchScript\Shaders\DebugNoDepthTest.shader" />

@@ -33,7 +33,7 @@ public class FightingStepLayer : UILayer
         }
         else
         {
-            MobileInputsManager.target.FocusCharInputs(RTFightManager.focusingUnit._MyBehaviorRunner, RTFightManager.focusingUnit.zokusei);
+            MobileInputsManager.target.FocusUnit(RTFightManager.focusingUnit._MyBehaviorRunner, RTFightManager.focusingUnit.zokusei);
         }
     }
     

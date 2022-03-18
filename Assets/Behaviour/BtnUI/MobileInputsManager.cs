@@ -43,9 +43,9 @@ public class MobileInputsManager : MonoBehaviour {
         return inputting && runner == Observing_Runner;
     }
     
-    public void FocusCharInputs(BehaviorRunner focusingCharInputManger, Zokusei zokusei)
+    public void FocusUnit(BehaviorRunner target, Zokusei zokusei)
     {
-        Observing_Runner = focusingCharInputManger;
+        Observing_Runner = target;
         if (Observing_Runner != null)
         {
             SwitchZokuseiButtons(zokusei);

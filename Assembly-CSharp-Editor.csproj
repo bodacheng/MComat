@@ -94,7 +94,7 @@
      <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_OutlineEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkConfig.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\GUI\GUIScaleUtility.cs" />
-     <Compile Include="Assets\Ultimate Joystick\Editor\UltimateJoystickEditor.cs" />
+     <Compile Include="Assets\Tank &amp; Healer Studio\Ultimate Joystick\Editor\UltimateJoystickEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkCinematic\Editor\RPGTalkCinematicDrawer.cs" />
      <Compile Include="Assets\TouchScript\Editor\EditorUI\GUIElements.cs" />
      <Compile Include="Assets\TouchScript\Editor\TouchManagerEditor.cs" />
@@ -132,7 +132,7 @@
      <Compile Include="Assets\RPGTALK\Scripts\Editor\RPGTalkLocalizationEditor.cs" />
      <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_EraserEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Editor\Node_Editor\RTNodeEditorInspector.cs" />
-     <Compile Include="Assets\Ultimate Joystick\Editor\UltimateJoystickReadme.cs" />
+     <Compile Include="Assets\Tank &amp; Healer Studio\Ultimate Joystick\Editor\UltimateJoystickReadme.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\EditorLoadingControl.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Editor\Node_Editor\RTCanvasCalculatorEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\Interface\NodeEditorCallbackReceiver.cs" />
@@ -146,7 +146,7 @@
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Editor\Node_Editor\CanvasInspector.cs" />
      <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_SobelEditor.cs" />
      <Compile Include="Assets\POFX\Scripts\Editor\Core\POFXEditor.cs" />
-     <Compile Include="Assets\Ultimate Joystick\Editor\UltimateJoystickReadmeEditor.cs" />
+     <Compile Include="Assets\Tank &amp; Healer Studio\Ultimate Joystick\Editor\UltimateJoystickReadmeEditor.cs" />
      <Compile Include="Assets\POFX\Scripts\Editor\Core\FX\POFX_DesaturateEditor.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\RPGTalk Nodes\Nodes\RPGTalkNode.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Framework\SaveSystem\NodeEditorUserCache.cs" />
