@@ -80,11 +80,11 @@ namespace FightScene
             switch (TeamMode)
             {
                 case TeamMode.multiRaid:
-                    foreach (var a_char in TeamMembers.GetValues())
+                    foreach (var unit in TeamMembers.GetValues())
                     {
-                        if (a_char._MyBehaviorRunner.GetNowState().StateKey != "Death")
+                        if (unit._MyBehaviorRunner.GetNowState().StateKey != "Death")
                         {
-                            transforms.Add(a_char.geometryCenter);
+                            transforms.Add(unit.geometryCenter);
                         }
                     }
                     return transforms;
@@ -95,14 +95,10 @@ namespace FightScene
                         {
                             RMode_Unit.Value.geometryCenter
                         };
-                        return transforms;
                     }
-                    else
-                    {
-                        return new List<Transform>();
-                    }
+                    return transforms;
             }
-            return null;
+            return transforms;
         }
         
         // 全队无敌

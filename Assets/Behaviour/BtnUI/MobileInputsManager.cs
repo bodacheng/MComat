@@ -26,7 +26,7 @@ public class MobileInputsManager : MonoBehaviour {
     [SerializeField] Button Dash;
     [SerializeField] Transform effectsParent;
     
-    static readonly IDictionary<Zokusei, zokuseiButtonEffectsGroup> ZokuseiButtonEffects = new Dictionary<Zokusei, zokuseiButtonEffectsGroup>();
+    static readonly IDictionary<Zokusei, ZokuseiButtonEffectsGroup> ZokuseiButtonEffects = new Dictionary<Zokusei, ZokuseiButtonEffectsGroup>();
     static Zokusei _focusing;
     
     public bool inputting = false;
@@ -78,33 +78,33 @@ public class MobileInputsManager : MonoBehaviour {
 
     public void ZokuseiButtonRegister(Zokusei zokusei)
     {
-        var zokuseiButtons = new zokuseiButtonEffectsGroup();
-        zokuseiButtons.INI(effectsParent, zokusei, Attack, Fire1, Fire2);
-        zokuseiButtons.Close();
+        var zokuseiBtn = new ZokuseiButtonEffectsGroup();
+        zokuseiBtn.INI(effectsParent, zokusei, Attack, Fire1, Fire2);
+        zokuseiBtn.Close();
         if (!ZokuseiButtonEffects.ContainsKey(zokusei))
         {
-            ZokuseiButtonEffects.Add(zokusei, zokuseiButtons);
+            ZokuseiButtonEffects.Add(zokusei, zokuseiBtn);
         } else {
-            ZokuseiButtonEffects[zokusei] = zokuseiButtons;
+            ZokuseiButtonEffects[zokusei] = zokuseiBtn;
         }
     }
 
-    ParticleSystem _targetexplode;
+    ParticleSystem _targetExplode;
     public void SkillButtonExplosion(InputKey inputs_Defined, int eX)
     {
         switch(eX)
         {
             case 0:
-                _targetexplode = ZokuseiButtonEffects[_focusing].triggerExplosion0;
+                _targetExplode = ZokuseiButtonEffects[_focusing].triggerExplosion0;
             break;
             case 1:
-                _targetexplode = ZokuseiButtonEffects[_focusing].triggerExplosion1;
+                _targetExplode = ZokuseiButtonEffects[_focusing].triggerExplosion1;
             break;
             case 2:
-                _targetexplode = ZokuseiButtonEffects[_focusing].triggerExplosion2;
+                _targetExplode = ZokuseiButtonEffects[_focusing].triggerExplosion2;
             break;
             case 3:
-                _targetexplode = ZokuseiButtonEffects[_focusing].triggerExplosion3;
+                _targetExplode = ZokuseiButtonEffects[_focusing].triggerExplosion3;
             break;
             default:
                 return;
@@ -113,16 +113,16 @@ public class MobileInputsManager : MonoBehaviour {
         switch (inputs_Defined)
         {
             case InputKey.Attack1:
-                _targetexplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, Attack.GetComponent<RectTransform>(), 3);
+                _targetExplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, Attack.GetComponent<RectTransform>(), 3);
                 break;
             case InputKey.Attack2:
-                _targetexplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, Fire1.GetComponent<RectTransform>(), 3);
+                _targetExplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, Fire1.GetComponent<RectTransform>(), 3);
                 break;
             case InputKey.Attack3:
-                _targetexplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, Fire2.GetComponent<RectTransform>(), 3);
+                _targetExplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, Fire2.GetComponent<RectTransform>(), 3);
                 break;
         }
-        _targetexplode.Play();
+        _targetExplode.Play();
         
         //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
         foreach (KeyValuePair<Button, ParticleSystem> keyValue in ZokuseiButtonEffects[_focusing].buttonRefreshEffects)

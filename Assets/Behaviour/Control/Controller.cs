@@ -123,7 +123,7 @@ namespace Soul
                 }
                 #endregion
             }
-
+            
             bool changed = false;
             #region AI决策
             if (Auto)
@@ -179,7 +179,7 @@ namespace Soul
                 if (finalConditionStateKeySet.Count > 0)
                 {
                     int random = Random.Range(0, finalConditionStateKeySet.Count);//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。
-                    SkillEntity _SE = behaviorRunner.SkillEntityDic[finalConditionStateKeySet[random].Item2];
+                    var _SE = behaviorRunner.SkillEntityDic[finalConditionStateKeySet[random].Item2];
                     if (behaviorRunner.InputsManager != null)
                     {
                         behaviorRunner.InputsManager.SkillButtonExplosion(_SE.EnterInput, _SE.SP_LEVEL);

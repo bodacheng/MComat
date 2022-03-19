@@ -33,7 +33,7 @@ namespace Soul
         Behavior _tryBehavior;
         public Behavior _commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
         #endregion
-
+        
         public MobileInputsManager InputsManager
         {
             get;
@@ -124,21 +124,14 @@ namespace Soul
                 Debug.Log("尝试读取未定义的状态" + num);
                 return;
             }
-
-            if (InputsManager != null)
+            
+            if (AI && !BeingControl())
             {
-                if (AI && !BeingControl())
-                {
-                    _nowBehavior.AI_State_enter();
-                }
-                else
-                {
-                    _nowBehavior.C_State_enter();
-                }
+                _nowBehavior.AI_State_enter();
             }
             else
             {
-                _nowBehavior.AI_State_enter();
+                _nowBehavior.C_State_enter();
             }
         }
         

@@ -9,20 +9,6 @@ namespace FightScene
         public ReactiveProperty<Data_Center> RMode_Unit = new ReactiveProperty<Data_Center>();
         Data_Center waitingMember;
         
-        public void OneUnitStartOff(Data_Center dc)
-        {
-            Sensor.AddOrRemoveSharedUnits(dc, teamConfig.myTeam, true);
-            InputsManager.FocusUnit(dc);
-            dc._MyBehaviorRunner.ChangeToWaitingState();
-            RMode_Unit.Value = dc;
-        }
-        
-        async void ToNewUnit()
-        {
-            await UniTask.DelayFrame(100);
-            RandomToAliveUnit();
-        }
-        
         public Data_Center ToStartPos_Rotate()
         {
             Data_Center startUnit = null;
@@ -40,6 +26,12 @@ namespace FightScene
             }
             ChangeFightingUnit(startUnit, true, TeamStandPoints[0]);
             return startUnit;
+        }
+        
+        async void ToNewUnit()
+        {
+            await UniTask.DelayFrame(100);
+            RandomToAliveUnit();
         }
         
         public void TeamsIni_Rotate(float TeamHpRate, CriticalGaugeMode teamCGMode)
@@ -75,9 +67,9 @@ namespace FightScene
         }
         
         // 切换队员
-        bool ChangeFightingUnit(Data_Center _changeTo, bool emptyState = false, Transform IniStandPoint = null)
+        public bool ChangeFightingUnit(Data_Center _changeTo, bool emptyState = false, Transform IniStandPoint = null)
         {
-            if (!(TeamMembers.GetValues().Count > 1) || RMode_Unit.Value == _changeTo)
+            if (!(TeamMembers.GetValues().Count > 1))
             {
                 return false;
             }
@@ -115,12 +107,14 @@ namespace FightScene
                     
                     RMode_Unit.Value = _changeTo;
                     RMode_Unit.Value.WholeT.gameObject.SetActive(true);
+                    Debug.Log(TeamMembers.GetValues().Count +":" +emptyState) ;
                     if (emptyState)
                     {
                         RMode_Unit.Value._MyBehaviorRunner.ChangeState("Empty");
                     }
                     else
                     {
+                        Debug.Log(RMode_Unit.Value );
                         RMode_Unit.Value._MyBehaviorRunner.ChangeToWaitingState();
                     }
                     RMode_Unit.Value.WholeT.transform.position = targetPos;
@@ -144,16 +138,6 @@ namespace FightScene
                 InputsManager?.FocusUnit(RMode_Unit.Value);
             }
             
-            switch (_changeTo._TeamConfig.myTeam)
-            {
-                case Team.player1:
-                    _changeTo._MyBehaviorRunner.AI = RTFightManager.target.team1.Auto;
-                    break;
-                case Team.player2:
-                    _changeTo._MyBehaviorRunner.AI = RTFightManager.target.team2.Auto;
-                    break;
-            }
-            RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
             //Refresh(TeamMembers);
             return unitChanged;
         }
@@ -211,7 +195,7 @@ namespace FightScene
             }
         }
         
-        public bool RandomToAliveUnit()
+        bool RandomToAliveUnit()
         {
             if (waitingMember != null && waitingMember.FightDataRef.CurrentHp.Value > 0)
             {

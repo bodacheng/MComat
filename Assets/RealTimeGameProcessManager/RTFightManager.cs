@@ -25,7 +25,7 @@ namespace FightScene
         
         public readonly IDictionary<Data_Center, UnitInfo> UnitInfoRef = new Dictionary<Data_Center, UnitInfo>();
         public static readonly IDictionary<Data_Center, ReactiveProperty<float>> RefreshTimeDic = new Dictionary<Data_Center, ReactiveProperty<float>>();
-
+        
         FightInfo loadFight;
         
         void Awake()
@@ -56,13 +56,14 @@ namespace FightScene
         
         public void ModeStart()
         {
+            Debug.Log(loadFight.Team1Mode + ":" + loadFight.Team2Mode);
             switch (loadFight.Team1Mode)
             {
                 case TeamMode.multiRaid:
                     team1.AllUnitsStartOff();
                     break;
                 case TeamMode.rotation:
-                    team1.OneUnitStartOff(team1StartUnit);
+                    team1.ChangeFightingUnit(team1StartUnit);
                     break;
             }
             
@@ -72,7 +73,7 @@ namespace FightScene
                     team2.AllUnitsStartOff();
                     break;
                 case TeamMode.rotation:
-                    team2.OneUnitStartOff(team2StartUnit);
+                    team2.ChangeFightingUnit(team2StartUnit);
                     break;
             }
         }

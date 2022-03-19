@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using FightScene;
 using System.Collections.Generic;
+using UniRx;
 
 public class PreparingProcess : FSceneProcess
 {
@@ -61,7 +62,7 @@ public class PreparingProcess : FSceneProcess
                 RTFightManager.target.team1StartUnit = RTFightManager.target.team1.ToStartPos_Rotate();
                 break;
         }
-            
+        
         switch (RTFightManager.target.team2.TeamMode)
         {
             case TeamMode.multiRaid:
@@ -73,6 +74,18 @@ public class PreparingProcess : FSceneProcess
                 RTFightManager.target.team2StartUnit = RTFightManager.target.team2.ToStartPos_Rotate();
                 break;
         }
+
+        RTFightManager.target.team1.RMode_Unit.Subscribe(x =>
+            {
+                RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
+            }
+        ).AddTo(RTFightManager.target);
+        
+        RTFightManager.target.team2.RMode_Unit.Subscribe(x =>
+            {
+                RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
+            }
+        ).AddTo(RTFightManager.target);
         
         RTFightManager.target.SetGame(NetFightScene.Fight);
     }

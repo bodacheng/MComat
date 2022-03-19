@@ -2,27 +2,27 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class zokuseiButtonEffectsGroup
+public class ZokuseiButtonEffectsGroup
 {
     //攻击键系成员
-    public IDictionary<Button, IDictionary<int, ParticleSystem>> buttonEffectsSets = new Dictionary<Button, IDictionary<int, ParticleSystem>>(); 
-    public IDictionary<int, ParticleSystem> Attack1ButtonEffects;
-    public IDictionary<int, ParticleSystem> Fire1ButtonEffects;
-    public IDictionary<int, ParticleSystem> Fire2ButtonEffects;
+    IDictionary<Button, IDictionary<int, ParticleSystem>> buttonEffectsSets = new Dictionary<Button, IDictionary<int, ParticleSystem>>(); 
+    IDictionary<int, ParticleSystem> Attack1ButtonEffects;
+    IDictionary<int, ParticleSystem> Fire1ButtonEffects;
+    IDictionary<int, ParticleSystem> Fire2ButtonEffects;
     public IDictionary<Button, ParticleSystem> buttonRefreshEffects;
     public ParticleSystem triggerExplosion0;
     public ParticleSystem triggerExplosion1;
     public ParticleSystem triggerExplosion2;
     public ParticleSystem triggerExplosion3;
     public ParticleSystem pressingExplosion;//这个不需要对象池子。
-    
+
     IDictionary<Button, ParticleSystem> buttonSlotEffects;
-    
-    ParticleSystem defendbutton;
-    ParticleSystem rushbutton;
-    ParticleSystem arefresh;
-    ParticleSystem fire1refresh;
-    ParticleSystem fire2refresh;
+
+    ParticleSystem _defendbutton;
+    ParticleSystem _rushbutton;
+    ParticleSystem _arefresh;
+    ParticleSystem _fire1Refresh;
+    ParticleSystem _fire2Refresh;
     
     public void Close()
     {
@@ -48,17 +48,17 @@ public class zokuseiButtonEffectsGroup
             keyValue.Value.Stop(true);
         }
         pressingExplosion.Stop(true);
-        rushbutton.Stop(true);
+        _rushbutton.Stop(true);
         
         if (FightGlobalSetting._hasDefend)
-            defendbutton.Stop(true);
+            _defendbutton.Stop(true);
     }
         
-    public void Open(Vector3 defendbuttonpos, Vector3 rushbuttonpos)
+    public void Open(Vector3 defendBtnPos, Vector3 rushBtnPos)
     {
-        foreach(KeyValuePair<Button, IDictionary<int, ParticleSystem>> keyValuePair in buttonEffectsSets)
+        foreach(var keyValuePair in buttonEffectsSets)
         {
-            foreach(KeyValuePair<int, ParticleSystem> exPPair in keyValuePair.Value)
+            foreach(var exPPair in keyValuePair.Value)
             {
                 exPPair.Value.Stop(true);
             }
@@ -73,13 +73,13 @@ public class zokuseiButtonEffectsGroup
             keyValue.Value.Stop(true);
         }
         pressingExplosion.Stop(true);
-        rushbutton.gameObject.transform.position = rushbuttonpos;
-        rushbutton.Play(true);
+        _rushbutton.gameObject.transform.position = rushBtnPos;
+        _rushbutton.Play(true);
         
         if (FightGlobalSetting._hasDefend)
         {
-            defendbutton.gameObject.transform.position = defendbuttonpos;
-            defendbutton.Play(true);
+            _defendbutton.gameObject.transform.position = defendBtnPos;
+            _defendbutton.Play(true);
         }
     }
                 
@@ -87,23 +87,23 @@ public class zokuseiButtonEffectsGroup
     {
         string buttoneffectspath = FightGlobalSetting.EffectPathDefine(zokusei);
                 
-        GameObject buttonslot = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/slot", typeof(GameObject)) as GameObject;
-        GameObject normal = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/normal", typeof(GameObject)) as GameObject;
-        GameObject EX1 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/EX1", typeof(GameObject)) as GameObject;
-        GameObject EX2 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/EX2", typeof(GameObject)) as GameObject;
-        GameObject EX3 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/EX3", typeof(GameObject)) as GameObject;
-        GameObject Defend = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/defend", typeof(GameObject)) as GameObject;
-        GameObject Rush = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/rush", typeof(GameObject)) as GameObject;
-        GameObject refresh = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/refresh", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab0 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion0", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab1 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion1", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab2 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion2", typeof(GameObject)) as GameObject;
-        GameObject triggerExplosionPretab3 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion3", typeof(GameObject)) as GameObject;
-        GameObject pressingExplosionPretab = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/pressing", typeof(GameObject)) as GameObject;
+        var buttonslot = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/slot", typeof(GameObject)) as GameObject;
+        var normal = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/normal", typeof(GameObject)) as GameObject;
+        var EX1 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/EX1", typeof(GameObject)) as GameObject;
+        var EX2 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/EX2", typeof(GameObject)) as GameObject;
+        var EX3 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/EX3", typeof(GameObject)) as GameObject;
+        var Defend = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/defend", typeof(GameObject)) as GameObject;
+        var Rush = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/rush", typeof(GameObject)) as GameObject;
+        var refresh = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/refresh", typeof(GameObject)) as GameObject;
+        var triggerExplosionPretab0 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion0", typeof(GameObject)) as GameObject;
+        var triggerExplosionPretab1 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion1", typeof(GameObject)) as GameObject;
+        var triggerExplosionPretab2 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion2", typeof(GameObject)) as GameObject;
+        var triggerExplosionPretab3 = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/explosion3", typeof(GameObject)) as GameObject;
+        var pressingExplosionPretab = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/pressing", typeof(GameObject)) as GameObject;
 
-        ParticleSystem attackbuttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
-        ParticleSystem fire1buttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
-        ParticleSystem fire2buttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
+        var attackbuttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
+        var fire1buttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
+        var fire2buttonslot = Object.Instantiate(buttonslot).GetComponent<ParticleSystem>();
         
         attackbuttonslot.transform.SetParent(targetRectT);
         fire1buttonslot.transform.SetParent(targetRectT);
@@ -117,11 +117,11 @@ public class zokuseiButtonEffectsGroup
         };
         
         if (FightGlobalSetting._hasDefend)
-            defendbutton = Object.Instantiate(Defend).GetComponent<ParticleSystem>();
-        rushbutton = Object.Instantiate(Rush).GetComponent<ParticleSystem>();
-        arefresh = Object.Instantiate(refresh).GetComponent<ParticleSystem>();
-        fire1refresh = Object.Instantiate(refresh).GetComponent<ParticleSystem>();
-        fire2refresh = Object.Instantiate(refresh).GetComponent<ParticleSystem>();
+            _defendbutton = Object.Instantiate(Defend).GetComponent<ParticleSystem>();
+        _rushbutton = Object.Instantiate(Rush).GetComponent<ParticleSystem>();
+        _arefresh = Object.Instantiate(refresh).GetComponent<ParticleSystem>();
+        _fire1Refresh = Object.Instantiate(refresh).GetComponent<ParticleSystem>();
+        _fire2Refresh = Object.Instantiate(refresh).GetComponent<ParticleSystem>();
         triggerExplosion0 = Object.Instantiate(triggerExplosionPretab0).GetComponent<ParticleSystem>();
         triggerExplosion1 = Object.Instantiate(triggerExplosionPretab1).GetComponent<ParticleSystem>();
         triggerExplosion2 = Object.Instantiate(triggerExplosionPretab2).GetComponent<ParticleSystem>();
@@ -129,11 +129,11 @@ public class zokuseiButtonEffectsGroup
         pressingExplosion = Object.Instantiate(pressingExplosionPretab).GetComponent<ParticleSystem>();
 
         if (FightGlobalSetting._hasDefend)
-            defendbutton.transform.SetParent(targetRectT);
-        rushbutton.transform.SetParent(targetRectT);
-        arefresh.transform.SetParent(targetRectT);
-        fire1refresh.transform.SetParent(targetRectT);
-        fire2refresh.transform.SetParent(targetRectT);
+            _defendbutton.transform.SetParent(targetRectT);
+        _rushbutton.transform.SetParent(targetRectT);
+        _arefresh.transform.SetParent(targetRectT);
+        _fire1Refresh.transform.SetParent(targetRectT);
+        _fire2Refresh.transform.SetParent(targetRectT);
         triggerExplosion0.transform.SetParent(targetRectT);
         triggerExplosion1.transform.SetParent(targetRectT);
         triggerExplosion2.transform.SetParent(targetRectT);
@@ -142,40 +142,40 @@ public class zokuseiButtonEffectsGroup
 
         buttonRefreshEffects = new Dictionary<Button, ParticleSystem>
         {
-            { Attack, arefresh },
-            { Fire1, fire1refresh },
-            { Fire2, fire2refresh }
+            { Attack, _arefresh },
+            { Fire1, _fire1Refresh },
+            { Fire2, _fire2Refresh }
         };
         
         Attack1ButtonEffects = new Dictionary<int, ParticleSystem>();
         Fire1ButtonEffects = new Dictionary<int, ParticleSystem>();
         Fire2ButtonEffects = new Dictionary<int, ParticleSystem>();
 
-        GameObject a_normal = Object.Instantiate(normal);
+        var a_normal = Object.Instantiate(normal);
         a_normal.name = "attack_normal"+buttoneffectspath;
-        GameObject a_ex1 = Object.Instantiate(EX1);
+        var a_ex1 = Object.Instantiate(EX1);
         a_ex1.name = "attack_ex1"+buttoneffectspath;
-        GameObject a_ex2 = Object.Instantiate(EX2);
+        var a_ex2 = Object.Instantiate(EX2);
         a_ex2.name = "attack_ex2"+buttoneffectspath;
-        GameObject a_ex3 = Object.Instantiate(EX3);
+        var a_ex3 = Object.Instantiate(EX3);
         a_ex3.name = "attack_ex3"+buttoneffectspath;
         
-        GameObject fire1_normal = Object.Instantiate(normal);
+        var fire1_normal = Object.Instantiate(normal);
         fire1_normal.name = "fire1_normal"+buttoneffectspath;
-        GameObject fire1_ex1 = Object.Instantiate(EX1);
+        var fire1_ex1 = Object.Instantiate(EX1);
         fire1_ex1.name = "fire1_ex1"+buttoneffectspath;
-        GameObject fire1_ex2 = Object.Instantiate(EX2); 
+        var fire1_ex2 = Object.Instantiate(EX2); 
         fire1_ex2.name = "fire1_ex2"+buttoneffectspath;
-        GameObject fire1_ex3 = Object.Instantiate(EX3);
+        var fire1_ex3 = Object.Instantiate(EX3);
         fire1_ex3.name = "fire1_ex3"+buttoneffectspath;
         
-        GameObject fire2_normal = Object.Instantiate(normal);
+        var fire2_normal = Object.Instantiate(normal);
         fire2_normal.name = "fire2_normal"+buttoneffectspath;
-        GameObject fire2_ex1 = Object.Instantiate(EX1);
+        var fire2_ex1 = Object.Instantiate(EX1);
         fire2_ex1.name = "fire2_ex1"+buttoneffectspath;
-        GameObject fire2_ex2 = Object.Instantiate(EX2); 
+        var fire2_ex2 = Object.Instantiate(EX2); 
         fire2_ex2.name = "fire2_ex2"+buttoneffectspath;
-        GameObject fire2_ex3 = Object.Instantiate(EX3);
+        var fire2_ex3 = Object.Instantiate(EX3);
         fire2_ex3.name = "fire2_ex3"+buttoneffectspath;
         
         a_normal.transform.SetParent(targetRectT);
@@ -217,10 +217,10 @@ public class zokuseiButtonEffectsGroup
         };
     }
     
-    IDictionary<int, ParticleSystem> tartget;
+    IDictionary<int, ParticleSystem> _target;
     public void RefreshBtn(Button button, int eX, Vector3 pos)
     {
-        tartget = buttonEffectsSets[button];
+        _target = buttonEffectsSets[button];
         if (eX == -1)
         {
             buttonSlotEffects[button].transform.position = pos;
@@ -229,7 +229,7 @@ public class zokuseiButtonEffectsGroup
             buttonSlotEffects[button].Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
         }
                 
-        foreach(KeyValuePair<int, ParticleSystem> pair in tartget)
+        foreach(KeyValuePair<int, ParticleSystem> pair in _target)
         {
             if (pair.Key == eX)
             {

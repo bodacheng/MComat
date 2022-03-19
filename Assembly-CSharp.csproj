@@ -437,11 +437,11 @@
      <Compile Include="Assets\TouchScript\Scripts\Layers\FullscreenLayer.cs" />
      <Compile Include="Assets\Structure\SingleThreadProcesser\SingleThreadProcesser2.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiBeamScript.cs" />
-     <Compile Include="Assets\FightSceneSystem\FSceneProcessesRunner.cs" />
      <Compile Include="Assets\POFX\Scripts\POFX.cs" />
+     <Compile Include="Assets\FightSceneSystem\FSceneProcessesRunner.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Utils\Geom\ProjectionUtils.cs" />
      <Compile Include="Assets\TeamUIManager\TeamUIManager.cs" />
-     <Compile Include="Assets\Behaviour\BtnUI\zokuseiButtonEffectsGroup.cs" />
+     <Compile Include="Assets\Behaviour\BtnUI\ZokuseiButtonEffectsGroup.cs" />
      <Compile Include="Assets\UI\Oldscripts\Save_Trans.cs" />
      <Compile Include="Assets\TutorialManger\processes\SelectASlot\SkillEditA1Try.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\StoneListLayer.cs" />
@@ -772,6 +772,7 @@
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Refraction.cs" />
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_Util.cs" />
      <Compile Include="Assets\TouchScript\Scripts\InputSources\InputHandlers\TouchHandler.cs" />
+     <Compile Include="Assets\UI\CameraSwipe.cs" />
      <Compile Include="Assets\Behaviour\Soul\Sensor.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Input\SliderGamepadManager.cs" />
      <Compile Include="Assets\TheBlur\Blur_basicdata.cs" />
@@ -786,7 +787,6 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
-     <Compile Include="Assets\UI\CameraSwipe.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />
