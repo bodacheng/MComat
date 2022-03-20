@@ -30,6 +30,8 @@ public class FightGlobalSetting : ScriptableObject
     public int defendHP = 20;
     public float lightBlockLastingTime = 0.3f, heavyBlockLastingTime = 0.5f;
     public float attackDrawingDistance = 1f;
+    public int ResistanceMax = 10;
+    public int EXMax = 120;
 
     public int HurtObjectPreLoadCount = 5;
     
@@ -65,9 +67,11 @@ public class FightGlobalSetting : ScriptableObject
     public static AnimationCurve _HdamageYAnimationCurve;
     public static AnimationCurve _HdamageZAnimationCurve;
     public static float _attackDrawingDistance;
+    public static int _ResistanceMax = 120;
+    public static int _EXMax;
     public static bool HitBoxLogger = true;
-    
     public static int _HurtObjectPreLoadCount;
+    
 
     public static string EffectPathDefine(Element element)
     {
@@ -145,6 +149,9 @@ public class FightGlobalSetting : ScriptableObject
         _heavyBlockLastingTime = heavyBlockLastingTime;
 
         _attackDrawingDistance = attackDrawingDistance;
+
+        _ResistanceMax = ResistanceMax;
+        _EXMax = EXMax;
 
         StoneExpManager.goldToExp = goldToExp;
         StoneExpManager.SkillStoneRankToExp_rank1 = SkillStoneRankToExp_rank1;

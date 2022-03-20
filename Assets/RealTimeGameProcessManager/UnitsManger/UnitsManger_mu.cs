@@ -54,19 +54,9 @@ namespace FightScene
             foreach (var center in TeamMembers.GetValues())
             {
                 center.Step3Initialize(teamConfig, TeamHpRate * SkillSet.INI_Hp(RTFightManager.target.UnitInfoRef[center].set.SkillEntityList()), teamCGMode);
-                
-                center.FightDataRef.CriticalGauge = new ReactiveProperty<int>();
-                
-                center._ResistanceManager.Resistance = new ReactiveProperty<int>(0);
-                center._ResistanceManager.Resistance.Subscribe(x =>
-                {
-                    center._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10);
-                }).AddTo(gameObject);
-                
                 center.FightDataRef._comboHitCount.HitCount.Value = 0;
-
-                center.IsDead = new ReactiveProperty<bool>(false);
-                center.IsDead.Subscribe(x => 
+                center.FightDataRef.IsDead.Value = false;
+                center.FightDataRef.IsDead.Subscribe(x => 
                 {
                     if (x)
                     {

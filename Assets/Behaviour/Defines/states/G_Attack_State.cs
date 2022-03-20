@@ -72,11 +72,11 @@ namespace Soul
             base.Pre_process_before_enter();
             rushstart = () =>
             {
-                _ResistanceManager.Resistance.Value += 1;
+                FightParamsRef.Resistance.Value += 1;
             };
             rushend = () =>
             {
-                _ResistanceManager.Resistance.Value -= 1;
+                FightParamsRef.Resistance.Value -= 1;
             };
             rushCoroutine = new CustomCoroutine(rushstart, 5f, rushend);
         }

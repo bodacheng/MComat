@@ -42,7 +42,6 @@ namespace FightScene
                 {
                     _SideIcon = UnitIconDic[center];
                 }
-                _SideIcon.INIHPShow(center, center.FightDataRef.CurrentHp.Value);
                 _SideIcon.focusingCharIcon.CooldownCurtainUpdate(0);
                 
                 if (teamConfig.myTeam == RTFightManager.playerTeam)
@@ -68,13 +67,12 @@ namespace FightScene
                 
                 center.FightDataRef.CriticalGauge.Subscribe(x =>
                 {
-                    RefreshExBar(center, x, 120);
+                    RefreshExBar(center, x, FightGlobalSetting._EXMax);
                 }).AddTo(gameObject);
                 
-                center._ResistanceManager.OpenResistRender();
-                center._ResistanceManager.Resistance.Subscribe(x =>
+                center.FightDataRef.Resistance.Subscribe(x =>
                 {
-                    RefreshResistanceBar(center);
+                    RefreshResistanceBar(center, x);
                 }).AddTo(gameObject);
             }
         }

@@ -37,7 +37,7 @@ namespace Soul
             base.AI_State_enter();
             time_count = 0f;
             pEvents.CloseAllPersonalityEffects();
-            _DATA_CENTER.IsDead.Value = true;
+            _DATA_CENTER.FightDataRef.IsDead.Value = true;
             time_counter = 0;
             FightParamsRef.ChangeLayerForLimbs(14);
             _Rigidbody.velocity = Vector3.zero;

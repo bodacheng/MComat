@@ -14,11 +14,11 @@ namespace Soul
             clip_name = "rushback";
             breakfreestart = () =>
             {
-                _ResistanceManager.Resistance.Value += 10;
+                FightParamsRef.Resistance.Value += 10;
             };
             breakfreeend = () =>
             {
-                _ResistanceManager.Resistance.Value -= 10;
+                FightParamsRef.Resistance.Value -= 10;
             };
             breakfreeCoroutine = new CustomCoroutine(breakfreestart, 0.6f, breakfreeend);
         }

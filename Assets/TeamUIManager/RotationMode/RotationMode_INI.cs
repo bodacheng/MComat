@@ -22,7 +22,6 @@ namespace FightScene
                 var unitConfig = Units.GetUnitConfig(info.r_id);
                 sideIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Get(info.r_id), unitConfig.element);
                 sideIcon.gameObject.SetActive(true);
-                sideIcon.INIHPShow(center, center.FightDataRef.CurrentHp.Value);
                 sideIcon.focusingCharIcon.CooldownCurtainUpdate(0);
                 
                 if (teamConfig.myTeam == RTFightManager.playerTeam)
@@ -53,19 +52,19 @@ namespace FightScene
                 
                 center.FightDataRef.CriticalGauge.Subscribe(x =>
                 {
-                    RefreshExBar(center, x, 120);
+                    RefreshExBar(center, x, FightGlobalSetting._EXMax);
                 }).AddTo(gameObject);
                 
-                center.IsDead.Subscribe(x => {
+                center.FightDataRef.IsDead.Subscribe(x => {
                     if (x)
                     {
                         UnitIconDic[center].focusingCharIcon.CooldownCurtainUpdate(1);
                     }
                 }).AddTo(gameObject);
                 
-                center._ResistanceManager.Resistance.Subscribe(x =>
+                center.FightDataRef.Resistance.Subscribe(x =>
                 {
-                    RefreshResistanceBar(center);
+                    RefreshResistanceBar(center, x);
                 }).AddTo(gameObject);
             }
         }

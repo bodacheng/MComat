@@ -45,24 +45,13 @@ namespace FightScene
                 }
                 
                 center.Step3Initialize(teamConfig, TeamHpRate * SkillSet.INI_Hp(RTFightManager.target.UnitInfoRef[center].set.SkillEntityList()), teamCGMode);
-                
-                center.IsDead = new ReactiveProperty<bool>(false);
-                center.IsDead.Subscribe(x => {
+                center.FightDataRef.IsDead.Subscribe(x => {
                     if (x) 
                     {
                         Sensor.AddOrRemoveSharedUnits(center, teamConfig.myTeam, false);
                         ToNewUnit();
                     }
-                });
-                
-                center._ResistanceManager.Resistance = new ReactiveProperty<int>
-                {
-                    Value = 0
-                };
-                center._ResistanceManager.Resistance.Subscribe(x =>
-                {
-                    center._ResistanceManager.Resistance.Value = Mathf.Clamp(x, 0, 10);
-                });
+                }).AddTo(gameObject);
             }
         }
         
@@ -73,7 +62,7 @@ namespace FightScene
             {
                 return false;
             }
-            if (_changeTo.IsDead.Value)
+            if (_changeTo.FightDataRef.IsDead.Value)
             {
                 return false;
             }
@@ -93,7 +82,7 @@ namespace FightScene
                     targetRot = RMode_Unit.Value.transform.rotation;
                 }
             }
-
+            
             foreach (var data_Center in TeamMembers.GetValues())
             {
                 if (_changeTo == data_Center)
@@ -102,19 +91,18 @@ namespace FightScene
                     {
                         _changeTo.FightDataRef._comboHitCount.HitCount.Value = RMode_Unit.Value.FightDataRef._comboHitCount.HitCount.Value;
                     }
-                    Sensor.AddOrRemoveSharedUnits(RMode_Unit.Value, this.teamConfig.myTeam, false);
-                    Sensor.AddOrRemoveSharedUnits(_changeTo, this.teamConfig.myTeam, true);
+                    Sensor.AddOrRemoveSharedUnits(RMode_Unit.Value, teamConfig.myTeam, false);
+                    Sensor.AddOrRemoveSharedUnits(_changeTo, teamConfig.myTeam, true);
                     
                     RMode_Unit.Value = _changeTo;
                     RMode_Unit.Value.WholeT.gameObject.SetActive(true);
-                    Debug.Log(TeamMembers.GetValues().Count +":" +emptyState) ;
+                    
                     if (emptyState)
                     {
                         RMode_Unit.Value._MyBehaviorRunner.ChangeState("Empty");
                     }
                     else
                     {
-                        Debug.Log(RMode_Unit.Value );
                         RMode_Unit.Value._MyBehaviorRunner.ChangeToWaitingState();
                     }
                     RMode_Unit.Value.WholeT.transform.position = targetPos;
@@ -127,7 +115,6 @@ namespace FightScene
                     if (data_Center._MyBehaviorRunner.GetNowState().StateKey != "Empty")
                     {
                         data_Center._MyBehaviorRunner.ChangeState("Empty");
-                        //data_Center.WholeT.transform.position = new Vector3(9999, 600, 9999);
                     }
                     data_Center.WholeT.gameObject.SetActive(false);
                 }
@@ -167,7 +154,7 @@ namespace FightScene
             {
                 return false;
             }
-            if (targetMember.IsDead.Value)
+            if (targetMember.FightDataRef.IsDead.Value)
             {
                 return false;
             }
@@ -199,7 +186,7 @@ namespace FightScene
         {
             if (waitingMember != null && waitingMember.FightDataRef.CurrentHp.Value > 0)
             {
-                if (!waitingMember.IsDead.Value)
+                if (!waitingMember.FightDataRef.IsDead.Value)
                 {
                     if (ChangeFightingUnit(waitingMember))
                     {
@@ -209,7 +196,7 @@ namespace FightScene
             }
             foreach (var data_Center in TeamMembers.GetValues())
             {
-                if (!data_Center.IsDead.Value)
+                if (!data_Center.FightDataRef.IsDead.Value)
                 {
                     if (ChangeFightingUnit(data_Center))
                     {

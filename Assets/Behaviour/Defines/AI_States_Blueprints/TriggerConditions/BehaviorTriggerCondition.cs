@@ -14,12 +14,12 @@ namespace Soul
 
         public bool LosingDefendStrength() // Dash_Back_State G_Ani_MoveEscape_State 1
         {
-            return _AIStateRunner.GetNowState().StateKey == "Defend" && _ResistanceManager.Resistance.Value < 2;
+            return _AIStateRunner.GetNowState().StateKey == "Defend" && FightParamsRef.Resistance.Value < 2;
         }
         
         public bool DangerousNearby() // Dash_Back_State G_Ani_MoveEscape_State 2
         {
-            return Sensor.GetSuddenThreatInRange(0 , 5) != null && _ResistanceManager.Resistance.Value == 0;
+            return Sensor.GetSuddenThreatInRange(0 , 5) != null && FightParamsRef.Resistance.Value == 0;
         }
         
         public bool DangerousClose() //Counter_State 1 2 3
@@ -47,7 +47,7 @@ namespace Soul
 
         public bool DangerousVeryClose() //CT
         {
-            if (_ResistanceManager.Resistance.Value > 0)
+            if (FightParamsRef.Resistance.Value > 0)
             {
                 return false;
             }

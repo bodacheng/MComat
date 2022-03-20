@@ -61,7 +61,7 @@ public class FightLogger
                 disposable.Disposable = Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    if (data_Center.IsDead.Value == true)
+                    if (data_Center.FightDataRef.IsDead.Value)
                     {
                         TeamDeadMemberDic[pair.Key.myTeam].Add(data_Center);
                         if (pair.Value.Count == TeamDeadMemberDic[pair.Key.myTeam].Count)

@@ -35,8 +35,8 @@ public class FightResultAnim : FSceneProcess
     {
         Time.timeScale = 0.4f;
         yield return new WaitForSeconds(2f);
-        List<Data_Center> winners = new List<Data_Center>();
-
+        var winners = new List<Data_Center>();
+        
         switch (FightLogger.value.GetWinnerTeam())
         {
             case Team.player1 :
@@ -49,7 +49,7 @@ public class FightResultAnim : FSceneProcess
         
         foreach (Data_Center _one in winners)
         {
-            if (!_one.IsDead.Value)
+            if (!_one.FightDataRef.IsDead.Value)
             {
                 _one._MyBehaviorRunner.ChangeState("Victory");
             }

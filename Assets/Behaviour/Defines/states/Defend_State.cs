@@ -92,7 +92,7 @@ namespace Soul
             //defendHP = FightGlobalSetting._defendHP;
             base.AI_State_enter();
             freezed = false;
-            _ResistanceManager.Resistance.Value = DefendHP > 0 ? 10 : 0;
+            FightParamsRef.Resistance.Value = DefendHP > 0 ? 10 : 0;
             _Weapon_Animation_Events.ClearMarkerManagers();
             Sensor.ContinuousDetectionStart(-1);
             _Animator.SetFloat("speed", 0f);
@@ -108,7 +108,7 @@ namespace Soul
         {
             base.AI_State_enter();
             freezed = false;
-            _ResistanceManager.Resistance.Value = DefendHP > 0 ? 10 : 0;
+            FightParamsRef.Resistance.Value = DefendHP > 0 ? 10 : 0;
             _Weapon_Animation_Events.ClearMarkerManagers();
             Sensor.ContinuousDetectionStart(-1);
             _Animator.SetFloat("speed", 0f);
@@ -168,7 +168,7 @@ namespace Soul
 
         public override void _State_FixedUpdate1()
         {
-            _ResistanceManager.Resistance.Value = DefendHP > 0 ? 5 : 0;
+            FightParamsRef.Resistance.Value = DefendHP > 0 ? 5 : 0;
             threat = Sensor.GetSuddenThreatInRange(0, 5f);
             nearbyenemymeat = Sensor.GetClosestEnemyColliderInSensorRange();
 

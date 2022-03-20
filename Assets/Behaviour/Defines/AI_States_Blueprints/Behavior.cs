@@ -116,7 +116,7 @@ namespace Soul
         public virtual void AI_State_enter()
         {
             FightParamsRef.AT = AT;
-            FightParamsRef.CostCriticalGaugeBySPlevel(splevel);
+            FightParamsRef.CostCriticalGaugeBySPLevel(splevel);
             BeheviourFrameCounter = 0;
             AbsorbEnergyFinished = false;
         }
@@ -125,7 +125,7 @@ namespace Soul
         public virtual void AI_State_enter(V_Damage newValue)
         {
             FightParamsRef.AT = AT;
-            FightParamsRef.CostCriticalGaugeBySPlevel(splevel);
+            FightParamsRef.CostCriticalGaugeBySPLevel(splevel);
         }
 
         public virtual void C_State_enter()

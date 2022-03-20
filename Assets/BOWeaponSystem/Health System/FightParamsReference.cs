@@ -22,24 +22,13 @@ public partial class FightParamsReference
     // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
     
-    public ReactiveProperty<float> CurrentHp { get; private set; } = new ReactiveProperty<float>();
+    public ReactiveProperty<bool> IsDead { get; set; } = new ReactiveProperty<bool>(false);
+    public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
+    public ReactiveProperty<int> Resistance { get; set; } = new ReactiveProperty<int>(0);
     public float AT { get; set; }
     public CriticalGaugeMode CriticalGaugeMode{ get; set; }
     public bool Invincible { get; set; }
     public bool GettingDamage { get; set; }
-    
-    public void Ini()
-    {
-        Clear();
-        CurrentHp = new ReactiveProperty<float>();
-        CriticalGauge = new ReactiveProperty<int>();
-    }
-
-    public void Clear()
-    {
-        CurrentHp.Dispose();
-        CriticalGauge.Dispose();
-    }
     
     public void HealthBodyFixedUpdate()
     {
@@ -121,7 +110,7 @@ public partial class FightParamsReference
     string _temp;
     void HitEffect(V_Damage damage)
     {
-        if (Center._ResistanceManager.Resistance.Value > 0)
+        if (Center.FightDataRef.Resistance.Value > 0)
         {
             EffectsManager.GenerateEffect("shield_hit",
             FightGlobalSetting.EffectPathDefine(damage.from_weapon.element),
@@ -154,7 +143,7 @@ public partial class FightParamsReference
     float _d;
     public void ApplyDamage(V_Damage dmg)
 	{
-        if (Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Def && Center._ResistanceManager.Resistance.Value > 0)
+        if (Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Def && Center.FightDataRef.Resistance.Value > 0)
         {
             Center._MyBehaviorRunner.ChangeState("Defend", dmg);
             HitEffect(dmg);
@@ -162,9 +151,9 @@ public partial class FightParamsReference
         }
         
         HitEffect(dmg);
-        if (Center._ResistanceManager.Resistance.Value > 0)
+        if (Center.FightDataRef.Resistance.Value > 0)
         {
-            Center._ResistanceManager.Resistance.Value -= 1;
+            Center.FightDataRef.Resistance.Value -= 1;
             return;
         }
         

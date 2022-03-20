@@ -37,8 +37,6 @@ public partial class Data_Center : MonoBehaviour
     [Header("传统防御盾。可能真的用不到了")]
     public BO_Shield Shield;
     
-    public ReactiveProperty<bool> IsDead { get; set; } = new ReactiveProperty<bool>(false);
-
     public bool IfPreparedForBattle()
     {
         return phase1Initialized && phase2Initialized;
@@ -55,10 +53,9 @@ public partial class Data_Center : MonoBehaviour
         if (!phase1Initialized)
         {
             Animation_Manger.AnimatorRef =  WholeT.GetComponent<Animator>();
-            this.Sensor.Center = this.geometryCenter;
-            this.Sensor.sensor_radius = 15f;
+            Sensor.Center = this.geometryCenter;
+            Sensor.sensor_radius = 15f;
             FightDataRef.Center = this;
-
             _BasicPhysicSupport.Rigidbody.useGravity = false;
             _BasicPhysicSupport.Rigidbody.mass = 500f;
             BodyElementTagAndLayerSet(TeamConfig.defaultSet);
@@ -151,14 +148,23 @@ public partial class Data_Center : MonoBehaviour
 
     public void Step3Initialize(TeamConfig _TeamConfig, float nineSkillHp, CriticalGaugeMode criticalGaugeMode)
     {
-        IsDead.Value = false;
+        FightDataRef.IsDead.Value = false;
         BodyElementTagAndLayerSet(_TeamConfig);
         FightDataRef.FindAllSelfCollidersAndIgnoreCollision();
         FightDataRef.ChangeLayerForLimbs(_TeamConfig.mylayer);
         FightDataRef.EnableAllLimbs(true);
-        FightDataRef.Ini();
         FightDataRef.CurrentHp.Value = nineSkillHp;
         FightDataRef.CriticalGaugeMode = criticalGaugeMode;
+        
+        FightDataRef.CurrentHp.Subscribe(x =>
+        {
+            FightDataRef.CurrentHp.Value = Mathf.Clamp(x, 0, nineSkillHp);
+        }).AddTo(gameObject);
+        
+        FightDataRef.Resistance.Subscribe(x =>
+        {
+            FightDataRef.Resistance.Value = Mathf.Clamp(x, 0, FightGlobalSetting._ResistanceMax);
+        }).AddTo(gameObject);
     }
 
     //我们希望datacenter是整个角色初始化的出发点，那么这个地方应该也可以做到根据情况决定一些组件加载还是不加载。

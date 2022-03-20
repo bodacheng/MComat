@@ -7,10 +7,10 @@ public partial class FightParamsReference
         
     public void PlusEx(int add)
     {
-        CriticalGauge.Value = Mathf.Clamp(CriticalGauge.Value + add, 0, 120);
+        CriticalGauge.Value = Mathf.Clamp(CriticalGauge.Value + add, 0, FightGlobalSetting._EXMax);
     }
     
-    public void CostCriticalGaugeBySPlevel(int level)
+    public void CostCriticalGaugeBySPLevel(int level)
     {
         if (CriticalGaugeMode == CriticalGaugeMode.Unlimited)
             return;
@@ -30,9 +30,9 @@ public partial class FightParamsReference
         }
     }
     
-    public bool HasPlentyGauge(int splevel)
+    public bool HasPlentyGauge(int spLevel)
     {
-        switch (splevel)
+        switch (spLevel)
         {
             case 0:
                 return true;

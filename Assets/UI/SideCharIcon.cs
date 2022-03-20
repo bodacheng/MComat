@@ -3,38 +3,27 @@ using UnityEngine.UI;
 using DG.Tweening;
 
 public class SideCharIcon : MonoBehaviour {
-
-    public Data_Center _charDataCenter;
     
-    [Header("浮动血条pretab")]
-    [Space(6)]
     public Slider HpBar;
     
-    [Header("浮动血条pretab")]
-    [Space(6)]
     public Text HpText;
     
-    [Header("浮动抵抗pretab")]
-    [Space(6)]
+    [Header("浮动抵抗")]
     public Slider ResistBar;
     public Image ResistBarFillImage;
     
     [Header("浮动Ex条")]
-    [Space(6)]
     public Slider ExBar;
     
     [Header("必杀技点")]
-    [Space(6)]
     public GameObject[] charges;
     
     public HeroIcon focusingCharIcon;
     
-    float maxHp;
-    
-    public void RefreshResistanceBar()
+    public void RefreshResistanceBar(float Resistance)
     {
-        DOTween.To(() => ResistBar.value, (x) => ResistBar.value = x, _charDataCenter._ResistanceManager.Resistance.Value / 10f, 0.2f);
-        ResistBarFillImage.color = _charDataCenter._ResistanceManager.Resistance.Value > 0 ? Color.yellow : Color.clear;
+        DOTween.To(() => ResistBar.value, (x) => ResistBar.value = x, Resistance / 10f, 0.2f);
+        ResistBarFillImage.color = Resistance > 0 ? Color.yellow : Color.clear;
     }
     
     public void RefreshHpBar(float current_hp, float whole_hp)
@@ -70,13 +59,6 @@ public class SideCharIcon : MonoBehaviour {
         }else{
             charges[0].SetActive(false);
         }
-    }
-    
-    public void INIHPShow(Data_Center watching, float MaxHp)
-    {
-    	_charDataCenter = watching;
-        maxHp = MaxHp;
-        HpBar.value = 1;
     }
     
     public void RecallBars()

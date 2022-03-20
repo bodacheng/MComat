@@ -77,10 +77,10 @@ namespace FightScene
             }
         }
         
-        void RefreshResistanceBar(Data_Center data_Center)
+        void RefreshResistanceBar(Data_Center data_Center, int value)
         {
             UnitIconDic.TryGetValue(data_Center, out var _tempSI);
-            _tempSI.RefreshResistanceBar();
+            _tempSI.RefreshResistanceBar(value);
         }
         void RefreshHPBar(Data_Center data_Center, float current_hp, float wholeHP)
         {

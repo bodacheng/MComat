@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class ResistanceManager : MonoBehaviour
 {
-    public ReactiveProperty<int> Resistance { get; set; } = new ReactiveProperty<int>(0);
     public Data_Center data_Center;
     
     int temp;
@@ -20,9 +19,9 @@ public class ResistanceManager : MonoBehaviour
         OpenResistRender();
     }
     
-    public void OpenResistRender()
+    void OpenResistRender()
     {
-        Resistance.Subscribe(
+        data_Center.FightDataRef.Resistance.Subscribe(
             x => 
             {
                 if (x > 0)
@@ -46,32 +45,32 @@ public class ResistanceManager : MonoBehaviour
     Color speedBuff = new Color(0.2f, 0.2f, 1f);
     public void ResistanceUp(AnimationEvent R)
     {
-        Resistance.Value += R.intParameter;                      
+        data_Center.FightDataRef.Resistance.Value += R.intParameter;                      
         switch (R.stringParameter)
         {
             case "resistup":
                 UnityEngine.Events.UnityAction eventStart = () =>
                 {
-                    Resistance.Value += 1;
+                    data_Center.FightDataRef.Resistance.Value += 1;
                     data_Center._SkillCancelFlag.turn_on_flag();
                     EffectsManager.GenerateEffect("break_free", "defaultmagic", data_Center.geometryCenter.position, data_Center.geometryCenter.rotation, data_Center.geometryCenter);
                 };
                 UnityEngine.Events.UnityAction eventEnd = () =>
                 {
-                    Resistance.Value = 0;
+                    data_Center.FightDataRef.Resistance.Value = 0;
                 };
                 CustomCoroutine eventCoroutine = new CustomCoroutine(eventStart, 0.8f, 
                 () =>
                 {
                     return data_Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit;
                 }, eventEnd);
-                temp = Resistance.Value;
+                temp = data_Center.FightDataRef.Resistance.Value;
                 var disposable = new SingleAssignmentDisposable();
                 disposableTasks.Add(disposable);
                 disposable.Disposable = Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    if (Resistance.Value < temp)
+                    if (data_Center.FightDataRef.Resistance.Value < temp)
                     {
                         data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine);
                         disposable.Dispose();
@@ -82,7 +81,7 @@ public class ResistanceManager : MonoBehaviour
                 UnityEngine.Events.UnityAction eventStart3 = () =>
                 {
                     data_Center._SkillCancelFlag.turn_on_flag();
-                    Resistance.Value += 1;
+                    data_Center.FightDataRef.Resistance.Value += 1;
                     data_Center._ShaderManager.FlatColor(0.5f, speedBuff);
                     data_Center.Animation_Manger.Speed = 2f;
                     EffectsManager.GenerateEffect("speedupbuff", "defaultmagic", data_Center.WholeT.position, data_Center.WholeT.rotation, data_Center.WholeT);
@@ -90,7 +89,7 @@ public class ResistanceManager : MonoBehaviour
                 UnityEngine.Events.UnityAction eventEnd3 = () =>
                 {
                     data_Center.Animation_Manger.Speed = 1f;
-                    Resistance.Value = 0;
+                    data_Center.FightDataRef.Resistance.Value = 0;
                     data_Center._ShaderManager.FlatColor(0f, Color.clear);
                 };
                 
@@ -100,13 +99,13 @@ public class ResistanceManager : MonoBehaviour
                      {
                          return data_Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit;
                      }, eventEnd3);
-                temp = Resistance.Value;
+                temp = data_Center.FightDataRef.Resistance.Value;
                 var disposable3 = new SingleAssignmentDisposable();
                 disposableTasks.Add(disposable3);
                 disposable3.Disposable = Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    if (Resistance.Value < temp)
+                    if (data_Center.FightDataRef.Resistance.Value < temp)
                     {
                         data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine3);
                         disposable3.Dispose();
@@ -121,16 +120,16 @@ public class ResistanceManager : MonoBehaviour
                 UnityEngine.Events.UnityAction eventEnd2 = () =>
                 {
                     data_Center._SkillCancelFlag.turn_on_flag();
-                    Resistance.Value = 0;
+                    data_Center.FightDataRef.Resistance.Value = 0;
                 };
                 var eventCoroutine2 = new CustomCoroutine(eventStart2, 0.2f, eventEnd2);
-                temp = Resistance.Value;
+                temp = data_Center.FightDataRef.Resistance.Value;
                 var disposable2 = new SingleAssignmentDisposable();
                 disposableTasks.Add(disposable2);
                 disposable2.Disposable = Observable.EveryUpdate()
                 .Subscribe(_ =>
                 {
-                    if (Resistance.Value < temp)
+                    if (data_Center.FightDataRef.Resistance.Value < temp)
                     {
                         data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine2);
                         disposable2.Dispose();
@@ -153,6 +152,6 @@ public class ResistanceManager : MonoBehaviour
             }
             disposableTasks.Clear();
         }
-        Resistance.Value = 0;
+        data_Center.FightDataRef.Resistance.Value = 0;
     }
 }
