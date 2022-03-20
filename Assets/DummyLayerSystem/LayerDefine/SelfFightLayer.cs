@@ -28,7 +28,7 @@ namespace mainMenu
         [SerializeField] Transform RotationTeam1T, RotationTeam2T;
         [SerializeField] HeroIcon team11_R, team12_R, team13_R;
         [SerializeField] HeroIcon team21_R, team22_R, team23_R;
-
+        
         readonly MultiDict<Team, int, HeroIcon> teamButtonDic_M = new MultiDict<Team, int, HeroIcon>();
         readonly MultiDict<Team, int, HeroIcon> teamButtonDic_R = new MultiDict<Team, int, HeroIcon>();
         readonly IDictionary<HeroIcon, int> IconNumCheck = new Dictionary<HeroIcon, int>();
@@ -49,7 +49,6 @@ namespace mainMenu
             
             IniMultiRaidModeUnitIcons(new List<HeroIcon> { team1back, team1left, team1front, team1right }, Team.player1);
             IniMultiRaidModeUnitIcons(new List<HeroIcon> { team2back, team2left, team2front, team2right }, Team.player2);
-
             IniRotationModeUnitIcons(new List<HeroIcon> { team11_R, team12_R, team13_R }, Team.player1);
             IniRotationModeUnitIcons(new List<HeroIcon> { team21_R, team22_R, team23_R }, Team.player2);
             

@@ -39,7 +39,7 @@ namespace FightScene
                 // 魔法按键
                 _inputsManager.ZokuseiButtonRegister(center.element);
                 
-                RTFightManager.RefreshTimeDic[center].Subscribe((x) =>
+                RTFightManager.target.RefreshTimeDic[center].Subscribe((x) =>
                 {
                     UnitIconDic[center].focusingCharIcon.CooldownCurtainUpdate(x/10);
                 }).AddTo(gameObject);
@@ -55,16 +55,16 @@ namespace FightScene
                     RefreshExBar(center, x, FightGlobalSetting._EXMax);
                 }).AddTo(gameObject);
                 
+                center.FightDataRef.Resistance.Subscribe(x =>
+                {
+                    RefreshResistanceBar(center, x);
+                }).AddTo(gameObject);
+                
                 center.FightDataRef.IsDead.Subscribe(x => {
                     if (x)
                     {
                         UnitIconDic[center].focusingCharIcon.CooldownCurtainUpdate(1);
                     }
-                }).AddTo(gameObject);
-                
-                center.FightDataRef.Resistance.Subscribe(x =>
-                {
-                    RefreshResistanceBar(center, x);
                 }).AddTo(gameObject);
             }
         }

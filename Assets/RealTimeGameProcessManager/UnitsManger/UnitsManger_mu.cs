@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
@@ -24,9 +22,9 @@ namespace FightScene
         public Data_Center ToStartPos_Multi()
         {
             Data_Center startUnit = null;
-            foreach (KeyValuePair<(int, int), Data_Center> kv in TeamMembers.mDict)
+            foreach (var kv in TeamMembers.mDict)
             {
-                Data_Center _DataCenter = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
+                var _DataCenter = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
                 if (_DataCenter == null)
                 {
                     continue;
@@ -54,8 +52,6 @@ namespace FightScene
             foreach (var center in TeamMembers.GetValues())
             {
                 center.Step3Initialize(teamConfig, TeamHpRate * SkillSet.INI_Hp(RTFightManager.target.UnitInfoRef[center].set.SkillEntityList()), teamCGMode);
-                center.FightDataRef._comboHitCount.HitCount.Value = 0;
-                center.FightDataRef.IsDead.Value = false;
                 center.FightDataRef.IsDead.Subscribe(x => 
                 {
                     if (x)

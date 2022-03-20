@@ -69,7 +69,7 @@ namespace FightScene
                 case TeamMode.multiRaid:
                     break;
                 case TeamMode.rotation:
-                    WaitToTriggerMemberChange();
+                    WaitUnitChange();
                     break;
             }
         }

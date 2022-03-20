@@ -17,18 +17,18 @@ public partial class EffectsManager
         EffectPoolsDic.Clear();
     }
     
-    public static Decompositioner GenerateEffect(string resource_name, string EffectsPath, Vector3 Pos, Quaternion Qua, Transform parentsetT)
+    public static Decompositioner GenerateEffect(string resource_name, string EffectsPath, Vector3 Pos, Quaternion Qua, Transform parentT)
     {
         if (string.IsNullOrEmpty(resource_name))
             return null;
-        DecompositionerPool EffectPool = INIEffectsPool(resource_name, EffectsPath, 3);
+        var EffectPool = INIEffectsPool(resource_name, EffectsPath, 3);
         if (EffectPool == null)
             return null;
-        Decompositioner processingEffectObj = EffectPool.Rent();
-        ConstraintSource myConstraintSource = new ConstraintSource();
-        if (parentsetT != null)
+        var processingEffectObj = EffectPool.Rent();
+        var myConstraintSource = new ConstraintSource();
+        if (parentT != null)
         {
-            myConstraintSource.sourceTransform = parentsetT;
+            myConstraintSource.sourceTransform = parentT;
             myConstraintSource.weight = 1;
             processingEffectObj.GetPositionConstraint().SetSources(new List<ConstraintSource> { myConstraintSource });
             processingEffectObj.GetPositionConstraint().locked = true;
@@ -42,7 +42,7 @@ public partial class EffectsManager
         processingEffectObj.transform.rotation = Qua;
         return processingEffectObj;
     }
-        
+    
     static DecompositionerPool ConstructEffectPoolWithPrefabAndKey(GameObject prefab, string key, int ini_count)
     {
         if (prefab != null)

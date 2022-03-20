@@ -153,9 +153,9 @@ public partial class Data_Center : MonoBehaviour
         FightDataRef.FindAllSelfCollidersAndIgnoreCollision();
         FightDataRef.ChangeLayerForLimbs(_TeamConfig.mylayer);
         FightDataRef.EnableAllLimbs(true);
-        FightDataRef.CurrentHp.Value = nineSkillHp;
+        FightDataRef._comboHitCount.HitCount.Value = 0;
         FightDataRef.CriticalGaugeMode = criticalGaugeMode;
-        
+        FightDataRef.CurrentHp.Value = nineSkillHp;
         FightDataRef.CurrentHp.Subscribe(x =>
         {
             FightDataRef.CurrentHp.Value = Mathf.Clamp(x, 0, nineSkillHp);

@@ -138,10 +138,10 @@ public class MobileInputsManager : MonoBehaviour {
     // 而防御与机动则是确定一直显示。
     void StartPressing(Button targetBtn)
     {
-        targetButtonPos = PosCal.GetWorldPos(NetFightScene.target.fxCamera, targetBtn.GetComponent<RectTransform>(), 7);
+        targetPos = PosCal.GetWorldPos(NetFightScene.target.fxCamera, targetBtn.GetComponent<RectTransform>(), 7);
         if (ElementEffects.ContainsKey(_focusing))
         {
-            ElementEffects[_focusing].pressingExplosion.transform.position = targetButtonPos;
+            ElementEffects[_focusing].pressingExplosion.transform.position = targetPos;
             ElementEffects[_focusing].pressingExplosion.Play();
         }
     }
@@ -339,13 +339,13 @@ public class MobileInputsManager : MonoBehaviour {
         CheckIfPlayerIsInputting();
     }
     
-    Vector3 targetButtonPos;
+    Vector3 targetPos;
     void RefreshPattern(Button button, int sp_level)//按钮切换也可以在这里做文章
     {
-        targetButtonPos = PosCal.GetWorldPos(NetFightScene.target.fxCamera, button.GetComponent<RectTransform>(), 5);
+        targetPos = PosCal.GetWorldPos(NetFightScene.target.fxCamera, button.GetComponent<RectTransform>(), 5);
         if (ElementEffects.ContainsKey(_focusing))
         {
-            ElementEffects[_focusing].RefreshBtn(button, sp_level, targetButtonPos);
+            ElementEffects[_focusing].RefreshBtn(button, sp_level, targetPos);
         }
     }
 

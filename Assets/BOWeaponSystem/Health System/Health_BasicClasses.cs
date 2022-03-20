@@ -16,7 +16,7 @@ public class KnockOffCount
 
     public void SetGauge(float amount)
     {
-        this.knock_off_gauge = amount;
+        knock_off_gauge = amount;
     }
 
     public void PlusGauge(float amount)
@@ -26,7 +26,7 @@ public class KnockOffCount
 
     public void PlusTimeCounter(float timeamout)
     {
-        this.knock_off_time_counter += timeamout;
+        knock_off_time_counter += timeamout;
     }
 
     public float GetGauge()
@@ -65,7 +65,7 @@ public class BeHitCount
         HitConnectTolerate = 1.5f;
         BeHitComboTimeCounter = 0f;
     }
-
+    
     public void BeHitCountPlus()
     {
         BeHitComboTimeCounter = HitConnectTolerate;

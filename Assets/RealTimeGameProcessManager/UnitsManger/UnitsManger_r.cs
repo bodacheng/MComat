@@ -39,11 +39,7 @@ namespace FightScene
             foreach (var center in TeamMembers.GetValues())
             {
                 //  时间刷新整备
-                if (!RTFightManager.RefreshTimeDic.ContainsKey(center))
-                {
-                    RTFightManager.RefreshTimeDic.Add(center, new ReactiveProperty<float>(0));
-                }
-                
+                RTFightManager.target.RefreshTimeDic.Add(center, new ReactiveProperty<float>(0));
                 center.Step3Initialize(teamConfig, TeamHpRate * SkillSet.INI_Hp(RTFightManager.target.UnitInfoRef[center].set.SkillEntityList()), teamCGMode);
                 center.FightDataRef.IsDead.Subscribe(x => {
                     if (x) 
@@ -58,10 +54,6 @@ namespace FightScene
         // 切换队员
         public bool ChangeFightingUnit(Data_Center _changeTo, bool emptyState = false, Transform IniStandPoint = null)
         {
-            if (!(TeamMembers.GetValues().Count > 1))
-            {
-                return false;
-            }
             if (_changeTo.FightDataRef.IsDead.Value)
             {
                 return false;
@@ -79,13 +71,13 @@ namespace FightScene
                 if (RMode_Unit != null)
                 {
                     targetPos = RMode_Unit.Value.transform.position;
-                    targetRot = RMode_Unit.Value.transform.rotation;
+                    targetRot = Quaternion.Euler(new Vector3(1,0,1));
                 }
             }
             
-            foreach (var data_Center in TeamMembers.GetValues())
+            foreach (var dataCenter in TeamMembers.GetValues())
             {
-                if (_changeTo == data_Center)
+                if (_changeTo == dataCenter)
                 {
                     if (RMode_Unit.Value != null && _changeTo != null) //继承hit数
                     {
@@ -93,7 +85,6 @@ namespace FightScene
                     }
                     Sensor.AddOrRemoveSharedUnits(RMode_Unit.Value, teamConfig.myTeam, false);
                     Sensor.AddOrRemoveSharedUnits(_changeTo, teamConfig.myTeam, true);
-                    
                     RMode_Unit.Value = _changeTo;
                     RMode_Unit.Value.WholeT.gameObject.SetActive(true);
                     
@@ -112,17 +103,17 @@ namespace FightScene
                 }
                 else
                 {
-                    if (data_Center._MyBehaviorRunner.GetNowState().StateKey != "Empty")
+                    if (dataCenter._MyBehaviorRunner.GetNowState().StateKey != "Empty")
                     {
-                        data_Center._MyBehaviorRunner.ChangeState("Empty");
+                        dataCenter._MyBehaviorRunner.ChangeState("Empty");
                     }
-                    data_Center.WholeT.gameObject.SetActive(false);
+                    dataCenter.WholeT.gameObject.SetActive(false);
                 }
             }
             
-            if (teamConfig.myTeam == RTFightManager.playerTeam)
+            if (teamConfig.myTeam == RTFightManager.playerTeam && InputsManager != null)
             {
-                InputsManager?.FocusUnit(RMode_Unit.Value);
+                InputsManager.FocusUnit(RMode_Unit.Value);
             }
             
             //Refresh(TeamMembers);
@@ -130,55 +121,55 @@ namespace FightScene
         }
         
         // 计算时间统计可上场角色，更新上场冷却图标UI
-        void WaitToTriggerMemberChange()
+        void WaitUnitChange()
         {
             for (var i = 0; i < TeamMembers.GetValues().Count; i++)
             {
-                if (RTFightManager.RefreshTimeDic[TeamMembers.GetValues()[i]].Value > 0)
+                if (RTFightManager.target.RefreshTimeDic[TeamMembers.GetValues()[i]].Value > 0)
                 {
-                    RTFightManager.RefreshTimeDic[TeamMembers.GetValues()[i]].Value -= Time.deltaTime; // 角色切换倒计时;
+                    RTFightManager.target.RefreshTimeDic[TeamMembers.GetValues()[i]].Value -= Time.deltaTime; // 角色切换倒计时;
                 }
             }
             
             if (waitingMember != null && CanChangeToThisMember(waitingMember))
             {
-                RTFightManager.RefreshTimeDic[RMode_Unit.Value].Value = 10f;
+                RTFightManager.target.RefreshTimeDic[RMode_Unit.Value].Value = 10f;
                 ChangeFightingUnit(waitingMember);
                 waitingMember = null;
             }
         }
         
-        bool CanChangeToThisMember(Data_Center targetMember)
+        bool CanChangeToThisMember(Data_Center target)
         {
-            if (targetMember == RMode_Unit.Value)
+            if (target == RMode_Unit.Value)
             {
                 return false;
             }
-            if (targetMember.FightDataRef.IsDead.Value)
+            if (target.FightDataRef.IsDead.Value)
             {
                 return false;
             }
-            if (RTFightManager.RefreshTimeDic[targetMember].Value > 0)
+            if (RTFightManager.target.RefreshTimeDic[target].Value > 0)
             {
                 return false;
             }
-            if (targetMember._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit || targetMember._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.KnockOff)
+            if (target._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit || target._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.KnockOff)
             {
                 return false;
             }
-            if (targetMember._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GI || targetMember._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GM || targetMember._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GR)
+            if (target._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GI || target._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GM || target._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GR)
             {
-                if (!targetMember._SkillCancelFlag.Cancel_Flag)
+                if (!target._SkillCancelFlag.Cancel_Flag)
                     return true;
             }
             return true;
         }
         
-        public void ReadyForNextMember(Data_Center nextOne)
+        public void ReadyForNextMember(Data_Center next)
         {
-            if (waitingMember != nextOne)
+            if (waitingMember != next)
             {
-                waitingMember = nextOne;
+                waitingMember = next;
             }
         }
         
@@ -194,11 +185,11 @@ namespace FightScene
                     }
                 }
             }
-            foreach (var data_Center in TeamMembers.GetValues())
+            foreach (var dataCenter in TeamMembers.GetValues())
             {
-                if (!data_Center.FightDataRef.IsDead.Value)
+                if (!dataCenter.FightDataRef.IsDead.Value)
                 {
-                    if (ChangeFightingUnit(data_Center))
+                    if (ChangeFightingUnit(dataCenter))
                     {
                         return true;
                     }

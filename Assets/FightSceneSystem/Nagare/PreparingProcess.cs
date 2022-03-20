@@ -74,7 +74,7 @@ public class PreparingProcess : FSceneProcess
                 RTFightManager.target.team2StartUnit = RTFightManager.target.team2.ToStartPos_Rotate();
                 break;
         }
-
+        
         RTFightManager.target.team1.RMode_Unit.Subscribe(x =>
             {
                 RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);

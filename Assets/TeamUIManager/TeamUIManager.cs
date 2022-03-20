@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using DG.Tweening;
 
 namespace FightScene
 {
@@ -67,8 +68,10 @@ namespace FightScene
                             {
                                 if (teamConfig.myTeam != RTFightManager.playerTeam)
                                 {
+                                    if (RMode_Unit.Value == null)
+                                        return;
                                     UnitIconDic.TryGetValue(RMode_Unit.Value, out var _tempSI);
-                                    _tempSI.transform.position = Vector3.Lerp(_tempSI.transform.position, CameraManager._camera.WorldToScreenPoint(RMode_Unit.Value.transform.position + Vector3.up * 3f), Time.deltaTime * 20f);
+                                    _tempSI.transform.DOMove(CameraManager._camera.WorldToScreenPoint(RMode_Unit.Value.transform.position + Vector3.up * 3f), 1);
                                 }
                             }
                         ).AddTo(gameObject);

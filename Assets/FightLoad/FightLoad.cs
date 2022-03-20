@@ -2,6 +2,7 @@
 using dataAccess;
 using FightScene;
 using mainMenu;
+using UnityEngine;
 
 public static class FightLoad
 {
@@ -48,9 +49,13 @@ public static class FightLoad
                 stage.team2Auto = true;
                 break;
         }
+
+        Debug.Log(stage.fightMembers.EnemySets._SerializableSets.Length + ":"+ stage.fightMembers.HeroSets._SerializableSets.Length);
         
         NetFightScene.Fight = stage;
         Stones.PreventStonesFromDestroy();
+        HurtObjectManager.Clear();
+        EffectsManager.Clear();
         SceneManager.LoadScene(2);
     }
 }
