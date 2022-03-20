@@ -184,7 +184,7 @@ public class MobileInputsManager : MonoBehaviour {
         Behavior_preview_button2 = null;
         Behavior_preview_button3 = null;
         
-        for (int i = 0; i < Options_preview.Count; i++)
+        for (var i = 0; i < Options_preview.Count; i++)
         {
             switch (Options_preview[i].EnterInput)
             {

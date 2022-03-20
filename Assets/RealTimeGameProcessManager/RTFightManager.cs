@@ -93,7 +93,7 @@ namespace FightScene
             }
         }
         
-        public void ClearUIAndData()
+        public void ClearUnitData()
         {
             foreach (var one in team1.TeamMembers.GetValues())
             {
@@ -103,8 +103,6 @@ namespace FightScene
             {
                 one.CleanClear();
             }
-            FightingStepLayer.target.team1UI.Clear();
-            FightingStepLayer.target.team2UI.Clear();
         }
         
         public void ClearUnits()

@@ -17,10 +17,10 @@ public class CommonFightResult : UILayer
     public NineForShow NineForShowPretab;
     
     // 战斗结束后统计技能石升级情况时的画面显示
-    List<NineForShow> NineForShows = new List<NineForShow>();
+    readonly List<NineForShow> _nineForShows = new List<NineForShow>();
     public void ShowSKillSets(TeamUIManager teamUIManager, RectTransform IconAndSKillShowUISetT)
     {
-        NineForShows.Clear();
+        _nineForShows.Clear();
         foreach (Transform child in IconAndSKillShowUISetT) 
         {
             Destroy(child.gameObject);
@@ -31,7 +31,7 @@ public class CommonFightResult : UILayer
             var iassi = Instantiate(IconAndSKillShowUISetPretab);
             var sideCharIcon = teamUIManager.GetSideIcon(kv.Key);
             var nineForShow = Instantiate(NineForShowPretab);
-            NineForShows.Add(nineForShow);
+            _nineForShows.Add(nineForShow);
             iassi.Set(sideCharIcon, nineForShow);
             iassi.transform.SetParent(IconAndSKillShowUISetT);
             iassi.transform.localPosition = Vector3.zero;
@@ -42,7 +42,7 @@ public class CommonFightResult : UILayer
     
     void Clear()
     {
-        foreach(NineForShow nineForShow in NineForShows)
+        foreach(NineForShow nineForShow in _nineForShows)
         {
             nineForShow.ClearCurrent();
         }

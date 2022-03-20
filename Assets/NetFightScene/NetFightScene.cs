@@ -111,11 +111,7 @@ namespace FightScene
             var data_Centers = new List<Data_Center>();
             data_Centers.AddRange(RTFightManager.target.team1.TeamMembers.GetValues());
             data_Centers.AddRange(RTFightManager.target.team2.TeamMembers.GetValues());
-            foreach (var one in data_Centers)
-            {
-                one.CleanClear();
-            }
-            RTFightManager.target.ClearUIAndData();
+            RTFightManager.target.ClearUnitData();
             RTFightManager.target.ClearUnits();
             FightLogger.value.WatchMissionsAbandon();
             FSceneProcessesRunner.Main.Clear();

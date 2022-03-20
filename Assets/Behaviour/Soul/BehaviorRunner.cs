@@ -73,7 +73,7 @@ namespace Soul
                 BehaviourTransitionEngine();
                 
                 #region 决策制定
-                controller.PlayerControl(this, _canTranTo, AI && !BeingControl());
+                controller.Decision(this, _canTranTo, AI && !BeingControl());
                 #endregion
                 
                 _nowBehavior?._State_Update();

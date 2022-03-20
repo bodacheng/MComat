@@ -25,7 +25,7 @@ namespace Soul
             #region Forced state transition 
             if (CurrentSKillEntity.ForcedTransitions != null)
             {
-                for (int i = 0; i < CurrentSKillEntity.ForcedTransitions.Length; i++)
+                for (var i = 0; i < CurrentSKillEntity.ForcedTransitions.Length; i++)
                 {
                     BehaviourDic.TryGetValue(CurrentSKillEntity.ForcedTransitions[i], out _tryBehavior);
                     if (_tryBehavior.Force_enter_condition())
@@ -64,8 +64,7 @@ namespace Soul
             #endregion
             
             #region 按钮技能刷新
-            if (InputsManager != null)
-                InputsManager.ButtonsFeatureLoad(optionsForButtonRefresh);
+            InputsManager?.ButtonsFeatureLoad(optionsForButtonRefresh);
             #endregion
             
             CalAdviceDistanceFromEnemy();
@@ -105,7 +104,7 @@ namespace Soul
         {
             min = 9999f;
             max = 0f;
-            for (int index = 0; index < _canTranTo.Count; index++)
+            for (var index = 0; index < _canTranTo.Count; index++)
             {
                 if (min > _canTranTo[index].AIAttrs.AI_MIN_DIS)
                     min = _canTranTo[index].AIAttrs.AI_MIN_DIS;

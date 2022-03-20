@@ -3,7 +3,6 @@ using DummyLayerSystem;
 using UnityEngine;
 using UnityEngine.UI;
 using FightScene;
-using UniRx;
 
 public class FightingStepLayer : UILayer
 {
@@ -23,7 +22,12 @@ public class FightingStepLayer : UILayer
     public Toggle Team1Auto;
     public Toggle Team2Auto;
     
-    public static FightingStepLayer target;
+    public void Clear()
+    {
+        team1UI.Clear();
+        team2UI.Clear();
+        InputsManager.Clear();
+    }
     
     public static FightingStepLayer Get()
     {
@@ -69,8 +73,6 @@ public class FightingStepLayer : UILayer
     
     void StartUp(Action<bool> switchTeam1Auto, Action<bool> switchTeam2Auto, Action pauseAction, Action cameraSwitchAction)
     {
-        target = this;
-        
         RTFightManager.target.team1.InputsManager = InputsManager;
         RTFightManager.target.team2.InputsManager = InputsManager;
         

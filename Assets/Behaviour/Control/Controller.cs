@@ -13,133 +13,145 @@ namespace Soul
     {
         readonly SSIMultiDictionary _triggerd = new SSIMultiDictionary();
         
-        public void PlayerControl(BehaviorRunner behaviorRunner, List<SkillEntity> Options, bool Auto)
+        public void Decision(BehaviorRunner runner, List<SkillEntity> Options, bool Auto)
         {
-            if (behaviorRunner.InputsManager != null)
-            {
-                #region 主动退出当前状态的控制类条件是否激活
-                if (!BehaviourExitInputTrigger(behaviorRunner.CurrentSKillEntity, behaviorRunner.InputsManager))
-                {
-                    return;
-                }
-                #endregion
-                
-                #region 按键触发
-                for (var i = 0; i < Options.Count; i++)
-                {
-                    switch (Options[i].EnterInput)
-                    {
-                        case InputKey.Attack1:
-                            if (MobileInputsManager.attack)
-                            {
-                                behaviorRunner.InputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
-                                behaviorRunner.SingleFightLog.WriteLog(
-                                    new SingleFightLog.BehaviourFightRecord
-                                    {
-                                        AI_Decided = false,
-                                        stateKey = Options[i].REAL_NAME,
-                                        whyIDidThis = null
-                                    }
-                                );
-                                behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
-                                behaviorRunner.ChangeState(Options[i].REAL_NAME);
-                                return;
-                            }
-                            break;
-                        case InputKey.Attack2:
-                            if (MobileInputsManager.fire1)
-                            {
-                                behaviorRunner.InputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
-                                behaviorRunner.SingleFightLog.WriteLog(
-                                    new SingleFightLog.BehaviourFightRecord
-                                    {
-                                        AI_Decided = false,
-                                        stateKey = Options[i].REAL_NAME,
-                                        whyIDidThis = null
-                                    }
-                                );
-                                behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
-                                behaviorRunner.ChangeState(Options[i].REAL_NAME);
-                                return;
-                            }
-                            break;
-                        case InputKey.Attack3:
-                            if (MobileInputsManager.fire2)
-                            {
-                                behaviorRunner.InputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
-                                behaviorRunner.SingleFightLog.WriteLog(
-                                    new SingleFightLog.BehaviourFightRecord
-                                    {
-                                        AI_Decided = false,
-                                        stateKey = Options[i].REAL_NAME,
-                                        whyIDidThis = null
-                                    }
-                                );
-                                behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
-                                behaviorRunner.ChangeState(Options[i].REAL_NAME);
-                                return;
-                            }
-                            break;
-                        case InputKey.Acc:
-                            if (MobileInputsManager.acc)
-                            {
-                                behaviorRunner.SingleFightLog.WriteLog(
-                                    new SingleFightLog.BehaviourFightRecord
-                                    {
-                                        AI_Decided = false,
-                                        stateKey = Options[i].REAL_NAME,
-                                        whyIDidThis = null
-                                    }
-                                );
-                                behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
-                                behaviorRunner.ChangeState(Options[i].REAL_NAME);
-                                return;
-                            }
-                            break;
-                        case InputKey.Defend:
-                            if (MobileInputsManager.defendButtonHover)
-                            {
-                                behaviorRunner.SingleFightLog.WriteLog(
-                                    new SingleFightLog.BehaviourFightRecord
-                                    {
-                                        AI_Decided = false,
-                                        stateKey = Options[i].REAL_NAME,
-                                        whyIDidThis = null
-                                    }
-                                );
-                                behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
-                                behaviorRunner.ChangeState(Options[i].REAL_NAME);
-                                return;
-                            }
-                            break;
-                        case InputKey.Null:
-                            if (!MobileInputsManager.defendButtonHover && !MobileInputsManager.acc && !MobileInputsManager.fire2 && !MobileInputsManager.fire1 && !MobileInputsManager.attack)
-                            {
-                                behaviorRunner.ChangeState(Options[i].REAL_NAME);
-                                return;
-                            }
-                            break;
-                    }
-                }
-                #endregion
-            }
-            
             bool changed = false;
-            #region AI决策
-            if (Auto)
+            
+            #region 按键触发
+            if (runner.InputsManager != null)
             {
-                changed = AI_RUNs(behaviorRunner, Options);
+                changed = BtnTrigger(runner, Options, runner.InputsManager);
             }
             #endregion
             
+            if (changed)
+            {
+                goto A;
+            }
+            
+            #region AI决策
+            if (Auto)
+            {
+                changed = AI_RUNs(runner, Options);
+            }
+            #endregion
+            
+            A:
             if (!changed)
-                AutoReset(behaviorRunner);
+                AutoReset(runner);
+        }
+
+        bool BtnTrigger(BehaviorRunner runner, List<SkillEntity> Options, MobileInputsManager InputsManager)
+        {
+            // 主动退出当前状态的控制类条件是否激活
+            if (!BehaviourExitInputTrigger(runner.CurrentSKillEntity, InputsManager))
+            {
+                return false;
+            }
+            
+            for (var i = 0; i < Options.Count; i++)
+            {
+                switch (Options[i].EnterInput)
+                {
+                    case InputKey.Attack1:
+                    if (MobileInputsManager.attack)
+                    {
+                        InputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
+                        runner.SingleFightLog.WriteLog(
+                        new SingleFightLog.BehaviourFightRecord
+                        {
+                            AI_Decided = false,
+                            stateKey = Options[i].REAL_NAME,
+                            whyIDidThis = null
+                        }
+                        );
+                        runner.SingleFightLog.AnalysisLog(runner.ConditionAndRespondPriority);
+                        runner.ChangeState(Options[i].REAL_NAME);
+                        return true;
+                    }
+                    break;
+                    case InputKey.Attack2:
+                    if (MobileInputsManager.fire1)
+                    {
+                        InputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
+                        runner.SingleFightLog.WriteLog(
+                            new SingleFightLog.BehaviourFightRecord
+                            {
+                                AI_Decided = false,
+                                stateKey = Options[i].REAL_NAME,
+                                whyIDidThis = null
+                            }
+                        );
+                        runner.SingleFightLog.AnalysisLog(runner.ConditionAndRespondPriority);
+                        runner.ChangeState(Options[i].REAL_NAME);
+                        return true;
+                    }
+                    break;
+                    case InputKey.Attack3:
+                    if (MobileInputsManager.fire2)
+                    {
+                        InputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
+                        runner.SingleFightLog.WriteLog(
+                        new SingleFightLog.BehaviourFightRecord
+                            {
+                                AI_Decided = false,
+                                stateKey = Options[i].REAL_NAME,
+                                whyIDidThis = null
+                            }
+                        );
+                        runner.SingleFightLog.AnalysisLog(runner.ConditionAndRespondPriority);
+                        runner.ChangeState(Options[i].REAL_NAME);
+                        return true;
+                    }
+                    break;
+                    case InputKey.Acc:
+                    if (MobileInputsManager.acc)
+                    {
+                        runner.SingleFightLog.WriteLog(
+                        new SingleFightLog.BehaviourFightRecord
+                            {
+                                AI_Decided = false,
+                                stateKey = Options[i].REAL_NAME,
+                                whyIDidThis = null
+                            }
+                        );
+                        runner.SingleFightLog.AnalysisLog(runner.ConditionAndRespondPriority);
+                        runner.ChangeState(Options[i].REAL_NAME);
+                        return true;
+                    }
+                    break;
+                    case InputKey.Defend:
+                    if (MobileInputsManager.defendButtonHover)
+                    {
+                        runner.SingleFightLog.WriteLog(
+                        new SingleFightLog.BehaviourFightRecord
+                            {
+                                AI_Decided = false,
+                                stateKey = Options[i].REAL_NAME,
+                                whyIDidThis = null
+                            }
+                        );
+                        runner.SingleFightLog.AnalysisLog(runner.ConditionAndRespondPriority);
+                        runner.ChangeState(Options[i].REAL_NAME);
+                        return true;
+                    }
+                    break;
+                    case InputKey.Null:
+                        if (!MobileInputsManager.defendButtonHover && !MobileInputsManager.acc && !MobileInputsManager.fire2 && !MobileInputsManager.fire1 && !MobileInputsManager.attack)
+                        {
+                            runner.ChangeState(Options[i].REAL_NAME);
+                            return true;
+                        }
+                    break;
+                }
+            }
+            return false;
         }
 
         // 状态的退出可以由特定的控制条件来决定时进行的判断。目前全项目只有防御这一种情况
-        bool BehaviourExitInputTrigger(SkillEntity current_Behavior_Set, MobileInputsManager _inputsManager)
+        bool BehaviourExitInputTrigger(SkillEntity current, MobileInputsManager _inputsManager)
         {
-            switch(current_Behavior_Set.ExitInput)
+            switch(current.ExitInput)
             {
                 case InputKey.Defend_Cancel:
                     return _inputsManager.DefendExitTrigger();
@@ -180,10 +192,6 @@ namespace Soul
                 {
                     int random = Random.Range(0, finalConditionStateKeySet.Count);//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。
                     var _SE = behaviorRunner.SkillEntityDic[finalConditionStateKeySet[random].Item2];
-                    if (behaviorRunner.InputsManager != null)
-                    {
-                        behaviorRunner.InputsManager.SkillButtonExplosion(_SE.EnterInput, _SE.SP_LEVEL);
-                    }
                     if (_SE.StateType == BehaviorType.AC || _SE.StateType == BehaviorType.CT || _SE.StateType == BehaviorType.Def
                         || _SE.StateType == BehaviorType.GI || _SE.StateType == BehaviorType.GM || _SE.StateType == BehaviorType.GR)
                     {
@@ -198,6 +206,7 @@ namespace Soul
                         behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
                     }
                     behaviorRunner.ChangeState(_SE.REAL_NAME);
+                    behaviorRunner.InputsManager?.SkillButtonExplosion(_SE.EnterInput, _SE.SP_LEVEL);
                     return true;
                 }
             }

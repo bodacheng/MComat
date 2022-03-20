@@ -195,10 +195,9 @@ public partial class Data_Center : MonoBehaviour
         Sensor.Stop();
         bO_Weapon_Animation_Events.ClearMarkerManagers();
         buffsRunner.EndAllCoroutines();
-        _ResistanceManager.Resistance.Dispose();
         _ResistanceManager.ResistanceClear();
         Personality_events.CloseAllPersonalityEffects();
-        FightDataRef.Clear();
+        //FightDataRef.Clear();
     }
 
     float p1_to_me, p2_to_me;

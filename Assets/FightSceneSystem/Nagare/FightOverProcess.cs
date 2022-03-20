@@ -113,7 +113,7 @@ namespace FightScene
                             LocalGameRestart();
                             UILayerLoader.Remove("CommonFightResult");
                         });
-                    c.ShowSKillSets(FightingStepLayer.target.team1UI, c.GetIconAndSKillShowUISetT());
+                    //c.ShowSKillSets(FightingStepLayer.target.team1UI, c.GetIconAndSKillShowUISetT());
                     break;
                 case FightEventType.SkillTest:
                     SkillTestReload();
@@ -124,10 +124,6 @@ namespace FightScene
             data_Centers.AddRange(RTFightManager.target.team1.TeamMembers.GetValues());
             data_Centers.AddRange(RTFightManager.target.team2.TeamMembers.GetValues());
             HitBoxLogTable.Instance.SkillLog(data_Centers);
-            foreach (var one in data_Centers)
-            {
-                one.CleanClear();
-            }
             FightLogger.value.WatchMissionsAbandon();
             SingleAssignmentDisposableCleaner.Clear();
         }

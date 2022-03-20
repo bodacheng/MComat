@@ -144,7 +144,7 @@ public class ResistanceManager : MonoBehaviour
     {
         if (disposableTasks.Count > 0)
         {
-            foreach (SingleAssignmentDisposable _d in disposableTasks)
+            foreach (var _d in disposableTasks)
             {
                 if (!_d.IsDisposed)
                 {
