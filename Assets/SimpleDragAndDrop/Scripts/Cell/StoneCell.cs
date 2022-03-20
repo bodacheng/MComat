@@ -129,7 +129,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         targetIcon.gameObject.SetActive(true);
         UnitConfig unitConfig = Units.GetUnitConfig(_one.r_id);
         targetIcon.ChangeIcon(unitConfig == null ? null : MonsterIconDic.Get(unitConfig.RECORD_ID),
-            unitConfig == null ? Zokusei.Null : unitConfig._zokusei);
+            unitConfig == null ? Element.Null : unitConfig.element);
     }
     
     /// <summary>

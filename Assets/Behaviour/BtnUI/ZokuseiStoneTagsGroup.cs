@@ -17,14 +17,14 @@ public class ZokuseiStoneTagsGroup
         }       
     }
     
-    public void INI_forSkillStoneBox(Zokusei zokusei,Transform effectObjectParent)
+    public void INI_forSkillStoneBox(Element element,Transform effectObjectParent)
     {
         btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
         
-        var normaltab = CreateOneButtonIcon(zokusei, 0);
-        var ex1tab = CreateOneButtonIcon(zokusei, 1);
-        var ex2tab = CreateOneButtonIcon(zokusei, 2);
-        var ex3tab = CreateOneButtonIcon(zokusei, 3);
+        var normaltab = CreateOneButtonIcon(element, 0);
+        var ex1tab = CreateOneButtonIcon(element, 1);
+        var ex2tab = CreateOneButtonIcon(element, 2);
+        var ex3tab = CreateOneButtonIcon(element, 3);
         
         normaltab.transform.SetParent(effectObjectParent);
         ex1tab.transform.SetParent(effectObjectParent);
@@ -36,12 +36,12 @@ public class ZokuseiStoneTagsGroup
         btnEffectsSetsForStoneBox.Add(2, ex2tab.GetComponent<ParticleSystem>());
         btnEffectsSetsForStoneBox.Add(3, ex3tab.GetComponent<ParticleSystem>());
 
-        LoadPressedEffect(zokusei, effectObjectParent);
+        LoadPressedEffect(element, effectObjectParent);
     }
     
-    public static GameObject CreateOneButtonIcon(Zokusei zokusei, int SpLevel)
+    public static GameObject CreateOneButtonIcon(Element element, int SpLevel)
     {
-        string buttoneffectspath = FightGlobalSetting.EffectPathDefine(zokusei);
+        string buttoneffectspath = FightGlobalSetting.EffectPathDefine(element);
         switch(SpLevel)
         {
             case 0:
@@ -60,9 +60,9 @@ public class ZokuseiStoneTagsGroup
         return null;
     }
     
-    public void LoadPressedEffect(Zokusei zokusei, Transform T)
+    public void LoadPressedEffect(Element element, Transform T)
     {
-        string buttoneffectspath = FightGlobalSetting.EffectPathDefine(zokusei);
+        string buttoneffectspath = FightGlobalSetting.EffectPathDefine(element);
         
         GameObject triggerExplosionPrefab0 = Resources.Load("essentialUIElements/buttonEffects/" + buttoneffectspath + "/explosion0", typeof(GameObject)) as GameObject;
         GameObject triggerExplosionPrefab1 = Resources.Load("essentialUIElements/buttonEffects/" + buttoneffectspath + "/explosion1", typeof(GameObject)) as GameObject;

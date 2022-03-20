@@ -179,7 +179,7 @@ public partial class Animation_Manger
         ////////////    以上内容为个性化动画片段对base层基础动画的覆盖   /////////////
     }
 
-    public IEnumerator PreloadPersonalAnimStreamingAssetMode(string animPath, string toLoadSkillAnimsName, string personalMagic, Zokusei _zokusei)
+    public IEnumerator PreloadPersonalAnimStreamingAssetMode(string animPath, string toLoadSkillAnimsName, string personalMagic, Element element)
     {
         if (toLoadAnims.ContainsKey(toLoadSkillAnimsName))
         {
@@ -196,27 +196,27 @@ public partial class Animation_Manger
                 {
                     if (e.functionName == "MagicForward")
                     {
-                        yield return (HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
+                        yield return (HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, element));
                     }
                     if (e.functionName == "PrepareOneMagic")
                     {
-                        yield return (HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
+                        yield return (HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, element));
                     }
                     if (e.functionName == "Bullet_shoot_from_body_part")
                     {
                         switch (e.intParameter)
                         {
                             case 1:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, element));
                                 break;
                             case 2:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("big_bullet", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("big_bullet", personalMagic, element));
                                 break;
                             case 3:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("super_bullet", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("super_bullet", personalMagic, element));
                                 break;
                             default:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, element));
                                 break;
                         }
                     }
@@ -225,16 +225,16 @@ public partial class Animation_Manger
                         switch (e.intParameter)
                         {
                             case 0:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element));
                                 break;
                             case 1:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element));
                                 break;
                             case 2:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("big_blast", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("big_blast", personalMagic, element));
                                 break;
                             default:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element));
                                 break;
                         }
                     }
@@ -252,13 +252,13 @@ public partial class Animation_Manger
         }
     }
 
-    public IEnumerator PreloadPersonalAnimsStreamingAssetMode(string animPath, List<string> toLoadSkillAnimsNames, string personalMagic, Zokusei _zokusei)
+    public IEnumerator PreloadPersonalAnimsStreamingAssetMode(string animPath, List<string> toLoadSkillAnimsNames, string personalMagic, Element element)
     {
         if (toLoadSkillAnimsNames != null)
         {
             foreach (string anim_name in toLoadSkillAnimsNames)
             {
-                PreloadPersonalAnimStreamingAssetMode(animPath, anim_name, personalMagic, _zokusei);
+                PreloadPersonalAnimStreamingAssetMode(animPath, anim_name, personalMagic, element);
             }
         }
         yield break;

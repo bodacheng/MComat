@@ -26,8 +26,8 @@ public class MobileInputsManager : MonoBehaviour {
     [SerializeField] Button Dash;
     [SerializeField] Transform effectsParent;
     
-    static readonly IDictionary<Zokusei, ZokuseiButtonEffectsGroup> ZokuseiButtonEffects = new Dictionary<Zokusei, ZokuseiButtonEffectsGroup>();
-    static Zokusei _focusing;
+    static readonly IDictionary<Element, ElementEffectsGroup> ElementEffects = new Dictionary<Element, ElementEffectsGroup>();
+    static Element _focusing;
     
     public bool inputting = false;
     
@@ -43,7 +43,7 @@ public class MobileInputsManager : MonoBehaviour {
         {
             center._MyBehaviorRunner.InputsManager = this;
             watch = center._MyBehaviorRunner;
-            SwitchZokuseiButtons(center.zokusei);
+            SwitchElementEffects(center.element);
             SuddenRefreshButtons(watch);
         }else{
             TurnOffButtons();
@@ -52,22 +52,22 @@ public class MobileInputsManager : MonoBehaviour {
     
     public void Clear()
     {
-        ZokuseiButtonEffects.Clear();
+        ElementEffects.Clear();
     }
     
     // 切换输入按键表现层（红黄蓝绿）.这个函数使用的前提是所有用的上的控制器组都已经注册并初始化
-    void SwitchZokuseiButtons(Zokusei zokusei)
+    void SwitchElementEffects(Element element)
     {
-        if (ZokuseiButtonEffects.ContainsKey(_focusing))
+        if (ElementEffects.ContainsKey(_focusing))
         {
-            ZokuseiButtonEffects[_focusing].Close();
+            ElementEffects[_focusing].Close();
         }
         
-        if (ZokuseiButtonEffects.ContainsKey(zokusei))
+        if (ElementEffects.ContainsKey(element))
         {
-            _focusing = zokusei;
+            _focusing = element;
             
-            ZokuseiButtonEffects[zokusei].Open(
+            ElementEffects[element].Open(
                 PosCal.GetWorldPos(NetFightScene.target.fxCamera, Defend.GetComponent<RectTransform>(), 5), 
                 PosCal.GetWorldPos(NetFightScene.target.fxCamera, Dash.GetComponent<RectTransform>(), 5)
             );
@@ -76,16 +76,16 @@ public class MobileInputsManager : MonoBehaviour {
         }
     }
 
-    public void ZokuseiButtonRegister(Zokusei zokusei)
+    public void ZokuseiButtonRegister(Element element)
     {
-        var zokuseiBtn = new ZokuseiButtonEffectsGroup();
-        zokuseiBtn.INI(effectsParent, zokusei, Attack, Fire1, Fire2);
+        var zokuseiBtn = new ElementEffectsGroup();
+        zokuseiBtn.INI(effectsParent, element, Attack, Fire1, Fire2);
         zokuseiBtn.Close();
-        if (!ZokuseiButtonEffects.ContainsKey(zokusei))
+        if (!ElementEffects.ContainsKey(element))
         {
-            ZokuseiButtonEffects.Add(zokusei, zokuseiBtn);
+            ElementEffects.Add(element, zokuseiBtn);
         } else {
-            ZokuseiButtonEffects[zokusei] = zokuseiBtn;
+            ElementEffects[element] = zokuseiBtn;
         }
     }
 
@@ -95,16 +95,16 @@ public class MobileInputsManager : MonoBehaviour {
         switch(eX)
         {
             case 0:
-                _targetExplode = ZokuseiButtonEffects[_focusing].triggerExplosion0;
+                _targetExplode = ElementEffects[_focusing].triggerExplosion0;
             break;
             case 1:
-                _targetExplode = ZokuseiButtonEffects[_focusing].triggerExplosion1;
+                _targetExplode = ElementEffects[_focusing].triggerExplosion1;
             break;
             case 2:
-                _targetExplode = ZokuseiButtonEffects[_focusing].triggerExplosion2;
+                _targetExplode = ElementEffects[_focusing].triggerExplosion2;
             break;
             case 3:
-                _targetExplode = ZokuseiButtonEffects[_focusing].triggerExplosion3;
+                _targetExplode = ElementEffects[_focusing].triggerExplosion3;
             break;
             default:
                 return;
@@ -125,7 +125,7 @@ public class MobileInputsManager : MonoBehaviour {
         _targetExplode.Play();
         
         //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
-        foreach (KeyValuePair<Button, ParticleSystem> keyValue in ZokuseiButtonEffects[_focusing].buttonRefreshEffects)
+        foreach (KeyValuePair<Button, ParticleSystem> keyValue in ElementEffects[_focusing].buttonRefreshEffects)
         {
             keyValue.Value.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, keyValue.Key.GetComponent<RectTransform>(),4);
             keyValue.Value.Play(true);
@@ -139,18 +139,18 @@ public class MobileInputsManager : MonoBehaviour {
     void StartPressing(Button targetBtn)
     {
         targetButtonPos = PosCal.GetWorldPos(NetFightScene.target.fxCamera, targetBtn.GetComponent<RectTransform>(), 7);
-        if (ZokuseiButtonEffects.ContainsKey(_focusing))
+        if (ElementEffects.ContainsKey(_focusing))
         {
-            ZokuseiButtonEffects[_focusing].pressingExplosion.transform.position = targetButtonPos;
-            ZokuseiButtonEffects[_focusing].pressingExplosion.Play();
+            ElementEffects[_focusing].pressingExplosion.transform.position = targetButtonPos;
+            ElementEffects[_focusing].pressingExplosion.Play();
         }
     }
 
     void StopPressing()
     {
-        if (ZokuseiButtonEffects.ContainsKey(_focusing))
+        if (ElementEffects.ContainsKey(_focusing))
         {
-            ZokuseiButtonEffects[_focusing].pressingExplosion.Stop();
+            ElementEffects[_focusing].pressingExplosion.Stop();
         }
     }
     
@@ -328,9 +328,9 @@ public class MobileInputsManager : MonoBehaviour {
             defendButtonHover = false;
         }
 
-        if (ZokuseiButtonEffects.ContainsKey(_focusing))
+        if (ElementEffects.ContainsKey(_focusing))
         {
-            ZokuseiButtonEffects[_focusing].Close();
+            ElementEffects[_focusing].Close();
         }
     }
     
@@ -343,9 +343,9 @@ public class MobileInputsManager : MonoBehaviour {
     void RefreshPattern(Button button, int sp_level)//按钮切换也可以在这里做文章
     {
         targetButtonPos = PosCal.GetWorldPos(NetFightScene.target.fxCamera, button.GetComponent<RectTransform>(), 5);
-        if (ZokuseiButtonEffects.ContainsKey(_focusing))
+        if (ElementEffects.ContainsKey(_focusing))
         {
-            ZokuseiButtonEffects[_focusing].RefreshBtn(button, sp_level, targetButtonPos);
+            ElementEffects[_focusing].RefreshBtn(button, sp_level, targetButtonPos);
         }
     }
 

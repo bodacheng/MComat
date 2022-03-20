@@ -53,7 +53,7 @@ public class StoneListLayer : UILayer
         returnValue.box.GenerateCells();
         returnValue.box._tabEffects.SwitchZokusei
         (
-            Zokusei.blueMagic
+            Element.blueMagic
         );
         returnValue.box.AddFeatureToCells(returnValue.CellFeature_StoneShow);
         returnValue.box.IniExTabs(PreScene.target.FxCamera);

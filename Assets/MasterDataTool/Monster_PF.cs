@@ -23,7 +23,7 @@ public partial class MasterDataTool
                 DisplayName = charsConfigs[i].REAL_NAME
             };
             PFDefine.C_CustomData c_CustomData = new PFDefine.C_CustomData();
-            c_CustomData.zokusei = ((int)charsConfigs[i]._zokusei).ToString();
+            c_CustomData.zokusei = ((int)charsConfigs[i].element).ToString();
             item.CustomData = c_CustomData.AsPlayFabVer();
             items.Add(item);
         }

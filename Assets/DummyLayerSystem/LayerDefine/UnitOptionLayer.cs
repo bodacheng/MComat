@@ -67,7 +67,7 @@ namespace mainMenu
                 Debug.Log("No this monster:" + PreScene.target._focusing.r_id);
                 return;
             }
-            BackGroundPS.target.ChangeBGByZokusei(Ref._zokusei);
+            BackGroundPS.target.ChangeBGByZokusei(Ref.element);
             
             // mini nineslot show
             _NineForShow.ShowStones_Acc(PreScene.target._focusing.id);
@@ -162,7 +162,7 @@ namespace mainMenu
                 var config = Units.GetUnitConfig(info.r_id);
                 var unitInfo = UnitInfo.GetUnitInfo(info);
                 yield return center.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK, config.SPECIAL_ZOKUSEI);
-                yield return center.Step2Initialize(config.TYPE, unitInfo.set, unitInfo.level, config._zokusei, config.SPECIAL_ZOKUSEI);
+                yield return center.Step2Initialize(config.TYPE, unitInfo.set, unitInfo.level, config.element, config.SPECIAL_ZOKUSEI);
                 
                 if (center._MyBehaviorRunner != null)
                     center._MyBehaviorRunner.ChangeState("Empty");

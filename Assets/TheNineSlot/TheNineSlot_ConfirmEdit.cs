@@ -95,7 +95,7 @@ namespace mainMenu
             void SkillEditConfirmAnimation()
             {
                 UnitConfig unitConfig = Units.GetUnitConfig(PreScene.target._focusing.r_id);
-                string personalEffectsPath = FightGlobalSetting.EffectPathDefine(unitConfig._zokusei);
+                string personalEffectsPath = FightGlobalSetting.EffectPathDefine(unitConfig.element);
                 EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, ShowModelPosition(new Vector3(0.2f, 0.4f, 8)), Quaternion.identity, null);
             }
             

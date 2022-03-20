@@ -17,13 +17,13 @@ public static class SkillShowSupporter
             switch (ResourceLoadingSetting.AnimationLoadingMode)
             {
                 case ResourceLoadMode.CachAB:
-                    yield return focusingC.Animation_Manger.PreloadPersonalAnim(ResourceDownLoad.BundleURL, unitConfig.TYPE, keyname, unitConfig.SPECIAL_ZOKUSEI, unitConfig._zokusei);
+                    yield return focusingC.Animation_Manger.PreloadPersonalAnim(ResourceDownLoad.BundleURL, unitConfig.TYPE, keyname, unitConfig.SPECIAL_ZOKUSEI, unitConfig.element);
                     break;
                 case ResourceLoadMode.StreamingAssetAB:
-                    yield return focusingC.Animation_Manger.PreloadPersonalAnimStreamingAssetMode(unitConfig.TYPE, keyname, unitConfig.SPECIAL_ZOKUSEI, unitConfig._zokusei);
+                    yield return focusingC.Animation_Manger.PreloadPersonalAnimStreamingAssetMode(unitConfig.TYPE, keyname, unitConfig.SPECIAL_ZOKUSEI, unitConfig.element);
                     break;
                 case ResourceLoadMode.Resource:
-                    yield return focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, keyname, unitConfig.SPECIAL_ZOKUSEI, unitConfig._zokusei);
+                    yield return focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, keyname, unitConfig.SPECIAL_ZOKUSEI, unitConfig.element);
                     break;
             }
             IfShowingSkill = true;

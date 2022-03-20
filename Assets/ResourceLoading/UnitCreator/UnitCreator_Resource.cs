@@ -31,7 +31,7 @@ public partial class UnitCreator
         _D = _ODL._C;        
         _TempModel.SetActive(true);
         // 在角色生成的瞬间各个组件的awake和onenable就已经都开了，而一些数据的初始化是从下一行开始，所以要确保这个过程不会有一些因为变量没被初始化而形成的报错。
-        _D.zokusei = unitConfig._zokusei;
+        _D.element = unitConfig.element;
         yield return (_D.Step1Initialize(unitConfig.TYPE, unitConfig.BASIC_MOVEMENT_PACK,unitConfig.SPECIAL_ZOKUSEI));
         yield return _D;
     }

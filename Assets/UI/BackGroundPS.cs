@@ -29,23 +29,23 @@ public class BackGroundPS : MonoBehaviour
         SwitchBG(-1);
     }
     
-    public void ChangeBGByZokusei(Zokusei _zokusei)
+    public void ChangeBGByZokusei(Element element)
     {
-        switch (_zokusei)
+        switch (element)
         {
-            case Zokusei.darkMagic:
+            case Element.darkMagic:
             Dark();
             break;
-            case Zokusei.blueMagic:
+            case Element.blueMagic:
             Blue();
             break;
-            case Zokusei.greenMagic:
+            case Element.greenMagic:
             Green();
             break;
-            case Zokusei.lightMagic:
+            case Element.lightMagic:
             Light();
             break;
-            case Zokusei.redMagic:
+            case Element.redMagic:
             Red();
             break;
             default:

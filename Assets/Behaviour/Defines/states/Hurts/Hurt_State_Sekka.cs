@@ -6,7 +6,7 @@ namespace Soul
     {
         Color stone = new Color(0.3f, 0.3f, 0.3f);
         Color freeze = new Color(0.1f, 0.1f, 0.8f);
-        void SekkaStart(Zokusei zokusei)
+        void SekkaStart(Element element)
         {
             pasuestart = () =>
             {
@@ -32,10 +32,10 @@ namespace Soul
                 pasueend);
             _BuffsRunner.RunSubCoroutineOfState(pasueCoroutine);
 
-            switch (zokusei)
+            switch (element)
             {
-                case Zokusei.blueMagic:
-                case Zokusei.lightMagic:
+                case Element.blueMagic:
+                case Element.lightMagic:
                     shaderManager.FlatColor(0.5f, freeze);
                     break;
                 default:

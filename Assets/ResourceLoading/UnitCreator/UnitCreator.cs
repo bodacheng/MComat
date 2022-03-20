@@ -14,7 +14,7 @@ public partial class UnitCreator {
             yield break;
         }
         var unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(info.r_id));
-        yield return _D.Step2Initialize (unitConfig.TYPE, info.set, info.level, unitConfig._zokusei, unitConfig.SPECIAL_ZOKUSEI);
+        yield return _D.Step2Initialize (unitConfig.TYPE, info.set, info.level, unitConfig.element, unitConfig.SPECIAL_ZOKUSEI);
         yield return _D;
     }
 }

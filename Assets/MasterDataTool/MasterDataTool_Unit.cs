@@ -67,22 +67,22 @@ public partial class MasterDataTool
                 };
 
                 OutsideDataLink outsideDataLink = character.GetComponent<OutsideDataLink>();
-                switch (outsideDataLink._C.zokusei)
+                switch (outsideDataLink._C.element)
                 {
-                    case Zokusei.blueMagic:
-                        unitConfig._zokusei = Zokusei.blueMagic;
+                    case Element.blueMagic:
+                        unitConfig.element = Element.blueMagic;
                         break;
-                    case Zokusei.redMagic:
-                        unitConfig._zokusei = Zokusei.redMagic;
+                    case Element.redMagic:
+                        unitConfig.element = Element.redMagic;
                         break;
-                    case Zokusei.greenMagic:
-                        unitConfig._zokusei = Zokusei.greenMagic;
+                    case Element.greenMagic:
+                        unitConfig.element = Element.greenMagic;
                         break;
-                    case Zokusei.darkMagic:
-                        unitConfig._zokusei = Zokusei.darkMagic;
+                    case Element.darkMagic:
+                        unitConfig.element = Element.darkMagic;
                         break;
-                    case Zokusei.lightMagic:
-                        unitConfig._zokusei = Zokusei.lightMagic;
+                    case Element.lightMagic:
+                        unitConfig.element = Element.lightMagic;
                         break;
                 }
                 unitConfig.SPECIAL_ZOKUSEI = null; //这个只能后加把。。

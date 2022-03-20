@@ -53,7 +53,7 @@ public partial class UnitCreator
         ODL = _TempModel.GetComponent<OutsideDataLink>();
         _TempDATACENTER = ODL._C;
         // 在角色生成的瞬间各个组件的awake和onenable就已经都开了，而一些数据的初始化是从下一行开始，所以要确保这个过程不会有一些因为变量没被初始化而形成的报错。
-        _TempDATACENTER.zokusei = _TempCharacterResourceInfo._zokusei;
+        _TempDATACENTER.element = _TempCharacterResourceInfo.element;
         yield return (_TempDATACENTER.Step1Initialize(_TempCharacterResourceInfo.TYPE, _TempCharacterResourceInfo.BASIC_MOVEMENT_PACK,_TempCharacterResourceInfo.SPECIAL_ZOKUSEI));
         yield return _TempDATACENTER;
     }
@@ -61,7 +61,7 @@ public partial class UnitCreator
     /////////////// For Debug  //////////////
     public IEnumerator CreateCharacterFromABByStreamingAssets(UnitInfo _CharacterDataInfo,
                                                               string AIScriptName,
-                                                              Zokusei _zokusei,
+                                                              Element element,
                                                               string personalMagic,
                                                               Team team,
                                                               Vector3 pos, Quaternion Q)

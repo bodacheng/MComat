@@ -1,4 +1,4 @@
-﻿public enum Zokusei
+﻿public enum Element
 {
     darkMagic = 1,
     lightMagic = 2,

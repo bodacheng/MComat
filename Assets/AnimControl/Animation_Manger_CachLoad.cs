@@ -148,18 +148,18 @@ public partial class Animation_Manger
     //本函数的改造方向是所有基础类动作全部从某个包里读取。
     //主意看参数toLoadSkillAnimsNames，这些只是技能类key的名字
     //另外，本模块现在肩负起提前构建对象池的任务。就是所有的hurtobject。这样一来这个模块现在是和BO_E模块产生密切关系
-    public IEnumerator PreloadPersonalAnims(string url,string type, List<string> toLoadSkillAnimsNames, string personalMagic, Zokusei _zokusei)
+    public IEnumerator PreloadPersonalAnims(string url,string type, List<string> toLoadSkillAnimsNames, string personalMagic, Element element)
     {
         if (toLoadSkillAnimsNames != null)
         {
             foreach (string anim_name in toLoadSkillAnimsNames)
             {
-                yield return PreloadPersonalAnim(url,type, anim_name, personalMagic, _zokusei);
+                yield return PreloadPersonalAnim(url,type, anim_name, personalMagic, element);
             }
         }
     }
 
-    public IEnumerator PreloadPersonalAnim(string url,string type,string toLoadSkillAnimName, string personalMagic, Zokusei _zokusei)
+    public IEnumerator PreloadPersonalAnim(string url,string type,string toLoadSkillAnimName, string personalMagic, Element element)
     {
         if (toLoadAnims.ContainsKey(toLoadSkillAnimName))
         {
@@ -177,27 +177,27 @@ public partial class Animation_Manger
                 {
                     if (e.functionName == "MagicForward")
                     {
-                        yield return (HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
+                        yield return (HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, element));
                     }
                     if (e.functionName == "PrepareOneMagic")
                     {
-                        yield return (HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, _zokusei));
+                        yield return (HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, element));
                     }
                     if (e.functionName == "Bullet_shoot_from_body_part")
                     {
                         switch (e.intParameter)
                         {
                             case 1:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, element));
                                 break;
                             case 2:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("big_bullet", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("big_bullet", personalMagic, element));
                                 break;
                             case 3:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("super_bullet", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("super_bullet", personalMagic, element));
                                 break;
                             default:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, element));
                                 break;
                         }
                     }
@@ -206,16 +206,16 @@ public partial class Animation_Manger
                         switch (e.intParameter)
                         {
                             case 0:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element));
                             break;
                             case 1:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element));
                             break;
                             case 2:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("big_blast", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("big_blast", personalMagic, element));
                             break;
                             default:
-                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, _zokusei));
+                                yield return (HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element));
                             break;
                         }
                     }

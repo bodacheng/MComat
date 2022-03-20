@@ -3,6 +3,7 @@ using DummyLayerSystem;
 using UnityEngine;
 using UnityEngine.UI;
 using FightScene;
+using UniRx;
 
 public class FightingStepLayer : UILayer
 {
@@ -24,12 +25,6 @@ public class FightingStepLayer : UILayer
     
     public static FightingStepLayer target;
     
-    public void Refresh()
-    {
-        team1UI.Refresh(RTFightManager.target.team1.RMode_Unit.Value);
-        team2UI.Refresh(RTFightManager.target.team2.RMode_Unit.Value);
-    }
-    
     public static FightingStepLayer Get()
     {
         var l = UILayerLoader.Get("FightingStepLayer");
@@ -41,7 +36,7 @@ public class FightingStepLayer : UILayer
         return returnValue;
     }
     
-    public static FightingStepLayer Open()
+    public static FightingStepLayer Open(bool active = true)
     {
         var returnValue = Get();
         if (returnValue != null)
@@ -68,18 +63,13 @@ public class FightingStepLayer : UILayer
         returnValue.Team1Auto.isOn = RTFightManager.target.team1.Auto;
         returnValue.Team2Auto.isOn = RTFightManager.target.team2.Auto;
         
+        returnValue.gameObject.SetActive(active);
         return returnValue;
     }
     
     void StartUp(Action<bool> switchTeam1Auto, Action<bool> switchTeam2Auto, Action pauseAction, Action cameraSwitchAction)
     {
         target = this;
-        
-        InputsManager.ZokuseiButtonRegister(Zokusei.blueMagic);
-        InputsManager.ZokuseiButtonRegister(Zokusei.redMagic);
-        InputsManager.ZokuseiButtonRegister(Zokusei.greenMagic);
-        InputsManager.ZokuseiButtonRegister(Zokusei.darkMagic);
-        InputsManager.ZokuseiButtonRegister(Zokusei.lightMagic);
         
         RTFightManager.target.team1.InputsManager = InputsManager;
         RTFightManager.target.team2.InputsManager = InputsManager;
@@ -97,7 +87,6 @@ public class FightingStepLayer : UILayer
         team2UI.teamConfig = RTFightManager.target.EnemyTeamConfig;
         team1UI.teamConfig.playID = NetFightScene.Fight.team1ID;
         team2UI.teamConfig.playID = NetFightScene.Fight.team2ID;
-
         team1UI.TeamMembers = RTFightManager.target.team1.TeamMembers;
         team2UI.TeamMembers = RTFightManager.target.team2.TeamMembers;
         

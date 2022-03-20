@@ -10,7 +10,7 @@ public class UnitConfig
     public string showNameEN;
     public string showNameCN;
     public string showNameJP;
-    public Zokusei _zokusei = Zokusei.lightMagic;
+    public Element element = Element.lightMagic;
     public string SPECIAL_ZOKUSEI;
     public string BASIC_MOVEMENT_PACK = "basic_anim";//monsterTable BasicMoveSet
     public MoveType MoveType = MoveType.Move_normal;//monsterTable moveType

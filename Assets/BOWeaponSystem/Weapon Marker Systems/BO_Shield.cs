@@ -44,7 +44,7 @@ public class BO_Shield : MonoBehaviour {
 	public bool DisableShieldOnDeath;
 
     [Tooltip("属性")]
-    public Zokusei zokusei;
+    public Element element;
 
     int _hpCounter;
     DecompositionerPool _hitSparks, shieldBreakSpark;
@@ -52,7 +52,7 @@ public class BO_Shield : MonoBehaviour {
 
     void Awake()
     {
-        personalEffectPath = FightGlobalSetting.EffectPathDefine(zokusei);
+        personalEffectPath = FightGlobalSetting.EffectPathDefine(element);
     }
 
     public void PlusHP(int plus)

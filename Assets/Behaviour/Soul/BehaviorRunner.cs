@@ -16,17 +16,17 @@ namespace Soul
         public SkillCancelFlag _SkillCancelFlag;
         #endregion
         
-        #region 辅助模块：控制器
-        public readonly Controller controller = new Controller();
-        #endregion
-        
         #region 运行时活参数
         public readonly SingleFightLog SingleFightLog = new SingleFightLog();
         public IDictionary<string, Behavior> BehaviourDic = new Dictionary<string, Behavior>();
         public IDictionary<string, SkillEntity> SkillEntityDic;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
         public SkillEntity CurrentSKillEntity;
         SkillEntity tempSKillEntity;
-
+        
+        #region 辅助模块：控制器
+        readonly Controller controller = new Controller();
+        #endregion
+        
         readonly Empty_State empty_State = new Empty_State();
         Behavior _nowBehavior;
         Behavior _lastBehavior;

@@ -126,10 +126,10 @@ namespace mainMenu
         
         // 技能按钮渲染与处理
         List<GameObject> renderPs = new List<GameObject>();
-        async void RenderButton(Zokusei zokusei, GameObject button, int splevel)
+        async void RenderButton(Element element, GameObject button, int splevel)
         {
             await Observable.TimerFrame(5);
-            GameObject t = ZokuseiStoneTagsGroup.CreateOneButtonIcon(zokusei,splevel);
+            GameObject t = ZokuseiStoneTagsGroup.CreateOneButtonIcon(element,splevel);
             t.layer = 5;//UI Layer
             foreach (Transform _t in t.transform)
             {
@@ -160,7 +160,7 @@ namespace mainMenu
             PageBGBtn.onClick.RemoveAllListeners();
             if (_watchingCharInfo != null && _watchingCharInfo.set != null)
             {
-                SkillScriptReader(_watchingCharInfo.set, unitConfig._zokusei);
+                SkillScriptReader(_watchingCharInfo.set, unitConfig.element);
             }
             void BFBtnForRefresh()
             {
@@ -170,9 +170,9 @@ namespace mainMenu
         }
 
         // 打印出技能显示画面
-        void SkillScriptReader(SkillSet nineAndTwo, Zokusei zokusei)
+        void SkillScriptReader(SkillSet nineAndTwo, Element element)
         {
-            EffectsManager.StartUp(zokusei);
+            EffectsManager.StartUp(element);
             DestroyFloatingMarks();
             ClearRenderPs();
             _skillStoneDetail.RefreshInfo((SkillEntity)null);
@@ -214,7 +214,7 @@ namespace mainMenu
                 
                 newShow.transform.position = pos + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
                 newShow.gameObject.SetActive(true);
-                RenderButton(zokusei,newShow.gameObject,attack_chuan[i].SP_LEVEL);
+                RenderButton(element,newShow.gameObject,attack_chuan[i].SP_LEVEL);
             }
 
             IDictionary<int, SkillEntity> Fire1_chuan = nineAndTwo.GetAttack2Chuan();
@@ -233,7 +233,7 @@ namespace mainMenu
                 Vector3 pos = fire1T.transform.position;
                 newShow.transform.position = pos + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
                 newShow.gameObject.SetActive(true);
-                RenderButton(zokusei,newShow.gameObject,Fire1_chuan[i].SP_LEVEL);
+                RenderButton(element,newShow.gameObject,Fire1_chuan[i].SP_LEVEL);
             }
              
             IDictionary<int, SkillEntity> Fire2_chuan = nineAndTwo.GetAttack3Chuan();
@@ -252,7 +252,7 @@ namespace mainMenu
                 Vector3 pos = fire2T.transform.position;
                 newShow.transform.position = pos + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
                 newShow.gameObject.SetActive(true);
-                RenderButton(zokusei,newShow.gameObject,Fire2_chuan[i].SP_LEVEL);
+                RenderButton(element,newShow.gameObject,Fire2_chuan[i].SP_LEVEL);
             }
         }
 

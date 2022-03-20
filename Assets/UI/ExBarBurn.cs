@@ -5,7 +5,7 @@ public class ExBarBurn : MonoBehaviour
 {
     void Awake()
     {
-        EffectsManager.INIEffectsPool("ui_exbarburn", FightGlobalSetting.EffectPathDefine(Zokusei.Null), 3);
+        EffectsManager.INIEffectsPool("ui_exbarburn", FightGlobalSetting.EffectPathDefine(Element.Null), 3);
     }
 
     void OnDisable()

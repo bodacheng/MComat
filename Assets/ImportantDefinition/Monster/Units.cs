@@ -186,7 +186,7 @@ public static class Units
                     RECORD_ID = Config.RECORD_ID,
                     MONSTER_TYPE = Config.TYPE,
                     REAL_NAME = Config.REAL_NAME,
-                    ZOKUSEI = ((int)Config._zokusei).ToString(),
+                    ZOKUSEI = ((int)Config.element).ToString(),
                     SPECIAL_ZOKUSEI = Config.SPECIAL_ZOKUSEI,
                     BASIC_MOVEMENT_PACK = Config.BASIC_MOVEMENT_PACK
                 };
@@ -299,7 +299,7 @@ public static class Units
             RECORD_ID = config.RECORD_ID,
             MONSTER_TYPE = config.TYPE,
             REAL_NAME = config.REAL_NAME,
-            ZOKUSEI = ((int)config._zokusei).ToString(),
+            ZOKUSEI = ((int)config.element).ToString(),
             SPECIAL_ZOKUSEI = config.SPECIAL_ZOKUSEI,
             BASIC_MOVEMENT_PACK = config.BASIC_MOVEMENT_PACK
         };
@@ -347,22 +347,22 @@ public static class Units
         switch (row.ZOKUSEI)
         {
             case "4":
-                _Config._zokusei = Zokusei.blueMagic;
+                _Config.element = Element.blueMagic;
                 break;
             case "3":
-                _Config._zokusei = Zokusei.redMagic;
+                _Config.element = Element.redMagic;
                 break;
             case "5":
-                _Config._zokusei = Zokusei.greenMagic;
+                _Config.element = Element.greenMagic;
                 break;
             case "1":
-                _Config._zokusei = Zokusei.darkMagic;
+                _Config.element = Element.darkMagic;
                 break;
             case "2":
-                _Config._zokusei = Zokusei.lightMagic;
+                _Config.element = Element.lightMagic;
                 break;
             default:
-                _Config._zokusei = Zokusei.lightMagic;
+                _Config.element = Element.lightMagic;
                 break;
         }
 

@@ -24,7 +24,7 @@ namespace HittingDetection
         [Tooltip("特效是否有粘身视效")]
         public bool effectSpreadOnBody;
         [Tooltip("魔法特效路径(blueMagic redMagic)")]
-        public Zokusei zokusei;
+        public Element element;
         [Tooltip("启动特效")]
         public string muzzle;
         [Tooltip("特殊爆炸特效")]

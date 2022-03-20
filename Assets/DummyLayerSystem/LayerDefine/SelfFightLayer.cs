@@ -61,11 +61,11 @@ namespace mainMenu
         {
             foreach (var Icon in teamButtonDic_M.GetValues())
             {
-                Icon.ChangeIcon(null, Zokusei.Null);
+                Icon.ChangeIcon(null, Element.Null);
             }
             foreach (var Icon in teamButtonDic_R.GetValues())
             {
-                Icon.ChangeIcon(null, Zokusei.Null);
+                Icon.ChangeIcon(null, Element.Null);
             }
             
             _team1PosKeySet_M = new PosKeySet();
@@ -248,11 +248,11 @@ namespace mainMenu
                 var _one = MyMonsters.Get(PosInstanceId);
                 var unitConfig = Units.GetUnitConfig(_one.r_id);
                 tar.ChangeIcon(unitConfig == null ? null : MonsterIconDic.Get(unitConfig.RECORD_ID),
-                    unitConfig == null ? Zokusei.Null : unitConfig._zokusei);
+                    unitConfig == null ? Element.Null : unitConfig.element);
             }
             else
             {
-                tar.ChangeIcon(null, Zokusei.Null);
+                tar.ChangeIcon(null, Element.Null);
             }
         }
         
@@ -263,7 +263,7 @@ namespace mainMenu
                 var heroIcon = icons[i];
                 teamButtonDic_M.Set(team, i, heroIcon);
                 DicAdd<HeroIcon, int>.Add(IconNumCheck, heroIcon, i);
-                heroIcon.ChangeIcon(null, Zokusei.Null);
+                heroIcon.ChangeIcon(null, Element.Null);
                 
                 void SelectedRender()
                 {
@@ -286,7 +286,7 @@ namespace mainMenu
                 var heroIcon = icons[i];
                 teamButtonDic_R.Set(team, i, heroIcon);
                 DicAdd<HeroIcon, int>.Add(IconNumCheck, heroIcon, i);
-                heroIcon.ChangeIcon(null, Zokusei.Null);
+                heroIcon.ChangeIcon(null, Element.Null);
                 heroIcon.iconButton.onClick.RemoveAllListeners();
                 heroIcon.iconButton.onClick.AddListener(() => {OnTeamPosBtn(team, IconNumCheck[heroIcon]);});
                 heroIcon.iconButton.onClick.AddListener(() => HeroIcon.SelectedFeature(heroIcon, selectedFrame, 110f));

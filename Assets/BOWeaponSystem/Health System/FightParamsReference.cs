@@ -124,7 +124,7 @@ public partial class FightParamsReference
         if (Center._ResistanceManager.Resistance.Value > 0)
         {
             EffectsManager.GenerateEffect("shield_hit",
-            FightGlobalSetting.EffectPathDefine(damage.from_weapon.zokusei),
+            FightGlobalSetting.EffectPathDefine(damage.from_weapon.element),
             damage.DamageEffectPoint,
             damage.CutRotation,
             null);
@@ -143,7 +143,7 @@ public partial class FightParamsReference
                     _temp = "light_hit";
                     break;
             }
-            EffectsManager.GenerateEffect(_temp, FightGlobalSetting.EffectPathDefine(damage.from_weapon.zokusei),
+            EffectsManager.GenerateEffect(_temp, FightGlobalSetting.EffectPathDefine(damage.from_weapon.element),
             damage.DamageEffectPoint,
             damage.CutRotation,
             damage.from_weapon.effectSpreadOnBody ? Center.geometryCenter : null);
@@ -237,25 +237,25 @@ public partial class FightParamsReference
     }
     
     Color _damagecolor;
-    public void RunShaderChangeProcess(Zokusei zokusei, float time)
+    public void RunShaderChangeProcess(Element element, float time)
     {
         if (Center._ShaderManager != null)
         {
-            switch (zokusei)
+            switch (element)
             {
-                case Zokusei.redMagic:
+                case Element.redMagic:
                     _damagecolor = Color.red;
                     break;
-                case Zokusei.blueMagic:
+                case Element.blueMagic:
                     _damagecolor = Color.blue;
                     break;
-                case Zokusei.greenMagic:
+                case Element.greenMagic:
                     _damagecolor = Color.green;
                     break;
-                case Zokusei.darkMagic:
+                case Element.darkMagic:
                     _damagecolor = new Color(1f, 0f, 1f);
                     break;
-                case Zokusei.lightMagic:
+                case Element.lightMagic:
                     _damagecolor = new Color(0f, 1f, 1f);
                     break;
                 default:

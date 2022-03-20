@@ -16,14 +16,14 @@ namespace FightScene
         
         public TeamMode TeamMode;
         public TeamConfig teamConfig;
-        
         public MultiDict<int, int, Data_Center> TeamMembers;
-
         public readonly IDictionary<Data_Center, SideCharIcon> UnitIconDic = new Dictionary<Data_Center, SideCharIcon>();
+        
+        private IDisposable barPosUpdate;
         
         public SideCharIcon GetSideIcon(Data_Center d)
         {
-            return UnitIconDic.ContainsKey(d) ? UnitIconDic[d]: null;
+            return UnitIconDic[d];
         }
         
         public void Clear()
@@ -38,23 +38,6 @@ namespace FightScene
                     break;
             }
         }
-
-        public void localUpdate()
-        {
-            if (teamConfig.myTeam != RTFightManager.playerTeam)
-            {
-                BarsPosUpdate();
-            }
-        }
-        
-        void BarsPosUpdate()
-        {
-            foreach (var _one in TeamMembers.GetValues())
-            {
-                UnitIconDic.TryGetValue(_one, out var _tempSI);
-                _tempSI.transform.position = Vector3.Lerp(_tempSI.transform.position, CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 3f), Time.deltaTime * 20f);
-            }
-        }
         
         public void InsTeamUI(Action<Data_Center> changeUnit, ReactiveProperty<Data_Center> RMode_Unit)
         {
@@ -62,15 +45,34 @@ namespace FightScene
             {
                 case TeamMode.multiRaid:
                     InsTeamUI_Multi();
+                    if (teamConfig.myTeam != RTFightManager.playerTeam)
+                    {
+                        barPosUpdate = Observable.IntervalFrame(30).Subscribe(_ =>
+                        {
+                            foreach (var _one in TeamMembers.GetValues())
+                            {
+                                UnitIconDic.TryGetValue(_one, out var _tempSI);
+                                _tempSI.transform.position = Vector3.Lerp(_tempSI.transform.position, CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 3f), Time.deltaTime * 20f);
+                            }
+                        }).AddTo(gameObject);
+                    }
                     break;
                 case TeamMode.rotation:
                     IniTeamUI_Rotate(changeUnit);
                     IniComboHit(RMode_Unit);
-                    RMode_Unit.Subscribe(
-                        x =>
+                    RMode_Unit.Subscribe(Refresh).AddTo(gameObject);
+                    if (teamConfig.myTeam != RTFightManager.playerTeam)
                     {
-                        FightingStepLayer.target.Refresh();
-                    }).AddTo(gameObject);
+                        barPosUpdate = Observable.IntervalFrame(30).Subscribe(_ =>
+                            {
+                                if (teamConfig.myTeam != RTFightManager.playerTeam)
+                                {
+                                    UnitIconDic.TryGetValue(RMode_Unit.Value, out var _tempSI);
+                                    _tempSI.transform.position = Vector3.Lerp(_tempSI.transform.position, CameraManager._camera.WorldToScreenPoint(RMode_Unit.Value.transform.position + Vector3.up * 3f), Time.deltaTime * 20f);
+                                }
+                            }
+                        ).AddTo(gameObject);
+                    }
                     break;
             }
         }
@@ -85,13 +87,13 @@ namespace FightScene
             UnitIconDic.TryGetValue(data_Center, out var _tempSI);
             _tempSI.RefreshHpBar(current_hp, wholeHP);
         }
-        void RefreshExBar(Data_Center data_Center, int current_ex, int wholeex)
+        void RefreshExBar(Data_Center data_Center, int current_ex, int wholeEx)
         {
             UnitIconDic.TryGetValue(data_Center, out var _tempSI);
-            _tempSI.RefreshExBar(current_ex, wholeex);
+            _tempSI.RefreshExBar(current_ex, wholeEx);
         }
         
-        public void Refresh(Data_Center fighting = null)
+        void Refresh(Data_Center fighting = null)
         {
             foreach (var _dt in TeamMembers.GetValues())
             {

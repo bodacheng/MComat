@@ -34,15 +34,15 @@ public partial class HurtObjectManager
         }
     }
 
-    public static IEnumerator ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Zokusei zokusei)
+    public static IEnumerator ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Element element)
     {
          switch(ResourceLoadingSetting.MagicLoadingMode)
          {
             case ResourceLoadMode.CachAB:
-            yield return ConstructHurtObjectPoolFromCach(resource_name, MagicForwardPath, zokusei);
+            yield return ConstructHurtObjectPoolFromCach(resource_name, MagicForwardPath, element);
             break;
             case ResourceLoadMode.Resource:
-            yield return ConstructHurtObjectPoolResourceMode(resource_name, MagicForwardPath, zokusei);
+            yield return ConstructHurtObjectPoolResourceMode(resource_name, MagicForwardPath, element);
             break;
             case ResourceLoadMode.StreamingAssetAB:
             break;
@@ -78,9 +78,9 @@ public partial class HurtObjectManager
         }
         
         // 第三轮
-        if (myDefaultMagicPath != FightGlobalSetting.EffectPathDefine(Zokusei.Null))
+        if (myDefaultMagicPath != FightGlobalSetting.EffectPathDefine(Element.Null))
         {
-            myDefaultMagicPath = FightGlobalSetting.EffectPathDefine(Zokusei.Null);
+            myDefaultMagicPath = FightGlobalSetting.EffectPathDefine(Element.Null);
             if (HurtPoolDic.ContainsKey(myDefaultMagicPath + "/" + resource_name))
             {
                 HurtPoolDic.TryGetValue(myDefaultMagicPath + "/" + resource_name, out HurtObjectPool);

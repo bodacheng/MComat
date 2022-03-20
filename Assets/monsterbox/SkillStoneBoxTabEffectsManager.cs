@@ -5,7 +5,7 @@ namespace mainMenu
 {
     public class SkillStoneBoxTabEffectsManager : MonoBehaviour
     {
-        readonly IDictionary<Zokusei, ZokuseiStoneTagsGroup> zokuseiBtnEffects = new Dictionary<Zokusei, ZokuseiStoneTagsGroup>();
+        readonly IDictionary<Element, ZokuseiStoneTagsGroup> zokuseiBtnEffects = new Dictionary<Element, ZokuseiStoneTagsGroup>();
         ZokuseiStoneTagsGroup _focusingEffectsGroup;
         GameObject triggerExplosionPrefab;
         ParticleSystem triggerExplosion0;
@@ -21,29 +21,29 @@ namespace mainMenu
             }
         }
         
-        public void StartUp(Zokusei zokusei)
+        public void StartUp(Element element)
         {
-            if (zokuseiBtnEffects.ContainsKey(zokusei))
+            if (zokuseiBtnEffects.ContainsKey(element))
                 return;
             ZokuseiStoneTagsGroup zt = new ZokuseiStoneTagsGroup();
-            zt.INI_forSkillStoneBox(zokusei, transform);
-            zokuseiBtnEffects.Add(zokusei, zt);
+            zt.INI_forSkillStoneBox(element, transform);
+            zokuseiBtnEffects.Add(element, zt);
             string path = null;
-            switch (zokusei)
+            switch (element)
             {
-                case Zokusei.blueMagic:
+                case Element.blueMagic:
                     path = "blueMagic";
                     break;
-                case Zokusei.darkMagic:
+                case Element.darkMagic:
                     path = "darkMagic";
                     break;
-                case Zokusei.greenMagic:
+                case Element.greenMagic:
                     path = "greenMagic";
                     break;
-                case Zokusei.lightMagic:
+                case Element.lightMagic:
                     path = "lightMagic";
                     break;
-                case Zokusei.redMagic:
+                case Element.redMagic:
                     path = "redMagic";
                     break;
                 default:
@@ -65,17 +65,17 @@ namespace mainMenu
             }
         }
         
-        public void SwitchZokusei(Zokusei zokusei)
+        public void SwitchZokusei(Element element)
         {
-            StartUp(zokusei);
+            StartUp(element);
             if (_focusingEffectsGroup != null)
             {
                 _focusingEffectsGroup.CloseTagEffects();
             }
             
-            if (zokuseiBtnEffects.ContainsKey(zokusei))
+            if (zokuseiBtnEffects.ContainsKey(element))
             {
-                _focusingEffectsGroup = zokuseiBtnEffects[zokusei];
+                _focusingEffectsGroup = zokuseiBtnEffects[element];
             }else{
                 Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
             }

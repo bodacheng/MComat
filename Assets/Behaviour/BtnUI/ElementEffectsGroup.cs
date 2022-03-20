@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ZokuseiButtonEffectsGroup
+public class ElementEffectsGroup
 {
     //攻击键系成员
     IDictionary<Button, IDictionary<int, ParticleSystem>> buttonEffectsSets = new Dictionary<Button, IDictionary<int, ParticleSystem>>(); 
@@ -83,9 +83,9 @@ public class ZokuseiButtonEffectsGroup
         }
     }
                 
-    public void INI(Transform targetRectT, Zokusei zokusei,Button Attack, Button Fire1, Button Fire2)
+    public void INI(Transform targetRectT, Element element,Button Attack, Button Fire1, Button Fire2)
     {
-        string buttoneffectspath = FightGlobalSetting.EffectPathDefine(zokusei);
+        string buttoneffectspath = FightGlobalSetting.EffectPathDefine(element);
                 
         var buttonslot = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/slot", typeof(GameObject)) as GameObject;
         var normal = Resources.Load("essentialUIElements/buttonEffects" + "/" + buttoneffectspath + "/normal", typeof(GameObject)) as GameObject;

@@ -24,7 +24,7 @@ public class DATACENTERGUI : Editor {
         EditorGUILayout.LabelField("以下项目在新角色构成时请按顺序填写，填写完毕后点击Construct Chracter按钮",title);
         GUILayout.Space(5f);
         
-        myScript.zokusei = (Zokusei)EditorGUILayout.EnumPopup("zokusei", myScript.zokusei);
+        myScript.element = (Element)EditorGUILayout.EnumPopup("zokusei", myScript.element);
         GUILayout.Space(5f);
         EditorGUILayout.LabelField("WholeT", title);
         myScript.WholeT = EditorGUILayout.ObjectField("WholeT", myScript.WholeT, typeof(Transform), true) as Transform;
@@ -175,25 +175,25 @@ public class DATACENTERGUI : Editor {
 
             string bladeName;
             //string shieldName;
-            switch(myScript.zokusei)
+            switch(myScript.element)
             {
-                case Zokusei.darkMagic:
+                case Element.darkMagic:
                     bladeName = "D_enegryBlade";
                     //shieldName = "dark_Shield"; 
                     break;
-                case Zokusei.blueMagic:
+                case Element.blueMagic:
                     bladeName = "B_enegryBlade";
                     //shieldName = "blue_Shield";
                     break;
-                case Zokusei.greenMagic:
+                case Element.greenMagic:
                     bladeName = "G_enegryBlade";
                     //shieldName = "green_Shield";
                     break;
-                case Zokusei.lightMagic:
+                case Element.lightMagic:
                     bladeName = "W_enegryBlade";
                     //shieldName = "light_Shield";
                     break;
-                case Zokusei.redMagic:
+                case Element.redMagic:
                     bladeName = "R_enegryBlade";
                     //shieldName = "red_Shield";
                     break;

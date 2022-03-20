@@ -88,6 +88,8 @@ public class PreparingProcess : FSceneProcess
         ).AddTo(RTFightManager.target);
         
         RTFightManager.target.SetGame(NetFightScene.Fight);
+        
+        FightingStepLayer.Open(false);
     }
     
     public override void ProcessEnter()

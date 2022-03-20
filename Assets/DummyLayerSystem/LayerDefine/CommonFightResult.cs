@@ -28,9 +28,9 @@ public class CommonFightResult : UILayer
         
         foreach (var kv in teamUIManager.UnitIconDic)
         {
-            IconAndSKillShowUISet iassi = Instantiate(IconAndSKillShowUISetPretab);
-            SideCharIcon sideCharIcon = teamUIManager.GetSideIcon(kv.Key);
-            NineForShow nineForShow = Instantiate(NineForShowPretab);
+            var iassi = Instantiate(IconAndSKillShowUISetPretab);
+            var sideCharIcon = teamUIManager.GetSideIcon(kv.Key);
+            var nineForShow = Instantiate(NineForShowPretab);
             NineForShows.Add(nineForShow);
             iassi.Set(sideCharIcon, nineForShow);
             iassi.transform.SetParent(IconAndSKillShowUISetT);

@@ -72,11 +72,11 @@ public partial class GotchaResultLayer : UILayer
                 break;
         }
         
-        Decompositioner screenStar = EffectsManager.GenerateEffect(screenStarName, FightGlobalSetting.EffectPathDefine(Zokusei.Null), waitPos, Quaternion.identity, null);
+        Decompositioner screenStar = EffectsManager.GenerateEffect(screenStarName, FightGlobalSetting.EffectPathDefine(Element.Null), waitPos, Quaternion.identity, null);
         screenStarModels.Add(screenStar);
         screenStar.transform.DOMove(endPos, 2f).OnComplete(() =>
         {
-            Decompositioner effect = EffectsManager.GenerateEffect(explosionName, FightGlobalSetting.EffectPathDefine(Zokusei.Null), endPos, Quaternion.identity, null);
+            Decompositioner effect = EffectsManager.GenerateEffect(explosionName, FightGlobalSetting.EffectPathDefine(Element.Null), endPos, Quaternion.identity, null);
             screenStarExplosionModels.Add(effect);
         });
     }

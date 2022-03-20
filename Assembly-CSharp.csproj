@@ -120,7 +120,7 @@
      <Compile Include="Assets\TouchScript\Scripts\Utils\Attributes\NullToggleAttribute.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\TeamEditLayer.cs" />
      <Compile Include="Assets\BOWeaponSystem\Health System\FightAttriCalReference_CriticalGauge.cs" />
-     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\zokusei.cs" />
+     <Compile Include="Assets\BOWeaponSystem\Weapon Marker Systems\Element.cs" />
      <Compile Include="Assets\UI\SciFic Icons\Scripts\RotationAnimation.cs" />
      <Compile Include="Assets\TouchScript\Scripts\InputSources\IInputSource.cs" />
      <Compile Include="Assets\ImportantDefinition\Skill\HitBoxLogTable.cs" />
@@ -441,7 +441,7 @@
      <Compile Include="Assets\FightSceneSystem\FSceneProcessesRunner.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Utils\Geom\ProjectionUtils.cs" />
      <Compile Include="Assets\TeamUIManager\TeamUIManager.cs" />
-     <Compile Include="Assets\Behaviour\BtnUI\ZokuseiButtonEffectsGroup.cs" />
+     <Compile Include="Assets\Behaviour\BtnUI\ElementEffectsGroup.cs" />
      <Compile Include="Assets\UI\Oldscripts\Save_Trans.cs" />
      <Compile Include="Assets\TutorialManger\processes\SelectASlot\SkillEditA1Try.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\StoneListLayer.cs" />
@@ -472,7 +472,6 @@
      <Compile Include="Assets\TouchScript\Scripts\Gestures\MetaGesture.cs" />
      <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer_Filter.cs" />
      <Compile Include="Assets\TouchScript\Scripts\GestureManager.cs" />
-     <Compile Include="Assets\TeamUIManager\RotationMode\TeamUIManagerRotationMode.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkDubSounds.cs" />
      <Compile Include="Assets\DATA_CENTER\Data_Center_Resource.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiButtonScript.cs" />

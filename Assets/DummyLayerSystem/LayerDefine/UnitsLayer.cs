@@ -91,7 +91,7 @@ namespace mainMenu
                 targetingIcon = Instantiate(noMagic);
                 targetingIcon.name = unitConfig.REAL_NAME + "_icon";
                 targetingIcon.unitConfig = unitConfig;
-                targetingIcon.ChangeIcon(MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig._zokusei);
+                targetingIcon.ChangeIcon(MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig.element);
                 DicAdd<string, HeroIcon>.Add(mainMenuIcons, instanceID, targetingIcon);
             }
             if (clearButtonFeature)

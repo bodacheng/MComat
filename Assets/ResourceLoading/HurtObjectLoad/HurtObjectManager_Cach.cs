@@ -4,7 +4,7 @@ using UnityEngine;
 
 public partial class HurtObjectManager
 {
-    public static IEnumerator ConstructHurtObjectPoolFromCach(string resource_name, string MagicForwardPath, Zokusei zokusei)
+    public static IEnumerator ConstructHurtObjectPoolFromCach(string resource_name, string MagicForwardPath, Element element)
     {
         DecompositionerPool poolToConstruct;
         GameObject hurtObject;
@@ -48,7 +48,7 @@ public partial class HurtObjectManager
                         {
                             for (int i = 0; i < decompositioner.Attachments.Length; i++)
                             {
-                                yield return ConstructHurtObjectPool(decompositioner.Attachments[i],MagicForwardPath,zokusei);
+                                yield return ConstructHurtObjectPool(decompositioner.Attachments[i],MagicForwardPath,element);
                             }
                         }
                     }else{
@@ -60,7 +60,7 @@ public partial class HurtObjectManager
         }
     
         ///////////////第二环节//////////////////         
-        string basicMagicForwardPath = FightGlobalSetting.EffectPathDefine(zokusei);
+        string basicMagicForwardPath = FightGlobalSetting.EffectPathDefine(element);
     
         if (HurtPoolDic.ContainsKey(basicMagicForwardPath + "/" + resource_name))
         {
@@ -94,7 +94,7 @@ public partial class HurtObjectManager
                     {
                         for (int i = 0; i < decompositioner.Attachments.Length; i++)
                         {
-                            yield return ConstructHurtObjectPool(decompositioner.Attachments[i],MagicForwardPath,zokusei);
+                            yield return ConstructHurtObjectPool(decompositioner.Attachments[i],MagicForwardPath,element);
                         }
                     }
                 }else{
@@ -139,7 +139,7 @@ public partial class HurtObjectManager
                         {
                             for (int i = 0; i < decompositioner.Attachments.Length; i++)
                             {
-                                yield return ConstructHurtObjectPool(decompositioner.Attachments[i],MagicForwardPath,zokusei);
+                                yield return ConstructHurtObjectPool(decompositioner.Attachments[i],MagicForwardPath,element);
                             }
                         }
                     }else{

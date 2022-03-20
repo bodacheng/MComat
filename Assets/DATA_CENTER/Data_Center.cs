@@ -11,7 +11,7 @@ using Soul;
 public partial class Data_Center : MonoBehaviour
 {
     public TeamConfig _TeamConfig = TeamConfig.defaultSet;
-    public Zokusei zokusei;
+    public Element element;
     public Transform geometryCenter;
     public Transform WholeT;
     public AudioSource _AudioSource;
@@ -77,7 +77,7 @@ public partial class Data_Center : MonoBehaviour
                     break;
             }
             Animation_Manger.PrepareHurtAndKnockOffAnimations(type);
-            yield return _BO_Ani_E.BasicMagicAndEffectsPathDefine(zokusei, personalMagicPath);
+            yield return _BO_Ani_E.BasicMagicAndEffectsPathDefine(element, personalMagicPath);
             //if (this.blendShapeProxy != null && this.blendShapeProxy.VRMBlendShapeProxy != null)
             //    this.blendShapeProxy.VRMBlendShapeProxy.AvaterRemerge(this.WholeT);
             //else
@@ -107,7 +107,7 @@ public partial class Data_Center : MonoBehaviour
         }
     }
     
-    public IEnumerator Step2Initialize(string type, SkillSet _NineAndTwo, int level, Zokusei _zokusei, string personalMagic)
+    public IEnumerator Step2Initialize(string type, SkillSet _NineAndTwo, int level, Element element, string personalMagic)
     {
         if (!phase2Initialized)
         {
@@ -119,18 +119,18 @@ public partial class Data_Center : MonoBehaviour
         _MyBehaviorRunner.FormFightingSetsByNineAndTwo(_NineAndTwo, level);
         _MyBehaviorRunner.INIStates(this);
         
-        EffectsManager.INIEffectsPool("short_effect", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
-        EffectsManager.INIEffectsPool("normal_effect", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
-        EffectsManager.INIEffectsPool("long_effect", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
-        EffectsManager.INIEffectsPool("Sparks", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
-        EffectsManager.INIEffectsPool("hitwave", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
-        EffectsManager.INIEffectsPool("light_hit", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
-        EffectsManager.INIEffectsPool("heavy_hit", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
-        EffectsManager.INIEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
-        EffectsManager.INIEffectsPool("resistanceUp", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
-        EffectsManager.INIEffectsPool("on_enable_effect", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
-        EffectsManager.INIEffectsPool("FlashStart", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
-        EffectsManager.INIEffectsPool("FlashEnd", FightGlobalSetting.EffectPathDefine(_zokusei), 3);
+        EffectsManager.INIEffectsPool("short_effect", FightGlobalSetting.EffectPathDefine(element), 3);
+        EffectsManager.INIEffectsPool("normal_effect", FightGlobalSetting.EffectPathDefine(element), 3);
+        EffectsManager.INIEffectsPool("long_effect", FightGlobalSetting.EffectPathDefine(element), 3);
+        EffectsManager.INIEffectsPool("Sparks", FightGlobalSetting.EffectPathDefine(element), 3);
+        EffectsManager.INIEffectsPool("hitwave", FightGlobalSetting.EffectPathDefine(element), 3);
+        EffectsManager.INIEffectsPool("light_hit", FightGlobalSetting.EffectPathDefine(element), 3);
+        EffectsManager.INIEffectsPool("heavy_hit", FightGlobalSetting.EffectPathDefine(element), 3);
+        EffectsManager.INIEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(element), 3);
+        EffectsManager.INIEffectsPool("resistanceUp", FightGlobalSetting.EffectPathDefine(element), 3);
+        EffectsManager.INIEffectsPool("on_enable_effect", FightGlobalSetting.EffectPathDefine(element), 3);
+        EffectsManager.INIEffectsPool("FlashStart", FightGlobalSetting.EffectPathDefine(element), 3);
+        EffectsManager.INIEffectsPool("FlashEnd", FightGlobalSetting.EffectPathDefine(element), 3);
         
         //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
         // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
@@ -138,13 +138,13 @@ public partial class Data_Center : MonoBehaviour
         switch (ResourceLoadingSetting.AnimationLoadingMode)
         {
             case ResourceLoadMode.CachAB:
-                yield return (Animation_Manger.PreloadPersonalAnims(ResourceDownLoad.BundleURL + "/animClips",type, toLoadSkillAnimsNames, personalMagic, _zokusei));
+                yield return (Animation_Manger.PreloadPersonalAnims(ResourceDownLoad.BundleURL + "/animClips",type, toLoadSkillAnimsNames, personalMagic, element));
             break;
             case ResourceLoadMode.Resource:
-                yield return (Animation_Manger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));
+                yield return (Animation_Manger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, personalMagic, element));
             break;
             case ResourceLoadMode.StreamingAssetAB:
-                yield return (Animation_Manger.PreloadPersonalAnimsStreamingAssetMode(type, toLoadSkillAnimsNames, personalMagic, _zokusei));
+                yield return (Animation_Manger.PreloadPersonalAnimsStreamingAssetMode(type, toLoadSkillAnimsNames, personalMagic, element));
             break;
         }
     }

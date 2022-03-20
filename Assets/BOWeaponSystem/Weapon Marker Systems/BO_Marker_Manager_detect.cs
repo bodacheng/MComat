@@ -337,10 +337,10 @@ namespace HittingDetection
                 UnityEngine.Events.UnityAction we_C = WeaponEnergyExaust;
                 WeaponEnergyExaustMissions.Add(we_C);
             }
-            if (!(zokusei == Zokusei.Null && _WeaponMode == WeaponMode.EnergyFromBodyWeapon)) // 不希望普攻hitbox有能量消逝火花
-                EffectsManager.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(zokusei), hitPointPara.onBodyPos, hitPointPara.qua, null);
+            if (!(element == Element.Null && _WeaponMode == WeaponMode.EnergyFromBodyWeapon)) // 不希望普攻hitbox有能量消逝火花
+                EffectsManager.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(element), hitPointPara.onBodyPos, hitPointPara.qua, null);
             else{
-                EffectsManager.GenerateEffect("hitwave", FightGlobalSetting.EffectPathDefine(zokusei), hitPointPara.onBodyPos, hitPointPara.qua, null);
+                EffectsManager.GenerateEffect("hitwave", FightGlobalSetting.EffectPathDefine(element), hitPointPara.onBodyPos, hitPointPara.qua, null);
             }
         }
         

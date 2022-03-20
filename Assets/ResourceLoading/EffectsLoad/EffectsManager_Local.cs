@@ -20,12 +20,12 @@ public partial class EffectsManager
                 EffectPool = ConstructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects/" + EffectsPath + "/" + resource_name,object_count);
                 return EffectPool;
             }
-            if (EffectsPath == FightGlobalSetting.EffectPathDefine(Zokusei.Null))
+            if (EffectsPath == FightGlobalSetting.EffectPathDefine(Element.Null))
             {
                 return null;//防止无限循环
             }
         }
-        EffectPool = INIEffectsPool(resource_name, FightGlobalSetting.EffectPathDefine(Zokusei.Null), object_count);
+        EffectPool = INIEffectsPool(resource_name, FightGlobalSetting.EffectPathDefine(Element.Null), object_count);
         return EffectPool;
     }
 }

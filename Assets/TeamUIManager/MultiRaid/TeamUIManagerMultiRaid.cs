@@ -35,7 +35,7 @@ namespace FightScene
                     });
                     var unitInfo = RTFightManager.target.UnitInfoRef[center];
                     var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
-                    _SideIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Get(unitInfo.r_id), unitConfig._zokusei);
+                    _SideIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Get(unitInfo.r_id), unitConfig.element);
                     _SideIcon.gameObject.SetActive(true);
                 }
                 else
@@ -58,7 +58,7 @@ namespace FightScene
                 DicAdd<Data_Center, SideCharIcon>.Add(UnitIconDic, center, _SideIcon);
                 
                 // 魔法按键
-                _inputsManager.ZokuseiButtonRegister(center.zokusei);
+                _inputsManager.ZokuseiButtonRegister(center.element);
                 
                 var maxHp = center.FightDataRef.CurrentHp.Value;
                 center.FightDataRef.CurrentHp.Subscribe(x =>

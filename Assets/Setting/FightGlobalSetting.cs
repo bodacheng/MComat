@@ -69,27 +69,27 @@ public class FightGlobalSetting : ScriptableObject
     
     public static int _HurtObjectPreLoadCount;
 
-    public static string EffectPathDefine(Zokusei zokusei)
+    public static string EffectPathDefine(Element element)
     {
         string personalEffectPath;
-        switch (zokusei)
+        switch (element)
         {
-            case Zokusei.blueMagic:
+            case Element.blueMagic:
                 personalEffectPath = "bluemagic";
                 break;
-            case Zokusei.redMagic:
+            case Element.redMagic:
                 personalEffectPath = "redmagic";
                 break;
-            case Zokusei.greenMagic:
+            case Element.greenMagic:
                 personalEffectPath = "greenmagic";
                 break;
-            case Zokusei.lightMagic:
+            case Element.lightMagic:
                 personalEffectPath = "lightmagic";
                 break;
-            case Zokusei.darkMagic:
+            case Element.darkMagic:
                 personalEffectPath = "darkmagic";
                 break;
-            case Zokusei.Null:
+            case Element.Null:
                 personalEffectPath = "defaultmagic";
                 break;
             default:

@@ -14,22 +14,22 @@ public class HeroIcon : MonoBehaviour {
     [FormerlySerializedAs("CharDataInfo")] public UnitInfo unitInfo;
     public UnitConfig unitConfig;
     
-    static IDictionary<Zokusei, Sprite> frames = new Dictionary<Zokusei, Sprite>();
+    static IDictionary<Element, Sprite> frames = new Dictionary<Element, Sprite>();
     
     public static void INIFrames()
     {
-        if (!frames.ContainsKey(Zokusei.blueMagic))
-            frames.Add(Zokusei.blueMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
-        if (!frames.ContainsKey(Zokusei.redMagic))
-            frames.Add(Zokusei.redMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
-        if (!frames.ContainsKey(Zokusei.greenMagic))
-            frames.Add(Zokusei.greenMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
-        if (!frames.ContainsKey(Zokusei.lightMagic))
-            frames.Add(Zokusei.lightMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
-        if (!frames.ContainsKey(Zokusei.darkMagic))
-            frames.Add(Zokusei.darkMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
-        if (!frames.ContainsKey(Zokusei.Null))
-            frames.Add(Zokusei.Null, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
+        if (!frames.ContainsKey(Element.blueMagic))
+            frames.Add(Element.blueMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
+        if (!frames.ContainsKey(Element.redMagic))
+            frames.Add(Element.redMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
+        if (!frames.ContainsKey(Element.greenMagic))
+            frames.Add(Element.greenMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
+        if (!frames.ContainsKey(Element.lightMagic))
+            frames.Add(Element.lightMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
+        if (!frames.ContainsKey(Element.darkMagic))
+            frames.Add(Element.darkMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
+        if (!frames.ContainsKey(Element.Null))
+            frames.Add(Element.Null, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
     }
     
     public void Grey()
@@ -49,7 +49,7 @@ public class HeroIcon : MonoBehaviour {
         cooldownCurtain.fillAmount = proportion;
     }
 
-    public void ChangeIcon(Sprite _Sprite, Zokusei zokusei)
+    public void ChangeIcon(Sprite _Sprite, Element element)
     {
         if (frame == null || Icon == null)
         {
@@ -67,29 +67,29 @@ public class HeroIcon : MonoBehaviour {
             cooldownCurtain.transform.SetSiblingIndex(3);
         }
         var colors = iconButton.colors;
-        switch (zokusei)
+        switch (element)
         {
-            case Zokusei.blueMagic:
+            case Element.blueMagic:
                 frame.color = new Color(0,0,1,1);
                 colors.normalColor = new Color(0,0,1,1);
                 colors.highlightedColor = new Color(0,0.2f,1,1);
             break;
-            case Zokusei.redMagic:
+            case Element.redMagic:
                 frame.color = new Color(1,0,0,1);
                 colors.normalColor = new Color(1,0,0,1);
                 colors.highlightedColor = new Color(1,0.2f,0,1);
             break;
-            case Zokusei.greenMagic:
+            case Element.greenMagic:
                 frame.color = new Color(0,1,0,1);
                 colors.normalColor = new Color(0,1,0,1);
                 colors.highlightedColor = new Color(0,1,0.2f,1);
             break;
-            case Zokusei.darkMagic:
+            case Element.darkMagic:
                 frame.color = new Color(1,0,1,1);
                 colors.normalColor = new Color(1,0,1,1);
                 colors.highlightedColor = new Color(1,0,0.8f,1);
             break;
-            case Zokusei.lightMagic:
+            case Element.lightMagic:
                 frame.color = new Color(1,1,0,1);
                 colors.normalColor = new Color(1,1,0,1);
                 colors.highlightedColor = new Color(1f,1,0.2f,1);
@@ -105,8 +105,8 @@ public class HeroIcon : MonoBehaviour {
         Icon.sprite = _Sprite;
         Icon.color = Icon.sprite == null ? new Color(1, 1, 1, 0f) : Color.white;
         
-        if (frames.ContainsKey(zokusei))
-            frame.sprite = frames[zokusei];                
+        if (frames.ContainsKey(element))
+            frame.sprite = frames[element];                
     }
     
     public static void ChangeHeroIconByInstanceId(string instanceId, HeroIcon Icon)
@@ -119,14 +119,14 @@ public class HeroIcon : MonoBehaviour {
         }
         else
         {
-            Icon.ChangeIcon(null, Zokusei.Null);
+            Icon.ChangeIcon(null, Element.Null);
         }
     }
     
     public static void ChangeHeroIconByRID(string rID, HeroIcon Icon)
     {
         UnitConfig unitConfig = Units.GetUnitConfig(rID);
-        Icon.ChangeIcon(unitConfig == null ? null : MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig == null ? Zokusei.Null : unitConfig._zokusei);
+        Icon.ChangeIcon(unitConfig == null ? null : MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig == null ? Element.Null : unitConfig.element);
     }
         
     public static void SelectedFeature(HeroIcon _charIcon, GameObject selectedFrame, float size)
@@ -157,7 +157,7 @@ public class HeroIcon : MonoBehaviour {
         }
         MyMemberIcon.unitInfo = unitInfo;
         MyMemberIcon.unitConfig = unitConfig;
-        MyMemberIcon.ChangeIcon(MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig._zokusei);
+        MyMemberIcon.ChangeIcon(MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig.element);
         MyMemberIcon.transform.SetParent(T);
         MyMemberIcon.transform.localPosition = Vector3.one;
         MyMemberIcon.transform.localScale = Vector3.one;

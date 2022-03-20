@@ -52,7 +52,7 @@ public partial class SkillEditLayer : UILayer
         
         returnValue.StonesBox._tabEffects.SwitchZokusei
         (
-            _CharConfig._zokusei
+            _CharConfig.element
         );
         returnValue.StonesBox.IniExTabs(PreScene.target.FxCamera);
         returnValue.StonesBox.EXTabsFeatureRefresh(true);
@@ -125,7 +125,7 @@ public partial class SkillEditLayer : UILayer
         UnitConfig unitConfig = Units.GetUnitConfig(PreScene.target._focusing.r_id);
         StonesBox._tabEffects.SwitchZokusei
         (
-            unitConfig._zokusei
+            unitConfig.element
         );
     }
     

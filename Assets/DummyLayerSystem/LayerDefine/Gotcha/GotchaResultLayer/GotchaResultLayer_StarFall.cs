@@ -51,8 +51,8 @@ public partial class GotchaResultLayer : UILayer
                 fallingstarexplosionname = "screenStarExplostionTest3";
             break;
         }
-        Decompositioner Star = EffectsManager.GenerateEffect(fallingstarname, FightGlobalSetting.EffectPathDefine(Zokusei.Null), targetPos, Quaternion.identity, null);
-        Decompositioner flash = EffectsManager.GenerateEffect(fallingstarexplosionname, FightGlobalSetting.EffectPathDefine(Zokusei.Null), flashPos, Quaternion.identity, null);
+        Decompositioner Star = EffectsManager.GenerateEffect(fallingstarname, FightGlobalSetting.EffectPathDefine(Element.Null), targetPos, Quaternion.identity, null);
+        Decompositioner flash = EffectsManager.GenerateEffect(fallingstarexplosionname, FightGlobalSetting.EffectPathDefine(Element.Null), flashPos, Quaternion.identity, null);
         stoneFallingModels.Add(Star);
         stoneStartFlashModels.Add(flash);
         StarsFall.target._camera.transform.DOLookAt(Star.transform.position, 1f);

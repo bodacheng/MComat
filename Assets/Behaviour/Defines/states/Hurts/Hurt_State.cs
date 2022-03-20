@@ -87,7 +87,7 @@ namespace Soul
 
             if (target.from_weapon.effectSpreadOnBody)
             {
-                FightParamsRef.RunShaderChangeProcess(target.from_weapon.zokusei, 0.1f);
+                FightParamsRef.RunShaderChangeProcess(target.from_weapon.element, 0.1f);
             }
             
             switch (target.from_weapon.damage_type)
@@ -107,7 +107,7 @@ namespace Soul
                 case DamageType.supper_damage_forward:
                     used_dizzy_time = FightGlobalSetting._superhit_lastingtime;
                     NormalStart(target);
-                    EffectsManager.GenerateEffect("electric_s_e", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.zokusei), newValue.DamageEffectPoint, newValue.CutRotation, _DATA_CENTER.geometryCenter);
+                    EffectsManager.GenerateEffect("electric_s_e", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, _DATA_CENTER.geometryCenter);
                     break;
                 case DamageType.draw:
                     DrawDamgeStart(target);
@@ -125,7 +125,7 @@ namespace Soul
                     PushToMidStart(target, 4f, false);
                     break;
                 case DamageType.sekka:
-                    SekkaStart(target.from_weapon.zokusei);
+                    SekkaStart(target.from_weapon.element);
                     break;
                 case DamageType.time_pause:
                     TimePauseStart();

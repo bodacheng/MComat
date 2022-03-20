@@ -28,7 +28,7 @@ namespace FightScene
             //    DOTween.To(() => ((OneVOneMode)nowC).xzMax, (x) => ((OneVOneMode)nowC).xzMax = x, 16, 3f);
             //}
             
-            _layer = FightingStepLayer.Open();
+            _layer = FightingStepLayer.Get();
             
             if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
             {
@@ -83,9 +83,6 @@ namespace FightScene
             {
                 RTFightManager.target.team1.localUpdate();
                 RTFightManager.target.team2.localUpdate();
-                
-                _layer.team1UI.localUpdate();
-                _layer.team2UI.localUpdate();
             }
         }
     }
