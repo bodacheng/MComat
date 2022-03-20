@@ -9,9 +9,6 @@ public class FightingStepLayer : UILayer
     [Header("Pause Button")]
     public Button pauseButton;
     
-    [Header("Camera Switch Button")]
-    public Button cameraSwitchBtn;
-
     [SerializeField] MobileInputsManager InputsManager;
     
     [Header("TeamUIManager")]
@@ -56,8 +53,8 @@ public class FightingStepLayer : UILayer
             {
                 RTFightManager.target.team2.Auto = x;
             },
-            ()=> FightScenePauseSupport.Open(NetFightScene.target.T.gameObject), 
-            RTFightManager.target.SwitchToWatchMode);
+            ()=> FightScenePauseSupport.Open(NetFightScene.target.T.gameObject)
+        );
 
         if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
         {
@@ -71,13 +68,12 @@ public class FightingStepLayer : UILayer
         return returnValue;
     }
     
-    void StartUp(Action<bool> switchTeam1Auto, Action<bool> switchTeam2Auto, Action pauseAction, Action cameraSwitchAction)
+    void StartUp(Action<bool> switchTeam1Auto, Action<bool> switchTeam2Auto, Action pauseAction)
     {
         RTFightManager.target.team1.InputsManager = InputsManager;
         RTFightManager.target.team2.InputsManager = InputsManager;
         
         pauseButton.onClick.AddListener(pauseAction.Invoke);
-        cameraSwitchBtn.onClick.AddListener(cameraSwitchAction.Invoke);
         
         Team1Auto.onValueChanged.AddListener(switchTeam1Auto.Invoke);
         Team2Auto.onValueChanged.AddListener(switchTeam2Auto.Invoke);

@@ -21,7 +21,7 @@ public class FightGlobalSetting : ScriptableObject
     public int Sp3SkillExGet = 5;
     public float GetExAfterDamageBy = 10f;// 每受到GetExAfterDamageBy的伤害，获得ExGetAfterDamage的EX槽。用以平衡弱势
     public int ExGetAfterDamage = 10;
-    public float slighthit_lastingtime = 0.2f,lighthit_lastingtime = 0.3f, heavyhit_lastingtime = 0.6f, superhit_lastingtime = 1f, highhit_lastingTime = 0.8f;
+    public float slighthitLastingtime = 0.2f,lighthitLastingtime = 0.3f, heavyhitLastingtime = 0.6f, superhitLastingtime = 1f, highhitLastingTime = 0.8f;
     public float normalattackpositionfixingtime = 0.1f;
     public float knockoffextent = 20f;
     public float MaxKnockoffLaidGroundTime = 2f;
@@ -126,11 +126,11 @@ public class FightGlobalSetting : ScriptableObject
         _Sp2SkillExGet = Sp2SkillExGet;
         _Sp3SkillExGet = Sp3SkillExGet;
         
-        _slighthit_lastingtime = slighthit_lastingtime;
-        _lighthit_lastingtime = lighthit_lastingtime;
-        _heavyhit_lastingtime = heavyhit_lastingtime;
-        _superhit_lastingtime = superhit_lastingtime;
-        _highhit_lastingTime = highhit_lastingTime;
+        _slighthit_lastingtime = slighthitLastingtime;
+        _lighthit_lastingtime = lighthitLastingtime;
+        _heavyhit_lastingtime = heavyhitLastingtime;
+        _superhit_lastingtime = superhitLastingtime;
+        _highhit_lastingTime = highhitLastingTime;
         _normalattackpositionfixingtime = normalattackpositionfixingtime;
         
         _knockoffextent = knockoffextent;

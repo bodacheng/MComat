@@ -14,55 +14,54 @@ namespace Soul
 {
     public class G_Attack_State : Behavior
     {
-
-        readonly string clip_name;
-        readonly string dash_clip_name;
+        readonly string _clipName;
+        readonly string _dashClipName;
         readonly int _skillEmergentLevel;
-        readonly bool isEventAttackLaunchState;
-        readonly bool isEventAttackEndState;
-        readonly float rushSpeed;
-        readonly float approcahingSpeed;
-        readonly float maxRushTime;
-        float rush_time_counter;
+        readonly bool _isEventAttackLaunchState;
+        readonly bool _isEventAttackEndState;
+        readonly float _rushSpeed;
+        readonly float _approachSpeed;
+        readonly float _maxRushTime;
+        float _rushTimeCounter;
         Phase _phase;
-        UnityEngine.Events.UnityAction rushstart;
-        UnityEngine.Events.UnityAction rushend;
-        CustomCoroutine rushCoroutine;
-
+        UnityEngine.Events.UnityAction _rushStart;
+        UnityEngine.Events.UnityAction _rushEnd;
+        CustomCoroutine _rushCoroutine;
+        
         enum Phase
         {
             noRushState = 0,
             farFromReach = 1,
             needToRush = 2,
             reached = 3,
-            reachedFromThebeginning = 4
+            reachedFromBeginning = 4
         }
 
         #region Constructor
         public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime, float approachingSpeed, string clip_name)
         {
-            this.rushSpeed = rushSpeed;
-            this.maxRushTime = maxRushTime;
-            approcahingSpeed = approachingSpeed;
-            this.clip_name = clip_name;
-            this.dash_clip_name = dash_clip_name;
+            this._rushSpeed = rushSpeed;
+            this._maxRushTime = maxRushTime;
+            _approachSpeed = approachingSpeed;
+            this._clipName = clip_name;
+            this._dashClipName = dash_clip_name;
         }
 
         public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime, string clip_name, bool EventLauncher_Or_Ender)
         {
-            this.maxRushTime = maxRushTime;
-            this.dash_clip_name = dash_clip_name;
-            this.rushSpeed = rushSpeed;
-            this.clip_name = clip_name;
-            isEventAttackLaunchState = EventLauncher_Or_Ender;
-            isEventAttackEndState = !EventLauncher_Or_Ender;
+            this._maxRushTime = maxRushTime;
+            this._dashClipName = dash_clip_name;
+            this._rushSpeed = rushSpeed;
+            this._clipName = clip_name;
+            _isEventAttackLaunchState = EventLauncher_Or_Ender;
+            _isEventAttackEndState = !EventLauncher_Or_Ender;
         }
         #endregion
 
         #region Capacity Enter Exit
         public override bool Capacity_Exit_Condition()
         {
-            return AnimationCasualFinishedFlag() && this.Animation_Manger._toUse.name == clip_name;
+            return AnimationCasualFinishedFlag() && this.Animation_Manger._toUse.name == _clipName;
         }
 
         #endregion
@@ -70,15 +69,15 @@ namespace Soul
         public override void Pre_process_before_enter()
         {
             base.Pre_process_before_enter();
-            rushstart = () =>
+            _rushStart = () =>
             {
                 FightParamsRef.Resistance.Value += 1;
             };
-            rushend = () =>
+            _rushEnd = () =>
             {
                 FightParamsRef.Resistance.Value -= 1;
             };
-            rushCoroutine = new CustomCoroutine(rushstart, 5f, rushend);
+            _rushCoroutine = new CustomCoroutine(_rushStart, 5f, _rushEnd);
         }
 
         public override void AI_State_exit()
@@ -87,16 +86,16 @@ namespace Soul
             _BasicPhysicSupport.OpenEnemyTouchingDrag(0);
             _Weapon_Animation_Events.ClearMarkerManagers();
             pEvents.CloseAllPersonalityEffects();
-            _BuffsRunner.EndSubCoroutineOfState(rushCoroutine);//冲刺阶段有可能没有正常结束就被强制离开当前技能状态
+            _BuffsRunner.EndSubCoroutineOfState(_rushCoroutine);//冲刺阶段有可能没有正常结束就被强制离开当前技能状态
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
-            if (isEventAttackLaunchState)
+            if (_isEventAttackLaunchState)
             {
                 if (FightParamsRef != null)
                 {
                     FightParamsRef.ReturnApprovedEventAttackAttempts().Clear();
                 }
             }
-            if (isEventAttackEndState)
+            if (_isEventAttackEndState)
                 EventAttackEnterProcess();
         }
 
@@ -115,7 +114,7 @@ namespace Soul
             if (StateType == BehaviorType.GI)
                 _SkillCancelFlag.TurnRotationAdjustmentStartFlagWithoutstepfoward(1);
             _Rigidbody.velocity = Vector3.zero;
-            rush_time_counter = 0f;
+            _rushTimeCounter = 0f;
             _Animator.applyRootMotion = true;
             Sensor.ContinuousDetectionStart(2);
             Sensor.GetEnemiesByDistance(true);
@@ -123,22 +122,22 @@ namespace Soul
             {
                 //一般来说下面这些情况不跑？
                 _phase = Phase.noRushState;
-                Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
+                Animation_Manger.AnimationTrigger(_clipName, true, 0.1f);
                 return;
             }
 
             collider = Sensor.GetClosestEnemyColliderInSensorRange();
             if (collider == null)
             {
-                Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
+                Animation_Manger.AnimationTrigger(_clipName, true, 0.1f);
                 _phase = Phase.farFromReach;
                 return;
             }
             float distance = Vector3.Distance(gameObject.transform.position, collider.transform.position);
             if (distance < Sensor.sensor_radius / 3)//内环检测结果
             {
-                _phase = Phase.reachedFromThebeginning;
-                Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
+                _phase = Phase.reachedFromBeginning;
+                Animation_Manger.AnimationTrigger(_clipName, true, 0.1f);
                 if (Sensor.GetEnemiesByDistance(false).Count > 0)
                 {
                     if (Sensor.GetEnemiesByDistance(false)[0] != null)
@@ -162,24 +161,24 @@ namespace Soul
                 if (_AIStateRunner.GetLastState().nextAttackCanRushFirst && StateType == BehaviorType.GR)
                 {
                     _phase = Phase.needToRush;
-                    if (Animation_Manger.TryAnimationClip(dash_clip_name) != null)
-                        Animation_Manger.AnimationTrigger(dash_clip_name, true, 0.05f);
+                    if (Animation_Manger.TryAnimationClip(_dashClipName) != null)
+                        Animation_Manger.AnimationTrigger(_dashClipName, true, 0.05f);
                     else
                     {
-                        Debug.Log("here:" + clip_name);
+                        Debug.Log("here:" + _clipName);
                         Animation_Manger.PlayLayerAnim(null, true, 0f);
                     }
-                    _BuffsRunner.RunSubCoroutineOfState(rushCoroutine);
+                    _BuffsRunner.RunSubCoroutineOfState(_rushCoroutine);
                 }
                 else
                 {
-                    _phase = Phase.reachedFromThebeginning;//这个环节最绕脑子，大概指的是如果外环也有敌人，就当“已经到达”。但其实从出发点将，一般的普通近距离攻击在中距离下也不会触发才对
-                    Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
+                    _phase = Phase.reachedFromBeginning;//这个环节最绕脑子，大概指的是如果外环也有敌人，就当“已经到达”。但其实从出发点将，一般的普通近距离攻击在中距离下也不会触发才对
+                    Animation_Manger.AnimationTrigger(_clipName, true, 0.1f);
                     return;
                 }
             }
 
-            Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
+            Animation_Manger.AnimationTrigger(_clipName, true, 0.1f);
             _phase = Phase.farFromReach;
             return;
         }
@@ -200,18 +199,18 @@ namespace Soul
                     }
                     else
                     {
-                        Move(collider.transform.position - gameObject.transform.position, rushSpeed, true);
+                        Move(collider.transform.position - gameObject.transform.position, _rushSpeed, true);
                         if (Vector3.Distance(gameObject.transform.position, collider.transform.position) < 2f)
                         {
                             _phase = Phase.reached;
                         }
                         if (_phase == Phase.reached)
                         {
-                            Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
+                            Animation_Manger.AnimationTrigger(_clipName, true, 0.1f);
                             _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                             _Rigidbody.velocity = Vector3.zero;
                             Sensor.GetEnemiesByDistance(true);
-                            _BuffsRunner.EndSubCoroutineOfState(rushCoroutine);
+                            _BuffsRunner.EndSubCoroutineOfState(_rushCoroutine);
                             if (Sensor.GetEnemiesByDistance(false).Count > 0)
                             {
                                 if (Sensor.GetEnemiesByDistance(false)[0] != null)
@@ -221,32 +220,32 @@ namespace Soul
                             }
                         }
                     }
-                    if (rush_time_counter > maxRushTime)
+                    if (_rushTimeCounter > _maxRushTime)
                     {
                         _phase = Phase.reached;
                     }
                     if (_phase == Phase.reached)
                     {
-                        Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
+                        Animation_Manger.AnimationTrigger(_clipName, true, 0.1f);
                         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                         _Rigidbody.velocity = Vector3.zero;
                         Sensor.OneRoundDetectionStart(5);
-                        _BuffsRunner.EndSubCoroutineOfState(rushCoroutine);
+                        _BuffsRunner.EndSubCoroutineOfState(_rushCoroutine);
                     }
                     break;
                 case Phase.reached:
                     if (Sensor.GetEnemiesByDistance(false).Count > 0)
                     {
                         if (Sensor.GetEnemiesByDistance(false)[0] != null)
-                            AttackApproach(Sensor.GetEnemiesByDistance(false)[0].transform.position, approcahingSpeed);
+                            AttackApproach(Sensor.GetEnemiesByDistance(false)[0].transform.position, _approachSpeed);
                     }
                     break;
-                case Phase.reachedFromThebeginning://reachedFromThebeginning现在其实是两种情况：1. 冲刺状态一开始内环就有敌人 2.非冲刺状态一开始外环有敌人
+                case Phase.reachedFromBeginning://reachedFromThebeginning现在其实是两种情况：1. 冲刺状态一开始内环就有敌人 2.非冲刺状态一开始外环有敌人
                     if (Sensor.GetEnemiesByDistance(false).Count > 0)
                     {
                         if (Sensor.GetEnemiesByDistance(false)[0] != null)
                         {
-                            AttackApproach(Sensor.GetEnemiesByDistance(false)[0].transform.position, approcahingSpeed);
+                            AttackApproach(Sensor.GetEnemiesByDistance(false)[0].transform.position, _approachSpeed);
                         }
                     }
                     break;

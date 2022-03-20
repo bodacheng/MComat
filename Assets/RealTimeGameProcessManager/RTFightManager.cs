@@ -33,13 +33,6 @@ namespace FightScene
             target = this;
         }
         
-        public void SwitchToWatchMode() // button behaviour
-        {
-            team1.Auto = false;
-            team2.Auto = false;
-            CameraAdjustment(playerTeam);
-        }
-        
         public IEnumerator LoadUnits(FightInfo info)
         {
             yield return team1._UnitsLoad(info.fightMembers.HeroSets, UnitInfoRef);
@@ -56,7 +49,6 @@ namespace FightScene
         
         public void ModeStart()
         {
-            Debug.Log(loadFight.Team1Mode + ":" + loadFight.Team2Mode);
             switch (loadFight.Team1Mode)
             {
                 case TeamMode.multiRaid:
