@@ -97,6 +97,7 @@ void vertInflate(inout appdata_base v, out Input o)
 	*/
 	o.grabPos = ComputeGrabScreenPos(UnityObjectToClipPos(v.vertex.xyz));
 	//v.normal = normalize( v.vertex );
+	o.uv_MainTex = v.texcoord.xy;
 }
 
 

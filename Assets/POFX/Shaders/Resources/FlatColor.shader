@@ -40,6 +40,8 @@ CGPROGRAM
 
 	void surf(Input IN, inout SurfaceOutput o)
 	{	
+		float4 mask = tex2D(_MainTex, IN.uv_MainTex);
+		clip(mask.a - .1);
 
 		float4 screenUV = IN.grabPos;
 

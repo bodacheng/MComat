@@ -15,7 +15,7 @@
 
 		Tags{ "RenderType" = "Transparent" "Queue" = "Transparent+14" }
 		LOD 200
-		//Cull off
+		Cull off
 		zwrite on
 		Offset -1,-1
 

@@ -113,7 +113,7 @@ namespace Kalagaan
 
                 string[] choicesLabel = { "From Shader", "Geometry", "Alpha Test", "Transparent" };
                 int[] choicesValues = { 0, 2000, 2450, 3000 };
-                int idx = 0;
+                int idx = 0;                
                 if (l.m_renderQueue <= 2450) idx = 2;
                 if (l.m_renderQueue >= 3000) idx = 3;
                 if (l.m_renderQueue <= 2000) idx = 1;

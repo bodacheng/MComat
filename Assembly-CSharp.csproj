@@ -244,7 +244,6 @@
      <Compile Include="Assets\TouchScript\Scripts\Hit\RaycastHitUI.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\StagesManager.cs" />
      <Compile Include="Assets\Remote\API\Dto\Model\Common\AbstractModel.cs" />
-     <Compile Include="Assets\Asstes\JMO Assets\MatCap Shaders\Demo\Assets\MC_AutoRotate.cs" />
      <Compile Include="Assets\PlayFab\Client\Login.cs" />
      <Compile Include="Assets\MainSceneSystem\NAGARE\Processes\SkillStone\StonesPage.cs" />
      <Compile Include="Assets\PlayFab\Defs\PFSKSTDefine.cs" />
@@ -302,7 +301,6 @@
      <Compile Include="Assets\JsonSupport\UnityLitJson\Unity\UnityTypeBindings.cs" />
      <Compile Include="Assets\TouchScript\Scripts\ITouchManager.cs" />
      <Compile Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Scripts\FrontAttack.cs" />
-     <Compile Include="Assets\Asstes\JMO Assets\MatCap Shaders\Demo\Assets\MC_SwitchTexture.cs" />
      <Compile Include="Assets\Prescene\PreScene.cs" />
      <Compile Include="Assets\TouchScript\Examples\Photos\Scripts\Container.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\Helpers\RPGTalkHelper.cs" />

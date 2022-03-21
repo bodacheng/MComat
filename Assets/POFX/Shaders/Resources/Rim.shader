@@ -1,6 +1,6 @@
 ﻿Shader "POFX/Rim" {
 	Properties{
-		_MainTex("Maintex", 2D) = "black" {}
+		_MainTex("Maintex", 2D) = "white" {}
 		_Intensity("Intensity", Range(0.0, 1.0)) = 1.0			
 		_Color("Color", Color) = (1,1,1,1)
 		_Outline("Outline", float) = 0.0
@@ -36,8 +36,12 @@ CGPROGRAM
 	half _RimPower;	
 	//float4 _GrabTexture_TexelSize;		
 
-	void surf(Input IN, inout SurfaceOutput o) {
+	void surf(Input IN, inout SurfaceOutput o) 
+	{
 	
+		float4 mask = tex2D(_MainTex, IN.uv_MainTex);
+		clip(mask.a - .1);
+
 		float4 screenUV = IN.grabPos;
 
 		half3 n = normalize(IN.worldNormal);
