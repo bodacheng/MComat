@@ -74,11 +74,11 @@ public class BoundaryControllByGod : MonoBehaviour {
             temp = temp.normalized * _BattleRingRadius;
             temp.y = dataCenter.WholeT.position.y;
             dataCenter.WholeT.position = temp;
-            dataCenter._BasicPhysicSupport.atRing = true;
+            dataCenter._BasicPhysicSupport.AtRing = true;
         }
         else
         {
-            dataCenter._BasicPhysicSupport.atRing = false;
+            dataCenter._BasicPhysicSupport.AtRing = false;
         }
         
         temp = dataCenter.WholeT.position;

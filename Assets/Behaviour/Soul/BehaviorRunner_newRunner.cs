@@ -73,15 +73,15 @@ namespace Soul
         // 获取接下来等待释放的技能，并非是真正可触发技能，但反应了是否够气
         public List<SkillEntity> GetNextSkills()
         {
-            List<SkillEntity> List = new List<SkillEntity>();
-            SkillEntity _CurrentSKillEntity = new SkillEntity();
+            var List = new List<SkillEntity>();
+            var currentSKillEntity = new SkillEntity();
             if (_nowBehavior != null)
             {
-                SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out _CurrentSKillEntity);
+                SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out currentSKillEntity);
             }
-            if (_CurrentSKillEntity == null)
+            if (currentSKillEntity == null)
                 return List;
-            foreach (string _Key in _CurrentSKillEntity.CasualTo)
+            foreach (var _Key in currentSKillEntity.CasualTo)
             {
                 BehaviourDic.TryGetValue(_Key, out _tryBehavior);
                 if (_tryBehavior == null)

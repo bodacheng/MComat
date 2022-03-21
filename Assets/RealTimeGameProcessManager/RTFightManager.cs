@@ -55,7 +55,6 @@ namespace FightScene
                     team1.AllUnitsStartOff();
                     break;
                 case TeamMode.rotation:
-                    Debug.Log(team1StartUnit);
                     team1.ChangeFightingUnit(team1StartUnit);
                     break;
             }
@@ -66,7 +65,6 @@ namespace FightScene
                     team2.AllUnitsStartOff();
                     break;
                 case TeamMode.rotation:
-                    Debug.Log(team2StartUnit);
                     team2.ChangeFightingUnit(team2StartUnit);
                     break;
             }
@@ -112,25 +110,5 @@ namespace FightScene
             team1.TeamMembers.Clear();
             team2.TeamMembers.Clear();
         }
-        
-        //void OnGUI()
-        //{
-        //    if (GUI.Button(new Rect(40, 40, 60, 30), "切换队伍"))
-        //    {
-        //        switch (playerTeam)
-        //        {
-        //            case Team.player1:
-        //                playerTeam = Team.player2;
-        //                SwitchToCMode(null, Auto);
-
-        //                break;
-        //            case Team.player2:
-        //                playerTeam = Team.player1;
-        //                SwitchToCMode(null, Auto);
-        //                break;
-        //        }
-        //        CameraParaAdjustment(playerTeam);
-        //    }
-        //}
     }
 }

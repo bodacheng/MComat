@@ -71,7 +71,7 @@ namespace Soul
             _timeCounter += Time.deltaTime;
             if (!_touchedBoundary)
             {
-                if (_BasicPhysicSupport.atRing)
+                if (_BasicPhysicSupport.AtRing)
                 {
                     _touchedBoundary = true;
                     _xz = Vector3.zero - gameObject.transform.position;

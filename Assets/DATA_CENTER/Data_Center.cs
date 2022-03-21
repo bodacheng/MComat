@@ -194,10 +194,6 @@ public partial class Data_Center : MonoBehaviour
     
     public void CleanClear()
     {
-        _BasicPhysicSupport.hiddenMethods.Grounded = true;
-        _BasicPhysicSupport.SetUsingGravity(false);
-        _BasicPhysicSupport.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-        _BasicPhysicSupport.Rigidbody.velocity = Vector3.zero;
         Sensor.Stop();
         bO_Weapon_Animation_Events.ClearMarkerManagers();
         buffsRunner.EndAllCoroutines();

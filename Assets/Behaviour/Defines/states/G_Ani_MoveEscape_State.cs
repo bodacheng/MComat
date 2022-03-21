@@ -66,7 +66,7 @@ namespace Soul
             facedirection = gameObject.transform.forward;
             threat = Sensor.GetSuddenThreatInRange(0, 5);
 
-            if (_BasicPhysicSupport.atRing)
+            if (_BasicPhysicSupport.AtRing)
             {
                 facedirection = Vector3.zero - gameObject.transform.position;
                 facedirection.y = 0;

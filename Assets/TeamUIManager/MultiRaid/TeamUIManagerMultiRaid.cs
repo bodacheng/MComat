@@ -56,9 +56,6 @@ namespace FightScene
                 }
                 DicAdd<Data_Center, SideCharIcon>.Add(UnitIconDic, center, _SideIcon);
                 
-                // 魔法按键
-                _inputsManager.ZokuseiButtonRegister(center.element);
-                
                 var maxHp = center.FightDataRef.CurrentHp.Value;
                 center.FightDataRef.CurrentHp.Subscribe(x =>
                 {

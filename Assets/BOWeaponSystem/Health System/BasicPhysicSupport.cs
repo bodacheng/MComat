@@ -7,10 +7,8 @@ public class BasicPhysicSupport : MonoBehaviour
     public Animator animator;
     public Rigidbody Rigidbody;
     public HiddenMethods hiddenMethods;
-    public Transform floorCheckersT;
-    Transform[] floorCheckers;
-
-    public bool atRing
+    
+    public bool AtRing
     {
         get;
         set;
@@ -45,21 +43,20 @@ public class BasicPhysicSupport : MonoBehaviour
             return _BasicPhysicSupport._DATA_CENTER == null || _BasicPhysicSupport._DATA_CENTER._TeamConfig != null
                 && (_BasicPhysicSupport._DATA_CENTER._TeamConfig.mylayer == box.gameObject.layer) || _BasicPhysicSupport._DATA_CENTER._TeamConfig.myShieldLayer == box.gameObject.layer;
         }
-
+        
         // 与敌人的接触摩操功能
         public bool EnemyTouchingDrag;
-        public List<Collider> touchingEnemyCs = new List<Collider>();
+        readonly List<Collider> _touchingEnemyCs = new List<Collider>();
         public bool ITouchedEnemyBody()
         {
-            return touchingEnemyCs.Count > 0;
+            return _touchingEnemyCs.Count > 0;
         }
 
-        public int draglevel;
-
+        public int _dragLevel;
+        
         //弃用
         private Vector3 keptEnemyPoint;
         private Vector3 keptMePoint;
-        public bool lockedKept;
         public Vector3 ClampPosBetweenMeAndE(Vector3 pos)
         {
             pos.y = 0;
@@ -73,9 +70,9 @@ public class BasicPhysicSupport : MonoBehaviour
         {
             if (!EnemyTouchingDrag)
                 return;
-            if (!touchingEnemyCs.Contains(C))
-                touchingEnemyCs.Add(C);
-            switch (draglevel)
+            if (!_touchingEnemyCs.Contains(C))
+                _touchingEnemyCs.Add(C);
+            switch (_dragLevel)
             {
                 case 1:
                     _BasicPhysicSupport.Rigidbody.drag = 100f;
@@ -105,16 +102,16 @@ public class BasicPhysicSupport : MonoBehaviour
         {
             if (!EnemyTouchingDrag)
             {
-                touchingEnemyCs.Clear();
+                _touchingEnemyCs.Clear();
                 return;
             }
-            if (touchingEnemyCs.Contains(C))
-                touchingEnemyCs.Remove(C);
+            if (_touchingEnemyCs.Contains(C))
+                _touchingEnemyCs.Remove(C);
         }
         
         public void ClearTouchedEnemyBody()
         {
-            touchingEnemyCs.Clear();
+            _touchingEnemyCs.Clear();
             _BasicPhysicSupport.Rigidbody.drag = 0f;
         }
 
@@ -142,20 +139,27 @@ public class BasicPhysicSupport : MonoBehaviour
             _BasicPhysicSupport.Rigidbody.useGravity = _BasicPhysicSupport.usingGravity;
             Grounded = false;
         }
-    }
-
-    void Awake()
-    {
-        hiddenMethods = new HiddenMethods(this);
-        floorCheckers = new Transform[floorCheckersT.childCount];
-        for (int i = 0; i < floorCheckers.Length; i++)
+        
+        public void RecoverRootPosChange( )
         {
-            floorCheckers[i] = floorCheckersT.GetChild(i);
+            if (!ITouchedEnemyBody() && _BasicPhysicSupport.Rigidbody.velocity == Vector3.zero)
+                _BasicPhysicSupport._DATA_CENTER.WholeT.transform.position += _BasicPhysicSupport._DATA_CENTER.Animation_Manger.AnimatorRef.deltaPosition;
+        }
+
+        public void LockPos()
+        {
+            _BasicPhysicSupport.hiddenMethods.Grounded = true;
+            _BasicPhysicSupport.SetUsingGravity(false);
+            _BasicPhysicSupport.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            _BasicPhysicSupport.Rigidbody.velocity = Vector3.zero;
         }
     }
     
-    Vector3 temp,temp2;
-    float dis_from_center;
+    void Awake()
+    {
+        hiddenMethods = new HiddenMethods(this);
+    }
+    
     void Update()
     {
         if (FightGlobalSetting.scenestep == 1)
@@ -173,7 +177,7 @@ public class BasicPhysicSupport : MonoBehaviour
 
     public void OpenEnemyTouchingDrag(int open)
     {
-        hiddenMethods.draglevel = open;
+        hiddenMethods._dragLevel = open;
         if (open == 0)
         {
             Rigidbody.drag = 0;
@@ -203,11 +207,5 @@ public class BasicPhysicSupport : MonoBehaviour
                 hiddenMethods.RemoveTouchedEnemyBody(collision.collider);
             }
         }
-    }
-    
-    public void RecoverRootPostionChange( )
-    {
-        if (!hiddenMethods.ITouchedEnemyBody() && Rigidbody.velocity == Vector3.zero)
-            _DATA_CENTER.WholeT.transform.position += _DATA_CENTER.Animation_Manger.AnimatorRef.deltaPosition;
     }
 }

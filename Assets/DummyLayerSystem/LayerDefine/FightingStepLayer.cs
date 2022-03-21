@@ -19,13 +19,6 @@ public class FightingStepLayer : UILayer
     public Toggle Team1Auto;
     public Toggle Team2Auto;
     
-    public void Clear()
-    {
-        team1UI.Clear();
-        team2UI.Clear();
-        InputsManager.Clear();
-    }
-    
     public static FightingStepLayer Get()
     {
         var l = UILayerLoader.Get("FightingStepLayer");
@@ -35,6 +28,16 @@ public class FightingStepLayer : UILayer
             returnValue = l as FightingStepLayer;
         }
         return returnValue;
+    }
+
+    public static void Close()
+    {
+        var layer = Get();
+        layer.InputsManager.FocusUnit(null);
+        layer.InputsManager.Clear();
+        layer.team1UI.Clear();
+        layer.team2UI.Clear();
+        UILayerLoader.Remove("FightingStepLayer");
     }
     
     public static FightingStepLayer Open(bool active = true)
@@ -91,5 +94,14 @@ public class FightingStepLayer : UILayer
         // 角色第二次初始化在这之前已经结束
         team1UI.InsTeamUI(RTFightManager.target.team1.ReadyForNextMember, RTFightManager.target.team1.RMode_Unit);
         team2UI.InsTeamUI(RTFightManager.target.team2.ReadyForNextMember, RTFightManager.target.team2.RMode_Unit);
+
+        foreach (var d in RTFightManager.target.team1.TeamMembers.GetValues())
+        {
+            InputsManager.ElementRegister(d.element);
+        }
+        foreach (var d in RTFightManager.target.team2.TeamMembers.GetValues())
+        {
+            InputsManager.ElementRegister(d.element);
+        }
     }
 }

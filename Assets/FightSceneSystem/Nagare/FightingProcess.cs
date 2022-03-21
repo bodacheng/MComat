@@ -22,14 +22,7 @@ namespace FightScene
         
         public override void ProcessEnter()
         {
-            //CameraMode nowC = RealTimeGameProcessManager.target._CameraManager.CModeDic[C_Mode.OneVOne];
-            //if (nowC is OneVOneMode)
-            //{
-            //    DOTween.To(() => ((OneVOneMode)nowC).xzMax, (x) => ((OneVOneMode)nowC).xzMax = x, 16, 3f);
-            //}
-            
             _layer = FightingStepLayer.Get();
-            
             if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
             {
                 var TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
@@ -71,10 +64,9 @@ namespace FightScene
             }
             else
             {
-                UILayerLoader.Remove("FightingStepLayer");
+                FightingStepLayer.Close();
             }
             RTFightManager.target.ClearUnitData();
-            _layer.Clear();
             FightLogger.value.WatchMissionsAbandon();
         }
 

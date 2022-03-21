@@ -220,21 +220,7 @@ public class DATACENTERGUI : Editor {
 				enegryBlade.transform.localRotation = Quaternion.identity;
                 myScript.Personality_events.left_sword = enegryBlade;
             }
-
-            if (myScript._BasicPhysicSupport.floorCheckersT == null)
-            {
-                GameObject floorChecker = Instantiate(Resources.Load("BasicCharComponent/FloorChecks") as GameObject);
-                if (floorChecker)
-                {
-                    floorChecker.name = "FloorChecks";
-                    floorChecker.transform.parent = null;
-                    floorChecker.transform.SetParent(myScript.WholeT.transform);
-                    floorChecker.transform.localPosition = Vector3.zero;
-                    floorChecker.transform.rotation = Quaternion.identity;
-                }
-                myScript._BasicPhysicSupport.floorCheckersT = floorChecker.transform;
-            }
-
+            
             //2019.3.29 我们基本放弃了传统防御盾逻辑。这让我们无比纠结但相关防御检测代码还在系统里只是没打开。
             //if (myScript.Shield == null)
             //{
@@ -270,15 +256,7 @@ public class DATACENTERGUI : Editor {
 
         GUILayout.Space(5f);
         EditorGUILayout.LabelField("以下项目在完成construct后应该会自动出现。如果事前手动适配，则construct操作不会更改他们",title);
-
-        if (myScript._BasicPhysicSupport != null)
-        {
-            GUILayout.Space(5f);
-            EditorGUILayout.BeginVertical();//floor checker按道理讲也是个自动去适配的东西，只要我们把默认物体放在默认位置
-            myScript._BasicPhysicSupport.floorCheckersT = EditorGUILayout.ObjectField("Floor Checker", myScript._BasicPhysicSupport.floorCheckersT, typeof(Transform), true) as Transform;
-            EditorGUILayout.EndVertical();
-        }
-
+        
         title.normal.textColor = Color.red;
         GUILayout.Space(5f);
         EditorGUILayout.LabelField("所有角色在创建的时候要遵循这样重要的一点：作为角色在地面支撑用的collider，",title);

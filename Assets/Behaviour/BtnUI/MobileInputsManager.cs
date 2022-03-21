@@ -26,8 +26,8 @@ public class MobileInputsManager : MonoBehaviour {
     [SerializeField] Button Dash;
     [SerializeField] Transform effectsParent;
     
-    static readonly IDictionary<Element, ElementEffectsGroup> ElementEffects = new Dictionary<Element, ElementEffectsGroup>();
-    static Element _focusing;
+    readonly IDictionary<Element, ElementEffectsGroup> ElementEffects = new Dictionary<Element, ElementEffectsGroup>();
+    Element _focusing;
     
     public bool inputting = false;
     
@@ -76,23 +76,20 @@ public class MobileInputsManager : MonoBehaviour {
         }
     }
 
-    public void ZokuseiButtonRegister(Element element)
+    public void ElementRegister(Element element)
     {
-        var zokuseiBtn = new ElementEffectsGroup();
-        zokuseiBtn.INI(effectsParent, element, Attack, Fire1, Fire2);
-        zokuseiBtn.Close();
-        if (!ElementEffects.ContainsKey(element))
-        {
-            ElementEffects.Add(element, zokuseiBtn);
-        } else {
-            ElementEffects[element] = zokuseiBtn;
-        }
+        if (ElementEffects.ContainsKey(element)) return;
+        var elementEffect = new ElementEffectsGroup();
+        elementEffect.INI(effectsParent, element, Attack, Fire1, Fire2);
+        elementEffect.Close();
+        Debug.Log(elementEffect + ":"+ element);
+        ElementEffects.Add(element, elementEffect);
     }
-
+    
     ParticleSystem _targetExplode;
-    public void SkillButtonExplosion(InputKey inputs_Defined, int eX)
+    public void SkillExplosion(InputKey key, int spLevel)
     {
-        switch(eX)
+        switch(spLevel)
         {
             case 0:
                 _targetExplode = ElementEffects[_focusing].triggerExplosion0;
@@ -110,7 +107,7 @@ public class MobileInputsManager : MonoBehaviour {
                 return;
         }
     
-        switch (inputs_Defined)
+        switch (key)
         {
             case InputKey.Attack1:
                 _targetExplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, Attack.GetComponent<RectTransform>(), 3);
@@ -125,7 +122,7 @@ public class MobileInputsManager : MonoBehaviour {
         _targetExplode.Play();
         
         //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
-        foreach (KeyValuePair<Button, ParticleSystem> keyValue in ElementEffects[_focusing].buttonRefreshEffects)
+        foreach (var keyValue in ElementEffects[_focusing].BtnRefreshEffects)
         {
             keyValue.Value.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, keyValue.Key.GetComponent<RectTransform>(),4);
             keyValue.Value.Play(true);

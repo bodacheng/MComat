@@ -56,7 +56,7 @@ namespace Soul
                     case InputKey.Attack1:
                     if (MobileInputsManager.attack)
                     {
-                        InputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
+                        InputsManager.SkillExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
                         runner.SingleFightLog.WriteLog(
                         new SingleFightLog.BehaviourFightRecord
                         {
@@ -73,7 +73,7 @@ namespace Soul
                     case InputKey.Attack2:
                     if (MobileInputsManager.fire1)
                     {
-                        InputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
+                        InputsManager.SkillExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
                         runner.SingleFightLog.WriteLog(
                             new SingleFightLog.BehaviourFightRecord
                             {
@@ -90,7 +90,7 @@ namespace Soul
                     case InputKey.Attack3:
                     if (MobileInputsManager.fire2)
                     {
-                        InputsManager.SkillButtonExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
+                        InputsManager.SkillExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
                         runner.SingleFightLog.WriteLog(
                         new SingleFightLog.BehaviourFightRecord
                             {
@@ -206,7 +206,7 @@ namespace Soul
                         behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
                     }
                     behaviorRunner.ChangeState(_SE.REAL_NAME);
-                    behaviorRunner.InputsManager?.SkillButtonExplosion(_SE.EnterInput, _SE.SP_LEVEL);
+                    behaviorRunner.InputsManager?.SkillExplosion(_SE.EnterInput, _SE.SP_LEVEL);
                     return true;
                 }
             }
