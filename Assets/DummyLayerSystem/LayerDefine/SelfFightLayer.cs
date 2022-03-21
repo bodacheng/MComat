@@ -11,7 +11,7 @@ namespace mainMenu
         [Header("Mode Buttons")] 
         [SerializeField] Button RotationModeBtn, MultiModeBtn;
 
-        [SerializeField] private Toggle testMode;
+        [SerializeField] Toggle testMode;
         
         [Header("模式选中框")]
         [SerializeField] GameObject ModeFrame;
@@ -20,7 +20,7 @@ namespace mainMenu
         [SerializeField] GameObject selectedFrame;
         
         [Header("共同战斗式按钮")]
-        [SerializeField] RectTransform MuitiRaidTeam1T, MuitiRaidTeam2T;
+        [SerializeField] RectTransform multiRaidTeam1T, multiRaidTeam2T;
         [SerializeField] HeroIcon team1back, team1front, team1left, team1right;
         [SerializeField] HeroIcon team2back, team2front, team2left, team2right;
         
@@ -76,7 +76,7 @@ namespace mainMenu
         void CancelSelect()
         {
             _focusingPosNum = -1;
-            HeroIcon.SelectedFeature(null, selectedFrame, 200f);
+            HeroIcon.SelectedFeature(null, selectedFrame, 1);
         }
 
         void FrameRefresh(Transform t)
@@ -87,8 +87,8 @@ namespace mainMenu
 
         public void SwitchToMultiRaidMode()
         {
-            MuitiRaidTeam1T.gameObject.SetActive(true);
-            MuitiRaidTeam2T.gameObject.SetActive(true);
+            multiRaidTeam1T.gameObject.SetActive(true);
+            multiRaidTeam2T.gameObject.SetActive(true);
             RotationTeam1T.gameObject.SetActive(false);
             RotationTeam2T.gameObject.SetActive(false);
             _stage.SetEventType(FightEventType.Self);
@@ -99,8 +99,8 @@ namespace mainMenu
         
         public void SwitchToRotationMode()
         {
-            MuitiRaidTeam1T.gameObject.SetActive(false);
-            MuitiRaidTeam2T.gameObject.SetActive(false);
+            multiRaidTeam1T.gameObject.SetActive(false);
+            multiRaidTeam2T.gameObject.SetActive(false);
             RotationTeam1T.gameObject.SetActive(true);
             RotationTeam2T.gameObject.SetActive(true);
             _stage.SetEventType(FightEventType.Self);
@@ -266,7 +266,7 @@ namespace mainMenu
                 
                 void SelectedRender()
                 {
-                    HeroIcon.SelectedFeature(heroIcon, selectedFrame, 110f);
+                    HeroIcon.SelectedFeature(heroIcon, selectedFrame, 1.1f);
                 }
                 void A()
                 {
@@ -288,13 +288,8 @@ namespace mainMenu
                 heroIcon.ChangeIcon(null, Element.Null);
                 heroIcon.iconButton.onClick.RemoveAllListeners();
                 heroIcon.iconButton.onClick.AddListener(() => {OnTeamPosBtn(team, IconNumCheck[heroIcon]);});
-                heroIcon.iconButton.onClick.AddListener(() => HeroIcon.SelectedFeature(heroIcon, selectedFrame, 110f));
+                heroIcon.iconButton.onClick.AddListener(() => HeroIcon.SelectedFeature(heroIcon, selectedFrame, 1.1f));
             }
-        }
-
-        void SelectedRender(HeroIcon charIcon)
-        {
-            HeroIcon.SelectedFeature(charIcon, selectedFrame, 110f);
         }
         
         void OnTeamPosBtn(Team team, int pos)

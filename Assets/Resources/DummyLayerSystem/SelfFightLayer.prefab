@@ -1434,10 +1434,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RotationModeBtn: {fileID: 4423945224785838114}
   MultiModeBtn: {fileID: 4423945225983796484}
+  testMode: {fileID: 0}
   ModeFrame: {fileID: 4423945224337034421}
   selectedFrame: {fileID: 7163939579410376176}
-  MuitiRaidTeam1T: {fileID: 4423945224829375322}
-  MuitiRaidTeam2T: {fileID: 4423945224699738159}
+  multiRaidTeam1T: {fileID: 4423945224829375322}
+  multiRaidTeam2T: {fileID: 4423945224699738159}
   team1back: {fileID: 8534569675184981343}
   team1front: {fileID: 2678038543226888903}
   team1left: {fileID: 8125468168027733408}

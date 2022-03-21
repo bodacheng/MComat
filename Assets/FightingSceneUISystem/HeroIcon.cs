@@ -129,7 +129,7 @@ public class HeroIcon : MonoBehaviour {
         Icon.ChangeIcon(unitConfig == null ? null : MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig == null ? Element.Null : unitConfig.element);
     }
         
-    public static void SelectedFeature(HeroIcon _charIcon, GameObject selectedFrame, float size)
+    public static void SelectedFeature(HeroIcon _charIcon, GameObject selectedFrame, float localScale)
     {
         if (_charIcon == null)
         {
@@ -139,8 +139,7 @@ public class HeroIcon : MonoBehaviour {
         selectedFrame.transform.SetParent(_charIcon.transform);
         selectedFrame.transform.localPosition = Vector3.zero;
         selectedFrame.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-        selectedFrame.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-        selectedFrame.GetComponent<RectTransform>().sizeDelta = new Vector2(size,size);
+        selectedFrame.GetComponent<RectTransform>().localScale = new Vector3(localScale, localScale, localScale);
         selectedFrame.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
         selectedFrame.gameObject.SetActive(true);
     }
