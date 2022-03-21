@@ -75,7 +75,8 @@ public class FrontPage : MainSceneProcess
         PreScene.target.SetFocusingUnit(focus_instanceID);//确立focusing角色
         yield return ModelShower.target.ShowMyModel(focus_instanceID);
         
-        UpperInfoBar.Open(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), () => PreScene.target.trySwitchToStep(MainSceneStep.Setting));
+        UpperInfoBar.Open(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), 
+            () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox));
         PopupLayer.Close();
     }
     

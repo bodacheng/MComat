@@ -10,7 +10,7 @@ namespace mainMenu
     {
         [Header("Mode Buttons")] 
         [SerializeField] Button RotationModeBtn, MultiModeBtn;
-
+        
         [SerializeField] Toggle testMode;
         
         [Header("模式选中框")]

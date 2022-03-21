@@ -58,8 +58,8 @@ public class MailListView : MonoBehaviour
         );
         
         //  暂不需要详细读取邮件功能
-        //ReadMe.onClick.RemoveAllListeners();
-        //ReadMe.onClick.AddListener(ReadMail);
+        ReadMe.onClick.RemoveAllListeners();
+        ReadMe.onClick.AddListener(ReadMail);
         
         mailData.Set();
     }

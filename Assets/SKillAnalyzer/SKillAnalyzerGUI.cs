@@ -70,7 +70,9 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
-            Debug.Log((decimal)1 / 12);
+            
+            PlayFabReadClient.GetPresentGetCatalogItems();
+
             return;
             
             PlayFabClientAPI.ExecuteCloudScript(

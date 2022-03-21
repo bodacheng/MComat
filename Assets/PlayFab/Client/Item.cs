@@ -11,7 +11,7 @@ public partial class PlayFabReadClient
         MyMonsters.Dic.Clear();
         Stones.Clear();
         _myMailList.Clear();
-
+        
         PlayFabClientAPI.GetUserInventory(
             new GetUserInventoryRequest(),
             (GetUserInventoryResult result) =>
@@ -21,7 +21,7 @@ public partial class PlayFabReadClient
                     //Debug.Log(item.CatalogVersion + ":" + item.ItemId);
                     if (item.CatalogVersion == PlayfabSetting._UnitCatalog)
                     {
-                        UnitInfo info = new UnitInfo
+                        var info = new UnitInfo
                         {
                             id = item.ItemInstanceId,
                             r_id = item.ItemId
@@ -30,7 +30,7 @@ public partial class PlayFabReadClient
                     }
                     else if (item.CatalogVersion == PlayfabSetting._StoneCatalog)
                     {
-                        StoneOfPlayerInfo Info = new StoneOfPlayerInfo
+                        var Info = new StoneOfPlayerInfo
                         {
                             InstanceId = item.ItemInstanceId,
                             skillId = item.ItemId,
@@ -41,9 +41,9 @@ public partial class PlayFabReadClient
                     }
                     else if (item.CatalogVersion == PlayfabSetting._MailCatalog)
                     {
-                        MailItemInstance maildata = new MailItemInstance();
-                        Copier<ItemInstance,MailItemInstance>.Copy(item, maildata);
-                        AddMailData(maildata);
+                        var mailData = new MailItemInstance();
+                        Copier<ItemInstance,MailItemInstance>.Copy(item, mailData);
+                        AddMailData(mailData);
                     }
                 }
                 LoadReadMails(); // 本地逻辑。读取已读邮件。放在这里是希望和远程读取未读邮件的动作保持步调一致
@@ -65,5 +65,7 @@ public partial class PlayFabReadClient
                 Debug.Log(errorCallback.Error);
                 finished.Invoke(-1);
             });
+        
+        GetPresentGetCatalogItems();
     }
 }

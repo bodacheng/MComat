@@ -6,17 +6,46 @@ using System;
 using Newtonsoft.Json;
 using Json;
 using System.IO;
-using System.Linq;
-using Cysharp.Threading.Tasks;
 
 public partial class PlayFabReadClient
 {
     #region MAIL
-    static List<MailItemInstance> _myMailList = new List<MailItemInstance>();
+    static readonly List<MailItemInstance> _myMailList = new List<MailItemInstance>();
+    static readonly Dictionary<string, CatalogItem> _catalogItems = new Dictionary<string, CatalogItem>();
+    
     public static List<MailItemInstance> GetMailsData()
     {
         return _myMailList;
     }
+
+    public static CatalogItem GetCatalogItemByDisplayName(string displayName)
+    {
+        if (!_catalogItems.ContainsKey(displayName)) return null;
+        var item = _catalogItems[displayName];
+        return item;
+    }
+
+    public static void GetPresentGetCatalogItems()
+    {
+        PlayFabClientAPI.GetCatalogItems(
+            new GetCatalogItemsRequest
+            {
+                CatalogVersion = PlayfabSetting._MailCatalog
+            },
+            (x)=>
+            {
+                foreach (var v in x.Catalog)
+                {
+                    DicAdd<string, CatalogItem>.Add(_catalogItems, v.DisplayName, v);
+                }
+            },
+            (x) =>
+            {
+                Debug.Log(x.Error);
+            }
+        );
+    }
+    
     /// <summary>
     /// 点击某邮件后打开邮件会使用此函数
     /// </summary>
@@ -24,7 +53,7 @@ public partial class PlayFabReadClient
     /// <returns></returns>
     public static ItemInstance Get(string itemInstanceId)
     {
-        for (int i = 0; i < _myMailList.Count; i++)
+        for (var i = 0; i < _myMailList.Count; i++)
         {
             if (_myMailList[i].ItemInstanceId == itemInstanceId)
                 return _myMailList[i];
@@ -43,16 +72,16 @@ public partial class PlayFabReadClient
     
     public static void SaveReadMailAsJson(ItemInstance mailOfPlayer)
     {
-        string json = JsonConvert.SerializeObject(mailOfPlayer);
+        var json = JsonConvert.SerializeObject(mailOfPlayer);
         LocalJson.SaveToJsonFile_persistentDataPath("readmail", mailOfPlayer.ItemInstanceId + ".json", json);
     }
     
     /// <summary>
     /// 已读取邮件的获取
     /// </summary>
-    public static void LoadReadMails()
+    static void LoadReadMails()
     {
-        string path = Application.persistentDataPath + "/readmail";
+        var path = Application.persistentDataPath + "/readmail";
         if (Directory.Exists(path))
         {
             foreach (string file in Directory.GetFiles(path))

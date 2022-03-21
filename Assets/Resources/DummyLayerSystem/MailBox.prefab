@@ -535,7 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee53179516a94f09a11901f33ae95b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mailListViewPretab: {fileID: 4502776208294558316}
+  mailListViewPrefab: {fileID: 4502776208294558316}
   MailBoxT: {fileID: 1682121644798879511}
   ReadAll: {fileID: 4381946650324088523}
   DeleteAllRead: {fileID: 1682121645773248062}

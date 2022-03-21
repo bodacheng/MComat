@@ -1,7 +1,7 @@
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using PlayFab.ClientModels;
+using System;
 
 public class MailDetailView : UILayer
 {
@@ -17,7 +17,8 @@ public class MailDetailView : UILayer
     public void Read(ItemInstance model)
     {
         title.text = model.DisplayName;
-        message.text = "temp";//model.CustomData.Contains("description") ? model.CustomData["description"] : 0;
+        var catalogItem = PlayFabReadClient.GetCatalogItemByDisplayName(model.DisplayName);
+        message.text = catalogItem != null ? catalogItem.Description : String.Empty;
         if (model.Expiration.HasValue)
             presentlifeRemain.text = model.Expiration.Value.ToString("yyyy-MM-dd");
         else
