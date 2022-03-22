@@ -27,23 +27,21 @@ namespace mainMenu
 
         // rare 度限定
         List<int> rares = new List<int> { 0, 1, 2, 3, 4, 5 };
-        string focusingType = "human";
         int focusingExType;
         
         void Awake()
         {
             _Selected = SelectedFrame;
             rares = new List<int> { 0, 1, 2, 3, 4, 5 };//否则其值会被inspector修改
+            FocusingType = "human";
+        }
+
+        public string FocusingType
+        {
+            get;
+            set;
         }
         
-        string GetFocusingType()
-        {
-            return focusingType;
-        }
-        public void SetFocusingType(string type)
-        {
-            focusingType = type;
-        }
         int GetFocusingExType()
         {
             return focusingExType;

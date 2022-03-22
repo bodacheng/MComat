@@ -81,8 +81,8 @@ public partial class SkillEditLayer : UILayer
             return;
         }
         NineSlot.ReadANineAndTwo(_UnitInfo);
-        UnitConfig unitInfo = Units.GetUnitConfig(_UnitInfo.r_id);
-        StonesBox.SetFocusingType(unitInfo.TYPE);
+        var unitInfo = Units.GetUnitConfig(_UnitInfo.r_id);
+        StonesBox.FocusingType = unitInfo.TYPE;
         StonesBox.RestFilter();
         StonesBox.EXTabsFeatureRefresh(false);
         void SkillEditConfirm()
@@ -137,8 +137,8 @@ public partial class SkillEditLayer : UILayer
             Debug.Log("到达了没道理到达的地方");
             return;
         }
-        UnitConfig unitInfo = Units.GetUnitConfig(_UnitInfo.r_id);
-        StonesBox.SetFocusingType(unitInfo.TYPE);
+        var unitInfo = Units.GetUnitConfig(_UnitInfo.r_id);
+        StonesBox.FocusingType = unitInfo.TYPE;
         StonesBox.RestFilter();
         StonesBox.EXTabsFeatureRefresh(false);
     }
