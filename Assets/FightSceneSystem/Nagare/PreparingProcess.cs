@@ -79,16 +79,15 @@ public class PreparingProcess : FSceneProcess
             {
                 RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
             }
-        ).AddTo(RTFightManager.target);
+        ).AddTo(RTFightManager.target.disposables);
         
         RTFightManager.target.team2.RMode_Unit.Subscribe(x =>
             {
                 RTFightManager.target.CameraAdjustment(RTFightManager.playerTeam);
             }
-        ).AddTo(RTFightManager.target);
+        ).AddTo(RTFightManager.target.disposables);
         
         RTFightManager.target.SetGame(NetFightScene.Fight);
-        
         FightingStepLayer.Open(false);
     }
     

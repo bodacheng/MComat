@@ -28,6 +28,8 @@ namespace FightScene
         
         FightInfo loadFight;
         
+        public readonly CompositeDisposable disposables = new CompositeDisposable();
+        
         void Awake()
         {
             target = this;
