@@ -16,8 +16,8 @@ public class FightingStepLayer : UILayer
     public TeamUIManager team2UI;
     
     [Header("Auto Button")]
-    public Toggle Team1Auto;
-    public Toggle Team2Auto;
+    public AutoSwitch Team1Auto;
+    public AutoSwitch Team2Auto;
     
     public static FightingStepLayer Get()
     {
@@ -64,9 +64,6 @@ public class FightingStepLayer : UILayer
             returnValue.gameObject.SetActive(false);
         }
         
-        returnValue.Team1Auto.isOn = RTFightManager.target.team1.Auto;
-        returnValue.Team2Auto.isOn = RTFightManager.target.team2.Auto;
-        
         returnValue.gameObject.SetActive(active);
         return returnValue;
     }
@@ -78,8 +75,8 @@ public class FightingStepLayer : UILayer
         
         pauseButton.onClick.AddListener(pauseAction.Invoke);
         
-        Team1Auto.onValueChanged.AddListener(switchTeam1Auto.Invoke);
-        Team2Auto.onValueChanged.AddListener(switchTeam2Auto.Invoke);
+        Team1Auto.INI(RTFightManager.target.team1.Auto, switchTeam1Auto.Invoke);
+        Team2Auto.INI(RTFightManager.target.team2.Auto, switchTeam2Auto.Invoke);
         
         team1UI.TeamMode = NetFightScene.Fight.Team1Mode;
         team2UI.TeamMode = NetFightScene.Fight.Team2Mode;

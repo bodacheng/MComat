@@ -1,0 +1,45 @@
+   This package represents 20 crystal particle system effects.
+
+ The package also supported  Universal RP see the description in PDF file that is located in "URP" folder inside the "Crystal Effects Volume 1 for URP" unitypackage.
+
+ If you want to use this package in URP, first you should create a new project (you should create new project with default RP (without URP template) it is important otherwise package will not work correctly) and downloaded the Universal RP from the package manager, second you should unpack the «Crystal Effects Volume 1 for URP» unitypackage from URP folder  to a new project you have created (Please follow these steps in order to avoid any "Missing script" errors). Do not forget to assign URP Pipeline asset from the unitypackage that is located in "URP" folder to graphics settings of the project. Otherwise all in the scene will be blue or pink collor. for more information read PDF files that are included: 
+   1)"Description how to setup URP and make Gem shader work with it"
+
+   2)"Description how to setup Post Process in Universal RP".
+ 
+ In order to watch how it works just load the "Crystals" scene file from the main "Crystal Effects" folder. After you do this take a look at the bottom left position of the screen. There should be orange buttons that allows to select the effect you want just click on it.
+
+   Also you may see effect in any position you want because of "free camera" scrypt that has already attached to the camera. In order to use it just click right mouse button when you a running the scene. Now you may look arrownd if you move your mouse and change the camere position if you press "W" "S" "A" "D" buttons on your keyboard. This allow you to see effects from any directin you want and move the camere to any position you want.  
+
+   This package mainly includes:
+
+   1)20 crystal particle system effects that are located in "Prefabs" folder;
+   2)30 crystal models;
+   3)30 crystal contur textures that are connected to 30 contur texture materials;
+   4)30 crystal textures that are connected to 30 crystal materials;
+   5)9 different crystal shader collors (Dark_blue, Green, Orange, Purple, Pink, Red, Rainbow, Turquoise and Yellow). You may change and replace crystal shader materials between the effects as you wish via particle system "Renderer" component from "inspector" area;     
+   6)30 prefabs with crystal shader settings;
+   7)60 Prefabs with new standard surface shader and particle system settings.
+ 
+   In order to make gems\crystals shine and flicker like in screensots or video you will need Unity Bloom post process effect. For default RP see the detailed instructions how to do it in PDF file that is called "description how to setup Post Process for default RP ".
+the recommendation settings for Bloom effect (it is a part of Post Process For default RP) are:
+ 
+   Intensity: 25
+   Threshold: 1.4
+   Soft Knee: 0.5
+
+the recommendation settings for Bloom effect (it is a part of Post Process For Universal RP) are:
+  
+  Threshold: 1.4
+  Intensity: 5  
+  Scatter: 0.9
+  
+   How to use effects - drag and drop crystal effects prefabs to the scene. 
+
+   Note:
+   All effects uses "Hierarchy" scaling mode in order to be able to scale the effects to the value you want.
+    
+   If any problems with this package suddenly appears please contact me via horofff@mail.ru 
+
+Hope you enjoy! :)
+ 

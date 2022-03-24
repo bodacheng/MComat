@@ -14,7 +14,7 @@ public class ZokuseiStoneTagsGroup
         foreach(var keyValuePair in btnEffectsSetsForStoneBox)
         {
             keyValuePair.Value.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        }       
+        }
     }
     
     public void INI_forSkillStoneBox(Element element,Transform effectObjectParent)

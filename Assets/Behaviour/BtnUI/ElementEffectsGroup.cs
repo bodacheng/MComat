@@ -17,7 +17,7 @@ public class ElementEffectsGroup
     public ParticleSystem pressingExplosion;//这个不需要对象池子。
 
     IDictionary<Button, ParticleSystem> buttonSlotEffects;
-
+    
     ParticleSystem _defendBtn;
     ParticleSystem _rushBtn;
     ParticleSystem _aRefresh;
@@ -31,7 +31,10 @@ public class ElementEffectsGroup
             foreach(var exPPair in keyValuePair.Value)
             {
                 if (exPPair.Value != null)
+                {
                     exPPair.Value.Stop(true);
+                    exPPair.Value.gameObject.SetActive(false);
+                }
                 else
                 {
                     Debug.Log("错误"+keyValuePair.Value );
@@ -61,6 +64,7 @@ public class ElementEffectsGroup
             foreach(var exPPair in keyValuePair.Value)
             {
                 exPPair.Value.Stop(true);
+                exPPair.Value.gameObject.SetActive(false);
             }
         }
         triggerExplosion0.Stop(true);
@@ -228,13 +232,13 @@ public class ElementEffectsGroup
             if (pair.Key == eX)
             {
                 pair.Value.gameObject.transform.position = pos;
-                //if (!pair.Value.isPlaying)
-                    pair.Value.Play(true);
+                pair.Value.gameObject.SetActive(true);
+                pair.Value.Play(true);
             }
             else
             {
                 pair.Value.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
-                //pair.Value.Clear(true);
+                pair.Value.gameObject.SetActive(false);
             }
         }
     }

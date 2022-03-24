@@ -784,6 +784,12 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
+     <Compile Include="Assets\UI\AutoSwitch.cs" />
+     <Compile Include="Assets\Crystal Effects Volume 1\Scrypts\DecalDestroyer.cs" />
+     <Compile Include="Assets\Crystal Effects Volume 1\Scrypts\ParticleExamples_part.cs" />
+     <Compile Include="Assets\Crystal Effects Volume 1\Scrypts\Rotate_the_object.cs" />
+     <Compile Include="Assets\Crystal Effects Volume 1\Scrypts\FreeCamera.cs" />
+     <Compile Include="Assets\Crystal Effects Volume 1\Scrypts\ParticleMenu_part.cs" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
      <None Include="Assets\Asstes\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
      <None Include="Assets\Asstes\ErbGameArt\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />
@@ -814,6 +820,7 @@
      <None Include="Assets\POFX\Shaders\Resources\Outline.shader" />
      <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\Lit_CenterGlow.shader" />
      <None Include="Assets\Asstes\Sci-Fi Arsenal\Sci-Fi Arsenal Readme.txt" />
+     <None Include="Assets\Crystal Effects Volume 1\Read me.txt" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\SSAOShader.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurvesSimple.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\Blend.shader" />
@@ -827,6 +834,7 @@
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\ConvertDepth.shader" />
      <None Include="Assets\Asstes\Hovl Studio\Wizard spells pack\Shaders\DissolveNoise.shader" />
      <None Include="Assets\TouchScript\Shaders\DebugNoDepthTest.shader" />
+     <None Include="Assets\Crystal Effects Volume 1\Shaders\Gem.shader" />
      <None Include="Assets\Asstes\Background Bokeh VFX\README.txt" />
      <None Include="Assets\Asstes\enviroments\Top-Down Dungeons2\Standard Assets\Effects\ImageEffects\Shaders\TwirlEffect.shader" />
      <None Include="Assets\Asstes\enviroments\Top-Down SF\Origin\Tools\Self_illum_reflective.shader" />
