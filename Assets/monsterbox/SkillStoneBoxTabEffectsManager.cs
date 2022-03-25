@@ -5,8 +5,8 @@ namespace mainMenu
 {
     public class SkillStoneBoxTabEffectsManager : MonoBehaviour
     {
-        readonly IDictionary<Element, ZokuseiStoneTagsGroup> zokuseiBtnEffects = new Dictionary<Element, ZokuseiStoneTagsGroup>();
-        ZokuseiStoneTagsGroup _focusingEffectsGroup;
+        readonly IDictionary<Element, ElementStoneTagsGroup> _elementBtnEffects = new Dictionary<Element, ElementStoneTagsGroup>();
+        ElementStoneTagsGroup _focusingEffectsGroup;
         GameObject triggerExplosionPrefab;
         ParticleSystem triggerExplosion0;
         
@@ -23,11 +23,11 @@ namespace mainMenu
         
         public void StartUp(Element element)
         {
-            if (zokuseiBtnEffects.ContainsKey(element))
+            if (_elementBtnEffects.ContainsKey(element))
                 return;
-            ZokuseiStoneTagsGroup zt = new ZokuseiStoneTagsGroup();
+            ElementStoneTagsGroup zt = new ElementStoneTagsGroup();
             zt.INI_forSkillStoneBox(element, transform);
-            zokuseiBtnEffects.Add(element, zt);
+            _elementBtnEffects.Add(element, zt);
             string path = null;
             switch (element)
             {
@@ -59,7 +59,7 @@ namespace mainMenu
         {
             if (_focusingEffectsGroup != null)
                 _focusingEffectsGroup.CloseTagEffects();
-            foreach (var VARIABLE in zokuseiBtnEffects)
+            foreach (var VARIABLE in _elementBtnEffects)
             {
                 VARIABLE.Value.Clear();
             }
@@ -73,9 +73,9 @@ namespace mainMenu
                 _focusingEffectsGroup.CloseTagEffects();
             }
             
-            if (zokuseiBtnEffects.ContainsKey(element))
+            if (_elementBtnEffects.ContainsKey(element))
             {
-                _focusingEffectsGroup = zokuseiBtnEffects[element];
+                _focusingEffectsGroup = _elementBtnEffects[element];
             }else{
                 Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
             }

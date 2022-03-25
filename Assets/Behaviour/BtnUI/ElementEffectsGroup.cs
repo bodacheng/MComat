@@ -92,15 +92,15 @@ public class ElementEffectsGroup
     public void INICommon(Transform targetRectT, Element element, Button Attack, Button Fire1, Button Fire2)
     {
         var path = FightGlobalSetting.EffectPathDefine(element);
-        var slot = Resources.Load("essentialUIElements/buttonEffects" + "/" + path + "/slot", typeof(GameObject)) as GameObject;
-        var Defend = Resources.Load("essentialUIElements/buttonEffects" + "/" + path + "/defend", typeof(GameObject)) as GameObject;
-        var Rush = Resources.Load("essentialUIElements/buttonEffects" + "/" + path + "/rush", typeof(GameObject)) as GameObject;
-        var refresh = Resources.Load("essentialUIElements/buttonEffects" + "/" + path + "/refresh", typeof(GameObject)) as GameObject;
-        var triggerExplosionPrefab0 = Resources.Load("essentialUIElements/buttonEffects" + "/" + path + "/explosion0", typeof(GameObject)) as GameObject;
-        var triggerExplosionPrefab1 = Resources.Load("essentialUIElements/buttonEffects" + "/" + path + "/explosion1", typeof(GameObject)) as GameObject;
-        var triggerExplosionPrefab2 = Resources.Load("essentialUIElements/buttonEffects" + "/" + path + "/explosion2", typeof(GameObject)) as GameObject;
-        var triggerExplosionPrefab3 = Resources.Load("essentialUIElements/buttonEffects" + "/" + path + "/explosion3", typeof(GameObject)) as GameObject;
-        var pressingExplosionPrefab = Resources.Load("essentialUIElements/buttonEffects" + "/" + path + "/pressing", typeof(GameObject)) as GameObject;
+        var slot = Resources.Load("essentialUIElements/buttonEffects/" + path + "/slot", typeof(GameObject)) as GameObject;
+        var Defend = Resources.Load("essentialUIElements/buttonEffects/" + path + "/defend", typeof(GameObject)) as GameObject;
+        var Rush = Resources.Load("essentialUIElements/buttonEffects/" + path + "/rush", typeof(GameObject)) as GameObject;
+        var refresh = Resources.Load("essentialUIElements/buttonEffects/" + path + "/refresh", typeof(GameObject)) as GameObject;
+        var triggerExplosionPrefab0 = Resources.Load("essentialUIElements/buttonEffects/" + path + "/explosion0", typeof(GameObject)) as GameObject;
+        var triggerExplosionPrefab1 = Resources.Load("essentialUIElements/buttonEffects/" + path + "/explosion1", typeof(GameObject)) as GameObject;
+        var triggerExplosionPrefab2 = Resources.Load("essentialUIElements/buttonEffects/" + path + "/explosion2", typeof(GameObject)) as GameObject;
+        var triggerExplosionPrefab3 = Resources.Load("essentialUIElements/buttonEffects/" + path + "/explosion3", typeof(GameObject)) as GameObject;
+        var pressingExplosionPrefab = Resources.Load("essentialUIElements/buttonEffects/" + path + "/pressing", typeof(GameObject)) as GameObject;
         
         var attackSlot = Object.Instantiate(slot).GetComponent<ParticleSystem>();
         var fire1Slot = Object.Instantiate(slot).GetComponent<ParticleSystem>();
@@ -199,10 +199,10 @@ public class ElementEffectsGroup
         };
     }
     
-    public void RefreshBtn(Button button, string skillid, Vector3 pos)
+    public void RefreshBtn(Button button, string skillId, Vector3 pos)
     {
         var _target = btnEffectsSets[button];
-        if (skillid == String.Empty)
+        if (skillId == String.Empty)
         {
             buttonSlotEffects[button].transform.position = pos;
             buttonSlotEffects[button].Play(true);
@@ -212,7 +212,7 @@ public class ElementEffectsGroup
                 
         foreach(var pair in _target)
         {
-            pair.Value.gameObject.SetActive(pair.Key == skillid);
+            pair.Value.gameObject.SetActive(pair.Key == skillId);
         }
     }
 }

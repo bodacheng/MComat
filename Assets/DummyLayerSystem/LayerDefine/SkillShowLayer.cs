@@ -129,7 +129,7 @@ namespace mainMenu
         async void RenderButton(Element element, GameObject button, int splevel)
         {
             await Observable.TimerFrame(5);
-            GameObject t = ZokuseiStoneTagsGroup.CreateOneButtonIcon(element,splevel);
+            var t = ElementStoneTagsGroup.CreateOneButtonIcon(element,splevel);
             t.layer = 5;//UI Layer
             foreach (Transform _t in t.transform)
             {

@@ -779,7 +779,7 @@
      <Compile Include="Assets\Behaviour\Soul\Sensor.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Input\SliderGamepadManager.cs" />
      <Compile Include="Assets\theBlur\Blur_basicdata.cs" />
-     <Compile Include="Assets\Behaviour\BtnUI\ZokuseiStoneTagsGroup.cs" />
+     <Compile Include="Assets\Behaviour\BtnUI\ElementStoneTagsGroup.cs" />
      <Compile Include="Assets\TheNineSlot\TheNineSlot_Watch.cs" />
      <Compile Include="Assets\UI\BackGroundPS.cs" />
      <Compile Include="Assets\Behaviour\Soul\BehaviorRunner.cs" />

@@ -45,6 +45,7 @@ namespace dataAccess
             
             var Icon = SkillIconsDic.Instance.FindSkillIconPrefabByResource(skillID);
             var ob = GameObject.Instantiate(Icon);
+            ob.gameObject.name = "skillIcon_" + skillID;
             var item = ob.GetComponent<SKStoneItem>();
             if (item == null)
             {
