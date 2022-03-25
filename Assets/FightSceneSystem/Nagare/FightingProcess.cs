@@ -67,6 +67,7 @@ namespace FightScene
                 FightingStepLayer.Close();
             }
             RTFightManager.target.disposables.Clear();
+            RTFightManager.target.RefreshTimeDic.Clear();
             RTFightManager.target.ClearUnitData();
             FightLogger.value.WatchMissionsAbandon();
         }

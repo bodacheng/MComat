@@ -39,30 +39,30 @@ namespace FightScene
                 RTFightManager.target.RefreshTimeDic[center].Subscribe((x) =>
                 {
                     UnitIconDic[center].focusingCharIcon.CooldownCurtainUpdate(x/10);
-                }).AddTo(gameObject);
+                }).AddTo(RTFightManager.target.disposables);
                 
                 var maxHp = center.FightDataRef.CurrentHp.Value;
                 center.FightDataRef.CurrentHp.Subscribe(x =>
                 {
                     RefreshHPBar(center, x, maxHp);
-                }).AddTo(gameObject);
+                }).AddTo(RTFightManager.target.disposables);
                 
                 center.FightDataRef.CriticalGauge.Subscribe(x =>
                 {
                     RefreshExBar(center, x, FightGlobalSetting._EXMax);
-                }).AddTo(gameObject);
+                }).AddTo(RTFightManager.target.disposables);
                 
                 center.FightDataRef.Resistance.Subscribe(x =>
                 {
                     RefreshResistanceBar(center, x);
-                }).AddTo(gameObject);
+                }).AddTo(RTFightManager.target.disposables);
                 
                 center.FightDataRef.IsDead.Subscribe(x => {
                     if (x)
                     {
                         UnitIconDic[center].focusingCharIcon.CooldownCurtainUpdate(1);
                     }
-                }).AddTo(gameObject);
+                }).AddTo(RTFightManager.target.disposables);
             }
         }
         

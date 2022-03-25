@@ -19,6 +19,7 @@ public class AutoSwitch : MonoBehaviour
         _action.Invoke(isOn);
         onObject.SetActive(on);
         offObject.SetActive(!on);
+        Debug.Log("Pressed" + isOn);
     }
     
     private void Awake()

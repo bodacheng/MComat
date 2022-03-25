@@ -151,45 +151,32 @@ public class ElementEffectsGroup
     
     public void INIBtn(Button Attack, Button Fire1, Button Fire2, UnitInfo unitInfo)
     {
-        var a1 = Stones.GenerateStoneModel(unitInfo.set.a1, false);
-        DicAdd<string, GameObject>.Add(_aEffects, unitInfo.set.a1, a1.gameObject);
-        var a2 = Stones.GenerateStoneModel(unitInfo.set.a2, false);
-        DicAdd<string, GameObject>.Add(_aEffects, unitInfo.set.a2, a2.gameObject);
-        var a3 = Stones.GenerateStoneModel(unitInfo.set.a3, false);
-        DicAdd<string, GameObject>.Add(_aEffects, unitInfo.set.a3, a3.gameObject);
+        void process(Button btn, string skillID, IDictionary<string, GameObject> dic)
+        {
+            var icon = Stones.GenerateStoneModel(skillID, false);
+            if (icon == null) return;
+            DicAdd<string, GameObject>.Add(dic, skillID, icon.gameObject);
+            Parent(icon.transform, btn.transform);
+        }
         
-        var b1 = Stones.GenerateStoneModel(unitInfo.set.b1, false);
-        DicAdd<string, GameObject>.Add(_bEffects, unitInfo.set.b1, b1.gameObject);
-        var b2 = Stones.GenerateStoneModel(unitInfo.set.b2, false);
-        DicAdd<string, GameObject>.Add(_bEffects, unitInfo.set.b2, b2.gameObject);
-        var b3 = Stones.GenerateStoneModel(unitInfo.set.b3, false);
-        DicAdd<string, GameObject>.Add(_bEffects, unitInfo.set.b3, b3.gameObject);
+        process(Attack, unitInfo.set.a1, _aEffects);
+        process(Attack, unitInfo.set.a2, _aEffects);
+        process(Attack, unitInfo.set.a3, _aEffects);
         
-        var c1 = Stones.GenerateStoneModel(unitInfo.set.c1, false);
-        DicAdd<string, GameObject>.Add(_cEffects, unitInfo.set.c1, c1.gameObject);
-        var c2 = Stones.GenerateStoneModel(unitInfo.set.c2, false);
-        DicAdd<string, GameObject>.Add(_cEffects, unitInfo.set.c2, c2.gameObject);
-        var c3 = Stones.GenerateStoneModel(unitInfo.set.c3, false);
-        DicAdd<string, GameObject>.Add(_cEffects, unitInfo.set.c3, c3.gameObject);
-
+        process(Fire1, unitInfo.set.b1, _bEffects);
+        process(Fire1, unitInfo.set.b2, _bEffects);
+        process(Fire1, unitInfo.set.b3, _bEffects);
+        
+        process(Fire2, unitInfo.set.c1, _cEffects);
+        process(Fire2, unitInfo.set.c2, _cEffects);
+        process(Fire2, unitInfo.set.c3, _cEffects);
+        
         void Parent(Transform t, Transform target)
         {
             t.SetParent(target);
             t.localPosition = Vector3.zero;
             t.localScale = Vector3.one;
         }
-
-        Parent(a1.transform, Attack.transform);
-        Parent(a2.transform, Attack.transform);
-        Parent(a3.transform, Attack.transform);
-
-        Parent(b1.transform, Fire1.transform);
-        Parent(b2.transform, Fire1.transform);
-        Parent(b3.transform, Fire1.transform);
-
-        Parent(c1.transform, Fire2.transform);
-        Parent(c2.transform, Fire2.transform);
-        Parent(c3.transform, Fire2.transform);
         
         btnEffectsSets = new Dictionary<Button, IDictionary<string, GameObject>>
         {
