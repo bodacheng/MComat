@@ -75,15 +75,17 @@ public class MobileInputsManager : MonoBehaviour {
             Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
         }
     }
-
-    public void ElementRegister(Element element)
+    
+    public void ElementRegister(Element element, UnitInfo unitInfo)
     {
-        if (ElementEffects.ContainsKey(element)) return;
-        var elementEffect = new ElementEffectsGroup();
-        elementEffect.INI(effectsParent, element, Attack, Fire1, Fire2);
-        elementEffect.Close();
-        Debug.Log(elementEffect + ":"+ element);
-        ElementEffects.Add(element, elementEffect);
+        if (!ElementEffects.ContainsKey(element))
+        {
+            var elementEffect = new ElementEffectsGroup();
+            elementEffect.INICommon(effectsParent, element, Attack, Fire1, Fire2);
+            ElementEffects.Add(element, elementEffect);
+        }
+        ElementEffects[element].INIBtn(Attack, Fire1, Fire2, unitInfo);
+        ElementEffects[element].Close();
     }
     
     ParticleSystem _targetExplode;
@@ -120,8 +122,11 @@ public class MobileInputsManager : MonoBehaviour {
                 break;
         }
         _targetExplode.Play();
-        
-        //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
+    }
+
+    //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
+    public void BtnRefreshEffects()
+    {
         foreach (var keyValue in ElementEffects[_focusing].BtnRefreshEffects)
         {
             keyValue.Value.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, keyValue.Key.GetComponent<RectTransform>(),4);
@@ -199,15 +204,15 @@ public class MobileInputsManager : MonoBehaviour {
         
         if (Options_lastframe[InputKey.Attack1] != Behavior_preview_button1)
         {
-            RefreshPattern(Attack, Behavior_preview_button1 != null ? Behavior_preview_button1.SP_LEVEL : -1);
+            RefreshPattern(Attack, Behavior_preview_button1 != null ? Behavior_preview_button1.SkillID : string.Empty);
         }
         if (Options_lastframe[InputKey.Attack2] != Behavior_preview_button2)
         {
-            RefreshPattern(Fire1, Behavior_preview_button2 != null ? Behavior_preview_button2.SP_LEVEL : -1);
+            RefreshPattern(Fire1, Behavior_preview_button2 != null ? Behavior_preview_button2.SkillID : string.Empty);
         }
         if (Options_lastframe[InputKey.Attack3] != Behavior_preview_button3)
         {
-            RefreshPattern(Fire2, Behavior_preview_button3 != null ? Behavior_preview_button3.SP_LEVEL : -1);
+            RefreshPattern(Fire2, Behavior_preview_button3 != null ? Behavior_preview_button3.SkillID : string.Empty);
         }
         
         Options_lastframe[InputKey.Attack1] = Behavior_preview_button1;
@@ -337,12 +342,12 @@ public class MobileInputsManager : MonoBehaviour {
     }
     
     Vector3 targetPos;
-    void RefreshPattern(Button button, int sp_level)//按钮切换也可以在这里做文章
+    void RefreshPattern(Button button, string skillId)//按钮切换也可以在这里做文章
     {
         targetPos = PosCal.GetWorldPos(NetFightScene.target.fxCamera, button.GetComponent<RectTransform>(), 5);
         if (ElementEffects.ContainsKey(_focusing))
         {
-            ElementEffects[_focusing].RefreshBtn(button, sp_level, targetPos);
+            ElementEffects[_focusing].RefreshBtn(button, skillId, targetPos);
         }
     }
 

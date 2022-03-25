@@ -37,15 +37,15 @@ namespace dataAccess
         // 有两种模式，1: “账户技能石” 2 ：纯粹展示用技能石
         public static SKStoneItem GenerateStoneModel(string skillID, bool openStoneFeature)
         {
-            SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(skillID);
+            var skillConfig = SkillConfigTable.GetSkillConfig(skillID);
             if (skillConfig == null)
             {
                 return null;
             }
             
-            GameObject Icon = SkillIconsDic.Instance.FindSkillIconPrefabByResource(skillID);
-            GameObject ob = GameObject.Instantiate(Icon);
-            SKStoneItem item = ob.GetComponent<SKStoneItem>();
+            var Icon = SkillIconsDic.Instance.FindSkillIconPrefabByResource(skillID);
+            var ob = GameObject.Instantiate(Icon);
+            var item = ob.GetComponent<SKStoneItem>();
             if (item == null)
             {
                 item = Icon.AddComponent<SKStoneItem>();

@@ -21,6 +21,10 @@ namespace Soul
             if (runner.InputsManager != null)
             {
                 changed = BtnTrigger(runner, Options, runner.InputsManager);
+                if (changed)
+                {
+                    runner.InputsManager.BtnRefreshEffects();
+                }
             }
             #endregion
             
