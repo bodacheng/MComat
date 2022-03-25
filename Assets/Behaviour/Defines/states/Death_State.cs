@@ -10,7 +10,7 @@ namespace Soul
         float _timeCounter;
         Vector3 _xz;
         bool _touchedBoundary;
-        bool _dropped, _canWakeUp;
+        bool _dropped;
         AnimationCurve _usedYCurve;
         AnimationCurve _usedZCurve;
         Decompositioner _layBlocker;
@@ -31,7 +31,6 @@ namespace Soul
             _timeCounter = 0;
             _touchedBoundary = false;
             _dropped = false;
-            _canWakeUp = false;
             FightParamsRef.GettingDamage = true;
             _BasicPhysicSupport.SetUsingGravity(false);
             _Animator.SetFloat("speed", 0f);
@@ -138,18 +137,6 @@ namespace Soul
                     }
                     break;
                 case 3:
-                    if (!_canWakeUp)
-                    {
-                        if (_dropped && _timeCounter > FightGlobalSetting._CanGetUpAfterKnockoffToGround)
-                        {
-                            _canWakeUp = true;
-                            _SkillCancelFlag.turn_on_flag();
-                        }
-                    }
-                    if (_timeCounter > FightGlobalSetting._MaxKnockoffLaidGroundTime)
-                    {
-                        _AIStateRunner.ChangeState("getUp");
-                    }
                     break;
             }
         }

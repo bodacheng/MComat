@@ -9,30 +9,28 @@ public class AutoSwitch : MonoBehaviour
     [SerializeField] private Button Btn;
     [SerializeField] private GameObject onObject;
     [SerializeField] private GameObject offObject;
-
-    private bool isOn;
+    
     private Action<bool> _action;
+    private Func<bool> currentState;
     
     void Switch(bool on)
     {
-        isOn = on;
-        _action.Invoke(isOn);
         onObject.SetActive(on);
         offObject.SetActive(!on);
-        Debug.Log("Pressed" + isOn);
     }
     
-    private void Awake()
-    {
-        Btn.onClick.AddListener(() =>
-        {
-            Switch(!isOn);
-        });
-    }
-
-    public void INI(bool on, Action<bool> action)
+    public void INI(Func<bool> currentState, Action<bool> action)
     {
         _action = action;
-        Switch(on);
+        this.currentState = currentState;
+        
+        Btn.onClick.AddListener(() =>
+        {
+            var changedState = !this.currentState();
+            _action.Invoke(changedState);
+            Switch(changedState);
+        });
+        
+        Switch(this.currentState());
     }
 }
