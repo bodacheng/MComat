@@ -55,6 +55,11 @@ namespace Soul
             return false;
         }
         
+        public override bool Force_enter_condition()
+        {
+            return false;
+        }
+
         public override void AI_State_exit()
         {
             base.AI_State_exit();
