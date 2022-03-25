@@ -75,8 +75,8 @@ public class FightingStepLayer : UILayer
         
         pauseButton.onClick.AddListener(pauseAction.Invoke);
         
-        Team1Auto.INI(RTFightManager.target.team1.Auto, switchTeam1Auto.Invoke);
-        Team2Auto.INI(RTFightManager.target.team2.Auto, switchTeam2Auto.Invoke);
+        Team1Auto.INI(RTFightManager.target.team1.Auto, switchTeam1Auto);
+        Team2Auto.INI(RTFightManager.target.team2.Auto, switchTeam2Auto);
         
         team1UI.TeamMode = NetFightScene.Fight.Team1Mode;
         team2UI.TeamMode = NetFightScene.Fight.Team2Mode;
