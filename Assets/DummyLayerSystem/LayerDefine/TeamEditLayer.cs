@@ -39,7 +39,7 @@ public class TeamEditLayer : UILayer
     void CancelSelect()
     {
         focusingPos = -1;
-        HeroIcon.SelectedFeature(null, selectedFrame, 1.1f);
+        HeroIcon.SelectedFeature(null, selectedFrame, 1f);
     }
 
     public void UnitIconClick(string instanceID, string teamMode)
@@ -131,16 +131,16 @@ public class TeamEditLayer : UILayer
                 switch (focusingPos)
                 {
                     case 0:
-                        HeroIcon.SelectedFeature(team1front, selectedFrame, 1.1f);
+                        HeroIcon.SelectedFeature(team1front, selectedFrame, 1f);
                         break;
                     case 1:
-                        HeroIcon.SelectedFeature(team1left, selectedFrame, 1.1f);
+                        HeroIcon.SelectedFeature(team1left, selectedFrame, 1f);
                         break;
                     case 2:
-                        HeroIcon.SelectedFeature(team1right, selectedFrame, 1.1f);
+                        HeroIcon.SelectedFeature(team1right, selectedFrame, 1f);
                         break;
                     default:
-                        HeroIcon.SelectedFeature(null, selectedFrame, 1.1f);
+                        HeroIcon.SelectedFeature(null, selectedFrame, 1f);
                         break;
                 }
                 

@@ -16,6 +16,9 @@ namespace mainMenu
         [SerializeField] Button EX1Tab;
         [SerializeField] Button EX2Tab;
         [SerializeField] Button EX3Tab;
+
+        [Header("order")] 
+        [SerializeField] Button orderBtn;
         
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _tabEffects;
@@ -34,6 +37,7 @@ namespace mainMenu
             _Selected = SelectedFrame;
             rares = new List<int> { 0, 1, 2, 3, 4, 5 };//否则其值会被inspector修改
             FocusingType = "human";
+            orderBtn.onClick.AddListener(SwitchOrder);
         }
 
         public string FocusingType

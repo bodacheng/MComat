@@ -76,7 +76,7 @@ namespace mainMenu
         void CancelSelect()
         {
             _focusingPosNum = -1;
-            HeroIcon.SelectedFeature(null, selectedFrame, 1);
+            HeroIcon.SelectedFeature(null, selectedFrame, 1.1f);
         }
 
         void FrameRefresh(Transform t)

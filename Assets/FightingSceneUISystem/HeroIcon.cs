@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
-using UnityEngine.Serialization;
 
 public class HeroIcon : MonoBehaviour {
 
@@ -10,11 +9,10 @@ public class HeroIcon : MonoBehaviour {
     public Image Icon;
     public Image frame;
     public Image cooldownCurtain;
-    
-    [FormerlySerializedAs("CharDataInfo")] public UnitInfo unitInfo;
+    public UnitInfo unitInfo;
     public UnitConfig unitConfig;
     
-    static IDictionary<Element, Sprite> frames = new Dictionary<Element, Sprite>();
+    static readonly IDictionary<Element, Sprite> frames = new Dictionary<Element, Sprite>();
     
     public static void INIFrames()
     {
@@ -145,22 +143,22 @@ public class HeroIcon : MonoBehaviour {
     }
     
     // 这个本身没问题但目前使用他的方式是有问题的。围绕SetParent(T);
-    public static HeroIcon ArrangeHeroIconToT(HeroIcon heroIconPretab, UnitInfo unitInfo, RectTransform T)
+    public static HeroIcon ArrangeHeroIconToT(HeroIcon prefab, UnitInfo unitInfo, RectTransform T)
     {
-        HeroIcon MyMemberIcon = Instantiate(heroIconPretab);
-        UnitConfig unitConfig = Units.GetUnitConfig(unitInfo.r_id);
+        var icon = Instantiate(prefab);
+        var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
         if (unitConfig == null)
         {
             Debug.Log("?? : " + unitInfo.r_id);
             return null;
         }
-        MyMemberIcon.unitInfo = unitInfo;
-        MyMemberIcon.unitConfig = unitConfig;
-        MyMemberIcon.ChangeIcon(MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig.element);
-        MyMemberIcon.transform.SetParent(T);
-        MyMemberIcon.transform.localPosition = Vector3.one;
-        MyMemberIcon.transform.localScale = Vector3.one;
-        MyMemberIcon.gameObject.SetActive(true);
-        return MyMemberIcon;
+        icon.unitInfo = unitInfo;
+        icon.unitConfig = unitConfig;
+        icon.ChangeIcon(MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig.element);
+        icon.transform.SetParent(T);
+        icon.transform.localPosition = Vector3.one;
+        icon.transform.localScale = Vector3.one;
+        icon.gameObject.SetActive(true);
+        return icon;
     }
 }

@@ -7,7 +7,7 @@ using TouchScript.Gestures;
 
 public class AutoSwitch : MonoBehaviour
 {
-    [SerializeField] private PressGesture Btn;
+    [SerializeField] private Button Btn;
     [SerializeField] private GameObject onObject;
     [SerializeField] private GameObject offObject;
     
@@ -24,9 +24,9 @@ public class AutoSwitch : MonoBehaviour
     {
         _action = action;
         this.currentState = currentState;
-        Btn.Pressed += temp;
+        Btn.onClick.AddListener(temp);
         
-        void temp(object sender, System.EventArgs e)
+        void temp()
         {
             var changedState = !this.currentState();
             _action.Invoke(changedState);
