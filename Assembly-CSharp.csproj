@@ -775,7 +775,6 @@
      <Compile Include="Assets\POFX\Scripts\FX\POFX_Refraction.cs" />
      <Compile Include="Assets\TheNineSlot\MiniNineSlots\NineForShow_Util.cs" />
      <Compile Include="Assets\TouchScript\Scripts\InputSources\InputHandlers\TouchHandler.cs" />
-     <Compile Include="Assets\UI\CameraSwipe.cs" />
      <Compile Include="Assets\Behaviour\Soul\Sensor.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Input\SliderGamepadManager.cs" />
      <Compile Include="Assets\theBlur\Blur_basicdata.cs" />
