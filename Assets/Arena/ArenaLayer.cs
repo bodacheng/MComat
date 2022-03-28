@@ -83,7 +83,6 @@ public class ArenaLayer : UILayer
             },
             () =>
             {
-                PopupLayer.Close();
                 PreScene.ReturnToLobby("通讯错误");
             }
         );

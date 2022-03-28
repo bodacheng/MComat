@@ -12,7 +12,7 @@ public class StoneSell : MainSceneProcess
     public StoneSell()
     {
         Step = MainSceneStep.SkillStones_Sell;
-        EelementsInherit(PreScene.target);
+        Inherit(PreScene.target);
     }
 
     private StoneListLayer StoneListLayer;

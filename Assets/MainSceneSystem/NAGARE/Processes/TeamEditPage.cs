@@ -20,18 +20,18 @@ public class TeamEditPage : MainSceneProcess
     public TeamEditPage()
     {
         Step = MainSceneStep.TeamEditFront;
-        EelementsInherit(PreScene.target);
+        Inherit(PreScene.target);
     }
     
-    void EnterProcess(string teammode)
+    void EnterProcess(string teamMode)
     {
-        TeamEditLayer teamEditLayer = TeamEditLayer.Open(teammode);
+        var teamEditLayer = TeamEditLayer.Open(teamMode);
         if (PreScene.target._focusing != null)
             teamEditLayer._nineForShow.ShowStones_Acc(PreScene.target._focusing.id);
         
-        UnitsLayer unitsLayer = UnitsLayer.Open();
+        var unitsLayer = UnitsLayer.Open();
         unitsLayer.DisplayUnitIcons(true);
-        unitsLayer.SetUnitsIconOnClick((x) => teamEditLayer.UnitIconClick(x, teamMode));
+        unitsLayer.SetUnitsIconOnClick((x) => teamEditLayer.UnitIconClick(x, this.teamMode));
         
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
     }
@@ -46,7 +46,7 @@ public class TeamEditPage : MainSceneProcess
     {
         UnitsLayer.Close();
         TeamEditLayer.Close();
-        
+        PopupLayer.Loading(">", PreScene.target.T);
         TeamSet.SaveTeamSet(teamMode, TeamSaveFinished);
         switch (teamMode)
         {
@@ -54,8 +54,11 @@ public class TeamEditPage : MainSceneProcess
                 CloudScript.ArenaDefendTeamSave(TeamSet.ToDic(TeamSet.Arena3V3) , ArenaDefendSaved);
                 missionWatcher = new MissionWatcher(
                     new List<string>() {"arenaDefendSaved", "teamSavedFinished"},
-                    () => {},
-                    () => { PreScene.ReturnToLobby("返回大厅？"); }
+                    () =>
+                    {
+                        PopupLayer.Close();
+                    },
+                    () => {}
                 );
                 break;
             case "arcade":
@@ -63,8 +66,11 @@ public class TeamEditPage : MainSceneProcess
                     new List<string>() {
                         "teamSavedFinished"
                     },
-                    () => {},
-                    () => { PreScene.ReturnToLobby("返回大厅？");}
+                    () =>
+                    {
+                        PopupLayer.Close();
+                    },
+                    () => {}
                 );
                 break;
         }

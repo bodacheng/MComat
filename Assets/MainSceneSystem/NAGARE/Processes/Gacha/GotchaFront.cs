@@ -8,7 +8,7 @@ public class GotchaFront : MainSceneProcess
     public GotchaFront()
     {
         Step = MainSceneStep.GotchaFront;
-        EelementsInherit(PreScene.target);
+        Inherit(PreScene.target);
     }
      
     public override void ProcessEnter()

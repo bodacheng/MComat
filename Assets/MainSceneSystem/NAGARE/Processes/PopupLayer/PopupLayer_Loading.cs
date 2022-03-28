@@ -12,7 +12,6 @@ public partial class PopupLayer : UILayer
     {
         Observable.Timer(TimeSpan.FromSeconds(CountTime), Scheduler.MainThreadIgnoreTimeScale).Subscribe(_ =>
         {
-            Close();
             PreScene.ReturnToLobby("通讯错误, 返回主屏幕");
         }).AddTo(disposables);                                 
     }

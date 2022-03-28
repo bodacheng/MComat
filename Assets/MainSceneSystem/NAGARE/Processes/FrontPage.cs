@@ -42,7 +42,7 @@ public class FrontPage : MainSceneProcess
     public FrontPage()
     {
         Step = MainSceneStep.FrontPage;
-        EelementsInherit(PreScene.target);
+        Inherit(PreScene.target);
     }
 
     FrontLayer frontLayer;

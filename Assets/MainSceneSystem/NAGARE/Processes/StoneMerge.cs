@@ -8,7 +8,7 @@ public class StoneMerge : MainSceneProcess
     public StoneMerge()
     {
         Step = MainSceneStep.StoneMerge;
-        EelementsInherit(PreScene.target);
+        Inherit(PreScene.target);
     }
     
     IEnumerator EnterProcess()

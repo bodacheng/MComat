@@ -14,7 +14,7 @@ public class ArenaPage : MainSceneProcess
     public ArenaPage()
     {
         Step = MainSceneStep.Arena;
-        EelementsInherit(PreScene.target);
+        Inherit(PreScene.target);
     }
     
     public override void ProcessEnter()

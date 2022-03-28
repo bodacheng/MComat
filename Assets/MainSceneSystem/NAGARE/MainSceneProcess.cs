@@ -8,10 +8,9 @@ namespace mainMenu
 
         public SingleThreadProcesser mainProcessRunner;
         public CameraManager _CameraManager;
-        public ProcessesRunner SubProcessesRunner;
-        public MissionWatcher missionWatcher;
-
-        public void EelementsInherit(PreScene _preparingScene)
+        protected MissionWatcher missionWatcher;
+        
+        protected void Inherit(PreScene _preparingScene)
         {
             _CameraManager = _preparingScene._CameraManager;
             mainProcessRunner = _preparingScene.mainProcessRunner;

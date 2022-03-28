@@ -10,7 +10,7 @@ public class MonsterEditPage : MainSceneProcess
     {
         missionWatcher.Finish("itemsLoadFinished", value);
     }
-
+    
     void EnterProcess()
     {
         var CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
@@ -28,15 +28,12 @@ public class MonsterEditPage : MainSceneProcess
     public MonsterEditPage()
     {
         Step = MainSceneStep.UnitSkillEdit;
-        EelementsInherit(PreScene.target);
+        Inherit(PreScene.target);
     }
     
-    //private StoneListSideLayer StoneListSideLayer;
     public override void ProcessEnter()
     {
         PlayFabReadClient.LoadItems(ItemsLoadFinished);
-        
-        //StoneListSideLayer = StoneListSideLayer.Open();
         
         missionWatcher = new MissionWatcher(
             new List<string>() {"itemsLoadFinished"},
@@ -59,8 +56,8 @@ public class MonsterEditPage : MainSceneProcess
     {
         SkillEditLayer.Close();
     }
-
-    Vector3 screenPos = new Vector3(0.23f, 0.3f, 10);
+    
+    readonly Vector3 screenPos = new Vector3(0.23f, 0.3f, 10);
     public override void LocalUpdate()
     {
         SkillShowSupporter.SkillsPrintOutLateUpdate();

@@ -6,7 +6,7 @@ public class SelfFightPage : MainSceneProcess
     public SelfFightPage()
     {
         Step = MainSceneStep.SelfFightFront;
-        EelementsInherit(PreScene.target);
+        Inherit(PreScene.target);
     }
 
     private SelfFightLayer selfFightLayer;

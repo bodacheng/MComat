@@ -9,7 +9,7 @@ public class ArcadeFrontPage : MainSceneProcess
     public ArcadeFrontPage()
     {
         Step = MainSceneStep.ArcadeFront;
-        EelementsInherit(PreScene.target);
+        Inherit(PreScene.target);
     }
 
     ArcadeTop arcadeTop;

@@ -12,7 +12,7 @@ public class UnitListPage : MainSceneProcess
     public UnitListPage()
     {
         Step = MainSceneStep.MonsterList;
-        EelementsInherit(PreScene.target);
+        Inherit(PreScene.target);
     }
 
     public override void ProcessEnter()

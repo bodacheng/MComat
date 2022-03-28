@@ -10,7 +10,7 @@ public class GotchaResult : MainSceneProcess
     public GotchaResult()
     {
         Step = MainSceneStep.GotchaResult;
-        EelementsInherit(PreScene.target);
+        Inherit(PreScene.target);
     }
     
     public override void ProcessEnter()

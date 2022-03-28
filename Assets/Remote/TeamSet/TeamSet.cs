@@ -2,7 +2,7 @@
 // 站位信息应该有多个版本，其中包括剧情模式版本，不同的竞技场对应版本等等。
 namespace dataAccess
 {
-    public partial class TeamSet
+    public static partial class TeamSet
     {
         public static PosKeySet Default = new PosKeySet();
         public static PosKeySet Arena3V3 = new PosKeySet();

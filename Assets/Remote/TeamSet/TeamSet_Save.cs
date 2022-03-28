@@ -1,25 +1,22 @@
 ﻿using System;
-using UnityEngine;
 using Newtonsoft.Json;
-using Api.Dto.Model;
-using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
 
 // 站位信息应该有多个版本，其中包括剧情模式版本，不同的竞技场对应版本等等。
 namespace dataAccess
 {
-    public partial class TeamSet
+    public static partial class TeamSet
     {
         public static void SaveTeamSet(string Mode, Action<bool> success)
         {
-            TeamPos form = new TeamPos();
+            var form = new TeamPos();
             switch (Mode)
             {
                 case "arcade":
-                    string F = Default.GetInstanceIdOnPos(0);
-                    string L = Default.GetInstanceIdOnPos(1);
-                    string R = Default.GetInstanceIdOnPos(2);
+                    var F = Default.GetInstanceIdOnPos(0);
+                    var L = Default.GetInstanceIdOnPos(1);
+                    var R = Default.GetInstanceIdOnPos(2);
                     
                     form.l = (L != null) ? L : null;
                     form.f = (F != null) ? F : null;
@@ -32,7 +29,7 @@ namespace dataAccess
                     break;
             }
 
-            string targetModeCode = "";
+            var targetModeCode = "";
             switch (Mode)
             {
                 case "arcade":

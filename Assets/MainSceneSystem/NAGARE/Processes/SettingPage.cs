@@ -7,7 +7,7 @@ public class SettingPage : MainSceneProcess
     public SettingPage()
     {
         Step = MainSceneStep.Setting;
-        EelementsInherit(PreScene.target);
+        Inherit(PreScene.target);
     }
     
     public override void ProcessEnter()

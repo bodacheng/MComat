@@ -109,10 +109,10 @@ public class HeroIcon : MonoBehaviour {
     
     public static void ChangeHeroIconByInstanceId(string instanceId, HeroIcon Icon)
     {
-        if (instanceId != null)
+        var _one = MyMonsters.Get(instanceId);
+        if (_one != null)
         {
-            UnitInfo _one = MyMonsters.Get(instanceId);
-            UnitConfig unitConfig = Units.GetUnitConfig(_one.r_id);
+            var unitConfig = Units.GetUnitConfig(_one.r_id);
             ChangeHeroIconByRID(unitConfig.RECORD_ID,Icon);
         }
         else

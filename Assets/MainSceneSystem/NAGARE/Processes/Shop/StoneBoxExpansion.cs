@@ -7,7 +7,7 @@ public class StoneBoxExpansion : MainSceneProcess
     public StoneBoxExpansion()
     {
         Step = MainSceneStep.BoxExpansion;
-        EelementsInherit(PreScene.target);
+        Inherit(PreScene.target);
     }
     
     public override void ProcessEnter()

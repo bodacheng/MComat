@@ -63,6 +63,7 @@ namespace mainMenu
         
         public static void ReturnToLobby(string error)
         {
+            PopupLayer.Close();
             var popupLayer = PopupLayer.Open(PreScene.target.T);
             popupLayer.ArrangeConfirmWindow((() => { SceneManager.LoadScene(1);}), error);
         }
