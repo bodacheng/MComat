@@ -68,6 +68,5 @@ public partial class PopupLayer : UILayer {
             });
         }
     }
-        
     #endregion
 }
