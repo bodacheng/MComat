@@ -439,8 +439,8 @@
      <Compile Include="Assets\Crystal Effects Volume 1\Scrypts\Rotate_the_object.cs" />
      <Compile Include="Assets\Structure\SingleThreadProcesser\SingleThreadProcesser2.cs" />
      <Compile Include="Assets\Asstes\Sci-Fi Arsenal\InteractiveDemo\Demo Scripts\SciFiBeamScript.cs" />
-     <Compile Include="Assets\POFX\Scripts\POFX.cs" />
      <Compile Include="Assets\FightSceneSystem\FSceneProcessesRunner.cs" />
+     <Compile Include="Assets\POFX\Scripts\POFX.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Utils\Geom\ProjectionUtils.cs" />
      <Compile Include="Assets\TeamUIManager\TeamUIManager.cs" />
      <Compile Include="Assets\Behaviour\BtnUI\ElementEffectsGroup.cs" />

@@ -1696,7 +1696,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1792276125}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: IngameDebugConsole.DebugLogRecycledListView, Assembly-CSharp-firstpass
         m_MethodName: UpdateItemsInTheList
         m_Mode: 6
         m_Arguments:
