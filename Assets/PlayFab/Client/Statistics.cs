@@ -5,18 +5,18 @@ using System;
 
 public partial class PlayFabReadClient
 {
-    public static void GetStatistics(Action<int> finished)
+    public static void GetStatistics(Action<bool> finished)
     {
         PlayFabClientAPI.GetPlayerStatistics(
             new GetPlayerStatisticsRequest(),
             (GetPlayerStatisticsResult result) => {
                 OnGetStatistics(result);
-                finished(1);
+                finished(true);
             },
             error =>
             {
                 Debug.Log(error.GenerateErrorReport());
-                finished.Invoke(-1);
+                finished.Invoke(false);
             }
         );
     }

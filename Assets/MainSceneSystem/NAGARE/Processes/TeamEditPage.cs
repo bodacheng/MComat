@@ -2,20 +2,19 @@
 using mainMenu;
 using dataAccess;
 using System.Collections.Generic;
-using UniRx;
 
 public class TeamEditPage : MainSceneProcess
 {
     string teamMode;
-    ReactiveProperty<int> teamSavedFinished = new ReactiveProperty<int>(0);
-    void TeamSaveFinished(int value)
+    
+    void TeamSaveFinished(bool value)
     {
-        teamSavedFinished.Value = value;
+        missionWatcher.Finish("teamSavedFinished", value);
     }
-    ReactiveProperty<int> arenaDefendSaved = new ReactiveProperty<int>(0);
-    void ArenaDefendSaved(int value)
+    
+    void ArenaDefendSaved(bool value)
     {
-        arenaDefendSaved.Value = value;
+        missionWatcher.Finish("arenaDefendSaved", value);
     }
     
     public TeamEditPage()
@@ -54,27 +53,17 @@ public class TeamEditPage : MainSceneProcess
             case "arena":
                 CloudScript.ArenaDefendTeamSave(TeamSet.ToDic(TeamSet.Arena3V3) , ArenaDefendSaved);
                 missionWatcher = new MissionWatcher(
-                    new List<ReactiveProperty<int>>() {
-                        arenaDefendSaved, teamSavedFinished
-                    },
-                    () => {
-                        TeamSaveFinished(0);
-                        ArenaDefendSaved(0); 
-                        missionWatcher.DisposeAll();
-                    },
+                    new List<string>() {"arenaDefendSaved", "teamSavedFinished"},
+                    () => {},
                     () => { PreScene.ReturnToLobby("返回大厅？"); }
                 );
                 break;
             case "arcade":
                 missionWatcher = new MissionWatcher(
-                    new List<ReactiveProperty<int>>() {
-                        teamSavedFinished
+                    new List<string>() {
+                        "teamSavedFinished"
                     },
-                    () => {                 
-                        TeamSaveFinished(0);
-                        ArenaDefendSaved(0);
-                        missionWatcher.DisposeAll();
-                    },
+                    () => {},
                     () => { PreScene.ReturnToLobby("返回大厅？");}
                 );
                 break;

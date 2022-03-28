@@ -13,16 +13,14 @@ public class StonesPage : MainSceneProcess
     
     private StoneListLayer stoneListLayer;
     
-    readonly ReactiveProperty<int> userReadOnlyDataLoadFinished = new ReactiveProperty<int>(0);
-    void UserReadOnlyDataLoadFinished(int value)
+    void UserReadOnlyDataLoadFinished(bool value)
     {
-        userReadOnlyDataLoadFinished.Value = value;
+        missionWatcher.Finish("userReadOnlyDataLoadFinished", value);
     }
     
-    readonly ReactiveProperty<int> itemsLoadFinished = new ReactiveProperty<int>(0);
-    void ItemsLoadFinished(int value)
+    void ItemsLoadFinished(bool value)
     {
-        itemsLoadFinished.Value = value;
+        missionWatcher.Finish("itemsLoadFinished", value);
     }
     
     public override void ProcessEnter()
@@ -36,8 +34,8 @@ public class StonesPage : MainSceneProcess
         PlayFabReadClient.LoadItems(ItemsLoadFinished);
         
         missionWatcher = new MissionWatcher(
-            new List<ReactiveProperty<int>>() {
-                itemsLoadFinished, userReadOnlyDataLoadFinished
+            new List<string>() {
+                "itemsLoadFinished", "userReadOnlyDataLoadFinished"
             },
             () =>
             {
@@ -84,9 +82,6 @@ public class StonesPage : MainSceneProcess
     
     public override void ProcessEnd()
     {
-        missionWatcher.DisposeAll();
-        ItemsLoadFinished(0);
-        UserReadOnlyDataLoadFinished(0);
         StoneListLayer.Close();
     }
 }

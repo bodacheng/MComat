@@ -1,22 +1,19 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using mainMenu;
 using System.Collections.Generic;
-using UniRx;
 
 public class MonsterEditPage : MainSceneProcess
 {
     private SkillEditLayer skillEditLayer;
-
-    ReactiveProperty<int> itemsLoadFinished = new ReactiveProperty<int>(0);
-    void ItemsLoadFinished(int value)
+    
+    void ItemsLoadFinished(bool value)
     {
-        itemsLoadFinished.Value = value;
+        missionWatcher.Finish("itemsLoadFinished", value);
     }
 
     void EnterProcess()
     {
-        List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
+        var CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
@@ -42,9 +39,7 @@ public class MonsterEditPage : MainSceneProcess
         //StoneListSideLayer = StoneListSideLayer.Open();
         
         missionWatcher = new MissionWatcher(
-            new List<ReactiveProperty<int>>() {
-                itemsLoadFinished
-            },
+            new List<string>() {"itemsLoadFinished"},
             () => {
                 if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
                 {
@@ -63,8 +58,6 @@ public class MonsterEditPage : MainSceneProcess
     public override void ProcessEnd()
     {
         SkillEditLayer.Close();
-        ItemsLoadFinished(0);
-        missionWatcher.DisposeAll();
     }
 
     Vector3 screenPos = new Vector3(0.23f, 0.3f, 10);

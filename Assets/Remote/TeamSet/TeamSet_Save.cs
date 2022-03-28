@@ -11,7 +11,7 @@ namespace dataAccess
 {
     public partial class TeamSet
     {
-        public static void SaveTeamSet(string Mode, Action<int> success)
+        public static void SaveTeamSet(string Mode, Action<bool> success)
         {
             TeamPos form = new TeamPos();
             switch (Mode)

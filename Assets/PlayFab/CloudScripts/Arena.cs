@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 public partial class CloudScript
 {
-    public static void ArenaDefendTeamSave(MultiDict<int, int, UnitInfo> info, Action<int> finished)
+    public static void ArenaDefendTeamSave(MultiDict<int, int, UnitInfo> info, Action<bool> finished)
     {
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest()
@@ -26,7 +26,7 @@ public partial class CloudScript
                 jsonResult.TryGetValue("success", out succeed);
                 if ((bool)succeed)
                 {
-                    finished.Invoke(1);
+                    finished.Invoke(true);
                 }
                 else
                 {
@@ -35,7 +35,7 @@ public partial class CloudScript
             },
             error =>
             {
-                finished.Invoke(-1);
+                finished.Invoke(false);
                 Debug.Log(error.Error);
             }
         );

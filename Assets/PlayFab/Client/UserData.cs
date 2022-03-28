@@ -8,38 +8,38 @@ using Newtonsoft.Json;
 
 public partial class PlayFabReadClient
 {
-    public static void GetUserData(GetUserDataRequest req, Action<int> finished)
+    public static void GetUserData(GetUserDataRequest req, Action<bool> finished)
     {
         PlayFabClientAPI.GetUserData
         (
             req,
             (GetUserDataResult obj) => {
                 //_AccInfo.PlayerName = obj.Data["PlayerName"].Value;
-                finished.Invoke(1);
+                finished.Invoke(true);
             },
             errorCallback => {
                 Debug.Log("Basic accInfo fail:" + errorCallback.ErrorMessage);
-                finished.Invoke(-1);
+                finished.Invoke(false);
             }
         );
     }
 
-    public static void UpdateUserData(UpdateUserDataRequest req, Action<int> finished)
+    public static void UpdateUserData(UpdateUserDataRequest req, Action<bool> finished)
     {
         PlayFabClientAPI.UpdateUserData
         (
             req,
             (UpdateUserDataResult obj) => {
-                finished.Invoke(1);
+                finished.Invoke(true);
             },
             errorCallback => {
                 Debug.Log("fail:" + errorCallback.ErrorMessage);
-                finished.Invoke(-1);
+                finished.Invoke(false);
             }
         );
     }
 
-    public static void LoadTeamSet(string Mode, Action<int> finished)
+    public static void LoadTeamSet(string Mode, Action<bool> finished)
     {
         string targetModeCode = Mode;
         PlayFabClientAPI.GetUserData(
@@ -80,16 +80,16 @@ public partial class PlayFabReadClient
                             break;
                     }
                 }
-                finished.Invoke(1);
+                finished.Invoke(true);
             },
             errorCallback => {
                 Debug.Log(errorCallback);
-                finished.Invoke(-1);
+                finished.Invoke(false);
             }
         );
     }
 
-    public static void GetUserReadOnlyData(Action<int> finished)
+    public static void GetUserReadOnlyData(Action<bool> finished)
     {
         PlayFabClientAPI.GetUserReadOnlyData
         (
@@ -117,11 +117,11 @@ public partial class PlayFabReadClient
                     PlayerAccountInfo.Me.StoneBoxSize = 50;
                     Debug.Log("玩家数据出错 boxsize");
                 }
-                finished.Invoke(1);
+                finished.Invoke(true);
             },
             errorCallback => {
                 Debug.Log("Basic accInfo fail:" + errorCallback.ErrorMessage);
-                finished.Invoke(-1);
+                finished.Invoke(false);
             }
         );
     }

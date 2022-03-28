@@ -5,45 +5,38 @@ using dataAccess;
 using DG.Tweening;
 using System.Collections.Generic;
 using DummyLayerSystem;
-using UniRx;
 using PlayFab.ClientModels;
 
 public class FrontPage : MainSceneProcess
 {
-    readonly ReactiveProperty<int> userDataLoadFinished = new ReactiveProperty<int>(0);
-    void UserDataLoadFinished(int value)
+    void UserDataLoadFinished(bool value)
     {
-        userDataLoadFinished.Value = value;
+        missionWatcher.Finish("userDataLoadFinished", value);
     }
-
-    readonly ReactiveProperty<int> userReadOnlyDataLoadLoaded = new ReactiveProperty<int>(0);
-    void UserReadOnlyDataLoadFinished(int value)
+    
+    void UserReadOnlyDataLoadFinished(bool value)
     {
-        userReadOnlyDataLoadLoaded.Value = value;
+        missionWatcher.Finish("userReadOnlyDataLoadLoaded", value);
     }
-
-    readonly ReactiveProperty<int> statisticsFinished = new ReactiveProperty<int>(0);
-    void StatisticsLoadFinished(int value)
+    
+    void StatisticsLoadFinished(bool value)
     {
-        statisticsFinished.Value = value;
+        missionWatcher.Finish("statisticsFinished", value);
     }
-
-    readonly ReactiveProperty<int> itemsLoadFinished = new ReactiveProperty<int>(0);
-    void ItemsLoadFinished(int value)
+    
+    void ItemsLoadFinished(bool value)
     {
-        itemsLoadFinished.Value = value;
+        missionWatcher.Finish("itemsLoadFinished", value);
     }
-
-    readonly ReactiveProperty<int> arenaTFinished = new ReactiveProperty<int>(0);
-    void ArenaTFinished(int value)
+    
+    void ArenaTFinished(bool value)
     {
-        arenaTFinished.Value = value;
+        missionWatcher.Finish("arenaTFinished", value);
     }
-
-    readonly ReactiveProperty<int> arcadeTFinished = new ReactiveProperty<int>(0);
-    void ArcadeTFinished(int value)
+    
+    void ArcadeTFinished(bool value)
     {
-        arcadeTFinished.Value = value;
+        missionWatcher.Finish("arcadeTFinished", value);
     }
 
     public FrontPage()
@@ -77,18 +70,17 @@ public class FrontPage : MainSceneProcess
         
         UpperInfoBar.Open(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), 
             () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox));
-        PopupLayer.Close();
     }
     
     public override void ProcessEnter()
     {
         PopupLayer.Loading(">", PreScene.target.T);
         PlayFabReadClient.GetUserData(
-            new GetUserDataRequest()
+            new GetUserDataRequest
             {
                 PlayFabId = PlayerAccountInfo.Me.PlayFabUsername,
                 Keys = new List<string>() { "PlayerName" }
-            },UserDataLoadFinished);
+            }, UserDataLoadFinished);
         PlayFabReadClient.GetUserReadOnlyData(UserReadOnlyDataLoadFinished);
         PlayFabReadClient.GetStatistics(StatisticsLoadFinished);
         
@@ -98,11 +90,14 @@ public class FrontPage : MainSceneProcess
         PlayFabReadClient.LoadTeamSet("arcade", ArcadeTFinished);
         
         missionWatcher = new MissionWatcher(
-            new List<ReactiveProperty<int>>() {
-                userDataLoadFinished, itemsLoadFinished, statisticsFinished, userReadOnlyDataLoadLoaded, arcadeTFinished, arenaTFinished
+            new List<string>
+            {
+                "userDataLoadFinished", "itemsLoadFinished", "statisticsFinished", 
+                "userReadOnlyDataLoadLoaded", "arcadeTFinished", "arenaTFinished"
             },
             () =>
             {
+                PopupLayer.Close();
                 mainProcessRunner.RunAsQueued(EnterProcess());
             },
             () => { Debug.Log("错误，怎么办？"); }
@@ -113,12 +108,6 @@ public class FrontPage : MainSceneProcess
     {
         if (frontLayer != null)
             GameObject.Destroy(frontLayer.gameObject);
-
-        missionWatcher.DisposeAll();
-        UserDataLoadFinished(0);
-        ItemsLoadFinished(0);
-        UserReadOnlyDataLoadFinished(0);
-        StatisticsLoadFinished(0);
         
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
         UpperInfoBar.Close();

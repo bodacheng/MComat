@@ -1,88 +1,39 @@
 ﻿using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
-using UniRx;
 using System;
-using UnityEngine;
 
 public class MissionWatcher
 {
-    private CompositeDisposable Disposable { get; } = new CompositeDisposable();
-
-    List<ReactiveProperty<int>> MissionFlags;
-
-    ReactiveProperty<int> MissionCompletedCount = new ReactiveProperty<int>();
-
-    public void DisposeAll()
+    private readonly IDictionary<string, bool> _missionDic;
+    private readonly Action _success, _fail;
+    
+    public MissionWatcher(List<string> missions, Action success = null, Action fail = null)
     {
-        Disposable.Dispose();
-    }
-
-    async void RunUniTask(UniTask task)
-    {
-        await task;
-    }
-
-    public MissionWatcher(List<ReactiveProperty<int>> missionFlags, UniTask success, Action fail)
-    {
-        MissionFlags = missionFlags;
-        MissionCompletedCount.Value = 0;
-        for (int i = 0; i < MissionFlags.Count; i++)
+        _missionDic = new Dictionary<string, bool>();
+        foreach (var missionCode in missions)
         {
-            MissionFlags[i].Subscribe(x =>
-            {
-                switch (x)
-                {
-                    case -1:
-                        fail.Invoke();
-                        DisposeAll();
-                        break;
-                    case 1:
-                        MissionCompletedCount.Value += 1;
-                        x = 0;
-                        break;
-                }
-            }).AddTo(Disposable);
+            _missionDic.Add(missionCode, false);
         }
-
-        MissionCompletedCount.Subscribe(x =>
-        {
-            if (x == MissionFlags.Count)
-            {
-                RunUniTask(success);
-                DisposeAll();
-            }
-        }).AddTo(Disposable);
+        this._success = success;
+        this._fail = fail;
     }
 
-    public MissionWatcher(List<ReactiveProperty<int>> missionFlags, Action success, Action fail)
+    public void Finish(string missionCode, bool value)
     {
-        MissionFlags = missionFlags;
-        MissionCompletedCount.Value = 0;
-        for (int i = 0; i < MissionFlags.Count; i++)
+        _missionDic[missionCode] = value;
+        if (!value)
         {
-            MissionFlags[i].Subscribe(x =>
-            {
-                switch (x)
-                {
-                    case -1:
-                        fail.Invoke();
-                        DisposeAll();
-                        break;
-                    case 1:
-                        MissionCompletedCount.Value += 1;
-                        x = 0;
-                        break;
-                }
-            }).AddTo(Disposable);
+            // 主动报告一个通信错误的时候才直接执行错误处理
+            _fail?.Invoke();
+            return;
         }
-
-        MissionCompletedCount.Subscribe(x =>
+        
+        foreach (var kv in _missionDic)
         {
-            if (x == MissionFlags.Count)
+            if (!kv.Value)
             {
-                success.Invoke();
-                DisposeAll();
+                return;
             }
-        }).AddTo(Disposable);
+        }
+        _success?.Invoke();
     }
 }

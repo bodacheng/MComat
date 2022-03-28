@@ -6,7 +6,7 @@ using System;
 
 public partial class PlayFabReadClient
 {
-    public static void LoadItems(Action<int> finished)
+    public static void LoadItems(Action<bool> finished)
     {
         MyMonsters.Dic.Clear();
         Stones.Clear();
@@ -59,11 +59,11 @@ public partial class PlayFabReadClient
                         Currencies.DiamondCount = kv.Value;
                     }
                 }
-                finished.Invoke(1);
+                finished.Invoke(true);
             },
             errorCallback => {
                 Debug.Log(errorCallback.Error);
-                finished.Invoke(-1);
+                finished.Invoke(false);
             });
         
         GetPresentGetCatalogItems();
