@@ -54,10 +54,7 @@ public class TeamEditPage : MainSceneProcess
                 CloudScript.ArenaDefendTeamSave(TeamSet.ToDic(TeamSet.Arena3V3) , ArenaDefendSaved);
                 missionWatcher = new MissionWatcher(
                     new List<string>() {"arenaDefendSaved", "teamSavedFinished"},
-                    () =>
-                    {
-                        PopupLayer.Close();
-                    },
+                    PopupLayer.Close,
                     () => {}
                 );
                 break;
@@ -66,10 +63,7 @@ public class TeamEditPage : MainSceneProcess
                     new List<string>() {
                         "teamSavedFinished"
                     },
-                    () =>
-                    {
-                        PopupLayer.Close();
-                    },
+                    PopupLayer.Close,
                     () => {}
                 );
                 break;

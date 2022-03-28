@@ -6,8 +6,8 @@ namespace mainMenu
         public MainSceneStep Step;
         public MainSceneStep nextProcessStep = MainSceneStep.None;//有的话代表本process存在一个注定会自然迁移到的下一个process。没的话代表本process不一定迁移到哪。
 
-        public SingleThreadProcesser mainProcessRunner;
-        public CameraManager _CameraManager;
+        protected SingleThreadProcesser mainProcessRunner;
+        protected CameraManager _CameraManager;
         protected MissionWatcher missionWatcher;
         
         protected void Inherit(PreScene _preparingScene)

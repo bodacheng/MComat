@@ -65,7 +65,7 @@ namespace mainMenu
         {
             PopupLayer.Close();
             var popupLayer = PopupLayer.Open(PreScene.target.T);
-            popupLayer.ArrangeConfirmWindow((() => { SceneManager.LoadScene(1);}), error);
+            popupLayer.ArrangeConfirmWindow((() => { SceneManager.LoadScene(0);}), error);
         }
         
         void BasicPhase()

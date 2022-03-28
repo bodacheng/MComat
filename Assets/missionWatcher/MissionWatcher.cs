@@ -14,8 +14,8 @@ public class MissionWatcher
         {
             _missionDic.Add(missionCode, false);
         }
-        this._success = success;
-        this._fail = fail;
+        _success = success;
+        _fail = fail;
     }
 
     public void Finish(string missionCode, bool value)
