@@ -191,11 +191,11 @@ MonoBehaviour:
   Sp3SkillExGet: 0
   GetExAfterDamageBy: 20
   ExGetAfterDamage: 10
-  slighthit_lastingtime: 0.1
-  lighthit_lastingtime: 0.3
-  heavyhit_lastingtime: 0.5
-  superhit_lastingtime: 0.6
-  highhit_lastingTime: 0.65
+  slighthitLastingtime: 0.1
+  lighthitLastingtime: 0.5
+  heavyhitLastingtime: 0.6
+  superhitLastingtime: 1
+  highhitLastingTime: 0.8
   normalattackpositionfixingtime: 0.1
   knockoffextent: 7
   MaxKnockoffLaidGroundTime: 1
@@ -205,6 +205,8 @@ MonoBehaviour:
   lightBlockLastingTime: 0.3
   heavyBlockLastingTime: 0.6
   attackDrawingDistance: 2
+  ResistanceMax: 10
+  EXMax: 120
   HurtObjectPreLoadCount: 5
   goldToExp: 1
   SkillStoneRankToExp_rank1: 100

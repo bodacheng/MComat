@@ -2061,7 +2061,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetGraphic
       value: 
-      objectReference: {fileID: 3206723498315014418}
+      objectReference: {fileID: 0}
     - target: {fileID: 1672078405889694886, guid: 2e327130f17be494280476b544e0526b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2192,18 +2192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 133c13e27409e49729eb8ffa94ced0b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3206723498315014418 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7995561999304750614, guid: 2e327130f17be494280476b544e0526b,
-    type: 3}
-  m_PrefabInstance: {fileID: 4788842967817066244}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8549945144899518016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2243,8 +2231,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114858982555920362, guid: 00bda726521bba14c8da0124216bdd05,
         type: 3}
+      propertyPath: joystickSize
+      value: 2.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 114858982555920362, guid: 00bda726521bba14c8da0124216bdd05,
+        type: 3}
       propertyPath: disableVisuals
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114858982555920362, guid: 00bda726521bba14c8da0124216bdd05,
+        type: 3}
+      propertyPath: radiusModifier
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114858982555920362, guid: 00bda726521bba14c8da0124216bdd05,
+        type: 3}
+      propertyPath: activationRange
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114858982555920362, guid: 00bda726521bba14c8da0124216bdd05,
         type: 3}
@@ -2259,12 +2262,12 @@ PrefabInstance:
     - target: {fileID: 224424276203311634, guid: 00bda726521bba14c8da0124216bdd05,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 270
+      value: 258.12003
       objectReference: {fileID: 0}
     - target: {fileID: 224424276203311634, guid: 00bda726521bba14c8da0124216bdd05,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 270
+      value: 258.12003
       objectReference: {fileID: 0}
     - target: {fileID: 224485150642013308, guid: 00bda726521bba14c8da0124216bdd05,
         type: 3}
@@ -2304,12 +2307,12 @@ PrefabInstance:
     - target: {fileID: 224485150642013308, guid: 00bda726521bba14c8da0124216bdd05,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 270
+      value: 516.24005
       objectReference: {fileID: 0}
     - target: {fileID: 224485150642013308, guid: 00bda726521bba14c8da0124216bdd05,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 270
+      value: 516.24005
       objectReference: {fileID: 0}
     - target: {fileID: 224485150642013308, guid: 00bda726521bba14c8da0124216bdd05,
         type: 3}
@@ -2535,7 +2538,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetGraphic
       value: 
-      objectReference: {fileID: 1324179549460629478}
+      objectReference: {fileID: 0}
     - target: {fileID: 1672078405889694886, guid: 2e327130f17be494280476b544e0526b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2664,17 +2667,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 133c13e27409e49729eb8ffa94ced0b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1324179549460629478 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7995561999304750614, guid: 2e327130f17be494280476b544e0526b,
-    type: 3}
-  m_PrefabInstance: {fileID: 8977256316797710832}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
