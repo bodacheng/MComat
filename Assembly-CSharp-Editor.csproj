@@ -165,7 +165,6 @@
      <Compile Include="Assets\TouchScript\Editor\Gestures\TransformGestures\Base\TransformGestureBaseEditor.cs" />
      <Compile Include="Assets\TouchScript\Editor\InputSources\StandardInputEditor.cs" />
      <None Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Utilities\link.xml" />
-     <None Include="Assets\RPGTALK\Scripts\Editor\Node Editor\Node_Editor_Framework-develop\Node_Editor\Resources\Shader\LineShader.shader" />
      <None Include="Assets\ImagineVR\Editor\Resources\Pixel.shader" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.29f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
