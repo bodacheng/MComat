@@ -97,6 +97,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: long_effect
       objectReference: {fileID: 0}
+    - target: {fileID: 9092885069460584407, guid: 4774ed9d045784bb4a42bdee06b1ba42,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 25006ae61d1d14047a3a17f1cdd0111d, type: 2}
     - target: {fileID: 9094402763675337577, guid: 4774ed9d045784bb4a42bdee06b1ba42,
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key1.b
