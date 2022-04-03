@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4613144022912779787}
   - component: {fileID: 3491934458430228758}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 829445793118672873}
   - component: {fileID: 671808965211893679}
   - component: {fileID: 671582196053643769}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Flare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4936,7 +4936,7 @@ GameObject:
   - component: {fileID: 836643872514638153}
   - component: {fileID: 671656866260910743}
   - component: {fileID: 672999091241973345}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: Dissolve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9810,7 +9810,7 @@ GameObject:
   - component: {fileID: 829443858965901783}
   - component: {fileID: 661260119635462989}
   - component: {fileID: 672758571842237723}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: slash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14684,7 +14684,7 @@ GameObject:
   - component: {fileID: 836966716046100373}
   - component: {fileID: 661466136580988395}
   - component: {fileID: 673270498523104015}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19561,7 +19561,7 @@ GameObject:
   - component: {fileID: 829394471010393209}
   - component: {fileID: 671195458599853355}
   - component: {fileID: 672984985607715773}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SparksCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24444,7 +24444,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6732413234002895734}
   - component: {fileID: 1933313967055279964}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24498,7 +24498,7 @@ GameObject:
   - component: {fileID: 7058572474234949304}
   - component: {fileID: 8360010449207813721}
   - component: {fileID: 4411220637573956294}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ring_slash_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29464,7 +29464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5037034390467159516}
   - component: {fileID: 9191726888348461360}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29514,7 +29514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8189619373116122648}
   - component: {fileID: 5193269673727249619}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29564,7 +29564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3721128876016273042}
   - component: {fileID: 1572223273965905589}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29614,7 +29614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3569797685672559582}
   - component: {fileID: 2787156218114300660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29664,7 +29664,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9061133854397531778}
   - component: {fileID: 6565485740025426914}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

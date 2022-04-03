@@ -9,12 +9,17 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 594160855387722868, guid: 1f144a2105326454a8fd8e29a54f366e,
         type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.r
-      value: 0.709363
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 594160855387722868, guid: 1f144a2105326454a8fd8e29a54f366e,
         type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 0.709363
+      objectReference: {fileID: 0}
+    - target: {fileID: 594160855407120692, guid: 1f144a2105326454a8fd8e29a54f366e,
+        type: 3}
+      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 594160855407120692, guid: 1f144a2105326454a8fd8e29a54f366e,
@@ -34,6 +39,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 594160855407120692, guid: 1f144a2105326454a8fd8e29a54f366e,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 594160855407120692, guid: 1f144a2105326454a8fd8e29a54f366e,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.7071068
       objectReference: {fileID: 0}
@@ -46,16 +56,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 594160855407120692, guid: 1f144a2105326454a8fd8e29a54f366e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 594160855407120692, guid: 1f144a2105326454a8fd8e29a54f366e,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 594160855407120692, guid: 1f144a2105326454a8fd8e29a54f366e,
         type: 3}
@@ -76,6 +76,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: smoke
+      objectReference: {fileID: 0}
+    - target: {fileID: 594160855407152404, guid: 1f144a2105326454a8fd8e29a54f366e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f144a2105326454a8fd8e29a54f366e, type: 3}

@@ -14,45 +14,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3463786728800672188, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
-      propertyPath: TrailModule.colorOverTrail.maxColor.r
-      value: 0.47450984
-      objectReference: {fileID: 0}
-    - target: {fileID: 3463786728800672188, guid: 257583256eb794a169b2ab28c65d9c83,
-        type: 3}
       propertyPath: TrailModule.colorOverTrail.maxColor.g
       value: 0.93514663
       objectReference: {fileID: 0}
-    - target: {fileID: 4252304058015930645, guid: 257583256eb794a169b2ab28c65d9c83,
+    - target: {fileID: 3463786728800672188, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.6839622
-      objectReference: {fileID: 0}
-    - target: {fileID: 4252304058015930645, guid: 257583256eb794a169b2ab28c65d9c83,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 1
+      propertyPath: TrailModule.colorOverTrail.maxColor.r
+      value: 0.47450984
       objectReference: {fileID: 0}
     - target: {fileID: 4252304058015930645, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.70941985
       objectReference: {fileID: 0}
-    - target: {fileID: 5851485357143169755, guid: 257583256eb794a169b2ab28c65d9c83,
+    - target: {fileID: 4252304058015930645, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252304058015930645, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.6839622
       objectReference: {fileID: 0}
     - target: {fileID: 5851485357143169755, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.085725546
       objectReference: {fileID: 0}
-    - target: {fileID: 5851980978311622851, guid: 257583256eb794a169b2ab28c65d9c83,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.5518868
-      objectReference: {fileID: 0}
-    - target: {fileID: 5851980978311622851, guid: 257583256eb794a169b2ab28c65d9c83,
+    - target: {fileID: 5851485357143169755, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
       value: 1
@@ -62,10 +52,20 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.60398096
       objectReference: {fileID: 0}
+    - target: {fileID: 5851980978311622851, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5851980978311622851, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.5518868
+      objectReference: {fileID: 0}
     - target: {fileID: 5852288684294242775, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
-      propertyPath: TrailModule.colorOverTrail.maxColor.r
-      value: 0.3537736
+      propertyPath: TrailModule.colorOverTrail.maxColor.b
+      value: 0.4830189
       objectReference: {fileID: 0}
     - target: {fileID: 5852288684294242775, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
@@ -74,18 +74,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5852288684294242775, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
-      propertyPath: TrailModule.colorOverTrail.maxColor.b
-      value: 0.4830189
-      objectReference: {fileID: 0}
-    - target: {fileID: 5857319742154606299, guid: 257583256eb794a169b2ab28c65d9c83,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 1
+      propertyPath: TrailModule.colorOverTrail.maxColor.r
+      value: 0.3537736
       objectReference: {fileID: 0}
     - target: {fileID: 5857319742154606299, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5857319742154606299, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5857319742154606299, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
@@ -96,6 +96,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: darkfirework
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050850085355819091, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6050850085355819091, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
@@ -114,6 +119,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6050850085355819091, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050850085355819091, guid: 257583256eb794a169b2ab28c65d9c83,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -125,16 +135,6 @@ PrefabInstance:
     - target: {fileID: 6050850085355819091, guid: 257583256eb794a169b2ab28c65d9c83,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6050850085355819091, guid: 257583256eb794a169b2ab28c65d9c83,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6050850085355819091, guid: 257583256eb794a169b2ab28c65d9c83,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6050850085355819091, guid: 257583256eb794a169b2ab28c65d9c83,

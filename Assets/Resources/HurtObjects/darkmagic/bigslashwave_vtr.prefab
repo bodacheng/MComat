@@ -7,10 +7,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2625492619390339995, guid: 09d076f168c914dbda070c4724cdf3ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3282487591699317010, guid: 09d076f168c914dbda070c4724cdf3ff,
         type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4756302418663753524, guid: 09d076f168c914dbda070c4724cdf3ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4791646065903600854, guid: 09d076f168c914dbda070c4724cdf3ff,
         type: 3}
@@ -72,10 +82,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6120772548631515089, guid: 09d076f168c914dbda070c4724cdf3ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121165213641388649, guid: 09d076f168c914dbda070c4724cdf3ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121321563194463317, guid: 09d076f168c914dbda070c4724cdf3ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121328725739774047, guid: 09d076f168c914dbda070c4724cdf3ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121336608320561749, guid: 09d076f168c914dbda070c4724cdf3ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6121476574274755349, guid: 09d076f168c914dbda070c4724cdf3ff,
         type: 3}
       propertyPath: m_Name
       value: bigslashwave_vtr
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121476574274755349, guid: 09d076f168c914dbda070c4724cdf3ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6211053947094308545, guid: 09d076f168c914dbda070c4724cdf3ff,
         type: 3}
@@ -126,6 +166,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.6432011
+      objectReference: {fileID: 0}
+    - target: {fileID: 8223572745550956800, guid: 09d076f168c914dbda070c4724cdf3ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09d076f168c914dbda070c4724cdf3ff, type: 3}

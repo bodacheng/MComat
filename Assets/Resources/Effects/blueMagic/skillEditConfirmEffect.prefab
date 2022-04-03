@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4628520907444220}
   - component: {fileID: 198755129591391718}
   - component: {fileID: 199291495542365448}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_big_ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4814,7 +4814,7 @@ GameObject:
   - component: {fileID: 198688319469863908}
   - component: {fileID: 199110370630044774}
   - component: {fileID: 114547195815361106}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: skillEditConfirmEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9656,7 +9656,7 @@ GameObject:
   - component: {fileID: 4511605257531034}
   - component: {fileID: 198628492910759412}
   - component: {fileID: 199497859689555100}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_gathering
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14346,7 +14346,7 @@ GameObject:
   - component: {fileID: 4795190216335038}
   - component: {fileID: 198442827878951640}
   - component: {fileID: 199180491005647512}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_ground_seal_rising
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19184,7 +19184,7 @@ GameObject:
   - component: {fileID: 4418042547734594}
   - component: {fileID: 198105948403675188}
   - component: {fileID: 199067877483128134}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_rising_line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23955,7 +23955,7 @@ GameObject:
   - component: {fileID: 4476355689415242}
   - component: {fileID: 198258439070293736}
   - component: {fileID: 199572355044051920}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_big_glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28757,7 +28757,7 @@ GameObject:
   - component: {fileID: 4617633533612786}
   - component: {fileID: 198980741123545630}
   - component: {fileID: 199481286628601542}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P_ground_seal_alpha
   m_TagString: Untagged
   m_Icon: {fileID: 0}

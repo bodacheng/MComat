@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5300040885440248244}
   - component: {fileID: 3815149348669472248}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 5896439125447702328}
   - component: {fileID: 5988491488286132234}
   - component: {fileID: 5989247013918167952}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: CircleShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4899,7 +4899,7 @@ GameObject:
   - component: {fileID: 5896457875269230806}
   - component: {fileID: 5988136518315589272}
   - component: {fileID: 5987550381411479936}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: ParticlesStay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9746,7 +9746,7 @@ GameObject:
   - component: {fileID: 5896610423662154060}
   - component: {fileID: 5987940011495300058}
   - component: {fileID: 5989040467042993296}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: SmokeOutAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14575,7 +14575,7 @@ GameObject:
   - component: {fileID: 5896637567781303300}
   - component: {fileID: 6009170583208119858}
   - component: {fileID: 5989702398771827738}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: Impact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19413,7 +19413,7 @@ GameObject:
   - component: {fileID: 5893809440977205836}
   - component: {fileID: 5988328498489491424}
   - component: {fileID: 5989240173922021402}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24251,7 +24251,7 @@ GameObject:
   - component: {fileID: 5896768481368963942}
   - component: {fileID: 5987853896644827804}
   - component: {fileID: 5989012293311499276}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: BeamImpact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29089,7 +29089,7 @@ GameObject:
   - component: {fileID: 5893549889675182676}
   - component: {fileID: 5988395261220978332}
   - component: {fileID: 5987710502736272638}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: SmokeOutAdd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33921,7 +33921,7 @@ GameObject:
   - component: {fileID: 7402256019376250513}
   - component: {fileID: 8940431472185578149}
   - component: {fileID: 707136572137008987}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: gimpact
   m_TagString: Untagged
   m_Icon: {fileID: 0}

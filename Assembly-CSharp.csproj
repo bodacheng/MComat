@@ -80,6 +80,7 @@
      <Compile Include="Assets\TeamUIManager\RotationMode\RotationMode_INI.cs" />
      <Compile Include="Assets\RewardManager\RewardManager.cs" />
      <Compile Include="Assets\Camera\Modes\StartToEndMode.cs" />
+     <Compile Include="Assets\Fantasy_Portal\Script\UserCamera.cs" />
      <Compile Include="Assets\Behaviour\Defines\states\Counter_State.cs" />
      <Compile Include="Assets\CSV2Table\Demo\C2TDemo.cs" />
      <Compile Include="Assets\UI\oldscripts\Debug_Char_Set.cs" />
@@ -197,6 +198,7 @@
      <Compile Include="Assets\Structure\SingleThreadProcesser\SingleThreadProcesser.cs" />
      <Compile Include="Assets\EffectsSystem\TrackControl.cs" />
      <Compile Include="Assets\TutorialManger\processes\GoToTeamEdit.cs" />
+     <Compile Include="Assets\Fantasy_Portal\Script\Exit.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManagerGameLogo.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\Clustered\ClusteredPinnedTransformGesture.cs" />
      <Compile Include="Assets\RealTimeGameProcessManager\RTFightManager.cs" />
@@ -484,6 +486,7 @@
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\UnitSelect.cs" />
      <Compile Include="Assets\Setting\FightGlobalSetting.cs" />
      <Compile Include="Assets\TouchScript\Scripts\InputSources\ICoordinatesRemapper.cs" />
+     <Compile Include="Assets\Fantasy_Portal\Script\NextPrefab.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\TransformGesture.cs" />
      <Compile Include="Assets\Behaviour\Defines\Behaviors_Dictionary.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\Cell\StoneCell.cs" />
@@ -758,9 +761,6 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
-     <Compile Include="Assets\Fantasy_Portal\Script\NextPrefab.cs" />
-     <Compile Include="Assets\Fantasy_Portal\Script\Exit.cs" />
-     <Compile Include="Assets\Fantasy_Portal\Script\UserCamera.cs" />
      <None Include="Assets\D_Resources\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
      <None Include="Assets\D_Resources\ErbGameArt\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

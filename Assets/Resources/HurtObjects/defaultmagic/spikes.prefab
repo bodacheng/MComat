@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 284778514394498005}
   - component: {fileID: 89627180517949175}
   - component: {fileID: 87888743191798763}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4894,7 +4894,7 @@ GameObject:
   - component: {fileID: 282800875629252427}
   - component: {fileID: 89332114251056575}
   - component: {fileID: 88162653052872305}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RayLightning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9768,7 +9768,7 @@ GameObject:
   - component: {fileID: 282778392369517387}
   - component: {fileID: 91062258762131397}
   - component: {fileID: 88009805765792503}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14651,7 +14651,7 @@ GameObject:
   - component: {fileID: 282856536324262167}
   - component: {fileID: 89244188712764975}
   - component: {fileID: 88345123758697505}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShockWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19525,7 +19525,7 @@ GameObject:
   - component: {fileID: 282772743528879531}
   - component: {fileID: 91147410580406537}
   - component: {fileID: 88029685795874495}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: spike1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24480,7 +24480,7 @@ GameObject:
   - component: {fileID: 284610098147559255}
   - component: {fileID: 89424960195505255}
   - component: {fileID: 88163517312392927}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Crater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29372,7 +29372,7 @@ GameObject:
   - component: {fileID: 284573648963759157}
   - component: {fileID: 89028449344884567}
   - component: {fileID: 88102022183653837}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34246,7 +34246,7 @@ GameObject:
   - component: {fileID: 284663186233553203}
   - component: {fileID: 89316207015362427}
   - component: {fileID: 88345296790837087}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EndlDesbis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39129,7 +39129,7 @@ GameObject:
   - component: {fileID: 282878943192558441}
   - component: {fileID: 89514912989913161}
   - component: {fileID: 87952901482592773}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44012,7 +44012,7 @@ GameObject:
   - component: {fileID: 284837036512793189}
   - component: {fileID: 89232384953832417}
   - component: {fileID: 88039978748917889}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PathStones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48904,7 +48904,7 @@ GameObject:
   - component: {fileID: 4629426633783417914}
   - component: {fileID: 4823266554870966774}
   - component: {fileID: 4821655906163209698}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RayLightning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53778,7 +53778,7 @@ GameObject:
   - component: {fileID: 4621149558463170308}
   - component: {fileID: 4822772807232497818}
   - component: {fileID: 4821669113315991616}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58652,7 +58652,7 @@ GameObject:
   - component: {fileID: 4620949536199445642}
   - component: {fileID: 4822721074386818190}
   - component: {fileID: 4822405071947381740}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63535,7 +63535,7 @@ GameObject:
   - component: {fileID: 4621011381770110704}
   - component: {fileID: 4823309805726743688}
   - component: {fileID: 4821771599137200658}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EndlDesbis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68418,7 +68418,7 @@ GameObject:
   - component: {fileID: 4620951515194067714}
   - component: {fileID: 4822576784203480582}
   - component: {fileID: 4822192847662015872}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShockWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73292,7 +73292,7 @@ GameObject:
   - component: {fileID: 4621128799120319676}
   - component: {fileID: 4823065258728692298}
   - component: {fileID: 4822391973449269150}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78175,7 +78175,7 @@ GameObject:
   - component: {fileID: 4629582975530432334}
   - component: {fileID: 4822989342639050492}
   - component: {fileID: 4821414217184158816}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Crater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83067,7 +83067,7 @@ GameObject:
   - component: {fileID: 4620869438096103724}
   - component: {fileID: 4823192276037537108}
   - component: {fileID: 4821858386112773408}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PathStones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87959,7 +87959,7 @@ GameObject:
   - component: {fileID: 4629390867670884338}
   - component: {fileID: 4822886919905723398}
   - component: {fileID: 4821672854411780576}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92842,7 +92842,7 @@ GameObject:
   - component: {fileID: 5829393788103817265}
   - component: {fileID: 5921061528690363183}
   - component: {fileID: 5921500848694658723}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: spike2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97800,7 +97800,7 @@ GameObject:
   - component: {fileID: 2413909614467311317}
   - component: {fileID: 1125497558690952229}
   - component: {fileID: 7549431089328870459}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102759,7 +102759,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7944522670765128031}
   - component: {fileID: 905231299391429726}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

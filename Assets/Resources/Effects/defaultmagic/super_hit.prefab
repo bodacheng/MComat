@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 199411340613498268}
   - component: {fileID: 198114928749518316}
   - component: {fileID: 114582061767031788}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: super_hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4891,7 +4891,7 @@ GameObject:
   - component: {fileID: 23786685062932641}
   - component: {fileID: 23786685047729647}
   - component: {fileID: 23786685047690319}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LightExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9581,7 +9581,7 @@ GameObject:
   - component: {fileID: 23786685062932643}
   - component: {fileID: 23786685047729633}
   - component: {fileID: 23786685047690305}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LightSparklesBig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14293,7 +14293,7 @@ GameObject:
   - component: {fileID: 1795549478031274496}
   - component: {fileID: 1889912233042039600}
   - component: {fileID: 1889646325637743798}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ParticlesStretched
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19131,7 +19131,7 @@ GameObject:
   - component: {fileID: 1808216655987255433}
   - component: {fileID: 2005856710466816899}
   - component: {fileID: 2005229994399855591}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24063,7 +24063,7 @@ GameObject:
   - component: {fileID: 1803428304217743989}
   - component: {fileID: 2005567889678172717}
   - component: {fileID: 2005785287604954319}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Noise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28937,7 +28937,7 @@ GameObject:
   - component: {fileID: 1803554762891877803}
   - component: {fileID: 2005621186794924323}
   - component: {fileID: 2004400931677782123}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CoreWind2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33847,7 +33847,7 @@ GameObject:
   - component: {fileID: 1803683090076041177}
   - component: {fileID: 2006158952642208399}
   - component: {fileID: 2004406522027421611}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShockWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38721,7 +38721,7 @@ GameObject:
   - component: {fileID: 1808532738198445631}
   - component: {fileID: 2005513427573879843}
   - component: {fileID: 2004875512936242793}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WindWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43604,7 +43604,7 @@ GameObject:
   - component: {fileID: 3568245525167430742}
   - component: {fileID: 3696324660279259546}
   - component: {fileID: 3695659902440112262}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48442,7 +48442,7 @@ GameObject:
   - component: {fileID: 3568142409801773378}
   - component: {fileID: 3695928819745579154}
   - component: {fileID: 3697398831368358102}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Electricity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53302,7 +53302,7 @@ GameObject:
   - component: {fileID: 7131670683394283559}
   - component: {fileID: 6937932195780660247}
   - component: {fileID: 6931888511153304055}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ElectricBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58140,7 +58140,7 @@ GameObject:
   - component: {fileID: 7126796614796437265}
   - component: {fileID: 6933255791551700913}
   - component: {fileID: 6932210574550754725}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63032,7 +63032,7 @@ GameObject:
   - component: {fileID: 7126597119473939051}
   - component: {fileID: 6933202083473587365}
   - component: {fileID: 6932333695617579493}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ElectricYellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67870,7 +67870,7 @@ GameObject:
   - component: {fileID: 7360448073782661607}
   - component: {fileID: 7360448073768610251}
   - component: {fileID: 7360448073768546495}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rings
   m_TagString: Untagged
   m_Icon: {fileID: 0}

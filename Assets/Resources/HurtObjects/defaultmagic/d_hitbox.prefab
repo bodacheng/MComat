@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2919496090475456064}
   - component: {fileID: 7007343582443700653}
   - component: {fileID: 1062223919313163292}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: d_hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,10 +49,11 @@ MonoBehaviour:
   SpecificTarget: 0
   damage_type: 1
   _WeaponMode: 3
+  AT_weight: 1
   weaponHP: 1
   onGroundMagic: 0
   effectSpreadOnBody: 0
-  zokusei: 0
+  element: 0
   muzzle: 
   ExplosionEffect: light_hit
   ContinuousDamage: 0
@@ -87,7 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1905903546009877799}
   - component: {fileID: 8097785747071360705}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

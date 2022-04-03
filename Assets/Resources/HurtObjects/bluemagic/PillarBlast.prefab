@@ -17,10 +17,50 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.key0.g
       value: 0.7231324
       objectReference: {fileID: 0}
+    - target: {fileID: 8313648247387466359, guid: 3260109345895474fa5111e6ad67e49d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8313696911458413953, guid: 3260109345895474fa5111e6ad67e49d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315067760583292883, guid: 3260109345895474fa5111e6ad67e49d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315357437965942331, guid: 3260109345895474fa5111e6ad67e49d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315385577334506695, guid: 3260109345895474fa5111e6ad67e49d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8315412857591381491, guid: 3260109345895474fa5111e6ad67e49d,
         type: 3}
       propertyPath: m_Name
       value: PillarBlast
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315412857591381491, guid: 3260109345895474fa5111e6ad67e49d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315786857302922333, guid: 3260109345895474fa5111e6ad67e49d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8317141087700614451, guid: 3260109345895474fa5111e6ad67e49d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8317141087700614451, guid: 3260109345895474fa5111e6ad67e49d,
         type: 3}
@@ -39,6 +79,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8317141087700614451, guid: 3260109345895474fa5111e6ad67e49d,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8317141087700614451, guid: 3260109345895474fa5111e6ad67e49d,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -51,16 +96,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8317141087700614451, guid: 3260109345895474fa5111e6ad67e49d,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8317141087700614451, guid: 3260109345895474fa5111e6ad67e49d,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8317141087700614451, guid: 3260109345895474fa5111e6ad67e49d,
         type: 3}

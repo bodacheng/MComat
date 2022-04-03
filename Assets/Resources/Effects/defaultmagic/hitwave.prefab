@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7900627160242843911}
   - component: {fileID: 8028376559728857613}
   - component: {fileID: 8027872989635291753}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4943,7 +4943,7 @@ GameObject:
   - component: {fileID: 7906948090105073487}
   - component: {fileID: 8028124008351134531}
   - component: {fileID: 8027793831968124667}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9819,7 +9819,7 @@ GameObject:
   - component: {fileID: 6630750498891796630}
   - component: {fileID: 418436584671250258}
   - component: {fileID: 2551415990152356744}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hitwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14812,7 +14812,7 @@ GameObject:
   - component: {fileID: 7907099945630170107}
   - component: {fileID: 8028102445579230115}
   - component: {fileID: 8028021386094492993}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Noise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19686,7 +19686,7 @@ GameObject:
   - component: {fileID: 7906878032741811313}
   - component: {fileID: 8004237291834367983}
   - component: {fileID: 8029236517873911921}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24569,7 +24569,7 @@ GameObject:
   - component: {fileID: 7900874007580821425}
   - component: {fileID: 8028152505396522413}
   - component: {fileID: 8029362147848013799}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WindWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29452,7 +29452,7 @@ GameObject:
   - component: {fileID: 7906977880719033381}
   - component: {fileID: 8028189887015153837}
   - component: {fileID: 8029260602081712613}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CoreWind2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34362,7 +34362,7 @@ GameObject:
   - component: {fileID: 7906985914459432535}
   - component: {fileID: 8028782396649650945}
   - component: {fileID: 8029263796107802149}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShockWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,8 +14,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3650856365488095610, guid: 5100634cfc6e043209d3e0ced8c5fa99,
         type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.04460168
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3650856365488095610, guid: 5100634cfc6e043209d3e0ced8c5fa99,
         type: 3}
@@ -24,7 +24,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3650856365488095610, guid: 5100634cfc6e043209d3e0ced8c5fa99,
         type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.04460168
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749761870632594207, guid: 5100634cfc6e043209d3e0ced8c5fa99,
+        type: 3}
+      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8749761870632594207, guid: 5100634cfc6e043209d3e0ced8c5fa99,
@@ -44,6 +49,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8749761870632594207, guid: 5100634cfc6e043209d3e0ced8c5fa99,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749761870632594207, guid: 5100634cfc6e043209d3e0ced8c5fa99,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -55,16 +65,6 @@ PrefabInstance:
     - target: {fileID: 8749761870632594207, guid: 5100634cfc6e043209d3e0ced8c5fa99,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8749761870632594207, guid: 5100634cfc6e043209d3e0ced8c5fa99,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8749761870632594207, guid: 5100634cfc6e043209d3e0ced8c5fa99,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8749761870632594207, guid: 5100634cfc6e043209d3e0ced8c5fa99,
@@ -89,8 +89,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8749761870651989437, guid: 5100634cfc6e043209d3e0ced8c5fa99,
         type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.073467255
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8749761870651989437, guid: 5100634cfc6e043209d3e0ced8c5fa99,
         type: 3}
@@ -99,23 +99,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8749761870651989437, guid: 5100634cfc6e043209d3e0ced8c5fa99,
         type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.073467255
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749761870652110119, guid: 5100634cfc6e043209d3e0ced8c5fa99,
+        type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749761870652110119, guid: 5100634cfc6e043209d3e0ced8c5fa99,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8749761870652110119, guid: 5100634cfc6e043209d3e0ced8c5fa99,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.1300379
-      objectReference: {fileID: 0}
-    - target: {fileID: 8749761870652110119, guid: 5100634cfc6e043209d3e0ced8c5fa99,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8749761870652110119, guid: 5100634cfc6e043209d3e0ced8c5fa99,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5100634cfc6e043209d3e0ced8c5fa99, type: 3}

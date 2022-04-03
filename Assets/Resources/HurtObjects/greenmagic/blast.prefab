@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4759971169438152021}
   - component: {fileID: 4760013439143734557}
   - component: {fileID: 4809666763288016285}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: blast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5037,7 +5037,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4866949163719596067}
   - component: {fileID: 4756852216119887367}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5088,7 +5088,7 @@ GameObject:
   - component: {fileID: 6448918894237117464}
   - component: {fileID: 6606996889368899426}
   - component: {fileID: 6608401762303923678}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9967,7 +9967,7 @@ GameObject:
   - component: {fileID: 6440440204437514114}
   - component: {fileID: 6607250663543911434}
   - component: {fileID: 6608003849331266726}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BeamAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14846,7 +14846,7 @@ GameObject:
   - component: {fileID: 6448760978068544328}
   - component: {fileID: 6607305574453816142}
   - component: {fileID: 6608179017142466884}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

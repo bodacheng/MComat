@@ -539,7 +539,7 @@
  <HintPath>/Users/hakutaisei/MComat_android/Library/PackageCache/com.unity.collab-proxy@1.15.12/Lib/Editor/PlasticSCM/unityplastic.dll</HintPath>
  </Reference>
  <Reference Include="JMOAssets_MatCapWelcome">
- <HintPath>/Users/hakutaisei/MComat_android/Assets/Asstes/JMO Assets/Editor/JMOAssets_MatCapWelcome.dll</HintPath>
+ <HintPath>/Users/hakutaisei/MComat_android/Assets/D_Resources/JMO Assets/Editor/JMOAssets_MatCapWelcome.dll</HintPath>
  </Reference>
  <Reference Include="DOTweenEditor">
  <HintPath>/Users/hakutaisei/MComat_android/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 79637649618554954}
   - component: {fileID: 79637649638008048}
   - component: {fileID: 79637649637920048}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4791,7 +4791,7 @@ GameObject:
   - component: {fileID: 79637649637946546}
   - component: {fileID: 79637649638589528}
   - component: {fileID: 79637649629562840}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9628,7 +9628,7 @@ GameObject:
   - component: {fileID: 6373827379472328875}
   - component: {fileID: 1029221105919901373}
   - component: {fileID: 8515867687185158356}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: stormspray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14557,7 +14557,7 @@ GameObject:
   - component: {fileID: 79637649618619278}
   - component: {fileID: 79637649637995708}
   - component: {fileID: 79637649637914496}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: StormRings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19286,7 +19286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2864080472828253840}
   - component: {fileID: 3694224622214406319}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1681226456841422748}
   - component: {fileID: 1556215091910051986}
   - component: {fileID: 1558135168326078462}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: Hemi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4849,7 +4849,7 @@ GameObject:
   - component: {fileID: 1678529534950442736}
   - component: {fileID: 1556226386741074718}
   - component: {fileID: 1557884962775441242}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: DarkParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9687,7 +9687,7 @@ GameObject:
   - component: {fileID: 1681267786497108414}
   - component: {fileID: 1577934920232051696}
   - component: {fileID: 1557752430117970542}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: Circles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14525,7 +14525,7 @@ GameObject:
   - component: {fileID: 1681278107076543640}
   - component: {fileID: 1556732723610863252}
   - component: {fileID: 1556421430661430186}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: VerticalAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19399,7 +19399,7 @@ GameObject:
   - component: {fileID: 1678384817711256816}
   - component: {fileID: 1556917105028300172}
   - component: {fileID: 1557171196103930470}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: BeamFlare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24237,7 +24237,7 @@ GameObject:
   - component: {fileID: 1678673385164865656}
   - component: {fileID: 1577821555751134072}
   - component: {fileID: 1556466170599296348}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29075,7 +29075,7 @@ GameObject:
   - component: {fileID: 1681016471592090910}
   - component: {fileID: 1556102429242483974}
   - component: {fileID: 1558104747944363714}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: CircleShatter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33914,7 +33914,7 @@ GameObject:
   - component: {fileID: 1678340082058617400}
   - component: {fileID: 1556892879768163740}
   - component: {fileID: 1558070429800373768}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: ImpactBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38761,7 +38761,7 @@ GameObject:
   - component: {fileID: 1681002894748473372}
   - component: {fileID: 1556236463046120424}
   - component: {fileID: 1557962149395035616}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: SpiralAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43608,7 +43608,7 @@ GameObject:
   - component: {fileID: 1681437846839991038}
   - component: {fileID: 1556736918860218848}
   - component: {fileID: 1557741409770766600}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: SpiralAnimated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48458,7 +48458,7 @@ GameObject:
   - component: {fileID: 1678330344289230008}
   - component: {fileID: 1556927803251564946}
   - component: {fileID: 1558139602779255162}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: ParticlesWhite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53305,7 +53305,7 @@ GameObject:
   - component: {fileID: 1678246622236657604}
   - component: {fileID: 1556222399901743024}
   - component: {fileID: 1558062328895754262}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: VerticalAdd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58182,7 +58182,7 @@ GameObject:
   - component: {fileID: 5809432807181421440}
   - component: {fileID: 3094169540783839689}
   - component: {fileID: 7743381156824896071}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: runesburst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63142,7 +63142,7 @@ GameObject:
   - component: {fileID: 1678196929498587128}
   - component: {fileID: 1556899117625035330}
   - component: {fileID: 1557935220256194036}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: BeamAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67980,7 +67980,7 @@ GameObject:
   - component: {fileID: 1680991009252730268}
   - component: {fileID: 1577814920208505884}
   - component: {fileID: 1557730711844528952}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: Spiral
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72827,7 +72827,7 @@ GameObject:
   - component: {fileID: 1681317581230388002}
   - component: {fileID: 1556715024470121238}
   - component: {fileID: 1556518873576641888}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: CircleShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77664,7 +77664,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8071421911032038747}
   - component: {fileID: 1298605933079923435}
-  m_Layer: 19
+  m_Layer: 7
   m_Name: marker1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

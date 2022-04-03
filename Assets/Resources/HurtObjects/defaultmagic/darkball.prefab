@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9045732127409088209}
   - component: {fileID: 679732045271300424}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 3074355485202923511}
   - component: {fileID: 3829198492329961209}
   - component: {fileID: 5955561958762602793}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: darkball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5030,7 +5030,7 @@ GameObject:
   - component: {fileID: 7534155964631852096}
   - component: {fileID: 7664872250351572948}
   - component: {fileID: 7663614601048071370}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9868,7 +9868,7 @@ GameObject:
   - component: {fileID: 7535078013555849864}
   - component: {fileID: 7664996092952040000}
   - component: {fileID: 7663466895086335896}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CirclesBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14684,7 +14684,7 @@ GameObject:
   - component: {fileID: 7534279548418007590}
   - component: {fileID: 7664284197639894738}
   - component: {fileID: 7664163214496260134}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19500,7 +19500,7 @@ GameObject:
   - component: {fileID: 7534908950755352058}
   - component: {fileID: 7647197789960378422}
   - component: {fileID: 7664256725193517384}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireInBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24316,7 +24316,7 @@ GameObject:
   - component: {fileID: 7534770423091511846}
   - component: {fileID: 7664662537945333070}
   - component: {fileID: 7663652989196516880}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BeamAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29154,7 +29154,7 @@ GameObject:
   - component: {fileID: 7534165807812964710}
   - component: {fileID: 7664349942155187114}
   - component: {fileID: 7663479444585303122}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SmokeAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33983,7 +33983,7 @@ GameObject:
   - component: {fileID: 7534803267663079462}
   - component: {fileID: 7664853713345491280}
   - component: {fileID: 7663802140323748244}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38799,7 +38799,7 @@ GameObject:
   - component: {fileID: 7534635441996896748}
   - component: {fileID: 7664760287255065406}
   - component: {fileID: 7664000555934648746}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireInOrange
   m_TagString: Untagged
   m_Icon: {fileID: 0}

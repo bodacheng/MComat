@@ -17,6 +17,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: slashwave_yoko
       objectReference: {fileID: 0}
+    - target: {fileID: 3534467867499058744, guid: dad80096548d31740a3a68907031e260,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4002904559227279668, guid: dad80096548d31740a3a68907031e260,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366337889970427659, guid: dad80096548d31740a3a68907031e260,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5641880313555137470, guid: dad80096548d31740a3a68907031e260,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140466627000572650, guid: dad80096548d31740a3a68907031e260,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6140466627000572650, guid: dad80096548d31740a3a68907031e260,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -31,6 +56,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -3101.095
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140466627000572650, guid: dad80096548d31740a3a68907031e260,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6140466627000572650, guid: dad80096548d31740a3a68907031e260,
         type: 3}
@@ -49,16 +79,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6140466627000572650, guid: dad80096548d31740a3a68907031e260,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6140466627000572650, guid: dad80096548d31740a3a68907031e260,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6140466627000572650, guid: dad80096548d31740a3a68907031e260,
-        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -72,10 +92,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8944756434322333784, guid: dad80096548d31740a3a68907031e260,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9122185952925432358, guid: dad80096548d31740a3a68907031e260,
         type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.71927917
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9122185952925432358, guid: dad80096548d31740a3a68907031e260,
         type: 3}
@@ -84,8 +109,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9122185952925432358, guid: dad80096548d31740a3a68907031e260,
         type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 1
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.71927917
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dad80096548d31740a3a68907031e260, type: 3}

@@ -3,16 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - explosion
+  - fire
+  - floor
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Unit
+  - unit
   - Water
   - UI
   - wall
-  - 
+  - effect
   - 
   - Player1
   - Player2

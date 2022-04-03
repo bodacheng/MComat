@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1987579097138158395}
   - component: {fileID: 2986065017533419536}
   - component: {fileID: 5271851507774399662}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: slashwave_yoko
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5028,7 +5028,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3334591270393368735}
   - component: {fileID: 1178364185795168765}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5078,7 +5078,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1806087882142023980}
   - component: {fileID: 1887724874837661639}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5128,7 +5128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1278977942991615618}
   - component: {fileID: 4479804875665081972}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5179,7 +5179,7 @@ GameObject:
   - component: {fileID: 8950638411693818502}
   - component: {fileID: 9122185952925432358}
   - component: {fileID: 9143159325581011598}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ps
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5697318568585290356}
   - component: {fileID: 6498534725499547357}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1480172238159716327}
   - component: {fileID: 5742862174666415851}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 6122873427041410933}
   - component: {fileID: 6212032774006750531}
   - component: {fileID: 6211209064571915935}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4927,7 +4927,7 @@ GameObject:
   - component: {fileID: 6118115267668673547}
   - component: {fileID: 6211904929117704277}
   - component: {fileID: 6211346193298517333}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SlashAdd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9828,7 +9828,7 @@ GameObject:
   - component: {fileID: 6122840364861247473}
   - component: {fileID: 6212357816028624423}
   - component: {fileID: 6211053947094308545}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SlashAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14729,7 +14729,7 @@ GameObject:
   - component: {fileID: 6117771555006195929}
   - component: {fileID: 6212663539993277987}
   - component: {fileID: 6211313329477823547}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ParticlesAdd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19545,7 +19545,7 @@ GameObject:
   - component: {fileID: 6117661818045949183}
   - component: {fileID: 6212163801416751583}
   - component: {fileID: 6211060178672325049}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ParticlesAB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24365,7 +24365,7 @@ GameObject:
   - component: {fileID: 4791646065903600854}
   - component: {fileID: 7025996636308094240}
   - component: {fileID: 1848449343563482259}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bigslashwave_vtr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29382,7 +29382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9133225296996672440}
   - component: {fileID: 7697663580958297499}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
