@@ -51131,7 +51131,7 @@ GameObject:
   - component: {fileID: 8450519453940172875}
   - component: {fileID: 3077705360140715328}
   - component: {fileID: 6488629362189708726}
-  m_Layer: 14
+  m_Layer: 3
   m_Name: Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

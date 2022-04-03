@@ -192,8 +192,8 @@ MonoBehaviour:
   GetExAfterDamageBy: 20
   ExGetAfterDamage: 10
   slighthitLastingtime: 0.1
-  lighthitLastingtime: 0.5
-  heavyhitLastingtime: 0.6
+  lighthitLastingtime: 0.3
+  heavyhitLastingtime: 0.4
   superhitLastingtime: 1
   highhitLastingTime: 0.8
   normalattackpositionfixingtime: 0.1

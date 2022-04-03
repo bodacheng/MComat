@@ -484,6 +484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 57159499935210550}
   - component: {fileID: 85160261606489340}
+  - component: {fileID: 5691997096226250232}
   m_Layer: 3
   m_Name: Fighter_11_Jaw_Mesh
   m_TagString: Untagged
@@ -559,6 +560,19 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.009017925, y: -0.085974306, z: 0.00000008009374}
     m_Extent: {x: 0.031628307, y: 0.031434305, z: 0.028076261}
   m_DirtyAABB: 0
+--- !u!114 &5691997096226250232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54305855741830386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4796095434084d59939621d426405db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dummyMaterial: {fileID: 2100000, guid: 5baacd645c2654d4cafec1ff874feb56, type: 2}
 --- !u!1 &54309755014425926
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,6 +583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 59845056038826604}
   - component: {fileID: 85194870605484184}
+  - component: {fileID: 1302509670634742607}
   m_Layer: 3
   m_Name: Fighter_11_Mask_Mesh
   m_TagString: Untagged
@@ -643,6 +658,19 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.050349634, y: -0.034208953, z: -0.00033616275}
     m_Extent: {x: 0.13956265, y: 0.10998866, z: 0.101220265}
   m_DirtyAABB: 0
+--- !u!114 &1302509670634742607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54309755014425926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4796095434084d59939621d426405db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dummyMaterial: {fileID: 2100000, guid: 5baacd645c2654d4cafec1ff874feb56, type: 2}
 --- !u!1 &54315152349404082
 GameObject:
   m_ObjectHideFlags: 0
@@ -2312,6 +2340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 60170613239666438}
   - component: {fileID: 84713859592335408}
+  - component: {fileID: 2893775143813789231}
   m_Layer: 3
   m_Name: Fighter_11_Body_Mesh
   m_TagString: Untagged
@@ -2440,6 +2469,19 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.047540545, y: 0.041404635, z: -0.000023782253}
     m_Extent: {x: 0.92571497, y: 0.22438842, z: 0.9351521}
   m_DirtyAABB: 0
+--- !u!114 &2893775143813789231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54828981310172858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4796095434084d59939621d426405db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dummyMaterial: {fileID: 2100000, guid: 5baacd645c2654d4cafec1ff874feb56, type: 2}
 --- !u!1 &54834353539364506
 GameObject:
   m_ObjectHideFlags: 0
@@ -47218,7 +47260,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b764016de3c8744b6942fcf52774a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshes: []
+  meshes:
+  - {fileID: 2893775143813789231}
+  - {fileID: 5691997096226250232}
+  - {fileID: 1302509670634742607}
 --- !u!114 &2924158878535747285
 MonoBehaviour:
   m_ObjectHideFlags: 0
