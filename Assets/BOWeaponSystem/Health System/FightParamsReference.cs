@@ -251,7 +251,8 @@ public partial class FightParamsReference
                     _damagecolor = Color.white;
                     break;
             }
-            Center._ShaderManager.RimEffectsForAShortTime(1f, time, _damagecolor);
+            _damagecolor.a = 0.5f;
+            Center._ShaderManager.RimEffectsForAShortTime(_damagecolor, time);
         }
     }
     

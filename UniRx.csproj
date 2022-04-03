@@ -73,8 +73,8 @@
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Triggers\ObservableBeginDragTrigger.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\Repeat.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\InspectableReactiveProperty.cs" />
-     <Compile Include="Assets\Plugins\UniRx\Scripts\InternalUtil\ImmutableList.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Tasks\TaskObservableExtensions.cs" />
+     <Compile Include="Assets\Plugins\UniRx\Scripts\InternalUtil\ImmutableList.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Triggers\ObservableTransformChangedTrigger.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Notifiers\MessageBroker.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\UnityEventExtensions.cs" />
@@ -105,9 +105,9 @@
      <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\Scan.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Triggers\ObservableStateMachineTrigger.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\OperatorObserverBase.cs" />
-     <Compile Include="Assets\Plugins\UniRx\Scripts\UnityWinRTBridge\Thread.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\ZipLatest.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\System\Tuple.cs" />
+     <Compile Include="Assets\Plugins\UniRx\Scripts\UnityWinRTBridge\Thread.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\ReactiveProperty.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\Empty.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Subjects\BehaviorSubject.cs" />
@@ -210,8 +210,8 @@
      <Compile Include="Assets\Plugins\UniRx\Scripts\System\IOptimizedObservable.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\UnityGraphicExtensions.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\SelectMany.cs" />
-     <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Triggers\ObservablePointerClickTrigger.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\Dematerialize.cs" />
+     <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Triggers\ObservablePointerClickTrigger.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\Triggers\ObservableUpdateSelectedTrigger.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\Start.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\Operators\TakeLast.cs" />
@@ -546,6 +546,9 @@
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
  <HintPath>/Users/hakutaisei/MComat_android/Library/PackageCache/com.unity.analytics@3.6.12/Unity.Analytics.Tracker.dll</HintPath>
+ </Reference>
+ <Reference Include="ICSharpCode.NRefactory">
+ <HintPath>/Users/hakutaisei/MComat_android/Library/PackageCache/com.unity.render-pipelines.core@10.8.1/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
  </Reference>
  <Reference Include="OSCsharp">
  <HintPath>/Users/hakutaisei/MComat_android/Assets/TouchScript/Modules/TUIO/Libraries/OSCsharp.dll</HintPath>

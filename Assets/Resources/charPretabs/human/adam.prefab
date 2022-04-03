@@ -10828,8 +10828,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6956502347287552174}
   - component: {fileID: 6630167104680625318}
-  - component: {fileID: 474879509}
-  m_Layer: 14
+  - component: {fileID: 4788306893815762397}
+  m_Layer: 3
   m_Name: polySurface111
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10976,7 +10976,7 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.008417606, y: -0.064956285, z: 0.00000008940697}
     m_Extent: {x: 0.893314, y: 0.200465, z: 0.6386255}
   m_DirtyAABB: 0
---- !u!114 &474879509
+--- !u!114 &4788306893815762397
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10985,14 +10985,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2803166146376490995}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32018270e31bd0549b723b29b1aced41, type: 3}
+  m_Script: {fileID: 11500000, guid: f4796095434084d59939621d426405db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_version: 1.2.1
-  m_layers: []
-  m_hideRenderer: 0
-  m_hideEditorSelection: 0
-  m_spriteRenderer: {fileID: 0}
+  dummyMaterial: {fileID: 2100000, guid: cffcc42a80738491597559acdd3c9a19, type: 2}
 --- !u!1 &2894952731503347949
 GameObject:
   m_ObjectHideFlags: 0
@@ -16127,8 +16123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b764016de3c8744b6942fcf52774a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pOFXes:
-  - {fileID: 474879509}
+  meshes:
+  - {fileID: 4788306893815762397}
 --- !u!114 &5887946732477614897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41990,8 +41986,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cffcc42a80738491597559acdd3c9a19, type: 2}
-  - {fileID: 2100000, guid: 5832d3e2524b35641bab3811346d78bc, type: 2}
+  - {fileID: 2100000, guid: 718b4d06a5b8d44538421fe070643d58, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -17,7 +17,7 @@ namespace Soul
             pasueend = () =>
             {
                 Animation_Manger.Speed = 1;
-                shaderManager.FlatColor(0, Color.white);
+                shaderManager.FlatColor(Color.white, 0);
                 _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
                 _BuffsRunner.Freesing = false;
             };
@@ -36,10 +36,10 @@ namespace Soul
             {
                 case Element.blueMagic:
                 case Element.lightMagic:
-                    shaderManager.FlatColor(0.5f, freeze);
+                    shaderManager.FlatColor(freeze, 0.5f);
                     break;
                 default:
-                    shaderManager.FlatColor(0.8f, stone);
+                    shaderManager.FlatColor(stone, 0.5f);
                     break;
             }
         }

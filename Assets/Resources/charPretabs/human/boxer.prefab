@@ -5615,8 +5615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b764016de3c8744b6942fcf52774a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pOFXes:
-  - {fileID: 4670950707664251585}
+  meshes: []
 --- !u!114 &2418704338616587985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12826,7 +12825,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 95b849614a56142298ea92eef41f3a13, type: 2}
+  - {fileID: 2100000, guid: 718b4d06a5b8d44538421fe070643d58, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -34628,8 +34627,7 @@ GameObject:
   m_Component:
   - component: {fileID: 890670414398321986}
   - component: {fileID: 2810957786191108333}
-  - component: {fileID: 4670950707664251585}
-  m_Layer: 14
+  m_Layer: 3
   m_Name: Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34827,23 +34825,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.023635864, y: -0.017737567, z: -0.00000023841858}
     m_Extent: {x: 0.88139117, y: 0.2074931, z: 0.42312124}
   m_DirtyAABB: 0
---- !u!114 &4670950707664251585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5921781190389773221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32018270e31bd0549b723b29b1aced41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_version: 1.2.1
-  m_layers: []
-  m_hideRenderer: 0
-  m_hideEditorSelection: 0
-  m_spriteRenderer: {fileID: 0}
 --- !u!1 &6008382227005271492
 GameObject:
   m_ObjectHideFlags: 0
