@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: framesMat
-  m_Shader: {fileID: 4800000, guid: 861553124340a4ae4a4b74312b4d9884, type: 3}
+  m_Shader: {fileID: 4800000, guid: 082502fc2604a6048a641a0ade8e8286, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -301,3 +301,4 @@ Material:
     - _StarLayer2Color: {r: 1, g: 0.5, b: 0.96, a: 1}
     - _StarLayer3Color: {r: 0.22, g: 1, b: 0.55, a: 1}
     - _TintColor: {r: 1, g: 1, b: 1, a: 0.7647059}
+  m_BuildTextureStacks: []
