@@ -27344,7 +27344,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1ca175c2410c04d18929a8a6c2bcf36c, type: 2}
+  - {fileID: 2100000, guid: 921925958e5357a44ab7d552d0ff7568, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -27438,7 +27438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1925183478401864101}
   - component: {fileID: 7045530860180660516}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: shadow2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43204,7 +43204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4460759397649371113}
   - component: {fileID: 4888501506405985118}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: shadow1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53729,7 +53729,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1ca175c2410c04d18929a8a6c2bcf36c, type: 2}
+  - {fileID: 2100000, guid: 921925958e5357a44ab7d552d0ff7568, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

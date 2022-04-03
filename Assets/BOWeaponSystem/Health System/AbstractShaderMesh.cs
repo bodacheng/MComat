@@ -7,8 +7,8 @@ public class AbstractShaderMesh : MonoBehaviour
 {
     protected virtual Material GetMaterial() => null;
     protected Renderer mesh = default;
-    protected Material currentMaterial = default;
-        
+    private Material currentMaterial = default;
+    
     private static readonly int kPropertyBaseColor = Shader.PropertyToID("_BaseColor");
     private static readonly int kPropertyEmissionColor = Shader.PropertyToID("_EmissionColor");
 
@@ -27,22 +27,13 @@ public class AbstractShaderMesh : MonoBehaviour
 
     public Color BaseColor
     {
-        get => currentMaterial != null ? currentMaterial.GetColor(kPropertyBaseColor) : Color.white;
-        set
-        {
-            if (currentMaterial != null) currentMaterial.SetColor(kPropertyBaseColor, value);
-        }
+        get => currentMaterial.GetColor(kPropertyBaseColor);
+        set => currentMaterial.SetColor(kPropertyBaseColor, value);
     }
 
     public Color EmissionColor
     {
-        get => currentMaterial != null ? currentMaterial.GetColor(kPropertyEmissionColor) : Color.black;
-        set
-        {
-            if (currentMaterial != null)
-            {
-                currentMaterial.SetColor(kPropertyEmissionColor, value);
-            }
-        }
+        get => currentMaterial.GetColor(kPropertyEmissionColor);
+        set => currentMaterial.SetColor(kPropertyEmissionColor, value);
     }
 }

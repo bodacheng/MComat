@@ -46,7 +46,8 @@ public class ShaderManager : MonoBehaviour
     {
         meshes.ForEach(x =>
         {
-            DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, color, duration);
+            if (x.CurrentMaterial != null)
+                DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, color, duration);
         });
     }
 
@@ -54,7 +55,8 @@ public class ShaderManager : MonoBehaviour
     {
         meshes.ForEach(x =>
         {
-            DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, Color.clear, duration);
+            if (x.CurrentMaterial != null)
+                DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, Color.clear, duration);
         });
     }
 
@@ -62,6 +64,7 @@ public class ShaderManager : MonoBehaviour
     {
         meshes.ForEach(x =>
         {
+            if (x.CurrentMaterial != null)
             DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, targetColor, duration).OnComplete(
                 () =>
                 {
@@ -77,6 +80,7 @@ public class ShaderManager : MonoBehaviour
     {
         meshes.ForEach(x =>
         {
+            if (x.CurrentMaterial != null)
             DOTween.To(() => x.BaseColor, c => x.BaseColor = c, targetColor, duration);
         });
     }
@@ -85,6 +89,7 @@ public class ShaderManager : MonoBehaviour
     {
         meshes.ForEach(x =>
         {
+            if (x.CurrentMaterial != null)
             DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, targetColor, addTime).OnComplete(
                 () =>
                 {
