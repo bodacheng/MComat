@@ -90,6 +90,12 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
             Debug.Log("逻辑问题"+ Prefab);
             return null;
         }
+        var decompositioner = a.GetComponent<Decompositioner>();
+        if (decompositioner == null)
+        {
+            Debug.Log("Decompositioner缺失："+ Prefab.name);
+            return null;
+        }
 
         if (Marker == null)
         {
@@ -99,7 +105,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         }
         
         a.transform.SetParent(Marker.transform);
-        var decompositioner = a.GetComponent<Decompositioner>();
+        
         var BBMM = a.GetComponent<HitBoxManager>();
         var danMuTest = a.GetComponent<TrackControl>();
         var PC = a.GetComponent<PositionConstraint>();
