@@ -4783,7 +4783,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 5fffb80392e0ded4a86fdf585dd4b1a6, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9568,7 +9567,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 01e0386bc3c5b2f45b5b2735939daa3f, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9625,7 +9623,6 @@ GameObject:
   - component: {fileID: 5678239860788810728}
   - component: {fileID: 5678239860774653312}
   - component: {fileID: 5678239860774727674}
-  - component: {fileID: 5678239860782971412}
   m_Layer: 7
   m_Name: Dust
   m_TagString: Untagged
@@ -14390,7 +14387,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d88a64f741e6d5d49b6f086ce70d1fa9, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14436,20 +14432,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &5678239860782971412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5678239860788492196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a84c9fd6072e17c46b93dd9cf28a0904, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateVector: {x: 0, y: 0, z: 100}
-  rotateSpace: 0
 --- !u!1 &5897594769408637694
 GameObject:
   m_ObjectHideFlags: 0
@@ -19157,7 +19139,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 4a6a3c0831f078c4b9e7930bc5af2501, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19362,7 +19343,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 5e71988081884334db5556ca5e77dcb0, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
