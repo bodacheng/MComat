@@ -191,9 +191,9 @@ MonoBehaviour:
   Sp3SkillExGet: 0
   GetExAfterDamageBy: 20
   ExGetAfterDamage: 10
-  slighthitLastingtime: 0.1
-  lighthitLastingtime: 0.3
-  heavyhitLastingtime: 0.4
+  slighthitLastingtime: 0.3
+  lighthitLastingtime: 0.5
+  heavyhitLastingtime: 0.6
   superhitLastingtime: 1
   highhitLastingTime: 0.8
   normalattackpositionfixingtime: 0.1
@@ -214,3 +214,4 @@ MonoBehaviour:
   SkillStoneRankToExp_rank3: 300
   SkillStoneRankToExp_rank4: 400
   SkillStoneRankToExp_rank5: 500
+  shadowMaterial: {fileID: 2100000, guid: 718b4d06a5b8d44538421fe070643d58, type: 2}

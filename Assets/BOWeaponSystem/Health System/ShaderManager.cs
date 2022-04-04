@@ -5,9 +5,22 @@ using DG.Tweening;
 public class ShaderManager : MonoBehaviour
 {
     [SerializeField] List<DummyMesh> meshes;
-    void Awake()
+    
+    void Start()
     {
         #region outdated
+
+        foreach (var mesh in meshes)
+        {
+            mesh.gameObject.layer = 3;
+            DummyMesh shadowMesh = Instantiate(mesh);
+            shadowMesh.transform.parent = mesh.transform;
+            shadowMesh.transform.localPosition = Vector3.zero;
+            shadowMesh.transform.localScale = Vector3.one * 0.9f;
+            shadowMesh.gameObject.name = "shadow_" + shadowMesh.gameObject.name;
+            shadowMesh.gameObject.layer = 0;
+            shadowMesh.Mesh.materials = new []{ FightGlobalSetting._shadowMaterial};
+        }
 
         // for (int i = 0; i < pOFXes.Count; i++)
         // {

@@ -43,6 +43,8 @@ public class FightGlobalSetting : ScriptableObject
     public int SkillStoneRankToExp_rank4 = 400;
     public int SkillStoneRankToExp_rank5 = 500;
     #endregion
+
+    public Material shadowMaterial;
     
     public static ProgramMode _programMode;
     public static int scenestep;//0 :mainmenu 1: fightscene
@@ -71,7 +73,7 @@ public class FightGlobalSetting : ScriptableObject
     public static int _EXMax;
     public static bool HitBoxLogger = true;
     public static int _HurtObjectPreLoadCount;
-    
+    public static Material _shadowMaterial;
 
     public static string EffectPathDefine(Element element)
     {
@@ -159,5 +161,7 @@ public class FightGlobalSetting : ScriptableObject
         StoneExpManager.SkillStoneRankToExp_rank3 = SkillStoneRankToExp_rank3;
         StoneExpManager.SkillStoneRankToExp_rank4 = SkillStoneRankToExp_rank4;
         StoneExpManager.SkillStoneRankToExp_rank5 = SkillStoneRankToExp_rank5;
+
+        _shadowMaterial = shadowMaterial;
     }
 }
