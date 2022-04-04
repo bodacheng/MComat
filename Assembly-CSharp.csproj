@@ -69,7 +69,6 @@
      <Compile Include="Assets\Arena\ArenaDummiesTable.cs" />
      <Compile Include="Assets\Behaviour\Defines\states\Empty_State.cs" />
      <Compile Include="Assets\Singleton\TeamConfig.cs" />
-     <Compile Include="Assets\EffectsResource\MagicArsenal\Effects\Scripts\MagicLightFlicker.cs" />
      <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\PowerEstimateTable.cs" />
      <Compile Include="Assets\PlayFab\Client\Item.cs" />
      <Compile Include="Assets\MasterDataTool\MasterDataTool_Unit.cs" />
@@ -153,7 +152,6 @@
      <Compile Include="Assets\monsterbox\StoneDeleteManger.cs" />
      <Compile Include="Assets\ImportantDefinition\Monster\UnitConfig.cs" />
      <Compile Include="Assets\TouchScript\Scripts\InputSources\InputSource.cs" />
-     <Compile Include="Assets\EffectsResource\MagicArsenal\Effects\Scripts\MagicBeamScript.cs" />
      <Compile Include="Assets\Singleton\SkillIconsDic\FromResource.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\StoneMergeLayer.cs" />
      <Compile Include="Assets\Behaviour\SkillAIAttrs.cs" />
@@ -590,7 +588,6 @@
      <Compile Include="Assets\DynamicBone\Scripts\DynamicBoneCollider.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonData.cs" />
      <Compile Include="Assets\Remote\Stone\MySkillStones.cs" />
-     <Compile Include="Assets\EffectsResource\MagicArsenal\Effects\Scripts\MagicRotation.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Behaviors\Cursors\PointerCursor.cs" />
      <Compile Include="Assets\Structure\RandomSelect.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkTimeline.cs" />
@@ -671,7 +668,6 @@
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonAttribute.cs" />
      <Compile Include="Assets\CachLogic\ResourceDownLoad.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Pointers\TouchPointer.cs" />
-     <Compile Include="Assets\EffectsResource\MagicArsenal\Effects\Scripts\MagicLightFade.cs" />
      <Compile Include="Assets\FightingSceneUISystem\HeroIcon.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\Dev.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\UnitsLayer.cs" />
