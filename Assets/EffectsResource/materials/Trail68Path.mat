@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: Trail68Path
   m_Shader: {fileID: 4800000, guid: a94def2acffda4e4bb6a001369871457, type: 3}
-  m_ShaderKeywords: _USEDEPTH_ON
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0

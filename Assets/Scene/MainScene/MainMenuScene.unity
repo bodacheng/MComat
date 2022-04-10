@@ -37651,7 +37651,6 @@ MonoBehaviour:
   - {fileID: 4375195399435027145}
   - {fileID: 6639731110479699956}
   - {fileID: 2898659339565555509}
-  playingNum: 0
 --- !u!1 &1359702675
 GameObject:
   m_ObjectHideFlags: 0
@@ -57059,7 +57058,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

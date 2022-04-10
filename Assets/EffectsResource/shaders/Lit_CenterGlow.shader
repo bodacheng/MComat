@@ -1,4 +1,4 @@
-Shader "ERB/Particles/Lit_CenterGlow"
+Shader "Hovl/Particles/Lit_CenterGlow"
 {
 	Properties
 	{

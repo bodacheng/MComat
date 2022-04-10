@@ -1,4 +1,4 @@
-Shader "ERB/Particles/Add_Fresnel"
+Shader "Hovl/Particles/Add_Fresnel"
 {
 	Properties
 	{
