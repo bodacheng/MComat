@@ -61,13 +61,13 @@ namespace mainMenu
                 return;
             }
             
-            UnitConfig Ref = Units.GetUnitConfig(PreScene.target._focusing.r_id);
+            var Ref = Units.GetUnitConfig(PreScene.target._focusing.r_id);
             if (Ref == null)
             {
                 Debug.Log("No this monster:" + PreScene.target._focusing.r_id);
                 return;
             }
-            BackGroundPS.target.ChangeBGByZokusei(Ref.element);
+            BackGroundPS.target.ChangeBGByElement(Ref.element);
             
             // mini nineslot show
             _NineForShow.ShowStones_Acc(PreScene.target._focusing.id);

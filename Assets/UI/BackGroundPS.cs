@@ -6,9 +6,9 @@ public class BackGroundPS : MonoBehaviour
     public Camera mainC;
     public List<ParticleSystem> BCPs;
     public static BackGroundPS target;
-
-    public int playingNum = 0;
-
+    
+    int playingNo = 0;
+    
     void Awake()
     {
         target = this;
@@ -16,12 +16,12 @@ public class BackGroundPS : MonoBehaviour
     
     public void Next()
     {
-        playingNum++;
-        if (playingNum == BCPs.Count)
+        playingNo++;
+        if (playingNo == BCPs.Count)
         {
-            playingNum = 0;
+            playingNo = 0;
         }
-        SwitchBG(playingNum);
+        SwitchBG(playingNo);
     }
     
     public void Off()
@@ -29,27 +29,27 @@ public class BackGroundPS : MonoBehaviour
         SwitchBG(-1);
     }
     
-    public void ChangeBGByZokusei(Element element)
+    public void ChangeBGByElement(Element element)
     {
         switch (element)
         {
             case Element.darkMagic:
-            Dark();
+                Dark();
             break;
             case Element.blueMagic:
-            Blue();
+                Blue();
             break;
             case Element.greenMagic:
-            Green();
+                Green();
             break;
             case Element.lightMagic:
-            Light();
+                Light();
             break;
             case Element.redMagic:
-            Red();
+                Red();
             break;
             default:
-            Default();
+                Default();
             break;
         }
     }
@@ -85,16 +85,18 @@ public class BackGroundPS : MonoBehaviour
     }
     
     void SwitchBG(int index)
-    {
-        for (int i = 0; i < BCPs.Count; i++)
+    { 
+        transform.SetParent(mainC.transform);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        
+        for (var i = 0; i < BCPs.Count; i++)
         {
             if (i == index)
             {
-                if (!BCPs[i].gameObject.activeSelf)
-                {
-                    BCPs[i].gameObject.SetActive(true);
-                    BCPs[i].Play(true);
-                }
+                if (BCPs[i].gameObject.activeSelf) continue;
+                BCPs[i].gameObject.SetActive(true);
+                BCPs[i].Play(true);
             }else{
                 BCPs[i].gameObject.SetActive(false);
             }
