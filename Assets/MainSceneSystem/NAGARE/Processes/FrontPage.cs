@@ -64,7 +64,7 @@ public class FrontPage : MainSceneProcess
             }
         }
         PreScene.target.SetFocusingUnit(focus_instanceID);//确立focusing角色
-        yield return ModelShower.target.ShowMyModel(focus_instanceID);
+        yield return frontLayer._connector.ShowMyModel(focus_instanceID);
         
         UpperInfoBar.Open(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), 
             () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox));
@@ -109,18 +109,5 @@ public class FrontPage : MainSceneProcess
         
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
         UpperInfoBar.Close();
-        
-        SingleThreadProcesser.backup.RunAsQueued(ModelShower.target.ShowMyModel(null));
-    }
-
-    readonly Vector3 screenPos = new Vector3(0.23f, 0.22f, 10);
-    public override void LocalUpdate()
-    {
-        if (!SkillShowSupporter.IfShowingSkill)
-        {
-            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
-        }else{
-            ModelShower.target.CFollowCharZ();
-        }
     }
 }

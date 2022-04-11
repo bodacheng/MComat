@@ -6,7 +6,6 @@ public class ArenaPage : MainSceneProcess
     private ArenaLayer arenaLayer;
     void EnterProcess()
     {
-        mainProcessRunner.RunFreely(ModelShower.target.ShowMyModel(null));
         arenaLayer = UILayerLoader.Load(PreScene.target.T, "ArenaLayer") as ArenaLayer;
         arenaLayer.RefreshOpponent();
     }

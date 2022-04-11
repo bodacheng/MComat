@@ -13,7 +13,6 @@ public class GotchaFront : MainSceneProcess
      
     public override void ProcessEnter()
     {
-        mainProcessRunner.RunFreely(ModelShower.target.ShowMyModel(null));
         StarsFall.target.gameObject.SetActive(true);
         List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)

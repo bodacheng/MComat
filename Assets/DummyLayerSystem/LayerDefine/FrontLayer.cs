@@ -1,3 +1,4 @@
+using Cocone.ProjectP3;
 using DummyLayerSystem;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ public class FrontLayer : UILayer
     [SerializeField] private Button GotchaBtn;
     [SerializeField] private Button SkillTestRBtn;
     [SerializeField] private Button SkillTestMBtn;
+
+    public DedicatedCameraConnector _connector;
     
     static FrontLayer Get()
     {

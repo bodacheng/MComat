@@ -3,13 +3,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using mainMenu;
-using dataAccess;
 using System;
 using DG.Tweening;
 using DummyLayerSystem;
+using Cocone.ProjectP3;
 
 public partial class ArcadeTop : UILayer
 {
+    [SerializeField] DedicatedCameraConnector _connector;
     [SerializeField] RectTransform ButtonsContainer;
     [SerializeField] Button JumpToNewStage;
     [SerializeField] ScrollRect _ScrollRect;
@@ -37,7 +38,7 @@ public partial class ArcadeTop : UILayer
     public void IconButtonFeature(HeroIcon heroIcon)
     {
         // 显示模型
-        SingleThreadProcesser.backup.RunAsQueued(ModelShower.target.ShowModel(heroIcon.unitConfig.RECORD_ID));
+        SingleThreadProcesser.backup.RunAsQueued(_connector.ShowModel(heroIcon.unitConfig.RECORD_ID));
         // 显示技能组
         _NineForShow.ShowStones_DataInfo(heroIcon.unitInfo);
     }

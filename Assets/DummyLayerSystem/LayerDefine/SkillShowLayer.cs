@@ -6,6 +6,8 @@ using System.Linq;
 using DG.Tweening;
 using DummyLayerSystem;
 using UniRx;
+using Cocone.ProjectP3;
+using System.Collections;
 
 namespace mainMenu
 {
@@ -13,7 +15,8 @@ namespace mainMenu
     // 如果一个九宫格存在相同技能重复登陆，本脚本的功能会出现问题，具体是因为analysisStatesSetDic的机制(以技能key寻找状态从而寻找按钮。)
     public class SkillShowLayer : UILayer
     {
-        [SerializeField] private Canvas canvas;
+        public DedicatedCameraConnector _connector;
+        
         [SerializeField] Button PageBGBtn;
         [SerializeField] GameObject flowParticle;
         [SerializeField] Button SkillButton;
@@ -168,6 +171,38 @@ namespace mainMenu
             }
             PageBGBtn.onClick.AddListener(BFBtnForRefresh);
         }
+        
+        IEnumerator ShowModel()
+        {
+            var showMyModel = _connector.ShowMyModel(PreScene.target._focusing.id);
+            yield return showMyModel;
+            
+            var focusingOneModel = (GameObject)showMyModel.Current;
+            if (focusingOneModel == null)
+            {
+                Debug.Log("模型错误");
+                SkillShowSupporter.focusingC = null;
+                yield break;
+            }
+            var outsideDataLink = focusingOneModel.GetComponent<OutsideDataLink>();
+            if (outsideDataLink == null)
+            {
+                Debug.Log("角色模型构成貌似有问题，resource：" + PreScene.target._focusing.r_id);
+                yield break;
+            }
+            var center = outsideDataLink._C;
+            SkillShowSupporter.focusingC = center;
+            SkillShowSupporter.focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
+            
+            var config = Units.GetUnitConfig(PreScene.target._focusing.r_id);
+            var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
+            
+            yield return center.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK, config.SPECIAL_ZOKUSEI);
+            yield return center.Step2Initialize(config.TYPE, unitInfo.set, unitInfo.level, config.element, config.SPECIAL_ZOKUSEI);
+                
+            if (center._MyBehaviorRunner != null)
+                center._MyBehaviorRunner.ChangeState("Empty");
+        }
 
         // 打印出技能显示画面
         void SkillScriptReader(SkillSet nineAndTwo, Element element)
@@ -254,6 +289,8 @@ namespace mainMenu
                 newShow.gameObject.SetActive(true);
                 RenderButton(element,newShow.gameObject,Fire2_chuan[i].SP_LEVEL);
             }
+            
+            StartCoroutine(ShowModel());
         }
 
         #region 表情测试相关

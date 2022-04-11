@@ -11,22 +11,14 @@ public class StoneMerge : MainSceneProcess
         Inherit(PreScene.target);
     }
     
-    IEnumerator EnterProcess()
+    public override void ProcessEnter()
     {
         stoneMergeLayer = StoneMergeLayer.Open();
-        
-        yield return ModelShower.target.ShowMyModel(null);
-        
         stoneMergeLayer.stoneBox.AddFeatureToCells(stoneMergeLayer.CellFeature_MergeMode);
         stoneMergeLayer.stoneBox.RestFilter();
         stoneMergeLayer.stoneBox.EXTabsFeatureRefresh(false);
         stoneMergeLayer._skillStoneDetail.Clear();
         stoneMergeLayer.stoneBox.IniExTabs(stoneMergeLayer.fxCamera);
-    }
-    
-    public override void ProcessEnter()
-    {
-        mainProcessRunner.RunAsQueued(EnterProcess());
     }
     
     public override void ProcessEnd()

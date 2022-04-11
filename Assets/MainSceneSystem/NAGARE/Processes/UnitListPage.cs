@@ -56,15 +56,4 @@ public class UnitListPage : MainSceneProcess
         UnitOptionLayer.Close();
         UnitsLayer.Close();
     }
-    
-    readonly Vector3 screenPos = new Vector3(0.23f, 0.35f, 10);
-    public override void LocalUpdate()
-    {
-        if (!SkillShowSupporter.IfShowingSkill)
-        {
-            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
-        }else{
-            ModelShower.target.CFollowCharZ();
-        }
-    }
 }

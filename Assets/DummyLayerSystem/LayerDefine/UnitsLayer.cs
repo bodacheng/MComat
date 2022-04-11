@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using dataAccess;
 using DummyLayerSystem;
+using Cocone.ProjectP3;
 
 namespace mainMenu
 {
@@ -25,7 +26,7 @@ namespace mainMenu
         [Header("宠物栏parent")]
         public RectTransform MonsterBoxContainer;
 
-        readonly List<string> typeOfUnitsIhave = new List<string>();
+        [SerializeField] List<string> _typeOfUnitsIHave = new List<string>();
         readonly IDictionary<string, HeroIcon> mainMenuIcons = new Dictionary<string, HeroIcon>();
         string selected_InstanceID;
         
@@ -64,7 +65,7 @@ namespace mainMenu
 
         public void Select(string instanceID)
         {
-            HeroIcon targetingIcon = GetUnitIcon(instanceID);
+            var targetingIcon = GetUnitIcon(instanceID);
             HeroIcon.SelectedFeature(targetingIcon, selectedFrame, 1f);
             selected_InstanceID = instanceID;
         }
@@ -76,15 +77,15 @@ namespace mainMenu
 
         void AddOneNewIcon(string instanceID, bool clearButtonFeature)
         {
-            UnitInfo unitInfo = MyMonsters.Get(instanceID);
-            UnitConfig unitConfig = Units.GetUnitConfig(unitInfo.r_id);
+            var unitInfo = MyMonsters.Get(instanceID);
+            var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
             if (unitConfig == null)
             {
                 Debug.Log("MonsterID:"+ unitInfo.r_id + " doesnt exist in this version");
                 return;
             }
-
-            HeroIcon targetingIcon = GetUnitIcon(instanceID);
+            
+            var targetingIcon = GetUnitIcon(instanceID);
             if (targetingIcon == null)
             {
                 MonsterIconDic.Get(unitConfig.RECORD_ID);
@@ -96,9 +97,9 @@ namespace mainMenu
             }
             if (clearButtonFeature)
                 targetingIcon.iconButton.onClick.RemoveAllListeners();
-            if (!typeOfUnitsIhave.Contains(targetingIcon.unitConfig.TYPE))
+            if (!_typeOfUnitsIHave.Contains(targetingIcon.unitConfig.TYPE))
             {
-                typeOfUnitsIhave.Add(targetingIcon.unitConfig.TYPE);
+                _typeOfUnitsIHave.Add(targetingIcon.unitConfig.TYPE);
             }
         }
         
@@ -114,7 +115,7 @@ namespace mainMenu
             {
                 AddOneNewIcon(keyValuePair.Value.id, clearButtonFeature);
             }
-            _monsterboxFilter.RefreshTypeDropDown(typeOfUnitsIhave);
+            _monsterboxFilter.RefreshTypeDropDown(_typeOfUnitsIHave);
         }
         
         //icon的排列，显示   
@@ -126,11 +127,11 @@ namespace mainMenu
             {
                 keyValuePair.Value.gameObject.SetActive(false);
             }
-            List<HeroIcon> nowcharIcons = _monsterboxFilter.OrderIcons(mainMenuIcons.Values.ToList());
-            int hangshu = 1;
-            for (int i = 0; i < nowcharIcons.Count; i++)
+            var icons = _monsterboxFilter.OrderIcons(mainMenuIcons.Values.ToList());
+            var hangshu = 1;
+            for (var i = 0; i < icons.Count; i++)
             {
-                HeroIcon _targetingIcon = nowcharIcons[i];
+                var _targetingIcon = icons[i];
                 if (_targetingIcon == null)
                 {
                     Debug.Log("严重错误");
@@ -143,7 +144,7 @@ namespace mainMenu
             }
 
             //adjustAllIconsSize(null);
-            hangshu = 1 + nowcharIcons.Count / 7;
+            hangshu = 1 + icons.Count / 7;
             MonsterBoxContainer.sizeDelta = new Vector2(MonsterBoxContainer.rect.width, noMagic.GetComponent<RectTransform>().rect.height * hangshu);
         }
     }

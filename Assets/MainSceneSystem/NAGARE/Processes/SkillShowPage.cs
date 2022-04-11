@@ -4,7 +4,7 @@ using mainMenu;
 
 public class SkillShowPage : MainSceneProcess
 {
-    private SkillShowLayer SkillShowLayer;
+    private SkillShowLayer layer;
     public SkillShowPage()
     {
         Step = MainSceneStep.UnitSkillShow;
@@ -13,26 +13,15 @@ public class SkillShowPage : MainSceneProcess
     
     public override void ProcessEnter()
     {
-        UnitInfo unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
-        SkillShowLayer = SkillShowLayer.Open();
-        SkillShowLayer.SkillsPrintPageRefresh( unitInfo);
+        var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
+        layer = SkillShowLayer.Open();
+        layer.SkillsPrintPageRefresh( unitInfo);
     }
     
     public override void ProcessEnd()
     {
-        SkillShowLayer.ClearRenderPs();
-        SkillShowLayer.EffectsManager.CloseShowingZokuseiTagEffects();
+        layer.ClearRenderPs();
+        layer.EffectsManager.CloseShowingZokuseiTagEffects();
         UILayerLoader.Remove("SkillShowLayer");
-    }
-
-    readonly Vector3 screenPos = new Vector3(0.23f, 0.3f,10);
-    public override void LocalUpdate()
-    {
-        if (!SkillShowSupporter.IfShowingSkill)
-        {
-            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
-        }else{
-            ModelShower.target.CFollowCharZ();
-        }
     }
 }

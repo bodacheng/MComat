@@ -32,15 +32,4 @@ public class ArcadeFrontPage : MainSceneProcess
     {
         ArcadeTop.Close();
     }
-    
-    readonly Vector3 screenPos = new Vector3(0.3f, 0.23f, 10);
-    public override void LocalUpdate()
-    {
-        if (!SkillShowSupporter.IfShowingSkill)
-        {
-            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
-        }else{
-            ModelShower.target.CFollowCharZ();
-        }
-    }
 }

@@ -56,17 +56,4 @@ public class MonsterEditPage : MainSceneProcess
     {
         SkillEditLayer.Close();
     }
-    
-    readonly Vector3 screenPos = new Vector3(0.23f, 0.3f, 10);
-    public override void LocalUpdate()
-    {
-        SkillShowSupporter.SkillsPrintOutLateUpdate();
-        
-        if (!SkillShowSupporter.IfShowingSkill)
-        {
-            ModelShower.target.TranslateShowingCharToDefaultPos(screenPos);
-        }else{
-            ModelShower.target.CFollowCharZ();
-        }
-    }
 }
