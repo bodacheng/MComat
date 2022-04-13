@@ -109,14 +109,8 @@ namespace mainMenu
                 Debug.Log("角色详细信息读取错误.尝试将“对准”中的角色信息至空");
                 yield return _connector.ShowMyModel(null);
             }else{
-                SkillShowSupporter.focusRId = info.r_id;
                 var showMyModel = _connector.ShowMyModel(info.id);
                 yield return showMyModel;
-                var focusingOneModel = (GameObject)showMyModel.Current;
-                if (focusingOneModel == null)
-                {
-                    Debug.Log("模型错误");
-                }
             }
         }
     }

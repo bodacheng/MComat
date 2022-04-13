@@ -24,4 +24,16 @@ public class SkillShowPage : MainSceneProcess
         layer.EffectsManager.CloseShowingZokuseiTagEffects();
         UILayerLoader.Remove("SkillShowLayer");
     }
+    
+    public override void LocalUpdate()
+    {
+        if (SkillShowSupporter.focusingC != null)
+        {
+            layer._connector.CameraPositionCal();
+        }
+        if (SkillShowSupporter.IfShowingSkill)
+        {
+            SkillShowSupporter.SkillsPrintOutLateUpdate();
+        }
+    }
 }

@@ -529,6 +529,7 @@
      <Compile Include="Assets\SKillAnalyzer\SKillAnalyzer.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Gestures\TransformGestures\PinnedTransformGesture.cs" />
      <Compile Include="Assets\NoSuchStudio\HighlightUI\Scritpts\Runtime\HighlightUIStatic.cs" />
+     <Compile Include="Assets\P3\TextureUtil.cs" />
      <Compile Include="Assets\Arena\ArenaFightTeamDisplay.cs" />
      <Compile Include="Assets\AnimControl\StateEnterd.cs" />
      <Compile Include="Assets\Behaviour\Defines\states\Dash_Back_State.cs" />
@@ -583,6 +584,7 @@
      <Compile Include="Assets\Remote\API\Dto\Model\SkillStoneLevelUpModel.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Pointers\Pointer.cs" />
      <Compile Include="Assets\Remote\API\Dto\Model\GetStructure\MonsterTeamOfPlayerModel.auto.cs" />
+     <Compile Include="Assets\P3\DedicatedCameraConnector.cs" />
      <Compile Include="Assets\RPGTALK\Scripts\RPGTalkArea.cs" />
      <Compile Include="Assets\DynamicBone\Scripts\DynamicBoneCollider.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonData.cs" />
@@ -730,8 +732,6 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
-     <Compile Include="Assets\P3\DedicatedCameraConnector.cs" />
-     <Compile Include="Assets\P3\TextureUtil.cs" />
      <None Include="Assets\EffectsResource\shaders\Slash2.shader" />
      <None Include="Assets\EffectsResource\Prefabs\Projectiles(Speed)\Readme.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

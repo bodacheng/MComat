@@ -60,7 +60,7 @@ namespace Cocone.ProjectP3
             {
                 yield break;
             }
-        
+            
             var p = GeneralModelPool.GetModel(recordID);
             yield return p;
             if (p.Current == null)
@@ -68,8 +68,19 @@ namespace Cocone.ProjectP3
                 Debug.Log("模型错误");
                 yield break;
             }
-        
-            var dataCenter = (Data_Center)p.Current;
+            
+            var _dataCenter = p.Current;
+            if (_dataCenter == null)
+            {
+                Debug.Log("模型错误");
+                SkillShowSupporter.focusingC = null;
+                yield break;
+            }
+            var dataCenter = (Data_Center)_dataCenter;
+            SkillShowSupporter.focusRId = recordID;
+            SkillShowSupporter.focusingC = dataCenter;
+            SkillShowSupporter.focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
+            
             // 这个短暂变色是为了掩盖一些模型刚加载瞬间有些渲染没到位的尴尬。比如裙子摇晃 
             // 但是这个不知道为什么报warning
             // dataCenter._ShaderManager.FlatColorForAShortTime(10f, 0, 0.5f, Color.black); 

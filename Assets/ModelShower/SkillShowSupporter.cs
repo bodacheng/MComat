@@ -1,6 +1,5 @@
 using System.Collections;
 using mainMenu;
-using UnityEngine;
 
 public static class SkillShowSupporter
 {

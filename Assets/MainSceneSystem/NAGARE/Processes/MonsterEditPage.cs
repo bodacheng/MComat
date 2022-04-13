@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class MonsterEditPage : MainSceneProcess
 {
-    private SkillEditLayer skillEditLayer;
+    private SkillEditLayer layer;
     
     void ItemsLoadFinished(bool value)
     {
@@ -19,7 +19,7 @@ public class MonsterEditPage : MainSceneProcess
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
             return;
         }
-        skillEditLayer = SkillEditLayer.Open();
+        layer = SkillEditLayer.Open();
         
         // 没这行的话从技能石升级画面返回的话角色模型加载不出来
         //yield return UnitOptionLayer.target.CharModelRender(UnitInfo.GetCharDataInfo(PreScene.target._focusing));
@@ -40,13 +40,14 @@ public class MonsterEditPage : MainSceneProcess
             () => {
                 if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
                 {
-                    skillEditLayer = SkillEditLayer.Open();
-                    skillEditLayer.SkillShowSpEnterProcess();
+                    layer = SkillEditLayer.Open();
+                    layer.SkillShowSpEnterProcess();
                 }
                 else
                 {
                     EnterProcess();
                 }
+                mainProcessRunner.RunAsQueued(layer._connector.ShowMyModel(PreScene.target._focusing.id));
             },
             () => { Debug.Log("failed"); }
         );
@@ -55,5 +56,17 @@ public class MonsterEditPage : MainSceneProcess
     public override void ProcessEnd()
     {
         SkillEditLayer.Close();
+    }
+    
+    public override void LocalUpdate()
+    {
+        if (SkillShowSupporter.focusingC != null)
+        {
+            layer._connector.CameraPositionCal();
+        }
+        if (SkillShowSupporter.IfShowingSkill)
+        {
+            SkillShowSupporter.SkillsPrintOutLateUpdate();
+        }
     }
 }

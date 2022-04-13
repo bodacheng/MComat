@@ -128,7 +128,7 @@ namespace mainMenu
         }
         
         // 技能按钮渲染与处理
-        List<GameObject> renderPs = new List<GameObject>();
+        readonly List<GameObject> renderPs = new List<GameObject>();
         async void RenderButton(Element element, GameObject button, int splevel)
         {
             await Observable.TimerFrame(5);
@@ -157,17 +157,17 @@ namespace mainMenu
         }
         
         //根据锁定的技能组，角色，来打印出所有技能按钮，以及背景按钮。
-        public void SkillsPrintPageRefresh(UnitInfo _watchingCharInfo)
+        public void SkillsPrintPageRefresh(UnitInfo _unitInfo)
         {
-            UnitConfig unitConfig = Units.GetUnitConfig(_watchingCharInfo.r_id);
+            UnitConfig unitConfig = Units.GetUnitConfig(_unitInfo.r_id);
             PageBGBtn.onClick.RemoveAllListeners();
-            if (_watchingCharInfo != null && _watchingCharInfo.set != null)
+            if (_unitInfo != null && _unitInfo.set != null)
             {
-                SkillScriptReader(_watchingCharInfo.set, unitConfig.element);
+                SkillScriptReader(_unitInfo.set, unitConfig.element);
             }
             void BFBtnForRefresh()
             {
-                SkillsPrintPageRefresh(_watchingCharInfo);
+                SkillsPrintPageRefresh(_unitInfo);
             }
             PageBGBtn.onClick.AddListener(BFBtnForRefresh);
         }
@@ -176,32 +176,12 @@ namespace mainMenu
         {
             var showMyModel = _connector.ShowMyModel(PreScene.target._focusing.id);
             yield return showMyModel;
-            
-            var focusingOneModel = (GameObject)showMyModel.Current;
-            if (focusingOneModel == null)
-            {
-                Debug.Log("模型错误");
-                SkillShowSupporter.focusingC = null;
-                yield break;
-            }
-            var outsideDataLink = focusingOneModel.GetComponent<OutsideDataLink>();
-            if (outsideDataLink == null)
-            {
-                Debug.Log("角色模型构成貌似有问题，resource：" + PreScene.target._focusing.r_id);
-                yield break;
-            }
-            var center = outsideDataLink._C;
-            SkillShowSupporter.focusingC = center;
-            SkillShowSupporter.focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
-            
             var config = Units.GetUnitConfig(PreScene.target._focusing.r_id);
             var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
-            
-            yield return center.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK, config.SPECIAL_ZOKUSEI);
-            yield return center.Step2Initialize(config.TYPE, unitInfo.set, unitInfo.level, config.element, config.SPECIAL_ZOKUSEI);
-                
-            if (center._MyBehaviorRunner != null)
-                center._MyBehaviorRunner.ChangeState("Empty");
+            yield return SkillShowSupporter.focusingC.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK, config.SPECIAL_ZOKUSEI);
+            yield return SkillShowSupporter.focusingC.Step2Initialize(config.TYPE, unitInfo.set, unitInfo.level, config.element, config.SPECIAL_ZOKUSEI);
+            if (SkillShowSupporter.focusingC._MyBehaviorRunner != null)
+                SkillShowSupporter.focusingC._MyBehaviorRunner.ChangeState("Empty");
         }
 
         // 打印出技能显示画面
@@ -225,69 +205,69 @@ namespace mainMenu
                 Destroy(child.gameObject);
             }
             
-            List<SkillEntity> SkillEntity_List = new List<SkillEntity>();
+            var SkillEntity_List = new List<SkillEntity>();
             SkillEntity_List.AddRange(nineAndTwo.GetAttack1Chuan().Values.ToList());
             SkillEntity_List.AddRange(nineAndTwo.GetAttack2Chuan().Values.ToList());
             SkillEntity_List.AddRange(nineAndTwo.GetAttack3Chuan().Values.ToList());
             analysisSKList = LToD(SkillEntity_List);
             StateButtonDic.Clear();
             
-            IDictionary<int, SkillEntity> attack_chuan = nineAndTwo.GetAttack1Chuan();
-            for (int i = 1; i < 4; i++)
+            var attackChuan = nineAndTwo.GetAttack1Chuan();
+            for (var i = 1; i < 4; i++)
             {
-                if (attack_chuan[i] == null)
+                if (attackChuan[i] == null)
                 {
                     continue;
                 }
                 Button newShow = Instantiate(SkillButton);
-                AddShowSkillInfoFeature(newShow, attack_chuan[i]);
-                StateButtonDic.Add(attack_chuan[i].REAL_NAME, newShow);
-                newShow.name = attack_chuan[i].REAL_NAME;
+                AddShowSkillInfoFeature(newShow, attackChuan[i]);
+                StateButtonDic.Add(attackChuan[i].REAL_NAME, newShow);
+                newShow.name = attackChuan[i].REAL_NAME;
                 
                 newShow.transform.SetParent(transform);
                 Vector3 pos = attacksT.transform.position;
                 
                 newShow.transform.position = pos + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
                 newShow.gameObject.SetActive(true);
-                RenderButton(element,newShow.gameObject,attack_chuan[i].SP_LEVEL);
+                RenderButton(element,newShow.gameObject,attackChuan[i].SP_LEVEL);
             }
-
-            IDictionary<int, SkillEntity> Fire1_chuan = nineAndTwo.GetAttack2Chuan();
-            for (int i = 1; i < 4; i++)
+            
+            var fire1Chuan = nineAndTwo.GetAttack2Chuan();
+            for (var i = 1; i < 4; i++)
             {
-                if (Fire1_chuan[i] == null)
+                if (fire1Chuan[i] == null)
                 {
                     continue;
                 }
                 Button newShow = Instantiate(SkillButton);
-                AddShowSkillInfoFeature(newShow, Fire1_chuan[i]);
-                StateButtonDic.Add(Fire1_chuan[i].REAL_NAME, newShow);
-                newShow.name = Fire1_chuan[i].REAL_NAME;
+                AddShowSkillInfoFeature(newShow, fire1Chuan[i]);
+                StateButtonDic.Add(fire1Chuan[i].REAL_NAME, newShow);
+                newShow.name = fire1Chuan[i].REAL_NAME;
                 
                 newShow.transform.SetParent(transform);
                 Vector3 pos = fire1T.transform.position;
                 newShow.transform.position = pos + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
                 newShow.gameObject.SetActive(true);
-                RenderButton(element,newShow.gameObject,Fire1_chuan[i].SP_LEVEL);
+                RenderButton(element,newShow.gameObject,fire1Chuan[i].SP_LEVEL);
             }
              
-            IDictionary<int, SkillEntity> Fire2_chuan = nineAndTwo.GetAttack3Chuan();
-            for (int i = 1; i < 4; i++)
+            var fire2Chuan = nineAndTwo.GetAttack3Chuan();
+            for (var i = 1; i < 4; i++)
             {
-                if (Fire2_chuan[i] == null)
+                if (fire2Chuan[i] == null)
                 {
                     continue;
                 }
                 Button newShow = Instantiate(SkillButton);
-                AddShowSkillInfoFeature(newShow, Fire2_chuan[i]);
-                StateButtonDic.Add(Fire2_chuan[i].REAL_NAME, newShow);
-                newShow.name = Fire2_chuan[i].REAL_NAME;
+                AddShowSkillInfoFeature(newShow, fire2Chuan[i]);
+                StateButtonDic.Add(fire2Chuan[i].REAL_NAME, newShow);
+                newShow.name = fire2Chuan[i].REAL_NAME;
                 
                 newShow.transform.SetParent(transform);
                 Vector3 pos = fire2T.transform.position;
                 newShow.transform.position = pos + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
                 newShow.gameObject.SetActive(true);
-                RenderButton(element,newShow.gameObject,Fire2_chuan[i].SP_LEVEL);
+                RenderButton(element,newShow.gameObject,fire2Chuan[i].SP_LEVEL);
             }
             
             StartCoroutine(ShowModel());

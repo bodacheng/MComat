@@ -54,17 +54,17 @@ public class FrontPage : MainSceneProcess
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
         
-        var focus_instanceID = TeamSet.Default.GetInstanceIdOnPos(0);
-        if (focus_instanceID == null)
+        var focusInstanceID = TeamSet.Default.GetInstanceIdOnPos(0);
+        if (focusInstanceID == null)
         {
             foreach (var keyValuePair in MyMonsters.Dic)
             {
-                focus_instanceID = keyValuePair.Key;
+                focusInstanceID = keyValuePair.Key;
                 break;
             }
         }
-        PreScene.target.SetFocusingUnit(focus_instanceID);//确立focusing角色
-        yield return frontLayer._connector.ShowMyModel(focus_instanceID);
+        PreScene.target.SetFocusingUnit(focusInstanceID);//确立focusing角色
+        yield return frontLayer._connector.ShowMyModel(focusInstanceID);
         
         UpperInfoBar.Open(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), 
             () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox));

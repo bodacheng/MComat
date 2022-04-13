@@ -4,7 +4,6 @@ using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
 using Cocone.ProjectP3;
-using System.Collections;
 
 public partial class SkillEditLayer : UILayer
 {
@@ -63,33 +62,8 @@ public partial class SkillEditLayer : UILayer
         returnValue._skillStoneDetail.Clear();
         returnValue.unitSwitcher.gameObject.SetActive(FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow);
         returnValue.SkillEditButtonFeature(PreScene.target._focusing);
-
-        returnValue.StartCoroutine(returnValue.ShowModel());
         
         return returnValue;
-    }
-
-    public IEnumerator ShowModel()
-    {
-        var showMyModel = _connector.ShowMyModel(PreScene.target._focusing.id);
-        yield return showMyModel;
-        
-        var focusingOneModel = (GameObject)showMyModel.Current;
-        if (focusingOneModel == null)
-        {
-            Debug.Log("模型错误");
-            SkillShowSupporter.focusingC = null;
-            yield break;
-        }
-        var outsideDataLink = focusingOneModel.GetComponent<OutsideDataLink>();
-        if (outsideDataLink == null)
-        {
-            Debug.Log("角色模型构成貌似有问题，resource：" + PreScene.target._focusing.r_id);
-            yield break;
-        }
-        var aI_DATA_CENTER = outsideDataLink._C;
-        SkillShowSupporter.focusingC = aI_DATA_CENTER;
-        SkillShowSupporter.focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
     }
     
     public static void Close()
