@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
@@ -23,11 +23,6 @@ namespace Cocone.ProjectP3
         [SerializeField] private RectTransform View3DSizeRef;
         private readonly Bounds tempBoundary = new Bounds();
         private RenderTexture renderTexture;
-        
-        public Camera GetCamera()
-        {
-            return camera;
-        }
         
         private bool fixMode;
         private float sizeDiffRate = 1; // mesh表示範囲と実際のview範囲の広さ比例
@@ -136,16 +131,6 @@ namespace Cocone.ProjectP3
                 sizeDiffRate = 1;
             }
         }
-
-        public int GetResolution()
-        {
-            return resolution;
-        }
-        
-        public void SetResolution(int value)
-        {
-            this.resolution = value;
-        }
         
         public void SetTexture()
         {
@@ -183,7 +168,7 @@ namespace Cocone.ProjectP3
 
             camera.transform.position = targetBounds.center + Vector3.forward * (targetBounds.extents.z + extraZDis);
             camera.transform.rotation = Quaternion.LookRotation(targetBounds.center - camera.transform.position, Vector3.up);
-            if (this.fixMode)
+            if (fixMode)
             {
                 _basicOrthographicSize = Mathf.Max(targetBounds.extents.x, targetBounds.extents.y);
             }
@@ -193,7 +178,7 @@ namespace Cocone.ProjectP3
             camera.transform.position += (camera.transform.right * cameraPosOffSet.x + Vector3.up * cameraPosOffSet.y);
         }
         
-        public float ViewColorAlpha
+        float ViewColorAlpha
         {
             get => view.color.a;
             set => view.color = new Color(view.color.r, view.color.g, view.color.b, value);
@@ -233,12 +218,6 @@ namespace Cocone.ProjectP3
             this.cameraPosOffSet = offSet;
             CameraPositionCal();
         }
-
-        public void SetUpDownRange(float min, float max)
-        {
-            this.UpDownRotateRangeMin = min;
-            this.UpDownRotateRangeMax = max;
-        }
         
         public void RotateTarget(float left_right, float up_down, float Z = 0)
         {
@@ -249,11 +228,6 @@ namespace Cocone.ProjectP3
             target.localRotation = Quaternion.Euler(up_down, 0, Z);
             target.RotateAround(target.position, target.up, left_right);
             CameraPositionCal();
-        }
-        
-        public (float, float, float) GetCurrentRotation()
-        {
-            return (left_right, up_down, _z);
         }
         
         public void OnPointerDown()
@@ -274,6 +248,14 @@ namespace Cocone.ProjectP3
         
         public void ItemDetailStartDirection(float x, float y, float z = 0)
         {
+            DOTween.To 
+            (
+                () => ViewColorAlpha,
+                (x) => ViewColorAlpha = x,
+                1,
+                0.5f
+            );
+            
             up_down = y;
             if (y < UpDownRotateRangeMin)
             {
@@ -287,13 +269,6 @@ namespace Cocone.ProjectP3
             up_down = Mathf.Clamp(up_down, UpDownRotateRangeMin, UpDownRotateRangeMax);
             RotateTarget(x, up_down, z);
             OnPointerDown();
-        }
-        
-        public void ItemDetailStartDirection(bool front)
-        {
-            left_right = front ? 0 : 180;
-            OnPointerDown();
-            OnHold();
         }
         
         /// <summary>
