@@ -17,9 +17,8 @@ public partial class GotchaResultLayer : UILayer
         
         while(!_starFallen)
             yield return new WaitForSeconds(0.1f);
-
-        ClearFallingStars();
         
+        ClearFallingStars();
         SpeedOnce.gameObject.SetActive(false);
         Skip.gameObject.SetActive(false);
         NineForShow.transform.gameObject.SetActive(true);
@@ -32,7 +31,7 @@ public partial class GotchaResultLayer : UILayer
         yield return new WaitForSeconds(2f);
         
         string a1 = null, a2 = null, a3 = null, b1 = null, b2 = null, b3 = null, c1 = null, c2 = null, c3 = null;
-        for (int i = 0; i < results.Count; i++)
+        for (var i = 0; i < results.Count; i++)
         {
             switch(i)
             {
@@ -65,7 +64,6 @@ public partial class GotchaResultLayer : UILayer
                     break;
             }
         }
-        
         NineForShow.ShowStones(a1, a2, a3, b1, b2, b3, c1, c2, c3);
     }
 }

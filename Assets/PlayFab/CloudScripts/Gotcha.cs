@@ -19,7 +19,7 @@ public partial class CloudScript
                 FunctionName = "GotchaX9", // Arbitrary function name (must exist in your uploaded cloud.js file)
                 FunctionParameter = new {
                     CatalogVersion = PlayfabSetting._StoneCatalog,
-                    tableName = "TestGotcha"
+                    tableName = "GotchaX9"
                 }, // The parameter provided to your function
                 GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
             },

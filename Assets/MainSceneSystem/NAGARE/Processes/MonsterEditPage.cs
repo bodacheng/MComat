@@ -21,8 +21,9 @@ public class MonsterEditPage : MainSceneProcess
         }
         layer = SkillEditLayer.Open();
         
-        // 没这行的话从技能石升级画面返回的话角色模型加载不出来
-        //yield return UnitOptionLayer.target.CharModelRender(UnitInfo.GetCharDataInfo(PreScene.target._focusing));
+        mainProcessRunner.RunAsQueued(layer._connector.ShowMyModel(
+            PreScene.target._focusing != null ?
+                PreScene.target._focusing.id: null));
     }
     
     public MonsterEditPage()
@@ -47,7 +48,6 @@ public class MonsterEditPage : MainSceneProcess
                 {
                     EnterProcess();
                 }
-                mainProcessRunner.RunAsQueued(layer._connector.ShowMyModel(PreScene.target._focusing.id));
             },
             () => { Debug.Log("failed"); }
         );

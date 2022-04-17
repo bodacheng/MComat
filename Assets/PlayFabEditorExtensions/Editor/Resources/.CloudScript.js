@@ -33,23 +33,30 @@
 // 建立玩家初始数据
 handlers.buildBasicData = function (args, context) {
 
-    var updateUserDataResult = server.UpdateUserReadOnlyData({
+    var playerData = server.GetUserReadOnlyData({
         PlayFabId: currentPlayerId,
-        Data: {
-            "stone_box_size": 50,
-            "last_Level_completed": 0
-        }
-    });
-
-    var playerStatResult = server.UpdatePlayerStatistics({
-        PlayFabId: currentPlayerId,
-        Statistics: [{
-            StatisticName: "arenapoint",
-            Value: 1000 // 初始值
-        }]
+        Keys: ["playerInitialized"]
     });
     
-    return { messageValue: updateUserDataResult };
+    var initialized = playerData.Data["playerInitialized"];
+    if (initialized == null) {
+        var updateUserDataResult = server.UpdateUserReadOnlyData({
+            PlayFabId: currentPlayerId,
+            Data: {
+                "stone_box_size": 50,
+                "last_Level_completed": 0
+            }
+        });
+        var playerStatResult = server.UpdatePlayerStatistics({
+            PlayFabId: currentPlayerId,
+            Statistics: [{
+                StatisticName: "arenapoint",
+                Value: 1000 // 初始值
+            }]
+        });
+        return { messageValue: updateUserDataResult };
+    }
+    return { messageValue: null };
 };
 
 handlers.sendPassResetMail = function(args, context) {
