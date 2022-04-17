@@ -2,17 +2,21 @@
 
 using UnityEngine;
 using UnityEditor;
+using System.Linq;
 
 public class LocalMasterDataToolGUI : EditorWindow {
 
     bool Initialized;
     MasterDataTool tool;
     
-    public string[] unitTypes = {"human"};
-    public TextAsset unitConfigFile;
-    public string unitConfigFilePath;
-    public TextAsset SkillConfigFile;
-    public string SkillConfigPath;
+    [SerializeField] string[] unitTypes = {"human"};
+    [SerializeField] TextAsset unitConfigFile;
+    [SerializeField] string unitConfigFilePath;
+    [SerializeField] TextAsset SkillConfigFile;
+    [SerializeField] string SkillConfigPath;
+    
+    [SerializeField] Shader ChangeShader;
+    [SerializeField] Shader ToShader;
     
     void OnGUI()
     {
@@ -25,6 +29,8 @@ public class LocalMasterDataToolGUI : EditorWindow {
         unitConfigFilePath = EditorGUILayout.TextField("角色定义文件路径",unitConfigFilePath);
         SkillConfigFile = EditorGUILayout.ObjectField("技能定义文件", SkillConfigFile, typeof(TextAsset), true) as TextAsset;
         SkillConfigPath = EditorGUILayout.TextField("技能定义文件",SkillConfigPath);
+        ChangeShader = EditorGUILayout.ObjectField("Change Shader", ChangeShader, typeof(Shader), true) as Shader;
+        ToShader = EditorGUILayout.ObjectField("To Shader", ToShader, typeof(Shader), true) as Shader;
 
         if (GUILayout.Button("根据Resource文件夹生成所有角色配置文件"))
         {
@@ -126,6 +132,23 @@ public class LocalMasterDataToolGUI : EditorWindow {
                         textureImporter.SetPlatformTextureSettings (iPhone_jpeg);
                         textureImporter.SetPlatformTextureSettings (Android_jpeg);
                     }
+                }
+            }
+        }
+        
+        
+        if (GUILayout.Button("置换一切材质的shader"))
+        {
+            var list = AssetDatabase
+                .FindAssets( "t:Material" )
+                .Select( AssetDatabase.GUIDToAssetPath )
+                .Select( AssetDatabase.LoadAssetAtPath<Material> )
+                .Where( c => c != null );
+            foreach (var m in list)
+            {
+                if (m.shader == ChangeShader)
+                {
+                    m.shader = ToShader;
                 }
             }
         }
