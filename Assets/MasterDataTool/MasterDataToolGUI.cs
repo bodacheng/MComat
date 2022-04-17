@@ -7,7 +7,7 @@ using System.Linq;
 public class LocalMasterDataToolGUI : EditorWindow {
 
     bool Initialized;
-    MasterDataTool tool;
+    MasterDataTool tool = new MasterDataTool();
     
     [SerializeField] string[] unitTypes = {"human"};
     [SerializeField] TextAsset unitConfigFile;
