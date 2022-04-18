@@ -13,3 +13,5 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK
 150,screwk,human,2,0.9,5,GM,,3
 125,frank_riseup,human,0,1,5,CT,,1
 102,slashwave,human,0,1,5,GR,,2
+53,dropkick,human,0,0.6,5,GR,,1
+55,swiftkick,human,0,0.5,5,GR,,1
