@@ -191,9 +191,9 @@ MonoBehaviour:
   Sp3SkillExGet: 0
   GetExAfterDamageBy: 20
   ExGetAfterDamage: 10
-  slighthitLastingtime: 0.3
-  lighthitLastingtime: 0.5
-  heavyhitLastingtime: 0.6
+  slighthitLastingtime: 0.2
+  lighthitLastingtime: 0.3
+  heavyhitLastingtime: 0.4
   superhitLastingtime: 1
   highhitLastingTime: 0.8
   normalattackpositionfixingtime: 0.1
