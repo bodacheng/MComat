@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using System.Linq;
 using System.Collections;
 using dataAccess;
+using mainMenu;
+using UnityEngine.Rendering.Universal;
 
 namespace Cocone.ProjectP3
 {
@@ -11,21 +13,14 @@ namespace Cocone.ProjectP3
     {
         [SerializeField] private Transform target;
         [SerializeField] private Camera camera;
-        [SerializeField] private RawImage view;
-        [SerializeField] private int resolution = 256;
-        [SerializeField] private float extraFrameSpace = 0;
-        [SerializeField] private Vector2 cameraPosOffSet;
         [SerializeField] private float UpDownRotateRangeMin = -10;
         [SerializeField] private float UpDownRotateRangeMax = 45;
         [SerializeField] private float rotateSpeed = 90;
         [SerializeField] private float extraZDis = 0;
         [SerializeField] private float extraZCameraDepth = 5f;
-        [SerializeField] private RectTransform View3DSizeRef;
         private readonly Bounds tempBoundary = new Bounds();
-        private RenderTexture renderTexture;
-        
+        private RectTransform rect;
         private bool fixMode;
-        private float sizeDiffRate = 1; // mesh表示範囲と実際のview範囲の広さ比例
         
         public void Clear()
         {
@@ -84,22 +79,16 @@ namespace Cocone.ProjectP3
             model.SetActive(true);
             model.transform.parent = transform;
             
-            Initialize(2048, true,model.transform, transform);
+            Initialize(true,model.transform, transform, PreScene.target.FxCamera);
             ItemDetailStartDirection(0,0,0);
             yield return model;
         }
-
-        public void Initialize(int resolution, bool fixMode, Transform focus, Transform camerasHolder = null)
-        {
-            this.resolution = resolution;
-            Initialize(fixMode, focus, camerasHolder);
-        }
         
-        public void Initialize(bool fixMode, Transform focus, Transform camerasHolder = null)
+        public void Initialize(bool fixMode, Transform focus, Transform camerasHolder = null, Camera stackParent = null)
         {
             this.fixMode = fixMode;
+            rect = transform.GetComponent<RectTransform>();
             target = focus;
-            SetTexture();
             parentNodeRenderer = target.GetComponent<Renderer>();
             renderers = target.GetComponentsInChildren<Renderer>().ToArray();
             
@@ -112,32 +101,21 @@ namespace Cocone.ProjectP3
             }
             
             camera.transform.SetParent(camerasHolder);
-
-            wid = view.GetComponent<RectTransform>().rect.width;
-            hei = view.GetComponent<RectTransform>().rect.height;
+            if (stackParent != null)
+            {
+                var PCameraData = stackParent.transform.GetComponent<UniversalAdditionalCameraData>();
+                var cameraData = camera.transform.GetComponent<UniversalAdditionalCameraData>();
+                cameraData.renderType = CameraRenderType.Overlay;
+                PCameraData.cameraStack.Add(camera);
+            }
+            
+            wid = rect.rect.width;
+            hei = rect.rect.height;
             
             camera.gameObject.SetActive(true);
             
             if (!this.fixMode)
                 _basicOrthographicSize = CalMaxOrthographicSize();
-            
-            if (View3DSizeRef != null)
-            {
-                var rect = transform.GetComponent<RectTransform>();
-                sizeDiffRate = (float)((decimal)View3DSizeRef.rect.width / (decimal)rect.rect.width);
-            }
-            else
-            {
-                sizeDiffRate = 1;
-            }
-        }
-        
-        public void SetTexture()
-        {
-            renderTexture = new RenderTexture(resolution, resolution, 16);
-            renderTexture.Create();
-            camera.targetTexture = renderTexture;
-            view.texture = renderTexture;
         }
         
         private Renderer parentNodeRenderer;
@@ -165,33 +143,39 @@ namespace Cocone.ProjectP3
                     targetBounds.Encapsulate(render.bounds);
                 }
             }
-
-            camera.transform.position = targetBounds.center + Vector3.forward * (targetBounds.extents.z + extraZDis);
-            camera.transform.rotation = Quaternion.LookRotation(targetBounds.center - camera.transform.position, Vector3.up);
+            
             if (fixMode)
             {
                 _basicOrthographicSize = Mathf.Max(targetBounds.extents.x, targetBounds.extents.y);
             }
             
-            camera.orthographicSize = _basicOrthographicSize * sizeDiffRate + extraFrameSpace;
+            camera.orthographicSize = _basicOrthographicSize * (Screen.height / rect.rect.height);
+            
+            var viewCenter = GetCenterPosition(rect);
+            var cViewWidth = camera.orthographicSize * 2 * camera.aspect;
+            var cViewHeight = camera.orthographicSize * 2;
+            
+            camera.transform.position = targetBounds.center + Vector3.forward * (targetBounds.extents.z + extraZDis)
+                        + (0.5f -　((float)viewCenter.x / Screen.width)) * cViewWidth * camera.transform.right 
+                        + (0.5f - ((float)viewCenter.y / Screen.height)) * cViewHeight * Vector3.up;
             camera.farClipPlane = targetBounds.extents.z * 2 + extraZDis + extraZCameraDepth;
-            camera.transform.position += (camera.transform.right * cameraPosOffSet.x + Vector3.up * cameraPosOffSet.y);
         }
         
-        float ViewColorAlpha
+        static Vector2 GetCenterPosition(RectTransform rect)
         {
-            get => view.color.a;
-            set => view.color = new Color(view.color.r, view.color.g, view.color.b, value);
-        }
-
-        public Texture GetView()
-        {
-            return view.texture;
-        }
-        
-        Texture2D GetViewT2D(int textureSize)
-        {
-            return TextureUtil.ToTexture2D(view.texture, textureSize);
+            var position = rect.transform.position;
+            
+            // 真ん中Pivotじゃなければ真ん中を計算する
+            if (rect.pivot != new Vector2(0.5f, 0.5f))
+            {
+                var scaleX = rect.transform.lossyScale.x;
+                var scaleY = rect.transform.lossyScale.y;
+                var x = rect.rect.width / 2f * scaleX;
+                var y = rect.rect.height / 2f * scaleY;
+                position.x += Mathf.Lerp(x, -x, rect.pivot.x);
+                position.y += Mathf.Lerp(y, -y, rect.pivot.y);
+            }
+            return position;
         }
         
         //回転用
@@ -205,18 +189,6 @@ namespace Cocone.ProjectP3
         {
             canLeftRight = x;
             canUpDown = y;
-        }
-        
-        public void SetZoom(float extraFrameSpace)
-        {
-            this.extraFrameSpace = extraFrameSpace;
-            CameraPositionCal();
-        }
-        
-        public void SetCameraOffSet(Vector2 offSet)
-        {
-            this.cameraPosOffSet = offSet;
-            CameraPositionCal();
         }
         
         public void RotateTarget(float left_right, float up_down, float Z = 0)
@@ -248,14 +220,6 @@ namespace Cocone.ProjectP3
         
         public void ItemDetailStartDirection(float x, float y, float z = 0)
         {
-            DOTween.To 
-            (
-                () => ViewColorAlpha,
-                (x) => ViewColorAlpha = x,
-                1,
-                0.5f
-            );
-            
             up_down = y;
             if (y < UpDownRotateRangeMin)
             {
