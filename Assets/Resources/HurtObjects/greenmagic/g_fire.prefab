@@ -19,8 +19,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
         type: 3}
+      propertyPath: ColorModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.47450984
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
         type: 3}
@@ -30,7 +35,17 @@ PrefabInstance:
     - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.48667967
+      value: 0.02238822
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921249576099848613, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: UVModule.tilesX
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921249576099848613, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: UVModule.tilesY
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3921249576099848613, guid: f10d742e0ed7882459a1bd256a2afa0b,
         type: 3}
@@ -62,6 +77,11 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.37254906
       objectReference: {fileID: 0}
+    - target: {fileID: 3922361875938509731, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e07b4aa37a751e043ad2e0a4d6a13ddd, type: 2}
     - target: {fileID: 8569786055881421617, guid: f10d742e0ed7882459a1bd256a2afa0b,
         type: 3}
       propertyPath: m_RootOrder
