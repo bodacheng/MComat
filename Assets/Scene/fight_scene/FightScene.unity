@@ -12722,6 +12722,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
+      propertyPath: layers.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
 --- !u!1 &1940347239
@@ -22690,6 +22694,7 @@ GameObject:
   - component: {fileID: 3000649885118306805}
   - component: {fileID: 3000649885118306804}
   - component: {fileID: 3000649885118306806}
+  - component: {fileID: 3000649885118306807}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -22852,6 +22857,30 @@ Skybox:
   m_GameObject: {fileID: 3000649885118306801}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: 982ec56802922a8408c6961f3c686127, type: 2}
+--- !u!114 &3000649885118306807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3000649885118306801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e5768c36d1bb4acea50bd233372843a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Main Camera
+  basicEditor: 0
+  advancedProps: 0
+  hitProps: 0
+  hit3DObjects: 1
+  hit2DObjects: 1
+  hitWorldSpaceUI: 1
+  hitScreenSpaceUI: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  useHitFilters: 0
 --- !u!4 &3000649885478591270
 Transform:
   m_ObjectHideFlags: 0

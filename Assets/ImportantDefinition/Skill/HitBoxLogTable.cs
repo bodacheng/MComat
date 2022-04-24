@@ -35,13 +35,13 @@ namespace Log
             
             if (FightGlobalSetting.HitBoxLogger)
             {
-                HitBoxLogTable.Instance.Load(HitBoxLogger.Instance.LoadCurrentToString());
+                Instance.Load(HitBoxLogger.Instance.LoadCurrentToString());
                 HitBoxLogger.Instance.LogSummit();
                 for (var i = 0; i < singleFightLogs.Count; i++)
                 {
                     singleFightLogs[i].Summary();
                 }
-                HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv", HitBoxLogger.Instance, singleFightLogs);
+                Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv", HitBoxLogger.Instance, singleFightLogs);
                 for (var i = 0; i < singleFightLogs.Count; i++)
                 {
                     singleFightLogs[i].Clear();
@@ -54,12 +54,12 @@ namespace Log
         {
             public string RECORD_ID;
             public string REAL_NAME;
-            public string USEABLE_MONSTER_TYPE;
+            public string MONSTER_TYPE;
             public string Untouched;
             public string Touched;
-            public string Successed;
-            public string TriggerdTimes;
-            public string InteruptedTimes;
+            public string Succeeded;
+            public string TriggeredTimes;
+            public string InterruptedTimes;
         }
 
         public List<Row> rowList = new List<Row>();
@@ -69,35 +69,30 @@ namespace Log
         {
             return isLoaded;
         }
-
-        public List<Row> GetRowList()
-        {
-            return rowList;
-        }
-
+        
         public void Load(TextAsset csv)
         {
             rowList.Clear();
             string[][] grid = CsvParser2.Parse(csv.text);
             for (int i = 1; i < grid.Length; i++)
             {
-                Row row = new Row
+                var row = new Row
                 {
                     RECORD_ID = grid[i][0],
                     REAL_NAME = grid[i][1],
-                    USEABLE_MONSTER_TYPE = grid[i][2],
+                    MONSTER_TYPE = grid[i][2],
                     Untouched = grid[i][3],
                     Touched = grid[i][4],
-                    Successed = grid[i][5],
-                    TriggerdTimes = grid[i][6],
-                    InteruptedTimes = grid[i][7]
+                    Succeeded = grid[i][5],
+                    TriggeredTimes = grid[i][6],
+                    InterruptedTimes = grid[i][7]
                 };
                 rowList.Add(row);
             }
             isLoaded = true;
         }
 
-        public void Load(string csv)
+        void Load(string csv)
         {
             rowList.Clear();
             string[][] grid = CsvParser2.Parse(csv);
@@ -111,12 +106,12 @@ namespace Log
                 {
                     RECORD_ID = grid[i][0],
                     REAL_NAME = grid[i][1],
-                    USEABLE_MONSTER_TYPE = grid[i][2],
+                    MONSTER_TYPE = grid[i][2],
                     Untouched = grid[i][3],
                     Touched = grid[i][4],
-                    Successed = grid[i][5],
-                    TriggerdTimes = grid[i][6],
-                    InteruptedTimes = grid[i][7]
+                    Succeeded = grid[i][5],
+                    TriggeredTimes = grid[i][6],
+                    InterruptedTimes = grid[i][7]
                 };
                 rowList.Add(row);
             }
@@ -133,10 +128,10 @@ namespace Log
 
             for (int index = 0; index < singleFightLogs.Count; index++)
             {
-                IDictionary<string, int> one_triggerdtimes = singleFightLogs[index].StateTriggerTimes;
-                IDictionary<string, int> one_interruptedTimes = singleFightLogs[index].StateInterruptedTimes;
+                var stateTriggerTimes = singleFightLogs[index].StateTriggerdTimes;
+                var one_interruptedTimes = singleFightLogs[index].StateInterruptedTimes;
 
-                foreach (KeyValuePair<string, int> keyValuePair in one_triggerdtimes)
+                foreach (KeyValuePair<string, int> keyValuePair in stateTriggerTimes)
                 {
                     if (!StateTriggerTimes_whole.ContainsKey(keyValuePair.Key))
                     {
@@ -145,6 +140,7 @@ namespace Log
                     else
                     {
                         StateTriggerTimes_whole[keyValuePair.Key] += keyValuePair.Value;
+                        Debug.Log("Add :"+ keyValuePair.Key + ":"+ StateTriggerTimes_whole[keyValuePair.Key]);
                     }
                 }
 
@@ -160,10 +156,10 @@ namespace Log
                     }
                 }
             }
-
-        A:
-
-            List<Row> toDeleteList = new List<Row>();
+            
+            A:
+            
+            var toDeleteList = new List<Row>();
             foreach (Row row in rowList)
             {
                 if (row.REAL_NAME == null)
@@ -183,7 +179,7 @@ namespace Log
                 {
                     grid[i][0] = "RECORD_ID";
                     grid[i][1] = "REAL_NAME";
-                    grid[i][2] = "USEABLE_MONSTER_TYPE";
+                    grid[i][2] = "MONSTER_TYPE";
                     grid[i][3] = "Untouched(未触摸到敌人的hitbox数量)";
                     grid[i][4] = "Touched(触摸到敌人但没造成伤害的hitbox数量)";
                     grid[i][5] = "Successed(成功击中敌人的hitbox数量)";
@@ -196,7 +192,7 @@ namespace Log
                     {
                         grid[i][0] = rowList[i - 1].RECORD_ID;
                         grid[i][1] = rowList[i - 1].REAL_NAME;
-                        grid[i][2] = rowList[i - 1].USEABLE_MONSTER_TYPE;
+                        grid[i][2] = rowList[i - 1].MONSTER_TYPE;
                         grid[i][3] = "0";
                         grid[i][4] = "0";
                         grid[i][5] = "0";
@@ -208,12 +204,16 @@ namespace Log
                     {
                         grid[i][0] = rowList[i - 1].RECORD_ID;
                         grid[i][1] = rowList[i - 1].REAL_NAME;
-                        grid[i][2] = rowList[i - 1].USEABLE_MONSTER_TYPE;
+                        grid[i][2] = rowList[i - 1].MONSTER_TYPE;
                         grid[i][3] = ((hitBoxLogger.untouchedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.untouchedtimes[grid[i][1]] : 0) + int.Parse(rowList[i - 1].Untouched)).ToString();
                         grid[i][4] = ((hitBoxLogger.touchedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.touchedtimes[grid[i][1]] : 0) + int.Parse(rowList[i - 1].Touched)).ToString();
-                        grid[i][5] = ((hitBoxLogger.successedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.successedtimes[grid[i][1]] : 0) + int.Parse(rowList[i - 1].Successed)).ToString();
-                        grid[i][6] = ((StateTriggerTimes_whole.ContainsKey(grid[i][1]) ? StateTriggerTimes_whole[grid[i][1]] : 0) + int.Parse(rowList[i - 1].TriggerdTimes)).ToString();
-                        grid[i][7] = ((StateInterruptedTimes_whole.ContainsKey(grid[i][1]) ? StateInterruptedTimes_whole[grid[i][1]] : 0) + int.Parse(rowList[i - 1].InteruptedTimes)).ToString();
+                        grid[i][5] = ((hitBoxLogger.successedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.successedtimes[grid[i][1]] : 0) + int.Parse(rowList[i - 1].Succeeded)).ToString();
+                        grid[i][6] = ((StateTriggerTimes_whole.ContainsKey(grid[i][1]) ? StateTriggerTimes_whole[grid[i][1]] : 0) + int.Parse(rowList[i - 1].TriggeredTimes)).ToString();
+                        grid[i][7] = ((StateInterruptedTimes_whole.ContainsKey(grid[i][1]) ? StateInterruptedTimes_whole[grid[i][1]] : 0) + int.Parse(rowList[i - 1].InterruptedTimes)).ToString();
+                        
+                        //Debug.Log(grid[i][1] + ":"+ StateTriggerTimes_whole[grid[i][1]] + ":"+ rowList[i - 1].TriggeredTimes);
+                        //Debug.Log(grid[i][6]);
+                        //Debug.Log(((StateTriggerTimes_whole.ContainsKey(grid[i][1]) ? StateTriggerTimes_whole[grid[i][1]] : 0) + int.Parse(rowList[i - 1].TriggeredTimes)));
                     }
                 }
             }
@@ -257,11 +257,11 @@ namespace Log
         }
         public Row Find_USEABLE_MONSTER_TYPE(string find)
         {
-            return rowList.Find(x => x.USEABLE_MONSTER_TYPE == find);
+            return rowList.Find(x => x.MONSTER_TYPE == find);
         }
         public List<Row> FindAll_USEABLE_MONSTER_TYPE(string find)
         {
-            return rowList.FindAll(x => x.USEABLE_MONSTER_TYPE == find);
+            return rowList.FindAll(x => x.MONSTER_TYPE == find);
         }
         public Row Find_Untouched(string find)
         {
@@ -281,11 +281,11 @@ namespace Log
         }
         public Row Find_Successed(string find)
         {
-            return rowList.Find(x => x.Successed == find);
+            return rowList.Find(x => x.Succeeded == find);
         }
         public List<Row> FindAll_Successed(string find)
         {
-            return rowList.FindAll(x => x.Successed == find);
+            return rowList.FindAll(x => x.Succeeded == find);
         }
     }
 }

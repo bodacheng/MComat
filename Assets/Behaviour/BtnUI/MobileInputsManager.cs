@@ -53,6 +53,7 @@ public class MobileInputsManager : MonoBehaviour {
     public void Clear()
     {
         ElementEffects.Clear();
+        Destroy(gameObject);
     }
     
     // 切换输入按键表现层（红黄蓝绿）.这个函数使用的前提是所有用的上的控制器组都已经注册并初始化

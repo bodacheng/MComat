@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using DummyLayerSystem;
+﻿using DummyLayerSystem;
 using UnityEngine;
-using Log;
 
 namespace FightScene
 {
@@ -120,11 +118,6 @@ namespace FightScene
                     break;
             }
             
-            var data_Centers = new List<Data_Center>();
-            data_Centers.AddRange(RTFightManager.target.team1.TeamMembers.GetValues());
-            data_Centers.AddRange(RTFightManager.target.team2.TeamMembers.GetValues());
-            HitBoxLogTable.Instance.SkillLog(data_Centers);
-            FightLogger.value.WatchMissionsAbandon();
             SingleAssignmentDisposableCleaner.Clear();
         }
         

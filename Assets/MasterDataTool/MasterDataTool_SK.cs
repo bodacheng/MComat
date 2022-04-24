@@ -236,10 +236,10 @@ public partial class MasterDataTool {
             {
                 RECORD_ID = newSkillConfig.RECORD_ID,
                 REAL_NAME = newSkillConfig.REAL_NAME,
-                USEABLE_MONSTER_TYPE = newSkillConfig.TYPE,
+                MONSTER_TYPE = newSkillConfig.TYPE,
                 Untouched = "0",
                 Touched = "0",
-                Successed = "0"
+                Succeeded = "0"
             };
             HitBoxLogTable.Instance.rowList.Add(row);
         }
