@@ -21,7 +21,6 @@ public class SKillAnalyzerGUI : EditorWindow
         _focusingType = EditorGUILayout.TextField("统计以下类型角色的技能信息", _focusingType);
         if (GUILayout.Button("输出技能攻击力预估"))
         {
-            SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
             PowerEstimateTable.Save(_focusingType);
         }
         

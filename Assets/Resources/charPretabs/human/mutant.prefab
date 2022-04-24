@@ -24484,7 +24484,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshes:
   - {fileID: 7375606567139454662}
-  - {fileID: 553764079380848651}
 --- !u!114 &4493621425876806522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34391,7 +34390,6 @@ GameObject:
   - component: {fileID: 3514154168980517605}
   - component: {fileID: 3514154168994341883}
   - component: {fileID: 7375606567139454662}
-  - component: {fileID: 553764079380848651}
   m_Layer: 3
   m_Name: Skin
   m_TagString: Untagged
@@ -34539,20 +34537,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4796095434084d59939621d426405db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dummyMaterial: {fileID: 2100000, guid: 5dd5e2d9345a2184a86b6b699de2bb7a, type: 2}
---- !u!114 &553764079380848651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3514154168980680325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4796095434084d59939621d426405db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dummyMaterial: {fileID: 2100000, guid: 0605da1102e107d42b1a25384d0471c3, type: 2}
 --- !u!1 &3514154168980680327
 GameObject:
   m_ObjectHideFlags: 0

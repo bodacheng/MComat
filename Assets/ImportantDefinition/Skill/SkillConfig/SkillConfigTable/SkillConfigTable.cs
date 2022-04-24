@@ -61,8 +61,8 @@ public partial class SkillConfigTable
     static void RefreshSkillConfigDicForReference()
     {
         IDictionary<string, SkillConfig> Dic = new Dictionary<string, SkillConfig>();
-        List<SkillConfig> ALL = RowsToSkillConfigList(rowList);
-        foreach (SkillConfig _SkillConfig in ALL)
+        var ALL = RowsToSkillConfigList(rowList);
+        foreach (var _SkillConfig in ALL)
         {
             if (!Dic.ContainsKey(_SkillConfig.RECORD_ID))
             {
@@ -104,7 +104,7 @@ public partial class SkillConfigTable
         return SkillConfigsOfType;
     }
     
-    public static void LoadAllSkillConfigFromLocalConfigFile()
+    static void LoadAllSkillConfigFromLocalConfigFile()
     {
         var csv = Resources.Load("Account/mst_skill") as TextAsset;
         var aiCsv = Resources.Load("Account/skill_ai_attrs") as TextAsset;

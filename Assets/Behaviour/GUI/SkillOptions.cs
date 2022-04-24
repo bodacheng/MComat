@@ -13,7 +13,6 @@ public partial class BehaviorRunnerGUI : Editor {
             return null;
         }
         
-        SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
         List<SkillConfig> SkillConfigs = SkillConfigTable.GetSkillConfigsOfType(anim_path);
         List<string> returnValue = new List<string>
         {

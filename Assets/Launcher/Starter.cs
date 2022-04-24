@@ -40,18 +40,15 @@ public class Starter : MonoBehaviour
         FightGlobalSetting.Initialise();
         PlayfabSetting.Initialise();
         keywordSetting.Initialise();
-        SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
+        SkillConfigTable.LoadAllSkillConfigs();
         PowerEstimateTable.Load();
+        Units.LoadByResource();
+        Units.RefreshDic();
     }
     
     void EnterFrontScene()
     {
         Initialise();
-        
-        // 这几个东西用不用执行待定
-        SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();
-        Units.LoadByResource();
-        Units.RefreshDic();
         
         if (enterFrontPageFirst)
         {

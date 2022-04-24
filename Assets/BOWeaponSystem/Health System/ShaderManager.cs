@@ -19,7 +19,7 @@ public class ShaderManager : MonoBehaviour
             shadowMesh.transform.localScale = Vector3.one * 0.9f;
             shadowMesh.gameObject.name = "shadow_" + shadowMesh.gameObject.name;
             shadowMesh.gameObject.layer = 0;
-            shadowMesh.Mesh.materials = new []{ FightGlobalSetting._shadowMaterial};
+            shadowMesh.Mesh.material = FightGlobalSetting._shadowMaterial;
         }
 
         // for (int i = 0; i < pOFXes.Count; i++)
@@ -59,7 +59,7 @@ public class ShaderManager : MonoBehaviour
     {
         meshes.ForEach(x =>
         {
-            if (x.CurrentMaterial != null)
+            if (x.CurrentMaterials != null)
                 DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, color, duration);
         });
     }
@@ -68,7 +68,7 @@ public class ShaderManager : MonoBehaviour
     {
         meshes.ForEach(x =>
         {
-            if (x.CurrentMaterial != null)
+            if (x.CurrentMaterials != null)
                 DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, Color.clear, duration);
         });
     }
@@ -77,7 +77,7 @@ public class ShaderManager : MonoBehaviour
     {
         meshes.ForEach(x =>
         {
-            if (x.CurrentMaterial != null)
+            if (x.CurrentMaterials != null)
             DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, targetColor, duration).OnComplete(
                 () =>
                 {
@@ -93,7 +93,7 @@ public class ShaderManager : MonoBehaviour
     {
         meshes.ForEach(x =>
         {
-            if (x.CurrentMaterial != null)
+            if (x.CurrentMaterials != null)
             DOTween.To(() => x.BaseColor, c => x.BaseColor = c, targetColor, duration);
         });
     }
@@ -102,7 +102,7 @@ public class ShaderManager : MonoBehaviour
     {
         meshes.ForEach(x =>
         {
-            if (x.CurrentMaterial != null)
+            if (x.CurrentMaterials != null)
             DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, targetColor, addTime).OnComplete(
                 () =>
                 {
