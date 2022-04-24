@@ -30,6 +30,7 @@ public class PowerEstimateTable
     
     static void Save(string filepath, List<SkillConfig> SkillConfigs, IDictionary<string, AnimationClip> AnimDic)
     {
+        rowList.Clear();
         string[][] grid = new string[SkillConfigs.Count + 1][];
         for (int i = 0; i < grid.Length; i++)
         {
@@ -50,17 +51,72 @@ public class PowerEstimateTable
                 AnimDic.TryGetValue(SkillConfigs[i -1].REAL_NAME, out AnimationClip clip);
                 grid[i][3] = ATCal(clip, SkillConfigs[i - 1].ATTACK_WEIGHT).ToString();
                 grid[i][4] = SkillConfigs[i - 1].HP_WEIGHT.ToString();
+                
+                Row row = new Row
+                {
+                    RECORD_ID = grid[i][0],
+                    REAL_NAME = grid[i][1],
+                    SPLevel = grid[i][2],
+                    EstimateDamage = grid[i][3],
+                    HP = grid[i][4]
+                };
+                rowList.Add(row);
             }
         }
-        string delimiter = ",";
-        StringBuilder sb = new StringBuilder();
-        for (int index = 0; index < grid.Length; index++)
-            sb.AppendLine(string.Join(delimiter, grid[index]));
+        
+        var delimiter = ",";
+        var sb = new StringBuilder();
+        foreach (var t in grid)
+            sb.AppendLine(string.Join(delimiter, t));
         Debug.Log("尝试最终保存文件" + filepath);
-        StreamWriter outStream = File.CreateText(filepath);
+        var outStream = File.CreateText(filepath);
         outStream.WriteLine(sb);
         outStream.Close();
     }
+    
+    public static void Load()
+    {
+        if (File.Exists(Application.persistentDataPath + "/" + KeywordSetting._SkillStaticAnalysis))
+        {
+            string csv = File.ReadAllText(Application.persistentDataPath + "/" + KeywordSetting._SkillStaticAnalysis);
+            Load(csv);
+        }
+        else
+        {
+            Save("human");
+        }
+    }
+    
+    static void Load(string text)
+	{
+		rowList.Clear();
+		string[][] grid = CsvParser2.Parse(text);
+        try
+        {
+            for(int i = 1 ; i < grid.Length ; i++)
+            {
+                if (grid[i].Length == 5)
+                {
+                    Row row = new Row
+                    {
+                        RECORD_ID = grid[i][0],
+                        REAL_NAME = grid[i][1],
+                        SPLevel = grid[i][2],
+                        EstimateDamage = grid[i][3],
+                        HP = grid[i][4]
+                    };
+                    rowList.Add(row);
+                }else{
+                    Debug.Log("行"+ (i+1) + "不录入数据");
+                }
+            }
+            isLoaded = true;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+        }
+	}
     
 	public static Row Find_RECORD_ID(string find)
 	{

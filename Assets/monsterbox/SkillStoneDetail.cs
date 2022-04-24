@@ -83,31 +83,30 @@ namespace mainMenu
         
         public void RefreshInfo(string instanceID)
         {
-            StoneOfPlayerInfo currentstone = Stones.Get(instanceID);
-            if (currentstone == null)
+            var currentStone = Stones.Get(instanceID);
+            if (currentStone == null)
             {
                 Clear();
                 return;
             }
-            SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(currentstone.skillId);
+            var skillConfig = SkillConfigTable.GetSkillConfig(currentStone.skillId);
             IconForShow(skillConfig.RECORD_ID);
-
             keyname.text = skillConfig.REAL_NAME;
             Showname.text = skillConfig.RECORD_ID + ":" + SkillNameTable.GetSkillName(skillConfig.RECORD_ID);
             ShowSkillStoneExType(skillConfig.SP_LEVEL);
             ShowSKillRanges(skillConfig.AIAttrs.AI_MIN_DIS, skillConfig.AIAttrs.AI_MAX_DIS);
-            PowerEstimateTable.Row row = PowerEstimateTable.Find_RECORD_ID(skillConfig.RECORD_ID);
+            var row = PowerEstimateTable.Find_RECORD_ID(skillConfig.RECORD_ID);
             float.TryParse(row.HP, out float hp);
             float.TryParse(row.EstimateDamage, out float at);
             if (AT != null)
             {
-                AT.text = "MaxDamage = " + SkillEntity.ATCal(at, currentstone.GetLevel());
+                AT.text = "MaxDamage = " + SkillEntity.ATCal(at, currentStone.GetLevel());
             }
             if (HP != null)
             {
-                HP.text = "MaxHp = " + SkillEntity.StoneHpCal(hp, currentstone.GetLevel());
+                HP.text = "MaxHp = " + SkillEntity.StoneHpCal(hp, currentStone.GetLevel());
             }
-            LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo(currentstone.EXP);
+            var current = LevelExpConfig.GetCurrentInfo(currentStone.EXP);
             StoneTargetLevel.text = "Level:" + current.currentLevel.ToString() + "/100";
             if (expValue != null)
             {

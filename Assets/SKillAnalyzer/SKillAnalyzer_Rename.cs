@@ -11,12 +11,12 @@ public partial class SKillAnalyzer
             return;
         }
         
-        List<UnityEngine.Object> BasicPack = Resources.LoadAll("Animations/" + type + "/" + "BasicPack", typeof(AnimationClip)).ToList();
-        List<UnityEngine.Object> G_Attack_States = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State", typeof(AnimationClip)).ToList();
-        List<UnityEngine.Object> G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State_Stay", typeof(AnimationClip)).ToList();
-        List<UnityEngine.Object> GMStatess = Resources.LoadAll("Animations/" + type + "/" + "GMStates", typeof(AnimationClip)).ToList();
+        var BasicPack = Resources.LoadAll("Animations/" + type + "/" + "BasicPack", typeof(AnimationClip)).ToList();
+        var G_Attack_States = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State", typeof(AnimationClip)).ToList();
+        var G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/" + "G_Attack_State_Stay", typeof(AnimationClip)).ToList();
+        var GMStatess = Resources.LoadAll("Animations/" + type + "/" + "GMStates", typeof(AnimationClip)).ToList();
 
-        List<UnityEngine.Object> AnimationClips = new List<UnityEngine.Object>();
+        var AnimationClips = new List<UnityEngine.Object>();
         foreach (UnityEngine.Object _object in BasicPack)
         {
             AnimationClips.Add(_object as AnimationClip);
