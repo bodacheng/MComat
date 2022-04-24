@@ -1,18 +1,50 @@
-﻿using dataAccess;
+﻿using System;
+using dataAccess;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using mainMenu;
+using UnityEditor;
 
+#if UNITY_EDITOR
+[CustomEditor(typeof(Starter))]
+public class StarterGUI : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        var s = (Starter)target;
+        if (GUILayout.Button("Refresh"))
+        {
+            s.Initialise();
+        }
+    }
+}
+#endif
+
+[ExecuteInEditMode]
 public class Starter : MonoBehaviour
 {
     [SerializeField] bool enterFrontPageFirst;
     [SerializeField] PlayfabSetting PlayfabSetting;
     [SerializeField] FightGlobalSetting FightGlobalSetting;
+    [SerializeField] KeywordSetting keywordSetting;
+
+    void Awake()
+    {
+        Initialise();
+    }
+
+    public void Initialise()
+    {
+        Debug.Log("files loads...");
+        FightGlobalSetting.Initialise();
+        PlayfabSetting.Initialise();
+        keywordSetting.Initialise();
+    }
     
     void EnterFrontScene()
     {
-        FightGlobalSetting.Initialise();
-        PlayfabSetting.Initialise();
+        Initialise();
         
         // 这几个东西用不用执行待定
         SkillConfigTable.LoadAllSkillConfigFromLocalConfigFile();

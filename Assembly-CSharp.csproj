@@ -732,6 +732,7 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
+     <Compile Include="Assets\Setting\KeywordSetting.cs" />
      <None Include="Assets\EffectsResource\shaders\Slash2.shader" />
      <None Include="Assets\EffectsResource\Prefabs\Projectiles(Speed)\Readme.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

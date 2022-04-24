@@ -37,11 +37,11 @@ namespace Log
             {
                 Instance.Load(HitBoxLogger.Instance.LoadCurrentToString());
                 HitBoxLogger.Instance.LogSummit();
-                for (var i = 0; i < singleFightLogs.Count; i++)
+                foreach (var t in singleFightLogs)
                 {
-                    singleFightLogs[i].Summary();
+                    t.Summary();
                 }
-                Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv", HitBoxLogger.Instance, singleFightLogs);
+                Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/" + KeywordSetting._SkillDynamicAnalysis, HitBoxLogger.Instance, singleFightLogs);
                 for (var i = 0; i < singleFightLogs.Count; i++)
                 {
                     singleFightLogs[i].Clear();
@@ -210,82 +210,17 @@ namespace Log
                         grid[i][5] = ((hitBoxLogger.successedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.successedtimes[grid[i][1]] : 0) + int.Parse(rowList[i - 1].Succeeded)).ToString();
                         grid[i][6] = ((StateTriggerTimes_whole.ContainsKey(grid[i][1]) ? StateTriggerTimes_whole[grid[i][1]] : 0) + int.Parse(rowList[i - 1].TriggeredTimes)).ToString();
                         grid[i][7] = ((StateInterruptedTimes_whole.ContainsKey(grid[i][1]) ? StateInterruptedTimes_whole[grid[i][1]] : 0) + int.Parse(rowList[i - 1].InterruptedTimes)).ToString();
-                        
-                        //Debug.Log(grid[i][1] + ":"+ StateTriggerTimes_whole[grid[i][1]] + ":"+ rowList[i - 1].TriggeredTimes);
-                        //Debug.Log(grid[i][6]);
-                        //Debug.Log(((StateTriggerTimes_whole.ContainsKey(grid[i][1]) ? StateTriggerTimes_whole[grid[i][1]] : 0) + int.Parse(rowList[i - 1].TriggeredTimes)));
                     }
                 }
             }
-            string delimiter = ",";
-            StringBuilder sb = new StringBuilder();
-            for (int index = 0; index < grid.Length; index++)
+            var delimiter = ",";
+            var sb = new StringBuilder();
+            for (var index = 0; index < grid.Length; index++)
                 sb.AppendLine(string.Join(delimiter, grid[index]));
             Debug.Log("尝试最终保存文件" + filePath);
-            StreamWriter outStream = File.CreateText(filePath);
+            var outStream = File.CreateText(filePath);
             outStream.WriteLine(sb);
             outStream.Close();
-        }
-
-        public int NumRows()
-        {
-            return rowList.Count;
-        }
-
-        public Row GetAt(int i)
-        {
-            if (rowList.Count <= i)
-                return null;
-            return rowList[i];
-        }
-
-        public Row Find_RECORD_ID(string find)
-        {
-            return rowList.Find(x => x.RECORD_ID == find);
-        }
-        public List<Row> FindAll_RECORD_ID(string find)
-        {
-            return rowList.FindAll(x => x.RECORD_ID == find);
-        }
-        public Row Find_REAL_NAME(string find)
-        {
-            return rowList.Find(x => x.REAL_NAME == find);
-        }
-        public List<Row> FindAll_REAL_NAME(string find)
-        {
-            return rowList.FindAll(x => x.REAL_NAME == find);
-        }
-        public Row Find_USEABLE_MONSTER_TYPE(string find)
-        {
-            return rowList.Find(x => x.MONSTER_TYPE == find);
-        }
-        public List<Row> FindAll_USEABLE_MONSTER_TYPE(string find)
-        {
-            return rowList.FindAll(x => x.MONSTER_TYPE == find);
-        }
-        public Row Find_Untouched(string find)
-        {
-            return rowList.Find(x => x.Untouched == find);
-        }
-        public List<Row> FindAll_Untouched(string find)
-        {
-            return rowList.FindAll(x => x.Untouched == find);
-        }
-        public Row Find_Touched(string find)
-        {
-            return rowList.Find(x => x.Touched == find);
-        }
-        public List<Row> FindAll_Touched(string find)
-        {
-            return rowList.FindAll(x => x.Touched == find);
-        }
-        public Row Find_Successed(string find)
-        {
-            return rowList.Find(x => x.Succeeded == find);
-        }
-        public List<Row> FindAll_Successed(string find)
-        {
-            return rowList.FindAll(x => x.Succeeded == find);
         }
     }
 }

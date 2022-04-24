@@ -38,9 +38,9 @@ namespace Log
         // 获取现版本text
         public string LoadCurrentToString()
         {
-            if (File.Exists(Application.persistentDataPath + "/HitBoxLog.csv"))
+            if (File.Exists(Application.persistentDataPath + "/" + KeywordSetting._SkillDynamicAnalysis))
             {
-                string level = File.ReadAllText(Application.persistentDataPath + "/HitBoxLog.csv");
+                string level = File.ReadAllText(Application.persistentDataPath + "/" + KeywordSetting._SkillDynamicAnalysis);
                 return level;
             }
             else
@@ -63,9 +63,8 @@ namespace Log
                     };
                     HitBoxLogTable.Instance.rowList.Add(row);
                 }
-                Debug.Log("尝试新建hitboxlog");
-                HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv", null, null);
-                string level = File.ReadAllText(Application.persistentDataPath + "/HitBoxLog.csv");
+                HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/" + KeywordSetting._SkillDynamicAnalysis, null, null);
+                string level = File.ReadAllText(Application.persistentDataPath + "/" + KeywordSetting._SkillDynamicAnalysis);
                 return level;
             }
         }

@@ -61,7 +61,6 @@ public partial class ResourceDownLoad : MonoBehaviour
             case ResourceLoadMode.Resource:
                 Units.LoadMonstersConfig();
                 SkillConfigTable.LoadAllSkillConfigs();
-                PowerEstimateTable.Load();
                 LevelExpConfig.LoadLevelExpConfig();
                 break;
         }

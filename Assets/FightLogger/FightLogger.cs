@@ -5,7 +5,7 @@ using System.Linq;
 // 用于在每一局游戏里起记录数据的作用，包括胜利判断，都应该是由本模块来执行。
 public class FightLogger
 {
-    public static FightLogger value = new FightLogger();
+    public static readonly FightLogger value = new FightLogger();
     
     public ReactiveProperty<bool> GameOver{ get; set; } = new ReactiveProperty<bool>(false);
     Team winnerTeam = Team.none;

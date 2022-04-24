@@ -25,7 +25,7 @@ public class PowerEstimateTable
     {
         var SkillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);
         var AnimDic = SKillAnalyzer.AllSkillAnims(type);
-        Save(Application.persistentDataPath + "/PowerEstimateTable.csv", SkillConfigs, AnimDic);
+        Save(Application.persistentDataPath + "/" +KeywordSetting._SkillStaticAnalysis, SkillConfigs, AnimDic);
     }
     
     static void Save(string filepath, List<SkillConfig> SkillConfigs, IDictionary<string, AnimationClip> AnimDic)
@@ -61,46 +61,6 @@ public class PowerEstimateTable
         outStream.WriteLine(sb);
         outStream.Close();
     }
-    
-    public static void Load()
-    {
-        TextAsset csv = Resources.Load("Account/PowerEstimateTable") as TextAsset;
-        if (csv != null)
-        {
-            Load(csv);
-        }
-    }
-    
-    static void Load(TextAsset csv)
-	{
-		rowList.Clear();
-		string[][] grid = CsvParser2.Parse(csv.text);
-        try
-        {
-            for(int i = 1 ; i < grid.Length ; i++)
-            {
-                if (grid[i].Length == 5)
-                {
-                    Row row = new Row
-                    {
-                        RECORD_ID = grid[i][0],
-                        REAL_NAME = grid[i][1],
-                        SPLevel = grid[i][2],
-                        EstimateDamage = grid[i][3],
-                        HP = grid[i][4]
-                    };
-                    rowList.Add(row);
-                }else{
-                    Debug.Log("行"+ (i+1) + "不录入数据");
-                }
-            }
-            isLoaded = true;
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e);
-        }
-	}
     
 	public static Row Find_RECORD_ID(string find)
 	{
