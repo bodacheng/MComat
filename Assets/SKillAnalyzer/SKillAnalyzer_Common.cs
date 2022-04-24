@@ -10,7 +10,7 @@ public partial class SKillAnalyzer
         public float startFrame;
     }
     
-    public static List<string> AttackFrameStartMethodNames = new List<string>() {
+    public static readonly List<string> AttackFrameStartMethodNames = new List<string>() {
         "SetRightHandMarkerManager","SetLeftHandMarkerManager",
         "SetRightFootMarkerManager","SetLeftFootMarkerManager",
         "SetRightHandWeaponMarkerManager","SetLeftHandWeaponMarkerManager",

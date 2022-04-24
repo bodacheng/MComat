@@ -18,27 +18,17 @@ public class PowerEstimateTable
 		public string HP;
 	}
 
-    readonly static List<Row> rowList = new List<Row>();
+    static readonly List<Row> rowList = new List<Row>();
     static bool isLoaded = false;
-
-	public static bool IsLoaded()
-	{
-		return isLoaded;
-	}
-    
-	public List<Row> GetRowList()
-	{
-		return rowList;
-	}
     
     public static void Save(string type)
     {
-        List<SkillConfig> SkillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);
-        IDictionary<string, AnimationClip> AnimDic = SKillAnalyzer.AllSkillAnims(type);
+        var SkillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);
+        var AnimDic = SKillAnalyzer.AllSkillAnims(type);
         Save(Application.persistentDataPath + "/PowerEstimateTable.csv", SkillConfigs, AnimDic);
     }
     
-    public static void Save(string filepath, List<SkillConfig> SkillConfigs, IDictionary<string, AnimationClip> AnimDic)
+    static void Save(string filepath, List<SkillConfig> SkillConfigs, IDictionary<string, AnimationClip> AnimDic)
     {
         string[][] grid = new string[SkillConfigs.Count + 1][];
         for (int i = 0; i < grid.Length; i++)
@@ -81,7 +71,7 @@ public class PowerEstimateTable
         }
     }
     
-	public static void Load(TextAsset csv)
+    static void Load(TextAsset csv)
 	{
 		rowList.Clear();
 		string[][] grid = CsvParser2.Parse(csv.text);
@@ -111,19 +101,7 @@ public class PowerEstimateTable
             Debug.Log(e);
         }
 	}
-
-	public int NumRows()
-	{
-		return rowList.Count;
-	}
-
-	public Row GetAt(int i)
-	{
-		if(rowList.Count <= i)
-			return null;
-		return rowList[i];
-	}
-
+    
 	public static Row Find_RECORD_ID(string find)
 	{
 		return rowList.Find(x => x.RECORD_ID == find);
@@ -165,7 +143,7 @@ public class PowerEstimateTable
 		return rowList.FindAll(x => x.HP == find);
 	}
 
-    public static float ATCal(AnimationClip _clip, float skillATRef)
+    static float ATCal(AnimationClip _clip, float skillATRef)
     {
         float amount = 0;
         for (int i = 0; i < _clip.events.Length; i++)
@@ -192,17 +170,17 @@ public class PowerEstimateTable
             #region MagicForward
             if (_clip.events[i].functionName == "MagicForward")
             {
-                string magicobjectname = _clip.events[i].stringParameter;
-                GameObject hurtObject = Resources.Load("HurtObjects/defaultmagic/" + magicobjectname) as GameObject;
-                HitBoxManager bO_Marker_Manager = hurtObject.GetComponent<HitBoxManager>();
-                if (bO_Marker_Manager == null)
+                var magicObjectName = _clip.events[i].stringParameter;
+                var hurtObject = Resources.Load("HurtObjects/defaultmagic/" + magicObjectName) as GameObject;
+                var hitBox = hurtObject.GetComponent<HitBoxManager>();
+                if (hitBox == null)
                 {
-                    Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicobjectname);
+                    Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicObjectName);
                 }
-                amount += bO_Marker_Manager.AT_weight * skillATRef;
+                amount += hitBox.AT_weight * skillATRef;
                 
                 Decompositioner decompositioner = hurtObject.GetComponent<Decompositioner>();
-                if ( decompositioner.Attachments.Length > 0)
+                if (decompositioner.Attachments.Length > 0)
                 {
                     Debug.Log("技能动画："+_clip.name + " 不好机械评估");
                     return -999f;
@@ -211,11 +189,11 @@ public class PowerEstimateTable
                 //// 顺便检查attachment，与攻击力预估无关 /////
                 for (int z = 0; z < decompositioner.Attachments.Length; z++)
                 {
-                    GameObject attachment = Resources.Load("HurtObjects/defaultmagic/" + decompositioner.Attachments[z]) as GameObject;
-                    HitBoxManager attachmentbo = attachment.GetComponent<HitBoxManager>();
-                    if (attachmentbo == null)
+                    var attachment = Resources.Load("HurtObjects/defaultmagic/" + decompositioner.Attachments[z]) as GameObject;
+                    var attachments = attachment.GetComponent<HitBoxManager>();
+                    if (attachments == null)
                     {
-                        Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicobjectname + "其附属物件资源"+ decompositioner.Attachments[z] + "不存在");
+                        Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicObjectName + "其附属物件资源"+ decompositioner.Attachments[z] + "不存在");
                     }
                 }
                 ///////////////////////////////////////////
@@ -234,10 +212,9 @@ public class PowerEstimateTable
                 float oneDamege;
                 string magicobjectname = _clip.events[i].stringParameter;
                 GameObject hurtObject = Resources.Load("HurtObjects/defaultmagic/" + magicobjectname) as GameObject;
-                HitBoxManager bO_Marker_Manager = hurtObject.GetComponent<HitBoxManager>();
-                oneDamege = bO_Marker_Manager.AT_weight * skillATRef;
-                
-                Decompositioner decompositioner = hurtObject.GetComponent<Decompositioner>();
+                var hitBox = hurtObject.GetComponent<HitBoxManager>();
+                oneDamege = hitBox.AT_weight * skillATRef;
+                var decompositioner = hurtObject.GetComponent<Decompositioner>();
                 if ( decompositioner.Attachments.Length > 0)
                 {
                     Debug.Log("技能动画："+_clip.name + " 不好机械评估");
@@ -247,9 +224,9 @@ public class PowerEstimateTable
                 //// 顺便检查attachment，与攻击力预估无关 /////
                 for (int z = 0; z < decompositioner.Attachments.Length; z++)
                 {
-                    GameObject attachment = Resources.Load("HurtObjects/defaultmagic/" + decompositioner.Attachments[z]) as GameObject;
-                    HitBoxManager attachmentbo = attachment.GetComponent<HitBoxManager>();
-                    if (attachmentbo == null)
+                    var attachment = Resources.Load("HurtObjects/defaultmagic/" + decompositioner.Attachments[z]) as GameObject;
+                    var attachments = attachment.GetComponent<HitBoxManager>();
+                    if (attachments == null)
                     {
                         Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicobjectname + "其附属物件资源"+ decompositioner.Attachments[z] + "不存在");
                     }
