@@ -106,43 +106,7 @@ public class PowerEstimateTable
 	{
 		return rowList.Find(x => x.RECORD_ID == find);
 	}
-	public List<Row> FindAll_RECORD_ID(string find)
-	{
-		return rowList.FindAll(x => x.RECORD_ID == find);
-	}
-	public Row Find_REAL_NAME(string find)
-	{
-		return rowList.Find(x => x.REAL_NAME == find);
-	}
-	public List<Row> FindAll_REAL_NAME(string find)
-	{
-		return rowList.FindAll(x => x.REAL_NAME == find);
-	}
-	public Row Find_SPLevel(string find)
-	{
-		return rowList.Find(x => x.SPLevel == find);
-	}
-	public List<Row> FindAll_SPLevel(string find)
-	{
-		return rowList.FindAll(x => x.SPLevel == find);
-	}
-	public Row Find_EstimateDamage(string find)
-	{
-		return rowList.Find(x => x.EstimateDamage == find);
-	}
-	public List<Row> FindAll_EstimateDamage(string find)
-	{
-		return rowList.FindAll(x => x.EstimateDamage == find);
-	}
-	public Row Find_HP(string find)
-	{
-		return rowList.Find(x => x.HP == find);
-	}
-	public List<Row> FindAll_HP(string find)
-	{
-		return rowList.FindAll(x => x.HP == find);
-	}
-
+    
     static float ATCal(AnimationClip _clip, float skillATRef)
     {
         float amount = 0;

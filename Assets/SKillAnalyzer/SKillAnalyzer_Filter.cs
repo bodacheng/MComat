@@ -15,8 +15,8 @@ public partial class SKillAnalyzer
             }
         }
     }
-
-    public bool SkillFrameFilter(AnimationClip _clip, string targetEventName, float start_min, float start_max, float end_min, float end_max)
+    
+    bool SkillFrameFilter(AnimationClip _clip, string targetEventName, float start_min, float start_max, float end_min, float end_max)
     {
         float earlieststartframe = 0, latestendframe;
         float cancelflagFrame = 0;

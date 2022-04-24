@@ -32,7 +32,7 @@ public partial class SKillAnalyzer
     {
         var G_Attack_States = Resources.LoadAll("Animations/" + type + "/G_Attack_State", typeof(AnimationClip)).ToList();
         var G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/G_Attack_State_Stay", typeof(AnimationClip)).ToList();
-        var GMStatess = Resources.LoadAll("Animations/" + type + "/GMStates", typeof(AnimationClip)).ToList();
+        var gmStates = Resources.LoadAll("Animations/" + type + "/GMStates", typeof(AnimationClip)).ToList();
         
         IDictionary<string, AnimationClip> AnimationClips = new Dictionary<string, AnimationClip>();
         
@@ -44,7 +44,7 @@ public partial class SKillAnalyzer
         {
             AnimationClips.Add(_object.name, _object as AnimationClip);
         }
-        foreach (var _object in GMStatess)
+        foreach (var _object in gmStates)
         {
             AnimationClips.Add(_object.name, _object as AnimationClip);
         }
