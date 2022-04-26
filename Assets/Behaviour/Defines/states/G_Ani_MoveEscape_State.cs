@@ -19,11 +19,11 @@ namespace Soul
             clip_name = _clip_name;
             breakfreestart = () =>
             {
-                FightParamsRef.Resistance.Value += 2;
+                //FightParamsRef.Resistance.Value += 2;
             };
             breakfreeend = () =>
             {
-                FightParamsRef.Resistance.Value -= 2;
+                //FightParamsRef.Resistance.Value -= 2;
             };
             breakfreeCoroutine = new CustomCoroutine(breakfreestart, 0.6f, breakfreeend);
         }
