@@ -64,7 +64,6 @@ namespace mainMenu
                 Debug.Log("No this monster:" + PreScene.target._focusing.r_id);
                 return;
             }
-            BackGroundPS.target.ChangeBGByElement(Ref.element);
             
             // mini nineslot show
             _NineForShow.ShowStones_Acc(PreScene.target._focusing.id);

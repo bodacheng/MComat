@@ -63,7 +63,7 @@ public class FrontPage : MainSceneProcess
                 break;
             }
         }
-        PreScene.target.SetFocusingUnit(focusInstanceID);//确立focusing角色
+        PreScene.target.SetFocusingUnit(focusInstanceID);
         yield return frontLayer._connector.ShowMyModel(focusInstanceID);
         
         UpperInfoBar.Open(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), 

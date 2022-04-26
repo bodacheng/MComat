@@ -39,6 +39,13 @@ namespace mainMenu
         public void SetFocusingUnit(string localID)
         {
             _focusing = MyMonsters.Get(localID);
+            var Ref = Units.GetUnitConfig(_focusing.r_id);
+            if (Ref == null)
+            {
+                Debug.Log("No this monster:" + _focusing.r_id);
+                return;
+            }
+            BackGroundPS.target.ChangeBGByElement(Ref.element);
         }
         
         void Awake()

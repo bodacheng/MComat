@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1617726352865536}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4861.2817, y: 1419.9862, z: -4380.1875}
+  m_LocalPosition: {x: -4861.2817, y: 1419.9862, z: -4380.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3363382651758757653}
@@ -5165,7 +5165,7 @@ GameObject:
   - component: {fileID: 3363382651758757649}
   - component: {fileID: 3363382651743552081}
   - component: {fileID: 3363382651743599601}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TrailFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9909,7 +9909,7 @@ GameObject:
   - component: {fileID: 3363382651758757655}
   - component: {fileID: 3363382651743552085}
   - component: {fileID: 3363382651743599605}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TrailSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14671,7 +14671,7 @@ GameObject:
   - component: {fileID: 3363382651758757653}
   - component: {fileID: 3363382651743552083}
   - component: {fileID: 3363382651743599603}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19451,7 +19451,7 @@ GameObject:
   - component: {fileID: 3363382651758757657}
   - component: {fileID: 3363382651743552087}
   - component: {fileID: 3363382651743599607}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TrailEmber
   m_TagString: Untagged
   m_Icon: {fileID: 0}

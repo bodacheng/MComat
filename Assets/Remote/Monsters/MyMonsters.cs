@@ -4,7 +4,7 @@ namespace dataAccess
 {
     public static partial class MyMonsters
     {
-        public static IDictionary<string, UnitInfo> Dic = new Dictionary<string, UnitInfo>();
+        public static readonly IDictionary<string, UnitInfo> Dic = new Dictionary<string, UnitInfo>();
         
         public static bool CheckExist(string key)
         {
