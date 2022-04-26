@@ -49,7 +49,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         if (myDadItem)
         {
             StoneOfPlayerInfo info = Stones.Get(myDadItem.instanceId);
-            level.text = info.GetLevel().ToString();
+            level.text = info.Level.ToString();
         }
         else
         {

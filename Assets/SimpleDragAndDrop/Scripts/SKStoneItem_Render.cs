@@ -5,8 +5,8 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
 {
     public void LevelUpShow(float beforeexp, float afterexp)
     {
-        int beforeLevel = LevelExpConfig.GetCurrentInfo((int)beforeexp).currentLevel;
-        int aferlevel = LevelExpConfig.GetCurrentInfo((int)afterexp).currentLevel;
+        int beforeLevel = 0;
+        int aferlevel = 1;
         if (aferlevel > beforeLevel)
         {
             //OverlayCanvasController.instance.ShowCombatText(gameObject, CombatTextType.LevelUp, aferlevel);

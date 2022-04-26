@@ -35,15 +35,6 @@ public class FightGlobalSetting : ScriptableObject
 
     public int HurtObjectPreLoadCount = 5;
     
-    #region 技能石经验相关
-    public float goldToExp = 1;
-    public int SkillStoneRankToExp_rank1 = 100;
-    public int SkillStoneRankToExp_rank2 = 200;
-    public int SkillStoneRankToExp_rank3 = 300;
-    public int SkillStoneRankToExp_rank4 = 400;
-    public int SkillStoneRankToExp_rank5 = 500;
-    #endregion
-
     public Material shadowMaterial;
     
     public static ProgramMode _programMode;
@@ -154,14 +145,7 @@ public class FightGlobalSetting : ScriptableObject
 
         _ResistanceMax = ResistanceMax;
         _EXMax = EXMax;
-
-        StoneExpManager.goldToExp = goldToExp;
-        StoneExpManager.SkillStoneRankToExp_rank1 = SkillStoneRankToExp_rank1;
-        StoneExpManager.SkillStoneRankToExp_rank2 = SkillStoneRankToExp_rank2;
-        StoneExpManager.SkillStoneRankToExp_rank3 = SkillStoneRankToExp_rank3;
-        StoneExpManager.SkillStoneRankToExp_rank4 = SkillStoneRankToExp_rank4;
-        StoneExpManager.SkillStoneRankToExp_rank5 = SkillStoneRankToExp_rank5;
-
+        
         _shadowMaterial = shadowMaterial;
     }
 }

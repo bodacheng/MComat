@@ -20,34 +20,7 @@ namespace dataAccess
         /// </summary>
         public string skillId { get; set; }
         
-        /// <summary>
-        /// 经验值
-        /// </summary>
-        string exp { get; set; }
-        public int EXP {
-            set {
-                if (exp != null)
-                {
-                    ExpUpForStoneShow(float.Parse(exp), value);
-                }
-                else
-                {
-                    ExpUpForStoneShow(0, value);
-                }
-                exp = value.ToString();
-            }
-            get { return exp == null ? 0 : int.Parse(exp);}
-        }
-        
-        /// <summary>
-        /// 突破等级上限次数
-        /// </summary>
-        string breakthrough { get; set; }
-        public int BreakThrough
-        {
-            set => breakthrough = value.ToString();
-            get => int.Parse(breakthrough);
-        }
+        public int Level { get; set; }
         
         /// <summary>
         /// 使用中のプレーヤ所有モンスターID
@@ -70,19 +43,12 @@ namespace dataAccess
             SKStone.LevelUpShow(formerExp, newExp);
         }
         
-        public int GetLevel()
-        {
-            return LevelExpConfig.GetCurrentInfo(EXP).currentLevel;
-        }
-
         public StoneOfPlayerInfo Clone()
         {
             StoneOfPlayerInfo info = new StoneOfPlayerInfo()
             {
                 InstanceId = this.InstanceId,
                 skillId = this.skillId,
-                EXP = this.EXP,
-                BreakThrough = this.BreakThrough,
                 Inherent = this.Inherent
             };
             return info;

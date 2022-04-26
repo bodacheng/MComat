@@ -10,7 +10,7 @@ using dataAccess;
 public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 	public static SKStoneItem draggedItem;                                      // Item that is dragged now
-	public static GameObject dragging;                                              // Icon of dragged item
+	public static GameObject dragging;                                          // Icon of dragged item
 	public static StoneCell sourceCell;                                         // From this cell dragged item is
     
     static Canvas canvas;                                                       // Canvas for item drag operation
@@ -47,7 +47,7 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
     {
         info.gameObject.SetActive(true);
         StoneOfPlayerInfo sspim = Stones.Get(instanceId);
-        info.text = sspim.GetLevel().ToString();
+        info.text = sspim.Level.ToString();
     }
     
     public void CloseInfo()

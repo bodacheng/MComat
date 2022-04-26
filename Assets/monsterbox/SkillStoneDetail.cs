@@ -33,7 +33,6 @@ namespace mainMenu
         
         [Space(7)]
         [Header("当前技能等级")]
-        [SerializeField] Slider expValue;
         [SerializeField] Text StoneTargetLevel;
 
         [SerializeField] Transform tempT;
@@ -68,10 +67,6 @@ namespace mainMenu
             ShowSkillStoneExType(-1);
             ShowSKillRanges(-10, -10); //即清空
             StoneTargetLevel.text = "";
-            if (expValue != null)
-            {
-                expValue.value = 0;
-            }
             if (IconShowT != null)
             {
                 foreach (Transform child in IconShowT)
@@ -100,18 +95,13 @@ namespace mainMenu
             float.TryParse(row.EstimateDamage, out float at);
             if (AT != null)
             {
-                AT.text = "MaxDamage = " + SkillEntity.ATCal(at, currentStone.GetLevel());
+                AT.text = "MaxDamage = " + SkillEntity.ATCal(at, currentStone.Level);
             }
             if (HP != null)
             {
-                HP.text = "MaxHp = " + SkillEntity.StoneHpCal(hp, currentStone.GetLevel());
+                HP.text = "MaxHp = " + SkillEntity.StoneHpCal(hp, currentStone.Level);
             }
-            var current = LevelExpConfig.GetCurrentInfo(currentStone.EXP);
-            StoneTargetLevel.text = "Level:" + current.currentLevel.ToString() + "/100";
-            if (expValue != null)
-            {
-                expValue.value = (float)current.expRemain / (current.expRemain + current.expToNextLevel);
-            }
+            StoneTargetLevel.text = "Level:" + currentStone.Level;
             transform.gameObject.SetActive(true);
         }
         

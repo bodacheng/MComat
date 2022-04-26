@@ -86,7 +86,7 @@ public class UnitInfo
                         set.c3 = targets[i].skillId;
                         break;
                 }
-                levels.Add(targets[i].GetLevel());
+                levels.Add(targets[i].Level);
             }
             
             unitInfo.level = set.GetAerLevel(levels);

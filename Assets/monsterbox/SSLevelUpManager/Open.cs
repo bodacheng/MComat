@@ -9,10 +9,10 @@ public partial class SSLevelUpManager : MonoBehaviour
     {
         targetStoneID = instanceID;
         focusingSSD.RefreshInfo(targetStoneID);
-        SKStoneItem renderModel = Stones.GetRenderModel(targetStoneID);
+        var renderModel = Stones.GetRenderModel(targetStoneID);
         renderModel._using = true;
         
-        StoneListLayer layer = StoneListLayer.Open();
+        var layer = StoneListLayer.Open();
         layer.box.AddFeatureToCells(layer.CellFeature_MAdd);
         RefreshSkillLevelUpModule();
         Stones.HighLight(renderModel._SkillConfig.RECORD_ID);
@@ -21,7 +21,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     void CloseLevelUpPage()
     {
-        StoneListLayer layer = StoneListLayer.Open();
+        var layer = StoneListLayer.Open();
         SKStoneItem renderModel = Stones.GetRenderModel(targetStoneID);
         renderModel._using = false;
         SKStoneItem.SeletedRender(renderModel, SkillStonesBox._Selected);

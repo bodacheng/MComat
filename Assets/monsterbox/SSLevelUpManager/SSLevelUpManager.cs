@@ -3,18 +3,12 @@ using dataAccess;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 public partial class SSLevelUpManager : MonoBehaviour
 {
     [SerializeField] Button cancelBtn;
     [SerializeField] Button autoAdd;
     [SerializeField] Button confirmLevelUp;
-    
-    [Header("目前各种参数显示")]
-    [SerializeField] Slider expValue;
-    [SerializeField] Text StoneTargetLevel;
-    [SerializeField] Text CurrentExpToNextLevel;
     
     [Header("升级对象技能石参数")]
     [SerializeField] SkillStoneDetail focusingSSD;
@@ -24,8 +18,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     [SerializeField] StoneCell cell2;
     [SerializeField] StoneCell cell3;
     [SerializeField] StoneCell cell4;
-    [SerializeField] StoneCell cell5;
-    
+
     public void INI()
     {
         cancelBtn.onClick.AddListener(CloseLevelUpPage);
@@ -34,14 +27,13 @@ public partial class SSLevelUpManager : MonoBehaviour
             var info = Stones.Get(targetStoneID);
             AutoAddMaterials(info.skillId);
         });
-        //target = this;
+        
         MaterialSlots = new List<StoneCell>
         {
             cell1,
             cell2,
             cell3,
-            cell4,
-            cell5
+            cell4
         };
         
         foreach (var cell in MaterialSlots)
@@ -50,44 +42,14 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
     }
     
-    int targetExp;
-    int TargetExp
-    {
-        set
-        {
-            LevelExpConfig.Current before = LevelExpConfig.GetCurrentInfo(targetExp);
-            LevelExpConfig.Current after = LevelExpConfig.GetCurrentInfo(value);
-            DOTween.To(() => DataForShow, x => DataForShow = x, value, 0.6f);
-            targetExp = value;
-        }
-    }
-    
-    int dataForShow;
-    float DataForShow
-    {
-        get => dataForShow;
-        set
-        {
-            LevelExpConfig.Current current = LevelExpConfig.GetCurrentInfo((int)value);
-            expValue.value = current.expRemain / (float)(current.expRemain + current.expToNextLevel);
-            if (expValue.value >= 1)
-                expValue.value = 0;
-            StoneTargetLevel.text = "Level:" + current.currentLevel;
-            StoneTargetLevel.color = CalCurrentExpFromMaterials() > 0 ? new Color(0, 1, 1) : new Color(1, 1, 1);
-            CurrentExpToNextLevel.text = "( " + (expValue.value * 100) + "% )";
-            dataForShow = (int)value;
-        }
-    }
-    
     void OnDropAction(StoneCell source, StoneCell to)
     {
         if (SKStoneItem.dragging != null)
         {
-            SKStoneItem item = SKStoneItem.draggedItem;
+            var item = SKStoneItem.draggedItem;
             if (item == null)
                 return;
-            StoneOfPlayerInfo target = Stones.Get(targetStoneID);
-            Debug.Log(targetStoneID + ":"+ target);
+            var target = Stones.Get(targetStoneID);
             if (item.instanceId != targetStoneID && item._SkillConfig.RECORD_ID == target.skillId)
             {
                 StoneCell.Install(source, to);
@@ -95,45 +57,30 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
     }
     
-    // 清除显示
-    void Clear()
-    {
-        StoneTargetLevel.text = "";
-        CurrentExpToNextLevel.text = "";
-        if (expValue != null)
-        {
-            expValue.value = 0;
-            expValue.gameObject.SetActive(false);
-        }
-        confirmLevelUp.gameObject.SetActive(false);
-    }
-    
     /// <summary>
-    /// 技能石升级画面更新。每调整一次目标等级画面都要随之更新
+    /// 技能石升级画面更新。
     /// </summary>
     public void RefreshSkillLevelUpModule()
     {
+        confirmLevelUp.gameObject.SetActive(false);
         if (targetStoneID == null)
         {
-            Clear();
             return;
         }
-        
-        StoneOfPlayerInfo target = Stones.Get(targetStoneID);
-        TargetExp = CalCurrentExpFromMaterials() + target.EXP;
-        
-        if (CalCurrentExpFromMaterials() > 0)
+        var target = Stones.Get(targetStoneID);
+        foreach (var slot in MaterialSlots)
         {
-            void Confirm()
-            {
-                PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-                popupLayer.ArrangeConfirmWindow(ConfirmSkillStoneLevelUp, "确实要升级技能石？");
-            }
-            confirmLevelUp.onClick.RemoveAllListeners();
-            confirmLevelUp.onClick.AddListener(Confirm);
-            confirmLevelUp.gameObject.SetActive(true);
-        }else{
-            confirmLevelUp.gameObject.SetActive(false);
+            if (slot.GetItem() == null)
+                return; // 材料槽满的时候才可能弹出确认按钮
         }
+        
+        void Confirm()
+        {
+            var popupLayer = PopupLayer.Open(PreScene.target.T);
+            popupLayer.ArrangeConfirmWindow(ConfirmSkillStoneLevelUp, "确实要升级技能石？");
+        }
+        confirmLevelUp.onClick.RemoveAllListeners();
+        confirmLevelUp.onClick.AddListener(Confirm);
+        confirmLevelUp.gameObject.SetActive(true);
     }
 }

@@ -1,13 +1,12 @@
-﻿using Api.Dto.Form.Common;
-
-namespace Api.Dto.Form
+﻿
+namespace dataAccess
 {
     /// <summary>
     /// モンスタースキルストーン配置フォーム
     /// 作成者：Auto Generated
     /// バージョン：1.00 2019/07/01
     /// </summary>
-    public class SkillStoneMergeForm : CertificationForm
+    public class SkillStoneMergeForm
     {        
         /// <summary>
         /// 材料技能石

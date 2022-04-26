@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Api.Dto.Form;
 
-namespace Api.Dto.Model
+namespace dataAccess
 {
     public class SkillStoneLevelUpModel
     {
@@ -26,10 +25,6 @@ namespace Api.Dto.Model
             if (form.M4Stone != null)
             {
                 StonesToDelete.Add(form.M4Stone);
-            }
-            if (form.M5Stone != null)
-            {
-                StonesToDelete.Add(form.M5Stone);
             }
         }
     }

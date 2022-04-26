@@ -1,8 +1,6 @@
-﻿using Api.Dto.Form.Common;
-using System.Collections.Generic;
-using dataAccess;
+﻿using System.Collections.Generic;
 
-namespace Api.Dto.Form
+namespace dataAccess
 {
 
     /// <summary>
@@ -10,7 +8,7 @@ namespace Api.Dto.Form
     /// 作成者：Auto Generated
     /// バージョン：1.00 2019/07/01
     /// </summary>
-    public class SkillStoneLevelUpForm : CertificationForm
+    public class SkillStoneLevelUpForm
     {
         /// <summary>
         /// 升级对象技能石
@@ -24,8 +22,7 @@ namespace Api.Dto.Form
         public string M2Stone { get; set; }
         public string M3Stone { get; set; }
         public string M4Stone { get; set; }
-        public string M5Stone { get; set; }
-        
+
         // 可能显示错误信息的材料添加错误现在看就只有技能石总数不过30那一条。
         public List<string> LocalCheck()
         {
