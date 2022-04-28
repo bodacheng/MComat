@@ -5,7 +5,7 @@ using System;
 
 namespace dataAccess
 {
-    public partial class Stones
+    public static partial class Stones
     {
         public static readonly IDictionary<string, StoneOfPlayerInfo> Dic = new Dictionary<string, StoneOfPlayerInfo>();
         static readonly IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();
@@ -23,7 +23,7 @@ namespace dataAccess
         
         public static List<string> GetMyStonesBySkillID(string skillID)
         {
-            List<string> infoModels = new List<string>();
+            var infoModels = new List<string>();
             foreach (KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in Dic)
             {
                 if (keyValuePair.Value.skillId == skillID)

@@ -12,7 +12,7 @@ public partial class CloudScript
         List<PlayFab.ServerModels.UpdateUserInventoryItemDataRequest> Items = new List<PlayFab.ServerModels.UpdateUserInventoryItemDataRequest>();
         foreach (KeyValuePair<string, Tuple<string, string>> keyValuePair in ToEditStones)
         {
-            PlayFab.ServerModels.UpdateUserInventoryItemDataRequest itemUpdate = new PlayFab.ServerModels.UpdateUserInventoryItemDataRequest
+            var itemUpdate = new PlayFab.ServerModels.UpdateUserInventoryItemDataRequest
             {
                 //PlayFabId = AccountSet._AccInfo.playerID,
                 ItemInstanceId = keyValuePair.Key,

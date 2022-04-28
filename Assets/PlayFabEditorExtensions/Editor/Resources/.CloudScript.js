@@ -233,20 +233,61 @@ handlers.claimAllPresentMails = function (args, context) {
 
 handlers.skillEdit = function (args, context) {
     let log = [];
-    for (let i = 0; i < args.inputValue.length; i++) {
-        var item = args.inputValue[i];
+    for (let i = 0; i < args.resources.length; i++) {
+        var item = args.resources[i];
         var request = {
             "PlayFabId": currentPlayerId,
             "ItemInstanceId": item.ItemInstanceId,
             "Data": item.Data
         };
         server.UpdateUserInventoryItemCustomData(request);
-        // 返回被修改的技能石的id
+        
         log.push({
             "ItemInstanceId": item.ItemInstanceId
         });
     }
     return { messageValue: log };
+}
+
+handlers.updateStone = function (args, context) {
+    
+    var request = {
+        "PlayFabId": currentPlayerId,
+        "Items": args.resources,
+    };
+    server.RevokeInventoryItems(request);
+    
+    var getInventoryRequest = {
+        "PlayFabId": currentPlayerId
+    };
+    var myItems = server.GetUserInventory(getInventoryRequest);
+    let currentLv = 0;
+    for (var i = 0; i < myItems.Inventory.length; i++) {
+        var item = myItems.Inventory[i];
+        if (item.CatalogVersion === "stoneTest2" && item.ItemInstanceId === args.targetItemInstanceId)
+        {
+            log.debug(item);
+            if ('level' in item.CustomData)
+            {
+                currentLv = Number(item.CustomData.level);
+            }else{
+                currentLv = 1;
+            }
+            
+            currentLv = 1 + currentLv;
+            
+            item.CustomData["level"] = currentLv;
+            var levelUpRequest = {
+                "PlayFabId": currentPlayerId,
+                "ItemInstanceId": item.ItemInstanceId,
+                "Data": item.CustomData
+            };
+            var updateResult = server.UpdateUserInventoryItemCustomData(levelUpRequest);
+            return {  success: true, stoneId: args.target, level:currentLv};
+        }
+    }
+    
+    return {  success: false, stoneId: args.target, level:0};
 }
 
 handlers.ArenaDefendTeamSave = function (args, context) {
@@ -387,6 +428,21 @@ handlers.Gotcha = function (args, context) {
     };
 
     var grantResult = server.GrantItemsToUser(grantRequest);
+    for (let i = 0; i < grantResult["ItemGrantResults"].length; i++)
+    {
+        var got = grantResult["ItemGrantResults"][i];
+        var request = {
+            "PlayFabId": currentPlayerId,
+            "ItemInstanceId": got.ItemInstanceId,
+            "Data":  {
+                "monsterid": null,
+                "slot": -1,
+                "level": 1
+            }
+        };
+        server.UpdateUserInventoryItemCustomData(request);
+    }
+    
     return { messageValue: grantResult["ItemGrantResults"] };
 }
 
@@ -409,6 +465,22 @@ handlers.GotchaX9 = function (args, context) {
     };
 
     var grantResult = server.GrantItemsToUser(grantRequest);
+    for (let i = 0; i < grantResult["ItemGrantResults"].length; i++)
+    {
+        var got = grantResult["ItemGrantResults"][i];
+        
+        var request = {
+            "PlayFabId": currentPlayerId,
+            "ItemInstanceId": got.ItemInstanceId,
+            "Data":  {
+                "monsterid": null,
+                "slot": -1,
+                "level": 1
+            }
+        };
+        server.UpdateUserInventoryItemCustomData(request);
+    }
+    
     return { messageValue: grantResult["ItemGrantResults"] };
 }
 

@@ -1,10 +1,11 @@
-﻿using dataAccess;
+﻿using System;
+using dataAccess;
 using UnityEngine;
 
 // 执行
 public partial class SSLevelUpManager : MonoBehaviour
 {
-    void LevelUpStone(string InstanceId)
+    void LevelUpStone(string InstanceId, Action<string> refreshStoneData)
     {
         var form = new SkillStoneLevelUpForm();
         
@@ -20,15 +21,29 @@ public partial class SSLevelUpManager : MonoBehaviour
         form.M3Stone = item3 != null ? item3.instanceId : null;
         form.M4Stone = item4 != null ? item4.instanceId : null;
 
-        CloudScript.UpdateStone(form, null, null);
+        CloudScript.UpdateStone(form, 
+            (targetInstanceId,x) =>
+            {
+                refreshStoneData.Invoke(targetInstanceId);
+                foreach (var instanceId in x)
+                {
+                    Stones.RemoveStoneLocal(instanceId);
+                }
+                
+            },
+            () =>
+            {
+                
+            }
+        );
     }
     
     // 技能升级确认。
-    public void ConfirmSkillStoneLevelUp()
+    public void ConfirmSkillStoneLevelUp(Action<string> refresh)
     {
         var target = Stones.Get(targetStoneID);
         if (target == null)
             return;
-        LevelUpStone(target.InstanceId);
+        LevelUpStone(target.InstanceId, refresh);
     }
 }

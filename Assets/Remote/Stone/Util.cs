@@ -1,14 +1,13 @@
 ﻿using mainMenu;
 using System.Collections.Generic;
 using UnityEngine;
-using Api.Dto.Model;
 using Skill;
 using System.Linq;
 
 // 配置文件属于资源信息，不是账户信息，应该分离开处理。
 namespace dataAccess
 {
-    public partial class Stones
+    public static partial class Stones
     {
         #region 技能石模型相关
         // 把所有技能的等级显示出来
