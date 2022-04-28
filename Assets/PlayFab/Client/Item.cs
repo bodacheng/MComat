@@ -34,6 +34,7 @@ public partial class PlayFabReadClient
                         {
                             InstanceId = item.ItemInstanceId,
                             skillId = item.ItemId,
+                            Level = (item.CustomData != null && item.CustomData.ContainsKey("level")) ? Convert.ToInt32(item.CustomData["level"]) : 1,
                             inUsingUnitInstanceId = (item.CustomData != null && item.CustomData.ContainsKey("monsterid")) ? item.CustomData["monsterid"] : null,
                             inUsingSkillSlot = (item.CustomData != null && item.CustomData.ContainsKey("slot")) ? item.CustomData["slot"] : null
                         };

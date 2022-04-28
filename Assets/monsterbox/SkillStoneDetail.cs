@@ -16,25 +16,27 @@ namespace mainMenu
         [SerializeField] Text keyname;
         [SerializeField] Text Showname;
         
-        [Space(7)]
+        [Space(2)]
         [Header("EXTypes")]
         [SerializeField] GameObject Ex1Icon, Ex2Icon, Ex3Icon;
         
-        [Space(7)]
+        [Space(2)]
         [Header("EXTypes")]
         [SerializeField] GameObject close, near, far;
         
-        [Space(7)]
+        [Space(2)]
         [Header("AT")]
         [SerializeField] Text AT;
-        [Space(7)]
+        
+        [Space(2)]
         [Header("HP")]
         [SerializeField] Text HP;
         
-        [Space(7)]
+        [Space(2)]
         [Header("当前技能等级")]
         [SerializeField] Text StoneTargetLevel;
 
+        [Space(2)]
         [SerializeField] Transform tempT;
         
         // 额外生成一个技能石图像

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using mainMenu;
-using Skill;
 
 namespace dataAccess
 {
