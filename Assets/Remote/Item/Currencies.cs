@@ -1,25 +1,19 @@
 ﻿using UnityEngine;
 
-public class Currencies
+public static class Currencies
 {
-    public static int coin;//智慧果实
-    public static int diamond;
+    private static int coin;//智慧果实
+    private static int diamond;
 
-    static public int DiamondCount
+    public static int DiamondCount
     {
         get => diamond;
-        set
-        {
-            diamond = Mathf.Clamp(value, 0, value);
-        }
+        set => diamond = Mathf.Clamp(value, 0, value);
     }
 
-    static public int CoinCount
+    public static int CoinCount
     {
         get => coin;
-        set
-        {
-            coin = Mathf.Clamp(value, 0, value);
-        }
+        set => coin = Mathf.Clamp(value, 0, value);
     }
 }

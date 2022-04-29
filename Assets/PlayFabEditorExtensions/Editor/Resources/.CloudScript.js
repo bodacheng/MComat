@@ -76,16 +76,15 @@ handlers.buildBasicData = function (args, context) {
             }
         );
     }
-    return { messageValue: null };
+    return { messageValue: "playerInitialized" };
 };
 
 handlers.grantUserUnit = function(args, context) {
-
+    
     var playerData = server.GetUserReadOnlyData({
         PlayFabId: currentPlayerId,
         Keys: ["last_Level_completed"]
     });
-
     var lastLevelCompleted = playerData.Data["last_Level_completed"];
     
     var inventoryRequest = {
@@ -124,7 +123,7 @@ handlers.grantUserUnit = function(args, context) {
         "ItemGrants": ItemGrants
     };
     var playerStatResult = server.GrantItemsToUsers(grantRequest);
-
+    
     return { messageValue: playerStatResult };
 }
 
@@ -319,41 +318,61 @@ handlers.skillEdit = function (args, context) {
 }
 
 handlers.updateStone = function (args, context) {
+
+    var targetStone;
     
-    var request = {
-        "PlayFabId": currentPlayerId,
-        "Items": args.resources,
-    };
-    server.RevokeInventoryItems(request);
-    
-    var getInventoryRequest = {
+    var inventoryRequest = {
         "PlayFabId": currentPlayerId
     };
-    var myItems = server.GetUserInventory(getInventoryRequest);
+    var items = server.GetUserInventory(inventoryRequest);
+
     let currentLv = 0;
-    for (var i = 0; i < myItems.Inventory.length; i++) {
-        var item = myItems.Inventory[i];
+    for (var i = 0; i < items.Inventory.length; i++) {
+        var item = items.Inventory[i];
         if (item.CatalogVersion === "stoneTest2" && item.ItemInstanceId === args.targetItemInstanceId)
         {
-            log.debug(item);
+            targetStone = item;
             if ('level' in item.CustomData)
             {
                 currentLv = Number(item.CustomData.level);
             }else{
                 currentLv = 1;
             }
-            
-            currentLv = 1 + currentLv;
-            
-            item.CustomData["level"] = currentLv;
-            var levelUpRequest = {
-                "PlayFabId": currentPlayerId,
-                "ItemInstanceId": item.ItemInstanceId,
-                "Data": item.CustomData
-            };
-            var updateResult = server.UpdateUserInventoryItemCustomData(levelUpRequest);
-            return {  success: true, stoneId: args.target, level:currentLv};
         }
+    }
+    
+    var GD = items.VirtualCurrency["GD"];
+    
+    // 是否有足够的金币升级？
+    
+    let needGD = 100 + 10 * (currentLv -1);
+    if (GD < needGD) {
+        return {  success: false, stoneId: args.target, level:0};
+    }
+    currentLv = 1 + currentLv;
+    var SubtractUserVirtualResult = server.SubtractUserVirtualCurrency(
+        {
+            PlayFabId :currentPlayerId,
+            Amount : needGD,
+            VirtualCurrency : "GD"
+        }
+    );
+    
+    var revokeRequest = {
+        "PlayFabId": currentPlayerId,
+        "Items": args.resources,
+    };
+    server.RevokeInventoryItems(revokeRequest);
+    
+    if (targetStone !== null) {
+        targetStone.CustomData["level"] = currentLv;
+        var levelUpRequest = {
+            "PlayFabId": currentPlayerId,
+            "ItemInstanceId": targetStone.ItemInstanceId,
+            "Data": targetStone.CustomData
+        };
+        var updateResult = server.UpdateUserInventoryItemCustomData(levelUpRequest);
+        return { success: true, stoneId: targetStone.ItemInstanceId, level:currentLv };
     }
     
     return {  success: false, stoneId: args.target, level:0};
