@@ -70,19 +70,17 @@ public class SKillAnalyzerGUI : EditorWindow
         if (GUILayout.Button("任意函数测试"))
         {
             
-            PlayFabReadClient.GetPresentGetCatalogItems();
-
-            return;
+            //PlayFabReadClient.GetPresentGetCatalogItems();
             
             PlayFabClientAPI.ExecuteCloudScript(
                 new ExecuteCloudScriptRequest()
                 {
-                    FunctionName = "GetLeaderboardAroundUser",
+                    FunctionName = "grantUserUnit",
                     GeneratePlayStreamEvent = true
                 },
                 (ExecuteCloudScriptResult result) => {
-                    var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
-                    Debug.Log(jsonResult);
+                    //var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
+                    //Debug.Log(jsonResult);
                 },
                 error => {
                     Debug.Log(error.Error);

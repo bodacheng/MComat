@@ -39,6 +39,12 @@ namespace mainMenu
         public void SetFocusingUnit(string localID)
         {
             _focusing = MyMonsters.Get(localID);
+            if (_focusing == null)
+            {
+                Debug.Log("玩家目前一个角色也没？？？？");
+                return;
+            }
+            
             var Ref = Units.GetUnitConfig(_focusing.r_id);
             if (Ref == null)
             {

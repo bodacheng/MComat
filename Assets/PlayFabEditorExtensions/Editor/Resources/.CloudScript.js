@@ -40,24 +40,93 @@ handlers.buildBasicData = function (args, context) {
     
     var initialized = playerData.Data["playerInitialized"];
     if (initialized == null) {
-        var updateUserDataResult = server.UpdateUserReadOnlyData({
-            PlayFabId: currentPlayerId,
-            Data: {
-                "stone_box_size": 50,
-                "last_Level_completed": 0
+        var updateUserDataResult = server.UpdateUserReadOnlyData(
+            {
+                PlayFabId: currentPlayerId,
+                Data: {
+                    "stone_box_size": 50,
+                    "last_Level_completed": 0,
+                    "playerInitialized" : true
+                }
             }
-        });
-        var playerStatResult = server.UpdatePlayerStatistics({
-            PlayFabId: currentPlayerId,
-            Statistics: [{
-                StatisticName: "arenapoint",
-                Value: 1000 // 初始值
-            }]
-        });
-        return { messageValue: updateUserDataResult };
+        );
+        var playerStatResult = server.UpdatePlayerStatistics(
+            {
+                PlayFabId: currentPlayerId,
+                Statistics: [{
+                    StatisticName: "arenapoint",
+                    Value: 1000 // 初始值
+                }]
+            }
+        );
+        
+        var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
+            {
+                PlayFabId :currentPlayerId,
+                Amount : 100,
+                VirtualCurrency : "DM"
+            }
+        );
+
+        var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
+            {
+                PlayFabId :currentPlayerId,
+                Amount : 1000,
+                VirtualCurrency : "GD"
+            }
+        );
     }
     return { messageValue: null };
 };
+
+handlers.grantUserUnit = function(args, context) {
+
+    var playerData = server.GetUserReadOnlyData({
+        PlayFabId: currentPlayerId,
+        Keys: ["last_Level_completed"]
+    });
+
+    var lastLevelCompleted = playerData.Data["last_Level_completed"];
+    
+    var inventoryRequest = {
+        "PlayFabId": currentPlayerId
+    };
+    var items = server.GetUserInventory(inventoryRequest);
+    var adam = null;
+    for (var i = 0; i < items.Inventory.length; i++) {
+        var item = items.Inventory[i];
+        if (item.CatalogVersion == "Monsters")
+        {
+            if (item.ItemId ===  "1"){
+                adam = item;
+            }
+        }
+    }
+    
+    let ItemGrants = [];
+    switch (Number(lastLevelCompleted.Value)){
+        case 0:
+            if (adam === null) {
+                ItemGrants.push(
+                    {
+                        "PlayFabId": currentPlayerId,
+                        "ItemId" : "1"
+                    }
+                );
+            }
+            break;
+        default:
+            break;
+    }
+    
+    var grantRequest = {
+        "CatalogVersion": "Monsters",
+        "ItemGrants": ItemGrants
+    };
+    var playerStatResult = server.GrantItemsToUsers(grantRequest);
+
+    return { messageValue: playerStatResult };
+}
 
 handlers.sendPassResetMail = function(args, context) {
 
@@ -499,8 +568,7 @@ handlers.getMonsterTest = function (args, context) {
             { "PlayFabId": currentPlayerId, "ItemId": "8" },
             { "PlayFabId": currentPlayerId, "ItemId": "9" },
             { "PlayFabId": currentPlayerId, "ItemId": "10" },
-            { "PlayFabId": currentPlayerId, "ItemId": "11" },
-            { "PlayFabId": currentPlayerId, "ItemId": "13" }
+            { "PlayFabId": currentPlayerId, "ItemId": "11" }
         ]
     };
     var playerStatResult = server.GrantItemsToUsers(request);
