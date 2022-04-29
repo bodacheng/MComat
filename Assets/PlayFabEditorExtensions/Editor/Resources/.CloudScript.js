@@ -55,7 +55,7 @@ handlers.buildBasicData = function (args, context) {
                 PlayFabId: currentPlayerId,
                 Statistics: [{
                     StatisticName: "arenapoint",
-                    Value: 1000 // 初始值
+                    Value: 1000
                 }]
             }
         );
@@ -75,11 +75,12 @@ handlers.buildBasicData = function (args, context) {
                 VirtualCurrency : "GD"
             }
         );
+        return { result: true };
     }
-    return { messageValue: "playerInitialized" };
+    return { result: false };
 };
 
-handlers.grantUserUnit = function(args, context) {
+handlers.grantUserUnitByProgress = function(args, context) {
     
     var playerData = server.GetUserReadOnlyData({
         PlayFabId: currentPlayerId,
@@ -124,17 +125,7 @@ handlers.grantUserUnit = function(args, context) {
     };
     var playerStatResult = server.GrantItemsToUsers(grantRequest);
     
-    return { messageValue: playerStatResult };
-}
-
-handlers.sendPassResetMail = function(args, context) {
-
-    var email = args.email;
-    var result = server.SendAccountRecoveryEmail({
-            Email : email
-        });
-    
-    return {result};
+    return { result : playerStatResult };
 }
 
 handlers.completedLevel = function (args, context) {
@@ -570,6 +561,17 @@ handlers.GotchaX9 = function (args, context) {
     }
     
     return { messageValue: grantResult["ItemGrantResults"] };
+}
+
+handlers.sendPassResetMail = function(args, context) {
+
+    var email = args.email;
+    var result = server.SendAccountRecoveryEmail(
+        {
+            Email : email
+        }
+    );
+    return { result };
 }
 
 // 我感觉我们还是应该一点点的按关卡进度把角色给玩家。。
