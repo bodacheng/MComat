@@ -956,10 +956,6 @@
       <Project>{b317e917-e5a6-f6ce-dbaa-38f130f58b97}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="PlayFabSDKEditor.csproj">
-      <Project>{85e3dfbe-282a-6ec0-039d-df4b19a71058}</Project>
-      <Name>PlayFabSDKEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="AppleAuth.Editor.csproj">
       <Project>{4b1d8cee-db8b-791c-1968-e7840611f263}</Project>
       <Name>AppleAuth.Editor</Name>
@@ -979,10 +975,6 @@
     <ProjectReference Include="PlayFabEditorExtensions.csproj">
       <Project>{62a55c63-7617-3317-8c8f-3e959cdf245d}</Project>
       <Name>PlayFabEditorExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="PlayFab.csproj">
-      <Project>{52cd54cf-a6fd-3561-aeaf-0d04da1943a8}</Project>
-      <Name>PlayFab</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.DOTween.csproj">
       <Project>{630e56dd-2581-1375-ea49-6b4890a18a86}</Project>
@@ -1007,6 +999,14 @@
     <ProjectReference Include="AppleAuth.csproj">
       <Project>{30ff7479-1e76-2ac2-59eb-00679bae52b4}</Project>
       <Name>AppleAuth</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayFabSDKEditor.csproj">
+      <Project>{85e3dfbe-282a-6ec0-039d-df4b19a71058}</Project>
+      <Name>PlayFabSDKEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayFab.csproj">
+      <Project>{52cd54cf-a6fd-3561-aeaf-0d04da1943a8}</Project>
+      <Name>PlayFab</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
   DevAccountEmail: hakuforwork@gmail.com
-  DevAccountToken: dbkc3mahj1nbiag6mqumydae77qnm88715u45epc6takms5ueck9mb5csic1p9yeeohs3fdab37rbomhpxb7uwi3yqfnfro6futz8799ycg6ewbbs6rr91oz6owajyf1tbx7w8agn3igri3j55ng8rueqazapzp7nrjoqy7473kk5ysioiq7o339xr7epn51dtxmjaze
+  DevAccountToken: 5qkw9bssaj16j6ptpnf96fnpgrh14qqo6cgrjs5b8d1z3piue61zn56atuf563y5dfzsdhn59mrzsour9xgwixgjtcf5fb7nencxxew9ppoexc96brm37jp9zsn5fyimhkh96gk1xhpxnm764z7dy8qdmpwwhb69xsp7rsegxndp676p44ts3o183rwfgochddnystxq
   SelectedStudio: 
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
-  LocalCloudScriptPath: /Users/hakutaisei/MComat_android/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js
+  LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 4
+  curMainMenuIdx: 0
   curSubMenuIdx: 0
