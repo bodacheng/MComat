@@ -147,45 +147,42 @@ handlers.grantUserUnitByProgress = function(args, context) {
             adam = GrantedItemInstance;
         }
     }
+    
+    return { result : true };
+}
 
-    //////  给予被动技能  ///////
-    var TitleDataRequest = {"Keys":"passive_skill"};
-    var TitleDataResponse = server.GetTitleData(TitleDataRequest);
+// 将被动技能给予角色
+handlers.givePassiveSkill= function (args, context) {
 
-    if (TitleDataResponse.Data.hasOwnProperty("passive_skill")) {
-        
-        var passiveSkillData = JSON.parse(TitleDataResponse.Data.passive_skill);
-        
-        for (var i = 0; i < passiveSkillData.length; i++) {
-            var object = passiveSkillData[i];
-            
-            if (adam !== null && object.unit_id == "1") {
-                
-                itemIds = [];
-                itemIds.push(object.skill_id);
-                var grantRequest = {
-                    "PlayFabId": currentPlayerId,
-                    "CatalogVersion": "stoneTest2",
-                    "ItemIds": itemIds
-                };
-                
-                var grantResult = server.GrantItemsToUser(grantRequest);
-                for (let i = 0; i < grantResult.ItemGrantResults.length; i++)
-                {
-                    var got = grantResult.ItemGrantResults[i];
-                    var request = {
-                        "PlayFabId": currentPlayerId,
-                        "ItemInstanceId": got.ItemInstanceId,
-                        "Data":  {
-                            "monsterid": adam.ItemInstanceId,
-                            "slot": -1,
-                            "level": 1
-                        }
-                    };
-                    server.UpdateUserInventoryItemCustomData(request);
-                }
+    var request = {
+        "PlayFabId": currentPlayerId
+    };
+    
+    var playstreamEvent = context.playStreamEvent;
+    var unit_InstanceId = playstreamEvent.InstanceId;
+    
+    let itemIds = [];
+    itemIds.push(args.skill_id);
+    var grantRequest = {
+        "PlayFabId": currentPlayerId,
+        "CatalogVersion": "stoneTest2",
+        "ItemIds": itemIds
+    };
+
+    var grantResult = server.GrantItemsToUser(grantRequest);
+    for (let i = 0; i < grantResult.ItemGrantResults.length; i++)
+    {
+        var got = grantResult.ItemGrantResults[i];
+        var request = {
+            "PlayFabId": currentPlayerId,
+            "ItemInstanceId": got.ItemInstanceId,
+            "Data":  {
+                "monsterid": unit_InstanceId,
+                "slot": 1,
+                "level": 1
             }
-        }
+        };
+        server.UpdateUserInventoryItemCustomData(request);
     }
     
     return { result : true };
