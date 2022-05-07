@@ -1,4 +1,5 @@
-﻿using DummyLayerSystem;
+﻿using System;
+using DummyLayerSystem;
 using UnityEngine;
 
 namespace FightScene
@@ -49,30 +50,17 @@ namespace FightScene
                             NetFightScene.Fight.ID.ToString(),
                             result =>
                             {
-                                PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                                int levelInt, reward_GDInt, reward_DIAInt;
-                                string levelstring = "0";
-                                string reward_GDstring = "0";
-                                string reward_DIAstring = "0";
-                                if (jsonResult != null)
-                                {
-                                    object level, reward_GD, reward_DIA;
-                                    
-                                    jsonResult.TryGetValue("progressLevel", out level);
-                                    jsonResult.TryGetValue("gold", out reward_GD);
-                                    jsonResult.TryGetValue("diamond", out reward_DIA);
-                                    
-                                    levelstring = level.ToString();
-                                    reward_GDstring = reward_GD != null ? reward_GD.ToString() : "0";
-                                    reward_DIAstring = reward_DIA != null ? reward_DIA.ToString() : "0";
-                                }
+                                var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                                var level = jsonResult.ContainsKey("progressLevel") ? jsonResult["progressLevel"] : 0;
+                                var reward_GD = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
+                                var reward_DIA = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
                                 
-                                int.TryParse(levelstring, out levelInt) ;
+                                int levelInt = Convert.ToInt32(level);
                                 PlayerAccountInfo.Me.ArcadeProcess = levelInt;
-                                int.TryParse(reward_GDstring, out reward_GDInt) ;
-                                int.TryParse(reward_DIAstring, out reward_DIAInt) ;
+                                int reward_GD_Int = Convert.ToInt32(reward_GD);
+                                int reward_GM_Int = Convert.ToInt32(reward_DIA);
                                 
-                                ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArcadeFightResult;
+                                var cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArcadeFightResult;
                                 cc.Initialise(
                                     NetFightScene.target.ReturnToFront, 
                                     ()=>
@@ -80,9 +68,8 @@ namespace FightScene
                                         LocalGameRestart();
                                         UILayerLoader.Remove("ArcadeFightResult");
                                     },
-                                    reward_GDInt, reward_DIAInt
+                                    reward_GD_Int, reward_GM_Int
                                 );
-                                Debug.Log("hello"+ cc);
                             },
                             () =>
                             {

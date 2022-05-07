@@ -29,6 +29,35 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+handlers.test = function (args, context) {
+
+    var stageKey = "stage_awards";
+    
+    //get title data
+    var TitleDataRequest = {"Keys":[stageKey]};
+    var TitleDataResponse = server.GetTitleData(TitleDataRequest);
+    if(!TitleDataResponse.Data.hasOwnProperty(stageKey))
+    {
+
+    }
+    else
+    {
+        var whole = TitleDataResponse.Data[stageKey];
+        var objData = JSON.parse(whole);
+        
+        for (var i = 0; i < objData.length; i++) {
+            log.debug(objData[i].award.g);
+        }
+    }
+
+    //log.debug("报酬信息未找到？ ..." + stageKey);
+    return {
+        success: true,
+        gold: 0,
+        diamond: 0
+    };
+};
+
 
 // 建立玩家初始数据
 handlers.buildBasicData = function (args, context) {
@@ -142,97 +171,83 @@ handlers.completedLevel = function (args, context) {
     var level = args.level;
     
     if (level <= lastLevelCompleted.Value) {
-        //log.debug("Didnt Set lastLevelCompleted for player ");
         return {
-            success: true,
             progressLevel: Number(lastLevelCompleted.Value)
         };
     } else {
+        
         var newLevelCompleted = Number(lastLevelCompleted.Value) + 1;
-        var updateUserDataResult = server.UpdateUserReadOnlyData({
+        server.UpdateUserReadOnlyData({
             PlayFabId: currentPlayerId,
             Data: {
                 "last_Level_completed" : newLevelCompleted
             }
         });
-
-        // 每个关卡的报酬我们是以stage_ + 关卡号码为索引保存在titledata里。
-        // g代表金币，d为宝石
-        // 我们唯一的担心是
-        var stageKey = "stage_" + newLevelCompleted;
-        var reward;
-        var arr_from_reward_json;
         
-        //get title data
-        var TitleDataRequest = {"Keys":[stageKey]};
+        var TitleDataRequest = {"Keys":"stage_awards"};
         var TitleDataResponse = server.GetTitleData(TitleDataRequest);
-        if(!TitleDataResponse.Data.hasOwnProperty(stageKey))
-        {
-            //log.debug("报酬信息未找到？ ..." + stageKey);
+        
+        if (!TitleDataResponse.Data.hasOwnProperty("stage_awards")){
             return {
-                success: true,
-                progressLevel: newLevelCompleted,
-                gold: 0,
-                diamond: 0
+                progressLevel: newLevelCompleted
             };
         }
-        else
-        {
-            reward = TitleDataResponse.Data[stageKey];
-            arr_from_reward_json = JSON.parse(reward);// 这一步被确定有必要
+        
+        var whole = TitleDataResponse.Data["stage_awards"];
+        var objData = JSON.parse(whole);
+        var award;
+        let g = 0;
+        let d = 0;
+        
+        for (var i = 0; i < objData.length; i++) {
+            
+            if (objData[i].stageKey == newLevelCompleted){
+                if(objData[i].hasOwnProperty("award")){
+                    award = objData[i].award;
+                    break;
+                }
+            }
         }
         
-        var gold;
-        var diamond;
-        
-        if (arr_from_reward_json !== null)
-        {
-            if(arr_from_reward_json.hasOwnProperty("d")){
-                diamond = arr_from_reward_json.dia;
-                log.debug("d" + arr_from_reward_json.dia);
-            }else{
-                diamond = 0;
+        if (award !== undefined) {
+            
+            if (award.hasOwnProperty("g")) {
+                g = Number(award.g);
+                
+                if (g > 0) {
+                    server.AddUserVirtualCurrency({
+                        PlayFabID: currentPlayerId,
+                        VirtualCurrency: "GD",
+                        Amount: g
+                    });
+                }
+            }
+            
+            if (award.hasOwnProperty("d")) {
+                d = Number(award.d);
+                
+                if (d > 0) {
+                    server.AddUserVirtualCurrency({
+                        PlayFabID: currentPlayerId,
+                        VirtualCurrency: "DM",
+                        Amount: d
+                    });
+                }
             }
 
-            if(arr_from_reward_json.hasOwnProperty("g")){
-                gold = arr_from_reward_json.g;
-                log.debug("g" + arr_from_reward_json.g);
-            }else{
-                gold = 0;
-            }
-            
-            if (diamond > 0)
-            {
-                server.AddUserVirtualCurrency({
-                    PlayFabID: currentPlayerId,
-                    VirtualCurrency: "DM",
-                    Amount: diamond
-                });
-            }
-            
-            if (gold > 0)
-            {
-                server.AddUserVirtualCurrency({
-                    PlayFabID: currentPlayerId,
-                    VirtualCurrency: "GD",
-                    Amount: gold
-                });
-            }
-            
             return {
-                success: true,
                 progressLevel: newLevelCompleted,
-                gold: gold,
-                diamond: diamond
-            };
-        }else{
-            return {
-                success: true,
-                progressLevel: newLevelCompleted,
-                gold: 0,
-                diamond: 0
+                gold: g,
+                diamond: d
             };
         }
+        
+        log.debug("报酬信息未找到？ ...");
+        return {
+            progressLevel: newLevelCompleted,
+            gold: 0,
+            diamond: 0
+        };
     }
 };
 

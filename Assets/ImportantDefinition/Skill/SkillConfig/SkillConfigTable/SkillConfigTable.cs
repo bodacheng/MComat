@@ -5,11 +5,57 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using PlayFab;
+using PlayFab.ClientModels;
 using Skill;
+using Json;
+using Newtonsoft.Json;
 
 public partial class SkillConfigTable
 {
     public static IDictionary<string, SkillConfig> SkillConfigRefDic = new Dictionary<string, SkillConfig>();
+    public static IDictionary<string, string> passiveSkills = new Dictionary<string, string>();
+
+    public static SkillConfig GetPassiveSkills(string unit_recordId)
+    {
+        string skillid;
+        passiveSkills.TryGetValue(unit_recordId, out skillid);
+        return GetSkillConfig(skillid);
+    }
+    
+    public class forDe
+    {
+        public string unit_id;
+        public string skill_id;
+    }
+    
+    public static void LoadPassive()
+    {
+        Debug.Log("try load passive_skill");
+        var request = new GetTitleDataRequest();
+        PlayFabClientAPI.GetTitleData(request, OnSuccess, OnError);
+
+
+        
+        void OnSuccess(GetTitleDataResult result)
+        {
+            Debug.Log("GetTitleData: Success!");
+            
+            Debug.Log(result.Data["passive_skill"]);
+            
+            var values = JsonConvert.DeserializeObject<forDe[]>(result.Data["passive_skill"]);
+            foreach (var target in values)
+            {
+                Debug.Log("ok:"+target.skill_id);
+            }
+        }
+
+        void OnError(PlayFabError error)
+        {
+            Debug.Log("GetTitleData: Fail...");
+            Debug.Log(error.GenerateErrorReport());
+        }
+    }
     
     public class Row
     {
@@ -52,7 +98,6 @@ public partial class SkillConfigTable
             break;
             case ResourceLoadMode.Resource:
                 LoadAllSkillConfigFromLocalConfigFile();
-                INHERENT_SkillTable.LoadAllINHERENTSkillConfigs();// 角色原生技能的load和技能表load同步进行。
                 SkillNameTable.LoadSkillNames();
             break;
         }

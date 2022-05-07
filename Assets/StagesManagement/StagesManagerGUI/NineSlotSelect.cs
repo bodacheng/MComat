@@ -72,8 +72,8 @@ public partial class StagesManager : EditorWindow {
                 C3ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
             }
-            KeyValuePair<string, string> kv = INHERENT_SkillTable.GetINHERENTSkill(focusingUnitInfo.r_id);
-            GUI.backgroundColor = Repeated(focusingUnitInfo.set, nowSkillID) ? Color.red : (defaultSkillConfig != null ? kv.Key == nowSkillID ? new Color(0.2f, 0.7f, 1) : Color.yellow : Color.white);
+            var kv = SkillConfigTable.GetPassiveSkills(focusingUnitInfo.r_id);
+            GUI.backgroundColor = Repeated(focusingUnitInfo.set, nowSkillID) ? Color.red : (defaultSkillConfig != null ? kv.RECORD_ID == nowSkillID ? new Color(0.2f, 0.7f, 1) : Color.yellow : Color.white);
         }
         
         SlotAnalyze(1);

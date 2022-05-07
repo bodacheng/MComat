@@ -66,7 +66,6 @@ public partial class StagesManager : EditorWindow {
         SkillConfigTable.LoadAllSkillConfigs();
         Units.LoadByResource();
         Units.RefreshDic();
-        INHERENT_SkillTable.LoadINHERENTSkillsByLocalConfigFile();
     }
 }
 #endif

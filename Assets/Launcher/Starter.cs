@@ -88,13 +88,13 @@ public class Starter : MonoBehaviour
                 r_id = i.ToString()
             };
             
-            var INHERENTSkills = INHERENT_SkillTable.GetINHERENTSkill(unitConfig.RECORD_ID);
-            if (INHERENTSkills.Key != null)
+            var INHERENTSkills = SkillConfigTable.GetPassiveSkills(unitConfig.RECORD_ID);
+            if (INHERENTSkills.RECORD_ID != null)
             {
                 var stoneInfo = new StoneOfPlayerInfo
                 {
                     InstanceId = (Stones.Dic.Count + 1).ToString(),
-                    skillId = INHERENTSkills.Key,
+                    skillId = INHERENTSkills.RECORD_ID,
                     Level = 1,
                     Inherent = "true",
                     inUsingUnitInstanceId = i.ToString(),

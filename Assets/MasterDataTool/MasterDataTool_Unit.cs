@@ -10,7 +10,6 @@ public partial class MasterDataTool
     // 如果要有一样的资源不同的条目这种情况，必定是手动添加的结果。
     // 如果数据库里存在条目在Resource下检测不到对应资源。。。。那这样的条目会被删除。原先的ID会被新添加的资源对应的新条目补空档。
     // 系统不会对旧条目中自己手动填写的任何具体定义做更新，只会根据资源的有无来决定条目的追加与删除与否。
-
     public void UnitsConfigFileGenerate(string path, TextAsset textAsset, string[] chartypes)
     {
         if (textAsset != null)

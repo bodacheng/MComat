@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEditor;
 using System.Linq;
-using UniRx;
+using Skill;
 
 public partial class StagesManager : EditorWindow {
 
-    KeyValuePair<string, string> InhereSks;
+    SkillConfig InhereSks;
     IDictionary<string, string> SelectInhere;
     int selectedInhereskill;
     
@@ -17,10 +17,10 @@ public partial class StagesManager : EditorWindow {
         {
             {"0","空"}
         };
-        InhereSks = INHERENT_SkillTable.GetINHERENTSkill(CharResourceID);
-        if (InhereSks.Key != null)
+        InhereSks = SkillConfigTable.GetPassiveSkills(CharResourceID);
+        if (InhereSks.RECORD_ID != null)
         {
-            SelectInhere.Add(InhereSks.Key, InhereSks.Value);
+            SelectInhere.Add(InhereSks.RECORD_ID, InhereSks.REAL_NAME);
         }
         selectedInhereskill = EditorGUILayout.Popup("原生技能：", selectedInhereskill, SelectInhere.Values.ToArray());
         SetSkillId(SelectInhere.ElementAt(selectedInhereskill).Key);

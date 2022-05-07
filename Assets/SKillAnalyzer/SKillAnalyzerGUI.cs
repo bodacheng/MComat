@@ -59,6 +59,7 @@ public class SKillAnalyzerGUI : EditorWindow
             PlayFabReadClient.LoginByDevice(
                 result => {
                     Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
+                    SkillConfigTable.LoadPassive();
                 },
                 fail => {
                     Debug.Log("login fail");
@@ -69,23 +70,42 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
-            
-            //PlayFabReadClient.GetPresentGetCatalogItems();
-            
             PlayFabClientAPI.ExecuteCloudScript(
                 new ExecuteCloudScriptRequest()
                 {
-                    FunctionName = "grantUserUnit",
+                    FunctionName = "completedLevel",
+                    FunctionParameter = new { level = "6" },
                     GeneratePlayStreamEvent = true
                 },
                 (ExecuteCloudScriptResult result) => {
-                    //var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
-                    //Debug.Log(jsonResult);
+                    
+                    var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                    var level = jsonResult.ContainsKey("progressLevel") ? jsonResult["progressLevel"] : 0;
+                    var reward_GD = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
+                    var reward_DIA = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
                 },
                 error => {
                     Debug.Log(error.Error);
                 }
-            );
+            );            
+            
+            
+            //PlayFabReadClient.GetPresentGetCatalogItems();
+            
+            // PlayFabClientAPI.ExecuteCloudScript(
+            //     new ExecuteCloudScriptRequest()
+            //     {
+            //         FunctionName = "test",
+            //         GeneratePlayStreamEvent = true
+            //     },
+            //     (ExecuteCloudScriptResult result) => {
+            //         //var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
+            //         //Debug.Log(jsonResult);
+            //     },
+            //     error => {
+            //         Debug.Log(error.Error);
+            //     }
+            // );
             
             // PlayFabClientAPI.ExecuteCloudScript(
             //     new ExecuteCloudScriptRequest()
@@ -130,24 +150,6 @@ public class SKillAnalyzerGUI : EditorWindow
             //     }
             // );
             
-            // PlayFabClientAPI.ExecuteCloudScript(
-            //     new ExecuteCloudScriptRequest()
-            //     {
-            //         FunctionName = "completedLevel",
-            //         FunctionParameter = new { level = "5" },
-            //         GeneratePlayStreamEvent = true
-            //     },
-            //     (ExecuteCloudScriptResult result) => {
-            //         PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-            //         object level;
-            //         jsonResult.TryGetValue("progressLevel", out level);
-            //         Debug.Log(level.ToString());
-            //     },
-            //     error => {
-            //         Debug.Log(error.Error);
-            //     }
-            // );
-
             //TitleData.SetArcadeRewards();
             //PlayFabClientAPI.WritePlayerEvent(new WriteClientPlayerEventRequest()
             //{

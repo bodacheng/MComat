@@ -66,12 +66,17 @@ public class LocalMasterDataToolGUI : EditorWindow {
         {
             tool.OutputMonsterStore();
         }
-
+        
         if (GUILayout.Button("(playFab)输出获取全部角色的测试用cloudscript)"))
         {
             tool.OutputCloudScriptPart_GetAllMonsters();
         }
-
+        
+        if (GUILayout.Button("(playFab)输出Json格式关卡报酬定义文件"))
+        {
+            StagesManager.ExportStageAward();
+        }
+        
         if (GUILayout.Button("全项目所有贴图转换iphone格式"))
         {
             Debug.Log("危险，已经弃用");

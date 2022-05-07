@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DevAccountEmail: hakuforwork@gmail.com
   DevAccountToken: 5qkw9bssaj16j6ptpnf96fnpgrh14qqo6cgrjs5b8d1z3piue61zn56atuf563y5dfzsdhn59mrzsour9xgwixgjtcf5fb7nencxxew9ppoexc96brm37jp9zsn5fyimhkh96gk1xhpxnm764z7dy8qdmpwwhb69xsp7rsegxndp676p44ts3o183rwfgochddnystxq
-  SelectedStudio: 
+  SelectedStudio: TEST
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
-  LocalCloudScriptPath: 
+  LocalCloudScriptPath: /Users/hakutaisei/MComat_android/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js
   PanelIsShown: 0
-  curMainMenuIdx: 0
+  curMainMenuIdx: 4
   curSubMenuIdx: 0
