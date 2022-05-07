@@ -109,6 +109,7 @@ handlers.buildBasicData = function (args, context) {
     return { result: false };
 };
 
+// 获取角色的唯一方式
 handlers.grantUserUnitByProgress = function(args, context) {
     
     var playerData = server.GetUserReadOnlyData({
@@ -116,45 +117,78 @@ handlers.grantUserUnitByProgress = function(args, context) {
         Keys: ["last_Level_completed"]
     });
     var lastLevelCompleted = playerData.Data["last_Level_completed"];
-    
+
     var inventoryRequest = {
         "PlayFabId": currentPlayerId
     };
-    var items = server.GetUserInventory(inventoryRequest);
     var adam = null;
-    for (var i = 0; i < items.Inventory.length; i++) {
-        var item = items.Inventory[i];
-        if (item.CatalogVersion == "Monsters")
-        {
-            if (item.ItemId ===  "1"){
-                adam = item;
-            }
-        }
-    }
-    
-    let ItemGrants = [];
+
+    let itemIds = [];
     switch (Number(lastLevelCompleted.Value)){
         case 0:
-            if (adam === null) {
-                ItemGrants.push(
-                    {
-                        "PlayFabId": currentPlayerId,
-                        "ItemId" : "1"
-                    }
-                );
-            }
+            itemIds.push("1");
             break;
         default:
             break;
     }
     
     var grantRequest = {
+        "PlayFabId": currentPlayerId,
         "CatalogVersion": "Monsters",
-        "ItemGrants": ItemGrants
+        "ItemIds": itemIds
     };
-    var playerStatResult = server.GrantItemsToUsers(grantRequest);
+    var GrantedItems = server.GrantItemsToUser(grantRequest);
     
-    return { result : playerStatResult };
+    for (var i = 0; i < GrantedItems.ItemGrantResults.length; i++){
+        var GrantedItemInstance = GrantedItems.ItemGrantResults[i];
+        log.debug(GrantedItemInstance);
+        if (GrantedItemInstance.CatalogVersion === "Monsters" &&
+            GrantedItemInstance.ItemId == "1") {
+            adam = GrantedItemInstance;
+        }
+    }
+
+    //////  给予被动技能  ///////
+    var TitleDataRequest = {"Keys":"passive_skill"};
+    var TitleDataResponse = server.GetTitleData(TitleDataRequest);
+
+    if (TitleDataResponse.Data.hasOwnProperty("passive_skill")) {
+        
+        var passiveSkillData = JSON.parse(TitleDataResponse.Data.passive_skill);
+        
+        for (var i = 0; i < passiveSkillData.length; i++) {
+            var object = passiveSkillData[i];
+            
+            if (adam !== null && object.unit_id == "1") {
+                
+                itemIds = [];
+                itemIds.push(object.skill_id);
+                var grantRequest = {
+                    "PlayFabId": currentPlayerId,
+                    "CatalogVersion": "stoneTest2",
+                    "ItemIds": itemIds
+                };
+                
+                var grantResult = server.GrantItemsToUser(grantRequest);
+                for (let i = 0; i < grantResult.ItemGrantResults.length; i++)
+                {
+                    var got = grantResult.ItemGrantResults[i];
+                    var request = {
+                        "PlayFabId": currentPlayerId,
+                        "ItemInstanceId": got.ItemInstanceId,
+                        "Data":  {
+                            "monsterid": adam.ItemInstanceId,
+                            "slot": -1,
+                            "level": 1
+                        }
+                    };
+                    server.UpdateUserInventoryItemCustomData(request);
+                }
+            }
+        }
+    }
+    
+    return { result : true };
 }
 
 handlers.completedLevel = function (args, context) {
