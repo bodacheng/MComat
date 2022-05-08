@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
@@ -17,6 +18,14 @@ public class AbstractShaderMesh : MonoBehaviour
         mesh = GetComponent<Renderer>();
         if (mesh != null)
         {
+            var materials = new List<Material>();
+            foreach (var m in Mesh.sharedMaterials)
+            {
+                var new_m = new Material(m.shader);
+                new_m.CopyPropertiesFromMaterial(m);
+                materials.Add(new_m);
+            }
+            mesh.sharedMaterials = materials.ToArray();
             CurrentMaterials = GetMaterials();
         }
     }
