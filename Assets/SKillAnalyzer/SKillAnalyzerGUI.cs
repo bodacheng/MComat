@@ -19,11 +19,6 @@ public class SKillAnalyzerGUI : EditorWindow
     {
         EditorGUILayout.LabelField(" 技能参数统计类  ");
         _focusingType = EditorGUILayout.TextField("统计以下类型角色的技能信息", _focusingType);
-        if (GUILayout.Button("输出技能攻击力预估"))
-        {
-            PowerEstimateTable.Save(_focusingType);
-        }
-        
         _targetEventName = EditorGUILayout.TextField("选择拥有该事件的技能动画片段", _targetEventName);
         _attackFrameStartAtMAX = EditorGUILayout.FloatField("攻击帧启动时间小于等于：", _attackFrameStartAtMAX);
         _attackFrameStartAtMIN = EditorGUILayout.FloatField("攻击帧启动时间大于：", _attackFrameStartAtMIN);

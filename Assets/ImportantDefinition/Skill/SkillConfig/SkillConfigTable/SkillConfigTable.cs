@@ -5,11 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
-using PlayFab;
-using PlayFab.ClientModels;
 using Skill;
-using Json;
-using Newtonsoft.Json;
 
 public partial class SkillConfigTable
 {

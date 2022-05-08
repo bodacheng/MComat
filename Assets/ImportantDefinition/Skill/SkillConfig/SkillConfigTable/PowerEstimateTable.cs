@@ -7,6 +7,9 @@ using System.Text;
 using HittingDetection;
 using System;
 
+// 本结构唯一的作用是主界面略览技能详情的时候提供一个大概的数值，
+// 任何已经登陆了的技能，如果在本表内没有条目，则会在技能详情画面报错。
+
 public class PowerEstimateTable
 {
 	public class Row
@@ -25,7 +28,7 @@ public class PowerEstimateTable
     {
         var SkillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);
         var AnimDic = SKillAnalyzer.AllSkillAnims(type);
-        Save(Application.persistentDataPath + "/" +KeywordSetting._SkillStaticAnalysis, SkillConfigs, AnimDic);
+        Save(Application.dataPath + "/" +KeywordSetting._SkillStaticAnalysis + ".csv", SkillConfigs, AnimDic);
     }
     
     static void Save(string filepath, List<SkillConfig> SkillConfigs, IDictionary<string, AnimationClip> AnimDic)
@@ -69,22 +72,21 @@ public class PowerEstimateTable
         foreach (var t in grid)
             sb.AppendLine(string.Join(delimiter, t));
         Debug.Log("尝试最终保存文件" + filepath);
-        var outStream = File.CreateText(filepath);
+        StreamWriter outStream = File.CreateText(filepath);
         outStream.WriteLine(sb);
         outStream.Close();
     }
     
-    public static void Load()
+    public static void LoadByResource()
     {
-        if (File.Exists(Application.persistentDataPath + "/" + KeywordSetting._SkillStaticAnalysis))
+        //暂时做如下处理
+        TextAsset CSV = Resources.Load("Account/" + KeywordSetting._SkillStaticAnalysis) as TextAsset;
+        if (CSV)
         {
-            string csv = File.ReadAllText(Application.persistentDataPath + "/" + KeywordSetting._SkillStaticAnalysis);
-            Load(csv);
+            Load(CSV.text);
         }
         else
-        {
-            Save("human");
-        }
+            Debug.Log("没能读取到技能数值参考文件。"+KeywordSetting._SkillStaticAnalysis);
     }
     
     static void Load(string text)
@@ -93,22 +95,18 @@ public class PowerEstimateTable
 		string[][] grid = CsvParser2.Parse(text);
         try
         {
+            Debug.Log(grid);
             for(int i = 1 ; i < grid.Length ; i++)
             {
-                if (grid[i].Length == 5)
+                Row row = new Row
                 {
-                    Row row = new Row
-                    {
-                        RECORD_ID = grid[i][0],
-                        REAL_NAME = grid[i][1],
-                        SPLevel = grid[i][2],
-                        EstimateDamage = grid[i][3],
-                        HP = grid[i][4]
-                    };
-                    rowList.Add(row);
-                }else{
-                    Debug.Log("行"+ (i+1) + "不录入数据");
-                }
+                    RECORD_ID = grid[i][0],
+                    REAL_NAME = grid[i][1],
+                    SPLevel = grid[i][2],
+                    EstimateDamage = grid[i][3],
+                    HP = grid[i][4]
+                };
+                rowList.Add(row);
             }
             isLoaded = true;
         }

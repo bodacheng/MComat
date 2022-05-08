@@ -1,11 +1,158 @@
-﻿using System.Collections.Generic;
+#if UNITY_EDITOR
+
 using UnityEngine;
+using UnityEditor;
+using System.Collections.Generic;
 using Skill;
 using Log;
 
+public partial class OtherTool : EditorWindow
+{
+    // 2022.5.8.
+    // 这个函数我认为已经没有什么用了，因为预计我们这个游戏加入的角色不会太多，
+    // 而且每次加入的时候会很谨慎，所以手动在定义文件加入对应条目就足够了。
+    // 假设有一天这个函数真有用的话那可以读读下面的介绍。真是太可笑了，我们竟然以为自己能驾驭的了那么多复杂的企划。
+    
+    // 以下这些是很久以前写的介绍：
+    // 由Resource文件夹更新角色配置文件信息所需要的工作应该有如下：
+    // 首先，同prefabName 允许在数据库存在复数个条目。比如外观一样的红色魔法暴龙和蓝色魔法暴龙，他们可以realName一样但recordId不同。
+    // 但首次自动生成配置文件，系统只会为新的资源添加一条对应条目，并且条目具体信息是默认的，非常空，一定需要手动设置。
+    // 如果要有一样的资源不同的条目这种情况，必定是手动添加的结果。
+    // 如果数据库里存在条目在Resource下检测不到对应资源。。。。那这样的条目会被删除。原先的ID会被新添加的资源对应的新条目补空档。
+    // 系统不会对旧条目中自己手动填写的任何具体定义做更新，只会根据资源的有无来决定条目的追加与删除与否。
+    public void UnitsConfigFileGenerate(string path, TextAsset textAsset, string[] chartypes)
+    {
+        if (textAsset != null)
+        {
+            Units.Load(textAsset);
+        }
+        var AllDeletedRecordsIDs = new List<int>();
+        var existedUnitUnitRID = new List<string>();
+        var AllNewUnitConfigsAllTypes = new List<UnitConfig>();
+        foreach (string type in chartypes)
+        {
+            List<string> currentAllRealNamesOfResourceFolder = new List<string>();
+            List<UnitConfig> unitConfigsOfOldConfigFileOFtype = Units.RowToConfigList(Units.FindAll_MONSTER_TYPE(type));
+            List<string> keySonnCharacterRealNames = new List<string>();
+            foreach (var oneConfig in unitConfigsOfOldConfigFileOFtype)
+            {
+                if (!keySonnCharacterRealNames.Contains(oneConfig.REAL_NAME))
+                {
+                    keySonnCharacterRealNames.Add(oneConfig.REAL_NAME);
+                }
+                else
+                {
+                    //什么也不做。允许。
+                }
+                existedUnitUnitRID.Add(oneConfig.RECORD_ID);
+            }
 
-public partial class MasterDataTool {
+            Object[] pretabResources = Resources.LoadAll("CharPretabs/" + type);
+            foreach (Object charPretab in pretabResources)
+            {
+                if (!currentAllRealNamesOfResourceFolder.Contains(charPretab.name))
+                    currentAllRealNamesOfResourceFolder.Add(charPretab.name);
 
+                if (keySonnCharacterRealNames.Contains(charPretab.name))
+                {
+                    continue;//不对原来就存在的资源对应条目做更改。
+                }
+
+                GameObject character = charPretab as GameObject;
+                if (character.GetComponent<OutsideDataLink>() == null)
+                {
+                    Debug.Log(type + "资源" + charPretab.name + "丢失必要组件，不是一个正常角色资源");
+                    continue;
+                }
+
+                UnitConfig unitConfig = new UnitConfig
+                {
+                    RECORD_ID = "-1",
+                    TYPE = type,
+                    REAL_NAME = charPretab.name,
+                    showNameEN = null,
+                    showNameCN = null,
+                    showNameJP = null
+                };
+
+                OutsideDataLink outsideDataLink = character.GetComponent<OutsideDataLink>();
+                switch (outsideDataLink._C.element)
+                {
+                    case Element.blueMagic:
+                        unitConfig.element = Element.blueMagic;
+                        break;
+                    case Element.redMagic:
+                        unitConfig.element = Element.redMagic;
+                        break;
+                    case Element.greenMagic:
+                        unitConfig.element = Element.greenMagic;
+                        break;
+                    case Element.darkMagic:
+                        unitConfig.element = Element.darkMagic;
+                        break;
+                    case Element.lightMagic:
+                        unitConfig.element = Element.lightMagic;
+                        break;
+                }
+                unitConfig.SPECIAL_ZOKUSEI = null; //这个只能后加把。。
+                unitConfig.BASIC_MOVEMENT_PACK = "warrior";//我感觉这个应该起名字叫做basic。每个type起码有一个叫这个的。
+                unitConfig.MoveType = MoveType.Move_normal;
+                unitConfig.RushType = RushType.RushBack;
+                unitConfig.DEFENDABLE_FLAG = true;
+                unitConfig.InstructionCH = null;
+                unitConfig.InstructionEN = null;
+                unitConfig.InstructionJP = null;
+                unitConfig.RARITY_LEVEL = 1;
+
+                AllNewUnitConfigsAllTypes.Add(unitConfig);
+            }
+
+            //旧版本有的keyname可是Resource文件夹下没有的
+            List<string> ResourceNamesShouldDeletedFromConfig = new List<string>();
+            foreach (string keyname in keySonnCharacterRealNames)
+            {
+                if (!currentAllRealNamesOfResourceFolder.Contains(keyname))
+                    ResourceNamesShouldDeletedFromConfig.Add(keyname);
+            }
+
+            foreach (string keyname in ResourceNamesShouldDeletedFromConfig)
+            {
+                List<Units.Row> toDeleteRows = Units.FindAll_TYPE_REALNAME(type, keyname);
+                foreach (Units.Row row in toDeleteRows)
+                {
+                    if (!AllDeletedRecordsIDs.Contains(int.Parse(row.RECORD_ID)))
+                    {
+                        Debug.Log("这是一个要删除的ID" + int.Parse(row.RECORD_ID));
+                        AllDeletedRecordsIDs.Add(int.Parse(row.RECORD_ID));
+                    }
+                    else
+                        Debug.Log("原monstersConfigTable似乎有重复ID，而且似乎还是因为资源缺失要删除的条目。。");
+                    Units.rowList.Remove(row);
+                }
+            }
+        }
+
+        foreach (UnitConfig characterResourceInfo in AllNewUnitConfigsAllTypes)
+        {
+            if (AllDeletedRecordsIDs.Count > 0)
+            {
+                characterResourceInfo.RECORD_ID = "new";
+                Debug.Log(characterResourceInfo.REAL_NAME + "的 ID： " + characterResourceInfo.RECORD_ID);
+                AllDeletedRecordsIDs.RemoveAt(0);
+                existedUnitUnitRID.Add(characterResourceInfo.RECORD_ID);
+            }
+            else
+            {
+                characterResourceInfo.RECORD_ID = "new";
+                existedUnitUnitRID.Add(characterResourceInfo.RECORD_ID);
+            }
+            Units.Row newRow = Units.ConfigToRow(characterResourceInfo);
+            if (newRow != null && newRow.REAL_NAME != null)
+                Units.rowList.Add(newRow);
+        }
+        Units.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : "mst_monster");
+    }
+    
     // 以下这个函数对技能表的更新机制企划如下：
     // 首先读取现有配置文件，获取现有的所有条目。然后，读取resource文件夹，会按type顺序拿现有条目和resource进行比较。
     // 配置文件允许在一个type下存在相同realname的复数个条目(同一个动画不同攻击类型)，
@@ -246,3 +393,4 @@ public partial class MasterDataTool {
         HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/HitBoxLog.csv", null, null);
     }
 }
+#endif

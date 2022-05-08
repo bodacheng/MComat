@@ -62,32 +62,4 @@ public partial class MasterDataTool
         json = "[" + json + "]";
         LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "MonsterStoresDefinationsJson.json", json);
     }
-
-    public void OutputCloudScriptPart_GetAllMonsters()
-    {
-        Units.LoadMonstersConfig();
-        string text =
-        "handlers.getMonsterTest = function (args, context) {" +
-        "var request = {" +
-        "\"CatalogVersion\": \"Monsters\"," +
-        "\"ItemGrants\": [";
-
-        List<UnitConfig> charsConfigs = Units.Dic.Values.ToList();
-        for (int i = 0; i < charsConfigs.Count; i++)
-        {
-            text +=
-            "{" +
-                "\"PlayFabId\": currentPlayerId," +
-                "\"ItemId\": \""+ charsConfigs[i].RECORD_ID + "\"" +
-            "}";
-            if (i != charsConfigs.Count - 1)
-                text += ",";
-        }
-
-        text += " ]};" +
-        "var playerStatResult = server.GrantItemsToUsers(request);" +
-        "};";
-
-        LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "GetAllMonstersCloudScriptPart.text", text);
-    }
 }

@@ -68,32 +68,4 @@ public partial class MasterDataTool
         json = "[" + json + "]";
         LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "StoneStoreDefinationsJson.json", json);
     }
-
-    public void OutputCloudScriptPart_GetAllStones()
-    {
-        SkillConfigTable.LoadAllSkillConfigs();
-        string text =
-        "handlers.getStonesTest = function (args, context) {" +
-        "var request = {" +
-        "\"CatalogVersion\": \"stoneTest2\"," +
-        "\"ItemGrants\": [";
-
-        List<SkillConfig> stoneDefinationList = SkillConfigTable.SkillConfigRefDic.Values.ToList();
-        for (int i = 0; i < stoneDefinationList.Count; i++)
-        {
-            text +=
-            "{" +
-                "\"PlayFabId\": currentPlayerId," +
-                "\"ItemId\": \"" + stoneDefinationList[i].RECORD_ID + "\"" +
-            "}";
-            if (i != stoneDefinationList.Count - 1)
-                text += ",";
-        }
-
-        text += " ]};" +
-        "var playerStatResult = server.GrantItemsToUsers(request);" +
-        "};";
-
-        LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "GetAllStonesCloudScriptPart.text", text);
-    }
 }

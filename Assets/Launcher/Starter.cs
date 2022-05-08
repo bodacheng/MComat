@@ -41,7 +41,7 @@ public class Starter : MonoBehaviour
         PlayfabSetting.Initialise();
         keywordSetting.Initialise();
         SkillConfigTable.LoadAllSkillConfigs();
-        PowerEstimateTable.Load();
+        PowerEstimateTable.LoadByResource();
         Units.LoadByResource();
         Units.RefreshDic();
     }

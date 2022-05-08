@@ -15,3 +15,8 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK
 102,slashwave,human,1,2,5,GR,,2
 53,dropkick,human,0,0.6,5,GR,,2
 55,swiftkick,human,0,0.5,5,GR,,2
+27,frank_heada,human,0,1,5,GR,,1
+182,guardforarmor,human,0,0,5,CT,,1
+167,rundrak,human,0,1,5,GM,,2
+113,shouqiang,human,0,1,5,GI,,1
+99,samk,human,0,0.6,5,GR,,1

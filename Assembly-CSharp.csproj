@@ -71,7 +71,6 @@
      <Compile Include="Assets\Singleton\TeamConfig.cs" />
      <Compile Include="Assets\ImportantDefinition\Skill\SkillConfig\SkillConfigTable\PowerEstimateTable.cs" />
      <Compile Include="Assets\PlayFab\Client\Item.cs" />
-     <Compile Include="Assets\MasterDataTool\MasterDataTool_Unit.cs" />
      <Compile Include="Assets\DummyLayerSystem\LayerDefine\TitleScreenLayer.cs" />
      <Compile Include="Assets\StagesManagement\StagesManagerGUI\SkillSetComment.cs" />
      <Compile Include="Assets\PlayFab\Server.cs" />
@@ -179,7 +178,6 @@
      <Compile Include="Assets\TouchScript\Scripts\Behaviors\Transformer.cs" />
      <Compile Include="Assets\Language\LanguageConverterManger.cs" />
      <Compile Include="Assets\JsonSupport\LocalJson.cs" />
-     <Compile Include="Assets\MasterDataTool\MasterDataTool_SK.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Manager\UIManager.cs" />
      <Compile Include="Assets\CSV2Table\Scripts\TableCodeGen.cs" />
      <Compile Include="Assets\Singleton\SkillIconsDic\FromCach.cs" />
@@ -730,6 +728,8 @@
      <Compile Include="Assets\EffectsSystem\HitBoxSubEventManger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\UI Element\UIElementSound.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
+     <Compile Include="Assets\OtherTool\OtherTool.cs" />
+     <Compile Include="Assets\OtherTool\OtherTool_part.cs" />
      <None Include="Assets\EffectsResource\shaders\Slash2.shader" />
      <None Include="Assets\EffectsResource\Prefabs\Projectiles(Speed)\Readme.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

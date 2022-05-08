@@ -28,5 +28,13 @@ public static class MyEditorWindow
         window.titleContent = new GUIContent("技能分析工具");
         window.Show();
     }
+    
+    [MenuItem("MCombat/other tool", priority = 4)]
+    static void OtherTool()
+    {
+        OtherTool window = (OtherTool)EditorWindow.GetWindow(typeof(OtherTool));
+        window.titleContent = new GUIContent("其他工具");
+        window.Show();
+    }
 }
 #endif
