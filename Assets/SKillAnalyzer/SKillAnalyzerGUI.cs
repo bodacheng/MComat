@@ -59,7 +59,6 @@ public class SKillAnalyzerGUI : EditorWindow
             PlayFabReadClient.LoginByDevice(
                 result => {
                     Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
-                    SkillConfigTable.LoadPassive();
                 },
                 fail => {
                     Debug.Log("login fail");
@@ -74,7 +73,7 @@ public class SKillAnalyzerGUI : EditorWindow
                 new ExecuteCloudScriptRequest()
                 {
                     FunctionName = "completedLevel",
-                    FunctionParameter = new { level = "6" },
+                    FunctionParameter = new { level = "3" },
                     GeneratePlayStreamEvent = true
                 },
                 (ExecuteCloudScriptResult result) => {

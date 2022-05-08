@@ -29,6 +29,10 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//var playstreamEvent = context.playStreamEvent;
+//log.debug(playstreamEvent.Entity);
+//var currentPlayerId = playstreamEvent.Entity.Id;
+
 handlers.test = function (args, context) {
 
     var stageKey = "stage_awards";
@@ -68,68 +72,105 @@ handlers.buildBasicData = function (args, context) {
     });
     
     var initialized = playerData.Data["playerInitialized"];
-    if (initialized == null) {
-        var updateUserDataResult = server.UpdateUserReadOnlyData(
-            {
-                PlayFabId: currentPlayerId,
-                Data: {
-                    "stone_box_size": 50,
-                    "last_Level_completed": 0,
-                    "playerInitialized" : true
-                }
-            }
-        );
-        var playerStatResult = server.UpdatePlayerStatistics(
-            {
-                PlayFabId: currentPlayerId,
-                Statistics: [{
-                    StatisticName: "arenapoint",
-                    Value: 1000
-                }]
-            }
-        );
-        
-        var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
-            {
-                PlayFabId :currentPlayerId,
-                Amount : 100,
-                VirtualCurrency : "DM"
-            }
-        );
-
-        var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
-            {
-                PlayFabId :currentPlayerId,
-                Amount : 1000,
-                VirtualCurrency : "GD"
-            }
-        );
-        return { result: true };
+    if (initialized !== undefined) {
+        return { result: false };
     }
-    return { result: false };
+    
+    var updateUserDataResult = server.UpdateUserReadOnlyData(
+        {
+            PlayFabId: currentPlayerId,
+            Data: {
+                "stone_box_size": args.stone_box_size,
+                "last_Level_completed": 0,
+                "playerInitialized" : true
+            }
+        }
+    );
+    
+    var playerStatResult = server.UpdatePlayerStatistics(
+        {
+            PlayFabId: currentPlayerId,
+            Statistics: [{
+                StatisticName: "arenapoint",
+                Value: args.arenapoint
+            }]
+        }
+    );
+    
+    return { result: true };
+};
+
+// 给予玩家基本财产
+handlers.grantBasicItems = function (args, context) {
+
+    var playerData = server.GetUserReadOnlyData({
+        PlayFabId: currentPlayerId,
+        Keys: ["basicItemGranted"]
+    });
+
+    var basicItemGranted = playerData.Data["basicItemGranted"];
+    if (basicItemGranted !== undefined) {
+        return { result: false };
+    }
+
+    var updateUserDataResult = server.UpdateUserReadOnlyData(
+        {
+            PlayFabId: currentPlayerId,
+            Data: {
+                "basicItemGranted" : true
+            }
+        }
+    );
+    
+    var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
+        {
+            PlayFabId :currentPlayerId,
+            Amount : args.DM,
+            VirtualCurrency : "DM"
+        }
+    );
+
+    var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
+        {
+            PlayFabId :currentPlayerId,
+            Amount : args.GD,
+            VirtualCurrency : "GD"
+        }
+    );
+
+    let itemIds = [];
+    itemIds.push(args.unit_id);
+    var grantRequest = {
+        "PlayFabId": currentPlayerId,
+        "CatalogVersion": "Monsters",
+        "ItemIds": itemIds
+    };
+
+    var GrantedItems = server.GrantItemsToUser(grantRequest);
+    return { result: true };
 };
 
 // 获取角色的唯一方式
+// completedLevel　的随即触发脚本
 handlers.grantUserUnitByProgress = function(args, context) {
-    
-    var playerData = server.GetUserReadOnlyData({
-        PlayFabId: currentPlayerId,
-        Keys: ["last_Level_completed"]
-    });
-    var lastLevelCompleted = playerData.Data["last_Level_completed"];
 
+    var playstreamEvent = context.playStreamEvent;
+    var FunctionResult = playstreamEvent.CloudScriptExecutionResult.FunctionResult;
+    
+    if (!FunctionResult.firstTime) {
+        return { result : false };
+    }
+    
+    var completedLevel = FunctionResult.progressLevel;
+    
     var inventoryRequest = {
         "PlayFabId": currentPlayerId
     };
-    var adam = null;
-
+    
     let itemIds = [];
-    switch (Number(lastLevelCompleted.Value)){
-        case 0:
-            itemIds.push("1");
-            break;
-        default:
-            break;
+    
+    if (args.level == completedLevel) {
+        itemIds.push(args.unit_id);
     }
     
     var grantRequest = {
@@ -139,19 +180,11 @@ handlers.grantUserUnitByProgress = function(args, context) {
     };
     var GrantedItems = server.GrantItemsToUser(grantRequest);
     
-    for (var i = 0; i < GrantedItems.ItemGrantResults.length; i++){
-        var GrantedItemInstance = GrantedItems.ItemGrantResults[i];
-        log.debug(GrantedItemInstance);
-        if (GrantedItemInstance.CatalogVersion === "Monsters" &&
-            GrantedItemInstance.ItemId == "1") {
-            adam = GrantedItemInstance;
-        }
-    }
-    
-    return { result : true };
+    return { GrantedItems : GrantedItems };
 }
 
 // 将被动技能给予角色
+// 是控制台内grantitem的附属执行函数
 handlers.givePassiveSkill= function (args, context) {
 
     var request = {
@@ -170,6 +203,7 @@ handlers.givePassiveSkill= function (args, context) {
     };
 
     var grantResult = server.GrantItemsToUser(grantRequest);
+    // 虽然是for循环体但其实只执行一圈
     for (let i = 0; i < grantResult.ItemGrantResults.length; i++)
     {
         var got = grantResult.ItemGrantResults[i];
@@ -188,8 +222,10 @@ handlers.givePassiveSkill= function (args, context) {
     return { result : true };
 }
 
+// 其实最好把关卡更新和报酬获取给做成两个cloudscript，前者触发后者，
+// 但目前没有找到办法把被触发的cloudscript的返回值直接传送给客户端。。。
 handlers.completedLevel = function (args, context) {
-
+    
     var playerData = server.GetUserReadOnlyData({
         PlayFabId: currentPlayerId,
         Keys: ["last_Level_completed"]
@@ -203,6 +239,7 @@ handlers.completedLevel = function (args, context) {
     
     if (level <= lastLevelCompleted.Value) {
         return {
+            firstTime: false,
             progressLevel: Number(lastLevelCompleted.Value)
         };
     } else {
@@ -211,15 +248,17 @@ handlers.completedLevel = function (args, context) {
         server.UpdateUserReadOnlyData({
             PlayFabId: currentPlayerId,
             Data: {
-                "last_Level_completed" : newLevelCompleted
+                "last_Level_completed" : newLevelCompleted // 关卡进度没有上限吗
             }
         });
         
         var TitleDataRequest = {"Keys":"stage_awards"};
         var TitleDataResponse = server.GetTitleData(TitleDataRequest);
         
+        // 原则上这部分代码在正式版不应该有机会执行
         if (!TitleDataResponse.Data.hasOwnProperty("stage_awards")){
             return {
+                firstTime: true,
                 progressLevel: newLevelCompleted
             };
         }
@@ -239,45 +278,36 @@ handlers.completedLevel = function (args, context) {
                 }
             }
         }
-        
-        if (award !== undefined) {
-            
-            if (award.hasOwnProperty("g")) {
-                g = Number(award.g);
-                
-                if (g > 0) {
-                    server.AddUserVirtualCurrency({
-                        PlayFabID: currentPlayerId,
-                        VirtualCurrency: "GD",
-                        Amount: g
-                    });
-                }
-            }
-            
-            if (award.hasOwnProperty("d")) {
-                d = Number(award.d);
-                
-                if (d > 0) {
-                    server.AddUserVirtualCurrency({
-                        PlayFabID: currentPlayerId,
-                        VirtualCurrency: "DM",
-                        Amount: d
-                    });
-                }
-            }
 
-            return {
-                progressLevel: newLevelCompleted,
-                gold: g,
-                diamond: d
-            };
+        if (award.hasOwnProperty("g")) {
+            g = Number(award.g);
+            
+            if (g > 0) {
+                server.AddUserVirtualCurrency({
+                    PlayFabID: currentPlayerId,
+                    VirtualCurrency: "GD",
+                    Amount: g
+                });
+            }
         }
         
-        log.debug("报酬信息未找到？ ...");
+        if (award.hasOwnProperty("d")) {
+            d = Number(award.d);
+            
+            if (d > 0) {
+                server.AddUserVirtualCurrency({
+                    PlayFabID: currentPlayerId,
+                    VirtualCurrency: "DM",
+                    Amount: d
+                });
+            }
+        }
+
         return {
+            firstTime: true,
             progressLevel: newLevelCompleted,
-            gold: 0,
-            diamond: 0
+            gold: g,
+            diamond: d
         };
     }
 };
