@@ -748,7 +748,6 @@
      <None Include="Assets\EffectsResource\shaders\DissolveNoise.shader" />
      <None Include="Assets\EffectsResource\shaders\Gem.shader" />
      <None Include="Assets\D_Resources\Background Bokeh VFX\README.txt" />
-     <None Include="Assets\Resources\Account\StoryChars.xml" />
      <None Include="Assets\EffectsResource\shaders\Add_DistortTexture.shader" />
      <None Include="Assets\EffectsResource\shaders\Add_Fresnel.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />

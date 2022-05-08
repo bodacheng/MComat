@@ -82,7 +82,7 @@ namespace mainMenu
                     StoneOfPlayerInfo myStone1 = Stones.Get(targets[j]);
                     StoneOfPlayerInfo myStone2 = Stones.Get(targets[j+1]);
                     
-                    if (order == 1 ? myStone1.Level > myStone2.Level : myStone1.Level < myStone2.Level)
+                    if (order == 1 ? myStone1.level > myStone2.level : myStone1.level < myStone2.level)
                     {
                         string temp = targets[j];
                         targets[j] = targets[j + 1];

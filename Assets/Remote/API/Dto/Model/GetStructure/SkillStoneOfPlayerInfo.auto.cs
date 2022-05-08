@@ -20,17 +20,17 @@ namespace dataAccess
         /// </summary>
         public string skillId { get; set; }
         
-        public int Level { get; set; }
+        public int level { get; set; }
         
         /// <summary>
         /// 使用中のプレーヤ所有モンスターID
         /// </summary>
-        public string inUsingUnitInstanceId { get; set; }
+        public string unitInstanceId { get; set; }
         
         /// <summary>
         /// 装备的位置槽。从1到9为A1到C3
         /// </summary>
-        public string inUsingSkillSlot { get; set; }
+        public string slot { get; set; }
         
         /// <summary>
         /// 是否为角色原生技能

@@ -72,7 +72,7 @@ public class Starter : MonoBehaviour
             {
                 InstanceId = (Stones.Dic.Count + 1).ToString(),
                 skillId = _pair.Value.RECORD_ID,
-                Level = 1,
+                level = 1,
                 Inherent = "false"
             };
             Stones.Add(stoneInfo);
@@ -95,10 +95,10 @@ public class Starter : MonoBehaviour
                 {
                     InstanceId = (Stones.Dic.Count + 1).ToString(),
                     skillId = INHERENTSkills.RECORD_ID,
-                    Level = 1,
+                    level = 1,
                     Inherent = "true",
-                    inUsingUnitInstanceId = i.ToString(),
-                    inUsingSkillSlot = "1"
+                    unitInstanceId = i.ToString(),
+                    slot = "1"
                 };
                 Stones.Add(stoneInfo);
             }

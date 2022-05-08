@@ -44,7 +44,7 @@ public class UnitInfo
                 id = info.id
             };
             
-            var targets = Stones.GetEquipingStones(info.id);
+            var targets = Stones.GetEquippingStones(info.id);
             var set = new SkillSet();
             var unitConfigInfo = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(info.r_id));
             if (unitConfigInfo == null)
@@ -56,7 +56,7 @@ public class UnitInfo
             var levels = new List<float>();
             for (var i = 0; i < targets.Count; i++)
             {
-                switch (targets[i].inUsingSkillSlot)
+                switch (targets[i].slot)
                 {
                     case "1":
                         set.a1 = targets[i].skillId;
@@ -86,7 +86,7 @@ public class UnitInfo
                         set.c3 = targets[i].skillId;
                         break;
                 }
-                levels.Add(targets[i].Level);
+                levels.Add(targets[i].level);
             }
             
             unitInfo.level = set.GetAerLevel(levels);
@@ -105,11 +105,11 @@ public class UnitInfo
     // 这个是从角色存档来读取
     public int GetNineSlotWholePointOfMonster(string unit_instanceID)
     {
-        var equipments = Stones.GetEquipingStones(unit_instanceID);
+        var equipments = Stones.GetEquippingStones(unit_instanceID);
         string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;
         for (var i = 0; i < equipments.Count; i++)
         {
-            switch (equipments[i].inUsingSkillSlot)
+            switch (equipments[i].slot)
             {
                 case "1":
                     A1 = equipments[i].skillId;

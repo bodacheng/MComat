@@ -78,7 +78,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
         
         confirmLevelUp.gameObject.SetActive(true);
-        int needGD = target.Level * 10 + 100;
+        int needGD = target.level * 10 + 100;
         GDCount.text = needGD.ToString();
         if (Currencies.CoinCount < needGD)
         {

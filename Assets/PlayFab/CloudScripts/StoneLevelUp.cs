@@ -68,7 +68,7 @@ public partial class CloudScript
                 if ((bool)successReturn)
                 {
                     StoneOfPlayerInfo targetInfo = Stones.Get(form.targetStoneID);
-                    targetInfo.Level = newLevel;
+                    targetInfo.level = newLevel;
                     success.Invoke(
                         form.targetStoneID,
                         new List<string>()

@@ -67,16 +67,16 @@ namespace dataAccess
 
         public static void RefreshLocalStoneParams(IDictionary<string, Tuple<string, string>> ToEditStones)
         {
-            foreach (KeyValuePair<string, Tuple<string, string>> kv in ToEditStones)
+            foreach (var kv in ToEditStones)
             {
                 if (!Dic.ContainsKey(kv.Key) || Dic[kv.Key] == null)
                 {
                     Debug.Log("更新对象技能石不存在。stoneOfPlayerID :" + kv.Key);
                     return;
                 }
-                StoneOfPlayerInfo ofPlayerInfo = Stones.Dic[kv.Key];
-                ofPlayerInfo.inUsingUnitInstanceId = kv.Value.Item1;
-                ofPlayerInfo.inUsingSkillSlot = kv.Value.Item2;
+                var stoneOfPlayerInfo = Dic[kv.Key];
+                stoneOfPlayerInfo.unitInstanceId = kv.Value.Item1;
+                stoneOfPlayerInfo.slot = kv.Value.Item2;
             }
         }
 

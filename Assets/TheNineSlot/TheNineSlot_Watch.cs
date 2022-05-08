@@ -159,7 +159,7 @@ namespace mainMenu
             
             foreach(StoneOfPlayerInfo one in stonelist)
             {
-                level.Add(one.Level);
+                level.Add(one.level);
                 skillIDs.Add(one.skillId);
             }
             

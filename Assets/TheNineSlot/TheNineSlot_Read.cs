@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using dataAccess;
 using UnityEngine.UI;
 
@@ -16,7 +15,7 @@ namespace mainMenu
                 Debug.Log("严重错误");
                 return;
             }
-            var equipments = Stones.GetEquipingStones(_AccCharInfo.id);
+            var equipments = Stones.GetEquippingStones(_AccCharInfo.id);
 
             for (var i = 1; i <= 9; i++)
             {
@@ -25,7 +24,7 @@ namespace mainMenu
 
             for (var i = 0; i < equipments.Count; i++)
             {
-                int usingPosInt = int.Parse(equipments[i].inUsingSkillSlot);
+                int usingPosInt = int.Parse(equipments[i].slot);
                 if (equipments[i].InstanceId != null)
                 {
                     

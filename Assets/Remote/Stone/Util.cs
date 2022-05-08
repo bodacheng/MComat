@@ -83,7 +83,7 @@ namespace dataAccess
                 StoneOfPlayerInfo infoModel = Get(origin[i]);
                 if (notUsing)
                 {
-                    if (MyMonsters.Get(infoModel.inUsingUnitInstanceId) != null)
+                    if (MyMonsters.Get(infoModel.unitInstanceId) != null)
                     {
                         continue;
                     }
@@ -118,12 +118,12 @@ namespace dataAccess
         }
 
         // 获取某个角色装备中的技能石列表应该是在已经读取了玩家所有技能石之后，这个过程从本地内存读就可以。我们只需要确保读取技能石，和下面这个函数总实质是一前一后。
-        public static List<StoneOfPlayerInfo> GetEquipingStones(string monsterOfPlayerId)
+        public static List<StoneOfPlayerInfo> GetEquippingStones(string instanceId)
         {
-            List<StoneOfPlayerInfo> targetStones = new List<StoneOfPlayerInfo>();
-            foreach(KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in Dic)
+            var targetStones = new List<StoneOfPlayerInfo>();
+            foreach(var keyValuePair in Dic)
             {
-                if (keyValuePair.Value.inUsingUnitInstanceId == monsterOfPlayerId)
+                if (keyValuePair.Value.unitInstanceId == instanceId)
                 {
                     targetStones.Add(keyValuePair.Value);
                 }
@@ -137,7 +137,7 @@ namespace dataAccess
             StoneOfPlayerInfo targetStone = null;
             foreach(KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in Dic)
             {
-                if (keyValuePair.Value.inUsingUnitInstanceId == monsterOfPlayerId && keyValuePair.Value.Inherent == "true")
+                if (keyValuePair.Value.unitInstanceId == monsterOfPlayerId && keyValuePair.Value.Inherent == "true")
                 {
                     targetStone = keyValuePair.Value;
                 }

@@ -8,20 +8,22 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public void UpdateStonesBaseOnSlots(UnitInfo info)
+        public void UpdateStonesBaseOnSlots(UnitInfo unitInfo)
         {
-            var equiping = Stones.GetEquipingStones(info.id);
-            // slot stoneid
+            var equipping = Stones.GetEquippingStones(unitInfo.id);
+            // slot stone_id
             IDictionary<string, string> beforeDic = new Dictionary<string, string>();
-            for (var i = 0; i < equiping.Count; i++)
+            for (var i = 0; i < equipping.Count; i++)
             {
-                StoneOfPlayerInfo stone = Stones.Get(equiping[i].InstanceId);
-                if (stone.inUsingSkillSlot != null)
+                var stone = Stones.Get(equipping[i].InstanceId);
+                if (stone.slot != null)
                 {
-                    if (!beforeDic.ContainsKey(stone.inUsingSkillSlot))
-                        beforeDic.Add(stone.inUsingSkillSlot, stone.InstanceId);
+                    if (!beforeDic.ContainsKey(stone.slot))
+                        beforeDic.Add(stone.slot, stone.InstanceId);
                     else
-                        Debug.Log("严重逻辑错误。怎么办待定");
+                    {
+                        Debug.Log("unit :"+ unitInfo.id+ " has multi stones on one slot.");
+                    }
                 }
             }
 
@@ -52,14 +54,14 @@ namespace mainMenu
 
             // k v : stoneid , equipingMonster, slot
             IDictionary<string, Tuple<string, string>> ToEditStones = new Dictionary<string, Tuple<string, string>>();
-
+            
             for (var i = 1; i < 10; i++)
             {
                 if (beforeDic[i.ToString()] != afterDic[i.ToString()])
                 {
                     if (afterDic[i.ToString()] != null)
                     {
-                        ToEditStones.Add(afterDic[i.ToString()], Tuple.Create(info.id, i.ToString()));
+                        ToEditStones.Add(afterDic[i.ToString()], Tuple.Create(unitInfo.id, i.ToString()));
                     }
                 }
             }
@@ -75,15 +77,15 @@ namespace mainMenu
                 }
             }
 
-            void Success(IDictionary<string, Tuple<string, string>> ee)
+            void Success(IDictionary<string, Tuple<string, string>> ChangedStoneDic)
             {
-                Stones.RefreshLocalStoneParams(ee);
-                ReadANineAndTwo(info);
-                SkillEditLayer skillEditLayer = SkillEditLayer.Open();
+                Stones.RefreshLocalStoneParams(ChangedStoneDic);
+                ReadANineAndTwo(unitInfo);
+                var skillEditLayer = SkillEditLayer.Open();
                 skillEditLayer.StonesBox.RestFilter();
                 SelectedRender(null);
                 SkillEditConfirmAnimation();
-
+                
                 MainSceneLog skillConfirmLog = new MainSceneLog()
                 {
                     step = ProcessesRunner.Main.currentProcess.Step,
@@ -99,26 +101,19 @@ namespace mainMenu
                 EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, SkillShowSupporter.focusingC.WholeT.position, Quaternion.identity, null);
             }
             
-            Vector3 tempV;
-            Vector3 ShowModelPosition(Vector3 screenP)//这个环节要说有什么问题的话，你那个主界面场景怎么确保总是能把射线找到地面呢。。。
-            {
-                tempV = CameraManager._camera.ViewportToWorldPoint(screenP);
-                return tempV;
-            }
-            
             void error()
             {
-                ReadANineAndTwo(info);
+                ReadANineAndTwo(unitInfo);
                 SelectedRender(null);
                 MainSceneLog skillConfirmLog = new MainSceneLog()
                 {
                     step = ProcessesRunner.Main.currentProcess.Step,
-                    description = "faile"
+                    description = "failed"
                 };
                 MainSceneLogger.Logs.Add(skillConfirmLog);
             }
-
-            CloudScript.UpdateSkillEdit(ToEditStones, () => Success(ToEditStones), error);
+            
+            CloudScript.UpdateSkillEdit(ToEditStones, (x) => Success(x), error);
         }
         
         // 下面这个貌似还是有地方用。。。先别删
@@ -136,8 +131,8 @@ namespace mainMenu
                 if (!GetUsingStonesId().Contains(formerStoneInfo.InstanceId)) //代表原来那个位置上有个技能石，但现在它在技能背包，这轮技能编辑它是要被卸载到背包里去。
                 {
                     Debug.Log("技能石头："+ formerStoneInfo.InstanceId + "被卸下");
-                    formerStoneInfo.inUsingUnitInstanceId = null;
-                    formerStoneInfo.inUsingSkillSlot = null;
+                    formerStoneInfo.unitInstanceId = null;
+                    formerStoneInfo.slot = null;
                     //yield return MySkillStones.Update(formerStoneInfo.InstanceId);
                 }else{
                     // 说明这个位置上原先的技能石现在在九宫格的其他位置上，轮到所在slot的处理时自然会更新那个技能石的信息。

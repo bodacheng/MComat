@@ -17,11 +17,11 @@ namespace mainMenu
         // 基于角色存档对技能编辑进行合法判断. 必须接受完整validation检测
         public SkillSet.SkillEditError CheckEditAfterOneStoneRemoved(string unitInstanceID, string SkillID)
         {
-            var equipped = Stones.GetEquipingStones(unitInstanceID);
+            var equipped = Stones.GetEquippingStones(unitInstanceID);
             string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;
             foreach (var t in equipped)
             {
-                switch (t.inUsingSkillSlot)
+                switch (t.slot)
                 {
                     case "1":
                         A1 = (t.skillId != SkillID) ? t.skillId : "-1";

@@ -3,23 +3,25 @@ using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
 using System;
+using dataAccess;
+using Newtonsoft.Json;
 
 public partial class CloudScript
 {
     // k v : stoneid , equipingMonster, slot
-    public static void UpdateSkillEdit(IDictionary<string, Tuple<string, string>> ToEditStones, Action success, Action fail)
+    public static void UpdateSkillEdit(IDictionary<string, Tuple<string, string>> ToEditStones, Action<IDictionary<string, Tuple<string, string>>> success, Action fail)
     {
-        List<PlayFab.ServerModels.UpdateUserInventoryItemDataRequest> Items = new List<PlayFab.ServerModels.UpdateUserInventoryItemDataRequest>();
-        foreach (KeyValuePair<string, Tuple<string, string>> keyValuePair in ToEditStones)
+        var Items = new List<PlayFab.ServerModels.UpdateUserInventoryItemDataRequest>();
+        foreach (var pair in ToEditStones)
         {
             var itemUpdate = new PlayFab.ServerModels.UpdateUserInventoryItemDataRequest
             {
                 //PlayFabId = AccountSet._AccInfo.playerID,
-                ItemInstanceId = keyValuePair.Key,
+                ItemInstanceId = pair.Key,
                 Data = new Dictionary<string, string>()
                 {
-                    { "monsterid", keyValuePair.Value.Item1 },
-                     { "slot", keyValuePair.Value.Item2 }
+                    { "unitInstanceId", string.IsNullOrEmpty(pair.Value.Item1) ? null : pair.Value.Item1  },
+                    { "slot", string.IsNullOrEmpty(pair.Value.Item2) ? null : pair.Value.Item2 }
                 },
             };
             Items.Add(itemUpdate);
@@ -33,11 +35,25 @@ public partial class CloudScript
                 GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
             },
         (ExecuteCloudScriptResult result) => {
-            PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-            object messageValue;
-            jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
-            Debug.Log(messageValue);
-            success.Invoke();
+            var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+            jsonResult.TryGetValue("changedStone", out var changedStone); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
+            
+            var ChangedDic = new Dictionary<string, Tuple<string, string>>();
+            var json = JsonConvert.SerializeObject(changedStone);
+            var changedStoneList = JsonConvert.DeserializeObject<List<StoneOfPlayerInfo>>(
+                json,
+                new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    MissingMemberHandling = MissingMemberHandling.Ignore
+                });
+            
+            foreach (var stone in changedStoneList)
+            {
+                Debug.Log(stone.InstanceId + " monster : "+ stone.unitInstanceId + " ,"+ " slot:" + stone.slot);
+                ChangedDic.Add(stone.InstanceId, new Tuple<string, string>(stone.unitInstanceId, stone.slot));
+            }
+            success.Invoke(ChangedDic);
         },
         error => {
             Debug.Log(error.Error);

@@ -7,7 +7,7 @@ public partial class NineForShow : MonoBehaviour
 {
     public void ShowStones_Acc(string MonsterOfPlayerID)
     {
-        List<StoneOfPlayerInfo> skillStoneOfPlayerInfoModels = Stones.GetEquipingStones(MonsterOfPlayerID);
+        List<StoneOfPlayerInfo> skillStoneOfPlayerInfoModels = Stones.GetEquippingStones(MonsterOfPlayerID);
         
         string A1SkillID = null, A2SkillID = null, A3SkillID = null;
         string B1SkillID = null, B2SkillID = null, B3SkillID = null;
@@ -15,7 +15,7 @@ public partial class NineForShow : MonoBehaviour
         
         for (int i = 0; i < skillStoneOfPlayerInfoModels.Count; i++)
         {
-            switch(skillStoneOfPlayerInfoModels[i].inUsingSkillSlot)
+            switch(skillStoneOfPlayerInfoModels[i].slot)
             {
                 case "1":
                     A1SkillID = skillStoneOfPlayerInfoModels[i].skillId;

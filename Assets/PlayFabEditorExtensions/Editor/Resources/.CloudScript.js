@@ -145,8 +145,9 @@ handlers.grantBasicItems = function (args, context) {
         "CatalogVersion": "Monsters",
         "ItemIds": itemIds
     };
-
+    
     var GrantedItems = server.GrantItemsToUser(grantRequest);
+    
     return { result: true };
 };
 
@@ -211,9 +212,10 @@ handlers.givePassiveSkill= function (args, context) {
             "PlayFabId": currentPlayerId,
             "ItemInstanceId": got.ItemInstanceId,
             "Data":  {
-                "monsterid": unit_InstanceId,
+                "unitInstanceId": unit_InstanceId,
                 "slot": 1,
-                "level": 1
+                "level": 1,
+                "born" : true
             }
         };
         server.UpdateUserInventoryItemCustomData(request);
@@ -366,22 +368,58 @@ handlers.claimAllPresentMails = function (args, context) {
     };
 }
 
+function between(x, min, max) {
+    return x >= min && x <= max;
+}
+
 handlers.skillEdit = function (args, context) {
-    let log = [];
-    for (let i = 0; i < args.resources.length; i++) {
-        var item = args.resources[i];
+
+    var inventoryRequest = {
+        "PlayFabId": currentPlayerId
+    };
+    var items = server.GetUserInventory(inventoryRequest);
+    
+    let memo = [];
+
+    var legal = true;
+    
+    // 检查是否有被动技能被卸载
+    for (let i = 0; i < args.inputValue.length; i++) {
+        var requestItem = args.inputValue[i];
+        for (var y = 0; y < items.Inventory.length; y++) {
+            var item = items.Inventory[y];
+            if (item.CatalogVersion === "stoneTest2" && requestItem.ItemInstanceId === item.ItemInstanceId)
+            {
+                if (item.CustomData.hasOwnProperty("born"))
+                {
+                    if (Boolean(item.CustomData.born) == true) {
+                        legal = between(Number(requestItem.Data.slot), 1, 9);
+                    }
+                    if (legal == false) {
+                        return { changedStone: memo };
+                    }
+                }
+            }
+        }
+    }
+    
+    for (let i = 0; i < args.inputValue.length; i++) {
+        var requestItem = args.inputValue[i];
         var request = {
             "PlayFabId": currentPlayerId,
-            "ItemInstanceId": item.ItemInstanceId,
-            "Data": item.Data
+            "ItemInstanceId": requestItem.ItemInstanceId,
+            "Data": requestItem.Data
         };
-        server.UpdateUserInventoryItemCustomData(request);
-        
-        log.push({
-            "ItemInstanceId": item.ItemInstanceId
-        });
+        var result = server.UpdateUserInventoryItemCustomData(request);
+        memo.push(
+            {
+                "InstanceId": requestItem.ItemInstanceId, 
+                "slot": requestItem.Data.slot,
+                "unitInstanceId":requestItem.Data.unitInstanceId
+            }
+        );
     }
-    return { messageValue: log };
+    return { changedStone: memo };
 }
 
 handlers.updateStone = function (args, context) {
@@ -590,7 +628,7 @@ handlers.Gotcha = function (args, context) {
             "PlayFabId": currentPlayerId,
             "ItemInstanceId": got.ItemInstanceId,
             "Data":  {
-                "monsterid": null,
+                "unitInstanceId": null,
                 "slot": -1,
                 "level": 1
             }
@@ -628,7 +666,7 @@ handlers.GotchaX9 = function (args, context) {
             "PlayFabId": currentPlayerId,
             "ItemInstanceId": got.ItemInstanceId,
             "Data":  {
-                "monsterid": null,
+                "unitInstanceId": null,
                 "slot": -1,
                 "level": 1
             }
