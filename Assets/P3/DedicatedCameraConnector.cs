@@ -134,6 +134,9 @@ namespace Cocone.ProjectP3
 
             foreach (var render in renderers)
             {
+                if (render == null)
+                    continue; 
+
                 if (targetBounds == tempBoundary)
                 {
                     targetBounds = render.bounds;

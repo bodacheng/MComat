@@ -215,6 +215,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -223,9 +225,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 1
     aniso: 16
-    mipBias: -100
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -246,9 +248,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
@@ -1620,6 +1625,71 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      3: 21300110
+      0: 21300104
+      y: 21300100
+      l: 21300074
+      P: 21300030
+      Y: 21300048
+      H: 21300014
+      L: 21300022
+      c: 21300056
+      w: 21300096
+      b: 21300054
+      S: 21300036
+      5: 21300114
+      question: 21300126
+      g: 21300064
+      6: 21300116
+      n: 21300078
+      r: 21300086
+      z: 21300102
+      x: 21300098
+      R: 21300034
+      D: 21300006
+      j: 21300070
+      Z: 21300050
+      K: 21300020
+      d: 21300058
+      M: 21300024
+      F: 21300010
+      W: 21300044
+      h: 21300066
+      a: 21300052
+      i: 21300068
+      o: 21300080
+      8: 21300120
+      v: 21300094
+      C: 21300004
+      Q: 21300032
+      2: 21300108
+      J: 21300018
+      9: 21300122
+      4: 21300112
+      G: 21300012
+      E: 21300008
+      X: 21300046
+      B: 21300002
+      U: 21300040
+      I: 21300016
+      '!': 21300124
+      O: 21300028
+      k: 21300072
+      T: 21300038
+      s: 21300088
+      A: 21300000
+      1: 21300106
+      7: 21300118
+      V: 21300042
+      f: 21300062
+      q: 21300084
+      u: 21300092
+      p: 21300082
+      e: 21300060
+      N: 21300026
+      m: 21300076
+      t: 21300090
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
