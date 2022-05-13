@@ -2,6 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using PlayFab;
 using PlayFab.ClientModels;
 
@@ -64,24 +65,45 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
-            PlayFabClientAPI.ExecuteCloudScript(
-                new ExecuteCloudScriptRequest()
+            var request = new UpdatePlayerStatisticsRequest();
+            request.Statistics = new List<StatisticUpdate>()
+            {
+                new StatisticUpdate
                 {
-                    FunctionName = "completedLevel",
-                    FunctionParameter = new { level = "3" },
-                    GeneratePlayStreamEvent = true
-                },
-                (ExecuteCloudScriptResult result) => {
-                    
-                    var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                    var level = jsonResult.ContainsKey("progressLevel") ? jsonResult["progressLevel"] : 0;
-                    var reward_GD = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
-                    var reward_DIA = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
-                },
-                error => {
-                    Debug.Log(error.Error);
+                    StatisticName = "arenapoint",
+                    Value = 2000
                 }
-            );            
+            };
+            
+            PlayFabClientAPI.UpdatePlayerStatistics(
+                request,
+                (x) =>
+                {
+                    Debug.Log(x);
+                }, (y) =>
+                {
+                    Debug.Log(y);
+                }
+                );
+            
+            // PlayFabClientAPI.ExecuteCloudScript(
+            //     new ExecuteCloudScriptRequest()
+            //     {
+            //         FunctionName = "completedLevel",
+            //         FunctionParameter = new { level = "3" },
+            //         GeneratePlayStreamEvent = true
+            //     },
+            //     (ExecuteCloudScriptResult result) => {
+            //         
+            //         var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+            //         var level = jsonResult.ContainsKey("progressLevel") ? jsonResult["progressLevel"] : 0;
+            //         var reward_GD = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
+            //         var reward_DIA = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
+            //     },
+            //     error => {
+            //         Debug.Log(error.Error);
+            //     }
+            // );            
             
             
             //PlayFabReadClient.GetPresentGetCatalogItems();

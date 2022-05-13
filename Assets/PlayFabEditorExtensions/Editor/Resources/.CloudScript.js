@@ -90,10 +90,16 @@ handlers.buildBasicData = function (args, context) {
     var playerStatResult = server.UpdatePlayerStatistics(
         {
             PlayFabId: currentPlayerId,
-            Statistics: [{
-                StatisticName: "arenapoint",
-                Value: args.arenapoint
-            }]
+            Statistics: [
+                {
+                    StatisticName: "arenapoint",
+                    Value: args.arenapoint
+                },
+                {
+                    StatisticName: "rank",
+                    Value: 0
+                }
+            ]
         }
     );
     
@@ -560,6 +566,51 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     return { teamInfos };
 }
 
+handlers.RankUp = function (args, context) {
+
+    var playstreamEvent = context.playStreamEvent;
+    let arenaPoint = Number(playstreamEvent.StatisticValue);
+
+    let shouldRank = 0;
+    
+    if (arenaPoint >= Number(args.goldPoint)) {
+        shouldRank = 3;
+    }
+    else if (arenaPoint >= Number(args.silverPoint)) {
+        shouldRank = 2;
+    }
+    else if (arenaPoint >= Number(args.bronzePoint)) {
+        shouldRank = 1;
+    }
+    
+    var getRequest = {
+        PlayFabId: currentPlayerId
+    };
+    
+    var playerStats = server.GetPlayerStatistics(getRequest).Statistics;
+    
+    for (i = 0; i < playerStats.length; ++i) {
+        if (playerStats[i].StatisticName === "rank") {
+            
+            if (Number(playerStats[i].Value) >= shouldRank){
+                return { "rank" : playerStats[i].Value };
+            }else{
+                var playerStatResult = server.UpdatePlayerStatistics({
+                    PlayFabId: currentPlayerId,
+                    Statistics: [{
+                        StatisticName: "rank",
+                        Value: shouldRank
+                    }]
+                });
+
+                return { "rank" : shouldRank };
+            }
+        }
+    }
+    return { "rank" : -1 };
+}
+
+
 // 竞技场分数+1
 // 这个绝不应该是让客户端主动运行而是应该由服务端建立在胜负基准上运行。
 handlers.ArenaPointUp = function (args, context) {
@@ -582,7 +633,7 @@ handlers.ArenaPointUp = function (args, context) {
             Value: point
         }]
     });
-
+    
     var PlayerPosition;
     
     var resultleaderboard = server.GetLeaderboardAroundUser(

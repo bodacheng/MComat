@@ -63,7 +63,7 @@ public partial class StagesManager : EditorWindow
             case 9:
             return focusingUnitInfo.set.c3;
             default:
-                return null;
+            return null;
         }
     }
 }
