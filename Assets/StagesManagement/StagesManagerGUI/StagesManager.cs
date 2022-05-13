@@ -1,5 +1,6 @@
 ﻿#if UNITY_EDITOR
 using System.Collections.Generic;
+using dataAccess;
 using UnityEngine;
 using UnityEditor;
 using Skill;
@@ -20,6 +21,8 @@ public partial class StagesManager : EditorWindow
     {
         if (!Initialized)
         {
+            Units.LoadMonstersConfig();
+            SkillConfigTable.LoadAllSkillConfigs();
             target = new FightMembers();
             UIparamIni();
             Initialized = true;
@@ -70,7 +73,7 @@ public partial class StagesManager : EditorWindow
             if (string.IsNullOrEmpty(focusingType))
                 return;
             var INHERENTSkills = SkillConfigTable.GetPassiveSkills(focusingUnitInfo.r_id);
-            focusingUnitInfo.set = SkillSet.RandomSkillSet(focusingType, INHERENTSkills.RECORD_ID, 1, false);
+            focusingUnitInfo.set = SkillSet.RandomSkillSet(focusingType,  INHERENTSkills?.RECORD_ID, 1, false);
         }
                 
         // 技能组评价

@@ -88,22 +88,25 @@ public class Starter : MonoBehaviour
                 r_id = i.ToString()
             };
             
-            var INHERENTSkills = SkillConfigTable.GetPassiveSkills(unitConfig.RECORD_ID);
-            if (INHERENTSkills.RECORD_ID != null)
-            {
-                var stoneInfo = new StoneOfPlayerInfo
-                {
-                    InstanceId = (Stones.Dic.Count + 1).ToString(),
-                    skillId = INHERENTSkills.RECORD_ID,
-                    level = 1,
-                    Inherent = "true",
-                    unitInstanceId = i.ToString(),
-                    slot = "1"
-                };
-                Stones.Add(stoneInfo);
-            }
             Debug.Log("尝试将角色" + unitConfig.REAL_NAME + "加入存档");
             DicAdd<string, UnitInfo>.Add(MyMonsters.Dic, unitInfo.id, unitInfo);
+            
+            var INHERENTSkills = SkillConfigTable.GetPassiveSkills(unitConfig.RECORD_ID);
+            if (INHERENTSkills == null || INHERENTSkills.RECORD_ID == null)
+            {
+                continue;
+            }
+            
+            var stoneInfo = new StoneOfPlayerInfo
+            {
+                InstanceId = (Stones.Dic.Count + 1).ToString(),
+                skillId = INHERENTSkills.RECORD_ID,
+                level = 1,
+                Inherent = "true",
+                unitInstanceId = i.ToString(),
+                slot = "1"
+            };
+            Stones.Add(stoneInfo);
             i++;
         }
         SceneManager.LoadScene(1);

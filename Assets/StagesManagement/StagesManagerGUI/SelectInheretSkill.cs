@@ -18,10 +18,10 @@ public partial class StagesManager : EditorWindow {
             {"0","空"}
         };
         InhereSks = SkillConfigTable.GetPassiveSkills(CharResourceID);
-        if (InhereSks.RECORD_ID != null)
-        {
-            SelectInhere.Add(InhereSks.RECORD_ID, InhereSks.REAL_NAME);
-        }
+        if (InhereSks == null || InhereSks.RECORD_ID == null)
+            return;
+        
+        SelectInhere.Add(InhereSks.RECORD_ID, InhereSks.REAL_NAME);
         selectedInhereskill = EditorGUILayout.Popup("原生技能：", selectedInhereskill, SelectInhere.Values.ToArray());
         SetSkillId(SelectInhere.ElementAt(selectedInhereskill).Key);
     }

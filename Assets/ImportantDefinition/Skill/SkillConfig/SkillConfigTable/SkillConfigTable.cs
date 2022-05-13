@@ -14,6 +14,9 @@ public partial class SkillConfigTable
 
     public static SkillConfig GetPassiveSkills(string unit_recordId)
     {
+        if (unit_recordId == null)
+            return null;
+        
         string skillid;
         passiveSkills.TryGetValue(unit_recordId, out skillid);
         return GetSkillConfig(skillid);
