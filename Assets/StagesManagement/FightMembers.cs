@@ -172,7 +172,7 @@ public class FightMembers
         return target;
     }
     
-    public void SaveFightAsJson(string path, MultiDict<int, int, UnitInfo> EnemySets)
+    public void SaveFightAsJson(MultiDict<int, int, UnitInfo> EnemySets, string path, string rootPath = null)
     {
         if (EnemySets == null)
             return;
@@ -182,7 +182,7 @@ public class FightMembers
         try
         {
             string json = JsonConvert.SerializeObject(EnemySets._SerializableSets);
-            LocalJson.SaveInfoToJsonFile_dataPath(null, path, json);
+            LocalJson.SaveInfoToJsonFile_dataPath(rootPath, path, json);
         }
         catch (Exception e)
         {

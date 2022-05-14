@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.Playables;
 using dataAccess;
+using System.IO;
 
 public class FightInfo : ScriptableObject
 {
@@ -34,6 +35,7 @@ public class FightInfo : ScriptableObject
     
     [SerializeField]
     public PlayableAsset beforefightstory;
+    
     [SerializeField]
     public TextAsset Script;
     [SerializeField]
@@ -67,6 +69,25 @@ public class FightInfo : ScriptableObject
         var exampleAsset = CreateInstance<FightInfo> ();
         AssetDatabase.CreateAsset (exampleAsset, "Assets/StagesManagement/ExampleStageAsset.asset");
         AssetDatabase.Refresh();
+    }
+    
+    public static FightInfo CreateFightInfoAsset(TextAsset file, string path, string fileName)
+    {
+        var fightInfo = CreateInstance<FightInfo>();
+        fightInfo.eventType = FightEventType.Quest;
+        if (!Directory.Exists(path))
+        {
+            //if it doesn't, create it
+            Directory.CreateDirectory(path);
+        }
+
+        fightInfo.Team1Mode = TeamMode.rotation;
+        fightInfo.Team2Mode = TeamMode.rotation;
+        
+        fightInfo.Script = file;
+        AssetDatabase.CreateAsset(fightInfo, path + "/" + fileName + ".asset");
+        AssetDatabase.Refresh();
+        return fightInfo;
     }
     #endif
     

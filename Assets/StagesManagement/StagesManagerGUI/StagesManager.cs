@@ -1,9 +1,11 @@
 ﻿#if UNITY_EDITOR
 using System.Collections.Generic;
-using dataAccess;
+using Json;
 using UnityEngine;
 using UnityEditor;
 using Skill;
+using System.IO;
+
 
 // 后排敌人——〉角色ID，
 // localID = 0，脚本ID，等级 前排中央敌人——〉角色ID，localID = 1，脚本ID，等级 前排左敌人——〉角色ID，localID = 2，脚本ID，等级 前排右敌人——〉角色ID，localID = 3，脚本ID，等级
@@ -12,20 +14,26 @@ public partial class StagesManager : EditorWindow
     public TextAsset FightScript;//存档文件。是我们拖给这个位置的一个东西，但如果说这个文件不存在，那应该要自动新建并指定到这个位置上
     FightMembers target;
     
-    string pathAndNameForLocalSave = "Resources/stageTemp/";
+    string pathAndNameForLocalSave = "ArcadeStages";
+    private int stageNo = 1;
+    
     IDictionary<string, string> UnitIDsAndNames;
     UnitInfo focusingUnitInfo;
-    string focusingType;
+    string focusingType = "human";
     
     void OnGUI()
     {
         if (!Initialized)
         {
-            Units.LoadMonstersConfig();
-            SkillConfigTable.LoadAllSkillConfigs();
             target = new FightMembers();
             UIparamIni();
             Initialized = true;
+        }
+        
+        if (GUILayout.Button("刷新数据定义", AddDeleteMember))
+        {
+            Units.LoadMonstersConfig();
+            SkillConfigTable.LoadAllSkillConfigs();
         }
         
         GUILayout.Space(10);
@@ -116,6 +124,10 @@ public partial class StagesManager : EditorWindow
         BasicStates(focusingUnitInfo);
         
         pathAndNameForLocalSave = EditorGUILayout.TextField("local Path For Saving", pathAndNameForLocalSave);
+        GUILayout.Space(10);
+
+        stageNo = EditorGUILayout.IntField("Stage No.", stageNo);
+        
         if (GUILayout.Button("保存战斗关卡至本地文档json", ButtonStyle_save))
         {
             for (int i = 0; i < target.EnemySets.GetValues().Count; i++)
@@ -127,8 +139,26 @@ public partial class StagesManager : EditorWindow
                 }
                 target.EnemySets.GetValues()[i].set.SortNineAndTwo(target.EnemySets.GetValues()[i].level);
             }
-            target.SaveFightAsJson(pathAndNameForLocalSave, target.EnemySets);
+            target.SaveFightAsJson(target.EnemySets, stageNo + ".json", pathAndNameForLocalSave + "/"+ stageNo);
         }
+
+        if (GUILayout.Button("依据各个关卡json建立scriptobject", ButtonStyle_save))
+        {
+            for (int i = 0; i < 100; i ++)
+            {
+                if (Directory.Exists("Assets/"+ pathAndNameForLocalSave + "/"+ i))
+                {
+                    var scriptObject = LocalJson.LoadFile("Assets/"+ pathAndNameForLocalSave + "/" + i + "/" + i +".asset");
+                    var file = LocalJson.LoadFile("Assets/"+pathAndNameForLocalSave + "/" + i + "/" + i+".json");
+                    if (file)
+                    {
+                        FightInfo.CreateFightInfoAsset((TextAsset)file, "Assets/"+ pathAndNameForLocalSave + "/"+ i, i.ToString());
+                    }
+                }
+            }
+            AssetDatabase.Refresh();
+        }
+        
         //if (GUILayout.Button("保存战斗关卡至本地文档xml",ButtonStyle_save))
         //{
         //    _stagesManager.SaveFightAsXml(pathAndNameForLocalSave,_stagesManager.EditoringFight);

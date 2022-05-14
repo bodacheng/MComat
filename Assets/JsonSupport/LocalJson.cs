@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 using System;
+using UnityEditor;
 
 namespace Json
 {
@@ -72,6 +73,12 @@ namespace Json
             {
                 Debug.Log(e);
             }
+        }
+        
+        public static UnityEngine.Object LoadFile(string path)
+        {
+            if (string.IsNullOrEmpty(path)) return null;
+            return AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path);
         }
         
         public static void DeleteAllUnderFolder(string filePath)

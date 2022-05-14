@@ -15,7 +15,7 @@ public partial class StagesManager : EditorWindow
             {
                 var target = FightMembers.RandomFight();
                 target.SetEnemyLevel(Int32.Parse(row.LEVEL));
-                target.SaveFightAsJson(pathAndNameForLocalSave + "/"+ row.NICK_NAME + ".json", target.EnemySets);
+                target.SaveFightAsJson(target.EnemySets, pathAndNameForLocalSave + "/"+ row.NICK_NAME + ".json");
             }
         }
     }
