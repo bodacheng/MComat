@@ -867,6 +867,9 @@
      <Reference Include="Unity.RenderPipelines.Core.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
      </Reference>
+     <Reference Include="Unity.Services.CCD.Management">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Services.CCD.Management.dll</HintPath>
+     </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="PlayFabSDKEditor.csproj">
