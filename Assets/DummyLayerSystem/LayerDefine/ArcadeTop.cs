@@ -7,6 +7,8 @@ using System;
 using DG.Tweening;
 using DummyLayerSystem;
 using Cocone.ProjectP3;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public partial class ArcadeTop : UILayer
 {
@@ -22,11 +24,10 @@ public partial class ArcadeTop : UILayer
     int StageCount; 
     public readonly IDictionary<int, StageInfo> ArcadeStages = new Dictionary<int, StageInfo>();
     
-    public static ArcadeTop Open()
+    public static ArcadeTop Open(Action afterAction)
     {
         var returnValue = UILayerLoader.Load(PreScene.target.T,"ArcadeTop") as ArcadeTop;
-        returnValue.INIArcadeStageButtons();
-        returnValue.INIPagingSystem(2);
+        returnValue.INIArcadeStageButtons(afterAction);
         return returnValue;
     }
     
@@ -43,9 +44,14 @@ public partial class ArcadeTop : UILayer
         _NineForShow.ShowStones_DataInfo(heroIcon.unitInfo);
     }
 
-    void INIArcadeStageButtons()
+    async void INIArcadeStageButtons(Action afterAction)
     {
-        var stageResources = Resources.LoadAll("StageConfigFiles", typeof(FightInfo)).ToList();
+        //var stageResources = Resources.LoadAll("StageConfigFiles", typeof(FightInfo)).ToList();
+        var handle = Addressables.LoadAssetsAsync<FightInfo>("quest", null);
+        await handle.Task;
+        var stageResources = handle.Task.Result.ToList();
+        Addressables.Release(handle);
+        
         foreach (var _object in stageResources)
         {
             var one = (FightInfo)_object;
@@ -96,6 +102,10 @@ public partial class ArcadeTop : UILayer
             }
         }
         StageCount = ArcadeStages.Count;
+        
+        INIPagingSystem(2);
+        
+        afterAction.Invoke();
     }
     
     List<HeroIcon> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)

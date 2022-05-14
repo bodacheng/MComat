@@ -41,9 +41,9 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Editor/ReferenceAnalyzer.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Editor/NoSuchEditor.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Editor/Service/ServiceEditor.cs" />
+     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Editor/ReferenceAnalyzer.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Editor/GameObjectTypeLogging.cs" />
      <None Include="Assets/NoSuchStudio/NoSuchStudioCommon/Editor/NoSuchStudio-Common-Editor.asmdef" />
      <Reference Include="UnityEngine">

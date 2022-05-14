@@ -41,15 +41,15 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogItem.cs" />
+     <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogRecycledListView.cs" />
+     <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogLogcatListener.cs" />
      <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogIndexList.cs" />
      <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugsOnScrollListener.cs" />
-     <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogItem.cs" />
      <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogPopup.cs" />
      <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogConsole.cs" />
-     <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogRecycledListView.cs" />
      <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogEntry.cs" />
      <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/ConsoleMethodAttribute.cs" />
-     <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogLogcatListener.cs" />
      <Compile Include="Assets/Plugins/IngameDebugConsole/Scripts/DebugLogManager.cs" />
      <None Include="Assets/Plugins/UniTask/package.json" />
      <None Include="Assets/Plugins/UniRx/ReadMe.txt" />
@@ -717,6 +717,12 @@
      <Reference Include="UnityEngine.Purchasing">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
      </Reference>
+     <Reference Include="UnityEditor.CacheServer">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.CacheServer.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Addressables">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Addressables.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.TextMeshPro.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
      </Reference>
@@ -741,11 +747,11 @@
      <Reference Include="Analytics">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Analytics.dll</HintPath>
      </Reference>
-     <Reference Include="UnityEngine.UI">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-     </Reference>
      <Reference Include="UnityEngine.SpatialTracking">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEngine.UI">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Analytics.DataPrivacy">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
@@ -765,17 +771,20 @@
      <Reference Include="UnityEngine.Monetization">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
      </Reference>
+     <Reference Include="Unity.Addressables.Editor">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Addressables.Editor.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.2D.Tilemap.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.RenderPipelines.Universal.Runtime">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
      </Reference>
-     <Reference Include="PPv2URPConverters">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/PPv2URPConverters.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.VisualStudio.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="PPv2URPConverters">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/PPv2URPConverters.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Timeline">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
@@ -791,6 +800,9 @@
      </Reference>
      <Reference Include="Unity.RenderPipelines.Core.Runtime">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ResourceManager">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.ResourceManager.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Postprocessing.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
@@ -837,8 +849,14 @@
      <Reference Include="UnityEditor.XR.LegacyInputHelpers">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
      </Reference>
+     <Reference Include="Unity.ScriptableBuildPipeline">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.dll</HintPath>
+     </Reference>
      <Reference Include="UnityEditor.Purchasing">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ScriptableBuildPipeline.Editor">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
      </Reference>
      <Reference Include="UnityEditor.SpatialTracking">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>

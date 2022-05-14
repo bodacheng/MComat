@@ -42,28 +42,28 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/Events.cs" />
-     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/ExceptionExts.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/Service/IServiceComponent.cs" />
-     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/UIExts.cs" />
-     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/UnityObjectLoggerExt.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/EditorUtilities.cs" />
-     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/TMPLinkHandler.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/ToStringExtReflection.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/InputTouchVisualizer.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/CollectionExts.cs" />
-     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/HSVColor.cs" />
-     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/Singleton.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/Service/Service.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/Scope.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/TransformExt.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/ToStringExt.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/MonoBehaviourRunDelayedExt.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/Helpers.cs" />
+     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/NoSuchScriptableObject.cs" />
+     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/Exceptions.cs" />
+     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/ExceptionExts.cs" />
+     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/UIExts.cs" />
+     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/UnityObjectLoggerExt.cs" />
+     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/TMPLinkHandler.cs" />
+     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/HSVColor.cs" />
+     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/Singleton.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/CircularArray.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/SingletonChildEnabler.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/CanvasTouchVisualizer.cs" />
-     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/NoSuchScriptableObject.cs" />
-     <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/Exceptions.cs" />
      <Compile Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/NoSuchMonoBehaviour.cs" />
      <None Include="Assets/NoSuchStudio/NoSuchStudioCommon/Runtime/NoSuchStudio-Common.asmdef" />
      <Reference Include="UnityEngine">

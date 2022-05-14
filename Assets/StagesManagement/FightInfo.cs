@@ -63,14 +63,6 @@ public class FightInfo : ScriptableObject
     }
     
     #if UNITY_EDITOR
-    [MenuItem ("Stage/Create StageScriptEditor")]
-    static void CreateExampleAsset()
-    {
-        var exampleAsset = CreateInstance<FightInfo> ();
-        AssetDatabase.CreateAsset (exampleAsset, "Assets/StagesManagement/ExampleStageAsset.asset");
-        AssetDatabase.Refresh();
-    }
-    
     public static FightInfo CreateFightInfoAsset(TextAsset file, string path, string fileName)
     {
         var fightInfo = CreateInstance<FightInfo>();
