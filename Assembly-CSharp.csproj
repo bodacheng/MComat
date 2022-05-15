@@ -151,7 +151,7 @@
      <Compile Include="Assets/POS_Sys/Child_Label.cs" />
      <Compile Include="Assets/Structure/SingleAssignmentDisposableCleaner.cs" />
      <Compile Include="Assets/MasterDataTool/Skill_PF.cs" />
-     <Compile Include="Assets/ResourceLoading/UnitCreator/UnitCreator.cs" />
+     <Compile Include="Assets/ResourceLoading/UnitCreator.cs" />
      <Compile Include="Assets/JsonSupport/UnityLitJson/Unity/UnityTypeBindings.cs" />
      <Compile Include="Assets/RPGTALK/Scripts/Helpers/RPGTalkHelper.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Gestures/TapGesture.cs" />
@@ -190,7 +190,6 @@
      <Compile Include="Assets/Setting/KeywordSetting.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Utils/ObjectPool.cs" />
      <Compile Include="Assets/Singleton/SkillIconsDic/SkillIconsDic.cs" />
-     <Compile Include="Assets/ResourceLoading/UnitCreator/UnitCreator_Resource.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Debugging/Filters/PointerLogFilter.cs" />
      <Compile Include="Assets/TheNineSlot/Validation/SVCenter.cs" />
      <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/Gacha/GotchaResult.cs" />
@@ -342,7 +341,6 @@
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Input/GamepadChecker.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Behaviors/Cursors/UI/TextureSwitch.cs" />
      <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUI.cs" />
-     <Compile Include="Assets/ResourceLoading/UnitCreator/UnitCreator_StreamingAssets.cs" />
      <Compile Include="Assets/JsonSupport/UnityLitJson/JsonAttribute.cs" />
      <Compile Include="Assets/CachLogic/ResourceDownLoad.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Pointers/TouchPointer.cs" />
@@ -401,7 +399,6 @@
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/UnitOptionLayer.cs" />
      <Compile Include="Assets/AppleAuthSample/GameMenuHandler.cs" />
      <Compile Include="Assets/Behaviour/GUI/BehaviorRunnerGUI.cs" />
-     <Compile Include="Assets/ResourceLoading/UnitCreator/UnitCreator_Cach.cs" />
      <Compile Include="Assets/Arena/ArenaLayer.cs" />
      <Compile Include="Assets/DynamicBone/Scripts/DynamicBonePlaneCollider.cs" />
      <Compile Include="Assets/TheNineSlot/MiniNineSlots/NineForShow.cs" />
@@ -893,7 +890,7 @@
      <None Include="Assets/Resources/TestSaveData/MyStones/33.json" />
      <None Include="Assets/Resources/TestSaveData/MyStones/21.json" />
      <None Include="Assets/Resources/TestSaveData/MyStones/77.json" />
-     <None Include="Assets/ArcadeStages/4/4.json" />
+     <None Include="Assets/ExternalAssets/ArcadeStages/4/4.json" />
      <None Include="Assets/Resources/TestSaveData/MyStones/242.json" />
      <None Include="Assets/Resources/TestSaveData/MyStones/343.json" />
      <None Include="Assets/EffectsResource/shaders/Distortion.shader" />
@@ -927,7 +924,7 @@
      <None Include="Assets/Resources/TestSaveData/MyStones/188.json" />
      <None Include="Assets/DynamicStarrySky/Shaders/StarrySky.shader" />
      <None Include="Assets/Resources/TestSaveData/MyStones/338.json" />
-     <None Include="Assets/ArcadeStages/3/3.json" />
+     <None Include="Assets/ExternalAssets/ArcadeStages/3/3.json" />
      <None Include="Assets/Resources/BasicCharComponent/Shield/saonian/FieldShield.shader" />
      <None Include="Assets/Resources/TestSaveData/MyStones/225.json" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Textures/BenSimonds/_Textures Readme.txt" />
@@ -945,14 +942,14 @@
      <None Include="Assets/Resources/TestSaveData/MyStones/365.json" />
      <None Include="Assets/Resources/TestSaveData/arena3V3TeamSet.json" />
      <None Include="Assets/Resources/TestSaveData/MyStones/339.json" />
-     <None Include="Assets/ArcadeStages/5/5.json" />
+     <None Include="Assets/ExternalAssets/ArcadeStages/5/5.json" />
      <None Include="Assets/Resources/TestSaveData/MyStones/191.json" />
      <None Include="Assets/Resources/TestSaveData/MyStones/135.json" />
      <None Include="Assets/Resources/TestSaveData/MyStones/147.json" />
      <None Include="Assets/Resources/TestSaveData/MyStones/325.json" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_Plain_Bumped.shader" />
      <None Include="Assets/Resources/TestSaveData/MyStones/132.json" />
-     <None Include="Assets/ArcadeStages/1/1.json" />
+     <None Include="Assets/ExternalAssets/ArcadeStages/1/1.json" />
      <None Include="Assets/Resources/TestSaveData/MyStones/168.json" />
      <None Include="Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Surface.shader" />
      <None Include="Assets/Resources/TestSaveData/MyStones/159.json" />
@@ -1157,7 +1154,7 @@
      <None Include="Assets/Resources/TestSaveData/MyStones/266.json" />
      <None Include="Assets/Resources/TestSaveData/MyStones/264.json" />
      <None Include="Assets/Resources/TestSaveData/MyStones/78.json" />
-     <None Include="Assets/ArcadeStages/2/2.json" />
+     <None Include="Assets/ExternalAssets/ArcadeStages/2/2.json" />
      <None Include="Assets/Resources/TestSaveData/MyStones/87.json" />
      <None Include="Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt" />
      <None Include="Assets/Resources/TestSaveData/MyStones/38.json" />

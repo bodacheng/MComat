@@ -14,7 +14,7 @@ public partial class StagesManager : EditorWindow
     public TextAsset FightScript;//存档文件。是我们拖给这个位置的一个东西，但如果说这个文件不存在，那应该要自动新建并指定到这个位置上
     FightMembers target;
     
-    string pathAndNameForLocalSave = "ArcadeStages";
+    string pathAndNameForLocalSave = "ExternalAssets/ArcadeStages";
     private int stageNo = 1;
     
     IDictionary<string, string> UnitIDsAndNames;

@@ -16,11 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 12326b1f1445842009fe2cbb9ff8f417
-  m_SerializeEntries:
-  - m_GUID: cf594503475a4a45ae63566500155b02
-    m_Address: Assets/ArcadeStages
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
