@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public partial class UnitCreator {
+public class UnitCreator {
     
     public static IEnumerator CreateUnit(UnitInfo info)
     {

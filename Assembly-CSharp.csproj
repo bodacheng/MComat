@@ -318,7 +318,6 @@
      <Compile Include="Assets/StagesManagement/StagesManagerGUI/StageAwards.cs" />
      <Compile Include="Assets/BOWeaponSystem/Health System/Health_BasicClasses.cs" />
      <Compile Include="Assets/PlayFab/Client/UserData.cs" />
-     <Compile Include="Assets/ResourceLoading/HurtObjectLoad/HurtObjectManager_Cach.cs" />
      <Compile Include="Assets/FightLoad/FightLoad.cs" />
      <Compile Include="Assets/FightLogger/FightLogger.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_Steps.cs" />
@@ -394,7 +393,6 @@
      <Compile Include="Assets/StagesManagement/StagesManagerGUI/SkillInfo.cs" />
      <Compile Include="Assets/ResourceLoading/EffectsLoad/EffectsManager_Cach.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/MailDetailView.cs" />
-     <Compile Include="Assets/ResourceLoading/HurtObjectLoad/HurtObjectManager_Local.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/FightingStepLayer.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/UnitOptionLayer.cs" />
      <Compile Include="Assets/AppleAuthSample/GameMenuHandler.cs" />

@@ -12,11 +12,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
   m_Name: Units
   m_EditorClassIdentifier: 
-  m_GroupName: Packed Assets
+  m_GroupName: Units
   m_Data:
     m_SerializedData: []
   m_GUID: f0dd6dc67cdb345bfa012551500cd672
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 6ca3efb6cefae4338ba0c93e213760a3
+    m_Address: human/adam.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+  - m_GUID: 1e1e05d63558f44b681b57faaf71bb49
+    m_Address: human/adam2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+  - m_GUID: 900549ee7a1937643adaa1c38d34d6c5
+    m_Address: human/adam7.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+  - m_GUID: f1732b694ef1b4ac9b896b55ce58d4fc
+    m_Address: human/boxer.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+  - m_GUID: 33e6164656c424916beb474da8851e97
+    m_Address: human/et.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+  - m_GUID: c689938da93504516873fd1383132569
+    m_Address: human/maksim1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+  - m_GUID: 769cccabaf2be43048fc2638d22361e4
+    m_Address: human/maksim2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+  - m_GUID: 4f7c92ef88828496eb7ce3b7de705e86
+    m_Address: human/mutant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+  - m_GUID: 6fc10c9acafe91c47b6414bcde9e68be
+    m_Address: human/mutant_b.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+  - m_GUID: d2ed3e4b366734b3a9375c08ada536fd
+    m_Address: human/schoolgirl.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+  - m_GUID: 090a349b7348e4958b68a1b07d604f13
+    m_Address: human/wang.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+  - m_GUID: 24087ecff243c4c4cb07db7cc128b2e2
+    m_Address: human/witch.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

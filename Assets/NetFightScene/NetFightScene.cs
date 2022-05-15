@@ -96,7 +96,6 @@ namespace FightScene
             }
             FSceneProcessesRunner.Main.ArrangeProcessOrder();
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
-            HurtObjectManager.ConstructDPool();
         }
         
         void Update()

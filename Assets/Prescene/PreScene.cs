@@ -140,7 +140,6 @@ namespace mainMenu
         void StartUp()
         {
             HeroIcon.INIFrames();
-            HurtObjectManager.ConstructDPool();
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
             {
                 UnitOptionLayer unitOptionLayer = UnitOptionLayer.Open();
