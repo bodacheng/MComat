@@ -74,7 +74,7 @@ public partial class Data_Center : MonoBehaviour
                     break;
             }
             Animation_Manger.PrepareHurtAndKnockOffAnimations(type);
-            yield return _BO_Ani_E.BasicMagicAndEffectsPathDefine(element, personalMagicPath);
+            _BO_Ani_E.BasicMagicAndEffectsPathDefine(element, personalMagicPath);
             //if (this.blendShapeProxy != null && this.blendShapeProxy.VRMBlendShapeProxy != null)
             //    this.blendShapeProxy.VRMBlendShapeProxy.AvaterRemerge(this.WholeT);
             //else

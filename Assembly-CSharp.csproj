@@ -97,7 +97,6 @@
      <Compile Include="Assets/FightSceneSystem/Nagare/FightingProcess.cs" />
      <Compile Include="Assets/TutorialManger/processes/GoToStages.cs" />
      <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/PopupLayer/PopupLayer_Loading.cs" />
-     <Compile Include="Assets/ResourceLoading/EffectsLoad/EffectsManager_Local.cs" />
      <Compile Include="Assets/TutorialManger/processes/ChooseAdamToSlot1.cs" />
      <Compile Include="Assets/P3/GradientColor.cs" />
      <Compile Include="Assets/StagesManagement/StagesManagerGUI/SkillSelect.cs" />
@@ -172,7 +171,6 @@
      <Compile Include="Assets/Camera/PinchZoom/PinchZoom.cs" />
      <Compile Include="Assets/Behaviour/Control/Controller.cs" />
      <Compile Include="Assets/Behaviour/Defines/states/Death_State.cs" />
-     <Compile Include="Assets/ResourceLoading/EffectsLoad/EffectsManager_StreamingAssets.cs" />
      <Compile Include="Assets/POFX/Scripts/FX/POFX_Rim.cs" />
      <Compile Include="Assets/UI/AutoSwitch.cs" />
      <Compile Include="Assets/RPGTALK/Scripts/RPGTalkCinematic/RPGTalkCinematicClip.cs" />
@@ -391,7 +389,6 @@
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/BoxExpandHelperLayer.cs" />
      <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/StoneMerge.cs" />
      <Compile Include="Assets/StagesManagement/StagesManagerGUI/SkillInfo.cs" />
-     <Compile Include="Assets/ResourceLoading/EffectsLoad/EffectsManager_Cach.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/MailDetailView.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/FightingStepLayer.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/UnitOptionLayer.cs" />

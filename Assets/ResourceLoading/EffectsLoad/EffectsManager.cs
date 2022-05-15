@@ -1,13 +1,58 @@
-﻿using UniRx;
+﻿using System.Collections;
+using UniRx;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceLocations;
 
 public partial class EffectsManager
 {
     // 以下的重点是主界面和战斗界面通用问题
     static readonly IDictionary<string, DecompositionerPool> EffectPoolsDic = new Dictionary<string, DecompositionerPool>();
-
+    static readonly List<string> keyExists = new();
+    static AsyncOperationHandle<GameObject> _handle;
+    
+    public static async void CheckExistedKey()
+    {
+        AsyncOperationHandle<IList<IResourceLocation>> locationHandle = Addressables.LoadResourceLocationsAsync("effect");
+        await locationHandle.Task;
+        if (locationHandle.Status == AsyncOperationStatus.Succeeded)
+        {
+            foreach (var weapon in locationHandle.Result)
+            {
+                if (!keyExists.Contains(weapon.PrimaryKey))
+                {
+                    keyExists.Add(weapon.PrimaryKey);
+                    Debug.Log("key :"+ weapon.PrimaryKey);
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("严重错误");
+        }
+        Addressables.Release(locationHandle);
+    }
+    
+    static GameObject TryLoadEffect(string key)
+    {
+        if (!keyExists.Contains(key))
+        {
+            return null;
+        }
+        else
+        {
+            GameObject returnValue = null;
+            var op = Addressables.LoadAssetAsync<GameObject>(key);
+            GameObject go = op.WaitForCompletion();
+            returnValue = go;
+            Addressables.Release(go);
+            return returnValue;
+        }
+    }
+    
     public static void Clear()
     {
         foreach (var pool in EffectPoolsDic)
@@ -56,5 +101,32 @@ public partial class EffectsManager
             return poolToConstruct;
         }
         return null;
+    }
+    
+    public static DecompositionerPool INIEffectsPool(string resource_name, string EffectsPath, int object_count)
+    {
+        DecompositionerPool EffectPool = null;
+        if (EffectsPath != null)
+        {
+            if (EffectPoolsDic.ContainsKey("Effects/" + EffectsPath + "/" + resource_name))
+            {
+                EffectPoolsDic.TryGetValue("Effects/" + EffectsPath + "/" + resource_name, out EffectPool);
+                if (EffectPool != null)
+                    return EffectPool;
+            }
+            
+            var EffectPrefab = TryLoadEffect("Effects/" + EffectsPath + "/" + resource_name + ".prefab");
+            if (EffectPrefab != null)
+            {
+                EffectPool = ConstructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects/" + EffectsPath + "/" + resource_name,object_count);
+                return EffectPool;
+            }
+            if (EffectsPath == FightGlobalSetting.EffectPathDefine(Element.Null))
+            {
+                return null;//防止无限循环
+            }
+        }
+        EffectPool = INIEffectsPool(resource_name, FightGlobalSetting.EffectPathDefine(Element.Null), object_count);
+        return EffectPool;
     }
 }

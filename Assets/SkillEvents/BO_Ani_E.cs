@@ -36,27 +36,10 @@ public partial class BO_Ani_E : MonoBehaviour
     
     // 这个系列的函数现在也有对重要变量myMagicForwardPath赋值的作用,所以不可以放在defaultPool里去
     // 另外这个系列的函数经常因为一些初始化流程问题忽略，它必须在模型起到展示技能或实际战斗之前执行，否则找不到特效
-    public IEnumerator BasicMagicAndEffectsPathDefine(Element element, string personalMagic)
+    public void BasicMagicAndEffectsPathDefine(Element element, string personalMagic)
     {
         myMagicForwardPath = personalMagic;
         magic_path = FightGlobalSetting.EffectPathDefine(element);
-        switch(ResourceLoadingSetting.MagicLoadingMode)
-        {
-            case ResourceLoadMode.CachAB:
-                if (myMagicForwardPath != null)
-                    yield return (EffectsManager.PrepareMagicFromCach(ResourceDownLoad.BundleURL,this.myMagicForwardPath));
-                yield return (EffectsManager.PrepareMagicFromCach(ResourceDownLoad.BundleURL + "/Magics", magic_path));
-                yield return (EffectsManager.PrepareMagicFromCach(ResourceDownLoad.BundleURL + "/Magics", FightGlobalSetting.EffectPathDefine(Element.Null)));
-            break;
-            case ResourceLoadMode.Resource:
-                break;
-            case ResourceLoadMode.StreamingAssetAB:
-                if (myMagicForwardPath != null)
-                    yield return (EffectsManager.PrepareMagicFromStreamingAssets(this.myMagicForwardPath));
-                yield return (EffectsManager.PrepareMagicFromStreamingAssets(magic_path));
-                yield return (EffectsManager.PrepareMagicFromStreamingAssets(FightGlobalSetting.EffectPathDefine(Element.Null)));
-            break;
-        }
     }
     
     void DecideTarget(string bodypartName)

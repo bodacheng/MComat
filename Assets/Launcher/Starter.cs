@@ -45,6 +45,7 @@ public class Starter : MonoBehaviour
         Units.LoadByResource();
         Units.RefreshDic();
         HurtObjectManager.CheckExistedKey();
+        EffectsManager.CheckExistedKey();
     }
     
     void EnterFrontScene()

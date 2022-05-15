@@ -72,6 +72,8 @@ namespace mainMenu
             StartUp();
             BasicPhase();
             ToInitialPhase();
+
+            StartCoroutine(HurtObjectManager.ConstructDPool());
         }
         
         public static void ReturnToLobby(string error)
