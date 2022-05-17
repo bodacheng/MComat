@@ -47,6 +47,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f59a3750178bf4db295798b6b11144c0, type: 2}
   - {fileID: 11400000, guid: 8ebbfed416f964995878b3c6250dc139, type: 2}
   - {fileID: 11400000, guid: bc1da1cc9abe140ba888edf0b05b8b9f, type: 2}
+  - {fileID: 11400000, guid: 1ac9141ffe41041f597365de0370dc81, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -91,6 +92,10 @@ MonoBehaviour:
     - quest
     - unit
     - weapon
+    - effect
+    - basic_anim
+    - hurt_anim
+    - knock_anim
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 7ed3c4f91e15949209e5cda4294e805b, type: 2}

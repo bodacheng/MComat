@@ -7,7 +7,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
 
-public partial class EffectsManager
+public class EffectsManager
 {
     // 以下的重点是主界面和战斗界面通用问题
     static readonly IDictionary<string, DecompositionerPool> EffectPoolsDic = new Dictionary<string, DecompositionerPool>();
@@ -25,7 +25,6 @@ public partial class EffectsManager
                 if (!keyExists.Contains(weapon.PrimaryKey))
                 {
                     keyExists.Add(weapon.PrimaryKey);
-                    Debug.Log("key :"+ weapon.PrimaryKey);
                 }
             }
         }

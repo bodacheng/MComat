@@ -23,7 +23,6 @@ public class HurtObjectManager
                 if (!keyExists.Contains(weapon.PrimaryKey))
                 {
                     keyExists.Add(weapon.PrimaryKey);
-                    Debug.Log("key :"+ weapon.PrimaryKey);
                 }
             }
         }
@@ -94,6 +93,7 @@ public class HurtObjectManager
     {
         DecompositionerPool poolToConstruct;
         GameObject hurtObject = null;
+        
         /////////////// 第一环节 : 搜索个性魔法//////////////////
         if (MagicForwardPath != null)
         {

@@ -228,7 +228,6 @@
      <Compile Include="Assets/TouchScript/Scripts/Pointers/PenPointer.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Utils/ClusterUtils.cs" />
      <Compile Include="Assets/ImportantDefinition/Monster/monster_nameTable.cs" />
-     <Compile Include="Assets/AnimControl/Animation_Manger_StreamingAssetsLoad.cs" />
      <Compile Include="Assets/Behaviour/Soul/SkillSet/SkillSet_INI.cs" />
      <Compile Include="Assets/SKillAnalyzer/SKillAnalyzerGUI.cs" />
      <Compile Include="Assets/Camera/Modes/ScreenSaverC.cs" />
@@ -255,7 +254,6 @@
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Other/ExitToSystem.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Utils/BinaryUtils.cs" />
      <Compile Include="Assets/MainSceneSystem/NAGARE/SceneProcess.cs" />
-     <Compile Include="Assets/AnimControl/Animation_Manger_CachLoad.cs" />
      <Compile Include="Assets/NoSuchStudio/HighlightUI/Scritpts/Runtime/HighlightUI.cs" />
      <Compile Include="Assets/DummyLayerSystem/UILayerLoader.cs" />
      <Compile Include="Assets/RPGTALK/Scripts/Helpers/TextWithIconSimpleText.cs" />
@@ -330,7 +328,6 @@
      <Compile Include="Assets/POS_Sys/Position_Set_Libary.cs" />
      <Compile Include="Assets/Behaviour/Defines/states/Defend_State.cs" />
      <Compile Include="Assets/theBlur/CircularBuffer.cs" />
-     <Compile Include="Assets/DATA_CENTER/Data_Center_StreamingAssets.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Rendering/UIParticleRenderer.cs" />
      <Compile Include="Assets/Behaviour/Defines/states/Knock_Off_State.cs" />
      <Compile Include="Assets/ImportantDefinition/Skill/SkillConfig/SkillNameTable.cs" />
@@ -373,7 +370,6 @@
      <Compile Include="Assets/EffectsSystem/HitBoxSubEventManger.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/UI Element/UIElementSound.cs" />
      <Compile Include="Assets/TutorialManger/processes/SelectASlot/SkillEditA3Try.cs" />
-     <Compile Include="Assets/DATA_CENTER/Data_Center_Cach.cs" />
      <Compile Include="Assets/Camera/Modes/OneVOneMode.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Hit/HitData.cs" />
      <Compile Include="Assets/BOWeaponSystem/Health System/ShaderManager.cs" />
@@ -654,7 +650,6 @@
      <Compile Include="Assets/JsonSupport/UnityLitJson/JsonWriter.cs" />
      <Compile Include="Assets/DATA_CENTER/Data_Center.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Buttons/SpotlightButton.cs" />
-     <Compile Include="Assets/CachLogic/downloads_charcomponents.cs" />
      <Compile Include="Assets/RPGTALK/Scripts/Helpers/TextWithIcon.cs" />
      <Compile Include="Assets/Behaviour/Soul/BuffsRunner.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Layers/ILayerDelegate.cs" />

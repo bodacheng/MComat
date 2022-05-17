@@ -6,9 +6,9 @@ namespace Soul
 {
     public class BehaviorsIncubator
     {
-        public IDictionary<string, Behavior> BehaviorDic;
+        public readonly IDictionary<string, Behavior> BehaviorDic;
         // 技能动画列表（不包括基础动画）
-        public List<string> SkillTypeKeys;
+        public readonly List<string> SkillTypeKeys;
 
         public BehaviorsIncubator(Empty_State empty_State, IDictionary<string, SkillEntity> ToFormAttackStateList)
         {

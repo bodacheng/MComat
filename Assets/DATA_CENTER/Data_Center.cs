@@ -60,19 +60,7 @@ public partial class Data_Center : MonoBehaviour
             _BasicPhysicSupport.Rigidbody.mass = 500f;
             BodyElementTagAndLayerSet(TeamConfig.defaultSet);
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(FightDataRef,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
-
-            switch (ResourceLoadingSetting.AnimationLoadingMode)
-            {
-                case ResourceLoadMode.CachAB:
-                    yield return (Animation_Manger.PreloadBasicPersonalAnims(type,basicPackName));
-                    break;
-                case ResourceLoadMode.StreamingAssetAB:
-                    yield return (Animation_Manger.preloadBasicPersonalAnimsStreamingAssetMode(type, basicPackName));
-                    break;
-                case ResourceLoadMode.Resource:
-                    Animation_Manger.PreloadBasicPersonalAnimsResourceMode(type, basicPackName);
-                    break;
-            }
+            yield return Animation_Manger.PreloadBasicPersonalAnimsResourceMode(type, basicPackName);
             Animation_Manger.PrepareHurtAndKnockOffAnimations(type);
             _BO_Ani_E.BasicMagicAndEffectsPathDefine(element, personalMagicPath);
             //if (this.blendShapeProxy != null && this.blendShapeProxy.VRMBlendShapeProxy != null)
@@ -134,18 +122,7 @@ public partial class Data_Center : MonoBehaviour
         //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
         // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
         var toLoadSkillAnimsNames = _MyBehaviorRunner.PassSkillTypeKeys();
-        switch (ResourceLoadingSetting.AnimationLoadingMode)
-        {
-            case ResourceLoadMode.CachAB:
-                yield return (Animation_Manger.PreloadPersonalAnims(ResourceDownLoad.BundleURL + "/animClips",type, toLoadSkillAnimsNames, personalMagic, element));
-            break;
-            case ResourceLoadMode.Resource:
-                yield return (Animation_Manger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, personalMagic, element));
-            break;
-            case ResourceLoadMode.StreamingAssetAB:
-                yield return (Animation_Manger.PreloadPersonalAnimsStreamingAssetMode(type, toLoadSkillAnimsNames, personalMagic, element));
-            break;
-        }
+        yield return (Animation_Manger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, personalMagic,element));
     }
 
     public void Step3Initialize(TeamConfig _TeamConfig, float nineSkillHp, CriticalGaugeMode criticalGaugeMode)

@@ -90,17 +90,12 @@ public partial class ResourceDownLoad : MonoBehaviour
         switch (ResourceLoadingSetting.AnimationLoadingMode)
         {
             case ResourceLoadMode.CachAB:
-                yield return unitComponentsDownload();
                 yield return AnimationResourceDownLoad();
                 break;
             case ResourceLoadMode.StreamingAssetAB:
                 break;
             case ResourceLoadMode.Resource:
                 // 测试版本要把所有动画片段全加载，不能像正式版那样按照角色技能分个加载，原因是动画片段地址机理不同。
-                foreach (string type in types)
-                {
-                    AnimationResourceLoader.Instance.PrepareAllAttackAnimationClipsByTypeFromResourceAndPutItIntoDic(type);
-                }
                 break;
         }
 

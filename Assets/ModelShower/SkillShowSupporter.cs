@@ -13,18 +13,7 @@ public static class SkillShowSupporter
         //下面这一大片，在资源存在的情况下压根不应该运行            
         if (focusingC.Animation_Manger != null)
         {
-            switch (ResourceLoadingSetting.AnimationLoadingMode)
-            {
-                case ResourceLoadMode.CachAB:
-                    yield return focusingC.Animation_Manger.PreloadPersonalAnim(ResourceDownLoad.BundleURL, unitConfig.TYPE, keyname, unitConfig.SPECIAL_ZOKUSEI, unitConfig.element);
-                    break;
-                case ResourceLoadMode.StreamingAssetAB:
-                    yield return focusingC.Animation_Manger.PreloadPersonalAnimStreamingAssetMode(unitConfig.TYPE, keyname, unitConfig.SPECIAL_ZOKUSEI, unitConfig.element);
-                    break;
-                case ResourceLoadMode.Resource:
-                    yield return focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, keyname, unitConfig.SPECIAL_ZOKUSEI, unitConfig.element);
-                    break;
-            }
+            yield return focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, keyname, unitConfig.SPECIAL_ZOKUSEI, unitConfig.element);
             IfShowingSkill = true;
             focusingC.Animation_Manger.AnimationTrigger(keyname, true, 0.05f);
         }

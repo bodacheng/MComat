@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Animation
+  m_EditorClassIdentifier: 
+  m_GroupName: Animation
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 0585100253e4349a6a5d57cdf17ea8e4
+  m_SerializeEntries:
+  - m_GUID: fe18baae7ba7848ff9b2e5eb922f4614
+    m_Address: Animation/human/BasicPack
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - anim
+    - basic_anim
+  - m_GUID: e56f84544fec544048d0cea7986efd29
+    m_Address: Animation/human/skill
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 816994435414445a6a750007d6f37276
+    m_Address: Animation/human/basic_hurts
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - hurt_anim
+  - m_GUID: 6ac2ea0a5dc5a43af98c78da5db37388
+    m_Address: Animation/human/basic_knockoffs
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - knock_anim
+  - m_GUID: f5e3533a721264c30aef1bf838723716
+    m_Address: Animation/human/face_anim
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - anim
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: e4b517c71adaf4f9ba014df2b8d66903, type: 2}
+    - {fileID: 11400000, guid: 27563071a99994da3ba2fec1e1f799ef, type: 2}

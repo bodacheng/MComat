@@ -61,16 +61,16 @@ public partial class Animation_Manger
         }
     }
     
-    List<AnimationClip> hurtclips_back, hurtclips_low, hurtclips_high, hurtclips_press, hurtclips_lay;
+    List<AnimationClip> _hurtClipsBack, _hurtClipsLow, _hurtClipsHigh, _hurtClipsPress, _hurtClipsLay;
     List<AnimationClip> knockoffAnimations;
     public void PrepareHurtAndKnockOffAnimations(string type)
     {
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_knockoffs", out knockoffAnimations);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/back", out hurtclips_back);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/low", out hurtclips_low);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/high", out hurtclips_high);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/press", out hurtclips_press);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/lay", out hurtclips_lay);
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/back", out _hurtClipsBack);
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/low", out _hurtClipsLow);
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/high", out _hurtClipsHigh);
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/press", out _hurtClipsPress);
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/lay", out _hurtClipsLay);
     }
     
     public AnimationClip GetRandomHurtAnim(string hurtPos)
@@ -79,22 +79,22 @@ public partial class Animation_Manger
         switch (hurtPos)
         {
             case "back":
-            target = hurtclips_back;
+                target = _hurtClipsBack;
             break;
             case "lay":
-            target = hurtclips_lay;
+                target = _hurtClipsLay;
             break;
             case "high":
-            target = hurtclips_high;
+                target = _hurtClipsHigh;
             break;
             case "low":
-            target = hurtclips_low;
+                target = _hurtClipsLow;
             break;
             case "press":
-            target = hurtclips_press;
+                target = _hurtClipsPress;
             break;
             default:
-            target = hurtclips_high;
+                target = _hurtClipsHigh;
             break;
         }
         int ranDom = Random.Range(0, target.Count);

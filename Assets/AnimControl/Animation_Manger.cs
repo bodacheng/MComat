@@ -61,15 +61,6 @@ public partial class Animation_Manger
 
         return null;
     }
-
-    // 模块启动时运行一次，从而确保模块了解自身能运行的trigger
-    public void GetAllParams()
-    {
-        foreach (AnimatorControllerParameter param in Animator.parameters)
-        {
-            parameters.Add(param.name);
-        }
-    }
     
     public bool GetBool(string anim)
     {

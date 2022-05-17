@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using mainMenu;
 using System.Collections.Generic;
+using Skill;
 
 public class MonsterEditPage : MainSceneProcess
 {
@@ -19,6 +20,7 @@ public class MonsterEditPage : MainSceneProcess
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
             return;
         }
+        
         layer = SkillEditLayer.Open();
         
         mainProcessRunner.RunAsQueued(layer._connector.ShowMyModel(

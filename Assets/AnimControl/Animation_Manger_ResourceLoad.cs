@@ -1,25 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using System.Linq;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public partial class Animation_Manger{
 
-    public void PreloadBasicPersonalAnimsResourceMode(string animPath, string basicPackName)
+    public IEnumerator PreloadBasicPersonalAnimsResourceMode(string animPath, string basicPackName)
     {
         List<AnimationClip> basicAnims = new List<AnimationClip>();
         string basicPackKey = animPath + "/" + basicPackName;
         if (AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(basicPackKey))
         {
             AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(basicPackKey,out basicAnims);
-        }else{
-            List<UnityEngine.Object> basicAnimsObject = Resources.LoadAll("Animations/" + animPath +  "/BasicPack/" +  basicPackName, typeof(AnimationClip)).ToList();
-            foreach (UnityEngine.Object _object in basicAnimsObject)
+        }
+        else
+        {
+            var loadPath = Addressables.LoadResourceLocationsAsync("basic_anim", Addressables.MergeMode.Intersection);
+            yield return loadPath;
+            if (loadPath.Status == AsyncOperationStatus.Succeeded)
             {
-                AnimationClip _AnimationClip = (AnimationClip)_object;
-                basicAnims.Add(_AnimationClip);
+                foreach (var path in loadPath.Result)
+                {
+                    if (path.PrimaryKey.Contains("Animation/" + animPath + "/BasicPack/" + basicPackName))
+                    {
+                        var handle = Addressables.LoadAssetAsync<AnimationClip>(path.PrimaryKey);
+                        yield return handle;
+                        if (handle.Status == AsyncOperationStatus.Succeeded)
+                        {
+                            Object value = handle.Result;
+                            if (value != null)
+                            {
+                                AnimationClip _AnimationClip = (AnimationClip)value;
+                                basicAnims.Add(_AnimationClip);
+                            }
+                        }
+                        Addressables.Release(handle);
+                    }
+                }
             }
+            Addressables.Release(loadPath);
             AnimationResourceLoader.SeriesAnimationClipsDic.Add(basicPackKey, basicAnims);
             Debug.Log("基础动画包"+basicPackKey + "已经加入了defaultPools.SeriesAnimationClipsDic公用字典");
         }
@@ -127,73 +148,51 @@ public partial class Animation_Manger{
                 }
             }
         }
-        
-        ///////////////////////////////////
-        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/back"))
-        {
-            AnimationResourceLoader.SeriesAnimationClipsDic.Add(animPath + "/basic_hurts/back", new List<AnimationClip>());
-            List<UnityEngine.Object> humanHurtAnimsObjects = Resources.LoadAll("Animations/" + animPath + "/basic_hurts/back", typeof(AnimationClip)).ToList();
-            foreach (UnityEngine.Object _object in humanHurtAnimsObjects)
-            {
-                AnimationResourceLoader.SeriesAnimationClipsDic[animPath + "/basic_hurts/back"].Add(_object as AnimationClip);
-            }
-        }
-        
-        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/high"))
-        {
-            AnimationResourceLoader.SeriesAnimationClipsDic.Add(animPath + "/basic_hurts/high", new List<AnimationClip>());
-            List<UnityEngine.Object> humanHurtAnimsObjects = Resources.LoadAll("Animations/" + animPath + "/basic_hurts/high", typeof(AnimationClip)).ToList();
-            foreach (UnityEngine.Object _object in humanHurtAnimsObjects)
-            {
-                AnimationResourceLoader.SeriesAnimationClipsDic[animPath + "/basic_hurts/high"].Add(_object as AnimationClip);
-            }
-        }
-        
-        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/lay"))
-        {
-            AnimationResourceLoader.SeriesAnimationClipsDic.Add(animPath + "/basic_hurts/lay", new List<AnimationClip>());
-            List<UnityEngine.Object> humanHurtAnimsObjects = Resources.LoadAll("Animations/" + animPath + "/basic_hurts/lay", typeof(AnimationClip)).ToList();
-            foreach (UnityEngine.Object _object in humanHurtAnimsObjects)
-            {
-                AnimationResourceLoader.SeriesAnimationClipsDic[animPath + "/basic_hurts/lay"].Add(_object as AnimationClip);
-            }
-        }
-        
-        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/low"))
-        {
-            AnimationResourceLoader.SeriesAnimationClipsDic.Add(animPath + "/basic_hurts/low", new List<AnimationClip>());
-            List<UnityEngine.Object> humanHurtAnimsObjects = Resources.LoadAll("Animations/" + animPath + "/basic_hurts/low", typeof(AnimationClip)).ToList();
-            foreach (UnityEngine.Object _object in humanHurtAnimsObjects)
-            {
-                AnimationResourceLoader.SeriesAnimationClipsDic[animPath + "/basic_hurts/low"].Add(_object as AnimationClip);
-            }
-        }
-        
-        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_hurts/press"))
-        {
-            AnimationResourceLoader.SeriesAnimationClipsDic.Add(animPath + "/basic_hurts/press", new List<AnimationClip>());
-            List<UnityEngine.Object> humanHurtAnimsObjects = Resources.LoadAll("Animations/" + animPath + "/basic_hurts/press", typeof(AnimationClip)).ToList();
-            foreach (UnityEngine.Object _object in humanHurtAnimsObjects)
-            {
-                AnimationResourceLoader.SeriesAnimationClipsDic[animPath + "/basic_hurts/press"].Add(_object as AnimationClip);
-            }
-        }
 
-        if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(animPath + "/basic_knockoffs"))
+        IEnumerator LoadHurtAnim(string type, string address, List<object> tags)
         {
-            AnimationResourceLoader.SeriesAnimationClipsDic.Add(animPath + "/basic_knockoffs",new List<AnimationClip>());
-            List<UnityEngine.Object> humanHurtAnimsObjects = Resources.LoadAll("Animations/" + animPath + "/basic_knockoffs", typeof(AnimationClip)).ToList();
-            foreach (UnityEngine.Object _object in humanHurtAnimsObjects)
+            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(type + "/" + address))
             {
-                AnimationResourceLoader.SeriesAnimationClipsDic[animPath + "/basic_knockoffs"].Add(_object as AnimationClip);
+                AnimationResourceLoader.SeriesAnimationClipsDic.Add(type + "/" + address, new List<AnimationClip>());
+                var humanHurtAnimsObjects = new List<AnimationClip>();
+                var loadPath = Addressables.LoadResourceLocationsAsync(tags, Addressables.MergeMode.Intersection);
+                yield return loadPath;
+                if (loadPath.Status == AsyncOperationStatus.Succeeded)
+                {
+                    foreach (var path in loadPath.Result)
+                    {
+                        if (path.PrimaryKey.Contains("Animation/" + type + "/" + address))
+                        {
+                            var handle = Addressables.LoadAssetAsync<AnimationClip>(path.PrimaryKey);
+                            yield return handle;
+                            if (handle.Status == AsyncOperationStatus.Succeeded)
+                            {
+                                Object value = handle.Result;
+                                if (value != null)
+                                {
+                                    AnimationClip _AnimationClip = (AnimationClip)value;
+                                    humanHurtAnimsObjects.Add(_AnimationClip);
+                                }
+                            }
+                            Addressables.Release(handle);
+                        }
+                    }
+                }
+                Addressables.Release(loadPath);
+                foreach (UnityEngine.Object _object in humanHurtAnimsObjects)
+                {
+                    AnimationResourceLoader.SeriesAnimationClipsDic[type + "/" + address].Add(_object as AnimationClip);
+                }
             }
-            Debug.Log("基础击飞动画包"+animPath + "/basic_knockoffs" + "已经加入公共字典");
-        }else{
-            //认为已经存在了相应系列的动画包
         }
         
-        ////////////    以上内容为实时动画片段的预备和个性化片段对他们的覆盖   /////////////
-
+        yield return LoadHurtAnim("human", "basic_hurts/back", new List<object> { "hurt_anim" });
+        yield return LoadHurtAnim("human", "basic_hurts/high", new List<object> { "hurt_anim" });
+        yield return LoadHurtAnim("human", "basic_hurts/lay", new List<object> { "hurt_anim" });
+        yield return LoadHurtAnim("human", "basic_hurts/low", new List<object> { "hurt_anim" });
+        yield return LoadHurtAnim("human", "basic_hurts/press", new List<object> { "hurt_anim" });
+        yield return LoadHurtAnim("human", "basic_knockoffs", new List<object> { "knock_anim" });
+        
         animatorOverride = new AnimatorOverrideController(Animator.runtimeAnimatorController);
 
         if (basicAnims != null)
@@ -223,22 +222,23 @@ public partial class Animation_Manger{
             }
         }
 
-        Animator.runtimeAnimatorController = animatorOverride;// 622！！！！！
+        Animator.runtimeAnimatorController = animatorOverride;
         ////////////    以上内容为个性化动画片段对base层基础动画的覆盖   /////////////
     }
 
-    public IEnumerator PreloadPersonalAnimResourceMode(string animPath, string toLoadSkillAnimName, string personalMagic, Element element)
+    public IEnumerator PreloadPersonalAnimResourceMode(string animPath, string key, string personalMagic, Element element)
     {
-        if (toLoadAnims.ContainsKey(toLoadSkillAnimName))
+        if (toLoadAnims.ContainsKey(key))
         {
             yield break;
         }
-        _clip = AnimationResourceLoader.Instance.GetAnimationClip(animPath + "/skill/" + toLoadSkillAnimName);
+        yield return AnimationResourceLoader.DownloadAnim(animPath, key);
+        _clip = AnimationResourceLoader.Instance.GetAnimationClip(animPath + "/skill/" + key);
         if (_clip != null)
         {
-            if (!toLoadAnims.ContainsKey(toLoadSkillAnimName))
+            if (!toLoadAnims.ContainsKey(key))
             {
-                toLoadAnims.Add(new KeyValuePair<string, AnimationClip>(toLoadSkillAnimName, _clip));
+                toLoadAnims.Add(new KeyValuePair<string, AnimationClip>(key, _clip));
                 foreach (AnimationEvent e in _clip.events)
                 {
                     if (e.functionName == "MagicForward")
@@ -297,14 +297,11 @@ public partial class Animation_Manger{
     }
 
     AnimationClip _clip;
-    public IEnumerator PreloadPersonalAnimsResourceMode(string animPath, List<string> toLoadSkillAnimsNames, string personalMagic, Element element)
+    public IEnumerator PreloadPersonalAnimsResourceMode(string type, List<string> toLoadSkillAnimsNames,string personalMagic, Element element)
     {
-        if (toLoadSkillAnimsNames != null)
+        foreach (string anim_name in toLoadSkillAnimsNames)
         {
-            foreach (string anim_name in toLoadSkillAnimsNames)
-            {
-                yield return PreloadPersonalAnimResourceMode(animPath, anim_name, personalMagic, element);
-            }
+            yield return PreloadPersonalAnimResourceMode(type, anim_name, personalMagic, element);
         }
     }
 }
