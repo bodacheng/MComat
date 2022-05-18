@@ -3,6 +3,9 @@ using UnityEngine;
 
 public partial class Animation_Manger
 {
+    List<AnimationClip> _hurtClipsBack, _hurtClipsLow, _hurtClipsHigh, _hurtClipsPress, _hurtClipsLay;
+    List<AnimationClip> knockoffAnimations;
+    
     void PlayLayerAnim_clip(AnimationClip clip, bool in_transition , float Duration)
     {
         AnimatorStateInfo = Animator.GetCurrentAnimatorStateInfo(1);
@@ -16,8 +19,6 @@ public partial class Animation_Manger
                 to_be_override_anim_name = "fullbody_empty1";
                 animatorOverride[to_be_override_anim_name] = clip;
                 Animator.CrossFade("full_body_state1", Duration);
-            }else{
-
             }
         }
         else
@@ -59,18 +60,6 @@ public partial class Animation_Manger
                 Animator.CrossFade("null", Duration);
             }       
         }
-    }
-    
-    List<AnimationClip> _hurtClipsBack, _hurtClipsLow, _hurtClipsHigh, _hurtClipsPress, _hurtClipsLay;
-    List<AnimationClip> knockoffAnimations;
-    public void PrepareHurtAndKnockOffAnimations(string type)
-    {
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_knockoffs", out knockoffAnimations);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/back", out _hurtClipsBack);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/low", out _hurtClipsLow);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/high", out _hurtClipsHigh);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/press", out _hurtClipsPress);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/lay", out _hurtClipsLay);
     }
     
     public AnimationClip GetRandomHurtAnim(string hurtPos)

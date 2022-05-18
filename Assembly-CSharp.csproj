@@ -1908,9 +1908,6 @@
      <Reference Include="Unity.RenderPipelines.Universal.Runtime">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Services.CCD.Management">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Services.CCD.Management.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.VisualStudio.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
      </Reference>

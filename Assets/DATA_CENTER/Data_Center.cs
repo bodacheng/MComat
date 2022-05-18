@@ -60,8 +60,7 @@ public partial class Data_Center : MonoBehaviour
             _BasicPhysicSupport.Rigidbody.mass = 500f;
             BodyElementTagAndLayerSet(TeamConfig.defaultSet);
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(FightDataRef,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
-            yield return Animation_Manger.PreloadBasicPersonalAnimsResourceMode(type, basicPackName);
-            Animation_Manger.PrepareHurtAndKnockOffAnimations(type);
+            yield return Animation_Manger.PreloadBasicPersonalAnims(type, basicPackName);
             _BO_Ani_E.BasicMagicAndEffectsPathDefine(element, personalMagicPath);
             //if (this.blendShapeProxy != null && this.blendShapeProxy.VRMBlendShapeProxy != null)
             //    this.blendShapeProxy.VRMBlendShapeProxy.AvaterRemerge(this.WholeT);
