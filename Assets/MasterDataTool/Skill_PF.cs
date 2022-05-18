@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using Skill;
-using System.Collections;
-using Log;
 using Json;
 using Newtonsoft.Json;
 using System.Linq;
 
 public partial class MasterDataTool
 {
+    
+#if UNITY_EDITOR
     /// <summary>
     /// 生成gs2 技能石master更新文件
     /// </summary>
@@ -68,4 +67,5 @@ public partial class MasterDataTool
         json = "[" + json + "]";
         LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "StoneStoreDefinationsJson.json", json);
     }
+#endif
 }

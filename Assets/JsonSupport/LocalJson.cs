@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using UnityEditor;
 
+
 namespace Json
 {
     public static class LocalJson
@@ -75,6 +76,7 @@ namespace Json
             }
         }
         
+        #if UNITY_EDITOR
         public static UnityEngine.Object LoadFile(string path)
         {
             if (string.IsNullOrEmpty(path)) return null;
@@ -98,6 +100,7 @@ namespace Json
                 Debug.Log(e.ToString());
             }
         }
+        #endif
     }
 }
 

@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using Json;
 using Newtonsoft.Json;
 using System.Linq;
 
 public partial class MasterDataTool
 {
+    
+#if UNITY_EDITOR
+    
     public void OutputMonstersCatalog()
     {
         Units.LoadMonstersConfig();
@@ -62,4 +64,6 @@ public partial class MasterDataTool
         json = "[" + json + "]";
         LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "MonsterStoresDefinationsJson.json", json);
     }
+    
+#endif
 }
