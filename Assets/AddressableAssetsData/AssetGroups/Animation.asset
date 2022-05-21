@@ -26,7 +26,8 @@ MonoBehaviour:
   - m_GUID: e56f84544fec544048d0cea7986efd29
     m_Address: Animation/human/skill
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - skill_anim
   - m_GUID: 816994435414445a6a750007d6f37276
     m_Address: Animation/human/basic_hurts
     m_ReadOnly: 0

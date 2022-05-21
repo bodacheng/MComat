@@ -31,20 +31,20 @@ public static class MonsterIconDic {
         Dic.TryGetValue(resource_id, out readingSprite);
         if (readingSprite == null)
         {
-            IEnumerator ienObj = CachManager.Instance.getABFromCach("monsterIcons", resource_id.ToString());
-            while (ienObj.MoveNext())
-            {
-                // Do Nothing
-            }
-            if (ienObj.Current != null)
-            {
-                readingBundle = (UnityEngine.AssetBundle)ienObj.Current;
-            }
-            else
-            {
-                Debug.Log("角色图标读取失败：" + resource_id);
-                yield break;
-            }
+            // IEnumerator ienObj = CachManager.Instance.getABFromCach("monsterIcons", resource_id.ToString());
+            // while (ienObj.MoveNext())
+            // {
+            //     // Do Nothing
+            // }
+            // if (ienObj.Current != null)
+            // {
+            //     readingBundle = (UnityEngine.AssetBundle)ienObj.Current;
+            // }
+            // else
+            // {
+            //     Debug.Log("角色图标读取失败：" + resource_id);
+            //     yield break;
+            // }
 
             var resultObject = readingBundle.LoadAssetAsync<Image>(resource_id.ToString());
             yield return new WaitWhile(() => resultObject.isDone == false);

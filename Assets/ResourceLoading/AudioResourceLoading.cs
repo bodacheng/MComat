@@ -20,34 +20,36 @@ public class AudioResourceLoading
     
     public IEnumerator LoadAudioClipFromCachAndPutItIntoDic(string bundleURL,string additionalPath, string clip_name)
     {
-        AudioClip _AudioClip = null;
-        string clipkey = additionalPath + "/" + clip_name;
-        soundClipsDic.TryGetValue(clipkey, out _AudioClip);
-        if (_AudioClip != null)
-        {
-            Debug.Log("声音：" + clipkey + "已经存在");
-            yield break;
-        }
-        IEnumerator task = CachManager.Instance.getABFromCach(bundleURL,clip_name);
-        yield return task;
-        AssetBundle readingBundle = (AssetBundle)task.Current;
-        if (readingBundle != null)
-        {
-            _AudioClip = readingBundle.LoadAsset<AudioClip>(clip_name);
-            if (_AudioClip != null)
-            {
-                readingBundle.Unload(false);
-                if (!soundClipsDic.ContainsKey(clipkey))
-                    soundClipsDic.Add(clipkey, _AudioClip);
-                else
-                    soundClipsDic[clipkey] = _AudioClip;
-            }
-            else
-            {
-                readingBundle.Unload(false);
-                yield break;
-            }
-        }
+        // AudioClip _AudioClip = null;
+        // string clipkey = additionalPath + "/" + clip_name;
+        // soundClipsDic.TryGetValue(clipkey, out _AudioClip);
+        // if (_AudioClip != null)
+        // {
+        //     Debug.Log("声音：" + clipkey + "已经存在");
+        //     yield break;
+        // }
+        // IEnumerator task = CachManager.Instance.getABFromCach(bundleURL,clip_name);
+        // yield return task;
+        // AssetBundle readingBundle = (AssetBundle)task.Current;
+        // if (readingBundle != null)
+        // {
+        //     _AudioClip = readingBundle.LoadAsset<AudioClip>(clip_name);
+        //     if (_AudioClip != null)
+        //     {
+        //         readingBundle.Unload(false);
+        //         if (!soundClipsDic.ContainsKey(clipkey))
+        //             soundClipsDic.Add(clipkey, _AudioClip);
+        //         else
+        //             soundClipsDic[clipkey] = _AudioClip;
+        //     }
+        //     else
+        //     {
+        //         readingBundle.Unload(false);
+        //         yield break;
+        //     }
+        // }
+        
+        yield break;
     }
     
     public IEnumerator LoadAudioClipFromResourceAndPutItIntoDic(string additionalPath, string clip_name)

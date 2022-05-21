@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 // AssetBundle cache checker & loader with caching
 // worsk by loading .manifest file from server and parsing hash string from it
@@ -16,7 +18,7 @@ using UnityEngine;
 // 以上这些如果在load过程里出了任何问题，则应该终止程序运行。这些方法写在哪里都可以只要在头画面里运行就行。
 // 然后如果程序运行途中这些下载完了的数据在读取时候出错，那怎么办？不管任何时候， 直接弹回资源确认画面。
 
-public partial class ResourceDownLoad : MonoBehaviour
+public class ResourceDownLoad : MonoBehaviour
 {
     [Space(7)]
     [Header("资源读取设置")]
@@ -28,15 +30,6 @@ public partial class ResourceDownLoad : MonoBehaviour
     [Header("assetBundleURL。根据服务器可能有变化")]
     public string assetBundleURL = "http://18.218.70.129/ios";
     public static string BundleURL = "http://18.218.70.129/ios";
-    IDictionary<string, CachDownLoadMission> DownLoadMissionDic = new Dictionary<string, CachDownLoadMission>();
-
-    /// <summary>
-    /// key: typecode
-    /// value : 所有基础动画包的名字
-    /// </summary>
-    IDictionary<string, List<string>> CharTypeCodeAndBasicMoveSets = new Dictionary<string, List<string>>();
-    CachDownLoadMission modelConfigFileMission;
-    CachDownLoadMission animationConfigFileMission;
     
     void Start()
     {
@@ -51,63 +44,34 @@ public partial class ResourceDownLoad : MonoBehaviour
         ResourceLoadingSetting.ModelLoadingMode = _ResourceSetting.ModelLoadingMode;
         ResourceLoadingSetting.IconLoadingMode = _ResourceSetting.IconLoadingMode;
         
-        switch (ResourceLoadingSetting.ConfigFileLoadingMode)
-        {
-            case ResourceLoadMode.CachAB:
-                yield return ConfigFilesDownLoad();
-                break;
-            case ResourceLoadMode.StreamingAssetAB:
-                break;
-            case ResourceLoadMode.Resource:
-                Units.LoadMonstersConfig();
-                SkillConfigTable.LoadAllSkillConfigs();
-                break;
-        }
+        Units.LoadMonstersConfig();
+        SkillConfigTable.LoadAllSkillConfigs();
 
-        switch (ResourceLoadingSetting.ModelLoadingMode)
-        {
-            case ResourceLoadMode.CachAB:
-                yield return ModelResourceDownLoad();
-                break;
-            case ResourceLoadMode.StreamingAssetAB:
-                break;
-            case ResourceLoadMode.Resource:
-                //Resource模式下模型都是现加载。
-                break;
-        }
+        yield return downLoadMission("basic_anim");
+        yield return downLoadMission("skill_anim");
+        yield return downLoadMission("hurt_anim");
+        yield return downLoadMission("knock_anim");
+        yield return downLoadMission("knock_anim");
+        yield return downLoadMission("unit");
+        yield return downLoadMission("weapon");
+        yield return downLoadMission("effect");
+        yield return downLoadMission("quest");
+    }
 
-        // CharTypeCodeAndBasicMoveSets 记录了角色配置文件所出现的所有角色type以及出现的所有基础动画包的名字。
-        foreach (Units.Row row in Units.rowList)
+    IEnumerator downLoadMission(string label)
+    {
+        // Clear all cached AssetBundles
+        // WARNING: This will cause all asset bundles to be re-downloaded at startup every time and should not be used in a production game
+        // Addressables.ClearDependencyCacheAsync(key);
+        
+        //Check the download size
+        AsyncOperationHandle<long> getDownloadSize = Addressables.GetDownloadSizeAsync(label);
+        yield return getDownloadSize;
+        
+        if (getDownloadSize.Result > 0)
         {
-            if (!CharTypeCodeAndBasicMoveSets.ContainsKey(row.MONSTER_TYPE))
-                CharTypeCodeAndBasicMoveSets.Add(row.MONSTER_TYPE, new List<string>());
-            if (!CharTypeCodeAndBasicMoveSets[row.MONSTER_TYPE].Contains(row.BASIC_MOVEMENT_PACK))
-            {
-                CharTypeCodeAndBasicMoveSets[row.MONSTER_TYPE].Add(row.BASIC_MOVEMENT_PACK);
-            }
-        }
-
-        switch (ResourceLoadingSetting.AnimationLoadingMode)
-        {
-            case ResourceLoadMode.CachAB:
-                yield return AnimationResourceDownLoad();
-                break;
-            case ResourceLoadMode.StreamingAssetAB:
-                break;
-            case ResourceLoadMode.Resource:
-                // 测试版本要把所有动画片段全加载，不能像正式版那样按照角色技能分个加载，原因是动画片段地址机理不同。
-                break;
-        }
-
-        switch (ResourceLoadingSetting.MagicLoadingMode)
-        {
-            case ResourceLoadMode.CachAB:
-                EffectsDownLoadByCach();
-                break;
-            case ResourceLoadMode.StreamingAssetAB:
-                break;
-            case ResourceLoadMode.Resource:
-                break;
+            AsyncOperationHandle downloadDependencies = Addressables.DownloadDependenciesAsync(label);
+            yield return downloadDependencies;
         }
     }
 }

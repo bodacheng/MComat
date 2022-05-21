@@ -96,6 +96,7 @@ MonoBehaviour:
     - basic_anim
     - hurt_anim
     - knock_anim
+    - skill_anim
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 7ed3c4f91e15949209e5cda4294e805b, type: 2}
