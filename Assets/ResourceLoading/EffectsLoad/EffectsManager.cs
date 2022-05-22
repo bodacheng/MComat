@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UniRx;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.AddressableAssets;
@@ -14,7 +15,7 @@ public class EffectsManager
     static readonly List<string> keyExists = new();
     static AsyncOperationHandle<GameObject> _handle;
     
-    public static async void CheckExistedKey()
+    public static async UniTask CheckExistedKey()
     {
         AsyncOperationHandle<IList<IResourceLocation>> locationHandle = Addressables.LoadResourceLocationsAsync("effect");
         await locationHandle.Task;
@@ -30,7 +31,7 @@ public class EffectsManager
         }
         else
         {
-            Debug.Log("严重错误");
+            Debug.Log("注册特效列表失败？");
         }
         Addressables.Release(locationHandle);
     }

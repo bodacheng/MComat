@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 using dataAccess;
 using DummyLayerSystem;
 using UnityEngine.SceneManagement;
@@ -73,6 +74,13 @@ namespace mainMenu
             BasicPhase();
             ToInitialPhase();
 
+            Essentials();
+        }
+
+        async UniTask Essentials()
+        {
+            await HurtObjectManager.CheckExistedKey();
+            await EffectsManager.CheckExistedKey();
             StartCoroutine(HurtObjectManager.ConstructDPool());
         }
         

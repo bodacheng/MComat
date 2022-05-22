@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UniRx;
 using UnityEngine.AddressableAssets;
@@ -12,7 +13,7 @@ public class HurtObjectManager
     static readonly IDictionary<string, DecompositionerPool> HurtPoolDic = new Dictionary<string, DecompositionerPool>();
     static AsyncOperationHandle<GameObject> _handle;
     static readonly List<string> keyExists = new();
-    public static async void CheckExistedKey()
+    public static async UniTask CheckExistedKey()
     {
         AsyncOperationHandle<IList<IResourceLocation>> locationHandle = Addressables.LoadResourceLocationsAsync("weapon");
         await locationHandle.Task;
@@ -28,13 +29,14 @@ public class HurtObjectManager
         }
         else
         {
-            Debug.Log("严重错误");
+            Debug.Log(" 注册武器列表失败？");
         }
         Addressables.Release(locationHandle);
     }
 
     static IEnumerator TryLoadWeapon(string key)
     {
+
         if (!keyExists.Contains(key))
         {
             yield return null;
@@ -44,6 +46,7 @@ public class HurtObjectManager
             GameObject returnValue = null;
             _handle = Addressables.LoadAssetAsync<GameObject>(key);
             yield return _handle;
+            
             if (_handle.Status == AsyncOperationStatus.Succeeded)
             {
                 returnValue = _handle.Result;

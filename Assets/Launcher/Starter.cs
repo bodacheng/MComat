@@ -39,8 +39,6 @@ public class Starter : MonoBehaviour
         PowerEstimateTable.LoadByResource();
         Units.LoadByResource();
         Units.RefreshDic();
-        HurtObjectManager.CheckExistedKey();
-        EffectsManager.CheckExistedKey();
     }
     
     void EnterFrontScene()
