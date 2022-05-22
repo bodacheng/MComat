@@ -28,12 +28,7 @@ public class Starter : MonoBehaviour
     [SerializeField] PlayfabSetting PlayfabSetting;
     [SerializeField] FightGlobalSetting FightGlobalSetting;
     [SerializeField] KeywordSetting keywordSetting;
-
-    void Awake()
-    {
-        Initialise();
-    }
-
+    
     public void Initialise()
     {
         Debug.Log("files loads...");
@@ -51,7 +46,7 @@ public class Starter : MonoBehaviour
     void EnterFrontScene()
     {
         Initialise();
-        
+        Debug.Log("hello");
         if (enterFrontPageFirst)
         {
             var stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
@@ -60,6 +55,7 @@ public class Starter : MonoBehaviour
             FightLoad.Go(stage);
         }else{
             MainMenuNote.goingtostep = MainSceneStep.FrontPage;
+            Debug.Log("场景开始迁移");
             SceneManager.LoadScene(1);
         }
     }
@@ -117,8 +113,10 @@ public class Starter : MonoBehaviour
     // 启动网络模式
     public void BeginNetMode()
     {
+        Debug.Log("try loggin");
         PlayFabReadClient.LoginByDevice(
             result => {
+                Debug.Log("loggin");
                 CloudScript.CheckIn();
                 EnterFrontScene();
             },

@@ -3,22 +3,23 @@ using UnityEngine;
 
 public class StartUpPresentation : MonoBehaviour
 {
-    [Space(7)]
-    [Header("Starter")]
     public Starter Starter;
-
-    [Space(7)]
-    [Header("ResourceLordSceneStarter")]
+    public RectTransform T;
     public ResourceDownLoad ResourceDownLoad;
     
     void Start()
     {
-        StartCoroutine(WholeProcess());
+        StartCoroutine(ResourceDownLoad.GetWholeDownLoadSize(DownLoadConfirm));
+    }
+    
+    void DownLoadConfirm(string msg)
+    {
+        var popupLayer = PopupLayer.Open(T.gameObject);
+        popupLayer.ArrangeConfirmWindow(()=> StartCoroutine(ResourceDownLoad.ResourcePrepareProcess(EnterGame)), msg);
     }
 
-    IEnumerator WholeProcess()
+    void EnterGame()
     {
-        yield return ResourceDownLoad.ResourcePrepareProcess();
         if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
         {
             Starter.ToSkillShowerMode();

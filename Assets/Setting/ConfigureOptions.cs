@@ -10,9 +10,6 @@ public class ConfigureOptionsGUI : Editor
     {
         _Setting = (ConfigureOptions)target;
         _Setting.ConfigFileLoadingMode = (ResourceLoadMode)EditorGUILayout.EnumPopup("ConfigFileLoadingMode:", _Setting.ConfigFileLoadingMode);
-        _Setting.ModelLoadingMode = (ResourceLoadMode)EditorGUILayout.EnumPopup("ModelLoadingMode:", _Setting.ModelLoadingMode);
-        _Setting.AnimationLoadingMode = (ResourceLoadMode)EditorGUILayout.EnumPopup("AnimationLoadingMode:", _Setting.AnimationLoadingMode);
-        _Setting.MagicLoadingMode = (ResourceLoadMode)EditorGUILayout.EnumPopup("MagicLoadingMode:", _Setting.MagicLoadingMode);
         _Setting.IconLoadingMode = (ResourceLoadMode)EditorGUILayout.EnumPopup("IconLoadingMode:", _Setting.IconLoadingMode);
     }
 }
@@ -22,9 +19,6 @@ public class ConfigureOptionsGUI : Editor
 public class ConfigureOptions : MonoBehaviour
 {
     public ResourceLoadMode ConfigFileLoadingMode;
-    public ResourceLoadMode ModelLoadingMode;
-    public ResourceLoadMode AnimationLoadingMode;
-    public ResourceLoadMode MagicLoadingMode;
     public ResourceLoadMode IconLoadingMode;
     public ResourceLoadMode bgmAndCvs;
 }

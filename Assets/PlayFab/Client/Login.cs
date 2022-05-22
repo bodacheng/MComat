@@ -69,5 +69,26 @@ public partial class PlayFabReadClient
                 fail
             );
 #endif
+        
+#if UNITY_STANDALONE
+        PlayFabClientAPI.LoginWithCustomID(
+            new LoginWithCustomIDRequest
+            {
+                CustomId = SystemInfo.deviceUniqueIdentifier,
+                CreateAccount = true
+            },
+            (x) =>
+            {
+                Debug.Log(x);
+                PlayerAccountInfo.Me = new PlayerAccountInfo
+                {
+                    PlayFabUsername = x.PlayFabId
+                };
+                AddUserNameAndPw(x.PlayFabId);
+                success.Invoke(x);
+            },
+            fail
+        );
+#endif
     }
 }

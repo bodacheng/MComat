@@ -230,9 +230,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ResourceSetting: {fileID: 870660824}
-  types:
-  - human
-  assetBundleURL: http://18.218.70.129/ios
 --- !u!4 &870660823
 Transform:
   m_ObjectHideFlags: 0
@@ -261,9 +258,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConfigFileLoadingMode: 3
-  ModelLoadingMode: 3
-  AnimationLoadingMode: 3
-  MagicLoadingMode: 3
   IconLoadingMode: 3
   bgmAndCvs: 0
 --- !u!1 &1023998772
@@ -4401,6 +4395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Starter: {fileID: 2075428156307059470}
+  T: {fileID: 1023998773}
   ResourceDownLoad: {fileID: 870660822}
 --- !u!1 &7265332446000478266
 GameObject:
