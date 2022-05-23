@@ -67,7 +67,7 @@ public class ResourceDownLoad : MonoBehaviour
         Complete(warn);
     }
     
-    public IEnumerator ResourcePrepareProcess(Action Complete)
+    public IEnumerator ResourcePrepareProcess(Action Complete, Action<string,float> progressUIRefresh)
     {
         ResourceLoadingSetting.ConfigFileLoadingMode = _ResourceSetting.ConfigFileLoadingMode;
         ResourceLoadingSetting.IconLoadingMode = _ResourceSetting.IconLoadingMode;
@@ -75,19 +75,19 @@ public class ResourceDownLoad : MonoBehaviour
         Units.LoadMonstersConfig();
         SkillConfigTable.LoadAllSkillConfigs();
         
-        yield return downLoadMission("basic_anim");
-        yield return downLoadMission("skill_anim");
-        yield return downLoadMission("hurt_anim");
-        yield return downLoadMission("knock_anim");
-        yield return downLoadMission("unit");
-        yield return downLoadMission("weapon");
-        yield return downLoadMission("effect");
-        yield return downLoadMission("quest");
+        yield return downLoadMission("basic_anim", progressUIRefresh);
+        yield return downLoadMission("skill_anim", progressUIRefresh);
+        yield return downLoadMission("hurt_anim", progressUIRefresh);
+        yield return downLoadMission("knock_anim", progressUIRefresh);
+        yield return downLoadMission("unit", progressUIRefresh);
+        yield return downLoadMission("weapon", progressUIRefresh);
+        yield return downLoadMission("effect", progressUIRefresh);
+        yield return downLoadMission("quest", progressUIRefresh);
         
         Complete.Invoke();
     }
     
-    IEnumerator downLoadMission(string label)
+    IEnumerator downLoadMission(string label, Action<string,float> progressUIRefresh)
     {
         // Clear all cached AssetBundles
         // WARNING: This will cause all asset bundles to be re-downloaded at startup every time and should not be used in a production game
@@ -108,7 +108,7 @@ public class ResourceDownLoad : MonoBehaviour
             };
             while (dl.PercentComplete < 1 && !dl.IsDone)
             {
-                Debug.Log("Downloading Asset "+label+":"+ + dl.PercentComplete);
+                progressUIRefresh("Downloading Asset: "+label, dl.PercentComplete);
                 yield return null;
             }
         }

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StartUpPresentation : MonoBehaviour
 {
@@ -11,11 +13,21 @@ public class StartUpPresentation : MonoBehaviour
     {
         StartCoroutine(ResourceDownLoad.GetWholeDownLoadSize(DownLoadConfirm));
     }
+
+    [SerializeField] private TextMeshProUGUI ProgressMsg;
+
+    [SerializeField] private Slider progressBar;
+    
+    void ProgressUIStateRefresh(string msg, float progress)
+    {
+        ProgressMsg.text = msg;
+        progressBar.value = progress;
+    }
     
     void DownLoadConfirm(string msg)
     {
         var popupLayer = PopupLayer.Open(T.gameObject);
-        popupLayer.ArrangeConfirmWindow(()=> StartCoroutine(ResourceDownLoad.ResourcePrepareProcess(EnterGame)), msg);
+        popupLayer.ArrangeConfirmWindow(()=> StartCoroutine(ResourceDownLoad.ResourcePrepareProcess(EnterGame, ProgressUIStateRefresh)), msg);
     }
 
     void EnterGame()
