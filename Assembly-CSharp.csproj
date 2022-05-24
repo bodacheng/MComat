@@ -87,7 +87,7 @@
      <Compile Include="Assets/JsonSupport/UnityLitJson/Platform.cs" />
      <Compile Include="Assets/UI/SideCharIcon.cs" />
      <Compile Include="Assets/Setting/AppSetting.cs" />
-     <Compile Include="Assets/Singleton/SkillIconsDic/FromResource.cs" />
+     <Compile Include="Assets/Singleton/SkillIconsDic/Render.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/StoneMergeLayer.cs" />
      <Compile Include="Assets/Behaviour/SkillAIAttrs.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Buttons/SettingsButton.cs" />
@@ -108,7 +108,6 @@
      <Compile Include="Assets/Language/LanguageConverterManger.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManager.cs" />
      <Compile Include="Assets/CSV2Table/Scripts/TableCodeGen.cs" />
-     <Compile Include="Assets/Singleton/SkillIconsDic/FromCach.cs" />
      <Compile Include="Assets/JsonSupport/UnityLitJson/ParserToken.cs" />
      <Compile Include="Assets/TutorialManger/processes/GoToTeamEdit.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManagerGameLogo.cs" />

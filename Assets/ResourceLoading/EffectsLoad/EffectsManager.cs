@@ -47,8 +47,8 @@ public class EffectsManager
             GameObject returnValue = null;
             var op = Addressables.LoadAssetAsync<GameObject>(key);
             GameObject go = op.WaitForCompletion();
+            Addressables.Release(op);
             returnValue = go;
-            Addressables.Release(go);
             return returnValue;
         }
     }

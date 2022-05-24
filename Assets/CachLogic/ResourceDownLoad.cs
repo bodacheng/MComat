@@ -37,6 +37,7 @@ public class ResourceDownLoad : MonoBehaviour
         bool weapon = false;
         bool effect = false;
         bool quest = false;
+        bool skill_icon = false;
         
         downLoadSize("basic_anim", () => { basic_anim = true; });
         downLoadSize("skill_anim", () => { skill_anim = true; });
@@ -46,6 +47,7 @@ public class ResourceDownLoad : MonoBehaviour
         downLoadSize("weapon",() => { weapon = true; });
         downLoadSize("effect",() => { effect = true; });
         downLoadSize("quest", () => { quest = true; });
+        downLoadSize("skill_icon", () => { skill_icon = true; });
         
         void downLoadSize(string label, Action OnComplete)
         {
@@ -57,7 +59,7 @@ public class ResourceDownLoad : MonoBehaviour
             };
         }
         
-        while (!(basic_anim && skill_anim && hurt_anim && knock_anim && unit && weapon && effect && quest))
+        while (!(basic_anim && skill_anim && hurt_anim && knock_anim && unit && weapon && effect && quest && skill_icon))
         {
             Debug.Log("正在计算下载文件总大小");
             yield return null;

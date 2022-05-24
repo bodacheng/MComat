@@ -10,21 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Default Local Group
+  m_Name: Skill
   m_EditorClassIdentifier: 
-  m_GroupName: Default Local Group
+  m_GroupName: SkillIcon
   m_Data:
     m_SerializedData: []
-  m_GUID: 12326b1f1445842009fe2cbb9ff8f417
+  m_GUID: 8fbbd0733e2274b91ada48d9bdce962e
   m_SerializeEntries:
   - m_GUID: 2691416dd835346ed9b47c259acf9b64
-    m_Address: Sprites/skillIcons
+    m_Address: icon
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - icon
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 2857d07f88ba6401687b9973b65dc3b6, type: 2}
-    - {fileID: 11400000, guid: 645cb35607aad46ecb290b8134459fcd, type: 2}
+    - {fileID: 11400000, guid: 9c50e846e5edd4485908fcca8924ce73, type: 2}
+    - {fileID: 11400000, guid: 1ec00a407a5bd497b9fb2bf1ccce9470, type: 2}

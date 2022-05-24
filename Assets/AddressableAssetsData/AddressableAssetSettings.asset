@@ -48,6 +48,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8ebbfed416f964995878b3c6250dc139, type: 2}
   - {fileID: 11400000, guid: bc1da1cc9abe140ba888edf0b05b8b9f, type: 2}
   - {fileID: 11400000, guid: 1ac9141ffe41041f597365de0370dc81, type: 2}
+  - {fileID: 11400000, guid: 1639e42e14586474a83a1e25ff67aa75, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -97,6 +98,7 @@ MonoBehaviour:
     - hurt_anim
     - knock_anim
     - skill_anim
+    - icon
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 7ed3c4f91e15949209e5cda4294e805b, type: 2}
@@ -127,7 +129,7 @@ MonoBehaviour:
           m_Key: HostingServiceUploadSpeed
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.String
-          m_Data: ServerData/StandaloneOSX
+          m_Data: ServerData/StandaloneOSX;Library/com.unity.addressables/aa/OSX/StandaloneOSX
           m_Key: ContentRoot
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Boolean
