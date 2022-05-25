@@ -87,7 +87,7 @@ public class Starter : MonoBehaviour
             Debug.Log("尝试将角色" + unitConfig.REAL_NAME + "加入存档");
             DicAdd<string, UnitInfo>.Add(MyMonsters.Dic, unitInfo.id, unitInfo);
             
-            var INHERENTSkills = SkillConfigTable.GetPassiveSkills(unitConfig.RECORD_ID);
+            var INHERENTSkills = SkillConfigTable.GetPassiveSkill(unitConfig.RECORD_ID);
             if (INHERENTSkills == null || INHERENTSkills.RECORD_ID == null)
             {
                 continue;
