@@ -55,17 +55,8 @@ public partial class SkillConfigTable
     
     public static void LoadAllSkillConfigs()
     {
-        switch (ResourceLoadingSetting.ConfigFileLoadingMode)
-        {
-            case ResourceLoadMode.CachAB:
-            break;
-            case ResourceLoadMode.StreamingAssetAB:
-            break;
-            case ResourceLoadMode.Resource:
-                LoadAllSkillConfigFromLocalConfigFile();
-                SkillNameTable.LoadSkillNames();
-            break;
-        }
+        LoadAllSkillConfigFromLocalConfigFile();
+        SkillNameTable.LoadAllSkillNamesFromLocalConfigFile();
     }
     
     static void RefreshSkillConfigDicForReference()

@@ -50,20 +50,6 @@ public class SkillNameTable
         }
     }
     
-    public static void LoadSkillNames()
-    {
-        switch (ResourceLoadingSetting.ConfigFileLoadingMode)
-        {
-            case ResourceLoadMode.CachAB:
-                break;
-            case ResourceLoadMode.StreamingAssetAB:
-                break;
-            case ResourceLoadMode.Resource:
-                LoadAllSkillNamesFromLocalConfigFile();
-                break;
-        }
-    }
-    
 	public bool IsLoaded()
 	{
 		return isLoaded;

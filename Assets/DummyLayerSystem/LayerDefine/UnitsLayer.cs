@@ -88,11 +88,11 @@ namespace mainMenu
             var targetingIcon = GetUnitIcon(instanceID);
             if (targetingIcon == null)
             {
-                MonsterIconDic.Get(unitConfig.RECORD_ID);
+                UnitIconDic.Get(unitConfig.RECORD_ID);
                 targetingIcon = Instantiate(noMagic);
                 targetingIcon.name = unitConfig.REAL_NAME + "_icon";
                 targetingIcon.unitConfig = unitConfig;
-                targetingIcon.ChangeIcon(MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig.element);
+                targetingIcon.ChangeIcon(UnitIconDic.Get(unitConfig.RECORD_ID), unitConfig.element);
                 DicAdd<string, HeroIcon>.Add(mainMenuIcons, instanceID, targetingIcon);
             }
             if (clearButtonFeature)

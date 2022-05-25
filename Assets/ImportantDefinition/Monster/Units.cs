@@ -54,16 +54,7 @@ public static class Units
     
     public static void LoadMonstersConfig()
     {
-        switch (ResourceLoadingSetting.ConfigFileLoadingMode)
-        {
-            case ResourceLoadMode.CachAB:
-                break;
-            case ResourceLoadMode.StreamingAssetAB:
-                break;
-            case ResourceLoadMode.Resource:
-                LoadByResource();
-                break;
-        }
+        LoadByResource();
         RefreshDic();
     }
 

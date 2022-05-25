@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -20,58 +20,97 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class ResourceDownLoad : MonoBehaviour
 {
-    [Space(7)]
-    [Header("资源读取设置")]
-    public ConfigureOptions _ResourceSetting;
-
-    public string[] types;
-
-    [Space(7)]
-    [Header("assetBundleURL。根据服务器可能有变化")]
-    public string assetBundleURL = "http://18.218.70.129/ios";
-    public static string BundleURL = "http://18.218.70.129/ios";
-    
-    void Start()
+    public IEnumerator GetWholeDownLoadSize(Action<string> Complete)
     {
-        BundleURL = assetBundleURL;
+        Caching.ClearCache();
+        
+        long wholeSize = 0;
+
+        bool basic_anim = false;
+        bool skill_anim = false;
+        bool hurt_anim = false;
+        bool knock_anim = false;
+        bool unit = false;
+        bool weapon = false;
+        bool effect = false;
+        bool quest = false;
+        bool skill_icon = false;
+        
+        downLoadSize("basic_anim", () => { basic_anim = true; });
+        downLoadSize("skill_anim", () => { skill_anim = true; });
+        downLoadSize("hurt_anim",() => { hurt_anim = true; });
+        downLoadSize("knock_anim",() => { knock_anim = true; });
+        downLoadSize("unit",() => { unit = true; });
+        downLoadSize("weapon",() => { weapon = true; });
+        downLoadSize("effect",() => { effect = true; });
+        downLoadSize("quest", () => { quest = true; });
+        downLoadSize("skill_icon", () => { skill_icon = true; });
+        
+        void downLoadSize(string label, Action OnComplete)
+        {
+            AsyncOperationHandle<long> getDownloadSize = Addressables.GetDownloadSizeAsync(label);
+            getDownloadSize.Completed += (AsyncOperationHandle) =>
+            {
+                wholeSize += AsyncOperationHandle.Result;
+                OnComplete.Invoke();
+            };
+        }
+        
+        while (!(basic_anim && skill_anim && hurt_anim && knock_anim && unit && weapon && effect && quest && skill_icon))
+        {
+            Debug.Log("正在计算下载文件总大小");
+            yield return null;
+        }
+        
+        string warn = "总大小" + wholeSize;
+        Complete(warn);
     }
     
-    public IEnumerator ResourcePrepareProcess()
+    public IEnumerator ResourcePrepareProcess(Action Complete, Action<string,float> progressUIRefresh)
     {
-        ResourceLoadingSetting.ConfigFileLoadingMode = _ResourceSetting.ConfigFileLoadingMode;
-        ResourceLoadingSetting.AnimationLoadingMode = _ResourceSetting.AnimationLoadingMode;
-        ResourceLoadingSetting.MagicLoadingMode = _ResourceSetting.MagicLoadingMode;
-        ResourceLoadingSetting.ModelLoadingMode = _ResourceSetting.ModelLoadingMode;
-        ResourceLoadingSetting.IconLoadingMode = _ResourceSetting.IconLoadingMode;
-        
         Units.LoadMonstersConfig();
         SkillConfigTable.LoadAllSkillConfigs();
-
-        yield return downLoadMission("basic_anim");
-        yield return downLoadMission("skill_anim");
-        yield return downLoadMission("hurt_anim");
-        yield return downLoadMission("knock_anim");
-        yield return downLoadMission("knock_anim");
-        yield return downLoadMission("unit");
-        yield return downLoadMission("weapon");
-        yield return downLoadMission("effect");
-        yield return downLoadMission("quest");
+        
+        yield return downLoadMission("basic_anim", progressUIRefresh);
+        yield return downLoadMission("skill_anim", progressUIRefresh);
+        yield return downLoadMission("hurt_anim", progressUIRefresh);
+        yield return downLoadMission("knock_anim", progressUIRefresh);
+        yield return downLoadMission("unit", progressUIRefresh);
+        yield return downLoadMission("weapon", progressUIRefresh);
+        yield return downLoadMission("effect", progressUIRefresh);
+        yield return downLoadMission("quest", progressUIRefresh);
+        
+        Complete.Invoke();
     }
-
-    IEnumerator downLoadMission(string label)
+    
+    IEnumerator downLoadMission(string label, Action<string,float> progressUIRefresh)
     {
         // Clear all cached AssetBundles
         // WARNING: This will cause all asset bundles to be re-downloaded at startup every time and should not be used in a production game
-        // Addressables.ClearDependencyCacheAsync(key);
+        //Addressables.ClearDependencyCacheAsync(label);
         
         //Check the download size
         AsyncOperationHandle<long> getDownloadSize = Addressables.GetDownloadSizeAsync(label);
         yield return getDownloadSize;
         
+        Debug.Log(getDownloadSize.Status);
+        
         if (getDownloadSize.Result > 0)
         {
-            AsyncOperationHandle downloadDependencies = Addressables.DownloadDependenciesAsync(label);
-            yield return downloadDependencies;
+            Debug.Log("尝试开始下载："+label + " size: " + getDownloadSize.Result);
+            var dl = Addressables.DownloadDependenciesAsync(label);
+            dl.Completed += (AsyncOperationHandle) =>
+            {
+            };
+            while (dl.PercentComplete < 1 && !dl.IsDone)
+            {
+                progressUIRefresh("Downloading Asset: "+label, dl.PercentComplete);
+                yield return null;
+            }
+        }
+        else
+        {
+            Debug.Log("没有get到远程？："+label + "："+ getDownloadSize.Result);
         }
     }
 }

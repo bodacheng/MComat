@@ -1,24 +1,37 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StartUpPresentation : MonoBehaviour
 {
-    [Space(7)]
-    [Header("Starter")]
     public Starter Starter;
-
-    [Space(7)]
-    [Header("ResourceLordSceneStarter")]
+    public RectTransform T;
     public ResourceDownLoad ResourceDownLoad;
     
     void Start()
     {
-        StartCoroutine(WholeProcess());
+        StartCoroutine(ResourceDownLoad.GetWholeDownLoadSize(DownLoadConfirm));
     }
 
-    IEnumerator WholeProcess()
+    [SerializeField] private TextMeshProUGUI ProgressMsg;
+
+    [SerializeField] private Slider progressBar;
+    
+    void ProgressUIStateRefresh(string msg, float progress)
     {
-        yield return ResourceDownLoad.ResourcePrepareProcess();
+        ProgressMsg.text = msg;
+        progressBar.value = progress;
+    }
+    
+    void DownLoadConfirm(string msg)
+    {
+        var popupLayer = PopupLayer.Open(T.gameObject);
+        popupLayer.ArrangeConfirmWindow(()=> StartCoroutine(ResourceDownLoad.ResourcePrepareProcess(EnterGame, ProgressUIStateRefresh)), msg);
+    }
+
+    void EnterGame()
+    {
         if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
         {
             Starter.ToSkillShowerMode();

@@ -35,7 +35,7 @@ namespace FightScene
                     });
                     var unitInfo = RTFightManager.target.UnitInfoRef[center];
                     var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
-                    _SideIcon.focusingCharIcon.ChangeIcon(MonsterIconDic.Get(unitInfo.r_id), unitConfig.element);
+                    _SideIcon.focusingCharIcon.ChangeIcon(global::UnitIconDic.Get(unitInfo.r_id), unitConfig.element);
                     _SideIcon.gameObject.SetActive(true);
                 }
                 else

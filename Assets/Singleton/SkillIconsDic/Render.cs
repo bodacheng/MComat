@@ -1,17 +1,22 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Skill;
+using UnityEngine.AddressableAssets;
 
 public partial class SkillIconsDic
 {
-    public GameObject FindSkillIconPrefabByResource(string skillID)
+    public GameObject FindSkillIconPrefab(string skillId)
     {
-        GameObject prefab, returnValue;
-        if (!SkillIconDic.ContainsKey(skillID))
+        GameObject returnValue;
+        if (!SkillIconDic.ContainsKey(skillId))
         {
-            SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(skillID);
+            var skillConfig = SkillConfigTable.GetSkillConfig(skillId);
             // 图标可以是Sprite或其他格式，只要名字对上编号就可以
-            Sprite sprite = Resources.Load<Sprite>("Sprites/skillIcons/" + skillID);
+            
+            var op = Addressables.LoadAssetAsync<Sprite>(skillId);
+            var sprite = op.WaitForCompletion();
+            Addressables.Release(op);
+            
+            GameObject prefab;
             if (sprite != null)
             {
                 prefab = Instance.GetDefaultSkillIconByResource(skillConfig.SP_LEVEL);
@@ -20,28 +25,30 @@ public partial class SkillIconsDic
             }
             else
             {
-                prefab = Resources.Load("Sprites/skillIcons/" + skillID) as GameObject;
+                var op2 = Addressables.LoadAssetAsync<GameObject>(skillId);
+                prefab = op2.WaitForCompletion();
+                Addressables.Release(op2);
                 if (prefab == null)
                 {
                     prefab = Instance.GetDefaultSkillIconByResource(skillConfig.SP_LEVEL);
                 }
                 returnValue = Object.Instantiate(prefab);
             }
-            DicAdd<string, GameObject>.Add(SkillIconDic, skillID, returnValue);
+            DicAdd<string, GameObject>.Add(SkillIconDic, skillId, returnValue);
         }
         else
         {
-            SkillIconDic.TryGetValue(skillID, out returnValue);
+            SkillIconDic.TryGetValue(skillId, out returnValue);
             if (returnValue == null)
             {
-                SkillIconDic.Remove(skillID);
-                return FindSkillIconPrefabByResource(skillID);
+                SkillIconDic.Remove(skillId);
+                return FindSkillIconPrefab(skillId);
             }
         }
         
         return returnValue;
     }
-
+    
     GameObject d, ex1, ex2, ex3;
     GameObject GetDefaultSkillIconByResource(int spLevel)
     {

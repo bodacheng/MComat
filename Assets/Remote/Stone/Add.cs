@@ -15,15 +15,15 @@ namespace dataAccess
         /// 生成账户用技能石图标，生成的模型会加入统一技能石字典作为备用
         /// </summary>
         /// <param name="instanceId">技能石账户id</param>
-        public static void GenerateStoneModelByAccID(string instanceId)
+        static void GenerateStoneModelByAccID(string instanceId)
         {
             if (RenderModelDic.ContainsKey(instanceId))
             {
                 if (RenderModelDic[instanceId] != null)
                     return;
             }
-            StoneOfPlayerInfo info = Get(instanceId);
-            SKStoneItem item = GenerateStoneModel(info.skillId, true);
+            var info = Get(instanceId);
+            var item = GenerateStoneModel(info.skillId, true);
             item.Inherent = info.Inherent == "true";
             item._SkillConfig = SkillConfigTable.GetSkillConfig(Dic[instanceId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
@@ -42,7 +42,7 @@ namespace dataAccess
                 return null;
             }
             
-            var Icon = SkillIconsDic.Instance.FindSkillIconPrefabByResource(skillID);
+            var Icon = SkillIconsDic.Instance.FindSkillIconPrefab(skillID);
             var ob = GameObject.Instantiate(Icon);
             ob.gameObject.name = "skillIcon_" + skillID;
             var item = ob.GetComponent<SKStoneItem>();

@@ -59,76 +59,60 @@ public partial class NineForShow : MonoBehaviour
         }
     }
     
-    public void ShowStones(string A1skillid, string A2skillid, string A3skillid,
-                                    string B1skillid, string B2skillid, string B3skillid,
-                                        string C1skillid, string C2skillid, string C3skillid)
+    public void ShowStones(string a1Skillid, string a2Skillid, string a3Skillid,
+                                    string b1Skillid, string b2Skillid, string b3Skillid,
+                                        string c1Skillid, string c2Skillid, string c3Skillid)
     {
-        try
+        ClearCurrent();
+        
+        A1S = Stones.GenerateStoneModel(a1Skillid, false);
+        A2S = Stones.GenerateStoneModel(a2Skillid, false);
+        A3S = Stones.GenerateStoneModel(a3Skillid, false);
+        B1S = Stones.GenerateStoneModel(b1Skillid, false);
+        B2S = Stones.GenerateStoneModel(b2Skillid, false);
+        B3S = Stones.GenerateStoneModel(b3Skillid, false);
+        C1S = Stones.GenerateStoneModel(c1Skillid, false);
+        C2S = Stones.GenerateStoneModel(c2Skillid, false);
+        C3S = Stones.GenerateStoneModel(c3Skillid, false);
+
+        if (A1S != null)
         {
-            ClearCurrent();
-
-            A1S = Stones.GenerateStoneModel(A1skillid, false);
-            A2S = Stones.GenerateStoneModel(A2skillid, false);
-            A3S = Stones.GenerateStoneModel(A3skillid, false);
-            B1S = Stones.GenerateStoneModel(B1skillid, false);
-            B2S = Stones.GenerateStoneModel(B2skillid, false);
-            B3S = Stones.GenerateStoneModel(B3skillid, false);
-            C1S = Stones.GenerateStoneModel(C1skillid, false);
-            C2S = Stones.GenerateStoneModel(C2skillid, false);
-            C3S = Stones.GenerateStoneModel(C3skillid, false);
-
-            if (A1S != null)
-            {
-                A1Frame.color = RefreshFrameColor(A1S._SkillConfig.SP_LEVEL);
-            }
-
-            if (A2S != null)
-            {
-                A2Frame.color = RefreshFrameColor(A2S._SkillConfig.SP_LEVEL);
-            }
-
-            if (A3S != null)
-            {
-                A3Frame.color = RefreshFrameColor(A3S._SkillConfig.SP_LEVEL);
-            }
-
-            if (B1S != null)
-            {
-                B1Frame.color = RefreshFrameColor(B1S._SkillConfig.SP_LEVEL);
-            }
-
-            if (B2S != null)
-            {
-                B2Frame.color = RefreshFrameColor(B2S._SkillConfig.SP_LEVEL);
-            }
-
-            if (B3S != null)
-            {
-                B3Frame.color = RefreshFrameColor(B3S._SkillConfig.SP_LEVEL);
-            }
-
-            if (C1S != null)
-            {
-                C1Frame.color = RefreshFrameColor(C1S._SkillConfig.SP_LEVEL);
-            }
-
-            if (C2S != null)
-            {
-                C2Frame.color = RefreshFrameColor(C2S._SkillConfig.SP_LEVEL);
-            }
-
-            if (C3S != null)
-            {
-                C3Frame.color = RefreshFrameColor(C3S._SkillConfig.SP_LEVEL);
-            }
-
-            Parent();
+            A1Frame.color = RefreshFrameColor(A1S._SkillConfig.SP_LEVEL);
         }
-        catch (Exception e)
+        if (A2S != null)
         {
-            Debug.Log("存在本地逻辑顺序问题");
-            Debug.Log(e);
+            A2Frame.color = RefreshFrameColor(A2S._SkillConfig.SP_LEVEL);
         }
+        if (A3S != null)
+        {
+            A3Frame.color = RefreshFrameColor(A3S._SkillConfig.SP_LEVEL);
+        }
+        if (B1S != null)
+        {
+            B1Frame.color = RefreshFrameColor(B1S._SkillConfig.SP_LEVEL);
+        }
+        if (B2S != null)
+        {
+            B2Frame.color = RefreshFrameColor(B2S._SkillConfig.SP_LEVEL);
+        }
+        if (B3S != null)
+        {
+            B3Frame.color = RefreshFrameColor(B3S._SkillConfig.SP_LEVEL);
+        }
+        if (C1S != null)
+        {
+            C1Frame.color = RefreshFrameColor(C1S._SkillConfig.SP_LEVEL);
+        }
+        if (C2S != null)
+        {
+            C2Frame.color = RefreshFrameColor(C2S._SkillConfig.SP_LEVEL);
+        }
+        if (C3S != null)
+        {
+            C3Frame.color = RefreshFrameColor(C3S._SkillConfig.SP_LEVEL);
+        }
+        
+        Parent();
     }
     
     Color RefreshFrameColor(int splevel)
