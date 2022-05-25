@@ -61,8 +61,8 @@ public class TeamEditLayer : UILayer
         
         PreScene.target.SetFocusingUnit(instanceID);//确立focusing角色
         _nineForShow.ShowStones_Acc(instanceID);
-        
-        SingleThreadProcesser.backup.RunAsQueued(_connector.ShowMyModel(instanceID));
+
+        _connector.ShowMyModel(instanceID);
     }
     
     // 修改对象队伍编程
@@ -149,7 +149,7 @@ public class TeamEditLayer : UILayer
                 
                 string instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(focusingPos);
                 PreScene.target.SetFocusingUnit(instanceID);//确立focusing角色
-                SingleThreadProcesser.backup.RunAsQueued(_connector.ShowMyModel(instanceID));
+                _connector.ShowMyModel(instanceID);
                 if (PreScene.target._focusing != null)
                     _nineForShow.ShowStones_Acc(PreScene.target._focusing.id);
                 else

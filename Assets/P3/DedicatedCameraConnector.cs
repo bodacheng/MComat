@@ -1,10 +1,11 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Linq;
 using System.Collections;
 using dataAccess;
 using mainMenu;
+using Singleton;
 using UnityEngine.Rendering.Universal;
 
 namespace Cocone.ProjectP3
@@ -21,6 +22,8 @@ namespace Cocone.ProjectP3
         private readonly Bounds tempBoundary = new Bounds();
         private RectTransform rect;
         private bool fixMode;
+
+        private IEnumerator enumerator;
         
         public void Clear()
         {
@@ -29,29 +32,55 @@ namespace Cocone.ProjectP3
                 DestroyImmediate(target.gameObject);
             DestroyImmediate(this.gameObject);
         }
+
+        private void OnDestroy()
+        {
+            if (enumerator != null)
+                StopCoroutine(enumerator);
+            
+            if (GeneralModelPool.process != null)
+                StopCoroutine(GeneralModelPool.process);
+                
+            if (target != null)
+                DestroyImmediate(target.gameObject);
+        }
+
+        public void ShowMyModel(string instanceID)
+        {
+            enumerator = _ShowMyModel(instanceID);
+            StartCoroutine(enumerator);
+        }
         
-        GameObject model;
-        public IEnumerator ShowMyModel(string instanceID)
+        GameObject _model;
+        IEnumerator _ShowMyModel(string instanceID)
         {
             var info = MyMonsters.Get(instanceID);
-            var p = ShowModel(info?.r_id);
+            var p = _ShowModel(info?.r_id);
             yield return p;
             yield return p.Current;
         }
-    
-        public IEnumerator ShowModel(string recordID) 
+        
+        public void ShowModel(string recordID)
         {
-            if (model != null)
+            enumerator = _ShowModel(recordID);
+            StartCoroutine(enumerator);
+        }
+    
+        IEnumerator _ShowModel(string recordID) 
+        {
+            if (enumerator != null)
+                StopCoroutine(enumerator);
+            if (_model != null)
             {
-                DestroyImmediate(model);
-                model = null;
+                DestroyImmediate(_model);
+                _model = null;
             }
             if (recordID == null)
             {
                 yield break;
             }
             
-            var p = GeneralModelPool.GetModel(recordID);
+            var p = GeneralModelPool.GetModel(recordID, transform);
             yield return p;
             if (p.Current == null)
             {
@@ -63,36 +92,35 @@ namespace Cocone.ProjectP3
             if (_dataCenter == null)
             {
                 Debug.Log("模型错误");
-                SkillShowSupporter.focusingC = null;
+                SkillShowSupporter.FocusingC = null;
                 yield break;
             }
             var dataCenter = (Data_Center)_dataCenter;
-            SkillShowSupporter.focusRId = recordID;
-            SkillShowSupporter.focusingC = dataCenter;
-            SkillShowSupporter.focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
+            SkillShowSupporter.FocusRId = recordID;
+            SkillShowSupporter.FocusingC = dataCenter;
+            SkillShowSupporter.FocusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
             
             // 这个短暂变色是为了掩盖一些模型刚加载瞬间有些渲染没到位的尴尬。比如裙子摇晃 
-            // 但是这个不知道为什么报warning
-            // dataCenter._ShaderManager.FlatColorForAShortTime(10f, 0, 0.5f, Color.black); 
-        
-            model = dataCenter.WholeT.gameObject;
-            model.SetActive(true);
-            model.transform.parent = transform;
+            dataCenter._ShaderManager.FlatColorForAShortTime(Color.black, 0.5f, 0.5f);
             
-            Initialize(true,model.transform, transform, PreScene.target.FxCamera);
+            _model = dataCenter.WholeT.gameObject;
+            _model.SetActive(true);
+            
+            Initialize(false,_model.transform, transform, PreScene.target.FxCamera);
             ItemDetailStartDirection(0,0,0);
-            yield return model;
+            yield return _model;
         }
         
-        public void Initialize(bool fixMode, Transform focus, Transform camerasHolder = null, Camera stackParent = null)
+        void Initialize(bool fixMode, Transform focus, Transform camerasHolder = null, Camera stackParent = null)
         {
             this.fixMode = fixMode;
             rect = transform.GetComponent<RectTransform>();
             target = focus;
-            parentNodeRenderer = target.GetComponent<Renderer>();
-            renderers = target.GetComponentsInChildren<Renderer>().ToArray();
+            target.SetParent(transform);
+            _parentNodeRenderer = target.GetComponent<Renderer>();
+            _renderers = target.GetComponentsInChildren<Renderer>().ToArray();
             
-            foreach (var mesh in renderers)
+            foreach (var mesh in _renderers)
             {
                 if (mesh is SkinnedMeshRenderer skinnedMesh)
                 {
@@ -117,39 +145,44 @@ namespace Cocone.ProjectP3
             if (!this.fixMode)
                 _basicOrthographicSize = CalMaxOrthographicSize();
         }
-        
-        private Renderer parentNodeRenderer;
-        private Bounds targetBounds;
-        private Renderer[] renderers;
 
+        void Update()
+        {
+            if (target != null) CameraPositionCal();
+        }
+
+        private Renderer _parentNodeRenderer;
+        private Bounds _targetBounds;
+        private Renderer[] _renderers;
         private float _basicOrthographicSize;
-        public void CameraPositionCal()
+        
+        void CameraPositionCal()
         {
             // 合成Bounds計算
-            targetBounds = tempBoundary;
-            if (parentNodeRenderer != null)
+            _targetBounds = tempBoundary;
+            if (_parentNodeRenderer != null)
             {
-                targetBounds = parentNodeRenderer.bounds;
+                _targetBounds = _parentNodeRenderer.bounds;
             }
 
-            foreach (var render in renderers)
+            foreach (var render in _renderers)
             {
                 if (render == null)
                     continue; 
 
-                if (targetBounds == tempBoundary)
+                if (_targetBounds == tempBoundary)
                 {
-                    targetBounds = render.bounds;
+                    _targetBounds = render.bounds;
                 }
                 else
                 {
-                    targetBounds.Encapsulate(render.bounds);
+                    _targetBounds.Encapsulate(render.bounds);
                 }
             }
             
             if (fixMode)
             {
-                _basicOrthographicSize = Mathf.Max(targetBounds.extents.x, targetBounds.extents.y);
+                _basicOrthographicSize = Mathf.Max(_targetBounds.extents.x, _targetBounds.extents.y);
             }
             
             camera.orthographicSize = _basicOrthographicSize * (Screen.height / rect.rect.height);
@@ -158,10 +191,10 @@ namespace Cocone.ProjectP3
             var cViewWidth = camera.orthographicSize * 2 * camera.aspect;
             var cViewHeight = camera.orthographicSize * 2;
             
-            camera.transform.position = targetBounds.center + Vector3.forward * (targetBounds.extents.z + extraZDis)
+            camera.transform.position = _targetBounds.center + Vector3.forward * (_targetBounds.extents.z + extraZDis)
                         + (0.5f -　((float)viewCenter.x / Screen.width)) * cViewWidth * camera.transform.right 
                         + (0.5f - ((float)viewCenter.y / Screen.height)) * cViewHeight * Vector3.up;
-            camera.farClipPlane = targetBounds.extents.z * 2 + extraZDis + extraZCameraDepth;
+            camera.farClipPlane = _targetBounds.extents.z * 2 + extraZDis + extraZCameraDepth;
         }
         
         static Vector2 GetCenterPosition(RectTransform rect)
@@ -202,7 +235,6 @@ namespace Cocone.ProjectP3
             this._z = Z;
             target.localRotation = Quaternion.Euler(up_down, 0, Z);
             target.RotateAround(target.position, target.up, left_right);
-            CameraPositionCal();
         }
         
         public void OnPointerDown()
@@ -255,25 +287,25 @@ namespace Cocone.ProjectP3
         
         float CalMaxExtend()
         {
-            targetBounds = tempBoundary;
-            if (parentNodeRenderer != null)
+            _targetBounds = tempBoundary;
+            if (_parentNodeRenderer != null)
             {
-                targetBounds = parentNodeRenderer.bounds;
+                _targetBounds = _parentNodeRenderer.bounds;
             }
 
-            foreach (Renderer render in renderers)
+            foreach (Renderer render in _renderers)
             {
-                if (targetBounds == tempBoundary)
+                if (_targetBounds == tempBoundary)
                 {
-                    targetBounds = render.bounds;
+                    _targetBounds = render.bounds;
                 }
                 else
                 {
-                    targetBounds.Encapsulate(render.bounds);
+                    _targetBounds.Encapsulate(render.bounds);
                 }
             }
 
-            return Vector3.Distance(targetBounds.max, targetBounds.min) / 2f;
+            return Vector3.Distance(_targetBounds.max, _targetBounds.min) / 2f;
         }
     }
 }

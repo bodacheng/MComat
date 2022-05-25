@@ -9,7 +9,7 @@ using Skill;
 
 public static class Units
 {
-    public static IDictionary<string, UnitConfig> Dic = new Dictionary<string, UnitConfig>();
+    public static readonly IDictionary<string, UnitConfig> Dic = new Dictionary<string, UnitConfig>();
 
     [Serializable]
     public class Row
@@ -28,6 +28,8 @@ public static class Units
             
     public static UnitConfig GetUnitConfig(string resourceId)
     {
+        if (resourceId == null)
+            return null;
         return Dic.ContainsKey(resourceId) ? Dic[resourceId] : null;
     }
     public static void LoadByResource()

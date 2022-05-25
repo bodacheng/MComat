@@ -98,18 +98,18 @@ namespace mainMenu
             //selfdefindtag.onValueChanged.AddListener(delegate { definemycharactertag(); });
 
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            presentationProcessRunner.RunAsQueued(UnitModelRender(UnitInfo.GetUnitInfo(PreScene.target._focusing)));
+            UnitModelRender(UnitInfo.GetUnitInfo(PreScene.target._focusing));
         }
         
-        IEnumerator UnitModelRender(UnitInfo info)
+        void UnitModelRender(UnitInfo info)
         {
             if (info == null)
             {
                 Debug.Log("角色详细信息读取错误.尝试将“对准”中的角色信息至空");
-                yield return _connector.ShowMyModel(null);
-            }else{
-                var showMyModel = _connector.ShowMyModel(info.id);
-                yield return showMyModel;
+                _connector.ShowMyModel(null);
+            }else
+            {
+                _connector.ShowMyModel(info.id);
             }
         }
     }

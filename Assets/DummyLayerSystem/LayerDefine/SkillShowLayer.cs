@@ -174,14 +174,13 @@ namespace mainMenu
         
         IEnumerator ShowModel()
         {
-            var showMyModel = _connector.ShowMyModel(PreScene.target._focusing.id);
-            yield return showMyModel;
+            _connector.ShowMyModel(PreScene.target._focusing.id);
             var config = Units.GetUnitConfig(PreScene.target._focusing.r_id);
             var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
-            yield return SkillShowSupporter.focusingC.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK, config.SPECIAL_ZOKUSEI);
-            yield return SkillShowSupporter.focusingC.Step2Initialize(config.TYPE, unitInfo.set, unitInfo.level, config.element, config.SPECIAL_ZOKUSEI);
-            if (SkillShowSupporter.focusingC._MyBehaviorRunner != null)
-                SkillShowSupporter.focusingC._MyBehaviorRunner.ChangeState("Empty");
+            yield return SkillShowSupporter.FocusingC.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK, config.SPECIAL_ZOKUSEI);
+            yield return SkillShowSupporter.FocusingC.Step2Initialize(config.TYPE, unitInfo.set, unitInfo.level, config.element, config.SPECIAL_ZOKUSEI);
+            if (SkillShowSupporter.FocusingC._MyBehaviorRunner != null)
+                SkillShowSupporter.FocusingC._MyBehaviorRunner.ChangeState("Empty");
         }
 
         // 打印出技能显示画面
@@ -276,58 +275,58 @@ namespace mainMenu
         #region 表情测试相关
         public void Face_CloseEye()
         {
-            if (SkillShowSupporter.focusingC != null)
+            if (SkillShowSupporter.FocusingC != null)
             {
-                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("face_reset");
-                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("close_eye");
+                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("face_reset");
+                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("close_eye");
             }
         }
         public void Face_Suprise()
         {
-            if (SkillShowSupporter.focusingC != null)
+            if (SkillShowSupporter.FocusingC != null)
             {
-                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("face_reset");
-                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("suprise");
+                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("face_reset");
+                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("suprise");
             }
         }
         public void Face_Angry()
         {
-            if (SkillShowSupporter.focusingC != null)
+            if (SkillShowSupporter.FocusingC != null)
             {
-                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("face_reset");
-                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("angry");
+                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("face_reset");
+                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("angry");
             }
         }
         public void Face_Pain()
         {
-            if (SkillShowSupporter.focusingC != null)
+            if (SkillShowSupporter.FocusingC != null)
             {
-                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("face_reset");
-                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("hurt");
+                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("face_reset");
+                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("hurt");
             }
         }
         public void Face_Smile()
         {
-            if (SkillShowSupporter.focusingC != null)
+            if (SkillShowSupporter.FocusingC != null)
             {
-                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("face_reset");
-                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("smile");
+                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("face_reset");
+                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("smile");
             }
         }
         public void Face_Evil()
         {
-            if (SkillShowSupporter.focusingC != null)
+            if (SkillShowSupporter.FocusingC != null)
             {
-                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("face_reset");
-                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("evil");
+                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("face_reset");
+                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("evil");
             }
         }
         public void Face_Ferocious()
         {
-            if (SkillShowSupporter.focusingC != null)
+            if (SkillShowSupporter.FocusingC != null)
             {
-                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("face_reset");
-                SkillShowSupporter.focusingC.Animation_Manger.SetTrigger("ferocious");
+                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("face_reset");
+                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("ferocious");
             }
         }
         #endregion
