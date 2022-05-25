@@ -16,10 +16,10 @@ namespace mainMenu
         [Header("主进程处理器")]
         public SingleThreadProcesser mainProcessRunner;
         
-        [Header("主相机")]
+        [Header("环境")]
         public CameraManager _CameraManager;
         
-        [Header("FX 相机")] 
+        [Header("UI 相机")] 
         public Camera FxCamera;
         
         [Header("Positions For Show")]

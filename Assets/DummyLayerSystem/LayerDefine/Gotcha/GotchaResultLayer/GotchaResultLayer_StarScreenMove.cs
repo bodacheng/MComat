@@ -2,21 +2,20 @@ using UnityEngine;
 using System.Collections.Generic;
 using dataAccess;
 using DG.Tweening;
-using Skill;
 using mainMenu;
 
 public partial class GotchaResultLayer : UILayer
 {
     #region 屏幕星星飞入位置
-    public RectTransform starWaitPos1, starWaitPos2, starWaitPos3, starWaitPos4, starWaitPos5, starWaitPos6, starWaitPos7, starWaitPos8, starWaitPos9;
-    readonly List<RectTransform> waitPos = new List<RectTransform>();
+    [SerializeField] RectTransform starWaitPos1, starWaitPos2, starWaitPos3, starWaitPos4, starWaitPos5, starWaitPos6, starWaitPos7, starWaitPos8, starWaitPos9;
+    readonly List<RectTransform> waitPos = new();
     #endregion
     
-    readonly List<Decompositioner> stoneFallingModels = new List<Decompositioner>();
-    readonly List<Decompositioner> stoneStartFlashModels = new List<Decompositioner>();
-    readonly List<Vector3> slotScreenPos = new List<Vector3>();
-    readonly List<Decompositioner> screenStarModels = new List<Decompositioner>();
-    readonly List<Decompositioner> screenStarExplosionModels = new List<Decompositioner>();
+    readonly List<Decompositioner> stoneFallingModels = new();
+    readonly List<Decompositioner> stoneStartFlashModels = new();
+    readonly List<Vector3> slotScreenPos = new();
+    readonly List<Decompositioner> screenStarModels = new();
+    readonly List<Decompositioner> screenStarExplosionModels = new();
     
     void SetWaitPos()
     {
@@ -49,9 +48,9 @@ public partial class GotchaResultLayer : UILayer
     /// <returns></returns>
     void StarScreenMoveAnim(StoneOfPlayerInfo info, Vector3 waitPos, Vector3 endPos)
     {
-        SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(info.skillId);
-        string screenStarName = "";
-        string explosionName = "";
+        var skillConfig = SkillConfigTable.GetSkillConfig(info.skillId);
+        var screenStarName = "";
+        var explosionName = "";
         switch(skillConfig.SP_LEVEL) // 这里应该是rarelevel
         {
             case 0:
@@ -72,11 +71,11 @@ public partial class GotchaResultLayer : UILayer
                 break;
         }
         
-        Decompositioner screenStar = EffectsManager.GenerateEffect(screenStarName, FightGlobalSetting.EffectPathDefine(Element.Null), waitPos, Quaternion.identity, null);
+        var screenStar = EffectsManager.GenerateEffect(screenStarName, FightGlobalSetting.EffectPathDefine(Element.Null), waitPos, Quaternion.identity, null);
         screenStarModels.Add(screenStar);
         screenStar.transform.DOMove(endPos, 2f).OnComplete(() =>
         {
-            Decompositioner effect = EffectsManager.GenerateEffect(explosionName, FightGlobalSetting.EffectPathDefine(Element.Null), endPos, Quaternion.identity, null);
+            var effect = EffectsManager.GenerateEffect(explosionName, FightGlobalSetting.EffectPathDefine(Element.Null), endPos, Quaternion.identity, null);
             screenStarExplosionModels.Add(effect);
         });
     }
@@ -85,15 +84,15 @@ public partial class GotchaResultLayer : UILayer
     void PosDecide()
     {
         // 星星落入格子
-        Vector3 a1ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.A1T.GetComponent<RectTransform>(), 5f);
-        Vector3 a2ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.A2T.GetComponent<RectTransform>(), 5f);
-        Vector3 a3screenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.A3T.GetComponent<RectTransform>(), 5f);
-        Vector3 b1ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.B1T.GetComponent<RectTransform>(), 5f);
-        Vector3 b2ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.B2T.GetComponent<RectTransform>(), 5f);
-        Vector3 b3ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.B3T.GetComponent<RectTransform>(), 5f);
-        Vector3 c1ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.C1T.GetComponent<RectTransform>(), 5f);
-        Vector3 c2ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.C2T.GetComponent<RectTransform>(), 5f);
-        Vector3 c3ScreenPos = PosCal.GetWorldPos(PreScene.target.FxCamera, NineForShow.C3T.GetComponent<RectTransform>(), 5f);
+        Vector3 a1ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.A1T.GetComponent<RectTransform>(), 5f);
+        Vector3 a2ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.A2T.GetComponent<RectTransform>(), 5f);
+        Vector3 a3screenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.A3T.GetComponent<RectTransform>(), 5f);
+        Vector3 b1ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.B1T.GetComponent<RectTransform>(), 5f);
+        Vector3 b2ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.B2T.GetComponent<RectTransform>(), 5f);
+        Vector3 b3ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.B3T.GetComponent<RectTransform>(), 5f);
+        Vector3 c1ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.C1T.GetComponent<RectTransform>(), 5f);
+        Vector3 c2ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.C2T.GetComponent<RectTransform>(), 5f);
+        Vector3 c3ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.C3T.GetComponent<RectTransform>(), 5f);
         slotScreenPos.Clear();
         slotScreenPos.Add(a1ScreenPos);
         slotScreenPos.Add(a2ScreenPos);

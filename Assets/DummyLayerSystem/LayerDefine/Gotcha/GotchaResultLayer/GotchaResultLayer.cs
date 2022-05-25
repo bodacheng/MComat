@@ -18,14 +18,14 @@ public partial class GotchaResultLayer : UILayer
     
     public static GotchaResultLayer Open()
     {
-        UILayer l = UILayerLoader.Get("GotchaResultLayer");
+        var l = UILayerLoader.Get("GotchaResultLayer");
         if (l != null)
         {
             return l as GotchaResultLayer;
         }
         
         l = UILayerLoader.Load(PreScene.target.T, "GotchaResultLayer");
-        GotchaResultLayer layer = l as GotchaResultLayer;
+        var layer = l as GotchaResultLayer;
         layer.Skip.onClick.AddListener(layer.SkipStarFallAnim);
         layer.SpeedOnce.onClick.AddListener(layer.SpeedOneGotchaAnim);
         layer.SetWaitPos();
