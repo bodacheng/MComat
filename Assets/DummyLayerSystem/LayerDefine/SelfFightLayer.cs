@@ -246,7 +246,7 @@ namespace mainMenu
             {
                 var _one = MyMonsters.Get(PosInstanceId);
                 var unitConfig = Units.GetUnitConfig(_one.r_id);
-                tar.ChangeIcon(unitConfig == null ? null : UnitIconDic.Get(unitConfig.RECORD_ID),
+                tar.ChangeIcon(unitConfig == null ? null : UnitIconDic.Load(unitConfig.RECORD_ID),
                     unitConfig == null ? Element.Null : unitConfig.element);
             }
             else

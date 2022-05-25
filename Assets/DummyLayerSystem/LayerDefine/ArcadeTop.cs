@@ -75,7 +75,7 @@ public partial class ArcadeTop : UILayer
                 {
                     for (int i = 0; i < one.fightMembers.EnemySets.GetValues().Count; i++)
                     {
-                        UnitIconDic.Get(one.fightMembers.EnemySets.GetValues()[i].r_id);
+                        UnitIconDic.Load(one.fightMembers.EnemySets.GetValues()[i].r_id);
                     }
                     
                     var heroIcons = MemberInfosShow(one.fightMembers.EnemySets.GetValues(), newButton.IconsT);
