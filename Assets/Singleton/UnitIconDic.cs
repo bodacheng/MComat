@@ -6,12 +6,7 @@ public static class UnitIconDic {
     
     static readonly IDictionary<string, Sprite> Dic = new Dictionary<string, Sprite>();
     
-    public static Sprite Get(string rId)
-    {
-        return FindByResource(rId);
-    }
-    
-    static Sprite FindByResource(string unit_id)
+    public static Sprite Load(string unit_id)
     {
         Dic.TryGetValue(unit_id, out Sprite Sprite);
         if (Sprite == null)
