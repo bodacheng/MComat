@@ -17,7 +17,7 @@ public partial class StagesManager : EditorWindow {
         {
             {"0","空"}
         };
-        InhereSks = SkillConfigTable.GetPassiveSkills(CharResourceID);
+        InhereSks = SkillConfigTable.GetPassiveSkill(CharResourceID);
         if (InhereSks == null || InhereSks.RECORD_ID == null)
             return;
         

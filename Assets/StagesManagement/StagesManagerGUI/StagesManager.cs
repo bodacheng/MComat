@@ -80,7 +80,7 @@ public partial class StagesManager : EditorWindow
             targetSlot = 0;
             if (string.IsNullOrEmpty(focusingType))
                 return;
-            var INHERENTSkills = SkillConfigTable.GetPassiveSkills(focusingUnitInfo.r_id);
+            var INHERENTSkills = SkillConfigTable.GetPassiveSkill(focusingUnitInfo.r_id);
             focusingUnitInfo.set = SkillSet.RandomSkillSet(focusingType,  INHERENTSkills?.RECORD_ID, 1, false);
         }
                 

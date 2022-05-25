@@ -10,23 +10,22 @@ using Skill;
 public partial class SkillConfigTable
 {
     public static IDictionary<string, SkillConfig> SkillConfigRefDic = new Dictionary<string, SkillConfig>();
-    public static IDictionary<string, string> passiveSkills = new Dictionary<string, string>();
+    static IDictionary<string, string> passiveSkills = new Dictionary<string, string>();
 
-    public static SkillConfig GetPassiveSkills(string unit_recordId)
+    public static SkillConfig GetPassiveSkill(string unit_recordId)
     {
         if (unit_recordId == null)
             return null;
-        
-        string skillid;
-        passiveSkills.TryGetValue(unit_recordId, out skillid);
-        return GetSkillConfig(skillid);
+
+        passiveSkills.TryGetValue(unit_recordId, out var skillId);
+        return GetSkillConfig(skillId);
     }
     
     public class Row
     {
         public string RECORD_ID;
         public string REAL_NAME;
-        public string USEABLE_MONSTER_TYPE;
+        public string TYPE;
         public string SP_LEVEL;
         public string ATTACK_WEIGHT;
         public string HP_WEIGHT;
@@ -35,7 +34,7 @@ public partial class SkillConfigTable
         public string RARITY_LEVEL;
     }
     
-    public static List<Row> rowList = new List<Row>();
+    public static readonly List<Row> rowList = new List<Row>();
     
     static bool isLoaded;
     public static bool IsLoaded()
@@ -148,7 +147,7 @@ public partial class SkillConfigTable
             {
                 grid[i][0] = rowList[i - 1].RECORD_ID;
                 grid[i][1] = rowList[i - 1].REAL_NAME;
-                grid[i][2] = rowList[i - 1].USEABLE_MONSTER_TYPE;
+                grid[i][2] = rowList[i - 1].TYPE;
                 grid[i][3] = rowList[i - 1].SP_LEVEL;
                 grid[i][4] = rowList[i - 1].ATTACK_WEIGHT;
                 grid[i][5] = rowList[i - 1].HP_WEIGHT;
@@ -185,7 +184,7 @@ public partial class SkillConfigTable
                 {
                     RECORD_ID = grid[i][0],
                     REAL_NAME = grid[i][1],
-                    USEABLE_MONSTER_TYPE = grid[i][2],
+                    TYPE = grid[i][2],
                     SP_LEVEL = grid[i][3],
                     ATTACK_WEIGHT = grid[i][4],
                     HP_WEIGHT = grid[i][5],
@@ -209,7 +208,7 @@ public partial class SkillConfigTable
     
     public static List<Row> FindAll_type_keyName(string type, string keyName)
     {
-        return (rowList.FindAll(x => x.REAL_NAME == keyName).Intersect(rowList.FindAll(x => x.USEABLE_MONSTER_TYPE == type))).ToList();
+        return (rowList.FindAll(x => x.REAL_NAME == keyName).Intersect(rowList.FindAll(x => x.TYPE == type))).ToList();
     }
 
     public int NumRows()
@@ -237,11 +236,11 @@ public partial class SkillConfigTable
 	}
     public Row Find_MONSTER_TYPE_CODE(string find)
     {
-    	return rowList.Find(x => x.USEABLE_MONSTER_TYPE == find);
+    	return rowList.Find(x => x.TYPE == find);
     }
     public static List<Row> FindAll_MONSTER_TYPE(string find)
     {
-    	return rowList.FindAll(x => x.USEABLE_MONSTER_TYPE == find);
+    	return rowList.FindAll(x => x.TYPE == find);
     }
 
     public static Row Find_keyName(string find)

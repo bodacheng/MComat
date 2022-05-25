@@ -2,36 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ffacfab-2dd5-4ae9-9658-5b27d8228901" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MComat_mac/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MComat_mac/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AppleAuth.Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/AppleAuth.Editor.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AppleAuth.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/AppleAuth.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp-Editor.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-firstpass.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp-firstpass.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/CachLogic/ResourceDownLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CachLogic/ResourceDownLoad.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SelfFightLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SelfFightLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UnitsLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UnitsLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightingSceneUISystem/HeroIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightingSceneUISystem/HeroIcon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SimpleDragAndDrop/Scripts/Cell/StoneCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimpleDragAndDrop/Scripts/Cell/StoneCell.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Singleton/UnitIconDic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/UnitIconDic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TeamUIManager/MultiRaid/TeamUIManagerMultiRaid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TeamUIManager/MultiRaid/TeamUIManagerMultiRaid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TeamUIManager/RotationMode/RotationMode_INI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TeamUIManager/RotationMode/RotationMode_INI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NoSuchLocalizationCore-Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/NoSuchLocalizationCore-Editor.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NoSuchLocalizationCore.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/NoSuchLocalizationCore.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlayFab.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PlayFab.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlayFabEditorExtensions.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PlayFabEditorExtensions.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlayFabSDKEditor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PlayFabSDKEditor.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniRx.Examples.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/UniRx.Examples.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniRx.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/UniRx.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniTask.Addressables.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/UniTask.Addressables.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniTask.DOTween.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/UniTask.DOTween.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniTask.Editor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/UniTask.Editor.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniTask.Linq.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/UniTask.Linq.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniTask.TextMeshPro.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/UniTask.TextMeshPro.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniTask.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/UniTask.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/HitBoxLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/HitBoxLogger.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable_Util.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable_Util.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StagesManagerGUI/NineSlotSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/StagesManagerGUI/NineSlotSelect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StagesManagerGUI/SelectInheretSkill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/StagesManagerGUI/SelectInheretSkill.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StagesManagerGUI/StagesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/StagesManagerGUI/StagesManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +80,7 @@
       <updated>1653389431067</updated>
       <workItem from="1653389437485" duration="8073000" />
       <workItem from="1653445182768" duration="3320000" />
-      <workItem from="1653485444896" duration="279000" />
+      <workItem from="1653485444896" duration="488000" />
     </task>
     <servers />
   </component>

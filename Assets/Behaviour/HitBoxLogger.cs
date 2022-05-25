@@ -54,7 +54,7 @@ namespace Log
                     {
                         RECORD_ID = SkillConfigTable.rowList[i].RECORD_ID,
                         REAL_NAME = SkillConfigTable.rowList[i].REAL_NAME,
-                        MONSTER_TYPE = SkillConfigTable.rowList[i].USEABLE_MONSTER_TYPE,
+                        MONSTER_TYPE = SkillConfigTable.rowList[i].TYPE,
                         Untouched = "0",
                         Touched = "0",
                         Succeeded = "0",

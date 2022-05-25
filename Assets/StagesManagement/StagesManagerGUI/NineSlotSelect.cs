@@ -72,7 +72,7 @@ public partial class StagesManager : EditorWindow {
                 C3ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
             }
-            var kv = SkillConfigTable.GetPassiveSkills(focusingUnitInfo.r_id) ?? new SkillConfig
+            var kv = SkillConfigTable.GetPassiveSkill(focusingUnitInfo.r_id) ?? new SkillConfig
             {
                 RECORD_ID = null
             };

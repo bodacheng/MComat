@@ -32,7 +32,7 @@ public partial class SkillConfigTable
         Row row = new Row
         {
             RECORD_ID = skillConfig.RECORD_ID,
-            USEABLE_MONSTER_TYPE = skillConfig.TYPE,
+            TYPE = skillConfig.TYPE,
             REAL_NAME = skillConfig.REAL_NAME,
             ATTACK_WEIGHT = skillConfig.ATTACK_WEIGHT.ToString(),
             HP_WEIGHT = skillConfig.HP_WEIGHT.ToString()
@@ -91,7 +91,7 @@ public partial class SkillConfigTable
         {
             SkillConfig _SkillConfig = new SkillConfig
             {
-                TYPE = row.USEABLE_MONSTER_TYPE,
+                TYPE = row.TYPE,
                 RECORD_ID = row.RECORD_ID,
                 REAL_NAME = row.REAL_NAME,
                 ATTACK_WEIGHT = float.Parse(row.ATTACK_WEIGHT),
