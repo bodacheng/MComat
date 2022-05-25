@@ -46,7 +46,7 @@ public class FrontPage : MainSceneProcess
     }
 
     FrontLayer frontLayer;
-    IEnumerator EnterProcess()
+    void EnterProcess()
     {
         frontLayer = UILayerLoader.Load(PreScene.target.T, "FrontLayer") as FrontLayer;
         frontLayer.Initialise(PreScene.target);
@@ -64,7 +64,7 @@ public class FrontPage : MainSceneProcess
             }
         }
         PreScene.target.SetFocusingUnit(focusInstanceID);
-        yield return frontLayer._connector.ShowMyModel(focusInstanceID);
+        frontLayer._connector.ShowMyModel(focusInstanceID);
         
         UpperInfoBar.Open(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), 
             () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox));
@@ -96,7 +96,7 @@ public class FrontPage : MainSceneProcess
             () =>
             {
                 PopupLayer.Close();
-                mainProcessRunner.RunAsQueued(EnterProcess());
+                EnterProcess();
             },
             () => { Debug.Log("错误，怎么办？"); }
         );

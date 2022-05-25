@@ -22,10 +22,8 @@ public class MonsterEditPage : MainSceneProcess
         }
         
         layer = SkillEditLayer.Open();
-        
-        mainProcessRunner.RunAsQueued(layer._connector.ShowMyModel(
-            PreScene.target._focusing != null ?
-                PreScene.target._focusing.id: null));
+
+        layer._connector.ShowMyModel(PreScene.target._focusing != null ? PreScene.target._focusing.id : null);
     }
     
     public MonsterEditPage()
@@ -62,10 +60,6 @@ public class MonsterEditPage : MainSceneProcess
     
     public override void LocalUpdate()
     {
-        if (SkillShowSupporter.focusingC != null)
-        {
-            layer._connector.CameraPositionCal();
-        }
         if (SkillShowSupporter.IfShowingSkill)
         {
             SkillShowSupporter.SkillsPrintOutLateUpdate();

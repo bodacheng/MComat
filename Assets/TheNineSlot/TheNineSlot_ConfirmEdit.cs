@@ -98,7 +98,7 @@ namespace mainMenu
             {
                 UnitConfig unitConfig = Units.GetUnitConfig(PreScene.target._focusing.r_id);
                 string personalEffectsPath = FightGlobalSetting.EffectPathDefine(unitConfig.element);
-                EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, SkillShowSupporter.focusingC.WholeT.position, Quaternion.identity, null);
+                EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, SkillShowSupporter.FocusingC.WholeT.position, Quaternion.identity, null);
             }
             
             void error()

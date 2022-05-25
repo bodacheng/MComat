@@ -27,10 +27,6 @@ public class SkillShowPage : MainSceneProcess
     
     public override void LocalUpdate()
     {
-        if (SkillShowSupporter.focusingC != null)
-        {
-            layer._connector.CameraPositionCal();
-        }
         if (SkillShowSupporter.IfShowingSkill)
         {
             SkillShowSupporter.SkillsPrintOutLateUpdate();

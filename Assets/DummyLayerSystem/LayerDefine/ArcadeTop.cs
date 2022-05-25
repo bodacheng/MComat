@@ -8,7 +8,6 @@ using DG.Tweening;
 using DummyLayerSystem;
 using Cocone.ProjectP3;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 public partial class ArcadeTop : UILayer
 {
@@ -39,7 +38,7 @@ public partial class ArcadeTop : UILayer
     public void IconButtonFeature(HeroIcon heroIcon)
     {
         // 显示模型
-        SingleThreadProcesser.backup.RunAsQueued(_connector.ShowModel(heroIcon.unitConfig.RECORD_ID));
+        _connector.ShowModel(heroIcon.unitConfig.RECORD_ID);
         // 显示技能组
         _NineForShow.ShowStones_DataInfo(heroIcon.unitInfo);
     }

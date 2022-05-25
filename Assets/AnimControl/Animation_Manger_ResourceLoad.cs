@@ -40,7 +40,7 @@ public partial class Animation_Manger{
                 }
             }
             Addressables.Release(loadPath);
-            AnimationResourceLoader.SeriesAnimationClipsDic.Add(basicPackKey, basicAnims);
+            DicAdd<string, List<AnimationClip>>.Add(AnimationResourceLoader.SeriesAnimationClipsDic, basicPackKey, basicAnims);
             Debug.Log("基础动画包: "+basicPackKey + "已经加入公用字典");
         }
         
@@ -238,13 +238,13 @@ public partial class Animation_Manger{
             yield break;
         }
         yield return AnimationResourceLoader.DownloadAnim(animPath, key);
-        var _clip = AnimationResourceLoader.Instance.GetAnimationClip(animPath + "/skill/" + key);
-        if (_clip != null)
+        var clip = AnimationResourceLoader.Instance.GetAnimationClip(animPath + "/skill/" + key);
+        if (clip != null)
         {
             if (!toLoadAnims.ContainsKey(key))
             {
-                toLoadAnims.Add(new KeyValuePair<string, AnimationClip>(key, _clip));
-                foreach (AnimationEvent e in _clip.events)
+                toLoadAnims.Add(new KeyValuePair<string, AnimationClip>(key, clip));
+                foreach (AnimationEvent e in clip.events)
                 {
                     if (e.functionName == "MagicForward")
                     {

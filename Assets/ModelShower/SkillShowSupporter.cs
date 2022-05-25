@@ -3,32 +3,34 @@ using mainMenu;
 
 public static class SkillShowSupporter
 {
-    public static string focusRId;
-    public static Data_Center focusingC;
+    public static string FocusRId;
+    public static Data_Center FocusingC;
     public static bool IfShowingSkill = false;
     
-    public static IEnumerator SkillShowRunWithPrepare(string keyname)
+    public static IEnumerator SkillShowRunWithPrepare(string skillName)
     {
-        var unitConfig = Units.GetUnitConfig(focusRId);
+        var unitConfig = Units.GetUnitConfig(FocusRId);
+        if (unitConfig == null)
+            yield break;
         //下面这一大片，在资源存在的情况下压根不应该运行            
-        if (focusingC.Animation_Manger != null)
+        if (FocusingC.Animation_Manger != null)
         {
-            yield return focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, keyname, unitConfig.SPECIAL_ZOKUSEI, unitConfig.element);
+            yield return FocusingC.Animation_Manger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, skillName, unitConfig.SPECIAL_ZOKUSEI, unitConfig.element);
             IfShowingSkill = true;
-            focusingC.Animation_Manger.AnimationTrigger(keyname, true, 0.05f);
+            FocusingC.Animation_Manger.AnimationTrigger(skillName, true, 0.05f);
         }
     }
     
     public static void SkillsPrintOutLateUpdate()
     {
-        if (focusingC != null)
+        if (FocusingC != null)
         {
-            if (focusingC.Animation_Manger != null && focusingC.WholeT.gameObject.activeSelf)
+            if (FocusingC.Animation_Manger != null && FocusingC.WholeT.gameObject.activeSelf)
             {
-                if (focusingC.Animation_Manger.GetBool("in_transition") == false && 
-                    focusingC.Animation_Manger.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
+                if (FocusingC.Animation_Manger.GetBool("in_transition") == false && 
+                    FocusingC.Animation_Manger.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
                 {
-                    focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.05f);
+                    FocusingC.Animation_Manger.PlayLayerAnim(null, true, 0.05f);
                     IfShowingSkill = false;
                     PreScene.target._CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
                 }
