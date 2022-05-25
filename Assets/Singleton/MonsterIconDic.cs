@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AddressableAssets;
 
 public static class MonsterIconDic {
 
@@ -25,61 +26,21 @@ public static class MonsterIconDic {
         }
         return null;
     }
-
-    static IEnumerator FindByCach(string resource_id)
+    
+    static Sprite FindByResource(string unit_id)
     {
-        Dic.TryGetValue(resource_id, out readingSprite);
-        if (readingSprite == null)
-        {
-            // IEnumerator ienObj = CachManager.Instance.getABFromCach("monsterIcons", resource_id.ToString());
-            // while (ienObj.MoveNext())
-            // {
-            //     // Do Nothing
-            // }
-            // if (ienObj.Current != null)
-            // {
-            //     readingBundle = (UnityEngine.AssetBundle)ienObj.Current;
-            // }
-            // else
-            // {
-            //     Debug.Log("角色图标读取失败：" + resource_id);
-            //     yield break;
-            // }
-
-            var resultObject = readingBundle.LoadAssetAsync<Image>(resource_id.ToString());
-            yield return new WaitWhile(() => resultObject.isDone == false);
-
-            if (resultObject.asset != null)
-            {
-                readingSprite = (Sprite)resultObject.asset;
-                if (Dic.ContainsKey(resource_id))
-                    Dic[resource_id] = readingSprite;
-                else
-                    Dic.Add(resource_id, readingSprite);
-
-                Debug.Log("成功从缓存读取了以下图标：" + resource_id);
-                readingBundle.Unload(false);
-            }
-            else
-            {
-                readingBundle.Unload(false);
-                Debug.Log("图标提取失败"+ resource_id);
-                yield break;
-            }
-        }
-        yield return readingSprite;
-    }
-
-    static Sprite FindByResource(string monsterId)
-    {
-        Dic.TryGetValue(monsterId, out Sprite Sprite);
+        Dic.TryGetValue(unit_id, out Sprite Sprite);
         if (Sprite == null)
-            Sprite = Resources.Load<Sprite>("Sprites/monsterIcons/" + monsterId);
+        {
+            var op = Addressables.LoadAssetAsync<Sprite>("unit/"+unit_id);
+            Sprite = op.WaitForCompletion();
+            Addressables.Release(op);
+        }
         else
         {
             return Sprite;
         }
-        DicAdd<string, Sprite>.Add(Dic, monsterId, Sprite);            
+        DicAdd<string, Sprite>.Add(Dic, unit_id, Sprite);            
         return Sprite;
     }
 }
