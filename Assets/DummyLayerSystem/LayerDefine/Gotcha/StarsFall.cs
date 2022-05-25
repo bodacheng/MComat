@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using mainMenu;
 
 public class StarsFall : MonoBehaviour
 {
     public Camera _camera;
+    public Camera _UICamera;
     [SerializeField] Transform center;
     [SerializeField] float SkySphereRadius = 650;
     
@@ -13,13 +16,22 @@ public class StarsFall : MonoBehaviour
         target = this;
         target.gameObject.SetActive(false);
     }
+
+    public void Enter()
+    {
+        var baseC =  PreScene.target.FxCamera.GetUniversalAdditionalCameraData();
+        
+        var cameraData = _camera.GetUniversalAdditionalCameraData();
+        cameraData.renderType = CameraRenderType.Overlay;
+        
+    }
     
     public Vector3 GetRandomStarPos()
     {
-        float xzDisFromCenter = Random.Range(0, SkySphereRadius * 2 / 3);
-        Vector3 temp = center.transform.position + (Vector3.forward * Random.Range(0, 100) + Vector3.right * Random.Range(0, 100)).normalized * xzDisFromCenter;
-        float height = Mathf.Sqrt(Mathf.Pow(SkySphereRadius, 2) - Mathf.Pow(xzDisFromCenter, 2));
-        Vector3 finalPos = temp + (int)(height - 10) * Vector3.up;
+        var xzDisFromCenter = Random.Range(0, SkySphereRadius * 2 / 3);
+        var temp = center.transform.position + (Vector3.forward * Random.Range(0, 100) + Vector3.right * Random.Range(0, 100)).normalized * xzDisFromCenter;
+        var height = Mathf.Sqrt(Mathf.Pow(SkySphereRadius, 2) - Mathf.Pow(xzDisFromCenter, 2));
+        var finalPos = temp + (int)(height - 10) * Vector3.up;
         return finalPos;
     }
 }

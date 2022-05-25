@@ -2,13 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ffacfab-2dd5-4ae9-9658-5b27d8228901" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/HitBoxLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/HitBoxLogger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable_Util.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable_Util.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StagesManagerGUI/NineSlotSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/StagesManagerGUI/NineSlotSelect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StagesManagerGUI/SelectInheretSkill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/StagesManagerGUI/SelectInheretSkill.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StagesManagerGUI/StagesManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/StagesManagerGUI/StagesManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MComat_mac/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MComat_mac/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_StarScreenMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_StarScreenMove.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/StarsFall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/StarsFall.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Gacha/GotchaFront.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Gacha/GotchaFront.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/GotchaResultLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/GotchaResultLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/MainScene/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/MainScene/MainMenuScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +83,7 @@
       <updated>1653389431067</updated>
       <workItem from="1653389437485" duration="8073000" />
       <workItem from="1653445182768" duration="3320000" />
-      <workItem from="1653485444896" duration="488000" />
+      <workItem from="1653485444896" duration="3690000" />
     </task>
     <servers />
   </component>

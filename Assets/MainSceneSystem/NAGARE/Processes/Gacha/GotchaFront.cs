@@ -1,5 +1,4 @@
 ﻿using mainMenu;
-using System.Collections.Generic;
 
 public class GotchaFront : MainSceneProcess
 {
@@ -14,7 +13,7 @@ public class GotchaFront : MainSceneProcess
     public override void ProcessEnter()
     {
         StarsFall.target.gameObject.SetActive(true);
-        List<string> CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
+        var CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
