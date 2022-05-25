@@ -228,7 +228,7 @@
      <Compile Include="Assets/Behaviour/Soul/SkillSet/SkillSet_INI.cs" />
      <Compile Include="Assets/SKillAnalyzer/SKillAnalyzerGUI.cs" />
      <Compile Include="Assets/Camera/Modes/ScreenSaverC.cs" />
-     <Compile Include="Assets/Singleton/MonsterIconDic.cs" />
+     <Compile Include="Assets/Singleton/UnitIconDic.cs" />
      <Compile Include="Assets/PlayFab/CloudScripts/SkillEdit.cs" />
      <Compile Include="Assets/TouchScript/Scripts/GestureManager.cs" />
      <Compile Include="Assets/SkillStoneBox/SkillStonesBox_Order.cs" />
@@ -422,7 +422,6 @@
      <Compile Include="Assets/TouchScript/Scripts/Behaviors/Transformer.cs" />
      <Compile Include="Assets/JsonSupport/LocalJson.cs" />
      <Compile Include="Assets/StagesManagement/StagesManagerGUI/Members.cs" />
-     <Compile Include="Assets/ResourceLoading/ResourceLoadingSetting.cs" />
      <Compile Include="Assets/NoSuchStudio/HighlightUI/Scritpts/Runtime/PointerDownHandler.cs" />
      <Compile Include="Assets/Structure/SingleThreadProcesser/SingleThreadProcesser.cs" />
      <Compile Include="Assets/EffectsSystem/TrackControl.cs" />
@@ -510,7 +509,6 @@
      <Compile Include="Assets/TutorialManger/Tutorial/TutorialHelper.cs" />
      <Compile Include="Assets/UI/oldscripts/RongLianGamen.cs" />
      <Compile Include="Assets/TheNineSlot/Validation/TheNineSlot_ValidationWarn.cs" />
-     <Compile Include="Assets/Setting/ConfigureOptions.cs" />
      <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/QuestInfoPage.cs" />
      <Compile Include="Assets/SkillEvents/BO_Ani_E.cs" />
      <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/PopupLayer/PopupLayer_HighLight.cs" />

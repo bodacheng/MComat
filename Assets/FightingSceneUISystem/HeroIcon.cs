@@ -124,7 +124,7 @@ public class HeroIcon : MonoBehaviour {
     public static void ChangeHeroIconByRID(string rID, HeroIcon Icon)
     {
         UnitConfig unitConfig = Units.GetUnitConfig(rID);
-        Icon.ChangeIcon(unitConfig == null ? null : MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig == null ? Element.Null : unitConfig.element);
+        Icon.ChangeIcon(unitConfig == null ? null : UnitIconDic.Get(unitConfig.RECORD_ID), unitConfig == null ? Element.Null : unitConfig.element);
     }
         
     public static void SelectedFeature(HeroIcon _charIcon, GameObject selectedFrame, float localScale)
@@ -154,7 +154,7 @@ public class HeroIcon : MonoBehaviour {
         }
         icon.unitInfo = unitInfo;
         icon.unitConfig = unitConfig;
-        icon.ChangeIcon(MonsterIconDic.Get(unitConfig.RECORD_ID), unitConfig.element);
+        icon.ChangeIcon(UnitIconDic.Get(unitConfig.RECORD_ID), unitConfig.element);
         icon.transform.SetParent(T);
         icon.transform.localPosition = Vector3.one;
         icon.transform.localScale = Vector3.one;

@@ -1,30 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 
-public static class MonsterIconDic {
-
-    public static Sprite readingSprite;
-    static AssetBundle readingBundle;
+public static class UnitIconDic {
+    
     static readonly IDictionary<string, Sprite> Dic = new Dictionary<string, Sprite>();
     
     public static Sprite Get(string rId)
     {
-        switch (ResourceLoadingSetting.IconLoadingMode)
-        {
-            case ResourceLoadMode.CachAB:
-                //coroutine = FindByCach(monsterId);
-                //yield return coroutine;
-                //yield return coroutine.Current;
-                break;
-            case ResourceLoadMode.Resource:
-                return FindByResource(rId);
-            case ResourceLoadMode.StreamingAssetAB:
-                break;
-        }
-        return null;
+        return FindByResource(rId);
     }
     
     static Sprite FindByResource(string unit_id)

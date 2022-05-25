@@ -3,33 +3,25 @@
   <component name="ChangeListManager">
     <list default="true" id="8ffacfab-2dd5-4ae9-9658-5b27d8228901" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MComat_mac/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MComat_mac/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Default Local Group.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Default Local Group.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Skill.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Skill.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/1.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/12.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/13.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/14.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/2.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/3.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/4.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/5.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/6.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Sprites/monsterIcons/7.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Singleton/MonsterIconDic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/MonsterIconDic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/CachLogic/ResourceDownLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/CachLogic/ResourceDownLoad.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SelfFightLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SelfFightLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UnitsLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UnitsLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightingSceneUISystem/HeroIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightingSceneUISystem/HeroIcon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Monster/Units.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Monster/Units.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillNameTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillNameTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ResourceLoading/ResourceLoadingSetting.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ResourceLoading/ResourceLoadingSetting.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Setting/ConfigureOptions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Setting/ConfigureOptions.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SimpleDragAndDrop/Scripts/Cell/StoneCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimpleDragAndDrop/Scripts/Cell/StoneCell.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Singleton/MonsterIconDic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/UnitIconDic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Singleton/MonsterIconDic.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/UnitIconDic.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TeamUIManager/MultiRaid/TeamUIManagerMultiRaid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TeamUIManager/MultiRaid/TeamUIManagerMultiRaid.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TeamUIManager/RotationMode/RotationMode_INI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TeamUIManager/RotationMode/RotationMode_INI.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +46,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Runtime/ScriptableRenderer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.xr.legacyinputhelpers@2.1.9/Editor/SeedXRInputBindings/SeedXRInputBindings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Importers/ShaderGraphImporter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Samples~/Customization/Video/VideoPlayableAsset.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="29bkyYctCT7mgCwOGbX8OmsPVXd" />
   <component name="ProjectViewState">
@@ -99,7 +92,7 @@
       <option name="presentableId" value="Default" />
       <updated>1653389431067</updated>
       <workItem from="1653389437485" duration="8073000" />
-      <workItem from="1653445182768" duration="1128000" />
+      <workItem from="1653445182768" duration="2519000" />
     </task>
     <servers />
   </component>
@@ -109,6 +102,17 @@
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

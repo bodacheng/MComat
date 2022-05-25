@@ -20,9 +20,6 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class ResourceDownLoad : MonoBehaviour
 {
-    [Header("资源读取设置")]
-    public ConfigureOptions _ResourceSetting;
-    
     public IEnumerator GetWholeDownLoadSize(Action<string> Complete)
     {
         Caching.ClearCache();
@@ -71,9 +68,6 @@ public class ResourceDownLoad : MonoBehaviour
     
     public IEnumerator ResourcePrepareProcess(Action Complete, Action<string,float> progressUIRefresh)
     {
-        ResourceLoadingSetting.ConfigFileLoadingMode = _ResourceSetting.ConfigFileLoadingMode;
-        ResourceLoadingSetting.IconLoadingMode = _ResourceSetting.IconLoadingMode;
-        
         Units.LoadMonstersConfig();
         SkillConfigTable.LoadAllSkillConfigs();
         
