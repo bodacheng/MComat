@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using Object = UnityEngine.Object;
 
 public class BoundaryControllByGod : MonoBehaviour {
-
-    public List<GameObject> BackGrounds = new List<GameObject>();
-
+    
     public List<ParticleSystem> BattleRingPSs;
     ParticleSystem BattleRingPS;
     float BattleRingRadius = 20f;
@@ -33,23 +36,20 @@ public class BoundaryControllByGod : MonoBehaviour {
         }
     }
 
-    public void ChangeBackGround(int Number)
+    public async void ChangeBackGround(int Number)
     {
-        if (Number >= BackGrounds.Count)
-        {
-            Debug.Log("战斗场景编号错误："+ Number);
-            ChangeBackGround(0);
-            return;
-        }
-        for (int i = 0; i < BackGrounds.Count; i++)
-        {
-            if (Number == i)
-            {
-                BackGrounds[i].SetActive(true);
+        void Completed(AsyncOperationHandle<GameObject> handle) {
+            if (handle.Status == AsyncOperationStatus.Succeeded) {
+                GameObject prefab = handle.Result;
+                GameObject result = GameObject.Instantiate(prefab);
+                result.GetComponent<BattleGround>().Set();
             }
-            else
-                BackGrounds[i].SetActive(false);
         }
+        
+        AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>("battleGround/" +Number);
+        handle.Completed += Completed;
+        await handle.Task;
+        Addressables.Release(handle);
     }
     
     public void ChangeMagicRingRadius(float targetradius)

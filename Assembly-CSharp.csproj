@@ -696,6 +696,7 @@
      <Compile Include="Assets\TouchScript\Scripts\Debugging\Loggers\IPointerLogger.cs" />
      <Compile Include="Assets\UI\Shift - Complete Sci-Fi UI\Scripts\Panel\ServerBrowserManager.cs" />
      <Compile Include="Assets\DynamicStarrySky\Scripts\StarPoint.cs" />
+     <Compile Include="Assets\BoundaryControl\BattleGround.cs" />
      <None Include="Assets\Resources\TestSaveData\MyStones\131.json" />
      <None Include="Assets\Resources\TestSaveData\MyStones\254.json" />
      <None Include="Assets\EffectsResource\shaders\Slash2.shader" />
