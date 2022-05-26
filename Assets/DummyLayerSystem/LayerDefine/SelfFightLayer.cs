@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
 using DummyLayerSystem;
+using Singleton;
 
 namespace mainMenu
 {
