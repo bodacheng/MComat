@@ -24,10 +24,10 @@ public class PreparingProcess : FSceneProcess
         Sensor.ClearFightingMember();
         yield return RTFightManager.target.LoadUnits(NetFightScene.Fight);
         
-        var TeamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
-        DicAdd<TeamConfig, List<Data_Center>>.Add(TeamMembers, RTFightManager.target.heroTeamConfig, RTFightManager.target.team1.TeamMembers.GetValues());
-        DicAdd<TeamConfig, List<Data_Center>>.Add(TeamMembers, RTFightManager.target.EnemyTeamConfig, RTFightManager.target.team2.TeamMembers.GetValues());
-        FightLogger.value.ReadyToLog(TeamMembers);
+        var teamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
+        DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.target.heroTeamConfig, RTFightManager.target.team1.TeamMembers.GetValues());
+        DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.target.EnemyTeamConfig, RTFightManager.target.team2.TeamMembers.GetValues());
+        FightLogger.value.ReadyToLog(teamMembers);
         
         EffectsManager.INIEffectsPool("hit_ground", null, 3);
         EffectsManager.INIEffectsPool("wallCrack", null, 3);

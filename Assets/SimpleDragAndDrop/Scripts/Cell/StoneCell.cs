@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using dataAccess;
+using Singleton;
 using TouchScript.Gestures;
 
 /// <summary>

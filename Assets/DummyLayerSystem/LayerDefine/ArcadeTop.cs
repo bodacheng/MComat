@@ -7,6 +7,7 @@ using System;
 using DG.Tweening;
 using DummyLayerSystem;
 using Cocone.ProjectP3;
+using Singleton;
 using UnityEngine.AddressableAssets;
 
 public partial class ArcadeTop : UILayer

@@ -20,7 +20,7 @@ namespace FightScene
                 sideIcon.focusingCharIcon.iconButton.onClick.AddListener(() => { ChangeUnit(center); });
                 var info = RTFightManager.target.UnitInfoRef[center];
                 var unitConfig = Units.GetUnitConfig(info.r_id);
-                sideIcon.focusingCharIcon.ChangeIcon(global::UnitIconDic.Load(info.r_id), unitConfig.element);
+                sideIcon.focusingCharIcon.ChangeIcon(global::Singleton.UnitIconDic.Load(info.r_id), unitConfig.element);
                 sideIcon.gameObject.SetActive(true);
                 sideIcon.focusingCharIcon.CooldownCurtainUpdate(0);
                 

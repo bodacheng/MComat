@@ -5,6 +5,7 @@ using UnityEngine;
 using dataAccess;
 using DummyLayerSystem;
 using Cocone.ProjectP3;
+using Singleton;
 
 namespace mainMenu
 {
@@ -75,7 +76,7 @@ namespace mainMenu
             return selected_InstanceID;
         }
 
-        void AddOneNewIcon(string instanceID, bool clearButtonFeature)
+        void AddUnitIcon(string instanceID, bool clearButtonFeature)
         {
             var unitInfo = MyMonsters.Get(instanceID);
             var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
@@ -97,9 +98,9 @@ namespace mainMenu
             }
             if (clearButtonFeature)
                 targetingIcon.iconButton.onClick.RemoveAllListeners();
-            if (!_typeOfUnitsIHave.Contains(targetingIcon.unitConfig.TYPE))
+            if (!_typeOfUnitsIHave.Contains(unitConfig.TYPE))
             {
-                _typeOfUnitsIHave.Add(targetingIcon.unitConfig.TYPE);
+                _typeOfUnitsIHave.Add(unitConfig.TYPE);
             }
         }
         
@@ -113,7 +114,7 @@ namespace mainMenu
             selected_InstanceID = null;
             foreach (KeyValuePair<string, UnitInfo> keyValuePair in MyMonsters.Dic)
             {
-                AddOneNewIcon(keyValuePair.Value.id, clearButtonFeature);
+                AddUnitIcon(keyValuePair.Value.id, clearButtonFeature);
             }
             _monsterboxFilter.RefreshTypeDropDown(_typeOfUnitsIHave);
         }

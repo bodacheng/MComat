@@ -38,15 +38,14 @@ namespace Cocone.ProjectP3
             if (enumerator != null)
                 StopCoroutine(enumerator);
             
-            if (GeneralModelPool.process != null)
-                StopCoroutine(GeneralModelPool.process);
-                
             if (target != null)
                 DestroyImmediate(target.gameObject);
         }
 
         public void ShowMyModel(string instanceID)
         {
+            if (enumerator != null)
+                StopCoroutine(enumerator);
             enumerator = _ShowMyModel(instanceID);
             StartCoroutine(enumerator);
         }
@@ -62,14 +61,15 @@ namespace Cocone.ProjectP3
         
         public void ShowModel(string recordID)
         {
+            if (enumerator != null)
+                StopCoroutine(enumerator);
             enumerator = _ShowModel(recordID);
             StartCoroutine(enumerator);
         }
     
         IEnumerator _ShowModel(string recordID) 
         {
-            if (enumerator != null)
-                StopCoroutine(enumerator);
+            PopupLayer.Loading(">", PreScene.target.T);
             if (_model != null)
             {
                 DestroyImmediate(_model);
@@ -108,6 +108,8 @@ namespace Cocone.ProjectP3
             
             Initialize(false,_model.transform, transform, PreScene.target.FxCamera);
             ItemDetailStartDirection(0,0,0);
+            
+            PopupLayer.Close();
             yield return _model;
         }
         

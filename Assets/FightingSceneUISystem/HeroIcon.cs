@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
+using Singleton;
 
 public class HeroIcon : MonoBehaviour {
 
