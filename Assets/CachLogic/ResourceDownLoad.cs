@@ -4,20 +4,6 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-// AssetBundle cache checker & loader with caching
-// worsk by loading .manifest file from server and parsing hash string from it
-// 资源下载策略：角色模型和技能动画先读取配置文件再根据配置文件一个个请求资源。
-// controller的话从上面的步骤里搞一个type统计，从所有type里找对应的controller组件
-// 魔法包直接代码引导去下那6个大包。
-// 所有资源应该进行一个文件数量统计和容量统计。下载过程中应该是前台有一个动画告诉已经下载到多少。
-// 还有个问题。。。我们看了下主场景里startup函数。。。发现的确很多加载性的东西分布在主场景的很多模块。。。
-// 所以我们这么想，这个scene只负责资源加载而不负责信息加载。
-
-// 一上来是要load所有的ab包，所有ab包包括什么呢 
-// 魔法特效，所有角色，所有角色动画，所有角色controller文件，所有技能脚本，所有音乐包。
-// 以上这些如果在load过程里出了任何问题，则应该终止程序运行。这些方法写在哪里都可以只要在头画面里运行就行。
-// 然后如果程序运行途中这些下载完了的数据在读取时候出错，那怎么办？不管任何时候， 直接弹回资源确认画面。
-
 public class ResourceDownLoad : MonoBehaviour
 {
     public IEnumerator GetWholeDownLoadSize(Action<string> Complete)
@@ -36,6 +22,7 @@ public class ResourceDownLoad : MonoBehaviour
         bool quest = false;
         bool skill_icon = false;
         bool unit_icon = false;
+        bool battle_ground = false;
         
         downLoadSize("basic_anim", () => { basic_anim = true; });
         downLoadSize("skill_anim", () => { skill_anim = true; });
@@ -47,6 +34,7 @@ public class ResourceDownLoad : MonoBehaviour
         downLoadSize("quest", () => { quest = true; });
         downLoadSize("skill_icon", () => { skill_icon = true; });
         downLoadSize("unit_icon", () => { unit_icon = true; });
+        downLoadSize("battle_ground", () => { battle_ground = true; });
         
         void downLoadSize(string label, Action OnComplete)
         {
@@ -58,7 +46,7 @@ public class ResourceDownLoad : MonoBehaviour
             };
         }
         
-        while (!(basic_anim && skill_anim && hurt_anim && knock_anim && unit && weapon && effect && quest && skill_icon && unit_icon))
+        while (!(basic_anim && skill_anim && hurt_anim && knock_anim && unit && weapon && effect && quest && skill_icon && unit_icon && battle_ground))
         {
             Debug.Log("正在计算下载文件总大小");
             yield return null;
@@ -68,7 +56,7 @@ public class ResourceDownLoad : MonoBehaviour
         Complete(warn);
     }
     
-    public IEnumerator ResourcePrepareProcess(Action Complete, Action<string,float> progressUIRefresh)
+    public IEnumerator ResourcePrepareProcess(Action complete, Action<string,float> progressUIRefresh)
     {
         Units.LoadMonstersConfig();
         SkillConfigTable.LoadAllSkillConfigs();
@@ -81,8 +69,11 @@ public class ResourceDownLoad : MonoBehaviour
         yield return downLoadMission("weapon", progressUIRefresh);
         yield return downLoadMission("effect", progressUIRefresh);
         yield return downLoadMission("quest", progressUIRefresh);
+        yield return downLoadMission("skill_icon", progressUIRefresh);
+        yield return downLoadMission("unit_icon", progressUIRefresh);
+        yield return downLoadMission("battle_ground", progressUIRefresh);
         
-        Complete.Invoke();
+        complete.Invoke();
     }
     
     IEnumerator downLoadMission(string label, Action<string,float> progressUIRefresh)
@@ -101,7 +92,7 @@ public class ResourceDownLoad : MonoBehaviour
         {
             Debug.Log("尝试开始下载："+label + " size: " + getDownloadSize.Result);
             var dl = Addressables.DownloadDependenciesAsync(label);
-            dl.Completed += (AsyncOperationHandle) =>
+            dl.Completed += (asyncOperationHandle) =>
             {
             };
             while (dl.PercentComplete < 1 && !dl.IsDone)
