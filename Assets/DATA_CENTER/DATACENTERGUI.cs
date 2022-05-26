@@ -7,44 +7,49 @@ using Soul;
 [CustomEditor(typeof(Data_Center))]
 public class DATACENTERGUI : Editor {
 
-    GUIStyle title;
-    Data_Center myScript;
+    GUIStyle _title;
+    Data_Center _myScript;
 
     public override void OnInspectorGUI()
     {        
-        myScript = (Data_Center)target;
+        _myScript = (Data_Center)target;
 
         if (Application.isPlaying)
             return;
-
-        title = new GUIStyle(GUI.skin.box);
-        title.normal.textColor = Color.blue;
-        title.fontSize = 11;
+        
+        _title = new GUIStyle(GUI.skin.box)
+        {
+            normal =
+            {
+                textColor = Color.blue
+            },
+            fontSize = 11
+        };
         GUILayout.Space(5f);
-        EditorGUILayout.LabelField("以下项目在新角色构成时请按顺序填写，填写完毕后点击Construct Chracter按钮",title);
+        EditorGUILayout.LabelField("以下项目在新角色构成时请按顺序填写，填写完毕后点击Construct Unit按钮", _title);
         GUILayout.Space(5f);
         
-        myScript.element = (Element)EditorGUILayout.EnumPopup("zokusei", myScript.element);
+        _myScript.element = (Element)EditorGUILayout.EnumPopup("zokusei", _myScript.element);
         GUILayout.Space(5f);
-        EditorGUILayout.LabelField("WholeT", title);
-        myScript.WholeT = EditorGUILayout.ObjectField("WholeT", myScript.WholeT, typeof(Transform), true) as Transform;
+        EditorGUILayout.LabelField("WholeT", _title);
+        _myScript.WholeT = EditorGUILayout.ObjectField("WholeT", _myScript.WholeT, typeof(Transform), true) as Transform;
 
         GUILayout.Space(5f);
-        EditorGUILayout.LabelField("各武器transform", title);
-        myScript.right_hand_t = EditorGUILayout.ObjectField("Right Hand", myScript.right_hand_t, typeof(Transform), true) as Transform;
-        myScript.left_hand_t = EditorGUILayout.ObjectField("Left Hand", myScript.left_hand_t, typeof(Transform), true) as Transform;
-        myScript.right_foot_t = EditorGUILayout.ObjectField("Right Foot", myScript.right_foot_t, typeof(Transform), true) as Transform;
-        myScript.left_foot_t = EditorGUILayout.ObjectField("Left Foot", myScript.left_foot_t, typeof(Transform), true) as Transform;
-        myScript.tail_t = EditorGUILayout.ObjectField("Tail", myScript.tail_t, typeof(Transform), true) as Transform;
-        myScript.head_t = EditorGUILayout.ObjectField("Head", myScript.head_t, typeof(Transform), true) as Transform;
+        EditorGUILayout.LabelField("各武器transform", _title);
+        _myScript.right_hand_t = EditorGUILayout.ObjectField("Right Hand", _myScript.right_hand_t, typeof(Transform), true) as Transform;
+        _myScript.left_hand_t = EditorGUILayout.ObjectField("Left Hand", _myScript.left_hand_t, typeof(Transform), true) as Transform;
+        _myScript.right_foot_t = EditorGUILayout.ObjectField("Right Foot", _myScript.right_foot_t, typeof(Transform), true) as Transform;
+        _myScript.left_foot_t = EditorGUILayout.ObjectField("Left Foot", _myScript.left_foot_t, typeof(Transform), true) as Transform;
+        _myScript.tail_t = EditorGUILayout.ObjectField("Tail", _myScript.tail_t, typeof(Transform), true) as Transform;
+        _myScript.head_t = EditorGUILayout.ObjectField("Head", _myScript.head_t, typeof(Transform), true) as Transform;
         GUILayout.Space(5f);
         
-        EditorGUILayout.LabelField("HitBox Transforms", title);
-        myScript.spine_hitbox_t = EditorGUILayout.ObjectField("SpineHitBox Transform", myScript.spine_hitbox_t, typeof(Transform), true) as Transform;
-        myScript.left_arm_hitbox_t = EditorGUILayout.ObjectField("LeftArmHitBox Transform", myScript.left_arm_hitbox_t, typeof(Transform), true) as Transform;
-        myScript.right_arm_hitbox_t = EditorGUILayout.ObjectField("RightArmHitBox Transform", myScript.right_arm_hitbox_t, typeof(Transform), true) as Transform;
-        myScript.left_leg_hitbox_t = EditorGUILayout.ObjectField("LeftLegHitBox Transform", myScript.left_leg_hitbox_t, typeof(Transform), true) as Transform;
-        myScript.right_leg_hitbox_t = EditorGUILayout.ObjectField("RightLegHitBox Transform", myScript.right_leg_hitbox_t, typeof(Transform), true) as Transform;
+        EditorGUILayout.LabelField("HitBox Transforms", _title);
+        _myScript.spine_hitbox_t = EditorGUILayout.ObjectField("SpineHitBox Transform", _myScript.spine_hitbox_t, typeof(Transform), true) as Transform;
+        _myScript.left_arm_hitbox_t = EditorGUILayout.ObjectField("LeftArmHitBox Transform", _myScript.left_arm_hitbox_t, typeof(Transform), true) as Transform;
+        _myScript.right_arm_hitbox_t = EditorGUILayout.ObjectField("RightArmHitBox Transform", _myScript.right_arm_hitbox_t, typeof(Transform), true) as Transform;
+        _myScript.left_leg_hitbox_t = EditorGUILayout.ObjectField("LeftLegHitBox Transform", _myScript.left_leg_hitbox_t, typeof(Transform), true) as Transform;
+        _myScript.right_leg_hitbox_t = EditorGUILayout.ObjectField("RightLegHitBox Transform", _myScript.right_leg_hitbox_t, typeof(Transform), true) as Transform;
         GUILayout.Space(5f);
         
         //GUILayout.Space(5f);
@@ -52,15 +57,15 @@ public class DATACENTERGUI : Editor {
         //EditorGUILayout.BeginVertical();
         //myScript.Shield = EditorGUILayout.ObjectField("Shield", myScript.Shield, typeof(BO_Shield), true) as BO_Shield;
         //EditorGUILayout.EndVertical();
-      
-        if (GUILayout.Button("Construct Chracter"))
+
+        if (GUILayout.Button("Construct Unit"))
         {
-            myScript.geometryCenter = myScript.transform;
-            if (myScript.WholeT)
+            _myScript.geometryCenter = _myScript.transform;
+            if (_myScript.WholeT)
             {
-                if (myScript.WholeT.GetComponent<OutsideDataLink>() == null)
-                    myScript.WholeT.gameObject.AddComponent<OutsideDataLink>();
-                myScript.WholeT.GetComponent<OutsideDataLink>()._C = myScript;
+                if (_myScript.WholeT.GetComponent<OutsideDataLink>() == null)
+                    _myScript.WholeT.gameObject.AddComponent<OutsideDataLink>();
+                _myScript.WholeT.GetComponent<OutsideDataLink>()._C = _myScript;
             } else {
                 Debug.Log(" 没有适配wholeT，返回");
                 return;
@@ -68,114 +73,114 @@ public class DATACENTERGUI : Editor {
             
             // 关于collisionDetectionMode ，计算量最小是Discrete，但实测设置成Continuous的话一定不会产生行走穿墙。但根据该功能注释看
             // 设置成Discrete或Continuous对于角色间碰撞是一样的。（Continuous式计算只对无刚体的collider有效）这样的话考虑计算量时候还牵扯到个地面的问题。。。
-            myScript._AudioSource = myScript.WholeT.GetComponent<AudioSource>();
-            myScript._SkillCancelFlag = myScript.WholeT.GetComponent<SkillCancelFlag>();
-            myScript._SkillCancelFlag._C = myScript;
-            myScript.FightDataRef.Center = myScript;
-            myScript._BO_Ani_E = myScript.WholeT.GetComponent<BO_Ani_E>();
-            myScript._BO_Ani_E._DATA_CENTER = myScript;
-            myScript._MyBehaviorRunner = myScript.gameObject.GetComponent<BehaviorRunner>();            
-            myScript._MyBehaviorRunner._SkillCancelFlag = myScript._SkillCancelFlag;
-            myScript.blendShapeProxy = myScript.gameObject.GetComponent<BlendShapeProxy>();                       
-            myScript._BasicPhysicSupport = myScript.WholeT.GetComponent<BasicPhysicSupport>();
-            myScript._BasicPhysicSupport._DATA_CENTER = myScript;
-            myScript._BasicPhysicSupport.animator = myScript.WholeT.GetComponent<Animator>();
-            myScript._BasicPhysicSupport.animator.applyRootMotion = false;
-            myScript._BasicPhysicSupport.animator.updateMode = AnimatorUpdateMode.Normal;
-            myScript._BasicPhysicSupport.animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
-            myScript._BasicPhysicSupport.Rigidbody = myScript.WholeT.GetComponent<Rigidbody>();//这个只在战斗模式需要
-            myScript._BasicPhysicSupport.Rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
-            myScript._BasicPhysicSupport.Rigidbody.useGravity = false;
-            myScript._BasicPhysicSupport.Rigidbody.mass = 100f;
-            myScript._BasicPhysicSupport.Rigidbody.drag = 0f;
-            myScript._BasicPhysicSupport.Rigidbody.angularDrag = 0.05f;
-            myScript._BasicPhysicSupport.Rigidbody.isKinematic = false;
-            myScript._BasicPhysicSupport.Rigidbody.interpolation = RigidbodyInterpolation.None;
-            myScript._BasicPhysicSupport.Rigidbody.constraints = RigidbodyConstraints.None;
-            myScript._BasicPhysicSupport.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;            
-            myScript.bO_Weapon_Animation_Events = myScript.WholeT.GetComponent<BO_Weapon_Animation_Events>();
-            ResistanceManager resistanceManager = myScript.WholeT.GetComponent<ResistanceManager>();
-            ShaderManager shaderManager = myScript.transform.GetComponent<ShaderManager>();
-            resistanceManager.data_Center = myScript;
-            myScript._ResistanceManager = resistanceManager;
-            myScript._ShaderManager = shaderManager;
-            myScript.Personality_events = myScript.WholeT.GetComponent<Personality_events>();
-            
+            _myScript._AudioSource = _myScript.WholeT.GetComponent<AudioSource>();
+            _myScript._SkillCancelFlag = _myScript.WholeT.GetComponent<SkillCancelFlag>();
+            _myScript._SkillCancelFlag._C = _myScript;
+            _myScript.FightDataRef.Center = _myScript;
+            _myScript._BO_Ani_E = _myScript.WholeT.GetComponent<BO_Ani_E>();
+            _myScript._BO_Ani_E._DATA_CENTER = _myScript;
+            _myScript._MyBehaviorRunner = _myScript.gameObject.GetComponent<BehaviorRunner>();            
+            _myScript._MyBehaviorRunner._SkillCancelFlag = _myScript._SkillCancelFlag;
+            _myScript.blendShapeProxy = _myScript.gameObject.GetComponent<BlendShapeProxy>();                       
+            _myScript._BasicPhysicSupport = _myScript.WholeT.GetComponent<BasicPhysicSupport>();
+            _myScript._BasicPhysicSupport._DATA_CENTER = _myScript;
+            _myScript._BasicPhysicSupport.animator = _myScript.WholeT.GetComponent<Animator>();
+            _myScript._BasicPhysicSupport.animator.applyRootMotion = false;
+            _myScript._BasicPhysicSupport.animator.updateMode = AnimatorUpdateMode.Normal;
+            _myScript._BasicPhysicSupport.animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+            _myScript._BasicPhysicSupport.Rigidbody = _myScript.WholeT.GetComponent<Rigidbody>();//这个只在战斗模式需要
+            _myScript._BasicPhysicSupport.Rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            _myScript._BasicPhysicSupport.Rigidbody.useGravity = false;
+            _myScript._BasicPhysicSupport.Rigidbody.mass = 100f;
+            _myScript._BasicPhysicSupport.Rigidbody.drag = 0f;
+            _myScript._BasicPhysicSupport.Rigidbody.angularDrag = 0.05f;
+            _myScript._BasicPhysicSupport.Rigidbody.isKinematic = false;
+            _myScript._BasicPhysicSupport.Rigidbody.interpolation = RigidbodyInterpolation.None;
+            _myScript._BasicPhysicSupport.Rigidbody.constraints = RigidbodyConstraints.None;
+            _myScript._BasicPhysicSupport.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;            
+            _myScript.bO_Weapon_Animation_Events = _myScript.WholeT.GetComponent<BO_Weapon_Animation_Events>();
+            ResistanceManager resistanceManager = _myScript.WholeT.GetComponent<ResistanceManager>();
+            ShaderManager shaderManager = _myScript.transform.GetComponent<ShaderManager>();
+            resistanceManager.data_Center = _myScript;
+            _myScript._ResistanceManager = resistanceManager;
+            _myScript._ShaderManager = shaderManager;
+            _myScript.Personality_events = _myScript.WholeT.GetComponent<Personality_events>();
+
             BO_Limb focusingHitBox = null;
-            if (myScript.right_arm_hitbox_t != null)
+            if (_myScript.right_arm_hitbox_t != null)
             {
-                if (!myScript.right_arm_hitbox_t.GetComponent<BoxCollider>())
+                if (!_myScript.right_arm_hitbox_t.GetComponent<BoxCollider>())
                 {
-                    myScript.right_arm_hitbox_t.gameObject.AddComponent<BoxCollider>();
-                    myScript.right_arm_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
+                    _myScript.right_arm_hitbox_t.gameObject.AddComponent<BoxCollider>();
+                    _myScript.right_arm_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
-                myScript.right_arm_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
-                focusingHitBox = myScript.right_arm_hitbox_t.GetComponent<BO_Limb>();
+                _myScript.right_arm_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
+                focusingHitBox = _myScript.right_arm_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
-                    myScript.right_arm_hitbox_t.gameObject.AddComponent<BO_Limb>();
-                focusingHitBox = myScript.right_arm_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.Center = myScript;
+                    _myScript.right_arm_hitbox_t.gameObject.AddComponent<BO_Limb>();
+                focusingHitBox = _myScript.right_arm_hitbox_t.GetComponent<BO_Limb>();
+                focusingHitBox.Center = _myScript;
             }
-            if (myScript.left_arm_hitbox_t != null)
+            if (_myScript.left_arm_hitbox_t != null)
             {
-                if (!myScript.left_arm_hitbox_t.GetComponent<BoxCollider>())
+                if (!_myScript.left_arm_hitbox_t.GetComponent<BoxCollider>())
                 {
-                    myScript.left_arm_hitbox_t.gameObject.AddComponent<BoxCollider>();
-                    myScript.left_arm_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
+                    _myScript.left_arm_hitbox_t.gameObject.AddComponent<BoxCollider>();
+                    _myScript.left_arm_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
-                myScript.left_arm_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
-                focusingHitBox = myScript.left_arm_hitbox_t.GetComponent<BO_Limb>();
+                _myScript.left_arm_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
+                focusingHitBox = _myScript.left_arm_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
-                    myScript.left_arm_hitbox_t.gameObject.AddComponent<BO_Limb>();
-                focusingHitBox = myScript.left_arm_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.Center = myScript;
+                    _myScript.left_arm_hitbox_t.gameObject.AddComponent<BO_Limb>();
+                focusingHitBox = _myScript.left_arm_hitbox_t.GetComponent<BO_Limb>();
+                focusingHitBox.Center = _myScript;
             }
-            if (myScript.right_leg_hitbox_t != null)
+            if (_myScript.right_leg_hitbox_t != null)
             {
-                if (!myScript.right_leg_hitbox_t.GetComponent<BoxCollider>())
+                if (!_myScript.right_leg_hitbox_t.GetComponent<BoxCollider>())
                 {
-                    myScript.right_leg_hitbox_t.gameObject.AddComponent<BoxCollider>();
-                    myScript.right_leg_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
+                    _myScript.right_leg_hitbox_t.gameObject.AddComponent<BoxCollider>();
+                    _myScript.right_leg_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
-                myScript.right_leg_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
-                focusingHitBox = myScript.right_leg_hitbox_t.GetComponent<BO_Limb>();
+                _myScript.right_leg_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
+                focusingHitBox = _myScript.right_leg_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
-                    myScript.right_leg_hitbox_t.gameObject.AddComponent<BO_Limb>();
-                focusingHitBox = myScript.right_leg_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.Center = myScript;
+                    _myScript.right_leg_hitbox_t.gameObject.AddComponent<BO_Limb>();
+                focusingHitBox = _myScript.right_leg_hitbox_t.GetComponent<BO_Limb>();
+                focusingHitBox.Center = _myScript;
             }
-            if (myScript.left_leg_hitbox_t != null)
+            if (_myScript.left_leg_hitbox_t != null)
             {
-                if (!myScript.left_leg_hitbox_t.GetComponent<BoxCollider>())
+                if (!_myScript.left_leg_hitbox_t.GetComponent<BoxCollider>())
                 {
-                    myScript.left_leg_hitbox_t.gameObject.AddComponent<BoxCollider>();
-                    myScript.left_leg_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
+                    _myScript.left_leg_hitbox_t.gameObject.AddComponent<BoxCollider>();
+                    _myScript.left_leg_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
-                myScript.left_leg_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
-                focusingHitBox = myScript.left_leg_hitbox_t.GetComponent<BO_Limb>();
+                _myScript.left_leg_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
+                focusingHitBox = _myScript.left_leg_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
-                    myScript.left_leg_hitbox_t.gameObject.AddComponent<BO_Limb>();
-                focusingHitBox = myScript.left_leg_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.Center = myScript;
+                    _myScript.left_leg_hitbox_t.gameObject.AddComponent<BO_Limb>();
+                focusingHitBox = _myScript.left_leg_hitbox_t.GetComponent<BO_Limb>();
+                focusingHitBox.Center = _myScript;
             }
-            if (myScript.spine_hitbox_t != null)
+            if (_myScript.spine_hitbox_t != null)
             {
-                if (!myScript.spine_hitbox_t.GetComponent<BoxCollider>())
+                if (!_myScript.spine_hitbox_t.GetComponent<BoxCollider>())
                 {
-                    myScript.spine_hitbox_t.gameObject.AddComponent<BoxCollider>();
-                    myScript.spine_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(1f, 1f, 1f);
+                    _myScript.spine_hitbox_t.gameObject.AddComponent<BoxCollider>();
+                    _myScript.spine_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(1f, 1f, 1f);
                 }
-                myScript.spine_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;                
-                focusingHitBox = myScript.spine_hitbox_t.GetComponent<BO_Limb>();
+                _myScript.spine_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;                
+                focusingHitBox = _myScript.spine_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
-                    myScript.spine_hitbox_t.gameObject.AddComponent<BO_Limb>();
-                focusingHitBox = myScript.spine_hitbox_t.GetComponent<BO_Limb>();
-                focusingHitBox.Center = myScript;
+                    _myScript.spine_hitbox_t.gameObject.AddComponent<BO_Limb>();
+                focusingHitBox = _myScript.spine_hitbox_t.GetComponent<BO_Limb>();
+                focusingHitBox.Center = _myScript;
             }
 
             string bladeName;
             //string shieldName;
-            switch(myScript.element)
+            switch(_myScript.element)
             {
                 case Element.darkMagic:
                     bladeName = "D_enegryBlade";
@@ -202,23 +207,23 @@ public class DATACENTERGUI : Editor {
                     //shieldName = "blue_Shield";
                     break;
             }
-            if (myScript.Personality_events.right_sword == null)
+            if (_myScript.Personality_events.right_sword == null)
             {
                 GameObject enegryBlade = Object.Instantiate(Resources.Load("BasicCharComponent" + "/" + bladeName) as GameObject);
                 enegryBlade.name = bladeName;
-                enegryBlade.transform.SetParent(myScript.right_hand_t);
+                enegryBlade.transform.SetParent(_myScript.right_hand_t);
 				enegryBlade.transform.localPosition = Vector3.zero;
                 enegryBlade.transform.localRotation = Quaternion.Euler(180, 0, 0);//这个事情非常不一定
-                myScript.Personality_events.right_sword = enegryBlade;
+                _myScript.Personality_events.right_sword = enegryBlade;
             }
-            if (myScript.Personality_events.left_sword == null)
+            if (_myScript.Personality_events.left_sword == null)
             {
                 GameObject enegryBlade = Object.Instantiate(Resources.Load("BasicCharComponent" + "/" + bladeName) as GameObject);
                 enegryBlade.name = bladeName;
-                enegryBlade.transform.SetParent(myScript.left_hand_t);
+                enegryBlade.transform.SetParent(_myScript.left_hand_t);
 				enegryBlade.transform.localPosition = Vector3.zero;
 				enegryBlade.transform.localRotation = Quaternion.identity;
-                myScript.Personality_events.left_sword = enegryBlade;
+                _myScript.Personality_events.left_sword = enegryBlade;
             }
             
             //2019.3.29 我们基本放弃了传统防御盾逻辑。这让我们无比纠结但相关防御检测代码还在系统里只是没打开。
@@ -255,38 +260,38 @@ public class DATACENTERGUI : Editor {
         }
 
         GUILayout.Space(5f);
-        EditorGUILayout.LabelField("以下项目在完成construct后应该会自动出现。如果事前手动适配，则construct操作不会更改他们",title);
+        EditorGUILayout.LabelField("以下项目在完成construct后应该会自动出现。如果事前手动适配，则construct操作不会更改他们",_title);
         
-        title.normal.textColor = Color.red;
+        _title.normal.textColor = Color.red;
         GUILayout.Space(5f);
-        EditorGUILayout.LabelField("所有角色在创建的时候要遵循这样重要的一点：作为角色在地面支撑用的collider，",title);
-        EditorGUILayout.LabelField(" 其下沿边必须低于gameobject。transform。position，并且高于floorcheckers中的marker。",title);
-        EditorGUILayout.LabelField("环境感知器的内环要超出所有身体collider，我们有一个攻击迈步系统，所以一个角色攻击另一个的时候略以远距离开始攻击没有关系", title);
+        EditorGUILayout.LabelField("所有角色在创建的时候要遵循这样重要的一点：作为角色在地面支撑用的collider，",_title);
+        EditorGUILayout.LabelField(" 其下沿边必须低于gameobject。transform。position，并且高于floorcheckers中的marker。",_title);
+        EditorGUILayout.LabelField("环境感知器的内环要超出所有身体collider，我们有一个攻击迈步系统，所以一个角色攻击另一个的时候略以远距离开始攻击没有关系", _title);
 
         if (GUILayout.Button("点一次这个。里面包括了清理多余Rigidbody和忽略自我碰撞两个方面"))
         {
-            allCollider.Clear();
-            CleanAllChildrenFromRigidBody(myScript.WholeT);
-            for (int i = 0; i < allCollider.Count; i++)
+            _allCollider.Clear();
+            CleanAllChildrenFromRigidBody(_myScript.WholeT);
+            for (int i = 0; i < _allCollider.Count; i++)
             {
-                for (int y = i + 1; y < allCollider.Count; y++)
+                for (int y = i + 1; y < _allCollider.Count; y++)
                 {
-                    Physics.IgnoreCollision(allCollider[i], allCollider[y]);
+                    Physics.IgnoreCollision(_allCollider[i], _allCollider[y]);
                 }
             }
-            allCollider.Clear();
+            _allCollider.Clear();
         }
     }
 
-    readonly List<Collider> allCollider = new List<Collider>();
-    public void CleanAllChildrenFromRigidBody(Transform T)
+    readonly List<Collider> _allCollider = new List<Collider>();
+    void CleanAllChildrenFromRigidBody(Transform T)
     {
         foreach (Transform _t in T)
         {
             Collider C = _t.GetComponent<Collider>();
             if (C != null)
             {
-                allCollider.Add(C);
+                _allCollider.Add(C);
             }
             if (_t.GetComponent<Rigidbody>())
             {
