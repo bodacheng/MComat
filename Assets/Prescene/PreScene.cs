@@ -149,7 +149,7 @@ namespace mainMenu
 
         void StartUp()
         {
-            HeroIcon.INIFrames();
+            HeroIcon.IniFrames();
             if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
             {
                 UnitOptionLayer unitOptionLayer = UnitOptionLayer.Open();

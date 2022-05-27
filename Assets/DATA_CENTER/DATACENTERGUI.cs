@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Soul;
+using UnityEngine.AddressableAssets;
 
 [CustomEditor(typeof(Data_Center))]
 public class DATACENTERGUI : Editor {
@@ -66,11 +67,13 @@ public class DATACENTERGUI : Editor {
                 if (_myScript.WholeT.GetComponent<OutsideDataLink>() == null)
                     _myScript.WholeT.gameObject.AddComponent<OutsideDataLink>();
                 _myScript.WholeT.GetComponent<OutsideDataLink>()._C = _myScript;
-            } else {
+            }
+            else
+            {
                 Debug.Log(" 没有适配wholeT，返回");
                 return;
             }
-            
+
             // 关于collisionDetectionMode ，计算量最小是Discrete，但实测设置成Continuous的话一定不会产生行走穿墙。但根据该功能注释看
             // 设置成Discrete或Continuous对于角色间碰撞是一样的。（Continuous式计算只对无刚体的collider有效）这样的话考虑计算量时候还牵扯到个地面的问题。。。
             _myScript._AudioSource = _myScript.WholeT.GetComponent<AudioSource>();
@@ -79,16 +82,16 @@ public class DATACENTERGUI : Editor {
             _myScript.FightDataRef.Center = _myScript;
             _myScript._BO_Ani_E = _myScript.WholeT.GetComponent<BO_Ani_E>();
             _myScript._BO_Ani_E._DATA_CENTER = _myScript;
-            _myScript._MyBehaviorRunner = _myScript.gameObject.GetComponent<BehaviorRunner>();            
+            _myScript._MyBehaviorRunner = _myScript.gameObject.GetComponent<BehaviorRunner>();
             _myScript._MyBehaviorRunner._SkillCancelFlag = _myScript._SkillCancelFlag;
-            _myScript.blendShapeProxy = _myScript.gameObject.GetComponent<BlendShapeProxy>();                       
+            _myScript.blendShapeProxy = _myScript.gameObject.GetComponent<BlendShapeProxy>();
             _myScript._BasicPhysicSupport = _myScript.WholeT.GetComponent<BasicPhysicSupport>();
             _myScript._BasicPhysicSupport._DATA_CENTER = _myScript;
             _myScript._BasicPhysicSupport.animator = _myScript.WholeT.GetComponent<Animator>();
             _myScript._BasicPhysicSupport.animator.applyRootMotion = false;
             _myScript._BasicPhysicSupport.animator.updateMode = AnimatorUpdateMode.Normal;
             _myScript._BasicPhysicSupport.animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
-            _myScript._BasicPhysicSupport.Rigidbody = _myScript.WholeT.GetComponent<Rigidbody>();//这个只在战斗模式需要
+            _myScript._BasicPhysicSupport.Rigidbody = _myScript.WholeT.GetComponent<Rigidbody>(); //这个只在战斗模式需要
             _myScript._BasicPhysicSupport.Rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
             _myScript._BasicPhysicSupport.Rigidbody.useGravity = false;
             _myScript._BasicPhysicSupport.Rigidbody.mass = 100f;
@@ -97,7 +100,7 @@ public class DATACENTERGUI : Editor {
             _myScript._BasicPhysicSupport.Rigidbody.isKinematic = false;
             _myScript._BasicPhysicSupport.Rigidbody.interpolation = RigidbodyInterpolation.None;
             _myScript._BasicPhysicSupport.Rigidbody.constraints = RigidbodyConstraints.None;
-            _myScript._BasicPhysicSupport.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;            
+            _myScript._BasicPhysicSupport.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _myScript.bO_Weapon_Animation_Events = _myScript.WholeT.GetComponent<BO_Weapon_Animation_Events>();
             ResistanceManager resistanceManager = _myScript.WholeT.GetComponent<ResistanceManager>();
             ShaderManager shaderManager = _myScript.transform.GetComponent<ShaderManager>();
@@ -114,6 +117,7 @@ public class DATACENTERGUI : Editor {
                     _myScript.right_arm_hitbox_t.gameObject.AddComponent<BoxCollider>();
                     _myScript.right_arm_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
+
                 _myScript.right_arm_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
                 focusingHitBox = _myScript.right_arm_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
@@ -121,6 +125,7 @@ public class DATACENTERGUI : Editor {
                 focusingHitBox = _myScript.right_arm_hitbox_t.GetComponent<BO_Limb>();
                 focusingHitBox.Center = _myScript;
             }
+
             if (_myScript.left_arm_hitbox_t != null)
             {
                 if (!_myScript.left_arm_hitbox_t.GetComponent<BoxCollider>())
@@ -128,6 +133,7 @@ public class DATACENTERGUI : Editor {
                     _myScript.left_arm_hitbox_t.gameObject.AddComponent<BoxCollider>();
                     _myScript.left_arm_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
+
                 _myScript.left_arm_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
                 focusingHitBox = _myScript.left_arm_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
@@ -135,6 +141,7 @@ public class DATACENTERGUI : Editor {
                 focusingHitBox = _myScript.left_arm_hitbox_t.GetComponent<BO_Limb>();
                 focusingHitBox.Center = _myScript;
             }
+
             if (_myScript.right_leg_hitbox_t != null)
             {
                 if (!_myScript.right_leg_hitbox_t.GetComponent<BoxCollider>())
@@ -142,6 +149,7 @@ public class DATACENTERGUI : Editor {
                     _myScript.right_leg_hitbox_t.gameObject.AddComponent<BoxCollider>();
                     _myScript.right_leg_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
+
                 _myScript.right_leg_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
                 focusingHitBox = _myScript.right_leg_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
@@ -149,6 +157,7 @@ public class DATACENTERGUI : Editor {
                 focusingHitBox = _myScript.right_leg_hitbox_t.GetComponent<BO_Limb>();
                 focusingHitBox.Center = _myScript;
             }
+
             if (_myScript.left_leg_hitbox_t != null)
             {
                 if (!_myScript.left_leg_hitbox_t.GetComponent<BoxCollider>())
@@ -156,6 +165,7 @@ public class DATACENTERGUI : Editor {
                     _myScript.left_leg_hitbox_t.gameObject.AddComponent<BoxCollider>();
                     _myScript.left_leg_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(0.3f, 0.15f, 0.15f);
                 }
+
                 _myScript.left_leg_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
                 focusingHitBox = _myScript.left_leg_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
@@ -163,6 +173,7 @@ public class DATACENTERGUI : Editor {
                 focusingHitBox = _myScript.left_leg_hitbox_t.GetComponent<BO_Limb>();
                 focusingHitBox.Center = _myScript;
             }
+
             if (_myScript.spine_hitbox_t != null)
             {
                 if (!_myScript.spine_hitbox_t.GetComponent<BoxCollider>())
@@ -170,7 +181,8 @@ public class DATACENTERGUI : Editor {
                     _myScript.spine_hitbox_t.gameObject.AddComponent<BoxCollider>();
                     _myScript.spine_hitbox_t.GetComponent<BoxCollider>().size = new Vector3(1f, 1f, 1f);
                 }
-                _myScript.spine_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;                
+
+                _myScript.spine_hitbox_t.GetComponent<BoxCollider>().isTrigger = false;
                 focusingHitBox = _myScript.spine_hitbox_t.GetComponent<BO_Limb>();
                 if (focusingHitBox == null)
                     _myScript.spine_hitbox_t.gameObject.AddComponent<BO_Limb>();
@@ -180,7 +192,7 @@ public class DATACENTERGUI : Editor {
 
             string bladeName;
             //string shieldName;
-            switch(_myScript.element)
+            switch (_myScript.element)
             {
                 case Element.darkMagic:
                     bladeName = "D_enegryBlade";
@@ -207,18 +219,27 @@ public class DATACENTERGUI : Editor {
                     //shieldName = "blue_Shield";
                     break;
             }
+            
             if (_myScript.Personality_events.right_sword == null)
             {
-                GameObject enegryBlade = Object.Instantiate(Resources.Load("BasicCharComponent" + "/" + bladeName) as GameObject);
+                var op = Addressables.LoadAssetAsync<GameObject>(bladeName);
+                var prefab = op.WaitForCompletion();
+                Addressables.Release(op);
+                
+                var enegryBlade = Object.Instantiate(prefab);
                 enegryBlade.name = bladeName;
                 enegryBlade.transform.SetParent(_myScript.right_hand_t);
 				enegryBlade.transform.localPosition = Vector3.zero;
-                enegryBlade.transform.localRotation = Quaternion.Euler(180, 0, 0);//这个事情非常不一定
+                enegryBlade.transform.localRotation = Quaternion.Euler(180, 0, 0);//非常不一定
                 _myScript.Personality_events.right_sword = enegryBlade;
             }
             if (_myScript.Personality_events.left_sword == null)
             {
-                GameObject enegryBlade = Object.Instantiate(Resources.Load("BasicCharComponent" + "/" + bladeName) as GameObject);
+                var op = Addressables.LoadAssetAsync<GameObject>(bladeName);
+                var prefab = op.WaitForCompletion();
+                Addressables.Release(op);
+                
+                var enegryBlade = Object.Instantiate(prefab);
                 enegryBlade.name = bladeName;
                 enegryBlade.transform.SetParent(_myScript.left_hand_t);
 				enegryBlade.transform.localPosition = Vector3.zero;
