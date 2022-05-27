@@ -52,7 +52,7 @@ public class Cach : MonoBehaviour
             yield return null;
         }
         
-        string warn = "总大小" + wholeSize;
+        string warn = "Download size : " + wholeSize / 1024 + "MB" + "\n\n" + "Start to download";
         Complete(warn);
     }
     
@@ -97,7 +97,7 @@ public class Cach : MonoBehaviour
             };
             while (dl.PercentComplete < 1 && !dl.IsDone)
             {
-                progressUIRefresh("Downloading Asset: "+label, dl.PercentComplete);
+                progressUIRefresh("Downloading "+ label + " asset", dl.PercentComplete);
                 yield return null;
             }
         }
