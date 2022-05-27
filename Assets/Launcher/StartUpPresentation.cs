@@ -8,15 +8,15 @@ public class StartUpPresentation : MonoBehaviour
 {
     public Starter Starter;
     public RectTransform T;
-    [FormerlySerializedAs("ResourceDownLoad")] public Cach cach;
+    
+    [SerializeField] Cach cach;
     
     void Start()
     {
         StartCoroutine(cach.GetWholeDownLoadSize(DownLoadConfirm));
     }
-
+    
     [SerializeField] private TextMeshProUGUI ProgressMsg;
-
     [SerializeField] private Slider progressBar;
     
     void ProgressUIStateRefresh(string msg, float progress)
@@ -28,11 +28,18 @@ public class StartUpPresentation : MonoBehaviour
     void DownLoadConfirm(string msg)
     {
         var popupLayer = PopupLayer.Open(T.gameObject);
-        popupLayer.ArrangeConfirmWindow(()=>
-        {
-            progressBar.gameObject.SetActive(true);
-            StartCoroutine(cach.ResourcePrepareProcess(EnterGame, ProgressUIStateRefresh));
-        }, msg);
+        popupLayer.ArrangeConfirmWindow(
+            ()=>
+            {
+                progressBar.gameObject.SetActive(true);
+                StartCoroutine(cach.ResourcePrepareProcess(EnterGame, ProgressUIStateRefresh));
+            },
+            () =>
+            {
+                Application.Quit();
+            },
+            msg
+        );
     }
 
     void EnterGame()
