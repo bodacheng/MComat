@@ -57,25 +57,25 @@ public partial class SkillIconsDic
             case 0:
                 if (d == null)
                 {
-                    d = Resources.Load<GameObject>("Sprites/skillIcons/normal_default");
+                    d = Resources.Load<GameObject>("BasicSprites/normal_default");
                 }
                 return d;
             case 1:
                 if (ex1 == null)
                 {
-                    ex1 = Resources.Load<GameObject>("Sprites/skillIcons/ex1_default");
+                    ex1 = Resources.Load<GameObject>("BasicSprites/ex1_default");
                 }
                 return ex1;
             case 2:
                 if (ex2 == null)
                 {
-                    ex2 = Resources.Load<GameObject>("Sprites/skillIcons/ex2_default");
+                    ex2 = Resources.Load<GameObject>("BasicSprites/ex2_default");
                 }
                 return ex2;
             case 3:
                 if (ex3 == null)
                 {
-                    ex3 = Resources.Load<GameObject>("Sprites/skillIcons/ex3_default");
+                    ex3 = Resources.Load<GameObject>("BasicSprites/ex3_default");
                 }
                 return ex3;
         }

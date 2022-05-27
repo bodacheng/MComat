@@ -15,7 +15,7 @@ public class HeroIcon : MonoBehaviour {
     
     static readonly IDictionary<Element, Sprite> frames = new Dictionary<Element, Sprite>();
     
-    public static void INIFrames()
+    public static void IniFrames()
     {
         if (!frames.ContainsKey(Element.blueMagic))
             frames.Add(Element.blueMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
