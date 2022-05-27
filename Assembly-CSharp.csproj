@@ -334,7 +334,7 @@
      <Compile Include="Assets\BoundaryControl\BattleGround.cs" />
      <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
      <Compile Include="Assets\JsonSupport\UnityLitJson\JsonAttribute.cs" />
-     <Compile Include="Assets\CachLogic\ResourceDownLoad.cs" />
+     <Compile Include="Assets\Cach\Cach.cs" />
      <Compile Include="Assets\TouchScript\Scripts\Pointers\TouchPointer.cs" />
      <Compile Include="Assets\FightingSceneUISystem\HeroIcon.cs" />
      <Compile Include="Assets\PlayFab\CloudScripts\Dev.cs" />

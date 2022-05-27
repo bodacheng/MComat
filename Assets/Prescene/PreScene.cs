@@ -81,7 +81,7 @@ namespace mainMenu
         {
             await HurtObjectManager.CheckExistedKey();
             await EffectsManager.CheckExistedKey();
-            StartCoroutine(HurtObjectManager.ConstructDPool());
+            HurtObjectManager.ConstructDPool();
         }
         
         public static void ReturnToLobby(string error)

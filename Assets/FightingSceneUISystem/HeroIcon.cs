@@ -13,22 +13,22 @@ public class HeroIcon : MonoBehaviour {
     public UnitInfo unitInfo;
     public UnitConfig unitConfig;
     
-    static readonly IDictionary<Element, Sprite> frames = new Dictionary<Element, Sprite>();
+    static readonly IDictionary<Element, Sprite> Frames = new Dictionary<Element, Sprite>();
     
     public static void IniFrames()
     {
-        if (!frames.ContainsKey(Element.blueMagic))
-            frames.Add(Element.blueMagic, ResourceDownLoad.LoadT<Sprite>("Icon_Frame/8.asset"));
-        if (!frames.ContainsKey(Element.redMagic))
-            frames.Add(Element.redMagic, ResourceDownLoad.LoadT<Sprite>("Icon_Frame/8.asset"));
-        if (!frames.ContainsKey(Element.greenMagic))
-            frames.Add(Element.greenMagic, ResourceDownLoad.LoadT<Sprite>("Icon_Frame/8.asset"));
-        if (!frames.ContainsKey(Element.lightMagic))
-            frames.Add(Element.lightMagic, ResourceDownLoad.LoadT<Sprite>("Icon_Frame/8.asset"));
-        if (!frames.ContainsKey(Element.darkMagic))
-            frames.Add(Element.darkMagic, ResourceDownLoad.LoadT<Sprite>("Icon_Frame/8.asset"));
-        if (!frames.ContainsKey(Element.Null))
-            frames.Add(Element.Null, ResourceDownLoad.LoadT<Sprite>("Icon_Frame/8.asset"));
+        if (!Frames.ContainsKey(Element.blueMagic))
+            Frames.Add(Element.blueMagic, Cach.LoadT<Sprite>("Icon_Frame/8.asset"));
+        if (!Frames.ContainsKey(Element.redMagic))
+            Frames.Add(Element.redMagic, Cach.LoadT<Sprite>("Icon_Frame/8.asset"));
+        if (!Frames.ContainsKey(Element.greenMagic))
+            Frames.Add(Element.greenMagic, Cach.LoadT<Sprite>("Icon_Frame/8.asset"));
+        if (!Frames.ContainsKey(Element.lightMagic))
+            Frames.Add(Element.lightMagic, Cach.LoadT<Sprite>("Icon_Frame/8.asset"));
+        if (!Frames.ContainsKey(Element.darkMagic))
+            Frames.Add(Element.darkMagic, Cach.LoadT<Sprite>("Icon_Frame/8.asset"));
+        if (!Frames.ContainsKey(Element.Null))
+            Frames.Add(Element.Null, Cach.LoadT<Sprite>("Icon_Frame/8.asset"));
     }
     
     public void Grey()
@@ -48,7 +48,7 @@ public class HeroIcon : MonoBehaviour {
         cooldownCurtain.fillAmount = proportion;
     }
 
-    public void ChangeIcon(Sprite _Sprite, Element element)
+    public void ChangeIcon(Sprite sprite, Element element)
     {
         if (frame == null || Icon == null)
         {
@@ -101,20 +101,20 @@ public class HeroIcon : MonoBehaviour {
         }
         iconButton.colors = colors;
         
-        Icon.sprite = _Sprite;
+        Icon.sprite = sprite;
         Icon.color = Icon.sprite == null ? new Color(1, 1, 1, 0f) : Color.white;
         
-        if (frames.ContainsKey(element))
-            frame.sprite = frames[element];                
+        if (Frames.ContainsKey(element))
+            frame.sprite = Frames[element];                
     }
     
     public static void ChangeHeroIconByInstanceId(string instanceId, HeroIcon Icon)
     {
-        var _one = MyMonsters.Get(instanceId);
-        if (_one != null)
+        var info = MyMonsters.Get(instanceId);
+        if (info != null)
         {
-            var unitConfig = Units.GetUnitConfig(_one.r_id);
-            ChangeHeroIconByRID(unitConfig.RECORD_ID,Icon);
+            var unitConfig = Units.GetUnitConfig(info.r_id);
+            ChangeHeroIconByRid(unitConfig.RECORD_ID,Icon);
         }
         else
         {
@@ -122,20 +122,20 @@ public class HeroIcon : MonoBehaviour {
         }
     }
     
-    public static void ChangeHeroIconByRID(string rID, HeroIcon Icon)
+    public static void ChangeHeroIconByRid(string rID, HeroIcon Icon)
     {
-        UnitConfig unitConfig = Units.GetUnitConfig(rID);
+        var unitConfig = Units.GetUnitConfig(rID);
         Icon.ChangeIcon(unitConfig == null ? null : UnitIconDic.Load(unitConfig.RECORD_ID), unitConfig == null ? Element.Null : unitConfig.element);
     }
         
-    public static void SelectedFeature(HeroIcon _charIcon, GameObject selectedFrame, float localScale)
+    public static void SelectedFeature(HeroIcon unitIcon, GameObject selectedFrame, float localScale)
     {
-        if (_charIcon == null)
+        if (unitIcon == null)
         {
             selectedFrame.SetActive(false);
             return;
         }
-        selectedFrame.transform.SetParent(_charIcon.transform);
+        selectedFrame.transform.SetParent(unitIcon.transform);
         selectedFrame.transform.localPosition = Vector3.zero;
         selectedFrame.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         selectedFrame.GetComponent<RectTransform>().localScale = new Vector3(localScale, localScale, localScale);

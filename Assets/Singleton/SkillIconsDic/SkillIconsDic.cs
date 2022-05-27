@@ -4,18 +4,18 @@ using UnityEngine;
 
 public partial class SkillIconsDic {
 
-    static SkillIconsDic instance;
+    static SkillIconsDic _instance;
     public static SkillIconsDic Instance
     {
         get
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = new SkillIconsDic();
+                _instance = new SkillIconsDic();
             }
-            return instance;
+            return _instance;
         }
     }
     
-    IDictionary<string, GameObject> SkillIconDic = new Dictionary<string, GameObject>();
+    readonly IDictionary<string, GameObject> _skillIconDic = new Dictionary<string, GameObject>();
 }

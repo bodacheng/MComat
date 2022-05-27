@@ -49,7 +49,7 @@ namespace mainMenu
                     path = "lightmagic";
                     break;
             }
-            triggerExplosion0 = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
+            triggerExplosion0 = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
             triggerExplosion0.transform.SetParent(Marker.transform);
         }
         

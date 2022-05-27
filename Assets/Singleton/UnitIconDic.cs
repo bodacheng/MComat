@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Singleton
 {
@@ -13,9 +12,7 @@ namespace Singleton
             Dic.TryGetValue(unit_id, out Sprite Sprite);
             if (Sprite == null)
             {
-                var op = Addressables.LoadAssetAsync<Sprite>("unit/"+unit_id);
-                Sprite = op.WaitForCompletion();
-                Addressables.Release(op);
+                Sprite = Cach.LoadT<Sprite>("unit/" + unit_id);
             }
             else
             {

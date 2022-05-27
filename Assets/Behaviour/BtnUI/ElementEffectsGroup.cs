@@ -92,9 +92,9 @@ public class ElementEffectsGroup
     public void INICommon(Transform targetRectT, Element element, Button Attack, Button Fire1, Button Fire2)
     {
         var path = FightGlobalSetting.EffectPathDefine(element);
-        var attackSlot = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
-        var fire1Slot = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
-        var fire2Slot = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
+        var attackSlot = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
+        var fire1Slot = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
+        var fire2Slot = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
         
         attackSlot.transform.SetParent(targetRectT);
         fire1Slot.transform.SetParent(targetRectT);
@@ -109,18 +109,18 @@ public class ElementEffectsGroup
 
         if (FightGlobalSetting._hasDefend)
         {
-            _defendBtn = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/defend.prefab");
+            _defendBtn = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/defend.prefab");
         }
         
-        _rushBtn = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/rush.prefab");
-        _aRefresh = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
-        _fire1Refresh = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
-        _fire2Refresh = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
-        triggerExplosion0 = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
-        triggerExplosion1 = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion1.prefab");
-        triggerExplosion2 = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion2.prefab");
-        triggerExplosion3 = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion3.prefab");
-        pressingExplosion = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/pressing.prefab");
+        _rushBtn = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/rush.prefab");
+        _aRefresh = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
+        _fire1Refresh = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
+        _fire2Refresh = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
+        triggerExplosion0 = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
+        triggerExplosion1 = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion1.prefab");
+        triggerExplosion2 = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion2.prefab");
+        triggerExplosion3 = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion3.prefab");
+        pressingExplosion = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/pressing.prefab");
         
         if (FightGlobalSetting._hasDefend)
             _defendBtn.transform.SetParent(targetRectT);

@@ -34,7 +34,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
                     target = member3;
                     break;
             }
-            HeroIcon.ChangeHeroIconByRID(unitInfo.r_id, target);
+            HeroIcon.ChangeHeroIconByRid(unitInfo.r_id, target);
         }
         
         FightMembers fightMembers = new FightMembers

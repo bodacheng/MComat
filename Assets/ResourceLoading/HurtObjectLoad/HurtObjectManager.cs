@@ -34,25 +34,16 @@ public class HurtObjectManager
         Addressables.Release(locationHandle);
     }
 
-    static IEnumerator TryLoadWeapon(string key)
+    static GameObject TryLoadWeapon(string key)
     {
-
         if (!keyExists.Contains(key))
         {
-            yield return null;
+            return null;
         }
         else
         {
-            GameObject returnValue = null;
-            _handle = Addressables.LoadAssetAsync<GameObject>(key);
-            yield return _handle;
-            
-            if (_handle.Status == AsyncOperationStatus.Succeeded)
-            {
-                returnValue = _handle.Result;
-            }
-            Addressables.Release(_handle);
-            yield return returnValue;
+            var returnValue = Cach.LoadObject(key);
+            return returnValue;
         }
     }
     
@@ -72,27 +63,23 @@ public class HurtObjectManager
     }
     
     // 默认攻击物件池的创建
-    public static IEnumerator ConstructDPool()
+    public static void ConstructDPool()
     {
         if (default_hitBoxPool == null)
         {
-            GameObject resultObject = null;
-            var process= TryLoadWeapon("HurtObjects/defaultmagic/d_hitbox.prefab");
-            yield return process;
-            resultObject = (GameObject)process.Current;
+            var resultObject =TryLoadWeapon("HurtObjects/defaultmagic/d_hitbox.prefab");
             if (resultObject == null)
             {
                 Debug.Log("严重错误");
-                yield break;
+                return;
             }
             
             default_hitBoxPool = new DecompositionerPool(resultObject);
             default_hitBoxPool.PreloadAsync(20, 1).Subscribe(_ => Debug.Log("已经为对象池:d_hitbox预留物件"));
         }
     }
-
-    private static IEnumerator process;
-    public static IEnumerator ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Element element)
+    
+    public static void ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Element element)
     {
         DecompositionerPool poolToConstruct;
         GameObject hurtObject = null;
@@ -105,13 +92,11 @@ public class HurtObjectManager
                 HurtPoolDic.TryGetValue(MagicForwardPath + "/" + resource_name, out poolToConstruct);
                 if (poolToConstruct != null)
                 {
-                    yield break;
+                    return;
                 }
             }
             
-            process= TryLoadWeapon("HurtObjects/" + MagicForwardPath + "/" + resource_name + ".prefab");
-            yield return process;
-            hurtObject = (GameObject)process.Current;
+            hurtObject = TryLoadWeapon("HurtObjects/" + MagicForwardPath + "/" + resource_name + ".prefab");
             
             if (hurtObject != null)
             {
@@ -123,13 +108,13 @@ public class HurtObjectManager
                     {
                         for (var i = 0; i < decomposition.Attachments.Length; i++)
                         {
-                            yield return ConstructHurtObjectPool(decomposition.Attachments[i],MagicForwardPath,element);
+                            ConstructHurtObjectPool(decomposition.Attachments[i],MagicForwardPath, element);
                         }
                     }
                 }else{
                     Debug.Log(resource_name + "没有Decompositioner！？");
                 }
-                yield break;
+                return;
             }
         }
         
@@ -139,12 +124,10 @@ public class HurtObjectManager
         {
             HurtPoolDic.TryGetValue(basicMagicForwardPath + "/" + resource_name, out poolToConstruct);
             if (poolToConstruct != null)
-                yield break;
+                return;
         }
         
-        process = TryLoadWeapon("HurtObjects/" + basicMagicForwardPath + "/" + resource_name + ".prefab");
-        yield return process;
-        hurtObject = (GameObject)process.Current;
+        hurtObject = TryLoadWeapon("HurtObjects/" + basicMagicForwardPath + "/" + resource_name + ".prefab");
         
         if (hurtObject != null)
         {
@@ -157,13 +140,13 @@ public class HurtObjectManager
                 {
                     for (var i = 0; i < decomposition.Attachments.Length; i++)
                     {
-                        yield return ConstructHurtObjectPool(decomposition.Attachments[i],MagicForwardPath,element);
+                        ConstructHurtObjectPool(decomposition.Attachments[i],MagicForwardPath,element);
                     }
                 }
             }else{
                 Debug.Log(resource_name + "没有Decompositioner！？");
             }
-            yield break;
+            return;
         }
 
         //////////// 第三环节  /////////////
@@ -174,12 +157,10 @@ public class HurtObjectManager
             {
                 HurtPoolDic.TryGetValue(basicMagicForwardPath + "/" + resource_name, out poolToConstruct);
                 if (poolToConstruct != null)
-                    yield break;
+                    return;
             }
             
-            process = TryLoadWeapon("HurtObjects/" + basicMagicForwardPath + "/" + resource_name + ".prefab");
-            yield return process;
-            hurtObject = (GameObject)process.Current;
+            hurtObject = TryLoadWeapon("HurtObjects/" + basicMagicForwardPath + "/" + resource_name + ".prefab");
             
             if (hurtObject != null)
             {
@@ -192,7 +173,7 @@ public class HurtObjectManager
                     {
                         for (int i = 0; i < decompositioner.Attachments.Length; i++)
                         {
-                            yield return ConstructHurtObjectPool(decompositioner.Attachments[i],MagicForwardPath,element);
+                            ConstructHurtObjectPool(decompositioner.Attachments[i],MagicForwardPath,element);
                         }
                     }
                 }else{

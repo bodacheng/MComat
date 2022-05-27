@@ -1,17 +1,18 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class StartUpPresentation : MonoBehaviour
 {
     public Starter Starter;
     public RectTransform T;
-    public ResourceDownLoad ResourceDownLoad;
+    [FormerlySerializedAs("ResourceDownLoad")] public Cach cach;
     
     void Start()
     {
-        StartCoroutine(ResourceDownLoad.GetWholeDownLoadSize(DownLoadConfirm));
+        StartCoroutine(cach.GetWholeDownLoadSize(DownLoadConfirm));
     }
 
     [SerializeField] private TextMeshProUGUI ProgressMsg;
@@ -27,7 +28,7 @@ public class StartUpPresentation : MonoBehaviour
     void DownLoadConfirm(string msg)
     {
         var popupLayer = PopupLayer.Open(T.gameObject);
-        popupLayer.ArrangeConfirmWindow(()=> StartCoroutine(ResourceDownLoad.ResourcePrepareProcess(EnterGame, ProgressUIStateRefresh)), msg);
+        popupLayer.ArrangeConfirmWindow(()=> StartCoroutine(cach.ResourcePrepareProcess(EnterGame, ProgressUIStateRefresh)), msg);
     }
 
     void EnterGame()
