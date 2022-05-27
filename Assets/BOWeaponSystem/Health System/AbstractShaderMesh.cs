@@ -23,6 +23,7 @@ public class AbstractShaderMesh : MonoBehaviour
             {
                 var new_m = new Material(m.shader);
                 new_m.CopyPropertiesFromMaterial(m);
+                new_m.EnableKeyword("_EMISSION");
                 materials.Add(new_m);
             }
             mesh.sharedMaterials = materials.ToArray();
