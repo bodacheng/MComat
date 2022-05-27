@@ -165,7 +165,6 @@ public partial class Decompositioner : MonoBehaviour {
                 BO_Ani_E.hiddenMethods.MagicForward_core("c_l_bullet", hitBoxSubEventManger.transform.position, hitBoxSubEventManger.transform.rotation, 3, _HitBox.GeneratedByStateKey);
                 break;
             case "c_r_bullet":
-                Debug.Log(BO_Ani_E.hiddenMethods + ":"+ _HitBox);
                 BO_Ani_E.hiddenMethods.MagicForward_core("c_r_bullet", hitBoxSubEventManger.transform.position, hitBoxSubEventManger.transform.rotation, 3, _HitBox.GeneratedByStateKey);
                 break;
             case "bulletForward":
