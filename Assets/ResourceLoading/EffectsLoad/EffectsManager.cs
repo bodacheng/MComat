@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UniRx;
+﻿using UniRx;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -44,7 +43,7 @@ public class EffectsManager
         }
         else
         {
-            var returnValue = Cach.LoadObject(key);
+            var returnValue = Cach.LoadPrefab(key);
             return returnValue;
         }
     }

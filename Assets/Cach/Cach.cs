@@ -117,6 +117,15 @@ public class Cach : MonoBehaviour
         return _object;
     }
     
+    public static GameObject LoadPrefab(string prefabPathName)
+    {
+        Debug.Log("读取prefab："+ prefabPathName);
+        var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
+        var prefab = op.WaitForCompletion();
+        Addressables.Release(op);
+        return prefab;
+    }
+    
     public static T LoadTOnObject<T>(string prefabPathName)
     {
         Debug.Log("读取："+ prefabPathName);
