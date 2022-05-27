@@ -44,11 +44,7 @@ public class EffectsManager
         }
         else
         {
-            GameObject returnValue = null;
-            var op = Addressables.LoadAssetAsync<GameObject>(key);
-            GameObject go = op.WaitForCompletion();
-            Addressables.Release(op);
-            returnValue = go;
+            var returnValue = Cach.LoadObject(key);
             return returnValue;
         }
     }
@@ -66,10 +62,10 @@ public class EffectsManager
     {
         if (string.IsNullOrEmpty(resource_name))
             return null;
-        var EffectPool = INIEffectsPool(resource_name, EffectsPath, 3);
-        if (EffectPool == null)
+        var effectPool = INIEffectsPool(resource_name, EffectsPath, 3);
+        if (effectPool == null)
             return null;
-        var processingEffectObj = EffectPool.Rent();
+        var processingEffectObj = effectPool.Rent();
         var myConstraintSource = new ConstraintSource();
         if (parentT != null)
         {

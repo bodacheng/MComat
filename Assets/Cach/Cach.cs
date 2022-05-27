@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-public class ResourceDownLoad : MonoBehaviour
+public class Cach : MonoBehaviour
 {
     public IEnumerator GetWholeDownLoadSize(Action<string> Complete)
     {

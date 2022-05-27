@@ -1,8 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using Object = UnityEngine.Object;
 
 namespace Singleton
 {
@@ -17,30 +14,16 @@ namespace Singleton
                 Debug.Log("资源号码错误");
                 yield break;
             }
-            GameObject tempModel = null;
-            GameObject resultObject;
-            AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(unitConfig.TYPE + "/" + unitConfig.REAL_NAME + ".prefab");
-            yield return handle;
-            if (handle.Status == AsyncOperationStatus.Succeeded)
-            {
-                resultObject = handle.Result;
-                Addressables.Release(handle);
-            }
-            else
-            {
-                Debug.Log("资源错误："+ unitConfig.TYPE + "/" + unitConfig.REAL_NAME);
-                Addressables.Release(handle);
-                yield break;
-            }
             
-            tempModel = Object.Instantiate(resultObject, Vector3.zero, Quaternion.identity, parent);
-            OutsideDataLink _ODL = tempModel.GetComponent<OutsideDataLink>();
-            if (_ODL == null)
+            var tempModel = Cach.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME + ".prefab");
+            tempModel.transform.SetParent(parent);
+            var odl = tempModel.GetComponent<OutsideDataLink>();
+            if (odl == null)
             {
                 yield return null;
                 yield break;
             }
-            var d = _ODL._C;        
+            var d = odl._C;        
             tempModel.SetActive(true);
             // 在角色生成的瞬间各个组件的awake和onenable就已经都开了，而一些数据的初始化是从下一行开始，所以要确保这个过程不会有一些因为变量没被初始化而形成的报错。
             d.element = unitConfig.element;
