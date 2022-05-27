@@ -45,17 +45,13 @@ public class ElementStoneTagsGroup
         switch(SpLevel)
         {
             case 0:
-                var normal = Resources.Load("essentialUIElements/buttonEffects/" + path + "/normal", typeof(GameObject)) as GameObject;
-                return Object.Instantiate(normal);
+                return ResourceDownLoad.LoadObject("ButtonEffects/" + path + "/normal.prefab");
             case 1:
-                var EX1 = Resources.Load("essentialUIElements/buttonEffects/" + path + "/EX1", typeof(GameObject)) as GameObject;
-                return Object.Instantiate(EX1);
+                return ResourceDownLoad.LoadObject("ButtonEffects/" + path + "/EX1.prefab");
             case 2:
-                var EX2 = Resources.Load("essentialUIElements/buttonEffects/" + path + "/EX2", typeof(GameObject)) as GameObject;
-                return Object.Instantiate(EX2);
+                return ResourceDownLoad.LoadObject("ButtonEffects/" + path + "/EX2.prefab");
             case 3:
-                var EX3 = Resources.Load("essentialUIElements/buttonEffects/" + path + "/EX3", typeof(GameObject)) as GameObject;
-                return Object.Instantiate(EX3);
+                return ResourceDownLoad.LoadObject("ButtonEffects/" + path + "/EX3.prefab");
         }
         return null;
     }
@@ -64,25 +60,20 @@ public class ElementStoneTagsGroup
     {
         var path = FightGlobalSetting.EffectPathDefine(element);
         
-        var triggerExplosionPrefab0 = Resources.Load("essentialUIElements/buttonEffects/" + path + "/explosion0", typeof(GameObject)) as GameObject;
-        var triggerExplosionPrefab1 = Resources.Load("essentialUIElements/buttonEffects/" + path + "/explosion1", typeof(GameObject)) as GameObject;
-        var triggerExplosionPrefab2 = Resources.Load("essentialUIElements/buttonEffects/" + path + "/explosion2", typeof(GameObject)) as GameObject;
-        var triggerExplosionPrefab3 = Resources.Load("essentialUIElements/buttonEffects/" + path + "/explosion3", typeof(GameObject)) as GameObject;
-        
-        var triggerExplosion0 = Object.Instantiate(triggerExplosionPrefab0).GetComponent<ParticleSystem>();
-        var triggerExplosion1 = Object.Instantiate(triggerExplosionPrefab1).GetComponent<ParticleSystem>();
-        var triggerExplosion2 = Object.Instantiate(triggerExplosionPrefab2).GetComponent<ParticleSystem>();
-        var triggerExplosion3 = Object.Instantiate(triggerExplosionPrefab3).GetComponent<ParticleSystem>();
+        var triggerExplosion0 = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
+        var triggerExplosion1 = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion1.prefab");
+        var triggerExplosion2 = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion2.prefab");
+        var triggerExplosion3 = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion3.prefab");
         
         triggerExplosion0.transform.SetParent(T);
         triggerExplosion1.transform.SetParent(T);
         triggerExplosion2.transform.SetParent(T);
         triggerExplosion3.transform.SetParent(T);
         
-        btnPressedEffects.Add(0,triggerExplosion0);
-        btnPressedEffects.Add(1,triggerExplosion1);
-        btnPressedEffects.Add(2,triggerExplosion2);
-        btnPressedEffects.Add(3,triggerExplosion3);
+        btnPressedEffects.Add(0, triggerExplosion0);
+        btnPressedEffects.Add(1, triggerExplosion1);
+        btnPressedEffects.Add(2, triggerExplosion2);
+        btnPressedEffects.Add(3, triggerExplosion3);
     }
     
     public void RefreshSTBoxEffects(int eX, Vector3 pos)
