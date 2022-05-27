@@ -106,4 +106,33 @@ public class ResourceDownLoad : MonoBehaviour
             Debug.Log("没有get到远程？："+label + "："+ getDownloadSize.Result);
         }
     }
+
+    public static GameObject LoadObject(string prefabPathName)
+    {
+        Debug.Log("读取："+ prefabPathName);
+        var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
+        var prefab = op.WaitForCompletion();
+        var _object = GameObject.Instantiate(prefab);
+        Addressables.Release(op);
+        return _object;
+    }
+    
+    public static T LoadTOnObject<T>(string prefabPathName)
+    {
+        Debug.Log("读取："+ prefabPathName);
+        var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
+        var prefab = op.WaitForCompletion();
+        var _object = GameObject.Instantiate(prefab);
+        Addressables.Release(op);
+        return _object.GetComponent<T>();
+    }
+    
+    public static T LoadT<T>(string prefabPathName)
+    {
+        Debug.Log("读取："+ prefabPathName);
+        var op = Addressables.LoadAssetAsync<T>(prefabPathName);
+        var prefab = op.WaitForCompletion();
+        Addressables.Release(op);
+        return prefab;
+    }
 }

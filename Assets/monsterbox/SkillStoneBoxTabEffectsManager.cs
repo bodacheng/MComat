@@ -7,7 +7,6 @@ namespace mainMenu
     {
         readonly IDictionary<Element, ElementStoneTagsGroup> _elementBtnEffects = new Dictionary<Element, ElementStoneTagsGroup>();
         ElementStoneTagsGroup _focusingEffectsGroup;
-        GameObject triggerExplosionPrefab;
         ParticleSystem triggerExplosion0;
         
         static GameObject Marker;
@@ -32,26 +31,25 @@ namespace mainMenu
             switch (element)
             {
                 case Element.blueMagic:
-                    path = "blueMagic";
+                    path = "bluemagic";
                     break;
                 case Element.darkMagic:
-                    path = "darkMagic";
+                    path = "darkmagic";
                     break;
                 case Element.greenMagic:
-                    path = "greenMagic";
+                    path = "greenmagic";
                     break;
                 case Element.lightMagic:
-                    path = "lightMagic";
+                    path = "lightmagic";
                     break;
                 case Element.redMagic:
-                    path = "redMagic";
+                    path = "redmagic";
                     break;
                 default:
-                    path = "lightMagic";
+                    path = "lightmagic";
                     break;
             }
-            triggerExplosionPrefab = Resources.Load("essentialUIElements/buttonEffects/"+ path + "/explosion0", typeof(GameObject)) as GameObject;
-            triggerExplosion0 = Instantiate(triggerExplosionPrefab).GetComponent<ParticleSystem>();
+            triggerExplosion0 = ResourceDownLoad.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
             triggerExplosion0.transform.SetParent(Marker.transform);
         }
         

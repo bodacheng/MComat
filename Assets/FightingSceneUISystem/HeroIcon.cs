@@ -18,17 +18,17 @@ public class HeroIcon : MonoBehaviour {
     public static void IniFrames()
     {
         if (!frames.ContainsKey(Element.blueMagic))
-            frames.Add(Element.blueMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
+            frames.Add(Element.blueMagic, ResourceDownLoad.LoadT<Sprite>("Icon_Frame/8.asset"));
         if (!frames.ContainsKey(Element.redMagic))
-            frames.Add(Element.redMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
+            frames.Add(Element.redMagic, ResourceDownLoad.LoadT<Sprite>("Icon_Frame/8.asset"));
         if (!frames.ContainsKey(Element.greenMagic))
-            frames.Add(Element.greenMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
+            frames.Add(Element.greenMagic, ResourceDownLoad.LoadT<Sprite>("Icon_Frame/8.asset"));
         if (!frames.ContainsKey(Element.lightMagic))
-            frames.Add(Element.lightMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
+            frames.Add(Element.lightMagic, ResourceDownLoad.LoadT<Sprite>("Icon_Frame/8.asset"));
         if (!frames.ContainsKey(Element.darkMagic))
-            frames.Add(Element.darkMagic, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
+            frames.Add(Element.darkMagic, ResourceDownLoad.LoadT<Sprite>("Icon_Frame/8.asset"));
         if (!frames.ContainsKey(Element.Null))
-            frames.Add(Element.Null, Resources.Load("essentialUIElements/iconframes/8") as Sprite);
+            frames.Add(Element.Null, ResourceDownLoad.LoadT<Sprite>("Icon_Frame/8.asset"));
     }
     
     public void Grey()
