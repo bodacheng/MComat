@@ -28,7 +28,11 @@ public class StartUpPresentation : MonoBehaviour
     void DownLoadConfirm(string msg)
     {
         var popupLayer = PopupLayer.Open(T.gameObject);
-        popupLayer.ArrangeConfirmWindow(()=> StartCoroutine(cach.ResourcePrepareProcess(EnterGame, ProgressUIStateRefresh)), msg);
+        popupLayer.ArrangeConfirmWindow(()=>
+        {
+            progressBar.gameObject.SetActive(true);
+            StartCoroutine(cach.ResourcePrepareProcess(EnterGame, ProgressUIStateRefresh));
+        }, msg);
     }
 
     void EnterGame()
