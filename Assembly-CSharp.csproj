@@ -93,7 +93,6 @@
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Buttons/SettingsButton.cs" />
      <Compile Include="Assets/TheNineSlot/TheNineSlot_Read.cs" />
      <Compile Include="Assets/Camera/Modes/New2022.cs" />
-     <Compile Include="Assets/POFX/Scripts/FX/POFX_ColorSwap.cs" />
      <Compile Include="Assets/FightSceneSystem/Nagare/FightingProcess.cs" />
      <Compile Include="Assets/TutorialManger/processes/GoToStages.cs" />
      <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/PopupLayer/PopupLayer_Loading.cs" />
@@ -169,7 +168,6 @@
      <Compile Include="Assets/Camera/PinchZoom/PinchZoom.cs" />
      <Compile Include="Assets/Behaviour/Control/Controller.cs" />
      <Compile Include="Assets/Behaviour/Defines/states/Death_State.cs" />
-     <Compile Include="Assets/POFX/Scripts/FX/POFX_Rim.cs" />
      <Compile Include="Assets/UI/AutoSwitch.cs" />
      <Compile Include="Assets/RPGTALK/Scripts/RPGTalkCinematic/RPGTalkCinematicClip.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Gestures/LongPressGesture.cs" />
@@ -342,7 +340,6 @@
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/MailBox.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Core/GestureManagerInstance.cs" />
      <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/notusinganymore/JiNengRongLian_selectBaseMonster.cs" />
-     <Compile Include="Assets/POFX/Scripts/FX/POFX_Pixelate.cs" />
      <Compile Include="Assets/NoSuchStudio/HighlightUI/Scritpts/Runtime/OptionsSO.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Pointers/IPointer.cs" />
      <Compile Include="Assets/RPGTALK/Scripts/Snippets/RPGTalkSkipCutscene.cs" />
@@ -355,7 +352,6 @@
      <Compile Include="Assets/monsterbox/SkillStoneDetail.cs" />
      <Compile Include="Assets/BOWeaponSystem/Health System/BasicPhysicSupport.cs" />
      <Compile Include="Assets/Behaviour/Soul/BehaviorRunner_Form.cs" />
-     <Compile Include="Assets/POFX/Scripts/FX/POFX_Outline.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Rendering/BlurManager.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Other/QualityManager.cs" />
      <Compile Include="Assets/RPGTALK/Scripts/RPGTalkCinematic/RPGTalkCinematicBehaviour.cs" />
@@ -407,7 +403,6 @@
      <Compile Include="Assets/AnimControl/readMe.cs" />
      <Compile Include="Assets/StagesManagement/StagesManagerGUI/SlotFocus.cs" />
      <Compile Include="Assets/POS_Sys/Parent_Label.cs" />
-     <Compile Include="Assets/POFX/Scripts/FX/POFX_Eraser.cs" />
      <Compile Include="Assets/monsterbox/SSLevelUpManager/BySKStone.cs" />
      <Compile Include="Assets/TutorialManger/processes/GoToMemberDetail.cs" />
      <Compile Include="Assets/MainSceneSystem/NAGARE/ProcessesRunner.cs" />
@@ -443,7 +438,6 @@
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Buttons/ChapterButton.cs" />
      <Compile Include="Assets/UI/ImageGliter.cs" />
      <Compile Include="Assets/NetFightScene/NetFightScene.cs" />
-     <Compile Include="Assets/POFX/Scripts/FX/POFX_Blur.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Hit/RaycastHitUI.cs" />
      <Compile Include="Assets/Remote/API/Dto/Model/Common/AbstractModel.cs" />
      <Compile Include="Assets/PlayFab/Client/Login.cs" />
@@ -484,13 +478,11 @@
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_StarScreenMove.cs" />
      <Compile Include="Assets/TouchScript/Scripts/InputSources/InputHandlers/WindowsPointerHandlers.cs" />
      <Compile Include="Assets/DynamicBone/Demo/DynamicBoneDemo1.cs" />
-     <Compile Include="Assets/POFX/Scripts/FX/POFX_Sobel.cs" />
      <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets/StagesManagement/StagesManagerGUI/UI_Ini.cs" />
      <Compile Include="Assets/Remote/API/Dto/Model/GetStructure/SkillStoneGotchaInfoModel.auto.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/Gotcha/StarsFall.cs" />
      <Compile Include="Assets/Behaviour/Soul/SkillCancelFlag.cs" />
-     <Compile Include="Assets/POFX/Scripts/FX/POFX_FlatColor.cs" />
      <Compile Include="Assets/RPGTALK/Scripts/Snippets/RPGTalkSimpleAnimation.cs" />
      <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUtils.cs" />
      <Compile Include="Assets/SKillAnalyzer/SKillAnalyzer_Common.cs" />
@@ -515,16 +507,13 @@
      <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/PopupLayer/PopupLayer_HighLight.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Pointers/ObjectPointer.cs" />
      <Compile Include="Assets/monsterbox/SSLevelUpManager/Open.cs" />
-     <Compile Include="Assets/POFX/Scripts/FX/POFX_Hsl.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Gestures/IGestureDelegate.cs" />
-     <Compile Include="Assets/POFX/Scripts/FX/POFX_Emboss.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManagerImage.cs" />
      <Compile Include="Assets/monsterbox/SSLevelUpManager/SSLevelUpManager.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Other/ScrollForMore.cs" />
      <Compile Include="Assets/POS_Sys/E_Damage.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Layers/FullscreenLayer.cs" />
      <Compile Include="Assets/Rotate_the_object.cs" />
-     <Compile Include="Assets/POFX/Scripts/POFX.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Utils/Geom/ProjectionUtils.cs" />
      <Compile Include="Assets/UI/oldscripts/Save_Trans.cs" />
      <Compile Include="Assets/TutorialManger/processes/SelectASlot/SkillEditA1Try.cs" />
@@ -599,10 +588,8 @@
      <Compile Include="Assets/Behaviour/Defines/states/Dash_Back_State.cs" />
      <Compile Include="Assets/FaciaManager.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Hit/HitTest.cs" />
-     <Compile Include="Assets/POFX/Scripts/FX/POFX_Desaturate.cs" />
      <Compile Include="Assets/DynamicBone/Scripts/DynamicBone.cs" />
      <Compile Include="Assets/Camera/Modes/OneVOneMode_failed.cs" />
-     <Compile Include="Assets/POFX/Scripts/FX/POFX_Matcap.cs" />
      <Compile Include="Assets/AppleAuthSample/MainMenu.cs" />
      <Compile Include="Assets/Behaviour/Defines/states/Hurts/Hurt_State_draw.cs" />
      <Compile Include="Assets/ResourceKeeper/ResourceKeeper.cs" />
@@ -688,7 +675,6 @@
      <Compile Include="Assets/BOWeaponSystem/HittingSystemDefinitions/HittingSystemDefinitions.cs" />
      <Compile Include="Assets/TouchScript/Scripts/InputSources/InputHandlers/MouseHandler.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Panel/MainPanelButtonParent.cs" />
-     <Compile Include="Assets/POFX/Scripts/FX/POFX_Refraction.cs" />
      <Compile Include="Assets/TheNineSlot/MiniNineSlots/NineForShow_Util.cs" />
      <Compile Include="Assets/TouchScript/Scripts/InputSources/InputHandlers/TouchHandler.cs" />
      <Compile Include="Assets/Behaviour/Soul/Sensor.cs" />
@@ -706,10 +692,7 @@
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Textures/MaCrea/MaCrea.txt" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_Plain_Additive.shader" />
      <None Include="Assets/UI/Shift - Complete Sci-Fi UI/Shaders/Masked UI Blur.shader" />
-     <None Include="Assets/POFX/Shaders/Resources/Refraction.shader" />
-     <None Include="Assets/POFX/Shaders/Resources/Outline.shader" />
      <None Include="Assets/EffectsResource/shaders/Lit_CenterGlow.shader" />
-     <None Include="Assets/POFX/Shaders/Resources/Sobel.shader" />
      <None Include="Assets/EffectsResource/shaders/FadeSlash.shader" />
      <None Include="Assets/Tank &amp; Healer Studio/Ultimate Joystick/_Examples/Spaceship Example/README_Spaceship.txt" />
      <None Include="Assets/EffectsResource/shaders/DissolveNoise.shader" />
@@ -727,14 +710,12 @@
      <None Include="Assets/UI/Shift - Complete Sci-Fi UI/Shaders/Fast UI Blur.shader" />
      <None Include="Assets/RPGTALK/ReadMe.txt" />
      <None Include="Assets/D_Resources/enviroments/Top-Down SF/Demo/readme mobile.txt" />
-     <None Include="Assets/POFX/Shaders/Resources/ColorSwap.shader" />
      <None Include="Assets/EffectsResource/shaders/Blend_CenterGlow.shader" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_Plain_AdditiveZ.shader" />
      <None Include="Assets/DynamicStarrySky/Shaders/StarrySky.shader" />
      <None Include="Assets/ExternalAssets/ArcadeStages/3/3.json" />
      <None Include="Assets/D_Resources/BasicCharComponent/Shield/saonian/FieldShield.shader" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Textures/BenSimonds/_Textures Readme.txt" />
-     <None Include="Assets/POFX/Shaders/Resources/Matcap.shader" />
      <None Include="Assets/ExternalAssets/ArcadeStages/5/5.json" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_Plain_Bumped.shader" />
      <None Include="Assets/ExternalAssets/ArcadeStages/1/1.json" />
@@ -752,32 +733,24 @@
      <None Include="Assets/EffectsResource/shaders/Electricity.shader" />
      <None Include="Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt" />
      <None Include="Assets/TextMesh Pro/Resources/Shaders/TMPro_Properties.cginc" />
-     <None Include="Assets/POFX/Shaders/Resources/Hsl.shader" />
      <None Include="Assets/EffectsResource/shaders/Blend_LinePath.shader" />
      <None Include="Assets/TextMesh Pro/Resources/Shaders/TMPro_Surface.cginc" />
      <None Include="Assets/EffectsResource/shaders/Gem_for_URP.shader" />
      <None Include="Assets/D_Resources/enviroments/Top-Down Dungeons2/Demo/!readme.txt" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_TextureMult_Bumped.shader" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_Plain.shader" />
-     <None Include="Assets/POFX/Shaders/Resources/Emboss.shader" />
-     <None Include="Assets/POFX/Shaders/Resources/Desaturate.shader" />
      <None Include="Assets/Resources/TimeLines/testdialog.txt" />
      <None Include="Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_TextureAdd.shader" />
-     <None Include="Assets/POFX/Shaders/Resources/POFX.cginc" />
      <None Include="Assets/EffectsResource/shaders/Add_Trail.shader" />
-     <None Include="Assets/POFX/Shaders/Resources/Rim.shader" />
-     <None Include="Assets/POFX/Shaders/Resources/Pixelate.shader" />
      <None Include="Assets/EffectsResource/shaders/Slash.shader" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_TextureAdd_Bumped.shader" />
      <None Include="Assets/Resources/title-data.json" />
      <None Include="Assets/EffectsResource/shaders/Fire.shader" />
-     <None Include="Assets/POFX/Shaders/Resources/FlatColor.shader" />
      <None Include="Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets/Demigiant/DOTween/readme.txt" />
      <None Include="Assets/EffectsResource/shaders/FireSphere.shader" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/_MatCap Shaders Readme.txt" />
-     <None Include="Assets/POFX/Shaders/Resources/Blur.shader" />
      <None Include="Assets/EffectsResource/shaders/Add_CenterGlow.shader" />
      <None Include="Assets/DynamicBone/ReadMe.txt" />
      <None Include="Assets/EffectsResource/shaders/Blend_DistortTexture.shader" />
@@ -786,7 +759,6 @@
      <None Include="Assets/UI/Shift - Complete Sci-Fi UI/Shaders/UI Blur.shader" />
      <None Include="Assets/ExternalAssets/ArcadeStages/2/2.json" />
      <None Include="Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt" />
-     <None Include="Assets/POFX/Shaders/Resources/Eraser.shader" />
      <None Include="Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Mobile.shader" />
      <None Include="Assets/EffectsResource/shaders/IceShader01.shader" />
      <None Include="Assets/TextMesh Pro/Sprites/EmojiOne.json" />
@@ -1025,9 +997,6 @@
      </Reference>
      <Reference Include="UnityEditor.UnityConnectModule">
      <HintPath>/Applications/Unity/Hub/Editor/2021.3.2f1/Unity.app/Contents/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
-     </Reference>
-     <Reference Include="POFX_Runtime">
-     <HintPath>/Users/hakutaisei/MComat_android/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Burst.Cecil.Pdb">
      <HintPath>/Users/hakutaisei/MComat_android/Library/PackageCache/com.unity.burst@1.6.5/Unity.Burst.CodeGen/Unity.Burst.Cecil.Pdb.dll</HintPath>

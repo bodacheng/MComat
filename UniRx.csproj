@@ -515,9 +515,6 @@
      <Reference Include="UnityEditor.iOS.Extensions">
      <HintPath>/Applications/Unity/Hub/Editor/2021.3.2f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
      </Reference>
-     <Reference Include="POFX_Runtime">
-     <HintPath>/Users/hakutaisei/MComat_android/Assets/POFX/Scripts/POFX_Runtime.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.Burst.Cecil.Pdb">
      <HintPath>/Users/hakutaisei/MComat_android/Library/PackageCache/com.unity.burst@1.6.5/Unity.Burst.CodeGen/Unity.Burst.Cecil.Pdb.dll</HintPath>
      </Reference>
@@ -529,9 +526,6 @@
      </Reference>
      <Reference Include="Newtonsoft.Json">
      <HintPath>/Users/hakutaisei/MComat_android/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/Newtonsoft.Json.dll</HintPath>
-     </Reference>
-     <Reference Include="POFX_Editor">
-     <HintPath>/Users/hakutaisei/MComat_android/Assets/POFX/Scripts/Editor/POFX_Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Plastic.Newtonsoft.Json">
      <HintPath>/Users/hakutaisei/MComat_android/Library/PackageCache/com.unity.collab-proxy@1.15.16/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll</HintPath>
