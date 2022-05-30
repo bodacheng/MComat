@@ -10,20 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Default Local Group
+  m_Name: Stage
   m_EditorClassIdentifier: 
-  m_GroupName: Default Local Group
+  m_GroupName: Packed Assets
   m_Data:
     m_SerializedData: []
-  m_GUID: 12326b1f1445842009fe2cbb9ff8f417
-  m_SerializeEntries:
-  - m_GUID: 33d883729e95ff641a4a7c4f8cd8d940
-    m_Address: Assets/ExternalAssets/Stage/Arcade
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+  m_GUID: 52793ab9aec54cb46ae7dbc072f154ce
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 2857d07f88ba6401687b9973b65dc3b6, type: 2}
-    - {fileID: 11400000, guid: 645cb35607aad46ecb290b8134459fcd, type: 2}
+    - {fileID: 11400000, guid: 40b1e02e7c467aa429beeea1559cd9b6, type: 2}
+    - {fileID: 11400000, guid: af49eedf639ec404698411e0f391a3a6, type: 2}

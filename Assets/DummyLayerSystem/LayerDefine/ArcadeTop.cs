@@ -1,14 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
 using mainMenu;
 using System;
-using DG.Tweening;
 using DummyLayerSystem;
 using Cocone.ProjectP3;
 using Singleton;
-using UnityEngine.AddressableAssets;
 
 public partial class ArcadeTop : UILayer
 {
@@ -24,7 +21,6 @@ public partial class ArcadeTop : UILayer
     public static ArcadeTop Open(Action afterAction)
     {
         var returnValue = UILayerLoader.Load(PreScene.target.T,"ArcadeTop") as ArcadeTop;
-        returnValue.INIArcadeStageButtons(afterAction);
         return returnValue;
     }
     
@@ -94,35 +90,29 @@ public partial class ArcadeTop : UILayer
                 }
                 newButton.MemberIcons = heroIcons;
             }
+            
+            Animator btnAnimator = newButton.GetComponent<Animator>();
+            if (btnAnimator != null)
+                btnAnimator.enabled = PlayerAccountInfo.Me.ArcadeProcess + 1 == stageNo;
+            if (PlayerAccountInfo.Me.ArcadeProcess + 1 >= stageNo)
+            {
+                newButton.ChangeColorOfIcons(true);
+            }
+            else
+            {
+                newButton.ChangeColorOfIcons(false);
+            }
         }
     }
 
     List<int> TargetStages(int stage)
     {
-        int Chapter = stage / 5;
+        int chapter = stage / 5;
         var returnValue = new List<int>()
         {
-            Chapter * 5 + 1, Chapter * 5 + 2, Chapter * 5 + 3, Chapter * 5 + 4 ,Chapter * 5 + 5
+            chapter * 5 + 1, chapter * 5 + 2, chapter * 5 + 3, chapter * 5 + 4 ,chapter * 5 + 5
         };
         return returnValue;
-    }
-    
-    void RefreshRender()
-    {
-        foreach (KeyValuePair<int, StageInfo> keyValuePair in ArcadeStages)
-        {
-            Animator btnAnimator = keyValuePair.Value.stageButton.GetComponent<Animator>();
-            if (btnAnimator != null)
-                btnAnimator.enabled = PlayerAccountInfo.Me.ArcadeProcess + 1 == keyValuePair.Key;
-            if (PlayerAccountInfo.Me.ArcadeProcess + 1 >= keyValuePair.Key)
-            {
-                keyValuePair.Value.ChangeColorOfIcons(true);
-            }
-            else
-            {
-                keyValuePair.Value.ChangeColorOfIcons(false);
-            }
-        }
     }
 }
 
