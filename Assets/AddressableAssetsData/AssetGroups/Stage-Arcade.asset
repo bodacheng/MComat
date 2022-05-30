@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Stages
+  m_Name: Stage-Arcade
   m_EditorClassIdentifier: 
-  m_GroupName: Stages
+  m_GroupName: Arcade
   m_Data:
     m_SerializedData: []
-  m_GUID: 609ec73c610f34544bd47ee389d32529
+  m_GUID: 020cd2abdf07b4e628014a57f5de37a7
   m_SerializeEntries:
   - m_GUID: 50a78ca09e109443d893823e9d02220a
     m_Address: Assets/ExternalAssets/ArcadeStages/4
@@ -42,9 +42,17 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - quest
+  - m_GUID: 1c59e3b10dbc94c0a9de9c3126d034c9
+    m_Address: Assets/ExternalAssets/ArcadeStages/6
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9604520c77393450ea7483ea50d26306
+    m_Address: Assets/ExternalAssets/ArcadeStages/7
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: e2295d453cfce44bea4927d582296fbc, type: 2}
-    - {fileID: 11400000, guid: 7a233f3f829cf419cbccfec9d530abaf, type: 2}
+    - {fileID: 11400000, guid: 9df93a5648c3c488a85f91e947b8a663, type: 2}
+    - {fileID: 11400000, guid: 0dcf1fee316334acf8510cbde1db72fd, type: 2}

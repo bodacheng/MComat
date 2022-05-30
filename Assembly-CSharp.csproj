@@ -699,6 +699,7 @@
      <None Include="Assets/EffectsResource/shaders/Gem.shader" />
      <None Include="Assets/D_Resources/Background Bokeh VFX/README.txt" />
      <None Include="Assets/EffectsResource/shaders/Add_DistortTexture.shader" />
+     <None Include="Assets/ExternalAssets/ArcadeStages/6/5.json" />
      <None Include="Assets/EffectsResource/shaders/Add_Fresnel.shader" />
      <None Include="Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets/DynamicStarrySky/README.txt" />
@@ -739,6 +740,7 @@
      <None Include="Assets/D_Resources/enviroments/Top-Down Dungeons2/Demo/!readme.txt" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_TextureMult_Bumped.shader" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_Plain.shader" />
+     <None Include="Assets/ExternalAssets/ArcadeStages/7/5.json" />
      <None Include="Assets/Resources/TimeLines/testdialog.txt" />
      <None Include="Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_TextureAdd.shader" />
