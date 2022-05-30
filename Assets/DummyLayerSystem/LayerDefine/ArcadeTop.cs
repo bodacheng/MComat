@@ -21,9 +21,6 @@ public partial class ArcadeTop : UILayer
     [SerializeField] HeroIcon UnitIconPrefab;
     [SerializeField] NineForShow _NineForShow;
     
-    int StageCount; 
-    public readonly IDictionary<int, StageInfo> ArcadeStages = new Dictionary<int, StageInfo>();
-    
     public static ArcadeTop Open(Action afterAction)
     {
         var returnValue = UILayerLoader.Load(PreScene.target.T,"ArcadeTop") as ArcadeTop;
@@ -42,70 +39,6 @@ public partial class ArcadeTop : UILayer
         _connector.ShowModel(heroIcon.unitConfig.RECORD_ID);
         // 显示技能组
         _NineForShow.ShowStones_DataInfo(heroIcon.unitInfo);
-    }
-
-    async void INIArcadeStageButtons(Action afterAction)
-    {
-        //var stageResources = Resources.LoadAll("StageConfigFiles", typeof(FightInfo)).ToList();
-        var handle = Addressables.LoadAssetsAsync<FightInfo>("quest", null);
-        await handle.Task;
-        var stageResources = handle.Task.Result.ToList();
-        Addressables.Release(handle);
-        
-        foreach (var _object in stageResources)
-        {
-            var one = (FightInfo)_object;
-            one.ID = int.Parse(one.name);
-            one.SetEventType(FightEventType.Quest);
-            if (!ArcadeStages.ContainsKey(one.ID))
-            {
-                one.LoadLocalFightFromScript();
-                var newButton = Instantiate(iconPrefab);
-                void LoadThisStage()
-                {
-                    ArcadeStages[one.ID].stageConfig.LoadMyTeam();
-                    ArcadeStages[one.ID].stageConfig.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
-                    PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, ArcadeStages[one.ID].stageConfig, true);
-                }
-                newButton.button.onClick.AddListener(LoadThisStage);
-                newButton.ID = one.ID;
-                newButton.text.text = "Stage" + one.ID;
-                newButton.name = "Stage" + one.ID;
-
-                if (one.fightMembers != null)
-                {
-                    for (int i = 0; i < one.fightMembers.EnemySets.GetValues().Count; i++)
-                    {
-                        UnitIconDic.Load(one.fightMembers.EnemySets.GetValues()[i].r_id);
-                    }
-                    
-                    var heroIcons = MemberInfosShow(one.fightMembers.EnemySets.GetValues(), newButton.IconsT);
-                    for (var i = 0; i < heroIcons.Count; i++)
-                    {
-                        HeroIcon heroIcon = heroIcons[i];
-                        heroIcon.iconButton.onClick.RemoveAllListeners();
-                        heroIcon.iconButton.onClick.AddListener(() => { IconButtonFeature(heroIcon); });
-                    }
-                    newButton.MemberIcons = heroIcons;
-                }
-                
-                var stageInfo = new StageInfo
-                {
-                    stageConfig = one,
-                    stageButton = newButton
-                };
-                ArcadeStages.Add(one.ID, stageInfo);
-            }
-            else
-            {
-                Debug.Log("重复的Arcade模式关卡ID：" + one.ID);
-            }
-        }
-        StageCount = ArcadeStages.Count;
-        
-        INIPagingSystem(2);
-        
-        afterAction.Invoke();
     }
     
     List<HeroIcon> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)
@@ -126,55 +59,54 @@ public partial class ArcadeTop : UILayer
         return icons;
     }
     
-    private Action EndDragExtra;
-    
-    // 分页排版
-    // mode 1: 无限模式 2. 5个关卡算一个章节模式
-    void INIPagingSystem(int mode)
+    void ShowStages(int stage)
     {
-        // 假设有100关，然后按钮应该是越往下拖关卡数越大，才能和JumpToNewest()堆起来
-        for (int i = StageCount; i > -1; i--)
+        var showStages = TargetStages(stage);
+        foreach (var stageNo in showStages)
         {
-            if (!ArcadeStages.ContainsKey(i))
+            var one = Cach.LoadT<FightInfo>("Stage/" + stageNo);
+            one.LoadLocalFightFromScript();
+            var newButton = Instantiate(iconPrefab);
+            void LoadThisStage()
             {
-                continue;
+                one.LoadMyTeam();
+                one.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
+                PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, one, true);
             }
-            ArcadeStages[i].stageButton.gameObject.SetActive(true);
-            ArcadeStages[i].stageButton.gameObject.transform.SetParent(ButtonsContainer);
-            ArcadeStages[i].stageButton.gameObject.transform.localScale = Vector3.one;
-        }
-        VerticalLayoutGroup vGroup = ButtonsContainer.GetComponent<VerticalLayoutGroup>();
-        ButtonsContainer.sizeDelta = new Vector2(ButtonsContainer.sizeDelta.x, (iconPrefab.button.GetComponent<RectTransform>().rect.height + vGroup.spacing) * ArcadeStages.Count);
+            newButton.button.onClick.AddListener(LoadThisStage);
+            newButton.ID = one.ID;
+            newButton.text.text = "Stage" + one.ID;
+            newButton.name = "Stage" + one.ID;
 
-        JumpToNewStage.onClick.RemoveAllListeners();
-        Action JumpToBtnFeature = () => { };
-        if (mode == 1)
-        {
-            JumpToBtnFeature = () =>
+            if (one.fightMembers != null)
             {
-                JumpTo(CurrentTargetScrollbarValue());
-            };
-            EndDragExtra = NormalAlignment;
+                for (int i = 0; i < one.fightMembers.EnemySets.GetValues().Count; i++)
+                {
+                    UnitIconDic.Load(one.fightMembers.EnemySets.GetValues()[i].r_id);
+                }
+                    
+                var heroIcons = MemberInfosShow(one.fightMembers.EnemySets.GetValues(), newButton.IconsT);
+                for (var i = 0; i < heroIcons.Count; i++)
+                {
+                    HeroIcon heroIcon = heroIcons[i];
+                    heroIcon.iconButton.onClick.RemoveAllListeners();
+                    heroIcon.iconButton.onClick.AddListener(() => { IconButtonFeature(heroIcon); });
+                }
+                newButton.MemberIcons = heroIcons;
+            }
         }
-        if (mode == 2)
-        {
-            JumpToBtnFeature = () =>
-            {
-                JumpTo(PageD(PlayerAccountInfo.Me.ArcadeProcess, StageCount));
-            };
-            EndDragExtra = FiveSetAlignment;
-        }
-        JumpToNewStage.onClick.AddListener(JumpToBtnFeature.Invoke);
-        RefreshRender();
-        JumpToBtnFeature.Invoke();
     }
 
-    void JumpTo(float target)
+    List<int> TargetStages(int stage)
     {
-        DOTween.To(() => _Scrollbar.value, x => _Scrollbar.value = x, target, 0.5f).
-            OnComplete((() => { EndDragExtra.Invoke(); }));
+        int Chapter = stage / 5;
+        var returnValue = new List<int>()
+        {
+            Chapter * 5 + 1, Chapter * 5 + 2, Chapter * 5 + 3, Chapter * 5 + 4 ,Chapter * 5 + 5
+        };
+        return returnValue;
     }
-
+    
     void RefreshRender()
     {
         foreach (KeyValuePair<int, StageInfo> keyValuePair in ArcadeStages)
@@ -191,12 +123,6 @@ public partial class ArcadeTop : UILayer
                 keyValuePair.Value.ChangeColorOfIcons(false);
             }
         }
-    }
-
-    // 放在滑动区上
-    public void DragEnd()
-    {
-        JumpTo(PageV(_Scrollbar.value, StageCount));
     }
 }
 
