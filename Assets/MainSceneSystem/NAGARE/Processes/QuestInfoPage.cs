@@ -16,7 +16,7 @@ public class QuestInfoPage : MainSceneProcess
         switch (NetFightScene.Fight.GetEventType())
         {
             case FightEventType.Arena:
-                NetFightScene.Fight.members.HeroSets = TeamSet.GetTargetSet("arena").LoadTeamDic();
+                NetFightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arena").LoadTeamDic();
                 void GoToTeamEdit_Arena()
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);

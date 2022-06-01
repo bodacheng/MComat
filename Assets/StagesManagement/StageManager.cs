@@ -23,14 +23,14 @@ public class StageManager : EditorWindow
             Initialized = true;
         }
         
-        _fightMemberManager.OnGUIView(target.members);
+        _fightMemberManager.OnGUIView(target.FightMembers);
 
         pathAndNameForLocalSave = EditorGUILayout.TextField("local Path For Saving", pathAndNameForLocalSave);
         fileName = EditorGUILayout.TextField("file", fileName);
         
         if (GUILayout.Button("Save"))
         {
-            FightInfo.CreateFightInfoAsset(target.members, pathAndNameForLocalSave, fileName);
+            FightInfo.CreateFightInfoAsset(target.FightMembers, pathAndNameForLocalSave, fileName);
         }
         
         GenerateArenaDummies();

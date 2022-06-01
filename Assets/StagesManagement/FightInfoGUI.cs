@@ -1,4 +1,7 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(FightInfo))]
 public class FightInfoGUI : Editor
@@ -17,6 +20,13 @@ public class FightInfoGUI : Editor
             _fightMemberManager = new FightMemberManager();
             initialized = true;
         }
-        _fightMemberManager.OnGUIView(fightInfo.members);
+        _fightMemberManager.OnGUIView(fightInfo.FightMembers);
+
+        if (GUILayout.Button("Save"))
+        {
+            fightInfo.SaveDicToData();
+            EditorUtility.SetDirty(fightInfo);
+        }
     }
 }
+#endif

@@ -35,13 +35,18 @@ public class FightInfo : ScriptableObject
     public string battleNameCH;
     
     [SerializeField]
-    public PlayableAsset beforefightstory;
+    public PlayableAsset beforeFightStory;
     
     [SerializeField]
     public Sprite StageButtonSprite;
+
+    [SerializeField] private List<UnitInfo> unitsData;
     
-    [SerializeField] 
-    public FightMembers members = new ();
+    public FightMembers FightMembers
+    {
+        set;
+        get;
+    }
     
     public int stageLevel = 1;
     public float Team1HpRate = 1f;
@@ -63,6 +68,11 @@ public class FightInfo : ScriptableObject
         set;
     }
     
+    public void Awake()
+    {
+        LoadTeam();
+    }
+    
     #if UNITY_EDITOR
     
     /// <summary>
@@ -82,7 +92,9 @@ public class FightInfo : ScriptableObject
             Directory.CreateDirectory(path);
         }
         
-        fightInfo.members = targetTeam;
+        fightInfo.FightMembers = targetTeam;
+        fightInfo.SaveDicToData();
+        
         fightInfo.Team1Mode = TeamMode.rotation;
         fightInfo.Team2Mode = TeamMode.rotation;
         
@@ -92,6 +104,24 @@ public class FightInfo : ScriptableObject
         return fightInfo;
     }
     #endif
+
+    void LoadTeam()
+    {
+        FightMembers = new FightMembers();
+        for (var i = 0; i < unitsData.Count; i++)
+        {
+            FightMembers.EnemySets.Set(0,i, unitsData[i]);
+        }
+    }
+
+    public void SaveDicToData()
+    {
+        unitsData = new List<UnitInfo>();
+        for (var i = 0; i < FightMembers.EnemySets.GetValues().Count; i++)
+        {
+            unitsData.Add(FightMembers.EnemySets.Get(0,i));
+        }
+    }
     
     public void LoadMyTeam()
     {
@@ -108,13 +138,14 @@ public class FightInfo : ScriptableObject
                 set = TeamSet.Default;
                 break;
         }
-        members.HeroSets = TeamSet.ToDic(set);
+        FightMembers.HeroSets = TeamSet.ToDic(set);
     }
     
     public static FightInfo ArenaStage(FightMembers fightUnits)
     {
         var stage = CreateInstance<FightInfo>();
-        stage.members = fightUnits;
+        stage.FightMembers = fightUnits;
+        stage.SaveDicToData();
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
         stage.Team2Mode = TeamMode.rotation;
@@ -125,7 +156,8 @@ public class FightInfo : ScriptableObject
     public static FightInfo RandomStage()
     {
         var stage = CreateInstance<FightInfo>();
-        stage.members = FightMembers.RandomFight();
+        stage.FightMembers = FightMembers.RandomFight();
+        stage.SaveDicToData();
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
         stage.Team2Mode = TeamMode.rotation;
@@ -136,7 +168,8 @@ public class FightInfo : ScriptableObject
     public static FightInfo RandomSkillTestStage(TeamMode teamMode)
     {
         var stage = CreateInstance<FightInfo>();
-        stage.members = FightMembers.RandomSkillTest(teamMode);
+        stage.FightMembers = FightMembers.RandomSkillTest(teamMode);
+        stage.SaveDicToData();
         stage.BattleGroundID = 0;
         stage.Team1Mode = teamMode;
         stage.Team2Mode = teamMode;

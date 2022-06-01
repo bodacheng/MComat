@@ -37,8 +37,8 @@ namespace FightScene
         
         public IEnumerator LoadUnits(FightInfo info)
         {
-            yield return team1._UnitsLoad(info.members.HeroSets, UnitInfoRef);
-            yield return team2._UnitsLoad(info.members.EnemySets, UnitInfoRef);
+            yield return team1._UnitsLoad(info.FightMembers.HeroSets, UnitInfoRef);
+            yield return team2._UnitsLoad(info.FightMembers.EnemySets, UnitInfoRef);
         }
         
         public Data_Center team1StartUnit = null, team2StartUnit = null;

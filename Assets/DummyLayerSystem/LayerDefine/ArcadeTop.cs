@@ -91,14 +91,14 @@ public class ArcadeTop : UILayer
             stageButton.text.text = "Stage" + stageNo;
             stageButton.name = "Stage" + stageNo;
 
-            if (one.members != null)
+            if (one.FightMembers != null)
             {
-                for (var i = 0; i < one.members.EnemySets.GetValues().Count; i++)
+                for (var i = 0; i < one.FightMembers.EnemySets.GetValues().Count; i++)
                 {
-                    UnitIconDic.Load(one.members.EnemySets.GetValues()[i].r_id);
+                    UnitIconDic.Load(one.FightMembers.EnemySets.GetValues()[i].r_id);
                 }
 
-                var heroIcons = MemberInfosShow(one.members.EnemySets.GetValues(), stageButton.IconsT);
+                var heroIcons = MemberInfosShow(one.FightMembers.EnemySets.GetValues(), stageButton.IconsT);
                 for (var i = 0; i < heroIcons.Count; i++)
                 {
                     var heroIcon = heroIcons[i];
