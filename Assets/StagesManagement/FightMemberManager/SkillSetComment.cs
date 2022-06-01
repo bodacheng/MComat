@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
-public partial class StagesManager : EditorWindow {
+public partial class FightMemberManager {
 
     SkillSet.SkillEditError se;
     

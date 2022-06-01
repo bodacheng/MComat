@@ -123,7 +123,7 @@ namespace mainMenu
                     _selfFight.EnemySets = _team2PosKeySet_R.LoadTeamDic();
                     break;
             }
-            _stage.fightMembers = _selfFight;
+            _stage.members = _selfFight;
             _stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
             _stage.team2ID = PlayerAccountInfo.Me.PlayFabUsername + "_2";
             FightLoad.Go(_stage);

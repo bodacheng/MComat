@@ -54,7 +54,7 @@
      <Compile Include="Assets/Singleton/TeamConfig.cs" />
      <Compile Include="Assets/PlayFab/Client/Item.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/TitleScreenLayer.cs" />
-     <Compile Include="Assets/StagesManagement/StagesManagerGUI/SkillSetComment.cs" />
+     <Compile Include="Assets/StagesManagement/FightMemberManager/SkillSetComment.cs" />
      <Compile Include="Assets/TeamUIManager/RotationMode/RotationMode_INI.cs" />
      <Compile Include="Assets/RewardManager/RewardManager.cs" />
      <Compile Include="Assets/Camera/Modes/StartToEndMode.cs" />
@@ -98,12 +98,11 @@
      <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/PopupLayer/PopupLayer_Loading.cs" />
      <Compile Include="Assets/TutorialManger/processes/ChooseAdamToSlot1.cs" />
      <Compile Include="Assets/P3/GradientColor.cs" />
-     <Compile Include="Assets/StagesManagement/StagesManagerGUI/SkillSelect.cs" />
+     <Compile Include="Assets/StagesManagement/FightMemberManager/SkillSelect.cs" />
      <Compile Include="Assets/Structure/Sys.cs" />
      <Compile Include="Assets/TutorialManger/processes/ClickTeamEditSlotOne.cs" />
      <Compile Include="Assets/Behaviour/Defines/states/Hurts/Hurt_State_light.cs" />
      <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/BoxOverLoadFix.cs" />
-     <Compile Include="Assets/StagesManagement/StagesManagerGUI/ScriptRead.cs" />
      <Compile Include="Assets/Language/LanguageConverterManger.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManager.cs" />
      <Compile Include="Assets/CSV2Table/Scripts/TableCodeGen.cs" />
@@ -124,7 +123,7 @@
      <Compile Include="Assets/NoSuchStudio/HighlightUI/Scritpts/Runtime/Options.cs" />
      <Compile Include="Assets/BOWeaponSystem/Weapon Marker Systems/BO_Marker_ManagerGUI.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Behaviors/Cursors/TouchCursor.cs" />
-     <Compile Include="Assets/StagesManagement/StagesManagerGUI/StagesManager.cs" />
+     <Compile Include="Assets/StagesManagement/FightMemberManager/FightMemberManager.cs" />
      <Compile Include="Assets/ResourceLoading/EffectsLoad/EffectsManager.cs" />
      <Compile Include="Assets/PlayFab/Client/Purchase.cs" />
      <Compile Include="Assets/PlayFab/Client/Mails.cs" />
@@ -210,7 +209,7 @@
      <Compile Include="Assets/BoundaryControl/BoundaryControllByGod.cs" />
      <Compile Include="Assets/Remote/Monsters/Json.cs" />
      <Compile Include="Assets/BOWeaponSystem/Health System/AbstractShaderMesh.cs" />
-     <Compile Include="Assets/StagesManagement/StagesManagerGUI/SelectInheretSkill.cs" />
+     <Compile Include="Assets/StagesManagement/FightMemberManager/SelectInheretSkill.cs" />
      <Compile Include="Assets/Camera/Modes/WatchOverCamera.cs" />
      <Compile Include="Assets/SkillStoneBox/SkillStonesBox.cs" />
      <Compile Include="Assets/PlayFab/CloudScripts/Arcade.cs" />
@@ -234,7 +233,7 @@
      <Compile Include="Assets/TouchScript/Scripts/Layers/ProjectionParams.cs" />
      <Compile Include="Assets/BOWeaponSystem/Weapon Marker Systems/BO_Marker_Manager_detect.cs" />
      <Compile Include="Assets/PlayFab/Client/AddUsernamePassword.cs" />
-     <Compile Include="Assets/StagesManagement/StagesManagerGUI/UnitSelect.cs" />
+     <Compile Include="Assets/StagesManagement/FightMemberManager/UnitSelect.cs" />
      <Compile Include="Assets/Setting/FightGlobalSetting.cs" />
      <Compile Include="Assets/TouchScript/Scripts/InputSources/ICoordinatesRemapper.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Gestures/TransformGestures/TransformGesture.cs" />
@@ -301,12 +300,11 @@
      <Compile Include="Assets/RealTimeGameProcessManager/UnitsManger/UnitsManger.cs" />
      <Compile Include="Assets/Launcher/StartUpPresentation.cs" />
      <Compile Include="Assets/AnimControl/Animation_Manger.cs" />
-     <Compile Include="Assets/DummyLayerSystem/LayerDefine/ArcadeTop_Paging.cs" />
      <Compile Include="Assets/Remote/Monsters/MyMonsters.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/UI Element/SwitchManager.cs" />
      <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/MonsterEditPage.cs" />
      <Compile Include="Assets/FPSLabel/FPSLabelStarter.cs" />
-     <Compile Include="Assets/StagesManagement/StagesManagerGUI/StageAwards.cs" />
+     <Compile Include="Assets/StagesManagement/FightMemberManager/StageAwards.cs" />
      <Compile Include="Assets/BOWeaponSystem/Health System/Health_BasicClasses.cs" />
      <Compile Include="Assets/PlayFab/Client/UserData.cs" />
      <Compile Include="Assets/FightLoad/FightLoad.cs" />
@@ -378,7 +376,7 @@
      <Compile Include="Assets/Behaviour/Soul/BehaviorRunner_newRunner.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/BoxExpandHelperLayer.cs" />
      <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/StoneMerge.cs" />
-     <Compile Include="Assets/StagesManagement/StagesManagerGUI/SkillInfo.cs" />
+     <Compile Include="Assets/StagesManagement/FightMemberManager/SkillInfo.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/MailDetailView.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/FightingStepLayer.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/UnitOptionLayer.cs" />
@@ -401,7 +399,7 @@
      <Compile Include="Assets/MainSceneSystem/EnumActionAttribute.cs" />
      <Compile Include="Assets/NoSuchStudio/HighlightUI/Scritpts/Runtime/Extentions/HighlightUIText.cs" />
      <Compile Include="Assets/AnimControl/readMe.cs" />
-     <Compile Include="Assets/StagesManagement/StagesManagerGUI/SlotFocus.cs" />
+     <Compile Include="Assets/StagesManagement/FightMemberManager/SlotFocus.cs" />
      <Compile Include="Assets/POS_Sys/Parent_Label.cs" />
      <Compile Include="Assets/monsterbox/SSLevelUpManager/BySKStone.cs" />
      <Compile Include="Assets/TutorialManger/processes/GoToMemberDetail.cs" />
@@ -417,7 +415,7 @@
      <Compile Include="Assets/SkillEvents/BO_Ani_E_special.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Behaviors/Transformer.cs" />
      <Compile Include="Assets/JsonSupport/LocalJson.cs" />
-     <Compile Include="Assets/StagesManagement/StagesManagerGUI/Members.cs" />
+     <Compile Include="Assets/StagesManagement/FightMemberManager/Members.cs" />
      <Compile Include="Assets/NoSuchStudio/HighlightUI/Scritpts/Runtime/PointerDownHandler.cs" />
      <Compile Include="Assets/Structure/SingleThreadProcesser/SingleThreadProcesser.cs" />
      <Compile Include="Assets/EffectsSystem/TrackControl.cs" />
@@ -479,7 +477,7 @@
      <Compile Include="Assets/TouchScript/Scripts/InputSources/InputHandlers/WindowsPointerHandlers.cs" />
      <Compile Include="Assets/DynamicBone/Demo/DynamicBoneDemo1.cs" />
      <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUnityVersion.cs" />
-     <Compile Include="Assets/StagesManagement/StagesManagerGUI/UI_Ini.cs" />
+     <Compile Include="Assets/StagesManagement/FightMemberManager/UI_Ini.cs" />
      <Compile Include="Assets/Remote/API/Dto/Model/GetStructure/SkillStoneGotchaInfoModel.auto.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/Gotcha/StarsFall.cs" />
      <Compile Include="Assets/Behaviour/Soul/SkillCancelFlag.cs" />
@@ -545,7 +543,6 @@
      <Compile Include="Assets/经济模型/EconomicWorld.cs" />
      <Compile Include="Assets/PlayFab/Admin/TitleData.cs" />
      <Compile Include="Assets/BOWeaponSystem/Health System/ResistanceManager.cs" />
-     <Compile Include="Assets/StagesManagement/StagesManagerGUI/DummyArenaOpponents.cs" />
      <Compile Include="Assets/Camera/Modes/New2023.cs" />
      <Compile Include="Assets/ImportantDefinition/Monster/UnitInfo.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Clusters/Clusters2D.cs" />
@@ -594,7 +591,7 @@
      <Compile Include="Assets/Behaviour/Defines/states/Hurts/Hurt_State_draw.cs" />
      <Compile Include="Assets/ResourceKeeper/ResourceKeeper.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Gestures/PressGesture.cs" />
-     <Compile Include="Assets/StagesManagement/StagesManagerGUI/NineSlotSelect.cs" />
+     <Compile Include="Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" />
      <Compile Include="Assets/Structure/PosCal.cs" />
      <Compile Include="Assets/SimpleDragAndDrop/Scripts/Cell/StoneCell_OnDrop.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/UI Element/CustomInputField.cs" />
@@ -669,7 +666,7 @@
      <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Debugging/Loggers/FileReaderLogger.cs" />
      <Compile Include="Assets/Behaviour/Defines/AI_States_Blueprints/SkillEntity.cs" />
-     <Compile Include="Assets/StagesManagement/StagesManagerGUI/BasicState.cs" />
+     <Compile Include="Assets/StagesManagement/FightMemberManager/BasicState.cs" />
      <Compile Include="Assets/MemberDetail/LevelManager.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" />
      <Compile Include="Assets/BOWeaponSystem/HittingSystemDefinitions/HittingSystemDefinitions.cs" />
@@ -683,6 +680,8 @@
      <Compile Include="Assets/TouchScript/Scripts/Debugging/Loggers/IPointerLogger.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Panel/ServerBrowserManager.cs" />
      <Compile Include="Assets/DynamicStarrySky/Scripts/StarPoint.cs" />
+     <Compile Include="Assets/StagesManagement/FightInfoGUI.cs" />
+     <Compile Include="Assets/StagesManagement/StageManager.cs" />
      <None Include="Assets/EffectsResource/shaders/Slash2.shader" />
      <None Include="Assets/EffectsResource/Prefabs/Projectiles(Speed)/Readme.txt" />
      <None Include="Assets/TextMesh Pro/Resources/Shaders/TMPro.cginc" />

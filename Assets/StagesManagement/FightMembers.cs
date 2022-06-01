@@ -4,7 +4,6 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using System.IO;
 using mainMenu;
-using Json;
 using System.Collections.Generic;
 using System.Linq;
 #if UNITY_EDITOR
@@ -14,14 +13,13 @@ using UnityEditor;
 [Serializable]
 public class FightMembers
 {
-    [NonSerialized]
-    public MultiDict<int, int, UnitInfo> HeroSets = new MultiDict<int, int, UnitInfo>();
-    public MultiDict<int, int, UnitInfo> EnemySets = new MultiDict<int, int, UnitInfo>();
+    public MultiDict<int, int, UnitInfo> HeroSets = new ();
+    public MultiDict<int, int, UnitInfo> EnemySets = new ();
     
     public FightMembers()
     {
     }
-
+    
     public void SetEnemyLevel(int level)
     {
         foreach (var unitInfo in EnemySets.GetValues())
@@ -172,25 +170,6 @@ public class FightMembers
         return target;
     }
     
-    public void SaveFightAsJson(MultiDict<int, int, UnitInfo> EnemySets, string path, string rootPath = null)
-    {
-        if (EnemySets == null)
-            return;
-
-        EnemySets.ConvertDictionaryToSerializableArray();
-
-        try
-        {
-            string json = JsonConvert.SerializeObject(EnemySets._SerializableSets);
-            LocalJson.SaveInfoToJsonFile_dataPath(rootPath, path, json);
-        }
-        catch (Exception e)
-        {
-            Debug.Log("战斗信息保存失败");
-            Debug.Log(e.ToString());
-        }
-    }
-
     public static FightMembers LoadEnemies_Json(TextAsset Script)
     {
         var _localFight = new FightMembers();

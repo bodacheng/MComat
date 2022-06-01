@@ -8,6 +8,7 @@ using System.IO;
 public class FightInfo : ScriptableObject
 {
     public int ID;
+    
     [SerializeField] FightEventType eventType;
     
     public string team1ID{ set; get; }
@@ -37,11 +38,9 @@ public class FightInfo : ScriptableObject
     public PlayableAsset beforefightstory;
     
     [SerializeField]
-    public TextAsset Script;
-    [SerializeField]
     public Sprite StageButtonSprite;
     
-    public FightMembers fightMembers = new FightMembers();
+    public FightMembers members = new ();
     public int stageLevel = 1;
     public float Team1HpRate = 1f;
     public float Team2HpRate = 1f;
@@ -49,7 +48,7 @@ public class FightInfo : ScriptableObject
     public CriticalGaugeMode team2CGMode = CriticalGaugeMode.normal;
     public TeamMode Team1Mode;
     public TeamMode Team2Mode;
-
+    
     public bool team1Auto
     {
         get;
@@ -63,7 +62,15 @@ public class FightInfo : ScriptableObject
     }
     
     #if UNITY_EDITOR
-    public static FightInfo CreateFightInfoAsset(TextAsset file, string path, string fileName)
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="targetTeam"></param>
+    /// <param name="path">"Assets/" 开头</param>
+    /// <param name="fileName"></param>
+    /// <returns></returns>
+    public static FightInfo CreateFightInfoAsset(FightMembers targetTeam, string path, string fileName)
     {
         var fightInfo = CreateInstance<FightInfo>();
         fightInfo.eventType = FightEventType.Quest;
@@ -72,24 +79,18 @@ public class FightInfo : ScriptableObject
             //if it doesn't, create it
             Directory.CreateDirectory(path);
         }
-
+        
+        fightInfo.members = targetTeam;
         fightInfo.Team1Mode = TeamMode.rotation;
         fightInfo.Team2Mode = TeamMode.rotation;
         
-        fightInfo.Script = file;
         AssetDatabase.CreateAsset(fightInfo, path + "/" + fileName + ".asset");
+        Debug.Log("Generated：" + path + "/" + fileName + ".asset");
         AssetDatabase.Refresh();
         return fightInfo;
     }
     #endif
     
-    public void LoadLocalFightFromScript()
-    {
-        fightMembers = FightMembers.LoadEnemies_Json(Script);
-        if (fightMembers != null)
-            fightMembers.SetEnemyLevel(stageLevel);
-    }
-
     public void LoadMyTeam()
     {
         PosKeySet set = null;
@@ -105,13 +106,13 @@ public class FightInfo : ScriptableObject
                 set = TeamSet.Default;
                 break;
         }
-        fightMembers.HeroSets = TeamSet.ToDic(set);
+        members.HeroSets = TeamSet.ToDic(set);
     }
     
     public static FightInfo ArenaStage(FightMembers fightUnits)
     {
         var stage = CreateInstance<FightInfo>();
-        stage.fightMembers = fightUnits;
+        stage.members = fightUnits;
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
         stage.Team2Mode = TeamMode.rotation;
@@ -122,7 +123,7 @@ public class FightInfo : ScriptableObject
     public static FightInfo RandomStage()
     {
         var stage = CreateInstance<FightInfo>();
-        stage.fightMembers = FightMembers.RandomFight();
+        stage.members = FightMembers.RandomFight();
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
         stage.Team2Mode = TeamMode.rotation;
@@ -133,7 +134,7 @@ public class FightInfo : ScriptableObject
     public static FightInfo RandomSkillTestStage(TeamMode teamMode)
     {
         var stage = CreateInstance<FightInfo>();
-        stage.fightMembers = FightMembers.RandomSkillTest(teamMode);
+        stage.members = FightMembers.RandomSkillTest(teamMode);
         stage.BattleGroundID = 0;
         stage.Team1Mode = teamMode;
         stage.Team2Mode = teamMode;

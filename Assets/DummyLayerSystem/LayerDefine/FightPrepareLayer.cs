@@ -38,8 +38,8 @@ namespace mainMenu
         
         public void StageMembersInfoShow(FightInfo stage)
         {
-            MemberInfosShow(stage.fightMembers.HeroSets.GetValues(), myTeamShowT);
-            MemberInfosShow(stage.fightMembers.EnemySets.GetValues(), enemyTeamShowT);
+            MemberInfosShow(stage.members.HeroSets.GetValues(), myTeamShowT);
+            MemberInfosShow(stage.members.EnemySets.GetValues(), enemyTeamShowT);
         }
         
         List<HeroIcon> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)

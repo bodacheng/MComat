@@ -2,12 +2,11 @@
 
 using UnityEngine;
 using UnityEditor;
-using System.Linq;
 
 public class LocalMasterDataToolGUI : EditorWindow {
 
     bool Initialized;
-    MasterDataTool tool = new MasterDataTool();
+    MasterDataTool tool = new ();
     
     void OnGUI()
     {
@@ -44,7 +43,7 @@ public class LocalMasterDataToolGUI : EditorWindow {
         
         if (GUILayout.Button("(playFab)输出Json格式关卡报酬定义文件"))
         {
-            StagesManager.ExportStageAward();
+            FightMemberManager.ExportStageAward();
         }
     }
 }
