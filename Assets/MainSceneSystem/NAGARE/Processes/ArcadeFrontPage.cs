@@ -14,15 +14,12 @@ public class ArcadeFrontPage : MainSceneProcess
     {
         arcadeTop = ArcadeTop.Open(() =>
             {
-                if (arcadeTop.ArcadeStages.ContainsKey(PlayerAccountInfo.Me.ArcadeProcess))
-                {
-                    var StageInfo = arcadeTop.ArcadeStages[PlayerAccountInfo.Me.ArcadeProcess];
-                    arcadeTop.IconButtonFeature(StageInfo.stageButton.MemberIcons[0]);
-                }else{
-                    Debug.Log("巨大错误。玩家关卡进度值不对应任何关卡" + PlayerAccountInfo.Me.ArcadeProcess);
-                }
+                
             }
         );
+
+        var stages = arcadeTop.NewStages(PlayerAccountInfo.Me.ArcadeProcess);
+        arcadeTop.ShowStages(stages);
     }
     
     public override void ProcessEnd()
