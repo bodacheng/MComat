@@ -698,13 +698,11 @@
      <None Include="Assets/EffectsResource/shaders/Gem.shader" />
      <None Include="Assets/D_Resources/Background Bokeh VFX/README.txt" />
      <None Include="Assets/EffectsResource/shaders/Add_DistortTexture.shader" />
-     <None Include="Assets/ExternalAssets/Stage/Arcade/6/5.json" />
      <None Include="Assets/EffectsResource/shaders/Add_Fresnel.shader" />
      <None Include="Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets/DynamicStarrySky/README.txt" />
      <None Include="Assets/EffectsResource/shaders/Ice.shader" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_TextureMult.shader" />
-     <None Include="Assets/ExternalAssets/Stage/Arcade/4/4.json" />
      <None Include="Assets/EffectsResource/shaders/Distortion.shader" />
      <None Include="Assets/EffectsResource/shaders/Blend_TwoSides.shader" />
      <None Include="Assets/UI/Shift - Complete Sci-Fi UI/Shaders/Fast UI Blur.shader" />
@@ -713,12 +711,9 @@
      <None Include="Assets/EffectsResource/shaders/Blend_CenterGlow.shader" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_Plain_AdditiveZ.shader" />
      <None Include="Assets/DynamicStarrySky/Shaders/StarrySky.shader" />
-     <None Include="Assets/ExternalAssets/Stage/Arcade/3/3.json" />
      <None Include="Assets/D_Resources/BasicCharComponent/Shield/saonian/FieldShield.shader" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Textures/BenSimonds/_Textures Readme.txt" />
-     <None Include="Assets/ExternalAssets/Stage/Arcade/5/5.json" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_Plain_Bumped.shader" />
-     <None Include="Assets/ExternalAssets/Stage/Arcade/1/1.json" />
      <None Include="Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Surface.shader" />
      <None Include="Assets/UI/Shift - Complete Sci-Fi UI/Shaders/UI Particle Additive.shader" />
      <None Include="Assets/Resources/Account/stoneCatagoryDefine.json" />
@@ -739,7 +734,6 @@
      <None Include="Assets/D_Resources/enviroments/Top-Down Dungeons2/Demo/!readme.txt" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_TextureMult_Bumped.shader" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_Plain.shader" />
-     <None Include="Assets/ExternalAssets/Stage/Arcade/7/5.json" />
      <None Include="Assets/Resources/TimeLines/testdialog.txt" />
      <None Include="Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_TextureAdd.shader" />
@@ -758,7 +752,6 @@
      <None Include="Assets/TextMesh Pro/Resources/Shaders/TMP_SDF Overlay.shader" />
      <None Include="Assets/TextMesh Pro/Resources/Shaders/TMP_Bitmap-Mobile.shader" />
      <None Include="Assets/UI/Shift - Complete Sci-Fi UI/Shaders/UI Blur.shader" />
-     <None Include="Assets/ExternalAssets/Stage/Arcade/2/2.json" />
      <None Include="Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt" />
      <None Include="Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Mobile.shader" />
      <None Include="Assets/EffectsResource/shaders/IceShader01.shader" />
