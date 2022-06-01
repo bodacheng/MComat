@@ -17,7 +17,7 @@ namespace FightScene
         
         public TeamMode TeamMode;
         public TeamConfig teamConfig;
-        public MultiDict<int, int, Data_Center> TeamMembers;
+        public MultiDic<int, int, Data_Center> TeamMembers;
         public readonly IDictionary<Data_Center, SideCharIcon> UnitIconDic = new Dictionary<Data_Center, SideCharIcon>();
         
         private IDisposable barPosUpdate;

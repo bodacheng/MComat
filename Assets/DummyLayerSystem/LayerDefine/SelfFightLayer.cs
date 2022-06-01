@@ -30,8 +30,8 @@ namespace mainMenu
         [SerializeField] HeroIcon team11_R, team12_R, team13_R;
         [SerializeField] HeroIcon team21_R, team22_R, team23_R;
         
-        readonly MultiDict<Team, int, HeroIcon> teamButtonDic_M = new MultiDict<Team, int, HeroIcon>();
-        readonly MultiDict<Team, int, HeroIcon> teamButtonDic_R = new MultiDict<Team, int, HeroIcon>();
+        readonly MultiDic<Team, int, HeroIcon> teamButtonDic_M = new MultiDic<Team, int, HeroIcon>();
+        readonly MultiDic<Team, int, HeroIcon> teamButtonDic_R = new MultiDic<Team, int, HeroIcon>();
         readonly IDictionary<HeroIcon, int> IconNumCheck = new Dictionary<HeroIcon, int>();
         readonly FightMembers _selfFight = new FightMembers { };
         FightInfo _stage;
@@ -230,7 +230,7 @@ namespace mainMenu
             //} 
         }
 
-        void ChangeIconOnPos(int posNum, MultiDict<Team, int, HeroIcon> teamButtonDic, PosKeySet posKeySet)
+        void ChangeIconOnPos(int posNum, MultiDic<Team, int, HeroIcon> teamButtonDic, PosKeySet posKeySet)
         {
             if (posNum == -1)
             {
