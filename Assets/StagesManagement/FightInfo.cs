@@ -40,7 +40,9 @@ public class FightInfo : ScriptableObject
     [SerializeField]
     public Sprite StageButtonSprite;
     
+    [SerializeField] 
     public FightMembers members = new ();
+    
     public int stageLevel = 1;
     public float Team1HpRate = 1f;
     public float Team2HpRate = 1f;
