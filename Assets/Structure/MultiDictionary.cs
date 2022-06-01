@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
 /// <summary>
 /// 复合字典
 /// </summary>
@@ -11,25 +12,25 @@ public class MultiDict<Key1, Key2, Value>
     /// 字典结构
     /// </summary>
     ///
-    public Dictionary<(Key1, Key2), Value> mDict = new Dictionary<(Key1, Key2), Value>();
-
+    public Dictionary<(Key1, Key2), Value> mDict = new();
+    
     public List<Value> GetValues()
     {
         return mDict.Values.ToList();
     }
-
-     /// <summary>
+    
+    /// <summary>
     /// 序列化对象
     /// </summary>
     public SerializableSet[] _SerializableSets;
-
+    
     // 该函数设置为private，成为Set函数内部处理，为了是简化程序
     public SerializableSet[] ConvertDictionaryToSerializableArray()
     {
-        List<SerializableSet> temp = new List<SerializableSet>();
-        foreach (KeyValuePair<(Key1, Key2), Value> keyValuePair in mDict)
+        var temp = new List<SerializableSet>();
+        foreach (var keyValuePair in mDict)
         {
-            SerializableSet serializableSet = new SerializableSet
+            var serializableSet = new SerializableSet
             {
                 key1 = keyValuePair.Key.Item1,
                 key2 = keyValuePair.Key.Item2,
@@ -44,7 +45,7 @@ public class MultiDict<Key1, Key2, Value>
     public Dictionary<(Key1, Key2), Value> ConvertSerializableArrayToDictionary()
     {
         mDict = new Dictionary<(Key1, Key2), Value>();
-        foreach(SerializableSet _set in _SerializableSets)
+        foreach(var _set in _SerializableSets)
         {
             mDict.Add((_set.key1, _set.key2), _set.value);
         }
@@ -86,7 +87,7 @@ public class MultiDict<Key1, Key2, Value>
     }
     
     [System.Serializable]
-    public struct SerializableSet
+    public class SerializableSet
     {
         public Key1 key1;
         public Key2 key2;
