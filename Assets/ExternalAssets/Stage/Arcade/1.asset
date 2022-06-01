@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaf3bb8ad816a44358eca5831d97217e, type: 3}
-  m_Name: 2
+  m_Name: 1
   m_EditorClassIdentifier: 
   ID: 0
   eventType: 4
@@ -18,28 +18,48 @@ MonoBehaviour:
   battleNameENG: 
   battleNameJPG: 
   battleNameCH: 
-  beforefightstory: {fileID: 0}
-  Script: {fileID: 4900000, guid: 4ebb639ea0cd64e7aad6dc70b24a8344, type: 3}
+  beforeFightStory: {fileID: 0}
   StageButtonSprite: {fileID: 0}
-  fightMembers:
-    EnemySets:
-      _SerializableSets:
-      - key1: 0
-        key2: 1
-        value:
-          id: 1
-          r_id: 1
-          level: 0
-          set:
-            a1: 167
-            a2: 182
-            a3: 102
-            b1: 99
-            b2: 27
-            b3: 89
-            c1: 166
-            c2: 113
-            c3: 156
+  unitsData:
+  - id: 0
+    r_id: 5
+    level: 0
+    set:
+      a1: 58
+      a2: 125
+      a3: 113
+      b1: 68
+      b2: 89
+      b3: 10
+      c1: 116
+      c2: 99
+      c3: 167
+  - id: 1
+    r_id: 1
+    level: 0
+    set:
+      a1: 113
+      a2: 89
+      a3: 80
+      b1: 167
+      b2: 156
+      b3: 99
+      c1: 166
+      c2: 55
+      c3: 169
+  - id: 2
+    r_id: 5
+    level: 0
+    set:
+      a1: 182
+      a2: 68
+      a3: 4
+      b1: 113
+      b2: 116
+      b3: 99
+      c1: 27
+      c2: 167
+      c3: 53
   stageLevel: 1
   Team1HpRate: 1
   Team2HpRate: 1

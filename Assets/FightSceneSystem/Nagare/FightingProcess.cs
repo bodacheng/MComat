@@ -26,7 +26,7 @@ namespace FightScene
         public override void ProcessEnter()
         {
             _layer = FightingStepLayer.Get();
-            if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
+            if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
             {
                 var TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
                 TitleScreenLayer.Initialise(NetFightScene.target.ReturnToFront, 
@@ -61,7 +61,7 @@ namespace FightScene
         
         public override void ProcessEnd()
         {
-            if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
+            if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
             {
                 UILayerLoader.Remove("TitleScreenLayer");
             }

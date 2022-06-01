@@ -6,7 +6,7 @@ public static class RewardManager
 {
     public static void RequestRewards(Action success, Action fail)
     {
-        switch (NetFightScene.Fight.GetEventType())
+        switch (NetFightScene.Fight.EventType)
         {
             case FightEventType.Arena:
                 CloudScript.ArenaPointUp(

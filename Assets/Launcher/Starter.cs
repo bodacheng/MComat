@@ -48,7 +48,7 @@ public class Starter : MonoBehaviour
         if (enterFrontPageFirst)
         {
             var stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
-            stage.SetEventType(FightEventType.Screensaver);
+            stage.EventType = FightEventType.Screensaver;
             stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
             FightLoad.Go(stage);
         }else{

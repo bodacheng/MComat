@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Playables;
@@ -7,23 +8,6 @@ using System.IO;
 
 public class FightInfo : ScriptableObject
 {
-    public int ID;
-    
-    [SerializeField] FightEventType eventType;
-    
-    public string team1ID{ set; get; }
-    public string team2ID{ set; get; }
-    
-    public FightEventType GetEventType()
-    {
-        return eventType;
-    }
-    
-    public void SetEventType(FightEventType eventType)
-    {
-        this.eventType = eventType;
-    }
-    
     [SerializeField]
     public int BattleGroundID;
     
@@ -42,7 +26,7 @@ public class FightInfo : ScriptableObject
 
     [SerializeField] private List<UnitInfo> unitsData;
     
-    public FightMembers FightMembers
+    public FightEventType EventType
     {
         set;
         get;
@@ -55,6 +39,20 @@ public class FightInfo : ScriptableObject
     public CriticalGaugeMode team2CGMode = CriticalGaugeMode.normal;
     public TeamMode Team1Mode;
     public TeamMode Team2Mode;
+    
+    public int ID
+    {
+        set;
+        get;
+    }
+    public string team1ID{ set; get; }
+    public string team2ID{ set; get; }
+    
+    public FightMembers FightMembers
+    {
+        set;
+        get;
+    }
     
     public bool team1Auto
     {
@@ -70,7 +68,7 @@ public class FightInfo : ScriptableObject
     
     public void Awake()
     {
-        LoadTeam();
+        Open();
     }
     
     #if UNITY_EDITOR
@@ -85,7 +83,6 @@ public class FightInfo : ScriptableObject
     public static FightInfo CreateFightInfoAsset(FightMembers targetTeam, string path, string fileName)
     {
         var fightInfo = CreateInstance<FightInfo>();
-        fightInfo.eventType = FightEventType.Quest;
         if (!Directory.Exists(path))
         {
             //if it doesn't, create it
@@ -93,8 +90,6 @@ public class FightInfo : ScriptableObject
         }
         
         fightInfo.FightMembers = targetTeam;
-        fightInfo.SaveDicToData();
-        
         fightInfo.Team1Mode = TeamMode.rotation;
         fightInfo.Team2Mode = TeamMode.rotation;
         
@@ -105,8 +100,9 @@ public class FightInfo : ScriptableObject
     }
     #endif
 
-    void LoadTeam()
+    public void Open()
     {
+        ID = Convert.ToInt32(this.name);
         FightMembers = new FightMembers();
         for (var i = 0; i < unitsData.Count; i++)
         {
@@ -126,7 +122,7 @@ public class FightInfo : ScriptableObject
     public void LoadMyTeam()
     {
         PosKeySet set = null;
-        switch (eventType)
+        switch (EventType)
         {
             case FightEventType.Quest:
                 set = TeamSet.Default;
@@ -145,11 +141,10 @@ public class FightInfo : ScriptableObject
     {
         var stage = CreateInstance<FightInfo>();
         stage.FightMembers = fightUnits;
-        stage.SaveDicToData();
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
         stage.Team2Mode = TeamMode.rotation;
-        stage.eventType = FightEventType.Arena;
+        stage.EventType = FightEventType.Arena;
         return stage;
     }
     
@@ -157,11 +152,10 @@ public class FightInfo : ScriptableObject
     {
         var stage = CreateInstance<FightInfo>();
         stage.FightMembers = FightMembers.RandomFight();
-        stage.SaveDicToData();
         stage.BattleGroundID = 0;
         stage.Team1Mode = TeamMode.rotation;
         stage.Team2Mode = TeamMode.rotation;
-        stage.eventType = FightEventType.Arena;
+        stage.EventType = FightEventType.Arena;
         return stage;
     }
     
@@ -169,11 +163,10 @@ public class FightInfo : ScriptableObject
     {
         var stage = CreateInstance<FightInfo>();
         stage.FightMembers = FightMembers.RandomSkillTest(teamMode);
-        stage.SaveDicToData();
         stage.BattleGroundID = 0;
         stage.Team1Mode = teamMode;
         stage.Team2Mode = teamMode;
-        stage.eventType = FightEventType.SkillTest;
+        stage.EventType = FightEventType.SkillTest;
         return stage;
     }
 }

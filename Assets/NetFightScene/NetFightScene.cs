@@ -70,7 +70,7 @@ namespace FightScene
             var fightOverProcess = new FightOverProcess();
             var basicTryProcess = new BasicTryProcess();
             
-            switch(Fight.GetEventType())
+            switch(Fight.EventType)
             {
                 case FightEventType.SkillTest:
                 case FightEventType.Self:

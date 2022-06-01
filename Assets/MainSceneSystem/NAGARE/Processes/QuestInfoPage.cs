@@ -13,7 +13,7 @@ public class QuestInfoPage : MainSceneProcess
         layer = FightPrepareLayer.Open();
         layer.QuestName.text = NetFightScene.Fight.battleNameJPG;
         
-        switch (NetFightScene.Fight.GetEventType())
+        switch (NetFightScene.Fight.EventType)
         {
             case FightEventType.Arena:
                 NetFightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arena").LoadTeamDic();

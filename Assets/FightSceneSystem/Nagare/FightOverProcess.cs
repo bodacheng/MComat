@@ -19,7 +19,7 @@ namespace FightScene
             // 技能测试：显示战斗分析？
             Debug.Log(" winner id " + FightLogger.value.GetWinnerId());
             
-            switch (NetFightScene.Fight.GetEventType())
+            switch (NetFightScene.Fight.EventType)
             {
                 case FightEventType.Arena:
                     if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabUsername)

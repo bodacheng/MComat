@@ -16,12 +16,12 @@ public class FightInfoGUI : Editor
         {
             Units.LoadMonstersConfig();
             SkillConfigTable.LoadAllSkillConfigs();
-            
+            fightInfo.Open();
             _fightMemberManager = new FightMemberManager();
             initialized = true;
         }
         _fightMemberManager.OnGUIView(fightInfo.FightMembers);
-
+        
         if (GUILayout.Button("Save"))
         {
             fightInfo.SaveDicToData();
