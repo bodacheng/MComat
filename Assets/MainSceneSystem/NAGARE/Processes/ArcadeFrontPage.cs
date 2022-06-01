@@ -1,5 +1,4 @@
 ﻿using mainMenu;
-using UnityEngine;
 
 public class ArcadeFrontPage : MainSceneProcess
 {
@@ -12,12 +11,7 @@ public class ArcadeFrontPage : MainSceneProcess
     ArcadeTop arcadeTop;
     public override void ProcessEnter()
     {
-        arcadeTop = ArcadeTop.Open(() =>
-            {
-                
-            }
-        );
-
+        arcadeTop = ArcadeTop.Open();
         var stages = arcadeTop.NewStages(PlayerAccountInfo.Me.ArcadeProcess);
         arcadeTop.ShowStages(stages);
     }

@@ -22,12 +22,12 @@ public partial class ArcadeTop : UILayer
 
     private List<int> currentStages;
     
-    public static ArcadeTop Open(Action afterAction)
+    public static ArcadeTop Open()
     {
         var returnValue = UILayerLoader.Load(PreScene.target.T,"ArcadeTop") as ArcadeTop;
         returnValue.nextChapter.onClick.AddListener(returnValue.ShowNextStages);
         returnValue.lastChapter.onClick.AddListener(returnValue.ShowLastStages);
-        afterAction?.Invoke();
+        returnValue.JumpToNewStage.onClick.AddListener(returnValue.ToNew);
         return returnValue;
     }
     
@@ -36,12 +36,18 @@ public partial class ArcadeTop : UILayer
         UILayerLoader.Remove("ArcadeTop");
     }
     
-    public void IconButtonFeature(HeroIcon heroIcon)
+    void IconButtonFeature(HeroIcon heroIcon)
     {
         // 显示模型
         _connector.ShowModel(heroIcon.unitConfig.RECORD_ID);
         // 显示技能组
         _NineForShow.ShowStones_DataInfo(heroIcon.unitInfo);
+    }
+
+    void ToNew()
+    {
+        var stages = NewStages(PlayerAccountInfo.Me.ArcadeProcess);
+        ShowStages(stages);
     }
 
     void ShowNextStages()
@@ -59,7 +65,7 @@ public partial class ArcadeTop : UILayer
         foreach (Transform child in container) {
             Destroy(child.gameObject);
         }
-
+        
         stages.Sort((a, b) => b.CompareTo(a));
         currentStages = stages;
         for (var index = 0; index < currentStages.Count; index++)
@@ -70,7 +76,7 @@ public partial class ArcadeTop : UILayer
             {
                 continue;
             }
-
+            
             one.LoadLocalFightFromScript();
             var stageButton = Instantiate(iconPrefab);
 
@@ -80,7 +86,7 @@ public partial class ArcadeTop : UILayer
                 one.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
                 PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, one, true);
             }
-
+            
             stageButton.button.onClick.AddListener(LoadThisStage);
             stageButton.ID = one.ID;
             stageButton.text.text = "Stage" + stageNo;
@@ -134,6 +140,10 @@ public partial class ArcadeTop : UILayer
     {
         nextChapter.gameObject.SetActive(PlayerAccountInfo.Me.ArcadeProcess> currentStages.Max());
         lastChapter.gameObject.SetActive(currentStages.Min() > 5);
+        JumpToNewStage.gameObject.SetActive(
+            !(PlayerAccountInfo.Me.ArcadeProcess >= currentStages.Min() &&
+            PlayerAccountInfo.Me.ArcadeProcess <= currentStages.Max())
+        );
     }
 
     public List<int> NewStages(int stage)
