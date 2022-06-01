@@ -50,9 +50,9 @@ public class PosKeySet
         return model;
     }
     
-    public MultiDict<int, int, UnitInfo> LoadTeamDic()
+    public MultiDic<int, int, UnitInfo> LoadTeamDic()
     {
-        MultiDict<int, int, UnitInfo> multiDictionary = new MultiDict<int, int, UnitInfo>();
+        MultiDic<int, int, UnitInfo> multiDictionary = new MultiDic<int, int, UnitInfo>();
         for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
         {
             if (PosNumsWithLocalKeys[i].instanceID != null)

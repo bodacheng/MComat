@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 public partial class CloudScript
 {
-    public static void ArenaDefendTeamSave(MultiDict<int, int, UnitInfo> info, Action<bool> finished)
+    public static void ArenaDefendTeamSave(MultiDic<int, int, UnitInfo> info, Action<bool> finished)
     {
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest()
@@ -99,6 +99,6 @@ public partial class CloudScript
     public class LeaderboardInfo
     {
         public PlayerLeaderboardEntry PlayerLeaderboardEntry;
-        public MultiDict<int, int, UnitInfo>.SerializableSet[] Team;
+        public MultiDic<int, int, UnitInfo>.SerializableSet[] Team;
     }
 }

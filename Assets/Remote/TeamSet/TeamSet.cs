@@ -22,9 +22,9 @@ namespace dataAccess
             return null;
         }
 
-        public static MultiDict<int, int, UnitInfo> ToDic(PosKeySet PosKeySet)
+        public static MultiDic<int, int, UnitInfo> ToDic(PosKeySet PosKeySet)
         {
-            var teamMembers = new MultiDict<int, int, UnitInfo>();
+            var teamMembers = new MultiDic<int, int, UnitInfo>();
             for (var i = 0; i < 3; i++)
             {
                 if (PosKeySet.GetInstanceIdOnPos(i) == null)

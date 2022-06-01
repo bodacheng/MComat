@@ -6,7 +6,7 @@ namespace FightScene
 {
     public partial class UnitsManger : MonoBehaviour
     {
-        public MultiDict<int, int, Data_Center> TeamMembers;
+        public MultiDic<int, int, Data_Center> TeamMembers;
         
         public TeamMode TeamMode;
         public TeamConfig teamConfig;
@@ -34,7 +34,7 @@ namespace FightScene
             get => auto;
         }
         
-        public IEnumerator _UnitsLoad(MultiDict<int, int, UnitInfo> MembersSets, IDictionary<Data_Center, UnitInfo> UnitInfoRef)
+        public IEnumerator _UnitsLoad(MultiDic<int, int, UnitInfo> MembersSets, IDictionary<Data_Center, UnitInfo> UnitInfoRef)
         {
             foreach (var kv in MembersSets.mDict)
             {
