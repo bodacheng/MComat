@@ -12,11 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
   m_Name: Stage
   m_EditorClassIdentifier: 
-  m_GroupName: Packed Assets
+  m_GroupName: Stage
   m_Data:
     m_SerializedData: []
   m_GUID: 52793ab9aec54cb46ae7dbc072f154ce
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 33d883729e95ff641a4a7c4f8cd8d940
+    m_Address: Arcade
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - quest
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

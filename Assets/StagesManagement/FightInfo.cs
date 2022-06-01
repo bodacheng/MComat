@@ -101,21 +101,13 @@ public class FightInfo : ScriptableObject
             case FightEventType.Arena:
                 set = TeamSet.Arena3V3;
                 break;
+            default:
+                set = TeamSet.Default;
+                break;
         }
         fightMembers.HeroSets = TeamSet.ToDic(set);
     }
     
-    public List<string> GetTeam1EnterRingLocalIds(FightMembers localFight)
-    {
-        List<string> enterRingLocalIDs = new List<string>();
-        foreach(UnitInfo _one in localFight.HeroSets.GetValues())
-        {
-            if (!enterRingLocalIDs.Contains(_one.id))
-                enterRingLocalIDs.Add(_one.id);
-        }
-        return enterRingLocalIDs;
-    }
-
     public static FightInfo ArenaStage(FightMembers fightUnits)
     {
         var stage = CreateInstance<FightInfo>();
