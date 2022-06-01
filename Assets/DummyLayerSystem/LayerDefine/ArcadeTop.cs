@@ -71,7 +71,7 @@ public class ArcadeTop : UILayer
         for (var index = 0; index < currentStages.Count; index++)
         {
             var stageNo = currentStages[index];
-            var one = Cach.LoadT<FightInfo>("Arcade/" + stageNo + "/" + stageNo + ".asset");
+            var one = Cach.LoadT<FightInfo>("Arcade/" + stageNo + ".asset");
             if (one == null)
             {
                 continue;

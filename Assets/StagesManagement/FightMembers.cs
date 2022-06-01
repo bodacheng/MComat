@@ -13,7 +13,7 @@ using UnityEditor;
 [Serializable]
 public class FightMembers
 {
-    public MultiDic<int, int, UnitInfo> HeroSets = new ();
+    [NonSerialized] public MultiDic<int, int, UnitInfo> HeroSets = new ();
     public MultiDic<int, int, UnitInfo> EnemySets = new ();
     
     public FightMembers()

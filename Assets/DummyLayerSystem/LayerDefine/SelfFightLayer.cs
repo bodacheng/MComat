@@ -92,7 +92,7 @@ namespace mainMenu
             multiRaidTeam2T.gameObject.SetActive(true);
             RotationTeam1T.gameObject.SetActive(false);
             RotationTeam2T.gameObject.SetActive(false);
-            _stage.SetEventType(FightEventType.Self);
+            _stage.EventType= FightEventType.Self;
             _stage.Team1Mode = TeamMode.multiRaid;
             _stage.Team2Mode = TeamMode.multiRaid;
             FrameRefresh(MultiModeBtn.transform);
@@ -104,7 +104,7 @@ namespace mainMenu
             multiRaidTeam2T.gameObject.SetActive(false);
             RotationTeam1T.gameObject.SetActive(true);
             RotationTeam2T.gameObject.SetActive(true);
-            _stage.SetEventType(FightEventType.Self);
+            _stage.EventType = FightEventType.Self;
             _stage.Team1Mode = TeamMode.rotation;
             _stage.Team2Mode = TeamMode.rotation;
             FrameRefresh(RotationModeBtn.transform);

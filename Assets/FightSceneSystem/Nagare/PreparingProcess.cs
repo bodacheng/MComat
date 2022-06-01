@@ -42,7 +42,7 @@ public class PreparingProcess : FSceneProcess
         RTFightManager.target.team1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
         RTFightManager.target.team2.TeamStandPoints = NetFightScene.target.Team2StandPoints;
         
-        if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
+        if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
         {
             RTFightManager.target.team1.TurnAllUnitsInvincible(true);
             RTFightManager.target.team2.TurnAllUnitsInvincible(true);
@@ -110,7 +110,7 @@ public class PreparingProcess : FSceneProcess
         }
         FightLoadError.Instance.FightLoadErrors.Clear();
         
-        if (NetFightScene.Fight.GetEventType() != FightEventType.Screensaver)
+        if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
         {
             PopupLayer.LightUp(1f);
         }

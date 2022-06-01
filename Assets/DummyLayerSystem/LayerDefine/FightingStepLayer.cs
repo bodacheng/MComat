@@ -60,7 +60,7 @@ public class FightingStepLayer : UILayer
             ()=> FightScenePauseSupport.Open(NetFightScene.target.T.gameObject)
         );
 
-        if (NetFightScene.Fight.GetEventType() == FightEventType.Screensaver)
+        if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
         {
             returnValue.gameObject.SetActive(false);
         }

@@ -2,7 +2,6 @@
 using dataAccess;
 using FightScene;
 using mainMenu;
-using UnityEngine;
 
 public static class FightLoad
 {
@@ -31,7 +30,7 @@ public static class FightLoad
             return;
         }
 
-        switch (stage.GetEventType())
+        switch (stage.EventType)
         {
             case FightEventType.Screensaver:
                 stage.team1Auto = true;
