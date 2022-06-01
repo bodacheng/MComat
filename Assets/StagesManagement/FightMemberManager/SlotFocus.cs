@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
-public partial class StagesManager : EditorWindow 
+public partial class FightMemberManager
 {
     int targetSlot = 0;
     void SetSkillId(string skillID)

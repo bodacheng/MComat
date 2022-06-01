@@ -15,7 +15,7 @@ public static class MyEditorWindow
     [MenuItem("MCombat/StageManager", priority = 1)]
     static void StageManager()
     {
-        StagesManager window = (StagesManager)EditorWindow.GetWindow(typeof(StagesManager));
+        StageManager window = (StageManager)EditorWindow.GetWindow(typeof(StageManager));
         window.titleContent = new GUIContent("关卡管理器");
         window.Show();
     }

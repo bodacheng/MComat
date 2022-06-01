@@ -1,8 +1,7 @@
 ﻿#if UNITY_EDITOR
 using UnityEngine;
-using UnityEditor;
 
-public partial class StagesManager : EditorWindow {
+public partial class FightMemberManager{
 
     bool Initialized;
     GUIStyle ButtonStyle;
@@ -15,7 +14,7 @@ public partial class StagesManager : EditorWindow {
     GUIStyle Title;
     GUIStyle AttackRangeToggleGUI;
     
-    void UIparamIni()
+    void UIParamIni()
     {
         ButtonStyle = new GUIStyle(GUI.skin.button);
         ButtonStyle.normal.textColor = Color.red;

@@ -1,0 +1,22 @@
+using UnityEditor;
+
+[CustomEditor(typeof(FightInfo))]
+public class FightInfoGUI : Editor
+{
+    private FightMemberManager _fightMemberManager;
+    private bool initialized = false;
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector ();
+        var fightInfo = (FightInfo)target;
+        if (!initialized)
+        {
+            Units.LoadMonstersConfig();
+            SkillConfigTable.LoadAllSkillConfigs();
+            
+            _fightMemberManager = new FightMemberManager();
+            initialized = true;
+        }
+        _fightMemberManager.OnGUIView(fightInfo.members);
+    }
+}

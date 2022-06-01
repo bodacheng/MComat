@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using System.Linq;
 
-public partial class StagesManager : EditorWindow {
+public partial class FightMemberManager {
     
     string UnitSelect()
     {

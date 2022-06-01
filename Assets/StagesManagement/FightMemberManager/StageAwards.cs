@@ -1,21 +1,9 @@
 #if UNITY_EDITOR
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-using Skill;
-using UnityEngine;
-using System.Collections.Generic;
-using System;
-using System.IO;
-using System.Linq;
-using System.Text;
-using PlayFab;
-using PlayFab.ClientModels;
-using Skill;
 using Json;
 using Newtonsoft.Json;
 
-public partial class StagesManager : EditorWindow
+public partial class FightMemberManager
 {
     public class StageAward
     {

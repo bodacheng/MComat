@@ -8,7 +8,7 @@ using DummyLayerSystem;
 using Cocone.ProjectP3;
 using Singleton;
 
-public partial class ArcadeTop : UILayer
+public class ArcadeTop : UILayer
 {
     [SerializeField] DedicatedCameraConnector _connector;
     [SerializeField] RectTransform container;
@@ -77,9 +77,8 @@ public partial class ArcadeTop : UILayer
                 continue;
             }
             
-            one.LoadLocalFightFromScript();
             var stageButton = Instantiate(iconPrefab);
-
+            
             void LoadThisStage()
             {
                 one.LoadMyTeam();
@@ -92,14 +91,14 @@ public partial class ArcadeTop : UILayer
             stageButton.text.text = "Stage" + stageNo;
             stageButton.name = "Stage" + stageNo;
 
-            if (one.fightMembers != null)
+            if (one.members != null)
             {
-                for (var i = 0; i < one.fightMembers.EnemySets.GetValues().Count; i++)
+                for (var i = 0; i < one.members.EnemySets.GetValues().Count; i++)
                 {
-                    UnitIconDic.Load(one.fightMembers.EnemySets.GetValues()[i].r_id);
+                    UnitIconDic.Load(one.members.EnemySets.GetValues()[i].r_id);
                 }
 
-                var heroIcons = MemberInfosShow(one.fightMembers.EnemySets.GetValues(), stageButton.IconsT);
+                var heroIcons = MemberInfosShow(one.members.EnemySets.GetValues(), stageButton.IconsT);
                 for (var i = 0; i < heroIcons.Count; i++)
                 {
                     var heroIcon = heroIcons[i];

@@ -2,12 +2,12 @@
 using UnityEngine;
 using UnityEditor;
 
-public partial class StagesManager : EditorWindow {
+public partial class FightMemberManager {
     
     int selectedUnitIndex;
     string focusingPosID;
     
-    void Members()
+    void Members(FightMembers target)
     {
         EditorGUILayout.LabelField(" 关卡敌人信息  ", Title);
         GUILayout.BeginHorizontal();

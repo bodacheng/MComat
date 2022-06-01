@@ -12,7 +12,7 @@ public class DATACENTERGUI : Editor {
     Data_Center _myScript;
 
     public override void OnInspectorGUI()
-    {        
+    {
         _myScript = (Data_Center)target;
 
         if (Application.isPlaying)
