@@ -32,11 +32,11 @@ public class FightMembers
     {
         var type = "human";
         
-        var CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(type);
-        var Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 3);
-        var charRecordIds = CharIDsAndNames.Keys.ToList();
+        var unitIDsAndNames = Units.GetMonsterIDsAndNamesDic(type);
+        var Indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 3);
+        var charRecordIds = unitIDsAndNames.Keys.ToList();
         
-        FightMembers target = new FightMembers();
+        var target = new FightMembers();
         
         UnitInfo char1 = new UnitInfo
         {

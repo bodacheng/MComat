@@ -103,8 +103,6 @@ public partial class FightMemberManager
         // 基础进程
         GUILayout.Space(10);
         BasicStates(focusingUnitInfo);
-
-        target.EnemySets.ConvertDictionaryToSerializableArray();
     }
 }
 #endif

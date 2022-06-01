@@ -8,16 +8,13 @@ public static class FightLoad
 {
     public static void Go(FightInfo stage, bool loadWithMyTeam = false)
     {
-        if (stage.members == null)
-            stage.members = new FightMembers();
-        
         if (loadWithMyTeam)
         {
             stage.LoadMyTeam();
             stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
         }
         
-        if (stage.members.HeroSets.GetValues().Count < 1 || stage.members.EnemySets.GetValues().Count < 1)
+        if (stage.FightMembers.HeroSets.GetValues().Count < 1 || stage.FightMembers.EnemySets.GetValues().Count < 1)
         {
             string error;
             switch (AppSetting.Language)
@@ -49,8 +46,6 @@ public static class FightLoad
                 stage.team2Auto = true;
                 break;
         }
-
-        Debug.Log(stage.members.EnemySets._SerializableSets.Length + ":"+ stage.members.HeroSets._SerializableSets.Length);
         
         NetFightScene.Fight = stage;
         Stones.PreventStonesFromDestroy();

@@ -14,10 +14,10 @@ namespace FightScene
         public override void ProcessEnter()
         {
             BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
-            if (NetFightScene.Fight.beforefightstory != null)
+            if (NetFightScene.Fight.beforeFightStory != null)
             {
                 AutoMoveToNext = false;
-                NetFightScene.target.playableDirector.playableAsset = NetFightScene.Fight.beforefightstory;
+                NetFightScene.target.playableDirector.playableAsset = NetFightScene.Fight.beforeFightStory;
                 NetFightScene.target.playableDirector.stopped += CanGoNext;
                 NetFightScene.target.playableDirector.Play();
             }

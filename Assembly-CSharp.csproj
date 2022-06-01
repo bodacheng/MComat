@@ -332,6 +332,7 @@
      <Compile Include="Assets/JsonSupport/UnityLitJson/JsonAttribute.cs" />
      <Compile Include="Assets/Cach/Cach.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Pointers/TouchPointer.cs" />
+     <Compile Include="Assets/StagesManagement/FightInfoGUI.cs" />
      <Compile Include="Assets/FightingSceneUISystem/HeroIcon.cs" />
      <Compile Include="Assets/PlayFab/CloudScripts/Dev.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/UnitsLayer.cs" />
@@ -400,6 +401,7 @@
      <Compile Include="Assets/NoSuchStudio/HighlightUI/Scritpts/Runtime/Extentions/HighlightUIText.cs" />
      <Compile Include="Assets/AnimControl/readMe.cs" />
      <Compile Include="Assets/StagesManagement/FightMemberManager/SlotFocus.cs" />
+     <Compile Include="Assets/StagesManagement/StageManager.cs" />
      <Compile Include="Assets/POS_Sys/Parent_Label.cs" />
      <Compile Include="Assets/monsterbox/SSLevelUpManager/BySKStone.cs" />
      <Compile Include="Assets/TutorialManger/processes/GoToMemberDetail.cs" />
@@ -680,8 +682,6 @@
      <Compile Include="Assets/TouchScript/Scripts/Debugging/Loggers/IPointerLogger.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Panel/ServerBrowserManager.cs" />
      <Compile Include="Assets/DynamicStarrySky/Scripts/StarPoint.cs" />
-     <Compile Include="Assets/StagesManagement/FightInfoGUI.cs" />
-     <Compile Include="Assets/StagesManagement/StageManager.cs" />
      <None Include="Assets/EffectsResource/shaders/Slash2.shader" />
      <None Include="Assets/EffectsResource/Prefabs/Projectiles(Speed)/Readme.txt" />
      <None Include="Assets/TextMesh Pro/Resources/Shaders/TMPro.cginc" />
