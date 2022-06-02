@@ -6,10 +6,11 @@ using DummyLayerSystem;
 
 public class UpperInfoBar : UILayer
 {
-    public Button SettingBtn;
-    public Button MailBtn;
+    [SerializeField] Button SettingBtn;
+    [SerializeField] Button MailBtn;
     [SerializeField] Text UserID;
     [SerializeField] Text accountDiamondCoin;
+    [SerializeField] Button diamondPlus;
     [SerializeField] Text accountIntelliCoin;
     
     public static UpperInfoBar Open(Action openSetting, Action OpenMail)
@@ -18,6 +19,11 @@ public class UpperInfoBar : UILayer
         returnValue.Refresh();
         returnValue.SettingBtn.onClick.AddListener(openSetting.Invoke);
         returnValue.MailBtn.onClick.AddListener(OpenMail.Invoke);
+        
+        returnValue.diamondPlus.onClick.AddListener(() =>
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.ShopTop, true);
+        });
         
         return returnValue;
     }
