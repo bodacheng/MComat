@@ -24,7 +24,7 @@ public class FightInfo : ScriptableObject
     [SerializeField]
     public Sprite StageButtonSprite;
 
-    [SerializeField] private List<UnitInfo> unitsData;
+    [SerializeField] private List<UnitInfo> unitsData = new ();
     
     public FightEventType EventType
     {
@@ -40,7 +40,7 @@ public class FightInfo : ScriptableObject
     public TeamMode Team1Mode;
     public TeamMode Team2Mode;
     
-    public int ID
+    public string ID
     {
         set;
         get;
@@ -90,6 +90,7 @@ public class FightInfo : ScriptableObject
         }
         
         fightInfo.FightMembers = targetTeam;
+        fightInfo.SaveDicToData();
         fightInfo.Team1Mode = TeamMode.rotation;
         fightInfo.Team2Mode = TeamMode.rotation;
         
@@ -102,7 +103,7 @@ public class FightInfo : ScriptableObject
 
     public void Open()
     {
-        ID = Convert.ToInt32(this.name);
+        ID = this.name;
         FightMembers = new FightMembers();
         for (var i = 0; i < unitsData.Count; i++)
         {
