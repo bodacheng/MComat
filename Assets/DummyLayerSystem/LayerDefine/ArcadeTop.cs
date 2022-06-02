@@ -87,10 +87,10 @@ public class ArcadeTop : UILayer
             }
             
             stageButton.button.onClick.AddListener(LoadThisStage);
-            stageButton.ID = one.ID;
+            stageButton.ID = Convert.ToInt32(one.ID);
             stageButton.text.text = "Stage" + stageNo;
             stageButton.name = "Stage" + stageNo;
-
+            
             if (one.FightMembers != null)
             {
                 for (var i = 0; i < one.FightMembers.EnemySets.GetValues().Count; i++)

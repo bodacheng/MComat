@@ -57,7 +57,7 @@ public class FightMembers
         target.EnemySets.Set(0, 0, char1);
         target.EnemySets.Set(0, 1, char2);
         target.EnemySets.Set(0, 2, char3);
-
+        
         return target;
     }
     

@@ -19,12 +19,12 @@ public class StageManager : EditorWindow
             SkillConfigTable.LoadAllSkillConfigs();
             
             target = new FightInfo();
+            target.FightMembers = new FightMembers();
             _fightMemberManager = new FightMemberManager();
             Initialized = true;
         }
         
         _fightMemberManager.OnGUIView(target.FightMembers);
-
         pathAndNameForLocalSave = EditorGUILayout.TextField("local Path For Saving", pathAndNameForLocalSave);
         fileName = EditorGUILayout.TextField("file", fileName);
         
