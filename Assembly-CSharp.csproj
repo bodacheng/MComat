@@ -711,6 +711,7 @@
      <None Include="Assets/D_Resources/enviroments/Top-Down SF/Demo/readme mobile.txt" />
      <None Include="Assets/EffectsResource/shaders/Blend_CenterGlow.shader" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_Plain_AdditiveZ.shader" />
+     <None Include="Assets/Resources/IAPProductCatalog.json" />
      <None Include="Assets/DynamicStarrySky/Shaders/StarrySky.shader" />
      <None Include="Assets/D_Resources/BasicCharComponent/Shield/saonian/FieldShield.shader" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Textures/BenSimonds/_Textures Readme.txt" />
