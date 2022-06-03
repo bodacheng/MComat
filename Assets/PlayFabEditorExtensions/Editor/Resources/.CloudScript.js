@@ -106,6 +106,19 @@ handlers.buildBasicData = function (args, context) {
     return { result: true };
 };
 
+handlers.buyCurrency= function (args, context) {
+
+    var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
+        {
+            PlayFabId :currentPlayerId,
+            Amount : args.GD,
+            VirtualCurrency : "GD"
+        }
+    );
+    
+    return { result: AddUserVirtualCurrencyResult };
+}
+
 // 给予玩家基本财产
 handlers.grantBasicItems = function (args, context) {
 
