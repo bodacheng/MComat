@@ -693,7 +693,6 @@
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_Plain_Additive.shader" />
      <None Include="Assets/UI/Shift - Complete Sci-Fi UI/Shaders/Masked UI Blur.shader" />
      <None Include="Assets/EffectsResource/shaders/Lit_CenterGlow.shader" />
-     <None Include="Assets/StreamingAssets/UnityServicesProjectConfiguration.json" />
      <None Include="Assets/EffectsResource/shaders/FadeSlash.shader" />
      <None Include="Assets/Tank &amp; Healer Studio/Ultimate Joystick/_Examples/Spaceship Example/README_Spaceship.txt" />
      <None Include="Assets/EffectsResource/shaders/DissolveNoise.shader" />
