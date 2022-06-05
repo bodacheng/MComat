@@ -46,7 +46,7 @@ public static class JenkinsBuild
 
         BuildOptions options = BuildOptions.CompressWithLz4;
         
-        var result = BuildPipeline.BuildPlayer(scene_name_array,"Builds/AppBundle" , BuildTarget.Android, options);
+        var result = BuildPipeline.BuildPlayer(scene_name_array,"Android_Build/AppBundle" , BuildTarget.Android, options);
         
         if (result.summary.result == BuildResult.Succeeded)
         {
