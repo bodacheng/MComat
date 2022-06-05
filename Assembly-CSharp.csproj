@@ -707,6 +707,7 @@
      <None Include="Assets/EffectsResource/shaders/Distortion.shader" />
      <None Include="Assets/EffectsResource/shaders/Blend_TwoSides.shader" />
      <None Include="Assets/UI/Shift - Complete Sci-Fi UI/Shaders/Fast UI Blur.shader" />
+     <None Include="Assets/StreamingAssets/UnityServicesProjectConfiguration.json" />
      <None Include="Assets/RPGTALK/ReadMe.txt" />
      <None Include="Assets/D_Resources/enviroments/Top-Down SF/Demo/readme mobile.txt" />
      <None Include="Assets/EffectsResource/shaders/Blend_CenterGlow.shader" />

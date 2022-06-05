@@ -42,6 +42,11 @@ public static class JenkinsBuild
 
         PlayerSettings.defaultScreenWidth = 1920;
         PlayerSettings.defaultScreenHeight = 1080;
+        PlayerSettings.Android.bundleVersionCode = PlayerSettings.Android.bundleVersionCode + 1;
+        
+        PlayerSettings.SetArchitecture(BuildTargetGroup.Android, unchecked((int)AndroidArchitecture.ARM64));
+        PlayerSettings.SetArchitecture(BuildTargetGroup.Android, unchecked((int)AndroidArchitecture.ARMv7));
+        PlayerSettings.SetArchitecture(BuildTargetGroup.Android, unchecked((int)AndroidArchitecture.X86));
         
         //AppBundleは使用しない（本番ビルドのときだけ使うイメージ）
         EditorUserBuildSettings.buildAppBundle = true;
@@ -128,7 +133,7 @@ public static class JenkinsBuild
             Debug.LogError(build_script + " couldn't be found or isn't a build script.");
             return false;
         }
-
+        
         setBuilder(builderScript);
 
         return buildAddressableContent();
