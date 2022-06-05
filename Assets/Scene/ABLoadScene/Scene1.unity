@@ -626,7 +626,7 @@ GameObject:
   - component: {fileID: 870660823}
   - component: {fileID: 870660822}
   m_Layer: 0
-  m_Name: ResourceDownloader
+  m_Name: Cach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

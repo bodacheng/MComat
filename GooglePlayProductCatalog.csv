@@ -1,0 +1,2 @@
+Product ID,Published State,Purchase Type,Auto Translate,Locale; Title; Description,Auto Fill Prices,Price,Pricing Template ID
+com.bo.mcombat.testbuy,published,managed_by_android,false,zh_TW;TEST;钻石,true,99000000,

@@ -23,6 +23,8 @@ public class Cach : MonoBehaviour
         bool skill_icon = false;
         bool unit_icon = false;
         bool battle_ground = false;
+        bool icon_frame = false;
+        bool btn_effect = false;
         
         downLoadSize("basic_anim", () => { basic_anim = true; });
         downLoadSize("skill_anim", () => { skill_anim = true; });
@@ -35,6 +37,8 @@ public class Cach : MonoBehaviour
         downLoadSize("skill_icon", () => { skill_icon = true; });
         downLoadSize("unit_icon", () => { unit_icon = true; });
         downLoadSize("battle_ground", () => { battle_ground = true; });
+        downLoadSize("icon_frame", () => { icon_frame = true; });
+        downLoadSize("btn_effect", () => { btn_effect = true; });
         
         void downLoadSize(string label, Action OnComplete)
         {
@@ -46,7 +50,7 @@ public class Cach : MonoBehaviour
             };
         }
         
-        while (!(basic_anim && skill_anim && hurt_anim && knock_anim && unit && weapon && effect && quest && skill_icon && unit_icon && battle_ground))
+        while (!(basic_anim && skill_anim && hurt_anim && knock_anim && unit && weapon && effect && quest && skill_icon && unit_icon && battle_ground && icon_frame && btn_effect))
         {
             Debug.Log("正在计算下载文件总大小");
             yield return null;
@@ -72,6 +76,8 @@ public class Cach : MonoBehaviour
         yield return downLoadMission("skill_icon", progressUIRefresh);
         yield return downLoadMission("unit_icon", progressUIRefresh);
         yield return downLoadMission("battle_ground", progressUIRefresh);
+        yield return downLoadMission("icon_frame", progressUIRefresh);
+        yield return downLoadMission("btn_effect", progressUIRefresh);
         
         complete.Invoke();
     }

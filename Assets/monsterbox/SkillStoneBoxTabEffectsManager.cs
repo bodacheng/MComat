@@ -24,7 +24,7 @@ namespace mainMenu
         {
             if (_elementBtnEffects.ContainsKey(element))
                 return;
-            ElementStoneTagsGroup zt = new ElementStoneTagsGroup();
+            var zt = new ElementStoneTagsGroup();
             zt.INI_forSkillStoneBox(element, transform);
             _elementBtnEffects.Add(element, zt);
             string path = null;

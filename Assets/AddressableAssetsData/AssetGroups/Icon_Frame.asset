@@ -20,7 +20,8 @@ MonoBehaviour:
   - m_GUID: 5e460045a29834886aefc81da49af339
     m_Address: Icon_Frame
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - icon_frame
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

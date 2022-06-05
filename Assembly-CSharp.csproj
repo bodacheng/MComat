@@ -473,7 +473,7 @@
      <Compile Include="Assets/missionWatcher/MissionWatcher.cs" />
      <Compile Include="Assets/monsterbox/SkillStoneBoxTabEffectsManager.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Utils/PointerUtils.cs" />
-     <Compile Include="Assets/ProductCell.cs" />
+     <Compile Include="Assets/UI/ProductCell.cs" />
      <Compile Include="Assets/PlayFab/Client/LinkDevice.cs" />
      <Compile Include="Assets/Remote/API/Dto/Model/GetStructure/SkillStoneOfPlayerInfo.auto.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_StarScreenMove.cs" />
@@ -514,7 +514,7 @@
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Other/ScrollForMore.cs" />
      <Compile Include="Assets/POS_Sys/E_Damage.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Layers/FullscreenLayer.cs" />
-     <Compile Include="Assets/Rotate_the_object.cs" />
+     <Compile Include="Assets/UI/Rotate_the_object.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Utils/Geom/ProjectionUtils.cs" />
      <Compile Include="Assets/UI/oldscripts/Save_Trans.cs" />
      <Compile Include="Assets/TutorialManger/processes/SelectASlot/SkillEditA1Try.cs" />
@@ -586,7 +586,7 @@
      <Compile Include="Assets/Arena/ArenaFightTeamDisplay.cs" />
      <Compile Include="Assets/AnimControl/StateEnterd.cs" />
      <Compile Include="Assets/Behaviour/Defines/states/Dash_Back_State.cs" />
-     <Compile Include="Assets/FaciaManager.cs" />
+     <Compile Include="Assets/AnimControl/FaciaManager.cs" />
      <Compile Include="Assets/TouchScript/Scripts/Hit/HitTest.cs" />
      <Compile Include="Assets/DynamicBone/Scripts/DynamicBone.cs" />
      <Compile Include="Assets/Camera/Modes/OneVOneMode_failed.cs" />
@@ -693,6 +693,7 @@
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_Plain_Additive.shader" />
      <None Include="Assets/UI/Shift - Complete Sci-Fi UI/Shaders/Masked UI Blur.shader" />
      <None Include="Assets/EffectsResource/shaders/Lit_CenterGlow.shader" />
+     <None Include="Assets/StreamingAssets/UnityServicesProjectConfiguration.json" />
      <None Include="Assets/EffectsResource/shaders/FadeSlash.shader" />
      <None Include="Assets/Tank &amp; Healer Studio/Ultimate Joystick/_Examples/Spaceship Example/README_Spaceship.txt" />
      <None Include="Assets/EffectsResource/shaders/DissolveNoise.shader" />
@@ -736,7 +737,6 @@
      <None Include="Assets/D_Resources/enviroments/Top-Down Dungeons2/Demo/!readme.txt" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_TextureMult_Bumped.shader" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_Plain.shader" />
-     <None Include="Assets/Resources/TimeLines/testdialog.txt" />
      <None Include="Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" />
      <None Include="Assets/D_Resources/JMO Assets/MatCap Shaders/Shaders/MatCap_TextureAdd.shader" />
      <None Include="Assets/EffectsResource/shaders/Add_Trail.shader" />
