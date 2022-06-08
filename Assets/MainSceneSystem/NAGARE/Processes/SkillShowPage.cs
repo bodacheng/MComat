@@ -15,7 +15,7 @@ public class SkillShowPage : MainSceneProcess
     {
         var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
         layer = SkillShowLayer.Open();
-        layer.SkillsPrintPageRefresh( unitInfo);
+        layer.SkillsPrintPageRefresh(unitInfo);
     }
     
     public override void ProcessEnd()
@@ -23,13 +23,5 @@ public class SkillShowPage : MainSceneProcess
         layer.ClearRenderPs();
         layer.EffectsManager.CloseShowingZokuseiTagEffects();
         UILayerLoader.Remove("SkillShowLayer");
-    }
-    
-    public override void LocalUpdate()
-    {
-        if (SkillShowSupporter.IfShowingSkill)
-        {
-            SkillShowSupporter.SkillsPrintOutLateUpdate();
-        }
     }
 }

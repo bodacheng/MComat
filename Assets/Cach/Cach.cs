@@ -106,6 +106,7 @@ public class Cach : MonoBehaviour
                 progressUIRefresh("Downloading "+ label + " asset", dl.PercentComplete);
                 yield return null;
             }
+            Addressables.Release(dl);
         }
         else
         {
@@ -115,39 +116,70 @@ public class Cach : MonoBehaviour
 
     public static GameObject LoadObject(string prefabPathName)
     {
-        Debug.Log("读取："+ prefabPathName);
-        var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
-        var prefab = op.WaitForCompletion();
-        var _object = GameObject.Instantiate(prefab);
-        Addressables.Release(op);
-        return _object;
+        try
+        {
+            var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
+            var prefab = op.WaitForCompletion();
+            var _object = GameObject.Instantiate(prefab);
+            Addressables.Release(op);
+            return _object;
+        }
+        catch (Exception e)
+        {
+            Debug.Log("包读取错误："+ e);
+            return null;
+        }
     }
     
     public static GameObject LoadPrefab(string prefabPathName)
     {
-        Debug.Log("读取prefab："+ prefabPathName);
-        var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
-        var prefab = op.WaitForCompletion();
-        Addressables.Release(op);
-        return prefab;
+        try
+        {
+            var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
+            var prefab = op.WaitForCompletion();
+            Addressables.Release(op);
+            return prefab;
+        }
+        catch (Exception e)
+        {
+            Debug.Log("包读取错误："+ e);
+            return null;
+        }
     }
     
     public static T LoadTOnObject<T>(string prefabPathName)
     {
-        Debug.Log("读取："+ prefabPathName);
-        var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
-        var prefab = op.WaitForCompletion();
-        var _object = GameObject.Instantiate(prefab);
-        Addressables.Release(op);
-        return _object.GetComponent<T>();
+        T returnValue = default;
+        try
+        {
+            var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
+            var prefab = op.WaitForCompletion();
+            var _object = GameObject.Instantiate(prefab);
+            Addressables.Release(op);
+            returnValue = _object.GetComponent<T>();
+            return returnValue;
+        }
+        catch (Exception e)
+        {
+            Debug.Log("包读取错误："+ e);
+            return returnValue;
+        }
     }
     
     public static T LoadT<T>(string prefabPathName)
     {
-        Debug.Log("读取："+ prefabPathName);
-        var op = Addressables.LoadAssetAsync<T>(prefabPathName);
-        var prefab = op.WaitForCompletion();
-        Addressables.Release(op);
-        return prefab;
+        T prefab = default;
+        try
+        {
+            var op = Addressables.LoadAssetAsync<T>(prefabPathName);
+            prefab = op.WaitForCompletion();
+            Addressables.Release(op);
+            return prefab;
+        }
+        catch (Exception e)
+        {
+            Debug.Log("包读取错误："+ e);
+            return prefab;
+        }
     }
 }

@@ -57,12 +57,4 @@ public class MonsterEditPage : MainSceneProcess
     {
         SkillEditLayer.Close();
     }
-    
-    public override void LocalUpdate()
-    {
-        if (SkillShowSupporter.IfShowingSkill)
-        {
-            SkillShowSupporter.SkillsPrintOutLateUpdate();
-        }
-    }
 }

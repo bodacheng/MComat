@@ -34,7 +34,7 @@ namespace mainMenu
         
         public SkillStoneBoxTabEffectsManager EffectsManager;
         
-        List<GameObject> floatingMarks = new List<GameObject>();
+        readonly List<GameObject> floatingMarks = new List<GameObject>();
         IDictionary<string, Button> StateButtonDic = new Dictionary<string, Button>();
         IDictionary<string, SkillEntity> analysisSKList = new Dictionary<string, SkillEntity>();
         
@@ -50,11 +50,6 @@ namespace mainMenu
             l = UILayerLoader.Load(PreScene.target.T,"SkillShowLayer") as SkillShowLayer;
             returnValue = l as SkillShowLayer;
             return returnValue;
-        }
-        
-        void LateUpdate()
-        {
-            SkillShowSupporter.SkillsPrintOutLateUpdate();
         }
         
         // 清理技能迁移表示符
@@ -106,9 +101,8 @@ namespace mainMenu
                     }
                 }
                 //////// 超级功能 ////////
-                runner.RunAsQueued(SkillShowSupporter.SkillShowRunWithPrepare(_SE.REAL_NAME));                
-                SkillShowSupporter.IfShowingSkill = true;
-                
+                _connector.SkillShowRun(_SE.REAL_NAME);
+
                 // 这个就是强行把技能盒子附带的那个点击触效给拿过来用了。
                 EffectsManager.SkillButtonExplosion(_SE.SP_LEVEL, _button.transform.position, transform);
             }
@@ -177,10 +171,10 @@ namespace mainMenu
             _connector.ShowMyModel(PreScene.target._focusing.id);
             var config = Units.GetUnitConfig(PreScene.target._focusing.r_id);
             var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
-            yield return SkillShowSupporter.FocusingC.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK, config.SPECIAL_ZOKUSEI);
-            yield return SkillShowSupporter.FocusingC.Step2Initialize(config.TYPE, unitInfo.set, unitInfo.level, config.element, config.SPECIAL_ZOKUSEI);
-            if (SkillShowSupporter.FocusingC._MyBehaviorRunner != null)
-                SkillShowSupporter.FocusingC._MyBehaviorRunner.ChangeState("Empty");
+            yield return _connector.FocusingC.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK, config.SPECIAL_ZOKUSEI);
+            yield return _connector.FocusingC.Step2Initialize(config.TYPE, unitInfo.set, unitInfo.level, config.element, config.SPECIAL_ZOKUSEI);
+            if (_connector.FocusingC._MyBehaviorRunner != null)
+                _connector.FocusingC._MyBehaviorRunner.ChangeState("Empty");
         }
 
         // 打印出技能显示画面
@@ -275,58 +269,58 @@ namespace mainMenu
         #region 表情测试相关
         public void Face_CloseEye()
         {
-            if (SkillShowSupporter.FocusingC != null)
+            if (_connector.FocusingC != null)
             {
-                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("face_reset");
-                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("close_eye");
+                _connector.FocusingC.Animation_Manger.SetTrigger("face_reset");
+                _connector.FocusingC.Animation_Manger.SetTrigger("close_eye");
             }
         }
         public void Face_Suprise()
         {
-            if (SkillShowSupporter.FocusingC != null)
+            if (_connector.FocusingC != null)
             {
-                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("face_reset");
-                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("suprise");
+                _connector.FocusingC.Animation_Manger.SetTrigger("face_reset");
+                _connector.FocusingC.Animation_Manger.SetTrigger("suprise");
             }
         }
         public void Face_Angry()
         {
-            if (SkillShowSupporter.FocusingC != null)
+            if (_connector.FocusingC != null)
             {
-                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("face_reset");
-                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("angry");
+                _connector.FocusingC.Animation_Manger.SetTrigger("face_reset");
+                _connector.FocusingC.Animation_Manger.SetTrigger("angry");
             }
         }
         public void Face_Pain()
         {
-            if (SkillShowSupporter.FocusingC != null)
+            if (_connector.FocusingC != null)
             {
-                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("face_reset");
-                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("hurt");
+                _connector.FocusingC.Animation_Manger.SetTrigger("face_reset");
+                _connector.FocusingC.Animation_Manger.SetTrigger("hurt");
             }
         }
         public void Face_Smile()
         {
-            if (SkillShowSupporter.FocusingC != null)
+            if (_connector.FocusingC != null)
             {
-                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("face_reset");
-                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("smile");
+                _connector.FocusingC.Animation_Manger.SetTrigger("face_reset");
+                _connector.FocusingC.Animation_Manger.SetTrigger("smile");
             }
         }
         public void Face_Evil()
         {
-            if (SkillShowSupporter.FocusingC != null)
+            if (_connector.FocusingC != null)
             {
-                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("face_reset");
-                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("evil");
+                _connector.FocusingC.Animation_Manger.SetTrigger("face_reset");
+                _connector.FocusingC.Animation_Manger.SetTrigger("evil");
             }
         }
         public void Face_Ferocious()
         {
-            if (SkillShowSupporter.FocusingC != null)
+            if (_connector.FocusingC != null)
             {
-                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("face_reset");
-                SkillShowSupporter.FocusingC.Animation_Manger.SetTrigger("ferocious");
+                _connector.FocusingC.Animation_Manger.SetTrigger("face_reset");
+                _connector.FocusingC.Animation_Manger.SetTrigger("ferocious");
             }
         }
         #endregion

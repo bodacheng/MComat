@@ -49,7 +49,7 @@ public static class JenkinsBuild
         PlayerSettings.SetArchitecture(BuildTargetGroup.Android, unchecked((int)AndroidArchitecture.X86));
         
         //AppBundleは使用しない（本番ビルドのときだけ使うイメージ）
-        EditorUserBuildSettings.buildAppBundle = true;
+        EditorUserBuildSettings.buildAppBundle = false;
         EditorUserBuildSettings.development = false;
 
         AddressableAssetSettings.CleanPlayerContent(AddressableAssetSettingsDefaultObject.Settings.ActivePlayerDataBuilder);

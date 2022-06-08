@@ -74,7 +74,7 @@ MonoBehaviour:
       - m_Id: cd58eb709aef248a0a61cfcf5029d3c5
         m_Value: ServerData/[BuildTarget]
       - m_Id: b06b7dac454e04a1b8447caade86f7fc
-        m_Value: https://s3.us-west-1.wasabisys.com/mcombat/[BuildTarget]
+        m_Value: https://mcombat.s3.ap-northeast-1.amazonaws.com/[BuildTarget]
     m_ProfileEntryNames:
     - m_Id: 7453e66a70ffb41e893c0afd44486595
       m_Name: BuildTarget
@@ -138,7 +138,7 @@ MonoBehaviour:
           m_Key: HostingServiceUploadSpeed
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.String
-          m_Data: ServerData/Android;Library/com.unity.addressables/aa/Android/Android
+          m_Data: ServerData/Android
           m_Key: ContentRoot
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Boolean

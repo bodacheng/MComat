@@ -84,7 +84,7 @@ namespace mainMenu
                 var skillEditLayer = SkillEditLayer.Open();
                 skillEditLayer.StonesBox.RestFilter();
                 SelectedRender(null);
-                SkillEditConfirmAnimation();
+                skillEditLayer.SkillEditConfirmAnimation();
                 
                 MainSceneLog skillConfirmLog = new MainSceneLog()
                 {
@@ -92,13 +92,6 @@ namespace mainMenu
                     description = "success"
                 };
                 MainSceneLogger.Logs.Add(skillConfirmLog);
-            }
-            
-            void SkillEditConfirmAnimation()
-            {
-                UnitConfig unitConfig = Units.GetUnitConfig(PreScene.target._focusing.r_id);
-                string personalEffectsPath = FightGlobalSetting.EffectPathDefine(unitConfig.element);
-                EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, SkillShowSupporter.FocusingC.WholeT.position, Quaternion.identity, null);
             }
             
             void error()

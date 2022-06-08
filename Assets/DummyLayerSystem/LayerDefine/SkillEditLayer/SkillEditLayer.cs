@@ -41,7 +41,11 @@ public partial class SkillEditLayer : UILayer
         l = UILayerLoader.Load(PreScene.target.T,"SkillEditLayer") as SkillEditLayer;
         returnValue = l as SkillEditLayer;
         returnValue.NineSlot.PrintSkillInfo = returnValue._skillStoneDetail.RefreshInfo;
-        returnValue.NineSlot.StartUp();
+        returnValue.NineSlot.StartUp((x) =>
+            {
+                returnValue._connector.SkillShowRun(x);
+            }
+        );
         returnValue.StonesBox.GenerateCells();
         
         // 表现系
@@ -200,11 +204,11 @@ public partial class SkillEditLayer : UILayer
     {
         void buttonFeature(object sender, System.EventArgs e)
         {
-            SKStoneItem _stone = _Cell.GetItem();
+            var _stone = _Cell.GetItem();
             if (_stone != null && _stone._SkillConfig != null)
             {
                 _skillStoneDetail.RefreshInfo(_stone.instanceId);
-                 PreScene.target.mainProcessRunner.RunAsQueued(SkillShowSupporter.SkillShowRunWithPrepare(_stone._SkillConfig.REAL_NAME));
+                _connector.SkillShowRun(_stone._SkillConfig.REAL_NAME);
             }else{
                 _skillStoneDetail.Clear();
             }
@@ -212,5 +216,11 @@ public partial class SkillEditLayer : UILayer
         }
         _Cell.pGesture.Pressed += buttonFeature;
         _Cell.SetOnDropAction(StoneCell.Install);
+    }
+
+    public void SkillEditConfirmAnimation()
+    {
+        var personalEffectsPath = FightGlobalSetting.EffectPathDefine(Element.Null);
+        EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, _connector.FocusingC.WholeT.position, Quaternion.identity, null);
     }
 }

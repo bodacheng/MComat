@@ -68,7 +68,6 @@
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaLayer.cs" />
      <Compile Include="Assets/DummyLayerSystem/LayerDefine/SkillShowLayer.cs" />
      <Compile Include="Assets/Remote/TeamSet/PosKeySet.cs" />
-     <Compile Include="Assets/ModelShower/SkillShowSupporter.cs" />
      <Compile Include="Assets/TutorialManger/TutorialProcess.cs" />
      <Compile Include="Assets/MainSceneSystem/NAGARE/Processes/SettingPage.cs" />
      <Compile Include="Assets/Behaviour/Defines/states/Move_State.cs" />
@@ -598,6 +597,7 @@
      <Compile Include="Assets/Structure/PosCal.cs" />
      <Compile Include="Assets/SimpleDragAndDrop/Scripts/Cell/StoneCell_OnDrop.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/UI Element/CustomInputField.cs" />
+     <Compile Include="Assets/P3/DedicatedCameraConnector.ModelShow.cs" />
      <Compile Include="Assets/EffectsResource/Effect3FromJapanNet/eff_magiccircle_sample/UvScroll.cs" />
      <Compile Include="Assets/TheNineSlot/TheNineSlot_ConfirmEdit.cs" />
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Scripts/Event/HoldKeyEvent.cs" />
@@ -707,7 +707,6 @@
      <None Include="Assets/EffectsResource/shaders/Distortion.shader" />
      <None Include="Assets/EffectsResource/shaders/Blend_TwoSides.shader" />
      <None Include="Assets/UI/Shift - Complete Sci-Fi UI/Shaders/Fast UI Blur.shader" />
-     <None Include="Assets/StreamingAssets/UnityServicesProjectConfiguration.json" />
      <None Include="Assets/RPGTALK/ReadMe.txt" />
      <None Include="Assets/D_Resources/enviroments/Top-Down SF/Demo/readme mobile.txt" />
      <None Include="Assets/EffectsResource/shaders/Blend_CenterGlow.shader" />

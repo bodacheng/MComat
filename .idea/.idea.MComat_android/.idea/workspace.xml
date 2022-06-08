@@ -4,12 +4,35 @@
     <list default="true" id="7c85ff7e-9bb9-40ee-a548-74fae0617095" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MComat_android/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MComat_android/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/Android/addressables_content_state.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/Android/addressables_content_state.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cach/Cach.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cach/Cach.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillShowLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillShowLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Effects/blueMagic_old/skillEditConfirmEffect.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Effects/blueMagic_old/skillEditConfirmEffect.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Effects/darkMagic_old/skillEditConfirmEffect.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Effects/darkMagic_old/skillEditConfirmEffect.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Effects/defaultmagic/skillEditConfirmEffect.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Effects/defaultmagic/skillEditConfirmEffect.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Effects/greenMagic/skillEditConfirmEffect.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Effects/greenMagic/skillEditConfirmEffect.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Effects/lightMagic_old/skillEditConfirmEffect.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Effects/lightMagic_old/skillEditConfirmEffect.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Effects/redMagic_old/skillEditConfirmEffect.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Effects/redMagic_old/skillEditConfirmEffect.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/JenkinsBuild.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/JenkinsBuild.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/MonsterEditPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/MonsterEditPage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/SkillShowPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/SkillShowPage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ModelShower.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ModelShower/SkillShowSupporter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ModelShower/SkillShowSupporter.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_ConfirmEdit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_ConfirmEdit.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +44,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Samples~/Customization/Annotation/Editor/ReplaceAnnotationDescriptionAction.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.ModelShow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8c3fe0ee67ef4023825e5be65f0e9e8880f400/f2/8f411a15/BuildPipeline.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2A8U1u7SRxK6mkW09TlAw4I72iZ" />
@@ -30,6 +54,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -74,6 +99,11 @@
       <workItem from="1654431531098" duration="1427000" />
       <workItem from="1654433467976" duration="1879000" />
       <workItem from="1654437642443" duration="138000" />
+      <workItem from="1654438900310" duration="308000" />
+      <workItem from="1654521943981" duration="262000" />
+      <workItem from="1654522401872" duration="514000" />
+      <workItem from="1654524100731" duration="532000" />
+      <workItem from="1654667197833" duration="6224000" />
     </task>
     <servers />
   </component>
@@ -96,6 +126,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
 </project>

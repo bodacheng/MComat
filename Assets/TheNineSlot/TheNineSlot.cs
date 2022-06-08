@@ -74,7 +74,7 @@ namespace mainMenu
             return focusingSlot;
         }
         
-        void SlotBehaviour(SkillStoneSlot slot)
+        void SlotBehaviour(SkillStoneSlot slot, Action<string> playSkill)
         {
             void buttonFeature(object sender, System.EventArgs e)
             {
@@ -85,12 +85,12 @@ namespace mainMenu
                 if (_SkillStone != null && _SkillStone._SkillConfig != null)
                 {
                     PrintSkillInfo.Invoke(_SkillStone.instanceId);
-                    PreScene.target.mainProcessRunner.RunAsQueued(SkillShowSupporter.SkillShowRunWithPrepare(_SkillStone._SkillConfig.REAL_NAME));
+                    playSkill.Invoke(_SkillStone._SkillConfig.REAL_NAME);
                 }else{
                     PrintSkillInfo.Invoke(null);
                 }
             }
-
+            
             void doubleClick(object sender, System.EventArgs e)
             {
                 focusingSlot = null;
@@ -120,7 +120,7 @@ namespace mainMenu
             }));
         }
         
-        public void StartUp()
+        public void StartUp(Action<string> runSkill)
         {
             SelectedRender(null);
             
@@ -144,10 +144,10 @@ namespace mainMenu
             allSlot.Add(C1Slot);
             allSlot.Add(C2Slot);
             allSlot.Add(C3Slot);
-
+            
             foreach (var _slot in allSlot)
             {
-                SlotBehaviour(_slot);
+                SlotBehaviour(_slot, runSkill);
             }
         }
         

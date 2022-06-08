@@ -1,16 +1,11 @@
-﻿using System;
-using DG.Tweening;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Linq;
 using System.Collections;
-using dataAccess;
-using mainMenu;
-using Singleton;
 using UnityEngine.Rendering.Universal;
 
 namespace Cocone.ProjectP3
 {
-    public class DedicatedCameraConnector : MonoBehaviour
+    public partial class DedicatedCameraConnector : MonoBehaviour
     {
         [SerializeField] private Transform target;
         [SerializeField] private Camera camera;
@@ -22,8 +17,6 @@ namespace Cocone.ProjectP3
         private readonly Bounds tempBoundary = new Bounds();
         private RectTransform rect;
         private bool fixMode;
-
-        private IEnumerator enumerator;
         
         public void Clear()
         {
@@ -35,82 +28,8 @@ namespace Cocone.ProjectP3
 
         private void OnDestroy()
         {
-            if (enumerator != null)
-                StopCoroutine(enumerator);
-            
             if (target != null)
                 DestroyImmediate(target.gameObject);
-        }
-
-        public void ShowMyModel(string instanceID)
-        {
-            if (enumerator != null)
-                StopCoroutine(enumerator);
-            enumerator = _ShowMyModel(instanceID);
-            StartCoroutine(enumerator);
-        }
-        
-        GameObject _model;
-        IEnumerator _ShowMyModel(string instanceID)
-        {
-            var info = MyMonsters.Get(instanceID);
-            var p = _ShowModel(info?.r_id);
-            yield return p;
-            yield return p.Current;
-        }
-        
-        public void ShowModel(string recordID)
-        {
-            if (enumerator != null)
-                StopCoroutine(enumerator);
-            enumerator = _ShowModel(recordID);
-            StartCoroutine(enumerator);
-        }
-    
-        IEnumerator _ShowModel(string recordID) 
-        {
-            PopupLayer.Loading(">", PreScene.target.T);
-            if (_model != null)
-            {
-                DestroyImmediate(_model);
-                _model = null;
-            }
-            if (recordID == null)
-            {
-                yield break;
-            }
-            
-            var p = GeneralModelPool.GetModel(recordID, transform);
-            yield return p;
-            if (p.Current == null)
-            {
-                Debug.Log("模型错误");
-                yield break;
-            }
-            
-            var _dataCenter = p.Current;
-            if (_dataCenter == null)
-            {
-                Debug.Log("模型错误");
-                SkillShowSupporter.FocusingC = null;
-                yield break;
-            }
-            var dataCenter = (Data_Center)_dataCenter;
-            SkillShowSupporter.FocusRId = recordID;
-            SkillShowSupporter.FocusingC = dataCenter;
-            SkillShowSupporter.FocusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
-            
-            // 这个短暂变色是为了掩盖一些模型刚加载瞬间有些渲染没到位的尴尬。比如裙子摇晃 
-            dataCenter._ShaderManager.FlatColorForAShortTime(Color.black, 0.5f, 0.5f);
-            
-            _model = dataCenter.WholeT.gameObject;
-            _model.SetActive(true);
-            
-            Initialize(false,_model.transform, transform, PreScene.target.FxCamera);
-            ItemDetailStartDirection(0,0,0);
-            
-            PopupLayer.Close();
-            yield return _model;
         }
         
         void Initialize(bool fixMode, Transform focus, Transform camerasHolder = null, Camera stackParent = null)
@@ -151,6 +70,10 @@ namespace Cocone.ProjectP3
         void Update()
         {
             if (target != null) CameraPositionCal();
+            if (IfShowingSkill)
+            {
+                SkillsPrintOutLateUpdate();
+            }
         }
 
         private Renderer _parentNodeRenderer;
