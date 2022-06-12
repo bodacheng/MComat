@@ -12,7 +12,7 @@ namespace Singleton
             Dic.TryGetValue(unit_id, out Sprite Sprite);
             if (Sprite == null)
             {
-                Sprite = Cach.LoadT<Sprite>("unit/" + unit_id);
+                Sprite = AddressablesLogic.LoadT<Sprite>("unit/" + unit_id);
             }
             else
             {

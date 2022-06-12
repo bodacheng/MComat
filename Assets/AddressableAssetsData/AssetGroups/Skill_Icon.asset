@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 8fbbd0733e2274b91ada48d9bdce962e
   m_SerializeEntries:
   - m_GUID: 97c7a5691a3064d10a1861f6c0dcc1da
-    m_Address: "\u65E0\u6807\u9898 (12)"
+    m_Address: 182
     m_ReadOnly: 0
     m_SerializedLabels:
     - skill_icon

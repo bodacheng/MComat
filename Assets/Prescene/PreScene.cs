@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using dataAccess;
 using DummyLayerSystem;
 using UnityEngine.SceneManagement;
@@ -74,14 +73,7 @@ namespace mainMenu
             BasicPhase();
             ToInitialPhase();
 
-            Essentials();
-        }
-
-        async UniTask Essentials()
-        {
-            await HurtObjectManager.CheckExistedKey();
-            await EffectsManager.CheckExistedKey();
-            HurtObjectManager.ConstructDPool();
+            AddressablesLogic.Essentials();
         }
         
         public static void ReturnToLobby(string error)

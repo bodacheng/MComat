@@ -5,7 +5,6 @@ using mainMenu;
 using System.Collections.Generic;
 using Log;
 
-
 namespace FightScene
 {
     public class FightingProcess : FSceneProcess
@@ -29,25 +28,24 @@ namespace FightScene
             if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
             {
                 var TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
-                TitleScreenLayer.Initialise(NetFightScene.target.ReturnToFront, 
-                    () =>
+                TitleScreenLayer.Initialise(
+                    (x) =>
                     {
-                        LoginLayer LoginLayer = LoginLayer.Open(
-                            result => {
-                                Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
-                                PlayerAccountInfo.Me = new PlayerAccountInfo
-                                {
-                                    PlayFabUsername = result.PlayFabId
-                                };
-                                CloudScript.CheckIn();
-                                MainMenuNote.goingtostep = MainSceneStep.FrontPage;
-                                SceneManager.LoadScene(1);
-                            },
-                            fail => {
-                                Debug.Log("login fail");
-                            }
-                        );
-                    });
+                        Debug.Log(" 登陆成功，获得下面这样一个东西： " + x.EntityToken.EntityToken);
+                        PlayerAccountInfo.Me = new PlayerAccountInfo
+                        {
+                            PlayFabUsername = x.PlayFabId
+                        };
+                        CloudScript.CheckIn();
+                        MainMenuNote.goingtostep = MainSceneStep.FrontPage;
+                        SceneManager.LoadScene(1);
+                    },
+                    (x) =>
+                    {
+                        Debug.Log("login fail");
+                    }
+                );
+                
                 PopupLayer.LightUp(1f);
             }
             else

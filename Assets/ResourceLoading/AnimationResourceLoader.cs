@@ -33,16 +33,17 @@ public class AnimationResourceLoader
 
     public static IEnumerator DownloadAnim(string type, string key)
     {
+        var clipKey = type + "/skill/" + key;
+        if (AnimationClipDic.ContainsKey(clipKey))
+        {
+            yield break;
+        }
+        
         var load = Addressables.LoadAssetAsync<AnimationClip>("Animation/"+ type+"/skill/"+ key +".anim");
         yield return load;
         if (load.Status == AsyncOperationStatus.Succeeded)
         {
-            var clipKey = type + "/skill/" + key;
-            if (AnimationClipDic.ContainsKey(clipKey))
-                Debug.Log("严重错误 技能动画key重复："+clipKey);
-            else{
-                AnimationClipDic.Add(clipKey, load.Result);
-            }
+            AnimationClipDic.Add(clipKey, load.Result);
         }
         Addressables.Release(load);
     }

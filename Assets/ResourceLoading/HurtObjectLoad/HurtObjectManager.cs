@@ -7,7 +7,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
 
-public class HurtObjectManager
+public static class HurtObjectManager
 {
     static DecompositionerPool default_hitBoxPool;
     static readonly IDictionary<string, DecompositionerPool> HurtPoolDic = new Dictionary<string, DecompositionerPool>();
@@ -42,11 +42,10 @@ public class HurtObjectManager
         }
         else
         {
-            var returnValue = Cach.LoadPrefab(key);
+            var returnValue = AddressablesLogic.LoadPrefab(key);
             return returnValue;
         }
     }
-    
     
     public static DecompositionerPool GetDPool()
     {
@@ -67,10 +66,10 @@ public class HurtObjectManager
     {
         if (default_hitBoxPool == null)
         {
-            var resultObject = TryLoadWeaponPrefab("HurtObjects/defaultmagic/d_hitbox.prefab");
+            var resultObject = Resources.Load("FightBasic/d_hitbox") as GameObject;
             if (resultObject == null)
             {
-                Debug.Log("严重错误");
+                Debug.Log("未能读取到默认hitbox");
                 return;
             }
             

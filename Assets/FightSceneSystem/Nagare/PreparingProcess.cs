@@ -15,6 +15,8 @@ public class PreparingProcess : FSceneProcess
     
     IEnumerator EnterProcess()
     {
+        AddressablesLogic.Essentials();
+        
         RTFightManager.target._CameraManager.Assign_Camera(C_Mode.NULL, null,null);
         CameraManager._camera.transform.position = CameraManager._StartPosRef.transform.position;
         CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
@@ -109,11 +111,7 @@ public class PreparingProcess : FSceneProcess
             SceneManager.LoadScene(1);//也就是说这个地方是为了阻止进入下一步
         }
         FightLoadError.Instance.FightLoadErrors.Clear();
-        
-        if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
-        {
-            PopupLayer.LightUp(1f);
-        }
+        PopupLayer.LightUp(1f);
     }
     
     public override bool CanEnterOtherProcess()

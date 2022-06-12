@@ -15,7 +15,7 @@ namespace Singleton
                 yield break;
             }
             
-            var tempModel = Cach.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME + ".prefab");
+            var tempModel = AddressablesLogic.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME + ".prefab");
             tempModel.transform.SetParent(parent);
             var odl = tempModel.GetComponent<OutsideDataLink>();
             if (odl == null)

@@ -7,7 +7,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
 
-public class EffectsManager
+public static class EffectsManager
 {
     // 以下的重点是主界面和战斗界面通用问题
     static readonly IDictionary<string, DecompositionerPool> EffectPoolsDic = new Dictionary<string, DecompositionerPool>();
@@ -43,7 +43,7 @@ public class EffectsManager
         }
         else
         {
-            var returnValue = Cach.LoadPrefab(key);
+            var returnValue = AddressablesLogic.LoadPrefab(key);
             return returnValue;
         }
     }

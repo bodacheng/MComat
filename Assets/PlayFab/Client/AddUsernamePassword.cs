@@ -25,8 +25,6 @@ public partial class PlayFabReadClient
         );
     }
     
-    
-
     public static void SendPwResetEmail(string email)
     {
         Debug.Log("send mail to this address:" + email.Trim() );

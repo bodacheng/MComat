@@ -1,5 +1,7 @@
 ﻿using System;
 using dataAccess;
+using DummyLayerSystem;
+using FightScene;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using mainMenu;
@@ -24,7 +26,6 @@ public class StarterGUI : Editor
 [ExecuteInEditMode]
 public class Starter : MonoBehaviour
 {
-    [SerializeField] bool enterFrontPageFirst;
     [SerializeField] PlayfabSetting PlayfabSetting;
     [SerializeField] FightGlobalSetting FightGlobalSetting;
     [SerializeField] KeywordSetting keywordSetting;
@@ -41,21 +42,13 @@ public class Starter : MonoBehaviour
         Units.RefreshDic();
     }
     
-    void EnterFrontScene()
+    public void EnterFrontScene()
     {
         Initialise();
-        Debug.Log("hello");
-        if (enterFrontPageFirst)
-        {
-            var stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
-            stage.EventType = FightEventType.Screensaver;
-            stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
-            FightLoad.Go(stage);
-        }else{
-            MainMenuNote.goingtostep = MainSceneStep.FrontPage;
-            Debug.Log("场景开始迁移");
-            SceneManager.LoadScene(1);
-        }
+        var stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
+        stage.EventType = FightEventType.Screensaver;
+        //stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
+        FightLoad.Go(stage);
     }
     
     // 启动技能浏览器模式
@@ -106,21 +99,5 @@ public class Starter : MonoBehaviour
             i++;
         }
         SceneManager.LoadScene(1);
-    }
-    
-    // 启动网络模式
-    public void BeginNetMode()
-    {
-        Debug.Log("try loggin");
-        PlayFabReadClient.LoginByDevice(
-            result => {
-                Debug.Log("loggin");
-                CloudScript.CheckIn();
-                EnterFrontScene();
-            },
-            fail => {
-                Debug.Log("login fail");
-            }
-        );
     }
 }

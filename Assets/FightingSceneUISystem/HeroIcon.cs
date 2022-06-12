@@ -18,17 +18,17 @@ public class HeroIcon : MonoBehaviour {
     public static void IniFrames()
     {
         if (!Frames.ContainsKey(Element.blueMagic))
-            Frames.Add(Element.blueMagic, Cach.LoadT<Sprite>("Icon_Frame/8.asset"));
+            Frames.Add(Element.blueMagic, AddressablesLogic.LoadT<Sprite>("Icon_Frame/8.asset"));
         if (!Frames.ContainsKey(Element.redMagic))
-            Frames.Add(Element.redMagic, Cach.LoadT<Sprite>("Icon_Frame/8.asset"));
+            Frames.Add(Element.redMagic, AddressablesLogic.LoadT<Sprite>("Icon_Frame/8.asset"));
         if (!Frames.ContainsKey(Element.greenMagic))
-            Frames.Add(Element.greenMagic, Cach.LoadT<Sprite>("Icon_Frame/8.asset"));
+            Frames.Add(Element.greenMagic, AddressablesLogic.LoadT<Sprite>("Icon_Frame/8.asset"));
         if (!Frames.ContainsKey(Element.lightMagic))
-            Frames.Add(Element.lightMagic, Cach.LoadT<Sprite>("Icon_Frame/8.asset"));
+            Frames.Add(Element.lightMagic, AddressablesLogic.LoadT<Sprite>("Icon_Frame/8.asset"));
         if (!Frames.ContainsKey(Element.darkMagic))
-            Frames.Add(Element.darkMagic, Cach.LoadT<Sprite>("Icon_Frame/8.asset"));
+            Frames.Add(Element.darkMagic, AddressablesLogic.LoadT<Sprite>("Icon_Frame/8.asset"));
         if (!Frames.ContainsKey(Element.Null))
-            Frames.Add(Element.Null, Cach.LoadT<Sprite>("Icon_Frame/8.asset"));
+            Frames.Add(Element.Null, AddressablesLogic.LoadT<Sprite>("Icon_Frame/8.asset"));
     }
     
     public void Grey()

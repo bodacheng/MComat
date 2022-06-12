@@ -128,7 +128,8 @@ namespace DummyLayerSystem
             if (toRemoveIndex >= 0)
             {
                 var layer = Queues[toRemoveIndex];
-                GameObject.Destroy(layer.gameObject);
+                if (layer.gameObject != null)
+                    GameObject.Destroy(layer.gameObject);
                 Queues.RemoveAt(toRemoveIndex);
             }
         }

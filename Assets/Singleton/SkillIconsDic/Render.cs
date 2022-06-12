@@ -11,7 +11,7 @@ public partial class SkillIconsDic
             var skillConfig = SkillConfigTable.GetSkillConfig(skillId);
             // 图标可以是Sprite或其他格式，只要名字对上编号就可以
 
-            var sprite = Cach.LoadT<Sprite>(skillId);
+            var sprite = AddressablesLogic.LoadT<Sprite>(skillId);
             GameObject prefab;
             if (sprite != null)
             {

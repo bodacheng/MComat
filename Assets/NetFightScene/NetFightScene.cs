@@ -34,7 +34,7 @@ namespace FightScene
         
         public static NetFightScene target;
         
-        public ReactiveProperty<bool> LoadStageFinished { get; set; } = new ReactiveProperty<bool>(false);
+        public ReactiveProperty<bool> LoadStageFinished { get; set; } = new(false);
 
         public static FightInfo Fight;
 

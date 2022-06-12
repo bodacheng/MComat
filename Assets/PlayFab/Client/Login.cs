@@ -37,11 +37,6 @@ public partial class PlayFabReadClient
                 },
                 (x) =>
                 {
-                    Debug.Log(x);
-                    PlayerAccountInfo.Me = new PlayerAccountInfo
-                    {
-                        PlayFabUsername = x.PlayFabId
-                    };
                     AddUserNameAndPw(x.PlayFabId);
                     success.Invoke(x);
                 },
@@ -58,11 +53,6 @@ public partial class PlayFabReadClient
                 },
                 (x) =>
                 {
-                    Debug.Log(x);
-                    PlayerAccountInfo.Me = new PlayerAccountInfo
-                    {
-                        PlayFabUsername = x.PlayFabId
-                    };
                     AddUserNameAndPw(x.PlayFabId);
                     success.Invoke(x);
                 },
@@ -79,11 +69,6 @@ public partial class PlayFabReadClient
             },
             (x) =>
             {
-                Debug.Log(x);
-                PlayerAccountInfo.Me = new PlayerAccountInfo
-                {
-                    PlayFabUsername = x.PlayFabId
-                };
                 AddUserNameAndPw(x.PlayFabId);
                 success.Invoke(x);
             },

@@ -4,9 +4,16 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-public class Cach : MonoBehaviour
+public static class AddressablesLogic
 {
-    public IEnumerator GetWholeDownLoadSize(Action<string> Complete)
+    public static async void Essentials()
+    {
+        await HurtObjectManager.CheckExistedKey();
+        await EffectsManager.CheckExistedKey();
+        HurtObjectManager.ConstructDPool();
+    }
+    
+    public static IEnumerator GetWholeDownLoadSize(Action<string> Complete)
     {
         Caching.ClearCache();
         
@@ -42,11 +49,12 @@ public class Cach : MonoBehaviour
         
         void downLoadSize(string label, Action OnComplete)
         {
-            AsyncOperationHandle<long> getDownloadSize = Addressables.GetDownloadSizeAsync(label);
+            var getDownloadSize = Addressables.GetDownloadSizeAsync(label);
             getDownloadSize.Completed += (AsyncOperationHandle) =>
             {
                 wholeSize += AsyncOperationHandle.Result;
                 OnComplete.Invoke();
+                Addressables.Release(getDownloadSize);
             };
         }
         
@@ -56,11 +64,11 @@ public class Cach : MonoBehaviour
             yield return null;
         }
         
-        string warn = "Download size : " + wholeSize / 1024 + "MB" + "\n\n" + "Start to download";
+        var warn = "Download size : " + wholeSize / 1024 + "MB" + "\n\n" + "Start to download";
         Complete(warn);
     }
     
-    public IEnumerator ResourcePrepareProcess(Action complete, Action<string,float> progressUIRefresh)
+    public static IEnumerator ResourcePrepareProcess(Action complete, Action<string,float> progressUIRefresh)
     {
         Units.LoadMonstersConfig();
         SkillConfigTable.LoadAllSkillConfigs();
@@ -82,36 +90,34 @@ public class Cach : MonoBehaviour
         complete.Invoke();
     }
     
-    IEnumerator downLoadMission(string label, Action<string,float> progressUIRefresh)
+    static IEnumerator downLoadMission(string label, Action<string,float> progressUIRefresh)
     {
         // Clear all cached AssetBundles
         // WARNING: This will cause all asset bundles to be re-downloaded at startup every time and should not be used in a production game
         //Addressables.ClearDependencyCacheAsync(label);
         
         //Check the download size
-        AsyncOperationHandle<long> getDownloadSize = Addressables.GetDownloadSizeAsync(label);
+        var getDownloadSize = Addressables.GetDownloadSizeAsync(label);
         yield return getDownloadSize;
-        
-        Debug.Log(getDownloadSize.Status);
-        
         if (getDownloadSize.Result > 0)
         {
             Debug.Log("尝试开始下载："+label + " size: " + getDownloadSize.Result);
             var dl = Addressables.DownloadDependenciesAsync(label);
             dl.Completed += (asyncOperationHandle) =>
             {
+                Addressables.Release(dl);
             };
             while (dl.PercentComplete < 1 && !dl.IsDone)
             {
                 progressUIRefresh("Downloading "+ label + " asset", dl.PercentComplete);
                 yield return null;
             }
-            Addressables.Release(dl);
         }
         else
         {
             Debug.Log("没有get到远程？："+label + "："+ getDownloadSize.Result);
         }
+        Addressables.Release(getDownloadSize);
     }
 
     public static GameObject LoadObject(string prefabPathName)

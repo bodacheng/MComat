@@ -45,13 +45,13 @@ public class ElementStoneTagsGroup
         switch(SpLevel)
         {
             case 0:
-                return Cach.LoadObject("ButtonEffects/" + path + "/normal.prefab");
+                return AddressablesLogic.LoadObject("ButtonEffects/" + path + "/normal.prefab");
             case 1:
-                return Cach.LoadObject("ButtonEffects/" + path + "/EX1.prefab");
+                return AddressablesLogic.LoadObject("ButtonEffects/" + path + "/EX1.prefab");
             case 2:
-                return Cach.LoadObject("ButtonEffects/" + path + "/EX2.prefab");
+                return AddressablesLogic.LoadObject("ButtonEffects/" + path + "/EX2.prefab");
             case 3:
-                return Cach.LoadObject("ButtonEffects/" + path + "/EX3.prefab");
+                return AddressablesLogic.LoadObject("ButtonEffects/" + path + "/EX3.prefab");
         }
         return null;
     }
@@ -60,10 +60,10 @@ public class ElementStoneTagsGroup
     {
         var path = FightGlobalSetting.EffectPathDefine(element);
         
-        var triggerExplosion0 = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
-        var triggerExplosion1 = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion1.prefab");
-        var triggerExplosion2 = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion2.prefab");
-        var triggerExplosion3 = Cach.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion3.prefab");
+        var triggerExplosion0 = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
+        var triggerExplosion1 = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion1.prefab");
+        var triggerExplosion2 = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion2.prefab");
+        var triggerExplosion3 = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion3.prefab");
         
         triggerExplosion0.transform.SetParent(T);
         triggerExplosion1.transform.SetParent(T);

@@ -69,7 +69,7 @@ public partial class SingleThreadProcesser : MonoBehaviour
 
     public void RunFreely(IEnumerator _process)
     {
-        UniTask task = _process.ToUniTask(this);
+        var task = _process.ToUniTask(this);
         task.Forget();
     }
 }

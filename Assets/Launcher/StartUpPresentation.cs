@@ -6,14 +6,12 @@ using UnityEngine.UI;
 
 public class StartUpPresentation : MonoBehaviour
 {
-    public Starter Starter;
-    public RectTransform T;
-    
-    [SerializeField] Cach cach;
+    [SerializeField] Starter Starter;
+    [SerializeField] RectTransform T;
     
     void Start()
     {
-        StartCoroutine(cach.GetWholeDownLoadSize(DownLoadConfirm));
+        StartCoroutine(AddressablesLogic.GetWholeDownLoadSize(DownLoadConfirm));
     }
     
     [SerializeField] private TextMeshProUGUI ProgressMsg;
@@ -32,7 +30,7 @@ public class StartUpPresentation : MonoBehaviour
             ()=>
             {
                 progressBar.gameObject.SetActive(true);
-                StartCoroutine(cach.ResourcePrepareProcess(EnterGame, ProgressUIStateRefresh));
+                StartCoroutine(AddressablesLogic.ResourcePrepareProcess(EnterGame, ProgressUIStateRefresh));
             },
             () =>
             {
@@ -50,7 +48,7 @@ public class StartUpPresentation : MonoBehaviour
         }
         else
         {
-            Starter.BeginNetMode();
+            Starter.EnterFrontScene();
         }
     }
 }
