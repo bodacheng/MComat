@@ -1,49 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c85ff7e-9bb9-40ee-a548-74fae0617095" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MComat_android/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MComat_android/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Skill_Icon.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Skill_Icon.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Unit_Icon.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Unit_Icon.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementEffectsGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementEffectsGroup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementStoneTagsGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementStoneTagsGroup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cach.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cach/Cach.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Cach/Cach.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DATA_CENTER/Data_Center.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DATA_CENTER/Data_Center.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/TitleScreenLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/TitleScreenLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/UILayerLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/UILayerLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/HurtObjects/defaultmagic/d_hitbox.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/HurtObjects/defaultmagic/d_hitbox.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Skill_Icon/无标题 (12).tiff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Skill_Icon/无标题 (12).tiff.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightingProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightingProcess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/PreparingProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/PreparingProcess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightingSceneUISystem/HeroIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightingSceneUISystem/HeroIcon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Launcher/StartUpPresentation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Launcher/StartUpPresentation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NetFightScene/NetFightScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/NetFightScene/NetFightScene.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/Client/AddUsernamePassword.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/Client/AddUsernamePassword.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/Client/Login.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/Client/Login.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ResourceLoading/AnimationResourceLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ResourceLoading/AnimationResourceLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ResourceLoading/EffectsLoad/EffectsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ResourceLoading/EffectsLoad/EffectsManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ResourceLoading/HurtObjectLoad/HurtObjectManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ResourceLoading/HurtObjectLoad/HurtObjectManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/LoginLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/LoginLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TitleScreenLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TitleScreenLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Singleton/GeneralModelPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/GeneralModelPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Singleton/SkillIconsDic/Render.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/SkillIconsDic/Render.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Singleton/UnitIconDic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/UnitIconDic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Structure/SingleThreadProcesser/SingleThreadProcesser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Structure/SingleThreadProcesser/SingleThreadProcesser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/monsterbox/SkillStoneBoxTabEffectsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/monsterbox/SkillStoneBoxTabEffectsManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
-    </list>
+    <list default="true" id="7c85ff7e-9bb9-40ee-a548-74fae0617095" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -117,7 +75,7 @@
       <workItem from="1654667197833" duration="6224000" />
       <workItem from="1655009365809" duration="1250000" />
       <workItem from="1655018692095" duration="2738000" />
-      <workItem from="1655036550722" duration="6472000" />
+      <workItem from="1655036550722" duration="6779000" />
     </task>
     <servers />
   </component>
