@@ -99,8 +99,8 @@
      <Compile Include="Assets/UI/Shift - Complete Sci-Fi UI/Editor/InitShift.cs" />
      <Compile Include="Assets/TouchScript/Editor/Gestures/FlickGestureEditor.cs" />
      <Compile Include="Assets/RPGTALK/Scripts/Editor/Node Editor/Node_Editor_Framework-develop/Node_Editor/Utilities/ReflectionUtility.cs" />
-     <Compile Include="Assets/TouchScript/Editor/Gestures/TransformGestures/Base/TwoPointTransformGestureBaseEditor.cs" />
      <Compile Include="Assets/RPGTALK/Scripts/Editor/Node Editor/Node_Editor_Framework-develop/Node_Editor/Framework/SaveSystem/ImportExportFormat.cs" />
+     <Compile Include="Assets/TouchScript/Editor/Gestures/TransformGestures/Base/TwoPointTransformGestureBaseEditor.cs" />
      <Compile Include="Assets/TouchScript/Editor/Utils/PropertyDrawers/ToggleLeftDrawer.cs" />
      <Compile Include="Assets/RPGTALK/Scripts/Editor/Node Editor/RPGTalk Nodes/Nodes/RPGTalkSaveNode.cs" />
      <Compile Include="Assets/RPGTALK/Scripts/Editor/Node Editor/Node_Editor_Framework-develop/Node_Editor/Framework/Interface/NodeEditorInputControls.cs" />
@@ -1079,17 +1079,80 @@
      <Reference Include="Unity.VSCode.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.RenderPipelines.Universal.Shaders">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
-     </Reference>
      <Reference Include="UnityEngine.Purchasing">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Addressables">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Addressables.dll</HintPath>
      </Reference>
      <Reference Include="UnityEditor.CacheServer">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.CacheServer.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Addressables">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Addressables.dll</HintPath>
+     <Reference Include="Unity.Rider.Editor">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEngine.SpatialTracking">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Analytics.DataPrivacy">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ShaderGraph.Editor">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Mathematics.Editor">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEngine.Monetization">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Addressables.Editor">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Addressables.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.TextMeshPro">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.Core.Runtime">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ResourceManager">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.ResourceManager.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.PlasticSCM.Editor">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Mathematics">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Services.Core.Analytics">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Services.Core.Analytics.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEngine.Purchasing.SecurityCore">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityCore.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Services.Core.Environments">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Services.Core.Environments.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEngine.Purchasing.Stores">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Purchasing.Stores.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ScriptableBuildPipeline">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEditor.SpatialTracking">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
      </Reference>
      <Reference Include="Unity.TextMeshPro.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -1106,41 +1169,17 @@
      <Reference Include="UnityEditor.UI">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Rider.Editor">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
-     </Reference>
      <Reference Include="Analytics">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Analytics.dll</HintPath>
      </Reference>
-     <Reference Include="UnityEngine.SpatialTracking">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
-     </Reference>
      <Reference Include="UnityEngine.UI">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Analytics.DataPrivacy">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.ShaderGraph.Editor">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
      </Reference>
      <Reference Include="UnityEngine.Purchasing.Codeless">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Purchasing.Codeless.dll</HintPath>
      </Reference>
      <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Mathematics.Editor">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="UnityEngine.Monetization">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Addressables.Editor">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Addressables.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.2D.Tilemap.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
@@ -1157,35 +1196,17 @@
      <Reference Include="Unity.Timeline">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.TextMeshPro">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.Burst.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.2D.Sprite.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.RenderPipelines.Core.Runtime">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.ResourceManager">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.ResourceManager.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.Postprocessing.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.PlasticSCM.Editor">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.Services.Core">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Services.Core.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Mathematics">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Services.Core.Analytics">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Services.Core.Analytics.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Burst">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
@@ -1196,38 +1217,17 @@
      <Reference Include="Unity.RenderPipelines.Universal.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="UnityEngine.Purchasing.SecurityCore">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityCore.dll</HintPath>
-     </Reference>
      <Reference Include="UnityEngine.XR.LegacyInputHelpers">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Services.Core.Environments">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Services.Core.Environments.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.Timeline.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
-     </Reference>
-     <Reference Include="UnityEngine.Purchasing.Stores">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Purchasing.Stores.dll</HintPath>
-     </Reference>
-     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.ScriptableBuildPipeline">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.dll</HintPath>
      </Reference>
      <Reference Include="UnityEditor.Purchasing">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
      </Reference>
      <Reference Include="Unity.ScriptableBuildPipeline.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="UnityEditor.SpatialTracking">
-     <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
      </Reference>
      <Reference Include="UnityEngine.Advertisements.Editor">
      <HintPath>/Users/hakutaisei/MComat_android/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
@@ -1249,6 +1249,22 @@
       <Project>{85e3dfbe-282a-6ec0-039d-df4b19a71058}</Project>
       <Name>PlayFabSDKEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="UniTask.Addressables.csproj">
+      <Project>{4fae4e08-8237-7f53-4681-c60a5d26323d}</Project>
+      <Name>UniTask.Addressables</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.DOTween.csproj">
+      <Project>{630e56dd-2581-1375-ea49-6b4890a18a86}</Project>
+      <Name>UniTask.DOTween</Name>
+    </ProjectReference>
+    <ProjectReference Include="NoSuchLocalizationCore-Editor.csproj">
+      <Project>{882951a8-4d49-143d-0cb9-51ce383a2110}</Project>
+      <Name>NoSuchLocalizationCore-Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.csproj">
+      <Project>{0faac9b5-0e62-69cd-dd6d-ce131ddf4f4b}</Project>
+      <Name>UniTask</Name>
+    </ProjectReference>
     <ProjectReference Include="AppleAuth.Editor.csproj">
       <Project>{4b1d8cee-db8b-791c-1968-e7840611f263}</Project>
       <Name>AppleAuth.Editor</Name>
@@ -1256,10 +1272,6 @@
     <ProjectReference Include="UniTask.TextMeshPro.csproj">
       <Project>{523bc564-8840-3b55-d2ed-3ed1ed4058df}</Project>
       <Name>UniTask.TextMeshPro</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniTask.Addressables.csproj">
-      <Project>{4fae4e08-8237-7f53-4681-c60a5d26323d}</Project>
-      <Name>UniTask.Addressables</Name>
     </ProjectReference>
     <ProjectReference Include="NoSuchLocalizationCore.csproj">
       <Project>{344be7e6-b996-15ff-bb8f-d454bd1f5019}</Project>
@@ -1273,10 +1285,6 @@
       <Project>{52cd54cf-a6fd-3561-aeaf-0d04da1943a8}</Project>
       <Name>PlayFab</Name>
     </ProjectReference>
-    <ProjectReference Include="UniTask.DOTween.csproj">
-      <Project>{630e56dd-2581-1375-ea49-6b4890a18a86}</Project>
-      <Name>UniTask.DOTween</Name>
-    </ProjectReference>
     <ProjectReference Include="UniTask.Linq.csproj">
       <Project>{f7337084-b769-db8f-6db1-efbdca501433}</Project>
       <Name>UniTask.Linq</Name>
@@ -1284,14 +1292,6 @@
     <ProjectReference Include="UniRx.csproj">
       <Project>{91b033c6-10a1-938f-0ff0-6aeb81d45caf}</Project>
       <Name>UniRx</Name>
-    </ProjectReference>
-    <ProjectReference Include="NoSuchLocalizationCore-Editor.csproj">
-      <Project>{882951a8-4d49-143d-0cb9-51ce383a2110}</Project>
-      <Name>NoSuchLocalizationCore-Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniTask.csproj">
-      <Project>{0faac9b5-0e62-69cd-dd6d-ce131ddf4f4b}</Project>
-      <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="AppleAuth.csproj">
       <Project>{30ff7479-1e76-2ac2-59eb-00679bae52b4}</Project>

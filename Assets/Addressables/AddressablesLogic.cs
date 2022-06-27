@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -13,179 +13,116 @@ public static class AddressablesLogic
         HurtObjectManager.ConstructDPool();
     }
     
-    public static IEnumerator GetWholeDownLoadSize(Action<string> Complete)
+    static async UniTask downLoadSize(string label, long size)
     {
-        Caching.ClearCache();
-        
-        long wholeSize = 0;
-
-        bool basic_anim = false;
-        bool skill_anim = false;
-        bool hurt_anim = false;
-        bool knock_anim = false;
-        bool unit = false;
-        bool weapon = false;
-        bool effect = false;
-        bool quest = false;
-        bool skill_icon = false;
-        bool unit_icon = false;
-        bool battle_ground = false;
-        bool icon_frame = false;
-        bool btn_effect = false;
-        
-        downLoadSize("basic_anim", () => { basic_anim = true; });
-        downLoadSize("skill_anim", () => { skill_anim = true; });
-        downLoadSize("hurt_anim",() => { hurt_anim = true; });
-        downLoadSize("knock_anim",() => { knock_anim = true; });
-        downLoadSize("unit",() => { unit = true; });
-        downLoadSize("weapon",() => { weapon = true; });
-        downLoadSize("effect",() => { effect = true; });
-        downLoadSize("quest", () => { quest = true; });
-        downLoadSize("skill_icon", () => { skill_icon = true; });
-        downLoadSize("unit_icon", () => { unit_icon = true; });
-        downLoadSize("battle_ground", () => { battle_ground = true; });
-        downLoadSize("icon_frame", () => { icon_frame = true; });
-        downLoadSize("btn_effect", () => { btn_effect = true; });
-        
-        void downLoadSize(string label, Action OnComplete)
+        var dl = Addressables.GetDownloadSizeAsync(label);
+        while (!dl.IsDone)
         {
-            var getDownloadSize = Addressables.GetDownloadSizeAsync(label);
-            getDownloadSize.Completed += (AsyncOperationHandle) =>
-            {
-                wholeSize += AsyncOperationHandle.Result;
-                OnComplete.Invoke();
-                Addressables.Release(getDownloadSize);
-            };
+            await UniTask.DelayFrame(1);
         }
-        
-        while (!(basic_anim && skill_anim && hurt_anim && knock_anim && unit && weapon && effect && quest && skill_icon && unit_icon && battle_ground && icon_frame && btn_effect))
+        if (dl.Status == AsyncOperationStatus.Succeeded)
         {
-            Debug.Log("正在计算下载文件总大小");
-            yield return null;
+            size += dl.Result;
         }
-        
-        var warn = "Download size : " + wholeSize / 1024 + "MB" + "\n\n" + "Start to download";
-        Complete(warn);
+        Addressables.Release(dl);
     }
     
-    public static IEnumerator ResourcePrepareProcess(Action complete, Action<string,float> progressUIRefresh)
-    {
-        Units.LoadMonstersConfig();
-        SkillConfigTable.LoadAllSkillConfigs();
-        
-        yield return downLoadMission("basic_anim", progressUIRefresh);
-        yield return downLoadMission("skill_anim", progressUIRefresh);
-        yield return downLoadMission("hurt_anim", progressUIRefresh);
-        yield return downLoadMission("knock_anim", progressUIRefresh);
-        yield return downLoadMission("unit", progressUIRefresh);
-        yield return downLoadMission("weapon", progressUIRefresh);
-        yield return downLoadMission("effect", progressUIRefresh);
-        yield return downLoadMission("quest", progressUIRefresh);
-        yield return downLoadMission("skill_icon", progressUIRefresh);
-        yield return downLoadMission("unit_icon", progressUIRefresh);
-        yield return downLoadMission("battle_ground", progressUIRefresh);
-        yield return downLoadMission("icon_frame", progressUIRefresh);
-        yield return downLoadMission("btn_effect", progressUIRefresh);
-        
-        complete.Invoke();
-    }
-    
-    static IEnumerator downLoadMission(string label, Action<string,float> progressUIRefresh)
+    static async UniTask downLoadMission(string label, Action<string,float> progressUIRefresh)
     {
         // Clear all cached AssetBundles
         // WARNING: This will cause all asset bundles to be re-downloaded at startup every time and should not be used in a production game
         //Addressables.ClearDependencyCacheAsync(label);
         
         //Check the download size
-        var getDownloadSize = Addressables.GetDownloadSizeAsync(label);
-        yield return getDownloadSize;
-        if (getDownloadSize.Result > 0)
+        var dl = Addressables.DownloadDependenciesAsync(label);
+        while (!dl.IsDone)
         {
-            Debug.Log("尝试开始下载："+label + " size: " + getDownloadSize.Result);
-            var dl = Addressables.DownloadDependenciesAsync(label);
-            dl.Completed += (asyncOperationHandle) =>
-            {
-                Addressables.Release(dl);
-            };
-            while (dl.PercentComplete < 1 && !dl.IsDone)
-            {
-                progressUIRefresh("Downloading "+ label + " asset", dl.PercentComplete);
-                yield return null;
-            }
+            progressUIRefresh("Downloading "+ label + " asset", dl.GetDownloadStatus().Percent);
+            await UniTask.DelayFrame(1);
         }
-        else
-        {
-            Debug.Log("没有get到远程？："+label + "："+ getDownloadSize.Result);
-        }
-        Addressables.Release(getDownloadSize);
+        Addressables.Release(dl);
     }
-
+    
+    public static async UniTask GetWholeDownLoadSize(Action<string> Complete)
+    {
+        Caching.ClearCache();
+        
+        long wholeSize = 0;
+        
+        await downLoadSize("basic_anim", wholeSize);
+        await downLoadSize("skill_anim", wholeSize);
+        await downLoadSize("hurt_anim", wholeSize);
+        await downLoadSize("knock_anim", wholeSize);
+        await downLoadSize("unit", wholeSize);
+        await downLoadSize("weapon", wholeSize);
+        await downLoadSize("effect", wholeSize);
+        await downLoadSize("quest", wholeSize);
+        await downLoadSize("skill_icon", wholeSize);
+        await downLoadSize("unit_icon", wholeSize);
+        await downLoadSize("battle_ground", wholeSize);
+        await downLoadSize("icon_frame", wholeSize);
+        await downLoadSize("btn_effect", wholeSize);
+        
+        var warn = "Download size : " + wholeSize / 1024 + "MB" + "\n\n" + "Start to download";
+        Complete(warn);
+    }
+    
+    public static async UniTask ResourcePrepareProcess(Action complete, Action<string,float> progressUIRefresh)
+    {
+        Units.LoadMonstersConfig();
+        SkillConfigTable.LoadAllSkillConfigs();
+        
+        await downLoadMission("basic_anim", progressUIRefresh);
+        await downLoadMission("skill_anim", progressUIRefresh);
+        await downLoadMission("hurt_anim", progressUIRefresh);
+        await downLoadMission("knock_anim", progressUIRefresh);
+        await downLoadMission("unit", progressUIRefresh);
+        await downLoadMission("weapon", progressUIRefresh);
+        await downLoadMission("effect", progressUIRefresh);
+        await downLoadMission("quest", progressUIRefresh);
+        await downLoadMission("skill_icon", progressUIRefresh);
+        await downLoadMission("unit_icon", progressUIRefresh);
+        await downLoadMission("battle_ground", progressUIRefresh);
+        await downLoadMission("icon_frame", progressUIRefresh);
+        await downLoadMission("btn_effect", progressUIRefresh);
+        
+        complete.Invoke();
+    }
+    
     public static GameObject LoadObject(string prefabPathName)
     {
-        try
-        {
-            var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
-            var prefab = op.WaitForCompletion();
-            var _object = GameObject.Instantiate(prefab);
-            Addressables.Release(op);
-            return _object;
-        }
-        catch (Exception e)
-        {
-            Debug.Log("包读取错误："+ e);
-            return null;
-        }
+        var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
+        var prefab = op.WaitForCompletion();
+        var _object = GameObject.Instantiate(prefab);
+        Addressables.Release(op);
+        return _object;
     }
     
     public static GameObject LoadPrefab(string prefabPathName)
     {
-        try
-        {
-            var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
-            var prefab = op.WaitForCompletion();
-            Addressables.Release(op);
-            return prefab;
-        }
-        catch (Exception e)
-        {
-            Debug.Log("包读取错误："+ e);
-            return null;
-        }
+        var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
+        var prefab = op.WaitForCompletion();
+        Addressables.Release(op);
+        return prefab;
     }
     
     public static T LoadTOnObject<T>(string prefabPathName)
     {
         T returnValue = default;
-        try
-        {
-            var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
-            var prefab = op.WaitForCompletion();
-            var _object = GameObject.Instantiate(prefab);
-            Addressables.Release(op);
-            returnValue = _object.GetComponent<T>();
-            return returnValue;
-        }
-        catch (Exception e)
-        {
-            Debug.Log("包读取错误："+ e);
-            return returnValue;
-        }
+        var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
+        var prefab = op.WaitForCompletion();
+        var _object = GameObject.Instantiate(prefab);
+        Addressables.Release(op);
+        returnValue = _object.GetComponent<T>();
+        return returnValue;
     }
     
     public static T LoadT<T>(string prefabPathName)
     {
         T prefab = default;
-        try
-        {
-            var op = Addressables.LoadAssetAsync<T>(prefabPathName);
-            prefab = op.WaitForCompletion();
-            Addressables.Release(op);
-            return prefab;
-        }
-        catch (Exception e)
-        {
-            Debug.Log("包读取错误："+ e);
-            return prefab;
-        }
+        var op = Addressables.LoadAssetAsync<T>(prefabPathName);
+        prefab = op.WaitForCompletion();
+        Addressables.Release(op);
+        return prefab;
     }
 }

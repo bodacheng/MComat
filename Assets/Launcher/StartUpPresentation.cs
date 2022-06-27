@@ -1,7 +1,7 @@
 ﻿using System.Collections;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class StartUpPresentation : MonoBehaviour
@@ -11,7 +11,7 @@ public class StartUpPresentation : MonoBehaviour
     
     void Start()
     {
-        StartCoroutine(AddressablesLogic.GetWholeDownLoadSize(DownLoadConfirm));
+        AddressablesLogic.GetWholeDownLoadSize(DownLoadConfirm).Forget();
     }
     
     [SerializeField] private TextMeshProUGUI ProgressMsg;
@@ -27,10 +27,10 @@ public class StartUpPresentation : MonoBehaviour
     {
         var popupLayer = PopupLayer.Open(T.gameObject);
         popupLayer.ArrangeConfirmWindow(
-            ()=>
+            async ()=>
             {
                 progressBar.gameObject.SetActive(true);
-                StartCoroutine(AddressablesLogic.ResourcePrepareProcess(EnterGame, ProgressUIStateRefresh));
+                await AddressablesLogic.ResourcePrepareProcess(EnterGame, ProgressUIStateRefresh);
             },
             () =>
             {

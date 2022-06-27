@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UniRx;
 using UnityEngine.Playables;
 using System.Collections.Generic;
-using DummyLayerSystem;
 using mainMenu;
 using UnityEngine.SceneManagement;
-using Log;
 
 namespace FightScene
 {
