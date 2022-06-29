@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+  <dict>
+    <key>Bundle identifier</key>
+    <string>jp.cocone.pokepia</string>
+    <key>destination</key>
+    <string>export</string>
+    <key>method</key>
+    <string>app-store</string>
+    <key>provisioningProfiles</key>
+    <dict>
+      <key>jp.cocone.pokepia</key>
+      <string>DISTPokepia</string>
+      <key>jp.cocone.pokepia.notification</key>
+      <string>DISTPokepiaNotification</string>
+    </dict>
+    <key>signingCertificate</key>
+    <string>iPhone Distribution</string>
+    <key>signingStyle</key>
+    <string>manual</string>
+    <key>stripSwiftSymbols</key>
+    <true />
+    <key>teamID</key>
+    <string>3YUQP9P6XE</string>
+    <key>thinning</key>
+    <string>&lt;thin-for-all-variants&gt;</string>
+    <key>Bundle name</key>
+    <string>pokepia</string>
+  </dict>
+</plist>
+

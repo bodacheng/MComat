@@ -1,0 +1,12 @@
+ProfileDev: P3Dev
+BuildDev: ServerData/dev/
+UploadDev: s3://p3-alpha-coconeimg-jp/asset/dev
+ProfileRelease: P3Release
+BuildRelease: ServerData/release/
+UploadRelease: s3://p3-coconeimg-jp/asset
+ProfileTest: P3Test
+BuildTest: ServerData/test/
+UploadTest: s3://p3-alpha-coconeimg-jp/asset/test
+ProfileBeta: P3Beta
+BuildBeta: ServerData/beta/
+UploadBeta: s3://p3-alpha-coconeimg-jp/asset/beta

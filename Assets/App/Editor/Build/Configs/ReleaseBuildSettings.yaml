@@ -1,0 +1,12 @@
+applicationIdentifier: jp.cocone.pokepia
+productName: pokepia
+cfBundleName: pokepia
+cfBundleExecutableName: pokepia
+appDisplayName: ポケピア
+keystoreName: Assets/App/Editor/Build/Configs/Android/pokepia.keystore
+keyaliasName: pokepia
+vivoxServer: https://mt1p.www.vivox.com/api2
+vivoxDomain: mt1p.vivox.com
+vivoxTokenIssuer: cocone4300-po72
+vivoxTokenKey: rtmFwhZjst86fviK0q6WmvV703YmMZpz
+addDefineSymbols: [NO_DEBUG]

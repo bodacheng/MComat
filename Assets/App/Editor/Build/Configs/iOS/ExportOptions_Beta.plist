@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+  <dict>
+    <key>Bundle identifier</key>
+    <string>jp.coconeenterprise.pokepiabeta</string>
+    <key>destination</key>
+    <string>export</string>
+    <key>method</key>
+    <string>enterprise</string>
+    <key>provisioningProfiles</key>
+    <dict>
+      <key>jp.coconeenterprise.pokepiabeta</key>
+      <string>EnterprisePokepiaBetaDistribution</string>
+      <key>jp.coconeenterprise.pokepiabeta.notification</key>
+      <string>EnterprisePokepiaBetaNotificationDistribution</string>
+    </dict>
+    <key>signingCertificate</key>
+    <string>Apple Distribution</string>
+    <key>signingStyle</key>
+    <string>manual</string>
+    <key>stripSwiftSymbols</key>
+    <true />
+    <key>teamID</key>
+    <string>87F58Y36R8</string>
+    <key>thinning</key>
+    <string>&lt;thin-for-all-variants&gt;</string>
+    <key>Bundle name</key>
+    <string>pokepiaBeta</string>
+  </dict>
+</plist>
+
