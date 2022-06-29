@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DevAccountEmail: hakuforwork@gmail.com
   DevAccountToken: u6spjxmjf7hdjx9a4cr4g9ysaqgjujo3u591gqd7dcbsid3irb4hhbcbemkismicd14pbbfx3kyyxq8w3dy11ak5e9zqcxzb8rz34gquof9yryyeh9g6ajgoi9mfggpft56kyxpx1n8zq4f43d96pmjx9ew454cbadrawkjpqddd5f8c5m7ikd16ep9p3tjys9d6b5c1
-  SelectedStudio: 
+  SelectedStudio: TEST
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 0
+  curMainMenuIdx: 1
   curSubMenuIdx: 0
