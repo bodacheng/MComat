@@ -2,11 +2,13 @@
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
-using DG.DemiEditor;
+//using DG.DemiEditor;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEditor.Callbacks;
+using UnityEditor.iOS.Xcode;
+using UnityEditor.iOS.Xcode.Extensions;
 #if UNITY_IOS
 using UnityEditor.iOS.Xcode;
 using UnityEditor.iOS.Xcode.Extensions;
@@ -345,12 +347,6 @@ namespace Cocone.ProjectP3
 				}
 			}
 			
-			var buildKind = GetBuildKind(config.buildKind);
-			
-			// 本番向けにはタイトルシーンで始まるようにする
-			var sceneType = (buildKind == PlayerBuildConfig.BuildKind.Release && !config.forceTestLogin) ? SceneType.Title : SceneType.TestLogin;
-			ConfigurationSetter.SetConfigurationValues(config.buildNumber, sceneType);
-
 			// configの設定
 			playerBuildConfig = config;
 			var report = Build(config);
@@ -436,10 +432,7 @@ namespace Cocone.ProjectP3
 		{
 			// Yamlの読み込みと設定
 			SetPlayerSettingsByBuildConfiguration(GetBuildKind(config.buildKind), config.buildTarget, config.TargetGroup);
-
-			// set vivox setting
-			ConfigurationSetter.SetVivoxSetting(BuildConfigurations.vivoxServer, BuildConfigurations.vivoxDomain, BuildConfigurations.vivoxTokenIssuer, BuildConfigurations.vivoxTokenKey);
-
+			
 			// AppCenterの設定を環境で変更する
 			ConfigurationSetter.SetAppCenterParam(GetBuildKind(config.buildKind) != PlayerBuildConfig.BuildKind.Release);
 
