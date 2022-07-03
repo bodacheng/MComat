@@ -8,7 +8,7 @@ namespace Cocone.ProjectP3
      */
     public static class ConfigurationSetter
     {
-        private const string appCenterAssetPath = "Assets/Plugins/AppCenter/AppCenterSettings.asset";
+        private const string appCenterAssetPath = "Assets/AppCenter/AppCenterSettings.asset";
 
         
         /// <summary>

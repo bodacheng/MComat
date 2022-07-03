@@ -83,7 +83,7 @@ namespace Cocone.ProjectP3
 
 	public static class Client
 	{
-		private const string AndroidManifestPath = "Assets/Plugins/Android/AndroidManifest.xml";
+		private const string AndroidManifestPath = "Assets/AndroidManifest.xml";
 
 		/**
 		 * ビルド種別の取得
