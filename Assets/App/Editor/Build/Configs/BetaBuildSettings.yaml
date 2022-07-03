@@ -1,11 +1,5 @@
-applicationIdentifier: jp.coconeenterprise.pokepiabeta
-productName: pokepia_β
-cfBundleName: pokepiaBeta
-cfBundleExecutableName: pokepiaBeta
-appDisplayName: ポケピアβ
-vivoxServer: https://mt1s.www.vivox.com/api2
-vivoxDomain: mt1s.vivox.com
-vivoxTokenIssuer: cocone4300-po72-dev
-vivoxTokenKey: mojo975
-# テスト的に書き方の例を記載しています。本運用時に修正してください。
-#addDefineSymbols: [TEST,TEST2]
+applicationIdentifier: BO
+productName: mcombatB
+cfBundleName: mcombatB
+cfBundleExecutableName: mcombatB
+appDisplayName: mcombatβ
