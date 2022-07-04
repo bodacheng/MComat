@@ -351,7 +351,7 @@ namespace Cocone.ProjectP3
 			playerBuildConfig = config;
 			var report = Build(config);
 			
-			EditorApplication.Exit(report.summary.result == BuildResult.Succeeded ? 0 : 1);
+			//EditorApplication.Exit(report.summary.result == BuildResult.Succeeded ? 0 : 1);
 		}
 
 		/**
@@ -359,13 +359,6 @@ namespace Cocone.ProjectP3
 		 */
 		private static string[] GetTargetScenes(PlayerBuildConfig.BuildKind kind, bool forceTestLogin)
 		{
-			// Releaseの場合テストシーンは抜く
-			if (kind == PlayerBuildConfig.BuildKind.Release && !forceTestLogin)
-			{
-				var scenes = EditorBuildSettings.scenes.Where(x => !x.path.StartsWith("Assets/App/Scenes/Test"));
-				return scenes.Select(x=>x.path).ToArray();
-			}
-
 			return EditorBuildSettings.scenes.Select(x => x.path).ToArray();
 		}
 		
@@ -471,7 +464,7 @@ namespace Cocone.ProjectP3
 				// ビルド番号を付与
 				PlayerSettings.Android.bundleVersionCode = config.buildNumber;
 				
-				if (config.uploadToStore)
+				//if (config.uploadToStore)
 				{
 					PlayerSettings.Android.useCustomKeystore = true;
 					if (!string.IsNullOrEmpty(BuildConfigurations.keystoreName))

@@ -3,3 +3,5 @@ productName: MCombat
 cfBundleName: mcombatDev
 cfBundleExecutableName: mcombatDev
 appDisplayName: MCombatDev
+keystoreName: Assets/App/Editor/Build/Configs/Android/mcombat.keystore
+keyaliasName: mcombat
