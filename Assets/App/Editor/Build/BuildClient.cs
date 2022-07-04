@@ -233,6 +233,8 @@ namespace Cocone.ProjectP3
 				"-BuildNumber", build_id,
 				"-OutputPath", output_path,
 				"-buildKind", "Dev",
+				"-keystorePass", "890710gxY", // TODO:unityから入力させたい
+				"-keyaliasPass", "890710gxY", // TODO:unityから入力させたい
 				"-androidArchitectures", "ARMv7;ARMv7;Arm64",
 			};
 
@@ -257,8 +259,8 @@ namespace Cocone.ProjectP3
 				"-BuildNumber", build_id,
 				"-OutputPath", output_path,
 				"-buildKind", "Release",
-				"-keystorePass", "", // TODO:unityから入力させたい
-				"-keyaliasPass", "", // TODO:unityから入力させたい
+				"-keystorePass", "890710gxY", // TODO:unityから入力させたい
+				"-keyaliasPass", "890710gxY", // TODO:unityから入力させたい
 				"-androidArchitectures", "ARMv7;ARM64",
 			};
 
@@ -374,6 +376,8 @@ namespace Cocone.ProjectP3
 			// PlayerSettingsの設定
 			if (BuildConfigurations != null)
 			{
+				Debug.Log("BuildConfigurations.applicationIdentifier:"+ BuildConfigurations.applicationIdentifier);
+				
 				if (!string.IsNullOrEmpty(BuildConfigurations.applicationIdentifier))
 				{
 					PlayerSettings.SetApplicationIdentifier(group, BuildConfigurations.applicationIdentifier);	
@@ -476,6 +480,11 @@ namespace Cocone.ProjectP3
 					{
 						PlayerSettings.Android.keyaliasName = BuildConfigurations.keyaliasName;
 					}
+					
+					Debug.Log("PlayerSettings.Android.keystorePass :" + config.keystorePass);
+					Debug.Log("PlayerSettings.Android.keyaliasPass :" + config.keyaliasPass);
+					Debug.Log("PlayerSettings.Android.keystoreName :" + BuildConfigurations.keystoreName);
+					Debug.Log("PlayerSettings.Android.keyaliasName :" + BuildConfigurations.keyaliasName);
 					
 					PlayerSettings.Android.keystorePass = config.keystorePass;
 					PlayerSettings.Android.keyaliasPass = config.keyaliasPass;
