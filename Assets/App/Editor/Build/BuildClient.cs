@@ -353,7 +353,7 @@ namespace Cocone.ProjectP3
 			playerBuildConfig = config;
 			var report = Build(config);
 			
-			//EditorApplication.Exit(report.summary.result == BuildResult.Succeeded ? 0 : 1);
+			EditorApplication.Exit(report.summary.result == BuildResult.Succeeded ? 0 : 1);
 		}
 
 		/**
