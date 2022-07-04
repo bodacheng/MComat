@@ -292,11 +292,13 @@ namespace Cocone.ProjectP3
 				{
 					case "-BuildNumber":
 						config.buildNumber = int.Parse(args[i + 1]);
+						Debug.Log("伯buildNumber"+config.buildNumber);
 						i++;
 						break;
 
 					case "-OutputPath":
 						config.outputDirectory = args[i + 1];
+						Debug.Log("伯outputDirectory"+config.outputDirectory);
 						i++;
 						break;
 
@@ -315,11 +317,13 @@ namespace Cocone.ProjectP3
 
 					case "-keystorePass":
 						config.keystorePass = args[i + 1];
+						Debug.Log("伯keystorePass"+config.keystorePass);
 						i++;
 						break;
 					
 					case "-keyaliasPass":
 						config.keyaliasPass = args[i + 1];
+						Debug.Log("伯keyaliasPass"+config.keyaliasPass);
 						i++;
 						break;
 
@@ -327,10 +331,15 @@ namespace Cocone.ProjectP3
 						config.androidArchitectures = new HashSet<AndroidArchitecture>();
 						
 						var architectures = args[i + 1].Split(';');
+						
+						Debug.Log("伯"+architectures);
+						
 						foreach (var architecture in architectures)
 						{
+							Debug.Log("伯architecture:+"+architecture);
 							if (Enum.TryParse<AndroidArchitecture>(architecture, out var androidArchitecture))
 							{
+								Debug.Log("伯 architecture:+"+androidArchitecture);
 								config.androidArchitectures.Add(androidArchitecture);
 							}
 						}
@@ -340,6 +349,7 @@ namespace Cocone.ProjectP3
 					
 					case "-buildKind":
 						config.buildKind = args[i + 1];
+						Debug.Log("伯buildKind"+config.buildKind);
 						i++;
 						break;
 					
