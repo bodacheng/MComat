@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 #if UNITY_EDITOR
-using System.IO;
 using UnityEditor;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.Build.Pipeline.Utilities;
@@ -19,23 +17,11 @@ namespace Cocone.ProjectP3
             string[] args = System.Environment.GetCommandLineArgs();
             BatchBuildInternal(args);
         }
-
-        public static bool IsItemGroup(AddressableAssetGroup group)
-        {
-            var groupName = group.Name;
-            if (groupName.Length != 10) return false;
-            var category = groupName[0];
-            var theme = groupName[1];
-            if (category != 'F' && category != 'I' && category != 'P') return false;
-            if (theme != 'G' && theme != 'N') return false;
-            return true;
-        }
-
+        
         private static void BatchBuildInternal(string[] args)
         {
             // 引数取得
             string assetProfile = "P3Dev";
-            bool useReleaseList = false;
             BuildTarget buildTarget = BuildTarget.iOS;
             BuildTargetGroup buildTargetGroup = BuildTargetGroup.iOS;
             for (int i = 0; i < args.Length; i++)
@@ -56,36 +42,18 @@ namespace Cocone.ProjectP3
                         assetProfile = args[i + 1];
                         i++;
                         break;
-
-                    case "-useReleaseList":
-                        useReleaseList = true;
-                        break;
                 }
             }
 
             var settings = GetSettings();
             var profileId = settings.profileSettings.GetProfileId(assetProfile);
             settings.activeProfileId = profileId;
-
-            if (useReleaseList)
-            {
-                var path = $"Assets/ExternalAssets/ReleaseTheme.yaml";
-                if (File.Exists(path))
-                {
-                    var themeList = ReleaseThemeList.Deserialize(path);
-                    var itemGroupList = settings.groups.Where(IsItemGroup).ToList();
-                    itemGroupList.ForEach(x =>
-                    {
-                        if (!themeList.IsReleasedItem(x.Name)) settings.RemoveGroup(x);
-                    });
-                }
-            }
-
+            
             // save addressable setting
             EditorUtility.SetDirty(settings);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-
+            
             CleanBuild(); // TODO: TargetPlatform設定は要らない？
         }
 
