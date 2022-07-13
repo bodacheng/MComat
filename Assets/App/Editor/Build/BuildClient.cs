@@ -12,7 +12,6 @@ using UnityEditor.iOS.Xcode.Extensions;
 #if UNITY_IOS
 using UnityEditor.iOS.Xcode;
 using UnityEditor.iOS.Xcode.Extensions;
-using Flour;
 
 
 #endif
@@ -703,7 +702,7 @@ namespace Cocone.ProjectP3
 				// iOS14対応
 				if (plist.root.values.TryGetValue("NSUserTrackingUsageDescription", out var attString))
 				{
-					if (!attString.AsString().IsNullOrEmpty())
+					if (!String.IsNullOrEmpty((attString.AsString())))
 					{
 						project.AddFrameworkToProject(frameworkTargetGuid, "AppTrackingTransparency.framework", true);
 						project.AddFrameworkToProject(frameworkTargetGuid, "AdSupport.framework", true);
