@@ -33,6 +33,8 @@ public class FightingStepLayer : UILayer
     public static void Close()
     {
         var layer = Get();
+        if (layer == null)
+            return;
         layer.InputsManager.FocusUnit(null);
         layer.InputsManager.Clear();
         layer.team1UI.Clear();
