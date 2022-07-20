@@ -38,7 +38,6 @@ ExportedObj/
 #*.pdb
 *.opendb
 *.VC.db
-*.unitypackage
 
 # Unity3D generated file on crash reports
 sysinfo.txt
