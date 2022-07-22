@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Triggers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -94,16 +96,32 @@ public static class AddressablesLogic
         var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
         var prefab = op.WaitForCompletion();
         var _object = GameObject.Instantiate(prefab);
-        Addressables.Release(op);
+        _object.AddOnDestroyCallback( () =>
+        {
+            Debug.Log("释放："+prefabPathName);
+            Addressables.Release(op);
+        });
         return _object;
     }
+
+
+    private static readonly List<AsyncOperationHandle> loadingHandlerList = new List<AsyncOperationHandle>();
     
-    public static GameObject LoadPrefab(string prefabPathName)
+    public static T LoadT<T>(string prefabPathName)
     {
-        var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
-        var prefab = op.WaitForCompletion();
-        Addressables.Release(op);
-        return prefab;
+        var op = Addressables.LoadAssetAsync<T>(prefabPathName);
+        var target = op.WaitForCompletion();
+        loadingHandlerList.Add(op);
+        return target;
+    }
+
+    public static void ReleaseAsyncOperationHandles()
+    {
+        foreach (var handle in loadingHandlerList)
+        {
+            Addressables.Release(handle);
+        }
+        loadingHandlerList.Clear();
     }
     
     public static T LoadTOnObject<T>(string prefabPathName)
@@ -112,17 +130,12 @@ public static class AddressablesLogic
         var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
         var prefab = op.WaitForCompletion();
         var _object = GameObject.Instantiate(prefab);
-        Addressables.Release(op);
+        _object.AddOnDestroyCallback( () =>
+        {
+            Debug.Log("释放："+prefabPathName);
+            Addressables.Release(op);
+        });
         returnValue = _object.GetComponent<T>();
         return returnValue;
-    }
-    
-    public static T LoadT<T>(string prefabPathName)
-    {
-        T prefab = default;
-        var op = Addressables.LoadAssetAsync<T>(prefabPathName);
-        prefab = op.WaitForCompletion();
-        Addressables.Release(op);
-        return prefab;
     }
 }

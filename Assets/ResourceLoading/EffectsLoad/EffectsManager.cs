@@ -35,7 +35,7 @@ public static class EffectsManager
         Addressables.Release(locationHandle);
     }
     
-    static GameObject TryLoadEffect(string key)
+    static GameObject TryLoadEffectPrefab(string key)
     {
         if (!keyExists.Contains(key))
         {
@@ -43,7 +43,7 @@ public static class EffectsManager
         }
         else
         {
-            var returnValue = AddressablesLogic.LoadPrefab(key);
+            var returnValue = AddressablesLogic.LoadT<GameObject>(key);
             return returnValue;
         }
     }
@@ -110,7 +110,7 @@ public static class EffectsManager
                     return EffectPool;
             }
             
-            var EffectPrefab = TryLoadEffect("Effects/" + EffectsPath + "/" + resource_name + ".prefab");
+            var EffectPrefab = TryLoadEffectPrefab("Effects/" + EffectsPath + "/" + resource_name + ".prefab");
             if (EffectPrefab != null)
             {
                 EffectPool = ConstructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects/" + EffectsPath + "/" + resource_name,object_count);

@@ -62,6 +62,8 @@ namespace mainMenu
 
         void Start()
         {
+            AddressablesLogic.ReleaseAsyncOperationHandles();
+            
             Screen.SetResolution(1920, 1080, true);
             UILayerLoader.Clear();
             AppSetting.bgmSource = audioSource;

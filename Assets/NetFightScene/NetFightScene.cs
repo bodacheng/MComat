@@ -42,6 +42,8 @@ namespace FightScene
         
         void Start()
         {
+            AddressablesLogic.ReleaseAsyncOperationHandles();
+            
             PopupLayer.DarkOff(T.gameObject, 1, 0);
             Time.timeScale = 1;
             if (Fight == null)

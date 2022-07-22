@@ -42,7 +42,7 @@ public static class HurtObjectManager
         }
         else
         {
-            var returnValue = AddressablesLogic.LoadPrefab(key);
+            var returnValue = AddressablesLogic.LoadT<GameObject>(key);
             return returnValue;
         }
     }
@@ -81,7 +81,7 @@ public static class HurtObjectManager
     public static void ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Element element)
     {
         DecompositionerPool poolToConstruct;
-        GameObject hurtObject = null;
+        GameObject weaponPrefab = null;
         
         /////////////// 第一环节 : 搜索个性魔法//////////////////
         if (MagicForwardPath != null)
@@ -95,12 +95,12 @@ public static class HurtObjectManager
                 }
             }
             
-            hurtObject = TryLoadWeaponPrefab("HurtObjects/" + MagicForwardPath + "/" + resource_name + ".prefab");
+            weaponPrefab = TryLoadWeaponPrefab("HurtObjects/" + MagicForwardPath + "/" + resource_name + ".prefab");
             
-            if (hurtObject != null)
+            if (weaponPrefab != null)
             {
-                poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(hurtObject, MagicForwardPath + "/" + resource_name, FightGlobalSetting._HurtObjectPreLoadCount);
-                var decomposition = hurtObject.GetComponent<Decompositioner>();
+                poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, MagicForwardPath + "/" + resource_name, FightGlobalSetting._HurtObjectPreLoadCount);
+                var decomposition = weaponPrefab.GetComponent<Decompositioner>();
                 if (decomposition != null)
                 {
                     if (decomposition.Attachments != null && decomposition.Attachments.Length > 0)
@@ -126,13 +126,13 @@ public static class HurtObjectManager
                 return;
         }
         
-        hurtObject = TryLoadWeaponPrefab("HurtObjects/" + basicMagicForwardPath + "/" + resource_name + ".prefab");
+        weaponPrefab = TryLoadWeaponPrefab("HurtObjects/" + basicMagicForwardPath + "/" + resource_name + ".prefab");
         
-        if (hurtObject != null)
+        if (weaponPrefab != null)
         {
-            poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,FightGlobalSetting._HurtObjectPreLoadCount);
+            poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resource_name,FightGlobalSetting._HurtObjectPreLoadCount);
             
-            var decomposition = hurtObject.GetComponent<Decompositioner>();
+            var decomposition = weaponPrefab.GetComponent<Decompositioner>();
             if (decomposition != null)
             {
                 if (decomposition.Attachments != null && decomposition.Attachments.Length > 0)
@@ -159,13 +159,13 @@ public static class HurtObjectManager
                     return;
             }
             
-            hurtObject = TryLoadWeaponPrefab("HurtObjects/" + basicMagicForwardPath + "/" + resource_name + ".prefab");
+            weaponPrefab = TryLoadWeaponPrefab("HurtObjects/" + basicMagicForwardPath + "/" + resource_name + ".prefab");
             
-            if (hurtObject != null)
+            if (weaponPrefab != null)
             {
-                poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(hurtObject, basicMagicForwardPath + "/" + resource_name,FightGlobalSetting._HurtObjectPreLoadCount);
+                poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resource_name,FightGlobalSetting._HurtObjectPreLoadCount);
                 
-                var d = hurtObject.GetComponent<Decompositioner>();
+                var d = weaponPrefab.GetComponent<Decompositioner>();
                 if (d != null)
                 {
                     if (d.Attachments != null && d.Attachments.Length > 0)
