@@ -12,9 +12,9 @@ public class SelfFightPage : MainSceneProcess
     private SelfFightLayer selfFightLayer;
     public override void ProcessEnter()
     {
-        UnitsLayer layer = UnitsLayer.Open();
+        var layer = UnitsLayer.Open();
         layer.DisplayUnitIcons(true);
-
+        
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
         
         selfFightLayer = UILayerLoader.Load(PreScene.target.T,"SelfFightLayer") as SelfFightLayer;

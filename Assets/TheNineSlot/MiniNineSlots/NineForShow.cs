@@ -59,21 +59,21 @@ public partial class NineForShow : MonoBehaviour
         }
     }
     
-    public void ShowStones(string a1Skillid, string a2Skillid, string a3Skillid,
+    public async void ShowStones(string a1Skillid, string a2Skillid, string a3Skillid,
                                     string b1Skillid, string b2Skillid, string b3Skillid,
                                         string c1Skillid, string c2Skillid, string c3Skillid)
     {
         ClearCurrent();
         
-        A1S = Stones.GenerateStoneModel(a1Skillid, false);
-        A2S = Stones.GenerateStoneModel(a2Skillid, false);
-        A3S = Stones.GenerateStoneModel(a3Skillid, false);
-        B1S = Stones.GenerateStoneModel(b1Skillid, false);
-        B2S = Stones.GenerateStoneModel(b2Skillid, false);
-        B3S = Stones.GenerateStoneModel(b3Skillid, false);
-        C1S = Stones.GenerateStoneModel(c1Skillid, false);
-        C2S = Stones.GenerateStoneModel(c2Skillid, false);
-        C3S = Stones.GenerateStoneModel(c3Skillid, false);
+        A1S = await Stones.GenerateStoneModel(a1Skillid, false);
+        A2S = await Stones.GenerateStoneModel(a2Skillid, false);
+        A3S = await Stones.GenerateStoneModel(a3Skillid, false);
+        B1S = await Stones.GenerateStoneModel(b1Skillid, false);
+        B2S = await Stones.GenerateStoneModel(b2Skillid, false);
+        B3S = await Stones.GenerateStoneModel(b3Skillid, false);
+        C1S = await Stones.GenerateStoneModel(c1Skillid, false);
+        C2S = await Stones.GenerateStoneModel(c2Skillid, false);
+        C3S = await Stones.GenerateStoneModel(c3Skillid, false);
 
         if (A1S != null)
         {

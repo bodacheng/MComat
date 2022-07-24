@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using DummyLayerSystem;
 using Cocone.ProjectP3;
+using Cysharp.Threading.Tasks;
 using Singleton;
 
 public class ArcadeTop : UILayer
@@ -39,7 +40,7 @@ public class ArcadeTop : UILayer
     void IconButtonFeature(HeroIcon heroIcon)
     {
         // 显示模型
-        _connector.ShowModel(heroIcon.unitConfig.RECORD_ID);
+        _connector._ShowModel(heroIcon.unitConfig.RECORD_ID).Forget();
         // 显示技能组
         _NineForShow.ShowStones_DataInfo(heroIcon.unitInfo);
     }
@@ -47,20 +48,20 @@ public class ArcadeTop : UILayer
     void ToNew()
     {
         var stages = NewStages(PlayerAccountInfo.Me.ArcadeProcess);
-        ShowStages(stages);
+        ShowStages(stages).Forget();
     }
 
     void ShowNextStages()
     {
-        ShowStages(NewStages(currentStages.Max() + 1));
+        ShowStages(NewStages(currentStages.Max() + 1)).Forget();
     }
     
     void ShowLastStages()
     {
-        ShowStages(NewStages(currentStages.Min() - 1));
+        ShowStages(NewStages(currentStages.Min() - 1)).Forget();
     }
     
-    public void ShowStages(List<int> stages)
+    public async UniTask ShowStages(List<int> stages)
     {
         foreach (Transform child in container) {
             Destroy(child.gameObject);
@@ -71,7 +72,7 @@ public class ArcadeTop : UILayer
         for (var index = 0; index < currentStages.Count; index++)
         {
             var stageNo = currentStages[index];
-            var one = AddressablesLogic.LoadT<FightInfo>("Arcade/" + stageNo + ".asset");
+            var one = await AddressablesLogic.LoadT<FightInfo>("Arcade/" + stageNo + ".asset");
             if (one == null)
             {
                 continue;
@@ -95,10 +96,10 @@ public class ArcadeTop : UILayer
             {
                 for (var i = 0; i < one.FightMembers.EnemySets.GetValues().Count; i++)
                 {
-                    UnitIconDic.Load(one.FightMembers.EnemySets.GetValues()[i].r_id);
+                    await UnitIconDic.Load(one.FightMembers.EnemySets.GetValues()[i].r_id);
                 }
 
-                var heroIcons = MemberInfosShow(one.FightMembers.EnemySets.GetValues(), stageButton.IconsT);
+                var heroIcons = await MemberInfosShow(one.FightMembers.EnemySets.GetValues(), stageButton.IconsT);
                 for (var i = 0; i < heroIcons.Count; i++)
                 {
                     var heroIcon = heroIcons[i];
@@ -159,7 +160,7 @@ public class ArcadeTop : UILayer
         return returnValue;
     }
     
-    List<HeroIcon> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)
+    async UniTask<List<HeroIcon>> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)
     {
         foreach (Transform transform in _ShowT)
         {
@@ -168,7 +169,8 @@ public class ArcadeTop : UILayer
         var icons = new List<HeroIcon>();
         foreach (var unitInfo in HeroSets)
         {
-            icons.Add(HeroIcon.ArrangeHeroIconToT(UnitIconPrefab, unitInfo, _ShowT));
+            var v = await HeroIcon.ArrangeHeroIconToT(UnitIconPrefab, unitInfo, _ShowT);
+            icons.Add(v);
         }
         for (var i = 0; i < icons.Count; i++)
         {

@@ -34,15 +34,15 @@ public static class HurtObjectManager
         Addressables.Release(locationHandle);
     }
 
-    static GameObject TryLoadWeaponPrefab(string key)
+    static UniTask<GameObject> TryLoadWeaponPrefab(string key)
     {
         if (!keyExists.Contains(key))
         {
-            return null;
+            return default;
         }
         else
         {
-            var returnValue = AddressablesLogic.LoadT<GameObject>(key);
+            var returnValue =  AddressablesLogic.LoadT<GameObject>(key);
             return returnValue;
         }
     }
@@ -78,7 +78,7 @@ public static class HurtObjectManager
         }
     }
     
-    public static void ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Element element)
+    public static async void ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Element element)
     {
         DecompositionerPool poolToConstruct;
         GameObject weaponPrefab = null;
@@ -95,7 +95,7 @@ public static class HurtObjectManager
                 }
             }
             
-            weaponPrefab = TryLoadWeaponPrefab("HurtObjects/" + MagicForwardPath + "/" + resource_name + ".prefab");
+            weaponPrefab = await TryLoadWeaponPrefab("HurtObjects/" + MagicForwardPath + "/" + resource_name + ".prefab");
             
             if (weaponPrefab != null)
             {
@@ -126,7 +126,7 @@ public static class HurtObjectManager
                 return;
         }
         
-        weaponPrefab = TryLoadWeaponPrefab("HurtObjects/" + basicMagicForwardPath + "/" + resource_name + ".prefab");
+        weaponPrefab = await TryLoadWeaponPrefab("HurtObjects/" + basicMagicForwardPath + "/" + resource_name + ".prefab");
         
         if (weaponPrefab != null)
         {
@@ -159,7 +159,7 @@ public static class HurtObjectManager
                     return;
             }
             
-            weaponPrefab = TryLoadWeaponPrefab("HurtObjects/" + basicMagicForwardPath + "/" + resource_name + ".prefab");
+            weaponPrefab = await TryLoadWeaponPrefab("HurtObjects/" + basicMagicForwardPath + "/" + resource_name + ".prefab");
             
             if (weaponPrefab != null)
             {

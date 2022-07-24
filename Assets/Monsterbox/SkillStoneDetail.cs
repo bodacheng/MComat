@@ -40,9 +40,9 @@ namespace mainMenu
         [SerializeField] Transform tempT;
         
         // 额外生成一个技能石图像
-        void IconForShow(string skillID)
+        async void IconForShow(string skillID)
         {
-            var item = Stones.GenerateStoneModel(skillID, false);
+            var item = await Stones.GenerateStoneModel(skillID, false);
             if (IconShowT != null)
             {
                 foreach (Transform child in IconShowT) 

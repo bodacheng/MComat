@@ -7,21 +7,22 @@ using System.Collections.Generic;
 
 public static class SVCenter
 {
-    public static void StoneRemoveFromSlotToCell(StoneCell sourceCell, StoneCell boxcell)
+    public static async void StoneRemoveFromSlotToCell(StoneCell sourceCell, StoneCell boxcell)
     {
         if (sourceCell.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
-            SkillEditLayer skillEditLayer = SkillEditLayer.Open();
-            SKStoneItem stone = sourceCell.GetItem();
+            var stone = sourceCell.GetItem();
             if (stone != null && stone.Inherent)
             {
                 Debug.Log("固有技能无法移出，返回");
                 return;
             }
+            
+            var layer = SkillEditLayer.Get();
             // 如果把技能石从9宫格拖到技能背包的一个有石头的格子上，那么就直接把拖动中的技能石先从九宫格拔下来，接着让技能背包自动排序一下
             if (boxcell.GetItem() != null)
             {
-                skillEditLayer.StonesBox.ReturnStoneToBox(stone);
+                layer.StonesBox.ReturnStoneToBox(stone);
             }
             else
             {
@@ -30,7 +31,7 @@ public static class SVCenter
                 // 松手瞬间会有一个技能石“变图案”的错觉。
                 boxcell.AddItem(stone);
             }
-            skillEditLayer.NineSlot.NineSlotsStatusRefresh();
+            layer.NineSlot.NineSlotsStatusRefresh();
         }
         else if (sourceCell.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
@@ -48,7 +49,7 @@ public static class SVCenter
         }
     }
     
-    public static void MoveItemFromTo(StoneCell from, StoneCell to)
+    public static async void MoveItemFromTo(StoneCell from, StoneCell to)
     {
         var item = from.GetItem();
         if (item == null)
@@ -63,21 +64,22 @@ public static class SVCenter
                 popupLayer.ArrangeWarnWindow("其他角色正在装备中！");
                 return;
             }
+
+            var layer = SkillEditLayer.Get();
             
-            var skillEditLayer = SkillEditLayer.Open();
-            var currentSkillIds = skillEditLayer.NineSlot.GetCurrentNineSlotAllSkillIds();
+            var currentSkillIds = layer.NineSlot.GetCurrentNineSlotAllSkillIds();
             if (currentSkillIds.Contains(item._SkillConfig.RECORD_ID))
             {
                 // 不可出现相同技能
-                skillEditLayer.NineSlot.ValidationWarn(SkillSet.SkillEditError.RepeatedSkill);
+                layer.NineSlot.ValidationWarn(SkillSet.SkillEditError.RepeatedSkill);
                 return;
             }
             
             if (!CheckIfOtherUnitOkAfterStoneRemove(item))
                 return;
-            skillEditLayer.StonesBox._tabEffects.SkillButtonExplosion(item._SkillConfig.SP_LEVEL, 
-            PosCal.GetWorldPos(PreScene.target.FxCamera, to.GetComponent<RectTransform>(), 3), 
-            skillEditLayer.StonesBox._tabEffects.transform);
+            layer.StonesBox._tabEffects.SkillButtonExplosion(item._SkillConfig.SP_LEVEL, 
+                PosCal.GetWorldPos(PreScene.target.FxCamera, to.GetComponent<RectTransform>(), 3), 
+                layer.StonesBox._tabEffects.transform);
         }
         
         to.AddItem(item);
@@ -85,8 +87,8 @@ public static class SVCenter
         
         if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || to.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
-            var skillEditLayer = SkillEditLayer.Open();
-            skillEditLayer.NineSlot.NineSlotsStatusRefresh();
+            var layer = SkillEditLayer.Get();
+            layer.NineSlot.NineSlotsStatusRefresh();
         }
         
         if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
@@ -197,7 +199,7 @@ public static class SVCenter
     // 尝试装载的技能石正被其他角色使用时候，对那个其他角色进行validation检验
     static bool CheckIfOtherUnitOkAfterStoneRemove(SKStoneItem item)
     {
-        var skillEditLayer = SkillEditLayer.Open();
+        var skillEditLayer = SkillEditLayer.Get();
         if (item.Inherent)
         {
             Debug.Log("固有技能无法移出，返回");

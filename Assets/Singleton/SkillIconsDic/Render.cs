@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.UI;
 
 public partial class SkillIconsDic
 {
-    public GameObject FindSkillIconPrefab(string skillId)
+    public async UniTask<GameObject> FindSkillIconPrefab(string skillId)
     {
         GameObject returnValue;
         if (!_skillIconDic.ContainsKey(skillId))
@@ -11,7 +12,7 @@ public partial class SkillIconsDic
             var skillConfig = SkillConfigTable.GetSkillConfig(skillId);
             // 图标可以是Sprite或其他格式，只要名字对上编号就可以
 
-            var sprite = AddressablesLogic.LoadT<Sprite>(skillId);
+            var sprite = await AddressablesLogic.LoadT<Sprite>(skillId);
             GameObject prefab;
             if (sprite != null)
             {
@@ -32,7 +33,7 @@ public partial class SkillIconsDic
             if (returnValue == null)
             {
                 _skillIconDic.Remove(skillId);
-                return FindSkillIconPrefab(skillId);
+                return await FindSkillIconPrefab(skillId);
             }
         }
         

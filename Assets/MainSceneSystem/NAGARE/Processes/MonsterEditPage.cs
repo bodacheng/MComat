@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using mainMenu;
 using System.Collections.Generic;
-using Skill;
+using Cysharp.Threading.Tasks;
 
 public class MonsterEditPage : MainSceneProcess
 {
@@ -21,9 +21,10 @@ public class MonsterEditPage : MainSceneProcess
             return;
         }
         
-        layer = SkillEditLayer.Open();
-
-        layer._connector.ShowMyModel(PreScene.target._focusing != null ? PreScene.target._focusing.id : null);
+        SkillEditLayer.Open((x) =>
+        {
+            x._connector.ShowMyModel(PreScene.target._focusing != null ? PreScene.target._focusing.id : null);
+        }).Forget();
     }
     
     public MonsterEditPage()
@@ -38,17 +39,7 @@ public class MonsterEditPage : MainSceneProcess
         
         missionWatcher = new MissionWatcher(
             new List<string>() {"itemsLoadFinished"},
-            () => {
-                if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
-                {
-                    layer = SkillEditLayer.Open();
-                    layer.SkillShowSpEnterProcess();
-                }
-                else
-                {
-                    EnterProcess();
-                }
-            },
+            EnterProcess,
             () => { Debug.Log("failed"); }
         );
     }

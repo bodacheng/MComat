@@ -124,22 +124,22 @@ public partial class BO_Ani_E : MonoBehaviour
     Transform target;
     Decompositioner effect;
     ConstraintSource myConstraintSource;
-    public void EffectOnBodyPart(AnimationEvent e)
+    public async void EffectOnBodyPart(AnimationEvent e)
 	{
         DecideTarget(e.stringParameter);
 		switch (e.intParameter) 
 		{
 			case 3:
-                effect = EffectsManager.GenerateEffect("long_effect", magic_path, target.position, target.rotation,target);
+                effect = await EffectsManager.GenerateEffect("long_effect", magic_path, target.position, target.rotation,target);
 			    break;
 			case 1:
-                effect = EffectsManager.GenerateEffect("short_effect", magic_path, target.position, target.rotation,target);
+                effect = await EffectsManager.GenerateEffect("short_effect", magic_path, target.position, target.rotation,target);
                 break;
 			case 2:
-                effect = EffectsManager.GenerateEffect("normal_effect", magic_path, target.position, target.rotation,target);
+                effect = await EffectsManager.GenerateEffect("normal_effect", magic_path, target.position, target.rotation,target);
                 break;
 			default:
-                effect = EffectsManager.GenerateEffect("short_effect", magic_path, target.position, target.rotation,target);
+                effect = await EffectsManager.GenerateEffect("short_effect", magic_path, target.position, target.rotation,target);
                 break;
 		}
            

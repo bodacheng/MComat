@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using UniRx;
 
 namespace FightScene
@@ -35,10 +36,10 @@ namespace FightScene
             target = this;
         }
         
-        public IEnumerator LoadUnits(FightInfo info)
+        public async UniTask LoadUnits(FightInfo info)
         {
-            yield return team1._UnitsLoad(info.FightMembers.HeroSets, UnitInfoRef);
-            yield return team2._UnitsLoad(info.FightMembers.EnemySets, UnitInfoRef);
+            await team1._UnitsLoad(info.FightMembers.HeroSets, UnitInfoRef);
+            await team2._UnitsLoad(info.FightMembers.EnemySets, UnitInfoRef);
         }
         
         public Data_Center team1StartUnit = null, team2StartUnit = null;

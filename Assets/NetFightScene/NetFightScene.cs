@@ -42,6 +42,7 @@ namespace FightScene
         
         void Start()
         {
+            AnimationResourceLoader.Instance.Clear();
             AddressablesLogic.ReleaseAsyncOperationHandles();
             
             PopupLayer.DarkOff(T.gameObject, 1, 0);

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 
 namespace mainMenu
@@ -42,7 +43,7 @@ namespace mainMenu
             MemberInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT);
         }
         
-        List<HeroIcon> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)
+        async UniTask<List<HeroIcon>> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)
         {
             foreach (Transform transform in _ShowT)
             {
@@ -51,7 +52,8 @@ namespace mainMenu
             List<HeroIcon> icons = new List<HeroIcon>();
             foreach(UnitInfo oneMember in HeroSets)
             {
-                icons.Add(HeroIcon.ArrangeHeroIconToT(FighterIcon, oneMember, _ShowT));
+                var v = await HeroIcon.ArrangeHeroIconToT(FighterIcon, oneMember, _ShowT);
+                icons.Add(v);
             }
             for (int i = 0; i < icons.Count; i++)
             {

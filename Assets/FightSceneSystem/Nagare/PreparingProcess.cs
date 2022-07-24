@@ -1,19 +1,21 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using FightScene;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UniRx;
 
 public class PreparingProcess : FSceneProcess
 {
+    private FightingStepLayer fightingStepLayer;
+    
     public PreparingProcess()
     {
         Step = SceneStep.Preparing;
         nextProcessStep = SceneStep.StoryBeforeFight;
     }
     
-    IEnumerator EnterProcess()
+    async UniTask EnterProcess()
     {
         AddressablesLogic.Essentials();
         
@@ -24,15 +26,15 @@ public class PreparingProcess : FSceneProcess
         FightLoadError.Instance.FightLoadErrors.Clear();
         BoundaryControllByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
         Sensor.ClearFightingMember();
-        yield return RTFightManager.target.LoadUnits(NetFightScene.Fight);
+        await RTFightManager.target.LoadUnits(NetFightScene.Fight);
         
         var teamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.target.heroTeamConfig, RTFightManager.target.team1.TeamMembers.GetValues());
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.target.EnemyTeamConfig, RTFightManager.target.team2.TeamMembers.GetValues());
         FightLogger.value.ReadyToLog(teamMembers);
         
-        EffectsManager.INIEffectsPool("hit_ground", null, 3);
-        EffectsManager.INIEffectsPool("wallCrack", null, 3);
+        await EffectsManager.INIEffectsPool("hit_ground", null, 3);
+        await EffectsManager.INIEffectsPool("wallCrack", null, 3);
         
         RTFightManager.target.team1.Auto = NetFightScene.Fight.team1Auto;
         RTFightManager.target.team2.Auto = NetFightScene.Fight.team2Auto;
@@ -90,13 +92,13 @@ public class PreparingProcess : FSceneProcess
         ).AddTo(RTFightManager.target.disposables);
         
         RTFightManager.target.SetGame(NetFightScene.Fight);
-        FightingStepLayer.Open(false);
+        fightingStepLayer = await FightingStepLayer.Open(false);
     }
     
     public override void ProcessEnter()
     {
         PopupLayer.DarkOff(NetFightScene.target.T.gameObject, 1, 0);
-        SingleThreadProcesser.backup.RunFreely(EnterProcess());
+        EnterProcess().Forget();
     }
     
     public override void ProcessEnd()
@@ -118,6 +120,7 @@ public class PreparingProcess : FSceneProcess
     {
         return NetFightScene.target.LoadStageFinished.Value
                && RTFightManager.target.team1.IfAllUnitsPreparedForBattle()
-               && RTFightManager.target.team2.IfAllUnitsPreparedForBattle();
+               && RTFightManager.target.team2.IfAllUnitsPreparedForBattle()
+               && (fightingStepLayer != null && fightingStepLayer.Initialized);
     }
 }

@@ -1,21 +1,19 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
 using Singleton;
 using UnityEngine;
 
 public class UnitCreator {
     
-    public static IEnumerator CreateUnit(UnitInfo info)
+    public static async UniTask<Data_Center> CreateUnit(UnitInfo info)
     {
-        var get = GeneralModelPool.GetModel(info.r_id);
-        yield return get;
-        var _D = (Data_Center)get.Current;
+        var _D = await GeneralModelPool.GetModel(info.r_id);
         if (_D == null)
         {
             Debug.Log("严重资源类错误");
-            yield break;
+            return _D;
         }
         var unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(info.r_id));
-        yield return _D.Step2Initialize (unitConfig.TYPE, info.set, info.level, unitConfig.element, unitConfig.SPECIAL_ZOKUSEI);
-        yield return _D;
+        await _D.Step2Initialize (unitConfig.TYPE, info.set, info.level, unitConfig.element, unitConfig.SPECIAL_ZOKUSEI);
+        return _D;
     }
 }

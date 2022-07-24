@@ -8,6 +8,7 @@ using DummyLayerSystem;
 using UniRx;
 using Cocone.ProjectP3;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 
 namespace mainMenu
 {
@@ -126,7 +127,7 @@ namespace mainMenu
         async void RenderButton(Element element, GameObject button, int splevel)
         {
             await Observable.TimerFrame(5);
-            var t = ElementStoneTagsGroup.CreateOneButtonIcon(element,splevel);
+            var t = await ElementStoneTagsGroup.CreateOneButtonIcon(element,splevel);
             t.layer = 5;//UI Layer
             foreach (Transform _t in t.transform)
             {
@@ -157,7 +158,7 @@ namespace mainMenu
             PageBGBtn.onClick.RemoveAllListeners();
             if (_unitInfo != null && _unitInfo.set != null)
             {
-                SkillScriptReader(_unitInfo.set, unitConfig.element);
+                SkillScriptReader(_unitInfo.set, unitConfig.element).Forget();
             }
             void BFBtnForRefresh()
             {
@@ -166,21 +167,21 @@ namespace mainMenu
             PageBGBtn.onClick.AddListener(BFBtnForRefresh);
         }
         
-        IEnumerator ShowModel()
+        async UniTask ShowModel()
         {
             _connector.ShowMyModel(PreScene.target._focusing.id);
             var config = Units.GetUnitConfig(PreScene.target._focusing.r_id);
             var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
-            yield return _connector.FocusingC.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK, config.SPECIAL_ZOKUSEI);
-            yield return _connector.FocusingC.Step2Initialize(config.TYPE, unitInfo.set, unitInfo.level, config.element, config.SPECIAL_ZOKUSEI);
+            await _connector.FocusingC.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK, config.SPECIAL_ZOKUSEI);
+            await _connector.FocusingC.Step2Initialize(config.TYPE, unitInfo.set, unitInfo.level, config.element, config.SPECIAL_ZOKUSEI);
             if (_connector.FocusingC._MyBehaviorRunner != null)
                 _connector.FocusingC._MyBehaviorRunner.ChangeState("Empty");
         }
 
         // 打印出技能显示画面
-        void SkillScriptReader(SkillSet nineAndTwo, Element element)
+        async UniTask SkillScriptReader(SkillSet nineAndTwo, Element element)
         {
-            EffectsManager.StartUp(element);
+            await EffectsManager.StartUp(element);
             DestroyFloatingMarks();
             ClearRenderPs();
             _skillStoneDetail.RefreshInfo((SkillEntity)null);
@@ -263,7 +264,7 @@ namespace mainMenu
                 RenderButton(element,newShow.gameObject,fire2Chuan[i].SP_LEVEL);
             }
             
-            StartCoroutine(ShowModel());
+            ShowModel().Forget();
         }
 
         #region 表情测试相关

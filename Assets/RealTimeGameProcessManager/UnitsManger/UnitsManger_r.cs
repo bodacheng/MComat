@@ -54,6 +54,20 @@ namespace FightScene
         // 切换队员
         public bool ChangeFightingUnit(Data_Center _changeTo, bool emptyState = false, Transform IniStandPoint = null)
         {
+            if (_changeTo == null)
+            {
+                Debug.Log("1");
+            }
+            else if (_changeTo.FightDataRef == null)
+            {
+                Debug.Log("2");
+            }
+            else if (_changeTo.FightDataRef.IsDead == null)
+            {
+                _changeTo.FightDataRef.IsDead = new ReactiveProperty<bool>(false);
+                Debug.Log("3");
+            }
+            
             if (_changeTo.FightDataRef.IsDead.Value)
             {
                 return false;

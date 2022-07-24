@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,17 +8,18 @@ using FightScene;
 public class FightingStepLayer : UILayer
 {
     [Header("Pause Button")]
-    public Button pauseButton;
+    [SerializeField] Button pauseButton;
     
+    [Header("MobileInputsManager")]
     [SerializeField] MobileInputsManager InputsManager;
     
     [Header("TeamUIManager")]
-    public TeamUIManager team1UI;
-    public TeamUIManager team2UI;
+    [SerializeField] TeamUIManager team1UI;
+    [SerializeField] TeamUIManager team2UI;
     
     [Header("Auto Button")]
-    public AutoSwitch Team1Auto;
-    public AutoSwitch Team2Auto;
+    [SerializeField] AutoSwitch Team1Auto;
+    [SerializeField] AutoSwitch Team2Auto;
     
     public static FightingStepLayer Get()
     {
@@ -42,15 +44,11 @@ public class FightingStepLayer : UILayer
         UILayerLoader.Remove("FightingStepLayer");
     }
     
-    public static FightingStepLayer Open(bool active = true)
+    public static async UniTask<FightingStepLayer> Open(bool active = true)
     {
-        var returnValue = Get();
-        if (returnValue != null)
-        {
-            return returnValue;
-        }
-        returnValue = UILayerLoader.Load(NetFightScene.target.T.gameObject,"FightingStepLayer") as FightingStepLayer;
-        returnValue.StartUp((x) =>
+        var returnValue = UILayerLoader.Load(NetFightScene.target.T.gameObject,"FightingStepLayer") as FightingStepLayer;
+        returnValue.gameObject.SetActive(active);
+        await returnValue.StartUp((x) =>
             {
                 Debug.Log("here" + x);
                 RTFightManager.target.team1.Auto = x;
@@ -61,18 +59,27 @@ public class FightingStepLayer : UILayer
             },
             ()=> FightScenePauseSupport.Open(NetFightScene.target.T.gameObject)
         );
-
+        
         if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
         {
             returnValue.gameObject.SetActive(false);
         }
         
-        returnValue.gameObject.SetActive(active);
         return returnValue;
     }
+
+    private bool initialized = false;
     
-    void StartUp(Action<bool> switchTeam1Auto, Action<bool> switchTeam2Auto, Action pauseAction)
+    public bool Initialized
     {
+        get => initialized;
+        set => initialized = value;
+    }
+    
+    async UniTask StartUp(Action<bool> switchTeam1Auto, Action<bool> switchTeam2Auto, Action pauseAction)
+    {
+        Initialized = false;
+        
         RTFightManager.target.team1.InputsManager = InputsManager;
         RTFightManager.target.team2.InputsManager = InputsManager;
         
@@ -97,11 +104,12 @@ public class FightingStepLayer : UILayer
 
         foreach (var d in RTFightManager.target.team1.TeamMembers.GetValues())
         {
-            InputsManager.ElementRegister(d.element, RTFightManager.target.UnitInfoRef[d]);
+            await InputsManager.ElementRegister(d.element, RTFightManager.target.UnitInfoRef[d]);
         }
         foreach (var d in RTFightManager.target.team2.TeamMembers.GetValues())
         {
-            InputsManager.ElementRegister(d.element, RTFightManager.target.UnitInfoRef[d]);
+            await InputsManager.ElementRegister(d.element, RTFightManager.target.UnitInfoRef[d]);
         }
+        Initialized = true;
     }
 }

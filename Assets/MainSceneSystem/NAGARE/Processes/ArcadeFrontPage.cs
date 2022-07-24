@@ -1,4 +1,5 @@
-﻿using mainMenu;
+﻿using Cysharp.Threading.Tasks;
+using mainMenu;
 
 public class ArcadeFrontPage : MainSceneProcess
 {
@@ -13,7 +14,7 @@ public class ArcadeFrontPage : MainSceneProcess
     {
         arcadeTop = ArcadeTop.Open();
         var stages = arcadeTop.NewStages(PlayerAccountInfo.Me.ArcadeProcess);
-        arcadeTop.ShowStages(stages);
+        arcadeTop.ShowStages(stages).Forget();
     }
     
     public override void ProcessEnd()

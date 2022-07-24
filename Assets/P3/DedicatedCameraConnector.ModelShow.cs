@@ -1,16 +1,19 @@
 using UnityEngine;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using dataAccess;
 using mainMenu;
 using Singleton;
+using UniRx;
 
 namespace Cocone.ProjectP3
 {
     public partial class DedicatedCameraConnector : MonoBehaviour
     {
-        public void ShowMyModel(string instanceID)
+        public async void ShowMyModel(string instanceID)
         {
-            StartCoroutine(_ShowMyModel(instanceID));
+            var info = MyMonsters.Get(instanceID);
+            await _ShowModel(info?.r_id);
         }
         
         GameObject _model;
@@ -20,20 +23,7 @@ namespace Cocone.ProjectP3
         string FocusRId;
         bool IfShowingSkill = false;
         
-        IEnumerator _ShowMyModel(string instanceID)
-        {
-            var info = MyMonsters.Get(instanceID);
-            var p = _ShowModel(info?.r_id);
-            yield return p;
-            yield return p.Current;
-        }
-        
-        public void ShowModel(string recordID)
-        {
-            StartCoroutine(_ShowModel(recordID));
-        }
-        
-        IEnumerator _ShowModel(string recordID) 
+        public async UniTask _ShowModel(string recordID) 
         {
             PopupLayer.Loading(">", PreScene.target.T);
             if (_model != null)
@@ -43,42 +33,33 @@ namespace Cocone.ProjectP3
             }
             if (recordID == null)
             {
-                yield break;
+                return;
             }
             
-            var p = GeneralModelPool.GetModel(recordID, transform);
-            yield return p;
-            if (p.Current == null)
+            focusingC = await GeneralModelPool.GetModel(recordID, transform);
+            if (focusingC == null)
             {
                 Debug.Log("模型错误");
-                yield break;
-            }
-            
-            var _dataCenter = p.Current;
-            if (_dataCenter == null)
-            {
-                Debug.Log("模型错误");
-                focusingC = null;
                 FocusRId = null;
                 _model = null;
-                yield break;
+                return;
             }
-            focusingC = (Data_Center)_dataCenter;
+            
             focusingC.WholeT.SetParent(transform); // 尽量确保模型总与图层一起被摧毁
             FocusRId = recordID;
             focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
             
             // 这个短暂变色是为了掩盖一些模型刚加载瞬间有些渲染没到位的尴尬。比如裙子摇晃 
             focusingC._ShaderManager.FlatColorForAShortTime(Color.black, 0f, 1f);
-            
             _model = focusingC.WholeT.gameObject;
             _model.SetActive(true);
+
+            await UniTask.DelayFrame(5);// 否则Unity对mesh的尺寸计算有错误。算是Unity的bug
             
             Initialize(false,_model.transform, transform, PreScene.target.FxCamera);
             ItemDetailStartDirection(0,0,0);
             
             PopupLayer.Close();
-            yield return _model;
         }
 
         public void SkillShowRun(string skillName)

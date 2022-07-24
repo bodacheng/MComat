@@ -4,31 +4,27 @@ using System.Linq;
 using UnityEngine;
 using dataAccess;
 using DummyLayerSystem;
-using Cocone.ProjectP3;
+using Cysharp.Threading.Tasks;
 using Singleton;
 
 namespace mainMenu
 {
     public class UnitsLayer : UILayer
     {
-        [Space(7)]
         [Header("monsterboxFilter")]
         public MonsterboxFilter _monsterboxFilter;
         
-        [Space(7)]
         [Header("角色属性框")]
         public HeroIcon noMagic;
         
-        [Space(7)]
         [Header("选中框")]
         public GameObject selectedFrame;
         
-        [Space(2)]
         [Header("宠物栏parent")]
         public RectTransform MonsterBoxContainer;
 
         [SerializeField] List<string> _typeOfUnitsIHave = new List<string>();
-        readonly IDictionary<string, HeroIcon> mainMenuIcons = new Dictionary<string, HeroIcon>();
+        readonly IDictionary<string, HeroIcon> heroIcons = new Dictionary<string, HeroIcon>();
         string selected_InstanceID;
         
         public static UnitsLayer Open()
@@ -45,13 +41,13 @@ namespace mainMenu
         {
             if (instanceID == null)
                 return null;
-            mainMenuIcons.TryGetValue(instanceID, out HeroIcon unitIcon);
+            heroIcons.TryGetValue(instanceID, out HeroIcon unitIcon);
             return unitIcon;
         }
         
         public void SetUnitsIconOnClick(Action<string> a)
         {
-            foreach (var kv in mainMenuIcons)
+            foreach (var kv in heroIcons)
             {
                 kv.Value.iconButton.onClick.RemoveAllListeners();
                 kv.Value.iconButton.onClick.AddListener(()=> { a.Invoke(kv.Key); });
@@ -76,7 +72,7 @@ namespace mainMenu
             return selected_InstanceID;
         }
 
-        void AddUnitIcon(string instanceID, bool clearButtonFeature)
+        async UniTask AddUnitIcon(string instanceID, bool clearButtonFeature)
         {
             var unitInfo = MyMonsters.Get(instanceID);
             var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
@@ -93,8 +89,11 @@ namespace mainMenu
                 targetingIcon = Instantiate(noMagic);
                 targetingIcon.name = unitConfig.REAL_NAME + "_icon";
                 targetingIcon.unitConfig = unitConfig;
-                targetingIcon.ChangeIcon(UnitIconDic.Load(unitConfig.RECORD_ID), unitConfig.element);
-                DicAdd<string, HeroIcon>.Add(mainMenuIcons, instanceID, targetingIcon);
+
+                var pic = await UnitIconDic.Load(unitConfig.RECORD_ID);
+                
+                targetingIcon.ChangeIcon(pic, unitConfig.element);
+                DicAdd<string, HeroIcon>.Add(heroIcons, instanceID, targetingIcon);
             }
             if (clearButtonFeature)
                 targetingIcon.iconButton.onClick.RemoveAllListeners();
@@ -109,26 +108,26 @@ namespace mainMenu
             DisplayUnitIcons(false);
         }
         
-        void UnitIconsGenerate(bool clearButtonFeature)
+        async UniTask UnitIconsGenerate(bool clearButtonFeature)
         {
             selected_InstanceID = null;
             foreach (KeyValuePair<string, UnitInfo> keyValuePair in MyMonsters.Dic)
             {
-                AddUnitIcon(keyValuePair.Value.id, clearButtonFeature);
+                await AddUnitIcon(keyValuePair.Value.id, clearButtonFeature);
             }
             _monsterboxFilter.RefreshTypeDropDown(_typeOfUnitsIHave);
         }
         
         //icon的排列，显示   
-        public void DisplayUnitIcons(bool clearButtonFeature)
+        public async void DisplayUnitIcons(bool clearButtonFeature, Action<UnitsLayer> afterLoad = null)
         {
             MonsterBoxContainer.gameObject.SetActive(true);
-            UnitIconsGenerate(clearButtonFeature);
-            foreach (KeyValuePair<string, HeroIcon> keyValuePair in mainMenuIcons)
+            await UnitIconsGenerate(clearButtonFeature);
+            foreach (KeyValuePair<string, HeroIcon> keyValuePair in heroIcons)
             {
                 keyValuePair.Value.gameObject.SetActive(false);
             }
-            var icons = _monsterboxFilter.OrderIcons(mainMenuIcons.Values.ToList());
+            var icons = _monsterboxFilter.OrderIcons(heroIcons.Values.ToList());
             var hangshu = 1;
             for (var i = 0; i < icons.Count; i++)
             {
@@ -147,6 +146,8 @@ namespace mainMenu
             //adjustAllIconsSize(null);
             hangshu = 1 + icons.Count / 7;
             MonsterBoxContainer.sizeDelta = new Vector2(MonsterBoxContainer.rect.width, noMagic.GetComponent<RectTransform>().rect.height * hangshu);
+            
+            afterLoad?.Invoke(this);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
@@ -15,20 +16,22 @@ public class HeroIcon : MonoBehaviour {
     
     static readonly IDictionary<Element, Sprite> Frames = new Dictionary<Element, Sprite>();
     
-    public static void IniFrames()
+    public static async UniTask IniFrames()
     {
+        var blue = await AddressablesLogic.LoadT<Sprite>("Icon_Frame/8.asset");
+        
         if (!Frames.ContainsKey(Element.blueMagic))
-            Frames.Add(Element.blueMagic, AddressablesLogic.LoadT<Sprite>("Icon_Frame/8.asset"));
+            Frames.Add(Element.blueMagic, blue);
         if (!Frames.ContainsKey(Element.redMagic))
-            Frames.Add(Element.redMagic, AddressablesLogic.LoadT<Sprite>("Icon_Frame/8.asset"));
+            Frames.Add(Element.redMagic, blue);
         if (!Frames.ContainsKey(Element.greenMagic))
-            Frames.Add(Element.greenMagic, AddressablesLogic.LoadT<Sprite>("Icon_Frame/8.asset"));
+            Frames.Add(Element.greenMagic, blue);
         if (!Frames.ContainsKey(Element.lightMagic))
-            Frames.Add(Element.lightMagic, AddressablesLogic.LoadT<Sprite>("Icon_Frame/8.asset"));
+            Frames.Add(Element.lightMagic, blue);
         if (!Frames.ContainsKey(Element.darkMagic))
-            Frames.Add(Element.darkMagic, AddressablesLogic.LoadT<Sprite>("Icon_Frame/8.asset"));
+            Frames.Add(Element.darkMagic, blue);
         if (!Frames.ContainsKey(Element.Null))
-            Frames.Add(Element.Null, AddressablesLogic.LoadT<Sprite>("Icon_Frame/8.asset"));
+            Frames.Add(Element.Null, blue);
     }
     
     public void Grey()
@@ -122,10 +125,11 @@ public class HeroIcon : MonoBehaviour {
         }
     }
     
-    public static void ChangeHeroIconByRid(string rID, HeroIcon Icon)
+    public static async void ChangeHeroIconByRid(string rID, HeroIcon Icon)
     {
         var unitConfig = Units.GetUnitConfig(rID);
-        Icon.ChangeIcon(unitConfig == null ? null : UnitIconDic.Load(unitConfig.RECORD_ID), unitConfig == null ? Element.Null : unitConfig.element);
+        var pic = await UnitIconDic.Load(unitConfig.RECORD_ID);
+        Icon.ChangeIcon(unitConfig == null ? null : pic, unitConfig == null ? Element.Null : unitConfig.element);
     }
         
     public static void SelectedFeature(HeroIcon unitIcon, GameObject selectedFrame, float localScale)
@@ -144,18 +148,19 @@ public class HeroIcon : MonoBehaviour {
     }
     
     // 这个本身没问题但目前使用他的方式是有问题的。围绕SetParent(T);
-    public static HeroIcon ArrangeHeroIconToT(HeroIcon prefab, UnitInfo unitInfo, RectTransform T)
+    public static async UniTask<HeroIcon> ArrangeHeroIconToT(HeroIcon prefab, UnitInfo unitInfo, RectTransform T)
     {
         var icon = Instantiate(prefab);
         var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
         if (unitConfig == null)
         {
             Debug.Log("?? : " + unitInfo.r_id);
-            return null;
+            return default;
         }
         icon.unitInfo = unitInfo;
         icon.unitConfig = unitConfig;
-        icon.ChangeIcon(UnitIconDic.Load(unitConfig.RECORD_ID), unitConfig.element);
+        var pic = await UnitIconDic.Load(unitConfig.RECORD_ID);
+        icon.ChangeIcon(pic, unitConfig.element);
         icon.transform.SetParent(T);
         icon.transform.localPosition = Vector3.one;
         icon.transform.localScale = Vector3.one;

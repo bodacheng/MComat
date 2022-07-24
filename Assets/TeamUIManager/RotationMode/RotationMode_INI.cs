@@ -10,7 +10,7 @@ namespace FightScene
     {
         Text rotationModeHitCombo;
         
-        void IniTeamUI_Rotate(Action<Data_Center> ChangeUnit)
+        async void IniTeamUI_Rotate(Action<Data_Center> ChangeUnit)
         {
             foreach (var center in TeamMembers.GetValues())
             {
@@ -20,7 +20,8 @@ namespace FightScene
                 sideIcon.focusingCharIcon.iconButton.onClick.AddListener(() => { ChangeUnit(center); });
                 var info = RTFightManager.target.UnitInfoRef[center];
                 var unitConfig = Units.GetUnitConfig(info.r_id);
-                sideIcon.focusingCharIcon.ChangeIcon(global::Singleton.UnitIconDic.Load(info.r_id), unitConfig.element);
+                var pic = await global::Singleton.UnitIconDic.Load(info.r_id);
+                sideIcon.focusingCharIcon.ChangeIcon(pic, unitConfig.element);
                 sideIcon.gameObject.SetActive(true);
                 sideIcon.focusingCharIcon.CooldownCurtainUpdate(0);
                 

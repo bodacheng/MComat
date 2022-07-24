@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Cocone.ProjectP3;
 using DummyLayerSystem;
@@ -9,10 +8,6 @@ namespace mainMenu
     public class UnitOptionLayer : UILayer
     {
         public DedicatedCameraConnector _connector;
-        
-        [Space(7)]
-        [Header("美术进程处理器")]
-        public SingleThreadProcesser presentationProcessRunner;
         
         [Space(11)]
         [Header("角色明细T，技能显示T")]
@@ -29,7 +24,7 @@ namespace mainMenu
         
         public static UnitOptionLayer Open()
         {
-            UILayer l = UILayerLoader.Get("UnitOptionLayer");
+            var l = UILayerLoader.Get("UnitOptionLayer");
             UnitOptionLayer returnValue;
             if (l != null)
             {
@@ -86,17 +81,7 @@ namespace mainMenu
                     PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit, true);
             }
             SkillEditButton.onClick.AddListener(SkillEdit);
-
-            // 自定义tag功能加载
-            //selfdefindtag.text = focusingCharacterDataInfo.userd_efined_name;
-            //selfdefindtag.onValueChanged.RemoveAllListeners();
-            //UnityEngine.Events.UnityAction definemycharactertag = () =>
-            //{
-            //    focusingCharacterDataInfo.userd_efined_name = this._preparingScene._MemberDetail.selfdefindtag.text;
-            //    this._preparingScene.triggerMainProcess(AccountCharsSet.Instance.updateMyCharInfo(focusingCharacterDataInfo));
-            //};
-            //selfdefindtag.onValueChanged.AddListener(delegate { definemycharactertag(); });
-
+            
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
             UnitModelRender(UnitInfo.GetUnitInfo(PreScene.target._focusing));
         }

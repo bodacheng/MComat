@@ -47,7 +47,7 @@ public static class AddressablesLogic
     
     public static async UniTask GetWholeDownLoadSize(Action<string> Complete)
     {
-        Caching.ClearCache();
+        //Caching.ClearCache();
         
         long wholeSize = 0;
         
@@ -91,51 +91,80 @@ public static class AddressablesLogic
         complete.Invoke();
     }
     
-    public static GameObject LoadObject(string prefabPathName)
+    public static async UniTask<GameObject> LoadObject(string prefabPathName)
     {
-        var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
-        var prefab = op.WaitForCompletion();
-        var _object = GameObject.Instantiate(prefab);
-        _object.AddOnDestroyCallback( () =>
+        var handle = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
+        await handle.Task;
+        if (handle.Status != AsyncOperationStatus.Succeeded)
         {
-            Debug.Log("释放："+prefabPathName);
-            Addressables.Release(op);
-        });
-        return _object;
+            Debug.Log($"Failed to load : {prefabPathName}");
+            Addressables.Release(handle);
+            return default;
+        }
+        else
+        {
+            loadingHandlerList.Add(handle);
+            var _object = GameObject.Instantiate(handle.Result);
+            _object.AddOnDestroyCallback( () =>
+            {
+                Debug.Log("释放："+prefabPathName);
+                Addressables.Release(handle);
+            });
+            return _object;
+        }
     }
-
-
+    
     private static readonly List<AsyncOperationHandle> loadingHandlerList = new List<AsyncOperationHandle>();
     
-    public static T LoadT<T>(string prefabPathName)
+    public static async UniTask<T> LoadT<T>(string prefabPathName)
     {
-        var op = Addressables.LoadAssetAsync<T>(prefabPathName);
-        var target = op.WaitForCompletion();
-        loadingHandlerList.Add(op);
-        return target;
+        var handle = Addressables.LoadAssetAsync<T>(prefabPathName);
+        await handle.Task;
+        if (handle.Status != AsyncOperationStatus.Succeeded)
+        {
+            Debug.Log($"Failed to load : {prefabPathName}");
+            Addressables.Release(handle);
+            return default;
+        }
+        else
+        {
+            loadingHandlerList.Add(handle);
+            return handle.Result;
+        }
     }
-
+    
+    public static async UniTask<T> LoadTOnObject<T>(string prefabPathName)
+    {
+        T returnValue = default;
+        var handle = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
+        await handle.Task;
+        if (handle.Status != AsyncOperationStatus.Succeeded)
+        {
+            Debug.Log($"Failed to load : {prefabPathName}");
+            Addressables.Release(handle);
+            return default;
+        }
+        else
+        {
+            var prefab = handle.WaitForCompletion();
+            var _object = GameObject.Instantiate(prefab);
+            _object.AddOnDestroyCallback( () =>
+            {
+                Debug.Log("释放："+prefabPathName);
+                Addressables.Release(handle);
+            });
+            returnValue = _object.GetComponent<T>();
+            return returnValue;
+        }
+    }
+    
     public static void ReleaseAsyncOperationHandles()
     {
         foreach (var handle in loadingHandlerList)
         {
-            Addressables.Release(handle);
+            if (handle.IsValid())
+                Addressables.Release(handle);
         }
         loadingHandlerList.Clear();
-    }
-    
-    public static T LoadTOnObject<T>(string prefabPathName)
-    {
-        T returnValue = default;
-        var op = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
-        var prefab = op.WaitForCompletion();
-        var _object = GameObject.Instantiate(prefab);
-        _object.AddOnDestroyCallback( () =>
-        {
-            Debug.Log("释放："+prefabPathName);
-            Addressables.Release(op);
-        });
-        returnValue = _object.GetComponent<T>();
-        return returnValue;
     }
 }

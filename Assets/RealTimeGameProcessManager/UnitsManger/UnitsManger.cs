@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 
 namespace FightScene
 {
@@ -34,7 +35,7 @@ namespace FightScene
             get => auto;
         }
         
-        public IEnumerator _UnitsLoad(MultiDic<int, int, UnitInfo> MembersSets, IDictionary<Data_Center, UnitInfo> UnitInfoRef)
+        public async UniTask _UnitsLoad(MultiDic<int, int, UnitInfo> MembersSets, IDictionary<Data_Center, UnitInfo> UnitInfoRef)
         {
             foreach (var kv in MembersSets.mDict)
             {
@@ -42,9 +43,8 @@ namespace FightScene
                 var center = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
                 if (center == null)
                 {
-                    var returnValue = UnitCreator.CreateUnit(_one);
-                    yield return returnValue;
-                    center = (Data_Center)returnValue.Current;
+                    center = await UnitCreator.CreateUnit(_one);
+                    Debug.Log("成功？"+ center);
                 }
                 
                 TeamMembers.Set(kv.Key.Item1, kv.Key.Item2, center);

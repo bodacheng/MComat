@@ -81,7 +81,7 @@ namespace mainMenu
             {
                 Stones.RefreshLocalStoneParams(ChangedStoneDic);
                 ReadANineAndTwo(unitInfo);
-                var skillEditLayer = SkillEditLayer.Open();
+                var skillEditLayer = SkillEditLayer.Get();
                 skillEditLayer.StonesBox.RestFilter();
                 SelectedRender(null);
                 skillEditLayer.SkillEditConfirmAnimation();

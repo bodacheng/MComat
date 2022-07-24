@@ -230,7 +230,7 @@ namespace mainMenu
             //} 
         }
 
-        void ChangeIconOnPos(int posNum, MultiDic<Team, int, HeroIcon> teamButtonDic, PosKeySet posKeySet)
+        async void ChangeIconOnPos(int posNum, MultiDic<Team, int, HeroIcon> teamButtonDic, PosKeySet posKeySet)
         {
             if (posNum == -1)
             {
@@ -247,7 +247,9 @@ namespace mainMenu
             {
                 var _one = MyMonsters.Get(PosInstanceId);
                 var unitConfig = Units.GetUnitConfig(_one.r_id);
-                tar.ChangeIcon(unitConfig == null ? null : UnitIconDic.Load(unitConfig.RECORD_ID),
+
+                var pic = await UnitIconDic.Load(unitConfig.RECORD_ID);
+                tar.ChangeIcon(unitConfig == null ? null :pic,
                     unitConfig == null ? Element.Null : unitConfig.element);
             }
             else

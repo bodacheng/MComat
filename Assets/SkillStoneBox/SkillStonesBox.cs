@@ -51,7 +51,23 @@ namespace mainMenu
             return focusingExType;
         }
 
-        public async void IniExTabs(Camera fxCamera)
+        public void IniExTabs()
+        {
+            void Temp(Button btn, int exLevel)
+            {
+                btn.onClick.AddListener(() =>
+                {
+                    focusingExType = exLevel;
+                    RestFilter();
+                });
+            }
+            Temp(NormalTab,0);
+            Temp(EX1Tab,1);
+            Temp(EX2Tab,2);
+            Temp(EX3Tab,3);
+        }
+
+        public async void IniExTabsEffects(Camera fxCamera)
         {
             void Temp(Button btn, int exLevel)
             {
@@ -64,8 +80,6 @@ namespace mainMenu
                     //NormalTabFeature(PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 3));
                     _tabEffects.SkillButtonExplosion
                         (exLevel, PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 5f), _tabEffects.transform);
-                    focusingExType = exLevel;
-                    RestFilter();
                 });
             }
             await Observable.TimerFrame(5);

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using Soul;
@@ -77,12 +78,12 @@ public class MobileInputsManager : MonoBehaviour {
         }
     }
     
-    public void ElementRegister(Element element, UnitInfo unitInfo)
+    public async UniTask ElementRegister(Element element, UnitInfo unitInfo)
     {
         if (!ElementEffects.ContainsKey(element))
         {
             var elementEffect = new ElementEffectsGroup();
-            elementEffect.INICommon(effectsParent, element, Attack, Fire1, Fire2);
+            await elementEffect.INICommon(effectsParent, element, Attack, Fire1, Fire2);
             ElementEffects.Add(element, elementEffect);
         }
         ElementEffects[element].INIBtn(Attack, Fire1, Fire2, unitInfo);
@@ -92,6 +93,12 @@ public class MobileInputsManager : MonoBehaviour {
     ParticleSystem _targetExplode;
     public void SkillExplosion(InputKey key, int spLevel)
     {
+        if (!ElementEffects.ContainsKey(_focusing))
+        {
+            Debug.Log("读取流程产生错误："+_focusing);
+            return;
+        }
+        
         switch(spLevel)
         {
             case 0:

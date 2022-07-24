@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace mainMenu
@@ -20,12 +22,12 @@ namespace mainMenu
             }
         }
         
-        public void StartUp(Element element)
+        public async UniTask StartUp(Element element)
         {
             if (_elementBtnEffects.ContainsKey(element))
                 return;
             var zt = new ElementStoneTagsGroup();
-            zt.INI_forSkillStoneBox(element, transform);
+            await zt.INI_forSkillStoneBox(element, transform);
             _elementBtnEffects.Add(element, zt);
             string path = null;
             switch (element)
@@ -49,7 +51,7 @@ namespace mainMenu
                     path = "lightmagic";
                     break;
             }
-            triggerExplosion0 = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
+            triggerExplosion0 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
             triggerExplosion0.transform.SetParent(Marker.transform);
         }
         
@@ -63,9 +65,9 @@ namespace mainMenu
             }
         }
         
-        public void SwitchZokusei(Element element)
+        public async UniTask SwitchZokusei(Element element, Action refreshTabEffects)
         {
-            StartUp(element);
+            await StartUp(element);
             if (_focusingEffectsGroup != null)
             {
                 _focusingEffectsGroup.CloseTagEffects();
@@ -77,6 +79,8 @@ namespace mainMenu
             }else{
                 Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
             }
+            
+            refreshTabEffects.Invoke();
         }
         
         public void RefreshTagEffect(Vector3 pos, int sp_level)//按钮切换也可以在这里做文章

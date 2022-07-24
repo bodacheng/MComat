@@ -133,12 +133,17 @@ namespace Soul
                         EffectsManager.GenerateEffect("hit_ground", null, _effectP, Quaternion.LookRotation(Vector3.right), null);
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                         _flyingStep = 3;
-                        _layBlocker = EffectsManager.GenerateEffect("layBlocker", "defaultmagic", _DATA_CENTER.geometryCenter.position, _DATA_CENTER.geometryCenter.rotation, _DATA_CENTER.geometryCenter);
+                        layBlock(_DATA_CENTER);
                     }
                     break;
                 case 3:
                     break;
             }
+        }
+        
+        async void layBlock(Data_Center _DATA_CENTER)
+        {
+            _layBlocker = await EffectsManager.GenerateEffect("layBlocker", "defaultmagic", _DATA_CENTER.geometryCenter.position, _DATA_CENTER.geometryCenter.rotation, _DATA_CENTER.geometryCenter);
         }
     }
 }

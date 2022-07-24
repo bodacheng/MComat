@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using mainMenu;
 using UnityEngine;
 using dataAccess;
@@ -51,12 +52,9 @@ public class StoneListLayer : UILayer
         }
         returnValue = UILayerLoader.Load(PreScene.target.T,"StoneListLayer") as StoneListLayer;
         returnValue.box.GenerateCells();
-        returnValue.box._tabEffects.SwitchZokusei
-        (
-            Element.blueMagic
-        );
+        returnValue.box.IniExTabs();
+        returnValue.box._tabEffects.SwitchZokusei(Element.blueMagic, ()=> returnValue.box.IniExTabsEffects(PreScene.target.FxCamera)).Forget();
         returnValue.box.AddFeatureToCells(returnValue.CellFeature_StoneShow);
-        returnValue.box.IniExTabs(PreScene.target.FxCamera);
         returnValue.box.EXTabsFeatureRefresh(true);
         returnValue.box.RestFilter();
         returnValue._skillStoneDetail.Clear();

@@ -30,7 +30,7 @@ public class StartUpPresentation : MonoBehaviour
             async ()=>
             {
                 progressBar.gameObject.SetActive(true);
-                await AddressablesLogic.ResourcePrepareProcess(EnterGame, ProgressUIStateRefresh);
+                await AddressablesLogic.ResourcePrepareProcess(Starter.EnterFrontScene, ProgressUIStateRefresh);
             },
             () =>
             {
@@ -38,17 +38,5 @@ public class StartUpPresentation : MonoBehaviour
             },
             msg
         );
-    }
-
-    void EnterGame()
-    {
-        if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
-        {
-            Starter.ToSkillShowerMode();
-        }
-        else
-        {
-            Starter.EnterFrontScene();
-        }
     }
 }

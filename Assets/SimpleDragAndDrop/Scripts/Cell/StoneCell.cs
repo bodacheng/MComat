@@ -107,7 +107,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     }
     
     // Show Character icon using this SkillStone
-    void ShowUsingChar(SKStoneItem Item, HeroIcon targetIcon)
+    async void ShowUsingChar(SKStoneItem Item, HeroIcon targetIcon)
     {
         if (Item == null || Item.instanceId == null)
         {
@@ -129,7 +129,8 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         }
         targetIcon.gameObject.SetActive(true);
         UnitConfig unitConfig = Units.GetUnitConfig(_one.r_id);
-        targetIcon.ChangeIcon(unitConfig == null ? null : UnitIconDic.Load(unitConfig.RECORD_ID),
+        var pic = await UnitIconDic.Load(unitConfig.RECORD_ID);
+        targetIcon.ChangeIcon(unitConfig == null ? null : pic,
             unitConfig == null ? Element.Null : unitConfig.element);
     }
     

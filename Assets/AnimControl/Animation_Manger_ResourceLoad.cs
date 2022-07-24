@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 public partial class Animation_Manger{
 
-    public IEnumerator PreloadBasicPersonalAnims(string type, string basicPackName)
+    public async UniTask PreloadBasicPersonalAnims(string type, string basicPackName)
     {
-        List<AnimationClip> basicAnims = new List<AnimationClip>();
+        var basicAnims = new List<AnimationClip>();
         string basicPackKey = type + "/" + basicPackName;
         if (AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(basicPackKey))
         {
@@ -17,25 +18,19 @@ public partial class Animation_Manger{
         else
         {
             var loadPath = Addressables.LoadResourceLocationsAsync("basic_anim");
-            yield return loadPath;
+            await loadPath;
             if (loadPath.Status == AsyncOperationStatus.Succeeded)
             {
                 foreach (var path in loadPath.Result)
                 {
                     if (path.PrimaryKey.Contains("Animation/" + type + "/BasicPack/" + basicPackName))
                     {
-                        var handle = Addressables.LoadAssetAsync<AnimationClip>(path.PrimaryKey);
-                        yield return handle;
-                        if (handle.Status == AsyncOperationStatus.Succeeded)
+                        Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey);
+                        if (value != null)
                         {
-                            Object value = handle.Result;
-                            if (value != null)
-                            {
-                                var _AnimationClip = (AnimationClip)value;
-                                basicAnims.Add(_AnimationClip);
-                            }
+                            var _AnimationClip = (AnimationClip)value;
+                            basicAnims.Add(_AnimationClip);
                         }
-                        Addressables.Release(handle);
                     }
                 }
             }
@@ -47,6 +42,11 @@ public partial class Animation_Manger{
         toLoadAnims = new Dictionary<string, AnimationClip>();        
         foreach (AnimationClip _AnimationClip in basicAnims)
         {
+            if (_AnimationClip == null)
+            {
+                continue;
+            }
+            
             if (_AnimationClip.name == "death")
             {
                 if (toLoadAnims.ContainsKey("death"))
@@ -148,32 +148,26 @@ public partial class Animation_Manger{
             }
         }
 
-        IEnumerator LoadHurtAnim(string type, string address, List<object> tags)
+        async UniTask LoadHurtAnim(string type, string address, List<object> tags)
         {
             if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(type + "/" + address))
             {
                 AnimationResourceLoader.SeriesAnimationClipsDic.Add(type + "/" + address, new List<AnimationClip>());
                 var humanHurtAnimsObjects = new List<AnimationClip>();
                 var loadPath = Addressables.LoadResourceLocationsAsync(tags, Addressables.MergeMode.Intersection);
-                yield return loadPath;
+                await loadPath;
                 if (loadPath.Status == AsyncOperationStatus.Succeeded)
                 {
                     foreach (var path in loadPath.Result)
                     {
                         if (path.PrimaryKey.Contains("Animation/" + type + "/" + address))
                         {
-                            var handle = Addressables.LoadAssetAsync<AnimationClip>(path.PrimaryKey);
-                            yield return handle;
-                            if (handle.Status == AsyncOperationStatus.Succeeded)
+                            Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey);
+                            if (value != null)
                             {
-                                Object value = handle.Result;
-                                if (value != null)
-                                {
-                                    AnimationClip _AnimationClip = (AnimationClip)value;
-                                    humanHurtAnimsObjects.Add(_AnimationClip);
-                                }
+                                AnimationClip _AnimationClip = (AnimationClip)value;
+                                humanHurtAnimsObjects.Add(_AnimationClip);
                             }
-                            Addressables.Release(handle);
                         }
                     }
                 }
@@ -185,12 +179,12 @@ public partial class Animation_Manger{
             }
         }
         
-        yield return LoadHurtAnim(type, "basic_hurts/back", new List<object> { "hurt_anim" });
-        yield return LoadHurtAnim(type, "basic_hurts/high", new List<object> { "hurt_anim" });
-        yield return LoadHurtAnim(type, "basic_hurts/lay", new List<object> { "hurt_anim" });
-        yield return LoadHurtAnim(type, "basic_hurts/low", new List<object> { "hurt_anim" });
-        yield return LoadHurtAnim(type, "basic_hurts/press",new List<object> { "hurt_anim" });
-        yield return LoadHurtAnim(type, "basic_knockoffs", new List<object> { "knock_anim" });
+        await LoadHurtAnim(type, "basic_hurts/back", new List<object> { "hurt_anim" });
+        await LoadHurtAnim(type, "basic_hurts/high", new List<object> { "hurt_anim" });
+        await LoadHurtAnim(type, "basic_hurts/lay", new List<object> { "hurt_anim" });
+        await LoadHurtAnim(type, "basic_hurts/low", new List<object> { "hurt_anim" });
+        await LoadHurtAnim(type, "basic_hurts/press",new List<object> { "hurt_anim" });
+        await LoadHurtAnim(type, "basic_knockoffs", new List<object> { "knock_anim" });
         
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_knockoffs", out knockoffAnimations);
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/back", out _hurtClipsBack);
@@ -231,13 +225,13 @@ public partial class Animation_Manger{
         Animator.runtimeAnimatorController = animatorOverride;
     }
 
-    public IEnumerator PreloadPersonalAnimResourceMode(string animPath, string key, string personalMagic, Element element)
+    public async UniTask PreloadPersonalAnimResourceMode(string animPath, string key, string personalMagic, Element element)
     {
         if (toLoadAnims.ContainsKey(key))
         {
-            yield break;
+            return;
         }
-        yield return AnimationResourceLoader.DownloadAnim(animPath, key);
+        await AnimationResourceLoader.DownloadAnim(animPath, key);
         var clip = AnimationResourceLoader.Instance.GetAnimationClip(animPath + "/skill/" + key);
         if (clip != null)
         {
@@ -292,18 +286,18 @@ public partial class Animation_Manger{
                     }
                     if (e.functionName == "PlaySoundOnce")
                     {
-                        yield return (AudioResourceLoading.Instance.LoadAudioClipFromResourceAndPutItIntoDic("effects", e.stringParameter));
+                        AudioResourceLoading.Instance.LoadAudioClipFromResourceAndPutItIntoDic("effects", e.stringParameter);
                     }
                 }
             }
         }
     }
     
-    public IEnumerator PreloadPersonalAnimsResourceMode(string type, List<string> toLoadSkillAnimsNames,string personalMagic, Element element)
+    public async UniTask PreloadPersonalAnimsResourceMode(string type, List<string> toLoadSkillAnimsNames,string personalMagic, Element element)
     {
         foreach (string anim_name in toLoadSkillAnimsNames)
         {
-            yield return PreloadPersonalAnimResourceMode(type, anim_name, personalMagic, element);
+            await PreloadPersonalAnimResourceMode(type, anim_name, personalMagic, element);
         }
     }
 }

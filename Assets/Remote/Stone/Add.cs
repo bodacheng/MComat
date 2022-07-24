@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 using mainMenu;
 
 namespace dataAccess
@@ -15,7 +16,7 @@ namespace dataAccess
         /// 生成账户用技能石图标，生成的模型会加入统一技能石字典作为备用
         /// </summary>
         /// <param name="instanceId">技能石账户id</param>
-        static void GenerateStoneModelByAccID(string instanceId)
+        static async void GenerateStoneModelByAccID(string instanceId)
         {
             if (RenderModelDic.ContainsKey(instanceId))
             {
@@ -23,7 +24,7 @@ namespace dataAccess
                     return;
             }
             var info = Get(instanceId);
-            var item = GenerateStoneModel(info.skillId, true);
+            var item = await GenerateStoneModel(info.skillId, true);
             item.Inherent = info.Inherent == "true";
             item._SkillConfig = SkillConfigTable.GetSkillConfig(Dic[instanceId].skillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
@@ -34,7 +35,7 @@ namespace dataAccess
 
         // 生成展示用技能石（额外模型）
         // 有两种模式，1: “账户技能石” 2 ：纯粹展示用技能石
-        public static SKStoneItem GenerateStoneModel(string skillID, bool openStoneFeature)
+        public static async UniTask<SKStoneItem> GenerateStoneModel(string skillID, bool openStoneFeature)
         {
             var skillConfig = SkillConfigTable.GetSkillConfig(skillID);
             if (skillConfig == null)
@@ -42,7 +43,7 @@ namespace dataAccess
                 return null;
             }
             
-            var Icon = SkillIconsDic.Instance.FindSkillIconPrefab(skillID);
+            var Icon = await SkillIconsDic.Instance.FindSkillIconPrefab(skillID);
             var ob = GameObject.Instantiate(Icon);
             ob.gameObject.name = "skillIcon_" + skillID;
             var item = ob.GetComponent<SKStoneItem>();

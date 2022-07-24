@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Singleton
@@ -7,12 +8,12 @@ namespace Singleton
     
         static readonly IDictionary<string, Sprite> Dic = new Dictionary<string, Sprite>();
     
-        public static Sprite Load(string unit_id)
+        public static async UniTask<Sprite> Load(string unit_id)
         {
             Dic.TryGetValue(unit_id, out Sprite Sprite);
             if (Sprite == null)
             {
-                Sprite = AddressablesLogic.LoadT<Sprite>("unit/" + unit_id);
+                Sprite = await AddressablesLogic.LoadT<Sprite>("unit/" + unit_id);
             }
             else
             {

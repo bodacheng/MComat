@@ -10,7 +10,7 @@ namespace FightScene
             UnitIconDic.Clear();
         }
         
-        void InsTeamUI_Multi()//这个环节应该能够同时把HP bar也适配好。
+        async void InsTeamUI_Multi()//这个环节应该能够同时把HP bar也适配好。
         {
             foreach (var center in TeamMembers.GetValues())
             {
@@ -35,7 +35,8 @@ namespace FightScene
                     });
                     var unitInfo = RTFightManager.target.UnitInfoRef[center];
                     var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
-                    _SideIcon.focusingCharIcon.ChangeIcon(global::Singleton.UnitIconDic.Load(unitInfo.r_id), unitConfig.element);
+                    var pic = await global::Singleton.UnitIconDic.Load(unitInfo.r_id);
+                    _SideIcon.focusingCharIcon.ChangeIcon(pic, unitConfig.element);
                     _SideIcon.gameObject.SetActive(true);
                 }
                 else

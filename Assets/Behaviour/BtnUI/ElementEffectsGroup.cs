@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
-using Object = UnityEngine.Object;
 
 public class ElementEffectsGroup
 {
@@ -29,17 +29,17 @@ public class ElementEffectsGroup
     
     public void Close()
     {
-        foreach(var keyValuePair in btnEffectsSets)
+        foreach(var kv in btnEffectsSets)
         {
-            foreach(var exPPair in keyValuePair.Value)
+            foreach(var pair in kv.Value)
             {
-                if (exPPair.Value != null)
+                if (pair.Value != null)
                 {
-                    exPPair.Value.gameObject.SetActive(false);
+                    pair.Value.gameObject.SetActive(false);
                 }
                 else
                 {
-                    Debug.Log("错误"+keyValuePair.Value );
+                    Debug.Log("错误"+kv.Value );
                 }
             }
         }
@@ -89,12 +89,12 @@ public class ElementEffectsGroup
         }
     }
 
-    public void INICommon(Transform targetRectT, Element element, Button Attack, Button Fire1, Button Fire2)
+    public async UniTask INICommon(Transform targetRectT, Element element, Button Attack, Button Fire1, Button Fire2)
     {
         var path = FightGlobalSetting.EffectPathDefine(element);
-        var attackSlot = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
-        var fire1Slot = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
-        var fire2Slot = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
+        var attackSlot = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
+        var fire1Slot = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
+        var fire2Slot = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
         
         attackSlot.transform.SetParent(targetRectT);
         fire1Slot.transform.SetParent(targetRectT);
@@ -109,18 +109,18 @@ public class ElementEffectsGroup
 
         if (FightGlobalSetting._hasDefend)
         {
-            _defendBtn = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/defend.prefab");
+            _defendBtn = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/defend.prefab");
         }
         
-        _rushBtn = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/rush.prefab");
-        _aRefresh = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
-        _fire1Refresh = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
-        _fire2Refresh = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
-        triggerExplosion0 = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
-        triggerExplosion1 = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion1.prefab");
-        triggerExplosion2 = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion2.prefab");
-        triggerExplosion3 = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion3.prefab");
-        pressingExplosion = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/pressing.prefab");
+        _rushBtn = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/rush.prefab");
+        _aRefresh = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
+        _fire1Refresh = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
+        _fire2Refresh = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
+        triggerExplosion0 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
+        triggerExplosion1 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion1.prefab");
+        triggerExplosion2 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion2.prefab");
+        triggerExplosion3 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion3.prefab");
+        pressingExplosion = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/pressing.prefab");
         
         if (FightGlobalSetting._hasDefend)
             _defendBtn.transform.SetParent(targetRectT);
@@ -144,9 +144,9 @@ public class ElementEffectsGroup
     
     public void INIBtn(Button Attack, Button Fire1, Button Fire2, UnitInfo unitInfo)
     {
-        void process(Button btn, string skillID, IDictionary<string, GameObject> dic)
+        async void process(Button btn, string skillID, IDictionary<string, GameObject> dic)
         {
-            var icon = Stones.GenerateStoneModel(skillID, false);
+            var icon = await Stones.GenerateStoneModel(skillID, false);
             if (icon == null) return;
             DicAdd<string, GameObject>.Add(dic, skillID, icon.gameObject);
             Parent(icon.transform, btn.transform);

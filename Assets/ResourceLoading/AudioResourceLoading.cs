@@ -52,7 +52,7 @@ public class AudioResourceLoading
         yield break;
     }
     
-    public IEnumerator LoadAudioClipFromResourceAndPutItIntoDic(string additionalPath, string clip_name)
+    public void LoadAudioClipFromResourceAndPutItIntoDic(string additionalPath, string clip_name)
     {
         string clipkey = "Audios/" + additionalPath + "/" + clip_name;
         AudioClip audioClip = Resources.Load(clipkey, typeof(AudioClip)) as AudioClip;
@@ -60,6 +60,5 @@ public class AudioResourceLoading
             soundClipsDic[clipkey] = audioClip;
         else
             soundClipsDic.Add(clipkey, audioClip);
-        yield break;
     }
 }

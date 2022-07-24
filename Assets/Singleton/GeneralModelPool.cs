@@ -1,34 +1,34 @@
 ﻿using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Singleton
 {
     public static class GeneralModelPool
     {
-        public static IEnumerator GetModel(string rId, Transform parent = null)
+        public static async UniTask<Data_Center> GetModel(string rId, Transform parent = null)
         {
             //以上这个信息就包括了全部的“我的角色”信息，下面别的信息都是据此各种由此索引出来的。
             var unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(rId));
             if (unitConfig == null)
             {
                 Debug.Log("资源号码错误");
-                yield break;
+                return null;
             }
             
-            var tempModel = AddressablesLogic.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME + ".prefab");
+            var tempModel = await AddressablesLogic.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME + ".prefab");
             tempModel.transform.SetParent(parent);
             var odl = tempModel.GetComponent<OutsideDataLink>();
             if (odl == null)
             {
-                yield return null;
-                yield break;
+                return null;
             }
             var d = odl._C;        
             tempModel.SetActive(true);
             // 在角色生成的瞬间各个组件的awake和onenable就已经都开了，而一些数据的初始化是从下一行开始，所以要确保这个过程不会有一些因为变量没被初始化而形成的报错。
             d.element = unitConfig.element;
-            yield return (d.Step1Initialize(unitConfig.TYPE, unitConfig.BASIC_MOVEMENT_PACK,unitConfig.SPECIAL_ZOKUSEI));
-            yield return d;
+            await (d.Step1Initialize(unitConfig.TYPE, unitConfig.BASIC_MOVEMENT_PACK,unitConfig.SPECIAL_ZOKUSEI));
+            return d;
         }
     }
 }

@@ -46,7 +46,7 @@ public partial class GotchaResultLayer : UILayer
     /// <param name="waitPos"></param>
     /// <param name="endPos"></param>
     /// <returns></returns>
-    void StarScreenMoveAnim(StoneOfPlayerInfo info, Vector3 waitPos, Vector3 endPos)
+    async void StarScreenMoveAnim(StoneOfPlayerInfo info, Vector3 waitPos, Vector3 endPos)
     {
         var skillConfig = SkillConfigTable.GetSkillConfig(info.skillId);
         var screenStarName = "";
@@ -71,11 +71,11 @@ public partial class GotchaResultLayer : UILayer
                 break;
         }
         
-        var screenStar = EffectsManager.GenerateEffect(screenStarName, FightGlobalSetting.EffectPathDefine(Element.Null), waitPos, Quaternion.identity, null);
+        var screenStar = await EffectsManager.GenerateEffect(screenStarName, FightGlobalSetting.EffectPathDefine(Element.Null), waitPos, Quaternion.identity, null);
         screenStarModels.Add(screenStar);
-        screenStar.transform.DOMove(endPos, 2f).OnComplete(() =>
+        screenStar.transform.DOMove(endPos, 2f).OnComplete(async () =>
         {
-            var effect = EffectsManager.GenerateEffect(explosionName, FightGlobalSetting.EffectPathDefine(Element.Null), endPos, Quaternion.identity, null);
+            var effect = await EffectsManager.GenerateEffect(explosionName, FightGlobalSetting.EffectPathDefine(Element.Null), endPos, Quaternion.identity, null);
             screenStarExplosionModels.Add(effect);
         });
     }

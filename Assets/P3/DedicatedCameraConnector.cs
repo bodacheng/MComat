@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Linq;
-using System.Collections;
 using UnityEngine.Rendering.Universal;
 
 namespace Cocone.ProjectP3

@@ -35,11 +35,11 @@ public static class EffectsManager
         Addressables.Release(locationHandle);
     }
     
-    static GameObject TryLoadEffectPrefab(string key)
+    static UniTask<GameObject> TryLoadEffectPrefab(string key)
     {
         if (!keyExists.Contains(key))
         {
-            return null;
+            return default;
         }
         else
         {
@@ -57,13 +57,13 @@ public static class EffectsManager
         EffectPoolsDic.Clear();
     }
     
-    public static Decompositioner GenerateEffect(string resource_name, string EffectsPath, Vector3 Pos, Quaternion Qua, Transform parentT)
+    public static async UniTask<Decompositioner> GenerateEffect(string resource_name, string EffectsPath, Vector3 Pos, Quaternion Qua, Transform parentT)
     {
         if (string.IsNullOrEmpty(resource_name))
-            return null;
-        var effectPool = INIEffectsPool(resource_name, EffectsPath, 3);
+            return default;
+        var effectPool = await INIEffectsPool(resource_name, EffectsPath, 3);
         if (effectPool == null)
-            return null;
+            return default;
         var processingEffectObj = effectPool.Rent();
         var myConstraintSource = new ConstraintSource();
         if (parentT != null)
@@ -98,7 +98,7 @@ public static class EffectsManager
         return null;
     }
     
-    public static DecompositionerPool INIEffectsPool(string resource_name, string EffectsPath, int object_count)
+    public static async UniTask<DecompositionerPool> INIEffectsPool(string resource_name, string EffectsPath, int object_count)
     {
         DecompositionerPool EffectPool = null;
         if (EffectsPath != null)
@@ -110,7 +110,7 @@ public static class EffectsManager
                     return EffectPool;
             }
             
-            var EffectPrefab = TryLoadEffectPrefab("Effects/" + EffectsPath + "/" + resource_name + ".prefab");
+            var EffectPrefab = await TryLoadEffectPrefab("Effects/" + EffectsPath + "/" + resource_name + ".prefab");
             if (EffectPrefab != null)
             {
                 EffectPool = ConstructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects/" + EffectsPath + "/" + resource_name,object_count);
@@ -121,7 +121,7 @@ public static class EffectsManager
                 return null;//防止无限循环
             }
         }
-        EffectPool = INIEffectsPool(resource_name, FightGlobalSetting.EffectPathDefine(Element.Null), object_count);
+        EffectPool = await INIEffectsPool(resource_name, FightGlobalSetting.EffectPathDefine(Element.Null), object_count);
         return EffectPool;
     }
 }

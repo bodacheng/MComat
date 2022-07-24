@@ -62,6 +62,7 @@ namespace mainMenu
 
         void Start()
         {
+            AnimationResourceLoader.Instance.Clear();
             AddressablesLogic.ReleaseAsyncOperationHandles();
             
             Screen.SetResolution(1920, 1080, true);
@@ -95,10 +96,9 @@ namespace mainMenu
             var teamEditFront = new TeamEditPage();
             var skillStones = new StonesPage();
             var stoneSell = new StoneSell();
-            var stoneMerge = new StoneMerge();
             var selfFightFront = new SelfFightPage();
             var questInfo = new QuestInfoPage();
-            var memberDetail = new UnitListPage();
+            var unitListPage = new UnitListPage();
             var memberDetail_edit = new MonsterEditPage();
             var memberDetail_SkillShow = new SkillShowPage();
             var arcadeFrontPage = new ArcadeFrontPage();
@@ -122,10 +122,9 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.TeamEditFront, teamEditFront);
             ProcessesRunner.Main.Add(MainSceneStep.SkillStoneList, skillStones);
             ProcessesRunner.Main.Add(MainSceneStep.SkillStones_Sell, stoneSell);
-            ProcessesRunner.Main.Add(MainSceneStep.StoneMerge, stoneMerge);
             ProcessesRunner.Main.Add(MainSceneStep.SelfFightFront, selfFightFront);
             ProcessesRunner.Main.Add(MainSceneStep.QuestInfo, questInfo);
-            ProcessesRunner.Main.Add(MainSceneStep.MonsterList, memberDetail);
+            ProcessesRunner.Main.Add(MainSceneStep.MonsterList, unitListPage);
             ProcessesRunner.Main.Add(MainSceneStep.UnitSkillEdit, memberDetail_edit);
             ProcessesRunner.Main.Add(MainSceneStep.UnitSkillShow, memberDetail_SkillShow);
             ProcessesRunner.Main.Add(MainSceneStep.FrontPage, frontPage);
@@ -141,47 +140,34 @@ namespace mainMenu
             #endregion
         }
 
-        void StartUp()
+        async void StartUp()
         {
-            HeroIcon.IniFrames();
-            if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
-            {
-                UnitOptionLayer unitOptionLayer = UnitOptionLayer.Open();
-                SetFocusingUnit("1");//确立focusing角色
-                unitOptionLayer.RefreshMemberDetailPageByFocusingChar();
-            }
+            await HeroIcon.IniFrames();
         }
 
         void ToInitialPhase()
         {
-            if (FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow)
+            if (ReturnLayer.ReturnMissionList.Count > 0)
             {
-                trySwitchToStep(MainSceneStep.UnitSkillEdit, false);
+                //ReturnLayer.AddFeatureToReturnButton();
+                //从战斗画面返回后，进入战斗前的菜单往上跳一节，指的是站前准备画面
+                ReturnLayer.POP();
             }
             else
             {
-                if (ReturnLayer.ReturnMissionList.Count > 0)
+                // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
+                switch (PlayerAccountInfo.Me.progress)
                 {
-                    //ReturnLayer.AddFeatureToReturnButton();
-                    //从战斗画面返回后，进入战斗前的菜单往上跳一节，指的是站前准备画面
-                    ReturnLayer.POP();
-                }
-                else
-                {
-                    // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
-                    switch (PlayerAccountInfo.Me.progress)
-                    {
-                        case PlayerAccountProgressStep.Freedom:
-                            trySwitchToStep(MainMenuNote.goingtostep, false);
-                            break;
-                        case PlayerAccountProgressStep.justCreated:
-                            break;
-                        case PlayerAccountProgressStep.Tutorial:
-                            TutorialRunner.Main.GenerateTutorial();
-                            trySwitchToStep(MainMenuNote.goingtostep, false);
-                            TutorialRunner.Main.StartToMove();
-                            break;
-                    }
+                    case PlayerAccountProgressStep.Freedom:
+                        trySwitchToStep(MainMenuNote.goingtostep, false);
+                        break;
+                    case PlayerAccountProgressStep.justCreated:
+                        break;
+                    case PlayerAccountProgressStep.Tutorial:
+                        TutorialRunner.Main.GenerateTutorial();
+                        trySwitchToStep(MainMenuNote.goingtostep, false);
+                        TutorialRunner.Main.StartToMove();
+                        break;
                 }
             }
         }

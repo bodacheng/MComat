@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using dataAccess;
 
 [CreateAssetMenu(fileName = "FightGlobalSetting", menuName = "ScriptableObjects/FightGlobalSetting", order = 1)]
 public class FightGlobalSetting : ScriptableObject
 {
-    public ProgramMode programMode = ProgramMode.normal;
     public bool hasDefend;
     public bool skillStoneHasExp = false;
     public AnimationCurve knockOffyAnimationCurve;
@@ -37,7 +35,6 @@ public class FightGlobalSetting : ScriptableObject
     
     public Material shadowMaterial;
     
-    public static ProgramMode _programMode;
     public static int scenestep;//0 :mainmenu 1: fightscene
     public static bool _hasDefend;
     public static bool _skillStoneHasExp;
@@ -95,17 +92,9 @@ public class FightGlobalSetting : ScriptableObject
         }
         return personalEffectPath;
     }
-
-    public enum ProgramMode
-    {
-        normal = 0,
-        skillShow = 1
-    }
     
     public void Initialise()
     {
-        _programMode = programMode;
-        
         _HurtObjectPreLoadCount = HurtObjectPreLoadCount;
         
         _hasDefend = hasDefend;

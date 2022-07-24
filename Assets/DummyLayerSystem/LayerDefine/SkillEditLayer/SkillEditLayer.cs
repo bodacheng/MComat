@@ -1,9 +1,11 @@
+using System;
 using DummyLayerSystem;
 using TouchScript.Gestures;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
 using Cocone.ProjectP3;
+using Cysharp.Threading.Tasks;
 
 public partial class SkillEditLayer : UILayer
 {
@@ -29,7 +31,7 @@ public partial class SkillEditLayer : UILayer
         return returnValue;
     }
     
-    public static SkillEditLayer Open()
+    public static async UniTask<SkillEditLayer> Open(Action<SkillEditLayer> toDo = null)
     {
         var l = UILayerLoader.Get("SkillEditLayer");
         SkillEditLayer returnValue;
@@ -49,23 +51,14 @@ public partial class SkillEditLayer : UILayer
         returnValue.StonesBox.GenerateCells();
         
         // 表现系
-        var _CharConfig = Units.GetUnitConfig(PreScene.target._focusing.r_id);
-        if (FightGlobalSetting._programMode != FightGlobalSetting.ProgramMode.skillShow)
-            returnValue.StonesBox.AddFeatureToCells(returnValue.StoneCellFeature);
-        else
-        {
-            returnValue.StonesBox.AddFeatureToCells(returnValue.CellFeature_SkillShowMode);
-        }
-        
-        returnValue.StonesBox._tabEffects.SwitchZokusei
-        (
-            _CharConfig.element
-        );
-        returnValue.StonesBox.IniExTabs(PreScene.target.FxCamera);
+        var unitConfig = Units.GetUnitConfig(PreScene.target._focusing.r_id);
+        returnValue.StonesBox.AddFeatureToCells(returnValue.StoneCellFeature);
+        returnValue.StonesBox.IniExTabs();
+        await returnValue.StonesBox._tabEffects.SwitchZokusei(unitConfig.element, ()=> returnValue.StonesBox.IniExTabsEffects(PreScene.target.FxCamera));
         returnValue.StonesBox.EXTabsFeatureRefresh(true);
         returnValue._skillStoneDetail.Clear();
-        returnValue.unitSwitcher.gameObject.SetActive(FightGlobalSetting._programMode == FightGlobalSetting.ProgramMode.skillShow);
         returnValue.SkillEditButtonFeature(PreScene.target._focusing);
+        toDo?.Invoke(returnValue);
         
         return returnValue;
     }
@@ -122,33 +115,6 @@ public partial class SkillEditLayer : UILayer
         NineSlot.ResetButton.onClick.AddListener(NineSlot.ResetNineSlot);
         NineSlot.removeAllBtn.onClick.AddListener(NineSlot.ClearSkillEquip);
         NineSlot.randomBtn.onClick.AddListener(FinishRemains);
-    }
-    
-    // 技能浏览器程序模式专用
-    public void SkillShowSpEnterProcess()
-    {
-        SkillEditButtonFeature_SP(PreScene.target._focusing);
-        
-        // 表现系
-        var unitConfig = Units.GetUnitConfig(PreScene.target._focusing.r_id);
-        StonesBox._tabEffects.SwitchZokusei
-        (
-            unitConfig.element
-        );
-    }
-    
-    // 技能浏览器版本
-    void SkillEditButtonFeature_SP(UnitInfo _UnitInfo)
-    {
-        if (_UnitInfo == null || _UnitInfo.r_id == null)
-        {
-            Debug.Log("到达了没道理到达的地方");
-            return;
-        }
-        var unitInfo = Units.GetUnitConfig(_UnitInfo.r_id);
-        StonesBox.FocusingType = unitInfo.TYPE;
-        StonesBox.RestFilter();
-        StonesBox.EXTabsFeatureRefresh(false);
     }
     
     void ForceClearAll()

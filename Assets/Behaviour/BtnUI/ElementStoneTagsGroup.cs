@@ -1,5 +1,14 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using System;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Triggers;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 //技能石盒分类系成员
 public class ElementStoneTagsGroup
@@ -17,14 +26,14 @@ public class ElementStoneTagsGroup
         }
     }
     
-    public void INI_forSkillStoneBox(Element element,Transform effectObjectParent)
+    public async UniTask INI_forSkillStoneBox(Element element,Transform effectObjectParent)
     {
         btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
         
-        var normalTab = CreateOneButtonIcon(element, 0);
-        var ex1Tab = CreateOneButtonIcon(element, 1);
-        var ex2Tab = CreateOneButtonIcon(element, 2);
-        var ex3Tab = CreateOneButtonIcon(element, 3);
+        var normalTab = await CreateOneButtonIcon(element, 0);
+        var ex1Tab = await CreateOneButtonIcon(element, 1);
+        var ex2Tab = await CreateOneButtonIcon(element, 2);
+        var ex3Tab = await CreateOneButtonIcon(element, 3);
         
         normalTab.transform.SetParent(effectObjectParent);
         ex1Tab.transform.SetParent(effectObjectParent);
@@ -36,10 +45,10 @@ public class ElementStoneTagsGroup
         btnEffectsSetsForStoneBox.Add(2, ex2Tab.GetComponent<ParticleSystem>());
         btnEffectsSetsForStoneBox.Add(3, ex3Tab.GetComponent<ParticleSystem>());
 
-        LoadPressedEffect(element, effectObjectParent);
+        await LoadPressedEffect(element, effectObjectParent);
     }
     
-    public static GameObject CreateOneButtonIcon(Element element, int SpLevel)
+    public static UniTask<GameObject> CreateOneButtonIcon(Element element, int SpLevel)
     {
         var path = FightGlobalSetting.EffectPathDefine(element);
         switch(SpLevel)
@@ -52,18 +61,19 @@ public class ElementStoneTagsGroup
                 return AddressablesLogic.LoadObject("ButtonEffects/" + path + "/EX2.prefab");
             case 3:
                 return AddressablesLogic.LoadObject("ButtonEffects/" + path + "/EX3.prefab");
+            default:
+                return default;
         }
-        return null;
     }
     
-    void LoadPressedEffect(Element element, Transform T)
+    async UniTask LoadPressedEffect(Element element, Transform T)
     {
         var path = FightGlobalSetting.EffectPathDefine(element);
         
-        var triggerExplosion0 = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
-        var triggerExplosion1 = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion1.prefab");
-        var triggerExplosion2 = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion2.prefab");
-        var triggerExplosion3 = AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion3.prefab");
+        var triggerExplosion0 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
+        var triggerExplosion1 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion1.prefab");
+        var triggerExplosion2 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion2.prefab");
+        var triggerExplosion3 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion3.prefab");
         
         triggerExplosion0.transform.SetParent(T);
         triggerExplosion1.transform.SetParent(T);
