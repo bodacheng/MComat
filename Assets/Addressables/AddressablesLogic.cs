@@ -14,18 +14,22 @@ public static class AddressablesLogic
         HurtObjectManager.ConstructDPool();
     }
     
-    static async UniTask downLoadSize(string label, long size)
+    static async UniTask<long> downLoadSize(string label)
     {
-        var dl = Addressables.GetDownloadSizeAsync(label);
-        while (!dl.IsDone)
+        var handle = Addressables.GetDownloadSizeAsync(label);
+        await handle.Task;
+        if (handle.Status != AsyncOperationStatus.Succeeded)
         {
-            await UniTask.DelayFrame(1);
+            Debug.Log($"Failed to get size : {label}");
+            Addressables.Release(handle);
+            return default;
         }
-        if (dl.Status == AsyncOperationStatus.Succeeded)
+        else
         {
-            size += dl.Result;
+            long result = handle.Result;
+            Addressables.Release(handle);
+            return result;
         }
-        Addressables.Release(dl);
     }
     
     static async UniTask downLoadMission(string label, Action<string,float> progressUIRefresh)
@@ -50,19 +54,19 @@ public static class AddressablesLogic
         
         long wholeSize = 0;
         
-        await downLoadSize("basic_anim", wholeSize);
-        await downLoadSize("skill_anim", wholeSize);
-        await downLoadSize("hurt_anim", wholeSize);
-        await downLoadSize("knock_anim", wholeSize);
-        await downLoadSize("unit", wholeSize);
-        await downLoadSize("weapon", wholeSize);
-        await downLoadSize("effect", wholeSize);
-        await downLoadSize("quest", wholeSize);
-        await downLoadSize("skill_icon", wholeSize);
-        await downLoadSize("unit_icon", wholeSize);
-        await downLoadSize("battle_ground", wholeSize);
-        await downLoadSize("icon_frame", wholeSize);
-        await downLoadSize("btn_effect", wholeSize);
+        wholeSize += await downLoadSize("basic_anim");
+        wholeSize += await downLoadSize("skill_anim");
+        wholeSize += await downLoadSize("hurt_anim");
+        wholeSize += await downLoadSize("knock_anim");
+        wholeSize += await downLoadSize("unit");
+        wholeSize += await downLoadSize("weapon");
+        wholeSize += await downLoadSize("effect");
+        wholeSize += await downLoadSize("quest");
+        wholeSize += await downLoadSize("skill_icon");
+        wholeSize += await downLoadSize("unit_icon");
+        wholeSize += await downLoadSize("battle_ground");
+        wholeSize += await downLoadSize("icon_frame");
+        wholeSize += await downLoadSize("btn_effect");
         
         var warn = "Download size : " + wholeSize / 1024 + "MB" + "\n\n" + "Start to download";
         Complete(warn);
