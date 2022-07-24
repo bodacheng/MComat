@@ -196,9 +196,9 @@ public partial class BO_Ani_E : MonoBehaviour
             {
                 temp.y = 0;
                 dis_from_center = temp.magnitude;
-                if (dis_from_center > BoundaryControllByGod._BattleRingRadius)
+                if (dis_from_center > BoundaryControlByGod._BattleRingRadius)
                 {
-                    temp = temp.normalized * BoundaryControllByGod._BattleRingRadius;
+                    temp = temp.normalized * BoundaryControlByGod._BattleRingRadius;
                 }
             }
             return temp;
@@ -247,9 +247,9 @@ public partial class BO_Ani_E : MonoBehaviour
             {
                 temp.y = 0;
                 dis_from_center = temp.magnitude;
-                if (dis_from_center > BoundaryControllByGod._BattleRingRadius)
+                if (dis_from_center > BoundaryControlByGod._BattleRingRadius)
                 {
-                    temp = temp.normalized * BoundaryControllByGod._BattleRingRadius;
+                    temp = temp.normalized * BoundaryControlByGod._BattleRingRadius;
                 }
             }
             return temp;

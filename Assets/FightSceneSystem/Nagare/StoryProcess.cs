@@ -13,7 +13,7 @@ namespace FightScene
         
         public override void ProcessEnter()
         {
-            BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
+            BoundaryControlByGod.target.ChangeMagicRingRadius(20f);
             if (NetFightScene.Fight.beforeFightStory != null)
             {
                 AutoMoveToNext = false;

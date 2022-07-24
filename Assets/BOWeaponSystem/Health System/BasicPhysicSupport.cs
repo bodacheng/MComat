@@ -165,7 +165,7 @@ public class BasicPhysicSupport : MonoBehaviour
         if (FightGlobalSetting.scenestep == 1)
         {
             hiddenMethods.GroundedCal();
-            BoundaryControllByGod.LimitTargetToRange(_DATA_CENTER);
+            BoundaryControlByGod.LimitTargetToRange(_DATA_CENTER);
         }
     }
 

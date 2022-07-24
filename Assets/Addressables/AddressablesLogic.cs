@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Cysharp.Threading.Tasks.Triggers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -107,7 +106,6 @@ public static class AddressablesLogic
             var _object = GameObject.Instantiate(handle.Result);
             _object.AddOnDestroyCallback( () =>
             {
-                Debug.Log("释放："+prefabPathName);
                 Addressables.Release(handle);
             });
             return _object;
@@ -150,7 +148,6 @@ public static class AddressablesLogic
             var _object = GameObject.Instantiate(prefab);
             _object.AddOnDestroyCallback( () =>
             {
-                Debug.Log("释放："+prefabPathName);
                 Addressables.Release(handle);
             });
             returnValue = _object.GetComponent<T>();

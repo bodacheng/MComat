@@ -1,19 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using Object = UnityEngine.Object;
+using Cysharp.Threading.Tasks;
 
-public class BoundaryControllByGod : MonoBehaviour {
+public class BoundaryControlByGod : MonoBehaviour {
     
     public List<ParticleSystem> BattleRingPSs;
     ParticleSystem BattleRingPS;
     float BattleRingRadius = 20f;
     public static float _BattleRingRadius;
-    public static BoundaryControllByGod target;
+    public static BoundaryControlByGod target;
     
     void Awake()
     {
@@ -36,20 +32,13 @@ public class BoundaryControllByGod : MonoBehaviour {
         }
     }
 
-    public async void ChangeBackGround(int Number)
+    public async UniTask ChangeBackGround(int Number)
     {
-        void Completed(AsyncOperationHandle<GameObject> handle) {
-            if (handle.Status == AsyncOperationStatus.Succeeded) {
-                GameObject prefab = handle.Result;
-                GameObject result = GameObject.Instantiate(prefab);
-                result.GetComponent<BattleGround>().Set();
-            }
+        var battleGround = await AddressablesLogic.LoadObject("battleGround/" +Number);
+        if (battleGround != null)
+        {
+            battleGround.GetComponent<BattleGround>().Set();
         }
-        
-        AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>("battleGround/" +Number);
-        handle.Completed += Completed;
-        await handle.Task;
-        Addressables.Release(handle);
     }
     
     public void ChangeMagicRingRadius(float targetradius)

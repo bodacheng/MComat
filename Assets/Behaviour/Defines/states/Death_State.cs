@@ -85,7 +85,7 @@ namespace Soul
                     _xz = Vector3.zero - gameObject.transform.position;
                     _xz.y = 0;
                     _xz = _xz.normalized;
-                    _effectP = gameObject.transform.position.normalized * BoundaryControllByGod._BattleRingRadius;
+                    _effectP = gameObject.transform.position.normalized * BoundaryControlByGod._BattleRingRadius;
                     _effectP.y = gameObject.transform.position.y;
                     _quaV = Vector3.zero - gameObject.transform.position.normalized;
                     _quaV.y = 0;

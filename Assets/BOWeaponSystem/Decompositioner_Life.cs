@@ -75,7 +75,7 @@ public partial class Decompositioner : MonoBehaviour
             temp2 = transform.position;
             temp2.y = 0;
             dis_from_center = temp2.magnitude;
-            if (dis_from_center > BoundaryControllByGod._BattleRingRadius + 4f)
+            if (dis_from_center > BoundaryControlByGod._BattleRingRadius + 4f)
             {
                 Phase = -1;
             }

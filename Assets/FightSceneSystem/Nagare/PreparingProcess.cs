@@ -24,7 +24,7 @@ public class PreparingProcess : FSceneProcess
         CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
         
         FightLoadError.Instance.FightLoadErrors.Clear();
-        BoundaryControllByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
+        await BoundaryControlByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
         Sensor.ClearFightingMember();
         await RTFightManager.target.LoadUnits(NetFightScene.Fight);
         

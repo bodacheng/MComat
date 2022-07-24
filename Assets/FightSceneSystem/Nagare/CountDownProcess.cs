@@ -25,7 +25,7 @@ namespace FightScene
         IEnumerator BeforeFightCountDown()
         {
             AutoMoveToNext = false;
-            BoundaryControllByGod.target.ChangeMagicRingRadius(20f);
+            BoundaryControlByGod.target.ChangeMagicRingRadius(20f);
             //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
             var cd = UILayerLoader.Load(NetFightScene.target.T.gameObject, "CountDownLayer") as CountDownLayer;
             yield return cd.BeforeFightCountDown();
