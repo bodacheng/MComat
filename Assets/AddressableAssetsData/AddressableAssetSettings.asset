@@ -39,7 +39,7 @@ MonoBehaviour:
     m_Id: b06b7dac454e04a1b8447caade86f7fc
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 1
-  m_overridePlayerVersion: 
+  m_overridePlayerVersion: v1
   m_GroupAssets:
   - {fileID: 11400000, guid: a032da4be2b634ae2ac2c1a3acf7eaa8, type: 2}
   - {fileID: 11400000, guid: 20eef0358be72403ca33daddeac76145, type: 2}
@@ -166,7 +166,7 @@ MonoBehaviour:
           m_Key: HostingServiceUploadSpeed
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.String
-          m_Data: ServerData/Android
+          m_Data: ServerData/dev/Android
           m_Key: ContentRoot
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Boolean
