@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Object = UnityEngine.Object;
 
 public static class AddressablesLogic
 {
@@ -14,7 +15,7 @@ public static class AddressablesLogic
         HurtObjectManager.ConstructDPool();
     }
     
-    static async UniTask<long> downLoadSize(string label)
+    static async UniTask<long> DownLoadSize(string label)
     {
         var handle = Addressables.GetDownloadSizeAsync(label);
         await handle.Task;
@@ -54,19 +55,19 @@ public static class AddressablesLogic
         
         long wholeSize = 0;
         
-        wholeSize += await downLoadSize("basic_anim");
-        wholeSize += await downLoadSize("skill_anim");
-        wholeSize += await downLoadSize("hurt_anim");
-        wholeSize += await downLoadSize("knock_anim");
-        wholeSize += await downLoadSize("unit");
-        wholeSize += await downLoadSize("weapon");
-        wholeSize += await downLoadSize("effect");
-        wholeSize += await downLoadSize("quest");
-        wholeSize += await downLoadSize("skill_icon");
-        wholeSize += await downLoadSize("unit_icon");
-        wholeSize += await downLoadSize("battle_ground");
-        wholeSize += await downLoadSize("icon_frame");
-        wholeSize += await downLoadSize("btn_effect");
+        wholeSize += await DownLoadSize("basic_anim");
+        wholeSize += await DownLoadSize("skill_anim");
+        wholeSize += await DownLoadSize("hurt_anim");
+        wholeSize += await DownLoadSize("knock_anim");
+        wholeSize += await DownLoadSize("unit");
+        wholeSize += await DownLoadSize("weapon");
+        wholeSize += await DownLoadSize("effect");
+        wholeSize += await DownLoadSize("quest");
+        wholeSize += await DownLoadSize("skill_icon");
+        wholeSize += await DownLoadSize("unit_icon");
+        wholeSize += await DownLoadSize("battle_ground");
+        wholeSize += await DownLoadSize("icon_frame");
+        wholeSize += await DownLoadSize("btn_effect");
         
         var warn = "Download size : " + wholeSize / 1024 + "MB" + "\n\n" + "Start to download";
         Complete(warn);
@@ -106,8 +107,7 @@ public static class AddressablesLogic
         }
         else
         {
-            loadingHandlerList.Add(handle);
-            var _object = GameObject.Instantiate(handle.Result);
+            var _object = Object.Instantiate(handle.Result);
             _object.AddOnDestroyCallback( () =>
             {
                 Addressables.Release(handle);
@@ -116,7 +116,7 @@ public static class AddressablesLogic
         }
     }
     
-    private static readonly List<AsyncOperationHandle> loadingHandlerList = new List<AsyncOperationHandle>();
+    private static readonly List<AsyncOperationHandle> LoadingHandlerList = new ();
     
     public static async UniTask<T> LoadT<T>(string prefabPathName)
     {
@@ -130,14 +130,13 @@ public static class AddressablesLogic
         }
         else
         {
-            loadingHandlerList.Add(handle);
+            LoadingHandlerList.Add(handle);
             return handle.Result;
         }
     }
     
     public static async UniTask<T> LoadTOnObject<T>(string prefabPathName)
     {
-        T returnValue = default;
         var handle = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
         await handle.Task;
         if (handle.Status != AsyncOperationStatus.Succeeded)
@@ -149,23 +148,23 @@ public static class AddressablesLogic
         else
         {
             var prefab = handle.WaitForCompletion();
-            var _object = GameObject.Instantiate(prefab);
+            var _object = Object.Instantiate(prefab);
             _object.AddOnDestroyCallback( () =>
             {
                 Addressables.Release(handle);
             });
-            returnValue = _object.GetComponent<T>();
+            var returnValue = _object.GetComponent<T>();
             return returnValue;
         }
     }
     
     public static void ReleaseAsyncOperationHandles()
     {
-        foreach (var handle in loadingHandlerList)
+        foreach (var handle in LoadingHandlerList)
         {
             if (handle.IsValid())
                 Addressables.Release(handle);
         }
-        loadingHandlerList.Clear();
+        LoadingHandlerList.Clear();
     }
 }
