@@ -8,6 +8,8 @@ using Object = UnityEngine.Object;
 
 public static class AddressablesLogic
 {
+    private static IDictionary<string, long> Sizes = new Dictionary<string, long>();
+    
     public static async UniTask Essentials()
     {
         await HurtObjectManager.CheckExistedKey();
@@ -28,25 +30,24 @@ public static class AddressablesLogic
         else
         {
             long result = handle.Result;
+            Sizes.Add(label, result);
             Addressables.Release(handle);
             return result;
         }
     }
     
-    static async UniTask downLoadMission(string label, Action<string,float> progressUIRefresh)
+    static async UniTask DownLoadMission(string label, Action<string, float> progressUIRefresh)
     {
-        // Clear all cached AssetBundles
-        // WARNING: This will cause all asset bundles to be re-downloaded at startup every time and should not be used in a production game
-        //Addressables.ClearDependencyCacheAsync(label);
-        
-        //Check the download size
-        var dl = Addressables.DownloadDependenciesAsync(label);
-        while (!dl.IsDone)
+        if (Sizes.ContainsKey(label))
         {
-            progressUIRefresh("Downloading "+ label + " asset", dl.GetDownloadStatus().Percent);
-            await UniTask.DelayFrame(1);
+            var handle = Addressables.DownloadDependenciesAsync(label);
+            while (!handle.IsDone)
+            {
+                progressUIRefresh("Downloading "+ label + " asset", handle.GetDownloadStatus().Percent);
+                await UniTask.DelayFrame(0);
+            }
+            Addressables.Release(handle);
         }
-        Addressables.Release(dl);
     }
     
     public static async UniTask GetWholeDownLoadSize(Action<string> Complete)
@@ -75,22 +76,26 @@ public static class AddressablesLogic
     
     public static async UniTask ResourcePrepareProcess(Action complete, Action<string,float> progressUIRefresh)
     {
+        // Clear all cached AssetBundles
+        // WARNING: This will cause all asset bundles to be re-downloaded at startup every time and should not be used in a production game
+        //Addressables.ClearDependencyCacheAsync(label);
+        
         Units.LoadMonstersConfig();
         SkillConfigTable.LoadAllSkillConfigs();
         
-        await downLoadMission("basic_anim", progressUIRefresh);
-        await downLoadMission("skill_anim", progressUIRefresh);
-        await downLoadMission("hurt_anim", progressUIRefresh);
-        await downLoadMission("knock_anim", progressUIRefresh);
-        await downLoadMission("unit", progressUIRefresh);
-        await downLoadMission("weapon", progressUIRefresh);
-        await downLoadMission("effect", progressUIRefresh);
-        await downLoadMission("quest", progressUIRefresh);
-        await downLoadMission("skill_icon", progressUIRefresh);
-        await downLoadMission("unit_icon", progressUIRefresh);
-        await downLoadMission("battle_ground", progressUIRefresh);
-        await downLoadMission("icon_frame", progressUIRefresh);
-        await downLoadMission("btn_effect", progressUIRefresh);
+        await DownLoadMission("basic_anim", progressUIRefresh);
+        await DownLoadMission("skill_anim", progressUIRefresh);
+        await DownLoadMission("hurt_anim", progressUIRefresh);
+        await DownLoadMission("knock_anim", progressUIRefresh);
+        await DownLoadMission("unit", progressUIRefresh);
+        await DownLoadMission("weapon", progressUIRefresh);
+        await DownLoadMission("effect", progressUIRefresh);
+        await DownLoadMission("quest", progressUIRefresh);
+        await DownLoadMission("skill_icon", progressUIRefresh);
+        await DownLoadMission("unit_icon", progressUIRefresh);
+        await DownLoadMission("battle_ground", progressUIRefresh);
+        await DownLoadMission("icon_frame", progressUIRefresh);
+        await DownLoadMission("btn_effect", progressUIRefresh);
         
         complete.Invoke();
     }

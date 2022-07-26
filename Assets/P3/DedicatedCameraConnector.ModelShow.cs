@@ -4,7 +4,6 @@ using Cysharp.Threading.Tasks;
 using dataAccess;
 using mainMenu;
 using Singleton;
-using UniRx;
 
 namespace Cocone.ProjectP3
 {
