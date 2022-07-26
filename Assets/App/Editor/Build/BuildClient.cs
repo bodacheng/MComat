@@ -7,8 +7,6 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEditor.Callbacks;
-using UnityEditor.iOS.Xcode;
-using UnityEditor.iOS.Xcode.Extensions;
 #if UNITY_IOS
 using UnityEditor.iOS.Xcode;
 using UnityEditor.iOS.Xcode.Extensions;
