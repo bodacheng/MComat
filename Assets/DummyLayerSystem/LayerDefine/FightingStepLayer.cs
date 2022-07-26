@@ -47,10 +47,9 @@ public class FightingStepLayer : UILayer
     public static async UniTask<FightingStepLayer> Open(bool active = true)
     {
         var returnValue = UILayerLoader.Load(NetFightScene.target.T.gameObject,"FightingStepLayer") as FightingStepLayer;
-        returnValue.gameObject.SetActive(active);
+        returnValue.gameObject.SetActive(active && NetFightScene.Fight.EventType != FightEventType.Screensaver);
         await returnValue.StartUp((x) =>
             {
-                Debug.Log("here" + x);
                 RTFightManager.target.team1.Auto = x;
             },
             (x) =>
@@ -59,11 +58,6 @@ public class FightingStepLayer : UILayer
             },
             ()=> FightScenePauseSupport.Open(NetFightScene.target.T.gameObject)
         );
-        
-        if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
-        {
-            returnValue.gameObject.SetActive(false);
-        }
         
         return returnValue;
     }
@@ -85,8 +79,8 @@ public class FightingStepLayer : UILayer
         
         pauseButton.onClick.AddListener(pauseAction.Invoke);
         
-        Team1Auto.INI((() => RTFightManager.target.team1.Auto), switchTeam1Auto);
-        Team2Auto.INI((() => RTFightManager.target.team2.Auto), switchTeam2Auto);
+        Team1Auto.Initialize((() => RTFightManager.target.team1.Auto), switchTeam1Auto);
+        Team2Auto.Initialize((() => RTFightManager.target.team2.Auto), switchTeam2Auto);
         
         team1UI.TeamMode = NetFightScene.Fight.Team1Mode;
         team2UI.TeamMode = NetFightScene.Fight.Team2Mode;

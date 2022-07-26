@@ -7,7 +7,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public static class AddressablesLogic
 {
-    public static async void Essentials()
+    public static async UniTask Essentials()
     {
         await HurtObjectManager.CheckExistedKey();
         await EffectsManager.CheckExistedKey();

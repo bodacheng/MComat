@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TouchScript.Gestures;
 
 public class AutoSwitch : MonoBehaviour
 {
@@ -19,19 +16,17 @@ public class AutoSwitch : MonoBehaviour
         onObject.SetActive(on);
         offObject.SetActive(!on);
     }
-
-    public void INI(Func<bool> currentState, Action<bool> action)
+    
+    public void Initialize(Func<bool> state, Action<bool> action)
     {
         _action = action;
-        this.currentState = currentState;
-        Btn.onClick.AddListener(temp);
-        
-        void temp()
+        currentState = state;
+        Btn.onClick.AddListener(() =>
         {
             var changedState = !this.currentState();
             _action.Invoke(changedState);
             Switch(changedState);
-        }
+        });
         
         Switch(this.currentState());
     }

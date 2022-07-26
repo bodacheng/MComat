@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 using dataAccess;
 using DummyLayerSystem;
 using UnityEngine.SceneManagement;
@@ -75,8 +76,8 @@ namespace mainMenu
             StartUp();
             BasicPhase();
             ToInitialPhase();
-
-            AddressablesLogic.Essentials();
+            
+            AddressablesLogic.Essentials().Forget();
         }
         
         public static void ReturnToLobby(string error)

@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using FightScene;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Singleton;
 using UniRx;
 
 public class PreparingProcess : FSceneProcess
@@ -17,15 +18,13 @@ public class PreparingProcess : FSceneProcess
     
     async UniTask EnterProcess()
     {
-        AddressablesLogic.Essentials();
-        
         RTFightManager.target._CameraManager.Assign_Camera(C_Mode.NULL, null,null);
         CameraManager._camera.transform.position = CameraManager._StartPosRef.transform.position;
         CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
-        
-        FightLoadError.Instance.FightLoadErrors.Clear();
-        await BoundaryControlByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
         Sensor.ClearFightingMember();
+        
+        await AddressablesLogic.Essentials();
+        await BoundaryControlByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
         await RTFightManager.target.LoadUnits(NetFightScene.Fight);
         
         var teamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
@@ -42,7 +41,6 @@ public class PreparingProcess : FSceneProcess
         RTFightManager.target.team2.TeamMode = NetFightScene.Fight.Team2Mode;
         RTFightManager.target.team1.teamConfig = RTFightManager.target.heroTeamConfig;
         RTFightManager.target.team2.teamConfig = RTFightManager.target.EnemyTeamConfig;
-        
         RTFightManager.target.team1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
         RTFightManager.target.team2.TeamStandPoints = NetFightScene.target.Team2StandPoints;
         
@@ -104,15 +102,6 @@ public class PreparingProcess : FSceneProcess
     public override void ProcessEnd()
     {
         NetFightScene.target.LoadStageFinished.Value = false;
-        if (FightLoadError.Instance.FightLoadErrors.Count > 0)
-        {
-            foreach (string error in FightLoadError.Instance.FightLoadErrors)
-            {
-                Debug.Log("双方队伍读取后问题： " + error);
-            }
-            SceneManager.LoadScene(1);//也就是说这个地方是为了阻止进入下一步
-        }
-        FightLoadError.Instance.FightLoadErrors.Clear();
         PopupLayer.LightUp(1f);
     }
     
