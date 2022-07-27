@@ -19,9 +19,9 @@ namespace FightScene
             }
         }
         
-        public Data_Center ToStartPos_Multi()
+        public void ToStartPos_Multi()
         {
-            Data_Center startUnit = null;
+            Data_Center unit = null;
             foreach (var kv in TeamMembers.mDict)
             {
                 var _DataCenter = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
@@ -29,8 +29,8 @@ namespace FightScene
                 {
                     continue;
                 }
-                if (startUnit == null)
-                    startUnit = kv.Value;
+                if (unit == null)
+                    unit = kv.Value;
                 if (TeamStandPoints[kv.Key.Item2] != null)
                 {
                     _DataCenter.WholeT.transform.position = TeamStandPoints[kv.Key.Item2].position;
@@ -43,8 +43,8 @@ namespace FightScene
                     Debug.Log("站位逻辑错误。出现了系统未安排的站位点");
                 }
             }
-
-            return startUnit;
+            
+            StartUnit = unit;
         }
         
         public void Initialize_Multi(float TeamHpRate, CriticalGaugeMode teamCGMode)

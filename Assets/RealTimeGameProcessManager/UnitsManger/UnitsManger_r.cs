@@ -9,9 +9,9 @@ namespace FightScene
         public ReactiveProperty<Data_Center> RMode_Unit = new ReactiveProperty<Data_Center>();
         Data_Center waitingMember;
         
-        public Data_Center ToStartPos_Rotate()
+        public void ToStartPos_Rotate()
         {
-            Data_Center startUnit = null;
+            Data_Center unit = null;
             foreach (var kv in TeamMembers.mDict)
             {
                 if (kv.Value == null)
@@ -19,13 +19,14 @@ namespace FightScene
                     continue;
                 }
                 
-                if (startUnit == null)
-                    startUnit = kv.Value;
+                if (unit == null)
+                    unit = kv.Value;
                 kv.Value.WholeT.parent = null;
                 kv.Value.WholeT.gameObject.SetActive(true);
             }
-            ChangeFightingUnit(startUnit, true, TeamStandPoints[0]);
-            return startUnit;
+
+            StartUnit = unit;
+            ChangeFightingUnit(unit, true, TeamStandPoints[0]);
         }
         
         async void ToNewUnit()
@@ -52,20 +53,13 @@ namespace FightScene
         }
         
         // 切换队员
-        public bool ChangeFightingUnit(Data_Center _changeTo, bool emptyState = false, Transform IniStandPoint = null)
+        public bool ChangeFightingUnit(Data_Center _changeTo = null, bool emptyState = false, Transform IniStandPoint = null)
         {
             if (_changeTo == null)
             {
-                Debug.Log("1");
-            }
-            else if (_changeTo.FightDataRef == null)
-            {
-                Debug.Log("2");
-            }
-            else if (_changeTo.FightDataRef.IsDead == null)
-            {
-                _changeTo.FightDataRef.IsDead = new ReactiveProperty<bool>(false);
-                Debug.Log("3");
+                _changeTo = StartUnit;
+                if (_changeTo == null)
+                    return false;
             }
             
             if (_changeTo.FightDataRef.IsDead.Value)

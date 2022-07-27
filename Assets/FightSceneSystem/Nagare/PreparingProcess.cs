@@ -1,9 +1,6 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-using FightScene;
+﻿using FightScene;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Singleton;
 using UniRx;
 
 public class PreparingProcess : FSceneProcess
@@ -22,9 +19,11 @@ public class PreparingProcess : FSceneProcess
         CameraManager._camera.transform.position = CameraManager._StartPosRef.transform.position;
         CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
         Sensor.ClearFightingMember();
-        
+        PopupLayer.LoadingPercent("loading Essentials", NetFightScene.target.T.gameObject, 0.1f);
         await AddressablesLogic.Essentials();
+        PopupLayer.LoadingPercent("loading BattleGround", NetFightScene.target.T.gameObject, 0.3f);
         await BoundaryControlByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
+        PopupLayer.LoadingPercent("loading Units", NetFightScene.target.T.gameObject, 0.5f);
         await RTFightManager.target.LoadUnits(NetFightScene.Fight);
         
         var teamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
@@ -32,6 +31,7 @@ public class PreparingProcess : FSceneProcess
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.target.EnemyTeamConfig, RTFightManager.target.team2.TeamMembers.GetValues());
         FightLogger.value.ReadyToLog(teamMembers);
         
+        PopupLayer.LoadingPercent("loading Effects", NetFightScene.target.T.gameObject, 0.5f);
         await EffectsManager.INIEffectsPool("hit_ground", null, 3);
         await EffectsManager.INIEffectsPool("wallCrack", null, 3);
         
@@ -57,11 +57,9 @@ public class PreparingProcess : FSceneProcess
         {
             case TeamMode.multiRaid:
                 RTFightManager.target.team1.Initialize_Multi(NetFightScene.Fight.Team1HpRate, NetFightScene.Fight.team1CGMode);
-                RTFightManager.target.team1StartUnit = RTFightManager.target.team1.ToStartPos_Multi();
                 break;
             case TeamMode.rotation:
                 RTFightManager.target.team1.TeamsIni_Rotate(NetFightScene.Fight.Team1HpRate, NetFightScene.Fight.team1CGMode);
-                RTFightManager.target.team1StartUnit = RTFightManager.target.team1.ToStartPos_Rotate();
                 break;
         }
         
@@ -69,11 +67,33 @@ public class PreparingProcess : FSceneProcess
         {
             case TeamMode.multiRaid:
                 RTFightManager.target.team2.Initialize_Multi(NetFightScene.Fight.Team2HpRate, NetFightScene.Fight.team2CGMode);
-                RTFightManager.target.team2StartUnit = RTFightManager.target.team2.ToStartPos_Multi();
                 break;
             case TeamMode.rotation:
                 RTFightManager.target.team2.TeamsIni_Rotate(NetFightScene.Fight.Team2HpRate, NetFightScene.Fight.team2CGMode);
-                RTFightManager.target.team2StartUnit = RTFightManager.target.team2.ToStartPos_Rotate();
+                break;
+        }
+        
+        RTFightManager.target.SetGame(NetFightScene.Fight);
+        PopupLayer.LoadingPercent("loading UI", NetFightScene.target.T.gameObject, 1f);
+        fightingStepLayer = await FightingStepLayer.Open(false);
+        
+        switch (RTFightManager.target.team1.TeamMode)
+        {
+            case TeamMode.multiRaid:
+                RTFightManager.target.team1.ToStartPos_Multi();
+                break;
+            case TeamMode.rotation:
+                RTFightManager.target.team1.ToStartPos_Rotate();
+                break;
+        }
+        
+        switch (RTFightManager.target.team2.TeamMode)
+        {
+            case TeamMode.multiRaid:
+                RTFightManager.target.team2.ToStartPos_Multi();
+                break;
+            case TeamMode.rotation:
+                RTFightManager.target.team2.ToStartPos_Rotate();
                 break;
         }
         
@@ -89,8 +109,7 @@ public class PreparingProcess : FSceneProcess
             }
         ).AddTo(RTFightManager.target.disposables);
         
-        RTFightManager.target.SetGame(NetFightScene.Fight);
-        fightingStepLayer = await FightingStepLayer.Open(false);
+        PopupLayer.Close();
     }
     
     public override void ProcessEnter()

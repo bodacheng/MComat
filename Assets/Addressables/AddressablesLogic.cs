@@ -78,7 +78,7 @@ public static class AddressablesLogic
         Complete(warn);
     }
     
-    public static async UniTask ResourcePrepareProcess(Action complete, Action<string,float> progressUIRefresh)
+    public static async UniTask ResourcePrepareProcess(Action complete, Action<string, float> progressUIRefresh)
     {
         // Clear all cached AssetBundles
         // WARNING: This will cause all asset bundles to be re-downloaded at startup every time and should not be used in a production game

@@ -42,8 +42,6 @@ namespace FightScene
             await team2._UnitsLoad(info.FightMembers.EnemySets, UnitInfoRef);
         }
         
-        public Data_Center team1StartUnit = null, team2StartUnit = null;
-        
         public void SetGame(FightInfo stage)
         {
             loadFight = stage;
@@ -58,7 +56,7 @@ namespace FightScene
                     team1.AllUnitsStartOff();
                     break;
                 case TeamMode.rotation:
-                    team1.ChangeFightingUnit(team1StartUnit);
+                    team1.ChangeFightingUnit();
                     break;
             }
             
@@ -68,7 +66,7 @@ namespace FightScene
                     team2.AllUnitsStartOff();
                     break;
                 case TeamMode.rotation:
-                    team2.ChangeFightingUnit(team2StartUnit);
+                    team2.ChangeFightingUnit();
                     break;
             }
         }

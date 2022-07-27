@@ -33,9 +33,11 @@ namespace ModelView
         string FocusRId;
         bool IfShowingSkill = false;
         
-        public async UniTask _ShowModel(string recordID) 
+        public async UniTask _ShowModel(string recordID)
         {
-            saves.TryGetValue(recordID, out var saveData);
+            Data_Center saveData = null;
+            if (recordID != null)
+                saves.TryGetValue(recordID, out saveData);
             
             if (_model != null)
             {
@@ -45,6 +47,7 @@ namespace ModelView
             
             if (recordID == null)
             {
+                focusingC = null;
                 return;
             }
 

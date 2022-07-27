@@ -13,6 +13,8 @@ namespace FightScene
         
         [HideInInspector]
         public Transform[] TeamStandPoints;
+
+        Data_Center StartUnit;
         
         public MobileInputsManager InputsManager
         {
@@ -43,7 +45,6 @@ namespace FightScene
                 if (center == null)
                 {
                     center = await UnitCreator.CreateUnit(_one);
-                    Debug.Log("成功？"+ center);
                 }
                 
                 TeamMembers.Set(kv.Key.Item1, kv.Key.Item2, center);
