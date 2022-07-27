@@ -142,9 +142,9 @@ public class ElementEffectsGroup
         };
     }
     
-    public void INIBtn(Button Attack, Button Fire1, Button Fire2, UnitInfo unitInfo)
+    public async UniTask INIBtn(Button Attack, Button Fire1, Button Fire2, UnitInfo unitInfo)
     {
-        async void process(Button btn, string skillID, IDictionary<string, GameObject> dic)
+        async UniTask process(Button btn, string skillID, IDictionary<string, GameObject> dic)
         {
             var icon = await Stones.GenerateStoneModel(skillID, false);
             if (icon == null) return;
@@ -152,17 +152,17 @@ public class ElementEffectsGroup
             Parent(icon.transform, btn.transform);
         }
         
-        process(Attack, unitInfo.set.a1, _aEffects);
-        process(Attack, unitInfo.set.a2, _aEffects);
-        process(Attack, unitInfo.set.a3, _aEffects);
+        await process(Attack, unitInfo.set.a1, _aEffects);
+        await process(Attack, unitInfo.set.a2, _aEffects);
+        await process(Attack, unitInfo.set.a3, _aEffects);
         
-        process(Fire1, unitInfo.set.b1, _bEffects);
-        process(Fire1, unitInfo.set.b2, _bEffects);
-        process(Fire1, unitInfo.set.b3, _bEffects);
+        await process(Fire1, unitInfo.set.b1, _bEffects);
+        await process(Fire1, unitInfo.set.b2, _bEffects);
+        await process(Fire1, unitInfo.set.b3, _bEffects);
         
-        process(Fire2, unitInfo.set.c1, _cEffects);
-        process(Fire2, unitInfo.set.c2, _cEffects);
-        process(Fire2, unitInfo.set.c3, _cEffects);
+        await process(Fire2, unitInfo.set.c1, _cEffects);
+        await process(Fire2, unitInfo.set.c2, _cEffects);
+        await process(Fire2, unitInfo.set.c3, _cEffects);
         
         void Parent(Transform t, Transform target)
         {
@@ -189,7 +189,7 @@ public class ElementEffectsGroup
         }else{
             buttonSlotEffects[button].Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
         }
-                
+        
         foreach(var pair in _target)
         {
             pair.Value.gameObject.SetActive(pair.Key == skillId);

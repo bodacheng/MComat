@@ -86,13 +86,13 @@ public class MobileInputsManager : MonoBehaviour {
             await elementEffect.INICommon(effectsParent, element, Attack, Fire1, Fire2);
             ElementEffects.Add(element, elementEffect);
         }
-        ElementEffects[element].INIBtn(Attack, Fire1, Fire2, unitInfo);
+        await ElementEffects[element].INIBtn(Attack, Fire1, Fire2, unitInfo);
         ElementEffects[element].Close();
     }
     
-    ParticleSystem _targetExplode;
     public void SkillExplosion(InputKey key, int spLevel)
     {
+        ParticleSystem _targetExplode;
         if (!ElementEffects.ContainsKey(_focusing))
         {
             Debug.Log("读取流程产生错误："+_focusing);
@@ -356,6 +356,10 @@ public class MobileInputsManager : MonoBehaviour {
         if (ElementEffects.ContainsKey(_focusing))
         {
             ElementEffects[_focusing].RefreshBtn(button, skillId, targetPos);
+        }
+        else
+        {
+            Debug.Log("error button effect："+　skillId);
         }
     }
 

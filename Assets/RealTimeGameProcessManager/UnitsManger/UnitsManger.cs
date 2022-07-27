@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 using Cysharp.Threading.Tasks;
 
 namespace FightScene

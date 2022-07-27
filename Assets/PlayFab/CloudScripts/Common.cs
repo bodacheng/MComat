@@ -12,7 +12,7 @@ public partial class CloudScript
         PlayFabClientAPI.ExecuteCloudScript(request, resultCallback, 
             (x)=>
             {
-                Debug.Log(x);
+                Debug.Log(x.Error);
                 errorCallback?.Invoke(x);
                 PreScene.ReturnToLobby("通讯错误");
             }, 
