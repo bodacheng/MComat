@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class CountDownLayer : UILayer
 {
-    [Space(11)]
     [Header("CountDownText")]
     public Text CountDown;
     

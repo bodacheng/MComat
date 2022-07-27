@@ -43,10 +43,7 @@ namespace FightScene
     
         public void AddNewProcess(SceneStep step, FSceneProcess _process)
         {
-            if (!SceneProcessDictionary.ContainsKey(step))
-                SceneProcessDictionary.Add(step, _process);
-            else
-                SceneProcessDictionary[step] = _process;
+            SceneProcessDictionary.Add(step, _process);
         }
         
         public void ArrangeProcessOrder()

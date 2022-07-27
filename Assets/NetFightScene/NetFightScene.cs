@@ -72,6 +72,7 @@ namespace FightScene
             var fightOverProcess = new FightOverProcess();
             var basicTryProcess = new BasicTryProcess();
             
+            FSceneProcessesRunner.Main.Clear();
             switch(Fight.EventType)
             {
                 case FightEventType.SkillTest:
