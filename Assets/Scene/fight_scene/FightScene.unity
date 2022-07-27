@@ -11458,8 +11458,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
       propertyPath: layers.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
+      propertyPath: layers.Array.data[0]
+      value: 
+      objectReference: {fileID: 3000649885118306807}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
 --- !u!1 &1940347239
@@ -23102,8 +23106,6 @@ MonoBehaviour:
   team2: {fileID: 1142809864}
   _CameraManager: {fileID: 3000649885118306800}
   Messages: {fileID: 0}
-  team1StartUnit: {fileID: 0}
-  team2StartUnit: {fileID: 0}
 --- !u!1 &3000649885632960530
 GameObject:
   m_ObjectHideFlags: 0
@@ -23146,6 +23148,7 @@ GameObject:
   - component: {fileID: 3000649885718481873}
   - component: {fileID: 3000649885718481872}
   - component: {fileID: 3000649885718481871}
+  - component: {fileID: 3000649885718481874}
   m_Layer: 0
   m_Name: CanvasT
   m_TagString: Untagged
@@ -23213,6 +23216,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &3000649885718481874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3000649885718481869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!4 &3000649885788242078
 Transform:
   m_ObjectHideFlags: 0
