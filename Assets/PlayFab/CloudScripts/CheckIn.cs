@@ -13,7 +13,7 @@ public partial class CloudScript
             FunctionName = "CheckIn",
         };
 
-        PlayFabClientAPI.ExecuteCloudScript(request, OnCheckInCallback, OnApiCallError);
+        ExecuteCloudScriptMainSceneCommon(request, OnCheckInCallback, OnApiCallError);
     }
 
     static void OnCheckInCallback(ExecuteCloudScriptResult result)

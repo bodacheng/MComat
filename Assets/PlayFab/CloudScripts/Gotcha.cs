@@ -13,7 +13,7 @@ public partial class CloudScript
 {
     public static void GotchaX9(Action<List<StoneOfPlayerInfo>> action)
     {
-        PlayFabClientAPI.ExecuteCloudScript(
+        ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest()
             {
                 FunctionName = "GotchaX9", // Arbitrary function name (must exist in your uploaded cloud.js file)
@@ -50,12 +50,7 @@ public partial class CloudScript
                     GotStones.Add(stoneOfPlayerInfo);
                 }
                 action(GotStones);
-            },
-            error =>
-            {
-                Debug.Log(error.Error);
-                // 缺失通信错误的提示
-                PreScene.target.trySwitchToStep(MainSceneStep.GotchaFront, true);
-            });
+            }
+        );
     }
 }

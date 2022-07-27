@@ -7,7 +7,7 @@ using dataAccess;
 
 public partial class CloudScript
 {
-    public static void UpdateStone(SkillStoneLevelUpForm form, Action<string, List<string>> success, Action fail)
+    public static void UpdateStone(SkillStoneLevelUpForm form, Action<string, List<string>> success)
     {
         var Items = new List<PlayFab.AdminModels.RevokeInventoryItem>();
 
@@ -46,7 +46,7 @@ public partial class CloudScript
         Items.Add(resource3);
         Items.Add(resource4);
         
-        PlayFabClientAPI.ExecuteCloudScript(
+        ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest()
             {
                 FunctionName = "updateStone",
@@ -57,7 +57,7 @@ public partial class CloudScript
                 }, 
                 GeneratePlayStreamEvent = true,
             },
-            (ExecuteCloudScriptResult result) => {
+            (result) => {
                 var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                 object successReturn, level;
                 jsonResult.TryGetValue("success", out successReturn);
@@ -80,10 +80,7 @@ public partial class CloudScript
                         }
                     );
                 }
-            },
-            error => {
-                Debug.Log(error.Error);
-                fail.Invoke();
-            });
+            }
+        );
     }
 }

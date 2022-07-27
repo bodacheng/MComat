@@ -29,11 +29,6 @@ public partial class SSLevelUpManager : MonoBehaviour
                 {
                     Stones.RemoveStoneLocal(instanceId);
                 }
-                
-            },
-            () =>
-            {
-                
             }
         );
     }

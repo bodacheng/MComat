@@ -4,8 +4,8 @@ using UnityEngine;
 using UniRx;
 public partial class PopupLayer : UILayer
 {
-    private static float waitRemoteExtendTime = 5f;
-    static readonly CompositeDisposable disposables = new CompositeDisposable();
+    private static float waitRemoteExtendTime = 10f;
+    static readonly CompositeDisposable disposables = new ();
     private float counter;
     
     static void RemoteWaitTooLongProcess(float CountTime)

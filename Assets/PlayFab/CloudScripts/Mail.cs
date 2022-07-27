@@ -1,5 +1,4 @@
 using UnityEngine;
-using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
 using Newtonsoft.Json;
@@ -8,8 +7,8 @@ public partial class CloudScript
 {
     public static void claimAllPresentMails(List<MailItemInstance> _myMailList, Action<ItemInstance> saveToLocal)
     {
-        PlayFabClientAPI.ExecuteCloudScript(
-            new ExecuteCloudScriptRequest()
+        ExecuteCloudScriptMainSceneCommon(
+            new ExecuteCloudScriptRequest
             {
                 FunctionName = "claimAllPresentMails",
                 GeneratePlayStreamEvent = true
@@ -32,9 +31,6 @@ public partial class CloudScript
                         saveToLocal(data);
                     }
                 }
-            },
-            error => {
-                Debug.Log(error.Error);
             }
         );
     }

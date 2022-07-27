@@ -1,5 +1,4 @@
 using UnityEngine;
-using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
 using System;
@@ -9,7 +8,7 @@ public partial class CloudScript
 {
     public static void ArenaDefendTeamSave(MultiDic<int, int, UnitInfo> info, Action<bool> finished)
     {
-        PlayFabClientAPI.ExecuteCloudScript(
+        ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest()
             {
                 FunctionName = "ArenaDefendTeamSave",
@@ -36,14 +35,13 @@ public partial class CloudScript
             error =>
             {
                 finished.Invoke(false);
-                Debug.Log(error.Error);
             }
         );
     }
     
-    public static void GetLeaderboardAroundUser(Action<List<LeaderboardInfo>> success, Action fail)
+    public static void GetLeaderboardAroundUser(Action<List<LeaderboardInfo>> success)
     {
-        PlayFabClientAPI.ExecuteCloudScript(
+        ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest()
             {
                 FunctionName = "GetLeaderboardAroundUser",
@@ -68,16 +66,13 @@ public partial class CloudScript
                     Debug.Log(e);
                     success.Invoke(new List<LeaderboardInfo>());
                 }
-            },
-            error => {
-                Debug.Log(error.Error);
-                fail.Invoke();
-        });
+            }
+        );
     }
     
-    public static void ArenaPointUp(Action success, Action fail)
+    public static void ArenaPointUp(Action success)
     {
-        PlayFabClientAPI.ExecuteCloudScript(
+        ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest()
             {
                 FunctionName = "ArenaPointUp",
@@ -89,11 +84,8 @@ public partial class CloudScript
                 jsonResult.TryGetValue("currentPoint", out point); 
                 Debug.Log(point);
                 success.Invoke();
-            },
-            error => {
-                Debug.Log(error.Error);
-                fail.Invoke();
-            });
+            }
+        );
     }
     
     public class LeaderboardInfo

@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartUpPresentation : MonoBehaviour
@@ -11,7 +11,17 @@ public class StartUpPresentation : MonoBehaviour
     
     void Start()
     {
-        AddressablesLogic.GetWholeDownLoadSize(DownLoadConfirm).Forget();
+        AddressablesLogic.GetWholeDownLoadSize(
+            DownLoadConfirm,
+            () =>
+            {
+                var popupLayer = PopupLayer.Open(T.gameObject);
+                popupLayer.ArrangeConfirmWindow((() =>
+                {
+                    SceneManager.LoadScene(0);
+                }), " 下载错误。请检查网络 ");
+            }
+        ).Forget();
     }
     
     [SerializeField] private TextMeshProUGUI ProgressMsg;

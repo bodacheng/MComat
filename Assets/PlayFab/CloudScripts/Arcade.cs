@@ -5,9 +5,9 @@ using System;
 
 public partial class CloudScript
 {
-    public static void ArcadeProgress(string targetLevel, Action<ExecuteCloudScriptResult> success, Action fail)
+    public static void ArcadeProgress(string targetLevel, Action<ExecuteCloudScriptResult> success)
     {
-        PlayFabClientAPI.ExecuteCloudScript(
+        ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest()
             {
                 FunctionName = "completedLevel",
@@ -16,10 +16,6 @@ public partial class CloudScript
             },
             (ExecuteCloudScriptResult result) => {
                 success.Invoke(result);
-            },
-            error => {
-                Debug.Log(error.Error);
-                fail.Invoke();
             });
     }
 }

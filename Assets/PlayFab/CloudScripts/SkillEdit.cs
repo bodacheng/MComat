@@ -27,7 +27,7 @@ public partial class CloudScript
             Items.Add(itemUpdate);
         }
 
-        PlayFabClientAPI.ExecuteCloudScript(
+        ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest()
             {
                 FunctionName = "skillEdit", // Arbitrary function name (must exist in your uploaded cloud.js file)
@@ -56,7 +56,6 @@ public partial class CloudScript
             success.Invoke(ChangedDic);
         },
         error => {
-            Debug.Log(error.Error);
             fail.Invoke();
         });
     }

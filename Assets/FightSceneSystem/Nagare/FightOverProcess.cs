@@ -29,10 +29,6 @@ namespace FightScene
                             {
                                 var a = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;
                                 a.Initialise(NetFightScene.target.ReturnToFront);
-                            },
-                            () =>
-                            {
-                                Debug.Log("没能加分成功");
                             }
                         );
                     }
@@ -70,10 +66,6 @@ namespace FightScene
                                     },
                                     reward_GD_Int, reward_GM_Int
                                 );
-                            },
-                            () =>
-                            {
-
                             }
                         );
                     }

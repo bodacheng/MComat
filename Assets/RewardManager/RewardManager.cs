@@ -10,8 +10,7 @@ public static class RewardManager
         {
             case FightEventType.Arena:
                 CloudScript.ArenaPointUp(
-                    () => {Debug.Log("胜利加分");},
-                    () => {Debug.Log("没能加分成功");}
+                    () => {Debug.Log("胜利加分");}
                 );
                 break;
             case FightEventType.Quest:

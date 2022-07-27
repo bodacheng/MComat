@@ -80,10 +80,6 @@ public class ArenaLayer : UILayer
                 LoadArena(exceptSelf);
                 View(true);
                 PopupLayer.Close();
-            },
-            () =>
-            {
-                PreScene.ReturnToLobby("通讯错误");
             }
         );
     }
