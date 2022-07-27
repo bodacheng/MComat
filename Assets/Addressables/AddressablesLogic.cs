@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 
 public static class AddressablesLogic
 {
-    private static IDictionary<string, long> Sizes = new Dictionary<string, long>();
+    private static readonly IDictionary<string, long> Sizes = new Dictionary<string, long>();
     
     public static async UniTask Essentials()
     {
@@ -21,18 +21,19 @@ public static class AddressablesLogic
     {
         var handle = Addressables.GetDownloadSizeAsync(label);
         await handle.Task;
-        if (handle.Status != AsyncOperationStatus.Succeeded)
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            var result = handle.Result;
+            if (result > 0)
+                Sizes.Add(label, result);
+            Addressables.Release(handle);
+            return result;
+        }
+        else
         {
             Debug.Log($"Failed to get size : {label}");
             Addressables.Release(handle);
             return default;
-        }
-        else
-        {
-            long result = handle.Result;
-            Sizes.Add(label, result);
-            Addressables.Release(handle);
-            return result;
         }
     }
     

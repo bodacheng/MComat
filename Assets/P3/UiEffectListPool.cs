@@ -2,11 +2,12 @@
 Original Code is here.
 https://bitbucket.org/Unity-Technologies/ui/src/f0b47d48183738c2eb00e90ede60c38448f359b5/UnityEngine.UI/UI/Core/Utility/ListPool.cs?at=5.4&fileviewer=file-view-default
 */
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace UiEffect
+namespace ModelView
 {
     public static class UiEffectListPool<T>
     {

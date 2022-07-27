@@ -1,14 +1,25 @@
-using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using dataAccess;
 using mainMenu;
 using Singleton;
+using UnityEngine;
 
-namespace Cocone.ProjectP3
+namespace ModelView
 {
     public partial class DedicatedCameraConnector : MonoBehaviour
     {
+        static readonly IDictionary<string, Data_Center> saves = new Dictionary<string, Data_Center>();
+
+        public static void ClearBackUpModels()
+        {
+            foreach (var save in saves)
+            {
+                if (save.Value != null)
+                Destroy(save.Value.WholeT.gameObject);
+            }
+        } 
+        
         public async void ShowMyModel(string instanceID)
         {
             var info = MyMonsters.Get(instanceID);
@@ -24,24 +35,35 @@ namespace Cocone.ProjectP3
         
         public async UniTask _ShowModel(string recordID) 
         {
-            PopupLayer.Loading(">", PreScene.target.T);
+            saves.TryGetValue(recordID, out var saveData);
+            
             if (_model != null)
             {
-                DestroyImmediate(_model);
+                _model.SetActive(false);
                 _model = null;
             }
+            
             if (recordID == null)
             {
                 return;
             }
-            
-            focusingC = await GeneralModelPool.GetModel(recordID, transform);
-            if (focusingC == null)
+
+            if (saveData != null)
             {
-                Debug.Log("模型错误");
-                FocusRId = null;
-                _model = null;
-                return;
+                focusingC = saveData;
+            }
+            else
+            {
+                PopupLayer.Loading(">", PreScene.target.T);
+                focusingC = await GeneralModelPool.GetModel(recordID, transform);
+                PopupLayer.Close();
+                if (focusingC == null)
+                {
+                    FocusRId = null;
+                    _model = null;
+                    return;
+                }
+                DicAdd<string, Data_Center>.Add(saves, recordID, focusingC);
             }
             
             focusingC.WholeT.SetParent(transform); // 尽量确保模型总与图层一起被摧毁
@@ -54,27 +76,23 @@ namespace Cocone.ProjectP3
             _model.SetActive(true);
 
             await UniTask.DelayFrame(5);// 否则Unity对mesh的尺寸计算有错误。算是Unity的bug
-            
-            Initialize(false,_model.transform, transform, PreScene.target.FxCamera);
-            ItemDetailStartDirection(0,0,0);
-            
-            PopupLayer.Close();
-        }
 
-        public void SkillShowRun(string skillName)
-        {
-            StartCoroutine(SkillShowRunWithPrepare(skillName));
+            if (_model != null)
+            {
+                Initialize(false,_model.transform, transform, PreScene.target.FxCamera);
+                ItemDetailStartDirection(0,0,0);
+            }
         }
         
-        IEnumerator SkillShowRunWithPrepare(string skillName)
+        public async UniTask SkillShowRunWithPrepare(string skillName)
         {
             var unitConfig = Units.GetUnitConfig(FocusRId);
             if (unitConfig == null)
-                yield break;
+                return;
             
             if (focusingC.Animation_Manger != null)
             {
-                yield return focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, skillName, unitConfig.SPECIAL_ZOKUSEI, unitConfig.element);
+                await focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, skillName, unitConfig.SPECIAL_ZOKUSEI, unitConfig.element);
                 IfShowingSkill = true;
                 focusingC.Animation_Manger.AnimationTrigger(skillName, true, 0.05f);
             }

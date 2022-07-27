@@ -6,9 +6,9 @@ using System.Linq;
 using DG.Tweening;
 using DummyLayerSystem;
 using UniRx;
-using Cocone.ProjectP3;
 using System.Collections;
 using Cysharp.Threading.Tasks;
+using ModelView;
 
 namespace mainMenu
 {
@@ -102,8 +102,8 @@ namespace mainMenu
                     }
                 }
                 //////// 超级功能 ////////
-                _connector.SkillShowRun(_SE.REAL_NAME);
-
+                _connector.SkillShowRunWithPrepare(_SE.REAL_NAME).Forget();
+                
                 // 这个就是强行把技能盒子附带的那个点击触效给拿过来用了。
                 EffectsManager.SkillButtonExplosion(_SE.SP_LEVEL, _button.transform.position, transform);
             }

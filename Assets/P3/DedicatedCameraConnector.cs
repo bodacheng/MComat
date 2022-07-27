@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Linq;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-namespace Cocone.ProjectP3
+namespace ModelView
 {
     public partial class DedicatedCameraConnector : MonoBehaviour
     {
@@ -13,7 +13,7 @@ namespace Cocone.ProjectP3
         [SerializeField] private float rotateSpeed = 90;
         [SerializeField] private float extraZDis = 0;
         [SerializeField] private float extraZCameraDepth = 5f;
-        private readonly Bounds tempBoundary = new Bounds();
+        private readonly Bounds tempBoundary = new ();
         private RectTransform rect;
         private bool fixMode;
         
@@ -22,7 +22,7 @@ namespace Cocone.ProjectP3
             DestroyImmediate(camera.gameObject);
             if (target != null)
                 DestroyImmediate(target.gameObject);
-            DestroyImmediate(this.gameObject);
+            DestroyImmediate(gameObject);
         }
 
         private void OnDestroy()

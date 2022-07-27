@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.IO;
+using UnityEngine;
 
-namespace Cocone.ProjectP3
+namespace ModelView
 {
     public static class TextureUtil
     {

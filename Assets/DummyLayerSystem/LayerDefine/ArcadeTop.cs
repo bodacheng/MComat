@@ -5,8 +5,8 @@ using mainMenu;
 using System;
 using System.Linq;
 using DummyLayerSystem;
-using Cocone.ProjectP3;
 using Cysharp.Threading.Tasks;
+using ModelView;
 using Singleton;
 
 public class ArcadeTop : UILayer

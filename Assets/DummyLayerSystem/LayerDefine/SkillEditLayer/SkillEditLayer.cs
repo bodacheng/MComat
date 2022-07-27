@@ -4,8 +4,8 @@ using TouchScript.Gestures;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
-using Cocone.ProjectP3;
 using Cysharp.Threading.Tasks;
+using ModelView;
 
 public partial class SkillEditLayer : UILayer
 {
@@ -45,7 +45,7 @@ public partial class SkillEditLayer : UILayer
         returnValue.NineSlot.PrintSkillInfo = returnValue._skillStoneDetail.RefreshInfo;
         returnValue.NineSlot.StartUp((x) =>
             {
-                returnValue._connector.SkillShowRun(x);
+                returnValue._connector.SkillShowRunWithPrepare(x);
             }
         );
         returnValue.StonesBox.GenerateCells();
@@ -165,25 +165,6 @@ public partial class SkillEditLayer : UILayer
         _Cell.SetOnDropAction(StoneCell.Install);
     }
     
-    // 技能浏览器模式
-    void CellFeature_SkillShowMode(StoneCell _Cell)
-    {
-        void buttonFeature(object sender, System.EventArgs e)
-        {
-            var _stone = _Cell.GetItem();
-            if (_stone != null && _stone._SkillConfig != null)
-            {
-                _skillStoneDetail.RefreshInfo(_stone.instanceId);
-                _connector.SkillShowRun(_stone._SkillConfig.REAL_NAME);
-            }else{
-                _skillStoneDetail.Clear();
-            }
-            StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
-        }
-        _Cell.pGesture.Pressed += buttonFeature;
-        _Cell.SetOnDropAction(StoneCell.Install);
-    }
-
     public void SkillEditConfirmAnimation()
     {
         var personalEffectsPath = FightGlobalSetting.EffectPathDefine(Element.Null);

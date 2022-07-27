@@ -38,7 +38,7 @@ public class UnitListPage : MainSceneProcess
         {
             void UnitIconBtn(string instanceId)
             {
-                Debug.Log("instanceId :"+ instanceId);
+                Debug.Log("onclick instanceId :"+ instanceId);
                 x.Select(instanceId);
                 PreScene.target.SetFocusingUnit(instanceId);
                 unitOptionLayer.RefreshMemberDetailPageByFocusingChar();

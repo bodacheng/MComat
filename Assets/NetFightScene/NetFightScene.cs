@@ -3,6 +3,7 @@ using UniRx;
 using UnityEngine.Playables;
 using System.Collections.Generic;
 using mainMenu;
+using ModelView;
 using UnityEngine.SceneManagement;
 
 namespace FightScene
@@ -43,6 +44,7 @@ namespace FightScene
         void Start()
         {
             AnimationResourceLoader.Instance.Clear();
+            DedicatedCameraConnector.ClearBackUpModels();
             AddressablesLogic.ReleaseAsyncOperationHandles();
             
             PopupLayer.DarkOff(T.gameObject, 1, 0);

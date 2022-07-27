@@ -2,6 +2,7 @@
 using UnityEngine;
 using dataAccess;
 using DummyLayerSystem;
+using ModelView;
 using UnityEngine.SceneManagement;
 
 namespace mainMenu
@@ -64,6 +65,7 @@ namespace mainMenu
         void Start()
         {
             AnimationResourceLoader.Instance.Clear();
+            DedicatedCameraConnector.ClearBackUpModels();
             AddressablesLogic.ReleaseAsyncOperationHandles();
             
             Screen.SetResolution(1920, 1080, true);
