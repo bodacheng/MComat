@@ -577,7 +577,11 @@ public class UltimateJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler
 	/// </summary>
 	void UpdateJoystickCenter ()
 	{
+		Debug.Log("joystickBase.position:"+ joystickBase.position);
+		Debug.Log("ParentCanvas.scaleFactor:"+ ParentCanvas.scaleFactor);
+		Debug.Log("canvasRectTrans.sizeDelta:"+ canvasRectTrans.sizeDelta);
 		joystickCenter = ( ( Vector2 )ParentCanvas.transform.InverseTransformPoint( joystickBase.position ) * ParentCanvas.scaleFactor ) + ( ( canvasRectTrans.sizeDelta * ParentCanvas.scaleFactor ) / 2 );
+		Debug.Log("joystickCenter:"+ joystickCenter);
 	}
 
 	/// <summary>

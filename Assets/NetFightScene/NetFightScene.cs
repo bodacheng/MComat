@@ -55,7 +55,7 @@ namespace FightScene
             }
             
             //QualitySettings.vSyncCount = 1;
-            Screen.SetResolution(1920, 1080, true);
+            //Screen.SetResolution(1920, 1080, true);
             
             AppSetting.bgmSource = audioSource;
             AppSetting.Load();
