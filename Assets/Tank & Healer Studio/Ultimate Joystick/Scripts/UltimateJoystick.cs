@@ -189,6 +189,8 @@ public class UltimateJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler
 	
 	public void OnPointerDown ( PointerEventData touchInfo )
 	{
+		Debug.Log(" 点击位置："+touchInfo.position);
+		
 		// If the joystick is already in use, then return.
 		if( joystickState )
 			return;
@@ -578,8 +580,6 @@ public class UltimateJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler
 	void UpdateJoystickCenter ()
 	{
 		Debug.Log("joystickBase.position:"+ joystickBase.position);
-		Debug.Log("ParentCanvas.scaleFactor:"+ ParentCanvas.scaleFactor);
-		Debug.Log("canvasRectTrans.sizeDelta:"+ canvasRectTrans.sizeDelta);
 		joystickCenter = ( ( Vector2 )ParentCanvas.transform.InverseTransformPoint( joystickBase.position ) * ParentCanvas.scaleFactor ) + ( ( canvasRectTrans.sizeDelta * ParentCanvas.scaleFactor ) / 2 );
 		Debug.Log("joystickCenter:"+ joystickCenter);
 	}
