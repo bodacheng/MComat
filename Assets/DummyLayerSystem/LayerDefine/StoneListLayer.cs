@@ -89,7 +89,7 @@ public class StoneListLayer : UILayer
             }
         }
         
-        _Cell.pGesture.Pressed += buttonFeature;
+        //_Cell.pGesture.Pressed += buttonFeature;
         _Cell.SetOnDropAction(StoneCell.Install);
     }
     
@@ -104,8 +104,8 @@ public class StoneListLayer : UILayer
             levelManager.AddMaterialFromCell(_Cell);
         }
         
-        _Cell.pGesture.Pressed += buttonFeature;
-        _Cell.tGesture.Tapped += doubleClick;
+        //_Cell.pGesture.Pressed += buttonFeature;
+        //_Cell.tGesture.Tapped += doubleClick;
         _Cell.SetOnDropAction(StoneCell.Install);
     }
 }

@@ -3,11 +3,355 @@
   <component name="ChangeListManager">
     <list default="true" id="9adf0cbd-a832-422a-beee-19cce46ed05d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MComatAndroid/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MComatAndroid/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/App/Editor/Build/BuildClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/App/Editor/Build/BuildClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/App/Editor/Build/ConfigurationSetter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/App/Editor/Build/ConfigurationSetter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/StoneListLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/StoneListLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SimpleDragAndDrop/Scripts/Cell/StoneCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimpleDragAndDrop/Scripts/Cell/StoneCell.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Devices.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Devices/Display.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Devices/Display/TVs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Devices/Display/TVs/FullHD TV 42.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Devices/Display/TVs/FullHD TV 42.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Devices/Display/TVs/FullHD TV 50.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Devices/Display/TVs/FullHD TV 50.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Devices/Display/TVs/FullHD TV 55.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Devices/Display/TVs/FullHD TV 55.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Devices/Display/Unknown Device.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Devices/Display/Unknown Device.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Behaviors.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Behaviors/Cursors.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Behaviors/Cursors/CursorManagerEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Behaviors/Cursors/CursorManagerEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Behaviors/TransformerEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Behaviors/TransformerEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Debugging.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Debugging/PointerDebuggerWindow.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Debugging/PointerDebuggerWindow.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/Icons.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/Icons/selector.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/Icons/selector.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/Icons/unknown.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/Icons/unknown.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/Icons/xy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/Icons/xy.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/Icons/xz.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/Icons/xz.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/Icons/yz.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/Icons/yz.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/SettingsWindow.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/SettingsWindow/Header.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/SettingsWindow/Header.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/TouchScript Component Icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorResources/TouchScript Component Icon.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorUI.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorUI/GUIElements.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorUI/GUIElements.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorUI/GUIUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorUI/GUIUtils.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorUI/PagedList.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/EditorUI/PagedList.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/FlickGestureEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/FlickGestureEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/GestureEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/GestureEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/LongPressGestureEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/LongPressGestureEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/MetaGestureEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/MetaGestureEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/PressGestureEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/PressGestureEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/ReleaseGestureEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/ReleaseGestureEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TapGestureEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TapGestureEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TransformGestures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TransformGestures/Base.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TransformGestures/Base/OnePointTransformGestureBaseEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TransformGestures/Base/OnePointTransformGestureBaseEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TransformGestures/Base/TransformGestureBaseEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TransformGestures/Base/TransformGestureBaseEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TransformGestures/Base/TwoPointTransformGestureBaseEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TransformGestures/Base/TwoPointTransformGestureBaseEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TransformGestures/PinnedTransformGestureEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TransformGestures/PinnedTransformGestureEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TransformGestures/ScreenTransformGestureEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TransformGestures/ScreenTransformGestureEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TransformGestures/TransformGestureEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Gestures/TransformGestures/TransformGestureEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/InputSources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/InputSources/InputSourceEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/InputSources/InputSourceEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/InputSources/StandardInputEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/InputSources/StandardInputEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Layers.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Layers/FullscreenLayerEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Layers/FullscreenLayerEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Layers/StandardLayerEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Layers/StandardLayerEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/TouchManagerEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/TouchManagerEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/TouchScriptSettingsWindow.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/TouchScriptSettingsWindow.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Utils.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Utils/PropertyDrawers.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Utils/PropertyDrawers/NullToggleDrawer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Utils/PropertyDrawers/NullToggleDrawer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Utils/PropertyDrawers/ToggleLeftDrawer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Editor/Utils/PropertyDrawers/ToggleLeftDrawer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules/TUIO.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules/TUIO/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules/TUIO/Editor/InputSources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules/TUIO/Editor/InputSources/TuioInputEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules/TUIO/Editor/InputSources/TuioInputEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules/TUIO/Libraries.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules/TUIO/Libraries/OSCsharp.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules/TUIO/Libraries/OSCsharp.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules/TUIO/Libraries/TUIOsharp.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules/TUIO/Libraries/TUIOsharp.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules/TUIO/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules/TUIO/Scripts/InputSources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules/TUIO/Scripts/InputSources/TuioInput.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Modules/TUIO/Scripts/InputSources/TuioInput.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Plugins.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Plugins/WindowsTouch.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Plugins/WindowsTouch/WindowsTouch.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Plugins/WindowsTouch/WindowsTouch.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Plugins/WindowsTouch/x64.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Plugins/WindowsTouch/x64/WindowsTouch.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Plugins/WindowsTouch/x64/WindowsTouch.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/Cursors.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/Cursors.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/Cursors.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/Cursors/Cursor.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/Cursors/Cursor.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/Cursors/Mouse Cursor.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/Cursors/Mouse Cursor.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/Cursors/Pen Cursor.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/Cursors/Pen Cursor.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/Cursors/Pointer.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/Cursors/Pointer.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/Cursors/Touch Cursor.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/Cursors/Touch Cursor.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/TouchManager.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Prefabs/TouchManager.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/CursorManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/CursorManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/MouseCursor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/MouseCursor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/ObjectCursor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/ObjectCursor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/PenCursor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/PenCursor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/PointerCursor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/PointerCursor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/TouchCursor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/TouchCursor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/UI.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/UI/GradientTexture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/UI/GradientTexture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/UI/TextureSwitch.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Cursors/UI/TextureSwitch.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Transformer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/Transformer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/UI.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/UI/OverHelper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Behaviors/UI/OverHelper.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Clusters.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Clusters/Clusters2D.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Clusters/Clusters2D.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Core.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Core/DebuggableMonoBehaviour.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Core/DebuggableMonoBehaviour.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Core/GestureManagerInstance.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Core/GestureManagerInstance.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Core/LayerManagerInstance.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Core/LayerManagerInstance.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Core/TouchManagerInstance.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Core/TouchManagerInstance.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Filters.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Filters/IPointerDataFilter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Filters/IPointerDataFilter.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Filters/IPointerLogFilter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Filters/IPointerLogFilter.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Filters/PointerLogFilter.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Filters/PointerLogFilter.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/GL.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/GL/DebugHelper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/GL/DebugHelper.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/GL/GLDebug.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/GL/GLDebug.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Loggers.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Loggers/FileReaderLogger.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Loggers/FileReaderLogger.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Loggers/FileWriterLogger.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Loggers/FileWriterLogger.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Loggers/IPointerLogger.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Loggers/IPointerLogger.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Loggers/PointerLogger.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/Loggers/PointerLogger.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/TouchScriptDebugger.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Debugging/TouchScriptDebugger.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Devices.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Devices/Display.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Devices/Display/DisplayDevice.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Devices/Display/DisplayDevice.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Devices/Display/GenericDisplayDevice.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Devices/Display/GenericDisplayDevice.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Devices/Display/IDisplayDevice.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Devices/Display/IDisplayDevice.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/GestureManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/GestureManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/FlickGesture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/FlickGesture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/Gesture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/Gesture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/IGestureDelegate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/IGestureDelegate.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/LongPressGesture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/LongPressGesture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/MetaGesture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/MetaGesture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/PressGesture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/PressGesture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/ReleaseGesture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/ReleaseGesture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TapGesture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TapGesture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/Base.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/Base/OnePointTrasformGestureBase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/Base/OnePointTrasformGestureBase.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/Base/TransformGestureBase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/Base/TransformGestureBase.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/Base/TwoPointTransformGestureBase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/Base/TwoPointTransformGestureBase.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/Clustered.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/Clustered/ClusteredPinnedTransformGesture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/Clustered/ClusteredPinnedTransformGesture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/Clustered/ClusteredScreenTransformGesture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/Clustered/ClusteredScreenTransformGesture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/Clustered/ClusteredTransformGesture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/Clustered/ClusteredTransformGesture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/ITransformGesture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/ITransformGesture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/PinnedTransformGesture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/PinnedTransformGesture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/ScreenTransformGesture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/ScreenTransformGesture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/TransformGesture.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Gestures/TransformGestures/TransformGesture.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Hit.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Hit/HitData.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Hit/HitData.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Hit/HitTest.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Hit/HitTest.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Hit/RaycastHitUI.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Hit/RaycastHitUI.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Hit/Untouchable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Hit/Untouchable.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/IDebuggable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/IDebuggable.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/IGestureManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/IGestureManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/ILayerManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/ILayerManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/ITouchManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/ITouchManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/ICoordinatesRemapper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/ICoordinatesRemapper.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/IInputSource.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/IInputSource.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/InputHandlers.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/InputHandlers/MouseHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/InputHandlers/MouseHandler.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/InputHandlers/TouchHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/InputHandlers/TouchHandler.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/InputHandlers/WindowsPointerHandlers.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/InputHandlers/WindowsPointerHandlers.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/InputSource.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/InputSource.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/StandardInput.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/InputSources/StandardInput.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/LayerManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/LayerManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Layers.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Layers/FullscreenLayer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Layers/FullscreenLayer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Layers/ILayerDelegate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Layers/ILayerDelegate.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Layers/ProjectionParams.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Layers/ProjectionParams.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Layers/StandardLayer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Layers/StandardLayer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Layers/TouchLayer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Layers/TouchLayer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Layers/UI.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Layers/UI/TouchScriptInputModule.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Layers/UI/TouchScriptInputModule.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/FakePointer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/FakePointer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/IPointer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/IPointer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/MousePointer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/MousePointer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/ObjectPointer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/ObjectPointer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/PenPointer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/PenPointer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/Pointer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/Pointer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/PointerFactory.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/PointerFactory.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/TouchPointer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Pointers/TouchPointer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/TouchManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/TouchManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/Attributes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/Attributes/NullToggleAttribute.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/Attributes/NullToggleAttribute.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/Attributes/ToggleLeftAttribute.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/Attributes/ToggleLeftAttribute.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/BinaryUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/BinaryUtils.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/ClusterUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/ClusterUtils.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/EventHandlerExtensions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/EventHandlerExtensions.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/Geom.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/Geom/ProjectionUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/Geom/ProjectionUtils.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/Geom/TwoD.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/Geom/TwoD.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/ObjectPool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/ObjectPool.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/Platform.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/Platform/WindowsUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/Platform/WindowsUtils.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/PointerUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/PointerUtils.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/TimedSequence.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/TimedSequence.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/TransformUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/Scripts/Utils/TransformUtils.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/license.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TouchScript/license.txt.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +360,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f945ea417a274874b9b494c87c6a16ba3cc00/11/88c793db/IPointerDownHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Selectable.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2BQr1eLceLctmDPEyzKaFlj82Qn" />
   <component name="ProjectViewState">
@@ -62,6 +410,7 @@
       <updated>1656848937125</updated>
       <workItem from="1656848967398" duration="2853000" />
       <workItem from="1656854330449" duration="513000" />
+      <workItem from="1659071535482" duration="2619000" />
     </task>
     <servers />
   </component>

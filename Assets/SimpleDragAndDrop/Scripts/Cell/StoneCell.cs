@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using dataAccess;
 using Singleton;
-using TouchScript.Gestures;
 
 /// <summary>
 /// Every item's cell must contain this script
@@ -21,9 +20,9 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         StoneMergeSlot
     }
 
-    public LongPressGesture lpGesture;
-    public PressGesture pGesture;
-    public TapGesture tGesture;
+    //public LongPressGesture lpGesture;
+    //public PressGesture pGesture;
+    //public TapGesture tGesture;
     
     [Tooltip("using Stone Character Icon")]
     public HeroIcon _charIcon;
@@ -60,9 +59,9 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
 
     public void ClearGestureFeature()
     {
-        lpGesture.ClearEvent();
-        pGesture.ClearEvent();
-        tGesture.ClearEvent();
+        //lpGesture.ClearEvent();
+        //pGesture.ClearEvent();
+        //tGesture.ClearEvent();
     }
     
     /// <summary>
