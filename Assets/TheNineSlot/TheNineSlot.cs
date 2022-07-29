@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TouchScript.Gestures;
 
 namespace mainMenu
 {
@@ -96,7 +97,19 @@ namespace mainMenu
                 SelectedRender(null);
             }
             
-            //slot._cell.pGesture.Pressed += buttonFeature;
+            // 前往技能石升级画面
+            void GoToLevelUpPage(object sender, GestureStateChangeEventArgs e)
+            {
+                if (!FightGlobalSetting._skillStoneHasExp)
+                    return;
+                SKStoneItem _stone = slot._cell.GetItem();
+                if (_stone != null && _stone._SkillConfig != null)
+                {
+                    PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.instanceId, true);
+                }
+            }
+            
+            slot._cell.pGesture.Pressed += buttonFeature;
             //slot._DragAndDropCell.tGesture.Tapped += doubleClick;
             //slot._DragAndDropCell.lpGesture.StateChanged += GoToLevelUpPage;
 
