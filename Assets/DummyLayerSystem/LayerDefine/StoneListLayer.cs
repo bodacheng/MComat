@@ -75,7 +75,7 @@ public class StoneListLayer : UILayer
     
     public void CellFeature_StoneShow(StoneCell _Cell)
     {
-        void buttonFeature(object sender, System.EventArgs e)
+        void buttonFeature()
         {
             SKStoneItem _stone = _Cell.GetItem();
             if (_stone != null && _stone._SkillConfig != null)
@@ -89,23 +89,25 @@ public class StoneListLayer : UILayer
             }
         }
         
-        _Cell.pGesture.Pressed += buttonFeature;
+        _Cell.btn.AddListener(buttonFeature);
         _Cell.SetOnDropAction(StoneCell.Install);
     }
     
     public void CellFeature_MAdd(StoneCell _Cell)
     {
-        void buttonFeature(object sender, System.EventArgs e)
+        void buttonFeature()
         {
             StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
         }
-        void doubleClick(object sender, System.EventArgs e)
+        void doubleClick()
         {
             levelManager.AddMaterialFromCell(_Cell);
         }
         
-        _Cell.pGesture.Pressed += buttonFeature;
-        _Cell.tGesture.Tapped += doubleClick;
+        _Cell.btn.AddListener(buttonFeature);
+        _Cell.btn.AddDoubleClickEvent(doubleClick);
+        
+        
         _Cell.SetOnDropAction(StoneCell.Install);
     }
 }

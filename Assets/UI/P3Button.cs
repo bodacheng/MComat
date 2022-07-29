@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -238,7 +239,19 @@ public class P3Button : Button
         onClick.RemoveAllListeners();
         onClick.AddListener(call);
     }
-
+    
+    public void AddHoldEvent(Action holdEvent)
+    {
+        onHold.RemoveAllListeners();
+        onHold.AddListener(() => holdEvent?.Invoke());
+    }
+    
+    public void AddDoubleClickEvent(Action doubleEvent)
+    {
+        doubleClick.RemoveAllListeners();
+        doubleClick.AddListener(() => doubleEvent?.Invoke());
+    }
+    
     public static bool AllowClickTime()
     {
         return (Time.time - pointerDownTime) >= 0.2f;

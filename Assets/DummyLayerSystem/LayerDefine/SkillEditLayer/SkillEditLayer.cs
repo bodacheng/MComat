@@ -1,6 +1,5 @@
 using System;
 using DummyLayerSystem;
-using TouchScript.Gestures;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
@@ -127,7 +126,7 @@ public partial class SkillEditLayer : UILayer
     
     void StoneCellFeature(StoneCell _Cell)
     {
-        void buttonFeature(object sender, System.EventArgs e)
+        void buttonFeature()
         {
             var _stone = _Cell.GetItem();
             if (_stone != null && _stone._SkillConfig != null)
@@ -139,7 +138,7 @@ public partial class SkillEditLayer : UILayer
             StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
         }
         
-        void doubleClick(object sender, System.EventArgs e)
+        void doubleClick()
         {
             if (NineSlot.GetFocusingStoneSlot() != null)
             {
@@ -148,7 +147,7 @@ public partial class SkillEditLayer : UILayer
         }
         
         // 前往技能石升级画面
-        void PressGoToLevelUpPage(object sender, GestureStateChangeEventArgs e)
+        void PressGoToLevelUpPage()
         {
             var _stone = _Cell.GetItem();
             if (_stone != null && _stone._SkillConfig != null)
@@ -158,9 +157,9 @@ public partial class SkillEditLayer : UILayer
             }
         }
         
-        _Cell.pGesture.Pressed += buttonFeature;
-        _Cell.lpGesture.StateChanged += PressGoToLevelUpPage;
-        _Cell.tGesture.Tapped += doubleClick;
+        _Cell.btn.AddListener(buttonFeature);
+        _Cell.btn.AddHoldEvent(PressGoToLevelUpPage);
+        _Cell.btn.AddDoubleClickEvent(doubleClick);
         
         _Cell.SetOnDropAction(StoneCell.Install);
     }

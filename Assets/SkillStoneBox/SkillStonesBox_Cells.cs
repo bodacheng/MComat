@@ -51,7 +51,6 @@ namespace mainMenu
         {
             foreach (var cell in CellsDic)
             {
-                cell.Value.ClearGestureFeature();
                 action.Invoke(cell.Value);
             }
         }

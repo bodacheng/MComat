@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using dataAccess;
 using Singleton;
-using TouchScript.Gestures;
 
 /// <summary>
 /// Every item's cell must contain this script
@@ -21,11 +20,9 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         StoneMergeSlot
     }
 
-    public LongPressGesture lpGesture;
-    public PressGesture pGesture;
-    public TapGesture tGesture;
+    public P3Button btn;
     
-    [Tooltip("using Stone Character Icon")]
+    [Tooltip("using Stone Unit Icon")]
     public HeroIcon _charIcon;
     [Tooltip("选中框，用来确保有一个选中框选中这个格子的时候不会有其他选中框选中他。")]
     public GameObject _selected;
@@ -56,13 +53,6 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         {
             level.text = string.Empty;
         }
-    }
-
-    public void ClearGestureFeature()
-    {
-        lpGesture.ClearEvent();
-        pGesture.ClearEvent();
-        tGesture.ClearEvent();
     }
     
     /// <summary>

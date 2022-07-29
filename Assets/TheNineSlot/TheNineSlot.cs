@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TouchScript.Gestures;
 
 namespace mainMenu
 {
@@ -76,7 +75,7 @@ namespace mainMenu
         
         void SlotBehaviour(SkillStoneSlot slot, Action<string> playSkill)
         {
-            void buttonFeature(object sender, System.EventArgs e)
+            void buttonFeature()
             {
                 focusingSlot = slot;
                 SelectedRender(focusingSlot._cell);
@@ -91,14 +90,14 @@ namespace mainMenu
                 }
             }
             
-            void doubleClick(object sender, System.EventArgs e)
+            void doubleClick()
             {
                 focusingSlot = null;
                 SelectedRender(null);
             }
             
             // 前往技能石升级画面
-            void GoToLevelUpPage(object sender, GestureStateChangeEventArgs e)
+            void GoToLevelUpPage()
             {
                 if (!FightGlobalSetting._skillStoneHasExp)
                     return;
@@ -109,10 +108,10 @@ namespace mainMenu
                 }
             }
             
-            slot._cell.pGesture.Pressed += buttonFeature;
-            //slot._DragAndDropCell.tGesture.Tapped += doubleClick;
-            //slot._DragAndDropCell.lpGesture.StateChanged += GoToLevelUpPage;
-
+            slot._cell.btn.AddListener(buttonFeature);
+            slot._cell.btn.AddHoldEvent(GoToLevelUpPage);
+            slot._cell.btn.AddDoubleClickEvent(doubleClick);
+            
             slot._cell.SetOnDropAction(((from, to) =>
             {
                 StoneCell.Install(from, to);
