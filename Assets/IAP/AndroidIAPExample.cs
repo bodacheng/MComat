@@ -17,7 +17,7 @@ public class AndroidIAPExample : MonoBehaviour, IStoreListener {
     public void Start() {
         // Make PlayFab log in
         
-        Login();
+        //Login();
     }
 
     public void OnGUI() {
@@ -47,7 +47,6 @@ public class AndroidIAPExample : MonoBehaviour, IStoreListener {
             CreateAccount = true,
             AndroidDeviceId = SystemInfo.deviceUniqueIdentifier
         }, result => {
-            Debug.Log("Logged in");
             // Refresh available items
             RefreshIAPItems();
         }, error => Debug.LogError(error.GenerateErrorReport()));
