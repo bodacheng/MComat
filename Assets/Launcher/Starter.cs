@@ -1,10 +1,4 @@
-﻿using System;
-using dataAccess;
-using DummyLayerSystem;
-using FightScene;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using mainMenu;
+﻿using UnityEngine;
 using UnityEditor;
 
 #if UNITY_EDITOR

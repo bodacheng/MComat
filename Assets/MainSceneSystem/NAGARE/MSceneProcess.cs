@@ -1,14 +1,26 @@
-﻿
-namespace mainMenu
+﻿namespace mainMenu
 {
-    public abstract class MainSceneProcess : SceneProcess
+    public abstract class MSceneProcess : SceneProcess
     {
         public MainSceneStep Step;
-        public MainSceneStep nextProcessStep = MainSceneStep.None;//有的话代表本process存在一个注定会自然迁移到的下一个process。没的话代表本process不一定迁移到哪。
-
         protected SingleThreadProcesser mainProcessRunner;
         protected CameraManager _CameraManager;
         protected MissionWatcher missionWatcher;
+        private bool _loaded = false;
+        
+        protected void SetLoaded(bool value)
+        {
+            _loaded = value;
+        }
+        public bool GetLoaded()
+        {
+            return _loaded;
+        }
+        
+        public override bool CanEnterOtherProcess()
+        {
+            return _loaded;
+        }
         
         protected void Inherit(PreScene _preparingScene)
         {
@@ -26,15 +38,14 @@ namespace mainMenu
         FrontPage = 1,
         SelfFightFront = 4,
         TeamEditFront = 2,
-        MonsterList = 5,
+        UnitList = 5,
         UnitSkillEdit = 16,
         UnitSkillShow = 17,
         SkillStoneList = 15,
         SkillStones_Sell = 100,
         GotchaFront = 6,
         GotchaResult = 24,
-        StoneMerge = 25,
-        
+
         ShopTop = 201,
         BoxOverLoadHelper = 203,
         BoxExpansion = 202,

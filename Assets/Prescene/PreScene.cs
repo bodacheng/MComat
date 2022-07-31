@@ -127,7 +127,7 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.SkillStones_Sell, stoneSell);
             ProcessesRunner.Main.Add(MainSceneStep.SelfFightFront, selfFightFront);
             ProcessesRunner.Main.Add(MainSceneStep.QuestInfo, questInfo);
-            ProcessesRunner.Main.Add(MainSceneStep.MonsterList, unitListPage);
+            ProcessesRunner.Main.Add(MainSceneStep.UnitList, unitListPage);
             ProcessesRunner.Main.Add(MainSceneStep.UnitSkillEdit, memberDetail_edit);
             ProcessesRunner.Main.Add(MainSceneStep.UnitSkillShow, memberDetail_SkillShow);
             ProcessesRunner.Main.Add(MainSceneStep.FrontPage, frontPage);

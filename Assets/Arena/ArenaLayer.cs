@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 using dataAccess;
 using mainMenu;
@@ -18,20 +19,18 @@ public class ArenaLayer : UILayer
     [SerializeField] ArenaFightTeamDisplay ArenaFightTeamDisplayPrefab;
 
     CloudScript.LeaderboardInfo myLeaderboardInfo;
-    readonly ArenaDummiesTable table = new ArenaDummiesTable();
+    readonly ArenaDummiesTable table = new ();
     
-    void Awake()
-    {
-        RefreshBtn.onClick.AddListener(RefreshOpponent);
-    }
-
     void Start()
     {
         table.Load();
     }
 
-    public void RefreshOpponent()
+    public void RefreshOpponent(Action<bool> SetLoaded)
     {
+        RefreshBtn.onClick.RemoveAllListeners();
+        RefreshBtn.onClick.AddListener(()=> SetLoaded(true));
+        
         PopupLayer.Loading(">", PreScene.target.T);
         View(false);
         CloudScript.GetLeaderboardAroundUser(
@@ -80,6 +79,7 @@ public class ArenaLayer : UILayer
                 LoadArena(exceptSelf);
                 View(true);
                 PopupLayer.Close();
+                SetLoaded.Invoke(true);
             }
         );
     }

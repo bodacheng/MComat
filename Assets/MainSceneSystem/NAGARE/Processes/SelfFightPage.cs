@@ -1,7 +1,7 @@
 ﻿using DummyLayerSystem;
 using mainMenu;
 
-public class SelfFightPage : MainSceneProcess
+public class SelfFightPage : MSceneProcess
 {    
     public SelfFightPage()
     {
@@ -21,6 +21,8 @@ public class SelfFightPage : MainSceneProcess
         selfFightLayer.INI();
         selfFightLayer.AddHeroIconFeaturesToMonsterBox();
         selfFightLayer.SwitchToRotationMode();
+        
+        SetLoaded(true);
     }
     
     public override void ProcessEnd()

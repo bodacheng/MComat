@@ -61,5 +61,6 @@ public class TitleScreenLayer : UILayer
                 this.fail.Invoke(error);
             }
         );
+        TouchScreen.onClick.RemoveAllListeners();
     }
 }

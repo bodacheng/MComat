@@ -49,7 +49,7 @@ public class FrontLayer : UILayer
     {
         ArcadeBtn.onClick.AddListener(()=> pre.trySwitchToStep(MainSceneStep.ArcadeFront,true));
         ArenaBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.Arena, true));
-        MemberBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.MonsterList, true));
+        MemberBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.UnitList, true));
         TrainBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SelfFightFront, true));
         StonesBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SkillStoneList, true));
         GotchaBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.GotchaFront, true));

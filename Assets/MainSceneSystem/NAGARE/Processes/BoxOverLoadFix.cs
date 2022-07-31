@@ -1,6 +1,6 @@
 ﻿using mainMenu;
 
-public class BoxOverLoadFix : MainSceneProcess
+public class BoxOverLoadFix : MSceneProcess
 {
     private BoxOverLoadFixLayer layer;
     public BoxOverLoadFix()
@@ -12,6 +12,7 @@ public class BoxOverLoadFix : MainSceneProcess
     public override void ProcessEnter()
     {
         layer = BoxOverLoadFixLayer.Open();
+        SetLoaded(true);
     }
     
     public override void ProcessEnd()

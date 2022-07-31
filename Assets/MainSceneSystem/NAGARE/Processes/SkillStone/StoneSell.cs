@@ -1,12 +1,12 @@
 ﻿using mainMenu;
-using UnityEngine;
 
-public class StoneSell : MainSceneProcess
+public class StoneSell : MSceneProcess
 {
     void EnterProcess()
     {
         //StonesPage.EnterProcess();  １１。８　临时逻辑
         //StoneDeleteManger.target.EnterDeleteMode();
+        SetLoaded(true);
     }
     
     public StoneSell()

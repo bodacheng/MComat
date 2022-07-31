@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using DummyLayerSystem;
 using PlayFab.ClientModels;
 
-public class FrontPage : MainSceneProcess
+public class FrontPage : MSceneProcess
 {
     void UserDataLoadFinished(bool value)
     {
@@ -67,6 +67,8 @@ public class FrontPage : MainSceneProcess
         
         UpperInfoBar.Open(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), 
             () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox));
+        
+        SetLoaded(true);
     }
     
     public override void ProcessEnter()

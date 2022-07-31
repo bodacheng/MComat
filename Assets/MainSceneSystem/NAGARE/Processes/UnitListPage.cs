@@ -2,16 +2,14 @@
 using mainMenu;
 using dataAccess;
 
-public class UnitListPage : MainSceneProcess
+public class UnitListPage : MSceneProcess
 {
-    public bool loadFinished;
-
     private UnitsLayer layer;
     private UnitOptionLayer unitOptionLayer;
     
     public UnitListPage()
     {
-        Step = MainSceneStep.MonsterList;
+        Step = MainSceneStep.UnitList;
         Inherit(PreScene.target);
     }
 
@@ -20,7 +18,6 @@ public class UnitListPage : MainSceneProcess
         HurtObjectManager.Clear();
         EffectsManager.Clear();
         
-        loadFinished = false;
         switch (PlayerAccountInfo.Me.progress)
         {
             case PlayerAccountProgressStep.Freedom:
@@ -49,7 +46,7 @@ public class UnitListPage : MainSceneProcess
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
         unitOptionLayer.RefreshMemberDetailPageByFocusingChar();
-        loadFinished = true;
+        SetLoaded(true);
     }
     
     public override void ProcessEnd()

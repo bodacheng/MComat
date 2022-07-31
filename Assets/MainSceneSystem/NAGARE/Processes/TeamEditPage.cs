@@ -1,9 +1,8 @@
-﻿using UnityEngine;
-using mainMenu;
+﻿using mainMenu;
 using dataAccess;
 using System.Collections.Generic;
 
-public class TeamEditPage : MainSceneProcess
+public class TeamEditPage : MSceneProcess
 {
     string teamMode;
     
@@ -36,6 +35,8 @@ public class TeamEditPage : MainSceneProcess
         });
         
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
+        
+        SetLoaded(true);
     }
     
     public override void ProcessEnter<T>(T mode)

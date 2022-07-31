@@ -65,7 +65,8 @@ public partial class PlayFabReadClient
             errorCallback => {
                 Debug.Log(errorCallback.Error);
                 finished.Invoke(false);
-            });
+            }
+        );
         
         GetPresentGetCatalogItems();
     }

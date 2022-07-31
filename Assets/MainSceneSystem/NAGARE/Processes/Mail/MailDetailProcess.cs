@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
-using dataAccess;
 using mainMenu;
-using System;
 using DummyLayerSystem;
-using PlayFab.ClientModels;
 
 // 阅读邮件，获取邮件附带的礼物应该都属于远程更新
 // 礼物其实可以靠代码来代表，服务器记录代码和礼物内容的对应关系
@@ -12,7 +9,7 @@ using PlayFab.ClientModels;
 // 任何报酬的赋予都是服务端的工作，而反应在客户端上应该是一种根据远程结果进行刷新的机制
 
 // 邮件详情
-public class MailDetailProcess : MainSceneProcess
+public class MailDetailProcess : MSceneProcess
 {
     public MailDetailProcess()
     {
@@ -26,6 +23,7 @@ public class MailDetailProcess : MainSceneProcess
         _mailDetailViewLayer = UILayerLoader.Load(PreScene.target.T, "MailDetail") as MailDetailView;
         var mail = PlayFabReadClient.Get(id.ToString());
         _mailDetailViewLayer.Read(mail);
+        SetLoaded(true);
     }
     
     public override void ProcessEnd()

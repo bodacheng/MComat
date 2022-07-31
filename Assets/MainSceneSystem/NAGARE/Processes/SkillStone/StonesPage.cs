@@ -1,6 +1,6 @@
 ﻿using mainMenu;
 
-public class StonesPage : MainSceneProcess
+public class StonesPage : MSceneProcess
 {
     public StonesPage()
     {
@@ -13,6 +13,7 @@ public class StonesPage : MainSceneProcess
     public override void ProcessEnter()
     {
         ProcessEnter<Any>(null);
+        SetLoaded(true);
     }
     
     public override void ProcessEnter<T>(T t)
@@ -21,6 +22,7 @@ public class StonesPage : MainSceneProcess
             EnterProcess(t);
         else
             EnterProcess();
+        SetLoaded(true);
     }
 
     //EnterProcess()内绝不能出现triggerMainProcess

@@ -1,13 +1,13 @@
 ﻿using DummyLayerSystem;
 using mainMenu;
 
-public class ArenaPage : MainSceneProcess
+public class ArenaPage : MSceneProcess
 {
     private ArenaLayer arenaLayer;
     void EnterProcess()
     {
         arenaLayer = UILayerLoader.Load(PreScene.target.T, "ArenaLayer") as ArenaLayer;
-        arenaLayer.RefreshOpponent();
+        arenaLayer.RefreshOpponent(SetLoaded);
     }
     
     public ArenaPage()

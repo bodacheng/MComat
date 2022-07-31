@@ -1,8 +1,7 @@
 ﻿using DummyLayerSystem;
-using UnityEngine;
 using mainMenu;
 
-public class SkillShowPage : MainSceneProcess
+public class SkillShowPage : MSceneProcess
 {
     private SkillShowLayer layer;
     public SkillShowPage()
@@ -16,6 +15,8 @@ public class SkillShowPage : MainSceneProcess
         var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
         layer = SkillShowLayer.Open();
         layer.SkillsPrintPageRefresh(unitInfo);
+        
+        SetLoaded(true);
     }
     
     public override void ProcessEnd()

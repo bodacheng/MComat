@@ -1,6 +1,6 @@
 ﻿using mainMenu;
 
-public class ShopTop : MainSceneProcess
+public class ShopTop : MSceneProcess
 {
     private ShopTopLayer shopTopLayer;
     public ShopTop()
@@ -12,6 +12,7 @@ public class ShopTop : MainSceneProcess
     public override void ProcessEnter()
     {
         shopTopLayer = ShopTopLayer.Open();
+        SetLoaded(true);
     }
     
     public override void ProcessEnd()

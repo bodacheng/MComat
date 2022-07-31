@@ -3,7 +3,7 @@ using DummyLayerSystem;
 using mainMenu;
 using FightScene;
 
-public class QuestInfoPage : MainSceneProcess
+public class QuestInfoPage : MSceneProcess
 {
     private FightPrepareLayer layer;
     // 这个进程需要有能力把加载的关卡信息记住，因为牵扯到从这个画面迁移到队伍编辑画面后再返回的问题
@@ -40,6 +40,8 @@ public class QuestInfoPage : MainSceneProcess
             FightLoad.Go(NetFightScene.Fight, true);
         }
         layer.BeginFight.onClick.AddListener(Go);
+        
+        SetLoaded(true);
     }
     
     public QuestInfoPage()

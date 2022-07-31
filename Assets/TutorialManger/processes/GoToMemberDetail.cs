@@ -20,6 +20,6 @@ public class GoToMemberDetail : TutorialProcess
     
     public override bool CanEnterOtherProcess()
     {
-        return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.MonsterList;
+        return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.UnitList;
     }
 }

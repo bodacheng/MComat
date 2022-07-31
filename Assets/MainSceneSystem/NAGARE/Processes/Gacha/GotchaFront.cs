@@ -1,6 +1,6 @@
 ﻿using mainMenu;
 
-public class GotchaFront : MainSceneProcess
+public class GotchaFront : MSceneProcess
 {
     private GotchaLayer layer;
     
@@ -21,6 +21,7 @@ public class GotchaFront : MainSceneProcess
         }
         BackGroundPS.target.Off();
         layer = GotchaLayer.Open();
+        SetLoaded(true);
     }
     
     public override void ProcessEnd()

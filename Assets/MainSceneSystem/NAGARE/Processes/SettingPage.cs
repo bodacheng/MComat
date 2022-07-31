@@ -1,6 +1,6 @@
 using mainMenu;
 
-public class SettingPage : MainSceneProcess
+public class SettingPage : MSceneProcess
 {
     private SettingLayer layer;
 
@@ -13,6 +13,8 @@ public class SettingPage : MainSceneProcess
     public override void ProcessEnter()
     {
         layer = SettingLayer.Open();
+        
+        SetLoaded(true);
     }
 
     public override void ProcessEnd()

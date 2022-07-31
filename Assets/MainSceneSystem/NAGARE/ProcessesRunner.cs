@@ -18,11 +18,11 @@ namespace mainMenu
             }
         }
         
-        public MainSceneProcess lastProcess;
-        public MainSceneProcess currentProcess;
-        readonly IDictionary<MainSceneStep, MainSceneProcess> Dic = new Dictionary<MainSceneStep, MainSceneProcess>();
+        public MSceneProcess lastProcess;
+        public MSceneProcess currentProcess;
+        readonly IDictionary<MainSceneStep, MSceneProcess> Dic = new Dictionary<MainSceneStep, MSceneProcess>();
 
-        public MainSceneProcess GetProcess(MainSceneStep step)
+        public MSceneProcess GetProcess(MainSceneStep step)
         {
             return Dic[step];
         }
@@ -34,9 +34,9 @@ namespace mainMenu
             Dic.Clear();
         }
 
-        public void Add(MainSceneStep step, MainSceneProcess _process)
+        public void Add(MainSceneStep step, MSceneProcess _process)
         {
-            DicAdd<MainSceneStep, MainSceneProcess>.Add(Dic, step, _process);
+            DicAdd<MainSceneStep, MSceneProcess>.Add(Dic, step, _process);
         }
 
         public void ProcessNagare()
@@ -44,10 +44,6 @@ namespace mainMenu
             if (currentProcess != null)
             {
                 currentProcess.LocalUpdate();
-                if (currentProcess.CanEnterOtherProcess()) // && currentProcess.nextProcessStep != MainSceneStep.None
-                {
-                    ChangeProcess(currentProcess.nextProcessStep);
-                }
             }
         }
 
@@ -60,15 +56,20 @@ namespace mainMenu
         {
             if (currentProcess != null)
             {
+                if (!currentProcess.CanEnterOtherProcess())
+                {
+                    return;
+                }
+                
                 currentProcess.ProcessEnd();
-                var Log = new MainSceneLog()
+                var Log_pre = new MainSceneLog()
                 {
                     step = currentProcess.Step,
                     description = "end"
                 };
-                MainSceneLogger.Logs.Add(Log);
+                MainSceneLogger.Logs.Add(Log_pre);
             }
-
+            
             lastProcess = currentProcess;
             Dic.TryGetValue(sceneStep, out currentProcess);
             if (currentProcess != null)
@@ -77,21 +78,16 @@ namespace mainMenu
                     currentProcess.ProcessEnter(t);
                 else
                     currentProcess.ProcessEnter();
-                var Log = new MainSceneLog()
+                var Log_new = new MainSceneLog()
                 {
                     step = currentProcess.Step,
                     description = "start"
                 };
-                MainSceneLogger.Logs.Add(Log);
+                MainSceneLogger.Logs.Add(Log_new);
             }
             else
             {
-                if (Dic.ContainsKey(sceneStep))
-                {
-                    Debug.Log(sceneStep + "倒是在字典里");
-                    Debug.Log(currentProcess);
-                }
-                Debug.Log("这个场景进程没定义：" + sceneStep);
+                Debug.Log("empty state key:" + sceneStep);
             }
         }
 

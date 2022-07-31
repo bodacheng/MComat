@@ -14,7 +14,7 @@ public class OpenSkillEdit : TutorialProcess
     public override void ProcessEnter()
     {
         waitCompleted = false;
-        MemberDetailProcess = (UnitListPage)ProcessesRunner.Main.GetProcess(MainSceneStep.MonsterList);
+        MemberDetailProcess = (UnitListPage)ProcessesRunner.Main.GetProcess(MainSceneStep.UnitList);
     }
     
     public override bool CanEnterOtherProcess()
@@ -26,7 +26,7 @@ public class OpenSkillEdit : TutorialProcess
     {        
         if (!waitCompleted)
         {
-            if (MemberDetailProcess.loadFinished)
+            if (MemberDetailProcess.GetLoaded())
             {
                 PopupLayer.HighLightRect(PreScene.target.T, TutorialHelper.target.SkillEditButton.GetComponent<RectTransform>());
                 waitCompleted = true;

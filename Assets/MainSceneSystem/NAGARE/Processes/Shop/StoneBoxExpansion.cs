@@ -1,6 +1,6 @@
 ﻿using mainMenu;
 
-public class StoneBoxExpansion : MainSceneProcess
+public class StoneBoxExpansion : MSceneProcess
 {
     private BoxExpandHelperLayer boxExpandHelperLayer;
     

@@ -37,10 +37,12 @@ public partial class SkillEditLayer : UILayer
         if (l != null)
         {
             returnValue = l as SkillEditLayer;
+            returnValue.gameObject.SetActive(true);
             return returnValue;
         }
         l = UILayerLoader.Load(PreScene.target.T,"SkillEditLayer") as SkillEditLayer;
-        returnValue = l as SkillEditLayer;
+        returnValue = (SkillEditLayer)l;
+        returnValue.gameObject.SetActive(false);
         returnValue.NineSlot.PrintSkillInfo = returnValue._skillStoneDetail.RefreshInfo;
         returnValue.NineSlot.StartUp((x) =>
             {
@@ -58,7 +60,7 @@ public partial class SkillEditLayer : UILayer
         returnValue._skillStoneDetail.Clear();
         returnValue.SkillEditButtonFeature(PreScene.target._focusing);
         toDo?.Invoke(returnValue);
-        
+        returnValue.gameObject.SetActive(true);
         return returnValue;
     }
     

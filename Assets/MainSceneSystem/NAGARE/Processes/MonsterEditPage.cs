@@ -3,17 +3,19 @@ using mainMenu;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
-public class MonsterEditPage : MainSceneProcess
+public class MonsterEditPage : MSceneProcess
 {
     private SkillEditLayer layer;
-    
+
     void ItemsLoadFinished(bool value)
     {
         missionWatcher.Finish("itemsLoadFinished", value);
     }
     
-    void EnterProcess()
+    
+    async UniTask EnterProcess()
     {
+        PopupLayer.Loading(">", PreScene.target.T);
         var CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
@@ -21,10 +23,12 @@ public class MonsterEditPage : MainSceneProcess
             return;
         }
         
-        SkillEditLayer.Open((x) =>
+        await SkillEditLayer.Open((x) =>
         {
             x._connector.ShowMyModel(PreScene.target._focusing != null ? PreScene.target._focusing.id : null);
-        }).Forget();
+        });
+        PopupLayer.Close();
+        SetLoaded(true);
     }
     
     public MonsterEditPage()
@@ -39,7 +43,7 @@ public class MonsterEditPage : MainSceneProcess
         
         missionWatcher = new MissionWatcher(
             new List<string>() {"itemsLoadFinished"},
-            EnterProcess,
+            ()=>EnterProcess().Forget(),
             () => { Debug.Log("failed"); }
         );
     }
