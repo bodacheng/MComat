@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 1801415331011410397}
   - component: {fileID: 1801415331011410398}
   - component: {fileID: 865493347287511085}
+  - component: {fileID: 5349525807023153691}
   m_Layer: 5
   m_Name: ShopTopLayer
   m_TagString: Untagged
@@ -342,6 +343,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2681d2472636491681fcaa3b0360550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5349525807023153691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801415331011410400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c298359c984646879963dc8654eca15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1929886239840953782
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a5f511b0d8142cba0aeb92d0b264c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productId: com.bo.mcombat.testbuy
+  productId: diamond100
   buttonType: 0
   consumePurchase: 1
   onPurchaseComplete:

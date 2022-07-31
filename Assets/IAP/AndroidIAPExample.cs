@@ -58,7 +58,7 @@ public class AndroidIAPExample : MonoBehaviour, IStoreListener {
             Catalog = result.Catalog;
 
             // Make UnityIAP initialize
-            InitializePurchasing();
+            //InitializePurchasing();
         }, error => Debug.LogError(error.GenerateErrorReport()));
     }
 
