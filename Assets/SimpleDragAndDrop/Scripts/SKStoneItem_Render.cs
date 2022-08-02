@@ -13,11 +13,11 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
         }
     }
 
-    public static void SeletedRender(SKStoneItem item, GameObject _Selected)
+    public static void SelectedRender(SKStoneItem item, GameObject _Selected)
     {
         if (item != null)
         {
-            StoneCell cell = item.GetCell();
+            var cell = item.GetCell();
             StoneCell.SelectedRender(cell, _Selected);
         }
         else

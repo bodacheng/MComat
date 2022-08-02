@@ -51,6 +51,7 @@ namespace mainMenu
         {
             foreach (var cell in CellsDic)
             {
+                cell.Value.btn.ClearAllEvents();
                 action.Invoke(cell.Value);
             }
         }

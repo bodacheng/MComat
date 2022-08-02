@@ -77,7 +77,7 @@ public class StoneListLayer : UILayer
     {
         void buttonFeature()
         {
-            SKStoneItem _stone = _Cell.GetItem();
+            var _stone = _Cell.GetItem();
             if (_stone != null && _stone._SkillConfig != null)
             {
                 StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
@@ -90,7 +90,6 @@ public class StoneListLayer : UILayer
         }
         
         _Cell.btn.AddListener(buttonFeature);
-        _Cell.btn.AddDoubleClickEvent(null);
         _Cell.SetOnDropAction(StoneCell.Install);
     }
     

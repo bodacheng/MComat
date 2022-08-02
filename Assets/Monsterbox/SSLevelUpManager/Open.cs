@@ -25,7 +25,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         var layer = StoneListLayer.Open();
         SKStoneItem renderModel = Stones.GetRenderModel(targetInstanceID);
         renderModel._using = false;
-        SKStoneItem.SeletedRender(renderModel, SkillStonesBox._Selected);
+        SKStoneItem.SelectedRender(renderModel, SkillStonesBox._Selected);
         focusingSSD.RefreshInfo(renderModel.instanceId);
         
         foreach (var t in MaterialSlots)

@@ -233,6 +233,13 @@ public class P3Button : Button
         yield return new WaitForSeconds(time);
         complete?.Invoke();
     }
+
+    public void ClearAllEvents()
+    {
+        onClick.RemoveAllListeners();
+        onHold.RemoveAllListeners();
+        doubleClick.RemoveAllListeners();
+    }
     
     public void AddListener(UnityAction call)
     {
