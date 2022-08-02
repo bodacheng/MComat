@@ -1,6 +1,5 @@
 using PlayFab;
 using PlayFab.ClientModels;
-using PlayFab.Json;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,25 +22,25 @@ public class AndroidIAPExample : MonoBehaviour, IStoreListener {
         InitializePurchasing();
     }
 
-    public void OnGUI() {
-        // This line just scales the UI up for high-res devices
-        // Comment it out if you find the UI too large.
-        GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(3, 3, 3));
-
-        // if we are not initialized, only draw a message
-        if (!IsInitialized) {
-            GUILayout.Label("Initializing IAP and logging in...");
-            return;
-        }
-
-        // Draw menu to purchase items
-        // foreach (var item in Catalog) {
-        //     if (GUILayout.Button("Buy " + item.DisplayName)) {
-        //         // On button click buy a product
-        //         BuyProductID(item.ItemId);
-        //     }
-        // }
-    }
+    // public void OnGUI() {
+    //     // This line just scales the UI up for high-res devices
+    //     // Comment it out if you find the UI too large.
+    //     GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(3, 3, 3));
+    //
+    //     // if we are not initialized, only draw a message
+    //     if (!IsInitialized) {
+    //         GUILayout.Label("Initializing IAP and logging in...");
+    //         return;
+    //     }
+    //
+    //     // Draw menu to purchase items
+    //     foreach (var item in Catalog) {
+    //         if (GUILayout.Button("Buy " + item.DisplayName)) {
+    //             // On button click buy a product
+    //             BuyProductID(item.ItemId);
+    //         }
+    //     }
+    // }
     
     public void myPurchaseSucceed ()
     {

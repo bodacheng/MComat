@@ -27,7 +27,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         cancelBtn.onClick.AddListener(CloseLevelUpPage);
         autoAdd.onClick.AddListener(() =>
         {
-            var info = Stones.Get(targetStoneID);
+            var info = Stones.Get(targetInstanceID);
             AutoAddMaterials(info.skillId);
         });
         
@@ -52,8 +52,8 @@ public partial class SSLevelUpManager : MonoBehaviour
             var item = SKStoneItem.draggedItem;
             if (item == null)
                 return;
-            var target = Stones.Get(targetStoneID);
-            if (item.instanceId != targetStoneID && item._SkillConfig.RECORD_ID == target.skillId)
+            var target = Stones.Get(targetInstanceID);
+            if (item.instanceId != targetInstanceID && item._SkillConfig.RECORD_ID == target.skillId)
             {
                 StoneCell.Install(source, to);
             }
@@ -66,11 +66,11 @@ public partial class SSLevelUpManager : MonoBehaviour
     public void RefreshSkillLevelUpModule()
     {
         confirmLevelUp.gameObject.SetActive(false);
-        if (targetStoneID == null)
+        if (targetInstanceID == null)
         {
             return;
         }
-        var target = Stones.Get(targetStoneID);
+        var target = Stones.Get(targetInstanceID);
         foreach (var slot in MaterialSlots)
         {
             if (slot.GetItem() == null)
@@ -96,6 +96,5 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
         confirmLevelUp.onClick.RemoveAllListeners();
         confirmLevelUp.onClick.AddListener(Confirm);
-        
     }
 }

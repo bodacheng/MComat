@@ -4,12 +4,13 @@ using UnityEngine;
 
 public partial class SSLevelUpManager : MonoBehaviour
 {
-    private string targetStoneID; 
+    private string targetInstanceID;
+    
     public void OpenLevelUpPage(string instanceID)
     {
-        targetStoneID = instanceID;
-        focusingSSD.RefreshInfo(targetStoneID);
-        var renderModel = Stones.GetRenderModel(targetStoneID);
+        targetInstanceID = instanceID;
+        focusingSSD.RefreshInfo(targetInstanceID);
+        var renderModel = Stones.GetRenderModel(targetInstanceID);
         renderModel._using = true;
         
         var layer = StoneListLayer.Open();
@@ -22,7 +23,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     void CloseLevelUpPage()
     {
         var layer = StoneListLayer.Open();
-        SKStoneItem renderModel = Stones.GetRenderModel(targetStoneID);
+        SKStoneItem renderModel = Stones.GetRenderModel(targetInstanceID);
         renderModel._using = false;
         SKStoneItem.SeletedRender(renderModel, SkillStonesBox._Selected);
         focusingSSD.RefreshInfo(renderModel.instanceId);
@@ -37,7 +38,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         
         layer.box.AddFeatureToCells(layer.CellFeature_StoneShow);
         RefreshSkillLevelUpModule();
-        targetStoneID = null;
+        targetInstanceID = null;
         Stones.ResetHighLight();
         gameObject.SetActive(false);
     }

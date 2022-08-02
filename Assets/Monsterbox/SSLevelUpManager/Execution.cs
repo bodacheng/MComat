@@ -36,9 +36,12 @@ public partial class SSLevelUpManager : MonoBehaviour
     // 技能升级确认。
     public void ConfirmSkillStoneLevelUp(Action<string> refresh)
     {
-        var target = Stones.Get(targetStoneID);
+        var target = Stones.Get(targetInstanceID);
         if (target == null)
+        {
+            Debug.Log("逻辑顺序错误？");
             return;
+        }
         LevelUpStone(target.InstanceId, refresh);
     }
 }

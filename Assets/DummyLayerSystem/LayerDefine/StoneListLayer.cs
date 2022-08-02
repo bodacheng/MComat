@@ -90,6 +90,7 @@ public class StoneListLayer : UILayer
         }
         
         _Cell.btn.AddListener(buttonFeature);
+        _Cell.btn.AddDoubleClickEvent(null);
         _Cell.SetOnDropAction(StoneCell.Install);
     }
     
@@ -106,8 +107,6 @@ public class StoneListLayer : UILayer
         
         _Cell.btn.AddListener(buttonFeature);
         _Cell.btn.AddDoubleClickEvent(doubleClick);
-        
-        
         _Cell.SetOnDropAction(StoneCell.Install);
     }
 }
