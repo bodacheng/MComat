@@ -21,33 +21,33 @@ public class TutorialRunner
     public TutorialProcess currentProcess;
 
     // 这个结构代表了教程的顺序, 很大的特点在于可加入重复元素。典型的如后退菜单
-    List<TutorialProcess> TutorialProcesses = new List<TutorialProcess>();
-
+    readonly List<TutorialProcess> TutorialProcesses = new ();
+    
     public void GenerateTutorial()
     {
-        GoToMemberDetail goToMemberDetail = new GoToMemberDetail();
-        OpenSkillEdit openSkillEdit = new OpenSkillEdit();
-        SkillEditA1Try skillEditA1Try = new SkillEditA1Try();
-        SkillEditA2Try skillEditA2Try = new SkillEditA2Try();
-        SkillEditA3Try skillEditA3Try = new SkillEditA3Try();
-        SkillEditTry_A1Filled skillEditTry_A1Filled = new SkillEditTry_A1Filled();
-        SkillEditTry_A2Filled skillEditTry_A2Filled = new SkillEditTry_A2Filled();
-        SkillEditTry_A3Filled skillEditTry_A3Filled = new SkillEditTry_A3Filled();
-        ALineConfirm aLineConfirm = new ALineConfirm();
-        ReturnOne returnOne = new ReturnOne();
-        GoToStages goToStages = new GoToStages();
-        GoToStageOne goToStageOne = new GoToStageOne();
-        GoToTeamEdit goToTeamEdit = new GoToTeamEdit();
-        ClickTeamEditSlotOne clickTeamEditSlotOne = new ClickTeamEditSlotOne();
-        ChooseAdamToSlot1 ChooseAdamToSlot1 = new ChooseAdamToSlot1();
-        ConfirmQuest1 confirmQuest1 = new ConfirmQuest1();
+        var goToMemberDetail = new GoToMemberDetail();
+        var openSkillEdit = new OpenSkillEdit();
+        var skillEditA1Try = new SkillEditA1Try();
+        var skillEditA2Try = new SkillEditA2Try();
+        var skillEditA3Try = new SkillEditA3Try();
+        var skillEditTry_A1Filled = new SkillEditTry_A1Filled();
+        var skillEditTry_A2Filled = new SkillEditTry_A2Filled();
+        var skillEditTry_A3Filled = new SkillEditTry_A3Filled();
+        var aLineConfirm = new ALineConfirm();
+        var returnOne = new ReturnOne();
+        var goToStages = new GoToStages();
+        var goToStageOne = new GoToStageOne();
+        var goToTeamEdit = new GoToTeamEdit();
+        var clickTeamEditSlotOne = new ClickTeamEditSlotOne();
+        var ChooseAdamToSlot1 = new ChooseAdamToSlot1();
+        var confirmQuest1 = new ConfirmQuest1();
         
         bool StartedFighting()
-        { 
+        {
             return FSceneProcessesRunner.Main.currentProcess.Step == SceneStep.Fighting; 
         }
-        WaitProcess waitForStage1Loaded = new WaitProcess(StartedFighting);
-
+        var waitForStage1Loaded = new WaitProcess(StartedFighting);
+        
         TutorialProcesses.Add(goToMemberDetail);
         TutorialProcesses.Add(openSkillEdit);
         TutorialProcesses.Add(skillEditA1Try);
