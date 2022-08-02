@@ -11,7 +11,6 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
 {
     public static void SelectedRender(StoneCell cell, GameObject _Selected)
     {
-        Debug.Log("selected :"+ cell);
         if (cell == null)
         {
             _Selected.SetActive(false);

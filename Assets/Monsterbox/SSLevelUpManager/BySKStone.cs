@@ -32,16 +32,30 @@ public partial class SSLevelUpManager : MonoBehaviour
     public void AutoAddMaterials(string skillId)
     {
         var stones = Stones.GetMyStonesBySkillID(skillId);
-        for (var i = 0; i < Mathf.Min(stones.Count, MaterialSlots.Count); i++)
+        Debug.Log(stones.Count);
+        var slotIndex = 0;
+        while(slotIndex < MaterialSlots.Count)
         {
-            var alreadyThere = MaterialSlots[i].GetItem();
+            if (stones.Count == 0)
+            {
+                break;
+            }
+            var alreadyThere = MaterialSlots[slotIndex].GetItem();
             if (alreadyThere == null)
             {
-                if (targetInstanceID != stones[i])
+                var stoneInstanceID = stones[^1];
+                if (targetInstanceID != stoneInstanceID)
                 {
-                    var itemModel = Stones.GetRenderModel(stones[i]);
-                    MaterialSlots[i].AddItem(itemModel);
+                    var itemModel = Stones.GetRenderModel(stoneInstanceID);
+                    MaterialSlots[slotIndex].AddItem(itemModel);
+                    slotIndex += 1;
                 }
+                stones.Remove(stoneInstanceID);
+            }
+            else
+            {
+                stones.Remove(alreadyThere.instanceId);
+                slotIndex += 1;
             }
         }
         RefreshSkillLevelUpModule();

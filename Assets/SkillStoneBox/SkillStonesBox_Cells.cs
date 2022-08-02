@@ -14,8 +14,8 @@ namespace mainMenu
         [Header("选中框")]
         public GameObject SelectedFrame;
         public static GameObject _Selected;
-        
-        IDictionary<int, StoneCell> CellsDic = new Dictionary<int, StoneCell>();
+
+        readonly IDictionary<int, StoneCell> CellsDic = new Dictionary<int, StoneCell>();
         
         public void GenerateCells()
         {
@@ -42,7 +42,7 @@ namespace mainMenu
                 
                 CellsDic[i]._selected.SetActive(false);
             }
-            GridLayoutGroup GridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
+            var GridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
             hang = PlayerAccountInfo.Me.StoneBoxSize / GridLayoutGroup.constraintCount + 1;
             BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (GridLayoutGroup.cellSize.x + GridLayoutGroup.spacing.x) * hang);
         }
@@ -96,35 +96,35 @@ namespace mainMenu
         
         public static List<string> CheckIfExceedCellLimit()
         {
-            List<string> errorMessages = new List<string>();
-            List<string> C_Types = Units.GetTypeList();
+            var errorMessages = new List<string>();
+            var C_Types = Units.GetTypeList();
             for (int i = 0; i < C_Types.Count; i++)
             {
-                StoneFilterForm filterForm0 = new StoneFilterForm
+                var filterForm0 = new StoneFilterForm
                 {
                     type = C_Types[i],
                     exType = new int[1] { 0 },
                 };
-                StoneFilterForm filterForm1 = new StoneFilterForm
+                var filterForm1 = new StoneFilterForm
                 {
                     type = C_Types[i],
                     exType = new int[1] { 1 },
                 };
-                StoneFilterForm filterForm2 = new StoneFilterForm
+                var filterForm2 = new StoneFilterForm
                 {
                     type = C_Types[i],
                     exType = new int[1] { 2 },
                 };
-                StoneFilterForm filterForm3 = new StoneFilterForm
+                var filterForm3 = new StoneFilterForm
                 {
                     type = C_Types[i],
                     exType = new int[1] { 3 },
                 };
                 
-                List<string> SkillStonesOfType_normal = Stones.TargetStonesFromAccount(filterForm0);
-                List<string> SkillStonesOfType_EX1 = Stones.TargetStonesFromAccount(filterForm1);
-                List<string> SkillStonesOfType_EX2 = Stones.TargetStonesFromAccount(filterForm2);
-                List<string> SkillStonesOfType_EX3 = Stones.TargetStonesFromAccount(filterForm3);
+                var SkillStonesOfType_normal = Stones.TargetStonesFromAccount(filterForm0);
+                var SkillStonesOfType_EX1 = Stones.TargetStonesFromAccount(filterForm1);
+                var SkillStonesOfType_EX2 = Stones.TargetStonesFromAccount(filterForm2);
+                var SkillStonesOfType_EX3 = Stones.TargetStonesFromAccount(filterForm3);
                 
                 if (SkillStonesOfType_normal.Count > PlayerAccountInfo.Me.StoneBoxSize)
                 {
