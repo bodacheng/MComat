@@ -10,14 +10,17 @@ public class AndroidIAPExample : MonoBehaviour, IStoreListener {
     // Items list, configurable via inspector
     private List<CatalogItem> Catalog;
 
+    public static AndroidIAPExample target;
+    
     // The Unity Purchasing system
     private static IStoreController m_StoreController;
 
     // Bootstrap the whole thing
     public void Start() {
         // Make PlayFab log in
-        
+        target = this;
         //Login();
+        InitializePurchasing();
     }
 
     public void OnGUI() {
@@ -32,12 +35,32 @@ public class AndroidIAPExample : MonoBehaviour, IStoreListener {
         }
 
         // Draw menu to purchase items
-        foreach (var item in Catalog) {
-            if (GUILayout.Button("Buy " + item.DisplayName)) {
-                // On button click buy a product
-                BuyProductID(item.ItemId);
-            }
-        }
+        // foreach (var item in Catalog) {
+        //     if (GUILayout.Button("Buy " + item.DisplayName)) {
+        //         // On button click buy a product
+        //         BuyProductID(item.ItemId);
+        //     }
+        // }
+    }
+    
+    public void myPurchaseSucceed ()
+    {
+        Debug.Log("Purchase Succeeded.");
+    }
+
+    public void myPurchaseFail()
+    {
+        Debug.Log("Purchase Failed.");
+    }
+    
+    public void myListenerSucceed()
+    {
+        Debug.Log("Listener Succeeded.");
+    }
+
+    public void myListenerFail()
+    {
+        Debug.Log("Listener Failed.");
     }
 
     // This is invoked manually on Start to initiate login ops
@@ -64,29 +87,31 @@ public class AndroidIAPExample : MonoBehaviour, IStoreListener {
     // This is invoked manually on Start to initialize UnityIAP
     public void InitializePurchasing() {
         // If IAP is already initialized, return gently
+        
         if (IsInitialized) return;
 
         // Create a builder for IAP service
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.GooglePlay));
 
         // Register each item from the catalog
-        foreach (var item in Catalog) {
-            builder.AddProduct(item.ItemId, ProductType.Consumable);
-        }
+        // foreach (var item in Catalog) {
+        //     builder.AddProduct(item.ItemId, ProductType.Consumable);
+        // }
+        
+        builder.AddProduct("diamond100", ProductType.Consumable);
 
         // Trigger IAP service initialization
         UnityPurchasing.Initialize(this, builder);
+        
+        Debug.Log("初始化成功？"+ builder);
     }
 
     // We are initialized when StoreController and Extensions are set and we are logged in
-    public bool IsInitialized {
-        get {
-            return m_StoreController != null && Catalog != null;
-        }
-    }
+    public bool IsInitialized => m_StoreController != null;
 
     // This is automatically invoked automatically when IAP service is initialized
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions) {
+        Debug.Log("初始化成功："+controller);
         m_StoreController = controller;
     }
 
@@ -127,6 +152,8 @@ public class AndroidIAPExample : MonoBehaviour, IStoreListener {
 
         Debug.Log("Processing transaction: " + e.purchasedProduct.transactionID);
 
+        Debug.Log("receipt:"+ e.purchasedProduct.receipt);
+        
         // Deserialize receipt
         var googleReceipt = GooglePurchase.FromJson(e.purchasedProduct.receipt);
 
@@ -150,8 +177,9 @@ public class AndroidIAPExample : MonoBehaviour, IStoreListener {
     }
 
     // This is invoked manually to initiate purchase
-    void BuyProductID(string productId) {
+    public void BuyProductID(string productId) {
         // If IAP service has not been initialized, fail hard
+        
         if (!IsInitialized) throw new Exception("IAP Service is not initialized!");
 
         // Pass in the product id to initiate purchase
