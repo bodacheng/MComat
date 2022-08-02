@@ -95,20 +95,19 @@ namespace mainMenu
         // 暂时没用。可能用来处理一些临时弹出的画面
         public void GrandNewChangeProcess(MainSceneStep sceneStep)
         {
-            if (currentProcess != null)
-                currentProcess.ProcessEnd();
+            currentProcess?.ProcessEnd();
             ReturnLayer.ReturnMissionList.Clear();
-            var returnToStep = MainSceneStep.FrontPage;
-            void returnTOCurrent()
-            {
-                PreScene.target.trySwitchToStep(returnToStep, false);
-            }
-            ReturnLayer.PUSH(returnTOCurrent);
             Dic.TryGetValue(sceneStep, out currentProcess);
             if (currentProcess != null)
             {
                 currentProcess.ProcessEnter();
             }
+            var returnToStep = MainSceneStep.FrontPage;
+            void returnToCurrent()
+            {
+                PreScene.target.trySwitchToStep(returnToStep, false);
+            }
+            ReturnLayer.PUSH(returnToCurrent);
         }
     }
 }

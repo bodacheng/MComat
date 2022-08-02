@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using DummyLayerSystem;
-using UnityEngine.UI;
 using UnityEngine.Events;
 using mainMenu;
 
 public class ReturnLayer : UILayer
 {
     public P3Button ReturnButton;
-    static readonly UnityEvent UnityEvent = new UnityEvent();
-    public static readonly List<UnityAction> ReturnMissionList = new List<UnityAction>();
+    static readonly UnityEvent UnityEvent = new ();
+    public static readonly List<UnityAction> ReturnMissionList = new ();
     
     static ReturnLayer Get()
     {
@@ -39,7 +38,7 @@ public class ReturnLayer : UILayer
         if (ReturnMissionList.Count == 0)
             return;
         UnityEvent.RemoveAllListeners();
-        UnityEvent.AddListener(ReturnMissionList[ReturnMissionList.Count - 1]);
+        UnityEvent.AddListener(ReturnMissionList[^1]);
         UnityEvent.Invoke();
         ReturnMissionList.RemoveAt(ReturnMissionList.Count - 1);
         if (ReturnMissionList.Count == 0)

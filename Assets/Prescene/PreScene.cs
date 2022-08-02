@@ -212,13 +212,15 @@ namespace mainMenu
                 var returnToStep = ProcessesRunner.Main.currentProcess.Step;
                 void returnToCurrent()
                 {
-                    //Debug.Log("回到：" + returnToStep);
                     trySwitchToStep(returnToStep, false);
                 }
+                ProcessesRunner.Main.ChangeProcess(next_step);
                 ReturnLayer.PUSH(returnToCurrent);
             }
-            Debug.Log("迁移 ：" + next_step + " ，"+ forward);
-            ProcessesRunner.Main.ChangeProcess(next_step);
+            else
+            {
+                ProcessesRunner.Main.ChangeProcess(next_step);
+            }
         }
 
         public void trySwitchToStep<T>(MainSceneStep next_step, T t, bool forward)
@@ -226,14 +228,17 @@ namespace mainMenu
             if (forward && ProcessesRunner.Main.currentProcess != null)
             {
                 var returnToStep = ProcessesRunner.Main.currentProcess.Step;
-                void returnTOCurrent()
+                void returnToCurrent()
                 {
                     trySwitchToStep(returnToStep, false);
                 }
-                ReturnLayer.PUSH(returnTOCurrent);
+                ProcessesRunner.Main.ChangeProcess(next_step, t);
+                ReturnLayer.PUSH(returnToCurrent);
             }
-            Debug.Log("迁移 ：" + next_step + " ，"+ forward);
-            ProcessesRunner.Main.ChangeProcess(next_step, t);
+            else
+            {
+                ProcessesRunner.Main.ChangeProcess(next_step, t);
+            }
         }
     }
 }
