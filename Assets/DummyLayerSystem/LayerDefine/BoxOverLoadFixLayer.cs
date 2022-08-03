@@ -6,12 +6,11 @@ using UnityEngine.UI;
 public class BoxOverLoadFixLayer : UILayer
 {
     [SerializeField] private Button SELL;
-    [SerializeField] private Button Expand;
     [SerializeField] private Button delete25;
     
     public static BoxOverLoadFixLayer Open()
     {
-        BoxOverLoadFixLayer b = UILayerLoader.Load(PreScene.target.T, "BoxOverLoadFixLayer") as BoxOverLoadFixLayer;
+        var b = UILayerLoader.Load(PreScene.target.T, "BoxOverLoadFixLayer") as BoxOverLoadFixLayer;
         b.INI();
         return b;
     }
@@ -23,12 +22,6 @@ public class BoxOverLoadFixLayer : UILayer
     
     void INI()
     {
-        void ChooseToExpand()
-        {
-            PreScene.target.trySwitchToStep(MainSceneStep.BoxExpansion, true);
-        }
-        Expand.onClick.AddListener(ChooseToExpand);
-        
         void ChooseToSell()
         {
             PreScene.target.trySwitchToStep(MainSceneStep.SkillStones_Sell, true);

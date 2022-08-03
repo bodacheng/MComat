@@ -21,12 +21,6 @@ public class PlayerAccountInfo
         set => _arcadeProcess = Mathf.Clamp(value, 1, 100);
     }
     
-    public int StoneBoxSize
-    {
-        get => _stoneBoxSize;
-        set => _stoneBoxSize = Mathf.Clamp(value, 0, value);
-    }
-    
     public PlayerAccountProgressStep progress = PlayerAccountProgressStep.Freedom;
 
     public PlayerAccountInfo()

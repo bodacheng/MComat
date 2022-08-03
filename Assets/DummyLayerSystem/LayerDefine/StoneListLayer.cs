@@ -51,7 +51,6 @@ public class StoneListLayer : UILayer
             return returnValue;
         }
         returnValue = UILayerLoader.Load(PreScene.target.T,"StoneListLayer") as StoneListLayer;
-        returnValue.box.GenerateCells();
         returnValue.box.IniExTabs();
         returnValue.box._tabEffects.SwitchZokusei(Element.blueMagic, ()=> returnValue.box.IniExTabsEffects(PreScene.target.FxCamera)).Forget();
         returnValue.box.AddFeatureToCells(returnValue.CellFeature_StoneShow);

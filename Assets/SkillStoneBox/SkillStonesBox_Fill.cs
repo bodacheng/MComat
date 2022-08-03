@@ -24,7 +24,7 @@ namespace mainMenu
             form = filterForm;
             PutSkillStonesToBox();
         }
-
+        
         public class StoneFilterForm
         {
             public string type;
@@ -38,20 +38,16 @@ namespace mainMenu
         
         void PutSkillStonesToBox()
         {
-            List<string> targetSKs = Stones.TargetStonesFromAccount_except(form, null, null, false);
+            GenerateCells();
+            var targetSKs = Stones.TargetStonesFromAccount_except(form, null, null, false);
             targetSKs = Order(targetSKs);
             
-            if (targetSKs.Count > PlayerAccountInfo.Me.StoneBoxSize)
-            {
-                Debug.Log("错误：待显示技能石数量超过了盒子容量。盒子长度：" + PlayerAccountInfo.Me.StoneBoxSize + " AND  技能石数：" + targetSKs.Count);
-            }
-            
-            foreach (KeyValuePair<int, StoneCell> cellPair in CellsDic)
+            foreach (var cellPair in CellsDic)
             {
                 cellPair.Value.RemoveToTemp();
             }
             
-            int key = 0;
+            var key = 0;
             foreach (var t in targetSKs)
             {
                 CellsDic.TryGetValue(key, out StoneCell _Cell);

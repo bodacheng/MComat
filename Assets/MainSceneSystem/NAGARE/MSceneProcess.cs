@@ -48,8 +48,7 @@
 
         ShopTop = 201,
         BoxOverLoadHelper = 203,
-        BoxExpansion = 202,
-        
+
         QuestInfo = 8,
         ArcadeFront = 9,
         Arena = 3

@@ -9,6 +9,8 @@ namespace dataAccess
     {
         static readonly IDictionary<string, StoneOfPlayerInfo> Dic = new Dictionary<string, StoneOfPlayerInfo>();
         static readonly IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();
+
+        public static IDictionary<string, StoneOfPlayerInfo> myStones => Dic;
         
         public static void Clear()
         {
@@ -24,7 +26,7 @@ namespace dataAccess
         public static List<string> GetMyStonesBySkillID(string skillID)
         {
             var infoModels = new List<string>();
-            foreach (KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in Dic)
+            foreach (var keyValuePair in Dic)
             {
                 if (keyValuePair.Value.skillId == skillID)
                 {

@@ -41,21 +41,21 @@ namespace dataAccess
         // 用于过滤显示在技能石盒内的技能石
         public static List<string> TargetStonesFromAccount(SkillStonesBox.StoneFilterForm filterForm)
         {
-            List<string> SkillStonesOfTypeAndExType = new List<string>(); //技能石本地id
-            foreach (KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in Dic)
+            var SkillStonesOfTypeAndExType = new List<string>(); //技能石本地id
+            foreach (var keyValuePair in Dic)
             {
                 if (keyValuePair.Value.Inherent == "true")
                 {
                     continue;//原生技能不显示在技能石盒子内
                 }
-                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfig(keyValuePair.Value.skillId);
+                var _SkillConfig = SkillConfigTable.GetSkillConfig(keyValuePair.Value.skillId);
                 if (_SkillConfig == null)
                 {
                     Debug.Log("????"+ keyValuePair.Value.skillId);
                     continue;
                 }
-                List<int> exs = filterForm.exType.ToList();
-                List<int> rare = filterForm.rare.ToList();
+                var exs = filterForm.exType.ToList();
+                var rare = filterForm.rare.ToList();
                 if (_SkillConfig.TYPE == filterForm.type 
                     && exs.Contains(_SkillConfig.SP_LEVEL) 
                     && SkillConfig.RangeLimit(_SkillConfig.AIAttrs.AI_MIN_DIS, _SkillConfig.AIAttrs.AI_MAX_DIS, filterForm.close, filterForm.near, filterForm.far)
@@ -71,16 +71,16 @@ namespace dataAccess
         // extraList ：额外添加这些 技能石账户ID
         public static List<string> TargetStonesFromAccount_except(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptList, List<string> extraList, bool notUsing)
         {
-            List<string> origin = TargetStonesFromAccount(filterForm);
-            List<string> list = new List<string>();
-            for (int i = 0; i < origin.Count; i++)
+            var origin = TargetStonesFromAccount(filterForm);
+            var list = new List<string>();
+            for (var i = 0; i < origin.Count; i++)
             {
                 if (extraList != null && extraList.Contains(origin[i]))
                 {
                     list.Add(origin[i]);
                     continue;
                 }
-                StoneOfPlayerInfo infoModel = Get(origin[i]);
+                var infoModel = Get(origin[i]);
                 if (notUsing)
                 {
                     if (Units.Get(infoModel.unitInstanceId) != null)
@@ -135,7 +135,7 @@ namespace dataAccess
         public static StoneOfPlayerInfo GetOriginSkillOfMonster(string monsterOfPlayerId)
         {
             StoneOfPlayerInfo targetStone = null;
-            foreach(KeyValuePair<string, StoneOfPlayerInfo> keyValuePair in Dic)
+            foreach(var keyValuePair in Dic)
             {
                 if (keyValuePair.Value.unitInstanceId == monsterOfPlayerId && keyValuePair.Value.Inherent == "true")
                 {

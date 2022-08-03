@@ -49,7 +49,6 @@ public partial class SkillEditLayer : UILayer
                 returnValue._connector.SkillShowRunWithPrepare(x);
             }
         );
-        returnValue.StonesBox.GenerateCells();
         
         // 表现系
         var unitConfig = Units.GetUnitConfig(PreScene.target._focusing.r_id);

@@ -19,8 +19,16 @@ namespace mainMenu
         
         public void GenerateCells()
         {
+            foreach (var kv in CellsDic)
+            {
+                kv.Value.gameObject.SetActive(false);
+            }
+            
             var hang = 1;
-            for (int i = 0; i < PlayerAccountInfo.Me.StoneBoxSize; i++)
+            var cellCount = BoxLength();
+            var GridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
+            cellCount = ((cellCount / GridLayoutGroup.constraintCount) + 1) * GridLayoutGroup.constraintCount;
+            for (int i = 0; i < cellCount; i++)
             {
                 if (!CellsDic.ContainsKey(i))
                 {
@@ -42,8 +50,8 @@ namespace mainMenu
                 
                 CellsDic[i]._selected.SetActive(false);
             }
-            var GridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
-            hang = PlayerAccountInfo.Me.StoneBoxSize / GridLayoutGroup.constraintCount + 1;
+            
+            hang = cellCount / GridLayoutGroup.constraintCount + 1;
             BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (GridLayoutGroup.cellSize.x + GridLayoutGroup.spacing.x) * hang);
         }
         
@@ -93,6 +101,43 @@ namespace mainMenu
             item._using = false;
             item.gameObject.transform.SetParent(PreScene.target.stonesTempContainer);
         }
+
+        static int BoxLength()
+        {
+            int returnValue = 0;
+            var C_Types = Units.GetTypeList();
+            for (int i = 0; i < C_Types.Count; i++)
+            {
+                var filterForm0 = new StoneFilterForm
+                {
+                    type = C_Types[i],
+                    exType = new int[1] { 0 },
+                };
+                var filterForm1 = new StoneFilterForm
+                {
+                    type = C_Types[i],
+                    exType = new int[1] { 1 },
+                };
+                var filterForm2 = new StoneFilterForm
+                {
+                    type = C_Types[i],
+                    exType = new int[1] { 2 },
+                };
+                var filterForm3 = new StoneFilterForm
+                {
+                    type = C_Types[i],
+                    exType = new int[1] { 3 },
+                };
+                
+                var SkillStonesOfType_normal = Stones.TargetStonesFromAccount(filterForm0);
+                var SkillStonesOfType_EX1 = Stones.TargetStonesFromAccount(filterForm1);
+                var SkillStonesOfType_EX2 = Stones.TargetStonesFromAccount(filterForm2);
+                var SkillStonesOfType_EX3 = Stones.TargetStonesFromAccount(filterForm3);
+
+                returnValue = Mathf.Max(SkillStonesOfType_normal.Count, SkillStonesOfType_EX1.Count, SkillStonesOfType_EX2.Count, SkillStonesOfType_EX3.Count);
+            }
+            return returnValue;
+        }
         
         public static List<string> CheckIfExceedCellLimit()
         {
@@ -126,22 +171,22 @@ namespace mainMenu
                 var SkillStonesOfType_EX2 = Stones.TargetStonesFromAccount(filterForm2);
                 var SkillStonesOfType_EX3 = Stones.TargetStonesFromAccount(filterForm3);
                 
-                if (SkillStonesOfType_normal.Count > PlayerAccountInfo.Me.StoneBoxSize)
-                {
-                    errorMessages.Add(C_Types[i]+"类角色的普通技能石数量超过限制");
-                }
-                if (SkillStonesOfType_EX1.Count > PlayerAccountInfo.Me.StoneBoxSize)
-                {
-                    errorMessages.Add(C_Types[i]+"类角色的一级必杀技能石数量超过限制");
-                }
-                if (SkillStonesOfType_EX2.Count > PlayerAccountInfo.Me.StoneBoxSize)
-                {
-                    errorMessages.Add(C_Types[i]+"类角色的二级必杀技能石数量超过限制");
-                }
-                if (SkillStonesOfType_EX3.Count > PlayerAccountInfo.Me.StoneBoxSize)
-                {
-                    errorMessages.Add(C_Types[i]+"类角色的三级必杀技能石数量超过限制");
-                }
+                // if (SkillStonesOfType_normal.Count > PlayerAccountInfo.Me.StoneBoxSize)
+                // {
+                //     errorMessages.Add(C_Types[i]+"类角色的普通技能石数量超过限制");
+                // }
+                // if (SkillStonesOfType_EX1.Count > PlayerAccountInfo.Me.StoneBoxSize)
+                // {
+                //     errorMessages.Add(C_Types[i]+"类角色的一级必杀技能石数量超过限制");
+                // }
+                // if (SkillStonesOfType_EX2.Count > PlayerAccountInfo.Me.StoneBoxSize)
+                // {
+                //     errorMessages.Add(C_Types[i]+"类角色的二级必杀技能石数量超过限制");
+                // }
+                // if (SkillStonesOfType_EX3.Count > PlayerAccountInfo.Me.StoneBoxSize)
+                // {
+                //     errorMessages.Add(C_Types[i]+"类角色的三级必杀技能石数量超过限制");
+                // }
             }
             return errorMessages;
         }

@@ -107,16 +107,6 @@ public partial class PlayFabReadClient
                 {
                     PlayerAccountInfo.Me.ArcadeProcess = 0;
                 }
-
-                if (obj.Data.ContainsKey("stone_box_size"))
-                {
-                    PlayerAccountInfo.Me.StoneBoxSize = int.Parse(obj.Data["stone_box_size"].Value);
-                }
-                else
-                {
-                    PlayerAccountInfo.Me.StoneBoxSize = 50;
-                    Debug.Log("玩家数据出错 boxsize");
-                }
                 finished.Invoke(true);
             },
             errorCallback => {
