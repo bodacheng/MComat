@@ -57,11 +57,11 @@ public static class EffectsManager
         EffectPoolsDic.Clear();
     }
     
-    public static async UniTask<Decompositioner> GenerateEffect(string resource_name, string effectsPath, Vector3 Pos, Quaternion Qua, Transform parentT)
+    public static async UniTask<Decompositioner> GenerateEffect(string resource_name, string EffectsPath, Vector3 Pos, Quaternion Qua, Transform parentT)
     {
         if (string.IsNullOrEmpty(resource_name))
             return default;
-        var effectPool = await INIEffectsPool(resource_name, effectsPath, 3);
+        var effectPool = await INIEffectsPool(resource_name, EffectsPath, 3);
         if (effectPool == null)
             return default;
         var processingEffectObj = effectPool.Rent();
@@ -100,44 +100,28 @@ public static class EffectsManager
     
     public static async UniTask<DecompositionerPool> INIEffectsPool(string resource_name, string EffectsPath, int object_count)
     {
-        DecompositionerPool effectPool = null;
+        DecompositionerPool EffectPool = null;
         if (EffectsPath != null)
         {
             if (EffectPoolsDic.ContainsKey("Effects/" + EffectsPath + "/" + resource_name))
             {
-                EffectPoolsDic.TryGetValue("Effects/" + EffectsPath + "/" + resource_name, out effectPool);
-                if (effectPool != null)
-                    return effectPool;
+                EffectPoolsDic.TryGetValue("Effects/" + EffectsPath + "/" + resource_name, out EffectPool);
+                if (EffectPool != null)
+                    return EffectPool;
             }
             
             var EffectPrefab = await TryLoadEffectPrefab("Effects/" + EffectsPath + "/" + resource_name + ".prefab");
             if (EffectPrefab != null)
             {
-                effectPool = ConstructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects/" + EffectsPath + "/" + resource_name,object_count);
-                return effectPool;
+                EffectPool = ConstructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects/" + EffectsPath + "/" + resource_name,object_count);
+                return EffectPool;
             }
             if (EffectsPath == FightGlobalSetting.EffectPathDefine(Element.Null))
             {
                 return null;//防止无限循环
             }
         }
-        effectPool = await INIEffectsPool(resource_name, FightGlobalSetting.EffectPathDefine(Element.Null), object_count);
-        return effectPool;
-    }
-    
-    public static DecompositionerPool RefEffectsPool(string resource_name, string EffectsPath)
-    {
-        DecompositionerPool effectPool = null;
-        if (EffectsPath != null)
-        {
-            if (EffectPoolsDic.ContainsKey("Effects/" + EffectsPath + "/" + resource_name))
-            {
-                EffectPoolsDic.TryGetValue("Effects/" + EffectsPath + "/" + resource_name, out effectPool);
-                if (effectPool != null)
-                    return effectPool;
-            }
-        }
-        effectPool = RefEffectsPool(resource_name, FightGlobalSetting.EffectPathDefine(Element.Null));
-        return effectPool;
+        EffectPool = await INIEffectsPool(resource_name, FightGlobalSetting.EffectPathDefine(Element.Null), object_count);
+        return EffectPool;
     }
 }
