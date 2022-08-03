@@ -39,8 +39,8 @@ namespace mainMenu
         
         public void StageMembersInfoShow(FightInfo stage)
         {
-            MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT);
-            MemberInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT);
+            MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT).Forget();
+            MemberInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT).Forget();
         }
         
         async UniTask<List<HeroIcon>> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)

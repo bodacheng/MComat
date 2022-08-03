@@ -49,7 +49,7 @@ public static class SVCenter
         }
     }
     
-    public static async void MoveItemFromTo(StoneCell from, StoneCell to)
+    public static void MoveItemFromTo(StoneCell from, StoneCell to)
     {
         var item = from.GetItem();
         if (item == null)

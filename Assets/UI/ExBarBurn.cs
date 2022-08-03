@@ -4,17 +4,12 @@ using FightScene;
 
 public class ExBarBurn : MonoBehaviour
 {
-    void Awake()
-    {
-        EffectsManager.INIEffectsPool("ui_exbarburn", FightGlobalSetting.EffectPathDefine(Element.Null), 3);
-    }
-
     void OnDisable()
     {
         Burn();
     }
 
-    public void Burn()
+    void Burn()
     {
         if (NetFightScene.target.fxCamera != null)
         {
