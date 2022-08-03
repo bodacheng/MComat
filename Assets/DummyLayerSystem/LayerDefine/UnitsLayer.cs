@@ -85,7 +85,7 @@ namespace mainMenu
             var targetingIcon = GetUnitIcon(instanceID);
             if (targetingIcon == null)
             {
-                UnitIconDic.Load(unitConfig.RECORD_ID);
+                await UnitIconDic.Load(unitConfig.RECORD_ID);
                 targetingIcon = Instantiate(noMagic);
                 targetingIcon.name = unitConfig.REAL_NAME + "_icon";
                 targetingIcon.unitConfig = unitConfig;

@@ -1,5 +1,3 @@
-using System;
-using mainMenu;
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
@@ -9,17 +7,8 @@ public partial class PopupLayer : UILayer
 {
     [SerializeField] Slider progressBar;
     
-    static float waitRemoteExtendTime = 10f;
     static readonly CompositeDisposable disposables = new ();
     float counter;
-    
-    static void RemoteWaitTooLongProcess(float CountTime)
-    {
-        Observable.Timer(TimeSpan.FromSeconds(CountTime), Scheduler.MainThreadIgnoreTimeScale).Subscribe(_ =>
-        {
-            PreScene.ReturnToLobby("通讯错误, 返回主屏幕");
-        }).AddTo(disposables);                                 
-    }
     
     public static void Loading(string description, GameObject hook, float curtainAlpha = 0.8f)
     {

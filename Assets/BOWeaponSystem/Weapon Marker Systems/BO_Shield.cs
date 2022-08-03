@@ -75,7 +75,7 @@ public class BO_Shield : MonoBehaviour {
         {
             if (shieldBreakSpark == null)
             {
-                shieldBreakSpark = await EffectsManager.INIEffectsPool("onEnableShieldSpark", personalEffectPath, 3);
+                //shieldBreakSpark = await EffectsManager.INIEffectsPool("onEnableShieldSpark", personalEffectPath, 3);
             }
             if (shieldBreakSpark != null)
             {
@@ -107,8 +107,8 @@ public class BO_Shield : MonoBehaviour {
 
     public async void PassHitPointsFromWeaponToShiled(List<Vector3> _ShiledHitPositions)
     {
-        if (_hitSparks == null)
-            _hitSparks = await EffectsManager.INIEffectsPool("shield_hit", personalEffectPath, 3);
+        // if (_hitSparks == null)
+        //     _hitSparks = await EffectsManager.INIEffectsPool("shield_hit", personalEffectPath, 3);
         
         if (_hitSparks != null)
         {
