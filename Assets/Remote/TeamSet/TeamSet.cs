@@ -31,7 +31,7 @@ namespace dataAccess
                 {
                     continue;
                 }
-                var info = MyMonsters.Get(PosKeySet.GetInstanceIdOnPos(i));
+                var info = Units.Get(PosKeySet.GetInstanceIdOnPos(i));
                 if (info != null)
                 {
                     var unitInfo = UnitInfo.GetUnitInfo(info);

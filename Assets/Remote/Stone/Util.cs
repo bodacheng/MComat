@@ -83,7 +83,7 @@ namespace dataAccess
                 StoneOfPlayerInfo infoModel = Get(origin[i]);
                 if (notUsing)
                 {
-                    if (MyMonsters.Get(infoModel.unitInstanceId) != null)
+                    if (Units.Get(infoModel.unitInstanceId) != null)
                     {
                         continue;
                     }

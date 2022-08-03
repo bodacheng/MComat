@@ -25,7 +25,7 @@ public class UnitListPage : MSceneProcess
             case PlayerAccountProgressStep.justCreated:
                 break;
             case PlayerAccountProgressStep.Tutorial:
-                MyMonsters.LoadTutorial();
+                dataAccess.Units.LoadTutorial();
                 break;
         }
         

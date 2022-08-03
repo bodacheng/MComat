@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace dataAccess
 {
-    public static partial class MyMonsters
+    public static partial class Units
     {
         public static List<UnitInfo> LoadAll_Json(string filePath)
         {

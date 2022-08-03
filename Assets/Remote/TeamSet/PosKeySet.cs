@@ -57,7 +57,7 @@ public class PosKeySet
         {
             if (PosNumsWithLocalKeys[i].instanceID != null)
             {
-                UnitInfo getUnitDetailModel = MyMonsters.Get(PosNumsWithLocalKeys[i].instanceID);
+                UnitInfo getUnitDetailModel = dataAccess.Units.Get(PosNumsWithLocalKeys[i].instanceID);
                 if (getUnitDetailModel != null)
                 {
                     UnitInfo unitInfo = UnitInfo.GetUnitInfo(getUnitDetailModel);

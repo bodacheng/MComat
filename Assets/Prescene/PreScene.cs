@@ -40,7 +40,7 @@ namespace mainMenu
         //下面这个函数总是建立在monsterbox函数运行在前，而monsterbox会部署好所有展示用模
         public void SetFocusingUnit(string localID)
         {
-            _focusing = MyMonsters.Get(localID);
+            _focusing = dataAccess.Units.Get(localID);
             if (_focusing == null)
             {
                 Debug.Log("玩家目前一个角色也没？？？？");

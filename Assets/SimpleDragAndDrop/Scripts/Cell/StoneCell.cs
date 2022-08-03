@@ -111,7 +111,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             return;
         }
             
-        UnitInfo _one = MyMonsters.Get(SSInfo.unitInstanceId);
+        UnitInfo _one = dataAccess.Units.Get(SSInfo.unitInstanceId);
         if (_one == null)
         {
             targetIcon.gameObject.SetActive(false);

@@ -56,7 +56,7 @@ public class FrontPage : MSceneProcess
         var focusInstanceID = TeamSet.Default.GetInstanceIdOnPos(0);
         if (focusInstanceID == null)
         {
-            foreach (var keyValuePair in MyMonsters.Dic)
+            foreach (var keyValuePair in dataAccess.Units.Dic)
             {
                 focusInstanceID = keyValuePair.Key;
                 break;

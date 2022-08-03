@@ -68,7 +68,7 @@ public partial class SkillEditLayer : UILayer
             for (int i = 0; i < Options.Count; i++)
             {
                 StoneOfPlayerInfo stoneInfo = Stones.Get(Options[i]);
-                if (MyMonsters.Get(stoneInfo.unitInstanceId) == null)
+                if (dataAccess.Units.Get(stoneInfo.unitInstanceId) == null)
                 {
                     targetStoneId = Options[i];
                     break;

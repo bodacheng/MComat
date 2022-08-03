@@ -22,7 +22,7 @@ namespace ModelView
         
         public async void ShowMyModel(string instanceID)
         {
-            var info = MyMonsters.Get(instanceID);
+            var info = dataAccess.Units.Get(instanceID);
             await _ShowModel(info?.r_id);
         }
         

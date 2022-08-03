@@ -87,7 +87,7 @@ public class BasicTryProcess : FSceneProcess
         //     }
         // }
 
-        UnitInfo before = MyMonsters.Get("1");
+        UnitInfo before = dataAccess.Units.Get("1");
         UnitInfo characterDataInfo = UnitInfo.GetUnitInfo(before);
         adamInfo = characterDataInfo;
         yield break;

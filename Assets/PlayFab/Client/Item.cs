@@ -8,7 +8,7 @@ public partial class PlayFabReadClient
 {
     public static void LoadItems(Action<bool> finished)
     {
-        MyMonsters.Dic.Clear();
+        dataAccess.Units.Dic.Clear();
         Stones.Clear();
         _myMailList.Clear();
         
@@ -26,7 +26,7 @@ public partial class PlayFabReadClient
                             id = item.ItemInstanceId,
                             r_id = item.ItemId
                         };
-                        DicAdd<string, UnitInfo>.Add(MyMonsters.Dic, item.ItemInstanceId, info);
+                        DicAdd<string, UnitInfo>.Add(dataAccess.Units.Dic, item.ItemInstanceId, info);
                     }
                     else if (item.CatalogVersion == PlayfabSetting._StoneCatalog)
                     {

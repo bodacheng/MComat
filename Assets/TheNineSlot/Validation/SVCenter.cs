@@ -58,7 +58,7 @@ public static class SVCenter
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
             var info = Stones.Get(item.instanceId);
-            if (MyMonsters.Get(info.unitInstanceId) != null)
+            if (dataAccess.Units.Get(info.unitInstanceId) != null)
             {
                 var popupLayer = PopupLayer.Open(PreScene.target.T);
                 popupLayer.ArrangeWarnWindow("其他角色正在装备中！");
@@ -109,7 +109,7 @@ public static class SVCenter
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
             var info = Stones.Get(fromItem.instanceId);
-            if (MyMonsters.Get(info.unitInstanceId) != null)
+            if (dataAccess.Units.Get(info.unitInstanceId) != null)
             {
                 var popupLayer = PopupLayer.Open(PreScene.target.T);
                 popupLayer.ArrangeWarnWindow("其他角色正在装备中！");
@@ -205,7 +205,7 @@ public static class SVCenter
             Debug.Log("固有技能无法移出，返回");
             return false;
         }
-        if (MyMonsters.CheckExist(Stones.Get(item.instanceId).unitInstanceId))
+        if (dataAccess.Units.CheckExist(Stones.Get(item.instanceId).unitInstanceId))
         {
             var unitInstanceID = Stones.Get(item.instanceId).unitInstanceId;
             var valR = skillEditLayer.NineSlot.CheckEditAfterOneStoneRemoved(unitInstanceID, item._SkillConfig.RECORD_ID);

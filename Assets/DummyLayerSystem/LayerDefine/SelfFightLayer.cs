@@ -245,7 +245,7 @@ namespace mainMenu
             var PosInstanceId = posKeySet.GetInstanceIdOnPos(posNum);
             if (PosInstanceId != null)
             {
-                var _one = MyMonsters.Get(PosInstanceId);
+                var _one = dataAccess.Units.Get(PosInstanceId);
                 var unitConfig = Units.GetUnitConfig(_one.r_id);
 
                 var pic = await UnitIconDic.Load(unitConfig.RECORD_ID);

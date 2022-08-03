@@ -74,7 +74,7 @@ namespace mainMenu
 
         async UniTask AddUnitIcon(string instanceID, bool clearButtonFeature)
         {
-            var unitInfo = MyMonsters.Get(instanceID);
+            var unitInfo = dataAccess.Units.Get(instanceID);
             var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
             if (unitConfig == null)
             {
@@ -111,7 +111,7 @@ namespace mainMenu
         async UniTask UnitIconsGenerate(bool clearButtonFeature)
         {
             selected_InstanceID = null;
-            foreach (KeyValuePair<string, UnitInfo> keyValuePair in MyMonsters.Dic)
+            foreach (KeyValuePair<string, UnitInfo> keyValuePair in dataAccess.Units.Dic)
             {
                 await AddUnitIcon(keyValuePair.Value.id, clearButtonFeature);
             }
