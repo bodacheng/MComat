@@ -242,27 +242,27 @@ public partial class Animation_Manger{
                 {
                     if (e.functionName == "MagicForward")
                     {
-                        HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, element);
+                        await HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, element);
                     }
                     if (e.functionName == "PrepareOneMagic")
                     {
-                        HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, element);
+                        await HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, element);
                     }
                     if (e.functionName == "Bullet_shoot_from_body_part")
                     {
                         switch (e.intParameter)
                         {
                             case 1:
-                                HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, element);
+                                await HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, element);
                                 break;
                             case 2:
-                                HurtObjectManager.ConstructHurtObjectPool("big_bullet", personalMagic, element);
+                                await HurtObjectManager.ConstructHurtObjectPool("big_bullet", personalMagic, element);
                                 break;
                             case 3:
-                                HurtObjectManager.ConstructHurtObjectPool("super_bullet", personalMagic, element);
+                                await HurtObjectManager.ConstructHurtObjectPool("super_bullet", personalMagic, element);
                                 break;
                             default:
-                                HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, element);
+                                await HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, element);
                                 break;
                         }
                     }
@@ -271,16 +271,16 @@ public partial class Animation_Manger{
                         switch (e.intParameter)
                         {
                             case 0:
-                                HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element);
+                                await HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element);
                                 break;
                             case 1:
-                                HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element);
+                                await HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element);
                                 break;
                             case 2:
-                                HurtObjectManager.ConstructHurtObjectPool("big_blast", personalMagic, element);
+                                await HurtObjectManager.ConstructHurtObjectPool("big_blast", personalMagic, element);
                                 break;
                             default:
-                                HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element);
+                                await HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element);
                                 break;
                         }
                     }

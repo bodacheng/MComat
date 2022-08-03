@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UniRx;
@@ -15,7 +14,7 @@ public static class HurtObjectManager
     static readonly List<string> keyExists = new();
     public static async UniTask CheckExistedKey()
     {
-        AsyncOperationHandle<IList<IResourceLocation>> locationHandle = Addressables.LoadResourceLocationsAsync("weapon");
+        var locationHandle = Addressables.LoadResourceLocationsAsync("weapon");
         await locationHandle.Task;
         if (locationHandle.Status == AsyncOperationStatus.Succeeded)
         {
@@ -78,7 +77,7 @@ public static class HurtObjectManager
         }
     }
     
-    public static async void ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Element element)
+    public static async UniTask ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Element element)
     {
         DecompositionPool poolToConstruct;
         GameObject weaponPrefab = null;
@@ -107,7 +106,7 @@ public static class HurtObjectManager
                     {
                         for (var i = 0; i < decomposition.Attachments.Length; i++)
                         {
-                            ConstructHurtObjectPool(decomposition.Attachments[i], MagicForwardPath, element);
+                            await ConstructHurtObjectPool(decomposition.Attachments[i], MagicForwardPath, element);
                         }
                     }
                 }else{
@@ -139,7 +138,7 @@ public static class HurtObjectManager
                 {
                     for (var i = 0; i < decomposition.Attachments.Length; i++)
                     {
-                        ConstructHurtObjectPool(decomposition.Attachments[i],MagicForwardPath,element);
+                        await ConstructHurtObjectPool(decomposition.Attachments[i],MagicForwardPath,element);
                     }
                 }
             }else{
@@ -172,7 +171,7 @@ public static class HurtObjectManager
                     {
                         for (int i = 0; i < d.Attachments.Length; i++)
                         {
-                            ConstructHurtObjectPool(d.Attachments[i],MagicForwardPath,element);
+                            await ConstructHurtObjectPool(d.Attachments[i],MagicForwardPath,element);
                         }
                     }
                 }else{
@@ -231,7 +230,7 @@ public static class HurtObjectManager
         if (prefab != null)
         {
             var poolToConstruct = new DecompositionPool(prefab);
-            poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => {});//Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件")
+            poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => {});
             DicAdd<string, DecompositionPool>.Add(HurtPoolDic, key, poolToConstruct);
             return poolToConstruct;
         }
