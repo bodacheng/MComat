@@ -13,7 +13,7 @@ namespace Soul
         bool _dropped, _canWakeUp;
         AnimationCurve _usedYCurve;
         AnimationCurve _usedZCurve;
-        Decompositioner _layBlocker;
+        Decomposition _layBlocker;
         float _temp;
         
         public Knock_Off_State()

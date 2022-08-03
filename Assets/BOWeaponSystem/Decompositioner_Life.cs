@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using HittingDetection;
 
-public partial class Decompositioner : MonoBehaviour
+public partial class Decomposition : MonoBehaviour
 {
     Vector3 temp,temp2;
     float dis_from_center;

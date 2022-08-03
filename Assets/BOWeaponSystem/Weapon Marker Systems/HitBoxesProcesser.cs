@@ -7,7 +7,7 @@ public class HitBoxesProcesser : MonoBehaviour
     public static HitBoxesProcesser Instance;
     
     private static Dictionary<Collider, HitBoxManager> ColliderHitBox = new Dictionary<Collider, HitBoxManager>();
-    private List<Decompositioner> processingDecompositioners = new List<Decompositioner>();
+    private List<Decomposition> processingDecompositioners = new List<Decomposition>();
     
     void Awake()
     {
@@ -25,7 +25,7 @@ public class HitBoxesProcesser : MonoBehaviour
         return hit_hitbox;
     }
     
-    public static void AddToDecompositionerProcesserList(Decompositioner _poolObject)
+    public static void AddToDecompositionerProcesserList(Decomposition _poolObject)
     {
         if (Instance != null)
             Instance.AddToHitBoxesProcesserList(_poolObject);
@@ -78,7 +78,7 @@ public class HitBoxesProcesser : MonoBehaviour
         }
     }
 
-    void AddToHitBoxesProcesserList(Decompositioner _poolObject)
+    void AddToHitBoxesProcesserList(Decomposition _poolObject)
     {
         if (!processingDecompositioners.Contains(_poolObject))
             processingDecompositioners.Add(_poolObject);

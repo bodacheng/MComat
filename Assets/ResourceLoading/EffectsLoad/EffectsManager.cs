@@ -9,8 +9,10 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 
 public static class EffectsManager
 {
+    public static Transform T;
+    
     // 以下的重点是主界面和战斗界面通用问题
-    static readonly IDictionary<string, DecompositionerPool> EffectPoolsDic = new Dictionary<string, DecompositionerPool>();
+    static readonly IDictionary<string, DecompositionPool> EffectPoolsDic = new Dictionary<string, DecompositionPool>();
     static readonly List<string> keyExists = new();
     static AsyncOperationHandle<GameObject> _handle;
     
@@ -57,7 +59,7 @@ public static class EffectsManager
         EffectPoolsDic.Clear();
     }
     
-    public static async UniTask<Decompositioner> GenerateEffect(string resource_name, string EffectsPath, Vector3 Pos, Quaternion Qua, Transform parentT)
+    public static async UniTask<Decomposition> GenerateEffect(string resource_name, string EffectsPath, Vector3 Pos, Quaternion Qua, Transform parentT)
     {
         if (string.IsNullOrEmpty(resource_name))
             return default;
@@ -83,45 +85,42 @@ public static class EffectsManager
         return processingEffectObj;
     }
     
-    static DecompositionerPool ConstructEffectPoolWithPrefabAndKey(GameObject prefab, string key, int ini_count)
+    static DecompositionPool ConstructEffectPoolWithPrefabAndKey(GameObject prefab, string key, int ini_count)
     {
-        if (prefab != null)
-        {
-            var poolToConstruct = new DecompositionerPool(prefab);
-            poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => {});//Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件")
-            if (EffectPoolsDic.ContainsKey(key))
-                EffectPoolsDic[key] = poolToConstruct;
-            else
-                EffectPoolsDic.Add(new KeyValuePair<string, DecompositionerPool>(key, poolToConstruct));
-            return poolToConstruct;
-        }
-        return null;
+        var poolToConstruct = new DecompositionPool(prefab);
+        poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => {});//Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件")
+        if (EffectPoolsDic.ContainsKey(key))
+            EffectPoolsDic[key] = poolToConstruct;
+        else
+            EffectPoolsDic.Add(new KeyValuePair<string, DecompositionPool>(key, poolToConstruct));
+        
+        return poolToConstruct;
     }
     
-    public static async UniTask<DecompositionerPool> INIEffectsPool(string resource_name, string EffectsPath, int object_count)
+    public static async UniTask<DecompositionPool> INIEffectsPool(string resource_name, string EffectsPath, int object_count)
     {
-        DecompositionerPool EffectPool = null;
+        DecompositionPool effectPool = null;
         if (EffectsPath != null)
         {
             if (EffectPoolsDic.ContainsKey("Effects/" + EffectsPath + "/" + resource_name))
             {
-                EffectPoolsDic.TryGetValue("Effects/" + EffectsPath + "/" + resource_name, out EffectPool);
-                if (EffectPool != null)
-                    return EffectPool;
+                EffectPoolsDic.TryGetValue("Effects/" + EffectsPath + "/" + resource_name, out effectPool);
+                if (effectPool != null)
+                    return effectPool;
             }
             
             var EffectPrefab = await TryLoadEffectPrefab("Effects/" + EffectsPath + "/" + resource_name + ".prefab");
             if (EffectPrefab != null)
             {
-                EffectPool = ConstructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects/" + EffectsPath + "/" + resource_name,object_count);
-                return EffectPool;
+                effectPool = ConstructEffectPoolWithPrefabAndKey(EffectPrefab, "Effects/" + EffectsPath + "/" + resource_name, object_count);
+                return effectPool;
             }
             if (EffectsPath == FightGlobalSetting.EffectPathDefine(Element.Null))
             {
                 return null;//防止无限循环
             }
         }
-        EffectPool = await INIEffectsPool(resource_name, FightGlobalSetting.EffectPathDefine(Element.Null), object_count);
-        return EffectPool;
+        effectPool = await INIEffectsPool(resource_name, FightGlobalSetting.EffectPathDefine(Element.Null), object_count);
+        return effectPool;
     }
 }

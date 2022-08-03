@@ -10,11 +10,11 @@ public partial class BO_Ani_E : MonoBehaviour
     string myMagicForwardPath;
     string magic_path;
     Transform right_hand, left_hand, right_foot, left_foot, head, tail;
-    DecompositionerPool target_pool;
-    IDictionary<Transform, Decompositioner> EffectsOnBodyParts = new Dictionary<Transform, Decompositioner>();
-    List<Decompositioner> OnProcessEnergyFromBodyWeapons = new List<Decompositioner>();
+    DecompositionPool target_pool;
+    IDictionary<Transform, Decomposition> EffectsOnBodyParts = new Dictionary<Transform, Decomposition>();
+    List<Decomposition> OnProcessEnergyFromBodyWeapons = new List<Decomposition>();
     
-    Decompositioner processingHitBox;
+    Decomposition processingHitBox;
     
     void Awake()
     {
@@ -122,7 +122,7 @@ public partial class BO_Ani_E : MonoBehaviour
     }
     
     Transform target;
-    Decompositioner effect;
+    Decomposition effect;
     ConstraintSource myConstraintSource;
     public async void EffectOnBodyPart(AnimationEvent e)
 	{

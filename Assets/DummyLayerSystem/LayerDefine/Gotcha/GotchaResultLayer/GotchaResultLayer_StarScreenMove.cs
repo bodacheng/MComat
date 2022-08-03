@@ -11,11 +11,11 @@ public partial class GotchaResultLayer : UILayer
     readonly List<RectTransform> waitPos = new();
     #endregion
     
-    readonly List<Decompositioner> stoneFallingModels = new();
-    readonly List<Decompositioner> stoneStartFlashModels = new();
+    readonly List<Decomposition> stoneFallingModels = new();
+    readonly List<Decomposition> stoneStartFlashModels = new();
     readonly List<Vector3> slotScreenPos = new();
-    readonly List<Decompositioner> screenStarModels = new();
-    readonly List<Decompositioner> screenStarExplosionModels = new();
+    readonly List<Decomposition> screenStarModels = new();
+    readonly List<Decomposition> screenStarExplosionModels = new();
     
     void SetWaitPos()
     {

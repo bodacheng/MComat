@@ -157,21 +157,21 @@ public class PowerEstimateTable
                 }
                 amount += hitBox.AT_weight * skillATRef;
                 
-                Decompositioner decompositioner = hurtObject.GetComponent<Decompositioner>();
-                if (decompositioner.Attachments.Length > 0)
+                Decomposition decomposition = hurtObject.GetComponent<Decomposition>();
+                if (decomposition.Attachments.Length > 0)
                 {
                     Debug.Log("技能动画："+_clip.name + " 不好机械评估");
                     return -999f;
                 }
                 
                 //// 顺便检查attachment，与攻击力预估无关 /////
-                for (int z = 0; z < decompositioner.Attachments.Length; z++)
+                for (int z = 0; z < decomposition.Attachments.Length; z++)
                 {
-                    var attachment = Resources.Load("HurtObjects/defaultmagic/" + decompositioner.Attachments[z]) as GameObject;
+                    var attachment = Resources.Load("HurtObjects/defaultmagic/" + decomposition.Attachments[z]) as GameObject;
                     var attachments = attachment.GetComponent<HitBoxManager>();
                     if (attachments == null)
                     {
-                        Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicObjectName + "其附属物件资源"+ decompositioner.Attachments[z] + "不存在");
+                        Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicObjectName + "其附属物件资源"+ decomposition.Attachments[z] + "不存在");
                     }
                 }
                 ///////////////////////////////////////////
@@ -192,7 +192,7 @@ public class PowerEstimateTable
                 GameObject hurtObject = Resources.Load("HurtObjects/defaultmagic/" + magicobjectname) as GameObject;
                 var hitBox = hurtObject.GetComponent<HitBoxManager>();
                 oneDamege = hitBox.AT_weight * skillATRef;
-                var decompositioner = hurtObject.GetComponent<Decompositioner>();
+                var decompositioner = hurtObject.GetComponent<Decomposition>();
                 if ( decompositioner.Attachments.Length > 0)
                 {
                     Debug.Log("技能动画："+_clip.name + " 不好机械评估");

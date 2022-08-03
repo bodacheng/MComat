@@ -6,12 +6,12 @@ using System;
 using System.Collections.Generic;
 using Log;
 
-public class DecompositionerPool : ObjectPool<Decompositioner> {
+public class DecompositionPool : ObjectPool<Decomposition> {
 
     static GameObject Marker;
     readonly GameObject Prefab;
 
-    public DecompositionerPool(GameObject prefab)
+    public DecompositionPool(GameObject prefab)
     {
         if (Marker == null)
         {
@@ -23,11 +23,11 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
     /// <summary>
     /// Return instance to pool.
     /// </summary>
-    public override void Return(Decompositioner instance)
+    public override void Return(Decomposition instance)
     {
         if (isDisposed) throw new ObjectDisposedException("ObjectPool was already disposed.");
         if (instance == null) throw new ArgumentNullException("instance");
-        if (q == null) q = new List<Decompositioner>();       
+        if (q == null) q = new List<Decomposition>();       
         if ((q.Count + 1) == MaxPoolCount)
         {
             throw new InvalidOperationException("Reached Max PoolSize");
@@ -43,10 +43,10 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
     /// <summary>
     /// Get instance from pool.
     /// </summary>
-    public override Decompositioner Rent()
+    public override Decomposition Rent()
     {
         if (isDisposed) throw new ObjectDisposedException("ObjectPool was already disposed.");
-        Decompositioner instance = null;
+        Decomposition instance = null;
         if (q.Count > 0)
         {
             instance = q[0];
@@ -61,7 +61,7 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         return instance;
     }
     
-    protected override void OnBeforeReturn(Decompositioner instance)
+    protected override void OnBeforeReturn(Decomposition instance)
     {
         if (FightGlobalSetting.HitBoxLogger)
         {
@@ -75,14 +75,14 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         base.OnBeforeReturn(instance);
     }
 
-    protected override void OnBeforeRent(Decompositioner instance)
+    protected override void OnBeforeRent(Decomposition instance)
     {
         base.OnBeforeRent(instance);
         instance.Local_OnEnable();
     }
     
     // オブジェクトが空のときにInstantiateする関数
-    protected override Decompositioner CreateInstance()
+    protected override Decomposition CreateInstance()
     {
         var a = UnityEngine.Object.Instantiate(Prefab);
         if (a == null)
@@ -90,16 +90,16 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
             Debug.Log("逻辑问题"+ Prefab);
             return null;
         }
-        var decompositioner = a.GetComponent<Decompositioner>();
-        if (decompositioner == null)
+        var decomposition = a.GetComponent<Decomposition>();
+        if (decomposition == null)
         {
-            Debug.Log("Decompositioner缺失："+ Prefab.name);
+            Debug.Log("decomposition："+ Prefab.name);
             return null;
         }
 
         if (Marker == null)
         {
-            Debug.Log("??");
+            Debug.Log("特效物体的parent已经被销毁？");
             GameObject.Destroy(a);
             return null;
         }
@@ -123,27 +123,27 @@ public class DecompositionerPool : ObjectPool<Decompositioner> {
         }
         RG.isKinematic = true;//这个刚体不受物理影响
         
-        if (decompositioner.audioSource == null)
+        if (decomposition.audioSource == null)
         {
-            decompositioner.audioSource = decompositioner.transform.GetComponent<AudioSource>();
+            decomposition.audioSource = decomposition.transform.GetComponent<AudioSource>();
         }
-        if (decompositioner.audioSource != null)
+        if (decomposition.audioSource != null)
         {
-            decompositioner.audioSource.volume = AppSetting.value.EffectsVolumn;
-            decompositioner.audioSource.minDistance = 20;
-            decompositioner.audioSource.maxDistance = 80;
+            decomposition.audioSource.volume = AppSetting.value.EffectsVolumn;
+            decomposition.audioSource.minDistance = 20;
+            decomposition.audioSource.maxDistance = 80;
         }
         
         if (BBMM != null)
         {
             BBMM.CurrentHP = BBMM.weaponHP;
-            decompositioner._HitBox = BBMM;
-            BBMM.SetDecompositioner(decompositioner);
+            decomposition._HitBox = BBMM;
+            BBMM.SetDecompositioner(decomposition);
         }
-        decompositioner.IsWeapon = decompositioner._HitBox != null;
-        decompositioner.SetPositionConstraint(PC);
-        decompositioner.TrackControl = danMuTest;
-        decompositioner.SetPool(this);
-        return decompositioner;
+        decomposition.IsWeapon = decomposition._HitBox != null;
+        decomposition.SetPositionConstraint(PC);
+        decomposition.TrackControl = danMuTest;
+        decomposition.SetPool(this);
+        return decomposition;
     }
 }

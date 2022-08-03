@@ -34,6 +34,8 @@ public class PreparingProcess : FSceneProcess
         PopupLayer.LoadingPercent("loading Effects", NetFightScene.target.T.gameObject, 0.5f);
         await EffectsManager.INIEffectsPool("hit_ground", null, 3);
         await EffectsManager.INIEffectsPool("wallCrack", null, 3);
+        await EffectsManager.INIEffectsPool("break_free", null, 3);
+        await EffectsManager.INIEffectsPool("speedupbuff", null, 3);
         
         RTFightManager.target.team1.Auto = NetFightScene.Fight.team1Auto;
         RTFightManager.target.team2.Auto = NetFightScene.Fight.team2Auto;

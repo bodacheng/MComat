@@ -12,7 +12,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
     
     TeamConfig _TeamConfig = TeamConfig.defaultSet;
     readonly List<Transform> _Used_Targets = new List<Transform>();
-    IDictionary<Transform, Decompositioner> bodyPartsHitBoxRegisterDic;
+    IDictionary<Transform, Decomposition> bodyPartsHitBoxRegisterDic;
     Transform right_hand, left_hand, right_foot, left_foot, head, tail;
     Transform geometryCenter;
     FightParamsReference myownheath;
@@ -46,7 +46,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             BEs.left_foot = left_foot;
             BEs.head = head;
             BEs.tail = tail;
-            BEs.bodyPartsHitBoxRegisterDic = new Dictionary<Transform,Decompositioner>();
+            BEs.bodyPartsHitBoxRegisterDic = new Dictionary<Transform,Decomposition>();
             if (BEs.right_hand != null)
                 BEs.bodyPartsHitBoxRegisterDic.Add(BEs.right_hand,null);
             if (BEs.left_hand != null)
@@ -70,7 +70,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         
         void RegisterBodyPartWeapon(Transform t)
         {
-            Decompositioner target_hitbox = null;
+            Decomposition target_hitbox = null;
             if (t != null && !BEs.bodyPartsHitBoxRegisterDic.ContainsKey(t))
             {
                 BEs.bodyPartsHitBoxRegisterDic.Add(t, null);
@@ -115,7 +115,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             }
             if (BEs.bodyPartsHitBoxRegisterDic[t] != null)
             {
-                Decompositioner target_hitbox = BEs.bodyPartsHitBoxRegisterDic[t];
+                Decomposition target_hitbox = BEs.bodyPartsHitBoxRegisterDic[t];
                 BEs.bodyPartsHitBoxRegisterDic[t] = null;
                 target_hitbox.GetPositionConstraint().constraintActive = false;
                 target_hitbox.CloseMarkers();
@@ -147,7 +147,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
     public void ClearTargets()
 	{
         toRefreshParts.Clear();
-        foreach (KeyValuePair<Transform, Decompositioner> keyValuePair in bodyPartsHitBoxRegisterDic) 
+        foreach (KeyValuePair<Transform, Decomposition> keyValuePair in bodyPartsHitBoxRegisterDic) 
         {
             if (keyValuePair.Value != null)
             {
@@ -187,7 +187,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
 	public void EnableMarkers()
 	{
         toRefreshParts.Clear();
-        foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsHitBoxRegisterDic) 
+        foreach (KeyValuePair<Transform,Decomposition> keyValuePair in bodyPartsHitBoxRegisterDic) 
         {
             if (keyValuePair.Value != null)
             {
@@ -208,7 +208,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
     
     public void DisableMarkers()
     {
-        foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsHitBoxRegisterDic) 
+        foreach (KeyValuePair<Transform,Decomposition> keyValuePair in bodyPartsHitBoxRegisterDic) 
         {
             if (keyValuePair.Value != null)
             {
@@ -221,7 +221,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
     public void SetDamageType(AnimationEvent e)
     {
         damageType = V_Damage.FormalIntToDamageType(e.intParameter);
-        foreach (KeyValuePair<Transform,Decompositioner> keyValuePair in bodyPartsHitBoxRegisterDic) 
+        foreach (KeyValuePair<Transform,Decomposition> keyValuePair in bodyPartsHitBoxRegisterDic) 
         {
             if (keyValuePair.Value != null)
             {

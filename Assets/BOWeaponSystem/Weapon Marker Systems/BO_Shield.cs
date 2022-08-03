@@ -47,7 +47,7 @@ public class BO_Shield : MonoBehaviour {
     public Element element;
 
     int _hpCounter;
-    DecompositionerPool _hitSparks, shieldBreakSpark;
+    DecompositionPool _hitSparks, shieldBreakSpark;
     string personalEffectPath;
 
     void Awake()
@@ -68,7 +68,7 @@ public class BO_Shield : MonoBehaviour {
         }
     }
 
-    Decompositioner shieldbreaking;
+    Decomposition shieldbreaking;
     async void ShieldBreak()
     {
         if (this._ShieldCenterSpot != null)

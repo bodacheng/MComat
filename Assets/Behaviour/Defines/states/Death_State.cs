@@ -14,7 +14,7 @@ namespace Soul
         bool _dropped;
         AnimationCurve _usedYCurve;
         AnimationCurve _usedZCurve;
-        Decompositioner _layBlocker;
+        Decomposition _layBlocker;
         float _temp;
         
         public Death_State()

@@ -308,10 +308,10 @@ namespace HittingDetection
             _Targets_Raw_Hit.Clear();
         }
         
-        Decompositioner decompositioner;
-        public void SetDecompositioner(Decompositioner _d)
+        Decomposition _decomposition;
+        public void SetDecompositioner(Decomposition _d)
         {
-            decompositioner = _d;
+            _decomposition = _d;
         }
         
         // 而这个参数将和ContinuousDamage形成一个相互权衡的关系。如果武器不是ContinuousDamage，则一个能量系武器在打击到对象后应该立刻hp-1，并且直接cleartargets。

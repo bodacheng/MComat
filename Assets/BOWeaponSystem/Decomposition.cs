@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using HittingDetection;
 using UnityEngine.Animations;
 
-public partial class Decompositioner : MonoBehaviour {
+public partial class Decomposition : MonoBehaviour {
 
     public HitBoxManager _HitBox;
     public TrackControl TrackControl;
@@ -18,7 +18,7 @@ public partial class Decompositioner : MonoBehaviour {
     public string[] Attachments;
 
     #region realtime
-    DecompositionerPool pool;
+    DecompositionPool pool;
     PositionConstraint positionConstraint;
     BO_Ani_E BO_Ani_E;
     ParticleSystem to_be_stop_emissions;
@@ -34,7 +34,7 @@ public partial class Decompositioner : MonoBehaviour {
         hasParticle = to_be_stop_emissions != null;
     }
 
-    public void SetPool(DecompositionerPool pool)
+    public void SetPool(DecompositionPool pool)
     {
         this.pool = pool;
     }

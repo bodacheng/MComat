@@ -3,7 +3,7 @@ using UniRx;
 
 public class HitBoxSubEventManger : MonoBehaviour
 {
-    public Decompositioner _Decompositioner;
+    public Decomposition decomposition;
     public EventAndTriggerTime _event;
     public string LandedEvent;
     public string fadeEvent;
@@ -41,7 +41,7 @@ public class HitBoxSubEventManger : MonoBehaviour
                 {
                     if (time_count > _event.time)
                     {
-                        _Decompositioner.SpecialTriggerEvent(_event.event_name, this);
+                        decomposition.SpecialTriggerEvent(_event.event_name, this);
                         clockEvent.Dispose();
                     }
                     if (!gameObject.activeSelf)
@@ -58,10 +58,10 @@ public class HitBoxSubEventManger : MonoBehaviour
             landEvent = new SingleAssignmentDisposable();
             landEvent.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
-                    if (_Decompositioner.transform.position.y <= 0)
+                    if (decomposition.transform.position.y <= 0)
                     {
-                        _Decompositioner.SpecialTriggerEvent(LandedEvent, this);
-                        _Decompositioner.Phase = -1;
+                        decomposition.SpecialTriggerEvent(LandedEvent, this);
+                        decomposition.Phase = -1;
                         landEvent.Dispose();
                     }
                     if (!gameObject.activeSelf)
@@ -78,9 +78,9 @@ public class HitBoxSubEventManger : MonoBehaviour
             fadedEvent = new SingleAssignmentDisposable();
             fadedEvent.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
-                    if (_Decompositioner._HitBox.weaponHP > 0 && _Decompositioner._HitBox.CurrentHP <= 0)
+                    if (decomposition._HitBox.weaponHP > 0 && decomposition._HitBox.CurrentHP <= 0)
                     {
-                        _Decompositioner.SpecialTriggerEvent(fadeEvent, this);
+                        decomposition.SpecialTriggerEvent(fadeEvent, this);
                         fadedEvent.Dispose();
                     }
                     if (!gameObject.activeSelf)

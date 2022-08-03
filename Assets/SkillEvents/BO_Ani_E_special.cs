@@ -53,15 +53,15 @@ public partial class BO_Ani_E : MonoBehaviour
             }
         }
         
-        public void AddOnProcessEnergyFromBodyWeapons(Decompositioner decompositioner)
+        public void AddOnProcessEnergyFromBodyWeapons(Decomposition decomposition)
         {
-            Ani_E.OnProcessEnergyFromBodyWeapons.Add(decompositioner);
+            Ani_E.OnProcessEnergyFromBodyWeapons.Add(decomposition);
             SingleAssignmentDisposable Disposable = new SingleAssignmentDisposable();
                 Disposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
-                    if (decompositioner.Phase == 0 || decompositioner.Phase == -1)
+                    if (decomposition.Phase == 0 || decomposition.Phase == -1)
                     {
-                        Ani_E.OnProcessEnergyFromBodyWeapons.Remove(decompositioner);
+                        Ani_E.OnProcessEnergyFromBodyWeapons.Remove(decomposition);
                         Disposable.Dispose();
                     }
                 }
@@ -284,7 +284,7 @@ public partial class BO_Ani_E : MonoBehaviour
 
         public void CloseEffectsOnBodyParts(bool clearParticles)
         {
-            foreach (KeyValuePair<Transform, Decompositioner> keyValuePair in Ani_E.EffectsOnBodyParts)
+            foreach (KeyValuePair<Transform, Decomposition> keyValuePair in Ani_E.EffectsOnBodyParts)
             {
                 if (keyValuePair.Value != null)
                 {

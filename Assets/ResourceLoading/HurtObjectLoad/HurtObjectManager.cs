@@ -9,8 +9,8 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 
 public static class HurtObjectManager
 {
-    static DecompositionerPool default_hitBoxPool;
-    static readonly IDictionary<string, DecompositionerPool> HurtPoolDic = new Dictionary<string, DecompositionerPool>();
+    static DecompositionPool default_hitBoxPool;
+    static readonly IDictionary<string, DecompositionPool> HurtPoolDic = new Dictionary<string, DecompositionPool>();
     static AsyncOperationHandle<GameObject> _handle;
     static readonly List<string> keyExists = new();
     public static async UniTask CheckExistedKey()
@@ -47,7 +47,7 @@ public static class HurtObjectManager
         }
     }
     
-    public static DecompositionerPool GetDPool()
+    public static DecompositionPool GetDPool()
     {
         return default_hitBoxPool;
     }
@@ -73,14 +73,14 @@ public static class HurtObjectManager
                 return;
             }
             
-            default_hitBoxPool = new DecompositionerPool(resultObject);
+            default_hitBoxPool = new DecompositionPool(resultObject);
             default_hitBoxPool.PreloadAsync(20, 1).Subscribe(_ => Debug.Log("已经为对象池:d_hitbox预留物件"));
         }
     }
     
     public static async void ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Element element)
     {
-        DecompositionerPool poolToConstruct;
+        DecompositionPool poolToConstruct;
         GameObject weaponPrefab = null;
         
         /////////////// 第一环节 : 搜索个性魔法//////////////////
@@ -100,7 +100,7 @@ public static class HurtObjectManager
             if (weaponPrefab != null)
             {
                 poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, MagicForwardPath + "/" + resource_name, FightGlobalSetting._HurtObjectPreLoadCount);
-                var decomposition = weaponPrefab.GetComponent<Decompositioner>();
+                var decomposition = weaponPrefab.GetComponent<Decomposition>();
                 if (decomposition != null)
                 {
                     if (decomposition.Attachments != null && decomposition.Attachments.Length > 0)
@@ -132,7 +132,7 @@ public static class HurtObjectManager
         {
             poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resource_name,FightGlobalSetting._HurtObjectPreLoadCount);
             
-            var decomposition = weaponPrefab.GetComponent<Decompositioner>();
+            var decomposition = weaponPrefab.GetComponent<Decomposition>();
             if (decomposition != null)
             {
                 if (decomposition.Attachments != null && decomposition.Attachments.Length > 0)
@@ -165,7 +165,7 @@ public static class HurtObjectManager
             {
                 poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resource_name,FightGlobalSetting._HurtObjectPreLoadCount);
                 
-                var d = weaponPrefab.GetComponent<Decompositioner>();
+                var d = weaponPrefab.GetComponent<Decomposition>();
                 if (d != null)
                 {
                     if (d.Attachments != null && d.Attachments.Length > 0)
@@ -182,8 +182,8 @@ public static class HurtObjectManager
         }
     }
     
-    static DecompositionerPool _hurtObjectPool;
-    public static DecompositionerPool GetHurtObjectPool(string resource_name, string myMagicPath, string myDefaultMagicPath)
+    static DecompositionPool _hurtObjectPool;
+    public static DecompositionPool GetHurtObjectPool(string resource_name, string myMagicPath, string myDefaultMagicPath)
     {
         _hurtObjectPool = null;
         
@@ -226,13 +226,13 @@ public static class HurtObjectManager
         return null;
     }
     
-    static DecompositionerPool ConstructHitBoxPoolWithPrefabAndKey(GameObject prefab, string key, int ini_count)
+    static DecompositionPool ConstructHitBoxPoolWithPrefabAndKey(GameObject prefab, string key, int ini_count)
     {
         if (prefab != null)
         {
-            var poolToConstruct = new DecompositionerPool(prefab);
+            var poolToConstruct = new DecompositionPool(prefab);
             poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => {});//Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件")
-            DicAdd<string, DecompositionerPool>.Add(HurtPoolDic, key, poolToConstruct);
+            DicAdd<string, DecompositionPool>.Add(HurtPoolDic, key, poolToConstruct);
             return poolToConstruct;
         }
         return null;
