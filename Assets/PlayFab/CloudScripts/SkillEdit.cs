@@ -1,5 +1,3 @@
-using UnityEngine;
-using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
 using System;
@@ -50,7 +48,6 @@ public partial class CloudScript
             
             foreach (var stone in changedStoneList)
             {
-                Debug.Log(stone.InstanceId + " monster : "+ stone.unitInstanceId + " ,"+ " slot:" + stone.slot);
                 ChangedDic.Add(stone.InstanceId, new Tuple<string, string>(stone.unitInstanceId, stone.slot));
             }
             success.Invoke(ChangedDic);

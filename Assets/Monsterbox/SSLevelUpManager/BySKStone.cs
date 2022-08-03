@@ -32,9 +32,8 @@ public partial class SSLevelUpManager : MonoBehaviour
     public void AutoAddMaterials(string skillId)
     {
         var stones = Stones.GetMyStonesBySkillID(skillId);
-        Debug.Log(stones.Count);
         var slotIndex = 0;
-        while(slotIndex < MaterialSlots.Count)
+        while (slotIndex < MaterialSlots.Count)
         {
             if (stones.Count == 0)
             {
@@ -44,9 +43,10 @@ public partial class SSLevelUpManager : MonoBehaviour
             if (alreadyThere == null)
             {
                 var stoneInstanceID = stones[^1];
-                if (targetInstanceID != stoneInstanceID)
+                var itemModel = Stones.GetRenderModel(stoneInstanceID);
+                var itemData = Stones.Get(stoneInstanceID);
+                if (targetInstanceID != stoneInstanceID && MyMonsters.Get(itemData.unitInstanceId) == null)
                 {
-                    var itemModel = Stones.GetRenderModel(stoneInstanceID);
                     MaterialSlots[slotIndex].AddItem(itemModel);
                     slotIndex += 1;
                 }
