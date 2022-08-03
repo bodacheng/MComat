@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 using HittingDetection;
 using Skill;
 
@@ -40,7 +41,7 @@ namespace Soul
             _xz = CalFixPushPos(newValue.impactComingPoint,  newValue.attacker.Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
             _xz = (_xz - gameObject.transform.position).normalized;
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
-            EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, null);
+            EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, null).Forget();
             _usedYCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageYAnimationCurve : FightGlobalSetting._knockOffyAnimationCurve;
             _usedZCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageZAnimationCurve : FightGlobalSetting._knockOffzAnimationCurve;
             FightParamsRef.EnableAllLimbs(false);
@@ -81,7 +82,7 @@ namespace Soul
                     _effectP.y = gameObject.transform.position.y;
                     _quaV = Vector3.zero - gameObject.transform.position.normalized;
                     _quaV.y = 0;
-                    EffectsManager.GenerateEffect("wallCrack", null, _effectP, Quaternion.LookRotation(_quaV, Vector3.up), null);
+                    EffectsManager.GenerateEffect("wallCrack", null, _effectP, Quaternion.LookRotation(_quaV, Vector3.up), null).Forget();
                 }
             }
             
@@ -122,7 +123,7 @@ namespace Soul
                         _BasicPhysicSupport.SetUsingGravity(true);
                         _effectP = gameObject.transform.position;
                         _effectP.y = 0;
-                        EffectsManager.GenerateEffect("hit_ground", null, _effectP, Quaternion.LookRotation(Vector3.right), null);
+                        EffectsManager.GenerateEffect("hit_ground", null, _effectP, Quaternion.LookRotation(Vector3.right), null).Forget();
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                         _flyingStep = 3;
                         layBlock(_DATA_CENTER);

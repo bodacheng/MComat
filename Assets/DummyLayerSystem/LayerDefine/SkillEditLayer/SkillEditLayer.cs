@@ -169,6 +169,6 @@ public partial class SkillEditLayer : UILayer
     public void SkillEditConfirmAnimation()
     {
         var personalEffectsPath = FightGlobalSetting.EffectPathDefine(Element.Null);
-        EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, _connector.FocusingC.WholeT.position, Quaternion.identity, null);
+        EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, _connector.FocusingC.WholeT.position, Quaternion.identity, null).Forget();
     }
 }

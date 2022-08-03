@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 using HittingDetection;
 using UniRx;
 using DG.Tweening;
@@ -107,7 +108,7 @@ namespace Soul
                 case DamageType.supper_damage_forward:
                     used_dizzy_time = FightGlobalSetting._superhit_lastingtime;
                     NormalStart(target);
-                    EffectsManager.GenerateEffect("electric_s_e", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, _DATA_CENTER.geometryCenter);
+                    EffectsManager.GenerateEffect("electric_s_e", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, _DATA_CENTER.geometryCenter).Forget();
                     break;
                 case DamageType.draw:
                     DrawDamgeStart(target);

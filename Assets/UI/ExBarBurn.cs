@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 using FightScene;
 
 public class ExBarBurn : MonoBehaviour
@@ -20,7 +21,7 @@ public class ExBarBurn : MonoBehaviour
             EffectsManager.GenerateEffect(
             "ui_exbarburn", null, 
             PosCal.GetWorldPos(NetFightScene.target.fxCamera, transform.GetComponent<RectTransform>(), 3), 
-            Quaternion.identity, null);
+            Quaternion.identity, null).Forget();
         }
     }
 }

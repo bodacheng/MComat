@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Log;
 
@@ -338,9 +339,9 @@ namespace HittingDetection
                 WeaponEnergyExaustMissions.Add(we_C);
             }
             if (!(element == Element.Null && _WeaponMode == WeaponMode.EnergyFromBodyWeapon)) // 不希望普攻hitbox有能量消逝火花
-                EffectsManager.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(element), hitPointPara.onBodyPos, hitPointPara.qua, null);
+                EffectsManager.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(element), hitPointPara.onBodyPos, hitPointPara.qua, null).Forget();
             else{
-                EffectsManager.GenerateEffect("hitwave", FightGlobalSetting.EffectPathDefine(element), hitPointPara.onBodyPos, hitPointPara.qua, null);
+                EffectsManager.GenerateEffect("hitwave", FightGlobalSetting.EffectPathDefine(element), hitPointPara.onBodyPos, hitPointPara.qua, null).Forget();
             }
         }
         

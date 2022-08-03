@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using HittingDetection;
 using Log;
@@ -112,11 +113,11 @@ public partial class FightParamsReference
     {
         if (Center.FightDataRef.Resistance.Value > 0)
         {
-            EffectsManager.GenerateEffect("shield_hit",
-            FightGlobalSetting.EffectPathDefine(damage.from_weapon.element),
-            damage.DamageEffectPoint,
-            damage.CutRotation,
-            null);
+            EffectsManager.GenerateEffect("shield_hit", 
+                FightGlobalSetting.EffectPathDefine(damage.from_weapon.element),
+                damage.DamageEffectPoint,
+                damage.CutRotation,
+            null).Forget();
         }
         else
         {
@@ -135,7 +136,7 @@ public partial class FightParamsReference
             EffectsManager.GenerateEffect(_temp, FightGlobalSetting.EffectPathDefine(damage.from_weapon.element),
             damage.DamageEffectPoint,
             damage.CutRotation,
-            damage.from_weapon.effectSpreadOnBody ? Center.geometryCenter : null);
+            damage.from_weapon.effectSpreadOnBody ? Center.geometryCenter : null).Forget();
         }
     }
 

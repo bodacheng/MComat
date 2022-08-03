@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using HittingDetection;
 using UnityEngine.Animations;
 using UniRx;
@@ -142,7 +143,7 @@ public partial class BO_Ani_E : MonoBehaviour
             Ani_E.processingHitBox._HitBox.SetOwnerFACR(Ani_E._DATA_CENTER.FightDataRef);
             Ani_E.processingHitBox.transform.position = pos;
             Ani_E.processingHitBox.transform.rotation = qua;
-            EffectsManager.GenerateEffect(Ani_E.processingHitBox._HitBox.muzzle, Ani_E.magic_path, Ani_E.processingHitBox.transform.position, Ani_E.transform.rotation, null);
+            EffectsManager.GenerateEffect(Ani_E.processingHitBox._HitBox.muzzle, Ani_E.magic_path, Ani_E.processingHitBox.transform.position, Ani_E.transform.rotation, null).Forget();
             Ani_E.processingHitBox._HitBox.SetReferenceTransformInfo(Ani_E.processingHitBox.transform);
             Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
             Ani_E.processingHitBox.SetBOAniE(Ani_E);
@@ -278,7 +279,7 @@ public partial class BO_Ani_E : MonoBehaviour
         {
             if (Ani_E.OnLoadEffect == null)
                 return;
-            EffectsManager.GenerateEffect(Ani_E.OnLoadEffect, Ani_E.magic_path , pos, qua, parentT);
+            EffectsManager.GenerateEffect(Ani_E.OnLoadEffect, Ani_E.magic_path , pos, qua, parentT).Forget();
         }
 
         public void CloseEffectsOnBodyParts(bool clearParticles)
@@ -296,9 +297,9 @@ public partial class BO_Ani_E : MonoBehaviour
         {
             Vector3 StartToEnd = targetpos - Ani_E.transform.position;
             StartToEnd.y = 0;
-            EffectsManager.GenerateEffect("FlashStart", Ani_E.magic_path, Ani_E._DATA_CENTER.geometryCenter.position, Quaternion.LookRotation(StartToEnd, Vector3.up), null);
+            EffectsManager.GenerateEffect("FlashStart", Ani_E.magic_path, Ani_E._DATA_CENTER.geometryCenter.position, Quaternion.LookRotation(StartToEnd, Vector3.up), null).Forget();
             Ani_E.transform.position = targetpos;
-            EffectsManager.GenerateEffect("FlashEnd", Ani_E.magic_path, Ani_E._DATA_CENTER.geometryCenter.position, Quaternion.LookRotation(-StartToEnd, Vector3.up), null);
+            EffectsManager.GenerateEffect("FlashEnd", Ani_E.magic_path, Ani_E._DATA_CENTER.geometryCenter.position, Quaternion.LookRotation(-StartToEnd, Vector3.up), null).Forget();
         }
     }
 }

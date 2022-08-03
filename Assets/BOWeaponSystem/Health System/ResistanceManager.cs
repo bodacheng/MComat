@@ -1,6 +1,7 @@
 ﻿using UniRx;
 using UnityEngine;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 
 public class ResistanceManager : MonoBehaviour
 {
@@ -55,7 +56,8 @@ public class ResistanceManager : MonoBehaviour
                 {
                     data_Center.FightDataRef.Resistance.Value += 1;
                     data_Center._SkillCancelFlag.turn_on_flag();
-                    EffectsManager.GenerateEffect("break_free", "defaultmagic", data_Center.geometryCenter.position, data_Center.geometryCenter.rotation, data_Center.geometryCenter);
+                    EffectsManager.GenerateEffect("break_free", 
+                        "defaultmagic", data_Center.geometryCenter.position, data_Center.geometryCenter.rotation, data_Center.geometryCenter).Forget();
                 };
                 UnityEngine.Events.UnityAction eventEnd = () =>
                 {
@@ -86,7 +88,7 @@ public class ResistanceManager : MonoBehaviour
                     data_Center.FightDataRef.Resistance.Value += 1;
                     data_Center._ShaderManager.FlatColor(speedBuff, 0.5f);
                     data_Center.Animation_Manger.Speed = 2f;
-                    EffectsManager.GenerateEffect("speedupbuff", "defaultmagic", data_Center.WholeT.position, data_Center.WholeT.rotation, data_Center.WholeT);
+                    EffectsManager.GenerateEffect("speedupbuff", "defaultmagic", data_Center.WholeT.position, data_Center.WholeT.rotation, data_Center.WholeT).Forget();
                 };
                 UnityEngine.Events.UnityAction eventEnd3 = () =>
                 {
