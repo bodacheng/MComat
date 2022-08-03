@@ -63,18 +63,16 @@ public static class HurtObjectManager
     // 默认攻击物件池的创建
     public static void ConstructDPool()
     {
-        if (default_hitBoxPool == null)
+        default_hitBoxPool?.Clear();
+        var resultObject = Resources.Load("FightBasic/d_hitbox") as GameObject;
+        if (resultObject == null)
         {
-            var resultObject = Resources.Load("FightBasic/d_hitbox") as GameObject;
-            if (resultObject == null)
-            {
-                Debug.Log("未能读取到默认hitbox");
-                return;
-            }
-            
-            default_hitBoxPool = new DecompositionPool(resultObject);
-            default_hitBoxPool.PreloadAsync(20, 1).Subscribe(_ => Debug.Log("已经为对象池:d_hitbox预留物件"));
+            Debug.Log("未能读取到默认hitbox");
+            return;
         }
+            
+        default_hitBoxPool = new DecompositionPool(resultObject);
+        default_hitBoxPool.PreloadAsync(20, 1).Subscribe(_ => Debug.Log("已经为对象池:d_hitbox预留物件"));
     }
     
     public static async UniTask ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Element element)
