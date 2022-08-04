@@ -32,7 +32,7 @@ namespace mainMenu
             {
                 if (!CellsDic.ContainsKey(i))
                 {
-                    StoneCell cell = Instantiate(Cellprefab);
+                    var cell = Instantiate(Cellprefab);
                     cell.empty = new Color(1, 1, 1, 0.6f);
                     cell.full = new Color(1, 1, 1, 1);
                     cell.cellPhase = StoneCell.CellPhase.SkillStoneBoxCell;
@@ -104,9 +104,9 @@ namespace mainMenu
 
         static int BoxLength()
         {
-            int returnValue = 0;
+            var returnValue = 0;
             var C_Types = Units.GetTypeList();
-            for (int i = 0; i < C_Types.Count; i++)
+            for (var i = 0; i < C_Types.Count; i++)
             {
                 var filterForm0 = new StoneFilterForm
                 {
@@ -133,8 +133,8 @@ namespace mainMenu
                 var SkillStonesOfType_EX1 = Stones.TargetStonesFromAccount(filterForm1);
                 var SkillStonesOfType_EX2 = Stones.TargetStonesFromAccount(filterForm2);
                 var SkillStonesOfType_EX3 = Stones.TargetStonesFromAccount(filterForm3);
-
-                returnValue = Mathf.Max(SkillStonesOfType_normal.Count, SkillStonesOfType_EX1.Count, SkillStonesOfType_EX2.Count, SkillStonesOfType_EX3.Count);
+                
+                returnValue = Mathf.Max(returnValue, SkillStonesOfType_normal.Count, SkillStonesOfType_EX1.Count, SkillStonesOfType_EX2.Count, SkillStonesOfType_EX3.Count);
             }
             return returnValue;
         }

@@ -27,6 +27,7 @@ public partial class SkillEditLayer : UILayer
         var l = UILayerLoader.Get("SkillEditLayer");
         if (l == null) return null;
         var returnValue = l as SkillEditLayer;
+        returnValue.StonesBox.GenerateCells();
         return returnValue;
     }
     
@@ -42,6 +43,7 @@ public partial class SkillEditLayer : UILayer
         }
         l = UILayerLoader.Load(PreScene.target.T,"SkillEditLayer") as SkillEditLayer;
         returnValue = (SkillEditLayer)l;
+        returnValue.StonesBox.GenerateCells();
         returnValue.gameObject.SetActive(false);
         returnValue.NineSlot.PrintSkillInfo = returnValue._skillStoneDetail.RefreshInfo;
         returnValue.NineSlot.StartUp((x) =>

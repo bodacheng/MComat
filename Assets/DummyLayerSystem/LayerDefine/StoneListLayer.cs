@@ -39,6 +39,7 @@ public class StoneListLayer : UILayer
         if (l != null)
         {
             returnValue = l as StoneListLayer;
+            returnValue.box.GenerateCells();
         }
         return returnValue;
     }
@@ -52,6 +53,7 @@ public class StoneListLayer : UILayer
         }
         returnValue = UILayerLoader.Load(PreScene.target.T,"StoneListLayer") as StoneListLayer;
         returnValue.box.IniExTabs();
+        returnValue.box.GenerateCells();
         returnValue.box._tabEffects.SwitchZokusei(Element.blueMagic, ()=> returnValue.box.IniExTabsEffects(PreScene.target.FxCamera)).Forget();
         returnValue.box.AddFeatureToCells(returnValue.CellFeature_StoneShow);
         returnValue.box.EXTabsFeatureRefresh(true);
@@ -63,7 +65,7 @@ public class StoneListLayer : UILayer
 
     public static void Close()
     {
-        StoneListLayer returnValue = Get();
+        var returnValue = Get();
         if (returnValue != null)
         {
             returnValue._skillStoneDetail.Clear();

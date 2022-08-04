@@ -38,7 +38,6 @@ namespace mainMenu
         
         void PutSkillStonesToBox()
         {
-            GenerateCells();
             var targetSKs = Stones.TargetStonesFromAccount_except(form, null, null, false);
             targetSKs = Order(targetSKs);
             

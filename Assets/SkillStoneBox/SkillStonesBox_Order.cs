@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Api.Dto.Model;
 using dataAccess;
 using Skill;
 using UnityEngine.UI;
@@ -9,7 +8,6 @@ namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
     {
-        [Space(7)]
         [Header("Order Button")]
         public Text orderButtonText;
         
