@@ -165,7 +165,7 @@ public partial class Animation_Manger{
                             Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey);
                             if (value != null)
                             {
-                                AnimationClip _AnimationClip = (AnimationClip)value;
+                                var _AnimationClip = (AnimationClip)value;
                                 humanHurtAnimsObjects.Add(_AnimationClip);
                             }
                         }

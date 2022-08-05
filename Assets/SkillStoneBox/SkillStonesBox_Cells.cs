@@ -17,7 +17,7 @@ namespace mainMenu
 
         readonly IDictionary<int, StoneCell> CellsDic = new Dictionary<int, StoneCell>();
         
-        public void GenerateCells()
+        public void GenerateCells(int extraCellNum = 0)
         {
             foreach (var kv in CellsDic)
             {
@@ -27,6 +27,7 @@ namespace mainMenu
             var hang = 1;
             var cellCount = BoxLength();
             var GridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
+            cellCount += extraCellNum;
             cellCount = ((cellCount / GridLayoutGroup.constraintCount) + 1) * GridLayoutGroup.constraintCount;
             for (int i = 0; i < cellCount; i++)
             {

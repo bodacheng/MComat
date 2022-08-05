@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public partial class NineForShow : MonoBehaviour
             unitInfo.set.a1, unitInfo.set.a2, unitInfo.set.a3,
             unitInfo.set.b1, unitInfo.set.b2, unitInfo.set.b3,
             unitInfo.set.c1, unitInfo.set.c2, unitInfo.set.c3
-        );
+        ).Forget();
     }
 
     public void LoadShowDetailFeature(Action<string> showDetail)

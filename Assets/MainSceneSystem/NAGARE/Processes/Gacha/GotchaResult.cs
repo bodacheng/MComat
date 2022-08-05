@@ -1,6 +1,7 @@
 ﻿using mainMenu;
 using dataAccess;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 
 public class GotchaResult : MSceneProcess
 {
@@ -18,7 +19,7 @@ public class GotchaResult : MSceneProcess
         layer = GotchaResultLayer.Open();
         StarsFall.target.gameObject.SetActive(true);
         layer.NineForShow.LoadShowDetailFeature(layer.ShowDetail);
-        mainProcessRunner.RunAsQueued(layer.WholeAnimProcess(Result));
+        layer.WholeAnimProcess(Result).Forget();
         SetLoaded(true);
     }
     

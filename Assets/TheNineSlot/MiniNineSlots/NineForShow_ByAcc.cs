@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using dataAccess;
-using Api.Dto.Model;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 
 public partial class NineForShow : MonoBehaviour
 {
     public void ShowStones_Acc(string MonsterOfPlayerID)
     {
-        List<StoneOfPlayerInfo> skillStoneOfPlayerInfoModels = Stones.GetEquippingStones(MonsterOfPlayerID);
+        var skillStoneOfPlayerInfoModels = Stones.GetEquippingStones(MonsterOfPlayerID);
         
         string A1SkillID = null, A2SkillID = null, A3SkillID = null;
         string B1SkillID = null, B2SkillID = null, B3SkillID = null;
@@ -51,6 +51,6 @@ public partial class NineForShow : MonoBehaviour
             A1SkillID, A2SkillID, A3SkillID,
             B1SkillID, B2SkillID, B3SkillID,
             C1SkillID, C2SkillID, C3SkillID
-        );
+        ).Forget();
     }
 }

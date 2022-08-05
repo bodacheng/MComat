@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
@@ -59,7 +60,7 @@ public partial class NineForShow : MonoBehaviour
         }
     }
     
-    public async void ShowStones(string a1Skillid, string a2Skillid, string a3Skillid,
+    public async UniTask ShowStones(string a1Skillid, string a2Skillid, string a3Skillid,
                                     string b1Skillid, string b2Skillid, string b3Skillid,
                                         string c1Skillid, string c2Skillid, string c3Skillid)
     {
