@@ -10,17 +10,17 @@ namespace Singleton
     
         public static async UniTask<Sprite> Load(string unit_id)
         {
-            Dic.TryGetValue(unit_id, out Sprite Sprite);
-            if (Sprite == null)
+            Dic.TryGetValue(unit_id, out Sprite sprite);
+            if (sprite == null)
             {
-                Sprite = await AddressablesLogic.LoadT<Sprite>("unit/" + unit_id);
+                sprite = await AddressablesLogic.LoadT<Sprite>("unit/" + unit_id);
             }
             else
             {
-                return Sprite;
+                return sprite;
             }
-            DicAdd<string, Sprite>.Add(Dic, unit_id, Sprite);            
-            return Sprite;
+            DicAdd<string, Sprite>.Add(Dic, unit_id, sprite);            
+            return sprite;
         }
     }
 }

@@ -4,7 +4,6 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using Object = UnityEngine.Object;
 
 public static class AddressablesLogic
 {
@@ -106,22 +105,44 @@ public static class AddressablesLogic
     
     public static async UniTask<GameObject> LoadObject(string prefabPathName)
     {
-        var handle = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
+        var handle = Addressables.InstantiateAsync(prefabPathName);
         await handle.Task;
         if (handle.Status != AsyncOperationStatus.Succeeded)
         {
             Debug.Log($"Failed to load : {prefabPathName}");
-            Addressables.Release(handle);
+            Addressables.ReleaseInstance(handle);
             return default;
         }
         else
         {
-            var _object = Object.Instantiate(handle.Result);
+            var _object = handle.Result; // インスタンス化されたもの
             _object.AddOnDestroyCallback( () =>
             {
-                Addressables.Release(handle);
+                Addressables.ReleaseInstance(handle);
             });
             return _object;
+        }
+    }
+    
+    public static async UniTask<T> LoadTOnObject<T>(string prefabPathName)
+    {
+        var handle = Addressables.InstantiateAsync(prefabPathName);
+        await handle.Task;
+        if (handle.Status != AsyncOperationStatus.Succeeded)
+        {
+            Debug.Log($"Failed to load : {prefabPathName}");
+            Addressables.ReleaseInstance(handle);
+            return default;
+        }
+        else
+        {
+            var _object = handle.Result; // インスタンス化されたもの
+            _object.AddOnDestroyCallback( () =>
+            {
+                Addressables.ReleaseInstance(handle);
+            });
+            var returnValue = _object.GetComponent<T>();
+            return returnValue;
         }
     }
     
@@ -141,29 +162,6 @@ public static class AddressablesLogic
         {
             LoadingHandlerList.Add(handle);
             return handle.Result;
-        }
-    }
-    
-    public static async UniTask<T> LoadTOnObject<T>(string prefabPathName)
-    {
-        var handle = Addressables.LoadAssetAsync<GameObject>(prefabPathName);
-        await handle.Task;
-        if (handle.Status != AsyncOperationStatus.Succeeded)
-        {
-            Debug.Log($"Failed to load : {prefabPathName}");
-            Addressables.Release(handle);
-            return default;
-        }
-        else
-        {
-            var prefab = handle.WaitForCompletion();
-            var _object = Object.Instantiate(prefab);
-            _object.AddOnDestroyCallback( () =>
-            {
-                Addressables.Release(handle);
-            });
-            var returnValue = _object.GetComponent<T>();
-            return returnValue;
         }
     }
     

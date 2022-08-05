@@ -48,7 +48,7 @@ public partial class SkillEditLayer : UILayer
         returnValue.NineSlot.PrintSkillInfo = returnValue._skillStoneDetail.RefreshInfo;
         returnValue.NineSlot.StartUp((x) =>
             {
-                returnValue._connector.SkillShowRunWithPrepare(x);
+                returnValue._connector.SkillShowRunWithPrepare(x).Forget();
             }
         );
         
