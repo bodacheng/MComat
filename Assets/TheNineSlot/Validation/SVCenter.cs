@@ -1,13 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using dataAccess;
 using DG.Tweening;
 using mainMenu;
-using System.Collections.Generic;
 
 public static class SVCenter
 {
-    public static async void StoneRemoveFromSlotToCell(StoneCell sourceCell, StoneCell boxcell)
+    public static void StoneRemoveFromSlotToCell(StoneCell sourceCell, StoneCell boxcell)
     {
         if (sourceCell.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {

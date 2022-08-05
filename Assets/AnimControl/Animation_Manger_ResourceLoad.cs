@@ -172,7 +172,7 @@ public partial class Animation_Manger{
                     }
                 }
                 Addressables.Release(loadPath);
-                foreach (UnityEngine.Object _object in humanHurtAnimsObjects)
+                foreach (Object _object in humanHurtAnimsObjects)
                 {
                     AnimationResourceLoader.SeriesAnimationClipsDic[type + "/" + address].Add(_object as AnimationClip);
                 }

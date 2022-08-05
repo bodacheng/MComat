@@ -4,9 +4,16 @@ using System;
 using Newtonsoft.Json;
 using Json;
 
+public enum ApiLanguage
+{
+    EnUs,
+    JaJp,
+    ZhCn
+}
+
 public class AppSetting
 {
-    public static AppSetting value = new AppSetting();
+    public static AppSetting value = new ();
     
     float bgmVolumn = 0.5f, effectsVolumn = 0.5f, cvVolumn = 0.5f;
     

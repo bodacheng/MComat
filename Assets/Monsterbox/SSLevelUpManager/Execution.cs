@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using dataAccess;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public partial class SSLevelUpManager : MonoBehaviour
 {
     void LevelUpStone(string InstanceId, Action<string> refreshStoneData)
     {
+        var materialInstanceIds = new List<string>();
+        
         var form = new SkillStoneLevelUpForm();
         
         var item1 = cell1.GetItem();
@@ -19,8 +22,20 @@ public partial class SSLevelUpManager : MonoBehaviour
         form.M2Stone = item2 != null ? item2.instanceId : null;
         form.M3Stone = item3 != null ? item3.instanceId : null;
         form.M4Stone = item4 != null ? item4.instanceId : null;
+
+        void AddInstanceIdToList(SKStoneItem item)
+        {
+            if (item != null)
+                materialInstanceIds.Add(item.instanceId);
+        }
         
-        CloudScript.UpdateStone(form, 
+        AddInstanceIdToList(item1);
+        AddInstanceIdToList(item2);
+        AddInstanceIdToList(item3);
+        AddInstanceIdToList(item4);
+        
+        CloudScript.UpdateStone(
+            form,
             (targetInstanceId,x) =>
             {
                 refreshStoneData.Invoke(targetInstanceId);
@@ -30,6 +45,23 @@ public partial class SSLevelUpManager : MonoBehaviour
                 }
             }
         );
+        
+        // 以下是远程那边计算技能石升到等级的逻辑：
+        var materialLevels = new List<int>();
+        var addLevel = 0; // 增加的等级
+        void Temp(string instanceID)
+        {
+            var ssInfo = Stones.Get(instanceID);
+            materialLevels.Add(ssInfo.level);
+            addLevel += (ssInfo.level - 1);
+            if (materialLevels.Count == 4)
+                addLevel += 1;
+        }
+        
+        foreach (var instanceId in materialInstanceIds)
+        {
+            Temp(instanceId);
+        }
     }
     
     // 技能升级确认。
