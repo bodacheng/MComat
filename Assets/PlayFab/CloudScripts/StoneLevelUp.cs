@@ -1,5 +1,4 @@
 using UnityEngine;
-using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
 using System;
@@ -54,6 +53,7 @@ public partial class CloudScript
                 {
                     targetItemInstanceId = form.targetStoneID,
                     resources = Items,
+                    addLevel = form.addLevel
                 }, 
                 GeneratePlayStreamEvent = true,
             },
@@ -67,7 +67,7 @@ public partial class CloudScript
                 int newLevel = Convert.ToInt32(level);
                 if ((bool)successReturn)
                 {
-                    StoneOfPlayerInfo targetInfo = Stones.Get(form.targetStoneID);
+                    var targetInfo = Stones.Get(form.targetStoneID);
                     targetInfo.level = newLevel;
                     success.Invoke(
                         form.targetStoneID,

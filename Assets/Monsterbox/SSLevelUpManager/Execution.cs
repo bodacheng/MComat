@@ -34,17 +34,6 @@ public partial class SSLevelUpManager : MonoBehaviour
         AddInstanceIdToList(item3);
         AddInstanceIdToList(item4);
         
-        CloudScript.UpdateStone(
-            form,
-            (targetInstanceId,x) =>
-            {
-                refreshStoneData.Invoke(targetInstanceId);
-                foreach (var instanceId in x)
-                {
-                    Stones.RemoveStoneLocal(instanceId);
-                }
-            }
-        );
         
         // 以下是远程那边计算技能石升到等级的逻辑：
         var materialLevels = new List<int>();
@@ -62,6 +51,20 @@ public partial class SSLevelUpManager : MonoBehaviour
         {
             Temp(instanceId);
         }
+
+        form.addLevel = addLevel.ToString();
+        
+        CloudScript.UpdateStone(
+            form,
+            (targetInstanceId,x) =>
+            {
+                refreshStoneData.Invoke(targetInstanceId);
+                foreach (var instanceId in x)
+                {
+                    Stones.RemoveStoneLocal(instanceId);
+                }
+            }
+        );
     }
     
     // 技能升级确认。
