@@ -9,7 +9,7 @@ namespace Singleton
         public static async UniTask<Data_Center> GetModel(string rId, Transform parent = null)
         {
             //以上这个信息就包括了全部的“我的角色”信息，下面别的信息都是据此各种由此索引出来的。
-            var unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(rId));
+            var unitConfig = Units.RowToUnitConfigInfo(Units.Find_RECORD_ID(rId));
             if (unitConfig == null)
             {
                 Debug.Log("资源号码错误");

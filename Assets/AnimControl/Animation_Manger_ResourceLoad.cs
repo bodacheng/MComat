@@ -231,38 +231,41 @@ public partial class Animation_Manger{
         {
             return;
         }
-        await AnimationResourceLoader.DownloadAnim(animPath, key);
+        
+        await AnimationResourceLoader.LoadAnim(animPath, key);
         var clip = AnimationResourceLoader.Instance.GetAnimationClip(animPath + "/skill/" + key);
         if (clip != null)
         {
             if (!toLoadAnims.ContainsKey(key))
             {
                 toLoadAnims.Add(new KeyValuePair<string, AnimationClip>(key, clip));
+                var tasks = new List<UniTask>();
+                
                 foreach (AnimationEvent e in clip.events)
                 {
                     if (e.functionName == "MagicForward")
                     {
-                        await HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, element);
+                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, element));
                     }
                     if (e.functionName == "PrepareOneMagic")
                     {
-                        await HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, element);
+                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, element));
                     }
                     if (e.functionName == "Bullet_shoot_from_body_part")
                     {
                         switch (e.intParameter)
                         {
                             case 1:
-                                await HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, element);
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, element));
                                 break;
                             case 2:
-                                await HurtObjectManager.ConstructHurtObjectPool("big_bullet", personalMagic, element);
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("big_bullet", personalMagic, element));
                                 break;
                             case 3:
-                                await HurtObjectManager.ConstructHurtObjectPool("super_bullet", personalMagic, element);
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("super_bullet", personalMagic, element));
                                 break;
                             default:
-                                await HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, element);
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, element));
                                 break;
                         }
                     }
@@ -271,16 +274,16 @@ public partial class Animation_Manger{
                         switch (e.intParameter)
                         {
                             case 0:
-                                await HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element);
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element));
                                 break;
                             case 1:
-                                await HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element);
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element));
                                 break;
                             case 2:
-                                await HurtObjectManager.ConstructHurtObjectPool("big_blast", personalMagic, element);
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("big_blast", personalMagic, element));
                                 break;
                             default:
-                                await HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element);
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element));
                                 break;
                         }
                     }
@@ -289,15 +292,18 @@ public partial class Animation_Manger{
                         AudioResourceLoading.Instance.LoadAudioClipFromResourceAndPutItIntoDic("effects", e.stringParameter);
                     }
                 }
+                await UniTask.WhenAll(tasks);
             }
         }
     }
     
     public async UniTask PreloadPersonalAnimsResourceMode(string type, List<string> toLoadSkillAnimsNames,string personalMagic, Element element)
     {
+        var tasks = new List<UniTask>();
         foreach (string anim_name in toLoadSkillAnimsNames)
         {
-            await PreloadPersonalAnimResourceMode(type, anim_name, personalMagic, element);
+            tasks.Add(PreloadPersonalAnimResourceMode(type, anim_name, personalMagic, element));
         }
+        await UniTask.WhenAll(tasks);
     }
 }

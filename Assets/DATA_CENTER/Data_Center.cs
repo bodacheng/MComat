@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UniRx;
@@ -104,23 +106,27 @@ public partial class Data_Center : MonoBehaviour
         _MyBehaviorRunner.FormFightingSetsByNineAndTwo(_NineAndTwo, level);
         _MyBehaviorRunner.INIStates(this);
         
-        await EffectsManager.INIEffectsPool("short_effect", FightGlobalSetting.EffectPathDefine(element), 3);
-        await EffectsManager.INIEffectsPool("normal_effect", FightGlobalSetting.EffectPathDefine(element), 3);
-        await EffectsManager.INIEffectsPool("long_effect", FightGlobalSetting.EffectPathDefine(element), 3);
-        await EffectsManager.INIEffectsPool("Sparks", FightGlobalSetting.EffectPathDefine(element), 3);
-        await EffectsManager.INIEffectsPool("hitwave", FightGlobalSetting.EffectPathDefine(element), 3);
-        await EffectsManager.INIEffectsPool("light_hit", FightGlobalSetting.EffectPathDefine(element), 3);
-        await EffectsManager.INIEffectsPool("heavy_hit", FightGlobalSetting.EffectPathDefine(element), 3);
-        await EffectsManager.INIEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(element), 3);
-        await EffectsManager.INIEffectsPool("resistanceUp", FightGlobalSetting.EffectPathDefine(element), 3);
-        await EffectsManager.INIEffectsPool("on_enable_effect", FightGlobalSetting.EffectPathDefine(element), 3);
-        await EffectsManager.INIEffectsPool("FlashStart", FightGlobalSetting.EffectPathDefine(element), 3);
-        await EffectsManager.INIEffectsPool("FlashEnd", FightGlobalSetting.EffectPathDefine(element), 3);
+        var tasks = new List<UniTask>
+        {
+            EffectsManager.INIEffectsPool("short_effect", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.INIEffectsPool("normal_effect", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.INIEffectsPool("long_effect", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.INIEffectsPool("Sparks", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.INIEffectsPool("hitwave", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.INIEffectsPool("light_hit", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.INIEffectsPool("heavy_hit", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.INIEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.INIEffectsPool("resistanceUp", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.INIEffectsPool("on_enable_effect", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.INIEffectsPool("FlashStart", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.INIEffectsPool("FlashEnd", FightGlobalSetting.EffectPathDefine(element), 3)
+        };
         
         //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
         // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
         var toLoadSkillAnimsNames = _MyBehaviorRunner.PassSkillTypeKeys();
-        await (Animation_Manger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, personalMagic,element));
+        tasks.Add(Animation_Manger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, personalMagic,element));
+        await UniTask.WhenAll(tasks);
     }
 
     public void Step3Initialize(TeamConfig _TeamConfig, float nineSkillHp, CriticalGaugeMode criticalGaugeMode)

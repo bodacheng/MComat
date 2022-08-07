@@ -274,7 +274,7 @@ public static class Units
         List<UnitConfig> ToReturn = new List<UnitConfig>();
         foreach (Row row in List)
         {
-            UnitConfig _CharacterResourceInfo = RowToCharConfigInfo(row);
+            UnitConfig _CharacterResourceInfo = RowToUnitConfigInfo(row);
             if (_CharacterResourceInfo != null)
                 ToReturn.Add(_CharacterResourceInfo);
             else
@@ -326,11 +326,11 @@ public static class Units
         return row;
     }
 
-    public static UnitConfig RowToCharConfigInfo(Row row)
+    public static UnitConfig RowToUnitConfigInfo(Row row)
     {
         if (row == null)
             return null;
-        UnitConfig _Config = new UnitConfig
+        var _Config = new UnitConfig
         {
             RECORD_ID = row.RECORD_ID,
             TYPE = row.MONSTER_TYPE,

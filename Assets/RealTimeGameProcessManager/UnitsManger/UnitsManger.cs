@@ -38,18 +38,27 @@ namespace FightScene
         
         public async UniTask _UnitsLoad(MultiDic<int, int, UnitInfo> MembersSets, IDictionary<Data_Center, UnitInfo> UnitInfoRef)
         {
-            foreach (var kv in MembersSets.mDict)
+            async UniTask LoadOneUnit(int key1, int key2, UnitInfo info)
             {
-                var _one = kv.Value;
-                var center = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
+                var _one = info;
+                var center = TeamMembers.Get(key1, key2);
                 if (center == null)
                 {
                     center = await UnitCreator.CreateUnit(_one);
                 }
                 
-                TeamMembers.Set(kv.Key.Item1, kv.Key.Item2, center);
+                TeamMembers.Set(key1, key2, center);
                 DicAdd<Data_Center, UnitInfo>.Add(UnitInfoRef, center, _one);
             }
+            
+            var tasks = new List<UniTask>();
+            
+            foreach (var kv in MembersSets.mDict)
+            {
+                tasks.Add(LoadOneUnit(kv.Key.Item1, kv.Key.Item2, kv.Value));
+            }
+
+            await UniTask.WhenAll(tasks);
         }
         
         public bool IfAllUnitsPreparedForBattle()

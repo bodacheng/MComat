@@ -46,7 +46,7 @@ public class UnitInfo
             
             var targets = Stones.GetEquippingStones(info.id);
             var set = new SkillSet();
-            var unitConfigInfo = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(info.r_id));
+            var unitConfigInfo = Units.RowToUnitConfigInfo(Units.Find_RECORD_ID(info.r_id));
             if (unitConfigInfo == null)
             {
                 Debug.Log("角色定义信息错误。monsterId：" + info.r_id);

@@ -34,7 +34,7 @@ public class AnimationResourceLoader
         return _AnimationClip;
     }
 
-    public static async UniTask DownloadAnim(string type, string key)
+    public static async UniTask LoadAnim(string type, string key)
     {
         var clipKey = type + "/skill/" + key;
         if (AnimationClipDic.ContainsKey(clipKey))
@@ -45,7 +45,7 @@ public class AnimationResourceLoader
         var result = await AddressablesLogic.LoadT<AnimationClip>("Animation/"+ type+"/skill/"+ key +".anim");
         if (result != null)
         {
-            AnimationClipDic.Add(clipKey, result);
+            DicAdd<string, AnimationClip>.Add(AnimationClipDic, clipKey, result);
         }
     }
 }

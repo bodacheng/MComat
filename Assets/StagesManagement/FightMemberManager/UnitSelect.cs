@@ -8,7 +8,7 @@ public partial class FightMemberManager {
     string UnitSelect()
     {
         // 角色选择
-        var focusingUnitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(focusingUnitInfo.r_id));
+        var focusingUnitConfig = Units.RowToUnitConfigInfo(Units.Find_RECORD_ID(focusingUnitInfo.r_id));
         focusingType = focusingUnitConfig != null ? EditorGUILayout.TextField("Unit Type", focusingUnitConfig.TYPE) : EditorGUILayout.TextField("Unit Type", focusingType);
         UnitIDsAndNames = new Dictionary<string, string>() { { "-1", "空" } };
         foreach(var keyValuePair in Units.GetMonsterIDsAndNamesDic(focusingType))

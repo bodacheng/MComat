@@ -12,7 +12,7 @@ public class UnitCreator {
             Debug.Log("严重资源类错误");
             return _D;
         }
-        var unitConfig = Units.RowToCharConfigInfo(Units.Find_RECORD_ID(info.r_id));
+        var unitConfig = Units.RowToUnitConfigInfo(Units.Find_RECORD_ID(info.r_id));
         await _D.Step2Initialize (unitConfig.TYPE, info.set, info.level, unitConfig.element, unitConfig.SPECIAL_ZOKUSEI);
         return _D;
     }

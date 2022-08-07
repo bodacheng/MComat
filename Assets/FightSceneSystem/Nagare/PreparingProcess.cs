@@ -20,22 +20,23 @@ public class PreparingProcess : FSceneProcess
         CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
         Sensor.ClearFightingMember();
         PopupLayer.LoadingPercent("loading Essentials", NetFightScene.target.T.gameObject, 0.1f);
-        await AddressablesLogic.Essentials();
-        PopupLayer.LoadingPercent("loading BattleGround", NetFightScene.target.T.gameObject, 0.3f);
-        await BoundaryControlByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID);
-        PopupLayer.LoadingPercent("loading Units", NetFightScene.target.T.gameObject, 0.5f);
-        await RTFightManager.target.LoadUnits(NetFightScene.Fight);
+        
+        var tasks = new List<UniTask>
+        {
+            AddressablesLogic.Essentials(),
+            BoundaryControlByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID),
+            RTFightManager.target.LoadUnits(NetFightScene.Fight),
+            EffectsManager.INIEffectsPool("hit_ground", null, 3),
+            EffectsManager.INIEffectsPool("wallCrack", null, 3),
+            EffectsManager.INIEffectsPool("break_free", null, 3),
+            EffectsManager.INIEffectsPool("memberShift", null, 3)
+        };
+        await UniTask.WhenAll(tasks);
         
         var teamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.target.heroTeamConfig, RTFightManager.target.team1.TeamMembers.GetValues());
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.target.EnemyTeamConfig, RTFightManager.target.team2.TeamMembers.GetValues());
         FightLogger.value.ReadyToLog(teamMembers);
-        
-        PopupLayer.LoadingPercent("loading Effects", NetFightScene.target.T.gameObject, 0.5f);
-        await EffectsManager.INIEffectsPool("hit_ground", null, 3);
-        await EffectsManager.INIEffectsPool("wallCrack", null, 3);
-        await EffectsManager.INIEffectsPool("break_free", null, 3);
-        await EffectsManager.INIEffectsPool("memberShift", null, 3);
         
         RTFightManager.target.team1.Auto = NetFightScene.Fight.team1Auto;
         RTFightManager.target.team2.Auto = NetFightScene.Fight.team2Auto;
