@@ -2,7 +2,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class StartUpPresentation : MonoBehaviour
 {
@@ -24,23 +23,14 @@ public class StartUpPresentation : MonoBehaviour
         ).Forget();
     }
     
-    [SerializeField] private TextMeshProUGUI ProgressMsg;
-    [SerializeField] private Slider progressBar;
-    
-    void ProgressUIStateRefresh(string msg, float progress)
-    {
-        ProgressMsg.text = msg;
-        progressBar.value = progress;
-    }
-    
     void DownLoadConfirm(string msg)
     {
         var popupLayer = PopupLayer.Open(T.gameObject);
         popupLayer.ArrangeConfirmWindow(
             async ()=>
             {
-                progressBar.gameObject.SetActive(true);
-                await AddressablesLogic.ResourcePrepareProcess(Starter.EnterFrontScene, ProgressUIStateRefresh);
+                await AddressablesLogic.ResourcePrepareProcess(Starter.EnterFrontScene, 
+                    (x,f) => PopupLayer.LoadingPercent(x, T.gameObject, f));
             },
             () =>
             {

@@ -21,9 +21,11 @@ public partial class PopupLayer : UILayer
 
     public static void LoadingPercent(string description, GameObject hook, float progress)
     {
+        Debug.Log("已经在这里？？");
         Loading(description, hook, 1f);
         var layer = Get();
         layer.progressBar.gameObject.SetActive(true);
+        layer.ValidationWindow.gameObject.SetActive(false);
         DOTween.To
         (
             () => layer.progressBar.value,
