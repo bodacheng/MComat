@@ -51,17 +51,26 @@ public class FrontPage : MSceneProcess
         frontLayer.Initialise(PreScene.target);
         
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
-        _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
-        
-        var focusInstanceID = TeamSet.Default.GetInstanceIdOnPos(0);
-        if (focusInstanceID == null)
+        //_CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
+
+        string focusInstanceID;
+        if (PreScene.target._focusing != null && dataAccess.Units.Get(PreScene.target._focusing.id) != null)
         {
-            foreach (var keyValuePair in dataAccess.Units.Dic)
+            focusInstanceID = PreScene.target._focusing.id;
+        }
+        else
+        {
+            focusInstanceID = TeamSet.Default.GetInstanceIdOnPos(0);
+            if (focusInstanceID == null)
             {
-                focusInstanceID = keyValuePair.Key;
-                break;
+                foreach (var keyValuePair in dataAccess.Units.Dic)
+                {
+                    focusInstanceID = keyValuePair.Key;
+                    break;
+                }
             }
         }
+        
         PreScene.target.SetFocusingUnit(focusInstanceID);
         frontLayer._connector.ShowMyModel(focusInstanceID);
         

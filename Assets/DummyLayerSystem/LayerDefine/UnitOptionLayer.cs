@@ -9,15 +9,12 @@ namespace mainMenu
     {
         public DedicatedCameraConnector _connector;
         
-        [Space(11)]
         [Header("角色明细T，技能显示T")]
         public RectTransform MemberInfoT;
-                
-        [Space(7)]
+        
         [Header("mini nineslot")]
         public NineForShow _NineForShow;
         
-        [Space(7)]
         [Header("部下详细")]
         public Text focusingCharName;
         public Button SkillShowButton, SkillEditButton;
@@ -32,7 +29,7 @@ namespace mainMenu
                 return returnValue;
             }
             l = UILayerLoader.Load(PreScene.target.T,"UnitOptionLayer") as UnitOptionLayer;
-            returnValue = l as UnitOptionLayer;
+            returnValue = (UnitOptionLayer)l;
             return returnValue;
         }
         
@@ -43,7 +40,7 @@ namespace mainMenu
             UILayerLoader.Remove("UnitOptionLayer");
         }
         
-        public void RefreshMemberDetailPageByFocusingChar()
+        public void RefreshMemberDetailPageByFocusingUnit()
         {
             if (PreScene.target._focusing == null || PreScene.target._focusing.id == null || PreScene.target._focusing.r_id == null)
             {

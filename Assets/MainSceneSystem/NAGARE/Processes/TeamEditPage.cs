@@ -29,10 +29,14 @@ public class TeamEditPage : MSceneProcess
             teamEditLayer._nineForShow.ShowStones_Acc(PreScene.target._focusing.id);
         
         var unitsLayer = UnitsLayer.Open();
-        unitsLayer.DisplayUnitIcons(true, x =>
-        {
-            x.SetUnitsIconOnClick((x) => teamEditLayer.UnitIconClick(x, this.teamMode));
-        });
+        unitsLayer.DisplayUnitIcons(
+            dataAccess.Units.Dic,
+            true, 
+            x =>
+            {
+                x.SetUnitsIconOnClick((x) => teamEditLayer.UnitIconClick(x, this.teamMode));
+            }
+        );
         
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
         

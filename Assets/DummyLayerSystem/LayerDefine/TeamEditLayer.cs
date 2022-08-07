@@ -47,7 +47,7 @@ public class TeamEditLayer : UILayer
 
     public void UnitIconClick(string instanceID, string teamMode)
     {
-        UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+        var unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
         if (focusingPos != -1)
         {
             ChangeTeamPos(instanceID, focusingPos, teamMode);
@@ -61,7 +61,6 @@ public class TeamEditLayer : UILayer
         
         PreScene.target.SetFocusingUnit(instanceID);//确立focusing角色
         _nineForShow.ShowStones_Acc(instanceID);
-
         _connector.ShowMyModel(instanceID);
     }
     

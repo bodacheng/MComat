@@ -13,7 +13,7 @@ public class SelfFightPage : MSceneProcess
     public override void ProcessEnter()
     {
         var layer = UnitsLayer.Open();
-        layer.DisplayUnitIcons(true);
+        layer.DisplayUnitIcons(dataAccess.Units.Dic, true);
         
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
         

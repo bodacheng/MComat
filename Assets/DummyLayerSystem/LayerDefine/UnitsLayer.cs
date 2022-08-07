@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using dataAccess;
 using DummyLayerSystem;
 using Cysharp.Threading.Tasks;
 using Singleton;
@@ -105,13 +104,13 @@ namespace mainMenu
         
         public void OnTypeChangeMyMonsterBox()
         {
-            DisplayUnitIcons(false);
+            DisplayUnitIcons(dataAccess.Units.Dic, false);
         }
         
-        async UniTask UnitIconsGenerate(bool clearButtonFeature)
+        async UniTask UnitIconsGenerate(IDictionary<string, UnitInfo> dic, bool clearButtonFeature)
         {
             selected_InstanceID = null;
-            foreach (KeyValuePair<string, UnitInfo> keyValuePair in dataAccess.Units.Dic)
+            foreach (var keyValuePair in dic)
             {
                 await AddUnitIcon(keyValuePair.Value.id, clearButtonFeature);
             }
@@ -119,10 +118,10 @@ namespace mainMenu
         }
         
         //icon的排列，显示   
-        public async void DisplayUnitIcons(bool clearButtonFeature, Action<UnitsLayer> afterLoad = null)
+        public async void DisplayUnitIcons(IDictionary<string, UnitInfo> dic, bool clearButtonFeature, Action<UnitsLayer> afterLoad = null)
         {
             MonsterBoxContainer.gameObject.SetActive(true);
-            await UnitIconsGenerate(clearButtonFeature);
+            await UnitIconsGenerate(dic, clearButtonFeature);
             foreach (KeyValuePair<string, HeroIcon> keyValuePair in heroIcons)
             {
                 keyValuePair.Value.gameObject.SetActive(false);

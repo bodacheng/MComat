@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using mainMenu;
-using dataAccess;
+using UniRx;
 
 public class UnitListPage : MSceneProcess
 {
@@ -31,21 +32,24 @@ public class UnitListPage : MSceneProcess
         
         layer = UnitsLayer.Open();
         unitOptionLayer = UnitOptionLayer.Open();
-        layer.DisplayUnitIcons(true, (x) =>
+        layer.DisplayUnitIcons(
+        dataAccess.Units.Dic, 
+        true, 
+        (x) =>
         {
             void UnitIconBtn(string instanceId)
             {
                 Debug.Log("onclick instanceId :"+ instanceId);
                 x.Select(instanceId);
                 PreScene.target.SetFocusingUnit(instanceId);
-                unitOptionLayer.RefreshMemberDetailPageByFocusingChar();
+                unitOptionLayer.RefreshMemberDetailPageByFocusingUnit();
             }
             x.SetUnitsIconOnClick(UnitIconBtn);
         });
         
-        // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
-        _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
-        unitOptionLayer.RefreshMemberDetailPageByFocusingChar();
+        Observable.Timer(TimeSpan.FromSeconds(1))
+            .Subscribe(_ => unitOptionLayer.RefreshMemberDetailPageByFocusingUnit()).AddTo(layer);
+        
         SetLoaded(true);
     }
     
