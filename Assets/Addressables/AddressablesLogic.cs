@@ -70,7 +70,6 @@ public static class AddressablesLogic
         wholeSize += await DownLoadSize("skill_icon", exception);
         wholeSize += await DownLoadSize("unit_icon", exception);
         wholeSize += await DownLoadSize("battle_ground", exception);
-        wholeSize += await DownLoadSize("icon_frame", exception);
         wholeSize += await DownLoadSize("btn_effect", exception);
         
         var warn = "Download size : " + wholeSize / 1024 + "MB" + "\n\n" + "Start to download";
@@ -97,7 +96,6 @@ public static class AddressablesLogic
         await DownLoadMission("skill_icon", progressUIRefresh);
         await DownLoadMission("unit_icon", progressUIRefresh);
         await DownLoadMission("battle_ground", progressUIRefresh);
-        await DownLoadMission("icon_frame", progressUIRefresh);
         await DownLoadMission("btn_effect", progressUIRefresh);
         
         complete.Invoke();

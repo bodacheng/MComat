@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
-using dataAccess;
 using DummyLayerSystem;
 using ModelView;
 using UnityEngine.SceneManagement;
@@ -75,7 +74,6 @@ namespace mainMenu
             Time.timeScale = 1;
             FightGlobalSetting.scenestep = 0;
             
-            StartUp();
             BasicPhase();
             ToInitialPhase();
             
@@ -140,12 +138,7 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.GotchaResult, gotchaResult);
             #endregion
         }
-
-        async void StartUp()
-        {
-            await HeroIcon.IniFrames();
-        }
-
+        
         void ToInitialPhase()
         {
             if (ReturnLayer.ReturnMissionList.Count > 0)

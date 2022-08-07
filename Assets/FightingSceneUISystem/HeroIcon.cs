@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using dataAccess;
 using Singleton;
 
 public class HeroIcon : MonoBehaviour {
@@ -10,29 +8,11 @@ public class HeroIcon : MonoBehaviour {
     public P3Button iconButton;
     public Image Icon;
     public Image frame;
+    
     public Image cooldownCurtain;
+    
     public UnitInfo unitInfo;
     public UnitConfig unitConfig;
-    
-    static readonly IDictionary<Element, Sprite> Frames = new Dictionary<Element, Sprite>();
-    
-    public static async UniTask IniFrames()
-    {
-        var blue = await AddressablesLogic.LoadT<Sprite>("Icon_Frame/8.asset");
-        
-        if (!Frames.ContainsKey(Element.blueMagic))
-            Frames.Add(Element.blueMagic, blue);
-        if (!Frames.ContainsKey(Element.redMagic))
-            Frames.Add(Element.redMagic, blue);
-        if (!Frames.ContainsKey(Element.greenMagic))
-            Frames.Add(Element.greenMagic, blue);
-        if (!Frames.ContainsKey(Element.lightMagic))
-            Frames.Add(Element.lightMagic, blue);
-        if (!Frames.ContainsKey(Element.darkMagic))
-            Frames.Add(Element.darkMagic, blue);
-        if (!Frames.ContainsKey(Element.Null))
-            Frames.Add(Element.Null, blue);
-    }
     
     public void Grey()
     {
@@ -58,57 +38,16 @@ public class HeroIcon : MonoBehaviour {
             Debug.Log("组件缺失");
             return;
         }
-
-        //frame.transform.localScale = Vector3.one;
-        //Icon.transform.localScale = Vector3.one;
-        Icon.GetComponent<RectTransform>().sizeDelta = new Vector2(frame.GetComponent<RectTransform>().sizeDelta.x * 0.8f, frame.GetComponent<RectTransform>().sizeDelta.y * 0.8f);
-        frame.transform.SetSiblingIndex(4);
-        Icon.transform.SetSiblingIndex(4);
+        
+        //Icon.GetComponent<RectTransform>().sizeDelta = new Vector2(frame.GetComponent<RectTransform>().sizeDelta.x * 0.8f, frame.GetComponent<RectTransform>().sizeDelta.y * 0.8f);
+        Icon.transform.SetSiblingIndex(frame.transform.GetSiblingIndex()- 1);
         if (cooldownCurtain != null)
         {
-            cooldownCurtain.transform.SetSiblingIndex(3);
+            cooldownCurtain.transform.SetSiblingIndex(Icon.transform.GetSiblingIndex() - 1);
         }
-        var colors = iconButton.colors;
-        switch (element)
-        {
-            case Element.blueMagic:
-                frame.color = new Color(0,0,1,1);
-                colors.normalColor = new Color(0,0,1,1);
-                colors.highlightedColor = new Color(0,0.2f,1,1);
-            break;
-            case Element.redMagic:
-                frame.color = new Color(1,0,0,1);
-                colors.normalColor = new Color(1,0,0,1);
-                colors.highlightedColor = new Color(1,0.2f,0,1);
-            break;
-            case Element.greenMagic:
-                frame.color = new Color(0,1,0,1);
-                colors.normalColor = new Color(0,1,0,1);
-                colors.highlightedColor = new Color(0,1,0.2f,1);
-            break;
-            case Element.darkMagic:
-                frame.color = new Color(1,0,1,1);
-                colors.normalColor = new Color(1,0,1,1);
-                colors.highlightedColor = new Color(1,0,0.8f,1);
-            break;
-            case Element.lightMagic:
-                frame.color = new Color(1,1,0,1);
-                colors.normalColor = new Color(1,1,0,1);
-                colors.highlightedColor = new Color(1f,1,0.2f,1);
-            break;
-            default:
-                frame.color = new Color(1,1,1,0.8f);
-                colors.normalColor = new Color(1,1,1,0.8f);
-                colors.highlightedColor = new Color(1,1,1,1);
-                break;
-        }
-        iconButton.colors = colors;
         
         Icon.sprite = sprite;
         Icon.color = Icon.sprite == null ? new Color(1, 1, 1, 0f) : Color.white;
-        
-        if (Frames.ContainsKey(element))
-            frame.sprite = Frames[element];                
     }
     
     public static void ChangeHeroIconByInstanceId(string instanceId, HeroIcon Icon)
