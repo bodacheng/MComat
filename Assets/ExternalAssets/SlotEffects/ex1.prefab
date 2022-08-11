@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4958340034833258}
   - component: {fileID: 198188863773783982}
   - component: {fileID: 199908486373802376}
-  m_Layer: 0
-  m_Name: Game_Portal_2
+  m_Layer: 5
+  m_Name: ex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1442438664128950}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.7, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4555100388864736}
@@ -4837,7 +4837,7 @@ GameObject:
   - component: {fileID: 4362062843934626}
   - component: {fileID: 198061279368716552}
   - component: {fileID: 199200077216182250}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9463,7 +9463,7 @@ GameObject:
   - component: {fileID: 4555100388864736}
   - component: {fileID: 108202851893188116}
   - component: {fileID: 5760036563257329584}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

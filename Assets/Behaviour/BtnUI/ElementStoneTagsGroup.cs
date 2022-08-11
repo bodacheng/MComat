@@ -89,7 +89,7 @@ public class ElementStoneTagsGroup
         p.Play(true);
     }
     
-    public void RefreshSlotEffects(int slotNum, int eX, Vector3 pos)
+    public async void RefreshSlotEffects(int slotNum, int eX, Vector3 pos)
     {
         if (slotEffects.ContainsKey(slotNum) && slotEffects[slotNum] != null)
         {
@@ -97,8 +97,23 @@ public class ElementStoneTagsGroup
         }
         
         if (!btnEffectsSetsForStoneBox.ContainsKey(eX)) return;
-        var prefab = btnEffectsSetsForStoneBox[eX];
-        var slotEffect = GameObject.Instantiate(prefab);
+        string effectName;
+        switch (eX)
+        {
+            case 1:
+                effectName = "SlotEffects/ex1";
+                break;
+            case 2:
+                effectName = "SlotEffects/ex2";
+                break;
+            case 3:
+                effectName = "SlotEffects/ex3";
+                break;
+            default:
+                effectName = "SlotEffects/normal";
+                break;
+        }
+        var slotEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>(effectName);
         DicAdd<int, ParticleSystem>.Add(slotEffects, slotNum, slotEffect);
         slotEffect.gameObject.name = "slotEffect"+ slotNum;
         slotEffect.gameObject.transform.position = pos;

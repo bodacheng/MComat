@@ -53,6 +53,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 86984773aed939e469945d1a67b1087e, type: 2}
   - {fileID: 11400000, guid: 68d02a7a477e04d458f6a52441d5b1f2, type: 2}
   - {fileID: 11400000, guid: 5f418eab2de650247a47a8883d17a999, type: 2}
+  - {fileID: 11400000, guid: bd7d61d6c13c74492a27bf7d63f0aa6d, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -148,7 +149,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec27b857eac994404b476a53067fca82, type: 2}
   - {fileID: 11400000, guid: cbfade50ae6ad48c68970c5afc4df589, type: 2}
   - {fileID: 11400000, guid: bd13e9449a0b14007b509b6255bc56f9, type: 2}
-  m_ActiveProfileId: ba89d062b8f2f4dc28fe182a21c15a13
+  m_ActiveProfileId: e103ffdc792314f4fa1d4a74f33b63bb
   m_HostingServicesManager:
     m_HostingServiceInfos:
     - classRef: UnityEditor.AddressableAssets.HostingServices.HttpHostingService,
@@ -165,7 +166,7 @@ MonoBehaviour:
           m_Key: HostingServiceUploadSpeed
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.String
-          m_Data: ServerData/dev/Android
+          m_Data: ServerData/Android
           m_Key: ContentRoot
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Boolean
