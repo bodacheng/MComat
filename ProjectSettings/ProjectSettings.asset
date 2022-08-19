@@ -157,7 +157,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.BO.mcombatDev
     Standalone: com.hogehoge.fugafuga
-    iPhone: com.hogehoge.fugafuga
+    iPhone: com.MCombat.BO
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -232,7 +232,7 @@ PlayerSettings:
   tvOSManualSigningProvisioningProfileID: 
   iOSManualSigningProvisioningProfileType: 0
   tvOSManualSigningProvisioningProfileType: 0
-  appleEnableAutomaticSigning: 0
+  appleEnableAutomaticSigning: 1
   iOSRequireARKit: 0
   iOSAutomaticallyDetectAndAddCapabilities: 1
   appleEnableProMotion: 0

@@ -576,8 +576,6 @@ namespace Cocone.ProjectP3
 			//URL Schemes
 			AddURLSchemes(plist);
 			AddAllowURLSchemes(plist);
-
-			Debug.Log("伯 "+ plistPath);
 			
 			// 保存
 			plist.WriteToFile(plistPath);
