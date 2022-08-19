@@ -564,15 +564,6 @@ namespace Cocone.ProjectP3
 			                 "\n※トラッキングの設定は端末の設定からいつでも変更可能です。";
 			plist.root.SetString("NSUserTrackingUsageDescription", attMessage);
 			
-			//マイク許可
-			var microphoneMessage = "許可すると、パーティ内のボイスチャットを使えるようになります。" +
-			                 "\n※マイクの設定はアプリ設定＞マイクからいつでも変更可能です。";
-			plist.root.SetString("NSMicrophoneUsageDescription", microphoneMessage);
-
-			
-			//Firebase SDK Bug ?  https://forum.unity.com/threads/ios-15-crash-since-2nd-sessions-xcode-13.1178734/
-			plist.root.SetBoolean("FirebaseAppStoreReceiptURLCheckEnabled", false);
-			
 			//URL Schemes
 			AddURLSchemes(plist);
 			AddAllowURLSchemes(plist);
@@ -717,6 +708,8 @@ namespace Cocone.ProjectP3
 				
 				// 署名設定をする
 				SetSignByExportProfile(project);
+				
+				project.SetBuildProperty(mainTargetGuid, "CODE_SIGN_IDENTITY", "Apple Development");
 
 				// NotificationTargetについて設定を行う
 				//AddNotificationExtension(project, mainTargetGuid, path);
