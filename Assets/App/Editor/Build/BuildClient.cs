@@ -577,6 +577,7 @@ namespace Cocone.ProjectP3
 			AddURLSchemes(plist);
 			AddAllowURLSchemes(plist);
 
+			Debug.Log("伯 "+ plistPath);
 			
 			// 保存
 			plist.WriteToFile(plistPath);
@@ -732,16 +733,11 @@ namespace Cocone.ProjectP3
 				capabilities.AddPushNotifications(isDevelopment);
 				capabilities.AddBackgroundModes(BackgroundModesOptions.RemoteNotifications);
 				
-				// Universal-link 対応 (1.3.0時点で未使用)
-				// capabilities.AddAssociatedDomains(new string[] { "applinks:s-alpha.pokepia.jp" });
-				
 				capabilities.WriteToFile();
-	        
-				// スクショ機能に使用
-				plist.root.SetString("NSPhotoLibraryUsageDescription","スクリーンショット機能で撮影した画像を保存するために使用します。");
-				plist.root.SetString("NSPhotoLibraryAddUsageDescription","スクリーンショット機能で撮影した画像を保存するために使用します。");
 				
 				plist.WriteToFile(plistPath);
+				
+				Debug.Log("OnPostProcessBuild 成功？？" + plistPath);
 			}
 		}
 
