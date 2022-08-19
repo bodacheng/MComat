@@ -655,7 +655,7 @@ namespace Cocone.ProjectP3
 				// アプリ管理のInfo.plistを設定
 				var plistPath = Path.Combine(path, "Info.plist");
 				var plist = GetDefaultPlistDocument(plistPath);
-			
+				
 				var projectPath = PBXProject.GetPBXProjectPath(path);
 
 				if (BuildConfigurations != null && !string.IsNullOrEmpty(BuildConfigurations.cfBundleName))
@@ -664,7 +664,7 @@ namespace Cocone.ProjectP3
 					// どこからこの設定値が来ているか不明情報求む
 					// productNameが微妙に連動していそうだが、合致はしていない。直値指定なので注意すること
 					var pbxProjectContent = File.ReadAllText(projectPath);
-					pbxProjectContent = pbxProjectContent.Replace("PRODUCT_NAME_APP = pokepia;", $"PRODUCT_NAME_APP = {BuildConfigurations.cfBundleName};");
+					pbxProjectContent = pbxProjectContent.Replace("PRODUCT_NAME_APP = mcombat;", $"PRODUCT_NAME_APP = {BuildConfigurations.cfBundleName};");
 					File.WriteAllText(projectPath, pbxProjectContent);
 				}
 
@@ -709,35 +709,33 @@ namespace Cocone.ProjectP3
 				}
 
 				// IOSカメラロールへのアクセス処理を使うためのフレームワーク追加
-				project.AddFrameworkToProject(frameworkTargetGuid, "Photos.framework", false);
+				//project.AddFrameworkToProject(frameworkTargetGuid, "Photos.framework", false);
 
-				project.AddFrameworkToProject(frameworkTargetGuid, "LinkPresentation.framework", false);
+				//project.AddFrameworkToProject(frameworkTargetGuid, "LinkPresentation.framework", false);
 
 				// Firebase ユーザー通知フレームワークを追加
-				project.AddFrameworkToProject(frameworkTargetGuid, "UserNotifications.framework", true);
-				project.AddFrameworkToProject(mainTargetGuid, "UserNotifications.framework", true);
+				//project.AddFrameworkToProject(frameworkTargetGuid, "UserNotifications.framework", true);
+				//project.AddFrameworkToProject(mainTargetGuid, "UserNotifications.framework", true);
 				
 				// 署名設定をする
 				SetSignByExportProfile(project);
 
 				// NotificationTargetについて設定を行う
-				AddNotificationExtension(project, mainTargetGuid, path);
+				//AddNotificationExtension(project, mainTargetGuid, path);
 
 				project.WriteToFile(projectPath);
 
 				// Firebase プッシュ通知を有効にする
 				const string targetName = "Unity-iPhone";
-				const string entitlementFileName = "pokepia.entitlements";
+				const string entitlementFileName = "mcombat.entitlements";
 				var isDevelopment = Debug.isDebugBuild;
 				var capabilities = new ProjectCapabilityManager(projectPath, targetName + "/" + entitlementFileName, targetName);
-				capabilities.AddPushNotifications(isDevelopment);
-				capabilities.AddBackgroundModes(BackgroundModesOptions.RemoteNotifications);
+				//capabilities.AddPushNotifications(isDevelopment);
+				//capabilities.AddBackgroundModes(BackgroundModesOptions.RemoteNotifications);
 				
 				capabilities.WriteToFile();
 				
 				plist.WriteToFile(plistPath);
-				
-				Debug.Log("OnPostProcessBuild 成功？？" + plistPath);
 			}
 		}
 
