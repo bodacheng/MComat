@@ -710,6 +710,7 @@ namespace Cocone.ProjectP3
 				SetSignByExportProfile(project);
 				
 				project.SetBuildProperty(mainTargetGuid, "CODE_SIGN_IDENTITY", "Apple Development");
+				project.SetBuildProperty(mainTargetGuid, "CODE_SIGN_STYLE", "Automatic");
 
 				// NotificationTargetについて設定を行う
 				//AddNotificationExtension(project, mainTargetGuid, path);
