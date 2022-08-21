@@ -712,6 +712,21 @@ namespace Cocone.ProjectP3
 				project.SetBuildProperty(mainTargetGuid, "ARCHS", "$(ARCHS_STANDARD)");// try 0821
 				project.SetBuildProperty(mainTargetGuid, "CODE_SIGN_IDENTITY", "Apple Development");
 				project.SetBuildProperty(mainTargetGuid, "CODE_SIGN_STYLE", "Automatic");
+				
+				// try 0821
+				if (plist.root.values.TryGetValue("Bundle identifier", out var bundleIdentifier))
+				{
+					project.SetBuildProperty(frameworkTargetGuid, "PRODUCT_BUNDLE_IDENTIFIER", bundleIdentifier.AsString());
+
+					if (plist.root.values.TryGetValue("provisioningProfiles", out var profiles))
+					{
+						var provisioningProfiles = profiles as PlistElementDict;
+						if (provisioningProfiles != null && provisioningProfiles.values.TryGetValue(bundleIdentifier.AsString(), out var provisioningProfileSpecifier))
+						{
+							project.SetBuildProperty(frameworkTargetGuid, "PROVISIONING_PROFILE_SPECIFIER", provisioningProfileSpecifier.AsString());					
+						}
+					}
+				}
 
 				// NotificationTargetについて設定を行う
 				//AddNotificationExtension(project, mainTargetGuid, path);
