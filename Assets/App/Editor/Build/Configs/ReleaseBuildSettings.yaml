@@ -1,5 +1,5 @@
-applicationIdentifier: com.BO.mcombat
-productName: MCombat
+applicationIdentifier: com.MCombat.BO
+productName: mcombat
 cfBundleName: mcombat
 cfBundleExecutableName: mcombat
 appDisplayName: MCombat
