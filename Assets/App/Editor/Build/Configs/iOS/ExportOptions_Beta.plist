@@ -10,8 +10,8 @@
 	<string>enterprise</string>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>mcombatbeta</key>
-		<string>bodacheng_mac</string>
+		<key>com.MCombat.BO</key>
+		<string>com.MCombat.BO</string>
 	</dict>
 	<key>signingCertificate</key>
 	<string>Apple Distribution</string>
