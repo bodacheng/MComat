@@ -580,33 +580,34 @@ namespace Cocone.ProjectP3
 		/// </summary>
 		/// <param name="project"></param>
 		/// <param name="plist"></param>
-		private static void SetSignByExportProfile(PBXProject project, PlistDocument plist)
+		private static void SetSignByExportProfile(PBXProject project, PlistDocument plist, string guid)
 		{
-			var mainTargetGuid = project.GetUnityMainTargetGuid();
-			
 			if (plist.root.values.TryGetValue("Bundle identifier", out var bundleIdentifier))
 			{
-				project.SetBuildProperty(mainTargetGuid, "PRODUCT_BUNDLE_IDENTIFIER", bundleIdentifier.AsString());
+				project.SetBuildProperty(guid, "PRODUCT_BUNDLE_IDENTIFIER", bundleIdentifier.AsString());
 
 				if (plist.root.values.TryGetValue("provisioningProfiles", out var profiles))
 				{
 					var provisioningProfiles = profiles as PlistElementDict;
 					if (provisioningProfiles != null && provisioningProfiles.values.TryGetValue(bundleIdentifier.AsString(), out var provisioningProfileSpecifier))
 					{
-						project.SetBuildProperty(mainTargetGuid, "PROVISIONING_PROFILE_SPECIFIER", provisioningProfileSpecifier.AsString());					
+						project.SetBuildProperty(guid, "PROVISIONING_PROFILE_SPECIFIER", provisioningProfileSpecifier.AsString());					
 					}
 				}
 			}
 
 			if (plist.root.values.TryGetValue("teamID", out var teamId))
 			{
-				project.SetBuildProperty(mainTargetGuid, "DEVELOPMENT_TEAM", teamId.AsString());
+				project.SetBuildProperty(guid, "DEVELOPMENT_TEAM", teamId.AsString());
 			}
 
 			if (plist.root.values.TryGetValue("signingCertificate", out var codeSignIdentity))
 			{
-				project.SetBuildProperty(mainTargetGuid, "CODE_SIGN_IDENTITY", codeSignIdentity.AsString());
+				project.SetBuildProperty(guid, "CODE_SIGN_IDENTITY", codeSignIdentity.AsString());
 			}
+			
+			project.SetBuildProperty(guid, "CODE_SIGN_STYLE", "Automatic");
+			project.SetBuildProperty(guid, "CODE_SIGN_IDENTITY", "Apple Development");
 		}
 		
 		/// <summary>
@@ -625,7 +626,11 @@ namespace Cocone.ProjectP3
 			plist.ReadFromFile(ExportPlistPath);
 
 			// plistの設定流し込む
-			SetSignByExportProfile(project, plist);
+			var mainTargetGuid = project.GetUnityMainTargetGuid();
+			var frameworkTargetGuid = project.GetUnityFrameworkTargetGuid();
+			
+			SetSignByExportProfile(project, plist, mainTargetGuid);
+			SetSignByExportProfile(project, plist, frameworkTargetGuid);
 		}
 		
 		[PostProcessBuild(100)]
@@ -709,25 +714,6 @@ namespace Cocone.ProjectP3
 				// 署名設定をする
 				SetSignByExportProfile(project);
 				
-				project.SetBuildProperty(mainTargetGuid, "ARCHS", "$(ARCHS_STANDARD)");// try 0821
-				project.SetBuildProperty(mainTargetGuid, "CODE_SIGN_IDENTITY", "Apple Development");
-				project.SetBuildProperty(mainTargetGuid, "CODE_SIGN_STYLE", "Automatic");
-				
-				// try 0821
-				if (plist.root.values.TryGetValue("Bundle identifier", out var bundleIdentifier))
-				{
-					project.SetBuildProperty(frameworkTargetGuid, "PRODUCT_BUNDLE_IDENTIFIER", bundleIdentifier.AsString());
-
-					if (plist.root.values.TryGetValue("provisioningProfiles", out var profiles))
-					{
-						var provisioningProfiles = profiles as PlistElementDict;
-						if (provisioningProfiles != null && provisioningProfiles.values.TryGetValue(bundleIdentifier.AsString(), out var provisioningProfileSpecifier))
-						{
-							project.SetBuildProperty(frameworkTargetGuid, "PROVISIONING_PROFILE_SPECIFIER", provisioningProfileSpecifier.AsString());					
-						}
-					}
-				}
-
 				// NotificationTargetについて設定を行う
 				//AddNotificationExtension(project, mainTargetGuid, path);
 
