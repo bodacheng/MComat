@@ -629,7 +629,6 @@ namespace Cocone.ProjectP3
 			var frameworkTargetGuid = project.GetUnityFrameworkTargetGuid();
 			
 			SetSignByExportProfile(project, plist, mainTargetGuid);
-			SetSignByExportProfile(project, plist, frameworkTargetGuid);
 		}
 		
 		[PostProcessBuild(100)]
@@ -683,6 +682,8 @@ namespace Cocone.ProjectP3
 					project.SetBuildProperty(mainTargetGuid, "ENABLE_BITCODE", bitCodeValue);
 					project.SetBuildProperty(frameworkTargetGuid, "ENABLE_BITCODE",bitCodeValue);
 				}
+				
+				project.SetBuildProperty(frameworkTargetGuid, "CODE_SIGN_STYLE", "Automatic");
 				
 				// targetにlibzを追加
 				if (plist.root.values.TryGetValue("libz.1.2.11.tbd", out var needLibz))
