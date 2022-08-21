@@ -606,7 +606,7 @@ namespace Cocone.ProjectP3
 				project.SetBuildProperty(guid, "CODE_SIGN_IDENTITY", codeSignIdentity.AsString());
 			}
 			
-			//project.SetBuildProperty(guid, "CODE_SIGN_STYLE", "Automatic");
+			project.SetBuildProperty(guid, "CODE_SIGN_STYLE", "Manual");// other option: Automatic
 		}
 		
 		/// <summary>
