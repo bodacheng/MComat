@@ -709,6 +709,7 @@ namespace Cocone.ProjectP3
 				// 署名設定をする
 				SetSignByExportProfile(project);
 				
+				project.SetBuildProperty(mainTargetGuid, "ARCHS", "$(ARCHS_STANDARD)");// try 0821
 				project.SetBuildProperty(mainTargetGuid, "CODE_SIGN_IDENTITY", "Apple Development");
 				project.SetBuildProperty(mainTargetGuid, "CODE_SIGN_STYLE", "Automatic");
 
