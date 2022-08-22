@@ -7,8 +7,8 @@ namespace HittingDetection
     public class BO_Marker : Marker
     {
         public float radius;
-        IDictionary<Collider, HitPointPara> BallDetectHitPool = new Dictionary<Collider, HitPointPara>();
-                
+        readonly IDictionary<Collider, HitPointPara> BallDetectHitPool = new Dictionary<Collider, HitPointPara>();
+        
         public IDictionary<Collider, HitPointPara> GetBallDetectHitPool()
         {
             return BallDetectHitPool;
@@ -24,16 +24,6 @@ namespace HittingDetection
         public override bool HitCheck()
         {
             return BallDetectHitPool.Count > 0;
-        }
-        
-        public override void EnableMarkerProcess(int weaponLayer)
-        {
-            base.EnableMarkerProcess(weaponLayer);
-        }
-        
-        public override void DisableMarkerProcess()
-        {
-            base.DisableMarkerProcess();
         }
         
         public override void ClearMarkerProcess()
@@ -55,8 +45,7 @@ namespace HittingDetection
         {
             BallDetectModeDetection(other);
         }
-
-        HitBoxManager tempM;
+        
         float tempWHpCost;
         void BallDetectModeDetection(Collider other)
         {
@@ -67,7 +56,7 @@ namespace HittingDetection
             {
                 if (!BallDetectHitPool.Keys.Contains(other))
                 {
-                    HitBoxManager hit_hitbox = HitBoxesProcesser.Instance.GetHitBox(other);
+                    HitBoxManager tempM = HitBoxesProcesser.Instance.GetHitBox(other);
                     tempWHpCost = tempM != null ? V_Damage.WpHpCost(V_Damage.WeaponHeavyCal(owner.damage_type), V_Damage.WeaponHeavyCal(tempM.damage_type)) : 1;
                     HitPointPara hitPointPara = new HitPointPara
                     {

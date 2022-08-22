@@ -105,11 +105,11 @@ namespace HittingDetection
             }
         }
     
-        public static float WpHpCost(int meLevel, int counterdLevel)
+        public static float WpHpCost(int meLevel, int counterLevel)
         {
-            if (meLevel > counterdLevel)
+            if (meLevel > counterLevel)
             {
-                switch (meLevel - counterdLevel)
+                switch (meLevel - counterLevel)
                 {
                     case 1:
                         return 0.5f;
