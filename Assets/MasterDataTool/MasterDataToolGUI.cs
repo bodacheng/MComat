@@ -1,5 +1,6 @@
 ﻿#if UNITY_EDITOR
 
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEditor;
 
@@ -35,10 +36,10 @@ public class LocalMasterDataToolGUI : EditorWindow {
             tool.OutputMonsterStore();
         }
         
-        if (GUILayout.Button("输出最新技能数值参考文件（技能详细画面用）"))
+        if (GUILayout.Button("输出最新技能数值参考文件（技能详细画面用）目前需要play模式下执行"))
         {
             SkillConfigTable.LoadAllSkillConfigs();
-            PowerEstimateTable.Save("human");
+            PowerEstimateTable.Save("human").Forget();
         }
         
         if (GUILayout.Button("(playFab)输出Json格式关卡报酬定义文件"))

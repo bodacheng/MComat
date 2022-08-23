@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using HittingDetection;
 using System;
+using Cysharp.Threading.Tasks;
 
 // 本结构唯一的作用是主界面略览技能详情的时候提供一个大概的数值，
 // 任何已经登陆了的技能，如果在本表内没有条目，则会在技能详情画面报错。
@@ -24,14 +25,14 @@ public class PowerEstimateTable
     static readonly List<Row> rowList = new List<Row>();
     static bool isLoaded = false;
     
-    public static void Save(string type)
+    public static async UniTask Save(string type)
     {
         var SkillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);
-        var AnimDic = SKillAnalyzer.AllSkillAnims(type);
-        Save(Application.dataPath + "/" +KeywordSetting._SkillStaticAnalysis + ".csv", SkillConfigs, AnimDic);
+        var AnimDic = await SKillAnalyzer.AllSkillAnims(type);
+        await Save(Application.dataPath + "/" +KeywordSetting._SkillStaticAnalysis + ".csv", SkillConfigs, AnimDic);
     }
     
-    static void Save(string filepath, List<SkillConfig> SkillConfigs, IDictionary<string, AnimationClip> AnimDic)
+    static async UniTask Save(string filepath, List<SkillConfig> SkillConfigs, IDictionary<string, AnimationClip> AnimDic)
     {
         rowList.Clear();
         string[][] grid = new string[SkillConfigs.Count + 1][];
@@ -52,7 +53,12 @@ public class PowerEstimateTable
                 grid[i][1] = SkillConfigs[i - 1].REAL_NAME;
                 grid[i][2] = SkillConfigs[i - 1].SP_LEVEL.ToString();
                 AnimDic.TryGetValue(SkillConfigs[i -1].REAL_NAME, out AnimationClip clip);
-                grid[i][3] = ATCal(clip, SkillConfigs[i - 1].ATTACK_WEIGHT).ToString();
+                if (clip != null)
+                {
+                    Debug.Log("cal this:"+ clip);
+                }
+                var at = await ATCal(clip, SkillConfigs[i - 1].ATTACK_WEIGHT);
+                grid[i][3] = at.ToString();
                 grid[i][4] = SkillConfigs[i - 1].HP_WEIGHT.ToString();
                 
                 Row row = new Row
@@ -121,7 +127,7 @@ public class PowerEstimateTable
 		return rowList.Find(x => x.RECORD_ID == find);
 	}
     
-    static float ATCal(AnimationClip _clip, float skillATRef)
+    static async UniTask<float> ATCal(AnimationClip _clip, float skillATRef)
     {
         float amount = 0;
         for (int i = 0; i < _clip.events.Length; i++)
@@ -149,7 +155,7 @@ public class PowerEstimateTable
             if (_clip.events[i].functionName == "MagicForward")
             {
                 var magicObjectName = _clip.events[i].stringParameter;
-                var hurtObject = Resources.Load("HurtObjects/defaultmagic/" + magicObjectName) as GameObject;
+                var hurtObject = await AddressablesLogic.LoadObject("HurtObjects/defaultmagic/" + magicObjectName);
                 var hitBox = hurtObject.GetComponent<HitBoxManager>();
                 if (hitBox == null)
                 {
@@ -167,7 +173,7 @@ public class PowerEstimateTable
                 //// 顺便检查attachment，与攻击力预估无关 /////
                 for (int z = 0; z < decomposition.Attachments.Length; z++)
                 {
-                    var attachment = Resources.Load("HurtObjects/defaultmagic/" + decomposition.Attachments[z]) as GameObject;
+                    var attachment = await AddressablesLogic.LoadObject("HurtObjects/defaultmagic/" + decomposition.Attachments[z]);
                     var attachments = attachment.GetComponent<HitBoxManager>();
                     if (attachments == null)
                     {
@@ -187,36 +193,35 @@ public class PowerEstimateTable
             
             if (_clip.events[i].functionName == "PrepareOneMagic")
             {
-                float oneDamege;
-                string magicobjectname = _clip.events[i].stringParameter;
-                GameObject hurtObject = Resources.Load("HurtObjects/defaultmagic/" + magicobjectname) as GameObject;
+                var magicObjectName = _clip.events[i].stringParameter;
+                var hurtObject = await AddressablesLogic.LoadObject("HurtObjects/defaultmagic/" + magicObjectName);
                 var hitBox = hurtObject.GetComponent<HitBoxManager>();
-                oneDamege = hitBox.AT_weight * skillATRef;
-                var decompositioner = hurtObject.GetComponent<Decomposition>();
-                if ( decompositioner.Attachments.Length > 0)
+                var oneDamage = hitBox.AT_weight * skillATRef;
+                var decomposition = hurtObject.GetComponent<Decomposition>();
+                if (decomposition.Attachments.Length > 0)
                 {
                     Debug.Log("技能动画："+_clip.name + " 不好机械评估");
                     return -999f;
                 }
                 
                 //// 顺便检查attachment，与攻击力预估无关 /////
-                for (int z = 0; z < decompositioner.Attachments.Length; z++)
+                for (int z = 0; z < decomposition.Attachments.Length; z++)
                 {
-                    var attachment = Resources.Load("HurtObjects/defaultmagic/" + decompositioner.Attachments[z]) as GameObject;
+                    var attachment = await AddressablesLogic.LoadObject("HurtObjects/defaultmagic/" + decomposition.Attachments[z]);
                     var attachments = attachment.GetComponent<HitBoxManager>();
                     if (attachments == null)
                     {
-                        Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicobjectname + "其附属物件资源"+ decompositioner.Attachments[z] + "不存在");
+                        Debug.Log("请检查这个技能动画:" + _clip.name + ",与此伤害物体：" + magicObjectName + "其附属物件资源"+ decomposition.Attachments[z] + "不存在");
                     }
                 }
                 ///////////////////////////////////////////
                 
-                for (int y = i + 1; y < _clip.events.Length; y++)
+                for (var y = i + 1; y < _clip.events.Length; y++)
                 {
                     if (_clip.events[y].functionName == "ReleasePreparedMagic" || _clip.events[y].functionName == "ReleasePreparedMagicToAir")
                     {
                         //Debug.Log(_clip.name + ":" + _clip.events[y].functionName + "伤害估值增加："+ oneDamege);
-                        amount += oneDamege;
+                        amount += oneDamage;
                     }
                     // 第二次遇到PrepareOneMagic说明换魔法了。一个技能两次PrepareOneMagic目前其实还没有
                     if (_clip.events[y].functionName == "PrepareOneMagic")

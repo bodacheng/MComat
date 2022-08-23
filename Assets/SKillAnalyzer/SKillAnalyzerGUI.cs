@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using PlayFab;
 using PlayFab.ClientModels;
 
@@ -27,7 +28,7 @@ public class SKillAnalyzerGUI : EditorWindow
         _attackFrameEndToCancelFrameTimeMIN = EditorGUILayout.FloatField("收手时间大于：", _attackFrameEndToCancelFrameTimeMIN);
         if (GUILayout.Button("满足以上条件的技能资源名如下：(console显示)"))
         {
-            target.SkillsAnalyzeByFrames(_focusingType, _targetEventName, _attackFrameStartAtMIN, _attackFrameStartAtMAX, _attackFrameEndToCancelFrameTimeMIN, _attackFrameEndToCancelFrameTimeMAX);
+            target.SkillsAnalyzeByFrames(_focusingType, _targetEventName, _attackFrameStartAtMIN, _attackFrameStartAtMAX, _attackFrameEndToCancelFrameTimeMIN, _attackFrameEndToCancelFrameTimeMAX).Forget();
         }
         EditorGUILayout.LabelField(" 整体替换动画事件名(千万慎用。一般用不上此功能）");
         old_name = EditorGUILayout.TextField("寻找该动画事件名", old_name);

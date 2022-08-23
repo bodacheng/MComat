@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+using Cysharp.Threading.Tasks;
 public partial class SKillAnalyzer
 {
-    public void SkillsAnalyzeByFrames(string type, string targetEventName, float start_min, float start_max, float end_min, float end_max)
+    public async UniTask SkillsAnalyzeByFrames(string type, string targetEventName, float start_min, float start_max, float end_min, float end_max)
     {
-        List<AnimationClip> AnimationClips = AllSkillAnims(type).Values.ToList();
+        var animDic = await AllSkillAnims(type);
+        List<AnimationClip> AnimationClips = animDic.Values.ToList();
         foreach (AnimationClip _clip in AnimationClips)
         {
             if (SkillFrameFilter(_clip, targetEventName, start_min, start_max, end_min, end_max))

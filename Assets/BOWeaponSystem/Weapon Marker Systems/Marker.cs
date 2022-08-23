@@ -1,5 +1,5 @@
 ﻿//The Marker Script
-//All markers must be a child of Marker Menager
+//All markers must be a child of Marker Manager
 
 using UnityEngine;
 

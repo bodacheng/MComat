@@ -8,9 +8,9 @@ namespace HittingDetection
     {
         #region settings
         [Tooltip("Should the Markers be active upon the Start of this weapon?")]
-        public float ActivateAfterTime;
+        [SerializeField] float ActivateAfterTime;
         [Tooltip("特定针对")]
-        public SpecificTarget SpecificTarget = SpecificTarget.both;
+        [SerializeField] SpecificTarget SpecificTarget = SpecificTarget.both;
         [Tooltip("damageTypeOfTheWeapon")]
         public DamageType damage_type = DamageType.light_damage_forward;
         [Tooltip("damageTypeOfTheWeapon")]

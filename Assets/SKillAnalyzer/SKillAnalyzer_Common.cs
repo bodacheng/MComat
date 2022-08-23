@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Cysharp.Threading.Tasks;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public partial class SKillAnalyzer
 {
@@ -28,26 +31,26 @@ public partial class SKillAnalyzer
         "MagicForward","Bullet_shoot_from_body_part","BlastAttack","ReleasePreparedMagic","ReleasePreparedMagicToAir"
     };
     
-    public static IDictionary<string, AnimationClip> AllSkillAnims(string type)
+    public static async UniTask<IDictionary<string, AnimationClip>> AllSkillAnims(string type)
     {
-        var G_Attack_States = Resources.LoadAll("Animations/" + type + "/G_Attack_State", typeof(AnimationClip)).ToList();
-        var G_Attack_State_Stays = Resources.LoadAll("Animations/" + type + "/G_Attack_State_Stay", typeof(AnimationClip)).ToList();
-        var gmStates = Resources.LoadAll("Animations/" + type + "/GMStates", typeof(AnimationClip)).ToList();
-        
         IDictionary<string, AnimationClip> AnimationClips = new Dictionary<string, AnimationClip>();
         
-        foreach (var _object in G_Attack_States)
+        var loadPath = Addressables.LoadResourceLocationsAsync("skill_anim");
+        await loadPath;
+        if (loadPath.Status == AsyncOperationStatus.Succeeded)
         {
-            AnimationClips.Add(_object.name, _object as AnimationClip);
+            foreach (var path in loadPath.Result)
+            {
+                Debug.Log(":"+ path);
+                Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey);
+                if (value != null)
+                {
+                    var _AnimationClip = (AnimationClip)value;
+                    AnimationClips.Add(_AnimationClip.name, _AnimationClip);
+                }
+            }
         }
-        foreach (var _object in G_Attack_State_Stays)
-        {
-            AnimationClips.Add(_object.name, _object as AnimationClip);
-        }
-        foreach (var _object in gmStates)
-        {
-            AnimationClips.Add(_object.name, _object as AnimationClip);
-        }
+        Addressables.Release(loadPath);
         return AnimationClips;
     }
 }

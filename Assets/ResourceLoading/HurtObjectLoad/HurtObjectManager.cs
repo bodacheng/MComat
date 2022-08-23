@@ -4,7 +4,6 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceLocations;
 
 public static class HurtObjectManager
 {
