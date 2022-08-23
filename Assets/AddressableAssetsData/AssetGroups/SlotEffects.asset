@@ -30,11 +30,13 @@ MonoBehaviour:
   - m_GUID: cb138a79593be5e4a8fffe8657e60b9a
     m_Address: SlotEffects/ex2
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - effect
   - m_GUID: 10c46ec9beba6bf47bd84e51232744ae
     m_Address: SlotEffects/ex3
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - effect
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
