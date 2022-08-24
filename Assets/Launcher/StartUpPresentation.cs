@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,7 +29,13 @@ public class StartUpPresentation : MonoBehaviour
             async ()=>
             {
                 await AddressablesLogic.ResourcePrepareProcess(Starter.EnterFrontScene, 
-                    (x,f) => PopupLayer.LoadingPercent(x, T.gameObject, f));
+                    (x,f) =>
+                    {
+                        if (f == 0)
+                            PopupLayer.LoadingPercent(x, f, false);
+                        else
+                            PopupLayer.LoadingPercent(x, f);
+                    });
             },
             () =>
             {

@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
-using UniRx;
 using UnityEngine.UI;
 using DG.Tweening;
+using UniRx;
 
 public partial class PopupLayer : UILayer
 {
@@ -9,6 +10,7 @@ public partial class PopupLayer : UILayer
     
     float counter;
     
+    // 「正在读取」画面
     public static void Loading(string description, GameObject hook, float curtainAlpha = 0.8f)
     {
         //RemoteWaitTooLongProcess(waitRemoteExtendTime);
@@ -18,18 +20,42 @@ public partial class PopupLayer : UILayer
         layer.loadingIcon.SetActive(true);
     }
 
-    public static void LoadingPercent(string description, GameObject hook, float progress)
+    private static IDisposable current;
+    
+    // 带进度条的正在读取画面。不会主动打开新的popuplayer
+    public static void LoadingPercent(string description, float progress, bool tween = true)
     {
-        Loading(description, hook, 1f);
         var layer = Get();
+        if (layer == null)
+        {
+            return;
+        }
+        layer.info.text = description;
         layer?.progressBar.gameObject.SetActive(true);
         layer?.ValidationWindow.gameObject.SetActive(false);
-        DOTween.To
-        (
-            () => layer.progressBar.value,
-            (x) => layer.progressBar.value = x,
-            progress,
-            1f
-        );
+
+        if (current != null)
+        {
+            current.Dispose();
+            current = null;
+        }
+
+        if (tween)
+        {
+            current = DOTween.To
+            (
+                () => layer.progressBar.value,
+                (x) => layer.progressBar.value = x,
+                progress,
+                1f
+            ).OnCompleteAsObservable().Subscribe(_ => 
+            {
+                Debug.Log("Percent Load Completed.");
+            }).AddTo(layer.gameObject);
+        }
+        else
+        {
+            layer.progressBar.value = progress;
+        }
     }
 }

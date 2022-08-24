@@ -41,6 +41,7 @@ public static class AddressablesLogic
     
     static async UniTask DownLoadMission(string label, Action<string, float> progressUIRefresh)
     {
+        progressUIRefresh("Downloading "+ label + " asset", 0);
         if (Sizes.ContainsKey(label))
         {
             var handle = Addressables.DownloadDependenciesAsync(label);
