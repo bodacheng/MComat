@@ -2,10 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 using UniRx;
 
 public partial class PopupLayer : UILayer
 {
+    [SerializeField] TextMeshProUGUI percentageText;
     [SerializeField] Slider progressBar;
     
     float counter;
@@ -31,15 +33,16 @@ public partial class PopupLayer : UILayer
             return;
         }
         layer.info.text = description;
-        layer?.progressBar.gameObject.SetActive(true);
-        layer?.ValidationWindow.gameObject.SetActive(false);
-
+        layer.progressBar.gameObject.SetActive(true);
+        layer.ValidationWindow.gameObject.SetActive(false);
+        layer.percentageText.text = ((int)(progress * 100)).ToString() + "%";
+        
         if (current != null)
         {
             current.Dispose();
             current = null;
         }
-
+        
         if (tween)
         {
             current = DOTween.To
