@@ -7,10 +7,8 @@ using UnityEngine.Purchasing;
 
 public class AndroidIAPExample : MonoBehaviour, IStoreListener {
     // Items list, configurable via inspector
-    private List<CatalogItem> Catalog;
-
+    private static List<CatalogItem> Catalog;
     public static AndroidIAPExample target;
-    
     // The Unity Purchasing system
     private static IStoreController m_StoreController;
 
@@ -18,73 +16,19 @@ public class AndroidIAPExample : MonoBehaviour, IStoreListener {
     public void Start() {
         // Make PlayFab log in
         target = this;
-        //Login();
-        InitializePurchasing();
-    }
-
-    // public void OnGUI() {
-    //     // This line just scales the UI up for high-res devices
-    //     // Comment it out if you find the UI too large.
-    //     GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(3, 3, 3));
-    //
-    //     // if we are not initialized, only draw a message
-    //     if (!IsInitialized) {
-    //         GUILayout.Label("Initializing IAP and logging in...");
-    //         return;
-    //     }
-    //
-    //     // Draw menu to purchase items
-    //     foreach (var item in Catalog) {
-    //         if (GUILayout.Button("Buy " + item.DisplayName)) {
-    //             // On button click buy a product
-    //             BuyProductID(item.ItemId);
-    //         }
-    //     }
-    // }
-    
-    public void myPurchaseSucceed ()
-    {
-        Debug.Log("Purchase Succeeded.");
-    }
-
-    public void myPurchaseFail()
-    {
-        Debug.Log("Purchase Failed.");
+        RefreshIAPItems();
     }
     
-    public void myListenerSucceed()
-    {
-        Debug.Log("Listener Succeeded.");
-    }
-
-    public void myListenerFail()
-    {
-        Debug.Log("Listener Failed.");
-    }
-
-    // This is invoked manually on Start to initiate login ops
-    private void Login() {
-        // Login with Android ID
-        PlayFabClientAPI.LoginWithAndroidDeviceID(new LoginWithAndroidDeviceIDRequest() {
-            CreateAccount = true,
-            AndroidDeviceId = SystemInfo.deviceUniqueIdentifier
-        }, result => {
-            // Refresh available items
-            RefreshIAPItems();
-        }, error => Debug.LogError(error.GenerateErrorReport()));
-    }
-
     private void RefreshIAPItems() {
         PlayFabClientAPI.GetCatalogItems(new GetCatalogItemsRequest(), result => {
             Catalog = result.Catalog;
-
             // Make UnityIAP initialize
-            //InitializePurchasing();
+            InitializePurchasing();
         }, error => Debug.LogError(error.GenerateErrorReport()));
     }
 
     // This is invoked manually on Start to initialize UnityIAP
-    public void InitializePurchasing() {
+    void InitializePurchasing() {
         // If IAP is already initialized, return gently
         
         if (IsInitialized) return;
@@ -93,16 +37,13 @@ public class AndroidIAPExample : MonoBehaviour, IStoreListener {
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.GooglePlay));
 
         // Register each item from the catalog
-        // foreach (var item in Catalog) {
-        //     builder.AddProduct(item.ItemId, ProductType.Consumable);
-        // }
+        foreach (var item in Catalog) {
+            Debug.Log("Add product:"+ item.ItemId);
+            builder.AddProduct(item.ItemId, ProductType.Consumable);
+        }
         
-        builder.AddProduct("diamond100", ProductType.Consumable);
-
         // Trigger IAP service initialization
         UnityPurchasing.Initialize(this, builder);
-        
-        Debug.Log("初始化成功？"+ builder);
     }
 
     // We are initialized when StoreController and Extensions are set and we are logged in
@@ -159,19 +100,21 @@ public class AndroidIAPExample : MonoBehaviour, IStoreListener {
         // Invoke receipt validation
         // This will not only validate a receipt, but will also grant player corresponding items
         // only if receipt is valid.
-        PlayFabClientAPI.ValidateGooglePlayPurchase(new ValidateGooglePlayPurchaseRequest() {
-            // Pass in currency code in ISO format
-            CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
-            // Convert and set Purchase price
-            PurchasePrice = (uint)(e.purchasedProduct.metadata.localizedPrice * 100),
-            // Pass in the receipt
-            ReceiptJson = googleReceipt.PayloadData.json,
-            // Pass in the signature
-            Signature = googleReceipt.PayloadData.signature
-        }, result => Debug.Log("Validation successful!"),
-           error => Debug.Log("Validation failed: " + error.GenerateErrorReport())
+        
+        PlayFabClientAPI.ValidateGooglePlayPurchase(
+            new ValidateGooglePlayPurchaseRequest() {
+                // Pass in currency code in ISO format
+                CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
+                // Convert and set Purchase price
+                PurchasePrice = (uint)(e.purchasedProduct.metadata.localizedPrice * 100),
+                // Pass in the receipt
+                ReceiptJson = googleReceipt.PayloadData.json,
+                // Pass in the signature
+                Signature = googleReceipt.PayloadData.signature
+            }, result => Debug.Log("Validation successful!"),
+            error => Debug.Log("Validation failed: " + error.GenerateErrorReport())
         );
-
+        
         return PurchaseProcessingResult.Complete;
     }
 
