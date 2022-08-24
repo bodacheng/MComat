@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -177,39 +178,14 @@ namespace mainMenu
             return full;
         }
         
-         void RefreshNineSlotColors()
+         async void RefreshNineSlotColors()
          {
-            foreach (var _slot in allSlot)
+             foreach (var _slot in allSlot)
             {
                 var item = _slot._cell.GetItem();
+                await Task.Delay(1);// wait for the UI Layer to be stable.Otherwise pos caculation will be wrong at the start
                 var worldPos = PosCal.GetWorldPos(PreScene.target.FxCamera, _slot._cell.GetComponent<RectTransform>(), 5f);
                 _tabEffects.RefreshSlotEffect(_slot.num, worldPos, item != null ? item._SkillConfig.SP_LEVEL : -1);
-            }
-            
-            return;
-            foreach (SkillStoneSlot _slot in allSlot)
-            {
-                SKStoneItem sKStoneItem = _slot._cell.GetItem();
-                if (sKStoneItem == null)
-                {
-                    _slot._cell.GetComponent<Image>().color = new Color(1f, 1f ,1f, 1f);
-                    continue;
-                }
-                switch (sKStoneItem._SkillConfig.SP_LEVEL)
-                {
-                    case 1:
-                        _slot._cell.GetComponent<Image>().color = new Color(1,0.2f,0.3f,1f);
-                    break;
-                    case 2:
-                        _slot._cell.GetComponent<Image>().color = new Color(0f,1f,0.1f,1f);
-                    break;
-                    case 3:
-                        _slot._cell.GetComponent<Image>().color = new Color(0f,0.1f,1f,1f);
-                    break;
-                    default:
-                        _slot._cell.GetComponent<Image>().color = new Color(1f, 1f ,1f, 1f);
-                    break;
-                }
             }
          }
     }

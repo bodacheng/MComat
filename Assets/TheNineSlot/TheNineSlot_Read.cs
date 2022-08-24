@@ -6,16 +6,16 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public void ReadANineAndTwo(UnitInfo _AccCharInfo)
+        public void ReadANineAndTwo(UnitInfo _unitInfo)
         {
             ForceClearAll();
             
-            if (_AccCharInfo == null)
+            if (_unitInfo == null)
             {
                 Debug.Log("严重错误");
                 return;
             }
-            var equipments = Stones.GetEquippingStones(_AccCharInfo.id);
+            var equipments = Stones.GetEquippingStones(_unitInfo.id);
 
             for (var i = 1; i <= 9; i++)
             {
@@ -24,15 +24,12 @@ namespace mainMenu
 
             for (var i = 0; i < equipments.Count; i++)
             {
-                int usingPosInt = int.Parse(equipments[i].slot);
+                var usingPosInt = int.Parse(equipments[i].slot);
                 if (equipments[i].InstanceId != null)
                 {
-                    
                     allSlot[usingPosInt - 1].TakeASkillStoneFromBoxToSlot(equipments[i].InstanceId, Color.white);
                 }
-                
                 allSlot[usingPosInt - 1]._cell.UpdateMyItem();
-                allSlot[usingPosInt - 1]._cell.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
             }
             
             NineSlotsStatusRefresh();
