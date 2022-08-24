@@ -47,11 +47,12 @@ public partial class PopupLayer : UILayer {
         NoButton.gameObject.SetActive(true);
         
         YesButton.onClick.RemoveAllListeners();
-        YesButton.onClick.AddListener(action);
         YesButton.onClick.AddListener(Close);
+        YesButton.onClick.AddListener(action);
         
-        NoButton.onClick.RemoveAllListeners();
         NoButton.onClick.AddListener(Close);
+        NoButton.onClick.RemoveAllListeners();
+        
         ValidationIntro.text = intro;
     }
     
@@ -67,12 +68,12 @@ public partial class PopupLayer : UILayer {
         NoButton.gameObject.SetActive(true);
         
         YesButton.onClick.RemoveAllListeners();
-        YesButton.onClick.AddListener(action);
         YesButton.onClick.AddListener(Close);
+        YesButton.onClick.AddListener(action);
         
         NoButton.onClick.RemoveAllListeners();
-        NoButton.onClick.AddListener(cancel_action);
         NoButton.onClick.AddListener(Close);
+        NoButton.onClick.AddListener(cancel_action);
         
         ValidationIntro.text = intro;
     }

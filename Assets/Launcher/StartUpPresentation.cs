@@ -28,13 +28,14 @@ public class StartUpPresentation : MonoBehaviour
         popupLayer.ArrangeConfirmWindow(
             async ()=>
             {
+                PopupLayer.Open(T.gameObject);
                 await AddressablesLogic.ResourcePrepareProcess(Starter.EnterFrontScene, 
                     (x,f) =>
                     {
                         if (f == 0)
                             PopupLayer.LoadingPercent(x, f, false);
                         else
-                            PopupLayer.LoadingPercent(x, f);
+                            PopupLayer.LoadingPercent(x, f, false);
                     });
             },
             () =>
