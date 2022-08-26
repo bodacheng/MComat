@@ -16,6 +16,20 @@ public class LocalMasterDataToolGUI : EditorWindow {
             Initialized = true;
         }
         
+        GUILayout.TextArea(" 输出技能参考信息文件，这个本程序的技能石详细画面要参考的。\n" +
+                           "但输出的内容只是个大概。\n");
+        
+        if (GUILayout.Button("输出最新技能数值参考文件（技能详细画面用）目前需要play模式下执行"))
+        {
+            SkillConfigTable.LoadAllSkillConfigs();
+            PowerEstimateTable.Save("human").Forget();
+        }
+
+        GUILayout.TextArea(" PlayFab相关文件，可以在PlayFab通过Update Json来实现对Master数据的更新，\n" +
+                           "但是大部分情况下其实是没有什么用的，因为技能石也好，角色也好，我们可以选择谨慎的手动更新。\n" +
+                           "而商店文件这个东西不知道我们当初为什么要给开发出来，其实PlayFab的商店功能我们应该是用不到。\n" +
+                           "另外最大的重点：这些出力功能都是基于Unity客户端下的技能和角色定义文件的。");
+        
         if (GUILayout.Button("(playFab)输出Json格式技能石定义文件"))
         {
             tool.OutputSKStonesCatalog();
@@ -36,13 +50,7 @@ public class LocalMasterDataToolGUI : EditorWindow {
             tool.OutputMonsterStore();
         }
         
-        if (GUILayout.Button("输出最新技能数值参考文件（技能详细画面用）目前需要play模式下执行"))
-        {
-            SkillConfigTable.LoadAllSkillConfigs();
-            PowerEstimateTable.Save("human").Forget();
-        }
-        
-        if (GUILayout.Button("(playFab)输出Json格式关卡报酬定义文件"))
+        if (GUILayout.Button("(playFab)输出Json格式Arcade关卡报酬定义文件"))
         {
             FightMemberManager.ExportStageAward();
         }

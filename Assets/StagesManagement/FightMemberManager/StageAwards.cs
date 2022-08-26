@@ -19,10 +19,10 @@ public partial class FightMemberManager
     
     public static void ExportStageAward()
     {
-        List<StageAward> stageAwards = new List<StageAward>();
+        var stageAwards = new List<StageAward>();
         for (int i = 1; i < 100 ; i++)
         {
-            StageAward award = new StageAward
+            var award = new StageAward
             {
                 stageKey = i.ToString(),
                 award = new Award
@@ -34,7 +34,7 @@ public partial class FightMemberManager
             stageAwards.Add(award);
         }
         
-        string json = JsonConvert.SerializeObject(stageAwards.ToArray());
+        var json = JsonConvert.SerializeObject(stageAwards.ToArray());
         LocalJson.SaveInfoToJsonFile_dataPath(null, "stage_awards.json", json);
     }
 }

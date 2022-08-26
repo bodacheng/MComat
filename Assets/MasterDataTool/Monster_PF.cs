@@ -11,58 +11,58 @@ public partial class MasterDataTool
     public void OutputMonstersCatalog()
     {
         Units.LoadMonstersConfig();
-        PFDefine pFSKDefine = new PFDefine
+        var pFSKDefine = new PFDefine
         {
-            CatalogVersion = "Monsters"
+            CatalogVersion = "unit"
         };
-        List<PFDefine.Item> items = new List<PFDefine.Item>();
-        List<UnitConfig> charsConfigs = Units.Dic.Values.ToList();
-        for (int i = 0; i < charsConfigs.Count; i++)
+        var items = new List<PFDefine.Item>();
+        var charsConfigs = Units.Dic.Values.ToList();
+        for (var i = 0; i < charsConfigs.Count; i++)
         {
-            PFDefine.Item item = new PFDefine.Item()
+            var item = new PFDefine.Item()
             {
                 ItemId = charsConfigs[i].RECORD_ID,
                 DisplayName = charsConfigs[i].REAL_NAME
             };
-            PFDefine.C_CustomData c_CustomData = new PFDefine.C_CustomData();
+            var c_CustomData = new PFDefine.C_CustomData();
             c_CustomData.zokusei = ((int)charsConfigs[i].element).ToString();
             item.CustomData = c_CustomData.AsPlayFabVer();
             items.Add(item);
         }
         pFSKDefine.Catalog = items.ToArray();
-        string json = JsonConvert.SerializeObject(pFSKDefine, Formatting.Indented);
-        LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "MonsterDefinationsJson.json", json);
+        var json = JsonConvert.SerializeObject(pFSKDefine, Formatting.Indented);
+        LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "MonsterDefinitionJson.json", json);
     }
 
     public void OutputMonsterStore()
     {
         Units.LoadMonstersConfig();
-        PFStoreDefine pFSKDefine = new PFStoreDefine();
-        pFSKDefine.StoreId = "monster";
-        List<PFStoreDefine.StoreItem> storeitems = new List<PFStoreDefine.StoreItem>();
+        var pFSKDefine = new PFStoreDefine();
+        pFSKDefine.StoreId = "unit";
+        var storeItems = new List<PFStoreDefine.StoreItem>();
 
-        List<UnitConfig> charsConfigs = Units.Dic.Values.ToList();
-        for (int i = 0; i < charsConfigs.Count; i++)
+        var unitConfigs = Units.Dic.Values.ToList();
+        for (var i = 0; i < unitConfigs.Count; i++)
         {
-            PFStoreDefine.StoreItem storeitem = new PFStoreDefine.StoreItem()
+            PFStoreDefine.StoreItem storeItem = new PFStoreDefine.StoreItem()
             {
-                ItemId = charsConfigs[i].RECORD_ID,
+                ItemId = unitConfigs[i].RECORD_ID,
                 VirtualCurrencyPrices = new PFStoreDefine.VirtualCurrencyPrices
                 {
                     GD = 0
                 }
             };
-            storeitems.Add(storeitem);
+            storeItems.Add(storeItem);
         }
-        pFSKDefine.Store = storeitems.ToArray();
+        pFSKDefine.Store = storeItems.ToArray();
         pFSKDefine.MarketingData = new PFStoreDefine._MarketingData
         {
-            DisplayName = "monsterstore"
+            DisplayName = "unit_store"
         };
 
         string json = JsonConvert.SerializeObject(pFSKDefine, Formatting.Indented);
         json = "[" + json + "]";
-        LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "MonsterStoresDefinationsJson.json", json);
+        LocalJson.SaveToJsonFile_persistentDataPath("PlayFab", "UnitStoreDefinitionJson.json", json);
     }
     
 #endif

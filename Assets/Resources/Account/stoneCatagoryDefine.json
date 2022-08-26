@@ -1,10 +1,10 @@
 {
-  "CatalogVersion": "stoneTest2",
+  "CatalogVersion": "stone",
   "Catalog": [
     {
       "ItemId": "1",
       "ItemClass": null,
-      "CatalogVersion": "stoneTest2",
+      "CatalogVersion": "stone",
       "DisplayName": null,
       "Description": null,
       "VirtualCurrencyPrices": {},
@@ -29,7 +29,7 @@
     {
       "ItemId": "2",
       "ItemClass": null,
-      "CatalogVersion": "stoneTest2",
+      "CatalogVersion": "stone",
       "DisplayName": null,
       "Description": null,
       "VirtualCurrencyPrices": {},
