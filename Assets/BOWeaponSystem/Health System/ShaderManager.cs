@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Rendering;
 
 public class ShaderManager : MonoBehaviour
 {
@@ -13,13 +14,14 @@ public class ShaderManager : MonoBehaviour
         foreach (var mesh in meshes)
         {
             mesh.gameObject.layer = 3;
-            DummyMesh shadowMesh = Instantiate(mesh);
+            var shadowMesh = Instantiate(mesh);
             shadowMesh.transform.parent = mesh.transform;
             shadowMesh.transform.localPosition = Vector3.zero;
             shadowMesh.transform.localScale = Vector3.one * 0.9f;
             shadowMesh.gameObject.name = "shadow_" + shadowMesh.gameObject.name;
             shadowMesh.gameObject.layer = 0;
             shadowMesh.Mesh.material = FightGlobalSetting._shadowMaterial;
+            shadowMesh.Mesh.shadowCastingMode = ShadowCastingMode.On;
         }
 
         // for (int i = 0; i < pOFXes.Count; i++)
