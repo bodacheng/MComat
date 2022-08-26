@@ -1,13 +1,17 @@
-﻿using DummyLayerSystem;
+﻿using System;
+using System.Collections.Generic;
+using DummyLayerSystem;
 using mainMenu;
 
 public class ArenaPage : MSceneProcess
 {
     private ArenaLayer arenaLayer;
+    readonly ArenaDummiesTable table = new ();
     void EnterProcess()
     {
         arenaLayer = UILayerLoader.Load(PreScene.target.T, "ArenaLayer") as ArenaLayer;
-        arenaLayer.RefreshOpponent(SetLoaded);
+        arenaLayer.SetUp(SetLoaded, PreScene.ReturnToLobby, table.GetOpponentAroundPoint);
+        arenaLayer.RefreshOpponent();
     }
     
     public ArenaPage()
@@ -18,6 +22,7 @@ public class ArenaPage : MSceneProcess
     
     public override void ProcessEnter()
     {
+        table.Load();
         EnterProcess();
     }
     

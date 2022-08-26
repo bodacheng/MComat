@@ -39,7 +39,7 @@ public partial class CloudScript
         );
     }
     
-    public static void GetLeaderboardAroundUser(Action<List<LeaderboardInfo>> success)
+    public static void GetLeaderboardAroundUser(Action<List<LeaderboardInfo>> success, Action fail)
     {
         ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest()
@@ -64,7 +64,7 @@ public partial class CloudScript
                 catch (Exception e)
                 {
                     Debug.Log(e);
-                    success.Invoke(new List<LeaderboardInfo>());
+                    fail.Invoke();
                 }
             }
         );

@@ -19,33 +19,38 @@ public class ArenaLayer : UILayer
     [SerializeField] ArenaFightTeamDisplay ArenaFightTeamDisplayPrefab;
 
     CloudScript.LeaderboardInfo myLeaderboardInfo;
-    readonly ArenaDummiesTable table = new ();
     
-    void Start()
-    {
-        table.Load();
-    }
 
-    public void RefreshOpponent(Action<bool> SetLoaded)
+    private Action<bool> SetLoaded;
+    private Action<string> ReturnToLobby;
+    private Func<int, List<CloudScript.LeaderboardInfo>> GetOpponentAroundPoint;
+    public void SetUp(Action<bool> SetLoaded, Action<string> ReturnToLobby, Func<int, List<CloudScript.LeaderboardInfo>> GetOpponentAroundPoint)
+    {
+        this.SetLoaded = SetLoaded;
+        this.ReturnToLobby = ReturnToLobby;
+        this.GetOpponentAroundPoint = GetOpponentAroundPoint;
+    }
+    
+    public void RefreshOpponent()
     {
         RefreshBtn.onClick.RemoveAllListeners();
-        RefreshBtn.onClick.AddListener(()=> SetLoaded(true));
+        RefreshBtn.onClick.AddListener(RefreshOpponent);
         
         ProgressLayer.Loading(">", PreScene.target.T);
-        View(false);
         CloudScript.GetLeaderboardAroundUser(
             obj =>
             {
                 var exceptSelf = new List<CloudScript.LeaderboardInfo>();
                 foreach (var t in obj)
                 {
-                    Debug.Log( "读取到以下玩家信息 : " +t.PlayerLeaderboardEntry.PlayFabId);
                     if (t.PlayerLeaderboardEntry.PlayFabId != PlayerAccountInfo.Me.PlayFabUsername)
                     {
+                        Debug.Log( "Opponent info loaded : " +t.PlayerLeaderboardEntry.PlayFabId);
                         exceptSelf.Add(t);
                     }
                     else
                     {
+                        Debug.Log( "Self info loaded : " +t.PlayerLeaderboardEntry.PlayFabId);
                         myLeaderboardInfo = t;
                     }
                 }
@@ -65,7 +70,7 @@ public class ArenaLayer : UILayer
                 if (exceptSelf.Count < 3)
                 {
                     var myPoint = (myLeaderboardInfo != null) ? myLeaderboardInfo.PlayerLeaderboardEntry.StatValue : 1000;
-                    var list = table.GetOpponentAroundPoint(myPoint);
+                    var list = this.GetOpponentAroundPoint(myPoint);
                     for (var i = 0; i < list.Count; i++)
                     {
                         exceptSelf.Add(list[i]);
@@ -76,16 +81,20 @@ public class ArenaLayer : UILayer
                     }
                 }
                 
-                LoadArena(exceptSelf);
-                View(true);
+                DisplayOpponents(exceptSelf);
                 ProgressLayer.Close();
                 SetLoaded.Invoke(true);
+            },
+            () =>
+            {
+                ProgressLayer.Close();
+                ReturnToLobby.Invoke("network error");
             }
         );
     }
     
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
-    void LoadArena(List<CloudScript.LeaderboardInfo> leaderboards)
+    void DisplayOpponents(List<CloudScript.LeaderboardInfo> leaderboards)
     {
         foreach (Transform c in EnemiesT)
         {
@@ -118,12 +127,5 @@ public class ArenaLayer : UILayer
         }
         EditMyTeamBtn.onClick.RemoveAllListeners();
         EditMyTeamBtn.onClick.AddListener(GoToTeamEdit);
-    }
-
-    void View(bool on)
-    {
-        member1.gameObject.SetActive(on);
-        member2.gameObject.SetActive(on);
-        member3.gameObject.SetActive(on);
     }
 }
