@@ -19,8 +19,8 @@ public class PreparingProcess : FSceneProcess
         CameraManager._camera.transform.position = CameraManager._StartPosRef.transform.position;
         CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
         Sensor.ClearFightingMember();
-        PopupLayer.Loading("loading Essentials", NetFightScene.target.T.gameObject, 1f);
-        PopupLayer.LoadingPercent("loading Essentials", 0.1f);
+        ProgressLayer.Open(NetFightScene.target.T.gameObject);
+        ProgressLayer.LoadingPercent("loading Essentials", 0.1f);
         
         var tasks = new List<UniTask>
         {
@@ -78,7 +78,7 @@ public class PreparingProcess : FSceneProcess
         }
         
         RTFightManager.target.SetGame(NetFightScene.Fight);
-        PopupLayer.LoadingPercent("loading UI", 1f);
+        ProgressLayer.LoadingPercent("loading UI", 1f);
         fightingStepLayer = await FightingStepLayer.Open(false);
         
         switch (RTFightManager.target.team1.TeamMode)
@@ -113,7 +113,7 @@ public class PreparingProcess : FSceneProcess
             }
         ).AddTo(RTFightManager.target.disposables);
         
-        PopupLayer.Close();
+        ProgressLayer.Close();
     }
     
     public override void ProcessEnter()

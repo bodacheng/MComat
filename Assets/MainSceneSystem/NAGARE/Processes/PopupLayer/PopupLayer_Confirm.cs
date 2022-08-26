@@ -24,9 +24,6 @@ public partial class PopupLayer : UILayer {
         NoButton.gameObject.SetActive(false);
         ValidationIntro.text = intro;
         
-        progressBar.gameObject.SetActive(false);
-        loadingIcon.gameObject.SetActive(false);
-        
         async void closeWindow()
         {
             await Observable.TimerFrame(20);
@@ -39,9 +36,6 @@ public partial class PopupLayer : UILayer {
     {
         ValidationWindow.gameObject.SetActive(true);
         HighLightRect(ValidationWindow.GetComponent<RectTransform>());
-        
-        progressBar.gameObject.SetActive(false);
-        loadingIcon.gameObject.SetActive(false);
         
         YesButton.gameObject.SetActive(true);
         NoButton.gameObject.SetActive(true);
@@ -60,9 +54,6 @@ public partial class PopupLayer : UILayer {
     {
         ValidationWindow.gameObject.SetActive(true);
         HighLightRect(ValidationWindow.GetComponent<RectTransform>());
-        
-        progressBar.gameObject.SetActive(false);
-        loadingIcon.gameObject.SetActive(false);
         
         YesButton.gameObject.SetActive(true);
         NoButton.gameObject.SetActive(true);

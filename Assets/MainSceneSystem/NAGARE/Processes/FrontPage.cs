@@ -82,7 +82,7 @@ public class FrontPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        PopupLayer.Loading(">", PreScene.target.T);
+        ProgressLayer.Loading(">", PreScene.target.T);
         PlayFabReadClient.GetUserData(
             new GetUserDataRequest
             {
@@ -105,7 +105,7 @@ public class FrontPage : MSceneProcess
             },
             () =>
             {
-                PopupLayer.Close();
+                ProgressLayer.Close();
                 EnterProcess();
             },
             () => { Debug.Log("错误，怎么办？"); }

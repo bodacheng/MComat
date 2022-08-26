@@ -23,6 +23,7 @@ namespace DummyLayerSystem
             {"SettingLayer", "DummyLayerSystem/SettingLayer"},
             {"UnitsLayer", "DummyLayerSystem/UnitsLayer"},
             {"PopupLayer", "DummyLayerSystem/PopupLayer"},
+            {"ProgressLayer", "DummyLayerSystem/ProgressLayer"},
             {"SelfFightLayer", "DummyLayerSystem/SelfFightLayer"},
             {"FightPrepareLayer", "DummyLayerSystem/FightPrepareLayer"},
             {"TeamEditLayer", "DummyLayerSystem/TeamEditLayer"},

@@ -15,7 +15,7 @@ public class MonsterEditPage : MSceneProcess
     
     async UniTask EnterProcess()
     {
-        PopupLayer.Loading(">", PreScene.target.T);
+        ProgressLayer.Loading(">", PreScene.target.T);
         var CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
@@ -27,7 +27,7 @@ public class MonsterEditPage : MSceneProcess
         {
             x._connector.ShowMyModel(PreScene.target._focusing != null ? PreScene.target._focusing.id : null);
         });
-        PopupLayer.Close();
+        ProgressLayer.Close();
         SetLoaded(true);
     }
     

@@ -53,7 +53,7 @@ public class TeamEditPage : MSceneProcess
     {
         UnitsLayer.Close();
         TeamEditLayer.Close();
-        PopupLayer.Loading(">", PreScene.target.T);
+        ProgressLayer.Loading(">", PreScene.target.T);
         TeamSet.SaveTeamSet(teamMode, TeamSaveFinished);
         switch (teamMode)
         {
@@ -61,7 +61,7 @@ public class TeamEditPage : MSceneProcess
                 CloudScript.ArenaDefendTeamSave(TeamSet.ToDic(TeamSet.Arena3V3) , ArenaDefendSaved);
                 missionWatcher = new MissionWatcher(
                     new List<string>() {"arenaDefendSaved", "teamSavedFinished"},
-                    PopupLayer.Close,
+                    ProgressLayer.Close,
                     () => {}
                 );
                 break;
@@ -70,7 +70,7 @@ public class TeamEditPage : MSceneProcess
                     new List<string>() {
                         "teamSavedFinished"
                     },
-                    PopupLayer.Close,
+                    ProgressLayer.Close,
                     () => {}
                 );
                 break;

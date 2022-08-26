@@ -57,9 +57,9 @@ namespace ModelView
             }
             else
             {
-                PopupLayer.Loading(">", PreScene.target.T);
+                ProgressLayer.Loading(">", PreScene.target.T);
                 focusingC = await GeneralModelPool.GetModel(recordID, transform);
-                PopupLayer.Close();
+                ProgressLayer.Close();
                 if (focusingC == null)
                 {
                     FocusRId = null;

@@ -31,7 +31,7 @@ public class ArenaLayer : UILayer
         RefreshBtn.onClick.RemoveAllListeners();
         RefreshBtn.onClick.AddListener(()=> SetLoaded(true));
         
-        PopupLayer.Loading(">", PreScene.target.T);
+        ProgressLayer.Loading(">", PreScene.target.T);
         View(false);
         CloudScript.GetLeaderboardAroundUser(
             obj =>
@@ -78,7 +78,7 @@ public class ArenaLayer : UILayer
                 
                 LoadArena(exceptSelf);
                 View(true);
-                PopupLayer.Close();
+                ProgressLayer.Close();
                 SetLoaded.Invoke(true);
             }
         );

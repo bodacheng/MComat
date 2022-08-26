@@ -1,13 +1,10 @@
 ﻿using DummyLayerSystem;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using NoSuchStudio.UI.Highlight;
 
 public partial class PopupLayer : UILayer
 {
-    [SerializeField] GameObject loadingIcon;
-    [SerializeField] TextMeshProUGUI info;
     [SerializeField] Image bigCurtain;
     
     static PopupLayer Get()
