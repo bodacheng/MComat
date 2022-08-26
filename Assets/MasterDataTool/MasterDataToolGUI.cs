@@ -49,6 +49,11 @@ public class LocalMasterDataToolGUI : EditorWindow {
         {
             tool.OutputMonsterStore();
         }
+
+        GUILayout.TextArea("关卡报酬信息我们保存在PlayFab->TITLE DATA里。\n" +
+                           "要注意的一点是这个部分我们没法在PlayFab直接使用Upload Json 来更新内容。\n" +
+                           "我们是点编辑，把值直接copy到stage_awards这个key对应的值那里。\n" +
+                           "下面这个按钮输出的文件里是那个值，只是提供了个格式，详细我们可以自己编辑，或在未来改写代码。");
         
         if (GUILayout.Button("(playFab)输出Json格式Arcade关卡报酬定义文件"))
         {
