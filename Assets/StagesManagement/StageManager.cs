@@ -23,6 +23,12 @@ public class StageManager : EditorWindow
             _fightMemberManager = new FightMemberManager();
             Initialized = true;
         }
+
+        if (target == null || target.FightMembers == null || _fightMemberManager == null)
+        {
+            Initialized = false;
+            return;
+        }
         
         _fightMemberManager.OnGUIView(target.FightMembers);
         pathAndNameForLocalSave = EditorGUILayout.TextField("local Path For Saving", pathAndNameForLocalSave);
@@ -33,6 +39,7 @@ public class StageManager : EditorWindow
             FightInfo.CreateFightInfoAsset(target.FightMembers, pathAndNameForLocalSave, fileName);
         }
         
+        EditorGUILayout.Space(200);
         GenerateArenaDummies();
     }
     
@@ -40,13 +47,13 @@ public class StageManager : EditorWindow
     void GenerateArenaDummies()
     {
         table.Load();
-        if (GUILayout.Button("根据ArenaDummiesTable生成假想敌文件"))
+        if (GUILayout.Button("根据ArenaDummiesTable生成假想敌文件（生成于Assets/Resources/ArenaDummies之下）"))
         {
             foreach (var row in table.GetRowList())
             {
                 var target = FightMembers.RandomFight();
                 target.SetEnemyLevel(Int32.Parse(row.LEVEL));
-                FightInfo.CreateFightInfoAsset(target, pathAndNameForLocalSave, row.NICK_NAME);
+                FightInfo.CreateFightInfoAsset(target, "Assets/Resources/ArenaDummies", row.NICK_NAME);
             }
         }
     }

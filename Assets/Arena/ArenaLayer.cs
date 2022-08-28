@@ -108,6 +108,7 @@ public class ArenaLayer : UILayer
             o.transform.SetParent(EnemiesT);
             o.transform.localPosition = Vector3.zero;
             o.transform.localScale = Vector3.one;
+            o.gameObject.SetActive(true);
         }
     }
     

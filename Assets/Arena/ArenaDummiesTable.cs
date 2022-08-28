@@ -97,28 +97,31 @@ public class ArenaDummiesTable
 		if (startRow == null)
 			return new List<CloudScript.LeaderboardInfo>();
 		
-		var s = Resources.Load("stageTemp/" + startRow.NICK_NAME) as TextAsset;
+		var s = Resources.Load( "ArenaDummies/" + startRow.NICK_NAME) as FightInfo;
 		if (s == null)
 		{
+			Debug.Log("Cant find dummy:"+ startRow.NICK_NAME);
 			return new List<CloudScript.LeaderboardInfo>();
 		}
 		
-		var f = FightMembers.LoadEnemies_Json(s);
-		startRow.SetFightMembers(f);
+		startRow.SetFightMembers(s.FightMembers);
 		
 		var returnValue = new List<CloudScript.LeaderboardInfo> { RowToLeaderboardInfo(startRow) };
 		for (var i = startIndex + 1; i < startIndex + 3; i++)
 		{
 			if (i >= rowList.Count)
 			{
+				Debug.Log("No enough dummies?");
 				break;
 			}
 			var row = rowList[i];
-			var file = Resources.Load("stageTemp/" + row.NICK_NAME) as TextAsset;
+			var file = Resources.Load("ArenaDummies/" + row.NICK_NAME) as FightInfo;
 			if (file == null)
+			{
+				Debug.Log("Cant find dummy:"+ startRow.NICK_NAME);
 				continue;
-			var fightMembers = FightMembers.LoadEnemies_Json(file);
-			row.SetFightMembers(fightMembers);
+			}
+			row.SetFightMembers(file.FightMembers);
 			returnValue.Add(RowToLeaderboardInfo(row));
 		}
 		return returnValue;
