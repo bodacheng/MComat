@@ -32,24 +32,21 @@ public class UnitListPage : MSceneProcess
         
         layer = UnitsLayer.Open();
         unitOptionLayer = UnitOptionLayer.Open();
-        layer.DisplayUnitIcons(
-        dataAccess.Units.Dic, 
-        true, 
-        (x) =>
-        {
-            void UnitIconBtn(string instanceId)
+        layer.SetDisplayUnitIconsAfterAction(
+            () =>
             {
-                Debug.Log("onclick instanceId :"+ instanceId);
-                x.Select(instanceId);
-                PreScene.target.SetFocusingUnit(instanceId);
-                unitOptionLayer.RefreshMemberDetailPageByFocusingUnit();
+                void UnitIconBtn(string instanceId)
+                {
+                    Debug.Log("onclick instanceId :"+ instanceId);
+                    layer.Select(instanceId);
+                    PreScene.target.SetFocusingUnit(instanceId);
+                    unitOptionLayer.RefreshMemberDetailPageByFocusingUnit();
+                }
+                layer.SetUnitsIconOnClick(UnitIconBtn);
             }
-            x.SetUnitsIconOnClick(UnitIconBtn);
-        });
-        
-        Observable.Timer(TimeSpan.FromSeconds(1))
-            .Subscribe(_ => unitOptionLayer.RefreshMemberDetailPageByFocusingUnit()).AddTo(layer);
-        
+        );
+        layer.DisplayUnitIcons(dataAccess.Units.Dic, true);
+        Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ => unitOptionLayer.RefreshMemberDetailPageByFocusingUnit()).AddTo(layer);
         SetLoaded(true);
     }
     

@@ -8,7 +8,6 @@ public class HeroIcon : MonoBehaviour {
     public P3Button iconButton;
     public Image Icon;
     public Image frame;
-    
     public Image cooldownCurtain;
     
     public UnitInfo unitInfo;
@@ -18,12 +17,14 @@ public class HeroIcon : MonoBehaviour {
     {
         frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 0.3f);
         Icon.color = new Color(1,1,1,0.3f);
+        iconButton.interactable = false;
     }
     
     public void LightOn()
     {
         frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 1f);
         Icon.color = new Color(1,1,1,1f);
+        iconButton.interactable = true;
     }
     
     public void CooldownCurtainUpdate(float proportion)
@@ -47,7 +48,14 @@ public class HeroIcon : MonoBehaviour {
         }
         
         Icon.sprite = sprite;
-        Icon.color = Icon.sprite == null ? new Color(1, 1, 1, 0f) : Color.white;
+        if (Icon.sprite != null)
+        {
+            LightOn();
+        }
+        else
+        {
+            Grey();
+        }
     }
     
     public static void ChangeHeroIconByInstanceId(string instanceId, HeroIcon Icon)

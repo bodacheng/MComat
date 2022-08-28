@@ -12,7 +12,7 @@ public class KeywordSetting : ScriptableObject
     
     public static string _SkillStaticAnalysis;
     public static string _SkillDynamicAnalysis;
-
+    
     public void Initialise()
     {
         _SkillStaticAnalysis = SkillStaticAnalysis;

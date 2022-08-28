@@ -37,19 +37,18 @@ namespace mainMenu
         public UnitInfo _focusing;
         
         //下面这个函数总是建立在monsterbox函数运行在前，而monsterbox会部署好所有展示用模
-        public void SetFocusingUnit(string localID)
+        public void SetFocusingUnit(string instanceID)
         {
-            _focusing = dataAccess.Units.Get(localID);
+            _focusing = dataAccess.Units.Get(instanceID);
             if (_focusing == null)
             {
-                Debug.Log("玩家目前一个角色也没？？？？");
                 return;
             }
             
             var Ref = Units.GetUnitConfig(_focusing.r_id);
             if (Ref == null)
             {
-                Debug.Log("No this monster:" + _focusing.r_id);
+                Debug.Log("No this unit:" + _focusing.r_id);
                 return;
             }
             BackGroundPS.target.ChangeBGByElement(Ref.element);

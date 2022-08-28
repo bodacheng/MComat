@@ -10,19 +10,19 @@ namespace mainMenu
 {
     public class UnitsLayer : UILayer
     {
-        [Header("monsterboxFilter")]
-        public MonsterboxFilter _monsterboxFilter;
+        [Header("filter")]
+        [SerializeField] MonsterboxFilter filter;
         
         [Header("角色属性框")]
-        public HeroIcon noMagic;
+        [SerializeField] HeroIcon noMagic;
         
         [Header("选中框")]
-        public GameObject selectedFrame;
+        [SerializeField] GameObject selectedFrame;
         
         [Header("宠物栏parent")]
-        public RectTransform MonsterBoxContainer;
-
-        [SerializeField] List<string> _typeOfUnitsIHave = new List<string>();
+        [SerializeField] RectTransform MonsterBoxContainer;
+        [SerializeField] List<string> _typeOfUnitsIHave = new ();
+        
         readonly IDictionary<string, HeroIcon> heroIcons = new Dictionary<string, HeroIcon>();
         string selected_InstanceID;
         
@@ -40,7 +40,7 @@ namespace mainMenu
         {
             if (instanceID == null)
                 return null;
-            heroIcons.TryGetValue(instanceID, out HeroIcon unitIcon);
+            heroIcons.TryGetValue(instanceID, out var unitIcon);
             return unitIcon;
         }
         
@@ -114,19 +114,41 @@ namespace mainMenu
             {
                 await AddUnitIcon(keyValuePair.Value.id, clearButtonFeature);
             }
-            _monsterboxFilter.RefreshTypeDropDown(_typeOfUnitsIHave);
+            filter.RefreshTypeDropDown(_typeOfUnitsIHave);
+        }
+
+        public void DisableLackSkillUnitIcon()
+        {
+            foreach (var kv in heroIcons)
+            {
+                if (kv.Value.unitInfo != null && kv.Value.unitInfo.set.SkillIDList().Count == 9)
+                {
+                    kv.Value.LightOn();
+                }
+                else
+                {
+                    kv.Value.Grey();
+                }
+            }
+        }
+        
+        Action displayUnitIconsAfterAction;
+
+        public void SetDisplayUnitIconsAfterAction(Action a)
+        {
+            this.displayUnitIconsAfterAction = a;
         }
         
         //icon的排列，显示   
-        public async void DisplayUnitIcons(IDictionary<string, UnitInfo> dic, bool clearButtonFeature, Action<UnitsLayer> afterLoad = null)
+        public async void DisplayUnitIcons(IDictionary<string, UnitInfo> dic, bool clearButtonFeature)
         {
             MonsterBoxContainer.gameObject.SetActive(true);
             await UnitIconsGenerate(dic, clearButtonFeature);
-            foreach (KeyValuePair<string, HeroIcon> keyValuePair in heroIcons)
+            foreach (var keyValuePair in heroIcons)
             {
                 keyValuePair.Value.gameObject.SetActive(false);
             }
-            var icons = _monsterboxFilter.OrderIcons(heroIcons.Values.ToList());
+            var icons = filter.OrderIcons(heroIcons.Values.ToList());
             var hangshu = 1;
             for (var i = 0; i < icons.Count; i++)
             {
@@ -145,8 +167,7 @@ namespace mainMenu
             //adjustAllIconsSize(null);
             hangshu = 1 + icons.Count / 7;
             MonsterBoxContainer.sizeDelta = new Vector2(MonsterBoxContainer.rect.width, noMagic.GetComponent<RectTransform>().rect.height * hangshu);
-            
-            afterLoad?.Invoke(this);
+            displayUnitIconsAfterAction?.Invoke();
         }
     }
 }

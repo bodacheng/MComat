@@ -5,7 +5,7 @@ public partial class SkillSet
 {
     public List<string> SkillIDList()
     {
-        List<string> IDs = new List<string>();
+        var IDs = new List<string>();
         
         if (a1 != null)
             IDs.Add(a1);
@@ -27,7 +27,7 @@ public partial class SkillSet
             IDs.Add(c2);
         if (c3 != null)
             IDs.Add(c3);
-            
+        
         return IDs;
     }
     
@@ -107,35 +107,35 @@ public partial class SkillSet
     }
     
     //下面的环节纯粹是针对SkillPrintOut的一些处理
-    public IDictionary<int, SkillEntity> GetAttack1Chuan()
+    public IDictionary<int, SkillEntity> GetAttack1Chan()
     {
-        IDictionary<int, SkillEntity> attack_chuan = new Dictionary<int, SkillEntity>
+        IDictionary<int, SkillEntity> chain = new Dictionary<int, SkillEntity>
         {
             { 1, A1 },
             { 2, A2 },
             { 3, A3 }
         };
-        return attack_chuan;
+        return chain;
     }
-    public IDictionary<int, SkillEntity> GetAttack2Chuan()
+    public IDictionary<int, SkillEntity> GetAttack2Chan()
     {
-        IDictionary<int, SkillEntity> B_chuan = new Dictionary<int, SkillEntity>
+        IDictionary<int, SkillEntity> chain = new Dictionary<int, SkillEntity>
         {
             { 1, B1 },
             { 2, B2 },
             { 3, B3 }
         };
-        return B_chuan;
+        return chain;
     }
-    public IDictionary<int, SkillEntity> GetAttack3Chuan()
+    public IDictionary<int, SkillEntity> GetAttack3Chan()
     {
-        IDictionary<int, SkillEntity> C_chuan = new Dictionary<int, SkillEntity>
+        IDictionary<int, SkillEntity> chain = new Dictionary<int, SkillEntity>
         {
             { 1, C1 },
             { 2, C2 },
             { 3, C3 }
         };
-        return C_chuan;
+        return chain;
     }
     
     public SkillConfig GetA1Config()

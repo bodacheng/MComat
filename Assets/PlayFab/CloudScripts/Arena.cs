@@ -8,6 +8,20 @@ public partial class CloudScript
 {
     public static void ArenaDefendTeamSave(MultiDic<int, int, UnitInfo> info, Action<bool> finished)
     {
+        if (info.GetValues().Count != 3)
+        {
+            Debug.Log("No enough member.");
+        }
+        
+        foreach (var kv in info.GetValues())
+        {
+            var skillList = kv.set.SkillIDList();
+            if (skillList.Count != 9)
+            {
+                Debug.Log("No enough skill.");
+            }
+        }
+        
         ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest()
             {
@@ -21,8 +35,7 @@ public partial class CloudScript
             (ExecuteCloudScriptResult result) =>
             {
                 var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
-                object succeed;
-                jsonResult.TryGetValue("success", out succeed);
+                jsonResult.TryGetValue("success", out var succeed);
                 if ((bool)succeed)
                 {
                     finished.Invoke(true);
@@ -80,8 +93,7 @@ public partial class CloudScript
             },
             (ExecuteCloudScriptResult result) => {
                 var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
-                object point;
-                jsonResult.TryGetValue("currentPoint", out point); 
+                jsonResult.TryGetValue("currentPoint", out var point); 
                 Debug.Log(point);
                 success.Invoke();
             }

@@ -200,13 +200,13 @@ namespace mainMenu
             }
             
             var SkillEntity_List = new List<SkillEntity>();
-            SkillEntity_List.AddRange(nineAndTwo.GetAttack1Chuan().Values.ToList());
-            SkillEntity_List.AddRange(nineAndTwo.GetAttack2Chuan().Values.ToList());
-            SkillEntity_List.AddRange(nineAndTwo.GetAttack3Chuan().Values.ToList());
+            SkillEntity_List.AddRange(nineAndTwo.GetAttack1Chan().Values.ToList());
+            SkillEntity_List.AddRange(nineAndTwo.GetAttack2Chan().Values.ToList());
+            SkillEntity_List.AddRange(nineAndTwo.GetAttack3Chan().Values.ToList());
             analysisSKList = LToD(SkillEntity_List);
             StateButtonDic.Clear();
             
-            var attackChuan = nineAndTwo.GetAttack1Chuan();
+            var attackChuan = nineAndTwo.GetAttack1Chan();
             for (var i = 1; i < 4; i++)
             {
                 if (attackChuan[i] == null)
@@ -226,7 +226,7 @@ namespace mainMenu
                 RenderButton(element,newShow.gameObject,attackChuan[i].SP_LEVEL);
             }
             
-            var fire1Chuan = nineAndTwo.GetAttack2Chuan();
+            var fire1Chuan = nineAndTwo.GetAttack2Chan();
             for (var i = 1; i < 4; i++)
             {
                 if (fire1Chuan[i] == null)
@@ -245,7 +245,7 @@ namespace mainMenu
                 RenderButton(element,newShow.gameObject,fire1Chuan[i].SP_LEVEL);
             }
              
-            var fire2Chuan = nineAndTwo.GetAttack3Chuan();
+            var fire2Chuan = nineAndTwo.GetAttack3Chan();
             for (var i = 1; i < 4; i++)
             {
                 if (fire2Chuan[i] == null)
