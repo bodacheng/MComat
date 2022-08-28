@@ -84,14 +84,9 @@ namespace mainMenu
             var targetingIcon = GetUnitIcon(instanceID);
             if (targetingIcon == null)
             {
-                await UnitIconDic.Load(unitConfig.RECORD_ID);
                 targetingIcon = Instantiate(noMagic);
                 targetingIcon.name = unitConfig.REAL_NAME + "_icon";
-                targetingIcon.unitConfig = unitConfig;
-
-                var pic = await UnitIconDic.Load(unitConfig.RECORD_ID);
-                
-                targetingIcon.ChangeIcon(pic, unitConfig.element);
+                targetingIcon.ChangeIcon(unitInfo);
                 DicAdd<string, HeroIcon>.Add(heroIcons, instanceID, targetingIcon);
             }
             if (clearButtonFeature)

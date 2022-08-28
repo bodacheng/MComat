@@ -104,7 +104,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             targetIcon.gameObject.SetActive(false);
             return;
         }
-        StoneOfPlayerInfo SSInfo = Stones.Get(Item.instanceId);
+        var SSInfo = Stones.Get(Item.instanceId);
         if (SSInfo == null || SSInfo.unitInstanceId == null)
         {
             targetIcon.gameObject.SetActive(false);
@@ -118,10 +118,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             return;
         }
         targetIcon.gameObject.SetActive(true);
-        UnitConfig unitConfig = Units.GetUnitConfig(_one.r_id);
-        var pic = await UnitIconDic.Load(unitConfig.RECORD_ID);
-        targetIcon.ChangeIcon(unitConfig == null ? null : pic,
-            unitConfig == null ? Element.Null : unitConfig.element);
+        targetIcon.ChangeIcon(_one);
     }
     
     /// <summary>

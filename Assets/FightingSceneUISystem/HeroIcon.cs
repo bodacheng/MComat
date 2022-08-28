@@ -32,7 +32,20 @@ public class HeroIcon : MonoBehaviour {
         cooldownCurtain.fillAmount = proportion;
     }
 
-    public void ChangeIcon(Sprite sprite, Element element)
+    public async void ChangeIcon(UnitInfo unitInfo)
+    {
+        this.unitInfo = unitInfo;
+        var pic = await UnitIconDic.Load(unitInfo.r_id);
+        this.unitConfig = Units.GetUnitConfig(unitInfo.r_id);
+        ChangeIcon(pic, unitConfig.element);
+    }
+    
+    public void Clear()
+    {
+        ChangeIcon(null, Element.Null);
+    }
+    
+    void ChangeIcon(Sprite sprite, Element element)
     {
         if (frame == null || Icon == null)
         {

@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using dataAccess;
 using DummyLayerSystem;
-using Singleton;
 
 namespace mainMenu
 {
@@ -30,18 +28,18 @@ namespace mainMenu
         [SerializeField] HeroIcon team11_R, team12_R, team13_R;
         [SerializeField] HeroIcon team21_R, team22_R, team23_R;
         
-        readonly MultiDic<Team, int, HeroIcon> teamButtonDic_M = new MultiDic<Team, int, HeroIcon>();
-        readonly MultiDic<Team, int, HeroIcon> teamButtonDic_R = new MultiDic<Team, int, HeroIcon>();
+        readonly MultiDic<Team, int, HeroIcon> teamButtonDic_M = new ();
+        readonly MultiDic<Team, int, HeroIcon> teamButtonDic_R = new ();
         readonly IDictionary<HeroIcon, int> IconNumCheck = new Dictionary<HeroIcon, int>();
-        readonly FightMembers _selfFight = new FightMembers { };
+        readonly FightMembers _selfFight = new() { };
         FightInfo _stage;
         Team _focusingTeam;
         int _focusingPosNum = -1;
         
-        PosKeySet _team1PosKeySet_M = new PosKeySet();
-        PosKeySet _team2PosKeySet_M = new PosKeySet();
-        PosKeySet _team1PosKeySet_R = new PosKeySet();
-        PosKeySet _team2PosKeySet_R = new PosKeySet();
+        PosKeySet _team1PosKeySet_M = new ();
+        PosKeySet _team2PosKeySet_M = new ();
+        PosKeySet _team1PosKeySet_R = new ();
+        PosKeySet _team2PosKeySet_R = new ();
         
         public void INI()
         {
@@ -61,11 +59,11 @@ namespace mainMenu
         {
             foreach (var Icon in teamButtonDic_M.GetValues())
             {
-                Icon.ChangeIcon(null, Element.Null);
+                Icon.Clear();
             }
             foreach (var Icon in teamButtonDic_R.GetValues())
             {
-                Icon.ChangeIcon(null, Element.Null);
+                Icon.Clear();
             }
             
             _team1PosKeySet_M = new PosKeySet();
@@ -246,15 +244,11 @@ namespace mainMenu
             if (PosInstanceId != null)
             {
                 var _one = dataAccess.Units.Get(PosInstanceId);
-                var unitConfig = Units.GetUnitConfig(_one.r_id);
-
-                var pic = await UnitIconDic.Load(unitConfig.RECORD_ID);
-                tar.ChangeIcon(unitConfig == null ? null :pic,
-                    unitConfig == null ? Element.Null : unitConfig.element);
+                tar.ChangeIcon(_one);
             }
             else
             {
-                tar.ChangeIcon(null, Element.Null);
+                tar.Clear();
             }
         }
         
@@ -265,7 +259,7 @@ namespace mainMenu
                 var heroIcon = icons[i];
                 teamButtonDic_M.Set(team, i, heroIcon);
                 DicAdd<HeroIcon, int>.Add(IconNumCheck, heroIcon, i);
-                heroIcon.ChangeIcon(null, Element.Null);
+                heroIcon.Clear();
                 
                 void SelectedRender()
                 {
@@ -288,7 +282,7 @@ namespace mainMenu
                 var heroIcon = icons[i];
                 teamButtonDic_R.Set(team, i, heroIcon);
                 DicAdd<HeroIcon, int>.Add(IconNumCheck, heroIcon, i);
-                heroIcon.ChangeIcon(null, Element.Null);
+                heroIcon.Clear();
                 heroIcon.iconButton.onClick.RemoveAllListeners();
                 heroIcon.iconButton.onClick.AddListener(() => {OnTeamPosBtn(team, IconNumCheck[heroIcon]);});
                 heroIcon.iconButton.onClick.AddListener(() => HeroIcon.SelectedFeature(heroIcon, selectedFrame, 1.1f));
