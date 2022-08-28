@@ -121,11 +121,11 @@ namespace dataAccess
         public static List<StoneOfPlayerInfo> GetEquippingStones(string instanceId)
         {
             var targetStones = new List<StoneOfPlayerInfo>();
-            foreach(var keyValuePair in Dic)
+            foreach(var pair in Dic)
             {
-                if (keyValuePair.Value.unitInstanceId == instanceId)
+                if (pair.Value.unitInstanceId == instanceId)
                 {
-                    targetStones.Add(keyValuePair.Value);
+                    targetStones.Add(pair.Value);
                 }
             }
             return targetStones;

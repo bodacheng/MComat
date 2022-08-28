@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using Singleton;
@@ -17,14 +18,12 @@ public class HeroIcon : MonoBehaviour {
     {
         frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 0.3f);
         Icon.color = new Color(1,1,1,0.3f);
-        iconButton.interactable = false;
     }
     
     public void LightOn()
     {
         frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 1f);
         Icon.color = new Color(1,1,1,1f);
-        iconButton.interactable = true;
     }
     
     public void CooldownCurtainUpdate(float proportion)
@@ -71,27 +70,6 @@ public class HeroIcon : MonoBehaviour {
         }
     }
     
-    public static void ChangeHeroIconByInstanceId(string instanceId, HeroIcon Icon)
-    {
-        var info = dataAccess.Units.Get(instanceId);
-        if (info != null)
-        {
-            var unitConfig = Units.GetUnitConfig(info.r_id);
-            ChangeHeroIconByRid(unitConfig.RECORD_ID,Icon);
-        }
-        else
-        {
-            Icon.ChangeIcon(null, Element.Null);
-        }
-    }
-    
-    public static async void ChangeHeroIconByRid(string rID, HeroIcon Icon)
-    {
-        var unitConfig = Units.GetUnitConfig(rID);
-        var pic = await UnitIconDic.Load(unitConfig.RECORD_ID);
-        Icon.ChangeIcon(unitConfig == null ? null : pic, unitConfig == null ? Element.Null : unitConfig.element);
-    }
-        
     public static void SelectedFeature(HeroIcon unitIcon, GameObject selectedFrame, float localScale)
     {
         if (unitIcon == null)

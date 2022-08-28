@@ -25,9 +25,6 @@ public class TeamEditPage : MSceneProcess
     void EnterProcess(string teamMode)
     {
         var teamEditLayer = TeamEditLayer.Open(teamMode);
-        if (PreScene.target._focusing != null)
-            teamEditLayer._nineForShow.ShowStones_Acc(PreScene.target._focusing.id);
-        
         var unitsLayer = UnitsLayer.Open();
         unitsLayer.SetDisplayUnitIconsAfterAction(() =>
         {
@@ -35,6 +32,9 @@ public class TeamEditPage : MSceneProcess
             unitsLayer.DisableLackSkillUnitIcon();
         });
         unitsLayer.DisplayUnitIcons(dataAccess.Units.Dic, true);
+        if (PreScene.target._focusing != null)
+            teamEditLayer.UnitIconClick(PreScene.target._focusing.id, this.teamMode);
+        
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
         SetLoaded(true);
     }

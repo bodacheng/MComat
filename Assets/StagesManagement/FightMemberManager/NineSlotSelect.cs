@@ -145,7 +145,7 @@ public partial class FightMemberManager {
     
     bool Repeated(SkillSet _NineAndTwo, string recordID)
     {
-        List<string> currentSkillList = _NineAndTwo.SkillIDList();
+        var currentSkillList = _NineAndTwo.SkillIDList();
         int count = 0;
         for (int i = 0; i < currentSkillList.Count; i++)
         {

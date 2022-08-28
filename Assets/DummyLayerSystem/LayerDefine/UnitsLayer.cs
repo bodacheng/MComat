@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using DummyLayerSystem;
 using Cysharp.Threading.Tasks;
+using dataAccess;
 using Singleton;
 
 namespace mainMenu
@@ -116,7 +117,7 @@ namespace mainMenu
         {
             foreach (var kv in heroIcons)
             {
-                if (kv.Value.unitInfo != null && kv.Value.unitInfo.set.SkillIDList().Count == 9)
+                if (kv.Value.unitInfo != null && Stones.GetEquippingStones(kv.Key).Count == 9)
                 {
                     kv.Value.LightOn();
                 }

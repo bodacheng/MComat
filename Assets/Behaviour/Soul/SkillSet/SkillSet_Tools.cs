@@ -3,6 +3,11 @@ using Skill;
 
 public partial class SkillSet
 {
+    /// <summary>
+    /// 这个仅仅是一个辅助于技能编辑画面的工具，并不能用来判断角色实际装备中技能
+    /// 实际装备中技能是用Stones.GetEquippingStones
+    /// </summary>
+    /// <returns></returns>
     public List<string> SkillIDList()
     {
         var IDs = new List<string>();

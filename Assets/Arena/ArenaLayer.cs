@@ -117,10 +117,14 @@ public class ArenaLayer : UILayer
         string Pos1InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(0);
         string Pos2InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(1);
         string Pos3InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(2);
+
+        var info1 = dataAccess.Units.Get(Pos1InstanceID);
+        var info2 = dataAccess.Units.Get(Pos2InstanceID);
+        var info3 = dataAccess.Units.Get(Pos3InstanceID);
         
-        HeroIcon.ChangeHeroIconByInstanceId(Pos1InstanceID, member1);
-        HeroIcon.ChangeHeroIconByInstanceId(Pos2InstanceID, member2);
-        HeroIcon.ChangeHeroIconByInstanceId(Pos3InstanceID, member3);
+        member1.ChangeIcon(info1);
+        member2.ChangeIcon(info2);
+        member3.ChangeIcon(info3);
         
         void GoToTeamEdit()
         {

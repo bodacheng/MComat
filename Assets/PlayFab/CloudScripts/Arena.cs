@@ -2,6 +2,7 @@ using UnityEngine;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
 using System;
+using dataAccess;
 using Newtonsoft.Json;
 
 public partial class CloudScript
@@ -15,7 +16,7 @@ public partial class CloudScript
         
         foreach (var kv in info.GetValues())
         {
-            var skillList = kv.set.SkillIDList();
+            var skillList = Stones.GetEquippingStones(kv.id);
             if (skillList.Count != 9)
             {
                 Debug.Log("No enough skill.");

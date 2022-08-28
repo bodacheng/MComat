@@ -19,8 +19,8 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         // 竞技场模式下毫无考虑敌人“多组上场”的情况
         for (int index = 0; index < LInfo.Team.Length; index++)
         {
-            int posNum = LInfo.Team[index].key2;
-            UnitInfo unitInfo = LInfo.Team[index].value;
+            var posNum = LInfo.Team[index].key2;
+            var unitInfo = LInfo.Team[index].value;
             HeroIcon target = null;
             switch (posNum)
             {
@@ -34,10 +34,10 @@ public class ArenaFightTeamDisplay : MonoBehaviour
                     target = member3;
                     break;
             }
-            HeroIcon.ChangeHeroIconByRid(unitInfo.r_id, target);
+            target.ChangeIcon(unitInfo);
         }
         
-        FightMembers fightMembers = new FightMembers
+        var fightMembers = new FightMembers
         {
             EnemySets =
             {

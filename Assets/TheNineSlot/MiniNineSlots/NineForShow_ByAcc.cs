@@ -1,19 +1,18 @@
 ﻿using UnityEngine;
 using dataAccess;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
 public partial class NineForShow : MonoBehaviour
 {
-    public void ShowStones_Acc(string MonsterOfPlayerID)
+    public void ShowStones_Acc(string instanceID)
     {
-        var skillStoneOfPlayerInfoModels = Stones.GetEquippingStones(MonsterOfPlayerID);
+        var skillStoneOfPlayerInfoModels = Stones.GetEquippingStones(instanceID);
         
         string A1SkillID = null, A2SkillID = null, A3SkillID = null;
         string B1SkillID = null, B2SkillID = null, B3SkillID = null;
         string C1SkillID = null, C2SkillID = null, C3SkillID = null;
         
-        for (int i = 0; i < skillStoneOfPlayerInfoModels.Count; i++)
+        for (var i = 0; i < skillStoneOfPlayerInfoModels.Count; i++)
         {
             switch(skillStoneOfPlayerInfoModels[i].slot)
             {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using mainMenu;
 using dataAccess;
@@ -8,21 +9,21 @@ using UnityEngine.UI;
 
 public class TeamEditLayer : UILayer
 {
-    public DedicatedCameraConnector _connector;
-    
-    public Button RemoveButton;
-    public HeroIcon team1front, team1left, team1right;
+    [SerializeField] DedicatedCameraConnector _connector;
+    [SerializeField] Button RemoveButton;
+    [SerializeField] HeroIcon team1front, team1left, team1right;
     
     [Space(7)]
     [Header("选中框")]
-    public GameObject selectedFrame;
+    [SerializeField] GameObject selectedFrame;
     
     [Space(7)]
     [Header("选中角色的技能显示")]
-    public NineForShow _nineForShow;
+    [SerializeField] NineForShow _nineForShow;
+    
     [Space(7)]
     [Header("技能编辑按钮")]
-    public Button SkillEditButton;
+    [SerializeField] Button SkillEditButton;
     
     int focusingPos = -1;
     readonly IDictionary<int, HeroIcon> teamBtnDic = new Dictionary<int, HeroIcon>();
@@ -67,21 +68,37 @@ public class TeamEditLayer : UILayer
     // 修改对象队伍编程
     void ChangeTeamPos(string instanceID, int targetPos, string teamMode)
     {
-        List<PosKeySet.OneSet> returns = TeamSet.GetTargetSet(teamMode).SetPosMemByMonsterOfPlayerID(targetPos, instanceID);
-        for (int i = 0; i < returns.Count; i++)
+        var unitInfo = dataAccess.Units.Get(instanceID);
+        if (unitInfo != null && Stones.GetEquippingStones(instanceID).Count != 9)
+        {
+            Debug.Log("no enough skill");
+            return;
+        }
+
+        var returns = TeamSet.GetTargetSet(teamMode).SetPosMemByMonsterOfPlayerID(targetPos, instanceID);
+        for (var i = 0; i < returns.Count; i++)
         {
             ChangeIconOnPos(returns[i].posNum, teamMode);
         }
     }
-
+    
     // 纯渲染函数
     void ChangeIconOnPos(int posNum, string teamMode)
     {
         if (teamBtnDic.ContainsKey(posNum))
         {
-            HeroIcon tar = teamBtnDic[posNum];
-            string Pos_instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(posNum);
-            HeroIcon.ChangeHeroIconByInstanceId(Pos_instanceID, tar);
+            var icon = teamBtnDic[posNum];
+            var posInstanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(posNum);
+            var info = dataAccess.Units.Get(posInstanceID);
+            icon.ChangeIcon(info);
+            if (info != null && Stones.GetEquippingStones(posInstanceID).Count == 9)
+            {
+                icon.LightOn();
+            }
+            else
+            {
+                icon.Grey();
+            }
         }
         else
         {
@@ -118,8 +135,8 @@ public class TeamEditLayer : UILayer
         
         void SetPos(int posNum)
         {
-            UnitsLayer unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
-            string selected_instanceID = unitsLayer.GetSelect();
+            var unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+            var selected_instanceID = unitsLayer.GetSelect();
             if (selected_instanceID != null)
             {
                 Remove();
@@ -146,7 +163,7 @@ public class TeamEditLayer : UILayer
                         break;
                 }
                 
-                string instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(focusingPos);
+                var instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(focusingPos);
                 PreScene.target.SetFocusingUnit(instanceID);//确立focusing角色
                 _connector.ShowMyModel(instanceID);
                 if (PreScene.target._focusing != null)
@@ -158,9 +175,9 @@ public class TeamEditLayer : UILayer
             }
         }
         
-        team1front.iconButton.onClick.AddListener(() =>{SetPos(0);});
-        team1left.iconButton.onClick.AddListener(() =>{SetPos(1);});
-        team1right.iconButton.onClick.AddListener(() =>{SetPos(2);});
+        team1front.iconButton.onClick.AddListener(() => SetPos(0));
+        team1left.iconButton.onClick.AddListener(() => SetPos(1));
+        team1right.iconButton.onClick.AddListener(() => SetPos(2));
     }
     #endregion
 }
