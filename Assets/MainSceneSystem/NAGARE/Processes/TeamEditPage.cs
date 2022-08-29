@@ -33,7 +33,11 @@ public class TeamEditPage : MSceneProcess
         });
         unitsLayer.DisplayUnitIcons(dataAccess.Units.Dic, true);
         if (PreScene.target._focusing != null)
+        {
+            // Just wanna show a model when enter team edit page
             teamEditLayer.UnitIconClick(PreScene.target._focusing.id, this.teamMode);
+            unitsLayer.CancelSelect();
+        }
         
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
         SetLoaded(true);
@@ -54,12 +58,41 @@ public class TeamEditPage : MSceneProcess
         switch (teamMode)
         {
             case "arena":
-                CloudScript.ArenaDefendTeamSave(TeamSet.ToDic(TeamSet.Arena3V3) , ArenaDefendSaved);
                 missionWatcher = new MissionWatcher(
                     new List<string>() {"arenaDefendSaved", "teamSavedFinished"},
                     ProgressLayer.Close,
                     () => {}
                 );
+                
+                #region 合格认证 
+                // 不符合要求的队伍不进行保存
+                bool qualified = true;
+                int teamCount = 0;
+                foreach (var set in TeamSet.Arena3V3.PosNumsWithLocalKeys)
+                {
+                    if (set.instanceID != null && dataAccess.Units.Get(set.instanceID) != null)
+                    {
+                        qualified = qualified && (Stones.GetEquippingStones(set.instanceID).Count == 9);
+                        teamCount += 1;
+                    }
+                    else
+                    {
+                        qualified = false;
+                    }
+                    if (!qualified)
+                        break;
+                }
+                qualified = qualified && teamCount == 3;
+                #endregion
+                
+                if (qualified)
+                {
+                    CloudScript.ArenaDefendTeamSave(TeamSet.ToDic(TeamSet.Arena3V3) , ArenaDefendSaved);
+                }
+                else
+                {
+                    ArenaDefendSaved(true);
+                }
                 break;
             case "arcade":
                 missionWatcher = new MissionWatcher(

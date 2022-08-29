@@ -45,7 +45,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
             }
         };
         fightMembers.EnemySets.ConvertSerializableArrayToDictionary();
-        FightInfo stage = FightInfo.ArenaStage(fightMembers);
+        var stage = FightInfo.ArenaStage(fightMembers);
         stage.team2ID = LInfo.PlayerLeaderboardEntry.PlayFabId;
         stage.EventType = FightEventType.Arena;
         

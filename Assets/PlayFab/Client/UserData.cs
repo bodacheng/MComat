@@ -39,9 +39,9 @@ public partial class PlayFabReadClient
         );
     }
 
-    public static void LoadTeamSet(string Mode, Action<bool> finished)
+    public static void LoadTeamSet(string mode, Action<bool> finished)
     {
-        string targetModeCode = Mode;
+        var targetModeCode = mode;
         PlayFabClientAPI.GetUserData(
             new GetUserDataRequest()
             {
@@ -51,8 +51,8 @@ public partial class PlayFabReadClient
             (GetUserDataResult obj) => {
                 if (obj.Data.ContainsKey(targetModeCode))
                 {
-                    UserDataRecord userData = obj.Data[targetModeCode];
-                    switch (Mode)
+                    var userData = obj.Data[targetModeCode];
+                    switch (mode)
                     {
                         case "arcade":
                             TeamSet.Default = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
@@ -67,7 +67,7 @@ public partial class PlayFabReadClient
                 }
                 else
                 {
-                    switch (Mode)
+                    switch (mode)
                     {
                         case "arcade":
                             TeamSet.Default = new PosKeySet();

@@ -463,14 +463,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b64822b218944cc8b599131a14206d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _connector: {fileID: 5553897477929448632}
-  RemoveButton: {fileID: 397087525308293043}
-  team1front: {fileID: 188679009172435764}
-  team1left: {fileID: 27863925876951001}
-  team1right: {fileID: 4955804786933037202}
-  warn: {fileID: 2584702724434167965}
+  connector: {fileID: 5553897477929448632}
+  removeButton: {fileID: 397087525308293043}
+  team1Front: {fileID: 188679009172435764}
+  team1Left: {fileID: 27863925876951001}
+  team1Right: {fileID: 4955804786933037202}
   selectedFrame: {fileID: 397087526803126541}
-  _nineForShow: {fileID: 4362441782267475170}
+  nineForShow: {fileID: 4362441782267475170}
   SkillEditButton: {fileID: 915743133412191350}
 --- !u!1 &7611406359091808434
 GameObject:

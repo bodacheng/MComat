@@ -28,7 +28,7 @@ namespace dataAccess
                     form.r = Arena3V3.GetInstanceIdOnPos(2);
                     break;
             }
-
+            
             var targetModeCode = "";
             switch (Mode)
             {
