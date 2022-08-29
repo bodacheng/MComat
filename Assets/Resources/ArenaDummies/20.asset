@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf3bb8ad816a44358eca5831d97217e, type: 3}
+  m_Name: 20
+  m_EditorClassIdentifier: 
+  BattleGroundID: 0
+  battleNameENG: 
+  battleNameJPG: 
+  battleNameCH: 
+  beforeFightStory: {fileID: 0}
+  StageButtonSprite: {fileID: 0}
+  unitsData:
+  - id: 
+    r_id: 3
+    level: 20
+    set:
+      a1: 99
+      a2: 102
+      a3: 55
+      b1: 150
+      b2: 4
+      b3: 125
+      c1: 68
+      c2: 58
+      c3: 53
+  - id: 
+    r_id: 4
+    level: 20
+    set:
+      a1: 53
+      a2: 156
+      a3: 80
+      b1: 58
+      b2: 113
+      b3: 89
+      c1: 68
+      c2: 99
+      c3: 166
+  - id: 
+    r_id: 2
+    level: 20
+    set:
+      a1: 182
+      a2: 58
+      a3: 167
+      b1: 166
+      b2: 55
+      b3: 53
+      c1: 125
+      c2: 27
+      c3: 99
+  stageLevel: 1
+  Team1HpRate: 1
+  Team2HpRate: 1
+  team1CGMode: 0
+  team2CGMode: 0
+  Team1Mode: 2
+  Team2Mode: 2
