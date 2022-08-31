@@ -15,15 +15,19 @@ namespace Soul
         AnimationCurve _usedZCurve;
         Decomposition _layBlocker;
         float _temp;
+        V_Damage target;
         
         public Knock_Off_State()
         {
             StateType = BehaviorType.KnockOff;
         }
         
-        public override void AI_State_enter(V_Damage newValue)
+        public override void AI_State_enter(V_Damage value)
         {
+            target = value;
             base.AI_State_enter();
+            FightParamsRef.ChangeLayerForLimbs(14);
+            
             _flyingStep = 0;
             _timeCounter = 0;
             _touchedBoundary = false;
@@ -39,12 +43,12 @@ namespace Soul
             _Rigidbody.velocity = Vector3.zero;
             Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.05f);
             //_xz = newValue.attacker._Center.WholeT.forward;
-            _xz = CalFixPushPos(newValue.impactComingPoint,  newValue.attacker.Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
+            _xz = CalFixPushPos(target.impactComingPoint,  target.attacker.Center.WholeT.position, gameObject.transform.position, target.from_weapon.damage_type);
             _xz = (_xz - gameObject.transform.position).normalized;
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
-            EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, null).Forget();
-            _usedYCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageYAnimationCurve : FightGlobalSetting._knockOffyAnimationCurve;
-            _usedZCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageZAnimationCurve : FightGlobalSetting._knockOffzAnimationCurve;
+            EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(target.from_weapon.element), target.DamageEffectPoint, target.CutRotation, null).Forget();
+            _usedYCurve = target.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageYAnimationCurve : FightGlobalSetting._knockOffyAnimationCurve;
+            _usedZCurve = target.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageZAnimationCurve : FightGlobalSetting._knockOffzAnimationCurve;
             FightParamsRef.EnableAllLimbs(false);
         }
 
@@ -57,6 +61,7 @@ namespace Soul
         {
             base.AI_State_exit();
             FightParamsRef.EnableAllLimbs(true);
+            FightParamsRef.ChangeLayerForLimbs(_DATA_CENTER._TeamConfig.mylayer);
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             FightParamsRef.GettingDamage = false;
             _SkillCancelFlag.turn_off_flag();
@@ -108,11 +113,13 @@ namespace Soul
                         // time_counter > 0.5f 这个数字是为了确保角色真能飞起来。
                         // 否则很有可能因为动画本身等复杂缘故，刚飞起来就被判断落地
                     {
+                        FightParamsRef.ChangeLayerForLimbs(_DATA_CENTER._TeamConfig.mylayer);
                         _flyingStep = 2;
                     }
 
                     if (_timeCounter > 2f)
                     {
+                        FightParamsRef.ChangeLayerForLimbs(_DATA_CENTER._TeamConfig.mylayer);
                         _flyingStep = 2;
                     }
                     break;

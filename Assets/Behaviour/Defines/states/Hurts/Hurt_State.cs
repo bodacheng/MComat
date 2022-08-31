@@ -75,6 +75,12 @@ namespace Soul
         public override void AI_State_enter(V_Damage newValue)
         {
             target = newValue;
+            if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && !_BasicPhysicSupport.hiddenMethods.Grounded)
+            {
+                _AIStateRunner.ChangeState("KnockOff", target);
+                return;
+            }
+            
             base.AI_State_enter();
             _Animator.applyRootMotion = false;
             PlayHurtAnim(newValue);
@@ -140,7 +146,7 @@ namespace Soul
                     _AIStateRunner.ChangeState("KnockOff", target);//HighDamgeStart(target);
                     return;
             }
-
+            
             FightParamsRef.GetKnockOffCount().PlusGauge(1f);
             FightParamsRef.GetKnockOffCount().PlusTimeCounter(0.2f);
             

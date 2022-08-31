@@ -131,7 +131,7 @@ namespace Log
                 var stateTriggerTimes = singleFightLogs[index].StateTriggerdTimes;
                 var one_interruptedTimes = singleFightLogs[index].StateInterruptedTimes;
 
-                foreach (KeyValuePair<string, int> keyValuePair in stateTriggerTimes)
+                foreach (var keyValuePair in stateTriggerTimes)
                 {
                     if (!StateTriggerTimes_whole.ContainsKey(keyValuePair.Key))
                     {
@@ -140,11 +140,10 @@ namespace Log
                     else
                     {
                         StateTriggerTimes_whole[keyValuePair.Key] += keyValuePair.Value;
-                        Debug.Log("Add :"+ keyValuePair.Key + ":"+ StateTriggerTimes_whole[keyValuePair.Key]);
                     }
                 }
 
-                foreach (KeyValuePair<string, int> keyValuePair in one_interruptedTimes)
+                foreach (var keyValuePair in one_interruptedTimes)
                 {
                     if (!StateInterruptedTimes_whole.ContainsKey(keyValuePair.Key))
                     {
