@@ -31,6 +31,7 @@ namespace Soul
             _canWakeUp = false;
             FightParamsRef.GettingDamage = true;
             _BasicPhysicSupport.SetUsingGravity(false);
+            _BasicPhysicSupport.hiddenMethods.ClearTouchedEnemyBody();
             _Animator.SetFloat("speed", 0f);
             _Animator.applyRootMotion = false;
             _Weapon_Animation_Events.ClearMarkerManagers();

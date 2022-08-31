@@ -41,7 +41,6 @@ namespace Soul
         public override void _State_FixedUpdate1()
         {
             counter += Time.fixedDeltaTime;
-            _Rigidbody.velocity = Vector3.zero;
         }
 
         public override void AI_State_exit()

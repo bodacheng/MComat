@@ -104,10 +104,7 @@ namespace Soul
         {
             _SkillCancelFlag.turn_off_flag();
             BehaviourDic.TryGetValue(num, out _tryBehavior);
-            if (_nowBehavior != null)
-            {
-                _nowBehavior.AI_State_exit();
-            }
+            _nowBehavior?.AI_State_exit();
 
             //注意看changeState环节，上一个状态的exit和下一个状态的enter是同一个帧执行的。
             //从这里我们曾经发现了动画播放模块一个重要问题，就是在特定情况下，

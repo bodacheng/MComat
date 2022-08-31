@@ -83,7 +83,9 @@ namespace Soul
         public override void AI_State_exit()
         {
             base.AI_State_exit();
+            _BasicPhysicSupport.hiddenMethods.ClearTouchedEnemyBody();
             _BasicPhysicSupport.OpenEnemyTouchingDrag(0);
+            _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _Weapon_Animation_Events.ClearMarkerManagers();
             pEvents.CloseAllPersonalityEffects();
             _BuffsRunner.EndSubCoroutineOfState(_rushCoroutine);//冲刺阶段有可能没有正常结束就被强制离开当前技能状态
@@ -107,7 +109,7 @@ namespace Soul
             //Animation_Manger.Animator.SetTrigger("face_reset");
             //Animation_Manger.Animator.SetTrigger("confident");
             _Animator.SetFloat("speed", 0f);
-            _BasicPhysicSupport.OpenEnemyTouchingDrag(3);
+            _BasicPhysicSupport.OpenEnemyTouchingDrag(1);
             _SkillCancelFlag.turn_off_flag();
             if (StateType == BehaviorType.GR)
                 _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
@@ -250,6 +252,16 @@ namespace Soul
                     }
                     break;
             }
+
+            if (_BasicPhysicSupport.hiddenMethods.TouchingEnemy() && _BasicPhysicSupport.hiddenMethods.Grounded)
+            {
+                _Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            }
+            else
+            {
+                _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            }
+            
             //if (isEventAttackLaunchState)
             //{
             //    this.DetectApprovedEventAttack();

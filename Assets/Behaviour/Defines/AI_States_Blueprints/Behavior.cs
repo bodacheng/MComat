@@ -396,7 +396,7 @@ namespace Soul
                 use_direction = P - gameObject.transform.position;
                 use_direction.y = 0;
                 Move(use_direction, speed, true);
-                if (_BasicPhysicSupport.hiddenMethods.ITouchedEnemyBody())
+                if (_BasicPhysicSupport.hiddenMethods.TouchingEnemy())
                 {
                     _SkillCancelFlag.hiddenMethods.SetAttackApproachingFlag(false);
                 }

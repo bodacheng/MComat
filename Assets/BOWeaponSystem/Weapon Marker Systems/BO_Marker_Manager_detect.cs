@@ -338,11 +338,8 @@ namespace HittingDetection
                 UnityEngine.Events.UnityAction we_C = WeaponEnergyExaust;
                 WeaponEnergyExaustMissions.Add(we_C);
             }
-            if (!(element == Element.Null && _WeaponMode == WeaponMode.EnergyFromBodyWeapon)) // 不希望普攻hitbox有能量消逝火花
+            if (_WeaponMode != WeaponMode.EnergyFromBodyWeapon) // 不希望普攻hitbox有能量消逝火花
                 EffectsManager.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(element), hitPointPara.onBodyPos, hitPointPara.qua, null).Forget();
-            else{
-                EffectsManager.GenerateEffect("hitwave", FightGlobalSetting.EffectPathDefine(element), hitPointPara.onBodyPos, hitPointPara.qua, null).Forget();
-            }
         }
         
         void WeaponEnergyExaust()

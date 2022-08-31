@@ -17,6 +17,7 @@ public class BasicPhysicSupport : MonoBehaviour
     public class HiddenMethods
     {
         readonly BasicPhysicSupport _BasicPhysicSupport;
+        public bool EnemyTouchingDrag;
         
         public HiddenMethods(BasicPhysicSupport _BasicPhysicSupport)
         {
@@ -45,14 +46,12 @@ public class BasicPhysicSupport : MonoBehaviour
         }
         
         // 与敌人的接触摩操功能
-        public bool EnemyTouchingDrag;
         readonly List<Collider> _touchingEnemyCs = new List<Collider>();
-        public bool ITouchedEnemyBody()
+        
+        public bool TouchingEnemy()
         {
             return _touchingEnemyCs.Count > 0;
         }
-
-        public int _dragLevel;
         
         //弃用
         private Vector3 keptEnemyPoint;
@@ -68,23 +67,9 @@ public class BasicPhysicSupport : MonoBehaviour
         
         public void AddTouchedEnemyBody(Collider C)
         {
-            if (!EnemyTouchingDrag)
-                return;
             if (!_touchingEnemyCs.Contains(C))
                 _touchingEnemyCs.Add(C);
-            switch (_dragLevel)
-            {
-                case 1:
-                    _BasicPhysicSupport.Rigidbody.drag = 100f;
-                    break;
-                case 2:
-                    _BasicPhysicSupport.Rigidbody.drag = 200f;
-                    break;
-                case 3:
-                    _BasicPhysicSupport.Rigidbody.drag = 300f;
-                    break;
-            }
-
+            
             // if (!lockedKept && touchingEnemyCs.Count > 0)
             // {
             //     lockedKept = true;
@@ -100,11 +85,6 @@ public class BasicPhysicSupport : MonoBehaviour
         }
         public void RemoveTouchedEnemyBody(Collider C)
         {
-            if (!EnemyTouchingDrag)
-            {
-                _touchingEnemyCs.Clear();
-                return;
-            }
             if (_touchingEnemyCs.Contains(C))
                 _touchingEnemyCs.Remove(C);
         }
@@ -142,7 +122,7 @@ public class BasicPhysicSupport : MonoBehaviour
         
         public void RecoverRootPosChange( )
         {
-            if (!ITouchedEnemyBody() && _BasicPhysicSupport.Rigidbody.velocity == Vector3.zero)
+            if (!TouchingEnemy() && _BasicPhysicSupport.Rigidbody.velocity == Vector3.zero)
                 _BasicPhysicSupport._DATA_CENTER.WholeT.transform.position += _BasicPhysicSupport._DATA_CENTER.Animation_Manger.AnimatorRef.deltaPosition;
         }
 
@@ -158,6 +138,7 @@ public class BasicPhysicSupport : MonoBehaviour
     void Awake()
     {
         hiddenMethods = new HiddenMethods(this);
+        Rigidbody.drag = 0;
     }
     
     void Update()
@@ -177,18 +158,15 @@ public class BasicPhysicSupport : MonoBehaviour
 
     public void OpenEnemyTouchingDrag(int open)
     {
-        hiddenMethods._dragLevel = open;
-        if (open == 0)
-        {
-            Rigidbody.drag = 0;
-        }
         hiddenMethods.EnemyTouchingDrag = open != 0;
-        if (hiddenMethods.EnemyTouchingDrag == false)
+        if (!hiddenMethods.EnemyTouchingDrag)
             hiddenMethods.ClearTouchedEnemyBody();
     }
 
+    
     void OnCollisionEnter(Collision collision)
     {
+        if (!hiddenMethods.EnemyTouchingDrag) return;
         if (_DATA_CENTER._MyBehaviorRunner.IfRunning())
         {
             if (hiddenMethods.IfStepOnEnemy(collision.collider))
@@ -200,6 +178,7 @@ public class BasicPhysicSupport : MonoBehaviour
 
     void OnCollisionExit(Collision collision)
     {
+        if (!hiddenMethods.EnemyTouchingDrag) return;
         if (_DATA_CENTER._MyBehaviorRunner.IfRunning())
         {
             if (hiddenMethods.IfStepOnEnemy(collision.collider))

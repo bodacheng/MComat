@@ -61,6 +61,7 @@ namespace Soul
         public override void AI_State_exit()
         {
             base.AI_State_exit();
+            _BasicPhysicSupport.OpenEnemyTouchingDrag(0);
             FightParamsRef.GettingDamage = false;
             if (physicMissionDisposable != null && !physicMissionDisposable.IsDisposed)
                 physicMissionDisposable.Dispose();
@@ -82,7 +83,7 @@ namespace Soul
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             TimeCounter = 0f;
             pEvents.CloseAllPersonalityEffects();
-
+            
             if (_BuffsRunner.Freesing)
                 return;
 
@@ -103,15 +104,15 @@ namespace Soul
                     break;
                 case DamageType.heavy_damage_forward:
                     used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
-                    NormalStart(target);
+                    HeavyStart(target);
                     break;
                 case DamageType.supper_damage_forward:
                     used_dizzy_time = FightGlobalSetting._superhit_lastingtime;
-                    NormalStart(target);
+                    HeavyStart(target);
                     EffectsManager.GenerateEffect("electric_s_e", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, _DATA_CENTER.geometryCenter).Forget();
                     break;
                 case DamageType.draw:
-                    DrawDamgeStart(target);
+                    DrawDamageStart(target);
                     break;
                 case DamageType.explosion:
                     ExplosionDamgeStart(target);
@@ -142,7 +143,7 @@ namespace Soul
 
             FightParamsRef.GetKnockOffCount().PlusGauge(1f);
             FightParamsRef.GetKnockOffCount().PlusTimeCounter(0.2f);
-
+            
             if (FightParamsRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent)
             {
                 FightParamsRef.GetKnockOffCount().SetGauge(0f);

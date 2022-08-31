@@ -23,7 +23,7 @@ namespace Soul
         public override void AI_State_enter()
         {
             base.AI_State_enter();
-            _BasicPhysicSupport.OpenEnemyTouchingDrag(2);
+            _BasicPhysicSupport.OpenEnemyTouchingDrag(1);
             _Rigidbody.velocity = Vector3.zero;
             Animation_Manger.SetTrigger("face_reset");
             Animation_Manger.SetTrigger("confident");
@@ -45,6 +45,7 @@ namespace Soul
         {
             base.AI_State_exit();
             _BasicPhysicSupport.OpenEnemyTouchingDrag(0);
+            _BasicPhysicSupport.hiddenMethods.ClearTouchedEnemyBody();
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(false);
         }
         #endregion
