@@ -86,7 +86,7 @@ namespace mainMenu
                 Clear();
                 return;
             }
-            var skillConfig = SkillConfigTable.GetSkillConfig(currentStone.skillId);
+            var skillConfig = SkillConfigTable.GetSkillConfig(currentStone.SkillId);
             IconForShow(skillConfig.RECORD_ID);
             keyname.text = skillConfig.REAL_NAME;
             Showname.text = skillConfig.RECORD_ID + ":" + SkillNameTable.GetSkillName(skillConfig.RECORD_ID);
@@ -97,13 +97,13 @@ namespace mainMenu
             float.TryParse(row.EstimateDamage, out float at);
             if (AT != null)
             {
-                AT.text = "MaxDamage = " + SkillEntity.ATCal(at, currentStone.level);
+                AT.text = "MaxDamage = " + SkillEntity.ATCal(at, currentStone.Level);
             }
             if (HP != null)
             {
-                HP.text = "MaxHp = " + SkillEntity.StoneHpCal(hp, currentStone.level);
+                HP.text = "MaxHp = " + SkillEntity.StoneHpCal(hp, currentStone.Level);
             }
-            StoneTargetLevel.text = "Level:" + currentStone.level;
+            StoneTargetLevel.text = "Level:" + currentStone.Level;
             transform.gameObject.SetActive(true);
         }
         

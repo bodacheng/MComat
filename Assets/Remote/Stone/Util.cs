@@ -48,10 +48,10 @@ namespace dataAccess
                 {
                     continue;//原生技能不显示在技能石盒子内
                 }
-                var _SkillConfig = SkillConfigTable.GetSkillConfig(keyValuePair.Value.skillId);
+                var _SkillConfig = SkillConfigTable.GetSkillConfig(keyValuePair.Value.SkillId);
                 if (_SkillConfig == null)
                 {
-                    Debug.Log("????"+ keyValuePair.Value.skillId);
+                    Debug.Log("????"+ keyValuePair.Value.SkillId);
                     continue;
                 }
                 var exs = filterForm.exType.ToList();
@@ -83,7 +83,7 @@ namespace dataAccess
                 var infoModel = Get(origin[i]);
                 if (notUsing)
                 {
-                    if (Units.Get(infoModel.unitInstanceId) != null)
+                    if (Units.Get(infoModel.UnitInstanceId) != null)
                     {
                         continue;
                     }
@@ -123,7 +123,7 @@ namespace dataAccess
             var targetStones = new List<StoneOfPlayerInfo>();
             foreach(var pair in Dic)
             {
-                if (pair.Value.unitInstanceId == instanceId)
+                if (pair.Value.UnitInstanceId == instanceId)
                 {
                     targetStones.Add(pair.Value);
                 }
@@ -137,7 +137,7 @@ namespace dataAccess
             StoneOfPlayerInfo targetStone = null;
             foreach(var keyValuePair in Dic)
             {
-                if (keyValuePair.Value.unitInstanceId == instanceId && keyValuePair.Value.Inherent == "true")
+                if (keyValuePair.Value.UnitInstanceId == instanceId && keyValuePair.Value.Inherent == "true")
                 {
                     targetStone = keyValuePair.Value;
                 }

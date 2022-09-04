@@ -30,7 +30,7 @@ public partial class SkillEditLayer : UILayer
         var unitConfig = Units.GetUnitConfig(info.r_id);
         var originSkillInfo = Stones.GetOriginSkillOfUnit(info.id);
         // 这一步仅仅是根据账户拥有技能石的情况来确定了可行的技能组，也就是说根据手上的石头这个技能组能拼出来，但没提供具体的石头，所以防重复工作在实际装备技能石的时候（AddRandomStoneToSlot）也要做
-        var targetSkillSet = SkillSet.RandomSkillSet(unitConfig.TYPE, originSkillInfo?.skillId, 1, true);
+        var targetSkillSet = SkillSet.RandomSkillSet(unitConfig.TYPE, originSkillInfo?.SkillId, 1, true);
         ForceClearAll();
         Finish(info, targetSkillSet);
     }
@@ -59,16 +59,16 @@ public partial class SkillEditLayer : UILayer
         
         var originSkillInfo = Stones.GetOriginSkillOfUnit(monsterOfPlayerId);
         var Options = Stones.GetMyStonesBySkillID(skillID);
-        if (originSkillInfo != null && skillID == originSkillInfo.skillId)
+        if (originSkillInfo != null && skillID == originSkillInfo.SkillId)
         {
             NineSlot.allSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(originSkillInfo.InstanceId));
         }else{
-            Options.OrderByDescending(x => Stones.Get(x).level);
+            Options.OrderByDescending(x => Stones.Get(x).Level);
             string targetStoneId = null;
             for (int i = 0; i < Options.Count; i++)
             {
                 StoneOfPlayerInfo stoneInfo = Stones.Get(Options[i]);
-                if (dataAccess.Units.Get(stoneInfo.unitInstanceId) == null)
+                if (dataAccess.Units.Get(stoneInfo.UnitInstanceId) == null)
                 {
                     targetStoneId = Options[i];
                     break;

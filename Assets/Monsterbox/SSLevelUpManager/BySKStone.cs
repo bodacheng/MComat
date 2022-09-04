@@ -18,7 +18,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         foreach (var slot in MaterialSlots)
         {
             var Material = boxCell.GetItem();
-            if (slot.GetItem() == null && Material != null && Material._SkillConfig.RECORD_ID == target.skillId) // 只能以同技能石为材料
+            if (slot.GetItem() == null && Material != null && Material._SkillConfig.RECORD_ID == target.SkillId) // 只能以同技能石为材料
             {
                 if (Material.instanceId != target.InstanceId)
                 {
@@ -45,7 +45,7 @@ public partial class SSLevelUpManager : MonoBehaviour
                 var stoneInstanceID = stones[^1];
                 var itemModel = Stones.GetRenderModel(stoneInstanceID);
                 var itemData = Stones.Get(stoneInstanceID);
-                if (targetInstanceID != stoneInstanceID && dataAccess.Units.Get(itemData.unitInstanceId) == null)
+                if (targetInstanceID != stoneInstanceID && dataAccess.Units.Get(itemData.UnitInstanceId) == null)
                 {
                     MaterialSlots[slotIndex].AddItem(itemModel);
                     slotIndex += 1;

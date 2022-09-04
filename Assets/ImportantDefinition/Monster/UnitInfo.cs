@@ -56,37 +56,37 @@ public class UnitInfo
             var levels = new List<float>();
             for (var i = 0; i < targets.Count; i++)
             {
-                switch (targets[i].slot)
+                switch (targets[i].Slot)
                 {
                     case "1":
-                        set.a1 = targets[i].skillId;
+                        set.a1 = targets[i].SkillId;
                         break;
                     case "2":
-                        set.a2 = targets[i].skillId;
+                        set.a2 = targets[i].SkillId;
                         break;
                     case "3":
-                        set.a3 = targets[i].skillId;
+                        set.a3 = targets[i].SkillId;
                         break;
                     case "4":
-                        set.b1 = targets[i].skillId;
+                        set.b1 = targets[i].SkillId;
                         break;
                     case "5":
-                        set.b2 = targets[i].skillId;
+                        set.b2 = targets[i].SkillId;
                         break;
                     case "6":
-                        set.b3 = targets[i].skillId;
+                        set.b3 = targets[i].SkillId;
                         break;
                     case "7":
-                        set.c1 = targets[i].skillId;
+                        set.c1 = targets[i].SkillId;
                         break;
                     case "8":
-                        set.c2 = targets[i].skillId;
+                        set.c2 = targets[i].SkillId;
                         break;
                     case "9":
-                        set.c3 = targets[i].skillId;
+                        set.c3 = targets[i].SkillId;
                         break;
                 }
-                levels.Add(targets[i].level);
+                levels.Add(targets[i].Level);
             }
             
             unitInfo.level = set.GetAerLevel(levels);
@@ -109,34 +109,34 @@ public class UnitInfo
         string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;
         for (var i = 0; i < equipments.Count; i++)
         {
-            switch (equipments[i].slot)
+            switch (equipments[i].Slot)
             {
                 case "1":
-                    A1 = equipments[i].skillId;
+                    A1 = equipments[i].SkillId;
                     break;
                 case "2":
-                    A2 = equipments[i].skillId;
+                    A2 = equipments[i].SkillId;
                     break;
                 case "3":
-                    A3 = equipments[i].skillId;
+                    A3 = equipments[i].SkillId;
                     break;
                 case "4":
-                    B1 = equipments[i].skillId;
+                    B1 = equipments[i].SkillId;
                     break;
                 case "5":
-                    B2 = equipments[i].skillId;
+                    B2 = equipments[i].SkillId;
                     break;
                 case "6":
-                    B3 = equipments[i].skillId;
+                    B3 = equipments[i].SkillId;
                     break;
                 case "7":
-                    C1 = equipments[i].skillId;
+                    C1 = equipments[i].SkillId;
                     break;
                 case "8":
-                    C2 = equipments[i].skillId;
+                    C2 = equipments[i].SkillId;
                     break;
                 case "9":
-                    C3 = equipments[i].skillId;
+                    C3 = equipments[i].SkillId;
                     break;
             }
         }

@@ -36,31 +36,31 @@ public partial class GotchaResultLayer : UILayer
             switch(i)
             {
                 case 0:
-                    a1 = results[i].skillId;
+                    a1 = results[i].SkillId;
                     break;
                 case 1:
-                    a2 = results[i].skillId;
+                    a2 = results[i].SkillId;
                     break;
                 case 2:
-                    a3 = results[i].skillId;
+                    a3 = results[i].SkillId;
                     break;
                 case 3:
-                    b1 = results[i].skillId;
+                    b1 = results[i].SkillId;
                     break;
                 case 4:
-                    b2 = results[i].skillId;
+                    b2 = results[i].SkillId;
                     break;
                 case 5:
-                    b3 = results[i].skillId;
+                    b3 = results[i].SkillId;
                     break;
                 case 6:
-                    c1 = results[i].skillId;
+                    c1 = results[i].SkillId;
                     break;
                 case 7:
-                    c2 = results[i].skillId;
+                    c2 = results[i].SkillId;
                     break;
                 case 8:
-                    c3 = results[i].skillId;
+                    c3 = results[i].SkillId;
                     break;
             }
         }

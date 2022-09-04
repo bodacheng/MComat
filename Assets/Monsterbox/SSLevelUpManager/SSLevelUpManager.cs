@@ -28,7 +28,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         autoAdd.onClick.AddListener(() =>
         {
             var info = Stones.Get(targetInstanceID);
-            AutoAddMaterials(info.skillId);
+            AutoAddMaterials(info.SkillId);
         });
         
         MaterialSlots = new List<StoneCell>
@@ -53,7 +53,7 @@ public partial class SSLevelUpManager : MonoBehaviour
             if (item == null)
                 return;
             var target = Stones.Get(targetInstanceID);
-            if (item.instanceId != targetInstanceID && item._SkillConfig.RECORD_ID == target.skillId)
+            if (item.instanceId != targetInstanceID && item._SkillConfig.RECORD_ID == target.SkillId)
             {
                 StoneCell.Install(source, to);
             }
@@ -78,7 +78,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
         
         confirmLevelUp.gameObject.SetActive(true);
-        int needGD = target.level * 10 + 100;
+        int needGD = target.Level * 10 + 100;
         GDCount.text = needGD.ToString();
         if (Currencies.CoinCount < needGD)
         {

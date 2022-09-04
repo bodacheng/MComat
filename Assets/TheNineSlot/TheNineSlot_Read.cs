@@ -24,7 +24,7 @@ namespace mainMenu
 
             for (var i = 0; i < equipments.Count; i++)
             {
-                var usingPosInt = int.Parse(equipments[i].slot);
+                var usingPosInt = int.Parse(equipments[i].Slot);
                 if (equipments[i].InstanceId != null)
                 {
                     allSlot[usingPosInt - 1].TakeASkillStoneFromBoxToSlot(equipments[i].InstanceId, Color.white);

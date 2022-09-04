@@ -33,10 +33,10 @@ public partial class PlayFabReadClient
                         var Info = new StoneOfPlayerInfo
                         {
                             InstanceId = item.ItemInstanceId,
-                            skillId = item.ItemId,
-                            level = (item.CustomData != null && item.CustomData.ContainsKey("level")) ? Convert.ToInt32(item.CustomData["level"]) : 1,
-                            unitInstanceId = (item.CustomData != null && item.CustomData.ContainsKey("unitInstanceId")) ? item.CustomData["unitInstanceId"] : null,
-                            slot = (item.CustomData != null && item.CustomData.ContainsKey("slot")) ? item.CustomData["slot"] : null
+                            SkillId = item.ItemId,
+                            Level = (item.CustomData != null && item.CustomData.ContainsKey("level")) ? Convert.ToInt32(item.CustomData["level"]) : 1,
+                            UnitInstanceId = (item.CustomData != null && item.CustomData.ContainsKey("unitInstanceId")) ? item.CustomData["unitInstanceId"] : null,
+                            Slot = (item.CustomData != null && item.CustomData.ContainsKey("slot")) ? item.CustomData["slot"] : null
                         };
                         Stones.Add(Info);
                     }

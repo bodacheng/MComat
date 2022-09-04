@@ -47,7 +47,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         if (myDadItem)
         {
             StoneOfPlayerInfo info = Stones.Get(myDadItem.instanceId);
-            level.text = info.level.ToString();
+            level.text = info.Level.ToString();
         }
         else
         {
@@ -105,13 +105,13 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             return;
         }
         var SSInfo = Stones.Get(Item.instanceId);
-        if (SSInfo == null || SSInfo.unitInstanceId == null)
+        if (SSInfo == null || SSInfo.UnitInstanceId == null)
         {
             targetIcon.gameObject.SetActive(false);
             return;
         }
             
-        UnitInfo _one = dataAccess.Units.Get(SSInfo.unitInstanceId);
+        UnitInfo _one = dataAccess.Units.Get(SSInfo.UnitInstanceId);
         if (_one == null)
         {
             targetIcon.gameObject.SetActive(false);

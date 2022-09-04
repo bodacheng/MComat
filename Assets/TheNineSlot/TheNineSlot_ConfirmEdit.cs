@@ -16,10 +16,10 @@ namespace mainMenu
             for (var i = 0; i < equipping.Count; i++)
             {
                 var stone = Stones.Get(equipping[i].InstanceId);
-                if (stone.slot != null)
+                if (stone.Slot != null)
                 {
-                    if (!beforeDic.ContainsKey(stone.slot))
-                        beforeDic.Add(stone.slot, stone.InstanceId);
+                    if (!beforeDic.ContainsKey(stone.Slot))
+                        beforeDic.Add(stone.Slot, stone.InstanceId);
                     else
                     {
                         Debug.Log("unit :"+ unitInfo.id+ " has multi stones on one slot.");
@@ -118,14 +118,14 @@ namespace mainMenu
             {
                 if (formerStoneInfo.Inherent == "true")
                 {
-                    Debug.Log("无法卸载原生技能.skillID: "+ formerStoneInfo.skillId + "  skillStoneOfPlayerId" + formerStoneInfo.InstanceId);
+                    Debug.Log("无法卸载原生技能.skillID: "+ formerStoneInfo.SkillId + "  skillStoneOfPlayerId" + formerStoneInfo.InstanceId);
                     yield break;
                 }
                 if (!GetUsingStonesId().Contains(formerStoneInfo.InstanceId)) //代表原来那个位置上有个技能石，但现在它在技能背包，这轮技能编辑它是要被卸载到背包里去。
                 {
                     Debug.Log("技能石头："+ formerStoneInfo.InstanceId + "被卸下");
-                    formerStoneInfo.unitInstanceId = null;
-                    formerStoneInfo.slot = null;
+                    formerStoneInfo.UnitInstanceId = null;
+                    formerStoneInfo.Slot = null;
                     //yield return MySkillStones.Update(formerStoneInfo.InstanceId);
                 }else{
                     // 说明这个位置上原先的技能石现在在九宫格的其他位置上，轮到所在slot的处理时自然会更新那个技能石的信息。

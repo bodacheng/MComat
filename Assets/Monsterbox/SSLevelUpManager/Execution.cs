@@ -41,8 +41,8 @@ public partial class SSLevelUpManager : MonoBehaviour
         void Temp(string instanceID)
         {
             var ssInfo = Stones.Get(instanceID);
-            materialLevels.Add(ssInfo.level);
-            addLevel += (ssInfo.level - 1);
+            materialLevels.Add(ssInfo.Level);
+            addLevel += (ssInfo.Level - 1);
             if (materialLevels.Count == 4)
                 addLevel += 1;
         }

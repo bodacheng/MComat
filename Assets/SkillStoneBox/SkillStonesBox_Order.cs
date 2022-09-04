@@ -56,8 +56,8 @@ namespace mainMenu
                 {
                     StoneOfPlayerInfo myStone1 = Stones.Get(targets[j]);
                     StoneOfPlayerInfo myStone2 = Stones.Get(targets[j + 1]);
-                    SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfig(myStone1.skillId);
-                    SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfig(myStone2.skillId);
+                    SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfig(myStone1.SkillId);
+                    SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfig(myStone2.SkillId);
 
                     if (order == 1 ? int.Parse(skillConfig1.RECORD_ID) > int.Parse(skillConfig2.RECORD_ID) : int.Parse(skillConfig2.RECORD_ID) < int.Parse(skillConfig1.RECORD_ID))
                     {
@@ -80,7 +80,7 @@ namespace mainMenu
                     StoneOfPlayerInfo myStone1 = Stones.Get(targets[j]);
                     StoneOfPlayerInfo myStone2 = Stones.Get(targets[j+1]);
                     
-                    if (order == 1 ? myStone1.level > myStone2.level : myStone1.level < myStone2.level)
+                    if (order == 1 ? myStone1.Level > myStone2.Level : myStone1.Level < myStone2.Level)
                     {
                         string temp = targets[j];
                         targets[j] = targets[j + 1];
@@ -100,8 +100,8 @@ namespace mainMenu
                 {
                     StoneOfPlayerInfo myStone1 = Stones.Get(targets[j]);
                     StoneOfPlayerInfo myStone2 = Stones.Get(targets[j+1]);
-                    SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfig(myStone1.skillId);
-                    SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfig(myStone2.skillId);
+                    SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfig(myStone1.SkillId);
+                    SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfig(myStone2.SkillId);
                     
                     if (order == 1 ? skillConfig1.RARITY_LEVEL > skillConfig2.RARITY_LEVEL : skillConfig2.RARITY_LEVEL < skillConfig1.RARITY_LEVEL)
                     {

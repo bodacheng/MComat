@@ -48,7 +48,7 @@ public partial class CloudScript
             
             foreach (var stone in changedStoneList)
             {
-                ChangedDic.Add(stone.InstanceId, new Tuple<string, string>(stone.unitInstanceId, stone.slot));
+                ChangedDic.Add(stone.InstanceId, new Tuple<string, string>(stone.UnitInstanceId, stone.Slot));
             }
             success.Invoke(ChangedDic);
         },

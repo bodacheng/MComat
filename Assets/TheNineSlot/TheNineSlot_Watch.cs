@@ -159,8 +159,8 @@ namespace mainMenu
             
             foreach(StoneOfPlayerInfo one in stonelist)
             {
-                level.Add(one.level);
-                skillIDs.Add(one.skillId);
+                level.Add(one.Level);
+                skillIDs.Add(one.SkillId);
             }
             
             _HP.text = "HP:" + INI_Hp(skillIDs, level);

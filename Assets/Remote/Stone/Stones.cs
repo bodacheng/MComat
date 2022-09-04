@@ -9,8 +9,6 @@ namespace dataAccess
     {
         static readonly IDictionary<string, StoneOfPlayerInfo> Dic = new Dictionary<string, StoneOfPlayerInfo>();
         static readonly IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();
-
-        public static IDictionary<string, StoneOfPlayerInfo> myStones => Dic;
         
         public static void Clear()
         {
@@ -26,11 +24,11 @@ namespace dataAccess
         public static List<string> GetMyStonesBySkillID(string skillID)
         {
             var infoModels = new List<string>();
-            foreach (var keyValuePair in Dic)
+            foreach (var kv in Dic)
             {
-                if (keyValuePair.Value.skillId == skillID)
+                if (kv.Value.SkillId == skillID)
                 {
-                    infoModels.Add(keyValuePair.Value.InstanceId);
+                    infoModels.Add(kv.Value.InstanceId);
                 }
             }
             return infoModels;
@@ -77,8 +75,8 @@ namespace dataAccess
                     return;
                 }
                 var stoneOfPlayerInfo = Dic[kv.Key];
-                stoneOfPlayerInfo.unitInstanceId = kv.Value.Item1;
-                stoneOfPlayerInfo.slot = kv.Value.Item2;
+                stoneOfPlayerInfo.UnitInstanceId = kv.Value.Item1;
+                stoneOfPlayerInfo.Slot = kv.Value.Item2;
             }
         }
 
@@ -90,10 +88,10 @@ namespace dataAccess
             RenderModelDic.Clear();
             foreach (KeyValuePair<string, StoneOfPlayerInfo> pair in Dic)
             {
-                SkillConfig _SkillConfig = SkillConfigTable.GetSkillConfig(pair.Value.skillId);
+                var _SkillConfig = SkillConfigTable.GetSkillConfig(pair.Value.SkillId);
                 if (_SkillConfig == null)
                 {
-                    Debug.Log("巨大问题,技能id似乎未定义：" + pair.Value.skillId);
+                    Debug.Log("巨大问题,技能id似乎未定义：" + pair.Value.SkillId);
                     return;
                 }
                 GenerateStoneModelByAccID(pair.Value.InstanceId);

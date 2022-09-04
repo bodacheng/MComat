@@ -14,34 +14,34 @@ public partial class NineForShow : MonoBehaviour
         
         for (var i = 0; i < skillStoneOfPlayerInfoModels.Count; i++)
         {
-            switch(skillStoneOfPlayerInfoModels[i].slot)
+            switch(skillStoneOfPlayerInfoModels[i].Slot)
             {
                 case "1":
-                    A1SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    A1SkillID = skillStoneOfPlayerInfoModels[i].SkillId;
                 break;
                 case "2":
-                    A2SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    A2SkillID = skillStoneOfPlayerInfoModels[i].SkillId;
                 break;
                 case "3":
-                    A3SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    A3SkillID = skillStoneOfPlayerInfoModels[i].SkillId;
                 break;
                 case "4":
-                    B1SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    B1SkillID = skillStoneOfPlayerInfoModels[i].SkillId;
                 break;
                 case "5":
-                    B2SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    B2SkillID = skillStoneOfPlayerInfoModels[i].SkillId;
                 break;
                 case "6":
-                    B3SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    B3SkillID = skillStoneOfPlayerInfoModels[i].SkillId;
                 break;
                 case "7":
-                    C1SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    C1SkillID = skillStoneOfPlayerInfoModels[i].SkillId;
                 break;
                 case "8":
-                    C2SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    C2SkillID = skillStoneOfPlayerInfoModels[i].SkillId;
                 break;
                 case "9":
-                    C3SkillID = skillStoneOfPlayerInfoModels[i].skillId;
+                    C3SkillID = skillStoneOfPlayerInfoModels[i].SkillId;
                 break;
             }
         }

@@ -48,7 +48,7 @@ public partial class GotchaResultLayer : UILayer
     /// <returns></returns>
     async void StarScreenMoveAnim(StoneOfPlayerInfo info, Vector3 waitPos, Vector3 endPos)
     {
-        var skillConfig = SkillConfigTable.GetSkillConfig(info.skillId);
+        var skillConfig = SkillConfigTable.GetSkillConfig(info.SkillId);
         var screenStarName = "";
         var explosionName = "";
         switch(skillConfig.SP_LEVEL) // 这里应该是rarelevel

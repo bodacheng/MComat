@@ -87,7 +87,7 @@ public partial class SkillSet
                 Debug.Log("无法为" + targetSlot + "找到合适技能石");
                 return skillSet;
             }
-            skillId = stoneInfoModel.skillId;
+            skillId = stoneInfoModel.SkillId;
         }
         else
         {

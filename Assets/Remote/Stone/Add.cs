@@ -24,9 +24,9 @@ namespace dataAccess
                     return;
             }
             var info = Get(instanceId);
-            var item = await GenerateStoneModel(info.skillId, true);
+            var item = await GenerateStoneModel(info.SkillId, true);
             item.Inherent = info.Inherent == "true";
-            item._SkillConfig = SkillConfigTable.GetSkillConfig(Dic[instanceId].skillId);
+            item._SkillConfig = SkillConfigTable.GetSkillConfig(Dic[instanceId].SkillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
             item.instanceId = instanceId;
             item.gameObject.transform.SetParent(PreScene.target.stonesTempContainer);

@@ -18,19 +18,19 @@ namespace dataAccess
         /// <summary>
         /// スキルレコードID
         /// </summary>
-        public string skillId { get; set; }
+        public string SkillId { get; set; }
         
-        public int level { get; set; }
+        public int Level { get; set; }
         
         /// <summary>
         /// 使用中のプレーヤ所有モンスターID
         /// </summary>
-        public string unitInstanceId { get; set; }
+        public string UnitInstanceId { get; set; }
         
         /// <summary>
         /// 装备的位置槽。从1到9为A1到C3
         /// </summary>
-        public string slot { get; set; }
+        public string Slot { get; set; }
         
         /// <summary>
         /// 是否为角色原生技能
@@ -39,16 +39,16 @@ namespace dataAccess
         
         public void ExpUpForStoneShow(float formerExp, float newExp)
         {
-            SKStoneItem SKStone = Stones.GetRenderModel(InstanceId);
+            var SKStone = Stones.GetRenderModel(InstanceId);
             SKStone.LevelUpShow(formerExp, newExp);
         }
         
         public StoneOfPlayerInfo Clone()
         {
-            StoneOfPlayerInfo info = new StoneOfPlayerInfo()
+            var info = new StoneOfPlayerInfo()
             {
                 InstanceId = this.InstanceId,
-                skillId = this.skillId,
+                SkillId = this.SkillId,
                 Inherent = this.Inherent
             };
             return info;

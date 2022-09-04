@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
 using dataAccess;
@@ -7,7 +6,6 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
-using mainMenu;
 
 public partial class CloudScript
 {
@@ -24,16 +22,15 @@ public partial class CloudScript
                 GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
             },
             (ExecuteCloudScriptResult result) => {
-                PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                object messageValue;
-                jsonResult.TryGetValue("messageValue", out messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
+                var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                jsonResult.TryGetValue("messageValue", out var messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
                 Debug.Log(messageValue);
                 
                 var list = JsonConvert.DeserializeObject<List<JObject>>(messageValue.ToString()).Select(x => x?.ToObject<Dictionary<string, string>>()).ToList();
-                List<StoneOfPlayerInfo> GotStones = new List<StoneOfPlayerInfo> ();
+                var GotStones = new List<StoneOfPlayerInfo> ();
                 foreach (var v in list)
                 {
-                    StoneOfPlayerInfo stoneOfPlayerInfo = new StoneOfPlayerInfo();
+                    var stoneOfPlayerInfo = new StoneOfPlayerInfo();
                     foreach (var s in v)
                     {
                         if (s.Key == "ItemInstanceId")
@@ -42,8 +39,8 @@ public partial class CloudScript
                         }
                         if (s.Key == "ItemId")
                         {
-                            stoneOfPlayerInfo.skillId = s.Value;
-                            Debug.Log("Got this:" + stoneOfPlayerInfo.skillId);
+                            stoneOfPlayerInfo.SkillId = s.Value;
+                            Debug.Log("Got this:" + stoneOfPlayerInfo.SkillId);
                         }
                     }
                     Stones.Add(stoneOfPlayerInfo);
