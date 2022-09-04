@@ -35,23 +35,6 @@ namespace dataAccess
         /// <summary>
         /// 是否为角色原生技能
         /// </summary>
-        public string Inherent { get; set; }
-        
-        public void ExpUpForStoneShow(float formerExp, float newExp)
-        {
-            var SKStone = Stones.GetRenderModel(InstanceId);
-            SKStone.LevelUpShow(formerExp, newExp);
-        }
-        
-        public StoneOfPlayerInfo Clone()
-        {
-            var info = new StoneOfPlayerInfo()
-            {
-                InstanceId = this.InstanceId,
-                SkillId = this.SkillId,
-                Inherent = this.Inherent
-            };
-            return info;
-        }
+        public string Born { get; set; }
     }
 }

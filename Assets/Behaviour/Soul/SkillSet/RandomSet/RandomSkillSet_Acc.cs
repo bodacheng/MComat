@@ -77,11 +77,11 @@ public partial class SkillSet
             };
         }
 
-        List<string> exceptSKIds = skillSet.SkillIDList();
+        var exceptSKIds = skillSet.SkillIDList();
         string skillId = null;
         if (baseOnAcc)
         {
-            StoneOfPlayerInfo stoneInfoModel = Stones.SearchStoneForRandomSet(filterForm, exceptSKIds);
+            var stoneInfoModel = Stones.SearchStoneForRandomSet(filterForm, exceptSKIds);
             if (stoneInfoModel == null) // 如果账户已经没有符合要求的石头
             {
                 Debug.Log("无法为" + targetSlot + "找到合适技能石");
@@ -91,7 +91,7 @@ public partial class SkillSet
         }
         else
         {
-            string skid = RandomSkillIDOfStone(filterForm, exceptSKIds);
+            var skid = RandomSkillIDOfStone(filterForm, exceptSKIds);
             if (skid == null) // 如果账户已经没有符合要求的石头
             {
                 Debug.Log("无法为" + targetSlot + "找到合适技能石");

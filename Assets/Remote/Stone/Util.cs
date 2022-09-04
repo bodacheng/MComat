@@ -44,10 +44,6 @@ namespace dataAccess
             var SkillStonesOfTypeAndExType = new List<string>(); //技能石本地id
             foreach (var keyValuePair in Dic)
             {
-                if (keyValuePair.Value.Inherent == "true")
-                {
-                    continue;//原生技能不显示在技能石盒子内
-                }
                 var _SkillConfig = SkillConfigTable.GetSkillConfig(keyValuePair.Value.SkillId);
                 if (_SkillConfig == null)
                 {
@@ -137,7 +133,7 @@ namespace dataAccess
             StoneOfPlayerInfo targetStone = null;
             foreach(var keyValuePair in Dic)
             {
-                if (keyValuePair.Value.UnitInstanceId == instanceId && keyValuePair.Value.Inherent == "true")
+                if (keyValuePair.Value.UnitInstanceId == instanceId && keyValuePair.Value.Born == "true")
                 {
                     targetStone = keyValuePair.Value;
                 }

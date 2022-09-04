@@ -25,7 +25,7 @@ namespace dataAccess
             }
             var info = Get(instanceId);
             var item = await GenerateStoneModel(info.SkillId, true);
-            item.Inherent = info.Inherent == "true";
+            item.Inherent = info.Born == "true";
             item._SkillConfig = SkillConfigTable.GetSkillConfig(Dic[instanceId].SkillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
             item.instanceId = instanceId;

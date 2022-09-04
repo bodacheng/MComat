@@ -106,31 +106,7 @@ namespace mainMenu
                 MainSceneLogger.Logs.Add(skillConfirmLog);
             }
             
-            CloudScript.UpdateSkillEdit(ToEditStones, (x) => Success(x), error);
-        }
-        
-        // 下面这个貌似还是有地方用。。。先别删
-        IEnumerator RemoveStone(string stoneID)
-        {
-            // 将原先九宫格对应位置的技能石卸载。即将其inUsingMonsterOfPlayerId变为null。
-            StoneOfPlayerInfo formerStoneInfo = Stones.Get(stoneID);
-            if (formerStoneInfo != null)
-            {
-                if (formerStoneInfo.Inherent == "true")
-                {
-                    Debug.Log("无法卸载原生技能.skillID: "+ formerStoneInfo.SkillId + "  skillStoneOfPlayerId" + formerStoneInfo.InstanceId);
-                    yield break;
-                }
-                if (!GetUsingStonesId().Contains(formerStoneInfo.InstanceId)) //代表原来那个位置上有个技能石，但现在它在技能背包，这轮技能编辑它是要被卸载到背包里去。
-                {
-                    Debug.Log("技能石头："+ formerStoneInfo.InstanceId + "被卸下");
-                    formerStoneInfo.UnitInstanceId = null;
-                    formerStoneInfo.Slot = null;
-                    //yield return MySkillStones.Update(formerStoneInfo.InstanceId);
-                }else{
-                    // 说明这个位置上原先的技能石现在在九宫格的其他位置上，轮到所在slot的处理时自然会更新那个技能石的信息。
-                }
-            }
+            CloudScript.UpdateSkillEdit(ToEditStones, Success, error);
         }
     }
 }
