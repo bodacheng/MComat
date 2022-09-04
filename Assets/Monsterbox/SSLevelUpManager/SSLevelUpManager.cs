@@ -41,11 +41,11 @@ public partial class SSLevelUpManager : MonoBehaviour
         
         foreach (var cell in MaterialSlots)
         {
-            cell.SetOnDropAction(OnDropAction);
+            cell.SetOnDropAction(MSlotOnDropAction);
         }
     }
     
-    void OnDropAction(StoneCell source, StoneCell to)
+    void MSlotOnDropAction(StoneCell source, StoneCell to)
     {
         if (SKStoneItem.dragging != null)
         {
@@ -53,8 +53,23 @@ public partial class SSLevelUpManager : MonoBehaviour
             if (item == null)
                 return;
             var target = Stones.Get(targetInstanceID);
+            
             if (item.instanceId != targetInstanceID && item._SkillConfig.RECORD_ID == target.SkillId)
             {
+                var m = Stones.Get(item.instanceId);
+                if (m.Born == "true")
+                {
+                    var popupLayer = PopupLayer.Open(PreScene.target.T);
+                    popupLayer.ArrangeWarnWindow("这个是被动技能，不能用作材料");
+                    return;
+                }
+                if (m.UnitInstanceId != null)
+                {
+                    var popupLayer = PopupLayer.Open(PreScene.target.T);
+                    popupLayer.ArrangeWarnWindow("有角色正在使用，不能用作材料");
+                    return;
+                }
+                
                 StoneCell.Install(source, to);
             }
         }

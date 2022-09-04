@@ -22,6 +22,8 @@ public partial class SSLevelUpManager : MonoBehaviour
         form.M2Stone = item2 != null ? item2.instanceId : null;
         form.M3Stone = item3 != null ? item3.instanceId : null;
         form.M4Stone = item4 != null ? item4.instanceId : null;
+        
+        
 
         void AddInstanceIdToList(SKStoneItem item)
         {
@@ -34,19 +36,30 @@ public partial class SSLevelUpManager : MonoBehaviour
         AddInstanceIdToList(item3);
         AddInstanceIdToList(item4);
         
-        
         // 以下是远程那边计算技能石升到等级的逻辑：
         var materialLevels = new List<int>();
         var addLevel = 0; // 增加的等级
         void Temp(string instanceID)
         {
             var ssInfo = Stones.Get(instanceID);
+            if (ssInfo.Born == "true")
+            {
+                Debug.Log("操作终止。被动技能正在被用作材料："+ssInfo.InstanceId);
+                return;
+            }
+            
             materialLevels.Add(ssInfo.Level);
             addLevel += (ssInfo.Level - 1);
             if (materialLevels.Count == 4)
                 addLevel += 1;
         }
-        
+
+        if (materialLevels.Count != 4)
+        {
+            Debug.Log("逻辑错误");
+            return;
+        }
+            
         foreach (var instanceId in materialInstanceIds)
         {
             Temp(instanceId);
