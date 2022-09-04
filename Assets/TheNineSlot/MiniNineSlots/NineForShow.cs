@@ -1,5 +1,4 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
@@ -60,55 +59,55 @@ public partial class NineForShow : MonoBehaviour
         }
     }
     
-    public async UniTask ShowStones(string a1Skillid, string a2Skillid, string a3Skillid,
-                                    string b1Skillid, string b2Skillid, string b3Skillid,
-                                        string c1Skillid, string c2Skillid, string c3Skillid)
+    public async UniTask ShowStones(string a1SkillId, string a2SkillId, string a3SkillId,
+                                    string b1SkillId, string b2SkillId, string b3SkillId,
+                                    string c1SkillId, string c2SkillId, string c3SkillId)
     {
         ClearCurrent();
         
-        A1S = await Stones.GenerateStoneModel(a1Skillid, false);
-        A2S = await Stones.GenerateStoneModel(a2Skillid, false);
-        A3S = await Stones.GenerateStoneModel(a3Skillid, false);
-        B1S = await Stones.GenerateStoneModel(b1Skillid, false);
-        B2S = await Stones.GenerateStoneModel(b2Skillid, false);
-        B3S = await Stones.GenerateStoneModel(b3Skillid, false);
-        C1S = await Stones.GenerateStoneModel(c1Skillid, false);
-        C2S = await Stones.GenerateStoneModel(c2Skillid, false);
-        C3S = await Stones.GenerateStoneModel(c3Skillid, false);
-
-        if (A1S != null)
+        A1S = await Stones.GenerateStoneModel(a1SkillId, false);
+        A2S = await Stones.GenerateStoneModel(a2SkillId, false);
+        A3S = await Stones.GenerateStoneModel(a3SkillId, false);
+        B1S = await Stones.GenerateStoneModel(b1SkillId, false);
+        B2S = await Stones.GenerateStoneModel(b2SkillId, false);
+        B3S = await Stones.GenerateStoneModel(b3SkillId, false);
+        C1S = await Stones.GenerateStoneModel(c1SkillId, false);
+        C2S = await Stones.GenerateStoneModel(c2SkillId, false);
+        C3S = await Stones.GenerateStoneModel(c3SkillId, false);
+        
+        if (A1S != null && A1Frame != null)
         {
             A1Frame.color = RefreshFrameColor(A1S._SkillConfig.SP_LEVEL);
         }
-        if (A2S != null)
+        if (A2S != null && A2Frame != null)
         {
             A2Frame.color = RefreshFrameColor(A2S._SkillConfig.SP_LEVEL);
         }
-        if (A3S != null)
+        if (A3S != null && A3Frame != null)
         {
             A3Frame.color = RefreshFrameColor(A3S._SkillConfig.SP_LEVEL);
         }
-        if (B1S != null)
+        if (B1S != null && B1Frame != null)
         {
             B1Frame.color = RefreshFrameColor(B1S._SkillConfig.SP_LEVEL);
         }
-        if (B2S != null)
+        if (B2S != null && B2Frame != null)
         {
             B2Frame.color = RefreshFrameColor(B2S._SkillConfig.SP_LEVEL);
         }
-        if (B3S != null)
+        if (B3S != null && B3Frame != null)
         {
             B3Frame.color = RefreshFrameColor(B3S._SkillConfig.SP_LEVEL);
         }
-        if (C1S != null)
+        if (C1S != null && C1Frame != null)
         {
             C1Frame.color = RefreshFrameColor(C1S._SkillConfig.SP_LEVEL);
         }
-        if (C2S != null)
+        if (C2S != null && C2Frame != null)
         {
             C2Frame.color = RefreshFrameColor(C2S._SkillConfig.SP_LEVEL);
         }
-        if (C3S != null)
+        if (C3S != null && C3Frame != null)
         {
             C3Frame.color = RefreshFrameColor(C3S._SkillConfig.SP_LEVEL);
         }
@@ -116,9 +115,9 @@ public partial class NineForShow : MonoBehaviour
         Parent();
     }
     
-    Color RefreshFrameColor(int splevel)
+    Color RefreshFrameColor(int spLevel)
     {
-        switch(splevel)
+        switch(spLevel)
         {
             case 1:
                 return Color.green;
@@ -213,16 +212,14 @@ public partial class NineForShow : MonoBehaviour
         
     void Parent()
     {
-        RectTransform slotRT = A1T.GetComponent<RectTransform>();
-
         void SS(SKStoneItem SK, Button BT)
         {
-            if (SK == null)
+            if (SK == null || BT == null)
                 return;
             SK.transform.SetParent(BT.transform);
             SK.transform.localPosition = Vector3.zero;
             SK.transform.localScale = Vector3.one;
-
+            
             var targetRect = SK.GetComponent<RectTransform>();
             targetRect.anchorMin = new Vector2(0, 0);
             targetRect.anchorMax = new Vector2(1, 1);
