@@ -54,7 +54,7 @@ public static class AddressablesLogic
         }
     }
     
-    public static async UniTask GetWholeDownLoadSize(Action<string> Complete, Action exception)
+    public static async UniTask<long> GetWholeDownLoadSize(Action exception)
     {
         //Caching.ClearCache();
         
@@ -72,9 +72,8 @@ public static class AddressablesLogic
         wholeSize += await DownLoadSize("unit_icon", exception);
         wholeSize += await DownLoadSize("battle_ground", exception);
         wholeSize += await DownLoadSize("btn_effect", exception);
-        
-        var warn = "Download size : " + wholeSize / 1024 + "MB" + "\n\n" + "Start to download";
-        Complete(warn);
+
+        return wholeSize;
     }
     
     public static async UniTask ResourcePrepareProcess(Action complete, Action<string, float> progressUIRefresh)
