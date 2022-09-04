@@ -26,9 +26,9 @@ public class ArenaDummiesTable
 		public FightMembers GetFightMembers() => fightMembers;
 	}
 
-	List<Row> rowList = new List<Row>();
+	readonly List<Row> rowList = new List<Row>();
 	bool isLoaded = false;
-
+	
 	public bool IsLoaded()
 	{
 		return isLoaded;
@@ -51,11 +51,13 @@ public class ArenaDummiesTable
 		string[][] grid = CsvParser2.Parse(csv.text);
 		for(int i = 1 ; i < grid.Length ; i++)
 		{
-			Row row = new Row();
-			row.NICK_NAME = grid[i][0];
-			row.ARENA_POINT = grid[i][1];
-			row.LEVEL = grid[i][2];
-			
+			var row = new Row
+			{
+				NICK_NAME = grid[i][0],
+				ARENA_POINT = grid[i][1],
+				LEVEL = grid[i][2]
+			};
+
 			rowList.Add(row);
 		}
 		isLoaded = true;

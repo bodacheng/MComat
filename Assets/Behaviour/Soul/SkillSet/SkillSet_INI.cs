@@ -20,15 +20,15 @@ public partial class SkillSet
     
     public void SortNineAndTwo(int lv)
     {
-        SkillConfig AConfig1 = a1 != null ? SkillConfigTable.GetSkillConfig(a1) : new SkillConfig();
-        SkillConfig AConfig2 = a2 != null ? SkillConfigTable.GetSkillConfig(a2) : new SkillConfig();
-        SkillConfig AConfig3 = a3 != null ? SkillConfigTable.GetSkillConfig(a3) : new SkillConfig();
-        SkillConfig BConfig1 = b1 != null ? SkillConfigTable.GetSkillConfig(b1) : new SkillConfig();
-        SkillConfig BConfig2 = b2 != null ? SkillConfigTable.GetSkillConfig(b2) : new SkillConfig();
-        SkillConfig BConfig3 = b3 != null ? SkillConfigTable.GetSkillConfig(b3) : new SkillConfig();
-        SkillConfig CConfig1 = c1 != null ? SkillConfigTable.GetSkillConfig(c1) : new SkillConfig();
-        SkillConfig CConfig2 = c2 != null ? SkillConfigTable.GetSkillConfig(c2) : new SkillConfig();
-        SkillConfig CConfig3 = c3 != null ? SkillConfigTable.GetSkillConfig(c3) : new SkillConfig();
+        var AConfig1 = a1 != null ? SkillConfigTable.GetSkillConfig(a1) : new SkillConfig();
+        var AConfig2 = a2 != null ? SkillConfigTable.GetSkillConfig(a2) : new SkillConfig();
+        var AConfig3 = a3 != null ? SkillConfigTable.GetSkillConfig(a3) : new SkillConfig();
+        var BConfig1 = b1 != null ? SkillConfigTable.GetSkillConfig(b1) : new SkillConfig();
+        var BConfig2 = b2 != null ? SkillConfigTable.GetSkillConfig(b2) : new SkillConfig();
+        var BConfig3 = b3 != null ? SkillConfigTable.GetSkillConfig(b3) : new SkillConfig();
+        var CConfig1 = c1 != null ? SkillConfigTable.GetSkillConfig(c1) : new SkillConfig();
+        var CConfig2 = c2 != null ? SkillConfigTable.GetSkillConfig(c2) : new SkillConfig();
+        var CConfig3 = c3 != null ? SkillConfigTable.GetSkillConfig(c3) : new SkillConfig();
         
         A1 = AConfig1 != null ? GetSE(a1, lv) : null;
         A2 = AConfig2 != null ? GetSE(a2, lv) : null;
@@ -146,15 +146,15 @@ public partial class SkillSet
             H3_list.Add(D.REAL_NAME);
         }
         
-        for (int i = 0; i < H1_E_list.Count; i++)
+        for (var i = 0; i < H1_E_list.Count; i++)
         {
             H1_E_list[i].CasualTo = H2_list.ToArray();
         }
-        for (int i = 0; i < H2_E_list.Count; i++)
+        for (var i = 0; i < H2_E_list.Count; i++)
         {
             H2_E_list[i].CasualTo = H3_list.ToArray();
         }        
-        for (int i = 0; i < H3_E_list.Count; i++)
+        for (var i = 0; i < H3_E_list.Count; i++)
         {
             H3_E_list[i].CasualTo = H1_list.ToArray();
         }
@@ -169,10 +169,10 @@ public partial class SkillSet
     // FormFightingSetsByNineAndTwo(string type,NineAndTwo nineAndTwo, passiveSkillConfigs passiveSkillConfigs, int AI_level) -->
     // 1.sortNineAndTwo(passiveSkillConfigs):整理三连击的连续关系。根据数据库配置好相应技能的属性。
     // 2.GenerateBeheviourSets():正式配置各State_Transition_Set，并且适配好所有技能组的force和casual迁移。
-    public IDictionary<string, SkillEntity> GenerateBeheviourSets()
+    public IDictionary<string, SkillEntity> GenerateBehaviourSets()
     {
         IDictionary<string, SkillEntity> _SEDic = new Dictionary<string, SkillEntity>();
-        List<SkillEntity> StateTransitionSetList = new List<SkillEntity>();
+        var StateTransitionSetList = new List<SkillEntity>();
         
         Empty = new SkillEntity("Empty", 0, 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1, 0);
         zhuangbi = new SkillEntity("zhuangbi", 0, 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1, 0);
@@ -242,16 +242,16 @@ public partial class SkillSet
             StateTransitionSetList.Add(C3);
         }
         
-        foreach (SkillEntity _SE in StateTransitionSetList)
+        foreach (var _SE in StateTransitionSetList)
         {
             if (_SE != M && _SE != KnockOff && _SE != Empty && _SE != Death && _SE != Victory)
             {
-                List<string> casualToOptoins = _SE.CasualTo.ToList();
-                if (!casualToOptoins.Contains(M.REAL_NAME))
+                var toOptions = _SE.CasualTo.ToList();
+                if (!toOptions.Contains(M.REAL_NAME))
                 {
-                    casualToOptoins.Add(M.REAL_NAME);
+                    toOptions.Add(M.REAL_NAME);
                 }
-                _SE.CasualTo = casualToOptoins.ToArray();
+                _SE.CasualTo = toOptions.ToArray();
             }
             if (_SE.REAL_NAME != null && !_SEDic.ContainsKey(_SE.REAL_NAME))
             {
@@ -271,9 +271,9 @@ public partial class SkillSet
     }
     
     // 这个应该是所谓技能等级的着手点
-    SkillEntity GetSE(string skillid, float level)
+    SkillEntity GetSE(string skillId, float level)
     {
-        SkillConfig SC = SkillConfigTable.GetSkillConfig(skillid);
+        var SC = SkillConfigTable.GetSkillConfig(skillId);
         if (SC == null)
         {
             return null;
@@ -281,7 +281,7 @@ public partial class SkillSet
         
         if (!string.IsNullOrEmpty(SC.REAL_NAME))
         {
-            SkillEntity _SE = new SkillEntity(
+            var _SE = new SkillEntity(
                 SC.RECORD_ID,
                 SC.REAL_NAME,
                 0,

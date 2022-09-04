@@ -23,8 +23,6 @@ public partial class SSLevelUpManager : MonoBehaviour
         form.M3Stone = item3 != null ? item3.instanceId : null;
         form.M4Stone = item4 != null ? item4.instanceId : null;
         
-        
-
         void AddInstanceIdToList(SKStoneItem item)
         {
             if (item != null)
@@ -53,16 +51,16 @@ public partial class SSLevelUpManager : MonoBehaviour
             if (materialLevels.Count == 4)
                 addLevel += 1;
         }
-
-        if (materialLevels.Count != 4)
-        {
-            Debug.Log("逻辑错误");
-            return;
-        }
-            
+        
         foreach (var instanceId in materialInstanceIds)
         {
             Temp(instanceId);
+        }
+        
+        if (materialLevels.Count != 4)
+        {
+            Debug.Log("逻辑错误，material count :"+ materialLevels.Count);
+            return;
         }
 
         form.addLevel = addLevel.ToString();
@@ -87,6 +85,12 @@ public partial class SSLevelUpManager : MonoBehaviour
         if (target == null)
         {
             Debug.Log("逻辑顺序错误？");
+            return;
+        }
+
+        if (target.Born == "true")
+        {
+            Debug.Log("原生技能石不需升级");
             return;
         }
         LevelUpStone(target.InstanceId, refresh);

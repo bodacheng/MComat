@@ -38,22 +38,22 @@ public class FightMembers
         
         var target = new FightMembers();
         
-        UnitInfo char1 = new UnitInfo
+        var char1 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[0]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
-        UnitInfo char2 = new UnitInfo
+        var char2 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[1]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
-        UnitInfo char3 = new UnitInfo
+        var char3 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[2]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
-
+        
         target.EnemySets.Set(0, 0, char1);
         target.EnemySets.Set(0, 1, char2);
         target.EnemySets.Set(0, 2, char3);
@@ -65,13 +65,12 @@ public class FightMembers
     {
         string focusingtype = "human";
         
-        IDictionary<string, string> CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
-        List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 6);
-        List<string> monsterIds = CharIDsAndNames.Keys.ToList();
+        var CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
+        var Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 6);
+        var monsterIds = CharIDsAndNames.Keys.ToList();
 
-        FightMembers target = new FightMembers();
-        
-        SkillStonesBox.StoneFilterForm filterForm = new SkillStonesBox.StoneFilterForm
+        var target = new FightMembers();
+        var filterForm = new SkillStonesBox.StoneFilterForm
         {
             type = focusingtype,
             exType = new int[1] { 0 },
@@ -81,12 +80,12 @@ public class FightMembers
             far = false
         };
         
-        UnitInfo char1 = new UnitInfo
+        var char1 = new UnitInfo
         {
             r_id = monsterIds[Indexes[0]],
             set = SkillSet.RandomSkillSet(focusingtype, null, 1, false, filterForm)
         };
-        UnitInfo char2 = new UnitInfo
+        var char2 = new UnitInfo
         {
             r_id = monsterIds[Indexes[1]],
             set = SkillSet.RandomSkillSet(focusingtype, null, 1, false, filterForm)
@@ -103,7 +102,7 @@ public class FightMembers
                 target.HeroSets.Set(0, 0, char2);
                 break;
         }
-
+        
         return target;
     }
     
@@ -111,39 +110,39 @@ public class FightMembers
     {
         string focusingtype = "human";
         
-        IDictionary<string, string> CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
-        List<int> Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 6);
-        List<string> charRecordIds = CharIDsAndNames.Keys.ToList();
+        var CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
+        var Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 6);
+        var charRecordIds = CharIDsAndNames.Keys.ToList();
 
-        FightMembers target = new FightMembers();
+        var target = new FightMembers();
 
-        UnitInfo char1 = new UnitInfo
+        var char1 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[0]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
-        UnitInfo char2 = new UnitInfo
+        var char2 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[1]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
-        UnitInfo char3 = new UnitInfo
+        var char3 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[2]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
 
-        UnitInfo char4 = new UnitInfo
+        var char4 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[3]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
-        UnitInfo char5 = new UnitInfo
+        var char5 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[4]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)
         };
-        UnitInfo char6 = new UnitInfo
+        var char6 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[5]],
             set = SkillSet.RandomSkillSet("human", null, 1, false)

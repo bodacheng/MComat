@@ -9,7 +9,7 @@ public class UnitInfo
     public string id;
     public string r_id;
     public int level;
-    public SkillSet set = new SkillSet();
+    public SkillSet set = new ();
     
     public UnitInfo Clone()
     {
@@ -26,10 +26,10 @@ public class UnitInfo
     public UnitInfo()
     {
     }
-
-    public UnitInfo(string localID, string r_id, SkillSet skillSet)
+    
+    public UnitInfo(string instanceID, string r_id, SkillSet skillSet)
     {
-        id = localID;
+        id = instanceID;
         this.r_id = r_id;
         set = skillSet;
     }

@@ -110,7 +110,7 @@ namespace Soul
         {
             nineAndTwo.SortNineAndTwo(level);
             //这上下两个函数之间存在一个chuanEndCasualT0的问题，从而必须一前一后紧密连接，下次review时候可以看看代码能不能整更利索一些。
-            SkillEntityDic = nineAndTwo.GenerateBeheviourSets();
+            SkillEntityDic = nineAndTwo.GenerateBehaviourSets();
             SkillEntity_List = nineAndTwo.SkillEntityList();//这一行于本游戏本身已经无用，但该列表牵扯到开发环境下角色技能详细的显示，以及框架本身保存xml战斗脚本的功能。
             _States_Incubator = new BehaviorsIncubator(empty_State, SkillEntityDic);
             IDictionary<string, Behavior> BehaviorDic = _States_Incubator.BehaviorDic; // 理解整个系统的关键

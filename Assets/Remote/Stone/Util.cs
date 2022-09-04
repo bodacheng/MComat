@@ -44,6 +44,10 @@ namespace dataAccess
             var SkillStonesOfTypeAndExType = new List<string>(); //技能石本地id
             foreach (var keyValuePair in Dic)
             {
+                if (keyValuePair.Value.Born == "true")
+                {
+                    continue;//原生技能不显示在技能石盒子内
+                }
                 var _SkillConfig = SkillConfigTable.GetSkillConfig(keyValuePair.Value.SkillId);
                 if (_SkillConfig == null)
                 {
