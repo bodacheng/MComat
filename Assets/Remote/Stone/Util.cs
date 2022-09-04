@@ -132,12 +132,12 @@ namespace dataAccess
         }
         
         // 获取一个角色的原生技能的对应技能石信息
-        public static StoneOfPlayerInfo GetOriginSkillOfMonster(string monsterOfPlayerId)
+        public static StoneOfPlayerInfo GetOriginSkillOfUnit(string instanceId)
         {
             StoneOfPlayerInfo targetStone = null;
             foreach(var keyValuePair in Dic)
             {
-                if (keyValuePair.Value.unitInstanceId == monsterOfPlayerId && keyValuePair.Value.Inherent == "true")
+                if (keyValuePair.Value.unitInstanceId == instanceId && keyValuePair.Value.Inherent == "true")
                 {
                     targetStone = keyValuePair.Value;
                 }

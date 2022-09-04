@@ -1,8 +1,6 @@
 ﻿#if UNITY_EDITOR
 using UnityEngine;
-using UnityEditor;
 using Skill;
-using System.Collections.Generic;
 
 public partial class FightMemberManager {
 

@@ -89,7 +89,7 @@ public class ElementStoneTagsGroup
         p.Play(true);
     }
     
-    public async void RefreshSlotEffects(int slotNum, int eX, Vector3 pos)
+    public async void RefreshSlotEffects(int slotNum, int eX, Vector3 pos, Transform parent)
     {
         if (slotEffects.ContainsKey(slotNum) && slotEffects[slotNum] != null)
         {
@@ -114,6 +114,7 @@ public class ElementStoneTagsGroup
                 break;
         }
         var slotEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>(effectName);
+        slotEffect.transform.SetParent(parent);
         DicAdd<int, ParticleSystem>.Add(slotEffects, slotNum, slotEffect);
         slotEffect.gameObject.name = "slotEffect"+ slotNum;
         slotEffect.gameObject.transform.position = pos;

@@ -6,9 +6,9 @@ namespace mainMenu
     public partial class TheNineSlot : MonoBehaviour
     {
         // 强制清空九宫槽 包括固有技能，用于程序处理
-        public void ForceClearAll()
+        void ForceClearAll()
         {
-            foreach (SkillStoneSlot _slot in allSlot)
+            foreach (var _slot in allSlot)
             {
                 _slot._cell.RemoveToTemp();
             }
@@ -20,11 +20,11 @@ namespace mainMenu
             if (PreScene.target._focusing == null)
                 return;
 
-            UnitInfo info = PreScene.target._focusing;
-            StoneOfPlayerInfo originSkillInfo = Stones.GetOriginSkillOfMonster(info.id);
-            foreach (SkillStoneSlot _slot in allSlot)
+            var info = PreScene.target._focusing;
+            var originSkillInfo = Stones.GetOriginSkillOfUnit(info.id);
+            foreach (var _slot in allSlot)
             {
-                SKStoneItem sK = _slot._cell.GetItem();
+                var sK = _slot._cell.GetItem();
                 if (sK == null)
                 {
                     continue;
@@ -34,7 +34,7 @@ namespace mainMenu
                     _slot._cell.RemoveToTemp();
                 }
             }
-            UpdateStonesBaseOnSlots(info);
+            NineSlotsStatusRefresh();
         }
     }
 }

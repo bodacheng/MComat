@@ -11,17 +11,6 @@ namespace mainMenu
         ElementStoneTagsGroup _focusingEffectsGroup;
         ParticleSystem triggerExplosion0;
         
-        static GameObject Marker;
-        
-        void Awake()
-        {
-            if (Marker == null)
-            {
-                Marker = new GameObject("ObjectPoolsContainer");
-                //UnityEngine.Object.DontDestroyOnLoad(Marker);
-            }
-        }
-        
         public async UniTask StartUp(Element element)
         {
             if (_elementBtnEffects.ContainsKey(element))
@@ -52,7 +41,7 @@ namespace mainMenu
                     break;
             }
             triggerExplosion0 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
-            triggerExplosion0.transform.SetParent(Marker.transform);
+            triggerExplosion0.transform.SetParent(transform);
         }
         
         public void CloseShowingZokuseiTagEffects()
@@ -90,7 +79,7 @@ namespace mainMenu
         
         public void RefreshSlotEffect(int slotNum ,Vector3 pos, int sp_level)//按钮切换也可以在这里做文章
         {
-            _focusingEffectsGroup.RefreshSlotEffects(slotNum, sp_level, pos);
+            _focusingEffectsGroup.RefreshSlotEffects(slotNum, sp_level, pos, transform);
         }
         
         public void SkillButtonExplosion(int splevel, Vector3 targetPOS, Transform parent)
