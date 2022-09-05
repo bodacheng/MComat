@@ -171,7 +171,7 @@ public partial class SkillSet
     // 2.GenerateBeheviourSets():正式配置各State_Transition_Set，并且适配好所有技能组的force和casual迁移。
     public IDictionary<string, SkillEntity> GenerateBehaviourSets()
     {
-        IDictionary<string, SkillEntity> _SEDic = new Dictionary<string, SkillEntity>();
+        IDictionary<string, SkillEntity> seDic = new Dictionary<string, SkillEntity>();
         var StateTransitionSetList = new List<SkillEntity>();
         
         Empty = new SkillEntity("Empty", 0, 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1, 0);
@@ -253,9 +253,9 @@ public partial class SkillSet
                 }
                 _SE.CasualTo = toOptions.ToArray();
             }
-            if (_SE.REAL_NAME != null && !_SEDic.ContainsKey(_SE.REAL_NAME))
+            if (_SE.REAL_NAME != null && !seDic.ContainsKey(_SE.REAL_NAME))
             {
-                _SEDic.Add(new KeyValuePair<string, SkillEntity>(_SE.REAL_NAME, _SE));
+                seDic.Add(new KeyValuePair<string, SkillEntity>(_SE.REAL_NAME, _SE));
             }
             else
             {
@@ -267,36 +267,36 @@ public partial class SkillSet
                 }
             }
         }
-        return _SEDic;
+        return seDic;
     }
     
     // 这个应该是所谓技能等级的着手点
     SkillEntity GetSE(string skillId, float level)
     {
-        var SC = SkillConfigTable.GetSkillConfig(skillId);
-        if (SC == null)
+        var sc = SkillConfigTable.GetSkillConfig(skillId);
+        if (sc == null)
         {
             return null;
         }
         
-        if (!string.IsNullOrEmpty(SC.REAL_NAME))
+        if (!string.IsNullOrEmpty(sc.REAL_NAME))
         {
-            var _SE = new SkillEntity(
-                SC.RECORD_ID,
-                SC.REAL_NAME,
+            var se = new SkillEntity(
+                sc.RECORD_ID,
+                sc.REAL_NAME,
                 0,
-                SC.STATE_TYPE,
-                SkillEntity.ATCal(SC.ATTACK_WEIGHT, level),
-                SkillEntity.StoneHpCal(SC.HP_WEIGHT, level),
-                SC.AIAttrs,
+                sc.STATE_TYPE,
+                SkillEntity.ATCal(sc.ATTACK_WEIGHT, level),
+                SkillEntity.StoneHpCal(sc.HP_WEIGHT, level),
+                sc.AIAttrs,
                 null,
                 null,
                 InputKey.Null,
                 InputKey.Null,
-                SC.SP_LEVEL,
-                SC.RARITY_LEVEL
+                sc.SP_LEVEL,
+                sc.RARITY_LEVEL
             );
-            return _SE;
+            return se;
         }
         return null;
     }

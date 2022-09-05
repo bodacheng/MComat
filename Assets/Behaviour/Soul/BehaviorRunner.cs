@@ -21,10 +21,10 @@ namespace Soul
         public IDictionary<string, Behavior> BehaviourDic = new Dictionary<string, Behavior>();
         public IDictionary<string, SkillEntity> SkillEntityDic;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
         public SkillEntity CurrentSKillEntity;
-        SkillEntity tempSKillEntity;
+        SkillEntity _tempSKillEntity;
         
         #region 辅助模块：控制器
-        readonly Controller controller = new Controller();
+        readonly Controller _controller = new Controller();
         #endregion
         
         readonly Empty_State empty_State = new Empty_State();
@@ -73,7 +73,7 @@ namespace Soul
                 BehaviourTransitionEngine();
                 
                 #region 决策制定
-                controller.Decision(this, _canTranTo, AI && !BeingControl());
+                _controller.Decision(this, _canTranTo, AI && !BeingControl());
                 #endregion
                 
                 _nowBehavior?._State_Update();

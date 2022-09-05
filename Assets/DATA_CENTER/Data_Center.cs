@@ -94,7 +94,7 @@ public partial class Data_Center : MonoBehaviour
         }
     }
     
-    public async UniTask Step2Initialize(string type, SkillSet _NineAndTwo, int level, Element element, string personalMagic)
+    public async UniTask Step2Initialize(string type, SkillSet nineAndTwo, int level, Element element, string personalMagic)
     {
         if (!phase2Initialized)
         {
@@ -103,7 +103,7 @@ public partial class Data_Center : MonoBehaviour
         
         WholeT.gameObject.SetActive(true);// 动画模块的一些处理要求active状态下运行
         
-        _MyBehaviorRunner.FormFightingSetsByNineAndTwo(_NineAndTwo, level);
+        _MyBehaviorRunner.FormFightingSetsByNineAndTwo(nineAndTwo, level);
         _MyBehaviorRunner.INIStates(this);
         
         var tasks = new List<UniTask>

@@ -54,11 +54,11 @@ namespace Soul
                 {
                     continue;
                 }
-                SkillEntityDic.TryGetValue(_Key, out tempSKillEntity);
-                optionsForButtonRefresh.Add(tempSKillEntity);
-                if ((tempSKillEntity.CANBECANCELLEDTO && _SkillCancelFlag.Cancel_Flag) || _nowBehavior.Capacity_Exit_Condition())
+                SkillEntityDic.TryGetValue(_Key, out _tempSKillEntity);
+                optionsForButtonRefresh.Add(_tempSKillEntity);
+                if ((_tempSKillEntity.CANBECANCELLEDTO && _SkillCancelFlag.Cancel_Flag) || _nowBehavior.Capacity_Exit_Condition())
                 {
-                    _canTranTo.Add(tempSKillEntity);
+                    _canTranTo.Add(_tempSKillEntity);
                 }
             }
             #endregion
@@ -93,8 +93,8 @@ namespace Soul
                 {
                     continue;
                 }
-                SkillEntityDic.TryGetValue(_Key, out tempSKillEntity);
-                List.Add(tempSKillEntity);
+                SkillEntityDic.TryGetValue(_Key, out _tempSKillEntity);
+                List.Add(_tempSKillEntity);
             }
             return List;
         }
