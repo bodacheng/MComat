@@ -10,30 +10,30 @@ public partial class SkillSet
     /// <returns></returns>
     public List<string> SkillIDList()
     {
-        var IDs = new List<string>();
+        var ids = new List<string>();
         
         if (a1 != null)
-            IDs.Add(a1);
+            ids.Add(a1);
         if (a2 != null)
-            IDs.Add(a2);
+            ids.Add(a2);
         if (a3 != null)
-            IDs.Add(a3);
+            ids.Add(a3);
             
         if (b1 != null)
-            IDs.Add(b1);
+            ids.Add(b1);
         if (b2 != null)
-            IDs.Add(b2);
+            ids.Add(b2);
         if (b3 != null)
-            IDs.Add(b3);
+            ids.Add(b3);
             
         if (c1 != null)
-            IDs.Add(c1);
+            ids.Add(c1);
         if (c2 != null)
-            IDs.Add(c2);
+            ids.Add(c2);
         if (c3 != null)
-            IDs.Add(c3);
+            ids.Add(c3);
         
-        return IDs;
+        return ids;
     }
     
     // 获取平均技能等级
@@ -53,62 +53,62 @@ public partial class SkillSet
     
     public static float INI_Hp(List<SkillEntity> sklist)
     {
-        float WholeHP = 0;
-        for (int index = 0; index < sklist.Count; index++)
+        float wholeHp = 0;
+        for (var index = 0; index < sklist.Count; index++)
         {
-            WholeHP += sklist[index].HP;
+            wholeHp += sklist[index].HP;
         }
-        return WholeHP;
+        return wholeHp;
     }
     
     // 获取技能实体列表，调用必须在SortNineAndTwo之后
     public List<SkillEntity> SkillEntityList()
     {
-        List<SkillEntity> behavior_Transition_Sets = new List<SkillEntity>();
+        var behaviorTransitionSets = new List<SkillEntity>();
         
         if (A1 != null)
-            behavior_Transition_Sets.Add(A1);
+            behaviorTransitionSets.Add(A1);
         if (A2 != null)
-            behavior_Transition_Sets.Add(A2);
+            behaviorTransitionSets.Add(A2);
         if (A3 != null)
-            behavior_Transition_Sets.Add(A3);
+            behaviorTransitionSets.Add(A3);
         
         if (B1 != null)
-            behavior_Transition_Sets.Add(B1);
+            behaviorTransitionSets.Add(B1);
         if (B2 != null)
-            behavior_Transition_Sets.Add(B2);
+            behaviorTransitionSets.Add(B2);
         if (B3 != null)
-            behavior_Transition_Sets.Add(B3);
+            behaviorTransitionSets.Add(B3);
         
         if (C1 != null)
-            behavior_Transition_Sets.Add(C1);
+            behaviorTransitionSets.Add(C1);
         if (C2 != null)
-            behavior_Transition_Sets.Add(C2);
+            behaviorTransitionSets.Add(C2);
         if (C3 != null)
-            behavior_Transition_Sets.Add(C3);
+            behaviorTransitionSets.Add(C3);
             
         if (D != null)
-            behavior_Transition_Sets.Add(D);
+            behaviorTransitionSets.Add(D);
         if (M != null)
-            behavior_Transition_Sets.Add(M);
+            behaviorTransitionSets.Add(M);
         if (R != null)
-            behavior_Transition_Sets.Add(R);
+            behaviorTransitionSets.Add(R);
         if (Empty != null)
-            behavior_Transition_Sets.Add(Empty);
+            behaviorTransitionSets.Add(Empty);
         if (zhuangbi != null)
-            behavior_Transition_Sets.Add(zhuangbi);
+            behaviorTransitionSets.Add(zhuangbi);
         if (Victory != null)
-            behavior_Transition_Sets.Add(Victory);    
+            behaviorTransitionSets.Add(Victory);    
         if (Death != null)
-            behavior_Transition_Sets.Add(Death);
+            behaviorTransitionSets.Add(Death);
         if (Hit != null)
-            behavior_Transition_Sets.Add(Hit);
+            behaviorTransitionSets.Add(Hit);
         if (getUp != null)
-            behavior_Transition_Sets.Add(getUp);
+            behaviorTransitionSets.Add(getUp);
         if (KnockOff != null)
-            behavior_Transition_Sets.Add(KnockOff);
+            behaviorTransitionSets.Add(KnockOff);
             
-        return behavior_Transition_Sets;
+        return behaviorTransitionSets;
     }
     
     //下面的环节纯粹是针对SkillPrintOut的一些处理

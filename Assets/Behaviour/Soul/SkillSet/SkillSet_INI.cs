@@ -20,27 +20,27 @@ public partial class SkillSet
     
     public void SortNineAndTwo(int lv)
     {
-        var AConfig1 = a1 != null ? SkillConfigTable.GetSkillConfig(a1) : new SkillConfig();
-        var AConfig2 = a2 != null ? SkillConfigTable.GetSkillConfig(a2) : new SkillConfig();
-        var AConfig3 = a3 != null ? SkillConfigTable.GetSkillConfig(a3) : new SkillConfig();
-        var BConfig1 = b1 != null ? SkillConfigTable.GetSkillConfig(b1) : new SkillConfig();
-        var BConfig2 = b2 != null ? SkillConfigTable.GetSkillConfig(b2) : new SkillConfig();
-        var BConfig3 = b3 != null ? SkillConfigTable.GetSkillConfig(b3) : new SkillConfig();
-        var CConfig1 = c1 != null ? SkillConfigTable.GetSkillConfig(c1) : new SkillConfig();
-        var CConfig2 = c2 != null ? SkillConfigTable.GetSkillConfig(c2) : new SkillConfig();
-        var CConfig3 = c3 != null ? SkillConfigTable.GetSkillConfig(c3) : new SkillConfig();
+        var aConfig1 = a1 != null ? SkillConfigTable.GetSkillConfig(a1) : new SkillConfig();
+        var aConfig2 = a2 != null ? SkillConfigTable.GetSkillConfig(a2) : new SkillConfig();
+        var aConfig3 = a3 != null ? SkillConfigTable.GetSkillConfig(a3) : new SkillConfig();
+        var bConfig1 = b1 != null ? SkillConfigTable.GetSkillConfig(b1) : new SkillConfig();
+        var bConfig2 = b2 != null ? SkillConfigTable.GetSkillConfig(b2) : new SkillConfig();
+        var bConfig3 = b3 != null ? SkillConfigTable.GetSkillConfig(b3) : new SkillConfig();
+        var cConfig1 = c1 != null ? SkillConfigTable.GetSkillConfig(c1) : new SkillConfig();
+        var cConfig2 = c2 != null ? SkillConfigTable.GetSkillConfig(c2) : new SkillConfig();
+        var cConfig3 = c3 != null ? SkillConfigTable.GetSkillConfig(c3) : new SkillConfig();
         
-        A1 = AConfig1 != null ? GetSE(a1, lv) : null;
-        A2 = AConfig2 != null ? GetSE(a2, lv) : null;
-        A3 = AConfig3 != null ? GetSE(a3, lv) : null;
+        A1 = aConfig1 != null ? GetSE(a1, lv) : null;
+        A2 = aConfig2 != null ? GetSE(a2, lv) : null;
+        A3 = aConfig3 != null ? GetSE(a3, lv) : null;
         
-        B1 = BConfig1 != null ? GetSE(b1, lv) : null;
-        B2 = BConfig2 != null ? GetSE(b2, lv) : null;
-        B3 = BConfig3 != null ? GetSE(b3, lv) : null;
+        B1 = bConfig1 != null ? GetSE(b1, lv) : null;
+        B2 = bConfig2 != null ? GetSE(b2, lv) : null;
+        B3 = bConfig3 != null ? GetSE(b3, lv) : null;
         
-        C1 = CConfig1 != null ? GetSE(c1, lv) : null;
-        C2 = CConfig2 != null ? GetSE(c2, lv) : null;
-        C3 = CConfig3 != null ? GetSE(c3, lv) : null;
+        C1 = cConfig1 != null ? GetSE(c1, lv) : null;
+        C2 = cConfig2 != null ? GetSE(c2, lv) : null;
+        C3 = cConfig3 != null ? GetSE(c3, lv) : null;
         
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ////////////
         D = Def ? SkillEntity.GetD_SE() : null;
