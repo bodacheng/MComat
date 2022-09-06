@@ -37,7 +37,8 @@ public partial class FightMemberManager
             focusingUnitInfo.set.c3 = skillID;
             break;
         }
-        focusingUnitInfo.set.SortNineAndTwo(focusingUnitInfo.level);
+        focusingUnitInfo.set.SortNineAndTwo();
+        focusingUnitInfo.set.SetLv(focusingUnitInfo.level);
     }
     
     string GetFocusSkillId()

@@ -346,7 +346,12 @@ namespace HittingDetection
         {
             if (_WeaponMode == WeaponMode.EnergyFromBodyWeapon)
             {
-                _attackerRef.Center.Animation_Manger.FrameFreeze();
+                if (_attackerRef != null)
+                    _attackerRef.Center.Animation_Manger.FrameFreeze();
+                else
+                {
+                    Debug.Log("武器引用逻辑错误:"+this.gameObject.name);
+                }
             }
         }
     }

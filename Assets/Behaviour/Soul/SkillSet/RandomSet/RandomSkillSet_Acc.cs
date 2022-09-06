@@ -25,7 +25,8 @@ public partial class SkillSet
         }
         
         skillSet = RandomSkillSetRec(type, skillSet, filterForm, 1, originSkillConfig, baseOnAcc);
-        skillSet.SortNineAndTwo(level);
+        skillSet.SortNineAndTwo();
+        skillSet.SetLv(level);
         return skillSet;
     }
     

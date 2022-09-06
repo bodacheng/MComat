@@ -14,7 +14,8 @@ public partial class SkillSet
             return null;
         }
         
-        skillSet.SortNineAndTwo(level);
+        skillSet.SortNineAndTwo();
+        skillSet.SetLv(level);
         return skillSet;
     }
 

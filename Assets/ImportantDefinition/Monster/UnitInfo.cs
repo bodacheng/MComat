@@ -92,7 +92,8 @@ public class UnitInfo
             unitInfo.level = set.GetAerLevel(levels);
             set.SetPassive(unitConfigInfo.DEFENDABLE_FLAG, unitConfigInfo.MoveType, unitConfigInfo.RushType);
             unitInfo.set = set;
-            unitInfo.set.SortNineAndTwo(unitInfo.level);
+            unitInfo.set.SortNineAndTwo();
+            unitInfo.set.SetLv(unitInfo.level);
             return unitInfo;
         }
         catch (Exception e)

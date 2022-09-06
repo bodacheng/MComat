@@ -10,44 +10,59 @@ public partial class SkillSet
     #region 基础进程实体
     SkillEntity Empty, zhuangbi, Victory, Death, Hit, getUp, KnockOff;
     #endregion
-
-    readonly List<SkillEntity> H1_E_list = new List<SkillEntity>();
-    readonly List<SkillEntity> H2_E_list = new List<SkillEntity>();
-    readonly List<SkillEntity> H3_E_list = new List<SkillEntity>();
-    readonly List<string> H1_list = new List<string>();
-    readonly List<string> H2_list = new List<string>();
-    readonly List<string> H3_list = new List<string>();
     
-    public void SortNineAndTwo(int lv)
+    readonly List<SkillEntity> H1_E_list = new ();
+    readonly List<SkillEntity> H2_E_list = new ();
+    readonly List<SkillEntity> H3_E_list = new ();
+    readonly List<string> H1_list = new ();
+    readonly List<string> H2_list = new ();
+    readonly List<string> H3_list = new ();
+
+    public void SetLv(int level)
     {
-        var aConfig1 = a1 != null ? SkillConfigTable.GetSkillConfig(a1) : new SkillConfig();
-        var aConfig2 = a2 != null ? SkillConfigTable.GetSkillConfig(a2) : new SkillConfig();
-        var aConfig3 = a3 != null ? SkillConfigTable.GetSkillConfig(a3) : new SkillConfig();
-        var bConfig1 = b1 != null ? SkillConfigTable.GetSkillConfig(b1) : new SkillConfig();
-        var bConfig2 = b2 != null ? SkillConfigTable.GetSkillConfig(b2) : new SkillConfig();
-        var bConfig3 = b3 != null ? SkillConfigTable.GetSkillConfig(b3) : new SkillConfig();
-        var cConfig1 = c1 != null ? SkillConfigTable.GetSkillConfig(c1) : new SkillConfig();
-        var cConfig2 = c2 != null ? SkillConfigTable.GetSkillConfig(c2) : new SkillConfig();
-        var cConfig3 = c3 != null ? SkillConfigTable.GetSkillConfig(c3) : new SkillConfig();
+        A1?.SetLv(level);
+        A2?.SetLv(level);
+        A3?.SetLv(level);
         
-        A1 = aConfig1 != null ? GetSE(a1, lv) : null;
-        A2 = aConfig2 != null ? GetSE(a2, lv) : null;
-        A3 = aConfig3 != null ? GetSE(a3, lv) : null;
+        B1?.SetLv(level);
+        B2?.SetLv(level);
+        B3?.SetLv(level);
         
-        B1 = bConfig1 != null ? GetSE(b1, lv) : null;
-        B2 = bConfig2 != null ? GetSE(b2, lv) : null;
-        B3 = bConfig3 != null ? GetSE(b3, lv) : null;
+        C1?.SetLv(level);
+        C2?.SetLv(level);
+        C3?.SetLv(level);
+    }
+    
+    public void SortNineAndTwo()
+    {
+        var aConfig1 = a1 != null ? SkillConfigTable.GetSkillConfig(a1) : null;
+        var aConfig2 = a2 != null ? SkillConfigTable.GetSkillConfig(a2) : null;
+        var aConfig3 = a3 != null ? SkillConfigTable.GetSkillConfig(a3) : null;
+        var bConfig1 = b1 != null ? SkillConfigTable.GetSkillConfig(b1) : null;
+        var bConfig2 = b2 != null ? SkillConfigTable.GetSkillConfig(b2) : null;
+        var bConfig3 = b3 != null ? SkillConfigTable.GetSkillConfig(b3) : null;
+        var cConfig1 = c1 != null ? SkillConfigTable.GetSkillConfig(c1) : null;
+        var cConfig2 = c2 != null ? SkillConfigTable.GetSkillConfig(c2) : null;
+        var cConfig3 = c3 != null ? SkillConfigTable.GetSkillConfig(c3) : null;
         
-        C1 = cConfig1 != null ? GetSE(c1, lv) : null;
-        C2 = cConfig2 != null ? GetSE(c2, lv) : null;
-        C3 = cConfig3 != null ? GetSE(c3, lv) : null;
+        A1 = aConfig1 != null ? GetSE(a1) : null;
+        A2 = aConfig2 != null ? GetSE(a2) : null;
+        A3 = aConfig3 != null ? GetSE(a3) : null;
+        
+        B1 = bConfig1 != null ? GetSE(b1) : null;
+        B2 = bConfig2 != null ? GetSE(b2) : null;
+        B3 = bConfig3 != null ? GetSE(b3) : null;
+        
+        C1 = cConfig1 != null ? GetSE(c1) : null;
+        C2 = cConfig2 != null ? GetSE(c2) : null;
+        C3 = cConfig3 != null ? GetSE(c3) : null;
         
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ////////////
         D = Def ? SkillEntity.GetD_SE() : null;
         M = SkillEntity.GetM_SE(MoveType);
         M.CAN_BE_CANCELLED_TO = false;
         R = SkillEntity.GetR_SE(RushType);
-
+        
         //////////////////////////////////////////////////////////////////////////
         
         H1_E_list.Clear();
@@ -153,7 +168,7 @@ public partial class SkillSet
         for (var i = 0; i < H2_E_list.Count; i++)
         {
             H2_E_list[i].CasualTo = H3_list.ToArray();
-        }        
+        }
         for (var i = 0; i < H3_E_list.Count; i++)
         {
             H3_E_list[i].CasualTo = H1_list.ToArray();
@@ -205,7 +220,7 @@ public partial class SkillSet
             StateTransitionSetList.Add(R);
         }
 
-        if(A1 != null)
+        if (A1 != null)
         {
             StateTransitionSetList.Add(A1);
         }
@@ -271,7 +286,7 @@ public partial class SkillSet
     }
     
     // 这个应该是所谓技能等级的着手点
-    SkillEntity GetSE(string skillId, float level)
+    SkillEntity GetSE(string skillId)
     {
         var sc = SkillConfigTable.GetSkillConfig(skillId);
         if (sc == null)
@@ -285,8 +300,8 @@ public partial class SkillSet
                 sc.RECORD_ID,
                 sc.REAL_NAME,
                 sc.STATE_TYPE,
-                SkillEntity.ATCal(sc.ATTACK_WEIGHT, level),
-                SkillEntity.StoneHpCal(sc.HP_WEIGHT, level),
+                SkillEntity.ATCal(sc.ATTACK_WEIGHT, 1),
+                SkillEntity.StoneHpCal(sc.HP_WEIGHT, 1),
                 sc.AIAttrs,
                 null,
                 null,
