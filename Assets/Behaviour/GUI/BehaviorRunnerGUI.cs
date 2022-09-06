@@ -202,7 +202,7 @@ public partial class BehaviorRunnerGUI : Editor {
                 }
                 EditorGUILayout.EndVertical();
                 
-                myScript.SkillEntity_List[i].CANBECANCELLEDTO = EditorGUILayout.Toggle("superCancel", myScript.SkillEntity_List[i].CANBECANCELLEDTO);
+                myScript.SkillEntity_List[i].CAN_BE_CANCELLED_TO = EditorGUILayout.Toggle("superCancel", myScript.SkillEntity_List[i].CAN_BE_CANCELLED_TO);
                 myScript.SkillEntity_List[i].EnterInput = (InputKey)EditorGUILayout.EnumPopup("enter input", myScript.SkillEntity_List[i].EnterInput);
                 myScript.SkillEntity_List[i].ExitInput = (InputKey)EditorGUILayout.EnumPopup("exit input", myScript.SkillEntity_List[i].ExitInput);
                 myScript.SkillEntity_List[i].SP_LEVEL = EditorGUILayout.IntPopup("SPLevel", myScript.SkillEntity_List[i].SP_LEVEL,exoptions_display,exoptions);
@@ -227,7 +227,7 @@ public partial class BehaviorRunnerGUI : Editor {
             if (GUILayout.Button("Add"))
             {
                 GUI.color = Color.green;
-                myScript.SkillEntity_List.Add(new SkillEntity("Empty", 0, 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, 0, 0));
+                myScript.SkillEntity_List.Add(new SkillEntity("Empty", 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, 0));
                 InitializeList(-1, myScript.SkillEntity_List.Count);
             }
         }

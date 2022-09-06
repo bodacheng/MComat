@@ -14,17 +14,16 @@ namespace Skill
     {
         public string SkillID;
         public string REAL_NAME;
-        public int LEVEL;
         public BehaviorType StateType;
         public float AT;
         public float HP;
         public AIAttrs AIAttrs = new AIAttrs();
         public string[] CasualTo = { };
-        public bool CANBECANCELLEDTO = true;
+        public bool CAN_BE_CANCELLED_TO = true;
         public InputKey EnterInput = InputKey.Null;
         public InputKey ExitInput = InputKey.Null;
         public int SP_LEVEL;
-        public int RARITY_LEVEL;
+        
         [HideInInspector]
         public string[] ForcedTransitions = { };
         
@@ -34,7 +33,6 @@ namespace Skill
         
         public SkillEntity( string SkillID,
                             string REAL_NAME,
-                            int LEVEL,
                             BehaviorType _attackType,
                             float _AT,
                             float _HP,
@@ -42,12 +40,10 @@ namespace Skill
                             string[] _casual_to_state_nums,
                             string[] _forced_to_state_nums,
                             InputKey _enterInput, InputKey _exitInput,
-                            int _SPMove,
-                            int _rarelevel)
+                            int _SPMove)
         {
             this.SkillID = SkillID;
             this.REAL_NAME = REAL_NAME;
-            this.LEVEL = LEVEL;
             this.StateType = _attackType;
             this.AT = _AT;
             this.HP = _HP;
@@ -56,7 +52,6 @@ namespace Skill
             this.EnterInput = _enterInput;
             this.ExitInput = _exitInput;
             this.SP_LEVEL = _SPMove;
-            this.RARITY_LEVEL = _rarelevel;
             this.AIAttrs = AIAttrs;
             
             if (this.CasualTo == null)
@@ -70,7 +65,6 @@ namespace Skill
         }
         
         public SkillEntity( string REAL_NAME,
-                            int level,
                             BehaviorType _BType,
                             float _AT,
                             float _HP,
@@ -81,11 +75,10 @@ namespace Skill
         {
             SkillID = null;
             this.REAL_NAME = REAL_NAME;
-            LEVEL = level;
             StateType = _BType;
             AT = _AT;
             HP = _HP;
-            CANBECANCELLEDTO = can_be_cancelled_to;
+            CAN_BE_CANCELLED_TO = can_be_cancelled_to;
             EnterInput = enterInput;
             ExitInput = exitInput;
             SP_LEVEL = SPMove;
@@ -93,7 +86,6 @@ namespace Skill
         }
         
         public SkillEntity( string REAL_NAME,
-                            int LEVEL,
                             BehaviorType _attackType,
                             float _AT,
                             float _HP,
@@ -101,12 +93,10 @@ namespace Skill
                             string[] _casual_to_state_nums,
                             string[] _forced_to_state_nums,
                             InputKey _enterInput, InputKey _exitInput,
-                            int _SPMove,
-                            int _rarelevel)
+                            int _SPMove)
         {
             this.SkillID = null;
             this.REAL_NAME = REAL_NAME;
-            this.LEVEL = LEVEL;
             this.StateType = _attackType;
             this.AT = _AT;
             this.HP = _HP;
@@ -115,7 +105,6 @@ namespace Skill
             this.EnterInput = _enterInput;
             this.ExitInput = _exitInput;
             this.SP_LEVEL = _SPMove;
-            this.RARITY_LEVEL = _rarelevel;
             AIAttrs = aIAttrs;
             
             if (this.CasualTo == null)
@@ -130,7 +119,6 @@ namespace Skill
         
         public SkillEntity( string SkillID,
                             string REAL_NAME,
-                            int level,
                             BehaviorType _BType,
                             float _AT,
                             float _HP,
@@ -141,11 +129,10 @@ namespace Skill
         {
             this.SkillID = SkillID;
             this.REAL_NAME = REAL_NAME;
-            LEVEL = level;
             StateType = _BType;
             AT = _AT;
             HP = _HP;
-            CANBECANCELLEDTO = can_be_cancelled_to;
+            CAN_BE_CANCELLED_TO = can_be_cancelled_to;
             EnterInput = enterInput;
             ExitInput = exitInput;
             SP_LEVEL = SPMove;
@@ -185,7 +172,6 @@ namespace Skill
                     R_SE = new SkillEntity
                     {
                         REAL_NAME = "Rush",
-                        LEVEL = 0,
                         StateType = BehaviorType.AC,
                         AT = 0,
                         HP = 0,
@@ -205,7 +191,6 @@ namespace Skill
                     R_SE = new SkillEntity
                     {
                         REAL_NAME = "RushBack",
-                        LEVEL = 0,
                         StateType = BehaviorType.AC,
                         AT = 0,
                         HP = 0,
@@ -233,7 +218,6 @@ namespace Skill
             return new SkillEntity
             {
                 REAL_NAME = "Defend",
-                LEVEL = 0,
                 StateType = BehaviorType.Def,
                 AT = 0,
                 HP = 0,
@@ -259,7 +243,6 @@ namespace Skill
                     M_SE = new SkillEntity
                     {
                         REAL_NAME = "Move",
-                        LEVEL = 0,
                         StateType = BehaviorType.MV,
                         AT = 0,
                         HP = 0,
@@ -279,7 +262,6 @@ namespace Skill
                     M_SE = new SkillEntity
                     {
                         REAL_NAME = "Move",
-                        LEVEL = 0,
                         StateType = BehaviorType.MV,
                         AT = 0,
                         HP = 0,
@@ -299,7 +281,6 @@ namespace Skill
                     M_SE = new SkillEntity()
                     {
                         REAL_NAME = "Move",
-                        LEVEL = 0,
                         StateType = BehaviorType.MV,
                         AT = 0,
                         HP = 0,
@@ -319,7 +300,6 @@ namespace Skill
                     M_SE = new SkillEntity
                     {
                         REAL_NAME = "Move",
-                        LEVEL = 0,
                         StateType = BehaviorType.MV,
                         AT = 0,
                         HP = 0,

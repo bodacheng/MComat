@@ -56,7 +56,7 @@ namespace Soul
                 }
                 SkillEntityDic.TryGetValue(_Key, out _tempSKillEntity);
                 optionsForButtonRefresh.Add(_tempSKillEntity);
-                if ((_tempSKillEntity.CANBECANCELLEDTO && _SkillCancelFlag.Cancel_Flag) || _nowBehavior.Capacity_Exit_Condition())
+                if ((_tempSKillEntity.CAN_BE_CANCELLED_TO && _SkillCancelFlag.Cancel_Flag) || _nowBehavior.Capacity_Exit_Condition())
                 {
                     _canTranTo.Add(_tempSKillEntity);
                 }

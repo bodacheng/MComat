@@ -45,7 +45,7 @@ public partial class SkillSet
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ////////////
         D = Def ? SkillEntity.GetD_SE() : null;
         M = SkillEntity.GetM_SE(MoveType);
-        M.CANBECANCELLEDTO = false;
+        M.CAN_BE_CANCELLED_TO = false;
         R = SkillEntity.GetR_SE(RushType);
 
         //////////////////////////////////////////////////////////////////////////
@@ -174,13 +174,13 @@ public partial class SkillSet
         IDictionary<string, SkillEntity> seDic = new Dictionary<string, SkillEntity>();
         var StateTransitionSetList = new List<SkillEntity>();
         
-        Empty = new SkillEntity("Empty", 0, 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1, 0);
-        zhuangbi = new SkillEntity("zhuangbi", 0, 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1, 0);
-        Victory = new SkillEntity("Victory",0, 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1, 0);
-        Death = new SkillEntity("Death", 0, 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1, 0);
-        Hit = new SkillEntity("Hit", 0, BehaviorType.Hit, 0, 0,new AIAttrs(), H1_list.ToArray(),null,InputKey.Null, InputKey.Null, -1, 0);
-        getUp = new SkillEntity("getUp", 0, BehaviorType.GetUp, 0, 0, new AIAttrs(), H1_list.ToArray(), null, InputKey.Any, InputKey.Null, -1, 0);
-        KnockOff = new SkillEntity("KnockOff", 0, BehaviorType.KnockOff, 0, 0, new AIAttrs(), R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, -1, 0);
+        Empty = new SkillEntity("Empty", BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,  -1);
+        zhuangbi = new SkillEntity("zhuangbi", BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,  -1);
+        Victory = new SkillEntity("Victory",BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);
+        Death = new SkillEntity("Death", BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);
+        Hit = new SkillEntity("Hit", BehaviorType.Hit, 0, 0,new AIAttrs(), H1_list.ToArray(),null,InputKey.Null, InputKey.Null, -1);
+        getUp = new SkillEntity("getUp",  BehaviorType.GetUp, 0, 0, new AIAttrs(), H1_list.ToArray(), null, InputKey.Any, InputKey.Null, -1);
+        KnockOff = new SkillEntity("KnockOff",  BehaviorType.KnockOff, 0, 0, new AIAttrs(), R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, -1);
         if (FightGlobalSetting._hasDefend)
         {
             D.CasualTo = H1_list.ToArray();
@@ -284,7 +284,6 @@ public partial class SkillSet
             var se = new SkillEntity(
                 sc.RECORD_ID,
                 sc.REAL_NAME,
-                0,
                 sc.STATE_TYPE,
                 SkillEntity.ATCal(sc.ATTACK_WEIGHT, level),
                 SkillEntity.StoneHpCal(sc.HP_WEIGHT, level),
@@ -293,8 +292,7 @@ public partial class SkillSet
                 null,
                 InputKey.Null,
                 InputKey.Null,
-                sc.SP_LEVEL,
-                sc.RARITY_LEVEL
+                sc.SP_LEVEL
             );
             return se;
         }
