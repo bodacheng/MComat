@@ -29,7 +29,7 @@ public partial class FightMemberManager
         {
             if (GUILayout.Button("Add", AddDeleteMember))
             {
-                focusingPosID = focusingPosID ?? "0";
+                focusingPosID ??= "0";
                 focusingUnitInfo = new UnitInfo
                 {
                     id = focusingPosID
@@ -62,7 +62,7 @@ public partial class FightMemberManager
             if (string.IsNullOrEmpty(focusingType))
                 return;
             var INHERENTSkills = SkillConfigTable.GetPassiveSkill(focusingUnitInfo.r_id);
-            focusingUnitInfo.set = SkillSet.RandomSkillSet(focusingType,  INHERENTSkills?.RECORD_ID, 1, false);
+            focusingUnitInfo.set = SkillSet.RandomSkillSet(focusingType,  INHERENTSkills?.RECORD_ID,  false);
         }
                 
         // 技能组评价

@@ -173,7 +173,7 @@ namespace mainMenu
             var config = Units.GetUnitConfig(PreScene.target._focusing.r_id);
             var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
             await _connector.FocusingC.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK, config.SPECIAL_ZOKUSEI);
-            await _connector.FocusingC.Step2Initialize(config.TYPE, unitInfo.set, unitInfo.level, config.element, config.SPECIAL_ZOKUSEI);
+            await _connector.FocusingC.Step2Initialize(config.TYPE, unitInfo, config.element, config.SPECIAL_ZOKUSEI);
             if (_connector.FocusingC._MyBehaviorRunner != null)
                 _connector.FocusingC._MyBehaviorRunner.ChangeState("Empty");
         }

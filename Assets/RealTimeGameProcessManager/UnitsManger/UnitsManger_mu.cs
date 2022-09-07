@@ -51,7 +51,7 @@ namespace FightScene
         {
             foreach (var center in TeamMembers.GetValues())
             {
-                center.Step3Initialize(teamConfig, TeamHpRate * SkillSet.INI_Hp(RTFightManager.target.UnitInfoRef[center].set.SkillEntityList()), teamCGMode);
+                center.Step3Initialize(teamConfig, teamCGMode, TeamHpRate);
                 center.FightDataRef.IsDead.Subscribe(x => 
                 {
                     if (x)

@@ -5,7 +5,7 @@ using mainMenu;
 public partial class SkillSet
 {
     // 根据账户内拥有的技能石来补完当前九宫格
-    public static SkillSet FixSkillSet(string type, SkillSet originSkillSet, int level, bool baseOnAcc)
+    public static SkillSet FixSkillSet(string type, SkillSet originSkillSet, bool baseOnAcc)
     {
         var skillSet = SkillSetRandomFix(type, originSkillSet, 1, baseOnAcc);
         if (skillSet == null)
@@ -15,7 +15,6 @@ public partial class SkillSet
         }
         
         skillSet.SortNineAndTwo();
-        skillSet.SetLv(level);
         return skillSet;
     }
 

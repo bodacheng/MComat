@@ -106,10 +106,9 @@ namespace Soul
             }
         }
 
-        public void FormFightingSetsByNineAndTwo(SkillSet nineAndTwo, int level)
+        public void FormFightingSetsByNineAndTwo(SkillSet nineAndTwo)
         {
             nineAndTwo.SortNineAndTwo();
-            nineAndTwo.SetLv(level);
             //这上下两个函数之间存在一个chuanEndCasualT0的问题，从而必须一前一后紧密连接，下次review时候可以看看代码能不能整更利索一些。
             SkillEntityDic = nineAndTwo.GenerateBehaviourSets();
             SkillEntity_List = nineAndTwo.SkillEntityList();//这一行于本游戏本身已经无用，但该列表牵扯到开发环境下角色技能详细的显示，以及框架本身保存xml战斗脚本的功能。
@@ -137,6 +136,19 @@ namespace Soul
             }
             AllConditionCodes = ConditionAndRespond.Keys.ToList();
             _commandWaitingState = BehaviourDic[nineAndTwo.GetM_STS().REAL_NAME];
+        }
+        
+        public void SetAt(float level)
+        {
+            foreach (var kv in BehaviourDic)
+            {
+                var sc = SkillConfigTable.GetSkillConfig(kv.Key);
+                if (sc == null)
+                    continue;
+                kv.Value.AT = SkillEntity.ATCal(sc.ATTACK_WEIGHT, level);
+                SkillEntityDic.TryGetValue(kv.Key, out var skillEntity);
+                skillEntity.AT = kv.Value.AT;
+            }
         }
     }
 }

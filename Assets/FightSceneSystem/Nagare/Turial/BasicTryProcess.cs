@@ -87,9 +87,9 @@ public class BasicTryProcess : FSceneProcess
         //     }
         // }
 
-        UnitInfo before = dataAccess.Units.Get("1");
-        UnitInfo characterDataInfo = UnitInfo.GetUnitInfo(before);
-        adamInfo = characterDataInfo;
+        var before = dataAccess.Units.Get("1");
+        var unitInfo = UnitInfo.GetUnitInfo(before);
+        adamInfo = unitInfo;
         yield break;
     }
     

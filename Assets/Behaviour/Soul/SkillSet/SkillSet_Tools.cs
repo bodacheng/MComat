@@ -51,11 +51,12 @@ public partial class SkillSet
         return intValue;
     }
     
-    public static float INI_Hp(List<SkillEntity> sklist)
+    public static float INI_Hp(List<SkillEntity> sklist, float lv)
     {
         float wholeHp = 0;
         for (var index = 0; index < sklist.Count; index++)
         {
+            sklist[index].SetLv(lv);
             wholeHp += sklist[index].HP;
         }
         return wholeHp;

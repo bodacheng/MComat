@@ -52,15 +52,15 @@ public class PosKeySet
     
     public MultiDic<int, int, UnitInfo> LoadTeamDic()
     {
-        MultiDic<int, int, UnitInfo> multiDictionary = new MultiDic<int, int, UnitInfo>();
-        for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
+        var multiDictionary = new MultiDic<int, int, UnitInfo>();
+        for (var i = 0; i < PosNumsWithLocalKeys.Length; i++)
         {
             if (PosNumsWithLocalKeys[i].instanceID != null)
             {
-                UnitInfo getUnitDetailModel = dataAccess.Units.Get(PosNumsWithLocalKeys[i].instanceID);
+                var getUnitDetailModel = dataAccess.Units.Get(PosNumsWithLocalKeys[i].instanceID);
                 if (getUnitDetailModel != null)
                 {
-                    UnitInfo unitInfo = UnitInfo.GetUnitInfo(getUnitDetailModel);
+                    var unitInfo = UnitInfo.GetUnitInfo(getUnitDetailModel);
                     multiDictionary.Set(0, PosNumsWithLocalKeys[i].posNum, unitInfo);
                 }
             }

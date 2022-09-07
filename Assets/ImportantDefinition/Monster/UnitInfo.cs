@@ -93,7 +93,6 @@ public class UnitInfo
             set.SetPassive(unitConfigInfo.DEFENDABLE_FLAG, unitConfigInfo.MoveType, unitConfigInfo.RushType);
             unitInfo.set = set;
             unitInfo.set.SortNineAndTwo();
-            unitInfo.set.SetLv(unitInfo.level);
             return unitInfo;
         }
         catch (Exception e)

@@ -40,6 +40,9 @@ public partial class Data_Center : MonoBehaviour
     [Header("传统防御盾。可能真的用不到了")]
     public BO_Shield Shield;
     
+    private UnitInfo unitInfo;
+    public UnitInfo UnitInfo => unitInfo;
+    
     public bool IfPreparedForBattle()
     {
         return phase1Initialized && phase2Initialized;
@@ -94,16 +97,17 @@ public partial class Data_Center : MonoBehaviour
         }
     }
     
-    public async UniTask Step2Initialize(string type, SkillSet nineAndTwo, int level, Element element, string personalMagic)
+    public async UniTask Step2Initialize(string type, UnitInfo unitInfo, Element element, string personalMagic)
     {
         if (!phase2Initialized)
         {
             phase2Initialized = true;
         }
         
+        this.unitInfo = unitInfo;
         WholeT.gameObject.SetActive(true);// 动画模块的一些处理要求active状态下运行
         
-        _MyBehaviorRunner.FormFightingSetsByNineAndTwo(nineAndTwo, level);
+        _MyBehaviorRunner.FormFightingSetsByNineAndTwo(unitInfo.set);
         _MyBehaviorRunner.INIStates(this);
         
         var tasks = new List<UniTask>
@@ -129,7 +133,7 @@ public partial class Data_Center : MonoBehaviour
         await UniTask.WhenAll(tasks);
     }
 
-    public void Step3Initialize(TeamConfig _TeamConfig, float nineSkillHp, CriticalGaugeMode criticalGaugeMode)
+    public void Step3Initialize(TeamConfig _TeamConfig, CriticalGaugeMode criticalGaugeMode, float TeamHpRate = 1, int lv = -1)
     {
         FightDataRef.IsDead.Value = false;
         BodyElementTagAndLayerSet(_TeamConfig);
@@ -138,16 +142,21 @@ public partial class Data_Center : MonoBehaviour
         FightDataRef.EnableAllLimbs(true);
         FightDataRef._comboHitCount.HitCount.Value = 0;
         FightDataRef.CriticalGaugeMode = criticalGaugeMode;
-        FightDataRef.CurrentHp.Value = nineSkillHp;
+        if (lv == -1)
+            lv = unitInfo.level;
+        float HP = SkillSet.INI_Hp(unitInfo.set.SkillEntityList(), lv) * TeamHpRate;
+        FightDataRef.CurrentHp.Value = HP;
         FightDataRef.CurrentHp.Subscribe(x =>
         {
-            FightDataRef.CurrentHp.Value = Mathf.Clamp(x, 0, nineSkillHp);
+            FightDataRef.CurrentHp.Value = Mathf.Clamp(x, 0, HP);
         }).AddTo(gameObject);
         
         FightDataRef.Resistance.Subscribe(x =>
         {
             FightDataRef.Resistance.Value = Mathf.Clamp(x, 0, FightGlobalSetting._ResistanceMax);
         }).AddTo(gameObject);
+        
+        this._MyBehaviorRunner.SetAt(lv);
     }
 
     //我们希望datacenter是整个角色初始化的出发点，那么这个地方应该也可以做到根据情况决定一些组件加载还是不加载。

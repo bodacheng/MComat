@@ -7,7 +7,7 @@ using mainMenu;
 public partial class SkillSet
 {
     // 随机技能组
-    public static SkillSet RandomSkillSet(string type, string originSkill, int level, bool baseOnAcc, SkillStonesBox.StoneFilterForm filterForm = null)
+    public static SkillSet RandomSkillSet(string type, string originSkill, bool baseOnAcc, SkillStonesBox.StoneFilterForm filterForm = null)
     {
         var skillSet = new SkillSet();
         var originSkillConfig = SkillConfigTable.GetSkillConfig(originSkill);
@@ -26,7 +26,6 @@ public partial class SkillSet
         
         skillSet = RandomSkillSetRec(type, skillSet, filterForm, 1, originSkillConfig, baseOnAcc);
         skillSet.SortNineAndTwo();
-        skillSet.SetLv(level);
         return skillSet;
     }
     

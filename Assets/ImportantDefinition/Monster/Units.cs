@@ -405,13 +405,13 @@ public static class Units
     
     public static IDictionary<string,string> GetMonsterIDsAndNamesDic(string type) // close, near, far.rarelevel = -1代表全部，0代表无星级技能
     {
-        IDictionary<string, string> Mdic = new Dictionary<string, string>();
+        IDictionary<string, string> mdic = new Dictionary<string, string>();
         List<Row> references = FindAll_MONSTER_TYPE(type);
         foreach (Row one in references)
         {
-            Mdic.Add(one.RECORD_ID, one.REAL_NAME);
+            mdic.Add(one.RECORD_ID, one.REAL_NAME);
         }
-        return Mdic;
+        return mdic;
     }
 
     public static List<Row> FindAll_TYPE_REALNAME(string MONSTER_TYPE, string keyName)

@@ -38,7 +38,6 @@ public partial class FightMemberManager
             break;
         }
         focusingUnitInfo.set.SortNineAndTwo();
-        focusingUnitInfo.set.SetLv(focusingUnitInfo.level);
     }
     
     string GetFocusSkillId()

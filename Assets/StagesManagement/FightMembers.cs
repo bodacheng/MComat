@@ -41,17 +41,17 @@ public class FightMembers
         var char1 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[0]],
-            set = SkillSet.RandomSkillSet("human", null, 1, false)
+            set = SkillSet.RandomSkillSet("human", null,  false)
         };
         var char2 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[1]],
-            set = SkillSet.RandomSkillSet("human", null, 1, false)
+            set = SkillSet.RandomSkillSet("human", null,  false)
         };
         var char3 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[2]],
-            set = SkillSet.RandomSkillSet("human", null, 1, false)
+            set = SkillSet.RandomSkillSet("human", null,  false)
         };
         
         target.EnemySets.Set(0, 0, char1);
@@ -83,12 +83,12 @@ public class FightMembers
         var char1 = new UnitInfo
         {
             r_id = monsterIds[Indexes[0]],
-            set = SkillSet.RandomSkillSet(focusingtype, null, 1, false, filterForm)
+            set = SkillSet.RandomSkillSet(focusingtype, null, false, filterForm)
         };
         var char2 = new UnitInfo
         {
             r_id = monsterIds[Indexes[1]],
-            set = SkillSet.RandomSkillSet(focusingtype, null, 1, false, filterForm)
+            set = SkillSet.RandomSkillSet(focusingtype, null, false, filterForm)
         };
         
         switch (teamMode)
@@ -119,33 +119,33 @@ public class FightMembers
         var char1 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[0]],
-            set = SkillSet.RandomSkillSet("human", null, 1, false)
+            set = SkillSet.RandomSkillSet("human", null,false)
         };
         var char2 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[1]],
-            set = SkillSet.RandomSkillSet("human", null, 1, false)
+            set = SkillSet.RandomSkillSet("human", null,false)
         };
         var char3 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[2]],
-            set = SkillSet.RandomSkillSet("human", null, 1, false)
+            set = SkillSet.RandomSkillSet("human", null,false)
         };
 
         var char4 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[3]],
-            set = SkillSet.RandomSkillSet("human", null, 1, false)
+            set = SkillSet.RandomSkillSet("human", null,false)
         };
         var char5 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[4]],
-            set = SkillSet.RandomSkillSet("human", null, 1, false)
+            set = SkillSet.RandomSkillSet("human", null,false)
         };
         var char6 = new UnitInfo
         {
             r_id = charRecordIds[Indexes[5]],
-            set = SkillSet.RandomSkillSet("human", null, 1, false)
+            set = SkillSet.RandomSkillSet("human", null,false)
         };
 
         switch (teamMode)

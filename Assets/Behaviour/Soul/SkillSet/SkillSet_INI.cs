@@ -17,21 +17,6 @@ public partial class SkillSet
     readonly List<string> H1_list = new ();
     readonly List<string> H2_list = new ();
     readonly List<string> H3_list = new ();
-
-    public void SetLv(int level)
-    {
-        A1?.SetLv(level);
-        A2?.SetLv(level);
-        A3?.SetLv(level);
-        
-        B1?.SetLv(level);
-        B2?.SetLv(level);
-        B3?.SetLv(level);
-        
-        C1?.SetLv(level);
-        C2?.SetLv(level);
-        C3?.SetLv(level);
-    }
     
     public void SortNineAndTwo()
     {

@@ -1,9 +1,7 @@
 using mainMenu;
 using dataAccess;
 using UnityEngine;
-using System.Collections.Generic;
 using System.Linq;
-using Skill;
 
 public partial class SkillEditLayer : UILayer
 {
@@ -12,7 +10,7 @@ public partial class SkillEditLayer : UILayer
         var info = PreScene.target._focusing;
         var unitConfig = Units.GetUnitConfig(info.r_id);
         var now = NineSlot.GetCurrentNineAndTwo();
-        var targetSkillSet = SkillSet.FixSkillSet(unitConfig.TYPE, now, 1, true);
+        var targetSkillSet = SkillSet.FixSkillSet(unitConfig.TYPE, now,  true);
         
         if (targetSkillSet == null)
         {
@@ -30,7 +28,7 @@ public partial class SkillEditLayer : UILayer
         var unitConfig = Units.GetUnitConfig(info.r_id);
         var originSkillInfo = Stones.GetOriginSkillOfUnit(info.id);
         // 这一步仅仅是根据账户拥有技能石的情况来确定了可行的技能组，也就是说根据手上的石头这个技能组能拼出来，但没提供具体的石头，所以防重复工作在实际装备技能石的时候（AddRandomStoneToSlot）也要做
-        var targetSkillSet = SkillSet.RandomSkillSet(unitConfig.TYPE, originSkillInfo?.SkillId, 1, true);
+        var targetSkillSet = SkillSet.RandomSkillSet(unitConfig.TYPE, originSkillInfo?.SkillId, true);
         ForceClearAll();
         Finish(info, targetSkillSet);
     }

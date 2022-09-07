@@ -41,7 +41,7 @@ namespace FightScene
             {
                 //  时间刷新整备
                 RTFightManager.target.RefreshTimeDic.Add(center, new ReactiveProperty<float>(0));
-                center.Step3Initialize(teamConfig, TeamHpRate * SkillSet.INI_Hp(RTFightManager.target.UnitInfoRef[center].set.SkillEntityList()), teamCGMode);
+                center.Step3Initialize(teamConfig, teamCGMode, TeamHpRate);
                 center.FightDataRef.IsDead.Subscribe(x => {
                     if (x) 
                     {

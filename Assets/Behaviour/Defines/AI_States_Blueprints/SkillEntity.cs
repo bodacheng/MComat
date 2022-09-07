@@ -34,8 +34,11 @@ namespace Skill
         public void SetLv(float level)
         {
             var sc = SkillConfigTable.GetSkillConfig(SkillID);
-            AT = ATCal(sc.ATTACK_WEIGHT, level);
-            HP = StoneHpCal(sc.HP_WEIGHT, level);
+            if (sc != null)
+            {
+                AT = ATCal(sc.ATTACK_WEIGHT, level);
+                HP = StoneHpCal(sc.HP_WEIGHT, level);
+            }
         }
         
         public SkillEntity( string SkillID,
