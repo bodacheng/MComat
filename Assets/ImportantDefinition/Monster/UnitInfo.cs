@@ -49,44 +49,48 @@ public class UnitInfo
             var unitConfigInfo = Units.RowToUnitConfigInfo(Units.Find_RECORD_ID(info.r_id));
             if (unitConfigInfo == null)
             {
-                Debug.Log("角色定义信息错误。monsterId：" + info.r_id);
+                Debug.Log("角色定义信息错误。r_id：" + info.r_id);
                 return null;
             }
 
             var levels = new List<float>();
-            for (var i = 0; i < targets.Count; i++)
+            foreach (var t in targets)
             {
-                switch (targets[i].Slot)
+                switch (t.Slot)
                 {
                     case "1":
-                        set.a1 = targets[i].SkillId;
+                        set.a1 = t.SkillId;
                         break;
                     case "2":
-                        set.a2 = targets[i].SkillId;
+                        set.a2 = t.SkillId;
                         break;
                     case "3":
-                        set.a3 = targets[i].SkillId;
+                        set.a3 = t.SkillId;
                         break;
                     case "4":
-                        set.b1 = targets[i].SkillId;
+                        set.b1 = t.SkillId;
                         break;
                     case "5":
-                        set.b2 = targets[i].SkillId;
+                        set.b2 = t.SkillId;
                         break;
                     case "6":
-                        set.b3 = targets[i].SkillId;
+                        set.b3 = t.SkillId;
                         break;
                     case "7":
-                        set.c1 = targets[i].SkillId;
+                        set.c1 = t.SkillId;
                         break;
                     case "8":
-                        set.c2 = targets[i].SkillId;
+                        set.c2 = t.SkillId;
                         break;
                     case "9":
-                        set.c3 = targets[i].SkillId;
+                        set.c3 = t.SkillId;
                         break;
                 }
-                levels.Add(targets[i].Level);
+                var sc = SkillConfigTable.GetSkillConfig(t.SkillId);
+                if (t.Born == "true" && sc.EVENT_CODE == "Born")
+                {
+                }else
+                    levels.Add(t.Level);
             }
             
             unitInfo.level = set.GetAerLevel(levels);
