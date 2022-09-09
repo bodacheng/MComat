@@ -45,6 +45,10 @@ public class ReturnLayer : UILayer
         {
             UILayerLoader.Remove("ReturnLayer");
         }
+        else
+        {
+            Open();
+        }
     }
     
     public static void PUSH(UnityAction returnAction)
