@@ -151,13 +151,13 @@ namespace mainMenu
                 switch (PlayerAccountInfo.Me.progress)
                 {
                     case PlayerAccountProgressStep.Freedom:
-                        trySwitchToStep(MainMenuNote.goingtostep, false);
+                        trySwitchToStep(MainMenuNote.GoingTo, false);
                         break;
                     case PlayerAccountProgressStep.justCreated:
                         break;
                     case PlayerAccountProgressStep.Tutorial:
                         TutorialRunner.Main.GenerateTutorial();
-                        trySwitchToStep(MainMenuNote.goingtostep, false);
+                        trySwitchToStep(MainMenuNote.GoingTo, false);
                         TutorialRunner.Main.StartToMove();
                         break;
                 }

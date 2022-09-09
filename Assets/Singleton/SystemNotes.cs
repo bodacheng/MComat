@@ -6,5 +6,5 @@
 
 public class MainMenuNote
 {
-    public static MainSceneStep goingtostep = MainSceneStep.FrontPage;
+    public static MainSceneStep GoingTo = MainSceneStep.FrontPage;
 }

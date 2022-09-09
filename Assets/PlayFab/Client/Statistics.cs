@@ -27,6 +27,9 @@ public partial class PlayFabReadClient
         {
             switch (value.StatisticName)
             {
+                case "rank":
+                    PlayerAccountInfo.Me.currentRank = value.Value;
+                    break;
                 default:
                     break;
             }

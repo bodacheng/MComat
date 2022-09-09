@@ -117,7 +117,7 @@ namespace FightScene
             RTFightManager.target.ClearUnits();
             FightLogger.value.WatchMissionsAbandon();
             FSceneProcessesRunner.Main.Clear();
-            MainMenuNote.goingtostep = MainSceneStep.FrontPage;
+            MainMenuNote.GoingTo = MainSceneStep.FrontPage;
             HitBoxesProcesser.Instance.Clear();
             SingleAssignmentDisposableCleaner.Clear();
             SceneManager.LoadScene(1);

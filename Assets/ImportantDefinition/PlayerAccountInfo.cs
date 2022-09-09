@@ -11,6 +11,9 @@ public class PlayerAccountInfo
     
     public string PlayFabUsername;
     public string PlayerName;
+
+    public int rankPont;
+    public int currentRank;
     
     int _stoneBoxSize;
     int _arcadeProcess;

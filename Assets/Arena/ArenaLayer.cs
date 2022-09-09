@@ -12,15 +12,18 @@ public class ArenaLayer : UILayer
     [SerializeField] Button EditMyTeamBtn;
     [SerializeField] Text myScore;
     [SerializeField] Text myRank;
+    [SerializeField] GameObject plsEditTeamIndicator;
+    [SerializeField] GameObject bronzeIcon;
+    [SerializeField] GameObject silverIcon;
+    [SerializeField] GameObject goldIcon;
     #endregion
     
     [SerializeField] Button RefreshBtn;
     [SerializeField] RectTransform EnemiesT;
     [SerializeField] ArenaFightTeamDisplay ArenaFightTeamDisplayPrefab;
-
+    
     CloudScript.LeaderboardInfo myLeaderboardInfo;
     
-
     private Action<bool> SetLoaded;
     private Action<string> ReturnToLobby;
     private Func<int, List<CloudScript.LeaderboardInfo>> GetOpponentAroundPoint;
@@ -30,9 +33,18 @@ public class ArenaLayer : UILayer
         this.ReturnToLobby = ReturnToLobby;
         this.GetOpponentAroundPoint = GetOpponentAroundPoint;
     }
+
+    void RefreshRankIcon(int rank)
+    {
+        bronzeIcon.SetActive(rank == 0);
+        silverIcon.SetActive(rank == 1);
+        goldIcon.SetActive(rank == 2);
+    }
     
     public void RefreshOpponent()
     {
+        RefreshRankIcon(PlayerAccountInfo.Me.currentRank);
+        
         RefreshBtn.onClick.RemoveAllListeners();
         RefreshBtn.onClick.AddListener(RefreshOpponent);
         
@@ -121,6 +133,8 @@ public class ArenaLayer : UILayer
         var info1 = dataAccess.Units.Get(Pos1InstanceID);
         var info2 = dataAccess.Units.Get(Pos2InstanceID);
         var info3 = dataAccess.Units.Get(Pos3InstanceID);
+        
+        plsEditTeamIndicator.SetActive(info1 == null || info2 == null || info3 == null);
         
         member1.ChangeIcon(info1);
         member2.ChangeIcon(info2);

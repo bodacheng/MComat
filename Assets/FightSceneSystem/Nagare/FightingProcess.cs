@@ -37,7 +37,7 @@ namespace FightScene
                             PlayFabUsername = x.PlayFabId
                         };
                         CloudScript.CheckIn();
-                        MainMenuNote.goingtostep = MainSceneStep.FrontPage;
+                        MainMenuNote.GoingTo = MainSceneStep.FrontPage;
                         SceneManager.LoadScene(1);
                     },
                     (x) =>
