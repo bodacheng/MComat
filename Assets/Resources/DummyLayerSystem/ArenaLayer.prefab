@@ -1230,7 +1230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: {fileID: 8575029600373481159}
-  score: {fileID: 5034609538538124836}
+  rank: {fileID: 5034609538538124836}
   member1: {fileID: 332134475635693634}
   member2: {fileID: 9020925581389436620}
   member3: {fileID: 4484838459595302472}
@@ -1247,7 +1247,7 @@ GameObject:
   - component: {fileID: 5034609538538124837}
   - component: {fileID: 5034609538538124836}
   m_Layer: 5
-  m_Name: Score
+  m_Name: Rank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

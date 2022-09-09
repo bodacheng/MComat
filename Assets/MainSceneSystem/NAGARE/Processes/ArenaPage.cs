@@ -10,7 +10,7 @@ public class ArenaPage : MSceneProcess
     void EnterProcess()
     {
         arenaLayer = UILayerLoader.Load(PreScene.target.T, "ArenaLayer") as ArenaLayer;
-        arenaLayer.SetUp(SetLoaded, PreScene.ReturnToLobby, table.GetOpponentAroundPoint);
+        arenaLayer.SetUp(SetLoaded, PreScene.ReturnToLobby, table.GetDummiesAroundPoint);
         arenaLayer.RefreshOpponent();
     }
     

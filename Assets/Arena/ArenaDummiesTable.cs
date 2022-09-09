@@ -82,7 +82,7 @@ public class ArenaDummiesTable
 		return info;
 	}
 
-	public List<CloudScript.LeaderboardInfo> GetOpponentAroundPoint(int point)
+	public List<CloudScript.LeaderboardInfo> GetDummiesAroundPoint(int point)
 	{
 		Row startRow = null;
 		int startIndex;

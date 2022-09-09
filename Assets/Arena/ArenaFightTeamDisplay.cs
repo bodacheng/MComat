@@ -6,7 +6,7 @@ using mainMenu;
 public class ArenaFightTeamDisplay : MonoBehaviour
 {
     public Text displayName;
-    public Text score;
+    public Text rank;
     public HeroIcon member1, member2, member3;
     public Button BigButton;
         
@@ -14,7 +14,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
     public void AddFightToList(CloudScript.LeaderboardInfo LInfo)
     {
         displayName.text = LInfo.PlayerLeaderboardEntry.DisplayName;
-        score.text = LInfo.PlayerLeaderboardEntry.StatValue.ToString();
+        rank.text = LInfo.PlayerLeaderboardEntry.Position.ToString();
         
         // 竞技场模式下毫无考虑敌人“多组上场”的情况
         for (int index = 0; index < LInfo.Team.Length; index++)
