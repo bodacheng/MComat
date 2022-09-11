@@ -14,7 +14,7 @@ namespace mainMenu
             StoneFilterForm filterForm = new StoneFilterForm
             {
                 type = FocusingType,
-                exType = new int[1] { GetFocusingExType() },
+                exType = new int[1] { FocusingExType },
                 close = closeCheckBox.isOn,
                 near = nearCheckBox.isOn,
                 far = farCheckBox.isOn,

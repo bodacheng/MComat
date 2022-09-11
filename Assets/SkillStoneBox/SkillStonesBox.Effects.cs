@@ -1,0 +1,61 @@
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
+using UniRx;
+
+namespace mainMenu
+{
+    public partial class SkillStonesBox : MonoBehaviour
+    {
+        private int focusingExType;
+        int FocusingExType
+        {
+            get => focusingExType;
+            set
+            {
+                focusingExType = value;
+                _tabEffects.SetSelectedTabPos(focusingExType);
+            }
+        }
+        
+        public void IniExTabs()
+        {
+            void Temp(Button btn, int exLevel)
+            {
+                btn.onClick.AddListener(() =>
+                {
+                    FocusingExType = exLevel;
+                    RestFilter();
+                });
+            }
+            Temp(NormalTab,0);
+            Temp(EX1Tab,1);
+            Temp(EX2Tab,2);
+            Temp(EX3Tab,3);
+        }
+        
+        public async void IniExTabsEffects(Camera fxCamera)
+        {
+            void IniExTab(Button btn, int exLevel)
+            {
+                var worldPos = PosCal.GetWorldPos(fxCamera, 
+                    PosCal.ConvertAnchorPos(btn.GetComponent<RectTransform>().anchoredPosition, Vector2.one, Vector2.zero),
+                    5f);
+                _tabEffects.RefreshTagEffect(worldPos, exLevel);
+                btn.onClick.AddListener(() =>
+                {
+                    //NormalTabFeature(PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 3));
+                    _tabEffects.SkillButtonExplosion
+                        (exLevel, PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 5f), _tabEffects.transform);
+                });
+            }
+            await Observable.TimerFrame(5);
+            IniExTab(NormalTab,0);
+            IniExTab(EX1Tab,1);
+            IniExTab(EX2Tab,2);
+            IniExTab(EX3Tab,3);
+            
+            _tabEffects.SetSelectedTabPos(focusingExType);
+        }
+    }
+}

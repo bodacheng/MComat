@@ -56,7 +56,7 @@ public class StoneListLayer : UILayer
         returnValue.box.GenerateCells();
         returnValue.box._tabEffects.SwitchZokusei(Element.blueMagic, ()=> returnValue.box.IniExTabsEffects(PreScene.target.FxCamera)).Forget();
         returnValue.box.AddFeatureToCells(returnValue.CellFeature_StoneShow);
-        returnValue.box.EXTabsFeatureRefresh(true);
+        returnValue.box.FilterFeatureRefresh(true);
         returnValue.box.RestFilter();
         returnValue._skillStoneDetail.Clear();
         returnValue.levelManager.INI();

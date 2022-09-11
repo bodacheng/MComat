@@ -30,7 +30,6 @@ namespace mainMenu
 
         // rare 度限定
         List<int> rares = new List<int> { 0, 1, 2, 3, 4, 5 };
-        int focusingExType;
         
         void Awake()
         {
@@ -46,51 +45,8 @@ namespace mainMenu
             set;
         }
         
-        int GetFocusingExType()
-        {
-            return focusingExType;
-        }
-
-        public void IniExTabs()
-        {
-            void Temp(Button btn, int exLevel)
-            {
-                btn.onClick.AddListener(() =>
-                {
-                    focusingExType = exLevel;
-                    RestFilter();
-                });
-            }
-            Temp(NormalTab,0);
-            Temp(EX1Tab,1);
-            Temp(EX2Tab,2);
-            Temp(EX3Tab,3);
-        }
-
-        public async void IniExTabsEffects(Camera fxCamera)
-        {
-            void Temp(Button btn, int exLevel)
-            {
-                var worldPos = PosCal.GetWorldPos(fxCamera, 
-                    PosCal.ConvertAnchorPos(btn.GetComponent<RectTransform>().anchoredPosition, Vector2.one, Vector2.zero),
-                    5f);
-                _tabEffects.RefreshTagEffect(worldPos, exLevel);
-                btn.onClick.AddListener(() =>
-                {
-                    //NormalTabFeature(PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 3));
-                    _tabEffects.SkillButtonExplosion
-                        (exLevel, PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 5f), _tabEffects.transform);
-                });
-            }
-            await Observable.TimerFrame(5);
-            Temp(NormalTab,0);
-            Temp(EX1Tab,1);
-            Temp(EX2Tab,2);
-            Temp(EX3Tab,3);
-        }
-        
         // 功能系。刷新技能石陈列界面。这里应该包括一个特殊功能，就是展示Tutorial模式下临时可用的那些石头
-        public void EXTabsFeatureRefresh(bool viewingMode)
+        public void FilterFeatureRefresh(bool viewingMode)
         {
             if (viewingMode)
             {
@@ -126,7 +82,7 @@ namespace mainMenu
         public void TypeDropDownBehaviour()
         {
             string targetType = types.options[types.value].text.Clone() as string;
-            EXTabsFeatureRefresh(true);
+            FilterFeatureRefresh(true);
             RestFilter();
         }
     }

@@ -47,6 +47,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - btn_effect
+  - m_GUID: d0b39e8dfd8694a66bbdde731c0a4905
+    m_Address: ButtonEffects/selectedTab.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - btn_effect
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

@@ -9,6 +9,16 @@ public class ElementStoneTagsGroup
     public readonly IDictionary<int, ParticleSystem> btnPressedEffects = new Dictionary<int, ParticleSystem>();
     readonly IDictionary<int, ParticleSystem> exTagEffects = new Dictionary<int, ParticleSystem>();
     readonly IDictionary<int, ParticleSystem> slotEffects = new Dictionary<int, ParticleSystem>();
+    ParticleSystem selectedTab;
+    
+    public void SetSelectedTabPos(int ex)
+    {
+        selectedTab.Clear(true);
+        exTagEffects.TryGetValue(ex, out var tab);
+        selectedTab.transform.SetParent(tab.transform);
+        selectedTab.transform.localPosition = Vector3.zero;
+        selectedTab.Play();
+    }
     
     public void CloseTagEffects()
     {
@@ -16,9 +26,10 @@ public class ElementStoneTagsGroup
         {
             keyValuePair.Value.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
+        selectedTab.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
     
-    public async UniTask INI_forSkillStoneBox(Element element,Transform effectObjectParent)
+    public async UniTask INI_forSkillStoneBox(Element element, Transform effectObjectParent)
     {
         btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
         
@@ -36,7 +47,10 @@ public class ElementStoneTagsGroup
         btnEffectsSetsForStoneBox.Add(1, ex1Tab.GetComponent<ParticleSystem>());
         btnEffectsSetsForStoneBox.Add(2, ex2Tab.GetComponent<ParticleSystem>());
         btnEffectsSetsForStoneBox.Add(3, ex3Tab.GetComponent<ParticleSystem>());
-
+        
+        selectedTab = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/selectedTab.prefab");
+        selectedTab.transform.SetParent(effectObjectParent);
+        
         await LoadPressedEffect(element, effectObjectParent);
     }
     
@@ -150,5 +164,7 @@ public class ElementStoneTagsGroup
                 GameObject.Destroy(VARIABLE.Value.gameObject);
         }
         slotEffects.Clear();
+        
+        GameObject.Destroy(selectedTab.gameObject);
     }
 }

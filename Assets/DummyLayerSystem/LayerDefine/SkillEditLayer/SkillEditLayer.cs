@@ -57,7 +57,7 @@ public partial class SkillEditLayer : UILayer
         returnValue.StonesBox.AddFeatureToCells(returnValue.StoneCellFeature);
         returnValue.StonesBox.IniExTabs();
         await returnValue.StonesBox._tabEffects.SwitchZokusei(unitConfig.element, ()=> returnValue.StonesBox.IniExTabsEffects(PreScene.target.FxCamera));
-        returnValue.StonesBox.EXTabsFeatureRefresh(true);
+        returnValue.StonesBox.FilterFeatureRefresh(true);
         returnValue._skillStoneDetail.Clear();
         returnValue.SkillEditButtonFeature(PreScene.target._focusing);
         toDo?.Invoke(returnValue);
@@ -87,7 +87,7 @@ public partial class SkillEditLayer : UILayer
         var unitInfo = Units.GetUnitConfig(_UnitInfo.r_id);
         StonesBox.FocusingType = unitInfo.TYPE;
         StonesBox.RestFilter();
-        StonesBox.EXTabsFeatureRefresh(false);
+        StonesBox.FilterFeatureRefresh(false);
         void SkillEditConfirm()
         {
             NineSlot.UpdateStonesBaseOnSlots(_UnitInfo);

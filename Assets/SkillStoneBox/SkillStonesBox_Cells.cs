@@ -78,7 +78,7 @@ namespace mainMenu
 
         public void ReturnStoneToBox(SKStoneItem item)
         {
-            if (item._SkillConfig.SP_LEVEL == GetFocusingExType())
+            if (item._SkillConfig.SP_LEVEL == FocusingExType)
             {
                 StoneCell dragAndDropCell = GetFirstEmptyCell();
                 if (dragAndDropCell != null)
