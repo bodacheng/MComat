@@ -12,6 +12,11 @@ public partial class PlayFabReadClient
     /// 而是一个账户生成后按某种主动方式给添加的，
     /// 所以一个playfab玩家账号完全可能这个登陆用的Username是空。
     /// 我们采取的策略是在玩家账号生成瞬间靠自动化流程把玩家的playfabid赋值给Username
+    ///
+    /// 有一个非常大的问题在于，如果玩家用这个方法登陆，
+    /// 我们希望玩家输入的账号是直接与这个设备进行绑定，
+    /// 那么如果当前的设备已经与其他账号进行了绑定的话，则必须先和那个账号进行松绑
+    /// 
     /// </summary>
     /// <param name="userName"></param>
     /// <param name="pw"></param>
@@ -32,14 +37,15 @@ public partial class PlayFabReadClient
             },
             (x)=>
             {
-                LinkDevice();
+                //UnLinkDevice(LinkDevice);
                 success.Invoke(x);
             },
             (x)=>
             {
                 Debug.Log(x.Error);
                 fail.Invoke(x);
-            });
+            }
+        );
     }
     
     /// <summary>
