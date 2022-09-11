@@ -106,7 +106,37 @@ public class FrontPage : MSceneProcess
             () =>
             {
                 ProgressLayer.Close();
-                EnterProcess();
+                if (PlayerAccountInfo.Me.PlayerName == null)
+                {
+                    NickNameLayer.Open(
+                        (x) =>
+                        {
+                            var popupLayer = PopupLayer.Open(PreScene.target.T);
+                            popupLayer.ArrangeConfirmWindow(() =>
+                            {
+                                PlayFabReadClient.UpdateUserData(
+                                    new UpdateUserDataRequest()
+                                    {
+                                        Data = new Dictionary<string, string>()
+                                        {
+                                            { "PlayerName", x }
+                                        }
+                                    },
+                                    (x) =>
+                                    {
+                                        UILayerLoader.Remove("NickNameLayer");
+                                        if (x)
+                                            EnterProcess();
+                                    }
+                                );
+                            }, "Set as your nick name?");
+                        }
+                    );
+                }
+                else
+                {
+                    EnterProcess();
+                }
             },
             () => { Debug.Log("错误，怎么办？"); }
         );

@@ -13,8 +13,12 @@ public partial class PlayFabReadClient
         PlayFabClientAPI.GetUserData
         (
             req,
-            (GetUserDataResult obj) => {
-                //_AccInfo.PlayerName = obj.Data["PlayerName"].Value;
+            (GetUserDataResult obj) =>
+            {
+                if (obj.Data.ContainsKey("PlayerName"))
+                    PlayerAccountInfo.Me.PlayerName = obj.Data["PlayerName"].Value;
+                else
+                    PlayerAccountInfo.Me.PlayerName = null;
                 finished.Invoke(true);
             },
             errorCallback => {

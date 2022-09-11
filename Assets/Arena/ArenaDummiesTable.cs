@@ -76,6 +76,7 @@ public class ArenaDummiesTable
 			{
 				DisplayName = row.NICK_NAME,
 				StatValue = Int32.Parse(row.ARENA_POINT),
+				Position =  -1
 			},
 			Team = row.GetFightMembers().EnemySets._SerializableSets
 		};

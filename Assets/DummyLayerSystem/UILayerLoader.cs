@@ -7,6 +7,7 @@ namespace DummyLayerSystem
     {
         static readonly IDictionary<string, string> paths = new Dictionary<string, string>()
         {
+            {"NickNameLayer", "DummyLayerSystem/NickNameLayer"},
             {"UpperInfoBar", "DummyLayerSystem/UpperInfoBar"},
             {"FrontLayer", "DummyLayerSystem/FrontLayer"},
             {"ArcadeTop", "DummyLayerSystem/ArcadeTop"},
