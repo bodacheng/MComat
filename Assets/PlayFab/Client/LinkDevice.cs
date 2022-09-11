@@ -2,6 +2,9 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 
+/// <summary>
+/// 这一部分我们的目标是不用它。link设备的流程应该靠playfab那边的自动化
+/// </summary>
 public partial class PlayFabReadClient
 {
     static void LinkDevice()
@@ -38,6 +41,43 @@ public partial class PlayFabReadClient
                         Debug.Log(x);
                     }
                 );
+#endif
+    }
+
+    public static void UnLinkDevice()
+    {
+#if UNITY_IOS
+        PlayFabClientAPI.UnlinkIOSDeviceID(
+            new UnlinkIOSDeviceIDRequest
+            {
+                DeviceId = SystemInfo.deviceUniqueIdentifier
+            },
+            (x) =>
+            {
+                Debug.Log(x);
+            },
+            (x) =>
+            {
+                Debug.Log(x);
+            }
+        );
+#endif
+        
+#if UNITY_ANDROID
+        PlayFabClientAPI.UnlinkAndroidDeviceID(
+            new UnlinkAndroidDeviceIDRequest
+            {
+                AndroidDeviceId = SystemInfo.deviceUniqueIdentifier
+            },
+            (x) =>
+            {
+                Debug.Log(x);
+            },
+            (x) =>
+            {
+                Debug.Log(x);
+            }
+        );
 #endif
     }
 }

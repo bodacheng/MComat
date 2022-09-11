@@ -74,7 +74,7 @@ public partial class SkillEditLayer : UILayer
             }
             NineSlot.allSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(targetStoneId));
         }
-
+        
         var skillConfig = SkillConfigTable.GetSkillConfig(skillID);
         StonesBox._tabEffects.SkillButtonExplosion(skillConfig.SP_LEVEL,
             PosCal.GetWorldPos(PreScene.target.FxCamera, 

@@ -5,6 +5,10 @@ using PlayFab.ClientModels;
 
 public partial class PlayFabReadClient
 {
+    /// <summary>
+    /// 希望弃用
+    /// </summary>
+    /// <param name="PlayFabUsername"></param>
     static void AddUserNameAndPw(string PlayFabUsername)
     {
         var guidValue = Guid.NewGuid();
@@ -25,6 +29,12 @@ public partial class PlayFabReadClient
         );
     }
     
+    /// <summary>
+    /// 主界面设置画面玩家可以自由指定邮件地址，发送用来设定密码的邮件。然后玩家可以靠
+    /// Username和设定的密码登陆。
+    /// 但是，玩家不能改username，这个是我们自己定的规矩，我们希望这个username就是玩家的playfabid。
+    /// </summary>
+    /// <param name="email"></param>
     public static void SendPwResetEmail(string email)
     {
         Debug.Log("send mail to this address:" + email.Trim() );

@@ -66,16 +66,18 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
-            var request = new UpdatePlayerStatisticsRequest();
-            request.Statistics = new List<StatisticUpdate>()
+            var request = new UpdatePlayerStatisticsRequest
             {
-                new StatisticUpdate
+                Statistics = new List<StatisticUpdate>()
                 {
-                    StatisticName = "arenapoint",
-                    Value = 2000
+                    new StatisticUpdate
+                    {
+                        StatisticName = "arenapoint",
+                        Value = 2000
+                    }
                 }
             };
-            
+
             PlayFabClientAPI.UpdatePlayerStatistics(
                 request,
                 (x) =>

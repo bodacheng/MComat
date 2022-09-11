@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using mainMenu;
 using System.Collections.Generic;
 using Log;
+using PlayFab;
 
 namespace FightScene
 {
@@ -28,24 +29,7 @@ namespace FightScene
             if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
             {
                 var TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
-                TitleScreenLayer.Initialise(
-                    (x) =>
-                    {
-                        Debug.Log(" 登陆成功，获得下面这样一个东西： " + x.EntityToken.EntityToken);
-                        PlayerAccountInfo.Me = new PlayerAccountInfo
-                        {
-                            PlayFabUsername = x.PlayFabId
-                        };
-                        CloudScript.CheckIn();
-                        MainMenuNote.GoingTo = MainSceneStep.FrontPage;
-                        SceneManager.LoadScene(1);
-                    },
-                    (x) =>
-                    {
-                        Debug.Log("login fail");
-                    }
-                );
-                
+                TitleScreenLayer.Initialise();
                 PopupLayer.LightUp(1f);
             }
             else

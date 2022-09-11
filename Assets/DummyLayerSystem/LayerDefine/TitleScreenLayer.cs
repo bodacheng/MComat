@@ -1,9 +1,15 @@
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
+using mainMenu;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// 这个layer的问题在于，它必须灵活的适应未来可能做出的一些改动
+/// 就是说它既可能出现在"标题战斗"上，也可能出现在主界面
+/// </summary>
 public class TitleScreenLayer : UILayer
 {
     // Main
@@ -18,18 +24,34 @@ public class TitleScreenLayer : UILayer
     [SerializeField] private Button LoginBtn;
     [SerializeField] private Button cancelBtn;
     
-    Action<LoginResult> success;
-    Action<PlayFabError> fail;
-    
-    public void Initialise(Action<LoginResult> success, Action<PlayFabError> fail)
+    public void Initialise()
     {
         TouchScreen.onClick.AddListener(TouchScreenLogin);
         accountLoginBtn.onClick.AddListener(()=> SwitchTab(2));
         cancelBtn.onClick.AddListener(()=> SwitchTab(1));
-        
-        this.success = success;
-        this.fail = fail;
         LoginBtn.onClick.AddListener(PWLogin);
+    }
+
+    void LoginSuccess(LoginResult result)
+    {
+        Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
+        PlayerAccountInfo.Me = new PlayerAccountInfo
+        {
+            PlayFabUsername = result.PlayFabId
+        };
+        CloudScript.CheckIn();
+        MainMenuNote.GoingTo = MainSceneStep.FrontPage;
+        SceneManager.LoadScene(1);
+    }
+
+    void LoginFail(PlayFabError error)
+    {
+        Debug.Log(error.Error);
+        if (error.Error == PlayFabErrorCode.AccountDeleted)
+        {
+            // 官网说如果出现这个错误的话，可能需要等一些时间，账户内容才被彻底清除
+        }
+        Debug.Log("login fail");
     }
     
     void SwitchTab(int step) // step 1:main ,step 2: login by pw
@@ -48,17 +70,17 @@ public class TitleScreenLayer : UILayer
     
     void PWLogin()
     {
-        PlayFabReadClient.PlayFabLogin(ID.text.Trim(), PASSWORD.text.Trim(), success, fail);
+        PlayFabReadClient.PlayFabLogin(ID.text.Trim(), PASSWORD.text.Trim(), LoginSuccess, LoginFail);
     }
     
     void TouchScreenLogin()
     {
         PlayFabReadClient.LoginByDevice(
             result => {
-                this.success.Invoke(result);
+                LoginSuccess(result);
             },
             error => {
-                this.fail.Invoke(error);
+                LoginFail(error);
             }
         );
         TouchScreen.onClick.RemoveAllListeners();
