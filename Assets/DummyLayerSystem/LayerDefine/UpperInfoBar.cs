@@ -35,7 +35,7 @@ public class UpperInfoBar : UILayer
 
     public void Refresh()
     {
-        UserID.text = PlayerAccountInfo.Me.PlayFabUsername; //SystemInfo.deviceUniqueIdentifier;
+        UserID.text = PlayerAccountInfo.Me.PlayFabId; //SystemInfo.deviceUniqueIdentifier;
         accountDiamondCoin.text = Currencies.DiamondCount.ToString();
         accountIntelliCoin.text = Currencies.CoinCount.ToString();
     }

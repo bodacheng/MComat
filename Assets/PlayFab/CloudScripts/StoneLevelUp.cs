@@ -19,25 +19,25 @@ public partial class CloudScript
         var resource1 = new PlayFab.AdminModels.RevokeInventoryItem()
         {
             ItemInstanceId = form.M1Stone,
-            PlayFabId = PlayerAccountInfo.Me.PlayFabUsername
+            PlayFabId = PlayerAccountInfo.Me.PlayFabId
         };
         
         var resource2 = new PlayFab.AdminModels.RevokeInventoryItem()
         {
             ItemInstanceId = form.M2Stone,
-            PlayFabId = PlayerAccountInfo.Me.PlayFabUsername
+            PlayFabId = PlayerAccountInfo.Me.PlayFabId
         };
         
         var resource3 = new PlayFab.AdminModels.RevokeInventoryItem()
         {
             ItemInstanceId = form.M3Stone,
-            PlayFabId = PlayerAccountInfo.Me.PlayFabUsername
+            PlayFabId = PlayerAccountInfo.Me.PlayFabId
         };
         
         var resource4 = new PlayFab.AdminModels.RevokeInventoryItem()
         {
             ItemInstanceId = form.M4Stone,
-            PlayFabId = PlayerAccountInfo.Me.PlayFabUsername
+            PlayFabId = PlayerAccountInfo.Me.PlayFabId
         };
         
         Items.Add(resource1);

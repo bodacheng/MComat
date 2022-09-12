@@ -83,7 +83,7 @@ public class ArcadeTop : UILayer
             void LoadThisStage()
             {
                 one.LoadMyTeam();
-                one.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
+                one.team1ID = PlayerAccountInfo.Me.PlayFabId;
                 PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, one, true);
             }
             

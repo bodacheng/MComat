@@ -55,7 +55,7 @@ public class ArenaLayer : UILayer
                 var exceptSelf = new List<CloudScript.LeaderboardInfo>();
                 foreach (var t in obj)
                 {
-                    if (t.PlayerLeaderboardEntry.PlayFabId != PlayerAccountInfo.Me.PlayFabUsername)
+                    if (t.PlayerLeaderboardEntry.PlayFabId != PlayerAccountInfo.Me.PlayFabId)
                     {
                         Debug.Log( "Opponent info loaded : " +t.PlayerLeaderboardEntry.PlayFabId);
                         exceptSelf.Add(t);

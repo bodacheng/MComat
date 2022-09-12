@@ -9,8 +9,9 @@ public class PlayerAccountInfo
 {
     public static PlayerAccountInfo Me;
     
-    public string PlayFabUsername;
+    public string PlayFabId;
     public string PlayerName;
+    public string PlayFabUserName;// for login
 
     public int rankPont;
     public int currentRank;

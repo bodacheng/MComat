@@ -669,6 +669,27 @@ handlers.ArenaPointUp = function (args, context) {
     return { "currentPoint" : point };
 };
 
+handlers.RankClear = function (args, context) {
+    
+    server.UpdatePlayerStatistics({
+        PlayFabId: currentPlayerId,
+        Statistics: [{
+            StatisticName: "rank",
+            Value: 0
+        }]
+    });
+
+    server.UpdatePlayerStatistics({
+        PlayFabId: currentPlayerId,
+        Statistics: [{
+            StatisticName: "arenapoint",
+            Value: 0
+        }]
+    });
+
+    return { };
+}
+
 handlers.Gotcha = function (args, context) {
     var request = {
         "CatalogVersion": args.CatalogVersion,

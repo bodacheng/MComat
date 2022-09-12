@@ -18,9 +18,10 @@ public partial class PlayFabReadClient
                 Username = PlayFabUsername,
                 Email = "xxx@xxx.com",
                 Password = guidValue.ToString()
-            }, addUsernamePasswordResult =>
+            }, result =>
             {
-                Debug.Log("我们把玩家的PlayFab username设置成了他的PlayFabId:" + addUsernamePasswordResult.Username);
+                PlayerAccountInfo.Me.PlayFabUserName = result.Username;
+                Debug.Log("我们把玩家的PlayFab username设置成了他的PlayFabId:" + result.Username);
             }, 
             (x) =>
             {

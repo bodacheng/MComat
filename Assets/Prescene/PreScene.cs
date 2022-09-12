@@ -182,14 +182,14 @@ namespace mainMenu
         public void BeginSkillTest_Rotation()
         {
             var stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
-            stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
+            stage.team1ID = PlayerAccountInfo.Me.PlayFabId;
             FightLoad.Go(stage);
         }
         
         public void BeginSkillTest_Multi()
         {
             var stage = FightInfo.RandomSkillTestStage(TeamMode.multiRaid);
-            stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
+            stage.team1ID = PlayerAccountInfo.Me.PlayFabId;
             FightLoad.Go(stage);
         }
         

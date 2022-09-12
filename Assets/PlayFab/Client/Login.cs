@@ -1,7 +1,9 @@
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
+using mainMenu;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public partial class PlayFabReadClient
 {
@@ -22,8 +24,7 @@ public partial class PlayFabReadClient
     /// <param name="pw"></param>
     /// <param name="success"></param>
     /// <param name="fail"></param>
-    public static void PlayFabLogin(string userName, string pw,
-        Action<LoginResult> success, Action<PlayFabError> fail)
+    public static void PlayFabLogin(string userName, string pw, Action<LoginResult> success, Action<PlayFabError> fail)
     {
         Debug.Log("尝试登陆 userName:"+ userName +"\n"
         + "pw:"+ pw +"\n" + "TitleId:"+ PlayFabSettings.TitleId);
@@ -35,11 +36,7 @@ public partial class PlayFabReadClient
                 Password = pw,
                 TitleId = PlayFabSettings.TitleId
             },
-            (x)=>
-            {
-                //UnLinkDevice(LinkDevice);
-                success.Invoke(x);
-            },
+            success.Invoke,
             (x)=>
             {
                 Debug.Log(x.Error);
@@ -78,29 +75,109 @@ public partial class PlayFabReadClient
                     AndroidDeviceId = SystemInfo.deviceUniqueIdentifier,
                     CreateAccount = true
                 },
-                (x) =>
-                {
-                    //AddUserNameAndPw(x.PlayFabId);
-                    success.Invoke(x);
-                },
+                success.Invoke,
                 fail
             );
 #endif
+    }
+    
+    public static void LoginSuccess(LoginResult result)
+    {
+        Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
+        PlayerAccountInfo.Me = new PlayerAccountInfo
+        {
+            PlayFabId = result.PlayFabId
+        };
         
-#if UNITY_STANDALONE
-        PlayFabClientAPI.LoginWithCustomID(
-            new LoginWithCustomIDRequest
+        GetAccountInfo(PlayerAccountInfo.Me.PlayFabId, EnterMainScene);
+    }
+    
+    public static void LoginSuccessWithAccountLink(LoginResult result)
+    {
+        Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
+        PlayerAccountInfo.Me = new PlayerAccountInfo
+        {
+            PlayFabId = result.PlayFabId
+        };
+        
+        GetAccountInfoWithLinkDevice(PlayerAccountInfo.Me.PlayFabId, EnterMainScene);
+    }
+
+    static void EnterMainScene()
+    {
+        CloudScript.CheckIn();
+        MainMenuNote.GoingTo = MainSceneStep.FrontPage;
+        SceneManager.LoadScene(1);
+    }
+
+    static void GetAccountInfo(string playFabId, Action enterMainScene)
+    {
+        PlayFabClientAPI.GetAccountInfo(
+            new GetAccountInfoRequest
             {
-                CustomId = SystemInfo.deviceUniqueIdentifier,
-                CreateAccount = true
+                PlayFabId = playFabId
             },
-            (x) =>
+            result =>
             {
-                AddUserNameAndPw(x.PlayFabId);
-                success.Invoke(x);
+                PlayerAccountInfo.Me.PlayFabUserName = result.AccountInfo.Username;
+                if (PlayerAccountInfo.Me.PlayFabUserName == null)
+                {
+                    AddUserNameAndPw(playFabId); // 这个方法没有server版，只能客户端主动执行
+                }
+                enterMainScene?.Invoke();
             },
-            fail
+            errorCallback =>
+            {
+                Debug.Log(errorCallback.Error);
+            }
         );
+    }
+    
+    static void GetAccountInfoWithLinkDevice(string playFabId, Action enterMainScene)
+    {
+        PlayFabClientAPI.GetAccountInfo(
+            new GetAccountInfoRequest
+            {
+                PlayFabId = playFabId
+            },
+            result =>
+            {
+                PlayerAccountInfo.Me.PlayFabUserName = result.AccountInfo.Username;
+                if (PlayerAccountInfo.Me.PlayFabUserName == null)
+                {
+                    AddUserNameAndPw(playFabId); // 这个方法没有server版，只能客户端主动执行
+                }
+#if UNITY_IOS
+                if (result.AccountInfo.IosDeviceInfo.IosDeviceId != SystemInfo.deviceUniqueIdentifier)
+                {
+                    Debug.Log("开始链接deviceID："+SystemInfo.deviceUniqueIdentifier);
+                    Link(SystemInfo.deviceUniqueIdentifier);
+                }
 #endif
+                
+#if UNITY_ANDROID
+                if (result.AccountInfo.AndroidDeviceInfo.AndroidDeviceId != SystemInfo.deviceUniqueIdentifier)
+                {
+                    Debug.Log("开始链接deviceID："+SystemInfo.deviceUniqueIdentifier);
+                    Link(SystemInfo.deviceUniqueIdentifier);
+                }
+#endif
+                enterMainScene?.Invoke();
+            },
+            errorCallback =>
+            {
+                Debug.Log(errorCallback.Error);
+            }
+        );
+    }
+    
+    public static void LoginFail(PlayFabError error)
+    {
+        Debug.Log(error.Error);
+        if (error.Error == PlayFabErrorCode.AccountDeleted)
+        {
+            // 官网说如果出现这个错误的话，可能需要等一些时间，账户内容才被彻底清除
+        }
+        Debug.Log("login fail");
     }
 }

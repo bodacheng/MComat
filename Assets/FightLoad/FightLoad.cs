@@ -10,7 +10,7 @@ public static class FightLoad
         if (loadWithMyTeam)
         {
             stage.LoadMyTeam();
-            stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
+            stage.team1ID = PlayerAccountInfo.Me.PlayFabId;
         }
         
         if (stage.FightMembers.HeroSets.GetValues().Count < 1 || stage.FightMembers.EnemySets.GetValues().Count < 1)

@@ -1,9 +1,4 @@
-using PlayFab;
-using PlayFab.ClientModels;
-using System;
-using mainMenu;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -31,28 +26,6 @@ public class TitleScreenLayer : UILayer
         cancelBtn.onClick.AddListener(()=> SwitchTab(1));
         LoginBtn.onClick.AddListener(PWLogin);
     }
-
-    void LoginSuccess(LoginResult result)
-    {
-        Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
-        PlayerAccountInfo.Me = new PlayerAccountInfo
-        {
-            PlayFabUsername = result.PlayFabId
-        };
-        CloudScript.CheckIn();
-        MainMenuNote.GoingTo = MainSceneStep.FrontPage;
-        SceneManager.LoadScene(1);
-    }
-
-    void LoginFail(PlayFabError error)
-    {
-        Debug.Log(error.Error);
-        if (error.Error == PlayFabErrorCode.AccountDeleted)
-        {
-            // 官网说如果出现这个错误的话，可能需要等一些时间，账户内容才被彻底清除
-        }
-        Debug.Log("login fail");
-    }
     
     void SwitchTab(int step) // step 1:main ,step 2: login by pw
     {
@@ -70,18 +43,15 @@ public class TitleScreenLayer : UILayer
     
     void PWLogin()
     {
-        PlayFabReadClient.PlayFabLogin(ID.text.Trim(), PASSWORD.text.Trim(), LoginSuccess, LoginFail);
+        PlayFabReadClient.PlayFabLogin(ID.text.Trim(), PASSWORD.text.Trim(), 
+            PlayFabReadClient.LoginSuccessWithAccountLink, PlayFabReadClient.LoginFail);
     }
     
     void TouchScreenLogin()
     {
         PlayFabReadClient.LoginByDevice(
-            result => {
-                LoginSuccess(result);
-            },
-            error => {
-                LoginFail(error);
-            }
+            PlayFabReadClient.LoginSuccess,
+            PlayFabReadClient.LoginFail
         );
         TouchScreen.onClick.RemoveAllListeners();
     }

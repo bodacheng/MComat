@@ -122,8 +122,8 @@ namespace mainMenu
                     break;
             }
             _stage.FightMembers = _selfFight;
-            _stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
-            _stage.team2ID = PlayerAccountInfo.Me.PlayFabUsername + "_2";
+            _stage.team1ID = PlayerAccountInfo.Me.PlayFabId;
+            _stage.team2ID = PlayerAccountInfo.Me.PlayFabId + "_2";
             FightLoad.Go(_stage);
         }
         

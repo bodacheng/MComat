@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -7,6 +8,24 @@ using PlayFab.ClientModels;
 /// </summary>
 public partial class PlayFabReadClient
 {
+    static void Link(string currentLinkedDeviceId)
+    {
+#if UNITY_IOS
+        if (currentLinkedDeviceId != SystemInfo.deviceUniqueIdentifier)
+        {
+            LinkDevice();
+        }
+#endif
+                
+#if UNITY_ANDROID
+        if (currentLinkedDeviceId != SystemInfo.deviceUniqueIdentifier)
+        {
+            LinkDevice();
+        }
+#endif
+    }
+    
+    
     static void LinkDevice()
     {
 #if UNITY_IOS
@@ -25,26 +44,26 @@ public partial class PlayFabReadClient
             }
         );
 #endif
-                
+        
 #if UNITY_ANDROID
-                PlayFabClientAPI.LinkAndroidDeviceID(
-                    new LinkAndroidDeviceIDRequest
-                    {
-                        AndroidDeviceId = SystemInfo.deviceUniqueIdentifier
-                    },
-                    (x) =>
-                    {
-                        Debug.Log(x);
-                    },
-                    (x) =>
-                    {
-                        Debug.Log(x);
-                    }
-                );
+        PlayFabClientAPI.LinkAndroidDeviceID(
+            new LinkAndroidDeviceIDRequest
+            {
+                AndroidDeviceId = SystemInfo.deviceUniqueIdentifier
+            },
+            (x) =>
+            {
+                Debug.Log(x);
+            },
+            (x) =>
+            {
+                Debug.Log(x);
+            }
+        );
 #endif
     }
 
-    public static void UnLinkDevice()
+    public static void UnLinkDevice(Action link)
     {
 #if UNITY_IOS
         PlayFabClientAPI.UnlinkIOSDeviceID(
@@ -55,6 +74,7 @@ public partial class PlayFabReadClient
             (x) =>
             {
                 Debug.Log(x);
+                link.Invoke();
             },
             (x) =>
             {
@@ -72,6 +92,7 @@ public partial class PlayFabReadClient
             (x) =>
             {
                 Debug.Log(x);
+                link.Invoke();
             },
             (x) =>
             {

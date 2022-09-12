@@ -63,7 +63,7 @@ public class SettingLayer : UILayer {
         onEffectsSoundChange();
         ResetSliders();
 
-        ID.text = PlayerAccountInfo.Me.PlayFabUsername;
+        ID.text = PlayerAccountInfo.Me.PlayFabUserName;
         
         SendEmail.onClick.AddListener(() =>
         {

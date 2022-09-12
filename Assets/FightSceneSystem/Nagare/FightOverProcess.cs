@@ -22,7 +22,7 @@ namespace FightScene
             switch (NetFightScene.Fight.EventType)
             {
                 case FightEventType.Arena:
-                    if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabUsername)
+                    if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabId)
                     {
                         CloudScript.ArenaPointUp(
                             () =>
@@ -40,7 +40,7 @@ namespace FightScene
                     //FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
                 break;
                 case FightEventType.Quest:
-                    if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabUsername)
+                    if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabId)
                     {
                         CloudScript.ArcadeProgress(
                             NetFightScene.Fight.ID.ToString(),
