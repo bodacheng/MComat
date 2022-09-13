@@ -66,28 +66,44 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
-            var request = new UpdatePlayerStatisticsRequest
-            {
-                Statistics = new List<StatisticUpdate>()
+            var guidValue = Guid.NewGuid();
+            PlayFabClientAPI.AddUsernamePassword(new PlayFab.ClientModels.AddUsernamePasswordRequest
                 {
-                    new StatisticUpdate
-                    {
-                        StatisticName = "arenapoint",
-                        Value = 2000
-                    }
-                }
-            };
-
-            PlayFabClientAPI.UpdatePlayerStatistics(
-                request,
+                    Username = "bodacheng3".ToLower(),
+                    Email = "bodacheng1234@gmail.com",
+                    Password = guidValue.ToString()
+                }, result =>
+                {
+                    Debug.Log("我们把玩家的PlayFab username设置成了他的PlayFabId:" + result.Username);
+                }, 
                 (x) =>
                 {
-                    Debug.Log(x);
-                }, (y) =>
-                {
-                    Debug.Log(y);
+                    Debug.Log("添加username失败："+ x.Error);
                 }
-                );
+            );
+            
+            // var request = new UpdatePlayerStatisticsRequest
+            // {
+            //     Statistics = new List<StatisticUpdate>()
+            //     {
+            //         new StatisticUpdate
+            //         {
+            //             StatisticName = "arenapoint",
+            //             Value = 2000
+            //         }
+            //     }
+            // };
+            //
+            // PlayFabClientAPI.UpdatePlayerStatistics(
+            //     request,
+            //     (x) =>
+            //     {
+            //         Debug.Log(x);
+            //     }, (y) =>
+            //     {
+            //         Debug.Log(y);
+            //     }
+            // );
             
             // PlayFabClientAPI.ExecuteCloudScript(
             //     new ExecuteCloudScriptRequest()

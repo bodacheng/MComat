@@ -16,9 +16,9 @@ public partial class PlayFabReadClient
         Debug.Log(guidValue.ToString());
         PlayFabClientAPI.AddUsernamePassword(new PlayFab.ClientModels.AddUsernamePasswordRequest
             {
-                Username = PlayFabUsername.ToLower()
-                //Email = String.Empty,
-                //Password = guidValue.ToString()
+                Username = PlayFabUsername.ToLower(),
+                Email = PlayFabUsername.ToLower() + "@xxx.com",
+                Password = guidValue.ToString()
             }, result =>
             {
                 PlayerAccountInfo.Me.PlayFabUserName = result.Username;
