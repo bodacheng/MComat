@@ -8,25 +8,7 @@ using PlayFab.ClientModels;
 /// </summary>
 public partial class PlayFabReadClient
 {
-    static void Link(string currentLinkedDeviceId)
-    {
-#if UNITY_IOS
-        if (currentLinkedDeviceId != SystemInfo.deviceUniqueIdentifier)
-        {
-            LinkDevice();
-        }
-#endif
-                
-#if UNITY_ANDROID
-        if (currentLinkedDeviceId != SystemInfo.deviceUniqueIdentifier)
-        {
-            LinkDevice();
-        }
-#endif
-    }
-    
-    
-    static void LinkDevice()
+    public static void LinkDevice(Action success)
     {
 #if UNITY_IOS
         PlayFabClientAPI.LinkIOSDeviceID(
@@ -37,6 +19,7 @@ public partial class PlayFabReadClient
             (x) =>
             {
                 Debug.Log(x);
+                success.Invoke();
             },
             (x) =>
             {
@@ -54,6 +37,7 @@ public partial class PlayFabReadClient
             (x) =>
             {
                 Debug.Log(x);
+                success.Invoke();
             },
             (x) =>
             {
@@ -63,7 +47,7 @@ public partial class PlayFabReadClient
 #endif
     }
 
-    public static void UnLinkDevice(Action link)
+    public static void UnLinkDevice(Action success)
     {
 #if UNITY_IOS
         PlayFabClientAPI.UnlinkIOSDeviceID(
@@ -74,7 +58,7 @@ public partial class PlayFabReadClient
             (x) =>
             {
                 Debug.Log(x);
-                link.Invoke();
+                success.Invoke();
             },
             (x) =>
             {
@@ -92,7 +76,7 @@ public partial class PlayFabReadClient
             (x) =>
             {
                 Debug.Log(x);
-                link.Invoke();
+                success.Invoke();
             },
             (x) =>
             {

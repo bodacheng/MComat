@@ -44,7 +44,7 @@ public class TitleScreenLayer : UILayer
     void PWLogin()
     {
         PlayFabReadClient.PlayFabLogin(ID.text.Trim(), PASSWORD.text.Trim(), 
-            PlayFabReadClient.LoginSuccessWithAccountLink, PlayFabReadClient.LoginFail);
+            PlayFabReadClient.LoginSuccess, PlayFabReadClient.LoginFail);
     }
     
     void TouchScreenLogin()

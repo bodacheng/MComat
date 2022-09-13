@@ -92,17 +92,6 @@ public partial class PlayFabReadClient
         GetAccountInfo(PlayerAccountInfo.Me.PlayFabId, EnterMainScene);
     }
     
-    public static void LoginSuccessWithAccountLink(LoginResult result)
-    {
-        Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
-        PlayerAccountInfo.Me = new PlayerAccountInfo
-        {
-            PlayFabId = result.PlayFabId
-        };
-        
-        GetAccountInfoWithLinkDevice(PlayerAccountInfo.Me.PlayFabId, EnterMainScene);
-    }
-
     static void EnterMainScene()
     {
         CloudScript.CheckIn();
@@ -120,47 +109,16 @@ public partial class PlayFabReadClient
             result =>
             {
                 PlayerAccountInfo.Me.PlayFabUserName = result.AccountInfo.Username;
-                if (PlayerAccountInfo.Me.PlayFabUserName == null)
-                {
-                    AddUserNameAndPw(playFabId); // 这个方法没有server版，只能客户端主动执行
-                }
-                enterMainScene?.Invoke();
-            },
-            errorCallback =>
-            {
-                Debug.Log(errorCallback.Error);
-            }
-        );
-    }
-    
-    static void GetAccountInfoWithLinkDevice(string playFabId, Action enterMainScene)
-    {
-        PlayFabClientAPI.GetAccountInfo(
-            new GetAccountInfoRequest
-            {
-                PlayFabId = playFabId
-            },
-            result =>
-            {
-                PlayerAccountInfo.Me.PlayFabUserName = result.AccountInfo.Username;
+                Debug.Log("目前本账户的Username："+ PlayerAccountInfo.Me.PlayFabUserName);
                 if (PlayerAccountInfo.Me.PlayFabUserName == null)
                 {
                     AddUserNameAndPw(playFabId); // 这个方法没有server版，只能客户端主动执行
                 }
 #if UNITY_IOS
-                if (result.AccountInfo.IosDeviceInfo.IosDeviceId != SystemInfo.deviceUniqueIdentifier)
-                {
-                    Debug.Log("开始链接deviceID："+SystemInfo.deviceUniqueIdentifier);
-                    Link(SystemInfo.deviceUniqueIdentifier);
-                }
+                PlayerAccountInfo.Me.currentLinkedDeviceId = result.AccountInfo.IosDeviceInfo.IosDeviceId;
 #endif
-                
 #if UNITY_ANDROID
-                if (result.AccountInfo.AndroidDeviceInfo.AndroidDeviceId != SystemInfo.deviceUniqueIdentifier)
-                {
-                    Debug.Log("开始链接deviceID："+SystemInfo.deviceUniqueIdentifier);
-                    Link(SystemInfo.deviceUniqueIdentifier);
-                }
+                PlayerAccountInfo.Me.currentLinkedDeviceId = result.AccountInfo.AndroidDeviceInfo.AndroidDeviceId;
 #endif
                 enterMainScene?.Invoke();
             },

@@ -13,6 +13,7 @@ public class PlayerAccountInfo
     public string PlayerName;
     public string PlayFabUserName;// for login
 
+    public string currentLinkedDeviceId;
     public int rankPont;
     public int currentRank;
     

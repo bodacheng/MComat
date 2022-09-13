@@ -38,6 +38,8 @@ public class FrontPage : MSceneProcess
         missionWatcher.Finish("arcadeTFinished", value);
     }
 
+    private static bool askedIfLinkDevice = false;
+
     public FrontPage()
     {
         Step = MainSceneStep.FrontPage;
@@ -82,6 +84,23 @@ public class FrontPage : MSceneProcess
     
     public override void ProcessEnter()
     {
+        if (!askedIfLinkDevice && PlayerAccountInfo.Me.currentLinkedDeviceId != SystemInfo.deviceUniqueIdentifier)
+        {
+            var popupLayer = PopupLayer.Open(PreScene.target.T);
+            popupLayer.ArrangeConfirmWindow(() =>
+            {
+                PlayFabReadClient.UnLinkDevice(() =>
+                {
+                    PlayFabReadClient.LinkDevice(() =>
+                    {
+                        var popupLayer = PopupLayer.Open(PreScene.target.T);
+                        popupLayer.ArrangeWarnWindow(" 已经关联账户 ");
+                    });
+                });
+            }, "当前设备没和这个账户进行绑定，绑定一下？绑定了的话。。");
+            askedIfLinkDevice = true;
+        }
+        
         ProgressLayer.Loading(">", PreScene.target.T);
         PlayFabReadClient.GetUserData(
             new GetUserDataRequest
