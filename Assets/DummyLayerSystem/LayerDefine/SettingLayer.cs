@@ -25,14 +25,58 @@ public class SettingLayer : UILayer {
     #endregion
 
     #region Email
-
-    [SerializeField] TextMeshProUGUI ID;
+    [SerializeField] TextMeshProUGUI CurrentEmail;
     [SerializeField] InputField EmailInput;
-    [SerializeField] Button SendEmail;
+    [SerializeField] Button EmailConfirmBtn;
+    [SerializeField] Button SendPwResetBtn;
     #endregion
+
+    #region linkDevice
+    [SerializeField] private Button linkDeviceBtn;
+    #endregion
+
+    void AccountPhase_EmailToBeSet()
+    {
+        CurrentEmail.gameObject.SetActive(false);
+        EmailInput.gameObject.SetActive(true);
+        EmailConfirmBtn.gameObject.SetActive(true);
+        SendPwResetBtn.gameObject.SetActive(false);
+        
+        EmailConfirmBtn.onClick.RemoveAllListeners();
+        EmailConfirmBtn.onClick.AddListener(() =>
+        {
+            if (PlayerAccountInfo.Me.PlayFabUserName == null)
+            {
+                PlayFabReadClient.AddUserNameAndEmail(
+                    PlayerAccountInfo.Me.PlayFabId, 
+                    EmailInput.text.Trim(),
+                    AccountPhase_EmailSet
+                ); // 这个方法没有server版，只能客户端主动执行
+            }
+        });
+    }
+    
+    void AccountPhase_EmailSet()
+    {
+        CurrentEmail.gameObject.SetActive(true);
+        CurrentEmail.text = PlayerAccountInfo.Me.Email;
+        
+        EmailInput.gameObject.SetActive(false);
+        EmailConfirmBtn.gameObject.SetActive(false);
+        SendPwResetBtn.gameObject.SetActive(true);
+        
+        SendPwResetBtn.onClick.AddListener(
+        () =>
+            {
+                PlayFabReadClient.SendPwResetEmail(PlayerAccountInfo.Me.Email);
+            }
+        );
+    }
     
     void Initialise()
     {
+        CurrentEmail.text = PlayerAccountInfo.Me.PlayFabUserName;
+        
         void CloseAllPanels()
         {
             volumePanel.gameObject.SetActive(false);
@@ -50,6 +94,21 @@ public class SettingLayer : UILayer {
         {
             CloseAllPanels();
             accountPanel.gameObject.SetActive(true);
+            
+            PlayFabReadClient.GetAccountInfo(
+                PlayerAccountInfo.Me.PlayFabId,
+                () =>
+                {
+                    if (PlayerAccountInfo.Me.Email != null)
+                    {
+                        AccountPhase_EmailSet();
+                    }
+                    else
+                    {
+                        AccountPhase_EmailToBeSet();
+                    }
+                }
+            );
         });
         
         supportBtn.onClick.AddListener(() =>
@@ -62,13 +121,12 @@ public class SettingLayer : UILayer {
         onCVsChange();
         onEffectsSoundChange();
         ResetSliders();
-
-        ID.text = PlayerAccountInfo.Me.PlayFabUserName;
         
-        SendEmail.onClick.AddListener(() =>
-        {
-            PlayFabReadClient.SendPwResetEmail(EmailInput.text);
-        });
+        linkDeviceBtn.onClick.AddListener(() =>
+            {
+                PlayFabReadClient.LinkAccountPopup(gameObject);
+            }
+        );
     }
     
     static SettingLayer Get()

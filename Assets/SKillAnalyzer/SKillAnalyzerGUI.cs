@@ -66,22 +66,25 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
-            var guidValue = Guid.NewGuid();
-            PlayFabClientAPI.AddUsernamePassword(new PlayFab.ClientModels.AddUsernamePasswordRequest
-                {
-                    Username = "bodacheng3".ToLower(),
-                    Email = "bodacheng1234@gmail.com",
-                    Password = guidValue.ToString()
-                }, result =>
-                {
-                    Debug.Log("我们把玩家的PlayFab username设置成了他的PlayFabId:" + result.Username);
-                }, 
-                (x) =>
-                {
-                    Debug.Log("添加username失败："+ x.Error);
-                }
-            );
-            
+            PlayFabReadClient.SendPwResetEmail("bodacheng123@gmail.com");
+
+
+            // var guidValue = Guid.NewGuid();
+            // PlayFabClientAPI.AddUsernamePassword(new PlayFab.ClientModels.AddUsernamePasswordRequest
+            //     {
+            //         Username = "bodacheng3".ToLower(),
+            //         Email = "bodacheng1234@gmail.com",
+            //         Password = guidValue.ToString()
+            //     }, result =>
+            //     {
+            //         Debug.Log("我们把玩家的PlayFab username设置成了他的PlayFabId:" + result.Username);
+            //     }, 
+            //     (x) =>
+            //     {
+            //         Debug.Log("添加username失败："+ x.Error);
+            //     }
+            // );
+
             // var request = new UpdatePlayerStatisticsRequest
             // {
             //     Statistics = new List<StatisticUpdate>()
@@ -104,7 +107,7 @@ public class SKillAnalyzerGUI : EditorWindow
             //         Debug.Log(y);
             //     }
             // );
-            
+
             // PlayFabClientAPI.ExecuteCloudScript(
             //     new ExecuteCloudScriptRequest()
             //     {
@@ -123,10 +126,10 @@ public class SKillAnalyzerGUI : EditorWindow
             //         Debug.Log(error.Error);
             //     }
             // );            
-            
-            
+
+
             //PlayFabReadClient.GetPresentGetCatalogItems();
-            
+
             // PlayFabClientAPI.ExecuteCloudScript(
             //     new ExecuteCloudScriptRequest()
             //     {
@@ -141,7 +144,7 @@ public class SKillAnalyzerGUI : EditorWindow
             //         Debug.Log(error.Error);
             //     }
             // );
-            
+
             // PlayFabClientAPI.ExecuteCloudScript(
             //     new ExecuteCloudScriptRequest()
             //     {
@@ -156,7 +159,7 @@ public class SKillAnalyzerGUI : EditorWindow
             //         Debug.Log(error.Error);
             //     }
             // );
-            
+
             // PlayFabClientAPI.ExecuteCloudScript(
             //     new ExecuteCloudScriptRequest()
             //     {
@@ -184,7 +187,7 @@ public class SKillAnalyzerGUI : EditorWindow
             //         Debug.Log(error.Error);
             //     }
             // );
-            
+
             //TitleData.SetArcadeRewards();
             //PlayFabClientAPI.WritePlayerEvent(new WriteClientPlayerEventRequest()
             //{

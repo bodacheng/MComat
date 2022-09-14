@@ -9,7 +9,7 @@ public partial class PlayFabReadClient
     /// 希望弃用
     /// </summary>
     /// <param name="PlayFabUsername"></param>
-    static void AddUserNameAndPw(string PlayFabUsername)
+    public static void AddUserNameAndEmail(string PlayFabUsername, string email, Action success)
     {
         Debug.Log("尝试把Username设置成"+ PlayFabUsername);
         var guidValue = Guid.NewGuid();
@@ -17,13 +17,14 @@ public partial class PlayFabReadClient
         PlayFabClientAPI.AddUsernamePassword(new PlayFab.ClientModels.AddUsernamePasswordRequest
             {
                 Username = PlayFabUsername.ToLower(),
-                Email = PlayFabUsername.ToLower() + "@xxx.com",
+                Email = email,
                 Password = guidValue.ToString()
             }, result =>
             {
                 PlayerAccountInfo.Me.PlayFabUserName = result.Username;
                 Debug.Log("我们把玩家的PlayFab username设置成了他的PlayFabId:" + result.Username);
-            }, 
+                success.Invoke();
+            },
             (x) =>
             {
                 Debug.Log("添加username失败："+ x.Error);

@@ -24,7 +24,7 @@ public class TitleScreenLayer : UILayer
         TouchScreen.onClick.AddListener(TouchScreenLogin);
         accountLoginBtn.onClick.AddListener(()=> SwitchTab(2));
         cancelBtn.onClick.AddListener(()=> SwitchTab(1));
-        LoginBtn.onClick.AddListener(PWLogin);
+        LoginBtn.onClick.AddListener(EmailLogin);
     }
     
     void SwitchTab(int step) // step 1:main ,step 2: login by pw
@@ -41,10 +41,11 @@ public class TitleScreenLayer : UILayer
         }
     }
     
-    void PWLogin()
+    void EmailLogin()
     {
-        PlayFabReadClient.PlayFabLogin(ID.text.Trim(), PASSWORD.text.Trim(), 
-            PlayFabReadClient.LoginSuccess, PlayFabReadClient.LoginFail);
+        PlayFabReadClient.PlayFabEmailLogin(ID.text.Trim(), PASSWORD.text.Trim(), 
+            (x)=> PlayFabReadClient.LoginWithEmailSuccess(x, gameObject),
+            PlayFabReadClient.LoginFail);
     }
     
     void TouchScreenLogin()

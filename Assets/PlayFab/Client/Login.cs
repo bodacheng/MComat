@@ -24,15 +24,15 @@ public partial class PlayFabReadClient
     /// <param name="pw"></param>
     /// <param name="success"></param>
     /// <param name="fail"></param>
-    public static void PlayFabLogin(string userName, string pw, Action<LoginResult> success, Action<PlayFabError> fail)
+    public static void PlayFabEmailLogin(string email, string pw, Action<LoginResult> success, Action<PlayFabError> fail)
     {
-        Debug.Log("尝试登陆 userName:"+ userName +"\n"
+        Debug.Log("尝试登陆 email:"+ email +"\n"
         + "pw:"+ pw +"\n" + "TitleId:"+ PlayFabSettings.TitleId);
 
-        PlayFabClientAPI.LoginWithPlayFab(
-            new LoginWithPlayFabRequest
+        PlayFabClientAPI.LoginWithEmailAddress(
+            new LoginWithEmailAddressRequest()
             {
-                Username = userName,
+                Email = email,
                 Password = pw,
                 TitleId = PlayFabSettings.TitleId
             },
@@ -89,7 +89,40 @@ public partial class PlayFabReadClient
             PlayFabId = result.PlayFabId
         };
         
-        GetAccountInfo(PlayerAccountInfo.Me.PlayFabId, EnterMainScene);
+        EnterMainScene();
+    }
+    
+    public static void LoginWithEmailSuccess(LoginResult result, GameObject T)
+    {
+        Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
+        PlayerAccountInfo.Me = new PlayerAccountInfo
+        {
+            PlayFabId = result.PlayFabId
+        };
+        GetAccountInfo(result.PlayFabId, ()=>LinkAccountPopup(T));
+    }
+
+    public static void LinkAccountPopup(GameObject T)
+    {
+        if (PlayerAccountInfo.Me.currentLinkedDeviceId != SystemInfo.deviceUniqueIdentifier)
+        {
+            var popupLayer = PopupLayer.Open(PreScene.target.T);
+            popupLayer.ArrangeConfirmWindow(() =>
+            {
+                UnLinkDevice(() =>
+                {
+                    LinkDevice(() =>
+                    {
+                        var popupLayer = PopupLayer.Open(T);
+                        popupLayer.ArrangeConfirmWindow(EnterMainScene," 已经关联账户 ");
+                    });
+                });
+            }, "当前设备没和这个账户进行绑定，绑定一下？绑定了的话。。");
+        }
+        else
+        {
+            EnterMainScene();
+        }
     }
     
     static void EnterMainScene()
@@ -99,7 +132,7 @@ public partial class PlayFabReadClient
         SceneManager.LoadScene(1);
     }
 
-    static void GetAccountInfo(string playFabId, Action enterMainScene)
+    public static void GetAccountInfo(string playFabId, Action success)
     {
         PlayFabClientAPI.GetAccountInfo(
             new GetAccountInfoRequest
@@ -108,19 +141,17 @@ public partial class PlayFabReadClient
             },
             result =>
             {
-                PlayerAccountInfo.Me.PlayFabUserName = result.AccountInfo.Username;
                 Debug.Log("目前本账户的Username："+ PlayerAccountInfo.Me.PlayFabUserName);
-                if (PlayerAccountInfo.Me.PlayFabUserName == null)
-                {
-                    AddUserNameAndPw(playFabId); // 这个方法没有server版，只能客户端主动执行
-                }
+                PlayerAccountInfo.Me.PlayFabUserName = result.AccountInfo.Username;
+                PlayerAccountInfo.Me.Email = result.AccountInfo.PrivateInfo.Email;
+                
 #if UNITY_IOS
                 PlayerAccountInfo.Me.currentLinkedDeviceId = result.AccountInfo.IosDeviceInfo.IosDeviceId;
 #endif
 #if UNITY_ANDROID
                 PlayerAccountInfo.Me.currentLinkedDeviceId = result.AccountInfo.AndroidDeviceInfo.AndroidDeviceId;
 #endif
-                enterMainScene?.Invoke();
+                success.Invoke();
             },
             errorCallback =>
             {
