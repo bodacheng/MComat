@@ -99,30 +99,50 @@ public partial class PlayFabReadClient
         {
             PlayFabId = result.PlayFabId
         };
-        GetAccountInfo(result.PlayFabId, ()=>LinkAccountPopup(T));
+        EnterMainScene();
     }
 
-    public static void LinkAccountPopup(GameObject T)
+    public static void LinkAccountPopup(GameObject T, Action success)
     {
-        if (PlayerAccountInfo.Me.currentLinkedDeviceId != SystemInfo.deviceUniqueIdentifier)
+        var popupLayer = PopupLayer.Open(T);
+        popupLayer.ArrangeConfirmWindow(() =>
         {
-            var popupLayer = PopupLayer.Open(PreScene.target.T);
-            popupLayer.ArrangeConfirmWindow(() =>
-            {
-                UnLinkDevice(() =>
+            LinkDevice(
+                () =>
                 {
-                    LinkDevice(() =>
-                    {
-                        var popupLayer = PopupLayer.Open(T);
-                        popupLayer.ArrangeConfirmWindow(EnterMainScene," 已经关联账户 ");
-                    });
-                });
-            }, "当前设备没和这个账户进行绑定，绑定一下？绑定了的话。。");
-        }
-        else
+                    var popupLayer = PopupLayer.Open(T);
+                    popupLayer.ArrangeWarnWindow(" 已经关联账户 ");
+                    success.Invoke();
+                },
+                (x) =>
+                {
+                    var popupLayer = PopupLayer.Open(T);
+                    popupLayer.ArrangeWarnWindow("绑定失败"+ x.Error);
+                }
+            );
+        }, "当前设备没和这个账户进行绑定，绑定一下？绑定了的话。。");
+    }
+    
+    public static void UnLinkAccountPopup(GameObject T, Action success)
+    {
+        var popupLayer = PopupLayer.Open(T);
+        popupLayer.ArrangeConfirmWindow(() =>
         {
-            EnterMainScene();
-        }
+            UnLinkDevice(
+                PlayerAccountInfo.Me.currentLinkedDeviceId,
+                () =>
+                {
+                    var popupLayer = PopupLayer.Open(T);
+                    popupLayer.ArrangeWarnWindow(" 已经与当前设备断开链接 ");
+                    success.Invoke();
+                },
+                () =>
+                {
+                    var popupLayer = PopupLayer.Open(T);
+                    popupLayer.ArrangeWarnWindow(" 未能与设备切断绑定，");
+                }
+            );
+        }, "要把当前设备和当前账户断开链接？");
     }
     
     static void EnterMainScene()
@@ -149,7 +169,10 @@ public partial class PlayFabReadClient
                 PlayerAccountInfo.Me.currentLinkedDeviceId = result.AccountInfo.IosDeviceInfo.IosDeviceId;
 #endif
 #if UNITY_ANDROID
-                PlayerAccountInfo.Me.currentLinkedDeviceId = result.AccountInfo.AndroidDeviceInfo.AndroidDeviceId;
+                if (result.AccountInfo.AndroidDeviceInfo != null)
+                    PlayerAccountInfo.Me.currentLinkedDeviceId = result.AccountInfo.AndroidDeviceInfo.AndroidDeviceId;
+                else
+                    PlayerAccountInfo.Me.currentLinkedDeviceId = null;
 #endif
                 success.Invoke();
             },

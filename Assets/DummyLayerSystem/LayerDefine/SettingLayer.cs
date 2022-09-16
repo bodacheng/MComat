@@ -33,6 +33,7 @@ public class SettingLayer : UILayer {
 
     #region linkDevice
     [SerializeField] private Button linkDeviceBtn;
+    [SerializeField] private Button unLinkDeviceBtn;
     #endregion
 
     void AccountPhase_EmailToBeSet()
@@ -107,6 +108,7 @@ public class SettingLayer : UILayer {
                     {
                         AccountPhase_EmailToBeSet();
                     }
+                    RefreshLinkDeviceBtn();
                 }
             );
         });
@@ -124,9 +126,20 @@ public class SettingLayer : UILayer {
         
         linkDeviceBtn.onClick.AddListener(() =>
             {
-                PlayFabReadClient.LinkAccountPopup(gameObject);
+                PlayFabReadClient.LinkAccountPopup(gameObject, RefreshLinkDeviceBtn);
             }
         );
+        unLinkDeviceBtn.onClick.AddListener(() =>
+            {
+                PlayFabReadClient.UnLinkAccountPopup(gameObject, RefreshLinkDeviceBtn);
+            }
+        );
+    }
+
+    void RefreshLinkDeviceBtn()
+    {
+        unLinkDeviceBtn.gameObject.SetActive(PlayerAccountInfo.Me.currentLinkedDeviceId == SystemInfo.deviceUniqueIdentifier);
+        linkDeviceBtn.gameObject.SetActive(PlayerAccountInfo.Me.currentLinkedDeviceId != SystemInfo.deviceUniqueIdentifier);
     }
     
     static SettingLayer Get()

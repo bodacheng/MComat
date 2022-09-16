@@ -8,7 +8,7 @@ using PlayFab.ClientModels;
 /// </summary>
 public partial class PlayFabReadClient
 {
-    public static void LinkDevice(Action success)
+    public static void LinkDevice(Action success, Action<PlayFabError> fail)
     {
 #if UNITY_IOS
         PlayFabClientAPI.LinkIOSDeviceID(
@@ -19,11 +19,13 @@ public partial class PlayFabReadClient
             (x) =>
             {
                 Debug.Log(x);
+                PlayerAccountInfo.Me.currentLinkedDeviceId = SystemInfo.deviceUniqueIdentifier;
                 success.Invoke();
             },
             (x) =>
             {
                 Debug.Log(x);
+                fail.Invoke(x);
             }
         );
 #endif
@@ -37,23 +39,25 @@ public partial class PlayFabReadClient
             (x) =>
             {
                 Debug.Log(x);
+                PlayerAccountInfo.Me.currentLinkedDeviceId = SystemInfo.deviceUniqueIdentifier;
                 success.Invoke();
             },
             (x) =>
             {
                 Debug.Log(x);
+                fail.Invoke(x);
             }
         );
 #endif
     }
 
-    public static void UnLinkDevice(Action success)
+    public static void UnLinkDevice(string unlinkDeviceId ,Action success, Action fail = null)
     {
 #if UNITY_IOS
         PlayFabClientAPI.UnlinkIOSDeviceID(
             new UnlinkIOSDeviceIDRequest
             {
-                DeviceId = SystemInfo.deviceUniqueIdentifier
+                DeviceId = unlinkDeviceId
             },
             (x) =>
             {
@@ -63,6 +67,7 @@ public partial class PlayFabReadClient
             (x) =>
             {
                 Debug.Log(x);
+                fail?.Invoke();
             }
         );
 #endif
@@ -71,7 +76,7 @@ public partial class PlayFabReadClient
         PlayFabClientAPI.UnlinkAndroidDeviceID(
             new UnlinkAndroidDeviceIDRequest
             {
-                AndroidDeviceId = SystemInfo.deviceUniqueIdentifier
+                AndroidDeviceId = unlinkDeviceId
             },
             (x) =>
             {
@@ -81,6 +86,7 @@ public partial class PlayFabReadClient
             (x) =>
             {
                 Debug.Log(x);
+                fail?.Invoke();
             }
         );
 #endif
