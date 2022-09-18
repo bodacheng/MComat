@@ -36,7 +36,7 @@ public class SettingLayer : UILayer {
     [SerializeField] private Button unLinkDeviceBtn;
     #endregion
 
-    void AccountPhase_EmailToBeSet()
+    public void AccountPhase_EmailToBeSet()
     {
         CurrentEmail.gameObject.SetActive(false);
         EmailInput.gameObject.SetActive(true);
@@ -57,7 +57,7 @@ public class SettingLayer : UILayer {
         });
     }
     
-    void AccountPhase_EmailSet()
+    public void AccountPhase_EmailSet()
     {
         CurrentEmail.gameObject.SetActive(true);
         CurrentEmail.text = PlayerAccountInfo.Me.Email;
@@ -95,22 +95,6 @@ public class SettingLayer : UILayer {
         {
             CloseAllPanels();
             accountPanel.gameObject.SetActive(true);
-            
-            PlayFabReadClient.GetAccountInfo(
-                PlayerAccountInfo.Me.PlayFabId,
-                () =>
-                {
-                    if (PlayerAccountInfo.Me.Email != null)
-                    {
-                        AccountPhase_EmailSet();
-                    }
-                    else
-                    {
-                        AccountPhase_EmailToBeSet();
-                    }
-                    RefreshLinkDeviceBtn();
-                }
-            );
         });
         
         supportBtn.onClick.AddListener(() =>
@@ -136,7 +120,7 @@ public class SettingLayer : UILayer {
         );
     }
 
-    void RefreshLinkDeviceBtn()
+    public void RefreshLinkDeviceBtn()
     {
         unLinkDeviceBtn.gameObject.SetActive(PlayerAccountInfo.Me.currentLinkedDeviceId == SystemInfo.deviceUniqueIdentifier);
         linkDeviceBtn.gameObject.SetActive(PlayerAccountInfo.Me.currentLinkedDeviceId != SystemInfo.deviceUniqueIdentifier);

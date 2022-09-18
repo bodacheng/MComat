@@ -62,6 +62,7 @@ public partial class PlayFabReadClient
             (x) =>
             {
                 Debug.Log(x);
+                PlayerAccountInfo.Me.currentLinkedDeviceId = null;
                 success.Invoke();
             },
             (x) =>
@@ -81,6 +82,7 @@ public partial class PlayFabReadClient
             (x) =>
             {
                 Debug.Log(x);
+                PlayerAccountInfo.Me.currentLinkedDeviceId = null;
                 success.Invoke();
             },
             (x) =>

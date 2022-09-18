@@ -379,9 +379,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e231bc78cc04b269b7bfc749e048f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  byzokusei: {fileID: 3577659869435407032}
+  byZokusei: {fileID: 3577659869435407032}
   typeDropDown: {fileID: 3577659869455630851}
-  searchtag: {fileID: 3577659870736830956}
+  searchTag: {fileID: 0}
 --- !u!1 &3577659869162476259
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,7 +860,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &3577659869455630849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,7 +1635,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &3577659869754747770
 GameObject:
   m_ObjectHideFlags: 0

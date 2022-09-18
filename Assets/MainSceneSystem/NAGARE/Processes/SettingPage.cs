@@ -13,7 +13,21 @@ public class SettingPage : MSceneProcess
     public override void ProcessEnter()
     {
         layer = SettingLayer.Open();
-        
+        PlayFabReadClient.GetAccountInfo(
+            PlayerAccountInfo.Me.PlayFabId,
+            () =>
+            {
+                if (PlayerAccountInfo.Me.Email != null)
+                {
+                    layer.AccountPhase_EmailSet();
+                }
+                else
+                {
+                    layer.AccountPhase_EmailToBeSet();
+                }
+                layer.RefreshLinkDeviceBtn();
+            }
+        );
         SetLoaded(true);
     }
 

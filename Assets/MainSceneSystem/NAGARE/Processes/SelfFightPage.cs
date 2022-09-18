@@ -1,4 +1,5 @@
-﻿using DummyLayerSystem;
+﻿using Cysharp.Threading.Tasks;
+using DummyLayerSystem;
 using mainMenu;
 
 public class SelfFightPage : MSceneProcess
@@ -13,7 +14,7 @@ public class SelfFightPage : MSceneProcess
     public override void ProcessEnter()
     {
         var layer = UnitsLayer.Open();
-        layer.DisplayUnitIcons(dataAccess.Units.Dic, true);
+        layer.DisplayUnitIcons(dataAccess.Units.Dic, true).Forget();
         
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
         

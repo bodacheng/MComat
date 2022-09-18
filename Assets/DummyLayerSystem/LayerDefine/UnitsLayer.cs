@@ -5,14 +5,13 @@ using UnityEngine;
 using DummyLayerSystem;
 using Cysharp.Threading.Tasks;
 using dataAccess;
-using Singleton;
 
 namespace mainMenu
 {
     public class UnitsLayer : UILayer
     {
         [Header("filter")]
-        [SerializeField] MonsterboxFilter filter;
+        [SerializeField] UnitFilter filter;
         
         [Header("角色属性框")]
         [SerializeField] HeroIcon noMagic;
@@ -72,13 +71,13 @@ namespace mainMenu
             return selected_InstanceID;
         }
 
-        async UniTask AddUnitIcon(string instanceID, bool clearButtonFeature)
+        void AddUnitIcon(string instanceID, bool clearBtnFeature)
         {
             var unitInfo = dataAccess.Units.Get(instanceID);
             var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
             if (unitConfig == null)
             {
-                Debug.Log("MonsterID:"+ unitInfo.r_id + " doesnt exist in this version");
+                Debug.Log("unit ID:"+ unitInfo.r_id + " doesnt exist in this version");
                 return;
             }
             
@@ -90,7 +89,7 @@ namespace mainMenu
                 targetingIcon.ChangeIcon(unitInfo);
                 DicAdd<string, HeroIcon>.Add(heroIcons, instanceID, targetingIcon);
             }
-            if (clearButtonFeature)
+            if (clearBtnFeature)
                 targetingIcon.iconButton.onClick.RemoveAllListeners();
             if (!_typeOfUnitsIHave.Contains(unitConfig.TYPE))
             {
@@ -100,7 +99,7 @@ namespace mainMenu
         
         public void OnTypeChangeMyMonsterBox()
         {
-            DisplayUnitIcons(dataAccess.Units.Dic, false);
+            DisplayUnitIcons(dataAccess.Units.Dic, false).Forget();
         }
         
         async UniTask UnitIconsGenerate(IDictionary<string, UnitInfo> dic, bool clearButtonFeature)
@@ -108,7 +107,7 @@ namespace mainMenu
             selected_InstanceID = null;
             foreach (var keyValuePair in dic)
             {
-                await AddUnitIcon(keyValuePair.Value.id, clearButtonFeature);
+                AddUnitIcon(keyValuePair.Value.id, clearButtonFeature);
             }
             filter.RefreshTypeDropDown(_typeOfUnitsIHave);
         }
@@ -136,7 +135,7 @@ namespace mainMenu
         }
         
         //icon的排列，显示   
-        public async void DisplayUnitIcons(IDictionary<string, UnitInfo> dic, bool clearButtonFeature)
+        public async UniTask DisplayUnitIcons(IDictionary<string, UnitInfo> dic, bool clearButtonFeature)
         {
             MonsterBoxContainer.gameObject.SetActive(true);
             await UnitIconsGenerate(dic, clearButtonFeature);
@@ -145,7 +144,8 @@ namespace mainMenu
                 keyValuePair.Value.gameObject.SetActive(false);
             }
             var icons = filter.OrderIcons(heroIcons.Values.ToList());
-            var hangshu = 1;
+            Debug.Log("两个长度："+heroIcons.Count + ":"+ icons.Count);
+            var row = 1;
             for (var i = 0; i < icons.Count; i++)
             {
                 var _targetingIcon = icons[i];
@@ -161,8 +161,8 @@ namespace mainMenu
             }
 
             //adjustAllIconsSize(null);
-            hangshu = 1 + icons.Count / 7;
-            MonsterBoxContainer.sizeDelta = new Vector2(MonsterBoxContainer.rect.width, noMagic.GetComponent<RectTransform>().rect.height * hangshu);
+            row = 1 + icons.Count / 7;
+            MonsterBoxContainer.sizeDelta = new Vector2(MonsterBoxContainer.rect.width, noMagic.GetComponent<RectTransform>().rect.height * row);
             displayUnitIconsAfterAction?.Invoke();
         }
     }

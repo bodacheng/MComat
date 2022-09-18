@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using mainMenu;
 using UniRx;
@@ -45,7 +46,7 @@ public class UnitListPage : MSceneProcess
                 layer.SetUnitsIconOnClick(UnitIconBtn);
             }
         );
-        layer.DisplayUnitIcons(dataAccess.Units.Dic, true);
+        layer.DisplayUnitIcons(dataAccess.Units.Dic, true).Forget();
         Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ => unitOptionLayer.RefreshMemberDetailPageByFocusingUnit()).AddTo(layer);
         SetLoaded(true);
     }
