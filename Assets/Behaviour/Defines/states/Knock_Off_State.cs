@@ -43,10 +43,9 @@ namespace Soul
             Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.05f);
             //_xz = newValue.attacker._Center.WholeT.forward;
             
-            _xz = CalFixPushPos(target.impactComingPoint,  target.attacker.Center.WholeT.position, gameObject.transform.position, 
+            _xz = CalFixPushVector(target.impactComingPoint,  target.attacker.Center.WholeT.position, gameObject.transform.position, 
                 target.from_weapon.damage_type, target.from_weapon._WeaponMode);
-            _xz = (_xz - gameObject.transform.position).normalized;
-
+            
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(target.from_weapon.element), target.DamageEffectPoint, target.CutRotation, null).Forget();
             _usedYCurve = target.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageYAnimationCurve : FightGlobalSetting._knockOffyAnimationCurve;

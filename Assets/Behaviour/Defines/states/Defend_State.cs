@@ -46,7 +46,7 @@ namespace Soul
 
         Collider threat;
         Collider nearbyenemymeat;
-        Vector3 fixDesPos;
+        Vector3 fixDesV3;
 
         public Defend_State(string defend_clip_name, string block_break_name)
         {
@@ -115,7 +115,7 @@ namespace Soul
             _SkillCancelFlag.turn_off_flag();
             //this.AI_DATA_CENTER.turnShield(true);
 
-            fixDesPos = CalFixPushPos(newValue.DamageEffectPoint,
+            fixDesV3 = CalFixPushVector(newValue.DamageEffectPoint,
                 newValue.attacker.Center.WholeT.position,
                                                gameObject.transform.position,
                                                    newValue.from_weapon.damage_type, newValue.from_weapon._WeaponMode);
@@ -123,25 +123,25 @@ namespace Soul
             {
                 case DamageType.light_damage_forward:
                     Animation_Manger.AnimationTrigger(block_break_name, true, 0.05f);
-                    _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
+                    _Rigidbody.velocity = fixDesV3;
                     used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
                     DefendHPfade(newValue);
                     break;
                 case DamageType.heavy_damage_forward:
                     Animation_Manger.AnimationTrigger(block_break_name, true, 0.05f);
-                    _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
+                    _Rigidbody.velocity = fixDesV3;
                     used_block_least_time = FightGlobalSetting._heavyBlockLastingTime;
                     DefendHPfade(newValue);
                     break;
                 case DamageType.supper_damage_forward:
                     Animation_Manger.AnimationTrigger(block_break_name, true, 0.05f);
-                    _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
+                    _Rigidbody.velocity = fixDesV3 - gameObject.transform.position;
                     used_block_least_time = FightGlobalSetting._heavyBlockLastingTime;
                     DefendHPfade(newValue);
                     break;
                 default:
                     Animation_Manger.AnimationTrigger(block_break_name, true, 0.05f);
-                    _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
+                    _Rigidbody.velocity = fixDesV3;
                     used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
                     DefendHPfade(newValue);
                     break;

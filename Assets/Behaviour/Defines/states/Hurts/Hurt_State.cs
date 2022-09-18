@@ -9,7 +9,6 @@ namespace Soul
     public partial class Hurt_State : Behavior
     {
         float used_dizzy_time;
-        Vector3 fixDesPos;
         float TimeCounter { set; get; }
         V_Damage target;
         SingleAssignmentDisposable physicMissionDisposable;
