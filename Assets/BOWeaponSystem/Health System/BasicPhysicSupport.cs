@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BasicPhysicSupport : MonoBehaviour
 {
@@ -125,7 +126,7 @@ public class BasicPhysicSupport : MonoBehaviour
             if (!TouchingEnemy() && _BasicPhysicSupport.Rigidbody.velocity == Vector3.zero)
                 _BasicPhysicSupport._DATA_CENTER.WholeT.transform.position += _BasicPhysicSupport._DATA_CENTER.Animation_Manger.AnimatorRef.deltaPosition;
         }
-
+        
         public void LockPos()
         {
             _BasicPhysicSupport.hiddenMethods.Grounded = true;
@@ -146,8 +147,42 @@ public class BasicPhysicSupport : MonoBehaviour
         if (FightGlobalSetting.scenestep == 1)
         {
             hiddenMethods.GroundedCal();
-            BoundaryControlByGod.LimitTargetToRange(_DATA_CENTER);
+            LimitTargetToRange();
         }
+    }
+    
+    private Vector3 pos;
+    void LimitTargetToRange()
+    {
+        var originY = _DATA_CENTER.WholeT.position.y;
+        pos = _DATA_CENTER.WholeT.position;
+        pos.y = 0;
+        var dis_from_center = pos.magnitude;
+        if (dis_from_center > BoundaryControlByGod._BattleRingRadius)
+        {
+            pos = pos.normalized * BoundaryControlByGod._BattleRingRadius;
+            pos.y = originY;
+            _DATA_CENTER.WholeT.position = pos;
+            AtRing = true;
+        }
+        else
+        {
+            AtRing = false;
+        }
+        
+        if (originY < 0)
+        {
+            pos.y = 0f;
+            _DATA_CENTER.WholeT.position = pos;
+        }
+    }
+    
+    private Tweener rotateTween;
+    public void RotateToTarget_Tween(Vector3 target, float duration)
+    {
+        if (rotateTween != null)
+            rotateTween.Kill();
+        rotateTween = _DATA_CENTER.WholeT.DOLookAt(target, duration, AxisConstraint.Y, Vector3.up);
     }
 
     private bool usingGravity;

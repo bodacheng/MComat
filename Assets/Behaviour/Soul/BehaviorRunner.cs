@@ -65,6 +65,12 @@ namespace Soul
         {
             return _lastBehavior;
         }
+
+        public Behavior GetState(string key)
+        {
+            BehaviourDic.TryGetValue(key, out var state);
+            return state;
+        }
         
         void Update()
         {

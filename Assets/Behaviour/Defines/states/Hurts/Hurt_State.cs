@@ -121,7 +121,7 @@ namespace Soul
                     DrawDamageStart(target);
                     break;
                 case DamageType.explosion:
-                    ExplosionDamgeStart(target);
+                    ExplosionDamageStart(target);
                     break;
                 case DamageType.push_to_mid:
                     PushToMidStart(target, 10f, true);

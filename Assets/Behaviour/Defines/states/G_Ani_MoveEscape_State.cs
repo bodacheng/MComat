@@ -34,12 +34,7 @@ namespace Soul
             if (BeheviourFrameCounter == 5)
                 _BuffsRunner.RunSubCoroutineOfState(_breakFreeCoroutine);
         }
-
-        public override void Pre_process_before_enter()
-        {
-            base.Pre_process_before_enter();
-        }
-
+        
         public override bool Capacity_enter_condition()
         {
             return _BasicPhysicSupport.hiddenMethods.Grounded && base.Capacity_enter_condition();
@@ -50,26 +45,30 @@ namespace Soul
             return AnimationCasualFinishedFlag();
         }
 
+        void CommonEnter()
+        {
+            base.AI_State_enter();
+            _Animator.SetFloat("speed", 0f);
+            _SkillCancelFlag.turn_off_flag();
+            _Rigidbody.velocity = Vector3.zero;
+            pEvents.CloseAllPersonalityEffects();
+            _Animator.applyRootMotion = true;
+            Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
+        }
+
         Vector3 damagingWeaponComingDirection;
-        Vector3 faceDirection;
         Collider threat;
         Collider ECollider;
         public override void AI_State_enter()
         {
-            base.AI_State_enter();
-            _Animator.SetFloat("speed", 0f);
-            Sensor.ContinuousDetectionStart(2);
-            _SkillCancelFlag.turn_off_flag();
-            pEvents.CloseAllPersonalityEffects();
-            _Animator.applyRootMotion = true;
-            Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
-            faceDirection = gameObject.transform.forward;
+            CommonEnter();
+            use_direction = gameObject.transform.forward;
             threat = Sensor.GetSuddenThreatInRange(0, 5);
             
             if (_BasicPhysicSupport.AtRing)
             {
-                faceDirection = Vector3.zero - gameObject.transform.position;
-                faceDirection.y = 0;
+                use_direction = Vector3.zero - gameObject.transform.position;
+                use_direction.y = 0;
             }
             else
             {
@@ -79,10 +78,10 @@ namespace Soul
                     switch (Random.Range(0, 2))
                     {
                         case 0:
-                            faceDirection = Quaternion.Euler(0, -135, 0) * damagingWeaponComingDirection;
+                            use_direction = Quaternion.Euler(0, -135, 0) * damagingWeaponComingDirection;
                             break;
                         case 1:
-                            faceDirection = Quaternion.Euler(0, 135, 0) * damagingWeaponComingDirection;
+                            use_direction = Quaternion.Euler(0, 135, 0) * damagingWeaponComingDirection;
                             break;
                     }
                 }
@@ -90,32 +89,27 @@ namespace Soul
                 {
                     ECollider = Sensor.GetClosestEnemyColliderInSensorRange();
                     if (ECollider != null)
-                        faceDirection = -gameObject.transform.position + ECollider.transform.position;
+                        use_direction = -gameObject.transform.position + ECollider.transform.position;
                     switch (Random.Range(0, 2))
                     {
                         case 0:
-                            faceDirection = Quaternion.Euler(0, -90, 0) * faceDirection;
+                            use_direction = Quaternion.Euler(0, -90, 0) * use_direction;
                             break;
                         case 1:
-                            faceDirection = Quaternion.Euler(0, 90, 0) * faceDirection;
+                            use_direction = Quaternion.Euler(0, 90, 0) * use_direction;
                             break;
                     }
                 }
             }
 
-            RotateToTarget_Tween(gameObject.transform.position + faceDirection, 0.01f);
+            RotateToTarget_Tween(gameObject.transform.position + use_direction, 0.1f);
         }
-
+        
         float h;
         float v;
         public override void C_State_enter()
         {
-            base.AI_State_enter();
-            _Animator.SetFloat("speed", 0f);
-            _SkillCancelFlag.turn_off_flag();
-            pEvents.CloseAllPersonalityEffects();
-            _Animator.applyRootMotion = true;
-            Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
+            CommonEnter();
             mainCam = CameraManager._camera.transform;
             screenMovementSpace = Quaternion.Euler(0, mainCam.eulerAngles.y, 0);
             screenMovementForward = screenMovementSpace * Vector3.forward;
@@ -132,13 +126,8 @@ namespace Soul
             {
                 use_direction = (screenMovementForward * v) + (screenMovementRight * h);
             }
-
-            RotateToTarget_Tween(gameObject.transform.position + use_direction, 0.01f);
-        }
-
-        public override void AI_State_exit()
-        {
-            base.AI_State_exit();
+            
+            RotateToTarget_Tween(gameObject.transform.position + use_direction, 0.1f);
         }
     }
 }

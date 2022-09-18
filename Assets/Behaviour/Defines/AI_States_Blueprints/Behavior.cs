@@ -1,6 +1,5 @@
 ﻿using HittingDetection;
 using UnityEngine;
-using DG.Tweening;
 using Skill;
 
 namespace Soul
@@ -225,10 +224,10 @@ namespace Soul
             //gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, dirQ, turnSpeed * Quaternion.Angle(dirQ, gameObject.transform.rotation) * Time.fixedDeltaTime);
             return Vector3.SignedAngle(_Rigidbody.transform.forward, _lookDir, Vector3.up);
         }
-
+        
         public void RotateToTarget_Tween(Vector3 target, float duration)
         {
-            _DATA_CENTER.WholeT.DOLookAt(target, duration, AxisConstraint.Y, Vector3.up);
+            _BasicPhysicSupport.RotateToTarget_Tween(target, duration);
         }
 
         //protected void RotateToDirection_Tween(Vector3 direction, float duration, bool ignoreY)
@@ -263,7 +262,7 @@ namespace Soul
         //    return gameObject.GetComponent<Rigidbody>().velocity.magnitude;
         //}
 
-        Vector3 v;
+        Vector3 _v;
         protected float Move(Vector3 relativePos, float acceleration, bool ignoreY)
         {
             if (_Rigidbody == null)
@@ -272,9 +271,9 @@ namespace Soul
             {
                 relativePos.y = 0;
             }
-            v = relativePos.normalized * acceleration;
+            _v = relativePos.normalized * acceleration;
             //_Rigidbody.AddForce(v, ForceMode.VelocityChange);
-            _Rigidbody.velocity = v;
+            _Rigidbody.velocity = _v;
             return _Rigidbody.velocity.magnitude;
         }
 
@@ -297,9 +296,9 @@ namespace Soul
             {
                 relativePos.y = 0;
             }
-            v = relativePos;
+            _v = relativePos;
             gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,
-                                                         gameObject.transform.position + v,
+                                                         gameObject.transform.position + _v,
                                                          Time.deltaTime * acceleration);
         }
 
@@ -325,8 +324,8 @@ namespace Soul
             current_speed = _Rigidbody.velocity.magnitude;
             if (current_speed > max_speed)
             {
-                v = (max_speed / current_speed) * _Rigidbody.velocity;
-                _Rigidbody.velocity = v;
+                _v = (max_speed / current_speed) * _Rigidbody.velocity;
+                _Rigidbody.velocity = _v;
             }
         }
 
@@ -368,8 +367,15 @@ namespace Soul
         // 另外通过点积的计算我们可以简单粗略的判断当前物体是否朝向另外一个物体: 只需要计算当前物体的transform.forward向量与 (otherObj.transform.position – transform.position)的点积即可， 大于0则面对，否则则背对着。当然这个计算也会有一点误差，但大致够用。 
         float f_temp;
         Vector3 v_temp;
-        protected Vector3 CalFixPushPos(Vector3 damageHappenPoint, Vector3 attackerT_pos, Vector3 victimT_pos, DamageType _DamageType)
+        protected Vector3 CalFixPushPos(Vector3 damageHappenPoint, Vector3 attackerT_pos, Vector3 victimT_pos, 
+            DamageType _DamageType, WeaponMode weaponMode)
         {
+            f_temp = Vector3.Distance(attackerT_pos, victimT_pos);
+            if (weaponMode == WeaponMode.EnergyFromBodyWeapon || f_temp < FightGlobalSetting._SureToPushForwardDis)
+            {
+                return (victimT_pos + (victimT_pos - attackerT_pos)).normalized;
+            }
+            
             if (_DamageType == DamageType.explosion)
             {
                 v_temp = (victimT_pos - damageHappenPoint).normalized;
@@ -377,6 +383,7 @@ namespace Soul
                 v_temp += victimT_pos;
                 return v_temp;
             }
+
             
             damageHappenPoint.y = 0;
             f_temp = Vector3.Dot(damageHappenPoint - attackerT_pos, attackerT_pos - victimT_pos);
@@ -385,7 +392,7 @@ namespace Soul
                 v_temp = f_temp * (attackerT_pos - victimT_pos) + attackerT_pos;//+ (touchingEnemyBody ? attackerTransform_foward : Vector3.zero);
                 return v_temp;
             }
-            return CalFixPushPos(damageHappenPoint, attackerT_pos, victimT_pos, DamageType.explosion);                
+            return CalFixPushPos(damageHappenPoint, attackerT_pos, victimT_pos, DamageType.explosion, weaponMode);
         }
 
         Vector3 use_direction;

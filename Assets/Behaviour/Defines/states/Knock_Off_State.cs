@@ -13,7 +13,6 @@ namespace Soul
         bool _dropped, _canWakeUp;
         AnimationCurve _usedYCurve;
         AnimationCurve _usedZCurve;
-        Decomposition _layBlocker;
         float _temp;
         V_Damage target;
         
@@ -43,8 +42,11 @@ namespace Soul
             _Rigidbody.velocity = Vector3.zero;
             Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.05f);
             //_xz = newValue.attacker._Center.WholeT.forward;
-            _xz = CalFixPushPos(target.impactComingPoint,  target.attacker.Center.WholeT.position, gameObject.transform.position, target.from_weapon.damage_type);
+            
+            _xz = CalFixPushPos(target.impactComingPoint,  target.attacker.Center.WholeT.position, gameObject.transform.position, 
+                target.from_weapon.damage_type, target.from_weapon._WeaponMode);
             _xz = (_xz - gameObject.transform.position).normalized;
+
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(target.from_weapon.element), target.DamageEffectPoint, target.CutRotation, null).Forget();
             _usedYCurve = target.from_weapon.damage_type == DamageType.high ? FightGlobalSetting._HdamageYAnimationCurve : FightGlobalSetting._knockOffyAnimationCurve;
@@ -66,9 +68,6 @@ namespace Soul
             FightParamsRef.GettingDamage = false;
             _SkillCancelFlag.turn_off_flag();
             _BasicPhysicSupport.SetUsingGravity(true);
-
-            if (_layBlocker != null)
-                _layBlocker.Phase = -1;
         }
         
         Vector3 _effectP, _quaV;
@@ -97,7 +96,8 @@ namespace Soul
                 case 0:
                     _temp = _usedYCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedYCurve.Evaluate(_timeCounter);
                     gameObject.transform.position +=
-                        _xz * (_usedZCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedZCurve.Evaluate(_timeCounter)) + Vector3.up * _temp;
+                        _xz * (_usedZCurve.Evaluate(_timeCounter + Time.deltaTime) 
+                               - _usedZCurve.Evaluate(_timeCounter)) + Vector3.up * _temp;
                     
                     if (!_BasicPhysicSupport.hiddenMethods.Grounded || _temp <= 0) //着地，或都应该下落了的时候还在地上
                     {
@@ -107,8 +107,8 @@ namespace Soul
                     break;
                 case 1:
                     gameObject.transform.position +=
-                        _xz * (_usedZCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedZCurve.Evaluate(_timeCounter)) +
-                        Vector3.up * (_usedYCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedYCurve.Evaluate(_timeCounter));
+                        _xz * (_usedZCurve.Evaluate(_timeCounter + Time.deltaTime) 
+                               - _usedZCurve.Evaluate(_timeCounter)) + Vector3.up * (_usedYCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedYCurve.Evaluate(_timeCounter));
                     if (_BasicPhysicSupport.hiddenMethods.Grounded && _timeCounter > 0.5f)
                         // time_counter > 0.5f 这个数字是为了确保角色真能飞起来。
                         // 否则很有可能因为动画本身等复杂缘故，刚飞起来就被判断落地
@@ -134,7 +134,6 @@ namespace Soul
                         EffectsManager.GenerateEffect("hit_ground", null, _effectP, Quaternion.LookRotation(Vector3.right), null).Forget();
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                         _flyingStep = 3;
-                        layBlock(_DATA_CENTER);
                     }
                     break;
                 case 3:
@@ -152,11 +151,6 @@ namespace Soul
                     }
                     break;
             }
-        }
-
-        async void layBlock(Data_Center _DATA_CENTER)
-        {
-            _layBlocker = await EffectsManager.GenerateEffect("layBlocker", "defaultmagic", _DATA_CENTER.geometryCenter.position, _DATA_CENTER.geometryCenter.rotation, _DATA_CENTER.geometryCenter);
         }
     }
 }

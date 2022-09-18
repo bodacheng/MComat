@@ -6,7 +6,7 @@ namespace Soul
 {
     public partial class Hurt_State : Behavior
     {
-        void ExplosionDamgeStart(V_Damage newValue)
+        void ExplosionDamageStart(V_Damage newValue)
         {
             used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
             physicMissionDisposable = new SingleAssignmentDisposable();
@@ -20,7 +20,8 @@ namespace Soul
                 }
             );
 
-            fixDesPos = CalFixPushPos(newValue.DamageEffectPoint,  newValue.attacker.Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
+            fixDesPos = CalFixPushPos(newValue.DamageEffectPoint,  newValue.attacker.Center.WholeT.position, gameObject.transform.position, 
+                newValue.from_weapon.damage_type, newValue.from_weapon._WeaponMode);
             _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
         }
     }

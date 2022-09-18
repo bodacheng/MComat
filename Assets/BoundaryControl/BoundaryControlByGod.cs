@@ -52,31 +52,6 @@ public class BoundaryControlByGod : MonoBehaviour {
         }
         DOTween.To(() => BattleRingRadius, x => BattleRingRadius = x, targetradius, 1).OnUpdate(() => changeRadius(BattleRingRadius));
     }
-    
-    public static void LimitTargetToRange(Data_Center dataCenter)
-    {
-        var temp = dataCenter.WholeT.position;
-        temp.y = 0;
-        var dis_from_center = temp.magnitude;
-        if (dis_from_center > _BattleRingRadius)
-        {
-            temp = temp.normalized * _BattleRingRadius;
-            temp.y = dataCenter.WholeT.position.y;
-            dataCenter.WholeT.position = temp;
-            dataCenter._BasicPhysicSupport.AtRing = true;
-        }
-        else
-        {
-            dataCenter._BasicPhysicSupport.AtRing = false;
-        }
-        
-        temp = dataCenter.WholeT.position;
-        if (temp.y < 0)
-        {
-            temp.y = 0f;
-            dataCenter.WholeT.position = temp;
-        }
-    }
 }
 
 //public void SUOQUANER(int aliveMemberCount)

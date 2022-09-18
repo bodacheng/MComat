@@ -118,7 +118,7 @@ namespace Soul
             fixDesPos = CalFixPushPos(newValue.DamageEffectPoint,
                 newValue.attacker.Center.WholeT.position,
                                                gameObject.transform.position,
-                                                   newValue.from_weapon.damage_type);
+                                                   newValue.from_weapon.damage_type, newValue.from_weapon._WeaponMode);
             switch (newValue.from_weapon.damage_type)
             {
                 case DamageType.light_damage_forward:

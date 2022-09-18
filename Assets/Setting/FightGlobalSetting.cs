@@ -25,6 +25,7 @@ public class FightGlobalSetting : ScriptableObject
     public float MaxKnockoffLaidGroundTime = 2f;
     public float CanGetUpAfterKnockoffToGround = 0.5f;
     public float GetupTime = 1f;
+    public float SureToPushForwardDis = 5f;
     public int defendHP = 20;
     public float lightBlockLastingTime = 0.3f, heavyBlockLastingTime = 0.5f;
     public float attackDrawingDistance = 1f;
@@ -50,6 +51,7 @@ public class FightGlobalSetting : ScriptableObject
     public static float _MaxKnockoffLaidGroundTime;
     public static float _CanGetUpAfterKnockoffToGround;
     public static float _GetupTime;
+    public static float _SureToPushForwardDis = 5f;
     public static int _defendHP;
     public static float _lightBlockLastingTime, _heavyBlockLastingTime, _highhit_lastingTime;
     public static float _normalattackpositionfixingtime;
@@ -125,6 +127,8 @@ public class FightGlobalSetting : ScriptableObject
 
         _HdamageYAnimationCurve = HdamageYAnimationCurve;
         _HdamageZAnimationCurve = HdamageZAnimationCurve;
+
+        _SureToPushForwardDis = SureToPushForwardDis;
 
         _defendHP = defendHP;
         _lightBlockLastingTime = lightBlockLastingTime;

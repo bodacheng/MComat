@@ -8,7 +8,8 @@ namespace Soul
     {
         void HeavyStart(V_Damage newValue)
         {
-            fixDesPos = CalFixPushPos(newValue.impactComingPoint, newValue.attacker.Center.WholeT.position, gameObject.transform.position, newValue.from_weapon.damage_type);
+            fixDesPos = CalFixPushPos(newValue.impactComingPoint, newValue.attacker.Center.WholeT.position, gameObject.transform.position, 
+                newValue.from_weapon.damage_type, newValue.from_weapon._WeaponMode);
             //gameObject.transform.DOMove(fixDesPos, 0.1f);
             _Rigidbody.velocity = fixDesPos - gameObject.transform.position;
             
