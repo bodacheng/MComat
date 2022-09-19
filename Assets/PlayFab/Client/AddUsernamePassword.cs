@@ -39,7 +39,7 @@ public partial class PlayFabReadClient
     /// 但是，玩家不能改username，这个是我们自己定的规矩，我们希望这个username就是玩家的playfabid。
     /// </summary>
     /// <param name="email"></param>
-    public static void SendPwResetEmail(string email)
+    public static void SendPwResetEmail(string email, Action success = null, Action<PlayFabError> fail = null)
     {
         Debug.Log("send mail to this address:" + email.Trim() );
         Debug.Log("titleID:" + PlayFabSettings.TitleId );
@@ -53,10 +53,12 @@ public partial class PlayFabReadClient
             (x) =>
             {
                 Debug.Log(x);
+                success?.Invoke();
             },
             (x)=>
             {
                 Debug.Log(x);
+                fail?.Invoke(x);
             }
         );
     }

@@ -83,7 +83,19 @@ public class SettingLayer : UILayer
         SendPwResetBtn.onClick.AddListener(
         () =>
             {
-                PlayFabReadClient.SendPwResetEmail(PlayerAccountInfo.Me.Email);
+                PlayFabReadClient.SendPwResetEmail(
+                    PlayerAccountInfo.Me.Email,
+                    () =>
+                    {
+                        var popupLayer = PopupLayer.Open(gameObject); 
+                        popupLayer.ArrangeWarnWindow(" Email Sent ");
+                    },
+                    (x)=>
+                    {
+                        var popupLayer = PopupLayer.Open(gameObject); 
+                        popupLayer.ArrangeWarnWindow(x.ErrorMessage);
+                    }
+                );
             }
         );
     }

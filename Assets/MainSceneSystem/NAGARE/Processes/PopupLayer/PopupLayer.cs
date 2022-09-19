@@ -20,6 +20,7 @@ public partial class PopupLayer : UILayer
     
     public static PopupLayer Open(GameObject T)
     {
+        Debug.Log("为何打开？"+T);
         var returnValue = Get();
         if (returnValue != null)
         {
