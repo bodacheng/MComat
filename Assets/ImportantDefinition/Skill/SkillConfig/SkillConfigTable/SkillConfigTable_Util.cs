@@ -9,11 +9,11 @@ public partial class SkillConfigTable
 {
     public static List<SkillConfig> RowsToSkillConfigList(List<Row> Rows)
     {
-        List<SkillConfig> skillConfigs = new List<SkillConfig>();
-        for (int i = 0; i < Rows.Count; i++)
+        var skillConfigs = new List<SkillConfig>();
+        for (var i = 0; i < Rows.Count; i++)
         {
-            SkillAIAttrs.Row aiRow = SkillAIAttrs.Find_RECORD_ID(Rows[i].RECORD_ID);
-            SkillConfig newConfig = RowToSkillConfig(Rows[i], aiRow);
+            var aiRow = SkillAIAttrs.Find_RECORD_ID(Rows[i].RECORD_ID);
+            var newConfig = RowToSkillConfig(Rows[i], aiRow);
             if (newConfig != null)
                 skillConfigs.Add(newConfig);
                 

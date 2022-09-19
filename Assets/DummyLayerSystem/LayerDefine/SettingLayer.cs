@@ -4,17 +4,22 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingLayer : UILayer {
+public class SettingLayer : UILayer
+{
+
+    [SerializeField] private RectTransform selectedFrame;
     
     #region Btns
     [SerializeField] Button volumeBtn;
     [SerializeField] Button accountBtn;
+    [SerializeField] Button deviceBtn;
     [SerializeField] Button supportBtn;
     #endregion
     
     #region Panels
     [SerializeField] RectTransform volumePanel;
     [SerializeField] RectTransform accountPanel;
+    [SerializeField] RectTransform devicePanel;
     [SerializeField] RectTransform supportPanel;
     #endregion
     
@@ -25,7 +30,9 @@ public class SettingLayer : UILayer {
     #endregion
 
     #region Email
-    [SerializeField] TextMeshProUGUI CurrentEmail;
+    [SerializeField] RectTransform emailSettingT;
+    [SerializeField] RectTransform emailT;
+    [SerializeField] InputField CurrentEmail;
     [SerializeField] InputField EmailInput;
     [SerializeField] Button EmailConfirmBtn;
     [SerializeField] Button SendPwResetBtn;
@@ -34,10 +41,14 @@ public class SettingLayer : UILayer {
     #region linkDevice
     [SerializeField] private Button linkDeviceBtn;
     [SerializeField] private Button unLinkDeviceBtn;
+    [SerializeField] private Text instruction;
     #endregion
 
     public void AccountPhase_EmailToBeSet()
     {
+        emailSettingT.gameObject.SetActive(true);
+        emailT.gameObject.SetActive(false);
+        
         CurrentEmail.gameObject.SetActive(false);
         EmailInput.gameObject.SetActive(true);
         EmailConfirmBtn.gameObject.SetActive(true);
@@ -59,6 +70,9 @@ public class SettingLayer : UILayer {
     
     public void AccountPhase_EmailSet()
     {
+        emailSettingT.gameObject.SetActive(false);
+        emailT.gameObject.SetActive(true);
+        
         CurrentEmail.gameObject.SetActive(true);
         CurrentEmail.text = PlayerAccountInfo.Me.Email;
         
@@ -73,6 +87,12 @@ public class SettingLayer : UILayer {
             }
         );
     }
+
+    void SetSelectedFrame(RectTransform target)
+    {
+        selectedFrame.position = target.position;
+        selectedFrame.gameObject.SetActive(true);
+    }
     
     void Initialise()
     {
@@ -82,6 +102,7 @@ public class SettingLayer : UILayer {
         {
             volumePanel.gameObject.SetActive(false);
             accountPanel.gameObject.SetActive(false);
+            devicePanel.gameObject.SetActive(false);
             supportPanel.gameObject.SetActive(false);
         }
         
@@ -89,18 +110,28 @@ public class SettingLayer : UILayer {
         {
             CloseAllPanels();
             volumePanel.gameObject.SetActive(true);
+            SetSelectedFrame(volumeBtn.GetComponent<RectTransform>());
         });
         
         accountBtn.onClick.AddListener(() =>
         {
             CloseAllPanels();
             accountPanel.gameObject.SetActive(true);
+            SetSelectedFrame(accountBtn.GetComponent<RectTransform>());
+        });
+        
+        deviceBtn.onClick.AddListener(() =>
+        {
+            CloseAllPanels();
+            devicePanel.gameObject.SetActive(true);
+            SetSelectedFrame(deviceBtn.GetComponent<RectTransform>());
         });
         
         supportBtn.onClick.AddListener(() =>
         {
             CloseAllPanels();
             supportPanel.gameObject.SetActive(true);
+            SetSelectedFrame(supportBtn.GetComponent<RectTransform>());
         });
         
         onBgmChange();
@@ -118,12 +149,19 @@ public class SettingLayer : UILayer {
                 PlayFabReadClient.UnLinkAccountPopup(gameObject, RefreshLinkDeviceBtn);
             }
         );
+        
+        accountBtn.onClick.Invoke();
     }
 
     public void RefreshLinkDeviceBtn()
     {
         unLinkDeviceBtn.gameObject.SetActive(PlayerAccountInfo.Me.currentLinkedDeviceId == SystemInfo.deviceUniqueIdentifier);
         linkDeviceBtn.gameObject.SetActive(PlayerAccountInfo.Me.currentLinkedDeviceId != SystemInfo.deviceUniqueIdentifier);
+
+        instruction.text = PlayerAccountInfo.Me.currentLinkedDeviceId == SystemInfo.deviceUniqueIdentifier ? 
+            "当前账户已经和设备进行了链接，你可以在程序打开后直接登陆本账户。如果你希望将本设备和其他账户进行绑定，请点击下方按钮。解除当前账户与设备的绑定会使您无法直接登陆目前账户，如果希望保留当前账户，请设置好本账户的邮箱与密码，否则可能造成账户丢失。" 
+            : 
+            "当前账户没有与当前设备进行绑定。点击下方绑定按钮可以绑定。";
     }
     
     static SettingLayer Get()

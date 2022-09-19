@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Reflection;
 
 namespace Soul
 {
@@ -29,8 +28,8 @@ namespace Soul
         
         public bool CounterComingEnergy()
         {
-            Collider nearestEnemyMeat = Sensor.GetTargetRangeEnemyCollider(0, 5);
-            Collider threat = Sensor.GetSuddenThreatInRange(5, 15);
+            var nearestEnemyMeat = Sensor.GetTargetRangeEnemyCollider(0, 5);
+            var threat = Sensor.GetSuddenThreatInRange(5, 15);
             return nearestEnemyMeat == null && (threat != null);
         }
         
@@ -52,23 +51,23 @@ namespace Soul
                 return false;
             }
             tempCollider1 = Sensor.GetSuddenThreatInRange(0, 3);
-            tempCollider2 = Sensor.GetClosestEnemyColliderInSensorRange();
+            //tempCollider2 = Sensor.GetClosestEnemyColliderInSensorRange();
             
-            if (tempCollider2 != null && tempCollider1 != null)
-            {
-                if (Vector3.Distance(tempCollider2.transform.position, _DATA_CENTER.geometryCenter.position) >  Vector3.Distance(tempCollider1.transform.position, _DATA_CENTER.geometryCenter.position))
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                if (tempCollider1 != null)
-                {
-                    return true;
-                }
-            }
-            return false;
+            // if (tempCollider2 != null && tempCollider1 != null)
+            // {
+            //     if (Vector3.Distance(tempCollider2.transform.position, _DATA_CENTER.geometryCenter.position) >  Vector3.Distance(tempCollider1.transform.position, _DATA_CENTER.geometryCenter.position))
+            //     {
+            //         return true;
+            //     }
+            // }
+            // else
+            // {
+            //     if (tempCollider1 != null)
+            //     {
+            //         return true;
+            //     }
+            // }
+            return tempCollider1 != null;
         }
 
         public bool EnemyClose()
