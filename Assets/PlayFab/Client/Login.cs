@@ -104,45 +104,45 @@ public partial class PlayFabReadClient
 
     public static void LinkAccountPopup(GameObject T, Action success)
     {
-        var popupLayer = PopupLayer.Open(T);
-        popupLayer.ArrangeConfirmWindow(() =>
-        {
-            LinkDevice(
-                () =>
-                {
-                    var popupLayer = PopupLayer.Open(T);
-                    popupLayer.ArrangeWarnWindow(" 已经关联账户 ");
-                    success.Invoke();
-                },
-                (x) =>
-                {
-                    var popupLayer = PopupLayer.Open(T);
-                    popupLayer.ArrangeWarnWindow("绑定失败"+ x.Error);
-                }
-            );
-        }, "当前设备没和这个账户进行绑定，绑定一下？绑定了的话。。");
+        PopupLayer.ArrangeConfirmWindow(
+            T,
+            () =>
+            {
+                LinkDevice(
+                    () =>
+                    {
+                        PopupLayer.ArrangeWarnWindow(T, " 已经关联账户 ");
+                        success.Invoke();
+                    },
+                    (x) =>
+                    {
+                        PopupLayer.ArrangeWarnWindow(T, "绑定失败"+ x.Error);
+                    }
+                );
+            }, 
+            "当前设备没和这个账户进行绑定，绑定一下？绑定了的话。。");
     }
     
     public static void UnLinkAccountPopup(GameObject T, Action success)
     {
-        var popupLayer = PopupLayer.Open(T);
-        popupLayer.ArrangeConfirmWindow(() =>
-        {
-            UnLinkDevice(
-                PlayerAccountInfo.Me.currentLinkedDeviceId,
-                () =>
-                {
-                    var popupLayer = PopupLayer.Open(T);
-                    popupLayer.ArrangeWarnWindow(" 已经与当前设备断开链接 ");
-                    success.Invoke();
-                },
-                () =>
-                {
-                    var popupLayer = PopupLayer.Open(T);
-                    popupLayer.ArrangeWarnWindow(" 未能与设备切断绑定，");
-                }
-            );
-        }, "要把当前设备和当前账户断开链接？");
+        PopupLayer.ArrangeConfirmWindow(
+            T,
+            () =>
+            {
+                UnLinkDevice(
+                    PlayerAccountInfo.Me.currentLinkedDeviceId,
+                    () =>
+                    {
+                        PopupLayer.ArrangeWarnWindow(T, " 已经与当前设备断开链接 ");
+                        success.Invoke();
+                    },
+                    () =>
+                    {
+                        PopupLayer.ArrangeWarnWindow(T, " 未能与设备切断绑定，");
+                    }
+                );
+            }, 
+        "要把当前设备和当前账户断开链接？");
     }
     
     static void EnterMainScene()

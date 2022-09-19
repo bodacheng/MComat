@@ -81,8 +81,7 @@ namespace mainMenu
         
         public static void ReturnToLobby(string error)
         {
-            var popupLayer = PopupLayer.Open(PreScene.target.T);
-            popupLayer.ArrangeConfirmWindow((() => { SceneManager.LoadScene(0);}), error);
+            PopupLayer.ArrangeConfirmWindow(PreScene.target.T, (() => { SceneManager.LoadScene(0);}), error);
         }
         
         void BasicPhase()
@@ -172,8 +171,8 @@ namespace mainMenu
 
         public void AskIfLoadFight(FightInfo stage)
         {
-            var popupLayer = PopupLayer.Open(PreScene.target.T);
-            popupLayer.ArrangeConfirmWindow(
+            PopupLayer.ArrangeConfirmWindow(
+                target.T,
                 delegate {
                     FightLoad.Go(stage, true);
                 }, "开打？");

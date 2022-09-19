@@ -111,25 +111,27 @@ public class FrontPage : MSceneProcess
                     NickNameLayer.Open(
                         (x) =>
                         {
-                            var popupLayer = PopupLayer.Open(PreScene.target.T);
-                            popupLayer.ArrangeConfirmWindow(() =>
-                            {
-                                PlayFabReadClient.UpdateUserData(
-                                    new UpdateUserDataRequest()
-                                    {
-                                        Data = new Dictionary<string, string>()
+                            PopupLayer.ArrangeConfirmWindow(
+                                PreScene.target.T,
+                                () =>
+                                {
+                                    PlayFabReadClient.UpdateUserData(
+                                        new UpdateUserDataRequest()
                                         {
-                                            { "PlayerName", x }
+                                            Data = new Dictionary<string, string>()
+                                            {
+                                                { "PlayerName", x }
+                                            }
+                                        },
+                                        (x) =>
+                                        {
+                                            UILayerLoader.Remove("NickNameLayer");
+                                            if (x)
+                                                EnterProcess();
                                         }
-                                    },
-                                    (x) =>
-                                    {
-                                        UILayerLoader.Remove("NickNameLayer");
-                                        if (x)
-                                            EnterProcess();
-                                    }
-                                );
-                            }, "Set as your nick name?");
+                                    );
+                                }, 
+                            "Set as your nick name?");
                         }
                     );
                 }

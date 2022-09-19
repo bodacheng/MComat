@@ -17,11 +17,13 @@ public class StartUpPresentation : MonoBehaviour
         var bytes = await AddressablesLogic.GetWholeDownLoadSize(
             () =>
             {
-                var popupLayer = PopupLayer.Open(T.gameObject);
-                popupLayer.ArrangeConfirmWindow((() =>
-                {
-                    SceneManager.LoadScene(0);
-                }), " 下载错误。请检查网络 ");
+                PopupLayer.ArrangeConfirmWindow(
+                    T.gameObject,
+                    (() =>
+                    {
+                        SceneManager.LoadScene(0);
+                    }), 
+                " 下载错误。请检查网络 ");
             }
         );
         
@@ -37,8 +39,8 @@ public class StartUpPresentation : MonoBehaviour
     
     void DownLoadConfirm(string msg)
     {
-        var popupLayer = PopupLayer.Open(T.gameObject);
-        popupLayer.ArrangeConfirmWindow(
+        PopupLayer.ArrangeConfirmWindow(
+            T.gameObject,
             async ()=>
             {
                 ProgressLayer.Open(T.gameObject);

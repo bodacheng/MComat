@@ -25,8 +25,7 @@ public static class FightLoad
                     error = "队伍人员不够。";
                     break;
             }
-            PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);
-            popupLayer.ArrangeWarnWindow(error);
+            PopupLayer.ArrangeWarnWindow(PreScene.target.T, error);
             return;
         }
 

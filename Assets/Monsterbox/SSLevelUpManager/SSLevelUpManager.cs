@@ -59,14 +59,12 @@ public partial class SSLevelUpManager : MonoBehaviour
                 var m = Stones.Get(item.instanceId);
                 if (m.Born == "true")
                 {
-                    var popupLayer = PopupLayer.Open(PreScene.target.T);
-                    popupLayer.ArrangeWarnWindow("这个是被动技能，不能用作材料");
+                    PopupLayer.ArrangeWarnWindow(PreScene.target.T, "这个是被动技能，不能用作材料");
                     return;
                 }
                 if (m.UnitInstanceId != null)
                 {
-                    var popupLayer = PopupLayer.Open(PreScene.target.T);
-                    popupLayer.ArrangeWarnWindow("有角色正在使用，不能用作材料");
+                    PopupLayer.ArrangeWarnWindow(PreScene.target.T,"有角色正在使用，不能用作材料");
                     return;
                 }
                 
@@ -103,11 +101,13 @@ public partial class SSLevelUpManager : MonoBehaviour
         confirmLevelUp.interactable = true;
         void Confirm()
         {
-            var popupLayer = PopupLayer.Open(PreScene.target.T);
-            popupLayer.ArrangeConfirmWindow(()=>
-            {
-                ConfirmSkillStoneLevelUp(x=> RefreshSkillLevelUpModule());
-            }, "确实要升级技能石？");
+            PopupLayer.ArrangeConfirmWindow(
+                PreScene.target.T,
+                ()=>
+                {
+                    ConfirmSkillStoneLevelUp(x=> RefreshSkillLevelUpModule());
+                }, 
+                "确实要升级技能石？");
         }
         confirmLevelUp.onClick.RemoveAllListeners();
         confirmLevelUp.onClick.AddListener(Confirm);

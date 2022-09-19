@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class SettingLayer : UILayer
 {
 
-    [SerializeField] private RectTransform selectedFrame;
+    [SerializeField] RectTransform selectedFrame;
     
     #region Btns
     [SerializeField] Button volumeBtn;
@@ -87,13 +87,11 @@ public class SettingLayer : UILayer
                     PlayerAccountInfo.Me.Email,
                     () =>
                     {
-                        var popupLayer = PopupLayer.Open(gameObject); 
-                        popupLayer.ArrangeWarnWindow(" Email Sent ");
+                        PopupLayer.ArrangeWarnWindow(gameObject, " Email Sent ");
                     },
                     (x)=>
                     {
-                        var popupLayer = PopupLayer.Open(gameObject); 
-                        popupLayer.ArrangeWarnWindow(x.ErrorMessage);
+                        PopupLayer.ArrangeWarnWindow(gameObject, x.ErrorMessage);
                     }
                 );
             }
@@ -161,8 +159,6 @@ public class SettingLayer : UILayer
                 PlayFabReadClient.UnLinkAccountPopup(gameObject, RefreshLinkDeviceBtn);
             }
         );
-        
-        accountBtn.onClick.Invoke();
     }
 
     public void RefreshLinkDeviceBtn()
