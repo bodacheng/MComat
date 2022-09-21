@@ -23,7 +23,7 @@ public class Starter : MonoBehaviour
     [SerializeField] PlayfabSetting PlayfabSetting;
     [SerializeField] FightGlobalSetting FightGlobalSetting;
     [SerializeField] KeywordSetting keywordSetting;
-    
+
     public void Initialise()
     {
         Debug.Log("files loads...");
@@ -38,10 +38,8 @@ public class Starter : MonoBehaviour
     
     public void EnterFrontScene()
     {
-        Initialise();
         var stage = FightInfo.RandomSkillTestStage(TeamMode.rotation);
         stage.EventType = FightEventType.Screensaver;
-        //stage.team1ID = PlayerAccountInfo.Me.PlayFabUsername;
         FightLoad.Go(stage);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using DummyLayerSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,7 @@ public class StartUpPresentation : MonoBehaviour
 {
     [SerializeField] Starter Starter;
     [SerializeField] RectTransform T;
+    [SerializeField] bool FrontSceneFight;
     
     void Start()
     {
@@ -33,7 +35,7 @@ public class StartUpPresentation : MonoBehaviour
         }
         else
         {
-            Starter.EnterFrontScene();
+            Go();
         }
     }
     
@@ -44,14 +46,16 @@ public class StartUpPresentation : MonoBehaviour
             async ()=>
             {
                 ProgressLayer.Open(T.gameObject);
-                await AddressablesLogic.ResourcePrepareProcess(Starter.EnterFrontScene, 
+                await AddressablesLogic.ResourcePrepareProcess(
+                    Go, 
                     (x,f) =>
                     {
                         if (f == 0)
                             ProgressLayer.LoadingPercent(x, f, false);
                         else
                             ProgressLayer.LoadingPercent(x, f, false);
-                    });
+                    }
+                );
             },
             () =>
             {
@@ -59,5 +63,19 @@ public class StartUpPresentation : MonoBehaviour
             },
             msg
         );
+    }
+
+    void Go()
+    {
+        Starter.Initialise();
+        if (FrontSceneFight)
+        {
+            Starter.EnterFrontScene();
+        }
+        else
+        {
+            var TitleScreenLayer = UILayerLoader.Load(T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
+            TitleScreenLayer.Initialise();
+        }
     }
 }

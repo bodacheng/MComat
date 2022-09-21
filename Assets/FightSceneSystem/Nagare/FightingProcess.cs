@@ -1,10 +1,6 @@
 ﻿using DummyLayerSystem;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using mainMenu;
 using System.Collections.Generic;
 using Log;
-using PlayFab;
 
 namespace FightScene
 {

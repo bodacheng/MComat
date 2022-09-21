@@ -184,8 +184,11 @@ namespace mainMenu
             {
                 var item = _slot._cell.GetItem();
                 await Task.Delay(1);// wait for the UI Layer to be stable.Otherwise pos caculation will be wrong at the start
-                var worldPos = PosCal.GetWorldPos(PreScene.target.FxCamera, _slot._cell.GetComponent<RectTransform>(), 5f);
-                _tabEffects.RefreshSlotEffect(_slot.num, worldPos, item != null ? item._SkillConfig.SP_LEVEL : -1);
+                if (_slot != null && _slot._cell != null)
+                {
+                    var worldPos = PosCal.GetWorldPos(PreScene.target.FxCamera, _slot._cell.GetComponent<RectTransform>(), 5f);
+                    _tabEffects.RefreshSlotEffect(_slot.num, worldPos, item != null ? item._SkillConfig.SP_LEVEL : -1);
+                }
             }
          }
     }
