@@ -152,16 +152,17 @@ public partial class PlayFabReadClient
         SceneManager.LoadScene(1);
     }
 
-    public static void GetAccountInfo(string playFabId, Action success)
+    public static void GetAccountInfo(Action<bool> success)
     {
         PlayFabClientAPI.GetAccountInfo(
             new GetAccountInfoRequest
             {
-                PlayFabId = playFabId
+                PlayFabId = PlayerAccountInfo.Me.PlayFabId
             },
             result =>
             {
-                Debug.Log("目前本账户的Username："+ PlayerAccountInfo.Me.PlayFabUserName);
+                Debug.Log("TitleDisplayName 是:"+result.AccountInfo.TitleInfo.DisplayName);
+                PlayerAccountInfo.Me.TitleDisplayName = result.AccountInfo.TitleInfo.DisplayName;
                 PlayerAccountInfo.Me.PlayFabUserName = result.AccountInfo.Username;
                 PlayerAccountInfo.Me.Email = result.AccountInfo.PrivateInfo.Email;
                 
@@ -174,11 +175,12 @@ public partial class PlayFabReadClient
                 else
                     PlayerAccountInfo.Me.currentLinkedDeviceId = null;
 #endif
-                success.Invoke();
+                success.Invoke(true);
             },
             errorCallback =>
             {
                 Debug.Log(errorCallback.Error);
+                success.Invoke(false);
             }
         );
     }

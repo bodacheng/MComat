@@ -10,7 +10,8 @@ namespace mainMenu
         {
             foreach (var _slot in allSlot)
             {
-                _slot._cell.RemoveToTemp();
+                if (_slot != null && _slot._cell != null)
+                    _slot._cell.RemoveToTemp();
             }
         }
         

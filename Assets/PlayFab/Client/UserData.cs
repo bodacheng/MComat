@@ -8,17 +8,13 @@ using Newtonsoft.Json;
 
 public partial class PlayFabReadClient
 {
-    public static void GetUserData(GetUserDataRequest req, Action<bool> finished)
+    public static void GetUserData(GetUserDataRequest req, Action<bool> finished) // 目前没用？？
     {
         PlayFabClientAPI.GetUserData
         (
             req,
             (GetUserDataResult obj) =>
             {
-                if (obj.Data.ContainsKey("PlayerName"))
-                    PlayerAccountInfo.Me.PlayerName = obj.Data["PlayerName"].Value;
-                else
-                    PlayerAccountInfo.Me.PlayerName = null;
                 finished.Invoke(true);
             },
             errorCallback => {
@@ -116,6 +112,24 @@ public partial class PlayFabReadClient
             errorCallback => {
                 Debug.Log("Basic accInfo fail:" + errorCallback.ErrorMessage);
                 finished.Invoke(false);
+            }
+        );
+    }
+
+    public static void UpdateUserTitleDisplayName(string DisplayName, Action<UpdateUserTitleDisplayNameResult> finished, Action error)
+    {
+        PlayFabClientAPI.UpdateUserTitleDisplayName(
+            new UpdateUserTitleDisplayNameRequest
+            {
+                DisplayName = DisplayName
+            },
+            (x)=>
+            {
+                finished.Invoke(x);
+            },
+        (x) =>
+            {
+                Debug.Log(x);
             }
         );
     }

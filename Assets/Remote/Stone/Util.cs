@@ -32,7 +32,8 @@ namespace dataAccess
         {
             foreach (KeyValuePair<string, SKStoneItem> keyValuePair in RenderModelDic)
             {
-                keyValuePair.Value.transform.SetParent(ResourceKeeper.dontDestroyOnLoadParent);
+                if (keyValuePair.Value != null)
+                    keyValuePair.Value.transform.SetParent(ResourceKeeper.dontDestroyOnLoadParent);
             }
         }
         #endregion

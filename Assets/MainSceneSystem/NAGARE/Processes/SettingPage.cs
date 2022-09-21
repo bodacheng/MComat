@@ -14,18 +14,20 @@ public class SettingPage : MSceneProcess
     {
         layer = SettingLayer.Open();
         PlayFabReadClient.GetAccountInfo(
-            PlayerAccountInfo.Me.PlayFabId,
-            () =>
+            (x) =>
             {
-                if (PlayerAccountInfo.Me.Email != null)
+                if (x)
                 {
-                    layer.AccountPhase_EmailSet();
+                    if (PlayerAccountInfo.Me.Email != null)
+                    {
+                        layer.AccountPhase_EmailSet();
+                    }
+                    else
+                    {
+                        layer.AccountPhase_EmailToBeSet();
+                    }
+                    layer.RefreshLinkDeviceBtn();
                 }
-                else
-                {
-                    layer.AccountPhase_EmailToBeSet();
-                }
-                layer.RefreshLinkDeviceBtn();
             }
         );
         SetLoaded(true);

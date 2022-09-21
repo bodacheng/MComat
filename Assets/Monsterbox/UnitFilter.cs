@@ -21,12 +21,10 @@ public class UnitFilter : MonoBehaviour
     
     public List<HeroIcon> OrderIcons(List<HeroIcon> origin_mainMenuIcons)
     {
-        origin_mainMenuIcons = TypeFilter(origin_mainMenuIcons);   
-        Debug.Log("长："+origin_mainMenuIcons.Count);
+        origin_mainMenuIcons = TypeFilter(origin_mainMenuIcons);
         if (byZokusei.isOn)
         {
             origin_mainMenuIcons = OrderIconsByZokusei(origin_mainMenuIcons);
-            Debug.Log("长d："+origin_mainMenuIcons.Count);
         }
         //origin_mainMenuIcons = putFavourateFirst(origin_mainMenuIcons);
         //origin_mainMenuIcons = SearchByKeyword(origin_mainMenuIcons);

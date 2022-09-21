@@ -10,7 +10,7 @@ public class PlayerAccountInfo
     public static PlayerAccountInfo Me;
     
     public string PlayFabId;
-    public string PlayerName;
+    public string TitleDisplayName;
     public string PlayFabUserName;// for login
     public string Email;
     
@@ -31,7 +31,7 @@ public class PlayerAccountInfo
 
     public PlayerAccountInfo()
     {
-        PlayerName = "helloKitty";
+        TitleDisplayName = "helloKitty";
     }
 }
 

@@ -8,6 +8,11 @@ using PlayFab.ClientModels;
 
 public class FrontPage : MSceneProcess
 {
+    void AccountInfoFinished(bool value)
+    {
+        missionWatcher.Finish("accountInfoFinished", value);
+    }
+    
     void UserDataLoadFinished(bool value)
     {
         missionWatcher.Finish("userDataLoadFinished", value);
@@ -86,9 +91,10 @@ public class FrontPage : MSceneProcess
         PlayFabReadClient.GetUserData(
             new GetUserDataRequest
             {
-                PlayFabId = PlayerAccountInfo.Me.PlayFabId,
-                Keys = new List<string>() { "PlayerName" }
+                PlayFabId = PlayerAccountInfo.Me.PlayFabId
             }, UserDataLoadFinished);
+
+        PlayFabReadClient.GetAccountInfo(AccountInfoFinished);
         PlayFabReadClient.GetUserReadOnlyData(UserReadOnlyDataLoadFinished);
         PlayFabReadClient.GetStatistics(StatisticsLoadFinished);
         
@@ -101,12 +107,12 @@ public class FrontPage : MSceneProcess
             new List<string>
             {
                 "userDataLoadFinished", "itemsLoadFinished", "statisticsFinished", 
-                "userReadOnlyDataLoadLoaded", "arcadeTFinished", "arenaTFinished"
+                "userReadOnlyDataLoadLoaded", "arcadeTFinished", "arenaTFinished", "accountInfoFinished"
             },
             () =>
             {
                 ProgressLayer.Close();
-                if (PlayerAccountInfo.Me.PlayerName == null)
+                if (PlayerAccountInfo.Me.TitleDisplayName == null)
                 {
                     NickNameLayer.Open(
                         (x) =>
@@ -115,19 +121,16 @@ public class FrontPage : MSceneProcess
                                 PreScene.target.T,
                                 () =>
                                 {
-                                    PlayFabReadClient.UpdateUserData(
-                                        new UpdateUserDataRequest()
-                                        {
-                                            Data = new Dictionary<string, string>()
-                                            {
-                                                { "PlayerName", x }
-                                            }
-                                        },
+                                    PlayFabReadClient.UpdateUserTitleDisplayName(
+                                        x,
                                         (x) =>
                                         {
                                             UILayerLoader.Remove("NickNameLayer");
-                                            if (x)
-                                                EnterProcess();
+                                            EnterProcess();
+                                        },
+                                        () =>
+                                        {
+                                            PopupLayer.ArrangeWarnWindow(PreScene.target.T,"Network Error");
                                         }
                                     );
                                 }, 

@@ -17,7 +17,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         rank.text = LInfo.PlayerLeaderboardEntry.Position.ToString();
         
         // 竞技场模式下毫无考虑敌人“多组上场”的情况
-        for (int index = 0; index < LInfo.Team.Length; index++)
+        for (var index = 0; index < LInfo.Team.Length; index++)
         {
             var posNum = LInfo.Team[index].key2;
             var unitInfo = LInfo.Team[index].value;

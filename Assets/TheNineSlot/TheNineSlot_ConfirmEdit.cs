@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using dataAccess;
 using System.Collections.Generic;
 using System;
@@ -27,7 +26,7 @@ namespace mainMenu
                 }
             }
 
-            for (int i = 1; i < 10; i++)
+            for (var i = 1; i < 10; i++)
             {
                 if (!beforeDic.ContainsKey(i.ToString()))
                 {
@@ -37,7 +36,7 @@ namespace mainMenu
 
             // slot stoneid
             IDictionary<string, string> afterDic = new Dictionary<string, string>();
-            for (int i = 0; i < allSlot.Count; i++)
+            for (var i = 0; i < allSlot.Count; i++)
             {
                 if (allSlot[i]._cell.GetItem() != null)
                 {
@@ -66,7 +65,7 @@ namespace mainMenu
                 }
             }
             
-            for (int i = 1; i < 10; i++)
+            for (var i = 1; i < 10; i++)
             {
                 if (beforeDic[i.ToString()] != afterDic[i.ToString()])
                 {
@@ -76,34 +75,48 @@ namespace mainMenu
                     }
                 }
             }
-
+            
+            ProgressLayer.Loading(">", PreScene.target.T);
+            
             void Success(IDictionary<string, Tuple<string, string>> ChangedStoneDic)
             {
                 Stones.RefreshLocalStoneParams(ChangedStoneDic);
-                ReadANineAndTwo(unitInfo);
                 var skillEditLayer = SkillEditLayer.Get();
-                skillEditLayer.StonesBox.RestFilter();
-                SelectedRender(null);
-                skillEditLayer.SkillEditConfirmAnimation();
+                if (skillEditLayer != null)
+                {
+                    ReadANineAndTwo(unitInfo);
+                    skillEditLayer.StonesBox.RestFilter();
+                    SelectedRender(null);
+                    skillEditLayer.SkillEditConfirmAnimation();
+                }
                 
-                MainSceneLog skillConfirmLog = new MainSceneLog()
+                var skillConfirmLog = new MainSceneLog()
                 {
                     step = ProcessesRunner.Main.currentProcess.Step,
                     description = "success"
                 };
                 MainSceneLogger.Logs.Add(skillConfirmLog);
+                
+                ProgressLayer.Close();
             }
             
             void error()
             {
-                ReadANineAndTwo(unitInfo);
-                SelectedRender(null);
-                MainSceneLog skillConfirmLog = new MainSceneLog()
+                var skillEditLayer = SkillEditLayer.Get();
+                if (skillEditLayer != null)
+                {
+                    ReadANineAndTwo(unitInfo);
+                    SelectedRender(null);
+                }
+                
+                var skillConfirmLog = new MainSceneLog()
                 {
                     step = ProcessesRunner.Main.currentProcess.Step,
                     description = "failed"
                 };
                 MainSceneLogger.Logs.Add(skillConfirmLog);
+                
+                ProgressLayer.Close();
             }
             
             CloudScript.UpdateSkillEdit(ToEditStones, Success, error);
