@@ -15,6 +15,12 @@ public class ElementStoneTagsGroup
     {
         selectedTab.Clear(true);
         exTagEffects.TryGetValue(ex, out var tab);
+        if (tab == null)
+        {
+            Debug.Log("按钮特效逻辑错误");
+            return;
+        }
+        
         selectedTab.transform.SetParent(tab.transform);
         selectedTab.transform.localPosition = Vector3.zero;
         selectedTab.Play();

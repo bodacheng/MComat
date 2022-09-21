@@ -144,7 +144,6 @@ namespace mainMenu
                 keyValuePair.Value.gameObject.SetActive(false);
             }
             var icons = filter.OrderIcons(heroIcons.Values.ToList());
-            Debug.Log("两个长度："+heroIcons.Count + ":"+ icons.Count);
             var row = 1;
             for (var i = 0; i < icons.Count; i++)
             {
