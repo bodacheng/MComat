@@ -116,12 +116,6 @@ namespace Soul
                         FightParamsRef.ChangeLayerForLimbs(_DATA_CENTER._TeamConfig.mylayer);
                         _flyingStep = 2;
                     }
-
-                    if (_timeCounter > 2f)
-                    {
-                        FightParamsRef.ChangeLayerForLimbs(_DATA_CENTER._TeamConfig.mylayer);
-                        _flyingStep = 2;
-                    }
                     break;
                 case 2 :
                     if (!_dropped)

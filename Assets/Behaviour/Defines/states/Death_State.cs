@@ -115,11 +115,6 @@ namespace Soul
                     {
                         _flyingStep = 2;
                     }
-
-                    if (_timeCounter > 2f)
-                    {
-                        _flyingStep = 2;
-                    }
                     break;
                 case 2 :
                     if (!_dropped)
