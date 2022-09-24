@@ -13,7 +13,7 @@ namespace Soul
             dropped = false;
             _Animator.SetFloat("speed", 0f);
             _Rigidbody.velocity = Vector3.zero;
-            used_dizzy_time = FightGlobalSetting._highhit_lastingTime;
+            used_dizzy_time = FightGlobalSetting.HighHitLastingTime;
             _xz = newValue.attacker.Center.WholeT.forward;
             FightParamsRef.GetKnockOffCount().PlusTimeCounter(0.2f);
             Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.1f);
@@ -31,8 +31,8 @@ namespace Soul
                 else
                 {
                     gameObject.transform.position +=
-                    _xz * (FightGlobalSetting._HdamageZAnimationCurve.Evaluate(TimeCounter + Time.fixedDeltaTime) - FightGlobalSetting._HdamageZAnimationCurve.Evaluate(TimeCounter)) +
-                    Vector3.up * (FightGlobalSetting._HdamageYAnimationCurve.Evaluate(TimeCounter + Time.fixedDeltaTime) - FightGlobalSetting._HdamageYAnimationCurve.Evaluate(TimeCounter));
+                    _xz * (FightGlobalSetting.HDamageZAnimationCurve.Evaluate(TimeCounter + Time.fixedDeltaTime) - FightGlobalSetting.HDamageZAnimationCurve.Evaluate(TimeCounter)) +
+                    Vector3.up * (FightGlobalSetting.HDamageYAnimationCurve.Evaluate(TimeCounter + Time.fixedDeltaTime) - FightGlobalSetting.HDamageYAnimationCurve.Evaluate(TimeCounter));
                 }
             }
         }

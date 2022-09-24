@@ -71,7 +71,7 @@ namespace mainMenu
             AppSetting.bgmSource = audioSource;
             AppSetting.Load();
             Time.timeScale = 1;
-            FightGlobalSetting.scenestep = 0;
+            FightGlobalSetting._sceneStep = 0;
             
             BasicPhase();
             ToInitialPhase();

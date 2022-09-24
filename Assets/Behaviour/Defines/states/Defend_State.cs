@@ -98,7 +98,7 @@ namespace Soul
             _Animator.SetFloat("speed", 0f);
             Animation_Manger.AnimationTrigger(defend_clip_name, false, 0.1f);
             _Rigidbody.velocity = Vector3.zero;
-            used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
+            used_block_least_time = FightGlobalSetting.LightBlockLastingTime;
             TimeCounter = used_block_least_time;
             _SkillCancelFlag.turn_off_flag();
             //this.AI_DATA_CENTER.turnShield(true);
@@ -124,25 +124,25 @@ namespace Soul
                 case DamageType.light_damage_forward:
                     Animation_Manger.AnimationTrigger(block_break_name, true, 0.05f);
                     _Rigidbody.velocity = fixDesV3;
-                    used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
+                    used_block_least_time = FightGlobalSetting.LightBlockLastingTime;
                     DefendHPfade(newValue);
                     break;
                 case DamageType.heavy_damage_forward:
                     Animation_Manger.AnimationTrigger(block_break_name, true, 0.05f);
                     _Rigidbody.velocity = fixDesV3;
-                    used_block_least_time = FightGlobalSetting._heavyBlockLastingTime;
+                    used_block_least_time = FightGlobalSetting.HeavyBlockLastingTime;
                     DefendHPfade(newValue);
                     break;
                 case DamageType.supper_damage_forward:
                     Animation_Manger.AnimationTrigger(block_break_name, true, 0.05f);
                     _Rigidbody.velocity = fixDesV3 - gameObject.transform.position;
-                    used_block_least_time = FightGlobalSetting._heavyBlockLastingTime;
+                    used_block_least_time = FightGlobalSetting.HeavyBlockLastingTime;
                     DefendHPfade(newValue);
                     break;
                 default:
                     Animation_Manger.AnimationTrigger(block_break_name, true, 0.05f);
                     _Rigidbody.velocity = fixDesV3;
-                    used_block_least_time = FightGlobalSetting._lightBlockLastingTime;
+                    used_block_least_time = FightGlobalSetting.LightBlockLastingTime;
                     DefendHPfade(newValue);
                     break;
             }

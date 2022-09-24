@@ -94,20 +94,20 @@ public partial class SkillSet
             behaviorTransitionSets.Add(M);
         if (R != null)
             behaviorTransitionSets.Add(R);
-        if (Empty != null)
-            behaviorTransitionSets.Add(Empty);
-        if (zhuangbi != null)
-            behaviorTransitionSets.Add(zhuangbi);
-        if (Victory != null)
-            behaviorTransitionSets.Add(Victory);    
-        if (Death != null)
-            behaviorTransitionSets.Add(Death);
-        if (Hit != null)
-            behaviorTransitionSets.Add(Hit);
-        if (getUp != null)
-            behaviorTransitionSets.Add(getUp);
-        if (KnockOff != null)
-            behaviorTransitionSets.Add(KnockOff);
+        if (_empty != null)
+            behaviorTransitionSets.Add(_empty);
+        if (_zhuangbi != null)
+            behaviorTransitionSets.Add(_zhuangbi);
+        if (_victory != null)
+            behaviorTransitionSets.Add(_victory);    
+        if (_death != null)
+            behaviorTransitionSets.Add(_death);
+        if (_hit != null)
+            behaviorTransitionSets.Add(_hit);
+        if (_getUp != null)
+            behaviorTransitionSets.Add(_getUp);
+        if (_knockOff != null)
+            behaviorTransitionSets.Add(_knockOff);
             
         return behaviorTransitionSets;
     }

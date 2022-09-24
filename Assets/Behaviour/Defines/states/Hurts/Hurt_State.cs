@@ -100,19 +100,19 @@ namespace Soul
             switch (target.from_weapon.damage_type)
             {
                 case DamageType.slight_damage_forward:
-                    used_dizzy_time = FightGlobalSetting._slighthit_lastingtime;
+                    used_dizzy_time = FightGlobalSetting.SlightHitLastingTime;
                     NormalStart(target);
                     break;
                 case DamageType.light_damage_forward:
-                    used_dizzy_time = FightGlobalSetting._lighthit_lastingtime;
+                    used_dizzy_time = FightGlobalSetting.LightHitLastingTime;
                     NormalStart(target);
                     break;
                 case DamageType.heavy_damage_forward:
-                    used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
+                    used_dizzy_time = FightGlobalSetting.HeavyHitLastingTime;
                     HeavyStart(target);
                     break;
                 case DamageType.supper_damage_forward:
-                    used_dizzy_time = FightGlobalSetting._superhit_lastingtime;
+                    used_dizzy_time = FightGlobalSetting.SuperHitLastingTime;
                     HeavyStart(target);
                     EffectsManager.GenerateEffect("electric_s_e", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, _DATA_CENTER.geometryCenter).Forget();
                     break;
@@ -149,7 +149,7 @@ namespace Soul
             FightParamsRef.GetKnockOffCount().PlusGauge(1f);
             FightParamsRef.GetKnockOffCount().PlusTimeCounter(0.2f);
             
-            if (FightParamsRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting._knockoffextent)
+            if (FightParamsRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting.KnockOffExtent)
             {
                 FightParamsRef.GetKnockOffCount().SetGauge(0f);
                 _AIStateRunner.ChangeState("KnockOff", target);

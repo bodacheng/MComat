@@ -8,7 +8,7 @@ namespace Soul
         void StableDamgeStart(V_Damage newValue)
         {
             FightParamsRef.GetKnockOffCount().SetGauge(0f);
-            used_dizzy_time = FightGlobalSetting._lighthit_lastingtime;
+            used_dizzy_time = FightGlobalSetting.LightHitLastingTime;
             if (_BasicPhysicSupport.hiddenMethods.Grounded)
             {
                 _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;

@@ -8,7 +8,7 @@ namespace Soul
         void NormalStart(V_Damage newValue)
         {
             _BasicPhysicSupport.OpenEnemyTouchingDrag(1);
-            used_dizzy_time = FightGlobalSetting._lighthit_lastingtime;
+            used_dizzy_time = FightGlobalSetting.LightHitLastingTime;
             if (_BasicPhysicSupport.hiddenMethods.Grounded)
             {
                 _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;

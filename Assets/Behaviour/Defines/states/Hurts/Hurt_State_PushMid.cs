@@ -8,7 +8,7 @@ namespace Soul
     {
         void PushToMidStart(V_Damage newValue, float dis, bool Grounded)
         {
-            used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
+            used_dizzy_time = FightGlobalSetting.HeavyHitLastingTime;
             Vector3 MidDistanceFromMe = newValue.attacker.Center.geometryCenter.transform.position + newValue.attacker.Center.WholeT.transform.forward * dis;
             if (Grounded)
             {

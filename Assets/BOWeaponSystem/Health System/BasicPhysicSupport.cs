@@ -144,7 +144,7 @@ public class BasicPhysicSupport : MonoBehaviour
     
     void Update()
     {
-        if (FightGlobalSetting.scenestep == 1)
+        if (FightGlobalSetting._sceneStep == 1)
         {
             hiddenMethods.GroundedCal();
             LimitTargetToRange();

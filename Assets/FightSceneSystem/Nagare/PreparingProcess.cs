@@ -53,7 +53,7 @@ public class PreparingProcess : FSceneProcess
             RTFightManager.target.team1.TurnAllUnitsInvincible(true);
             RTFightManager.target.team2.TurnAllUnitsInvincible(true);
         }else{
-            RTFightManager.target.team1.TurnAllUnitsInvincible(false);
+            RTFightManager.target.team1.TurnAllUnitsInvincible(FightGlobalSetting._Team1Invincible);
             RTFightManager.target.team2.TurnAllUnitsInvincible(false);
         }
         

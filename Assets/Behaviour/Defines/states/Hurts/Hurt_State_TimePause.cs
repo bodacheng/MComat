@@ -25,7 +25,7 @@ namespace Soul
                 _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
                 _BuffsRunner.Freesing = false;
             };
-            pasueCoroutine = new CustomCoroutine(pasuestart, FightGlobalSetting._superhit_lastingtime * 3, pasueend);
+            pasueCoroutine = new CustomCoroutine(pasuestart, FightGlobalSetting.SuperHitLastingTime * 3, pasueend);
             _BuffsRunner.RunSubCoroutineOfState(pasueCoroutine);
         }
     }

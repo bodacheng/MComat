@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43766b8020d004e79a0be7e7abcca48c, type: 3}
   m_Name: Data
   m_EditorClassIdentifier: 
-  programMode: 0
   hasDefend: 0
   skillStoneHasExp: 0
   knockOffyAnimationCurve:
@@ -117,44 +116,35 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  HdamageYAnimationCurve:
+  HDamageYAnimationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 38.199276
-      outSlope: 38.199276
+      inSlope: 1
+      outSlope: 1
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.22357102
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.3
-      value: 4.2652397
-      inSlope: -3.0295079
-      outSlope: -3.0295079
+      time: 0.4844873
+      value: 0.6354041
+      inSlope: 1
+      outSlope: 1
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.63102204
-      outWeight: 0.08148797
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.2
-      value: -27.144798
-      inSlope: -74.15157
-      outSlope: -74.15157
+      time: 7.0253286
+      value: -6.115452
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.063456886
-      outWeight: 0
-    - serializedVersion: 3
-      time: 23.68893
-      value: -1003.78217
-      inSlope: -41.56187
-      outSlope: -41.56187
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.09150091
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -189,8 +179,6 @@ MonoBehaviour:
   Sp1SkillExGet: 0
   Sp2SkillExGet: 0
   Sp3SkillExGet: 0
-  GetExAfterDamageBy: 20
-  ExGetAfterDamage: 10
   slighthitLastingtime: 0.2
   lighthitLastingtime: 0.3
   heavyhitLastingtime: 0.4
@@ -201,6 +189,7 @@ MonoBehaviour:
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5
   GetupTime: 0.6
+  SureToPushForwardDis: 5
   defendHP: 20
   lightBlockLastingTime: 0.3
   heavyBlockLastingTime: 0.6
@@ -208,10 +197,4 @@ MonoBehaviour:
   ResistanceMax: 10
   EXMax: 120
   HurtObjectPreLoadCount: 5
-  goldToExp: 1
-  SkillStoneRankToExp_rank1: 100
-  SkillStoneRankToExp_rank2: 200
-  SkillStoneRankToExp_rank3: 300
-  SkillStoneRankToExp_rank4: 400
-  SkillStoneRankToExp_rank5: 500
   shadowMaterial: {fileID: 2100000, guid: 718b4d06a5b8d44538421fe070643d58, type: 2}

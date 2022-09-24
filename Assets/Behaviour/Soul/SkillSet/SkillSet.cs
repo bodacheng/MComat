@@ -8,23 +8,23 @@ public partial class SkillSet {
     public string b1, b2, b3;
     public string c1, c2, c3;
     
-    private bool Def;
-    private MoveType MoveType;
-    private RushType RushType;
-
+    private bool _def;
+    private MoveType _moveType;
+    private RushType _rushType;
+    
     public bool GetD()
     {
-        return Def;
+        return _def;
     }
 
     public MoveType GetM()
     {
-        return MoveType;
+        return _moveType;
     }
 
     public RushType GetR()
     {
-        return RushType;
+        return _rushType;
     }
     
     public SkillSet()
@@ -33,9 +33,9 @@ public partial class SkillSet {
         b1 = null; b2 = null; b3 = null;
         c1 = null; c2 = null; c3 = null;
         
-        MoveType = MoveType.Move_normal;
-        Def = false;
-        RushType = RushType.Rush;
+        _moveType = MoveType.Move_normal;
+        _def = false;
+        _rushType = RushType.Rush;
     }
 
     public SkillSet(MoveType moveType, bool canDefend, RushType rushType)
@@ -44,9 +44,9 @@ public partial class SkillSet {
         b1 = null; b2 = null; b3 = null;
         c1 = null; c2 = null; c3 = null;
 
-        this.MoveType = moveType;
-        this.Def = canDefend;
-        this.RushType = rushType;
+        this._moveType = moveType;
+        this._def = canDefend;
+        this._rushType = rushType;
     }
 
     public SkillSet DeepCopy()
@@ -56,8 +56,8 @@ public partial class SkillSet {
 
     public void SetPassive(bool _Def, MoveType _MoveType, RushType _RushType)
     {
-        Def = _Def;
-        MoveType = _MoveType;
-        RushType = _RushType;
+        _def = _Def;
+        _moveType = _MoveType;
+        _rushType = _RushType;
     }
 }

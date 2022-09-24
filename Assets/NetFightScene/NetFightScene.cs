@@ -61,7 +61,7 @@ namespace FightScene
             AppSetting.Load();
             
             Application.targetFrameRate = 60;
-            FightGlobalSetting.scenestep = 1;
+            FightGlobalSetting._sceneStep = 1;
             SingleThreadProcesser.backup = mainProcessRunner;
             //Position_Set_Executor.Instance.P_sets.Clear();
             var preparingProcess = new PreparingProcess();

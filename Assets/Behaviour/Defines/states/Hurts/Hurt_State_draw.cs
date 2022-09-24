@@ -8,10 +8,10 @@ namespace Soul
     {
         void DrawDamageStart(V_Damage newValue)
         {
-            used_dizzy_time = FightGlobalSetting._heavyhit_lastingtime;
+            used_dizzy_time = FightGlobalSetting.HeavyHitLastingTime;
             var vector3 = newValue.from_weapon_marker.transform.position;
             vector3.y = gameObject.transform.position.y;
-            gameObject.transform.DOMove(vector3, FightGlobalSetting._normalattackpositionfixingtime).OnComplete(() =>
+            gameObject.transform.DOMove(vector3, FightGlobalSetting.NormalAttackPosFixingTime).OnComplete(() =>
             {
                 if (!_BasicPhysicSupport.hiddenMethods.Grounded)
                     _Rigidbody.velocity = Vector3.zero;

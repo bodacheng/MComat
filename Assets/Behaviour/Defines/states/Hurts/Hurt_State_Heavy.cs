@@ -15,7 +15,7 @@ namespace Soul
             physicMissionDisposable = new SingleAssignmentDisposable();
             physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
-                    if (TimeCounter > FightGlobalSetting._normalattackpositionfixingtime)
+                    if (TimeCounter > FightGlobalSetting.NormalAttackPosFixingTime)
                     {
                         if (_BasicPhysicSupport.hiddenMethods.Grounded)
                             _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;

@@ -23,7 +23,7 @@ namespace Soul
             };
             pasueCoroutine = new CustomCoroutine(
                 pasuestart,
-                FightGlobalSetting._superhit_lastingtime * 2,
+                FightGlobalSetting.SuperHitLastingTime * 2,
                 () =>
                 {
                 // 被其他种类攻击打一下接着石化就中止

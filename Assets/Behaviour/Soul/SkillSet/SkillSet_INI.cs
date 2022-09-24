@@ -6,17 +6,17 @@ using System.Linq;
 public partial class SkillSet
 {
     SkillEntity A1, A2, A3, B1, B2, B3, C1, C2, C3, D, M, R;
-
+    
     #region 基础进程实体
-    SkillEntity Empty, zhuangbi, Victory, Death, Hit, getUp, KnockOff;
+    SkillEntity _empty, _zhuangbi, _victory, _death, _hit, _getUp, _knockOff;
     #endregion
     
-    readonly List<SkillEntity> H1_E_list = new ();
-    readonly List<SkillEntity> H2_E_list = new ();
-    readonly List<SkillEntity> H3_E_list = new ();
-    readonly List<string> H1_list = new ();
-    readonly List<string> H2_list = new ();
-    readonly List<string> H3_list = new ();
+    readonly List<SkillEntity> _h1EList = new ();
+    readonly List<SkillEntity> _h2EList = new ();
+    readonly List<SkillEntity> _h3EList = new ();
+    readonly List<string> _h1List = new ();
+    readonly List<string> _h2List = new ();
+    readonly List<string> _h3List = new ();
     
     public void SortNineAndTwo()
     {
@@ -43,127 +43,127 @@ public partial class SkillSet
         C3 = cConfig3 != null ? GetSE(c3) : null;
         
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ////////////
-        D = Def ? SkillEntity.GetD_SE() : null;
-        M = SkillEntity.GetM_SE(MoveType);
+        D = _def ? SkillEntity.GetD_SE() : null;
+        M = SkillEntity.GetM_SE(_moveType);
         M.CAN_BE_CANCELLED_TO = false;
-        R = SkillEntity.GetR_SE(RushType);
+        R = SkillEntity.GetR_SE(_rushType);
         
         //////////////////////////////////////////////////////////////////////////
         
-        H1_E_list.Clear();
-        H2_E_list.Clear();
-        H3_E_list.Clear();
+        _h1EList.Clear();
+        _h2EList.Clear();
+        _h3EList.Clear();
         
-        H1_list.Clear();
-        H2_list.Clear();
-        H3_list.Clear();
+        _h1List.Clear();
+        _h2List.Clear();
+        _h3List.Clear();
         
         if (A1 != null)
         {
-            H1_E_list.Add(A1);
-            H1_list.Add(A1.REAL_NAME);
+            _h1EList.Add(A1);
+            _h1List.Add(A1.REAL_NAME);
             A1.EnterInput = InputKey.Attack1;
             A1.ExitInput = InputKey.Null;
         }
         if (A2 != null)
         {
-            H2_E_list.Add(A2);
-            H2_list.Add(A2.REAL_NAME);
+            _h2EList.Add(A2);
+            _h2List.Add(A2.REAL_NAME);
             A2.EnterInput = InputKey.Attack1;
             A2.ExitInput = InputKey.Null;
         }
         if (A3 != null)
         {
-            H3_E_list.Add(A3);
-            H3_list.Add(A3.REAL_NAME);
+            _h3EList.Add(A3);
+            _h3List.Add(A3.REAL_NAME);
             A3.EnterInput = InputKey.Attack1;
             A3.ExitInput = InputKey.Null;
         }
 
         if (B1 != null)
         {
-            H1_E_list.Add(B1);
-            H1_list.Add(B1.REAL_NAME);
+            _h1EList.Add(B1);
+            _h1List.Add(B1.REAL_NAME);
             B1.EnterInput = InputKey.Attack2;
             B1.ExitInput = InputKey.Null;
         }
         if (B2 != null)
         {
-            H2_E_list.Add(B2);
-            H2_list.Add(B2.REAL_NAME);
+            _h2EList.Add(B2);
+            _h2List.Add(B2.REAL_NAME);
             B2.EnterInput = InputKey.Attack2;
             B2.ExitInput = InputKey.Null;
         }
         if (B3 != null)
         {
-            H3_E_list.Add(B3);
-            H3_list.Add(B3.REAL_NAME);
+            _h3EList.Add(B3);
+            _h3List.Add(B3.REAL_NAME);
             B3.EnterInput = InputKey.Attack2;
             B3.ExitInput = InputKey.Null;
         }
 
         if (C1 != null)
         {
-            H1_E_list.Add(C1);
-            H1_list.Add(C1.REAL_NAME);
+            _h1EList.Add(C1);
+            _h1List.Add(C1.REAL_NAME);
             C1.EnterInput = InputKey.Attack3;
             C1.ExitInput = InputKey.Null;
         }
         if (C2 != null)
         {
-            H2_E_list.Add(C2);
-            H2_list.Add(C2.REAL_NAME);
+            _h2EList.Add(C2);
+            _h2List.Add(C2.REAL_NAME);
             C2.EnterInput = InputKey.Attack3;
             C2.ExitInput = InputKey.Null;
         }
         if (C3 != null)
         {
-            H3_E_list.Add(C3);
-            H3_list.Add(C3.REAL_NAME);
+            _h3EList.Add(C3);
+            _h3List.Add(C3.REAL_NAME);
             C3.EnterInput = InputKey.Attack3;
             C3.ExitInput = InputKey.Null;
         }
         
         if (R != null)
         {
-            H1_E_list.Add(R);
-            H2_E_list.Add(R);
-            H3_E_list.Add(R);
+            _h1EList.Add(R);
+            _h2EList.Add(R);
+            _h3EList.Add(R);
             
-            H1_list.Add(R.REAL_NAME);
-            H2_list.Add(R.REAL_NAME);
-            H3_list.Add(R.REAL_NAME);
+            _h1List.Add(R.REAL_NAME);
+            _h2List.Add(R.REAL_NAME);
+            _h3List.Add(R.REAL_NAME);
         }
 
         if (D != null && FightGlobalSetting._hasDefend)
         {
-            H1_E_list.Add(D);
-            H2_E_list.Add(D);
-            H3_E_list.Add(D);
+            _h1EList.Add(D);
+            _h2EList.Add(D);
+            _h3EList.Add(D);
             
-            H1_list.Add(D.REAL_NAME);
-            H2_list.Add(D.REAL_NAME);
-            H3_list.Add(D.REAL_NAME);
+            _h1List.Add(D.REAL_NAME);
+            _h2List.Add(D.REAL_NAME);
+            _h3List.Add(D.REAL_NAME);
         }
         
-        for (var i = 0; i < H1_E_list.Count; i++)
+        for (var i = 0; i < _h1EList.Count; i++)
         {
-            H1_E_list[i].CasualTo = H2_list.ToArray();
+            _h1EList[i].CasualTo = _h2List.ToArray();
         }
-        for (var i = 0; i < H2_E_list.Count; i++)
+        for (var i = 0; i < _h2EList.Count; i++)
         {
-            H2_E_list[i].CasualTo = H3_list.ToArray();
+            _h2EList[i].CasualTo = _h3List.ToArray();
         }
-        for (var i = 0; i < H3_E_list.Count; i++)
+        for (var i = 0; i < _h3EList.Count; i++)
         {
-            H3_E_list[i].CasualTo = H1_list.ToArray();
+            _h3EList[i].CasualTo = _h1List.ToArray();
         }
         
-        M.CasualTo = H1_list.ToArray();
+        M.CasualTo = _h1List.ToArray();
         if (D != null)
-            D.CasualTo = H1_list.ToArray();
+            D.CasualTo = _h1List.ToArray();
         if (R != null)
-            R.CasualTo = H1_list.ToArray();
+            R.CasualTo = _h1List.ToArray();
     }
     
     // FormFightingSetsByNineAndTwo(string type,NineAndTwo nineAndTwo, passiveSkillConfigs passiveSkillConfigs, int AI_level) -->
@@ -174,26 +174,26 @@ public partial class SkillSet
         IDictionary<string, SkillEntity> seDic = new Dictionary<string, SkillEntity>();
         var StateTransitionSetList = new List<SkillEntity>();
         
-        Empty = new SkillEntity("Empty", BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,  -1);
-        zhuangbi = new SkillEntity("zhuangbi", BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,  -1);
-        Victory = new SkillEntity("Victory",BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);
-        Death = new SkillEntity("Death", BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);
-        Hit = new SkillEntity("Hit", BehaviorType.Hit, 0, 0,new AIAttrs(), H1_list.ToArray(),null,InputKey.Null, InputKey.Null, -1);
-        getUp = new SkillEntity("getUp",  BehaviorType.GetUp, 0, 0, new AIAttrs(), H1_list.ToArray(), null, InputKey.Any, InputKey.Null, -1);
-        KnockOff = new SkillEntity("KnockOff",  BehaviorType.KnockOff, 0, 0, new AIAttrs(), R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, -1);
+        _empty = new SkillEntity("Empty", BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,  -1);
+        _zhuangbi = new SkillEntity("zhuangbi", BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,  -1);
+        _victory = new SkillEntity("Victory",BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);
+        _death = new SkillEntity("Death", BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);
+        _hit = new SkillEntity("Hit", BehaviorType.Hit, 0, 0,new AIAttrs(), _h1List.ToArray(),null,InputKey.Null, InputKey.Null, -1);
+        _getUp = new SkillEntity("getUp",  BehaviorType.GetUp, 0, 0, new AIAttrs(), _h1List.ToArray(), null, InputKey.Any, InputKey.Null, -1);
+        _knockOff = new SkillEntity("KnockOff",  BehaviorType.KnockOff, 0, 0, new AIAttrs(), R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, -1);
         if (FightGlobalSetting._hasDefend)
         {
-            D.CasualTo = H1_list.ToArray();
+            D.CasualTo = _h1List.ToArray();
             StateTransitionSetList.Add(D);
         }
         
-        StateTransitionSetList.Add(getUp);
-        StateTransitionSetList.Add(KnockOff);
-        StateTransitionSetList.Add(Empty);
-        StateTransitionSetList.Add(zhuangbi);
-        StateTransitionSetList.Add(Victory);
-        StateTransitionSetList.Add(Death);
-        StateTransitionSetList.Add(Hit);        
+        StateTransitionSetList.Add(_getUp);
+        StateTransitionSetList.Add(_knockOff);
+        StateTransitionSetList.Add(_empty);
+        StateTransitionSetList.Add(_zhuangbi);
+        StateTransitionSetList.Add(_victory);
+        StateTransitionSetList.Add(_death);
+        StateTransitionSetList.Add(_hit);        
         StateTransitionSetList.Add(M);
         
         if (D != null && FightGlobalSetting._hasDefend)
@@ -244,7 +244,7 @@ public partial class SkillSet
         
         foreach (var _SE in StateTransitionSetList)
         {
-            if (_SE != M && _SE != KnockOff && _SE != Empty && _SE != Death && _SE != Victory)
+            if (_SE != M && _SE != _knockOff && _SE != _empty && _SE != _death && _SE != _victory)
             {
                 var toOptions = _SE.CasualTo.ToList();
                 if (!toOptions.Contains(M.REAL_NAME))
