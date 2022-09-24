@@ -18,8 +18,8 @@ namespace FightScene
         [Header("Messages")]
         public Text Messages;
         
-        public readonly TeamConfig heroTeamConfig = new TeamConfig("1", Team.player1, new List<Team>() { Team.player2 });
-        public readonly TeamConfig EnemyTeamConfig = new TeamConfig("2", Team.player2, new List<Team>() { Team.player1 });
+        public readonly TeamConfig heroTeamConfig = new("1", Team.player1, new List<Team>() { Team.player2 });
+        public readonly TeamConfig EnemyTeamConfig = new("2", Team.player2, new List<Team>() { Team.player1 });
         
         public static RTFightManager target;
         public static Team playerTeam = Team.player1;
@@ -29,7 +29,7 @@ namespace FightScene
         
         FightInfo loadFight;
         
-        public readonly CompositeDisposable disposables = new CompositeDisposable();
+        public readonly CompositeDisposable disposables = new ();
         
         void Awake()
         {

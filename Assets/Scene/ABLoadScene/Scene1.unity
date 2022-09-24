@@ -4251,7 +4251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Starter: {fileID: 2075428156307059470}
   T: {fileID: 1907867391}
-  FrontSceneFight: 1
+  FrontSceneFight: 0
 --- !u!1 &7265332446000478266
 GameObject:
   m_ObjectHideFlags: 0

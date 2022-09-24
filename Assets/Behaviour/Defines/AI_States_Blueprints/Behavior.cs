@@ -373,7 +373,8 @@ namespace Soul
             f_temp = Vector3.Distance(attackerT_pos, victimT_pos);
             if (weaponMode == WeaponMode.EnergyFromBodyWeapon || f_temp < FightGlobalSetting._SureToPushForwardDis)
             {
-                return (victimT_pos - attackerT_pos).normalized;
+                v_temp = (1000 * victimT_pos - 1000 * attackerT_pos).normalized;
+                return v_temp;
             }
             
             if (_DamageType == DamageType.explosion)

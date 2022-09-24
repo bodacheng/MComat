@@ -14,187 +14,143 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasDefend: 0
   skillStoneHasExp: 0
-  knockOffyAnimationCurve:
+  knockOffYAnimationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 22.88202
-      outSlope: 22.88202
+      inSlope: 12.306488
+      outSlope: 12.306488
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.16640311
+      outWeight: 0.25669587
     - serializedVersion: 3
-      time: 0.008183558
-      value: 0.9083524
-      inSlope: 58.032818
-      outSlope: 58.032818
-      tangentMode: 136
+      time: 0.16701663
+      value: 2.2879415
+      inSlope: 5.989071
+      outSlope: 5.989071
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.90062773
+      outWeight: 0.3507107
+    - serializedVersion: 3
+      time: 0.6866846
+      value: -1.4872141
+      inSlope: -10.570619
+      outSlope: -10.570619
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.029317271
-      value: 1.7013638
-      inSlope: 24.10118
-      outSlope: 24.10118
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.06455918
-      value: 2.2670712
-      inSlope: 9.342522
-      outSlope: 9.342522
-      tangentMode: 1
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.11377848
-      value: 2.836588
-      inSlope: 4.478429
-      outSlope: 3.235302
-      tangentMode: 1
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0.6055075
-    - serializedVersion: 3
-      time: 0.2229837
-      value: 3.188968
-      inSlope: -0.40642887
-      outSlope: -0.40642887
-      tangentMode: 1
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.8854712
-      value: -4.163789
-      inSlope: -21.653965
-      outSlope: -19.80093
-      tangentMode: 65
-      weightedMode: 0
-      inWeight: 0.065278545
-      outWeight: 0
-    - serializedVersion: 3
-      time: 39.382317
-      value: -766.43713
-      inSlope: -19.80093
-      outSlope: 0
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      outWeight: 0.047121063
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  knockOffzAnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.06893921
-      value: 0
-      inSlope: 22.88278
-      outSlope: 22.88278
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.06611723
-    - serializedVersion: 3
-      time: 55.950256
-      value: 726.5756
-      inSlope: -1.3786863
-      outSlope: -1.3786863
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.071523644
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  HDamageYAnimationCurve:
+  knockOffZAnimationCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
+      inSlope: 35.417484
+      outSlope: 35.417484
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.043838307
+    - serializedVersion: 3
+      time: 50
+      value: 1200
       inSlope: 1
       outSlope: 1
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  hDamageYAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
     - serializedVersion: 3
-      time: 0.4844873
-      value: 0.6354041
+      time: 0
+      value: 0
+      inSlope: 31.185656
+      outSlope: 31.185656
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.14812188
+    - serializedVersion: 3
+      time: 0.4691651
+      value: 10.103442
+      inSlope: 13.493832
+      outSlope: 13.493832
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.24911416
+      outWeight: 0.018564237
+    - serializedVersion: 3
+      time: 5.5395856
+      value: -6.841279
+      inSlope: -17.640345
+      outSlope: -17.640345
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.03007436
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  hDamageZAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 64.65759
+      outSlope: 64.65759
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.016696976
+    - serializedVersion: 3
+      time: 50
+      value: 1200
       inSlope: 1
       outSlope: 1
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 7.0253286
-      value: -6.115452
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  HdamageZAnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 9.446574
-      outSlope: 9.446574
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.062140897
-    - serializedVersion: 3
-      time: 1
-      value: 5
-      inSlope: 2.2851849
-      outSlope: 2.2851849
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.08363986
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  AT_coefficient: 1
+  AT_coefficient: 10
   HP_coefficient: 1
-  NormalSkillExGet: 99
+  Team1Invincible: 0
+  NormalSkillExGet: 2
   Sp1SkillExGet: 0
   Sp2SkillExGet: 0
   Sp3SkillExGet: 0
-  slighthitLastingtime: 0.2
-  lighthitLastingtime: 0.3
-  heavyhitLastingtime: 0.4
-  superhitLastingtime: 1
-  highhitLastingTime: 0.8
-  normalattackpositionfixingtime: 0.1
-  knockoffextent: 7
+  slightHitLastingTime: 0.5
+  lightHitLastingTime: 0.5
+  heavyHitLastingTime: 0.5
+  superHitLastingTime: 0.5
+  highHitLastingTime: 0.5
+  normalAttackPosFixingTime: 0.1
+  knockOffExtent: 1
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5
-  GetupTime: 0.6
+  GetupTime: 0.5
   SureToPushForwardDis: 5
-  defendHP: 20
+  defendHP: 0
   lightBlockLastingTime: 0.3
   heavyBlockLastingTime: 0.6
-  attackDrawingDistance: 2
-  ResistanceMax: 10
-  EXMax: 120
-  HurtObjectPreLoadCount: 5
+  attackDrawingDistance: 1
+  resistanceMax: 10
+  eXMax: 100
+  hurtObjectPreLoadCount: 5
   shadowMaterial: {fileID: 2100000, guid: 718b4d06a5b8d44538421fe070643d58, type: 2}

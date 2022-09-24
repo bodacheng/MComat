@@ -96,10 +96,10 @@ public class BasicPhysicSupport : MonoBehaviour
             _BasicPhysicSupport.Rigidbody.drag = 0f;
         }
 
-        public bool Grounded { get; set; }
+        public bool Grounded => _BasicPhysicSupport._DATA_CENTER.WholeT.position.y <= floorY;
 
         readonly float floorY = 0f;
-        public void GroundedCal()
+        public void AutoSwitchGravity()
         {
             // foreach (var check in _BasicPhysicSupport.floorCheckers)
             // {
@@ -111,14 +111,12 @@ public class BasicPhysicSupport : MonoBehaviour
             //     }
             // }
 
-            if (_BasicPhysicSupport._DATA_CENTER.WholeT.position.y <= floorY)
+            if (Grounded)
             {
-                Grounded = true;
                 _BasicPhysicSupport.Rigidbody.useGravity = false;
                 return;
             }
             _BasicPhysicSupport.Rigidbody.useGravity = _BasicPhysicSupport.usingGravity;
-            Grounded = false;
         }
         
         public void RecoverRootPosChange( )
@@ -129,7 +127,6 @@ public class BasicPhysicSupport : MonoBehaviour
         
         public void LockPos()
         {
-            _BasicPhysicSupport.hiddenMethods.Grounded = true;
             _BasicPhysicSupport.SetUsingGravity(false);
             _BasicPhysicSupport.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             _BasicPhysicSupport.Rigidbody.velocity = Vector3.zero;
@@ -146,7 +143,7 @@ public class BasicPhysicSupport : MonoBehaviour
     {
         if (FightGlobalSetting._sceneStep == 1)
         {
-            hiddenMethods.GroundedCal();
+            hiddenMethods.AutoSwitchGravity();
             LimitTargetToRange();
         }
     }

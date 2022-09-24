@@ -14,7 +14,6 @@ namespace Soul
         bool _dropped;
         AnimationCurve _usedYCurve;
         AnimationCurve _usedZCurve;
-        Decomposition _layBlocker;
         float _temp;
         
         public Death_State()
@@ -43,6 +42,8 @@ namespace Soul
             //_xz = newValue.attacker._Center.WholeT.forward;
             _xz = CalFixPushVector(newValue.impactComingPoint,  newValue.attacker.Center.WholeT.position, gameObject.transform.position, 
                 newValue.from_weapon.damage_type, newValue.from_weapon._WeaponMode);
+            RotateToTarget_Tween(gameObject.transform.position - _xz, 0f);
+            
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, null).Forget();
             _usedYCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting.HDamageYAnimationCurve : FightGlobalSetting.KnockOffYAnimationCurve;
@@ -68,9 +69,6 @@ namespace Soul
             FightParamsRef.GettingDamage = false;
             _SkillCancelFlag.turn_off_flag();
             _BasicPhysicSupport.SetUsingGravity(true);
-
-            if (_layBlocker != null)
-                _layBlocker.Phase = -1;
         }
         
         Vector3 _effectP, _quaV;
@@ -134,17 +132,11 @@ namespace Soul
                         EffectsManager.GenerateEffect("hit_ground", null, _effectP, Quaternion.LookRotation(Vector3.right), null).Forget();
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                         _flyingStep = 3;
-                        layBlock(_DATA_CENTER);
                     }
                     break;
                 case 3:
                     break;
             }
-        }
-        
-        async void layBlock(Data_Center _DATA_CENTER)
-        {
-            _layBlocker = await EffectsManager.GenerateEffect("layBlocker", "defaultmagic", _DATA_CENTER.geometryCenter.position, _DATA_CENTER.geometryCenter.rotation, _DATA_CENTER.geometryCenter);
         }
     }
 }
