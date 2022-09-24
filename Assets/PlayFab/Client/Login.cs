@@ -59,11 +59,7 @@ public partial class PlayFabReadClient
                     DeviceId = SystemInfo.deviceUniqueIdentifier,
                     CreateAccount = true
                 },
-                (x) =>
-                {
-                    AddUserNameAndPw(x.PlayFabId);
-                    success.Invoke(x);
-                },
+                success.Invoke,
                 fail
             );
 #endif
