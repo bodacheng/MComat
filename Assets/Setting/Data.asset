@@ -38,12 +38,21 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.6866846
       value: -1.4872141
-      inSlope: -10.570619
-      outSlope: -10.570619
+      inSlope: -12.752612
+      outSlope: -12.752612
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.047121063
+      outWeight: 0.0025325217
+    - serializedVersion: 3
+      time: 60.630272
+      value: -692.26746
+      inSlope: -8.790829
+      outSlope: -8.790829
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10435713
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -53,15 +62,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 35.417484
-      outSlope: 35.417484
+      inSlope: 29.74857
+      outSlope: 29.74857
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.043838307
+      outWeight: 0.037420116
     - serializedVersion: 3
-      time: 50
-      value: 1200
+      time: 49.790714
+      value: 1016.41833
       inSlope: 1
       outSlope: 1
       tangentMode: 0
@@ -130,7 +139,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   AT_coefficient: 1
   HP_coefficient: 1
-  Team1Invincible: 0
+  Team1Invincible: 1
   NormalSkillExGet: 30
   Sp1SkillExGet: 0
   Sp2SkillExGet: 0

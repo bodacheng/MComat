@@ -35,12 +35,6 @@ namespace mainMenu
                 case 3: // 等级升序
                     orderButtonText.text = "Level DES";
                 return ByLevel(targets,0);
-                case 2: // 稀有度降序
-                    orderButtonText.text = "Rarity ASC";
-                return ByRareLevel(targets,1);
-                case 1: // 稀有度升序
-                    orderButtonText.text = "Rarity DES";
-                return ByRareLevel(targets,0);
                 case 0: // 以技能ID
                     orderButtonText.text = "開発番号";
                 return ByDevID(targets, 1);
@@ -81,29 +75,6 @@ namespace mainMenu
                     StoneOfPlayerInfo myStone2 = Stones.Get(targets[j+1]);
                     
                     if (order == 1 ? myStone1.Level > myStone2.Level : myStone1.Level < myStone2.Level)
-                    {
-                        string temp = targets[j];
-                        targets[j] = targets[j + 1];
-                        targets[j + 1] = temp;
-                    }
-                }
-            }
-            return targets;
-        }
-        
-        List<string> ByRareLevel(List<string> targets, int order) //1:升序 0:降序 
-        {
-            targets = ByLevel(targets,1);
-            for (int i = 0; i < targets.Count - 1; i++)
-            {
-                for (int j = 0; j < targets.Count - 1 - i; j++)
-                {
-                    StoneOfPlayerInfo myStone1 = Stones.Get(targets[j]);
-                    StoneOfPlayerInfo myStone2 = Stones.Get(targets[j+1]);
-                    SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfig(myStone1.SkillId);
-                    SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfig(myStone2.SkillId);
-                    
-                    if (order == 1 ? skillConfig1.RARITY_LEVEL > skillConfig2.RARITY_LEVEL : skillConfig2.RARITY_LEVEL < skillConfig1.RARITY_LEVEL)
                     {
                         string temp = targets[j];
                         targets[j] = targets[j + 1];

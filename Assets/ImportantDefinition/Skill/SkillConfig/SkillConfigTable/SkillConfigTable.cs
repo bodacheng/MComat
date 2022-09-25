@@ -31,7 +31,6 @@ public partial class SkillConfigTable
         public string HP_WEIGHT;
         public string ATTACK_TYPE;
         public string EVENT_CODE;
-        public string RARITY_LEVEL;
     }
     
     public static readonly List<Row> rowList = new List<Row>();
@@ -42,7 +41,7 @@ public partial class SkillConfigTable
     	return isLoaded;
     }
 
-    static List<string> AttackTypes = new List<string>()
+    static readonly List<string> AttackTypes = new List<string>()
     {
         "GR","GM","GI","CT"
     };
@@ -153,7 +152,6 @@ public partial class SkillConfigTable
                 grid[i][5] = rowList[i - 1].HP_WEIGHT;
                 grid[i][6] = rowList[i - 1].ATTACK_TYPE;
                 grid[i][7] = rowList[i - 1].EVENT_CODE;
-                grid[i][8] = rowList[i - 1].RARITY_LEVEL;
                 if (!LegalStateType(rowList[i - 1].ATTACK_TYPE))
                 {
                     Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ rowList[i - 1].RECORD_ID);
@@ -189,8 +187,7 @@ public partial class SkillConfigTable
                     ATTACK_WEIGHT = grid[i][4],
                     HP_WEIGHT = grid[i][5],
                     ATTACK_TYPE = grid[i][6],
-                    EVENT_CODE = grid[i][7],
-                    RARITY_LEVEL = grid[i][8]
+                    EVENT_CODE = grid[i][7]
                 };
                 if (!LegalStateType(grid[i][6]))
                 {
@@ -274,13 +271,5 @@ public partial class SkillConfigTable
     public List<Row> FindAll_SPLevel(string find)
     {
     	return rowList.FindAll(x => x.SP_LEVEL == find);
-    }
-    public Row Find_Rarelevel(string find)
-    {
-        return rowList.Find(x => x.RARITY_LEVEL == find);
-    }
-    public List<Row> FindAll_Rarelevel(string find)
-    {
-        return rowList.FindAll(x => x.RARITY_LEVEL == find);
     }
 }

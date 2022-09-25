@@ -30,7 +30,6 @@ namespace Skill
         public BehaviorType STATE_TYPE;
         public int SP_LEVEL;
         public string EVENT_CODE;
-        public int RARITY_LEVEL;
         public AIAttrs AIAttrs = new AIAttrs();
         
         public SkillConfig Clone()

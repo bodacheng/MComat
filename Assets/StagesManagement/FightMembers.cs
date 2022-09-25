@@ -74,7 +74,6 @@ public class FightMembers
         {
             type = focusingtype,
             exType = new int[1] { 0 },
-            rare = new List<int> { 0, 1, 2 },
             close = false,
             near = false,
             far = false

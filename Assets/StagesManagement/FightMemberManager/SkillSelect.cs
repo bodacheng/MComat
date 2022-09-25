@@ -3,19 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
-using UniRx;
 using mainMenu;
 
 public partial class FightMemberManager {
 
     int selectSkillExLevel = -1;
-    List<int> rares = new List<int>();
-    readonly int[] rareOptions = {-1, 0, 1, 2, 3};
-    readonly string[] rareOptionsRender = { "ALL", "★", "★★", "★★★" , "★★★★" };
     readonly int[] exLevels = {-1, 0, 1, 2, 3 };
     readonly string[] exLevelShows = { "ALL", "普攻", "一级必杀", "二级必杀", "三级必杀" };
     int[] SPselected = { 0, 1, 2, 3 };
-    int selectskillrarelevel = -1;
     readonly bool[] skillrangeselectfilter = { false, false, false };
     bool skillselectfilter;
     bool filterranges = true;
@@ -59,33 +54,10 @@ public partial class FightMemberManager {
                 skillrangeselectfilter[2] = EditorGUILayout.Toggle("远", skillrangeselectfilter[2], AttackRangeToggleGUI);
             }
             EditorGUILayout.EndToggleGroup();
-            
-            selectskillrarelevel = EditorGUILayout.IntPopup("技能rank:", selectskillrarelevel, rareOptionsRender, rareOptions);
             EditorGUILayout.LabelField(" ~~~~~  以下将陈列根据条件删选出的技能  ~~~~~ ", Title);
             GUILayout.Space(10f);
         }
         
-        switch(selectskillrarelevel)
-        {
-            case 1:
-                rares = new List<int>() { 1 };
-                break;
-            case 2:
-                rares = new List<int>() { 2 };
-                break;
-            case 3:
-                rares = new List<int>() { 3 };
-                break;
-            case 4:
-                rares = new List<int>() { 4 };
-                break;
-            case 5:
-                rares = new List<int>() { 5 };
-                break;
-            default:
-                rares = new List<int>() { 1, 2, 3, 4, 5 };
-                break;
-        }
         SkillStonesBox.StoneFilterForm filterForm = new SkillStonesBox.StoneFilterForm
         {
             type = focusingType,
@@ -93,8 +65,7 @@ public partial class FightMemberManager {
             near = skillrangeselectfilter[1],
             far = skillrangeselectfilter[2],
             exType = SPselected,
-            BType = Skill.BehaviorType.NONE,
-            rare = rares
+            BType = Skill.BehaviorType.NONE
         };        
         _SkillIDsAndNames = SkillList(filterForm);// 待研究
         

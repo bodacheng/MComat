@@ -56,11 +56,9 @@ namespace dataAccess
                     continue;
                 }
                 var exs = filterForm.exType.ToList();
-                var rare = filterForm.rare.ToList();
                 if (_SkillConfig.TYPE == filterForm.type 
                     && exs.Contains(_SkillConfig.SP_LEVEL) 
-                    && SkillConfig.RangeLimit(_SkillConfig.AIAttrs.AI_MIN_DIS, _SkillConfig.AIAttrs.AI_MAX_DIS, filterForm.close, filterForm.near, filterForm.far)
-                    && rare.Contains(_SkillConfig.RARITY_LEVEL))
+                    && SkillConfig.RangeLimit(_SkillConfig.AIAttrs.AI_MIN_DIS, _SkillConfig.AIAttrs.AI_MAX_DIS, filterForm.close, filterForm.near, filterForm.far))
                 {
                     SkillStonesOfTypeAndExType.Add(keyValuePair.Value.InstanceId);
                 }

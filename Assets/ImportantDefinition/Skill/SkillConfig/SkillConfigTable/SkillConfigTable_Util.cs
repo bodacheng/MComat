@@ -81,7 +81,6 @@ public partial class SkillConfigTable
                 break;
         }
         row.EVENT_CODE = skillConfig.EVENT_CODE;
-        row.RARITY_LEVEL = skillConfig.RARITY_LEVEL.ToString();
         return row;
     }
     
@@ -146,7 +145,6 @@ public partial class SkillConfigTable
             }
             _SkillConfig.SHOW_NAME = SkillNameTable.GetSkillName(row.RECORD_ID);
             _SkillConfig.EVENT_CODE = row.EVENT_CODE;
-            _SkillConfig.RARITY_LEVEL = int.Parse(row.RARITY_LEVEL);
             return _SkillConfig;
         }
         catch(Exception e)
@@ -168,8 +166,7 @@ public partial class SkillConfigTable
                 continue;
             }
             
-            if (SkillConfig.RangeLimit(one.AIAttrs.AI_MIN_DIS, one.AIAttrs.AI_MAX_DIS, filterForm.close, filterForm.near, filterForm.far) 
-                && (filterForm.rare.ToList().Contains(one.RARITY_LEVEL))
+            if (SkillConfig.RangeLimit(one.AIAttrs.AI_MIN_DIS, one.AIAttrs.AI_MAX_DIS, filterForm.close, filterForm.near, filterForm.far)
                 && filterForm.exType.ToList().Contains(one.SP_LEVEL))
             {
                 if (one.RECORD_ID == null)

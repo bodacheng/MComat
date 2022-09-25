@@ -28,13 +28,10 @@ namespace mainMenu
         [SerializeField] Toggle nearCheckBox;
         [SerializeField] Toggle farCheckBox;
 
-        // rare 度限定
-        List<int> rares = new List<int> { 0, 1, 2, 3, 4, 5 };
         
         void Awake()
         {
             _Selected = SelectedFrame;
-            rares = new List<int> { 0, 1, 2, 3, 4, 5 };//否则其值会被inspector修改
             FocusingType = "human";
             orderBtn.onClick.AddListener(SwitchOrder);
         }

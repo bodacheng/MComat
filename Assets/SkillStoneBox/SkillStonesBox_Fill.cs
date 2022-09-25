@@ -17,8 +17,7 @@ namespace mainMenu
                 exType = new int[1] { FocusingExType },
                 close = closeCheckBox.isOn,
                 near = nearCheckBox.isOn,
-                far = farCheckBox.isOn,
-                rare = rares
+                far = farCheckBox.isOn
             };
 
             form = filterForm;
@@ -33,7 +32,6 @@ namespace mainMenu
             public bool close;
             public bool near;
             public bool far;
-            public List<int> rare = new List<int> { 0, 1, 2, 3, 4, 5 };
         }
         
         void PutSkillStonesToBox()

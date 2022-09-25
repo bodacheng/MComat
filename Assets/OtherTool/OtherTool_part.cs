@@ -241,8 +241,7 @@ public partial class OtherTool : EditorWindow
                             AI_MIN_DIS = 0.2f,
                             AI_MAX_DIS = 5f,
                             height = 0
-                        },
-                        RARITY_LEVEL = 1
+                        }
                     };
                     newSkillConfigsOfType.Add(OneConfig);
                 }
@@ -281,8 +280,7 @@ public partial class OtherTool : EditorWindow
                             AI_MIN_DIS = 3f,
                             AI_MAX_DIS = 10f,
                             height = 0
-                        },
-                        RARITY_LEVEL = 1
+                        }
                     };
                     newSkillConfigsOfType.Add(OneConfig);
                 }
@@ -321,8 +319,7 @@ public partial class OtherTool : EditorWindow
                             AI_MIN_DIS = 3f,
                             AI_MAX_DIS = 8f,
                             height = 0
-                        },
-                        RARITY_LEVEL = 1
+                        }
                     };
                     newSkillConfigsOfType.Add(OneConfig);
                 }

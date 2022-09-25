@@ -20,4 +20,7 @@ RECORD_ID,REAL_NAME,SPLevel,EstimateDamage,HP
 167,rundrak,0,1,5
 113,shouqiang,0,1,5
 99,samk,0,1.2,5
-
+39,crushkick,1,2,5
+5,doublepunch,0,0.6,5
+176,adam_spin,1,1,5
+95,rotatefoward,0,1.5,5
