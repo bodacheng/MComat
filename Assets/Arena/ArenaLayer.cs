@@ -22,6 +22,14 @@ public class ArenaLayer : UILayer
     [SerializeField] RectTransform EnemiesT;
     [SerializeField] ArenaFightTeamDisplay ArenaFightTeamDisplayPrefab;
     
+    #region reward indicator
+    [SerializeField] Slider rankPointPositionBar;
+    [SerializeField] GameObject bronzeAwardGot;
+    [SerializeField] GameObject silverAwardGot;
+    [SerializeField] GameObject goldAwardGot;
+    [SerializeField] Button questionBtn;
+    #endregion
+    
     CloudScript.LeaderboardInfo myLeaderboardInfo;
     
     private Action<bool> SetLoaded;
