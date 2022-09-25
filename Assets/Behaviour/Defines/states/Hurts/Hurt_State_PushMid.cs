@@ -2,6 +2,7 @@
 using HittingDetection;
 using UniRx;
 using DG.Tweening;
+
 namespace Soul
 {
     public partial class Hurt_State : Behavior

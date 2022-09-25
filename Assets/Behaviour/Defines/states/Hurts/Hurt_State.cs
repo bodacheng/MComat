@@ -97,6 +97,15 @@ namespace Soul
                 FightParamsRef.RunShaderChangeProcess(target.from_weapon.element, 0.1f);
             }
             
+            FightParamsRef.GetKnockOffCount().PlusGauge(1f);
+            FightParamsRef.GetKnockOffCount().PlusTimeCounter(0.2f);
+            if (FightParamsRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting.KnockOffExtent)
+            {
+                FightParamsRef.GetKnockOffCount().SetGauge(0f);
+                _AIStateRunner.ChangeState("KnockOff", target);
+                return;
+            }
+            
             switch (target.from_weapon.damage_type)
             {
                 case DamageType.slight_damage_forward:
@@ -146,16 +155,6 @@ namespace Soul
                     return;
             }
             
-            FightParamsRef.GetKnockOffCount().PlusGauge(1f);
-            FightParamsRef.GetKnockOffCount().PlusTimeCounter(0.2f);
-            
-            if (FightParamsRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting.KnockOffExtent)
-            {
-                FightParamsRef.GetKnockOffCount().SetGauge(0f);
-                _AIStateRunner.ChangeState("KnockOff", target);
-                return;
-            }
-
             Animation_Manger.SetTrigger("face_reset");
             Animation_Manger.SetTrigger("hurt");
         }

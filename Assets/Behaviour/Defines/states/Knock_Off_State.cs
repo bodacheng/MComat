@@ -10,12 +10,11 @@ namespace Soul
         float _timeCounter;
         Vector3 _xz;
         bool _touchedBoundary;
-        bool _dropped, _canWakeUp;
+        bool _canWakeUp;
         AnimationCurve _usedYCurve;
         AnimationCurve _usedZCurve;
         float _temp;
-        V_Damage target;
-        
+
         public Knock_Off_State()
         {
             StateType = BehaviorType.KnockOff;
@@ -23,18 +22,15 @@ namespace Soul
         
         public override void AI_State_enter(V_Damage value)
         {
-            target = value;
             base.AI_State_enter();
             FightParamsRef.ChangeLayerForLimbs(14);
             
             _flyingStep = 0;
             _timeCounter = 0;
             _touchedBoundary = false;
-            _dropped = false;
-            _canWakeUp = false;
             FightParamsRef.GettingDamage = true;
             _BasicPhysicSupport.SetUsingGravity(false);
-            _BasicPhysicSupport.hiddenMethods.ClearTouchedEnemyBody();
+            _BasicPhysicSupport.OpenEnemyTouchingDrag(0);
             _Animator.SetFloat("speed", 0f);
             _Animator.applyRootMotion = false;
             _Weapon_Animation_Events.ClearMarkerManagers();
@@ -42,15 +38,14 @@ namespace Soul
             _Rigidbody.velocity = Vector3.zero;
             Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.05f);
             //_xz = newValue.attacker._Center.WholeT.forward;
-            
-            _xz = CalFixPushVector(target.impactComingPoint,  target.attacker.Center.WholeT.position, gameObject.transform.position, 
-                target.from_weapon.damage_type, target.from_weapon._WeaponMode);
+            _xz = CalFixPushVector(value.impactComingPoint,  value.attacker.Center.WholeT.position, gameObject.transform.position, 
+                value.from_weapon.damage_type, value.from_weapon._WeaponMode);
             RotateToTarget_Tween(gameObject.transform.position - _xz, 0f);
             
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
-            EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(target.from_weapon.element), target.DamageEffectPoint, target.CutRotation, null).Forget();
-            _usedYCurve = target.from_weapon.damage_type == DamageType.high ? FightGlobalSetting.HDamageYAnimationCurve : FightGlobalSetting.KnockOffYAnimationCurve;
-            _usedZCurve = target.from_weapon.damage_type == DamageType.high ? FightGlobalSetting.HDamageZAnimationCurve : FightGlobalSetting.KnockOffZAnimationCurve;
+            EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(value.from_weapon.element), value.DamageEffectPoint, value.CutRotation, null).Forget();
+            _usedYCurve = value.from_weapon.damage_type == DamageType.high ? FightGlobalSetting.HDamageYAnimationCurve : FightGlobalSetting.KnockOffYAnimationCurve;
+            _usedZCurve = value.from_weapon.damage_type == DamageType.high ? FightGlobalSetting.HDamageZAnimationCurve : FightGlobalSetting.KnockOffZAnimationCurve;
             FightParamsRef.EnableAllLimbs(false);
         }
 
@@ -74,7 +69,6 @@ namespace Soul
         private int _flyingStep;// 0 拔地 1 曲线 2 落地以及躺地昏迷
         public override void _State_Update()
         {
-            _timeCounter += Time.deltaTime;
             if (!_touchedBoundary)
             {
                 if (_BasicPhysicSupport.AtRing)
@@ -94,46 +88,29 @@ namespace Soul
             switch (_flyingStep)
             {
                 case 0:
-                    _temp = _usedYCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedYCurve.Evaluate(_timeCounter);
                     gameObject.transform.position +=
-                        _xz * (_usedZCurve.Evaluate(_timeCounter + Time.deltaTime) 
-                               - _usedZCurve.Evaluate(_timeCounter)) + Vector3.up * _temp;
-                    
-                    if (!_BasicPhysicSupport.hiddenMethods.Grounded || _temp <= 0) //着地，或都应该下落了的时候还在地上
-                    {
-                        _flyingStep = 1;
-                        FightParamsRef.EnableAllLimbs(true);
-                    }
-                    break;
-                case 1:
-                    gameObject.transform.position +=
-                        _xz * (_usedZCurve.Evaluate(_timeCounter + Time.deltaTime) 
-                               - _usedZCurve.Evaluate(_timeCounter)) + Vector3.up * (_usedYCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedYCurve.Evaluate(_timeCounter));
+                        _xz * (_usedZCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedZCurve.Evaluate(_timeCounter)) +
+                        Vector3.up * (_usedYCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedYCurve.Evaluate(_timeCounter));
                     if (_BasicPhysicSupport.hiddenMethods.Grounded && _timeCounter > 0.5f)
                         // time_counter > 0.5f 这个数字是为了确保角色真能飞起来。
                         // 否则很有可能因为动画本身等复杂缘故，刚飞起来就被判断落地
                     {
-                        FightParamsRef.ChangeLayerForLimbs(_DATA_CENTER._TeamConfig.mylayer);
-                        _flyingStep = 2;
+                        _flyingStep = 1;
                     }
                     break;
-                case 2 :
-                    if (!_dropped)
-                    {
-                        _dropped = true;
-                        _timeCounter = 0;
-                        _BasicPhysicSupport.SetUsingGravity(true);
-                        _effectP = gameObject.transform.position;
-                        _effectP.y = 0;
-                        EffectsManager.GenerateEffect("hit_ground", null, _effectP, Quaternion.LookRotation(Vector3.right), null).Forget();
-                        _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-                        _flyingStep = 3;
-                    }
+                case 1:
+                    _timeCounter = 0;
+                    _BasicPhysicSupport.SetUsingGravity(true);
+                    _effectP = gameObject.transform.position;
+                    _effectP.y = 0;
+                    EffectsManager.GenerateEffect("hit_ground", null, _effectP, Quaternion.LookRotation(Vector3.right), null).Forget();
+                    _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+                    _flyingStep = 2;
                     break;
-                case 3:
+                case 2:
                     if (!_canWakeUp)
                     {
-                        if (_dropped && _timeCounter > FightGlobalSetting._CanGetUpAfterKnockoffToGround)
+                        if (_timeCounter > FightGlobalSetting._CanGetUpAfterKnockoffToGround)
                         {
                             _canWakeUp = true;
                             _SkillCancelFlag.turn_on_flag();
@@ -145,6 +122,7 @@ namespace Soul
                     }
                     break;
             }
+            _timeCounter += Time.deltaTime;
         }
     }
 }
