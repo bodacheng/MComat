@@ -74,13 +74,13 @@ namespace Soul
         public override void AI_State_enter(V_Damage newValue)
         {
             target = newValue;
+            base.AI_State_enter();
             if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && !_BasicPhysicSupport.hiddenMethods.Grounded)
             {
                 _AIStateRunner.ChangeState("KnockOff", target);
                 return;
             }
             
-            base.AI_State_enter();
             _Animator.applyRootMotion = false;
             PlayHurtAnim(newValue);
             FightParamsRef.GettingDamage = true;

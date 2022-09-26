@@ -57,10 +57,6 @@ namespace Soul
                     RegisterConditionToRespond(keyValuePair_ct);
                     ConditionAndRespondPriority.Set(keyValuePair_ct.Key, keyValuePair_ct.Value, 1);
                     
-                    var EnemyClose = new KeyValuePair<string, string>("EnemyClose", behavior_define.REAL_NAME);
-                    RegisterConditionToRespond(EnemyClose);
-                    ConditionAndRespondPriority.Set(EnemyClose.Key, EnemyClose.Value, 2);
-                    
                     BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, null);
                     break;
                 case BehaviorType.Def:

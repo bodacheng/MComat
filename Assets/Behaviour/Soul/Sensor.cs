@@ -103,7 +103,13 @@ public class Sensor
     
     Collider GetClosestEnemyHitBoxColliderInSensorRange()
     {
-        return NearestDamagingWeapon;
+        if (NearestDamagingWeapon != null)
+        {
+            var returnValue = NearestDamagingWeapon;
+            NearestDamagingWeapon = null;
+            return returnValue;
+        }
+        return null;
     }
 
     public void SensorFixedUpdate()

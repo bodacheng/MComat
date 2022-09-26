@@ -22,6 +22,5 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK
 99,samk,human,0,0.6,5,GR,
 39,crushkick,human,1,2,5,GI,
 5,doublepunch,human,0,0.6,5,GR,
-169,fireball,human,1,2,5,GI,
 176,adam_spin,human,1,1,5,GI,
 95,rotatefoward,human,0,1.5,5,GR,
