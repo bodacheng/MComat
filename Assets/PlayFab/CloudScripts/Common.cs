@@ -7,9 +7,15 @@ using mainMenu;
 
 public partial class CloudScript
 {
-    static void ExecuteCloudScriptMainSceneCommon(ExecuteCloudScriptRequest request, Action<ExecuteCloudScriptResult> resultCallback, Action<PlayFabError> errorCallback = null, object customData = null, Dictionary<string, string> extraHeaders = null)
+    static void ExecuteCloudScriptMainSceneCommon(
+        ExecuteCloudScriptRequest request, 
+        Action<ExecuteCloudScriptResult> resultCallback, 
+        Action<PlayFabError> errorCallback = null, 
+        object customData = null, Dictionary<string, string> extraHeaders = null)
     {
-        PlayFabClientAPI.ExecuteCloudScript(request, resultCallback, 
+        PlayFabClientAPI.ExecuteCloudScript(
+            request,
+            resultCallback, 
             (x)=>
             {
                 Debug.Log(x.Error);

@@ -577,6 +577,39 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     return { teamInfos };
 }
 
+// 应该已经没用
+handlers.ArenaReward = function (args, context) {
+    
+    var playstreamEvent = context.playStreamEvent;
+    let arenaPoint = Number(playstreamEvent.StatisticValue);
+
+    let shouldStage = arenaPoint / 100;
+    
+    var getRequest = {
+        PlayFabId: currentPlayerId
+    };
+
+    var playerStats = server.GetPlayerStatistics(getRequest).Statistics;
+
+    let currentRewardStage = -1;
+    for (i = 0; i < playerStats.length; ++i) {
+        if (playerStats[i].StatisticName === "rewardStage") {
+            currentRewardStage = playerStats[i].StatisticName;
+        }
+    }
+    
+    if (shouldStage > currentRewardStage) {
+        var playerStatResult = server.UpdatePlayerStatistics({
+            PlayFabId: currentPlayerId,
+            Statistics: [{
+                StatisticName: "rewardStage",
+                Value: shouldRank
+            }]
+        });
+    }
+    return { };
+}
+
 handlers.RankUp = function (args, context) {
 
     var playstreamEvent = context.playStreamEvent;
@@ -628,43 +661,47 @@ handlers.ArenaPointUp = function (args, context) {
     var getRequest = {
         PlayFabId: currentPlayerId
     };
+    
+    let mePoint = args.mePoint;
+    let opponentPoint = args.opponentPoint;
+    let shouldPoint = (mePoint + opponentPoint) / 2;
+    
     var playerStats = server.GetPlayerStatistics(getRequest).Statistics;
-    var point = 0;
+    var currentPoint = 0;
     
     for (i = 0; i < playerStats.length; ++i) {
         if (playerStats[i].StatisticName === "arenapoint") {
-            point = playerStats[i].Value + 1;
+            currentPoint = playerStats[i].Value;
         }
     }
-    
+
     var playerStatResult = server.UpdatePlayerStatistics({
         PlayFabId: currentPlayerId,
         Statistics: [{
             StatisticName: "arenapoint",
-            Value: point
+            Value: shouldPoint
         }]
     });
     
-    var PlayerPosition;
-    
-    var resultleaderboard = server.GetLeaderboardAroundUser(
-        {
-            PlayFabID: currentPlayerId,
-            StatisticName : "arenapoint",
-            MaxResultsCount : 1
-        });
+    let oldStage = currentPoint / 100;
+    let shouldStage = shouldPoint / 100;
 
-    if ((resultleaderboard != null) && (resultleaderboard.Error == null))
-    {
-        resultleaderboard.Leaderboard.forEach(element => {
-            if (element.PlayFabId == currentPlayerId)
+    let diamond = 0;
+    if ((shouldStage - oldStage) > 0) {
+        diamond = (shouldStage - oldStage) * 100;
+        var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
             {
-                PlayerPosition = element.Position;
+                PlayFabId :currentPlayerId,
+                Amount : diamond,
+                VirtualCurrency : "GD"
             }
-        });
+        );
     }
     
-    return { "currentPoint" : point };
+    return { 
+        "currentPoint" : currentPoint,
+        "GD" : diamond
+    };
 };
 
 handlers.RankClear = function (args, context) {

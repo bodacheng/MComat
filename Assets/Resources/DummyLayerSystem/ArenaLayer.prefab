@@ -628,11 +628,11 @@ MonoBehaviour:
   RefreshBtn: {fileID: 4549164827824181004}
   EnemiesT: {fileID: 4549164827160355230}
   ArenaFightTeamDisplayPrefab: {fileID: 5034609537138417577}
-  rankPointPositionBar: {fileID: 0}
-  bronzeAwardGot: {fileID: 0}
-  silverAwardGot: {fileID: 0}
-  goldAwardGot: {fileID: 0}
-  questionBtn: {fileID: 0}
+  rankPointBar: {fileID: 9027616999041002424}
+  bronzeAwardGot: {fileID: 8223566047215394351}
+  silverAwardGot: {fileID: 4896611353584497671}
+  goldAwardGot: {fileID: 5730775421908966373}
+  questionBtn: {fileID: 1563474157268050549}
 --- !u!223 &6863176314036883254
 Canvas:
   m_ObjectHideFlags: 0

@@ -23,12 +23,17 @@ public class ArenaLayer : UILayer
     [SerializeField] ArenaFightTeamDisplay ArenaFightTeamDisplayPrefab;
     
     #region reward indicator
-    [SerializeField] Slider rankPointPositionBar;
+    [SerializeField] Slider rankPointBar;
     [SerializeField] GameObject bronzeAwardGot;
     [SerializeField] GameObject silverAwardGot;
     [SerializeField] GameObject goldAwardGot;
     [SerializeField] Button questionBtn;
     #endregion
+
+    private int maxArenaPoint = 300;
+    private int bronzePoint = 100;
+    private int silverPoint = 200;
+    private int goldPoint = 300;
     
     CloudScript.LeaderboardInfo myLeaderboardInfo;
     
@@ -40,6 +45,15 @@ public class ArenaLayer : UILayer
         this.SetLoaded = SetLoaded;
         this.ReturnToLobby = ReturnToLobby;
         this.GetOpponentAroundPoint = GetOpponentAroundPoint;
+    }
+
+    void RefreshRankPointBar(int current)
+    {
+        rankPointBar.value = (float)current / (float)maxArenaPoint;
+        
+        bronzeAwardGot.SetActive(current >= bronzePoint);
+        silverAwardGot.SetActive(current >= silverPoint);
+        goldAwardGot.SetActive(current >= goldPoint);
     }
 
     void RefreshRankIcon(int rank)
@@ -76,6 +90,7 @@ public class ArenaLayer : UILayer
                 }
                 if (myLeaderboardInfo != null)
                 {
+                    RefreshRankPointBar(myLeaderboardInfo.PlayerLeaderboardEntry.StatValue);
                     myScore.text = myLeaderboardInfo.PlayerLeaderboardEntry.StatValue.ToString();
                     myRank.text = "Rank :" + myLeaderboardInfo.PlayerLeaderboardEntry.Position;
                 }

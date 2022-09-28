@@ -56,7 +56,7 @@ public partial class CloudScript
     public static void GetLeaderboardAroundUser(Action<List<LeaderboardInfo>> success, Action fail)
     {
         ExecuteCloudScriptMainSceneCommon(
-            new ExecuteCloudScriptRequest()
+            new ExecuteCloudScriptRequest
             {
                 FunctionName = "GetLeaderboardAroundUser",
                 GeneratePlayStreamEvent = true
@@ -84,21 +84,30 @@ public partial class CloudScript
         );
     }
     
-    public static void ArenaPointUp(Action success)
+    public static void ArenaPointUp(int mePoint, int opponentPoint, Action success)
     {
         ExecuteCloudScriptMainSceneCommon(
-            new ExecuteCloudScriptRequest()
+            new ExecuteCloudScriptRequest
             {
                 FunctionName = "ArenaPointUp",
+                FunctionParameter = 
+                    new
+                    {
+                        mePoint = mePoint,
+                        opponentPoint = opponentPoint
+                    },
                 GeneratePlayStreamEvent = true
             },
             (ExecuteCloudScriptResult result) => {
-                var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
-                jsonResult.TryGetValue("currentPoint", out var point); 
-                Debug.Log(point);
+                var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                var currentPoint = jsonResult.ContainsKey("currentPoint") ? jsonResult["currentPoint"] : 0;
+                var GD = jsonResult.ContainsKey("GD") ? jsonResult["GD"] : 0;
                 success.Invoke();
+            },
+            error => {
+                Debug.Log(error.Error);
             }
-        );
+        );    
     }
     
     public class LeaderboardInfo
