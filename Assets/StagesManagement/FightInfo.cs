@@ -47,6 +47,11 @@ public class FightInfo : ScriptableObject
     public string team1ID{ set; get; }
     public string team2ID{ set; get; }
     
+    public int Team2ArenaPoint {
+        set;
+        get;
+    }
+    
     public FightMembers FightMembers
     {
         set;

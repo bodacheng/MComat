@@ -25,12 +25,12 @@ namespace FightScene
                     if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabId)
                     {
                         CloudScript.ArenaPointUp(
-                            0,
-                            0,
-                            () =>
+                            PlayerAccountInfo.Me.arenaPoint,
+                            NetFightScene.Fight.Team2ArenaPoint,
+                            (x,y) =>
                             {
                                 var a = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;
-                                a.Initialise(NetFightScene.target.ReturnToFront);
+                                a.Initialise(NetFightScene.target.ReturnToFront, x, y);
                             }
                         );
                     }

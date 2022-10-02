@@ -100,8 +100,6 @@ public class ArenaLayer : UILayer
                     myRank.gameObject.SetActive(false);
                 }
                 
-                ShowMyTeam();
-                
                 if (exceptSelf.Count < 3)
                 {
                     var myPoint = (myLeaderboardInfo != null) ? myLeaderboardInfo.PlayerLeaderboardEntry.StatValue : 1000;
@@ -147,12 +145,12 @@ public class ArenaLayer : UILayer
         }
     }
     
-    void ShowMyTeam()
+    public void ShowMyTeam()
     {
-        string Pos1InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(0);
-        string Pos2InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(1);
-        string Pos3InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(2);
-
+        var Pos1InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(0);
+        var Pos2InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(1);
+        var Pos3InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(2);
+        
         var info1 = dataAccess.Units.Get(Pos1InstanceID);
         var info2 = dataAccess.Units.Get(Pos2InstanceID);
         var info3 = dataAccess.Units.Get(Pos3InstanceID);

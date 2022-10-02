@@ -15,10 +15,9 @@ public class PlayerAccountInfo
     public string Email;
     
     public string currentLinkedDeviceId;
-    public int rankPont;
+    public int arenaPoint = -1; // 依靠是否为-1来判断玩家的竞技场分数和防御队伍是否已经登陆。
     public int currentRank;
     
-    int _stoneBoxSize;
     int _arcadeProcess;
     
     public int ArcadeProcess

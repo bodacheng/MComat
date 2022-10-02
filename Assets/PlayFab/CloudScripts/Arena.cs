@@ -29,7 +29,8 @@ public partial class CloudScript
                 FunctionName = "ArenaDefendTeamSave",
                 FunctionParameter = new
                 {
-                    Team = info._SerializableSets
+                    Team = info._SerializableSets,
+                    resetArenaPoint = PlayerAccountInfo.Me.arenaPoint == -1
                 },
                 GeneratePlayStreamEvent = true
             },
@@ -37,9 +38,15 @@ public partial class CloudScript
             {
                 var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
                 jsonResult.TryGetValue("success", out var succeed);
+                jsonResult.TryGetValue("arenaPointReset", out var arenaPointReset);
                 if ((bool)succeed)
                 {
+                    if ((bool)arenaPointReset)
+                    {
+                        PlayerAccountInfo.Me.arenaPoint = 0;
+                    }
                     finished.Invoke(true);
+                    
                 }
                 else
                 {
@@ -84,7 +91,7 @@ public partial class CloudScript
         );
     }
     
-    public static void ArenaPointUp(int mePoint, int opponentPoint, Action success)
+    public static void ArenaPointUp(int mePoint, int opponentPoint, Action<int, int> success)
     {
         ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest
@@ -102,7 +109,7 @@ public partial class CloudScript
                 var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                 var currentPoint = jsonResult.ContainsKey("currentPoint") ? jsonResult["currentPoint"] : 0;
                 var GD = jsonResult.ContainsKey("GD") ? jsonResult["GD"] : 0;
-                success.Invoke();
+                success.Invoke(PlayerAccountInfo.Me.arenaPoint ,(int)currentPoint);
             },
             error => {
                 Debug.Log(error.Error);

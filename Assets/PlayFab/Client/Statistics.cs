@@ -30,6 +30,9 @@ public partial class PlayFabReadClient
                 case "rank":
                     PlayerAccountInfo.Me.currentRank = value.Value;
                     break;
+                case "arenapoint":
+                    PlayerAccountInfo.Me.arenaPoint = value.Value;
+                    break;
                 default:
                     break;
             }

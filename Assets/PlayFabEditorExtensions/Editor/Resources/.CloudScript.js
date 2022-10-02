@@ -82,24 +82,9 @@ handlers.buildBasicData = function (args, context) {
             Data: {
                 "stone_box_size": args.stone_box_size,
                 "last_Level_completed": 0,
-                "playerInitialized" : true
+                "playerInitialized" : true,
+                "arenaCountToday" : 0
             }
-        }
-    );
-    
-    var playerStatResult = server.UpdatePlayerStatistics(
-        {
-            PlayFabId: currentPlayerId,
-            Statistics: [
-                {
-                    StatisticName: "arenapoint",
-                    Value: args.arenapoint
-                },
-                {
-                    StatisticName: "rank",
-                    Value: 0
-                }
-            ]
         }
     );
     
@@ -501,8 +486,8 @@ handlers.updateStone = function (args, context) {
 }
 
 handlers.ArenaDefendTeamSave = function (args, context) {
-    let members = [];
     
+    let members = [];
     if (args.Team == null) {
         return { success: false };
     }
@@ -523,8 +508,26 @@ handlers.ArenaDefendTeamSave = function (args, context) {
         }
     };
     var Result = server.UpdateUserData(request);
+    
+    var arenaPointReset = false;
+    if (args.resetArenaPoint) {
+        var playerStatResult = server.UpdatePlayerStatistics(
+            {
+                PlayFabId: currentPlayerId,
+                Statistics: [
+                    {
+                        StatisticName: "arenapoint",
+                        Value: 0
+                    }
+                ]
+            }
+        );
+        arenaPointReset = true;
+    }
+    
     return {
         success: true,
+        arenaPointReset : arenaPointReset,
         messageValue: members
     };
 }
@@ -541,36 +544,23 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     };
     var Result = server.GetLeaderboardAroundUser(request);
     let teamInfos = [];
-    
-    if (Result == null) // 说明这个玩家的 arenapoint 信息不存在
-    {
-        var playerStatResult = server.UpdatePlayerStatistics({
-            PlayFabId: currentPlayerId,
-            Statistics: [{
-                StatisticName: "arenapoint",
-                Value: 1000
-            }]
-        });
-    } // 如果玩家没有arenapoint信息，那么返回空列表。让本地完成其他处理
-    else
-    {
-        for (let i = 0; i < Result.Leaderboard.length; i++) {
-            
-            var playerTeamData = server.GetUserData(
-                {
-                    PlayFabId: Result.Leaderboard[i].PlayFabId,
-                    Keys: ["DefendTeam"]
-                }
-            );
-            
-            // 玩家可能未曾保存过防御队伍阵容，对这种玩家不返回。
-            if (playerTeamData.Data["DefendTeam"] != null) {
-                var item = {
-                    "PlayerLeaderboardEntry": Result.Leaderboard[i],
-                    "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value)
-                };
-                teamInfos.push(item);
+
+    for (let i = 0; i < Result.Leaderboard.length; i++) {
+
+        var playerTeamData = server.GetUserData(
+            {
+                PlayFabId: Result.Leaderboard[i].PlayFabId,
+                Keys: ["DefendTeam"]
             }
+        );
+
+        // 玩家可能未曾保存过防御队伍阵容，对这种玩家不返回。
+        if (playerTeamData.Data["DefendTeam"] != null) {
+            var item = {
+                "PlayerLeaderboardEntry": Result.Leaderboard[i],
+                "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value)
+            };
+            teamInfos.push(item);
         }
     }
     
@@ -654,27 +644,69 @@ handlers.RankUp = function (args, context) {
     return { "rank" : -1 };
 }
 
+function rankReward(rank) {
+    
+    switch(rank) {
+        case 1:
+        case 2:
+        case 3:
+            return 100;
+        case 4:
+        case 5:
+        case 6:
+            return 150;
+        case 7:
+        case 8:
+        case 9:
+            return 200;
+        case 10:
+        case 11:
+        case 12:
+            return 250;
+        case 13:
+            return 500;
+    }
+    return 0;
+}
 
-// 竞技场分数+1
-// 这个绝不应该是让客户端主动运行而是应该由服务端建立在胜负基准上运行。
+// 根据自己的分数和对手的分数来判断接下来应该的竞技场加分。
+// 自己的分数和对手的分数都是客户端传来的。图省事。
 handlers.ArenaPointUp = function (args, context) {
     var getRequest = {
         PlayFabId: currentPlayerId
     };
     
-    let mePoint = args.mePoint;
     let opponentPoint = args.opponentPoint;
-    let shouldPoint = (mePoint + opponentPoint) / 2;
+    let mePoint = args.mePoint;
     
-    var playerStats = server.GetPlayerStatistics(getRequest).Statistics;
-    var currentPoint = 0;
-    
-    for (i = 0; i < playerStats.length; ++i) {
-        if (playerStats[i].StatisticName === "arenapoint") {
-            currentPoint = playerStats[i].Value;
-        }
-    }
+    var playerData = server.GetUserReadOnlyData({
+        PlayFabId: currentPlayerId,
+        Keys: ["arenaCountToday"]
+    });
 
+    let arenaCountToday = Number(playerData.Data["arenaCountToday"].Value);
+    if (arenaCountToday < 3) {
+        arenaCountToday += 1;
+        var updateUserDataResult = server.UpdateUserReadOnlyData({
+            PlayFabId: currentPlayerId,
+            Data: {
+                "arenaCountToday": arenaCountToday,
+            }
+        });
+    }
+    
+    let shouldPoint = 0;
+    // 把基础增分牵制在5到30之间
+    if (opponentPoint - mePoint < 5){
+        shouldPoint = mePoint + 5;
+    }
+    if (opponentPoint - mePoint > 30) {
+        shouldPoint = mePoint + 30;
+    }
+    if (arenaCountToday < 3) {
+        shouldPoint += 50; // 每天前三次竞技场有额外加成
+    }
+    
     var playerStatResult = server.UpdatePlayerStatistics({
         PlayFabId: currentPlayerId,
         Statistics: [{
@@ -683,24 +715,27 @@ handlers.ArenaPointUp = function (args, context) {
         }]
     });
     
-    let oldStage = currentPoint / 100;
+    let oldStage = mePoint / 100;
     let shouldStage = shouldPoint / 100;
-
-    let diamond = 0;
+    let shouldReward = 0;
+    
     if ((shouldStage - oldStage) > 0) {
-        diamond = (shouldStage - oldStage) * 100;
+        for (var i = 1; i < shouldStage - oldStage; i++){
+            shouldReward += rankReward(oldStage + i);
+        }
+        
         var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
             {
                 PlayFabId :currentPlayerId,
-                Amount : diamond,
+                Amount : shouldReward,
                 VirtualCurrency : "GD"
             }
         );
     }
     
-    return { 
-        "currentPoint" : currentPoint,
-        "GD" : diamond
+    return {
+        "currentPoint" : shouldPoint,
+        "GD" : shouldReward
     };
 };
 

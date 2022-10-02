@@ -48,6 +48,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         var stage = FightInfo.ArenaStage(fightMembers);
         stage.team2ID = LInfo.PlayerLeaderboardEntry.PlayFabId;
         stage.EventType = FightEventType.Arena;
+        stage.Team2ArenaPoint = LInfo.PlayerLeaderboardEntry.StatValue;
         
         BigButton.onClick.RemoveAllListeners();
         void PrepareForIt()

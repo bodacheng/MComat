@@ -66,7 +66,7 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
-            CloudScript.ArenaPointUp(1000,2000,()=>{});
+            CloudScript.ArenaPointUp(1000,2000,(x,y )=>{});
 
             //PlayFabReadClient.SendPwResetEmail("bodacheng123@gmail.com");
 
