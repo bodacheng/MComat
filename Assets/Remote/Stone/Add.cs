@@ -43,13 +43,12 @@ namespace dataAccess
                 return null;
             }
             
-            var Icon = await SkillIconsDic.Instance.FindSkillIconPrefab(skillID);
-            var ob = GameObject.Instantiate(Icon);
+            var ob = await SkillIcon.FindSkillIcon(skillID);
             ob.gameObject.name = "skillIcon_" + skillID;
             var item = ob.GetComponent<SKStoneItem>();
             if (item == null)
             {
-                item = Icon.AddComponent<SKStoneItem>();
+                item = ob.AddComponent<SKStoneItem>();
             }
             item._SkillConfig = skillConfig;
             item.enabled = openStoneFeature;
