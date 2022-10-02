@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using mainMenu;
 using dataAccess;
@@ -12,25 +13,25 @@ public class TeamEditLayer : UILayer
     [SerializeField] Button removeButton;
     [SerializeField] HeroIcon team1Front, team1Left, team1Right;
     
-    [Space(7)]
     [Header("选中框")]
     [SerializeField] GameObject selectedFrame;
     
-    [Space(7)]
     [Header("选中角色的技能显示")]
     [SerializeField] NineForShow nineForShow;
     
-    [Space(7)]
+    [Header("队伍保存")]
+    [SerializeField] Button saveBtn;
+    
     [Header("技能编辑按钮")]
     [SerializeField] Button SkillEditButton;
     
     int focusingPos = -1;
     readonly IDictionary<int, HeroIcon> _teamBtnDic = new Dictionary<int, HeroIcon>();
     
-    public static TeamEditLayer Open(string teamMode)
+    public static TeamEditLayer Open(string teamMode, Action save)
     {
         var returnValue = UILayerLoader.Load(PreScene.target.T,"TeamEditLayer") as TeamEditLayer;
-        returnValue.INI(teamMode);
+        returnValue.INI(teamMode, save);
         return returnValue;
     }
 
@@ -107,7 +108,7 @@ public class TeamEditLayer : UILayer
     }
 
     #region 初始化（显示目前队伍编辑，加载按钮功能）
-    void INI(string teamMode)
+    void INI(string teamMode, Action save)
     {
         _teamBtnDic.Clear();
         _teamBtnDic.Add(0, team1Front);
@@ -179,6 +180,8 @@ public class TeamEditLayer : UILayer
         team1Front.iconButton.onClick.AddListener(() => SetPos(0));
         team1Left.iconButton.onClick.AddListener(() => SetPos(1));
         team1Right.iconButton.onClick.AddListener(() => SetPos(2));
+        
+        saveBtn.onClick.AddListener(()=>save());
     }
     #endregion
 }

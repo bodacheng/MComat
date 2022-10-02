@@ -25,7 +25,7 @@ public class TeamEditPage : MSceneProcess
     
     void EnterProcess(string teamMode)
     {
-        var teamEditLayer = TeamEditLayer.Open(teamMode);
+        var teamEditLayer = TeamEditLayer.Open(teamMode, Save);
         var unitsLayer = UnitsLayer.Open();
         unitsLayer.SetDisplayUnitIconsAfterAction(() =>
         {
@@ -49,11 +49,9 @@ public class TeamEditPage : MSceneProcess
         teamMode = mode as string;
         EnterProcess(teamMode);
     }
-    
-    public override void ProcessEnd()
+
+    void Save()
     {
-        UnitsLayer.Close();
-        TeamEditLayer.Close();
         ProgressLayer.Loading(">", PreScene.target.T);
         TeamSet.SaveTeamSet(teamMode, TeamSaveFinished);
         switch (teamMode)
@@ -62,7 +60,11 @@ public class TeamEditPage : MSceneProcess
                 missionWatcher = new MissionWatcher(
                     new List<string>() {"arenaDefendSaved", "teamSavedFinished"},
                     ProgressLayer.Close,
-                    () => {}
+                    () =>
+                    {
+                        PopupLayer.ArrangeWarnWindow(PreScene.target.T,"network error");
+                        ProgressLayer.Close();
+                    }
                 );
                 
                 #region 合格认证 
@@ -101,9 +103,19 @@ public class TeamEditPage : MSceneProcess
                         "teamSavedFinished"
                     },
                     ProgressLayer.Close,
-                    () => {}
+                    () =>
+                    {
+                        PopupLayer.ArrangeWarnWindow(PreScene.target.T,"network error");
+                        ProgressLayer.Close();
+                    }
                 );
                 break;
         }
+    }
+    
+    public override void ProcessEnd()
+    {
+        UnitsLayer.Close();
+        TeamEditLayer.Close();
     }
 }

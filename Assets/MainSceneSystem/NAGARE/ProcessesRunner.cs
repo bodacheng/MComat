@@ -41,10 +41,7 @@ namespace mainMenu
 
         public void ProcessNagare()
         {
-            if (currentProcess != null)
-            {
-                currentProcess.LocalUpdate();
-            }
+            currentProcess?.LocalUpdate();
         }
 
         public void ChangeProcess(MainSceneStep sceneStep)
