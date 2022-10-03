@@ -7,6 +7,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
 {
     public Text displayName;
     public Text rank;
+    public Text arenaPoint;
     public HeroIcon member1, member2, member3;
     public Button BigButton;
         
@@ -15,6 +16,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
     {
         displayName.text = LInfo.PlayerLeaderboardEntry.DisplayName;
         rank.text = LInfo.PlayerLeaderboardEntry.Position.ToString();
+        arenaPoint.text =  LInfo.PlayerLeaderboardEntry.StatValue.ToString();
         
         // 竞技场模式下毫无考虑敌人“多组上场”的情况
         for (var index = 0; index < LInfo.Team.Length; index++)

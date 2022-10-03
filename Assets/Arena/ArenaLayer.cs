@@ -30,10 +30,10 @@ public class ArenaLayer : UILayer
     [SerializeField] Button questionBtn;
     #endregion
 
-    private int maxArenaPoint = 300;
-    private int bronzePoint = 100;
-    private int silverPoint = 200;
-    private int goldPoint = 300;
+    private int maxArenaPoint = 1300;
+    private int bronzePoint = 400;
+    private int silverPoint = 800;
+    private int goldPoint = 1200;
     
     CloudScript.LeaderboardInfo myLeaderboardInfo;
     
