@@ -11,11 +11,12 @@ public class ArenaFightOver : UILayer
     [SerializeField] private Button returnBtn;
     [SerializeField] private ArenaRankIcon arenaRankIcon;
     [SerializeField] private TextMeshProUGUI arenaPoint;
+    [SerializeField] private TextMeshProUGUI awardCurrency;
 
     private int arenaPointValue;
     private TweenerCore<int, int, NoOptions> _tweenerCore;
     
-    public void Initialise(Action R, int oldPoint = 0, int currentPoint = -1)
+    public void Initialise(Action R, int oldPoint = 0, int currentPoint = -1, int awardCurrency = 0)
     {
         returnBtn.onClick.AddListener(R.Invoke);
         if (currentPoint != -1)
@@ -32,6 +33,9 @@ public class ArenaFightOver : UILayer
             currentPoint,                  // 最終的な値
             5.0f                  // アニメーション時間
         ).OnUpdate(()=> arenaPoint.text = arenaPointValue.ToString());
+        
+        this.awardCurrency.gameObject.SetActive(awardCurrency > 0);
+        this.awardCurrency.text = awardCurrency.ToString();
     }
     
     public override void OnDestroy()

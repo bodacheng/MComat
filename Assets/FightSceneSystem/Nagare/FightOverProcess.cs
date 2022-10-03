@@ -27,10 +27,10 @@ namespace FightScene
                         CloudScript.ArenaPointUp(
                             PlayerAccountInfo.Me.arenaPoint,
                             NetFightScene.Fight.Team2ArenaPoint,
-                            (x,y) =>
+                            (x,y, z) =>
                             {
                                 var a = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;
-                                a.Initialise(NetFightScene.target.ReturnToFront, x, y);
+                                a.Initialise(NetFightScene.target.ReturnToFront, x, y, z);
                             }
                         );
                     }

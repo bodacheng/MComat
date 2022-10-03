@@ -91,7 +91,13 @@ public partial class CloudScript
         );
     }
     
-    public static void ArenaPointUp(int mePoint, int opponentPoint, Action<int, int> success)
+    /// <summary>
+    /// success : old point, current point, award currency
+    /// </summary>
+    /// <param name="mePoint"></param>
+    /// <param name="opponentPoint"></param>
+    /// <param name="success"></param>
+    public static void ArenaPointUp(int mePoint, int opponentPoint, Action<int, int, int> success)
     {
         ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest
@@ -108,13 +114,14 @@ public partial class CloudScript
             (ExecuteCloudScriptResult result) => {
                 var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                 var currentPoint = jsonResult.ContainsKey("currentPoint") ? jsonResult["currentPoint"] : 0;
-                var GD = jsonResult.ContainsKey("GD") ? jsonResult["GD"] : 0;
-                success.Invoke(PlayerAccountInfo.Me.arenaPoint ,(int)currentPoint);
+                var DM = jsonResult.ContainsKey("DM") ? jsonResult["DM"] : 0;
+                success.Invoke(PlayerAccountInfo.Me.arenaPoint ,(int)currentPoint, (int)DM);
+                PlayerAccountInfo.Me.arenaPoint = (int)currentPoint;
             },
             error => {
                 Debug.Log(error.Error);
             }
-        );    
+        );
     }
     
     public class LeaderboardInfo

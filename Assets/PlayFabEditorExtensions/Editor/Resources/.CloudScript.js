@@ -728,14 +728,14 @@ handlers.ArenaPointUp = function (args, context) {
             {
                 PlayFabId :currentPlayerId,
                 Amount : shouldReward,
-                VirtualCurrency : "GD"
+                VirtualCurrency : "DM"
             }
         );
     }
     
     return {
         "currentPoint" : shouldPoint,
-        "GD" : shouldReward
+        "DM" : shouldReward
     };
 };
 
