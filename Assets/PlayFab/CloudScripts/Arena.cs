@@ -113,10 +113,23 @@ public partial class CloudScript
             },
             (ExecuteCloudScriptResult result) => {
                 var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                var currentPoint = jsonResult.ContainsKey("currentPoint") ? jsonResult["currentPoint"] : 0;
-                var DM = jsonResult.ContainsKey("DM") ? jsonResult["DM"] : 0;
-                success.Invoke(PlayerAccountInfo.Me.arenaPoint ,(int)currentPoint, (int)DM);
-                PlayerAccountInfo.Me.arenaPoint = (int)currentPoint;
+                var currentPoint = (jsonResult.ContainsKey("currentPoint") ? jsonResult["currentPoint"] : 0).ToString();
+                var DM = (jsonResult.ContainsKey("DM") ? jsonResult["DM"] : 0).ToString();
+
+                int currentPointInt;
+                int.TryParse(currentPoint, out currentPointInt);
+
+                int DMInt;
+                int.TryParse(DM, out DMInt);
+                
+                Debug.Log("currentPoint :"+ currentPoint);
+                Debug.Log("DM :"+ DM);
+                
+                if (PlayerAccountInfo.Me != null)
+                {
+                    success.Invoke(PlayerAccountInfo.Me.arenaPoint , currentPointInt, DMInt);
+                    PlayerAccountInfo.Me.arenaPoint = currentPointInt;
+                }
             },
             error => {
                 Debug.Log(error.Error);

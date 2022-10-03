@@ -683,7 +683,7 @@ handlers.ArenaPointUp = function (args, context) {
         PlayFabId: currentPlayerId,
         Keys: ["arenaCountToday"]
     });
-
+    
     let arenaCountToday = Number(playerData.Data["arenaCountToday"].Value);
     if (arenaCountToday < 3) {
         arenaCountToday += 1;
@@ -715,12 +715,14 @@ handlers.ArenaPointUp = function (args, context) {
         }]
     });
     
-    let oldStage = mePoint / 100;
-    let shouldStage = shouldPoint / 100;
+    let oldStage = Math.floor(mePoint / 100);
+    let shouldStage = Math.floor(shouldPoint / 100);
     let shouldReward = 0;
-    
+
+    log.info("shouldStage："+ shouldStage);
+    log.info("oldStage："+ oldStage);
     if ((shouldStage - oldStage) > 0) {
-        for (var i = 1; i < shouldStage - oldStage; i++){
+        for (var i = 0; i < shouldStage - oldStage; i++){
             shouldReward += rankReward(oldStage + i);
         }
         

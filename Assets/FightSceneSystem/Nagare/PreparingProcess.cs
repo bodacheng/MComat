@@ -35,6 +35,9 @@ public class PreparingProcess : FSceneProcess
         await UniTask.WhenAll(tasks);
         
         var teamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
+        RTFightManager.target.heroTeamConfig.playID = NetFightScene.Fight.team1ID;
+        RTFightManager.target.EnemyTeamConfig.playID = NetFightScene.Fight.team2ID;
+        
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.target.heroTeamConfig, RTFightManager.target.team1.TeamMembers.GetValues());
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.target.EnemyTeamConfig, RTFightManager.target.team2.TeamMembers.GetValues());
         FightLogger.value.ReadyToLog(teamMembers);

@@ -11,7 +11,7 @@ public class Sensor
     LayerMask _meAndEnemyLayerMask;
     Collider[] _hits; //What was hit in this frame?
     RaycastHit[] _spherecastHits;
-    TeamConfig _TeamConfig = TeamConfig.defaultSet;
+    TeamConfig _TeamConfig = TeamConfig.DefaultSet;
     
     int _detectionInterval;
     bool _detectionLoopStarted;

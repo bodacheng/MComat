@@ -39,7 +39,7 @@ namespace HittingDetection
         bool Enabled;
         public float CurrentHP { get; set; }
         FightParamsReference _attackerRef;
-        TeamConfig teamConfig = TeamConfig.defaultSet;
+        TeamConfig teamConfig = TeamConfig.DefaultSet;
         Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
         bool HitFlesh;
         bool HitShield;
@@ -114,7 +114,7 @@ namespace HittingDetection
         public void Local_OnDisable()
         {
             DisableMarkers();
-            SetTeamConfig(TeamConfig.defaultSet);
+            SetTeamConfig(TeamConfig.DefaultSet);
         }
 
         public void SetReferenceTransformInfo(Transform centerT)

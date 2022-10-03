@@ -12,11 +12,10 @@ public enum Team
 
 public class TeamConfig
 {
-    public Team myTeam;
-    public List<Team> myEnemies;
+    public readonly Team myTeam;
+    public readonly List<Team> myEnemies;
     
     public string playID = "-1";
-    
     public int mylayer;
     public int myWeaponLayer;
     public int myShieldLayer;
@@ -28,7 +27,7 @@ public class TeamConfig
     public LayerMask enemyShieldLayerMask;
     public LayerMask mySensorAndWeaponTargetLayerMask;//不管是我的武器还是我的Sensor都是用这个layermask决定去检测哪些战场上的敌人信息
 
-    public static TeamConfig defaultSet = new TeamConfig( "-1", Team.none,new List<Team>());
+    public static readonly TeamConfig DefaultSet = new ("-1", Team.none,new List<Team>());
     
     public TeamConfig(string id, Team myTeam, List<Team> myEnemies)
     {

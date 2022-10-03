@@ -13,7 +13,7 @@ using Soul;
 [RequireComponent(typeof(BlendShapeProxy))]
 public partial class Data_Center : MonoBehaviour
 {
-    public TeamConfig _TeamConfig = TeamConfig.defaultSet;
+    public TeamConfig _TeamConfig = TeamConfig.DefaultSet;
     public Element element;
     public Transform geometryCenter;
     public Transform WholeT;
@@ -64,7 +64,7 @@ public partial class Data_Center : MonoBehaviour
             FightDataRef.Center = this;
             _BasicPhysicSupport.Rigidbody.useGravity = false;
             _BasicPhysicSupport.Rigidbody.mass = 500f;
-            BodyElementTagAndLayerSet(TeamConfig.defaultSet);
+            BodyElementTagAndLayerSet(TeamConfig.DefaultSet);
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(FightDataRef,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
             await Animation_Manger.PreloadBasicPersonalAnims(type, basicPackName);
             _BO_Ani_E.BasicMagicAndEffectsPathDefine(element, personalMagicPath);

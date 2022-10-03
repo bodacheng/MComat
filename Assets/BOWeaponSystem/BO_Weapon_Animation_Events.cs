@@ -10,7 +10,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
 {
     public HiddenMethods hiddenMethods;
     
-    TeamConfig _TeamConfig = TeamConfig.defaultSet;
+    TeamConfig _TeamConfig = TeamConfig.DefaultSet;
     readonly List<Transform> _Used_Targets = new List<Transform>();
     IDictionary<Transform, Decomposition> bodyPartsHitBoxRegisterDic;
     Transform right_hand, left_hand, right_foot, left_foot, head, tail;
