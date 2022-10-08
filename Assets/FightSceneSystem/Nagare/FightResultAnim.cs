@@ -2,8 +2,6 @@ using System.Collections;
 using UnityEngine;
 using FightScene;
 using System.Collections.Generic;
-using dataAccess;
-using DummyLayerSystem;
 
 public class FightResultAnim : FSceneProcess
 {
@@ -56,19 +54,7 @@ public class FightResultAnim : FSceneProcess
         }
         Time.timeScale = 1f;
 
-        FightResultAnimLayer fightResultAnimLayer = UILayerLoader.Load
-            (NetFightScene.target.T.gameObject, "FightResultAnimLayer") as FightResultAnimLayer;
-
-        
-        if (FightLogger.value.GetWinnerTeam() == Team.player1)
-        {
-            yield return fightResultAnimLayer.WINProcess();
-        }
-        else
-        {
-            yield return fightResultAnimLayer.LoseProcess();
-        }
-        
-        UILayerLoader.Remove("FightResultAnimLayer");
+        var arenaFightOver = ArenaFightOver.Open();
+        arenaFightOver.Step1Anim();
     }
 }

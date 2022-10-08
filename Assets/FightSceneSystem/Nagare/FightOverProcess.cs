@@ -29,15 +29,12 @@ namespace FightScene
                             NetFightScene.Fight.Team2ArenaPoint,
                             (x,y, z) =>
                             {
-                                var a = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;
-                                a.Initialise(NetFightScene.target.ReturnToFront, x, y, z);
+                                var a = ArenaFightOver.Open();
+                                a.Step2Anim();
+                                a.ShowArenaPoint(x,y);
+                                a.ShowAward(z,0);
                             }
                         );
-                    }
-                    else
-                    {
-                        var a = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;
-                        a.Initialise(NetFightScene.target.ReturnToFront);
                     }
                     //FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
                 break;
@@ -58,14 +55,8 @@ namespace FightScene
                                 int reward_GD_Int = Convert.ToInt32(reward_GD);
                                 int reward_GM_Int = Convert.ToInt32(reward_DIA);
                                 
-                                var cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArcadeFightResult;
-                                cc.Initialise(
-                                    NetFightScene.target.ReturnToFront, 
-                                    ()=>
-                                    {
-                                        LocalGameRestart();
-                                        UILayerLoader.Remove("ArcadeFightResult");
-                                    },
+                                var cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArenaFightOver;
+                                cc.ShowAward(
                                     reward_GD_Int, reward_GM_Int
                                 );
                             }
@@ -73,15 +64,8 @@ namespace FightScene
                     }
                     else
                     {
-                        ArcadeFightResult cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArcadeFightResult;
-                        cc.Initialise(NetFightScene.target.ReturnToFront, 
-                             ()=>
-                             {
-                                 LocalGameRestart();
-                                 UILayerLoader.Remove("ArcadeFightResult");
-                             },
-                             0, 
-                             0);
+                        var cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArenaFightOver;
+                        cc.ShowAward(0, 0);
                     }
                     break;
                 case FightEventType.Self:
