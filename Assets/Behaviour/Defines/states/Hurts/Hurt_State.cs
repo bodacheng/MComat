@@ -75,9 +75,11 @@ namespace Soul
         {
             target = newValue;
             base.AI_State_enter();
-            if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && !_BasicPhysicSupport.hiddenMethods.Grounded)
+            if (_AIStateRunner.GetLastState().StateKey == "KnockOff")
             {
-                _AIStateRunner.ChangeState("KnockOff", target);
+                var knockOffState = (Knock_Off_State)_AIStateRunner.GetLastState();
+                if (knockOffState._flyingStep == 0 || knockOffState._flyingStep == 1)
+                    _AIStateRunner.ChangeState("KnockOff", target);
                 return;
             }
             

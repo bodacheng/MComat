@@ -84,15 +84,15 @@ public class ArenaFightOver : UILayer
 
     public void ShowArenaPoint(int oldPoint, int currentPoint)
     {
-        arenaRankIcon.gameObject.SetActive(true);
         arenaPoint.gameObject.SetActive(true);
         arenaRankIcon.Set(currentPoint);
+        arenaRankIcon.gameObject.SetActive(true);
         arenaPointValue = oldPoint;
         _tweenerCore = DOTween.To(
             () => arenaPointValue,          // 何を対象にするのか
             num => arenaPointValue = num,   // 値の更新
             currentPoint,                  // 最終的な値
-            5.0f                  // アニメーション時間
+            3.0f                  // アニメーション時間
         ).OnUpdate(()=> arenaPoint.text = arenaPointValue.ToString());
     }
 

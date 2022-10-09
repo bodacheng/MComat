@@ -32,7 +32,7 @@ public class FightResultAnim : FSceneProcess
     IEnumerator FinalMomentAnim()
     {
         Time.timeScale = 0.4f;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         var winners = new List<Data_Center>();
         
         switch (FightLogger.value.GetWinnerTeam())
@@ -56,5 +56,6 @@ public class FightResultAnim : FSceneProcess
 
         var arenaFightOver = ArenaFightOver.Open();
         arenaFightOver.Step1Anim();
+        yield return new WaitForSeconds(0.5f);
     }
 }

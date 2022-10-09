@@ -66,7 +66,7 @@ namespace Soul
         }
         
         Vector3 _effectP, _quaV;
-        private int _flyingStep;// 0 拔地 1 曲线 2 落地以及躺地昏迷
+        public int _flyingStep;// 0 拔地 1 曲线 2 落地以及躺地昏迷
         public override void _State_Update()
         {
             if (!_touchedBoundary)
