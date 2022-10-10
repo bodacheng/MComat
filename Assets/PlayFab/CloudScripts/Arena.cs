@@ -116,18 +116,10 @@ public partial class CloudScript
                 var currentPoint = (jsonResult.ContainsKey("currentPoint") ? jsonResult["currentPoint"] : 0).ToString();
                 var DM = (jsonResult.ContainsKey("DM") ? jsonResult["DM"] : 0).ToString();
                 var arenaCountToday = (jsonResult.ContainsKey("arenaCountToday") ? jsonResult["arenaCountToday"] : 0).ToString();
-                
-                int currentPointInt;
-                int.TryParse(currentPoint, out currentPointInt);
 
-                int DMInt;
-                int.TryParse(DM, out DMInt);
-
-                int arenaCountTodayInt;
-                int.TryParse(arenaCountToday, out arenaCountTodayInt);
-                
-                Debug.Log("currentPoint :"+ currentPoint);
-                Debug.Log("DM :"+ DM);
+                int.TryParse(currentPoint, out var currentPointInt);
+                int.TryParse(DM, out var DMInt);
+                int.TryParse(arenaCountToday, out var arenaCountTodayInt);
                 
                 if (PlayerAccountInfo.Me != null)
                 {
