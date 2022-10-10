@@ -60,6 +60,7 @@ namespace Soul
         public override void AI_State_exit()
         {
             base.AI_State_exit();
+            _Rigidbody.mass = 500;
             _BasicPhysicSupport.OpenEnemyTouchingDrag(0);
             FightParamsRef.GettingDamage = false;
             if (physicMissionDisposable != null && !physicMissionDisposable.IsDisposed)
@@ -101,7 +102,10 @@ namespace Soul
             
             FightParamsRef.GetKnockOffCount().PlusGauge(1f);
             FightParamsRef.GetKnockOffCount().PlusTimeCounter(0.2f);
-            if (FightParamsRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting.KnockOffExtent)
+            if (FightParamsRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting.KnockOffExtent
+            && target.from_weapon.damage_type != DamageType.stable_damage
+            && target.from_weapon.damage_type != DamageType.stable_damage_forward
+            && target.from_weapon.damage_type != DamageType.stable_draw)
             {
                 FightParamsRef.GetKnockOffCount().SetGauge(0f);
                 _AIStateRunner.ChangeState("KnockOff", target);
@@ -118,6 +122,14 @@ namespace Soul
                     used_dizzy_time = FightGlobalSetting.LightHitLastingTime;
                     NormalStart(target);
                     break;
+                case DamageType.stable_damage:
+                    used_dizzy_time = FightGlobalSetting.LightHitLastingTime;
+                    NormalStart(target);
+                    break;
+                case DamageType.stable_damage_forward:
+                    used_dizzy_time = FightGlobalSetting.LightHitLastingTime;
+                    HeavyStart(target);
+                    break;
                 case DamageType.heavy_damage_forward:
                     used_dizzy_time = FightGlobalSetting.HeavyHitLastingTime;
                     HeavyStart(target);
@@ -128,6 +140,7 @@ namespace Soul
                     EffectsManager.GenerateEffect("electric_s_e", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, _DATA_CENTER.geometryCenter).Forget();
                     break;
                 case DamageType.draw:
+                case DamageType.stable_draw:
                     DrawDamageStart(target);
                     break;
                 case DamageType.explosion:
@@ -148,9 +161,6 @@ namespace Soul
                 case DamageType.time_pause:
                     TimePauseStart();
                     return;
-                case DamageType.stable_damage:
-                    StableDamgeStart(target);
-                    return;
                 case DamageType.high:
                     // 20201008 修改。high攻击不外乎是直接让对手被击飞，那么击飞状态里确实有相应的一切。
                     _AIStateRunner.ChangeState("KnockOff", target);//HighDamgeStart(target);
@@ -168,6 +178,10 @@ namespace Soul
             {
                 case DamageType.high:
                     HighDamageUpdate();
+                    break;
+                case DamageType.draw:
+                case DamageType.stable_draw:
+                    DrawDamageUpdate(target);
                     break;
             }
         }

@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: zokusei
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3074355485202923511, guid: 267736fa4080844289955c65a2561351,
+        type: 3}
+      propertyPath: damage_type
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 7534735640392544024, guid: 267736fa4080844289955c65a2561351,
         type: 3}
       propertyPath: m_RootOrder

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using HittingDetection;
-using DG.Tweening;
 
 namespace Soul
 {
@@ -8,16 +7,19 @@ namespace Soul
     {
         void DrawDamageStart(V_Damage newValue)
         {
+            _Rigidbody.mass = 200;
             used_dizzy_time = FightGlobalSetting.HeavyHitLastingTime;
-            var vector3 = newValue.from_weapon_marker.transform.position;
-            vector3.y = gameObject.transform.position.y;
-            gameObject.transform.DOMove(vector3, FightGlobalSetting.NormalAttackPosFixingTime).OnComplete(() =>
+        }
+
+        void DrawDamageUpdate(V_Damage newValue)
+        {
+            Vector3 destination()
             {
-                if (!_BasicPhysicSupport.hiddenMethods.Grounded)
-                    _Rigidbody.velocity = Vector3.zero;
-                else
-                    _Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-            });
+                var vector3 = newValue.from_weapon_marker.transform.position;
+                vector3.y = gameObject.transform.position.y;
+                return vector3;
+            }
+            _Rigidbody.MovePosition(destination());
         }
     }
 }
