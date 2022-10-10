@@ -44,7 +44,7 @@ public class TitleScreenLayer : UILayer
     void EmailLogin()
     {
         PlayFabReadClient.PlayFabEmailLogin(ID.text.Trim(), PASSWORD.text.Trim(), 
-            (x)=> PlayFabReadClient.LoginWithEmailSuccess(x, gameObject),
+            PlayFabReadClient.LoginSuccess,
             PlayFabReadClient.LoginFail);
     }
     

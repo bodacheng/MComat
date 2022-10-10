@@ -12,8 +12,9 @@ public partial class CloudScript
         {
             FunctionName = "CheckIn",
         };
-
-        ExecuteCloudScriptMainSceneCommon(request, OnCheckInCallback, OnApiCallError);
+        
+        ExecuteCloudScriptMainSceneCommon(request, (x) => { }, (x) => { });
+        //ExecuteCloudScriptMainSceneCommon(request, OnCheckInCallback, OnApiCallError);
     }
 
     static void OnCheckInCallback(ExecuteCloudScriptResult result)

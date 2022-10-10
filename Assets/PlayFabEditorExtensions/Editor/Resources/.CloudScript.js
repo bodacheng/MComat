@@ -1018,8 +1018,7 @@ var PROGRESSIVE_REWARD = "Reward";							// PROGRESSIVE_REWARD_TABLE property de
 var TRACKER_NEXT_GRANT = "NextEligibleGrant";				// CHECK_IN_TRACKER property containing the time at which we 
 var TRACKER_LOGIN_STREAK = "LoginStreak";					// CHECK_IN_TRACKER property containing the streak length
 
-
-handlers.CheckIn = function(args) {
+handlers.CheckInExample = function(args) {
 
     var GetUserReadOnlyDataRequest = {
         "PlayFabId": currentPlayerId,
@@ -1112,6 +1111,65 @@ handlers.CheckIn = function(args) {
     return JSON.stringify([]);
 };
 
+handlers.CheckIn = function(args) {
+
+    var GetUserReadOnlyDataRequest = {
+        "PlayFabId": currentPlayerId,
+        "Keys": [ CHECK_IN_TRACKER ]
+    };
+    var GetUserReadOnlyDataResponse = server.GetUserReadOnlyData(GetUserReadOnlyDataRequest);
+
+    // need to ensure that our data field exists
+    var tracker = {}; // this would be the first login ever (across any title), so we have to make sure our record exists.
+    if(GetUserReadOnlyDataResponse.Data.hasOwnProperty(CHECK_IN_TRACKER))
+    {
+        tracker = JSON.parse(GetUserReadOnlyDataResponse.Data[CHECK_IN_TRACKER].Value);
+    }
+    else
+    {
+        tracker = ResetTracker();
+
+        // write back updated data to PlayFab
+        UpdateTrackerData(tracker);
+
+        log.info("This was your first login, Login tomorrow to get a bonus!");
+        return JSON.stringify([]);
+    }
+    
+    if(Date.now() > parseInt(tracker[TRACKER_NEXT_GRANT]))
+    {
+        var updateUserDataResult = server.UpdateUserReadOnlyData({
+            PlayFabId: currentPlayerId,
+            Data: {
+                "arenaCountToday": 0,
+            }
+        });
+        
+        // Eligible for an item grant.
+        //check to ensure that it has been less than 24 hours since the last grant window opened
+        var timeWindow = new Date(parseInt(tracker[TRACKER_NEXT_GRANT]));
+        timeWindow.setDate(timeWindow.getDate() + 1); // add 1 day 
+        
+        if(Date.now() > timeWindow.getTime())
+        {
+            // streak ended :(			
+            tracker = ResetTracker();
+            UpdateTrackerData(tracker);
+            log.info("Your consecutive login streak has been broken. Login tomorrow to get a bonus!");
+        }else{
+            // streak continues
+            tracker[TRACKER_LOGIN_STREAK] += 1;
+            var dateObj = new Date(Date.now());
+            dateObj.setDate(dateObj.getDate() + 1); // add one day 
+            tracker[TRACKER_NEXT_GRANT] = dateObj.getTime();
+
+            // write back updated data to PlayFab
+            log.info("Your consecutive login streak increased to: " + tracker[TRACKER_LOGIN_STREAK]);
+            UpdateTrackerData(tracker);
+        }
+    }
+    return JSON.stringify([]);
+};
 
 function ResetTracker()
 {

@@ -85,19 +85,10 @@ public partial class PlayFabReadClient
             PlayFabId = result.PlayFabId
         };
         
+        CloudScript.CheckIn();
         EnterMainScene();
     }
     
-    public static void LoginWithEmailSuccess(LoginResult result, GameObject T)
-    {
-        Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
-        PlayerAccountInfo.Me = new PlayerAccountInfo
-        {
-            PlayFabId = result.PlayFabId
-        };
-        EnterMainScene();
-    }
-
     public static void LinkAccountPopup(GameObject T, Action success)
     {
         PopupLayer.ArrangeConfirmWindow(
@@ -143,7 +134,6 @@ public partial class PlayFabReadClient
     
     static void EnterMainScene()
     {
-        CloudScript.CheckIn();
         MainMenuNote.GoingTo = MainSceneStep.FrontPage;
         SceneManager.LoadScene(1);
     }
