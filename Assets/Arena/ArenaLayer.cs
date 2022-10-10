@@ -23,6 +23,7 @@ public class ArenaLayer : UILayer
     [SerializeField] ArenaFightTeamDisplay ArenaFightTeamDisplayPrefab;
     
     #region reward indicator
+    [SerializeField] Text extraAwardLeftToday;
     [SerializeField] Slider rankPointBar;
     [SerializeField] GameObject bronzeAwardGot;
     [SerializeField] GameObject silverAwardGot;
@@ -65,6 +66,9 @@ public class ArenaLayer : UILayer
     
     public void RefreshOpponent()
     {
+        var extraAwardLeft = 3 - PlayerAccountInfo.Me.ArenaCountToday;
+        extraAwardLeft = Mathf.Clamp(extraAwardLeft, 0, extraAwardLeft);
+        extraAwardLeftToday.text = "(" + extraAwardLeft + "/3)"; 
         RefreshRankIcon(PlayerAccountInfo.Me.currentRank);
         
         RefreshBtn.onClick.RemoveAllListeners();

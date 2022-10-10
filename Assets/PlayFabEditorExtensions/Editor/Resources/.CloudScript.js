@@ -737,7 +737,8 @@ handlers.ArenaPointUp = function (args, context) {
     
     return {
         "currentPoint" : shouldPoint,
-        "DM" : shouldReward
+        "DM" : shouldReward,
+        "arenaCountToday" : arenaCountToday
     };
 };
 

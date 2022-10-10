@@ -96,7 +96,7 @@ public partial class PlayFabReadClient
             new GetUserDataRequest()
             {
                 PlayFabId = PlayerAccountInfo.Me.PlayFabId,
-                Keys = new List<string>() { "last_Level_completed", "stone_box_size" }
+                Keys = new List<string>() { "last_Level_completed", "stone_box_size", "arenaCountToday" }
             },
             (GetUserDataResult obj) => {
                 if (obj.Data.ContainsKey("last_Level_completed"))
@@ -107,6 +107,10 @@ public partial class PlayFabReadClient
                 {
                     PlayerAccountInfo.Me.ArcadeProcess = 0;
                 }
+                
+                PlayerAccountInfo.Me.ArenaCountToday = 
+                    obj.Data.ContainsKey("arenaCountToday") ? int.Parse(obj.Data["arenaCountToday"].Value) : 0;
+                
                 finished.Invoke(true);
             },
             errorCallback => {

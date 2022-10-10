@@ -18,6 +18,7 @@ public class PlayerAccountInfo
     public int arenaPoint = -1; // 依靠是否为-1来判断玩家的竞技场分数和防御队伍是否已经登陆。
     public int currentRank;
     
+    public int ArenaCountToday;
     int _arcadeProcess;
     
     public int ArcadeProcess

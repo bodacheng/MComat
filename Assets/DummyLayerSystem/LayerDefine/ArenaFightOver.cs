@@ -76,12 +76,12 @@ public class ArenaFightOver : UILayer
             loseObject.SetActive(true);
         }
     }
-
+    
     public void Step2Anim()
     {
         _animator.SetTrigger("step2");
     }
-
+    
     public void ShowArenaPoint(int oldPoint, int currentPoint)
     {
         arenaPoint.gameObject.SetActive(true);
