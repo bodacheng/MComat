@@ -9688,8 +9688,8 @@ MonoBehaviour:
   SpecificTarget: 0
   damage_type: 14
   _WeaponMode: 3
-  AT_weight: 1
-  weaponHP: 20
+  AT_weight: 0.5
+  weaponHP: 10
   heavyLevel: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
@@ -9698,7 +9698,7 @@ MonoBehaviour:
   hitEffect: dark_boom
   ExplosionEffect: energy_resolve
   ContinuousDamage: 1
-  ContinuousDamageInterval: 0.1
+  ContinuousDamageInterval: 0.2
 --- !u!114 &3829198492329961209
 MonoBehaviour:
   m_ObjectHideFlags: 0

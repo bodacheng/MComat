@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
@@ -11,8 +10,8 @@ public partial class BO_Ani_E : MonoBehaviour
     string magic_path;
     Transform right_hand, left_hand, right_foot, left_foot, head, tail;
     DecompositionPool target_pool;
-    IDictionary<Transform, Decomposition> EffectsOnBodyParts = new Dictionary<Transform, Decomposition>();
-    List<Decomposition> OnProcessEnergyFromBodyWeapons = new List<Decomposition>();
+    readonly IDictionary<Transform, Decomposition> EffectsOnBodyParts = new Dictionary<Transform, Decomposition>();
+    readonly List<Decomposition> OnProcessEnergyFromBodyWeapons = new List<Decomposition>();
     
     Decomposition processingHitBox;
     
@@ -28,7 +27,7 @@ public partial class BO_Ani_E : MonoBehaviour
     
     public void CloseOnProcessEnergyFromBodyWeapons()
     {
-        for (int i = 0; i < OnProcessEnergyFromBodyWeapons.Count; i++)
+        for (var i = 0; i < OnProcessEnergyFromBodyWeapons.Count; i++)
         {
             OnProcessEnergyFromBodyWeapons[i].Phase = -1;
         }

@@ -41483,6 +41483,20 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.76666665
+    functionName: PrepareOneMagic
+    data: k_hitbox
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.81666666
+    functionName: ReleasePreparedMagic
+    data: left_hand
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.9166667
     functionName: CloseOnProcessEnergyFromBodyWeapons
     data: 
