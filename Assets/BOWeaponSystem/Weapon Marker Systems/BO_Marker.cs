@@ -57,7 +57,9 @@ namespace HittingDetection
                 if (!BallDetectHitPool.Keys.Contains(other))
                 {
                     var tempM = HitBoxesProcesser.Instance.GetHitBox(other);
-                    tempWHpCost = tempM != null ? V_Damage.WpHpCost(V_Damage.WeaponHeavyCal(owner.damage_type), V_Damage.WeaponHeavyCal(tempM.damage_type)) : 1;
+                    tempWHpCost = 
+                        tempM != null ? 
+                            V_Damage.WpHpCost(owner.heavyLevel, tempM.heavyLevel) : 1;
                     var hitPointPara = new HitPointPara
                     {
                         onBodyPos = HitEffectPointCal(other.transform.position),

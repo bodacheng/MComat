@@ -121,18 +121,26 @@ public partial class FightParamsReference
         }
         else
         {
-            switch (damage.from_weapon.damage_type)
+            if (!string.IsNullOrEmpty(damage.from_weapon.hitEffect))
             {
-                case DamageType.heavy_damage_forward:
-                    _temp = "heavy_hit";
-                    break;
-                case DamageType.supper_damage_forward:
-                    _temp = "super_hit";
-                    break;
-                default:
-                    _temp = "light_hit";
-                    break;
+                _temp = damage.from_weapon.hitEffect;
             }
+            else
+            {
+                switch (damage.from_weapon.damage_type)
+                {
+                    case DamageType.heavy_damage_forward:
+                        _temp = "heavy_hit";
+                        break;
+                    case DamageType.supper_damage_forward:
+                        _temp = "super_hit";
+                        break;
+                    default:
+                        _temp = "light_hit";
+                        break;
+                }
+            }
+            
             EffectsManager.GenerateEffect(_temp, FightGlobalSetting.EffectPathDefine(damage.from_weapon.element),
             damage.DamageEffectPoint,
             damage.CutRotation,

@@ -79,32 +79,15 @@ namespace HittingDetection
             }
             return damageType;
         }
-    
-        public static int WeaponHeavyCal(DamageType me)
-        {
-            switch (me)
-            {
-                case DamageType.none:
-                case DamageType.slight_damage_forward:
-                    return 0;
-                case DamageType.light_damage_forward:
-                case DamageType.stable_damage:
-                    return 1;
-                case DamageType.heavy_damage_forward:
-                case DamageType.same_height_to_mid:
-                case DamageType.draw:
-                case DamageType.high:
-                case DamageType.push_to_mid:
-                case DamageType.push_to_mid_slight:
-                    return 2;
-                case DamageType.explosion:
-                case DamageType.supper_damage_forward:
-                    return 3;
-                default:
-                    return 1;
-            }
-        }
-    
+        
+        /// <summary>
+        /// heavyLevel是2的能量球，撞击1的能量球时，
+        /// 自身HP只消耗0.5, 从而在HP都是1的情况下，
+        /// 一个heavyLevel是2的能量球在撞击两个1的能量球时才会消失掉。
+        /// </summary>
+        /// <param name="meLevel"></param>
+        /// <param name="counterLevel"></param>
+        /// <returns></returns>
         public static float WpHpCost(int meLevel, int counterLevel)
         {
             if (meLevel > counterLevel)

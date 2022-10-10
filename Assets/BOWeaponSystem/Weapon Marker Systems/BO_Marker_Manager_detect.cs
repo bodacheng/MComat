@@ -8,7 +8,7 @@ namespace HittingDetection
     public partial class HitBoxManager : MonoBehaviour
     {
         FightParamsReference _Raw_Target_Instance;//A single target which was hit.
-        BO_Limb _BO_Hitbox;
+        BO_Limb _boHitBox;
         Vector3 _TrailModeStartPoint;
         IDictionary<Collider, HitPointPara> BallDetectHitPool;
 
@@ -96,13 +96,14 @@ namespace HittingDetection
                                     if (hit_hitbox != null && hit_hitbox.Enabled)
                                     {
                                         _usedTargets.Add(_hits[hit_target_index].collider.transform);
-                                        HitPointPara hitPointPara = new HitPointPara()
+                                        HitPointPara hitPointPara = new HitPointPara
                                         {
                                             onBodyPos = _hits[hit_target_index].point,
                                             qua = _hits[hit_target_index].collider.transform.rotation,
-                                            WeaponHpCost = 1
+                                            WeaponHpCost = 1,
+                                            exhaustEffect = true
                                         };
-                                        AddWeaponEnergyExaust(hitPointPara);// 因难以解决的问题已经停用
+                                        AddWeaponEnergyExhaust(hitPointPara);// 因难以解决的问题已经停用
                                         HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                         continue;//这里不退出循环的话就可能造成一个HP只有1的能量球既打碎了敌人的一个同血量能量球，又对敌人产生一点伤害。
                                     }
@@ -116,7 +117,7 @@ namespace HittingDetection
  
                             //_Raw_Target_Instance这个里面全是mainhealth，就是mainhealth，不是含着mainhealth的transform
                             //_Targets_Raw_Hit里面加入的全是_Raw_Target_Instance的transform，也就是mainhealth的transform
-                            _BO_Hitbox = _hits[hit_target_index].collider.GetComponent<BO_Limb>();
+                            _boHitBox = _hits[hit_target_index].collider.GetComponent<BO_Limb>();
                             if (!_Targets_Raw_Hit.Contains(_hits[hit_target_index].collider.transform) && !_usedTargets.Contains(_hits[hit_target_index].collider.transform))
                             {
                                 //方式1：mainhealth所在层级有collider //注意看这行条件，主要就是考虑到防御问题  （* *）
@@ -130,14 +131,14 @@ namespace HittingDetection
                                 //}
                                 
                                 //方式2：hitbox模式
-                                if (_BO_Hitbox != null)
+                                if (_boHitBox != null)
                                 {
-                                    if (!_usedTargets.Contains(_BO_Hitbox.Center.geometryCenter)) //注意看这行条件，主要就是考虑到防御问题 （* *）
+                                    if (!_usedTargets.Contains(_boHitBox.Center.geometryCenter)) //注意看这行条件，主要就是考虑到防御问题 （* *）
                                     {
                                         HitFlesh = true;
-                                        _Raw_Target_Instance = _BO_Hitbox.Center.FightDataRef;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
-                                        _usedTargets.Add(_BO_Hitbox.transform);
-                                        _usedTargets.Add(_BO_Hitbox.Center.geometryCenter);
+                                        _Raw_Target_Instance = _boHitBox.Center.FightDataRef;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
+                                        _usedTargets.Add(_boHitBox.transform);
+                                        _usedTargets.Add(_boHitBox.Center.geometryCenter);
                                     }
                                 }
                                 
@@ -148,14 +149,15 @@ namespace HittingDetection
                                     _TrailModeStartPoint = _TrailModeStartPoint + (_hits[hit_target_index].transform.position - _TrailModeStartPoint) * 0.3f;
                                     hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _attackerRef, _TrailModeStartPoint,_TrailModeStartPoint, Quaternion.LookRotation(_Raw_Target_Instance.Center.geometryCenter.position-_TrailModeStartPoint,Vector3.up)));
                                     
-                                    HitPointPara hitPointPara = new HitPointPara()
+                                    HitPointPara hitPointPara = new HitPointPara
                                     {
                                         onBodyPos = _hits[hit_target_index].point,
                                         qua = _hits[hit_target_index].collider.transform.rotation,
-                                        WeaponHpCost = 1
+                                        WeaponHpCost = 1,
+                                        exhaustEffect = false
                                     };
                                     
-                                    AddWeaponEnergyExaust(hitPointPara);// 因难以解决的问题已经停用
+                                    AddWeaponEnergyExhaust(hitPointPara);// 因难以解决的问题已经停用
                                     HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                 }
                                 if (HitFlesh && _Raw_Target_Instance != null)
@@ -245,7 +247,8 @@ namespace HittingDetection
                                         if (hit_hitbox != null && hit_hitbox.Enabled)
                                         {
                                             _usedTargets.Add(Hit_C.Key.transform);
-                                            AddWeaponEnergyExaust(Hit_C.Value);
+                                            Hit_C.Value.exhaustEffect = true;
+                                            AddWeaponEnergyExhaust(Hit_C.Value);
                                             HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                             continue;
                                         }
@@ -257,7 +260,7 @@ namespace HittingDetection
                                     continue;
                                 }
 
-                                _BO_Hitbox = Hit_C.Key.GetComponent<BO_Limb>();
+                                _boHitBox = Hit_C.Key.GetComponent<BO_Limb>();
                                 if (!_Targets_Raw_Hit.Contains(Hit_C.Key.transform) && !_usedTargets.Contains(Hit_C.Key.transform))
                                 {
                                     //方式1：mainhealth所在层级有collider.注意看这行条件，主要就是考虑到防御问题  （* *）
@@ -270,14 +273,14 @@ namespace HittingDetection
                                     //    }
                                     //}
                                     //方式2：hitbox模式
-                                    if (_BO_Hitbox != null)
+                                    if (_boHitBox != null)
                                     {
-                                        if (!_usedTargets.Contains(_BO_Hitbox.Center.geometryCenter)) //注意看这行条件，主要就是考虑到防御问题 （* *）
+                                        if (!_usedTargets.Contains(_boHitBox.Center.geometryCenter)) //注意看这行条件，主要就是考虑到防御问题 （* *）
                                         {
                                             HitFlesh = true;
-                                            _Raw_Target_Instance = _BO_Hitbox.Center.FightDataRef;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
-                                            _usedTargets.Add(_BO_Hitbox.transform);
-                                            _usedTargets.Add(_BO_Hitbox.Center.geometryCenter);
+                                            _Raw_Target_Instance = _boHitBox.Center.FightDataRef;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
+                                            _usedTargets.Add(_boHitBox.transform);
+                                            _usedTargets.Add(_boHitBox.Center.geometryCenter);
                                         }
                                     }
 
@@ -285,7 +288,8 @@ namespace HittingDetection
                                     {
                                         _Targets_Raw_Hit.Add(_Raw_Target_Instance.Center.geometryCenter);
                                         hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _attackerRef, Hit_C.Value.onBodyPos, Hit_C.Value.impactPos, Hit_C.Value.qua));
-                                        AddWeaponEnergyExaust(Hit_C.Value);
+                                        Hit_C.Value.exhaustEffect = false;
+                                        AddWeaponEnergyExhaust(Hit_C.Value);
                                         HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                     }
                                     if (HitFlesh && _Raw_Target_Instance != null)
@@ -319,30 +323,31 @@ namespace HittingDetection
         // 而如果这个武器是ContinuousDamage，事情将另当别论。ContinuousDamage类武器的cleartargets周期应该符合ContinuousDamageInterval。
         // 它在攻击到一个对象后不会立刻随着自身hp的减少而cleartargets，但如果它有着大于0的hp，它依然会随着打击到对象而掉血，并随着寿命结束而消失
         // 设想有一个地上火焰技能是ContinuousDamage，它可能有两种消失方式，一种是打击了不少对象hp为0了，一种是随着自身BO_destroyer的设置而时间已经尽。        
-        // WeaponEnergyExaust 这个函数在“与敌人武器发生接触”和“与敌人肉体产生接触”的时候是不同的处理逻辑
-        readonly List<UnityEngine.Events.UnityAction> WeaponEnergyExaustMissions = new List<UnityEngine.Events.UnityAction>();
-        void AddWeaponEnergyExaust(HitPointPara hitPointPara)
+        // WeaponEnergyExhaust 这个函数在“与敌人武器发生接触”和“与敌人肉体产生接触”的时候是不同的处理逻辑
+        readonly List<UnityEngine.Events.UnityAction> WeaponEnergyExhaustMissions = new ();
+        void AddWeaponEnergyExhaust(HitPointPara hitPointPara)
         {
             if (weaponHP > 0 && CurrentHP > 0)
             {
                 CurrentHP -= hitPointPara.WeaponHpCost;
-                UnityEngine.Events.UnityAction wC = WeaponEnergyExaust;
-                WeaponEnergyExaustMissions.Add(wC);
+                UnityEngine.Events.UnityAction wC = WeaponEnergyExhaust;
+                WeaponEnergyExhaustMissions.Add(wC);
                 if (!ContinuousDamage)
                 {
-                    WeaponEnergyExaustMissions.Add(ClearTargets);
+                    WeaponEnergyExhaustMissions.Add(ClearTargets);
                 }
             }
             if (weaponHP <= 0)
             {
-                UnityEngine.Events.UnityAction we_C = WeaponEnergyExaust;
-                WeaponEnergyExaustMissions.Add(we_C);
+                UnityEngine.Events.UnityAction we_C = WeaponEnergyExhaust;
+                WeaponEnergyExhaustMissions.Add(we_C);
             }
-            if (_WeaponMode != WeaponMode.EnergyFromBodyWeapon) // 不希望普攻hitbox有能量消逝火花
+            
+            if (hitPointPara.exhaustEffect && !string.IsNullOrEmpty(ExplosionEffect))
                 EffectsManager.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(element), hitPointPara.onBodyPos, hitPointPara.qua, null).Forget();
         }
         
-        void WeaponEnergyExaust()
+        void WeaponEnergyExhaust()
         {
             if (_WeaponMode == WeaponMode.EnergyFromBodyWeapon)
             {

@@ -11,6 +11,7 @@ namespace HittingDetection
         public Vector3 impactPos;// 冲击来源点
         public Quaternion qua;
         public float WeaponHpCost;
+        public bool exhaustEffect = false;
     }
     
     public class Marker : MonoBehaviour

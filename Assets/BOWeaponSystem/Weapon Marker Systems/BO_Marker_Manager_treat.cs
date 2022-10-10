@@ -91,11 +91,11 @@ namespace HittingDetection
                 }
             }
 
-            for (int i = 0; i < WeaponEnergyExaustMissions.Count; i++)
+            for (var i = 0; i < WeaponEnergyExhaustMissions.Count; i++)
             {
-                WeaponEnergyExaustMissions[i].Invoke();               
+                WeaponEnergyExhaustMissions[i].Invoke();               
             }
-            WeaponEnergyExaustMissions.Clear();
+            WeaponEnergyExhaustMissions.Clear();
         }
     }
 }

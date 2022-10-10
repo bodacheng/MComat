@@ -9690,11 +9690,13 @@ MonoBehaviour:
   _WeaponMode: 3
   AT_weight: 1
   weaponHP: 20
+  heavyLevel: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
   element: 0
   muzzle: 
-  ExplosionEffect: dark_boom
+  hitEffect: dark_boom
+  ExplosionEffect: energy_resolve
   ContinuousDamage: 1
   ContinuousDamageInterval: 0.1
 --- !u!114 &3829198492329961209
