@@ -8,10 +8,12 @@ using UnityEngine;
 public class ReturnLayer : UILayer
 {
     [SerializeField] Button ReturnButton;
+    [SerializeField] GameObject maskBg;
+    
     static readonly UnityEvent unityEvent = new ();
     public static readonly List<UnityAction> ReturnMissionList = new ();
     
-    static ReturnLayer Get()
+    public static ReturnLayer Get()
     {
         var l = UILayerLoader.Get("ReturnLayer");
         ReturnLayer returnValue = null;
@@ -22,7 +24,7 @@ public class ReturnLayer : UILayer
         return returnValue;
     }
     
-    static ReturnLayer Open()
+    public static ReturnLayer Open()
     {
         ReturnLayer returnValue = Get();
         if (returnValue != null)
@@ -57,5 +59,10 @@ public class ReturnLayer : UILayer
     {
         ReturnMissionList.Add(returnAction);
         Open();
+    }
+
+    public void ForceBackMode(bool on)
+    {
+        maskBg.gameObject.SetActive(on);
     }
 }

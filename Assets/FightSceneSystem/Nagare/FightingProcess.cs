@@ -26,7 +26,7 @@ namespace FightScene
             {
                 var TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
                 TitleScreenLayer.Initialise();
-                PopupLayer.LightUp(1f);
+                HighLightLayer.LightUp(1f);
             }
             else
             {

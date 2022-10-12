@@ -1,20 +1,19 @@
 ﻿using mainMenu;
 using UnityEngine;
 
-// Tutorial 2
 public class OpenSkillEdit : TutorialProcess
 {
-    bool waitCompleted;
-    UnitListPage MemberDetailProcess;
-    public OpenSkillEdit()
-    {
-        EelementsInherit(PreScene.target);
-    }
-    
+    UnitListPage unitListPage;
+    UnitOptionLayer UnitOptionLayer;
+
     public override void ProcessEnter()
     {
-        waitCompleted = false;
-        MemberDetailProcess = (UnitListPage)ProcessesRunner.Main.GetProcess(MainSceneStep.UnitList);
+        unitListPage = (UnitListPage)ProcessesRunner.Main.GetProcess(MainSceneStep.UnitList);
+    }
+    
+    public override void ProcessEnd()
+    {
+        HighLightLayer.Close();
     }
     
     public override bool CanEnterOtherProcess()
@@ -23,13 +22,17 @@ public class OpenSkillEdit : TutorialProcess
     }
     
     public override void LocalUpdate()
-    {        
-        if (!waitCompleted)
+    {
+        if (!Loaded)
         {
-            if (MemberDetailProcess.GetLoaded())
+            if (UnitOptionLayer == null)
+                UnitOptionLayer = UnitOptionLayer.Get();
+            
+            if (unitListPage.GetLoaded() && UnitOptionLayer != null)
             {
-                PopupLayer.HighLightRect(PreScene.target.T, TutorialHelper.target.SkillEditButton.GetComponent<RectTransform>());
-                waitCompleted = true;
+                UnitOptionLayer.PlsClickSkillEdit();
+                HighLightLayer.HighLightRect(PreScene.target.T,UnitOptionLayer._NineForShow.GetComponent<RectTransform>());
+                Loaded = true;
             }
         }
     }

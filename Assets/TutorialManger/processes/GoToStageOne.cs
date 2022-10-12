@@ -6,11 +6,6 @@ public class GoToStageOne : TutorialProcess
     bool missionCompleted;
     ArcadeFrontPage _arcadeFrontPage;
     
-    public GoToStageOne()
-    {
-        EelementsInherit(PreScene.target);
-    }
-    
     public override void ProcessEnter()
     {
         missionCompleted = false;

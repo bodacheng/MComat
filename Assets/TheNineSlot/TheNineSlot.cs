@@ -174,7 +174,7 @@ namespace mainMenu
             RefreshCurrentHpBasedOnNineSlots();
             RefreshNineSlotColors();
             var valR = ValidateWarn();
-            ConfirmSkillChangeButton.gameObject.SetActive(valR == SkillSet.SkillEditError.Perfect);
+            //ConfirmSkillChangeButton.gameObject.SetActive(valR == SkillSet.SkillEditError.Perfect);
             return full;
         }
         

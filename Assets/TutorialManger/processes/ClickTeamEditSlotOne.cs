@@ -3,11 +3,6 @@
 // Tutorial 1 
 public class ClickTeamEditSlotOne : TutorialProcess
 {
-    public ClickTeamEditSlotOne()
-    {
-        EelementsInherit(PreScene.target);
-    }
-    
     public override void ProcessEnter()
     {
         PopupLayer popupLayer = PopupLayer.Open(PreScene.target.T);

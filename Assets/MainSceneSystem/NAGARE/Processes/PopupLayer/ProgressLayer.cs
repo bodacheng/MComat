@@ -105,7 +105,6 @@ public class ProgressLayer : UILayer
     
     public static void Close()
     {
-        HighlightUI.Dismiss();
         UILayerLoader.Remove("ProgressLayer");
     }
 }

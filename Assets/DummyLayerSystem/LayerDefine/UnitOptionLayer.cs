@@ -7,30 +7,39 @@ namespace mainMenu
 {
     public class UnitOptionLayer : UILayer
     {
-        public DedicatedCameraConnector _connector;
+        [SerializeField] DedicatedCameraConnector _connector;
         
         [Header("角色明细T，技能显示T")]
-        public RectTransform MemberInfoT;
+        [SerializeField] RectTransform MemberInfoT;
         
-        [Header("mini nineslot")]
+        [Header("mini nine slot")]
         public NineForShow _NineForShow;
+        [SerializeField] GameObject clickSkillEditIndicator;
         
         [Header("部下详细")]
-        public Text focusingCharName;
-        public Button SkillShowButton, SkillEditButton;
+        [SerializeField] Text focusingCharName;
+        [SerializeField] Button SkillShowButton, SkillEditButton;
         
-        public static UnitOptionLayer Open()
+        public static UnitOptionLayer Get()
         {
             var l = UILayerLoader.Get("UnitOptionLayer");
-            UnitOptionLayer returnValue;
+            UnitOptionLayer returnValue = null;
             if (l != null)
             {
                 returnValue = l as UnitOptionLayer;
-                return returnValue;
             }
-            l = UILayerLoader.Load(PreScene.target.T,"UnitOptionLayer") as UnitOptionLayer;
-            returnValue = (UnitOptionLayer)l;
             return returnValue;
+        }
+        
+        public static UnitOptionLayer Open()
+        {
+            var layer = Get();
+            if (layer != null)
+            {
+                return layer;
+            }
+            layer = UILayerLoader.Load(PreScene.target.T,"UnitOptionLayer") as UnitOptionLayer;
+            return layer;
         }
         
         public static void Close()
@@ -94,5 +103,12 @@ namespace mainMenu
                 _connector.ShowMyModel(info.id);
             }
         }
+
+        #region 教程
+        public void PlsClickSkillEdit()
+        {
+            clickSkillEditIndicator.SetActive(true);
+        }
+        #endregion
     }
 }

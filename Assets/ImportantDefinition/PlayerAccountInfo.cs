@@ -27,7 +27,7 @@ public class PlayerAccountInfo
         set => _arcadeProcess = Mathf.Clamp(value, 1, 100);
     }
     
-    public PlayerAccountProgressStep progress = PlayerAccountProgressStep.Freedom;
+    public PlayerAccountProgressStep progress = PlayerAccountProgressStep.Tutorial;
 
     public PlayerAccountInfo()
     {

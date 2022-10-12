@@ -121,14 +121,14 @@ public class PreparingProcess : FSceneProcess
     
     public override void ProcessEnter()
     {
-        PopupLayer.DarkOff(NetFightScene.target.T.gameObject, 1, 0);
+        HighLightLayer.DarkOff(NetFightScene.target.T.gameObject, 1, 0);
         EnterProcess().Forget();
     }
     
     public override void ProcessEnd()
     {
         NetFightScene.target.LoadStageFinished.Value = false;
-        PopupLayer.LightUp(1f);
+        HighLightLayer.LightUp(1f);
     }
     
     public override bool CanEnterOtherProcess()

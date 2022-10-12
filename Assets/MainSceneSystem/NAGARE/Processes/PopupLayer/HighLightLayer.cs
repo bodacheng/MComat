@@ -1,10 +1,14 @@
-﻿using UnityEngine;
-using UniRx;
-using NoSuchStudio.UI.Highlight;
 using DG.Tweening;
+using DummyLayerSystem;
+using UnityEngine;
+using NoSuchStudio.UI.Highlight;
+using UniRx;
+using UnityEngine.UI;
 
-public partial class PopupLayer : UILayer {
-
+public class HighLightLayer : UILayer
+{
+    [SerializeField] Image bigCurtain;
+    
     // canvasSortOrder = 100，这个数字无非是想让黑幕变成最上层，
     // 黑幕是靠缕空来实现空区域可点击。
     // PopupLayer 的 sortingOrder为更上一层101，
@@ -14,11 +18,33 @@ public partial class PopupLayer : UILayer {
     // 之所以不得不分两种是因为那么傻逼插件在计算高亮区域的时候不得不延迟两帧，否则计算不对
     // 从而有些需要立刻让全屏变色的地方我们要准备另外一套
     
+    static HighLightLayer Get()
+    {
+        HighLightLayer returnValue = null;
+        var l = UILayerLoader.Get("HighLightLayer");
+        if (l != null)
+        {
+            returnValue = l as HighLightLayer;
+        }
+        return returnValue;
+    }
+    
+    public static HighLightLayer Open(GameObject T)
+    {
+        var returnValue = Get();
+        if (returnValue != null)
+        {
+            return returnValue;
+        }
+        returnValue = UILayerLoader.Load(T,"HighLightLayer") as HighLightLayer;
+        return returnValue;
+    }
+    
     #region 高亮显示
     public static void HighLightRect(GameObject T, RectTransform r, Options options = null)
     {
-        var popupLayer = Open(T);
-        popupLayer.HighLightRect(r, options);
+        var HighLightLayer = Open(T);
+        HighLightLayer.HighLightRect(r, options);
     }
     
     async void HighLightRect(RectTransform r, Options options = null)
@@ -35,7 +61,7 @@ public partial class PopupLayer : UILayer {
                     padding = new Padding(0,0,0,0),
                     fadeDuration = 0.5f,
                     dismissOnClick = false,
-                    color = new Color(0,0,0,0.7f),
+                    color = new Color(1,1,1,0f),
                     canvasSortOrder = 100
                 }
             );
@@ -46,8 +72,8 @@ public partial class PopupLayer : UILayer {
     #region 黑幕
     public static void DarkOff(GameObject T, float darkness, float duration)
     {
-        var popupLayer = Open(T);
-        popupLayer.DarkOff(darkness, duration);
+        var HighLightLayer = Open(T);
+        HighLightLayer.DarkOff(darkness, duration);
     }
     
     void DarkOff(float darkness, float duration)
@@ -55,18 +81,25 @@ public partial class PopupLayer : UILayer {
         bigCurtain.raycastTarget = true;
         bigCurtain.DOColor(new Color(0,0,0, darkness), duration);
     }
-
+    
     public static void LightUp(float duration)
     {
-        var popupLayer = Get();
-        if (popupLayer != null)
+        var HighLightLayer = Get();
+        if (HighLightLayer != null)
         {
-            popupLayer.bigCurtain.DOColor(new Color(0,0,0, 0), duration).OnComplete(() =>
+            HighLightLayer.bigCurtain.DOColor(new Color(0,0,0, 0), duration).OnComplete(() =>
             {
-                popupLayer.bigCurtain.raycastTarget = false;
+                HighLightLayer.bigCurtain.raycastTarget = false;
                 Close();
             });
         }
     }
+    
     #endregion
+    
+    public static void Close()
+    {
+        HighlightUI.Dismiss();
+        UILayerLoader.Remove("HighLightLayer");
+    }
 }

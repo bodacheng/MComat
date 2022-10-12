@@ -96,7 +96,8 @@ public partial class SkillEditLayer : UILayer
         {
             if (NineSlot.CheckEditBasedOnCurrent() != SkillSet.SkillEditError.Perfect)
             {
-                return;
+                // 可以更新但不能上场
+                //return;
             }
             
             string warn;

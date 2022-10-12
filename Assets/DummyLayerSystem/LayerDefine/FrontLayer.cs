@@ -15,9 +15,11 @@ public class FrontLayer : UILayer
     [SerializeField] private Button SkillTestRBtn;
     [SerializeField] private Button SkillTestMBtn;
 
+    [SerializeField] private GameObject selectMeIndicator;
+    
     public DedicatedCameraConnector _connector;
     
-    static FrontLayer Get()
+    public static FrontLayer Get()
     {
         var l = UILayerLoader.Get("FrontLayer");
         FrontLayer returnValue = null;
@@ -57,4 +59,33 @@ public class FrontLayer : UILayer
         SkillTestRBtn.onClick.AddListener(pre.BeginSkillTest_Rotation);
         SkillTestMBtn.onClick.AddListener(pre.BeginSkillTest_Multi);
     }
+
+    #region 教程
+
+    public void PlsClickBtn(string btnCode)
+    {
+        ArcadeBtn.interactable = btnCode == "arcade";
+        ArenaBtn.interactable = btnCode == "arena";
+        MemberBtn.interactable = btnCode == "unit";
+        TrainBtn.interactable = btnCode == "train";
+        StonesBtn.interactable = btnCode == "stones";
+        GotchaBtn.interactable = btnCode == "gotcha";
+
+        switch (btnCode)
+        {
+            case "arcade":
+                break;
+            case "arena":
+                break;
+            case "unit":
+                break;
+            case "train":
+                break;
+            case "stones":
+                break;
+            case "gotcha":
+                break;
+        }
+    }
+    #endregion
 }

@@ -1,14 +1,8 @@
-﻿using mainMenu;
-using FightScene;
+﻿using FightScene;
 
 // Tutorial 1 
 public class ConfirmQuest1 : TutorialProcess
 {
-    public ConfirmQuest1()
-    {
-        EelementsInherit(PreScene.target);
-    }
-    
     public override void ProcessEnter()
     {
         //LoadingCanvas.target.HigtLightRect(FightPreparePage.target.EnterQuest.transform);

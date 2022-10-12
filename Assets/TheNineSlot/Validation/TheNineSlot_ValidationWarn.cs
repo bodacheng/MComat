@@ -6,7 +6,7 @@ namespace mainMenu
     {
         [SerializeField] RectTransform normalSkillIndicator;
         
-        SkillSet.SkillEditError ValidateWarn()
+        public SkillSet.SkillEditError ValidateWarn()
         {
             // 第一列技能必须有普通技能
             var valR = CheckEditBasedOnCurrent();

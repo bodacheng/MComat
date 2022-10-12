@@ -31,7 +31,6 @@ public partial class PopupLayer : UILayer
     
     public static void Close()
     {
-        HighlightUI.Dismiss();
         UILayerLoader.Remove("PopupLayer");
     }
 }

@@ -1,5 +1,4 @@
-﻿using mainMenu;
-using FightScene;
+﻿using FightScene;
 
 // Tutorial 1 
 public class WaitProcess : TutorialProcess
@@ -11,7 +10,6 @@ public class WaitProcess : TutorialProcess
     public WaitProcess(WaitOverDelegate waitOverDelegate)
     {
         waitForThis = waitOverDelegate;
-        EelementsInherit(NetFightScene.target);
     }
         
     public override void ProcessEnd()
