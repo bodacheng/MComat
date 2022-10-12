@@ -22,6 +22,7 @@ public class FrontLayer : UILayer
     public static FrontLayer Get()
     {
         var l = UILayerLoader.Get("FrontLayer");
+        Debug.Log("IS "+ l);
         FrontLayer returnValue = null;
         if (l != null)
         {
@@ -64,6 +65,8 @@ public class FrontLayer : UILayer
 
     public void PlsClickBtn(string btnCode)
     {
+        Debug.Log("this place entered:"+ btnCode);
+        
         ArcadeBtn.interactable = btnCode == "arcade";
         ArenaBtn.interactable = btnCode == "arena";
         MemberBtn.interactable = btnCode == "unit";

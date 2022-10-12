@@ -24,7 +24,7 @@ public class TutorialRunner
     
     public void GenerateTutorial()
     {
-        var goToMemberDetail = new GoToUnitList();
+        var goToUnitList = new GoToUnitList();
         var openSkillEdit = new OpenSkillEdit();
         var SkillEditTry = new SkillEditTry();
         var aLineConfirm = new ALineConfirm();
@@ -41,12 +41,12 @@ public class TutorialRunner
         }
         var waitForStage1Loaded = new WaitProcess(StartedFighting);
         
-        TutorialProcesses.Add(goToMemberDetail);
+        TutorialProcesses.Add(goToUnitList);
         TutorialProcesses.Add(openSkillEdit);
         TutorialProcesses.Add(SkillEditTry);
         //TutorialProcesses.Add(aLineConfirm);
-        //TutorialProcesses.Add(goToStages);
-        //TutorialProcesses.Add(goToStageOne);
+        TutorialProcesses.Add(goToStages);
+        TutorialProcesses.Add(goToStageOne);
         //TutorialProcesses.Add(goToTeamEdit);
         // TutorialProcesses.Add(clickTeamEditSlotOne);
         // TutorialProcesses.Add(ChooseAdamToSlot1);

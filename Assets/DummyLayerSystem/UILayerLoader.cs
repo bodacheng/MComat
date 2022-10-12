@@ -44,7 +44,7 @@ namespace DummyLayerSystem
             {"FightScenePauseSupport", "DummyLayerSystem/FightScenePauseSupport"},
         };
 
-        private static readonly List<UILayer> Queues = new List<UILayer>();
+        private static readonly List<UILayer> Queues = new ();
         
         public static void Clear(string except = null)
         {

@@ -3,18 +3,17 @@
 // Tutorial 1 
 public class GoToStageOne : TutorialProcess
 {
-    bool missionCompleted;
+    private ReturnLayer _returnLayer;
+    private ArcadeTop _arcadeTop;
     ArcadeFrontPage _arcadeFrontPage;
     
     public override void ProcessEnter()
     {
-        missionCompleted = false;
-        _arcadeFrontPage = (ArcadeFrontPage)ProcessesRunner.Main.GetProcess(MainSceneStep.ArcadeFront);
     }
     
     public override void ProcessEnd()
     {
-        PopupLayer.Close();
+        HighLightLayer.Close();
     }
     
     public override bool CanEnterOtherProcess()
@@ -24,12 +23,18 @@ public class GoToStageOne : TutorialProcess
     
     public override void LocalUpdate()
     {
-        if (!missionCompleted)
+        if (!Loaded)
         {
-            //if (_arcadeFrontPage.loadFinished)
+            if (_returnLayer == null)
+                _returnLayer = ReturnLayer.Get();
+            
+            if (_arcadeTop == null)
+                _arcadeTop = ArcadeTop.Get();
+            
+            if (_returnLayer != null && _arcadeTop != null)
             {
-                //LoadingCanvas.target.HigtLightRect(ArcadeManager.target.GetStageButton(1).button.transform);
-                missionCompleted = true;
+                _returnLayer.gameObject.SetActive(false);
+                Loaded = true;
             }
         }
     }

@@ -52,7 +52,7 @@ public class FrontPage : MSceneProcess
     FrontLayer frontLayer;
     void EnterProcess()
     {
-        frontLayer = UILayerLoader.Load(PreScene.target.T, "FrontLayer") as FrontLayer;
+        frontLayer = FrontLayer.Open(PreScene.target);
         frontLayer.Initialise(PreScene.target);
         
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
@@ -149,9 +149,7 @@ public class FrontPage : MSceneProcess
     
     public override void ProcessEnd()
     {
-        if (frontLayer != null)
-            GameObject.Destroy(frontLayer.gameObject);
-        
+        FrontLayer.Close();
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
         UpperInfoBar.Close();
     }
