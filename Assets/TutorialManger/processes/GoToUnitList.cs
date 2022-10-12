@@ -1,6 +1,6 @@
 ﻿using mainMenu;
 
-public class GoToMemberDetail : TutorialProcess
+public class GoToUnitList : TutorialProcess
 {
     private FrontLayer _frontLayer;
     

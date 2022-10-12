@@ -3,15 +3,14 @@ using mainMenu;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
-public class MonsterEditPage : MSceneProcess
+public class SkillEditPage : MSceneProcess
 {
     private SkillEditLayer layer;
-
+    
     void ItemsLoadFinished(bool value)
     {
         missionWatcher.Finish("itemsLoadFinished", value);
     }
-    
     
     async UniTask EnterProcess()
     {
@@ -31,7 +30,7 @@ public class MonsterEditPage : MSceneProcess
         SetLoaded(true);
     }
     
-    public MonsterEditPage()
+    public SkillEditPage()
     {
         Step = MainSceneStep.UnitSkillEdit;
         Inherit(PreScene.target);
@@ -50,6 +49,8 @@ public class MonsterEditPage : MSceneProcess
     
     public override void ProcessEnd()
     {
+        HurtObjectManager.Clear();
+        EffectsManager.Clear();
         SkillEditLayer.Close();
     }
 }

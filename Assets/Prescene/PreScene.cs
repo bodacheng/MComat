@@ -97,7 +97,7 @@ namespace mainMenu
             var selfFightFront = new SelfFightPage();
             var questInfo = new QuestInfoPage();
             var unitListPage = new UnitListPage();
-            var memberDetail_edit = new MonsterEditPage();
+            var memberDetail_edit = new SkillEditPage();
             var memberDetail_SkillShow = new SkillShowPage();
             var arcadeFrontPage = new ArcadeFrontPage();
             

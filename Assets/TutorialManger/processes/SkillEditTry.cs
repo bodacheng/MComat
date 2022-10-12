@@ -6,25 +6,19 @@ public class SkillEditTry : TutorialProcess
     private SkillEditLayer _skillEditLayer;
 
     private bool showEditConfirmIndicator = false;
+    private bool skillEditFinished = false;
     
     public override void ProcessEnter()
     {
-        
     }
     
     public override void ProcessEnd()
     {
-        _returnLayer.ForceBackMode(true);
     }
     
     public override bool CanEnterOtherProcess()
     {
-        var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
-        if (unitInfo != null)
-        {
-            return unitInfo.set.CheckEdit() == SkillSet.SkillEditError.Perfect;
-        }
-        return false;
+        return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage;
     }
     
     public override void LocalUpdate()
@@ -55,6 +49,25 @@ public class SkillEditTry : TutorialProcess
                     showEditConfirmIndicator = true;
                 }
             }
+        }
+        
+        if (!skillEditFinished)
+        {
+            var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
+            if (unitInfo != null)
+            {
+                skillEditFinished = unitInfo.set.CheckEdit() == SkillSet.SkillEditError.Perfect;
+                if (skillEditFinished)
+                {
+                    _returnLayer.gameObject.SetActive(true);
+                    _returnLayer.ForceBackMode(true);
+                }
+            }
+        }
+
+        if (skillEditFinished && ProcessesRunner.Main.currentProcess.Step == MainSceneStep.UnitList)
+        {
+            _returnLayer.ForceBackMode(true);
         }
     }
 }

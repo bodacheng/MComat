@@ -2,7 +2,7 @@
 
 namespace dataAccess
 {
-    public static partial class Units
+    public static class Units
     {
         public static readonly IDictionary<string, UnitInfo> Dic = new Dictionary<string, UnitInfo>();
         

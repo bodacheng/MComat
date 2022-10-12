@@ -24,7 +24,7 @@ public class TutorialRunner
     
     public void GenerateTutorial()
     {
-        var goToMemberDetail = new GoToMemberDetail();
+        var goToMemberDetail = new GoToUnitList();
         var openSkillEdit = new OpenSkillEdit();
         var SkillEditTry = new SkillEditTry();
         var aLineConfirm = new ALineConfirm();

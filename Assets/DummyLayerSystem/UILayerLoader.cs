@@ -94,14 +94,7 @@ namespace DummyLayerSystem
             Queues.Add(t);
             return t;
         }
-
-        // 为了把layer直接加入队列。
-        public static void FixAdd(string layerName, UILayer t)
-        {
-            t.Index = layerName;
-            Queues.Add(t);
-        }
-
+        
         public static void Pop()
         {
             if (Queues.Count > 0)

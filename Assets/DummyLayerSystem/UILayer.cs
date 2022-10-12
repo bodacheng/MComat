@@ -14,4 +14,9 @@ public class UILayer : MonoBehaviour
     {
         
     }
+
+    protected void ToTop()
+    {
+        gameObject.transform.SetAsLastSibling();
+    }
 }

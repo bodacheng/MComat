@@ -1,7 +1,4 @@
 ﻿using UnityEngine;
-using Newtonsoft.Json;
-using Json;
-using System.IO;
 using System;
 
 [Serializable]
@@ -28,7 +25,7 @@ public class PlayerAccountInfo
     }
     
     public PlayerAccountProgressStep progress = PlayerAccountProgressStep.Tutorial;
-
+    
     public PlayerAccountInfo()
     {
         TitleDisplayName = "helloKitty";

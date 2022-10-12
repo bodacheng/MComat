@@ -64,5 +64,6 @@ public class ReturnLayer : UILayer
     public void ForceBackMode(bool on)
     {
         maskBg.gameObject.SetActive(on);
+        ToTop();
     }
 }

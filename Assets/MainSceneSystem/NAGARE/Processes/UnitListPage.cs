@@ -17,20 +17,6 @@ public class UnitListPage : MSceneProcess
 
     public override void ProcessEnter()
     {
-        HurtObjectManager.Clear();
-        EffectsManager.Clear();
-        
-        switch (PlayerAccountInfo.Me.progress)
-        {
-            case PlayerAccountProgressStep.Freedom:
-                break;
-            case PlayerAccountProgressStep.justCreated:
-                break;
-            case PlayerAccountProgressStep.Tutorial:
-                dataAccess.Units.LoadTutorial();
-                break;
-        }
-        
         layer = UnitsLayer.Open();
         unitOptionLayer = UnitOptionLayer.Open();
         layer.SetDisplayUnitIconsAfterAction(
