@@ -43,8 +43,8 @@ public partial class PopupLayer : UILayer {
         layer.YesButton.onClick.AddListener(Close);
         layer.YesButton.onClick.AddListener(action);
         
-        layer.NoButton.onClick.AddListener(Close);
         layer.NoButton.onClick.RemoveAllListeners();
+        layer.NoButton.onClick.AddListener(Close);
         
         layer.ValidationIntro.text = intro;
     }

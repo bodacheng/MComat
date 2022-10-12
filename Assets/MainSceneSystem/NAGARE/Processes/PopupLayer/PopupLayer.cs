@@ -1,7 +1,6 @@
 ﻿using DummyLayerSystem;
 using UnityEngine;
 using UnityEngine.UI;
-using NoSuchStudio.UI.Highlight;
 
 public partial class PopupLayer : UILayer
 {
