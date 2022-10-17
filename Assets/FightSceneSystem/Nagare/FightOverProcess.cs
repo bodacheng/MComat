@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using DummyLayerSystem;
 using UnityEngine;
+using PlayFab.ClientModels;
 
 namespace FightScene
 {
@@ -59,6 +61,23 @@ namespace FightScene
                                 a.ShowAward(reward_GD_Int, reward_GM_Int);
                             }
                         );
+                        
+                        if (NetFightScene.Fight.ID == "1")
+                        {
+                            PlayerAccountInfo.Me.TutorialProgress = "StageOneFinished";
+                            PlayFabReadClient.UpdateUserData(
+                                new UpdateUserDataRequest()
+                                {
+                                    Data = new Dictionary<string, string>()
+                                    {
+                                        { "TutorialProgress", "StageOneFinished" }
+                                    }
+                                },
+                                (x) =>
+                                { }
+                            );
+                            ReturnLayer.ReturnMissionList.Clear(); // 直接回到 front scene
+                        }
                     }
                     else
                     {

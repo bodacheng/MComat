@@ -1,7 +1,6 @@
 ﻿using mainMenu;
 using UnityEngine;
 
-// Tutorial 1 
 public class GoToStages : TutorialProcess
 {
     private FrontLayer _frontLayer;
@@ -22,7 +21,6 @@ public class GoToStages : TutorialProcess
             _frontLayer = FrontLayer.Get();
             if (_frontLayer != null)
             {
-                Debug.Log("bodacheng");
                 _frontLayer.PlsClickBtn("arcade");
                 Loaded = true;
             }

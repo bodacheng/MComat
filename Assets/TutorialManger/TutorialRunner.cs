@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using PlayFab.ClientModels;
-using Newtonsoft.Json;
 using FightScene;
 
 /// <summary>
@@ -26,14 +25,13 @@ public class TutorialRunner
     // 这个结构代表了教程的顺序, 很大的特点在于可加入重复元素。典型的如后退菜单
     readonly List<TutorialProcess> TutorialProcesses = new ();
     
-    public void GenerateTutorial()
+    void GenerateStep1Tutorial()
     {
         var goToUnitList = new GoToUnitList();
         var openSkillEdit = new OpenSkillEdit();
-        var SkillEditTry = new SkillEditTry();
+        var skillEditTry = new SkillEditTry();
         var aLineConfirm = new ALineConfirm();
-        var goToStages = new GoToStages();
-        var goToStageOne = new GoToStageOne();
+
         var goToTeamEdit = new GoToTeamEdit();
         var clickTeamEditSlotOne = new ClickTeamEditSlotOne();
         var ChooseAdamToSlot1 = new ChooseAdamToSlot1();
@@ -45,17 +43,28 @@ public class TutorialRunner
         }
         var waitForStage1Loaded = new WaitProcess(StartedFighting);
         
+        TutorialProcesses.Clear();
         TutorialProcesses.Add(goToUnitList);
         TutorialProcesses.Add(openSkillEdit);
-        TutorialProcesses.Add(SkillEditTry);
-        //TutorialProcesses.Add(aLineConfirm);
+        TutorialProcesses.Add(skillEditTry);
+    }
+
+    void GenerateStep2Tutorial()
+    {
+        var goToStages = new GoToStages();
+        var goToStageOne = new GoToStageOne();
+        
+        TutorialProcesses.Clear();
         TutorialProcesses.Add(goToStages);
         TutorialProcesses.Add(goToStageOne);
-        //TutorialProcesses.Add(goToTeamEdit);
-        // TutorialProcesses.Add(clickTeamEditSlotOne);
-        // TutorialProcesses.Add(ChooseAdamToSlot1);
-        // TutorialProcesses.Add(confirmQuest1);
-        // TutorialProcesses.Add(waitForStage1Loaded);
+    }
+
+    void GenerateStep3Tutorial()
+    {
+        // gacha
+        // new character skill edit
+        // team edit
+        // arcade stage 2
     }
 
     public void ProcessNagare()
@@ -86,6 +95,7 @@ public class TutorialRunner
         currentProcess?.ProcessEnd();
         if (currentProcess is SkillEditTry)
         {
+            PlayerAccountInfo.Me.TutorialProgress = "SkillEditFinished";
             PlayFabReadClient.UpdateUserData(
                 new UpdateUserDataRequest()
                 {
@@ -105,5 +115,28 @@ public class TutorialRunner
         
         currentProcess = nextProcess;
         currentProcess?.ProcessEnter();
+    }
+    
+    // 所有的教程链都是以FrontPage为起点
+    public void TutorialCheck()
+    {
+        // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
+        switch (PlayerAccountInfo.Me.TutorialProgress)
+        {
+            case "Started":
+                Main.GenerateStep1Tutorial();
+                Main.StartToMove();
+                break;
+            case "SkillEditFinished": // 技能编辑教程结束 
+                Main.GenerateStep2Tutorial();
+                Main.StartToMove();
+                break;
+            case "StageOneFinished": // 第一关结束
+                break;
+            case "Finished":
+                break;
+            default:
+                break;
+        }
     }
 }

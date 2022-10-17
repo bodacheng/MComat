@@ -1,11 +1,13 @@
 ﻿using mainMenu;
+using UnityEngine;
 
 // Tutorial 1 
 public class GoToStageOne : TutorialProcess
 {
     private ReturnLayer _returnLayer;
     private ArcadeTop _arcadeTop;
-    ArcadeFrontPage _arcadeFrontPage;
+    private ArcadeFrontPage _arcadeFrontPage;
+    private FightingStepLayer fightingLayer;
     
     public override void ProcessEnter()
     {
@@ -18,7 +20,8 @@ public class GoToStageOne : TutorialProcess
     
     public override bool CanEnterOtherProcess()
     {
-        return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.QuestInfo;
+        Debug.Log("reading");
+        return fightingLayer != null;
     }
     
     public override void LocalUpdate()
@@ -36,6 +39,11 @@ public class GoToStageOne : TutorialProcess
                 _returnLayer.gameObject.SetActive(false);
                 Loaded = true;
             }
+        }
+
+        if (fightingLayer == null)
+        {
+            fightingLayer = FightingStepLayer.Get();
         }
     }
 }

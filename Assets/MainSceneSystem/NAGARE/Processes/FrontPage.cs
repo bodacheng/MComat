@@ -52,7 +52,7 @@ public class FrontPage : MSceneProcess
     FrontLayer frontLayer;
     void EnterProcess()
     {
-        PreScene.target.TutorialCheck();
+        TutorialRunner.Main.TutorialCheck();
         
         frontLayer = FrontLayer.Open(PreScene.target);
         frontLayer.Initialise(PreScene.target);
