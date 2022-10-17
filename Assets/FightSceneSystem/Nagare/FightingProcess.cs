@@ -33,7 +33,8 @@ namespace FightScene
                 var fightingStepLayer = FightingStepLayer.Get();
                 fightingStepLayer.gameObject.SetActive(true);
             }
-            
+            if (NetFightScene.Fight.runTutorial)
+                _layer.OpenTutorial();
             RTFightManager.target.ModeStart();
         }
         

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEngine.Playables;
 using dataAccess;
 using System.IO;
 
@@ -16,9 +15,6 @@ public class FightInfo : ScriptableObject
     public string battleNameJPG;
     [SerializeField]
     public string battleNameCH;
-    
-    [SerializeField]
-    public PlayableAsset beforeFightStory;
     
     [SerializeField]
     public Sprite StageButtonSprite;
@@ -38,7 +34,18 @@ public class FightInfo : ScriptableObject
     public CriticalGaugeMode team2CGMode = CriticalGaugeMode.normal;
     public TeamMode Team1Mode;
     public TeamMode Team2Mode;
+
+    public bool runTutorial
+    {
+        set;
+        get;
+    }
     
+    public void Awake()
+    {
+        Open();
+    }
+
     public string ID
     {
         set;
@@ -70,13 +77,7 @@ public class FightInfo : ScriptableObject
         set;
     }
     
-    public void Awake()
-    {
-        Open();
-    }
-    
     #if UNITY_EDITOR
-    
     /// <summary>
     /// 
     /// </summary>

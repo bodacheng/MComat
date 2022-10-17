@@ -24,20 +24,10 @@ public class PlayerAccountInfo
         set => _arcadeProcess = Mathf.Clamp(value, 1, 100);
     }
     
-    public PlayerAccountProgressStep progress = PlayerAccountProgressStep.Tutorial;
+    public string TutorialProgress = string.Empty;
     
     public PlayerAccountInfo()
     {
         TitleDisplayName = "helloKitty";
     }
-}
-
-public enum PlayerAccountProgressStep
-{
-    justCreated = 1,
-    Tutorial = 2,
-    justNamed = 3,
-    MenuTuorial = 4,
-    Freedom = 5,
-    Season1_Completed = 6,
 }

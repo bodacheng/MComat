@@ -12,12 +12,8 @@ namespace FightScene
     {
         None = 0,
         Preparing = 1,
-        StoryBeforeFight = 6,
         CountDown = 4,
-        
         Fighting = 2,
-        BasicTryTutorial = 7,
-        
         FightResultAnim = 5,
         FightOver = 3
     }

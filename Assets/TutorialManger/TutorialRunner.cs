@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
-using mainMenu;
+using PlayFab.ClientModels;
+using Newtonsoft.Json;
 using FightScene;
 
+/// <summary>
+/// 
+/// </summary>
 public class TutorialRunner
 {
     static TutorialRunner instance;
@@ -79,25 +83,27 @@ public class TutorialRunner
     
     void ChangeProcess(TutorialProcess nextProcess)
     {
-        if (currentProcess != null)
+        currentProcess?.ProcessEnd();
+        if (currentProcess is SkillEditTry)
         {
-            currentProcess.ProcessEnd();
-            var Log = new TutorialLog()
-            {
-                description = "end"
-            };
-            TutorialLogger.Logs.Add(Log);
+            PlayFabReadClient.UpdateUserData(
+                new UpdateUserDataRequest()
+                {
+                    Data = new Dictionary<string, string>()
+                    {
+                        { "TutorialProgress", "SkillEditFinished" }
+                    }
+                },
+                (x) =>
+                { }
+            );
+        }
+        else if (currentProcess is GoToStageOne)
+        {
+            
         }
         
         currentProcess = nextProcess;
-        if (currentProcess != null)
-        {
-            currentProcess.ProcessEnter();
-            var Log = new TutorialLog()
-            {
-                description = "start"
-            };
-            TutorialLogger.Logs.Add(Log);
-        }
+        currentProcess?.ProcessEnter();
     }
 }

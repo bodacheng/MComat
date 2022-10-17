@@ -46,7 +46,7 @@ public class BasicTryProcess : FSceneProcess
 
     public BasicTryProcess()
     {
-        base.Step = SceneStep.BasicTryTutorial;
+        //base.Step = SceneStep.BasicTryTutorial;
         nextProcessStep = SceneStep.FightOver;
     }
     

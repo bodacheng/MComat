@@ -16,6 +16,31 @@ public partial class PlayFabReadClient
             (GetUserDataResult obj) =>
             {
                 finished.Invoke(true);
+                Debug.Log("bodacheng");
+                Debug.Log(obj.Data);
+                
+                if (obj.Data.ContainsKey("TutorialProgress"))
+                {
+                    PlayerAccountInfo.Me.TutorialProgress = obj.Data["TutorialProgress"].Value;
+                    Debug.Log("jiba:"+ PlayerAccountInfo.Me.TutorialProgress);
+                }
+                else
+                {
+                    UpdateUserData(
+                        new UpdateUserDataRequest()
+                        {
+                            Data = new Dictionary<string, string>
+                            {
+                                { "TutorialProgress", "Started" }
+                            }
+                        },
+                        (x) =>
+                        {
+                            
+                        }
+                    );
+                }
+                
             },
             errorCallback => {
                 Debug.Log("Basic accInfo fail:" + errorCallback.ErrorMessage);

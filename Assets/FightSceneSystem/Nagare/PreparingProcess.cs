@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UniRx;
+using UnityEngine;
 
 public class PreparingProcess : FSceneProcess
 {
@@ -10,7 +11,7 @@ public class PreparingProcess : FSceneProcess
     public PreparingProcess()
     {
         Step = SceneStep.Preparing;
-        nextProcessStep = SceneStep.StoryBeforeFight;
+        nextProcessStep = SceneStep.CountDown;
     }
     
     async UniTask EnterProcess()
@@ -43,7 +44,7 @@ public class PreparingProcess : FSceneProcess
         FightLogger.value.ReadyToLog(teamMembers);
         
         RTFightManager.target.team1.Auto = NetFightScene.Fight.team1Auto;
-        RTFightManager.target.team2.Auto = NetFightScene.Fight.team2Auto;
+        RTFightManager.target.team2.Auto = NetFightScene.Fight.runTutorial ? false : NetFightScene.Fight.team2Auto;
         RTFightManager.target.team1.TeamMode = NetFightScene.Fight.Team1Mode;
         RTFightManager.target.team2.TeamMode = NetFightScene.Fight.Team2Mode;
         RTFightManager.target.team1.teamConfig = RTFightManager.target.heroTeamConfig;

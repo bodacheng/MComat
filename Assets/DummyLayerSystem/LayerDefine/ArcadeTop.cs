@@ -93,8 +93,12 @@ public class ArcadeTop : UILayer
             
             void LoadThisStage()
             {
-                one.LoadMyTeam();
-                one.team1ID = PlayerAccountInfo.Me.PlayFabId;
+                one.EventType = FightEventType.Quest;
+                if (one.ID == "1")
+                {
+                    one.runTutorial = true;
+                }
+                
                 PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, one, true);
             }
             

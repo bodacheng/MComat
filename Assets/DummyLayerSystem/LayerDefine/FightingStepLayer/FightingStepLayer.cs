@@ -20,6 +20,9 @@ public class FightingStepLayer : UILayer
     [Header("Auto Button")]
     [SerializeField] AutoSwitch Team1Auto;
     [SerializeField] AutoSwitch Team2Auto;
+
+    [Header("Tutorial")]
+    [SerializeField] FightingStepTutorial fightingStepTutorial;
     
     public static FightingStepLayer Get()
     {
@@ -30,18 +33,6 @@ public class FightingStepLayer : UILayer
             returnValue = l as FightingStepLayer;
         }
         return returnValue;
-    }
-
-    public static void Close()
-    {
-        var layer = Get();
-        if (layer == null)
-            return;
-        layer.InputsManager.FocusUnit(null);
-        layer.InputsManager.Clear();
-        layer.team1UI.Clear();
-        layer.team2UI.Clear();
-        UILayerLoader.Remove("FightingStepLayer");
     }
     
     public static async UniTask<FightingStepLayer> Open(bool active = true)
@@ -61,15 +52,26 @@ public class FightingStepLayer : UILayer
         
         return returnValue;
     }
-
-    private bool initialized = false;
     
-    public bool Initialized
+    public static void Close()
     {
-        get => initialized;
-        set => initialized = value;
+        var layer = Get();
+        if (layer == null)
+            return;
+        layer.InputsManager.FocusUnit(null);
+        layer.InputsManager.Clear();
+        layer.team1UI.Clear();
+        layer.team2UI.Clear();
+        UILayerLoader.Remove("FightingStepLayer");
     }
-    
+
+    public void OpenTutorial()
+    {
+        fightingStepTutorial.Open();
+    }
+
+    public bool Initialized { get; set; } = false;
+
     async UniTask StartUp(Action<bool> switchTeam1Auto, Action<bool> switchTeam2Auto, Action pauseAction)
     {
         Initialized = false;

@@ -146,23 +146,30 @@ namespace mainMenu
             }
             else
             {
-                // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
-                switch (PlayerAccountInfo.Me.progress)
-                {
-                    case PlayerAccountProgressStep.Freedom:
-                        trySwitchToStep(MainMenuNote.GoingTo, false);
-                        break;
-                    case PlayerAccountProgressStep.justCreated:
-                        break;
-                    case PlayerAccountProgressStep.Tutorial:
-                        TutorialRunner.Main.GenerateTutorial();
-                        trySwitchToStep(MainMenuNote.GoingTo, false);
-                        TutorialRunner.Main.StartToMove();
-                        break;
-                }
+                trySwitchToStep(MainMenuNote.GoingTo, false);
             }
         }
-
+        
+        public void TutorialCheck()
+        {
+            // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
+            switch (PlayerAccountInfo.Me.TutorialProgress)
+            {
+                case "Started":
+                    TutorialRunner.Main.GenerateTutorial();
+                    TutorialRunner.Main.StartToMove();
+                    break;
+                case "SkillEditFinished": // 技能编辑教程结束 
+                    break;
+                case "StageOneFinished": // 第一关结束
+                    break;
+                case "Finished":
+                    break;
+                default:
+                    break;
+            }
+        }
+        
         void Update()
         {
             ProcessesRunner.Main.ProcessNagare();

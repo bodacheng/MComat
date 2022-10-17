@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UniRx;
-using UnityEngine.Playables;
 using System.Collections.Generic;
 using mainMenu;
 using ModelView;
@@ -11,11 +10,6 @@ namespace FightScene
     public class NetFightScene : MonoBehaviour
     { 
         public RectTransform T;
-        
-        #region before fight
-        [Header("PlayableDirector")]
-        public PlayableDirector playableDirector;
-        #endregion
         
         [Header("双方站位点")]
         public Transform[] Team1StandPoints, Team2StandPoints;//这个也是应该按模式区分，能改名字现在就改名字吧。免得以后乱
@@ -65,9 +59,8 @@ namespace FightScene
             SingleThreadProcesser.backup = mainProcessRunner;
             //Position_Set_Executor.Instance.P_sets.Clear();
             var preparingProcess = new PreparingProcess();
-            var fightingProcess = new FightingProcess();
             var countDownProcess = new CountDownProcess();
-            var storyProcess = new StoryProcess();
+            var fightingProcess = new FightingProcess();
             var fightResultAnim = new FightResultAnim();
             var fightOverProcess = new FightOverProcess();
             var basicTryProcess = new BasicTryProcess();
@@ -78,15 +71,8 @@ namespace FightScene
                 case FightEventType.SkillTest:
                 case FightEventType.Self:
                 case FightEventType.Arena:
-                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Preparing, preparingProcess);
-                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.CountDown, countDownProcess);
-                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Fighting, fightingProcess);
-                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightResultAnim, fightResultAnim);
-                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightOver, fightOverProcess);
-                    break;
                 case FightEventType.Quest:
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Preparing, preparingProcess);
-                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.StoryBeforeFight, storyProcess);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.CountDown, countDownProcess);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Fighting, fightingProcess);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightResultAnim, fightResultAnim);
