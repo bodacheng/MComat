@@ -98,7 +98,6 @@ public class ArcadeTop : UILayer
                 {
                     one.runTutorial = true;
                 }
-                
                 PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, one, true);
             }
             

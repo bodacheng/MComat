@@ -12,13 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf3bb8ad816a44358eca5831d97217e, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  ID: 0
-  eventType: 4
   BattleGroundID: 0
   battleNameENG: 
   battleNameJPG: 
   battleNameCH: 
-  beforeFightStory: {fileID: 0}
   StageButtonSprite: {fileID: 0}
   unitsData:
   - id: 0
@@ -65,5 +62,5 @@ MonoBehaviour:
   Team2HpRate: 1
   team1CGMode: 0
   team2CGMode: 0
-  Team1Mode: 0
-  Team2Mode: 0
+  Team1Mode: 2
+  Team2Mode: 2

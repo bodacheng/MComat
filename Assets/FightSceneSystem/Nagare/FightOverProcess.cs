@@ -42,7 +42,7 @@ namespace FightScene
                     if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabId)
                     {
                         CloudScript.ArcadeProgress(
-                            NetFightScene.Fight.ID.ToString(),
+                            NetFightScene.Fight.ID,
                             result =>
                             {
                                 var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
@@ -55,10 +55,8 @@ namespace FightScene
                                 int reward_GD_Int = Convert.ToInt32(reward_GD);
                                 int reward_GM_Int = Convert.ToInt32(reward_DIA);
                                 
-                                var cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArenaFightOver;
-                                cc.ShowAward(
-                                    reward_GD_Int, reward_GM_Int
-                                );
+                                var a = ArenaFightOver.Open();
+                                a.ShowAward(reward_GD_Int, reward_GM_Int);
                             }
                         );
                     }

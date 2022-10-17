@@ -32,8 +32,8 @@ public class FightInfo : ScriptableObject
     public float Team2HpRate = 1f;
     public CriticalGaugeMode team1CGMode = CriticalGaugeMode.normal;
     public CriticalGaugeMode team2CGMode = CriticalGaugeMode.normal;
-    public TeamMode Team1Mode;
-    public TeamMode Team2Mode;
+    public TeamMode Team1Mode = TeamMode.rotation;
+    public TeamMode Team2Mode = TeamMode.rotation;
 
     public bool runTutorial
     {

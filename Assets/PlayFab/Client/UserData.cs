@@ -22,7 +22,6 @@ public partial class PlayFabReadClient
                 if (obj.Data.ContainsKey("TutorialProgress"))
                 {
                     PlayerAccountInfo.Me.TutorialProgress = obj.Data["TutorialProgress"].Value;
-                    Debug.Log("jiba:"+ PlayerAccountInfo.Me.TutorialProgress);
                 }
                 else
                 {
