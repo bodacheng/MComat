@@ -53,10 +53,12 @@ public class TutorialRunner
     {
         var goToStages = new GoToStages();
         var goToStageOne = new GoToStageOne();
+        var stageOne = new StageOne();
         
         TutorialProcesses.Clear();
         TutorialProcesses.Add(goToStages);
         TutorialProcesses.Add(goToStageOne);
+        TutorialProcesses.Add(stageOne);
     }
 
     void GenerateStep3Tutorial()
@@ -65,6 +67,11 @@ public class TutorialRunner
         // new character skill edit
         // team edit
         // arcade stage 2
+
+        var tryGotcha = new TryGotcha();
+        
+        TutorialProcesses.Clear();
+        TutorialProcesses.Add(tryGotcha);
     }
 
     public void ProcessNagare()
@@ -132,6 +139,8 @@ public class TutorialRunner
                 Main.StartToMove();
                 break;
             case "StageOneFinished": // 第一关结束
+                break;
+            case "GotchaFinished":
                 break;
             case "Finished":
                 break;

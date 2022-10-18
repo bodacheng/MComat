@@ -22,7 +22,6 @@ public class FrontLayer : UILayer
     public static FrontLayer Get()
     {
         var l = UILayerLoader.Get("FrontLayer");
-        Debug.Log("IS "+ l);
         FrontLayer returnValue = null;
         if (l != null)
         {

@@ -1,4 +1,5 @@
-﻿using mainMenu;
+﻿using System;
+using mainMenu;
 using dataAccess;
 using UnityEngine.UI;
 using System.Collections.Generic;
@@ -12,10 +13,32 @@ public class GotchaLayer : UILayer
     [SerializeField] private Button GetAllSKBtn;
     [SerializeField] private Button GetAllMBtn;
     [SerializeField] private Button Remove25StonesBtn;
+
+    private static Action extraSuccessAction;
+
+    public static void SetExtraSuccessAction(Action _extraSuccessAction)
+    {
+        extraSuccessAction = _extraSuccessAction;
+    }
+    
+    public static GotchaLayer Get()
+    {
+        var l = UILayerLoader.Get("GotchaLayer");
+        GotchaLayer returnValue = null;
+        if (l != null)
+        {
+            returnValue = l as GotchaLayer;
+        }
+        return returnValue;
+    }
     
     public static GotchaLayer Open()
     {
-        var layer = UILayerLoader.Load(PreScene.target.T, "GotchaLayer") as GotchaLayer;
+        var layer = Get();
+        if (layer != null)
+            return layer;
+        
+        layer = UILayerLoader.Load(PreScene.target.T, "GotchaLayer") as GotchaLayer;
         layer.Gotcha1.onClick.AddListener(OneTime);
         layer.Gotcha9.onClick.AddListener(NineTimes);
         
@@ -50,6 +73,7 @@ public class GotchaLayer : UILayer
         {
             GotchaResult.Result = stones;
             PreScene.target.trySwitchToStep(MainSceneStep.GotchaResult, true);
+            extraSuccessAction?.Invoke();
         }
     }
     

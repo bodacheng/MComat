@@ -20,7 +20,6 @@ public class GoToStageOne : TutorialProcess
     
     public override bool CanEnterOtherProcess()
     {
-        Debug.Log("reading");
         return fightingLayer != null;
     }
     
