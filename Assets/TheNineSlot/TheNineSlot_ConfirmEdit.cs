@@ -7,6 +7,12 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
+        private Action extraSkillEditSuccess;
+        public void SetExtraSkillEditSuccess(Action extraSkillEditSuccess)
+        {
+            this.extraSkillEditSuccess = extraSkillEditSuccess;
+        }
+        
         public void UpdateStonesBaseOnSlots(UnitInfo unitInfo)
         {
             var equipping = Stones.GetEquippingStones(unitInfo.id);
@@ -97,6 +103,7 @@ namespace mainMenu
                 };
                 MainSceneLogger.Logs.Add(skillConfirmLog);
                 
+                extraSkillEditSuccess?.Invoke();
                 ProgressLayer.Close();
             }
             

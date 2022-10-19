@@ -1,4 +1,6 @@
 using mainMenu;
+using System.Collections.Generic;
+using PlayFab.ClientModels;
 
 public class SkillEditTry : TutorialProcess
 {
@@ -27,13 +29,19 @@ public class SkillEditTry : TutorialProcess
         {
             if (_returnLayer == null)
                 _returnLayer = ReturnLayer.Get();
-            
+
             if (_skillEditLayer == null)
+            {
                 _skillEditLayer = SkillEditLayer.Get();
+            }
+                
             
             if (_returnLayer != null && _skillEditLayer != null)
             {
                 _returnLayer.gameObject.SetActive(false);
+                _skillEditLayer.NineSlot.SetExtraSkillEditSuccess(() =>
+                {
+                });
                 Loaded = true;
             }
         }
@@ -57,8 +65,23 @@ public class SkillEditTry : TutorialProcess
             if (unitInfo != null)
             {
                 skillEditFinished = unitInfo.set.CheckEdit() == SkillSet.SkillEditError.Perfect;
+                string TutorialProgressLabel =
+                    PreScene.target._focusing.r_id == "1" ? "SkillEditFinished" : "SkillEditFinished2";
                 if (skillEditFinished)
                 {
+                    PlayerAccountInfo.Me.TutorialProgress = TutorialProgressLabel;
+                    PlayFabReadClient.UpdateUserData(
+                        new UpdateUserDataRequest()
+                        {
+                            Data = new Dictionary<string, string>()
+                            {
+                                { "TutorialProgress", TutorialProgressLabel }
+                            }
+                        },
+                        (x) =>
+                        { }
+                    );
+                    
                     _returnLayer.gameObject.SetActive(true);
                     _returnLayer.ForceBackMode(true);
                 }

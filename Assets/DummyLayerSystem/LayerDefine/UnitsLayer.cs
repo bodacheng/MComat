@@ -25,12 +25,24 @@ namespace mainMenu
         
         readonly IDictionary<string, HeroIcon> heroIcons = new Dictionary<string, HeroIcon>();
         string selected_InstanceID;
+
+        public static UnitsLayer Get()
+        {
+            var value = UILayerLoader.Get("UnitsLayer");
+            if (value != null)
+                return value as UnitsLayer;
+            return null;
+        }
         
         public static UnitsLayer Open()
         {
+            var v = Get();
+            if (v != null)
+                return v;
+            
             return UILayerLoader.Load(PreScene.target.T,"UnitsLayer") as UnitsLayer;
         }
-
+        
         public static void Close()
         {
             UILayerLoader.Remove("UnitsLayer");
@@ -163,6 +175,14 @@ namespace mainMenu
             row = 1 + icons.Count / 7;
             MonsterBoxContainer.sizeDelta = new Vector2(MonsterBoxContainer.rect.width, noMagic.GetComponent<RectTransform>().rect.height * row);
             displayUnitIconsAfterAction?.Invoke();
+        }
+
+        public void ForceClickUnit(string unitRId)
+        {
+            foreach (var iconKV in heroIcons)
+            {
+                iconKV.Value.iconButton.interactable = unitRId == iconKV.Value.unitConfig.RECORD_ID;
+            }
         }
     }
 }

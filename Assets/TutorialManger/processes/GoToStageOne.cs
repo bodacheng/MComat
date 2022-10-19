@@ -1,7 +1,6 @@
 ﻿using mainMenu;
 using UnityEngine;
 
-// Tutorial 1 
 public class GoToStageOne : TutorialProcess
 {
     private ReturnLayer _returnLayer;

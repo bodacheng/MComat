@@ -33,5 +33,17 @@ namespace dataAccess
             }
             return null;
         }
+        
+        public static UnitInfo GetByRId(string r_id)
+        {
+            foreach (var kv in Dic)
+            {
+                if (kv.Value.r_id == r_id)
+                {
+                    return kv.Value;
+                }
+            }
+            return null;
+        }
     }
 }

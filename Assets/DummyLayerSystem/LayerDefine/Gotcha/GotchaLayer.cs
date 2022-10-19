@@ -91,4 +91,9 @@ public class GotchaLayer : UILayer
     {
         CloudScript.Remove25Stones();
     }
+
+    public void TutorialMode()
+    {
+        Gotcha1.gameObject.SetActive(false);
+    }
 }

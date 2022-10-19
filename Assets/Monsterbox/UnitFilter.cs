@@ -51,10 +51,8 @@ public class UnitFilter : MonoBehaviour
         {
             for (var i = 0; i < origin_mainMenuIcons.Count; i++)
             {
-                Debug.Log(i);
                 if (origin_mainMenuIcons[i] != null)
                 {
-                    Debug.Log("he "+ origin_mainMenuIcons[i].unitConfig.TYPE);
                     if (origin_mainMenuIcons[i].unitConfig.TYPE == typeDropDown.options[typeDropDown.value].text)
                     {
                         new_mainMenuIcons.Add(origin_mainMenuIcons[i]);

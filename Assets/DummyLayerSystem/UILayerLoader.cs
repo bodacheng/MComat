@@ -72,7 +72,7 @@ namespace DummyLayerSystem
         
         public static UILayer Load(GameObject T, string layerName)
         {
-            if (Get(layerName)!= null)
+            if (Get(layerName) != null)
             {
                 Debug.Log("冲突"+ layerName);
                 return Get(layerName);

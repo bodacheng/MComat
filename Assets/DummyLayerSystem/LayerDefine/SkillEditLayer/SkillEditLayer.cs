@@ -163,7 +163,6 @@ public partial class SkillEditLayer : UILayer
         _Cell.btn.AddListener(buttonFeature);
         _Cell.btn.AddHoldEvent(PressGoToLevelUpPage);
         _Cell.btn.AddDoubleClickEvent(doubleClick);
-        
         _Cell.SetOnDropAction(StoneCell.Install);
     }
     

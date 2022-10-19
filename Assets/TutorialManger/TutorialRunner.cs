@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using PlayFab.ClientModels;
 using FightScene;
 
 /// <summary>
@@ -28,11 +27,10 @@ public class TutorialRunner
     void GenerateStep1Tutorial()
     {
         var goToUnitList = new GoToUnitList();
-        var openSkillEdit = new OpenSkillEdit();
+        var openSkillEdit = new OpenSkillEdit("1");
         var skillEditTry = new SkillEditTry();
         var aLineConfirm = new ALineConfirm();
-
-        var goToTeamEdit = new GoToTeamEdit();
+        
         var clickTeamEditSlotOne = new ClickTeamEditSlotOne();
         var ChooseAdamToSlot1 = new ChooseAdamToSlot1();
         var confirmQuest1 = new ConfirmQuest1();
@@ -53,12 +51,12 @@ public class TutorialRunner
     {
         var goToStages = new GoToStages();
         var goToStageOne = new GoToStageOne();
-        var stageOne = new StageOne();
+        var waitFighting = new WaitFighting();
         
         TutorialProcesses.Clear();
         TutorialProcesses.Add(goToStages);
         TutorialProcesses.Add(goToStageOne);
-        TutorialProcesses.Add(stageOne);
+        TutorialProcesses.Add(waitFighting);
     }
 
     void GenerateStep3Tutorial()
@@ -74,6 +72,28 @@ public class TutorialRunner
         TutorialProcesses.Add(tryGotcha);
     }
 
+    void GenerateStep4Tutorial()
+    {
+        var goToUnitList = new GoToUnitList();
+        var openSkillEdit = new OpenSkillEdit("2");
+        var skillEditTry = new SkillEditTry();
+        
+        TutorialProcesses.Clear();
+        TutorialProcesses.Add(goToUnitList);
+        TutorialProcesses.Add(openSkillEdit);
+        TutorialProcesses.Add(skillEditTry);
+    }
+
+    void GenerateStep5Tutorial()
+    {
+        var teamEdit = new TeamEdit();
+        var goToStageOne = new GoToStageOne();
+        
+        TutorialProcesses.Clear();
+        TutorialProcesses.Add(teamEdit);
+        TutorialProcesses.Add(goToStageOne);// 这个环节已经可有可无。如果玩家在队伍编辑后直接退出游戏重开，将获得自由
+    }
+    
     public void ProcessNagare()
     {
         if (currentProcess != null)
@@ -100,26 +120,6 @@ public class TutorialRunner
     void ChangeProcess(TutorialProcess nextProcess)
     {
         currentProcess?.ProcessEnd();
-        if (currentProcess is SkillEditTry)
-        {
-            PlayerAccountInfo.Me.TutorialProgress = "SkillEditFinished";
-            PlayFabReadClient.UpdateUserData(
-                new UpdateUserDataRequest()
-                {
-                    Data = new Dictionary<string, string>()
-                    {
-                        { "TutorialProgress", "SkillEditFinished" }
-                    }
-                },
-                (x) =>
-                { }
-            );
-        }
-        else if (currentProcess is GoToStageOne)
-        {
-            
-        }
-        
         currentProcess = nextProcess;
         currentProcess?.ProcessEnter();
     }
@@ -139,10 +139,18 @@ public class TutorialRunner
                 Main.StartToMove();
                 break;
             case "StageOneFinished": // 第一关结束
+                GenerateStep3Tutorial();
+                Main.StartToMove();
                 break;
             case "GotchaFinished":
+                GenerateStep4Tutorial();
+                Main.StartToMove();
                 break;
-            case "Finished":
+            case "SkillEditFinished2":
+                GenerateStep5Tutorial();
+                Main.StartToMove();
+                break;
+            case "TeamEditFinished":// 
                 break;
             default:
                 break;

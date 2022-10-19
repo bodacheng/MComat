@@ -1,4 +1,5 @@
-﻿using mainMenu;
+﻿using System;
+using mainMenu;
 using dataAccess;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
@@ -48,6 +49,18 @@ public class TeamEditPage : MSceneProcess
     {
         teamMode = mode as string;
         EnterProcess(teamMode);
+    }
+    
+    public override void ProcessEnd()
+    {
+        UnitsLayer.Close();
+        TeamEditLayer.Close();
+    }
+
+    private Action extraArcadeTeamEditSuccess;
+    public void SetExtraArcadeTeamEditSuccess(Action extraArcadeTeamEditSuccess)
+    {
+        this.extraArcadeTeamEditSuccess = extraArcadeTeamEditSuccess;
     }
 
     void Save()
@@ -102,7 +115,11 @@ public class TeamEditPage : MSceneProcess
                     new List<string>() {
                         "teamSavedFinished"
                     },
-                    ProgressLayer.Close,
+                    ()=>
+                    {
+                        extraArcadeTeamEditSuccess?.Invoke();
+                        ProgressLayer.Close();
+                    },
                     () =>
                     {
                         PopupLayer.ArrangeWarnWindow(PreScene.target.T,"network error");
@@ -111,11 +128,5 @@ public class TeamEditPage : MSceneProcess
                 );
                 break;
         }
-    }
-    
-    public override void ProcessEnd()
-    {
-        UnitsLayer.Close();
-        TeamEditLayer.Close();
     }
 }

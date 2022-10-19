@@ -37,6 +37,12 @@ public class FightingStepLayer : UILayer
     
     public static async UniTask<FightingStepLayer> Open(bool active = true)
     {
+        var returnV = Get();
+        if (returnV != null)
+        {
+            return returnV;
+        }
+        
         var returnValue = UILayerLoader.Load(NetFightScene.target.T.gameObject,"FightingStepLayer") as FightingStepLayer;
         returnValue.gameObject.SetActive(active && NetFightScene.Fight.EventType != FightEventType.Screensaver);
         await returnValue.StartUp((x) =>
@@ -67,6 +73,7 @@ public class FightingStepLayer : UILayer
 
     public void OpenTutorial()
     {
+        pauseButton.gameObject.SetActive(false);
         fightingStepTutorial.Open();
     }
 

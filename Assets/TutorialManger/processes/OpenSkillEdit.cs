@@ -4,10 +4,20 @@ using UnityEngine;
 public class OpenSkillEdit : TutorialProcess
 {
     UnitListPage unitListPage;
+    UnitsLayer _unitsLayer;
     UnitOptionLayer UnitOptionLayer;
+
+    private readonly string _focusUnitRId;
+    
+    public OpenSkillEdit(string unitRId)
+    {
+        _focusUnitRId = unitRId;
+    }
 
     public override void ProcessEnter()
     {
+        var unitInfo = dataAccess.Units.GetByRId(_focusUnitRId);
+        PreScene.target.SetFocusingUnit(unitInfo.id);
         unitListPage = (UnitListPage)ProcessesRunner.Main.GetProcess(MainSceneStep.UnitList);
     }
     
@@ -34,6 +44,12 @@ public class OpenSkillEdit : TutorialProcess
                 HighLightLayer.HighLightRect(PreScene.target.T,UnitOptionLayer._NineForShow.GetComponent<RectTransform>());
                 Loaded = true;
             }
+        }
+
+        if (_unitsLayer == null)
+        {
+            _unitsLayer = UnitsLayer.Get();
+            _unitsLayer.ForceClickUnit(_focusUnitRId);
         }
     }
 }

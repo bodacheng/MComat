@@ -14,8 +14,13 @@ namespace mainMenu
         public RectTransform enemyTeamShowT;
         public Button EditTeamButton; // 根据进入战斗模式决定是否显示
         public Button BeginFight;
+
+        public void ForcePressTeamEdit()
+        {
+            // 强制玩家点击EditTeamButton按钮，待制作
+        }
         
-        static FightPrepareLayer Get()
+        public static FightPrepareLayer Get()
         {
             var l = UILayerLoader.Get("FightPrepareLayer");
             FightPrepareLayer returnValue = null;

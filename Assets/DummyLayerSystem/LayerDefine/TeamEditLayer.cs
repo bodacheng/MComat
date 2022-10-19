@@ -27,9 +27,19 @@ public class TeamEditLayer : UILayer
     
     int focusingPos = -1;
     readonly IDictionary<int, HeroIcon> _teamBtnDic = new Dictionary<int, HeroIcon>();
+    public static TeamEditLayer Get()
+    {
+        var returnValue = UILayerLoader.Get("TeamEditLayer");
+        if (returnValue != null)
+            return returnValue as TeamEditLayer;
+        return null;
+    }
     
     public static TeamEditLayer Open(string teamMode, Action save)
     {
+        if (Get() != null)
+            return Get();
+        
         var returnValue = UILayerLoader.Load(PreScene.target.T,"TeamEditLayer") as TeamEditLayer;
         returnValue.INI(teamMode, save);
         return returnValue;
