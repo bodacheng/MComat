@@ -20,20 +20,10 @@ namespace mainMenu
         [SerializeField] Text focusingCharName;
         [SerializeField] Button SkillShowButton, SkillEditButton;
         
-        public static UnitOptionLayer Get()
-        {
-            var l = UILayerLoader.Get("UnitOptionLayer");
-            UnitOptionLayer returnValue = null;
-            if (l != null)
-            {
-                returnValue = l as UnitOptionLayer;
-            }
-            return returnValue;
-        }
         
         public static UnitOptionLayer Open()
         {
-            var layer = Get();
+            var layer = UILayerLoader.Get<UnitOptionLayer>();
             if (layer != null)
             {
                 return layer;
@@ -44,7 +34,7 @@ namespace mainMenu
         
         public static void Close()
         {
-            UnitOptionLayer l = (UnitOptionLayer)UILayerLoader.Get("UnitOptionLayer");
+            var l = UILayerLoader.Get<UnitOptionLayer>();
             l._connector.Clear();
             UILayerLoader.Remove("UnitOptionLayer");
         }

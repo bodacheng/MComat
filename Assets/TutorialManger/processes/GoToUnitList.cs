@@ -1,11 +1,13 @@
-﻿using mainMenu;
+﻿using DummyLayerSystem;
+using mainMenu;
 
 public class GoToUnitList : TutorialProcess
 {
     private FrontLayer _frontLayer;
-    
+    private UpperInfoBar _upperInfoBar;
     public override void ProcessEnter()
     {
+        
     }
     
     public override void ProcessEnd()
@@ -17,12 +19,19 @@ public class GoToUnitList : TutorialProcess
     {
         if (!Loaded)
         {
-            _frontLayer = FrontLayer.Get();
+            _frontLayer = UILayerLoader.Get<FrontLayer>();
             if (_frontLayer != null)
             {
                 _frontLayer.PlsClickBtn("unit");
                 Loaded = true;
             }
+        }
+
+        if (_upperInfoBar == null)
+        {
+            _upperInfoBar = UILayerLoader.Get<UpperInfoBar>();
+            if (_upperInfoBar != null){}
+                _upperInfoBar.Interactable(false);
         }
     }
     

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DummyLayerSystem;
 using mainMenu;
 using PlayFab.ClientModels;
 
@@ -13,14 +14,14 @@ public class TryGotcha : TutorialProcess
     {
         if (_frontLayer == null)
         {
-            _frontLayer = FrontLayer.Get();
+            _frontLayer = UILayerLoader.Get<FrontLayer>();
             if (_frontLayer != null)
                 _frontLayer.PlsClickBtn("gotcha");
         }
         
         if (_gotchaLayer == null)
         {
-            _gotchaLayer = GotchaLayer.Get();
+            _gotchaLayer = UILayerLoader.Get<GotchaLayer>();
             if (_gotchaLayer != null)
             {
                 _gotchaLayer.TutorialMode();
@@ -46,14 +47,14 @@ public class TryGotcha : TutorialProcess
         
         if (_returnLayer == null)
         {
-            _returnLayer = ReturnLayer.Get();
+            _returnLayer = UILayerLoader.Get<ReturnLayer>();
             if (_returnLayer != null)
                 _returnLayer.gameObject.SetActive(false);
         }
         
         if (_gotchaResultLayer == null)
         {
-            _gotchaResultLayer = GotchaResultLayer.Get();
+            _gotchaResultLayer = UILayerLoader.Get<GotchaResultLayer>();
             if (_gotchaResultLayer != null)
             {
                 _returnLayer.gameObject.SetActive(true);

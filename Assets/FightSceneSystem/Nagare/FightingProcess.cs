@@ -21,7 +21,7 @@ namespace FightScene
         
         public override void ProcessEnter()
         {
-            _layer = FightingStepLayer.Get();
+            _layer = UILayerLoader.Get<FightingStepLayer>();
             if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
             {
                 var TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
@@ -30,8 +30,7 @@ namespace FightScene
             }
             else
             {
-                var fightingStepLayer = FightingStepLayer.Get();
-                fightingStepLayer.gameObject.SetActive(true);
+                _layer.gameObject.SetActive(true);
             }
             if (NetFightScene.Fight.runTutorial)
                 _layer.OpenTutorial();

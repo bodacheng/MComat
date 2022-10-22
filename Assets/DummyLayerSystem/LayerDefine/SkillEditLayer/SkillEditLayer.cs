@@ -22,22 +22,14 @@ public partial class SkillEditLayer : UILayer
     [Header("技能展示器模式切换角色按钮")]
     [SerializeField] Button unitSwitcher;
     
-    public static SkillEditLayer Get()
-    {
-        var l = UILayerLoader.Get("SkillEditLayer");
-        if (l == null) return null;
-        var returnValue = l as SkillEditLayer;
-        returnValue.StonesBox.GenerateCells(9);
-        return returnValue;
-    }
-    
     public static async UniTask<SkillEditLayer> Open(Action<SkillEditLayer> toDo = null)
     {
-        var l = UILayerLoader.Get("SkillEditLayer");
+        var l = UILayerLoader.Get<SkillEditLayer>();
         SkillEditLayer returnValue;
         if (l != null)
         {
-            returnValue = l as SkillEditLayer;
+            returnValue = l;
+            returnValue.StonesBox.GenerateCells(9);
             returnValue.gameObject.SetActive(true);
             return returnValue;
         }
@@ -67,11 +59,10 @@ public partial class SkillEditLayer : UILayer
     
     public static void Close()
     {
-        var layer = UILayerLoader.Get("SkillEditLayer");
+        var layer = UILayerLoader.Get<SkillEditLayer>();
         if (layer != null)
         {
-            SkillEditLayer se = (SkillEditLayer)layer;
-            se.StonesBox._tabEffects.CloseShowingZokuseiTagEffects();
+            layer.StonesBox._tabEffects.CloseShowingZokuseiTagEffects();
         }
         UILayerLoader.Remove("SkillEditLayer");
     }

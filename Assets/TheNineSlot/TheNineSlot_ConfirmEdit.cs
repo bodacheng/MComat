@@ -2,6 +2,7 @@
 using dataAccess;
 using System.Collections.Generic;
 using System;
+using DummyLayerSystem;
 
 namespace mainMenu
 {
@@ -87,7 +88,7 @@ namespace mainMenu
             void Success(IDictionary<string, Tuple<string, string>> ChangedStoneDic)
             {
                 Stones.RefreshLocalStoneParams(ChangedStoneDic);
-                var skillEditLayer = SkillEditLayer.Get();
+                var skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
                 if (skillEditLayer != null)
                 {
                     ReadANineAndTwo(unitInfo);
@@ -109,7 +110,7 @@ namespace mainMenu
             
             void error()
             {
-                var skillEditLayer = SkillEditLayer.Get();
+                var skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
                 if (skillEditLayer != null)
                 {
                     ReadANineAndTwo(unitInfo);

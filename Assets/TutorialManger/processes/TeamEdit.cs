@@ -1,5 +1,6 @@
 ﻿using mainMenu;
 using System.Collections.Generic;
+using DummyLayerSystem;
 using PlayFab.ClientModels;
 
 public class TeamEdit : TutorialProcess
@@ -48,7 +49,7 @@ public class TeamEdit : TutorialProcess
     {
         if (_frontLayer == null)
         {
-            _frontLayer = FrontLayer.Get();
+            _frontLayer = UILayerLoader.Get<FrontLayer>();
             if (_frontLayer != null)
             {
                 _frontLayer.PlsClickBtn("arcade");
@@ -58,7 +59,7 @@ public class TeamEdit : TutorialProcess
         
         if (_fightPrepareLayer == null)
         {
-            _fightPrepareLayer = FightPrepareLayer.Get();
+            _fightPrepareLayer = UILayerLoader.Get<FightPrepareLayer>();
             if (_fightPrepareLayer != null)
             {
                 _fightPrepareLayer.ForcePressTeamEdit();
@@ -66,14 +67,14 @@ public class TeamEdit : TutorialProcess
         }
         
         if (_teamEditLayer == null)
-            _teamEditLayer = TeamEditLayer.Get();
+            _teamEditLayer = UILayerLoader.Get<TeamEditLayer>();
         
         if (_arcadeTop == null)
-            _arcadeTop = ArcadeTop.Get();
+            _arcadeTop = UILayerLoader.Get<ArcadeTop>();
         
         if (!_returnLayer)
         {
-            _returnLayer = ReturnLayer.Get();
+            _returnLayer = UILayerLoader.Get<ReturnLayer>();
             if (_returnLayer != null)
                 _returnLayer.gameObject.SetActive(false);
         }

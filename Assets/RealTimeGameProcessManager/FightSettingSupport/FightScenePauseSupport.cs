@@ -35,20 +35,9 @@ public class FightScenePauseSupport : UILayer
         //OptionsButton.onClick.AddListener(JumpToOptions);
     }
     
-    static FightScenePauseSupport Get()
-    {
-        FightScenePauseSupport returnValue = null;
-        var l = UILayerLoader.Get("FightScenePauseSupport");
-        if (l != null)
-        {
-            returnValue = l as FightScenePauseSupport;
-        }
-        return returnValue;
-    }
-    
     public static FightScenePauseSupport Open(GameObject T)
     {
-        var returnValue = Get();
+        var returnValue = UILayerLoader.Get<FightScenePauseSupport>();
         if (returnValue != null)
         {
             return returnValue;

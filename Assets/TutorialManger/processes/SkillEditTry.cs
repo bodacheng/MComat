@@ -1,5 +1,6 @@
 using mainMenu;
 using System.Collections.Generic;
+using DummyLayerSystem;
 using PlayFab.ClientModels;
 
 public class SkillEditTry : TutorialProcess
@@ -28,11 +29,11 @@ public class SkillEditTry : TutorialProcess
         if (!Loaded)
         {
             if (_returnLayer == null)
-                _returnLayer = ReturnLayer.Get();
+                _returnLayer = UILayerLoader.Get<ReturnLayer>();
 
             if (_skillEditLayer == null)
             {
-                _skillEditLayer = SkillEditLayer.Get();
+                _skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
             }
                 
             

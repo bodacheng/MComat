@@ -1,4 +1,5 @@
-﻿using mainMenu;
+﻿using DummyLayerSystem;
+using mainMenu;
 using UnityEngine;
 
 public class GoToStages : TutorialProcess
@@ -18,7 +19,7 @@ public class GoToStages : TutorialProcess
     {
         if (!Loaded)
         {
-            _frontLayer = FrontLayer.Get();
+            _frontLayer = UILayerLoader.Get<FrontLayer>();
             if (_frontLayer != null)
             {
                 _frontLayer.PlsClickBtn("arcade");

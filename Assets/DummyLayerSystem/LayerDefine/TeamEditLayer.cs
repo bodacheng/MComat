@@ -27,18 +27,12 @@ public class TeamEditLayer : UILayer
     
     int focusingPos = -1;
     readonly IDictionary<int, HeroIcon> _teamBtnDic = new Dictionary<int, HeroIcon>();
-    public static TeamEditLayer Get()
-    {
-        var returnValue = UILayerLoader.Get("TeamEditLayer");
-        if (returnValue != null)
-            return returnValue as TeamEditLayer;
-        return null;
-    }
     
     public static TeamEditLayer Open(string teamMode, Action save)
     {
-        if (Get() != null)
-            return Get();
+        var r = UILayerLoader.Get<TeamEditLayer>();
+        if (r != null)
+            return r;
         
         var returnValue = UILayerLoader.Load(PreScene.target.T,"TeamEditLayer") as TeamEditLayer;
         returnValue.INI(teamMode, save);
@@ -58,7 +52,7 @@ public class TeamEditLayer : UILayer
 
     public void UnitIconClick(string instanceID, string teamMode)
     {
-        var unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+        var unitsLayer = UILayerLoader.Get<UnitsLayer>();
         if (unitsLayer == null) return;
         if (focusingPos != -1)
         {
@@ -146,7 +140,7 @@ public class TeamEditLayer : UILayer
         
         void SetPos(int posNum)
         {
-            var unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+            var unitsLayer = UILayerLoader.Get<UnitsLayer>();
             if (unitsLayer == null) return;
             var selectedInstanceID = unitsLayer.GetSelect();
             if (selectedInstanceID != null)

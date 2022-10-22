@@ -24,20 +24,10 @@ public class FightingStepLayer : UILayer
     [Header("Tutorial")]
     [SerializeField] FightingStepTutorial fightingStepTutorial;
     
-    public static FightingStepLayer Get()
-    {
-        var l = UILayerLoader.Get("FightingStepLayer");
-        FightingStepLayer returnValue = null;
-        if (l != null)
-        {
-            returnValue = l as FightingStepLayer;
-        }
-        return returnValue;
-    }
     
     public static async UniTask<FightingStepLayer> Open(bool active = true)
     {
-        var returnV = Get();
+        var returnV = UILayerLoader.Get<FightingStepLayer>();
         if (returnV != null)
         {
             return returnV;
@@ -61,7 +51,7 @@ public class FightingStepLayer : UILayer
     
     public static void Close()
     {
-        var layer = Get();
+        var layer = UILayerLoader.Get<FightingStepLayer>();
         if (layer == null)
             return;
         layer.InputsManager.FocusUnit(null);

@@ -20,20 +20,9 @@ namespace mainMenu
             // 强制玩家点击EditTeamButton按钮，待制作
         }
         
-        public static FightPrepareLayer Get()
-        {
-            var l = UILayerLoader.Get("FightPrepareLayer");
-            FightPrepareLayer returnValue = null;
-            if (l != null)
-            {
-                returnValue = l as FightPrepareLayer;
-            }
-            return returnValue;
-        }
-        
         public static FightPrepareLayer Open()
         {
-            var returnValue = Get();
+            var returnValue = UILayerLoader.Get<FightPrepareLayer>();
             if (returnValue != null)
             {
                 return returnValue;

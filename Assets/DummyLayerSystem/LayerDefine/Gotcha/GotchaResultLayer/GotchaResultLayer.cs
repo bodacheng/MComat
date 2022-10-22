@@ -16,19 +16,10 @@ public partial class GotchaResultLayer : UILayer
     Coroutine starFallAnimOneProcess;
     #endregion
     
-    public static GotchaResultLayer Get()
-    {
-        var l = UILayerLoader.Get("GotchaResultLayer");
-        if (l != null)
-        {
-            return l as GotchaResultLayer;
-        }
-        return null;
-    }
     
     public static GotchaResultLayer Open()
     {
-        var l = Get();
+        var l = UILayerLoader.Get<GotchaResultLayer>();
         if (l != null)
         {
             return l;
@@ -45,11 +36,10 @@ public partial class GotchaResultLayer : UILayer
 
     public static void Close()
     {
-        var layer = UILayerLoader.Get("GotchaResultLayer");
+        var layer = UILayerLoader.Get<GotchaResultLayer>();
         if (layer != null)
         {
-            GotchaResultLayer gLayer = (GotchaResultLayer)layer;
-            gLayer.Reset();
+            layer.Reset();
         }
         UILayerLoader.Remove("GotchaResultLayer");
     }

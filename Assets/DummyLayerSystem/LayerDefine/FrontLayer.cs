@@ -19,20 +19,9 @@ public class FrontLayer : UILayer
     
     public DedicatedCameraConnector _connector;
     
-    public static FrontLayer Get()
-    {
-        var l = UILayerLoader.Get("FrontLayer");
-        FrontLayer returnValue = null;
-        if (l != null)
-        {
-            returnValue = l as FrontLayer;
-        }
-        return returnValue;
-    }
-    
     public static FrontLayer Open(PreScene pre)
     {
-        var returnValue = Get();
+        var returnValue = UILayerLoader.Get<FrontLayer>();
         if (returnValue != null)
         {
             return returnValue;

@@ -132,7 +132,7 @@ namespace mainMenu
         {
             void MonsterIconButton(string instanceID)
             {
-                var unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+                var unitsLayer = UILayerLoader.Get<UnitsLayer>();
                 unitsLayer.Select(instanceID);
                 UnitIconBtn(instanceID);
             }
@@ -141,14 +141,14 @@ namespace mainMenu
                 MonsterIconButton(instanceID);
             }
             
-            var unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+            var unitsLayer = UILayerLoader.Get<UnitsLayer>();
             unitsLayer.SetUnitsIconOnClick(Trigger);
         }
         #endregion
         
         void UnitIconBtn(string instanceID)
         {
-            var unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+            var unitsLayer = UILayerLoader.Get<UnitsLayer>();
             if (_focusingPosNum == -1)
             {
                 unitsLayer.Select(instanceID);
@@ -293,7 +293,7 @@ namespace mainMenu
         {
             _focusingTeam = team;
             _focusingPosNum = pos;
-            var unitsLayer = UILayerLoader.Get("UnitsLayer") as UnitsLayer;
+            var unitsLayer = UILayerLoader.Get<UnitsLayer>();
             var unitsBoxSelect = unitsLayer.GetSelect();
             
             if (unitsBoxSelect != null)

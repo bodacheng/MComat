@@ -12,9 +12,20 @@ public class UpperInfoBar : UILayer
     [SerializeField] Text accountDiamondCoin;
     [SerializeField] Button diamondPlus;
     [SerializeField] Text accountIntelliCoin;
+
+    public void Interactable(bool on)
+    {
+        SettingBtn.interactable = on;
+        MailBtn.interactable = on;
+        diamondPlus.interactable = on;
+    }
     
     public static UpperInfoBar Open(Action openSetting, Action OpenMail)
     {
+        var current = UILayerLoader.Get<UpperInfoBar>();
+        if (current != null)
+            return current;
+        
         var returnValue = UILayerLoader.Load(PreScene.target.T,"UpperInfoBar") as UpperInfoBar;
         returnValue.Refresh();
         returnValue.SettingBtn.onClick.AddListener(openSetting.Invoke);
@@ -33,7 +44,7 @@ public class UpperInfoBar : UILayer
         UILayerLoader.Remove("UpperInfoBar");
     }
 
-    public void Refresh()
+    void Refresh()
     {
         UserID.text = PlayerAccountInfo.Me.PlayFabId; //SystemInfo.deviceUniqueIdentifier;
         accountDiamondCoin.text = Currencies.DiamondCount.ToString();

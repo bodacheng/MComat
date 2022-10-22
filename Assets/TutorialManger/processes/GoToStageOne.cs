@@ -1,4 +1,5 @@
-﻿using mainMenu;
+﻿using DummyLayerSystem;
+using mainMenu;
 using UnityEngine;
 
 public class GoToStageOne : TutorialProcess
@@ -27,10 +28,10 @@ public class GoToStageOne : TutorialProcess
         if (!Loaded)
         {
             if (_returnLayer == null)
-                _returnLayer = ReturnLayer.Get();
+                _returnLayer = UILayerLoader.Get<ReturnLayer>();
             
             if (_arcadeTop == null)
-                _arcadeTop = ArcadeTop.Get();
+                _arcadeTop = UILayerLoader.Get<ArcadeTop>();
             
             if (_returnLayer != null && _arcadeTop != null)
             {
@@ -41,7 +42,7 @@ public class GoToStageOne : TutorialProcess
 
         if (fightingLayer == null)
         {
-            fightingLayer = FightingStepLayer.Get();
+            fightingLayer = UILayerLoader.Get<FightingStepLayer>();
         }
     }
 }

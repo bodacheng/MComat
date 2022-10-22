@@ -1,4 +1,5 @@
-﻿using mainMenu;
+﻿using DummyLayerSystem;
+using mainMenu;
 using UnityEngine;
 
 public class OpenSkillEdit : TutorialProcess
@@ -36,7 +37,7 @@ public class OpenSkillEdit : TutorialProcess
         if (!Loaded)
         {
             if (UnitOptionLayer == null)
-                UnitOptionLayer = UnitOptionLayer.Get();
+                UnitOptionLayer = UILayerLoader.Get<UnitOptionLayer>();
             
             if (unitListPage.GetLoaded() && UnitOptionLayer != null)
             {
@@ -48,7 +49,7 @@ public class OpenSkillEdit : TutorialProcess
 
         if (_unitsLayer == null)
         {
-            _unitsLayer = UnitsLayer.Get();
+            _unitsLayer = UILayerLoader.Get<UnitsLayer>();
             _unitsLayer.ForceClickUnit(_focusUnitRId);
         }
     }

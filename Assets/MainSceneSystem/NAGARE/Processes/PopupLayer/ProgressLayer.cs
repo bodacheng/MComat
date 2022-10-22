@@ -14,20 +14,10 @@ public class ProgressLayer : UILayer
     [SerializeField] TextMeshProUGUI info;
     [SerializeField] Image bigCurtain;
     
-    static ProgressLayer Get()
-    {
-        ProgressLayer returnValue = null;
-        var l = UILayerLoader.Get("ProgressLayer");
-        if (l != null)
-        {
-            returnValue = l as ProgressLayer;
-        }
-        return returnValue;
-    }
     
     public static ProgressLayer Open(GameObject T)
     {
-        var returnValue = Get();
+        var returnValue = UILayerLoader.Get<ProgressLayer>();
         if (returnValue != null)
         {
             return returnValue;
@@ -53,7 +43,7 @@ public class ProgressLayer : UILayer
 
     public static void LightUp(float duration)
     {
-        var popupLayer = Get();
+        var popupLayer = UILayerLoader.Get<ProgressLayer>();
         if (popupLayer != null)
         {
             popupLayer.bigCurtain.DOColor(new Color(0,0,0, 0), duration).OnComplete(() =>
@@ -69,7 +59,7 @@ public class ProgressLayer : UILayer
     // 带进度条的正在读取画面。不会主动打开新的popuplayer
     public static void LoadingPercent(string description, float progress, bool tween = true)
     {
-        var layer = Get();
+        var layer = UILayerLoader.Get<ProgressLayer>();
         if (layer == null)
         {
             return;

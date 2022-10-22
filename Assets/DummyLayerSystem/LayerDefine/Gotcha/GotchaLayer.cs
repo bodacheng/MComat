@@ -21,20 +21,9 @@ public class GotchaLayer : UILayer
         extraSuccessAction = _extraSuccessAction;
     }
     
-    public static GotchaLayer Get()
-    {
-        var l = UILayerLoader.Get("GotchaLayer");
-        GotchaLayer returnValue = null;
-        if (l != null)
-        {
-            returnValue = l as GotchaLayer;
-        }
-        return returnValue;
-    }
-    
     public static GotchaLayer Open()
     {
-        var layer = Get();
+        var layer = UILayerLoader.Get<GotchaLayer>();
         if (layer != null)
             return layer;
         

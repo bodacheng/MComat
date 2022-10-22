@@ -21,7 +21,7 @@ public class HighLightLayer : UILayer
     static HighLightLayer Get()
     {
         HighLightLayer returnValue = null;
-        var l = UILayerLoader.Get("HighLightLayer");
+        var l = UILayerLoader.Get<HighLightLayer>();
         if (l != null)
         {
             returnValue = l as HighLightLayer;

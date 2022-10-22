@@ -172,20 +172,10 @@ public class SettingLayer : UILayer
             "当前账户没有与当前设备进行绑定。点击下方绑定按钮可以绑定。";
     }
     
-    static SettingLayer Get()
-    {
-        var l = UILayerLoader.Get("SettingLayer");
-        SettingLayer returnValue = null;
-        if (l != null)
-        {
-            returnValue = l as SettingLayer;
-        }
-        return returnValue;
-    }
     
     public static SettingLayer Open()
     {
-        var returnValue = Get();
+        var returnValue = UILayerLoader.Get<SettingLayer>();
         if (returnValue != null)
         {
             return returnValue;

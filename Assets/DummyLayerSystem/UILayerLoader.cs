@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -65,17 +66,28 @@ namespace DummyLayerSystem
             }
         }
     
-        public static UILayer Get(string key)
+        static UILayer _Get(string key)
         {
             return Queues.Find(x => x.Index == key);
         }
         
+        public static T Get<T>()
+        {
+            var target = Queues.Find(x => x.Index == typeof(T).Name);
+            if (target != null)
+                return (T) Convert.ChangeType(target, typeof(T));
+            else
+            {
+                return default;
+            }
+        }
+        
         public static UILayer Load(GameObject T, string layerName)
         {
-            if (Get(layerName) != null)
+            if (_Get(layerName) != null)
             {
                 Debug.Log("冲突"+ layerName);
-                return Get(layerName);
+                return _Get(layerName);
             }
             
             var path = paths[layerName];

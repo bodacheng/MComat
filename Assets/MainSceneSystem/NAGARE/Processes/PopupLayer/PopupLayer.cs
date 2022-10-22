@@ -6,20 +6,9 @@ public partial class PopupLayer : UILayer
 {
     [SerializeField] Image bigCurtain;
     
-    static PopupLayer Get()
-    {
-        PopupLayer returnValue = null;
-        var l = UILayerLoader.Get("PopupLayer");
-        if (l != null)
-        {
-            returnValue = l as PopupLayer;
-        }
-        return returnValue;
-    }
-    
     public static PopupLayer Open(GameObject T)
     {
-        var returnValue = Get();
+        var returnValue = UILayerLoader.Get<PopupLayer>();
         if (returnValue != null)
         {
             return returnValue;

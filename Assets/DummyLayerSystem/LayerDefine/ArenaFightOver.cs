@@ -42,20 +42,9 @@ public class ArenaFightOver : UILayer
         returnBtn.onClick.AddListener(NetFightScene.target.ReturnToFront);
     }
     
-    static ArenaFightOver Get()
-    {
-        var l = UILayerLoader.Get("ArenaFightOver");
-        ArenaFightOver returnValue = null;
-        if (l != null)
-        {
-            returnValue = l as ArenaFightOver;
-        }
-        return returnValue;
-    }
-    
     public static ArenaFightOver Open()
     {
-        var returnValue = Get();
+        var returnValue = UILayerLoader.Get<ArenaFightOver>();
         if (returnValue != null)
         {
             return returnValue;

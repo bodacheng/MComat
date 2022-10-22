@@ -13,20 +13,10 @@ public class ReturnLayer : UILayer
     static readonly UnityEvent unityEvent = new ();
     public static readonly List<UnityAction> ReturnMissionList = new ();
     
-    public static ReturnLayer Get()
-    {
-        var l = UILayerLoader.Get("ReturnLayer");
-        ReturnLayer returnValue = null;
-        if (l != null)
-        {
-            returnValue = l as ReturnLayer;
-        }
-        return returnValue;
-    }
     
     public static ReturnLayer Open()
     {
-        ReturnLayer returnValue = Get();
+        ReturnLayer returnValue = UILayerLoader.Get<ReturnLayer>();
         if (returnValue != null)
         {
             return returnValue;

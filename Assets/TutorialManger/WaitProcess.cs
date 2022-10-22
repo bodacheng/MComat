@@ -5,11 +5,11 @@ public class WaitProcess : TutorialProcess
 {
     public delegate bool WaitOverDelegate();
 
-    WaitOverDelegate waitForThis;
+    readonly WaitOverDelegate _waitForThis;
     
     public WaitProcess(WaitOverDelegate waitOverDelegate)
     {
-        waitForThis = waitOverDelegate;
+        _waitForThis = waitOverDelegate;
     }
         
     public override void ProcessEnd()
@@ -20,6 +20,6 @@ public class WaitProcess : TutorialProcess
     
     public override bool CanEnterOtherProcess()
     {
-        return waitForThis();
+        return _waitForThis();
     }
 }

@@ -41,15 +41,12 @@ namespace mainMenu
         
         public static SkillShowLayer Open()
         {
-            UILayer l = UILayerLoader.Get("SkillShowLayer");
-            SkillShowLayer returnValue;
-            if (l != null)
+            var returnValue = UILayerLoader.Get<SkillShowLayer>();
+            if (returnValue != null)
             {
-                returnValue = l as SkillShowLayer;
                 return returnValue;
             }
-            l = UILayerLoader.Load(PreScene.target.T,"SkillShowLayer") as SkillShowLayer;
-            returnValue = l as SkillShowLayer;
+            returnValue = UILayerLoader.Load(PreScene.target.T,"SkillShowLayer") as SkillShowLayer;
             return returnValue;
         }
         

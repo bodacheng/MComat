@@ -32,23 +32,12 @@ public class StoneListLayer : UILayer
         }
     }
     
-    public static StoneListLayer Get()
-    {
-        UILayer l = UILayerLoader.Get("StoneListLayer");
-        StoneListLayer returnValue = null;
-        if (l != null)
-        {
-            returnValue = l as StoneListLayer;
-            returnValue.box.GenerateCells();
-        }
-        return returnValue;
-    }
-    
     public static StoneListLayer Open()
     {
-        StoneListLayer returnValue = Get();
+        StoneListLayer returnValue = UILayerLoader.Get<StoneListLayer>();
         if (returnValue != null)
         {
+            returnValue.box.GenerateCells();
             return returnValue;
         }
         returnValue = UILayerLoader.Load(PreScene.target.T,"StoneListLayer") as StoneListLayer;
@@ -65,7 +54,7 @@ public class StoneListLayer : UILayer
 
     public static void Close()
     {
-        var returnValue = Get();
+        var returnValue = UILayerLoader.Get<StoneListLayer>();
         if (returnValue != null)
         {
             returnValue._skillStoneDetail.Clear();

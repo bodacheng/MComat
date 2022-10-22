@@ -1,9 +1,5 @@
 ﻿using System.Collections.Generic;
-using FightScene;
 
-/// <summary>
-/// 
-/// </summary>
 public class TutorialRunner
 {
     static TutorialRunner instance;
@@ -29,17 +25,6 @@ public class TutorialRunner
         var goToUnitList = new GoToUnitList();
         var openSkillEdit = new OpenSkillEdit("1");
         var skillEditTry = new SkillEditTry();
-        var aLineConfirm = new ALineConfirm();
-        
-        var clickTeamEditSlotOne = new ClickTeamEditSlotOne();
-        var ChooseAdamToSlot1 = new ChooseAdamToSlot1();
-        var confirmQuest1 = new ConfirmQuest1();
-        
-        bool StartedFighting()
-        {
-            return FSceneProcessesRunner.Main.currentProcess.Step == SceneStep.Fighting; 
-        }
-        var waitForStage1Loaded = new WaitProcess(StartedFighting);
         
         TutorialProcesses.Clear();
         TutorialProcesses.Add(goToUnitList);
@@ -51,7 +36,13 @@ public class TutorialRunner
     {
         var goToStages = new GoToStages();
         var goToStageOne = new GoToStageOne();
-        var waitFighting = new WaitFighting();
+        
+        bool StageOneFinished()
+        {
+            return PlayerAccountInfo.Me.TutorialProgress == "StageOneFinished";
+        }
+        
+        var waitFighting = new WaitProcess(StageOneFinished);
         
         TutorialProcesses.Clear();
         TutorialProcesses.Add(goToStages);

@@ -23,16 +23,9 @@ public class ArcadeTop : UILayer
 
     private List<int> currentStages;
     
-    public static ArcadeTop Get()
-    {
-        var returnValue = UILayerLoader.Get("ArcadeTop");
-        if (returnValue == null) return null;
-        return returnValue as ArcadeTop;
-    }
-    
     public static ArcadeTop Open()
     {
-        var returnValue = Get();
+        var returnValue = UILayerLoader.Get<ArcadeTop>();
         if (returnValue != null)
             return returnValue;
         
