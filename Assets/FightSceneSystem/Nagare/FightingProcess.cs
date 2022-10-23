@@ -24,7 +24,7 @@ namespace FightScene
             _layer = UILayerLoader.Get<FightingStepLayer>();
             if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
             {
-                var TitleScreenLayer = UILayerLoader.Load(NetFightScene.target.T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
+                var TitleScreenLayer = UILayerLoader.Load<TitleScreenLayer>();
                 TitleScreenLayer.Initialise();
                 HighLightLayer.LightUp(1f);
             }
@@ -41,7 +41,7 @@ namespace FightScene
         {
             if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
             {
-                UILayerLoader.Remove("TitleScreenLayer");
+                UILayerLoader.Remove<TitleScreenLayer>();
             }
             else
             {

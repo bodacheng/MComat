@@ -14,8 +14,6 @@ public class WaitProcess : TutorialProcess
         
     public override void ProcessEnd()
     {
-        RTFightManager.target.Messages.gameObject.SetActive(true);
-        RTFightManager.target.Messages.text = "hello kitty";
     }
     
     public override bool CanEnterOtherProcess()

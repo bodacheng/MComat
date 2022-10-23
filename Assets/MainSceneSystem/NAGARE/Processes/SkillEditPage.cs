@@ -2,6 +2,7 @@
 using mainMenu;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using DummyLayerSystem;
 
 public class SkillEditPage : MSceneProcess
 {
@@ -21,11 +22,13 @@ public class SkillEditPage : MSceneProcess
             PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
             return;
         }
-        
-        await SkillEditLayer.Open((x) =>
+
+        var layer = UILayerLoader.Load<SkillEditLayer>();
+        await layer.Setup((x) =>
         {
             x._connector.ShowMyModel(PreScene.target._focusing != null ? PreScene.target._focusing.id : null);
         });
+        
         ProgressLayer.Close();
         SetLoaded(true);
     }
@@ -51,6 +54,6 @@ public class SkillEditPage : MSceneProcess
     {
         HurtObjectManager.Clear();
         EffectsManager.Clear();
-        SkillEditLayer.Close();
+        UILayerLoader.Remove<SkillEditLayer>();
     }
 }

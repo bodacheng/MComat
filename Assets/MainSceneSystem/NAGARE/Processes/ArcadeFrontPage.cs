@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using DummyLayerSystem;
 using mainMenu;
 
 public class ArcadeFrontPage : MSceneProcess
@@ -12,7 +13,8 @@ public class ArcadeFrontPage : MSceneProcess
     ArcadeTop arcadeTop;
     public override void ProcessEnter()
     {
-        arcadeTop = ArcadeTop.Open();
+        arcadeTop = UILayerLoader.Load<ArcadeTop>();
+        arcadeTop.Setup();
         Load().Forget();
     }
 
@@ -25,6 +27,6 @@ public class ArcadeFrontPage : MSceneProcess
     
     public override void ProcessEnd()
     {
-        ArcadeTop.Close();
+        UILayerLoader.Remove<ArcadeTop>();
     }
 }

@@ -1,4 +1,5 @@
 using dataAccess;
+using DummyLayerSystem;
 using mainMenu;
 using UnityEngine;
 
@@ -12,8 +13,9 @@ public partial class SSLevelUpManager : MonoBehaviour
         focusingSSD.RefreshInfo(targetInstanceID);
         var renderModel = Stones.GetRenderModel(targetInstanceID);
         renderModel._using = true;
-        
-        var layer = StoneListLayer.Open();
+
+        var layer = UILayerLoader.Load<StoneListLayer>();
+        layer.Setup();
         layer.box.AddFeatureToCells(layer.CellFeature_MAdd);
         RefreshSkillLevelUpModule();
         Stones.HighLight(renderModel._SkillConfig.RECORD_ID);
@@ -22,8 +24,9 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     void CloseLevelUpPage()
     {
-        var layer = StoneListLayer.Open();
-        SKStoneItem renderModel = Stones.GetRenderModel(targetInstanceID);
+        var layer = UILayerLoader.Load<StoneListLayer>();
+        layer.Setup();
+        var renderModel = Stones.GetRenderModel(targetInstanceID);
         renderModel._using = false;
         SKStoneItem.SelectedRender(renderModel, SkillStonesBox._Selected);
         focusingSSD.RefreshInfo(renderModel.instanceId);

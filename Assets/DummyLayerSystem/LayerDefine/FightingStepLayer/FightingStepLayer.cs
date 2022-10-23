@@ -24,18 +24,10 @@ public class FightingStepLayer : UILayer
     [Header("Tutorial")]
     [SerializeField] FightingStepTutorial fightingStepTutorial;
     
-    
-    public static async UniTask<FightingStepLayer> Open(bool active = true)
+    public async UniTask Setup(bool active = true)
     {
-        var returnV = UILayerLoader.Get<FightingStepLayer>();
-        if (returnV != null)
-        {
-            return returnV;
-        }
-        
-        var returnValue = UILayerLoader.Load(NetFightScene.target.T.gameObject,"FightingStepLayer") as FightingStepLayer;
-        returnValue.gameObject.SetActive(active && NetFightScene.Fight.EventType != FightEventType.Screensaver);
-        await returnValue.StartUp((x) =>
+        gameObject.SetActive(active && NetFightScene.Fight.EventType != FightEventType.Screensaver);
+        await StartUp((x) =>
             {
                 RTFightManager.target.team1.Auto = x;
             },
@@ -43,10 +35,8 @@ public class FightingStepLayer : UILayer
             {
                 RTFightManager.target.team2.Auto = x;
             },
-            ()=> FightScenePauseSupport.Open(NetFightScene.target.T.gameObject)
-        );
-        
-        return returnValue;
+            ()=> UILayerLoader.Load<FightScenePauseSupport>()
+            );
     }
     
     public static void Close()
@@ -58,7 +48,7 @@ public class FightingStepLayer : UILayer
         layer.InputsManager.Clear();
         layer.team1UI.Clear();
         layer.team2UI.Clear();
-        UILayerLoader.Remove("FightingStepLayer");
+        UILayerLoader.Remove<FightingStepLayer>();
     }
 
     public void OpenTutorial()

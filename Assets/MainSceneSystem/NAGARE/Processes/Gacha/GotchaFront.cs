@@ -1,4 +1,5 @@
-﻿using mainMenu;
+﻿using DummyLayerSystem;
+using mainMenu;
 
 public class GotchaFront : MSceneProcess
 {
@@ -20,13 +21,14 @@ public class GotchaFront : MSceneProcess
             return;
         }
         BackGroundPS.target.Off();
-        layer = GotchaLayer.Open();
+        layer = UILayerLoader.Load<GotchaLayer>();
+        layer.Setup();
         SetLoaded(true);
     }
     
     public override void ProcessEnd()
     {
-        GotchaLayer.Close();
+        UILayerLoader.Remove<GotchaLayer>();
         StarsFall.target.gameObject.SetActive(false);
     }
 }

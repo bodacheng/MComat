@@ -1,4 +1,5 @@
-﻿using mainMenu;
+﻿using DummyLayerSystem;
+using mainMenu;
 
 // 迎合PlayFab的机制我们是把邮件作为“item”去看待
 
@@ -14,12 +15,13 @@ public class MailBoxProcess : MSceneProcess
     
     public override void ProcessEnter()
     {
-        mailBox = MailBox.Open();
+        mailBox = UILayerLoader.Load<MailBox>();
+        mailBox.Setup();
         SetLoaded(true);
     }
     
     public override void ProcessEnd()
     {
-        MailBox.Close();
+        UILayerLoader.Remove<MailBox>();
     }
 }

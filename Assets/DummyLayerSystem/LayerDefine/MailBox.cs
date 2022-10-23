@@ -15,26 +15,19 @@ public class MailBox : UILayer
     
     private readonly List<MailListView> _currentMailListViews = new List<MailListView>();
     
-    public static MailBox Open()
+    public void Setup()
     {
-        var returnValue = UILayerLoader.Load(PreScene.target.T,"MailBox") as MailBox;
-        returnValue.GenerateMailModels();
-        returnValue.DeleteAllRead.onClick.AddListener(() =>
+        GenerateMailModels();
+        DeleteAllRead.onClick.AddListener(() =>
         {
             PlayFabReadClient.DeleteAllLocalMails();
-            returnValue.GenerateMailModels();
+            GenerateMailModels();
         });
         
-        returnValue.ReadAll.onClick.AddListener(() =>
+        ReadAll.onClick.AddListener(() =>
         {
             PlayFabReadClient.claimAllPresentMails(PlayFabReadClient.SaveReadMailAsJson);
         });
-        return returnValue;
-    }
-    
-    public static void Close()
-    {
-        UILayerLoader.Remove("MailBox");
     }
     
     /// <summary>

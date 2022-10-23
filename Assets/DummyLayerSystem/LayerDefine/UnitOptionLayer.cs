@@ -21,24 +21,11 @@ namespace mainMenu
         [SerializeField] Button SkillShowButton, SkillEditButton;
         
         
-        public static UnitOptionLayer Open()
+        public override void OnDestroy()
         {
-            var layer = UILayerLoader.Get<UnitOptionLayer>();
-            if (layer != null)
-            {
-                return layer;
-            }
-            layer = UILayerLoader.Load(PreScene.target.T,"UnitOptionLayer") as UnitOptionLayer;
-            return layer;
+            _connector.Clear();
         }
-        
-        public static void Close()
-        {
-            var l = UILayerLoader.Get<UnitOptionLayer>();
-            l._connector.Clear();
-            UILayerLoader.Remove("UnitOptionLayer");
-        }
-        
+
         public void RefreshMemberDetailPageByFocusingUnit()
         {
             if (PreScene.target._focusing == null || PreScene.target._focusing.id == null || PreScene.target._focusing.r_id == null)

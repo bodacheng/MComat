@@ -1,6 +1,7 @@
 ﻿using FightScene;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using DummyLayerSystem;
 using UniRx;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ public class PreparingProcess : FSceneProcess
         CameraManager._camera.transform.position = CameraManager._StartPosRef.transform.position;
         CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
         Sensor.ClearFightingMember();
-        ProgressLayer.Open(NetFightScene.target.T.gameObject);
+        UILayerLoader.Load<ProgressLayer>();
         ProgressLayer.LoadingPercent("loading Essentials", 0.1f);
         
         var tasks = new List<UniTask>
@@ -83,7 +84,8 @@ public class PreparingProcess : FSceneProcess
         
         RTFightManager.target.SetGame(NetFightScene.Fight);
         ProgressLayer.LoadingPercent("loading UI", 1f);
-        fightingStepLayer = await FightingStepLayer.Open(false);
+        fightingStepLayer = UILayerLoader.Load<FightingStepLayer>();
+        await fightingStepLayer.Setup(false);
         
         switch (RTFightManager.target.team1.TeamMode)
         {
@@ -122,7 +124,7 @@ public class PreparingProcess : FSceneProcess
     
     public override void ProcessEnter()
     {
-        HighLightLayer.DarkOff(NetFightScene.target.T.gameObject, 1, 0);
+        HighLightLayer.DarkOff(1, 0);
         EnterProcess().Forget();
     }
     

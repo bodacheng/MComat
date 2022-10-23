@@ -23,22 +23,11 @@ public class ArcadeTop : UILayer
 
     private List<int> currentStages;
     
-    public static ArcadeTop Open()
+    public void Setup()
     {
-        var returnValue = UILayerLoader.Get<ArcadeTop>();
-        if (returnValue != null)
-            return returnValue;
-        
-        returnValue = UILayerLoader.Load(PreScene.target.T,"ArcadeTop") as ArcadeTop;
-        returnValue.nextChapter.onClick.AddListener(returnValue.ShowNextStages);
-        returnValue.lastChapter.onClick.AddListener(returnValue.ShowLastStages);
-        returnValue.JumpToNewStage.onClick.AddListener(returnValue.ToNew);
-        return returnValue;
-    }
-    
-    public static void Close()
-    {
-        UILayerLoader.Remove("ArcadeTop");
+        nextChapter.onClick.AddListener(ShowNextStages);
+        lastChapter.onClick.AddListener(ShowLastStages);
+        JumpToNewStage.onClick.AddListener(ToNew);
     }
     
     void IconButtonFeature(HeroIcon heroIcon)

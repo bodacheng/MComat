@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using DummyLayerSystem;
 using UnityEngine;
 using mainMenu;
 using UniRx;
@@ -17,8 +18,8 @@ public class UnitListPage : MSceneProcess
 
     public override void ProcessEnter()
     {
-        layer = UnitsLayer.Open();
-        unitOptionLayer = UnitOptionLayer.Open();
+        layer = UILayerLoader.Load<UnitsLayer>();
+        unitOptionLayer = UILayerLoader.Load<UnitOptionLayer>();
         layer.SetDisplayUnitIconsAfterAction(
             () =>
             {
@@ -39,7 +40,7 @@ public class UnitListPage : MSceneProcess
     
     public override void ProcessEnd()
     {
-        UnitOptionLayer.Close();
-        UnitsLayer.Close();
+        UILayerLoader.Remove<UnitOptionLayer>();
+        UILayerLoader.Remove<UnitsLayer>();
     }
 }

@@ -3,6 +3,7 @@ using mainMenu;
 using dataAccess;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using DummyLayerSystem;
 
 public class TeamEditPage : MSceneProcess
 {
@@ -26,8 +27,10 @@ public class TeamEditPage : MSceneProcess
     
     void EnterProcess(string teamMode)
     {
-        var teamEditLayer = TeamEditLayer.Open(teamMode, Save);
-        var unitsLayer = UnitsLayer.Open();
+        var teamEditLayer = UILayerLoader.Load<TeamEditLayer>();
+        teamEditLayer.INI(teamMode, Save);
+        
+        var unitsLayer = UILayerLoader.Load<UnitsLayer>();
         unitsLayer.SetDisplayUnitIconsAfterAction(() =>
         {
             unitsLayer.SetUnitsIconOnClick((x) => teamEditLayer.UnitIconClick(x, this.teamMode));
@@ -53,8 +56,8 @@ public class TeamEditPage : MSceneProcess
     
     public override void ProcessEnd()
     {
-        UnitsLayer.Close();
-        TeamEditLayer.Close();
+        UILayerLoader.Remove<UnitsLayer>();
+        UILayerLoader.Remove<TeamEditLayer>();
     }
 
     private Action extraArcadeTeamEditSuccess;

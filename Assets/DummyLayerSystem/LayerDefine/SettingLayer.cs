@@ -104,7 +104,7 @@ public class SettingLayer : UILayer
         selectedFrame.gameObject.SetActive(true);
     }
     
-    void Initialise()
+    public void Initialise()
     {
         CurrentEmail.text = PlayerAccountInfo.Me.PlayFabUserName;
         
@@ -172,23 +172,10 @@ public class SettingLayer : UILayer
             "当前账户没有与当前设备进行绑定。点击下方绑定按钮可以绑定。";
     }
     
-    
-    public static SettingLayer Open()
-    {
-        var returnValue = UILayerLoader.Get<SettingLayer>();
-        if (returnValue != null)
-        {
-            return returnValue;
-        }
-        returnValue = UILayerLoader.Load(PreScene.target.T,"SettingLayer") as SettingLayer;
-        returnValue.Initialise();
-        return returnValue;
-    }
-    
     public static void Close()
     {
         AppSetting.Save();
-        UILayerLoader.Remove("SettingLayer");
+        UILayerLoader.Remove<SettingLayer>();
     }
     
     void ResetSliders()

@@ -37,20 +37,9 @@ public class ArenaFightOver : UILayer
         AgainBtn.onClick.AddListener(() =>
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
-            UILayerLoader.Remove("ArcadeFightResult");
+            UILayerLoader.Remove<ArenaFightOver>();
         });
         returnBtn.onClick.AddListener(NetFightScene.target.ReturnToFront);
-    }
-    
-    public static ArenaFightOver Open()
-    {
-        var returnValue = UILayerLoader.Get<ArenaFightOver>();
-        if (returnValue != null)
-        {
-            return returnValue;
-        }
-        returnValue = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArenaFightOver") as ArenaFightOver;
-        return returnValue;
     }
     
     public void Step1Anim()

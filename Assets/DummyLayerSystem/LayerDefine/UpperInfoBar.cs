@@ -20,30 +20,17 @@ public class UpperInfoBar : UILayer
         diamondPlus.interactable = on;
     }
     
-    public static UpperInfoBar Open(Action openSetting, Action OpenMail)
+    public void Setup(Action openSetting, Action OpenMail)
     {
-        var current = UILayerLoader.Get<UpperInfoBar>();
-        if (current != null)
-            return current;
-        
-        var returnValue = UILayerLoader.Load(PreScene.target.T,"UpperInfoBar") as UpperInfoBar;
-        returnValue.Refresh();
-        returnValue.SettingBtn.onClick.AddListener(openSetting.Invoke);
-        returnValue.MailBtn.onClick.AddListener(OpenMail.Invoke);
-        
-        returnValue.diamondPlus.onClick.AddListener(() =>
+        Refresh();
+        SettingBtn.onClick.AddListener(openSetting.Invoke);
+        MailBtn.onClick.AddListener(OpenMail.Invoke);
+        diamondPlus.onClick.AddListener(() =>
         {
             PreScene.target.trySwitchToStep(MainSceneStep.ShopTop, true);
         });
-        
-        return returnValue;
     }
     
-    public static void Close()
-    {
-        UILayerLoader.Remove("UpperInfoBar");
-    }
-
     void Refresh()
     {
         UserID.text = PlayerAccountInfo.Me.PlayFabId; //SystemInfo.deviceUniqueIdentifier;

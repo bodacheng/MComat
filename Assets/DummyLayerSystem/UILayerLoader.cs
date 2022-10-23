@@ -45,6 +45,12 @@ namespace DummyLayerSystem
             {"FightScenePauseSupport", "DummyLayerSystem/FightScenePauseSupport"},
         };
 
+        private static Transform Hanger;
+        public static void SetHanger(Transform target)
+        {
+            Hanger = target;
+        }
+
         private static readonly List<UILayer> Queues = new ();
         
         public static void Clear(string except = null)
@@ -82,19 +88,21 @@ namespace DummyLayerSystem
             }
         }
         
-        public static UILayer Load(GameObject T, string layerName)
+        public static T Load<T>()
         {
-            if (_Get(layerName) != null)
+            string layerName = typeof(T).Name;
+            var existed = Get<T>();
+            if (existed != null)
             {
                 Debug.Log("冲突"+ layerName);
-                return _Get(layerName);
+                return existed;
             }
             
             var path = paths[layerName];
             var UILayerPrefab = Resources.Load<UILayer>(path);
             var t = GameObject.Instantiate(UILayerPrefab);
             t.Index = layerName;
-            t.transform.SetParent(T.transform);
+            t.transform.SetParent(Hanger.transform);
             t.transform.localPosition = Vector3.zero;
             var rt = t.GetComponent<RectTransform>();
             rt.anchorMax = Vector2.one;
@@ -104,7 +112,8 @@ namespace DummyLayerSystem
             rt.localPosition = Vector3.zero;
             rt.localScale = Vector3.one;
             Queues.Add(t);
-            return t;
+            var returnValue = (T) Convert.ChangeType(t, typeof(T));
+            return returnValue;
         }
         
         public static void Pop()
@@ -120,8 +129,14 @@ namespace DummyLayerSystem
                 Queues.RemoveAt(Queues.Count - 1);
             }
         }
+
+        public static void Remove<T>()
+        {
+            string layerName = typeof(T).Name;
+            Remove(layerName);
+        }
     
-        public static void Remove(string index)
+        static void Remove(string index)
         {
             var toRemoveIndex = -1;
             for (var i = 0; i < Queues.Count; i++)

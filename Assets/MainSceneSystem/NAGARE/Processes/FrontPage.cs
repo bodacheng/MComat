@@ -53,8 +53,8 @@ public class FrontPage : MSceneProcess
     void EnterProcess()
     {
         TutorialRunner.Main.TutorialCheck();
-        
-        frontLayer = FrontLayer.Open(PreScene.target);
+
+        frontLayer = UILayerLoader.Load<FrontLayer>();
         frontLayer.Initialise(PreScene.target);
         
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
@@ -80,8 +80,9 @@ public class FrontPage : MSceneProcess
         
         PreScene.target.SetFocusingUnit(focusInstanceID);
         frontLayer._connector.ShowMyModel(focusInstanceID);
-        
-        UpperInfoBar.Open(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), 
+
+        var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
+        upperInfoBar.Setup(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), 
             () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox));
         
         SetLoaded(true);
@@ -116,7 +117,8 @@ public class FrontPage : MSceneProcess
                 ProgressLayer.Close();
                 if (PlayerAccountInfo.Me.TitleDisplayName == null)
                 {
-                    NickNameLayer.Open(
+                    var nickNameLayer = UILayerLoader.Load<NickNameLayer>();
+                    nickNameLayer.Setup(
                         (x) =>
                         {
                             PopupLayer.ArrangeConfirmWindow(
@@ -127,7 +129,7 @@ public class FrontPage : MSceneProcess
                                         x,
                                         (x) =>
                                         {
-                                            UILayerLoader.Remove("NickNameLayer");
+                                            UILayerLoader.Remove<NickNameLayer>();
                                             EnterProcess();
                                         },
                                         () =>
@@ -151,8 +153,8 @@ public class FrontPage : MSceneProcess
     
     public override void ProcessEnd()
     {
-        FrontLayer.Close();
+        UILayerLoader.Remove<FrontLayer>();
         DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
-        UpperInfoBar.Close();
+        UILayerLoader.Remove<UpperInfoBar>();
     }
 }

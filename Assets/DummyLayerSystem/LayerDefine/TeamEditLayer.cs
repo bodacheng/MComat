@@ -28,22 +28,6 @@ public class TeamEditLayer : UILayer
     int focusingPos = -1;
     readonly IDictionary<int, HeroIcon> _teamBtnDic = new Dictionary<int, HeroIcon>();
     
-    public static TeamEditLayer Open(string teamMode, Action save)
-    {
-        var r = UILayerLoader.Get<TeamEditLayer>();
-        if (r != null)
-            return r;
-        
-        var returnValue = UILayerLoader.Load(PreScene.target.T,"TeamEditLayer") as TeamEditLayer;
-        returnValue.INI(teamMode, save);
-        return returnValue;
-    }
-
-    public static void Close()
-    {
-        UILayerLoader.Remove("TeamEditLayer");
-    }
-    
     void CancelSelect()
     {
         focusingPos = -1;
@@ -112,7 +96,7 @@ public class TeamEditLayer : UILayer
     }
 
     #region 初始化（显示目前队伍编辑，加载按钮功能）
-    void INI(string teamMode, Action save)
+    public void INI(string teamMode, Action save)
     {
         _teamBtnDic.Clear();
         _teamBtnDic.Add(0, team1Front);

@@ -32,35 +32,22 @@ public class StoneListLayer : UILayer
         }
     }
     
-    public static StoneListLayer Open()
+    public void Setup()
     {
-        StoneListLayer returnValue = UILayerLoader.Get<StoneListLayer>();
-        if (returnValue != null)
-        {
-            returnValue.box.GenerateCells();
-            return returnValue;
-        }
-        returnValue = UILayerLoader.Load(PreScene.target.T,"StoneListLayer") as StoneListLayer;
-        returnValue.box.IniExTabs();
-        returnValue.box.GenerateCells();
-        returnValue.box._tabEffects.SwitchZokusei(Element.blueMagic, ()=> returnValue.box.IniExTabsEffects(PreScene.target.FxCamera)).Forget();
-        returnValue.box.AddFeatureToCells(returnValue.CellFeature_StoneShow);
-        returnValue.box.FilterFeatureRefresh(true);
-        returnValue.box.RestFilter();
-        returnValue._skillStoneDetail.Clear();
-        returnValue.levelManager.INI();
-        return returnValue;
+        box.IniExTabs();
+        box.GenerateCells();
+        box._tabEffects.SwitchZokusei(Element.blueMagic, ()=> box.IniExTabsEffects(PreScene.target.FxCamera)).Forget();
+        box.AddFeatureToCells(CellFeature_StoneShow);
+        box.FilterFeatureRefresh(true);
+        box.RestFilter();
+        _skillStoneDetail.Clear();
+        levelManager.INI();
     }
-
-    public static void Close()
+    
+    public override void OnDestroy()
     {
-        var returnValue = UILayerLoader.Get<StoneListLayer>();
-        if (returnValue != null)
-        {
-            returnValue._skillStoneDetail.Clear();
-            returnValue.box._tabEffects.CloseShowingZokuseiTagEffects();
-        }
-        UILayerLoader.Remove("StoneListLayer");
+        _skillStoneDetail.Clear();
+        box._tabEffects.CloseShowingZokuseiTagEffects();
     }
     
     public void CellFeature_StoneShow(StoneCell _Cell)

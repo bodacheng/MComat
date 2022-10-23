@@ -19,23 +19,6 @@ public class FrontLayer : UILayer
     
     public DedicatedCameraConnector _connector;
     
-    public static FrontLayer Open(PreScene pre)
-    {
-        var returnValue = UILayerLoader.Get<FrontLayer>();
-        if (returnValue != null)
-        {
-            return returnValue;
-        }
-        returnValue = UILayerLoader.Load(PreScene.target.T,"FrontLayer") as FrontLayer;
-        returnValue.Initialise(pre);
-        return returnValue;
-    }
-
-    public static void Close()
-    {
-        UILayerLoader.Remove("FrontLayer");
-    }
-    
     public void Initialise(PreScene pre)
     {
         ArcadeBtn.onClick.AddListener(()=> pre.trySwitchToStep(MainSceneStep.ArcadeFront,true));

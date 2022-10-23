@@ -1,3 +1,4 @@
+using DummyLayerSystem;
 using mainMenu;
 
 public class SettingPage : MSceneProcess
@@ -12,7 +13,8 @@ public class SettingPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        layer = SettingLayer.Open();
+        layer = UILayerLoader.Load<SettingLayer>();
+        layer.Initialise();
         PlayFabReadClient.GetAccountInfo(
             (x) =>
             {

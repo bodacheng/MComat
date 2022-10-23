@@ -1,4 +1,5 @@
-﻿using mainMenu;
+﻿using DummyLayerSystem;
+using mainMenu;
 
 public class BoxOverLoadFix : MSceneProcess
 {
@@ -11,12 +12,13 @@ public class BoxOverLoadFix : MSceneProcess
     
     public override void ProcessEnter()
     {
-        layer = BoxOverLoadFixLayer.Open();
+        layer = UILayerLoader.Load<BoxOverLoadFixLayer>();
+        layer.INI();
         SetLoaded(true);
     }
     
     public override void ProcessEnd()
     {
-        BoxOverLoadFixLayer.Close();
+        UILayerLoader.Remove<BoxOverLoadFixLayer>();
     }
 }

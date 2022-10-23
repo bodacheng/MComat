@@ -27,7 +27,7 @@ namespace FightScene
             AutoMoveToNext = false;
             BoundaryControlByGod.target.ChangeMagicRingRadius(20f);
             //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
-            var cd = UILayerLoader.Load(NetFightScene.target.T.gameObject, "CountDownLayer") as CountDownLayer;
+            var cd = UILayerLoader.Load<CountDownLayer>();
             yield return cd.BeforeFightCountDown();
             
             AutoMoveToNext = true;
@@ -35,7 +35,7 @@ namespace FightScene
         
         public override void ProcessEnd()
         {
-            UILayerLoader.Remove("CountDownLayer");
+            UILayerLoader.Remove<CountDownLayer>();
         }
         
         public override bool CanEnterOtherProcess()

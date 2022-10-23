@@ -1,3 +1,4 @@
+using DummyLayerSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,8 +19,8 @@ public partial class PopupLayer : UILayer {
     /// <param name="intro"></param>
     public static void ArrangeWarnWindow(GameObject T, string intro)
     {
-        var layer = Open(T);
-
+        var layer = UILayerLoader.Load<PopupLayer>();
+        
         layer.bigCurtain.color = windowBgColor;
         layer.ValidationWindow.gameObject.SetActive(true);
         
@@ -31,7 +32,7 @@ public partial class PopupLayer : UILayer {
     
     public static void ArrangeConfirmWindow(GameObject T, UnityEngine.Events.UnityAction action, string intro)
     {
-        var layer = Open(T);
+        var layer = UILayerLoader.Load<PopupLayer>();
         
         layer.bigCurtain.color = windowBgColor;
         layer.ValidationWindow.gameObject.SetActive(true);
@@ -51,7 +52,7 @@ public partial class PopupLayer : UILayer {
     
     public static void ArrangeConfirmWindow(GameObject T, UnityEngine.Events.UnityAction action, UnityEngine.Events.UnityAction cancel_action, string intro)
     {
-        var layer = Open(T);
+        var layer = UILayerLoader.Load<PopupLayer>();
         
         layer.bigCurtain.color = windowBgColor;
         layer.ValidationWindow.gameObject.SetActive(true);

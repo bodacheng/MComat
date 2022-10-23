@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UniRx;
 using System.Collections.Generic;
+using DummyLayerSystem;
 using mainMenu;
 using ModelView;
 using UnityEngine.SceneManagement;
@@ -41,7 +42,10 @@ namespace FightScene
             DedicatedCameraConnector.ClearBackUpModels();
             AddressablesLogic.ReleaseAsyncOperationHandles();
             
-            HighLightLayer.DarkOff(T.gameObject, 1, 0);
+            UILayerLoader.Clear();
+            UILayerLoader.SetHanger(T);
+            
+            HighLightLayer.DarkOff(1, 0);
             Time.timeScale = 1;
             if (Fight == null)
             {
@@ -53,9 +57,9 @@ namespace FightScene
             
             AppSetting.bgmSource = audioSource;
             AppSetting.Load();
-            
             Application.targetFrameRate = 60;
             FightGlobalSetting._sceneStep = 1;
+            
             SingleThreadProcesser.backup = mainProcessRunner;
             //Position_Set_Executor.Instance.P_sets.Clear();
             var preparingProcess = new PreparingProcess();

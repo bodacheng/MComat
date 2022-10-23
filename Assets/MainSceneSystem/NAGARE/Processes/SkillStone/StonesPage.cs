@@ -1,4 +1,5 @@
-﻿using mainMenu;
+﻿using DummyLayerSystem;
+using mainMenu;
 
 public class StonesPage : MSceneProcess
 {
@@ -54,11 +55,12 @@ public class StonesPage : MSceneProcess
     
     void CommonEnterProcess()
     {
-        stoneListLayer = StoneListLayer.Open();
+        stoneListLayer = UILayerLoader.Load<StoneListLayer>();
+        stoneListLayer.Setup();
     }
     
     public override void ProcessEnd()
     {
-        StoneListLayer.Close();
+        UILayerLoader.Remove<StoneListLayer>();
     }
 }

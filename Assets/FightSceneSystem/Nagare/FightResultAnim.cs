@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using FightScene;
 using System.Collections.Generic;
+using DummyLayerSystem;
 
 public class FightResultAnim : FSceneProcess
 {
@@ -54,7 +55,7 @@ public class FightResultAnim : FSceneProcess
         }
         Time.timeScale = 1f;
 
-        var arenaFightOver = ArenaFightOver.Open();
+        var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
         arenaFightOver.Step1Anim();
         yield return new WaitForSeconds(0.5f);
     }

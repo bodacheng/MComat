@@ -18,32 +18,10 @@ public class HighLightLayer : UILayer
     // 之所以不得不分两种是因为那么傻逼插件在计算高亮区域的时候不得不延迟两帧，否则计算不对
     // 从而有些需要立刻让全屏变色的地方我们要准备另外一套
     
-    static HighLightLayer Get()
-    {
-        HighLightLayer returnValue = null;
-        var l = UILayerLoader.Get<HighLightLayer>();
-        if (l != null)
-        {
-            returnValue = l as HighLightLayer;
-        }
-        return returnValue;
-    }
-    
-    public static HighLightLayer Open(GameObject T)
-    {
-        var returnValue = Get();
-        if (returnValue != null)
-        {
-            return returnValue;
-        }
-        returnValue = UILayerLoader.Load(T,"HighLightLayer") as HighLightLayer;
-        return returnValue;
-    }
-    
     #region 高亮显示
     public static void HighLightRect(GameObject T, RectTransform r, Options options = null)
     {
-        var HighLightLayer = Open(T);
+        var HighLightLayer = UILayerLoader.Load<HighLightLayer>();
         HighLightLayer.HighLightRect(r, options);
     }
     
@@ -70,21 +48,16 @@ public class HighLightLayer : UILayer
     #endregion
     
     #region 黑幕
-    public static void DarkOff(GameObject T, float darkness, float duration)
+    public static void DarkOff(float darkness, float duration)
     {
-        var HighLightLayer = Open(T);
-        HighLightLayer.DarkOff(darkness, duration);
-    }
-    
-    void DarkOff(float darkness, float duration)
-    {
-        bigCurtain.raycastTarget = true;
-        bigCurtain.DOColor(new Color(0,0,0, darkness), duration);
+        var HighLightLayer = UILayerLoader.Load<HighLightLayer>();
+        HighLightLayer.bigCurtain.raycastTarget = true;
+        HighLightLayer.bigCurtain.DOColor(new Color(0,0,0, darkness), duration);
     }
     
     public static void LightUp(float duration)
     {
-        var HighLightLayer = Get();
+        var HighLightLayer = UILayerLoader.Get<HighLightLayer>();
         if (HighLightLayer != null)
         {
             HighLightLayer.bigCurtain.DOColor(new Color(0,0,0, 0), duration).OnComplete(() =>
@@ -100,6 +73,6 @@ public class HighLightLayer : UILayer
     public static void Close()
     {
         HighlightUI.Dismiss();
-        UILayerLoader.Remove("HighLightLayer");
+        UILayerLoader.Remove<HighLightLayer>();
     }
 }

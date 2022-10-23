@@ -26,20 +26,6 @@ namespace mainMenu
         readonly IDictionary<string, HeroIcon> heroIcons = new Dictionary<string, HeroIcon>();
         string selected_InstanceID;
         
-        public static UnitsLayer Open()
-        {
-            var v = UILayerLoader.Get<UnitsLayer>();
-            if (v != null)
-                return v;
-            
-            return UILayerLoader.Load(PreScene.target.T,"UnitsLayer") as UnitsLayer;
-        }
-        
-        public static void Close()
-        {
-            UILayerLoader.Remove("UnitsLayer");
-        }
-        
         public HeroIcon GetUnitIcon(string instanceID)
         {
             if (instanceID == null)

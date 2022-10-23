@@ -9,20 +9,11 @@ public class NickNameLayer : UILayer
     [SerializeField] private TMP_InputField nickNameInput;
     [SerializeField] private P3Button OK;
     
-    
-    public static NickNameLayer Open(Action<string> setNickName)
+    public void Setup(Action<string> setNickName)
     {
-        var returnValue = UILayerLoader.Get<NickNameLayer>();
-        if (returnValue != null)
+        OK.AddListener(()=>
         {
-            return returnValue;
-        }
-        returnValue = UILayerLoader.Load(PreScene.target.T.gameObject,"NickNameLayer") as NickNameLayer;
-        returnValue.OK.AddListener(()=>
-        {
-            setNickName.Invoke(returnValue.nickNameInput.text);
+            setNickName.Invoke(nickNameInput.text);
         });
-        
-        return returnValue;
     }
 }

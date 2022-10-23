@@ -7,7 +7,7 @@ public class ArenaPage : MSceneProcess
     readonly ArenaDummiesTable table = new ();
     void EnterProcess()
     {
-        arenaLayer = UILayerLoader.Load(PreScene.target.T, "ArenaLayer") as ArenaLayer;
+        arenaLayer = UILayerLoader.Load<ArenaLayer>();
         arenaLayer.SetUp(SetLoaded, PreScene.ReturnToLobby, table.GetDummiesAroundPoint);
         arenaLayer.ShowMyTeam();
         
@@ -36,6 +36,6 @@ public class ArenaPage : MSceneProcess
     
     public override void ProcessEnd()
     {
-        UILayerLoader.Remove("ArenaLayer");
+        UILayerLoader.Remove<ArenaLayer>();
     }
 }

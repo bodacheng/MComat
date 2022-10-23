@@ -13,7 +13,6 @@ public class SkillShowPage : MSceneProcess
     public override void ProcessEnter()
     {
         var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
-        layer = SkillShowLayer.Open();
         layer.SkillsPrintPageRefresh(unitInfo);
         
         SetLoaded(true);
@@ -23,6 +22,6 @@ public class SkillShowPage : MSceneProcess
     {
         layer.ClearRenderPs();
         layer.EffectsManager.CloseShowingZokuseiTagEffects();
-        UILayerLoader.Remove("SkillShowLayer");
+        UILayerLoader.Remove<SkillShowLayer>();
     }
 }

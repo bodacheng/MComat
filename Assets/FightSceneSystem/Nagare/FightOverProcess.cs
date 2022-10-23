@@ -31,7 +31,7 @@ namespace FightScene
                             NetFightScene.Fight.Team2ArenaPoint,
                             (x,y, z) =>
                             {
-                                var a = ArenaFightOver.Open();
+                                var a = UILayerLoader.Load<ArenaFightOver>();
                                 a.Step2Anim();
                                 a.ShowArenaPoint(x,y);
                                 a.ShowAward(z,0);
@@ -56,8 +56,8 @@ namespace FightScene
                                 PlayerAccountInfo.Me.ArcadeProcess = levelInt;
                                 int reward_GD_Int = Convert.ToInt32(reward_GD);
                                 int reward_GM_Int = Convert.ToInt32(reward_DIA);
-                                
-                                var a = ArenaFightOver.Open();
+
+                                var a = UILayerLoader.Load<ArenaFightOver>();
                                 a.ShowAward(reward_GD_Int, reward_GM_Int);
                             }
                         );
@@ -81,17 +81,17 @@ namespace FightScene
                     }
                     else
                     {
-                        var cc = UILayerLoader.Load(NetFightScene.target.T.gameObject, "ArcadeFightResult") as ArenaFightOver;
+                        var cc = UILayerLoader.Load<ArenaFightOver>();
                         cc.ShowAward(0, 0);
                     }
                     break;
                 case FightEventType.Self:
-                    CommonFightResult c = UILayerLoader.Load(NetFightScene.target.T.gameObject, "CommonFightResult") as CommonFightResult;
+                    var c = UILayerLoader.Load<CommonFightResult>();
                     c.Initialise(NetFightScene.target.ReturnToFront, 
                         () =>
                         {
                             LocalGameRestart();
-                            UILayerLoader.Remove("CommonFightResult");
+                            UILayerLoader.Remove<CommonFightResult>();
                         });
                     //c.ShowSKillSets(FightingStepLayer.target.team1UI, c.GetIconAndSKillShowUISetT());
                     break;

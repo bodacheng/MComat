@@ -10,7 +10,7 @@ public class QuestInfoPage : MSceneProcess
     void EnterProcess(FightInfo stage)
     {
         NetFightScene.Fight = stage;
-        layer = FightPrepareLayer.Open();
+        layer = UILayerLoader.Load<FightPrepareLayer>();
         layer.QuestName.text = NetFightScene.Fight.battleNameJPG;
         
         switch (NetFightScene.Fight.EventType)
@@ -62,6 +62,6 @@ public class QuestInfoPage : MSceneProcess
     
     public override void ProcessEnd()
     {
-        UILayerLoader.Remove("FightPrepareLayer");
+        UILayerLoader.Remove<FightPrepareLayer>();
     }
 }

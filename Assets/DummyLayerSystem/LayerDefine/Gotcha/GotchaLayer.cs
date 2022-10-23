@@ -21,30 +21,18 @@ public class GotchaLayer : UILayer
         extraSuccessAction = _extraSuccessAction;
     }
     
-    public static GotchaLayer Open()
+    public void Setup()
     {
-        var layer = UILayerLoader.Get<GotchaLayer>();
-        if (layer != null)
-            return layer;
+        Gotcha1.onClick.AddListener(OneTime);
+        Gotcha9.onClick.AddListener(NineTimes);
         
-        layer = UILayerLoader.Load(PreScene.target.T, "GotchaLayer") as GotchaLayer;
-        layer.Gotcha1.onClick.AddListener(OneTime);
-        layer.Gotcha9.onClick.AddListener(NineTimes);
-        
-        layer.GetAllSKBtn.gameObject.SetActive(true);
-        layer.GetAllMBtn.gameObject.SetActive(true);
-        layer.Remove25StonesBtn.gameObject.SetActive(true);
+        GetAllSKBtn.gameObject.SetActive(true);
+        GetAllMBtn.gameObject.SetActive(true);
+        Remove25StonesBtn.gameObject.SetActive(true);
 
-        layer.GetAllSKBtn.onClick.AddListener(GetAllSK);
-        layer.GetAllMBtn.onClick.AddListener(GetAllM);
-        layer.Remove25StonesBtn.onClick.AddListener(Remove25Stones);
-        
-        return layer;
-    }
-
-    public static void Close()
-    {
-        UILayerLoader.Remove("GotchaLayer");
+        GetAllSKBtn.onClick.AddListener(GetAllSK);
+        GetAllMBtn.onClick.AddListener(GetAllM);
+        Remove25StonesBtn.onClick.AddListener(Remove25Stones);
     }
     
     static void OneTime()
@@ -56,7 +44,7 @@ public class GotchaLayer : UILayer
     /// </summary>
     static void NineTimes()
     {
-        Close();// 点击按钮瞬间关闭layer。
+        UILayerLoader.Remove<GotchaLayer>();// 点击按钮瞬间关闭layer。
         CloudScript.GotchaX9(temp);
         void temp(List<StoneOfPlayerInfo> stones)
         {

@@ -20,17 +20,6 @@ namespace mainMenu
             // 强制玩家点击EditTeamButton按钮，待制作
         }
         
-        public static FightPrepareLayer Open()
-        {
-            var returnValue = UILayerLoader.Get<FightPrepareLayer>();
-            if (returnValue != null)
-            {
-                return returnValue;
-            }
-            returnValue = UILayerLoader.Load(PreScene.target.T,"FightPrepareLayer") as FightPrepareLayer;
-            return returnValue;
-        }
-        
         public void StageMembersInfoShow(FightInfo stage)
         {
             MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT).Forget();

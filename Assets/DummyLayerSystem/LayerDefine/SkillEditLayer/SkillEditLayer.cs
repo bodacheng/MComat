@@ -22,51 +22,34 @@ public partial class SkillEditLayer : UILayer
     [Header("技能展示器模式切换角色按钮")]
     [SerializeField] Button unitSwitcher;
     
-    public static async UniTask<SkillEditLayer> Open(Action<SkillEditLayer> toDo = null)
+    public async UniTask Setup(Action<SkillEditLayer> toDo = null)
     {
-        var l = UILayerLoader.Get<SkillEditLayer>();
-        SkillEditLayer returnValue;
-        if (l != null)
-        {
-            returnValue = l;
-            returnValue.StonesBox.GenerateCells(9);
-            returnValue.gameObject.SetActive(true);
-            return returnValue;
-        }
-        l = UILayerLoader.Load(PreScene.target.T,"SkillEditLayer") as SkillEditLayer;
-        returnValue = (SkillEditLayer)l;
-        returnValue.StonesBox.GenerateCells(9);
-        returnValue.gameObject.SetActive(false);
-        returnValue.NineSlot.PrintSkillInfo = returnValue._skillStoneDetail.RefreshInfo;
-        returnValue.NineSlot.StartUp((x) =>
+        StonesBox.GenerateCells(9);
+        gameObject.SetActive(false);
+        NineSlot.PrintSkillInfo = _skillStoneDetail.RefreshInfo;
+        NineSlot.StartUp((x) =>
             {
-                returnValue._connector.SkillShowRunWithPrepare(x).Forget();
+                _connector.SkillShowRunWithPrepare(x).Forget();
             }
         );
         
         // 表现系
         var unitConfig = Units.GetUnitConfig(PreScene.target._focusing.r_id);
-        returnValue.StonesBox.AddFeatureToCells(returnValue.StoneCellFeature);
-        returnValue.StonesBox.IniExTabs();
-        await returnValue.StonesBox._tabEffects.SwitchZokusei(unitConfig.element, ()=> returnValue.StonesBox.IniExTabsEffects(PreScene.target.FxCamera));
-        returnValue.StonesBox.FilterFeatureRefresh(true);
-        returnValue._skillStoneDetail.Clear();
-        returnValue.SkillEditButtonFeature(PreScene.target._focusing);
-        toDo?.Invoke(returnValue);
-        returnValue.gameObject.SetActive(true);
-        return returnValue;
+        StonesBox.AddFeatureToCells(StoneCellFeature);
+        StonesBox.IniExTabs();
+        await StonesBox._tabEffects.SwitchZokusei(unitConfig.element, ()=> StonesBox.IniExTabsEffects(PreScene.target.FxCamera));
+        StonesBox.FilterFeatureRefresh(true);
+        _skillStoneDetail.Clear();
+        SkillEditButtonFeature(PreScene.target._focusing);
+        toDo?.Invoke(this);
+        gameObject.SetActive(true);
     }
     
-    public static void Close()
+    public override void OnDestroy()
     {
-        var layer = UILayerLoader.Get<SkillEditLayer>();
-        if (layer != null)
-        {
-            layer.StonesBox._tabEffects.CloseShowingZokuseiTagEffects();
-        }
-        UILayerLoader.Remove("SkillEditLayer");
+        StonesBox._tabEffects.CloseShowingZokuseiTagEffects();
     }
-    
+
     void SkillEditButtonFeature(UnitInfo _UnitInfo)
     {
         if (_UnitInfo == null || _UnitInfo.r_id == null)

@@ -13,12 +13,12 @@ public class SelfFightPage : MSceneProcess
     private SelfFightLayer selfFightLayer;
     public override void ProcessEnter()
     {
-        var layer = UnitsLayer.Open();
+        var layer = UILayerLoader.Load<UnitsLayer>();
         layer.DisplayUnitIcons(dataAccess.Units.Dic, true).Forget();
         
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
         
-        selfFightLayer = UILayerLoader.Load(PreScene.target.T,"SelfFightLayer") as SelfFightLayer;
+        selfFightLayer = UILayerLoader.Load<SelfFightLayer>();
         selfFightLayer.INI();
         selfFightLayer.AddHeroIconFeaturesToMonsterBox();
         selfFightLayer.SwitchToRotationMode();
@@ -28,7 +28,7 @@ public class SelfFightPage : MSceneProcess
     
     public override void ProcessEnd()
     {
-        UnitsLayer.Close();
-        UILayerLoader.Remove("SelfFightLayer");
+        UILayerLoader.Remove<UnitsLayer>();
+        UILayerLoader.Remove<SelfFightLayer>();
     }
 }

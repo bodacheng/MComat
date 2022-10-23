@@ -11,6 +11,7 @@ public class StartUpPresentation : MonoBehaviour
     
     void Start()
     {
+        UILayerLoader.SetHanger(T);
         OnStart().Forget();
     }
 
@@ -45,7 +46,7 @@ public class StartUpPresentation : MonoBehaviour
             T.gameObject,
             async ()=>
             {
-                ProgressLayer.Open(T.gameObject);
+                UILayerLoader.Load<PopupLayer>();
                 await AddressablesLogic.ResourcePrepareProcess(
                     Go, 
                     (x,f) =>
@@ -74,7 +75,7 @@ public class StartUpPresentation : MonoBehaviour
         }
         else
         {
-            var TitleScreenLayer = UILayerLoader.Load(T.gameObject, "TitleScreenLayer") as TitleScreenLayer;
+            var TitleScreenLayer = UILayerLoader.Load<TitleScreenLayer>();
             TitleScreenLayer.Initialise();
         }
     }

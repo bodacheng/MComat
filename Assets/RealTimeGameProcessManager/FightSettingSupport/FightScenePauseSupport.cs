@@ -28,28 +28,14 @@ public class FightScenePauseSupport : UILayer
         ReturnButton.onClick.AddListener(NetFightScene.target.ReturnToFront);
         
         ResumeButton.onClick.RemoveAllListeners();
-        ResumeButton.onClick.AddListener(Close);
+        ResumeButton.onClick.AddListener(() =>
+        {
+            UILayerLoader.Remove<FightScenePauseSupport>();
+        });
         
         //OptionsButton.onClick.RemoveAllListeners();
         //OptionsButton.onClick.AddListener(settingLayer.Open);
         //OptionsButton.onClick.AddListener(JumpToOptions);
-    }
-    
-    public static FightScenePauseSupport Open(GameObject T)
-    {
-        var returnValue = UILayerLoader.Get<FightScenePauseSupport>();
-        if (returnValue != null)
-        {
-            return returnValue;
-        }
-        Time.timeScale = 0;
-        returnValue = UILayerLoader.Load(T,"FightScenePauseSupport") as FightScenePauseSupport;
-        return returnValue;
-    }
-
-    public static void Close()
-    {
-        UILayerLoader.Remove("FightScenePauseSupport");
     }
     
     public override void OnDestroy()

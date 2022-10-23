@@ -39,17 +39,6 @@ namespace mainMenu
         IDictionary<string, Button> StateButtonDic = new Dictionary<string, Button>();
         IDictionary<string, SkillEntity> analysisSKList = new Dictionary<string, SkillEntity>();
         
-        public static SkillShowLayer Open()
-        {
-            var returnValue = UILayerLoader.Get<SkillShowLayer>();
-            if (returnValue != null)
-            {
-                return returnValue;
-            }
-            returnValue = UILayerLoader.Load(PreScene.target.T,"SkillShowLayer") as SkillShowLayer;
-            return returnValue;
-        }
-        
         // 清理技能迁移表示符
         void DestroyFloatingMarks()
         {

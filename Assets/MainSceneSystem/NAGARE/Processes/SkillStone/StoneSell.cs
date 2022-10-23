@@ -1,4 +1,5 @@
-﻿using mainMenu;
+﻿using DummyLayerSystem;
+using mainMenu;
 
 public class StoneSell : MSceneProcess
 {
@@ -18,7 +19,8 @@ public class StoneSell : MSceneProcess
     private StoneListLayer StoneListLayer;
     public override void ProcessEnter()
     {
-        StoneListLayer = StoneListLayer.Open();
+        StoneListLayer = UILayerLoader.Load<StoneListLayer>();
+        StoneListLayer.Setup();
         EnterProcess();
     }
     

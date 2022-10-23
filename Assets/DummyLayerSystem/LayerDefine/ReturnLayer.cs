@@ -13,18 +13,10 @@ public class ReturnLayer : UILayer
     static readonly UnityEvent unityEvent = new ();
     public static readonly List<UnityAction> ReturnMissionList = new ();
     
-    
-    public static ReturnLayer Open()
+    public void Setup()
     {
-        ReturnLayer returnValue = UILayerLoader.Get<ReturnLayer>();
-        if (returnValue != null)
-        {
-            return returnValue;
-        }
-        returnValue = UILayerLoader.Load(PreScene.target.T,"ReturnLayer") as ReturnLayer;
-        returnValue.ReturnButton.onClick.RemoveAllListeners();
-        returnValue.ReturnButton.onClick.AddListener(POP);
-        return returnValue;
+        ReturnButton.onClick.RemoveAllListeners();
+        ReturnButton.onClick.AddListener(POP);
     }
     
     public static void POP()
@@ -37,18 +29,20 @@ public class ReturnLayer : UILayer
         ReturnMissionList.RemoveAt(ReturnMissionList.Count - 1);
         if (ReturnMissionList.Count == 0)
         {
-            UILayerLoader.Remove("ReturnLayer");
+            UILayerLoader.Remove<ReturnLayer>();
         }
         else
         {
-            Open();
+            var returnLayer = UILayerLoader.Load<ReturnLayer>();
+            returnLayer.Setup();
         }
     }
     
     public static void PUSH(UnityAction returnAction)
     {
         ReturnMissionList.Add(returnAction);
-        Open();
+        var returnLayer = UILayerLoader.Load<ReturnLayer>();
+        returnLayer.Setup();
     }
 
     public void ForceBackMode(bool on)

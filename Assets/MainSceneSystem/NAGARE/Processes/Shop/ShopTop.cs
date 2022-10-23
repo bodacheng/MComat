@@ -1,4 +1,5 @@
-﻿using mainMenu;
+﻿using DummyLayerSystem;
+using mainMenu;
 
 public class ShopTop : MSceneProcess
 {
@@ -11,13 +12,13 @@ public class ShopTop : MSceneProcess
     
     public override void ProcessEnter()
     {
-        shopTopLayer = ShopTopLayer.Open();
+        shopTopLayer = UILayerLoader.Load<ShopTopLayer>();
         SetLoaded(true);
     }
     
     public override void ProcessEnd()
     {
-        ShopTopLayer.Close();
+        UILayerLoader.Remove<ShopTopLayer>();
     }
     
     public override void LocalUpdate()

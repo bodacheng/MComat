@@ -68,6 +68,7 @@ namespace mainMenu
             
             Screen.SetResolution(1920, 1080, true);
             UILayerLoader.Clear();
+            UILayerLoader.SetHanger(T.transform);
             AppSetting.bgmSource = audioSource;
             AppSetting.Load();
             Time.timeScale = 1;

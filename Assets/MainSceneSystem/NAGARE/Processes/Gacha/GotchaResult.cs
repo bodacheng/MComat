@@ -2,6 +2,7 @@
 using dataAccess;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using DummyLayerSystem;
 
 public class GotchaResult : MSceneProcess
 {
@@ -16,7 +17,8 @@ public class GotchaResult : MSceneProcess
     
     public override void ProcessEnter()
     {
-        layer = GotchaResultLayer.Open();
+        layer = UILayerLoader.Load<GotchaResultLayer>();
+        layer.Setup();
         StarsFall.target.gameObject.SetActive(true);
         layer.NineForShow.LoadShowDetailFeature(layer.ShowDetail);
         layer.WholeAnimProcess(Result).Forget();

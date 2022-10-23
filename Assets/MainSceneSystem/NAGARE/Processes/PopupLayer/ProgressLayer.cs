@@ -5,7 +5,6 @@ using DG.Tweening;
 using TMPro;
 using UniRx;
 using DummyLayerSystem;
-using NoSuchStudio.UI.Highlight;
 
 public class ProgressLayer : UILayer
 {
@@ -14,22 +13,10 @@ public class ProgressLayer : UILayer
     [SerializeField] TextMeshProUGUI info;
     [SerializeField] Image bigCurtain;
     
-    
-    public static ProgressLayer Open(GameObject T)
-    {
-        var returnValue = UILayerLoader.Get<ProgressLayer>();
-        if (returnValue != null)
-        {
-            return returnValue;
-        }
-        returnValue = UILayerLoader.Load(T,"ProgressLayer") as ProgressLayer;
-        return returnValue;
-    }
-    
     // 「正在读取」画面
     public static void Loading(string description, GameObject hook, float curtainAlpha = 0.8f)
     {
-        var layer = Open(hook);
+        var layer = UILayerLoader.Load<ProgressLayer>();
         layer.DarkOff(curtainAlpha,0.5f);
         layer.info.text = description;
     }
@@ -95,6 +82,6 @@ public class ProgressLayer : UILayer
     
     public static void Close()
     {
-        UILayerLoader.Remove("ProgressLayer");
+        UILayerLoader.Remove<ProgressLayer>();
     }
 }

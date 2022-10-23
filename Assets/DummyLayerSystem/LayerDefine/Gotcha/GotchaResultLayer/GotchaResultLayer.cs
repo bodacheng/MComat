@@ -16,22 +16,11 @@ public partial class GotchaResultLayer : UILayer
     Coroutine starFallAnimOneProcess;
     #endregion
     
-    
-    public static GotchaResultLayer Open()
+    public void Setup()
     {
-        var l = UILayerLoader.Get<GotchaResultLayer>();
-        if (l != null)
-        {
-            return l;
-        }
-        
-        var uiLayer = UILayerLoader.Load(PreScene.target.T, "GotchaResultLayer");
-        var layer = uiLayer as GotchaResultLayer;
-        layer.Skip.onClick.AddListener(layer.SkipStarFallAnim);
-        layer.SpeedOnce.onClick.AddListener(layer.SpeedOneGotchaAnim);
-        layer.SetWaitPos();
-        
-        return layer;
+        Skip.onClick.AddListener(SkipStarFallAnim);
+        SpeedOnce.onClick.AddListener(SpeedOneGotchaAnim);
+        SetWaitPos();
     }
 
     public static void Close()
@@ -41,7 +30,7 @@ public partial class GotchaResultLayer : UILayer
         {
             layer.Reset();
         }
-        UILayerLoader.Remove("GotchaResultLayer");
+        UILayerLoader.Remove<GotchaResultLayer>();
     }
     
     // 清理相关特效等等
