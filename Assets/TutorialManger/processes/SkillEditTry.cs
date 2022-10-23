@@ -7,91 +7,61 @@ public class SkillEditTry : TutorialProcess
 {
     private ReturnLayer _returnLayer;
     private SkillEditLayer _skillEditLayer;
-
-    private bool showEditConfirmIndicator = false;
+    
     private bool skillEditFinished = false;
-    
-    public override void ProcessEnter()
-    {
-    }
-    
-    public override void ProcessEnd()
-    {
-    }
     
     public override bool CanEnterOtherProcess()
     {
-        return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage;
+        return skillEditFinished;
     }
     
     public override void LocalUpdate()
     {
-        if (!Loaded)
+        if (_returnLayer == null)
         {
-            if (_returnLayer == null)
-                _returnLayer = UILayerLoader.Get<ReturnLayer>();
-
-            if (_skillEditLayer == null)
-            {
-                _skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
-            }
-                
-            
-            if (_returnLayer != null && _skillEditLayer != null)
-            {
-                _returnLayer.gameObject.SetActive(false);
-                _skillEditLayer.NineSlot.SetExtraSkillEditSuccess(() =>
-                {
-                });
-                Loaded = true;
-            }
+            _returnLayer = UILayerLoader.Get<ReturnLayer>();
         }
-        
-        if (!showEditConfirmIndicator)
+        if (_returnLayer != null)
         {
-            if (_skillEditLayer != null)
-            {
-                var validate = _skillEditLayer.NineSlot.ValidateWarn();
-                if (validate == SkillSet.SkillEditError.Perfect)
-                {
-                    //HighLightLayer.HighLightRect(PreScene.target.T,_skillEditLayer.NineSlot.ConfirmSkillChangeButton.GetComponent<RectTransform>());
-                    showEditConfirmIndicator = true;
-                }
-            }
+            _returnLayer.gameObject.SetActive(false);
         }
         
         if (!skillEditFinished)
         {
-            var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
-            if (unitInfo != null)
+            if (_skillEditLayer != null)
             {
-                skillEditFinished = unitInfo.set.CheckEdit() == SkillSet.SkillEditError.Perfect;
-                string TutorialProgressLabel =
-                    PreScene.target._focusing.r_id == "1" ? "SkillEditFinished" : "SkillEditFinished2";
-                if (skillEditFinished)
-                {
-                    PlayerAccountInfo.Me.TutorialProgress = TutorialProgressLabel;
-                    PlayFabReadClient.UpdateUserData(
-                        new UpdateUserDataRequest()
-                        {
-                            Data = new Dictionary<string, string>()
-                            {
-                                { "TutorialProgress", TutorialProgressLabel }
-                            }
-                        },
-                        (x) =>
-                        { }
-                    );
-                    
-                    _returnLayer.gameObject.SetActive(true);
-                    _returnLayer.ForceBackMode(true);
-                }
+                var validate = _skillEditLayer.NineSlot.ValidateWarn();
+                _skillEditLayer.NineSlot.confirmBtnIndicator.SetActive(validate == SkillSet.SkillEditError.Perfect);
             }
         }
-
-        if (skillEditFinished && ProcessesRunner.Main.currentProcess.Step == MainSceneStep.UnitList)
+        
+        if (_skillEditLayer == null)
         {
-            _returnLayer.ForceBackMode(true);
+            _skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
+            if (_skillEditLayer != null)
+            {
+                _skillEditLayer.NineSlot.SetExtraSkillEditSuccess(
+                    () =>
+                    {
+                        var TutorialProgressLabel = PreScene.target._focusing.r_id == "1" ? "SkillEditFinished" : "SkillEditFinished2";
+                        PlayFabReadClient.UpdateUserData(
+                            new UpdateUserDataRequest()
+                            {
+                                Data = new Dictionary<string, string>()
+                                {
+                                    { "TutorialProgress", TutorialProgressLabel }
+                                }
+                            },
+                            (x) =>
+                            {
+                                PlayerAccountInfo.Me.TutorialProgress = TutorialProgressLabel;
+                                skillEditFinished = true;
+                                _skillEditLayer.NineSlot.confirmBtnIndicator.SetActive(false);
+                            }
+                        );
+                    }
+                );
+            }
         }
     }
 }

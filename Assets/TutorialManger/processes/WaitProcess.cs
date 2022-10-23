@@ -1,6 +1,4 @@
-﻿using FightScene;
-
-// Tutorial 1 
+﻿
 public class WaitProcess : TutorialProcess
 {
     public delegate bool WaitOverDelegate();

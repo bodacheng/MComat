@@ -6,7 +6,7 @@ public class OpenSkillEdit : TutorialProcess
 {
     UnitListPage unitListPage;
     UnitsLayer _unitsLayer;
-    UnitOptionLayer UnitOptionLayer;
+    UnitOptionLayer unitOptionLayer;
 
     private readonly string _focusUnitRId;
     
@@ -34,23 +34,13 @@ public class OpenSkillEdit : TutorialProcess
     
     public override void LocalUpdate()
     {
-        if (!Loaded)
+        if (unitOptionLayer == null)
+            unitOptionLayer = UILayerLoader.Get<UnitOptionLayer>();
+        
+        if (unitListPage.GetLoaded() && unitOptionLayer != null)
         {
-            if (UnitOptionLayer == null)
-                UnitOptionLayer = UILayerLoader.Get<UnitOptionLayer>();
-            
-            if (unitListPage.GetLoaded() && UnitOptionLayer != null)
-            {
-                UnitOptionLayer.PlsClickSkillEdit();
-                HighLightLayer.HighLightRect(PreScene.target.T,UnitOptionLayer._NineForShow.GetComponent<RectTransform>());
-                Loaded = true;
-            }
-        }
-
-        if (_unitsLayer == null)
-        {
-            _unitsLayer = UILayerLoader.Get<UnitsLayer>();
-            _unitsLayer.ForceClickUnit(_focusUnitRId);
+            unitOptionLayer.PlsClickSkillEdit();
+            HighLightLayer.HighLightRect(unitOptionLayer._NineForShow.GetComponent<RectTransform>());
         }
     }
 }

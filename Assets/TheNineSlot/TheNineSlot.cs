@@ -28,6 +28,9 @@ namespace mainMenu
         
         [Header("技能石编辑确认")]
         public Button ConfirmSkillChangeButton;
+
+        [Header("Confirm Indicator")] 
+        public GameObject confirmBtnIndicator;
         
         [Header("技能石编辑确认")]
         public Button ResetButton;

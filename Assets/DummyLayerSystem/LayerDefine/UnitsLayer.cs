@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using DummyLayerSystem;
 using Cysharp.Threading.Tasks;
 using dataAccess;
 
@@ -21,12 +20,13 @@ namespace mainMenu
         
         [Header("宠物栏parent")]
         [SerializeField] RectTransform MonsterBoxContainer;
-        [SerializeField] List<string> _typeOfUnitsIHave = new ();
+        
+        readonly List<string> _typeOfUnitsIHave = new ();
         
         readonly IDictionary<string, HeroIcon> heroIcons = new Dictionary<string, HeroIcon>();
         string selected_InstanceID;
         
-        public HeroIcon GetUnitIcon(string instanceID)
+        HeroIcon GetUnitIcon(string instanceID)
         {
             if (instanceID == null)
                 return null;

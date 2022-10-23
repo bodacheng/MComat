@@ -1,6 +1,4 @@
 ﻿using DummyLayerSystem;
-using mainMenu;
-using UnityEngine;
 
 public class GoToStageOne : TutorialProcess
 {
@@ -25,21 +23,17 @@ public class GoToStageOne : TutorialProcess
     
     public override void LocalUpdate()
     {
-        if (!Loaded)
+        if (_returnLayer == null)
+            _returnLayer = UILayerLoader.Get<ReturnLayer>();
+        
+        if (_arcadeTop == null)
+            _arcadeTop = UILayerLoader.Get<ArcadeTop>();
+        
+        if (_returnLayer != null && _arcadeTop != null)
         {
-            if (_returnLayer == null)
-                _returnLayer = UILayerLoader.Get<ReturnLayer>();
-            
-            if (_arcadeTop == null)
-                _arcadeTop = UILayerLoader.Get<ArcadeTop>();
-            
-            if (_returnLayer != null && _arcadeTop != null)
-            {
-                _returnLayer.gameObject.SetActive(false);
-                Loaded = true;
-            }
+            _returnLayer.gameObject.SetActive(false);
         }
-
+        
         if (fightingLayer == null)
         {
             fightingLayer = UILayerLoader.Get<FightingStepLayer>();

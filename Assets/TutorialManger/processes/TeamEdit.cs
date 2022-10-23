@@ -53,7 +53,6 @@ public class TeamEdit : TutorialProcess
             if (_frontLayer != null)
             {
                 _frontLayer.PlsClickBtn("arcade");
-                Loaded = true;
             }
         }
         

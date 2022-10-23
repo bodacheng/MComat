@@ -7,26 +7,23 @@ public class GoToUnitList : TutorialProcess
     private UpperInfoBar _upperInfoBar;
     public override void ProcessEnter()
     {
-        
     }
     
     public override void ProcessEnd()
     {
-        HighLightLayer.Close();
     }
     
     public override void LocalUpdate()
     {
-        if (!Loaded)
+        if (_frontLayer == null)
         {
             _frontLayer = UILayerLoader.Get<FrontLayer>();
             if (_frontLayer != null)
             {
                 _frontLayer.PlsClickBtn("unit");
-                Loaded = true;
             }
         }
-
+        
         if (_upperInfoBar == null)
         {
             _upperInfoBar = UILayerLoader.Get<UpperInfoBar>();

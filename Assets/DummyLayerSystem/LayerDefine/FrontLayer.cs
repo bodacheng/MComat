@@ -14,10 +14,9 @@ public class FrontLayer : UILayer
     [SerializeField] private Button GotchaBtn;
     [SerializeField] private Button SkillTestRBtn;
     [SerializeField] private Button SkillTestMBtn;
-
-    [SerializeField] private GameObject selectMeIndicator;
+    [SerializeField] DedicatedCameraConnector camConnector;
     
-    public DedicatedCameraConnector _connector;
+    public DedicatedCameraConnector CamConnector => camConnector;
     
     public void Initialise(PreScene pre)
     {
@@ -33,11 +32,10 @@ public class FrontLayer : UILayer
     }
 
     #region 教程
+    [SerializeField] private GameObject indicator;
 
     public void PlsClickBtn(string btnCode)
     {
-        Debug.Log("this place entered:"+ btnCode);
-        
         ArcadeBtn.interactable = btnCode == "arcade";
         ArenaBtn.interactable = btnCode == "arena";
         MemberBtn.interactable = btnCode == "unit";
@@ -45,21 +43,31 @@ public class FrontLayer : UILayer
         StonesBtn.interactable = btnCode == "stones";
         GotchaBtn.interactable = btnCode == "gotcha";
 
+        Vector3 localPos = Vector3.zero;
         switch (btnCode)
         {
             case "arcade":
+                localPos = ArcadeBtn.transform.localPosition;
                 break;
             case "arena":
+                localPos = ArenaBtn.transform.localPosition;
                 break;
             case "unit":
+                localPos = MemberBtn.transform.localPosition;
                 break;
             case "train":
+                localPos = TrainBtn.transform.localPosition;
                 break;
             case "stones":
+                localPos = StonesBtn.transform.localPosition;
                 break;
             case "gotcha":
+                localPos = GotchaBtn.transform.localPosition;
                 break;
         }
+
+        indicator.transform.localPosition = localPos;
+        indicator.SetActive(true);
     }
     #endregion
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using mainMenu;
 
 public class TutorialRunner
 {
@@ -16,8 +17,6 @@ public class TutorialRunner
     }
     
     TutorialProcess currentProcess;
-
-    // 这个结构代表了教程的顺序, 很大的特点在于可加入重复元素。典型的如后退菜单
     readonly List<TutorialProcess> TutorialProcesses = new ();
     
     void GenerateStep1Tutorial()
@@ -25,13 +24,17 @@ public class TutorialRunner
         var goToUnitList = new GoToUnitList();
         var openSkillEdit = new OpenSkillEdit("1");
         var skillEditTry = new SkillEditTry();
+        var forceBack = new ForceBack(
+            () => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage
+        );
         
         TutorialProcesses.Clear();
         TutorialProcesses.Add(goToUnitList);
         TutorialProcesses.Add(openSkillEdit);
         TutorialProcesses.Add(skillEditTry);
+        TutorialProcesses.Add(forceBack);
     }
-
+    
     void GenerateStep2Tutorial()
     {
         var goToStages = new GoToStages();
@@ -52,11 +55,6 @@ public class TutorialRunner
 
     void GenerateStep3Tutorial()
     {
-        // gacha
-        // new character skill edit
-        // team edit
-        // arcade stage 2
-
         var tryGotcha = new TryGotcha();
         
         TutorialProcesses.Clear();
@@ -85,7 +83,7 @@ public class TutorialRunner
         TutorialProcesses.Add(goToStageOne);// 这个环节已经可有可无。如果玩家在队伍编辑后直接退出游戏重开，将获得自由
     }
     
-    public void ProcessNagare()
+    public void Process()
     {
         if (currentProcess != null)
         {
@@ -97,7 +95,7 @@ public class TutorialRunner
         }
     }
 
-    public void StartToMove()
+    void StartToMove()
     {
         ChangeProcess(TutorialProcesses[0]);
     }

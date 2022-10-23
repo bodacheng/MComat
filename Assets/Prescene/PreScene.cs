@@ -110,7 +110,7 @@ namespace mainMenu
             var gotchaFront = new GotchaFront();
             var gotchaResult = new GotchaResult();
             var arenaPage = new ArenaPage();
-
+            
             // mail
             var mailBox = new MailBoxProcess();
             var mailDetail = new MailDetailProcess();
@@ -154,7 +154,7 @@ namespace mainMenu
         void Update()
         {
             ProcessesRunner.Main.ProcessNagare();
-            TutorialRunner.Main.ProcessNagare();
+            TutorialRunner.Main.Process();
         }
 
         public void AskIfLoadFight(FightInfo stage)

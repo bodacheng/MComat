@@ -94,7 +94,7 @@ namespace FightScene
         void Update()
         {
             FSceneProcessesRunner.Main.ProcessNagare();
-            TutorialRunner.Main.ProcessNagare();
+            TutorialRunner.Main.Process();
         }
         
         public void ReturnToFront()

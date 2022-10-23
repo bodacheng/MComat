@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using DummyLayerSystem;
 using ModelView;
 
 namespace mainMenu
@@ -17,7 +16,7 @@ namespace mainMenu
         [SerializeField] GameObject clickSkillEditIndicator;
         
         [Header("部下详细")]
-        [SerializeField] Text focusingCharName;
+        [SerializeField] Text focusingUnitName;
         [SerializeField] Button SkillShowButton, SkillEditButton;
         
         

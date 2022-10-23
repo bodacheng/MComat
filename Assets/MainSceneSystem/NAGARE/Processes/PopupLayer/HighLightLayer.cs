@@ -19,13 +19,13 @@ public class HighLightLayer : UILayer
     // 从而有些需要立刻让全屏变色的地方我们要准备另外一套
     
     #region 高亮显示
-    public static void HighLightRect(GameObject T, RectTransform r, Options options = null)
+    public static void HighLightRect(RectTransform r, Options options = null)
     {
         var HighLightLayer = UILayerLoader.Load<HighLightLayer>();
-        HighLightLayer.HighLightRect(r, options);
+        HighLightLayer._HighLightRect(r, options);
     }
     
-    async void HighLightRect(RectTransform r, Options options = null)
+    async void _HighLightRect(RectTransform r, Options options = null)
     {
         bigCurtain.raycastTarget = true; // 防止下面那点间隔里有点击画面的空间
         await Observable.TimerFrame(2); // 没有这个间隔ShowForUI的计算可能出错

@@ -3,10 +3,10 @@
 public class RotationAnimation : MonoBehaviour
 {
     [Range(1, 300)]
-    public int rotationSpeed;
+    [SerializeField] int rotationSpeed;
     [Header("Clock-wise and Anti-clockwise 1 and -1")]
     [Range(-1, 1)]
-    public int direction;
+    [SerializeField] int direction;
     
     float rotation = 0;
     

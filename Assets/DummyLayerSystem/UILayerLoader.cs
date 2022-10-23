@@ -90,11 +90,10 @@ namespace DummyLayerSystem
         
         public static T Load<T>()
         {
-            string layerName = typeof(T).Name;
+            var layerName = typeof(T).Name;
             var existed = Get<T>();
             if (existed != null)
             {
-                Debug.Log("冲突"+ layerName);
                 return existed;
             }
             

@@ -79,7 +79,7 @@ public class FrontPage : MSceneProcess
         }
         
         PreScene.target.SetFocusingUnit(focusInstanceID);
-        frontLayer._connector.ShowMyModel(focusInstanceID);
+        frontLayer.CamConnector.ShowMyModel(focusInstanceID);
 
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
         upperInfoBar.Setup(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), 

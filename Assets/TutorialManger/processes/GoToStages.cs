@@ -17,13 +17,12 @@ public class GoToStages : TutorialProcess
     
     public override void LocalUpdate()
     {
-        if (!Loaded)
+        if (_frontLayer == null)
         {
             _frontLayer = UILayerLoader.Get<FrontLayer>();
             if (_frontLayer != null)
             {
                 _frontLayer.PlsClickBtn("arcade");
-                Loaded = true;
             }
         }
     }
