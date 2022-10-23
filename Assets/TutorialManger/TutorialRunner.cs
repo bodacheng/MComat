@@ -3,41 +3,41 @@ using mainMenu;
 
 public class TutorialRunner
 {
-    static TutorialRunner instance;
+    static TutorialRunner _instance;
     public static TutorialRunner Main
     {
         get
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = new TutorialRunner();
+                _instance = new TutorialRunner();
             }
-            return instance;
+            return _instance;
         }
     }
     
     TutorialProcess currentProcess;
-    readonly List<TutorialProcess> TutorialProcesses = new ();
+    readonly List<TutorialProcess> _tutorialProcesses = new ();
     
     void GenerateStep1Tutorial()
     {
-        var goToUnitList = new GoToUnitList();
+        var goToUnitList = new GoTo("unit");
         var openSkillEdit = new OpenSkillEdit("1");
         var skillEditTry = new SkillEditTry();
         var forceBack = new ForceBack(
             () => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage
         );
         
-        TutorialProcesses.Clear();
-        TutorialProcesses.Add(goToUnitList);
-        TutorialProcesses.Add(openSkillEdit);
-        TutorialProcesses.Add(skillEditTry);
-        TutorialProcesses.Add(forceBack);
+        _tutorialProcesses.Clear();
+        _tutorialProcesses.Add(goToUnitList);
+        _tutorialProcesses.Add(openSkillEdit);
+        _tutorialProcesses.Add(skillEditTry);
+        _tutorialProcesses.Add(forceBack);
     }
     
     void GenerateStep2Tutorial()
     {
-        var goToStages = new GoToStages();
+        var goTo = new GoTo("arcade");
         var goToStageOne = new GoToStageOne();
         
         bool StageOneFinished()
@@ -47,40 +47,51 @@ public class TutorialRunner
         
         var waitFighting = new WaitProcess(StageOneFinished);
         
-        TutorialProcesses.Clear();
-        TutorialProcesses.Add(goToStages);
-        TutorialProcesses.Add(goToStageOne);
-        TutorialProcesses.Add(waitFighting);
+        _tutorialProcesses.Clear();
+        _tutorialProcesses.Add(goTo);
+        _tutorialProcesses.Add(goToStageOne);
+        _tutorialProcesses.Add(waitFighting);
     }
 
     void GenerateStep3Tutorial()
     {
+        var goTo = new GoTo("gotcha");
         var tryGotcha = new TryGotcha();
+        var forceBack = new ForceBack(
+            () => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage
+        );
         
-        TutorialProcesses.Clear();
-        TutorialProcesses.Add(tryGotcha);
+        _tutorialProcesses.Clear();
+        _tutorialProcesses.Add(goTo);
+        _tutorialProcesses.Add(tryGotcha);
+        _tutorialProcesses.Add(forceBack);
     }
 
     void GenerateStep4Tutorial()
     {
-        var goToUnitList = new GoToUnitList();
+        var goTo = new GoTo("unit");
         var openSkillEdit = new OpenSkillEdit("2");
         var skillEditTry = new SkillEditTry();
-        
-        TutorialProcesses.Clear();
-        TutorialProcesses.Add(goToUnitList);
-        TutorialProcesses.Add(openSkillEdit);
-        TutorialProcesses.Add(skillEditTry);
+        var forceBack = new ForceBack(
+            () => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage
+        );
+        _tutorialProcesses.Clear();
+        _tutorialProcesses.Add(goTo);
+        _tutorialProcesses.Add(openSkillEdit);
+        _tutorialProcesses.Add(skillEditTry);
+        _tutorialProcesses.Add(forceBack);
     }
 
     void GenerateStep5Tutorial()
     {
+        var goTo = new GoTo("arcade");
         var teamEdit = new TeamEdit();
         var goToStageOne = new GoToStageOne();
         
-        TutorialProcesses.Clear();
-        TutorialProcesses.Add(teamEdit);
-        TutorialProcesses.Add(goToStageOne);// 这个环节已经可有可无。如果玩家在队伍编辑后直接退出游戏重开，将获得自由
+        _tutorialProcesses.Clear();
+        _tutorialProcesses.Add(goTo);
+        _tutorialProcesses.Add(teamEdit);
+        _tutorialProcesses.Add(goToStageOne);// 这个环节已经可有可无。如果玩家在队伍编辑后直接退出游戏重开，将获得自由
     }
     
     public void Process()
@@ -97,13 +108,13 @@ public class TutorialRunner
 
     void StartToMove()
     {
-        ChangeProcess(TutorialProcesses[0]);
+        ChangeProcess(_tutorialProcesses[0]);
     }
 
     void MoveToNext()
     {
-        ChangeProcess(TutorialProcesses.Count > 1 ? TutorialProcesses[1] : null);
-        TutorialProcesses.RemoveAt(0);
+        ChangeProcess(_tutorialProcesses.Count > 1 ? _tutorialProcesses[1] : null);
+        _tutorialProcesses.RemoveAt(0);
     }
     
     void ChangeProcess(TutorialProcess nextProcess)

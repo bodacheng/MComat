@@ -10,7 +10,7 @@ public class TeamEdit : TutorialProcess
     private ReturnLayer _returnLayer;
     private FightPrepareLayer _fightPrepareLayer;
     private TeamEditPage _teamEditPage;
-    private FrontLayer _frontLayer;
+    
     public override void ProcessEnter()
     {
         _teamEditPage = (TeamEditPage)ProcessesRunner.Main.GetProcess(MainSceneStep.TeamEditFront);
@@ -47,15 +47,6 @@ public class TeamEdit : TutorialProcess
     
     public override void LocalUpdate()
     {
-        if (_frontLayer == null)
-        {
-            _frontLayer = UILayerLoader.Get<FrontLayer>();
-            if (_frontLayer != null)
-            {
-                _frontLayer.PlsClickBtn("arcade");
-            }
-        }
-        
         if (_fightPrepareLayer == null)
         {
             _fightPrepareLayer = UILayerLoader.Get<FightPrepareLayer>();

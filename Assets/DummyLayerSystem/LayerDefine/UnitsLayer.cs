@@ -34,12 +34,12 @@ namespace mainMenu
             return unitIcon;
         }
         
-        public void SetUnitsIconOnClick(Action<string> a)
+        public void SetUnitsIconOnClick(Action<string> onClick)
         {
             foreach (var kv in heroIcons)
             {
                 kv.Value.iconButton.onClick.RemoveAllListeners();
-                kv.Value.iconButton.onClick.AddListener(()=> { a.Invoke(kv.Key); });
+                kv.Value.iconButton.onClick.AddListener(()=> { onClick.Invoke(kv.Key); });
             }
         }
         
@@ -152,6 +152,7 @@ namespace mainMenu
             //adjustAllIconsSize(null);
             row = 1 + icons.Count / 7;
             MonsterBoxContainer.sizeDelta = new Vector2(MonsterBoxContainer.rect.width, noMagic.GetComponent<RectTransform>().rect.height * row);
+            Select(PreScene.target._focusing.id);
             displayUnitIconsAfterAction?.Invoke();
         }
 

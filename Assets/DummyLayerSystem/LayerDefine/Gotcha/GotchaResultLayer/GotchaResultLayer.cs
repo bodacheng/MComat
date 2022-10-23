@@ -1,6 +1,5 @@
 ﻿using DummyLayerSystem;
 using UnityEngine;
-using mainMenu;
 using UnityEngine.UI;
 
 public partial class GotchaResultLayer : UILayer

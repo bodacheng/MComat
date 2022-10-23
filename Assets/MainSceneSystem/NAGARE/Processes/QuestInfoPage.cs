@@ -25,6 +25,7 @@ public class QuestInfoPage : MSceneProcess
                 layer.EditTeamButton.onClick.AddListener(GoToTeamEdit_Arena);
                 break;
             case FightEventType.Quest:
+                NetFightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arcade").LoadTeamDic();
                 void GoToTeamEdit_Arcade()
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);

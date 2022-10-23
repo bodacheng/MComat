@@ -84,15 +84,15 @@ public partial class GotchaResultLayer : UILayer
     void PosDecide()
     {
         // 星星落入格子
-        Vector3 a1ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.A1T.GetComponent<RectTransform>(), 5f);
-        Vector3 a2ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.A2T.GetComponent<RectTransform>(), 5f);
-        Vector3 a3screenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.A3T.GetComponent<RectTransform>(), 5f);
-        Vector3 b1ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.B1T.GetComponent<RectTransform>(), 5f);
-        Vector3 b2ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.B2T.GetComponent<RectTransform>(), 5f);
-        Vector3 b3ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.B3T.GetComponent<RectTransform>(), 5f);
-        Vector3 c1ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.C1T.GetComponent<RectTransform>(), 5f);
-        Vector3 c2ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.C2T.GetComponent<RectTransform>(), 5f);
-        Vector3 c3ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.C3T.GetComponent<RectTransform>(), 5f);
+        var a1ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.A1T.GetComponent<RectTransform>(), 5f);
+        var a2ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.A2T.GetComponent<RectTransform>(), 5f);
+        var a3screenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.A3T.GetComponent<RectTransform>(), 5f);
+        var b1ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.B1T.GetComponent<RectTransform>(), 5f);
+        var b2ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.B2T.GetComponent<RectTransform>(), 5f);
+        var b3ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.B3T.GetComponent<RectTransform>(), 5f);
+        var c1ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.C1T.GetComponent<RectTransform>(), 5f);
+        var c2ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.C2T.GetComponent<RectTransform>(), 5f);
+        var c3ScreenPos = PosCal.GetWorldPos(StarsFall.target._UICamera, NineForShow.C3T.GetComponent<RectTransform>(), 5f);
         slotScreenPos.Clear();
         slotScreenPos.Add(a1ScreenPos);
         slotScreenPos.Add(a2ScreenPos);

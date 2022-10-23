@@ -3,32 +3,22 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UnitOptionLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UnitOptionLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FightPrepareLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FightPrepareLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_StarScreenMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_StarScreenMove.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_Steps.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_Steps.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UnitsLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UnitsLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/UILayerLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/UILayerLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/PopupLayer/HighLightLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/PopupLayer/HighLightLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NetFightScene/NetFightScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/NetFightScene/NetFightScene.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FrontLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FrontLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SkillEditLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SkillEditLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UnitOptionLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UnitOptionLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/TutorialProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/TutorialProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UpperInfoBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UpperInfoBar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/QuestInfoPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/QuestInfoPage.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/TutorialRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/TutorialRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/WaitProcess.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/WaitProcess.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/GoToStageOne.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/GoToStageOne.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/GoToStages.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/GoToStages.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/GoToUnitList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/GoToUnitList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/GoToStages.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/GoToStages.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/GoToUnitList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/GoTo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/GoToUnitList.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/GoTo.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/OpenSkillEdit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/OpenSkillEdit.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/SkillEditTry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/SkillEditTry.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/TeamEdit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/TeamEdit.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI/RotationAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/RotationAnimation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/TryGotcha.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/TryGotcha.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +97,15 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">

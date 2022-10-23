@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class OpenSkillEdit : TutorialProcess
 {
+    private ReturnLayer _returnLayer;
     UnitListPage unitListPage;
-    UnitsLayer _unitsLayer;
     UnitOptionLayer unitOptionLayer;
-
+    
     private readonly string _focusUnitRId;
     
     public OpenSkillEdit(string unitRId)
@@ -34,6 +34,15 @@ public class OpenSkillEdit : TutorialProcess
     
     public override void LocalUpdate()
     {
+        if (_returnLayer == null)
+        {
+            _returnLayer = UILayerLoader.Get<ReturnLayer>();
+        }
+        if (_returnLayer != null)
+        {
+            _returnLayer.gameObject.SetActive(false);
+        }
+        
         if (unitOptionLayer == null)
             unitOptionLayer = UILayerLoader.Get<UnitOptionLayer>();
         
