@@ -17,9 +17,6 @@ public class TeamEdit : TutorialProcess
         _teamEditPage.SetExtraArcadeTeamEditSuccess(
             () =>
             {
-                if (_returnLayer != null)
-                    _returnLayer.gameObject.SetActive(true);
-                PlayerAccountInfo.Me.TutorialProgress = "TeamEditFinished";
                 PlayFabReadClient.UpdateUserData(
                     new UpdateUserDataRequest()
                     {
@@ -29,7 +26,11 @@ public class TeamEdit : TutorialProcess
                         }
                     },
                     (x) =>
-                    { }
+                    {
+                        if (_returnLayer != null)
+                            _returnLayer.gameObject.SetActive(true);
+                        PlayerAccountInfo.Me.TutorialProgress = "TeamEditFinished";
+                    }
                 );
             }
         );
@@ -41,8 +42,7 @@ public class TeamEdit : TutorialProcess
     
     public override bool CanEnterOtherProcess()
     {
-        return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.TeamEditFront && 
-               PlayerAccountInfo.Me.TutorialProgress == "TeamEditFinished";
+        return PlayerAccountInfo.Me.TutorialProgress == "TeamEditFinished";
     }
     
     public override void LocalUpdate()
@@ -62,7 +62,7 @@ public class TeamEdit : TutorialProcess
         if (_arcadeTop == null)
             _arcadeTop = UILayerLoader.Get<ArcadeTop>();
         
-        if (!_returnLayer)
+        if (_returnLayer == null)
         {
             _returnLayer = UILayerLoader.Get<ReturnLayer>();
             if (_returnLayer != null)

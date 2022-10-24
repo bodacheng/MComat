@@ -38,6 +38,7 @@ public class TutorialRunner
     void GenerateStep2Tutorial()
     {
         var goTo = new GoTo("arcade");
+        var teamEdit = new TeamEdit();
         var goToStageOne = new GoToStageOne();
         
         bool StageOneFinished()
@@ -49,6 +50,7 @@ public class TutorialRunner
         
         _tutorialProcesses.Clear();
         _tutorialProcesses.Add(goTo);
+        _tutorialProcesses.Add(teamEdit);
         _tutorialProcesses.Add(goToStageOne);
         _tutorialProcesses.Add(waitFighting);
     }

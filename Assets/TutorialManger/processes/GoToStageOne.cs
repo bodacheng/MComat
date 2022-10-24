@@ -5,7 +5,8 @@ public class GoToStageOne : TutorialProcess
     private ReturnLayer _returnLayer;
     private ArcadeTop _arcadeTop;
     private ArcadeFrontPage _arcadeFrontPage;
-    private FightingStepLayer fightingLayer;
+    private FightPrepareLayer _fightPrepareLayer;
+    private FightingStepLayer _fightingLayer;
     
     public override void ProcessEnter()
     {
@@ -18,7 +19,7 @@ public class GoToStageOne : TutorialProcess
     
     public override bool CanEnterOtherProcess()
     {
-        return fightingLayer != null;
+        return _fightingLayer != null;
     }
     
     public override void LocalUpdate()
@@ -34,9 +35,19 @@ public class GoToStageOne : TutorialProcess
             _returnLayer.gameObject.SetActive(false);
         }
         
-        if (fightingLayer == null)
+        if (_fightPrepareLayer == null)
         {
-            fightingLayer = UILayerLoader.Get<FightingStepLayer>();
+            _fightPrepareLayer = UILayerLoader.Get<FightPrepareLayer>();
+        }
+
+        if (_fightPrepareLayer != null && _returnLayer != null)
+        {
+            _returnLayer.gameObject.SetActive(false);
+        }
+        
+        if (_fightingLayer == null)
+        {
+            _fightingLayer = UILayerLoader.Get<FightingStepLayer>();
         }
     }
 }
