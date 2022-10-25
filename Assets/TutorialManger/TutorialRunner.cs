@@ -38,7 +38,7 @@ public class TutorialRunner
     void GenerateStep2Tutorial()
     {
         var goTo = new GoTo("arcade");
-        var teamEdit = new TeamEdit();
+        var teamEdit = new TeamEdit("teamEdit1");
         var goToStageOne = new GoToStageOne();
         
         bool StageOneFinished()
@@ -83,11 +83,11 @@ public class TutorialRunner
         _tutorialProcesses.Add(skillEditTry);
         _tutorialProcesses.Add(forceBack);
     }
-
+    
     void GenerateStep5Tutorial()
     {
         var goTo = new GoTo("arcade");
-        var teamEdit = new TeamEdit();
+        var teamEdit = new TeamEdit("teamEdit2");
         var goToStageOne = new GoToStageOne();
         
         _tutorialProcesses.Clear();
@@ -151,8 +151,6 @@ public class TutorialRunner
             case "SkillEditFinished2":
                 GenerateStep5Tutorial();
                 Main.StartToMove();
-                break;
-            case "TeamEditFinished":// 
                 break;
             default:
                 break;

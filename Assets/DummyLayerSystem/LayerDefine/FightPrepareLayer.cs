@@ -32,13 +32,13 @@ public class FightPrepareLayer : UILayer
         {
             Destroy(transform.gameObject);
         }
-        List<HeroIcon> icons = new List<HeroIcon>();
-        foreach(UnitInfo oneMember in HeroSets)
+        var icons = new List<HeroIcon>();
+        foreach(var oneMember in HeroSets)
         {
             var v = await HeroIcon.ArrangeHeroIconToT(FighterIcon, oneMember, _ShowT);
             icons.Add(v);
         }
-        for (int i = 0; i < icons.Count; i++)
+        for (var i = 0; i < icons.Count; i++)
         {
             icons[i].iconButton.targetGraphic.raycastTarget = true;
         }

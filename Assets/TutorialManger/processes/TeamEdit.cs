@@ -1,7 +1,7 @@
-﻿using mainMenu;
-using System.Collections.Generic;
+﻿using dataAccess;
+using mainMenu;
 using DummyLayerSystem;
-using PlayFab.ClientModels;
+using UnityEngine;
 
 public class TeamEdit : TutorialProcess
 {
@@ -10,6 +10,13 @@ public class TeamEdit : TutorialProcess
     private ReturnLayer _returnLayer;
     private FightPrepareLayer _fightPrepareLayer;
     private TeamEditPage _teamEditPage;
+
+    private bool teamEditFinished = false;
+    private readonly string tutorialStep;
+    public TeamEdit(string TutorialStep)
+    {
+        tutorialStep = TutorialStep;
+    }
     
     public override void ProcessEnter()
     {
@@ -17,32 +24,66 @@ public class TeamEdit : TutorialProcess
         _teamEditPage.SetExtraArcadeTeamEditSuccess(
             () =>
             {
-                PlayFabReadClient.UpdateUserData(
-                    new UpdateUserDataRequest()
-                    {
-                        Data = new Dictionary<string, string>()
-                        {
-                            { "TutorialProgress", "TeamEditFinished" }
-                        }
-                    },
-                    (x) =>
-                    {
-                        if (_returnLayer != null)
-                            _returnLayer.gameObject.SetActive(true);
-                        PlayerAccountInfo.Me.TutorialProgress = "TeamEditFinished";
-                    }
-                );
+                teamEditFinished = true;
+                if (_returnLayer != null)
+                    _returnLayer.gameObject.SetActive(true);
             }
         );
     }
     
-    public override void ProcessEnd()
+    private bool TutorialLegal(string teamMode)
     {
+        bool qualified = false;
+        int unitCount = 0;
+
+        PosKeySet targetTeamSet = null;
+        switch (teamMode)
+        {
+            case "arena":
+                targetTeamSet = TeamSet.Arena3V3;
+                break;
+            case "arcade":
+                targetTeamSet = TeamSet.Default;
+                break;
+        }
+        
+        foreach (var set in targetTeamSet.PosNumsWithLocalKeys)
+        {
+            if (set.instanceID != null && dataAccess.Units.Get(set.instanceID) != null)
+            {
+                qualified = qualified && (Stones.GetEquippingStones(set.instanceID).Count == 9);
+                unitCount += 1;
+            }
+            else
+            {
+                qualified = false;
+            }
+            if (!qualified)
+                break;
+        }
+        
+        switch (teamMode)
+        {
+            case "arena":
+                qualified = qualified && unitCount == 3;
+                break;
+            case "arcade":
+                if (tutorialStep == "teamEdit1")
+                {
+                    qualified = qualified && unitCount > 0;
+                }
+                else if (tutorialStep == "teamEdit2")
+                {
+                    qualified = qualified && unitCount > 1;
+                }
+                break;
+        }
+        return qualified;
     }
     
     public override bool CanEnterOtherProcess()
     {
-        return PlayerAccountInfo.Me.TutorialProgress == "TeamEditFinished";
+        return teamEditFinished;
     }
     
     public override void LocalUpdate()
@@ -55,9 +96,15 @@ public class TeamEdit : TutorialProcess
                 _fightPrepareLayer.ForcePressTeamEdit();
             }
         }
-        
+
         if (_teamEditLayer == null)
+        {
             _teamEditLayer = UILayerLoader.Get<TeamEditLayer>();
+            if (_teamEditLayer != null)
+            {
+                _teamEditLayer.SetTeamLegalCheck(TutorialLegal);
+            }
+        }
         
         if (_arcadeTop == null)
             _arcadeTop = UILayerLoader.Get<ArcadeTop>();

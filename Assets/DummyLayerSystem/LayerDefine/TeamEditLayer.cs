@@ -27,13 +27,21 @@ public class TeamEditLayer : UILayer
     
     int focusingPos = -1;
     readonly IDictionary<int, HeroIcon> _teamBtnDic = new Dictionary<int, HeroIcon>();
+    private Func<string, bool> teamLegal;
+    private string currentTeamMode;
+
+    public void SetTeamLegalCheck(Func<string, bool> teamLegal)
+    {
+        this.teamLegal = teamLegal;
+        SkillEditButton.interactable = teamLegal(this.currentTeamMode);
+    }
     
     void CancelSelect()
     {
         focusingPos = -1;
         HeroIcon.SelectedFeature(null, selectedFrame, 1f);
     }
-
+    
     public void UnitIconClick(string instanceID, string teamMode)
     {
         var unitsLayer = UILayerLoader.Get<UnitsLayer>();
@@ -69,6 +77,8 @@ public class TeamEditLayer : UILayer
         {
             ChangeIconOnPos(returns[i].posNum, teamMode);
         }
+        
+        SkillEditButton.interactable = teamLegal(teamMode);
     }
     
     // 纯渲染函数
@@ -96,8 +106,11 @@ public class TeamEditLayer : UILayer
     }
 
     #region 初始化（显示目前队伍编辑，加载按钮功能）
-    public void INI(string teamMode, Action save)
+    public void Ini(string teamMode, Action save, Func<string, bool> teamLegal)
     {
+        this.currentTeamMode = teamMode;
+        SetTeamLegalCheck(teamLegal);
+        
         _teamBtnDic.Clear();
         _teamBtnDic.Add(0, team1Front);
         _teamBtnDic.Add(1, team1Left);

@@ -4,6 +4,7 @@ using dataAccess;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
+using UnityEngine;
 
 public class TeamEditPage : MSceneProcess
 {
@@ -28,7 +29,7 @@ public class TeamEditPage : MSceneProcess
     void EnterProcess(string teamMode)
     {
         var teamEditLayer = UILayerLoader.Load<TeamEditLayer>();
-        teamEditLayer.INI(teamMode, Save);
+        teamEditLayer.Ini(teamMode, Save, Legal);
         
         var unitsLayer = UILayerLoader.Load<UnitsLayer>();
         unitsLayer.SetDisplayUnitIconsAfterAction(() =>
@@ -66,10 +67,52 @@ public class TeamEditPage : MSceneProcess
         this.extraArcadeTeamEditSuccess = extraArcadeTeamEditSuccess;
     }
 
+    private bool Legal(string teamMode)
+    {
+        bool qualified = false;
+        int unitCount = 0;
+
+        PosKeySet targetTeamSet = null;
+        switch (teamMode)
+        {
+            case "arena":
+                targetTeamSet = TeamSet.Arena3V3;
+                break;
+            case "arcade":
+                targetTeamSet = TeamSet.Default;
+                break;
+        }
+        
+        foreach (var set in targetTeamSet.PosNumsWithLocalKeys)
+        {
+            if (set.instanceID != null && dataAccess.Units.Get(set.instanceID) != null)
+            {
+                qualified = qualified && (Stones.GetEquippingStones(set.instanceID).Count == 9);
+                unitCount += 1;
+            }
+            else
+            {
+                qualified = false;
+            }
+            if (!qualified)
+                break;
+        }
+        
+        switch (teamMode)
+        {
+            case "arena":
+                qualified = qualified && unitCount == 3;
+                break;
+            case "arcade":
+                qualified = qualified && unitCount > 0;
+                break;
+        }
+        return qualified;
+    }
+    
     void Save()
     {
         ProgressLayer.Loading(">", PreScene.target.T);
-        TeamSet.SaveTeamSet(teamMode, TeamSaveFinished);
         switch (teamMode)
         {
             case "arena":
@@ -83,27 +126,7 @@ public class TeamEditPage : MSceneProcess
                     }
                 );
                 
-                #region 合格认证 
-                // 不符合要求的队伍不进行保存
-                bool qualified = true;
-                int teamCount = 0;
-                foreach (var set in TeamSet.Arena3V3.PosNumsWithLocalKeys)
-                {
-                    if (set.instanceID != null && dataAccess.Units.Get(set.instanceID) != null)
-                    {
-                        qualified = qualified && (Stones.GetEquippingStones(set.instanceID).Count == 9);
-                        teamCount += 1;
-                    }
-                    else
-                    {
-                        qualified = false;
-                    }
-                    if (!qualified)
-                        break;
-                }
-                qualified = qualified && teamCount == 3;
-                #endregion
-                
+                bool qualified = Legal(teamMode);
                 if (qualified)
                 {
                     CloudScript.ArenaDefendTeamSave(TeamSet.ToDic(TeamSet.Arena3V3) , ArenaDefendSaved);
@@ -131,5 +154,6 @@ public class TeamEditPage : MSceneProcess
                 );
                 break;
         }
+        TeamSet.SaveTeamSet(teamMode, TeamSaveFinished);
     }
 }
