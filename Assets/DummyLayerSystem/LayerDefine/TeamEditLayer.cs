@@ -123,7 +123,7 @@ public class TeamEditLayer : UILayer
         
         void SkillEdit()
         {
-            if (PreScene.target._focusing.id != null)
+            if (PreScene.target.Focusing.id != null)
                 PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
         }
         skillEditButton.onClick.AddListener(SkillEdit);
@@ -171,8 +171,8 @@ public class TeamEditLayer : UILayer
                 PreScene.target.SetFocusingUnit(instanceID);
                 connector.ShowMyModel(instanceID);
                 removeButton.gameObject.SetActive(instanceID != null);
-                if (PreScene.target._focusing != null)
-                    nineForShow.ShowStones_Acc(PreScene.target._focusing.id);
+                if (PreScene.target.Focusing != null)
+                    nineForShow.ShowStones_Acc(PreScene.target.Focusing.id);
                 else
                 {
                     // empty slot

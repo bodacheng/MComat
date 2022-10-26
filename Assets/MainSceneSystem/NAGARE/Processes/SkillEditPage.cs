@@ -26,7 +26,7 @@ public class SkillEditPage : MSceneProcess
         var layer = UILayerLoader.Load<SkillEditLayer>();
         await layer.Setup((x) =>
         {
-            x._connector.ShowMyModel(PreScene.target._focusing != null ? PreScene.target._focusing.id : null);
+            x._connector.ShowMyModel(PreScene.target.Focusing != null ? PreScene.target.Focusing.id : null);
         });
         
         ProgressLayer.Close();

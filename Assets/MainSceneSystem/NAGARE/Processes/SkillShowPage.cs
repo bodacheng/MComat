@@ -12,7 +12,7 @@ public class SkillShowPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
+        var unitInfo = UnitInfo.GetUnitInfo(PreScene.target.Focusing);
         layer.SkillsPrintPageRefresh(unitInfo);
         
         SetLoaded(true);

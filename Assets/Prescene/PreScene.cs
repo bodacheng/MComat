@@ -33,10 +33,10 @@ namespace mainMenu
         public AudioSource audioSource;
 
         public RectTransform stonesTempContainer;
+
+        public UnitInfo Focusing => _focusing;
+        UnitInfo _focusing;
         
-        public UnitInfo _focusing;
-        
-        //下面这个函数总是建立在monsterbox函数运行在前，而monsterbox会部署好所有展示用模
         public void SetFocusingUnit(string instanceID)
         {
             _focusing = dataAccess.Units.Get(instanceID);

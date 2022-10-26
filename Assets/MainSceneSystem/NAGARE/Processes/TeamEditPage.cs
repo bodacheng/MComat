@@ -38,10 +38,10 @@ public class TeamEditPage : MSceneProcess
             unitsLayer.DisableLackSkillUnitIcon();
         });
         unitsLayer.DisplayUnitIcons(dataAccess.Units.Dic, true);
-        if (PreScene.target._focusing != null)
+        if (PreScene.target.Focusing != null)
         {
             // Just wanna show a model when enter team edit page
-            teamEditLayer.UnitIconClick(PreScene.target._focusing.id, this.teamMode);
+            teamEditLayer.UnitIconClick(PreScene.target.Focusing.id, this.teamMode);
             unitsLayer.CancelSelect();
         }
         

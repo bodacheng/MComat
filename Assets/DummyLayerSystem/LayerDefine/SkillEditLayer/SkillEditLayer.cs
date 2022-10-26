@@ -33,13 +33,13 @@ public partial class SkillEditLayer : UILayer
         );
         
         // 表现系
-        var unitConfig = Units.GetUnitConfig(PreScene.target._focusing.r_id);
+        var unitConfig = Units.GetUnitConfig(PreScene.target.Focusing.r_id);
         StonesBox.AddFeatureToCells(StoneCellFeature);
         StonesBox.IniExTabs();
         await StonesBox._tabEffects.SwitchZokusei(unitConfig.element, ()=> StonesBox.IniExTabsEffects(PreScene.target.FxCamera));
         StonesBox.FilterFeatureRefresh(true);
         _skillStoneDetail.Clear();
-        SkillEditButtonFeature(PreScene.target._focusing);
+        SkillEditButtonFeature(PreScene.target.Focusing);
         toDo?.Invoke(this);
         gameObject.SetActive(true);
     }

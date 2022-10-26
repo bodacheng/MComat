@@ -61,9 +61,9 @@ public class FrontPage : MSceneProcess
         //_CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
 
         string focusInstanceID;
-        if (PreScene.target._focusing != null && dataAccess.Units.Get(PreScene.target._focusing.id) != null)
+        if (PreScene.target.Focusing != null && dataAccess.Units.Get(PreScene.target.Focusing.id) != null)
         {
-            focusInstanceID = PreScene.target._focusing.id;
+            focusInstanceID = PreScene.target.Focusing.id;
         }
         else
         {

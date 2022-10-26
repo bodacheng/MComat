@@ -155,9 +155,9 @@ namespace mainMenu
         
         async UniTask ShowModel()
         {
-            _connector.ShowMyModel(PreScene.target._focusing.id);
-            var config = Units.GetUnitConfig(PreScene.target._focusing.r_id);
-            var unitInfo = UnitInfo.GetUnitInfo(PreScene.target._focusing);
+            _connector.ShowMyModel(PreScene.target.Focusing.id);
+            var config = Units.GetUnitConfig(PreScene.target.Focusing.r_id);
+            var unitInfo = UnitInfo.GetUnitInfo(PreScene.target.Focusing);
             await _connector.FocusingC.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK, config.SPECIAL_ZOKUSEI);
             await _connector.FocusingC.Step2Initialize(config.TYPE, unitInfo, config.element, config.SPECIAL_ZOKUSEI);
             if (_connector.FocusingC._MyBehaviorRunner != null)

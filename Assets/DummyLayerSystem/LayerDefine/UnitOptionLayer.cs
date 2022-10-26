@@ -27,7 +27,7 @@ namespace mainMenu
 
         public void RefreshMemberDetailPageByFocusingUnit()
         {
-            if (PreScene.target._focusing == null || PreScene.target._focusing.id == null || PreScene.target._focusing.r_id == null)
+            if (PreScene.target.Focusing == null || PreScene.target.Focusing.id == null || PreScene.target.Focusing.r_id == null)
             {
                 SkillShowButton.onClick.RemoveAllListeners();
                 SkillEditButton.onClick.RemoveAllListeners();
@@ -35,22 +35,22 @@ namespace mainMenu
                 return;
             }
             
-            var Ref = Units.GetUnitConfig(PreScene.target._focusing.r_id);
+            var Ref = Units.GetUnitConfig(PreScene.target.Focusing.r_id);
             if (Ref == null)
             {
-                Debug.Log("No this monster:" + PreScene.target._focusing.r_id);
+                Debug.Log("No this monster:" + PreScene.target.Focusing.r_id);
                 return;
             }
             
             // mini nineslot show
-            _NineForShow.ShowStones_Acc(PreScene.target._focusing.id);
+            _NineForShow.ShowStones_Acc(PreScene.target.Focusing.id);
             
             MemberInfoT.gameObject.SetActive(true);
             // show按钮功能加载
             SkillShowButton.onClick.RemoveAllListeners();
             void SkillShow()
             {
-                if (PreScene.target._focusing.id != null)
+                if (PreScene.target.Focusing.id != null)
                     PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillShow, true);
             }
             SkillShowButton.onClick.AddListener(SkillShow);
@@ -59,13 +59,13 @@ namespace mainMenu
             SkillEditButton.onClick.RemoveAllListeners();
             void SkillEdit()
             {
-                if (PreScene.target._focusing.id != null)
+                if (PreScene.target.Focusing.id != null)
                     PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit, true);
             }
             SkillEditButton.onClick.AddListener(SkillEdit);
             
             // 下面这些都是针对技能显示这个高级功能的，按理说下面这些即便出错，上面的功能也该健全。。即，这些是表现层。
-            UnitModelRender(UnitInfo.GetUnitInfo(PreScene.target._focusing));
+            UnitModelRender(UnitInfo.GetUnitInfo(PreScene.target.Focusing));
         }
         
         void UnitModelRender(UnitInfo info)

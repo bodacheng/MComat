@@ -18,10 +18,10 @@ namespace mainMenu
         // 清空角色技能编辑
         public void ClearSkillEquip()
         {
-            if (PreScene.target._focusing == null)
+            if (PreScene.target.Focusing == null)
                 return;
 
-            var info = PreScene.target._focusing;
+            var info = PreScene.target.Focusing;
             var originSkillInfo = Stones.GetOriginSkillOfUnit(info.id);
             foreach (var _slot in allSlot)
             {

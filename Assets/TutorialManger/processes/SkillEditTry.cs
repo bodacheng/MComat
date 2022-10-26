@@ -43,7 +43,7 @@ public class SkillEditTry : TutorialProcess
                 _skillEditLayer.NineSlot.SetExtraSkillEditSuccess(
                     () =>
                     {
-                        var TutorialProgressLabel = PreScene.target._focusing.r_id == "1" ? "SkillEditFinished" : "SkillEditFinished2";
+                        var TutorialProgressLabel = PreScene.target.Focusing.r_id == "1" ? "SkillEditFinished" : "SkillEditFinished2";
                         PlayFabReadClient.UpdateUserData(
                             new UpdateUserDataRequest()
                             {
