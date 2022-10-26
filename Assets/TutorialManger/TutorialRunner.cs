@@ -152,6 +152,8 @@ public class TutorialRunner
                 GenerateStep5Tutorial();
                 Main.StartToMove();
                 break;
+            case "Finished":
+                break;
             default:
                 break;
         }

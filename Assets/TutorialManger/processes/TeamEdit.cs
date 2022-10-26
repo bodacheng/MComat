@@ -1,7 +1,8 @@
 ﻿using dataAccess;
 using mainMenu;
 using DummyLayerSystem;
-using UnityEngine;
+using System.Collections.Generic;
+using PlayFab.ClientModels;
 
 public class TeamEdit : TutorialProcess
 {
@@ -24,6 +25,23 @@ public class TeamEdit : TutorialProcess
         _teamEditPage.SetExtraArcadeTeamEditSuccess(
             () =>
             {
+                if (tutorialStep == "teamEdit2") // 总教程结束于第二次队伍编辑结束
+                {
+                    PlayFabReadClient.UpdateUserData(
+                        new UpdateUserDataRequest()
+                        {
+                            Data = new Dictionary<string, string>()
+                            {
+                                { "TutorialProgress", "Finished" }
+                            }
+                        },
+                        (x) =>
+                        {
+                            PlayerAccountInfo.Me.TutorialProgress = "Finished";
+                        }
+                    );
+                }
+                
                 teamEditFinished = true;
                 if (_returnLayer != null)
                     _returnLayer.gameObject.SetActive(true);
