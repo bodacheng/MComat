@@ -19,12 +19,15 @@ namespace mainMenu
         [SerializeField] GameObject selectedFrame;
         
         [Header("宠物栏parent")]
-        [SerializeField] RectTransform MonsterBoxContainer;
+        [SerializeField] RectTransform unitBoxContainer;
         
         readonly List<string> _typeOfUnitsIHave = new ();
         
         readonly IDictionary<string, HeroIcon> heroIcons = new Dictionary<string, HeroIcon>();
         string selected_InstanceID;
+
+        private Action<string> onClick;
+        public Action<string> OnClick => onClick;
         
         HeroIcon GetUnitIcon(string instanceID)
         {
@@ -36,6 +39,7 @@ namespace mainMenu
         
         public void SetUnitsIconOnClick(Action<string> onClick)
         {
+            this.onClick = onClick;
             foreach (var kv in heroIcons)
             {
                 kv.Value.iconButton.onClick.RemoveAllListeners();
@@ -89,10 +93,10 @@ namespace mainMenu
         
         public void OnTypeChangeMyMonsterBox()
         {
-            DisplayUnitIcons(dataAccess.Units.Dic, false).Forget();
+            DisplayUnitIcons(dataAccess.Units.Dic, false);
         }
         
-        async UniTask UnitIconsGenerate(IDictionary<string, UnitInfo> dic, bool clearButtonFeature)
+        void UnitIconsGenerate(IDictionary<string, UnitInfo> dic, bool clearButtonFeature)
         {
             selected_InstanceID = null;
             foreach (var keyValuePair in dic)
@@ -125,10 +129,10 @@ namespace mainMenu
         }
         
         //icon的排列，显示   
-        public async UniTask DisplayUnitIcons(IDictionary<string, UnitInfo> dic, bool clearButtonFeature)
+        public void DisplayUnitIcons(IDictionary<string, UnitInfo> dic, bool clearBtnFeature)
         {
-            MonsterBoxContainer.gameObject.SetActive(true);
-            await UnitIconsGenerate(dic, clearButtonFeature);
+            unitBoxContainer.gameObject.SetActive(true);
+            UnitIconsGenerate(dic, clearBtnFeature);
             foreach (var keyValuePair in heroIcons)
             {
                 keyValuePair.Value.gameObject.SetActive(false);
@@ -144,15 +148,13 @@ namespace mainMenu
                     return;
                 }
                 _targetingIcon.gameObject.SetActive(true);
-                _targetingIcon.transform.SetParent(MonsterBoxContainer);
+                _targetingIcon.transform.SetParent(unitBoxContainer);
                 _targetingIcon.transform.localScale = Vector3.one;
                 _targetingIcon.transform.localPosition = Vector3.zero;
             }
-
-            //adjustAllIconsSize(null);
+            
             row = 1 + icons.Count / 7;
-            MonsterBoxContainer.sizeDelta = new Vector2(MonsterBoxContainer.rect.width, noMagic.GetComponent<RectTransform>().rect.height * row);
-            Select(PreScene.target._focusing.id);
+            unitBoxContainer.sizeDelta = new Vector2(unitBoxContainer.rect.width, noMagic.GetComponent<RectTransform>().rect.height * row);
             displayUnitIconsAfterAction?.Invoke();
         }
 

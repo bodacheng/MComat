@@ -127,22 +127,17 @@ namespace mainMenu
             FightLoad.Go(_stage);
         }
         
-        #region MonsterBoxIconFeature 必须在monsterbox生成所有角色头像之后执行
-        public void AddHeroIconFeaturesToMonsterBox()
+        #region Icon Feature 必须在unit box生成所有角色头像之后执行
+        public void AddUnitIconFeaturesToBox()
         {
-            void MonsterIconButton(string instanceID)
+            void UnitIconButton(string instanceID)
             {
                 var unitsLayer = UILayerLoader.Get<UnitsLayer>();
                 unitsLayer.Select(instanceID);
                 UnitIconBtn(instanceID);
             }
-            void Trigger(string instanceID)
-            {
-                MonsterIconButton(instanceID);
-            }
-            
             var unitsLayer = UILayerLoader.Get<UnitsLayer>();
-            unitsLayer.SetUnitsIconOnClick(Trigger);
+            unitsLayer.SetUnitsIconOnClick(UnitIconButton);
         }
         #endregion
         
@@ -284,7 +279,7 @@ namespace mainMenu
                 DicAdd<HeroIcon, int>.Add(IconNumCheck, heroIcon, i);
                 heroIcon.Clear();
                 heroIcon.iconButton.onClick.RemoveAllListeners();
-                heroIcon.iconButton.onClick.AddListener(() => {OnTeamPosBtn(team, IconNumCheck[heroIcon]);});
+                heroIcon.iconButton.onClick.AddListener(() => { OnTeamPosBtn(team, IconNumCheck[heroIcon]); });
                 heroIcon.iconButton.onClick.AddListener(() => HeroIcon.SelectedFeature(heroIcon, selectedFrame, 1.1f));
             }
         }

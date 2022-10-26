@@ -73,9 +73,9 @@ public class TeamEditLayer : UILayer
         }
 
         var returns = TeamSet.GetTargetSet(teamMode).SetPosMemByMonsterOfPlayerID(targetPos, instanceID);
-        for (var i = 0; i < returns.Count; i++)
+        foreach (var t in returns)
         {
-            ChangeIconOnPos(returns[i].posNum, teamMode);
+            ChangeIconOnPos(t.posNum, teamMode);
         }
         
         SkillEditButton.interactable = teamLegal(teamMode);
@@ -167,7 +167,7 @@ public class TeamEditLayer : UILayer
                 }
                 
                 var instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(focusingPos);
-                PreScene.target.SetFocusingUnit(instanceID); //确立focusing角色
+                PreScene.target.SetFocusingUnit(instanceID);
                 connector.ShowMyModel(instanceID);
                 if (PreScene.target._focusing != null)
                     nineForShow.ShowStones_Acc(PreScene.target._focusing.id);

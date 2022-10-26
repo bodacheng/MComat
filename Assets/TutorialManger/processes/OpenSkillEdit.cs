@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class OpenSkillEdit : TutorialProcess
 {
-    private ReturnLayer _returnLayer;
-    UnitListPage unitListPage;
-    UnitOptionLayer unitOptionLayer;
-    
-    private readonly string _focusUnitRId;
+    ReturnLayer _returnLayer;
+    UnitListPage _unitListPage;
+    UnitsLayer _unitsLayer;
+    UnitOptionLayer _unitOptionLayer;
+
+    UnitInfo _focusUnitInfo;
+    readonly string _focusUnitRId;
     
     public OpenSkillEdit(string unitRId)
     {
@@ -17,9 +19,8 @@ public class OpenSkillEdit : TutorialProcess
 
     public override void ProcessEnter()
     {
-        var unitInfo = dataAccess.Units.GetByRId(_focusUnitRId);
-        PreScene.target.SetFocusingUnit(unitInfo.id);
-        unitListPage = (UnitListPage)ProcessesRunner.Main.GetProcess(MainSceneStep.UnitList);
+        _focusUnitInfo = dataAccess.Units.GetByRId(_focusUnitRId);
+        _unitListPage = (UnitListPage)ProcessesRunner.Main.GetProcess(MainSceneStep.UnitList);
     }
     
     public override void ProcessEnd()
@@ -43,13 +44,22 @@ public class OpenSkillEdit : TutorialProcess
             _returnLayer.gameObject.SetActive(false);
         }
         
-        if (unitOptionLayer == null)
-            unitOptionLayer = UILayerLoader.Get<UnitOptionLayer>();
+        if (_unitOptionLayer == null)
+            _unitOptionLayer = UILayerLoader.Get<UnitOptionLayer>();
         
-        if (unitListPage.GetLoaded() && unitOptionLayer != null)
+        if (_unitListPage.GetLoaded() && _unitOptionLayer != null)
         {
-            unitOptionLayer.PlsClickSkillEdit();
-            HighLightLayer.HighLightRect(unitOptionLayer._NineForShow.GetComponent<RectTransform>());
+            _unitOptionLayer.PlsClickSkillEdit();
+            HighLightLayer.HighLightRect(_unitOptionLayer._NineForShow.GetComponent<RectTransform>());
+        }
+
+        if (_unitsLayer == null)
+        {
+            _unitsLayer = UILayerLoader.Get<UnitsLayer>();
+            if (_unitsLayer != null && _focusUnitInfo != null)
+            {
+                _unitsLayer.OnClick(_focusUnitInfo.id);
+            }
         }
     }
 }

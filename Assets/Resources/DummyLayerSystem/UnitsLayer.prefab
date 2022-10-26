@@ -216,8 +216,7 @@ MonoBehaviour:
   filter: {fileID: 3577659869119853523}
   noMagic: {fileID: 4599398632650404793, guid: ab04803d5c276457ea03841b256e73bf, type: 3}
   selectedFrame: {fileID: 3577659869478130332}
-  MonsterBoxContainer: {fileID: 3577659870373180623}
-  _typeOfUnitsIHave: []
+  unitBoxContainer: {fileID: 3577659870373180623}
 --- !u!222 &2986948565410060182
 CanvasRenderer:
   m_ObjectHideFlags: 0
