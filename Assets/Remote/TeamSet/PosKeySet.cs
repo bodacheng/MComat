@@ -68,29 +68,28 @@ public class PosKeySet
         return multiDictionary;
     }
     
-    public void SetPosMemInfoByLocalID(int posNum, string monsterofplayerid)
+    public void SetPosMemInfoByInstanceID(int posNum, string instanceID)
     {
-        for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
+        for (var i = 0; i < PosNumsWithLocalKeys.Length; i++)
         {
             if (PosNumsWithLocalKeys[i].posNum == posNum)
             {
-                //Debug.Log(this + ":" + monsterofplayerid);
-                PosNumsWithLocalKeys[i].instanceID = monsterofplayerid;
+                PosNumsWithLocalKeys[i].instanceID = instanceID;
                 return;
             }
         }
-        Debug.Log("没找着对应的位置键："+posNum);
+        Debug.Log("posNum not exists："+posNum);
     }
     
-    public List<OneSet> SetPosMemByMonsterOfPlayerID(int targetPos,string monsterlocalID)// 返回长度为2时，第一个元素是目标位置，第二个元素是被替换位置
+    public List<OneSet> SetPosUnitByInstanceID(int targetPos, string instanceID)// 返回长度为2时，第一个元素是目标位置，第二个元素是被替换位置
     {
         if (targetPos == -1)
             return new List<OneSet>();
         bool inTeamMemberChange = false;
         
-        foreach (OneSet _Set in PosNumsWithLocalKeys)
+        foreach (var _Set in PosNumsWithLocalKeys)
         {
-            if (_Set.instanceID == monsterlocalID && _Set.instanceID != null)
+            if (_Set.instanceID == instanceID && _Set.instanceID != null)
             {
                 if (_Set.posNum != targetPos)
                 {
@@ -106,8 +105,8 @@ public class PosKeySet
         }
         if (!inTeamMemberChange)
         {
-            SetPosMemInfoByLocalID(targetPos, monsterlocalID);
-            return new List<OneSet> {GetPosMemInfo(targetPos)};
+            SetPosMemInfoByInstanceID(targetPos, instanceID);
+            return new List<OneSet> { GetPosMemInfo(targetPos) };
         }
         return new List<OneSet>();
     }

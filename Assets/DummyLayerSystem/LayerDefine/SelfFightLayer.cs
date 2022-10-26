@@ -156,11 +156,11 @@ namespace mainMenu
                         switch (_focusingTeam)
                         {
                             case Team.player1:
-                                _team1PosKeySet_M.SetPosMemInfoByLocalID(_focusingPosNum, instanceID);
+                                _team1PosKeySet_M.SetPosMemInfoByInstanceID(_focusingPosNum, instanceID);
                                 ChangeIconOnPos(_focusingPosNum, teamButtonDic_M, _team1PosKeySet_M);
                                 break;
                             case Team.player2:
-                                _team2PosKeySet_M.SetPosMemInfoByLocalID(_focusingPosNum, instanceID);
+                                _team2PosKeySet_M.SetPosMemInfoByInstanceID(_focusingPosNum, instanceID);
                                 ChangeIconOnPos(_focusingPosNum, teamButtonDic_M, _team2PosKeySet_M);
                                 break;
                         }
@@ -169,11 +169,11 @@ namespace mainMenu
                         switch (_focusingTeam)
                         {
                             case Team.player1:
-                                _team1PosKeySet_R.SetPosMemInfoByLocalID(_focusingPosNum, instanceID);
+                                _team1PosKeySet_R.SetPosMemInfoByInstanceID(_focusingPosNum, instanceID);
                                 ChangeIconOnPos(_focusingPosNum, teamButtonDic_R, _team1PosKeySet_R);
                                 break;
                             case Team.player2:
-                                _team2PosKeySet_R.SetPosMemInfoByLocalID(_focusingPosNum, instanceID);
+                                _team2PosKeySet_R.SetPosMemInfoByInstanceID(_focusingPosNum, instanceID);
                                 ChangeIconOnPos(_focusingPosNum, teamButtonDic_R, _team2PosKeySet_R);
                                 break;
                         }

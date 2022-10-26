@@ -6,6 +6,7 @@ using dataAccess;
 using DummyLayerSystem;
 using ModelView;
 using UnityEngine.UI;
+using UniRx;
 
 public class TeamEditLayer : UILayer
 {
@@ -25,7 +26,7 @@ public class TeamEditLayer : UILayer
     [Header("技能编辑按钮")]
     [SerializeField] Button skillEditButton;
     
-    int _focusingPos = -1;
+    public ReactiveProperty<int> _focusingPos = new ReactiveProperty<int>(-1);
     readonly IDictionary<int, HeroIcon> _teamBtnDic = new Dictionary<int, HeroIcon>();
     private Func<string, bool> _teamLegal;
     private string _currentTeamMode;
@@ -36,20 +37,18 @@ public class TeamEditLayer : UILayer
         skillEditButton.interactable = teamLegal(this._currentTeamMode);
     }
     
-    void CancelSelect()
-    {
-        _focusingPos = -1;
-        HeroIcon.SelectedFeature(null, selectedFrame, 1f);
-    }
-    
+    /// <summary>
+    /// unit box icon feature
+    /// </summary>
+    /// <param name="instanceID"></param>
+    /// <param name="teamMode"></param>
     public void UnitIconClick(string instanceID, string teamMode)
     {
         var unitsLayer = UILayerLoader.Get<UnitsLayer>();
         if (unitsLayer == null) return;
-        if (_focusingPos != -1)
+        if (_focusingPos.Value != -1)
         {
-            ChangeTeamPos(instanceID, _focusingPos, teamMode);
-            CancelSelect();
+            ChangeTeamPos(instanceID, _focusingPos.Value, teamMode);
             unitsLayer.CancelSelect();
         }
         else
@@ -57,25 +56,36 @@ public class TeamEditLayer : UILayer
             unitsLayer.Select(instanceID);
         }
         
-        PreScene.target.SetFocusingUnit(instanceID);//确立focusing角色
+        PreScene.target.SetFocusingUnit(instanceID);
         nineForShow.ShowStones_Acc(instanceID);
         connector.ShowMyModel(instanceID);
     }
     
-    // 修改对象队伍编程
+    /// <summary>
+    /// Change target pos unit
+    /// </summary>
+    /// <param name="instanceID"></param>
+    /// <param name="targetPos"></param>
+    /// <param name="teamMode"></param>
     void ChangeTeamPos(string instanceID, int targetPos, string teamMode)
     {
         var unitInfo = dataAccess.Units.Get(instanceID);
         if (unitInfo != null && Stones.GetEquippingStones(instanceID).Count != 9)
         {
+            _focusingPos.Value = -1;
             Debug.Log("no enough skill");
             return;
         }
-
-        var returns = TeamSet.GetTargetSet(teamMode).SetPosMemByMonsterOfPlayerID(targetPos, instanceID);
+        
+        var returns = TeamSet.GetTargetSet(teamMode).SetPosUnitByInstanceID(targetPos, instanceID);
         foreach (var t in returns)
         {
             ChangeIconOnPos(t.posNum, teamMode);
+        }
+
+        if (returns.Count > 0)
+        {
+            _focusingPos.Value = -1;
         }
         
         skillEditButton.interactable = _teamLegal(teamMode);
@@ -101,15 +111,35 @@ public class TeamEditLayer : UILayer
         }
         else
         {
-            Debug.Log("逻辑冗余？posNum:" + posNum);
+            Debug.Log("posNum not exists:" + posNum);
         }
     }
-
-    #region 初始化（显示目前队伍编辑，加载按钮功能）
+    
     public void Ini(string teamMode, Action save, Func<string, bool> teamLegal)
     {
-        this._currentTeamMode = teamMode;
+        _currentTeamMode = teamMode;
         SetTeamLegalCheck(teamLegal);
+
+        _focusingPos.Subscribe((x) =>
+        {
+            var posInstanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(x);
+            removeButton.gameObject.SetActive(x != -1 && posInstanceID != null);
+            switch (x)
+            {
+                case 0:
+                    HeroIcon.SelectedFeature(team1Front, selectedFrame, 1f);
+                    break;
+                case 1:
+                    HeroIcon.SelectedFeature(team1Left, selectedFrame, 1f);
+                    break;
+                case 2:
+                    HeroIcon.SelectedFeature(team1Right, selectedFrame, 1f);
+                    break;
+                default:
+                    HeroIcon.SelectedFeature(null, selectedFrame, 1f);
+                    break;
+            }
+        }).AddTo(gameObject);
         
         _teamBtnDic.Clear();
         _teamBtnDic.Add(0, team1Front);
@@ -130,9 +160,7 @@ public class TeamEditLayer : UILayer
         
         void Remove()
         {
-            ChangeTeamPos(null, _focusingPos, teamMode);
-            removeButton.gameObject.SetActive(false);
-            CancelSelect();
+            ChangeTeamPos(null, _focusingPos.Value, teamMode);
         }
         removeButton.onClick.AddListener(Remove);
         
@@ -145,32 +173,14 @@ public class TeamEditLayer : UILayer
             {
                 Remove();
                 unitsLayer.CancelSelect();
-                CancelSelect();
                 ChangeTeamPos(selectedInstanceID, posNum, teamMode);
             }
             else
             {
-                _focusingPos = posNum;
-                switch (_focusingPos)
-                {
-                    case 0:
-                        HeroIcon.SelectedFeature(team1Front, selectedFrame, 1f);
-                        break;
-                    case 1:
-                        HeroIcon.SelectedFeature(team1Left, selectedFrame, 1f);
-                        break;
-                    case 2:
-                        HeroIcon.SelectedFeature(team1Right, selectedFrame, 1f);
-                        break;
-                    default:
-                        HeroIcon.SelectedFeature(null, selectedFrame, 1f);
-                        break;
-                }
-                
-                var instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(_focusingPos);
+                _focusingPos.Value = posNum;
+                var instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(_focusingPos.Value);
                 PreScene.target.SetFocusingUnit(instanceID);
                 connector.ShowMyModel(instanceID);
-                removeButton.gameObject.SetActive(instanceID != null);
                 if (PreScene.target.Focusing != null)
                     nineForShow.ShowStones_Acc(PreScene.target.Focusing.id);
                 else
@@ -186,5 +196,4 @@ public class TeamEditLayer : UILayer
         
         saveBtn.onClick.AddListener(()=>save());
     }
-    #endregion
 }
