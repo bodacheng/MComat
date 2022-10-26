@@ -42,13 +42,14 @@ namespace mainMenu
             _focusing = dataAccess.Units.Get(instanceID);
             if (_focusing == null)
             {
+                BackGroundPS.target.ChangeBGByElement(Element.Null);
                 return;
             }
             
             var Ref = Units.GetUnitConfig(_focusing.r_id);
             if (Ref == null)
             {
-                Debug.Log("No this unit:" + _focusing.r_id);
+                Debug.Log("Error r id:" + _focusing.r_id);
                 return;
             }
             BackGroundPS.target.ChangeBGByElement(Ref.element);
