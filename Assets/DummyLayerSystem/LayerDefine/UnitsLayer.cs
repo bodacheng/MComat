@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Cysharp.Threading.Tasks;
+using UniRx;
 using dataAccess;
 
 namespace mainMenu
@@ -24,7 +24,7 @@ namespace mainMenu
         readonly List<string> _typeOfUnitsIHave = new ();
         
         readonly IDictionary<string, HeroIcon> heroIcons = new Dictionary<string, HeroIcon>();
-        string selected_InstanceID;
+        public ReactiveProperty<string> Selected { get; } = new (null);
 
         private Action<string> onClick;
         public Action<string> OnClick => onClick;
@@ -47,22 +47,40 @@ namespace mainMenu
             }
         }
         
-        public void CancelSelect()
+        //icon的排列，显示   
+        public void DisplayUnitIcons(IDictionary<string, UnitInfo> dic, bool clearBtnFeature)
         {
-            selected_InstanceID = null;
-            HeroIcon.SelectedFeature(null, selectedFrame, 1f);
-        }
-
-        public void Select(string instanceID)
-        {
-            var targetingIcon = GetUnitIcon(instanceID);
-            HeroIcon.SelectedFeature(targetingIcon, selectedFrame, 1f);
-            selected_InstanceID = instanceID;
-        }
-
-        public string GetSelect()
-        {
-            return selected_InstanceID;
+            Selected.Subscribe(x =>
+            {
+                var targetingIcon = GetUnitIcon(x);
+                HeroIcon.SelectedFeature(targetingIcon, selectedFrame, 1f);
+            }).AddTo(gameObject);
+            
+            unitBoxContainer.gameObject.SetActive(true);
+            UnitIconsGenerate(dic, clearBtnFeature);
+            foreach (var keyValuePair in heroIcons)
+            {
+                keyValuePair.Value.gameObject.SetActive(false);
+            }
+            var icons = filter.OrderIcons(heroIcons.Values.ToList());
+            var row = 1;
+            for (var i = 0; i < icons.Count; i++)
+            {
+                var _targetingIcon = icons[i];
+                if (_targetingIcon == null)
+                {
+                    Debug.Log("严重错误");
+                    return;
+                }
+                _targetingIcon.gameObject.SetActive(true);
+                _targetingIcon.transform.SetParent(unitBoxContainer);
+                _targetingIcon.transform.localScale = Vector3.one;
+                _targetingIcon.transform.localPosition = Vector3.zero;
+            }
+            
+            row = 1 + icons.Count / 7;
+            unitBoxContainer.sizeDelta = new Vector2(unitBoxContainer.rect.width, noMagic.GetComponent<RectTransform>().rect.height * row);
+            displayUnitIconsAfterAction?.Invoke();
         }
 
         void AddUnitIcon(string instanceID, bool clearBtnFeature)
@@ -98,7 +116,6 @@ namespace mainMenu
         
         void UnitIconsGenerate(IDictionary<string, UnitInfo> dic, bool clearButtonFeature)
         {
-            selected_InstanceID = null;
             foreach (var keyValuePair in dic)
             {
                 AddUnitIcon(keyValuePair.Value.id, clearButtonFeature);
@@ -128,36 +145,6 @@ namespace mainMenu
             this.displayUnitIconsAfterAction = a;
         }
         
-        //icon的排列，显示   
-        public void DisplayUnitIcons(IDictionary<string, UnitInfo> dic, bool clearBtnFeature)
-        {
-            unitBoxContainer.gameObject.SetActive(true);
-            UnitIconsGenerate(dic, clearBtnFeature);
-            foreach (var keyValuePair in heroIcons)
-            {
-                keyValuePair.Value.gameObject.SetActive(false);
-            }
-            var icons = filter.OrderIcons(heroIcons.Values.ToList());
-            var row = 1;
-            for (var i = 0; i < icons.Count; i++)
-            {
-                var _targetingIcon = icons[i];
-                if (_targetingIcon == null)
-                {
-                    Debug.Log("严重错误");
-                    return;
-                }
-                _targetingIcon.gameObject.SetActive(true);
-                _targetingIcon.transform.SetParent(unitBoxContainer);
-                _targetingIcon.transform.localScale = Vector3.one;
-                _targetingIcon.transform.localPosition = Vector3.zero;
-            }
-            
-            row = 1 + icons.Count / 7;
-            unitBoxContainer.sizeDelta = new Vector2(unitBoxContainer.rect.width, noMagic.GetComponent<RectTransform>().rect.height * row);
-            displayUnitIconsAfterAction?.Invoke();
-        }
-
         public void ForceClickUnit(string unitRId)
         {
             foreach (var iconKV in heroIcons)

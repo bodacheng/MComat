@@ -25,7 +25,7 @@ public class UnitListPage : MSceneProcess
                 void UnitIconBtn(string instanceId)
                 {
                     Debug.Log("onclick instanceId :"+ instanceId);
-                    layer.Select(instanceId);
+                    layer.Selected.Value = instanceId;
                     PreScene.target.SetFocusingUnit(instanceId);
                     unitOptionLayer.RefreshMemberDetailPageByFocusingUnit();
                 }

@@ -133,7 +133,7 @@ namespace mainMenu
             void UnitIconButton(string instanceID)
             {
                 var unitsLayer = UILayerLoader.Get<UnitsLayer>();
-                unitsLayer.Select(instanceID);
+                unitsLayer.Selected.Value = instanceID;
                 UnitIconBtn(instanceID);
             }
             var unitsLayer = UILayerLoader.Get<UnitsLayer>();
@@ -146,7 +146,7 @@ namespace mainMenu
             var unitsLayer = UILayerLoader.Get<UnitsLayer>();
             if (_focusingPosNum == -1)
             {
-                unitsLayer.Select(instanceID);
+                unitsLayer.Selected.Value = instanceID;
             }
             else
             {
@@ -180,7 +180,7 @@ namespace mainMenu
                         break;
                 }
                 CancelSelect();
-                unitsLayer.CancelSelect();
+                unitsLayer.Selected.Value = null;
             }
 
             //以下为防重复版本选人。
@@ -289,8 +289,7 @@ namespace mainMenu
             _focusingTeam = team;
             _focusingPosNum = pos;
             var unitsLayer = UILayerLoader.Get<UnitsLayer>();
-            var unitsBoxSelect = unitsLayer.GetSelect();
-            
+            var unitsBoxSelect = unitsLayer.Selected.Value;
             if (unitsBoxSelect != null)
             {
                 UnitIconBtn(unitsBoxSelect);

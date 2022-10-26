@@ -49,11 +49,11 @@ public class TeamEditLayer : UILayer
         if (_focusingPos.Value != -1)
         {
             ChangeTeamPos(instanceID, _focusingPos.Value, teamMode);
-            unitsLayer.CancelSelect();
+            unitsLayer.Selected.Value = null;
         }
         else
         {
-            unitsLayer.Select(instanceID);
+            unitsLayer.Selected.Value = instanceID;
         }
         
         PreScene.target.SetFocusingUnit(instanceID);
@@ -168,11 +168,11 @@ public class TeamEditLayer : UILayer
         {
             var unitsLayer = UILayerLoader.Get<UnitsLayer>();
             if (unitsLayer == null) return;
-            var selectedInstanceID = unitsLayer.GetSelect();
+            var selectedInstanceID = unitsLayer.Selected.Value;
             if (selectedInstanceID != null)
             {
                 Remove();
-                unitsLayer.CancelSelect();
+                unitsLayer.Selected.Value = null;
                 ChangeTeamPos(selectedInstanceID, posNum, teamMode);
             }
             else

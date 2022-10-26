@@ -42,7 +42,7 @@ public class TeamEditPage : MSceneProcess
         {
             // Just wanna show a model when enter team edit page
             teamEditLayer.UnitIconClick(PreScene.target.Focusing.id, this.teamMode);
-            unitsLayer.CancelSelect();
+            unitsLayer.Selected.Value = null;
         }
         
         _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
