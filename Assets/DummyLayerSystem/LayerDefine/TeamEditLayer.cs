@@ -26,7 +26,7 @@ public class TeamEditLayer : UILayer
     [Header("技能编辑按钮")]
     [SerializeField] Button skillEditButton;
     
-    public ReactiveProperty<int> _focusingPos = new ReactiveProperty<int>(-1);
+    public ReactiveProperty<int> _focusingPos = new(-1);
     readonly IDictionary<int, HeroIcon> _teamBtnDic = new Dictionary<int, HeroIcon>();
     private Func<string, bool> _teamLegal;
     private string _currentTeamMode;

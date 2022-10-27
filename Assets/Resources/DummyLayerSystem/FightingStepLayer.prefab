@@ -2256,7 +2256,7 @@ MonoBehaviour:
   team2UI: {fileID: 7415628285627410667}
   Team1Auto: {fileID: 7711802977148177760}
   Team2Auto: {fileID: 7812704827599794702}
-  fightingStepTutorial: {fileID: 6657232899897156521}
+  clickNextTutorial: {fileID: 6657232899897156521}
 --- !u!1 &6380204765882067249
 GameObject:
   m_ObjectHideFlags: 0

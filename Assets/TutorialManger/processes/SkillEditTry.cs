@@ -9,6 +9,13 @@ public class SkillEditTry : TutorialProcess
     private SkillEditLayer _skillEditLayer;
     
     private bool skillEditFinished = false;
+
+    private string tutorialFlag;
+
+    public SkillEditTry(string tutorialFlag)
+    {
+        this.tutorialFlag = tutorialFlag;
+    }
     
     public override bool CanEnterOtherProcess()
     {
@@ -40,6 +47,11 @@ public class SkillEditTry : TutorialProcess
             _skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
             if (_skillEditLayer != null)
             {
+                if (this.tutorialFlag == "openInstruction")
+                {
+                    _skillEditLayer.OpenTutorial();
+                }
+                
                 _skillEditLayer.NineSlot.SetExtraSkillEditSuccess(
                     () =>
                     {

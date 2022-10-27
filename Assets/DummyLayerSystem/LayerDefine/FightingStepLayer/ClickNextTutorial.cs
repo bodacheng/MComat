@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FightingStepTutorial : MonoBehaviour
+public class ClickNextTutorial : MonoBehaviour
 {
     [SerializeField] private Button Btn;
     [SerializeField] private GameObject[] TutorialLayers;
@@ -15,7 +15,7 @@ public class FightingStepTutorial : MonoBehaviour
     public void Open()
     {
         gameObject.SetActive(true);
-        pageIndex = 0;
+        pageIndex = -1;
         NextPage();
     }
     

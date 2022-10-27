@@ -21,6 +21,9 @@ public partial class SkillEditLayer : UILayer
     [Header("技能展示器模式切换角色按钮")]
     [SerializeField] Button unitSwitcher;
     
+    [Header("Tutorial")]
+    [SerializeField] ClickNextTutorial clickNextTutorial;
+    
     public async UniTask Setup(Action<SkillEditLayer> toDo = null)
     {
         StonesBox.GenerateCells(9);
@@ -143,5 +146,10 @@ public partial class SkillEditLayer : UILayer
     {
         var personalEffectsPath = FightGlobalSetting.EffectPathDefine(Element.Null);
         EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, _connector.FocusingC.WholeT.position, Quaternion.identity, null).Forget();
+    }
+    
+    public void OpenTutorial()
+    {
+        clickNextTutorial.Open();
     }
 }

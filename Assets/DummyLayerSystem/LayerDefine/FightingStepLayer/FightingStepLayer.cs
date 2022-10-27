@@ -22,7 +22,7 @@ public class FightingStepLayer : UILayer
     [SerializeField] AutoSwitch Team2Auto;
 
     [Header("Tutorial")]
-    [SerializeField] FightingStepTutorial fightingStepTutorial;
+    [SerializeField] ClickNextTutorial clickNextTutorial;
     
     public async UniTask Setup(bool active = true)
     {
@@ -54,7 +54,7 @@ public class FightingStepLayer : UILayer
     public void OpenTutorial()
     {
         pauseButton.gameObject.SetActive(false);
-        fightingStepTutorial.Open();
+        clickNextTutorial.Open();
     }
 
     public bool Initialized { get; set; } = false;
