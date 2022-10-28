@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -15,13 +14,13 @@ public class ArenaFightOver : UILayer
     [SerializeField] private GameObject loseObject;
     [SerializeField] private Button returnBtn;
     
-    [SerializeField] private TextMeshProUGUI awardCurrency;
-    [SerializeField] private TextMeshProUGUI awardGDCurrency;
+    [SerializeField] private Text awardCurrency;
+    [SerializeField] private Text awardGDCurrency;
     #endregion
     
     #region arena
     [SerializeField] private ArenaRankIcon arenaRankIcon;
-    [SerializeField] private TextMeshProUGUI arenaPoint;
+    [SerializeField] private Text arenaPoint;
     #endregion
 
     #region arcade

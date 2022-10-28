@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using dataAccess;
 using mainMenu;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +9,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     [SerializeField] Button cancelBtn;
     [SerializeField] Button autoAdd;
     [SerializeField] Button confirmLevelUp;
-
-    [SerializeField] TextMeshProUGUI GDCount;
+    [SerializeField] Text gdCount;
     
     [Header("升级对象技能石参数")]
     [SerializeField] SkillStoneDetail focusingSSD;
@@ -92,7 +90,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         
         confirmLevelUp.gameObject.SetActive(true);
         int needGD = target.Level * 10 + 100;
-        GDCount.text = needGD.ToString();
+        gdCount.text = needGD.ToString();
         if (Currencies.CoinCount < needGD)
         {
             confirmLevelUp.interactable = false;

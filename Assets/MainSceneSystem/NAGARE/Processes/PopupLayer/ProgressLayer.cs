@@ -2,15 +2,14 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using TMPro;
 using UniRx;
 using DummyLayerSystem;
 
 public class ProgressLayer : UILayer
 {
-    [SerializeField] TextMeshProUGUI percentageText;
+    [SerializeField] Text percentageText;
     [SerializeField] Slider progressBar;
-    [SerializeField] TextMeshProUGUI info;
+    [SerializeField] Text info;
     [SerializeField] Image bigCurtain;
     
     // 「正在读取」画面

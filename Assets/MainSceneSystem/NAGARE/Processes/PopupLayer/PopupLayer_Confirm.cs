@@ -7,7 +7,7 @@ public partial class PopupLayer : UILayer {
     
     [Header("Validation")]
     [SerializeField] RectTransform ValidationWindow;
-    [SerializeField] TextMeshProUGUI ValidationIntro;
+    [SerializeField] Text ValidationIntro;
     [SerializeField] Button YesButton;
     [SerializeField] Button NoButton;
 

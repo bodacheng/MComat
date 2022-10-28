@@ -177,9 +177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef569fe8d16848f3b0e9fed26610e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  percentageText: {fileID: 4050191765156185995}
+  percentageText: {fileID: 6590177343585812566}
   progressBar: {fileID: 4050191765087020488}
-  info: {fileID: 921517128120179225}
+  info: {fileID: 2443872354998318439}
   bigCurtain: {fileID: 206743753813286962}
 --- !u!1001 &963679372904606749
 PrefabInstance:
@@ -351,20 +351,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114366504036939268, guid: c5e36c0970c552e47a688b1ba4c9fd3c, type: 3}
+    - {fileID: 114525771388666700, guid: c5e36c0970c552e47a688b1ba4c9fd3c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c5e36c0970c552e47a688b1ba4c9fd3c, type: 3}
---- !u!114 &921517128120179225 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114366504036939268, guid: c5e36c0970c552e47a688b1ba4c9fd3c,
+--- !u!1 &962172357044106195 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1688719283838926, guid: c5e36c0970c552e47a688b1ba4c9fd3c,
     type: 3}
   m_PrefabInstance: {fileID: 963679372904606749}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &2443872354998318439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962172357044106195}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: bf882ea178a999648a63680a4a04ac5d, type: 3}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 4
+    m_MaxSize: 40
+    m_Alignment: 5
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Loading
 --- !u!224 &1027582386468803501 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224364095853461424, guid: c5e36c0970c552e47a688b1ba4c9fd3c,
@@ -573,7 +603,8 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.8862745
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5031893686669253324, guid: eae9fafb84b8c44c8b8e6b119f103b37, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eae9fafb84b8c44c8b8e6b119f103b37, type: 3}
 --- !u!114 &4050191765087020488 stripped
 MonoBehaviour:
@@ -593,15 +624,43 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 9070754695922539847}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4050191765156185995 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5031893686669253324, guid: eae9fafb84b8c44c8b8e6b119f103b37,
+--- !u!1 &4050191765156185993 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5031893686669253326, guid: eae9fafb84b8c44c8b8e6b119f103b37,
     type: 3}
   m_PrefabInstance: {fileID: 9070754695922539847}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &6590177343585812566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4050191765156185993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: bf882ea178a999648a63680a4a04ac5d, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 100
