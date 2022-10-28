@@ -1,18 +1,21 @@
 fileFormatVersion: 2
-guid: e3265ab4bf004d28a9537516768c1c75
+guid: 5fc14a699a1d36a4a8ae87d331d5ca6b
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 20
+  fontSize: 50
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
+  fontName: M+ 1c
   fontNames:
-  - Liberation Sans
-  fallbackFontReferences: []
+  - M+ 1c
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 4c387066fd2bd6047a0508c3d7ea86b6, type: 3}
+  - {fileID: 12800000, guid: 5f3edff6d7c989d42855196f819dd804, type: 3}
   customCharacters: 
-  fontRenderingMode: 3
+  fontRenderingMode: 0
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1
