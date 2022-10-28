@@ -11,6 +11,7 @@ public class StartUpPresentation : MonoBehaviour
     
     void Start()
     {
+        Screen.SetResolution(1920, 1080, true);
         UILayerLoader.SetHanger(T);
         OnStart().Forget();
     }
