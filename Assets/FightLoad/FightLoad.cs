@@ -46,7 +46,7 @@ public static class FightLoad
         }
         
         NetFightScene.Fight = stage;
-        Stones.PreventStonesFromDestroy();
+        Stones.Clear();
         HurtObjectManager.Clear();
         EffectsManager.Clear();
         SceneManager.LoadScene(2);

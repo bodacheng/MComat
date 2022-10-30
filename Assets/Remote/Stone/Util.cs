@@ -28,14 +28,6 @@ namespace dataAccess
             }
         }
         
-        public static void PreventStonesFromDestroy()
-        {
-            foreach (KeyValuePair<string, SKStoneItem> keyValuePair in RenderModelDic)
-            {
-                if (keyValuePair.Value != null)
-                    keyValuePair.Value.transform.SetParent(ResourceKeeper.dontDestroyOnLoadParent);
-            }
-        }
         #endregion
 
         #region 财产数据相关
