@@ -20,15 +20,15 @@ public class StarterGUI : Editor
 [ExecuteInEditMode]
 public class Starter : MonoBehaviour
 {
-    [SerializeField] PlayfabSetting PlayfabSetting;
-    [SerializeField] FightGlobalSetting FightGlobalSetting;
+    [SerializeField] PlayfabSetting playFabSetting;
+    [SerializeField] FightGlobalSetting fightGlobalSetting;
     [SerializeField] KeywordSetting keywordSetting;
 
     public void Initialise()
     {
         Debug.Log("files loads...");
-        FightGlobalSetting.Initialise();
-        PlayfabSetting.Initialise();
+        fightGlobalSetting.Initialise();
+        playFabSetting.Initialise();
         keywordSetting.Initialise();
         SkillConfigTable.LoadAllSkillConfigs();
         PowerEstimateTable.LoadByResource();

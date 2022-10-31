@@ -10,4 +10,4 @@ recordId,realName,monsterType,zokusei,specialZokusei,rarityLevel,basicMovementPa
 9,mutant_b,human,2,,1,adam,Move1,Rush,1
 10,maksim1,human,2,,1,warrior,Move1,Rush,1
 11,maksim2,human,5,,1,warrior,Move1,Rush,1
-12,robot3,human,3,,1,warrior,Move1,Rush,1
+12,robot3,human,3,,1,robot3,Move1,Rush,1
