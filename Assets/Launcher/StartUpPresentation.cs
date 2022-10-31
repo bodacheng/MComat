@@ -47,7 +47,7 @@ public class StartUpPresentation : MonoBehaviour
             T.gameObject,
             async ()=>
             {
-                UILayerLoader.Load<PopupLayer>();
+                UILayerLoader.Load<ProgressLayer>();
                 await AddressablesLogic.ResourcePrepareProcess(
                     Go, 
                     (x,f) =>
