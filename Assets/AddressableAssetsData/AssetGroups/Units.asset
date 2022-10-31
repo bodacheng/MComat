@@ -77,6 +77,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit
+  - m_GUID: 2e8d7b503712441beac04cf9f89e22c7
+    m_Address: human/robot3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

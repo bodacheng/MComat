@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,7 +40,13 @@ public partial class SkillEditLayer : UILayer
         var unitConfig = Units.GetUnitConfig(PreScene.target.Focusing.r_id);
         StonesBox.AddFeatureToCells(StoneCellFeature);
         StonesBox.IniExTabs();
-        await StonesBox._tabEffects.SwitchZokusei(unitConfig.element, ()=> StonesBox.IniExTabsEffects(PreScene.target.FxCamera));
+        
+        var cts = new CancellationTokenSource();
+        ReturnLayer.AddUniTaskCancel(cts);
+        await StonesBox._tabEffects.SwitchElement
+            (unitConfig.element, 
+                ()=> StonesBox.IniExTabsEffects(PreScene.target.FxCamera),
+                cts.Token);
         StonesBox.FilterFeatureRefresh(true);
         _skillStoneDetail.Clear();
         SkillEditButtonFeature(PreScene.target.Focusing);
@@ -49,7 +56,7 @@ public partial class SkillEditLayer : UILayer
     
     public override void OnDestroy()
     {
-        StonesBox._tabEffects.CloseShowingZokuseiTagEffects();
+        StonesBox._tabEffects.CloseShowingTagEffects();
     }
 
     void SkillEditButtonFeature(UnitInfo _UnitInfo)

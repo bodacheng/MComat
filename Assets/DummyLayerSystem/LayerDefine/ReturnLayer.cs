@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using DummyLayerSystem;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -13,7 +14,7 @@ public class ReturnLayer : UILayer
     static readonly UnityEvent unityEvent = new ();
     public static readonly List<UnityAction> ReturnMissionList = new ();
     
-    public void Setup()
+    void Setup()
     {
         ReturnButton.onClick.RemoveAllListeners();
         ReturnButton.onClick.AddListener(POP);
@@ -43,6 +44,25 @@ public class ReturnLayer : UILayer
         ReturnMissionList.Add(returnAction);
         var returnLayer = UILayerLoader.Load<ReturnLayer>();
         returnLayer.Setup();
+    }
+
+    public static void AddUniTaskCancel(CancellationTokenSource cts)
+    {
+        var layer = UILayerLoader.Get<ReturnLayer>();
+        if (layer != null)
+        {
+            void triggerCts()
+            {
+                Debug.Log("cancel");
+                cts.Cancel();
+            }
+            
+            layer.ReturnButton.onClick.AddListener(() =>
+            {
+                triggerCts();
+                layer.ReturnButton.onClick.RemoveListener(triggerCts);
+            });
+        }
     }
 
     public void ForceBackMode(bool on)

@@ -1,3 +1,4 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using mainMenu;
 using UnityEngine;
@@ -34,9 +35,14 @@ public class StoneListLayer : UILayer
     
     public void Setup()
     {
+        var cts = new CancellationTokenSource();
+        ReturnLayer.AddUniTaskCancel(cts);
+        
         box.IniExTabs();
         box.GenerateCells();
-        box._tabEffects.SwitchZokusei(Element.blueMagic, ()=> box.IniExTabsEffects(PreScene.target.FxCamera)).Forget();
+        box._tabEffects.SwitchElement(Element.blueMagic, 
+            ()=> box.IniExTabsEffects(PreScene.target.FxCamera),
+            cts.Token).Forget();
         box.AddFeatureToCells(CellFeature_StoneShow);
         box.FilterFeatureRefresh(true);
         box.RestFilter();
@@ -47,7 +53,7 @@ public class StoneListLayer : UILayer
     public override void OnDestroy()
     {
         _skillStoneDetail.Clear();
-        box._tabEffects.CloseShowingZokuseiTagEffects();
+        box._tabEffects.CloseShowingTagEffects();
     }
     
     public void CellFeature_StoneShow(StoneCell _Cell)

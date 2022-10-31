@@ -15,7 +15,6 @@ public class SkillEditPage : MSceneProcess
     
     async UniTask EnterProcess()
     {
-        ProgressLayer.Loading(">", PreScene.target.T);
         var CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
         if (CheckIfExceedLimit.Count > 0)
         {
@@ -29,7 +28,6 @@ public class SkillEditPage : MSceneProcess
             x._connector.ShowMyModel(PreScene.target.Focusing != null ? PreScene.target.Focusing.id : null);
         });
         
-        ProgressLayer.Close();
         SetLoaded(true);
     }
     

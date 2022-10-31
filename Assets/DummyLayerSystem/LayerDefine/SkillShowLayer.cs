@@ -7,6 +7,7 @@ using DG.Tweening;
 using DummyLayerSystem;
 using UniRx;
 using System.Collections;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using ModelView;
 
@@ -130,7 +131,7 @@ namespace mainMenu
         // 离开技能展示画面的时候必须要清除掉不要的特效
         public void ClearRenderPs()
         {
-            foreach (GameObject _t in renderPs)
+            foreach (var _t in renderPs)
             {
                 Destroy(_t);
             }
@@ -140,7 +141,7 @@ namespace mainMenu
         //根据锁定的技能组，角色，来打印出所有技能按钮，以及背景按钮。
         public void SkillsPrintPageRefresh(UnitInfo _unitInfo)
         {
-            UnitConfig unitConfig = Units.GetUnitConfig(_unitInfo.r_id);
+            var unitConfig = Units.GetUnitConfig(_unitInfo.r_id);
             PageBGBtn.onClick.RemoveAllListeners();
             if (_unitInfo != null && _unitInfo.set != null)
             {
@@ -165,9 +166,10 @@ namespace mainMenu
         }
 
         // 打印出技能显示画面
-        async UniTask SkillScriptReader(SkillSet nineAndTwo, Element element)
+        async UniTask SkillScriptReader(SkillSet nineAndTwo, Element element, CancellationToken ct = default)
         {
-            await EffectsManager.StartUp(element);
+            await EffectsManager.StartUp(element, ct);
+            ct.ThrowIfCancellationRequested();
             DestroyFloatingMarks();
             ClearRenderPs();
             _skillStoneDetail.RefreshInfo((SkillEntity)null);

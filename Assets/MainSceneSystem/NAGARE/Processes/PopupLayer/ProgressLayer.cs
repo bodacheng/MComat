@@ -15,7 +15,7 @@ public class ProgressLayer : UILayer
     // 「正在读取」画面
     public static void Loading(string description, GameObject hook, float curtainAlpha = 0.8f)
     {
-        var layer = UILayerLoader.Load<ProgressLayer>();
+        var layer = UILayerLoader.Load<ProgressLayer>(true);
         layer.DarkOff(curtainAlpha,0.5f);
         layer.info.text = description;
     }

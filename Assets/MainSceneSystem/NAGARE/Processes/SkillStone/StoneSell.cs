@@ -27,6 +27,6 @@ public class StoneSell : MSceneProcess
     public override void ProcessEnd()
     {
         //StoneDeleteManger.target.ExitDeleteMode();
-        StoneListLayer.box._tabEffects.CloseShowingZokuseiTagEffects();
+        StoneListLayer.box._tabEffects.CloseShowingTagEffects();
     }
 }

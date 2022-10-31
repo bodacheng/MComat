@@ -88,12 +88,17 @@ namespace DummyLayerSystem
             }
         }
         
-        public static T Load<T>()
+        public static T Load<T>(bool insertToTop = false)
         {
             var layerName = typeof(T).Name;
             var existed = Get<T>();
             if (existed != null)
             {
+                if (insertToTop)
+                {
+                    var target = existed as GameObject;
+                    target?.transform.SetAsLastSibling();
+                }
                 return existed;
             }
             

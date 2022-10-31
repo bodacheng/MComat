@@ -21,7 +21,7 @@ public class SkillShowPage : MSceneProcess
     public override void ProcessEnd()
     {
         layer.ClearRenderPs();
-        layer.EffectsManager.CloseShowingZokuseiTagEffects();
+        layer.EffectsManager.CloseShowingTagEffects();
         UILayerLoader.Remove<SkillShowLayer>();
     }
 }

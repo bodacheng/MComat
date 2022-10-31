@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -11,25 +12,26 @@ namespace mainMenu
         ElementStoneTagsGroup _focusingEffectsGroup;
         ParticleSystem triggerExplosion0;
 
-        public async UniTask StartUp(Element element)
+        public async UniTask StartUp(Element element, CancellationToken ct = default)
         {
             if (_BtnEffects.ContainsKey(element))
                 return;
             var zt = new ElementStoneTagsGroup();
             await zt.INI_forSkillStoneBox(element, transform);
+            ct.ThrowIfCancellationRequested();
             _BtnEffects.Add(element, zt);
             var path = FightGlobalSetting.EffectPathDefine(element);
             triggerExplosion0 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
+            ct.ThrowIfCancellationRequested();
             triggerExplosion0.transform.SetParent(transform);
         }
         
-        public void CloseShowingZokuseiTagEffects()
+        public void CloseShowingTagEffects()
         {
-            if (_focusingEffectsGroup != null)
-                _focusingEffectsGroup.CloseTagEffects();
-            foreach (var VARIABLE in _BtnEffects)
+            _focusingEffectsGroup?.CloseTagEffects();
+            foreach (var kv in _BtnEffects)
             {
-                VARIABLE.Value.Clear();
+                kv.Value.Clear();
             }
         }
 
@@ -38,22 +40,20 @@ namespace mainMenu
             _focusingEffectsGroup?.SetSelectedTabPos(ex);
         }
         
-        public async UniTask SwitchZokusei(Element element, Action refreshTabEffects)
+        public async UniTask SwitchElement(Element element, Action refreshTabEffects, CancellationToken ct)
         {
-            await StartUp(element);
-            if (_focusingEffectsGroup != null)
-            {
-                _focusingEffectsGroup.CloseTagEffects();
-            }
-            
+            ProgressLayer.Loading(">", PreScene.target.T);
+            await StartUp(element, ct);
+            ct.ThrowIfCancellationRequested();
+            _focusingEffectsGroup?.CloseTagEffects();
             if (_BtnEffects.ContainsKey(element))
             {
                 _focusingEffectsGroup = _BtnEffects[element];
             }else{
-                Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
+                Debug.Log("fatal error element tags");
             }
-            
             refreshTabEffects.Invoke();
+            ProgressLayer.Close();
         }
         
         public void RefreshTagEffect(Vector3 pos, int sp_level)//按钮切换也可以在这里做文章
