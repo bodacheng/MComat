@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 /// <summary>
 /// 这个layer的问题在于，它必须灵活的适应未来可能做出的一些改动
@@ -9,6 +10,7 @@ public class TitleScreenLayer : UILayer
 {
     // Main
     [SerializeField] private RectTransform mainTab;
+    [SerializeField] private Image title;
     [SerializeField] private P3Button TouchScreen;
     [SerializeField] private Button accountLoginBtn;
     
@@ -18,13 +20,19 @@ public class TitleScreenLayer : UILayer
     [SerializeField] private InputField PASSWORD;
     [SerializeField] private Button LoginBtn;
     [SerializeField] private Button cancelBtn;
-    
+
+    private float titleAnimFactor = 0;
     public void Initialise()
     {
         TouchScreen.onClick.AddListener(TouchScreenLogin);
         accountLoginBtn.onClick.AddListener(()=> SwitchTab(2));
         cancelBtn.onClick.AddListener(()=> SwitchTab(1));
         LoginBtn.onClick.AddListener(EmailLogin);
+
+        DOTween.To(() => titleAnimFactor, (x) => titleAnimFactor = x, 2, 10).OnUpdate(() =>
+        {
+            title.material.SetFloat("_Animation_Factor", titleAnimFactor);
+        });
     }
     
     void SwitchTab(int step) // step 1:main ,step 2: login by pw
