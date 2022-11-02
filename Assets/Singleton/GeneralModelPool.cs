@@ -16,7 +16,7 @@ namespace Singleton
                 return null;
             }
             
-            var tempModel = await AddressablesLogic.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME + ".prefab");
+            var tempModel = await AddressablesLogic.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME);
             tempModel.transform.SetParent(parent);
             var odl = tempModel.GetComponent<OutsideDataLink>();
             if (odl == null)
