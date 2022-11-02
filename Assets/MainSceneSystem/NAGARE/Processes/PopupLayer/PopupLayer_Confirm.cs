@@ -17,7 +17,7 @@ public partial class PopupLayer : UILayer {
     /// 闪一下就关闭的提示窗口
     /// </summary>
     /// <param name="intro"></param>
-    public static void ArrangeWarnWindow(GameObject T, string intro)
+    public static void ArrangeWarnWindow(string intro)
     {
         var layer = UILayerLoader.Load<PopupLayer>();
         
@@ -30,7 +30,7 @@ public partial class PopupLayer : UILayer {
         layer.YesButton.onClick.AddListener(Close);
     }
     
-    public static void ArrangeConfirmWindow(GameObject T, UnityEngine.Events.UnityAction action, string intro)
+    public static void ArrangeConfirmWindow(UnityEngine.Events.UnityAction action, string intro)
     {
         var layer = UILayerLoader.Load<PopupLayer>();
         

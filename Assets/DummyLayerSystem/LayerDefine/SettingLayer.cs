@@ -87,11 +87,11 @@ public class SettingLayer : UILayer
                     PlayerAccountInfo.Me.Email,
                     () =>
                     {
-                        PopupLayer.ArrangeWarnWindow(gameObject, " Email Sent ");
+                        PopupLayer.ArrangeWarnWindow(" Email Sent ");
                     },
                     (x)=>
                     {
-                        PopupLayer.ArrangeWarnWindow(gameObject, x.ErrorMessage);
+                        PopupLayer.ArrangeWarnWindow(x.ErrorMessage);
                     }
                 );
             }
@@ -151,12 +151,12 @@ public class SettingLayer : UILayer
         
         linkDeviceBtn.onClick.AddListener(() =>
             {
-                PlayFabReadClient.LinkAccountPopup(gameObject, RefreshLinkDeviceBtn);
+                PlayFabReadClient.LinkAccountPopup(RefreshLinkDeviceBtn);
             }
         );
         unLinkDeviceBtn.onClick.AddListener(() =>
             {
-                PlayFabReadClient.UnLinkAccountPopup(gameObject, RefreshLinkDeviceBtn);
+                PlayFabReadClient.UnLinkAccountPopup(RefreshLinkDeviceBtn);
             }
         );
     }

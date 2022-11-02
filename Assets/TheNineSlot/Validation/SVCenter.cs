@@ -59,7 +59,7 @@ public static class SVCenter
             var info = Stones.Get(item.instanceId);
             if (dataAccess.Units.Get(info.UnitInstanceId) != null)
             {
-                PopupLayer.ArrangeWarnWindow(PreScene.target.T, "其他角色正在装备中！");
+                PopupLayer.ArrangeWarnWindow("其他角色正在装备中！");
                 return;
             }
 
@@ -109,7 +109,7 @@ public static class SVCenter
             var info = Stones.Get(fromItem.instanceId);
             if (dataAccess.Units.Get(info.UnitInstanceId) != null)
             {
-                PopupLayer.ArrangeWarnWindow(PreScene.target.T, "其他角色正在装备中！");
+                PopupLayer.ArrangeWarnWindow("其他角色正在装备中！");
                 return;
             }
             

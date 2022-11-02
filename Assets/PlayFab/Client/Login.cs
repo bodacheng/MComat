@@ -89,43 +89,41 @@ public partial class PlayFabReadClient
         EnterMainScene();
     }
     
-    public static void LinkAccountPopup(GameObject T, Action success)
+    public static void LinkAccountPopup(Action success)
     {
         PopupLayer.ArrangeConfirmWindow(
-            T,
             () =>
             {
                 LinkDevice(
                     () =>
                     {
-                        PopupLayer.ArrangeWarnWindow(T, " 已经关联账户 ");
+                        PopupLayer.ArrangeWarnWindow(" 已经关联账户 ");
                         success.Invoke();
                     },
                     (x) =>
                     {
-                        PopupLayer.ArrangeWarnWindow(T, "绑定失败"+ x.Error);
+                        PopupLayer.ArrangeWarnWindow("绑定失败"+ x.Error);
                     }
                 );
             }, 
             "当前设备没和这个账户进行绑定，绑定一下？绑定了的话。。");
     }
     
-    public static void UnLinkAccountPopup(GameObject T, Action success)
+    public static void UnLinkAccountPopup(Action success)
     {
         PopupLayer.ArrangeConfirmWindow(
-            T,
             () =>
             {
                 UnLinkDevice(
                     PlayerAccountInfo.Me.currentLinkedDeviceId,
                     () =>
                     {
-                        PopupLayer.ArrangeWarnWindow(T, " 已经与当前设备断开链接 ");
+                        PopupLayer.ArrangeWarnWindow(" 已经与当前设备断开链接 ");
                         success.Invoke();
                     },
                     () =>
                     {
-                        PopupLayer.ArrangeWarnWindow(T, " 未能与设备切断绑定，");
+                        PopupLayer.ArrangeWarnWindow(" 未能与设备切断绑定，");
                     }
                 );
             }, 

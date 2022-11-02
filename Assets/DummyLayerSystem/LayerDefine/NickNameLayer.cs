@@ -1,7 +1,5 @@
 using System;
-using DummyLayerSystem;
 using UnityEngine;
-using mainMenu;
 using TMPro;
 
 public class NickNameLayer : UILayer

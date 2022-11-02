@@ -22,7 +22,6 @@ public class StartUpPresentation : MonoBehaviour
             () =>
             {
                 PopupLayer.ArrangeConfirmWindow(
-                    T.gameObject,
                     (() =>
                     {
                         SceneManager.LoadScene(0);

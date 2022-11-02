@@ -122,7 +122,6 @@ public class FrontPage : MSceneProcess
                         (x) =>
                         {
                             PopupLayer.ArrangeConfirmWindow(
-                                PreScene.target.T,
                                 () =>
                                 {
                                     PlayFabReadClient.UpdateUserTitleDisplayName(
@@ -134,7 +133,7 @@ public class FrontPage : MSceneProcess
                                         },
                                         () =>
                                         {
-                                            PopupLayer.ArrangeWarnWindow(PreScene.target.T,"Network Error");
+                                            PopupLayer.ArrangeWarnWindow("Network Error");
                                         }
                                     );
                                 }, 

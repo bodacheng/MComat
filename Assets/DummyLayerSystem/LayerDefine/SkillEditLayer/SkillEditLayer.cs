@@ -93,7 +93,7 @@ public partial class SkillEditLayer : UILayer
                     warn = "确实要进行技能更新？";
                 break;
             }
-            PopupLayer.ArrangeConfirmWindow(PreScene.target.T, SkillEditConfirm, warn);
+            PopupLayer.ArrangeConfirmWindow(SkillEditConfirm, warn);
         }
         
         NineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
