@@ -122,7 +122,7 @@ public partial class PlayFabReadClient
                 PlayFabId = PlayerAccountInfo.Me.PlayFabId,
                 Keys = new List<string>() { "last_Level_completed", "stone_box_size", "arenaCountToday" }
             },
-            (GetUserDataResult obj) => {
+            (obj) => {
                 if (obj.Data.ContainsKey("last_Level_completed"))
                 {
                     PlayerAccountInfo.Me.ArcadeProcess = int.Parse(obj.Data["last_Level_completed"].Value);
@@ -144,20 +144,18 @@ public partial class PlayFabReadClient
         );
     }
 
-    public static void UpdateUserTitleDisplayName(string DisplayName, Action<UpdateUserTitleDisplayNameResult> finished, Action error)
+    public static void UpdateUserTitleDisplayName(string DisplayName, Action<UpdateUserTitleDisplayNameResult> finished, Action<PlayFabError> error)
     {
         PlayFabClientAPI.UpdateUserTitleDisplayName(
             new UpdateUserTitleDisplayNameRequest
             {
                 DisplayName = DisplayName
             },
-            (x)=>
-            {
-                finished.Invoke(x);
-            },
+            finished.Invoke,
         (x) =>
             {
                 Debug.Log(x);
+                error(x);
             }
         );
     }

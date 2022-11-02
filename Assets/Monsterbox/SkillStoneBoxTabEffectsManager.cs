@@ -42,7 +42,7 @@ namespace mainMenu
         
         public async UniTask SwitchElement(Element element, Action refreshTabEffects, CancellationToken ct)
         {
-            ProgressLayer.Loading(">", PreScene.target.T);
+            ProgressLayer.Loading(">");
             await StartUp(element, ct);
             ct.ThrowIfCancellationRequested();
             _focusingEffectsGroup?.CloseTagEffects();

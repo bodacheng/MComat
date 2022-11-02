@@ -13,7 +13,7 @@ public class ProgressLayer : UILayer
     [SerializeField] Image bigCurtain;
     
     // 「正在读取」画面
-    public static void Loading(string description, GameObject hook, float curtainAlpha = 0.8f)
+    public static void Loading(string description, float curtainAlpha = 0.8f)
     {
         var layer = UILayerLoader.Load<ProgressLayer>(true);
         layer.DarkOff(curtainAlpha,0.5f);

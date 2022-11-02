@@ -112,7 +112,7 @@ public class TeamEditPage : MSceneProcess
     
     void Save()
     {
-        ProgressLayer.Loading(">", PreScene.target.T);
+        ProgressLayer.Loading(">");
         switch (teamMode)
         {
             case "arena":

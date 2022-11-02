@@ -83,7 +83,7 @@ namespace mainMenu
                 }
             }
             
-            ProgressLayer.Loading(">", PreScene.target.T);
+            ProgressLayer.Loading(">");
             
             void Success(IDictionary<string, Tuple<string, string>> ChangedStoneDic)
             {

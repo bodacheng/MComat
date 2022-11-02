@@ -4,6 +4,7 @@ using dataAccess;
 using DG.Tweening;
 using System.Collections.Generic;
 using DummyLayerSystem;
+using PlayFab;
 using PlayFab.ClientModels;
 
 public class FrontPage : MSceneProcess
@@ -90,7 +91,7 @@ public class FrontPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        ProgressLayer.Loading(">", PreScene.target.T);
+        ProgressLayer.Loading(">");
         PlayFabReadClient.GetUserData(
             new GetUserDataRequest
             {
@@ -124,16 +125,23 @@ public class FrontPage : MSceneProcess
                             PopupLayer.ArrangeConfirmWindow(
                                 () =>
                                 {
+                                    ProgressLayer.Loading(">");
+                                    nickNameLayer.LoadingRender(true);
                                     PlayFabReadClient.UpdateUserTitleDisplayName(
                                         x,
                                         (x) =>
                                         {
                                             UILayerLoader.Remove<NickNameLayer>();
                                             EnterProcess();
+                                            ProgressLayer.Close();
                                         },
-                                        () =>
+                                        (x) =>
                                         {
-                                            PopupLayer.ArrangeWarnWindow("Network Error");
+                                            nickNameLayer.LoadingRender(false);
+                                            PopupLayer.ArrangeWarnWindow(x.Error == PlayFabErrorCode.InvalidUsername
+                                                ? "InvalidUsername"
+                                                : "Network Error");
+                                            ProgressLayer.Close();
                                         }
                                     );
                                 }, 

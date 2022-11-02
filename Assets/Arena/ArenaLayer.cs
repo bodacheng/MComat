@@ -74,7 +74,7 @@ public class ArenaLayer : UILayer
         RefreshBtn.onClick.RemoveAllListeners();
         RefreshBtn.onClick.AddListener(RefreshOpponent);
         
-        ProgressLayer.Loading(">", PreScene.target.T);
+        ProgressLayer.Loading(">");
         CloudScript.GetLeaderboardAroundUser(
             obj =>
             {

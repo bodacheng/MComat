@@ -14,4 +14,10 @@ public class NickNameLayer : UILayer
             setNickName.Invoke(nickNameInput.text);
         });
     }
+
+    public void LoadingRender(bool loading)
+    {
+        nickNameInput.interactable = !loading;
+        OK.interactable = !loading;
+    }
 }
