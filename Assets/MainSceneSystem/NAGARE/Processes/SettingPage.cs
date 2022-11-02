@@ -1,5 +1,7 @@
+using System;
 using DummyLayerSystem;
 using mainMenu;
+using PlayFab;
 
 public class SettingPage : MSceneProcess
 {
@@ -38,5 +40,41 @@ public class SettingPage : MSceneProcess
     public override void ProcessEnd()
     {
         SettingLayer.Close();
+    }
+
+    public static void SetNickName(Action<string> success, bool closeBtnOn)
+    {
+        var nickNameLayer = UILayerLoader.Load<NickNameLayer>();
+        nickNameLayer.Cancel.gameObject.SetActive(closeBtnOn);
+        nickNameLayer.Setup(
+            (x) =>
+            {
+                PopupLayer.ArrangeConfirmWindow(
+                    () =>
+                    {
+                        ProgressLayer.Loading(">");
+                        nickNameLayer.LoadingRender(true);
+                        PlayFabReadClient.UpdateUserTitleDisplayName(
+                            x,
+                            (x) =>
+                            {
+                                PlayerAccountInfo.Me.TitleDisplayName = x.DisplayName;
+                                UILayerLoader.Remove<NickNameLayer>();
+                                ProgressLayer.Close();
+                                success?.Invoke(x.DisplayName);
+                            },
+                            (x) =>
+                            {
+                                nickNameLayer.LoadingRender(false);
+                                PopupLayer.ArrangeWarnWindow(x.Error == PlayFabErrorCode.InvalidUsername
+                                    ? "InvalidUsername"
+                                    : "Network Error");
+                                ProgressLayer.Close();
+                            }
+                        );
+                    }, 
+                    "Set as your nick name?");
+            }
+        );
     }
 }

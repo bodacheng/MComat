@@ -118,36 +118,7 @@ public class FrontPage : MSceneProcess
                 ProgressLayer.Close();
                 if (PlayerAccountInfo.Me.TitleDisplayName == null)
                 {
-                    var nickNameLayer = UILayerLoader.Load<NickNameLayer>();
-                    nickNameLayer.Setup(
-                        (x) =>
-                        {
-                            PopupLayer.ArrangeConfirmWindow(
-                                () =>
-                                {
-                                    ProgressLayer.Loading(">");
-                                    nickNameLayer.LoadingRender(true);
-                                    PlayFabReadClient.UpdateUserTitleDisplayName(
-                                        x,
-                                        (x) =>
-                                        {
-                                            UILayerLoader.Remove<NickNameLayer>();
-                                            EnterProcess();
-                                            ProgressLayer.Close();
-                                        },
-                                        (x) =>
-                                        {
-                                            nickNameLayer.LoadingRender(false);
-                                            PopupLayer.ArrangeWarnWindow(x.Error == PlayFabErrorCode.InvalidUsername
-                                                ? "InvalidUsername"
-                                                : "Network Error");
-                                            ProgressLayer.Close();
-                                        }
-                                    );
-                                }, 
-                            "Set as your nick name?");
-                        }
-                    );
+                    SettingPage.SetNickName((_)=>EnterProcess(), false);
                 }
                 else
                 {

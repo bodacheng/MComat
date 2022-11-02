@@ -25,9 +25,4 @@ public class PlayerAccountInfo
     }
     
     public string TutorialProgress = string.Empty;
-    
-    public PlayerAccountInfo()
-    {
-        TitleDisplayName = "helloKitty";
-    }
 }

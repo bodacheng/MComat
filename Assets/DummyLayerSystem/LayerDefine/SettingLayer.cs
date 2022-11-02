@@ -1,12 +1,9 @@
 ﻿using DummyLayerSystem;
-using mainMenu;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingLayer : UILayer
 {
-
     [SerializeField] RectTransform selectedFrame;
     
     #region Btns
@@ -14,6 +11,7 @@ public class SettingLayer : UILayer
     [SerializeField] Button accountBtn;
     [SerializeField] Button deviceBtn;
     [SerializeField] Button supportBtn;
+    [SerializeField] Button nickNameBtn;
     #endregion
     
     #region Panels
@@ -21,6 +19,7 @@ public class SettingLayer : UILayer
     [SerializeField] RectTransform accountPanel;
     [SerializeField] RectTransform devicePanel;
     [SerializeField] RectTransform supportPanel;
+    [SerializeField] RectTransform nickNamePanel;
     #endregion
     
     #region Sound
@@ -42,6 +41,11 @@ public class SettingLayer : UILayer
     [SerializeField] private Button linkDeviceBtn;
     [SerializeField] private Button unLinkDeviceBtn;
     [SerializeField] private Text instruction;
+    #endregion
+
+    #region nickName
+    [SerializeField] private Text nickName;
+    [SerializeField] private Button resetNickNameBtn;
     #endregion
 
     public void AccountPhase_EmailToBeSet()
@@ -106,6 +110,7 @@ public class SettingLayer : UILayer
     
     public void Initialise()
     {
+        nickName.text = PlayerAccountInfo.Me.TitleDisplayName;
         CurrentEmail.text = PlayerAccountInfo.Me.PlayFabUserName;
         
         void CloseAllPanels()
@@ -114,6 +119,7 @@ public class SettingLayer : UILayer
             accountPanel.gameObject.SetActive(false);
             devicePanel.gameObject.SetActive(false);
             supportPanel.gameObject.SetActive(false);
+            nickNamePanel.gameObject.SetActive(false);
         }
         
         volumeBtn.onClick.AddListener(() =>
@@ -142,6 +148,21 @@ public class SettingLayer : UILayer
             CloseAllPanels();
             supportPanel.gameObject.SetActive(true);
             SetSelectedFrame(supportBtn.GetComponent<RectTransform>());
+        });
+        
+        nickNameBtn.onClick.AddListener(() =>
+        {
+            CloseAllPanels();
+            nickNamePanel.gameObject.SetActive(true);
+            SetSelectedFrame(nickNameBtn.GetComponent<RectTransform>());
+            resetNickNameBtn.onClick.AddListener(() =>
+            {
+                SettingPage.SetNickName((x) =>
+                {
+                    PopupLayer.ArrangeWarnWindow("Nickname Set");
+                    nickName.text = x;
+                }, true);
+            });
         });
         
         onBgmChange();
