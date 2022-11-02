@@ -91,7 +91,7 @@ public static class HurtObjectManager
                 }
             }
             
-            weaponPrefab = await TryLoadWeaponPrefab("HurtObjects/" + MagicForwardPath + "/" + resource_name + ".prefab");
+            weaponPrefab = await TryLoadWeaponPrefab(MagicForwardPath + "/" + resource_name + ".prefab");
             
             if (weaponPrefab != null)
             {
@@ -122,7 +122,7 @@ public static class HurtObjectManager
                 return;
         }
         
-        weaponPrefab = await TryLoadWeaponPrefab("HurtObjects/" + basicMagicForwardPath + "/" + resource_name + ".prefab");
+        weaponPrefab = await TryLoadWeaponPrefab(basicMagicForwardPath + "/" + resource_name + ".prefab");
         
         if (weaponPrefab != null)
         {
@@ -155,7 +155,7 @@ public static class HurtObjectManager
                     return;
             }
             
-            weaponPrefab = await TryLoadWeaponPrefab("HurtObjects/" + basicMagicForwardPath + "/" + resource_name + ".prefab");
+            weaponPrefab = await TryLoadWeaponPrefab(basicMagicForwardPath + "/" + resource_name + ".prefab");
             
             if (weaponPrefab != null)
             {

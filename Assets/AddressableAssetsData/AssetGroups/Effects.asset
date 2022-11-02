@@ -18,32 +18,32 @@ MonoBehaviour:
   m_GUID: 64e13291244ba4a7081263bae4da9fd5
   m_SerializeEntries:
   - m_GUID: f086acfb6dc9946beac72e9cfc67ded9
-    m_Address: Effects/blueMagic
+    m_Address: blueMagic
     m_ReadOnly: 0
     m_SerializedLabels:
     - effect
   - m_GUID: d2cb06a3d8f5b4c2eb2214f46ebe885f
-    m_Address: Effects/darkMagic
+    m_Address: darkMagic
     m_ReadOnly: 0
     m_SerializedLabels:
     - effect
   - m_GUID: ca7d60e6fecaa4cdebb6069c3ddc94ce
-    m_Address: Effects/defaultmagic
+    m_Address: defaultmagic
     m_ReadOnly: 0
     m_SerializedLabels:
     - effect
   - m_GUID: 14ca550a50cfd4b5991f49b5d73a60f4
-    m_Address: Effects/greenMagic
+    m_Address: greenMagic
     m_ReadOnly: 0
     m_SerializedLabels:
     - effect
   - m_GUID: aff4e202137ba41ec82dab77a9e68085
-    m_Address: Effects/lightMagic
+    m_Address: lightMagic
     m_ReadOnly: 0
     m_SerializedLabels:
     - effect
   - m_GUID: 8b322cffeb156444281ed22adc0a03e5
-    m_Address: Effects/redMagic
+    m_Address: redMagic
     m_ReadOnly: 0
     m_SerializedLabels:
     - effect

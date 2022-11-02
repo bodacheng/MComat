@@ -29,10 +29,10 @@ public class PreparingProcess : FSceneProcess
             AddressablesLogic.Essentials(),
             BoundaryControlByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID),
             RTFightManager.target.LoadUnits(NetFightScene.Fight),
-            EffectsManager.INIEffectsPool("hit_ground", null, 3),
-            EffectsManager.INIEffectsPool("wallCrack", null, 3),
-            EffectsManager.INIEffectsPool("break_free", null, 3),
-            EffectsManager.INIEffectsPool("memberShift", null, 3)
+            EffectsManager.IniEffectsPool("hit_ground", null, 3),
+            EffectsManager.IniEffectsPool("wallCrack", null, 3),
+            EffectsManager.IniEffectsPool("break_free", null, 3),
+            EffectsManager.IniEffectsPool("memberShift", null, 3)
         };
         await UniTask.WhenAll(tasks);
         

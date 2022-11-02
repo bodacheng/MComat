@@ -112,18 +112,18 @@ public partial class Data_Center : MonoBehaviour
         
         var tasks = new List<UniTask>
         {
-            EffectsManager.INIEffectsPool("short_effect", FightGlobalSetting.EffectPathDefine(element), 3),
-            EffectsManager.INIEffectsPool("normal_effect", FightGlobalSetting.EffectPathDefine(element), 3),
-            EffectsManager.INIEffectsPool("long_effect", FightGlobalSetting.EffectPathDefine(element), 3),
-            EffectsManager.INIEffectsPool("Sparks", FightGlobalSetting.EffectPathDefine(element), 3),
-            EffectsManager.INIEffectsPool("hitwave", FightGlobalSetting.EffectPathDefine(element), 3),
-            EffectsManager.INIEffectsPool("light_hit", FightGlobalSetting.EffectPathDefine(element), 3),
-            EffectsManager.INIEffectsPool("heavy_hit", FightGlobalSetting.EffectPathDefine(element), 3),
-            EffectsManager.INIEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(element), 3),
-            EffectsManager.INIEffectsPool("resistanceUp", FightGlobalSetting.EffectPathDefine(element), 3),
-            EffectsManager.INIEffectsPool("on_enable_effect", FightGlobalSetting.EffectPathDefine(element), 3),
-            EffectsManager.INIEffectsPool("FlashStart", FightGlobalSetting.EffectPathDefine(element), 3),
-            EffectsManager.INIEffectsPool("FlashEnd", FightGlobalSetting.EffectPathDefine(element), 3)
+            EffectsManager.IniEffectsPool("short_effect", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.IniEffectsPool("normal_effect", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.IniEffectsPool("long_effect", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.IniEffectsPool("Sparks", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.IniEffectsPool("hitwave", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.IniEffectsPool("light_hit", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.IniEffectsPool("heavy_hit", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.IniEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.IniEffectsPool("resistanceUp", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.IniEffectsPool("on_enable_effect", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.IniEffectsPool("FlashStart", FightGlobalSetting.EffectPathDefine(element), 3),
+            EffectsManager.IniEffectsPool("FlashEnd", FightGlobalSetting.EffectPathDefine(element), 3)
         };
         
         //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招

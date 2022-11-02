@@ -18,57 +18,32 @@ MonoBehaviour:
   m_GUID: 157b11f4138794e828a44fe1b11e91ce
   m_SerializeEntries:
   - m_GUID: a5f71a40524fc4afea0d7136365a0768
-    m_Address: HurtObjects/bluemagic
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - weapon
-  - m_GUID: d77541384f2894fdc860ae5ad456871e
-    m_Address: HurtObjects/bluemagic_old
+    m_Address: bluemagic
     m_ReadOnly: 0
     m_SerializedLabels:
     - weapon
   - m_GUID: e2a7d7e67697d483fb476a8e81f0af38
-    m_Address: HurtObjects/darkmagic
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - weapon
-  - m_GUID: 9eb43a153e3414e8184cbb1090797330
-    m_Address: HurtObjects/darkmagic_old
+    m_Address: darkmagic
     m_ReadOnly: 0
     m_SerializedLabels:
     - weapon
   - m_GUID: 2d823c1fb646349b894badaf146bce05
-    m_Address: HurtObjects/defaultmagic
+    m_Address: defaultmagic
     m_ReadOnly: 0
     m_SerializedLabels:
     - weapon
   - m_GUID: 64c0940bcfa204eabb7147436da27b90
-    m_Address: HurtObjects/greenmagic
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - weapon
-  - m_GUID: 76f328c869a3d4476bca2b2047b8da3a
-    m_Address: HurtObjects/greenmagic_old
+    m_Address: greenmagic
     m_ReadOnly: 0
     m_SerializedLabels:
     - weapon
   - m_GUID: b41378ed82cac40789cfe56989ba88cc
-    m_Address: HurtObjects/lightmagic
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - weapon
-  - m_GUID: c2935d7fc6b8c4a7e990936229c2ece5
-    m_Address: HurtObjects/lightmagic_old
+    m_Address: lightmagic
     m_ReadOnly: 0
     m_SerializedLabels:
     - weapon
   - m_GUID: 1525bc5928d6f4b41a2b8386153079b4
-    m_Address: HurtObjects/redmagic
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - weapon
-  - m_GUID: 34469abab2e9c4c309965dc72047548d
-    m_Address: HurtObjects/redmagic_old
+    m_Address: redmagic
     m_ReadOnly: 0
     m_SerializedLabels:
     - weapon
