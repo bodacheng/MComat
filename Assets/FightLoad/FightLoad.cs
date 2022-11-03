@@ -1,7 +1,6 @@
 ﻿using UnityEngine.SceneManagement;
 using dataAccess;
 using FightScene;
-using mainMenu;
 
 public static class FightLoad
 {

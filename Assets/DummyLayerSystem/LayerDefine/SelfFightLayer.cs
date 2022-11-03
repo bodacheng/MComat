@@ -44,7 +44,7 @@ namespace mainMenu
         public void INI()
         {
             _stage = ScriptableObject.CreateInstance<FightInfo>();
-            _stage.BattleGroundID = 0;
+            _stage.BattleGroundID = 1;
             
             IniMultiRaidModeUnitIcons(new List<HeroIcon> { team1back, team1left, team1front, team1right }, Team.player1);
             IniMultiRaidModeUnitIcons(new List<HeroIcon> { team2back, team2left, team2front, team2right }, Team.player2);

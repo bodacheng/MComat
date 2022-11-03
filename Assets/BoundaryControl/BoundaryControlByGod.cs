@@ -32,9 +32,9 @@ public class BoundaryControlByGod : MonoBehaviour {
         }
     }
 
-    public async UniTask ChangeBackGround(int Number)
+    public async UniTask ChangeBackGround(int number)
     {
-        var battleGround = await AddressablesLogic.LoadObject("battleGround/" +Number);
+        var battleGround = await AddressablesLogic.LoadObject("battleGround/" +number);
         if (battleGround != null)
         {
             battleGround.GetComponent<BattleGround>().Set();

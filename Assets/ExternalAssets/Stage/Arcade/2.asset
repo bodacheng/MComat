@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf3bb8ad816a44358eca5831d97217e, type: 3}
   m_Name: 2
   m_EditorClassIdentifier: 
-  BattleGroundID: 0
+  BattleGroundID: 1
   battleNameENG: 
   battleNameJPG: 
   battleNameCH: 
