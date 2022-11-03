@@ -36,12 +36,11 @@ public static class HurtObjectManager
     {
         if (!keyExists.Contains(key))
         {
-            Debug.Log(key +"资源key不存在？");
             return default;
         }
         else
         {
-            var returnValue =  AddressablesLogic.LoadObject(key);
+            var returnValue =  AddressablesLogic.LoadT<GameObject>(key);
             return returnValue;
         }
     }
@@ -90,10 +89,8 @@ public static class HurtObjectManager
         }
         
         weaponPrefab = await TryLoadWeaponPrefab(basicMagicForwardPath + "/" + resource_name + ".prefab");
-        Debug.Log("这个"+ basicMagicForwardPath + "/" + resource_name + ".prefab到底是什么：" + weaponPrefab);
         if (weaponPrefab != null)
         {
-            Debug.Log("是null却仍然执行？？"+ weaponPrefab);
             poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resource_name,FightGlobalSetting._HurtObjectPreLoadCount);
             
             var decomposition = weaponPrefab.GetComponent<Decomposition>();
@@ -113,18 +110,19 @@ public static class HurtObjectManager
         }
 
         //////////// 第三环节  /////////////
-        if (basicMagicForwardPath != "defaultmagic")
+        if (basicMagicForwardPath != FightGlobalSetting.EffectPathDefine())
         {
-            basicMagicForwardPath = "defaultmagic";
+            basicMagicForwardPath = FightGlobalSetting.EffectPathDefine();
             if (HurtPoolDic.ContainsKey(basicMagicForwardPath + "/" + resource_name))
             {
                 HurtPoolDic.TryGetValue(basicMagicForwardPath + "/" + resource_name, out poolToConstruct);
                 if (poolToConstruct != null)
+                {
                     return;
+                }
             }
             
             weaponPrefab = await TryLoadWeaponPrefab(basicMagicForwardPath + "/" + resource_name + ".prefab");
-            
             if (weaponPrefab != null)
             {
                 poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resource_name,FightGlobalSetting._HurtObjectPreLoadCount);
@@ -162,9 +160,9 @@ public static class HurtObjectManager
         }
         
         // 第三轮
-        if (myDefaultMagicPath != FightGlobalSetting.EffectPathDefine(Element.Null))
+        if (myDefaultMagicPath != FightGlobalSetting.EffectPathDefine())
         {
-            myDefaultMagicPath = FightGlobalSetting.EffectPathDefine(Element.Null);
+            myDefaultMagicPath = FightGlobalSetting.EffectPathDefine();
             if (HurtPoolDic.ContainsKey(myDefaultMagicPath + "/" + resource_name))
             {
                 HurtPoolDic.TryGetValue(myDefaultMagicPath + "/" + resource_name, out _hurtObjectPool);

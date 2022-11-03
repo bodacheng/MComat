@@ -66,6 +66,8 @@ namespace mainMenu
             AnimationResourceLoader.Instance.Clear();
             DedicatedCameraConnector.ClearBackUpModels();
             AddressablesLogic.ReleaseAsyncOperationHandles();
+            HurtObjectManager.Clear();
+            EffectsManager.Clear();
             
             Screen.SetResolution(1920, 1080, true);
             UILayerLoader.Clear();

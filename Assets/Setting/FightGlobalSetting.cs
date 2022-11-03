@@ -60,7 +60,7 @@ public class FightGlobalSetting : ScriptableObject
     public static Material _shadowMaterial;
     public static int _defendHP;
     
-    public static string EffectPathDefine(Element element)
+    public static string EffectPathDefine(Element element = Element.Null)
     {
         string personalEffectPath;
         switch (element)

@@ -41,6 +41,8 @@ namespace FightScene
             AnimationResourceLoader.Instance.Clear();
             DedicatedCameraConnector.ClearBackUpModels();
             AddressablesLogic.ReleaseAsyncOperationHandles();
+            HurtObjectManager.Clear();
+            EffectsManager.Clear();
             
             UILayerLoader.Clear();
             UILayerLoader.SetHanger(T);
