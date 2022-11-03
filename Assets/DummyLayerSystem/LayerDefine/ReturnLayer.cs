@@ -3,7 +3,6 @@ using System.Threading;
 using DummyLayerSystem;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using mainMenu;
 using UnityEngine;
 
 public class ReturnLayer : UILayer
@@ -22,6 +21,7 @@ public class ReturnLayer : UILayer
     
     public static void POP()
     {
+        Debug.Log("her:"+ ReturnMissionList.Count);
         if (ReturnMissionList.Count == 0)
             return;
         unityEvent.RemoveAllListeners();
@@ -41,6 +41,7 @@ public class ReturnLayer : UILayer
     
     public static void PUSH(UnityAction returnAction)
     {
+        Debug.Log("WE ARE:"+returnAction);
         ReturnMissionList.Add(returnAction);
         var returnLayer = UILayerLoader.Load<ReturnLayer>();
         returnLayer.Setup();

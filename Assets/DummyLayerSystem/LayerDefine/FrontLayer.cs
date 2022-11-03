@@ -20,12 +20,12 @@ public class FrontLayer : UILayer
     
     public void Initialise(PreScene pre)
     {
-        ArcadeBtn.onClick.AddListener(()=> pre.trySwitchToStep(MainSceneStep.ArcadeFront,true));
-        ArenaBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.Arena, true));
-        MemberBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.UnitList, true));
-        TrainBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SelfFightFront, true));
-        StonesBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SkillStoneList, true));
-        GotchaBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.GotchaFront, true));
+        ArcadeBtn.onClick.AddListener(()=> pre.trySwitchToStep(MainSceneStep.ArcadeFront));
+        ArenaBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.Arena));
+        MemberBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.UnitList));
+        TrainBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SelfFightFront));
+        StonesBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SkillStoneList));
+        GotchaBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.GotchaFront));
         
         SkillTestRBtn.onClick.AddListener(pre.BeginSkillTest_Rotation);
         SkillTestMBtn.onClick.AddListener(pre.BeginSkillTest_Multi);

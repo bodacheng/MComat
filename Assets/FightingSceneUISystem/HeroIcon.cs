@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using Singleton;

@@ -30,22 +30,29 @@ public class ArenaLayer : UILayer
     [SerializeField] GameObject goldAwardGot;
     [SerializeField] Button questionBtn;
     #endregion
-
+    
+    [SerializeField] Button rankingPageBtn;
+    
     private int maxArenaPoint = 1300;
     private int bronzePoint = 400;
     private int silverPoint = 800;
     private int goldPoint = 1200;
     
-    CloudScript.LeaderboardInfo myLeaderboardInfo;
+    LeaderboardInfo myLeaderboardInfo;
     
     private Action<bool> SetLoaded;
     private Action<string> ReturnToLobby;
-    private Func<int, List<CloudScript.LeaderboardInfo>> GetOpponentAroundPoint;
-    public void SetUp(Action<bool> SetLoaded, Action<string> ReturnToLobby, Func<int, List<CloudScript.LeaderboardInfo>> GetOpponentAroundPoint)
+    private Func<int, List<LeaderboardInfo>> GetOpponentAroundPoint;
+    public void SetUp(Action<bool> SetLoaded, 
+        Action<string> ReturnToLobby, 
+        Func<int, List<LeaderboardInfo>> GetOpponentAroundPoint,
+        Action openRanking)
     {
         this.SetLoaded = SetLoaded;
         this.ReturnToLobby = ReturnToLobby;
         this.GetOpponentAroundPoint = GetOpponentAroundPoint;
+        rankingPageBtn.onClick.RemoveAllListeners();
+        rankingPageBtn.onClick.AddListener(()=> openRanking());
     }
 
     void RefreshRankPointBar(int current)
@@ -78,7 +85,7 @@ public class ArenaLayer : UILayer
         CloudScript.GetLeaderboardAroundUser(
             obj =>
             {
-                var exceptSelf = new List<CloudScript.LeaderboardInfo>();
+                var exceptSelf = new List<LeaderboardInfo>();
                 foreach (var t in obj)
                 {
                     if (t.PlayerLeaderboardEntry.PlayFabId != PlayerAccountInfo.Me.PlayFabId)
@@ -131,7 +138,7 @@ public class ArenaLayer : UILayer
     }
     
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
-    void DisplayOpponents(List<CloudScript.LeaderboardInfo> leaderboards)
+    void DisplayOpponents(List<LeaderboardInfo> leaderboards)
     {
         foreach (Transform c in EnemiesT)
         {

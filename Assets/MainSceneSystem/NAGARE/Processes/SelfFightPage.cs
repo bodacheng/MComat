@@ -3,7 +3,7 @@ using DummyLayerSystem;
 using mainMenu;
 
 public class SelfFightPage : MSceneProcess
-{    
+{
     public SelfFightPage()
     {
         Step = MainSceneStep.SelfFightFront;

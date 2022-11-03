@@ -8,7 +8,10 @@ public class ArenaPage : MSceneProcess
     void EnterProcess()
     {
         arenaLayer = UILayerLoader.Load<ArenaLayer>();
-        arenaLayer.SetUp(SetLoaded, PreScene.ReturnToLobby, table.GetDummiesAroundPoint);
+        arenaLayer.SetUp(SetLoaded, PreScene.ReturnToLobby, table.GetDummiesAroundPoint, () =>
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.Ranking);
+        });
         arenaLayer.ShowMyTeam();
         
         if (PlayerAccountInfo.Me.arenaPoint != -1)

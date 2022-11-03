@@ -68,9 +68,9 @@ public class ArenaDummiesTable
 		return rowList.Count;
 	}
 	
-	CloudScript.LeaderboardInfo RowToLeaderboardInfo(Row row)
+	LeaderboardInfo RowToLeaderboardInfo(Row row)
 	{
-		var info = new CloudScript.LeaderboardInfo()
+		var info = new LeaderboardInfo()
 		{
 			PlayerLeaderboardEntry = new PlayerLeaderboardEntry
 			{
@@ -83,7 +83,7 @@ public class ArenaDummiesTable
 		return info;
 	}
 
-	public List<CloudScript.LeaderboardInfo> GetDummiesAroundPoint(int point)
+	public List<LeaderboardInfo> GetDummiesAroundPoint(int point)
 	{
 		Row startRow = null;
 		int startIndex;
@@ -98,18 +98,18 @@ public class ArenaDummiesTable
 		}
 		
 		if (startRow == null)
-			return new List<CloudScript.LeaderboardInfo>();
+			return new List<LeaderboardInfo>();
 		
 		var s = Resources.Load( "ArenaDummies/" + startRow.NICK_NAME) as FightInfo;
 		if (s == null)
 		{
 			Debug.Log("Cant find dummy:"+ startRow.NICK_NAME);
-			return new List<CloudScript.LeaderboardInfo>();
+			return new List<LeaderboardInfo>();
 		}
 		
 		startRow.SetFightMembers(s.FightMembers);
 		
-		var returnValue = new List<CloudScript.LeaderboardInfo> { RowToLeaderboardInfo(startRow) };
+		var returnValue = new List<LeaderboardInfo> { RowToLeaderboardInfo(startRow) };
 		for (var i = startIndex + 1; i < startIndex + 3; i++)
 		{
 			if (i >= rowList.Count)

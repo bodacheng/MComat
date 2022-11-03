@@ -113,6 +113,7 @@ namespace mainMenu
             var gotchaFront = new GotchaFront();
             var gotchaResult = new GotchaResult();
             var arenaPage = new ArenaPage();
+            var rankingPage = new RankingPage();
             
             // mail
             var mailBox = new MailBoxProcess();
@@ -131,6 +132,7 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.FrontPage, frontPage);
             ProcessesRunner.Main.Add(MainSceneStep.ArcadeFront, arcadeFrontPage);
             ProcessesRunner.Main.Add(MainSceneStep.Arena, arenaPage);
+            ProcessesRunner.Main.Add(MainSceneStep.Ranking, rankingPage);
             ProcessesRunner.Main.Add(MainSceneStep.ShopTop, shopTop);
             ProcessesRunner.Main.Add(MainSceneStep.BoxOverLoadHelper, boxOverLoadFix);
             ProcessesRunner.Main.Add(MainSceneStep.MailBox, mailBox);
@@ -192,6 +194,7 @@ namespace mainMenu
                 {
                     trySwitchToStep(returnToStep, false);
                 }
+                Debug.Log("back to:"+ returnToStep);
                 ProcessesRunner.Main.ChangeProcess(next_step);
                 ReturnLayer.PUSH(returnToCurrent);
             }

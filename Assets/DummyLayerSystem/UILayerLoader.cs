@@ -13,6 +13,7 @@ namespace DummyLayerSystem
             {"FrontLayer", "DummyLayerSystem/FrontLayer"},
             {"ArcadeTop", "DummyLayerSystem/ArcadeTop"},
             {"ArenaLayer", "DummyLayerSystem/ArenaLayer"},
+            {"RankingLayer", "DummyLayerSystem/RankingLayer"},
             {"MailBox", "DummyLayerSystem/MailBox"},
             {"MailDetail", "DummyLayerSystem/MailDetail"},
             {"ArenaFightOver", "DummyLayerSystem/ArenaFightOver"},

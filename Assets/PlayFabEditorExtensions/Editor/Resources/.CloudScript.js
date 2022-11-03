@@ -567,6 +567,40 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     return { teamInfos };
 }
 
+handlers.GetLeaderboard = function (args, context) {
+
+    var request = {
+        "MaxResultsCount": 20, //自己，和三个对手
+        "StatisticName": "arenapoint",
+        "ProfileConstraints" : {
+            "ShowDisplayName" : true
+        }
+    };
+    var Result = server.GetLeaderboard(request);
+    let teamInfos = [];
+
+    for (let i = 0; i < Result.Leaderboard.length; i++) {
+
+        var playerTeamData = server.GetUserData(
+            {
+                PlayFabId: Result.Leaderboard[i].PlayFabId,
+                Keys: ["DefendTeam"]
+            }
+        );
+
+        // 玩家可能未曾保存过防御队伍阵容，对这种玩家不返回。
+        if (playerTeamData.Data["DefendTeam"] != null) {
+            var item = {
+                "PlayerLeaderboardEntry": Result.Leaderboard[i],
+                "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value)
+            };
+            teamInfos.push(item);
+        }
+    }
+
+    return { teamInfos };
+}
+
 // 应该已经没用
 handlers.ArenaReward = function (args, context) {
     

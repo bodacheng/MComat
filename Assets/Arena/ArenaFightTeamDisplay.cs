@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using mainMenu;
 
@@ -12,17 +13,17 @@ public class ArenaFightTeamDisplay : MonoBehaviour
     public Button BigButton;
         
     // 本函数唯一用途是竞技场的挑战玩家选择画面里每组敌人图标按钮的外观与功能加载
-    public void AddFightToList(CloudScript.LeaderboardInfo LInfo)
+    public void AddFightToList(LeaderboardInfo info)
     {
-        displayName.text = LInfo.PlayerLeaderboardEntry.DisplayName;
-        rank.text = LInfo.PlayerLeaderboardEntry.Position.ToString();
-        arenaPoint.text =  LInfo.PlayerLeaderboardEntry.StatValue.ToString();
+        displayName.text = info.PlayerLeaderboardEntry.DisplayName;
+        rank.text = info.PlayerLeaderboardEntry.Position.ToString();
+        arenaPoint.text =  info.PlayerLeaderboardEntry.StatValue.ToString();
         
         // 竞技场模式下毫无考虑敌人“多组上场”的情况
-        for (var index = 0; index < LInfo.Team.Length; index++)
+        for (var index = 0; index < info.Team.Length; index++)
         {
-            var posNum = LInfo.Team[index].key2;
-            var unitInfo = LInfo.Team[index].value;
+            var posNum = info.Team[index].key2;
+            var unitInfo = info.Team[index].value;
             HeroIcon target = null;
             switch (posNum)
             {
@@ -43,14 +44,14 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         {
             EnemySets =
             {
-                _SerializableSets = LInfo.Team
+                _SerializableSets = info.Team
             }
         };
         fightMembers.EnemySets.ConvertSerializableArrayToDictionary();
         var stage = FightInfo.ArenaStage(fightMembers);
-        stage.team2ID = LInfo.PlayerLeaderboardEntry.PlayFabId;
+        stage.team2ID = info.PlayerLeaderboardEntry.PlayFabId;
         stage.EventType = FightEventType.Arena;
-        stage.Team2ArenaPoint = LInfo.PlayerLeaderboardEntry.StatValue;
+        stage.Team2ArenaPoint = info.PlayerLeaderboardEntry.StatValue;
         
         BigButton.onClick.RemoveAllListeners();
         void PrepareForIt()
@@ -58,5 +59,42 @@ public class ArenaFightTeamDisplay : MonoBehaviour
             PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, true);
         }
         BigButton.onClick.AddListener(PrepareForIt);
+    }
+    
+    public void ArenaRankingShow(LeaderboardInfo info, Action<UnitInfo> onClickUnitIcon)
+    {
+        displayName.text = info.PlayerLeaderboardEntry.DisplayName;
+        rank.text = info.PlayerLeaderboardEntry.Position.ToString();
+        arenaPoint.text =  info.PlayerLeaderboardEntry.StatValue.ToString();
+        
+        var fightMembers = new FightMembers
+        {
+            EnemySets =
+            {
+                _SerializableSets = info.Team
+            }
+        };
+        fightMembers.EnemySets.ConvertSerializableArrayToDictionary();
+        
+        for (var index = 0; index < info.Team.Length; index++)
+        {
+            var posNum = info.Team[index].key2;
+            var unitInfo = info.Team[index].value;
+            HeroIcon target = null;
+            switch (posNum)
+            {
+                case 0:
+                    target = member1;
+                    break;
+                case 1:
+                    target = member2;
+                    break;
+                case 2:
+                    target = member3;
+                    break;
+            }
+            target.ChangeIcon(unitInfo);
+            target.iconButton.AddListener(() => { onClickUnitIcon(unitInfo); });
+        }
     }
 }

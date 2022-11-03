@@ -68,7 +68,38 @@ public partial class CloudScript
                 FunctionName = "GetLeaderboardAroundUser",
                 GeneratePlayStreamEvent = true
             },
-            (ExecuteCloudScriptResult result) => {
+            (result) => {
+                try
+                {
+                    var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
+                    jsonResult.TryGetValue("teamInfos", out var teamInfos);
+                    var json = JsonConvert.SerializeObject(teamInfos);
+                    var opponents = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(
+                        json,
+                        new JsonSerializerSettings
+                        {
+                            NullValueHandling = NullValueHandling.Ignore
+                        });
+                    success.Invoke(opponents);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e);
+                    fail.Invoke();
+                }
+            }
+        );
+    }
+    
+    public static void GetLeaderboard(Action<List<LeaderboardInfo>> success, Action fail)
+    {
+        ExecuteCloudScriptMainSceneCommon(
+            new ExecuteCloudScriptRequest
+            {
+                FunctionName = "GetLeaderboard",
+                GeneratePlayStreamEvent = true
+            },
+            (result) => {
                 try
                 {
                     var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
@@ -133,10 +164,10 @@ public partial class CloudScript
             }
         );
     }
-    
-    public class LeaderboardInfo
-    {
-        public PlayerLeaderboardEntry PlayerLeaderboardEntry;
-        public MultiDic<int, int, UnitInfo>.SerializableSet[] Team;
-    }
+}
+
+public class LeaderboardInfo
+{
+    public PlayerLeaderboardEntry PlayerLeaderboardEntry;
+    public MultiDic<int, int, UnitInfo>.SerializableSet[] Team;
 }
