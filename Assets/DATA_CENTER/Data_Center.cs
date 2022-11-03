@@ -54,7 +54,7 @@ public partial class Data_Center : MonoBehaviour
             geometryCenter = gameObject.transform; 
     }
 
-    public async UniTask Step1Initialize(string type, string basicPackName, string personalMagicPath)
+    public async UniTask Step1Initialize(string type, string basicPackName)
     {
         if (!phase1Initialized)
         {
@@ -67,7 +67,7 @@ public partial class Data_Center : MonoBehaviour
             BodyElementTagAndLayerSet(TeamConfig.DefaultSet);
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(FightDataRef,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
             await Animation_Manger.PreloadBasicPersonalAnims(type, basicPackName);
-            _BO_Ani_E.BasicMagicAndEffectsPathDefine(element, personalMagicPath);
+            _BO_Ani_E.BasicMagicAndEffectsPathDefine(element);
             //if (this.blendShapeProxy != null && this.blendShapeProxy.VRMBlendShapeProxy != null)
             //    this.blendShapeProxy.VRMBlendShapeProxy.AvaterRemerge(this.WholeT);
             //else
@@ -97,7 +97,7 @@ public partial class Data_Center : MonoBehaviour
         }
     }
     
-    public async UniTask Step2Initialize(string type, UnitInfo unitInfo, Element element, string personalMagic)
+    public async UniTask Step2Initialize(string type, UnitInfo unitInfo, Element element)
     {
         if (!phase2Initialized)
         {
@@ -129,7 +129,7 @@ public partial class Data_Center : MonoBehaviour
         //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
         // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
         var toLoadSkillAnimsNames = _MyBehaviorRunner.PassSkillTypeKeys();
-        tasks.Add(Animation_Manger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, personalMagic,element));
+        tasks.Add(Animation_Manger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, element));
         await UniTask.WhenAll(tasks);
     }
 

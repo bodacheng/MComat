@@ -48,11 +48,11 @@ namespace mainMenu
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _tabEffects;
         
-        SkillStoneSlot A1Slot, A2Slot, A3Slot;
-        SkillStoneSlot B1Slot, B2Slot, B3Slot;
-        SkillStoneSlot C1Slot, C2Slot, C3Slot;
+        SkillStoneSlot _a1Slot, _a2Slot, _a3Slot;
+        SkillStoneSlot _b1Slot, _b2Slot, _b3Slot;
+        SkillStoneSlot _c1Slot, _c2Slot, _c3Slot;
         SkillStoneSlot focusingSlot;
-        public readonly List<SkillStoneSlot> allSlot = new List<SkillStoneSlot>();
+        public readonly List<SkillStoneSlot> allSlot = new();
 
         public Action<string> PrintSkillInfo;
         
@@ -84,7 +84,7 @@ namespace mainMenu
                 focusingSlot = slot;
                 SelectedRender(focusingSlot._cell);
                 slot._cell.UpdateMyItem();
-                SKStoneItem _SkillStone = slot._cell.GetItem();
+                var _SkillStone = slot._cell.GetItem();
                 if (_SkillStone != null && _SkillStone._SkillConfig != null)
                 {
                     PrintSkillInfo.Invoke(_SkillStone.instanceId);
@@ -105,7 +105,7 @@ namespace mainMenu
             {
                 if (!FightGlobalSetting._skillStoneHasExp)
                     return;
-                SKStoneItem _stone = slot._cell.GetItem();
+                var _stone = slot._cell.GetItem();
                 if (_stone != null && _stone._SkillConfig != null)
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.instanceId, true);
@@ -127,26 +127,26 @@ namespace mainMenu
         {
             SelectedRender(null);
             
-            A1Slot = new SkillStoneSlot(1, A1DragAndDropCell);
-            A2Slot = new SkillStoneSlot(2, A2DragAndDropCell);
-            A3Slot = new SkillStoneSlot(3, A3DragAndDropCell);
-            B1Slot = new SkillStoneSlot(4, B1DragAndDropCell);
-            B2Slot = new SkillStoneSlot(5, B2DragAndDropCell);
-            B3Slot = new SkillStoneSlot(6, B3DragAndDropCell);
-            C1Slot = new SkillStoneSlot(7, C1DragAndDropCell);
-            C2Slot = new SkillStoneSlot(8, C2DragAndDropCell);
-            C3Slot = new SkillStoneSlot(9, C3DragAndDropCell);
+            _a1Slot = new SkillStoneSlot(1, A1DragAndDropCell);
+            _a2Slot = new SkillStoneSlot(2, A2DragAndDropCell);
+            _a3Slot = new SkillStoneSlot(3, A3DragAndDropCell);
+            _b1Slot = new SkillStoneSlot(4, B1DragAndDropCell);
+            _b2Slot = new SkillStoneSlot(5, B2DragAndDropCell);
+            _b3Slot = new SkillStoneSlot(6, B3DragAndDropCell);
+            _c1Slot = new SkillStoneSlot(7, C1DragAndDropCell);
+            _c2Slot = new SkillStoneSlot(8, C2DragAndDropCell);
+            _c3Slot = new SkillStoneSlot(9, C3DragAndDropCell);
 
             allSlot.Clear();
-            allSlot.Add(A1Slot);
-            allSlot.Add(A2Slot);
-            allSlot.Add(A3Slot);
-            allSlot.Add(B1Slot);
-            allSlot.Add(B2Slot);
-            allSlot.Add(B3Slot);
-            allSlot.Add(C1Slot);
-            allSlot.Add(C2Slot);
-            allSlot.Add(C3Slot);
+            allSlot.Add(_a1Slot);
+            allSlot.Add(_a2Slot);
+            allSlot.Add(_a3Slot);
+            allSlot.Add(_b1Slot);
+            allSlot.Add(_b2Slot);
+            allSlot.Add(_b3Slot);
+            allSlot.Add(_c1Slot);
+            allSlot.Add(_c2Slot);
+            allSlot.Add(_c3Slot);
             
             foreach (var _slot in allSlot)
             {

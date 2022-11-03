@@ -6,7 +6,6 @@ public partial class BO_Ani_E : MonoBehaviour
 {
     public HiddenMethods hiddenMethods;
     public Data_Center _DATA_CENTER;
-    string myMagicForwardPath;
     string magic_path;
     Transform right_hand, left_hand, right_foot, left_foot, head, tail;
     DecompositionPool target_pool;
@@ -35,9 +34,8 @@ public partial class BO_Ani_E : MonoBehaviour
     
     // 这个系列的函数现在也有对重要变量myMagicForwardPath赋值的作用,所以不可以放在defaultPool里去
     // 另外这个系列的函数经常因为一些初始化流程问题忽略，它必须在模型起到展示技能或实际战斗之前执行，否则找不到特效
-    public void BasicMagicAndEffectsPathDefine(Element element, string personalMagic)
+    public void BasicMagicAndEffectsPathDefine(Element element)
     {
-        myMagicForwardPath = personalMagic;
         magic_path = FightGlobalSetting.EffectPathDefine(element);
     }
     

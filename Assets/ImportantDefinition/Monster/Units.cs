@@ -17,8 +17,7 @@ public static class Units
 		public string RECORD_ID;
         public string REAL_NAME;
         public string MONSTER_TYPE;
-		public string ZOKUSEI;
-		public string SPECIAL_ZOKUSEI;
+		public string ELEMENT;
         public string RARITY_LEVEL;
 		public string BASIC_MOVEMENT_PACK;
 		public string MOVE_TYPE;
@@ -86,13 +85,12 @@ public static class Units
                     RECORD_ID = grid[i][0],
                     REAL_NAME = grid[i][1],
                     MONSTER_TYPE = grid[i][2],
-                    ZOKUSEI = grid[i][3],
-                    SPECIAL_ZOKUSEI = grid[i][4],
-                    RARITY_LEVEL = grid[i][5],
-                    BASIC_MOVEMENT_PACK = grid[i][6],
-                    MOVE_TYPE = grid[i][7],
-                    DODGE_SKILL = grid[i][8],
-                    DEFENDABLE_FLAG = grid[i][9]
+                    ELEMENT = grid[i][3],
+                    RARITY_LEVEL = grid[i][4],
+                    BASIC_MOVEMENT_PACK = grid[i][5],
+                    MOVE_TYPE = grid[i][6],
+                    DODGE_SKILL = grid[i][7],
+                    DEFENDABLE_FLAG = grid[i][8]
                 };
                 rowList.Add(row);
             }
@@ -128,25 +126,23 @@ public static class Units
                 grid[i][1] = "REAL_NAME";
                 grid[i][2] = "MONSTER_TYPE_CODE";
                 grid[i][3] = "ZOKUSEI";
-                grid[i][4] = "SPECIAL_ZOKUSEI";
-                grid[i][5] = "RARITY_LEVEL";
-                grid[i][6] = "BASIC_MOVEMENT_PACK";
-                grid[i][7] = "MOVE_TYPE";
-                grid[i][8] = "MOTILITY_SKILL_PACK";
-                grid[i][9] = "DEFENDABLE_FLAG";
+                grid[i][4] = "RARITY_LEVEL";
+                grid[i][5] = "BASIC_MOVEMENT_PACK";
+                grid[i][6] = "MOVE_TYPE";
+                grid[i][7] = "MOTILITY_SKILL_PACK";
+                grid[i][8] = "DEFENDABLE_FLAG";
             }
             else
             {
                 grid[i][0] = rowList[i - 1].RECORD_ID;
                 grid[i][1] = rowList[i - 1].REAL_NAME;
                 grid[i][2] = rowList[i - 1].MONSTER_TYPE;
-                grid[i][3] = rowList[i - 1].ZOKUSEI;
-                grid[i][4] = rowList[i - 1].SPECIAL_ZOKUSEI;
-                grid[i][5] = rowList[i - 1].RARITY_LEVEL;
-                grid[i][6] = rowList[i - 1].BASIC_MOVEMENT_PACK;
-                grid[i][7] = rowList[i - 1].MOVE_TYPE;
-                grid[i][8] = rowList[i - 1].DODGE_SKILL;
-                grid[i][9] = rowList[i - 1].DEFENDABLE_FLAG;
+                grid[i][3] = rowList[i - 1].ELEMENT;
+                grid[i][4] = rowList[i - 1].RARITY_LEVEL;
+                grid[i][5] = rowList[i - 1].BASIC_MOVEMENT_PACK;
+                grid[i][6] = rowList[i - 1].MOVE_TYPE;
+                grid[i][7] = rowList[i - 1].DODGE_SKILL;
+                grid[i][8] = rowList[i - 1].DEFENDABLE_FLAG;
             }
         }
         string delimiter = ",";
@@ -179,8 +175,7 @@ public static class Units
                     RECORD_ID = Config.RECORD_ID,
                     MONSTER_TYPE = Config.TYPE,
                     REAL_NAME = Config.REAL_NAME,
-                    ZOKUSEI = ((int)Config.element).ToString(),
-                    SPECIAL_ZOKUSEI = Config.SPECIAL_ZOKUSEI,
+                    ELEMENT = ((int)Config.element).ToString(),
                     BASIC_MOVEMENT_PACK = Config.BASIC_MOVEMENT_PACK
                 };
                 switch (Config.MoveType)
@@ -229,25 +224,23 @@ public static class Units
                     grid[i][1] = "REAL_NAME";
                     grid[i][2] = "MONSTER_TYPE_CODE";
                     grid[i][3] = "ZOKUSEI";
-                    grid[i][4] = "SPECIAL_ZOKUSEI";
-                    grid[i][5] = "RARITY_LEVEL";
-                    grid[i][6] = "BASIC_MOVEMENT_PACK";
-                    grid[i][7] = "MOVE_TYPE";
-                    grid[i][8] = "MOTILITY_SKILL_PACK";
-                    grid[i][9] = "DEFENDABLE_FLAG";
+                    grid[i][4] = "RARITY_LEVEL";
+                    grid[i][5] = "BASIC_MOVEMENT_PACK";
+                    grid[i][6] = "MOVE_TYPE";
+                    grid[i][7] = "MOTILITY_SKILL_PACK";
+                    grid[i][8] = "DEFENDABLE_FLAG";
                 }
                 else
                 {
                     grid[i][0] = rowList[i - 1].RECORD_ID;
                     grid[i][1] = rowList[i - 1].REAL_NAME;
                     grid[i][2] = rowList[i - 1].MONSTER_TYPE;
-                    grid[i][3] = rowList[i - 1].ZOKUSEI;
-                    grid[i][4] = rowList[i - 1].SPECIAL_ZOKUSEI;
-                    grid[i][5] = rowList[i - 1].RARITY_LEVEL;
-                    grid[i][6] = rowList[i - 1].BASIC_MOVEMENT_PACK;
-                    grid[i][7] = rowList[i - 1].MOVE_TYPE;
-                    grid[i][8] = rowList[i - 1].DODGE_SKILL;
-                    grid[i][9] = rowList[i - 1].DEFENDABLE_FLAG;
+                    grid[i][3] = rowList[i - 1].ELEMENT;
+                    grid[i][4] = rowList[i - 1].RARITY_LEVEL;
+                    grid[i][5] = rowList[i - 1].BASIC_MOVEMENT_PACK;
+                    grid[i][6] = rowList[i - 1].MOVE_TYPE;
+                    grid[i][7] = rowList[i - 1].DODGE_SKILL;
+                    grid[i][8] = rowList[i - 1].DEFENDABLE_FLAG;
                 }
             }
             string delimiter = ",";
@@ -292,8 +285,7 @@ public static class Units
             RECORD_ID = config.RECORD_ID,
             MONSTER_TYPE = config.TYPE,
             REAL_NAME = config.REAL_NAME,
-            ZOKUSEI = ((int)config.element).ToString(),
-            SPECIAL_ZOKUSEI = config.SPECIAL_ZOKUSEI,
+            ELEMENT = ((int)config.element).ToString(),
             BASIC_MOVEMENT_PACK = config.BASIC_MOVEMENT_PACK
         };
         switch (config.MoveType)
@@ -337,7 +329,7 @@ public static class Units
             REAL_NAME = row.REAL_NAME
         };
 
-        switch (row.ZOKUSEI)
+        switch (row.ELEMENT)
         {
             case "4":
                 _Config.element = Element.blueMagic;
@@ -442,21 +434,13 @@ public static class Units
     
 	public static Row Find_Zokusei(string find)
 	{
-		return rowList.Find(x => x.ZOKUSEI == find);
+		return rowList.Find(x => x.ELEMENT == find);
 	}
 	public static List<Row> FindAll_Zokusei(string find)
 	{
-		return rowList.FindAll(x => x.ZOKUSEI == find);
+		return rowList.FindAll(x => x.ELEMENT == find);
 	}
-	public static Row Find_personalMagicPack(string find)
-	{
-        return rowList.Find(x => x.SPECIAL_ZOKUSEI == find);
-	}
-	public static List<Row> FindAll_personalMagicPack(string find)
-	{
-		return rowList.FindAll(x => x.SPECIAL_ZOKUSEI == find);
-	}
-	public static Row Find_BasicMoveSet(string find)
+    public static Row Find_BasicMoveSet(string find)
 	{
         return rowList.Find(x => x.BASIC_MOVEMENT_PACK == find);
 	}

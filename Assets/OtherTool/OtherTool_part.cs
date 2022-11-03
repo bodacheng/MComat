@@ -94,7 +94,7 @@ public partial class OtherTool : EditorWindow
                         unitConfig.element = Element.lightMagic;
                         break;
                 }
-                unitConfig.SPECIAL_ZOKUSEI = null; //这个只能后加把。。
+                
                 unitConfig.BASIC_MOVEMENT_PACK = "warrior";//我感觉这个应该起名字叫做basic。每个type起码有一个叫这个的。
                 unitConfig.MoveType = MoveType.Move_normal;
                 unitConfig.RushType = RushType.RushBack;

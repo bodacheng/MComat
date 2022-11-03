@@ -224,7 +224,7 @@ public partial class Animation_Manger{
         Animator.runtimeAnimatorController = animatorOverride;
     }
 
-    public async UniTask PreloadPersonalAnimResourceMode(string animPath, string key, string personalMagic, Element element)
+    public async UniTask PreloadPersonalAnimResourceMode(string animPath, string key, Element element)
     {
         if (toLoadAnims.ContainsKey(key))
         {
@@ -244,27 +244,27 @@ public partial class Animation_Manger{
                 {
                     if (e.functionName == "MagicForward")
                     {
-                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, element));
+                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element));
                     }
                     if (e.functionName == "PrepareOneMagic")
                     {
-                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, personalMagic, element));
+                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element));
                     }
                     if (e.functionName == "Bullet_shoot_from_body_part")
                     {
                         switch (e.intParameter)
                         {
                             case 1:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("bullet", element));
                                 break;
                             case 2:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("big_bullet", personalMagic, element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("big_bullet", element));
                                 break;
                             case 3:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("super_bullet", personalMagic, element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("super_bullet", element));
                                 break;
                             default:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("bullet", personalMagic, element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("bullet", element));
                                 break;
                         }
                     }
@@ -273,16 +273,16 @@ public partial class Animation_Manger{
                         switch (e.intParameter)
                         {
                             case 0:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element));
                                 break;
                             case 1:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element));
                                 break;
                             case 2:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("big_blast", personalMagic, element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("big_blast", element));
                                 break;
                             default:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", personalMagic, element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element));
                                 break;
                         }
                     }
@@ -296,12 +296,12 @@ public partial class Animation_Manger{
         }
     }
     
-    public async UniTask PreloadPersonalAnimsResourceMode(string type, List<string> toLoadSkillAnimsNames,string personalMagic, Element element)
+    public async UniTask PreloadPersonalAnimsResourceMode(string type, List<string> toLoadSkillAnimsNames,Element element)
     {
         var tasks = new List<UniTask>();
         foreach (string anim_name in toLoadSkillAnimsNames)
         {
-            tasks.Add(PreloadPersonalAnimResourceMode(type, anim_name, personalMagic, element));
+            tasks.Add(PreloadPersonalAnimResourceMode(type, anim_name, element));
         }
         await UniTask.WhenAll(tasks);
     }

@@ -95,7 +95,7 @@ namespace ModelView
             
             if (focusingC.Animation_Manger != null)
             {
-                await focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, skillName, unitConfig.SPECIAL_ZOKUSEI, unitConfig.element);
+                await focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, skillName, unitConfig.element);
                 IfShowingSkill = true;
                 focusingC.Animation_Manger.AnimationTrigger(skillName, true, 0.05f);
             }

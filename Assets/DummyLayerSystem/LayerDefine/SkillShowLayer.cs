@@ -159,8 +159,8 @@ namespace mainMenu
             _connector.ShowMyModel(PreScene.target.Focusing.id);
             var config = Units.GetUnitConfig(PreScene.target.Focusing.r_id);
             var unitInfo = UnitInfo.GetUnitInfo(PreScene.target.Focusing);
-            await _connector.FocusingC.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK, config.SPECIAL_ZOKUSEI);
-            await _connector.FocusingC.Step2Initialize(config.TYPE, unitInfo, config.element, config.SPECIAL_ZOKUSEI);
+            await _connector.FocusingC.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK);
+            await _connector.FocusingC.Step2Initialize(config.TYPE, unitInfo, config.element);
             if (_connector.FocusingC._MyBehaviorRunner != null)
                 _connector.FocusingC._MyBehaviorRunner.ChangeState("Empty");
         }

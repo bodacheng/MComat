@@ -11,7 +11,6 @@ public class UnitConfig
     public string showNameCN;
     public string showNameJP;
     public Element element = Element.lightMagic;
-    public string SPECIAL_ZOKUSEI;
     public string BASIC_MOVEMENT_PACK = "basic_anim";//monsterTable BasicMoveSet
     public MoveType MoveType = MoveType.Move_normal;//monsterTable moveType
     public RushType RushType = RushType.RushBack;//monsterTable accSKill

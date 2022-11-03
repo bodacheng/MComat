@@ -36,11 +36,12 @@ public static class HurtObjectManager
     {
         if (!keyExists.Contains(key))
         {
+            Debug.Log(key +"资源key不存在？");
             return default;
         }
         else
         {
-            var returnValue =  AddressablesLogic.LoadT<GameObject>(key);
+            var returnValue =  AddressablesLogic.LoadObject(key);
             return returnValue;
         }
     }
@@ -74,44 +75,10 @@ public static class HurtObjectManager
         default_hitBoxPool.PreloadAsync(20, 1).Subscribe(_ => Debug.Log("已经为对象池:d_hitbox预留物件"));
     }
     
-    public static async UniTask ConstructHurtObjectPool(string resource_name, string MagicForwardPath, Element element)
+    public static async UniTask ConstructHurtObjectPool(string resource_name, Element element)
     {
         DecompositionPool poolToConstruct;
         GameObject weaponPrefab = null;
-        
-        /////////////// 第一环节 : 搜索个性魔法//////////////////
-        if (MagicForwardPath != null)
-        {
-            if (HurtPoolDic.ContainsKey(MagicForwardPath + "/" + resource_name))
-            {
-                HurtPoolDic.TryGetValue(MagicForwardPath + "/" + resource_name, out poolToConstruct);
-                if (poolToConstruct != null)
-                {
-                    return;
-                }
-            }
-            
-            weaponPrefab = await TryLoadWeaponPrefab(MagicForwardPath + "/" + resource_name + ".prefab");
-            
-            if (weaponPrefab != null)
-            {
-                poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, MagicForwardPath + "/" + resource_name, FightGlobalSetting._HurtObjectPreLoadCount);
-                var decomposition = weaponPrefab.GetComponent<Decomposition>();
-                if (decomposition != null)
-                {
-                    if (decomposition.Attachments != null && decomposition.Attachments.Length > 0)
-                    {
-                        for (var i = 0; i < decomposition.Attachments.Length; i++)
-                        {
-                            await ConstructHurtObjectPool(decomposition.Attachments[i], MagicForwardPath, element);
-                        }
-                    }
-                }else{
-                    Debug.Log(resource_name + "没有Decompositioner！？");
-                }
-                return;
-            }
-        }
         
         ///////////////第二环节 ： 搜索属性魔法//////////////////
         string basicMagicForwardPath = FightGlobalSetting.EffectPathDefine(element);
@@ -123,9 +90,10 @@ public static class HurtObjectManager
         }
         
         weaponPrefab = await TryLoadWeaponPrefab(basicMagicForwardPath + "/" + resource_name + ".prefab");
-        
+        Debug.Log("这个"+ basicMagicForwardPath + "/" + resource_name + ".prefab到底是什么：" + weaponPrefab);
         if (weaponPrefab != null)
         {
+            Debug.Log("是null却仍然执行？？"+ weaponPrefab);
             poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resource_name,FightGlobalSetting._HurtObjectPreLoadCount);
             
             var decomposition = weaponPrefab.GetComponent<Decomposition>();
@@ -135,7 +103,7 @@ public static class HurtObjectManager
                 {
                     for (var i = 0; i < decomposition.Attachments.Length; i++)
                     {
-                        await ConstructHurtObjectPool(decomposition.Attachments[i],MagicForwardPath,element);
+                        await ConstructHurtObjectPool(decomposition.Attachments[i], element);
                     }
                 }
             }else{
@@ -168,7 +136,7 @@ public static class HurtObjectManager
                     {
                         for (int i = 0; i < d.Attachments.Length; i++)
                         {
-                            await ConstructHurtObjectPool(d.Attachments[i],MagicForwardPath,element);
+                            await ConstructHurtObjectPool(d.Attachments[i], element);
                         }
                     }
                 }else{
@@ -179,22 +147,9 @@ public static class HurtObjectManager
     }
     
     static DecompositionPool _hurtObjectPool;
-    public static DecompositionPool GetHurtObjectPool(string resource_name, string myMagicPath, string myDefaultMagicPath)
+    public static DecompositionPool GetHurtObjectPool(string resource_name, string myDefaultMagicPath)
     {
         _hurtObjectPool = null;
-        
-        // 第一轮
-        if (myMagicPath != null)
-        {
-            if (HurtPoolDic.ContainsKey(myMagicPath + "/" + resource_name))
-            {
-                HurtPoolDic.TryGetValue(myMagicPath + "/" + resource_name, out _hurtObjectPool);
-                if (_hurtObjectPool != null)
-                {
-                    return _hurtObjectPool;
-                }
-            }
-        }
         
         // 第二轮
         if (HurtPoolDic.ContainsKey(myDefaultMagicPath + "/" + resource_name))
