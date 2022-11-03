@@ -61,57 +61,12 @@ public class FightMembers
         return target;
     }
     
-    public static FightMembers ScreenSaver(TeamMode teamMode)
-    {
-        string focusingtype = "human";
-        
-        var CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
-        var Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 6);
-        var monsterIds = CharIDsAndNames.Keys.ToList();
-
-        var target = new FightMembers();
-        var filterForm = new SkillStonesBox.StoneFilterForm
-        {
-            type = focusingtype,
-            exType = new int[1] { 0 },
-            close = false,
-            near = false,
-            far = false
-        };
-        
-        var char1 = new UnitInfo
-        {
-            r_id = monsterIds[Indexes[0]],
-            set = SkillSet.RandomSkillSet(focusingtype, null, false, filterForm)
-        };
-        var char2 = new UnitInfo
-        {
-            r_id = monsterIds[Indexes[1]],
-            set = SkillSet.RandomSkillSet(focusingtype, null, false, filterForm)
-        };
-        
-        switch (teamMode)
-        {
-            case TeamMode.multiRaid:
-                target.EnemySets.Set(0, 0, char1);
-                target.HeroSets.Set(0, 0, char2);
-                break;
-            case TeamMode.rotation:
-                target.EnemySets.Set(0, 0, char1);
-                target.HeroSets.Set(0, 0, char2);
-                break;
-        }
-        
-        return target;
-    }
-    
     public static FightMembers RandomSkillTest(TeamMode teamMode)
     {
-        string focusingtype = "human";
-        
-        var CharIDsAndNames = Units.GetMonsterIDsAndNamesDic(focusingtype);
-        var Indexes = RandomSelect.Get(0, CharIDsAndNames.Count - 1, 6);
-        var charRecordIds = CharIDsAndNames.Keys.ToList();
+        var type = "human";
+        var unitIDsAndNames = Units.GetMonsterIDsAndNamesDic(type);
+        var Indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 6);
+        var charRecordIds = unitIDsAndNames.Keys.ToList();
 
         var target = new FightMembers();
 
@@ -164,7 +119,50 @@ public class FightMembers
                 target.HeroSets.Set(0, 2, char6);
                 break;
         }
+        
+        return target;
+    }
+    
+    public static FightMembers ScreenSaver(TeamMode teamMode)
+    {
+        var type = "human";
+        var unitIDsAndNames = Units.GetMonsterIDsAndNamesDic(type);
+        var Indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 6);
+        var monsterIds = unitIDsAndNames.Keys.ToList();
 
+        var target = new FightMembers();
+        var filterForm = new SkillStonesBox.StoneFilterForm
+        {
+            type = type,
+            exType = new int[1] { 0 },
+            close = false,
+            near = false,
+            far = false
+        };
+        
+        var char1 = new UnitInfo
+        {
+            r_id = monsterIds[Indexes[0]],
+            set = SkillSet.RandomSkillSet(type, null, false, filterForm)
+        };
+        var char2 = new UnitInfo
+        {
+            r_id = monsterIds[Indexes[1]],
+            set = SkillSet.RandomSkillSet(type, null, false, filterForm)
+        };
+        
+        switch (teamMode)
+        {
+            case TeamMode.multiRaid:
+                target.EnemySets.Set(0, 0, char1);
+                target.HeroSets.Set(0, 0, char2);
+                break;
+            case TeamMode.rotation:
+                target.EnemySets.Set(0, 0, char1);
+                target.HeroSets.Set(0, 0, char2);
+                break;
+        }
+        
         return target;
     }
     

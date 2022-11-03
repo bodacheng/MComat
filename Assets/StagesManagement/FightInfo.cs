@@ -153,15 +153,32 @@ public class FightInfo : ScriptableObject
         stage.EventType = FightEventType.Arena;
         return stage;
     }
-    
-    public static FightInfo RandomStage()
+
+    public static FightInfo Copy(FightInfo source)
     {
         var stage = CreateInstance<FightInfo>();
-        stage.FightMembers = FightMembers.RandomFight();
-        stage.BattleGroundID = 0;
-        stage.Team1Mode = TeamMode.rotation;
-        stage.Team2Mode = TeamMode.rotation;
-        stage.EventType = FightEventType.Arena;
+        
+        stage.ID = source.ID;
+        stage.FightMembers = source.FightMembers;
+        stage.BattleGroundID = source.BattleGroundID;
+        stage.Team1Mode = source.Team1Mode;
+        stage.Team2Mode = source.Team2Mode;
+        stage.team1Auto = source.team1Auto;
+        stage.team2Auto = source.team2Auto;
+        stage.stageLevel = source.stageLevel;
+        stage.team1ID = source.team1ID;
+        stage.team2ID = source.team2ID;
+        stage.Team1HpRate = source.Team1HpRate;
+        stage.Team2HpRate = source.Team2HpRate;
+        stage.Team2ArenaPoint = source.Team2ArenaPoint;
+        stage.runTutorial = source.runTutorial;
+        stage.battleNameCH = source.battleNameCH;
+        stage.battleNameENG = source.battleNameENG;
+        stage.battleNameJPG = source.battleNameJPG;
+        stage.StageButtonSprite = source.StageButtonSprite;
+        stage.EventType = source.EventType;
+        
+        Debug.Log("已经获取");
         return stage;
     }
     
@@ -173,6 +190,17 @@ public class FightInfo : ScriptableObject
         stage.Team1Mode = teamMode;
         stage.Team2Mode = teamMode;
         stage.EventType = FightEventType.SkillTest;
+        return stage;
+    }
+    
+    public static FightInfo RandomStage()
+    {
+        var stage = CreateInstance<FightInfo>();
+        stage.FightMembers = FightMembers.RandomFight();
+        stage.BattleGroundID = 0;
+        stage.Team1Mode = TeamMode.rotation;
+        stage.Team2Mode = TeamMode.rotation;
+        stage.EventType = FightEventType.Arena;
         return stage;
     }
 }
