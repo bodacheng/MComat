@@ -2,9 +2,7 @@
 using mainMenu;
 using dataAccess;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
-using UnityEngine;
 
 public class TeamEditPage : MSceneProcess
 {
@@ -69,7 +67,7 @@ public class TeamEditPage : MSceneProcess
 
     private bool Legal(string teamMode)
     {
-        bool qualified = false;
+        bool qualified = true;
         int unitCount = 0;
 
         PosKeySet targetTeamSet = null;
