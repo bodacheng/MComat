@@ -46,13 +46,13 @@ namespace mainMenu
                 return;
             }
             
-            var Ref = Units.GetUnitConfig(_focusing.r_id);
-            if (Ref == null)
+            var unitConfig = Units.GetUnitConfig(_focusing.r_id);
+            if (unitConfig == null)
             {
                 Debug.Log("Error r id:" + _focusing.r_id);
                 return;
             }
-            BackGroundPS.target.ChangeBGByElement(Ref.element);
+            BackGroundPS.target.ChangeBGByElement(unitConfig.element);
         }
         
         void Awake()
@@ -101,8 +101,8 @@ namespace mainMenu
             var selfFightFront = new SelfFightPage();
             var questInfo = new QuestInfoPage();
             var unitListPage = new UnitListPage();
-            var memberDetail_edit = new SkillEditPage();
-            var memberDetail_SkillShow = new SkillShowPage();
+            var memberDetailEdit = new SkillEditPage();
+            var memberDetailSkillShow = new SkillShowPage();
             var arcadeFrontPage = new ArcadeFrontPage();
             
             // Shop
@@ -127,8 +127,8 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.SelfFightFront, selfFightFront);
             ProcessesRunner.Main.Add(MainSceneStep.QuestInfo, questInfo);
             ProcessesRunner.Main.Add(MainSceneStep.UnitList, unitListPage);
-            ProcessesRunner.Main.Add(MainSceneStep.UnitSkillEdit, memberDetail_edit);
-            ProcessesRunner.Main.Add(MainSceneStep.UnitSkillShow, memberDetail_SkillShow);
+            ProcessesRunner.Main.Add(MainSceneStep.UnitSkillEdit, memberDetailEdit);
+            ProcessesRunner.Main.Add(MainSceneStep.UnitSkillShow, memberDetailSkillShow);
             ProcessesRunner.Main.Add(MainSceneStep.FrontPage, frontPage);
             ProcessesRunner.Main.Add(MainSceneStep.ArcadeFront, arcadeFrontPage);
             ProcessesRunner.Main.Add(MainSceneStep.Arena, arenaPage);
@@ -185,40 +185,44 @@ namespace mainMenu
         }
         
         [EnumAction(typeof(MainSceneStep))]
-        public void trySwitchToStep(MainSceneStep next_step, bool forward = true)
+        public bool trySwitchToStep(MainSceneStep next_step, bool forward = true)
         {
             if (forward && ProcessesRunner.Main.currentProcess != null)
             {
                 var returnToStep = ProcessesRunner.Main.currentProcess.Step;
-                void returnToCurrent()
+                bool returnToCurrent()
                 {
-                    trySwitchToStep(returnToStep, false);
+                    return trySwitchToStep(returnToStep, false);
                 }
-                Debug.Log("back to:"+ returnToStep);
-                ProcessesRunner.Main.ChangeProcess(next_step);
-                ReturnLayer.PUSH(returnToCurrent);
+                
+                var success = ProcessesRunner.Main.ChangeProcess(next_step);
+                if (success)
+                    ReturnLayer.PUSH(returnToCurrent);
+                return success;
             }
             else
             {
-                ProcessesRunner.Main.ChangeProcess(next_step);
+                return ProcessesRunner.Main.ChangeProcess(next_step);
             }
         }
-
-        public void trySwitchToStep<T>(MainSceneStep next_step, T t, bool forward)
+        
+        public bool trySwitchToStep<T>(MainSceneStep next_step, T t, bool forward)
         {
             if (forward && ProcessesRunner.Main.currentProcess != null)
             {
                 var returnToStep = ProcessesRunner.Main.currentProcess.Step;
-                void returnToCurrent()
+                bool returnToCurrent()
                 {
-                    trySwitchToStep(returnToStep, false);
+                    return trySwitchToStep(returnToStep, false);
                 }
-                ProcessesRunner.Main.ChangeProcess(next_step, t);
-                ReturnLayer.PUSH(returnToCurrent);
+                var success = ProcessesRunner.Main.ChangeProcess(next_step, t);
+                if (success)
+                    ReturnLayer.PUSH(returnToCurrent);
+                return success;
             }
             else
             {
-                ProcessesRunner.Main.ChangeProcess(next_step, t);
+                return ProcessesRunner.Main.ChangeProcess(next_step, t);
             }
         }
     }

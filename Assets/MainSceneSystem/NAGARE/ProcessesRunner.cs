@@ -44,18 +44,18 @@ namespace mainMenu
             currentProcess?.LocalUpdate();
         }
 
-        public void ChangeProcess(MainSceneStep sceneStep)
+        public bool ChangeProcess(MainSceneStep sceneStep)
         {
-            ChangeProcess<Any>(sceneStep, null);
+            return ChangeProcess<Any>(sceneStep, null);
         }
         
-        public void ChangeProcess<T>(MainSceneStep sceneStep, T t)
+        public bool ChangeProcess<T>(MainSceneStep sceneStep, T t)
         {
             if (currentProcess != null)
             {
                 if (!currentProcess.CanEnterOtherProcess())
                 {
-                    return;
+                    return false;
                 }
                 
                 currentProcess.ProcessEnd();
@@ -86,6 +86,7 @@ namespace mainMenu
             {
                 Debug.Log("empty state key:" + sceneStep);
             }
+            return true;
         }
 
         // 清空返回菜单，并进入step。将返回按钮设置为返回到FrontPage画面
@@ -100,9 +101,9 @@ namespace mainMenu
                 currentProcess.ProcessEnter();
             }
             var returnToStep = MainSceneStep.FrontPage;
-            void returnToCurrent()
+            bool returnToCurrent()
             {
-                PreScene.target.trySwitchToStep(returnToStep, false);
+                return PreScene.target.trySwitchToStep(returnToStep, false);
             }
             ReturnLayer.PUSH(returnToCurrent);
         }

@@ -1,5 +1,6 @@
 ﻿using DummyLayerSystem;
 using mainMenu;
+using UnityEngine;
 
 public class ArenaPage : MSceneProcess
 {

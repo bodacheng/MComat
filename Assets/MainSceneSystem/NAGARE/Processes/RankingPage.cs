@@ -26,7 +26,11 @@ public class RankingPage : MSceneProcess
                 ProgressLayer.Close();
             }
         );
-        
+    }
+    
+    public override bool CanEnterOtherProcess()
+    {
+        return true;
     }
     
     public override void ProcessEnd()

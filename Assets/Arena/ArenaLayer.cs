@@ -51,6 +51,7 @@ public class ArenaLayer : UILayer
         this.SetLoaded = SetLoaded;
         this.ReturnToLobby = ReturnToLobby;
         this.GetOpponentAroundPoint = GetOpponentAroundPoint;
+        
         rankingPageBtn.onClick.RemoveAllListeners();
         rankingPageBtn.onClick.AddListener(()=> openRanking());
     }
@@ -158,13 +159,13 @@ public class ArenaLayer : UILayer
     
     public void ShowMyTeam()
     {
-        var Pos1InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(0);
-        var Pos2InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(1);
-        var Pos3InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(2);
+        var pos1InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(0);
+        var pos2InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(1);
+        var pos3InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(2);
         
-        var info1 = dataAccess.Units.Get(Pos1InstanceID);
-        var info2 = dataAccess.Units.Get(Pos2InstanceID);
-        var info3 = dataAccess.Units.Get(Pos3InstanceID);
+        var info1 = dataAccess.Units.Get(pos1InstanceID);
+        var info2 = dataAccess.Units.Get(pos2InstanceID);
+        var info3 = dataAccess.Units.Get(pos3InstanceID);
         
         plsEditTeamIndicator.SetActive(info1 == null || info2 == null || info3 == null);
         

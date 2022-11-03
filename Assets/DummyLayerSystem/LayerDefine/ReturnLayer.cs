@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using DummyLayerSystem;
 using UnityEngine.Events;
@@ -10,8 +11,7 @@ public class ReturnLayer : UILayer
     [SerializeField] Button ReturnButton;
     [SerializeField] GameObject maskBg;
     
-    static readonly UnityEvent unityEvent = new ();
-    public static readonly List<UnityAction> ReturnMissionList = new ();
+    public static readonly List<Func<bool>> ReturnMissionList = new ();
     
     void Setup()
     {
@@ -21,30 +21,38 @@ public class ReturnLayer : UILayer
     
     public static void POP()
     {
-        Debug.Log("her:"+ ReturnMissionList.Count);
         if (ReturnMissionList.Count == 0)
             return;
-        unityEvent.RemoveAllListeners();
-        unityEvent.AddListener(ReturnMissionList[^1]);
-        unityEvent.Invoke();
+
+        var targetMission = ReturnMissionList[^1];
         ReturnMissionList.RemoveAt(ReturnMissionList.Count - 1);
-        if (ReturnMissionList.Count == 0)
+        var success = targetMission.Invoke();
+        
+        if (success)
         {
-            UILayerLoader.Remove<ReturnLayer>();
-        }
-        else
-        {
-            var returnLayer = UILayerLoader.Load<ReturnLayer>();
-            returnLayer.Setup();
+            if (ReturnMissionList.Count == 0)
+            {
+                UILayerLoader.Remove<ReturnLayer>();
+            }
+            else
+            {
+                var returnLayer = UILayerLoader.Load<ReturnLayer>();
+                returnLayer.Setup();
+            }
         }
     }
     
-    public static void PUSH(UnityAction returnAction)
+    public static void PUSH(Func<bool> returnAction)
     {
-        Debug.Log("WE ARE:"+returnAction);
         ReturnMissionList.Add(returnAction);
         var returnLayer = UILayerLoader.Load<ReturnLayer>();
         returnLayer.Setup();
+    }
+    
+    public void ForceBackMode(bool on)
+    {
+        maskBg.gameObject.SetActive(on);
+        ToTop();
     }
 
     public static void AddUniTaskCancel(CancellationTokenSource cts)
@@ -54,7 +62,6 @@ public class ReturnLayer : UILayer
         {
             void triggerCts()
             {
-                Debug.Log("cancel");
                 cts.Cancel();
             }
             
@@ -64,11 +71,5 @@ public class ReturnLayer : UILayer
                 layer.ReturnButton.onClick.RemoveListener(triggerCts);
             });
         }
-    }
-
-    public void ForceBackMode(bool on)
-    {
-        maskBg.gameObject.SetActive(on);
-        ToTop();
     }
 }
