@@ -40,7 +40,7 @@ namespace Soul
         
         public bool OnBuff()
         {
-            return _DATA_CENTER.buffsRunner.mysubmissions.Count > 0;
+            return _DATA_CENTER.buffsRunner.mySubMissions.Count > 0;
         }
 
 

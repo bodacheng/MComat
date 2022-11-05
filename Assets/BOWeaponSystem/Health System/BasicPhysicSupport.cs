@@ -194,7 +194,6 @@ public class BasicPhysicSupport : MonoBehaviour
         if (!hiddenMethods.EnemyTouchingDrag)
             hiddenMethods.ClearTouchedEnemyBody();
     }
-
     
     void OnCollisionEnter(Collision collision)
     {

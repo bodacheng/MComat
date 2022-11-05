@@ -23,6 +23,8 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] float CanGetUpAfterKnockoffToGround = 0.5f;
     [SerializeField] float GetupTime = 1f;
     [SerializeField] float SureToPushForwardDis = 5f;
+    [SerializeField] PhysicMaterial roughMaterial;
+    [SerializeField] PhysicMaterial smoothMaterial;
     [SerializeField] int defendHP = 20;
     [SerializeField] float lightBlockLastingTime = 0.3f, heavyBlockLastingTime = 0.5f;
     [SerializeField] float attackDrawingDistance = 1f;
@@ -30,7 +32,7 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] int eXMax = 120;
     [SerializeField] int hurtObjectPreLoadCount = 5;
     [SerializeField] Material shadowMaterial;
-    
+
     public static int _sceneStep;//0 :mainmenu 1: fightscene
     public static bool _hasDefend;
     public static bool _skillStoneHasExp;
@@ -47,6 +49,8 @@ public class FightGlobalSetting : ScriptableObject
     public static float _CanGetUpAfterKnockoffToGround;
     public static float _GetupTime;
     public static float _SureToPushForwardDis = 5f;
+    public static PhysicMaterial _roughMaterial;
+    public static PhysicMaterial _smoothMaterial;
     public static float LightBlockLastingTime, HeavyBlockLastingTime, HighHitLastingTime;
     public static float NormalAttackPosFixingTime;
     public static AnimationCurve KnockOffYAnimationCurve, KnockOffZAnimationCurve;
@@ -117,6 +121,9 @@ public class FightGlobalSetting : ScriptableObject
         _CanGetUpAfterKnockoffToGround = CanGetUpAfterKnockoffToGround;
         _MaxKnockoffLaidGroundTime = MaxKnockoffLaidGroundTime;
         _GetupTime = GetupTime;
+
+        _roughMaterial = roughMaterial;
+        _smoothMaterial = smoothMaterial;
         
         KnockOffYAnimationCurve = knockOffYAnimationCurve;
         KnockOffZAnimationCurve = knockOffZAnimationCurve;

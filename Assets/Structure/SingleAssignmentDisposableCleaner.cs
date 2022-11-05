@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using UniRx;
 
 public class SingleAssignmentDisposableCleaner
 {
-    static List<SingleAssignmentDisposable> list = new List<SingleAssignmentDisposable>();
+    static readonly List<SingleAssignmentDisposable> list = new();
     public static void Add(SingleAssignmentDisposable single)
     {
         if (!list.Contains(single))
@@ -16,7 +14,7 @@ public class SingleAssignmentDisposableCleaner
 
     public static void Clear()
     {
-        for (int i = 0; i < list.Count; i++)
+        for (var i = 0; i < list.Count; i++)
         {
             if (list[i] != null && !list[i].IsDisposed)
             {

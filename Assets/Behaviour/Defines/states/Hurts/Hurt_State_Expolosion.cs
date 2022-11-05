@@ -18,7 +18,7 @@ namespace Soul
                         physicMissionDisposable.Dispose();
                     }
                 }
-            );
+            ).AddTo(gameObject);
 
             _Rigidbody.velocity = CalFixPushVector(newValue.DamageEffectPoint, newValue.attacker.Center.WholeT.position,
                 gameObject.transform.position,

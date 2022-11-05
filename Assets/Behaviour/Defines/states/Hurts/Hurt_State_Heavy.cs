@@ -26,7 +26,7 @@ namespace Soul
                         physicMissionDisposable.Dispose();
                     }
                 }
-            );
+            ).AddTo(gameObject);
         }
     }
 }

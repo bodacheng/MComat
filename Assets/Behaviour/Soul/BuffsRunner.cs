@@ -4,54 +4,54 @@ using UnityEngine;
 public class BuffsRunner
 {
     #region 自定义携程
-    public readonly List<CustomCoroutine> mysubmissions = new List<CustomCoroutine>();
-    readonly List<CustomCoroutine> endedcustomCoroutines = new List<CustomCoroutine>();
+    public readonly List<CustomCoroutine> mySubMissions = new();
+    readonly List<CustomCoroutine> endedCustomCoroutines = new();
     
-    public bool Freesing { get; set; } = false;
+    public bool Freezing { get; set; } = false;
     #endregion
-
+    
     public void RunSubCoroutineOfState(CustomCoroutine _Coroutine)
     {
         _Coroutine.CustomCoroutineTrigger();
-        mysubmissions.Add(_Coroutine);
+        mySubMissions.Add(_Coroutine);
     }
 
     public void EndSubCoroutineOfState(CustomCoroutine _Coroutine)
     {
         if (_Coroutine.IfProcessing())
             _Coroutine.EndCustomCoroutine();
-        if (mysubmissions.Contains(_Coroutine))
+        if (mySubMissions.Contains(_Coroutine))
         {
-            mysubmissions.Remove(_Coroutine);
+            mySubMissions.Remove(_Coroutine);
         }
     }
     
     public void EndAllCoroutines()
     {
-        foreach (CustomCoroutine customCoroutine in mysubmissions)
+        foreach (CustomCoroutine customCoroutine in mySubMissions)
         {
             customCoroutine.EndCustomCoroutine();
         }
-        mysubmissions.Clear();
+        mySubMissions.Clear();
     }
     
     // Update is called once per frame
     public void BuffsRunnerFixedUpdate()
     {
-        if (mysubmissions.Count > 0)
+        if (mySubMissions.Count > 0)
         {
-            endedcustomCoroutines.Clear();
-            foreach (CustomCoroutine customCoroutine in mysubmissions)
+            endedCustomCoroutines.Clear();
+            foreach (CustomCoroutine customCoroutine in mySubMissions)
             {
                 customCoroutine.CustomCoroutineProcess();
                 if (!customCoroutine.IfProcessing())
                 {
-                    endedcustomCoroutines.Add(customCoroutine);
+                    endedCustomCoroutines.Add(customCoroutine);
                 }
             }
-            for (int i = 0; i < endedcustomCoroutines.Count; i++)
+            for (int i = 0; i < endedCustomCoroutines.Count; i++)
             {
-                mysubmissions.Remove(endedcustomCoroutines[i]);
+                mySubMissions.Remove(endedCustomCoroutines[i]);
             }
         }
     }

@@ -141,8 +141,7 @@ namespace Soul
         public void ChangeState(string num, V_Damage damage)
         {
             BehaviourDic.TryGetValue(num, out _tryBehavior);
-            if (_nowBehavior != null)
-                _nowBehavior.AI_State_exit();
+            _nowBehavior?.AI_State_exit();
             
             _lastBehavior = _nowBehavior;
             _nowBehavior = _tryBehavior;

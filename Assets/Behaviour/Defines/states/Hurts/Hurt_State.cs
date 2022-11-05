@@ -14,12 +14,6 @@ namespace Soul
         SingleAssignmentDisposable physicMissionDisposable;
         Tween tween;
         
-        public override void Pre_process_before_enter()
-        {
-            base.Pre_process_before_enter();
-            SingleAssignmentDisposableCleaner.Add(physicMissionDisposable);
-        }
-
         void PlayHurtAnim(V_Damage newValue)
         {
             if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && _BasicPhysicSupport.hiddenMethods.Grounded)
@@ -63,9 +57,10 @@ namespace Soul
             _Rigidbody.mass = 500;
             _BasicPhysicSupport.OpenEnemyTouchingDrag(0);
             FightParamsRef.GettingDamage = false;
-            if (physicMissionDisposable != null && !physicMissionDisposable.IsDisposed)
-                physicMissionDisposable.Dispose();
-            if (_BuffsRunner.Freesing)
+            if (tween != null && tween.active && tween.IsPlaying())
+                tween.Kill();
+            physicMissionDisposable?.Dispose();
+            if (_BuffsRunner.Freezing)
             {
                 return;
             }
@@ -92,7 +87,7 @@ namespace Soul
             TimeCounter = 0f;
             pEvents.CloseAllPersonalityEffects();
             
-            if (_BuffsRunner.Freesing)
+            if (_BuffsRunner.Freezing)
                 return;
 
             if (target.from_weapon.effectSpreadOnBody)
@@ -188,7 +183,7 @@ namespace Soul
 
         public override bool Capacity_Exit_Condition()
         {
-            return TimeCounter > used_dizzy_time && !_BuffsRunner.Freesing;
+            return TimeCounter > used_dizzy_time && !_BuffsRunner.Freezing;
         }
     }
 }
