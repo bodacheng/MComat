@@ -7,19 +7,19 @@ namespace Soul
 {
     public partial class BehaviorRunner : MonoBehaviour
     {
-        public IDictionary<string, List<string>> ConditionAndRespond = new Dictionary<string, List<string>>();
-        public MultiDic<string, string, int> ConditionAndRespondPriority = new MultiDic<string, string, int>();// 注意，这个字典是value越小代表有限度越高
-        public IDictionary<string, string> BehaviourAndStrategicExitCondition = new Dictionary<string, string>();
+        public readonly IDictionary<string, List<string>> ConditionAndRespond = new Dictionary<string, List<string>>();
+        public readonly MultiDic<string, string, int> ConditionAndRespondPriority = new();// 注意，这个字典是value越小代表有限度越高
+        public readonly IDictionary<string, string> BehaviourAndStrategicExitCondition = new Dictionary<string, string>();
         public List<string> AllConditionCodes;
 
-        void RegisterConditionToRespond(KeyValuePair<string, string> ConditionAndBeheviourcode)//string target_beheviour,string condition_code
+        void RegisterConditionToRespond(KeyValuePair<string, string> ConditionAndBeheviourCode)//string target_beheviour,string condition_code
         {
-            if (ConditionAndRespond.ContainsKey(ConditionAndBeheviourcode.Key))
+            if (ConditionAndRespond.ContainsKey(ConditionAndBeheviourCode.Key))
             {
-                ConditionAndRespond[ConditionAndBeheviourcode.Key].Add(ConditionAndBeheviourcode.Value);
+                ConditionAndRespond[ConditionAndBeheviourCode.Key].Add(ConditionAndBeheviourCode.Value);
             }
             else{
-                ConditionAndRespond.Add(ConditionAndBeheviourcode.Key,new List<string>() { ConditionAndBeheviourcode.Value});
+                ConditionAndRespond.Add(ConditionAndBeheviourCode.Key,new List<string>() { ConditionAndBeheviourCode.Value});
             }
         }
 

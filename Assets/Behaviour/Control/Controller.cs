@@ -11,7 +11,7 @@ namespace Soul
 {
     public class Controller
     {
-        readonly SSIMultiDictionary _triggerd = new SSIMultiDictionary();
+        readonly SSIMultiDictionary _triggered = new ();
         
         public void Decision(BehaviorRunner runner, List<SkillEntity> Options, bool Auto)
         {
@@ -165,10 +165,10 @@ namespace Soul
         }
 
         string Condition;
-        List<(string, string)> finalConditionStateKeySet = new List<(string, string)>();
+        List<(string, string)> finalConditionStateKeySet = new();
         bool AI_RUNs(BehaviorRunner behaviorRunner, List<SkillEntity> options) // AI根据目前可作出的行为作出选择
         {
-            _triggerd.main.Clear();
+            _triggered.Main.Clear();
             if (behaviorRunner.GetNowState().Strategic_exit_condition())
             {
                 for (var y = 0; y < behaviorRunner.AllConditionCodes.Count; y++)
@@ -181,17 +181,16 @@ namespace Soul
                             behaviorRunner.BehaviourDic.TryGetValue(options[x].REAL_NAME, out var try_behavior);
                             if (try_behavior.CheckTriggerCondition(Condition))
                             {
-                                _triggerd.main.Set(Condition, options[x].REAL_NAME, behaviorRunner.ConditionAndRespondPriority.Get(Condition, options[x].REAL_NAME));
+                                _triggered.Main.Set(Condition, options[x].REAL_NAME, behaviorRunner.ConditionAndRespondPriority.Get(Condition, options[x].REAL_NAME));
                             }
                         }
                     }
                 }
             }
             
-            if (_triggerd.main.GetValues().Count > 0)
+            if (_triggered.Main.GetValues().Count > 0)
             {
-                finalConditionStateKeySet = _triggerd.GiveOutMin();
-                
+                finalConditionStateKeySet = _triggered.GiveOutMin();
                 if (finalConditionStateKeySet.Count > 0)
                 {
                     int random = Random.Range(0, finalConditionStateKeySet.Count);//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。

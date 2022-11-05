@@ -99,28 +99,28 @@ public class SSIMultiDictionary
 {
     public SSIMultiDictionary()
     {
-        main = new MultiDic<string, string, int>();        
+        Main = new MultiDic<string, string, int>();        
     }
-    public MultiDic<string, string, int> main = new MultiDic<string, string, int>();
+    public readonly MultiDic<string, string, int> Main = new MultiDic<string, string, int>();
 
     public List<(string, string)> GiveOutMin()
     {
         int min = 999999999;
         List<(string, string)> minkeys = null;
-        foreach (KeyValuePair<(string, string), int> BigPair in main.mDict)
+        foreach (var pair in Main.mDict)
         {
-            if (BigPair.Value < min)
+            if (pair.Value < min)
             {
-                minkeys = new List<(string, string)>();
-                minkeys.Add(BigPair.Key);
+                minkeys = new List<(string, string)> { pair.Key };
+                min = pair.Value;
             }
-            else if (BigPair.Value == min)
+            else if (pair.Value == min)
             {
                 if (minkeys == null)
                 {
                     minkeys = new List<(string, string)>();
                 }
-                minkeys.Add(BigPair.Key);
+                minkeys.Add(pair.Key);
             }
         }
         return minkeys;
