@@ -38,14 +38,14 @@ public class SettingLayer : UILayer
     #endregion
 
     #region linkDevice
-    [SerializeField] private Button linkDeviceBtn;
-    [SerializeField] private Button unLinkDeviceBtn;
-    [SerializeField] private Text instruction;
+    [SerializeField] Button linkDeviceBtn;
+    [SerializeField] Button unLinkDeviceBtn;
+    [SerializeField] Text instruction;
     #endregion
-
+    
     #region nickName
-    [SerializeField] private Text nickName;
-    [SerializeField] private Button resetNickNameBtn;
+    [SerializeField] Text nickName;
+    [SerializeField] Button resetNickNameBtn;
     #endregion
 
     public void AccountPhase_EmailToBeSet()

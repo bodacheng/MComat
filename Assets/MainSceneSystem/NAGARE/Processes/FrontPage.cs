@@ -51,6 +51,7 @@ public class FrontPage : MSceneProcess
     }
 
     FrontLayer frontLayer;
+    bool askedIfLinkDevice = false;
     void EnterProcess()
     {
         TutorialRunner.Main.TutorialCheck();
@@ -85,6 +86,35 @@ public class FrontPage : MSceneProcess
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
         upperInfoBar.Setup(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), 
             () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox));
+
+        // If account isn't linked to device, ask if link. Only ask once
+        if (PlayerAccountInfo.Me.currentLinkedDeviceId != PlayFabReadClient.CustomId && !askedIfLinkDevice)
+        {
+            askedIfLinkDevice = true;
+            var askIfLinkDeviceLayer = UILayerLoader.Load<AskIfLinkDeviceLayer>();
+            askIfLinkDeviceLayer.Initialise(
+                () =>
+                {
+                    PlayFabReadClient.LinkDevice(
+                        () =>
+                        {
+                            PopupLayer.ArrangeWarnWindow("Account linked to device.");
+                            PlayerAccountInfo.Me.currentLinkedDeviceId = PlayFabReadClient.CustomId;
+                        },
+                        (x) =>
+                        {
+                            PopupLayer.ArrangeWarnWindow("绑定失败"+ x.Error);
+                        }
+                    );
+                    UILayerLoader.Remove<AskIfLinkDeviceLayer>();
+                },
+                () =>
+                {
+                    PopupLayer.ArrangeWarnWindow("U can link your account to this device later in setting.");
+                    UILayerLoader.Remove<AskIfLinkDeviceLayer>();
+                }
+            );
+        }
         
         SetLoaded(true);
     }
@@ -118,7 +148,7 @@ public class FrontPage : MSceneProcess
                 ProgressLayer.Close();
                 if (PlayerAccountInfo.Me.TitleDisplayName == null)
                 {
-                    SettingPage.SetNickName((_)=>EnterProcess(), false);
+                    SettingPage.SetNickName((_) => EnterProcess(), false);
                 }
                 else
                 {

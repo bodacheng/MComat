@@ -24,6 +24,7 @@ namespace DummyLayerSystem
             {"CountDownLayer", "DummyLayerSystem/CountDownLayer"},
             {"FightingStepLayer", "DummyLayerSystem/FightingStepLayer"},
             {"SettingLayer", "DummyLayerSystem/SettingLayer"},
+            {"AskIfLinkDeviceLayer", "DummyLayerSystem/AskIfLinkDeviceLayer"},
             {"UnitsLayer", "DummyLayerSystem/UnitsLayer"},
             {"PopupLayer", "DummyLayerSystem/PopupLayer"},
             {"HighLightLayer", "DummyLayerSystem/HighLightLayer"},

@@ -9,17 +9,17 @@ using DG.Tweening;
 public class TitleScreenLayer : UILayer
 {
     // Main
-    [SerializeField] private RectTransform mainTab;
-    [SerializeField] private Image title;
-    [SerializeField] private P3Button TouchScreen;
-    [SerializeField] private Button accountLoginBtn;
+    [SerializeField] RectTransform mainTab;
+    [SerializeField] Image title;
+    [SerializeField] P3Button TouchScreen;
+    [SerializeField] Button accountLoginBtn;
     
     // Login by pw
-    [SerializeField] private RectTransform loginByPwTab;
-    [SerializeField] private InputField ID;
-    [SerializeField] private InputField PASSWORD;
-    [SerializeField] private Button LoginBtn;
-    [SerializeField] private Button cancelBtn;
+    [SerializeField] RectTransform loginByPwTab;
+    [SerializeField] InputField ID;
+    [SerializeField] InputField PASSWORD;
+    [SerializeField] Button LoginBtn;
+    [SerializeField] Button cancelBtn;
 
     private float titleAnimFactor = 0;
     public void Initialise()

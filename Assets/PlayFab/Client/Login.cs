@@ -8,12 +8,16 @@ using UnityEngine.SceneManagement;
 public partial class PlayFabReadClient
 {
     const string PLAYFAB_CUSTOM_ID = "PLAYFAB_CUSTOM_ID";
-    public static string CustomId => PlayerPrefs.GetString(PLAYFAB_CUSTOM_ID, Guid.NewGuid().ToString());
-
-    static void SaveCustomId()
+    
+    public static string CustomId
     {
-        PlayerPrefs.SetString(PLAYFAB_CUSTOM_ID, CustomId);
-        PlayerPrefs.Save();
+        get
+        {
+            var customId = PlayerPrefs.GetString(PLAYFAB_CUSTOM_ID, Guid.NewGuid().ToString());
+            PlayerPrefs.SetString(PLAYFAB_CUSTOM_ID, customId);
+            PlayerPrefs.Save();
+            return customId;
+        }
     }
     
     /// <summary>
@@ -68,15 +72,11 @@ public partial class PlayFabReadClient
                     DeviceId = CustomId,
                     CreateAccount = true
                 },
-                (x)=>
-                {
-                    success.Invoke(x);
-                    SaveCustomId();
-                },
+                success.Invoke,
                 fail
             );
 #endif
-        
+
 #if UNITY_ANDROID
         PlayFabClientAPI.LoginWithAndroidDeviceID(
             new LoginWithAndroidDeviceIDRequest
@@ -84,11 +84,7 @@ public partial class PlayFabReadClient
                 AndroidDeviceId = CustomId,
                 CreateAccount = true
             },
-            (x)=>
-            {
-                success.Invoke(x);
-                SaveCustomId();
-            },
+            success.Invoke,
             fail
         );
 #endif
@@ -152,7 +148,7 @@ public partial class PlayFabReadClient
         MainMenuNote.GoingTo = MainSceneStep.FrontPage;
         SceneManager.LoadScene(1);
     }
-
+    
     public static void GetAccountInfo(Action<bool> success)
     {
         PlayFabClientAPI.GetAccountInfo(
@@ -168,16 +164,12 @@ public partial class PlayFabReadClient
                 PlayerAccountInfo.Me.Email = result.AccountInfo.PrivateInfo.Email;
                 
 #if UNITY_IOS
-                if (result.AccountInfo.IosDeviceInfo != null)
-                    PlayerAccountInfo.Me.currentLinkedDeviceId = result.AccountInfo.IosDeviceInfo.IosDeviceId;
-                if (result.AccountInfo.AndroidDeviceInfo != null)
-                    PlayerAccountInfo.Me.currentLinkedDeviceId = result.AccountInfo.AndroidDeviceInfo.AndroidDeviceId;
+                PlayerAccountInfo.Me.currentLinkedDeviceId = 
+                    result.AccountInfo.IosDeviceInfo != null ? result.AccountInfo.IosDeviceInfo.IosDeviceId : null;
 #endif
 #if UNITY_ANDROID
-                if (result.AccountInfo.AndroidDeviceInfo != null)
-                    PlayerAccountInfo.Me.currentLinkedDeviceId = result.AccountInfo.AndroidDeviceInfo.AndroidDeviceId;
-                else
-                    PlayerAccountInfo.Me.currentLinkedDeviceId = null;
+                PlayerAccountInfo.Me.currentLinkedDeviceId = 
+                    result.AccountInfo.AndroidDeviceInfo != null ? result.AccountInfo.AndroidDeviceInfo.AndroidDeviceId : null;
 #endif
                 success.Invoke(true);
             },

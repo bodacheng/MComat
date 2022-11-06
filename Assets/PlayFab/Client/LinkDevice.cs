@@ -8,7 +8,7 @@ using PlayFab.ClientModels;
 /// </summary>
 public partial class PlayFabReadClient
 {
-    static void LinkDevice(Action success, Action<PlayFabError> fail)
+    public static void LinkDevice(Action success, Action<PlayFabError> fail)
     {
 #if UNITY_IOS
         PlayFabClientAPI.LinkIOSDeviceID(
@@ -53,7 +53,7 @@ public partial class PlayFabReadClient
 #endif
     }
 
-    public static void UnLinkDevice(string unlinkDeviceId ,Action success, Action fail = null)
+    static void UnLinkDevice(string unlinkDeviceId ,Action success, Action fail = null)
     {
 #if UNITY_IOS
         PlayFabClientAPI.UnlinkIOSDeviceID(
