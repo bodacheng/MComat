@@ -7,6 +7,15 @@ using UnityEngine.SceneManagement;
 
 public partial class PlayFabReadClient
 {
+    const string PLAYFAB_CUSTOM_ID = "PLAYFAB_CUSTOM_ID";
+    public static string CustomId => PlayerPrefs.GetString(PLAYFAB_CUSTOM_ID, Guid.NewGuid().ToString());
+
+    static void SaveCustomId()
+    {
+        PlayerPrefs.SetString(PLAYFAB_CUSTOM_ID, CustomId);
+        PlayerPrefs.Save();
+    }
+    
     /// <summary>
     /// 以Username和Password来登陆，
     /// 是玩家在设备迁移的时候会用的方法
@@ -56,24 +65,32 @@ public partial class PlayFabReadClient
             PlayFabClientAPI.LoginWithIOSDeviceID(
                 new LoginWithIOSDeviceIDRequest
                 {
-                    DeviceId = SystemInfo.deviceUniqueIdentifier,
+                    DeviceId = CustomId,
                     CreateAccount = true
                 },
-                success.Invoke,
+                (x)=>
+                {
+                    success.Invoke(x);
+                    SaveCustomId();
+                },
                 fail
             );
 #endif
-
+        
 #if UNITY_ANDROID
-            PlayFabClientAPI.LoginWithAndroidDeviceID(
-                new LoginWithAndroidDeviceIDRequest
-                {
-                    AndroidDeviceId = SystemInfo.deviceUniqueIdentifier,
-                    CreateAccount = true
-                },
-                success.Invoke,
-                fail
-            );
+        PlayFabClientAPI.LoginWithAndroidDeviceID(
+            new LoginWithAndroidDeviceIDRequest
+            {
+                AndroidDeviceId = CustomId,
+                CreateAccount = true
+            },
+            (x)=>
+            {
+                success.Invoke(x);
+                SaveCustomId();
+            },
+            fail
+        );
 #endif
     }
     
@@ -105,7 +122,7 @@ public partial class PlayFabReadClient
                         PopupLayer.ArrangeWarnWindow("绑定失败"+ x.Error);
                     }
                 );
-            }, 
+            },
             "当前设备没和这个账户进行绑定，绑定一下？绑定了的话。。");
     }
     
@@ -151,7 +168,10 @@ public partial class PlayFabReadClient
                 PlayerAccountInfo.Me.Email = result.AccountInfo.PrivateInfo.Email;
                 
 #if UNITY_IOS
-                PlayerAccountInfo.Me.currentLinkedDeviceId = result.AccountInfo.IosDeviceInfo.IosDeviceId;
+                if (result.AccountInfo.IosDeviceInfo != null)
+                    PlayerAccountInfo.Me.currentLinkedDeviceId = result.AccountInfo.IosDeviceInfo.IosDeviceId;
+                if (result.AccountInfo.AndroidDeviceInfo != null)
+                    PlayerAccountInfo.Me.currentLinkedDeviceId = result.AccountInfo.AndroidDeviceInfo.AndroidDeviceId;
 #endif
 #if UNITY_ANDROID
                 if (result.AccountInfo.AndroidDeviceInfo != null)
