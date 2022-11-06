@@ -8889,6 +8889,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1926495220161390441, guid: 24d00d71aee6bed45b2e606cb8ed8793,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1926495220772822036, guid: 24d00d71aee6bed45b2e606cb8ed8793,
         type: 3}
       propertyPath: m_Shade

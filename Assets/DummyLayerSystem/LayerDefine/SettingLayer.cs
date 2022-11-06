@@ -177,7 +177,7 @@ public class SettingLayer : UILayer
         );
         unLinkDeviceBtn.onClick.AddListener(() =>
             {
-                PlayFabReadClient.UnLinkAccountPopup(RefreshLinkDeviceBtn);
+                //PlayFabReadClient.UnLinkAccountPopup(RefreshLinkDeviceBtn);
             }
         );
     }
@@ -187,7 +187,7 @@ public class SettingLayer : UILayer
         unLinkDeviceBtn.gameObject.SetActive(PlayerAccountInfo.Me.currentLinkedDeviceId == PlayFabReadClient.CustomId);
         linkDeviceBtn.gameObject.SetActive(PlayerAccountInfo.Me.currentLinkedDeviceId != PlayFabReadClient.CustomId);
         instruction.text = PlayerAccountInfo.Me.currentLinkedDeviceId == PlayFabReadClient.CustomId ? 
-            "当前账户已经和设备进行了链接，你可以在程序打开后直接登陆本账户。如果你希望将本设备和其他账户进行绑定，请点击下方按钮。解除当前账户与设备的绑定会使您无法直接登陆目前账户，如果希望保留当前账户，请设置好本账户的邮箱与密码，否则可能造成账户丢失。" 
+            "当前账户已经和设备进行了链接，你可以在程序打开后直接登陆本账户。" 
             : 
             "当前账户没有与当前设备进行绑定。点击下方绑定按钮可以绑定。";
     }
