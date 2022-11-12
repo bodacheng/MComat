@@ -27,8 +27,8 @@ public partial class Animation_Manger{
                         Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey);
                         if (value != null)
                         {
-                            var _AnimationClip = (AnimationClip)value;
-                            basicAnims.Add(_AnimationClip);
+                            var animationClip = (AnimationClip)value;
+                            basicAnims.Add(animationClip);
                         }
                     }
                 }
@@ -39,14 +39,14 @@ public partial class Animation_Manger{
         }
         
         toLoadAnims = new Dictionary<string, AnimationClip>();        
-        foreach (AnimationClip _AnimationClip in basicAnims)
+        foreach (var animationClip in basicAnims)
         {
-            if (_AnimationClip == null)
+            if (animationClip == null)
             {
                 continue;
             }
             
-            if (_AnimationClip.name == "death")
+            if (animationClip.name == "death")
             {
                 if (toLoadAnims.ContainsKey("death"))
                 {
@@ -54,10 +54,10 @@ public partial class Animation_Manger{
                 }
                 else
                 {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("death", _AnimationClip));
+                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("death", animationClip));
                 }
             }
-            if (_AnimationClip.name == "rush")
+            if (animationClip.name == "rush")
             {
                 if (toLoadAnims.ContainsKey("rush"))
                 {
@@ -65,10 +65,10 @@ public partial class Animation_Manger{
                 }
                 else
                 {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rush", _AnimationClip));
+                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rush", animationClip));
                 }
             }
-            if (_AnimationClip.name == "block")
+            if (animationClip.name == "block")
             {
                 if (toLoadAnims.ContainsKey("block"))
                 {
@@ -76,10 +76,10 @@ public partial class Animation_Manger{
                 }
                 else
                 {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("block", _AnimationClip));
+                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("block", animationClip));
                 }
             }
-            if (_AnimationClip.name == "block_break")
+            if (animationClip.name == "block_break")
             {
                 if (toLoadAnims.ContainsKey("block_break"))
                 {
@@ -87,10 +87,10 @@ public partial class Animation_Manger{
                 }
                 else
                 {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("block_break", _AnimationClip));
+                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("block_break", animationClip));
                 }
             }
-            if (_AnimationClip.name == "zhuangbi")
+            if (animationClip.name == "zhuangbi")
             {
                 if (toLoadAnims.ContainsKey("zhuangbi"))
                 {
@@ -98,10 +98,10 @@ public partial class Animation_Manger{
                 }
                 else
                 {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("zhuangbi", _AnimationClip));
+                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("zhuangbi", animationClip));
                 }
             }
-            if (_AnimationClip.name == "dash")
+            if (animationClip.name == "dash")
             {
                 if (toLoadAnims.ContainsKey("dash"))
                 {
@@ -109,10 +109,10 @@ public partial class Animation_Manger{
                 }
                 else
                 {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("dash", _AnimationClip));
+                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("dash", animationClip));
                 }
             }
-            if (_AnimationClip.name == "rushback")
+            if (animationClip.name == "rushback")
             {
                 if (toLoadAnims.ContainsKey("rushback"))
                 {
@@ -120,10 +120,10 @@ public partial class Animation_Manger{
                 }
                 else
                 {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rushback", _AnimationClip));
+                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rushback", animationClip));
                 }
             }
-            if (_AnimationClip.name == "getup")
+            if (animationClip.name == "getup")
             {
                 if (toLoadAnims.ContainsKey("getup"))
                 {
@@ -131,10 +131,10 @@ public partial class Animation_Manger{
                 }
                 else
                 {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("getup", _AnimationClip));
+                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("getup", animationClip));
                 }
             }
-            if (_AnimationClip.name == "victory")
+            if (animationClip.name == "victory")
             {
                 if (toLoadAnims.ContainsKey("victory"))
                 {
@@ -142,12 +142,12 @@ public partial class Animation_Manger{
                 }
                 else
                 {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("victory", _AnimationClip));
+                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("victory", animationClip));
                 }
             }
         }
 
-        async UniTask LoadHurtAnim(string type, string address, List<object> tags)
+        async UniTask LoadHurtAnim(string type, string address, List<string> tags)
         {
             if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(type + "/" + address))
             {
@@ -164,26 +164,26 @@ public partial class Animation_Manger{
                             Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey);
                             if (value != null)
                             {
-                                var _AnimationClip = (AnimationClip)value;
-                                humanHurtAnimsObjects.Add(_AnimationClip);
+                                var animationClip = (AnimationClip)value;
+                                humanHurtAnimsObjects.Add(animationClip);
                             }
                         }
                     }
                 }
                 Addressables.Release(loadPath);
-                foreach (Object _object in humanHurtAnimsObjects)
+                foreach (var clip in humanHurtAnimsObjects)
                 {
-                    AnimationResourceLoader.SeriesAnimationClipsDic[type + "/" + address].Add(_object as AnimationClip);
+                    AnimationResourceLoader.SeriesAnimationClipsDic[type + "/" + address].Add(clip);
                 }
             }
         }
         
-        await LoadHurtAnim(type, "basic_hurts/back", new List<object> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_hurts/high", new List<object> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_hurts/lay", new List<object> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_hurts/low", new List<object> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_hurts/press",new List<object> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_knockoffs", new List<object> { "knock_anim" });
+        await LoadHurtAnim(type, "basic_hurts/back", new List<string> { "hurt_anim" });
+        await LoadHurtAnim(type, "basic_hurts/high", new List<string> { "hurt_anim" });
+        await LoadHurtAnim(type, "basic_hurts/lay", new List<string> { "hurt_anim" });
+        await LoadHurtAnim(type, "basic_hurts/low", new List<string> { "hurt_anim" });
+        await LoadHurtAnim(type, "basic_hurts/press",new List<string> { "hurt_anim" });
+        await LoadHurtAnim(type, "basic_knockoffs", new List<string> { "knock_anim" });
         
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_knockoffs", out knockoffAnimations);
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/back", out _hurtClipsBack);
@@ -195,30 +195,27 @@ public partial class Animation_Manger{
         animatorOverride = new AnimatorOverrideController(Animator.runtimeAnimatorController);
         
         // 以上内容为个性化动画片段对base层基础动画的覆盖
-        if (basicAnims != null)
+        foreach (var animationClip in basicAnims)
         {
-            foreach (AnimationClip _AnimationClip in basicAnims)
+            if (animationClip.name == "idle")
             {
-                if (_AnimationClip.name == "idle")
-                {
-                    if (animatorOverride["idle"])
-                        animatorOverride["idle"] = _AnimationClip;
-                }
-                if (_AnimationClip.name == "walk")
-                {
-                    if (animatorOverride["walk"])
-                        animatorOverride["walk"] = _AnimationClip;
-                }
-                if (_AnimationClip.name == "run")
-                {
-                    if (animatorOverride["run"])
-                        animatorOverride["run"] = _AnimationClip;
-                }
-                if (_AnimationClip.name == "air")
-                {
-                    if (animatorOverride["air"])
-                        animatorOverride["air"] = _AnimationClip;
-                }
+                if (animatorOverride["idle"])
+                    animatorOverride["idle"] = animationClip;
+            }
+            if (animationClip.name == "walk")
+            {
+                if (animatorOverride["walk"])
+                    animatorOverride["walk"] = animationClip;
+            }
+            if (animationClip.name == "run")
+            {
+                if (animatorOverride["run"])
+                    animatorOverride["run"] = animationClip;
+            }
+            if (animationClip.name == "air")
+            {
+                if (animatorOverride["air"])
+                    animatorOverride["air"] = animationClip;
             }
         }
         Animator.runtimeAnimatorController = animatorOverride;
@@ -299,9 +296,9 @@ public partial class Animation_Manger{
     public async UniTask PreloadPersonalAnimsResourceMode(string type, List<string> toLoadSkillAnimsNames,Element element)
     {
         var tasks = new List<UniTask>();
-        foreach (string anim_name in toLoadSkillAnimsNames)
+        foreach (var animName in toLoadSkillAnimsNames)
         {
-            tasks.Add(PreloadPersonalAnimResourceMode(type, anim_name, element));
+            tasks.Add(PreloadPersonalAnimResourceMode(type, animName, element));
         }
         await UniTask.WhenAll(tasks);
     }

@@ -14,7 +14,7 @@ public class FightInfoGUI : Editor
         var fightInfo = (FightInfo)target;
         if (!initialized)
         {
-            Units.LoadMonstersConfig();
+            Units.LoadUnitConfigs();
             SkillConfigTable.LoadAllSkillConfigs();
             fightInfo.Open();
             _fightMemberManager = new FightMemberManager();

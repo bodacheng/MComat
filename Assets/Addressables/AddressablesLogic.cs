@@ -82,9 +82,10 @@ public static class AddressablesLogic
         // WARNING: This will cause all asset bundles to be re-downloaded at startup every time and should not be used in a production game
         //Addressables.ClearDependencyCacheAsync(label);
         
-        Units.LoadMonstersConfig();
+        Units.LoadUnitConfigs();
         SkillConfigTable.LoadAllSkillConfigs();
         
+        await DownLoadMission("pic", progressUIRefresh);
         await DownLoadMission("basic_anim", progressUIRefresh);
         await DownLoadMission("skill_anim", progressUIRefresh);
         await DownLoadMission("hurt_anim", progressUIRefresh);

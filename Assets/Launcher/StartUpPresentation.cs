@@ -46,9 +46,10 @@ public class StartUpPresentation : MonoBehaviour
             T.gameObject,
             async ()=>
             {
+                HighLightLayer.DarkOff(Color.white, 0, true);
                 UILayerLoader.Load<ProgressLayer>();
                 await AddressablesLogic.ResourcePrepareProcess(
-                    Go, 
+                    Go,
                     (x,f) =>
                     {
                         if (f == 0)
@@ -68,6 +69,7 @@ public class StartUpPresentation : MonoBehaviour
 
     void Go()
     {
+        HighLightLayer.Close();
         Starter.Initialise();
         if (FrontSceneFight)
         {

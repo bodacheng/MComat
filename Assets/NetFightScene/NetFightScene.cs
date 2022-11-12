@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 namespace FightScene
 {
     public class NetFightScene : MonoBehaviour
-    { 
+    {
         public RectTransform T;
         
         [Header("双方站位点")]
@@ -47,7 +47,7 @@ namespace FightScene
             UILayerLoader.Clear();
             UILayerLoader.SetHanger(T);
             
-            HighLightLayer.DarkOff(1, 0);
+            HighLightLayer.DarkOff(Color.white, 0, true);
             Time.timeScale = 1;
             if (Fight == null)
             {

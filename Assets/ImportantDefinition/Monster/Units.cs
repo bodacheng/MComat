@@ -46,14 +46,14 @@ public static class Units
     public static void RefreshDic()
     {
         Dic.Clear();
-        List<UnitConfig> characterResourceInfos = RowToConfigList(rowList);
-        foreach (UnitConfig one in characterResourceInfos)            
+        var characterResourceInfos = RowToConfigList(rowList);
+        foreach (var one in characterResourceInfos)            
         {
             Dic.Add(one.RECORD_ID,one);
         }
     }
     
-    public static void LoadMonstersConfig()
+    public static void LoadUnitConfigs()
     {
         LoadByResource();
         RefreshDic();

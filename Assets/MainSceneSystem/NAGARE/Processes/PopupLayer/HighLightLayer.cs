@@ -1,9 +1,15 @@
+using System;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using DummyLayerSystem;
 using UnityEngine;
 using NoSuchStudio.UI.Highlight;
 using UniRx;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class HighLightLayer : UILayer
 {
@@ -21,8 +27,8 @@ public class HighLightLayer : UILayer
     #region 高亮显示
     public static void HighLightRect(RectTransform r, Options options = null)
     {
-        var HighLightLayer = UILayerLoader.Load<HighLightLayer>();
-        HighLightLayer._HighLightRect(r, options);
+        var highLightLayer = UILayerLoader.Load<HighLightLayer>();
+        highLightLayer._HighLightRect(r, options);
     }
     
     async void _HighLightRect(RectTransform r, Options options = null)
@@ -48,27 +54,59 @@ public class HighLightLayer : UILayer
     #endregion
     
     #region 黑幕
-    public static void DarkOff(float darkness, float duration)
+    public static void DarkOff(Color color, float duration, bool randomBg)
     {
-        var HighLightLayer = UILayerLoader.Load<HighLightLayer>();
-        HighLightLayer.bigCurtain.raycastTarget = true;
-        HighLightLayer.bigCurtain.DOColor(new Color(0,0,0, darkness), duration);
+        var highLightLayer = UILayerLoader.Load<HighLightLayer>();
+        highLightLayer.bigCurtain.raycastTarget = true;
+        if (randomBg)
+        {
+            LoadBg(highLightLayer.RandomChangeBg).Forget();
+        }
+        highLightLayer.bigCurtain.DOColor(color, duration);
     }
     
     public static void LightUp(float duration)
     {
-        var HighLightLayer = UILayerLoader.Get<HighLightLayer>();
-        if (HighLightLayer != null)
+        var highLightLayer = UILayerLoader.Get<HighLightLayer>();
+        if (highLightLayer != null)
         {
-            HighLightLayer.bigCurtain.DOColor(new Color(0,0,0, 0), duration).OnComplete(() =>
+            highLightLayer.bigCurtain.DOColor(new Color(0,0,0, 0), duration).OnComplete(() =>
             {
-                HighLightLayer.bigCurtain.raycastTarget = false;
+                highLightLayer.bigCurtain.raycastTarget = false;
                 Close();
             });
         }
     }
     
     #endregion
+    
+    private static readonly List<string> BgKeys = new ();
+    static async UniTask LoadBg(Action success)
+    {
+        if (BgKeys.Count == 0)
+        {
+            var loadPath = Addressables.LoadResourceLocationsAsync( new List<string> {"pic"} , Addressables.MergeMode.Intersection);
+            await loadPath;
+            if (loadPath.Status == AsyncOperationStatus.Succeeded)
+            {
+                foreach (var path in loadPath.Result)
+                {
+                    if (!BgKeys.Contains(path.PrimaryKey))
+                        BgKeys.Add(path.PrimaryKey);
+                }
+            }
+            Addressables.Release(loadPath);
+        }
+        success.Invoke();
+    }
+
+    async void RandomChangeBg()
+    {
+        if (BgKeys.Count == 0) return;
+        int randomIndex = Random.Range(0, BgKeys.Count);
+        var value = await AddressablesLogic.LoadT<Sprite>(BgKeys[randomIndex]);
+        bigCurtain.sprite = value;
+    }
     
     public static void Close()
     {

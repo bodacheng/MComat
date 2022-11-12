@@ -12,7 +12,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                 {
                     case CellPhase.SkillStoneBoxCell:
                     case CellPhase.NineSlotCell:
-                        if (to.myDadItem == null)
+                        if (to._myDadItem == null)
                         {
                             SVCenter.MoveItemFromTo(from, to);
                             break;
@@ -23,7 +23,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                 }
             break;
             case CellPhase.SKLevelUpMSlot:
-                if (to.myDadItem == null)
+                if (to._myDadItem == null)
                     SVCenter.MoveItemFromTo(from, to);
                 else
                     SVCenter.SwapItemFromTo(from, to);
@@ -40,7 +40,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                 }
             break;
             case CellPhase.StoneMergeSlot:
-                if (to.myDadItem == null)
+                if (to._myDadItem == null)
                     SVCenter.MoveItemFromTo(from, to);
                 else
                     SVCenter.SwapItemFromTo(from, to);

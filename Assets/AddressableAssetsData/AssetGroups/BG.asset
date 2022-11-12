@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: BG
+  m_EditorClassIdentifier: 
+  m_GroupName: BG
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 3fbc6ab1102ec472b9b793c40f0f1b9e
+  m_SerializeEntries:
+  - m_GUID: bdfd268a327c74539872beb7915e587b
+    m_Address: face_fix
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - pic
+  - m_GUID: eb220cbf519bf40809a1d52321eb47be
+    m_Address: tatie_fix
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - pic
+  - m_GUID: 4b6f359877f4b44d997586e7b4bce4c3
+    m_Address: three_fix
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - pic
+  - m_GUID: 0ee1e48a2efe849d7880e8730fc2b06c
+    m_Address: "\u4F53\u64CD\u9009\u624B2"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - pic
+  - m_GUID: 83c6ea019cb5d42238092aaf7dc6fe64
+    m_Address: "\u5916\u661F\u4EBA"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - pic
+  - m_GUID: f5fcb3ce88111481eb8807a40950370a
+    m_Address: "\u5B66\u751F\u59B9"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - pic
+  - m_GUID: 22a531618759e469f811bc48aa5b1b89
+    m_Address: "\u5C1D\u8BD5\u5220\u9664\u80CC\u666F1"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - pic
+  - m_GUID: 4a112b37057374e69bad4c7ca132162c
+    m_Address: "\u5FA1\u59D0"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - pic
+  - m_GUID: 6e07f2f59a2394ce19ec2f00c4f0eeb0
+    m_Address: "\u62F3\u51FB\u624B"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - pic
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 256a9e651e0b7458abffd03fe97e37bb, type: 2}
+    - {fileID: 11400000, guid: 86a15696e0a69445693fe8e9f2edb1dc, type: 2}

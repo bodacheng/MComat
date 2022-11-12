@@ -54,6 +54,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 68d02a7a477e04d458f6a52441d5b1f2, type: 2}
   - {fileID: 11400000, guid: 5f418eab2de650247a47a8883d17a999, type: 2}
   - {fileID: 11400000, guid: bd7d61d6c13c74492a27bf7d63f0aa6d, type: 2}
+  - {fileID: 11400000, guid: e5f958cd002d343a79877b2395599754, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -136,6 +137,7 @@ MonoBehaviour:
     - battle_ground
     - btn_effect
     - icon_frame
+    - pic
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 7ed3c4f91e15949209e5cda4294e805b, type: 2}
@@ -166,7 +168,7 @@ MonoBehaviour:
           m_Key: HostingServiceUploadSpeed
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.String
-          m_Data: ServerData/Android
+          m_Data: ServerData/iOS;Library/com.unity.addressables/aa/iOS/iOS
           m_Key: ContentRoot
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Boolean

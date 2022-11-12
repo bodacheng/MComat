@@ -11,7 +11,6 @@ namespace Soul
         float _timeCounter;
         Vector3 _xz;
         bool _touchedBoundary;
-        bool _dropped;
         AnimationCurve _usedYCurve;
         AnimationCurve _usedZCurve;
         float _temp;
@@ -30,11 +29,10 @@ namespace Soul
             _flyingStep = 0;
             _timeCounter = 0;
             _touchedBoundary = false;
-            _dropped = false;
             FightParamsRef.GettingDamage = true;
             _BasicPhysicSupport.SetUsingGravity(false);
             _BasicPhysicSupport.OpenEnemyTouchingDrag(0);
-            _Animator.SetFloat("speed", 0f);
+            _Animator.SetFloat(Speed, 0f);
             _Animator.applyRootMotion = false;
             _Weapon_Animation_Events.ClearMarkerManagers();
             pEvents.CloseAllPersonalityEffects();
@@ -74,6 +72,8 @@ namespace Soul
         
         Vector3 _effectP, _quaV;
         private int _flyingStep;// 0 拔地 1 曲线 2 落地以及躺地昏迷
+        private static readonly int Speed = Animator.StringToHash("speed");
+
         public override void _State_Update()
         {
             if (!_touchedBoundary)
@@ -81,12 +81,13 @@ namespace Soul
                 if (_BasicPhysicSupport.AtRing)
                 {
                     _touchedBoundary = true;
-                    _xz = Vector3.zero - gameObject.transform.position;
+                    var pos = gameObject.transform.position;
+                    _xz = Vector3.zero - pos;
                     _xz.y = 0;
                     _xz = _xz.normalized;
-                    _effectP = gameObject.transform.position.normalized * BoundaryControlByGod._BattleRingRadius;
-                    _effectP.y = gameObject.transform.position.y;
-                    _quaV = Vector3.zero - gameObject.transform.position.normalized;
+                    _effectP = pos.normalized * BoundaryControlByGod._BattleRingRadius;
+                    _effectP.y = pos.y;
+                    _quaV = Vector3.zero - pos.normalized;
                     _quaV.y = 0;
                     EffectsManager.GenerateEffect("wallCrack", null, _effectP, Quaternion.LookRotation(_quaV, Vector3.up), null).Forget();
                 }

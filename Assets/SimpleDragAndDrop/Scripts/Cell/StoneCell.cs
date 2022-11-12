@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using dataAccess;
-using Singleton;
 
 /// <summary>
 /// Every item's cell must contain this script
@@ -38,15 +37,15 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     [Tooltip("Level")] 
     [SerializeField] Text level;
     
-    SKStoneItem myDadItem;
-
+    SKStoneItem _myDadItem;
+    
     void ShowLevel()
     {
         if (level == null)
             return;
-        if (myDadItem)
+        if (_myDadItem)
         {
-            StoneOfPlayerInfo info = Stones.Get(myDadItem.instanceId);
+            StoneOfPlayerInfo info = Stones.Get(_myDadItem.instanceId);
             level.text = info.Level.ToString();
         }
         else
@@ -85,19 +84,19 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     /// </summary>
     public void UpdateMyItem()
     {
-        myDadItem = GetComponentInChildren<SKStoneItem>();
+        _myDadItem = GetComponentInChildren<SKStoneItem>();
         if (cellPhase == CellPhase.SkillStoneBoxCell)
         {
             if (gameObject.activeSelf)
             {
-                ShowUsingChar(myDadItem, _charIcon);
+                ShowUsingUnit(_myDadItem, _charIcon);
             }
         }
         ShowLevel();
     }
     
     // Show Character icon using this SkillStone
-    async void ShowUsingChar(SKStoneItem Item, HeroIcon targetIcon)
+    void ShowUsingUnit(SKStoneItem Item, HeroIcon targetIcon)
     {
         if (Item == null || Item.instanceId == null)
         {
@@ -171,6 +170,6 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     public SKStoneItem GetItem()
     {
         UpdateMyItem();
-        return myDadItem;
+        return _myDadItem;
     }
 }

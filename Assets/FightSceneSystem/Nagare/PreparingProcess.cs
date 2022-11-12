@@ -124,7 +124,7 @@ public class PreparingProcess : FSceneProcess
     
     public override void ProcessEnter()
     {
-        HighLightLayer.DarkOff(1, 0);
+        HighLightLayer.DarkOff(Color.white, 0, true);
         EnterProcess().Forget();
     }
     

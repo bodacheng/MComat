@@ -7,10 +7,10 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     public void RemoveToTemp()
     {
         UpdateMyItem();
-        if (myDadItem)
+        if (_myDadItem)
         {
-            myDadItem._using = false;
-            myDadItem.gameObject.transform.SetParent(PreScene.target.stonesTempContainer);
+            _myDadItem._using = false;
+            _myDadItem.gameObject.transform.SetParent(PreScene.target.stonesTempContainer);
         }
         UpdateMyItem();
     }

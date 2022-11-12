@@ -15,7 +15,7 @@ public class StageManager : EditorWindow
     {
         if (!Initialized)
         {
-            Units.LoadMonstersConfig();
+            Units.LoadUnitConfigs();
             SkillConfigTable.LoadAllSkillConfigs();
             
             target = new FightInfo();

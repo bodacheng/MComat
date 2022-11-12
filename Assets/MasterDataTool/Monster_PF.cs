@@ -10,7 +10,7 @@ public partial class MasterDataTool
     
     public void OutputMonstersCatalog()
     {
-        Units.LoadMonstersConfig();
+        Units.LoadUnitConfigs();
         var pFSKDefine = new PFDefine
         {
             CatalogVersion = "unit"
@@ -36,7 +36,7 @@ public partial class MasterDataTool
 
     public void OutputMonsterStore()
     {
-        Units.LoadMonstersConfig();
+        Units.LoadUnitConfigs();
         var pFSKDefine = new PFStoreDefine();
         pFSKDefine.StoreId = "unit";
         var storeItems = new List<PFStoreDefine.StoreItem>();
