@@ -143,7 +143,6 @@ namespace ModelView
         float wid = 100, hei = 100; //スクリーンサイズ
         float left_right, left_right_old,　up_down, up_down_old, _z; //変数
         bool canLeftRight = true, canUpDown = true;
-
         
         public void EnableRotateDirection(bool x, bool y)
         {

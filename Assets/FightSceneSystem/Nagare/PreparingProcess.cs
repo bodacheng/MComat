@@ -22,7 +22,7 @@ public class PreparingProcess : FSceneProcess
         CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
         Sensor.ClearFightingMember();
         UILayerLoader.Load<ProgressLayer>();
-        ProgressLayer.LoadingPercent("loading Essentials", 0.1f);
+        ProgressLayer.LoadingPercent("loading Essentials", 0.5f);
         
         var tasks = new List<UniTask>
         {

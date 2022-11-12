@@ -54,14 +54,12 @@ public class HighLightLayer : UILayer
     #endregion
     
     #region 黑幕
-    public static void DarkOff(Color color, float duration, bool randomBg)
+    public static void DarkOff(Color color, float duration, bool randomChangeBg)
     {
         var highLightLayer = UILayerLoader.Load<HighLightLayer>();
         highLightLayer.bigCurtain.raycastTarget = true;
-        if (randomBg)
-        {
-            LoadBg(highLightLayer.RandomChangeBg).Forget();
-        }
+        if (randomChangeBg)
+            highLightLayer.RandomChangeBg();
         highLightLayer.bigCurtain.DOColor(color, duration);
     }
     
@@ -81,23 +79,19 @@ public class HighLightLayer : UILayer
     #endregion
     
     private static readonly List<string> BgKeys = new ();
-    static async UniTask LoadBg(Action success)
+    public static async UniTask LoadBg()
     {
-        if (BgKeys.Count == 0)
+        var loadPath = Addressables.LoadResourceLocationsAsync( new List<string> {"pic"} , Addressables.MergeMode.Intersection);
+        await loadPath;
+        if (loadPath.Status == AsyncOperationStatus.Succeeded)
         {
-            var loadPath = Addressables.LoadResourceLocationsAsync( new List<string> {"pic"} , Addressables.MergeMode.Intersection);
-            await loadPath;
-            if (loadPath.Status == AsyncOperationStatus.Succeeded)
+            foreach (var path in loadPath.Result)
             {
-                foreach (var path in loadPath.Result)
-                {
-                    if (!BgKeys.Contains(path.PrimaryKey))
-                        BgKeys.Add(path.PrimaryKey);
-                }
+                if (!BgKeys.Contains(path.PrimaryKey))
+                    BgKeys.Add(path.PrimaryKey);
             }
-            Addressables.Release(loadPath);
         }
-        success.Invoke();
+        Addressables.Release(loadPath);
     }
 
     async void RandomChangeBg()

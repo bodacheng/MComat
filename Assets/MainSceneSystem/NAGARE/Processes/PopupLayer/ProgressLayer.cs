@@ -4,11 +4,11 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UniRx;
 using DummyLayerSystem;
-
+using DuloGames.UI;
 public class ProgressLayer : UILayer
 {
-    [SerializeField] Text percentageText;
-    [SerializeField] Slider progressBar;
+    [SerializeField] UIProgressBar progressBar;
+    [SerializeField] Text percentage;
     [SerializeField] Text info;
     [SerializeField] Image bigCurtain;
     
@@ -50,9 +50,9 @@ public class ProgressLayer : UILayer
         {
             return;
         }
-        layer.info.text = description;
+        
         layer.progressBar.gameObject.SetActive(true);
-        layer.percentageText.text = ((int)(progress * 100)).ToString() + "%";
+        layer.info.text = description;
         
         if (current != null)
         {
@@ -64,18 +64,22 @@ public class ProgressLayer : UILayer
         {
             current = DOTween.To
             (
-                () => layer.progressBar.value,
-                (x) => layer.progressBar.value = x,
+                () => layer.progressBar.fillAmount,
+                (x) =>
+                {
+                    layer.progressBar.fillAmount = x;
+                    layer.percentage.text = ((int)(x * 100)) + "%";
+                },
                 progress,
-                1f
-            ).OnCompleteAsObservable().Subscribe(_ => 
+                3f
+            ).SetEase(Ease.OutFlash).OnCompleteAsObservable().Subscribe(_ => 
             {
                 Debug.Log("Percent Load Completed.");
             }).AddTo(layer.gameObject);
         }
         else
         {
-            layer.progressBar.value = progress;
+            layer.progressBar.fillAmount = progress;
         }
     }
     

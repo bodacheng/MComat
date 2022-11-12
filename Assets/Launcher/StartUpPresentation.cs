@@ -18,6 +18,7 @@ public class StartUpPresentation : MonoBehaviour
 
     async UniTask OnStart()
     {
+        await HighLightLayer.LoadBg();
         var bytes = await AddressablesLogic.GetWholeDownLoadSize(
             () =>
             {
@@ -55,7 +56,7 @@ public class StartUpPresentation : MonoBehaviour
                         if (f == 0)
                             ProgressLayer.LoadingPercent(x, f, false);
                         else
-                            ProgressLayer.LoadingPercent(x, f, false);
+                            ProgressLayer.LoadingPercent(x, f, true);
                     }
                 );
             },

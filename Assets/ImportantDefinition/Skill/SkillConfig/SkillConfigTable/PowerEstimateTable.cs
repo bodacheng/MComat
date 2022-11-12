@@ -22,7 +22,7 @@ public class PowerEstimateTable
 		public string HP;
 	}
 
-    static readonly List<Row> rowList = new List<Row>();
+    static readonly List<Row> rowList = new();
     static bool isLoaded = false;
     
     public static async UniTask Save(string type)

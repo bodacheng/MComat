@@ -99,6 +99,8 @@ public static class AddressablesLogic
         await DownLoadMission("battle_ground", progressUIRefresh);
         await DownLoadMission("btn_effect", progressUIRefresh);
         
+        await HighLightLayer.LoadBg();
+        
         complete.Invoke();
     }
     

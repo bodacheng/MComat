@@ -10,7 +10,7 @@ namespace FightScene
     {
         Text rotationModeHitCombo;
         
-        async void IniTeamUI_Rotate(Action<Data_Center> ChangeUnit)
+        void IniTeamUI_Rotate(Action<Data_Center> ChangeUnit)
         {
             foreach (var center in TeamMembers.GetValues())
             {

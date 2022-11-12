@@ -223,7 +223,7 @@ namespace mainMenu
             //} 
         }
 
-        async void ChangeIconOnPos(int posNum, MultiDic<Team, int, HeroIcon> teamButtonDic, PosKeySet posKeySet)
+        void ChangeIconOnPos(int posNum, MultiDic<Team, int, HeroIcon> teamButtonDic, PosKeySet posKeySet)
         {
             if (posNum == -1)
             {
