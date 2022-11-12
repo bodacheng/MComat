@@ -29,6 +29,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6675580150928740957}
   m_Father: {fileID: 0}
@@ -62,6 +63,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -97,13 +100,11 @@ MonoBehaviour:
     ATTACK_WEIGHT: 1
     HP_WEIGHT: 1
     STATE_TYPE: 0
-    AI_MIN_DIS: 0
-    AI_MAX_DIS: 0
     SP_LEVEL: 0
     EVENT_CODE: 
-    RARITY_LEVEL: 0
   Inherent: 0
-  SkillStoneOfPlayerId: 
+  instanceId: 
+  _using: 0
 --- !u!1 &4662212388362361352
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +133,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3128579168341383753}
   m_RootOrder: 0
@@ -164,6 +166,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.9118239, b: 0, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

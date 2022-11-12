@@ -9,10 +9,11 @@ namespace mainMenu
     public partial class SkillStonesBox : MonoBehaviour
     {
         [Header("格子")]
-        public StoneCell Cellprefab;
+        [SerializeField] StoneCell Cellprefab;
         
         [Header("选中框")]
-        public GameObject SelectedFrame;
+        [SerializeField] GameObject SelectedFrame;
+        
         public static GameObject _Selected;
 
         readonly IDictionary<int, StoneCell> CellsDic = new Dictionary<int, StoneCell>();

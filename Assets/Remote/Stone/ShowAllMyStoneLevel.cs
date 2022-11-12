@@ -1,18 +1,23 @@
 ﻿using dataAccess;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShowAllMyStoneLevel : MonoBehaviour
 {
-    int phase = 1;
-    public void _ShowAllMyStoneLevel()
+    [SerializeField] private Toggle toggle;
+
+    void Awake()
     {
-        if (phase == 1)
+        toggle.onValueChanged.AddListener(x =>
         {
-            Stones.ShowAllMyStoneLevel();
-            phase = 2;
-        }else{
-            Stones.CloseAllMyStoneFloatInfo();
-            phase = 1; 
-        }        
+            if (x)
+            {
+                Stones.ShowAllMyStoneLevel();
+            }
+            else
+            {
+                Stones.CloseAllMyStoneFloatInfo();
+            }
+        });
     }
 }
