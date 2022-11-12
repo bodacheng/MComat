@@ -67,11 +67,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - skill_icon
-  - m_GUID: 15004079ba362d64db076ee2297e68d3
-    m_Address: ball
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - skill_icon
   - m_GUID: 13f07c1e02f66134f97f48fabc5b32f8
     m_Address: 9999
     m_ReadOnly: 0

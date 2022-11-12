@@ -46,11 +46,11 @@ namespace mainMenu
             if (viewingMode)
             {
                 types.ClearOptions();
-                foreach (string Rname in Units.GetTypeList())
+                foreach (var s in Units.GetTypeList())
                 {
-                    Dropdown.OptionData m_NewData = new Dropdown.OptionData
+                    var m_NewData = new Dropdown.OptionData
                     {
-                        text = Rname
+                        text = s
                     };
                     types.options.Add(m_NewData);
                 }

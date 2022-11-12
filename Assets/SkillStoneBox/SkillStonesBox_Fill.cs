@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using dataAccess;
 using Skill;
 
@@ -11,7 +10,7 @@ namespace mainMenu
         
         public void RestFilter()
         {
-            StoneFilterForm filterForm = new StoneFilterForm
+            var filterForm = new StoneFilterForm
             {
                 type = FocusingType,
                 exType = new int[1] { FocusingExType },
