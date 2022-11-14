@@ -63,7 +63,6 @@ namespace mainMenu
         
         public void Clear()
         {
-            transform.gameObject.SetActive(false);
             keyname.text = "";
             Showname.text = "";
             ShowSkillStoneExType(-1);

@@ -13,9 +13,9 @@ public partial class SSLevelUpManager : MonoBehaviour
         focusingSSD.RefreshInfo(targetInstanceID);
         var renderModel = Stones.GetRenderModel(targetInstanceID);
         renderModel._using = true;
-
-        var layer = UILayerLoader.Load<StoneListLayer>();
-        layer.Setup();
+        
+        var layer = UILayerLoader.Get<StoneListLayer>();
+        //layer.Setup();
         layer.box.AddFeatureToCells(layer.CellFeature_MAdd);
         RefreshSkillLevelUpModule();
         Stones.HighLight(renderModel._SkillConfig.RECORD_ID);
@@ -27,6 +27,12 @@ public partial class SSLevelUpManager : MonoBehaviour
         var layer = UILayerLoader.Load<StoneListLayer>();
         layer.Setup();
         var renderModel = Stones.GetRenderModel(targetInstanceID);
+        if (renderModel == null)
+        {
+            Debug.Log("Logic Error:"+ targetInstanceID);
+            return;
+        }
+        
         renderModel._using = false;
         SKStoneItem.SelectedRender(renderModel, SkillStonesBox._Selected);
         focusingSSD.RefreshInfo(renderModel.instanceId);
