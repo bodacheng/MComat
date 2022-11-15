@@ -9,7 +9,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     public void AddMaterialFromCell(StoneCell boxCell)
     {
-        var target = Stones.Get(targetInstanceID);
+        var target = Stones.Get(_stoneListLayer.TargetStoneID);
         if (target == null)
         {
             return;
@@ -29,7 +29,7 @@ public partial class SSLevelUpManager : MonoBehaviour
     }
     
     // 自动添加技能卡
-    public void AutoAddMaterials(string skillId)
+    void AutoAddMaterials(string skillId)
     {
         var stones = Stones.GetMyStonesBySkillID(skillId);
         var slotIndex = 0;
@@ -45,7 +45,7 @@ public partial class SSLevelUpManager : MonoBehaviour
                 var stoneInstanceID = stones[^1];
                 var itemModel = Stones.GetRenderModel(stoneInstanceID);
                 var itemData = Stones.Get(stoneInstanceID);
-                if (targetInstanceID != stoneInstanceID && dataAccess.Units.Get(itemData.UnitInstanceId) == null)
+                if (_stoneListLayer.TargetStoneID != stoneInstanceID && dataAccess.Units.Get(itemData.UnitInstanceId) == null)
                 {
                     MaterialSlots[slotIndex].AddItem(itemModel);
                     slotIndex += 1;

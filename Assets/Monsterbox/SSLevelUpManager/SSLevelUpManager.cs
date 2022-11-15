@@ -20,12 +20,14 @@ public partial class SSLevelUpManager : MonoBehaviour
     [SerializeField] StoneCell cell3;
     [SerializeField] StoneCell cell4;
 
+    [SerializeField] StoneListLayer _stoneListLayer;
+
     public void INI()
     {
         cancelBtn.onClick.AddListener(CloseLevelUpPage);
         autoAdd.onClick.AddListener(() =>
         {
-            var info = Stones.Get(targetInstanceID);
+            var info = Stones.Get(_stoneListLayer.TargetStoneID);
             AutoAddMaterials(info.SkillId);
         });
         
@@ -50,9 +52,9 @@ public partial class SSLevelUpManager : MonoBehaviour
             var item = SKStoneItem.draggedItem;
             if (item == null)
                 return;
-            var target = Stones.Get(targetInstanceID);
+            var target = Stones.Get(_stoneListLayer.TargetStoneID);
             
-            if (item.instanceId != targetInstanceID && item._SkillConfig.RECORD_ID == target.SkillId)
+            if (item.instanceId != _stoneListLayer.TargetStoneID && item._SkillConfig.RECORD_ID == target.SkillId)
             {
                 var m = Stones.Get(item.instanceId);
                 if (m.Born == "true")
@@ -62,7 +64,7 @@ public partial class SSLevelUpManager : MonoBehaviour
                 }
                 if (m.UnitInstanceId != null)
                 {
-                    PopupLayer.ArrangeWarnWindow("有角色正在使用，不能用作材料");
+                    PopupLayer.ArrangeWarnWindow("このストーンは装備中です");
                     return;
                 }
                 
@@ -77,11 +79,11 @@ public partial class SSLevelUpManager : MonoBehaviour
     public void RefreshSkillLevelUpModule()
     {
         confirmLevelUp.gameObject.SetActive(false);
-        if (targetInstanceID == null)
+        if (_stoneListLayer.TargetStoneID == null)
         {
             return;
         }
-        var target = Stones.Get(targetInstanceID);
+        var target = Stones.Get(_stoneListLayer.TargetStoneID);
         foreach (var slot in MaterialSlots)
         {
             if (slot.GetItem() == null)
@@ -104,7 +106,7 @@ public partial class SSLevelUpManager : MonoBehaviour
                 {
                     ConfirmSkillStoneLevelUp(x=> RefreshSkillLevelUpModule());
                 }, 
-                "确实要升级技能石？");
+                "技ストーンを強化しますか ?");
         }
         confirmLevelUp.onClick.RemoveAllListeners();
         confirmLevelUp.onClick.AddListener(Confirm);

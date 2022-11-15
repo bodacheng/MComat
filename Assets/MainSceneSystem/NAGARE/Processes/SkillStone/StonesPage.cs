@@ -13,19 +13,11 @@ public class StonesPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        ProcessEnter<Any>(null);
+        EnterProcess();
         SetLoaded(true);
     }
     
-    public override void ProcessEnter<T>(T t)
-    {
-        if (t != null)
-            EnterProcess(t);
-        else
-            EnterProcess();
-        SetLoaded(true);
-    }
-
+    
     //EnterProcess()内绝不能出现triggerMainProcess
     void EnterProcess()
     {
@@ -37,20 +29,6 @@ public class StonesPage : MSceneProcess
         }
         
         CommonEnterProcess();
-    }
-    
-    //EnterProcess()内绝不能出现triggerMainProcess
-    void EnterProcess<T>(T t)
-    {
-        var CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
-        if (CheckIfExceedLimit.Count > 0)
-        {
-            PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
-            return;
-        }
-        
-        CommonEnterProcess();
-        stoneListLayer.levelManager.OpenLevelUpPage(t as string);
     }
     
     void CommonEnterProcess()

@@ -96,13 +96,13 @@ namespace mainMenu
             float.TryParse(row.EstimateDamage, out float at);
             if (AT != null)
             {
-                AT.text = "MaxDamage = " + SkillEntity.ATCal(at, currentStone.Level);
+                AT.text = "AT = " + SkillEntity.ATCal(at, currentStone.Level);
             }
             if (HP != null)
             {
-                HP.text = "MaxHp = " + SkillEntity.StoneHpCal(hp, currentStone.Level);
+                HP.text = "HP = " + SkillEntity.StoneHpCal(hp, currentStone.Level);
             }
-            StoneTargetLevel.text = "Level:" + currentStone.Level;
+            StoneTargetLevel.text = "LV:" + currentStone.Level;
             transform.gameObject.SetActive(true);
         }
         
@@ -134,11 +134,11 @@ namespace mainMenu
             float.TryParse(row.EstimateDamage, out float at);
             if (AT != null)
             {
-                AT.text = "MaxDamage = " + _SkillEntity.AT;
+                AT.text = "AT = " + _SkillEntity.AT;
             }
             if (HP != null)
             {
-                HP.text = "MaxHp = " + _SkillEntity.HP;
+                HP.text = "HP = " + _SkillEntity.HP;
             }
             transform.gameObject.SetActive(true);
         }

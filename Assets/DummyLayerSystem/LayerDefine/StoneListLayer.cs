@@ -13,20 +13,21 @@ public class StoneListLayer : UILayer
     [SerializeField] Button OpenBtn;
     
     string targetStoneID;
-    string TargetStoneID
+    public string TargetStoneID
     {
         get => targetStoneID; 
         set
         {
             targetStoneID = value;
-            StoneOfPlayerInfo info = Stones.Get(targetStoneID);
+            var info = Stones.Get(targetStoneID);
+            _skillStoneDetail.gameObject.SetActive(info != null);
             OpenBtn.gameObject.SetActive(info != null);
             if (info != null)
             {
                 OpenBtn.onClick.RemoveAllListeners();
                 OpenBtn.onClick.AddListener(() =>
                 {
-                    levelManager.OpenLevelUpPage(targetStoneID);
+                    levelManager.OpenLevelUpPage();
                 });
             }
         }
@@ -57,7 +58,7 @@ public class StoneListLayer : UILayer
     
     public void CellFeature_StoneShow(StoneCell _Cell)
     {
-        void buttonFeature()
+        void btnFeature()
         {
             var _stone = _Cell.GetItem();
             if (_stone != null && _stone._SkillConfig != null)
@@ -71,7 +72,7 @@ public class StoneListLayer : UILayer
             }
         }
         
-        _Cell.btn.AddListener(buttonFeature);
+        _Cell.btn.AddListener(btnFeature);
         _Cell.SetOnDropAction(StoneCell.Install);
     }
     

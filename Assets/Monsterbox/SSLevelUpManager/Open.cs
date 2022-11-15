@@ -5,13 +5,10 @@ using UnityEngine;
 
 public partial class SSLevelUpManager : MonoBehaviour
 {
-    private string targetInstanceID;
-    
-    public void OpenLevelUpPage(string instanceID)
+    public void OpenLevelUpPage()
     {
-        targetInstanceID = instanceID;
-        focusingSSD.RefreshInfo(targetInstanceID);
-        var renderModel = Stones.GetRenderModel(targetInstanceID);
+        focusingSSD.RefreshInfo(_stoneListLayer.TargetStoneID);
+        var renderModel = Stones.GetRenderModel(_stoneListLayer.TargetStoneID);
         renderModel._using = true;
         
         var layer = UILayerLoader.Get<StoneListLayer>();
@@ -24,12 +21,12 @@ public partial class SSLevelUpManager : MonoBehaviour
     
     void CloseLevelUpPage()
     {
-        var layer = UILayerLoader.Load<StoneListLayer>();
-        layer.Setup();
-        var renderModel = Stones.GetRenderModel(targetInstanceID);
+        var layer = UILayerLoader.Get<StoneListLayer>();
+        //layer.Setup();
+        var renderModel = Stones.GetRenderModel(_stoneListLayer.TargetStoneID);
         if (renderModel == null)
         {
-            Debug.Log("Logic Error:"+ targetInstanceID);
+            Debug.Log("Logic Error:"+ _stoneListLayer.TargetStoneID);
             return;
         }
         
@@ -47,7 +44,6 @@ public partial class SSLevelUpManager : MonoBehaviour
         
         layer.box.AddFeatureToCells(layer.CellFeature_StoneShow);
         RefreshSkillLevelUpModule();
-        targetInstanceID = null;
         Stones.ResetHighLight();
         gameObject.SetActive(false);
     }
