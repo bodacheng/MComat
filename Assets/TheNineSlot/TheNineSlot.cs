@@ -112,9 +112,12 @@ namespace mainMenu
                 }
             }
             
-            slot._cell.btn.AddListener(buttonFeature);
-            slot._cell.btn.AddHoldEvent(GoToLevelUpPage);
-            slot._cell.btn.AddDoubleClickEvent(doubleClick);
+            slot._cell.btn.SetListener(buttonFeature);
+            
+            slot._cell.btn.ActivateHold = true;
+            slot._cell.btn.ActivateDoubleClick = true;
+            slot._cell.btn.onHold.AddListener(GoToLevelUpPage);
+            slot._cell.btn.onDoubleClick.AddListener(doubleClick);
             
             slot._cell.SetOnDropAction(((from, to) =>
             {

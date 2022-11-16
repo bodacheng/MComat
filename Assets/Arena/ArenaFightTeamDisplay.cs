@@ -94,7 +94,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
                     break;
             }
             target.ChangeIcon(unitInfo);
-            target.iconButton.AddListener(() => { onClickUnitIcon(unitInfo); });
+            target.iconButton.SetListener(() => { onClickUnitIcon(unitInfo); });
         }
     }
 }

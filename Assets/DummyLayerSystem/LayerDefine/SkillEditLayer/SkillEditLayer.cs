@@ -143,9 +143,13 @@ public partial class SkillEditLayer : UILayer
             }
         }
         
-        _Cell.btn.AddListener(buttonFeature);
-        _Cell.btn.AddHoldEvent(PressGoToLevelUpPage);
-        _Cell.btn.AddDoubleClickEvent(doubleClick);
+        _Cell.btn.SetListener(buttonFeature);
+
+        _Cell.btn.ActivateHold = true;
+        _Cell.btn.ActivateDoubleClick = true;
+        
+        _Cell.btn.onHold.AddListener(PressGoToLevelUpPage);
+        _Cell.btn.onDoubleClick.AddListener(doubleClick);
         _Cell.SetOnDropAction(StoneCell.Install);
     }
     

@@ -324,9 +324,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   disableTransitionOverride: 0
-  activateDoubleClick: 1
-  activateHold: 1
-  sound: 0
+  activateDoubleClick: 0
+  activateHold: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
 --- !u!1 &4037095681978422865
@@ -468,7 +467,6 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
-  sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
 --- !u!1 &8622753969618814232

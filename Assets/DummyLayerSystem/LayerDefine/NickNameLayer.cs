@@ -13,11 +13,11 @@ public class NickNameLayer : UILayer
     
     public void Setup(Action<string> setNickName)
     {
-        OK.AddListener(()=>
+        OK.SetListener(()=>
         {
             setNickName.Invoke(nickNameInput.text);
         });
-        Cancel.AddListener(UILayerLoader.Remove<NickNameLayer>);
+        Cancel.SetListener(UILayerLoader.Remove<NickNameLayer>);
         nickNameInput.onEndEdit.AddListener(BadWordFilter);
     }
 

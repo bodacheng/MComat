@@ -72,13 +72,16 @@ public class StoneListLayer : UILayer
             }
         }
         
-        _Cell.btn.AddListener(btnFeature);
+        _Cell.btn.ActivateHold = false;
+        _Cell.btn.ActivateDoubleClick = false;
+        
+        _Cell.btn.SetListener(btnFeature);
         _Cell.SetOnDropAction(StoneCell.Install);
     }
     
     public void CellFeature_MAdd(StoneCell _Cell)
     {
-        void buttonFeature()
+        void btnFeature()
         {
             StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
         }
@@ -87,8 +90,10 @@ public class StoneListLayer : UILayer
             levelManager.AddMaterialFromCell(_Cell);
         }
         
-        _Cell.btn.AddListener(buttonFeature);
-        _Cell.btn.AddDoubleClickEvent(doubleClick);
+        _Cell.btn.SetListener(btnFeature);
+        
+        _Cell.btn.ActivateDoubleClick = true;
+        _Cell.btn.onDoubleClick.AddListener(doubleClick);
         _Cell.SetOnDropAction(StoneCell.Install);
     }
 }

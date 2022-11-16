@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using Cysharp.Threading.Tasks;
+using UniRx;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -18,262 +19,290 @@ public enum SeType
     None
 }
 
-public class P3Button : Button
-{
-    static System.Action<string> playSe;
-    public static void SetPlaySeMethod(System.Action<string> playSe)
+    public class P3Button : Button
     {
-        if (playSe == null)
+        static System.Action<string> playSe;
+        public static void SetPlaySeMethod(System.Action<string> playSe)
         {
-            return;
-        }
-        P3Button.playSe = playSe;
-    }
-    
-    private static readonly Color DisableColor = new Color32(0xC8, 0xC8, 0xC8, 0xFF);
-    private const float DoubleClickInterval = 0.22f;
-    private const float HoldTime = 0.8f;
-    
-    public static bool AnyProcess
-    {
-        get;
-        private set;
-    }
-
-    static float pointerDownTime = 0;
-
-    [System.Serializable] public class ButtonHoldEvent : UnityEvent { }
-    [System.Serializable] public class ButtonDoubleClickEvent : UnityEvent { }
-    
-    [SerializeField, FormerlySerializedAs("onDoubleClick")] ButtonDoubleClickEvent doubleClick = new ButtonDoubleClickEvent();
-    [SerializeField, FormerlySerializedAs("onHold")] ButtonHoldEvent hold = new ButtonHoldEvent();
-
-
-    [SerializeField]
-    private bool disableTransitionOverride = false;
-    [SerializeField]
-    private bool activateDoubleClick = false;
-    [SerializeField]
-    private bool activateHold = false;
-    [SerializeField]
-    private SeType sound = default;
-    
-    [SerializeField]
-    private Sprite disableSprite = default;
-
-    [SerializeField]
-    private Text text = default;
-    
-    private Sprite defaultSprite = default;
-    private Image targetImage = default;
-
-    private bool outOfRange = false;
-
-    private bool executedDoubleClick = false;
-    private readonly float[] clickTimeQueue = new float[2] { 0, 0 };
-
-    private bool executedHold = false;
-    private Coroutine singleClickCoroutine;
-    private Coroutine holdWaitCoroutine;
-
-    public ButtonDoubleClickEvent onDoubleClick => doubleClick;
-    public ButtonHoldEvent onHold => hold;
-
-    public new bool interactable
-    {
-        get => base.interactable;
-        set
-        {
-            base.interactable = value;
-            if (targetImage == null || disableSprite == null)
+            if (playSe == null)
             {
                 return;
             }
-            targetImage.sprite = value ? defaultSprite : disableSprite;
-        }
-    }
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        if (disableSprite != null && targetGraphic != null && targetGraphic is Image image)
-        {
-            targetImage = image;
-            defaultSprite = targetImage.sprite;
+            P3Button.playSe = playSe;
         }
 
-        if (!disableTransitionOverride)
+        private static readonly Color DisableColor = new Color32(0xC8, 0xC8, 0xC8, 0xFF);
+
+        private const float DoubleClickInterval = 0.22f;
+        private const float HoldTime = 0.8f;
+
+        public static bool AnyProcess
         {
-            var c = colors;
-            c.disabledColor = DisableColor;
-            colors = c;
+            get;
+            private set;
         }
-    }
 
-    public static async void AnyButtonAsync()
-    {
-        AnyProcess = true;
-        await UniTask.Delay(300);
-        AnyProcess = false;
-    }
+        static float pointerDownTime = 0;
 
-    public void SetText(string txt)
-    {
-        if (text != null)
+        [System.Serializable] public class ButtonHoldEvent : UnityEvent { }
+        [System.Serializable] public class ButtonDoubleClickEvent : UnityEvent { }
+
+
+        [SerializeField, FormerlySerializedAs("onDoubleClick")] ButtonDoubleClickEvent doubleClick = new ButtonDoubleClickEvent();
+        [SerializeField, FormerlySerializedAs("onHold")] ButtonHoldEvent hold = new ButtonHoldEvent();
+
+
+        [SerializeField]
+        private bool disableTransitionOverride = false;
+        [SerializeField]
+        private bool activateDoubleClick = false;
+        [SerializeField]
+        private bool activateHold = false;
+
+        [SerializeField]
+        private Sprite disableSprite = default;
+
+       　[SerializeField]
+        private Text text = default;
+
+        private Sprite defaultSprite = default;
+        private Image targetImage = default;
+
+        private bool outOfRange = false;
+
+        private bool executedDoubleClick = false;
+        private readonly float[] clickTimeQueue = new float[2] { 0, 0 };
+
+        private bool executedHold = false;
+        private Coroutine singleClickCoroutine;
+        private Coroutine holdWaitCoroutine;
+
+        public ButtonDoubleClickEvent onDoubleClick => doubleClick;
+        public ButtonHoldEvent onHold => hold;
+
+        public bool ActivateDoubleClick
         {
-            text.text = txt;
+            get => activateDoubleClick;
+            set => activateDoubleClick = value;
         }
-    }
 
-    public void SetActive(bool active)
-    {
-        transform.gameObject.SetActive(active);
-    }
-
-    public override void OnPointerClick(PointerEventData eventData)
-    {
-        if (activateDoubleClick)
+        public bool ActivateHold
         {
-            clickTimeQueue[0] = clickTimeQueue[1];
-            clickTimeQueue[1] = Time.time;
+            get => activateHold;
+            set => activateHold = value;
+        }
 
-            if (clickTimeQueue[1] - clickTimeQueue[0] <= DoubleClickInterval)
+        public new bool interactable
+        {
+            get => base.interactable;
+            set
             {
-                clickTimeQueue[0] = 0;
-                clickTimeQueue[1] = 0;
-                executedDoubleClick = true;
-            }
-        }
-
-        if (!executedDoubleClick)
-        {
-            if (AnyProcess)
-            {
-                return;
-            }
-            AnyButtonAsync();
-        }
-
-        if (!executedHold)
-        {
-            if (executedDoubleClick)
-            {
-                StopCoroutine(singleClickCoroutine);
-                UISystemProfilerApi.AddMarker("Button.onDoubleClick", this);
-                onDoubleClick.Invoke();
-            }
-            else if (activateDoubleClick)
-            {
-                singleClickCoroutine = StartCoroutine(Wait(DoubleClickInterval, () => base.OnPointerClick(eventData)));
-            }
-            else
-            {
-                if (interactable)
+                base.interactable = value;
+                if (targetImage == null || disableSprite == null)
                 {
-                    //playSe?.Invoke(sound.ToName());
+                    return;
                 }
-                base.OnPointerClick(eventData);
+                targetImage.sprite = value ? defaultSprite : disableSprite;
             }
         }
 
-        executedDoubleClick = false;
-        executedHold = false;
-    }
-
-    public override void OnPointerDown(PointerEventData eventData)
-    {
-        base.OnPointerDown(eventData);
-        if (!interactable)
+        protected override void Awake()
         {
-            return;
-        }
+            base.Awake();
 
-        outOfRange = false;
-        if (activateHold)
-        {
-            holdWaitCoroutine = StartCoroutine(Wait(HoldTime, ExecuteHold));
-        }
+            if (disableSprite != null && targetGraphic != null && targetGraphic is Image image)
+            {
+                targetImage = image;
+                defaultSprite = targetImage.sprite;
+            }
 
-        pointerDownTime = Time.time;
-    }
-
-    public override void OnPointerUp(PointerEventData eventData)
-    {
-        if (holdWaitCoroutine != null)
-        {
-            StopCoroutine(holdWaitCoroutine);
-            holdWaitCoroutine = null;
+            if (!disableTransitionOverride)
+            {
+                var c = colors;
+                c.disabledColor = DisableColor;
+                colors = c;
+            }
         }
         
-        base.OnPointerUp(eventData);
-    }
-
-    private void ExecuteHold()
-    {
-        if (!activateHold || outOfRange)
+        public void ClearAllEvents()
         {
-            executedHold = false;
-            return;
+            onClick.RemoveAllListeners();
+            onHold.RemoveAllListeners();
+            doubleClick.RemoveAllListeners();
         }
-        executedHold = true;
+        
+        public static async void AnyButtonAsync()
+        {
+            AnyProcess = true;
+            await UniTask.Delay(300);
+            AnyProcess = false;
+        }
 
-        UISystemProfilerApi.AddMarker("Button.onHold", this);
-        onHold.Invoke();
-    }
+        public void SetText(string txt)
+        {
+            if (text != null)
+            {
+                text.text = txt;
+            }
+        }
 
-    public override void OnPointerExit(PointerEventData eventData)
-    {
-        outOfRange = true;
-        base.OnPointerExit(eventData);
-    }
+        public void SetActive(bool active)
+        {
+            transform.gameObject.SetActive(active);
+        }
 
-    IEnumerator Wait(float time, System.Action complete)
-    {
-        yield return new WaitForSeconds(time);
-        complete?.Invoke();
-    }
+        public override void OnPointerClick(PointerEventData eventData)
+        {
+            if (activateDoubleClick)
+            {
+                clickTimeQueue[0] = clickTimeQueue[1];
+                clickTimeQueue[1] = Time.time;
 
-    public void ClearAllEvents()
-    {
-        onClick.RemoveAllListeners();
-        onHold.RemoveAllListeners();
-        doubleClick.RemoveAllListeners();
-    }
-    
-    public void AddListener(UnityAction call)
-    {
-        onClick.RemoveAllListeners();
-        onClick.AddListener(call);
-    }
-    
-    public void AddHoldEvent(Action holdEvent)
-    {
-        onHold.RemoveAllListeners();
-        onHold.AddListener(() => holdEvent?.Invoke());
-    }
-    
-    public void AddDoubleClickEvent(Action doubleEvent)
-    {
-        doubleClick.RemoveAllListeners();
-        doubleClick.AddListener(() => doubleEvent?.Invoke());
-    }
-    
-    public static bool AllowClickTime()
-    {
-        return (Time.time - pointerDownTime) >= 0.2f;
-    }
+                if (clickTimeQueue[1] - clickTimeQueue[0] <= DoubleClickInterval)
+                {
+                    clickTimeQueue[0] = 0;
+                    clickTimeQueue[1] = 0;
+                    executedDoubleClick = true;
+                }
+            }
 
-    public static float LastClickTime()
-    {
-        return pointerDownTime;
-    }
+            if (!executedDoubleClick)
+            {
+                if (AnyProcess)
+                {
+                    return;
+                }
+                AnyButtonAsync();
+            }
 
-    public static void SetClickTime()
-    {
-        pointerDownTime = Time.time;
+            if (!executedHold)
+            {
+                if (executedDoubleClick)
+                {
+                    //singleClickCoroutine = StartCoroutine(Wait(DoubleClickInterval, () => base.OnPointerClick(eventData)));
+                    //StopCoroutine(singleClickCoroutine);
+                    UISystemProfilerApi.AddMarker("Button.onDoubleClick", this);
+                    onDoubleClick.Invoke();
+                }
+                // else if (activateDoubleClick)
+                // {
+                //     singleClickCoroutine = StartCoroutine(Wait(DoubleClickInterval, () => base.OnPointerClick(eventData)));
+                //     Debug.Log("here:"+eventData );
+                // }
+                else
+                {
+                    if (interactable)
+                    {
+                        //playSe?.Invoke(sound.ToName());
+                    }
+                    base.OnPointerClick(eventData);
+                }
+            }
+
+            executedDoubleClick = false;
+            executedHold = false;
+        }
+
+        public override void OnPointerDown(PointerEventData eventData)
+        {
+            base.OnPointerDown(eventData);
+            if (!interactable)
+            {
+                return;
+            }
+
+            outOfRange = false;
+            if (activateHold)
+            {
+                holdWaitCoroutine = StartCoroutine(Wait(HoldTime, ExecuteHold));
+            }
+
+            pointerDownTime = Time.time;
+        }
+
+        public override void OnPointerUp(PointerEventData eventData)
+        {
+            if (holdWaitCoroutine != null)
+            {
+                StopCoroutine(holdWaitCoroutine);
+                holdWaitCoroutine = null;
+            }
+
+            base.OnPointerUp(eventData);
+        }
+
+        private void ExecuteHold()
+        {
+            if (!activateHold || outOfRange)
+            {
+                executedHold = false;
+                return;
+            }
+            executedHold = true;
+
+            UISystemProfilerApi.AddMarker("Button.onHold", this);
+            onHold.Invoke();
+        }
+
+        public override void OnPointerExit(PointerEventData eventData)
+        {
+            outOfRange = true;
+            base.OnPointerExit(eventData);
+        }
+
+        IEnumerator Wait(float time, System.Action complete)
+        {
+            yield return new WaitForSeconds(time);
+            complete?.Invoke();
+        }
+        
+        public void SetListener(System.Action action)
+        {
+            onClick.RemoveAllListeners();
+            onClick.AddListener(() => action?.Invoke());
+        }
+
+        /// <summary>
+        /// onClick にタスクを設定する
+        /// </summary>
+        /// <param name="action">イベント</param>
+        /// <param name="waitTask">タスクの終了待ちの間非活性にするか</param>
+        /// <param name="endInteractable">タスクの終了後のinteractableに設定する値</param>
+        public void SetListener(System.Func<UniTask> action, bool waitTask = true, bool endInteractable = true)
+        {
+            onClick.RemoveAllListeners();
+            onClick.AddListener(() => UniTask.Void(async () =>
+            {
+                try
+                {
+                    if (action != null)
+                    {
+                        if (waitTask) interactable = false;
+                        await action.Invoke();
+                    }
+                }
+                finally
+                {
+                    if (waitTask) interactable = endInteractable;
+                }
+            }));
+        }
+
+        public static bool AllowClickTime()
+        {
+            return (Time.time - pointerDownTime) >= 0.2f;
+        }
+
+        public static float LastClickTime()
+        {
+            return pointerDownTime;
+        }
+
+        public static void SetClickTime()
+        {
+            pointerDownTime = Time.time;
+        }
     }
-}
 
 
 #if UNITY_EDITOR
@@ -283,15 +312,14 @@ public class P3Button : Button
     public class P2ButtonEditor : ButtonEditor
     {
         SerializedProperty disableSpriteProperty;
-        
+
         SerializedProperty disableTransitionOverrideProperty;
         SerializedProperty activateDoubleClickProperty;
         SerializedProperty activateHoldProperty;
 
         SerializedProperty onDoubleClickProperty;
         SerializedProperty onHoldProperty;
-
-        SerializedProperty soundProperty;
+        
         SerializedProperty textProperty;
 
         protected override void OnEnable()
@@ -305,15 +333,13 @@ public class P3Button : Button
 
             onDoubleClickProperty = serializedObject.FindProperty("doubleClick");
             onHoldProperty = serializedObject.FindProperty("hold");
-
-            soundProperty = serializedObject.FindProperty("sound");
+            
             textProperty = serializedObject.FindProperty("text");
         }
 
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
-            EditorGUILayout.PropertyField(soundProperty);
             EditorGUILayout.PropertyField(disableTransitionOverrideProperty);
             EditorGUILayout.PropertyField(disableSpriteProperty);
             EditorGUILayout.PropertyField(disableSpriteProperty);

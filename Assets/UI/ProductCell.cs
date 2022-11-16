@@ -10,6 +10,6 @@ public class ProductCell : MonoBehaviour
 
     void Start()
     {
-        btn.AddListener(()=> AndroidIAPExample.target.BuyProductID(product_id));
+        btn.SetListener(()=> AndroidIAPExample.target.BuyProductID(product_id));
     }
 }
