@@ -10,22 +10,22 @@ public class StoneListLayer : UILayer
     public SkillStonesBox box;
     public SSLevelUpManager levelManager;
     [SerializeField] SkillStoneDetail _skillStoneDetail;
-    [SerializeField] Button OpenBtn;
+    [SerializeField] Button openPowerUpBtn;
     
-    string targetStoneID;
+    string _targetStoneID;
     public string TargetStoneID
     {
-        get => targetStoneID; 
+        get => _targetStoneID; 
         set
         {
-            targetStoneID = value;
-            var info = Stones.Get(targetStoneID);
+            _targetStoneID = value;
+            var info = Stones.Get(_targetStoneID);
             _skillStoneDetail.gameObject.SetActive(info != null);
-            OpenBtn.gameObject.SetActive(info != null);
+            openPowerUpBtn.gameObject.SetActive(Stones.StoneCanLevelUp(_targetStoneID));
             if (info != null)
             {
-                OpenBtn.onClick.RemoveAllListeners();
-                OpenBtn.onClick.AddListener(() =>
+                openPowerUpBtn.onClick.RemoveAllListeners();
+                openPowerUpBtn.onClick.AddListener(() =>
                 {
                     levelManager.OpenLevelUpPage();
                 });
@@ -56,43 +56,43 @@ public class StoneListLayer : UILayer
         box._tabEffects.CloseShowingTagEffects();
     }
     
-    public void CellFeature_StoneShow(StoneCell _Cell)
+    public void CellFeature_StoneShow(StoneCell cell)
     {
-        void btnFeature()
+        void BtnFeature()
         {
-            var _stone = _Cell.GetItem();
-            if (_stone != null && _stone._SkillConfig != null)
+            var stone = cell.GetItem();
+            if (stone != null && stone._SkillConfig != null)
             {
-                StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
-                _skillStoneDetail.RefreshInfo(_stone.instanceId);
-                TargetStoneID = _stone.instanceId;
+                StoneCell.SelectedRender(cell, SkillStonesBox._Selected);
+                _skillStoneDetail.RefreshInfo(stone.instanceId);
+                TargetStoneID = stone.instanceId;
             }else{
                 _skillStoneDetail.Clear();
                 TargetStoneID = null;
             }
         }
         
-        _Cell.btn.ActivateHold = false;
-        _Cell.btn.ActivateDoubleClick = false;
+        cell.btn.ActivateHold = false;
+        cell.btn.ActivateDoubleClick = false;
         
-        _Cell.btn.SetListener(btnFeature);
-        _Cell.SetOnDropAction(StoneCell.Install);
+        cell.btn.SetListener(BtnFeature);
+        cell.SetOnDropAction(StoneCell.Install);
     }
     
-    public void CellFeature_MAdd(StoneCell _Cell)
+    public void CellFeature_MAdd(StoneCell cell)
     {
-        void btnFeature()
+        void BtnFeature()
         {
-            StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
+            StoneCell.SelectedRender(cell, SkillStonesBox._Selected);
         }
-        void doubleClick()
+        void DoubleClick()
         {
-            levelManager.AddMaterialFromCell(_Cell);
+            levelManager.AddMaterialFromCell(cell);
         }
         
-        _Cell.btn.SetListener(btnFeature);
-        _Cell.btn.ActivateDoubleClick = true;
-        _Cell.btn.onDoubleClick.AddListener(doubleClick);
-        _Cell.SetOnDropAction(StoneCell.Install);
+        cell.btn.SetListener(BtnFeature);
+        cell.btn.ActivateDoubleClick = true;
+        cell.btn.onDoubleClick.AddListener(DoubleClick);
+        cell.SetOnDropAction(StoneCell.Install);
     }
 }

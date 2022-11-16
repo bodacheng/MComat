@@ -13,6 +13,10 @@ namespace dataAccess
         public static void Clear()
         {
             Dic.Clear();
+            foreach (var kv in RenderModelDic)
+            {
+                GameObject.Destroy(kv.Value);
+            }
             RenderModelDic.Clear();
         }
         
@@ -34,6 +38,33 @@ namespace dataAccess
             return infoModels;
         }
 
+        public static bool StoneCanLevelUp(string instanceID)
+        {
+            var targetData = Stones.Get(instanceID);
+            if (targetData == null)
+                return false;
+            var infoModels = new List<string>();
+            int usingCount = 0;
+            foreach (var kv in Dic)
+            {
+                if (kv.Value.SkillId == targetData.SkillId)
+                {
+                    var itemData = Stones.Get(kv.Value.InstanceId);
+                    if (itemData.UnitInstanceId != null && itemData.InstanceId != instanceID)
+                    {
+                        usingCount++;
+                    }
+                        
+                    if (itemData.UnitInstanceId == null && kv.Value.InstanceId != targetData.InstanceId)
+                        infoModels.Add(kv.Value.InstanceId);
+                }
+            }
+            usingCount = Mathf.Clamp(usingCount, 3, Int32.MaxValue);
+            // 队伍最多3个人所以起码保留3个石头，而升级一个石头则
+            Debug.Log("盈余技能石数量："+(infoModels.Count - usingCount));
+            return infoModels.Count - usingCount >= 4;
+        }
+        
         public static SKStoneItem GetRenderModel(string ItemId)
         {
             return ItemId == null ? null : RenderModelDic.ContainsKey(ItemId) ? RenderModelDic[ItemId] : null;
@@ -86,7 +117,7 @@ namespace dataAccess
             //LoadAll_Json(Application.persistentDataPath + "/TutorialStones");
             // 上面的步骤已经完成了Dic的适配
             RenderModelDic.Clear();
-            foreach (KeyValuePair<string, StoneOfPlayerInfo> pair in Dic)
+            foreach (var pair in Dic)
             {
                 var _SkillConfig = SkillConfigTable.GetSkillConfig(pair.Value.SkillId);
                 if (_SkillConfig == null)

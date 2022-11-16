@@ -31,7 +31,7 @@ public partial class SSLevelUpManager : MonoBehaviour
             AutoAddMaterials(info.SkillId);
         });
         
-        MaterialSlots = new List<StoneCell>
+        _materialSlots = new List<StoneCell>
         {
             cell1,
             cell2,
@@ -39,7 +39,7 @@ public partial class SSLevelUpManager : MonoBehaviour
             cell4
         };
         
-        foreach (var cell in MaterialSlots)
+        foreach (var cell in _materialSlots)
         {
             cell.SetOnDropAction(MSlotOnDropAction);
         }
@@ -83,7 +83,11 @@ public partial class SSLevelUpManager : MonoBehaviour
             return;
         }
         var target = Stones.Get(_stoneListLayer.TargetStoneID);
-        foreach (var slot in MaterialSlots)
+        foreach (var cell in _materialSlots)
+        {
+            cell.UpdateMyItem();
+        }
+        foreach (var slot in _materialSlots)
         {
             if (slot.GetItem() == null)
                 return; // 材料槽满的时候才可能弹出确认按钮
@@ -92,14 +96,14 @@ public partial class SSLevelUpManager : MonoBehaviour
         confirmLevelUp.gameObject.SetActive(true);
         int needGD = target.Level * 10 + 100;
         gdCount.text = needGD.ToString();
-        if (Currencies.CoinCount < needGD)
-        {
-            confirmLevelUp.interactable = false;
-            return; // 所需金币不够
-        }
-        confirmLevelUp.interactable = true;
         void Confirm()
         {
+            if (Currencies.CoinCount < needGD)
+            {
+                PopupLayer.ArrangeWarnWindow("ゴールドが足りない");
+                return;
+            }
+            
             PopupLayer.ArrangeConfirmWindow(
                 ()=>
                 {

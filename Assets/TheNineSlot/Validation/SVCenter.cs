@@ -34,9 +34,8 @@ public static class SVCenter
         }
         else if (sourceCell.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
-            SKStoneItem stone = sourceCell.GetItem();
-            StoneListLayer sl = UILayerLoader.Get<StoneListLayer>();
-            sl.levelManager.RefreshSkillLevelUpModule();
+            var stone = sourceCell.GetItem();
+            var sl = UILayerLoader.Get<StoneListLayer>();
             if (boxcell.GetItem() != null)
             {
                 sl.box.ReturnStoneToBox(stone);
@@ -45,6 +44,7 @@ public static class SVCenter
             {
                 boxcell.AddItem(stone);
             }
+            sl.levelManager.RefreshSkillLevelUpModule();
         }
     }
     

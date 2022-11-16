@@ -74,6 +74,8 @@ public partial class SSLevelUpManager : MonoBehaviour
                 {
                     Stones.RemoveStoneLocal(instanceId);
                 }
+                CloseLevelUpPage();
+                _stoneListLayer.TargetStoneID = targetInstanceId;
             }
         );
     }

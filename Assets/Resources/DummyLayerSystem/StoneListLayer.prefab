@@ -5109,7 +5109,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e72e35f15b5804d538652094d0a09a19, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb38ac040049a4910b13f7d7bb93ca85, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5140,9 +5140,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_NormalColor: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -7208,7 +7208,7 @@ MonoBehaviour:
   box: {fileID: 7080503536421198422}
   levelManager: {fileID: 5832295999211850545}
   _skillStoneDetail: {fileID: 1764983510227371885}
-  OpenBtn: {fileID: 5206352635495377146}
+  openPowerUpBtn: {fileID: 5206352635495377146}
 --- !u!1 &5487491327950039118
 GameObject:
   m_ObjectHideFlags: 0

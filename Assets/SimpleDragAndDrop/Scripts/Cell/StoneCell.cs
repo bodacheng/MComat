@@ -45,7 +45,13 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             return;
         if (_myDadItem)
         {
-            StoneOfPlayerInfo info = Stones.Get(_myDadItem.instanceId);
+            var info = Stones.Get(_myDadItem.instanceId);
+            if (info == null)
+            {
+                Debug.Log("Kinda logic error:"+ _myDadItem.instanceId);
+                Destroy(_myDadItem);
+                return;
+            }
             level.text = info.Level.ToString();
         }
         else

@@ -13,7 +13,7 @@ namespace dataAccess
         // 把所有技能的等级显示出来
         public static void ShowAllMyStoneLevel()
         {
-            foreach (KeyValuePair<string, SKStoneItem> keyValuePair in RenderModelDic)
+            foreach (var keyValuePair in RenderModelDic)
             {
                 keyValuePair.Value.ShowStoneLevel();
             }
@@ -22,7 +22,7 @@ namespace dataAccess
         // 关闭所有技能石文字类提示
         public static void CloseAllMyStoneFloatInfo()
         {
-            foreach (KeyValuePair<string, SKStoneItem> keyValuePair in RenderModelDic)
+            foreach (var keyValuePair in RenderModelDic)
             {
                 keyValuePair.Value.CloseInfo();
             }
