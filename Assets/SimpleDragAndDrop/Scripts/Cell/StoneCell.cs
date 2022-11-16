@@ -19,7 +19,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         StoneMergeSlot
     }
 
-    public P3Button btn;
+    public BOButton btn;
     
     [Tooltip("using Stone Unit Icon")]
     public HeroIcon _charIcon;

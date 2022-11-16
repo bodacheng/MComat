@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class NickNameLayer : UILayer
 {
     [SerializeField] private InputField nickNameInput;
-    [SerializeField] private P3Button OK;
-    [SerializeField] public P3Button Cancel;
+    [SerializeField] private BOButton OK;
+    [SerializeField] public BOButton Cancel;
     
     public void Setup(Action<string> setNickName)
     {

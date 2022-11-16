@@ -11,7 +11,7 @@ public class TitleScreenLayer : UILayer
     // Main
     [SerializeField] RectTransform mainTab;
     [SerializeField] Image title;
-    [SerializeField] P3Button TouchScreen;
+    [SerializeField] BOButton TouchScreen;
     [SerializeField] Button accountLoginBtn;
     
     // Login by pw

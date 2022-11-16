@@ -5,7 +5,7 @@ using Singleton;
 
 public class HeroIcon : MonoBehaviour {
 
-    public P3Button iconButton;
+    public BOButton iconButton;
     public Image Icon;
     public Image frame;
     public Image cooldownCurtain;

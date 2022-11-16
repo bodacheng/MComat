@@ -6,7 +6,7 @@ public class ProductCell : MonoBehaviour
     [SerializeField] private string product_id;
     [SerializeField] private Text msg;
     [SerializeField] private Text price;
-    [SerializeField] private P3Button btn;
+    [SerializeField] private BOButton btn;
 
     void Start()
     {

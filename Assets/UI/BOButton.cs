@@ -19,7 +19,7 @@ public enum SeType
     None
 }
 
-    public class P3Button : Button
+    public class BOButton : Button
     {
         static System.Action<string> playSe;
         public static void SetPlaySeMethod(System.Action<string> playSe)
@@ -28,7 +28,7 @@ public enum SeType
             {
                 return;
             }
-            P3Button.playSe = playSe;
+            BOButton.playSe = playSe;
         }
 
         private static readonly Color DisableColor = new Color32(0xC8, 0xC8, 0xC8, 0xFF);
@@ -307,7 +307,7 @@ public enum SeType
 
 #if UNITY_EDITOR
 
-    [CustomEditor(typeof(P3Button), true)]
+    [CustomEditor(typeof(BOButton), true)]
     [CanEditMultipleObjects]
     public class P2ButtonEditor : ButtonEditor
     {
