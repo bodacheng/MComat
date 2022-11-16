@@ -9,7 +9,7 @@ namespace mainMenu
     public partial class SkillStonesBox : MonoBehaviour
     {
         [Header("格子")]
-        [SerializeField] StoneCell Cellprefab;
+        [SerializeField] StoneCell cellPrefab;
         
         [Header("选中框")]
         [SerializeField] GameObject SelectedFrame;
@@ -34,7 +34,7 @@ namespace mainMenu
             {
                 if (!CellsDic.ContainsKey(i))
                 {
-                    var cell = Instantiate(Cellprefab);
+                    var cell = Instantiate(cellPrefab);
                     cell.empty = new Color(1, 1, 1, 0.6f);
                     cell.full = new Color(1, 1, 1, 1);
                     cell.cellPhase = StoneCell.CellPhase.SkillStoneBoxCell;

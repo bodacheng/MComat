@@ -53,7 +53,6 @@ public partial class SSLevelUpManager : MonoBehaviour
             if (item == null)
                 return;
             var target = Stones.Get(_stoneListLayer.TargetStoneID);
-            
             if (item.instanceId != _stoneListLayer.TargetStoneID && item._SkillConfig.RECORD_ID == target.SkillId)
             {
                 var m = Stones.Get(item.instanceId);

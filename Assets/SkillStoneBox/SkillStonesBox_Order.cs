@@ -11,15 +11,15 @@ namespace mainMenu
         [Header("Order Button")]
         public Text orderButtonText;
         
-        int ordertype = 0;
+        int _orderType = 0;
         
         // 功能本身直接放按钮上，但text要适配到SkillStonesBox上。
         public void SwitchOrder()
         {
-            ordertype++;
-            if (ordertype == 5)
+            _orderType++;
+            if (_orderType == 5)
             {
-                ordertype = 0;
+                _orderType = 0;
             }
             _Selected.gameObject.SetActive(false);
             RestFilter();
@@ -27,7 +27,7 @@ namespace mainMenu
               
         List<string> Order(List<string> targets)
         {
-            switch (ordertype)
+            switch (_orderType)
             {
                 case 4: // 等级降序
                     orderButtonText.text = "Level ASC";
@@ -71,8 +71,8 @@ namespace mainMenu
             {
                 for (int j = 0; j < targets.Count - 1 - i; j++)
                 {
-                    StoneOfPlayerInfo myStone1 = Stones.Get(targets[j]);
-                    StoneOfPlayerInfo myStone2 = Stones.Get(targets[j+1]);
+                    var myStone1 = Stones.Get(targets[j]);
+                    var myStone2 = Stones.Get(targets[j+1]);
                     
                     if (order == 1 ? myStone1.Level > myStone2.Level : myStone1.Level < myStone2.Level)
                     {

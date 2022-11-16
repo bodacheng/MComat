@@ -1661,7 +1661,6 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
-  sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
 --- !u!1 &1028160420446388641
@@ -2807,7 +2806,6 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
-  sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
 --- !u!1 &1880400130078516781
@@ -5300,7 +5298,7 @@ MonoBehaviour:
   closeCheckBox: {fileID: 2523835563422896331}
   nearCheckBox: {fileID: 2523835564484449973}
   farCheckBox: {fileID: 2523835564471563446}
-  Cellprefab: {fileID: 9087381990746991603, guid: b3795898c2a1b4eeaa126e66fe7de953,
+  cellPrefab: {fileID: 9087381990746991603, guid: b3795898c2a1b4eeaa126e66fe7de953,
     type: 3}
   SelectedFrame: {fileID: 2677751319738524578}
   orderButtonText: {fileID: 2677751318686789821}
@@ -6243,7 +6241,6 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
-  sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
 --- !u!1 &2523835563779046661
@@ -11162,7 +11159,6 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
-  sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
 --- !u!1 &2787613232405551917
@@ -13269,7 +13265,6 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
-  sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
 --- !u!1 &5030380695904012047
@@ -13870,7 +13865,6 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
-  sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
 --- !u!1 &5754967710018029275
@@ -18630,7 +18624,6 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
-  sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
 --- !u!1 &7023597795901153004
@@ -21212,7 +21205,6 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
-  sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
 --- !u!1 &8287663799644644669
@@ -21488,7 +21480,6 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
-  sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
 --- !u!1 &8895661193702549657

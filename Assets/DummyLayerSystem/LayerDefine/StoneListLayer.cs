@@ -91,7 +91,6 @@ public class StoneListLayer : UILayer
         }
         
         _Cell.btn.SetListener(btnFeature);
-        
         _Cell.btn.ActivateDoubleClick = true;
         _Cell.btn.onDoubleClick.AddListener(doubleClick);
         _Cell.SetOnDropAction(StoneCell.Install);

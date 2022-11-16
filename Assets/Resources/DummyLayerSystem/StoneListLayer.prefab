@@ -80,7 +80,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!114 &9106681503243877112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,7 +346,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!114 &8576153679358275419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6753,7 +6753,7 @@ MonoBehaviour:
   closeCheckBox: {fileID: 6007867260253646155}
   nearCheckBox: {fileID: 2012323267730553595}
   farCheckBox: {fileID: 6219039724186404503}
-  Cellprefab: {fileID: 9087381990746991603, guid: b3795898c2a1b4eeaa126e66fe7de953,
+  cellPrefab: {fileID: 9087381990746991603, guid: b3795898c2a1b4eeaa126e66fe7de953,
     type: 3}
   SelectedFrame: {fileID: 5056399119111226684}
   orderButtonText: {fileID: 5206352635357477876}
@@ -8900,7 +8900,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!114 &8411742620188826005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9702,7 +9702,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!114 &4417347978195599401
 MonoBehaviour:
   m_ObjectHideFlags: 0
