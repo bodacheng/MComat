@@ -58,6 +58,6 @@ public partial class SSLevelUpManager : MonoBehaviour
                 slotIndex += 1;
             }
         }
-        RefreshSkillLevelUpModule();
+        RefreshSkillLevelUpModule(_stoneListLayer.TargetStoneID);
     }
 }

@@ -14,7 +14,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         var layer = UILayerLoader.Get<StoneListLayer>();
         //layer.Setup();
         layer.box.AddFeatureToCells(layer.CellFeature_MAdd);
-        RefreshSkillLevelUpModule();
+        RefreshSkillLevelUpModule(_stoneListLayer.TargetStoneID);
         Stones.HighLight(renderModel._SkillConfig.RECORD_ID);
         gameObject.SetActive(true);
     }
@@ -43,7 +43,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
         
         layer.box.AddFeatureToCells(layer.CellFeature_StoneShow);
-        RefreshSkillLevelUpModule();
+        RefreshSkillLevelUpModule(_stoneListLayer.TargetStoneID);
         Stones.ResetHighLight();
         gameObject.SetActive(false);
     }

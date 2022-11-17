@@ -59,12 +59,11 @@ public partial class CloudScript
             },
             (result) => {
                 var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                object successReturn, level;
-                jsonResult.TryGetValue("success", out successReturn);
-                jsonResult.TryGetValue("level", out level);
+                jsonResult.TryGetValue("success", out var successReturn);
+                jsonResult.TryGetValue("level", out var level);
                 
                 Debug.Log(successReturn + ", Level:" + level);
-                int newLevel = Convert.ToInt32(level);
+                var newLevel = Convert.ToInt32(level);
                 if ((bool)successReturn)
                 {
                     var targetInfo = Stones.Get(form.targetStoneID);

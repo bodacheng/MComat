@@ -43,7 +43,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     {
         if (level == null)
             return;
-        if (_myDadItem)
+        if (_myDadItem != null)
         {
             var info = Stones.Get(_myDadItem.instanceId);
             if (info == null)

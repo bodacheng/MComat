@@ -44,7 +44,7 @@ public static class SVCenter
             {
                 boxcell.AddItem(stone);
             }
-            sl.levelManager.RefreshSkillLevelUpModule();
+            sl.levelManager.RefreshSkillLevelUpModule(sl.TargetStoneID);
         }
     }
     
@@ -92,7 +92,7 @@ public static class SVCenter
         if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
             var sl = UILayerLoader.Get<StoneListLayer>();
-            sl.levelManager.RefreshSkillLevelUpModule();
+            sl.levelManager.RefreshSkillLevelUpModule(sl.TargetStoneID);
         }
     }
     
@@ -159,7 +159,7 @@ public static class SVCenter
         if (from.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot || to.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
         {
             var sl = UILayerLoader.Get<StoneListLayer>();
-            sl.levelManager.RefreshSkillLevelUpModule();
+            sl.levelManager.RefreshSkillLevelUpModule(sl.TargetStoneID);
         }
     }
     

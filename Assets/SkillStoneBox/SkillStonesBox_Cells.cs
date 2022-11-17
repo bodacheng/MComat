@@ -81,7 +81,7 @@ namespace mainMenu
         {
             if (item._SkillConfig.SP_LEVEL == FocusingExType)
             {
-                StoneCell dragAndDropCell = GetFirstEmptyCell();
+                var dragAndDropCell = GetFirstEmptyCell();
                 if (dragAndDropCell != null)
                 {
                     dragAndDropCell.AddItem(item);

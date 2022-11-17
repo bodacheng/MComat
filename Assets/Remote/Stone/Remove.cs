@@ -3,14 +3,14 @@
     public static partial class Stones
     {
         // 删除一个技能石
-        public static void RemoveStoneLocal(string stoneID)
+        public static void RemoveStoneLocal(string instanceId)
         {
-            if (RenderModelDic.ContainsKey(stoneID))
+            if (RenderModelDic.ContainsKey(instanceId))
             {
-                UnityEngine.Object.Destroy(RenderModelDic[stoneID].gameObject);
+                UnityEngine.Object.Destroy(RenderModelDic[instanceId].gameObject);
             }
-            RenderModelDic.Remove(stoneID);
-            Dic.Remove(stoneID);
+            RenderModelDic.Remove(instanceId);
+            Dic.Remove(instanceId);
         }
     }
 }

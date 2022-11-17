@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using dataAccess;
 using UnityEngine;
 
@@ -8,6 +9,19 @@ public partial class SSLevelUpManager : MonoBehaviour
 {
     void LevelUpStone(string InstanceId, Action<string> refreshStoneData)
     {
+        var target = Stones.Get(InstanceId);
+        if (target == null)
+        {
+            Debug.Log("逻辑顺序错误？");
+            return;
+        }
+
+        if (target.Born == "true")
+        {
+            Debug.Log("原生技能石不需升级");
+            return;
+        }
+        
         var materialInstanceIds = new List<string>();
         
         var form = new SkillStoneLevelUpForm();
@@ -67,34 +81,20 @@ public partial class SSLevelUpManager : MonoBehaviour
         
         CloudScript.UpdateStone(
             form,
-            (targetInstanceId,x) =>
+            async (targetInstanceId,x) =>
             {
-                refreshStoneData.Invoke(targetInstanceId);
                 foreach (var instanceId in x)
                 {
                     Stones.RemoveStoneLocal(instanceId);
                 }
+                // RemoveStoneLocal会销毁作为材料的技能石模型，
+                // 而CloseLevelUpPage内部有对材料的操作，
+                // 他们在同一帧执行的话会有一定错误
+                await UniTask.DelayFrame(1);
                 CloseLevelUpPage();
+                refreshStoneData.Invoke(targetInstanceId);
                 _stoneListLayer.TargetStoneID = targetInstanceId;
             }
         );
-    }
-    
-    // 技能升级确认。
-    public void ConfirmSkillStoneLevelUp(Action<string> refresh)
-    {
-        var target = Stones.Get(_stoneListLayer.TargetStoneID);
-        if (target == null)
-        {
-            Debug.Log("逻辑顺序错误？");
-            return;
-        }
-
-        if (target.Born == "true")
-        {
-            Debug.Log("原生技能石不需升级");
-            return;
-        }
-        LevelUpStone(target.InstanceId, refresh);
     }
 }

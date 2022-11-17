@@ -75,14 +75,15 @@ public partial class SSLevelUpManager : MonoBehaviour
     /// <summary>
     /// 技能石升级画面更新。
     /// </summary>
-    public void RefreshSkillLevelUpModule()
+    public void RefreshSkillLevelUpModule(string instanceId)
     {
+        Debug.Log("we are here:"+ instanceId);
         confirmLevelUp.gameObject.SetActive(false);
-        if (_stoneListLayer.TargetStoneID == null)
+        if (instanceId == null)
         {
             return;
         }
-        var target = Stones.Get(_stoneListLayer.TargetStoneID);
+        var target = Stones.Get(instanceId);
         foreach (var cell in _materialSlots)
         {
             cell.UpdateMyItem();
@@ -107,7 +108,10 @@ public partial class SSLevelUpManager : MonoBehaviour
             PopupLayer.ArrangeConfirmWindow(
                 ()=>
                 {
-                    ConfirmSkillStoneLevelUp(x=> RefreshSkillLevelUpModule());
+                    LevelUpStone(instanceId, x =>
+                    {
+                        // 具体待定。但不应该是RefreshSkillLevelUpModule，这个在CloseLevelUpPage会跑一次才对
+                    });
                 }, 
                 "技ストーンを強化しますか ?");
         }
