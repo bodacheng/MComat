@@ -3,6 +3,7 @@ using UnityEngine;
 using DummyLayerSystem;
 using ModelView;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace mainMenu
 {
@@ -14,13 +15,12 @@ namespace mainMenu
         public GameObject T;
         
         [Header("主进程处理器")]
-        public SingleThreadProcesser mainProcessRunner;
+        [SerializeField] SingleThreadProcesser mainProcessRunner;
         
-        [Header("环境")]
-        public CameraManager _CameraManager;
-        
-        [Header("UI 相机")] 
-        public Camera FxCamera;
+        [Header("主相机")] 
+        public Camera mainC;
+        [Header("UI特效相机")]
+        public Camera effectC;
         
         [Header("Positions For Show")]
         public Transform MemDetailTargetPos;
@@ -54,11 +54,22 @@ namespace mainMenu
             }
             BackGroundPS.target.ChangeBGByElement(unitConfig.element);
         }
-        
+
+        [SerializeField] private RawImage effectBg;
+        RenderTexture effectRenderTexture;
         void Awake()
         {
             target = this;
             SingleThreadProcesser.backup = mainProcessRunner;
+            SetBgRenderTexture();
+        }
+        
+        void SetBgRenderTexture()
+        {
+            effectRenderTexture = new RenderTexture(Screen.width, Screen.height, 16);
+            effectRenderTexture.Create();
+            effectC.targetTexture = effectRenderTexture;
+            effectBg.texture = effectRenderTexture;
         }
 
         void Start()
@@ -72,6 +83,7 @@ namespace mainMenu
             Screen.SetResolution(1920, 1080, true);
             UILayerLoader.Clear();
             UILayerLoader.SetHanger(T.transform);
+            UILayerLoader.SetEffectBg(effectBg.rectTransform);
             AppSetting.bgmSource = audioSource;
             AppSetting.Load();
             Time.timeScale = 1;

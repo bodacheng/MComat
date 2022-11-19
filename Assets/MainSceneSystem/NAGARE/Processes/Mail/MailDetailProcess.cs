@@ -14,7 +14,6 @@ public class MailDetailProcess : MSceneProcess
     public MailDetailProcess()
     {
         Step = MainSceneStep.MailDetail;
-        Inherit(PreScene.target);
     }
     
     MailDetailView _mailDetailViewLayer;

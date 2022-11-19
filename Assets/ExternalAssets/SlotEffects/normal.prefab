@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4756096781576562}
   - component: {fileID: 108173637974920758}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 4397885755957916}
   - component: {fileID: 198248570037274194}
   - component: {fileID: 199819124697351354}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4902,7 +4902,7 @@ GameObject:
   - component: {fileID: 4346681150602538}
   - component: {fileID: 198522458922536182}
   - component: {fileID: 199811228982348970}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -7,7 +7,6 @@ public class ArcadeFrontPage : MSceneProcess
     public ArcadeFrontPage()
     {
         Step = MainSceneStep.ArcadeFront;
-        Inherit(PreScene.target);
     }
     
     ArcadeTop arcadeTop;

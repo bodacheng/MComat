@@ -47,7 +47,6 @@ public class FrontPage : MSceneProcess
     public FrontPage()
     {
         Step = MainSceneStep.FrontPage;
-        Inherit(PreScene.target);
     }
 
     FrontLayer frontLayer;

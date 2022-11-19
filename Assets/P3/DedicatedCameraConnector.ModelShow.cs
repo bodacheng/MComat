@@ -81,7 +81,7 @@ namespace ModelView
 
             if (_model != null)
             {
-                Initialize(false,_model.transform, transform, PreScene.target.FxCamera);
+                Initialize(false,_model.transform, transform, PreScene.target.mainC);
                 ItemDetailStartDirection(0,0,0);
             }
         }

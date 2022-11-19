@@ -35,7 +35,7 @@ public partial class GotchaResultLayer : UILayer
     {
         for (int i = 0; i < results.Count; i++)
         {
-            StarScreenMoveAnim(results[i], PosCal.GetWorldPos(PreScene.target.FxCamera, waitPos[i], 5f), slotScreenPos[i]);
+            StarScreenMoveAnim(results[i], PosCal.GetWorldPos(PreScene.target.mainC, waitPos[i], 5f), slotScreenPos[i]);
         }
     }
     

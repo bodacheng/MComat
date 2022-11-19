@@ -48,7 +48,6 @@ public class QuestInfoPage : MSceneProcess
     public QuestInfoPage()
     {
         Step = MainSceneStep.QuestInfo;
-        Inherit(PreScene.target);
     }
     
     public override void ProcessEnter()

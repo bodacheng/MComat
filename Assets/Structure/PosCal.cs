@@ -19,7 +19,7 @@ public static class PosCal
     /// 这样的情况下为了得到正确的UI元素screen position，
     /// 我们引入了ConvertAnchorPos
     /// </param>
-    /// <param name="rectPos"></param>
+    /// <param name="rectPos"> 这个值是UI元素的坐标，指的应该是我们希望把某个特效给定到的位置 </param>
     /// <param name="z_offset"></param>
     /// <returns></returns>
     public static Vector3 GetWorldPos(Camera refC, Vector3 rectPos, float z_offset)

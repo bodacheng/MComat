@@ -34,7 +34,6 @@ public class SkillEditPage : MSceneProcess
     public SkillEditPage()
     {
         Step = MainSceneStep.UnitSkillEdit;
-        Inherit(PreScene.target);
     }
     
     public override void ProcessEnter()

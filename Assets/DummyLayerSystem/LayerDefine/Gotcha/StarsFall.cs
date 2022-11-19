@@ -19,7 +19,7 @@ public class StarsFall : MonoBehaviour
 
     public void Enter()
     {
-        var baseC =  PreScene.target.FxCamera.GetUniversalAdditionalCameraData();
+        var baseC =  PreScene.target.mainC.GetUniversalAdditionalCameraData();
         
         var cameraData = _camera.GetUniversalAdditionalCameraData();
         cameraData.renderType = CameraRenderType.Overlay;

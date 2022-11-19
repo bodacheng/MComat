@@ -29,7 +29,6 @@ public class ArenaPage : MSceneProcess
     public ArenaPage()
     {
         Step = MainSceneStep.Arena;
-        Inherit(PreScene.target);
     }
     
     public override void ProcessEnter()

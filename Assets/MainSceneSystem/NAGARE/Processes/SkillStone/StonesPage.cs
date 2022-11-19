@@ -6,7 +6,6 @@ public class StonesPage : MSceneProcess
     public StonesPage()
     {
         Step = MainSceneStep.SkillStoneList;
-        Inherit(PreScene.target);
     }
     
     private StoneListLayer stoneListLayer;

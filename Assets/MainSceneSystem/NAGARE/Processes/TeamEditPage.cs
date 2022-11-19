@@ -21,7 +21,6 @@ public class TeamEditPage : MSceneProcess
     public TeamEditPage()
     {
         Step = MainSceneStep.TeamEditFront;
-        Inherit(PreScene.target);
     }
     
     void EnterProcess(string teamMode)
@@ -43,7 +42,6 @@ public class TeamEditPage : MSceneProcess
             unitsLayer.Selected.Value = null;
         }
         
-        _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
         SetLoaded(true);
     }
     

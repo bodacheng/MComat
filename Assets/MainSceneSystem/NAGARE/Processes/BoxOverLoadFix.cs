@@ -7,7 +7,6 @@ public class BoxOverLoadFix : MSceneProcess
     public BoxOverLoadFix()
     {
         Step = MainSceneStep.BoxOverLoadHelper;
-        Inherit(PreScene.target);
     }
     
     public override void ProcessEnter()

@@ -76,7 +76,7 @@ public static class SVCenter
             if (!CheckIfOtherUnitOkAfterStoneRemove(item))
                 return;
             layer.StonesBox._tabEffects.SkillButtonExplosion(item._SkillConfig.SP_LEVEL, 
-                PosCal.GetWorldPos(PreScene.target.FxCamera, to.GetComponent<RectTransform>(), 3), 
+                PosCal.GetWorldPos(PreScene.target.mainC, to.GetComponent<RectTransform>(), 3), 
                 layer.StonesBox._tabEffects.transform);
         }
         
@@ -133,7 +133,7 @@ public static class SVCenter
             if (!CheckIfOtherUnitOkAfterStoneRemove(fromItem))
                 return;
             skillEditLayer.StonesBox._tabEffects.SkillButtonExplosion(fromItem._SkillConfig.SP_LEVEL, 
-            PosCal.GetWorldPos(PreScene.target.FxCamera, to.GetComponent<RectTransform>(), 3), 
+            PosCal.GetWorldPos(PreScene.target.mainC, to.GetComponent<RectTransform>(), 3), 
             skillEditLayer.StonesBox._tabEffects.transform);
         }
         

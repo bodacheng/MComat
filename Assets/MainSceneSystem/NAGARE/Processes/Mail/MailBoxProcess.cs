@@ -10,7 +10,6 @@ public class MailBoxProcess : MSceneProcess
     public MailBoxProcess()
     {
         Step = MainSceneStep.MailBox;
-        Inherit(PreScene.target);
     }
     
     public override void ProcessEnter()

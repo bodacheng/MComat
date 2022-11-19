@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4958340034833258}
   - component: {fileID: 198188863773783982}
   - component: {fileID: 199908486373802376}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4837,7 +4837,7 @@ GameObject:
   - component: {fileID: 4362062843934626}
   - component: {fileID: 198061279368716552}
   - component: {fileID: 199200077216182250}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9463,7 +9463,7 @@ GameObject:
   - component: {fileID: 4555100388864736}
   - component: {fileID: 108202851893188116}
   - component: {fileID: 5760036563257329584}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

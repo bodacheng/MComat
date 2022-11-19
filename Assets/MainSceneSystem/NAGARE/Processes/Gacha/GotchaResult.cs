@@ -12,7 +12,6 @@ public class GotchaResult : MSceneProcess
     public GotchaResult()
     {
         Step = MainSceneStep.GotchaResult;
-        Inherit(PreScene.target);
     }
     
     public override void ProcessEnter()

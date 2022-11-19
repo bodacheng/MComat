@@ -7,7 +7,6 @@ public class SelfFightPage : MSceneProcess
     public SelfFightPage()
     {
         Step = MainSceneStep.SelfFightFront;
-        Inherit(PreScene.target);
     }
 
     private SelfFightLayer selfFightLayer;
@@ -15,8 +14,6 @@ public class SelfFightPage : MSceneProcess
     {
         var layer = UILayerLoader.Load<UnitsLayer>();
         layer.DisplayUnitIcons(dataAccess.Units.Dic, true);
-        
-        _CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
         
         selfFightLayer = UILayerLoader.Load<SelfFightLayer>();
         selfFightLayer.INI();

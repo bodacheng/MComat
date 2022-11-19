@@ -45,7 +45,7 @@ public partial class SkillEditLayer : UILayer
         ReturnLayer.AddUniTaskCancel(cts);
         await StonesBox._tabEffects.SwitchElement
             (unitConfig.element, 
-                ()=> StonesBox.IniExTabsEffects(PreScene.target.FxCamera),
+                ()=> StonesBox.IniExTabsEffects(PreScene.target.mainC),
                 cts.Token);
         StonesBox.FilterFeatureRefresh(true);
         _skillStoneDetail.Clear();

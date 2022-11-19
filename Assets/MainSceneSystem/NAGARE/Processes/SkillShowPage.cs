@@ -7,7 +7,6 @@ public class SkillShowPage : MSceneProcess
     public SkillShowPage()
     {
         Step = MainSceneStep.UnitSkillShow;
-        Inherit(PreScene.target);
     }
     
     public override void ProcessEnter()

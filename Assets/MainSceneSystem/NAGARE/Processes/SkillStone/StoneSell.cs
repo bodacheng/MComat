@@ -13,7 +13,6 @@ public class StoneSell : MSceneProcess
     public StoneSell()
     {
         Step = MainSceneStep.SkillStones_Sell;
-        Inherit(PreScene.target);
     }
 
     private StoneListLayer StoneListLayer;

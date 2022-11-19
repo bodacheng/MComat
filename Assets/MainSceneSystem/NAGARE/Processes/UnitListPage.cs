@@ -12,7 +12,6 @@ public class UnitListPage : MSceneProcess
     public UnitListPage()
     {
         Step = MainSceneStep.UnitList;
-        Inherit(PreScene.target);
     }
 
     public override void ProcessEnter()

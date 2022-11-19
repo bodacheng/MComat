@@ -8,7 +8,6 @@ public class GotchaFront : MSceneProcess
     public GotchaFront()
     {
         Step = MainSceneStep.GotchaFront;
-        Inherit(PreScene.target);
     }
      
     public override void ProcessEnter()

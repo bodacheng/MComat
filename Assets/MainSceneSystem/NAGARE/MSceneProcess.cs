@@ -3,7 +3,6 @@
     public abstract class MSceneProcess : SceneProcess
     {
         public MainSceneStep Step;
-        protected CameraManager _CameraManager;
         protected MissionWatcher missionWatcher;
         private bool _loaded = false;
         
@@ -19,11 +18,6 @@
         public override bool CanEnterOtherProcess()
         {
             return _loaded;
-        }
-        
-        protected void Inherit(PreScene _preparingScene)
-        {
-            _CameraManager = _preparingScene._CameraManager;
         }
     }
 

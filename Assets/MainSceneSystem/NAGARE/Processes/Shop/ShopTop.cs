@@ -7,7 +7,6 @@ public class ShopTop : MSceneProcess
     public ShopTop()
     {
         Step = MainSceneStep.ShopTop;
-        Inherit(PreScene.target);
     }
     
     public override void ProcessEnter()

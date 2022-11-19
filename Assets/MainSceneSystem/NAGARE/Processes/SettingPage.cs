@@ -10,7 +10,6 @@ public class SettingPage : MSceneProcess
     public SettingPage()
     {
         Step = MainSceneStep.Setting;
-        Inherit(PreScene.target);
     }
     
     public override void ProcessEnter()

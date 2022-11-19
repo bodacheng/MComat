@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace DummyLayerSystem
 {
     internal static class UILayerLoader
     {
-        static readonly IDictionary<string, string> paths = new Dictionary<string, string>()
+        static readonly IDictionary<string, string> Paths = new Dictionary<string, string>()
         {
             {"NickNameLayer", "DummyLayerSystem/NickNameLayer"},
             {"UpperInfoBar", "DummyLayerSystem/UpperInfoBar"},
@@ -46,10 +47,16 @@ namespace DummyLayerSystem
             {"FightScenePauseSupport", "DummyLayerSystem/FightScenePauseSupport"},
         };
 
-        private static Transform Hanger;
+        private static Transform _hanger;
         public static void SetHanger(Transform target)
         {
-            Hanger = target;
+            _hanger = target;
+        }
+
+        private static RectTransform effectBg;
+        public static void SetEffectBg(RectTransform _effectBg)
+        {
+            effectBg = _effectBg;
         }
 
         private static readonly List<UILayer> Queues = new ();
@@ -103,11 +110,11 @@ namespace DummyLayerSystem
                 return existed;
             }
             
-            var path = paths[layerName];
+            var path = Paths[layerName];
             var UILayerPrefab = Resources.Load<UILayer>(path);
             var t = GameObject.Instantiate(UILayerPrefab);
             t.Index = layerName;
-            t.transform.SetParent(Hanger.transform);
+            t.transform.SetParent(_hanger.transform);
             t.transform.localPosition = Vector3.zero;
             var rt = t.GetComponent<RectTransform>();
             rt.anchorMax = Vector2.one;
@@ -118,6 +125,13 @@ namespace DummyLayerSystem
             rt.localScale = Vector3.one;
             Queues.Add(t);
             var returnValue = (T) Convert.ChangeType(t, typeof(T));
+            
+            if (effectBg != null)
+            {
+                effectBg.transform.SetParent(_hanger);
+                effectBg.transform.SetAsLastSibling();
+            }
+            
             return returnValue;
         }
         
