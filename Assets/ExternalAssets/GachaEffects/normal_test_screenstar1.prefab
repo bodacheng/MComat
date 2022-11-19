@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 546798265390847784, guid: ae5f399233189481c8d842fb9f3d2e8c,
         type: 3}
       propertyPath: m_Name
-      value: normal_test_screenstar0
+      value: normal_test_screenstar1
       objectReference: {fileID: 0}
     - target: {fileID: 546798265390877448, guid: ae5f399233189481c8d842fb9f3d2e8c,
         type: 3}

@@ -5,7 +5,6 @@ using mainMenu;
 public class StarsFall : MonoBehaviour
 {
     public Camera _camera;
-    public Camera _UICamera;
     [SerializeField] Transform center;
     [SerializeField] float SkySphereRadius = 650;
     
