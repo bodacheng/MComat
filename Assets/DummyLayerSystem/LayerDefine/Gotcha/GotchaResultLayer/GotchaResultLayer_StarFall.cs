@@ -13,7 +13,7 @@ public partial class GotchaResultLayer : UILayer
         Reset();
         
         if (results != null)
-        foreach (StoneOfPlayerInfo info in results)
+        foreach (var info in results)
         {
             StarFall(info);
             starFallAnimOneProcess = StartCoroutine(WaitForOneStarFall());
