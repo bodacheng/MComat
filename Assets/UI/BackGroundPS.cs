@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BackGroundPS : MonoBehaviour
 {
-    public Camera mainC;
-    public List<ParticleSystem> BCPs;
+    [SerializeField] Camera mainC;
+    [SerializeField] List<ParticleSystem> BCPs;
     public static BackGroundPS target;
     
     int playingNo = 0;
