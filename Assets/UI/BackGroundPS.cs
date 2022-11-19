@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class BackGroundPS : MonoBehaviour
 {
-    [SerializeField] Camera mainC;
     [SerializeField] List<ParticleSystem> BCPs;
     public static BackGroundPS target;
     
@@ -56,7 +55,7 @@ public class BackGroundPS : MonoBehaviour
     
     void Default()
     {
-        SwitchBG(14);
+        SwitchBG(18);
     }
     
     void Red()
@@ -85,11 +84,7 @@ public class BackGroundPS : MonoBehaviour
     }
     
     void SwitchBG(int index)
-    { 
-        transform.SetParent(mainC.transform);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
-        
+    {
         for (var i = 0; i < BCPs.Count; i++)
         {
             if (i == index)

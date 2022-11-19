@@ -22,10 +22,6 @@ namespace mainMenu
         [Header("UI特效相机")]
         public Camera effectC;
         
-        [Header("Positions For Show")]
-        public Transform MemDetailTargetPos;
-        public Transform MemDetailWatchPos;
-        
         [Header("Shader转换器")]
         public SwapAllModelShader _SwapAllModelShader;
         
@@ -70,6 +66,7 @@ namespace mainMenu
             effectRenderTexture.Create();
             effectC.targetTexture = effectRenderTexture;
             effectBg.texture = effectRenderTexture;
+            effectBg.color = Color.white;
         }
 
         void Start()
