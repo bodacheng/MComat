@@ -1,4 +1,5 @@
-﻿using mainMenu;
+﻿using Cysharp.Threading.Tasks;
+using mainMenu;
 using UnityEngine;
 
 namespace dataAccess
@@ -7,7 +8,7 @@ namespace dataAccess
     {
         // 删除一个技能石
         
-        public static async void RemoveStoneLocal(string instanceId)
+        public static async UniTask RemoveStoneLocal(string instanceId)
         {
             if (RenderModelDic.ContainsKey(instanceId))
             {

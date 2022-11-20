@@ -48,7 +48,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - btn_effect
   - m_GUID: d0b39e8dfd8694a66bbdde731c0a4905
-    m_Address: ButtonEffects/selectedTab.prefab
+    m_Address: ButtonEffects/selectedTab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - btn_effect
+  - m_GUID: e2a5a03cf6c1c48099c00e2166539e9c
+    m_Address: ButtonEffects/stonePoweredUp
     m_ReadOnly: 0
     m_SerializedLabels:
     - btn_effect

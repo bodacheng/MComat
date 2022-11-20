@@ -6,11 +6,11 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
     public async void Shine(Camera refC)
     {
         var worldPos = PosCal.GetWorldPos(refC, transform.GetComponent<RectTransform>(), 5f);
-        var path = FightGlobalSetting.EffectPathDefine();
-        var slotEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion2.prefab");
+        var slotEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/stonePoweredUp");
         slotEffect.gameObject.name = "stoneShine";
         slotEffect.gameObject.transform.position = worldPos;
         slotEffect.Play(true);
+        slotEffect.transform.SetParent(transform);
     }
     
     public static void SelectedRender(SKStoneItem item, GameObject _Selected)

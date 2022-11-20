@@ -61,6 +61,7 @@ namespace mainMenu
                 }
                 else
                 {
+                    // 这个环节按理说不该出现
                     cell.UpdateMyItem();
                 }
             }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Skill;
@@ -38,24 +39,23 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
 			canvas = canvasObj.AddComponent<Canvas>();
 			canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 			canvas.sortingOrder = canvasSortOrder;
-            CloseInfo();
+			RenderStoneLevel(false);
 		}
 	}
+
+    public void RenderStoneLevel(bool on)
+    {
+	    RenderStoneLevel();
+	    info.gameObject.SetActive(on);
+    }
     
     // 在技能石模型上显示目前等级
-    public void ShowStoneLevel()
+    public void RenderStoneLevel()
     {
-        info.gameObject.SetActive(true);
-        StoneOfPlayerInfo sspim = Stones.Get(instanceId);
-        info.text = sspim.Level.ToString();
+	    var stoneInfo = Stones.Get(instanceId);
+	    info.text = stoneInfo != null? stoneInfo.Level.ToString() : String.Empty;
     }
     
-    public void CloseInfo()
-    {
-        if (info != null)
-            info.gameObject.SetActive(false);
-    }
-
 	/// <summary>
 	/// This item started to drag.
 	/// </summary>

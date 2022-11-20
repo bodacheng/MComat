@@ -77,7 +77,6 @@ public partial class SSLevelUpManager : MonoBehaviour
     /// </summary>
     public void RefreshSkillLevelUpModule(string instanceId)
     {
-        Debug.Log("we are here:"+ instanceId);
         confirmLevelUp.gameObject.SetActive(false);
         if (instanceId == null)
         {
@@ -95,7 +94,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
         
         confirmLevelUp.gameObject.SetActive(true);
-        int needGD = target.Level * 10 + 100;
+        var needGD = target.Level * 10 + 100;
         gdCount.text = needGD.ToString();
         void Confirm()
         {

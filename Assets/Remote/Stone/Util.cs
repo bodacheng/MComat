@@ -11,23 +11,21 @@ namespace dataAccess
     {
         #region 技能石模型相关
         // 把所有技能的等级显示出来
-        public static void ShowAllMyStoneLevel()
+        public static void ShowAllStonesLevel(bool on)
         {
             foreach (var keyValuePair in RenderModelDic)
             {
-                keyValuePair.Value.ShowStoneLevel();
+                keyValuePair.Value.RenderStoneLevel(on);
             }
         }
         
-        // 关闭所有技能石文字类提示
-        public static void CloseAllMyStoneFloatInfo()
+        public static void ShowAllStonesLevel()
         {
             foreach (var keyValuePair in RenderModelDic)
             {
-                keyValuePair.Value.CloseInfo();
+                keyValuePair.Value.RenderStoneLevel();
             }
         }
-        
         #endregion
 
         #region 财产数据相关
@@ -35,16 +33,16 @@ namespace dataAccess
         public static List<string> TargetStonesFromAccount(SkillStonesBox.StoneFilterForm filterForm)
         {
             var skillStonesOfTypeAndExType = new List<string>(); // instanceId list
-            foreach (var keyValuePair in Dic)
+            foreach (var pair in Dic)
             {
-                if (keyValuePair.Value.Born == "true")
+                if (pair.Value.Born == "true")
                 {
                     continue;//原生技能不显示在技能石盒子内
                 }
-                var skillConfig = SkillConfigTable.GetSkillConfig(keyValuePair.Value.SkillId);
+                var skillConfig = SkillConfigTable.GetSkillConfig(pair.Value.SkillId);
                 if (skillConfig == null)
                 {
-                    Debug.Log("????"+ keyValuePair.Value.SkillId);
+                    Debug.Log("????"+ pair.Value.SkillId);
                     continue;
                 }
                 var exs = filterForm.ExType.ToList();
@@ -52,7 +50,7 @@ namespace dataAccess
                     && exs.Contains(skillConfig.SP_LEVEL) 
                     && SkillConfig.RangeLimit(skillConfig.AIAttrs.AI_MIN_DIS, skillConfig.AIAttrs.AI_MAX_DIS, filterForm.Close, filterForm.Near, filterForm.Far))
                 {
-                    skillStonesOfTypeAndExType.Add(keyValuePair.Value.InstanceId);
+                    skillStonesOfTypeAndExType.Add(pair.Value.InstanceId);
                 }
             }
             return skillStonesOfTypeAndExType;

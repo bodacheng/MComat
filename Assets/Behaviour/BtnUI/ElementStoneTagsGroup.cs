@@ -54,7 +54,7 @@ public class ElementStoneTagsGroup
         btnEffectsSetsForStoneBox.Add(2, ex2Tab.GetComponent<ParticleSystem>());
         btnEffectsSetsForStoneBox.Add(3, ex3Tab.GetComponent<ParticleSystem>());
         
-        selectedTab = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/selectedTab.prefab");
+        selectedTab = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/selectedTab");
         selectedTab.transform.SetParent(effectObjectParent);
         
         await LoadPressedEffect(element, effectObjectParent);

@@ -8,16 +8,6 @@ public class ShowAllMyStoneLevel : MonoBehaviour
 
     void Awake()
     {
-        toggle.onValueChanged.AddListener(x =>
-        {
-            if (x)
-            {
-                Stones.ShowAllMyStoneLevel();
-            }
-            else
-            {
-                Stones.CloseAllMyStoneFloatInfo();
-            }
-        });
+        toggle.onValueChanged.AddListener(Stones.ShowAllStonesLevel);
     }
 }
