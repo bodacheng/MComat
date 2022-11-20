@@ -60,11 +60,11 @@ public partial class FightMemberManager {
         
         SkillStonesBox.StoneFilterForm filterForm = new SkillStonesBox.StoneFilterForm
         {
-            type = focusingType,
-            close = skillrangeselectfilter[0],
-            near = skillrangeselectfilter[1],
-            far = skillrangeselectfilter[2],
-            exType = SPselected,
+            Type = focusingType,
+            Close = skillrangeselectfilter[0],
+            Near = skillrangeselectfilter[1],
+            Far = skillrangeselectfilter[2],
+            ExType = SPselected,
             BType = Skill.BehaviorType.NONE
         };        
         _SkillIDsAndNames = SkillList(filterForm);// 待研究

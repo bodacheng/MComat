@@ -6,36 +6,36 @@ namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
     {
-        private StoneFilterForm form;
+        private StoneFilterForm _form;
         
         public void RestFilter()
         {
             var filterForm = new StoneFilterForm
             {
-                type = FocusingType,
-                exType = new int[1] { FocusingExType },
-                close = closeCheckBox.isOn,
-                near = nearCheckBox.isOn,
-                far = farCheckBox.isOn
+                Type = FocusingType,
+                ExType = new[] { FocusingExType },
+                Close = closeCheckBox.isOn,
+                Near = nearCheckBox.isOn,
+                Far = farCheckBox.isOn
             };
 
-            form = filterForm;
+            _form = filterForm;
             PutSkillStonesToBox();
         }
         
         public class StoneFilterForm
         {
-            public string type;
+            public string Type;
             public BehaviorType BType = BehaviorType.NONE;
-            public int[] exType = { 0, 1, 2, 3 };
-            public bool close;
-            public bool near;
-            public bool far;
+            public int[] ExType = { 0, 1, 2, 3 };
+            public bool Close;
+            public bool Near;
+            public bool Far;
         }
         
         void PutSkillStonesToBox()
         {
-            var targetSKs = Stones.TargetStonesFromAccount_except(form, null, null, false);
+            var targetSKs = Stones.TargetStonesFromAccount_except(_form, null, null, false);
             targetSKs = Order(targetSKs);
             
             foreach (var cellPair in CellsDic)
@@ -44,24 +44,24 @@ namespace mainMenu
             }
             
             var key = 0;
-            foreach (var t in targetSKs)
+            foreach (var instanceId in targetSKs)
             {
-                CellsDic.TryGetValue(key, out StoneCell _Cell);
-                if (_Cell == null)
+                CellsDic.TryGetValue(key, out var cell);
+                if (cell == null)
                 {
                     Debug.Log("Stone box exceed："+ key);
                     Debug.Log("此时技能石头盒子的总容量：" + CellsDic.Count);
                     continue;
                 }
                 
-                if (!Stones.GetRenderModel(t)._using)
+                if (!Stones.GetRenderModel(instanceId)._using)
                 {
-                    _Cell.AddItem(Stones.GetRenderModel(t));
+                    cell.AddItem(Stones.GetRenderModel(instanceId));
                     key++;
                 }
                 else
                 {
-                    _Cell.UpdateMyItem();
+                    cell.UpdateMyItem();
                 }
             }
         }

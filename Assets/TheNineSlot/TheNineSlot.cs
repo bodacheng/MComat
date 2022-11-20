@@ -79,22 +79,22 @@ namespace mainMenu
         
         void SlotBehaviour(SkillStoneSlot slot, Action<string> playSkill)
         {
-            void buttonFeature()
+            void ButtonFeature()
             {
                 focusingSlot = slot;
                 SelectedRender(focusingSlot._cell);
                 slot._cell.UpdateMyItem();
-                var _SkillStone = slot._cell.GetItem();
-                if (_SkillStone != null && _SkillStone._SkillConfig != null)
+                var skillStone = slot._cell.GetItem();
+                if (skillStone != null && skillStone._SkillConfig != null)
                 {
-                    PrintSkillInfo.Invoke(_SkillStone.instanceId);
-                    playSkill.Invoke(_SkillStone._SkillConfig.REAL_NAME);
+                    PrintSkillInfo.Invoke(skillStone.instanceId);
+                    playSkill.Invoke(skillStone._SkillConfig.REAL_NAME);
                 }else{
                     PrintSkillInfo.Invoke(null);
                 }
             }
             
-            void doubleClick()
+            void DoubleClick()
             {
                 focusingSlot = null;
                 SelectedRender(null);
@@ -105,19 +105,19 @@ namespace mainMenu
             {
                 if (!FightGlobalSetting._skillStoneHasExp)
                     return;
-                var _stone = slot._cell.GetItem();
-                if (_stone != null && _stone._SkillConfig != null)
+                var stone = slot._cell.GetItem();
+                if (stone != null && stone._SkillConfig != null)
                 {
-                    PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.instanceId, true);
+                    PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, stone.instanceId, true);
                 }
             }
             
-            slot._cell.btn.SetListener(buttonFeature);
+            slot._cell.btn.SetListener(ButtonFeature);
             
             slot._cell.btn.ActivateHold = true;
             slot._cell.btn.ActivateDoubleClick = true;
             slot._cell.btn.onHold.AddListener(GoToLevelUpPage);
-            slot._cell.btn.onDoubleClick.AddListener(doubleClick);
+            slot._cell.btn.onDoubleClick.AddListener(DoubleClick);
             
             slot._cell.SetOnDropAction(((from, to) =>
             {

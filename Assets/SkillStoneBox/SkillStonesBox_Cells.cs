@@ -112,23 +112,23 @@ namespace mainMenu
             {
                 var filterForm0 = new StoneFilterForm
                 {
-                    type = C_Types[i],
-                    exType = new int[1] { 0 },
+                    Type = C_Types[i],
+                    ExType = new int[1] { 0 },
                 };
                 var filterForm1 = new StoneFilterForm
                 {
-                    type = C_Types[i],
-                    exType = new int[1] { 1 },
+                    Type = C_Types[i],
+                    ExType = new int[1] { 1 },
                 };
                 var filterForm2 = new StoneFilterForm
                 {
-                    type = C_Types[i],
-                    exType = new int[1] { 2 },
+                    Type = C_Types[i],
+                    ExType = new int[1] { 2 },
                 };
                 var filterForm3 = new StoneFilterForm
                 {
-                    type = C_Types[i],
-                    exType = new int[1] { 3 },
+                    Type = C_Types[i],
+                    ExType = new int[1] { 3 },
                 };
                 
                 var SkillStonesOfType_normal = Stones.TargetStonesFromAccount(filterForm0);
@@ -149,23 +149,23 @@ namespace mainMenu
             {
                 var filterForm0 = new StoneFilterForm
                 {
-                    type = C_Types[i],
-                    exType = new int[1] { 0 },
+                    Type = C_Types[i],
+                    ExType = new int[1] { 0 },
                 };
                 var filterForm1 = new StoneFilterForm
                 {
-                    type = C_Types[i],
-                    exType = new int[1] { 1 },
+                    Type = C_Types[i],
+                    ExType = new int[1] { 1 },
                 };
                 var filterForm2 = new StoneFilterForm
                 {
-                    type = C_Types[i],
-                    exType = new int[1] { 2 },
+                    Type = C_Types[i],
+                    ExType = new int[1] { 2 },
                 };
                 var filterForm3 = new StoneFilterForm
                 {
-                    type = C_Types[i],
-                    exType = new int[1] { 3 },
+                    Type = C_Types[i],
+                    ExType = new int[1] { 3 },
                 };
                 
                 var SkillStonesOfType_normal = Stones.TargetStonesFromAccount(filterForm0);

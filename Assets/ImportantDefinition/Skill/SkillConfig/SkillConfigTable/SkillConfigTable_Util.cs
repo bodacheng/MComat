@@ -158,7 +158,7 @@ public partial class SkillConfigTable
     public static IDictionary<string,string> GetSkillIDAndNameDic(SkillStonesBox.StoneFilterForm filterForm)
     {
         Dictionary<string, string> SkillIDAndNameDic = new Dictionary<string, string>();
-        List<SkillConfig> list = GetSkillConfigsOfType(filterForm.type);
+        List<SkillConfig> list = GetSkillConfigsOfType(filterForm.Type);
         foreach (SkillConfig one in list)
         {
             if (filterForm.BType != BehaviorType.NONE && filterForm.BType != one.STATE_TYPE)
@@ -166,8 +166,8 @@ public partial class SkillConfigTable
                 continue;
             }
             
-            if (SkillConfig.RangeLimit(one.AIAttrs.AI_MIN_DIS, one.AIAttrs.AI_MAX_DIS, filterForm.close, filterForm.near, filterForm.far)
-                && filterForm.exType.ToList().Contains(one.SP_LEVEL))
+            if (SkillConfig.RangeLimit(one.AIAttrs.AI_MIN_DIS, one.AIAttrs.AI_MAX_DIS, filterForm.Close, filterForm.Near, filterForm.Far)
+                && filterForm.ExType.ToList().Contains(one.SP_LEVEL))
             {
                 if (one.RECORD_ID == null)
                 {

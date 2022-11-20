@@ -133,11 +133,11 @@ public class FightMembers
         var target = new FightMembers();
         var filterForm = new SkillStonesBox.StoneFilterForm
         {
-            type = type,
-            exType = new int[1] { 0 },
-            close = false,
-            near = false,
-            far = false
+            Type = type,
+            ExType = new int[1] { 0 },
+            Close = false,
+            Near = false,
+            Far = false
         };
         
         var char1 = new UnitInfo

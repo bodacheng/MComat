@@ -16,11 +16,11 @@ public partial class SkillSet
         {
             filterForm = new SkillStonesBox.StoneFilterForm
             {
-                type = type,
-                exType = new int[1] { 0 },
-                close = false,
-                near = false,
-                far = false
+                Type = type,
+                ExType = new int[1] { 0 },
+                Close = false,
+                Near = false,
+                Far = false
             };
         }
         
@@ -58,22 +58,22 @@ public partial class SkillSet
             }
             filterForm = new SkillStonesBox.StoneFilterForm
             {
-                type = type,
-                exType = RemainSlotSPLevelCal(skillSet).ToArray(),
-                close = false,
-                near = false,
-                far = false
+                Type = type,
+                ExType = RemainSlotSPLevelCal(skillSet).ToArray(),
+                Close = false,
+                Near = false,
+                Far = false
             };
         }
         else
         {
             filterForm = new SkillStonesBox.StoneFilterForm
             {
-                type = type,
-                exType = RemainSlotSPLevelCal(skillSet).ToArray(),
-                close = false,
-                near = false,
-                far = false
+                Type = type,
+                ExType = RemainSlotSPLevelCal(skillSet).ToArray(),
+                Close = false,
+                Near = false,
+                Far = false
             };
         }
 

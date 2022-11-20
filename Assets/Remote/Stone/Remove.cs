@@ -18,7 +18,7 @@ namespace dataAccess
                 slotEffect.gameObject.transform.position = worldPos;
                 slotEffect.Play(true);
                 
-                UnityEngine.Object.Destroy(RenderModelDic[instanceId].gameObject);
+                Object.Destroy(RenderModelDic[instanceId].gameObject);
             }
             RenderModelDic.Remove(instanceId);
             Dic.Remove(instanceId);

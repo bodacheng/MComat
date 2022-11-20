@@ -89,14 +89,14 @@ public partial class SSLevelUpManager : MonoBehaviour
                     Stones.RemoveStoneLocal(instanceId);
                 }
                 
-                var renderModel = Stones.GetRenderModel(_stoneListLayer.TargetStoneID);
-                renderModel.Shine(PreScene.target.mainC);
-                
                 // RemoveStoneLocal会销毁作为材料的技能石模型，
                 // 而CloseLevelUpPage内部有对材料的操作，
                 // 他们在同一帧执行的话会有一定错误
                 await UniTask.DelayFrame(1);
                 CloseLevelUpPage();
+                _stoneListLayer.box.RestFilter();
+                var renderModel = Stones.GetRenderModel(_stoneListLayer.TargetStoneID);
+                renderModel.Shine(PreScene.target.mainC);
                 refreshStoneData.Invoke(targetInstanceId);
                 _stoneListLayer.TargetStoneID = targetInstanceId;
             }

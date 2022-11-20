@@ -34,28 +34,28 @@ namespace dataAccess
         // 用于过滤显示在技能石盒内的技能石
         public static List<string> TargetStonesFromAccount(SkillStonesBox.StoneFilterForm filterForm)
         {
-            var SkillStonesOfTypeAndExType = new List<string>(); //技能石本地id
+            var skillStonesOfTypeAndExType = new List<string>(); // instanceId list
             foreach (var keyValuePair in Dic)
             {
                 if (keyValuePair.Value.Born == "true")
                 {
                     continue;//原生技能不显示在技能石盒子内
                 }
-                var _SkillConfig = SkillConfigTable.GetSkillConfig(keyValuePair.Value.SkillId);
-                if (_SkillConfig == null)
+                var skillConfig = SkillConfigTable.GetSkillConfig(keyValuePair.Value.SkillId);
+                if (skillConfig == null)
                 {
                     Debug.Log("????"+ keyValuePair.Value.SkillId);
                     continue;
                 }
-                var exs = filterForm.exType.ToList();
-                if (_SkillConfig.TYPE == filterForm.type 
-                    && exs.Contains(_SkillConfig.SP_LEVEL) 
-                    && SkillConfig.RangeLimit(_SkillConfig.AIAttrs.AI_MIN_DIS, _SkillConfig.AIAttrs.AI_MAX_DIS, filterForm.close, filterForm.near, filterForm.far))
+                var exs = filterForm.ExType.ToList();
+                if (skillConfig.TYPE == filterForm.Type 
+                    && exs.Contains(skillConfig.SP_LEVEL) 
+                    && SkillConfig.RangeLimit(skillConfig.AIAttrs.AI_MIN_DIS, skillConfig.AIAttrs.AI_MAX_DIS, filterForm.Close, filterForm.Near, filterForm.Far))
                 {
-                    SkillStonesOfTypeAndExType.Add(keyValuePair.Value.InstanceId);
+                    skillStonesOfTypeAndExType.Add(keyValuePair.Value.InstanceId);
                 }
             }
-            return SkillStonesOfTypeAndExType;
+            return skillStonesOfTypeAndExType;
         }
         
         // exceptList ： 除了这些 技能石账户ID
