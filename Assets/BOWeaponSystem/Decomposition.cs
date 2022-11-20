@@ -62,7 +62,10 @@ public partial class Decomposition : MonoBehaviour {
     // Local_OnEnable和Local_OnDisable，最大的一个区别是，
     // 前者没有打开marker的处理，marker的开启由各个与攻击相关的模块自行处理，因为在那之前涉及一些不太统一的参数设置
     // 而Local_OnDisable进行了关闭marker的处理（目前好像就干了这一件事）
-    public void Local_OnEnable()
+    
+    // 本函数只有在Decomposition作为对象池内物体向外取的时候才会在取出时被执行，否则不会主动执行，从而会由于Phase没有置于1而一直不消逝。
+    // 如果Decomposition不基于对象池构建来生成，比如由addressable中直接创建instance，必须主动运行Local_OnEnable()
+    public void OnEnableProcess()
     {
         Phase = 1;
         if (DestructionDelay >= 0)
@@ -82,10 +85,10 @@ public partial class Decomposition : MonoBehaviour {
     
     void Update()
     {
-        HitBoxesProcesser.AddToDecompositionerProcesserList(this);
+        HitBoxesProcesser.AddToDecompositionProcessorList(this);
     }
 
-    public void EnergyRessolve()
+    public void EnergyResolve()
     {
         StopEmissions(true);
         if (pool == null)

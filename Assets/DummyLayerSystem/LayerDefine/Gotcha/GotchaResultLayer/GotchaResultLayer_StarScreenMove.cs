@@ -11,11 +11,11 @@ public partial class GotchaResultLayer : UILayer
     readonly List<RectTransform> waitPos = new();
     #endregion
     
-    readonly List<Decomposition> stoneFallingModels = new();
-    readonly List<Decomposition> stoneStartFlashModels = new();
+    readonly List<ParticleSystem> stoneFallingModels = new();
+    readonly List<ParticleSystem> stoneStartFlashModels = new();
     readonly List<Vector3> slotScreenPos = new();
-    readonly List<Decomposition> screenStarModels = new();
-    readonly List<Decomposition> screenStarExplosionModels = new();
+    readonly List<ParticleSystem> screenStarModels = new();
+    readonly List<ParticleSystem> screenStarExplosionModels = new();
     
     void SetWaitPos()
     {
@@ -71,12 +71,12 @@ public partial class GotchaResultLayer : UILayer
                 break;
         }
         
-        var screenStar = await AddressablesLogic.LoadTOnObject<Decomposition>(screenStarName);
+        var screenStar = await AddressablesLogic.LoadTOnObject<ParticleSystem>(screenStarName);
         screenStar.transform.position = waitPos;
         screenStarModels.Add(screenStar);
         screenStar.transform.DOMove(endPos, 2f).OnComplete(async () =>
         {
-            var effect = await AddressablesLogic.LoadTOnObject<Decomposition>(explosionName);
+            var effect = await AddressablesLogic.LoadTOnObject<ParticleSystem>(explosionName);
             effect.transform.position = endPos;
             screenStarExplosionModels.Add(effect);
         });

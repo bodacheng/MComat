@@ -51,10 +51,14 @@ public partial class GotchaResultLayer : UILayer
                 fallingstarexplosionname = "screenStarExplostionTest3";
             break;
         }
-        Decomposition Star = await AddressablesLogic.LoadTOnObject<Decomposition>(fallingstarname);
+        var Star = await AddressablesLogic.LoadTOnObject<ParticleSystem>(fallingstarname);
+        Star.gameObject.name = fallingstarname;
         Star.transform.position = targetPos;
-        Decomposition flash = await AddressablesLogic.LoadTOnObject<Decomposition>(fallingstarexplosionname);
+
+        var flash = await AddressablesLogic.LoadTOnObject<ParticleSystem>(fallingstarexplosionname);
+        flash.gameObject.name = fallingstarexplosionname;
         flash.transform.position = flashPos;
+
         stoneFallingModels.Add(Star);
         stoneStartFlashModels.Add(flash);
         StarsFall.target._camera.transform.DOLookAt(Star.transform.position, 1f);

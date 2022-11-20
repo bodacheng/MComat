@@ -3,7 +3,7 @@ using HittingDetection;
 
 public partial class Decomposition : MonoBehaviour
 {
-    Vector3 temp,temp2;
+    Vector3 temp, temp2;
     float dis_from_center;
     public void Life()
     {
@@ -26,7 +26,7 @@ public partial class Decomposition : MonoBehaviour
                         Counter = stop_emission_delay;
                         Phase = 2;
                     }
-                break;
+                    break;
                 case WeaponMode.FlyerWeapon:
                     if (_HitBox.weaponHP > 0 && _HitBox.CurrentHP <= 0)
                     {
@@ -35,7 +35,7 @@ public partial class Decomposition : MonoBehaviour
                         Counter = stop_emission_delay;
                         Phase = 2;
                     }
-                break;
+                    break;
             }
         }
         
@@ -51,7 +51,7 @@ public partial class Decomposition : MonoBehaviour
                         Phase = 2;
                     }
                 }
-            break;
+                break;
             case 2:
                 if (DestructionDelay > 0 && stop_emission_delay > 0)//如果能量自身有寿命
                 {
@@ -64,9 +64,9 @@ public partial class Decomposition : MonoBehaviour
                 {
                     Phase = -1;
                 }
-            break;
+                break;
             case -1: // -1是立刻归还对象池的flag。这个逻辑是让所有hitbox按序运行的重要一环。
-                EnergyRessolve();
+                EnergyResolve();
                 break;
         }
         

@@ -6,8 +6,8 @@ public class HitBoxesProcesser : MonoBehaviour
 {
     public static HitBoxesProcesser Instance;
     
-    private static Dictionary<Collider, HitBoxManager> ColliderHitBox = new Dictionary<Collider, HitBoxManager>();
-    private List<Decomposition> processingDecompositioners = new List<Decomposition>();
+    private static readonly Dictionary<Collider, HitBoxManager> ColliderHitBox = new();
+    private readonly List<Decomposition> _processingDecompositions = new();
     
     void Awake()
     {
@@ -16,71 +16,71 @@ public class HitBoxesProcesser : MonoBehaviour
 
     public void Clear()
     {
-        processingDecompositioners.Clear();
+        _processingDecompositions.Clear();
     }
 
     public HitBoxManager GetHitBox(Collider c)
     {
-        ColliderHitBox.TryGetValue(c, out HitBoxManager hit_hitbox);
-        return hit_hitbox;
+        ColliderHitBox.TryGetValue(c, out var hitBox);
+        return hitBox;
     }
     
-    public static void AddToDecompositionerProcesserList(Decomposition _poolObject)
+    public static void AddToDecompositionProcessorList(Decomposition poolObject)
     {
         if (Instance != null)
-            Instance.AddToHitBoxesProcesserList(_poolObject);
+            Instance.AddToHitBoxesProcessorList(poolObject);
     }
     
     // 用于靠collider索引对应的BO_Marker_Manager，与update内功能无关。
-    public static void AddToColliderHitBoxDic(Collider collider, HitBoxManager bo_hitbox)
+    public static void AddToColliderHitBoxDic(Collider collider, HitBoxManager boHitbox)
     {
         if (!ColliderHitBox.ContainsKey(collider))
         {
-            ColliderHitBox.Add(collider, bo_hitbox);
+            ColliderHitBox.Add(collider, boHitbox);
         }
     }
 
     void Update()
     {
-        if (processingDecompositioners.Count > 0)
+        if (_processingDecompositions.Count > 0)
         {
-            for (int i = 0; i < processingDecompositioners.Count; i++)
+            for (int i = 0; i < _processingDecompositions.Count; i++)
             {
-                if (processingDecompositioners[i] == null)
+                if (_processingDecompositions[i] == null)
                 {
                     Debug.Log("队列错误");
-                    processingDecompositioners.Clear();
+                    _processingDecompositions.Clear();
                     return;
                 }
-                processingDecompositioners[i].Step1();
+                _processingDecompositions[i].Step1();
             }
-            for (int i = 0; i < processingDecompositioners.Count; i++)
+            for (int i = 0; i < _processingDecompositions.Count; i++)
             {
-                if (processingDecompositioners[i] == null)
+                if (_processingDecompositions[i] == null)
                 {
                     Debug.Log("队列错误");
-                    processingDecompositioners.Clear();
+                    _processingDecompositions.Clear();
                     return;
                 }
-                processingDecompositioners[i].Step2();
+                _processingDecompositions[i].Step2();
             }
-            for (int i = 0; i < processingDecompositioners.Count; i++)
+            for (int i = 0; i < _processingDecompositions.Count; i++)
             {
-                if (processingDecompositioners[i] == null)
+                if (_processingDecompositions[i] == null)
                 {
                     Debug.Log("队列错误");
-                    processingDecompositioners.Clear();
+                    _processingDecompositions.Clear();
                     return;
                 }
-                processingDecompositioners[i].Life();
+                _processingDecompositions[i].Life();
             }
-            processingDecompositioners.Clear();
+            _processingDecompositions.Clear();
         }
     }
 
-    void AddToHitBoxesProcesserList(Decomposition _poolObject)
+    void AddToHitBoxesProcessorList(Decomposition _poolObject)
     {
-        if (!processingDecompositioners.Contains(_poolObject))
-            processingDecompositioners.Add(_poolObject);
+        if (!_processingDecompositions.Contains(_poolObject))
+            _processingDecompositions.Add(_poolObject);
     }
 }

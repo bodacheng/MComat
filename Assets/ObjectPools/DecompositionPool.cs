@@ -78,7 +78,7 @@ public class DecompositionPool : ObjectPool<Decomposition> {
     protected override void OnBeforeRent(Decomposition instance)
     {
         base.OnBeforeRent(instance);
-        instance.Local_OnEnable();
+        instance.OnEnableProcess();
     }
     
     // オブジェクトが空のときにInstantiateする関数
@@ -106,7 +106,7 @@ public class DecompositionPool : ObjectPool<Decomposition> {
         
         a.transform.SetParent(Marker.transform);
         
-        var BBMM = a.GetComponent<HitBoxManager>();
+        var bbmm = a.GetComponent<HitBoxManager>();
         var danMuTest = a.GetComponent<TrackControl>();
         var PC = a.GetComponent<PositionConstraint>();
         if (PC == null)
@@ -134,11 +134,10 @@ public class DecompositionPool : ObjectPool<Decomposition> {
             decomposition.audioSource.maxDistance = 80;
         }
         
-        if (BBMM != null)
+        if (bbmm != null)
         {
-            BBMM.CurrentHP = BBMM.weaponHP;
-            decomposition._HitBox = BBMM;
-            BBMM.SetDecompositioner(decomposition);
+            bbmm.CurrentHP = bbmm.weaponHP;
+            decomposition._HitBox = bbmm;
         }
         decomposition.IsWeapon = decomposition._HitBox != null;
         decomposition.SetPositionConstraint(PC);

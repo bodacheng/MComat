@@ -9,8 +9,6 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 
 public static class EffectsManager
 {
-    public static Transform T;
-    
     // 以下的重点是主界面和战斗界面通用问题
     static readonly IDictionary<string, DecompositionPool> EffectPoolsDic = new Dictionary<string, DecompositionPool>();
     static readonly List<string> KeyExists = new();
@@ -85,10 +83,10 @@ public static class EffectsManager
         return processingEffectObj;
     }
     
-    static DecompositionPool ConstructEffectPoolWithPrefabAndKey(GameObject prefab, string key, int ini_count)
+    static DecompositionPool ConstructEffectPoolWithPrefabAndKey(GameObject prefab, string key, int iniCount)
     {
         var poolToConstruct = new DecompositionPool(prefab);
-        poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => {});//Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件")
+        poolToConstruct.PreloadAsync(iniCount, 1).Subscribe(_ => {});//Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件")
         if (EffectPoolsDic.ContainsKey(key))
             EffectPoolsDic[key] = poolToConstruct;
         else
@@ -99,7 +97,7 @@ public static class EffectsManager
     
     public static async UniTask<DecompositionPool> IniEffectsPool(string resourceName, string effectPath, int objectCount)
     {
-        DecompositionPool effectPool = null;
+        DecompositionPool effectPool;
         if (effectPath != null)
         {
             if (EffectPoolsDic.ContainsKey(effectPath + "/" + resourceName))
@@ -115,7 +113,7 @@ public static class EffectsManager
                 effectPool = ConstructEffectPoolWithPrefabAndKey(effectPrefab, effectPath + "/" + resourceName, objectCount);
                 return effectPool;
             }
-            if (effectPath == FightGlobalSetting.EffectPathDefine(Element.Null))
+            if (effectPath == FightGlobalSetting.EffectPathDefine())
             {
                 return null;//防止无限循环
             }

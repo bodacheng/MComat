@@ -312,12 +312,6 @@ namespace HittingDetection
             _Targets_Raw_Hit.Clear();
         }
         
-        Decomposition _decomposition;
-        public void SetDecompositioner(Decomposition _d)
-        {
-            _decomposition = _d;
-        }
-        
         // 而这个参数将和ContinuousDamage形成一个相互权衡的关系。如果武器不是ContinuousDamage，则一个能量系武器在打击到对象后应该立刻hp-1，并且直接cleartargets。
         // 直到hp为0时自身消灭。这样比如一个hp为2的波动技能就形成了一个类似kof99中boss那样的2连击飞行道具，这个道具打到人身上基本是形成一个很快的2连击。
         // 而如果这个武器是ContinuousDamage，事情将另当别论。ContinuousDamage类武器的cleartargets周期应该符合ContinuousDamageInterval。

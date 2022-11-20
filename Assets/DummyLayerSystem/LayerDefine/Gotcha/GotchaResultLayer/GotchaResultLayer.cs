@@ -46,12 +46,12 @@ public partial class GotchaResultLayer : UILayer
     {
         foreach (var t in stoneFallingModels)
         {
-            t.EnergyRessolve();
+            Destroy(t.gameObject);
         }
         stoneFallingModels.Clear();
         foreach (var t in stoneStartFlashModels)
         {
-            t.EnergyRessolve();
+            Destroy(t.gameObject);
         }
         stoneStartFlashModels.Clear();
     }
@@ -60,11 +60,11 @@ public partial class GotchaResultLayer : UILayer
     {
         foreach (var t in screenStarModels)
         {
-            t.EnergyRessolve();
+            Destroy(t.gameObject);
         }
         foreach (var t in screenStarExplosionModels)
         {
-            t.EnergyRessolve();
+            Destroy(t.gameObject);
         }
         screenStarModels.Clear();
         screenStarExplosionModels.Clear();
