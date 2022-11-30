@@ -141,7 +141,7 @@ namespace Soul
                 var sc = SkillConfigTable.GetSkillConfig(kv.Key);
                 if (sc == null)
                     continue;
-                kv.Value.AT = SkillEntity.ATCal(sc.ATTACK_WEIGHT, level);
+                kv.Value.AT = FightGlobalSetting.ATCal(sc.ATTACK_WEIGHT, level);
                 SkillEntityDic.TryGetValue(kv.Key, out var skillEntity);
                 skillEntity.AT = kv.Value.AT;
             }

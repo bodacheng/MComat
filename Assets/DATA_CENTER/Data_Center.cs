@@ -133,22 +133,22 @@ public partial class Data_Center : MonoBehaviour
         await UniTask.WhenAll(tasks);
     }
 
-    public void Step3Initialize(TeamConfig _TeamConfig, CriticalGaugeMode criticalGaugeMode, float TeamHpRate = 1, int lv = -1)
+    public void Step3Initialize(TeamConfig teamConfig, CriticalGaugeMode criticalGaugeMode, float teamHpRate = 1, int lv = -1)
     {
         FightDataRef.IsDead.Value = false;
-        BodyElementTagAndLayerSet(_TeamConfig);
+        BodyElementTagAndLayerSet(teamConfig);
         FightDataRef.FindAllSelfCollidersAndIgnoreCollision();
-        FightDataRef.ChangeLayerForLimbs(_TeamConfig.mylayer);
+        FightDataRef.ChangeLayerForLimbs(teamConfig.mylayer);
         FightDataRef.EnableAllLimbs(true);
         FightDataRef._comboHitCount.HitCount.Value = 0;
         FightDataRef.CriticalGaugeMode = criticalGaugeMode;
         if (lv == -1)
             lv = unitInfo.level;
-        float HP = SkillSet.INI_Hp(unitInfo.set.SkillEntityList(), lv) * TeamHpRate;
-        FightDataRef.CurrentHp.Value = HP;
+        var hp = SkillSet.INI_Hp(unitInfo.set.SkillEntityList(), lv) * teamHpRate;
+        FightDataRef.CurrentHp.Value = hp;
         FightDataRef.CurrentHp.Subscribe(x =>
         {
-            FightDataRef.CurrentHp.Value = Mathf.Clamp(x, 0, HP);
+            FightDataRef.CurrentHp.Value = Mathf.Clamp(x, 0, hp);
         }).AddTo(gameObject);
         
         FightDataRef.Resistance.Subscribe(x =>

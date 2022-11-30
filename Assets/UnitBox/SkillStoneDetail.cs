@@ -96,11 +96,11 @@ namespace mainMenu
             float.TryParse(row.EstimateDamage, out float at);
             if (AT != null)
             {
-                AT.text = "AT = " + SkillEntity.ATCal(at, currentStone.Level);
+                AT.text = "AT = " + FightGlobalSetting.ATCal(at, currentStone.Level);
             }
             if (HP != null)
             {
-                HP.text = "HP = " + SkillEntity.StoneHpCal(hp, currentStone.Level);
+                HP.text = "HP = " + FightGlobalSetting.StoneHpCal(hp, currentStone.Level);
             }
             StoneTargetLevel.text = "LV:" + currentStone.Level;
             transform.gameObject.SetActive(true);

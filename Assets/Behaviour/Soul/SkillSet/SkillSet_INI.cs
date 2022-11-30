@@ -18,6 +18,12 @@ public partial class SkillSet
     readonly List<string> _h2List = new ();
     readonly List<string> _h3List = new ();
     
+    /// <summary>
+    /// 根据9个技能的id对技能组信息进行一个整理和补全，
+    /// 生成技能实体。这里有个问题是，生成的技能实体在这里并没有依据等级
+    /// 设置好对应的攻击和血量
+    /// 整理三连击的连续关系。根据数据库配置好相应技能的属性。
+    /// </summary>
     public void SortNineAndTwo()
     {
         var aConfig1 = a1 != null ? SkillConfigTable.GetSkillConfig(a1) : null;
@@ -30,24 +36,23 @@ public partial class SkillSet
         var cConfig2 = c2 != null ? SkillConfigTable.GetSkillConfig(c2) : null;
         var cConfig3 = c3 != null ? SkillConfigTable.GetSkillConfig(c3) : null;
         
-        A1 = aConfig1 != null ? GetSE(a1) : null;
-        A2 = aConfig2 != null ? GetSE(a2) : null;
-        A3 = aConfig3 != null ? GetSE(a3) : null;
+        A1 = aConfig1 != null ? GetSkillEntity(a1) : null;
+        A2 = aConfig2 != null ? GetSkillEntity(a2) : null;
+        A3 = aConfig3 != null ? GetSkillEntity(a3) : null;
         
-        B1 = bConfig1 != null ? GetSE(b1) : null;
-        B2 = bConfig2 != null ? GetSE(b2) : null;
-        B3 = bConfig3 != null ? GetSE(b3) : null;
+        B1 = bConfig1 != null ? GetSkillEntity(b1) : null;
+        B2 = bConfig2 != null ? GetSkillEntity(b2) : null;
+        B3 = bConfig3 != null ? GetSkillEntity(b3) : null;
         
-        C1 = cConfig1 != null ? GetSE(c1) : null;
-        C2 = cConfig2 != null ? GetSE(c2) : null;
-        C3 = cConfig3 != null ? GetSE(c3) : null;
+        C1 = cConfig1 != null ? GetSkillEntity(c1) : null;
+        C2 = cConfig2 != null ? GetSkillEntity(c2) : null;
+        C3 = cConfig3 != null ? GetSkillEntity(c3) : null;
         
         ////////////  关于DMR 的处理，和角色本身被动有关，有别于现在的9宫  ////////////
         D = _def ? SkillEntity.GetD_SE() : null;
         M = SkillEntity.GetM_SE(_moveType);
         M.CAN_BE_CANCELLED_TO = false;
         R = SkillEntity.GetR_SE(_rushType);
-        
         //////////////////////////////////////////////////////////////////////////
         
         _h1EList.Clear();
@@ -167,8 +172,8 @@ public partial class SkillSet
     }
     
     // FormFightingSetsByNineAndTwo(string type,NineAndTwo nineAndTwo, passiveSkillConfigs passiveSkillConfigs, int AI_level) -->
-    // 1.sortNineAndTwo(passiveSkillConfigs):整理三连击的连续关系。根据数据库配置好相应技能的属性。
-    // 2.GenerateBeheviourSets():正式配置各State_Transition_Set，并且适配好所有技能组的force和casual迁移。
+    // 1.SortNineAndTwo(passiveSkillConfigs):整理三连击的连续关系。根据数据库配置好相应技能的属性。
+    // 2.GenerateBehaviourSets():正式配置各State_Transition_Set，并且适配好所有技能组的force和casual迁移。
     public IDictionary<string, SkillEntity> GenerateBehaviourSets()
     {
         IDictionary<string, SkillEntity> seDic = new Dictionary<string, SkillEntity>();
@@ -270,8 +275,7 @@ public partial class SkillSet
         return seDic;
     }
     
-    // 这个应该是所谓技能等级的着手点
-    SkillEntity GetSE(string skillId)
+    SkillEntity GetSkillEntity(string skillId)
     {
         var sc = SkillConfigTable.GetSkillConfig(skillId);
         if (sc == null)
@@ -279,23 +283,19 @@ public partial class SkillSet
             return null;
         }
         
-        if (!string.IsNullOrEmpty(sc.REAL_NAME))
-        {
-            var se = new SkillEntity(
-                sc.RECORD_ID,
-                sc.REAL_NAME,
-                sc.STATE_TYPE,
-                SkillEntity.ATCal(sc.ATTACK_WEIGHT, 1),
-                SkillEntity.StoneHpCal(sc.HP_WEIGHT, 1),
-                sc.AIAttrs,
-                null,
-                null,
-                InputKey.Null,
-                InputKey.Null,
-                sc.SP_LEVEL
-            );
-            return se;
-        }
-        return null;
+        var se = new SkillEntity(
+            sc.RECORD_ID,
+            sc.REAL_NAME,
+            sc.STATE_TYPE,
+            FightGlobalSetting.ATCal(sc.ATTACK_WEIGHT, 1),
+            FightGlobalSetting.StoneHpCal(sc.HP_WEIGHT, 1),
+            sc.AIAttrs,
+            null,
+            null,
+            InputKey.Null,
+            InputKey.Null,
+            sc.SP_LEVEL
+        );
+        return se;
     }
 }

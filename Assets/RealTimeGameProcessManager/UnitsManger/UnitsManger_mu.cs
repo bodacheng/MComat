@@ -5,12 +5,12 @@ namespace FightScene
 {
     public partial class UnitsManger : MonoBehaviour
     {
-        public void AllUnitsStartOff(bool TestMode = false)
+        public void AllUnitsStartOff(bool testMode = false)
         {
             foreach (var oneMember in TeamMembers.GetValues())
             {
                 Sensor.AddOrRemoveSharedUnits(oneMember, teamConfig.myTeam, true);
-                if (!TestMode)
+                if (!testMode)
                     oneMember._MyBehaviorRunner.ChangeToWaitingState();
                 else
                 {
@@ -47,11 +47,11 @@ namespace FightScene
             StartUnit = unit;
         }
         
-        public void Initialize_Multi(float TeamHpRate, CriticalGaugeMode teamCGMode)
+        public void Initialize_Multi(float teamHpRate, CriticalGaugeMode teamCGMode)
         {
             foreach (var center in TeamMembers.GetValues())
             {
-                center.Step3Initialize(teamConfig, teamCGMode, TeamHpRate);
+                center.Step3Initialize(teamConfig, teamCGMode, teamHpRate);
                 center.FightDataRef.IsDead.Subscribe(x => 
                 {
                     if (x)
