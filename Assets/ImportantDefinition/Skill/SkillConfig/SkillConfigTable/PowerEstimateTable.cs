@@ -19,6 +19,7 @@ public class PowerEstimateTable
 		public string REAL_NAME;
 		public string SPLevel;
 		public string EstimateDamage;
+        public string AttackCount;
 		public string HP;
 	}
 
@@ -27,6 +28,7 @@ public class PowerEstimateTable
     
     public static async UniTask Save(string type)
     {
+        Debug.Log("开始生成技能参数预估文件，等一阵子，开始可能没有反应。");
         var skillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);
         var animDic = await SKillAnalyzer.AllSkillAnims(type);
         await Save(Application.dataPath + "/" +KeywordSetting._SkillStaticAnalysis + ".csv", skillConfigs, animDic);
@@ -38,14 +40,15 @@ public class PowerEstimateTable
         string[][] grid = new string[skillConfigs.Count + 1][];
         for (int i = 0; i < grid.Length; i++)
         {
-            grid[i] = new string[5];
+            grid[i] = new string[6];
             if (i == 0)
             {
                 grid[i][0] = "RECORD_ID";
                 grid[i][1] = "REAL_NAME";
                 grid[i][2] = "SPLevel";
                 grid[i][3] = "EstimateDamage";
-                grid[i][4] = "HP";
+                grid[i][4] = "AttackCount";
+                grid[i][5] = "HP";
             }
             else
             {
@@ -55,11 +58,12 @@ public class PowerEstimateTable
                 animDic.TryGetValue(skillConfigs[i -1].REAL_NAME, out var clip);
                 if (clip != null)
                 {
-                    Debug.Log("cal this:"+ clip);
+                    //Debug.Log("cal this:"+ clip);
                 }
-                var at = await ATCal(clip, skillConfigs[i - 1].ATTACK_WEIGHT);
-                grid[i][3] = at.ToString();
-                grid[i][4] = skillConfigs[i - 1].HP_WEIGHT.ToString();
+                var pair = await ATCal(clip, skillConfigs[i - 1].ATTACK_WEIGHT);
+                grid[i][3] = pair.Item1.ToString();
+                grid[i][4] = pair.Item2.ToString();
+                grid[i][5] = skillConfigs[i - 1].HP_WEIGHT.ToString();
                 
                 var row = new Row
                 {
@@ -67,7 +71,8 @@ public class PowerEstimateTable
                     REAL_NAME = grid[i][1],
                     SPLevel = grid[i][2],
                     EstimateDamage = grid[i][3],
-                    HP = grid[i][4]
+                    AttackCount = grid[i][4],
+                    HP = grid[i][5]
                 };
                 rowList.Add(row);
             }
@@ -127,8 +132,9 @@ public class PowerEstimateTable
 		return rowList.Find(x => x.RECORD_ID == find);
 	}
     
-    static async UniTask<float> ATCal(AnimationClip clip, float skillATRef)
+    static async UniTask<(float, int) > ATCal(AnimationClip clip, float skillATRef)
     {
+        int attackCount = 0;
         float amount = 0;
         for (int i = 0; i < clip.events.Length; i++)
         {
@@ -136,18 +142,22 @@ public class PowerEstimateTable
             if (SKillAnalyzer.AttackFrameStartMethodNames.Contains(clip.events[i].functionName) && clip.events[i].intParameter != 0)
             {
                 amount += skillATRef;
+                attackCount++;
             }
             if (clip.events[i].functionName == "SetAllBodyMarkerManagersIn")
             {
                 amount += skillATRef;
+                attackCount++;
             }
             if (clip.events[i].functionName == "ClearTargets")
             {
                 amount += skillATRef;
+                attackCount++;
             }
             if (clip.events[i].functionName == "EnableMarkers")
             {
                 amount += skillATRef;
+                attackCount++;
             }
             #endregion
                         
@@ -155,25 +165,26 @@ public class PowerEstimateTable
             if (clip.events[i].functionName == "MagicForward")
             {
                 var magicObjectName = clip.events[i].stringParameter;
-                var hurtObject = await AddressablesLogic.LoadObject("HurtObjects/defaultmagic/" + magicObjectName);
+                var hurtObject = await AddressablesLogic.LoadObject("defaultmagic/" + magicObjectName + ".prefab");
                 var hitBox = hurtObject.GetComponent<HitBoxManager>();
                 if (hitBox == null)
                 {
                     Debug.Log("请检查这个技能动画:" + clip.name + ",与此伤害物体：" + magicObjectName);
                 }
                 amount += hitBox.AT_weight * skillATRef;
+                attackCount++;
                 
                 var decomposition = hurtObject.GetComponent<Decomposition>();
                 if (decomposition.Attachments.Length > 0)
                 {
                     Debug.Log("技能动画："+clip.name + " 不好机械评估");
-                    return -999f;
+                    return (-999f, attackCount);
                 }
                 
                 //// 顺便检查attachment，与攻击力预估无关 /////
                 for (int z = 0; z < decomposition.Attachments.Length; z++)
                 {
-                    var attachment = await AddressablesLogic.LoadObject("HurtObjects/defaultmagic/" + decomposition.Attachments[z]);
+                    var attachment = await AddressablesLogic.LoadObject("defaultmagic/" + decomposition.Attachments[z]+ ".prefab");
                     var attachments = attachment.GetComponent<HitBoxManager>();
                     if (attachments == null)
                     {
@@ -188,26 +199,27 @@ public class PowerEstimateTable
             if (clip.events[i].functionName == "Bullet_shoot_from_body_part" || clip.events[i].functionName == "BlastAttack")
             {
                 amount += skillATRef;
+                attackCount++;
             }
             #endregion
             
             if (clip.events[i].functionName == "PrepareOneMagic")
             {
                 var magicObjectName = clip.events[i].stringParameter;
-                var hurtObject = await AddressablesLogic.LoadObject("HurtObjects/defaultmagic/" + magicObjectName);
+                var hurtObject = await AddressablesLogic.LoadObject("defaultmagic/" + magicObjectName+ ".prefab");
                 var hitBox = hurtObject.GetComponent<HitBoxManager>();
                 var oneDamage = hitBox.AT_weight * skillATRef;
                 var decomposition = hurtObject.GetComponent<Decomposition>();
                 if (decomposition.Attachments.Length > 0)
                 {
                     Debug.Log("技能动画："+clip.name + " 不好机械评估");
-                    return -999f;
+                    return (-999f, attackCount);
                 }
                 
                 //// 顺便检查attachment，与攻击力预估无关 /////
                 for (int z = 0; z < decomposition.Attachments.Length; z++)
                 {
-                    var attachment = await AddressablesLogic.LoadObject("HurtObjects/defaultmagic/" + decomposition.Attachments[z]);
+                    var attachment = await AddressablesLogic.LoadObject("defaultmagic/" + decomposition.Attachments[z]+ ".prefab");
                     var attachments = attachment.GetComponent<HitBoxManager>();
                     if (attachments == null)
                     {
@@ -222,6 +234,7 @@ public class PowerEstimateTable
                     {
                         //Debug.Log(_clip.name + ":" + _clip.events[y].functionName + "伤害估值增加："+ oneDamege);
                         amount += oneDamage;
+                        attackCount++;
                     }
                     // 第二次遇到PrepareOneMagic说明换魔法了。一个技能两次PrepareOneMagic目前其实还没有
                     if (clip.events[y].functionName == "PrepareOneMagic")
@@ -232,6 +245,6 @@ public class PowerEstimateTable
                 }
             }
         }
-        return amount;
+        return (amount, attackCount);
     }
 }

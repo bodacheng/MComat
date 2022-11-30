@@ -7,7 +7,7 @@ using UnityEditor;
 public class LocalMasterDataToolGUI : EditorWindow {
 
     bool Initialized;
-    MasterDataTool tool = new ();
+    readonly MasterDataTool tool = new ();
     
     void OnGUI()
     {

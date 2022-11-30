@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -13,20 +12,20 @@ public partial class SKillAnalyzer
         public float startFrame;
     }
     
-    public static readonly List<string> AttackFrameStartMethodNames = new List<string>() {
+    public static readonly List<string> AttackFrameStartMethodNames = new() {
         "SetRightHandMarkerManager","SetLeftHandMarkerManager",
         "SetRightFootMarkerManager","SetLeftFootMarkerManager",
         "SetRightHandWeaponMarkerManager","SetLeftHandWeaponMarkerManager",
         "SetHeadMarkerManager","SetTailMarkerManager"
     };
     
-    static readonly List<string> AttackClearMethodNames = new List<string>() {
+    static readonly List<string> AttackClearMethodNames = new() {
         "SetRightHandMarkerManager","SetLeftHandMarkerManager",
         "SetRightFootMarkerManager","SetLeftFootMarkerManager",
         "SetRightHandWeaponMarkerManager","SetLeftHandWeaponMarkerManager",
         "SetHeadMarkerManager","SetTailMarkerManager"
     };
-    static readonly List<string> EffectsAttackFrameStartMethodNames = new List<string>()
+    static readonly List<string> EffectsAttackFrameStartMethodNames = new()
     {
         "MagicForward","Bullet_shoot_from_body_part","BlastAttack","ReleasePreparedMagic","ReleasePreparedMagicToAir"
     };
@@ -41,7 +40,7 @@ public partial class SKillAnalyzer
         {
             foreach (var path in loadPath.Result)
             {
-                Debug.Log(":"+ path);
+                //Debug.Log(":"+ path);
                 Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey);
                 if (value != null)
                 {
