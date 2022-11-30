@@ -64,36 +64,6 @@ public class FightGlobalSetting : ScriptableObject
     public static Material _shadowMaterial;
     public static int _defendHP;
     
-    public static string EffectPathDefine(Element element = Element.Null)
-    {
-        string personalEffectPath;
-        switch (element)
-        {
-            case Element.blueMagic:
-                personalEffectPath = "bluemagic";
-                break;
-            case Element.redMagic:
-                personalEffectPath = "redmagic";
-                break;
-            case Element.greenMagic:
-                personalEffectPath = "greenmagic";
-                break;
-            case Element.lightMagic:
-                personalEffectPath = "lightmagic";
-                break;
-            case Element.darkMagic:
-                personalEffectPath = "darkmagic";
-                break;
-            case Element.Null:
-                personalEffectPath = "defaultmagic";
-                break;
-            default:
-                personalEffectPath = "defaultmagic";
-                break;
-        }
-        return personalEffectPath;
-    }
-    
     public void Initialise()
     {
         _HurtObjectPreLoadCount = hurtObjectPreLoadCount;
@@ -143,5 +113,37 @@ public class FightGlobalSetting : ScriptableObject
         _EXMax = eXMax;
         
         _shadowMaterial = shadowMaterial;
+    }
+    
+    
+    
+    public static string EffectPathDefine(Element element = Element.Null)
+    {
+        string personalEffectPath;
+        switch (element)
+        {
+            case Element.blueMagic:
+                personalEffectPath = "bluemagic";
+                break;
+            case Element.redMagic:
+                personalEffectPath = "redmagic";
+                break;
+            case Element.greenMagic:
+                personalEffectPath = "greenmagic";
+                break;
+            case Element.lightMagic:
+                personalEffectPath = "lightmagic";
+                break;
+            case Element.darkMagic:
+                personalEffectPath = "darkmagic";
+                break;
+            case Element.Null:
+                personalEffectPath = "defaultmagic";
+                break;
+            default:
+                personalEffectPath = "defaultmagic";
+                break;
+        }
+        return personalEffectPath;
     }
 }

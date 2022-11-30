@@ -9,7 +9,7 @@ public class StoneListLayer : UILayer
 {
     public SkillStonesBox box;
     public SSLevelUpManager levelManager;
-    [SerializeField] SkillStoneDetail _skillStoneDetail;
+    [SerializeField] SkillStoneDetail skillStoneDetail;
     [SerializeField] Button openPowerUpBtn;
     
     string _targetStoneID;
@@ -20,16 +20,14 @@ public class StoneListLayer : UILayer
         {
             _targetStoneID = value;
             var info = Stones.Get(_targetStoneID);
-            _skillStoneDetail.gameObject.SetActive(info != null);
+            skillStoneDetail.gameObject.SetActive(info != null);
             openPowerUpBtn.gameObject.SetActive(Stones.StoneCanLevelUp(_targetStoneID));
-            if (info != null)
+            if (info == null) return;
+            openPowerUpBtn.onClick.RemoveAllListeners();
+            openPowerUpBtn.onClick.AddListener(() =>
             {
-                openPowerUpBtn.onClick.RemoveAllListeners();
-                openPowerUpBtn.onClick.AddListener(() =>
-                {
-                    levelManager.OpenLevelUpPage();
-                });
-            }
+                levelManager.OpenLevelUpPage();
+            });
         }
     }
     
@@ -46,13 +44,13 @@ public class StoneListLayer : UILayer
         box.AddFeatureToCells(CellFeature_StoneShow);
         box.FilterFeatureRefresh(true);
         box.RestFilter();
-        _skillStoneDetail.Clear();
+        skillStoneDetail.Clear();
         levelManager.INI();
     }
     
     public override void OnDestroy()
     {
-        _skillStoneDetail.Clear();
+        skillStoneDetail.Clear();
         box._tabEffects.CloseShowingTagEffects();
     }
     
@@ -64,10 +62,10 @@ public class StoneListLayer : UILayer
             if (stone != null && stone._SkillConfig != null)
             {
                 StoneCell.SelectedRender(cell, SkillStonesBox._Selected);
-                _skillStoneDetail.RefreshInfo(stone.instanceId);
+                skillStoneDetail.RefreshInfo(stone.instanceId);
                 TargetStoneID = stone.instanceId;
             }else{
-                _skillStoneDetail.Clear();
+                skillStoneDetail.Clear();
                 TargetStoneID = null;
             }
         }

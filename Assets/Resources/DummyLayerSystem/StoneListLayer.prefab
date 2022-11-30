@@ -7207,7 +7207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   box: {fileID: 7080503536421198422}
   levelManager: {fileID: 5832295999211850545}
-  _skillStoneDetail: {fileID: 1764983510227371885}
+  skillStoneDetail: {fileID: 1764983510227371885}
   openPowerUpBtn: {fileID: 5206352635495377146}
 --- !u!1 &5487491327950039118
 GameObject:
