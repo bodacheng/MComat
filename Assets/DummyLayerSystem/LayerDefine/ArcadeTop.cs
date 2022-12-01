@@ -47,14 +47,12 @@ public class ArcadeTop : UILayer
 
     void ShowNextStages()
     {
-        Debug.Log("ShowNextStages");
         ShowStages(NewStages(_currentStages.Max() + 1), _cts.Token).Forget();
     }
     
     void ShowLastStages()
     {
-        Debug.Log("ShowLastStages");
-        ShowStages(NewStages(_currentStages.Min() - 1), _cts.Token).Forget();
+        ShowStages(NewStages(_currentStages.Min() - 2), _cts.Token).Forget();
     }
     
     public async UniTask ShowStages(List<int> stages, CancellationToken token)
@@ -65,14 +63,13 @@ public class ArcadeTop : UILayer
         
         stages.Sort((a, b) => b.CompareTo(a));
         _currentStages = stages;
-        Debug.Log("Current Progress:"+ PlayerAccountInfo.Me.arcadeProcess);
+        Refresh();
         for (var index = 0; index < _currentStages.Count; index++)
         {
             if (token.IsCancellationRequested)
                 return;
             
             var stageNo = _currentStages[index];
-            Debug.Log("stageNo:" + stageNo);
             var one = await AddressablesLogic.LoadT<FightInfo>("Arcade/" + stageNo + ".asset");
             if (one == null)
             {
@@ -136,24 +133,22 @@ public class ArcadeTop : UILayer
             stageButton.transform.localPosition = Vector3.zero;
             stageButton.transform.localRotation = Quaternion.identity;
         }
-
-        Refresh();
     }
 
     void Refresh()
     {
-        nextChapter.gameObject.SetActive(PlayerAccountInfo.Me.arcadeProcess> _currentStages.Max());
+        nextChapter.gameObject.SetActive(PlayerAccountInfo.Me.arcadeProcess + 1 > _currentStages.Max());
         lastChapter.gameObject.SetActive(_currentStages.Min() > 5);
-        jumpToNewStage.gameObject.SetActive(
-            !(PlayerAccountInfo.Me.arcadeProcess >= _currentStages.Min() &&
-            PlayerAccountInfo.Me.arcadeProcess <= _currentStages.Max())
-        );
+        
+        var progressChapter = PlayerAccountInfo.Me.arcadeProcess / 5;
+        var currentChapter = _currentStages.Min() / 5;
+        
+        jumpToNewStage.gameObject.SetActive(progressChapter != currentChapter);
     }
-
-    public List<int> NewStages(int stage)
+    
+    public List<int> NewStages(int progress)
     {
-        int currentChapter = stage / 5;
-        Debug.Log("currentChapter:"+ currentChapter);
+        var currentChapter = progress / 5;
         var returnValue = new List<int>()
         {
             currentChapter * 5 + 1, 

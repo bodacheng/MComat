@@ -16,6 +16,6 @@ public class PlayerAccountInfo
     public int currentRank;
     
     public int arenaCountToday;
-    public int arcadeProcess;
+    public int arcadeProcess; // 已经打通的关卡，所以初始账号是从0开始 
     public string tutorialProgress = string.Empty;
 }
