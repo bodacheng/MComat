@@ -19,5 +19,5 @@ MonoBehaviour:
   EdExPath: 
   LocalCloudScriptPath: /Users/hakutaisei/MCombat_ios/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js
   PanelIsShown: 0
-  curMainMenuIdx: 1
+  curMainMenuIdx: 0
   curSubMenuIdx: 0

@@ -74,7 +74,7 @@ public class ArenaLayer : UILayer
     
     public void RefreshOpponent()
     {
-        var extraAwardLeft = 3 - PlayerAccountInfo.Me.ArenaCountToday;
+        var extraAwardLeft = 3 - PlayerAccountInfo.Me.arenaCountToday;
         extraAwardLeft = Mathf.Clamp(extraAwardLeft, 0, extraAwardLeft);
         extraAwardLeftToday.text = "(" + extraAwardLeft + "/3)"; 
         RefreshRankIcon(PlayerAccountInfo.Me.currentRank);

@@ -178,13 +178,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b617314d18f4261b82fa884e5a5b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _connector: {fileID: 8765277457727503852}
+  connector: {fileID: 8765277457727503852}
   container: {fileID: 4887374770362112100}
-  JumpToNewStage: {fileID: 2148228107022251843}
+  jumpToNewStage: {fileID: 2148228107022251843}
   iconPrefab: {fileID: 952904729559763101}
-  UnitIconPrefab: {fileID: 4599398632650404793, guid: ab04803d5c276457ea03841b256e73bf,
+  unitIconPrefab: {fileID: 4599398632650404793, guid: ab04803d5c276457ea03841b256e73bf,
     type: 3}
-  _NineForShow: {fileID: 5340505936988530625}
+  nineForShow: {fileID: 5340505936988530625}
   nextChapter: {fileID: 1205889481844079161}
   lastChapter: {fileID: 1984076305203297026}
 --- !u!1 &2148228107022251841
@@ -1328,12 +1328,12 @@ PrefabInstance:
     - target: {fileID: 3850318373848056875, guid: 72d00ee42a0b94b3aa1db5764acd394f,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 500
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 3850318373848056875, guid: 72d00ee42a0b94b3aa1db5764acd394f,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 500
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 3850318373848056875, guid: 72d00ee42a0b94b3aa1db5764acd394f,
         type: 3}
@@ -1378,7 +1378,7 @@ PrefabInstance:
     - target: {fileID: 3850318373848056875, guid: 72d00ee42a0b94b3aa1db5764acd394f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 53
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3850318373848056875, guid: 72d00ee42a0b94b3aa1db5764acd394f,
         type: 3}

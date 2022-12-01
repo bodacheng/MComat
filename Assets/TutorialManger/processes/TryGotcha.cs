@@ -29,7 +29,7 @@ public class TryGotcha : TutorialProcess
                             },
                             (x) =>
                             {
-                                PlayerAccountInfo.Me.TutorialProgress = "GotchaFinished";
+                                PlayerAccountInfo.Me.tutorialProgress = "GotchaFinished";
                             }
                         );
                     }
@@ -55,6 +55,6 @@ public class TryGotcha : TutorialProcess
 
     public override bool CanEnterOtherProcess()
     {
-        return PlayerAccountInfo.Me.TutorialProgress == "GotchaFinished" && _gotchaResultLayer != null && _gotchaResultLayer.ShowFinished;
+        return PlayerAccountInfo.Me.tutorialProgress == "GotchaFinished" && _gotchaResultLayer != null && _gotchaResultLayer.ShowFinished;
     }
 }

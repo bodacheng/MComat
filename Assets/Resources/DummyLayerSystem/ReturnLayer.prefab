@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3875049384089849796}
   - component: {fileID: 3875049384089849795}
   m_Layer: 5
-  m_Name: Button_Back
+  m_Name: back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -248,5 +248,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6c66ea8e4544b1e9fdd61f99df7b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReturnButton: {fileID: 3875049384089849795}
+  returnButton: {fileID: 3875049384089849795}
   maskBg: {fileID: 4239098444007544518}

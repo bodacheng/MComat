@@ -66,7 +66,7 @@ public class SkillEditTry : TutorialProcess
                             },
                             (x) =>
                             {
-                                PlayerAccountInfo.Me.TutorialProgress = TutorialProgressLabel;
+                                PlayerAccountInfo.Me.tutorialProgress = TutorialProgressLabel;
                                 skillEditFinished = true;
                                 _skillEditLayer.NineSlot.confirmBtnIndicator.SetActive(false);
                             }

@@ -37,7 +37,7 @@ public class TeamEdit : TutorialProcess
                         },
                         (x) =>
                         {
-                            PlayerAccountInfo.Me.TutorialProgress = "Finished";
+                            PlayerAccountInfo.Me.tutorialProgress = "Finished";
                         }
                     );
                 }

@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using System.Threading;
 using DummyLayerSystem;
-using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine;
 
 public class ReturnLayer : UILayer
 {
-    [SerializeField] Button ReturnButton;
+    [SerializeField] Button returnButton;
     [SerializeField] GameObject maskBg;
     
     public static readonly List<Func<bool>> ReturnMissionList = new ();
     
     void Setup()
     {
-        ReturnButton.onClick.RemoveAllListeners();
-        ReturnButton.onClick.AddListener(POP);
+        returnButton.onClick.RemoveAllListeners();
+        returnButton.onClick.AddListener(POP);
     }
     
     public static void POP()
@@ -65,10 +64,10 @@ public class ReturnLayer : UILayer
                 cts.Cancel();
             }
             
-            layer.ReturnButton.onClick.AddListener(() =>
+            layer.returnButton.onClick.AddListener(() =>
             {
                 triggerCts();
-                layer.ReturnButton.onClick.RemoveListener(triggerCts);
+                layer.returnButton.onClick.RemoveListener(triggerCts);
             });
         }
     }

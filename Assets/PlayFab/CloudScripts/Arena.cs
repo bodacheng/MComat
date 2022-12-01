@@ -156,7 +156,7 @@ public partial class CloudScript
                 {
                     success.Invoke(PlayerAccountInfo.Me.arenaPoint , currentPointInt, DMInt);
                     PlayerAccountInfo.Me.arenaPoint = currentPointInt;
-                    PlayerAccountInfo.Me.ArenaCountToday = arenaCountTodayInt;
+                    PlayerAccountInfo.Me.arenaCountToday = arenaCountTodayInt;
                 }
             },
             error => {

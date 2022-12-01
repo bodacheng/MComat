@@ -43,7 +43,7 @@ public class TutorialRunner
         
         bool StageOneFinished()
         {
-            return PlayerAccountInfo.Me.TutorialProgress == "StageOneFinished";
+            return PlayerAccountInfo.Me.tutorialProgress == "StageOneFinished";
         }
         
         var waitFighting = new WaitProcess(StageOneFinished);
@@ -130,7 +130,7 @@ public class TutorialRunner
     public void TutorialCheck()
     {
         // 在以下的分歧之前，账户信息必须是最新，否则反应不到账户真实进度。
-        switch (PlayerAccountInfo.Me.TutorialProgress)
+        switch (PlayerAccountInfo.Me.tutorialProgress)
         {
             case "Started":
                 Main.GenerateStep1Tutorial();

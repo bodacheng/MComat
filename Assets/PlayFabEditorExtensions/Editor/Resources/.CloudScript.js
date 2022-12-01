@@ -81,7 +81,7 @@ handlers.buildBasicData = function (args, context) {
             PlayFabId: currentPlayerId,
             Data: {
                 "stone_box_size": args.stone_box_size,
-                "last_Level_completed": 0,
+                "arcadeProcess": 0,
                 "playerInitialized" : true,
                 "arenaCountToday" : 0
             }
@@ -232,10 +232,10 @@ handlers.completedLevel = function (args, context) {
     
     var playerData = server.GetUserReadOnlyData({
         PlayFabId: currentPlayerId,
-        Keys: ["last_Level_completed"]
+        Keys: ["arcadeProcess"]
     });
     
-    var lastLevelCompleted = playerData.Data["last_Level_completed"];
+    var lastLevelCompleted = playerData.Data["arcadeProcess"];
     
     // 传递过来的这个level是玩家试图更新到的进度，但这个数值来自客户端，并不能完全信任
     // 关卡更新机制我们只有一个逻辑就是一次只更新一关
@@ -252,7 +252,7 @@ handlers.completedLevel = function (args, context) {
         server.UpdateUserReadOnlyData({
             PlayFabId: currentPlayerId,
             Data: {
-                "last_Level_completed" : newLevelCompleted // 关卡进度没有上限吗
+                "arcadeProcess" : newLevelCompleted // 关卡进度没有上限吗
             }
         });
         

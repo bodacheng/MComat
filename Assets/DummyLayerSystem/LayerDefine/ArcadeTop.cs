@@ -4,73 +4,82 @@ using UnityEngine.UI;
 using mainMenu;
 using System;
 using System.Linq;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using ModelView;
 using Singleton;
 
 public class ArcadeTop : UILayer
 {
-    [SerializeField] DedicatedCameraConnector _connector;
+    [SerializeField] DedicatedCameraConnector connector;
     [SerializeField] RectTransform container;
-    [SerializeField] Button JumpToNewStage;
+    [SerializeField] Button jumpToNewStage;
     [SerializeField] StageButton iconPrefab;
-    [SerializeField] HeroIcon UnitIconPrefab;
-    [SerializeField] NineForShow _NineForShow;
+    [SerializeField] HeroIcon unitIconPrefab;
+    [SerializeField] NineForShow nineForShow;
 
     [SerializeField] Button nextChapter;
     [SerializeField] Button lastChapter;
 
-    private List<int> currentStages;
-    
-    public void Setup()
+    List<int> _currentStages;
+    private CancellationTokenSource _cts;
+    public void Setup(CancellationTokenSource cts)
     {
+        this._cts = cts; 
         nextChapter.onClick.AddListener(ShowNextStages);
         lastChapter.onClick.AddListener(ShowLastStages);
-        JumpToNewStage.onClick.AddListener(ToNew);
+        jumpToNewStage.onClick.AddListener(ToNew);
     }
     
     void IconButtonFeature(HeroIcon heroIcon)
     {
         // 显示模型
-        _connector._ShowModel(heroIcon.unitConfig.RECORD_ID).Forget();
+        connector._ShowModel(heroIcon.unitConfig.RECORD_ID).Forget();
         // 显示技能组
-        _NineForShow.ShowStones_DataInfo(heroIcon.unitInfo);
+        nineForShow.ShowStones_DataInfo(heroIcon.unitInfo);
     }
 
     void ToNew()
     {
-        var stages = NewStages(PlayerAccountInfo.Me.ArcadeProcess);
-        ShowStages(stages).Forget();
+        var stages = NewStages(PlayerAccountInfo.Me.arcadeProcess);
+        ShowStages(stages, _cts.Token).Forget();
     }
 
     void ShowNextStages()
     {
-        ShowStages(NewStages(currentStages.Max() + 1)).Forget();
+        Debug.Log("ShowNextStages");
+        ShowStages(NewStages(_currentStages.Max() + 1), _cts.Token).Forget();
     }
     
     void ShowLastStages()
     {
-        ShowStages(NewStages(currentStages.Min() - 1)).Forget();
+        Debug.Log("ShowLastStages");
+        ShowStages(NewStages(_currentStages.Min() - 1), _cts.Token).Forget();
     }
     
-    public async UniTask ShowStages(List<int> stages)
+    public async UniTask ShowStages(List<int> stages, CancellationToken token)
     {
         foreach (Transform child in container) {
             Destroy(child.gameObject);
         }
         
         stages.Sort((a, b) => b.CompareTo(a));
-        currentStages = stages;
-        for (var index = 0; index < currentStages.Count; index++)
+        _currentStages = stages;
+        Debug.Log("Current Progress:"+ PlayerAccountInfo.Me.arcadeProcess);
+        for (var index = 0; index < _currentStages.Count; index++)
         {
-            var stageNo = currentStages[index];
+            if (token.IsCancellationRequested)
+                return;
+            
+            var stageNo = _currentStages[index];
+            Debug.Log("stageNo:" + stageNo);
             var one = await AddressablesLogic.LoadT<FightInfo>("Arcade/" + stageNo + ".asset");
             if (one == null)
             {
                 continue;
             }
             
-            var stageButton = Instantiate(iconPrefab);
+            var stageButton = Instantiate(iconPrefab, container, true);
             
             void LoadThisStage()
             {
@@ -94,7 +103,7 @@ public class ArcadeTop : UILayer
                     await UnitIconDic.Load(one.FightMembers.EnemySets.GetValues()[i].r_id);
                 }
 
-                var heroIcons = await MemberInfosShow(one.FightMembers.EnemySets.GetValues(), stageButton.IconsT);
+                var heroIcons = await UnitInfosShow(one.FightMembers.EnemySets.GetValues(), stageButton.IconsT);
                 for (var i = 0; i < heroIcons.Count; i++)
                 {
                     var heroIcon = heroIcons[i];
@@ -102,7 +111,7 @@ public class ArcadeTop : UILayer
                     heroIcon.iconButton.onClick.AddListener(() => { IconButtonFeature(heroIcon); });
 
                     // 默认显示章节boss
-                    if (stageNo == currentStages.Max() && i == 0)
+                    if (stageNo == _currentStages.Max() && i == 0)
                     {
                         IconButtonFeature(heroIcon);
                     }
@@ -113,8 +122,9 @@ public class ArcadeTop : UILayer
 
             var btnAnimator = stageButton.GetComponent<Animator>();
             if (btnAnimator != null)
-                btnAnimator.enabled = PlayerAccountInfo.Me.ArcadeProcess + 1 == stageNo;
-            if (PlayerAccountInfo.Me.ArcadeProcess + 1 >= stageNo)
+                btnAnimator.enabled = PlayerAccountInfo.Me.arcadeProcess + 1 == stageNo;
+            
+            if (PlayerAccountInfo.Me.arcadeProcess + 1 >= stageNo)
             {
                 stageButton.ChangeColorOfIcons(true);
             }
@@ -122,8 +132,7 @@ public class ArcadeTop : UILayer
             {
                 stageButton.ChangeColorOfIcons(false);
             }
-
-            stageButton.transform.SetParent(container);
+            
             stageButton.transform.localPosition = Vector3.zero;
             stageButton.transform.localRotation = Quaternion.identity;
         }
@@ -133,17 +142,18 @@ public class ArcadeTop : UILayer
 
     void Refresh()
     {
-        nextChapter.gameObject.SetActive(PlayerAccountInfo.Me.ArcadeProcess> currentStages.Max());
-        lastChapter.gameObject.SetActive(currentStages.Min() > 5);
-        JumpToNewStage.gameObject.SetActive(
-            !(PlayerAccountInfo.Me.ArcadeProcess >= currentStages.Min() &&
-            PlayerAccountInfo.Me.ArcadeProcess <= currentStages.Max())
+        nextChapter.gameObject.SetActive(PlayerAccountInfo.Me.arcadeProcess> _currentStages.Max());
+        lastChapter.gameObject.SetActive(_currentStages.Min() > 5);
+        jumpToNewStage.gameObject.SetActive(
+            !(PlayerAccountInfo.Me.arcadeProcess >= _currentStages.Min() &&
+            PlayerAccountInfo.Me.arcadeProcess <= _currentStages.Max())
         );
     }
 
     public List<int> NewStages(int stage)
     {
         int currentChapter = stage / 5;
+        Debug.Log("currentChapter:"+ currentChapter);
         var returnValue = new List<int>()
         {
             currentChapter * 5 + 1, 
@@ -155,16 +165,16 @@ public class ArcadeTop : UILayer
         return returnValue;
     }
     
-    async UniTask<List<HeroIcon>> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)
+    async UniTask<List<HeroIcon>> UnitInfosShow(List<UnitInfo> heroSets, RectTransform showT)
     {
-        foreach (Transform transform in _ShowT)
+        foreach (Transform t in showT)
         {
-            Destroy(transform.gameObject);
+            Destroy(t.gameObject);
         }
         var icons = new List<HeroIcon>();
-        foreach (var unitInfo in HeroSets)
+        foreach (var unitInfo in heroSets)
         {
-            var v = await HeroIcon.ArrangeHeroIconToT(UnitIconPrefab, unitInfo, _ShowT);
+            var v = await HeroIcon.ArrangeHeroIconToT(unitIconPrefab, unitInfo, showT);
             icons.Add(v);
         }
         for (var i = 0; i < icons.Count; i++)

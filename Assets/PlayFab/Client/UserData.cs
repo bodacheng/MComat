@@ -21,7 +21,7 @@ public partial class PlayFabReadClient
                 
                 if (obj.Data.ContainsKey("TutorialProgress"))
                 {
-                    PlayerAccountInfo.Me.TutorialProgress = obj.Data["TutorialProgress"].Value;
+                    PlayerAccountInfo.Me.tutorialProgress = obj.Data["TutorialProgress"].Value;
                 }
                 else
                 {
@@ -120,19 +120,19 @@ public partial class PlayFabReadClient
             new GetUserDataRequest()
             {
                 PlayFabId = PlayerAccountInfo.Me.PlayFabId,
-                Keys = new List<string>() { "last_Level_completed", "stone_box_size", "arenaCountToday" }
+                Keys = new List<string>() { "arcadeProcess", "stone_box_size", "arenaCountToday" }
             },
             (obj) => {
-                if (obj.Data.ContainsKey("last_Level_completed"))
+                if (obj.Data.ContainsKey("arcadeProcess"))
                 {
-                    PlayerAccountInfo.Me.ArcadeProcess = int.Parse(obj.Data["last_Level_completed"].Value);
+                    PlayerAccountInfo.Me.arcadeProcess = int.Parse(obj.Data["arcadeProcess"].Value);
                 }
                 else
                 {
-                    PlayerAccountInfo.Me.ArcadeProcess = 0;
+                    PlayerAccountInfo.Me.arcadeProcess = 0;
                 }
                 
-                PlayerAccountInfo.Me.ArenaCountToday = 
+                PlayerAccountInfo.Me.arenaCountToday = 
                     obj.Data.ContainsKey("arenaCountToday") ? int.Parse(obj.Data["arenaCountToday"].Value) : 0;
                 
                 finished.Invoke(true);

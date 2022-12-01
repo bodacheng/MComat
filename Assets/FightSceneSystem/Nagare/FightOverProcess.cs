@@ -53,7 +53,7 @@ namespace FightScene
                                 var reward_DIA = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
                                 
                                 int levelInt = Convert.ToInt32(level);
-                                PlayerAccountInfo.Me.ArcadeProcess = levelInt;
+                                PlayerAccountInfo.Me.arcadeProcess = levelInt;
                                 int reward_GD_Int = Convert.ToInt32(reward_GD);
                                 int reward_GM_Int = Convert.ToInt32(reward_DIA);
 
@@ -64,7 +64,7 @@ namespace FightScene
                         
                         if (NetFightScene.Fight.ID == "1")
                         {
-                            PlayerAccountInfo.Me.TutorialProgress = "StageOneFinished";
+                            PlayerAccountInfo.Me.tutorialProgress = "StageOneFinished";
                             PlayFabReadClient.UpdateUserData(
                                 new UpdateUserDataRequest()
                                 {
