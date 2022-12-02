@@ -5,7 +5,7 @@ using UnityEditor;
 using System.Linq;
 using mainMenu;
 
-public partial class FightMemberManager {
+public partial class StageEditor {
 
     int selectSkillExLevel = -1;
     readonly int[] exLevels = {-1, 0, 1, 2, 3 };
@@ -60,7 +60,7 @@ public partial class FightMemberManager {
         
         SkillStonesBox.StoneFilterForm filterForm = new SkillStonesBox.StoneFilterForm
         {
-            Type = focusingType,
+            Type = _focusingType,
             Close = skillrangeselectfilter[0],
             Near = skillrangeselectfilter[1],
             Far = skillrangeselectfilter[2],

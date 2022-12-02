@@ -3,31 +3,31 @@ using System.Collections.Generic;
 using UnityEditor;
 using System.Linq;
 
-public partial class FightMemberManager {
+public partial class StageEditor {
     
     string UnitSelect()
     {
         // 角色选择
-        var focusingUnitConfig = Units.RowToUnitConfigInfo(Units.Find_RECORD_ID(focusingUnitInfo.r_id));
-        focusingType = focusingUnitConfig != null ? EditorGUILayout.TextField("Unit Type", focusingUnitConfig.TYPE) : EditorGUILayout.TextField("Unit Type", focusingType);
-        UnitIDsAndNames = new Dictionary<string, string>() { { "-1", "空" } };
-        foreach(var keyValuePair in Units.GetMonsterIDsAndNamesDic(focusingType))
+        var focusingUnitConfig = Units.RowToUnitConfigInfo(Units.Find_RECORD_ID(_focusingUnitInfo.r_id));
+        _focusingType = focusingUnitConfig != null ? EditorGUILayout.TextField("Unit Type", focusingUnitConfig.TYPE) : EditorGUILayout.TextField("Unit Type", _focusingType);
+        _unitIDsAndNames = new Dictionary<string, string>() { { "-1", "空" } };
+        foreach(var keyValuePair in Units.GetMonsterIDsAndNamesDic(_focusingType))
         {
-            UnitIDsAndNames.Add(keyValuePair.Key, keyValuePair.Value);
+            _unitIDsAndNames.Add(keyValuePair.Key, keyValuePair.Value);
         }
         var index = 0;
-        foreach (var keyValuePair in UnitIDsAndNames)
+        foreach (var keyValuePair in _unitIDsAndNames)
         {
-            if (keyValuePair.Key == focusingUnitInfo.r_id)
+            if (keyValuePair.Key == _focusingUnitInfo.r_id)
             {
                 selectedUnitIndex = index;
                 break;
             }
             index++;
         }
-        selectedUnitIndex = EditorGUILayout.Popup("角色名：", selectedUnitIndex, UnitIDsAndNames.Values.ToArray());
-        focusingUnitInfo.r_id =  UnitIDsAndNames.Count > selectedUnitIndex ? UnitIDsAndNames.ElementAt(selectedUnitIndex).Key : null;
-        return focusingUnitInfo.r_id;
+        selectedUnitIndex = EditorGUILayout.Popup("角色名：", selectedUnitIndex, _unitIDsAndNames.Values.ToArray());
+        _focusingUnitInfo.r_id =  _unitIDsAndNames.Count > selectedUnitIndex ? _unitIDsAndNames.ElementAt(selectedUnitIndex).Key : null;
+        return _focusingUnitInfo.r_id;
     }
 }
 #endif

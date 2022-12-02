@@ -57,7 +57,7 @@ public class LocalMasterDataToolGUI : EditorWindow {
         
         if (GUILayout.Button("(playFab)输出Json格式Arcade关卡报酬定义文件"))
         {
-            FightMemberManager.ExportStageAward();
+            StageEditor.ExportStageAward();
         }
     }
 }

@@ -3,25 +3,26 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Arena/ArenaLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Arena/ArenaLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BOWeaponSystem/Decomposition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BOWeaponSystem/Decomposition.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ReturnLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ReturnLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/7.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/7.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightOverProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightOverProcess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/PlayerAccountInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/PlayerAccountInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/ArcadeFrontPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/ArcadeFrontPage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/Client/UserData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/Client/UserData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Arena.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Arena.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArcadeTop.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArcadeTop.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ReturnLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ReturnLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/TutorialRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/TutorialRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/SkillEditTry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/SkillEditTry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/TeamEdit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/TeamEdit.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/TryGotcha.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/TryGotcha.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Editor/MyEditorWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/MyEditorWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/3.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/3.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MasterDataTool/MasterDataToolGUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MasterDataTool/MasterDataToolGUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightInfoGUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightInfoGUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/BasicState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/BasicState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/FightMemberManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/FightMemberManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/Members.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/Members.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SelectInheretSkill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SelectInheretSkill.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSelect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSetComment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSetComment.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SlotFocus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SlotFocus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageAwards.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageAwards.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/UI_Ini.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/UI_Ini.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/UnitSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/UnitSelect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StageManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/StageEditorWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StageManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/StageEditorWindow.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,11 +43,14 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c884d993da6242ae98d95c11d4715907157400/22/52ee20c7/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4379fcb5ffcd422abdabe963856ef06326000/3a/2299bfc9/DOTween.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Runtime/Audio/AudioPlayableAsset.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Interfaces/IMayRequireDepthTexture.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../p3-client/Assets/App/Scripts/Contents/Quest/QuestListItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/RankingPage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4379fcb5ffcd422abdabe963856ef06326000/1d/7d9a4d3f/TweenerCore`3.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.31/UnityEngine.TestRunner/Assertions/LogScope/ILogScope.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/RankingLayer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Nodes/Utility/Logic/IsFrontFaceNode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/Addressables.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2FCSthWut6QlSsM5jlbY0pKTcgQ" />

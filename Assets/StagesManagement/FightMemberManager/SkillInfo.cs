@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor;
 using Skill;
 
-public partial class FightMemberManager {
+public partial class StageEditor {
     
     readonly int[] exoptions = { 0, 1, 2, 3 };
     readonly string[] exoptions_display = {"normal","ex1","ex2","ex3"};

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Json;
 using Newtonsoft.Json;
 
-public partial class FightMemberManager
+public partial class StageEditor
 {
     public class StageAward
     {

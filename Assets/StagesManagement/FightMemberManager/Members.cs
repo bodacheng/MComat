@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
-public partial class FightMemberManager {
+public partial class StageEditor {
     
     int selectedUnitIndex;
     string focusingPosID;
@@ -15,22 +15,22 @@ public partial class FightMemberManager {
         {
             selectedUnitIndex = 0;
             focusingPosID = 1.ToString();
-            focusingUnitInfo = target.EnemySets.Get(0, 1);
-            targetSlot = 0;
+            _focusingUnitInfo = target.EnemySets.Get(0, 1);
+            _targetSlot = 0;
         }
         if (GUILayout.Button("mid", (focusingPosID != 0.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {
             selectedUnitIndex = 0;
             focusingPosID = 0.ToString();
-            focusingUnitInfo = target.EnemySets.Get(0, 0);
-            targetSlot = 0;
+            _focusingUnitInfo = target.EnemySets.Get(0, 0);
+            _targetSlot = 0;
         }
         if (GUILayout.Button("right", (focusingPosID != 2.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {
             selectedUnitIndex = 0;
             focusingPosID = 2.ToString();
-            focusingUnitInfo = target.EnemySets.Get(0, 2);
-            targetSlot = 0;
+            _focusingUnitInfo = target.EnemySets.Get(0, 2);
+            _targetSlot = 0;
         }
         GUILayout.EndHorizontal();
     }

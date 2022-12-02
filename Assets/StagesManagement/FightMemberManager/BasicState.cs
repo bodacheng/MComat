@@ -1,7 +1,7 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
 
-public partial class FightMemberManager {
+public partial class StageEditor {
 
     void BasicStates(UnitInfo CharInfo)
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
-public partial class FightMemberManager {
+public partial class StageEditor {
 
     SkillSet.SkillEditError se;
     
@@ -11,9 +11,9 @@ public partial class FightMemberManager {
         // 技能组评价
         GUILayout.BeginHorizontal();
         se = SkillSet.CheckEdit(
-            focusingUnitInfo.set.GetA1Config()?.RECORD_ID,focusingUnitInfo.set.GetA2Config()?.RECORD_ID, focusingUnitInfo.set.GetA3Config()?.RECORD_ID,
-            focusingUnitInfo.set.GetB1Config()?.RECORD_ID,focusingUnitInfo.set.GetB2Config()?.RECORD_ID, focusingUnitInfo.set.GetB3Config()?.RECORD_ID,
-            focusingUnitInfo.set.GetC1Config()?.RECORD_ID,focusingUnitInfo.set.GetC2Config()?.RECORD_ID, focusingUnitInfo.set.GetC3Config()?.RECORD_ID);
+            _focusingUnitInfo.set.GetA1Config()?.RECORD_ID,_focusingUnitInfo.set.GetA2Config()?.RECORD_ID, _focusingUnitInfo.set.GetA3Config()?.RECORD_ID,
+            _focusingUnitInfo.set.GetB1Config()?.RECORD_ID,_focusingUnitInfo.set.GetB2Config()?.RECORD_ID, _focusingUnitInfo.set.GetB3Config()?.RECORD_ID,
+            _focusingUnitInfo.set.GetC1Config()?.RECORD_ID,_focusingUnitInfo.set.GetC2Config()?.RECORD_ID, _focusingUnitInfo.set.GetC3Config()?.RECORD_ID);
             
         switch (se)
         {

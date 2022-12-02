@@ -6,7 +6,7 @@ using UnityEngine;
 [CustomEditor(typeof(FightInfo))]
 public class FightInfoGUI : Editor
 {
-    private FightMemberManager _fightMemberManager;
+    private StageEditor _stageEditor;
     private bool initialized = false;
     public override void OnInspectorGUI()
     {
@@ -17,10 +17,10 @@ public class FightInfoGUI : Editor
             Units.LoadUnitConfigs();
             SkillConfigTable.LoadAllSkillConfigs();
             fightInfo.Open();
-            _fightMemberManager = new FightMemberManager();
+            _stageEditor = new StageEditor();
             initialized = true;
         }
-        _fightMemberManager.OnGUIView(fightInfo.FightMembers);
+        _stageEditor.OnGUIView(fightInfo.FightMembers);
         
         if (GUILayout.Button("Save"))
         {

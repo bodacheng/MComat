@@ -4,7 +4,7 @@ using UnityEditor;
 using System.Linq;
 using Skill;
 
-public partial class FightMemberManager {
+public partial class StageEditor {
 
     SkillConfig InhereSks;
     IDictionary<string, string> SelectInhere;

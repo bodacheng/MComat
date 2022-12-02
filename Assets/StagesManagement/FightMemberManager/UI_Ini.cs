@@ -1,7 +1,7 @@
 ﻿#if UNITY_EDITOR
 using UnityEngine;
 
-public partial class FightMemberManager{
+public partial class StageEditor{
 
     bool Initialized;
     GUIStyle ButtonStyle;

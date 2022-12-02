@@ -2,7 +2,7 @@
 using UnityEngine;
 using Skill;
 
-public partial class FightMemberManager {
+public partial class StageEditor {
 
     string A1ButtonText = "A1";
     string A2ButtonText = "A2";
@@ -25,117 +25,117 @@ public partial class FightMemberManager {
             switch(_targetSlot)
             {
                 case 1:
-                nowSkillID = focusingUnitInfo.set.a1;
+                nowSkillID = _focusingUnitInfo.set.a1;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 A1ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 2:
-                nowSkillID = focusingUnitInfo.set.a2;
+                nowSkillID = _focusingUnitInfo.set.a2;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 A2ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 3:
-                nowSkillID = focusingUnitInfo.set.a3;
+                nowSkillID = _focusingUnitInfo.set.a3;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 A3ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 4:
-                nowSkillID = focusingUnitInfo.set.b1;
+                nowSkillID = _focusingUnitInfo.set.b1;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 B1ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 5:
-                nowSkillID = focusingUnitInfo.set.b2;
+                nowSkillID = _focusingUnitInfo.set.b2;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 B2ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 6:
-                nowSkillID = focusingUnitInfo.set.b3;
+                nowSkillID = _focusingUnitInfo.set.b3;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 B3ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 7:
-                nowSkillID = focusingUnitInfo.set.c1;
+                nowSkillID = _focusingUnitInfo.set.c1;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 C1ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 8:
-                nowSkillID = focusingUnitInfo.set.c2;
+                nowSkillID = _focusingUnitInfo.set.c2;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 C2ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 9:
-                nowSkillID = focusingUnitInfo.set.c1;
+                nowSkillID = _focusingUnitInfo.set.c1;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 C3ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
             }
-            var kv = SkillConfigTable.GetPassiveSkill(focusingUnitInfo.r_id) ?? new SkillConfig
+            var kv = SkillConfigTable.GetPassiveSkill(_focusingUnitInfo.r_id) ?? new SkillConfig
             {
                 RECORD_ID = null
             };
-            GUI.backgroundColor = Repeated(focusingUnitInfo.set, nowSkillID) ? Color.red : (defaultSkillConfig != null ? kv.RECORD_ID == nowSkillID ? new Color(0.2f, 0.7f, 1) : Color.yellow : Color.white);
+            GUI.backgroundColor = Repeated(_focusingUnitInfo.set, nowSkillID) ? Color.red : (defaultSkillConfig != null ? kv.RECORD_ID == nowSkillID ? new Color(0.2f, 0.7f, 1) : Color.yellow : Color.white);
         }
         
         SlotAnalyze(1);
-        if (GUILayout.Button(A1ButtonText, targetSlot == 1 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(A1ButtonText, _targetSlot == 1 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
             selectedInhereskill = 0;
-            targetSlot = 1;
+            _targetSlot = 1;
         }
         SlotAnalyze(2);
-        if (GUILayout.Button(A2ButtonText, targetSlot == 2 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(A2ButtonText, _targetSlot == 2 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
             selectedInhereskill = 0;
-            targetSlot = 2;
+            _targetSlot = 2;
         }
         SlotAnalyze(3);
-        if (GUILayout.Button(A3ButtonText, targetSlot == 3 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(A3ButtonText, _targetSlot == 3 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
             selectedInhereskill = 0;
-            targetSlot = 3;
+            _targetSlot = 3;
         }
         GUILayout.EndHorizontal();
         
         GUILayout.BeginHorizontal();
         SlotAnalyze(4);
-        if (GUILayout.Button(B1ButtonText, targetSlot == 4 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(B1ButtonText, _targetSlot == 4 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
             selectedInhereskill = 0;
-            targetSlot = 4;
+            _targetSlot = 4;
         }
         SlotAnalyze(5);
-        if (GUILayout.Button(B2ButtonText, targetSlot == 5 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(B2ButtonText, _targetSlot == 5 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
             selectedInhereskill = 0;
-            targetSlot = 5;
+            _targetSlot = 5;
         }
         SlotAnalyze(6);
-        if (GUILayout.Button(B3ButtonText, targetSlot == 6 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(B3ButtonText, _targetSlot == 6 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
             selectedInhereskill = 0;
-            targetSlot = 6;
+            _targetSlot = 6;
         }
         GUILayout.EndHorizontal();
         
         GUILayout.BeginHorizontal();
         SlotAnalyze(7);
-        if (GUILayout.Button(C1ButtonText, targetSlot == 7 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(C1ButtonText, _targetSlot == 7 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
             selectedInhereskill = 0;
-            targetSlot = 7;
+            _targetSlot = 7;
         }
         SlotAnalyze(8);
-        if (GUILayout.Button(C2ButtonText, targetSlot == 8 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(C2ButtonText, _targetSlot == 8 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
             selectedInhereskill = 0;
-            targetSlot = 8;
+            _targetSlot = 8;
         }
         SlotAnalyze(9);
-        if (GUILayout.Button(C3ButtonText, targetSlot == 9 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(C3ButtonText, _targetSlot == 9 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
             selectedInhereskill = 0;
-            targetSlot = 9;
+            _targetSlot = 9;
         }
         GUI.backgroundColor = Color.white;
         GUILayout.EndHorizontal();
