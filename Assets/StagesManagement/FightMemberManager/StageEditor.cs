@@ -1,5 +1,6 @@
 ﻿#if UNITY_EDITOR
 using System.Collections.Generic;
+using mainMenu;
 using UnityEngine;
 using Skill;
 
@@ -56,13 +57,44 @@ public partial class StageEditor
         // 九宫格
         NineSlotPart();
         
-        if (GUILayout.Button("推荐", ButtonStyle))
+        GUILayout.BeginHorizontal();
+
+        void Random(SkillStonesBox.StoneFilterForm form)
         {
             _targetSlot = 0;
             if (string.IsNullOrEmpty(_focusingType))
                 return;
-            _focusingUnitInfo.set = SkillSet.RandomSkillSet(_focusingType,  null,  false);
+            
+            _focusingUnitInfo.set = SkillSet.RandomSkillSet(_focusingType,  null,  false, form);
         }
+        if (GUILayout.Button("一般", ButtonStyle))
+        {
+            var form = new SkillStonesBox.StoneFilterForm
+            {
+                Type = _focusingType,
+                ExType = new[] { 0 }
+            };
+            Random(form);
+        }
+        if (GUILayout.Button("中boss", ButtonStyle))
+        {
+            var form = new SkillStonesBox.StoneFilterForm
+            {
+                Type = _focusingType,
+                ExType = new[] { 0, 1, 2 }
+            };
+            Random(form);
+        }
+        if (GUILayout.Button("大boss", ButtonStyle))
+        {
+            var form = new SkillStonesBox.StoneFilterForm
+            {
+                Type = _focusingType,
+                ExType = new[] { 2, 3 }
+            };
+            Random(form);
+        }
+        GUILayout.EndHorizontal();
                 
         // 技能组评价
         SkillSetComment();

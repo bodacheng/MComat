@@ -28,10 +28,10 @@ public partial class SkillSet
 
     public static List<int> RemainSlotSPLevelCal(SkillSet current)
     {
-        int remainSlotCount = 9 - current.SkillIDList().Count;
-        int currentPoint = SkillBalancePoint(current.a1, current.a2, current.a3, current.b1, current.b2, current.b3, current.c1, current.c2, current.c3);
-        int point = currentPoint + (remainSlotCount - 1) * 10;
-        List<int> returnValue = new List<int>();
+        var remainSlotCount = 9 - current.SkillIDList().Count;
+        var currentPoint = SkillBalancePoint(current.a1, current.a2, current.a3, current.b1, current.b2, current.b3, current.c1, current.c2, current.c3);
+        var point = currentPoint + (remainSlotCount - 1) * 10;
+        var returnValue = new List<int>();
         if (point >= 30)
             returnValue.Add(3);
         if (point >= 20)
