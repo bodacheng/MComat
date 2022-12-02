@@ -56,13 +56,12 @@ public partial class StageEditor
         // 九宫格
         NineSlotPart();
         
-        if (GUILayout.Button("推荐（暂时未适配原生技能自动适应）", ButtonStyle))
+        if (GUILayout.Button("推荐", ButtonStyle))
         {
             _targetSlot = 0;
             if (string.IsNullOrEmpty(_focusingType))
                 return;
-            var inherentSkills = SkillConfigTable.GetPassiveSkill(_focusingUnitInfo.r_id);
-            _focusingUnitInfo.set = SkillSet.RandomSkillSet(_focusingType,  inherentSkills?.RECORD_ID,  false);
+            _focusingUnitInfo.set = SkillSet.RandomSkillSet(_focusingType,  null,  false);
         }
                 
         // 技能组评价
@@ -74,11 +73,7 @@ public partial class StageEditor
         // 技能选择
         if (GetFocusSkillId() == null)
         {
-            SelectInher(_focusingUnitInfo.r_id);
-            if (selectedInhereskill == 0)
-            {
-                SkillSelect();
-            }                
+            SkillSelect();
         }
         else
         {

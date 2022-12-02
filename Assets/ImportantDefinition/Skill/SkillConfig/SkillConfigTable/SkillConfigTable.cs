@@ -10,16 +10,6 @@ using Skill;
 public partial class SkillConfigTable
 {
     public static IDictionary<string, SkillConfig> SkillConfigRefDic = new Dictionary<string, SkillConfig>();
-    static IDictionary<string, string> passiveSkills = new Dictionary<string, string>();
-
-    public static SkillConfig GetPassiveSkill(string unit_recordId)
-    {
-        if (unit_recordId == null)
-            return null;
-
-        passiveSkills.TryGetValue(unit_recordId, out var skillId);
-        return GetSkillConfig(skillId);
-    }
     
     public class Row
     {
@@ -59,13 +49,13 @@ public partial class SkillConfigTable
     
     static void RefreshSkillConfigDicForReference()
     {
-        IDictionary<string, SkillConfig> Dic = new Dictionary<string, SkillConfig>();
-        var ALL = RowsToSkillConfigList(rowList);
-        foreach (var _SkillConfig in ALL)
+        IDictionary<string, SkillConfig> dic = new Dictionary<string, SkillConfig>();
+        var all = RowsToSkillConfigList(rowList);
+        foreach (var _SkillConfig in all)
         {
-            if (!Dic.ContainsKey(_SkillConfig.RECORD_ID))
+            if (!dic.ContainsKey(_SkillConfig.RECORD_ID))
             {
-                Dic.Add(new KeyValuePair<string, SkillConfig>(_SkillConfig.RECORD_ID, _SkillConfig));
+                dic.Add(new KeyValuePair<string, SkillConfig>(_SkillConfig.RECORD_ID, _SkillConfig));
                 //Debug.Log("以下技能加入字典： RECORDID:"+keyValuePair.RECORD_ID + "  realname:"+ keyValuePair.REAL_NAME);
             }
             else
@@ -73,20 +63,20 @@ public partial class SkillConfigTable
                 Debug.Log("致命错误「技能配置文件」技能ID重复：" + _SkillConfig.RECORD_ID);
             }
         }
-        Debug.Log("已读取共"+ Dic.Count + "个技能");
-        SkillConfigRefDic = Dic;
+        Debug.Log("已读取共"+ dic.Count + "个技能");
+        SkillConfigRefDic = dic;
     }
     
     /// <summary>
     /// 获取技能定义信息
     /// </summary>
-    /// <param name="ID">SKill ID</param>
+    /// <param name="id">SKill ID</param>
     /// <returns></returns>
-    public static SkillConfig GetSkillConfig(string ID)
+    public static SkillConfig GetSkillConfig(string id)
     {
-        if (ID != null)
+        if (id != null)
         {
-            SkillConfigRefDic.TryGetValue(ID, out SkillConfig skillConfig);
+            SkillConfigRefDic.TryGetValue(id, out SkillConfig skillConfig);
             return skillConfig;
         }
         return null;
@@ -94,13 +84,13 @@ public partial class SkillConfigTable
     
     public static List<SkillConfig> GetSkillConfigsOfType(string type)
     {
-        List<SkillConfig> SkillConfigsOfType = new List<SkillConfig>();
-        foreach (KeyValuePair<string, SkillConfig> one in SkillConfigRefDic)
+        var skillConfigsOfType = new List<SkillConfig>();
+        foreach (var one in SkillConfigRefDic)
         {
             if (one.Value.TYPE == type)
-                SkillConfigsOfType.Add(one.Value);
+                skillConfigsOfType.Add(one.Value);
         }
-        return SkillConfigsOfType;
+        return skillConfigsOfType;
     }
     
     static void LoadAllSkillConfigFromLocalConfigFile()

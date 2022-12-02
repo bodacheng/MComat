@@ -7,51 +7,51 @@ using mainMenu;
 
 public partial class StageEditor {
 
-    int selectSkillExLevel = -1;
-    readonly int[] exLevels = {-1, 0, 1, 2, 3 };
-    readonly string[] exLevelShows = { "ALL", "普攻", "一级必杀", "二级必杀", "三级必杀" };
-    int[] SPselected = { 0, 1, 2, 3 };
-    readonly bool[] skillrangeselectfilter = { false, false, false };
-    bool skillselectfilter;
-    bool filterranges = true;
-    IDictionary<string, string> _SkillIDsAndNames = new Dictionary<string, string>();
+    int _selectSkillExLevel = -1;
+    readonly int[] _exLevels = {-1, 0, 1, 2, 3 };
+    readonly string[] _exLevelShows = { "ALL", "普攻", "一级必杀", "二级必杀", "三级必杀" };
+    int[] _spSelected = { 0, 1, 2, 3 };
+    readonly bool[] _rangeFilter = { false, false, false };
+    bool _skillSelectFilter;
+    bool _filterRanges = true;
+    IDictionary<string, string> _skillIDsAndNames = new Dictionary<string, string>();
     
     void SkillSelect()
     {
-        skillselectfilter = EditorGUILayout.Toggle("限制技能选择条件", skillselectfilter, AttackRangeToggleGUI);
-        if (skillselectfilter)
+        _skillSelectFilter = EditorGUILayout.Toggle("限制技能选择条件", _skillSelectFilter, AttackRangeToggleGUI);
+        if (_skillSelectFilter)
         {
             EditorGUILayout.LabelField(" ~~~~~  限制技能条件  ~~~~~ ", Title);
-            selectSkillExLevel = EditorGUILayout.IntPopup("必杀技等级:", selectSkillExLevel, exLevelShows, exLevels);
-            switch(selectSkillExLevel)
+            _selectSkillExLevel = EditorGUILayout.IntPopup("必杀技等级:", _selectSkillExLevel, _exLevelShows, _exLevels);
+            switch(_selectSkillExLevel)
             {
                 case 0:
-                    SPselected = new int[] { 0 };
+                    _spSelected = new[] { 0 };
                 break;
                 case 1:
-                    SPselected = new int[] { 1 };
+                    _spSelected = new[] { 1 };
                 break;
                 case 2:
-                    SPselected = new int[] { 2 };
+                    _spSelected = new[] { 2 };
                 break;
                 case 3:
-                    SPselected = new int[] { 3 };
+                    _spSelected = new[] { 3 };
                 break;
                 default:
-                    SPselected = new int[] { 0, 1, 2, 3 };
+                    _spSelected = new[] { 0, 1, 2, 3 };
                 break;
             }
             
-            filterranges = EditorGUILayout.BeginToggleGroup("限定攻击范围", filterranges);
-            if (!filterranges)
+            _filterRanges = EditorGUILayout.BeginToggleGroup("限定攻击范围", _filterRanges);
+            if (!_filterRanges)
             {
-                skillrangeselectfilter[0] = false;
-                skillrangeselectfilter[1] = false;
-                skillrangeselectfilter[2] = false;
+                _rangeFilter[0] = false;
+                _rangeFilter[1] = false;
+                _rangeFilter[2] = false;
             }else{
-                skillrangeselectfilter[0] = EditorGUILayout.Toggle("近", skillrangeselectfilter[0], AttackRangeToggleGUI);
-                skillrangeselectfilter[1] = EditorGUILayout.Toggle("中", skillrangeselectfilter[1], AttackRangeToggleGUI);
-                skillrangeselectfilter[2] = EditorGUILayout.Toggle("远", skillrangeselectfilter[2], AttackRangeToggleGUI);
+                _rangeFilter[0] = EditorGUILayout.Toggle("近", _rangeFilter[0], AttackRangeToggleGUI);
+                _rangeFilter[1] = EditorGUILayout.Toggle("中", _rangeFilter[1], AttackRangeToggleGUI);
+                _rangeFilter[2] = EditorGUILayout.Toggle("远", _rangeFilter[2], AttackRangeToggleGUI);
             }
             EditorGUILayout.EndToggleGroup();
             EditorGUILayout.LabelField(" ~~~~~  以下将陈列根据条件删选出的技能  ~~~~~ ", Title);
@@ -61,42 +61,42 @@ public partial class StageEditor {
         SkillStonesBox.StoneFilterForm filterForm = new SkillStonesBox.StoneFilterForm
         {
             Type = _focusingType,
-            Close = skillrangeselectfilter[0],
-            Near = skillrangeselectfilter[1],
-            Far = skillrangeselectfilter[2],
-            ExType = SPselected,
+            Close = _rangeFilter[0],
+            Near = _rangeFilter[1],
+            Far = _rangeFilter[2],
+            ExType = _spSelected,
             BType = Skill.BehaviorType.NONE
         };        
-        _SkillIDsAndNames = SkillList(filterForm);// 待研究
+        _skillIDsAndNames = SkillList(filterForm);// 待研究
         
         int index2 = 0;
-        int selectedskillindex = 0;
-        foreach (KeyValuePair<string, string> keyValuePair in _SkillIDsAndNames)
+        int selectedSkillIndex = 0;
+        foreach (var keyValuePair in _skillIDsAndNames)
         {
             if (keyValuePair.Key == GetFocusSkillId())
             {
-                selectedskillindex = index2;
+                selectedSkillIndex = index2;
                 break;
             }
             index2++;
         }
         
-        selectedskillindex = EditorGUILayout.Popup("技能：", selectedskillindex, _SkillIDsAndNames.Values.ToArray());
-        SetSkillId(selectedskillindex == 0 ? null : _SkillIDsAndNames.ElementAt(selectedskillindex).Key);
+        selectedSkillIndex = EditorGUILayout.Popup("技能：", selectedSkillIndex, _skillIDsAndNames.Values.ToArray());
+        SetSkillId(selectedSkillIndex == 0 ? null : _skillIDsAndNames.ElementAt(selectedSkillIndex).Key);
     }
     
     IDictionary<string,string> SkillList(SkillStonesBox.StoneFilterForm filterForm)
     {
-        IDictionary<string, string> returnvalue = new Dictionary<string, string>
+        IDictionary<string, string> returnValue = new Dictionary<string, string>
         {
             { "-1", "空" }
         };
-        IDictionary<string, string> SkillIDAndNameDic = SkillConfigTable.GetSkillIDAndNameDic(filterForm);
-        foreach(KeyValuePair<string, string> keyValuePair in SkillIDAndNameDic)
+        var skillIDAndNameDic = SkillConfigTable.GetSkillIDAndNameDic(filterForm);
+        foreach(var keyValuePair in skillIDAndNameDic)
         {
-            returnvalue.Add(keyValuePair.Key, keyValuePair.Value);
+            returnValue.Add(keyValuePair.Key, keyValuePair.Value);
         }
-        return returnvalue;
+        return returnValue;
     }
 }
 #endif

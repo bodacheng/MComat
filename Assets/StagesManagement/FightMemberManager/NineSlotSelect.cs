@@ -16,8 +16,6 @@ public partial class StageEditor {
     
     void NineSlotPart()
     {
-        GUILayout.BeginHorizontal();
-        
         void SlotAnalyze(int _targetSlot)
         {
             string nowSkillID = null;
@@ -65,34 +63,29 @@ public partial class StageEditor {
                 C2ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
                 case 9:
-                nowSkillID = _focusingUnitInfo.set.c1;
+                nowSkillID = _focusingUnitInfo.set.c3;
                 defaultSkillConfig = SkillConfigTable.GetSkillConfig(nowSkillID);
                 C3ButtonText = RefreshButtonText(defaultSkillConfig);
                 break;
             }
-            var kv = SkillConfigTable.GetPassiveSkill(_focusingUnitInfo.r_id) ?? new SkillConfig
-            {
-                RECORD_ID = null
-            };
-            GUI.backgroundColor = Repeated(_focusingUnitInfo.set, nowSkillID) ? Color.red : (defaultSkillConfig != null ? kv.RECORD_ID == nowSkillID ? new Color(0.2f, 0.7f, 1) : Color.yellow : Color.white);
+            
+            GUI.backgroundColor = Repeated(_focusingUnitInfo.set, nowSkillID) ? Color.red : (defaultSkillConfig != null ? Color.yellow : Color.white);
         }
         
+        GUILayout.BeginHorizontal();
         SlotAnalyze(1);
         if (GUILayout.Button(A1ButtonText, _targetSlot == 1 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            selectedInhereskill = 0;
             _targetSlot = 1;
         }
         SlotAnalyze(2);
         if (GUILayout.Button(A2ButtonText, _targetSlot == 2 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            selectedInhereskill = 0;
             _targetSlot = 2;
         }
         SlotAnalyze(3);
         if (GUILayout.Button(A3ButtonText, _targetSlot == 3 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            selectedInhereskill = 0;
             _targetSlot = 3;
         }
         GUILayout.EndHorizontal();
@@ -101,19 +94,16 @@ public partial class StageEditor {
         SlotAnalyze(4);
         if (GUILayout.Button(B1ButtonText, _targetSlot == 4 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            selectedInhereskill = 0;
             _targetSlot = 4;
         }
         SlotAnalyze(5);
         if (GUILayout.Button(B2ButtonText, _targetSlot == 5 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            selectedInhereskill = 0;
             _targetSlot = 5;
         }
         SlotAnalyze(6);
         if (GUILayout.Button(B3ButtonText, _targetSlot == 6 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            selectedInhereskill = 0;
             _targetSlot = 6;
         }
         GUILayout.EndHorizontal();
@@ -122,19 +112,16 @@ public partial class StageEditor {
         SlotAnalyze(7);
         if (GUILayout.Button(C1ButtonText, _targetSlot == 7 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            selectedInhereskill = 0;
             _targetSlot = 7;
         }
         SlotAnalyze(8);
         if (GUILayout.Button(C2ButtonText, _targetSlot == 8 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            selectedInhereskill = 0;
             _targetSlot = 8;
         }
         SlotAnalyze(9);
         if (GUILayout.Button(C3ButtonText, _targetSlot == 9 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
         {
-            selectedInhereskill = 0;
             _targetSlot = 9;
         }
         GUI.backgroundColor = Color.white;
@@ -144,8 +131,8 @@ public partial class StageEditor {
     bool Repeated(SkillSet _NineAndTwo, string recordID)
     {
         var currentSkillList = _NineAndTwo.SkillIDList();
-        int count = 0;
-        for (int i = 0; i < currentSkillList.Count; i++)
+        var count = 0;
+        for (var i = 0; i < currentSkillList.Count; i++)
         {
             if (currentSkillList[i] == recordID)
                 count += 1;

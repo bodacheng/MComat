@@ -9,7 +9,7 @@ public partial class StageEditor {
     
     void Members(FightMembers target)
     {
-        EditorGUILayout.LabelField(" 关卡敌人信息  ", Title);
+        EditorGUILayout.LabelField(" Enemies infos ", Title);
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("left", (focusingPosID != 1.ToString()) ? ButtonStyle : ButtonStyle_selected))
         {

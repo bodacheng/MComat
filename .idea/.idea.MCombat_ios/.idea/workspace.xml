@@ -3,25 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Editor/MyEditorWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/MyEditorWindow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/3.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/3.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MasterDataTool/MasterDataToolGUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MasterDataTool/MasterDataToolGUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightInfoGUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightInfoGUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/BasicState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/BasicState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/FightMemberManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/FightMemberManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/1.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/Members.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/Members.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SelectInheretSkill.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SelectInheretSkill.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SelectInheretSkill.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SelectInheretSkill.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSelect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSetComment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSetComment.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SlotFocus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SlotFocus.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageAwards.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageAwards.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/UI_Ini.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/UI_Ini.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/UnitSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/UnitSelect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StageManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/StageEditorWindow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StageManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/StageEditorWindow.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
