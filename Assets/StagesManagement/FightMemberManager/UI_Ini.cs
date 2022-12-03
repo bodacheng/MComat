@@ -5,6 +5,7 @@ public partial class StageEditor{
 
     bool Initialized;
     GUIStyle ButtonStyle;
+    GUIStyle ButtonHasUnit;
     GUIStyle AddDeleteMember;
     GUIStyle ButtonStyle_selected;
     GUIStyle ButtonStyle_save;
@@ -20,6 +21,11 @@ public partial class StageEditor{
         ButtonStyle.normal.textColor = Color.red;
         ButtonStyle.fixedWidth = 100f;
         ButtonStyle.alignment = TextAnchor.MiddleCenter;
+        
+        ButtonHasUnit = new GUIStyle(GUI.skin.button);
+        ButtonHasUnit.normal.textColor = Color.green;
+        ButtonHasUnit.fixedWidth = 100f;
+        ButtonHasUnit.alignment = TextAnchor.MiddleCenter;
         
         AddDeleteMember = new GUIStyle(GUI.skin.button);
         AddDeleteMember.normal.textColor = new Color(1, 0.3f, 0f);

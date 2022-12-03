@@ -11,21 +11,24 @@ public partial class StageEditor {
     {
         EditorGUILayout.LabelField(" Enemies infos ", Title);
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("left", (_focusingPosID != 1.ToString()) ? ButtonStyle : ButtonStyle_selected))
+        if (GUILayout.Button("left", (_focusingPosID != 1.ToString()) ? 
+            (target.EnemySets.Get(0, 1) != null ? ButtonHasUnit :ButtonStyle) : ButtonStyle_selected))
         {
             _selectedUnitIndex = 0;
             _focusingPosID = 1.ToString();
             _focusingUnitInfo = target.EnemySets.Get(0, 1);
             _targetSlot = 0;
         }
-        if (GUILayout.Button("mid", (_focusingPosID != 0.ToString()) ? ButtonStyle : ButtonStyle_selected))
+        if (GUILayout.Button("mid", (_focusingPosID != 0.ToString()) ? 
+            (target.EnemySets.Get(0, 0) != null ? ButtonHasUnit :ButtonStyle) : ButtonStyle_selected))
         {
             _selectedUnitIndex = 0;
             _focusingPosID = 0.ToString();
             _focusingUnitInfo = target.EnemySets.Get(0, 0);
             _targetSlot = 0;
         }
-        if (GUILayout.Button("right", (_focusingPosID != 2.ToString()) ? ButtonStyle : ButtonStyle_selected))
+        if (GUILayout.Button("right", (_focusingPosID != 2.ToString()) ? 
+            (target.EnemySets.Get(0, 2) != null ? ButtonHasUnit :ButtonStyle) : ButtonStyle_selected))
         {
             _selectedUnitIndex = 0;
             _focusingPosID = 2.ToString();
