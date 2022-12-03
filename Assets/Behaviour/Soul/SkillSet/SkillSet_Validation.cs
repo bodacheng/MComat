@@ -13,33 +13,33 @@ public partial class SkillSet
     }
     
     // 判断技能组是否合法。包括了首技能有无普攻，有无重复，总点数是否平衡 这三方面
-    public static SkillEditError CheckEdit(string A1, string A2, string A3, string B1, string B2, string B3, string C1, string C2, string C3)
+    public static SkillEditError CheckEdit(string a1, string a2, string a3, string b1, string b2, string b3, string c1, string c2, string c3)
     {
-        if (!(hasStone(A1) && hasStone(A2) && hasStone(A3) &&
-              hasStone(B1) && hasStone(B2) && hasStone(B3) &&
-              hasStone(C1) && hasStone(C2) && hasStone(C3)))
+        if (!(HasStone(a1) && HasStone(a2) && HasStone(a3) &&
+              HasStone(b1) && HasStone(b2) && HasStone(b3) &&
+              HasStone(c1) && HasStone(c2) && HasStone(c3)))
         {
             return SkillEditError.NotFull;
         }
         
         // 第一列技能必须有普通技能
-        if (CheckStartSKills(A1, B1, C1) == SkillEditError.NoNormalStart)
+        if (CheckStartSKills(a1, b1, c1) == SkillEditError.NoNormalStart)
         {
             return SkillEditError.NoNormalStart;
         }
         
-        if (!CheckRepeat(A1, A2, A3, B1, B2, B3, C1, C2, C3))
+        if (!CheckRepeat(a1, a2, a3, b1, b2, b3, c1, c2, c3))
         {
             return SkillEditError.RepeatedSkill;
         }
         
-        bool hasStone(string skillID)
+        bool HasStone(string skillID)
         {
             var skillConfig = SkillConfigTable.GetSkillConfig(skillID);
             return skillConfig != null;
         }
         
-        var wholePoint = SkillBalancePoint(A1, A2, A3, B1, B2, B3, C1, C2, C3);
+        var wholePoint = SkillBalancePoint(a1, a2, a3, b1, b2, b3, c1, c2, c3);
         return wholePoint < 0 ? SkillEditError.UnBalanced : SkillEditError.Perfect;
     }
     
@@ -102,20 +102,20 @@ public partial class SkillSet
     }
     
     // 查看技能组内是否有重复 false :不合法，有重复  true：合法，无重复
-    static bool CheckRepeat(string A1, string A2, string A3, string B1, string B2, string B3, string C1, string C2, string C3)
+    static bool CheckRepeat(string a1, string a2, string a3, string b1, string b2, string b3, string c1, string c2, string c3)
     {
         // 检查技能重复
         var checkSame = new List<string>
         {
-            A1,
-            A2,
-            A3,
-            B1,
-            B2,
-            B3,
-            C1,
-            C2,
-            C3
+            a1,
+            a2,
+            a3,
+            b1,
+            b2,
+            b3,
+            c1,
+            c2,
+            c3
         };
         
         for (var i = 0; i < checkSame.Count; i++)
@@ -134,21 +134,21 @@ public partial class SkillSet
     }
     
     // 检查起始技能有没有普通技能
-    static SkillEditError CheckStartSKills(string a1skill, string a2skill, string a3skill)
+    static SkillEditError CheckStartSKills(string a1Skill, string a2Skill, string a3Skill)
     {
         // 第一列技能必须有普通技能
-        var NormalSkillsOfAList = new List<string>();            
-        var _SkillConfigA1 = SkillConfigTable.GetSkillConfig(a1skill);
-        var _SkillConfigB1 = SkillConfigTable.GetSkillConfig(a2skill);
-        var _SkillConfigC1 = SkillConfigTable.GetSkillConfig(a3skill);
+        var normalSkillsOfAList = new List<string>();            
+        var skillConfigA1 = SkillConfigTable.GetSkillConfig(a1Skill);
+        var skillConfigB1 = SkillConfigTable.GetSkillConfig(a2Skill);
+        var skillConfigC1 = SkillConfigTable.GetSkillConfig(a3Skill);
         
-        if (_SkillConfigA1 != null && _SkillConfigA1.SP_LEVEL == 0)
-            NormalSkillsOfAList.Add(_SkillConfigA1.REAL_NAME);
-        if (_SkillConfigB1 != null && _SkillConfigB1.SP_LEVEL == 0)
-            NormalSkillsOfAList.Add(_SkillConfigB1.REAL_NAME);
-        if (_SkillConfigC1 != null && _SkillConfigC1.SP_LEVEL == 0)
-            NormalSkillsOfAList.Add(_SkillConfigC1.REAL_NAME);
+        if (skillConfigA1 != null && skillConfigA1.SP_LEVEL == 0)
+            normalSkillsOfAList.Add(skillConfigA1.REAL_NAME);
+        if (skillConfigB1 != null && skillConfigB1.SP_LEVEL == 0)
+            normalSkillsOfAList.Add(skillConfigB1.REAL_NAME);
+        if (skillConfigC1 != null && skillConfigC1.SP_LEVEL == 0)
+            normalSkillsOfAList.Add(skillConfigC1.REAL_NAME);
         
-        return NormalSkillsOfAList.Count == 0 ? SkillEditError.NoNormalStart : SkillEditError.Perfect;
+        return normalSkillsOfAList.Count == 0 ? SkillEditError.NoNormalStart : SkillEditError.Perfect;
     }
 }
