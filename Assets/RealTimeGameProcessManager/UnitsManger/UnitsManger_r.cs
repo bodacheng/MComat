@@ -35,13 +35,13 @@ namespace FightScene
             RandomToAliveUnit();
         }
         
-        public void TeamsIni_Rotate(float TeamHpRate, CriticalGaugeMode teamCGMode)
+        public void TeamsIni_Rotate(float teamHpRate, CriticalGaugeMode teamCGMode)
         {
             foreach (var center in TeamMembers.GetValues())
             {
                 //  时间刷新整备
                 RTFightManager.target.RefreshTimeDic.Add(center, new ReactiveProperty<float>(0));
-                center.Step3Initialize(teamConfig, teamCGMode, TeamHpRate);
+                center.Step3Initialize(teamConfig, teamCGMode, teamHpRate);
                 center.FightDataRef.IsDead.Subscribe(x => {
                     if (x) 
                     {
@@ -53,26 +53,26 @@ namespace FightScene
         }
         
         // 切换队员
-        public bool ChangeFightingUnit(Data_Center _changeTo = null, bool emptyState = false, Transform IniStandPoint = null)
+        public bool ChangeFightingUnit(Data_Center changeTo = null, bool emptyState = false, Transform iniStandPoint = null)
         {
-            if (_changeTo == null)
+            if (changeTo == null)
             {
-                _changeTo = StartUnit;
-                if (_changeTo == null)
+                changeTo = StartUnit;
+                if (changeTo == null)
                     return false;
             }
             
-            if (_changeTo.FightDataRef.IsDead.Value)
+            if (changeTo.FightDataRef.IsDead.Value)
             {
                 return false;
             }
             var unitChanged = false;
             var targetPos = Vector3.zero;
             var targetRot = Quaternion.identity;
-            if (IniStandPoint != null)
+            if (iniStandPoint != null)
             {
-                targetPos = IniStandPoint.position;
-                targetRot = IniStandPoint.rotation;
+                targetPos = iniStandPoint.position;
+                targetRot = iniStandPoint.rotation;
             }
             else
             {
@@ -85,15 +85,15 @@ namespace FightScene
             
             foreach (var dataCenter in TeamMembers.GetValues())
             {
-                if (_changeTo == dataCenter)
+                if (changeTo == dataCenter)
                 {
-                    if (RMode_Unit.Value != null && _changeTo != null) //继承hit数
+                    if (RMode_Unit.Value != null && changeTo != null) //继承hit数
                     {
-                        _changeTo.FightDataRef._comboHitCount.HitCount.Value = RMode_Unit.Value.FightDataRef._comboHitCount.HitCount.Value;
+                        changeTo.FightDataRef._comboHitCount.HitCount.Value = RMode_Unit.Value.FightDataRef._comboHitCount.HitCount.Value;
                     }
                     Sensor.AddOrRemoveSharedUnits(RMode_Unit.Value, teamConfig.myTeam, false);
-                    Sensor.AddOrRemoveSharedUnits(_changeTo, teamConfig.myTeam, true);
-                    RMode_Unit.Value = _changeTo;
+                    Sensor.AddOrRemoveSharedUnits(changeTo, teamConfig.myTeam, true);
+                    RMode_Unit.Value = changeTo;
                     RMode_Unit.Value.WholeT.gameObject.SetActive(true);
                     
                     if (emptyState)

@@ -125,7 +125,7 @@ public partial class StageEditor
             }
         }
                         
-        SkillConfig defaultSkillConfig = SkillConfigTable.GetSkillConfig(GetFocusSkillId());
+        var defaultSkillConfig = SkillConfigTable.GetSkillConfig(GetFocusSkillId());
         if (defaultSkillConfig == null)
         {
             goto A;

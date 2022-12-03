@@ -78,6 +78,7 @@ public class PreparingProcess : FSceneProcess
                 RTFightManager.target.team2.Initialize_Multi(NetFightScene.Fight.team2HpRate, NetFightScene.Fight.team2CGMode);
                 break;
             case TeamMode.Rotation:
+                Debug.Log("team2 mode:" + NetFightScene.Fight.team2CGMode);
                 RTFightManager.target.team2.TeamsIni_Rotate(NetFightScene.Fight.team2HpRate, NetFightScene.Fight.team2CGMode);
                 break;
         }

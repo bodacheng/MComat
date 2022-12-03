@@ -5,23 +5,23 @@ using Skill;
 
 public partial class StageEditor {
     
-    readonly int[] exoptions = { 0, 1, 2, 3 };
-    readonly string[] exoptions_display = {"normal","ex1","ex2","ex3"};
+    readonly int[] _exOptions = { 0, 1, 2, 3 };
+    readonly string[] exOptionsDisplay = {"normal","ex1","ex2","ex3"};
     
-    void SkillInfo(SkillConfig SkillConfig)
+    void SkillInfo(SkillConfig skillConfig)
     {
-        if (SkillConfig == null)
+        if (skillConfig == null)
             return;
         EditorGUILayout.LabelField("技能详细信息");
         GUI.backgroundColor = new Color(1f, 0.7f, 0.5f);
-        SkillConfig.REAL_NAME = EditorGUILayout.TextField("Name",SkillConfig.REAL_NAME);
-        SkillConfig.STATE_TYPE = (BehaviorType)EditorGUILayout.EnumPopup("Attack Type", SkillConfig.STATE_TYPE);                                                    
-        SkillConfig.ATTACK_WEIGHT = EditorGUILayout.FloatField("AT", SkillConfig.ATTACK_WEIGHT);
-        SkillConfig.SP_LEVEL = EditorGUILayout.IntPopup("SPLevel", SkillConfig.SP_LEVEL, exoptions_display, exoptions);        
+        skillConfig.REAL_NAME = EditorGUILayout.TextField("Name",skillConfig.REAL_NAME);
+        skillConfig.STATE_TYPE = (BehaviorType)EditorGUILayout.EnumPopup("Attack Type", skillConfig.STATE_TYPE);                                                    
+        skillConfig.ATTACK_WEIGHT = EditorGUILayout.FloatField("AT", skillConfig.ATTACK_WEIGHT);
+        skillConfig.SP_LEVEL = EditorGUILayout.IntPopup("SPLevel", skillConfig.SP_LEVEL, exOptionsDisplay, _exOptions);        
         EditorGUILayout.LabelField("AI模式技能触发范围");
-        SkillConfig.AIAttrs.AI_MIN_DIS = EditorGUILayout.FloatField("min_dis",SkillConfig.AIAttrs.AI_MIN_DIS);
-        SkillConfig.AIAttrs.AI_MAX_DIS = EditorGUILayout.FloatField("max_dis",SkillConfig.AIAttrs.AI_MAX_DIS);
-        SkillConfig.AIAttrs.height = EditorGUILayout.IntField("height",SkillConfig.AIAttrs.height);
+        skillConfig.AIAttrs.AI_MIN_DIS = EditorGUILayout.FloatField("min_dis",skillConfig.AIAttrs.AI_MIN_DIS);
+        skillConfig.AIAttrs.AI_MAX_DIS = EditorGUILayout.FloatField("max_dis",skillConfig.AIAttrs.AI_MAX_DIS);
+        skillConfig.AIAttrs.height = EditorGUILayout.IntField("height",skillConfig.AIAttrs.height);
         GUI.backgroundColor = Color.white;
     }
 }

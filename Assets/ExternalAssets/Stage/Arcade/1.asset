@@ -12,55 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf3bb8ad816a44358eca5831d97217e, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  BattleGroundID: 0
+  battleGroundID: 0
   battleNameENG: 
   battleNameJPG: 
   battleNameCH: 
-  StageButtonSprite: {fileID: 0}
+  stageButtonSprite: {fileID: 0}
   unitsData:
   - id: 0
     r_id: 5
     level: 0
     set:
-      a1: 58
-      a2: 125
-      a3: 113
-      b1: 68
-      b2: 89
-      b3: 10
-      c1: 116
-      c2: 99
-      c3: 167
-  - id: 1
-    r_id: 1
-    level: 0
-    set:
-      a1: 58
-      a2: 182
-      a3: 55
-      b1: 169
+      a1: 166
+      a2: 150
+      a3: 102
+      b1: 156
       b2: 4
-      b3: 53
-      c1: 125
-      c2: 27
+      b3: 39
+      c1: 116
+      c2: 176
       c3: 183
-  - id: 2
-    r_id: 5
-    level: 0
-    set:
-      a1: 182
-      a2: 68
-      a3: 4
-      b1: 113
-      b2: 116
-      b3: 99
-      c1: 27
-      c2: 167
-      c3: 53
   stageLevel: 1
-  Team1HpRate: 1
-  Team2HpRate: 1
+  team1HpRate: 1
+  team2HpRate: 1
   team1CGMode: 0
-  team2CGMode: 0
-  Team1Mode: 2
-  Team2Mode: 2
+  team2CGMode: 2
+  team1Mode: 2
+  team2Mode: 2

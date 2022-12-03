@@ -26,9 +26,9 @@ namespace Soul
         
         public float AT;
         public string StateKey;
-        public int splevel;
-        public float triggerAtttackRangeMin, triggerAtttackRangeMax;
-        public int triggerAtttackHeight;
+        public int spLevel;
+        public float triggerAttackRangeMin, triggerAttackRangeMax;
+        public int TriggerAttackHeight;
         protected bool AbsorbEnergyFinished;
         public BehaviorType StateType;
         public bool nextAttackCanRushFirst;
@@ -38,7 +38,7 @@ namespace Soul
         {
             if (!AbsorbEnergyFinished)
             {
-                switch(splevel)
+                switch(spLevel)
                 {
                     case 0:
                         temp = FightGlobalSetting._NormalSkillExGet;
@@ -102,7 +102,7 @@ namespace Soul
 
         public virtual bool Capacity_enter_condition()
         {
-            return FightParamsRef.HasPlentyGauge(splevel);
+            return FightParamsRef.HasPlentyGauge(spLevel);
         }
 
         // On what condition we have to enter this state
@@ -115,7 +115,7 @@ namespace Soul
         public virtual void AI_State_enter()
         {
             FightParamsRef.AT = AT;
-            FightParamsRef.CostCriticalGaugeBySPLevel(splevel);
+            FightParamsRef.CostCriticalGaugeBySPLevel(spLevel);
             BeheviourFrameCounter = 0;
             AbsorbEnergyFinished = false;
         }
@@ -124,7 +124,7 @@ namespace Soul
         public virtual void AI_State_enter(V_Damage newValue)
         {
             FightParamsRef.AT = AT;
-            FightParamsRef.CostCriticalGaugeBySPLevel(splevel);
+            FightParamsRef.CostCriticalGaugeBySPLevel(spLevel);
         }
 
         public virtual void C_State_enter()

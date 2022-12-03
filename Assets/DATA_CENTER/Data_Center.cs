@@ -156,6 +156,8 @@ public partial class Data_Center : MonoBehaviour
             FightDataRef.Resistance.Value = Mathf.Clamp(x, 0, FightGlobalSetting._ResistanceMax);
         }).AddTo(gameObject);
         
+        if (FightDataRef.CriticalGaugeMode == CriticalGaugeMode.Unlimited)
+            FightDataRef.CriticalGauge.Value = FightGlobalSetting._EXMax;
         this._MyBehaviorRunner.SetAt(lv);
     }
 

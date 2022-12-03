@@ -3,7 +3,7 @@ using UniRx;
 
 public partial class FightParamsReference
 {
-    public ReactiveProperty<int> CriticalGauge { get; set; } = new ReactiveProperty<int>();
+    public ReactiveProperty<int> CriticalGauge { get; set; } = new ();
         
     public void PlusEx(int add)
     {
@@ -32,6 +32,8 @@ public partial class FightParamsReference
     
     public bool HasPlentyGauge(int spLevel)
     {
+        if (CriticalGaugeMode == CriticalGaugeMode.Unlimited)
+            return true;
         switch (spLevel)
         {
             case 0:

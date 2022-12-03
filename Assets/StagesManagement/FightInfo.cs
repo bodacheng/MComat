@@ -119,10 +119,16 @@ public class FightInfo : ScriptableObject
     public void SaveDicToData()
     {
         unitsData = new List<UnitInfo>();
-        for (var i = 0; i < FightMembers.EnemySets.GetValues().Count; i++)
-        {
-            unitsData.Add(FightMembers.EnemySets.Get(0,i));
-        }
+        var one = FightMembers.EnemySets.Get(0, 0);
+        var two = FightMembers.EnemySets.Get(0, 1);
+        var three = FightMembers.EnemySets.Get(0, 3);
+
+        if (one != default)
+            unitsData.Add(one);
+        if (two != default)
+            unitsData.Add(two);
+        if (three != default)
+            unitsData.Add(three);
     }
     
     public void LoadMyTeam()
@@ -170,6 +176,8 @@ public class FightInfo : ScriptableObject
         stage.Team2ID = source.Team2ID;
         stage.team1HpRate = source.team1HpRate;
         stage.team2HpRate = source.team2HpRate;
+        stage.team1CGMode = source.team1CGMode;
+        stage.team2CGMode = source.team2CGMode;
         stage.Team2ArenaPoint = source.Team2ArenaPoint;
         stage.RunTutorial = source.RunTutorial;
         stage.battleNameCH = source.battleNameCH;

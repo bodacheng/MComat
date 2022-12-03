@@ -118,10 +118,10 @@ namespace Soul
                 if (SkillEntityDic.ContainsKey(s.Key))
                 {
                     s.Value.StateKey = SkillEntityDic[s.Key].REAL_NAME;
-                    s.Value.splevel = SkillEntityDic[s.Key].SP_LEVEL;
-                    s.Value.triggerAtttackRangeMin = SkillEntityDic[s.Key].AIAttrs.AI_MIN_DIS;
-                    s.Value.triggerAtttackRangeMax = SkillEntityDic[s.Key].AIAttrs.AI_MAX_DIS;
-                    s.Value.triggerAtttackHeight = SkillEntityDic[s.Key].AIAttrs.height;
+                    s.Value.spLevel = SkillEntityDic[s.Key].SP_LEVEL;
+                    s.Value.triggerAttackRangeMin = SkillEntityDic[s.Key].AIAttrs.AI_MIN_DIS;
+                    s.Value.triggerAttackRangeMax = SkillEntityDic[s.Key].AIAttrs.AI_MAX_DIS;
+                    s.Value.TriggerAttackHeight = SkillEntityDic[s.Key].AIAttrs.height;
                     AddAITriggerConditionToBehavior(SkillEntityDic[s.Key]);
                     BehaviourDic.Add(new KeyValuePair<string, Behavior>(s.Key, s.Value));
                 }
