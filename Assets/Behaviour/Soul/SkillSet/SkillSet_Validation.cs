@@ -44,38 +44,38 @@ public partial class SkillSet
     }
     
     // 当前总分。不问技能组是否合法
-    public static int SkillBalancePoint(string A1skillid, string A2skillid, string A3skillid, string B1skillid, string B2skillid, string B3skillid, string C1skillid, string C2skillid, string C3skillid)
+    public static int SkillBalancePoint(string a1SkillId, string a2SkillId, string a3SkillId, string b1SkillId, string b2SkillId, string b3SkillId, string c1SkillId, string c2SkillId, string c3SkillId)
     {
-        var _SkillConfigA1 = SkillConfigTable.GetSkillConfig(A1skillid);
-        var _SkillConfigA2 = SkillConfigTable.GetSkillConfig(A2skillid);
-        var _SkillConfigA3 = SkillConfigTable.GetSkillConfig(A3skillid);
-        var _SkillConfigB1 = SkillConfigTable.GetSkillConfig(B1skillid);
-        var _SkillConfigB2 = SkillConfigTable.GetSkillConfig(B2skillid);
-        var _SkillConfigB3 = SkillConfigTable.GetSkillConfig(B3skillid);
-        var _SkillConfigC1 = SkillConfigTable.GetSkillConfig(C1skillid);
-        var _SkillConfigC2 = SkillConfigTable.GetSkillConfig(C2skillid);
-        var _SkillConfigC3 = SkillConfigTable.GetSkillConfig(C3skillid);
+        var skillConfigA1 = SkillConfigTable.GetSkillConfig(a1SkillId);
+        var skillConfigA2 = SkillConfigTable.GetSkillConfig(a2SkillId);
+        var skillConfigA3 = SkillConfigTable.GetSkillConfig(a3SkillId);
+        var skillConfigB1 = SkillConfigTable.GetSkillConfig(b1SkillId);
+        var skillConfigB2 = SkillConfigTable.GetSkillConfig(b2SkillId);
+        var skillConfigB3 = SkillConfigTable.GetSkillConfig(b3SkillId);
+        var skillConfigC1 = SkillConfigTable.GetSkillConfig(c1SkillId);
+        var skillConfigC2 = SkillConfigTable.GetSkillConfig(c2SkillId);
+        var skillConfigC3 = SkillConfigTable.GetSkillConfig(c3SkillId);
         
         var skillConfigs = new List<SkillConfig>();
         
-        if (_SkillConfigA1 != null)
-            skillConfigs.Add(_SkillConfigA1);
-        if (_SkillConfigA2 != null)
-            skillConfigs.Add(_SkillConfigA2);
-        if (_SkillConfigA3 != null)
-            skillConfigs.Add(_SkillConfigA3);
-        if (_SkillConfigB1 != null)
-            skillConfigs.Add(_SkillConfigB1);
-        if (_SkillConfigB2 != null)
-            skillConfigs.Add(_SkillConfigB2);
-        if (_SkillConfigB3 != null)
-            skillConfigs.Add(_SkillConfigB3);
-        if (_SkillConfigC1 != null)
-            skillConfigs.Add(_SkillConfigC1);
-        if (_SkillConfigC2 != null)
-            skillConfigs.Add(_SkillConfigC2);
-        if (_SkillConfigC3 != null)
-            skillConfigs.Add(_SkillConfigC3);
+        if (skillConfigA1 != null)
+            skillConfigs.Add(skillConfigA1);
+        if (skillConfigA2 != null)
+            skillConfigs.Add(skillConfigA2);
+        if (skillConfigA3 != null)
+            skillConfigs.Add(skillConfigA3);
+        if (skillConfigB1 != null)
+            skillConfigs.Add(skillConfigB1);
+        if (skillConfigB2 != null)
+            skillConfigs.Add(skillConfigB2);
+        if (skillConfigB3 != null)
+            skillConfigs.Add(skillConfigB3);
+        if (skillConfigC1 != null)
+            skillConfigs.Add(skillConfigC1);
+        if (skillConfigC2 != null)
+            skillConfigs.Add(skillConfigC2);
+        if (skillConfigC3 != null)
+            skillConfigs.Add(skillConfigC3);
             
         var balancePoint = 0;
         foreach (var t in skillConfigs)
