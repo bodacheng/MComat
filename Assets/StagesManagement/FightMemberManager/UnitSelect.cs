@@ -20,13 +20,13 @@ public partial class StageEditor {
         {
             if (keyValuePair.Key == _focusingUnitInfo.r_id)
             {
-                selectedUnitIndex = index;
+                _selectedUnitIndex = index;
                 break;
             }
             index++;
         }
-        selectedUnitIndex = EditorGUILayout.Popup("角色名：", selectedUnitIndex, _unitIDsAndNames.Values.ToArray());
-        _focusingUnitInfo.r_id =  _unitIDsAndNames.Count > selectedUnitIndex ? _unitIDsAndNames.ElementAt(selectedUnitIndex).Key : null;
+        _selectedUnitIndex = EditorGUILayout.Popup("角色名：", _selectedUnitIndex, _unitIDsAndNames.Values.ToArray());
+        _focusingUnitInfo.r_id =  _unitIDsAndNames.Count > _selectedUnitIndex ? _unitIDsAndNames.ElementAt(_selectedUnitIndex).Key : null;
         return _focusingUnitInfo.r_id;
     }
 }

@@ -30,19 +30,19 @@ public partial class StageEditor
         {
             if (GUILayout.Button("Add", AddDeleteMember))
             {
-                focusingPosID ??= "0";
+                _focusingPosID ??= "0";
                 _focusingUnitInfo = new UnitInfo
                 {
-                    id = focusingPosID
+                    id = _focusingPosID
                 };
-                target.EnemySets.Set(0, int.Parse(focusingPosID), _focusingUnitInfo);
+                target.EnemySets.Set(0, int.Parse(_focusingPosID), _focusingUnitInfo);
             }
         }
         if (_focusingUnitInfo != null)
         {
             if (GUILayout.Button("Delete", AddDeleteMember))
             {
-                target.EnemySets.Set(0, int.Parse(focusingPosID), null);
+                target.EnemySets.Set(0, int.Parse(_focusingPosID), null);
                 _focusingUnitInfo = null;
                 _targetSlot = 0;
             }
@@ -59,13 +59,13 @@ public partial class StageEditor
         
         GUILayout.BeginHorizontal();
 
-        void Random(SkillStonesBox.StoneFilterForm form)
+        void Random(SkillStonesBox.StoneFilterForm form, bool noSpLimit = false)
         {
             _targetSlot = 0;
             if (string.IsNullOrEmpty(_focusingType))
                 return;
             
-            _focusingUnitInfo.set = SkillSet.RandomSkillSet(_focusingType,  null,  false, form);
+            _focusingUnitInfo.set = SkillSet.RandomSkillSet(_focusingType,  null,  false, form, noSpLimit);
         }
         if (GUILayout.Button("一般", ButtonStyle))
         {
@@ -93,6 +93,15 @@ public partial class StageEditor
                 ExType = new[] { 2, 3 }
             };
             Random(form);
+        }
+        if (GUILayout.Button("超boss", ButtonStyle))
+        {
+            var form = new SkillStonesBox.StoneFilterForm
+            {
+                Type = _focusingType,
+                ExType = new[] { 1, 2, 3 }
+            };
+            Random(form, true);
         }
         GUILayout.EndHorizontal();
                 

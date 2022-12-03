@@ -9,7 +9,7 @@ using NoSuchStudio.Common;
 public partial class SkillSet
 {
     // 随机技能组
-    public static SkillSet RandomSkillSet(string type, string originSkill, bool baseOnAcc, SkillStonesBox.StoneFilterForm filterForm = null)
+    public static SkillSet RandomSkillSet(string type, string originSkill, bool baseOnAcc, SkillStonesBox.StoneFilterForm filterForm = null, bool noSpLimit = false)
     {
         var skillSet = new SkillSet();
         var originSkillConfig = SkillConfigTable.GetSkillConfig(originSkill);
@@ -17,13 +17,18 @@ public partial class SkillSet
         skillSet = RandomSkillSetRec(type, skillSet, new List<int>()
         {
             1,2,3,4,5,6,7,8,9
-        }, originSkillConfig, baseOnAcc, filterForm);
+        }, originSkillConfig, baseOnAcc, filterForm, noSpLimit);
         skillSet.SortNineAndTwo();
         return skillSet;
     }
     
-    static SkillStonesBox.StoneFilterForm DecideRemainForm(SkillSet skillSet, string type, SkillStonesBox.StoneFilterForm form, int targetSlot)
+    static SkillStonesBox.StoneFilterForm DecideRemainForm(SkillSet skillSet, string type, SkillStonesBox.StoneFilterForm form, int targetSlot, bool noSpLimit = false)
     {
+        if (noSpLimit)
+        {
+            return form;
+        }
+        
         var currentStartSkills = new List<string>();
         if (skillSet.a1 != null)
             currentStartSkills.Add(skillSet.a1);
@@ -96,11 +101,11 @@ public partial class SkillSet
     /// <param name="baseOnAcc"></param>
     /// <returns></returns>
     static SkillSet RandomSkillSetRec(string type, SkillSet skillSet, List<int> remainSlots, SkillConfig origin, bool baseOnAcc, 
-        SkillStonesBox.StoneFilterForm filterForm)
+        SkillStonesBox.StoneFilterForm filterForm, bool noSpLimit = false)
     {
         var targetSlot = remainSlots.Random();
         remainSlots.Remove(targetSlot);
-        filterForm = DecideRemainForm(skillSet, type, filterForm, targetSlot);
+        filterForm = DecideRemainForm(skillSet, type, filterForm, targetSlot, noSpLimit);
         
         var exceptSkIds = skillSet.SkillIDList();
         string skillId;
@@ -166,6 +171,6 @@ public partial class SkillSet
         {
             return skillSet;
         }
-        return RandomSkillSetRec(type, skillSet, remainSlots, origin, baseOnAcc, filterForm);
+        return RandomSkillSetRec(type, skillSet, remainSlots, origin, baseOnAcc, filterForm, noSpLimit);
     }
 }
