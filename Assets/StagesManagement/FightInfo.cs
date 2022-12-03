@@ -7,7 +7,7 @@ using System.IO;
 public class FightInfo : ScriptableObject
 {
     [SerializeField]
-    public int BattleGroundID;
+    public int battleGroundID;
     
     [SerializeField]
     public string battleNameENG;
@@ -17,7 +17,7 @@ public class FightInfo : ScriptableObject
     public string battleNameCH;
     
     [SerializeField]
-    public Sprite StageButtonSprite;
+    public Sprite stageButtonSprite;
 
     [SerializeField] private List<UnitInfo> unitsData = new ();
     
@@ -28,14 +28,14 @@ public class FightInfo : ScriptableObject
     }
     
     public int stageLevel = 1;
-    public float Team1HpRate = 1f;
-    public float Team2HpRate = 1f;
-    public CriticalGaugeMode team1CGMode = CriticalGaugeMode.normal;
-    public CriticalGaugeMode team2CGMode = CriticalGaugeMode.normal;
-    public TeamMode Team1Mode = TeamMode.rotation;
-    public TeamMode Team2Mode = TeamMode.rotation;
+    public float team1HpRate = 1f;
+    public float team2HpRate = 1f;
+    public CriticalGaugeMode team1CGMode = CriticalGaugeMode.Normal;
+    public CriticalGaugeMode team2CGMode = CriticalGaugeMode.Normal;
+    public TeamMode team1Mode = TeamMode.Rotation;
+    public TeamMode team2Mode = TeamMode.Rotation;
 
-    public bool runTutorial
+    public bool RunTutorial
     {
         set;
         get;
@@ -51,8 +51,8 @@ public class FightInfo : ScriptableObject
         set;
         get;
     }
-    public string team1ID{ set; get; }
-    public string team2ID{ set; get; }
+    public string Team1ID{ set; get; }
+    public string Team2ID{ set; get; }
     
     public int Team2ArenaPoint {
         set;
@@ -65,13 +65,13 @@ public class FightInfo : ScriptableObject
         get;
     }
     
-    public bool team1Auto
+    public bool Team1Auto
     {
         get;
         set;
     }
     
-    public bool team2Auto
+    public bool Team2Auto
     {
         get;
         set;
@@ -96,8 +96,8 @@ public class FightInfo : ScriptableObject
         
         fightInfo.FightMembers = targetTeam;
         fightInfo.SaveDicToData();
-        fightInfo.Team1Mode = TeamMode.rotation;
-        fightInfo.Team2Mode = TeamMode.rotation;
+        fightInfo.team1Mode = TeamMode.Rotation;
+        fightInfo.team2Mode = TeamMode.Rotation;
         
         AssetDatabase.CreateAsset(fightInfo, path + "/" + fileName + ".asset");
         Debug.Log("Generated：" + path + "/" + fileName + ".asset");
@@ -147,9 +147,9 @@ public class FightInfo : ScriptableObject
     {
         var stage = CreateInstance<FightInfo>();
         stage.FightMembers = fightUnits;
-        stage.BattleGroundID = 0;
-        stage.Team1Mode = TeamMode.rotation;
-        stage.Team2Mode = TeamMode.rotation;
+        stage.battleGroundID = 0;
+        stage.team1Mode = TeamMode.Rotation;
+        stage.team2Mode = TeamMode.Rotation;
         stage.EventType = FightEventType.Arena;
         return stage;
     }
@@ -160,22 +160,22 @@ public class FightInfo : ScriptableObject
         
         stage.ID = source.ID;
         stage.FightMembers = source.FightMembers;
-        stage.BattleGroundID = source.BattleGroundID;
-        stage.Team1Mode = source.Team1Mode;
-        stage.Team2Mode = source.Team2Mode;
-        stage.team1Auto = source.team1Auto;
-        stage.team2Auto = source.team2Auto;
+        stage.battleGroundID = source.battleGroundID;
+        stage.team1Mode = source.team1Mode;
+        stage.team2Mode = source.team2Mode;
+        stage.Team1Auto = source.Team1Auto;
+        stage.Team2Auto = source.Team2Auto;
         stage.stageLevel = source.stageLevel;
-        stage.team1ID = source.team1ID;
-        stage.team2ID = source.team2ID;
-        stage.Team1HpRate = source.Team1HpRate;
-        stage.Team2HpRate = source.Team2HpRate;
+        stage.Team1ID = source.Team1ID;
+        stage.Team2ID = source.Team2ID;
+        stage.team1HpRate = source.team1HpRate;
+        stage.team2HpRate = source.team2HpRate;
         stage.Team2ArenaPoint = source.Team2ArenaPoint;
-        stage.runTutorial = source.runTutorial;
+        stage.RunTutorial = source.RunTutorial;
         stage.battleNameCH = source.battleNameCH;
         stage.battleNameENG = source.battleNameENG;
         stage.battleNameJPG = source.battleNameJPG;
-        stage.StageButtonSprite = source.StageButtonSprite;
+        stage.stageButtonSprite = source.stageButtonSprite;
         stage.EventType = source.EventType;
         
         Debug.Log("已经获取");
@@ -186,9 +186,9 @@ public class FightInfo : ScriptableObject
     {
         var stage = CreateInstance<FightInfo>();
         stage.FightMembers = FightMembers.RandomSkillTest(teamMode);
-        stage.BattleGroundID = 0;
-        stage.Team1Mode = teamMode;
-        stage.Team2Mode = teamMode;
+        stage.battleGroundID = 0;
+        stage.team1Mode = teamMode;
+        stage.team2Mode = teamMode;
         stage.EventType = FightEventType.SkillTest;
         return stage;
     }
@@ -197,9 +197,9 @@ public class FightInfo : ScriptableObject
     {
         var stage = CreateInstance<FightInfo>();
         stage.FightMembers = FightMembers.RandomFight();
-        stage.BattleGroundID = 0;
-        stage.Team1Mode = TeamMode.rotation;
-        stage.Team2Mode = TeamMode.rotation;
+        stage.battleGroundID = 0;
+        stage.team1Mode = TeamMode.Rotation;
+        stage.team2Mode = TeamMode.Rotation;
         stage.EventType = FightEventType.Arena;
         return stage;
     }
@@ -207,8 +207,8 @@ public class FightInfo : ScriptableObject
 
 public enum CriticalGaugeMode
 {
-    normal,
-    doubleGain,
+    Normal,
+    DoubleGain,
     Unlimited
 }
 
@@ -226,6 +226,6 @@ public enum FightEventType
 
 public enum TeamMode
 {
-    multiRaid = 1,
-    rotation = 2
+    MultiRaid = 1,
+    Rotation = 2
 }

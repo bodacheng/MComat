@@ -44,7 +44,7 @@ namespace mainMenu
         public void INI()
         {
             _stage = ScriptableObject.CreateInstance<FightInfo>();
-            _stage.BattleGroundID = 1;
+            _stage.battleGroundID = 1;
             
             IniMultiRaidModeUnitIcons(new List<HeroIcon> { team1back, team1left, team1front, team1right }, Team.player1);
             IniMultiRaidModeUnitIcons(new List<HeroIcon> { team2back, team2left, team2front, team2right }, Team.player2);
@@ -91,8 +91,8 @@ namespace mainMenu
             RotationTeam1T.gameObject.SetActive(false);
             RotationTeam2T.gameObject.SetActive(false);
             _stage.EventType= FightEventType.Self;
-            _stage.Team1Mode = TeamMode.multiRaid;
-            _stage.Team2Mode = TeamMode.multiRaid;
+            _stage.team1Mode = TeamMode.MultiRaid;
+            _stage.team2Mode = TeamMode.MultiRaid;
             FrameRefresh(MultiModeBtn.transform);
         }
         
@@ -103,27 +103,27 @@ namespace mainMenu
             RotationTeam1T.gameObject.SetActive(true);
             RotationTeam2T.gameObject.SetActive(true);
             _stage.EventType = FightEventType.Self;
-            _stage.Team1Mode = TeamMode.rotation;
-            _stage.Team2Mode = TeamMode.rotation;
+            _stage.team1Mode = TeamMode.Rotation;
+            _stage.team2Mode = TeamMode.Rotation;
             FrameRefresh(RotationModeBtn.transform);
         }
         
         public void FightStart()
         {
-            switch (_stage.Team1Mode)
+            switch (_stage.team1Mode)
             {
-                case TeamMode.multiRaid:
+                case TeamMode.MultiRaid:
                     _selfFight.HeroSets = _team1PosKeySet_M.LoadTeamDic();
                     _selfFight.EnemySets = _team2PosKeySet_M.LoadTeamDic();
                     break;
-                case TeamMode.rotation:
+                case TeamMode.Rotation:
                     _selfFight.HeroSets = _team1PosKeySet_R.LoadTeamDic();
                     _selfFight.EnemySets = _team2PosKeySet_R.LoadTeamDic();
                     break;
             }
             _stage.FightMembers = _selfFight;
-            _stage.team1ID = PlayerAccountInfo.Me.PlayFabId;
-            _stage.team2ID = PlayerAccountInfo.Me.PlayFabId + "_2";
+            _stage.Team1ID = PlayerAccountInfo.Me.PlayFabId;
+            _stage.Team2ID = PlayerAccountInfo.Me.PlayFabId + "_2";
             FightLoad.Go(_stage);
         }
         
@@ -150,9 +150,9 @@ namespace mainMenu
             }
             else
             {
-                switch (_stage.Team1Mode)
+                switch (_stage.team1Mode)
                 {
-                    case TeamMode.multiRaid:
+                    case TeamMode.MultiRaid:
                         switch (_focusingTeam)
                         {
                             case Team.player1:
@@ -165,7 +165,7 @@ namespace mainMenu
                                 break;
                         }
                         break;
-                    case TeamMode.rotation:
+                    case TeamMode.Rotation:
                         switch (_focusingTeam)
                         {
                             case Team.player1:

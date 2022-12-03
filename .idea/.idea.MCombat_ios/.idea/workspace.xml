@@ -3,15 +3,25 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/1.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/Members.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/Members.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SelectInheretSkill.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SelectInheretSkill.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSelect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Arena/ArenaFightTeamDisplay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Arena/ArenaFightTeamDisplay.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/Defines/AI_States_Blueprints/Behavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/Defines/AI_States_Blueprints/Behavior.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FightingStepLayer/FightingStepLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FightingStepLayer/FightingStepLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SelfFightLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SelfFightLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/2.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/2.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightLoad/FightLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightLoad/FightLoad.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightOverProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightOverProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightingProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightingProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/PreparingProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/PreparingProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/RTFightManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/RTFightManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/UnitsManger/UnitsManger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/UnitsManger/UnitsManger.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMembers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMembers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TeamUIManager/TeamUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TeamUIManager/TeamUIManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +49,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4379fcb5ffcd422abdabe963856ef06326000/1d/7d9a4d3f/TweenerCore`3.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.31/UnityEngine.TestRunner/Assertions/LogScope/ILogScope.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/RankingLayer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/ResourceManager/AsyncOperations/AsyncOperationHandle.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Nodes/Utility/Logic/IsFrontFaceNode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/Addressables.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -86,6 +97,7 @@
       <option name="presentableId" value="Default" />
       <updated>1663994799134</updated>
       <workItem from="1663994816436" duration="87000" />
+      <workItem from="1670039508505" duration="232000" />
     </task>
     <servers />
   </component>

@@ -57,7 +57,7 @@ namespace Soul
                 victim.PlusEx(temp + 5);
                 switch(gaugeMode)
                 {
-                    case CriticalGaugeMode.doubleGain:
+                    case CriticalGaugeMode.DoubleGain:
                         temp *= 2;
                         break;
                     default:

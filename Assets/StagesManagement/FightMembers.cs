@@ -104,13 +104,13 @@ public class FightMembers
 
         switch (teamMode)
         {
-            case TeamMode.multiRaid:
+            case TeamMode.MultiRaid:
                 target.EnemySets.Set(0, 0, char1);
                 target.EnemySets.Set(0, 1, char6);
                 target.HeroSets.Set(0, 0, char4);
                 target.HeroSets.Set(0, 1, char5);
                 break;
-            case TeamMode.rotation:
+            case TeamMode.Rotation:
                 target.EnemySets.Set(0, 0, char1);
                 target.EnemySets.Set(0, 1, char2);
                 target.EnemySets.Set(0, 2, char3);
@@ -153,11 +153,11 @@ public class FightMembers
         
         switch (teamMode)
         {
-            case TeamMode.multiRaid:
+            case TeamMode.MultiRaid:
                 target.EnemySets.Set(0, 0, char1);
                 target.HeroSets.Set(0, 0, char2);
                 break;
-            case TeamMode.rotation:
+            case TeamMode.Rotation:
                 target.EnemySets.Set(0, 0, char1);
                 target.HeroSets.Set(0, 0, char2);
                 break;

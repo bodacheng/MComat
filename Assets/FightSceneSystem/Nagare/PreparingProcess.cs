@@ -27,7 +27,7 @@ public class PreparingProcess : FSceneProcess
         var tasks = new List<UniTask>
         {
             AddressablesLogic.Essentials(),
-            BoundaryControlByGod.target.ChangeBackGround(NetFightScene.Fight.BattleGroundID),
+            BoundaryControlByGod.target.ChangeBackGround(NetFightScene.Fight.battleGroundID),
             RTFightManager.target.LoadUnits(NetFightScene.Fight),
             EffectsManager.IniEffectsPool("hit_ground", null, 3),
             EffectsManager.IniEffectsPool("wallCrack", null, 3),
@@ -37,17 +37,17 @@ public class PreparingProcess : FSceneProcess
         await UniTask.WhenAll(tasks);
         
         var teamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
-        RTFightManager.target.heroTeamConfig.playID = NetFightScene.Fight.team1ID;
-        RTFightManager.target.EnemyTeamConfig.playID = NetFightScene.Fight.team2ID;
+        RTFightManager.target.heroTeamConfig.playID = NetFightScene.Fight.Team1ID;
+        RTFightManager.target.EnemyTeamConfig.playID = NetFightScene.Fight.Team2ID;
         
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.target.heroTeamConfig, RTFightManager.target.team1.TeamMembers.GetValues());
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.target.EnemyTeamConfig, RTFightManager.target.team2.TeamMembers.GetValues());
         FightLogger.value.ReadyToLog(teamMembers);
         
-        RTFightManager.target.team1.Auto = NetFightScene.Fight.team1Auto;
-        RTFightManager.target.team2.Auto = NetFightScene.Fight.runTutorial ? false : NetFightScene.Fight.team2Auto;
-        RTFightManager.target.team1.TeamMode = NetFightScene.Fight.Team1Mode;
-        RTFightManager.target.team2.TeamMode = NetFightScene.Fight.Team2Mode;
+        RTFightManager.target.team1.Auto = NetFightScene.Fight.Team1Auto;
+        RTFightManager.target.team2.Auto = NetFightScene.Fight.RunTutorial ? false : NetFightScene.Fight.Team2Auto;
+        RTFightManager.target.team1.TeamMode = NetFightScene.Fight.team1Mode;
+        RTFightManager.target.team2.TeamMode = NetFightScene.Fight.team2Mode;
         RTFightManager.target.team1.teamConfig = RTFightManager.target.heroTeamConfig;
         RTFightManager.target.team2.teamConfig = RTFightManager.target.EnemyTeamConfig;
         RTFightManager.target.team1.TeamStandPoints = NetFightScene.target.Team1StandPoints;
@@ -64,21 +64,21 @@ public class PreparingProcess : FSceneProcess
         
         switch (RTFightManager.target.team1.TeamMode)
         {
-            case TeamMode.multiRaid:
-                RTFightManager.target.team1.Initialize_Multi(NetFightScene.Fight.Team1HpRate, NetFightScene.Fight.team1CGMode);
+            case TeamMode.MultiRaid:
+                RTFightManager.target.team1.Initialize_Multi(NetFightScene.Fight.team1HpRate, NetFightScene.Fight.team1CGMode);
                 break;
-            case TeamMode.rotation:
-                RTFightManager.target.team1.TeamsIni_Rotate(NetFightScene.Fight.Team1HpRate, NetFightScene.Fight.team1CGMode);
+            case TeamMode.Rotation:
+                RTFightManager.target.team1.TeamsIni_Rotate(NetFightScene.Fight.team1HpRate, NetFightScene.Fight.team1CGMode);
                 break;
         }
         
         switch (RTFightManager.target.team2.TeamMode)
         {
-            case TeamMode.multiRaid:
-                RTFightManager.target.team2.Initialize_Multi(NetFightScene.Fight.Team2HpRate, NetFightScene.Fight.team2CGMode);
+            case TeamMode.MultiRaid:
+                RTFightManager.target.team2.Initialize_Multi(NetFightScene.Fight.team2HpRate, NetFightScene.Fight.team2CGMode);
                 break;
-            case TeamMode.rotation:
-                RTFightManager.target.team2.TeamsIni_Rotate(NetFightScene.Fight.Team2HpRate, NetFightScene.Fight.team2CGMode);
+            case TeamMode.Rotation:
+                RTFightManager.target.team2.TeamsIni_Rotate(NetFightScene.Fight.team2HpRate, NetFightScene.Fight.team2CGMode);
                 break;
         }
         
@@ -89,20 +89,20 @@ public class PreparingProcess : FSceneProcess
         
         switch (RTFightManager.target.team1.TeamMode)
         {
-            case TeamMode.multiRaid:
+            case TeamMode.MultiRaid:
                 RTFightManager.target.team1.ToStartPos_Multi();
                 break;
-            case TeamMode.rotation:
+            case TeamMode.Rotation:
                 RTFightManager.target.team1.ToStartPos_Rotate();
                 break;
         }
         
         switch (RTFightManager.target.team2.TeamMode)
         {
-            case TeamMode.multiRaid:
+            case TeamMode.MultiRaid:
                 RTFightManager.target.team2.ToStartPos_Multi();
                 break;
-            case TeamMode.rotation:
+            case TeamMode.Rotation:
                 RTFightManager.target.team2.ToStartPos_Rotate();
                 break;
         }

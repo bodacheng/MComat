@@ -50,22 +50,22 @@ namespace FightScene
         
         public void ModeStart()
         {
-            switch (loadFight.Team1Mode)
+            switch (loadFight.team1Mode)
             {
-                case TeamMode.multiRaid:
+                case TeamMode.MultiRaid:
                     team1.AllUnitsStartOff();
                     break;
-                case TeamMode.rotation:
+                case TeamMode.Rotation:
                     team1.ChangeFightingUnit();
                     break;
             }
             
-            switch (loadFight.Team2Mode)
+            switch (loadFight.team2Mode)
             {
-                case TeamMode.multiRaid:
+                case TeamMode.MultiRaid:
                     team2.AllUnitsStartOff();
                     break;
-                case TeamMode.rotation:
+                case TeamMode.Rotation:
                     team2.ChangeFightingUnit();
                     break;
             }

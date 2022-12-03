@@ -71,13 +71,13 @@ public class FightingStepLayer : UILayer
         Team1Auto.Initialize((() => RTFightManager.target.team1.Auto), switchTeam1Auto);
         Team2Auto.Initialize((() => RTFightManager.target.team2.Auto), switchTeam2Auto);
         
-        team1UI.TeamMode = NetFightScene.Fight.Team1Mode;
-        team2UI.TeamMode = NetFightScene.Fight.Team2Mode;
+        team1UI.TeamMode = NetFightScene.Fight.team1Mode;
+        team2UI.TeamMode = NetFightScene.Fight.team2Mode;
         
         team1UI.teamConfig = RTFightManager.target.heroTeamConfig;
         team2UI.teamConfig = RTFightManager.target.EnemyTeamConfig;
-        team1UI.teamConfig.playID = NetFightScene.Fight.team1ID;
-        team2UI.teamConfig.playID = NetFightScene.Fight.team2ID;
+        team1UI.teamConfig.playID = NetFightScene.Fight.Team1ID;
+        team2UI.teamConfig.playID = NetFightScene.Fight.Team2ID;
         team1UI.TeamMembers = RTFightManager.target.team1.TeamMembers;
         team2UI.TeamMembers = RTFightManager.target.team2.TeamMembers;
         

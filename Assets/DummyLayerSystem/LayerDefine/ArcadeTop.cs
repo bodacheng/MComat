@@ -83,7 +83,7 @@ public class ArcadeTop : UILayer
                 one.EventType = FightEventType.Quest;
                 if (one.ID == "1")
                 {
-                    one.runTutorial = true;
+                    one.RunTutorial = true;
                 }
                 PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, one, true);
             }

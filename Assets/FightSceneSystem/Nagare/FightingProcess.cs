@@ -32,7 +32,7 @@ namespace FightScene
             {
                 _layer.gameObject.SetActive(true);
             }
-            if (NetFightScene.Fight.runTutorial)
+            if (NetFightScene.Fight.RunTutorial)
                 _layer.OpenTutorial();
             RTFightManager.target.ModeStart();
         }

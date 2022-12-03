@@ -75,9 +75,9 @@ namespace FightScene
         {
             switch (TeamMode)
             {
-                case TeamMode.multiRaid:
+                case TeamMode.MultiRaid:
                     break;
-                case TeamMode.rotation:
+                case TeamMode.Rotation:
                     WaitUnitChange();
                     break;
             }
@@ -88,7 +88,7 @@ namespace FightScene
             var transforms = new List<Transform>();
             switch (TeamMode)
             {
-                case TeamMode.multiRaid:
+                case TeamMode.MultiRaid:
                     foreach (var unit in TeamMembers.GetValues())
                     {
                         if (unit._MyBehaviorRunner.GetNowState().StateKey != "Death")
@@ -97,7 +97,7 @@ namespace FightScene
                         }
                     }
                     return transforms;
-                case TeamMode.rotation:
+                case TeamMode.Rotation:
                     if (RMode_Unit.Value != null)
                     {
                         transforms = new List<Transform>

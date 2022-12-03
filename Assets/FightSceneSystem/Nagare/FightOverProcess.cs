@@ -120,7 +120,7 @@ namespace FightScene
         void SkillTestReload()
         {
             RTFightManager.target.ClearUnits();
-            NetFightScene.Fight = FightInfo.RandomSkillTestStage(TeamMode.rotation);
+            NetFightScene.Fight = FightInfo.RandomSkillTestStage(TeamMode.Rotation);
             LocalGameRestart();
         }
     }

@@ -9,7 +9,7 @@ public static class FightLoad
         if (loadWithMyTeam)
         {
             stage.LoadMyTeam();
-            stage.team1ID = PlayerAccountInfo.Me.PlayFabId;
+            stage.Team1ID = PlayerAccountInfo.Me.PlayFabId;
         }
         
         if (stage.FightMembers.HeroSets.GetValues().Count < 1 || stage.FightMembers.EnemySets.GetValues().Count < 1)
@@ -31,16 +31,16 @@ public static class FightLoad
         switch (stage.EventType)
         {
             case FightEventType.Screensaver:
-                stage.team1Auto = true;
-                stage.team2Auto = true;
+                stage.Team1Auto = true;
+                stage.Team2Auto = true;
                 break;
             case FightEventType.SkillTest:
-                stage.team1Auto = true;
-                stage.team2Auto = true;
+                stage.Team1Auto = true;
+                stage.Team2Auto = true;
                 break;
             default:
-                stage.team1Auto = true;
-                stage.team2Auto = true;
+                stage.Team1Auto = true;
+                stage.Team2Auto = true;
                 break;
         }
         

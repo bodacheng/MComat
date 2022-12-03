@@ -31,10 +31,10 @@ namespace FightScene
         {
             switch (TeamMode)
             {
-                case TeamMode.multiRaid:
+                case TeamMode.MultiRaid:
                     MultiClear();
                     break;
-                case TeamMode.rotation:
+                case TeamMode.Rotation:
                     RotateClear();
                     break;
             }
@@ -44,7 +44,7 @@ namespace FightScene
         {
             switch (TeamMode)
             {
-                case TeamMode.multiRaid:
+                case TeamMode.MultiRaid:
                     InsTeamUI_Multi();
                     if (teamConfig.myTeam != RTFightManager.playerTeam)
                     {
@@ -58,7 +58,7 @@ namespace FightScene
                         }).AddTo(gameObject);
                     }
                     break;
-                case TeamMode.rotation:
+                case TeamMode.Rotation:
                     IniTeamUI_Rotate(changeUnit);
                     IniComboHit(RMode_Unit);
                     RMode_Unit.Subscribe(Refresh).AddTo(gameObject);
