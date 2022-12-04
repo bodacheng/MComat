@@ -42,19 +42,19 @@ namespace Soul
             #endregion
 
             #region 查找已经可以触发的后续技能
-            foreach (string _Key in CurrentSKillEntity.CasualTo)
+            foreach (var key in CurrentSKillEntity.CasualTo)
             {
-                BehaviourDic.TryGetValue(_Key, out _tryBehavior);
+                BehaviourDic.TryGetValue(key, out _tryBehavior);
                 if (_tryBehavior == null)
                 {
-                    Debug.Log("没找到"+_Key);
+                    Debug.Log("没找到"+key);
                     return;
                 }
                 if (!_tryBehavior.Capacity_enter_condition())
                 {
                     continue;
                 }
-                SkillEntityDic.TryGetValue(_Key, out _tempSKillEntity);
+                SkillEntityDic.TryGetValue(key, out _tempSKillEntity);
                 optionsForButtonRefresh.Add(_tempSKillEntity);
                 if ((_tempSKillEntity.CAN_BE_CANCELLED_TO && _SkillCancelFlag.Cancel_Flag) || _nowBehavior.Capacity_Exit_Condition())
                 {

@@ -13,7 +13,7 @@ namespace Soul
     {
         readonly SSIMultiDictionary _triggered = new ();
         
-        public void Decision(BehaviorRunner runner, List<SkillEntity> Options, bool Auto)
+        public void Decision(BehaviorRunner runner, List<SkillEntity> Options, bool auto)
         {
             bool changed = false;
             
@@ -34,7 +34,7 @@ namespace Soul
             }
             
             #region AI决策
-            if (Auto)
+            if (auto)
             {
                 changed = AI_RUNs(runner, Options);
             }
@@ -45,66 +45,66 @@ namespace Soul
                 AutoReset(runner);
         }
 
-        bool BtnTrigger(BehaviorRunner runner, List<SkillEntity> Options, MobileInputsManager InputsManager)
+        bool BtnTrigger(BehaviorRunner runner, List<SkillEntity> options, MobileInputsManager inputsManager)
         {
             // 主动退出当前状态的控制类条件是否激活
-            if (!BehaviourExitInputTrigger(runner.CurrentSKillEntity, InputsManager))
+            if (!BehaviourExitInputTrigger(runner.CurrentSKillEntity, inputsManager))
             {
                 return false;
             }
             
-            for (var i = 0; i < Options.Count; i++)
+            for (var i = 0; i < options.Count; i++)
             {
-                switch (Options[i].EnterInput)
+                switch (options[i].EnterInput)
                 {
                     case InputKey.Attack1:
                     if (MobileInputsManager.attack)
                     {
-                        InputsManager.SkillExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
+                        inputsManager.SkillExplosion(options[i].EnterInput, options[i].SP_LEVEL);
                         runner.SingleFightLog.WriteLog(
                         new SingleFightLog.BehaviourFightRecord
                         {
                             AI_Decided = false,
-                            stateKey = Options[i].REAL_NAME,
+                            stateKey = options[i].REAL_NAME,
                             whyIDidThis = null
                         }
                         );
                         runner.SingleFightLog.AnalysisLog(runner.ConditionAndRespondPriority);
-                        runner.ChangeState(Options[i].REAL_NAME);
+                        runner.ChangeState(options[i].REAL_NAME);
                         return true;
                     }
                     break;
                     case InputKey.Attack2:
                     if (MobileInputsManager.fire1)
                     {
-                        InputsManager.SkillExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
+                        inputsManager.SkillExplosion(options[i].EnterInput, options[i].SP_LEVEL);
                         runner.SingleFightLog.WriteLog(
                             new SingleFightLog.BehaviourFightRecord
                             {
                                 AI_Decided = false,
-                                stateKey = Options[i].REAL_NAME,
+                                stateKey = options[i].REAL_NAME,
                                 whyIDidThis = null
                             }
                         );
                         runner.SingleFightLog.AnalysisLog(runner.ConditionAndRespondPriority);
-                        runner.ChangeState(Options[i].REAL_NAME);
+                        runner.ChangeState(options[i].REAL_NAME);
                         return true;
                     }
                     break;
                     case InputKey.Attack3:
                     if (MobileInputsManager.fire2)
                     {
-                        InputsManager.SkillExplosion(Options[i].EnterInput, Options[i].SP_LEVEL);
+                        inputsManager.SkillExplosion(options[i].EnterInput, options[i].SP_LEVEL);
                         runner.SingleFightLog.WriteLog(
                         new SingleFightLog.BehaviourFightRecord
                             {
                                 AI_Decided = false,
-                                stateKey = Options[i].REAL_NAME,
+                                stateKey = options[i].REAL_NAME,
                                 whyIDidThis = null
                             }
                         );
                         runner.SingleFightLog.AnalysisLog(runner.ConditionAndRespondPriority);
-                        runner.ChangeState(Options[i].REAL_NAME);
+                        runner.ChangeState(options[i].REAL_NAME);
                         return true;
                     }
                     break;
@@ -115,12 +115,12 @@ namespace Soul
                         new SingleFightLog.BehaviourFightRecord
                             {
                                 AI_Decided = false,
-                                stateKey = Options[i].REAL_NAME,
+                                stateKey = options[i].REAL_NAME,
                                 whyIDidThis = null
                             }
                         );
                         runner.SingleFightLog.AnalysisLog(runner.ConditionAndRespondPriority);
-                        runner.ChangeState(Options[i].REAL_NAME);
+                        runner.ChangeState(options[i].REAL_NAME);
                         return true;
                     }
                     break;
@@ -131,19 +131,19 @@ namespace Soul
                         new SingleFightLog.BehaviourFightRecord
                             {
                                 AI_Decided = false,
-                                stateKey = Options[i].REAL_NAME,
+                                stateKey = options[i].REAL_NAME,
                                 whyIDidThis = null
                             }
                         );
                         runner.SingleFightLog.AnalysisLog(runner.ConditionAndRespondPriority);
-                        runner.ChangeState(Options[i].REAL_NAME);
+                        runner.ChangeState(options[i].REAL_NAME);
                         return true;
                     }
                     break;
                     case InputKey.Null:
                         if (!MobileInputsManager.defendButtonHover && !MobileInputsManager.acc && !MobileInputsManager.fire2 && !MobileInputsManager.fire1 && !MobileInputsManager.attack)
                         {
-                            runner.ChangeState(Options[i].REAL_NAME);
+                            runner.ChangeState(options[i].REAL_NAME);
                             return true;
                         }
                     break;
@@ -218,7 +218,7 @@ namespace Soul
 
         void AutoReset(BehaviorRunner behaviorRunner)
         {
-            if (behaviorRunner.GetNowState().StateKey != behaviorRunner._commandWaitingState.StateKey && behaviorRunner.GetNowState().Capacity_Exit_Condition())
+            if (behaviorRunner.GetNowState().StateKey != behaviorRunner.CommandWaitingState.StateKey && behaviorRunner.GetNowState().Capacity_Exit_Condition())
             {
                 behaviorRunner.ChangeToWaitingState();
             }

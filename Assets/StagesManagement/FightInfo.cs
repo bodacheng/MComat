@@ -34,6 +34,8 @@ public class FightInfo : ScriptableObject
     public CriticalGaugeMode team2CGMode = CriticalGaugeMode.Normal;
     public TeamMode team1Mode = TeamMode.Rotation;
     public TeamMode team2Mode = TeamMode.Rotation;
+    public AIMode team1AIMode = AIMode.Aggressive;
+    public AIMode team2AIMode = AIMode.Aggressive;
 
     public bool RunTutorial
     {
@@ -218,6 +220,12 @@ public enum CriticalGaugeMode
     Normal,
     DoubleGain,
     Unlimited
+}
+
+public enum AIMode
+{
+    Aggressive,
+    Dumb
 }
 
 // 系统会根据这个量来决定一场战斗结束后应该做什么。
