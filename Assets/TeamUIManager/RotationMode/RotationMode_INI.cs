@@ -18,7 +18,7 @@ namespace FightScene
                 sideIcon.name = center.name + " ICon";
                 sideIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
                 sideIcon.focusingCharIcon.iconButton.onClick.AddListener(() => { ChangeUnit(center); });
-                var info = RTFightManager.target.UnitInfoRef[center];
+                var info = RTFightManager.Target.UnitInfoRef[center];
                 sideIcon.focusingCharIcon.ChangeIcon(info);
                 sideIcon.gameObject.SetActive(true);
                 sideIcon.focusingCharIcon.CooldownCurtainUpdate(0);
@@ -35,33 +35,33 @@ namespace FightScene
                 }
                 DicAdd<Data_Center, SideCharIcon>.Add(UnitIconDic, center, sideIcon);
                 
-                RTFightManager.target.RefreshTimeDic[center].Subscribe((x) =>
+                RTFightManager.Target.RefreshTimeDic[center].Subscribe((x) =>
                 {
                     UnitIconDic[center].focusingCharIcon.CooldownCurtainUpdate(x/10);
-                }).AddTo(RTFightManager.target.disposables);
+                }).AddTo(RTFightManager.Target.Disposables);
                 
                 var maxHp = center.FightDataRef.CurrentHp.Value;
                 center.FightDataRef.CurrentHp.Subscribe(x =>
                 {
                     RefreshHPBar(center, x, maxHp);
-                }).AddTo(RTFightManager.target.disposables);
+                }).AddTo(RTFightManager.Target.Disposables);
                 
                 center.FightDataRef.CriticalGauge.Subscribe(x =>
                 {
                     RefreshExBar(center, x, FightGlobalSetting._EXMax);
-                }).AddTo(RTFightManager.target.disposables);
+                }).AddTo(RTFightManager.Target.Disposables);
                 
                 center.FightDataRef.Resistance.Subscribe(x =>
                 {
                     RefreshResistanceBar(center, x);
-                }).AddTo(RTFightManager.target.disposables);
+                }).AddTo(RTFightManager.Target.Disposables);
                 
                 center.FightDataRef.IsDead.Subscribe(x => {
                     if (x)
                     {
                         UnitIconDic[center].focusingCharIcon.CooldownCurtainUpdate(1);
                     }
-                }).AddTo(RTFightManager.target.disposables);
+                }).AddTo(RTFightManager.Target.Disposables);
             }
         }
         

@@ -26,6 +26,7 @@ public class FightInfoGUI : Editor
         {
             fightInfo.SaveDicToData();
             EditorUtility.SetDirty(fightInfo);
+            AssetDatabase.SaveAssets();
         }
     }
 }

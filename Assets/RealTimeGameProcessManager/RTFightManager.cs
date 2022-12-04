@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using Cysharp.Threading.Tasks;
 using UniRx;
 
@@ -21,19 +20,19 @@ namespace FightScene
         public readonly TeamConfig heroTeamConfig = new("1", Team.player1, new List<Team>() { Team.player2 });
         public readonly TeamConfig EnemyTeamConfig = new("2", Team.player2, new List<Team>() { Team.player1 });
         
-        public static RTFightManager target;
+        public static RTFightManager Target;
         public static Team playerTeam = Team.player1;
         
         public readonly IDictionary<Data_Center, UnitInfo> UnitInfoRef = new Dictionary<Data_Center, UnitInfo>();
         public readonly IDictionary<Data_Center, ReactiveProperty<float>> RefreshTimeDic = new Dictionary<Data_Center, ReactiveProperty<float>>();
         
-        FightInfo loadFight;
+        FightInfo _loadFight;
         
-        public readonly CompositeDisposable disposables = new ();
+        public readonly CompositeDisposable Disposables = new ();
         
         void Awake()
         {
-            target = this;
+            Target = this;
         }
         
         public async UniTask LoadUnits(FightInfo info)
@@ -44,13 +43,13 @@ namespace FightScene
         
         public void SetGame(FightInfo stage)
         {
-            loadFight = stage;
+            _loadFight = stage;
             NetFightScene.target.LoadStageFinished.Value = true;
         }
         
         public void ModeStart()
         {
-            switch (loadFight.team1Mode)
+            switch (_loadFight.team1Mode)
             {
                 case TeamMode.MultiRaid:
                     team1.AllUnitsStartOff();
@@ -60,7 +59,7 @@ namespace FightScene
                     break;
             }
             
-            switch (loadFight.team2Mode)
+            switch (_loadFight.team2Mode)
             {
                 case TeamMode.MultiRaid:
                     team2.AllUnitsStartOff();
@@ -88,11 +87,11 @@ namespace FightScene
         
         public void ClearUnitData()
         {
-            foreach (var one in team1.TeamMembers.GetValues())
+            foreach (var one in team1.teamMembers.GetValues())
             {
                 one.CleanClear();
             }
-            foreach (var one in team2.TeamMembers.GetValues())
+            foreach (var one in team2.teamMembers.GetValues())
             {
                 one.CleanClear();
             }
@@ -100,16 +99,16 @@ namespace FightScene
         
         public void ClearUnits()
         {
-            foreach (var one in team1.TeamMembers.GetValues())
+            foreach (var one in team1.teamMembers.GetValues())
             {
                 Destroy(one.WholeT.gameObject);
             }
-            foreach (var one in team2.TeamMembers.GetValues())
+            foreach (var one in team2.teamMembers.GetValues())
             {
                 Destroy(one.WholeT.gameObject);
             }
-            team1.TeamMembers.Clear();
-            team2.TeamMembers.Clear();
+            team1.teamMembers.Clear();
+            team2.teamMembers.Clear();
         }
     }
 }

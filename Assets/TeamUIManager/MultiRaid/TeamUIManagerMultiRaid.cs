@@ -33,7 +33,7 @@ namespace FightScene
                     {
                         Action1(center);
                     });
-                    var unitInfo = RTFightManager.target.UnitInfoRef[center];
+                    var unitInfo = RTFightManager.Target.UnitInfoRef[center];
                     _SideIcon.focusingCharIcon.ChangeIcon(unitInfo);
                     _SideIcon.gameObject.SetActive(true);
                 }

@@ -31,7 +31,6 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] int resistanceMax = 10;
     [SerializeField] int eXMax = 120;
     [SerializeField] int hurtObjectPreLoadCount = 5;
-    [SerializeField] int dumbAIDecisionDelay = 150;
     [SerializeField] Material shadowMaterial;
 
     public static int _sceneStep;//0 :mainmenu 1: fightscene
@@ -63,7 +62,6 @@ public class FightGlobalSetting : ScriptableObject
     public static bool HitBoxLogger = true;
     public static int _HurtObjectPreLoadCount;
     public static Material _shadowMaterial;
-    public static int _dumbAIDecisionDelay;
     public static int _defendHP;
     
     public void Initialise()
@@ -115,8 +113,6 @@ public class FightGlobalSetting : ScriptableObject
         _EXMax = eXMax;
         
         _shadowMaterial = shadowMaterial;
-
-        _dumbAIDecisionDelay = dumbAIDecisionDelay;
     }
     
     // 900血，10攻击力，1打1的话接近40秒左右游戏结束。但如果存在大量远距离对火立回那么就不太好说这个时间。。

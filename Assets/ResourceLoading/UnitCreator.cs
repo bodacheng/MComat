@@ -13,7 +13,7 @@ public class UnitCreator {
             return _D;
         }
         var unitConfig = Units.RowToUnitConfigInfo(Units.Find_RECORD_ID(info.r_id));
-        await _D.Step2Initialize (unitConfig.TYPE, info, unitConfig.element);
+        await _D.Step2Initialize (unitConfig.TYPE, unitConfig.element);
         return _D;
     }
 }

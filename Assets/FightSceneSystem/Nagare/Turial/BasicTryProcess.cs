@@ -57,8 +57,8 @@ public class BasicTryProcess : FSceneProcess
         
     public IEnumerator EnterProcess()
     {
-        AllMembers.Add(Team.player1, RTFightManager.target.team1.TeamMembers.GetValues());
-        AllMembers.Add(Team.player2, RTFightManager.target.team2.TeamMembers.GetValues());
+        AllMembers.Add(Team.player1, RTFightManager.Target.team1.teamMembers.GetValues());
+        AllMembers.Add(Team.player2, RTFightManager.Target.team2.teamMembers.GetValues());
         TeamDeadMemberDictionary.Clear();
         
         foreach (KeyValuePair<Team,List<Data_Center>> keyValuePair in AllMembers)
@@ -75,7 +75,7 @@ public class BasicTryProcess : FSceneProcess
             TeamDeadMemberDictionary.Add(keyValuePair.Key,new List<Data_Center>());//这个什么意思呢，就是说把所有队伍的Team值加进TeamDeadMemberDictionary，value是个空列表，谁死了谁加进入
         }
         loser = Team.none;
-        RTFightManager.target.ModeStart();
+        RTFightManager.Target.ModeStart();
         //NetFightScene.target.FightCanvas.gameObject.SetActive(true);
 
         watchetargets.Clear();

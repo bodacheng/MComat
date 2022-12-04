@@ -1,8 +1,8 @@
 ﻿#if UNITY_EDITOR
 using System.Collections.Generic;
 using mainMenu;
+using UnityEditor;
 using UnityEngine;
-using Skill;
 
 // 后排敌人——〉角色ID，
 // localID = 0，脚本ID，等级 前排中央敌人——〉角色ID，localID = 1，脚本ID，等级 前排左敌人——〉角色ID，localID = 2，脚本ID，等级 前排右敌人——〉角色ID，localID = 3，脚本ID，等级
@@ -11,18 +11,28 @@ public partial class StageEditor
     IDictionary<string, string> _unitIDsAndNames;
     UnitInfo _focusingUnitInfo;
     string _focusingType = "human";
+    int stageLevel = 1;
     
     public void OnGUIView(FightMembers target)
     {
         if (!Initialized)
         {
             UIParamIni();
+            // 认为所有敌人等级一致的简化处理
+            foreach (var unitInfo in target.EnemySets.GetValues())
+            {
+                stageLevel = unitInfo.level;
+            }
             Initialized = true;
         }
         
         GUILayout.Space(10);
         Members(target);
         GUILayout.Space(10);
+        
+        stageLevel =  EditorGUILayout.IntField("Stage Level:", stageLevel);
+        target.SetEnemyLevel(stageLevel);
+        GUILayout.Space(5);
         
         // 指定站位人员的添加与删除 //
         GUILayout.BeginHorizontal();

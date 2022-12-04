@@ -36,7 +36,7 @@ public class CommonFightResult : UILayer
             iassi.transform.SetParent(IconAndSKillShowUISetT);
             iassi.transform.localPosition = Vector3.zero;
             iassi.transform.localScale = Vector3.one;
-            nineForShow.ShowStones_Acc(RTFightManager.target.UnitInfoRef[kv.Key].id);
+            nineForShow.ShowStones_Acc(RTFightManager.Target.UnitInfoRef[kv.Key].id);
         }
     }
     

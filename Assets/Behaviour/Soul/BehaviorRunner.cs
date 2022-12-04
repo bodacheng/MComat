@@ -25,23 +25,19 @@ namespace Soul
         
         #region 辅助模块：控制器
         readonly Controller _controller = new();
+        public Controller Controller => _controller;
         #endregion
         
         readonly Empty_State _emptyState = new();
         Behavior _nowBehavior;
         Behavior _lastBehavior;
         Behavior _tryBehavior;
-        public Behavior CommandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
+        Behavior _commandWaitingState;//所谓的待机状态。和首发状态分开处理，因为有实际作用的技能肯定要优先释放，没有的话才进行一些移动等等。
+        public Behavior CommandWaitingState => _commandWaitingState;
         #endregion
 
-        private AIMode _aiMode;
+        public AIMode AIMode { get; set; }
 
-        public AIMode AIMode
-        {
-            get => _aiMode;
-            set => _aiMode = value;
-        }
-        
         public MobileInputsManager InputsManager
         {
             get;
@@ -167,16 +163,16 @@ namespace Soul
 
         public void ChangeToWaitingState()
         {
-            BehaviourDic.TryGetValue(CommandWaitingState.StateKey, out _tryBehavior);
+            BehaviourDic.TryGetValue(_commandWaitingState.StateKey, out _tryBehavior);
             if (_tryBehavior != GetNowState())//避免战斗待机状态重复进入
             {
-                ChangeState(CommandWaitingState.StateKey);
+                ChangeState(_commandWaitingState.StateKey);
             }
         }
         
         public void ChangeToTestMode()
         {
-            BehaviourDic.TryGetValue(CommandWaitingState.StateKey, out _tryBehavior);
+            BehaviourDic.TryGetValue(_commandWaitingState.StateKey, out _tryBehavior);
             var move_State = (Move_State)_tryBehavior;
             move_State._AIMoveStyle = AIMoveMode.test;
             ChangeToWaitingState();

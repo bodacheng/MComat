@@ -53,7 +53,7 @@ public partial class PlayFabReadClient
         PlayFabClientAPI.UpdateUserData
         (
             req,
-            (UpdateUserDataResult obj) => {
+            obj => {
                 finished.Invoke(true);
             },
             errorCallback => {
@@ -72,7 +72,7 @@ public partial class PlayFabReadClient
                 PlayFabId = PlayerAccountInfo.Me.PlayFabId,
                 Keys = new List<string>() { targetModeCode }
             },
-            (GetUserDataResult obj) => {
+            obj => {
                 if (obj.Data.ContainsKey(targetModeCode))
                 {
                     var userData = obj.Data[targetModeCode];

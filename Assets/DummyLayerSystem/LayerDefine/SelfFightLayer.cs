@@ -28,18 +28,18 @@ namespace mainMenu
         [SerializeField] HeroIcon team11_R, team12_R, team13_R;
         [SerializeField] HeroIcon team21_R, team22_R, team23_R;
         
-        readonly MultiDic<Team, int, HeroIcon> teamButtonDic_M = new ();
-        readonly MultiDic<Team, int, HeroIcon> teamButtonDic_R = new ();
-        readonly IDictionary<HeroIcon, int> IconNumCheck = new Dictionary<HeroIcon, int>();
+        readonly MultiDic<Team, int, HeroIcon> _teamButtonDicM = new ();
+        readonly MultiDic<Team, int, HeroIcon> _teamButtonDicR = new ();
+        readonly IDictionary<HeroIcon, int> _iconNumCheck = new Dictionary<HeroIcon, int>();
         readonly FightMembers _selfFight = new() { };
         FightInfo _stage;
         Team _focusingTeam;
         int _focusingPosNum = -1;
         
-        PosKeySet _team1PosKeySet_M = new ();
-        PosKeySet _team2PosKeySet_M = new ();
-        PosKeySet _team1PosKeySet_R = new ();
-        PosKeySet _team2PosKeySet_R = new ();
+        PosKeySet _team1PosKeySetM = new ();
+        PosKeySet _team2PosKeySetM = new ();
+        PosKeySet _team1PosKeySetR = new ();
+        PosKeySet _team2PosKeySetR = new ();
         
         public void INI()
         {
@@ -57,19 +57,19 @@ namespace mainMenu
         
         public void Clear()
         {
-            foreach (var Icon in teamButtonDic_M.GetValues())
+            foreach (var icon in _teamButtonDicM.GetValues())
             {
-                Icon.Clear();
+                icon.Clear();
             }
-            foreach (var Icon in teamButtonDic_R.GetValues())
+            foreach (var icon in _teamButtonDicR.GetValues())
             {
-                Icon.Clear();
+                icon.Clear();
             }
             
-            _team1PosKeySet_M = new PosKeySet();
-            _team2PosKeySet_M = new PosKeySet();
-            _team1PosKeySet_R = new PosKeySet();
-            _team2PosKeySet_R = new PosKeySet();
+            _team1PosKeySetM = new PosKeySet();
+            _team2PosKeySetM = new PosKeySet();
+            _team1PosKeySetR = new PosKeySet();
+            _team2PosKeySetR = new PosKeySet();
         }
         
         void CancelSelect()
@@ -113,12 +113,12 @@ namespace mainMenu
             switch (_stage.team1Mode)
             {
                 case TeamMode.MultiRaid:
-                    _selfFight.HeroSets = _team1PosKeySet_M.LoadTeamDic();
-                    _selfFight.EnemySets = _team2PosKeySet_M.LoadTeamDic();
+                    _selfFight.HeroSets = _team1PosKeySetM.LoadTeamDic();
+                    _selfFight.EnemySets = _team2PosKeySetM.LoadTeamDic();
                     break;
                 case TeamMode.Rotation:
-                    _selfFight.HeroSets = _team1PosKeySet_R.LoadTeamDic();
-                    _selfFight.EnemySets = _team2PosKeySet_R.LoadTeamDic();
+                    _selfFight.HeroSets = _team1PosKeySetR.LoadTeamDic();
+                    _selfFight.EnemySets = _team2PosKeySetR.LoadTeamDic();
                     break;
             }
             _stage.FightMembers = _selfFight;
@@ -156,12 +156,12 @@ namespace mainMenu
                         switch (_focusingTeam)
                         {
                             case Team.player1:
-                                _team1PosKeySet_M.SetPosMemInfoByInstanceID(_focusingPosNum, instanceID);
-                                ChangeIconOnPos(_focusingPosNum, teamButtonDic_M, _team1PosKeySet_M);
+                                _team1PosKeySetM.SetPosMemInfoByInstanceID(_focusingPosNum, instanceID);
+                                ChangeIconOnPos(_focusingPosNum, _teamButtonDicM, _team1PosKeySetM);
                                 break;
                             case Team.player2:
-                                _team2PosKeySet_M.SetPosMemInfoByInstanceID(_focusingPosNum, instanceID);
-                                ChangeIconOnPos(_focusingPosNum, teamButtonDic_M, _team2PosKeySet_M);
+                                _team2PosKeySetM.SetPosMemInfoByInstanceID(_focusingPosNum, instanceID);
+                                ChangeIconOnPos(_focusingPosNum, _teamButtonDicM, _team2PosKeySetM);
                                 break;
                         }
                         break;
@@ -169,12 +169,12 @@ namespace mainMenu
                         switch (_focusingTeam)
                         {
                             case Team.player1:
-                                _team1PosKeySet_R.SetPosMemInfoByInstanceID(_focusingPosNum, instanceID);
-                                ChangeIconOnPos(_focusingPosNum, teamButtonDic_R, _team1PosKeySet_R);
+                                _team1PosKeySetR.SetPosMemInfoByInstanceID(_focusingPosNum, instanceID);
+                                ChangeIconOnPos(_focusingPosNum, _teamButtonDicR, _team1PosKeySetR);
                                 break;
                             case Team.player2:
-                                _team2PosKeySet_R.SetPosMemInfoByInstanceID(_focusingPosNum, instanceID);
-                                ChangeIconOnPos(_focusingPosNum, teamButtonDic_R, _team2PosKeySet_R);
+                                _team2PosKeySetR.SetPosMemInfoByInstanceID(_focusingPosNum, instanceID);
+                                ChangeIconOnPos(_focusingPosNum, _teamButtonDicR, _team2PosKeySetR);
                                 break;
                         }
                         break;
@@ -229,17 +229,17 @@ namespace mainMenu
             {
                 Debug.Log("请检查changeIconOnPos函数执行顺序");
             }
-            HeroIcon tar = teamButtonDic.Get(_focusingTeam, posNum);
+            var tar = teamButtonDic.Get(_focusingTeam, posNum);
             if (tar == null)
             {
                 Debug.Log("严重错误");
             }
             
-            var PosInstanceId = posKeySet.GetInstanceIdOnPos(posNum);
-            if (PosInstanceId != null)
+            var posInstanceId = posKeySet.GetInstanceIdOnPos(posNum);
+            if (posInstanceId != null)
             {
-                var _one = dataAccess.Units.Get(PosInstanceId);
-                tar.ChangeIcon(_one);
+                var one = dataAccess.Units.Get(posInstanceId);
+                tar.ChangeIcon(one);
             }
             else
             {
@@ -252,8 +252,8 @@ namespace mainMenu
             for (var i = 0; i < icons.Count; i++)
             {
                 var heroIcon = icons[i];
-                teamButtonDic_M.Set(team, i, heroIcon);
-                DicAdd<HeroIcon, int>.Add(IconNumCheck, heroIcon, i);
+                _teamButtonDicM.Set(team, i, heroIcon);
+                DicAdd<HeroIcon, int>.Add(_iconNumCheck, heroIcon, i);
                 heroIcon.Clear();
                 
                 void SelectedRender()
@@ -262,7 +262,7 @@ namespace mainMenu
                 }
                 void A()
                 {
-                    OnTeamPosBtn(team, IconNumCheck[heroIcon]);
+                    OnTeamPosBtn(team, _iconNumCheck[heroIcon]);
                 }
                 heroIcon.iconButton.onClick.RemoveAllListeners();
                 heroIcon.iconButton.onClick.AddListener(A);
@@ -275,11 +275,11 @@ namespace mainMenu
             for (var i = 0; i < icons.Count; i++)
             {
                 var heroIcon = icons[i];
-                teamButtonDic_R.Set(team, i, heroIcon);
-                DicAdd<HeroIcon, int>.Add(IconNumCheck, heroIcon, i);
+                _teamButtonDicR.Set(team, i, heroIcon);
+                DicAdd<HeroIcon, int>.Add(_iconNumCheck, heroIcon, i);
                 heroIcon.Clear();
                 heroIcon.iconButton.onClick.RemoveAllListeners();
-                heroIcon.iconButton.onClick.AddListener(() => { OnTeamPosBtn(team, IconNumCheck[heroIcon]); });
+                heroIcon.iconButton.onClick.AddListener(() => { OnTeamPosBtn(team, _iconNumCheck[heroIcon]); });
                 heroIcon.iconButton.onClick.AddListener(() => HeroIcon.SelectedFeature(heroIcon, selectedFrame, 1.1f));
             }
         }

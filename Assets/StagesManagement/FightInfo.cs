@@ -27,7 +27,6 @@ public class FightInfo : ScriptableObject
         get;
     }
     
-    public int stageLevel = 1;
     public float team1HpRate = 1f;
     public float team2HpRate = 1f;
     public CriticalGaugeMode team1CGMode = CriticalGaugeMode.Normal;
@@ -36,6 +35,8 @@ public class FightInfo : ScriptableObject
     public TeamMode team2Mode = TeamMode.Rotation;
     public AIMode team1AIMode = AIMode.Aggressive;
     public AIMode team2AIMode = AIMode.Aggressive;
+    
+    public int dumbAIDecisionDelay = 50;
 
     public bool RunTutorial
     {
@@ -135,7 +136,7 @@ public class FightInfo : ScriptableObject
     
     public void LoadMyTeam()
     {
-        PosKeySet set = null;
+        PosKeySet set;
         switch (EventType)
         {
             case FightEventType.Quest:
@@ -175,7 +176,6 @@ public class FightInfo : ScriptableObject
         stage.Team2Auto = source.Team2Auto;
         stage.team1AIMode = source.team1AIMode;
         stage.team2AIMode = source.team2AIMode;
-        stage.stageLevel = source.stageLevel;
         stage.Team1ID = source.Team1ID;
         stage.Team2ID = source.Team2ID;
         stage.team1HpRate = source.team1HpRate;

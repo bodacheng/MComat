@@ -6,7 +6,7 @@ namespace FightScene
 {
     public partial class UnitsManger : MonoBehaviour
     {
-        public MultiDic<int, int, Data_Center> TeamMembers;
+        public MultiDic<int, int, Data_Center> teamMembers;
         
         public TeamMode TeamMode;
         public TeamConfig teamConfig;
@@ -22,38 +22,38 @@ namespace FightScene
             get;
         }
         
-        private bool auto;
+        private bool _auto;
         public bool Auto
         {
             set
             {
-                auto = value;
-                foreach (var dataCenter in TeamMembers.GetValues())
+                _auto = value;
+                foreach (var dataCenter in teamMembers.GetValues())
                 {
-                    dataCenter._MyBehaviorRunner.AI = auto;
+                    dataCenter._MyBehaviorRunner.AI = _auto;
                 }
             }
-            get => auto;
+            get => _auto;
         }
         
-        public async UniTask _UnitsLoad(MultiDic<int, int, UnitInfo> MembersSets, IDictionary<Data_Center, UnitInfo> UnitInfoRef)
+        public async UniTask _UnitsLoad(MultiDic<int, int, UnitInfo> membersSets, IDictionary<Data_Center, UnitInfo> unitInfoRef)
         {
             async UniTask LoadOneUnit(int key1, int key2, UnitInfo info)
             {
                 var _one = info;
-                var center = TeamMembers.Get(key1, key2);
+                var center = teamMembers.Get(key1, key2);
                 if (center == null)
                 {
                     center = await UnitCreator.CreateUnit(_one);
                 }
                 
-                TeamMembers.Set(key1, key2, center);
-                DicAdd<Data_Center, UnitInfo>.Add(UnitInfoRef, center, _one);
+                teamMembers.Set(key1, key2, center);
+                DicAdd<Data_Center, UnitInfo>.Add(unitInfoRef, center, _one);
             }
             
             var tasks = new List<UniTask>();
             
-            foreach (var kv in MembersSets.mDict)
+            foreach (var kv in membersSets.mDict)
             {
                 tasks.Add(LoadOneUnit(kv.Key.Item1, kv.Key.Item2, kv.Value));
             }
@@ -63,7 +63,7 @@ namespace FightScene
         
         public bool IfAllUnitsPreparedForBattle()
         {
-            foreach (var oneMember in TeamMembers.GetValues())
+            foreach (var oneMember in teamMembers.GetValues())
             {
                 if (!oneMember.IfPreparedForBattle())
                     return false;
@@ -89,7 +89,7 @@ namespace FightScene
             switch (TeamMode)
             {
                 case TeamMode.MultiRaid:
-                    foreach (var unit in TeamMembers.GetValues())
+                    foreach (var unit in teamMembers.GetValues())
                     {
                         if (unit._MyBehaviorRunner.GetNowState().StateKey != "Death")
                         {
@@ -113,7 +113,7 @@ namespace FightScene
         // 全队无敌
         public void TurnAllUnitsInvincible(bool _Invincible)
         {
-            foreach (var center in TeamMembers.GetValues())
+            foreach (var center in teamMembers.GetValues())
             {
                 center.FightDataRef.Invincible = _Invincible;
             }

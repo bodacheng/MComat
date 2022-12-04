@@ -103,10 +103,10 @@ namespace FightScene
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);
             var data_Centers = new List<Data_Center>();
-            data_Centers.AddRange(RTFightManager.target.team1.TeamMembers.GetValues());
-            data_Centers.AddRange(RTFightManager.target.team2.TeamMembers.GetValues());
-            RTFightManager.target.ClearUnitData();
-            RTFightManager.target.ClearUnits();
+            data_Centers.AddRange(RTFightManager.Target.team1.teamMembers.GetValues());
+            data_Centers.AddRange(RTFightManager.Target.team2.teamMembers.GetValues());
+            RTFightManager.Target.ClearUnitData();
+            RTFightManager.Target.ClearUnits();
             FightLogger.value.WatchMissionsAbandon();
             FSceneProcessesRunner.Main.Clear();
             MainMenuNote.GoingTo = MainSceneStep.FrontPage;

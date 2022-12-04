@@ -17,21 +17,21 @@ public class QuestInfoPage : MSceneProcess
         {
             case FightEventType.Arena:
                 NetFightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arena").LoadTeamDic();
-                void GoToTeamEdit_Arena()
+                void GoToTeamEditArena()
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
                 }
                 layer.EditTeamButton.onClick.RemoveAllListeners();
-                layer.EditTeamButton.onClick.AddListener(GoToTeamEdit_Arena);
+                layer.EditTeamButton.onClick.AddListener(GoToTeamEditArena);
                 break;
             case FightEventType.Quest:
                 NetFightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arcade").LoadTeamDic();
-                void GoToTeamEdit_Arcade()
+                void GoToTeamEditArcade()
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);
                 }
                 layer.EditTeamButton.onClick.RemoveAllListeners();
-                layer.EditTeamButton.onClick.AddListener(GoToTeamEdit_Arcade);
+                layer.EditTeamButton.onClick.AddListener(GoToTeamEditArcade);
                 break;
         }
         layer.StageMembersInfoShow(NetFightScene.Fight);

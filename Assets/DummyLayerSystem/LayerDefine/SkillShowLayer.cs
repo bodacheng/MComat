@@ -158,9 +158,8 @@ namespace mainMenu
         {
             _connector.ShowMyModel(PreScene.target.Focusing.id);
             var config = Units.GetUnitConfig(PreScene.target.Focusing.r_id);
-            var unitInfo = UnitInfo.GetUnitInfo(PreScene.target.Focusing);
             await _connector.FocusingC.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK);
-            await _connector.FocusingC.Step2Initialize(config.TYPE, unitInfo, config.element);
+            await _connector.FocusingC.Step2Initialize(config.TYPE, config.element);
             if (_connector.FocusingC._MyBehaviorRunner != null)
                 _connector.FocusingC._MyBehaviorRunner.ChangeState("Empty");
         }
@@ -227,7 +226,7 @@ namespace mainMenu
                 newShow.name = fire1Chuan[i].REAL_NAME;
                 
                 newShow.transform.SetParent(transform);
-                Vector3 pos = fire1T.transform.position;
+                var pos = fire1T.transform.position;
                 newShow.transform.position = pos + Vector3.right * newShow.GetComponent<RectTransform>().rect.width * (i - 1) + Vector3.right * 200f * (i - 1);
                 newShow.gameObject.SetActive(true);
                 RenderButton(element,newShow.gameObject,fire1Chuan[i].SP_LEVEL);

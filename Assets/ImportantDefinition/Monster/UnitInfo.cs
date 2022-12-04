@@ -8,7 +8,7 @@ public class UnitInfo
 {
     public string id;
     public string r_id;
-    public int level;
+    public int level = 1;
     public SkillSet set = new ();
     
     public UnitInfo Clone()
@@ -18,9 +18,9 @@ public class UnitInfo
 
     public UnitInfo DeepCopy()
     {
-        UnitInfo Copy = this.Clone();
-        Copy.set = Copy.set.DeepCopy();
-        return Copy;
+        var copy = this.Clone();
+        copy.set = copy.set.DeepCopy();
+        return copy;
     }
 
     public UnitInfo()
@@ -33,7 +33,7 @@ public class UnitInfo
         this.r_id = r_id;
         set = skillSet;
     }
-
+    
     public static UnitInfo GetUnitInfo(UnitInfo info)
     {
         try
@@ -107,44 +107,44 @@ public class UnitInfo
     }
 
     // 这个是从角色存档来读取
-    public int GetNineSlotWholePointOfMonster(string unit_instanceID)
+    public int GetNineSlotWholePointOfMonster(string unitInstanceID)
     {
-        var equipments = Stones.GetEquippingStones(unit_instanceID);
-        string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;
+        var equipments = Stones.GetEquippingStones(unitInstanceID);
+        string a1 = null, a2 = null, a3 = null, b1 = null, b2 = null, b3 = null, c1 = null, c2 = null, c3 = null;
         for (var i = 0; i < equipments.Count; i++)
         {
             switch (equipments[i].Slot)
             {
                 case "1":
-                    A1 = equipments[i].SkillId;
+                    a1 = equipments[i].SkillId;
                     break;
                 case "2":
-                    A2 = equipments[i].SkillId;
+                    a2 = equipments[i].SkillId;
                     break;
                 case "3":
-                    A3 = equipments[i].SkillId;
+                    a3 = equipments[i].SkillId;
                     break;
                 case "4":
-                    B1 = equipments[i].SkillId;
+                    b1 = equipments[i].SkillId;
                     break;
                 case "5":
-                    B2 = equipments[i].SkillId;
+                    b2 = equipments[i].SkillId;
                     break;
                 case "6":
-                    B3 = equipments[i].SkillId;
+                    b3 = equipments[i].SkillId;
                     break;
                 case "7":
-                    C1 = equipments[i].SkillId;
+                    c1 = equipments[i].SkillId;
                     break;
                 case "8":
-                    C2 = equipments[i].SkillId;
+                    c2 = equipments[i].SkillId;
                     break;
                 case "9":
-                    C3 = equipments[i].SkillId;
+                    c3 = equipments[i].SkillId;
                     break;
             }
         }
-        int wholePoint = SkillSet.SkillBalancePoint(A1, A2, A3, B1, B2, B3, C1, C2, C3);
+        int wholePoint = SkillSet.SkillBalancePoint(a1, a2, a3, b1, b2, b3, c1, c2, c3);
         return wholePoint;
     }
 }

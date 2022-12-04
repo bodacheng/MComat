@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UniRx;
@@ -35,17 +33,16 @@ public partial class Data_Center : MonoBehaviour
     public Transform right_hand_t, left_hand_t, right_foot_t, left_foot_t,tail_t, head_t;
     public Transform left_arm_hitbox_t, right_arm_hitbox_t, left_leg_hitbox_t, right_leg_hitbox_t, spine_hitbox_t;
     
-    protected bool phase1Initialized, phase2Initialized;
+    protected bool Phase1Initialized, Phase2Initialized;
     
     [Header("传统防御盾。可能真的用不到了")]
     public BO_Shield Shield;
     
     private UnitInfo unitInfo;
-    public UnitInfo UnitInfo => unitInfo;
     
     public bool IfPreparedForBattle()
     {
-        return phase1Initialized && phase2Initialized;
+        return Phase1Initialized && Phase2Initialized;
     }
 
     void Awake()
@@ -56,7 +53,7 @@ public partial class Data_Center : MonoBehaviour
 
     public async UniTask Step1Initialize(string type, string basicPackName)
     {
-        if (!phase1Initialized)
+        if (!Phase1Initialized)
         {
             Animation_Manger.AnimatorRef =  WholeT.GetComponent<Animator>();
             Sensor.Center = this.geometryCenter;
@@ -75,7 +72,7 @@ public partial class Data_Center : MonoBehaviour
             //    this.blendShapeProxy = this.gameObject.GetComponent<BlendShapeProxy>();
             //    this.blendShapeProxy.VRMBlendShapeProxy.AvaterRemerge(this.WholeT);
             //}                
-            phase1Initialized = true;
+            Phase1Initialized = true;
         }
     }
 
@@ -97,14 +94,13 @@ public partial class Data_Center : MonoBehaviour
         }
     }
     
-    public async UniTask Step2Initialize(string type, UnitInfo unitInfo, Element element)
+    public async UniTask Step2Initialize(string type, Element element)
     {
-        if (!phase2Initialized)
+        if (!Phase2Initialized)
         {
-            phase2Initialized = true;
+            Phase2Initialized = true;
         }
         
-        this.unitInfo = unitInfo;
         WholeT.gameObject.SetActive(true);// 动画模块的一些处理要求active状态下运行
         
         _MyBehaviorRunner.FormFightingSetsByNineAndTwo(unitInfo.set);
@@ -133,7 +129,16 @@ public partial class Data_Center : MonoBehaviour
         await UniTask.WhenAll(tasks);
     }
 
-    public void Step3Initialize(TeamConfig teamConfig, CriticalGaugeMode criticalGaugeMode, AIMode _aiMode, float teamHpRate, int lv)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="teamConfig"></param>
+    /// <param name="criticalGaugeMode"></param>
+    /// <param name="aiMode"></param>
+    /// <param name="aiDelayFrame"></param>
+    /// <param name="teamHpRate"></param>
+    /// <param name="lv"> 两种模式，如果带入-1，将按照角色等级来初始化，用于玩家账户队伍。带入其他值则按其他值来，用于关卡队伍 </param>
+    public void Step3Initialize(TeamConfig teamConfig, CriticalGaugeMode criticalGaugeMode, AIMode aiMode, int aiDelayFrame, float teamHpRate, UnitInfo unitInfo)
     {
         FightDataRef.IsDead.Value = false;
         BodyElementTagAndLayerSet(teamConfig);
@@ -142,9 +147,8 @@ public partial class Data_Center : MonoBehaviour
         FightDataRef.EnableAllLimbs(true);
         FightDataRef._comboHitCount.HitCount.Value = 0;
         FightDataRef.CriticalGaugeMode = criticalGaugeMode;
-        if (lv == -1)
-            lv = unitInfo.level;
-        var hp = SkillSet.INI_Hp(unitInfo.set.SkillEntityList(), lv) * teamHpRate;
+        this.unitInfo = unitInfo;
+        var hp = SkillSet.INI_Hp(unitInfo.set.SkillEntityList(), unitInfo.level) * teamHpRate;
         FightDataRef.CurrentHp.Value = hp;
         FightDataRef.CurrentHp.Subscribe(x =>
         {
@@ -158,8 +162,9 @@ public partial class Data_Center : MonoBehaviour
         
         if (FightDataRef.CriticalGaugeMode == CriticalGaugeMode.Unlimited)
             FightDataRef.CriticalGauge.Value = FightGlobalSetting._EXMax;
-        this._MyBehaviorRunner.SetAt(lv);
-        this._MyBehaviorRunner.AIMode = _aiMode;
+        this._MyBehaviorRunner.SetAt(unitInfo.level);
+        this._MyBehaviorRunner.AIMode = aiMode;
+        this._MyBehaviorRunner.Controller.DecisionDelay = aiDelayFrame;
     }
 
     //我们希望datacenter是整个角色初始化的出发点，那么这个地方应该也可以做到根据情况决定一些组件加载还是不加载。

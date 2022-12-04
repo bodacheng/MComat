@@ -12,7 +12,7 @@ namespace FightScene
         public void ToStartPos_Rotate()
         {
             Data_Center unit = null;
-            foreach (var kv in TeamMembers.mDict)
+            foreach (var kv in teamMembers.mDict)
             {
                 if (kv.Value == null)
                 {
@@ -35,13 +35,13 @@ namespace FightScene
             RandomToAliveUnit();
         }
         
-        public void TeamsIni_Rotate(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode _aiMode, int lv)
+        public void TeamsIni_Rotate(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode _aiMode, int aiDelayFrame)
         {
-            foreach (var center in TeamMembers.GetValues())
+            foreach (var center in teamMembers.GetValues())
             {
                 //  时间刷新整备
-                RTFightManager.target.RefreshTimeDic.Add(center, new ReactiveProperty<float>(0));
-                center.Step3Initialize(teamConfig, teamCGMode, _aiMode, teamHpRate, lv);
+                RTFightManager.Target.RefreshTimeDic.Add(center, new ReactiveProperty<float>(0));
+                center.Step3Initialize(teamConfig, teamCGMode, _aiMode, aiDelayFrame, teamHpRate, RTFightManager.Target.UnitInfoRef[center]);
                 center.FightDataRef.IsDead.Subscribe(x => {
                     if (x) 
                     {
@@ -83,7 +83,7 @@ namespace FightScene
                 }
             }
             
-            foreach (var dataCenter in TeamMembers.GetValues())
+            foreach (var dataCenter in teamMembers.GetValues())
             {
                 if (changeTo == dataCenter)
                 {
@@ -131,17 +131,17 @@ namespace FightScene
         // 计算时间统计可上场角色，更新上场冷却图标UI
         void WaitUnitChange()
         {
-            for (var i = 0; i < TeamMembers.GetValues().Count; i++)
+            for (var i = 0; i < teamMembers.GetValues().Count; i++)
             {
-                if (RTFightManager.target.RefreshTimeDic[TeamMembers.GetValues()[i]].Value > 0)
+                if (RTFightManager.Target.RefreshTimeDic[teamMembers.GetValues()[i]].Value > 0)
                 {
-                    RTFightManager.target.RefreshTimeDic[TeamMembers.GetValues()[i]].Value -= Time.deltaTime; // 角色切换倒计时;
+                    RTFightManager.Target.RefreshTimeDic[teamMembers.GetValues()[i]].Value -= Time.deltaTime; // 角色切换倒计时;
                 }
             }
             
             if (waitingMember != null && CanChangeToThisMember(waitingMember))
             {
-                RTFightManager.target.RefreshTimeDic[RMode_Unit.Value].Value = 10f;
+                RTFightManager.Target.RefreshTimeDic[RMode_Unit.Value].Value = 10f;
                 ChangeFightingUnit(waitingMember);
                 waitingMember = null;
             }
@@ -157,7 +157,7 @@ namespace FightScene
             {
                 return false;
             }
-            if (RTFightManager.target.RefreshTimeDic[target].Value > 0)
+            if (RTFightManager.Target.RefreshTimeDic[target].Value > 0)
             {
                 return false;
             }
@@ -193,7 +193,7 @@ namespace FightScene
                     }
                 }
             }
-            foreach (var dataCenter in TeamMembers.GetValues())
+            foreach (var dataCenter in teamMembers.GetValues())
             {
                 if (!dataCenter.FightDataRef.IsDead.Value)
                 {

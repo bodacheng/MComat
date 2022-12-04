@@ -57,11 +57,11 @@ public class PosKeySet
         {
             if (PosNumsWithLocalKeys[i].instanceID != null)
             {
-                var getUnitDetailModel = dataAccess.Units.Get(PosNumsWithLocalKeys[i].instanceID);
-                if (getUnitDetailModel != null)
+                var unitInfoOrigin = dataAccess.Units.Get(PosNumsWithLocalKeys[i].instanceID);
+                if (unitInfoOrigin != null)
                 {
-                    var unitInfo = UnitInfo.GetUnitInfo(getUnitDetailModel);
-                    multiDictionary.Set(0, PosNumsWithLocalKeys[i].posNum, unitInfo);
+                    var unitInfoAdvanced = UnitInfo.GetUnitInfo(unitInfoOrigin);
+                    multiDictionary.Set(0, PosNumsWithLocalKeys[i].posNum, unitInfoAdvanced);
                 }
             }
         }
@@ -87,15 +87,15 @@ public class PosKeySet
             return new List<OneSet>();
         bool inTeamMemberChange = false;
         
-        foreach (var _Set in PosNumsWithLocalKeys)
+        foreach (var set in PosNumsWithLocalKeys)
         {
-            if (_Set.instanceID == instanceID && _Set.instanceID != null)
+            if (set.instanceID == instanceID && set.instanceID != null)
             {
-                if (_Set.posNum != targetPos)
+                if (set.posNum != targetPos)
                 {
                     inTeamMemberChange = true;
-                    ChangePosition(targetPos, _Set.posNum);
-                    return new List<OneSet> {GetPosMemInfo(targetPos), _Set};
+                    ChangePosition(targetPos, set.posNum);
+                    return new List<OneSet> {GetPosMemInfo(targetPos), set};
                 }
                 else
                 {
@@ -111,11 +111,11 @@ public class PosKeySet
         return new List<OneSet>();
     }
     
-    public OneSet GetPosMemInfo(int PosNum)
+    public OneSet GetPosMemInfo(int posNum)
     {
-        for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
+        for (var i = 0; i < PosNumsWithLocalKeys.Length; i++)
         {
-            if (PosNumsWithLocalKeys[i].posNum == PosNum)
+            if (PosNumsWithLocalKeys[i].posNum == posNum)
                 return PosNumsWithLocalKeys[i];
         }
         return null;
@@ -128,10 +128,10 @@ public class PosKeySet
     
     public void ChangePosition(int position1, int position2)
     {
-        OneSet PosNumWithLocalKey1 = GetPosMemInfo(position1);
-        OneSet PosNumWithLocalKey2 = GetPosMemInfo(position2);
+        var PosNumWithLocalKey1 = GetPosMemInfo(position1);
+        var PosNumWithLocalKey2 = GetPosMemInfo(position2);
         
-        string temp = PosNumWithLocalKey2.instanceID;
+        var temp = PosNumWithLocalKey2.instanceID;
         PosNumWithLocalKey2.instanceID = PosNumWithLocalKey1.instanceID;
         PosNumWithLocalKey1.instanceID = temp;
     }
@@ -139,9 +139,9 @@ public class PosKeySet
     // 暂时不再使用。最初是selffight模式下队员要求不重复的队员指定模式
     public static void ChangePositionBetweenDifferentTeamSets(int position1, PosKeySet team1, int position2, PosKeySet team2)
     {
-        OneSet PosNumWithLocalKey1 = team1.GetPosMemInfo(position1);
-        OneSet PosNumWithLocalKey2 = team2.GetPosMemInfo(position2);
-        string temp = PosNumWithLocalKey2.instanceID;
+        var PosNumWithLocalKey1 = team1.GetPosMemInfo(position1);
+        var PosNumWithLocalKey2 = team2.GetPosMemInfo(position2);
+        var temp = PosNumWithLocalKey2.instanceID;
         PosNumWithLocalKey2.instanceID = PosNumWithLocalKey1.instanceID;
         PosNumWithLocalKey1.instanceID = temp;
     }
@@ -149,8 +149,8 @@ public class PosKeySet
     // 暂时不再使用。最初是selffight模式下队员要求不重复的队员指定模式
     public List<string> GetAllOnSetMonsterOfPlayerIds()
     {
-        List<string> onsetMonsterOfPlayerIds = new List<string>();
-        foreach (OneSet _Set in PosNumsWithLocalKeys)
+        var onsetMonsterOfPlayerIds = new List<string>();
+        foreach (var _Set in PosNumsWithLocalKeys)
         {
             if (_Set.instanceID != null)
                 onsetMonsterOfPlayerIds.Add(_Set.instanceID);

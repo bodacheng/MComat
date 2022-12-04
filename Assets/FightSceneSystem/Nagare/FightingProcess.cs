@@ -34,7 +34,7 @@ namespace FightScene
             }
             if (NetFightScene.Fight.RunTutorial)
                 _layer.OpenTutorial();
-            RTFightManager.target.ModeStart();
+            RTFightManager.Target.ModeStart();
         }
         
         public override void ProcessEnd()
@@ -49,12 +49,12 @@ namespace FightScene
             }
             
             var data_Centers = new List<Data_Center>();
-            data_Centers.AddRange(RTFightManager.target.team1.TeamMembers.GetValues());
-            data_Centers.AddRange(RTFightManager.target.team2.TeamMembers.GetValues());
+            data_Centers.AddRange(RTFightManager.Target.team1.teamMembers.GetValues());
+            data_Centers.AddRange(RTFightManager.Target.team2.teamMembers.GetValues());
             HitBoxLogTable.Instance.SkillLog(data_Centers);
-            RTFightManager.target.disposables.Clear();
-            RTFightManager.target.RefreshTimeDic.Clear();
-            RTFightManager.target.ClearUnitData();
+            RTFightManager.Target.Disposables.Clear();
+            RTFightManager.Target.RefreshTimeDic.Clear();
+            RTFightManager.Target.ClearUnitData();
             FightLogger.value.WatchMissionsAbandon();
         }
 
@@ -62,8 +62,8 @@ namespace FightScene
         {
             if (_layer != null)
             {
-                RTFightManager.target.team1.localUpdate();
-                RTFightManager.target.team2.localUpdate();
+                RTFightManager.Target.team1.localUpdate();
+                RTFightManager.Target.team2.localUpdate();
             }
         }
     }

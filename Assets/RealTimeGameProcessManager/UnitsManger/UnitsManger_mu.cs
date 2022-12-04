@@ -7,7 +7,7 @@ namespace FightScene
     {
         public void AllUnitsStartOff(bool testMode = false)
         {
-            foreach (var oneMember in TeamMembers.GetValues())
+            foreach (var oneMember in teamMembers.GetValues())
             {
                 Sensor.AddOrRemoveSharedUnits(oneMember, teamConfig.myTeam, true);
                 if (!testMode)
@@ -22,9 +22,9 @@ namespace FightScene
         public void ToStartPos_Multi()
         {
             Data_Center unit = null;
-            foreach (var kv in TeamMembers.mDict)
+            foreach (var kv in teamMembers.mDict)
             {
-                var _DataCenter = TeamMembers.Get(kv.Key.Item1, kv.Key.Item2);
+                var _DataCenter = teamMembers.Get(kv.Key.Item1, kv.Key.Item2);
                 if (_DataCenter == null)
                 {
                     continue;
@@ -47,11 +47,11 @@ namespace FightScene
             StartUnit = unit;
         }
         
-        public void Initialize_Multi(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode _aiMode, int lv)
+        public void Initialize_Multi(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode _aiMode, int aiDelayFrame)
         {
-            foreach (var center in TeamMembers.GetValues())
+            foreach (var center in teamMembers.GetValues())
             {
-                center.Step3Initialize(teamConfig, teamCGMode, _aiMode, teamHpRate, lv);
+                center.Step3Initialize(teamConfig, teamCGMode, _aiMode, aiDelayFrame, teamHpRate, RTFightManager.Target.UnitInfoRef[center]);
                 center.FightDataRef.IsDead.Subscribe(x => 
                 {
                     if (x)

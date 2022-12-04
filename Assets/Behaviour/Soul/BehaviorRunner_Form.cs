@@ -131,7 +131,7 @@ namespace Soul
                 }
             }
             AllConditionCodes = ConditionAndRespond.Keys.ToList();
-            CommandWaitingState = BehaviourDic[nineAndTwo.GetM_STS().REAL_NAME];
+            _commandWaitingState = BehaviourDic[nineAndTwo.GetM_STS().REAL_NAME];
         }
         
         public void SetAt(float level)

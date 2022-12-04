@@ -6,9 +6,9 @@ public partial class Data_Center : MonoBehaviour
 {
     public IEnumerator Step2InitializeByResourceFolder(string type, TextAsset Script, Element element, string personalMagic)
     {
-        if (!phase2Initialized)
+        if (!Phase2Initialized)
         {
-            phase2Initialized = true;
+            Phase2Initialized = true;
         }
 
         if (_MyBehaviorRunner.usingScript != Script)

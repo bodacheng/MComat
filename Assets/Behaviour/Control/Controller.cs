@@ -7,6 +7,7 @@ using Skill;
 // 目前AI的特点是根据事前登录好的若干条件组与各个条件组下登录的行为列表进行反应。
 // 如果说将来这套AI系统要变的更高级，那么可能条件组并不是固定的，而是能在战斗过程中动态调整，动态自我追加和细化。
 // 但目前来说我们还不需要。或许可以制作一个简单的通过logger分析条件组下各个行为有没有效益，并调整优先级的脚本，但这个点到为止。
+
 namespace Soul
 {
     public class Controller
@@ -166,19 +167,26 @@ namespace Soul
 
         string _condition;
         List<(string, string)> _finalConditionStateKeySet = new();
-        int _decisionDelay = 0;
-        private int DecisionDelay
+        int _decisionDelayCount = 0;
+        private int DecisionDelayCount
         {
             set
             {
-                _decisionDelay = value;
-                if (_decisionDelay > FightGlobalSetting._dumbAIDecisionDelay)
+                _decisionDelayCount = value;
+                if (_decisionDelayCount > DecisionDelay)
                 {
-                    _decisionDelay = 0;
+                    _decisionDelayCount = 0;
                 }
             }
-            get => _decisionDelay;
+            get => _decisionDelayCount;
         }
+
+        public int DecisionDelay
+        {
+            get;
+            set;
+        }
+        
         bool AI_RUNs(BehaviorRunner behaviorRunner, List<SkillEntity> options) // AI根据目前可作出的行为作出选择
         {
             _triggered.Main.Clear();
@@ -206,8 +214,8 @@ namespace Soul
             {
                 if (behaviorRunner.AIMode == AIMode.Aggressive)
                     return true;
-                DecisionDelay++;
-                return DecisionDelay == 0;
+                DecisionDelayCount++;
+                return DecisionDelayCount == 0;
             }
             
             if (_triggered.Main.GetValues().Count > 0 && Delay())

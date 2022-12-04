@@ -29,11 +29,11 @@ public class FightingStepLayer : UILayer
         gameObject.SetActive(active && NetFightScene.Fight.EventType != FightEventType.Screensaver);
         await StartUp((x) =>
             {
-                RTFightManager.target.team1.Auto = x;
+                RTFightManager.Target.team1.Auto = x;
             },
             (x) =>
             {
-                RTFightManager.target.team2.Auto = x;
+                RTFightManager.Target.team2.Auto = x;
             },
             ()=> UILayerLoader.Load<FightScenePauseSupport>()
             );
@@ -63,35 +63,35 @@ public class FightingStepLayer : UILayer
     {
         Initialized = false;
         
-        RTFightManager.target.team1.InputsManager = InputsManager;
-        RTFightManager.target.team2.InputsManager = InputsManager;
+        RTFightManager.Target.team1.InputsManager = InputsManager;
+        RTFightManager.Target.team2.InputsManager = InputsManager;
         
         pauseButton.onClick.AddListener(pauseAction.Invoke);
         
-        Team1Auto.Initialize((() => RTFightManager.target.team1.Auto), switchTeam1Auto);
-        Team2Auto.Initialize((() => RTFightManager.target.team2.Auto), switchTeam2Auto);
+        Team1Auto.Initialize((() => RTFightManager.Target.team1.Auto), switchTeam1Auto);
+        Team2Auto.Initialize((() => RTFightManager.Target.team2.Auto), switchTeam2Auto);
         
         team1UI.TeamMode = NetFightScene.Fight.team1Mode;
         team2UI.TeamMode = NetFightScene.Fight.team2Mode;
         
-        team1UI.teamConfig = RTFightManager.target.heroTeamConfig;
-        team2UI.teamConfig = RTFightManager.target.EnemyTeamConfig;
+        team1UI.teamConfig = RTFightManager.Target.heroTeamConfig;
+        team2UI.teamConfig = RTFightManager.Target.EnemyTeamConfig;
         team1UI.teamConfig.playID = NetFightScene.Fight.Team1ID;
         team2UI.teamConfig.playID = NetFightScene.Fight.Team2ID;
-        team1UI.TeamMembers = RTFightManager.target.team1.TeamMembers;
-        team2UI.TeamMembers = RTFightManager.target.team2.TeamMembers;
+        team1UI.TeamMembers = RTFightManager.Target.team1.teamMembers;
+        team2UI.TeamMembers = RTFightManager.Target.team2.teamMembers;
         
         // 角色第二次初始化在这之前已经结束
-        team1UI.InsTeamUI(RTFightManager.target.team1.ReadyForNextMember, RTFightManager.target.team1.RMode_Unit);
-        team2UI.InsTeamUI(RTFightManager.target.team2.ReadyForNextMember, RTFightManager.target.team2.RMode_Unit);
+        team1UI.InsTeamUI(RTFightManager.Target.team1.ReadyForNextMember, RTFightManager.Target.team1.RMode_Unit);
+        team2UI.InsTeamUI(RTFightManager.Target.team2.ReadyForNextMember, RTFightManager.Target.team2.RMode_Unit);
 
-        foreach (var d in RTFightManager.target.team1.TeamMembers.GetValues())
+        foreach (var d in RTFightManager.Target.team1.teamMembers.GetValues())
         {
-            await InputsManager.ElementRegister(d.element, RTFightManager.target.UnitInfoRef[d]);
+            await InputsManager.ElementRegister(d.element, RTFightManager.Target.UnitInfoRef[d]);
         }
-        foreach (var d in RTFightManager.target.team2.TeamMembers.GetValues())
+        foreach (var d in RTFightManager.Target.team2.teamMembers.GetValues())
         {
-            await InputsManager.ElementRegister(d.element, RTFightManager.target.UnitInfoRef[d]);
+            await InputsManager.ElementRegister(d.element, RTFightManager.Target.UnitInfoRef[d]);
         }
         Initialized = true;
     }
