@@ -94,7 +94,7 @@ public partial class Data_Center : MonoBehaviour
         }
     }
     
-    public async UniTask Step2Initialize(string type, Element element)
+    public async UniTask Step2Initialize(string type, Element element, SkillSet skillSet)
     {
         if (!Phase2Initialized)
         {
@@ -103,7 +103,7 @@ public partial class Data_Center : MonoBehaviour
         
         WholeT.gameObject.SetActive(true);// 动画模块的一些处理要求active状态下运行
         
-        _MyBehaviorRunner.FormFightingSetsByNineAndTwo(unitInfo.set);
+        _MyBehaviorRunner.FormFightingSetsByNineAndTwo(skillSet);
         _MyBehaviorRunner.INIStates(this);
         
         var tasks = new List<UniTask>

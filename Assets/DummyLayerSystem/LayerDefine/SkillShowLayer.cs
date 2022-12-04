@@ -159,7 +159,7 @@ namespace mainMenu
             _connector.ShowMyModel(PreScene.target.Focusing.id);
             var config = Units.GetUnitConfig(PreScene.target.Focusing.r_id);
             await _connector.FocusingC.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK);
-            await _connector.FocusingC.Step2Initialize(config.TYPE, config.element);
+            await _connector.FocusingC.Step2Initialize(config.TYPE, config.element, PreScene.target.Focusing.set);
             if (_connector.FocusingC._MyBehaviorRunner != null)
                 _connector.FocusingC._MyBehaviorRunner.ChangeState("Empty");
         }
