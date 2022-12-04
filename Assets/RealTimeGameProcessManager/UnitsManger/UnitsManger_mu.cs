@@ -47,11 +47,11 @@ namespace FightScene
             StartUnit = unit;
         }
         
-        public void Initialize_Multi(float teamHpRate, CriticalGaugeMode teamCGMode)
+        public void Initialize_Multi(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode _aiMode, int lv)
         {
             foreach (var center in TeamMembers.GetValues())
             {
-                center.Step3Initialize(teamConfig, teamCGMode, teamHpRate);
+                center.Step3Initialize(teamConfig, teamCGMode, _aiMode, teamHpRate, lv);
                 center.FightDataRef.IsDead.Subscribe(x => 
                 {
                     if (x)

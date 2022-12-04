@@ -35,13 +35,13 @@ namespace FightScene
             RandomToAliveUnit();
         }
         
-        public void TeamsIni_Rotate(float teamHpRate, CriticalGaugeMode teamCGMode)
+        public void TeamsIni_Rotate(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode _aiMode, int lv)
         {
             foreach (var center in TeamMembers.GetValues())
             {
                 //  时间刷新整备
                 RTFightManager.target.RefreshTimeDic.Add(center, new ReactiveProperty<float>(0));
-                center.Step3Initialize(teamConfig, teamCGMode, teamHpRate);
+                center.Step3Initialize(teamConfig, teamCGMode, _aiMode, teamHpRate, lv);
                 center.FightDataRef.IsDead.Subscribe(x => {
                     if (x) 
                     {

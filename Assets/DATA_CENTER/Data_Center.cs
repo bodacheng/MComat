@@ -133,7 +133,7 @@ public partial class Data_Center : MonoBehaviour
         await UniTask.WhenAll(tasks);
     }
 
-    public void Step3Initialize(TeamConfig teamConfig, CriticalGaugeMode criticalGaugeMode, float teamHpRate = 1, int lv = -1)
+    public void Step3Initialize(TeamConfig teamConfig, CriticalGaugeMode criticalGaugeMode, AIMode _aiMode, float teamHpRate, int lv)
     {
         FightDataRef.IsDead.Value = false;
         BodyElementTagAndLayerSet(teamConfig);
@@ -159,6 +159,7 @@ public partial class Data_Center : MonoBehaviour
         if (FightDataRef.CriticalGaugeMode == CriticalGaugeMode.Unlimited)
             FightDataRef.CriticalGauge.Value = FightGlobalSetting._EXMax;
         this._MyBehaviorRunner.SetAt(lv);
+        this._MyBehaviorRunner.AIMode = _aiMode;
     }
 
     //我们希望datacenter是整个角色初始化的出发点，那么这个地方应该也可以做到根据情况决定一些组件加载还是不加载。

@@ -65,21 +65,20 @@ public class PreparingProcess : FSceneProcess
         switch (RTFightManager.target.team1.TeamMode)
         {
             case TeamMode.MultiRaid:
-                RTFightManager.target.team1.Initialize_Multi(NetFightScene.Fight.team1HpRate, NetFightScene.Fight.team1CGMode);
+                RTFightManager.target.team1.Initialize_Multi(NetFightScene.Fight.team1HpRate, NetFightScene.Fight.team1CGMode, NetFightScene.Fight.team1AIMode, NetFightScene.Fight.stageLevel);
                 break;
             case TeamMode.Rotation:
-                RTFightManager.target.team1.TeamsIni_Rotate(NetFightScene.Fight.team1HpRate, NetFightScene.Fight.team1CGMode);
+                RTFightManager.target.team1.TeamsIni_Rotate(NetFightScene.Fight.team1HpRate, NetFightScene.Fight.team1CGMode, NetFightScene.Fight.team1AIMode, NetFightScene.Fight.stageLevel);
                 break;
         }
         
         switch (RTFightManager.target.team2.TeamMode)
         {
             case TeamMode.MultiRaid:
-                RTFightManager.target.team2.Initialize_Multi(NetFightScene.Fight.team2HpRate, NetFightScene.Fight.team2CGMode);
+                RTFightManager.target.team2.Initialize_Multi(NetFightScene.Fight.team2HpRate, NetFightScene.Fight.team2CGMode, NetFightScene.Fight.team2AIMode, NetFightScene.Fight.stageLevel);
                 break;
             case TeamMode.Rotation:
-                Debug.Log("team2 mode:" + NetFightScene.Fight.team2CGMode);
-                RTFightManager.target.team2.TeamsIni_Rotate(NetFightScene.Fight.team2HpRate, NetFightScene.Fight.team2CGMode);
+                RTFightManager.target.team2.TeamsIni_Rotate(NetFightScene.Fight.team2HpRate, NetFightScene.Fight.team2CGMode, NetFightScene.Fight.team2AIMode, NetFightScene.Fight.stageLevel);
                 break;
         }
         

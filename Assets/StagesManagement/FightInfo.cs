@@ -173,6 +173,8 @@ public class FightInfo : ScriptableObject
         stage.team2Mode = source.team2Mode;
         stage.Team1Auto = source.Team1Auto;
         stage.Team2Auto = source.Team2Auto;
+        stage.team1AIMode = source.team1AIMode;
+        stage.team2AIMode = source.team2AIMode;
         stage.stageLevel = source.stageLevel;
         stage.Team1ID = source.Team1ID;
         stage.Team2ID = source.Team2ID;

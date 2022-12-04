@@ -35,6 +35,12 @@ namespace Soul
         #endregion
 
         private AIMode _aiMode;
+
+        public AIMode AIMode
+        {
+            get => _aiMode;
+            set => _aiMode = value;
+        }
         
         public MobileInputsManager InputsManager
         {

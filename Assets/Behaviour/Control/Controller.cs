@@ -153,63 +153,85 @@ namespace Soul
         }
 
         // 状态的退出可以由特定的控制条件来决定时进行的判断。目前全项目只有防御这一种情况
-        bool BehaviourExitInputTrigger(SkillEntity current, MobileInputsManager _inputsManager)
+        bool BehaviourExitInputTrigger(SkillEntity current, MobileInputsManager inputsManager)
         {
             switch(current.ExitInput)
             {
                 case InputKey.Defend_Cancel:
-                    return _inputsManager.DefendExitTrigger();
+                    return inputsManager.DefendExitTrigger();
                 default:
                     return true;
             }
         }
 
-        string Condition;
-        List<(string, string)> finalConditionStateKeySet = new();
+        string _condition;
+        List<(string, string)> _finalConditionStateKeySet = new();
+        int _decisionDelay = 0;
+        private int DecisionDelay
+        {
+            set
+            {
+                _decisionDelay = value;
+                if (_decisionDelay > FightGlobalSetting._dumbAIDecisionDelay)
+                {
+                    _decisionDelay = 0;
+                }
+            }
+            get => _decisionDelay;
+        }
         bool AI_RUNs(BehaviorRunner behaviorRunner, List<SkillEntity> options) // AI根据目前可作出的行为作出选择
         {
             _triggered.Main.Clear();
+            
             if (behaviorRunner.GetNowState().Strategic_exit_condition())
             {
                 for (var y = 0; y < behaviorRunner.AllConditionCodes.Count; y++)
                 {
-                    Condition = behaviorRunner.AllConditionCodes[y];
+                    _condition = behaviorRunner.AllConditionCodes[y];
                     for (var x = 0; x < options.Count; x++)
                     {
-                        if (behaviorRunner.ConditionAndRespond[Condition].Contains(options[x].REAL_NAME))
+                        if (behaviorRunner.ConditionAndRespond[_condition].Contains(options[x].REAL_NAME))
                         {
-                            behaviorRunner.BehaviourDic.TryGetValue(options[x].REAL_NAME, out var try_behavior);
-                            if (try_behavior.CheckTriggerCondition(Condition))
+                            behaviorRunner.BehaviourDic.TryGetValue(options[x].REAL_NAME, out var tryBehavior);
+                            if (tryBehavior.CheckTriggerCondition(_condition))
                             {
-                                _triggered.Main.Set(Condition, options[x].REAL_NAME, behaviorRunner.ConditionAndRespondPriority.Get(Condition, options[x].REAL_NAME));
+                                _triggered.Main.Set(_condition, options[x].REAL_NAME, behaviorRunner.ConditionAndRespondPriority.Get(_condition, options[x].REAL_NAME));
                             }
                         }
                     }
                 }
             }
             
-            if (_triggered.Main.GetValues().Count > 0)
+            bool Delay()
             {
-                finalConditionStateKeySet = _triggered.GiveOutMin();
-                if (finalConditionStateKeySet.Count > 0)
+                if (behaviorRunner.AIMode == AIMode.Aggressive)
+                    return true;
+                DecisionDelay++;
+                return DecisionDelay == 0;
+            }
+            
+            if (_triggered.Main.GetValues().Count > 0 && Delay())
+            {
+                _finalConditionStateKeySet = _triggered.GiveOutMin();
+                if (_finalConditionStateKeySet.Count > 0)
                 {
-                    int random = Random.Range(0, finalConditionStateKeySet.Count);//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。
-                    var _SE = behaviorRunner.SkillEntityDic[finalConditionStateKeySet[random].Item2];
-                    if (_SE.StateType == BehaviorType.AC || _SE.StateType == BehaviorType.CT || _SE.StateType == BehaviorType.Def
-                        || _SE.StateType == BehaviorType.GI || _SE.StateType == BehaviorType.GM || _SE.StateType == BehaviorType.GR)
+                    var random = Random.Range(0, _finalConditionStateKeySet.Count);//这里虽然是随机但是毕竟随机的这几个选项在优先级上是相同的。
+                    var se = behaviorRunner.SkillEntityDic[_finalConditionStateKeySet[random].Item2];
+                    if (se.StateType == BehaviorType.AC || se.StateType == BehaviorType.CT || se.StateType == BehaviorType.Def
+                        || se.StateType == BehaviorType.GI || se.StateType == BehaviorType.GM || se.StateType == BehaviorType.GR)
                     {
                         behaviorRunner.SingleFightLog.WriteLog(
                             new SingleFightLog.BehaviourFightRecord
                             {
                                 AI_Decided = true,
-                                stateKey = _SE.REAL_NAME,
-                                whyIDidThis = finalConditionStateKeySet[random].Item1
+                                stateKey = se.REAL_NAME,
+                                whyIDidThis = _finalConditionStateKeySet[random].Item1
                             }
                         );
                         behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
                     }
-                    behaviorRunner.ChangeState(_SE.REAL_NAME);
-                    behaviorRunner.InputsManager?.SkillExplosion(_SE.EnterInput, _SE.SP_LEVEL);
+                    behaviorRunner.ChangeState(se.REAL_NAME);
+                    behaviorRunner.InputsManager?.SkillExplosion(se.EnterInput, se.SP_LEVEL);
                     return true;
                 }
             }

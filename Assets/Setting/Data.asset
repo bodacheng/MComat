@@ -155,6 +155,8 @@ MonoBehaviour:
   CanGetUpAfterKnockoffToGround: 0.5
   GetupTime: 0.5
   SureToPushForwardDis: 5
+  roughMaterial: {fileID: 0}
+  smoothMaterial: {fileID: 0}
   defendHP: 0
   lightBlockLastingTime: 0.3
   heavyBlockLastingTime: 0.6
@@ -162,4 +164,5 @@ MonoBehaviour:
   resistanceMax: 10
   eXMax: 100
   hurtObjectPreLoadCount: 5
+  dumbAIDecisionDelay: 80
   shadowMaterial: {fileID: 2100000, guid: 718b4d06a5b8d44538421fe070643d58, type: 2}
