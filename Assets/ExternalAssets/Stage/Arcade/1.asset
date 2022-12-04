@@ -20,7 +20,7 @@ MonoBehaviour:
   unitsData:
   - id: 0
     r_id: 5
-    level: 0
+    level: 1
     set:
       a1: 166
       a2: 150
@@ -31,10 +31,12 @@ MonoBehaviour:
       c1: 116
       c2: 176
       c3: 183
-  stageLevel: 1
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0
   team2CGMode: 2
   team1Mode: 2
   team2Mode: 2
+  team1AIMode: 0
+  team2AIMode: 0
+  dumbAIDecisionDelay: 50
