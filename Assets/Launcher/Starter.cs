@@ -23,6 +23,7 @@ public class Starter : MonoBehaviour
     [SerializeField] PlayfabSetting playFabSetting;
     [SerializeField] FightGlobalSetting fightGlobalSetting;
     [SerializeField] KeywordSetting keywordSetting;
+    [SerializeField] DefaultIconSetting defaultIconSetting;
 
     public void Initialise()
     {
@@ -30,6 +31,7 @@ public class Starter : MonoBehaviour
         fightGlobalSetting.Initialise();
         playFabSetting.Initialise();
         keywordSetting.Initialise();
+        defaultIconSetting.Initialise();
         SkillConfigTable.LoadAllSkillConfigs();
         PowerEstimateTable.LoadByResource();
         Units.LoadByResource();

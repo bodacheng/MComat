@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3709941, g: 0.3785282, b: 0.35739636, a: 1}
+  m_IndirectSpecularColor: {r: 0.3708985, g: 0.3783704, b: 0.35722548, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4241,6 +4241,7 @@ MonoBehaviour:
   playFabSetting: {fileID: 11400000, guid: ce076091f5876436790a16d502d758d7, type: 2}
   fightGlobalSetting: {fileID: 11400000, guid: 26bb3442a9a6b4908b2a162f148e49b0, type: 2}
   keywordSetting: {fileID: 11400000, guid: cc8bc4431333a4b94b1f8148807004f0, type: 2}
+  defaultIconSetting: {fileID: 11400000, guid: a20af27109115ef41ad76db47537e305, type: 2}
 --- !u!4 &2075428156307059471
 Transform:
   m_ObjectHideFlags: 0

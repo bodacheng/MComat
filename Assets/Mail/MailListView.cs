@@ -25,16 +25,26 @@ public class MailListView : MonoBehaviour
     [SerializeField] Button ClaimBtn;
     [SerializeField] Button ReadMe;
 
-    string ItemInstanceId;
-    string ItemId;
+    string _itemInstanceId;
+    string _itemId;
 
     public bool claimed = false;
-    
+
     public void PassMailInfo(MailItemInstance mailData, Action sort)
     {
-        ItemInstanceId = mailData.ItemInstanceId;
-        ItemId = mailData.ItemId;
+        _itemInstanceId = mailData.ItemInstanceId;
+        _itemId = mailData.ItemId;
         title.text = mailData.DisplayName;
+
+        if (mailData.DisplayName.Contains("DM"))
+        {
+            mailIcon.sprite = DefaultIconSetting._diamondIcon;
+        }
+        else if (mailData.DisplayName.Contains("GD"))
+        {
+            mailIcon.sprite = DefaultIconSetting._coinIcon;
+        }
+
         if (mailData.Expiration.HasValue)
         {
             presentlifeRemain.text = mailData.Expiration.Value.ToString("yyyy-MM-dd");
@@ -77,7 +87,7 @@ public class MailListView : MonoBehaviour
     
     void ReadMail()
     {
-        PreScene.target.trySwitchToStep(MainSceneStep.MailDetail, ItemInstanceId, true);
+        PreScene.target.trySwitchToStep(MainSceneStep.MailDetail, _itemInstanceId, true);
     }
     
     // 根据报酬不同显示不同的图片

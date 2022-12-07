@@ -39,11 +39,11 @@ public class MailBox : UILayer
         }
         _currentMailListViews.Clear();
         
-        var _myMailList = PlayFabReadClient.GetMailsData();
-        for (var i = 0; i < _myMailList.Count; i++)
+        var myMailList = PlayFabReadClient.GetMailsData();
+        for (var i = 0; i < myMailList.Count; i++)
         {
             var mailListView = Instantiate(mailListViewPrefab);
-            mailListView.PassMailInfo(_myMailList[i], Sort);
+            mailListView.PassMailInfo(myMailList[i], Sort);
             _currentMailListViews.Add(mailListView);
         }
         Sort();
