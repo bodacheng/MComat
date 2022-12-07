@@ -20,43 +20,40 @@ public class MailListView : MonoBehaviour
     [SerializeField] Image bg;
     [SerializeField] Image mailIcon;
     [SerializeField] Text title;
-    [SerializeField] Text presentlifeRemain;
-    [SerializeField] GameObject ReadFlag;
-    [SerializeField] Button ClaimBtn;
-    [SerializeField] Button ReadMe;
+    [SerializeField] Text expiration;
+    [SerializeField] GameObject readFlag;
+    [SerializeField] Button claimBtn;
+    [SerializeField] Button detailBtn;
 
     string _itemInstanceId;
-    string _itemId;
 
     public bool claimed = false;
+    
+    private Action<Image, string> _iconRefresh;
+    public void Setup(Action<Image, string> iconRefresh)
+    {
+        this._iconRefresh = iconRefresh;
+    }
 
     public void PassMailInfo(MailItemInstance mailData, Action sort)
     {
         _itemInstanceId = mailData.ItemInstanceId;
-        _itemId = mailData.ItemId;
         title.text = mailData.DisplayName;
-
-        if (mailData.DisplayName.Contains("DM"))
-        {
-            mailIcon.sprite = DefaultIconSetting._diamondIcon;
-        }
-        else if (mailData.DisplayName.Contains("GD"))
-        {
-            mailIcon.sprite = DefaultIconSetting._coinIcon;
-        }
+        
+        _iconRefresh(mailIcon, mailData.ItemId);
 
         if (mailData.Expiration.HasValue)
         {
-            presentlifeRemain.text = mailData.Expiration.Value.ToString("yyyy-MM-dd");
+            expiration.text = mailData.Expiration.Value.ToString("yyyy-MM-dd");
         }
         else
         {
-            presentlifeRemain.gameObject.SetActive(false);
+            expiration.gameObject.SetActive(false);
         }
         mailData.ReadObservable.Subscribe(AsRead).AddTo(this.gameObject);
         
-        ClaimBtn.onClick.RemoveAllListeners();
-        ClaimBtn.onClick.AddListener(
+        claimBtn.onClick.RemoveAllListeners();
+        claimBtn.onClick.AddListener(
             () => PlayFabReadClient.ClaimPresent(
                 mailData.ItemId,
                 x =>
@@ -68,21 +65,21 @@ public class MailListView : MonoBehaviour
         );
         
         //  暂不需要详细读取邮件功能
-        ReadMe.onClick.RemoveAllListeners();
-        ReadMe.onClick.AddListener(ReadMail);
+        detailBtn.onClick.RemoveAllListeners();
+        detailBtn.onClick.AddListener(ReadMail);
         
         mailData.Set();
     }
     
-    private Color unreadc = new Color(0.4f,0.4f,1, 1);
-    private Color readc = new Color(0.4f,0.4f,1, 0.6f); 
+    private readonly Color _unreadc = new Color(0.4f,0.4f,1, 1);
+    private readonly Color _readc = new Color(0.4f,0.4f,1, 0.6f); 
     void AsRead(bool read)
     {
         claimed = read;
-        presentlifeRemain.gameObject.SetActive(!read);
-        ClaimBtn.gameObject.SetActive(!read);
-        ReadFlag.SetActive(read);
-        bg.color = read ? readc : unreadc;
+        expiration.gameObject.SetActive(!read);
+        claimBtn.gameObject.SetActive(!read);
+        readFlag.SetActive(read);
+        bg.color = read ? _readc : _unreadc;
     }
     
     void ReadMail()
@@ -92,8 +89,4 @@ public class MailListView : MonoBehaviour
     
     // 根据报酬不同显示不同的图片
     // 已经获取的话直接就显示个read标签
-
-    public void LoadPic(string itemId)
-    {
-    }
 }

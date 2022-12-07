@@ -5,12 +5,17 @@ using System;
 
 public class MailDetailView : UILayer
 {
-    public RectTransform detailPartT;
     public Image mailIcon;
     public Text title;
     public Text message;
     public Text expiration;
     public Button claimPresentBtn;
+    
+    private Action<Image, string> _iconRefresh;
+    public void Setup(Action<Image, string> iconRefresh)
+    {
+        this._iconRefresh = iconRefresh;
+    }
     
     public void Read(ItemInstance model)
     {
@@ -28,5 +33,6 @@ public class MailDetailView : UILayer
             () => PlayFabReadClient.ClaimPresent(model.ItemId, 
                 PlayFabReadClient.SaveReadMailAsJson)
         );
+        _iconRefresh(mailIcon, model.ItemId);
     }
 }

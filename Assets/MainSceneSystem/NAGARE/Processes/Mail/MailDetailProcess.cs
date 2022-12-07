@@ -15,6 +15,7 @@ public class MailDetailProcess : MSceneProcess
     public override void ProcessEnter<String>(String id)
     {
         _mailDetailViewLayer = UILayerLoader.Load<MailDetailView>();
+        _mailDetailViewLayer.Setup(MailBox.LoadPic);
         var mail = PlayFabReadClient.Get(id.ToString());
         _mailDetailViewLayer.Read(mail);
         SetLoaded(true);

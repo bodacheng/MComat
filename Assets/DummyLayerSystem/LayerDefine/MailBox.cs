@@ -4,36 +4,33 @@ using System.Collections.Generic;
 
 public class MailBox : UILayer
 {
-    #region MailBox
     [SerializeField] MailListView mailListViewPrefab;
-    [SerializeField] RectTransform MailBoxT;
-    [SerializeField] Button ReadAll;
-    [SerializeField] Button DeleteAllRead;
-    #endregion
-    
+    [SerializeField] VerticalLayoutGroup mailBoxT;
+    [SerializeField] Button readAll;
+    [SerializeField] Button deleteAllRead;
+
     private readonly List<MailListView> _currentMailListViews = new();
     
     public void Setup()
     {
-        GenerateMailModels();
-        DeleteAllRead.onClick.AddListener(() =>
+        RefreshMailList();
+        deleteAllRead.onClick.AddListener(() =>
         {
             PlayFabReadClient.DeleteAllLocalMails();
-            GenerateMailModels();
+            RefreshMailList();
         });
         
-        ReadAll.onClick.AddListener(() =>
+        readAll.onClick.AddListener(() =>
         {
             PlayFabReadClient.ClaimAllPresentMails(PlayFabReadClient.SaveReadMailAsJson);
+            PlayFabReadClient.DeleteAllLocalMails();
+            RefreshMailList();
         });
     }
     
-    /// <summary>
-    /// 建立邮件的viewlist，运行次函数的时间点邮件已经读取至_myMailList
-    /// </summary>
-    void GenerateMailModels()
+    void RefreshMailList()
     {
-        foreach (Transform t in MailBoxT)
+        foreach (Transform t in mailBoxT.transform)
         {
             Destroy(t.gameObject);
         }
@@ -43,6 +40,7 @@ public class MailBox : UILayer
         for (var i = 0; i < myMailList.Count; i++)
         {
             var mailListView = Instantiate(mailListViewPrefab);
+            mailListView.Setup(LoadPic);
             mailListView.PassMailInfo(myMailList[i], Sort);
             _currentMailListViews.Add(mailListView);
         }
@@ -55,12 +53,12 @@ public class MailBox : UILayer
         foreach (var t in _currentMailListViews)
         {
             t.transform.SetParent(null);
-            rectHeight += t.GetComponent<RectTransform>().rect.height;
+            rectHeight += (t.GetComponent<RectTransform>().rect.height + mailBoxT.spacing);
         }
         foreach (var t in _currentMailListViews)
         {
             if (!t.claimed)
-                t.transform.SetParent(MailBoxT);
+                t.transform.SetParent(mailBoxT.transform);
             t.transform.localPosition = Vector3.zero;
             t.transform.localScale = Vector3.one;
             t.gameObject.SetActive(true);
@@ -68,16 +66,23 @@ public class MailBox : UILayer
         foreach (var t in _currentMailListViews)
         {
             if (t.claimed)
-                t.transform.SetParent(MailBoxT);
+                t.transform.SetParent(mailBoxT.transform);
             t.transform.localPosition = Vector3.zero;
             t.transform.localScale = Vector3.one;
             t.gameObject.SetActive(true);
         }
-        MailBoxT.sizeDelta = new Vector2(MailBoxT.sizeDelta.x, rectHeight);
+        mailBoxT.GetComponent<RectTransform>().sizeDelta = new Vector2(mailBoxT.GetComponent<RectTransform>().sizeDelta.x, rectHeight);
     }
-
-    public void AddButtonFeatures()
+    
+    public static void LoadPic(Image mailIcon , string itemId)
     {
-
+        if (itemId.Contains("DM"))
+        {
+            mailIcon.sprite = DefaultIconSetting._diamondIcon;
+        }
+        else if (itemId.Contains("GD"))
+        {
+            mailIcon.sprite = DefaultIconSetting._coinIcon;
+        }
     }
 }
