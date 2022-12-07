@@ -14,7 +14,7 @@ namespace FightScene
         [HideInInspector]
         public Transform[] TeamStandPoints;
 
-        Data_Center StartUnit;
+        Data_Center _startUnit;
         
         public MobileInputsManager InputsManager
         {

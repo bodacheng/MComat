@@ -51,5 +51,5 @@ MonoBehaviour:
   team1Mode: 2
   team2Mode: 2
   team1AIMode: 0
-  team2AIMode: 0
+  team2AIMode: 1
   dumbAIDecisionDelay: 50

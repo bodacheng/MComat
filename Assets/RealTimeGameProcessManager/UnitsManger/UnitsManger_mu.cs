@@ -44,7 +44,7 @@ namespace FightScene
                 }
             }
             
-            StartUnit = unit;
+            _startUnit = unit;
         }
         
         public void Initialize_Multi(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode _aiMode, int aiDelayFrame)

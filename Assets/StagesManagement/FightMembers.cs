@@ -24,7 +24,8 @@ public class FightMembers
     {
         foreach (var unitInfo in EnemySets.GetValues())
         {
-            unitInfo.level = level;
+            if (unitInfo != null)
+                unitInfo.level = level;
         }
     }
     
@@ -34,24 +35,23 @@ public class FightMembers
         
         var unitIDsAndNames = Units.GetMonsterIDsAndNamesDic(type);
         var Indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 3);
-        var charRecordIds = unitIDsAndNames.Keys.ToList();
-        
+        var recordIds = unitIDsAndNames.Keys.ToList();
         var target = new FightMembers();
         
         var char1 = new UnitInfo
         {
-            r_id = charRecordIds[Indexes[0]],
-            set = SkillSet.RandomSkillSet("human", null,  false)
+            r_id = recordIds[Indexes[0]],
+            set = SkillSet.RandomSkillSet(type, null,  false)
         };
         var char2 = new UnitInfo
         {
-            r_id = charRecordIds[Indexes[1]],
-            set = SkillSet.RandomSkillSet("human", null,  false)
+            r_id = recordIds[Indexes[1]],
+            set = SkillSet.RandomSkillSet(type, null,  false)
         };
         var char3 = new UnitInfo
         {
-            r_id = charRecordIds[Indexes[2]],
-            set = SkillSet.RandomSkillSet("human", null,  false)
+            r_id = recordIds[Indexes[2]],
+            set = SkillSet.RandomSkillSet(type, null,  false)
         };
         
         target.EnemySets.Set(0, 0, char1);
@@ -66,40 +66,39 @@ public class FightMembers
         var type = "human";
         var unitIDsAndNames = Units.GetMonsterIDsAndNamesDic(type);
         var Indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 6);
-        var charRecordIds = unitIDsAndNames.Keys.ToList();
-
+        var recordIds = unitIDsAndNames.Keys.ToList();
         var target = new FightMembers();
-
+        
         var char1 = new UnitInfo
         {
-            r_id = charRecordIds[Indexes[0]],
-            set = SkillSet.RandomSkillSet("human", null,false)
+            r_id = recordIds[Indexes[0]],
+            set = SkillSet.RandomSkillSet(type, null,false)
         };
         var char2 = new UnitInfo
         {
-            r_id = charRecordIds[Indexes[1]],
-            set = SkillSet.RandomSkillSet("human", null,false)
+            r_id = recordIds[Indexes[1]],
+            set = SkillSet.RandomSkillSet(type, null,false)
         };
         var char3 = new UnitInfo
         {
-            r_id = charRecordIds[Indexes[2]],
-            set = SkillSet.RandomSkillSet("human", null,false)
+            r_id = recordIds[Indexes[2]],
+            set = SkillSet.RandomSkillSet(type, null,false)
         };
 
         var char4 = new UnitInfo
         {
-            r_id = charRecordIds[Indexes[3]],
-            set = SkillSet.RandomSkillSet("human", null,false)
+            r_id = recordIds[Indexes[3]],
+            set = SkillSet.RandomSkillSet(type, null,false)
         };
         var char5 = new UnitInfo
         {
-            r_id = charRecordIds[Indexes[4]],
-            set = SkillSet.RandomSkillSet("human", null,false)
+            r_id = recordIds[Indexes[4]],
+            set = SkillSet.RandomSkillSet(type, null,false)
         };
         var char6 = new UnitInfo
         {
-            r_id = charRecordIds[Indexes[5]],
-            set = SkillSet.RandomSkillSet("human", null,false)
+            r_id = recordIds[Indexes[5]],
+            set = SkillSet.RandomSkillSet(type, null,false)
         };
 
         switch (teamMode)
@@ -169,10 +168,9 @@ public class FightMembers
     public static FightMembers LoadEnemies_Json(TextAsset Script)
     {
         var _localFight = new FightMembers();
-        MultiDic<int, int, UnitInfo>.SerializableSet[] targetValue;
         try
         {
-            targetValue = JsonConvert.DeserializeObject<MultiDic<int, int, UnitInfo>.SerializableSet[]>(Script.text);
+            var targetValue = JsonConvert.DeserializeObject<MultiDic<int, int, UnitInfo>.SerializableSet[]>(Script.text);
             _localFight.EnemySets._SerializableSets = targetValue;
             _localFight.EnemySets.ConvertSerializableArrayToDictionary();
             return _localFight;
@@ -198,9 +196,8 @@ public class FightMembers
 
         try
         {
-            XmlSerializer XmlSerializer = new XmlSerializer(typeof(MultiDic<int, int, UnitInfo>.SerializableSet[]));
-            FileStream FileStream;
-            FileStream = new FileStream(Application.dataPath + "/" + path, FileMode.Create);
+            var XmlSerializer = new XmlSerializer(typeof(MultiDic<int, int, UnitInfo>.SerializableSet[]));
+            var FileStream = new FileStream(Application.dataPath + "/" + path, FileMode.Create);
             XmlSerializer.Serialize(FileStream, UnNullDic._SerializableSets);
             Debug.Log(Application.dataPath + path + " 尝试进行关卡存储");
             FileStream.Close();
@@ -214,7 +211,7 @@ public class FightMembers
     
     public FightMembers LoadOneLocalFight_XML(TextAsset Script)
     {
-        FightMembers _localFight = new FightMembers();
+        var _localFight = new FightMembers();
         
         MultiDic<int, int, UnitInfo>.SerializableSet[] targetValue;
         try

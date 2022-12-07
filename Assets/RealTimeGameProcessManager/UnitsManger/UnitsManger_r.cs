@@ -25,7 +25,7 @@ namespace FightScene
                 kv.Value.WholeT.gameObject.SetActive(true);
             }
 
-            StartUnit = unit;
+            _startUnit = unit;
             ChangeFightingUnit(unit, true, TeamStandPoints[0]);
         }
         
@@ -57,7 +57,7 @@ namespace FightScene
         {
             if (changeTo == null)
             {
-                changeTo = StartUnit;
+                changeTo = _startUnit;
                 if (changeTo == null)
                     return false;
             }

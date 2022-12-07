@@ -19,8 +19,8 @@ MonoBehaviour:
   stageButtonSprite: {fileID: 0}
   unitsData:
   - id: 0
-    r_id: 5
-    level: 3
+    r_id: 3
+    level: 1
     set:
       a1: 58
       a2: 125
@@ -33,7 +33,7 @@ MonoBehaviour:
       c3: 167
   - id: 1
     r_id: 1
-    level: 3
+    level: 1
     set:
       a1: 113
       a2: 89
@@ -51,5 +51,5 @@ MonoBehaviour:
   team1Mode: 2
   team2Mode: 2
   team1AIMode: 0
-  team2AIMode: 0
+  team2AIMode: 1
   dumbAIDecisionDelay: 50
