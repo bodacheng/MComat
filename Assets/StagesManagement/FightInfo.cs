@@ -124,7 +124,7 @@ public class FightInfo : ScriptableObject
         unitsData = new List<UnitInfo>();
         var one = FightMembers.EnemySets.Get(0, 0);
         var two = FightMembers.EnemySets.Get(0, 1);
-        var three = FightMembers.EnemySets.Get(0, 3);
+        var three = FightMembers.EnemySets.Get(0, 2);
 
         if (one != default)
             unitsData.Add(one);

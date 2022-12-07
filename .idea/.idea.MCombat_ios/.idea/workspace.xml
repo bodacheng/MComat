@@ -3,25 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/1.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/10.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/10.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/2.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/2.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/3.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/3.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/4.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/4.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/5.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/5.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/6.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/6.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/7.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/7.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/8.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/8.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/9.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/9.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/UnitsManger/UnitsManger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/UnitsManger/UnitsManger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/UnitsManger/UnitsManger_mu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/UnitsManger/UnitsManger_mu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/UnitsManger/UnitsManger_r.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/UnitsManger/UnitsManger_r.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMembers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMembers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightInfo.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1670163011792</updated>
       <workItem from="1670163013223" duration="893000" />
-      <workItem from="1670388887960" duration="994000" />
+      <workItem from="1670388887960" duration="1471000" />
     </task>
     <servers />
   </component>
