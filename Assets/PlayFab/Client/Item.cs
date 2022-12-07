@@ -14,7 +14,7 @@ public partial class PlayFabReadClient
         
         PlayFabClientAPI.GetUserInventory(
             new GetUserInventoryRequest(),
-            (GetUserInventoryResult result) =>
+            result =>
             {
                 foreach (var item in result.Inventory)
                 {

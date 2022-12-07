@@ -49,8 +49,6 @@ public partial class PlayFabReadClient
     /// <summary>
     /// 点击某邮件后打开邮件会使用此函数
     /// </summary>
-    /// <param name="mailID"></param>
-    /// <returns></returns>
     public static ItemInstance Get(string itemInstanceId)
     {
         for (var i = 0; i < _myMailList.Count; i++)
@@ -84,14 +82,14 @@ public partial class PlayFabReadClient
         var path = Application.persistentDataPath + "/readmail";
         if (Directory.Exists(path))
         {
-            foreach (string file in Directory.GetFiles(path))
+            foreach (var file in Directory.GetFiles(path))
             {
                 try
                 {
-                    string dataAsJson = File.ReadAllText(file);
+                    var dataAsJson = File.ReadAllText(file);
                     //Debug.Log("邮件信息已经读取："+ dataAsJson);
-                    MailItemInstance mailOfPlayerModel = JsonConvert.DeserializeObject<MailItemInstance>(dataAsJson);
-                    PlayFabReadClient.AddMailData(mailOfPlayerModel);
+                    var mailOfPlayerModel = JsonConvert.DeserializeObject<MailItemInstance>(dataAsJson);
+                    AddMailData(mailOfPlayerModel);
                 }
                 catch (Exception e)
                 {
@@ -103,8 +101,8 @@ public partial class PlayFabReadClient
     
     public static void DeleteAllLocalMails()
     {
-        List<MailItemInstance> ToDelete = _myMailList.FindAll(x => (x.RemainingUses.Value <= 0));
-        foreach (var d in ToDelete)
+        var toDelete = _myMailList.FindAll(x => (x.RemainingUses.Value <= 0));
+        foreach (var d in toDelete)
         {
             _myMailList.Remove(d);
         }
@@ -137,6 +135,22 @@ public partial class PlayFabReadClient
             resultCallback => {
                 Debug.Log(":"+ resultCallback.UnlockedItemInstanceId);
                 ItemInstance target = null;
+
+                foreach (var kv in resultCallback.VirtualCurrency)
+                {
+                    if (kv.Key == PlayfabSetting._GoldCode)
+                    {
+                        Debug.Log("get gold:"+ kv.Value);
+                        Currencies.CoinCount += (int)kv.Value;
+                        
+                    }
+                    if (kv.Key == PlayfabSetting._DiamondCode)
+                    {
+                        Debug.Log("get diamond:"+ kv.Value);
+                        Currencies.DiamondCount += (int)kv.Value;
+                    }
+                }
+                
                 foreach (var data in _myMailList)
                 {
                     if (data.ItemInstanceId == resultCallback.UnlockedItemInstanceId)
@@ -156,7 +170,7 @@ public partial class PlayFabReadClient
         );
     }
     
-    public static void claimAllPresentMails(Action<ItemInstance> saveToLocal)
+    public static void ClaimAllPresentMails(Action<ItemInstance> saveToLocal)
     {
         CloudScript.claimAllPresentMails(_myMailList, saveToLocal);
     }

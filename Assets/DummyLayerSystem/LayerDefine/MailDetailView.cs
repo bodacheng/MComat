@@ -5,14 +5,12 @@ using System;
 
 public class MailDetailView : UILayer
 {
-    #region MailDetail
     public RectTransform detailPartT;
     public Image mailIcon;
     public Text title;
     public Text message;
     public Text presentlifeRemain;
     public Button ClaimPresentBtn;
-    #endregion
     
     public void Read(ItemInstance model)
     {

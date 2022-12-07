@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 5263684349799826647}
   - component: {fileID: 6224791517682873861}
   m_Layer: 5
-  m_Name: MailDetail
+  m_Name: MailDetailView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

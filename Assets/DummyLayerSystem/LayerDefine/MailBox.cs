@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using DummyLayerSystem;
-using mainMenu;
 
 public class MailBox : UILayer
 {
@@ -13,7 +11,7 @@ public class MailBox : UILayer
     [SerializeField] Button DeleteAllRead;
     #endregion
     
-    private readonly List<MailListView> _currentMailListViews = new List<MailListView>();
+    private readonly List<MailListView> _currentMailListViews = new();
     
     public void Setup()
     {
@@ -26,7 +24,7 @@ public class MailBox : UILayer
         
         ReadAll.onClick.AddListener(() =>
         {
-            PlayFabReadClient.claimAllPresentMails(PlayFabReadClient.SaveReadMailAsJson);
+            PlayFabReadClient.ClaimAllPresentMails(PlayFabReadClient.SaveReadMailAsJson);
         });
     }
     
