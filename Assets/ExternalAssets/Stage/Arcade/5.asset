@@ -32,7 +32,7 @@ MonoBehaviour:
       c2: 125
       c3: 95
   team1HpRate: 1
-  team2HpRate: 1
+  team2HpRate: 0.9
   team1CGMode: 0
   team2CGMode: 0
   team1Mode: 2

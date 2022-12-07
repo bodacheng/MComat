@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaf3bb8ad816a44358eca5831d97217e, type: 3}
-  m_Name: 2
+  m_Name: 7
   m_EditorClassIdentifier: 
   battleGroundID: 0
   battleNameENG: 
@@ -31,6 +31,19 @@ MonoBehaviour:
       c1: 53
       c2: 68
       c3: 58
+  - id: 1
+    r_id: 3
+    level: 1
+    set:
+      a1: 89
+      a2: 27
+      a3: 95
+      b1: 68
+      b2: 182
+      b3: 10
+      c1: 99
+      c2: 55
+      c3: 5
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0

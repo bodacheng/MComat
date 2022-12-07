@@ -44,6 +44,19 @@ MonoBehaviour:
       c1: 166
       c2: 55
       c3: 169
+  - id: 2
+    r_id: 6
+    level: 1
+    set:
+      a1: 58
+      a2: 10
+      a3: 99
+      b1: 125
+      b2: 167
+      b3: 182
+      c1: 68
+      c2: 53
+      c3: 55
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0
