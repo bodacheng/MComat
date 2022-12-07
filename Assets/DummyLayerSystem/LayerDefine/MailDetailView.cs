@@ -9,8 +9,8 @@ public class MailDetailView : UILayer
     public Image mailIcon;
     public Text title;
     public Text message;
-    public Text presentlifeRemain;
-    public Button ClaimPresentBtn;
+    public Text expiration;
+    public Button claimPresentBtn;
     
     public void Read(ItemInstance model)
     {
@@ -18,13 +18,13 @@ public class MailDetailView : UILayer
         var catalogItem = PlayFabReadClient.GetCatalogItemByDisplayName(model.DisplayName);
         message.text = catalogItem != null ? catalogItem.Description : String.Empty;
         if (model.Expiration.HasValue)
-            presentlifeRemain.text = model.Expiration.Value.ToString("yyyy-MM-dd");
+            expiration.text = model.Expiration.Value.ToString("yyyy-MM-dd");
         else
         {
-            presentlifeRemain.text = "无时间限制？";
+            expiration.text = "无时间限制？";
         }
-        ClaimPresentBtn.onClick.RemoveAllListeners();
-        ClaimPresentBtn.onClick.AddListener(
+        claimPresentBtn.onClick.RemoveAllListeners();
+        claimPresentBtn.onClick.AddListener(
             () => PlayFabReadClient.ClaimPresent(model.ItemId, 
                 PlayFabReadClient.SaveReadMailAsJson)
         );
