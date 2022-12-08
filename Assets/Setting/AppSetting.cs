@@ -15,37 +15,37 @@ public class AppSetting
 {
     public static AppSetting value = new ();
     
-    float bgmVolumn = 0.5f, effectsVolumn = 0.5f, cvVolumn = 0.5f;
+    float _bgmVolume = 0.5f, _effectsVolume = 0.5f, _cvVolume = 0.5f;
     
     public static AudioSource bgmSource;
     
     public static ApiLanguage Language = ApiLanguage.JaJp;
     
-    public float BgmVolumn
+    public float BgmVolume
     {
-        get => bgmVolumn;
+        get => _bgmVolume;
         set
         {
-            bgmVolumn = Mathf.Clamp(value, 0, 1);
-            bgmSource.volume = bgmVolumn;
+            _bgmVolume = Mathf.Clamp(value, 0, 1);
+            bgmSource.volume = _bgmVolume;
         }
     }
 
-    public float EffectsVolumn
+    public float EffectsVolume
     {
-        get => effectsVolumn;
+        get => _effectsVolume;
         set
         {
-            effectsVolumn = Mathf.Clamp(value, 0, 1);
+            _effectsVolume = Mathf.Clamp(value, 0, 1);
         }
     }
     
-    public float CvVolumn
+    public float CvVolume
     {
-        get => cvVolumn;
+        get => _cvVolume;
         set
         {
-            cvVolumn = Mathf.Clamp(value, 0, 1);
+            _cvVolume = Mathf.Clamp(value, 0, 1);
         }
     }
 
@@ -60,10 +60,10 @@ public class AppSetting
         try
         {
             AppSetting info = new AppSetting();
-            string wholepath = Application.persistentDataPath + "/AppSetting.json";
-            if (File.Exists(wholepath))
+            string wholePath = Application.persistentDataPath + "/AppSetting.json";
+            if (File.Exists(wholePath))
             {
-                string dataAsJson = File.ReadAllText(wholepath);
+                string dataAsJson = File.ReadAllText(wholePath);
                 info = JsonConvert.DeserializeObject<AppSetting>(dataAsJson);
                 Debug.Log("基本程序设置读取成功");
             }

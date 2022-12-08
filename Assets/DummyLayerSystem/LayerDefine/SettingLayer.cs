@@ -200,21 +200,21 @@ public class SettingLayer : UILayer
     
     void ResetSliders()
     {
-        effectsSoundsSlider.value = AppSetting.value.EffectsVolumn;
-        bgmSlider.value = AppSetting.value.BgmVolumn;
-        cvSlider.value = AppSetting.value.CvVolumn;
+        effectsSoundsSlider.value = AppSetting.value.EffectsVolume;
+        bgmSlider.value = AppSetting.value.BgmVolume;
+        cvSlider.value = AppSetting.value.CvVolume;
     }
     
     public void onBgmChange()
     {
-        AppSetting.value.BgmVolumn = bgmSlider.value;
+        AppSetting.value.BgmVolume = bgmSlider.value;
     }
     public void onCVsChange()
     {
-        AppSetting.value.CvVolumn = cvSlider.value;        
+        AppSetting.value.CvVolume = cvSlider.value;        
     }
     public void onEffectsSoundChange()
     {
-        AppSetting.value.EffectsVolumn = effectsSoundsSlider.value;
+        AppSetting.value.EffectsVolume = effectsSoundsSlider.value;
     }
 }

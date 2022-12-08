@@ -17,11 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 3fbc6ab1102ec472b9b793c40f0f1b9e
   m_SerializeEntries:
-  - m_GUID: bdfd268a327c74539872beb7915e587b
-    m_Address: face_fix
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - pic
   - m_GUID: eb220cbf519bf40809a1d52321eb47be
     m_Address: tatie_fix
     m_ReadOnly: 0
