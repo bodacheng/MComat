@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7999002266072399539}
   - component: {fileID: 7874179193401273403}
   m_Layer: 0
-  m_Name: AndroidIAPExample
+  m_Name: IAPManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

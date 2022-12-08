@@ -81355,7 +81355,7 @@ PrefabInstance:
     - target: {fileID: 4047891589326131840, guid: 2aaa288e2992e4d17b82d6d742a48043,
         type: 3}
       propertyPath: m_Name
-      value: Code
+      value: IAPManager
       objectReference: {fileID: 0}
     - target: {fileID: 7999002266072399539, guid: 2aaa288e2992e4d17b82d6d742a48043,
         type: 3}
