@@ -7,11 +7,11 @@
 	<key>destination</key>
 	<string>export</string>
 	<key>method</key>
-	<string>ad-hoc</string>
+	<string>app-store</string>
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>com.MCombat.BO</key>
-		<string>TestProfile</string>
+		<string>MCombat_Release</string>
 	</dict>
 	<key>signingCertificate</key>
 	<string>iPhone Distribution</string>
@@ -24,6 +24,6 @@
 	<key>thinning</key>
 	<string>&lt;thin-for-all-variants&gt;</string>
 	<key>Bundle name</key>
-	<string>mcombatRelease</string>
+	<string>mcombat</string>
 </dict>
 </plist>
