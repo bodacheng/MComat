@@ -133,14 +133,6 @@ handlers.grantBasicItems = function (args, context) {
             VirtualCurrency : "DM"
         }
     );
-
-    var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
-        {
-            PlayFabId :currentPlayerId,
-            Amount : args.GD,
-            VirtualCurrency : "GD"
-        }
-    );
     
     var grantRequest = {
         "PlayFabId": currentPlayerId,
@@ -149,6 +141,14 @@ handlers.grantBasicItems = function (args, context) {
     };
     
     var GrantedItems = server.GrantItemsToUser(grantRequest);
+    
+    var grantStonesRequest = {
+        "PlayFabId": currentPlayerId,
+        "CatalogVersion": "stone",
+        "ItemIds": args.stone_ids
+    }
+
+    var GrantedStones = server.GrantItemsToUser(grantStonesRequest);
     
     return { result: true };
 };
