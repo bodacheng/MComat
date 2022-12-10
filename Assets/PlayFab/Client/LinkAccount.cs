@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public partial class PlayFabReadClient
 {
@@ -42,7 +39,7 @@ public partial class PlayFabReadClient
                         PopupLayer.ArrangeWarnWindow(" 未能与设备切断绑定，");
                     }
                 );
-            }, 
+            },
             "要把当前设备和当前账户断开链接？");
     }
 }

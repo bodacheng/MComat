@@ -49,7 +49,7 @@ public partial class PopupLayer : UILayer {
         layer.ValidationIntro.text = intro;
     }
     
-    public static void ArrangeConfirmWindow(GameObject T, UnityEngine.Events.UnityAction action, UnityEngine.Events.UnityAction cancel_action, string intro)
+    public static void ArrangeConfirmWindow(UnityEngine.Events.UnityAction action, UnityEngine.Events.UnityAction cancel_action, string intro)
     {
         var layer = UILayerLoader.Load<PopupLayer>(true);
         

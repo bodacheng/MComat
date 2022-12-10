@@ -44,7 +44,6 @@ public class StartUpPresentation : MonoBehaviour
     void DownLoadConfirm(string msg)
     {
         PopupLayer.ArrangeConfirmWindow(
-            T.gameObject,
             async ()=>
             {
                 HighLightLayer.DarkOff(Color.white, 0, true);
