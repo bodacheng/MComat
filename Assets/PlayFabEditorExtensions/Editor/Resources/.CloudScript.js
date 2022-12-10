@@ -845,7 +845,6 @@ handlers.initStoneData = function (args, context) {
     let itemId = playstreamEvent.ItemId;
     if (itemId === "176" || itemId === "183") // 被动获得被动技能石有其他函数帮助更新数据
     {
-        log.debug("被动获得被动技能石有其他函数帮助更新数据:"+itemId);
         return { };
     }
     
