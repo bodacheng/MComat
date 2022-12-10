@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.Collections;
+using UnityEngine;
 using UnityEditor;
 
 #if UNITY_EDITOR
@@ -27,6 +28,8 @@ public class Starter : MonoBehaviour
 
     public void Initialise()
     {
+        NativeLeakDetection.Mode = NativeLeakDetectionMode.EnabledWithStackTrace;
+        
         Debug.Log("files loads...");
         fightGlobalSetting.Initialise();
         playFabSetting.Initialise();

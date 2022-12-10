@@ -8,46 +8,6 @@ using Newtonsoft.Json;
 
 public partial class PlayFabReadClient
 {
-    public static void GetUserData(GetUserDataRequest req, Action<bool> finished) // 目前没用？？
-    {
-        PlayFabClientAPI.GetUserData
-        (
-            req,
-            (GetUserDataResult obj) =>
-            {
-                finished.Invoke(true);
-                Debug.Log("bodacheng");
-                Debug.Log(obj.Data);
-                
-                if (obj.Data.ContainsKey("TutorialProgress"))
-                {
-                    PlayerAccountInfo.Me.tutorialProgress = obj.Data["TutorialProgress"].Value;
-                }
-                else
-                {
-                    UpdateUserData(
-                        new UpdateUserDataRequest()
-                        {
-                            Data = new Dictionary<string, string>
-                            {
-                                { "TutorialProgress", "Started" }
-                            }
-                        },
-                        (x) =>
-                        {
-                            
-                        }
-                    );
-                }
-                
-            },
-            errorCallback => {
-                Debug.Log("Basic accInfo fail:" + errorCallback.ErrorMessage);
-                finished.Invoke(false);
-            }
-        );
-    }
-
     public static void UpdateUserData(UpdateUserDataRequest req, Action<bool> finished)
     {
         PlayFabClientAPI.UpdateUserData

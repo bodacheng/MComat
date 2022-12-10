@@ -813,21 +813,6 @@ handlers.Gotcha = function (args, context) {
     };
 
     var grantResult = server.GrantItemsToUser(grantRequest);
-    for (let i = 0; i < grantResult["ItemGrantResults"].length; i++)
-    {
-        var got = grantResult["ItemGrantResults"][i];
-        var request = {
-            "PlayFabId": currentPlayerId,
-            "ItemInstanceId": got.ItemInstanceId,
-            "Data":  {
-                "unitInstanceId": null,
-                "slot": -1,
-                "level": 1
-            }
-        };
-        server.UpdateUserInventoryItemCustomData(request);
-    }
-    
     return { messageValue: grantResult["ItemGrantResults"] };
 }
 
@@ -850,23 +835,31 @@ handlers.GotchaX9 = function (args, context) {
     };
 
     var grantResult = server.GrantItemsToUser(grantRequest);
-    for (let i = 0; i < grantResult["ItemGrantResults"].length; i++)
-    {
-        var got = grantResult["ItemGrantResults"][i];
-        
-        var request = {
-            "PlayFabId": currentPlayerId,
-            "ItemInstanceId": got.ItemInstanceId,
-            "Data":  {
-                "unitInstanceId": null,
-                "slot": -1,
-                "level": 1
-            }
-        };
-        server.UpdateUserInventoryItemCustomData(request);
-    }
     
     return { messageValue: grantResult["ItemGrantResults"] };
+}
+
+handlers.initStoneData = function (args, context) {
+    var playstreamEvent = context.playStreamEvent;
+    let itemInstanceId = playstreamEvent.InstanceId;
+    let itemId = playstreamEvent.ItemId;
+    if (itemId === "176" || itemId === "183") // 被动获得被动技能石有其他函数帮助更新数据
+    {
+        log.debug("被动获得被动技能石有其他函数帮助更新数据:"+itemId);
+        return { };
+    }
+    
+    var request = {
+        "PlayFabId": currentPlayerId,
+        "ItemInstanceId": itemInstanceId,
+        "Data":  {
+            "unitInstanceId": null,
+            "slot": -1,
+            "level": 1
+        }
+    };
+    var result = server.UpdateUserInventoryItemCustomData(request);
+    return { result };
 }
 
 handlers.sendPassResetMail = function(args, context) {

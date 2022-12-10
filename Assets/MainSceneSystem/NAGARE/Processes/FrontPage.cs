@@ -14,11 +14,6 @@ public class FrontPage : MSceneProcess
         missionWatcher.Finish("accountInfoFinished", value);
     }
     
-    void UserDataLoadFinished(bool value)
-    {
-        missionWatcher.Finish("userDataLoadFinished", value);
-    }
-    
     void UserReadOnlyDataLoadFinished(bool value)
     {
         missionWatcher.Finish("userReadOnlyDataLoadLoaded", value);
@@ -121,12 +116,6 @@ public class FrontPage : MSceneProcess
     public override void ProcessEnter()
     {
         ProgressLayer.Loading(">");
-        PlayFabReadClient.GetUserData(
-            new GetUserDataRequest
-            {
-                PlayFabId = PlayerAccountInfo.Me.PlayFabId
-            }, UserDataLoadFinished);
-
         PlayFabReadClient.GetAccountInfo(AccountInfoFinished);
         PlayFabReadClient.GetUserReadOnlyData(UserReadOnlyDataLoadFinished);
         PlayFabReadClient.GetStatistics(StatisticsLoadFinished);
@@ -139,7 +128,7 @@ public class FrontPage : MSceneProcess
         missionWatcher = new MissionWatcher(
             new List<string>
             {
-                "userDataLoadFinished", "itemsLoadFinished", "statisticsFinished", 
+                "itemsLoadFinished", "statisticsFinished", 
                 "userReadOnlyDataLoadLoaded", "arcadeTFinished", "arenaTFinished", "accountInfoFinished"
             },
             () =>

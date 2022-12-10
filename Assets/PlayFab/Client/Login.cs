@@ -1,6 +1,9 @@
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -90,6 +93,9 @@ public partial class PlayFabReadClient
 #endif
     }
     
+    static MissionWatcher missionWatcher;
+    static bool accountIsInitialized;
+    static bool tutorialProgressGot;
     public static void LoginSuccess(LoginResult result)
     {
         Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
@@ -99,7 +105,107 @@ public partial class PlayFabReadClient
         };
         
         CloudScript.CheckIn();
-        EnterMainScene();
+        missionWatcher = new MissionWatcher(
+            new List<string>
+            {
+                "accountIsInitialized", "tutorialProgressGot"
+            },
+            EnterMainScene,
+            () => { Debug.Log("错误，怎么办？"); }
+        );
+        TryProcessWithLimitedTimes(CheckAccountInitialized, ()=> accountIsInitialized, 0);
+        TryProcessWithLimitedTimes(CheckTutorialProgressGot, ()=> tutorialProgressGot, 0);
+    }
+
+    static void CheckTutorialProgressGot()
+    {
+        PlayFabClientAPI.GetUserData
+        (
+            new GetUserDataRequest
+            {
+                PlayFabId = PlayerAccountInfo.Me.PlayFabId
+            },
+            (GetUserDataResult obj) =>
+            {
+                if (obj.Data.ContainsKey("TutorialProgress"))
+                {
+                    PlayerAccountInfo.Me.tutorialProgress = obj.Data["TutorialProgress"].Value;
+                    tutorialProgressGot = true;
+                    missionWatcher.Finish("tutorialProgressGot", true);
+                }
+                else
+                {
+                    UpdateUserData(
+                        new UpdateUserDataRequest()
+                        {
+                            Data = new Dictionary<string, string>
+                            {
+                                { "TutorialProgress", "Started" }
+                            }
+                        },
+                        (x) =>
+                        {
+                            PlayerAccountInfo.Me.tutorialProgress = "Started";
+                            tutorialProgressGot = true;
+                            missionWatcher.Finish("tutorialProgressGot", true);
+                        }
+                    );
+                }
+            },
+            errorCallback => {
+                Debug.Log("Basic accInfo fail:" + errorCallback.ErrorMessage);
+            }
+        );
+    }
+
+    static void CheckAccountInitialized()
+    {
+        PlayFabClientAPI.GetUserReadOnlyData
+        (
+            new GetUserDataRequest
+            {
+                PlayFabId = PlayerAccountInfo.Me.PlayFabId,
+                Keys = new List<string> { "basicItemGranted", "playerInitialized" }
+            },
+            (obj) =>
+            {
+                string basicItemGranted = null;
+                if (obj.Data.ContainsKey("basicItemGranted"))
+                {
+                    basicItemGranted = obj.Data["basicItemGranted"].Value;
+                }
+                
+                string playerInitialized = null;
+                if (obj.Data.ContainsKey("playerInitialized"))
+                {
+                    playerInitialized = obj.Data["playerInitialized"].Value;
+                }
+                
+                accountIsInitialized = basicItemGranted == "true" && playerInitialized == "true";
+                if (accountIsInitialized)
+                {
+                    missionWatcher.Finish("accountIsInitialized", true);
+                }
+            },
+            errorCallback => {
+                Debug.Log("Basic accInfo fail:" + errorCallback.ErrorMessage);
+            }
+        );
+    }
+    
+    static void TryProcessWithLimitedTimes(Action tryProcess, Func<bool> check, int tryTime)
+    {
+        Debug.Log("wait for a initialized account, try time:"+ tryTime);
+        if (tryTime == 5 || check())
+        {
+            return;
+        }
+        UniTask.Delay(TimeSpan.FromSeconds(1)).ContinueWith(()=>
+        {
+            tryTime += 1;
+            tryProcess();
+            TryProcessWithLimitedTimes(tryProcess, check, tryTime);
+        });
     }
     
     public static void LinkAccountPopup(Action success)
