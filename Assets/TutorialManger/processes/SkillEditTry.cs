@@ -7,19 +7,17 @@ public class SkillEditTry : TutorialProcess
 {
     private ReturnLayer _returnLayer;
     private SkillEditLayer _skillEditLayer;
-    
-    private bool skillEditFinished = false;
-
-    private string tutorialFlag;
+    private bool _skillEditFinished = false;
+    private readonly string _tutorialFlag;
 
     public SkillEditTry(string tutorialFlag)
     {
-        this.tutorialFlag = tutorialFlag;
+        this._tutorialFlag = tutorialFlag;
     }
     
     public override bool CanEnterOtherProcess()
     {
-        return skillEditFinished;
+        return _skillEditFinished;
     }
     
     public override void LocalUpdate()
@@ -33,7 +31,7 @@ public class SkillEditTry : TutorialProcess
             _returnLayer.gameObject.SetActive(false);
         }
         
-        if (!skillEditFinished)
+        if (!_skillEditFinished)
         {
             if (_skillEditLayer != null)
             {
@@ -47,7 +45,7 @@ public class SkillEditTry : TutorialProcess
             _skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
             if (_skillEditLayer != null)
             {
-                if (this.tutorialFlag == "openInstruction")
+                if (this._tutorialFlag == "openInstruction")
                 {
                     _skillEditLayer.OpenTutorial();
                 }
@@ -55,21 +53,22 @@ public class SkillEditTry : TutorialProcess
                 _skillEditLayer.NineSlot.SetExtraSkillEditSuccess(
                     () =>
                     {
-                        var TutorialProgressLabel = PreScene.target.Focusing.r_id == "1" ? "SkillEditFinished" : "SkillEditFinished2";
+                        var tutorialProgressLabel = PreScene.target.Focusing.r_id == "1" ? "SkillEditFinished" : "SkillEditFinished2";
                         PlayFabReadClient.UpdateUserData(
                             new UpdateUserDataRequest()
                             {
                                 Data = new Dictionary<string, string>()
                                 {
-                                    { "TutorialProgress", TutorialProgressLabel }
+                                    { "TutorialProgress", tutorialProgressLabel }
                                 }
                             },
-                            (x) =>
+                            () =>
                             {
-                                PlayerAccountInfo.Me.tutorialProgress = TutorialProgressLabel;
-                                skillEditFinished = true;
+                                PlayerAccountInfo.Me.tutorialProgress = tutorialProgressLabel;
+                                _skillEditFinished = true;
                                 _skillEditLayer.NineSlot.confirmBtnIndicator.SetActive(false);
-                            }
+                            },
+                            PreScene.ReturnToLobby
                         );
                     }
                 );

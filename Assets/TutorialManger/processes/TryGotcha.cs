@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DummyLayerSystem;
+using mainMenu;
 using PlayFab.ClientModels;
 
 public class TryGotcha : TutorialProcess
@@ -27,10 +28,11 @@ public class TryGotcha : TutorialProcess
                                     { "TutorialProgress", "GotchaFinished" }
                                 }
                             },
-                            (x) =>
+                            () =>
                             {
                                 PlayerAccountInfo.Me.tutorialProgress = "GotchaFinished";
-                            }
+                            },
+                            PreScene.ReturnToLobby
                         );
                     }
                 );

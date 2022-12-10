@@ -35,10 +35,11 @@ public class TeamEdit : TutorialProcess
                                 { "TutorialProgress", "Finished" }
                             }
                         },
-                        (x) =>
+                        () =>
                         {
                             PlayerAccountInfo.Me.tutorialProgress = "Finished";
-                        }
+                        },
+                        PreScene.ReturnToLobby
                     );
                 }
                 

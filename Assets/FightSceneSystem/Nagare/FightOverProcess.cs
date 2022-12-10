@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DummyLayerSystem;
+using mainMenu;
 using UnityEngine;
 using PlayFab.ClientModels;
 
@@ -49,16 +50,15 @@ namespace FightScene
                             {
                                 var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                                 var level = jsonResult.ContainsKey("progressLevel") ? jsonResult["progressLevel"] : 0;
-                                var reward_GD = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
-                                var reward_DIA = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
+                                var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
+                                var rewardDia = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
                                 
-                                int levelInt = Convert.ToInt32(level);
+                                var levelInt = Convert.ToInt32(level);
                                 PlayerAccountInfo.Me.arcadeProcess = levelInt;
-                                int reward_GD_Int = Convert.ToInt32(reward_GD);
-                                int reward_GM_Int = Convert.ToInt32(reward_DIA);
-
+                                var rewardGdInt = Convert.ToInt32(rewardGd);
+                                var rewardGmInt = Convert.ToInt32(rewardDia);
                                 var a = UILayerLoader.Load<ArenaFightOver>();
-                                a.ShowAward(reward_GD_Int, reward_GM_Int);
+                                a.ShowAward(rewardGdInt, rewardGmInt);
                             }
                         );
                         
@@ -73,8 +73,8 @@ namespace FightScene
                                         { "TutorialProgress", "StageOneFinished" }
                                     }
                                 },
-                                (x) =>
-                                { }
+                                () => {},
+                                PreScene.ReturnToLobby
                             );
                             ReturnLayer.ReturnMissionList.Clear(); // 直接回到 front scene
                         }

@@ -8,17 +8,17 @@ using Newtonsoft.Json;
 
 public partial class PlayFabReadClient
 {
-    public static void UpdateUserData(UpdateUserDataRequest req, Action<bool> finished)
+    public static void UpdateUserData(UpdateUserDataRequest req, Action finished, Action fail)
     {
         PlayFabClientAPI.UpdateUserData
         (
             req,
             obj => {
-                finished.Invoke(true);
+                finished.Invoke();
             },
             errorCallback => {
                 Debug.Log("fail:" + errorCallback.ErrorMessage);
-                finished.Invoke(false);
+                fail.Invoke();
             }
         );
     }

@@ -162,14 +162,15 @@ public partial class PlayFabReadClient
                                 { "TutorialProgress", "Started" }
                             }
                         },
-                        (x) =>
+                        () =>
                         {
-                            if (x)
-                            {
-                                PlayerAccountInfo.Me.tutorialProgress = "Started";
-                                _tutorialProgressGot = true;
-                            }
-                            _missionWatcher.Finish("tutorialProgressGot", x);
+                            PlayerAccountInfo.Me.tutorialProgress = "Started";
+                            _tutorialProgressGot = true;
+                            _missionWatcher.Finish("tutorialProgressGot", true);
+                        },
+                        () =>
+                        {
+                            _missionWatcher.Finish("tutorialProgressGot", false);
                         }
                     );
                 }
