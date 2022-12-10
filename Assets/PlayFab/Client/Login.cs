@@ -2,7 +2,6 @@ using PlayFab;
 using PlayFab.ClientModels;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using mainMenu;
 using UnityEngine;
@@ -42,9 +41,9 @@ public partial class PlayFabReadClient
     /// <param name="fail"></param>
     public static void PlayFabEmailLogin(string email, string pw, Action<LoginResult> success, Action<PlayFabError> fail)
     {
-        Debug.Log("尝试登陆 email:"+ email +"\n"
+        Debug.Log("try login by email:"+ email +"\n"
         + "pw:"+ pw +"\n" + "TitleId:"+ PlayFabSettings.TitleId);
-
+        
         PlayFabClientAPI.LoginWithEmailAddress(
             new LoginWithEmailAddressRequest()
             {
@@ -93,28 +92,49 @@ public partial class PlayFabReadClient
 #endif
     }
     
-    static MissionWatcher missionWatcher;
-    static bool accountIsInitialized;
-    static bool tutorialProgressGot;
+    static MissionWatcher _missionWatcher;
+    static bool _accountIsInitialized;
+    static bool _tutorialProgressGot;
     public static void LoginSuccess(LoginResult result)
     {
-        Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
+        Debug.Log(" login success： " + result.EntityToken.EntityToken);
         PlayerAccountInfo.Me = new PlayerAccountInfo
         {
             PlayFabId = result.PlayFabId
         };
         
         CloudScript.CheckIn();
-        missionWatcher = new MissionWatcher(
+        _missionWatcher = new MissionWatcher(
             new List<string>
             {
                 "accountIsInitialized", "tutorialProgressGot"
             },
             EnterMainScene,
-            () => { Debug.Log("错误，怎么办？"); }
+            () =>
+            {
+                
+                Debug.Log("错误，怎么办？");
+            }
         );
-        TryProcessWithLimitedTimes(CheckAccountInitialized, ()=> accountIsInitialized, 0);
-        TryProcessWithLimitedTimes(CheckTutorialProgressGot, ()=> tutorialProgressGot, 0);
+        TryProcessWithLimitedTimes(CheckAccountInitialized, ()=> _accountIsInitialized, 0);
+        TryProcessWithLimitedTimes(CheckTutorialProgressGot, ()=> _tutorialProgressGot, 0);
+    }
+
+    private static readonly int MAXTry = 5;
+    private static readonly float tryInterval = 1f;
+    static void TryProcessWithLimitedTimes(Action tryProcess, Func<bool> check, int tryTime)
+    {
+        UniTask.Delay(TimeSpan.FromSeconds(tryInterval)).ContinueWith(()=>
+        {
+            tryTime += 1;
+            if (tryTime == MAXTry || check())
+            {
+                return;
+            }
+            Debug.Log("wait for a initialized account, try time : "+ tryTime);
+            tryProcess();
+            TryProcessWithLimitedTimes(tryProcess, check, tryTime);
+        });
     }
 
     static void CheckTutorialProgressGot()
@@ -130,8 +150,8 @@ public partial class PlayFabReadClient
                 if (obj.Data.ContainsKey("TutorialProgress"))
                 {
                     PlayerAccountInfo.Me.tutorialProgress = obj.Data["TutorialProgress"].Value;
-                    tutorialProgressGot = true;
-                    missionWatcher.Finish("tutorialProgressGot", true);
+                    _tutorialProgressGot = true;
+                    _missionWatcher.Finish("tutorialProgressGot", true);
                 }
                 else
                 {
@@ -146,8 +166,8 @@ public partial class PlayFabReadClient
                         (x) =>
                         {
                             PlayerAccountInfo.Me.tutorialProgress = "Started";
-                            tutorialProgressGot = true;
-                            missionWatcher.Finish("tutorialProgressGot", true);
+                            _tutorialProgressGot = true;
+                            _missionWatcher.Finish("tutorialProgressGot", true);
                         }
                     );
                 }
@@ -181,108 +201,14 @@ public partial class PlayFabReadClient
                     playerInitialized = obj.Data["playerInitialized"].Value;
                 }
                 
-                accountIsInitialized = basicItemGranted == "true" && playerInitialized == "true";
-                if (accountIsInitialized)
+                _accountIsInitialized = basicItemGranted == "true" && playerInitialized == "true";
+                if (_accountIsInitialized)
                 {
-                    missionWatcher.Finish("accountIsInitialized", true);
+                    _missionWatcher.Finish("accountIsInitialized", true);
                 }
             },
             errorCallback => {
                 Debug.Log("Basic accInfo fail:" + errorCallback.ErrorMessage);
-            }
-        );
-    }
-    
-    static void TryProcessWithLimitedTimes(Action tryProcess, Func<bool> check, int tryTime)
-    {
-        Debug.Log("wait for a initialized account, try time:"+ tryTime);
-        if (tryTime == 5 || check())
-        {
-            return;
-        }
-        UniTask.Delay(TimeSpan.FromSeconds(1)).ContinueWith(()=>
-        {
-            tryTime += 1;
-            tryProcess();
-            TryProcessWithLimitedTimes(tryProcess, check, tryTime);
-        });
-    }
-    
-    public static void LinkAccountPopup(Action success)
-    {
-        PopupLayer.ArrangeConfirmWindow(
-            () =>
-            {
-                LinkDevice(
-                    () =>
-                    {
-                        PopupLayer.ArrangeWarnWindow(" 已经关联账户 ");
-                        success.Invoke();
-                    },
-                    (x) =>
-                    {
-                        PopupLayer.ArrangeWarnWindow("绑定失败"+ x.Error);
-                    }
-                );
-            },
-            "当前设备没和这个账户进行绑定，绑定一下？绑定了的话。。");
-    }
-    
-    public static void UnLinkAccountPopup(Action success)
-    {
-        PopupLayer.ArrangeConfirmWindow(
-            () =>
-            {
-                UnLinkDevice(
-                    PlayerAccountInfo.Me.currentLinkedDeviceId,
-                    () =>
-                    {
-                        PopupLayer.ArrangeWarnWindow(" 已经与当前设备断开链接 ");
-                        success.Invoke();
-                    },
-                    () =>
-                    {
-                        PopupLayer.ArrangeWarnWindow(" 未能与设备切断绑定，");
-                    }
-                );
-            }, 
-        "要把当前设备和当前账户断开链接？");
-    }
-    
-    static void EnterMainScene()
-    {
-        MainMenuNote.GoingTo = MainSceneStep.FrontPage;
-        SceneManager.LoadScene(1);
-    }
-    
-    public static void GetAccountInfo(Action<bool> success)
-    {
-        PlayFabClientAPI.GetAccountInfo(
-            new GetAccountInfoRequest
-            {
-                PlayFabId = PlayerAccountInfo.Me.PlayFabId
-            },
-            result =>
-            {
-                Debug.Log("TitleDisplayName 是:"+result.AccountInfo.TitleInfo.DisplayName);
-                PlayerAccountInfo.Me.TitleDisplayName = result.AccountInfo.TitleInfo.DisplayName;
-                PlayerAccountInfo.Me.PlayFabUserName = result.AccountInfo.Username;
-                PlayerAccountInfo.Me.Email = result.AccountInfo.PrivateInfo.Email;
-                
-#if UNITY_IOS
-                PlayerAccountInfo.Me.currentLinkedDeviceId = 
-                    result.AccountInfo.IosDeviceInfo != null ? result.AccountInfo.IosDeviceInfo.IosDeviceId : null;
-#endif
-#if UNITY_ANDROID
-                PlayerAccountInfo.Me.currentLinkedDeviceId = 
-                    result.AccountInfo.AndroidDeviceInfo != null ? result.AccountInfo.AndroidDeviceInfo.AndroidDeviceId : null;
-#endif
-                success.Invoke(true);
-            },
-            errorCallback =>
-            {
-                Debug.Log(errorCallback.Error);
-                success.Invoke(false);
             }
         );
     }
@@ -295,5 +221,11 @@ public partial class PlayFabReadClient
             // 官网说如果出现这个错误的话，可能需要等一些时间，账户内容才被彻底清除
         }
         Debug.Log("login fail");
+    }
+    
+    static void EnterMainScene()
+    {
+        MainMenuNote.GoingTo = MainSceneStep.FrontPage;
+        SceneManager.LoadScene(1);
     }
 }
