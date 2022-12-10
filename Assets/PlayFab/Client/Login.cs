@@ -3,6 +3,7 @@ using PlayFab.ClientModels;
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using DummyLayerSystem;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -98,6 +99,7 @@ public partial class PlayFabReadClient
     public static void LoginSuccess(LoginResult result)
     {
         Debug.Log(" login success： " + result.EntityToken.EntityToken);
+        ProgressLayer.Loading(">");
         PlayerAccountInfo.Me = new PlayerAccountInfo
         {
             PlayFabId = result.PlayFabId
@@ -107,9 +109,13 @@ public partial class PlayFabReadClient
         _missionWatcher = new MissionWatcher(
             new List<string>
             {
-                "accountIsInitialized", "tutorialProgressGot"
+                "accountIsInitialized", "tutorialProgressGot", "accountInfoFinished"
             },
-            EnterMainScene,
+            ()=>
+            {
+                ProgressLayer.Close();
+                EnterMainScene();
+            },
             () =>
             {
                 PopupLayer.ArrangeWarnWindow("Network Error");
@@ -117,6 +123,12 @@ public partial class PlayFabReadClient
         );
         TryProcessWithLimitedTimes(CheckAccountInitialized, ()=> _playerInitialized, 0);
         TryProcessWithLimitedTimes(CheckTutorialProgressGot, ()=> _tutorialProgressGot, 0);
+        GetAccountInfo(AccountInfoFinished);
+    }
+    
+    static void AccountInfoFinished(bool value)
+    {
+        _missionWatcher.Finish("accountInfoFinished", value);
     }
 
     private static readonly int MAXTry = 5;

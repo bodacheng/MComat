@@ -14,7 +14,6 @@ public partial class PlayFabReadClient
             },
             result =>
             {
-                Debug.Log("TitleDisplayName 是:"+result.AccountInfo.TitleInfo.DisplayName);
                 PlayerAccountInfo.Me.TitleDisplayName = result.AccountInfo.TitleInfo.DisplayName;
                 PlayerAccountInfo.Me.PlayFabUserName = result.AccountInfo.Username;
                 PlayerAccountInfo.Me.Email = result.AccountInfo.PrivateInfo.Email;

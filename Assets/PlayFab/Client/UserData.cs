@@ -73,7 +73,7 @@ public partial class PlayFabReadClient
         );
     }
 
-    public static void GetUserReadOnlyData(Action<bool> finished)
+    public static void GetBasicReadOnlyData(Action<bool> finished)
     {
         PlayFabClientAPI.GetUserReadOnlyData
         (
@@ -98,7 +98,7 @@ public partial class PlayFabReadClient
                 finished.Invoke(true);
             },
             errorCallback => {
-                Debug.Log("Basic accInfo fail:" + errorCallback.ErrorMessage);
+                Debug.Log(errorCallback.ErrorMessage);
                 finished.Invoke(false);
             }
         );

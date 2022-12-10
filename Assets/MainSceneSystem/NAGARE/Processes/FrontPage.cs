@@ -9,11 +9,6 @@ using PlayFab.ClientModels;
 
 public class FrontPage : MSceneProcess
 {
-    void AccountInfoFinished(bool value)
-    {
-        missionWatcher.Finish("accountInfoFinished", value);
-    }
-    
     void UserReadOnlyDataLoadFinished(bool value)
     {
         missionWatcher.Finish("userReadOnlyDataLoadLoaded", value);
@@ -43,15 +38,15 @@ public class FrontPage : MSceneProcess
     {
         Step = MainSceneStep.FrontPage;
     }
-
-    FrontLayer frontLayer;
-    bool askedIfLinkDevice = false;
+    
+    FrontLayer _frontLayer;
+    bool _askedIfLinkDevice = false;
     void EnterProcess()
     {
         TutorialRunner.Main.TutorialCheck();
 
-        frontLayer = UILayerLoader.Load<FrontLayer>();
-        frontLayer.Initialise(PreScene.target);
+        _frontLayer = UILayerLoader.Load<FrontLayer>();
+        _frontLayer.Initialise(PreScene.target);
         
         // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
         //_CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
@@ -75,16 +70,16 @@ public class FrontPage : MSceneProcess
         }
         
         PreScene.target.SetFocusingUnit(focusInstanceID);
-        frontLayer.CamConnector.ShowMyModel(focusInstanceID);
+        _frontLayer.CamConnector.ShowMyModel(focusInstanceID);
 
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
-        upperInfoBar.Setup(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting, true), 
+        upperInfoBar.Setup(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting), 
             () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox));
 
         // If account isn't linked to device, ask if link. Only ask once
-        if (PlayerAccountInfo.Me.currentLinkedDeviceId != PlayFabReadClient.CustomId && !askedIfLinkDevice)
+        if (PlayerAccountInfo.Me.currentLinkedDeviceId != PlayFabReadClient.CustomId && !_askedIfLinkDevice)
         {
-            askedIfLinkDevice = true;
+            _askedIfLinkDevice = true;
             var askIfLinkDeviceLayer = UILayerLoader.Load<AskIfLinkDeviceLayer>();
             askIfLinkDeviceLayer.Initialise(
                 () =>
@@ -116,8 +111,7 @@ public class FrontPage : MSceneProcess
     public override void ProcessEnter()
     {
         ProgressLayer.Loading(">");
-        PlayFabReadClient.GetAccountInfo(AccountInfoFinished);
-        PlayFabReadClient.GetUserReadOnlyData(UserReadOnlyDataLoadFinished);
+        PlayFabReadClient.GetBasicReadOnlyData(UserReadOnlyDataLoadFinished);
         PlayFabReadClient.GetStatistics(StatisticsLoadFinished);
         
         //AccountCharsSet.LoadTutorial();
@@ -129,7 +123,7 @@ public class FrontPage : MSceneProcess
             new List<string>
             {
                 "itemsLoadFinished", "statisticsFinished", 
-                "userReadOnlyDataLoadLoaded", "arcadeTFinished", "arenaTFinished", "accountInfoFinished"
+                "userReadOnlyDataLoadLoaded", "arcadeTFinished", "arenaTFinished"
             },
             () =>
             {

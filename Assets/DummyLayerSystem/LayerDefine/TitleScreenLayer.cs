@@ -52,34 +52,15 @@ public class TitleScreenLayer : UILayer
     
     void EmailLogin()
     {
-        ProgressLayer.Loading(">");
         PlayFabReadClient.PlayFabEmailLogin(id.text.Trim(), password.text.Trim(), 
-            (x)=>
-            {
-                PlayFabReadClient.LoginSuccess(x);
-                ProgressLayer.Close();
-            },
-            (x)=>
-            {
-                PlayFabReadClient.LoginFail(x);
-                ProgressLayer.Close();
-            });
+            PlayFabReadClient.LoginSuccess,
+            PlayFabReadClient.LoginFail);
     }
     
     void TouchScreenLogin()
     {
-        ProgressLayer.Loading(">");
         PlayFabReadClient.LoginByDevice(
-            (x)=>
-            {
-                PlayFabReadClient.LoginSuccess(x);
-                ProgressLayer.Close();
-                UILayerLoader.Remove<TitleScreenLayer>();
-            },
-            (x)=>
-            {
-                PlayFabReadClient.LoginFail(x);
-                ProgressLayer.Close();
-            });
+            PlayFabReadClient.LoginSuccess,
+            PlayFabReadClient.LoginFail);
     }
 }
