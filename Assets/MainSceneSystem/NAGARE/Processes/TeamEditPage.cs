@@ -117,7 +117,7 @@ public class TeamEditPage : MSceneProcess
                     ProgressLayer.Close,
                     () =>
                     {
-                        PopupLayer.ArrangeWarnWindow("network error");
+                        PreScene.ReturnToLobby();
                         ProgressLayer.Close();
                     }
                 );
@@ -144,7 +144,7 @@ public class TeamEditPage : MSceneProcess
                     },
                     () =>
                     {
-                        PopupLayer.ArrangeWarnWindow("network error");
+                        PreScene.ReturnToLobby();
                         ProgressLayer.Close();
                     }
                 );

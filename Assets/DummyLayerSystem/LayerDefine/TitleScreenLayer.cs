@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using DummyLayerSystem;
 
 /// <summary>
 /// 这个layer的问题在于，它必须灵活的适应未来可能做出的一些改动
@@ -11,23 +12,23 @@ public class TitleScreenLayer : UILayer
     // Main
     [SerializeField] RectTransform mainTab;
     [SerializeField] Image title;
-    [SerializeField] BOButton TouchScreen;
+    [SerializeField] BOButton touchScreenBtn;
     [SerializeField] Button accountLoginBtn;
     
     // Login by pw
     [SerializeField] RectTransform loginByPwTab;
-    [SerializeField] InputField ID;
-    [SerializeField] InputField PASSWORD;
-    [SerializeField] Button LoginBtn;
+    [SerializeField] InputField id;
+    [SerializeField] InputField password;
+    [SerializeField] Button loginBtn;
     [SerializeField] Button cancelBtn;
 
     private float titleAnimFactor = 0;
     public void Initialise()
     {
-        TouchScreen.onClick.AddListener(TouchScreenLogin);
+        touchScreenBtn.onClick.AddListener(TouchScreenLogin);
         accountLoginBtn.onClick.AddListener(()=> SwitchTab(2));
         cancelBtn.onClick.AddListener(()=> SwitchTab(1));
-        LoginBtn.onClick.AddListener(EmailLogin);
+        loginBtn.onClick.AddListener(EmailLogin);
 
         DOTween.To(() => titleAnimFactor, (x) => titleAnimFactor = x, 2, 10).OnUpdate(() =>
         {
@@ -51,17 +52,34 @@ public class TitleScreenLayer : UILayer
     
     void EmailLogin()
     {
-        PlayFabReadClient.PlayFabEmailLogin(ID.text.Trim(), PASSWORD.text.Trim(), 
-            PlayFabReadClient.LoginSuccess,
-            PlayFabReadClient.LoginFail);
+        ProgressLayer.Loading(">");
+        PlayFabReadClient.PlayFabEmailLogin(id.text.Trim(), password.text.Trim(), 
+            (x)=>
+            {
+                PlayFabReadClient.LoginSuccess(x);
+                ProgressLayer.Close();
+            },
+            (x)=>
+            {
+                PlayFabReadClient.LoginFail(x);
+                ProgressLayer.Close();
+            });
     }
     
     void TouchScreenLogin()
     {
+        ProgressLayer.Loading(">");
         PlayFabReadClient.LoginByDevice(
-            PlayFabReadClient.LoginSuccess,
-            PlayFabReadClient.LoginFail
-        );
-        TouchScreen.onClick.RemoveAllListeners();
+            (x)=>
+            {
+                PlayFabReadClient.LoginSuccess(x);
+                ProgressLayer.Close();
+                UILayerLoader.Remove<TitleScreenLayer>();
+            },
+            (x)=>
+            {
+                PlayFabReadClient.LoginFail(x);
+                ProgressLayer.Close();
+            });
     }
 }

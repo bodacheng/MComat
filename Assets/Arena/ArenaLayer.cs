@@ -40,17 +40,17 @@ public class ArenaLayer : UILayer
     
     LeaderboardInfo myLeaderboardInfo;
     
-    private Action<bool> SetLoaded;
-    private Action<string> ReturnToLobby;
-    private Func<int, List<LeaderboardInfo>> GetOpponentAroundPoint;
-    public void SetUp(Action<bool> SetLoaded, 
-        Action<string> ReturnToLobby, 
-        Func<int, List<LeaderboardInfo>> GetOpponentAroundPoint,
+    private Action<bool> _setLoaded;
+    private Action _returnToLobby;
+    private Func<int, List<LeaderboardInfo>> _getOpponentAroundPoint;
+    public void SetUp(Action<bool> setLoaded, 
+        Action returnToLobby, 
+        Func<int, List<LeaderboardInfo>> getOpponentAroundPoint,
         Action openRanking)
     {
-        this.SetLoaded = SetLoaded;
-        this.ReturnToLobby = ReturnToLobby;
-        this.GetOpponentAroundPoint = GetOpponentAroundPoint;
+        this._setLoaded = setLoaded;
+        this._returnToLobby = returnToLobby;
+        this._getOpponentAroundPoint = getOpponentAroundPoint;
         
         rankingPageBtn.onClick.RemoveAllListeners();
         rankingPageBtn.onClick.AddListener(()=> openRanking());
@@ -115,7 +115,7 @@ public class ArenaLayer : UILayer
                 if (exceptSelf.Count < 3)
                 {
                     var myPoint = (myLeaderboardInfo != null) ? myLeaderboardInfo.PlayerLeaderboardEntry.StatValue : 1000;
-                    var list = this.GetOpponentAroundPoint(myPoint);
+                    var list = this._getOpponentAroundPoint(myPoint);
                     for (var i = 0; i < list.Count; i++)
                     {
                         exceptSelf.Add(list[i]);
@@ -128,12 +128,12 @@ public class ArenaLayer : UILayer
                 
                 DisplayOpponents(exceptSelf);
                 ProgressLayer.Close();
-                SetLoaded.Invoke(true);
+                _setLoaded.Invoke(true);
             },
             () =>
             {
                 ProgressLayer.Close();
-                ReturnToLobby.Invoke("network error");
+                _returnToLobby.Invoke();
             }
         );
     }

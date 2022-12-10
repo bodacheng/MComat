@@ -92,9 +92,9 @@ namespace mainMenu
             AddressablesLogic.Essentials().Forget();
         }
         
-        public static void ReturnToLobby(string error)
+        public static void ReturnToLobby()
         {
-            PopupLayer.ArrangeConfirmWindow((() => { SceneManager.LoadScene(0);}), error);
+            PopupLayer.ArrangeConfirmWindow((() => { SceneManager.LoadScene(0);}), "Network Error. Return to lobby.");
         }
         
         void BasicPhase()

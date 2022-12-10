@@ -24,9 +24,8 @@ public class MissionWatcher
         if (!value)
         {
             // 主动报告一个通信错误的时候才直接执行错误处理
-            // 所有通信错误原则上都不该发生，发生了就返回主界面
             _fail?.Invoke();
-            PreScene.ReturnToLobby("返回大厅？");
+            //PreScene.ReturnToLobby();
             return;
         }
         

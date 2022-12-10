@@ -917,12 +917,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainTab: {fileID: 2765050249069523412}
   title: {fileID: 7007119828061677676}
-  TouchScreen: {fileID: 8677488652153994379}
+  touchScreenBtn: {fileID: 8677488652153994379}
   accountLoginBtn: {fileID: 4749662999847860386}
   loginByPwTab: {fileID: 4821403674555003584}
-  ID: {fileID: 2444670806525046310}
-  PASSWORD: {fileID: 5909952540937570759}
-  LoginBtn: {fileID: 7239677770134277855}
+  id: {fileID: 2444670806525046310}
+  password: {fileID: 5909952540937570759}
+  loginBtn: {fileID: 7239677770134277855}
   cancelBtn: {fileID: 120935324781771985}
 --- !u!1 &4749662999051188556
 GameObject:

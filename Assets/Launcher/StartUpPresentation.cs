@@ -37,7 +37,7 @@ public class StartUpPresentation : MonoBehaviour
         }
         else
         {
-            Go();
+            Go(); // no asset to download.begin directly 
         }
     }
     

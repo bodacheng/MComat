@@ -3,7 +3,6 @@ using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
 using System;
-using mainMenu;
 
 public partial class CloudScript
 {
@@ -20,7 +19,7 @@ public partial class CloudScript
             {
                 Debug.Log(x.Error);
                 errorCallback?.Invoke(x);
-                PreScene.ReturnToLobby("通讯错误");
+                PopupLayer.ArrangeWarnWindow(x.ErrorMessage);
             }, 
             customData, extraHeaders);
     }

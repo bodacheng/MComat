@@ -43,7 +43,7 @@ public class SkillEditPage : MSceneProcess
         missionWatcher = new MissionWatcher(
             new List<string>() {"itemsLoadFinished"},
             ()=>EnterProcess().Forget(),
-            () => { Debug.Log("failed"); }
+            PreScene.ReturnToLobby
         );
     }
     

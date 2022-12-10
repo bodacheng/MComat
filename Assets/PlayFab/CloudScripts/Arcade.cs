@@ -2,6 +2,7 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using System;
+using mainMenu;
 
 public partial class CloudScript
 {
@@ -14,8 +15,6 @@ public partial class CloudScript
                 FunctionParameter = new { level = targetLevel },
                 GeneratePlayStreamEvent = true
             },
-            (ExecuteCloudScriptResult result) => {
-                success.Invoke(result);
-            });
+            success.Invoke);
     }
 }

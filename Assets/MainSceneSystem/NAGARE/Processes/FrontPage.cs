@@ -143,7 +143,7 @@ public class FrontPage : MSceneProcess
                     EnterProcess();
                 }
             },
-            () => { Debug.Log("错误，怎么办？"); }
+            PreScene.ReturnToLobby
         );
     }
     
