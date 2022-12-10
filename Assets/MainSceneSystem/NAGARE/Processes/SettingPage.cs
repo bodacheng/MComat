@@ -5,7 +5,7 @@ using PlayFab;
 
 public class SettingPage : MSceneProcess
 {
-    private SettingLayer layer;
+    private SettingLayer _layer;
 
     public SettingPage()
     {
@@ -14,8 +14,8 @@ public class SettingPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        layer = UILayerLoader.Load<SettingLayer>();
-        layer.Initialise();
+        _layer = UILayerLoader.Load<SettingLayer>();
+        _layer.Initialise();
         PlayFabReadClient.GetAccountInfo(
             (x) =>
             {
@@ -23,13 +23,13 @@ public class SettingPage : MSceneProcess
                 {
                     if (PlayerAccountInfo.Me.Email != null)
                     {
-                        layer.AccountPhase_EmailSet();
+                        _layer.AccountPhase_EmailSet();
                     }
                     else
                     {
-                        layer.AccountPhase_EmailToBeSet();
+                        _layer.AccountPhase_EmailToBeSet();
                     }
-                    layer.RefreshLinkDeviceBtn();
+                    _layer.RefreshLinkDeviceBtn();
                 }
             }
         );
@@ -55,17 +55,17 @@ public class SettingPage : MSceneProcess
                         nickNameLayer.LoadingRender(true);
                         PlayFabReadClient.UpdateUserTitleDisplayName(
                             x,
-                            (x) =>
+                            (result) =>
                             {
-                                PlayerAccountInfo.Me.TitleDisplayName = x.DisplayName;
+                                PlayerAccountInfo.Me.TitleDisplayName = result.DisplayName;
                                 UILayerLoader.Remove<NickNameLayer>();
                                 ProgressLayer.Close();
-                                success?.Invoke(x.DisplayName);
+                                success?.Invoke(result.DisplayName);
                             },
-                            (x) =>
+                            (playFabError) =>
                             {
                                 nickNameLayer.LoadingRender(false);
-                                PopupLayer.ArrangeWarnWindow(x.Error == PlayFabErrorCode.InvalidUsername
+                                PopupLayer.ArrangeWarnWindow(playFabError.Error == PlayFabErrorCode.InvalidUsername
                                     ? "InvalidUsername"
                                     : "Network Error");
                                 ProgressLayer.Close();
