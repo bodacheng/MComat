@@ -7,15 +7,15 @@ using UnityEngine.Purchasing;
 
 public class IAPManager : MonoBehaviour, IStoreListener {
     // Items list, configurable via inspector
-    private static List<CatalogItem> Catalog;
-    public static IAPManager target;
+    private static List<CatalogItem> _catalog;
+    public static IAPManager Target;
     // The Unity Purchasing system
-    private static IStoreController m_StoreController;
+    private static IStoreController _mStoreController;
     private string ProductCatalogVersion = "Product";
     // Bootstrap the whole thing
     public void Start() {
         // Make PlayFab log in
-        target = this;
+        Target = this;
         RefreshIAPItems();
     }
     
@@ -25,7 +25,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 CatalogVersion = ProductCatalogVersion
             },
         result => {
-            Catalog = result.Catalog;
+            _catalog = result.Catalog;
             // Make UnityIAP initialize
             InitializePurchasing();
         }, error => Debug.LogError(error.GenerateErrorReport()));
@@ -46,7 +46,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.GooglePlay));
 #endif
         // Register each item from the catalog
-        foreach (var item in Catalog) {
+        foreach (var item in _catalog) {
             Debug.Log("Add product:"+ item.ItemId);
             builder.AddProduct(item.ItemId, ProductType.Consumable);
         }
@@ -56,12 +56,12 @@ public class IAPManager : MonoBehaviour, IStoreListener {
     }
 
     // We are initialized when StoreController and Extensions are set and we are logged in
-    public bool IsInitialized => m_StoreController != null;
+    public bool IsInitialized => _mStoreController != null;
 
     // This is automatically invoked automatically when IAP service is initialized
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions) {
         Debug.Log("Initialized ：" + controller);
-        m_StoreController = controller;
+        _mStoreController = controller;
     }
 
     // This is automatically invoked automatically when IAP service failed to initialized
@@ -108,13 +108,17 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         var store = (string)wrapper["Store"];
         var payload = (string)wrapper["Payload"]; // For Apple this will be the base64 encoded ASN.1 receipt
 
+        Debug.Log("CurrencyCode:"+e.purchasedProduct.metadata.isoCurrencyCode);
+        Debug.Log("PurchasePrice:"+(int)e.purchasedProduct.metadata.localizedPrice);
         PlayFabClientAPI.ValidateIOSReceipt(new ValidateIOSReceiptRequest
             {
+                CatalogVersion = ProductCatalogVersion,
                 CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
                 PurchasePrice = (int)e.purchasedProduct.metadata.localizedPrice * 100,
                 ReceiptData = payload
             }, result => {
                 Debug.Log("Validation successful!");
+                _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
             },
             error => {
                 Debug.Log("Validation failed: " + error.GenerateErrorReport());
@@ -140,7 +144,10 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 ReceiptJson = googleReceipt.PayloadData.json,
                 // Pass in the signature
                 Signature = googleReceipt.PayloadData.signature
-            }, result => Debug.Log("Validation successful!"),
+            }, result => {
+                Debug.Log("Validation successful!");
+                _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
+            },
             error => Debug.Log("Validation failed: " + error.GenerateErrorReport())
         );
         #endif
@@ -155,7 +162,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         if (!IsInitialized) throw new Exception("IAP Service is not initialized!");
 
         // Pass in the product id to initiate purchase
-        m_StoreController.InitiatePurchase(productId);
+        _mStoreController.InitiatePurchase(productId);
     }
 }
 
