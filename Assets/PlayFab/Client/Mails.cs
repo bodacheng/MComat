@@ -141,13 +141,13 @@ public partial class PlayFabReadClient
                     if (kv.Key == PlayfabSetting._GoldCode)
                     {
                         Debug.Log("get gold:"+ kv.Value);
-                        Currencies.CoinCount += (int)kv.Value;
+                        Currencies.CoinCount.Value += (int)kv.Value;
                         
                     }
                     if (kv.Key == PlayfabSetting._DiamondCode)
                     {
                         Debug.Log("get diamond:"+ kv.Value);
-                        Currencies.DiamondCount += (int)kv.Value;
+                        Currencies.DiamondCount.Value += (int)kv.Value;
                     }
                 }
                 

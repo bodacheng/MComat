@@ -1,11 +1,8 @@
-﻿using UnityEngine;
-using mainMenu;
+﻿using mainMenu;
 using dataAccess;
 using DG.Tweening;
 using System.Collections.Generic;
 using DummyLayerSystem;
-using PlayFab;
-using PlayFab.ClientModels;
 
 public class FrontPage : MSceneProcess
 {
@@ -40,7 +37,7 @@ public class FrontPage : MSceneProcess
     }
     
     FrontLayer _frontLayer;
-    bool _askedIfLinkDevice = false;
+    bool _askedIfLinkDevice;
     void EnterProcess()
     {
         TutorialRunner.Main.TutorialCheck();

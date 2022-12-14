@@ -54,11 +54,11 @@ public partial class PlayFabReadClient
                 {
                     if (kv.Key == PlayfabSetting._GoldCode)
                     {
-                        Currencies.CoinCount = kv.Value;
+                        Currencies.CoinCount.Value = kv.Value;
                     }
                     else if (kv.Key == PlayfabSetting._DiamondCode)
                     {
-                        Currencies.DiamondCount = kv.Value;
+                        Currencies.DiamondCount.Value = kv.Value;
                     }
                 }
                 finished.Invoke(true);

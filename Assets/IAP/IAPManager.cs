@@ -119,6 +119,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
             }, result => {
                 Debug.Log("Validation successful!");
                 _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
+                PlayFabReadClient.LoadItems(null);
             },
             error => {
                 Debug.Log("Validation failed: " + error.GenerateErrorReport());

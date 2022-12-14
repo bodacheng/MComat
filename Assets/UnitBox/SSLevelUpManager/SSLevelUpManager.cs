@@ -98,7 +98,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         gdCount.text = needGD.ToString();
         void Confirm()
         {
-            if (Currencies.CoinCount < needGD)
+            if (Currencies.CoinCount.Value < needGD)
             {
                 PopupLayer.ArrangeWarnWindow("ゴールドが足りない");
                 return;
