@@ -1,0 +1,1722 @@
+fileFormatVersion: 2
+guid: 0682a8c6fe988c846a25f0754fe59555
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1345071483148780038
+    second: GLU_Art_019b_000
+  - first:
+      213: 3430252779201948642
+    second: GLU_Art_019b_001
+  - first:
+      213: -6691937358274214723
+    second: GLU_Art_019b_002
+  - first:
+      213: 8943481850119881182
+    second: GLU_Art_019b_003
+  - first:
+      213: -1030858262697177963
+    second: GLU_Art_019b_004
+  - first:
+      213: 4302343146657728802
+    second: GLU_Art_019b_005
+  - first:
+      213: -158290108236786650
+    second: GLU_Art_019b_006
+  - first:
+      213: 6975295951468533549
+    second: GLU_Art_019b_007
+  - first:
+      213: -7002304755501322792
+    second: GLU_Art_019b_008
+  - first:
+      213: -116790562794117926
+    second: GLU_Art_019b_009
+  - first:
+      213: 9132872221472525273
+    second: GLU_Art_019b_010
+  - first:
+      213: -6760790159220906960
+    second: GLU_Art_019b_011
+  - first:
+      213: 5051217122213441164
+    second: GLU_Art_019b_012
+  - first:
+      213: -455988264512822426
+    second: GLU_Art_019b_013
+  - first:
+      213: -3649290538718814827
+    second: GLU_Art_019b_014
+  - first:
+      213: 9158219629392890196
+    second: GLU_Art_019b_015
+  - first:
+      213: -4915300731202728460
+    second: GLU_Art_019b_016
+  - first:
+      213: -8915157619815417486
+    second: GLU_Art_019b_017
+  - first:
+      213: -8041004847301708485
+    second: GLU_Art_019b_018
+  - first:
+      213: 5581930037774630038
+    second: GLU_Art_019b_019
+  - first:
+      213: 7828207786273465550
+    second: GLU_Art_019b_020
+  - first:
+      213: 2832137169123684236
+    second: GLU_Art_019b_021
+  - first:
+      213: -9011873252604512258
+    second: GLU_Art_019b_022
+  - first:
+      213: -8641968487709949840
+    second: GLU_Art_019b_023
+  - first:
+      213: -716869926325658676
+    second: GLU_Art_019b_024
+  - first:
+      213: -2344191404426153568
+    second: GLU_Art_019b_025
+  - first:
+      213: -8385173070813799332
+    second: GLU_Art_019b_026
+  - first:
+      213: -660538857428744540
+    second: GLU_Art_019b_027
+  - first:
+      213: -5568353850090552238
+    second: GLU_Art_019b_028
+  - first:
+      213: 3107155630661009798
+    second: GLU_Art_019b_029
+  - first:
+      213: -7108981800935835263
+    second: GLU_Art_019b_030
+  - first:
+      213: -7342345643552188848
+    second: GLU_Art_019b_031
+  - first:
+      213: -8905743282659409387
+    second: GLU_Art_019b_032
+  - first:
+      213: 684590642603365761
+    second: GLU_Art_019b_033
+  - first:
+      213: -2047025383367871001
+    second: GLU_Art_019b_034
+  - first:
+      213: 5516855116964074650
+    second: GLU_Art_019b_035
+  - first:
+      213: 8409750652355057501
+    second: GLU_Art_019b_036
+  - first:
+      213: 6965524922790845187
+    second: GLU_Art_019b_037
+  - first:
+      213: -5103321161305144075
+    second: GLU_Art_019b_038
+  - first:
+      213: -648127301707092092
+    second: GLU_Art_019b_039
+  - first:
+      213: -3872692318835519741
+    second: GLU_Art_019b_040
+  - first:
+      213: 2133016685991519997
+    second: GLU_Art_019b_041
+  - first:
+      213: 3945288884096973566
+    second: GLU_Art_019b_042
+  - first:
+      213: 2184427767625233207
+    second: GLU_Art_019b_043
+  - first:
+      213: 4314523033061924718
+    second: GLU_Art_019b_044
+  - first:
+      213: -8435517218413188491
+    second: GLU_Art_019b_045
+  - first:
+      213: -3590766330912586543
+    second: GLU_Art_019b_046
+  - first:
+      213: 1914248436282778705
+    second: GLU_Art_019b_047
+  - first:
+      213: -1019111825190265763
+    second: GLU_Art_019b_048
+  - first:
+      213: 7501241981737960371
+    second: GLU_Art_019b_049
+  - first:
+      213: -7148511780492352085
+    second: GLU_Art_019b_050
+  - first:
+      213: 5557976871207705703
+    second: GLU_Art_019b_051
+  - first:
+      213: 605438177691605989
+    second: GLU_Art_019b_052
+  - first:
+      213: 2478353026237715092
+    second: GLU_Art_019b_053
+  - first:
+      213: -3250887420842316243
+    second: GLU_Art_019b_054
+  - first:
+      213: -6681627948149786285
+    second: GLU_Art_019b_055
+  - first:
+      213: 4191373727262442390
+    second: GLU_Art_019b_056
+  - first:
+      213: 5689581963906696089
+    second: GLU_Art_019b_057
+  - first:
+      213: 5880385137347281757
+    second: GLU_Art_019b_058
+  - first:
+      213: 1658927661622436970
+    second: GLU_Art_019b_059
+  - first:
+      213: 7716388750991427097
+    second: GLU_Art_019b_060
+  - first:
+      213: 6450262419252090919
+    second: GLU_Art_019b_061
+  - first:
+      213: -2556285947880378288
+    second: GLU_Art_019b_062
+  - first:
+      213: -6457004832358819465
+    second: GLU_Art_019b_063
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GLU_Art_019b_000
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 3588
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d404eb5dd5def945bfe3e94436b128e
+      internalID: 1345071483148780038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_001
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 3588
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9539835b098347b4db961e381cbef0b4
+      internalID: 3430252779201948642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_002
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 3588
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42c8fe9e7f1af8c4b91b959c9d717506
+      internalID: -6691937358274214723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_003
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 3588
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bd5622ba7defa849a22e1aaa10afe50
+      internalID: 8943481850119881182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_004
+      rect:
+        serializedVersion: 2
+        x: 2052
+        y: 3588
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b1e0761d70af894dade4e39ca58e84b
+      internalID: -1030858262697177963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_005
+      rect:
+        serializedVersion: 2
+        x: 2564
+        y: 3588
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e0fb1124e8a7394daba04890e3eab16
+      internalID: 4302343146657728802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_006
+      rect:
+        serializedVersion: 2
+        x: 3076
+        y: 3588
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccc3636d46985de46bd3bb6963a92a6b
+      internalID: -158290108236786650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_007
+      rect:
+        serializedVersion: 2
+        x: 3588
+        y: 3588
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bf1ac6d2dd9f2f4c954755764ba0097
+      internalID: 6975295951468533549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_008
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 3076
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4290adb30613aeb4bbd2e3896564368a
+      internalID: -7002304755501322792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_009
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 3076
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 789c9bf088aa8794a90e33a2a3d8be11
+      internalID: -116790562794117926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_010
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 3076
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ec1fb4017bfc284caf3692b9f82ee54
+      internalID: 9132872221472525273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_011
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 3076
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aa4abe610914e1498c1363e1d2d4572
+      internalID: -6760790159220906960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_012
+      rect:
+        serializedVersion: 2
+        x: 2052
+        y: 3076
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b09882b2e51ac59488456e8a1eefb95e
+      internalID: 5051217122213441164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_013
+      rect:
+        serializedVersion: 2
+        x: 2564
+        y: 3076
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f42ee17fffea66f459ee218f273ce6b0
+      internalID: -455988264512822426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_014
+      rect:
+        serializedVersion: 2
+        x: 3076
+        y: 3076
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dff043dd84b7184da6fd0e5b5ad3c2f
+      internalID: -3649290538718814827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_015
+      rect:
+        serializedVersion: 2
+        x: 3588
+        y: 3076
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 134ff5ed0a7cadc4d991cc4ad9c38336
+      internalID: 9158219629392890196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_016
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 2564
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35d4e28dc7608e545acca7a9ae9a56bc
+      internalID: -4915300731202728460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_017
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 2564
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3ed7cfb3baac9b47bfdde51a3c79920
+      internalID: -8915157619815417486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_018
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 2564
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2a57a1ae0d777147a4039172221c29e
+      internalID: -8041004847301708485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_019
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 2564
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0cfc5371f5ad9f429a566c50eed6944
+      internalID: 5581930037774630038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_020
+      rect:
+        serializedVersion: 2
+        x: 2052
+        y: 2564
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef7b4e05af30af14ca5d23a2ff994c24
+      internalID: 7828207786273465550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_021
+      rect:
+        serializedVersion: 2
+        x: 2564
+        y: 2564
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7359712db899ab4e86a525f7b313e33
+      internalID: 2832137169123684236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_022
+      rect:
+        serializedVersion: 2
+        x: 3076
+        y: 2564
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5766fe262104484f92fc83e9517cb43
+      internalID: -9011873252604512258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_023
+      rect:
+        serializedVersion: 2
+        x: 3588
+        y: 2564
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13c05dffcf50158448dfa7dc8a1891ea
+      internalID: -8641968487709949840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_024
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 2052
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f59918adddd3c546a18385195325153
+      internalID: -716869926325658676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_025
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 2052
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc18574aeb7329146a3cb5b773b41544
+      internalID: -2344191404426153568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_026
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 2052
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c52d1276dc458464d8a972e45decfd3f
+      internalID: -8385173070813799332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_027
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 2052
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37adeeab084698740a9a65cebcff8b8d
+      internalID: -660538857428744540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_028
+      rect:
+        serializedVersion: 2
+        x: 2052
+        y: 2052
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e12b35c6886723b4d8b6fd60482f3098
+      internalID: -5568353850090552238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_029
+      rect:
+        serializedVersion: 2
+        x: 2564
+        y: 2052
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 268cc0e856bd74d459c61d261f6d1ad0
+      internalID: 3107155630661009798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_030
+      rect:
+        serializedVersion: 2
+        x: 3076
+        y: 2052
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f324e952b49a17142b4390e0e34492bf
+      internalID: -7108981800935835263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_031
+      rect:
+        serializedVersion: 2
+        x: 3588
+        y: 2052
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: baf9309f6e46e214fa7432829d525e3f
+      internalID: -7342345643552188848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_032
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1540
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c5a0bf63b4bb9e4a8760372049349cc
+      internalID: -8905743282659409387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_033
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 1540
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b42a98875a673bf4cac0a1d026249cd0
+      internalID: 684590642603365761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_034
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 1540
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2db3902774f6e794685988cc2ab19e0c
+      internalID: -2047025383367871001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_035
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 1540
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6aa0c6656de70a4bb8bfb4ecf4d7a06
+      internalID: 5516855116964074650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_036
+      rect:
+        serializedVersion: 2
+        x: 2052
+        y: 1540
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 414d172433957a846bd03fea754a59cd
+      internalID: 8409750652355057501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_037
+      rect:
+        serializedVersion: 2
+        x: 2564
+        y: 1540
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ce88210fd76b7846a178a399224916f
+      internalID: 6965524922790845187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_038
+      rect:
+        serializedVersion: 2
+        x: 3076
+        y: 1540
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fb450f16c66ec04bab62cd906539c4a
+      internalID: -5103321161305144075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_039
+      rect:
+        serializedVersion: 2
+        x: 3588
+        y: 1540
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d0c457f27df4c9489bd1e44df354338
+      internalID: -648127301707092092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_040
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1028
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57285177eb2705b47b97de1f460b54b9
+      internalID: -3872692318835519741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_041
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 1028
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b1d6c1be6dd0694bacebcdc44037c73
+      internalID: 2133016685991519997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_042
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 1028
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2f25bd0f111ebb4ca05732a4cd2ed4f
+      internalID: 3945288884096973566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_043
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 1028
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f93e21493aa32d741b4b030c3b9c1f37
+      internalID: 2184427767625233207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_044
+      rect:
+        serializedVersion: 2
+        x: 2052
+        y: 1028
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9be0bd2d988147b45a483225db01b68a
+      internalID: 4314523033061924718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_045
+      rect:
+        serializedVersion: 2
+        x: 2564
+        y: 1028
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 870991a9008c19343b5255661e6594d7
+      internalID: -8435517218413188491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_046
+      rect:
+        serializedVersion: 2
+        x: 3076
+        y: 1028
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0be2dced4c2d8ee4da993d5a24ca0631
+      internalID: -3590766330912586543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_047
+      rect:
+        serializedVersion: 2
+        x: 3588
+        y: 1028
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 916267cbbe02a96448b6785a93a5697d
+      internalID: 1914248436282778705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_048
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 516
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c43585f5950f7e4bb816c6432f773e2
+      internalID: -1019111825190265763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_049
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 516
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f62370aba0c8a25498f0e93ae4862506
+      internalID: 7501241981737960371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_050
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 516
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1909caff991b6444aa40bd77f654ef3
+      internalID: -7148511780492352085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_051
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 516
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ab958d94694cc74db2804e8fd0bff4a
+      internalID: 5557976871207705703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_052
+      rect:
+        serializedVersion: 2
+        x: 2052
+        y: 516
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7aad9401f862f94db51009153887cb9
+      internalID: 605438177691605989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_053
+      rect:
+        serializedVersion: 2
+        x: 2564
+        y: 516
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 207a762ce14ec9e419252456adf79c54
+      internalID: 2478353026237715092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_054
+      rect:
+        serializedVersion: 2
+        x: 3076
+        y: 516
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82abba76e4f7ceb41a2d2069a796bc5c
+      internalID: -3250887420842316243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_055
+      rect:
+        serializedVersion: 2
+        x: 3588
+        y: 516
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3eed70ec2f353e4893dbb3ae8722144
+      internalID: -6681627948149786285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_056
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 4
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adb49db4e2f871b4996740aa5b7c5986
+      internalID: 4191373727262442390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_057
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 4
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb1ad52c24bea194cb218b4ce58574b6
+      internalID: 5689581963906696089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_058
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 4
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da8b45abe458f2547ac24a9968651a88
+      internalID: 5880385137347281757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_059
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 4
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbca05220efe2944794e485888efa1e0
+      internalID: 1658927661622436970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_060
+      rect:
+        serializedVersion: 2
+        x: 2052
+        y: 4
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 363996661555b874fb7455538a0811d9
+      internalID: 7716388750991427097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_061
+      rect:
+        serializedVersion: 2
+        x: 2564
+        y: 4
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d23b995863a6cea44bb82181d0b32bbe
+      internalID: 6450262419252090919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_062
+      rect:
+        serializedVersion: 2
+        x: 3076
+        y: 4
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e350974097302e4b8be102a90d5b563
+      internalID: -2556285947880378288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GLU_Art_019b_063
+      rect:
+        serializedVersion: 2
+        x: 3588
+        y: 4
+        width: 504
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63a143b870a0b4a42a1d00aee3e29e9d
+      internalID: -6457004832358819465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      GLU_Art_019b_013: -455988264512822426
+      GLU_Art_019b_012: 5051217122213441164
+      GLU_Art_019b_024: -716869926325658676
+      GLU_Art_019b_061: 6450262419252090919
+      GLU_Art_019b_039: -648127301707092092
+      GLU_Art_019b_051: 5557976871207705703
+      GLU_Art_019b_049: 7501241981737960371
+      GLU_Art_019b_045: -8435517218413188491
+      GLU_Art_019b_053: 2478353026237715092
+      GLU_Art_019b_037: 6965524922790845187
+      GLU_Art_019b_028: -5568353850090552238
+      GLU_Art_019b_048: -1019111825190265763
+      GLU_Art_019b_011: -6760790159220906960
+      GLU_Art_019b_059: 1658927661622436970
+      GLU_Art_019b_014: -3649290538718814827
+      GLU_Art_019b_007: 6975295951468533549
+      GLU_Art_019b_057: 5689581963906696089
+      GLU_Art_019b_019: 5581930037774630038
+      GLU_Art_019b_017: -8915157619815417486
+      GLU_Art_019b_042: 3945288884096973566
+      GLU_Art_019b_003: 8943481850119881182
+      GLU_Art_019b_063: -6457004832358819465
+      GLU_Art_019b_027: -660538857428744540
+      GLU_Art_019b_035: 5516855116964074650
+      GLU_Art_019b_046: -3590766330912586543
+      GLU_Art_019b_052: 605438177691605989
+      GLU_Art_019b_022: -9011873252604512258
+      GLU_Art_019b_005: 4302343146657728802
+      GLU_Art_019b_018: -8041004847301708485
+      GLU_Art_019b_038: -5103321161305144075
+      GLU_Art_019b_062: -2556285947880378288
+      GLU_Art_019b_036: 8409750652355057501
+      GLU_Art_019b_044: 4314523033061924718
+      GLU_Art_019b_004: -1030858262697177963
+      GLU_Art_019b_033: 684590642603365761
+      GLU_Art_019b_009: -116790562794117926
+      GLU_Art_019b_032: -8905743282659409387
+      GLU_Art_019b_034: -2047025383367871001
+      GLU_Art_019b_023: -8641968487709949840
+      GLU_Art_019b_001: 3430252779201948642
+      GLU_Art_019b_029: 3107155630661009798
+      GLU_Art_019b_043: 2184427767625233207
+      GLU_Art_019b_054: -3250887420842316243
+      GLU_Art_019b_021: 2832137169123684236
+      GLU_Art_019b_008: -7002304755501322792
+      GLU_Art_019b_058: 5880385137347281757
+      GLU_Art_019b_026: -8385173070813799332
+      GLU_Art_019b_040: -3872692318835519741
+      GLU_Art_019b_060: 7716388750991427097
+      GLU_Art_019b_030: -7108981800935835263
+      GLU_Art_019b_015: 9158219629392890196
+      GLU_Art_019b_031: -7342345643552188848
+      GLU_Art_019b_002: -6691937358274214723
+      GLU_Art_019b_055: -6681627948149786285
+      GLU_Art_019b_000: 1345071483148780038
+      GLU_Art_019b_010: 9132872221472525273
+      GLU_Art_019b_050: -7148511780492352085
+      GLU_Art_019b_025: -2344191404426153568
+      GLU_Art_019b_056: 4191373727262442390
+      GLU_Art_019b_020: 7828207786273465550
+      GLU_Art_019b_047: 1914248436282778705
+      GLU_Art_019b_041: 2133016685991519997
+      GLU_Art_019b_016: -4915300731202728460
+      GLU_Art_019b_006: -158290108236786650
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
