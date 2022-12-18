@@ -8,7 +8,7 @@ public class UpperInfoBar : UILayer
 {
     [SerializeField] Button settingBtn;
     [SerializeField] Button mailBtn;
-    [SerializeField] Text userID;
+    [SerializeField] Text titleDisplayName;
     [SerializeField] Text accountDiamondCoin;
     [SerializeField] Button diamondPlus;
     [SerializeField] Text accountIntelliCoin;
@@ -22,7 +22,7 @@ public class UpperInfoBar : UILayer
     
     public void Setup(Action openSetting, Action openMail)
     {
-        userID.text = PlayerAccountInfo.Me.PlayFabId; //SystemInfo.deviceUniqueIdentifier;
+        titleDisplayName.text = PlayerAccountInfo.Me.TitleDisplayName; //SystemInfo.deviceUniqueIdentifier;
         Currencies.DiamondCount.Subscribe(x =>
         {
             accountDiamondCoin.text = x.ToString();

@@ -17998,6 +17998,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GLU_Art_019b
       objectReference: {fileID: 0}
+    - target: {fileID: 6329398160069678658, guid: dbf46ee93729e0443af4bd2fcc671d89,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbf46ee93729e0443af4bd2fcc671d89, type: 3}
 --- !u!224 &5367964862178731217 stripped
