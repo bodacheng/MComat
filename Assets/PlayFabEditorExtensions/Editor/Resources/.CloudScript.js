@@ -379,31 +379,31 @@ handlers.skillEdit = function (args, context) {
     var inventoryRequest = {
         "PlayFabId": currentPlayerId
     };
-    var items = server.GetUserInventory(inventoryRequest);
+    
     
     let memo = [];
 
-    var legal = true;
-    
-    // 检查是否有被动技能被卸载
-    for (let i = 0; i < args.inputValue.length; i++) {
-        var requestItem = args.inputValue[i];
-        for (var y = 0; y < items.Inventory.length; y++) {
-            var item = items.Inventory[y];
-            if (item.CatalogVersion === "stone" && requestItem.ItemInstanceId === item.ItemInstanceId)
-            {
-                if (item.CustomData.hasOwnProperty("born"))
-                {
-                    if (Boolean(item.CustomData.born) == true) {
-                        legal = between(Number(requestItem.Data.slot), 1, 9);
-                    }
-                    if (legal == false) {
-                        return { changedStone: memo };
-                    }
-                }
-            }
-        }
-    }
+    // var items = server.GetUserInventory(inventoryRequest);
+    // var legal = true;
+    // // 检查是否有被动技能被卸载
+    // for (let i = 0; i < args.inputValue.length; i++) {
+    //     var requestItem = args.inputValue[i];
+    //     for (var y = 0; y < items.Inventory.length; y++) {
+    //         var item = items.Inventory[y];
+    //         if (item.CatalogVersion === "stone" && requestItem.ItemInstanceId === item.ItemInstanceId)
+    //         {
+    //             if (item.CustomData.hasOwnProperty("born"))
+    //             {
+    //                 if (Boolean(item.CustomData.born) == true) {
+    //                     legal = between(Number(requestItem.Data.slot), 1, 9);
+    //                 }
+    //                 if (legal == false) {
+    //                     return { changedStone: memo };
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
     
     for (let i = 0; i < args.inputValue.length; i++) {
         var requestItem = args.inputValue[i];
@@ -837,6 +837,17 @@ handlers.GotchaX9 = function (args, context) {
     var grantResult = server.GrantItemsToUser(grantRequest);
     
     return { messageValue: grantResult["ItemGrantResults"] };
+}
+
+handlers.stoneDropTableInfo= function (args, context) {
+    var TableID = args.TableID;
+    var result = server.GetRandomResultTables(
+        {
+            CatalogVersion : "stone",
+            TableIDs : [TableID]
+        }
+    );
+    return { result };
 }
 
 handlers.initStoneData = function (args, context) {

@@ -7,10 +7,6 @@ public static class PosCal
         return GetWorldPos(refC, rect.transform.position, z_offset);
     }
     
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="refC">
     /// 指的是一个UI元素的screen position
     /// 这个数值大部分情况下就是对象元素的RectTransform.transform.position
     /// 而且哪怕它是某个节点的子节点这么写也灵（虽然我不知道为什么）

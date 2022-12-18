@@ -83,8 +83,6 @@ namespace mainMenu
                 }
             }
             
-            ProgressLayer.Loading(">");
-            
             void Success(IDictionary<string, Tuple<string, string>> ChangedStoneDic)
             {
                 Stones.RefreshLocalStoneParams(ChangedStoneDic);
@@ -105,7 +103,6 @@ namespace mainMenu
                 MainSceneLogger.Logs.Add(skillConfirmLog);
                 
                 extraSkillEditSuccess?.Invoke();
-                ProgressLayer.Close();
             }
             
             void error()
@@ -123,8 +120,6 @@ namespace mainMenu
                     description = "failed"
                 };
                 MainSceneLogger.Logs.Add(skillConfirmLog);
-                
-                ProgressLayer.Close();
             }
             
             CloudScript.UpdateSkillEdit(ToEditStones, Success, error);

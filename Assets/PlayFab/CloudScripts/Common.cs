@@ -12,13 +12,19 @@ public partial class CloudScript
         Action<PlayFabError> errorCallback = null, 
         object customData = null, Dictionary<string, string> extraHeaders = null)
     {
+        ProgressLayer.Loading(string.Empty);
         PlayFabClientAPI.ExecuteCloudScript(
             request,
-            resultCallback, 
+            (x)=>
+            {
+                resultCallback(x);
+                ProgressLayer.Close();
+            }, 
             (x)=>
             {
                 Debug.Log(x.Error);
                 errorCallback?.Invoke(x);
+                ProgressLayer.Close();
                 PopupLayer.ArrangeWarnWindow(x.ErrorMessage);
             }, 
             customData, extraHeaders);

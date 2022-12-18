@@ -14,6 +14,8 @@ public class GotchaLayer : UILayer
     [SerializeField] private Button GetAllMBtn;
     [SerializeField] private Button Remove25StonesBtn;
 
+    [SerializeField] private Button openDropTableInfo;
+
     private static Action extraSuccessAction;
 
     public static void SetExtraSuccessAction(Action _extraSuccessAction)
@@ -33,6 +35,13 @@ public class GotchaLayer : UILayer
         GetAllSKBtn.onClick.AddListener(GetAllSK);
         GetAllMBtn.onClick.AddListener(GetAllM);
         Remove25StonesBtn.onClick.AddListener(Remove25Stones);
+        
+        openDropTableInfo.onClick.AddListener(DropTableInfo);
+    }
+
+    void DropTableInfo()
+    {
+        PreScene.target.trySwitchToStep(MainSceneStep.DropTableInfo,"GotchaX9", true);
     }
     
     static void OneTime()

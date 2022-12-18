@@ -37,6 +37,7 @@
         SkillStones_Sell = 100,
         GotchaFront = 6,
         GotchaResult = 24,
+        DropTableInfo = 26,
         Ranking = 25,
         
         ShopTop = 201,

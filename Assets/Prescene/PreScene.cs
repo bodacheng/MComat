@@ -121,6 +121,7 @@ namespace mainMenu
             // Gotcha
             var gotchaFront = new GotchaFront();
             var gotchaResult = new GotchaResult();
+            var dropTableInfo = new DropTableInfoDetail();
             var arenaPage = new ArenaPage();
             var rankingPage = new RankingPage();
             
@@ -148,6 +149,7 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.MailDetail, mailDetail);
             ProcessesRunner.Main.Add(MainSceneStep.GotchaFront, gotchaFront);
             ProcessesRunner.Main.Add(MainSceneStep.GotchaResult, gotchaResult);
+            ProcessesRunner.Main.Add(MainSceneStep.DropTableInfo, dropTableInfo);
             #endregion
         }
         
@@ -222,6 +224,7 @@ namespace mainMenu
                 var returnToStep = ProcessesRunner.Main.currentProcess.Step;
                 bool returnToCurrent()
                 {
+                    Debug.Log("返回："+ returnToStep);
                     return trySwitchToStep(returnToStep, false);
                 }
                 var success = ProcessesRunner.Main.ChangeProcess(next_step, t);

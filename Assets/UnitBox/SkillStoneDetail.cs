@@ -21,7 +21,7 @@ namespace mainMenu
         [SerializeField] GameObject Ex1Icon, Ex2Icon, Ex3Icon;
         
         [Space(2)]
-        [Header("EXTypes")]
+        [Header("Range")]
         [SerializeField] GameObject close, near, far;
         
         [Space(2)]
@@ -65,8 +65,8 @@ namespace mainMenu
         {
             keyname.text = "";
             Showname.text = "";
-            ShowSkillStoneExType(-1);
-            ShowSKillRanges(-10, -10); //即清空
+            ShowSkillStoneExType(Ex1Icon, Ex2Icon, Ex3Icon,-1);
+            ShowSKillRanges(close, near, far, -10, -10); //即清空
             StoneTargetLevel.text = "";
             if (IconShowT != null)
             {
@@ -89,8 +89,8 @@ namespace mainMenu
             IconForShow(skillConfig.RECORD_ID);
             keyname.text = skillConfig.REAL_NAME;
             Showname.text = skillConfig.RECORD_ID + ":" + SkillNameTable.GetSkillName(skillConfig.RECORD_ID);
-            ShowSkillStoneExType(skillConfig.SP_LEVEL);
-            ShowSKillRanges(skillConfig.AIAttrs.AI_MIN_DIS, skillConfig.AIAttrs.AI_MAX_DIS);
+            ShowSkillStoneExType(Ex1Icon, Ex2Icon, Ex3Icon, skillConfig.SP_LEVEL);
+            ShowSKillRanges(close, near, far, skillConfig.AIAttrs.AI_MIN_DIS, skillConfig.AIAttrs.AI_MAX_DIS);
             var row = PowerEstimateTable.Find_RECORD_ID(skillConfig.RECORD_ID);
             float.TryParse(row.HP, out float hp);
             float.TryParse(row.EstimateDamage, out float at);
@@ -111,8 +111,8 @@ namespace mainMenu
             IconForShow(_ConfigOfStone.RECORD_ID);
             keyname.text = _ConfigOfStone.REAL_NAME;
             Showname.text = _ConfigOfStone.RECORD_ID + ":" + SkillNameTable.GetSkillName(_ConfigOfStone.RECORD_ID);
-            ShowSkillStoneExType(_ConfigOfStone.SP_LEVEL);
-            ShowSKillRanges(_ConfigOfStone.AIAttrs.AI_MIN_DIS, _ConfigOfStone.AIAttrs.AI_MAX_DIS);
+            ShowSkillStoneExType(Ex1Icon, Ex2Icon, Ex3Icon, _ConfigOfStone.SP_LEVEL);
+            ShowSKillRanges(close, near, far, _ConfigOfStone.AIAttrs.AI_MIN_DIS, _ConfigOfStone.AIAttrs.AI_MAX_DIS);
             transform.gameObject.SetActive(true);
         }
         
@@ -127,8 +127,8 @@ namespace mainMenu
             SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(_SkillEntity.SkillID);
             keyname.text = _SkillEntity.REAL_NAME;
             Showname.text = skillConfig.SHOW_NAME;
-            ShowSkillStoneExType(_SkillEntity.SP_LEVEL);
-            ShowSKillRanges(_SkillEntity.AIAttrs.AI_MIN_DIS, _SkillEntity.AIAttrs.AI_MAX_DIS);
+            ShowSkillStoneExType(Ex1Icon, Ex2Icon, Ex3Icon, _SkillEntity.SP_LEVEL);
+            ShowSKillRanges(close, near, far, _SkillEntity.AIAttrs.AI_MIN_DIS, _SkillEntity.AIAttrs.AI_MAX_DIS);
             PowerEstimateTable.Row row = PowerEstimateTable.Find_RECORD_ID(skillConfig.RECORD_ID);
             float.TryParse(row.HP, out float hp);
             float.TryParse(row.EstimateDamage, out float at);
@@ -143,7 +143,7 @@ namespace mainMenu
             transform.gameObject.SetActive(true);
         }
         
-        void ShowSKillRanges(float dis_min, float float_max)
+        public static void ShowSKillRanges(GameObject close, GameObject near, GameObject far, float dis_min, float float_max)
         {
             if (SkillConfig.RangeLimit(dis_min, float_max, true, false, false))
                 close.SetActive(true);
@@ -161,7 +161,7 @@ namespace mainMenu
                 far.SetActive(false);
         }
         
-        void ShowSkillStoneExType(int eX)
+        public static void ShowSkillStoneExType(GameObject Ex1Icon, GameObject Ex2Icon, GameObject Ex3Icon, int eX)
         {
             switch (eX)
             {

@@ -2,17 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/UnitBtnEffect.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/UnitBtnEffect.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/DropTableInfoLayer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/DropTableInfoLayer.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UpperInfoBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UpperInfoBar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/IAP/IAPManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/IAP/IAPManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/Client/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/Client/Item.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/Client/Mails.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/Client/Mails.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Remote/Item/Currencies.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Remote/Item/Currencies.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UpperInfoBar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UpperInfoBar.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UnitBox/SSLevelUpManager/SSLevelUpManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UnitBox/SSLevelUpManager/SSLevelUpManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/UILayerLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/UILayerLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/MSceneProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/MSceneProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Common.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Common.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Gotcha.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Gotcha.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FrontLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FrontLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/GotchaLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/GotchaLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/StoneListLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/StoneListLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SKillAnalyzer/SKillAnalyzerGUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SKillAnalyzer/SKillAnalyzerGUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Setting/Data.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/Data.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Structure/PosCal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Structure/PosCal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_ConfirmEdit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_ConfirmEdit.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UnitBox/SkillStoneDetail.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UnitBox/SkillStoneDetail.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TimeManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TimeManager.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,12 +44,17 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ads@3.7.5/Runtime/Monetization/MonetizationPlatform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Utilities/CameraCaptureBridge.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Purchasing/UnityPurchasing.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.postprocessing@3.2.2/PostProcessing/Runtime/PostProcessVolume.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.mathematics@1.2.6/Unity.Mathematics/Noise/cellular2D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_SubMeshUI_Editor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Runtime/Audio/AudioPlayableAsset.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../p3-client/Assets/App/Scripts/Contents/Quest/QuestListItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/RankingPage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/ResourceManager/ResourceManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4379fcb5ffcd422abdabe963856ef06326000/1d/7d9a4d3f/TweenerCore`3.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Graphs/GraphData.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/UIElements/PanelRaycaster.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/ResultTableNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/RankingLayer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Nodes/Utility/Logic/IsFrontFaceNode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c884d993da6242ae98d95c11d4715907157400/22/52ee20c7/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
@@ -46,11 +64,16 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/RenderGraph/RenderGraphResourcePool.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4379fcb5ffcd422abdabe963856ef06326000/3a/2299bfc9/DOTween.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.analytics@4.0.1/Runtime/Runtime/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/Views/IncomingChanges/Gluon/IncomingChangesTab.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFab/Client/LinkAccount.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Gacha/DropTableInfoDetail.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ads@3.7.5/Editor/Parser/SkAdNetworkJsonParser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.scriptablebuildpipeline@1.19.6/Editor/Tasks/CalculateAssetDependencyData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/UI/Tree/DrawTreeViewItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Editor/ShaderGraph/UniversalBlockFields.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PlayFabSDK/Shared/Public/PlayFabEvents.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/Addressables.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Runtime/Events/MarkerList.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2IS7AXmxi1SEqxDoRshceHtRUYD" />
   <component name="ProjectViewState">

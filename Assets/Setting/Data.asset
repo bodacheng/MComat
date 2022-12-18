@@ -137,7 +137,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  AT_coefficient: 1
+  AT_coefficient: 90
   HP_coefficient: 1
   Team1Invincible: 0
   NormalSkillExGet: 30
@@ -164,5 +164,4 @@ MonoBehaviour:
   resistanceMax: 10
   eXMax: 100
   hurtObjectPreLoadCount: 5
-  dumbAIDecisionDelay: 80
   shadowMaterial: {fileID: 2100000, guid: 718b4d06a5b8d44538421fe070643d58, type: 2}

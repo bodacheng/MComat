@@ -35,6 +35,7 @@ namespace DummyLayerSystem
             {"SkillShowLayer", "DummyLayerSystem/SkillShowLayer"},
             {"GotchaLayer", "DummyLayerSystem/GotchaLayer"},
             {"GotchaResultLayer", "DummyLayerSystem/GotchaResultLayer"},
+            {"DropTableInfoLayer", "DummyLayerSystem/DropTableInfoLayer"},
             {"StoneListLayer", "DummyLayerSystem/StoneListLayer"},
             {"SkillEditLayer", "DummyLayerSystem/SkillEditLayer"},
             {"UnitOptionLayer", "DummyLayerSystem/UnitOptionLayer"},
