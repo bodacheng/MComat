@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using mainMenu;
 using NoSuchStudio.Common;
 using UnityEngine;
@@ -7,11 +8,13 @@ public class UnitBtnEffect : MonoBehaviour
 {
     [SerializeField] private RectTransform[] nineSlots;
 
-    private List<string> slotEffectNames = new List<string>()
+    private readonly List<string> _slotEffectNames = new List<string>()
     {
-        "SlotEffects/ex1",
-        "SlotEffects/ex2",
-        "SlotEffects/ex3"
+        "frontLayerUnitBtn/stoneEffect.prefab",
+        "frontLayerUnitBtn/stoneEffect1.prefab",
+        "frontLayerUnitBtn/stoneEffect2.prefab",
+        "frontLayerUnitBtn/stoneEffect3.prefab",
+        "frontLayerUnitBtn/stoneEffect4.prefab"
     };
     
     void Start()
@@ -29,17 +32,16 @@ public class UnitBtnEffect : MonoBehaviour
     
     async void SlotShine(RectTransform t)
     {
-        var slotName = slotEffectNames.Random();
+        var slotName = _slotEffectNames.Random();
         var effect = await AddressablesLogic.LoadTOnObject<ParticleSystem>(slotName);
         if (t == null)
         {
             GameObject.Destroy(effect.gameObject);
             return;
         }
+        await UniTask.DelayFrame(5);
         effect.transform.SetParent(t);
         effect.transform.position = 
-            PosCal.GetWorldPos(PreScene.target.mainC, 
-                PosCal.ConvertAnchorPos(t.GetComponent<RectTransform>().anchoredPosition, Vector2.one, Vector2.zero )
-                , 20f);
+            PosCal.GetWorldPos(PreScene.target.mainC, t.GetComponent<RectTransform>(), 20f);
     }
 }
