@@ -66,6 +66,20 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
+            CloudScript.ArcadeProgress(
+                "1",
+                result =>
+                {
+                    var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                    var level = jsonResult.ContainsKey("progressLevel") ? jsonResult["progressLevel"] : 0;
+                    var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
+                    var rewardDia = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
+                                
+                    Debug.Log(jsonResult);
+                }
+            );
+
+
             //CloudScript.ArenaPointUp(980,2000,(x,y,z)=>{});
 
             //PlayFabReadClient.SendPwResetEmail("bodacheng123@gmail.com");

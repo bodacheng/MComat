@@ -6,13 +6,13 @@ using mainMenu;
 
 public partial class CloudScript
 {
-    public static void ArcadeProgress(string targetLevel, Action<ExecuteCloudScriptResult> success)
+    public static void ArcadeProgress(string stage, Action<ExecuteCloudScriptResult> success)
     {
         ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest()
             {
                 FunctionName = "completedLevel",
-                FunctionParameter = new { level = targetLevel },
+                FunctionParameter = new { level = stage },
                 GeneratePlayStreamEvent = true
             },
             success.Invoke);

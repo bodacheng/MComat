@@ -12,7 +12,8 @@ public partial class CloudScript
         Action<PlayFabError> errorCallback = null, 
         object customData = null, Dictionary<string, string> extraHeaders = null)
     {
-        ProgressLayer.Loading(string.Empty);
+        if (Application.isPlaying)
+            ProgressLayer.Loading(string.Empty);
         PlayFabClientAPI.ExecuteCloudScript(
             request,
             (x)=>

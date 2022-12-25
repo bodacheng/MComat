@@ -31,8 +31,10 @@ public partial class PlayFabReadClient
                     PlayerAccountInfo.Me.currentRank = value.Value;
                     break;
                 case "arenapoint":
-                    
                     PlayerAccountInfo.Me.arenaPoint = value.Value;
+                    break;
+                case "stageProgress":
+                    PlayerAccountInfo.Me.arcadeProcess = value.Value;
                     break;
                 default:
                     break;

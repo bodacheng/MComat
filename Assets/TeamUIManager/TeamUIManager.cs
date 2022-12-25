@@ -71,7 +71,12 @@ namespace FightScene
                                     if (RMode_Unit.Value == null)
                                         return;
                                     UnitIconDic.TryGetValue(RMode_Unit.Value, out var _tempSI);
-                                    _tempSI.transform.DOMove(CameraManager._camera.WorldToScreenPoint(RMode_Unit.Value.transform.position + Vector3.up * 3f), 1);
+                                    if (_tempSI != null)
+                                        _tempSI.transform.DOMove(CameraManager._camera.WorldToScreenPoint(RMode_Unit.Value.transform.position + Vector3.up * 3f), 1);
+                                    else
+                                    {
+                                        Debug.Log("潜在逻辑错误");
+                                    }
                                 }
                             }
                         ).AddTo(gameObject);

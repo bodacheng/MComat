@@ -80,18 +80,9 @@ public partial class PlayFabReadClient
             new GetUserDataRequest()
             {
                 PlayFabId = PlayerAccountInfo.Me.PlayFabId,
-                Keys = new List<string>() { "arcadeProcess", "stone_box_size", "arenaCountToday" }
+                Keys = new List<string>() { "stone_box_size", "arenaCountToday" }
             },
             (obj) => {
-                if (obj.Data.ContainsKey("arcadeProcess"))
-                {
-                    PlayerAccountInfo.Me.arcadeProcess = int.Parse(obj.Data["arcadeProcess"].Value);
-                }
-                else
-                {
-                    PlayerAccountInfo.Me.arcadeProcess = 0;
-                }
-                
                 PlayerAccountInfo.Me.arenaCountToday = 
                     obj.Data.ContainsKey("arenaCountToday") ? int.Parse(obj.Data["arenaCountToday"].Value) : 0;
                 

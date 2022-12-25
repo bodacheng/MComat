@@ -81,7 +81,6 @@ handlers.buildBasicData = function (args, context) {
             PlayFabId: currentPlayerId,
             Data: {
                 "stone_box_size": args.stone_box_size,
-                "arcadeProcess": 0,
                 "playerInitialized" : true,
                 "arenaCountToday" : 0
             }
@@ -153,39 +152,6 @@ handlers.grantBasicItems = function (args, context) {
     return { result: true };
 };
 
-// 获取角色的唯一方式
-// completedLevel　的随即触发脚本
-handlers.grantUserUnitByProgress = function(args, context) {
-
-    var playstreamEvent = context.playStreamEvent;
-    var FunctionResult = playstreamEvent.CloudScriptExecutionResult.FunctionResult;
-    
-    if (!FunctionResult.firstTime) {
-        return { result : false };
-    }
-    
-    var completedLevel = FunctionResult.progressLevel;
-    
-    var inventoryRequest = {
-        "PlayFabId": currentPlayerId
-    };
-    
-    let itemIds = [];
-    
-    if (args.level == completedLevel) {
-        itemIds.push(args.unit_id);
-    }
-    
-    var grantRequest = {
-        "PlayFabId": currentPlayerId,
-        "CatalogVersion": "unit",
-        "ItemIds": itemIds
-    };
-    var GrantedItems = server.GrantItemsToUser(grantRequest);
-    
-    return { GrantedItems : GrantedItems };
-}
-
 // 将被动技能给予角色
 // 是控制台内grantitem的附属执行函数
 handlers.givePassiveSkill= function (args, context) {
@@ -226,35 +192,45 @@ handlers.givePassiveSkill= function (args, context) {
     return { result : true };
 }
 
-// 其实最好把关卡更新和报酬获取给做成两个cloudscript，前者触发后者，
-// 但目前没有找到办法把被触发的cloudscript的返回值直接传送给客户端。。。
 handlers.completedLevel = function (args, context) {
-    
-    var playerData = server.GetUserReadOnlyData({
+
+    var getRequest = {
         PlayFabId: currentPlayerId,
-        Keys: ["arcadeProcess"]
-    });
+        StatisticNames: ["stageProgress"]
+    };
     
-    var lastLevelCompleted = playerData.Data["arcadeProcess"];
+    var playerStats = server.GetPlayerStatistics(getRequest);
+    let stageProgress = 0;
+    for (i = 0; i < playerStats.Statistics.length; ++i) {
+        if (playerStats.Statistics[i].StatisticName === "stageProgress") {
+            stageProgress = playerStats.Statistics[i].Value;
+        }
+    }
+    
+    var lastLevelCompleted = stageProgress;
     
     // 传递过来的这个level是玩家试图更新到的进度，但这个数值来自客户端，并不能完全信任
     // 关卡更新机制我们只有一个逻辑就是一次只更新一关
     var level = args.level;
-    
-    if (level <= lastLevelCompleted.Value) {
+    if (level <= lastLevelCompleted) {
         return {
             firstTime: false,
-            progressLevel: Number(lastLevelCompleted.Value)
+            progressLevel: Number(lastLevelCompleted)
         };
     } else {
         
-        var newLevelCompleted = Number(lastLevelCompleted.Value) + 1;
-        server.UpdateUserReadOnlyData({
-            PlayFabId: currentPlayerId,
-            Data: {
-                "arcadeProcess" : newLevelCompleted // 关卡进度没有上限吗
+        var newLevelCompleted = Number(lastLevelCompleted) + 1;
+        var playerStatResult = server.UpdatePlayerStatistics(
+            {
+                PlayFabId: currentPlayerId,
+                Statistics: [
+                    {
+                        StatisticName: "stageProgress",
+                        Value: newLevelCompleted
+                    }
+                ]
             }
-        });
+        );
         
         var TitleDataRequest = {"Keys":"stage_awards"};
         var TitleDataResponse = server.GetTitleData(TitleDataRequest);
@@ -281,6 +257,13 @@ handlers.completedLevel = function (args, context) {
                     break;
                 }
             }
+        }
+        
+        if (award === undefined) {
+            return {
+                firstTime: true,
+                progressLevel: newLevelCompleted
+            };
         }
 
         if (award.hasOwnProperty("g")) {
