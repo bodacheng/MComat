@@ -65,9 +65,14 @@ public class SettingPage : MSceneProcess
                             (playFabError) =>
                             {
                                 nickNameLayer.LoadingRender(false);
-                                PopupLayer.ArrangeWarnWindow(playFabError.Error == PlayFabErrorCode.InvalidUsername
-                                    ? "InvalidUsername"
-                                    : "Network Error");
+                                if (playFabError.Error == PlayFabErrorCode.InvalidUsername)
+                                {
+                                    PopupLayer.ArrangeWarnWindow("InvalidUsername");
+                                }
+                                else
+                                {
+                                    PreScene.ReturnToLobby();
+                                }
                                 ProgressLayer.Close();
                             }
                         );

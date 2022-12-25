@@ -1,8 +1,5 @@
-using UnityEngine;
-using PlayFab;
 using PlayFab.ClientModels;
 using System;
-using mainMenu;
 
 public partial class CloudScript
 {
