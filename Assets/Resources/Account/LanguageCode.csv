@@ -2,3 +2,10 @@ RECORD_ID,EN,JP,CH
 Front,Front,ホール,大厅
 Arcade,Arcade,クエスト,探险
 illegalword,illegal words,使用できない単語が含んでる,监测到非法字符
+NormalSkill,Normal Skill,Normal Skill,普通招数
+Ex1Skill,Ex1 Skill,Ex1 Skill,一费必杀技
+Ex2Skill,Ex2 Skill,Ex2 Skill,二费必杀技
+Ex3Skill,Ex3 Skill,Ex3 Skill,三费必杀技
+TryFilterRange,Choose different ranges of skills,Choose different ranges of skills,可以选择不同攻击距离的技能
+fill9Slots,Fill Nine Slots,"戦士の技を自由に装備、編集する画面です。
+左のボックスからストンーを選んで、9 slotsにドラッグしましょう。",尝试通过安装技能石为战士佩戴不同技能

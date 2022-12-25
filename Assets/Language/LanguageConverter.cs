@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class LanguageConverter : MonoBehaviour
@@ -15,7 +16,12 @@ public class LanguageConverter : MonoBehaviour
         if (target == null)
             target = transform.GetComponent<Text>();
     }
-    
+
+    void Start()
+    {
+        Change();
+    }
+
     public void Change()
     {
         if (target != null && !string.IsNullOrEmpty(languageCode))

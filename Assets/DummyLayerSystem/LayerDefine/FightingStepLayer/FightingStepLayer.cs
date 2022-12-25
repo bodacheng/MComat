@@ -29,6 +29,7 @@ public class FightingStepLayer : UILayer
         gameObject.SetActive(active && NetFightScene.Fight.EventType != FightEventType.Screensaver);
         await StartUp((x) =>
             {
+                PlayerPrefs.SetInt("auto", x ? 1:0);
                 RTFightManager.Target.team1.Auto = x;
             },
             (x) =>

@@ -3,15 +3,27 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/Client/Statistics.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/Client/Statistics.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/Client/UserData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/Client/UserData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Arcade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Arcade.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Common.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Common.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SKillAnalyzer/SKillAnalyzerGUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SKillAnalyzer/SKillAnalyzerGUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TeamUIManager/TeamUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TeamUIManager/TeamUIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Language/LanguageConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Language/LanguageConverter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Language/LanguageConverterManger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Language/LanguageConverterManger.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/LanguageCode.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Account/LanguageCode.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FrontLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FrontLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SkillEditLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SkillEditLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UnitOptionLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UnitOptionLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UnitsLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UnitsLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame - 3px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame - 3px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame - 4px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame - 4px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow - 2px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow - 2px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow - 3px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow - 3px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow - 4px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow - 4px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/MiniNineSlot.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/MiniNineSlot.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/TutorialRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/TutorialRunner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/SkillEditTry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/SkillEditTry.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +54,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.mathematics@1.2.6/Unity.Mathematics/Noise/cellular2D.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_SubMeshUI_Editor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Runtime/Audio/AudioPlayableAsset.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Canvas/CanvasSizeCorrectInAwakeAndStart.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../p3-client/Assets/App/Scripts/Contents/Quest/QuestListItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/RankingPage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/ResourceManager/ResourceManager.cs" root0="SKIP_HIGHLIGHTING" />
@@ -50,6 +63,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/UIElements/PanelRaycaster.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/ResultTableNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/RankingLayer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Graphic/RawImageTest.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Nodes/Utility/Logic/IsFrontFaceNode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c884d993da6242ae98d95c11d4715907157400/22/52ee20c7/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Interfaces/IMayRequireDepthTexture.cs" root0="SKIP_HIGHLIGHTING" />
@@ -67,6 +81,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/UI/Tree/DrawTreeViewItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/GUI/AddressablesGUIUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Editor/ShaderGraph/UniversalBlockFields.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/Actions/TrackActions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFabSDK/Shared/Public/PlayFabEvents.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/Addressables.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Runtime/Events/MarkerList.cs" root0="SKIP_HIGHLIGHTING" />
@@ -127,7 +142,8 @@
       <workItem from="1671630039591" duration="2744000" />
       <workItem from="1671714214990" duration="1957000" />
       <workItem from="1671883749447" duration="1267000" />
-      <workItem from="1671929184324" duration="8926000" />
+      <workItem from="1671929184324" duration="12345000" />
+      <workItem from="1671966032193" duration="6954000" />
     </task>
     <servers />
   </component>

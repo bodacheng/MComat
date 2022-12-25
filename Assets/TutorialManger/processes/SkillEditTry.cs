@@ -45,9 +45,14 @@ public class SkillEditTry : TutorialProcess
             _skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
             if (_skillEditLayer != null)
             {
-                if (this._tutorialFlag == "openInstruction")
+                if (this._tutorialFlag == "openInstruction1")
                 {
-                    _skillEditLayer.OpenTutorial();
+                    _skillEditLayer.OpenTutorial1();
+                }
+                
+                if (this._tutorialFlag == "openInstruction2")
+                {
+                    _skillEditLayer.OpenTutorial2();
                 }
                 
                 _skillEditLayer.NineSlot.SetExtraSkillEditSuccess(

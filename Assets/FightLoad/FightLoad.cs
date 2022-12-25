@@ -1,6 +1,7 @@
 ﻿using UnityEngine.SceneManagement;
 using dataAccess;
 using FightScene;
+using UnityEngine;
 
 public static class FightLoad
 {
@@ -39,7 +40,7 @@ public static class FightLoad
                 stage.Team2Auto = true;
                 break;
             default:
-                stage.Team1Auto = true;
+                stage.Team1Auto = PlayerPrefs.GetInt("auto") == 1;
                 stage.Team2Auto = true;
                 break;
         }

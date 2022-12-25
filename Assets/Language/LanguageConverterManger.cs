@@ -10,11 +10,10 @@ public class LanguageConverterManger : MonoBehaviour
     void Awake()
     {
         list = PreList;
-        Translate.LoadLanguageCodes();
         ChangeLanguage();
     }
     
-    public static void ChangeLanguage()
+    static void ChangeLanguage()
     {
         for (int i = 0; i < list.Count; i++)
         {

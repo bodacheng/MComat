@@ -23,7 +23,7 @@ public class TutorialRunner
     {
         var goToUnitList = new GoTo("unit");
         var openSkillEdit = new OpenSkillEdit("3");
-        var skillEditTry = new SkillEditTry(null);
+        var skillEditTry = new SkillEditTry("openInstruction1");
         var forceBack = new ForceBack(
             () => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage
         );
@@ -72,8 +72,8 @@ public class TutorialRunner
     void GenerateStep4Tutorial()
     {
         var goTo = new GoTo("unit");
-        var openSkillEdit = new OpenSkillEdit("1");
-        var skillEditTry = new SkillEditTry("openInstruction");
+        var openSkillEdit = new OpenSkillEdit("2");
+        var skillEditTry = new SkillEditTry("openInstruction2");
         var forceBack = new ForceBack(
             () => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage
         );

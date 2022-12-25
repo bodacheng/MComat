@@ -23,7 +23,7 @@ public partial class SkillEditLayer : UILayer
     [SerializeField] Button unitSwitcher;
     
     [Header("Tutorial")]
-    [SerializeField] ClickNextTutorial clickNextTutorial;
+    [SerializeField] ClickNextTutorial clickNextTutorial1, clickNextTutorial2;
     
     public async UniTask Setup(Action<SkillEditLayer> toDo = null)
     {
@@ -59,21 +59,21 @@ public partial class SkillEditLayer : UILayer
         StonesBox._tabEffects.CloseShowingTagEffects();
     }
 
-    void SkillEditButtonFeature(UnitInfo _UnitInfo)
+    void SkillEditButtonFeature(UnitInfo _unitInfo)
     {
-        if (_UnitInfo == null || _UnitInfo.r_id == null)
+        if (_unitInfo == null || _unitInfo.r_id == null)
         {
             Debug.Log("到达了没道理到达的地方");
             return;
         }
-        NineSlot.ReadANineAndTwo(_UnitInfo);
-        var unitInfo = Units.GetUnitConfig(_UnitInfo.r_id);
+        NineSlot.ReadANineAndTwo(_unitInfo);
+        var unitInfo = Units.GetUnitConfig(_unitInfo.r_id);
         StonesBox.FocusingType = unitInfo.TYPE;
         StonesBox.RestFilter();
         StonesBox.FilterFeatureRefresh(false);
         void SkillEditConfirm()
         {
-            NineSlot.UpdateStonesBaseOnSlots(_UnitInfo);
+            NineSlot.UpdateStonesBaseOnSlots(_unitInfo);
         }
         void SkillUpdateValidation()
         {
@@ -159,8 +159,13 @@ public partial class SkillEditLayer : UILayer
         EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, _connector.FocusingC.WholeT.position, Quaternion.identity, null).Forget();
     }
     
-    public void OpenTutorial()
+    public void OpenTutorial1()
     {
-        clickNextTutorial.Open();
+        clickNextTutorial1.Open();
+    }
+    
+    public void OpenTutorial2()
+    {
+        clickNextTutorial2.Open();
     }
 }
