@@ -59,4 +59,9 @@ public class TryGotcha : TutorialProcess
     {
         return PlayerAccountInfo.Me.tutorialProgress == "GotchaFinished" && _gotchaResultLayer != null && _gotchaResultLayer.ShowFinished;
     }
+    
+    public override void ProcessEnd()
+    {
+        GotchaLayer.SetExtraSuccessAction(null);
+    }
 }
