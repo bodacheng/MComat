@@ -6,16 +6,16 @@ using UnityEngine;
 public class KeywordSetting : ScriptableObject
 {
     [Tooltip("SkillStaticAnalysis后不加.csv")]
-    [SerializeField] string SkillStaticAnalysis = "SkillStaticAnalysis";
+    [SerializeField] string skillStaticAnalysis = "SkillStaticAnalysis";
     [Tooltip("SkillDynamicAnalysis后加.csv")]
-    [SerializeField] string SkillDynamicAnalysis = "SkillDynamicAnalysis.csv";
+    [SerializeField] string skillDynamicAnalysis = "SkillDynamicAnalysis.csv";
     
-    public static string _SkillStaticAnalysis;
-    public static string _SkillDynamicAnalysis;
+    public static string SkillStaticAnalysis;
+    public static string SkillDynamicAnalysis;
     
     public void Initialise()
     {
-        _SkillStaticAnalysis = SkillStaticAnalysis;
-        _SkillDynamicAnalysis = SkillDynamicAnalysis;
+        SkillStaticAnalysis = skillStaticAnalysis;
+        SkillDynamicAnalysis = skillDynamicAnalysis;
     }
 }

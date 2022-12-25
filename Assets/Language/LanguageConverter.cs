@@ -20,7 +20,7 @@ public class LanguageConverter : MonoBehaviour
     {
         if (target != null && !string.IsNullOrEmpty(languageCode))
         {
-            LanguageCodeTable.Row row = LanguageCodeTable.Find_RECORD_ID(languageCode);
+            Translate.Row row = Translate.Find_RECORD_ID(languageCode);
             if (row != null)
             {
                 switch (AppSetting.Language)

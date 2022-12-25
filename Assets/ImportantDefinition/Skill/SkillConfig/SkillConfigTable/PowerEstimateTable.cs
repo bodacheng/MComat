@@ -31,7 +31,7 @@ public class PowerEstimateTable
         Debug.Log("开始生成技能参数预估文件，等一阵子，开始可能没有反应。");
         var skillConfigs = SkillConfigTable.GetSkillConfigsOfType(type);
         var animDic = await SKillAnalyzer.AllSkillAnims(type);
-        await Save(Application.dataPath + "/" +KeywordSetting._SkillStaticAnalysis + ".csv", skillConfigs, animDic);
+        await Save(Application.dataPath + "/" +KeywordSetting.SkillStaticAnalysis + ".csv", skillConfigs, animDic);
     }
     
     static async UniTask Save(string filepath, List<SkillConfig> skillConfigs, IDictionary<string, AnimationClip> animDic)
@@ -91,13 +91,13 @@ public class PowerEstimateTable
     public static void LoadByResource()
     {
         //暂时做如下处理
-        var CSV = Resources.Load("Account/" + KeywordSetting._SkillStaticAnalysis) as TextAsset;
+        var CSV = Resources.Load("Account/" + KeywordSetting.SkillStaticAnalysis) as TextAsset;
         if (CSV)
         {
             Load(CSV.text);
         }
         else
-            Debug.Log("没能读取到技能数值参考文件。"+KeywordSetting._SkillStaticAnalysis);
+            Debug.Log("没能读取到技能数值参考文件。"+KeywordSetting.SkillStaticAnalysis);
     }
     
     static void Load(string text)

@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public static class LanguageCodeTable
+public static class Translate
 {
 	public class Row
 	{
@@ -12,7 +12,7 @@ public static class LanguageCodeTable
 		public string CH;
 	}
 
-	static List<Row> rowList = new List<Row>();
+	static readonly List<Row> rowList = new();
 	static bool isLoaded = false;
 
 	public static bool IsLoaded()
@@ -61,6 +61,28 @@ public static class LanguageCodeTable
 		if(rowList.Count <= i)
 			return null;
 		return rowList[i];
+	}
+
+	public static string Get(string languageCode)
+	{
+		Row row = Find_RECORD_ID(languageCode);
+		string text = default;
+		if (row != null)
+		{
+			switch (AppSetting.Language)
+			{
+				case ApiLanguage.EnUs:
+					text = row.EN;
+					break;
+				case ApiLanguage.JaJp:
+					text = row.JP;
+					break;
+				case ApiLanguage.ZhCn:
+					text = row.CH;
+					break;
+			}
+		}
+		return text;
 	}
 
 	public static Row Find_RECORD_ID(string find)

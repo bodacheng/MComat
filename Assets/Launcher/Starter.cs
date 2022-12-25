@@ -34,6 +34,7 @@ public class Starter : MonoBehaviour
         fightGlobalSetting.Initialise();
         playFabSetting.Initialise();
         keywordSetting.Initialise();
+        Translate.LoadLanguageCodes();
         defaultIconSetting.Initialise();
         SkillConfigTable.LoadAllSkillConfigs();
         PowerEstimateTable.LoadByResource();

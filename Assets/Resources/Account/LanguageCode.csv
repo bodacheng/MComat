@@ -1,3 +1,4 @@
 RECORD_ID,EN,JP,CH
 Front,Front,ホール,大厅
 Arcade,Arcade,クエスト,探险
+illegalword,illegal words,使用できない単語が含んでる,监测到非法字符
