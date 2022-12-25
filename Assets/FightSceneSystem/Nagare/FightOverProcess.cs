@@ -52,13 +52,21 @@ namespace FightScene
                                 var level = jsonResult.ContainsKey("progressLevel") ? jsonResult["progressLevel"] : 0;
                                 var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
                                 var rewardDia = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
+                                var firstTime = jsonResult.ContainsKey("firstTime") ? jsonResult["firstTime"] : false;
                                 
                                 var levelInt = Convert.ToInt32(level);
                                 PlayerAccountInfo.Me.arcadeProcess = levelInt;
                                 var rewardGdInt = Convert.ToInt32(rewardGd);
                                 var rewardGmInt = Convert.ToInt32(rewardDia);
+                                var firstTimeBool = (bool)firstTime;
+                                
                                 var a = UILayerLoader.Load<ArenaFightOver>();
                                 a.ShowAward(rewardGdInt, rewardGmInt);
+
+                                if (levelInt == 1 && firstTimeBool)
+                                {
+                                    PopupLayer.ArrangeWarnWindowUnitIcon(" tetsuya 加入队伍 ", "2");
+                                }
                             }
                         );
                         

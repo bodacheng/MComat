@@ -45,6 +45,13 @@ public class HeroIcon : MonoBehaviour {
         }
     }
     
+    public async void ChangeIcon(string recordId)
+    {
+        this.unitConfig = Units.GetUnitConfig(recordId);
+        var pic = await UnitIconDic.Load(recordId);
+        ChangeIcon(pic, unitConfig.element);
+    }
+    
     public void Clear()
     {
         ChangeIcon(null, Element.Null);

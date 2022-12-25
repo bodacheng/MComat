@@ -29,7 +29,7 @@ namespace FightScene
         
         public void Clear()
         {
-            barPosUpdate.Dispose();
+            barPosUpdate?.Dispose();
             switch (TeamMode)
             {
                 case TeamMode.MultiRaid:

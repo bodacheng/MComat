@@ -2,7 +2,9 @@ using DummyLayerSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
-public partial class PopupLayer : UILayer {
+public partial class PopupLayer : UILayer
+{
+    [SerializeField] HeroIcon unitIcon;
     
     [Header("Validation")]
     [SerializeField] RectTransform ValidationWindow;
@@ -19,6 +21,27 @@ public partial class PopupLayer : UILayer {
     public static void ArrangeWarnWindow(string intro)
     {
         var layer = UILayerLoader.Load<PopupLayer>(true);
+        
+        layer.bigCurtain.color = windowBgColor;
+        layer.ValidationWindow.gameObject.SetActive(true);
+        
+        layer.YesButton.gameObject.SetActive(true);
+        layer.NoButton.gameObject.SetActive(false);
+        layer.ValidationIntro.text = intro;
+        layer.YesButton.onClick.AddListener(Close);
+    }
+    
+    public static void ArrangeWarnWindowUnitIcon(string intro, string unit_RecordId)
+    {
+        var unitConfig = Units.GetUnitConfig(unit_RecordId);
+        if (unitConfig == null)
+        {
+            return;
+        }
+        
+        var layer = UILayerLoader.Load<PopupLayer>(true);
+        layer.unitIcon.ChangeIcon(unitConfig.RECORD_ID);
+        layer.unitIcon.gameObject.SetActive(true);
         
         layer.bigCurtain.color = windowBgColor;
         layer.ValidationWindow.gameObject.SetActive(true);
