@@ -44,4 +44,9 @@ public class FightPrepareLayer : UILayer
         }
         return icons;
     }
+
+    public void TutorialForceFightBegin()
+    {
+        EditTeamButton.gameObject.SetActive(false);
+    }
 }

@@ -38,6 +38,10 @@ public class GoToStageOne : TutorialProcess
         if (_fightPrepareLayer == null)
         {
             _fightPrepareLayer = UILayerLoader.Get<FightPrepareLayer>();
+            if (_fightPrepareLayer != null)
+            {
+                _fightPrepareLayer.TutorialForceFightBegin();
+            }
         }
 
         if (_fightPrepareLayer != null && _returnLayer != null)

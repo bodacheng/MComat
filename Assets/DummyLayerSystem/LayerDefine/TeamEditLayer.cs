@@ -26,7 +26,7 @@ public class TeamEditLayer : UILayer
     [Header("技能编辑按钮")]
     [SerializeField] Button skillEditButton;
     
-    public ReactiveProperty<int> _focusingPos = new(-1);
+    public ReactiveProperty<int> focusingPos = new(-1);
     readonly IDictionary<int, HeroIcon> _teamBtnDic = new Dictionary<int, HeroIcon>();
     private Func<string, bool> _teamLegal;
     private string _currentTeamMode;
@@ -34,7 +34,12 @@ public class TeamEditLayer : UILayer
     public void SetTeamLegalCheck(Func<string, bool> teamLegal)
     {
         this._teamLegal = teamLegal;
-        skillEditButton.interactable = teamLegal(this._currentTeamMode);
+        SetConfirmBtnActive();
+    }
+
+    private void SetConfirmBtnActive()
+    {
+        saveBtn.interactable = _teamLegal(this._currentTeamMode);
     }
     
     /// <summary>
@@ -46,9 +51,9 @@ public class TeamEditLayer : UILayer
     {
         var unitsLayer = UILayerLoader.Get<UnitsLayer>();
         if (unitsLayer == null) return;
-        if (_focusingPos.Value != -1)
+        if (focusingPos.Value != -1)
         {
-            ChangeTeamPos(instanceID, _focusingPos.Value, teamMode);
+            ChangeTeamPos(instanceID, focusingPos.Value, teamMode);
             unitsLayer.Selected.Value = null;
         }
         else
@@ -72,7 +77,7 @@ public class TeamEditLayer : UILayer
         var unitInfo = dataAccess.Units.Get(instanceID);
         if (unitInfo != null && Stones.GetEquippingStones(instanceID).Count != 9)
         {
-            _focusingPos.Value = -1;
+            focusingPos.Value = -1;
             Debug.Log("no enough skill");
             return;
         }
@@ -85,10 +90,10 @@ public class TeamEditLayer : UILayer
 
         if (returns.Count > 0)
         {
-            _focusingPos.Value = -1;
+            focusingPos.Value = -1;
         }
-        
-        skillEditButton.interactable = _teamLegal(teamMode);
+
+        SetConfirmBtnActive();
     }
     
     // 纯渲染函数
@@ -120,7 +125,7 @@ public class TeamEditLayer : UILayer
         _currentTeamMode = teamMode;
         SetTeamLegalCheck(teamLegal);
 
-        _focusingPos.Subscribe((x) =>
+        focusingPos.Subscribe((x) =>
         {
             var posInstanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(x);
             removeButton.gameObject.SetActive(x != -1 && posInstanceID != null);
@@ -160,7 +165,7 @@ public class TeamEditLayer : UILayer
         
         void Remove()
         {
-            ChangeTeamPos(null, _focusingPos.Value, teamMode);
+            ChangeTeamPos(null, focusingPos.Value, teamMode);
         }
         removeButton.onClick.AddListener(Remove);
         
@@ -177,8 +182,8 @@ public class TeamEditLayer : UILayer
             }
             else
             {
-                _focusingPos.Value = posNum;
-                var instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(_focusingPos.Value);
+                focusingPos.Value = posNum;
+                var instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(focusingPos.Value);
                 PreScene.target.SetFocusingUnit(instanceID);
                 connector.ShowMyModel(instanceID);
                 if (PreScene.target.Focusing != null)
