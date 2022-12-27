@@ -3,6 +3,7 @@ using mainMenu;
 using DummyLayerSystem;
 using System.Collections.Generic;
 using PlayFab.ClientModels;
+using UnityEngine;
 
 public class TeamEdit : TutorialProcess
 {
@@ -13,10 +14,10 @@ public class TeamEdit : TutorialProcess
     private TeamEditPage _teamEditPage;
 
     private bool teamEditFinished = false;
-    private readonly string tutorialStep;
+    private readonly string _tutorialStep;
     public TeamEdit(string TutorialStep)
     {
-        tutorialStep = TutorialStep;
+        _tutorialStep = TutorialStep;
     }
     
     public override void ProcessEnter()
@@ -25,7 +26,7 @@ public class TeamEdit : TutorialProcess
         _teamEditPage.SetExtraArcadeTeamEditSuccess(
             () =>
             {
-                if (tutorialStep == "teamEdit2") // 总教程结束于第二次队伍编辑结束
+                if (_tutorialStep == "teamEdit2") // 总教程结束于第二次队伍编辑结束
                 {
                     PlayFabReadClient.UpdateUserData(
                         new UpdateUserDataRequest()
@@ -45,14 +46,17 @@ public class TeamEdit : TutorialProcess
                 
                 teamEditFinished = true;
                 if (_returnLayer != null)
+                {
                     _returnLayer.gameObject.SetActive(true);
+                    _returnLayer.ForceBackMode(true);
+                }
             }
         );
     }
     
     private bool TutorialLegal(string teamMode)
     {
-        bool qualified = false;
+        bool qualified = true;
         int unitCount = 0;
 
         PosKeySet targetTeamSet = null;
@@ -73,10 +77,6 @@ public class TeamEdit : TutorialProcess
                 qualified = qualified && (Stones.GetEquippingStones(set.instanceID).Count == 9);
                 unitCount += 1;
             }
-            else
-            {
-                qualified = false;
-            }
             if (!qualified)
                 break;
         }
@@ -87,11 +87,12 @@ public class TeamEdit : TutorialProcess
                 qualified = qualified && unitCount == 3;
                 break;
             case "arcade":
-                if (tutorialStep == "teamEdit1")
+                if (_tutorialStep == "teamEdit1")
                 {
                     qualified = qualified && unitCount > 0;
+                    Debug.Log(qualified +" : "+unitCount);
                 }
-                else if (tutorialStep == "teamEdit2")
+                else if (_tutorialStep == "teamEdit2")
                 {
                     qualified = qualified && unitCount > 1;
                 }

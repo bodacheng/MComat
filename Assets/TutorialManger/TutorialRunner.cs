@@ -38,7 +38,7 @@ public class TutorialRunner
     void GenerateStep2Tutorial()
     {
         var goTo = new GoTo("arcade");
-        var teamEdit = new TeamEdit("teamEdit1");
+        var teamEdit1 = new TeamEdit("teamEdit1");
         var goToStageOne = new GoToStageOne();
         
         bool StageOneFinished()
@@ -50,7 +50,7 @@ public class TutorialRunner
         
         _tutorialProcesses.Clear();
         _tutorialProcesses.Add(goTo);
-        _tutorialProcesses.Add(teamEdit);
+        _tutorialProcesses.Add(teamEdit1);
         _tutorialProcesses.Add(goToStageOne);
         _tutorialProcesses.Add(waitFighting);
     }
@@ -87,12 +87,12 @@ public class TutorialRunner
     void GenerateStep5Tutorial()
     {
         var goTo = new GoTo("arcade");
-        var teamEdit = new TeamEdit("teamEdit2");
+        var teamEdit2 = new TeamEdit("teamEdit2");
         var goToStageOne = new GoToStageOne();
         
         _tutorialProcesses.Clear();
         _tutorialProcesses.Add(goTo);
-        _tutorialProcesses.Add(teamEdit);
+        _tutorialProcesses.Add(teamEdit2);
         _tutorialProcesses.Add(goToStageOne);// 这个环节已经可有可无。如果玩家在队伍编辑后直接退出游戏重开，将获得自由
     }
     

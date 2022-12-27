@@ -45,31 +45,33 @@ public class SkillEditTry : TutorialProcess
             _skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
             if (_skillEditLayer != null)
             {
+                string nextTutorialProgress = null;
                 if (this._tutorialFlag == "openInstruction1")
                 {
                     _skillEditLayer.OpenTutorial1();
+                    nextTutorialProgress = "SkillEditFinished";
                 }
                 
                 if (this._tutorialFlag == "openInstruction2")
                 {
                     _skillEditLayer.OpenTutorial2();
+                    nextTutorialProgress = "SkillEditFinished2";
                 }
                 
                 _skillEditLayer.NineSlot.SetExtraSkillEditSuccess(
                     () =>
                     {
-                        var tutorialProgressLabel = PreScene.target.Focusing.r_id == "1" ? "SkillEditFinished" : "SkillEditFinished2";
                         PlayFabReadClient.UpdateUserData(
                             new UpdateUserDataRequest()
                             {
                                 Data = new Dictionary<string, string>()
                                 {
-                                    { "TutorialProgress", tutorialProgressLabel }
+                                    { "TutorialProgress", nextTutorialProgress }
                                 }
                             },
                             () =>
                             {
-                                PlayerAccountInfo.Me.tutorialProgress = tutorialProgressLabel;
+                                PlayerAccountInfo.Me.tutorialProgress = nextTutorialProgress;
                                 _skillEditFinished = true;
                                 _skillEditLayer.NineSlot.confirmBtnIndicator.SetActive(false);
                             },

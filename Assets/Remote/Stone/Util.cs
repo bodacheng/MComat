@@ -97,11 +97,11 @@ namespace dataAccess
                 List<string> exceptAccIds = Stones.GetMyStonesBySkillID(exceptSkIDs[i]);
                 exceptStones.AddRange(exceptAccIds);
             }
-            List<string> StoneAccIDs = Stones.TargetStonesFromAccount_except(filterForm, exceptStones, null, true);
-            if (StoneAccIDs.Count == 0)
+            List<string> stoneAccIDs = Stones.TargetStonesFromAccount_except(filterForm, exceptStones, null, true);
+            if (stoneAccIDs.Count == 0)
                 return null;
-            int ranDom = Random.Range(0, StoneAccIDs.Count);
-            string stoneAccID = StoneAccIDs[ranDom];
+            int ranDom = Random.Range(0, stoneAccIDs.Count);
+            string stoneAccID = stoneAccIDs[ranDom];
             infoModel = Stones.Get(stoneAccID);
             return infoModel;
         }
@@ -109,6 +109,9 @@ namespace dataAccess
         // 获取某个角色装备中的技能石列表应该是在已经读取了玩家所有技能石之后，这个过程从本地内存读就可以。我们只需要确保读取技能石，和下面这个函数总实质是一前一后。
         public static List<StoneOfPlayerInfo> GetEquippingStones(string instanceId)
         {
+            if (Units.Get(instanceId) == null)
+                return new List<StoneOfPlayerInfo>();
+            
             var targetStones = new List<StoneOfPlayerInfo>();
             foreach(var pair in Dic)
             {

@@ -14,13 +14,13 @@ namespace dataAccess
             switch (Mode)
             {
                 case "arcade":
-                    var F = Default.GetInstanceIdOnPos(0);
-                    var L = Default.GetInstanceIdOnPos(1);
-                    var R = Default.GetInstanceIdOnPos(2);
+                    var f = Default.GetInstanceIdOnPos(0);
+                    var l = Default.GetInstanceIdOnPos(1);
+                    var r = Default.GetInstanceIdOnPos(2);
                     
-                    form.l = L;
-                    form.f = F;
-                    form.r = R;
+                    form.l = l;
+                    form.f = f;
+                    form.r = r;
                     break;
                 case "arena":
                     form.f = Arena3V3.GetInstanceIdOnPos(0);
