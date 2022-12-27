@@ -55,32 +55,32 @@ public class BackGroundPS : MonoBehaviour
     
     void Default()
     {
-        SwitchBG(18);
+        SwitchBG(0);
     }
     
     void Red()
     {
-        SwitchBG(6);
+        SwitchBG(0);
     }
     
     void Blue()
     {
-        SwitchBG(8);
+        SwitchBG(2);
     }
     
     void Green()
     {
-        SwitchBG(7);
+        SwitchBG(1);
     }
     
     void Light()
     {
-        SwitchBG(12);
+        SwitchBG(3);
     }
     
     void Dark()
     {
-        SwitchBG(5);
+        SwitchBG(4);
     }
     
     void SwitchBG(int index)
