@@ -2,6 +2,7 @@ using System;
 using DummyLayerSystem;
 using mainMenu;
 using PlayFab;
+using UnityEngine;
 
 public class SettingPage : MSceneProcess
 {
@@ -65,14 +66,23 @@ public class SettingPage : MSceneProcess
                             (playFabError) =>
                             {
                                 nickNameLayer.LoadingRender(false);
-                                if (playFabError.Error == PlayFabErrorCode.InvalidUsername)
+                                Debug.Log("nick name setting fail:"+ playFabError.Error);
+                                switch (playFabError.Error)
                                 {
-                                    PopupLayer.ArrangeWarnWindow("InvalidUsername");
+                                    case PlayFabErrorCode.InvalidUsername:
+                                        PopupLayer.ArrangeWarnWindow(Translate.Get("InvalidUsername"));
+                                        break;
+                                    case PlayFabErrorCode.DuplicateUsername:
+                                        PopupLayer.ArrangeWarnWindow(Translate.Get("DuplicateUsername"));
+                                        break;
+                                    case PlayFabErrorCode.InvalidParams:
+                                        PopupLayer.ArrangeWarnWindow(Translate.Get("InvalidUsername"));
+                                        break;
+                                    default:
+                                        PreScene.ReturnToLobby();
+                                        break;
                                 }
-                                else
-                                {
-                                    PreScene.ReturnToLobby();
-                                }
+                                
                                 ProgressLayer.Close();
                             }
                         );

@@ -94,6 +94,7 @@ namespace mainMenu
         
         public static void ReturnToLobby()
         {
+            ProgressLayer.Loading(">");
             PopupLayer.ArrangeConfirmWindow((() => { SceneManager.LoadScene(0);}), "Network Error. Return to lobby.");
         }
         

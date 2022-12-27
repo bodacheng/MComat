@@ -9,3 +9,6 @@ Ex3Skill,Ex3 Skill,Ex3 Skill,三费必杀技
 TryFilterRange,Choose different ranges of skills,Choose different ranges of skills,可以选择不同攻击距离的技能
 fill9Slots,Fill Nine Slots,"戦士の技を自由に装備、編集する画面です。
 左のボックスからストンーを選んで、9 slotsにドラッグしましょう。",尝试通过安装技能石为战士佩戴不同技能
+InvalidUsername,Invalid Username,Invalid Username,Invalid Username
+DuplicateUsername,Duplicate Username,Duplicate Username,Duplicate Username
+InvalidUsername,Invalid Username,使用できない単語が含んでる,监测到非法字符

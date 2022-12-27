@@ -98,6 +98,8 @@ public partial class PlayFabReadClient
     static bool _tutorialProgressGot;
     public static void LoginSuccess(LoginResult result)
     {
+        _playerInitialized = false;
+        _tutorialProgressGot = false;
         Debug.Log(" login success： " + result.EntityToken.EntityToken);
         ProgressLayer.Loading(">");
         PlayerAccountInfo.Me = new PlayerAccountInfo

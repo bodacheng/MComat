@@ -103,11 +103,7 @@ public partial class PlayFabReadClient
                 DisplayName = DisplayName
             },
             finished.Invoke,
-        (x) =>
-            {
-                Debug.Log(x);
-                error(x);
-            }
+            error
         );
     }
 }
