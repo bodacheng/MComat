@@ -192,7 +192,7 @@ namespace mainMenu
                 await Task.Delay(1);// wait for the UI Layer to be stable.Otherwise pos caculation will be wrong at the start
                 if (_slot != null && _slot._cell != null)
                 {
-                    var worldPos = PosCal.GetWorldPos(PreScene.target.mainC, _slot._cell.GetComponent<RectTransform>(), 5f);
+                    var worldPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, _slot._cell.GetComponent<RectTransform>(), 5f);
                     _tabEffects.RefreshSlotEffect(_slot.num, worldPos, item != null ? item._SkillConfig.SP_LEVEL : -1);
                 }
             }

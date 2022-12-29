@@ -26,6 +26,6 @@ public class ArenaBtnEffect : MonoBehaviour
         }
         effect.transform.SetParent(t);
         effect.transform.position = 
-            PosCal.GetWorldPos(PreScene.target.mainC, t.GetComponent<RectTransform>(), 20f);
+            PosCal.GetWorldPos(PreScene.target.postProcessCamera, t.GetComponent<RectTransform>(), 20f);
     }
 }

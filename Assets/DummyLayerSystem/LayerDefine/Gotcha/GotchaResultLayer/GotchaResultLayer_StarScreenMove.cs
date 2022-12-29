@@ -35,7 +35,7 @@ public partial class GotchaResultLayer : UILayer
     {
         for (int i = 0; i < results.Count; i++)
         {
-            StarScreenMoveAnim(results[i], PosCal.GetWorldPos(PreScene.target.mainC, waitPos[i], 5f), slotScreenPos[i]);
+            StarScreenMoveAnim(results[i], PosCal.GetWorldPos(PreScene.target.postProcessCamera, waitPos[i], 5f), slotScreenPos[i]);
         }
     }
     
@@ -86,15 +86,15 @@ public partial class GotchaResultLayer : UILayer
     void PosDecide()
     {
         // 星星落入格子
-        var a1ScreenPos = PosCal.GetWorldPos(PreScene.target.mainC, NineForShow.A1T.GetComponent<RectTransform>(), 5f);
-        var a2ScreenPos = PosCal.GetWorldPos(PreScene.target.mainC, NineForShow.A2T.GetComponent<RectTransform>(), 5f);
-        var a3screenPos = PosCal.GetWorldPos(PreScene.target.mainC, NineForShow.A3T.GetComponent<RectTransform>(), 5f);
-        var b1ScreenPos = PosCal.GetWorldPos(PreScene.target.mainC, NineForShow.B1T.GetComponent<RectTransform>(), 5f);
-        var b2ScreenPos = PosCal.GetWorldPos(PreScene.target.mainC, NineForShow.B2T.GetComponent<RectTransform>(), 5f);
-        var b3ScreenPos = PosCal.GetWorldPos(PreScene.target.mainC, NineForShow.B3T.GetComponent<RectTransform>(), 5f);
-        var c1ScreenPos = PosCal.GetWorldPos(PreScene.target.mainC, NineForShow.C1T.GetComponent<RectTransform>(), 5f);
-        var c2ScreenPos = PosCal.GetWorldPos(PreScene.target.mainC, NineForShow.C2T.GetComponent<RectTransform>(), 5f);
-        var c3ScreenPos = PosCal.GetWorldPos(PreScene.target.mainC, NineForShow.C3T.GetComponent<RectTransform>(), 5f);
+        var a1ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.A1T.GetComponent<RectTransform>(), 5f);
+        var a2ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.A2T.GetComponent<RectTransform>(), 5f);
+        var a3screenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.A3T.GetComponent<RectTransform>(), 5f);
+        var b1ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.B1T.GetComponent<RectTransform>(), 5f);
+        var b2ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.B2T.GetComponent<RectTransform>(), 5f);
+        var b3ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.B3T.GetComponent<RectTransform>(), 5f);
+        var c1ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.C1T.GetComponent<RectTransform>(), 5f);
+        var c2ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.C2T.GetComponent<RectTransform>(), 5f);
+        var c3ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.C3T.GetComponent<RectTransform>(), 5f);
         slotScreenPos.Clear();
         slotScreenPos.Add(a1ScreenPos);
         slotScreenPos.Add(a2ScreenPos);

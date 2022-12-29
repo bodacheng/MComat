@@ -42,6 +42,6 @@ public class UnitBtnEffect : MonoBehaviour
         await UniTask.DelayFrame(5);
         effect.transform.SetParent(t);
         effect.transform.position = 
-            PosCal.GetWorldPos(PreScene.target.mainC, t.GetComponent<RectTransform>(), 20f);
+            PosCal.GetWorldPos(PreScene.target.postProcessCamera, t.GetComponent<RectTransform>(), 20f);
     }
 }

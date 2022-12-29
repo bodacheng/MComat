@@ -18,7 +18,7 @@ public class ArcadeBtnEffect : MonoBehaviour
     {
         runningGuy.transform.SetParent(t);
         runningGuy.transform.position = 
-            PosCal.GetWorldPos(PreScene.target.mainC, 
+            PosCal.GetWorldPos(PreScene.target.postProcessCamera, 
                 PosCal.ConvertAnchorPos(t.GetComponent<RectTransform>().anchoredPosition, Vector2.one, Vector2.zero )
                 , 20f);
     }

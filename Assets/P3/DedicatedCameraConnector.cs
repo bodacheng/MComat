@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using mainMenu;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -8,6 +9,7 @@ namespace ModelView
     {
         [SerializeField] private Transform target;
         [SerializeField] private Camera camera;
+        [SerializeField] private Camera eCamera;
         [SerializeField] private float UpDownRotateRangeMin = -10;
         [SerializeField] private float UpDownRotateRangeMax = 45;
         [SerializeField] private float rotateSpeed = 90;
@@ -20,6 +22,7 @@ namespace ModelView
         public void Clear()
         {
             DestroyImmediate(camera.gameObject);
+            DestroyImmediate(eCamera.gameObject);
             if (target != null)
                 DestroyImmediate(target.gameObject);
             DestroyImmediate(gameObject);
@@ -31,7 +34,7 @@ namespace ModelView
                 DestroyImmediate(target.gameObject);
         }
         
-        void Initialize(bool fixMode, Transform focus, Transform camerasHolder = null, Camera stackParent = null)
+        void Initialize(bool fixMode, Transform focus, Transform camerasHolder = null, Camera postProcessParent = null, Camera nonePostProcessParent = null)
         {
             this.fixMode = fixMode;
             rect = transform.GetComponent<RectTransform>();
@@ -48,19 +51,15 @@ namespace ModelView
                 }
             }
             
-            camera.transform.SetParent(camerasHolder);
-            if (stackParent != null)
-            {
-                var PCameraData = stackParent.transform.GetComponent<UniversalAdditionalCameraData>();
-                var cameraData = camera.transform.GetComponent<UniversalAdditionalCameraData>();
-                cameraData.renderType = CameraRenderType.Overlay;
-                PCameraData.cameraStack.Add(camera);
-            }
-            
             wid = rect.rect.width;
             hei = rect.rect.height;
+
             
-            camera.gameObject.SetActive(true);
+            camera.transform.SetParent(camerasHolder);
+            eCamera.transform.SetParent(camerasHolder);
+
+            PreScene.target.CameraStackToPostProcess(eCamera);
+            PreScene.target.CameraStackToNonePostProcess(camera);
             
             if (!this.fixMode)
                 _basicOrthographicSize = CalMaxOrthographicSize();
@@ -109,16 +108,21 @@ namespace ModelView
                 _basicOrthographicSize = Mathf.Max(_targetBounds.extents.x, _targetBounds.extents.y);
             }
             
-            camera.orthographicSize = _basicOrthographicSize * (Screen.height / rect.rect.height);
-            
             var viewCenter = GetCenterPosition(rect);
-            var cViewWidth = camera.orthographicSize * 2 * camera.aspect;
-            var cViewHeight = camera.orthographicSize * 2;
-            
-            camera.transform.position = _targetBounds.center + Vector3.forward * (_targetBounds.extents.z + extraZDis)
-                        + (0.5f -　((float)viewCenter.x / Screen.width)) * cViewWidth * camera.transform.right 
-                        + (0.5f - ((float)viewCenter.y / Screen.height)) * cViewHeight * Vector3.up;
-            camera.farClipPlane = _targetBounds.extents.z * 2 + extraZDis + extraZCameraDepth;
+
+            void CameraTreat(Camera camera)
+            {
+                camera.orthographicSize = _basicOrthographicSize * (Screen.height / rect.rect.height);
+                var cViewWidth = camera.orthographicSize * 2 * camera.aspect;
+                var cViewHeight = camera.orthographicSize * 2;
+                camera.transform.position = _targetBounds.center + Vector3.forward * (_targetBounds.extents.z + extraZDis)
+                                                                 + (0.5f -　((float)viewCenter.x / Screen.width)) * cViewWidth * camera.transform.right 
+                                                                 + (0.5f - ((float)viewCenter.y / Screen.height)) * cViewHeight * Vector3.up;
+                camera.farClipPlane = _targetBounds.extents.z * 2 + extraZDis + extraZCameraDepth;
+            }
+
+            CameraTreat(camera);
+            CameraTreat(eCamera);
         }
         
         static Vector2 GetCenterPosition(RectTransform rect)

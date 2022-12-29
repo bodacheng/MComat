@@ -12,7 +12,7 @@ namespace dataAccess
         {
             if (RenderModelDic.ContainsKey(instanceId))
             {
-                var worldPos = PosCal.GetWorldPos(PreScene.target.mainC, RenderModelDic[instanceId].GetComponent<RectTransform>(), 0f);
+                var worldPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, RenderModelDic[instanceId].GetComponent<RectTransform>(), 0f);
                 var path = FightGlobalSetting.EffectPathDefine();
                 var slotEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion3.prefab");
                 slotEffect.gameObject.name = "stoneExplosion";

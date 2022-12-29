@@ -96,7 +96,7 @@ public partial class SSLevelUpManager : MonoBehaviour
                 _stoneListLayer.box.RestFilter();
                 CloseLevelUpPage();
                 var renderModel = Stones.GetRenderModel(_stoneListLayer.TargetStoneID);
-                renderModel.Shine(PreScene.target.mainC);
+                renderModel.Shine(PreScene.target.postProcessCamera);
                 refreshStoneData.Invoke(targetInstanceId);
                 _stoneListLayer.TargetStoneID = targetInstanceId;
                 Stones.ShowAllStonesLevel();

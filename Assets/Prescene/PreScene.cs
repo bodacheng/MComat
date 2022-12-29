@@ -2,6 +2,7 @@
 using UnityEngine;
 using DummyLayerSystem;
 using ModelView;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -18,9 +19,9 @@ namespace mainMenu
         [SerializeField] SingleThreadProcesser mainProcessRunner;
         
         [Header("主相机")] 
-        public Camera mainC;
+        public Camera postProcessCamera;
         [Header("UI特效相机")]
-        public Camera effectC;
+        public Camera noPostProcessCamera;
         
         [Header("Shader转换器")]
         public SwapAllModelShader _SwapAllModelShader;
@@ -64,9 +65,54 @@ namespace mainMenu
         {
             effectRenderTexture = new RenderTexture(Screen.width, Screen.height, 16);
             effectRenderTexture.Create();
-            effectC.targetTexture = effectRenderTexture;
+            noPostProcessCamera.targetTexture = effectRenderTexture;
             effectBg.texture = effectRenderTexture;
             effectBg.color = Color.white;
+        }
+        
+        // URP的postprocess有个默认设置，就是overlay的相机如果启用postprocess，
+        // 那么它会把被叠加的主相机和在它之前的stack全都加上postprocess，哪怕这些相机culling mask不一样
+        // 甚至复数个stack都有postprocess的话还能把前面前面的stack或base的东西postprocess给增强
+        public void CameraStackToPostProcess(Camera camera)
+        {
+            var pCameraData = postProcessCamera.GetComponent<UniversalAdditionalCameraData>();
+            if (pCameraData.cameraStack.Contains(camera))
+                return;
+            
+            pCameraData.renderPostProcessing = false;
+            for (var index = 0; index < pCameraData.cameraStack.Count; index++)
+            {
+                var stackCamera = pCameraData.cameraStack[index];
+                var sCameraData = stackCamera.GetComponent<UniversalAdditionalCameraData>();
+                sCameraData.renderPostProcessing = false;
+            }
+            
+            var cameraData = camera.transform.GetComponent<UniversalAdditionalCameraData>();
+            cameraData.renderType = CameraRenderType.Overlay;
+            cameraData.renderPostProcessing = true;
+            pCameraData.cameraStack.Add(camera);
+            OnDestroyCallback.AddOnDestroyCallback(camera.gameObject, () =>
+            {
+                pCameraData.cameraStack.Remove(camera);
+                pCameraData.renderPostProcessing = pCameraData.cameraStack.Count == 0;
+                for (var index = 0; index < pCameraData.cameraStack.Count; index++)
+                {
+                    var stackCamera = pCameraData.cameraStack[index];
+                    var sCameraData = stackCamera.GetComponent<UniversalAdditionalCameraData>();
+                    sCameraData.renderPostProcessing = index == pCameraData.cameraStack.Count - 1;
+                }
+            });
+        }
+        
+        public void CameraStackToNonePostProcess(Camera camera)
+        {
+            var pCameraData = noPostProcessCamera.GetComponent<UniversalAdditionalCameraData>();
+            if (pCameraData.cameraStack.Contains(camera))
+                return;
+            var cameraData = camera.transform.GetComponent<UniversalAdditionalCameraData>();
+            cameraData.renderType = CameraRenderType.Overlay;
+            cameraData.renderPostProcessing = false;
+            pCameraData.cameraStack.Add(camera);
         }
 
         void Start()
