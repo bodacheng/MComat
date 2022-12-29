@@ -1,5 +1,4 @@
-﻿using Skill;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using dataAccess;
 
@@ -32,16 +31,15 @@ namespace mainMenu
             C3DragAndDropCell.UpdateMyItem();
             
             var IDs = new List<string>();
-            
-            string A1 = A1DragAndDropCell.GetItem()?.instanceId;
-            string A2 = A2DragAndDropCell.GetItem()?.instanceId;
-            string A3 = A3DragAndDropCell.GetItem()?.instanceId;
-            string B1 = B1DragAndDropCell.GetItem()?.instanceId;
-            string B2 = B2DragAndDropCell.GetItem()?.instanceId;
-            string B3 = B3DragAndDropCell.GetItem()?.instanceId;
-            string C1 = C1DragAndDropCell.GetItem()?.instanceId;
-            string C2 = C2DragAndDropCell.GetItem()?.instanceId;
-            string C3 = C3DragAndDropCell.GetItem()?.instanceId;
+            var A1 = A1DragAndDropCell.GetItem()?.instanceId;
+            var A2 = A2DragAndDropCell.GetItem()?.instanceId;
+            var A3 = A3DragAndDropCell.GetItem()?.instanceId;
+            var B1 = B1DragAndDropCell.GetItem()?.instanceId;
+            var B2 = B2DragAndDropCell.GetItem()?.instanceId;
+            var B3 = B3DragAndDropCell.GetItem()?.instanceId;
+            var C1 = C1DragAndDropCell.GetItem()?.instanceId;
+            var C2 = C2DragAndDropCell.GetItem()?.instanceId;
+            var C3 = C3DragAndDropCell.GetItem()?.instanceId;
             
             if (A1 != null)
                 IDs.Add(A1);
@@ -163,10 +161,10 @@ namespace mainMenu
                 skillIDs.Add(one.SkillId);
             }
             
-            _HP.text = "HP:" + INI_Hp(skillIDs, level);
+            _HP.text = "HP:" + IniHp(skillIDs, level);
         }
                 
-        static float INI_Hp(List<string> skillIDs, List<int> level)
+        static float IniHp(List<string> skillIDs, List<int> level)
         {
             float wholeHp = 0;
             for (var index = 0; index < skillIDs.Count; index++)

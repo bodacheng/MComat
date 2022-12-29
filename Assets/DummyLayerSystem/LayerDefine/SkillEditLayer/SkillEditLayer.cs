@@ -8,16 +8,16 @@ using ModelView;
 
 public partial class SkillEditLayer : UILayer
 {
-    public DedicatedCameraConnector _connector;
+    public DedicatedCameraConnector connector;
     
     [Header("九宫格")]
-    public TheNineSlot NineSlot;
+    public TheNineSlot nineSlot;
     
     [Header("技能石盒")]
-    public SkillStonesBox StonesBox;
+    public SkillStonesBox stonesBox;
     
     [Header("技能信息")]
-    [SerializeField] SkillStoneDetail _skillStoneDetail;
+    [SerializeField] SkillStoneDetail skillStoneDetail;
     
     [Header("技能展示器模式切换角色按钮")]
     [SerializeField] Button unitSwitcher;
@@ -27,28 +27,28 @@ public partial class SkillEditLayer : UILayer
     
     public async UniTask Setup(Action<SkillEditLayer> toDo = null)
     {
-        StonesBox.GenerateCells(9);
+        stonesBox.GenerateCells(9);
         gameObject.SetActive(false);
-        NineSlot.PrintSkillInfo = _skillStoneDetail.RefreshInfo;
-        NineSlot.StartUp((x) =>
+        nineSlot.PrintSkillInfo = skillStoneDetail.RefreshInfo;
+        nineSlot.StartUp((x) =>
             {
-                _connector.SkillShowRunWithPrepare(x).Forget();
+                connector.SkillShowRunWithPrepare(x).Forget();
             }
         );
         
         // 表现系
         var unitConfig = Units.GetUnitConfig(PreScene.target.Focusing.r_id);
-        StonesBox.AddFeatureToCells(StoneCellFeature);
-        StonesBox.IniExTabs();
+        stonesBox.AddFeatureToCells(StoneCellFeature);
+        stonesBox.IniExTabs();
         
         var cts = new CancellationTokenSource();
         ReturnLayer.AddUniTaskCancel(cts);
-        await StonesBox._tabEffects.SwitchElement
+        await stonesBox._tabEffects.SwitchElement
             (unitConfig.element, 
-                ()=> StonesBox.IniExTabsEffects(PreScene.target.postProcessCamera),
+                ()=> stonesBox.IniExTabsEffects(PreScene.target.postProcessCamera),
                 cts.Token);
-        StonesBox.FilterFeatureRefresh(true);
-        _skillStoneDetail.Clear();
+        stonesBox.FilterFeatureRefresh(true);
+        skillStoneDetail.Clear();
         SkillEditButtonFeature(PreScene.target.Focusing);
         toDo?.Invoke(this);
         gameObject.SetActive(true);
@@ -56,7 +56,7 @@ public partial class SkillEditLayer : UILayer
     
     public override void OnDestroy()
     {
-        StonesBox._tabEffects.CloseShowingTagEffects();
+        stonesBox._tabEffects.CloseShowingTagEffects();
     }
 
     void SkillEditButtonFeature(UnitInfo _unitInfo)
@@ -66,18 +66,18 @@ public partial class SkillEditLayer : UILayer
             Debug.Log("到达了没道理到达的地方");
             return;
         }
-        NineSlot.ReadANineAndTwo(_unitInfo);
+        nineSlot.ReadANineAndTwo(_unitInfo);
         var unitInfo = Units.GetUnitConfig(_unitInfo.r_id);
-        StonesBox.FocusingType = unitInfo.TYPE;
-        StonesBox.RestFilter();
-        StonesBox.FilterFeatureRefresh(false);
+        stonesBox.FocusingType = unitInfo.TYPE;
+        stonesBox.RestFilter();
+        stonesBox.FilterFeatureRefresh(false);
         void SkillEditConfirm()
         {
-            NineSlot.UpdateStonesBaseOnSlots(_unitInfo);
+            nineSlot.UpdateStonesBaseOnSlots(_unitInfo);
         }
         void SkillUpdateValidation()
         {
-            if (NineSlot.CheckEditBasedOnCurrent() != SkillSet.SkillEditError.Perfect)
+            if (nineSlot.CheckEditBasedOnCurrent() != SkillSet.SkillEditError.Perfect)
             {
                 // 可以更新但不能上场
                 //return;
@@ -96,15 +96,15 @@ public partial class SkillEditLayer : UILayer
             PopupLayer.ArrangeConfirmWindow(SkillEditConfirm, warn);
         }
         
-        NineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
-        NineSlot.ResetButton.onClick.AddListener(NineSlot.ResetNineSlot);
-        NineSlot.removeAllBtn.onClick.AddListener(NineSlot.ClearSkillEquip);
-        NineSlot.randomBtn.onClick.AddListener(FinishRemains);
+        nineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
+        nineSlot.ResetButton.onClick.AddListener(nineSlot.ResetNineSlot);
+        nineSlot.removeAllBtn.onClick.AddListener(nineSlot.ClearSkillEquip);
+        nineSlot.randomBtn.onClick.AddListener(FinishRemains);
     }
     
     void ForceClearAll()
     {
-        foreach (SkillStoneSlot _slot in NineSlot.allSlot)
+        foreach (var _slot in nineSlot.allSlot)
         {
             _slot._cell.RemoveToTemp();
         }
@@ -117,18 +117,18 @@ public partial class SkillEditLayer : UILayer
             var _stone = _Cell.GetItem();
             if (_stone != null && _stone._SkillConfig != null)
             {
-                _skillStoneDetail.RefreshInfo(_stone.instanceId);
+                skillStoneDetail.RefreshInfo(_stone.instanceId);
             }else{
-                _skillStoneDetail.Clear();
+                skillStoneDetail.Clear();
             }
             StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
         }
         
         void doubleClick()
         {
-            if (NineSlot.GetFocusingStoneSlot() != null)
+            if (nineSlot.GetFocusingStoneSlot() != null)
             {
-                StoneCell.Install(_Cell, NineSlot.GetFocusingStoneSlot()._cell);
+                StoneCell.Install(_Cell, nineSlot.GetFocusingStoneSlot()._cell);
             }
         }
         
@@ -156,7 +156,7 @@ public partial class SkillEditLayer : UILayer
     public void SkillEditConfirmAnimation()
     {
         var personalEffectsPath = FightGlobalSetting.EffectPathDefine(Element.Null);
-        EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, _connector.FocusingC.WholeT.position, Quaternion.identity, null).Forget();
+        EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, connector.FocusingC.WholeT.position, Quaternion.identity, null).Forget();
     }
     
     public void OpenTutorial1()

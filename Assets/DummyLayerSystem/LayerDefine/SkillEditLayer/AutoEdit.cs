@@ -9,7 +9,7 @@ public partial class SkillEditLayer : UILayer
     {
         var info = PreScene.target.Focusing;
         var unitConfig = Units.GetUnitConfig(info.r_id);
-        var now = NineSlot.GetCurrentNineAndTwo();
+        var now = nineSlot.GetCurrentNineAndTwo();
         var targetSkillSet = SkillSet.FixSkillSet(unitConfig.TYPE, now,  true);
         
         if (targetSkillSet == null)
@@ -44,13 +44,13 @@ public partial class SkillEditLayer : UILayer
         AddRandomStoneToSlot(info.id, 7, targetSkillSet.c1);
         AddRandomStoneToSlot(info.id, 8, targetSkillSet.c2);
         AddRandomStoneToSlot(info.id, 9, targetSkillSet.c3);
-        NineSlot.NineSlotsStatusRefresh();
-        StonesBox.RestFilter();
+        nineSlot.NineSlotsStatusRefresh();
+        stonesBox.RestFilter();
     }
     
     void AddRandomStoneToSlot(string monsterOfPlayerId, int targetSlot, string skillID)
     {
-        if (NineSlot.allSlot[targetSlot - 1]._cell.GetItem() != null)
+        if (nineSlot.allSlot[targetSlot - 1]._cell.GetItem() != null)
         {
             return;
         }
@@ -59,7 +59,7 @@ public partial class SkillEditLayer : UILayer
         var Options = Stones.GetMyStonesBySkillID(skillID);
         if (originSkillInfo != null && skillID == originSkillInfo.SkillId)
         {
-            NineSlot.allSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(originSkillInfo.InstanceId));
+            nineSlot.allSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(originSkillInfo.InstanceId));
         }else{
             Options.OrderByDescending(x => Stones.Get(x).Level);
             string targetStoneId = null;
@@ -72,14 +72,14 @@ public partial class SkillEditLayer : UILayer
                     break;
                 }
             }
-            NineSlot.allSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(targetStoneId));
+            nineSlot.allSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(targetStoneId));
         }
         
         var skillConfig = SkillConfigTable.GetSkillConfig(skillID);
-        StonesBox._tabEffects.SkillButtonExplosion(skillConfig.SP_LEVEL,
+        stonesBox._tabEffects.SkillButtonExplosion(skillConfig.SP_LEVEL,
             PosCal.GetWorldPos(PreScene.target.postProcessCamera, 
-                NineSlot.allSlot[targetSlot - 1]._cell.GetComponent<RectTransform>(), 
+                nineSlot.allSlot[targetSlot - 1]._cell.GetComponent<RectTransform>(), 
                 3),
-            StonesBox._tabEffects.transform);
+            stonesBox._tabEffects.transform);
     }
 }

@@ -6309,8 +6309,8 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 170, y: 170}
-  m_Spacing: {x: 5, y: 5}
+  m_CellSize: {x: 165, y: 165}
+  m_Spacing: {x: 10, y: 10}
   m_Constraint: 1
   m_ConstraintCount: 3
 --- !u!114 &3223205477154158133
@@ -7584,10 +7584,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d9799e9b8c3049768fc8c19a5334618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _connector: {fileID: 8609518065019232744}
-  NineSlot: {fileID: 3223205477154158133}
-  StonesBox: {fileID: 2351650544814400329}
-  _skillStoneDetail: {fileID: 1058373452942944366}
+  connector: {fileID: 8609518065019232744}
+  nineSlot: {fileID: 3223205477154158133}
+  stonesBox: {fileID: 2351650544814400329}
+  skillStoneDetail: {fileID: 1058373452942944366}
   unitSwitcher: {fileID: 2523835563921883631}
   clickNextTutorial1: {fileID: 50036536774461550}
   clickNextTutorial2: {fileID: 424466859683484242}
@@ -19395,7 +19395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8463186054152279222
 RectTransform:
   m_ObjectHideFlags: 0

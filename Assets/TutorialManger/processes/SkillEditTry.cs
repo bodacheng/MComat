@@ -35,8 +35,8 @@ public class SkillEditTry : TutorialProcess
         {
             if (_skillEditLayer != null)
             {
-                var validate = _skillEditLayer.NineSlot.ValidateWarn();
-                _skillEditLayer.NineSlot.confirmBtnIndicator.SetActive(validate == SkillSet.SkillEditError.Perfect);
+                var validate = _skillEditLayer.nineSlot.ValidateWarn();
+                _skillEditLayer.nineSlot.confirmBtnIndicator.SetActive(validate == SkillSet.SkillEditError.Perfect);
             }
         }
         
@@ -58,7 +58,7 @@ public class SkillEditTry : TutorialProcess
                     nextTutorialProgress = "SkillEditFinished2";
                 }
                 
-                _skillEditLayer.NineSlot.SetExtraSkillEditSuccess(
+                _skillEditLayer.nineSlot.SetExtraSkillEditSuccess(
                     () =>
                     {
                         PlayFabReadClient.UpdateUserData(
@@ -73,7 +73,7 @@ public class SkillEditTry : TutorialProcess
                             {
                                 PlayerAccountInfo.Me.tutorialProgress = nextTutorialProgress;
                                 _skillEditFinished = true;
-                                _skillEditLayer.NineSlot.confirmBtnIndicator.SetActive(false);
+                                _skillEditLayer.nineSlot.confirmBtnIndicator.SetActive(false);
                             },
                             PreScene.ReturnToLobby
                         );

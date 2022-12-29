@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using dataAccess;
-using UnityEngine.UI;
 
 namespace mainMenu
 {
@@ -16,7 +15,6 @@ namespace mainMenu
                 return;
             }
             var equipments = Stones.GetEquippingStones(_unitInfo.id);
-
             for (var i = 1; i <= 9; i++)
             {
                 allSlot[i - 1]._cell.RemoveToTemp();

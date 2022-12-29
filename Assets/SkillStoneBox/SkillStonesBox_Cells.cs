@@ -35,8 +35,6 @@ namespace mainMenu
                 if (!CellsDic.ContainsKey(i))
                 {
                     var cell = Instantiate(cellPrefab);
-                    cell.empty = new Color(1, 1, 1, 0.6f);
-                    cell.full = new Color(1, 1, 1, 1);
                     cell.cellPhase = StoneCell.CellPhase.SkillStoneBoxCell;
                     CellsDic.Add(i, cell);
                 }
@@ -131,12 +129,12 @@ namespace mainMenu
                     ExType = new int[1] { 3 },
                 };
                 
-                var SkillStonesOfType_normal = Stones.TargetStonesFromAccount(filterForm0);
-                var SkillStonesOfType_EX1 = Stones.TargetStonesFromAccount(filterForm1);
-                var SkillStonesOfType_EX2 = Stones.TargetStonesFromAccount(filterForm2);
-                var SkillStonesOfType_EX3 = Stones.TargetStonesFromAccount(filterForm3);
+                var skillStonesOfTypeNormal = Stones.TargetStonesFromAccount(filterForm0);
+                var skillStonesOfTypeEx1 = Stones.TargetStonesFromAccount(filterForm1);
+                var skillStonesOfTypeEx2 = Stones.TargetStonesFromAccount(filterForm2);
+                var skillStonesOfTypeEx3 = Stones.TargetStonesFromAccount(filterForm3);
                 
-                returnValue = Mathf.Max(returnValue, SkillStonesOfType_normal.Count, SkillStonesOfType_EX1.Count, SkillStonesOfType_EX2.Count, SkillStonesOfType_EX3.Count);
+                returnValue = Mathf.Max(returnValue, skillStonesOfTypeNormal.Count, skillStonesOfTypeEx1.Count, skillStonesOfTypeEx2.Count, skillStonesOfTypeEx3.Count);
             }
             return returnValue;
         }

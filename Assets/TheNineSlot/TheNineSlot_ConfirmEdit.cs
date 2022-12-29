@@ -59,7 +59,7 @@ namespace mainMenu
             }
 
             // k v : stoneid , equipingMonster, slot
-            IDictionary<string, Tuple<string, string>> ToEditStones = new Dictionary<string, Tuple<string, string>>();
+            IDictionary<string, Tuple<string, string>> toEditStones = new Dictionary<string, Tuple<string, string>>();
             
             for (var i = 1; i < 10; i++)
             {
@@ -67,7 +67,7 @@ namespace mainMenu
                 {
                     if (afterDic[i.ToString()] != null)
                     {
-                        ToEditStones.Add(afterDic[i.ToString()], Tuple.Create(unitInfo.id, i.ToString()));
+                        toEditStones.Add(afterDic[i.ToString()], Tuple.Create(unitInfo.id, i.ToString()));
                     }
                 }
             }
@@ -76,21 +76,21 @@ namespace mainMenu
             {
                 if (beforeDic[i.ToString()] != afterDic[i.ToString()])
                 {
-                    if (beforeDic[i.ToString()] != null && !ToEditStones.ContainsKey(beforeDic[i.ToString()]))
+                    if (beforeDic[i.ToString()] != null && !toEditStones.ContainsKey(beforeDic[i.ToString()]))
                     {
-                        ToEditStones.Add(beforeDic[i.ToString()], Tuple.Create(string.Empty, string.Empty));
+                        toEditStones.Add(beforeDic[i.ToString()], Tuple.Create(string.Empty, string.Empty));
                     }
                 }
             }
             
-            void Success(IDictionary<string, Tuple<string, string>> ChangedStoneDic)
+            void Success(IDictionary<string, Tuple<string, string>> changedStoneDic)
             {
-                Stones.RefreshLocalStoneParams(ChangedStoneDic);
+                Stones.RefreshLocalStoneParams(changedStoneDic);
                 var skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
                 if (skillEditLayer != null)
                 {
                     ReadANineAndTwo(unitInfo);
-                    skillEditLayer.StonesBox.RestFilter();
+                    skillEditLayer.stonesBox.RestFilter();
                     SelectedRender(null);
                     skillEditLayer.SkillEditConfirmAnimation();
                 }
@@ -105,7 +105,7 @@ namespace mainMenu
                 extraSkillEditSuccess?.Invoke();
             }
             
-            void error()
+            void Error()
             {
                 var skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
                 if (skillEditLayer != null)
@@ -122,7 +122,7 @@ namespace mainMenu
                 MainSceneLogger.Logs.Add(skillConfirmLog);
             }
             
-            CloudScript.UpdateSkillEdit(ToEditStones, Success, error);
+            CloudScript.UpdateSkillEdit(toEditStones, Success, Error);
         }
     }
 }

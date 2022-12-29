@@ -5,39 +5,39 @@ using UnityEngine;
 //技能石盒分类系成员
 public class ElementStoneTagsGroup
 {
-    IDictionary<int, ParticleSystem> btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
-    public readonly IDictionary<int, ParticleSystem> btnPressedEffects = new Dictionary<int, ParticleSystem>();
-    readonly IDictionary<int, ParticleSystem> exTagEffects = new Dictionary<int, ParticleSystem>();
-    readonly IDictionary<int, ParticleSystem> slotEffects = new Dictionary<int, ParticleSystem>();
-    ParticleSystem selectedTab;
+    IDictionary<int, ParticleSystem> _btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
+    readonly IDictionary<int, ParticleSystem> _btnPressedEffects = new Dictionary<int, ParticleSystem>();
+    readonly IDictionary<int, ParticleSystem> _exTagEffects = new Dictionary<int, ParticleSystem>();
+    readonly IDictionary<int, ParticleSystem> _slotEffects = new Dictionary<int, ParticleSystem>();
+    ParticleSystem _selectedTab;
     
     public void SetSelectedTabPos(int ex)
     {
-        selectedTab.Clear(true);
-        exTagEffects.TryGetValue(ex, out var tab);
+        _selectedTab.Clear(true);
+        _exTagEffects.TryGetValue(ex, out var tab);
         if (tab == null)
         {
             Debug.Log("按钮特效逻辑错误");
             return;
         }
         
-        selectedTab.transform.SetParent(tab.transform);
-        selectedTab.transform.localPosition = Vector3.zero;
-        selectedTab.Play();
+        _selectedTab.transform.SetParent(tab.transform);
+        _selectedTab.transform.localPosition = Vector3.zero;
+        _selectedTab.Play();
     }
     
     public void CloseTagEffects()
     {
-        foreach(var keyValuePair in btnEffectsSetsForStoneBox)
+        foreach(var keyValuePair in _btnEffectsSetsForStoneBox)
         {
             keyValuePair.Value.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
-        selectedTab.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        _selectedTab.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
     
-    public async UniTask INI_forSkillStoneBox(Element element, Transform effectObjectParent)
+    public async UniTask IniForSkillStoneBox(Element element, Transform effectObjectParent)
     {
-        btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
+        _btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
         
         var normalTab = await CreateOneButtonIcon(element, 0);
         var ex1Tab = await CreateOneButtonIcon(element, 1);
@@ -49,21 +49,21 @@ public class ElementStoneTagsGroup
         ex2Tab.transform.SetParent(effectObjectParent);
         ex3Tab.transform.SetParent(effectObjectParent);
         
-        btnEffectsSetsForStoneBox.Add(0, normalTab.GetComponent<ParticleSystem>());
-        btnEffectsSetsForStoneBox.Add(1, ex1Tab.GetComponent<ParticleSystem>());
-        btnEffectsSetsForStoneBox.Add(2, ex2Tab.GetComponent<ParticleSystem>());
-        btnEffectsSetsForStoneBox.Add(3, ex3Tab.GetComponent<ParticleSystem>());
+        _btnEffectsSetsForStoneBox.Add(0, normalTab.GetComponent<ParticleSystem>());
+        _btnEffectsSetsForStoneBox.Add(1, ex1Tab.GetComponent<ParticleSystem>());
+        _btnEffectsSetsForStoneBox.Add(2, ex2Tab.GetComponent<ParticleSystem>());
+        _btnEffectsSetsForStoneBox.Add(3, ex3Tab.GetComponent<ParticleSystem>());
         
-        selectedTab = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/selectedTab");
-        selectedTab.transform.SetParent(effectObjectParent);
+        _selectedTab = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/selectedTab");
+        _selectedTab.transform.SetParent(effectObjectParent);
         
         await LoadPressedEffect(element, effectObjectParent);
     }
     
-    public static UniTask<GameObject> CreateOneButtonIcon(Element element, int SpLevel)
+    public static UniTask<GameObject> CreateOneButtonIcon(Element element, int spLevel)
     {
         var path = FightGlobalSetting.EffectPathDefine(element);
-        switch(SpLevel)
+        switch(spLevel)
         {
             case 0:
                 return AddressablesLogic.LoadObject("ButtonEffects/" + path + "/normal.prefab");
@@ -92,31 +92,31 @@ public class ElementStoneTagsGroup
         triggerExplosion2.transform.SetParent(T);
         triggerExplosion3.transform.SetParent(T);
         
-        btnPressedEffects.Add(0, triggerExplosion0);
-        btnPressedEffects.Add(1, triggerExplosion1);
-        btnPressedEffects.Add(2, triggerExplosion2);
-        btnPressedEffects.Add(3, triggerExplosion3);
+        _btnPressedEffects.Add(0, triggerExplosion0);
+        _btnPressedEffects.Add(1, triggerExplosion1);
+        _btnPressedEffects.Add(2, triggerExplosion2);
+        _btnPressedEffects.Add(3, triggerExplosion3);
     }
     
     public void RefreshSTBoxEffects(int eX, Vector3 pos)
     {
-        if (exTagEffects.ContainsKey(eX))
+        if (_exTagEffects.ContainsKey(eX))
             return;
-        var p = btnEffectsSetsForStoneBox[eX];
+        var p = _btnEffectsSetsForStoneBox[eX];
         p.gameObject.name = "UIExTag"+ eX;
-        exTagEffects.Add(eX,p);
+        _exTagEffects.Add(eX,p);
         p.gameObject.transform.position = pos;
         p.Play(true);
     }
     
     public async void RefreshSlotEffects(int slotNum, int eX, Vector3 pos, Transform parent)
     {
-        if (slotEffects.ContainsKey(slotNum) && slotEffects[slotNum] != null)
+        if (_slotEffects.ContainsKey(slotNum) && _slotEffects[slotNum] != null)
         {
-            GameObject.Destroy(slotEffects[slotNum].gameObject);
+            GameObject.Destroy(_slotEffects[slotNum].gameObject);
         }
         
-        if (!btnEffectsSetsForStoneBox.ContainsKey(eX)) return;
+        if (!_btnEffectsSetsForStoneBox.ContainsKey(eX)) return;
         string effectName;
         switch (eX)
         {
@@ -135,7 +135,7 @@ public class ElementStoneTagsGroup
         }
         var slotEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>(effectName);
         slotEffect.transform.SetParent(parent);
-        DicAdd<int, ParticleSystem>.Add(slotEffects, slotNum, slotEffect);
+        DicAdd<int, ParticleSystem>.Add(_slotEffects, slotNum, slotEffect);
         slotEffect.gameObject.name = "slotEffect"+ slotNum;
         slotEffect.gameObject.transform.position = pos;
         slotEffect.Play(true);
@@ -143,34 +143,43 @@ public class ElementStoneTagsGroup
     
     public void Clear()
     {
-        foreach (var VARIABLE in exTagEffects)
+        foreach (var variable in _exTagEffects)
         {
-            if (VARIABLE.Value != null)
-                GameObject.Destroy(VARIABLE.Value.gameObject);
+            if (variable.Value != null)
+                GameObject.Destroy(variable.Value.gameObject);
         }
-        exTagEffects.Clear();
+        _exTagEffects.Clear();
         
-        foreach (var VARIABLE in btnPressedEffects)
+        foreach (var variable in _btnPressedEffects)
         {
-            if (VARIABLE.Value != null)
-                GameObject.Destroy(VARIABLE.Value.gameObject);
+            if (variable.Value != null)
+                GameObject.Destroy(variable.Value.gameObject);
         }
-        btnPressedEffects.Clear();
+        _btnPressedEffects.Clear();
         
-        foreach (var VARIABLE in btnEffectsSetsForStoneBox)
+        foreach (var variable in _btnEffectsSetsForStoneBox)
         {
-            if (VARIABLE.Value != null)
-                GameObject.Destroy(VARIABLE.Value.gameObject);
+            if (variable.Value != null)
+                GameObject.Destroy(variable.Value.gameObject);
         }
-        btnEffectsSetsForStoneBox.Clear();
+        _btnEffectsSetsForStoneBox.Clear();
         
-        foreach (var VARIABLE in slotEffects)
+        foreach (var variable in _slotEffects)
         {
-            if (VARIABLE.Value != null)
-                GameObject.Destroy(VARIABLE.Value.gameObject);
+            if (variable.Value != null)
+                GameObject.Destroy(variable.Value.gameObject);
         }
-        slotEffects.Clear();
+        _slotEffects.Clear();
         
-        GameObject.Destroy(selectedTab.gameObject);
+        GameObject.Destroy(_selectedTab.gameObject);
+    }
+
+    public void SkillButtonExplosion(int spLevel, Vector3 targetPos, Transform parent)
+    {
+        var pressedExplosion = _btnPressedEffects[spLevel];
+        pressedExplosion.gameObject.name = "ExExplosion" + spLevel;
+        pressedExplosion.transform.position = targetPos;
+        pressedExplosion.Play();
+        pressedExplosion.transform.SetParent(parent);
     }
 }

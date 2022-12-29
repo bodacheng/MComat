@@ -27,13 +27,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     public GameObject _selected;
     [Tooltip("Functional type of this cell")]
     public CellPhase cellPhase = CellPhase.SkillStoneBoxCell;
-    [Tooltip("Image of this cell")]
-    public Image image;
-    [Tooltip("Sprite color for empty cell")]
-    public Color empty = new Color(); // Sprite color for empty cell
-    [Tooltip("Sprite color for filled cell")]
-    public Color full = new Color(); // Sprite color for filled cell
-
+    
     [Tooltip("Level")] 
     [SerializeField] Text level;
     
