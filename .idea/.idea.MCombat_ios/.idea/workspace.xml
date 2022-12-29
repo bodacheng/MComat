@@ -3,19 +3,349 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/Soul/SkillSet/SkillSet_Validation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/Soul/SkillSet/SkillSet_Validation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/AutoEdit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/AutoEdit.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GUI Kit - Matt Metal/Prefabs/Prefabs_Component_UI_Etc/Status-Group.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GUI Kit - Matt Metal/Prefabs/Prefabs_Component_UI_Etc/Status-Group.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RPG and MMO UI 11/Prefabs/Mobile/Action Buttons/Button (Ability) (Large).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RPG and MMO UI 11/Prefabs/Mobile/Action Buttons/Button (Ability) (Large).prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RPG and MMO UI 11/Prefabs/Mobile/Joystick.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RPG and MMO UI 11/Prefabs/Mobile/Joystick.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RPG and MMO UI 11/Prefabs/Mobile/NPC Bubble.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RPG and MMO UI 11/Prefabs/Mobile/NPC Bubble.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RPG and MMO UI 11/Prefabs/Mobile/Unit Frames/Small Unit Frame (Mobile Small) (2).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RPG and MMO UI 11/Prefabs/Mobile/Unit Frames/Small Unit Frame (Mobile Small) (2).prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/LanguageCode.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Account/LanguageCode.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SkillStoneBox/SkillStonesBox.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SkillStoneBox/SkillStonesBox.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SkillEditLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SkillEditLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Cursor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Cursor/Circle Cursor.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Cursor/Circle Cursor.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Cursor/Circle In.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Cursor/Circle In.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Cursor/Circle Loop.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Cursor/Circle Loop.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Cursor/Circle Out.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Cursor/Circle Out.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other/Dots Loop.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other/Dots Loop.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other/Dots.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other/Dots.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other/Highlight Anim Loop.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other/Highlight Anim Loop.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other/Highlight Anim.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other/Highlight Anim.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other/SFI In.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other/SFI In.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other/SFI Out.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other/SFI Out.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other/Start Fade-in.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Other/Start Fade-in.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Friends Tab In.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Friends Tab In.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Friends Tab Out.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Friends Tab Out.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Friends Tab.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Friends Tab.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Main Panel In.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Main Panel In.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Main Panel Out.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Main Panel Out.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Main Panel Root Invisible.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Main Panel Root Invisible.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Main Panel Root Start.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Main Panel Root Start.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Main Panel Root.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Main Panel Root.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Main Panel.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Main Panel.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/PM Settings.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/PM Settings.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Pause Menu In.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Pause Menu In.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Pause Menu List In.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Pause Menu List In.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Pause Menu List.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Pause Menu List.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Pause Menu Out.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Pause Menu Out.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Pause Menu.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Pause Menu.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Server Browser List Expand.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Server Browser List Expand.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Server Browser List Minimize.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Server Browser List Minimize.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Server Browser.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Server Browser.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Settings Panel In.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Settings Panel In.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Settings Panel Out.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Settings Panel Out.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Settings Panel.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Main Panels/Settings Panel.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Selected Server In.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Selected Server In.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Selected Server Loop.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Selected Server Loop.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Selected Server Out.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Selected Server Out.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Selected Server.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Selected Server.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Standard In.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Standard In.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Standard Loop.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Standard Loop.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Standard Out.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Standard Out.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Standard.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Modal Windows/Standard.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Loading Out.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Loading Out.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Loading.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Loading.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Login to Loading.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Login to Loading.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Login to Sign Up.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Login to Sign Up.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Login.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Login.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Press Any Key to Loading.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Press Any Key to Loading.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Press Any Key to Login.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Press Any Key to Login.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Press Any Key.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Press Any Key.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Sign Up to Login.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/SS Sign Up to Login.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/Splash Screen.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Panel/Splash Screen/Splash Screen.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Chapter Button.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Chapter Button.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Friend Button.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Friend Button.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Main Button.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Main Button.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button A2 Dissolve to Normal.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button A2 Dissolve to Normal.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button A2 Normal to Dissolve.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button A2 Normal to Dissolve.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button A2 Normal to Pressed.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button A2 Normal to Pressed.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button A2 Pressed to Dissolve.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button A2 Pressed to Dissolve.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button A2 Pressed to Normal.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button A2 Pressed to Normal.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button Alternative.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button Alternative.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button Dissolve to Normal.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button Dissolve to Normal.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button Normal to Dissolve.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button Normal to Dissolve.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button Normal to Pressed.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button Normal to Pressed.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button Pressed to Dissolve.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button Pressed to Dissolve.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button Pressed to Normal.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button Pressed to Normal.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Panel Button.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Quick Match Button.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Quick Match Button.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Server Button.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Server Button.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Settings Button.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Settings Button.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Shortcut Key.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Shortcut Key.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Spotlight Button BG Loop.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Spotlight Button BG Loop.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Spotlight Button BG.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Spotlight Button BG.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Spotlight Button.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Button/Spotlight Button.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Horizontal Selector.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Horizontal Selector/HS Forward.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Horizontal Selector/HS Forward.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Horizontal Selector/HS Previous.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Horizontal Selector/HS Previous.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Horizontal Selector/Nav Button.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Horizontal Selector/Nav Button.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Horizontal Selector/Standard H Selector.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Horizontal Selector/Standard H Selector.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Input Field.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Input Field/Fading In.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Input Field/Fading In.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Input Field/Fading.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Input Field/Fading.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Input Field/Standard In.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Input Field/Standard In.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Input Field/Standard.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Input Field/Standard.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Slider.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Slider/Slider.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Slider/Slider.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Slider/loop.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Slider/loop.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Slider/mySlider.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Slider/mySlider.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Switch.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Switch/Switch Off.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Switch/Switch Off.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Switch/Switch On.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Switch/Switch On.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Switch/Switch.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/UI Element/Switch/Switch.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Editor/ContextMenu.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Editor/ContextMenu.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Editor/ExtendedColorPicker.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Editor/ExtendedColorPicker.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Editor/InitShift.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Editor/InitShift.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Editor/UIManagerEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Editor/UIManagerEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Main Menu.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Main Menu/Main Menu (Console).unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Main Menu/Main Menu (Console).unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Main Menu/Main Menu (Cross Platform).unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Main Menu/Main Menu (Cross Platform).unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Main Menu/Main Menu (Desktop).unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Main Menu/Main Menu (Desktop).unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Main Menu/URP &amp; HDRP.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Main Menu/URP &amp; HDRP/Main Menu (Console).unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Main Menu/URP &amp; HDRP/Main Menu (Console).unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Main Menu/URP &amp; HDRP/Main Menu (Cross Platform).unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Main Menu/URP &amp; HDRP/Main Menu (Cross Platform).unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Main Menu/URP &amp; HDRP/Main Menu (Desktop).unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Main Menu/URP &amp; HDRP/Main Menu (Desktop).unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Simple HUD.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Simple HUD/Simple HUD (Console).unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Simple HUD/Simple HUD (Console).unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Simple HUD/Simple HUD (Cross Platform).unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Simple HUD/Simple HUD (Cross Platform).unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Simple HUD/Simple HUD (Desktop).unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Simple HUD/Simple HUD (Desktop).unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Simple HUD/URP &amp; HDRP.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Simple HUD/URP &amp; HDRP/Simple HUD (Console).unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Simple HUD/URP &amp; HDRP/Simple HUD (Console).unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Simple HUD/URP &amp; HDRP/Simple HUD (Cross Platform).unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Simple HUD/URP &amp; HDRP/Simple HUD (Cross Platform).unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Simple HUD/URP &amp; HDRP/Simple HUD (Desktop).unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scenes/Simple HUD/URP &amp; HDRP/Simple HUD (Desktop).unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/ChapterButton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/ChapterButton.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/FavoriteButton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/FavoriteButton.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/MainButton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/MainButton.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/MainPanelButton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/MainPanelButton.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/QuickMatchButton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/QuickMatchButton.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/SettingsButton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/SettingsButton.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/ShortcutButton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/ShortcutButton.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/SpotlightButton.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Buttons/SpotlightButton.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Event.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Event/HoldKeyEvent.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Event/HoldKeyEvent.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Event/PointerEnterEvents.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Event/PointerEnterEvents.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Event/PressKeyEvent.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Event/PressKeyEvent.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Event/TimedEvent.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Event/TimedEvent.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Fix.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Fix/LayoutGroupPositionFix.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Fix/LayoutGroupPositionFix.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Fix/UIElementInFront.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Fix/UIElementInFront.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Input.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Input/GamepadChecker.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Input/GamepadChecker.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Input/ScrollGamepadManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Input/ScrollGamepadManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Input/SliderGamepadManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Input/SliderGamepadManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Input/VirtualCursor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Input/VirtualCursor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Input/VirtualCursorAnimate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Input/VirtualCursorAnimate.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Other.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Other/CanvasManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Other/CanvasManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Other/ExitToSystem.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Other/ExitToSystem.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Other/LaunchURL.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Other/LaunchURL.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Other/QualityManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Other/QualityManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Other/ScrollForMore.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Other/ScrollForMore.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Panel.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Panel/FriendsPanelManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Panel/FriendsPanelManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Panel/MainPanelButtonParent.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Panel/MainPanelButtonParent.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Panel/MainPanelManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Panel/MainPanelManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Panel/ModalWindowManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Panel/ModalWindowManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Panel/ServerBrowserManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Panel/ServerBrowserManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Panel/SplashScreenManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Panel/SplashScreenManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Rendering.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Rendering/BlurManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Rendering/BlurManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Rendering/GradientEffect.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Rendering/GradientEffect.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Rendering/UIParticleRenderer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/Rendering/UIParticleRenderer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Element.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Element/CustomInputField.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Element/CustomInputField.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Element/HorizontalSelector.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Element/HorizontalSelector.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Element/SliderManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Element/SliderManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Element/SwitchManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Element/SwitchManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Element/UIElementSound.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Element/UIElementSound.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManagerBGMusic.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManagerBGMusic.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManagerBackground.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManagerBackground.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManagerGameLogo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManagerGameLogo.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManagerImage.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManagerImage.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManagerParticle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManagerParticle.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManagerText.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Scripts/UI Manager/UIManagerText.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Shaders.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Shaders/Fast UI Blur.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Shaders/Fast UI Blur.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Shaders/Masked UI Blur.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Shaders/Masked UI Blur.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Shaders/UI Blur.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Shaders/UI Blur.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Shaders/UI Particle Additive.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Shaders/UI Particle Additive.shader.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Finish.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Finish.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/Validation/SVCenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/Validation/SVCenter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/Validation/TheNineSlot_Validation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/Validation/TheNineSlot_Validation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/Validation/TheNineSlot_ValidationWarn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/Validation/TheNineSlot_ValidationWarn.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +412,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.analytics@4.0.1/Runtime/Runtime/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/Views/IncomingChanges/Gluon/IncomingChangesTab.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Gacha/DropTableInfoDetail.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/TheNineSlot/Validation/ConfirmBtnColorSwapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.scriptablebuildpipeline@1.19.6/Editor/Tasks/CalculateAssetDependencyData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/GUI/AddressablesGUIUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/Actions/TrackActions.cs" root0="SKIP_HIGHLIGHTING" />
@@ -150,7 +481,7 @@
       <workItem from="1672154139910" duration="528000" />
       <workItem from="1672279194912" duration="5319000" />
       <workItem from="1672293076449" duration="10408000" />
-      <workItem from="1672310789459" duration="2306000" />
+      <workItem from="1672310789459" duration="4187000" />
     </task>
     <servers />
   </component>

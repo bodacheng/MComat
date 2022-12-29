@@ -76,7 +76,7 @@ public partial class SkillEditLayer : UILayer
         {
             nineSlot.UpdateStonesBaseOnSlots(_unitInfo);
         }
-        void SkillUpdateValidation()
+        void SkillSetUpdate()
         {
             var valid = nineSlot.CheckEditBasedOnCurrent();
             if (valid != SkillSet.SkillEditError.Perfect)
@@ -90,7 +90,7 @@ public partial class SkillEditLayer : UILayer
             }
         }
         
-        nineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);
+        nineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillSetUpdate);
         nineSlot.ResetButton.onClick.AddListener(nineSlot.ResetNineSlot);
         nineSlot.removeAllBtn.onClick.AddListener(nineSlot.ClearSkillEquip);
         nineSlot.randomBtn.onClick.AddListener(FinishRemains);

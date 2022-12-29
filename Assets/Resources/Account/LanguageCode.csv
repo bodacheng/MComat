@@ -19,3 +19,4 @@ NotFull,Not Full,全てのスロットを満たしましょう,不满
 AColumnNeedNormal,AColumnNeedNormal,AColumnNeedNormal,第一列需要普通招数
 BornSkillCantRemove,BornSkillCantRemove,BornSkillCantRemove,BornSkillCantRemove
 NotLegalButStillUpdate,NotLegalButStillUpdate,技能组非法，仍然更新？,NotLegalButStillUpdate
+SKillConfirm,Confirm,確定,Confirm

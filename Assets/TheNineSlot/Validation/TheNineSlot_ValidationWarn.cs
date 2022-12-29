@@ -22,6 +22,7 @@ namespace mainMenu
         
         public void ValidationWarn(SkillSet.SkillEditError skillEditError)
         {
+            confirmBtnColorSwapper.ChangeColor(skillEditError == SkillSet.SkillEditError.Perfect ? Color.green : Color.white);
             validationWarn.gameObject.SetActive(true);
             normalSkillIndicator.gameObject.SetActive(false);
             switch(skillEditError)

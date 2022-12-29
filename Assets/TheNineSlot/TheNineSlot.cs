@@ -28,6 +28,7 @@ namespace mainMenu
         
         [Header("技能石编辑确认")]
         public Button ConfirmSkillChangeButton;
+        [SerializeField] ConfirmBtnColorSwapper confirmBtnColorSwapper;
 
         [Header("Confirm Indicator")] 
         public GameObject confirmBtnIndicator;
