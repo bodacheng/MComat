@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 4e4d2f51a03724d2782981921556d853
   m_SerializeEntries:
   - m_GUID: 5ac2ac0fac8b3754eb7617f47341594c
-    m_Address: SlotEffects/ex1
+    m_Address: SlotEffects/ex2
     m_ReadOnly: 0
     m_SerializedLabels:
     - effect
@@ -27,8 +27,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - effect
-  - m_GUID: cb138a79593be5e4a8fffe8657e60b9a
-    m_Address: SlotEffects/ex2
+  - m_GUID: 9474b6c41563310429b735a9c0cceb49
+    m_Address: SlotEffects/ex1
     m_ReadOnly: 0
     m_SerializedLabels:
     - effect

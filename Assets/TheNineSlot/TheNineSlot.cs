@@ -161,10 +161,10 @@ namespace mainMenu
         public bool NineSlotsStatusRefresh()
         {
             var full = true;
-            foreach (var _slot in allSlot)
+            foreach (var slot in allSlot)
             {
-                _slot._cell.UpdateMyItem();
-                if (_slot._cell.GetItem() == null)
+                slot._cell.UpdateMyItem();
+                if (slot._cell.GetItem() == null)
                 {
                     full = false;
                 }
@@ -178,22 +178,22 @@ namespace mainMenu
             
             ShowNineSlotExSurplus(wholePoint);
             RefreshCurrentHpBasedOnNineSlots();
-            RefreshNineSlotColors();
+            RefreshEffects();
             var valR = ValidateWarn();
             //ConfirmSkillChangeButton.gameObject.SetActive(valR == SkillSet.SkillEditError.Perfect);
             return full;
         }
         
-         async void RefreshNineSlotColors()
+         async void RefreshEffects()
          {
-             foreach (var _slot in allSlot)
+             foreach (var slot in allSlot)
             {
-                var item = _slot._cell.GetItem();
+                var item = slot._cell.GetItem();
                 await Task.Delay(1);// wait for the UI Layer to be stable.Otherwise pos caculation will be wrong at the start
-                if (_slot != null && _slot._cell != null)
+                if (slot != null && slot._cell != null)
                 {
-                    var worldPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, _slot._cell.GetComponent<RectTransform>(), 5f);
-                    _tabEffects.RefreshSlotEffect(_slot.num, worldPos, item != null ? item._SkillConfig.SP_LEVEL : -1);
+                    var worldPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, slot._cell.GetComponent<RectTransform>(), 5f);
+                    _tabEffects.RefreshSlotEffect(slot.num, worldPos, item != null ? item._SkillConfig.SP_LEVEL : -1);
                 }
             }
          }

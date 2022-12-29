@@ -25,7 +25,7 @@ namespace mainMenu
                 var usingPosInt = int.Parse(equipments[i].Slot);
                 if (equipments[i].InstanceId != null)
                 {
-                    allSlot[usingPosInt - 1].TakeASkillStoneFromBoxToSlot(equipments[i].InstanceId, Color.white);
+                    allSlot[usingPosInt - 1].TakeASkillStoneFromBoxToSlot(equipments[i].InstanceId);
                 }
                 allSlot[usingPosInt - 1]._cell.UpdateMyItem();
             }

@@ -30,7 +30,7 @@ namespace mainMenu
             C2DragAndDropCell.UpdateMyItem();
             C3DragAndDropCell.UpdateMyItem();
             
-            var IDs = new List<string>();
+            var instanceIds = new List<string>();
             var A1 = A1DragAndDropCell.GetItem()?.instanceId;
             var A2 = A2DragAndDropCell.GetItem()?.instanceId;
             var A3 = A3DragAndDropCell.GetItem()?.instanceId;
@@ -42,24 +42,24 @@ namespace mainMenu
             var C3 = C3DragAndDropCell.GetItem()?.instanceId;
             
             if (A1 != null)
-                IDs.Add(A1);
+                instanceIds.Add(A1);
             if (A2 != null)
-                IDs.Add(A2);
+                instanceIds.Add(A2);
             if (A3 != null)
-                IDs.Add(A3);
+                instanceIds.Add(A3);
             if (B1 != null)
-                IDs.Add(B1);
+                instanceIds.Add(B1);
             if (B2 != null)
-                IDs.Add(B2);
+                instanceIds.Add(B2);
             if (B3 != null)
-                IDs.Add(B3);
+                instanceIds.Add(B3);
             if (C1 != null)
-                IDs.Add(C1);
+                instanceIds.Add(C1);
             if (C2 != null)
-                IDs.Add(C2);
+                instanceIds.Add(C2);
             if (C3 != null)
-                IDs.Add(C3);
-            return IDs;
+                instanceIds.Add(C3);
+            return instanceIds;
         }
 
         public SkillSet GetCurrentNineAndTwo()
@@ -91,7 +91,7 @@ namespace mainMenu
         // 返回的是技能定义ID，长度固定为9
         public List<string> GetCurrentNineSlotAllSkillIds()
         {
-            var NineSkillIDs = new List<string>();
+            var nineSkillIDs = new List<string>();
             var A1 = A1DragAndDropCell.GetItem() != null ? A1DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
             var A2 = A2DragAndDropCell.GetItem() != null ? A2DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
             var A3 = A3DragAndDropCell.GetItem() != null ? A3DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
@@ -102,16 +102,16 @@ namespace mainMenu
             var C2 = C2DragAndDropCell.GetItem() != null ? C2DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
             var C3 = C3DragAndDropCell.GetItem() != null ? C3DragAndDropCell.GetItem()._SkillConfig.RECORD_ID : "-1";
             
-            NineSkillIDs.Add(A1);
-            NineSkillIDs.Add(A2);
-            NineSkillIDs.Add(A3);
-            NineSkillIDs.Add(B1);
-            NineSkillIDs.Add(B2);
-            NineSkillIDs.Add(B3);
-            NineSkillIDs.Add(C1);
-            NineSkillIDs.Add(C2);
-            NineSkillIDs.Add(C3);
-            return NineSkillIDs;
+            nineSkillIDs.Add(A1);
+            nineSkillIDs.Add(A2);
+            nineSkillIDs.Add(A3);
+            nineSkillIDs.Add(B1);
+            nineSkillIDs.Add(B2);
+            nineSkillIDs.Add(B3);
+            nineSkillIDs.Add(C1);
+            nineSkillIDs.Add(C2);
+            nineSkillIDs.Add(C3);
+            return nineSkillIDs;
         }
         
         void ShowNineSlotExSurplus(int wholePoint)
@@ -145,7 +145,7 @@ namespace mainMenu
             }
             
             float temp = tempCount / (float)burdenCharges.Count;
-            overHeatBar.gameObject.SetActive(tempCount > 0);
+            //overHeatBar.gameObject.SetActive(tempCount > 0);
             overHeatBar.value = temp;
         }
 

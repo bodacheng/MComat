@@ -3,18 +3,28 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/SlotEffects.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/SlotEffects.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementStoneTagsGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementStoneTagsGroup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/AutoEdit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/AutoEdit.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/SkillEditPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/SkillEditPage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex1.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex1.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex2.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex2.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/normal.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GUI Kit - Matt Metal/Prefabs/Prefabs_Component_Sliders/Slider_IconType_Purple.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GUI Kit - Matt Metal/Prefabs/Prefabs_Component_Sliders/Slider_IconType_Purple.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/BG.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/BG.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_16.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_16.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_7.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_7.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SkillEditLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SkillEditLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SimpleDragAndDrop/Scripts/Cell/StoneCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimpleDragAndDrop/Scripts/Cell/StoneCell.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SkillStoneBox/SkillStonesBox_Cells.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SkillStoneBox/SkillStonesBox_Cells.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_ConfirmEdit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_ConfirmEdit.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Slider/mySlider.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Slider/mySlider.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/SkillStoneSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/SkillStoneSlot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Read.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Read.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Watch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Watch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/Validation/SVCenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/Validation/SVCenter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/SkillEditTry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/SkillEditTry.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/UnitBox/SkillStoneBoxTabEffectsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UnitBox/SkillStoneBoxTabEffectsManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
     </list>
@@ -54,6 +64,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/RenderGraph/RenderGraphResourcePool.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/ArenaBtnEffect.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Drawing/MaterialGraphEditWindow.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/Views/PendingChanges/PendingChangesTab.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4379fcb5ffcd422abdabe963856ef06326000/3a/2299bfc9/DOTween.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFab/Client/LinkAccount.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ads@3.7.5/Editor/Parser/SkAdNetworkJsonParser.cs" root0="SKIP_HIGHLIGHTING" />
@@ -149,7 +160,7 @@
       <workItem from="1672124813834" duration="7791000" />
       <workItem from="1672154139910" duration="528000" />
       <workItem from="1672279194912" duration="5319000" />
-      <workItem from="1672293076449" duration="2474000" />
+      <workItem from="1672293076449" duration="7073000" />
     </task>
     <servers />
   </component>

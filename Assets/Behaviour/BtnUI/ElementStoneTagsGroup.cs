@@ -98,7 +98,7 @@ public class ElementStoneTagsGroup
         _btnPressedEffects.Add(3, triggerExplosion3);
     }
     
-    public void RefreshSTBoxEffects(int eX, Vector3 pos)
+    public void RefreshBoxEffects(int eX, Vector3 pos)
     {
         if (_exTagEffects.ContainsKey(eX))
             return;
@@ -113,7 +113,7 @@ public class ElementStoneTagsGroup
     {
         if (_slotEffects.ContainsKey(slotNum) && _slotEffects[slotNum] != null)
         {
-            GameObject.Destroy(_slotEffects[slotNum].gameObject);
+            Object.Destroy(_slotEffects[slotNum].gameObject);
         }
         
         if (!_btnEffectsSetsForStoneBox.ContainsKey(eX)) return;

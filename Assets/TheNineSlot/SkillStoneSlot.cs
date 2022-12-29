@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using dataAccess;
 
 // 编辑技能的两种模式，归根结底是9宫格自身的两种模式，即SkillStoneSlot的两种模式。
@@ -20,17 +19,14 @@ public class SkillStoneSlot
         this._cell = cell;
     }
 
-    public void TakeASkillStoneFromBoxToSlot(string stoneOfPlayerID, Color itemColor)
+    public void TakeASkillStoneFromBoxToSlot(string instanceID)
     {
-        SKStoneItem stoneModel = Stones.GetRenderModel(stoneOfPlayerID);
+        var stoneModel = Stones.GetRenderModel(instanceID);
         if (stoneModel == null)
         {
-            Debug.Log("wrong...");
+            Debug.Log("Cant find stone model. InstanceID:"+ instanceID);
             return;
         }
-
-        stoneModel.GetComponent<Image>().color = itemColor;
-        _cell.GetComponent<Image>().color = stoneModel._SkillConfig.SP_LEVEL == 0 ? new Color(0, 1, 1, 1f) : new Color(1, 0, 0, 1f);
         _cell.AddItem(stoneModel);
     }
 }
