@@ -1777,9 +1777,6 @@ MonoBehaviour:
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
-  image: {fileID: 2939606698515467328}
-  empty: {r: 0, g: 0, b: 0, a: 0}
-  full: {r: 0, g: 0, b: 0, a: 0}
   level: {fileID: 0}
 --- !u!114 &8488526340663131745
 MonoBehaviour:
@@ -3013,9 +3010,6 @@ MonoBehaviour:
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
-  image: {fileID: 5332814954699940297}
-  empty: {r: 0, g: 0, b: 0, a: 0}
-  full: {r: 0, g: 0, b: 0, a: 0}
   level: {fileID: 0}
 --- !u!114 &3940050818239514970
 MonoBehaviour:
@@ -4524,7 +4518,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 09f5f6f2c59fdf2449740899f95946b9, type: 3}
+    m_Font: {fileID: 12800000, guid: bf882ea178a999648a63680a4a04ac5d, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
@@ -6326,7 +6320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _HP: {fileID: 7418582878372443952}
-  _ValiWarn: {fileID: 3687525846662268692}
+  validationWarn: {fileID: 3687525846662268692}
   A1DragAndDropCell: {fileID: 2523835563764239828}
   A2DragAndDropCell: {fileID: 7562399722062069366}
   A3DragAndDropCell: {fileID: 4477315994927111599}
@@ -6540,9 +6534,6 @@ MonoBehaviour:
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
-  image: {fileID: 2523835563764239830}
-  empty: {r: 0, g: 0, b: 0, a: 0}
-  full: {r: 0, g: 0, b: 0, a: 0}
   level: {fileID: 0}
 --- !u!114 &4007072832368222597
 MonoBehaviour:
@@ -11459,9 +11450,6 @@ MonoBehaviour:
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
-  image: {fileID: 6843261364516246474}
-  empty: {r: 0, g: 0, b: 0, a: 0}
-  full: {r: 0, g: 0, b: 0, a: 0}
   level: {fileID: 0}
 --- !u!114 &4478077552881733570
 MonoBehaviour:
@@ -13704,9 +13692,6 @@ MonoBehaviour:
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
-  image: {fileID: 3201983781798700702}
-  empty: {r: 0, g: 0, b: 0, a: 0}
-  full: {r: 0, g: 0, b: 0, a: 0}
   level: {fileID: 0}
 --- !u!114 &1049461083118735842
 MonoBehaviour:
@@ -14319,9 +14304,6 @@ MonoBehaviour:
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
-  image: {fileID: 8656016554220128063}
-  empty: {r: 0, g: 0, b: 0, a: 0}
-  full: {r: 0, g: 0, b: 0, a: 0}
   level: {fileID: 0}
 --- !u!114 &731724822284198417
 MonoBehaviour:
@@ -19147,9 +19129,6 @@ MonoBehaviour:
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
-  image: {fileID: 2866693792167376384}
-  empty: {r: 0, g: 0, b: 0, a: 0}
-  full: {r: 0, g: 0, b: 0, a: 0}
   level: {fileID: 0}
 --- !u!114 &390182266117222212
 MonoBehaviour:
@@ -21896,9 +21875,6 @@ MonoBehaviour:
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
-  image: {fileID: 1134469102460445933}
-  empty: {r: 0, g: 0, b: 0, a: 0}
-  full: {r: 0, g: 0, b: 0, a: 0}
   level: {fileID: 0}
 --- !u!114 &1993869217285259994
 MonoBehaviour:
@@ -22172,9 +22148,6 @@ MonoBehaviour:
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 1
-  image: {fileID: 2637365885238537892}
-  empty: {r: 0, g: 0, b: 0, a: 0}
-  full: {r: 0, g: 0, b: 0, a: 0}
   level: {fileID: 0}
 --- !u!114 &4071043431009893345
 MonoBehaviour:

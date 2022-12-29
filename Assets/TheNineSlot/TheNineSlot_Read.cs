@@ -29,7 +29,6 @@ namespace mainMenu
                 }
                 allSlot[usingPosInt - 1]._cell.UpdateMyItem();
             }
-            
             NineSlotsStatusRefresh();
         }
         

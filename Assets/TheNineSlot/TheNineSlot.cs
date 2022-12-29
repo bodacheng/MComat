@@ -12,7 +12,7 @@ namespace mainMenu
         [SerializeField] Text _HP;
         
         [Header("Validation Warning")]
-        [SerializeField] Text _ValiWarn;
+        [SerializeField] Text validationWarn;
         
         [Header("九格")]
         [SerializeField] StoneCell
@@ -43,7 +43,7 @@ namespace mainMenu
         public Slider overHeatBar;
         
         [Header("选中框")]
-        public GameObject SelectedFrame;
+        [SerializeField] GameObject SelectedFrame;
         
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _tabEffects;

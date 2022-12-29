@@ -16,25 +16,25 @@ namespace mainMenu
         
         public void ValidationWarn(SkillSet.SkillEditError skillEditError)
         {
-            _ValiWarn.gameObject.SetActive(true);
+            validationWarn.gameObject.SetActive(true);
             normalSkillIndicator.gameObject.SetActive(false);
             switch(skillEditError)
             {
                 case SkillSet.SkillEditError.RepeatedSkill:
-                    _ValiWarn.text = "不可装备相同技能！";
+                    validationWarn.text = "不可装备相同技能！";
                 break;
                 case SkillSet.SkillEditError.UnBalanced:
-                    _ValiWarn.text = "技能点数失衡";
+                    validationWarn.text = "技能点数失衡";
                 break;
                 case SkillSet.SkillEditError.NoNormalStart:
                     normalSkillIndicator.gameObject.SetActive(true);
-                    _ValiWarn.text = "第一竖列必须有一个普通技能！";// 这地方最好配合个显示特效
+                    validationWarn.text = "第一竖列必须有一个普通技能！";// 这地方最好配合个显示特效
                     break;
                 case SkillSet.SkillEditError.NotFull:
-                    _ValiWarn.text = "全てのスロットを満たしましょう！";
+                    validationWarn.text = "全てのスロットを満たしましょう！";
                     break;
                 case SkillSet.SkillEditError.Perfect:
-                    _ValiWarn.gameObject.SetActive(false);
+                    validationWarn.gameObject.SetActive(false);
                     break;
             }
         }
