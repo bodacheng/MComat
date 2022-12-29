@@ -39,6 +39,11 @@ namespace mainMenu
             get;
             set;
         }
+
+        public void TriggerNormalTab()
+        {
+            NormalTab.onClick.Invoke();
+        }
         
         // 功能系。刷新技能石陈列界面。这里应该包括一个特殊功能，就是展示Tutorial模式下临时可用的那些石头
         public void FilterFeatureRefresh(bool viewingMode)

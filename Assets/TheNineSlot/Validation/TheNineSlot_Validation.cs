@@ -15,44 +15,44 @@ namespace mainMenu
         }
         
         // 基于角色存档对技能编辑进行合法判断. 必须接受完整validation检测
-        public SkillSet.SkillEditError CheckEditAfterOneStoneRemoved(string unitInstanceID, string SkillID)
+        public SkillSet.SkillEditError CheckEditAfterOneStoneRemoved(string unitInstanceID, string skillID)
         {
             var equipped = Stones.GetEquippingStones(unitInstanceID);
-            string A1 = null, A2 = null, A3 = null, B1 = null, B2 = null, B3 = null, C1 = null, C2 = null, C3 = null;
+            string a1 = null, a2 = null, a3 = null, b1 = null, b2 = null, b3 = null, c1 = null, c2 = null, c3 = null;
             foreach (var t in equipped)
             {
                 switch (t.Slot)
                 {
                     case "1":
-                        A1 = (t.SkillId != SkillID) ? t.SkillId : "-1";
+                        a1 = (t.SkillId != skillID) ? t.SkillId : "-1";
                         break;
                     case "2":
-                        A2 = (t.SkillId != SkillID) ? t.SkillId : "-1";
+                        a2 = (t.SkillId != skillID) ? t.SkillId : "-1";
                         break;
                     case "3":
-                        A3 = (t.SkillId != SkillID) ? t.SkillId : "-1";
+                        a3 = (t.SkillId != skillID) ? t.SkillId : "-1";
                         break;
                     case "4":
-                        B1 = (t.SkillId != SkillID) ? t.SkillId : "-1";
+                        b1 = (t.SkillId != skillID) ? t.SkillId : "-1";
                         break;
                     case "5":
-                        B2 = (t.SkillId != SkillID) ? t.SkillId : "-1";
+                        b2 = (t.SkillId != skillID) ? t.SkillId : "-1";
                         break;
                     case "6":
-                        B3 = (t.SkillId != SkillID) ? t.SkillId : "-1";
+                        b3 = (t.SkillId != skillID) ? t.SkillId : "-1";
                         break;
                     case "7":
-                        C1 = (t.SkillId != SkillID) ? t.SkillId : "-1";
+                        c1 = (t.SkillId != skillID) ? t.SkillId : "-1";
                         break;
                     case "8":
-                        C2 = (t.SkillId != SkillID) ? t.SkillId : "-1";
+                        c2 = (t.SkillId != skillID) ? t.SkillId : "-1";
                         break;
                     case "9":
-                        C3 = (t.SkillId != SkillID) ? t.SkillId : "-1";
+                        c3 = (t.SkillId != skillID) ? t.SkillId : "-1";
                         break;
                 }
             }
-            return SkillSet.CheckEdit(A1, A2, A3, B1, B2, B3, C1, C2, C3);
+            return SkillSet.CheckEdit(a1, a2, a3, b1, b2, b3, c1, c2, c3);
         }
     }
 }

@@ -30,6 +30,7 @@ public partial class SkillEditLayer : UILayer
         stonesBox.GenerateCells(9);
         gameObject.SetActive(false);
         nineSlot.PrintSkillInfo = skillStoneDetail.RefreshInfo;
+        nineSlot.plsTryNormalSkill = stonesBox.TriggerNormalTab;
         nineSlot.StartUp((x) =>
             {
                 connector.SkillShowRunWithPrepare(x).Forget();
@@ -77,23 +78,16 @@ public partial class SkillEditLayer : UILayer
         }
         void SkillUpdateValidation()
         {
-            if (nineSlot.CheckEditBasedOnCurrent() != SkillSet.SkillEditError.Perfect)
+            var valid = nineSlot.CheckEditBasedOnCurrent();
+            if (valid != SkillSet.SkillEditError.Perfect)
             {
-                // 可以更新但不能上场
-                //return;
+                // 比如想给角色卸载全部技能的时候，虽然全部卸载后不能再战斗但是需要更新。
+                PopupLayer.ArrangeConfirmWindow(SkillEditConfirm, Translate.Get("NotLegalButStillUpdate"));
             }
-            
-            string warn;
-            switch (AppSetting.Language)
+            else
             {
-                case ApiLanguage.JaJp:
-                    warn = "選択したスキルストーンでユニットの技を更新しますか？";
-                break;
-                default:
-                    warn = "确实要进行技能更新？";
-                break;
+                SkillEditConfirm();
             }
-            PopupLayer.ArrangeConfirmWindow(SkillEditConfirm, warn);
         }
         
         nineSlot.ConfirmSkillChangeButton.onClick.AddListener(SkillUpdateValidation);

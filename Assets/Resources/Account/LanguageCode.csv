@@ -1,4 +1,4 @@
-RECORD_ID,EN,JP,CH
+NoEnoughStoneToFill,EN,JP,CH
 Front,Front,ホール,大厅
 Arcade,Arcade,クエスト,探险
 illegalword,illegal words,使用できない単語が含んでる,监测到非法字符
@@ -12,3 +12,10 @@ fill9Slots,Fill Nine Slots,"戦士の技を自由に装備、編集する画面�
 InvalidUsername,Invalid Username,Invalid Username,Invalid Username
 DuplicateUsername,Duplicate Username,Duplicate Username,Duplicate Username
 InvalidUsername,Invalid Username,使用できない単語が含んでる,监测到非法字符
+NoEnoughStoneToFill,No Enough Stones,No Enough Stones,技能石不足
+UnBalanced,Too much sp skill. Try use normal skill to balance your skill set,Too much sp skill. Try use normal skill to balance your skill set,必杀技过多
+CantEquipSameSkill,Cant Equip Same Skill,Cant Equip Same Skill,Cant Equip Same Skill
+NotFull,Not Full,全てのスロットを満たしましょう,不满
+AColumnNeedNormal,AColumnNeedNormal,AColumnNeedNormal,第一列需要普通招数
+BornSkillCantRemove,BornSkillCantRemove,BornSkillCantRemove,BornSkillCantRemove
+NotLegalButStillUpdate,NotLegalButStillUpdate,技能组非法，仍然更新？,NotLegalButStillUpdate

@@ -3,30 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/SlotEffects.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/SlotEffects.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementStoneTagsGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementStoneTagsGroup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex1.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex1.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex2.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex2.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/ex3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects/normal.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GUI Kit - Matt Metal/Prefabs/Prefabs_Component_Sliders/Slider_IconType_Purple.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GUI Kit - Matt Metal/Prefabs/Prefabs_Component_Sliders/Slider_IconType_Purple.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/BG.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/BG.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_16.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_16.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_7.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_7.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SkillEditLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SkillEditLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Slider/mySlider.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Slider/mySlider.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/SkillStoneSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/SkillStoneSlot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/Soul/SkillSet/SkillSet_Validation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/Soul/SkillSet/SkillSet_Validation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/AutoEdit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/AutoEdit.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillEditLayer/SkillEditLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/LanguageCode.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Account/LanguageCode.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SkillStoneBox/SkillStonesBox.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SkillStoneBox/SkillStonesBox.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Read.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Read.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Watch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Watch.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UnitBox/SkillStoneBoxTabEffectsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UnitBox/SkillStoneBoxTabEffectsManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Finish.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Finish.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/Validation/SVCenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/Validation/SVCenter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/Validation/TheNineSlot_Validation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/Validation/TheNineSlot_Validation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/Validation/TheNineSlot_ValidationWarn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/Validation/TheNineSlot_ValidationWarn.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +149,8 @@
       <workItem from="1672124813834" duration="7791000" />
       <workItem from="1672154139910" duration="528000" />
       <workItem from="1672279194912" duration="5319000" />
-      <workItem from="1672293076449" duration="7073000" />
+      <workItem from="1672293076449" duration="10408000" />
+      <workItem from="1672310789459" duration="2306000" />
     </task>
     <servers />
   </component>

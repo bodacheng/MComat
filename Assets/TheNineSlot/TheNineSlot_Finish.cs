@@ -10,7 +10,6 @@ public partial class SkillSet
         var skillSet = SkillSetRandomFix(type, originSkillSet, 1, baseOnAcc);
         if (skillSet == null)
         {
-            Debug.Log("无法根据现在的技能石安排合法补全九宫格");
             return null;
         }
         
@@ -68,9 +67,9 @@ public partial class SkillSet
         if (targetSlot == 7)
         {
             // 第一列技能必须有普通技能
-            var A1skillConfig = SkillConfigTable.GetSkillConfig(_skillSet.a1);
-            var B1skillConfig = SkillConfigTable.GetSkillConfig(_skillSet.b1);
-            if (A1skillConfig.SP_LEVEL != 0 && B1skillConfig.SP_LEVEL != 0)
+            var a1SkillConfig = SkillConfigTable.GetSkillConfig(_skillSet.a1);
+            var b1SkillConfig = SkillConfigTable.GetSkillConfig(_skillSet.b1);
+            if (a1SkillConfig.SP_LEVEL != 0 && b1SkillConfig.SP_LEVEL != 0)
             {
                 filterForm = new SkillStonesBox.StoneFilterForm
                 {

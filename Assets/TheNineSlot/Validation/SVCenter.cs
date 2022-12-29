@@ -13,7 +13,7 @@ public static class SVCenter
             var stone = sourceCell.GetItem();
             if (stone != null && stone.Inherent)
             {
-                Debug.Log("固有技能无法移出，返回");
+                PopupLayer.ArrangeWarnWindow(Translate.Get("BornSkillCantRemove"));
                 return;
             }
             
@@ -127,6 +127,12 @@ public static class SVCenter
                         return;
                     }
                 }
+
+                if (toItem.Inherent)
+                {
+                    PopupLayer.ArrangeWarnWindow(Translate.Get("BornSkillCantRemove"));
+                    return;
+                }
             }
             
             // 从技能石盒子取出的石头安装到技能槽，要看如果这个技能石被其他角色使用中的话，那个角色会不会有问题
@@ -143,7 +149,7 @@ public static class SVCenter
             var stone = to.GetItem();
             if (stone.Inherent)
             {
-                Debug.Log("固有技能无法移出，返回");
+                PopupLayer.ArrangeWarnWindow(Translate.Get("BornSkillCantRemove"));
                 return;
             }
         }
@@ -199,7 +205,7 @@ public static class SVCenter
         var skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
         if (item.Inherent)
         {
-            Debug.Log("固有技能无法移出，返回");
+            PopupLayer.ArrangeWarnWindow(Translate.Get("BornSkillCantRemove"));
             return false;
         }
         if (dataAccess.Units.CheckExist(Stones.Get(item.instanceId).UnitInstanceId))

@@ -10,6 +10,12 @@ namespace mainMenu
         {
             // 第一列技能必须有普通技能
             var valR = CheckEditBasedOnCurrent();
+            if (valR == SkillSet.SkillEditError.UnBalanced)
+            {
+                // Click NormalTab For User
+                plsTryNormalSkill.Invoke();
+            }
+            
             ValidationWarn(valR);
             return valR;
         }
@@ -21,17 +27,17 @@ namespace mainMenu
             switch(skillEditError)
             {
                 case SkillSet.SkillEditError.RepeatedSkill:
-                    validationWarn.text = "不可装备相同技能！";
+                    validationWarn.text = Translate.Get("CantEquipSameSkill");
                 break;
                 case SkillSet.SkillEditError.UnBalanced:
-                    validationWarn.text = "技能点数失衡";
+                    validationWarn.text = Translate.Get("UnBalanced");
                 break;
                 case SkillSet.SkillEditError.NoNormalStart:
                     normalSkillIndicator.gameObject.SetActive(true);
-                    validationWarn.text = "第一竖列必须有一个普通技能！";// 这地方最好配合个显示特效
+                    validationWarn.text = Translate.Get("AColumnNeedNormal");
                     break;
                 case SkillSet.SkillEditError.NotFull:
-                    validationWarn.text = "全てのスロットを満たしましょう！";
+                    validationWarn.text = Translate.Get("NotFull");//"全てのスロットを満たしましょう！";
                     break;
                 case SkillSet.SkillEditError.Perfect:
                     validationWarn.gameObject.SetActive(false);

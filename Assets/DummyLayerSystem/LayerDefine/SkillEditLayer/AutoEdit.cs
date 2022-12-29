@@ -15,6 +15,7 @@ public partial class SkillEditLayer : UILayer
         if (targetSkillSet == null)
         {
             // 这里必须有某些其他处理（比如不让按钮显示？）
+            PopupLayer.ArrangeWarnWindow(Translate.Get("NoEnoughStoneToFill"));
         }
         else
         {

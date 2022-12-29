@@ -55,6 +55,7 @@ namespace mainMenu
         public readonly List<SkillStoneSlot> allSlot = new();
 
         public Action<string> PrintSkillInfo;
+        public Action plsTryNormalSkill;
         
         void SelectedRender(StoneCell cell)
         {
