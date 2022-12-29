@@ -61,6 +61,10 @@ namespace ModelView
             PreScene.target.CameraStackToPostProcess(eCamera);
             PreScene.target.CameraStackToNonePostProcess(camera);
             
+            // 初始化工作全部完成后才启用相机，否则会在之前造成黑屏
+            camera.gameObject.SetActive(true);
+            eCamera.gameObject.SetActive(true);
+            
             if (!this.fixMode)
                 _basicOrthographicSize = CalMaxOrthographicSize();
         }
