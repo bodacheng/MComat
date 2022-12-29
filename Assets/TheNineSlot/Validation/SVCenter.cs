@@ -69,7 +69,7 @@ public static class SVCenter
             if (currentSkillIds.Contains(item._SkillConfig.RECORD_ID))
             {
                 // 不可出现相同技能
-                layer.nineSlot.ValidationWarn(SkillSet.SkillEditError.RepeatedSkill);
+                PopupLayer.ArrangeWarnWindow(Translate.Get("CantEquipSameSkill"));
                 return;
             }
             
@@ -109,7 +109,7 @@ public static class SVCenter
             var info = Stones.Get(fromItem.instanceId);
             if (dataAccess.Units.Get(info.UnitInstanceId) != null)
             {
-                PopupLayer.ArrangeWarnWindow("其他角色正在装备中！");
+                PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get("OtherUnitUsing"), dataAccess.Units.Get(info.UnitInstanceId).r_id);
                 return;
             }
             
@@ -123,7 +123,7 @@ public static class SVCenter
                     if (currentSkillIds.Contains(fromItem._SkillConfig.RECORD_ID))
                     {
                         // 不可出现相同技能
-                        skillEditLayer.nineSlot.ValidationWarn(SkillSet.SkillEditError.RepeatedSkill);
+                        PopupLayer.ArrangeWarnWindow(Translate.Get("CantEquipSameSkill"));
                         return;
                     }
                 }

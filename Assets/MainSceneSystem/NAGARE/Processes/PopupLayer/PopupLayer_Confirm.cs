@@ -31,9 +31,9 @@ public partial class PopupLayer : UILayer
         layer.YesButton.onClick.AddListener(Close);
     }
     
-    public static void ArrangeWarnWindowUnitIcon(string intro, string unit_RecordId)
+    public static void ArrangeWarnWindowUnitIcon(string intro, string unitRecordId)
     {
-        var unitConfig = Units.GetUnitConfig(unit_RecordId);
+        var unitConfig = Units.GetUnitConfig(unitRecordId);
         if (unitConfig == null)
         {
             return;
@@ -42,7 +42,6 @@ public partial class PopupLayer : UILayer
         var layer = UILayerLoader.Load<PopupLayer>(true);
         layer.unitIcon.ChangeIcon(unitConfig.RECORD_ID);
         layer.unitIcon.gameObject.SetActive(true);
-        
         layer.bigCurtain.color = windowBgColor;
         layer.ValidationWindow.gameObject.SetActive(true);
         
