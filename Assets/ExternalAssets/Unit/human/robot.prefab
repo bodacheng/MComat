@@ -51290,19 +51290,15 @@ MonoBehaviour:
   CurrentSKillEntity:
     SkillID: 
     REAL_NAME: 
-    LEVEL: 0
     StateType: 0
     AT: 0
     HP: 0
     CasualTo: []
-    CANBECANCELLEDTO: 1
+    CAN_BE_CANCELLED_TO: 1
     EnterInput: -1
     ExitInput: -1
     SP_LEVEL: 0
-    RARITY_LEVEL: 0
     ForcedTransitions: []
-  ConditionAndRespondPriority:
-    _SerializableSets: []
   AllConditionCodes: []
   optionsForButtonRefresh: []
   AI_States_path: 

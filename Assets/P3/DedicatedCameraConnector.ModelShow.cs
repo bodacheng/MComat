@@ -76,12 +76,12 @@ namespace ModelView
             focusingC._ShaderManager.FlatColorForAShortTime(Color.black, 0f, 1f);
             _model = focusingC.WholeT.gameObject;
             _model.SetActive(true);
-
+            
             await UniTask.DelayFrame(5);// 否则Unity对mesh的尺寸计算有错误。算是Unity的bug
-
+            
             if (_model != null)
             {
-                Initialize(false,_model.transform, transform, PreScene.target.postProcessCamera, PreScene.target.noPostProcessCamera);
+                Initialize(false,_model.transform, transform);
                 ItemDetailStartDirection(0,0,0);
             }
         }

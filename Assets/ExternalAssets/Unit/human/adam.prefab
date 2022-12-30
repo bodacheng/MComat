@@ -16261,8 +16261,6 @@ MonoBehaviour:
     ExitInput: -1
     SP_LEVEL: 0
     ForcedTransitions: []
-  ConditionAndRespondPriority:
-    _SerializableSets: []
   AllConditionCodes: []
   optionsForButtonRefresh: []
   AI_States_path: 

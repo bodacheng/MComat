@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using mainMenu;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 namespace ModelView
 {
@@ -10,14 +9,14 @@ namespace ModelView
         [SerializeField] private Transform target;
         [SerializeField] private Camera camera;
         [SerializeField] private Camera eCamera;
-        [SerializeField] private float UpDownRotateRangeMin = -10;
-        [SerializeField] private float UpDownRotateRangeMax = 45;
+        [SerializeField] private float upDownRotateRangeMin = -10;
+        [SerializeField] private float upDownRotateRangeMax = 45;
         [SerializeField] private float rotateSpeed = 90;
-        [SerializeField] private float extraZDis = 0;
+        [SerializeField] private float extraZDis;
         [SerializeField] private float extraZCameraDepth = 5f;
-        private readonly Bounds tempBoundary = new ();
-        private RectTransform rect;
-        private bool fixMode;
+        private readonly Bounds _tempBoundary = new ();
+        private RectTransform _rect;
+        private bool _fixMode;
         
         public void Clear()
         {
@@ -34,10 +33,10 @@ namespace ModelView
                 DestroyImmediate(target.gameObject);
         }
         
-        void Initialize(bool fixMode, Transform focus, Transform camerasHolder = null, Camera postProcessParent = null, Camera nonePostProcessParent = null)
+        void Initialize(bool fixMode, Transform focus, Transform camerasHolder = null)
         {
-            this.fixMode = fixMode;
-            rect = transform.GetComponent<RectTransform>();
+            _fixMode = fixMode;
+            _rect = transform.GetComponent<RectTransform>();
             target = focus;
             target.SetParent(transform);
             _parentNodeRenderer = target.GetComponent<Renderer>();
@@ -51,9 +50,8 @@ namespace ModelView
                 }
             }
             
-            wid = rect.rect.width;
-            hei = rect.rect.height;
-
+            wid = _rect.rect.width;
+            hei = _rect.rect.height;
             
             camera.transform.SetParent(camerasHolder);
             eCamera.transform.SetParent(camerasHolder);
@@ -65,7 +63,7 @@ namespace ModelView
             camera.gameObject.SetActive(true);
             eCamera.gameObject.SetActive(true);
             
-            if (!this.fixMode)
+            if (!this._fixMode)
                 _basicOrthographicSize = CalMaxOrthographicSize();
         }
 
@@ -86,7 +84,7 @@ namespace ModelView
         void CameraPositionCal()
         {
             // 合成Bounds計算
-            _targetBounds = tempBoundary;
+            _targetBounds = _tempBoundary;
             if (_parentNodeRenderer != null)
             {
                 _targetBounds = _parentNodeRenderer.bounds;
@@ -97,7 +95,7 @@ namespace ModelView
                 if (render == null)
                     continue; 
 
-                if (_targetBounds == tempBoundary)
+                if (_targetBounds == _tempBoundary)
                 {
                     _targetBounds = render.bounds;
                 }
@@ -107,22 +105,21 @@ namespace ModelView
                 }
             }
             
-            if (fixMode)
+            if (_fixMode)
             {
                 _basicOrthographicSize = Mathf.Max(_targetBounds.extents.x, _targetBounds.extents.y);
             }
             
-            var viewCenter = GetCenterPosition(rect);
-
-            void CameraTreat(Camera camera)
+            var viewCenter = GetCenterPosition(_rect);
+            void CameraTreat(Camera _camera)
             {
-                camera.orthographicSize = _basicOrthographicSize * (Screen.height / rect.rect.height);
-                var cViewWidth = camera.orthographicSize * 2 * camera.aspect;
-                var cViewHeight = camera.orthographicSize * 2;
-                camera.transform.position = _targetBounds.center + Vector3.forward * (_targetBounds.extents.z + extraZDis)
-                                                                 + (0.5f -　((float)viewCenter.x / Screen.width)) * cViewWidth * camera.transform.right 
-                                                                 + (0.5f - ((float)viewCenter.y / Screen.height)) * cViewHeight * Vector3.up;
-                camera.farClipPlane = _targetBounds.extents.z * 2 + extraZDis + extraZCameraDepth;
+                _camera.orthographicSize = _basicOrthographicSize * (Screen.height / _rect.rect.height);
+                var cViewWidth = _camera.orthographicSize * 2 * _camera.aspect;
+                var cViewHeight = _camera.orthographicSize * 2;
+                _camera.transform.position = _targetBounds.center + Vector3.forward * (_targetBounds.extents.z + extraZDis)
+                                                                 + (0.5f -　(viewCenter.x / Screen.width)) * cViewWidth * _camera.transform.right 
+                                                                 + (0.5f - (viewCenter.y / Screen.height)) * cViewHeight * Vector3.up;
+                _camera.farClipPlane = _targetBounds.extents.z * 2 + extraZDis + extraZCameraDepth;
             }
 
             CameraTreat(camera);
@@ -180,23 +177,23 @@ namespace ModelView
             //回転
             left_right = left_right_old + (canLeftRight ? (sPos.x - Input.mousePosition.x) * rotateSpeed/ wid : 0); //横移動量(-1<tx<1)
             up_down = up_down_old + (canUpDown ? (sPos.y - Input.mousePosition.y) * rotateSpeed/ hei : 0); //縦移動量(-1<ty<1);
-            up_down = Mathf.Clamp(up_down, UpDownRotateRangeMin, UpDownRotateRangeMax);
+            up_down = Mathf.Clamp(up_down, upDownRotateRangeMin, upDownRotateRangeMax);
             RotateTarget(left_right, up_down, _z);
         }
         
         public void ItemDetailStartDirection(float x, float y, float z = 0)
         {
             up_down = y;
-            if (y < UpDownRotateRangeMin)
+            if (y < upDownRotateRangeMin)
             {
-                UpDownRotateRangeMin = y;
+                upDownRotateRangeMin = y;
             }
-            if (y > UpDownRotateRangeMax)
+            if (y > upDownRotateRangeMax)
             {
-                UpDownRotateRangeMax = y;
+                upDownRotateRangeMax = y;
             }
             
-            up_down = Mathf.Clamp(up_down, UpDownRotateRangeMin, UpDownRotateRangeMax);
+            up_down = Mathf.Clamp(up_down, upDownRotateRangeMin, upDownRotateRangeMax);
             RotateTarget(x, up_down, z);
             OnPointerDown();
         }
@@ -208,17 +205,17 @@ namespace ModelView
         float CalMaxOrthographicSize()
         {
             float value = 0;
-            RotateTarget(0,0,0);
+            RotateTarget(0,0);
             value = Mathf.Max(value, CalMaxExtend());
-            RotateTarget(0,90,0);
+            RotateTarget(0,90);
             value = Mathf.Max(value, CalMaxExtend());
-            RotateTarget(90,0,0);
-            return value = Mathf.Max(value, CalMaxExtend());
+            RotateTarget(90,0);
+            return Mathf.Max(value, CalMaxExtend());
         }
         
         float CalMaxExtend()
         {
-            _targetBounds = tempBoundary;
+            _targetBounds = _tempBoundary;
             if (_parentNodeRenderer != null)
             {
                 _targetBounds = _parentNodeRenderer.bounds;
@@ -226,7 +223,7 @@ namespace ModelView
 
             foreach (Renderer render in _renderers)
             {
-                if (_targetBounds == tempBoundary)
+                if (_targetBounds == _tempBoundary)
                 {
                     _targetBounds = render.bounds;
                 }

@@ -12,7 +12,7 @@ public partial class Animation_Manger{
         string basicPackKey = type + "/" + basicPackName;
         if (AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(basicPackKey))
         {
-            AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(basicPackKey,out basicAnims);
+            AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(basicPackKey, out basicAnims);
         }
         else
         {
@@ -35,7 +35,6 @@ public partial class Animation_Manger{
             }
             Addressables.Release(loadPath);
             DicAdd<string, List<AnimationClip>>.Add(AnimationResourceLoader.SeriesAnimationClipsDic, basicPackKey, basicAnims);
-            Debug.Log("基础动画包: "+basicPackKey + "已经加入公用字典");
         }
         
         toLoadAnims = new Dictionary<string, AnimationClip>();        
