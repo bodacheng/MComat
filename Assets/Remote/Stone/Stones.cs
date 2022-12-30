@@ -10,9 +10,13 @@ namespace dataAccess
         static readonly IDictionary<string, StoneOfPlayerInfo> Dic = new Dictionary<string, StoneOfPlayerInfo>();
         static readonly IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();
         
-        public static void Clear()
+        public static void ClearData()
         {
             Dic.Clear();
+        }
+
+        public static void ClearRender()
+        {
             foreach (var kv in RenderModelDic)
             {
                 GameObject.Destroy(kv.Value);
@@ -65,9 +69,9 @@ namespace dataAccess
             return infoModels.Count - usingCount >= 4;
         }
         
-        public static SKStoneItem GetRenderModel(string ItemId)
+        public static SKStoneItem GetRenderModel(string itemId)
         {
-            return ItemId == null ? null : RenderModelDic.ContainsKey(ItemId) ? RenderModelDic[ItemId] : null;
+            return itemId == null ? null : RenderModelDic.ContainsKey(itemId) ? RenderModelDic[itemId] : null;
         }
         
         public static void HighLight(string skillId)
@@ -96,9 +100,9 @@ namespace dataAccess
             }
         }
 
-        public static void RefreshLocalStoneParams(IDictionary<string, Tuple<string, string>> ToEditStones)
+        public static void RefreshLocalStoneParams(IDictionary<string, Tuple<string, string>> toEditStones)
         {
-            foreach (var kv in ToEditStones)
+            foreach (var kv in toEditStones)
             {
                 if (!Dic.ContainsKey(kv.Key) || Dic[kv.Key] == null)
                 {
@@ -119,8 +123,8 @@ namespace dataAccess
             RenderModelDic.Clear();
             foreach (var pair in Dic)
             {
-                var _SkillConfig = SkillConfigTable.GetSkillConfig(pair.Value.SkillId);
-                if (_SkillConfig == null)
+                var skillConfig = SkillConfigTable.GetSkillConfig(pair.Value.SkillId);
+                if (skillConfig == null)
                 {
                     Debug.Log("巨大问题,技能id似乎未定义：" + pair.Value.SkillId);
                     return;

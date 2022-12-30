@@ -9,7 +9,8 @@ public partial class PlayFabReadClient
     public static void LoadItems(Action<bool> finished)
     {
         dataAccess.Units.Dic.Clear();
-        Stones.Clear();
+        Stones.ClearData();
+        Stones.ClearRender();
         _myMailList.Clear();
         
         PlayFabClientAPI.GetUserInventory(

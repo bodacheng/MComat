@@ -38,7 +38,7 @@ public class UnitInfo
     {
         try
         {
-            global::UnitInfo unitInfo = new global::UnitInfo
+            var unitInfo = new UnitInfo
             {
                 r_id = info.r_id,
                 id = info.id

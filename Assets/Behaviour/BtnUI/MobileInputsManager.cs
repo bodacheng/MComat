@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Soul;
 using Skill;
-using FightScene;
 
 public enum InputKey
 {

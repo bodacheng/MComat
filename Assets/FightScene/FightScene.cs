@@ -5,6 +5,7 @@ using DummyLayerSystem;
 using mainMenu;
 using ModelView;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace FightScene
 {
@@ -102,9 +103,9 @@ namespace FightScene
         public void ReturnToFront()
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);
-            var data_Centers = new List<Data_Center>();
-            data_Centers.AddRange(RTFightManager.Target.team1.teamMembers.GetValues());
-            data_Centers.AddRange(RTFightManager.Target.team2.teamMembers.GetValues());
+            var dataCenters = new List<Data_Center>();
+            dataCenters.AddRange(RTFightManager.Target.team1.teamMembers.GetValues());
+            dataCenters.AddRange(RTFightManager.Target.team2.teamMembers.GetValues());
             RTFightManager.Target.ClearUnitData();
             RTFightManager.Target.ClearUnits();
             FightLogger.value.WatchMissionsAbandon();

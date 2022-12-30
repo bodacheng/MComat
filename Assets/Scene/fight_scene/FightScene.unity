@@ -268,7 +268,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1545
+    m_Bits: 1609
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -383,7 +383,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1545
+    m_Bits: 1609
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -445,7 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4edda3a66ed614b6ebcbdff89dee1305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeamMembers:
+  teamMembers:
     _SerializableSets: []
   TeamMode: 0
   TeamStandPoints: []
@@ -646,7 +646,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1545
+    m_Bits: 1609
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -5771,7 +5771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4edda3a66ed614b6ebcbdff89dee1305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeamMembers:
+  teamMembers:
     _SerializableSets: []
   TeamMode: 0
   TeamStandPoints: []
@@ -11004,7 +11004,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1545
+    m_Bits: 1609
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
