@@ -63,9 +63,30 @@ namespace FightScene
                                 var a = UILayerLoader.Load<ArenaFightOver>();
                                 a.ShowAward(rewardGdInt, rewardGmInt);
 
-                                if (levelInt == 1 && firstTimeBool)
+                                if (firstTimeBool)
                                 {
-                                    PopupLayer.ArrangeWarnWindowUnitIcon(" tetsuya 加入队伍 ", "2");
+                                    switch (levelInt)
+                                    {
+                                        case 1:
+                                            PopupLayer.ArrangeWarnWindowUnitIcon(" tetsuya  " + Translate.Get("GotNewUnit"), "2");
+                                            break;
+                                        case 5:
+                                            PopupLayer.ArrangeWarnWindowUnitIcon(" adam  " + Translate.Get("GotNewUnit"), "1");
+                                            break;
+                                        case 20:
+                                            PopupLayer.ArrangeWarnWindowUnitIcon(" maggie  " + Translate.Get("GotNewUnit"), "4");
+                                            break;
+                                        case 35:
+                                            PopupLayer.ArrangeWarnWindowUnitIcon(" yuta  " + Translate.Get("GotNewUnit"), "7");
+                                            break;
+                                        case 50:
+                                            PopupLayer.ArrangeWarnWindowUnitIcon(" sybill  " + Translate.Get("GotNewUnit"), "6");
+                                            break;
+                                        case 100:
+                                            PopupLayer.ArrangeWarnWindowUnitIcon(" et  " + Translate.Get("GotNewUnit"), "5");
+                                            break;
+                                    }
+                                    
                                 }
                             }
                         );

@@ -36,8 +36,8 @@ public class FightGlobalSetting : ScriptableObject
     public static int _sceneStep;//0 :mainmenu 1: fightscene
     public static bool _hasDefend;
     public static bool _skillStoneHasExp;
-    public static float _AT_coefficient = 1;
-    public static float _HP_coefficient = 1;
+    public static float AtCoefficient = 1;
+    public static float HpCoefficient = 1;
     public static bool _Team1Invincible;
     public static int _NormalSkillExGet;
     public static int _Sp1SkillExGet;
@@ -71,8 +71,8 @@ public class FightGlobalSetting : ScriptableObject
         _hasDefend = hasDefend;
         _skillStoneHasExp = skillStoneHasExp;
 
-        _AT_coefficient = AT_coefficient;
-        _HP_coefficient = HP_coefficient;
+        AtCoefficient = AT_coefficient;
+        HpCoefficient = HP_coefficient;
         _Team1Invincible = Team1Invincible;
         
         _NormalSkillExGet = NormalSkillExGet;
@@ -131,11 +131,11 @@ public class FightGlobalSetting : ScriptableObject
     // Ex3 ：60
     public static float ATCal(float originAT, float level)
     {
-        return _AT_coefficient * originAT * (10 + level) / 11;
+        return AtCoefficient * originAT * (10 + level) / 11;
     }
     public static float StoneHpCal(float originHP, float level)
     {
-        return _HP_coefficient * originHP * (10 + level) / 11;
+        return HpCoefficient * originHP * (10 + level) / 11;
     }
     
     public static string EffectPathDefine(Element element = Element.Null)
