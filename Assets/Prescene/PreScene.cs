@@ -98,8 +98,11 @@ namespace mainMenu
                 for (var index = 0; index < pCameraData.cameraStack.Count; index++)
                 {
                     var stackCamera = pCameraData.cameraStack[index];
-                    var sCameraData = stackCamera.GetComponent<UniversalAdditionalCameraData>();
-                    sCameraData.renderPostProcessing = index == pCameraData.cameraStack.Count - 1;
+                    if (stackCamera != null)
+                    {
+                        var sCameraData = stackCamera.GetComponent<UniversalAdditionalCameraData>();
+                        sCameraData.renderPostProcessing = index == pCameraData.cameraStack.Count - 1;
+                    }
                 }
             });
         }

@@ -1063,6 +1063,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3622991293733183848}
   - component: {fileID: 4511073407100563557}
+  - component: {fileID: 5837341813890628734}
   m_Layer: 3
   m_Name: lian
   m_TagString: Untagged
@@ -1170,6 +1171,18 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.013899047, y: -0.0013888758, z: 0.000000015832484}
     m_Extent: {x: 0.011900432, y: 0.011946725, z: 0.007950011}
   m_DirtyAABB: 0
+--- !u!114 &5837341813890628734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188119360509159929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4796095434084d59939621d426405db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1207828872257123330
 GameObject:
   m_ObjectHideFlags: 0
@@ -17795,6 +17808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2062716451536440283}
   - component: {fileID: 8598230491373980971}
+  - component: {fileID: 3041620873717997141}
   m_Layer: 3
   m_Name: kuzi
   m_TagString: Untagged
@@ -17877,6 +17891,18 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.04325979, y: -0.003265799, z: -0.00000012200326}
     m_Extent: {x: 0.04763202, y: 0.012765179, z: 0.022983994}
   m_DirtyAABB: 0
+--- !u!114 &3041620873717997141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3553074568232024624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4796095434084d59939621d426405db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3558987715368067942
 GameObject:
   m_ObjectHideFlags: 0
@@ -28390,7 +28416,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b764016de3c8744b6942fcf52774a743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshes: []
+  meshes:
+  - {fileID: 3041620873717997141}
+  - {fileID: 5837341813890628734}
+  - {fileID: 9110643362478052742}
+  - {fileID: 8557615806036641901}
+  - {fileID: 3498152445938138423}
 --- !u!114 &4108938776797320776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49762,6 +49793,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2747559992415572756}
   - component: {fileID: 1506463752617562495}
+  - component: {fileID: 8557615806036641901}
   m_Layer: 3
   m_Name: xiezi
   m_TagString: Untagged
@@ -49841,6 +49873,18 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.0053713126, y: 0.005721771, z: 0.017400812}
     m_Extent: {x: 0.0055670114, y: 0.014418102, z: 0.022623051}
   m_DirtyAABB: 0
+--- !u!114 &8557615806036641901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6423362534850168272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4796095434084d59939621d426405db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6507183007665863833
 GameObject:
   m_ObjectHideFlags: 0
@@ -50109,6 +50153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2937624776955378843}
   - component: {fileID: 6986386442591202558}
+  - component: {fileID: 9110643362478052742}
   m_Layer: 3
   m_Name: shangshen
   m_TagString: Untagged
@@ -50228,6 +50273,18 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.019952128, y: -0.0024864264, z: 0.000000018626451}
     m_Extent: {x: 0.03542661, y: 0.014126165, z: 0.049881358}
   m_DirtyAABB: 0
+--- !u!114 &9110643362478052742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6701211979595913728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4796095434084d59939621d426405db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6780533994048194004
 GameObject:
   m_ObjectHideFlags: 0
@@ -51881,6 +51938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6628536772371976176}
   - component: {fileID: 4958346148310151553}
+  - component: {fileID: 3498152445938138423}
   m_Layer: 3
   m_Name: yifu
   m_TagString: Untagged
@@ -51989,6 +52047,18 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.013031388, y: -0.004713392, z: -0.00024949946}
     m_Extent: {x: 0.026792912, y: 0.021246599, z: 0.028107937}
   m_DirtyAABB: 0
+--- !u!114 &3498152445938138423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8642491844900442744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4796095434084d59939621d426405db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8680821202990064723
 GameObject:
   m_ObjectHideFlags: 0
