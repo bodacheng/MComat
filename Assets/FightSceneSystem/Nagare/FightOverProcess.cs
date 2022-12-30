@@ -22,14 +22,14 @@ namespace FightScene
             // 技能测试：显示战斗分析？
             Debug.Log(" winner id " + FightLogger.value.GetWinnerId());
             
-            switch (NetFightScene.Fight.EventType)
+            switch (FightScene.Fight.EventType)
             {
                 case FightEventType.Arena:
                     if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabId)
                     {
                         CloudScript.ArenaPointUp(
                             PlayerAccountInfo.Me.arenaPoint,
-                            NetFightScene.Fight.Team2ArenaPoint,
+                            FightScene.Fight.Team2ArenaPoint,
                             (x,y, z) =>
                             {
                                 var a = UILayerLoader.Load<ArenaFightOver>();
@@ -45,7 +45,7 @@ namespace FightScene
                     if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabId)
                     {
                         CloudScript.ArcadeProgress(
-                            NetFightScene.Fight.ID,
+                            FightScene.Fight.ID,
                             result =>
                             {
                                 var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
@@ -70,7 +70,7 @@ namespace FightScene
                             }
                         );
                         
-                        if (NetFightScene.Fight.ID == "1")
+                        if (FightScene.Fight.ID == "1")
                         {
                             PlayerAccountInfo.Me.tutorialProgress = "StageOneFinished";
                             PlayFabReadClient.UpdateUserData(
@@ -95,7 +95,7 @@ namespace FightScene
                     break;
                 case FightEventType.Self:
                     var c = UILayerLoader.Load<CommonFightResult>();
-                    c.Initialise(NetFightScene.target.ReturnToFront, 
+                    c.Initialise(FightScene.target.ReturnToFront, 
                         () =>
                         {
                             LocalGameRestart();
@@ -128,7 +128,7 @@ namespace FightScene
         void SkillTestReload()
         {
             RTFightManager.Target.ClearUnits();
-            NetFightScene.Fight = FightInfo.RandomSkillTestStage(TeamMode.Rotation);
+            FightScene.Fight = FightInfo.RandomSkillTestStage(TeamMode.Rotation);
             LocalGameRestart();
         }
     }

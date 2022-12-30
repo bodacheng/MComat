@@ -26,7 +26,7 @@ public class FightingStepLayer : UILayer
     
     public async UniTask Setup(bool active = true)
     {
-        gameObject.SetActive(active && NetFightScene.Fight.EventType != FightEventType.Screensaver);
+        gameObject.SetActive(active && FightScene.FightScene.Fight.EventType != FightEventType.Screensaver);
         await StartUp((x) =>
             {
                 PlayerPrefs.SetInt("auto", x ? 1:0);
@@ -72,13 +72,13 @@ public class FightingStepLayer : UILayer
         Team1Auto.Initialize((() => RTFightManager.Target.team1.Auto), switchTeam1Auto);
         Team2Auto.Initialize((() => RTFightManager.Target.team2.Auto), switchTeam2Auto);
         
-        team1UI.TeamMode = NetFightScene.Fight.team1Mode;
-        team2UI.TeamMode = NetFightScene.Fight.team2Mode;
+        team1UI.TeamMode = FightScene.FightScene.Fight.team1Mode;
+        team2UI.TeamMode = FightScene.FightScene.Fight.team2Mode;
         
         team1UI.teamConfig = RTFightManager.Target.heroTeamConfig;
         team2UI.teamConfig = RTFightManager.Target.EnemyTeamConfig;
-        team1UI.teamConfig.playID = NetFightScene.Fight.Team1ID;
-        team2UI.teamConfig.playID = NetFightScene.Fight.Team2ID;
+        team1UI.teamConfig.playID = FightScene.FightScene.Fight.Team1ID;
+        team2UI.teamConfig.playID = FightScene.FightScene.Fight.Team2ID;
         team1UI.TeamMembers = RTFightManager.Target.team1.teamMembers;
         team2UI.TeamMembers = RTFightManager.Target.team2.teamMembers;
         

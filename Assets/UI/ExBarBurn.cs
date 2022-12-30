@@ -11,11 +11,11 @@ public class ExBarBurn : MonoBehaviour
 
     void Burn()
     {
-        if (NetFightScene.target.fxCamera != null)
+        if (FightScene.FightScene.target.fxCamera != null)
         {
             EffectsManager.GenerateEffect(
             "ui_exbarburn", null, 
-            PosCal.GetWorldPos(NetFightScene.target.fxCamera, transform.GetComponent<RectTransform>(), 3), 
+            PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, transform.GetComponent<RectTransform>(), 3), 
             Quaternion.identity, null).Forget();
         }
     }

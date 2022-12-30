@@ -38,7 +38,7 @@ public class ArenaFightOver : UILayer
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
             UILayerLoader.Remove<ArenaFightOver>();
         });
-        returnBtn.onClick.AddListener(NetFightScene.target.ReturnToFront);
+        returnBtn.onClick.AddListener(FightScene.FightScene.target.ReturnToFront);
     }
     
     public void Step1Anim()

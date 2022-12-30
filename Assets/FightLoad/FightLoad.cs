@@ -45,7 +45,7 @@ public static class FightLoad
                 break;
         }
         
-        NetFightScene.Fight =  FightInfo.Copy(stage);
+        FightScene.FightScene.Fight =  FightInfo.Copy(stage);
         Stones.Clear();
         HurtObjectManager.Clear();
         EffectsManager.Clear();

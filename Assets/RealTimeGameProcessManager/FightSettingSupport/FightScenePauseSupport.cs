@@ -25,7 +25,7 @@ public class FightScenePauseSupport : UILayer
     void Start()
     {
         ReturnButton.onClick.RemoveAllListeners();
-        ReturnButton.onClick.AddListener(NetFightScene.target.ReturnToFront);
+        ReturnButton.onClick.AddListener(FightScene.FightScene.target.ReturnToFront);
         
         ResumeButton.onClick.RemoveAllListeners();
         ResumeButton.onClick.AddListener(() =>

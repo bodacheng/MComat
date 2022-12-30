@@ -22,7 +22,7 @@ namespace FightScene
         public override void ProcessEnter()
         {
             _layer = UILayerLoader.Get<FightingStepLayer>();
-            if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
+            if (FightScene.Fight.EventType == FightEventType.Screensaver)
             {
                 var TitleScreenLayer = UILayerLoader.Load<TitleScreenLayer>();
                 TitleScreenLayer.Initialise();
@@ -32,14 +32,14 @@ namespace FightScene
             {
                 _layer.gameObject.SetActive(true);
             }
-            if (NetFightScene.Fight.RunTutorial)
+            if (FightScene.Fight.RunTutorial)
                 _layer.OpenTutorial();
             RTFightManager.Target.ModeStart();
         }
         
         public override void ProcessEnd()
         {
-            if (NetFightScene.Fight.EventType == FightEventType.Screensaver)
+            if (FightScene.Fight.EventType == FightEventType.Screensaver)
             {
                 UILayerLoader.Remove<TitleScreenLayer>();
             }

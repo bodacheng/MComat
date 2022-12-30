@@ -44,7 +44,7 @@ namespace FightScene
         public void SetGame(FightInfo stage)
         {
             _loadFight = stage;
-            NetFightScene.target.LoadStageFinished.Value = true;
+            FightScene.target.LoadStageFinished.Value = true;
         }
         
         public void ModeStart()

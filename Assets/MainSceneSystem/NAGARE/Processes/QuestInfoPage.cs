@@ -9,13 +9,13 @@ public class QuestInfoPage : MSceneProcess
     
     void EnterProcess(FightInfo stage)
     {
-        NetFightScene.Fight = stage;
+        FightScene.FightScene.Fight = stage;
         _layer = UILayerLoader.Load<FightPrepareLayer>();
         
-        switch (NetFightScene.Fight.EventType)
+        switch (FightScene.FightScene.Fight.EventType)
         {
             case FightEventType.Arena:
-                NetFightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arena").LoadTeamDic();
+                FightScene.FightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arena").LoadTeamDic();
                 void GoToTeamEditArena()
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
@@ -24,7 +24,7 @@ public class QuestInfoPage : MSceneProcess
                 _layer.EditTeamButton.onClick.AddListener(GoToTeamEditArena);
                 break;
             case FightEventType.Quest:
-                NetFightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arcade").LoadTeamDic();
+                FightScene.FightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arcade").LoadTeamDic();
                 void GoToTeamEditArcade()
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);
@@ -33,11 +33,11 @@ public class QuestInfoPage : MSceneProcess
                 _layer.EditTeamButton.onClick.AddListener(GoToTeamEditArcade);
                 break;
         }
-        _layer.StageMembersInfoShow(NetFightScene.Fight);
+        _layer.StageMembersInfoShow(FightScene.FightScene.Fight);
         _layer.BeginFight.onClick.RemoveAllListeners();
         void Go()
         {
-            FightLoad.Go(NetFightScene.Fight, true);
+            FightLoad.Go(FightScene.FightScene.Fight, true);
         }
         _layer.BeginFight.onClick.AddListener(Go);
         
@@ -51,7 +51,7 @@ public class QuestInfoPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        EnterProcess(NetFightScene.Fight);
+        EnterProcess(FightScene.FightScene.Fight);
     }
     
     public override void ProcessEnter<T>(T t)

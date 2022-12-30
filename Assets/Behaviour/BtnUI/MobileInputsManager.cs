@@ -70,8 +70,8 @@ public class MobileInputsManager : MonoBehaviour {
             _focusing = element;
             
             ElementEffects[element].Open(
-                PosCal.GetWorldPos(NetFightScene.target.fxCamera, Defend.GetComponent<RectTransform>(), 5), 
-                PosCal.GetWorldPos(NetFightScene.target.fxCamera, Dash.GetComponent<RectTransform>(), 5)
+                PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Defend.GetComponent<RectTransform>(), 5), 
+                PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Dash.GetComponent<RectTransform>(), 5)
             );
         }else{
             Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
@@ -120,13 +120,13 @@ public class MobileInputsManager : MonoBehaviour {
         switch (key)
         {
             case InputKey.Attack1:
-                _targetExplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, Attack.GetComponent<RectTransform>(), 3);
+                _targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Attack.GetComponent<RectTransform>(), 3);
                 break;
             case InputKey.Attack2:
-                _targetExplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, Fire1.GetComponent<RectTransform>(), 3);
+                _targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Fire1.GetComponent<RectTransform>(), 3);
                 break;
             case InputKey.Attack3:
-                _targetExplode.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, Fire2.GetComponent<RectTransform>(), 3);
+                _targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Fire2.GetComponent<RectTransform>(), 3);
                 break;
         }
         _targetExplode.Play();
@@ -137,7 +137,7 @@ public class MobileInputsManager : MonoBehaviour {
     {
         foreach (var keyValue in ElementEffects[_focusing].BtnRefreshEffects)
         {
-            keyValue.Value.transform.position = PosCal.GetWorldPos(NetFightScene.target.fxCamera, keyValue.Key.GetComponent<RectTransform>(),4);
+            keyValue.Value.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, keyValue.Key.GetComponent<RectTransform>(),4);
             keyValue.Value.Play(true);
         }
     }
@@ -148,7 +148,7 @@ public class MobileInputsManager : MonoBehaviour {
     // 而防御与机动则是确定一直显示。
     void StartPressing(Button targetBtn)
     {
-        targetPos = PosCal.GetWorldPos(NetFightScene.target.fxCamera, targetBtn.GetComponent<RectTransform>(), 7);
+        targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, targetBtn.GetComponent<RectTransform>(), 7);
         if (ElementEffects.ContainsKey(_focusing))
         {
             ElementEffects[_focusing].pressingExplosion.transform.position = targetPos;
@@ -352,7 +352,7 @@ public class MobileInputsManager : MonoBehaviour {
     Vector3 targetPos;
     void RefreshPattern(Button button, string skillId)//按钮切换也可以在这里做文章
     {
-        targetPos = PosCal.GetWorldPos(NetFightScene.target.fxCamera, button.GetComponent<RectTransform>(), 5);
+        targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, button.GetComponent<RectTransform>(), 5);
         if (ElementEffects.ContainsKey(_focusing))
         {
             ElementEffects[_focusing].RefreshBtn(button, skillId, targetPos);

@@ -3,29 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimControl/Animation_Manger_ResourceLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AnimControl/Animation_Manger_ResourceLoad.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/adam.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/adam.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/adam7.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/adam7.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/et.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/et.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/haruka.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/haruka.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/maggie.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/maggie.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/maksim1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/maksim1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/maksim2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/maksim2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/mutant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/mutant.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/mutant_b.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/mutant_b.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/robot.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/robot.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/robot3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/robot3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/sybill.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/sybill.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/tetsuya.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/tetsuya.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/yuta.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/yuta.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.ModelShow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.ModelShow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UnitOptionLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UnitOptionLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Singleton/GeneralModelPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/GeneralModelPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementStoneTagsGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementStoneTagsGroup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/MobileInputsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/MobileInputsManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaFightOver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaFightOver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FightingStepLayer/FightingStepLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FightingStepLayer/FightingStepLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightLoad/FightLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightLoad/FightLoad.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightOverProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightOverProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightingProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightingProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/PreparingProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/PreparingProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/QuestInfoPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/QuestInfoPage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/NetFightScene/NetFightScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/NetFightScene/FightScene.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/NetFightScene/NetFightScene.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/NetFightScene/FightScene.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/FightSettingSupport/FightScenePauseSupport.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/FightSettingSupport/FightScenePauseSupport.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/RTFightManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/RTFightManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/ExBarBurn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/ExBarBurn.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TimeManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TimeManager.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace FightScene
 {
-    public class NetFightScene : MonoBehaviour
+    public class FightScene : MonoBehaviour
     {
         public RectTransform T;
         
@@ -25,7 +25,7 @@ namespace FightScene
         [Header("AudioSource")]
         public AudioSource audioSource;
         
-        public static NetFightScene target;
+        public static FightScene target;
         
         public ReactiveProperty<bool> LoadStageFinished { get; set; } = new(false);
 
