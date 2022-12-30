@@ -6,19 +6,9 @@ using System.IO;
 
 public class FightInfo : ScriptableObject
 {
-    [SerializeField]
     public int battleGroundID;
     
-    [SerializeField]
-    public string battleNameENG;
-    [SerializeField]
-    public string battleNameJPG;
-    [SerializeField]
-    public string battleNameCH;
-    
-    [SerializeField]
-    public Sprite stageButtonSprite;
-
+    [SerializeField] private Sprite stageButtonSprite;
     [SerializeField] private List<UnitInfo> unitsData = new ();
     
     public FightEventType EventType
@@ -184,13 +174,8 @@ public class FightInfo : ScriptableObject
         stage.team2CGMode = source.team2CGMode;
         stage.Team2ArenaPoint = source.Team2ArenaPoint;
         stage.RunTutorial = source.RunTutorial;
-        stage.battleNameCH = source.battleNameCH;
-        stage.battleNameENG = source.battleNameENG;
-        stage.battleNameJPG = source.battleNameJPG;
         stage.stageButtonSprite = source.stageButtonSprite;
         stage.EventType = source.EventType;
-        
-        Debug.Log("已经获取");
         return stage;
     }
     

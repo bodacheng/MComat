@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Collections.Generic;
 using HittingDetection;
-using UniRx;
 using UnityEngine.Animations;
 using Log;
 
