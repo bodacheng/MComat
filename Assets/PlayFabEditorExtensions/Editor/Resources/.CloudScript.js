@@ -780,48 +780,6 @@ handlers.RankClear = function (args, context) {
     return { };
 }
 
-handlers.Gotcha = function (args, context) {
-    var request = {
-        "CatalogVersion": args.CatalogVersion,
-        "TableId": args.tableName
-    };
-    var Result = server.EvaluateRandomResultTable(request);
-
-    let itemIds = [];
-    itemIds.push(Result.ResultItemId);
-    var grantRequest = {
-        "PlayFabId": currentPlayerId,
-        "CatalogVersion": args.CatalogVersion,
-        "ItemIds": itemIds
-    };
-
-    var grantResult = server.GrantItemsToUser(grantRequest);
-    return { messageValue: grantResult["ItemGrantResults"] };
-}
-
-handlers.GotchaX9 = function (args, context) {
-    
-    let itemIds = [];
-    for (let i = 0; i < 9; i++) {
-        var request = {
-            "CatalogVersion": args.CatalogVersion,
-            "TableId": args.tableName
-        };
-        var Result = server.EvaluateRandomResultTable(request);
-        itemIds.push(Result.ResultItemId);
-    }
-    
-    var grantRequest = {
-        "PlayFabId": currentPlayerId,
-        "CatalogVersion": args.CatalogVersion,
-        "ItemIds": itemIds
-    };
-
-    var grantResult = server.GrantItemsToUser(grantRequest);
-    
-    return { messageValue: grantResult["ItemGrantResults"] };
-}
-
 handlers.stoneDropTableInfo= function (args, context) {
     var TableID = args.TableID;
     var result = server.GetRandomResultTables(
@@ -1377,3 +1335,45 @@ handlers.RoomEventRaised = function (args) {
             break;
     }
 };
+
+// handlers.Gotcha = function (args, context) {
+//     var request = {
+//         "CatalogVersion": args.CatalogVersion,
+//         "TableId": args.tableName
+//     };
+//     var Result = server.EvaluateRandomResultTable(request);
+//
+//     let itemIds = [];
+//     itemIds.push(Result.ResultItemId);
+//     var grantRequest = {
+//         "PlayFabId": currentPlayerId,
+//         "CatalogVersion": args.CatalogVersion,
+//         "ItemIds": itemIds
+//     };
+//
+//     var grantResult = server.GrantItemsToUser(grantRequest);
+//     return { messageValue: grantResult["ItemGrantResults"] };
+// }
+//
+// handlers.GotchaX9 = function (args, context) {
+//
+//     let itemIds = [];
+//     for (let i = 0; i < 9; i++) {
+//         var request = {
+//             "CatalogVersion": args.CatalogVersion,
+//             "TableId": args.tableName
+//         };
+//         var Result = server.EvaluateRandomResultTable(request);
+//         itemIds.push(Result.ResultItemId);
+//     }
+//
+//     var grantRequest = {
+//         "PlayFabId": currentPlayerId,
+//         "CatalogVersion": args.CatalogVersion,
+//         "ItemIds": itemIds
+//     };
+//
+//     var grantResult = server.GrantItemsToUser(grantRequest);
+//
+//     return { messageValue: grantResult["ItemGrantResults"] };
+// }

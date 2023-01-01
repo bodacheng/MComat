@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -9,7 +10,7 @@ using FightScene;
 public class ArenaFightOver : UILayer
 {
     #region commen
-    [SerializeField] private Animator _animator;
+    [SerializeField] private Animator animator;
     [SerializeField] private GameObject winObject;
     [SerializeField] private GameObject loseObject;
     [SerializeField] private Button returnBtn;
@@ -24,16 +25,17 @@ public class ArenaFightOver : UILayer
     #endregion
 
     #region arcade
-    [SerializeField] private Button AgainBtn;
-    [SerializeField] private Button NextBtn;
+    [SerializeField] private Button againBtn;
     #endregion
     
     private int arenaPointValue;
-    private TweenerCore<int, int, NoOptions> _tweenerCore;
+    private TweenerCore<int, int, NoOptions> _arenaPointTweenerCore;
+    private TweenerCore<int, int, NoOptions> _dmAwardTweenerCore;
+    private TweenerCore<int, int, NoOptions> _gdAwardTweenerCore;
     
     private void Awake()
     {
-        AgainBtn.onClick.AddListener(() =>
+        againBtn.onClick.AddListener(() =>
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
             UILayerLoader.Remove<ArenaFightOver>();
@@ -55,7 +57,7 @@ public class ArenaFightOver : UILayer
     
     public void Step2Anim()
     {
-        _animator.SetTrigger("step2");
+        animator.SetTrigger("step2");
     }
     
     public void ShowArenaPoint(int oldPoint, int currentPoint)
@@ -64,7 +66,7 @@ public class ArenaFightOver : UILayer
         arenaRankIcon.Set(currentPoint);
         arenaRankIcon.gameObject.SetActive(true);
         arenaPointValue = oldPoint;
-        _tweenerCore = DOTween.To(
+        _arenaPointTweenerCore = DOTween.To(
             () => arenaPointValue,          // 何を対象にするのか
             num => arenaPointValue = num,   // 値の更新
             currentPoint,                  // 最終的な値
@@ -72,19 +74,57 @@ public class ArenaFightOver : UILayer
         ).OnUpdate(()=> arenaPoint.text = arenaPointValue.ToString());
     }
 
-    public void ShowAward(int awardCurrency, int awardGD)
+    public async UniTask ShowAward(int awardCurrency, int awardGD)
     {
-        this.awardCurrency.gameObject.SetActive(awardCurrency > 0);
-        this.awardCurrency.text = awardCurrency.ToString();
-        
-        this.awardGDCurrency.gameObject.SetActive(awardGD > 0);
-        this.awardGDCurrency.text = awardGD.ToString();
+        async UniTask DM()
+        {
+            if (awardCurrency > 0)
+            {
+                this.awardCurrency.gameObject.SetActive(true);
+                this.awardCurrency.color = Color.yellow;
+                this.awardCurrency.text = awardCurrency.ToString();
+                var currentDmValue = Currencies.DiamondCount.Value + awardCurrency;
+                await UniTask.DelayFrame(40);
+                this.awardCurrency.color = Color.green;
+                _dmAwardTweenerCore = DOTween.To(
+                    () => Currencies.DiamondCount.Value,          // 何を対象にするのか
+                    num => Currencies.DiamondCount.Value = num,
+                    currentDmValue,
+                    3f
+                ).OnUpdate(()=> this.awardCurrency.text = Currencies.DiamondCount.Value.ToString() + " (+" + awardCurrency + ")");
+            }
+        }
+
+        async UniTask GD()
+        {
+            if (awardGD > 0)
+            {
+                this.awardGDCurrency.gameObject.SetActive(true);
+                this.awardGDCurrency.color = Color.yellow;
+                this.awardGDCurrency.text = awardGD.ToString();
+                var currentGdValue = Currencies.CoinCount.Value + awardGD;
+                await UniTask.DelayFrame(40);
+                this.awardGDCurrency.color = Color.green;
+                _gdAwardTweenerCore = DOTween.To(
+                    () => Currencies.CoinCount.Value,          // 何を対象にするのか
+                    num => Currencies.CoinCount.Value = num,
+                    currentGdValue,
+                    3f
+                ).OnUpdate(()=> this.awardGDCurrency.text = Currencies.CoinCount.Value.ToString()+ " (+" + awardGD + ")");
+            }
+        }
+
+        await UniTask.WhenAll(DM(), GD());
     }
     
     public override void OnDestroy()
     {
         base.OnDestroy();
-        if (_tweenerCore != null)
-            _tweenerCore.Kill();
+        if (_arenaPointTweenerCore != null)
+            _arenaPointTweenerCore.Kill();
+        if (_dmAwardTweenerCore != null)
+            _dmAwardTweenerCore.Kill();
+        if (_gdAwardTweenerCore != null)
+            _gdAwardTweenerCore.Kill();
     }
 }

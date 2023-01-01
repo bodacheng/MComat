@@ -1,4 +1,7 @@
-﻿using DummyLayerSystem;
+﻿using System;
+using System.Collections.Generic;
+using dataAccess;
+using DummyLayerSystem;
 using mainMenu;
 
 public class GotchaFront : MSceneProcess
@@ -21,7 +24,7 @@ public class GotchaFront : MSceneProcess
         }
         BackGroundPS.target.Off();
         layer = UILayerLoader.Load<GotchaLayer>();
-        layer.Setup();
+        layer.Setup(NineTimes, GetAllSK, GetAllM, Remove25Stones, DropTableInfo);
         SetLoaded(true);
     }
     
@@ -29,5 +32,34 @@ public class GotchaFront : MSceneProcess
     {
         UILayerLoader.Remove<GotchaLayer>();
         StarsFall.target.gameObject.SetActive(false);
+    }
+    
+    void DropTableInfo()
+    {
+        PreScene.target.trySwitchToStep(MainSceneStep.DropTableInfo,"GotchaX9", true);
+    }
+    
+    /// <summary>
+    /// 缺少消费关联处理
+    /// </summary>
+    static void NineTimes(Action<List<StoneOfPlayerInfo>> success)
+    {
+        UILayerLoader.Remove<GotchaLayer>();// 点击按钮瞬间关闭layer。
+        CloudScript.GotchaX9(success.Invoke);
+    }
+    
+    static void GetAllSK()
+    {
+        CloudScript.GrantStonesTest();
+    }
+
+    static void GetAllM()
+    {
+        CloudScript.GrantMonsterTest();
+    }
+
+    static void Remove25Stones()
+    {
+        CloudScript.Remove25Stones();
     }
 }

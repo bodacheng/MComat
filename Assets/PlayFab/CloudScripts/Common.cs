@@ -14,6 +14,7 @@ public partial class CloudScript
     {
         if (Application.isPlaying)
             ProgressLayer.Loading(string.Empty);
+        
         PlayFabClientAPI.ExecuteCloudScript(
             request,
             (x)=>

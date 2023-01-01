@@ -40,8 +40,9 @@ public class FrontPage : MSceneProcess
     bool _askedIfLinkDevice;
     void EnterProcess()
     {
+        AddressablesLogic.ReleaseAsyncOperationHandles();
         TutorialRunner.Main.TutorialCheck();
-
+        
         _frontLayer = UILayerLoader.Load<FrontLayer>();
         _frontLayer.Initialise(PreScene.target);
         

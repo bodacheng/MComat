@@ -16,7 +16,6 @@ public class TryGotcha : TutorialProcess
             _gotchaLayer = UILayerLoader.Get<GotchaLayer>();
             if (_gotchaLayer != null)
             {
-                _gotchaLayer.TutorialMode();
                 GotchaLayer.SetExtraSuccessAction(
                     () =>
                     {

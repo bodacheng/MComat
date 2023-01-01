@@ -103,12 +103,11 @@ public class HeroIcon : MonoBehaviour {
     {
         var icon = Instantiate(prefab);
         var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
+        icon.unitInfo = unitInfo;
         if (unitConfig == null)
         {
-            Debug.Log("?? : " + unitInfo.r_id);
-            return default;
+            return icon;
         }
-        icon.unitInfo = unitInfo;
         icon.unitConfig = unitConfig;
         var pic = await UnitIconDic.Load(unitConfig.RECORD_ID);
         icon.ChangeIcon(pic, unitConfig.element);

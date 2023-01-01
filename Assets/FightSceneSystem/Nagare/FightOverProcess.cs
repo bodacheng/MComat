@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using mainMenu;
 using UnityEngine;
@@ -35,7 +36,7 @@ namespace FightScene
                                 var a = UILayerLoader.Load<ArenaFightOver>();
                                 a.Step2Anim();
                                 a.ShowArenaPoint(x,y);
-                                a.ShowAward(z,0);
+                                a.ShowAward(z,0).Forget();
                             }
                         );
                     }
@@ -61,7 +62,7 @@ namespace FightScene
                                 var firstTimeBool = (bool)firstTime;
                                 
                                 var a = UILayerLoader.Load<ArenaFightOver>();
-                                a.ShowAward(rewardGdInt, rewardGmInt);
+                                a.ShowAward(rewardGdInt, rewardGmInt).Forget();
 
                                 if (firstTimeBool)
                                 {
@@ -111,7 +112,7 @@ namespace FightScene
                     else
                     {
                         var cc = UILayerLoader.Load<ArenaFightOver>();
-                        cc.ShowAward(0, 0);
+                        cc.ShowAward(0, 0).Forget();
                     }
                     break;
                 case FightEventType.Self:

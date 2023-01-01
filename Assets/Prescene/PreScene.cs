@@ -122,7 +122,6 @@ namespace mainMenu
         {
             AnimationResourceLoader.Instance.Clear();
             DedicatedCameraConnector.ClearBackUpModels();
-            AddressablesLogic.ReleaseAsyncOperationHandles();
             HurtObjectManager.Clear();
             EffectsManager.Clear();
             

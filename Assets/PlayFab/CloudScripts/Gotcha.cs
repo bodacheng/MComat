@@ -6,6 +6,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using PlayFab;
 using PlayFab.ServerModels;
 using ExecuteCloudScriptResult = PlayFab.ClientModels.ExecuteCloudScriptResult;
 
@@ -44,43 +45,35 @@ public partial class CloudScript
     
     public static void GotchaX9(Action<List<StoneOfPlayerInfo>> action)
     {
-        ExecuteCloudScriptMainSceneCommon(
-            new ExecuteCloudScriptRequest()
+        PlayFabClientAPI.PurchaseItem(
+            new PurchaseItemRequest
             {
-                FunctionName = "GotchaX9", // Arbitrary function name (must exist in your uploaded cloud.js file)
-                FunctionParameter = new {
-                    CatalogVersion = PlayfabSetting._StoneCatalog,
-                    tableName = "GotchaX9"
-                }, // The parameter provided to your function
-                GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
+                CatalogVersion = "stone",
+                StoreId = "Gotcha",
+                ItemId = "GotchaX9",
+                VirtualCurrency = "DM",
+                Price = 90
             },
-            (ExecuteCloudScriptResult result) => {
-                var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                jsonResult.TryGetValue("messageValue", out var messageValue); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
-                Debug.Log(messageValue);
-                
-                var list = JsonConvert.DeserializeObject<List<JObject>>(messageValue.ToString()).Select(x => x?.ToObject<Dictionary<string, string>>()).ToList();
+            (x) =>
+            {
                 var GotStones = new List<StoneOfPlayerInfo> ();
-                foreach (var v in list)
+                if (x.Items.Count > 0)
                 {
-                    var stoneOfPlayerInfo = new StoneOfPlayerInfo();
-                    foreach (var s in v)
+                    foreach (var skillId in x.Items[0].BundleContents)
                     {
-                        if (s.Key == "ItemInstanceId")
+                        var stoneOfPlayerInfo = new StoneOfPlayerInfo
                         {
-                            stoneOfPlayerInfo.InstanceId = s.Value;
-                        }
-                        if (s.Key == "ItemId")
-                        {
-                            stoneOfPlayerInfo.SkillId = s.Value;
-                            Debug.Log("Got this:" + stoneOfPlayerInfo.SkillId);
-                        }
+                            SkillId = skillId
+                        };
+                        GotStones.Add(stoneOfPlayerInfo);
                     }
-                    Stones.Add(stoneOfPlayerInfo);
-                    GotStones.Add(stoneOfPlayerInfo);
                 }
                 action(GotStones);
-            }
-        );
+                Currencies.DiamondCount.Value -= 90;
+            },
+            (x) =>
+            {
+                PopupLayer.ArrangeWarnWindow(x.ErrorMessage);
+            });
     }
 }

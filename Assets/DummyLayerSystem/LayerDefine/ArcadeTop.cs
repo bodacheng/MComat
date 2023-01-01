@@ -12,7 +12,7 @@ using Singleton;
 public class ArcadeTop : UILayer
 {
     [SerializeField] DedicatedCameraConnector connector;
-    [SerializeField] RectTransform container;
+    [SerializeField] VerticalLayoutGroup container;
     [SerializeField] Button jumpToNewStage;
     [SerializeField] StageButton iconPrefab;
     [SerializeField] HeroIcon unitIconPrefab;
@@ -57,13 +57,14 @@ public class ArcadeTop : UILayer
     
     public async UniTask ShowStages(List<int> stages, CancellationToken token)
     {
-        foreach (Transform child in container) {
+        ProgressLayer.Loading(">");
+        foreach (Transform child in container.transform) {
             Destroy(child.gameObject);
         }
         
         stages.Sort((a, b) => b.CompareTo(a));
         _currentStages = stages;
-        Refresh();
+        
         for (var index = 0; index < _currentStages.Count; index++)
         {
             if (token.IsCancellationRequested)
@@ -76,8 +77,7 @@ public class ArcadeTop : UILayer
                 continue;
             }
             
-            var stageButton = Instantiate(iconPrefab, container, true);
-            
+            var stageButton = Instantiate(iconPrefab, container.transform, true);
             void LoadThisStage()
             {
                 one.EventType = FightEventType.Quest;
@@ -99,7 +99,7 @@ public class ArcadeTop : UILayer
                 {
                     await UnitIconDic.Load(one.FightMembers.EnemySets.GetValues()[i].r_id);
                 }
-
+                
                 var heroIcons = await UnitInfosShow(one.FightMembers.EnemySets.GetValues(), stageButton.IconsT);
                 for (var i = 0; i < heroIcons.Count; i++)
                 {
@@ -132,7 +132,12 @@ public class ArcadeTop : UILayer
             
             stageButton.transform.localPosition = Vector3.zero;
             stageButton.transform.localRotation = Quaternion.identity;
+            stageButton.transform.localScale = Vector3.one;
         }
+        
+        Refresh();
+        
+        ProgressLayer.Close();
     }
 
     void Refresh()
@@ -144,6 +149,11 @@ public class ArcadeTop : UILayer
         var currentChapter = _currentStages.Min() / 5;
         
         jumpToNewStage.gameObject.SetActive(progressChapter != currentChapter);
+        
+        container.CalculateLayoutInputHorizontal();
+        container.CalculateLayoutInputVertical();
+        container.SetLayoutHorizontal();
+        container.SetLayoutVertical();
     }
     
     public List<int> NewStages(int progress)

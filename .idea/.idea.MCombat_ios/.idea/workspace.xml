@@ -3,21 +3,22 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/textures/ice_core_len.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/textures/ice_core_len.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/textures/ice_core_len_red.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/textures/ice_core_len_red.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/textures/ice_core_len_yellow.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/textures/ice_core_len_yellow.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_01.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_01_blue.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_01_blue.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_02.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_glow1_blue.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_glow1_blue.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_glow1_red.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_glow1_red.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_glow1_yellow.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_glow1_yellow.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_ray03_blue.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_ray03_blue.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_ring02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/textures/len_ring02.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaFightOver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaFightOver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/12.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/12.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightOverProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightOverProcess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/mst_skill.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Account/mst_skill.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Setting/FightGlobalSetting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/FightGlobalSetting.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightingSceneUISystem/HeroIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightingSceneUISystem/HeroIcon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Gacha/GotchaFront.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Gacha/GotchaFront.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Common.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Common.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Gotcha.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Gotcha.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArcadeTop.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArcadeTop.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArenaFightOver.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArenaFightOver.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/GotchaLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/GotchaLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/TryGotcha.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/TryGotcha.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +40,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.scriptablebuildpipeline@1.19.6/Editor/Tasks/CreateBuiltInShadersBundle.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Purchasing/IStoreController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Runtime/UniversalAdditionalCameraData.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Layout/VerticalLayoutGroup.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/ArcadeBtnEffect.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFab/Client/AccountInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Purchasing/UnityPurchasing.cs" root0="SKIP_HIGHLIGHTING" />
@@ -50,6 +52,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Samples~/PrefabSpawner/PrefabSpawnerSample.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Graphic/RawImageTest.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Build/AnalyzeRules/AnalyzeRule.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Layout/LayoutGroup.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Interfaces/IMayRequireDepthTexture.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.31/UnityEngine.TestRunner/Assertions/LogScope/ILogScope.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Drawing/Manipulators/ResizeBorderFrame.cs" root0="SKIP_HIGHLIGHTING" />
