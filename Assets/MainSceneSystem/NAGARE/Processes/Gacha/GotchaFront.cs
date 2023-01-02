@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using dataAccess;
 using DummyLayerSystem;
 using mainMenu;
+using PlayFab.ClientModels;
+using PlayFab;
 
 public class GotchaFront : MSceneProcess
 {
@@ -11,6 +13,12 @@ public class GotchaFront : MSceneProcess
     public GotchaFront()
     {
         Step = MainSceneStep.GotchaFront;
+    }
+    
+    private Action extraSuccessAction;
+    public void SetExtraSuccessAction(Action _extraSuccessAction)
+    {
+        extraSuccessAction = _extraSuccessAction;
     }
      
     public override void ProcessEnter()
@@ -24,7 +32,14 @@ public class GotchaFront : MSceneProcess
         }
         BackGroundPS.target.Off();
         layer = UILayerLoader.Load<GotchaLayer>();
-        layer.Setup(NineTimes, GetAllSK, GetAllM, Remove25Stones, DropTableInfo);
+        layer.Setup(NineTimes, DropTableInfo, GetAllSK, GetAllM, Remove25Stones);
+        
+        var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
+        upperInfoBar.Setup(null,null,() =>
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.ShopTop, true);
+        });
+        
         SetLoaded(true);
     }
     
@@ -34,18 +49,59 @@ public class GotchaFront : MSceneProcess
         StarsFall.target.gameObject.SetActive(false);
     }
     
-    void DropTableInfo()
+    void DropTableInfo(string dropTableId)
     {
-        PreScene.target.trySwitchToStep(MainSceneStep.DropTableInfo,"GotchaX9", true);
+        PreScene.target.trySwitchToStep(MainSceneStep.DropTableInfo,dropTableId, true);
     }
     
     /// <summary>
     /// 缺少消费关联处理
     /// </summary>
-    static void NineTimes(Action<List<StoneOfPlayerInfo>> success)
+    void NineTimes(string itemId, string currencyCode, int currencyCount)
     {
         UILayerLoader.Remove<GotchaLayer>();// 点击按钮瞬间关闭layer。
-        CloudScript.GotchaX9(success.Invoke);
+        PlayFabClientAPI.PurchaseItem(
+            new PurchaseItemRequest
+            {
+                CatalogVersion = "stone",
+                StoreId = "StoneGotcha",
+                ItemId = itemId,
+                VirtualCurrency = currencyCode,
+                Price = currencyCount
+            },
+            (x) =>
+            {
+                var GotStones = new List<StoneOfPlayerInfo> ();
+                if (x.Items.Count > 0)
+                {
+                    foreach (var skillId in x.Items[0].BundleContents)
+                    {
+                        var stoneOfPlayerInfo = new StoneOfPlayerInfo
+                        {
+                            SkillId = skillId
+                        };
+                        GotStones.Add(stoneOfPlayerInfo);
+                    }
+                }
+
+                switch (currencyCode)
+                {
+                    case "DM":
+                        Currencies.DiamondCount.Value -= currencyCount;
+                        break;
+                    case "GD":
+                        Currencies.CoinCount.Value -= currencyCount;
+                        break;
+                }
+                
+                GotchaResult.Result = GotStones;
+                PreScene.target.trySwitchToStep(MainSceneStep.GotchaResult, true);
+                extraSuccessAction?.Invoke();
+            },
+            (x) =>
+            {
+                PopupLayer.ArrangeWarnWindow(x.ErrorMessage);
+            });
     }
     
     static void GetAllSK()

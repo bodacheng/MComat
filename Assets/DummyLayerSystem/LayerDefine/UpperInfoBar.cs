@@ -20,7 +20,7 @@ public class UpperInfoBar : UILayer
         diamondPlus.interactable = on;
     }
     
-    public void Setup(Action openSetting, Action openMail)
+    public void Setup(Action openSetting, Action openMail, Action openDMShop)
     {
         titleDisplayName.text = PlayerAccountInfo.Me.TitleDisplayName; //SystemInfo.deviceUniqueIdentifier;
         Currencies.DiamondCount.Subscribe(x =>
@@ -32,12 +32,35 @@ public class UpperInfoBar : UILayer
         {
             accountIntelliCoin.text = x.ToString();
         }).AddTo(this.gameObject);
-        
-        settingBtn.onClick.AddListener(openSetting.Invoke);
-        mailBtn.onClick.AddListener(openMail.Invoke);
-        diamondPlus.onClick.AddListener(() =>
+
+        if (openSetting != null)
         {
-            PreScene.target.trySwitchToStep(MainSceneStep.ShopTop, true);
-        });
+            settingBtn.onClick.AddListener(openSetting.Invoke);
+            settingBtn.gameObject.SetActive(true);
+        }
+        else
+        {
+            settingBtn.gameObject.SetActive(false);
+        }
+
+        if (openMail != null)
+        {
+            mailBtn.onClick.AddListener(openMail.Invoke);
+            mailBtn.gameObject.SetActive(true);
+        }
+        else
+        {
+            mailBtn.gameObject.SetActive(false);
+        }
+
+        if (diamondPlus != null)
+        {
+            diamondPlus.onClick.AddListener(openDMShop.Invoke);
+            diamondPlus.gameObject.SetActive(true);
+        }
+        else
+        {
+            diamondPlus.gameObject.SetActive(false);
+        }
     }
 }

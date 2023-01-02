@@ -16,7 +16,8 @@ public class TryGotcha : TutorialProcess
             _gotchaLayer = UILayerLoader.Get<GotchaLayer>();
             if (_gotchaLayer != null)
             {
-                GotchaLayer.SetExtraSuccessAction(
+                var gotchaFront  = (GotchaFront)ProcessesRunner.Main.GetProcess(MainSceneStep.GotchaFront);
+                gotchaFront.SetExtraSuccessAction(
                     () =>
                     {
                         PlayFabReadClient.UpdateUserData(
@@ -61,6 +62,7 @@ public class TryGotcha : TutorialProcess
     
     public override void ProcessEnd()
     {
-        GotchaLayer.SetExtraSuccessAction(null);
+        var gotchaFront  = (GotchaFront)ProcessesRunner.Main.GetProcess(MainSceneStep.GotchaFront);
+        gotchaFront.SetExtraSuccessAction(null);
     }
 }

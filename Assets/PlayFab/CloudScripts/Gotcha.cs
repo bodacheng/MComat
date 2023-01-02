@@ -1,14 +1,8 @@
 ﻿using UnityEngine;
 using PlayFab.ClientModels;
-using System.Collections.Generic;
-using dataAccess;
 using System;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Linq;
-using PlayFab;
 using PlayFab.ServerModels;
-using ExecuteCloudScriptResult = PlayFab.ClientModels.ExecuteCloudScriptResult;
 
 public partial class CloudScript
 {
@@ -40,40 +34,6 @@ public partial class CloudScript
             }, (x) =>
             {
                 Debug.Log(x);
-            });
-    }
-    
-    public static void GotchaX9(Action<List<StoneOfPlayerInfo>> action)
-    {
-        PlayFabClientAPI.PurchaseItem(
-            new PurchaseItemRequest
-            {
-                CatalogVersion = "stone",
-                StoreId = "Gotcha",
-                ItemId = "GotchaX9",
-                VirtualCurrency = "DM",
-                Price = 90
-            },
-            (x) =>
-            {
-                var GotStones = new List<StoneOfPlayerInfo> ();
-                if (x.Items.Count > 0)
-                {
-                    foreach (var skillId in x.Items[0].BundleContents)
-                    {
-                        var stoneOfPlayerInfo = new StoneOfPlayerInfo
-                        {
-                            SkillId = skillId
-                        };
-                        GotStones.Add(stoneOfPlayerInfo);
-                    }
-                }
-                action(GotStones);
-                Currencies.DiamondCount.Value -= 90;
-            },
-            (x) =>
-            {
-                PopupLayer.ArrangeWarnWindow(x.ErrorMessage);
             });
     }
 }

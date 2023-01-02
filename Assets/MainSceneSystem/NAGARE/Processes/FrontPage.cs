@@ -72,8 +72,9 @@ public class FrontPage : MSceneProcess
 
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
         upperInfoBar.Setup(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting), 
-            () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox));
-
+            () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox),
+            () => PreScene.target.trySwitchToStep(MainSceneStep.ShopTop));
+        
         // If account isn't linked to device, ask if link. Only ask once
         if (PlayerAccountInfo.Me.currentLinkedDeviceId != PlayFabReadClient.CustomId && !_askedIfLinkDevice)
         {
