@@ -18,10 +18,10 @@ public partial class StageEditor {
     
     void SkillSelect()
     {
-        _skillSelectFilter = EditorGUILayout.Toggle("限制技能选择条件", _skillSelectFilter, AttackRangeToggleGUI);
+        _skillSelectFilter = EditorGUILayout.Toggle("限制技能选择条件", _skillSelectFilter, _attackRangeToggleGUI);
         if (_skillSelectFilter)
         {
-            EditorGUILayout.LabelField(" ~~~~~  限制技能条件  ~~~~~ ", Title);
+            EditorGUILayout.LabelField(" ~~~~~  限制技能条件  ~~~~~ ", _title);
             _selectSkillExLevel = EditorGUILayout.IntPopup("必杀技等级:", _selectSkillExLevel, _exLevelShows, _exLevels);
             switch(_selectSkillExLevel)
             {
@@ -49,12 +49,12 @@ public partial class StageEditor {
                 _rangeFilter[1] = false;
                 _rangeFilter[2] = false;
             }else{
-                _rangeFilter[0] = EditorGUILayout.Toggle("近", _rangeFilter[0], AttackRangeToggleGUI);
-                _rangeFilter[1] = EditorGUILayout.Toggle("中", _rangeFilter[1], AttackRangeToggleGUI);
-                _rangeFilter[2] = EditorGUILayout.Toggle("远", _rangeFilter[2], AttackRangeToggleGUI);
+                _rangeFilter[0] = EditorGUILayout.Toggle("近", _rangeFilter[0], _attackRangeToggleGUI);
+                _rangeFilter[1] = EditorGUILayout.Toggle("中", _rangeFilter[1], _attackRangeToggleGUI);
+                _rangeFilter[2] = EditorGUILayout.Toggle("远", _rangeFilter[2], _attackRangeToggleGUI);
             }
             EditorGUILayout.EndToggleGroup();
-            EditorGUILayout.LabelField(" ~~~~~  以下将陈列根据条件删选出的技能  ~~~~~ ", Title);
+            EditorGUILayout.LabelField(" ~~~~~  以下将陈列根据条件删选出的技能  ~~~~~ ", _title);
             GUILayout.Space(10f);
         }
         

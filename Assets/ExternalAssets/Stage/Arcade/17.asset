@@ -42,7 +42,7 @@ MonoBehaviour:
       c2: 125
       c3: 55
   - id: 2
-    r_id: -1
+    r_id: 1
     level: 1
     set:
       a1: 113

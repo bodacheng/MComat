@@ -4,63 +4,89 @@ using UnityEngine;
 public partial class StageEditor{
 
     bool Initialized;
-    GUIStyle ButtonStyle;
-    GUIStyle ButtonHasUnit;
-    GUIStyle AddDeleteMember;
-    GUIStyle ButtonStyle_selected;
-    GUIStyle ButtonStyle_save;
-    GUIStyle ButtonStyle_NineAndTwo;
-    GUIStyle ButtonStyle_NineAndTwo_Selected;
-    GUIStyle Big_title;
-    GUIStyle Title;
-    GUIStyle AttackRangeToggleGUI;
+    GUIStyle _buttonStyle;
+    GUIStyle _unitIconStyle, _unitIconSelectedStyle;
+    GUIContent _unitBtnContent;
+    GUIStyle _addDeleteMember;
+    GUIStyle _buttonStyleNineAndTwo;
+    GUIStyle _buttonStyleNineAndTwoSelected;
+    GUIStyle _title;
+    GUIStyle _attackRangeToggleGUI;
     
     void UIParamIni()
     {
-        ButtonStyle = new GUIStyle(GUI.skin.button);
-        ButtonStyle.normal.textColor = Color.red;
-        ButtonStyle.fixedWidth = 100f;
-        ButtonStyle.alignment = TextAnchor.MiddleCenter;
+        _buttonStyle = new GUIStyle(GUI.skin.button)
+        {
+            normal =
+            {
+                textColor = Color.red
+            },
+            fixedWidth = 100f,
+            alignment = TextAnchor.MiddleCenter
+        };
+
+        _unitIconStyle = new GUIStyle(GUI.skin.button)
+        {
+            normal =
+            {
+                textColor = Color.white
+            },
+            fixedWidth = 30f,
+            fixedHeight = 30f,
+            alignment = TextAnchor.MiddleCenter
+        };
         
-        ButtonHasUnit = new GUIStyle(GUI.skin.button);
-        ButtonHasUnit.normal.textColor = Color.green;
-        ButtonHasUnit.fixedWidth = 100f;
-        ButtonHasUnit.alignment = TextAnchor.MiddleCenter;
+        _unitIconSelectedStyle= new GUIStyle(GUI.skin.button)
+        {
+            normal =
+            {
+                textColor = Color.yellow
+            },
+            fixedWidth = 40f,
+            fixedHeight = 40f,
+            alignment = TextAnchor.MiddleCenter
+        };
+
+        _addDeleteMember = new GUIStyle(GUI.skin.button)
+        {
+            normal =
+            {
+                textColor = new Color(1, 0.3f, 0f)
+            },
+            fixedWidth = 50f,
+            alignment = TextAnchor.MiddleCenter
+        };
+
+        _title = new GUIStyle(GUI.skin.label)
+        {
+            normal =
+            {
+                textColor = Color.blue
+            },
+            alignment = TextAnchor.MiddleCenter
+        };
         
-        AddDeleteMember = new GUIStyle(GUI.skin.button);
-        AddDeleteMember.normal.textColor = new Color(1, 0.3f, 0f);
-        AddDeleteMember.fixedWidth = 50f;
-        AddDeleteMember.alignment = TextAnchor.MiddleCenter;
-        
-        ButtonStyle_selected = new GUIStyle(GUI.skin.button);
-        ButtonStyle_selected.normal.textColor = Color.yellow;
-        ButtonStyle_selected.fixedWidth = 100f;
-        ButtonStyle_selected.alignment = TextAnchor.MiddleCenter;
-        
-        ButtonStyle_save = new GUIStyle(GUI.skin.button);
-        ButtonStyle_save.normal.textColor = Color.blue;
-        ButtonStyle_save.fixedWidth = 200f;
-        ButtonStyle_save.alignment = TextAnchor.MiddleCenter;
-        
-        Title = new GUIStyle(GUI.skin.label);
-        Title.normal.textColor = Color.blue;
-        Title.alignment = TextAnchor.MiddleCenter;
-        
-        Big_title = new GUIStyle(GUI.skin.label);
-        Big_title.normal.textColor = Color.red;
-        Big_title.alignment = TextAnchor.UpperLeft;
-        
-        ButtonStyle_NineAndTwo = new GUIStyle(GUI.skin.button);
-        ButtonStyle_NineAndTwo.normal.textColor = Color.blue;
-        ButtonStyle_NineAndTwo.fixedWidth = 80f;
-        ButtonStyle_NineAndTwo.alignment = TextAnchor.MiddleCenter;
-        
-        ButtonStyle_NineAndTwo_Selected = new GUIStyle(GUI.skin.button);
-        ButtonStyle_NineAndTwo_Selected.normal.textColor = Color.yellow;
-        ButtonStyle_NineAndTwo_Selected.fixedWidth = 80f;
-        ButtonStyle_NineAndTwo_Selected.alignment = TextAnchor.MiddleCenter;
-        
-        AttackRangeToggleGUI = new GUIStyle(GUI.skin.toggle)
+        _buttonStyleNineAndTwo = new GUIStyle(GUI.skin.button)
+        {
+            normal =
+            {
+                textColor = Color.blue
+            },
+            fixedWidth = 80f,
+            alignment = TextAnchor.MiddleCenter
+        };
+
+        _buttonStyleNineAndTwoSelected = new GUIStyle(GUI.skin.button)
+        {
+            normal =
+            {
+                textColor = Color.yellow
+            },
+            fixedWidth = 80f,
+            alignment = TextAnchor.MiddleCenter
+        };
+
+        _attackRangeToggleGUI = new GUIStyle(GUI.skin.toggle)
         {
             margin = new RectOffset(1, 1, 11, 11),
             alignment = TextAnchor.MiddleCenter,

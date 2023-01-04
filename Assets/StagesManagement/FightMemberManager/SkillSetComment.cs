@@ -18,27 +18,27 @@ public partial class StageEditor {
         switch (se)
         {
             case SkillSet.SkillEditError.Perfect:
-                Title.normal.textColor = Color.green;
-                EditorGUILayout.LabelField("合法", Title);
+                _title.normal.textColor = Color.green;
+                EditorGUILayout.LabelField("合法", _title);
             break;
             case SkillSet.SkillEditError.NoNormalStart:
-                Title.normal.textColor = Color.red;
-                EditorGUILayout.LabelField("首发技能无普攻", Title);
+                _title.normal.textColor = Color.red;
+                EditorGUILayout.LabelField("首发技能无普攻", _title);
             break;
             case SkillSet.SkillEditError.RepeatedSkill:
-                Title.normal.textColor = Color.red;
-                EditorGUILayout.LabelField("技能重复", Title);
+                _title.normal.textColor = Color.red;
+                EditorGUILayout.LabelField("技能重复", _title);
             break;
             case SkillSet.SkillEditError.UnBalanced:
-                Title.normal.textColor = Color.red;
-                EditorGUILayout.LabelField("必杀普攻不平衡", Title);
+                _title.normal.textColor = Color.red;
+                EditorGUILayout.LabelField("必杀普攻不平衡", _title);
             break;
             case SkillSet.SkillEditError.NotFull:
-                Title.normal.textColor = Color.red;
-                EditorGUILayout.LabelField("不满", Title);
+                _title.normal.textColor = Color.red;
+                EditorGUILayout.LabelField("不满", _title);
                 break;
         }
-        Title.normal.textColor = Color.black;
+        _title.normal.textColor = Color.black;
         GUILayout.EndHorizontal();
     }
 }

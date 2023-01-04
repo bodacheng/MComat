@@ -74,17 +74,17 @@ public partial class StageEditor {
         
         GUILayout.BeginHorizontal();
         SlotAnalyze(1);
-        if (GUILayout.Button(A1ButtonText, _targetSlot == 1 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(A1ButtonText, _targetSlot == 1 ? _buttonStyleNineAndTwoSelected : _buttonStyleNineAndTwo))
         {
             _targetSlot = 1;
         }
         SlotAnalyze(2);
-        if (GUILayout.Button(A2ButtonText, _targetSlot == 2 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(A2ButtonText, _targetSlot == 2 ? _buttonStyleNineAndTwoSelected : _buttonStyleNineAndTwo))
         {
             _targetSlot = 2;
         }
         SlotAnalyze(3);
-        if (GUILayout.Button(A3ButtonText, _targetSlot == 3 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(A3ButtonText, _targetSlot == 3 ? _buttonStyleNineAndTwoSelected : _buttonStyleNineAndTwo))
         {
             _targetSlot = 3;
         }
@@ -92,17 +92,17 @@ public partial class StageEditor {
         
         GUILayout.BeginHorizontal();
         SlotAnalyze(4);
-        if (GUILayout.Button(B1ButtonText, _targetSlot == 4 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(B1ButtonText, _targetSlot == 4 ? _buttonStyleNineAndTwoSelected : _buttonStyleNineAndTwo))
         {
             _targetSlot = 4;
         }
         SlotAnalyze(5);
-        if (GUILayout.Button(B2ButtonText, _targetSlot == 5 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(B2ButtonText, _targetSlot == 5 ? _buttonStyleNineAndTwoSelected : _buttonStyleNineAndTwo))
         {
             _targetSlot = 5;
         }
         SlotAnalyze(6);
-        if (GUILayout.Button(B3ButtonText, _targetSlot == 6 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(B3ButtonText, _targetSlot == 6 ? _buttonStyleNineAndTwoSelected : _buttonStyleNineAndTwo))
         {
             _targetSlot = 6;
         }
@@ -110,17 +110,17 @@ public partial class StageEditor {
         
         GUILayout.BeginHorizontal();
         SlotAnalyze(7);
-        if (GUILayout.Button(C1ButtonText, _targetSlot == 7 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(C1ButtonText, _targetSlot == 7 ? _buttonStyleNineAndTwoSelected : _buttonStyleNineAndTwo))
         {
             _targetSlot = 7;
         }
         SlotAnalyze(8);
-        if (GUILayout.Button(C2ButtonText, _targetSlot == 8 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(C2ButtonText, _targetSlot == 8 ? _buttonStyleNineAndTwoSelected : _buttonStyleNineAndTwo))
         {
             _targetSlot = 8;
         }
         SlotAnalyze(9);
-        if (GUILayout.Button(C3ButtonText, _targetSlot == 9 ? ButtonStyle_NineAndTwo_Selected : ButtonStyle_NineAndTwo))
+        if (GUILayout.Button(C3ButtonText, _targetSlot == 9 ? _buttonStyleNineAndTwoSelected : _buttonStyleNineAndTwo))
         {
             _targetSlot = 9;
         }

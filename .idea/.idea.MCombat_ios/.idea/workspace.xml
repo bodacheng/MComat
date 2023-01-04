@@ -3,19 +3,40 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UpperInfoBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UpperInfoBar.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Gacha/GotchaFront.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Gacha/GotchaFront.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Gotcha.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Gotcha.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/GotchaLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/GotchaLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Setting/Data.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/Data.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageAwards.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageAwards.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/TryGotcha.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/TryGotcha.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/17.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/17.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/1.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/10.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/10.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/11.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/11.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/12.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/12.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/13.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/13.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/14.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/14.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/2.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/3.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/3.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/4.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/4.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/5.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/5.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/6.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/6.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/7.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/7.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/8.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/8.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/9.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/9.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RPG and MMO UI 11/Textures/Demo/Avatars/AB_UnitFrame_Avatar_Example.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RPG and MMO UI 11/Textures/Demo/Avatars/AB_UnitFrame_Avatar_Example.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame - 2px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame - 2px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame - 5px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame - 5px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightInfoGUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightInfoGUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/BasicState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/BasicState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/Members.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/Members.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSelect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSetComment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSetComment.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/UI_Ini.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/UI_Ini.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TimelineSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TimelineSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Search.settings" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Search.settings" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +59,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Purchasing/IStoreController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Runtime/UniversalAdditionalCameraData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Layout/VerticalLayoutGroup.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Security/AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/ArcadeBtnEffect.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFab/Client/AccountInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Purchasing/UnityPurchasing.cs" root0="SKIP_HIGHLIGHTING" />
@@ -83,8 +105,10 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Runtime/External/LibTessDotNet/Geom.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Nodes/Utility/Logic/IsFrontFaceNode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c884d993da6242ae98d95c11d4715907157400/22/52ee20c7/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e0dda07d79934199bc7ad502dc3969bd29200/b6/3fdc9282/GUIContent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.6.5/Runtime/Intrinsics/x86/Csr.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/ResourceManager/AsyncOperations/AsyncOperationHandle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e0dda07d79934199bc7ad502dc3969bd29200/d5/03e14685/GUILayout.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Tests/Editor/ReflectionUtils.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.analytics@4.0.1/Runtime/Runtime/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/Views/IncomingChanges/Gluon/IncomingChangesTab.cs" root0="SKIP_HIGHLIGHTING" />
@@ -93,9 +117,11 @@
     <setting file="file://$PROJECT_DIR$/Assets/TheNineSlot/Validation/ConfirmBtnColorSwapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.scriptablebuildpipeline@1.19.6/Editor/Tasks/CalculateAssetDependencyData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/GUI/AddressablesGUIUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/SpriteDrawUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/Actions/TrackActions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFabSDK/Shared/Public/PlayFabEvents.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.4.0/Editor/Core/ProjectStateManagement/IServiceFlagRequest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/TimelineEditor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2IS7AXmxi1SEqxDoRshceHtRUYD" />
   <component name="ProjectViewState">
@@ -163,7 +189,9 @@
       <workItem from="1672321545734" duration="1273000" />
       <workItem from="1672363871681" duration="2778000" />
       <workItem from="1672630922244" duration="8256000" />
-      <workItem from="1672647224915" duration="1448000" />
+      <workItem from="1672647224915" duration="1805000" />
+      <workItem from="1672752293945" duration="1024000" />
+      <workItem from="1672792710049" duration="11954000" />
     </task>
     <servers />
   </component>

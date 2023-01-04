@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class FightInfoGUI : Editor
 {
     private StageEditor _stageEditor;
     private bool initialized = false;
+    
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector ();
@@ -28,6 +30,19 @@ public class FightInfoGUI : Editor
             EditorUtility.SetDirty(fightInfo);
             AssetDatabase.SaveAssets();
         }
+    }
+    
+    public static Sprite GetSprite(string name)
+    {
+        var searchRootAssetFolder = Application.dataPath;
+        var pfGuiPaths = Directory.GetFiles(searchRootAssetFolder, name, SearchOption.AllDirectories);
+        foreach (var eachPath in pfGuiPaths)
+        {
+            var loadPath = eachPath.Substring(eachPath.LastIndexOf("Assets"));
+            var sprite =(Sprite)AssetDatabase.LoadAssetAtPath(loadPath, typeof(Sprite));
+            return sprite;
+        }
+        return null;
     }
 }
 #endif

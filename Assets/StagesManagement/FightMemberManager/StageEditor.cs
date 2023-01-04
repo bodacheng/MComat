@@ -1,8 +1,12 @@
 ﻿#if UNITY_EDITOR
 using System.Collections.Generic;
 using mainMenu;
+using Singleton;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceLocations;
 
 // 后排敌人——〉角色ID，
 // localID = 0，脚本ID，等级 前排中央敌人——〉角色ID，localID = 1，脚本ID，等级 前排左敌人——〉角色ID，localID = 2，脚本ID，等级 前排右敌人——〉角色ID，localID = 3，脚本ID，等级
@@ -12,6 +16,25 @@ public partial class StageEditor
     UnitInfo _focusingUnitInfo;
     string _focusingType = "human";
     int stageLevel = 1;
+    
+    private static Sprite SlotEmpty;
+    private static bool unitIconInitialized = false;
+    async void UnitIconInitialize()
+    {
+        AsyncOperationHandle<IList<IResourceLocation>> locationHandle = Addressables.LoadResourceLocationsAsync("unit_icon");
+        await locationHandle.Task;
+        if (locationHandle.Status == AsyncOperationStatus.Succeeded)
+        {
+            foreach (var path in locationHandle.Result)
+            {
+                string[] words = path.PrimaryKey.Split("unit/");
+                await UnitIconDic.Load(words[1]);
+            }
+        }
+        
+        SlotEmpty = FightInfoGUI.GetSprite("SlotEmpty.png");
+        unitIconInitialized = true;
+    }
     
     public void OnGUIView(FightMembers target)
     {
@@ -26,6 +49,12 @@ public partial class StageEditor
             Initialized = true;
         }
         
+        if (!unitIconInitialized)
+        {
+            UnitIconInitialize();
+            return;
+        }
+        
         GUILayout.Space(10);
         Members(target);
         GUILayout.Space(10);
@@ -38,7 +67,7 @@ public partial class StageEditor
         GUILayout.BeginHorizontal();
         if (_focusingUnitInfo == null)
         {
-            if (GUILayout.Button("Add", AddDeleteMember))
+            if (GUILayout.Button("Add", _addDeleteMember))
             {
                 _focusingPosID ??= "0";
                 _focusingUnitInfo = new UnitInfo
@@ -50,7 +79,7 @@ public partial class StageEditor
         }
         if (_focusingUnitInfo != null)
         {
-            if (GUILayout.Button("Delete", AddDeleteMember))
+            if (GUILayout.Button("Delete", _addDeleteMember))
             {
                 target.EnemySets.Set(0, int.Parse(_focusingPosID), null);
                 _focusingUnitInfo = null;
@@ -77,7 +106,7 @@ public partial class StageEditor
             
             _focusingUnitInfo.set = SkillSet.RandomSkillSet(_focusingType,  null,  false, form, noSpLimit);
         }
-        if (GUILayout.Button("一般", ButtonStyle))
+        if (GUILayout.Button("一般", _buttonStyle))
         {
             var form = new SkillStonesBox.StoneFilterForm
             {
@@ -86,7 +115,7 @@ public partial class StageEditor
             };
             Random(form);
         }
-        if (GUILayout.Button("中boss", ButtonStyle))
+        if (GUILayout.Button("中boss", _buttonStyle))
         {
             var form = new SkillStonesBox.StoneFilterForm
             {
@@ -95,7 +124,7 @@ public partial class StageEditor
             };
             Random(form);
         }
-        if (GUILayout.Button("大boss", ButtonStyle))
+        if (GUILayout.Button("大boss", _buttonStyle))
         {
             var form = new SkillStonesBox.StoneFilterForm
             {
@@ -104,7 +133,7 @@ public partial class StageEditor
             };
             Random(form);
         }
-        if (GUILayout.Button("超boss", ButtonStyle))
+        if (GUILayout.Button("超boss", _buttonStyle))
         {
             var form = new SkillStonesBox.StoneFilterForm
             {
@@ -128,7 +157,7 @@ public partial class StageEditor
         }
         else
         {
-            if (GUILayout.Button("重选技能", ButtonStyle))
+            if (GUILayout.Button("重选技能", _buttonStyle))
             {
                 SetSkillId(null);
                 NineSlotPart();// 为了刷新格子颜色

@@ -29,8 +29,7 @@ public class Starter : MonoBehaviour
     public void Initialise()
     {
         NativeLeakDetection.Mode = NativeLeakDetectionMode.EnabledWithStackTrace;
-        
-        Debug.Log("files loads...");
+        AddressablesLogic.ReleaseAsyncOperationHandles();
         fightGlobalSetting.Initialise();
         playFabSetting.Initialise();
         keywordSetting.Initialise();
