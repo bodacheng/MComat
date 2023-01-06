@@ -21,11 +21,6 @@ public class FrontPage : MSceneProcess
         missionWatcher.Finish("itemsLoadFinished", value);
     }
     
-    void ArenaTFinished(bool value)
-    {
-        missionWatcher.Finish("arenaTFinished", value);
-    }
-    
     void ArcadeTFinished(bool value)
     {
         missionWatcher.Finish("arcadeTFinished", value);
@@ -116,14 +111,13 @@ public class FrontPage : MSceneProcess
         
         //AccountCharsSet.LoadTutorial();
         PlayFabReadClient.LoadItems(ItemsLoadFinished);
-        PlayFabReadClient.LoadTeamSet("arena", ArenaTFinished);
         PlayFabReadClient.LoadTeamSet("arcade", ArcadeTFinished);
         
         missionWatcher = new MissionWatcher(
             new List<string>
             {
                 "itemsLoadFinished", "statisticsFinished", 
-                "userReadOnlyDataLoadLoaded", "arcadeTFinished", "arenaTFinished"
+                "userReadOnlyDataLoadLoaded", "arcadeTFinished"
             },
             () =>
             {

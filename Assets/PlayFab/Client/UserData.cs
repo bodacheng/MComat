@@ -95,12 +95,12 @@ public partial class PlayFabReadClient
         );
     }
 
-    public static void UpdateUserTitleDisplayName(string DisplayName, Action<UpdateUserTitleDisplayNameResult> finished, Action<PlayFabError> error)
+    public static void UpdateUserTitleDisplayName(string displayName, Action<UpdateUserTitleDisplayNameResult> finished, Action<PlayFabError> error)
     {
         PlayFabClientAPI.UpdateUserTitleDisplayName(
             new UpdateUserTitleDisplayNameRequest
             {
-                DisplayName = DisplayName
+                DisplayName = displayName
             },
             finished.Invoke,
             error

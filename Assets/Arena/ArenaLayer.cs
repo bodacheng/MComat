@@ -37,22 +37,32 @@ public class ArenaLayer : UILayer
     private int bronzePoint = 400;
     private int silverPoint = 800;
     private int goldPoint = 1200;
-    private LeaderboardInfo _myLeaderboardInfo;
     
-    private Action<bool> _setLoaded;
-    private Action _returnToLobby;
-    private Func<int, List<LeaderboardInfo>> _getOpponentAroundPoint;
-    public void SetUp(Action<bool> setLoaded, 
-        Action returnToLobby, 
-        Func<int, List<LeaderboardInfo>> getOpponentAroundPoint,
-        Action openRanking)
+    public void SetUp(Action loadData, Action openRanking)
     {
-        this._setLoaded = setLoaded;
-        this._returnToLobby = returnToLobby;
-        this._getOpponentAroundPoint = getOpponentAroundPoint;
+        refreshBtn.onClick.RemoveAllListeners();
+        refreshBtn.onClick.AddListener(()=> loadData());
         
         rankingPageBtn.onClick.RemoveAllListeners();
         rankingPageBtn.onClick.AddListener(()=> openRanking());
+    }
+
+    public void SetMyArenaInfo(int rank, int extraAwardLeft)
+    {
+        RefreshRankIcon(rank);
+        extraAwardLeftToday.text = "(" + extraAwardLeft + "/3)"; 
+    }
+
+    public void SetMyLeaderboardInfo(LeaderboardInfo _myLeaderboardInfo)
+    {
+        RefreshRankPointBar(_myLeaderboardInfo.PlayerLeaderboardEntry.StatValue);
+        myScore.text = _myLeaderboardInfo.PlayerLeaderboardEntry.StatValue.ToString();
+        myRank.text = "Rank :" + _myLeaderboardInfo.PlayerLeaderboardEntry.Position;
+    }
+
+    public void ShowEnemies(List<LeaderboardInfo> enemies)
+    {
+        DisplayOpponents(enemies);
     }
 
     void RefreshRankPointBar(int current)
@@ -69,72 +79,6 @@ public class ArenaLayer : UILayer
         bronzeIcon.SetActive(rank == 0);
         silverIcon.SetActive(rank == 1);
         goldIcon.SetActive(rank == 2);
-    }
-    
-    public void RefreshOpponent()
-    {
-        var extraAwardLeft = 3 - PlayerAccountInfo.Me.arenaCountToday;
-        extraAwardLeft = Mathf.Clamp(extraAwardLeft, 0, extraAwardLeft);
-        extraAwardLeftToday.text = "(" + extraAwardLeft + "/3)"; 
-        RefreshRankIcon(PlayerAccountInfo.Me.currentRank);
-        
-        refreshBtn.onClick.RemoveAllListeners();
-        refreshBtn.onClick.AddListener(RefreshOpponent);
-        
-        ProgressLayer.Loading(">");
-        CloudScript.GetLeaderboardAroundUser(
-            obj =>
-            {
-                var exceptSelf = new List<LeaderboardInfo>();
-                foreach (var t in obj)
-                {
-                    if (t.PlayerLeaderboardEntry.PlayFabId != PlayerAccountInfo.Me.PlayFabId)
-                    {
-                        Debug.Log( "Opponent info loaded : " +t.PlayerLeaderboardEntry.PlayFabId);
-                        exceptSelf.Add(t);
-                    }
-                    else
-                    {
-                        Debug.Log( "Self info loaded : " +t.PlayerLeaderboardEntry.PlayFabId);
-                        _myLeaderboardInfo = t;
-                    }
-                }
-                if (_myLeaderboardInfo != null)
-                {
-                    RefreshRankPointBar(_myLeaderboardInfo.PlayerLeaderboardEntry.StatValue);
-                    myScore.text = _myLeaderboardInfo.PlayerLeaderboardEntry.StatValue.ToString();
-                    myRank.text = "Rank :" + _myLeaderboardInfo.PlayerLeaderboardEntry.Position;
-                }
-                else
-                {
-                    myScore.gameObject.SetActive(false);
-                    myRank.gameObject.SetActive(false);
-                }
-                
-                if (exceptSelf.Count < 3)
-                {
-                    var myPoint = (_myLeaderboardInfo != null) ? _myLeaderboardInfo.PlayerLeaderboardEntry.StatValue : 1000;
-                    var list = this._getOpponentAroundPoint(myPoint);
-                    for (var i = 0; i < list.Count; i++)
-                    {
-                        exceptSelf.Add(list[i]);
-                        if (exceptSelf.Count == 3)
-                        {
-                            break;
-                        }
-                    }
-                }
-                
-                DisplayOpponents(exceptSelf);
-                ProgressLayer.Close();
-                _setLoaded.Invoke(true);
-            },
-            () =>
-            {
-                ProgressLayer.Close();
-                _returnToLobby.Invoke();
-            }
-        );
     }
     
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
