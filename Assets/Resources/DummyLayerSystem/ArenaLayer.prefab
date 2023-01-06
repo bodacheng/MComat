@@ -460,16 +460,16 @@ MonoBehaviour:
   member1: {fileID: 69165872471447435}
   member2: {fileID: 69165872845364502}
   member3: {fileID: 69165873651810636}
-  EditMyTeamBtn: {fileID: 4951913693364351523}
+  editMyTeamBtn: {fileID: 4951913693364351523}
   myScore: {fileID: 8098733855991587621}
   myRank: {fileID: 1234486643644859623}
   plsEditTeamIndicator: {fileID: 8636556668407159720}
   bronzeIcon: {fileID: 8989336897593226232}
   silverIcon: {fileID: 3264024328824935241}
   goldIcon: {fileID: 8670576106932404423}
-  RefreshBtn: {fileID: 4549164827824181004}
-  EnemiesT: {fileID: 4549164827160355230}
-  ArenaFightTeamDisplayPrefab: {fileID: 5034609537138417577}
+  refreshBtn: {fileID: 4549164827824181004}
+  enemiesT: {fileID: 4549164827160355230}
+  arenaFightTeamDisplayPrefab: {fileID: 5034609537138417577}
   extraAwardLeftToday: {fileID: 3144460102232591075}
   rankPointBar: {fileID: 9027616999041002424}
   bronzeAwardGot: {fileID: 8223566047215394351}

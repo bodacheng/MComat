@@ -9,7 +9,7 @@ public class ArenaLayer : UILayer
 {
     #region 玩家队伍
     [SerializeField] HeroIcon member1, member2, member3;
-    [SerializeField] Button EditMyTeamBtn;
+    [SerializeField] Button editMyTeamBtn;
     [SerializeField] Text myScore;
     [SerializeField] Text myRank;
     [SerializeField] GameObject plsEditTeamIndicator;
@@ -18,9 +18,9 @@ public class ArenaLayer : UILayer
     [SerializeField] GameObject goldIcon;
     #endregion
     
-    [SerializeField] Button RefreshBtn;
-    [SerializeField] RectTransform EnemiesT;
-    [SerializeField] ArenaFightTeamDisplay ArenaFightTeamDisplayPrefab;
+    [SerializeField] Button refreshBtn;
+    [SerializeField] RectTransform enemiesT;
+    [SerializeField] ArenaFightTeamDisplay arenaFightTeamDisplayPrefab;
     
     #region reward indicator
     [SerializeField] Text extraAwardLeftToday;
@@ -37,8 +37,7 @@ public class ArenaLayer : UILayer
     private int bronzePoint = 400;
     private int silverPoint = 800;
     private int goldPoint = 1200;
-    
-    LeaderboardInfo myLeaderboardInfo;
+    private LeaderboardInfo _myLeaderboardInfo;
     
     private Action<bool> _setLoaded;
     private Action _returnToLobby;
@@ -58,7 +57,7 @@ public class ArenaLayer : UILayer
 
     void RefreshRankPointBar(int current)
     {
-        rankPointBar.value = (float)current / (float)maxArenaPoint;
+        rankPointBar.value = current / (float)maxArenaPoint;
         
         bronzeAwardGot.SetActive(current >= bronzePoint);
         silverAwardGot.SetActive(current >= silverPoint);
@@ -79,8 +78,8 @@ public class ArenaLayer : UILayer
         extraAwardLeftToday.text = "(" + extraAwardLeft + "/3)"; 
         RefreshRankIcon(PlayerAccountInfo.Me.currentRank);
         
-        RefreshBtn.onClick.RemoveAllListeners();
-        RefreshBtn.onClick.AddListener(RefreshOpponent);
+        refreshBtn.onClick.RemoveAllListeners();
+        refreshBtn.onClick.AddListener(RefreshOpponent);
         
         ProgressLayer.Loading(">");
         CloudScript.GetLeaderboardAroundUser(
@@ -97,14 +96,14 @@ public class ArenaLayer : UILayer
                     else
                     {
                         Debug.Log( "Self info loaded : " +t.PlayerLeaderboardEntry.PlayFabId);
-                        myLeaderboardInfo = t;
+                        _myLeaderboardInfo = t;
                     }
                 }
-                if (myLeaderboardInfo != null)
+                if (_myLeaderboardInfo != null)
                 {
-                    RefreshRankPointBar(myLeaderboardInfo.PlayerLeaderboardEntry.StatValue);
-                    myScore.text = myLeaderboardInfo.PlayerLeaderboardEntry.StatValue.ToString();
-                    myRank.text = "Rank :" + myLeaderboardInfo.PlayerLeaderboardEntry.Position;
+                    RefreshRankPointBar(_myLeaderboardInfo.PlayerLeaderboardEntry.StatValue);
+                    myScore.text = _myLeaderboardInfo.PlayerLeaderboardEntry.StatValue.ToString();
+                    myRank.text = "Rank :" + _myLeaderboardInfo.PlayerLeaderboardEntry.Position;
                 }
                 else
                 {
@@ -114,7 +113,7 @@ public class ArenaLayer : UILayer
                 
                 if (exceptSelf.Count < 3)
                 {
-                    var myPoint = (myLeaderboardInfo != null) ? myLeaderboardInfo.PlayerLeaderboardEntry.StatValue : 1000;
+                    var myPoint = (_myLeaderboardInfo != null) ? _myLeaderboardInfo.PlayerLeaderboardEntry.StatValue : 1000;
                     var list = this._getOpponentAroundPoint(myPoint);
                     for (var i = 0; i < list.Count; i++)
                     {
@@ -141,16 +140,16 @@ public class ArenaLayer : UILayer
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
     void DisplayOpponents(List<LeaderboardInfo> leaderboards)
     {
-        foreach (Transform c in EnemiesT)
+        foreach (Transform c in enemiesT)
         {
             Destroy(c.gameObject);
         }
         
         foreach (var t in leaderboards)
         {
-            var o = Instantiate(ArenaFightTeamDisplayPrefab);
+            var o = Instantiate(arenaFightTeamDisplayPrefab);
             o.AddFightToList(t);
-            o.transform.SetParent(EnemiesT);
+            o.transform.SetParent(enemiesT);
             o.transform.localPosition = Vector3.zero;
             o.transform.localScale = Vector3.one;
             o.gameObject.SetActive(true);
@@ -177,7 +176,7 @@ public class ArenaLayer : UILayer
         {
             PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
         }
-        EditMyTeamBtn.onClick.RemoveAllListeners();
-        EditMyTeamBtn.onClick.AddListener(GoToTeamEdit);
+        editMyTeamBtn.onClick.RemoveAllListeners();
+        editMyTeamBtn.onClick.AddListener(GoToTeamEdit);
     }
 }

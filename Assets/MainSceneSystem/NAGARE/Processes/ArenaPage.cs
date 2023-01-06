@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class ArenaPage : MSceneProcess
 {
-    private ArenaLayer arenaLayer;
-    readonly ArenaDummiesTable table = new ();
+    ArenaLayer arenaLayer;
+    readonly ArenaDummiesTable _table = new ();
     void EnterProcess()
     {
         arenaLayer = UILayerLoader.Load<ArenaLayer>();
-        arenaLayer.SetUp(SetLoaded, PreScene.ReturnToLobby, table.GetDummiesAroundPoint, () =>
-        {
-            PreScene.target.trySwitchToStep(MainSceneStep.Ranking);
-        });
+        arenaLayer.SetUp(SetLoaded, PreScene.ReturnToLobby, _table.GetDummiesAroundPoint, 
+            () =>
+            {
+                PreScene.target.trySwitchToStep(MainSceneStep.Ranking);
+            });
         arenaLayer.ShowMyTeam();
         
         if (PlayerAccountInfo.Me.arenaPoint != -1)
         {
             arenaLayer.RefreshOpponent();
         }
-        else // 说明玩家的防御队伍没有登陆，因为arenaPoint是首次登陆防御队伍时候顺便登陆的
+        else
         {
+            // 说明玩家的防御队伍没有登陆，因为arenaPoint是首次登陆防御队伍时候顺便登陆的
             // 强制玩家登陆防御队伍
             SetLoaded(true);
         }
@@ -33,7 +35,7 @@ public class ArenaPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        table.Load();
+        _table.Load();
         EnterProcess();
     }
     

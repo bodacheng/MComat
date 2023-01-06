@@ -20,15 +20,15 @@ public partial class StageEditor
     public static void ExportStageAward()
     {
         var stageAwards = new List<StageAward>();
-        for (int i = 1; i < 100 ; i++)
+        for (int i = 1; i <= 1000 ; i++)
         {
             var award = new StageAward
             {
                 stageKey = i.ToString(),
                 award = new Award
                 {
-                    g = 100,
-                    d = 15,
+                    g = 20,
+                    d = 5,
                 }
             };
             stageAwards.Add(award);

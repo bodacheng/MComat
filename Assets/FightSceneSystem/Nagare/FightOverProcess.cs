@@ -62,6 +62,7 @@ namespace FightScene
                                 var firstTimeBool = (bool)firstTime;
                                 
                                 var a = UILayerLoader.Load<ArenaFightOver>();
+                                a.Step2Anim();
                                 a.ShowAward(rewardGdInt, rewardGmInt).Forget();
 
                                 if (firstTimeBool)
