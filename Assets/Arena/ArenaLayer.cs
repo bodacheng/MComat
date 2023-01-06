@@ -16,9 +16,7 @@ public class ArenaLayer : UILayer
     [SerializeField] Text myScore;
     [SerializeField] Text myRank;
     [SerializeField] GameObject plsEditTeamIndicator;
-    [SerializeField] GameObject bronzeIcon;
-    [SerializeField] GameObject silverIcon;
-    [SerializeField] GameObject goldIcon;
+    [SerializeField] ArenaRankIcon arenaRankIcon;
     #endregion
     
     [SerializeField] Button refreshBtn;
@@ -27,10 +25,6 @@ public class ArenaLayer : UILayer
     
     #region reward indicator
     [SerializeField] Text extraAwardLeftToday;
-    [SerializeField] Slider rankPointBar;
-    [SerializeField] GameObject bronzeAwardGot;
-    [SerializeField] GameObject silverAwardGot;
-    [SerializeField] GameObject goldAwardGot;
     [SerializeField] Button questionBtn;
     #endregion
     
@@ -54,15 +48,14 @@ public class ArenaLayer : UILayer
         }).AddTo(this.gameObject);
     }
 
-    public void SetMyArenaInfo(int rank, int extraAwardLeft)
+    public void SetMyArenaInfo(int extraAwardLeft)
     {
-        RefreshRankIcon(rank);
+        arenaRankIcon.Set(PlayerAccountInfo.Me.arenaPoint);
         extraAwardLeftToday.text = "(" + extraAwardLeft + "/3)"; 
     }
 
     public void SetMyLeaderboardInfo(LeaderboardInfo _myLeaderboardInfo)
     {
-        RefreshRankPointBar(_myLeaderboardInfo.PlayerLeaderboardEntry.StatValue);
         myScore.text = _myLeaderboardInfo.PlayerLeaderboardEntry.StatValue.ToString();
         myRank.text = "Rank :" + _myLeaderboardInfo.PlayerLeaderboardEntry.Position;
     }
@@ -70,22 +63,6 @@ public class ArenaLayer : UILayer
     public void ShowEnemies(List<LeaderboardInfo> enemies)
     {
         DisplayOpponents(enemies);
-    }
-
-    void RefreshRankPointBar(int current)
-    {
-        rankPointBar.value = current / (float)maxArenaPoint;
-        
-        bronzeAwardGot.SetActive(current >= bronzePoint);
-        silverAwardGot.SetActive(current >= silverPoint);
-        goldAwardGot.SetActive(current >= goldPoint);
-    }
-
-    void RefreshRankIcon(int rank)
-    {
-        bronzeIcon.SetActive(rank == 0);
-        silverIcon.SetActive(rank == 1);
-        goldIcon.SetActive(rank == 2);
     }
     
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）

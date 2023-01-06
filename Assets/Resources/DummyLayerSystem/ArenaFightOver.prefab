@@ -1419,8 +1419,43 @@ PrefabInstance:
     - target: {fileID: 770496383257989977, guid: e47331b69de144b62aef394841ce25b9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1373637177193087998, guid: e47331b69de144b62aef394841ce25b9,
+        type: 3}
+      propertyPath: rankIcons.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373637177193087998, guid: e47331b69de144b62aef394841ce25b9,
+        type: 3}
+      propertyPath: rankIcons.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: f1f98aa9ceb844a77a8e55fce6b48eae,
+        type: 3}
+    - target: {fileID: 1373637177193087998, guid: e47331b69de144b62aef394841ce25b9,
+        type: 3}
+      propertyPath: rankIcons.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 9faa93679376145008f2932e69f94e66,
+        type: 3}
+    - target: {fileID: 1373637177193087998, guid: e47331b69de144b62aef394841ce25b9,
+        type: 3}
+      propertyPath: rankIcons.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 991249a572419495885fc8c70f1c72e9,
+        type: 3}
+    - target: {fileID: 1373637177193087998, guid: e47331b69de144b62aef394841ce25b9,
+        type: 3}
+      propertyPath: rankIcons.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 211ee35aa3e494d83b540f18b1627091,
+        type: 3}
+    - target: {fileID: 1373637177193087998, guid: e47331b69de144b62aef394841ce25b9,
+        type: 3}
+      propertyPath: rankIcons.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: fa11b1773955b420e9e159e51e83159d,
+        type: 3}
     - target: {fileID: 7147824029452837387, guid: e47331b69de144b62aef394841ce25b9,
         type: 3}
       propertyPath: m_Pivot.x

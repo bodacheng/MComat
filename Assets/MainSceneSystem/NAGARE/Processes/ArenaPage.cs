@@ -33,7 +33,7 @@ public class ArenaPage : MSceneProcess
                 PreScene.target.trySwitchToStep(MainSceneStep.Ranking);
             });
         
-        arenaLayer.SetMyArenaInfo(PlayerAccountInfo.Me.currentRank, Currencies.ArenaTicket.Value);
+        arenaLayer.SetMyArenaInfo(Currencies.ArenaTicket.Value);
         missionWatcher = new MissionWatcher(
             new List<string>
             {
