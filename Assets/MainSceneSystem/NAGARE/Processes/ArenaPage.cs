@@ -18,9 +18,13 @@ public class ArenaPage : MSceneProcess
         missionWatcher.Finish("arenaTFinished", value);
     }
     
+    void LeaderBoardFinished(bool value)
+    {
+        missionWatcher.Finish("leaderBoardFinished", value);
+    }
+    
     void EnterProcess()
     {
-        ProgressLayer.Loading(">");
         arenaLayer = UILayerLoader.Load<ArenaLayer>();
         arenaLayer.SetUp(
             LoadLeaderboardInfos,
@@ -36,12 +40,11 @@ public class ArenaPage : MSceneProcess
         missionWatcher = new MissionWatcher(
             new List<string>
             {
-                "arenaTFinished", 
+                "arenaTFinished", "leaderBoardFinished"
             },
             () =>
             {
                 arenaLayer.ShowMyTeam();
-                ProgressLayer.Close();
             }, PreScene.ReturnToLobby);
         
         PlayFabReadClient.LoadTeamSet("arena", ArenaTFinished);
@@ -109,9 +112,13 @@ public class ArenaPage : MSceneProcess
                 }
                 
                 arenaLayer.ShowEnemies(exceptSelf);
+                LeaderBoardFinished(true);
                 SetLoaded(true);
             },
-            PreScene.ReturnToLobby
+            () =>
+            {
+                LeaderBoardFinished(false);
+            }
         );
     }
 }

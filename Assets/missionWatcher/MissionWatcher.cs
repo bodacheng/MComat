@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System;
-using mainMenu;
 
 public class MissionWatcher
 {
@@ -17,15 +16,16 @@ public class MissionWatcher
         _success = success;
         _fail = fail;
     }
-
+    
     public void Finish(string missionCode, bool value)
     {
         _missionDic[missionCode] = value;
         if (!value)
         {
-            // 主动报告一个通信错误的时候才直接执行错误处理
+            // 主动报告一个通信错误的时候才直接执行错误处理,
+            // 如果_success过一次，在原MissionWatcher上以value = false 运行Finish的话
+            // 依然会触发_fail
             _fail?.Invoke();
-            //PreScene.ReturnToLobby();
             return;
         }
         

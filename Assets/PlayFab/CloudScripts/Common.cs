@@ -28,7 +28,7 @@ public partial class CloudScript
                 errorCallback?.Invoke(x);
                 ProgressLayer.Close();
                 PopupLayer.ArrangeWarnWindow(x.ErrorMessage);
-            }, 
+            },
             customData, extraHeaders);
     }
 }
