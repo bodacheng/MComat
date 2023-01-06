@@ -71,7 +71,8 @@ public class FrontPage : MSceneProcess
         _frontLayer.CamConnector.ShowMyModel(focusInstanceID);
 
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
-        upperInfoBar.Setup(() => PreScene.target.trySwitchToStep(MainSceneStep.Setting), 
+        upperInfoBar.Setup(PlayerAccountInfo.Me.TitleDisplayName,
+            () => PreScene.target.trySwitchToStep(MainSceneStep.Setting), 
             () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox),
             () => PreScene.target.trySwitchToStep(MainSceneStep.ShopTop));
         

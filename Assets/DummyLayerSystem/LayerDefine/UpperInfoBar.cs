@@ -1,5 +1,4 @@
-﻿using mainMenu;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using UnityEngine;
 using System;
 using UniRx;
@@ -20,9 +19,9 @@ public class UpperInfoBar : UILayer
         diamondPlus.interactable = on;
     }
     
-    public void Setup(Action openSetting, Action openMail, Action openDMShop)
+    public void Setup(string _titleDisplayName, Action openSetting, Action openMail, Action openDMShop)
     {
-        titleDisplayName.text = PlayerAccountInfo.Me.TitleDisplayName; //SystemInfo.deviceUniqueIdentifier;
+        titleDisplayName.text = _titleDisplayName;
         Currencies.DiamondCount.Subscribe(x =>
         {
             accountDiamondCoin.text = x.ToString();
@@ -53,7 +52,7 @@ public class UpperInfoBar : UILayer
             mailBtn.gameObject.SetActive(false);
         }
 
-        if (diamondPlus != null)
+        if (openDMShop != null)
         {
             diamondPlus.onClick.AddListener(openDMShop.Invoke);
             diamondPlus.gameObject.SetActive(true);

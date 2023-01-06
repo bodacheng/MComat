@@ -1,6 +1,4 @@
 ﻿using System;
-using mainMenu;
-using dataAccess;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,49 +11,19 @@ public class GotchaLayer : UILayer
     [SerializeField] private Button remove25StonesBtn;
     [SerializeField] private Button left, right;
     
-    private int index;
-    public void Setup(Action<string,string,int> nine, Action<string> dropTableInfo, Action getAllSK, Action getAllM, Action remove25Stones)
+    public void Setup(Action<string,string,int> execute, Action<string> dropTableInfo, Action<int, List<DropTablePage>> indexAction,
+        Action getAllSK, Action getAllM, Action remove25Stones)
     {
-        void MoveNext(int next)
-        {
-            if (next > 0)
-            {
-                index = index + 1;
-                if (index == dropTables.Count)
-                {
-                    index = 0;
-                }
-            }
-            else if (next < 0)
-            {
-                index = index - 1;
-                if (index < 0)
-                {
-                    index = dropTables.Count - 1;
-                }
-            }
-            else
-            {
-                index = 0;
-            }
-            
-            for (int i = 0; i < dropTables.Count; i++)
-            {
-                var dropTable = dropTables[i];
-                dropTable.parentT.gameObject.SetActive(index == i);
-            }
-        }
-        
-        for (int i = 0; i < dropTables.Count; i++)
+        for (var i = 0; i < dropTables.Count; i++)
         {
             var dropTable = dropTables[i];
-            dropTable.Setup(nine, dropTableInfo);
+            dropTable.Setup(execute, dropTableInfo);
         }
         
-        left.onClick.AddListener(() => { MoveNext(-1);});
-        right.onClick.AddListener(() => { MoveNext(1);});
-
-        MoveNext(0);
+        left.onClick.AddListener(() => { indexAction(-1, dropTables);});
+        right.onClick.AddListener(() => { indexAction(1, dropTables);});
+        
+        indexAction(0, dropTables);
         
         getAllSKBtn.gameObject.SetActive(true);
         getAllMBtn.gameObject.SetActive(true);

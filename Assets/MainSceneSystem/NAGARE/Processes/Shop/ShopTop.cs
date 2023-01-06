@@ -12,11 +12,17 @@ public class ShopTop : MSceneProcess
     public override void ProcessEnter()
     {
         shopTopLayer = UILayerLoader.Load<ShopTopLayer>();
+        var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
+        upperInfoBar.Setup(null,
+            null, 
+            null,
+            null);
         SetLoaded(true);
     }
     
     public override void ProcessEnd()
     {
+        UILayerLoader.Remove<UpperInfoBar>();
         UILayerLoader.Remove<ShopTopLayer>();
     }
     
