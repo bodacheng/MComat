@@ -33,10 +33,7 @@ public class ArenaPage : MSceneProcess
                 PreScene.target.trySwitchToStep(MainSceneStep.Ranking);
             });
         
-        var extraAwardLeft = 3 - PlayerAccountInfo.Me.arenaCountToday;
-        extraAwardLeft = Mathf.Clamp(extraAwardLeft, 0, extraAwardLeft);
-        arenaLayer.SetMyArenaInfo(PlayerAccountInfo.Me.currentRank, extraAwardLeft);
-        
+        arenaLayer.SetMyArenaInfo(PlayerAccountInfo.Me.currentRank, Currencies.ArenaTicket.Value);
         missionWatcher = new MissionWatcher(
             new List<string>
             {

@@ -146,17 +146,14 @@ public partial class CloudScript
                 var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                 var currentPoint = (jsonResult.ContainsKey("currentPoint") ? jsonResult["currentPoint"] : 0).ToString();
                 var DM = (jsonResult.ContainsKey("DM") ? jsonResult["DM"] : 0).ToString();
-                var arenaCountToday = (jsonResult.ContainsKey("arenaCountToday") ? jsonResult["arenaCountToday"] : 0).ToString();
 
                 int.TryParse(currentPoint, out var currentPointInt);
                 int.TryParse(DM, out var DMInt);
-                int.TryParse(arenaCountToday, out var arenaCountTodayInt);
                 
                 if (PlayerAccountInfo.Me != null)
                 {
                     success.Invoke(PlayerAccountInfo.Me.arenaPoint , currentPointInt, DMInt);
                     PlayerAccountInfo.Me.arenaPoint = currentPointInt;
-                    PlayerAccountInfo.Me.arenaCountToday = arenaCountTodayInt;
                 }
             },
             error => {

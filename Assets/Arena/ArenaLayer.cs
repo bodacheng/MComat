@@ -3,10 +3,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using dataAccess;
 using mainMenu;
+using UniRx;
 using UnityEngine.UI;
 
 public class ArenaLayer : UILayer
 {
+    [SerializeField] private Text ticket;
+    
     #region 玩家队伍
     [SerializeField] HeroIcon member1, member2, member3;
     [SerializeField] Button editMyTeamBtn;
@@ -45,6 +48,10 @@ public class ArenaLayer : UILayer
         
         rankingPageBtn.onClick.RemoveAllListeners();
         rankingPageBtn.onClick.AddListener(()=> openRanking());
+        Currencies.ArenaTicket.Subscribe(x=>
+        {
+            ticket.text = x.ToString();
+        }).AddTo(this.gameObject);
     }
 
     public void SetMyArenaInfo(int rank, int extraAwardLeft)

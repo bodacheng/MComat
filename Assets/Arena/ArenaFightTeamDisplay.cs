@@ -56,7 +56,14 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         BigButton.onClick.RemoveAllListeners();
         void PrepareForIt()
         {
-            PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, true);
+            if (Currencies.ArenaTicket.Value > 0)
+            {
+                PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, true);
+            }
+            else
+            {
+                PopupLayer.ArrangeWarnWindow(Translate.Get("NoArenaEnoughTicket"));
+            }
         }
         BigButton.onClick.AddListener(PrepareForIt);
     }

@@ -61,6 +61,10 @@ public partial class PlayFabReadClient
                     {
                         Currencies.DiamondCount.Value = kv.Value;
                     }
+                    else if (kv.Key == PlayfabSetting._ArenaTicketCodeCode)
+                    {
+                        Currencies.ArenaTicket.Value = kv.Value;
+                    }
                 }
                 finished.Invoke(true);
             },

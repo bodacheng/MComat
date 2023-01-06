@@ -81,8 +81,7 @@ handlers.buildBasicData = function (args, context) {
             PlayFabId: currentPlayerId,
             Data: {
                 "stone_box_size": args.stone_box_size,
-                "playerInitialized" : true,
-                "arenaCountToday" : 0
+                "playerInitialized" : true
             }
         }
     );
@@ -696,22 +695,6 @@ handlers.ArenaPointUp = function (args, context) {
     let opponentPoint = args.opponentPoint;
     let mePoint = args.mePoint;
     
-    var playerData = server.GetUserReadOnlyData({
-        PlayFabId: currentPlayerId,
-        Keys: ["arenaCountToday"]
-    });
-    
-    let arenaCountToday = Number(playerData.Data["arenaCountToday"].Value);
-    if (arenaCountToday < 3) {
-        arenaCountToday += 1;
-        var updateUserDataResult = server.UpdateUserReadOnlyData({
-            PlayFabId: currentPlayerId,
-            Data: {
-                "arenaCountToday": arenaCountToday,
-            }
-        });
-    }
-    
     let shouldPoint = 0;
     // 把基础增分牵制在5到30之间
     if (opponentPoint - mePoint < 5){
@@ -719,9 +702,6 @@ handlers.ArenaPointUp = function (args, context) {
     }
     if (opponentPoint - mePoint > 30) {
         shouldPoint = mePoint + 30;
-    }
-    if (arenaCountToday < 3) {
-        shouldPoint += 50; // 每天前三次竞技场有额外加成
     }
     
     var playerStatResult = server.UpdatePlayerStatistics({
@@ -754,8 +734,7 @@ handlers.ArenaPointUp = function (args, context) {
     
     return {
         "currentPoint" : shouldPoint,
-        "DM" : shouldReward,
-        "arenaCountToday" : arenaCountToday
+        "DM" : shouldReward
     };
 };
 
@@ -1116,12 +1095,22 @@ handlers.CheckIn = function(args) {
     
     if(Date.now() > parseInt(tracker[TRACKER_NEXT_GRANT]))
     {
-        var updateUserDataResult = server.UpdateUserReadOnlyData({
-            PlayFabId: currentPlayerId,
-            Data: {
-                "arenaCountToday": 0,
-            }
-        });
+        // 
+        var inventoryRequest = {
+            "PlayFabId": currentPlayerId
+        };
+        var items = server.GetUserInventory(inventoryRequest);
+        var TK = items.VirtualCurrency["TK"];
+        if (TK < 5)
+        {
+            var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
+                {
+                    PlayFabId :currentPlayerId,
+                    Amount : 5 - TK,
+                    VirtualCurrency : "TK"
+                }
+            );    
+        }
         
         // Eligible for an item grant.
         //check to ensure that it has been less than 24 hours since the last grant window opened

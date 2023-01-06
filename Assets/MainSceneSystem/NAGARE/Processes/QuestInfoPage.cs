@@ -1,7 +1,9 @@
 ﻿using dataAccess;
 using DummyLayerSystem;
 using mainMenu;
-using FightScene;
+using PlayFab;
+using PlayFab.ClientModels;
+using UnityEngine;
 
 public class QuestInfoPage : MSceneProcess
 {
@@ -37,7 +39,28 @@ public class QuestInfoPage : MSceneProcess
         _layer.BeginFight.onClick.RemoveAllListeners();
         void Go()
         {
-            FightLoad.Go(FightScene.FightScene.Fight, true);
+            switch (FightScene.FightScene.Fight.EventType)
+            {
+                case FightEventType.Arena:
+                    PlayFabClientAPI.SubtractUserVirtualCurrency(new SubtractUserVirtualCurrencyRequest
+                        {
+                            Amount = 1,
+                            VirtualCurrency = "TK"
+                        },
+                        (x) =>
+                        {
+                            Currencies.ArenaTicket.Value -= 1;
+                            FightLoad.Go(FightScene.FightScene.Fight, true);
+                        }, (x) =>
+                        {
+                            Debug.Log(x.ErrorMessage);
+                            PreScene.ReturnToLobby();
+                        });
+                    break;
+                default:
+                    FightLoad.Go(FightScene.FightScene.Fight, true);
+                    break;
+            }
         }
         _layer.BeginFight.onClick.AddListener(Go);
         

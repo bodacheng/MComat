@@ -83,9 +83,6 @@ public partial class PlayFabReadClient
                 Keys = new List<string> { "stone_box_size", "arenaCountToday" }
             },
             (obj) => {
-                PlayerAccountInfo.Me.arenaCountToday = 
-                    obj.Data.ContainsKey("arenaCountToday") ? int.Parse(obj.Data["arenaCountToday"].Value) : 0;
-                
                 finished.Invoke(true);
             },
             errorCallback => {
