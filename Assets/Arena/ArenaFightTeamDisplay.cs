@@ -13,7 +13,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
     public Button BigButton;
         
     // 本函数唯一用途是竞技场的挑战玩家选择画面里每组敌人图标按钮的外观与功能加载
-    public void AddFightToList(LeaderboardInfo info)
+    public void AddFightToList(LeaderboardInfo info, Action<FightInfo> tryBeginStage)
     {
         displayName.text = info.PlayerLeaderboardEntry.DisplayName;
         rank.text = info.PlayerLeaderboardEntry.Position.ToString();
@@ -54,18 +54,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         stage.Team2ArenaPoint = info.PlayerLeaderboardEntry.StatValue;
         
         BigButton.onClick.RemoveAllListeners();
-        void PrepareForIt()
-        {
-            if (Currencies.ArenaTicket.Value > 0)
-            {
-                PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, true);
-            }
-            else
-            {
-                PopupLayer.ArrangeWarnWindow(Translate.Get("NoArenaEnoughTicket"));
-            }
-        }
-        BigButton.onClick.AddListener(PrepareForIt);
+        BigButton.onClick.AddListener(()=> tryBeginStage(stage));
     }
     
     public void ArenaRankingShow(LeaderboardInfo info, Action<UnitInfo> onClickUnitIcon)

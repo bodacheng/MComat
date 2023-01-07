@@ -24,36 +24,30 @@ public class ArenaLayer : UILayer
     [SerializeField] ArenaFightTeamDisplay arenaFightTeamDisplayPrefab;
     
     #region reward indicator
-    [SerializeField] Text extraAwardLeftToday;
     [SerializeField] Button questionBtn;
     #endregion
     
     [SerializeField] Button rankingPageBtn;
+
+    private Action<FightInfo> tryBeginStage;
     
-    private int maxArenaPoint = 1300;
-    private int bronzePoint = 400;
-    private int silverPoint = 800;
-    private int goldPoint = 1200;
-    
-    public void SetUp(Action loadData, Action openRanking)
+    public void SetUp(Action loadData, Action openRanking, Action<FightInfo> tryBeginStage)
     {
         refreshBtn.onClick.RemoveAllListeners();
         refreshBtn.onClick.AddListener(()=> loadData());
         
         rankingPageBtn.onClick.RemoveAllListeners();
         rankingPageBtn.onClick.AddListener(()=> openRanking());
+        
         Currencies.ArenaTicket.Subscribe(x=>
         {
             ticket.text = x.ToString();
-        }).AddTo(this.gameObject);
-    }
-
-    public void SetMyArenaInfo(int extraAwardLeft)
-    {
+        }).AddTo(gameObject);
         arenaRankIcon.Set(PlayerAccountInfo.Me.arenaPoint);
-        extraAwardLeftToday.text = "(" + extraAwardLeft + "/3)"; 
-    }
 
+        this.tryBeginStage = tryBeginStage;
+    }
+    
     public void SetMyLeaderboardInfo(LeaderboardInfo _myLeaderboardInfo)
     {
         myScore.text = _myLeaderboardInfo.PlayerLeaderboardEntry.StatValue.ToString();
@@ -76,7 +70,7 @@ public class ArenaLayer : UILayer
         foreach (var t in leaderboards)
         {
             var o = Instantiate(arenaFightTeamDisplayPrefab);
-            o.AddFightToList(t);
+            o.AddFightToList(t, tryBeginStage);
             o.transform.SetParent(enemiesT);
             o.transform.localPosition = Vector3.zero;
             o.transform.localScale = Vector3.one;

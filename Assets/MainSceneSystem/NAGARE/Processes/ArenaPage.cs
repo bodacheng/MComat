@@ -31,9 +31,10 @@ public class ArenaPage : MSceneProcess
             () =>
             {
                 PreScene.target.trySwitchToStep(MainSceneStep.Ranking);
-            });
+            },
+            PrepareForIt
+        );
         
-        arenaLayer.SetMyArenaInfo(Currencies.ArenaTicket.Value);
         missionWatcher = new MissionWatcher(
             new List<string>
             {
@@ -55,6 +56,18 @@ public class ArenaPage : MSceneProcess
             // 说明玩家的防御队伍没有登陆，因为arenaPoint是首次登陆防御队伍时候顺便登陆的
             // 强制玩家登陆防御队伍
             SetLoaded(true);
+        }
+    }
+    
+    void PrepareForIt(FightInfo stage)
+    {
+        if (Currencies.ArenaTicket.Value > 0)
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, true);
+        }
+        else
+        {
+            PopupLayer.ArrangeWarnWindow(Translate.Get("NoArenaEnoughTicket"));
         }
     }
     
