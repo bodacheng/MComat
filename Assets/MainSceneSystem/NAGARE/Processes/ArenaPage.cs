@@ -13,6 +13,11 @@ public class ArenaPage : MSceneProcess
         Step = MainSceneStep.Arena;
     }
     
+    void ItemsLoadFinished(bool value)
+    {
+        missionWatcher.Finish("itemsLoadFinished", value);
+    }
+    
     void ArenaTFinished(bool value)
     {
         missionWatcher.Finish("arenaTFinished", value);
@@ -38,13 +43,17 @@ public class ArenaPage : MSceneProcess
         missionWatcher = new MissionWatcher(
             new List<string>
             {
-                "arenaTFinished", "leaderBoardFinished"
+                "itemsLoadFinished", "arenaTFinished", "leaderBoardFinished", 
             },
             () =>
             {
+                arenaLayer.SetupArenaTicket();
                 arenaLayer.ShowMyTeam();
-            }, PreScene.ReturnToLobby);
+            },
+            PreScene.ReturnToLobby
+        );
         
+        PlayFabReadClient.LoadItems(ItemsLoadFinished);
         PlayFabReadClient.LoadTeamSet("arena", ArenaTFinished);
         
         if (PlayerAccountInfo.Me.arenaPoint != -1)

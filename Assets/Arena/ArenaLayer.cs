@@ -8,7 +8,8 @@ using UnityEngine.UI;
 
 public class ArenaLayer : UILayer
 {
-    [SerializeField] private Text ticket;
+    [SerializeField] Text ticketCount;
+    [SerializeField] Text ticketChargeCountDown;
     
     #region 玩家队伍
     [SerializeField] HeroIcon member1, member2, member3;
@@ -39,13 +40,40 @@ public class ArenaLayer : UILayer
         rankingPageBtn.onClick.RemoveAllListeners();
         rankingPageBtn.onClick.AddListener(()=> openRanking());
         
+        arenaRankIcon.Set(PlayerAccountInfo.Me.arenaPoint);
+        this.tryBeginStage = tryBeginStage;
+    }
+
+    private IDisposable disposeCountDown;
+    public void SetupArenaTicket()
+    {
         Currencies.ArenaTicket.Subscribe(x=>
         {
-            ticket.text = x.ToString();
+            disposeCountDown?.Dispose();
+            ticketCount.text = x.ToString();
+            if (x >= Currencies.RechargeMax)
+            {
+                ticketChargeCountDown.text = string.Empty;
+            }
+            else
+            {
+                disposeCountDown = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe((_) =>
+                {
+                    if (Currencies.SecondsToRecharge > 0)
+                    {
+                        var minute = Currencies.SecondsToRecharge / 60;
+                        var seconds = Currencies.SecondsToRecharge - minute * 60;
+                        ticketChargeCountDown.text = $"{minute :00}:{seconds:00}";
+                        Currencies.SecondsToRecharge -= 1;
+                    }
+                    else
+                    {
+                        Currencies.ArenaTicket.Value += 1;
+                        Currencies.SecondsToRecharge = 60 * 60;
+                    }
+                }).AddTo(gameObject);
+            }
         }).AddTo(gameObject);
-        arenaRankIcon.Set(PlayerAccountInfo.Me.arenaPoint);
-
-        this.tryBeginStage = tryBeginStage;
     }
     
     public void SetMyLeaderboardInfo(LeaderboardInfo _myLeaderboardInfo)

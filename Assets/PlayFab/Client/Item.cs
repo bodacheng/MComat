@@ -66,10 +66,19 @@ public partial class PlayFabReadClient
                         Currencies.ArenaTicket.Value = kv.Value;
                     }
                 }
+
+                foreach (var kv in result.VirtualCurrencyRechargeTimes)
+                {
+                    if (kv.Key == PlayfabSetting._ArenaTicketCodeCode)
+                    {
+                        Currencies.SecondsToRecharge = kv.Value.SecondsToRecharge;
+                        Currencies.RechargeMax = kv.Value.RechargeMax;
+                    }
+                }
                 finished.Invoke(true);
             },
             errorCallback => {
-                Debug.Log(errorCallback.Error);
+                Debug.Log(errorCallback.ErrorMessage);
                 finished.Invoke(false);
             }
         );
