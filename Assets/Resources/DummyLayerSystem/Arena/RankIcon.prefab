@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: fa2ffcfca435d44cc87c4458bb52e7be, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -91,6 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _image: {fileID: 71265425455538251}
   rankIcons:
+  - {fileID: 21300000, guid: fa2ffcfca435d44cc87c4458bb52e7be, type: 3}
   - {fileID: 21300000, guid: f1f98aa9ceb844a77a8e55fce6b48eae, type: 3}
   - {fileID: 21300000, guid: 9faa93679376145008f2932e69f94e66, type: 3}
   - {fileID: 21300000, guid: 991249a572419495885fc8c70f1c72e9, type: 3}

@@ -9,13 +9,14 @@ using UnityEngine.UI;
 public class ArenaLayer : UILayer
 {
     [SerializeField] Text ticketCount;
+    [SerializeField] RectTransform ticketChargeCountDownT;
     [SerializeField] Text ticketChargeCountDown;
     
     #region 玩家队伍
     [SerializeField] HeroIcon member1, member2, member3;
     [SerializeField] Button editMyTeamBtn;
     [SerializeField] Text myScore;
-    [SerializeField] Text myRank;
+    [SerializeField] Text myRank; // playfab 提供的实际排名
     [SerializeField] GameObject plsEditTeamIndicator;
     [SerializeField] ArenaRankIcon arenaRankIcon;
     #endregion
@@ -54,11 +55,13 @@ public class ArenaLayer : UILayer
             if (x >= Currencies.RechargeMax)
             {
                 ticketChargeCountDown.text = string.Empty;
+                ticketChargeCountDownT.gameObject.SetActive(false);
             }
             else
             {
                 disposeCountDown = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe((_) =>
                 {
+                    ticketChargeCountDownT.gameObject.SetActive(true);
                     if (Currencies.SecondsToRecharge > 0)
                     {
                         var minute = Currencies.SecondsToRecharge / 60;
