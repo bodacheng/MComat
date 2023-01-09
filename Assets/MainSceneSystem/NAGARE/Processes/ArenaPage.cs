@@ -78,6 +78,7 @@ public class ArenaPage : MSceneProcess
         {
             // 说明玩家的防御队伍没有登陆，因为arenaPoint是首次登陆防御队伍时候顺便登陆的
             // 强制玩家登陆防御队伍
+            LeaderBoardFinished(true);
             SetLoaded(true);
         }
     }

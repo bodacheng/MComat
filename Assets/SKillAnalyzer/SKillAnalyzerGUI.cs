@@ -54,8 +54,8 @@ public class SKillAnalyzerGUI : EditorWindow
         if (GUILayout.Button("Login"))
         {
             PlayFabReadClient.LoginByDevice(
-                result => {
-                    Debug.Log(" 登陆成功，获得下面这样一个东西： " + result.EntityToken.EntityToken);
+                (x, y) => {
+                    Debug.Log(" 登陆成功，获得下面这样一个东西： " + x.EntityToken.EntityToken);
                 },
                 fail => {
                     Debug.Log("login fail");
@@ -66,18 +66,26 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
-            CloudScript.ArcadeProgress(
-                "1",
-                result =>
+            CloudScript.Common(
+                "grantDevItems",
+                (x) =>
                 {
-                    var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                    var level = jsonResult.ContainsKey("progressLevel") ? jsonResult["progressLevel"] : 0;
-                    var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
-                    var rewardDia = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
-                                
-                    Debug.Log(jsonResult);
+                    Debug.Log("成功给予测试用账户额外财产"+ x.Logs);
                 }
             );
+            
+            // CloudScript.ArcadeProgress(
+            //     "1",
+            //     result =>
+            //     {
+            //         var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+            //         var level = jsonResult.ContainsKey("progressLevel") ? jsonResult["progressLevel"] : 0;
+            //         var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
+            //         var rewardDia = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
+            //                     
+            //         Debug.Log(jsonResult);
+            //     }
+            // );
 
 
             //CloudScript.ArenaPointUp(980,2000,(x,y,z)=>{});

@@ -22,6 +22,12 @@ public partial class PlayFabReadClient
         }
     }
 
+    public enum LoginType
+    {
+        normal,
+        dev
+    }
+
     /// <summary>
     /// 以Username和Password来登陆，
     /// 是玩家在设备迁移的时候会用的方法
@@ -39,7 +45,7 @@ public partial class PlayFabReadClient
     /// <param name="pw"></param>
     /// <param name="success"></param>
     /// <param name="fail"></param>
-    public static void PlayFabEmailLogin(string email, string pw, Action<LoginResult> success, Action<PlayFabError> fail)
+    public static void PlayFabEmailLogin(string email, string pw, Action<LoginResult, LoginType> success, Action<PlayFabError> fail)
     {
         Debug.Log("try login by email:"+ email +"\n"
         + "pw:"+ pw +"\n" + "TitleId:"+ PlayFabSettings.TitleId);
@@ -51,7 +57,7 @@ public partial class PlayFabReadClient
                 Password = pw,
                 TitleId = PlayFabSettings.TitleId
             },
-            success.Invoke,
+            (x)=>success.Invoke(x, LoginType.normal),
             (x)=>
             {
                 Debug.Log(x.Error);
@@ -65,7 +71,7 @@ public partial class PlayFabReadClient
     /// </summary>
     /// <param name="success"></param>
     /// <param name="fail"></param>
-    public static void LoginByDevice(Action<LoginResult> success, Action<PlayFabError> fail)
+    public static void LoginByDevice(Action<LoginResult, LoginType> success, Action<PlayFabError> fail)
     {
 #if UNITY_IOS
             PlayFabClientAPI.LoginWithIOSDeviceID(
@@ -74,7 +80,7 @@ public partial class PlayFabReadClient
                     DeviceId = CustomId,
                     CreateAccount = true
                 },
-                success.Invoke,
+                (x)=>success.Invoke(x, LoginType.normal),
                 fail
             );
 #endif
@@ -86,7 +92,7 @@ public partial class PlayFabReadClient
                 AndroidDeviceId = CustomId,
                 CreateAccount = true
             },
-            success.Invoke,
+            (x)=>success.Invoke(x, LoginType.normal),
             fail
         );
 #endif
@@ -95,7 +101,7 @@ public partial class PlayFabReadClient
     static MissionWatcher _missionWatcher;
     static bool _playerInitialized;
     static bool _tutorialProgressGot;
-    public static void LoginSuccess(LoginResult result)
+    public static void LoginSuccess(LoginResult result, LoginType loginType = LoginType.normal)
     {
         _playerInitialized = false;
         _tutorialProgressGot = false;
@@ -123,7 +129,7 @@ public partial class PlayFabReadClient
             }
         );
         TryProcessWithLimitedTimes(CheckAccountInitialized, ()=> _playerInitialized, 0);
-        TryProcessWithLimitedTimes(CheckTutorialProgressGot, ()=> _tutorialProgressGot, 0);
+        TryProcessWithLimitedTimes(()=> CheckTutorialProgressGot(loginType), ()=> _tutorialProgressGot, 0);
         GetAccountInfo(AccountInfoFinished);
     }
     
@@ -149,7 +155,7 @@ public partial class PlayFabReadClient
         });
     }
 
-    static void CheckTutorialProgressGot()
+    static void CheckTutorialProgressGot(LoginType loginType)
     {
         PlayFabClientAPI.GetUserData
         (
@@ -167,17 +173,29 @@ public partial class PlayFabReadClient
                 }
                 else
                 {
+                    if (loginType == LoginType.dev)
+                    {
+                        CloudScript.Common(
+                            "grantDevItems",
+                            (x) =>
+                            {
+                                Debug.Log("成功给予测试用账户额外财产"+ x.Logs);
+                            }
+                        );
+                    }
+                    
                     UpdateUserData(
                         new UpdateUserDataRequest()
                         {
                             Data = new Dictionary<string, string>
                             {
-                                { "TutorialProgress", "Started" }
+                                { "TutorialProgress", loginType == LoginType.normal? "Started" : "Finished" }
                             }
                         },
                         () =>
                         {
-                            PlayerAccountInfo.Me.tutorialProgress = "Started";
+                            PlayerAccountInfo.Me.tutorialProgress =
+                                loginType == LoginType.normal ? "Started" : "Finished";
                             _tutorialProgressGot = true;
                             _missionWatcher.Finish("tutorialProgressGot", true);
                         },

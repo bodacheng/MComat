@@ -25,9 +25,12 @@ public class Starter : MonoBehaviour
     [SerializeField] FightGlobalSetting fightGlobalSetting;
     [SerializeField] KeywordSetting keywordSetting;
     [SerializeField] DefaultIconSetting defaultIconSetting;
+    [SerializeField] bool devMode = false;
 
+    public static bool _devMode;
     public void Initialise()
     {
+        _devMode = devMode;
         NativeLeakDetection.Mode = NativeLeakDetectionMode.EnabledWithStackTrace;
         AddressablesLogic.ReleaseAsyncOperationHandles();
         fightGlobalSetting.Initialise();

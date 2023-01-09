@@ -102,6 +102,61 @@ handlers.buyCurrency= function (args, context) {
     return { result: AddUserVirtualCurrencyResult };
 }
 
+// 给予dev用户基本财产
+handlers.grantDevItems = function (args, context) {
+    
+    var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
+        {
+            PlayFabId :currentPlayerId,
+            Amount : 99999,
+            VirtualCurrency : "DM"
+        }
+    );
+
+    var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
+        {
+            PlayFabId :currentPlayerId,
+            Amount : 99999,
+            VirtualCurrency : "GD"
+        }
+    );
+
+    var catalogItems = server.GetCatalogItems(
+        {
+            CatalogVersion : "stone"
+        }
+    );
+
+    let stoneIds = [];
+    for (let i = 0; i < catalogItems.Catalog.length; i++) {
+        var itemInfo = catalogItems.Catalog[i];
+        if (itemInfo.Bundle == null && itemInfo.Container == null)
+            stoneIds.push({"PlayFabId": currentPlayerId,"ItemId": itemInfo.ItemId});
+    }
+
+    var grantStoneRequest = {
+        "CatalogVersion": "stone",
+        ItemGrants: stoneIds
+    };
+
+    var stoneResult = server.GrantItemsToUsers(grantStoneRequest);
+    
+    var grantItemRequest = {
+        "CatalogVersion": "unit",
+        "ItemGrants": [
+            {"PlayFabId": currentPlayerId,"ItemId": "1"},//adam
+            {"PlayFabId": currentPlayerId,"ItemId": "2"},//tetsuya
+            {"PlayFabId": currentPlayerId,"ItemId": "4"},//maggie
+            {"PlayFabId": currentPlayerId,"ItemId": "5"},//et
+            {"PlayFabId": currentPlayerId,"ItemId": "6"},//sybill
+            {"PlayFabId": currentPlayerId,"ItemId": "7"} //yuta
+        ]
+    };
+    var playerStatResult = server.GrantItemsToUsers(grantItemRequest);
+    
+    return { result: true };
+};
+
 // 给予玩家基本财产
 handlers.grantBasicItems = function (args, context) {
 

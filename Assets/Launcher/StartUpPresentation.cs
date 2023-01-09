@@ -8,7 +8,7 @@ public class StartUpPresentation : MonoBehaviour
     [SerializeField] Starter Starter;
     [SerializeField] RectTransform T;
     [SerializeField] bool FrontSceneFight;
-    
+
     void Start()
     {
         Screen.SetResolution(1920, 1080, true);

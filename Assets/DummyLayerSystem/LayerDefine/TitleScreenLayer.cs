@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using DummyLayerSystem;
 
 /// <summary>
 /// 这个layer的问题在于，它必须灵活的适应未来可能做出的一些改动
@@ -22,6 +21,10 @@ public class TitleScreenLayer : UILayer
     [SerializeField] Button loginBtn;
     [SerializeField] Button cancelBtn;
 
+    // Dev login
+    [SerializeField] InputField devId;
+    [SerializeField] Button devEnter;
+    
     private float titleAnimFactor = 0;
     public void Initialise()
     {
@@ -30,6 +33,12 @@ public class TitleScreenLayer : UILayer
         cancelBtn.onClick.AddListener(()=> SwitchTab(1));
         loginBtn.onClick.AddListener(EmailLogin);
 
+        if (Starter._devMode)
+        {
+            devEnter.gameObject.SetActive(true);
+            devEnter.onClick.AddListener(DevUserLogin);
+        }
+        
         DOTween.To(() => titleAnimFactor, (x) => titleAnimFactor = x, 2, 10).OnUpdate(() =>
         {
             title.material.SetFloat("_Animation_Factor", titleAnimFactor);
@@ -52,7 +61,8 @@ public class TitleScreenLayer : UILayer
     
     void EmailLogin()
     {
-        PlayFabReadClient.PlayFabEmailLogin(id.text.Trim(), password.text.Trim(), 
+        PlayFabReadClient.PlayFabEmailLogin(
+            id.text.Trim(), password.text.Trim(), 
             PlayFabReadClient.LoginSuccess,
             PlayFabReadClient.LoginFail);
     }
@@ -60,6 +70,14 @@ public class TitleScreenLayer : UILayer
     void TouchScreenLogin()
     {
         PlayFabReadClient.LoginByDevice(
+            PlayFabReadClient.LoginSuccess,
+            PlayFabReadClient.LoginFail);
+    }
+
+    void DevUserLogin()
+    {
+        PlayFabReadClient.LoginByCustomId(
+            devId.text,
             PlayFabReadClient.LoginSuccess,
             PlayFabReadClient.LoginFail);
     }
