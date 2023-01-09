@@ -27,9 +27,23 @@ public class ArenaPage : MSceneProcess
     {
         missionWatcher.Finish("leaderBoardFinished", value);
     }
+
+    void CheckNewSeason()
+    {
+        int lastarenapoint = PlayerPrefs.GetInt("arenapoint");
+        if (lastarenapoint > PlayerAccountInfo.Me.arenaPoint)
+        {
+            var arenaNewSeason = UILayerLoader.Load<ArenaNewSeason>();
+            arenaNewSeason.Setup(lastarenapoint, PlayerAccountInfo.Me.arenaPoint,
+                UILayerLoader.Remove<ArenaNewSeason>);
+        }
+        PlayerPrefs.SetInt("arenapoint", PlayerAccountInfo.Me.arenaPoint);
+    }
     
     void EnterProcess()
     {
+        CheckNewSeason();
+        
         arenaLayer = UILayerLoader.Load<ArenaLayer>();
         arenaLayer.SetUp(
             LoadLeaderboardInfos,
@@ -130,7 +144,7 @@ public class ArenaPage : MSceneProcess
                     }
                 }
                 
-                arenaLayer.ShowEnemies(exceptSelf);
+                arenaLayer.DisplayOpponents(exceptSelf, _myLeaderboardInfo);
                 LeaderBoardFinished(true);
                 SetLoaded(true);
             },

@@ -85,13 +85,9 @@ public class ArenaLayer : UILayer
         myRank.text = "Rank :" + _myLeaderboardInfo.PlayerLeaderboardEntry.Position;
     }
 
-    public void ShowEnemies(List<LeaderboardInfo> enemies)
-    {
-        DisplayOpponents(enemies);
-    }
     
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
-    void DisplayOpponents(List<LeaderboardInfo> leaderboards)
+    public void DisplayOpponents(List<LeaderboardInfo> leaderboards, LeaderboardInfo myInfo)
     {
         foreach (Transform c in enemiesT)
         {
@@ -101,7 +97,7 @@ public class ArenaLayer : UILayer
         foreach (var t in leaderboards)
         {
             var o = Instantiate(arenaFightTeamDisplayPrefab);
-            o.AddFightToList(t, tryBeginStage);
+            o.AddFightToList(t, myInfo, tryBeginStage);
             o.transform.SetParent(enemiesT);
             o.transform.localPosition = Vector3.zero;
             o.transform.localScale = Vector3.one;

@@ -91,7 +91,7 @@ public partial class CloudScript
         );
     }
     
-    public static void GetLeaderboard(Action<List<LeaderboardInfo>> success, Action fail)
+    public static void GetLeaderboard(Action<List<LeaderboardInfo>> success)
     {
         ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest
@@ -116,7 +116,6 @@ public partial class CloudScript
                 catch (Exception e)
                 {
                     Debug.Log(e);
-                    fail.Invoke();
                 }
             }
         );

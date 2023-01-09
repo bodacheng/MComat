@@ -13,17 +13,10 @@ public class RankingPage : MSceneProcess
     public override void ProcessEnter()
     {
         layer = UILayerLoader.Load<RankingLayer>();
-        
-        ProgressLayer.Loading(">");
         CloudScript.GetLeaderboard(
             obj =>
             {
-                ProgressLayer.Close();
                 layer.DisplayOpponents(obj);
-            },
-            () =>
-            {
-                ProgressLayer.Close();
             }
         );
     }

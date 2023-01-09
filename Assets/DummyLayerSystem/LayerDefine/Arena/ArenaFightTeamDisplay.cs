@@ -1,23 +1,26 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-using mainMenu;
 
 // 该模块只用于竞技场front画面的玩家队伍显示和挑战敌人队伍显示
 public class ArenaFightTeamDisplay : MonoBehaviour
 {
-    public Text displayName;
-    public Text rank;
-    public Text arenaPoint;
-    public HeroIcon member1, member2, member3;
-    public Button BigButton;
+    [SerializeField] Text displayName;
+    [SerializeField] Text rank;
+    [SerializeField] ArenaRankIcon rankIcon;
+    [SerializeField] Text arenaPoint;
+    [SerializeField] Text plusArenaPoint;
+    [SerializeField] HeroIcon member1, member2, member3;
+    [SerializeField] Button bigButton;
         
     // 本函数唯一用途是竞技场的挑战玩家选择画面里每组敌人图标按钮的外观与功能加载
-    public void AddFightToList(LeaderboardInfo info, Action<FightInfo> tryBeginStage)
+    public void AddFightToList(LeaderboardInfo info, LeaderboardInfo myInfo, Action<FightInfo> tryBeginStage)
     {
         displayName.text = info.PlayerLeaderboardEntry.DisplayName;
         rank.text = info.PlayerLeaderboardEntry.Position.ToString();
         arenaPoint.text =  info.PlayerLeaderboardEntry.StatValue.ToString();
+        plusArenaPoint.text = "+" +((info.PlayerLeaderboardEntry.StatValue - myInfo.PlayerLeaderboardEntry.StatValue) / 2);
+        rankIcon.Set(info.PlayerLeaderboardEntry.StatValue);
         
         // 竞技场模式下毫无考虑敌人“多组上场”的情况
         for (var index = 0; index < info.Team.Length; index++)
@@ -53,8 +56,8 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         stage.EventType = FightEventType.Arena;
         stage.Team2ArenaPoint = info.PlayerLeaderboardEntry.StatValue;
         
-        BigButton.onClick.RemoveAllListeners();
-        BigButton.onClick.AddListener(()=> tryBeginStage(stage));
+        bigButton.onClick.RemoveAllListeners();
+        bigButton.onClick.AddListener(()=> tryBeginStage(stage));
     }
     
     public void ArenaRankingShow(LeaderboardInfo info, Action<UnitInfo> onClickUnitIcon)
