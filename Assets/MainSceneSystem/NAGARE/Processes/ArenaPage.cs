@@ -110,20 +110,20 @@ public class ArenaPage : MSceneProcess
     void LoadLeaderboardInfos()
     {
         CloudScript.GetLeaderboardAroundUser(
-            obj =>
+            leaderboardInfos =>
             {
                 var exceptSelf = new List<LeaderboardInfo>();
-                foreach (var t in obj)
+                foreach (var leaderboardInfo in leaderboardInfos)
                 {
-                    if (t.PlayerLeaderboardEntry.PlayFabId != PlayerAccountInfo.Me.PlayFabId)
+                    if (leaderboardInfo.PlayerLeaderboardEntry.PlayFabId != PlayerAccountInfo.Me.PlayFabId)
                     {
-                        Debug.Log( "Opponent info loaded : " +t.PlayerLeaderboardEntry.PlayFabId);
-                        exceptSelf.Add(t);
+                        Debug.Log( "Opponent info loaded : " +leaderboardInfo.PlayerLeaderboardEntry.PlayFabId);
+                        exceptSelf.Add(leaderboardInfo);
                     }
                     else
                     {
-                        Debug.Log( "Self info loaded : " +t.PlayerLeaderboardEntry.PlayFabId);
-                        _myLeaderboardInfo = t;
+                        Debug.Log( "Self info loaded : " +leaderboardInfo.PlayerLeaderboardEntry.PlayFabId);
+                        _myLeaderboardInfo = leaderboardInfo;
                     }
                 }
                 if (_myLeaderboardInfo != null)

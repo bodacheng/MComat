@@ -71,7 +71,7 @@ public class SKillAnalyzerGUI : EditorWindow
                 {
                     for (int i = 0; i < x.Count; i++)
                     {
-                        Debug.Log(x[i].PlayerLeaderboardEntry.DisplayName);
+                        Debug.Log("返回值 :"+ x[i].PlayerLeaderboardEntry.StatValue+ ", "+ x[i].PlayerLeaderboardEntry.DisplayName);
                     }
                 },
                 () =>

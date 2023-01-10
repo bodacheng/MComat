@@ -599,10 +599,11 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
             "ShowDisplayName" : true
         }
     };
+    
     var result = server.GetLeaderboardAroundUser(request);
     let teamInfos = [];
-
-    var chooseHighest = result.Leaderboard[result.Leaderboard.length-1];
+    // 结果列表里分数高的在前
+    var chooseHighest = result.Leaderboard[0];
     var requestForAHigherPlayer = {
         "MaxResultsCount": 1,
         "StatisticName": "arenapoint",
@@ -631,6 +632,8 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
             teamInfos.push(item);
         }
     }
+    
+    // 该返回值内存在元素重复的可能
     return { teamInfos };
 }
 

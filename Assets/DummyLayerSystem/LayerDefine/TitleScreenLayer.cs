@@ -24,6 +24,7 @@ public class TitleScreenLayer : UILayer
     // Dev login
     [SerializeField] InputField devId;
     [SerializeField] Button devEnter;
+    [SerializeField] Button devLoginBtn;
     
     private float titleAnimFactor = 0;
     public void Initialise()
@@ -36,7 +37,7 @@ public class TitleScreenLayer : UILayer
         if (Starter._devMode)
         {
             devEnter.gameObject.SetActive(true);
-            devEnter.onClick.AddListener(DevUserLogin);
+            devLoginBtn.onClick.AddListener(DevUserLogin);
         }
         
         DOTween.To(() => titleAnimFactor, (x) => titleAnimFactor = x, 2, 10).OnUpdate(() =>
