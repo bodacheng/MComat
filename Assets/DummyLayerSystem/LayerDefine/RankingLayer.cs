@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using ModelView;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RankingLayer : UILayer
 {
-    [SerializeField] RectTransform EnemiesT;
+    [SerializeField] VerticalLayoutGroup enemiesT;
     [SerializeField] ArenaFightTeamDisplay arenaFightTeamDisplayPrefab;
     [SerializeField] DedicatedCameraConnector _cameraConnector;
     [SerializeField] NineForShow miniNineForShow;
@@ -24,19 +25,19 @@ public class RankingLayer : UILayer
     
     public void DisplayOpponents(List<LeaderboardInfo> leaderboards)
     {
-        foreach (Transform c in EnemiesT)
-        {
-            Destroy(c.gameObject);
-        }
-        
+        float rectHeight = 0;
         foreach (var t in leaderboards)
         {
             var o = Instantiate(arenaFightTeamDisplayPrefab);
             o.ArenaRankingShow(t, OnClickUnitIcon);
-            o.transform.SetParent(EnemiesT);
+            o.transform.SetParent(enemiesT.transform);
             o.transform.localPosition = Vector3.zero;
             o.transform.localScale = Vector3.one;
             o.gameObject.SetActive(true);
+            
+            rectHeight += o.GetComponent<RectTransform>().rect.height + enemiesT.spacing;
         }
+        enemiesT.GetComponent<RectTransform>().sizeDelta = 
+            new Vector2(enemiesT.GetComponent<RectTransform>().sizeDelta.x, rectHeight);
     }
 }

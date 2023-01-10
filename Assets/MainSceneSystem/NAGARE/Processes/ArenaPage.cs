@@ -30,11 +30,11 @@ public class ArenaPage : MSceneProcess
 
     void CheckNewSeason()
     {
-        int lastarenapoint = PlayerPrefs.GetInt("arenapoint");
-        if (lastarenapoint > PlayerAccountInfo.Me.arenaPoint)
+        int lastSeasonPoint = PlayerPrefs.GetInt("arenapoint");
+        if (lastSeasonPoint > PlayerAccountInfo.Me.arenaPoint)
         {
             var arenaNewSeason = UILayerLoader.Load<ArenaNewSeason>();
-            arenaNewSeason.Setup(lastarenapoint, PlayerAccountInfo.Me.arenaPoint,
+            arenaNewSeason.Setup(lastSeasonPoint, PlayerAccountInfo.Me.arenaPoint,
                 UILayerLoader.Remove<ArenaNewSeason>);
         }
         PlayerPrefs.SetInt("arenapoint", PlayerAccountInfo.Me.arenaPoint);

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using dataAccess;
 using mainMenu;
 using UniRx;
@@ -32,6 +33,7 @@ public class ArenaLayer : UILayer
     [SerializeField] Button rankingPageBtn;
 
     private Action<FightInfo> tryBeginStage;
+    private int maxOpponentCount = 3;
     
     public void SetUp(Action loadData, Action openRanking, Action<FightInfo> tryBeginStage)
     {
@@ -84,7 +86,6 @@ public class ArenaLayer : UILayer
         myScore.text = _myLeaderboardInfo.PlayerLeaderboardEntry.StatValue.ToString();
         myRank.text = "Rank :" + _myLeaderboardInfo.PlayerLeaderboardEntry.Position;
     }
-
     
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
     public void DisplayOpponents(List<LeaderboardInfo> leaderboards, LeaderboardInfo myInfo)
@@ -93,11 +94,12 @@ public class ArenaLayer : UILayer
         {
             Destroy(c.gameObject);
         }
-        
-        foreach (var t in leaderboards)
+        var ordered = leaderboards.OrderBy(x=> x.PlayerLeaderboardEntry.Position).ToList();
+        for (var index = 0; index < Mathf.Min(ordered.Count, maxOpponentCount); index++)
         {
+            var leaderInfo = ordered[index];
             var o = Instantiate(arenaFightTeamDisplayPrefab);
-            o.AddFightToList(t, myInfo, tryBeginStage);
+            o.AddFightToList(leaderInfo, myInfo, tryBeginStage);
             o.transform.SetParent(enemiesT);
             o.transform.localPosition = Vector3.zero;
             o.transform.localScale = Vector3.one;

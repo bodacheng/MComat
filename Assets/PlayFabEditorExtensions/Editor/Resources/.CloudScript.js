@@ -569,6 +569,26 @@ handlers.ArenaDefendTeamSave = function (args, context) {
     };
 }
 
+function AddTeamInfoItem(Leaderboard) {
+    
+    var playerTeamData = server.GetUserData(
+        {
+            PlayFabId: Leaderboard.PlayFabId,
+            Keys: ["DefendTeam"]
+        }
+    );
+    
+    // 玩家可能未曾保存过防御队伍阵容，对这种玩家不返回。
+    if (playerTeamData.Data["DefendTeam"] != null) {
+        var item = {
+            "PlayerLeaderboardEntry": Leaderboard,
+            "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value)
+        };
+        return item;
+    }
+    return null;
+}
+
 handlers.GetLeaderboardAroundUser = function (args, context) {
 
     var request = {
@@ -579,39 +599,54 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
             "ShowDisplayName" : true
         }
     };
-    var Result = server.GetLeaderboardAroundUser(request);
+    var result = server.GetLeaderboardAroundUser(request);
     let teamInfos = [];
 
-    for (let i = 0; i < Result.Leaderboard.length; i++) {
+    var chooseHighest = result.Leaderboard[result.Leaderboard.length-1];
+    var requestForAHigherPlayer = {
+        "MaxResultsCount": 1,
+        "StatisticName": "arenapoint",
+        "ProfileConstraints" : {
+            "ShowDisplayName" : true
+        },
+        "StartPosition" : clamp(chooseHighest.Position - 50)// playfab 不提供指定分数获取排行榜名单功能，只能给个更高位置
+    };
 
-        var playerTeamData = server.GetUserData(
-            {
-                PlayFabId: Result.Leaderboard[i].PlayFabId,
-                Keys: ["DefendTeam"]
-            }
-        );
-
-        // 玩家可能未曾保存过防御队伍阵容，对这种玩家不返回。
-        if (playerTeamData.Data["DefendTeam"] != null) {
-            var item = {
-                "PlayerLeaderboardEntry": Result.Leaderboard[i],
-                "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value)
-            };
+    var higherPlayer = undefined;
+    var higherPlayerResult = server.GetLeaderboard(requestForAHigherPlayer);
+    if (higherPlayerResult.Leaderboard.length > 0) {
+        higherPlayer = higherPlayerResult.Leaderboard[0];
+    }
+    var higherPlayerItem;
+    if (higherPlayer != undefined) 
+        higherPlayerItem = AddTeamInfoItem(higherPlayer);
+    
+    if (higherPlayerItem != null) {
+        teamInfos.push(higherPlayerItem);
+    }
+    
+    for (let i = 0; i < result.Leaderboard.length; i++) {
+        var item = AddTeamInfoItem(result.Leaderboard[i]);
+        if (item != null) {
             teamInfos.push(item);
         }
     }
-    
     return { teamInfos };
+}
+
+function clamp(x) {
+    return (x < 0) ? 0 : x;
 }
 
 handlers.GetLeaderboard = function (args, context) {
 
     var request = {
-        "MaxResultsCount": 20, //自己，和三个对手
+        "MaxResultsCount": 20, 
         "StatisticName": "arenapoint",
         "ProfileConstraints" : {
             "ShowDisplayName" : true
-        }
+        },
+        "StartPosition" : 1
     };
     var Result = server.GetLeaderboard(request);
     let teamInfos = [];
