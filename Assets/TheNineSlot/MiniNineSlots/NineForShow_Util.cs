@@ -15,36 +15,36 @@ public partial class NineForShow : MonoBehaviour
         ).Forget();
     }
 
-    public void LoadShowDetailFeature(Action<string> showDetail)
+    public void AddOnClickToBtns(Action<string> onClickStone)
     {
         A1T.onClick.RemoveAllListeners();
-        A1T.onClick.AddListener(() => { ShowDetailOfStone(A1T, showDetail);});
+        A1T.onClick.AddListener(() => { AddOnClickToBtn(A1T, onClickStone);});
         A2T.onClick.RemoveAllListeners();
-        A2T.onClick.AddListener(() => { ShowDetailOfStone(A2T, showDetail);});
+        A2T.onClick.AddListener(() => { AddOnClickToBtn(A2T, onClickStone);});
         A3T.onClick.RemoveAllListeners();
-        A3T.onClick.AddListener(() => { ShowDetailOfStone(A3T, showDetail);});
+        A3T.onClick.AddListener(() => { AddOnClickToBtn(A3T, onClickStone);});
         
         B1T.onClick.RemoveAllListeners();
-        B1T.onClick.AddListener(() => { ShowDetailOfStone(B1T, showDetail);});
+        B1T.onClick.AddListener(() => { AddOnClickToBtn(B1T, onClickStone);});
         B2T.onClick.RemoveAllListeners();
-        B2T.onClick.AddListener(() => { ShowDetailOfStone(B2T, showDetail);});
+        B2T.onClick.AddListener(() => { AddOnClickToBtn(B2T, onClickStone);});
         B3T.onClick.RemoveAllListeners();
-        B3T.onClick.AddListener(() => { ShowDetailOfStone(B3T, showDetail);});
+        B3T.onClick.AddListener(() => { AddOnClickToBtn(B3T, onClickStone);});
         
         C1T.onClick.RemoveAllListeners();
-        C1T.onClick.AddListener(() => { ShowDetailOfStone(C1T, showDetail);});
+        C1T.onClick.AddListener(() => { AddOnClickToBtn(C1T, onClickStone);});
         C2T.onClick.RemoveAllListeners();
-        C2T.onClick.AddListener(() => { ShowDetailOfStone(C2T, showDetail);});
+        C2T.onClick.AddListener(() => { AddOnClickToBtn(C2T, onClickStone);});
         C3T.onClick.RemoveAllListeners();
-        C3T.onClick.AddListener(() => { ShowDetailOfStone(C3T, showDetail);});
+        C3T.onClick.AddListener(() => { AddOnClickToBtn(C3T, onClickStone);});
     }
     
-    void ShowDetailOfStone(Button targetButton, Action<string> showDetail)
+    void AddOnClickToBtn(Button targetButton, Action<string> onClickStone)
     {
-        SKStoneItem item = targetButton.transform.GetComponentInChildren<SKStoneItem>();
+        var item = targetButton.transform.GetComponentInChildren<SKStoneItem>();
         if (item != null)
         {
-            showDetail(item._SkillConfig.RECORD_ID);
+            onClickStone(item._SkillConfig.RECORD_ID);
         }
     }
 }

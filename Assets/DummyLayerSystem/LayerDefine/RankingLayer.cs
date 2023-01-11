@@ -20,7 +20,13 @@ public class RankingLayer : UILayer
             set.b1, set.b2, set.b3,
             set.c1, set.c2, set.c3
         ).Forget();
-
+        
+        miniNineForShow.AddOnClickToBtns((RECORD_ID) =>
+        {
+            var skillConfig = SkillConfigTable.GetSkillConfig(RECORD_ID);
+            _cameraConnector.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
+        });
+        
         _cameraConnector._ShowModel(unitInfo.r_id).Forget();
     }
 
