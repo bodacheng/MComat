@@ -8,54 +8,54 @@ public partial class NineForShow : MonoBehaviour
     public Button A1T, A2T, A3T, B1T, B2T, B3T, C1T, C2T, C3T;
     public Image A1Frame, A2Frame, A3Frame, B1Frame, B2Frame, B3Frame, C1Frame, C2Frame, C3Frame;
     
-    SKStoneItem A1S, A2S, A3S, B1S, B2S, B3S, C1S, C2S, C3S;
+    SKStoneItem _a1S, _a2S, _a3S, _b1S, _b2S, _b3S, _c1S, _c2S, _c3S;
     
     public void ClearCurrent()
     {
-        if (A1S != null)
+        if (_a1S != null)
         {
-            Destroy(A1S.gameObject);
-            A1S = null;
+            Destroy(_a1S.gameObject);
+            _a1S = null;
         }
-        if (A2S != null)
+        if (_a2S != null)
         {
-            Destroy(A2S.gameObject);
-            A2S = null;
+            Destroy(_a2S.gameObject);
+            _a2S = null;
         }
-        if (A3S != null)
+        if (_a3S != null)
         {
-            Destroy(A3S.gameObject);
-            A3S = null;
+            Destroy(_a3S.gameObject);
+            _a3S = null;
         }
-        if (B1S != null)
+        if (_b1S != null)
         {
-            Destroy(B1S.gameObject);
-            B1S = null;
+            Destroy(_b1S.gameObject);
+            _b1S = null;
         }
-        if (B2S != null)
+        if (_b2S != null)
         {
-            Destroy(B2S.gameObject);
-            B2S = null;
+            Destroy(_b2S.gameObject);
+            _b2S = null;
         }
-        if (B3S != null)
+        if (_b3S != null)
         {
-            Destroy(B3S.gameObject);
-            B3S = null;
+            Destroy(_b3S.gameObject);
+            _b3S = null;
         }
-        if (C1S != null)
+        if (_c1S != null)
         {
-            Destroy(C1S.gameObject);
-            C1S = null;
+            Destroy(_c1S.gameObject);
+            _c1S = null;
         }
-        if (C2S != null)
+        if (_c2S != null)
         {
-            Destroy(C2S.gameObject);
-            C2S = null;
+            Destroy(_c2S.gameObject);
+            _c2S = null;
         }
-        if (C3S != null)
+        if (_c3S != null)
         {
-            Destroy(C3S.gameObject);
-            C3S = null;
+            Destroy(_c3S.gameObject);
+            _c3S = null;
         }
     }
     
@@ -65,51 +65,51 @@ public partial class NineForShow : MonoBehaviour
     {
         ClearCurrent();
         
-        A1S = await Stones.GenerateStoneModel(a1SkillId, false);
-        A2S = await Stones.GenerateStoneModel(a2SkillId, false);
-        A3S = await Stones.GenerateStoneModel(a3SkillId, false);
-        B1S = await Stones.GenerateStoneModel(b1SkillId, false);
-        B2S = await Stones.GenerateStoneModel(b2SkillId, false);
-        B3S = await Stones.GenerateStoneModel(b3SkillId, false);
-        C1S = await Stones.GenerateStoneModel(c1SkillId, false);
-        C2S = await Stones.GenerateStoneModel(c2SkillId, false);
-        C3S = await Stones.GenerateStoneModel(c3SkillId, false);
+        _a1S = await Stones.GenerateStoneModel(a1SkillId, false);
+        _a2S = await Stones.GenerateStoneModel(a2SkillId, false);
+        _a3S = await Stones.GenerateStoneModel(a3SkillId, false);
+        _b1S = await Stones.GenerateStoneModel(b1SkillId, false);
+        _b2S = await Stones.GenerateStoneModel(b2SkillId, false);
+        _b3S = await Stones.GenerateStoneModel(b3SkillId, false);
+        _c1S = await Stones.GenerateStoneModel(c1SkillId, false);
+        _c2S = await Stones.GenerateStoneModel(c2SkillId, false);
+        _c3S = await Stones.GenerateStoneModel(c3SkillId, false);
         
-        if (A1S != null && A1Frame != null)
+        if (_a1S != null && A1Frame != null)
         {
-            A1Frame.color = RefreshFrameColor(A1S._SkillConfig.SP_LEVEL);
+            A1Frame.color = RefreshFrameColor(_a1S._SkillConfig.SP_LEVEL);
         }
-        if (A2S != null && A2Frame != null)
+        if (_a2S != null && A2Frame != null)
         {
-            A2Frame.color = RefreshFrameColor(A2S._SkillConfig.SP_LEVEL);
+            A2Frame.color = RefreshFrameColor(_a2S._SkillConfig.SP_LEVEL);
         }
-        if (A3S != null && A3Frame != null)
+        if (_a3S != null && A3Frame != null)
         {
-            A3Frame.color = RefreshFrameColor(A3S._SkillConfig.SP_LEVEL);
+            A3Frame.color = RefreshFrameColor(_a3S._SkillConfig.SP_LEVEL);
         }
-        if (B1S != null && B1Frame != null)
+        if (_b1S != null && B1Frame != null)
         {
-            B1Frame.color = RefreshFrameColor(B1S._SkillConfig.SP_LEVEL);
+            B1Frame.color = RefreshFrameColor(_b1S._SkillConfig.SP_LEVEL);
         }
-        if (B2S != null && B2Frame != null)
+        if (_b2S != null && B2Frame != null)
         {
-            B2Frame.color = RefreshFrameColor(B2S._SkillConfig.SP_LEVEL);
+            B2Frame.color = RefreshFrameColor(_b2S._SkillConfig.SP_LEVEL);
         }
-        if (B3S != null && B3Frame != null)
+        if (_b3S != null && B3Frame != null)
         {
-            B3Frame.color = RefreshFrameColor(B3S._SkillConfig.SP_LEVEL);
+            B3Frame.color = RefreshFrameColor(_b3S._SkillConfig.SP_LEVEL);
         }
-        if (C1S != null && C1Frame != null)
+        if (_c1S != null && C1Frame != null)
         {
-            C1Frame.color = RefreshFrameColor(C1S._SkillConfig.SP_LEVEL);
+            C1Frame.color = RefreshFrameColor(_c1S._SkillConfig.SP_LEVEL);
         }
-        if (C2S != null && C2Frame != null)
+        if (_c2S != null && C2Frame != null)
         {
-            C2Frame.color = RefreshFrameColor(C2S._SkillConfig.SP_LEVEL);
+            C2Frame.color = RefreshFrameColor(_c2S._SkillConfig.SP_LEVEL);
         }
-        if (C3S != null && C3Frame != null)
+        if (_c3S != null && C3Frame != null)
         {
-            C3Frame.color = RefreshFrameColor(C3S._SkillConfig.SP_LEVEL);
+            C3Frame.color = RefreshFrameColor(_c3S._SkillConfig.SP_LEVEL);
         }
         
         Parent();
@@ -149,14 +149,14 @@ public partial class NineForShow : MonoBehaviour
             SK.gameObject.SetActive(true);
         }
 
-        SS(A1S, A1T);
-        SS(A2S, A2T);
-        SS(A3S, A3T);
-        SS(B1S, B1T);
-        SS(B2S, B2T);
-        SS(B3S, B3T);
-        SS(C1S, C1T);
-        SS(C2S, C2T);
-        SS(C3S, C3T);
+        SS(_a1S, A1T);
+        SS(_a2S, A2T);
+        SS(_a3S, A3T);
+        SS(_b1S, B1T);
+        SS(_b2S, B2T);
+        SS(_b3S, B3T);
+        SS(_c1S, C1T);
+        SS(_c2S, C2T);
+        SS(_c3S, C3T);
     }
 }

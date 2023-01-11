@@ -105,7 +105,8 @@ public class ArenaPage : MSceneProcess
     {
         UILayerLoader.Remove<ArenaLayer>();
     }
-    
+
+    public LeaderboardInfo MyLeaderboardInfo => _myLeaderboardInfo;
     private LeaderboardInfo _myLeaderboardInfo;
     void LoadLeaderboardInfos()
     {

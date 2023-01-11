@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class RankingLayer : UILayer
 {
     [SerializeField] VerticalLayoutGroup enemiesT;
+    [SerializeField] ArenaFightTeamDisplay myArenaFightTeamDisplay;
     [SerializeField] ArenaFightTeamDisplay arenaFightTeamDisplayPrefab;
     [SerializeField] DedicatedCameraConnector _cameraConnector;
     [SerializeField] NineForShow miniNineForShow;
@@ -21,6 +22,11 @@ public class RankingLayer : UILayer
         ).Forget();
 
         _cameraConnector._ShowModel(unitInfo.r_id).Forget();
+    }
+
+    public void SetMyLeaderboardInfo(LeaderboardInfo myTeamInfo)
+    {
+        myArenaFightTeamDisplay.ArenaRankingShow(myTeamInfo, OnClickUnitIcon);
     }
     
     public void DisplayOpponents(List<LeaderboardInfo> leaderboards)

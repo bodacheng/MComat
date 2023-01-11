@@ -4,6 +4,7 @@ using mainMenu;
 public class RankingPage : MSceneProcess
 {
     private RankingLayer layer;
+    private LeaderboardInfo _myLeaderboardInfo;
     
     public RankingPage()
     {
@@ -13,6 +14,9 @@ public class RankingPage : MSceneProcess
     public override void ProcessEnter()
     {
         layer = UILayerLoader.Load<RankingLayer>();
+        var arenaPage = (ArenaPage)ProcessesRunner.Main.GetProcess(MainSceneStep.Arena);
+        _myLeaderboardInfo = arenaPage.MyLeaderboardInfo;
+        layer.SetMyLeaderboardInfo(_myLeaderboardInfo);
         CloudScript.GetLeaderboard(
             obj =>
             {
