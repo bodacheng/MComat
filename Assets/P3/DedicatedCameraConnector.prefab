@@ -351,10 +351,10 @@ MonoBehaviour:
   target: {fileID: 0}
   camera: {fileID: 1192313894380458908}
   eCamera: {fileID: 767077272757755818}
-  UpDownRotateRangeMin: -10
-  UpDownRotateRangeMax: 45
+  upDownRotateRangeMin: -10
+  upDownRotateRangeMax: 45
   rotateSpeed: 90
-  extraZDis: 0
+  extraZDis: 30
   extraZCameraDepth: 5
 --- !u!222 &8129782284400709095
 CanvasRenderer:
@@ -521,7 +521,7 @@ Camera:
   m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 105992
+    m_Bits: 106120
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
