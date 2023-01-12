@@ -7,14 +7,16 @@ public partial class CloudScript
 {
     public static void CheckIn()
     {
-        Debug.Log("Checking-in with Server...");
-        ExecuteCloudScriptRequest request = new ExecuteCloudScriptRequest()
-        {
-            FunctionName = "CheckIn",
-        };
-        
-        ExecuteCloudScriptMainSceneCommon(request, (x) => { }, (x) => { });
-        //ExecuteCloudScriptMainSceneCommon(request, OnCheckInCallback, OnApiCallError);
+        CloudScript.Common(
+            "CheckIn",
+            (x) =>
+            {
+                var jsonResult = (PlayFab.Json.JsonObject)x.FunctionResult;
+                jsonResult.TryGetValue("message", out var messageValue);
+                jsonResult.TryGetValue("award", out var award);
+                Debug.Log("Checkin Result: "+ messageValue + " award:"+award);
+            }
+        );
     }
 
     static void OnCheckInCallback(ExecuteCloudScriptResult result)

@@ -66,14 +66,7 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
-            CloudScript.Common(
-                "CheckIn",
-                (x) =>
-                {
-                    Debug.Log("成功给予测试用账户额外财产"+ x.Logs);
-                },
-                true
-            );
+            CloudScript.CheckIn();
             
             // CloudScript.GetLeaderboardAroundUser(
             //     (x) =>

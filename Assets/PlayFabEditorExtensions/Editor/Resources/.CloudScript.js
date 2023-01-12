@@ -62,6 +62,17 @@ handlers.test = function (args, context) {
     };
 };
 
+function GrantItemToCurrentUser(itemIds, CatalogVersion)
+{
+    var GrantItemsToUserRequest = {
+        "CatalogVersion": CatalogVersion,
+        "PlayFabId" : currentPlayerId,
+        "ItemIds" : itemIds
+    };
+    var GrantItemsToUserResult = server.GrantItemsToUser(GrantItemsToUserRequest);
+    log.info(GrantItemsToUserResult);
+    return JSON.stringify(GrantItemsToUserResult.ItemGrantResults);
+}
 
 // 建立玩家初始数据
 handlers.buildBasicData = function (args, context) {
@@ -131,28 +142,10 @@ handlers.grantDevItems = function (args, context) {
     for (let i = 0; i < catalogItems.Catalog.length; i++) {
         var itemInfo = catalogItems.Catalog[i];
         if (itemInfo.Bundle == null && itemInfo.Container == null)
-            stoneIds.push({"PlayFabId": currentPlayerId,"ItemId": itemInfo.ItemId});
+            stoneIds.push(itemInfo.ItemId);
     }
-
-    var grantStoneRequest = {
-        "CatalogVersion": "stone",
-        ItemGrants: stoneIds
-    };
-
-    var stoneResult = server.GrantItemsToUsers(grantStoneRequest);
-    
-    var grantItemRequest = {
-        "CatalogVersion": "unit",
-        "ItemGrants": [
-            {"PlayFabId": currentPlayerId,"ItemId": "1"},//adam
-            {"PlayFabId": currentPlayerId,"ItemId": "2"},//tetsuya
-            {"PlayFabId": currentPlayerId,"ItemId": "4"},//maggie
-            {"PlayFabId": currentPlayerId,"ItemId": "5"},//et
-            {"PlayFabId": currentPlayerId,"ItemId": "6"},//sybill
-            {"PlayFabId": currentPlayerId,"ItemId": "7"} //yuta
-        ]
-    };
-    var playerStatResult = server.GrantItemsToUsers(grantItemRequest);
+    var stoneResult = GrantItemToCurrentUser(stoneIds , "stone");
+    var unitResult = GrantItemToCurrentUser(["1","2","4","5","6","7"] , "unit");
     
     return { result: true };
 };
@@ -187,21 +180,8 @@ handlers.grantBasicItems = function (args, context) {
         }
     );
     
-    var grantRequest = {
-        "PlayFabId": currentPlayerId,
-        "CatalogVersion": "unit",
-        "ItemIds": args.unit_ids
-    };
-    
-    var GrantedItems = server.GrantItemsToUser(grantRequest);
-    
-    var grantStonesRequest = {
-        "PlayFabId": currentPlayerId,
-        "CatalogVersion": "stone",
-        "ItemIds": args.stone_ids
-    }
-
-    var GrantedStones = server.GrantItemsToUser(grantStonesRequest);
+    var GrantedItems = GrantItemToCurrentUser(args.unit_ids, "unit");
+    var GrantedStones = GrantItemToCurrentUser(args.stone_ids, "stone");
     
     return { result: true };
 };
@@ -219,13 +199,8 @@ handlers.givePassiveSkill= function (args, context) {
     
     let itemIds = [];
     itemIds.push(args.skill_id);
-    var grantRequest = {
-        "PlayFabId": currentPlayerId,
-        "CatalogVersion": "stone",
-        "ItemIds": itemIds
-    };
-
-    var grantResult = server.GrantItemsToUser(grantRequest);
+    var grantResult = GrantItemToCurrentUser(itemIds, "stone");
+    
     // 虽然是for循环体但其实只执行一圈
     for (let i = 0; i < grantResult.ItemGrantResults.length; i++)
     {
@@ -896,53 +871,6 @@ handlers.sendPassResetMail = function(args, context) {
     return { result };
 }
 
-// 我感觉我们还是应该一点点的按关卡进度把角色给玩家。。
-handlers.getMonsterTest = function (args, context) {
-    var request = {
-        "CatalogVersion": "unit",
-        "ItemGrants": [
-            {"PlayFabId": currentPlayerId,"ItemId": "1"},
-            {"PlayFabId": currentPlayerId,"ItemId": "2"},
-            {"PlayFabId": currentPlayerId,"ItemId": "3"},
-            {"PlayFabId": currentPlayerId,"ItemId": "4"},
-            {"PlayFabId": currentPlayerId,"ItemId": "5"},
-            {"PlayFabId": currentPlayerId, "ItemId": "6" },
-            { "PlayFabId": currentPlayerId, "ItemId": "7" },
-            { "PlayFabId": currentPlayerId, "ItemId": "8" },
-            { "PlayFabId": currentPlayerId, "ItemId": "9" },
-            { "PlayFabId": currentPlayerId, "ItemId": "10" },
-            { "PlayFabId": currentPlayerId, "ItemId": "11" }
-        ]
-    };
-    var playerStatResult = server.GrantItemsToUsers(request);
-};
-
-handlers.getStonesTest = function (args, context) {
-    var request = {
-        "CatalogVersion": "stone",
-        "ItemGrants": [{"PlayFabId": currentPlayerId,"ItemId": "1"},
-            {"PlayFabId": currentPlayerId,"ItemId": "39"},
-            {"PlayFabId": currentPlayerId,"ItemId": "5"},
-            {"PlayFabId": currentPlayerId,"ItemId": "176"},
-            {"PlayFabId": currentPlayerId,"ItemId": "95"},
-            {"PlayFabId": currentPlayerId,"ItemId": "2"},{"PlayFabId": currentPlayerId,"ItemId": "3"},{"PlayFabId": currentPlayerId,"ItemId": "4"},{"PlayFabId": currentPlayerId,"ItemId": "5"},{"PlayFabId": currentPlayerId,"ItemId": "6"},{"PlayFabId": currentPlayerId,"ItemId": "7"},{"PlayFabId": currentPlayerId,"ItemId": "8"},{"PlayFabId": currentPlayerId,"ItemId": "9"},{"PlayFabId": currentPlayerId,"ItemId": "10"},{"PlayFabId": currentPlayerId,"ItemId": "11"},{"PlayFabId": currentPlayerId,"ItemId": "12"},{"PlayFabId": currentPlayerId,"ItemId": "13"},{"PlayFabId": currentPlayerId,"ItemId": "14"},{"PlayFabId": currentPlayerId,"ItemId": "15"},{"PlayFabId": currentPlayerId,"ItemId": "16"},{"PlayFabId": currentPlayerId,"ItemId": "17"},{"PlayFabId": currentPlayerId,"ItemId": "18"},{"PlayFabId": currentPlayerId,"ItemId": "19"},{"PlayFabId": currentPlayerId,"ItemId": "20"},{"PlayFabId": currentPlayerId,"ItemId": "21"},{"PlayFabId": currentPlayerId,"ItemId": "22"},{"PlayFabId": currentPlayerId,"ItemId": "23"},{"PlayFabId": currentPlayerId,"ItemId": "24"},{"PlayFabId": currentPlayerId,"ItemId": "25"},{"PlayFabId": currentPlayerId,"ItemId": "26"},{"PlayFabId": currentPlayerId,"ItemId": "27"},{"PlayFabId": currentPlayerId,"ItemId": "28"},{"PlayFabId": currentPlayerId,"ItemId": "29"},{"PlayFabId": currentPlayerId,"ItemId": "30"},{"PlayFabId": currentPlayerId,"ItemId": "31"},{"PlayFabId": currentPlayerId,"ItemId": "32"},{"PlayFabId": currentPlayerId,"ItemId": "33"},{"PlayFabId": currentPlayerId,"ItemId": "34"},{"PlayFabId": currentPlayerId,"ItemId": "35"},{"PlayFabId": currentPlayerId,"ItemId": "36"},{"PlayFabId": currentPlayerId,"ItemId": "37"},{"PlayFabId": currentPlayerId,"ItemId": "38"},{"PlayFabId": currentPlayerId,"ItemId": "39"},{"PlayFabId": currentPlayerId,"ItemId": "40"},{"PlayFabId": currentPlayerId,"ItemId": "41"},{"PlayFabId": currentPlayerId,"ItemId": "42"},{"PlayFabId": currentPlayerId,"ItemId": "43"},{"PlayFabId": currentPlayerId,"ItemId": "44"},{"PlayFabId": currentPlayerId,"ItemId": "45"},{"PlayFabId": currentPlayerId,"ItemId": "46"},{"PlayFabId": currentPlayerId,"ItemId": "47"},{"PlayFabId": currentPlayerId,"ItemId": "48"},{"PlayFabId": currentPlayerId,"ItemId": "49"},{"PlayFabId": currentPlayerId,"ItemId": "50"},{"PlayFabId": currentPlayerId,"ItemId": "51"},{"PlayFabId": currentPlayerId,"ItemId": "52"},{"PlayFabId": currentPlayerId,"ItemId": "53"},{"PlayFabId": currentPlayerId,"ItemId": "54"},{"PlayFabId": currentPlayerId,"ItemId": "55"},{"PlayFabId": currentPlayerId,"ItemId": "56"},{"PlayFabId": currentPlayerId,"ItemId": "57"},{"PlayFabId": currentPlayerId,"ItemId": "58"},{"PlayFabId": currentPlayerId,"ItemId": "59"},{"PlayFabId": currentPlayerId,"ItemId": "60"},{"PlayFabId": currentPlayerId,"ItemId": "61"},{"PlayFabId": currentPlayerId,"ItemId": "62"},{"PlayFabId": currentPlayerId,"ItemId": "63"},{"PlayFabId": currentPlayerId,"ItemId": "64"},{"PlayFabId": currentPlayerId,"ItemId": "65"},{"PlayFabId": currentPlayerId,"ItemId": "66"},{"PlayFabId": currentPlayerId,"ItemId": "67"},{"PlayFabId": currentPlayerId,"ItemId": "68"},{"PlayFabId": currentPlayerId,"ItemId": "69"},{"PlayFabId": currentPlayerId,"ItemId": "70"},{"PlayFabId": currentPlayerId,"ItemId": "71"},{"PlayFabId": currentPlayerId,"ItemId": "72"},{"PlayFabId": currentPlayerId,"ItemId": "73"},{"PlayFabId": currentPlayerId,"ItemId": "74"},{"PlayFabId": currentPlayerId,"ItemId": "75"},{"PlayFabId": currentPlayerId,"ItemId": "76"},{"PlayFabId": currentPlayerId,"ItemId": "77"},{"PlayFabId": currentPlayerId,"ItemId": "78"},{"PlayFabId": currentPlayerId,"ItemId": "79"},{"PlayFabId": currentPlayerId,"ItemId": "80"},{"PlayFabId": currentPlayerId,"ItemId": "81"},{"PlayFabId": currentPlayerId,"ItemId": "82"},{"PlayFabId": currentPlayerId,"ItemId": "83"},{"PlayFabId": currentPlayerId,"ItemId": "84"},{"PlayFabId": currentPlayerId,"ItemId": "85"},{"PlayFabId": currentPlayerId,"ItemId": "86"},{"PlayFabId": currentPlayerId,"ItemId": "87"},{"PlayFabId": currentPlayerId,"ItemId": "88"},{"PlayFabId": currentPlayerId,"ItemId": "89"},{"PlayFabId": currentPlayerId,"ItemId": "90"},{"PlayFabId": currentPlayerId,"ItemId": "91"},{"PlayFabId": currentPlayerId,"ItemId": "92"},{"PlayFabId": currentPlayerId,"ItemId": "93"},{"PlayFabId": currentPlayerId,"ItemId": "94"},{"PlayFabId": currentPlayerId,"ItemId": "95"},{"PlayFabId": currentPlayerId,"ItemId": "96"},{"PlayFabId": currentPlayerId,"ItemId": "97"},{"PlayFabId": currentPlayerId,"ItemId": "98"},{"PlayFabId": currentPlayerId,"ItemId": "99"},{"PlayFabId": currentPlayerId,"ItemId": "100"},{"PlayFabId": currentPlayerId,"ItemId": "101"},{"PlayFabId": currentPlayerId,"ItemId": "102"},{"PlayFabId": currentPlayerId,"ItemId": "103"},{"PlayFabId": currentPlayerId,"ItemId": "104"},{"PlayFabId": currentPlayerId,"ItemId": "105"},{"PlayFabId": currentPlayerId,"ItemId": "106"},{"PlayFabId": currentPlayerId,"ItemId": "107"},{"PlayFabId": currentPlayerId,"ItemId": "108"},{"PlayFabId": currentPlayerId,"ItemId": "109"},{"PlayFabId": currentPlayerId,"ItemId": "110"},{"PlayFabId": currentPlayerId,"ItemId": "111"},{"PlayFabId": currentPlayerId,"ItemId": "112"},{"PlayFabId": currentPlayerId,"ItemId": "113"},{"PlayFabId": currentPlayerId,"ItemId": "114"},{"PlayFabId": currentPlayerId,"ItemId": "115"},{"PlayFabId": currentPlayerId,"ItemId": "116"},{"PlayFabId": currentPlayerId,"ItemId": "117"},{"PlayFabId": currentPlayerId,"ItemId": "118"},{"PlayFabId": currentPlayerId,"ItemId": "119"},{"PlayFabId": currentPlayerId,"ItemId": "120"},{"PlayFabId": currentPlayerId,"ItemId": "121"},{"PlayFabId": currentPlayerId,"ItemId": "122"},{"PlayFabId": currentPlayerId,"ItemId": "123"},{"PlayFabId": currentPlayerId,"ItemId": "124"},{"PlayFabId": currentPlayerId,"ItemId": "125"},{"PlayFabId": currentPlayerId,"ItemId": "126"},{"PlayFabId": currentPlayerId,"ItemId": "127"},{"PlayFabId": currentPlayerId,"ItemId": "128"},{"PlayFabId": currentPlayerId,"ItemId": "129"},{"PlayFabId": currentPlayerId,"ItemId": "130"},{"PlayFabId": currentPlayerId,"ItemId": "131"},{"PlayFabId": currentPlayerId,"ItemId": "132"},{"PlayFabId": currentPlayerId,"ItemId": "133"},{"PlayFabId": currentPlayerId,"ItemId": "134"},{"PlayFabId": currentPlayerId,"ItemId": "135"},{"PlayFabId": currentPlayerId,"ItemId": "136"},{"PlayFabId": currentPlayerId,"ItemId": "137"},{"PlayFabId": currentPlayerId,"ItemId": "138"},{"PlayFabId": currentPlayerId,"ItemId": "139"},{"PlayFabId": currentPlayerId,"ItemId": "140"},{"PlayFabId": currentPlayerId,"ItemId": "141"},{"PlayFabId": currentPlayerId,"ItemId": "142"},{"PlayFabId": currentPlayerId,"ItemId": "143"},{"PlayFabId": currentPlayerId,"ItemId": "144"},{"PlayFabId": currentPlayerId,"ItemId": "145"},{"PlayFabId": currentPlayerId,"ItemId": "146"},{"PlayFabId": currentPlayerId,"ItemId": "147"},{"PlayFabId": currentPlayerId,"ItemId": "148"},{"PlayFabId": currentPlayerId,"ItemId": "149"},{"PlayFabId": currentPlayerId,"ItemId": "150"},{"PlayFabId": currentPlayerId,"ItemId": "151"},{"PlayFabId": currentPlayerId,"ItemId": "152"},{"PlayFabId": currentPlayerId,"ItemId": "153"},{"PlayFabId": currentPlayerId,"ItemId": "156"},{"PlayFabId": currentPlayerId,"ItemId": "154"},{"PlayFabId": currentPlayerId,"ItemId": "155"},{"PlayFabId": currentPlayerId,"ItemId": "157"},{"PlayFabId": currentPlayerId,"ItemId": "158"},{"PlayFabId": currentPlayerId,"ItemId": "159"},{"PlayFabId": currentPlayerId,"ItemId": "160"},{"PlayFabId": currentPlayerId,"ItemId": "161"},{"PlayFabId": currentPlayerId,"ItemId": "162"},{"PlayFabId": currentPlayerId,"ItemId": "163"},{"PlayFabId": currentPlayerId,"ItemId": "164"},{"PlayFabId": currentPlayerId,"ItemId": "165"},{"PlayFabId": currentPlayerId,"ItemId": "166"},{"PlayFabId": currentPlayerId,"ItemId": "167"},{"PlayFabId": currentPlayerId,"ItemId": "168"},{"PlayFabId": currentPlayerId,"ItemId": "169"},{"PlayFabId": currentPlayerId,"ItemId": "170"},{"PlayFabId": currentPlayerId,"ItemId": "171"},{"PlayFabId": currentPlayerId,"ItemId": "172"},{"PlayFabId": currentPlayerId,"ItemId": "173"},{"PlayFabId": currentPlayerId,"ItemId": "174"},{"PlayFabId": currentPlayerId,"ItemId": "175"},{"PlayFabId": currentPlayerId,"ItemId": "176"},{"PlayFabId": currentPlayerId,"ItemId": "177"},{"PlayFabId": currentPlayerId,"ItemId": "178"},{"PlayFabId": currentPlayerId,"ItemId": "179"},{"PlayFabId": currentPlayerId,"ItemId": "180"},{"PlayFabId": currentPlayerId,"ItemId": "181"},{"PlayFabId": currentPlayerId,"ItemId": "182"} ]};
-    var playerStatResult1 = server.GrantItemsToUsers(request);
-    var playerStatResult2 = server.GrantItemsToUsers(request);
-    var playerStatResult3 = server.GrantItemsToUsers(request);
-    var playerStatResult4 = server.GrantItemsToUsers(request);
-    var playerStatResult5 = server.GrantItemsToUsers(request);
-    var playerStatResult6 = server.GrantItemsToUsers(request);
-    var playerStatResult7 = server.GrantItemsToUsers(request);
-    var playerStatResult8 = server.GrantItemsToUsers(request);
-    var playerStatResult9 = server.GrantItemsToUsers(request);
-    var playerStatResult10 = server.GrantItemsToUsers(request);
-    var playerStatResult11 = server.GrantItemsToUsers(request);
-    var playerStatResult12 = server.GrantItemsToUsers(request);
-    var playerStatResult13 = server.GrantItemsToUsers(request);
-    var playerStatResult14 = server.GrantItemsToUsers(request);
-    var playerStatResult15 = server.GrantItemsToUsers(request);
-};
-
 handlers.Remove25Stones = function (args, context) {
 
     var request = {
@@ -1056,6 +984,9 @@ var PROGRESSIVE_MIN_CREDITS = "MinStreak";					// PROGRESSIVE_REWARD_TABLE prope
 var PROGRESSIVE_REWARD = "Reward";							// PROGRESSIVE_REWARD_TABLE property denoting what item gets rewarded at this level
 var TRACKER_NEXT_GRANT = "NextEligibleGrant";				// CHECK_IN_TRACKER property containing the time at which we 
 var TRACKER_LOGIN_STREAK = "LoginStreak";					// CHECK_IN_TRACKER property containing the streak length
+var login_bonus_catalog = "Present";
+var normalDMAward = "normalLoginBonus";
+var extraDMAward = "sevenDaysLoginBonus";
 
 handlers.CheckInExample = function(args) {
 
@@ -1156,24 +1087,7 @@ handlers.CheckIn = function(args) {
         "Keys": [ CHECK_IN_TRACKER ]
     };
     var GetUserReadOnlyDataResponse = server.GetUserReadOnlyData(GetUserReadOnlyDataRequest);
-
-    // Get this title's reward table so we know what items to grant. 
-    var GetTitleDataRequest = {
-        "Keys": [ PROGRESSIVE_REWARD_TABLE ]
-    };
-    var GetTitleDataResult = server.GetTitleData(GetTitleDataRequest);
-    let normalDMAward = 0;
-    let extraDMAward = 0;
-    if(!GetTitleDataResult.Data.hasOwnProperty(PROGRESSIVE_REWARD_TABLE))
-    {
-        log.error("Rewards table could not be found. No rewards will be given. Exiting...");
-        return JSON.stringify([]);
-    }else{
-        var rewardTable = JSON.parse(GetTitleDataResult.Data[PROGRESSIVE_REWARD_TABLE]);
-        normalDMAward = rewardTable[normalDMAward];
-        extraDMAward = rewardTable[extraDMAward];
-    }
-
+    
     // need to ensure that our data field exists
     var tracker = {}; // this would be the first login ever (across any title), so we have to make sure our record exists.
     if(GetUserReadOnlyDataResponse.Data.hasOwnProperty(CHECK_IN_TRACKER))
@@ -1186,14 +1100,7 @@ handlers.CheckIn = function(args) {
         // write back updated data to PlayFab
         UpdateTrackerData(tracker);
         log.info("This was your first login, Login tomorrow to get a bonus!");
-
-        var rewardDM = server.AddUserVirtualCurrency(
-            {
-                PlayFabId :currentPlayerId,
-                Amount : normalDMAward,
-                VirtualCurrency : "DM"
-            }
-        );
+        GrantItemToCurrentUser([normalDMAward], login_bonus_catalog);
         
         return {
             message: "FirstLogin",
@@ -1214,15 +1121,7 @@ handlers.CheckIn = function(args) {
             tracker = ResetTracker();
             UpdateTrackerData(tracker);
             log.info("Your consecutive login streak has been broken. Login tomorrow to get a bonus!");
-            
-            var extraReward = server.AddUserVirtualCurrency(
-                {
-                    PlayFabId :currentPlayerId,
-                    Amount : normalDMAward,
-                    VirtualCurrency : "DM"
-                }
-            );
-            
+            GrantItemToCurrentUser([normalDMAward], login_bonus_catalog);
             return { 
                 message: "LoginStreakBroken", 
                 award : normalDMAward
@@ -1240,35 +1139,23 @@ handlers.CheckIn = function(args) {
 
             var remainder = Math.round(tracker[TRACKER_LOGIN_STREAK] % 7);
             if (remainder == 0) {
-                server.AddUserVirtualCurrency(
-                    {
-                        PlayFabId :currentPlayerId,
-                        Amount : extraDMAward,
-                        VirtualCurrency : "DM"
-                    }
-                );
+                GrantItemToCurrentUser([normalDMAward], login_bonus_catalog);
                 return {
                     message: "LoginStreak",
-                    award : awardDMCount
+                    award : normalDMAward
                 };
             }else{
-                server.AddUserVirtualCurrency(
-                    {
-                        PlayFabId :currentPlayerId,
-                        Amount : normalDMAward,
-                        VirtualCurrency : "DM"
-                    }
-                );
+                GrantItemToCurrentUser([extraDMAward], login_bonus_catalog);
                 return {
                     message: "LoginStreakBroken",
-                    award : awardDMCount
+                    award : extraDMAward
                 };
             }
         }
     }
     return {
         message: "AlreadyLoginToday",
-        award : 0
+        award : null
     };
 };
 
@@ -1293,22 +1180,6 @@ function UpdateTrackerData(data)
     };
     UpdateUserReadOnlyDataRequest.Data[CHECK_IN_TRACKER] = JSON.stringify(data);
     server.UpdateUserReadOnlyData(UpdateUserReadOnlyDataRequest);
-}
-
-
-function GrantItems(items, count)
-{
-    log.info("Granting: " + items);
-    var parsed = Array.isArray(items) ? items : [ items ];
-
-    var GrantItemsToUserRequest = {
-        "PlayFabId" : currentPlayerId,
-        "ItemIds" : parsed,
-        "Annotation" : "Granted for logging in over " + count + " consecutive days."
-    };
-
-    var GrantItemsToUserResult = server.GrantItemsToUser(GrantItemsToUserRequest);
-    return JSON.stringify(GrantItemsToUserResult.ItemGrantResults);
 }
 
 // handlers.Gotcha = function (args, context) {
