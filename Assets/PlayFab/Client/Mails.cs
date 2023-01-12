@@ -172,7 +172,7 @@ public partial class PlayFabReadClient
     
     public static void ClaimAllPresentMails(Action<ItemInstance> saveToLocal)
     {
-        CloudScript.claimAllPresentMails(_myMailList, saveToLocal);
+        CloudScript.ClaimAllPresentMails(_myMailList, saveToLocal);
     }
     
     #endregion

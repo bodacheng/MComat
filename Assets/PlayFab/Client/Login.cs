@@ -112,7 +112,6 @@ public partial class PlayFabReadClient
             PlayFabId = result.PlayFabId
         };
         
-        CloudScript.CheckIn();
         _missionWatcher = new MissionWatcher(
             new List<string>
             {
@@ -120,8 +119,7 @@ public partial class PlayFabReadClient
             },
             ()=>
             {
-                ProgressLayer.Close();
-                EnterMainScene();
+                CloudScript.CheckIn(EnterMainScene);
             },
             () =>
             {

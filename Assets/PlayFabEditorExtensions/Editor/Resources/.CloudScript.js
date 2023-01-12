@@ -1080,6 +1080,9 @@ handlers.CheckInExample = function(args) {
     return JSON.stringify([]);
 };
 
+// 这个位置存在一个浪费了我们很长时间的天坑我们暂时不知道怎么解释，
+// 就是tracker[TRACKER_LOGIN_STREAK]没法直接放在返回值里成功给客户端
+// 但是不知道为什么这种值貌似是可以用于比较计算但单独拿出来竟说没定义
 handlers.CheckIn = function(args) {
 
     var GetUserReadOnlyDataRequest = {

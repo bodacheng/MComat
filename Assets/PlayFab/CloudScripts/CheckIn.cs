@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -5,7 +6,7 @@ using System.Collections.Generic;
 
 public partial class CloudScript
 {
-    public static void CheckIn()
+    public static void CheckIn(Action success)
     {
         CloudScript.Common(
             "CheckIn",
@@ -15,7 +16,8 @@ public partial class CloudScript
                 jsonResult.TryGetValue("message", out var messageValue);
                 jsonResult.TryGetValue("award", out var award);
                 Debug.Log("Checkin Result: "+ messageValue + " award:"+award);
-            }
+                success.Invoke();
+            },true
         );
     }
 

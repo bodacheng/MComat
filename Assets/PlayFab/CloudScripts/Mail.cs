@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using System;
 public partial class CloudScript
 {
-    public static void claimAllPresentMails(List<MailItemInstance> _myMailList, Action<ItemInstance> saveToLocal)
+    public static void ClaimAllPresentMails(List<MailItemInstance> _myMailList, Action<ItemInstance> saveToLocal)
     {
         ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest
