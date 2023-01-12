@@ -13,7 +13,7 @@ namespace ModelView
         [SerializeField] private float upDownRotateRangeMax = 45;
         [SerializeField] private float rotateSpeed = 90;
         [SerializeField] private float extraZDis;
-        [SerializeField] private float extraZCameraDepth = 5f;
+        [SerializeField] private float extraZCameraDepth = 30f;
         private readonly Bounds _tempBoundary = new ();
         private RectTransform _rect;
         private bool _fixMode;

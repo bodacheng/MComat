@@ -1047,17 +1047,6 @@ handlers.handlePlayStreamEventAndProfile = function (args, context) {
 };
 
 
-// Below are some examples of using Cloud Script in slightly more realistic scenarios
-
-// This is a function that the game client would call whenever a player completes
-// a level. It updates a setting in the player's data that only game server
-// code can write - it is read-only on the client - and it updates a player
-// statistic that can be used for leaderboards. 
-//
-// A funtion like this could be extended to perform validation on the 
-// level completion data to detect cheating. It could also do things like 
-// award the player items from the game catalog based on their performance.
-
 /////// Check In System
 
 // defining these up top so we can easily change these later if we need to.
@@ -1092,8 +1081,7 @@ handlers.CheckInExample = function(args) {
         log.info("This was your first login, Login tomorrow to get a bonus!");
         return JSON.stringify([]);
     }
-
-
+    
     if(Date.now() > parseInt(tracker[TRACKER_NEXT_GRANT]))
     {
         // Eligible for an item grant.
@@ -1169,6 +1157,23 @@ handlers.CheckIn = function(args) {
     };
     var GetUserReadOnlyDataResponse = server.GetUserReadOnlyData(GetUserReadOnlyDataRequest);
 
+    // Get this title's reward table so we know what items to grant. 
+    var GetTitleDataRequest = {
+        "Keys": [ PROGRESSIVE_REWARD_TABLE ]
+    };
+    var GetTitleDataResult = server.GetTitleData(GetTitleDataRequest);
+    let normalDMAward = 0;
+    let extraDMAward = 0;
+    if(!GetTitleDataResult.Data.hasOwnProperty(PROGRESSIVE_REWARD_TABLE))
+    {
+        log.error("Rewards table could not be found. No rewards will be given. Exiting...");
+        return JSON.stringify([]);
+    }else{
+        var rewardTable = JSON.parse(GetTitleDataResult.Data[PROGRESSIVE_REWARD_TABLE]);
+        normalDMAward = rewardTable[normalDMAward];
+        extraDMAward = rewardTable[extraDMAward];
+    }
+
     // need to ensure that our data field exists
     var tracker = {}; // this would be the first login ever (across any title), so we have to make sure our record exists.
     if(GetUserReadOnlyDataResponse.Data.hasOwnProperty(CHECK_IN_TRACKER))
@@ -1178,45 +1183,51 @@ handlers.CheckIn = function(args) {
     else
     {
         tracker = ResetTracker();
-
         // write back updated data to PlayFab
         UpdateTrackerData(tracker);
-
         log.info("This was your first login, Login tomorrow to get a bonus!");
-        return JSON.stringify([]);
+
+        var rewardDM = server.AddUserVirtualCurrency(
+            {
+                PlayFabId :currentPlayerId,
+                Amount : normalDMAward,
+                VirtualCurrency : "DM"
+            }
+        );
+        
+        return {
+            message: "FirstLogin",
+            award : normalDMAward
+        };
     }
     
     if(Date.now() > parseInt(tracker[TRACKER_NEXT_GRANT]))
     {
-        // 
-        var inventoryRequest = {
-            "PlayFabId": currentPlayerId
-        };
-        var items = server.GetUserInventory(inventoryRequest);
-        var TK = items.VirtualCurrency["TK"];
-        if (TK < 5)
-        {
-            var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
-                {
-                    PlayFabId :currentPlayerId,
-                    Amount : 5 - TK,
-                    VirtualCurrency : "TK"
-                }
-            );    
-        }
-        
         // Eligible for an item grant.
-        //check to ensure that it has been less than 24 hours since the last grant window opened
+        // check to ensure that it has been less than 24 hours since the last grant window opened
         var timeWindow = new Date(parseInt(tracker[TRACKER_NEXT_GRANT]));
         timeWindow.setDate(timeWindow.getDate() + 1); // add 1 day 
         
-        if(Date.now() > timeWindow.getTime())
+        if(Date.now() > timeWindow.getTime()) // 指的是目前这次登陆起码在上次登陆基础上跳过了一天
         {
             // streak ended :(			
             tracker = ResetTracker();
             UpdateTrackerData(tracker);
             log.info("Your consecutive login streak has been broken. Login tomorrow to get a bonus!");
-        }else{
+            
+            var extraReward = server.AddUserVirtualCurrency(
+                {
+                    PlayFabId :currentPlayerId,
+                    Amount : normalDMAward,
+                    VirtualCurrency : "DM"
+                }
+            );
+            
+            return { 
+                message: "LoginStreakBroken", 
+                award : normalDMAward
+            };
+        }else{ // 指的是现在这一天正好是上次登陆日期+1 （ Date.now() == timeWindow.getTime() ），不存在 Date.now() < timeWindow.getTime()
             // streak continues
             tracker[TRACKER_LOGIN_STREAK] += 1;
             var dateObj = new Date(Date.now());
@@ -1226,20 +1237,49 @@ handlers.CheckIn = function(args) {
             // write back updated data to PlayFab
             log.info("Your consecutive login streak increased to: " + tracker[TRACKER_LOGIN_STREAK]);
             UpdateTrackerData(tracker);
+
+            var remainder = Math.round(tracker[TRACKER_LOGIN_STREAK] % 7);
+            if (remainder == 0) {
+                server.AddUserVirtualCurrency(
+                    {
+                        PlayFabId :currentPlayerId,
+                        Amount : extraDMAward,
+                        VirtualCurrency : "DM"
+                    }
+                );
+                return {
+                    message: "LoginStreak",
+                    award : awardDMCount
+                };
+            }else{
+                server.AddUserVirtualCurrency(
+                    {
+                        PlayFabId :currentPlayerId,
+                        Amount : normalDMAward,
+                        VirtualCurrency : "DM"
+                    }
+                );
+                return {
+                    message: "LoginStreakBroken",
+                    award : awardDMCount
+                };
+            }
         }
     }
-    return JSON.stringify([]);
+    return {
+        message: "AlreadyLoginToday",
+        award : 0
+    };
 };
 
 function ResetTracker()
 {
     var reset = {};
-
     reset[TRACKER_LOGIN_STREAK] = 1;
-
+    
     var dateObj = new Date(Date.now());
-    dateObj.setDate(dateObj.getDate() + 1); // add one day 
-
+    dateObj.setDate(dateObj.getDate() + 1); // add one day
+    
     reset[TRACKER_NEXT_GRANT] = dateObj.getTime();
     return JSON.stringify(reset);
 }
@@ -1252,7 +1292,6 @@ function UpdateTrackerData(data)
         "Data": {}
     };
     UpdateUserReadOnlyDataRequest.Data[CHECK_IN_TRACKER] = JSON.stringify(data);
-
     server.UpdateUserReadOnlyData(UpdateUserReadOnlyDataRequest);
 }
 
@@ -1271,152 +1310,6 @@ function GrantItems(items, count)
     var GrantItemsToUserResult = server.GrantItemsToUser(GrantItemsToUserRequest);
     return JSON.stringify(GrantItemsToUserResult.ItemGrantResults);
 }
-
-
-///////
-
-
-// In addition to the Cloud Script handlers, you can define your own functions and call them from your handlers. 
-// This makes it possible to share code between multiple handlers and to improve code organization.
-handlers.updatePlayerMove = function (args) {
-    var validMove = processPlayerMove(args);
-    return { validMove: validMove };
-};
-
-
-// This is a helper function that verifies that the player's move wasn't made
-// too quickly following their previous move, according to the rules of the game.
-// If the move is valid, then it updates the player's statistics and profile data.
-// This function is called from the "UpdatePlayerMove" handler above and also is 
-// triggered by the "RoomEventRaised" Photon room event in the Webhook handler
-// below. 
-//
-// For this example, the script defines the cooldown period (playerMoveCooldownInSeconds)
-// as 15 seconds. A recommended approach for values like this would be to create them in Title
-// Data, so that they can be queries in the script with a call to GetTitleData
-// (https://api.playfab.com/Documentation/Server/method/GetTitleData). This would allow you to
-// make adjustments to these values over time, without having to edit, test, and roll out an
-// updated script.
-function processPlayerMove(playerMove) {
-    var now = Date.now();
-    var playerMoveCooldownInSeconds = 15;
-
-    var playerData = server.GetUserInternalData({
-        PlayFabId: currentPlayerId,
-        Keys: ["last_move_timestamp"]
-    });
-
-    var lastMoveTimestampSetting = playerData.Data["last_move_timestamp"];
-
-    if (lastMoveTimestampSetting) {
-        var lastMoveTime = Date.parse(lastMoveTimestampSetting.Value);
-        var timeSinceLastMoveInSeconds = (now - lastMoveTime) / 1000;
-        log.debug("lastMoveTime: " + lastMoveTime + " now: " + now + " timeSinceLastMoveInSeconds: " + timeSinceLastMoveInSeconds);
-
-        if (timeSinceLastMoveInSeconds < playerMoveCooldownInSeconds) {
-            log.error("Invalid move - time since last move: " + timeSinceLastMoveInSeconds + "s less than minimum of " + playerMoveCooldownInSeconds + "s.");
-            return false;
-        }
-    }
-
-    var playerStats = server.GetPlayerStatistics({
-        PlayFabId: currentPlayerId
-    }).Statistics;
-    var movesMade = 0;
-    for (var i = 0; i < playerStats.length; i++)
-        if (playerStats[i].StatisticName === "")
-            movesMade = playerStats[i].Value;
-    movesMade += 1;
-    var request = {
-        PlayFabId: currentPlayerId, Statistics: [{
-                StatisticName: "movesMade",
-                Value: movesMade
-            }]
-    };
-    server.UpdatePlayerStatistics(request);
-    server.UpdateUserInternalData({
-        PlayFabId: currentPlayerId,
-        Data: {
-            last_move_timestamp: new Date(now).toUTCString(),
-            last_move: JSON.stringify(playerMove)
-        }
-    });
-
-    return true;
-}
-
-// This is an example of using PlayStream real-time segmentation to trigger
-// game logic based on player behavior. (https://playfab.com/introducing-playstream/)
-// The function is called when a player_statistic_changed PlayStream event causes a player 
-// to enter a segment defined for high skill players. It sets a key value in
-// the player's internal data which unlocks some new content for the player.
-handlers.unlockHighSkillContent = function (args, context) {
-    var playerStatUpdatedEvent = context.playStreamEvent;
-    var request = {
-        PlayFabId: currentPlayerId,
-        Data: {
-            "HighSkillContent": "true",
-            "XPAtHighSkillUnlock": playerStatUpdatedEvent.StatisticValue.toString()
-        }
-    };
-    var playerInternalData = server.UpdateUserInternalData(request);
-    log.info('Unlocked HighSkillContent for ' + context.playerProfile.DisplayName);
-    return { profile: context.playerProfile };
-};
-
-// Photon Webhooks Integration
-//
-// The following functions are examples of Photon Cloud Webhook handlers. 
-// When you enable the Photon Add-on (https://playfab.com/marketplace/photon/)
-// in the Game Manager, your Photon applications are automatically configured
-// to authenticate players using their PlayFab accounts and to fire events that 
-// trigger your Cloud Script Webhook handlers, if defined. 
-// This makes it easier than ever to incorporate multiplayer server logic into your game.
-
-
-// Triggered automatically when a Photon room is first created
-handlers.RoomCreated = function (args) {
-    log.debug("Room Created - Game: " + args.GameId + " MaxPlayers: " + args.CreateOptions.MaxPlayers);
-};
-
-// Triggered automatically when a player joins a Photon room
-handlers.RoomJoined = function (args) {
-    log.debug("Room Joined - Game: " + args.GameId + " PlayFabId: " + args.UserId);
-};
-
-// Triggered automatically when a player leaves a Photon room
-handlers.RoomLeft = function (args) {
-    log.debug("Room Left - Game: " + args.GameId + " PlayFabId: " + args.UserId);
-};
-
-// Triggered automatically when a Photon room closes
-// Note: currentPlayerId is undefined in this function
-handlers.RoomClosed = function (args) {
-    log.debug("Room Closed - Game: " + args.GameId);
-};
-
-// Triggered automatically when a Photon room game property is updated.
-// Note: currentPlayerId is undefined in this function
-handlers.RoomPropertyUpdated = function (args) {
-    log.debug("Room Property Updated - Game: " + args.GameId);
-};
-
-// Triggered by calling "OpRaiseEvent" on the Photon client. The "args.Data" property is 
-// set to the value of the "customEventContent" HashTable parameter, so you can use
-// it to pass in arbitrary data.
-handlers.RoomEventRaised = function (args) {
-    var eventData = args.Data;
-    log.debug("Event Raised - Game: " + args.GameId + " Event Type: " + eventData.eventType);
-
-    switch (eventData.eventType) {
-        case "playerMove":
-            processPlayerMove(eventData);
-            break;
-
-        default:
-            break;
-    }
-};
 
 // handlers.Gotcha = function (args, context) {
 //     var request = {

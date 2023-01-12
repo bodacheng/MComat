@@ -66,27 +66,29 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
-            CloudScript.GetLeaderboardAroundUser(
+            CloudScript.Common(
+                "CheckIn",
                 (x) =>
                 {
-                    for (int i = 0; i < x.Count; i++)
-                    {
-                        Debug.Log("返回值 :"+ x[i].PlayerLeaderboardEntry.StatValue+ ", "+ x[i].PlayerLeaderboardEntry.DisplayName);
-                    }
+                    Debug.Log("成功给予测试用账户额外财产"+ x.Logs);
                 },
-                () =>
-                {
-                    Debug.Log("failed");
-                });
-
-            // CloudScript.Common(
-            //     "grantDevItems",
+                true
+            );
+            
+            // CloudScript.GetLeaderboardAroundUser(
             //     (x) =>
             //     {
-            //         Debug.Log("成功给予测试用账户额外财产"+ x.Logs);
-            //     }
-            // );
+            //         for (int i = 0; i < x.Count; i++)
+            //         {
+            //             Debug.Log("返回值 :"+ x[i].PlayerLeaderboardEntry.StatValue+ ", "+ x[i].PlayerLeaderboardEntry.DisplayName);
+            //         }
+            //     },
+            //     () =>
+            //     {
+            //         Debug.Log("failed");
+            //     });
 
+            
             // CloudScript.ArcadeProgress(
             //     "1",
             //     result =>
