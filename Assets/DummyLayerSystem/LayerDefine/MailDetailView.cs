@@ -22,6 +22,11 @@ public class MailDetailView : UILayer
         title.text = model.DisplayName;
         var catalogItem = PlayFabReadClient.GetCatalogItemByDisplayName(model.DisplayName);
         message.text = catalogItem != null ? catalogItem.Description : String.Empty;
+
+        if (model.ItemId == "normalLoginBonus")
+        {
+            message.text = message.text.Replace("$streak", PlayerAccountInfo.Me.loginStreak.ToString());
+        }
         
         if (model.Expiration.HasValue)
             expiration.text = model.Expiration.Value.ToString("yyyy-MM-dd");

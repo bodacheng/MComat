@@ -15,7 +15,9 @@ public partial class CloudScript
                 var jsonResult = (PlayFab.Json.JsonObject)x.FunctionResult;
                 jsonResult.TryGetValue("message", out var messageValue);
                 jsonResult.TryGetValue("award", out var award);
-                Debug.Log("Checkin Result: "+ messageValue + " award:"+award);
+                jsonResult.TryGetValue("streak", out var streak);
+                Debug.Log("Checkin Result: "+ messageValue + " award:"+award + " streak:"+ streak);
+                int.TryParse(streak.ToString(), out PlayerAccountInfo.Me.loginStreak);
                 success.Invoke();
             },true
         );

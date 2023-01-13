@@ -1107,7 +1107,8 @@ handlers.CheckIn = function(args) {
         
         return {
             message: "FirstLogin",
-            award : normalDMAward
+            award : normalDMAward,
+            streak : 1
         };
     }
     
@@ -1127,7 +1128,8 @@ handlers.CheckIn = function(args) {
             GrantItemToCurrentUser([normalDMAward], login_bonus_catalog);
             return { 
                 message: "LoginStreakBroken", 
-                award : normalDMAward
+                award : normalDMAward,
+                streak : 1
             };
         }else{ // 指的是现在这一天正好是上次登陆日期+1 （ Date.now() == timeWindow.getTime() ），不存在 Date.now() < timeWindow.getTime()
             // streak continues
@@ -1141,24 +1143,24 @@ handlers.CheckIn = function(args) {
             UpdateTrackerData(tracker);
 
             var remainder = Math.round(tracker[TRACKER_LOGIN_STREAK] % 7);
-            if (remainder == 0) {
-                GrantItemToCurrentUser([normalDMAward], login_bonus_catalog);
-                return {
-                    message: "LoginStreak",
-                    award : normalDMAward
-                };
+            var award;
+            if (remainder == 0){
+                award = normalDMAward;
             }else{
-                GrantItemToCurrentUser([extraDMAward], login_bonus_catalog);
-                return {
-                    message: "LoginStreakBroken",
-                    award : extraDMAward
-                };
+                award = extraDMAward;
             }
+            GrantItemToCurrentUser([award], login_bonus_catalog);
+            return {
+                message: "LoginStreak",
+                award : award,
+                streak: tracker[TRACKER_LOGIN_STREAK]
+            };
         }
     }
     return {
         message: "AlreadyLoginToday",
-        award : null
+        award : null,
+        streak: tracker[TRACKER_LOGIN_STREAK]
     };
 };
 
@@ -1181,7 +1183,7 @@ function UpdateTrackerData(data)
         "PlayFabId": currentPlayerId,
         "Data": {}
     };
-    UpdateUserReadOnlyDataRequest.Data[CHECK_IN_TRACKER] = JSON.stringify(data);
+    UpdateUserReadOnlyDataRequest.Data[CHECK_IN_TRACKER] = data;//JSON.stringify(data);
     server.UpdateUserReadOnlyData(UpdateUserReadOnlyDataRequest);
 }
 
