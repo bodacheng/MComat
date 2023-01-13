@@ -37,14 +37,14 @@ namespace mainMenu
         public Button ResetButton;
         
         [Header("EXPoint+")]
-        public List<GameObject> remainCharges;//固定是9个长度
+        [SerializeField] List<GameObject> remainCharges;//固定是9个长度
         [Header("EXPoint-")]
-        public List<GameObject> burdenCharges;//固定是9个长度
+        [SerializeField] List<GameObject> burdenCharges;//固定是9个长度
         [Header("over heat bar")] 
-        public Slider overHeatBar;
+        [SerializeField] Slider overHeatBar;
         
         [Header("选中框")]
-        [SerializeField] GameObject SelectedFrame;
+        [SerializeField] GameObject selectedFrame;
         
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _tabEffects;
@@ -62,16 +62,16 @@ namespace mainMenu
         {
             if (cell == null)
             {
-                SelectedFrame.SetActive(false);
+                selectedFrame.SetActive(false);
                 return;
             }
-            SelectedFrame.SetActive(true);
-            SelectedFrame.transform.SetParent(cell.GetComponent<RectTransform>());
-            SelectedFrame.transform.localPosition = Vector3.zero;
-            SelectedFrame.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
-            SelectedFrame.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-            SelectedFrame.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-            SelectedFrame.gameObject.SetActive(true);
+            selectedFrame.SetActive(true);
+            selectedFrame.transform.SetParent(cell.GetComponent<RectTransform>());
+            selectedFrame.transform.localPosition = Vector3.zero;
+            selectedFrame.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+            selectedFrame.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+            selectedFrame.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+            selectedFrame.gameObject.SetActive(true);
         }
         
         public SkillStoneSlot GetFocusingStoneSlot()

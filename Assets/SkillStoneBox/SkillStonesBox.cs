@@ -29,7 +29,7 @@ namespace mainMenu
         
         void Awake()
         {
-            _Selected = SelectedFrame;
+            Selected = selectedFrame;
             FocusingType = "human";
             orderBtn.onClick.AddListener(SwitchOrder);
         }

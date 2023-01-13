@@ -21,7 +21,7 @@ namespace mainMenu
             {
                 _orderType = 0;
             }
-            _Selected.gameObject.SetActive(false);
+            Selected.gameObject.SetActive(false);
             RestFilter();
         }
               

@@ -98,58 +98,58 @@ public partial class SkillEditLayer : UILayer
     
     void ForceClearAll()
     {
-        foreach (var _slot in nineSlot.allSlot)
+        foreach (var slot in nineSlot.allSlot)
         {
-            _slot._cell.RemoveToTemp();
+            slot._cell.RemoveToTemp();
         }
     }
     
-    void StoneCellFeature(StoneCell _Cell)
+    void StoneCellFeature(StoneCell cell)
     {
-        void buttonFeature()
+        void ButtonFeature()
         {
-            var _stone = _Cell.GetItem();
-            if (_stone != null && _stone._SkillConfig != null)
+            var stone = cell.GetItem();
+            if (stone != null && stone._SkillConfig != null)
             {
-                skillStoneDetail.RefreshInfo(_stone.instanceId);
+                skillStoneDetail.RefreshInfo(stone.instanceId);
             }else{
                 skillStoneDetail.Clear();
             }
-            StoneCell.SelectedRender(_Cell, SkillStonesBox._Selected);
+            StoneCell.SelectedRender(cell, SkillStonesBox.Selected);
         }
         
-        void doubleClick()
+        void DoubleClick()
         {
             if (nineSlot.GetFocusingStoneSlot() != null)
             {
-                StoneCell.Install(_Cell, nineSlot.GetFocusingStoneSlot()._cell);
+                StoneCell.Install(cell, nineSlot.GetFocusingStoneSlot()._cell);
             }
         }
         
         // 前往技能石升级画面
         void PressGoToLevelUpPage()
         {
-            var _stone = _Cell.GetItem();
-            if (_stone != null && _stone._SkillConfig != null)
+            var stone = cell.GetItem();
+            if (stone != null && stone._SkillConfig != null)
             {
                 if (FightGlobalSetting._skillStoneHasExp)
-                    PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, _stone.instanceId, true);
+                    PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, stone.instanceId, true);
             }
         }
         
-        _Cell.btn.SetListener(buttonFeature);
+        cell.btn.SetListener(ButtonFeature);
 
-        _Cell.btn.ActivateHold = true;
-        _Cell.btn.ActivateDoubleClick = true;
+        cell.btn.ActivateHold = true;
+        cell.btn.ActivateDoubleClick = true;
         
-        _Cell.btn.onHold.AddListener(PressGoToLevelUpPage);
-        _Cell.btn.onDoubleClick.AddListener(doubleClick);
-        _Cell.SetOnDropAction(StoneCell.Install);
+        cell.btn.onHold.AddListener(PressGoToLevelUpPage);
+        cell.btn.onDoubleClick.AddListener(DoubleClick);
+        cell.SetOnDropAction(StoneCell.Install);
     }
     
     public void SkillEditConfirmAnimation()
     {
-        var personalEffectsPath = FightGlobalSetting.EffectPathDefine(Element.Null);
+        var personalEffectsPath = FightGlobalSetting.EffectPathDefine();
         EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, connector.FocusingC.WholeT.position, Quaternion.identity, null).Forget();
     }
     

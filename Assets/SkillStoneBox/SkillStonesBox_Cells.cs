@@ -12,52 +12,51 @@ namespace mainMenu
         [SerializeField] StoneCell cellPrefab;
         
         [Header("选中框")]
-        [SerializeField] GameObject SelectedFrame;
+        [SerializeField] GameObject selectedFrame;
         
-        public static GameObject _Selected;
-
-        readonly IDictionary<int, StoneCell> CellsDic = new Dictionary<int, StoneCell>();
+        public static GameObject Selected;
+        readonly IDictionary<int, StoneCell> _cellsDic = new Dictionary<int, StoneCell>();
         
         public void GenerateCells(int extraCellNum = 0)
         {
-            foreach (var kv in CellsDic)
+            foreach (var kv in _cellsDic)
             {
                 kv.Value.gameObject.SetActive(false);
             }
             
             var hang = 1;
             var cellCount = BoxLength();
-            var GridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
+            var gridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
             cellCount += extraCellNum;
-            cellCount = ((cellCount / GridLayoutGroup.constraintCount) + 1) * GridLayoutGroup.constraintCount;
+            cellCount = ((cellCount / gridLayoutGroup.constraintCount) + 1) * gridLayoutGroup.constraintCount;
             for (int i = 0; i < cellCount; i++)
             {
-                if (!CellsDic.ContainsKey(i))
+                if (!_cellsDic.ContainsKey(i))
                 {
                     var cell = Instantiate(cellPrefab);
                     cell.cellPhase = StoneCell.CellPhase.SkillStoneBoxCell;
-                    CellsDic.Add(i, cell);
+                    _cellsDic.Add(i, cell);
                 }
                 
                 //CellsDictionary[i].RemoveItemWithOutDestroy();//根据之前经验，这个东西有出错的可能
-                CellsDic[i].gameObject.SetActive(true);
-                if (CellsDic[i].transform.parent != BoxT)
+                _cellsDic[i].gameObject.SetActive(true);
+                if (_cellsDic[i].transform.parent != BoxT)
                 {
-                    CellsDic[i].transform.SetParent(BoxT);
-                    CellsDic[i].transform.localPosition = Vector3.zero;
-                    CellsDic[i].transform.localScale = Vector3.one;
+                    _cellsDic[i].transform.SetParent(BoxT);
+                    _cellsDic[i].transform.localPosition = Vector3.zero;
+                    _cellsDic[i].transform.localScale = Vector3.one;
                 }
                 
-                CellsDic[i]._selected.SetActive(false);
+                _cellsDic[i]._selected.SetActive(false);
             }
             
-            hang = cellCount / GridLayoutGroup.constraintCount + 1;
-            BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (GridLayoutGroup.cellSize.x + GridLayoutGroup.spacing.x) * hang);
+            hang = cellCount / gridLayoutGroup.constraintCount + 1;
+            BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (gridLayoutGroup.cellSize.x + gridLayoutGroup.spacing.x) * hang);
         }
         
         public void AddFeatureToCells(Action<StoneCell> action)
         {
-            foreach (var cell in CellsDic)
+            foreach (var cell in _cellsDic)
             {
                 cell.Value.btn.ClearAllEvents();
                 action.Invoke(cell.Value);
@@ -66,7 +65,7 @@ namespace mainMenu
         
         StoneCell GetFirstEmptyCell()
         {
-            foreach (KeyValuePair<int, StoneCell> keyValuePair in CellsDic)
+            foreach (KeyValuePair<int, StoneCell> keyValuePair in _cellsDic)
             {
                 if (keyValuePair.Value.GetItem() != null)
                     continue;
@@ -111,22 +110,22 @@ namespace mainMenu
                 var filterForm0 = new StoneFilterForm
                 {
                     Type = C_Types[i],
-                    ExType = new int[1] { 0 },
+                    ExType = new[] { 0 },
                 };
                 var filterForm1 = new StoneFilterForm
                 {
                     Type = C_Types[i],
-                    ExType = new int[1] { 1 },
+                    ExType = new[] { 1 },
                 };
                 var filterForm2 = new StoneFilterForm
                 {
                     Type = C_Types[i],
-                    ExType = new int[1] { 2 },
+                    ExType = new[] { 2 },
                 };
                 var filterForm3 = new StoneFilterForm
                 {
                     Type = C_Types[i],
-                    ExType = new int[1] { 3 },
+                    ExType = new[] { 3 },
                 };
                 
                 var skillStonesOfTypeNormal = Stones.TargetStonesFromAccount(filterForm0);

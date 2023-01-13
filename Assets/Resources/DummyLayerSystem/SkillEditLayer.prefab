@@ -3799,7 +3799,7 @@ MonoBehaviour:
   farCheckBox: {fileID: 2523835564471563446}
   cellPrefab: {fileID: 9087381990746991603, guid: b3795898c2a1b4eeaa126e66fe7de953,
     type: 3}
-  SelectedFrame: {fileID: 2677751319738524578}
+  selectedFrame: {fileID: 2677751319738524578}
   orderButtonText: {fileID: 2677751318686789821}
 --- !u!1 &2523835563299966731
 GameObject:
@@ -4506,7 +4506,7 @@ MonoBehaviour:
   - {fileID: 5494244693283132827}
   - {fileID: 2988137878191731058}
   overHeatBar: {fileID: 436999325610243610}
-  SelectedFrame: {fileID: 2523835564432070104}
+  selectedFrame: {fileID: 2523835564432070104}
   _tabEffects: {fileID: 2523835562817921893}
   normalSkillIndicator: {fileID: 8463186054152279222}
 --- !u!1 &2523835563641974155

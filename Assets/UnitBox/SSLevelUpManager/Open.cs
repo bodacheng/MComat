@@ -31,7 +31,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
         
         renderModel._using = false;
-        SKStoneItem.SelectedRender(renderModel, SkillStonesBox._Selected);
+        SKStoneItem.SelectedRender(renderModel, SkillStonesBox.Selected);
         focusingSSD.RefreshInfo(renderModel.instanceId);
         
         foreach (var t in _materialSlots)

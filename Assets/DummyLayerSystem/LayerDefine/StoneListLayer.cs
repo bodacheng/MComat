@@ -61,7 +61,7 @@ public class StoneListLayer : UILayer
             var stone = cell.GetItem();
             if (stone != null && stone._SkillConfig != null)
             {
-                StoneCell.SelectedRender(cell, SkillStonesBox._Selected);
+                StoneCell.SelectedRender(cell, SkillStonesBox.Selected);
                 skillStoneDetail.RefreshInfo(stone.instanceId);
                 TargetStoneID = stone.instanceId;
             }else{
@@ -81,7 +81,7 @@ public class StoneListLayer : UILayer
     {
         void BtnFeature()
         {
-            StoneCell.SelectedRender(cell, SkillStonesBox._Selected);
+            StoneCell.SelectedRender(cell, SkillStonesBox.Selected);
         }
         void DoubleClick()
         {

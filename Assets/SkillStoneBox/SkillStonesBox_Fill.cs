@@ -38,7 +38,7 @@ namespace mainMenu
             var targetSKs = Stones.TargetStonesFromAccount_except(_form, null, null, false);
             targetSKs = Order(targetSKs);
             
-            foreach (var cellPair in CellsDic)
+            foreach (var cellPair in _cellsDic)
             {
                 cellPair.Value.RemoveToTemp();
             }
@@ -46,11 +46,11 @@ namespace mainMenu
             var key = 0;
             foreach (var instanceId in targetSKs)
             {
-                CellsDic.TryGetValue(key, out var cell);
+                _cellsDic.TryGetValue(key, out var cell);
                 if (cell == null)
                 {
                     Debug.Log("Stone box exceed："+ key);
-                    Debug.Log("此时技能石头盒子的总容量：" + CellsDic.Count);
+                    Debug.Log("此时技能石头盒子的总容量：" + _cellsDic.Count);
                     continue;
                 }
                 
