@@ -1,4 +1,5 @@
-﻿using DummyLayerSystem;
+﻿using dataAccess;
+using DummyLayerSystem;
 using mainMenu;
 
 public class StonesPage : MSceneProcess
@@ -8,7 +9,7 @@ public class StonesPage : MSceneProcess
         Step = MainSceneStep.SkillStoneList;
     }
     
-    private StoneListLayer stoneListLayer;
+    private StoneListLayer layer;
     
     public override void ProcessEnter()
     {
@@ -16,24 +17,16 @@ public class StonesPage : MSceneProcess
         SetLoaded(true);
     }
     
-    
     //EnterProcess()内绝不能出现triggerMainProcess
     void EnterProcess()
     {
-        var CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
-        if (CheckIfExceedLimit.Count > 0)
-        {
-            PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
-            return;
-        }
-        
         CommonEnterProcess();
     }
     
     void CommonEnterProcess()
     {
-        stoneListLayer = UILayerLoader.Load<StoneListLayer>();
-        stoneListLayer.Setup();
+        layer = UILayerLoader.Load<StoneListLayer>();
+        layer.Setup();
     }
     
     public override void ProcessEnd()

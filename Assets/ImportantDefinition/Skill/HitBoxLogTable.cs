@@ -41,7 +41,7 @@ namespace Log
                 {
                     t.Summary();
                 }
-                Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/" + KeywordSetting.SkillDynamicAnalysis, HitBoxLogger.Instance, singleFightLogs);
+                Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/" + CommonSetting.SkillDynamicAnalysis, HitBoxLogger.Instance, singleFightLogs);
                 for (var i = 0; i < singleFightLogs.Count; i++)
                 {
                     singleFightLogs[i].Clear();

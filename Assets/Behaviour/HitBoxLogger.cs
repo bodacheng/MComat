@@ -38,9 +38,9 @@ namespace Log
         // 获取现版本text
         public string LoadCurrentToString()
         {
-            if (File.Exists(Application.persistentDataPath + "/" + KeywordSetting.SkillDynamicAnalysis))
+            if (File.Exists(Application.persistentDataPath + "/" + CommonSetting.SkillDynamicAnalysis))
             {
-                string level = File.ReadAllText(Application.persistentDataPath + "/" + KeywordSetting.SkillDynamicAnalysis);
+                string level = File.ReadAllText(Application.persistentDataPath + "/" + CommonSetting.SkillDynamicAnalysis);
                 return level;
             }
             else
@@ -63,8 +63,8 @@ namespace Log
                     };
                     HitBoxLogTable.Instance.rowList.Add(row);
                 }
-                HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/" + KeywordSetting.SkillDynamicAnalysis, null, null);
-                string level = File.ReadAllText(Application.persistentDataPath + "/" + KeywordSetting.SkillDynamicAnalysis);
+                HitBoxLogTable.Instance.SaveByCurrentRows_HitBoxLog(Application.persistentDataPath + "/" + CommonSetting.SkillDynamicAnalysis, null, null);
+                string level = File.ReadAllText(Application.persistentDataPath + "/" + CommonSetting.SkillDynamicAnalysis);
                 return level;
             }
         }

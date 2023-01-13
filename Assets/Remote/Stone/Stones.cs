@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Skill;
 using System;
 
 namespace dataAccess
@@ -15,6 +14,11 @@ namespace dataAccess
             Dic.Clear();
         }
 
+        public static bool TooManyStones()
+        {
+            return Dic.Count > CommonSetting.MAXStoneCount;
+        }
+        
         public static void ClearRender()
         {
             foreach (var kv in RenderModelDic)

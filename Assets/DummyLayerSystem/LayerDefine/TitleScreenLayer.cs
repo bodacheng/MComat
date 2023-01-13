@@ -34,7 +34,7 @@ public class TitleScreenLayer : UILayer
         cancelBtn.onClick.AddListener(()=> SwitchTab(1));
         loginBtn.onClick.AddListener(EmailLogin);
 
-        if (Starter._devMode)
+        if (CommonSetting.DevMode)
         {
             devEnter.gameObject.SetActive(true);
             devLoginBtn.onClick.AddListener(DevUserLogin);

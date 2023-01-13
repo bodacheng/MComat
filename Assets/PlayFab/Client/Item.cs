@@ -31,16 +31,23 @@ public partial class PlayFabReadClient
                     }
                     else if (item.CatalogVersion == PlayfabSetting._StoneCatalog)
                     {
-                        var Info = new StoneOfPlayerInfo
+                        if (SkillConfigTable.GetSkillConfig(item.ItemId) != null)
                         {
-                            InstanceId = item.ItemInstanceId,
-                            SkillId = item.ItemId,
-                            Level = (item.CustomData != null && item.CustomData.ContainsKey("level")) ? Convert.ToInt32(item.CustomData["level"]) : 1,
-                            UnitInstanceId = (item.CustomData != null && item.CustomData.ContainsKey("unitInstanceId")) ? item.CustomData["unitInstanceId"] : null,
-                            Slot = (item.CustomData != null && item.CustomData.ContainsKey("slot")) ? item.CustomData["slot"] : null,
-                            Born = (item.CustomData != null && item.CustomData.ContainsKey("born")) ? item.CustomData["born"] : null
-                        };
-                        Stones.Add(Info);
+                            var Info = new StoneOfPlayerInfo
+                            {
+                                InstanceId = item.ItemInstanceId,
+                                SkillId = item.ItemId,
+                                Level = (item.CustomData != null && item.CustomData.ContainsKey("level")) ? Convert.ToInt32(item.CustomData["level"]) : 1,
+                                UnitInstanceId = (item.CustomData != null && item.CustomData.ContainsKey("unitInstanceId")) ? item.CustomData["unitInstanceId"] : null,
+                                Slot = (item.CustomData != null && item.CustomData.ContainsKey("slot")) ? item.CustomData["slot"] : null,
+                                Born = (item.CustomData != null && item.CustomData.ContainsKey("born")) ? item.CustomData["born"] : null
+                            };
+                            Stones.Add(Info);
+                        }
+                        else
+                        {
+                            // 可能是stone类型的bundle等等
+                        }
                     }
                     else if (item.CatalogVersion == PlayfabSetting._MailCatalog)
                     {
@@ -75,11 +82,11 @@ public partial class PlayFabReadClient
                         Currencies.RechargeMax = kv.Value.RechargeMax;
                     }
                 }
-                finished.Invoke(true);
+                finished?.Invoke(true);
             },
             errorCallback => {
                 Debug.Log(errorCallback.ErrorMessage);
-                finished.Invoke(false);
+                finished?.Invoke(false);
             }
         );
         

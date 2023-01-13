@@ -9,66 +9,67 @@ using UnityEngine;
 
 public class GotchaFront : MSceneProcess
 {
-    private GotchaLayer layer;
+    private GotchaLayer _layer;
     
     public GotchaFront()
     {
         Step = MainSceneStep.GotchaFront;
     }
     
-    private int startIndex;
-    private Action extraSuccessAction;
-    public void SetExtraSuccessAction(Action _extraSuccessAction)
+    private int _startIndex;
+    private Action _extraSuccessAction;
+    public void SetExtraSuccessAction(Action extraSuccessAction)
     {
-        extraSuccessAction = _extraSuccessAction;
+        this._extraSuccessAction = extraSuccessAction;
     }
     
     void MoveNext(int direction, List<DropTablePage> dropTables)
     {
         if (direction > 0)
         {
-            startIndex = startIndex + 1;
-            if (startIndex == dropTables.Count)
+            _startIndex = _startIndex + 1;
+            if (_startIndex == dropTables.Count)
             {
-                startIndex = 0;
+                _startIndex = 0;
             }
         }
         else if (direction < 0)
         {
-            startIndex = startIndex - 1;
-            if (startIndex < 0)
+            _startIndex = _startIndex - 1;
+            if (_startIndex < 0)
             {
-                startIndex = dropTables.Count - 1;
+                _startIndex = dropTables.Count - 1;
             }
         }
 
         for (var i = 0; i < dropTables.Count; i++)
         {
             var dropTable = dropTables[i];
-            dropTable.parentT.gameObject.SetActive(startIndex == i);
+            dropTable.parentT.gameObject.SetActive(_startIndex == i);
         }
     }
      
     public override void ProcessEnter()
     {
         StarsFall.target.gameObject.SetActive(true);
-        var CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
-        if (CheckIfExceedLimit.Count > 0)
+        
+        if (Stones.TooManyStones())
         {
-            PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
+            ReturnLayer.ReturnMissionList.Clear();
+            PreScene.target.trySwitchToStep(MainSceneStep.FrontPage, false);
             return;
         }
+        
         BackGroundPS.target.Off();
-        layer = UILayerLoader.Load<GotchaLayer>();
-        layer.Setup(NineTimes, DropTableInfo, MoveNext,
-            GetAllSK, GetAllM, Remove25Stones);
+        _layer = UILayerLoader.Load<GotchaLayer>();
+        _layer.Setup(NineTimes, DropTableInfo, MoveNext, GetAllSK, GetAllM, Remove25Stones);
         
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
         upperInfoBar.Setup(null,
             null,null,
             () =>
             {
-                PreScene.target.trySwitchToStep(MainSceneStep.ShopTop, true);
+                PreScene.target.trySwitchToStep(MainSceneStep.ShopTop);
             });
         
         SetLoaded(true);
@@ -121,7 +122,7 @@ public class GotchaFront : MSceneProcess
             },
             (x) =>
             {
-                var GotStones = new List<StoneOfPlayerInfo> ();
+                var gotStones = new List<StoneOfPlayerInfo> ();
                 if (x.Items.Count > 0)
                 {
                     foreach (var skillId in x.Items[0].BundleContents)
@@ -130,23 +131,15 @@ public class GotchaFront : MSceneProcess
                         {
                             SkillId = skillId
                         };
-                        GotStones.Add(stoneOfPlayerInfo);
+                        gotStones.Add(stoneOfPlayerInfo);
                     }
                 }
-
-                switch (currencyCode)
-                {
-                    case "DM":
-                        Currencies.DiamondCount.Value -= currencyCount;
-                        break;
-                    case "GD":
-                        Currencies.CoinCount.Value -= currencyCount;
-                        break;
-                }
                 
-                GotchaResult.Result = GotStones;
+                PlayFabReadClient.LoadItems(null);
+                
+                GotchaResult.Result = gotStones;
                 PreScene.target.trySwitchToStep(MainSceneStep.GotchaResult, true);
-                extraSuccessAction?.Invoke();
+                _extraSuccessAction?.Invoke();
             },
             (x) =>
             {

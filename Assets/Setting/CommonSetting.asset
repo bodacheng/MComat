@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a2fc58dd8a094ee2b1e75230d7aeca8, type: 3}
-  m_Name: KeywordSetting
+  m_Name: CommonSetting
   m_EditorClassIdentifier: 
-  SkillStaticAnalysis: SkillStaticAnalysis
-  SkillDynamicAnalysis: SkillDynamicAnalysis.csv
+  devMode: 0
+  maxStoneCount: 160
+  skillStaticAnalysis: SkillStaticAnalysis
+  skillDynamicAnalysis: SkillDynamicAnalysis.csv

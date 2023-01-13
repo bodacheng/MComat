@@ -100,6 +100,11 @@ public class FrontPage : MSceneProcess
             );
         }
         
+        if (PlayerAccountInfo.Me.tutorialProgress == "Finished" && Stones.TooManyStones())
+        {
+            _frontLayer.PlsClickBtn("stones");
+        }
+        
         SetLoaded(true);
     }
     

@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
-using UnityEngine;
 using mainMenu;
+using UnityEngine;
 
 namespace dataAccess
 {
@@ -25,6 +25,13 @@ namespace dataAccess
             }
             var info = Get(instanceId);
             var item = await GenerateStoneModel(info.SkillId, true);
+
+            if (item == null)
+            {
+                Debug.Log("info.SkillId："+ info.SkillId + "  技能石定义信息不存在？");
+                return;
+            }
+            
             item.Inherent = info.Born == "true";
             item._SkillConfig = SkillConfigTable.GetSkillConfig(Dic[instanceId].SkillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
