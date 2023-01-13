@@ -42,20 +42,14 @@ public class QuestInfoPage : MSceneProcess
             switch (FightScene.FightScene.Fight.EventType)
             {
                 case FightEventType.Arena:
-                    PlayFabClientAPI.SubtractUserVirtualCurrency(new SubtractUserVirtualCurrencyRequest
+                    
+                    CloudScript.SubtractVirtualCurrency(
+                        "TK",1,
+                        () =>
                         {
-                            Amount = 1,
-                            VirtualCurrency = "TK"
-                        },
-                        (x) =>
-                        {
-                            Currencies.ArenaTicket.Value -= 1;
                             FightLoad.Go(FightScene.FightScene.Fight, true);
-                        }, (x) =>
-                        {
-                            Debug.Log(x.ErrorMessage);
-                            PreScene.ReturnToLobby();
-                        });
+                        }
+                    );
                     break;
                 default:
                     FightLoad.Go(FightScene.FightScene.Fight, true);

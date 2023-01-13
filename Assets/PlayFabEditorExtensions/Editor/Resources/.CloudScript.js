@@ -113,6 +113,17 @@ handlers.buyCurrency= function (args, context) {
     return { result: AddUserVirtualCurrencyResult };
 }
 
+handlers.SubtractVirtualCurrency = function (args, context) {
+    var result = server.SubtractUserVirtualCurrency(
+        {
+            PlayFabId :currentPlayerId,
+            Amount : args.Count,
+            VirtualCurrency : args.VirtualCurrencyCode
+        }
+    );
+    return { result };
+}
+
 // 给予dev用户基本财产
 handlers.grantDevItems = function (args, context) {
     
