@@ -9,12 +9,12 @@ using UnityEngine.UI;
 public class NickNameLayer : UILayer
 {
     [SerializeField] private InputField nickNameInput;
-    [SerializeField] private BOButton OK;
-    [SerializeField] public BOButton Cancel;
+    [SerializeField] private Button OK;
+    [SerializeField] private Button Cancel;
     
-    public void Setup(Action<string> setNickName)
+    public void Setup(Action<string> setNickName, bool showCloseBtn)
     {
-        OK.SetListener(async ()=>
+        OK.onClick.AddListener(async ()=>
         {
             BWFManager.Instance.Load();
             await UniTask.WaitUntil(()=> BWFManager.Instance.isReady);
@@ -29,7 +29,8 @@ public class NickNameLayer : UILayer
                 setNickName.Invoke(filteredWord);
             }
         });
-        Cancel.SetListener(UILayerLoader.Remove<NickNameLayer>);
+        Cancel.gameObject.SetActive(showCloseBtn);
+        Cancel.onClick.AddListener(UILayerLoader.Remove<NickNameLayer>);
     }
 
     string BadWordFilter(string currentTxt)

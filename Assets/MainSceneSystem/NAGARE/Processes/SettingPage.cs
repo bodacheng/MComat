@@ -45,7 +45,6 @@ public class SettingPage : MSceneProcess
     public static void SetNickName(Action<string> success, bool closeBtnOn)
     {
         var nickNameLayer = UILayerLoader.Load<NickNameLayer>();
-        nickNameLayer.Cancel.gameObject.SetActive(closeBtnOn);
         nickNameLayer.Setup(
             (x) =>
             {
@@ -88,7 +87,7 @@ public class SettingPage : MSceneProcess
                         );
                     }, 
                     "Set as your nick name?");
-            }
+            },closeBtnOn
         );
     }
 }
