@@ -596,7 +596,7 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
         "ProfileConstraints" : {
             "ShowDisplayName" : true
         },
-        "StartPosition" : clamp(chooseHighest.Position - 50)// playfab 不提供指定分数获取排行榜名单功能，只能给个更高位置
+        "StartPosition" : clamp(chooseHighest.Position - 50, 0)// playfab 不提供指定分数获取排行榜名单功能，只能给个更高位置
     };
 
     var higherPlayer = undefined;
@@ -623,8 +623,20 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     return { teamInfos };
 }
 
-function clamp(x) {
-    return (x < 0) ? 0 : x;
+function clamp(value, min, max) {
+    if (value < min) {
+        return min;
+    } else if (value > max) {
+        return max;
+    }
+    return value;
+}
+
+function clamp(value, min) {
+    if (value < min) {
+        return min;
+    }
+    return value;
 }
 
 handlers.GetLeaderboard = function (args, context) {
@@ -662,108 +674,6 @@ handlers.GetLeaderboard = function (args, context) {
     return { teamInfos };
 }
 
-// 应该已经没用
-handlers.ArenaReward = function (args, context) {
-    
-    var playstreamEvent = context.playStreamEvent;
-    let arenaPoint = Number(playstreamEvent.StatisticValue);
-
-    let shouldStage = arenaPoint / 100;
-    
-    var getRequest = {
-        PlayFabId: currentPlayerId
-    };
-
-    var playerStats = server.GetPlayerStatistics(getRequest).Statistics;
-
-    let currentRewardStage = -1;
-    for (i = 0; i < playerStats.length; ++i) {
-        if (playerStats[i].StatisticName === "rewardStage") {
-            currentRewardStage = playerStats[i].StatisticName;
-        }
-    }
-    
-    if (shouldStage > currentRewardStage) {
-        var playerStatResult = server.UpdatePlayerStatistics({
-            PlayFabId: currentPlayerId,
-            Statistics: [{
-                StatisticName: "rewardStage",
-                Value: shouldRank
-            }]
-        });
-    }
-    return { };
-}
-
-handlers.RankUp = function (args, context) {
-
-    var playstreamEvent = context.playStreamEvent;
-    let arenaPoint = Number(playstreamEvent.StatisticValue);
-
-    let shouldRank = 0;
-    
-    if (arenaPoint >= Number(args.goldPoint)) {
-        shouldRank = 3;
-    }
-    else if (arenaPoint >= Number(args.silverPoint)) {
-        shouldRank = 2;
-    }
-    else if (arenaPoint >= Number(args.bronzePoint)) {
-        shouldRank = 1;
-    }
-    
-    var getRequest = {
-        PlayFabId: currentPlayerId
-    };
-    
-    var playerStats = server.GetPlayerStatistics(getRequest).Statistics;
-    
-    for (i = 0; i < playerStats.length; ++i) {
-        if (playerStats[i].StatisticName === "rank") {
-            
-            if (Number(playerStats[i].Value) >= shouldRank){
-                return { "rank" : playerStats[i].Value };
-            }else{
-                var playerStatResult = server.UpdatePlayerStatistics({
-                    PlayFabId: currentPlayerId,
-                    Statistics: [{
-                        StatisticName: "rank",
-                        Value: shouldRank
-                    }]
-                });
-
-                return { "rank" : shouldRank };
-            }
-        }
-    }
-    return { "rank" : -1 };
-}
-
-function rankReward(rank) {
-    
-    switch(rank) {
-        case 1:
-        case 2:
-        case 3:
-            return 100;
-        case 4:
-        case 5:
-        case 6:
-            return 150;
-        case 7:
-        case 8:
-        case 9:
-            return 200;
-        case 10:
-        case 11:
-        case 12:
-            return 250;
-        case 13:
-            return 500;
-    }
-    return 0;
-}
-
 // 根据自己的分数和对手的分数来判断接下来应该的竞技场加分。
 // 自己的分数和对手的分数都是客户端传来的。图省事。
 handlers.ArenaPointUp = function (args, context) {
@@ -771,18 +681,22 @@ handlers.ArenaPointUp = function (args, context) {
         PlayFabId: currentPlayerId
     };
     
-    let opponentPoint = args.opponentPoint;
+    let mePosition = args.mePosition;
+    let opponentPosition = args.opponentPosition;
     let mePoint = args.mePoint;
+    let opponentPoint = args.opponentPoint;
     
-    let shouldPoint = 0;
-    // 把基础增分牵制在5到30之间
-    if (opponentPoint - mePoint < 5){
-        shouldPoint = mePoint + 5;
+    let plusPoint = 0;
+    if (opponentPosition - mePosition >= 50)
+    {
+        plusPoint = clamp(opponentPoint - mePoint, 10, 20);
     }
-    if (opponentPoint - mePoint > 30) {
-        shouldPoint = mePoint + 30;
+    else
+    {
+        plusPoint = clamp(opponentPoint - mePoint, 5, 10);
     }
     
+    let shouldPoint = mePoint + plusPoint;
     var playerStatResult = server.UpdatePlayerStatistics({
         PlayFabId: currentPlayerId,
         Statistics: [{
@@ -791,29 +705,8 @@ handlers.ArenaPointUp = function (args, context) {
         }]
     });
     
-    let oldStage = Math.floor(mePoint / 100);
-    let shouldStage = Math.floor(shouldPoint / 100);
-    let shouldReward = 0;
-
-    log.info("shouldStage："+ shouldStage);
-    log.info("oldStage："+ oldStage);
-    if ((shouldStage - oldStage) > 0) {
-        for (var i = 0; i < shouldStage - oldStage; i++){
-            shouldReward += rankReward(oldStage + i);
-        }
-        
-        var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
-            {
-                PlayFabId :currentPlayerId,
-                Amount : shouldReward,
-                VirtualCurrency : "DM"
-            }
-        );
-    }
-    
     return {
-        "currentPoint" : shouldPoint,
-        "DM" : shouldReward
+        "currentPoint" : shouldPoint
     };
 };
 

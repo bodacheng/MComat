@@ -1,4 +1,5 @@
 ﻿using System;
+using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,17 +45,17 @@ public class ArenaFightTeamDisplay : MonoBehaviour
     }
     
     // 本函数唯一用途是竞技场的挑战玩家选择画面里每组敌人图标按钮的外观与功能加载
-    public void AddFightToList(LeaderboardInfo info, LeaderboardInfo myInfo, Action<FightInfo> tryBeginStage)
+    public void AddFightToList(LeaderboardInfo info, LeaderboardInfo myInfo, Func<PlayerLeaderboardEntry, PlayerLeaderboardEntry, int> plusCal, Action<FightInfo> tryBeginStage)
     {
         SetUpCommonInfo(info);
         var stage = LeaderBoardInfoToFightInfo(info);
+        stage.Team1LeaderboardEntry = myInfo.PlayerLeaderboardEntry;
         
         bigButton.onClick.AddListener(()=> tryBeginStage(stage));
-        
-        plusArenaPoint.text = "+" +((info.PlayerLeaderboardEntry.StatValue - myInfo.PlayerLeaderboardEntry.StatValue) / 2);
+        plusArenaPoint.text = "+" + plusCal(myInfo.PlayerLeaderboardEntry, info.PlayerLeaderboardEntry);
         plusArenaPoint.gameObject.SetActive(true);
     }
-
+    
     FightInfo LeaderBoardInfoToFightInfo(LeaderboardInfo info)
     {
         var fightMembers = new FightMembers
@@ -68,7 +69,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         var stage = FightInfo.ArenaStage(fightMembers);
         stage.Team2ID = info.PlayerLeaderboardEntry.PlayFabId;
         stage.EventType = FightEventType.Arena;
-        stage.Team2ArenaPoint = info.PlayerLeaderboardEntry.StatValue;
+        stage.Team2LeaderboardEntry = info.PlayerLeaderboardEntry;
         return stage;
     }
     

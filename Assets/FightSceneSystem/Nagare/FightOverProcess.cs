@@ -29,8 +29,8 @@ namespace FightScene
                     if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabId)
                     {
                         CloudScript.ArenaPointUp(
-                            PlayerAccountInfo.Me.arenaPoint,
-                            FightScene.Fight.Team2ArenaPoint,
+                            FightScene.Fight.Team1LeaderboardEntry,
+                            FightScene.Fight.Team2LeaderboardEntry,
                             (x,y, z) =>
                             {
                                 var a = UILayerLoader.Load<ArenaFightOver>();

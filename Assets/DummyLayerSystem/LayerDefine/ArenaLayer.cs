@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using dataAccess;
 using mainMenu;
+using PlayFab.ClientModels;
 using UniRx;
 using UnityEngine.UI;
 
@@ -32,10 +33,11 @@ public class ArenaLayer : UILayer
     
     [SerializeField] Button rankingPageBtn;
 
+    private Func<PlayerLeaderboardEntry, PlayerLeaderboardEntry, int> plusCal;
     private Action<FightInfo> tryBeginStage;
     private int maxOpponentCount = 3;
     
-    public void SetUp(Action loadData, Action openRanking, Action<FightInfo> tryBeginStage)
+    public void SetUp(Action loadData, Action openRanking, Func<PlayerLeaderboardEntry, PlayerLeaderboardEntry, int> plusCal, Action<FightInfo> tryBeginStage)
     {
         refreshBtn.onClick.RemoveAllListeners();
         refreshBtn.onClick.AddListener(()=> loadData());
@@ -45,6 +47,7 @@ public class ArenaLayer : UILayer
         
         arenaRankIcon.Set(PlayerAccountInfo.Me.arenaPoint);
         this.tryBeginStage = tryBeginStage;
+        this.plusCal = plusCal;
     }
 
     private IDisposable disposeCountDown;
@@ -99,7 +102,7 @@ public class ArenaLayer : UILayer
         {
             var leaderInfo = ordered[index];
             var o = Instantiate(arenaFightTeamDisplayPrefab);
-            o.AddFightToList(leaderInfo, myInfo, tryBeginStage);
+            o.AddFightToList(leaderInfo, myInfo, plusCal, tryBeginStage);
             o.transform.SetParent(enemiesT);
             o.transform.localPosition = Vector3.zero;
             o.transform.localScale = Vector3.one;

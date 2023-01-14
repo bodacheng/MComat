@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DummyLayerSystem;
 using mainMenu;
+using PlayFab.ClientModels;
 using UnityEngine;
 
 public class ArenaPage : MSceneProcess
@@ -51,6 +52,7 @@ public class ArenaPage : MSceneProcess
             {
                 PreScene.target.trySwitchToStep(MainSceneStep.Ranking);
             },
+            PlusPoint,
             PrepareForIt
         );
         
@@ -105,7 +107,7 @@ public class ArenaPage : MSceneProcess
     {
         UILayerLoader.Remove<ArenaLayer>();
     }
-
+    
     public LeaderboardInfo MyLeaderboardInfo => _myLeaderboardInfo;
     private LeaderboardInfo _myLeaderboardInfo;
     void LoadLeaderboardInfos()
@@ -155,5 +157,17 @@ public class ArenaPage : MSceneProcess
                 LeaderBoardFinished(false);
             }
         );
+    }
+    
+    int PlusPoint(PlayerLeaderboardEntry myInfo, PlayerLeaderboardEntry opponentInfo)
+    {
+        if (opponentInfo.Position - myInfo.Position >= 50)
+        {
+            return Mathf.Clamp(opponentInfo.StatValue - myInfo.StatValue, 10, 20);
+        }
+        else
+        {
+            return Mathf.Clamp(opponentInfo.StatValue - myInfo.StatValue, 5, 10);
+        }
     }
 }

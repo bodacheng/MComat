@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEditor;
 using dataAccess;
 using System.IO;
+using PlayFab.ClientModels;
 
 public class FightInfo : ScriptableObject
 {
@@ -47,7 +48,12 @@ public class FightInfo : ScriptableObject
     public string Team1ID{ set; get; }
     public string Team2ID{ set; get; }
     
-    public int Team2ArenaPoint {
+    public PlayerLeaderboardEntry Team1LeaderboardEntry {
+        set;
+        get;
+    }
+    
+    public PlayerLeaderboardEntry Team2LeaderboardEntry {
         set;
         get;
     }
@@ -172,7 +178,8 @@ public class FightInfo : ScriptableObject
         stage.team2HpRate = source.team2HpRate;
         stage.team1CGMode = source.team1CGMode;
         stage.team2CGMode = source.team2CGMode;
-        stage.Team2ArenaPoint = source.Team2ArenaPoint;
+        stage.Team1LeaderboardEntry = source.Team1LeaderboardEntry;
+        stage.Team2LeaderboardEntry = source.Team2LeaderboardEntry;
         stage.RunTutorial = source.RunTutorial;
         stage.stageButtonSprite = source.stageButtonSprite;
         stage.EventType = source.EventType;

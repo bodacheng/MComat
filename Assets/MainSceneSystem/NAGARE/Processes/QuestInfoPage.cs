@@ -1,10 +1,6 @@
 ﻿using dataAccess;
 using DummyLayerSystem;
 using mainMenu;
-using PlayFab;
-using PlayFab.ClientModels;
-using UnityEngine;
-
 public class QuestInfoPage : MSceneProcess
 {
     private FightPrepareLayer _layer;

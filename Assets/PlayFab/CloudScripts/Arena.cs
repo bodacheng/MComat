@@ -127,7 +127,7 @@ public partial class CloudScript
     /// <param name="mePoint"></param>
     /// <param name="opponentPoint"></param>
     /// <param name="success"></param>
-    public static void ArenaPointUp(int mePoint, int opponentPoint, Action<int, int, int> success)
+    public static void ArenaPointUp(PlayerLeaderboardEntry meLeaderboardEntry, PlayerLeaderboardEntry opponentLeaderboardEntry, Action<int, int, int> success)
     {
         ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest
@@ -136,22 +136,46 @@ public partial class CloudScript
                 FunctionParameter = 
                     new
                     {
-                        mePoint = mePoint,
-                        opponentPoint = opponentPoint
+                        mePoint = meLeaderboardEntry.StatValue,
+                        opponentPoint = opponentLeaderboardEntry.StatValue,
+                        mePosition = meLeaderboardEntry.Position,
+                        opponentPosition = opponentLeaderboardEntry.Position
                     },
                 GeneratePlayStreamEvent = true
             },
-            (ExecuteCloudScriptResult result) => {
+            (result) => {
                 var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                 var currentPoint = (jsonResult.ContainsKey("currentPoint") ? jsonResult["currentPoint"] : 0).ToString();
-                var DM = (jsonResult.ContainsKey("DM") ? jsonResult["DM"] : 0).ToString();
-
                 int.TryParse(currentPoint, out var currentPointInt);
-                int.TryParse(DM, out var DMInt);
+
+                int awardDM = 0;
+                int oldRank = PlayerAccountInfo.Me.arenaPoint / 100;
+                int newRank = currentPointInt / 100;
+                if (newRank > oldRank)
+                {
+                    switch (newRank)
+                    {
+                        case 5:
+                            awardDM = 100;
+                            break;
+                        case 4:
+                            awardDM = 100;
+                            break;
+                        case 3:
+                            awardDM = 100;
+                            break;
+                        case 2:
+                            awardDM = 100;
+                            break;
+                        case 1:
+                            awardDM = 100;
+                            break;
+                    }
+                }
                 
                 if (PlayerAccountInfo.Me != null)
                 {
-                    success.Invoke(PlayerAccountInfo.Me.arenaPoint , currentPointInt, DMInt);
+                    success.Invoke(PlayerAccountInfo.Me.arenaPoint , currentPointInt, awardDM);
                     PlayerAccountInfo.Me.arenaPoint = currentPointInt;
                 }
             },
