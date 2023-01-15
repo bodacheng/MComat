@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -99,6 +98,8 @@ public class HighLightLayer : UILayer
         if (BgKeys.Count == 0) return;
         int randomIndex = Random.Range(0, BgKeys.Count);
         var value = await AddressablesLogic.LoadT<Sprite>(BgKeys[randomIndex]);
+        var bigCurtainRect = bigCurtain.transform.GetComponent<RectTransform>();
+        bigCurtainRect.sizeDelta = new Vector2(value.rect.width * (float)Screen.height / value.rect.height   , Screen.height);
         bigCurtain.sprite = value;
     }
     
