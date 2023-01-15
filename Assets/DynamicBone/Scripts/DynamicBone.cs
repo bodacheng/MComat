@@ -166,8 +166,8 @@ public class DynamicBone : MonoBehaviour
     float dt;
     void LateUpdate()
     {
-        use_UpdateRate = FPSLabel.fps < 57 ? m_UpdateRate / 2 : m_UpdateRate;
-        if (FPSLabel.fps > 55)
+        //use_UpdateRate = FPSLabel.fps < 57 ? m_UpdateRate / 2 : m_UpdateRate;
+        //if (FPSLabel.fps > 55)
         {
             if (m_DistantDisable)
                 CheckDistance();

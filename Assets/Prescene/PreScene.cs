@@ -18,9 +18,7 @@ namespace mainMenu
         [Header("主进程处理器")]
         [SerializeField] SingleThreadProcesser mainProcessRunner;
         
-        [Header("主相机")] 
         public Camera postProcessCamera;
-        [Header("UI特效相机")]
         public Camera noPostProcessCamera;
         
         [Header("Shader转换器")]

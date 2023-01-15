@@ -8,7 +8,6 @@ namespace ModelView
     {
         [SerializeField] private Transform target;
         [SerializeField] private Camera camera;
-        [SerializeField] private Camera eCamera;
         [SerializeField] private float upDownRotateRangeMin = -10;
         [SerializeField] private float upDownRotateRangeMax = 45;
         [SerializeField] private float rotateSpeed = 90;
@@ -21,7 +20,6 @@ namespace ModelView
         public void Clear()
         {
             DestroyImmediate(camera.gameObject);
-            DestroyImmediate(eCamera.gameObject);
             if (target != null)
                 DestroyImmediate(target.gameObject);
             DestroyImmediate(gameObject);
@@ -54,15 +52,11 @@ namespace ModelView
             hei = _rect.rect.height;
             
             camera.transform.SetParent(camerasHolder);
-            eCamera.transform.SetParent(camerasHolder);
-
-            PreScene.target.CameraStackToPostProcess(eCamera);
-            PreScene.target.CameraStackToNonePostProcess(camera);
+            PreScene.target.CameraStackToPostProcess(camera);
             
             // 初始化工作全部完成后才启用相机，否则会在之前造成黑屏
             camera.gameObject.SetActive(true);
-            eCamera.gameObject.SetActive(true);
-            
+
             if (!this._fixMode)
                 _basicOrthographicSize = CalMaxOrthographicSize();
         }
@@ -121,9 +115,7 @@ namespace ModelView
                                                                  + (0.5f - (viewCenter.y / Screen.height)) * cViewHeight * Vector3.up;
                 _camera.farClipPlane = _targetBounds.extents.z * 2 + extraZDis + extraZCameraDepth;
             }
-
             CameraTreat(camera);
-            CameraTreat(eCamera);
         }
         
         static Vector2 GetCenterPosition(RectTransform rect)

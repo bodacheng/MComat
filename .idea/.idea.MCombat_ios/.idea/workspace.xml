@@ -3,40 +3,754 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/17.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/17.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/1.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/10.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/10.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/11.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/11.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/12.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/12.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/13.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/13.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/14.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/14.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/2.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/3.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/3.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/4.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/4.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/5.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/5.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/6.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/6.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/7.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/7.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/8.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/8.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/9.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/9.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG and MMO UI 11/Textures/Demo/Avatars/AB_UnitFrame_Avatar_Example.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RPG and MMO UI 11/Textures/Demo/Avatars/AB_UnitFrame_Avatar_Example.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame - 2px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame - 2px.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame - 5px.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame - 5px.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightInfoGUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightInfoGUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/BasicState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/BasicState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/Members.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/Members.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSelect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSetComment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSetComment.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/UI_Ini.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/UI_Ini.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/GabrielAguiarProductions.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/HDRP.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/HDRP/UniqueMagicAbilitiesVol1_HDRP_v1.3_2018.4.22f1.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/LWRP.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/GabrielAguiarProductions/Unique_MagicAbilities_Volume_1/LWRP/UniqueMagicAbilitiesVol1_LWRP_v1.3_2018.4.22f1.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Editor/AssetPostImportProcess_TitleFX.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Editor/AssetPostImportProcess_TitleFX.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Editor/TitleFX_Welcome.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Editor/TitleFX_Welcome.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Editor/Title_fx_GUI.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Editor/Title_fx_GUI.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Editor/Title_fx_GUI_V2.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Editor/Title_fx_GUI_V2.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/Shaders.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/Shaders/TitleFX_VA.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/Shaders/TitleFX_VA.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/Shaders/TitleFX_VB.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/Shaders/TitleFX_VB.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V1.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V10.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V10.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V11.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V11.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V12.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V12.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V3.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V3.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V4.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V4.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V5.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V5.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V6.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V6.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V7.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V7.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V8.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V8.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V9.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VA/TitleFX_V9.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_1.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_10.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_10.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_2.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_2.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_3.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_3.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_4.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_4.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_5.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_5.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_6.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_6.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_7.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_7.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_8.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_8.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_9.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Materials/VB/TFX_VB_9.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/ReadMe.rtf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/ReadMe.rtf.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Resources/TitleFX_PACK.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Resources/TitleFX_PACK.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Scenes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Scenes/TITLEFX_SampleScene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Scenes/TITLEFX_SampleScene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Scenes/TITLEFX_SampleScene_Profiles.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Scenes/TITLEFX_SampleScene_Profiles/PostProcess Profile.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Scenes/TITLEFX_SampleScene_Profiles/PostProcess Profile.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Scripts/ShowCase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Scripts/ShowCase.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/LensDirt03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/LensDirt03.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_LensDir.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_LensDir.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Lu_Noise_07.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Lu_Noise_07.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Lu_Noise_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Lu_Noise_10.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Lu_Noise_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Lu_Noise_18.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Lu_Noise_22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Lu_Noise_22.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Lu_Noise_31.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Lu_Noise_31.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_N1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_N1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_N1_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_N1_2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_N2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_N2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_N2_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_N2_2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Noise_11.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Noise_11.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Noise_13.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Noise_13.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Noise_14.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Noise_14.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Noise_5.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Noise_5.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Random_04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Random_04.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Random_06.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Random_06.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Random_19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Random_19.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Random_44.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Random_44.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Random_45.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Random_45.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Random_46.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Noise_textures/T_Random_46.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Text.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Text/Mugen-Combat-2022-10-31.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Text/Mugen-Combat-2022-10-31.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Text/Title_A.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Text/Title_A.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Text/Title_A_Outline.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Asstes/OrangedKeys/TitleFX/Textures/Text/Title_A_Outline.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DynamicBone/Scripts/DynamicBone.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DynamicBone/Scripts/DynamicBone.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/textures/MagicCircle38.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/textures/MagicCircle38.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/tetsuya.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/tetsuya.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_1.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_10.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_10.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_11.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_11.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_12.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_12.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_13.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_13.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_14.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_14.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_15.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_15.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_16.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_16.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_17.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_17.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_18.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_18.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_19.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_19.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_2.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_2.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_20.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_20.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_3.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_3.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_4.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_4.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_5.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_5.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_6.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_6.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_7.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_7.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_8.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_8.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_9.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Game_Portal_9.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Glow_Main.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Materials/Glow_Main.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_10.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_10.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_11.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_11.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_14.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_14.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_15.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_15.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_16.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_16.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_17.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_17.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_18.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_18.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_19.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_19.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_20.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_20.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_3.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_3.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_4.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_4.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_5.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_5.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_6.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_6.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_8.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_8.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_9.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Prefab/Game_Portal_9.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Readme.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Scene.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Scene/Demo.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Scene/Demo.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Script.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Script/NextPrefab.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Script/NextPrefab.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Script/UserCamera.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Script/UserCamera.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_10.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_11.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_12.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_13.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_14.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_15.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_16.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_17.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_18.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_19.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_20.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_4.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_5.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_6.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_7.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_8.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Game_Portal_9.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Glow_Main.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game_Portal/Textures/Glow_Main.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Robot Kyle.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Robot Kyle/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Robot Kyle/Materials/Robot_Color.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Robot Kyle/Materials/Robot_Color.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Robot Kyle/Model.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Robot Kyle/Model/Robot Kyle.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Robot Kyle/Model/Robot Kyle.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Robot Kyle/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Robot Kyle/Textures/Robot_Color.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Robot Kyle/Textures/Robot_Color.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Robot Kyle/Textures/Robot_Normal.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Robot Kyle/Textures/Robot_Normal.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Confirm.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Loader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Loader/Circle Loader Loop.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Loader/Circle Loader Loop.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Loader/Circle Loader.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Animations/Loader/Circle Loader.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Audio.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Audio/Background.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Audio/Background.ogg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Audio/Click.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Audio/Click.ogg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Audio/Hover.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Audio/Hover.ogg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Audio/Start.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Audio/Start.ogg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Audio/_Mixer.mixer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Audio/_Mixer.mixer.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Documentation.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Documentation/Documentation.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Documentation/Documentation.pdf.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Chapter Button.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Chapter Button.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Filter Button (Switch).prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Filter Button (Switch).prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Friend Button.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Friend Button.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Gamepad Shortcut Key.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Gamepad Shortcut Key.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Icon Button.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Icon Button.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Keyboard Shortcut Key.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Keyboard Shortcut Key.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Main Button.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Main Button.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Panel Button Alternative.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Panel Button Alternative.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Panel Button.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Panel Button.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Quick Match Button.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Quick Match Button.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Server Button.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Server Button.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Settings Button.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Settings Button.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Spotlight Button.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Spotlight Button.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Squad Member Button.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Button/Squad Member Button.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Horizontal Selector.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Horizontal Selector/Horizontal Selector.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Horizontal Selector/Horizontal Selector.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Horizontal Selector/Indicator Item.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Horizontal Selector/Indicator Item.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Input Field.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Input Field/Search.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Input Field/Search.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Input Field/Standard (Left Aligned).prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Input Field/Standard (Left Aligned).prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Input Field/Standard (Middle Aligned).prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Input Field/Standard (Middle Aligned).prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Loader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Loader/Loading.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Loader/Loading.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Modal Window.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Modal Window/Exit.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Modal Window/Exit.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Modal Window/Key Binding.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Modal Window/Key Binding.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Modal Window/Play Chapter.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Modal Window/Play Chapter.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Modal Window/Selected Server.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Modal Window/Selected Server.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Panels.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Panels/Friends Tab.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Panels/Friends Tab.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Scrollbar.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Scrollbar/Scrollbar.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Scrollbar/Scrollbar.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Slider.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Slider/Slider.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Slider/Slider.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Switch.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Switch/Switch.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Switch/Switch.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Virtual Cursor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Virtual Cursor/Virtual Cursor.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Prefabs/Virtual Cursor/Virtual Cursor.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Read Me.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Read Me.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Resources/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Resources/Editor/Shift Editor Dark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Resources/Editor/Shift Editor Dark.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Resources/Editor/Shift Editor Light.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Resources/Editor/Shift Editor Light.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Resources/Shift UI Manager.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Resources/Shift UI Manager.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Resources/Shift UI Presets.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Resources/Shift UI Presets/Default.preset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Resources/Shift UI Presets/Default.preset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Dash 2 64px - Stroke 10px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Dash 2 64px - Stroke 10px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Filled.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Filled.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 10px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 10px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 12px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 12px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 14px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 14px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 16px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 16px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 18px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 18px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 20px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 20px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 3px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 3px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 5px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 5px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 8px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline - Stroke 8px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline Dash - Stroke 3px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Circle/Circle Outline Dash - Stroke 3px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Big - 6px (200ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Big - 6px (200ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Big - 6px (300ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Big - 6px (300ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Corner Glow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Corner Glow.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Corner.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Corner.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Filled Big (200ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Filled Big (200ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Filled Big (300ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Filled Big (300ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Filled Big.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Filled Big.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Filled Glow Big (200ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Filled Glow Big (200ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Filled Glow Big.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Filled Glow Big.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Filled Glow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Filled Glow.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Filled.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Filled.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow - 5px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow - 5px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 2px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 2px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 3px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 3px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 4px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 4px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 5px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 5px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 6px (200ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 6px (200ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 6px (250ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 6px (250ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 7px (250ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 7px (250ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 8px (200ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Cut/Cut Frame Glow Big - 8px (200ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle (250ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle (250ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle (400ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle (400ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle (450ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle (450ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle (500ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle (500ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle (600ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle (600ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle (750ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle (750ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle (900ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle (900ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle Outline - Stroke 6px (225ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle Outline - Stroke 6px (225ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle Outline - Stroke 8px (225ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle Outline - Stroke 8px (225ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle Outline - Stroke 8px (300ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle Outline - Stroke 8px (300ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle Outline - Stroke 8px (900ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Circle Outline - Stroke 8px (900ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Filled (300ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Filled (300ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Filled (500ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Filled (500ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 10px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 10px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 12px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 12px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 14px (500ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 14px (500ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 14px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 14px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 16px (500ppu).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 16px (500ppu).png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 16px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 16px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 18px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 18px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 20px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 20px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 5px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 5px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 8px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Rounded/Rounded Outline - Stroke 8px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Filled Square Glow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Filled Square Glow.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Filled Square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Filled Square.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 10x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 10x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 12x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 12x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 14x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 14x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 16x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 16x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 18x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 18x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 20x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 20x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 22x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 22x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 24x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 24x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 2x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 4x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 4x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 6x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 6x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 8x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline - Stroke 8x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 10x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 10x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 12x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 12x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 14x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 14x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 16x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 16x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 18x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 18x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 20x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 20x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 22x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 22x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 24x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 24x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 2x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 4x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 4x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 6x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 6x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 8x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Border/Square/Outline Glow - Stroke 8x.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Background Glow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Background Glow.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Circle Filled Glow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Circle Filled Glow.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Circle Glow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Circle Glow.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Circle Outline Glow 64px.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Circle Outline Glow 64px.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Gradient Bottom.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Gradient Bottom.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Gradient Left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Gradient Left.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Gradient Right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Gradient Right.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Gradient Top.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Gradient Top.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Lens Flare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Lens Flare.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Shiny Move.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Shiny Move.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Square Shadow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Glow &amp; Shadow/Square Shadow.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Add Glow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Add Glow.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Armor Glow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Armor Glow.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Arrow Left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Arrow Left.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Arrow Right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Arrow Right.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Audio Device.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Audio Device.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Audio.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Audio.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Brightness.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Brightness.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Campaign.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Campaign.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Cancel.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Cancel.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Check.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Check.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Controls.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Controls.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Cursor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Cursor.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Dev Console.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Dev Console.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Exit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Exit.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Friends.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Friends.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Gamepad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Gamepad.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Gameplay.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Gameplay.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Glow Mote.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Glow Mote.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/HUD.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/HUD.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Home.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Home.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Language.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Language.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Lock.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Lock.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Mic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Mic.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Multiplayer.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Multiplayer.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Music.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Music.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Ping.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Ping.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Placeholder Profile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Placeholder Profile.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Play.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Play.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Refresh.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Refresh.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/SFX.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/SFX.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Screen Position.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Screen Position.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Search.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Server Map.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Server Map.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Settings.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Settings.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Star Filled.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Star Filled.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Star.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Star.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Subtitles.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Subtitles.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Swap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Swap.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Tutorial.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Tutorial.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/UI Manager Icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/UI Manager Icon.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/UI Scale.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/UI Scale.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Visuals.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Visuals.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Window Mode.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Icon/Window Mode.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/10.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/11.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/12.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/13.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/14.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/15.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/16.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/17.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/18.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/19.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/20.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/21.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/22.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/23.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/24.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/25.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/26.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/26.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/27.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/27.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/28.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/28.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/29.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/29.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/3.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/30.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/30.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/31.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/31.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/32.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/33.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/33.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/34.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/34.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/35.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/35.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/36.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/36.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/37.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/37.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/38.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/38.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/39.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/39.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/4.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/40.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/40.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/5.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/6.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/7.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/8.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Shift - Complete Sci-Fi UI/Textures/Loader/9.png.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TimelineSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TimelineSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Search.settings" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Search.settings" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +803,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Volume/Volume.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.xr.legacyinputhelpers@2.1.9/Runtime/ArmModels/TransitionArmModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ads@3.7.5/Runtime/Monetization/MonetizationPlatform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PlayFab/CloudScripts/VirtualCurrency.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Utilities/CameraCaptureBridge.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Nodes/Input/Matrix/Matrix3Node.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Debugging/Prefabs/Scripts/DebugUIHandlerIndirectToggle.cs" root0="SKIP_HIGHLIGHTING" />
@@ -192,6 +907,8 @@
       <workItem from="1672647224915" duration="1805000" />
       <workItem from="1672752293945" duration="1024000" />
       <workItem from="1672792710049" duration="11954000" />
+      <workItem from="1673748333469" duration="1135000" />
+      <workItem from="1673756823085" duration="711000" />
     </task>
     <servers />
   </component>

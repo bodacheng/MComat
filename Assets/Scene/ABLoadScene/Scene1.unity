@@ -3312,6 +3312,55 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2106050673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2106050675}
+  - component: {fileID: 2106050674}
+  m_Layer: 0
+  m_Name: Volumn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2106050674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106050673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: f530954c0fd1648b6b817ae43a16b144, type: 2}
+--- !u!4 &2106050675
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106050673}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 331.90427, y: -11.893541, z: 1706.5781}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1000012001667391
 GameObject:
   m_ObjectHideFlags: 0
@@ -4240,7 +4289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playFabSetting: {fileID: 11400000, guid: ce076091f5876436790a16d502d758d7, type: 2}
   fightGlobalSetting: {fileID: 11400000, guid: 26bb3442a9a6b4908b2a162f148e49b0, type: 2}
-  keywordSetting: {fileID: 11400000, guid: cc8bc4431333a4b94b1f8148807004f0, type: 2}
+  commonSetting: {fileID: 11400000, guid: cc8bc4431333a4b94b1f8148807004f0, type: 2}
   defaultIconSetting: {fileID: 11400000, guid: a20af27109115ef41ad76db47537e305, type: 2}
 --- !u!4 &2075428156307059471
 Transform:
