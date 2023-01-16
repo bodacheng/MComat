@@ -34143,7 +34143,7 @@ GameObject:
   - component: {fileID: 7961396959558868838}
   - component: {fileID: 7961396959573999088}
   - component: {fileID: 7961396959574031186}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BeamUpCloudBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38910,7 +38910,7 @@ GameObject:
   - component: {fileID: 7961396959558788220}
   - component: {fileID: 7961396959573987524}
   - component: {fileID: 7961396959574898134}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LongBeams
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43675,7 +43675,7 @@ GameObject:
   - component: {fileID: 7961396959558776408}
   - component: {fileID: 7961396959573988278}
   - component: {fileID: 7961396959574990660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
