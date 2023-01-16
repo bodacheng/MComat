@@ -6,13 +6,9 @@ using UnityEngine;
 public class GotchaLayer : UILayer
 {
     [SerializeField] private List<DropTablePage> dropTables;
-    [SerializeField] private Button getAllSKBtn;
-    [SerializeField] private Button getAllMBtn;
-    [SerializeField] private Button remove25StonesBtn;
     [SerializeField] private Button left, right;
     
-    public void Setup(Action<string,string,int> execute, Action<string> dropTableInfo, Action<int, List<DropTablePage>> indexAction,
-        Action getAllSK, Action getAllM, Action remove25Stones)
+    public void Setup(Action<string,string,int> execute, Action<string> dropTableInfo, Action<int, List<DropTablePage>> indexAction)
     {
         for (var i = 0; i < dropTables.Count; i++)
         {
@@ -24,13 +20,5 @@ public class GotchaLayer : UILayer
         right.onClick.AddListener(() => { indexAction(1, dropTables);});
         
         indexAction(0, dropTables);
-        
-        getAllSKBtn.gameObject.SetActive(true);
-        getAllMBtn.gameObject.SetActive(true);
-        remove25StonesBtn.gameObject.SetActive(true);
-
-        getAllSKBtn.onClick.AddListener(()=>getAllSK());
-        getAllMBtn.onClick.AddListener(()=>getAllM());
-        remove25StonesBtn.onClick.AddListener(()=> remove25Stones());
     }
 }

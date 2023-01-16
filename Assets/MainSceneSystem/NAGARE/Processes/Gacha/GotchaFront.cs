@@ -62,7 +62,7 @@ public class GotchaFront : MSceneProcess
         
         BackGroundPS.target.Off();
         _layer = UILayerLoader.Load<GotchaLayer>();
-        _layer.Setup(NineTimes, DropTableInfo, MoveNext, GetAllSK, GetAllM, Remove25Stones);
+        _layer.Setup(NineTimes, DropTableInfo, MoveNext);
         
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
         upperInfoBar.Setup(null,
@@ -145,43 +145,5 @@ public class GotchaFront : MSceneProcess
             {
                 PopupLayer.ArrangeWarnWindow(x.ErrorMessage);
             });
-    }
-    
-    static void GetAllSK()
-    {
-        CloudScript.Common("getStonesTest", OnGrantStoness);
-    }
-
-    static void GetAllM()
-    {
-        CloudScript.Common("getMonsterTest", OnGrantMonsters);
-    }
-
-    static void Remove25Stones()
-    {
-        CloudScript.Common("Remove25Stones", OnRemove25Stones);
-    }
-    
-    static void OnGrantStoness(ExecuteCloudScriptResult result)
-    {
-        //Debug.Log(JsonWrapper.SerializeObject(result.FunctionResult));
-        PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-        Debug.Log(jsonResult);
-    }
-    
-    static void OnGrantMonsters(ExecuteCloudScriptResult result)
-    {
-        //Debug.Log(JsonWrapper.SerializeObject(result.FunctionResult));
-        PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-        Debug.Log(jsonResult);
-    }
-
-    static void OnRemove25Stones(ExecuteCloudScriptResult result)
-    {
-        PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-        object currentItemCount;
-        jsonResult.TryGetValue("currentItemCount", out currentItemCount); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
-        Debug.Log(currentItemCount);
-        PlayFabReadClient.LoadItems((x) =>{});
     }
 }
