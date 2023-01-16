@@ -13,13 +13,12 @@ namespace FightScene
         [SerializeField] RectTransform sideIconsContainer;
         [SerializeField] RectTransform _targetCanvasT;
         [SerializeField] SideCharIcon button_prefab;
-        [SerializeField] Text HitCombo;
-        
-        public TeamMode TeamMode;
+        [SerializeField] Text hitCombo;
+
+        public TeamMode teamMode;
         public TeamConfig teamConfig;
-        public MultiDic<int, int, Data_Center> TeamMembers;
+        public MultiDic<int, int, Data_Center> teamMembers;
         public readonly IDictionary<Data_Center, SideCharIcon> UnitIconDic = new Dictionary<Data_Center, SideCharIcon>();
-        
         private IDisposable barPosUpdate;
         
         public SideCharIcon GetSideIcon(Data_Center d)
@@ -30,7 +29,7 @@ namespace FightScene
         public void Clear()
         {
             barPosUpdate?.Dispose();
-            switch (TeamMode)
+            switch (teamMode)
             {
                 case TeamMode.MultiRaid:
                     MultiClear();
@@ -43,7 +42,7 @@ namespace FightScene
         
         public void InsTeamUI(Action<Data_Center> changeUnit, ReactiveProperty<Data_Center> RMode_Unit)
         {
-            switch (TeamMode)
+            switch (teamMode)
             {
                 case TeamMode.MultiRaid:
                     InsTeamUI_Multi();
@@ -51,10 +50,11 @@ namespace FightScene
                     {
                         barPosUpdate = Observable.IntervalFrame(30).Subscribe(_ =>
                         {
-                            foreach (var _one in TeamMembers.GetValues())
+                            foreach (var _one in teamMembers.GetValues())
                             {
                                 UnitIconDic.TryGetValue(_one, out var _tempSI);
-                                _tempSI.transform.position = Vector3.Lerp(_tempSI.transform.position, CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 3f), Time.deltaTime * 20f);
+                                _tempSI.transform.position = 
+                                    Vector3.Lerp(_tempSI.transform.position, CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 2.8f), Time.deltaTime * 30);
                             }
                         }).AddTo(gameObject);
                     }
@@ -73,7 +73,7 @@ namespace FightScene
                                         return;
                                     UnitIconDic.TryGetValue(RMode_Unit.Value, out var _tempSI);
                                     if (_tempSI != null)
-                                        _tempSI.transform.DOMove(CameraManager._camera.WorldToScreenPoint(RMode_Unit.Value.transform.position + Vector3.up * 3f), 1);
+                                        _tempSI.transform.DOMove(CameraManager._camera.WorldToScreenPoint(RMode_Unit.Value.transform.position + Vector3.up * 2.5f), 0.5f);
                                     else
                                     {
                                         Debug.Log("潜在逻辑错误");
@@ -86,25 +86,25 @@ namespace FightScene
             }
         }
         
-        void RefreshResistanceBar(Data_Center data_Center, int value)
+        void RefreshResistanceBar(Data_Center dataCenter, int value)
         {
-            UnitIconDic.TryGetValue(data_Center, out var _tempSI);
-            _tempSI.RefreshResistanceBar(value);
+            UnitIconDic.TryGetValue(dataCenter, out var tempSi);
+            tempSi.RefreshResistanceBar(value);
         }
-        void RefreshHPBar(Data_Center data_Center, float current_hp, float wholeHP)
+        void RefreshHPBar(Data_Center dataCenter, float current_hp, float wholeHP)
         {
-            UnitIconDic.TryGetValue(data_Center, out var _tempSI);
-            _tempSI.RefreshHpBar(current_hp, wholeHP);
+            UnitIconDic.TryGetValue(dataCenter, out var tempSi);
+            tempSi.RefreshHpBar(current_hp, wholeHP);
         }
-        void RefreshExBar(Data_Center data_Center, int current_ex, int wholeEx)
+        void RefreshExBar(Data_Center dataCenter, int current_ex, int wholeEx)
         {
-            UnitIconDic.TryGetValue(data_Center, out var _tempSI);
-            _tempSI.RefreshExBar(current_ex, wholeEx);
+            UnitIconDic.TryGetValue(dataCenter, out var tempSi);
+            tempSi.RefreshExBar(current_ex, wholeEx);
         }
         
         void Refresh(Data_Center fighting = null)
         {
-            foreach (var _dt in TeamMembers.GetValues())
+            foreach (var _dt in teamMembers.GetValues())
             {
                 UnitIconDic.TryGetValue(_dt, out var _tempSI);
                 if (_tempSI == null)

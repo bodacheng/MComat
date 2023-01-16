@@ -12,7 +12,7 @@ namespace FightScene
         
         void IniTeamUI_Rotate(Action<Data_Center> ChangeUnit)
         {
-            foreach (var center in TeamMembers.GetValues())
+            foreach (var center in teamMembers.GetValues())
             {
                 var sideIcon = Instantiate(button_prefab);
                 sideIcon.name = center.name + " ICon";
@@ -82,9 +82,8 @@ namespace FightScene
                 
                 if (x != null)
                 {
-                    rotationModeHitCombo = Instantiate(HitCombo);
+                    rotationModeHitCombo = Instantiate(hitCombo);
                     rotationModeHitCombo.name = teamConfig.myTeam + "HitCombo";
-                    
                     rotationModeHitCombo.color = teamConfig.myTeam == RTFightManager.playerTeam ? Color.yellow : Color.blue;
                     rotationModeHitCombo.gameObject.SetActive(true);
                     if (rotationModeHitCombo.gameObject.transform.parent != _targetCanvasT)

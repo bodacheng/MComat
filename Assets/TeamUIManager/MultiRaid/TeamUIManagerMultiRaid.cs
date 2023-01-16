@@ -12,7 +12,7 @@ namespace FightScene
         
         void InsTeamUI_Multi()//这个环节应该能够同时把HP bar也适配好。
         {
-            foreach (var center in TeamMembers.GetValues())
+            foreach (var center in teamMembers.GetValues())
             {
                 // SideCharIcon整备
                 void Action1(Data_Center c)

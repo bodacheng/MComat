@@ -27,7 +27,8 @@ public class FightingStepLayer : UILayer
     public async UniTask Setup(bool active = true)
     {
         gameObject.SetActive(active && FightScene.FightScene.Fight.EventType != FightEventType.Screensaver);
-        await StartUp((x) =>
+        await StartUp(
+            (x) =>
             {
                 PlayerPrefs.SetInt("auto", x ? 1:0);
                 RTFightManager.Target.team1.Auto = x;
@@ -36,8 +37,15 @@ public class FightingStepLayer : UILayer
             {
                 RTFightManager.Target.team2.Auto = x;
             },
-            ()=> UILayerLoader.Load<FightScenePauseSupport>()
-            );
+            ()=>
+            {
+                var pauseLayer = UILayerLoader.Load<FightScenePauseSupport>();
+                pauseLayer.Setup(
+                    ()=>{ Time.timeScale = 0; },
+                    FightScene.FightScene.target.ReturnToFront,
+                    ()=>{ Time.timeScale = 1; }
+                );
+            });
     }
     
     public static void Close()
@@ -72,15 +80,15 @@ public class FightingStepLayer : UILayer
         Team1Auto.Initialize((() => RTFightManager.Target.team1.Auto), switchTeam1Auto);
         Team2Auto.Initialize((() => RTFightManager.Target.team2.Auto), switchTeam2Auto);
         
-        team1UI.TeamMode = FightScene.FightScene.Fight.team1Mode;
-        team2UI.TeamMode = FightScene.FightScene.Fight.team2Mode;
+        team1UI.teamMode = FightScene.FightScene.Fight.team1Mode;
+        team2UI.teamMode = FightScene.FightScene.Fight.team2Mode;
         
         team1UI.teamConfig = RTFightManager.Target.heroTeamConfig;
         team2UI.teamConfig = RTFightManager.Target.EnemyTeamConfig;
         team1UI.teamConfig.playID = FightScene.FightScene.Fight.Team1ID;
         team2UI.teamConfig.playID = FightScene.FightScene.Fight.Team2ID;
-        team1UI.TeamMembers = RTFightManager.Target.team1.teamMembers;
-        team2UI.TeamMembers = RTFightManager.Target.team2.teamMembers;
+        team1UI.teamMembers = RTFightManager.Target.team1.teamMembers;
+        team2UI.teamMembers = RTFightManager.Target.team2.teamMembers;
         
         // 角色第二次初始化在这之前已经结束
         team1UI.InsTeamUI(RTFightManager.Target.team1.ReadyForNextMember, RTFightManager.Target.team1.RMode_Unit);
