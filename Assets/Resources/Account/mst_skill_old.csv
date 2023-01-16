@@ -43,7 +43,7 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK
 42,fangentou,human,0,0.5,5,GR,
 43,forwardblade,human,1,2,5,GR,
 44,frictionkick,human,1,2,5,GR,
-45,f_rushpuch,human,1,2,5,GR,
+45,f_rushpunch,human,1,2,5,GR,
 46,horiblade,human,1,2,5,GR,
 47,jiancepunch,human,1,2,5,GR,
 48,chargepunch,human,1,2,5,GR,

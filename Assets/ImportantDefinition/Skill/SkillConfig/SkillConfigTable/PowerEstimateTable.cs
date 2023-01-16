@@ -56,9 +56,10 @@ public class PowerEstimateTable
                 grid[i][1] = skillConfigs[i - 1].REAL_NAME;
                 grid[i][2] = skillConfigs[i - 1].SP_LEVEL.ToString();
                 animDic.TryGetValue(skillConfigs[i -1].REAL_NAME, out var clip);
-                if (clip != null)
+                if (clip == null)
                 {
-                    //Debug.Log("cal this:"+ clip);
+                    Debug.Log("no anim clip :"+ skillConfigs[i -1].REAL_NAME);
+                    continue;
                 }
                 var pair = await ATCal(clip, skillConfigs[i - 1].ATTACK_WEIGHT);
                 grid[i][3] = pair.Item1.ToString();

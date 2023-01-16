@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CommonSetting
   m_EditorClassIdentifier: 
   devMode: 0
-  maxStoneCount: 160
+  maxStoneCount: 1000
   skillStaticAnalysis: SkillStaticAnalysis
   skillDynamicAnalysis: SkillDynamicAnalysis.csv
