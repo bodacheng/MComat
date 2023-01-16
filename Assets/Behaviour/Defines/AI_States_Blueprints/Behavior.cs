@@ -367,31 +367,31 @@ namespace Soul
         // 另外通过点积的计算我们可以简单粗略的判断当前物体是否朝向另外一个物体: 只需要计算当前物体的transform.forward向量与 (otherObj.transform.position – transform.position)的点积即可， 大于0则面对，否则则背对着。当然这个计算也会有一点误差，但大致够用。 
         float f_temp;
         Vector3 v_temp;
-        protected Vector3 CalFixPushVector(Vector3 damageHappenPoint, Vector3 attackerT_pos, Vector3 victimT_pos, 
-            DamageType _DamageType, WeaponMode weaponMode)
+        protected Vector3 CalFixPushVector(Vector3 damageHappenPoint, Vector3 attackerTPos, Vector3 victimTPos, 
+            DamageType damageType, WeaponMode weaponMode)
         {
-            f_temp = Vector3.Distance(attackerT_pos, victimT_pos);
+            f_temp = Vector3.Distance(attackerTPos, victimTPos);
             if (weaponMode == WeaponMode.EnergyFromBodyWeapon || f_temp < FightGlobalSetting._SureToPushForwardDis)
             {
-                v_temp = (1000 * victimT_pos - 1000 * attackerT_pos).normalized;
+                v_temp = (1000 * victimTPos - 1000 * attackerTPos).normalized;
                 return v_temp;
             }
             
-            if (_DamageType == DamageType.explosion)
+            if (damageType == DamageType.explosion)
             {
-                v_temp = victimT_pos - damageHappenPoint;
+                v_temp = 1000 * victimTPos - 1000 * damageHappenPoint;
                 v_temp.y = 0;
                 return v_temp.normalized;
             }
             
             damageHappenPoint.y = 0;
-            f_temp = Vector3.Dot(damageHappenPoint - attackerT_pos, attackerT_pos - victimT_pos);
-            if (f_temp > 0 && Vector3.Distance(attackerT_pos, victimT_pos) < FightGlobalSetting._attackDrawingDistance)
+            f_temp = Vector3.Dot(damageHappenPoint - attackerTPos, attackerTPos - victimTPos);
+            if (f_temp > 0 && Vector3.Distance(attackerTPos, victimTPos) < FightGlobalSetting._attackDrawingDistance)
             {
-                v_temp = f_temp * (attackerT_pos - victimT_pos);//+ (touchingEnemyBody ? attackerTransform_foward : Vector3.zero);
+                v_temp = f_temp * (1000 * attackerTPos - 1000 * victimTPos);//+ (touchingEnemyBody ? attackerTransform_foward : Vector3.zero);
                 return v_temp.normalized;
             }
-            return CalFixPushVector(damageHappenPoint, attackerT_pos, victimT_pos, DamageType.explosion, weaponMode);
+            return CalFixPushVector(damageHappenPoint, attackerTPos, victimTPos, DamageType.explosion, weaponMode);
         }
 
         Vector3 use_direction;
