@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 /// <summary>
 /// 这个layer的问题在于，它必须灵活的适应未来可能做出的一些改动
@@ -16,8 +17,8 @@ public class TitleScreenLayer : UILayer
     
     // Login by pw
     [SerializeField] RectTransform loginByPwTab;
-    [SerializeField] InputField id;
-    [SerializeField] InputField password;
+    [SerializeField] TMP_InputField id;
+    [SerializeField] TMP_InputField password;
     [SerializeField] Button loginBtn;
     [SerializeField] Button cancelBtn;
 
