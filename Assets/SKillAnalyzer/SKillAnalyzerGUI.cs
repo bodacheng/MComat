@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using PlayFab;
 using PlayFab.ClientModels;
+using PlayFab.ServerModels;
 
 public class SKillAnalyzerGUI : EditorWindow
 {
@@ -66,10 +67,11 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
-            CloudScript.CheckIn(() =>
-            {
-                
-            });
+            
+            // CloudScript.CheckIn(() =>
+            // {
+            //     
+            // });
             
             // CloudScript.GetLeaderboardAroundUser(
             //     (x) =>

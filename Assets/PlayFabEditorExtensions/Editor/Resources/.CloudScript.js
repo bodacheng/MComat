@@ -711,24 +711,31 @@ handlers.ArenaPointUp = function (args, context) {
 };
 
 handlers.RankClear = function (args, context) {
+
+    var getRequest = {
+        PlayFabId: currentPlayerId,
+        StatisticNames: ["arenapoint"],
+    };
+
+    var playerStats = server.GetPlayerStatistics(getRequest);
+    let arenapoint = 0;
+    for (i = 0; i < playerStats.Statistics.length; ++i) {
+        if (playerStats.Statistics[i].StatisticName === "arenapoint") {
+            arenapoint = playerStats.Statistics[i].Value;
+        }
+    }
+    
+    let targetPoint = Math.floor(arenapoint / 2);
     
     server.UpdatePlayerStatistics({
         PlayFabId: currentPlayerId,
         Statistics: [{
-            StatisticName: "rank",
-            Value: 0
-        }]
-    });
-
-    server.UpdatePlayerStatistics({
-        PlayFabId: currentPlayerId,
-        Statistics: [{
             StatisticName: "arenapoint",
-            Value: 0
+            Value: targetPoint
         }]
     });
 
-    return { };
+    return { arenapoint : targetPoint };
 }
 
 handlers.stoneDropTableInfo= function (args, context) {

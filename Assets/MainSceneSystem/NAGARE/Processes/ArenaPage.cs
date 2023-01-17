@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DummyLayerSystem;
 using mainMenu;
 using PlayFab.ClientModels;
@@ -27,6 +28,11 @@ public class ArenaPage : MSceneProcess
     void LeaderBoardFinished(bool value)
     {
         missionWatcher.Finish("leaderBoardFinished", value);
+    }
+    
+    void GotServerTime(bool value)
+    {
+        missionWatcher.Finish("gotServerTime", value);
     }
 
     void CheckNewSeason()
@@ -59,7 +65,7 @@ public class ArenaPage : MSceneProcess
         missionWatcher = new MissionWatcher(
             new List<string>
             {
-                "itemsLoadFinished", "arenaTFinished", "leaderBoardFinished", 
+                "itemsLoadFinished", "arenaTFinished", "leaderBoardFinished", "gotServerTime"
             },
             () =>
             {
@@ -71,6 +77,20 @@ public class ArenaPage : MSceneProcess
         
         PlayFabReadClient.LoadItems(ItemsLoadFinished);
         PlayFabReadClient.LoadTeamSet("arena", ArenaTFinished);
+        PlayFabReadClient.GetServerTime(
+            (x) =>
+            {
+                // The (... + 7) % 7 ensures we end up with a value in the range [0, 6]
+                int daysUntilTuesday = ((int) DayOfWeek.Monday - (int) x.DayOfWeek + 7) % 7;
+                DateTime nextMonday = x.AddDays(daysUntilTuesday);
+                nextMonday = new DateTime(nextMonday.Year, nextMonday.Month, nextMonday.Day, 0, 0, 0, 0, nextMonday.Kind);
+                Debug.Log("next monday:"+ nextMonday);
+                GotServerTime(true);
+                
+                arenaLayer.SetSeasonCountDown(nextMonday);
+            },
+            ()=>{ GotServerTime(false); }
+        );
         
         if (PlayerAccountInfo.Me.arenaPoint != -1)
         {

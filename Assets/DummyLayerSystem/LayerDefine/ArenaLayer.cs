@@ -13,6 +13,7 @@ public class ArenaLayer : UILayer
     [SerializeField] Text ticketCount;
     [SerializeField] RectTransform ticketChargeCountDownT;
     [SerializeField] Text ticketChargeCountDown;
+    [SerializeField] Text seasonCountDown;
     
     #region 玩家队伍
     [SerializeField] HeroIcon member1, member2, member3;
@@ -37,7 +38,8 @@ public class ArenaLayer : UILayer
     private Action<FightInfo> tryBeginStage;
     private int maxOpponentCount = 3;
     
-    public void SetUp(Action loadData, Action openRanking, Func<PlayerLeaderboardEntry, PlayerLeaderboardEntry, int> plusCal, Action<FightInfo> tryBeginStage)
+    public void SetUp(Action loadData, Action openRanking, 
+        Func<PlayerLeaderboardEntry, PlayerLeaderboardEntry, int> plusCal, Action<FightInfo> tryBeginStage)
     {
         refreshBtn.onClick.RemoveAllListeners();
         refreshBtn.onClick.AddListener(()=> loadData());
@@ -48,6 +50,18 @@ public class ArenaLayer : UILayer
         arenaRankIcon.Set(PlayerAccountInfo.Me.arenaPoint);
         this.tryBeginStage = tryBeginStage;
         this.plusCal = plusCal;
+    }
+    
+    private IDisposable disposeArenaCountDown;
+    public void SetSeasonCountDown(DateTime nextSeasonStartDate)
+    {
+        disposeArenaCountDown = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe(
+            (_) =>
+            {
+                var difference = nextSeasonStartDate - DateTime.Now;
+                difference = difference.Subtract(TimeSpan.FromSeconds(1));
+                seasonCountDown.text = difference.ToString(@"dd\:hh\:mm\:ss");
+            }).AddTo(gameObject);
     }
 
     private IDisposable disposeCountDown;
