@@ -12,16 +12,16 @@ namespace FightScene
         [SerializeField] MobileInputsManager _inputsManager;
         [SerializeField] RectTransform sideIconsContainer;
         [SerializeField] RectTransform _targetCanvasT;
-        [SerializeField] SideCharIcon button_prefab;
+        [SerializeField] SideUnitIcon button_prefab;
         [SerializeField] Text hitCombo;
 
         public TeamMode teamMode;
         public TeamConfig teamConfig;
         public MultiDic<int, int, Data_Center> teamMembers;
-        public readonly IDictionary<Data_Center, SideCharIcon> UnitIconDic = new Dictionary<Data_Center, SideCharIcon>();
+        public readonly IDictionary<Data_Center, SideUnitIcon> UnitIconDic = new Dictionary<Data_Center, SideUnitIcon>();
         private IDisposable barPosUpdate;
         
-        public SideCharIcon GetSideIcon(Data_Center d)
+        public SideUnitIcon GetSideIcon(Data_Center d)
         {
             return UnitIconDic[d];
         }

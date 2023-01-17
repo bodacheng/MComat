@@ -23,7 +23,7 @@ namespace FightScene
                     }
                 }
                 
-                SideCharIcon _SideIcon;
+                SideUnitIcon _SideIcon;
                 if (!(UnitIconDic.ContainsKey(center) && UnitIconDic[center] != null))
                 {
                     _SideIcon = Instantiate(button_prefab);
@@ -53,7 +53,7 @@ namespace FightScene
                     _SideIcon.transform.SetParent(_targetCanvasT.transform);
                     _SideIcon.transform.localScale = Vector3.one;
                 }
-                DicAdd<Data_Center, SideCharIcon>.Add(UnitIconDic, center, _SideIcon);
+                DicAdd<Data_Center, SideUnitIcon>.Add(UnitIconDic, center, _SideIcon);
                 
                 var maxHp = center.FightDataRef.CurrentHp.Value;
                 center.FightDataRef.CurrentHp.Subscribe(x =>

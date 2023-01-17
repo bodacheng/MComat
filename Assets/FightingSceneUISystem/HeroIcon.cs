@@ -59,19 +59,38 @@ public class HeroIcon : MonoBehaviour {
     
     void ChangeIcon(Sprite sprite, Element element)
     {
-        if (frame == null || Icon == null)
-        {
-            Debug.Log("组件缺失");
-            return;
-        }
-        
         //Icon.GetComponent<RectTransform>().sizeDelta = new Vector2(frame.GetComponent<RectTransform>().sizeDelta.x * 0.8f, frame.GetComponent<RectTransform>().sizeDelta.y * 0.8f);
         Icon.transform.SetSiblingIndex(frame.transform.GetSiblingIndex()- 1);
         if (cooldownCurtain != null)
         {
             cooldownCurtain.transform.SetSiblingIndex(Icon.transform.GetSiblingIndex() - 1);
         }
-        
+
+        var htmlString = "";
+        switch (element)
+        {
+            case Element.blueMagic:
+                htmlString = "00ABFFFF";
+                break;
+            case Element.darkMagic:
+                htmlString = "8D00FFFF";
+                break;
+            case Element.redMagic:
+                htmlString = "FF5367FF";
+                break;
+            case Element.lightMagic:
+                htmlString = "FFE300FF";
+                break;
+            case Element.greenMagic:
+                htmlString = "0FE500FF";
+                break;
+            case Element.Null:
+                htmlString = "FFFFFFFF";
+                break;
+        }
+
+        ColorUtility.TryParseHtmlString("#"+htmlString, out var color);
+        frame.color = color;
         Icon.sprite = sprite;
         if (Icon.sprite != null)
         {

@@ -3,50 +3,27 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_1.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_10.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_10.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_11.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_11.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_12.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_12.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_13.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_13.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_14.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_14.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_15.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_15.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_2.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_3.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_3.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_4.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_4.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_5.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_5.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_6.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_6.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_7.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_7.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_8.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_8.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_9.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_9.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_01.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_02.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_02.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_03.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_03.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_04.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_04.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_05.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_05.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_06.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_06.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_07.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_07.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_08.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_08.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_09.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_09.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_10.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_10.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_11.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_11.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_12.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_12.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_13.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_13.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_14.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_14.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_15.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_15.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_15_Hair.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_15_Hair.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_8_Hair.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_8_Hair.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Animations/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Animations/Materials/Material.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Animations/Materials/Material.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Animations/Materials/Scene_Material.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Animations/Materials/Scene_Material.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Animations/Materials/Scene_Material2.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Animations/Materials/Scene_Material2.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/PowerEstimateTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/PowerEstimateTable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/mst_skill.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Account/mst_skill.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/mst_skill_old.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Account/mst_skill_old.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/materials/Projectiles/Fire/FireOrb.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/materials/Projectiles/Fire/FireOrb.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/HurtObjects/bluemagic/blast.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/HurtObjects/bluemagic/blast.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/HurtObjects/lightmagic/blast.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/HurtObjects/lightmagic/blast.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/HurtObjects/redmagic_old/blast_ex1.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/HurtObjects/redmagic_old/blast_ex1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/PreparingProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/PreparingProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightingSceneUISystem/HeroIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightingSceneUISystem/HeroIcon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FightingStepLayer/SideUnitIcon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FightingStepLayer/SideUnitIcon.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UnitsLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UnitsLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/unit/UnitIconPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/unit/UnitIconPrefab.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TeamUIManager/MultiRaid/TeamUIManagerMultiRaid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TeamUIManager/MultiRaid/TeamUIManagerMultiRaid.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TeamUIManager/RotationMode/RotationMode_INI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TeamUIManager/RotationMode/RotationMode_INI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TeamUIManager/TeamUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TeamUIManager/TeamUIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/FightOverShow/IconAndSKillShowUISet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/FightOverShow/IconAndSKillShowUISet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/SideCharIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/SideUnitIcon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/SideCharIcon.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/SideUnitIcon.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TimelineSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TimelineSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,10 +51,12 @@
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/ArcadeBtnEffect.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFab/Client/AccountInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Purchasing/UnityPurchasing.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PlayFab/Client/Time.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.postprocessing@3.2.2/PostProcessing/Runtime/PostProcessVolume.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Lighting/ProbeVolume/ProbeVolumeBakingProcessSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../p3-client/Assets/App/Scripts/Contents/Quest/QuestListItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/RankingPage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c884d993da6242ae98d95c11d4715907157400/26/fbbae327/ColorUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Graphs/GraphData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Samples~/PrefabSpawner/PrefabSpawnerSample.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_InputField.cs" root0="SKIP_HIGHLIGHTING" />
@@ -98,11 +77,13 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Editor/ShaderGraph/UniversalBlockFields.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/Addressables.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Runtime/Events/MarkerList.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/a5/608acf8c/DateTimeKind.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c884d993da6242ae98d95c11d4715907157400/09/77e7f949/Bounds.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Volume/Volume.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.xr.legacyinputhelpers@2.1.9/Runtime/ArmModels/TransitionArmModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ads@3.7.5/Runtime/Monetization/MonetizationPlatform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFab/CloudScripts/VirtualCurrency.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Tests/Editor/Collaborate/Presenters/TestChangesView.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Utilities/CameraCaptureBridge.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Nodes/Input/Matrix/Matrix3Node.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Debugging/Prefabs/Scripts/DebugUIHandlerIndirectToggle.cs" root0="SKIP_HIGHLIGHTING" />
@@ -130,11 +111,13 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Editor/Lighting/UniversalRenderPipelineLightUI.Drawers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Gacha/DropTableInfoDetail.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/TheNineSlot/Validation/ConfirmBtnColorSwapper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/42/System.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.scriptablebuildpipeline@1.19.6/Editor/Tasks/CalculateAssetDependencyData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/GUI/AddressablesGUIUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/SpriteDrawUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/Actions/TrackActions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFabSDK/Shared/Public/PlayFabEvents.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Diagnostics/Data/EventDataSet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.4.0/Editor/Core/ProjectStateManagement/IServiceFlagRequest.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/TimelineEditor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -209,7 +192,8 @@
       <workItem from="1672792710049" duration="11954000" />
       <workItem from="1673748333469" duration="1135000" />
       <workItem from="1673756823085" duration="711000" />
-      <workItem from="1673850864585" duration="1427000" />
+      <workItem from="1673850864585" duration="8165000" />
+      <workItem from="1673912413218" duration="10094000" />
     </task>
     <servers />
   </component>

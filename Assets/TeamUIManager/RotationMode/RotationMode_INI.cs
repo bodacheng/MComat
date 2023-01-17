@@ -33,7 +33,7 @@ namespace FightScene
                     sideIcon.transform.SetParent(_targetCanvasT.transform);
                     sideIcon.transform.localScale = Vector3.one;
                 }
-                DicAdd<Data_Center, SideCharIcon>.Add(UnitIconDic, center, sideIcon);
+                DicAdd<Data_Center, SideUnitIcon>.Add(UnitIconDic, center, sideIcon);
                 
                 RTFightManager.Target.RefreshTimeDic[center].Subscribe((x) =>
                 {

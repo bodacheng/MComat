@@ -5,12 +5,12 @@ public class IconAndSKillShowUISet : MonoBehaviour
     public RectTransform iconPlace;
     public RectTransform nineSKillPlace;
     
-    public void Set(SideCharIcon sideCharIcon, NineForShow nineForShow)
+    public void Set(SideUnitIcon sideUnitIcon, NineForShow nineForShow)
     {
-        sideCharIcon.transform.SetParent(iconPlace);
-        sideCharIcon.transform.localPosition = Vector3.zero;
-        sideCharIcon.transform.localScale = Vector3.one;
-        sideCharIcon.gameObject.SetActive(true);
+        sideUnitIcon.transform.SetParent(iconPlace);
+        sideUnitIcon.transform.localPosition = Vector3.zero;
+        sideUnitIcon.transform.localScale = Vector3.one;
+        sideUnitIcon.gameObject.SetActive(true);
         
         nineForShow.transform.SetParent(nineSKillPlace);
         nineForShow.transform.localPosition = Vector3.zero;

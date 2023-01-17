@@ -17,6 +17,7 @@ public class PreparingProcess : FSceneProcess
     
     async UniTask EnterProcess()
     {
+        UILayerLoader.Remove<ArenaFightOver>();
         RTFightManager.Target._CameraManager.Assign_Camera(C_Mode.NULL, null,null);
         CameraManager._camera.transform.position = CameraManager._StartPosRef.transform.position;
         CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
