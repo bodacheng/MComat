@@ -23,7 +23,7 @@ public class MailBox : UILayer
         readAll.onClick.AddListener(() =>
         {
             PlayFabReadClient.ClaimAllPresentMails(PlayFabReadClient.SaveReadMailAsJson);
-            PlayFabReadClient.DeleteAllLocalMails();
+            //PlayFabReadClient.DeleteAllLocalMails();
             RefreshMailList();
         });
     }

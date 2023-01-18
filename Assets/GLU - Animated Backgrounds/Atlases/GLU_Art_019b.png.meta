@@ -267,7 +267,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 4096
@@ -279,7 +279,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 4096
@@ -291,7 +291,31 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1652,15 +1676,15 @@ TextureImporter:
     nameFileIdTable:
       GLU_Art_019b_013: -455988264512822426
       GLU_Art_019b_012: 5051217122213441164
-      GLU_Art_019b_024: -716869926325658676
-      GLU_Art_019b_061: 6450262419252090919
+      GLU_Art_019b_047: 1914248436282778705
+      GLU_Art_019b_041: 2133016685991519997
       GLU_Art_019b_039: -648127301707092092
-      GLU_Art_019b_051: 5557976871207705703
-      GLU_Art_019b_049: 7501241981737960371
       GLU_Art_019b_045: -8435517218413188491
       GLU_Art_019b_053: 2478353026237715092
       GLU_Art_019b_037: 6965524922790845187
       GLU_Art_019b_028: -5568353850090552238
+      GLU_Art_019b_006: -158290108236786650
+      GLU_Art_019b_016: -4915300731202728460
       GLU_Art_019b_048: -1019111825190265763
       GLU_Art_019b_011: -6760790159220906960
       GLU_Art_019b_059: 1658927661622436970
@@ -1679,8 +1703,8 @@ TextureImporter:
       GLU_Art_019b_022: -9011873252604512258
       GLU_Art_019b_005: 4302343146657728802
       GLU_Art_019b_018: -8041004847301708485
-      GLU_Art_019b_038: -5103321161305144075
       GLU_Art_019b_062: -2556285947880378288
+      GLU_Art_019b_038: -5103321161305144075
       GLU_Art_019b_036: 8409750652355057501
       GLU_Art_019b_044: 4314523033061924718
       GLU_Art_019b_004: -1030858262697177963
@@ -1704,16 +1728,16 @@ TextureImporter:
       GLU_Art_019b_031: -7342345643552188848
       GLU_Art_019b_002: -6691937358274214723
       GLU_Art_019b_055: -6681627948149786285
+      GLU_Art_019b_051: 5557976871207705703
       GLU_Art_019b_000: 1345071483148780038
       GLU_Art_019b_010: 9132872221472525273
-      GLU_Art_019b_050: -7148511780492352085
+      GLU_Art_019b_061: 6450262419252090919
       GLU_Art_019b_025: -2344191404426153568
+      GLU_Art_019b_050: -7148511780492352085
+      GLU_Art_019b_049: 7501241981737960371
       GLU_Art_019b_056: 4191373727262442390
       GLU_Art_019b_020: 7828207786273465550
-      GLU_Art_019b_047: 1914248436282778705
-      GLU_Art_019b_041: 2133016685991519997
-      GLU_Art_019b_016: -4915300731202728460
-      GLU_Art_019b_006: -158290108236786650
+      GLU_Art_019b_024: -716869926325658676
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

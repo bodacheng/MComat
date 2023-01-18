@@ -71,15 +71,15 @@ public class MailListView : MonoBehaviour
         mailData.Set();
     }
     
-    private readonly Color _unreadc = new Color(0.4f,0.4f,1, 1);
-    private readonly Color _readc = new Color(0.4f,0.4f,1, 0.6f); 
+    [SerializeField] private Color unreadc = new Color(0.4f,0.4f,1, 1);
+    [SerializeField] private Color readc = new Color(0.4f,0.4f,1, 0.6f); 
     void AsRead(bool read)
     {
         claimed = read;
         expiration.gameObject.SetActive(!read);
         claimBtn.gameObject.SetActive(!read);
         readFlag.SetActive(read);
-        bg.color = read ? _readc : _unreadc;
+        bg.color = read ? readc : unreadc;
     }
     
     void ReadMail()
