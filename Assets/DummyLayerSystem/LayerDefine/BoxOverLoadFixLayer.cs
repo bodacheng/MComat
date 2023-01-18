@@ -14,10 +14,5 @@ public class BoxOverLoadFixLayer : UILayer
             PreScene.target.trySwitchToStep(MainSceneStep.SkillStones_Sell, true);
         }
         SELL.onClick.AddListener(ChooseToSell);
-        
-        #if Pre
-        delete25.gameObject.SetActive(true);
-        delete25.onClick.AddListener(CloudScript.Remove25Stones);
-        #endif
     }
 }
