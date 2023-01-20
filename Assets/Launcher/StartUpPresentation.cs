@@ -49,7 +49,11 @@ public class StartUpPresentation : MonoBehaviour
                 HighLightLayer.DarkOff(Color.white, 0, true);
                 UILayerLoader.Load<ProgressLayer>();
                 await AddressablesLogic.ResourcePrepareProcess(
-                    Go,
+                    () =>
+                    {
+                        UILayerLoader.Remove<ProgressLayer>();
+                        Go();
+                    },
                     (x,f) =>
                     {
                         if (f == 0)

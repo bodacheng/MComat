@@ -9,7 +9,7 @@ public partial class Animation_Manger{
     public async UniTask PreloadBasicPersonalAnims(string type, string basicPackName)
     {
         var basicAnims = new List<AnimationClip>();
-        string basicPackKey = type + "/" + basicPackName;
+        var basicPackKey = type + "/" + basicPackName;
         if (AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(basicPackKey))
         {
             AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(basicPackKey, out basicAnims);
@@ -37,115 +37,54 @@ public partial class Animation_Manger{
             DicAdd<string, List<AnimationClip>>.Add(AnimationResourceLoader.SeriesAnimationClipsDic, basicPackKey, basicAnims);
         }
         
-        toLoadAnims = new Dictionary<string, AnimationClip>();        
-        foreach (var animationClip in basicAnims)
+        toLoadAnims = new Dictionary<string, AnimationClip>();
+        if (basicAnims != null)
         {
-            if (animationClip == null)
+            foreach (var animationClip in basicAnims)
             {
-                continue;
-            }
-            
-            if (animationClip.name == "death")
-            {
-                if (toLoadAnims.ContainsKey("death"))
-                {
-                    Debug.Log("严重错误。基础包里有重名动画片段？");
-                }
-                else
+                if (animationClip.name == "death")
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("death", animationClip));
                 }
-            }
-            if (animationClip.name == "rush")
-            {
-                if (toLoadAnims.ContainsKey("rush"))
-                {
-                    Debug.Log("严重错误。基础包里有重名动画片段？");
-                }
-                else
+                if (animationClip.name == "rush")
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rush", animationClip));
                 }
-            }
-            if (animationClip.name == "block")
-            {
-                if (toLoadAnims.ContainsKey("block"))
-                {
-                    Debug.Log("严重错误。基础包里有重名动画片段？");
-                }
-                else
+                if (animationClip.name == "block")
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("block", animationClip));
                 }
-            }
-            if (animationClip.name == "block_break")
-            {
-                if (toLoadAnims.ContainsKey("block_break"))
-                {
-                    Debug.Log("严重错误。基础包里有重名动画片段？");
-                }
-                else
+                if (animationClip.name == "block_break")
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("block_break", animationClip));
                 }
-            }
-            if (animationClip.name == "zhuangbi")
-            {
-                if (toLoadAnims.ContainsKey("zhuangbi"))
-                {
-                    Debug.Log("严重错误。基础包里有重名动画片段？");
-                }
-                else
+                if (animationClip.name == "zhuangbi")
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("zhuangbi", animationClip));
                 }
-            }
-            if (animationClip.name == "dash")
-            {
-                if (toLoadAnims.ContainsKey("dash"))
-                {
-                    Debug.Log("严重错误。基础包里有重名动画片段？");
-                }
-                else
+                if (animationClip.name == "dash")
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("dash", animationClip));
                 }
-            }
-            if (animationClip.name == "rushback")
-            {
-                if (toLoadAnims.ContainsKey("rushback"))
-                {
-                    Debug.Log("严重错误。基础包里有重名动画片段？");
-                }
-                else
+                if (animationClip.name == "rushback")
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rushback", animationClip));
                 }
-            }
-            if (animationClip.name == "getup")
-            {
-                if (toLoadAnims.ContainsKey("getup"))
-                {
-                    Debug.Log("严重错误。基础包里有重名动画片段？");
-                }
-                else
+                if (animationClip.name == "getup")
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("getup", animationClip));
                 }
-            }
-            if (animationClip.name == "victory")
-            {
-                if (toLoadAnims.ContainsKey("victory"))
-                {
-                    Debug.Log("严重错误。基础包里有重名动画片段？");
-                }
-                else
+                if (animationClip.name == "victory")
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("victory", animationClip));
                 }
             }
         }
-
+        else
+        {
+            Debug.Log("Basic Anim Pack Error:"+ type + "  "+ basicPackName);
+        }
+        
         async UniTask LoadHurtAnim(string type, string address, List<string> tags)
         {
             if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(type + "/" + address))
@@ -219,7 +158,7 @@ public partial class Animation_Manger{
         }
         Animator.runtimeAnimatorController = animatorOverride;
     }
-
+    
     public async UniTask PreloadPersonalAnimResourceMode(string animPath, string key, Element element)
     {
         if (toLoadAnims.ContainsKey(key))

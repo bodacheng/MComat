@@ -14,9 +14,6 @@ namespace FightScene
         [Header("Basic Element")]
         public CameraManager _CameraManager;
         
-        [Header("Messages")]
-        public Text Messages;
-        
         public readonly TeamConfig heroTeamConfig = new("1", Team.player1, new List<Team>() { Team.player2 });
         public readonly TeamConfig EnemyTeamConfig = new("2", Team.player2, new List<Team>() { Team.player1 });
         
