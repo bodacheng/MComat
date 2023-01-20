@@ -1,6 +1,7 @@
 ﻿using Unity.Collections;
 using UnityEngine;
 using UnityEditor;
+using GoogleMobileAds.Api;
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(Starter))]
@@ -40,6 +41,7 @@ public class Starter : MonoBehaviour
         PowerEstimateTable.LoadByResource();
         Units.LoadByResource();
         Units.RefreshDic();
+        MobileAds.Initialize(initStatus => { Debug.Log(initStatus);});
     }
     
     public void EnterFrontScene()
