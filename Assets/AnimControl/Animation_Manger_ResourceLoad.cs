@@ -1,162 +1,189 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Object = UnityEngine.Object;
 
 public partial class Animation_Manger{
 
     public async UniTask PreloadBasicPersonalAnims(string type, string basicPackName)
     {
-        var basicAnims = new List<AnimationClip>();
-        var basicPackKey = type + "/" + basicPackName;
-        if (AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(basicPackKey))
+        try
         {
-            AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(basicPackKey, out basicAnims);
-        }
-        else
-        {
-            var loadPath = Addressables.LoadResourceLocationsAsync("basic_anim");
-            await loadPath;
-            if (loadPath.Status == AsyncOperationStatus.Succeeded)
+            var basicAnims = new List<AnimationClip>();
+            var basicPackKey = type + "/" + basicPackName;
+            if (AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(basicPackKey))
             {
-                foreach (var path in loadPath.Result)
-                {
-                    if (path.PrimaryKey.Contains("Animation/" + type + "/BasicPack/" + basicPackName))
-                    {
-                        Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey);
-                        if (value != null)
-                        {
-                            var animationClip = (AnimationClip)value;
-                            basicAnims.Add(animationClip);
-                        }
-                    }
-                }
+                AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(basicPackKey, out basicAnims);
             }
-            Addressables.Release(loadPath);
-            DicAdd<string, List<AnimationClip>>.Add(AnimationResourceLoader.SeriesAnimationClipsDic, basicPackKey, basicAnims);
-        }
-        
-        toLoadAnims = new Dictionary<string, AnimationClip>();
-        if (basicAnims != null)
-        {
-            foreach (var animationClip in basicAnims)
+            else
             {
-                if (animationClip.name == "death")
-                {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("death", animationClip));
-                }
-                if (animationClip.name == "rush")
-                {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rush", animationClip));
-                }
-                if (animationClip.name == "block")
-                {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("block", animationClip));
-                }
-                if (animationClip.name == "block_break")
-                {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("block_break", animationClip));
-                }
-                if (animationClip.name == "zhuangbi")
-                {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("zhuangbi", animationClip));
-                }
-                if (animationClip.name == "dash")
-                {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("dash", animationClip));
-                }
-                if (animationClip.name == "rushback")
-                {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rushback", animationClip));
-                }
-                if (animationClip.name == "getup")
-                {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("getup", animationClip));
-                }
-                if (animationClip.name == "victory")
-                {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("victory", animationClip));
-                }
-            }
-        }
-        else
-        {
-            Debug.Log("Basic Anim Pack Error:"+ type + "  "+ basicPackName);
-        }
-        
-        async UniTask LoadHurtAnim(string type, string address, List<string> tags)
-        {
-            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(type + "/" + address))
-            {
-                AnimationResourceLoader.SeriesAnimationClipsDic.Add(type + "/" + address, new List<AnimationClip>());
-                var humanHurtAnimsObjects = new List<AnimationClip>();
-                var loadPath = Addressables.LoadResourceLocationsAsync(tags, Addressables.MergeMode.Intersection);
+                var loadPath = Addressables.LoadResourceLocationsAsync("basic_anim");
                 await loadPath;
                 if (loadPath.Status == AsyncOperationStatus.Succeeded)
                 {
                     foreach (var path in loadPath.Result)
                     {
-                        if (path.PrimaryKey.Contains("Animation/" + type + "/" + address))
+                        if (path.PrimaryKey.Contains("Animation/" + type + "/BasicPack/" + basicPackName))
                         {
                             Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey);
                             if (value != null)
                             {
                                 var animationClip = (AnimationClip)value;
-                                humanHurtAnimsObjects.Add(animationClip);
+                                basicAnims.Add(animationClip);
                             }
                         }
                     }
                 }
+
                 Addressables.Release(loadPath);
-                foreach (var clip in humanHurtAnimsObjects)
+                DicAdd<string, List<AnimationClip>>.Add(AnimationResourceLoader.SeriesAnimationClipsDic, basicPackKey,
+                    basicAnims);
+            }
+
+            toLoadAnims = new Dictionary<string, AnimationClip>();
+            if (basicAnims != null)
+            {
+                foreach (var animationClip in basicAnims)
                 {
-                    AnimationResourceLoader.SeriesAnimationClipsDic[type + "/" + address].Add(clip);
+                    if (animationClip.name == "death")
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("death", animationClip));
+                    }
+
+                    if (animationClip.name == "rush")
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rush", animationClip));
+                    }
+
+                    if (animationClip.name == "block")
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("block", animationClip));
+                    }
+
+                    if (animationClip.name == "block_break")
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("block_break", animationClip));
+                    }
+
+                    if (animationClip.name == "zhuangbi")
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("zhuangbi", animationClip));
+                    }
+
+                    if (animationClip.name == "dash")
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("dash", animationClip));
+                    }
+
+                    if (animationClip.name == "rushback")
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rushback", animationClip));
+                    }
+
+                    if (animationClip.name == "getup")
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("getup", animationClip));
+                    }
+
+                    if (animationClip.name == "victory")
+                    {
+                        toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("victory", animationClip));
+                    }
                 }
             }
+            else
+            {
+                Debug.Log("Basic Anim Pack Error:" + type + "  " + basicPackName);
+            }
+
+            async UniTask LoadHurtAnim(string type, string address, List<string> tags)
+            {
+                if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(type + "/" + address))
+                {
+                    AnimationResourceLoader.SeriesAnimationClipsDic.Add(type + "/" + address,
+                        new List<AnimationClip>());
+                    var humanHurtAnimsObjects = new List<AnimationClip>();
+                    var loadPath = Addressables.LoadResourceLocationsAsync(tags, Addressables.MergeMode.Intersection);
+                    await loadPath;
+                    if (loadPath.Status == AsyncOperationStatus.Succeeded)
+                    {
+                        foreach (var path in loadPath.Result)
+                        {
+                            if (path.PrimaryKey.Contains("Animation/" + type + "/" + address))
+                            {
+                                Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey);
+                                if (value != null)
+                                {
+                                    var animationClip = (AnimationClip)value;
+                                    humanHurtAnimsObjects.Add(animationClip);
+                                }
+                            }
+                        }
+                    }
+
+                    Addressables.Release(loadPath);
+                    foreach (var clip in humanHurtAnimsObjects)
+                    {
+                        AnimationResourceLoader.SeriesAnimationClipsDic[type + "/" + address].Add(clip);
+                    }
+                }
+            }
+
+            await LoadHurtAnim(type, "basic_hurts/back", new List<string> { "hurt_anim" });
+            await LoadHurtAnim(type, "basic_hurts/high", new List<string> { "hurt_anim" });
+            await LoadHurtAnim(type, "basic_hurts/lay", new List<string> { "hurt_anim" });
+            await LoadHurtAnim(type, "basic_hurts/low", new List<string> { "hurt_anim" });
+            await LoadHurtAnim(type, "basic_hurts/press", new List<string> { "hurt_anim" });
+            await LoadHurtAnim(type, "basic_knockoffs", new List<string> { "knock_anim" });
+
+            AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_knockoffs",
+                out knockoffAnimations);
+            AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/back", out _hurtClipsBack);
+            AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/low", out _hurtClipsLow);
+            AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/high", out _hurtClipsHigh);
+            AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/press",
+                out _hurtClipsPress);
+            AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/lay", out _hurtClipsLay);
+
+            animatorOverride = new AnimatorOverrideController(Animator.runtimeAnimatorController);
+
+            // 以上内容为个性化动画片段对base层基础动画的覆盖
+            foreach (var animationClip in basicAnims)
+            {
+                if (animationClip.name == "idle")
+                {
+                    if (animatorOverride["idle"])
+                        animatorOverride["idle"] = animationClip;
+                }
+
+                if (animationClip.name == "walk")
+                {
+                    if (animatorOverride["walk"])
+                        animatorOverride["walk"] = animationClip;
+                }
+
+                if (animationClip.name == "run")
+                {
+                    if (animatorOverride["run"])
+                        animatorOverride["run"] = animationClip;
+                }
+
+                if (animationClip.name == "air")
+                {
+                    if (animatorOverride["air"])
+                        animatorOverride["air"] = animationClip;
+                }
+            }
+
+            Animator.runtimeAnimatorController = animatorOverride;
         }
-        
-        await LoadHurtAnim(type, "basic_hurts/back", new List<string> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_hurts/high", new List<string> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_hurts/lay", new List<string> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_hurts/low", new List<string> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_hurts/press",new List<string> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_knockoffs", new List<string> { "knock_anim" });
-        
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_knockoffs", out knockoffAnimations);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/back", out _hurtClipsBack);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/low", out _hurtClipsLow);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/high", out _hurtClipsHigh);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/press", out _hurtClipsPress);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/lay", out _hurtClipsLay);
-        
-        animatorOverride = new AnimatorOverrideController(Animator.runtimeAnimatorController);
-        
-        // 以上内容为个性化动画片段对base层基础动画的覆盖
-        foreach (var animationClip in basicAnims)
+        catch (Exception e)
         {
-            if (animationClip.name == "idle")
-            {
-                if (animatorOverride["idle"])
-                    animatorOverride["idle"] = animationClip;
-            }
-            if (animationClip.name == "walk")
-            {
-                if (animatorOverride["walk"])
-                    animatorOverride["walk"] = animationClip;
-            }
-            if (animationClip.name == "run")
-            {
-                if (animatorOverride["run"])
-                    animatorOverride["run"] = animationClip;
-            }
-            if (animationClip.name == "air")
-            {
-                if (animatorOverride["air"])
-                    animatorOverride["air"] = animationClip;
-            }
+            Debug.Log(e.Message);
         }
-        Animator.runtimeAnimatorController = animatorOverride;
     }
     
     public async UniTask PreloadPersonalAnimResourceMode(string animPath, string key, Element element)
