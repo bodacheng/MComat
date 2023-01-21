@@ -4,56 +4,53 @@ using DG.Tweening;
 
 public class SideUnitIcon : MonoBehaviour {
     
-    public Slider HpBar;
-    
-    public Text HpText;
+    [SerializeField] Slider HpBar;
+    [SerializeField] Text HpText;
     
     [Header("浮动抵抗")]
-    public Slider ResistBar;
-    public Image ResistBarFillImage;
+    [SerializeField] Slider ResistBar;
     
     [Header("浮动Ex条")]
     public Slider ExBar;
     
     [Header("必杀技点")]
-    public GameObject[] charges;
+    [SerializeField] GameObject[] charges;
     
     public HeroIcon focusingCharIcon;
     
-    public void RefreshResistanceBar(float Resistance)
+    public void RefreshResistanceBar(float resistance)
     {
-        DOTween.To(() => ResistBar.value, (x) => ResistBar.value = x, Resistance / 10f, 0.2f);
-        ResistBarFillImage.color = Resistance > 0 ? Color.yellow : Color.clear;
+        DOTween.To(() => ResistBar.value, (x) => ResistBar.value = x, resistance / 10f, 0.2f);
     }
     
-    public void RefreshHpBar(float current_hp, float whole_hp)
+    public void RefreshHpBar(float currentHp, float wholeHp)
     {
-        HpText.text = Mathf.Ceil(current_hp).ToString();
-        DOTween.To(() => HpBar.value, (x) => HpBar.value = x, current_hp / whole_hp, 0.2f);
+        HpText.text = Mathf.Ceil(currentHp).ToString();
+        DOTween.To(() => HpBar.value, (x) => HpBar.value = x, currentHp / wholeHp, 0.2f);
     }
     
-    public void RefreshExBar(int current_ex, int wholeex)
+    public void RefreshExBar(int currentEx, int wholeEx)
     {
-        if (current_ex > 0 && !ExBar.fillRect.gameObject.activeSelf)
+        if (currentEx > 0 && !ExBar.fillRect.gameObject.activeSelf)
         {
             ExBar.fillRect.gameObject.SetActive(true);
         }
-        DOTween.To(() => ExBar.value, (x) => ExBar.value = x, (float)current_ex / wholeex, 0.1f).OnComplete(() => { if (System.Math.Abs(ExBar.value) < 0.1) ExBar.fillRect.gameObject.SetActive(false); });
-        if (current_ex >= 90)
+        DOTween.To(() => ExBar.value, (x) => ExBar.value = x, (float)currentEx / wholeEx, 0.1f).OnComplete(() => { if (System.Math.Abs(ExBar.value) < 0.1) ExBar.fillRect.gameObject.SetActive(false); });
+        if (currentEx >= 90)
         {
             charges[2].SetActive(true);
         }else{
             charges[2].SetActive(false);
         }
         
-        if (current_ex >= 60)
+        if (currentEx >= 60)
         {
             charges[1].SetActive(true);
         }else{
             charges[1].SetActive(false);
         }
         
-        if (current_ex >= 30)
+        if (currentEx >= 30)
         {
             charges[0].SetActive(true);
         }else{

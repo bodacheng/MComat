@@ -152,7 +152,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec27b857eac994404b476a53067fca82, type: 2}
   - {fileID: 11400000, guid: cbfade50ae6ad48c68970c5afc4df589, type: 2}
   - {fileID: 11400000, guid: bd13e9449a0b14007b509b6255bc56f9, type: 2}
-  m_ActiveProfileId: e103ffdc792314f4fa1d4a74f33b63bb
+  m_ActiveProfileId: 4b03e1e645aca4a45a3124cb03a3f7d6
   m_HostingServicesManager:
     m_HostingServiceInfos:
     - classRef: UnityEditor.AddressableAssets.HostingServices.HttpHostingService,
@@ -169,7 +169,7 @@ MonoBehaviour:
           m_Key: HostingServiceUploadSpeed
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.String
-          m_Data: ServerData/iOS;Library/com.unity.addressables/aa/iOS/iOS
+          m_Data: ServerData/release/iOS;Library/com.unity.addressables/aa/iOS/iOS
           m_Key: ContentRoot
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Boolean

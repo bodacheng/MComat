@@ -2,566 +2,171 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Animation.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Animation/CameraScene1.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Animation/CameraScene1.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Animation/CameraScene2.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Animation/CameraScene2.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Animation/Main CameraScene1.controller" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Animation/Main CameraScene1.controller.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Animation/Main CameraScene2.controller" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Animation/Main CameraScene2.controller.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Asteroid.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Asteroid.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/BlackHoleReflectPlane.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/BlackHoleReflectPlane.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/BlackHoleSphere.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/BlackHoleSphere.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Earth.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Earth.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/EarthInsidePlanet.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/EarthInsidePlanet.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/FogParticle.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/FogParticle.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Galaxy.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Galaxy.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/GlowWhite.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/GlowWhite.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/GlowWhiteHDR.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/GlowWhiteHDR.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Jupiter.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Jupiter.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/JupiterInsidePlanet.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/JupiterInsidePlanet.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Mars.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Mars.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/MarsInsidePlanet.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/MarsInsidePlanet.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Mercury.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Mercury.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/MercuryInsidePlanet.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/MercuryInsidePlanet.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Moon.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Moon.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/MoonInsidePlanet.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/MoonInsidePlanet.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Neptune.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Neptune.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/NeptuneInsidePlanet.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/NeptuneInsidePlanet.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/NucleusFire.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/NucleusFire.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/NucleusOpaque.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/NucleusOpaque.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Saturn.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Saturn.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/SaturnInsidePlanet.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/SaturnInsidePlanet.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/SaturnRing.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/SaturnRing.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/SkyboxGalaxyShader.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/SkyboxGalaxyShader.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/SkyboxNebulosa.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/SkyboxNebulosa.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/SkyboxURPMaterial.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/SkyboxURPMaterial.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Sun.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Sun.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/SunInside.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/SunInside.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/SunNucleus.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/SunNucleus.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Uranus.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Uranus.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/UranusInsidePlanet.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/UranusInsidePlanet.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Venus.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/Venus.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/VenusInsidePlanet.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials/VenusInsidePlanet.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Mesh.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Mesh/Asteroid001.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Mesh/Asteroid001.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Mesh/Earth.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Mesh/Earth.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Mesh/Galaxy01.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Mesh/Galaxy01.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Mesh/PlanetInside.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Mesh/PlanetInside.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Mesh/PlanetNucleus.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Mesh/PlanetNucleus.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Mesh/SaturnRing.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Mesh/SaturnRing.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/AsteroidsBelt.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/AsteroidsBelt.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/AsteroidsField.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/AsteroidsField.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/BlackHole.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/BlackHole.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Earth.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Earth.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/EarthNucleus.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/EarthNucleus.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Jupiter.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Jupiter.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/JupiterNucleus.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/JupiterNucleus.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Mars.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Mars.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/MarsNucleus.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/MarsNucleus.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Mercury.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Mercury.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/MercuryNucleus.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/MercuryNucleus.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Moon.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Moon.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/MoonNucleus.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/MoonNucleus.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Neptune.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Neptune.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/NeptuneNucleus.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/NeptuneNucleus.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Saturn.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Saturn.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/SaturnAlone.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/SaturnAlone.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/SaturnNucleus.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/SaturnNucleus.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/SaturnRing.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/SaturnRing.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/SaturnRingAsteroids.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/SaturnRingAsteroids.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Sun.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Sun.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/SunNucleus.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/SunNucleus.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Uranus.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Uranus.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/UranusNucleus.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/UranusNucleus.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Venus.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/Venus.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/VenusNucleus.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs/VenusNucleus.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/AudioCompressedInMemory.preset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/AudioCompressedInMemory.preset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/AudioStreaming.preset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/AudioStreaming.preset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/Defaults.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/Defaults/AlbedoTexture_Default.preset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/Defaults/AlbedoTexture_Default.preset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/Defaults/AudioDecompressOnLoad.preset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/Defaults/AudioDecompressOnLoad.preset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/Defaults/DirectionalLight_Default.preset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/Defaults/DirectionalLight_Default.preset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/NormalTexture.preset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/NormalTexture.preset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/UtilityTexture.preset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets/UtilityTexture.preset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scenes.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scenes/Scene 1. Solar System Translation Script.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scenes/Scene 1. Solar System Translation Script.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scenes/Scene 2. Rotation Planets Shader.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scenes/Scene 2. Rotation Planets Shader.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scenes/Scene 3. Black Hole 01.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scenes/Scene 3. Black Hole 01.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scenes/Scene 4. Black Hole 02 with Shader.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scenes/Scene 4. Black Hole 02 with Shader.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scenes/Scene 5. Nucleus.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scenes/Scene 5. Nucleus.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scenes/Scene 6. Skybox.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scenes/Scene 6. Skybox.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scripts.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scripts/RotateArround.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scripts/RotateArround.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scripts/SimpleCameraController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scripts/SimpleCameraController.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Settings.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Settings/ForwardRenderer.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Settings/ForwardRenderer.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Settings/SampleSceneProfile.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Settings/SampleSceneProfile.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Settings/UniversalRP-HighQuality.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Settings/UniversalRP-HighQuality.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Settings/UniversalRP-LowQuality.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Settings/UniversalRP-LowQuality.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Settings/UniversalRP-MediumQuality.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Settings/UniversalRP-MediumQuality.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Shaders.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Shaders/BlackHoleReflectPlane.shadergraph" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Shaders/BlackHoleReflectPlane.shadergraph.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Shaders/BlackHoleSphere.shadergraph" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Shaders/BlackHoleSphere.shadergraph.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Shaders/Glow.shadergraph" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Shaders/Glow.shadergraph.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Shaders/PlanetRotationAndMask.shadergraph" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Shaders/PlanetRotationAndMask.shadergraph.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Shaders/Skybox_GalaxyProcedural.shadergraph" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Shaders/Skybox_GalaxyProcedural.shadergraph.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Shaders/Sun.shadergraph" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Shaders/Sun.shadergraph.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Asteroid.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Asteroid/Asteroid_DefaultMaterial_AlbedoTransparency.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Asteroid/Asteroid_DefaultMaterial_AlbedoTransparency.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Asteroid/Asteroid_DefaultMaterial_MetallicSmoothness.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Asteroid/Asteroid_DefaultMaterial_MetallicSmoothness.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Asteroid/Asteroid_DefaultMaterial_Normal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Asteroid/Asteroid_DefaultMaterial_Normal.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Earth2K.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Earth2K.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/EarthInsidePlanet.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/EarthInsidePlanet.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/FogParticle.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/FogParticle.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Galaxy01.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Galaxy01.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/GlowWhite.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/GlowWhite.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Jupiter2K.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Jupiter2K.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/JupiterInsidePlanet.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/JupiterInsidePlanet.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Mars2K.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Mars2K.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/MarsInsidePlanet.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/MarsInsidePlanet.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Mercury2K.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Mercury2K.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/MercuryInsidePlanet.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/MercuryInsidePlanet.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Moon2K.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Moon2K.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/MoonInsidePlanet.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/MoonInsidePlanet.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01/Nebula01.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01/Nebula01.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01/Nebula01Back.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01/Nebula01Back.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01/Nebula01Bottom.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01/Nebula01Bottom.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01/Nebula01Front.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01/Nebula01Front.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01/Nebula01Left.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01/Nebula01Left.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01/Nebula01Right.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01/Nebula01Right.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01/Nebula01Top.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula01/Nebula01Top.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02Back.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02Back.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02Bottom.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02Bottom.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02Front.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02Front.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02Left.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02Left.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02Right.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02Right.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02Skybox.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02Skybox.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02Top.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Nebula02Top.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Neptune2K.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Neptune2K.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/NeptuneInsidePlanet.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/NeptuneInsidePlanet.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/NightGradient.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/NightGradient.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/NightOff.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/NightOff.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Noise01.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Noise01.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Noise02.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Noise02.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Ring.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Ring.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Saturn2K.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Saturn2K.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/SaturnInsidePlanet.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/SaturnInsidePlanet.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/SaturnRing2K.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/SaturnRing2K.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Uranus2K.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/Uranus2K.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/UranusInsidePlanet.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/UranusInsidePlanet.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/VenusInsidePlanet.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/VenusInsidePlanet.psd.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/VenusSurface2K.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites/VenusSurface2K.psd.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Controls/Buttons/Rectangular/Button (Normal S).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Controls/Buttons/Rectangular/Button (Normal S).prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Consumables.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Consumables/Button (Consumable) (Blue).prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Consumables/Button (Consumable) (Blue).prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Consumables/Button (Consumable) (Green).prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Consumables/Button (Consumable) (Green).prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Consumables/Button (Consumable) (Orange).prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Consumables/Button (Consumable) (Orange).prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Dialog Box.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Dialog Box.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Joystick.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Joystick.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Minimap (Mobile).prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Minimap (Mobile).prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/NPC Bubble.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/NPC Bubble.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Unit Frames.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Unit Frames/Large Unit Frame (Mobile).prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Unit Frames/Large Unit Frame (Mobile).prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Unit Frames/Small Unit Frame (Mobile Small) (1).prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Unit Frames/Small Unit Frame (Mobile Small) (1).prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Unit Frames/Small Unit Frame (Mobile Small) (2).prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs/Mobile/Unit Frames/Small Unit Frame (Mobile Small) (2).prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/MailBox.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/MailBox.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/GLU - Animated Backgrounds/Atlases/GLU_Art_019b.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/GLU - Animated Backgrounds/Atlases/GLU_Art_019b.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Mail/MailListView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mail/MailListView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/LanguageCode.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Account/LanguageCode.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArcadeTop.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArcadeTop.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/Arena/OpponentPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/Arena/OpponentPrefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArenaLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArenaLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/AskIfLinkDeviceLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/AskIfLinkDeviceLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/DropTableInfoLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/DropTableInfoLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FightScenePauseSupport.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FightScenePauseSupport.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.IOSResolver.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.IOSResolver.dll.mdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.IOSResolver.dll.mdb.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.IOSResolver.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.JarResolver.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.JarResolver.dll.mdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.JarResolver.dll.mdb.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.JarResolver.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.PackageManagerResolver.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.PackageManagerResolver.dll.mdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.PackageManagerResolver.dll.mdb.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.PackageManagerResolver.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.VersionHandlerImpl.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.VersionHandlerImpl.dll.mdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.VersionHandlerImpl.dll.mdb.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/1.2.175/Google.VersionHandlerImpl.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/CHANGELOG.md.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/Google.VersionHandler.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/Google.VersionHandler.dll.mdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/Google.VersionHandler.dll.mdb.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/Google.VersionHandler.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/LICENSE.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/README.md.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/external-dependency-manager_version-1.2.175_manifest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalDependencyManager/Editor/external-dependency-manager_version-1.2.175_manifest.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/CHANGELOG.md.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/BuildPreProcessor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/BuildPreProcessor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAds.Editor.asmdef" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAds.Editor.asmdef.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsDependencies.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsDependencies.xml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsSKAdNetworkItems.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsSKAdNetworkItems.xml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsSettings.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsSettings.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsSettingsEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsSettingsEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleUmpDependencies.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleUmpDependencies.xml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/ManifestProcessor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/ManifestProcessor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/PListProcessor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/PListProcessor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/1024x768.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/1024x768.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/300x250.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/300x250.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/320x100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/320x100.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/320x480.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/320x480.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/320x50.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/320x50.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/468x60.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/468x60.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/480x320.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/480x320.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/728x90.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/728x90.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/768x1024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/768x1024.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/AdInspectorHome.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/AdInspectorHome.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdInspector.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdInspector/768x1024.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdInspector/768x1024.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AppOpen.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AppOpen/1024x768.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AppOpen/1024x768.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AppOpen/768x1024.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AppOpen/768x1024.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/ADAPTIVE.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/ADAPTIVE.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/BANNER.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/BANNER.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/CENTER.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/CENTER.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/FULL_BANNER.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/FULL_BANNER.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/LARGE_BANNER.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/LARGE_BANNER.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/LEADERBOARD.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/LEADERBOARD.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/MEDIUM_RECTANGLE.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/MEDIUM_RECTANGLE.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/SMART_BANNER.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/SMART_BANNER.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Interstitials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Interstitials/1024x768.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Interstitials/1024x768.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Interstitials/768x1024.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Interstitials/768x1024.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Rewarded.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Rewarded/1024x768.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Rewarded/1024x768.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Rewarded/768x1024.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Rewarded/768x1024.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/Ump.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/Ump/ConsentForm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/Ump/ConsentForm.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/Ump/ConsentForm.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/Ump/ConsentForm.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Android.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Android.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Common.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Common.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Core.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Core.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Ump.Android.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Ump.Android.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Ump.Unity.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Ump.Unity.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Ump.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Ump.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Ump.iOS.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Ump.iOS.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Unity.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Unity.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.iOS.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.iOS.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds_version-7.4.0_manifest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds_version-7.4.0_manifest.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/LICENSE.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Resources/GoogleMobileAdsSettings.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Resources/GoogleMobileAdsSettings.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/link.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/link.xml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Android.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Android/GoogleMobileAdsPlugin.androidlib.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Android/GoogleMobileAdsPlugin.androidlib/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Android/GoogleMobileAdsPlugin.androidlib/AndroidManifest.xml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Android/GoogleMobileAdsPlugin.androidlib/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Android/GoogleMobileAdsPlugin.androidlib/project.properties.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Android/googlemobileads-unity.aar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Android/googlemobileads-unity.aar.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/iOS.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/iOS/GADUAdNetworkExtras.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/iOS/GADUAdNetworkExtras.h.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/iOS/unity-plugin-library.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/iOS/unity-plugin-library.a.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FightingStepLayer/SideUnitIcon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FightingStepLayer/SideUnitIcon.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FightingStepLayer/Team2Auto.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FightingStepLayer/Team2Auto.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FrontLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FrontLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/MailBox.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/MailBox.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/MailDetailView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/MailDetailView.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/NickNameLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/NickNameLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/PopupLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/PopupLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SettingLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SettingLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ShopTopLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ShopTopLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TeamEditLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TeamEditLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TitleScreenLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TitleScreenLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UpperInfoBar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UpperInfoBar.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/Materials/Block.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/Materials/Block.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/Materials/sky.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/Materials/sky.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleScene.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleScene.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleScene.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleScene/LightingData.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleScene/LightingData.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleScene/Lightmap-0_comp_light.exr" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleScene/Lightmap-0_comp_light.exr.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleScene/Lightmap-1_comp_light.exr" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleScene/Lightmap-1_comp_light.exr.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleScene/ReflectionProbe-0.exr" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleScene/ReflectionProbe-0.exr.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleSkin.guiskin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Demo/SampleSkin.guiskin.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/( 推荐 )mplus-1c-black.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/( 推荐 )mplus-1c-black.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/LICENSE_E.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/LICENSE_E.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/LICENSE_J.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/LICENSE_J.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/README_E.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/README_E.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/README_J.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/README_J.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1c-bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1c-bold.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1c-heavy.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1c-heavy.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1c-light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1c-light.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1c-medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1c-medium.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1c-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1c-regular.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1c-thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1c-thin.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1m-bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1m-bold.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1m-light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1m-light.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1m-medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1m-medium.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1m-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1m-regular.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1m-thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1m-thin.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1mn-bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1mn-bold.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1mn-light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1mn-light.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1mn-medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1mn-medium.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1mn-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1mn-regular.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1mn-thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1mn-thin.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1p-black.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1p-black.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1p-bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1p-bold.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1p-heavy.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1p-heavy.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1p-light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1p-light.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1p-medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1p-medium.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1p-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1p-regular.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1p-thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-1p-thin.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2c-black.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2c-black.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2c-bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2c-bold.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2c-heavy.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2c-heavy.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2c-light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2c-light.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2c-medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2c-medium.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2c-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2c-regular.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2c-thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2c-thin.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2m-bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2m-bold.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2m-light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2m-light.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2m-medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2m-medium.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2m-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2m-regular.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2m-thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2m-thin.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2p-black.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2p-black.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2p-bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2p-bold.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2p-heavy.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2p-heavy.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2p-light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2p-light.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2p-medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2p-medium.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2p-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2p-regular.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2p-thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/Fonts/MPlusTestflight63a/mplus-2p-thin.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1c-black SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1c-black SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1c-bold SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1c-bold SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1c-heavy SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1c-heavy SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1c-light SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1c-light SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1c-medium SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1c-medium SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1c-regular SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1c-regular SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1c-thin SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1c-thin SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1m-bold SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1m-bold SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1m-light SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1m-light SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1m-medium SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1m-medium SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1m-regular SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1m-regular SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1m-thin SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1m-thin SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1mn-bold SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1mn-bold SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1mn-light SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1mn-light SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1mn-medium SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1mn-medium SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1mn-regular SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1mn-regular SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1mn-thin SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1mn-thin SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1p-black SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1p-black SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1p-bold SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1p-bold SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1p-heavy SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1p-heavy SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1p-light SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1p-light SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1p-medium SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1p-medium SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1p-regular SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1p-regular SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1p-thin SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-1p-thin SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2c-black SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2c-black SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2c-bold SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2c-bold SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2c-heavy SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2c-heavy SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2c-light SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2c-light SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2c-medium SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2c-medium SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2c-regular SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2c-regular SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2c-thin SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2c-thin SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2m-bold SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2m-bold SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2m-light SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2m-light SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2m-medium SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2m-medium SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2m-regular SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2m-regular SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2m-thin SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2m-thin SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2p-black SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2p-black SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2p-bold SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2p-bold SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2p-heavy SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2p-heavy SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2p-light SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2p-light SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2p-medium SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2p-medium SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2p-regular SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2p-regular SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2p-thin SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/Selected/mplus-2p-thin SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/school-characters-list.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/TextMeshProFont/school-characters-list.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/readme.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/readme.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/readme_jp.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SU3DJPFont/readme_jp.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/MainScene/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/MainScene/MainMenuScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Setting/DefaultIconSetting.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/DefaultIconSetting.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StageButton.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/StageButton.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ProgressLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ProgressLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/StoneProperty/ExBar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/StoneProperty/ExBar.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/SideUnitIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/SideUnitIcon.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
@@ -584,6 +189,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.scriptablebuildpipeline@1.19.6/Editor/Tasks/CreateBuiltInShadersBundle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/inspectors/FrameRateDrawer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Purchasing/IStoreController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Runtime/UniversalAdditionalCameraData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Layout/VerticalLayoutGroup.cs" root0="SKIP_HIGHLIGHTING" />
@@ -596,7 +202,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Lighting/ProbeVolume/ProbeVolumeBakingProcessSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../p3-client/Assets/App/Scripts/Contents/Quest/QuestListItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/RankingPage.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c884d993da6242ae98d95c11d4715907157400/26/fbbae327/ColorUtility.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c884d993da6242ae98d95c11d4715907157400/26/fbbae327/ColorUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Graphs/GraphData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Samples~/PrefabSpawner/PrefabSpawnerSample.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_InputField.cs" root0="SKIP_HIGHLIGHTING" />
@@ -604,6 +210,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Build/AnalyzeRules/AnalyzeRule.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Layout/LayoutGroup.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Interfaces/IMayRequireDepthTexture.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Settings/AddressableAssetSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.31/UnityEngine.TestRunner/Assertions/LogScope/ILogScope.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Drawing/Manipulators/ResizeBorderFrame.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/RenderGraph/RenderGraphResourcePool.cs" root0="SKIP_HIGHLIGHTING" />
@@ -626,12 +233,14 @@
     <setting file="file://$PROJECT_DIR$/Assets/PlayFab/CloudScripts/VirtualCurrency.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Tests/Editor/Collaborate/Presenters/TestChangesView.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Utilities/CameraCaptureBridge.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Build/AddressablesDataBuilderInput.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Nodes/Input/Matrix/Matrix3Node.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Debugging/Prefabs/Scripts/DebugUIHandlerIndirectToggle.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/DropTablePage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.mathematics@1.2.6/Unity.Mathematics/Noise/cellular2D.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_SubMeshUI_Editor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Runtime/Audio/AudioPlayableAsset.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Runtime/External/LibTessDotNet/Tess.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Canvas/CanvasSizeCorrectInAwakeAndStart.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/ResourceManager/ResourceManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4379fcb5ffcd422abdabe963856ef06326000/1d/7d9a4d3f/TweenerCore`3.cs" root0="SKIP_HIGHLIGHTING" />
@@ -646,6 +255,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.6.5/Runtime/Intrinsics/x86/Csr.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/ResourceManager/AsyncOperations/AsyncOperationHandle.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e0dda07d79934199bc7ad502dc3969bd29200/d5/03e14685/GUILayout.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.31/UnityEngine.TestRunner/Utils/IPostBuildCleanup.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Tests/Editor/ReflectionUtils.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.analytics@4.0.1/Runtime/Runtime/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/Views/IncomingChanges/Gluon/IncomingChangesTab.cs" root0="SKIP_HIGHLIGHTING" />
@@ -737,6 +347,9 @@
       <workItem from="1673912413218" duration="14889000" />
       <workItem from="1674004076748" duration="1769000" />
       <workItem from="1674010936131" duration="485000" />
+      <workItem from="1674044097786" duration="2723000" />
+      <workItem from="1674140394012" duration="457000" />
+      <workItem from="1674215014788" duration="5440000" />
     </task>
     <servers />
   </component>
