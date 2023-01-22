@@ -26,7 +26,7 @@ public partial class AnimationManger {
                 {
                     if (path.PrimaryKey.Contains("Animation/" + type + "/BasicPack/" + basicPackName))
                     {
-                        Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey, AnimatorRef.gameObject);
+                        Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey);
                         if (value != null)
                         {
                             var animationClip = (AnimationClip)value;
