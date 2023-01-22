@@ -148,7 +148,7 @@ public static class AddressablesLogic
     
     private static readonly List<AsyncOperationHandle> LoadingHandlerList = new ();
     
-    public static async UniTask<T> LoadT<T>(string prefabPathName)
+    public static async UniTask<T> LoadT<T>(string prefabPathName, GameObject memoryReleaseTarget = null)
     {
         var handle = Addressables.LoadAssetAsync<T>(prefabPathName);
         await handle.Task;
@@ -160,7 +160,17 @@ public static class AddressablesLogic
         }
         else
         {
-            LoadingHandlerList.Add(handle);
+            if (memoryReleaseTarget == null)
+            {
+                LoadingHandlerList.Add(handle);
+            }
+            else
+            {
+                memoryReleaseTarget.AddOnDestroyCallback( () =>
+                {
+                    Addressables.ReleaseInstance(handle);
+                });
+            }
             return handle.Result;
         }
     }

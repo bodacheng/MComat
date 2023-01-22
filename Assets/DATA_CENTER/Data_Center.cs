@@ -17,7 +17,7 @@ public partial class Data_Center : MonoBehaviour
     public Transform WholeT;
     public AudioSource _AudioSource;
     public readonly Sensor Sensor = new Sensor();
-    public readonly Animation_Manger Animation_Manger = new Animation_Manger();
+    public readonly AnimationManger Animation_Manger = new AnimationManger();
     public readonly FightParamsReference FightDataRef = new FightParamsReference();
     public readonly BuffsRunner buffsRunner = new BuffsRunner();
     public SkillCancelFlag _SkillCancelFlag;

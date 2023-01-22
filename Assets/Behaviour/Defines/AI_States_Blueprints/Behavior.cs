@@ -19,7 +19,7 @@ namespace Soul
         public SkillCancelFlag _SkillCancelFlag;
         public BO_Weapon_Animation_Events _Weapon_Animation_Events;
         public ShaderManager shaderManager;
-        public Animation_Manger Animation_Manger;
+        public AnimationManger Animation_Manger;
         public BuffsRunner _BuffsRunner;
         public BlendShapeProxy blendShapeProxy;
         public Personality_events pEvents;
