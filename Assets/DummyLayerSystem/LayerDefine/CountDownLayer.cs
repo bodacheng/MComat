@@ -1,4 +1,5 @@
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,13 +10,13 @@ public class CountDownLayer : UILayer
     
     float startTimestamp = 3f;
     
-    public IEnumerator BeforeFightCountDown()
+    public async UniTask BeforeFightCountDown()
     {
         while (startTimestamp > 0)
         {
             startTimestamp -= Time.deltaTime;
             CountDown.text = "" + (1 + (int)(startTimestamp));
-            yield return null;
+            await UniTask.DelayFrame(0);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 
 namespace FightScene
@@ -19,17 +19,16 @@ namespace FightScene
             //{
             //    ((OneVOneMode)nowC).xzMax = 100f;
             //}
-            SingleThreadProcesser.backup.RunAsQueued(BeforeFightCountDown());
+            BeforeFightCountDown().Forget();
         }
         
-        IEnumerator BeforeFightCountDown()
+        async UniTask BeforeFightCountDown()
         {
             AutoMoveToNext = false;
             BoundaryControlByGod.target.ChangeMagicRingRadius(20f);
             //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
             var cd = UILayerLoader.Load<CountDownLayer>();
-            yield return cd.BeforeFightCountDown();
-            
+            await cd.BeforeFightCountDown();
             AutoMoveToNext = true;
         }
         

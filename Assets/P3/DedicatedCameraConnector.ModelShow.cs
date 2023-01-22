@@ -18,30 +18,34 @@ namespace ModelView
             }
         }
         
-        public async void ShowMyModel(string instanceID)
+        public async UniTask ShowMyModel(string instanceID)
         {
             var info = dataAccess.Units.Get(instanceID);
-            await _ShowModel(info?.r_id);
+            await ShowModel(info?.r_id);
         }
         
-        GameObject _model;
         Data_Center _focusingC;
         public Data_Center FocusingC => _focusingC;
         
         string _focusRId;
         bool _ifShowingSkill = false;
-        
-        public async UniTask _ShowModel(string recordID)
+        private readonly SingleThreadProcessor singleThreadProcessor = new ();
+        public async UniTask ShowModel(string recordID)
         {
+            await singleThreadProcessor.RunAsQueued(_ShowModel(recordID));
+        }
+        
+        async UniTask _ShowModel(string recordID)
+        {
+            foreach (var save in saves)
+            {
+                if (save.Value != null)
+                    save.Value.WholeT.gameObject.SetActive(false);
+            }
+            
             Data_Center saveData = null;
             if (recordID != null)
                 saves.TryGetValue(recordID, out saveData);
-            
-            if (_model != null)
-            {
-                _model.SetActive(false);
-                _model = null;
-            }
             
             if (recordID == null)
             {
@@ -61,7 +65,6 @@ namespace ModelView
                 if (_focusingC == null)
                 {
                     _focusRId = null;
-                    _model = null;
                     return;
                 }
                 DicAdd<string, Data_Center>.Add(saves, recordID, _focusingC);
@@ -73,14 +76,12 @@ namespace ModelView
             
             // 这个短暂变色是为了掩盖一些模型刚加载瞬间有些渲染没到位的尴尬。比如裙子摇晃 
             _focusingC._ShaderManager.FlatColorForAShortTime(Color.black, 0f, 1f);
-            _model = _focusingC.WholeT.gameObject;
-            _model.SetActive(true);
+            _focusingC.WholeT.gameObject.SetActive(true);
             
             await UniTask.DelayFrame(5);// 否则Unity对mesh的尺寸计算有错误。算是Unity的bug
-            
-            if (_model != null)
+            if (_focusingC != null && _focusingC.WholeT != null)
             {
-                Initialize(false,_model.transform, transform);
+                Initialize(false,_focusingC.WholeT.gameObject.transform, transform);
                 ItemDetailStartDirection(0,0,0);
             }
         }

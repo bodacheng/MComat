@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using mainMenu;
 using dataAccess;
@@ -63,7 +64,7 @@ public class TeamEditLayer : UILayer
         
         PreScene.target.SetFocusingUnit(instanceID);
         nineForShow.ShowStones_Acc(instanceID);
-        connector.ShowMyModel(instanceID);
+        connector.ShowMyModel(instanceID).Forget();
     }
     
     /// <summary>
@@ -185,7 +186,7 @@ public class TeamEditLayer : UILayer
                 focusingPos.Value = posNum;
                 var instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(focusingPos.Value);
                 PreScene.target.SetFocusingUnit(instanceID);
-                connector.ShowMyModel(instanceID);
+                connector.ShowMyModel(instanceID).Forget();
                 if (PreScene.target.Focusing != null)
                     nineForShow.ShowStones_Acc(PreScene.target.Focusing.id);
                 else

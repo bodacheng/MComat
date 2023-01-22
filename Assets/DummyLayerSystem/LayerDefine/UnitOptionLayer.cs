@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.UI;
 using ModelView;
 
@@ -73,10 +74,10 @@ namespace mainMenu
             if (info == null)
             {
                 Debug.Log("角色详细信息读取错误.尝试将“对准”中的角色信息至空");
-                _connector.ShowMyModel(null);
+                _connector.ShowMyModel(null).Forget();
             }else
             {
-                _connector.ShowMyModel(info.id);
+                _connector.ShowMyModel(info.id).Forget();
             }
         }
 

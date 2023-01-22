@@ -19,10 +19,6 @@ namespace FightScene
         [Header("FX")]
         public Camera fxCamera;
         
-        // 主进程
-        [Header("主进程处理器")]
-        public SingleThreadProcesser mainProcessRunner;
-        
         [Header("AudioSource")]
         public AudioSource audioSource;
         
@@ -63,14 +59,12 @@ namespace FightScene
             Application.targetFrameRate = 60;
             FightGlobalSetting._sceneStep = 1;
             
-            SingleThreadProcesser.backup = mainProcessRunner;
             //Position_Set_Executor.Instance.P_sets.Clear();
             var preparingProcess = new PreparingProcess();
             var countDownProcess = new CountDownProcess();
             var fightingProcess = new FightingProcess();
             var fightResultAnim = new FightResultAnim();
             var fightOverProcess = new FightOverProcess();
-            var basicTryProcess = new BasicTryProcess();
             
             FSceneProcessesRunner.Main.Clear();
             switch(Fight.EventType)

@@ -10,6 +10,8 @@ public static class SkillIcon
         var prefab = GetDefaultSkillIconByResource(skillConfig.SP_LEVEL);
         var returnValue = Object.Instantiate(prefab);
         var sprite = await AddressablesLogic.LoadT<Sprite>(skillId, returnValue);
+        if (returnValue == null)
+            return null;
         returnValue.GetComponent<Image>().sprite = sprite;
         return returnValue;
     }

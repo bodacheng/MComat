@@ -32,7 +32,7 @@ public class ArcadeTop : UILayer
     async UniTask IconButtonFeature(HeroIcon heroIcon)
     {
         // 显示模型
-        await connector._ShowModel(heroIcon.unitConfig.RECORD_ID);
+        await connector.ShowModel(heroIcon.unitConfig.RECORD_ID);
         // 显示技能组
         await nineForShow.ShowStones_DataInfo(heroIcon.unitInfo);
         nineForShow.AddOnClickToSlots((RECORD_ID) =>

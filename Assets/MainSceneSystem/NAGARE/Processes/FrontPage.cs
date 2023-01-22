@@ -2,6 +2,7 @@
 using dataAccess;
 using DG.Tweening;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 
 public class FrontPage : MSceneProcess
@@ -68,7 +69,7 @@ public class FrontPage : MSceneProcess
         }
         
         PreScene.target.SetFocusingUnit(focusInstanceID);
-        _frontLayer.CamConnector.ShowMyModel(focusInstanceID);
+        _frontLayer.CamConnector.ShowMyModel(focusInstanceID).Forget();
 
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
         upperInfoBar.Setup(PlayerAccountInfo.Me.TitleDisplayName,

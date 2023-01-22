@@ -15,9 +15,6 @@ namespace mainMenu
         [Header("T")]
         public GameObject T;
         
-        [Header("主进程处理器")]
-        [SerializeField] SingleThreadProcesser mainProcessRunner;
-        
         public Camera postProcessCamera;
         public Camera noPostProcessCamera;
         
@@ -55,7 +52,6 @@ namespace mainMenu
         void Awake()
         {
             target = this;
-            SingleThreadProcesser.backup = mainProcessRunner;
             SetBgRenderTexture();
         }
         

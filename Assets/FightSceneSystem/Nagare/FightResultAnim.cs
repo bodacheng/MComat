@@ -1,7 +1,7 @@
-using System.Collections;
 using UnityEngine;
 using FightScene;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 
 public class FightResultAnim : FSceneProcess
@@ -15,13 +15,13 @@ public class FightResultAnim : FSceneProcess
     
     public override void ProcessEnter()
     {
-        SingleThreadProcesser.backup.RunAsQueued(EnterProcess());
+        EnterProcess().Forget();
     }
     
-    IEnumerator EnterProcess()
+    async UniTask EnterProcess()
     {
         animEnd = false;
-        yield return FinalMomentAnim();
+        await FinalMomentAnim();
         animEnd = true;
     }
     
@@ -30,10 +30,10 @@ public class FightResultAnim : FSceneProcess
         return animEnd;
     }
     
-    IEnumerator FinalMomentAnim()
+    async UniTask FinalMomentAnim()
     {
         Time.timeScale = 0.4f;
-        yield return new WaitForSeconds(1f);
+        await UniTask.DelayFrame(10);
         var winners = new List<Data_Center>();
         
         switch (FightLogger.value.GetWinnerTeam())
@@ -46,17 +46,17 @@ public class FightResultAnim : FSceneProcess
                 break;
         }
         
-        foreach (Data_Center _one in winners)
+        foreach (Data_Center one in winners)
         {
-            if (!_one.FightDataRef.IsDead.Value)
+            if (!one.FightDataRef.IsDead.Value)
             {
-                _one._MyBehaviorRunner.ChangeState("Victory");
+                one._MyBehaviorRunner.ChangeState("Victory");
             }
         }
         Time.timeScale = 1f;
 
         var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
         arenaFightOver.Step1Anim();
-        yield return new WaitForSeconds(0.5f);
+        await UniTask.DelayFrame(10);
     }
 }

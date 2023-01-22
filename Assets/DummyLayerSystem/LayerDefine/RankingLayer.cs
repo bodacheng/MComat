@@ -27,7 +27,7 @@ public class RankingLayer : UILayer
             _cameraConnector.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
         });
         
-        _cameraConnector._ShowModel(unitInfo.r_id).Forget();
+        _cameraConnector.ShowModel(unitInfo.r_id).Forget();
     }
 
     public void SetMyLeaderboardInfo(LeaderboardInfo myTeamInfo)

@@ -25,11 +25,7 @@ namespace mainMenu
         [SerializeField] RectTransform attacksT;
         [SerializeField] RectTransform fire1T;
         [SerializeField] RectTransform fire2T;
-
-        [Space(11)]
-        [Header("Runner")]
-        [SerializeField] SingleThreadProcesser runner;
-
+        
         [Space(11)]
         [Header("Skill Info")]
         [SerializeField] SkillStoneDetail _skillStoneDetail;
@@ -156,7 +152,7 @@ namespace mainMenu
         
         async UniTask ShowModel()
         {
-            _connector.ShowMyModel(PreScene.target.Focusing.id);
+            await _connector.ShowMyModel(PreScene.target.Focusing.id);
             var config = Units.GetUnitConfig(PreScene.target.Focusing.r_id);
             await _connector.FocusingC.Step1Initialize(config.TYPE, config.BASIC_MOVEMENT_PACK);
             await _connector.FocusingC.Step2Initialize(config.TYPE, config.element, PreScene.target.Focusing.set);
