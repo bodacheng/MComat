@@ -3,34 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/CountDownLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/CountDownLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/RankingLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/RankingLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillShowLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SkillShowLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/TeamEditLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/TeamEditLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UnitOptionLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UnitOptionLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/UILayerLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/UILayerLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightScene/FightScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightScene/FightScene.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/CountDownProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/CountDownProcess.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightResultAnim.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightResultAnim.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/Turial.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/Turial/BasicTryProcess.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/Turial/BasicTryProcess.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/SkillEditPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/SkillEditPage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.ModelShow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.ModelShow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/MainScene/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/MainScene/MainMenuScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/UnitsManger/UnitsManger_r.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RealTimeGameProcessManager/UnitsManger/UnitsManger_r.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Remote/Stone/Add.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Remote/Stone/Add.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scene/fight_scene/FightScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/fight_scene/FightScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Singleton/SkillIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/SkillIcon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Structure/SingleThreadProcesser/SingleThreadProcesser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Structure/SingleThreadProcesser/SingleThreadProcessor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Structure/SingleThreadProcesser/SingleThreadProcesser.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Structure/SingleThreadProcesser/SingleThreadProcessor.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Structure/SingleThreadProcesser/SingleThreadProcesser2.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Structure/SingleThreadProcesser/SingleThreadProcesser2.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +187,7 @@
       <workItem from="1674044097786" duration="2723000" />
       <workItem from="1674140394012" duration="457000" />
       <workItem from="1674215014788" duration="7888000" />
-      <workItem from="1674358484262" duration="12326000" />
+      <workItem from="1674358484262" duration="13336000" />
     </task>
     <servers />
   </component>

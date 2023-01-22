@@ -51,6 +51,8 @@ namespace dataAccess
             }
             
             var ob = await SkillIcon.FindSkillIcon(skillID);
+            if (ob == null)
+                return null;
             ob.gameObject.name = "skillIcon_" + skillID;
             var item = ob.GetComponent<SKStoneItem>();
             if (item == null)

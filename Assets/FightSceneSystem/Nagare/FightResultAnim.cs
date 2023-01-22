@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using FightScene;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ public class FightResultAnim : FSceneProcess
     async UniTask FinalMomentAnim()
     {
         Time.timeScale = 0.4f;
-        await UniTask.DelayFrame(10);
+        await UniTask.Delay(TimeSpan.FromSeconds(3));
         var winners = new List<Data_Center>();
         
         switch (FightLogger.value.GetWinnerTeam())
@@ -57,6 +58,6 @@ public class FightResultAnim : FSceneProcess
 
         var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
         arenaFightOver.Step1Anim();
-        await UniTask.DelayFrame(10);
+        await UniTask.Delay(TimeSpan.FromSeconds(3));
     }
 }

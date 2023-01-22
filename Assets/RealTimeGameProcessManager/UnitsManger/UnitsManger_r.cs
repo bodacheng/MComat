@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UniRx;
 using Cysharp.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace FightScene
         
         async void ToNewUnit()
         {
-            await UniTask.DelayFrame(100);
+            await UniTask.Delay(TimeSpan.FromSeconds(2));
             RandomToAliveUnit();
         }
         
@@ -46,7 +47,8 @@ namespace FightScene
                     if (x) 
                     {
                         Sensor.AddOrRemoveSharedUnits(center, teamConfig.myTeam, false);
-                        ToNewUnit();
+                        if (FightLogger.value.GetWinnerTeam() == Team.none)
+                            ToNewUnit();
                     }
                 }).AddTo(gameObject);
             }
