@@ -57,19 +57,19 @@ namespace ModelView
             // 初始化工作全部完成后才启用相机，否则会在之前造成黑屏
             camera.gameObject.SetActive(true);
 
-            if (!this._fixMode)
+            if (!_fixMode)
                 _basicOrthographicSize = CalMaxOrthographicSize();
         }
 
         void Update()
         {
             if (target != null) CameraPositionCal();
-            if (IfShowingSkill)
+            if (_ifShowingSkill)
             {
                 SkillsPrintOutLateUpdate();
             }
         }
-
+        
         private Renderer _parentNodeRenderer;
         private Bounds _targetBounds;
         private Renderer[] _renderers;

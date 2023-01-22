@@ -10,22 +10,22 @@ using System.IO;
 public partial class PlayFabReadClient
 {
     #region MAIL
-    static readonly List<MailItemInstance> _myMailList = new ();
-    static readonly Dictionary<string, CatalogItem> _catalogItems = new ();
+    static readonly List<MailItemInstance> MyMailList = new ();
+    static readonly Dictionary<string, CatalogItem> CatalogItems = new ();
     
     public static List<MailItemInstance> GetMailsData()
     {
-        return _myMailList;
+        return MyMailList;
     }
 
     public static CatalogItem GetCatalogItemByDisplayName(string displayName)
     {
-        if (!_catalogItems.ContainsKey(displayName)) return null;
-        var item = _catalogItems[displayName];
+        if (!CatalogItems.ContainsKey(displayName)) return null;
+        var item = CatalogItems[displayName];
         return item;
     }
 
-    public static void GetPresentGetCatalogItems()
+    public static void GetMailCatalogItems(Action<bool> finished)
     {
         PlayFabClientAPI.GetCatalogItems(
             new GetCatalogItemsRequest
@@ -36,12 +36,14 @@ public partial class PlayFabReadClient
             {
                 foreach (var v in x.Catalog)
                 {
-                    DicAdd<string, CatalogItem>.Add(_catalogItems, v.DisplayName, v);
+                    DicAdd<string, CatalogItem>.Add(CatalogItems, v.DisplayName, v);
                 }
+                finished?.Invoke(true);
             },
             (x) =>
             {
-                Debug.Log(x.Error);
+                finished?.Invoke(false);
+                Debug.Log(x.ErrorMessage);
             }
         );
     }
@@ -51,10 +53,10 @@ public partial class PlayFabReadClient
     /// </summary>
     public static ItemInstance Get(string itemInstanceId)
     {
-        for (var i = 0; i < _myMailList.Count; i++)
+        for (var i = 0; i < MyMailList.Count; i++)
         {
-            if (_myMailList[i].ItemInstanceId == itemInstanceId)
-                return _myMailList[i];
+            if (MyMailList[i].ItemInstanceId == itemInstanceId)
+                return MyMailList[i];
         }
         return null;
     }
@@ -65,7 +67,7 @@ public partial class PlayFabReadClient
     /// <param name="mailData"></param>
     static void AddMailData(MailItemInstance mailData)
     {
-        _myMailList.Add(mailData);
+        MyMailList.Add(mailData);
     }
     
     public static void SaveReadMailAsJson(ItemInstance mailOfPlayer)
@@ -101,10 +103,10 @@ public partial class PlayFabReadClient
     
     public static void DeleteAllLocalMails()
     {
-        var toDelete = _myMailList.FindAll(x => (x.RemainingUses.Value <= 0));
+        var toDelete = MyMailList.FindAll(x => (x.RemainingUses.Value <= 0));
         foreach (var d in toDelete)
         {
-            _myMailList.Remove(d);
+            MyMailList.Remove(d);
         }
         
         string path = Application.persistentDataPath + "/readmail";
@@ -124,13 +126,13 @@ public partial class PlayFabReadClient
         }
     }
     
-    public static void ClaimPresent(string ItemId, Action<ItemInstance> saveToLocal)
+    public static void ClaimPresent(string itemId, Action<ItemInstance> saveToLocal)
     {
         PlayFabClientAPI.UnlockContainerItem(
             new UnlockContainerItemRequest
             {
                 CatalogVersion = PlayfabSetting._MailCatalog,
-                ContainerItemId = ItemId
+                ContainerItemId = itemId
             },
             resultCallback => {
                 Debug.Log(":"+ resultCallback.UnlockedItemInstanceId);
@@ -151,7 +153,7 @@ public partial class PlayFabReadClient
                     }
                 }
                 
-                foreach (var data in _myMailList)
+                foreach (var data in MyMailList)
                 {
                     if (data.ItemInstanceId == resultCallback.UnlockedItemInstanceId)
                     {
@@ -172,7 +174,7 @@ public partial class PlayFabReadClient
     
     public static void ClaimAllPresentMails(Action<ItemInstance> saveToLocal)
     {
-        CloudScript.ClaimAllPresentMails(_myMailList, saveToLocal);
+        CloudScript.ClaimAllPresentMails(MyMailList, saveToLocal);
     }
     
     #endregion

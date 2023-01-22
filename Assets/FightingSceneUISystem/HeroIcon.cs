@@ -36,7 +36,7 @@ public class HeroIcon : MonoBehaviour {
         if (unitInfo != null)
         {
             this.unitConfig = Units.GetUnitConfig(unitInfo.r_id);
-            var pic = await UnitIconDic.Load(unitInfo.r_id);
+            var pic = await UnitIconDic.Load(unitInfo.r_id, gameObject);
             ChangeIcon(pic, unitConfig.element);
         }
         else
@@ -48,7 +48,7 @@ public class HeroIcon : MonoBehaviour {
     public async void ChangeIcon(string recordId)
     {
         this.unitConfig = Units.GetUnitConfig(recordId);
-        var pic = await UnitIconDic.Load(recordId);
+        var pic = await UnitIconDic.Load(recordId, gameObject);
         ChangeIcon(pic, unitConfig.element);
     }
     
@@ -128,7 +128,7 @@ public class HeroIcon : MonoBehaviour {
             return icon;
         }
         icon.unitConfig = unitConfig;
-        var pic = await UnitIconDic.Load(unitConfig.RECORD_ID);
+        var pic = await UnitIconDic.Load(unitConfig.RECORD_ID, icon.gameObject);
         icon.ChangeIcon(pic, unitConfig.element);
         icon.transform.SetParent(T);
         icon.transform.localPosition = Vector3.one;

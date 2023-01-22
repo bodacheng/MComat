@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using ModelView;
-using Singleton;
 
 public class ArcadeTop : UILayer
 {
@@ -17,7 +16,6 @@ public class ArcadeTop : UILayer
     [SerializeField] StageButton iconPrefab;
     [SerializeField] HeroIcon unitIconPrefab;
     [SerializeField] NineForShow nineForShow;
-
     [SerializeField] Button nextChapter;
     [SerializeField] Button lastChapter;
 
@@ -25,18 +23,23 @@ public class ArcadeTop : UILayer
     private CancellationTokenSource _cts;
     public void Setup(CancellationTokenSource cts)
     {
-        this._cts = cts; 
+        _cts = cts; 
         nextChapter.onClick.AddListener(ShowNextStages);
         lastChapter.onClick.AddListener(ShowLastStages);
         jumpToNewStage.onClick.AddListener(ToNew);
     }
     
-    void IconButtonFeature(HeroIcon heroIcon)
+    async UniTask IconButtonFeature(HeroIcon heroIcon)
     {
         // 显示模型
-        connector._ShowModel(heroIcon.unitConfig.RECORD_ID).Forget();
+        await connector._ShowModel(heroIcon.unitConfig.RECORD_ID);
         // 显示技能组
-        nineForShow.ShowStones_DataInfo(heroIcon.unitInfo);
+        await nineForShow.ShowStones_DataInfo(heroIcon.unitInfo);
+        nineForShow.AddOnClickToSlots((RECORD_ID) =>
+        {
+            var skillConfig = SkillConfigTable.GetSkillConfig(RECORD_ID);
+            connector.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
+        });
     }
 
     void ToNew()
@@ -58,23 +61,22 @@ public class ArcadeTop : UILayer
     public async UniTask ShowStages(List<int> stages, CancellationToken token)
     {
         ProgressLayer.Loading(">");
+        container.transform.gameObject.SetActive(false);
         foreach (Transform child in container.transform) {
             Destroy(child.gameObject);
         }
         
         stages.Sort((a, b) => b.CompareTo(a));
         _currentStages = stages;
-        
-        for (var index = 0; index < _currentStages.Count; index++)
+        async UniTask LoadStage(int stageNo)
         {
             if (token.IsCancellationRequested)
                 return;
             
-            var stageNo = _currentStages[index];
             var one = await AddressablesLogic.LoadT<FightInfo>("Arcade/" + stageNo + ".asset");
             if (one == null)
             {
-                continue;
+                return;
             }
             
             var stageButton = Instantiate(iconPrefab, container.transform, true);
@@ -95,25 +97,23 @@ public class ArcadeTop : UILayer
             
             if (one.FightMembers != null)
             {
-                for (var i = 0; i < one.FightMembers.EnemySets.GetValues().Count; i++)
-                {
-                    await UnitIconDic.Load(one.FightMembers.EnemySets.GetValues()[i].r_id);
-                }
-                
                 var heroIcons = await UnitInfosShow(one.FightMembers.EnemySets.GetValues(), stageButton.IconsT);
                 for (var i = 0; i < heroIcons.Count; i++)
                 {
                     var heroIcon = heroIcons[i];
                     heroIcon.iconButton.onClick.RemoveAllListeners();
-                    heroIcon.iconButton.onClick.AddListener(() => { IconButtonFeature(heroIcon); });
-
+                    heroIcon.iconButton.onClick.AddListener( async () =>
+                    {
+                        ProgressLayer.Loading(">");
+                        await IconButtonFeature(heroIcon);
+                        ProgressLayer.Close();
+                    });
                     // 默认显示章节boss
                     if (stageNo == _currentStages.Max() && i == 0)
                     {
-                        IconButtonFeature(heroIcon);
+                        await IconButtonFeature(heroIcon);
                     }
                 }
-
                 stageButton.MemberIcons = heroIcons;
             }
 
@@ -121,22 +121,19 @@ public class ArcadeTop : UILayer
             if (btnAnimator != null)
                 btnAnimator.enabled = PlayerAccountInfo.Me.arcadeProcess + 1 == stageNo;
             
-            if (PlayerAccountInfo.Me.arcadeProcess + 1 >= stageNo)
-            {
-                stageButton.ChangeColorOfIcons(true);
-            }
-            else
-            {
-                stageButton.ChangeColorOfIcons(false);
-            }
-            
+            stageButton.ChangeColorOfIcons(PlayerAccountInfo.Me.arcadeProcess + 1 >= stageNo);
             stageButton.transform.localPosition = Vector3.zero;
             stageButton.transform.localRotation = Quaternion.identity;
             stageButton.transform.localScale = Vector3.one;
         }
-        
+        var tasks = new List<UniTask>();
+        for (var index = 0; index < _currentStages.Count; index++)
+        {
+            tasks.Add(LoadStage(_currentStages[index]));
+        }
+        await UniTask.WhenAll(tasks);
         Refresh();
-        
+        container.transform.gameObject.SetActive(true);
         ProgressLayer.Close();
     }
 
@@ -177,11 +174,17 @@ public class ArcadeTop : UILayer
             Destroy(t.gameObject);
         }
         var icons = new List<HeroIcon>();
+        List<UniTask> tasks = new List<UniTask>();
         foreach (var unitInfo in heroSets)
         {
-            var v = await HeroIcon.ArrangeHeroIconToT(unitIconPrefab, unitInfo, showT);
-            icons.Add(v);
+            async UniTask load(UnitInfo unitInfo)
+            {
+                var v = await HeroIcon.ArrangeHeroIconToT(unitIconPrefab, unitInfo, showT);
+                icons.Add(v);
+            }
+            tasks.Add(load(unitInfo));
         }
+        await UniTask.WhenAll(tasks);
         for (var i = 0; i < icons.Count; i++)
         {
             icons[i].iconButton.targetGraphic.raycastTarget = true;

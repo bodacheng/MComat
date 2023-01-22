@@ -8,18 +8,18 @@ namespace Singleton
     
         static readonly IDictionary<string, Sprite> Dic = new Dictionary<string, Sprite>();
     
-        public static async UniTask<Sprite> Load(string unit_id)
+        public static async UniTask<Sprite> Load(string recordId, GameObject memoryReleaseTarget = null)
         {
-            Dic.TryGetValue(unit_id, out Sprite sprite);
+            Dic.TryGetValue(recordId, out Sprite sprite);
             if (sprite == null)
             {
-                sprite = await AddressablesLogic.LoadT<Sprite>("unit/" + unit_id);
+                sprite = await AddressablesLogic.LoadT<Sprite>("unit/" + recordId, memoryReleaseTarget);
             }
             else
             {
                 return sprite;
             }
-            DicAdd<string, Sprite>.Add(Dic, unit_id, sprite);            
+            DicAdd<string, Sprite>.Add(Dic, recordId, sprite);            
             return sprite;
         }
     }

@@ -6,17 +6,17 @@ namespace dataAccess
 {
     public static partial class Stones
     {
-        public static void Add(StoneOfPlayerInfo one)
+        public static async UniTask Add(StoneOfPlayerInfo one)
         {
             DicAdd<string, StoneOfPlayerInfo>.Add(Dic, one.InstanceId, one);
-            GenerateStoneModelByAccID(one.InstanceId);
+            await GenerateStoneModelByAccID(one.InstanceId);
         }
 
         /// <summary>
         /// 生成账户用技能石图标，生成的模型会加入统一技能石字典作为备用
         /// </summary>
         /// <param name="instanceId">技能石账户id</param>
-        static async void GenerateStoneModelByAccID(string instanceId)
+        static async UniTask GenerateStoneModelByAccID(string instanceId)
         {
             if (RenderModelDic.ContainsKey(instanceId))
             {
@@ -28,7 +28,7 @@ namespace dataAccess
 
             if (item == null)
             {
-                Debug.Log("info.SkillId："+ info.SkillId + "  技能石定义信息不存在？");
+                Debug.Log("info.SkillId："+ info.SkillId + " skill stone info not found？");
                 return;
             }
             

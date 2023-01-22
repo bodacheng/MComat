@@ -19,7 +19,7 @@ public class GotchaResult : MSceneProcess
         layer = UILayerLoader.Load<GotchaResultLayer>();
         layer.Setup();
         StarsFall.target.gameObject.SetActive(true);
-        layer.NineForShow.AddOnClickToBtns(layer.ShowDetail);
+        layer.NineForShow.AddOnClickToSlots(layer.ShowDetail);
         layer.WholeAnimProcess(Result).Forget();
         SetLoaded(true);
     }

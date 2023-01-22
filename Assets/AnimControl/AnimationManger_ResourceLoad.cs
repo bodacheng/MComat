@@ -36,8 +36,7 @@ public partial class AnimationManger {
                 }
             }
             Addressables.Release(loadPath);
-            DicAdd<string, List<AnimationClip>>.Add(AnimationResourceLoader.SeriesAnimationClipsDic, basicPackKey,
-                basicAnims);
+            DicAdd<string, List<AnimationClip>>.Add(AnimationResourceLoader.SeriesAnimationClipsDic, basicPackKey, basicAnims);
         }
 
         toLoadAnims = new Dictionary<string, AnimationClip>();
@@ -136,15 +135,13 @@ public partial class AnimationManger {
         await LoadHurtAnim(type, "basic_hurts/press", new List<string> { "hurt_anim" });
         await LoadHurtAnim(type, "basic_knockoffs", new List<string> { "knock_anim" });
 
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_knockoffs",
-            out knockoffAnimations);
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_knockoffs", out knockoffAnimations);
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/back", out _hurtClipsBack);
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/low", out _hurtClipsLow);
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/high", out _hurtClipsHigh);
-        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/press",
-            out _hurtClipsPress);
+        AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/press", out _hurtClipsPress);
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/lay", out _hurtClipsLay);
-
+        
         animatorOverride = new AnimatorOverrideController(Animator.runtimeAnimatorController);
 
         // 以上内容为个性化动画片段对base层基础动画的覆盖

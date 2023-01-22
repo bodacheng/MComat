@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using mainMenu;
 using Singleton;
 using UnityEngine;
 
@@ -15,9 +14,9 @@ namespace ModelView
             foreach (var save in saves)
             {
                 if (save.Value != null)
-                Destroy(save.Value.WholeT.gameObject);
+                    Destroy(save.Value.WholeT.gameObject);
             }
-        } 
+        }
         
         public async void ShowMyModel(string instanceID)
         {
@@ -26,11 +25,11 @@ namespace ModelView
         }
         
         GameObject _model;
-        Data_Center focusingC;
-        public Data_Center FocusingC => focusingC;
+        Data_Center _focusingC;
+        public Data_Center FocusingC => _focusingC;
         
-        string FocusRId;
-        bool IfShowingSkill = false;
+        string _focusRId;
+        bool _ifShowingSkill = false;
         
         public async UniTask _ShowModel(string recordID)
         {
@@ -46,35 +45,35 @@ namespace ModelView
             
             if (recordID == null)
             {
-                focusingC = null;
+                _focusingC = null;
                 return;
             }
 
             if (saveData != null)
             {
-                focusingC = saveData;
+                _focusingC = saveData;
             }
             else
             {
                 ProgressLayer.Loading(">");
-                focusingC = await GeneralModelPool.GetModel(recordID, transform);
+                _focusingC = await GeneralModelPool.GetModel(recordID, transform);
                 ProgressLayer.Close();
-                if (focusingC == null)
+                if (_focusingC == null)
                 {
-                    FocusRId = null;
+                    _focusRId = null;
                     _model = null;
                     return;
                 }
-                DicAdd<string, Data_Center>.Add(saves, recordID, focusingC);
+                DicAdd<string, Data_Center>.Add(saves, recordID, _focusingC);
             }
             
-            focusingC.WholeT.SetParent(transform); // 尽量确保模型总与图层一起被摧毁
-            FocusRId = recordID;
-            focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
+            _focusingC.WholeT.SetParent(transform); // 尽量确保模型总与图层一起被摧毁
+            _focusRId = recordID;
+            _focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
             
             // 这个短暂变色是为了掩盖一些模型刚加载瞬间有些渲染没到位的尴尬。比如裙子摇晃 
-            focusingC._ShaderManager.FlatColorForAShortTime(Color.black, 0f, 1f);
-            _model = focusingC.WholeT.gameObject;
+            _focusingC._ShaderManager.FlatColorForAShortTime(Color.black, 0f, 1f);
+            _model = _focusingC.WholeT.gameObject;
             _model.SetActive(true);
             
             await UniTask.DelayFrame(5);// 否则Unity对mesh的尺寸计算有错误。算是Unity的bug
@@ -88,27 +87,27 @@ namespace ModelView
         
         public async UniTask SkillShowRunWithPrepare(string skillName)
         {
-            var unitConfig = Units.GetUnitConfig(FocusRId);
+            var unitConfig = Units.GetUnitConfig(_focusRId);
             if (unitConfig == null)
                 return;
             
-            if (focusingC.Animation_Manger != null)
+            if (_focusingC.Animation_Manger != null)
             {
-                await focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, skillName, unitConfig.element);
-                IfShowingSkill = true;
-                focusingC.Animation_Manger.AnimationTrigger(skillName, true, 0.05f);
+                await _focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, skillName, unitConfig.element);
+                _ifShowingSkill = true;
+                _focusingC.Animation_Manger.AnimationTrigger(skillName, true, 0.05f);
             }
         }
         
         void SkillsPrintOutLateUpdate()
         {
-            if (focusingC != null && focusingC.Animation_Manger != null && focusingC.WholeT.gameObject.activeSelf)
+            if (_focusingC != null && _focusingC.Animation_Manger != null && _focusingC.WholeT.gameObject.activeSelf)
             {
-                if (focusingC.Animation_Manger.GetBool("in_transition") == false && 
-                    focusingC.Animation_Manger.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
+                if (_focusingC.Animation_Manger.GetBool("in_transition") == false && 
+                    _focusingC.Animation_Manger.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
                 {
-                    focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.05f);
-                    IfShowingSkill = false;
+                    _focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.05f);
+                    _ifShowingSkill = false;
                 }
             }
         }

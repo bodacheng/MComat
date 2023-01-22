@@ -118,23 +118,5 @@ namespace dataAccess
                 stoneOfPlayerInfo.Slot = kv.Value.Item2;
             }
         }
-
-        public static void LoadTutorial()
-        {
-            Dic.Clear();
-            //LoadAll_Json(Application.persistentDataPath + "/TutorialStones");
-            // 上面的步骤已经完成了Dic的适配
-            RenderModelDic.Clear();
-            foreach (var pair in Dic)
-            {
-                var skillConfig = SkillConfigTable.GetSkillConfig(pair.Value.SkillId);
-                if (skillConfig == null)
-                {
-                    Debug.Log("巨大问题,技能id似乎未定义：" + pair.Value.SkillId);
-                    return;
-                }
-                GenerateStoneModelByAccID(pair.Value.InstanceId);
-            }
-        }
     }
 }

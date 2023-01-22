@@ -3,15 +3,24 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Animation.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Animation.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Addressables/AddressablesLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Addressables/AddressablesLogic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimControl/Animation_Manger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AnimControl/AnimationManger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimControl/Animation_Manger.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AnimControl/AnimationManger.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimControl/Animation_Manger_ResourceLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AnimControl/Animation_Manger_ResourceLoad.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimControl/Animation_Manger_methodsGround2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AnimControl/Animation_Manger_methodsGround2.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/Defines/AI_States_Blueprints/Behavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/Defines/AI_States_Blueprints/Behavior.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DATA_CENTER/Data_Center.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DATA_CENTER/Data_Center.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AnimControl/AnimationManger_ResourceLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AnimControl/AnimationManger_ResourceLoad.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/RankingLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/RankingLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightingSceneUISystem/HeroIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightingSceneUISystem/HeroIcon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Gacha/GotchaResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Gacha/GotchaResult.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.ModelShow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.ModelShow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/Client/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/Client/Item.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/Client/Mails.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/Client/Mails.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Remote/Stone/Add.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Remote/Stone/Add.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Remote/Stone/Stones.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Remote/Stone/Stones.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArcadeTop.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArcadeTop.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Singleton/SkillIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/SkillIcon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Singleton/UnitIconDic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/UnitIconDic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StageButton.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StageButton.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/NineForShow_Util.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/NineForShow_Util.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
@@ -194,7 +203,7 @@
       <workItem from="1674044097786" duration="2723000" />
       <workItem from="1674140394012" duration="457000" />
       <workItem from="1674215014788" duration="7888000" />
-      <workItem from="1674358484262" duration="1360000" />
+      <workItem from="1674358484262" duration="6941000" />
     </task>
     <servers />
   </component>
