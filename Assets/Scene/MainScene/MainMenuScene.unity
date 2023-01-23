@@ -33312,6 +33312,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1376671716}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1376671718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7631986227177476596, guid: a79b5915986bff54286f9061d96bdfb8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1376671716}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1521090755
 GameObject:
   m_ObjectHideFlags: 0
@@ -126621,7 +126627,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 7819942770786997248}
   center: {fileID: 5806278774368444703}
-  SkySphereRadius: 650
+  lookTarget: {fileID: 1376671718}
+  skySphereRadius: 650
 --- !u!1 &3775932190536985830
 GameObject:
   m_ObjectHideFlags: 0

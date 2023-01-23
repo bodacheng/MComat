@@ -5,12 +5,12 @@ using dataAccess;
 
 public partial class GotchaResultLayer : UILayer
 {
-    private bool _showFinished = false;
-    public bool ShowFinished => _showFinished;
+    private bool showFinished = false;
+    public bool ShowFinished => showFinished;
     // Gotcha总动画过程 点击画面的话进入下一个星星
     public async UniTask WholeAnimProcess(List<StoneOfPlayerInfo> results)
     {
-        _showFinished = false;
+        showFinished = false;
         Reset();
         NineForShow.transform.gameObject.SetActive(false);
         await UniTask.DelayFrame(1);
@@ -68,6 +68,6 @@ public partial class GotchaResultLayer : UILayer
             }
         }
         await NineForShow.ShowStones(a1, a2, a3, b1, b2, b3, c1, c2, c3);
-        _showFinished = true;
+        showFinished = true;
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using dataAccess;
+using DG.Tweening;
 using DummyLayerSystem;
 using mainMenu;
 using PlayFab.ClientModels;
 using PlayFab;
-using UnityEngine;
 
 public class GotchaFront : MSceneProcess
 {
@@ -59,6 +59,8 @@ public class GotchaFront : MSceneProcess
             PreScene.target.trySwitchToStep(MainSceneStep.FrontPage, false);
             return;
         }
+
+        StarsFall.target.LookReset();
         
         BackGroundPS.target.Off();
         _layer = UILayerLoader.Load<GotchaLayer>();
