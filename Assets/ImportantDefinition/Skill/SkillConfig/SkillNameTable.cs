@@ -8,7 +8,6 @@ public class SkillNameTable
 	public class Row
 	{
 		public string RECORD_ID;
-		public string SKILL_ID;
 		public string EN_NAME;
 		public string JP_NAME;
 		public string CN_NAME;
@@ -29,37 +28,27 @@ public class SkillNameTable
     {
         foreach (Row row in rowList)
         {
-            if (!SkillNameDic.ContainsKey(row.SKILL_ID))
+            if (!SkillNameDic.ContainsKey(row.RECORD_ID))
             {
                 switch (apiLanguage)
                 {
                     case ApiLanguage.EnUs:
-                        SkillNameDic.Add(row.SKILL_ID,row.EN_NAME);
+                        SkillNameDic.Add(row.RECORD_ID,row.EN_NAME);
                     break;
                     case ApiLanguage.JaJp:
-                        SkillNameDic.Add(row.SKILL_ID,row.JP_NAME);
+                        SkillNameDic.Add(row.RECORD_ID,row.JP_NAME);
                     break;
                     case ApiLanguage.ZhCn:
-                        SkillNameDic.Add(row.SKILL_ID,row.CN_NAME);
+                        SkillNameDic.Add(row.RECORD_ID,row.CN_NAME);
                     break;
                     default:
-                        SkillNameDic.Add(row.SKILL_ID,row.EN_NAME);
+                        SkillNameDic.Add(row.RECORD_ID,row.EN_NAME);
                     break;
                 }
             }
         }
     }
     
-	public bool IsLoaded()
-	{
-		return isLoaded;
-	}
-
-	public List<Row> GetRowList()
-	{
-		return rowList;
-	}
-
     static void Load(TextAsset csv)
     {
         Debug.Log("尝试读取技能名文档");
@@ -70,10 +59,9 @@ public class SkillNameTable
             Row row = new Row
             {
                 RECORD_ID = grid[i][0],
-                SKILL_ID = grid[i][1],
-                EN_NAME = grid[i][2],
-                JP_NAME = grid[i][3],
-                CN_NAME = grid[i][4]
+                EN_NAME = grid[i][1],
+                JP_NAME = grid[i][2],
+                CN_NAME = grid[i][3]
             };
             rowList.Add(row);
     	}
@@ -109,14 +97,6 @@ public class SkillNameTable
 	public List<Row> FindAll_RECORD_ID(string find)
 	{
 		return rowList.FindAll(x => x.RECORD_ID == find);
-	}
-	public Row Find_SKILL_ID(string find)
-	{
-		return rowList.Find(x => x.SKILL_ID == find);
-	}
-	public List<Row> FindAll_SKILL_ID(string find)
-	{
-		return rowList.FindAll(x => x.SKILL_ID == find);
 	}
 	public Row Find_EN_NAME(string find)
 	{
