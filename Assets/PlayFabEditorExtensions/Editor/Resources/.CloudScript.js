@@ -738,6 +738,19 @@ handlers.RankClear = function (args, context) {
     return { arenapoint : targetPoint };
 }
 
+handlers.DeleteNoDisplayNameUser = function (args, context) {
+    var getRequest = {
+        PlayFabId: currentPlayerId
+    };
+    var accountInfo = server.GetUserAccountInfo(getRequest);
+    var displayName = accountInfo.UserInfo.TitleInfo.DisplayName;
+    if (displayName == "" || displayName == null) {
+        var deleted = server.DeletePlayer(getRequest);
+        return { deleted };
+    }
+    return {};
+}
+
 handlers.stoneDropTableInfo= function (args, context) {
     var TableID = args.TableID;
     var result = server.GetRandomResultTables(

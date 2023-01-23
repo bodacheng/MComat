@@ -85,6 +85,7 @@ public static class AddressablesLogic
         Units.LoadUnitConfigs();
         SkillConfigTable.LoadAllSkillConfigs();
         
+        await DownLoadMission("resource", progressUIRefresh);
         await DownLoadMission("pic", progressUIRefresh);
         await DownLoadMission("basic_anim", progressUIRefresh);
         await DownLoadMission("skill_anim", progressUIRefresh);
