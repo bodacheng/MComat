@@ -2,13 +2,223 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_back.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_back.jpg.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_bottom.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_bottom.jpg.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_front.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_front.jpg.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_left.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_left.jpg.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_right.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_right.jpg.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_top.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_top.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2D Icons Space Rank.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Achievement_Tokens/png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Achievement_Tokens/psd.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AnimControl/humanEmptyAni.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/App.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/App/Editor/Build/Configs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/App/Editor/Build/NotificationService.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AppCenter/Plugins/WSA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AppCenter/Plugins/iOS/Analytics.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AppCenter/Plugins/iOS/Core/AppCenter.framework.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AppCenter/Plugins/iOS/Crashes/AppCenterCrashes.framework.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AppCenter/Plugins/iOS/Distribute.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AppleAuth/Native/iOS.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AppleAuth/Native/macOS.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AppleAuthSample/Img.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BGMS.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Background Bokeh VFX/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Background Bokeh VFX/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Background Bokeh VFX/Scenes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Background Bokeh VFX/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Bare_Ninja_AnimSet.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Combat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/old.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/CLazyRunnerActionAnimPack.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Crypt Dungeon Environment.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Demon Wolf.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack).meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Forest Wolf.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/GUI Kit - Matt Metal.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/GabrielAguiarProductions.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Game_Portal/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Game_Portal/Prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Game_Portal/Scene.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Game_Portal/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Gems and gold.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Gems_Icons.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Animation.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Mesh.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Presets.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Scenes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Settings.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Shaders.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Inguz Media Studio/The Amazing Solar System/Sprites.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/JMO Assets.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/JMO Assets/MatCap Shaders/Textures/Additive.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/JMO Assets/MatCap Shaders/Textures/Toon.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Magic Circle Fx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Martial_Arts_Fight_Game.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/ModelResource.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/NotUsingAnyMore.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OldCharResources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VB.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Scenes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Color Schemes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Robot Kyle.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Sci-Fi Backgrounds.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Shift - Complete Sci-Fi UI/Animations.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Shift - Complete Sci-Fi UI/Audio.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Shift - Complete Sci-Fi UI/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Shift - Complete Sci-Fi UI/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Sprites.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/enviroments.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/enviroments/Top-Down Dungeons2/Demo/Demo mobile.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/enviroments/Top-Down Dungeons2/Imported Objects.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/enviroments/Top-Down Dungeons2/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/enviroments/Top-Down Dungeons2/Standard Assets.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/enviroments/Top-Down Dungeons2/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/enviroments/Top-Down SF/Demo/Demo1_baked.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/enviroments/Top-Down SF/Demo/Demo1_mobile.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/enviroments/Top-Down SF/Origin.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/enviroments/Top-Down SF/Particles.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/enviroments/Top-Down SF/Prefabs_Base.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/enviroments/Top-Down SF/Prefabs_Props.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/enviroments/Top-Down SF/Standard Assets.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/humansound.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Demigiant.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DynamicStarrySky/Demos/Cubemap.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DynamicStarrySky/Demos/Gradient.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DynamicStarrySky/Demos/Space/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DynamicStarrySky/Demos/Space/Models.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DynamicStarrySky/Demos/Space/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DynamicStarrySky/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DynamicStarrySky/Models.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DynamicStarrySky/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DynamicStarrySky/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Editor Default Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/Animations.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/EffectAtlas_Training.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/Prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/Scenes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/eff_burst_sample.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/eff_icewall_sample.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/eff_magiccircle_sample/Fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/eff_magiccircle_sample/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Aura.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/BeamUp.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Beams.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Buff.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Charge.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Crystal models from effect 17 prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Crystal models from effect 18 prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Crystal models with crystal shader prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/DamageOverTime.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Enchant.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/EnergyCharge.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Fire.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Flamethrower.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Flash.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/FormerBtnEffects.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Front attack.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Full Crystal effects prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Ice rain.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/JetFlame.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/LightJump.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Lightning.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Loot.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Magic circle.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Magic shield.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/MeshGlow.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Modular.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/MuzzleFlash.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Nova.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Pillar Blast.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Portal.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Projectiles(transform).meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Projectiles.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Regenerate.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Shield.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Shields.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Slash.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/SphereBlast.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Sprays.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Sword air attack.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Temporary explosion.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/UltimateNova.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Walls.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/WarpGate.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Zones.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/orbs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Sounds.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/model.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Animations.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Audios.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/BasicUnitComponent.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/BattleGround.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Effects.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/HurtObjects.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Skill_Icon.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/SlotEffects.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GLU - Animated Backgrounds.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Modern &amp; Clean GUI.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/NoSuchStudio/HighlightUI/Data.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/NoSuchStudio/NoSuchStudioCommon.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabSDK/Shared/Public/Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/IngameDebugConsole/Android.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/IngameDebugConsole/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/IngameDebugConsole/Sprites.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/UniTask/Runtime/External.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/crosstales/BadWordFilter/Resources/2D.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/crosstales/BadWordFilter/Resources/Data.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/crosstales/BadWordFilter/Resources/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prototype Hero - Pixel Art/Animations.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prototype Hero - Pixel Art/Sprites.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/mst_monster.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Account/mst_monster.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/BasicSprites.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/FightBasic.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/physics.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/ABLoadScene.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/MainScene.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/TITLE_SCENE/3D MUGEN铰介.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/fight_scene.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tank &amp; Healer Studio/Ultimate Joystick/Editor/Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tank &amp; Healer Studio/Ultimate Joystick/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tank &amp; Healer Studio/Ultimate Joystick/Sprites.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Documentation.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Sprite Assets.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Style Sheets.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/图.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/男主角/kuzi_Normal.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/男主角/kuzi_Normal.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/男主角/lian_Normal.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/男主角/lian_Normal.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/男主角/shenti_Normal.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/男主角/shenti_Normal.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/男主角/toufa_Normal.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/男主角/toufa_Normal.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/男主角/xiezi_Normal.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/男主角/xiezi_Normal.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/男主角/yifu_Normal.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/男主角/yifu_Normal.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,90 +237,90 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.scriptablebuildpipeline@1.19.6/Editor/Tasks/CreateBuiltInShadersBundle.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/inspectors/FrameRateDrawer.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Purchasing/IStoreController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Runtime/UniversalAdditionalCameraData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Layout/VerticalLayoutGroup.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Security/AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Runtime/External/LibTessDotNet/Tess.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Build/AddressablesDataBuilderInput.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Graphs/GraphData.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Nodes/Input/Matrix/Matrix3Node.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Diagnostics/Data/EventDataSet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/ArcadeBtnEffect.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/DocCodeExamples/TimelineAttributesExamples.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFab/Client/AccountInfo.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Purchasing/UnityPurchasing.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Drawing/MaterialGraphEditWindow.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Volume/Volume.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFab/Client/Time.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Tests/Editor/ReflectionUtils.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.postprocessing@3.2.2/PostProcessing/Runtime/PostProcessVolume.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Lighting/ProbeVolume/ProbeVolumeBakingProcessSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../p3-client/Assets/App/Scripts/Contents/Quest/QuestListItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/RankingPage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c884d993da6242ae98d95c11d4715907157400/26/fbbae327/ColorUtility.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/DocCodeExamples/TimelineAttributesExamples.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Graphs/GraphData.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Samples~/PrefabSpawner/PrefabSpawnerSample.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Runtime/Events/MarkerList.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Tests/Editor/Collaborate/Presenters/TestChangesView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/Views/IncomingChanges/Gluon/IncomingChangesTab.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_InputField.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ads@3.7.5/Runtime/Monetization/MonetizationPlatform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Graphic/RawImageTest.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Build/AnalyzeRules/AnalyzeRule.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ads@3.7.5/Editor/Parser/SkAdNetworkJsonParser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Layout/LayoutGroup.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Interfaces/IMayRequireDepthTexture.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Settings/AddressableAssetSettings.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.31/UnityEngine.TestRunner/Assertions/LogScope/ILogScope.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Runtime/Audio/AudioPlayableAsset.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Security/AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/ResourceManager/AsyncOperations/AsyncOperationHandle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/UI/Tree/DrawTreeViewItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Drawing/Manipulators/ResizeBorderFrame.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/RenderGraph/RenderGraphResourcePool.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.analytics@4.0.1/Runtime/Runtime/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/ResourceManager/ResourceManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/ArenaBtnEffect.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Drawing/MaterialGraphEditWindow.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/Views/PendingChanges/PendingChangesTab.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Samples~/PrefabSpawner/PrefabSpawnerSample.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4379fcb5ffcd422abdabe963856ef06326000/3a/2299bfc9/DOTween.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFab/Client/LinkAccount.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ads@3.7.5/Editor/Parser/SkAdNetworkJsonParser.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/UI/Tree/DrawTreeViewItem.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Editor/ShaderGraph/UniversalBlockFields.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/Addressables.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Runtime/Events/MarkerList.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/Views/PendingChanges/PendingChangesTab.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/a5/608acf8c/DateTimeKind.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Settings/AddressableAssetProfileSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c884d993da6242ae98d95c11d4715907157400/09/77e7f949/Bounds.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Volume/Volume.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Settings/AddressableAssetProfileSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.xr.legacyinputhelpers@2.1.9/Runtime/ArmModels/TransitionArmModel.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ads@3.7.5/Runtime/Monetization/MonetizationPlatform.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/PlayFab/CloudScripts/VirtualCurrency.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Tests/Editor/Collaborate/Presenters/TestChangesView.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Utilities/CameraCaptureBridge.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Build/AddressablesDataBuilderInput.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Nodes/Input/Matrix/Matrix3Node.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Debugging/Prefabs/Scripts/DebugUIHandlerIndirectToggle.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/DropTablePage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.mathematics@1.2.6/Unity.Mathematics/Noise/cellular2D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PlayFab/CloudScripts/VirtualCurrency.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/inspectors/FrameRateDrawer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Lighting/ProbeVolume/ProbeVolumeBakingProcessSettings.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/DropTablePage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Utilities/CameraCaptureBridge.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_SubMeshUI_Editor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Runtime/Audio/AudioPlayableAsset.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Runtime/External/LibTessDotNet/Tess.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Nodes/Utility/Logic/IsFrontFaceNode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Canvas/CanvasSizeCorrectInAwakeAndStart.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/ResourceManager/ResourceManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.scriptablebuildpipeline@1.19.6/Editor/Tasks/CalculateAssetDependencyData.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Settings/AddressableAssetSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4379fcb5ffcd422abdabe963856ef06326000/1d/7d9a4d3f/TweenerCore`3.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/UIElements/PanelRaycaster.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/ResultTableNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/RankingLayer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Runtime/External/LibTessDotNet/Geom.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Nodes/Utility/Logic/IsFrontFaceNode.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.31/UnityEngine.TestRunner/Utils/IPostBuildCleanup.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Build/AnalyzeRules/AnalyzeRule.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.31/UnityEngine.TestRunner/Assertions/LogScope/ILogScope.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Debugging/Prefabs/Scripts/DebugUIHandlerIndirectToggle.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c884d993da6242ae98d95c11d4715907157400/5a/04778d4b/Sprite.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c884d993da6242ae98d95c11d4715907157400/22/52ee20c7/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e0dda07d79934199bc7ad502dc3969bd29200/b6/3fdc9282/GUIContent.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.6.5/Runtime/Intrinsics/x86/Csr.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/ResourceManager/AsyncOperations/AsyncOperationHandle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/TimelineEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/GUI/AddressablesGUIUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Purchasing/IStoreController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/Actions/TrackActions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Editor/ShaderGraph/UniversalBlockFields.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.scriptablebuildpipeline@1.19.6/Editor/Tasks/CreateBuiltInShadersBundle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.4.0/Editor/Core/ProjectStateManagement/IServiceFlagRequest.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e0dda07d79934199bc7ad502dc3969bd29200/d5/03e14685/GUILayout.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.31/UnityEngine.TestRunner/Utils/IPostBuildCleanup.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Tests/Editor/ReflectionUtils.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.analytics@4.0.1/Runtime/Runtime/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/Views/IncomingChanges/Gluon/IncomingChangesTab.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Editor/Lighting/UniversalRenderPipelineLightUI.Drawers.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/RenderGraph/RenderGraphResourcePool.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/Addressables.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Gacha/DropTableInfoDetail.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/TheNineSlot/Validation/ConfirmBtnColorSwapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/42/System.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.scriptablebuildpipeline@1.19.6/Editor/Tasks/CalculateAssetDependencyData.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/GUI/AddressablesGUIUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Runtime/External/LibTessDotNet/Geom.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/SpriteDrawUtility.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/Actions/TrackActions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.6.5/Runtime/Intrinsics/x86/Csr.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFabSDK/Shared/Public/PlayFabEvents.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Diagnostics/Data/EventDataSet.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.core@1.4.0/Editor/Core/ProjectStateManagement/IServiceFlagRequest.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/TimelineEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Purchasing/UnityPurchasing.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Interfaces/IMayRequireDepthTexture.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Editor/Lighting/UniversalRenderPipelineLightUI.Drawers.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2IS7AXmxi1SEqxDoRshceHtRUYD" />
   <component name="ProjectViewState">
