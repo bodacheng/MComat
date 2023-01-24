@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_back.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_back.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_bottom.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_bottom.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_front.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_front.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_left.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_left.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_right.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_right.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_top.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/materials/Skyboxes/3Skyboxes/Skybox_BluePinkNebular_Textures/BluePinkNebular_top.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/mst_monster.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Account/mst_monster.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,8 +194,6 @@
       <workItem from="1674385860605" duration="4627000" />
       <workItem from="1674435894851" duration="533000" />
       <workItem from="1674442817318" duration="507000" />
-      <workItem from="1674535707349" duration="666000" />
-      <workItem from="1674540788935" duration="354000" />
     </task>
     <servers />
   </component>
