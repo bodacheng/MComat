@@ -64,7 +64,7 @@ public static class AddressablesLogic
         wholeSize += await DownLoadSize("skill_anim", exception);
         wholeSize += await DownLoadSize("hurt_anim", exception);
         wholeSize += await DownLoadSize("knock_anim", exception);
-        wholeSize += await DownLoadSize("unit", exception);
+        //wholeSize += await DownLoadSize("unit", exception);
         wholeSize += await DownLoadSize("weapon", exception);
         wholeSize += await DownLoadSize("effect", exception);
         wholeSize += await DownLoadSize("quest", exception);
@@ -91,7 +91,7 @@ public static class AddressablesLogic
         await DownLoadMission("skill_anim", progressUIRefresh);
         await DownLoadMission("hurt_anim", progressUIRefresh);
         await DownLoadMission("knock_anim", progressUIRefresh);
-        await DownLoadMission("unit", progressUIRefresh);
+        //await DownLoadMission("unit", progressUIRefresh);
         await DownLoadMission("weapon", progressUIRefresh);
         await DownLoadMission("effect", progressUIRefresh);
         await DownLoadMission("quest", progressUIRefresh);
