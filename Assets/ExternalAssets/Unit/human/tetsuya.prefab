@@ -28724,14 +28724,22 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3669803289984295455}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 9f9e0395ac9d94c6b84b324cc16b8816, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 161f2be8365db43b0b1c2b807173e8e7, type: 3}
   m_Controller: {fileID: 9100000, guid: e1546378b5d43478da7fecd5fc7007f9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'Face_Bone17'\n\tTransform 'Face_Bone18'\n\tTransform
+    'Face_Bone10'\n\tTransform 'Face_Bone12'\n\tTransform 'Face_Bone17'\n\tTransform
+    'Face_Bone18'\n\tTransform 'Face_Bone10'\n\tTransform 'Face_Bone12'\n\tTransform
+    'Bip001 Spine1'\n\tTransform 'Bip001 Head'\n\tand more ...\n\tFrom animation
+    clip 'daiji'\n\tFrom animation clip 'shounai'\n\tFrom animation clip 'daxiao2'\n\tFrom
+    animation clip 'jingya'\n\tFrom animation clip 'fennu'\n\tFrom animation clip
+    'daxiao2'\n\tFrom animation clip 'zixin'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
