@@ -7,8 +7,8 @@ public class SettingLayer : UILayer
     [SerializeField] RectTransform selectedFrame;
     
     #region Btns
-    [SerializeField] Button volumeBtn;
     [SerializeField] Button accountBtn;
+    [SerializeField] Button volumeBtn;
     [SerializeField] Button deviceBtn;
     [SerializeField] Button supportBtn;
     [SerializeField] Button nickNameBtn;
@@ -41,6 +41,11 @@ public class SettingLayer : UILayer
     [SerializeField] Button linkDeviceBtn;
     [SerializeField] Button unLinkDeviceBtn;
     [SerializeField] Text linkInstruction;
+    #endregion
+    
+    #region Support
+    [SerializeField] Button privacyBtn;
+    [SerializeField] Button contactBtn;
     #endregion
     
     #region nickName
@@ -180,6 +185,17 @@ public class SettingLayer : UILayer
                 //PlayFabReadClient.UnLinkAccountPopup(RefreshLinkDeviceBtn);
             }
         );
+        
+        privacyBtn.onClick.AddListener(() =>
+        {
+            Application.OpenURL("https://hotaru-4.jimdosite.com/");
+        });
+        
+        contactBtn.onClick.AddListener(() =>
+        {
+            Application.OpenURL("https://hotaru-4.jimdosite.com/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/");
+        });
+        accountBtn.onClick.Invoke();
     }
 
     public void RefreshLinkDeviceBtn()

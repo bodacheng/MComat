@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SettingLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SettingLayer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SettingLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SettingLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Singleton/UnitIconDic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/UnitIconDic.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +191,7 @@
       <workItem from="1674385860605" duration="4627000" />
       <workItem from="1674435894851" duration="533000" />
       <workItem from="1674442817318" duration="507000" />
-      <workItem from="1674644326830" duration="1938000" />
+      <workItem from="1674644326830" duration="4208000" />
     </task>
     <servers />
   </component>
