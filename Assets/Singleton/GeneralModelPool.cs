@@ -19,7 +19,8 @@ namespace Singleton
             GameObject tempModel;
             if (unitConfig.REAL_NAME == "tetsuya")
             {
-                tempModel = Resources.Load("unit/human/tetsuya") as GameObject;
+                var prefab = Resources.Load("unit/human/tetsuya");
+                tempModel = GameObject.Instantiate(prefab) as GameObject;
             }
             else
             {
