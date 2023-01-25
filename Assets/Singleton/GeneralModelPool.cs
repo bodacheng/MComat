@@ -15,9 +15,17 @@ namespace Singleton
                 Debug.Log("资源号码错误");
                 return null;
             }
-            
-            var tempModel = await AddressablesLogic.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME);
-            tempModel.transform.SetParent(parent);
+
+            GameObject tempModel;
+            if (unitConfig.REAL_NAME == "tetsuya")
+            {
+                tempModel = Resources.Load("unit/human/tetsuya") as GameObject;
+            }
+            else
+            {
+                tempModel = await AddressablesLogic.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME);
+                tempModel.transform.SetParent(parent);
+            }
             var odl = tempModel.GetComponent<OutsideDataLink>();
             if (odl == null)
             {

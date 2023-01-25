@@ -18648,7 +18648,7 @@ GameObject:
   - component: {fileID: 2181148972522528234}
   - component: {fileID: 7234616545516129551}
   m_Layer: 0
-  m_Name: tetsuya_full
+  m_Name: tetsuya
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
