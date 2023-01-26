@@ -21,6 +21,7 @@ namespace DummyLayerSystem
             {"ArenaFightOver", "DummyLayerSystem/ArenaFightOver"},
             {"CommonFightResult", "DummyLayerSystem/CommonFightResult"},
             {"TitleScreenLayer", "DummyLayerSystem/TitleScreenLayer"},
+            {"TitleBgLayer", "DummyLayerSystem/TitleBgLayer"},
             {"FightResultAnimLayer", "DummyLayerSystem/FightResultAnimLayer"},
             {"CountDownLayer", "DummyLayerSystem/CountDownLayer"},
             {"FightingStepLayer", "DummyLayerSystem/FightingStepLayer"},

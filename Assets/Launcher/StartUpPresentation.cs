@@ -28,7 +28,8 @@ public class StartUpPresentation : MonoBehaviour
                         SceneManager.LoadScene(0);
                     }), 
                 " 下载错误。请检查网络 ");
-            }
+            },
+            Starter.DownLoadLabels
         );
         
         if (bytes > 0)
@@ -60,7 +61,8 @@ public class StartUpPresentation : MonoBehaviour
                             ProgressLayer.LoadingPercent(x, f, false);
                         else
                             ProgressLayer.LoadingPercent(x, f, true);
-                    }
+                    },
+                    Starter.DownLoadLabels
                 );
             },
             () =>
@@ -81,8 +83,10 @@ public class StartUpPresentation : MonoBehaviour
         }
         else
         {
-            var TitleScreenLayer = UILayerLoader.Load<TitleScreenLayer>();
-            TitleScreenLayer.Initialise();
+            var titleBgLayer= UILayerLoader.Load<TitleBgLayer>();
+            titleBgLayer.Setup();
+            var titleScreenLayer = UILayerLoader.Load<TitleScreenLayer>();
+            titleScreenLayer.Initialise();
         }
     }
 }

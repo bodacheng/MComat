@@ -1,4 +1,5 @@
-﻿using Unity.Collections;
+﻿using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using UnityEditor;
 
@@ -25,7 +26,8 @@ public class Starter : MonoBehaviour
     [SerializeField] FightGlobalSetting fightGlobalSetting;
     [SerializeField] CommonSetting commonSetting;
     [SerializeField] DefaultIconSetting defaultIconSetting;
-
+    [SerializeField] List<string> downLoadLabels;
+    public List<string> DownLoadLabels => downLoadLabels;
     
     public void Initialise()
     {

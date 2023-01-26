@@ -8,7 +8,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 public static class AddressablesLogic
 {
     private static readonly IDictionary<string, long> Sizes = new Dictionary<string, long>();
-    
+
     public static async UniTask Essentials()
     {
         await HurtObjectManager.CheckExistedKey();
@@ -54,29 +54,26 @@ public static class AddressablesLogic
         }
     }
     
-    public static async UniTask<long> GetWholeDownLoadSize(Action exception)
+    public static async UniTask<long> GetWholeDownLoadSize(Action exception, List<string> downLoadLabel)
     {
         //Caching.ClearCache();
         
         long wholeSize = 0;
-        
-        wholeSize += await DownLoadSize("basic_anim", exception);
-        wholeSize += await DownLoadSize("skill_anim", exception);
-        wholeSize += await DownLoadSize("hurt_anim", exception);
-        wholeSize += await DownLoadSize("knock_anim", exception);
-        wholeSize += await DownLoadSize("unit", exception);
-        wholeSize += await DownLoadSize("weapon", exception);
-        wholeSize += await DownLoadSize("effect", exception);
-        wholeSize += await DownLoadSize("quest", exception);
-        wholeSize += await DownLoadSize("skill_icon", exception);
-        wholeSize += await DownLoadSize("unit_icon", exception);
-        wholeSize += await DownLoadSize("battle_ground", exception);
-        wholeSize += await DownLoadSize("btn_effect", exception);
+        var downLoadSizeCal = new List<UniTask<long>>();
+        foreach (var label in downLoadLabel)
+        {
+            downLoadSizeCal.Add(DownLoadSize(label, exception));
+        }
+        await UniTask.WhenAll(downLoadSizeCal);
 
+        foreach (var kv in Sizes)
+        {
+            wholeSize += kv.Value;
+        }
         return wholeSize;
     }
     
-    public static async UniTask ResourcePrepareProcess(Action complete, Action<string, float> progressUIRefresh)
+    public static async UniTask ResourcePrepareProcess(Action complete, Action<string, float> progressUIRefresh, List<string> downLoadLabel)
     {
         // Clear all cached AssetBundles
         // WARNING: This will cause all asset bundles to be re-downloaded at startup every time and should not be used in a production game
@@ -85,20 +82,12 @@ public static class AddressablesLogic
         Units.LoadUnitConfigs();
         SkillConfigTable.LoadAllSkillConfigs();
         
-        await DownLoadMission("resource", progressUIRefresh);
-        await DownLoadMission("pic", progressUIRefresh);
-        await DownLoadMission("basic_anim", progressUIRefresh);
-        await DownLoadMission("skill_anim", progressUIRefresh);
-        await DownLoadMission("hurt_anim", progressUIRefresh);
-        await DownLoadMission("knock_anim", progressUIRefresh);
-        await DownLoadMission("unit", progressUIRefresh);
-        await DownLoadMission("weapon", progressUIRefresh);
-        await DownLoadMission("effect", progressUIRefresh);
-        await DownLoadMission("quest", progressUIRefresh);
-        await DownLoadMission("skill_icon", progressUIRefresh);
-        await DownLoadMission("unit_icon", progressUIRefresh);
-        await DownLoadMission("battle_ground", progressUIRefresh);
-        await DownLoadMission("btn_effect", progressUIRefresh);
+        var downLoadTasks = new List<UniTask>();
+        foreach (var label in downLoadLabel)
+        {
+            downLoadTasks.Add(DownLoadMission(label, progressUIRefresh));
+        }
+        await UniTask.WhenAll(downLoadTasks);
         await HighLightLayer.LoadBg();
         
         complete.Invoke();
