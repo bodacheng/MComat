@@ -60,7 +60,8 @@ MonoBehaviour:
   - m_GUID: 35b081799385246ab801019250e99a80
     m_Address: frontLayerUnitBtn
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - btn_effect
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
