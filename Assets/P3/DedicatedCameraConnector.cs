@@ -50,7 +50,6 @@ namespace ModelView
             
             wid = _rect.rect.width;
             hei = _rect.rect.height;
-            
             camera.transform.SetParent(camerasHolder);
             PreScene.target.CameraStackToPostProcess(camera);
             

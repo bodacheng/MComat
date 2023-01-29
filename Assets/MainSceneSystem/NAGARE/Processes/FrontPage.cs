@@ -39,7 +39,21 @@ public class FrontPage : MSceneProcess
     
     FrontLayer _frontLayer;
     bool _askedIfLinkDevice;
+
     void EnterProcess()
+    {
+        if (PlayerAccountInfo.Me.tutorialProgress == "Started")
+        {
+            var titleBgLayer = UILayerLoader.Load<TitleBgLayer>();
+            titleBgLayer.Setup(true, _EnterProcess);
+        }
+        else
+        {
+            _EnterProcess();
+        }
+    }
+    
+    void _EnterProcess()
     {
         TutorialRunner.Main.TutorialCheck();
         
