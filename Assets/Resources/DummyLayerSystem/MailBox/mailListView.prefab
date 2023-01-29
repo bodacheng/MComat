@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 3524880222236326317}
   - component: {fileID: 2848894796176393742}
   m_Layer: 5
-  m_Name: Read
+  m_Name: unRead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -381,7 +381,7 @@ MonoBehaviour:
   mailIcon: {fileID: 5322332611265516127}
   title: {fileID: 6298908843636613369}
   expiration: {fileID: 7360346292272228738}
-  readFlag: {fileID: 896480456557671947}
+  unReadFlag: {fileID: 896480456557671947}
   claimBtn: {fileID: 5401309859999481574}
   detailBtn: {fileID: 6298908842485499584}
   claimed: 0

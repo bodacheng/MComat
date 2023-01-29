@@ -4,12 +4,23 @@
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/MailBox.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/MailBox.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/MailDetailView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/MailDetailView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/TitleBgLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/TitleBgLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/FrontPage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/P3/DedicatedCameraConnector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TitleBgLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TitleBgLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TitleScreenLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TitleScreenLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UpperInfoBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/UpperInfoBar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mail.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mail/MailItemInstance.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mail/MailItemInstance.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mail/MailListView.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mail/MailListView.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mail/mailModel.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mail/mailModel.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/Client/Mails.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/Client/Mails.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/MailBox.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/MailBox.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/MailBox/mailListView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/MailBox/mailListView.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/MailDetailView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/MailDetailView.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UpperInfoBar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UpperInfoBar.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -198,7 +209,7 @@
       <workItem from="1674442817318" duration="507000" />
       <workItem from="1674644326830" duration="4514000" />
       <workItem from="1674954474037" duration="6924000" />
-      <workItem from="1674967814456" duration="3179000" />
+      <workItem from="1674967814456" duration="8573000" />
     </task>
     <servers />
   </component>

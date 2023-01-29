@@ -7,6 +7,7 @@ public class UpperInfoBar : UILayer
 {
     [SerializeField] Button settingBtn;
     [SerializeField] Button mailBtn;
+    [SerializeField] GameObject unReadFlag;
     [SerializeField] Text titleDisplayName;
     [SerializeField] Text accountDiamondCoin;
     [SerializeField] Button diamondPlus;
@@ -31,7 +32,8 @@ public class UpperInfoBar : UILayer
         {
             accountIntelliCoin.text = x.ToString();
         }).AddTo(this.gameObject);
-
+        
+        unReadFlag.gameObject.SetActive(PlayFabReadClient.GetMailsData(true).Count > 0);
         if (openSetting != null)
         {
             settingBtn.onClick.AddListener(openSetting.Invoke);

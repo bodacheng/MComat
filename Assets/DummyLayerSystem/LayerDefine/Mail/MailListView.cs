@@ -21,20 +21,18 @@ public class MailListView : MonoBehaviour
     [SerializeField] Image mailIcon;
     [SerializeField] Text title;
     [SerializeField] Text expiration;
-    [SerializeField] GameObject readFlag;
+    [SerializeField] GameObject unReadFlag;
     [SerializeField] Button claimBtn;
     [SerializeField] Button detailBtn;
 
     string _itemInstanceId;
-
-    public bool claimed = false;
-    
     private Action<Image, string> _iconRefresh;
+    private IDisposable disposeCountDown;
     public void Setup(Action<Image, string> iconRefresh)
     {
         this._iconRefresh = iconRefresh;
     }
-
+    
     public void PassMailInfo(MailItemInstance mailData, Action sort)
     {
         _itemInstanceId = mailData.ItemInstanceId;
@@ -44,12 +42,18 @@ public class MailListView : MonoBehaviour
 
         if (mailData.Expiration.HasValue)
         {
-            expiration.text = mailData.Expiration.Value.ToString("yyyy-MM-dd");
+            disposeCountDown = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe((_) =>
+            {
+                var difference = mailData.Expiration.Value - DateTime.Now;
+                difference = difference.Subtract(TimeSpan.FromSeconds(1));
+                expiration.text = difference.ToString(@"dd\:hh\:mm\:ss");
+            }).AddTo(gameObject);
         }
         else
         {
             expiration.gameObject.SetActive(false);
         }
+        
         mailData.ReadObservable.Subscribe(AsRead).AddTo(this.gameObject);
         
         claimBtn.onClick.RemoveAllListeners();
@@ -75,10 +79,10 @@ public class MailListView : MonoBehaviour
     [SerializeField] private Color readc = new Color(0.4f,0.4f,1, 0.6f); 
     void AsRead(bool read)
     {
-        claimed = read;
+        claimBtn.gameObject.SetActive(!read);
         expiration.gameObject.SetActive(!read);
         claimBtn.gameObject.SetActive(!read);
-        readFlag.SetActive(read);
+        unReadFlag.SetActive(!read);
         bg.color = read ? readc : unreadc;
     }
     

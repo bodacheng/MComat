@@ -13,9 +13,11 @@ public partial class PlayFabReadClient
     static readonly List<MailItemInstance> MyMailList = new ();
     static readonly Dictionary<string, CatalogItem> CatalogItems = new ();
     
-    public static List<MailItemInstance> GetMailsData()
+    public static List<MailItemInstance> GetMailsData(bool onlyUnRead = false)
     {
-        return MyMailList;
+        if (!onlyUnRead)
+            return MyMailList;
+        return MyMailList.FindAll(x=> x.NotRead());
     }
 
     public static CatalogItem GetCatalogItemByDisplayName(string displayName)
@@ -51,7 +53,7 @@ public partial class PlayFabReadClient
     /// <summary>
     /// 点击某邮件后打开邮件会使用此函数
     /// </summary>
-    public static ItemInstance Get(string itemInstanceId)
+    public static MailItemInstance Get(string itemInstanceId)
     {
         for (var i = 0; i < MyMailList.Count; i++)
         {

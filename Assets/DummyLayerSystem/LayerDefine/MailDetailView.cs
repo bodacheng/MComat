@@ -1,15 +1,16 @@
-using UnityEngine;
 using UnityEngine.UI;
-using PlayFab.ClientModels;
 using System;
+using UniRx;
+using UnityEngine;
 
 public class MailDetailView : UILayer
 {
-    public Image mailIcon;
-    public Text title;
-    public Text message;
-    public Text expiration;
-    public Button claimPresentBtn;
+    [SerializeField] Image mailIcon;
+    [SerializeField] Text title;
+    [SerializeField] Text message;
+    [SerializeField] RectTransform expirationT;
+    [SerializeField] Text expiration;
+    [SerializeField] Button claimPresentBtn;
     
     private Action<Image, string> _iconRefresh;
     public void Setup(Action<Image, string> iconRefresh)
@@ -17,28 +18,45 @@ public class MailDetailView : UILayer
         this._iconRefresh = iconRefresh;
     }
     
-    public void Read(ItemInstance model)
+    private IDisposable disposeCountDown;
+    public void Read(MailItemInstance model)
     {
         title.text = model.DisplayName;
         var catalogItem = PlayFabReadClient.GetCatalogItemByDisplayName(model.DisplayName);
         message.text = catalogItem != null ? catalogItem.Description : String.Empty;
-
+        
         if (model.ItemId == "normalLoginBonus")
         {
             message.text = message.text.Replace("$streak", PlayerAccountInfo.Me.loginStreak.ToString());
         }
         
         if (model.Expiration.HasValue)
-            expiration.text = model.Expiration.Value.ToString("yyyy-MM-dd");
+        {
+            disposeCountDown = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe((_) =>
+            {
+                var difference = model.Expiration.Value - DateTime.Now;
+                difference = difference.Subtract(TimeSpan.FromSeconds(1));
+                expiration.text = difference.ToString(@"dd\:hh\:mm\:ss");
+            }).AddTo(gameObject);
+        }
         else
         {
-            expiration.text = "无时间限制？";
+            expirationT.gameObject.SetActive(false);
         }
-        claimPresentBtn.onClick.RemoveAllListeners();
-        claimPresentBtn.onClick.AddListener(
-            () => PlayFabReadClient.ClaimPresent(model.ItemId, 
-                PlayFabReadClient.SaveReadMailAsJson)
-        );
+        
+        if (model.NotRead())
+        {
+            claimPresentBtn.gameObject.SetActive(true);
+            claimPresentBtn.onClick.RemoveAllListeners();
+            claimPresentBtn.onClick.AddListener(
+                () => PlayFabReadClient.ClaimPresent(model.ItemId, 
+                    PlayFabReadClient.SaveReadMailAsJson)
+            );
+        }
+        else
+        {
+            claimPresentBtn.gameObject.SetActive(false);
+        }
         _iconRefresh(mailIcon, model.ItemId);
     }
 }

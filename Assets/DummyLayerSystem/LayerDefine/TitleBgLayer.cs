@@ -53,6 +53,7 @@ public class TitleBgLayer : UILayer
                     ChangeSubtitle(indexOfSubtitleCodes);
                     if (milliSecondCounter >= 1.2)
                     {
+                        languageConverter.gameObject.SetActive(false);
                         touchScreenBtn.gameObject.SetActive(true);
                         _disposable.Dispose();
                     }

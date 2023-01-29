@@ -9,7 +9,7 @@ public class MailBox : UILayer
     [SerializeField] Button readAll;
     [SerializeField] Button deleteAllRead;
 
-    private readonly List<MailListView> _currentMailListViews = new();
+    readonly List<MailListView> _currentMailListViews = new();
     
     public void Setup()
     {
@@ -57,16 +57,14 @@ public class MailBox : UILayer
         }
         foreach (var t in _currentMailListViews)
         {
-            if (!t.claimed)
-                t.transform.SetParent(mailBoxT.transform);
+            t.transform.SetParent(mailBoxT.transform);
             t.transform.localPosition = Vector3.zero;
             t.transform.localScale = Vector3.one;
             t.gameObject.SetActive(true);
         }
         foreach (var t in _currentMailListViews)
         {
-            if (t.claimed)
-                t.transform.SetParent(mailBoxT.transform);
+            t.transform.SetParent(mailBoxT.transform);
             t.transform.localPosition = Vector3.zero;
             t.transform.localScale = Vector3.one;
             t.gameObject.SetActive(true);
@@ -74,7 +72,7 @@ public class MailBox : UILayer
         mailBoxT.GetComponent<RectTransform>().sizeDelta = new Vector2(mailBoxT.GetComponent<RectTransform>().sizeDelta.x, rectHeight);
     }
     
-    public static void LoadPic(Image mailIcon , string itemId)
+    public static void LoadPic(Image mailIcon, string itemId)
     {
         if (itemId.Contains("DM"))
         {
@@ -83,6 +81,10 @@ public class MailBox : UILayer
         else if (itemId.Contains("GD"))
         {
             mailIcon.sprite = DefaultIconSetting._coinIcon;
+        }
+        else
+        {
+            mailIcon.gameObject.SetActive(false);
         }
     }
 }
