@@ -91,7 +91,7 @@ public partial class PlayFabReadClient
                     DeviceId = CustomId,
                     CreateAccount = true
                 },
-                (x)=>success.Invoke(x, LoginType.normal),
+                (x)=> success.Invoke(x, LoginType.normal),
                 fail
             );
 #endif
