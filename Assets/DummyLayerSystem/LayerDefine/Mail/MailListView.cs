@@ -24,10 +24,14 @@ public class MailListView : MonoBehaviour
     [SerializeField] GameObject unReadFlag;
     [SerializeField] Button claimBtn;
     [SerializeField] Button detailBtn;
+    
+    [SerializeField] Color unreadc = new Color(0.4f,0.4f,1, 1);
+    [SerializeField] Color readc = new Color(0.4f,0.4f,1, 0.6f); 
 
     string _itemInstanceId;
     private Action<Image, string> _iconRefresh;
     private IDisposable disposeCountDown;
+    
     public void Setup(Action<Image, string> iconRefresh)
     {
         this._iconRefresh = iconRefresh;
@@ -37,9 +41,7 @@ public class MailListView : MonoBehaviour
     {
         _itemInstanceId = mailData.ItemInstanceId;
         title.text = mailData.DisplayName;
-        
         _iconRefresh(mailIcon, mailData.ItemId);
-
         if (mailData.Expiration.HasValue)
         {
             disposeCountDown = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe((_) =>
@@ -75,8 +77,6 @@ public class MailListView : MonoBehaviour
         mailData.Set();
     }
     
-    [SerializeField] private Color unreadc = new Color(0.4f,0.4f,1, 1);
-    [SerializeField] private Color readc = new Color(0.4f,0.4f,1, 0.6f); 
     void AsRead(bool read)
     {
         claimBtn.gameObject.SetActive(!read);
@@ -90,7 +90,4 @@ public class MailListView : MonoBehaviour
     {
         PreScene.target.trySwitchToStep(MainSceneStep.MailDetail, _itemInstanceId, true);
     }
-    
-    // 根据报酬不同显示不同的图片
-    // 已经获取的话直接就显示个read标签
 }

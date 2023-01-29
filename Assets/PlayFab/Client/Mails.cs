@@ -17,7 +17,7 @@ public partial class PlayFabReadClient
     {
         if (!onlyUnRead)
             return MyMailList;
-        return MyMailList.FindAll(x=> x.NotRead());
+        return MyMailList.FindAll(x=> x.NotClaimed());
     }
 
     public static CatalogItem GetCatalogItemByDisplayName(string displayName)

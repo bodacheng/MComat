@@ -13,18 +13,22 @@ public partial class CloudScript
                 FunctionName = "claimAllPresentMails",
                 GeneratePlayStreamEvent = true
             },
-            (ExecuteCloudScriptResult result) => {
+            (result) => {
                 PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                object gd, dm, unlockedidlist;
-                jsonResult.TryGetValue("diamond", out dm);
-                jsonResult.TryGetValue("gold", out gd);
-                jsonResult.TryGetValue("UnlockedItemInstanceIds", out unlockedidlist);
-                Debug.Log(" 获得黄金"+ gd.ToString()+" 宝石"+ dm.ToString());
-                List<string> unlockedids =JsonConvert.DeserializeObject<List<string>>(unlockedidlist.ToString());
-
+                jsonResult.TryGetValue("diamond", out var dm);
+                jsonResult.TryGetValue("gold", out var gd);
+                jsonResult.TryGetValue("UnlockedItemInstanceIds", out var unLockedIdList);
+                
+                int.TryParse(dm.ToString(), out int dmInt);
+                int.TryParse(gd.ToString(), out int gdInt);
+                
+                Currencies.CoinCount.Value += gdInt;
+                Currencies.DiamondCount.Value += dmInt;
+                
+                var claimedIds =JsonConvert.DeserializeObject<List<string>>(unLockedIdList.ToString());
                 foreach (var data in _myMailList)
                 {
-                    if (unlockedids.Contains(data.ItemInstanceId))
+                    if (claimedIds.Contains(data.ItemInstanceId))
                     {
                         data.RemainingUses = 0;
                         data.Set();

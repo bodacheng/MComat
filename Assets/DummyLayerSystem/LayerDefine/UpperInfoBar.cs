@@ -2,6 +2,7 @@
 using UnityEngine;
 using System;
 using UniRx;
+using DG.Tweening;
 
 public class UpperInfoBar : UILayer
 {
@@ -12,7 +13,7 @@ public class UpperInfoBar : UILayer
     [SerializeField] Text accountDiamondCoin;
     [SerializeField] Button diamondPlus;
     [SerializeField] Text accountIntelliCoin;
-
+    [SerializeField] float currencyTextChangeDuration = 2f;
     public void Interactable(bool on)
     {
         settingBtn.interactable = on;
@@ -20,17 +21,39 @@ public class UpperInfoBar : UILayer
         diamondPlus.interactable = on;
     }
     
-    public void Setup(string _titleDisplayName, Action openSetting, Action openMail, Action openDMShop)
+    public void Setup(string titleDisplayName, Action openSetting, Action openMail, Action openDmShop)
     {
-        titleDisplayName.text = _titleDisplayName;
+        this.titleDisplayName.text = titleDisplayName;
+        accountDiamondCoin.text = Currencies.DiamondCount.Value.ToString();
         Currencies.DiamondCount.Subscribe(x =>
         {
-            accountDiamondCoin.text = x.ToString();
+            int.TryParse(accountDiamondCoin.text, out int currentValue);
+            int targetValue = currentValue;
+            DOTween.To(
+                () => targetValue,
+                setterValue => targetValue = setterValue,
+                x,
+                currencyTextChangeDuration
+            ).OnUpdate(() =>
+            {
+                accountDiamondCoin.text = targetValue.ToString();
+            });
         }).AddTo(this.gameObject);
         
+        accountIntelliCoin.text = Currencies.CoinCount.Value.ToString();
         Currencies.CoinCount.Subscribe(x =>
         {
-            accountIntelliCoin.text = x.ToString();
+            int.TryParse(accountIntelliCoin.text, out int currentValue);
+            int targetValue = currentValue;
+            DOTween.To(
+                () => targetValue,
+                setterValue => targetValue = setterValue,
+                x,
+                currencyTextChangeDuration
+            ).OnUpdate(() =>
+            {
+                accountIntelliCoin.text = targetValue.ToString();
+            });
         }).AddTo(this.gameObject);
         
         unReadFlag.gameObject.SetActive(PlayFabReadClient.GetMailsData(true).Count > 0);
@@ -54,9 +77,9 @@ public class UpperInfoBar : UILayer
             mailBtn.gameObject.SetActive(false);
         }
 
-        if (openDMShop != null)
+        if (openDmShop != null)
         {
-            diamondPlus.onClick.AddListener(openDMShop.Invoke);
+            diamondPlus.onClick.AddListener(openDmShop.Invoke);
             diamondPlus.gameObject.SetActive(true);
         }
         else

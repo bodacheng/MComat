@@ -2,11 +2,10 @@
 using mainMenu;
 
 // 迎合PlayFab的机制我们是把邮件作为“item”去看待
-
 // 邮箱top
 public class MailBoxProcess : MSceneProcess
 {
-    MailBox mailBox;
+    MailBox _mailBox;
     public MailBoxProcess()
     {
         Step = MainSceneStep.MailBox;
@@ -14,13 +13,16 @@ public class MailBoxProcess : MSceneProcess
     
     public override void ProcessEnter()
     {
-        mailBox = UILayerLoader.Load<MailBox>();
-        mailBox.Setup();
+        _mailBox = UILayerLoader.Load<MailBox>();
+        _mailBox.Setup();
+        var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
+        upperInfoBar.Setup(null, null,null, null);
         SetLoaded(true);
     }
     
     public override void ProcessEnd()
     {
         UILayerLoader.Remove<MailBox>();
+        UILayerLoader.Remove<UpperInfoBar>();
     }
 }

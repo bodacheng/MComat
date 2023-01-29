@@ -4,16 +4,16 @@ using PlayFab.ClientModels;
 
 public class MailItemInstance : ItemInstance
 {
-    readonly Subject<bool> read = new();
-    public IObservable<bool> ReadObservable => read;
+    readonly Subject<bool> _read = new();
+    public IObservable<bool> ReadObservable => _read;
     
     public void Set()
     {
-        read.OnNext(!NotRead());
+        _read.OnNext(!NotClaimed());
     }
 
-    public bool NotRead()
+    public bool NotClaimed()
     {
-        return (RemainingUses.HasValue && RemainingUses.Value > 0);
+        return RemainingUses.HasValue && RemainingUses.Value > 0;
     }
 }

@@ -14,6 +14,8 @@ public class MailDetailProcess : MSceneProcess
     MailDetailView _mailDetailViewLayer;
     public override void ProcessEnter<String>(String id)
     {
+        var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
+        upperInfoBar.Setup(null, null,null, null);
         _mailDetailViewLayer = UILayerLoader.Load<MailDetailView>();
         _mailDetailViewLayer.Setup(MailBox.LoadPic);
         var mail = PlayFabReadClient.Get(id.ToString());
@@ -23,7 +25,7 @@ public class MailDetailProcess : MSceneProcess
     
     public override void ProcessEnd()
     {
-        if (_mailDetailViewLayer != null)
-            GameObject.Destroy(_mailDetailViewLayer.gameObject);
+        UILayerLoader.Remove<MailDetailView>();
+        UILayerLoader.Remove<UpperInfoBar>();
     }
 }
