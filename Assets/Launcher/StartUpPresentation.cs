@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class StartUpPresentation : MonoBehaviour
 {
-    [SerializeField] Starter Starter;
+    [SerializeField] Starter starter;
     [SerializeField] RectTransform T;
-    [SerializeField] bool FrontSceneFight;
+    [SerializeField] bool frontSceneFight;
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class StartUpPresentation : MonoBehaviour
                     }), 
                 " 下载错误。请检查网络 ");
             },
-            Starter.DownLoadLabels
+            starter.DownLoadLabels
         );
         
         if (bytes > 0)
@@ -62,7 +62,7 @@ public class StartUpPresentation : MonoBehaviour
                         else
                             ProgressLayer.LoadingPercent(x, f, true);
                     },
-                    Starter.DownLoadLabels
+                    starter.DownLoadLabels
                 );
             },
             () =>
@@ -76,15 +76,15 @@ public class StartUpPresentation : MonoBehaviour
     void Go()
     {
         HighLightLayer.Close();
-        Starter.Initialise();
-        if (FrontSceneFight)
+        starter.Initialise();
+        if (frontSceneFight)
         {
-            Starter.EnterFrontScene();
+            starter.EnterFrontScene();
         }
         else
         {
             var titleBgLayer= UILayerLoader.Load<TitleBgLayer>();
-            titleBgLayer.Setup();
+            titleBgLayer.Setup(false);
             var titleScreenLayer = UILayerLoader.Load<TitleScreenLayer>();
             titleScreenLayer.Initialise();
         }
