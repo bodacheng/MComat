@@ -15,9 +15,20 @@ public partial class PlayFabReadClient
     {
         get
         {
-            var customId = PlayerPrefs.GetString(PLAYFAB_CUSTOM_ID, Guid.NewGuid().ToString());
+            // customId的默认值存在诸多疑问，1。29 我们试着把它先从 Guid.NewGuid()改成SystemInfo.deviceUniqueIdentifier
+            //var customId = PlayerPrefs.GetString(PLAYFAB_CUSTOM_ID, Guid.NewGuid().ToString());
+            var customId = PlayerPrefs.GetString(PLAYFAB_CUSTOM_ID, SystemInfo.deviceUniqueIdentifier);
             PlayerPrefs.SetString(PLAYFAB_CUSTOM_ID, customId);
             PlayerPrefs.Save();
+            return customId;
+        }
+    }
+    
+    public static string CustomIdNoDefaultValue
+    {
+        get
+        {
+            var customId = PlayerPrefs.GetString(PLAYFAB_CUSTOM_ID, null);
             return customId;
         }
     }

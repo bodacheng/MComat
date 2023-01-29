@@ -4405,9 +4405,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccad5ed2f8b9641f48b196822dc8d068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Starter: {fileID: 2075428156307059470}
-  T: {fileID: 1907867391}
-  FrontSceneFight: 0
+  starter: {fileID: 2075428156307059470}
+  t: {fileID: 1907867391}
+  frontSceneFight: 1
 --- !u!1 &7265332446000478266
 GameObject:
   m_ObjectHideFlags: 0

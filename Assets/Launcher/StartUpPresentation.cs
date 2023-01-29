@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class StartUpPresentation : MonoBehaviour
 {
     [SerializeField] Starter starter;
-    [SerializeField] RectTransform T;
+    [SerializeField] RectTransform t;
     [SerializeField] bool frontSceneFight;
 
     void Start()
     {
         Screen.SetResolution(1920, 1080, true);
-        UILayerLoader.SetHanger(T);
+        UILayerLoader.SetHanger(t);
         OnStart().Forget();
     }
 
@@ -77,7 +77,7 @@ public class StartUpPresentation : MonoBehaviour
     {
         HighLightLayer.Close();
         starter.Initialise();
-        if (frontSceneFight)
+        if (frontSceneFight && PlayFabReadClient.CustomIdNoDefaultValue == null)
         {
             starter.EnterFrontScene();
         }
