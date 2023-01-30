@@ -10,14 +10,15 @@ public class PlayfabSetting : ScriptableObject
     public string GoldCode;
     public string DiamondCode;
     public string ArenaTicketCode;
+    public string AdTicketCode;
 
     public static string _UnitCatalog;
     public static string _StoneCatalog;
     public static string _MailCatalog;
     public static string _GoldCode;
     public static string _DiamondCode;
-    public static string _ArenaTicketCodeCode;
-    
+    public static string _ArenaTicketCode;
+    public static string _AdTicketCode;
 
     public void Initialise()
     {
@@ -26,6 +27,7 @@ public class PlayfabSetting : ScriptableObject
         _MailCatalog = MailCatalog;
         _GoldCode = GoldCode;
         _DiamondCode = DiamondCode;
-        _ArenaTicketCodeCode = ArenaTicketCode;
+        _ArenaTicketCode = ArenaTicketCode;
+        _AdTicketCode = AdTicketCode;
     }
 }

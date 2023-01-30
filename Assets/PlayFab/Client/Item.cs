@@ -84,18 +84,27 @@ public partial class PlayFabReadClient
             {
                 Currencies.DiamondCount.Value = kv.Value;
             }
-            else if (kv.Key == PlayfabSetting._ArenaTicketCodeCode)
+            else if (kv.Key == PlayfabSetting._ArenaTicketCode)
             {
                 Currencies.ArenaTicket.Value = kv.Value;
+            }
+            else if (kv.Key == PlayfabSetting._AdTicketCode)
+            {
+                Currencies.AdTicket.Value = kv.Value;
             }
         }
 
         foreach (var kv in result.VirtualCurrencyRechargeTimes)
         {
-            if (kv.Key == PlayfabSetting._ArenaTicketCodeCode)
+            if (kv.Key == PlayfabSetting._ArenaTicketCode)
             {
-                Currencies.SecondsToRecharge = kv.Value.SecondsToRecharge;
-                Currencies.RechargeMax = kv.Value.RechargeMax;
+                Currencies.SecondsToRechargeArenaTicket = kv.Value.SecondsToRecharge;
+                Currencies.ArenaTicketRechargeMax = kv.Value.RechargeMax;
+            }
+            if (kv.Key == PlayfabSetting._AdTicketCode)
+            {
+                Currencies.SecondsToRechargeAdTicket = kv.Value.SecondsToRecharge;
+                Currencies.AdTicketRechargeMax = kv.Value.RechargeMax;
             }
         }
         

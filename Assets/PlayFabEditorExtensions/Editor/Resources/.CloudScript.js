@@ -100,17 +100,15 @@ handlers.buildBasicData = function (args, context) {
     return { result: true };
 };
 
-handlers.buyCurrency= function (args, context) {
-
-    var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
+handlers.advertisementReward = function (args, context) {
+    var result = server.AddUserVirtualCurrency(
         {
             PlayFabId :currentPlayerId,
-            Amount : args.GD,
-            VirtualCurrency : "GD"
+            Amount : 50,
+            VirtualCurrency : "DM"
         }
     );
-    
-    return { result: AddUserVirtualCurrencyResult };
+    return { result };
 }
 
 handlers.SubtractVirtualCurrency = function (args, context) {

@@ -71,7 +71,7 @@ public class ArenaLayer : UILayer
         {
             disposeCountDown?.Dispose();
             ticketCount.text = x.ToString();
-            if (x >= Currencies.RechargeMax)
+            if (x >= Currencies.ArenaTicketRechargeMax)
             {
                 ticketChargeCountDown.text = string.Empty;
                 ticketChargeCountDownT.gameObject.SetActive(false);
@@ -81,17 +81,17 @@ public class ArenaLayer : UILayer
                 disposeCountDown = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe((_) =>
                 {
                     ticketChargeCountDownT.gameObject.SetActive(true);
-                    if (Currencies.SecondsToRecharge > 0)
+                    if (Currencies.SecondsToRechargeArenaTicket > 0)
                     {
-                        var minute = Currencies.SecondsToRecharge / 60;
-                        var seconds = Currencies.SecondsToRecharge - minute * 60;
+                        var minute = Currencies.SecondsToRechargeArenaTicket / 60;
+                        var seconds = Currencies.SecondsToRechargeArenaTicket - minute * 60;
                         ticketChargeCountDown.text = $"{minute :00}:{seconds:00}";
-                        Currencies.SecondsToRecharge -= 1;
+                        Currencies.SecondsToRechargeArenaTicket -= 1;
                     }
                     else
                     {
                         Currencies.ArenaTicket.Value += 1;
-                        Currencies.SecondsToRecharge = 60 * 60;
+                        Currencies.SecondsToRechargeArenaTicket = 60 * 60;
                     }
                 }).AddTo(gameObject);
             }
