@@ -129,14 +129,17 @@ public class PreparingProcess : FSceneProcess
     
     public override void ProcessEnter()
     {
-        HighLightLayer.DarkOff(Color.white, 0, true);
+        //HighLightLayer.DarkOff(Color.white, 0, true);
+        var unitInstructionLayer = UILayerLoader.Load<UnitInstructionLayer>();
+        unitInstructionLayer.RandomChangeUnitImage();
         EnterProcess().Forget();
     }
     
     public override void ProcessEnd()
     {
         FightScene.FightScene.target.LoadStageFinished.Value = false;
-        HighLightLayer.LightUp(1f);
+        //HighLightLayer.LightUp(1f);
+        UILayerLoader.Remove<UnitInstructionLayer>();
     }
     
     public override bool CanEnterOtherProcess()

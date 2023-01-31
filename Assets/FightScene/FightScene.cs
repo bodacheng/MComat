@@ -44,7 +44,7 @@ namespace FightScene
             UILayerLoader.Clear();
             UILayerLoader.SetHanger(T);
             
-            HighLightLayer.DarkOff(Color.white, 0, true);
+            //HighLightLayer.DarkOff(Color.white, 0, true);
             Time.timeScale = 1;
             if (Fight == null)
             {

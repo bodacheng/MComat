@@ -30,7 +30,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7863940776908092930}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -80,7 +80,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7863940776908092930}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5927,50 +5927,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &7863940776783957502
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7863940776783957500}
-  - component: {fileID: 7863940776783957503}
-  m_Layer: 0
-  m_Name: runner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7863940776783957500
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7863940776783957502}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 76427.836, y: -20104.248, z: 54958.945}
-  m_LocalScale: {x: 18, y: 18, z: 18}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7863940776908092930}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7863940776783957503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7863940776783957502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18fefa970fb6a4f0d8d12c35a9520f82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7863940776786334901
 GameObject:
   m_ObjectHideFlags: 0
@@ -6305,7 +6261,6 @@ RectTransform:
   - {fileID: 7863940775985880660}
   - {fileID: 7863940776226782772}
   - {fileID: 7863940777721554426}
-  - {fileID: 7863940776783957500}
   - {fileID: 5647287060537533105}
   - {fileID: 6440214543245538056}
   m_Father: {fileID: 0}
@@ -6335,7 +6290,6 @@ MonoBehaviour:
   attacksT: {fileID: 7863940776975464789}
   fire1T: {fileID: 7863940775985880660}
   fire2T: {fileID: 7863940776226782772}
-  runner: {fileID: 7863940776783957503}
   _skillStoneDetail: {fileID: 3672631541681370285}
   EffectsManager: {fileID: 6282472420397796138}
 --- !u!1 &7863940776975464788

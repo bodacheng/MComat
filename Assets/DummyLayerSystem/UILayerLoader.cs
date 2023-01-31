@@ -31,6 +31,7 @@ namespace DummyLayerSystem
             {"PopupLayer", "DummyLayerSystem/PopupLayer"},
             {"HighLightLayer", "DummyLayerSystem/HighLightLayer"},
             {"ProgressLayer", "DummyLayerSystem/ProgressLayer"},
+            {"UnitInstructionLayer", "DummyLayerSystem/UnitInstructionLayer"},
             {"SelfFightLayer", "DummyLayerSystem/SelfFightLayer"},
             {"FightPrepareLayer", "DummyLayerSystem/FightPrepareLayer"},
             {"TeamEditLayer", "DummyLayerSystem/TeamEditLayer"},

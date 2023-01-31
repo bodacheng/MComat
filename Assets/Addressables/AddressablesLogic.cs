@@ -89,7 +89,7 @@ public static class AddressablesLogic
         }
         await UniTask.WhenAll(downLoadTasks);
         await HighLightLayer.LoadBg();
-        
+        await UnitInstructionLayer.LoadUnitImage();
         complete.Invoke();
     }
     
