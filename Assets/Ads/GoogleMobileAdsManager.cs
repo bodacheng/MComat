@@ -35,7 +35,7 @@ public class GoogleMobileAdsManager : MonoBehaviour
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/1033173712";
 #elif UNITY_IOS
-        string adUnitId = "ca-app-pub-3094747799359437~9758804477";
+        string adUnitId = "ca-app-pub-3094747799359437/1421143280";
 #else
         string adUnitId = "unexpected_platform";
 #endif
