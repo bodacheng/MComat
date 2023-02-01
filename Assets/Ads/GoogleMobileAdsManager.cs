@@ -50,19 +50,13 @@ public class GoogleMobileAdsManager : MonoBehaviour
         this.interstitial.OnAdOpening += HandleOnAdOpening;
         // Called when the ad is closed.
         this.interstitial.OnAdClosed += HandleOnAdClosed;
-        this.interstitial.OnAdPaid += HandleOnAdPaid;
         
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
         // Load the interstitial with the request.
         this.interstitial.LoadAd(request);
     }
-
-    private void HandleOnAdPaid(AdValue obj)
-    {
-        Debug.Log(obj);
-    }
-
+    
     public void HandleOnAdLoaded(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleAdLoaded event received");
