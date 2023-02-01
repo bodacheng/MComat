@@ -10,6 +10,9 @@ public class AdsBtnRender : MonoBehaviour
     [SerializeField] private RectTransform ticketChargeCountDownT;
     [SerializeField] private RewardedAdsButton rewardedAdsButton;
 
+    [Header("google ads")]
+    [SerializeField] private GoogleMobileAdsManager googleMobileAdsManager;
+    
     private IDisposable disposeCountDown;
 
     void Start()
@@ -19,7 +22,11 @@ public class AdsBtnRender : MonoBehaviour
 
     void Setup()
     {
+        // unity
         rewardedAdsButton.SetEnableCondition(()=> Currencies.AdTicket.Value > 0);
+        // google
+        googleMobileAdsManager.SetEnableCondition(()=> Currencies.AdTicket.Value > 0);
+        
         Currencies.AdTicket.Subscribe(
             x=>
             {
@@ -50,6 +57,7 @@ public class AdsBtnRender : MonoBehaviour
                     }).AddTo(gameObject);
                 }
                 rewardedAdsButton.Enable(x > 0);
+                googleMobileAdsManager.Enable(x > 0);
             }
         ).AddTo(gameObject);
     }

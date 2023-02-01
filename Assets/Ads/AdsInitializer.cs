@@ -1,16 +1,24 @@
 using UnityEngine;
 using UnityEngine.Advertisements;
- 
+using GoogleMobileAds.Api;
+
 public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 {
     [SerializeField] string _androidGameId;
     [SerializeField] string _iOSGameId;
     [SerializeField] bool _testMode = true;
     private string _gameId;
- 
+    
     void Awake()
     {
+        // Unity ads
         InitializeAds();
+        
+        // Google admob
+        MobileAds.Initialize(initStatus =>
+        {
+            Debug.Log("谷歌广告插件初始化状态："+initStatus);
+        });
     }
  
     public void InitializeAds()
