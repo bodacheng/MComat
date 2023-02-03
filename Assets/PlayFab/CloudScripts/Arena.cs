@@ -72,6 +72,12 @@ public partial class CloudScript
                 try
                 {
                     var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
+                    if (jsonResult == null)
+                    {
+                        Debug.Log(" 远程结果为空 ");
+                        return;
+                    }
+                    
                     jsonResult.TryGetValue("teamInfos", out var teamInfos);
                     var json = JsonConvert.SerializeObject(teamInfos);
                     var opponents = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(

@@ -65,18 +65,17 @@ public class ArenaPage : MSceneProcess
         missionWatcher = new MissionWatcher(
             new List<string>
             {
-                "itemsLoadFinished", "arenaTFinished", "leaderBoardFinished", "gotServerTime"
+                "itemsLoadFinished", "leaderBoardFinished", "gotServerTime" // "arenaTFinished"
             },
             () =>
             {
                 arenaLayer.SetupArenaTicket();
-                arenaLayer.ShowMyTeam();
             },
             PreScene.ReturnToLobby
         );
         
         PlayFabReadClient.LoadItems(ItemsLoadFinished);
-        PlayFabReadClient.LoadTeamSet("arena", ArenaTFinished);
+        //PlayFabReadClient.LoadTeamSet("arena", ArenaTFinished);
         PlayFabReadClient.GetServerTime(
             (x) =>
             {
@@ -135,6 +134,14 @@ public class ArenaPage : MSceneProcess
         CloudScript.GetLeaderboardAroundUser(
             leaderboardInfos =>
             {
+                if (leaderboardInfos== null || leaderboardInfos.Count == 0)
+                {
+                    Debug.Log("玩家队伍未登录");
+                    LeaderBoardFinished(true);
+                    SetLoaded(true);
+                    return;
+                }
+                
                 var exceptSelf = new List<LeaderboardInfo>();
                 foreach (var leaderboardInfo in leaderboardInfos)
                 {
@@ -152,6 +159,7 @@ public class ArenaPage : MSceneProcess
                 if (_myLeaderboardInfo != null)
                 {
                     arenaLayer.SetMyLeaderboardInfo(_myLeaderboardInfo);
+                    arenaLayer.ShowMyTeamByLeaderInfo(_myLeaderboardInfo);
                 }
                 
                 if (exceptSelf.Count < 3)
@@ -167,7 +175,6 @@ public class ArenaPage : MSceneProcess
                         }
                     }
                 }
-                
                 arenaLayer.DisplayOpponents(exceptSelf, _myLeaderboardInfo);
                 LeaderBoardFinished(true);
                 SetLoaded(true);

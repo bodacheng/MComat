@@ -94,11 +94,11 @@ public class HeroIcon : MonoBehaviour {
         Icon.sprite = sprite;
         if (Icon.sprite != null)
         {
-            LightOn();
+            //LightOn();
         }
         else
         {
-            Grey();
+            //Grey();
         }
     }
     

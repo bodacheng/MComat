@@ -573,11 +573,31 @@ function AddTeamInfoItem(Leaderboard) {
     return null;
 }
 
+function ArrangeMyTeamInfoItem(Leaderboard, DefendTeam) {
+    var item = {
+        "PlayerLeaderboardEntry": Leaderboard,
+        "Team": JSON.parse(DefendTeam)
+    };
+    return item;
+}
+
 handlers.GetLeaderboardAroundUser = function (args, context) {
 
+    let teamInfos = [];
+    var myTeamData = server.GetUserData(
+        {
+            PlayFabId: currentPlayerId,
+            Keys: ["DefendTeam"]
+        }
+    );
+
+    if (myTeamData.Data["DefendTeam"] == null){
+        return { teamInfos };
+    }
+    
     var request = {
         "PlayFabId": currentPlayerId,
-        "MaxResultsCount": 4, //自己，和三个对手
+        "MaxResultsCount": 3,
         "StatisticName": "arenapoint",
         "ProfileConstraints" : {
             "ShowDisplayName" : true
@@ -585,7 +605,6 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     };
     
     var result = server.GetLeaderboardAroundUser(request);
-    let teamInfos = [];
     // 结果列表里分数高的在前
     var chooseHighest = result.Leaderboard[0];
     var requestForAHigherPlayer = {
@@ -611,9 +630,16 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     }
     
     for (let i = 0; i < result.Leaderboard.length; i++) {
-        var item = AddTeamInfoItem(result.Leaderboard[i]);
-        if (item != null) {
-            teamInfos.push(item);
+        if (result.Leaderboard[i].PlayFabId == currentPlayerId){
+            var item = ArrangeMyTeamInfoItem(result.Leaderboard[i], myTeamData.Data["DefendTeam"].Value);
+            if (item != null) {
+                teamInfos.push(item);
+            }
+        }else{
+            var item = AddTeamInfoItem(result.Leaderboard[i]);
+            if (item != null) {
+                teamInfos.push(item);
+            }
         }
     }
     

@@ -39,5 +39,15 @@
             }
             return teamMembers;
         }
+        
+        public static PosKeySet DicToPosKeySet(MultiDic<int, int, UnitInfo> dic)
+        {
+            var posKeySet = new PosKeySet();
+            foreach (var kv in dic.mDict)
+            {
+                posKeySet.SetPosMemInfoByInstanceID(kv.Key.Item2, kv.Value.id);
+            }
+            return posKeySet;
+        }
     }
 }
