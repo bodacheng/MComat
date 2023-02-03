@@ -50,6 +50,13 @@ public class ArenaLayer : UILayer
         arenaRankIcon.Set(PlayerAccountInfo.Me.arenaPoint);
         this.tryBeginStage = tryBeginStage;
         this.plusCal = plusCal;
+        
+        void GoToTeamEdit()
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
+        }
+        editMyTeamBtn.onClick.RemoveAllListeners();
+        editMyTeamBtn.onClick.AddListener(GoToTeamEdit);
     }
     
     private IDisposable disposeArenaCountDown;
@@ -123,8 +130,35 @@ public class ArenaLayer : UILayer
             o.gameObject.SetActive(true);
         }
     }
+
+    public void ShowMyTeamByLeaderInfo(LeaderboardInfo info)
+    {
+        var posKeySet = new PosKeySet();
+        for (var index = 0; index < info.Team.Length; index++)
+        {
+            var posNum = info.Team[index].key2;
+            var unitInfo = info.Team[index].value;
+            HeroIcon target = null;
+            switch (posNum)
+            {
+                case 0:
+                    target = member1;
+                    break;
+                case 1:
+                    target = member2;
+                    break;
+                case 2:
+                    target = member3;
+                    break;
+            }
+            posKeySet.SetPosMemInfoByInstanceID(posNum, unitInfo.id);
+            target.ChangeIcon(unitInfo);
+        }
+
+        TeamSet.Arena3V3 = posKeySet;
+    }
     
-    public void ShowMyTeam()
+    public void ShowMyTeamByUserData()
     {
         var pos1InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(0);
         var pos2InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(1);
@@ -139,12 +173,5 @@ public class ArenaLayer : UILayer
         member1.ChangeIcon(info1);
         member2.ChangeIcon(info2);
         member3.ChangeIcon(info3);
-        
-        void GoToTeamEdit()
-        {
-            PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
-        }
-        editMyTeamBtn.onClick.RemoveAllListeners();
-        editMyTeamBtn.onClick.AddListener(GoToTeamEdit);
     }
 }

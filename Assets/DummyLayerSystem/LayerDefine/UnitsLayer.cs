@@ -129,10 +129,12 @@ namespace mainMenu
             {
                 if (kv.Value.unitInfo != null && Stones.GetEquippingStones(kv.Key).Count == 9)
                 {
+                    Debug.Log("here:"+ kv.Value.unitInfo);
                     kv.Value.LightOn();
                 }
                 else
                 {
+                    Debug.Log("黑:"+ kv.Value.unitInfo);
                     kv.Value.Grey();
                 }
             }
