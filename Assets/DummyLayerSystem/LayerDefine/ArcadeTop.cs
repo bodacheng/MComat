@@ -19,8 +19,8 @@ public class ArcadeTop : UILayer
     [SerializeField] Button lastChapter;
 
     List<int> _currentStages;
-    private readonly List<StageButton> _stageButtons = new();
-    private CancellationTokenSource _cts;
+    readonly List<StageButton> _stageButtons = new();
+    CancellationTokenSource _cts;
     public void Setup(CancellationTokenSource cts)
     {
         _cts = cts; 

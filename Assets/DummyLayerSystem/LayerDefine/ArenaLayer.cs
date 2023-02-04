@@ -33,6 +33,7 @@ public class ArenaLayer : UILayer
     #endregion
     
     [SerializeField] Button rankingPageBtn;
+    [SerializeField] Button rewardBtn;
 
     private Func<PlayerLeaderboardEntry, PlayerLeaderboardEntry, int> plusCal;
     private Action<FightInfo> tryBeginStage;
@@ -105,12 +106,6 @@ public class ArenaLayer : UILayer
         }).AddTo(gameObject);
     }
     
-    public void SetMyLeaderboardInfo(LeaderboardInfo _myLeaderboardInfo)
-    {
-        myScore.text = _myLeaderboardInfo.PlayerLeaderboardEntry.StatValue.ToString();
-        myRank.text = "Rank :" + _myLeaderboardInfo.PlayerLeaderboardEntry.Position;
-    }
-    
     // 挑战玩家队伍机能加载（目前规定显示在画面上的挑战组一共四个。远程获取不到的情况下就本地生成）
     public void DisplayOpponents(List<LeaderboardInfo> leaderboards, LeaderboardInfo myInfo)
     {
@@ -130,31 +125,44 @@ public class ArenaLayer : UILayer
             o.gameObject.SetActive(true);
         }
     }
+    
+    public void SetMyLeaderboardInfo(LeaderboardInfo info)
+    {
+        myScore.text = info != null? info.PlayerLeaderboardEntry.StatValue.ToString() : "";
+        myRank.text = info != null ? info.PlayerLeaderboardEntry.Position.ToString() : "";
+        
+        rankingPageBtn.gameObject.SetActive(info != null);
+        refreshBtn.gameObject.SetActive(info != null);
+        arenaRankIcon.gameObject.SetActive(info != null);
+        rewardBtn.gameObject.SetActive(info != null);
+    }
 
     public void ShowMyTeamByLeaderInfo(LeaderboardInfo info)
     {
         var posKeySet = new PosKeySet();
-        for (var index = 0; index < info.Team.Length; index++)
+        if (info != null)
         {
-            var posNum = info.Team[index].key2;
-            var unitInfo = info.Team[index].value;
-            HeroIcon target = null;
-            switch (posNum)
+            for (var index = 0; index < info.Team.Length; index++)
             {
-                case 0:
-                    target = member1;
-                    break;
-                case 1:
-                    target = member2;
-                    break;
-                case 2:
-                    target = member3;
-                    break;
+                var posNum = info.Team[index].key2;
+                var unitInfo = info.Team[index].value;
+                HeroIcon target = null;
+                switch (posNum)
+                {
+                    case 0:
+                        target = member1;
+                        break;
+                    case 1:
+                        target = member2;
+                        break;
+                    case 2:
+                        target = member3;
+                        break;
+                }
+                posKeySet.SetPosMemInfoByInstanceID(posNum, unitInfo.id);
+                target.ChangeIcon(unitInfo);
             }
-            posKeySet.SetPosMemInfoByInstanceID(posNum, unitInfo.id);
-            target.ChangeIcon(unitInfo);
         }
-
         TeamSet.Arena3V3 = posKeySet;
     }
     

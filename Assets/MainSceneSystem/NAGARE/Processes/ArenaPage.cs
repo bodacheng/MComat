@@ -136,7 +136,9 @@ public class ArenaPage : MSceneProcess
             {
                 if (leaderboardInfos== null || leaderboardInfos.Count == 0)
                 {
-                    Debug.Log("玩家队伍未登录");
+                    // Debug.Log("玩家队伍未登录");
+                    arenaLayer.SetMyLeaderboardInfo(null);
+                    arenaLayer.ShowMyTeamByLeaderInfo(null);
                     LeaderBoardFinished(true);
                     SetLoaded(true);
                     return;
