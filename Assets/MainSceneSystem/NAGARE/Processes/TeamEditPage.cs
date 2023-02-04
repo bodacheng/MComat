@@ -6,16 +6,11 @@ using DummyLayerSystem;
 
 public class TeamEditPage : MSceneProcess
 {
-    string teamMode;
+    string _teamMode;
     
     void TeamSaveFinished(bool value)
     {
         missionWatcher.Finish("teamSavedFinished", value);
-    }
-    
-    void ArenaDefendSaved(bool value)
-    {
-        missionWatcher.Finish("arenaDefendSaved", value);
     }
     
     public TeamEditPage()
@@ -31,24 +26,22 @@ public class TeamEditPage : MSceneProcess
         var unitsLayer = UILayerLoader.Load<UnitsLayer>();
         unitsLayer.SetDisplayUnitIconsAfterAction(() =>
         {
-            unitsLayer.SetUnitsIconOnClick((x) => teamEditLayer.UnitIconClick(x, this.teamMode));
-            unitsLayer.DisableLackSkillUnitIcon();
+            unitsLayer.SetUnitsIconOnClick((x) => teamEditLayer.UnitIconClick(x, this._teamMode));
         });
-        unitsLayer.DisplayUnitIcons(dataAccess.Units.Dic, true);
+        unitsLayer.DisplayUnitIcons(dataAccess.Units.Dic, true, true);
         if (PreScene.target.Focusing != null)
         {
             // Just wanna show a model when enter team edit page
-            teamEditLayer.UnitIconClick(PreScene.target.Focusing.id, this.teamMode);
+            teamEditLayer.UnitIconClick(PreScene.target.Focusing.id, this._teamMode);
             unitsLayer.Selected.Value = null;
         }
-        
         SetLoaded(true);
     }
     
     public override void ProcessEnter<T>(T mode)
     {
-        teamMode = mode as string;
-        EnterProcess(teamMode);
+        _teamMode = mode as string;
+        EnterProcess(_teamMode);
     }
     
     public override void ProcessEnd()
@@ -57,17 +50,16 @@ public class TeamEditPage : MSceneProcess
         UILayerLoader.Remove<TeamEditLayer>();
     }
 
-    private Action extraArcadeTeamEditSuccess;
+    private Action _extraArcadeTeamEditSuccess;
     public void SetExtraArcadeTeamEditSuccess(Action extraArcadeTeamEditSuccess)
     {
-        this.extraArcadeTeamEditSuccess = extraArcadeTeamEditSuccess;
+        this._extraArcadeTeamEditSuccess = extraArcadeTeamEditSuccess;
     }
 
     private bool Legal(string teamMode)
     {
-        bool qualified = true;
-        int unitCount = 0;
-
+        var qualified = true;
+        var unitCount = 0;
         PosKeySet targetTeamSet = null;
         switch (teamMode)
         {
@@ -109,11 +101,11 @@ public class TeamEditPage : MSceneProcess
     void Save()
     {
         ProgressLayer.Loading(">");
-        switch (teamMode)
+        switch (_teamMode)
         {
             case "arena":
                 missionWatcher = new MissionWatcher(
-                    new List<string>() {"arenaDefendSaved", "teamSavedFinished"},
+                    new List<string>() {"teamSavedFinished"},
                     ProgressLayer.Close,
                     () =>
                     {
@@ -122,14 +114,14 @@ public class TeamEditPage : MSceneProcess
                     }
                 );
                 
-                bool qualified = Legal(teamMode);
+                bool qualified = Legal(_teamMode);
                 if (qualified)
                 {
-                    CloudScript.ArenaDefendTeamSave(TeamSet.ToDic(TeamSet.Arena3V3) , ArenaDefendSaved);
+                    CloudScript.ArenaDefendTeamSave(TeamSet.ToDic(TeamSet.Arena3V3) , TeamSaveFinished);
                 }
                 else
                 {
-                    ArenaDefendSaved(true);
+                    TeamSaveFinished(true);
                 }
                 break;
             case "arcade":
@@ -139,7 +131,7 @@ public class TeamEditPage : MSceneProcess
                     },
                     ()=>
                     {
-                        extraArcadeTeamEditSuccess?.Invoke();
+                        _extraArcadeTeamEditSuccess?.Invoke();
                         ProgressLayer.Close();
                     },
                     () =>
@@ -148,8 +140,8 @@ public class TeamEditPage : MSceneProcess
                         ProgressLayer.Close();
                     }
                 );
+                TeamSet.SaveTeamSet(_teamMode, TeamSaveFinished);
                 break;
         }
-        TeamSet.SaveTeamSet(teamMode, TeamSaveFinished);
     }
 }

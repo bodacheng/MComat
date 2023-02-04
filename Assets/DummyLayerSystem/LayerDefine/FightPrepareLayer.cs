@@ -1,32 +1,29 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 
 public class FightPrepareLayer : UILayer
 {
-    public Text QuestName;
-    [SerializeField] HeroIcon FighterIcon;
+    [SerializeField] HeroIcon fighterIcon;
     [SerializeField] RectTransform myTeamShowT;
     [SerializeField] RectTransform enemyTeamShowT;
-    public Button EditTeamButton; // 根据进入战斗模式决定是否显示
-    public Button BeginFight;
+    public Button editTeamButton; // 根据进入战斗模式决定是否显示
+    public Button beginFight;
 
     [SerializeField] GameObject teamEditIndicator;
     public void ForcePressTeamEdit()
     {
         teamEditIndicator.gameObject.SetActive(true);
-        BeginFight.gameObject.SetActive(false);
+        beginFight.gameObject.SetActive(false);
         // 强制玩家点击EditTeamButton按钮，待制作
     }
         
     public void StageMembersInfoShow(FightInfo stage)
     {
-        MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT).Forget();
-        MemberInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT).Forget();
+        MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT);
+        MemberInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT);
     }
-        
-    async UniTask<List<HeroIcon>> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)
+    List<HeroIcon> MemberInfosShow(List<UnitInfo> HeroSets, RectTransform _ShowT)
     {
         foreach (Transform transform in _ShowT)
         {
@@ -35,18 +32,14 @@ public class FightPrepareLayer : UILayer
         var icons = new List<HeroIcon>();
         foreach(var oneMember in HeroSets)
         {
-            var v = await HeroIcon.ArrangeHeroIconToT(FighterIcon, oneMember, _ShowT);
+            var v = HeroIcon.ArrangeHeroIconToT(fighterIcon, oneMember, _ShowT);
             icons.Add(v);
-        }
-        for (var i = 0; i < icons.Count; i++)
-        {
-            icons[i].iconButton.targetGraphic.raycastTarget = true;
         }
         return icons;
     }
 
     public void TutorialForceFightBegin()
     {
-        EditTeamButton.gameObject.SetActive(false);
+        editTeamButton.gameObject.SetActive(false);
     }
 }

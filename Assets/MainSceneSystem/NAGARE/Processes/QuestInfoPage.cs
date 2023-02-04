@@ -18,8 +18,8 @@ public class QuestInfoPage : MSceneProcess
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
                 }
-                _layer.EditTeamButton.onClick.RemoveAllListeners();
-                _layer.EditTeamButton.onClick.AddListener(GoToTeamEditArena);
+                _layer.editTeamButton.onClick.RemoveAllListeners();
+                _layer.editTeamButton.onClick.AddListener(GoToTeamEditArena);
                 break;
             case FightEventType.Quest:
                 FightScene.FightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arcade").LoadTeamDic();
@@ -27,12 +27,12 @@ public class QuestInfoPage : MSceneProcess
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);
                 }
-                _layer.EditTeamButton.onClick.RemoveAllListeners();
-                _layer.EditTeamButton.onClick.AddListener(GoToTeamEditArcade);
+                _layer.editTeamButton.onClick.RemoveAllListeners();
+                _layer.editTeamButton.onClick.AddListener(GoToTeamEditArcade);
                 break;
         }
         _layer.StageMembersInfoShow(FightScene.FightScene.Fight);
-        _layer.BeginFight.onClick.RemoveAllListeners();
+        _layer.beginFight.onClick.RemoveAllListeners();
         void Go()
         {
             switch (FightScene.FightScene.Fight.EventType)
@@ -52,7 +52,7 @@ public class QuestInfoPage : MSceneProcess
                     break;
             }
         }
-        _layer.BeginFight.onClick.AddListener(Go);
+        _layer.beginFight.onClick.AddListener(Go);
         
         SetLoaded(true);
     }

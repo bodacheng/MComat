@@ -40,7 +40,7 @@ public class TeamEditLayer : UILayer
 
     private void SetConfirmBtnActive()
     {
-        saveBtn.interactable = _teamLegal(this._currentTeamMode);
+        saveBtn.interactable = _teamLegal(_currentTeamMode);
     }
     
     /// <summary>
@@ -105,15 +105,7 @@ public class TeamEditLayer : UILayer
             var icon = _teamBtnDic[posNum];
             var posInstanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(posNum);
             var info = dataAccess.Units.Get(posInstanceID);
-            icon.ChangeIcon(info);
-            if (info != null && Stones.GetEquippingStones(posInstanceID).Count == 9)
-            {
-                icon.LightOn();
-            }
-            else
-            {
-                icon.Grey();
-            }
+            icon.ChangeIcon(info, true);
         }
         else
         {

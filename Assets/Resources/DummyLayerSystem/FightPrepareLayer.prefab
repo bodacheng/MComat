@@ -649,12 +649,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuestName: {fileID: 7090545317446320300}
-  FighterIcon: {fileID: 4599398632650404793, guid: ab04803d5c276457ea03841b256e73bf,
+  fighterIcon: {fileID: 4599398632650404793, guid: ab04803d5c276457ea03841b256e73bf,
     type: 3}
   myTeamShowT: {fileID: 7090545318320839565}
   enemyTeamShowT: {fileID: 7090545317579343575}
-  EditTeamButton: {fileID: 7090545318509655610}
-  BeginFight: {fileID: 9055526476593702428}
+  editTeamButton: {fileID: 7090545318509655610}
+  beginFight: {fileID: 9055526476593702428}
   teamEditIndicator: {fileID: 2153183825879536808}
 --- !u!1 &7090545318509655608
 GameObject:

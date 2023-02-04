@@ -48,7 +48,7 @@ namespace mainMenu
         }
         
         //icon的排列，显示   
-        public void DisplayUnitIcons(IDictionary<string, UnitInfo> dic, bool clearBtnFeature)
+        public void DisplayUnitIcons(IDictionary<string, UnitInfo> dic, bool clearBtnFeature, bool withSkillCheck = false)
         {
             Selected.Subscribe(x =>
             {
@@ -57,7 +57,7 @@ namespace mainMenu
             }).AddTo(gameObject);
             
             unitBoxContainer.gameObject.SetActive(true);
-            UnitIconsGenerate(dic, clearBtnFeature);
+            UnitIconsGenerate(dic, clearBtnFeature, withSkillCheck);
             foreach (var keyValuePair in heroIcons)
             {
                 keyValuePair.Value.gameObject.SetActive(false);
@@ -83,7 +83,7 @@ namespace mainMenu
             displayUnitIconsAfterAction?.Invoke();
         }
 
-        void AddUnitIcon(string instanceID, bool clearBtnFeature)
+        void AddUnitIcon(string instanceID, bool clearBtnFeature, bool withSkillCheck)
         {
             var unitInfo = dataAccess.Units.Get(instanceID);
             var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
@@ -98,7 +98,7 @@ namespace mainMenu
             {
                 targetingIcon = Instantiate(noMagic);
                 targetingIcon.name = unitConfig.REAL_NAME + "_icon";
-                targetingIcon.ChangeIcon(unitInfo);
+                targetingIcon.ChangeIcon(unitInfo, withSkillCheck);
                 DicAdd<string, HeroIcon>.Add(heroIcons, instanceID, targetingIcon);
             }
             if (clearBtnFeature)
@@ -114,34 +114,16 @@ namespace mainMenu
             DisplayUnitIcons(dataAccess.Units.Dic, false);
         }
         
-        void UnitIconsGenerate(IDictionary<string, UnitInfo> dic, bool clearButtonFeature)
+        void UnitIconsGenerate(IDictionary<string, UnitInfo> dic, bool clearButtonFeature, bool withSkillCheck)
         {
             foreach (var keyValuePair in dic)
             {
-                AddUnitIcon(keyValuePair.Value.id, clearButtonFeature);
+                AddUnitIcon(keyValuePair.Value.id, clearButtonFeature, withSkillCheck);
             }
             filter.RefreshTypeDropDown(_typeOfUnitsIHave);
         }
-
-        public void DisableLackSkillUnitIcon()
-        {
-            foreach (var kv in heroIcons)
-            {
-                if (kv.Value.unitInfo != null && Stones.GetEquippingStones(kv.Key).Count == 9)
-                {
-                    Debug.Log("here:"+ kv.Value.unitInfo);
-                    kv.Value.LightOn();
-                }
-                else
-                {
-                    Debug.Log("黑:"+ kv.Value.unitInfo);
-                    kv.Value.Grey();
-                }
-            }
-        }
         
         Action displayUnitIconsAfterAction;
-
         public void SetDisplayUnitIconsAfterAction(Action a)
         {
             this.displayUnitIconsAfterAction = a;

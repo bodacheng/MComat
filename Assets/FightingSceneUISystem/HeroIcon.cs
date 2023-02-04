@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using dataAccess;
 using UnityEngine;
 using UnityEngine.UI;
 using Singleton;
@@ -30,7 +31,7 @@ public class HeroIcon : MonoBehaviour {
         cooldownCurtain.fillAmount = proportion;
     }
 
-    public async void ChangeIcon(UnitInfo unitInfo)
+    public async void ChangeIcon(UnitInfo unitInfo, bool withSkillCheck = false)
     {
         this.unitInfo = unitInfo;
         if (unitInfo != null)
@@ -38,6 +39,18 @@ public class HeroIcon : MonoBehaviour {
             this.unitConfig = Units.GetUnitConfig(unitInfo.r_id);
             var pic = await UnitIconDic.Load(unitInfo.r_id, gameObject);
             ChangeIcon(pic, unitConfig.element);
+            
+            if (withSkillCheck)
+            {
+                if (Stones.GetEquippingStones(unitInfo.id).Count == 9)
+                    LightOn();
+                else
+                    Grey();
+            }
+            else
+            {
+                LightOn();
+            }
         }
         else
         {
@@ -65,7 +78,7 @@ public class HeroIcon : MonoBehaviour {
         {
             cooldownCurtain.transform.SetSiblingIndex(Icon.transform.GetSiblingIndex() - 1);
         }
-
+        
         var htmlString = "";
         switch (element)
         {
@@ -92,14 +105,7 @@ public class HeroIcon : MonoBehaviour {
         ColorUtility.TryParseHtmlString("#"+htmlString, out var color);
         frame.color = color;
         Icon.sprite = sprite;
-        if (Icon.sprite != null)
-        {
-            //LightOn();
-        }
-        else
-        {
-            //Grey();
-        }
+        Icon.gameObject.SetActive(sprite != null);
     }
     
     public static void SelectedFeature(HeroIcon unitIcon, GameObject selectedFrame, float localScale)
@@ -118,18 +124,13 @@ public class HeroIcon : MonoBehaviour {
     }
     
     // 这个本身没问题但目前使用他的方式是有问题的。围绕SetParent(T);
-    public static async UniTask<HeroIcon> ArrangeHeroIconToT(HeroIcon prefab, UnitInfo unitInfo, RectTransform T)
+    public static HeroIcon ArrangeHeroIconToT(HeroIcon prefab, UnitInfo unitInfo, RectTransform T)
     {
         var icon = Instantiate(prefab);
         var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
         icon.unitInfo = unitInfo;
-        if (unitConfig == null)
-        {
-            return icon;
-        }
         icon.unitConfig = unitConfig;
-        var pic = await UnitIconDic.Load(unitConfig.RECORD_ID, icon.gameObject);
-        icon.ChangeIcon(pic, unitConfig.element);
+        icon.ChangeIcon(unitInfo);
         icon.transform.SetParent(T);
         icon.transform.localPosition = Vector3.one;
         icon.transform.localScale = Vector3.one;
