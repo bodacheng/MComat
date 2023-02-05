@@ -134,7 +134,7 @@ public class ArenaPage : MSceneProcess
         CloudScript.GetLeaderboardAroundUser(
             leaderboardInfos =>
             {
-                if (leaderboardInfos== null || leaderboardInfos.Count == 0)
+                if (leaderboardInfos == null || leaderboardInfos.Count == 0)
                 {
                     // Debug.Log("玩家队伍未登录");
                     arenaLayer.SetMyLeaderboardInfo(null);

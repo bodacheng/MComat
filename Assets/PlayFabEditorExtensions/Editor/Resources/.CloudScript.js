@@ -613,7 +613,7 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
         "ProfileConstraints" : {
             "ShowDisplayName" : true
         },
-        "StartPosition" : clamp(chooseHighest.Position - 50, 0)// playfab 不提供指定分数获取排行榜名单功能，只能给个更高位置
+        "StartPosition" : clampMin(chooseHighest.Position - 50, 0)// playfab 不提供指定分数获取排行榜名单功能，只能给个更高位置
     };
 
     var higherPlayer = undefined;
@@ -648,19 +648,19 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
 }
 
 function clamp(value, min, max) {
-    if (value < min) {
+    if (value <= min) {
         return min;
-    } else if (value > max) {
+    } else if (value >= max) {
         return max;
-    }
+    } else
     return value;
 }
 
-function clamp(value, min) {
+function clampMin(value, min) {
     if (value < min) {
         return min;
-    }
-    return value;
+    }else
+        return value;
 }
 
 handlers.GetLeaderboard = function (args, context) {

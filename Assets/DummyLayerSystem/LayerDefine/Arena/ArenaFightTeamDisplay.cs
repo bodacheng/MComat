@@ -50,6 +50,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         SetUpCommonInfo(info);
         var stage = LeaderBoardInfoToFightInfo(info);
         stage.Team1LeaderboardEntry = myInfo.PlayerLeaderboardEntry;
+        stage.Team2LeaderboardEntry = info.PlayerLeaderboardEntry;
         
         bigButton.onClick.AddListener(()=> tryBeginStage(stage));
         plusArenaPoint.text = "+" + plusCal(myInfo.PlayerLeaderboardEntry, info.PlayerLeaderboardEntry);
