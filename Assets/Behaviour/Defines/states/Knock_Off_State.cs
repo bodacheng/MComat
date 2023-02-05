@@ -25,7 +25,7 @@ namespace Soul
             base.AI_State_enter();
             FightParamsRef.ChangeLayerForLimbs(14);
             
-            _flyingStep = 0;
+            FlyingStep = 0;
             _timeCounter = 0;
             _touchedBoundary = false;
             FightParamsRef.GettingDamage = true;
@@ -38,10 +38,10 @@ namespace Soul
             _Rigidbody.velocity = Vector3.zero;
             Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.05f);
             //_xz = newValue.attacker._Center.WholeT.forward;
-            _xz = CalFixPushVector(value.impactComingPoint,  value.attacker.Center.WholeT.position, gameObject.transform.position, 
+            var position = gameObject.transform.position;
+            _xz = CalFixPushVector(value.impactComingPoint,  value.attacker.Center.WholeT.position, position, 
                 value.from_weapon.damage_type, value.from_weapon._WeaponMode);
-            RotateToTarget_Tween(gameObject.transform.position - _xz, 0f);
-            
+            RotateToTarget_Tween(position - _xz, 0f);
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(value.from_weapon.element), value.DamageEffectPoint, value.CutRotation, null).Forget();
             _usedYCurve = value.from_weapon.damage_type == DamageType.high ? FightGlobalSetting.HDamageYAnimationCurve : FightGlobalSetting.KnockOffYAnimationCurve;
@@ -66,7 +66,7 @@ namespace Soul
         }
         
         Vector3 _effectP, _quaV;
-        public int _flyingStep;// 0 拔地 1 曲线 2 落地以及躺地昏迷
+        public int FlyingStep;// 0 拔地 1 曲线 2 落地以及躺地昏迷
         public override void _State_Update()
         {
             if (!_touchedBoundary)
@@ -85,19 +85,17 @@ namespace Soul
                 }
             }
             
-            switch (_flyingStep)
+            switch (FlyingStep)
             {
                 case 0:
-                    var yDiffer = _usedYCurve.Evaluate(_timeCounter + Time.deltaTime) -
-                                  _usedYCurve.Evaluate(_timeCounter);
+                    var yDiffer = _usedYCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedYCurve.Evaluate(_timeCounter);
                     gameObject.transform.position +=
-                        _xz * (_usedZCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedZCurve.Evaluate(_timeCounter)) +
-                        Vector3.up * yDiffer;
+                        _xz * (_usedZCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedZCurve.Evaluate(_timeCounter)) + Vector3.up * yDiffer;
                     if (_BasicPhysicSupport.hiddenMethods.Grounded && yDiffer < 0)
                         // time_counter > 0.5f 这个数字是为了确保角色真能飞起来。
                         // 否则很有可能因为动画本身等复杂缘故，刚飞起来就被判断落地
                     {
-                        _flyingStep = 1;
+                        FlyingStep = 1;
                     }
                     break;
                 case 1:
@@ -107,7 +105,7 @@ namespace Soul
                     _effectP.y = 0;
                     EffectsManager.GenerateEffect("hit_ground", null, _effectP, Quaternion.LookRotation(Vector3.right), null).Forget();
                     _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-                    _flyingStep = 2;
+                    FlyingStep = 2;
                     break;
                 case 2:
                     if (!_canWakeUp)

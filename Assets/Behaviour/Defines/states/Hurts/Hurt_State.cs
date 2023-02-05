@@ -74,7 +74,7 @@ namespace Soul
             if (_AIStateRunner.GetLastState().StateKey == "KnockOff")
             {
                 var knockOffState = (Knock_Off_State)_AIStateRunner.GetLastState();
-                if (knockOffState._flyingStep == 0 || knockOffState._flyingStep == 1)
+                if (knockOffState.FlyingStep == 0 || knockOffState.FlyingStep == 1)
                     _AIStateRunner.ChangeState("KnockOff", target);
                 return;
             }

@@ -373,13 +373,15 @@ namespace Soul
             f_temp = Vector3.Distance(attackerTPos, victimTPos);
             if (weaponMode == WeaponMode.EnergyFromBodyWeapon || f_temp < FightGlobalSetting._SureToPushForwardDis)
             {
-                v_temp = (1000 * victimTPos - 1000 * attackerTPos).normalized;
-                return v_temp;
+                v_temp = victimTPos - attackerTPos;
+                v_temp.y = 0;
+                if (v_temp.normalized != Vector3.zero)
+                    return v_temp.normalized;
             }
             
             if (damageType == DamageType.explosion)
             {
-                v_temp = 1000 * victimTPos - 1000 * damageHappenPoint;
+                v_temp = victimTPos - damageHappenPoint;
                 v_temp.y = 0;
                 return v_temp.normalized;
             }
@@ -388,7 +390,7 @@ namespace Soul
             f_temp = Vector3.Dot(damageHappenPoint - attackerTPos, attackerTPos - victimTPos);
             if (f_temp > 0 && Vector3.Distance(attackerTPos, victimTPos) < FightGlobalSetting._attackDrawingDistance)
             {
-                v_temp = f_temp * (1000 * attackerTPos - 1000 * victimTPos);//+ (touchingEnemyBody ? attackerTransform_foward : Vector3.zero);
+                v_temp = f_temp * (attackerTPos - victimTPos);//+ (touchingEnemyBody ? attackerTransform_foward : Vector3.zero);
                 return v_temp.normalized;
             }
             return CalFixPushVector(damageHappenPoint, attackerTPos, victimTPos, DamageType.explosion, weaponMode);

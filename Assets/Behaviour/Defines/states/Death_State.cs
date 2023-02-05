@@ -99,8 +99,7 @@ namespace Soul
                     var yDiffer = _usedYCurve.Evaluate(_timeCounter + Time.deltaTime) -
                                   _usedYCurve.Evaluate(_timeCounter);
                     gameObject.transform.position +=
-                        _xz * (_usedZCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedZCurve.Evaluate(_timeCounter)) +
-                        Vector3.up * yDiffer;
+                        _xz * (_usedZCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedZCurve.Evaluate(_timeCounter)) + Vector3.up * yDiffer;
                     if (_BasicPhysicSupport.hiddenMethods.Grounded && _timeCounter > 0.5f)
                         // time_counter > 0.5f 这个数字是为了确保角色真能飞起来。
                         // 否则很有可能因为动画本身等复杂缘故，刚飞起来就被判断落地

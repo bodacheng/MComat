@@ -121,13 +121,13 @@ namespace Soul
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
                         case BehaviorType.CT:
-                            Counter_State _Counter = new Counter_State(_set.REAL_NAME)
+                            Counter_State counter = new Counter_State(_set.REAL_NAME)
                             {
                                 StateType = BehaviorType.CT,
                                 AT = _set.AT,
                                 nextAttackCanRushFirst = false
                             };
-                            BehaviorDic.Add(_set.REAL_NAME, _Counter);
+                            BehaviorDic.Add(_set.REAL_NAME, counter);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
                         case BehaviorType.NONE:
