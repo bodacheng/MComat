@@ -154,9 +154,9 @@ public partial class CloudScript
                 var currentPoint = (jsonResult.ContainsKey("currentPoint") ? jsonResult["currentPoint"] : 0).ToString();
                 int.TryParse(currentPoint, out var currentPointInt);
 
-                int awardDM = 0;
-                int oldRank = PlayerAccountInfo.Me.arenaPoint / 100;
-                int newRank = currentPointInt / 100;
+                var awardDM = 0;
+                var oldRank = PlayfabSetting.ArenaPointToRank(PlayerAccountInfo.Me.arenaPoint);
+                var newRank =  PlayfabSetting.ArenaPointToRank(currentPointInt);
                 if (newRank > oldRank)
                 {
                     switch (newRank)

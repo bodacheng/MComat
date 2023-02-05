@@ -30,4 +30,11 @@ public class PlayfabSetting : ScriptableObject
         _ArenaTicketCode = ArenaTicketCode;
         _AdTicketCode = AdTicketCode;
     }
+
+    public static int ArenaPointToRank(int point)
+    {
+        var rank = point / 100;
+        rank = Mathf.Clamp(rank, 0, 5);
+        return rank;
+    }
 }

@@ -6,34 +6,36 @@ using FightScene;
 
 public class CommonFightResult : UILayer
 {
-    [SerializeField] private Button ReturnBtn;
-    [SerializeField] private Button AgainBtn;
-    [SerializeField] private RectTransform IconAndSKillShowUISetT;
-
-    [Header("IconWithSkillShow")]
-    public IconAndSKillShowUISet IconAndSKillShowUISetPretab;
-        
-    [Header("NineForShow")]
-    public NineForShow NineForShowPretab;
+    [SerializeField] Button returnBtn;
+    [SerializeField] Button againBtn;
+    [SerializeField] RectTransform iconAndSKillShowUISetT;
+    [SerializeField] IconAndSKillShowUISet iconAndSKillShowUISetPrefab;
+    [SerializeField] NineForShow nineForShowPrefab;
     
     // 战斗结束后统计技能石升级情况时的画面显示
-    readonly List<NineForShow> _nineForShows = new List<NineForShow>();
-    public void ShowSKillSets(TeamUIManager teamUIManager, RectTransform IconAndSKillShowUISetT)
+    readonly List<NineForShow> _nineForShows = new();
+    
+    public void Setup(Action r, Action a)
+    {
+        returnBtn.onClick.AddListener(r.Invoke);
+        againBtn.onClick.AddListener(a.Invoke);
+    }
+    
+    public void ShowSKillSets(TeamUIManager teamUIManager)
     {
         _nineForShows.Clear();
-        foreach (Transform child in IconAndSKillShowUISetT) 
+        foreach (Transform child in iconAndSKillShowUISetT) 
         {
             Destroy(child.gameObject);
         }
         
         foreach (var kv in teamUIManager.UnitIconDic)
         {
-            var iassi = Instantiate(IconAndSKillShowUISetPretab);
+            var iassi = Instantiate(iconAndSKillShowUISetPrefab, iconAndSKillShowUISetT, true);
             var sideCharIcon = teamUIManager.GetSideIcon(kv.Key);
-            var nineForShow = Instantiate(NineForShowPretab);
+            var nineForShow = Instantiate(nineForShowPrefab);
             _nineForShows.Add(nineForShow);
             iassi.Set(sideCharIcon, nineForShow);
-            iassi.transform.SetParent(IconAndSKillShowUISetT);
             iassi.transform.localPosition = Vector3.zero;
             iassi.transform.localScale = Vector3.one;
             nineForShow.ShowStones_Acc(RTFightManager.Target.UnitInfoRef[kv.Key].id);
@@ -51,16 +53,5 @@ public class CommonFightResult : UILayer
     public override void OnDestroy()
     {
         Clear();
-    }
-    
-    public RectTransform GetIconAndSKillShowUISetT()
-    {
-        return IconAndSKillShowUISetT;
-    }
-    
-    public void Initialise(Action R, Action A)
-    {
-        ReturnBtn.onClick.AddListener(R.Invoke);
-        AgainBtn.onClick.AddListener(A.Invoke);
     }
 }

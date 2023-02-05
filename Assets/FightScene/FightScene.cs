@@ -69,14 +69,19 @@ namespace FightScene
             FSceneProcessesRunner.Main.Clear();
             switch(Fight.EventType)
             {
-                case FightEventType.SkillTest:
-                case FightEventType.Self:
                 case FightEventType.Arena:
                 case FightEventType.Quest:
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Preparing, preparingProcess);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.CountDown, countDownProcess);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Fighting, fightingProcess);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightResultAnim, fightResultAnim);
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightOver, fightOverProcess);
+                    break;
+                case FightEventType.SkillTest:
+                case FightEventType.Self:
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Preparing, preparingProcess);
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.CountDown, countDownProcess);
+                    FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Fighting, fightingProcess);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.FightOver, fightOverProcess);
                     break;
                 case FightEventType.Screensaver:

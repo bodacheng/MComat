@@ -4,11 +4,27 @@
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArcadeTop.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/ArenaPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/ArenaPage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArenaLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArenaLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaFightOver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaFightOver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/CommonFightResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/CommonFightResult.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightScene/FightScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightScene/FightScene.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightOverProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightOverProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightResultAnim.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightResultAnim.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Arena.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Arena.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/Arena/RankIcon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/Arena/RankIcon.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArenaFightOver.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArenaFightOver.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/CommonFightResult.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/CommonFightResult.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FightingOver/ResultTileUp.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FightingOver/ResultTileUp.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TitleBgLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TitleBgLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/スクリーンショット 2022-12-26 午後7.40.34.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/スクリーンショット 2022-12-26 午後7.40.34.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Setting/Data.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/Data.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Setting/PlayfabSetting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/PlayfabSetting.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/FightOverShow.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/FightOverShow/IconAndSKillShowUISet.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/FightOverShow/IconAndSKillShowUISet.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/FightOverShow/set.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/FightOverShow/set.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/ArenaRankIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/ArenaRankIcon.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,6 +64,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/Views/IncomingChanges/Gluon/IncomingChangesTab.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_InputField.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Graphic/RawImageTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Editor/Converter/RenderPipelineConverter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Layout/LayoutGroup.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@4.4.1/Runtime/Security/AssemblyInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/ResourceManager/AsyncOperations/AsyncOperationHandle.cs" root0="SKIP_HIGHLIGHTING" />
@@ -202,7 +219,9 @@
       <workItem from="1675260127662" duration="403000" />
       <workItem from="1675421155467" duration="8399000" />
       <workItem from="1675471913119" duration="6479000" />
-      <workItem from="1675483397837" duration="1461000" />
+      <workItem from="1675483397837" duration="1715000" />
+      <workItem from="1675559335996" duration="4595000" />
+      <workItem from="1675574291451" duration="9473000" />
     </task>
     <servers />
   </component>

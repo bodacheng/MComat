@@ -5,11 +5,16 @@ public class ArenaRankIcon : MonoBehaviour
 {
     [SerializeField] private Image _image;
     [SerializeField] private Sprite[] rankIcons; // 暂定13个等级 
-
+    [SerializeField] private Animator _animator;
+    
     public void Set(int point)
     {
-        var rank = point / 100;
-        rank = Mathf.Clamp(rank, 0, rankIcons.Length - 1);
+        var rank = PlayfabSetting.ArenaPointToRank(point);
         _image.sprite = rankIcons[rank];
+    }
+    
+    public void RankUpAnim()
+    {
+        _animator.SetTrigger("rankChange");
     }
 }

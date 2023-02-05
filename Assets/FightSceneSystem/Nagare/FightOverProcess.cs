@@ -40,6 +40,11 @@ namespace FightScene
                             }
                         );
                     }
+                    else
+                    {
+                        var a = UILayerLoader.Load<ArenaFightOver>();
+                        a.Step2Anim();
+                    }
                     //FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
                 break;
                 case FightEventType.Quest:
@@ -52,19 +57,19 @@ namespace FightScene
                                 var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                                 var level = jsonResult.ContainsKey("progressLevel") ? jsonResult["progressLevel"] : 0;
                                 var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
-                                var rewardDia = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
+                                var rewardDm = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
                                 var firstTime = jsonResult.ContainsKey("firstTime") ? jsonResult["firstTime"] : false;
                                 
                                 var levelInt = Convert.ToInt32(level);
                                 PlayerAccountInfo.Me.arcadeProcess = levelInt;
                                 var rewardGdInt = Convert.ToInt32(rewardGd);
-                                var rewardGmInt = Convert.ToInt32(rewardDia);
+                                var rewardDmInt = Convert.ToInt32(rewardDm);
                                 var firstTimeBool = (bool)firstTime;
                                 
                                 var a = UILayerLoader.Load<ArenaFightOver>();
                                 a.Step2Anim();
-                                a.ShowAward(rewardGdInt, rewardGmInt).Forget();
-
+                                a.ShowAward(rewardDmInt, rewardGdInt).Forget();
+                                
                                 if (firstTimeBool)
                                 {
                                     switch (levelInt)
@@ -112,19 +117,22 @@ namespace FightScene
                     }
                     else
                     {
-                        var cc = UILayerLoader.Load<ArenaFightOver>();
-                        cc.ShowAward(0, 0).Forget();
+                        var a = UILayerLoader.Load<ArenaFightOver>();
+                        a.Step2Anim();
+                        a.AgainBtn.gameObject.SetActive(true);
                     }
                     break;
                 case FightEventType.Self:
                     var c = UILayerLoader.Load<CommonFightResult>();
-                    c.Initialise(FightScene.target.ReturnToFront, 
+                    c.Setup(
+                        FightScene.target.ReturnToFront, 
                         () =>
                         {
                             LocalGameRestart();
                             UILayerLoader.Remove<CommonFightResult>();
-                        });
-                    //c.ShowSKillSets(FightingStepLayer.target.team1UI, c.GetIconAndSKillShowUISetT());
+                        }
+                    );
+                    //c.ShowSKillSets(FightingStepLayer.target.team1UI);
                     break;
                 case FightEventType.SkillTest:
                     SkillTestReload();

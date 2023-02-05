@@ -2,8 +2,8 @@
 
 public class IconAndSKillShowUISet : MonoBehaviour
 {
-    public RectTransform iconPlace;
-    public RectTransform nineSKillPlace;
+    [SerializeField] RectTransform iconPlace;
+    [SerializeField] RectTransform nineSKillPlace;
     
     public void Set(SideUnitIcon sideUnitIcon, NineForShow nineForShow)
     {
