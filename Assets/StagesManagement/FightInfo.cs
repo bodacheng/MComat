@@ -191,6 +191,8 @@ public class FightInfo : ScriptableObject
         var stage = CreateInstance<FightInfo>();
         stage.FightMembers = FightMembers.RandomSkillTest(teamMode);
         stage.battleGroundID = 0;
+        stage.Team1Auto = true;
+        stage.Team2Auto = true;
         stage.team1Mode = teamMode;
         stage.team2Mode = teamMode;
         stage.EventType = FightEventType.SkillTest;
