@@ -1,11 +1,12 @@
-﻿using UnityEngine;
-using mainMenu;
+﻿using mainMenu;
 using DummyLayerSystem;
 
 // 任何报酬的赋予都是服务端的工作，而反应在客户端上应该是一种根据远程结果进行刷新的机制
 
 public class MailDetailProcess : MSceneProcess
 {
+    private string mailId;
+    
     public MailDetailProcess()
     {
         Step = MainSceneStep.MailDetail;
@@ -14,6 +15,7 @@ public class MailDetailProcess : MSceneProcess
     MailDetailView _mailDetailViewLayer;
     public override void ProcessEnter<String>(String id)
     {
+        this.mailId = id.ToString();
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
         upperInfoBar.Setup(null, null,null, null);
         _mailDetailViewLayer = UILayerLoader.Load<MailDetailView>();
@@ -21,6 +23,11 @@ public class MailDetailProcess : MSceneProcess
         var mail = PlayFabReadClient.Get(id.ToString());
         _mailDetailViewLayer.Read(mail);
         SetLoaded(true);
+    }
+    
+    public override void ProcessEnter()
+    {
+        ProcessEnter(mailId);
     }
     
     public override void ProcessEnd()

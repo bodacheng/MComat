@@ -1,5 +1,4 @@
-﻿using dataAccess;
-using DummyLayerSystem;
+﻿using DummyLayerSystem;
 using mainMenu;
 
 public class StonesPage : MSceneProcess

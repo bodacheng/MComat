@@ -4,6 +4,7 @@ using mainMenu;
 public class DropTableInfoDetail : MSceneProcess
 {
     private DropTableInfoLayer _layer;
+    private string tableId;
     
     public DropTableInfoDetail()
     {
@@ -13,7 +14,13 @@ public class DropTableInfoDetail : MSceneProcess
     public override void ProcessEnter<T>(T tableId)
     {
         _layer = UILayerLoader.Load<DropTableInfoLayer>();
-        CloudScript.GetDropTableInfo(_layer.ShowDropTableInfo, tableId as string);
+        this.tableId = tableId as string;
+        CloudScript.GetDropTableInfo(_layer.ShowDropTableInfo, this.tableId);
+    }
+    
+    public override void ProcessEnter()
+    {
+        ProcessEnter(tableId);
     }
 
     public override void ProcessEnd()

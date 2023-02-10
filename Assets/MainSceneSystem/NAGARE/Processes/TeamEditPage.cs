@@ -44,6 +44,11 @@ public class TeamEditPage : MSceneProcess
         EnterProcess(_teamMode);
     }
     
+    public override void ProcessEnter()
+    {
+        EnterProcess(_teamMode);
+    }
+    
     public override void ProcessEnd()
     {
         UILayerLoader.Remove<UnitsLayer>();
