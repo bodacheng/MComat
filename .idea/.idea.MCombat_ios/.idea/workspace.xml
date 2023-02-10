@@ -3,18 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BOWeaponSystem/Decomposition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BOWeaponSystem/Decomposition.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SettingLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SettingLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Config/LanguageCode.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/LanguageCode.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightLoad/FightLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightLoad/FightLoad.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillNameTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillNameTable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Language/LanguageConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Language/LanguageConverter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Language/LanguageConverterManger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Language/LanguageConverterManger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Language/Translate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Language/Translate.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ObjectPools/DecompositionPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ObjectPools/DecompositionPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SettingLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SettingLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Setting/AppSetting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/AppSetting.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,7 +206,8 @@
       <workItem from="1675574291451" duration="9473000" />
       <workItem from="1675780019327" duration="1190000" />
       <workItem from="1675990440766" duration="4953000" />
-      <workItem from="1675999592005" duration="9593000" />
+      <workItem from="1675999592005" duration="9659000" />
+      <workItem from="1676018867213" duration="983000" />
     </task>
     <servers />
   </component>

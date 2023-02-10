@@ -134,6 +134,7 @@ public class SettingLayer : UILayer
             devicePanel.gameObject.SetActive(false);
             supportPanel.gameObject.SetActive(false);
             nickNamePanel.gameObject.SetActive(false);
+            languagePanel.gameObject.SetActive(false);
         }
         
         volumeBtn.onClick.AddListener(() =>
@@ -198,8 +199,10 @@ public class SettingLayer : UILayer
                 enBtn.onClick.AddListener(() => { SetLanguage(SystemLanguage.English); });
                 jpBtn.onClick.AddListener(() => { SetLanguage(SystemLanguage.Japanese); });
                 chBtn.onClick.AddListener(() => { SetLanguage(SystemLanguage.Chinese); });
+                SetSelectedFrame(languageBtn.GetComponent<RectTransform>());
             }
         );
+        
         LanguageIndicator();
         
         nickNameBtn.onClick.AddListener(() =>
