@@ -10,15 +10,15 @@ public partial class StageEditor {
     
     async void Members(FightMembers target)
     {
-        EditorGUILayout.LabelField(" Enemies infos ", _title);
+        EditorGUILayout.LabelField(" Enemies infos ");
         GUILayout.BeginHorizontal();
 
         Texture2D GetIconTexture2D(Sprite icon)
         {
-            Texture2D croppedTexture = new Texture2D(10,10);
+            var croppedTexture = new Texture2D(10,10);
             if (icon == null)
             {
-                icon = SlotEmpty;
+                icon = DefaultIconSetting._unitSlotEmpty;
             }
             
             croppedTexture = new Texture2D( (int)icon.rect.width, (int)icon.rect.height );

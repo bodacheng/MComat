@@ -12,12 +12,10 @@ public class FightInfoGUI : Editor
     
     public override void OnInspectorGUI()
     {
-        DrawDefaultInspector ();
+        DrawDefaultInspector();
         var fightInfo = (FightInfo)target;
         if (!initialized)
         {
-            Units.LoadUnitConfigs();
-            SkillConfigTable.LoadAllSkillConfigs();
             fightInfo.Open();
             _stageEditor = new StageEditor();
             initialized = true;

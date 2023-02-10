@@ -89,13 +89,13 @@ public class PowerEstimateTable
         outStream.Close();
     }
     
-    public static void LoadByResource()
+    public static async UniTask LoadFile()
     {
         //暂时做如下处理
-        var CSV = Resources.Load("Account/" + CommonSetting.SkillStaticAnalysis) as TextAsset;
-        if (CSV)
+        var csv = await AddressablesLogic.LoadT<TextAsset>("Config/" + CommonSetting.SkillStaticAnalysis);
+        if (csv)
         {
-            Load(CSV.text);
+            Load(csv.text);
         }
         else
             Debug.Log("没能读取到技能数值参考文件。"+CommonSetting.SkillStaticAnalysis);
@@ -107,18 +107,21 @@ public class PowerEstimateTable
 		var grid = CsvParser2.Parse(text);
         try
         {
-            Debug.Log(grid);
             for(var i = 1 ; i < grid.Length ; i++)
             {
-                var row = new Row
+                if (grid[i].Length == 6) // 程序似乎会把最后的空行也读取所以需这个check
                 {
-                    RECORD_ID = grid[i][0],
-                    REAL_NAME = grid[i][1],
-                    SPLevel = grid[i][2],
-                    EstimateDamage = grid[i][3],
-                    HP = grid[i][4]
-                };
-                rowList.Add(row);
+                    var row = new Row
+                    {
+                        RECORD_ID = grid[i][0],
+                        REAL_NAME = grid[i][1],
+                        SPLevel = grid[i][2],
+                        EstimateDamage = grid[i][3],
+                        AttackCount = grid[i][4],
+                        HP = grid[i][5]
+                    };
+                    rowList.Add(row);
+                }
             }
             isLoaded = true;
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class monster_nameTable
+public class UnitNameTable
 {
 	public class Row
 	{
@@ -12,7 +12,6 @@ public class monster_nameTable
 		public string EN_NAME;
 		public string JP_NAME;
 		public string CN_NAME;
-
 	}
 
 	List<Row> rowList = new List<Row>();

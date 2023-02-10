@@ -2,7 +2,6 @@
 
 using UnityEngine;
 using UnityEditor;
-using System;
 
 public class StageEditorWindow : EditorWindow
 {
@@ -15,9 +14,6 @@ public class StageEditorWindow : EditorWindow
     {
         if (!_initialized)
         {
-            Units.LoadUnitConfigs();
-            SkillConfigTable.LoadAllSkillConfigs();
-            
             _target = new FightInfo();
             _target.FightMembers = new FightMembers();
             _stageEditor = new StageEditor();
@@ -37,24 +33,6 @@ public class StageEditorWindow : EditorWindow
         if (GUILayout.Button("Save"))
         {
             FightInfo.CreateFightInfoAsset(_target.FightMembers, _pathAndNameForLocalSave, _fileName);
-        }
-        
-        EditorGUILayout.Space(200);
-        GenerateArenaDummies();
-    }
-    
-    readonly ArenaDummiesTable table = new ();
-    void GenerateArenaDummies()
-    {
-        table.Load();
-        if (GUILayout.Button("根据ArenaDummiesTable生成假想敌文件（生成于Assets/Resources/ArenaDummies之下）"))
-        {
-            foreach (var row in table.GetRowList())
-            {
-                var fight = FightMembers.RandomFight();
-                fight.SetEnemyLevel(Int32.Parse(row.LEVEL));
-                FightInfo.CreateFightInfoAsset(fight, "Assets/Resources/ArenaDummies", row.NICK_NAME);
-            }
         }
     }
 }

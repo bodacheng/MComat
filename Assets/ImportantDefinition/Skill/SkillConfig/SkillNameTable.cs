@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 
 public class SkillNameTable
 {
@@ -69,10 +70,10 @@ public class SkillNameTable
     	isLoaded = true;
     }
     
-    public static void LoadAllSkillNamesFromLocalConfigFile()
+	public static async UniTask LoadAllSkillNamesFromLocalConfigFile()
     {
-        TextAsset csv = Resources.Load("Account/skill_name") as TextAsset;
-        if (csv != null)
+	    TextAsset csv = await AddressablesLogic.LoadT<TextAsset>("Config/"+ CommonSetting.SkillNameFile);
+	    if (csv != null)
         {
             Load(csv);
         }

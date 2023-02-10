@@ -150,7 +150,7 @@ public partial class OtherTool : EditorWindow
             if (newRow != null && newRow.REAL_NAME != null)
                 Units.rowList.Add(newRow);
         }
-        Units.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : "mst_monster");
+        Units.SaveByCurrentRows(Application.dataPath + "/" + path != null ? path : CommonSetting.UnitConfigFile);
     }
     
     // 以下这个函数对技能表的更新机制企划如下：

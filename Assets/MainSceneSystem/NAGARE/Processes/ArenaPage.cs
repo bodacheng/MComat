@@ -8,7 +8,6 @@ using UnityEngine;
 public class ArenaPage : MSceneProcess
 {
     ArenaLayer arenaLayer;
-    readonly ArenaDummiesTable _table = new ();
     
     public ArenaPage()
     {
@@ -118,7 +117,6 @@ public class ArenaPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        _table.Load();
         EnterProcess();
     }
     
@@ -164,19 +162,6 @@ public class ArenaPage : MSceneProcess
                     arenaLayer.ShowMyTeamByLeaderInfo(_myLeaderboardInfo);
                 }
                 
-                if (exceptSelf.Count < 3)
-                {
-                    var myPoint = (_myLeaderboardInfo != null) ? _myLeaderboardInfo.PlayerLeaderboardEntry.StatValue : 1000;
-                    var list = _table.GetDummiesAroundPoint(myPoint);
-                    for (var i = 0; i < list.Count; i++)
-                    {
-                        exceptSelf.Add(list[i]);
-                        if (exceptSelf.Count == 3)
-                        {
-                            break;
-                        }
-                    }
-                }
                 arenaLayer.DisplayOpponents(exceptSelf, _myLeaderboardInfo);
                 LeaderBoardFinished(true);
                 SetLoaded(true);

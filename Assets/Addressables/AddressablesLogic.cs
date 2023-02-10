@@ -79,9 +79,6 @@ public static class AddressablesLogic
         // WARNING: This will cause all asset bundles to be re-downloaded at startup every time and should not be used in a production game
         //Addressables.ClearDependencyCacheAsync(label);
         
-        Units.LoadUnitConfigs();
-        SkillConfigTable.LoadAllSkillConfigs();
-        
         var downLoadTasks = new List<UniTask>();
         foreach (var label in downLoadLabel)
         {

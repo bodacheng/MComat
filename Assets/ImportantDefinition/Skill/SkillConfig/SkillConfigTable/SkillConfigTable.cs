@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Cysharp.Threading.Tasks;
 using Skill;
 
 public partial class SkillConfigTable
@@ -41,10 +42,10 @@ public partial class SkillConfigTable
         return AttackTypes.Contains(attackType);
     }
     
-    public static void LoadAllSkillConfigs()
+    public static async UniTask LoadAllSkillConfigs()
     {
-        LoadAllSkillConfigFromLocalConfigFile();
-        SkillNameTable.LoadAllSkillNamesFromLocalConfigFile();
+        await LoadAllSkillConfigFromLocalConfigFile();
+        await SkillNameTable.LoadAllSkillNamesFromLocalConfigFile();
     }
     
     static void RefreshSkillConfigDicForReference()
@@ -93,10 +94,10 @@ public partial class SkillConfigTable
         return skillConfigsOfType;
     }
     
-    static void LoadAllSkillConfigFromLocalConfigFile()
+    static async UniTask LoadAllSkillConfigFromLocalConfigFile()
     {
-        var csv = Resources.Load("Account/mst_skill") as TextAsset;
-        var aiCsv = Resources.Load("Account/skill_ai_attrs") as TextAsset;
+        var csv = await AddressablesLogic.LoadT<TextAsset>("Config/" + CommonSetting.SkillConfigFile);
+        var aiCsv = await AddressablesLogic.LoadT<TextAsset>("Config/" + CommonSetting.SkillAIFile);
         Load(csv);
         SkillAIAttrs.Load(aiCsv);
         RefreshSkillConfigDicForReference();

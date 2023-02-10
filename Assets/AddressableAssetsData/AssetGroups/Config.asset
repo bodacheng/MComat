@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Config
+  m_EditorClassIdentifier: 
+  m_GroupName: Config
+  m_Data:
+    m_SerializedData: []
+  m_GUID: e937ec13c8ac84573b6ede0b131434e7
+  m_SerializeEntries:
+  - m_GUID: d7db40fb5b64b403480905c9cb8899d6
+    m_Address: Config/mst_unit
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+  - m_GUID: ba918278b8f5f41299cb4e7930b9b5b4
+    m_Address: Config/skill_name
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+  - m_GUID: a68841c2c08ac4fefafe74c4812cbcd1
+    m_Address: Config/skill_ai_attrs
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+  - m_GUID: fb73d0a5d0f8b483090a002c2d712a02
+    m_Address: Config/mst_skill
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+  - m_GUID: 748b934bcc8e446789b50cef9fd249ad
+    m_Address: Config/SkillStaticAnalysis
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+  - m_GUID: 07b6bc4776f62485d8a9445bdaed9e04
+    m_Address: Config/LanguageCode
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 4f3fbf609cb0745e1b39aa14279722db, type: 2}
+    - {fileID: 11400000, guid: fe6ac7a1ae94f4c5e83ab2cf90ee0b2a, type: 2}

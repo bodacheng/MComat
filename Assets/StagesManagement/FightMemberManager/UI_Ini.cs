@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public partial class StageEditor{
@@ -92,11 +93,6 @@ public partial class StageEditor{
             alignment = TextAnchor.MiddleCenter,
             stretchWidth = false
         };
-        
-        // 关卡编辑器下，技能配置文件定走resource文件夹，所以不需要走SkillsConfigInfos.loadAllSkillConfigs(), 同理角色配置文件也是
-        SkillConfigTable.LoadAllSkillConfigs();
-        Units.LoadByResource();
-        Units.RefreshDic();
     }
 }
 #endif

@@ -2,29 +2,106 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Config.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Schemas/Config_BundledAssetGroupSchema.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Schemas/Config_ContentUpdateGroupSchema.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaFightOver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaFightOver.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/CommonFightResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/CommonFightResult.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightScene/FightScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightScene/FightScene.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightOverProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightOverProcess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightResultAnim.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightResultAnim.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Arena.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Arena.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/Arena/RankIcon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/Arena/RankIcon.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArenaFightOver.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArenaFightOver.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/CommonFightResult.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/CommonFightResult.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FightingOver/ResultTileUp.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FightingOver/ResultTileUp.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TitleBgLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TitleBgLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/スクリーンショット 2022-12-26 午後7.40.34.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/スクリーンショット 2022-12-26 午後7.40.34.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Setting/Data.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/Data.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Setting/PlayfabSetting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/PlayfabSetting.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/FightOverShow.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/FightOverShow/IconAndSKillShowUISet.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/FightOverShow/IconAndSKillShowUISet.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/FightOverShow/set.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/FightOverShow/set.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UI/ArenaRankIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/ArenaRankIcon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Addressables/AddressablesLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Addressables/AddressablesLogic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Textures/EquipSlot_Background.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Textures/SlotEmpty.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Textures/EquipSlot_Background.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/RPG and MMO UI 11/Textures/SlotEmpty.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Arena/ArenaDummiesTable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Arena/ArenaDummiesTable.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Monster/Units.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Monster/Units.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Monster/monster_nameTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Monster/UnitNameTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Monster/monster_nameTable.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Monster/UnitNameTable.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/PowerEstimateTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/PowerEstimateTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillNameTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillNameTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Language/Translate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Language/Translate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/ArenaPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/ArenaPage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MasterDataTool/MasterDataToolGUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MasterDataTool/MasterDataToolGUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MasterDataTool/Monster_PF.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MasterDataTool/Monster_PF.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MasterDataTool/Skill_PF.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MasterDataTool/Skill_PF.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OtherTool/OtherTool_part.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OtherTool/OtherTool_part.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/ArenaDummies.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/ArenaDummies.csv.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/LanguageCode.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/LanguageCode.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/LanguageCode.csv.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/LanguageCode.csv.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/SkillStaticAnalysis.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/SkillStaticAnalysis.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/SkillStaticAnalysis.csv.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/SkillStaticAnalysis.csv.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/monster_name.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/monster_name.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/monster_name.csv.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/monster_name.csv.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/mst_monster.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/mst_monster.csv.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/mst_skill.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/mst_skill.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/mst_skill.csv.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/mst_skill.csv.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/mst_skill_old.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/mst_skill_old.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/mst_skill_old.csv.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/mst_skill_old.csv.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/skill_ai_attrs.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/skill_ai_attrs.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/skill_ai_attrs.csv.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/skill_ai_attrs.csv.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/skill_name.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/skill_name.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/skill_name.csv.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/skill_name.csv.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/stoneCatagoryDefine.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/stoneCatagoryDefine.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Account/stoneCatagoryDefine.json.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/stoneCatagoryDefine.json.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/11.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/11.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/12.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/12.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Config.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/14.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/14.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Schemas/Config_BundledAssetGroupSchema.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/15.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/15.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Schemas/Config_ContentUpdateGroupSchema.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/17.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/17.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/18.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/18.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/20.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/20.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/21uyi.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/21uyi.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/22rty.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/22rty.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/5.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/5.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/546.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/546.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/6.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/6.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/8.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/8.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/9.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/9.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/bf.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/bf.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/fsdfs.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/fsdfs.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/ghj.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/ghj.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/nbv.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/nbv.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/try.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/try.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/vgrt.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/vgrt.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/wer.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/wer.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/yui.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/ArenaDummies/yui.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Setting/CommonSetting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/CommonSetting.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Setting/DefaultIconSetting.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/DefaultIconSetting.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Setting/DefaultIconSetting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/DefaultIconSetting.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Singleton/UnitIconDic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/UnitIconDic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightInfoGUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightInfoGUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/Members.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/Members.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/UI_Ini.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/UI_Ini.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StageEditorWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/StageEditorWindow.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,6 +163,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Settings/AddressableAssetProfileSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.mathematics@1.2.6/Unity.Mathematics/Noise/cellular2D.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFab/CloudScripts/VirtualCurrency.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.analytics@4.0.1/Runtime/Platform/Locale.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Lighting/ProbeVolume/ProbeVolumeBakingProcessSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/DropTablePage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Utilities/CameraCaptureBridge.cs" root0="SKIP_HIGHLIGHTING" />
@@ -128,6 +206,7 @@
   </component>
   <component name="ProjectId" id="2IS7AXmxi1SEqxDoRshceHtRUYD" />
   <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
@@ -222,6 +301,9 @@
       <workItem from="1675483397837" duration="1715000" />
       <workItem from="1675559335996" duration="4595000" />
       <workItem from="1675574291451" duration="9473000" />
+      <workItem from="1675780019327" duration="1190000" />
+      <workItem from="1675990440766" duration="4953000" />
+      <workItem from="1675999592005" duration="4499000" />
     </task>
     <servers />
   </component>

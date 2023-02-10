@@ -17,7 +17,6 @@ public partial class StageEditor
     string _focusingType = "human";
     int stageLevel = 1;
     
-    private static Sprite SlotEmpty;
     private static bool unitIconInitialized = false;
     async void UnitIconInitialize()
     {
@@ -31,8 +30,6 @@ public partial class StageEditor
                 await UnitIconDic.Load(words[1]);
             }
         }
-        
-        SlotEmpty = FightInfoGUI.GetSprite("SlotEmpty.png");
         unitIconInitialized = true;
     }
     

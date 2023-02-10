@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Cysharp.Threading.Tasks;
 using Skill;
 
 public static class Units
@@ -25,16 +26,16 @@ public static class Units
 		public string DEFENDABLE_FLAG;
 	}
             
-    public static UnitConfig GetUnitConfig(string resourceId)
+    public static UnitConfig GetUnitConfig(string RECORD_ID)
     {
-        if (resourceId == null)
+        if (RECORD_ID == null)
             return null;
-        return Dic.ContainsKey(resourceId) ? Dic[resourceId] : null;
+        return Dic.ContainsKey(RECORD_ID) ? Dic[RECORD_ID] : null;
     }
-    public static void LoadByResource()
+    static async UniTask LoadFile()
     {
         //暂时做如下处理
-        TextAsset CSV = Resources.Load("Account/mst_monster") as TextAsset;
+        TextAsset CSV = await AddressablesLogic.LoadT<TextAsset>("Config/" + CommonSetting.UnitConfigFile);
         if (CSV)
         {
             Load(CSV);
@@ -43,7 +44,7 @@ public static class Units
             Debug.Log("没能读取到角色数据库文件。");
     }
     
-    public static void RefreshDic()
+    static void RefreshDic()
     {
         Dic.Clear();
         var characterResourceInfos = RowToConfigList(rowList);
@@ -53,13 +54,13 @@ public static class Units
         }
     }
     
-    public static void LoadUnitConfigs()
+    public static async UniTask LoadUnitConfigs()
     {
-        LoadByResource();
+        await LoadFile();
         RefreshDic();
     }
-
-	public static List<Row> rowList = new List<Row>();
+    
+    public static readonly List<Row> rowList = new();
     static bool isLoaded;
 
 	public static bool IsLoaded()

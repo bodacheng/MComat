@@ -21,7 +21,6 @@ public class LocalMasterDataToolGUI : EditorWindow {
         
         if (GUILayout.Button("输出最新技能数值参考文件（技能详细画面用）目前需要play模式下执行"))
         {
-            SkillConfigTable.LoadAllSkillConfigs();
             PowerEstimateTable.Save("human").Forget();
         }
 

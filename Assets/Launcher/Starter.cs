@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Unity.Collections;
 using UnityEngine;
 using UnityEditor;
@@ -28,21 +29,34 @@ public class Starter : MonoBehaviour
     [SerializeField] DefaultIconSetting defaultIconSetting;
     [SerializeField] List<string> downLoadLabels;
     public List<string> DownLoadLabels => downLoadLabels;
-    
-    public void Initialise()
+
+    void Awake()
+    {
+        if (Application.isEditor)
+        {
+            Initialise();
+        }
+    }
+
+    public async void Initialise()
     {
         NativeLeakDetection.Mode = NativeLeakDetectionMode.EnabledWithStackTrace;
         AddressablesLogic.ReleaseAsyncOperationHandles();
+        commonSetting.Initialise();
         fightGlobalSetting.Initialise();
         playFabSetting.Initialise();
-        commonSetting.Initialise();
-        Translate.LoadLanguageCodes();
         defaultIconSetting.Initialise();
-        SkillConfigTable.LoadAllSkillConfigs();
-        PowerEstimateTable.LoadByResource();
-        Units.LoadByResource();
-        Units.RefreshDic();
+        await UniTask.WhenAll(
+            new List<UniTask>()
+            {
+                SkillConfigTable.LoadAllSkillConfigs(),
+                PowerEstimateTable.LoadFile(),
+                Units.LoadUnitConfigs(),
+                Translate.LoadLanguageCodes()
+            }
+        );
         //MobileAds.Initialize(initStatus => { Debug.Log(initStatus);});
+        Debug.Log("Config Files Loaded With No Errors");
     }
     
     public void EnterFrontScene()

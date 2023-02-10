@@ -10,7 +10,6 @@ public partial class MasterDataTool
     
     public void OutputSKStonesCatalog()
     {
-        SkillConfigTable.LoadAllSkillConfigs();
         var pFSKDefine = new PFDefine();
         pFSKDefine.CatalogVersion = "stone";
         var items = new List<PFDefine.Item>();
@@ -33,7 +32,6 @@ public partial class MasterDataTool
 
     public void OutputSKStonesStore()
     {
-        SkillConfigTable.LoadAllSkillConfigs();
         var pFSKDefine = new PFStoreDefine();
         pFSKDefine.StoreId = "stone";
         var storeItems = new List<PFStoreDefine.StoreItem>();
