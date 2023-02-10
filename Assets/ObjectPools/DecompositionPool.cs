@@ -129,7 +129,7 @@ public class DecompositionPool : ObjectPool<Decomposition> {
         }
         if (decomposition.audioSource != null)
         {
-            decomposition.audioSource.volume = AppSetting.value.EffectsVolume;
+            decomposition.audioSource.volume = AppSetting.Value.EffectsVolume;
             decomposition.audioSource.minDistance = 20;
             decomposition.audioSource.maxDistance = 80;
         }

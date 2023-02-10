@@ -70,16 +70,19 @@ public static class Translate
 		string text = default;
 		if (row != null)
 		{
-			switch (AppSetting.Language)
+			switch (AppSetting.Value.Language)
 			{
-				case ApiLanguage.EnUs:
+				case SystemLanguage.English:
 					text = row.EN;
 					break;
-				case ApiLanguage.JaJp:
+				case SystemLanguage.Japanese:
 					text = row.JP;
 					break;
-				case ApiLanguage.ZhCn:
+				case SystemLanguage.Chinese:
 					text = row.CH;
+					break;
+				default:
+					text = row.EN;
 					break;
 			}
 		}

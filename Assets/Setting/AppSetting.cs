@@ -1,25 +1,15 @@
 ﻿using UnityEngine;
 using System.IO;
-using System;
 using Newtonsoft.Json;
 using Json;
 
-public enum ApiLanguage
-{
-    EnUs,
-    JaJp,
-    ZhCn
-}
-
 public class AppSetting
 {
-    public static AppSetting value = new ();
-    
+    public static AppSetting Value = new ();
     float _bgmVolume = 0.5f, _effectsVolume = 0.5f, _cvVolume = 0.5f;
-    
     public static AudioSource bgmSource;
-    
-    public static ApiLanguage Language = ApiLanguage.JaJp;
+
+    public SystemLanguage Language { get; set; } = SystemLanguage.English;
     
     public float BgmVolume
     {
@@ -51,29 +41,27 @@ public class AppSetting
 
     public static void Save()
     {
-        string json = JsonConvert.SerializeObject(value);
+        string json = JsonConvert.SerializeObject(Value);
         LocalJson.SaveToJsonFile_persistentDataPath(null, "AppSetting.json", json);
     }
     
     public static void Load()
     {
-        try
+        var wholePath = Application.persistentDataPath + "/AppSetting.json";
+        if (File.Exists(wholePath))
         {
-            AppSetting info = new AppSetting();
-            string wholePath = Application.persistentDataPath + "/AppSetting.json";
-            if (File.Exists(wholePath))
-            {
-                string dataAsJson = File.ReadAllText(wholePath);
-                info = JsonConvert.DeserializeObject<AppSetting>(dataAsJson);
-                Debug.Log("基本程序设置读取成功");
-            }
-            value = info;
+            var dataAsJson = File.ReadAllText(wholePath);
+            Value = JsonConvert.DeserializeObject<AppSetting>(dataAsJson);
+            Debug.Log("基本程序设置读取成功");
         }
-        catch (Exception e)
+        else
         {
-            Debug.Log("基本程序设置读取失败");
-            Debug.Log(e.ToString());
-            value = new AppSetting();
+            Value = new AppSetting
+            {
+                Language = Application.systemLanguage is SystemLanguage.ChineseSimplified or SystemLanguage.ChineseTraditional ? 
+                    SystemLanguage.Chinese : Application.systemLanguage,
+                _bgmVolume = 0.5f, _effectsVolume = 0.5f, _cvVolume = 0.5f
+            };
             Save();
         }
     }

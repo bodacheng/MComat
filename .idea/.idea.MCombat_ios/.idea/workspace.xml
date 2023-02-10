@@ -3,16 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Gacha/DropTableInfoDetail.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Gacha/DropTableInfoDetail.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Mail/MailDetailProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/Mail/MailDetailProcess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/SkillStone/StonesPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/SkillStone/StonesPage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/TeamEditPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/TeamEditPage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TitleBgLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TitleBgLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/hisnameishotaru様_ラフ_完成.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/hisnameishotaru様_ラフ_完成.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BOWeaponSystem/Decomposition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BOWeaponSystem/Decomposition.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SettingLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SettingLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Config/LanguageCode.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/LanguageCode.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightLoad/FightLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightLoad/FightLoad.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillNameTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillNameTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Language/LanguageConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Language/LanguageConverter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Language/LanguageConverterManger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Language/LanguageConverterManger.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Language/Translate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Language/Translate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ObjectPools/DecompositionPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ObjectPools/DecompositionPool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SettingLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SettingLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Setting/AppSetting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/AppSetting.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +87,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Ads/RewardedAdsButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4379fcb5ffcd422abdabe963856ef06326000/1d/7d9a4d3f/TweenerCore`3.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/UIElements/PanelRaycaster.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c884d993da6242ae98d95c11d4715907157400/ac/ae6f1025/SystemLanguage.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/ResultTableNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/RankingLayer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Build/AnalyzeRules/AnalyzeRule.cs" root0="SKIP_HIGHLIGHTING" />
@@ -213,7 +216,7 @@
       <workItem from="1675574291451" duration="9473000" />
       <workItem from="1675780019327" duration="1190000" />
       <workItem from="1675990440766" duration="4953000" />
-      <workItem from="1675999592005" duration="5997000" />
+      <workItem from="1675999592005" duration="9593000" />
     </task>
     <servers />
   </component>

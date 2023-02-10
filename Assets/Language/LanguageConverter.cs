@@ -34,15 +34,15 @@ public class LanguageConverter : MonoBehaviour
             Translate.Row row = Translate.Find_RECORD_ID(languageCode);
             if (row != null)
             {
-                switch (AppSetting.Language)
+                switch (AppSetting.Value.Language)
                 {
-                    case ApiLanguage.EnUs:
+                    case SystemLanguage.English:
                         target.text = row.EN;
                         break;
-                    case ApiLanguage.JaJp:
+                    case SystemLanguage.Japanese:
                         target.text = row.JP;
                         break;
-                    case ApiLanguage.ZhCn:
+                    case SystemLanguage.Chinese:
                         target.text = row.CH;
                         break;
                 }

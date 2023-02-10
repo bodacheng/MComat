@@ -25,21 +25,21 @@ public class SkillNameTable
         return "UnKnown";
     }
     
-    public static void PrepareSkillNames(ApiLanguage apiLanguage)
+    public static void PrepareSkillNames(SystemLanguage language)
     {
         foreach (Row row in rowList)
         {
             if (!SkillNameDic.ContainsKey(row.RECORD_ID))
             {
-                switch (apiLanguage)
+                switch (language)
                 {
-                    case ApiLanguage.EnUs:
+                    case SystemLanguage.English:
                         SkillNameDic.Add(row.RECORD_ID,row.EN_NAME);
                     break;
-                    case ApiLanguage.JaJp:
+                    case SystemLanguage.Japanese:
                         SkillNameDic.Add(row.RECORD_ID,row.JP_NAME);
                     break;
-                    case ApiLanguage.ZhCn:
+                    case SystemLanguage.Chinese:
                         SkillNameDic.Add(row.RECORD_ID,row.CN_NAME);
                     break;
                     default:
@@ -66,7 +66,7 @@ public class SkillNameTable
             };
             rowList.Add(row);
     	}
-        PrepareSkillNames(AppSetting.Language);
+        PrepareSkillNames(AppSetting.Value.Language);
     	isLoaded = true;
     }
     

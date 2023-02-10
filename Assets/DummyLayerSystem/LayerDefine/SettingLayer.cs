@@ -11,6 +11,7 @@ public class SettingLayer : UILayer
     [SerializeField] Button volumeBtn;
     [SerializeField] Button deviceBtn;
     [SerializeField] Button supportBtn;
+    [SerializeField] Button languageBtn;
     [SerializeField] Button nickNameBtn;
     #endregion
     
@@ -19,6 +20,7 @@ public class SettingLayer : UILayer
     [SerializeField] RectTransform accountPanel;
     [SerializeField] RectTransform devicePanel;
     [SerializeField] RectTransform supportPanel;
+    [SerializeField] RectTransform languagePanel;
     [SerializeField] RectTransform nickNamePanel;
     #endregion
     
@@ -46,6 +48,13 @@ public class SettingLayer : UILayer
     #region Support
     [SerializeField] Button privacyBtn;
     [SerializeField] Button contactBtn;
+    #endregion
+    
+    #region Support
+    [SerializeField] Button chBtn;
+    [SerializeField] Button jpBtn;
+    [SerializeField] Button enBtn;
+    [SerializeField] GameObject selectedIndicator;
     #endregion
     
     #region nickName
@@ -154,6 +163,44 @@ public class SettingLayer : UILayer
             supportPanel.gameObject.SetActive(true);
             SetSelectedFrame(supportBtn.GetComponent<RectTransform>());
         });
+
+        void LanguageIndicator()
+        {
+            switch (AppSetting.Value.Language)
+            {
+                case SystemLanguage.English:
+                    selectedIndicator.transform.SetParent(enBtn.transform);
+                    break;
+                case SystemLanguage.Japanese:
+                    selectedIndicator.transform.SetParent(jpBtn.transform);
+                    break;
+                case SystemLanguage.Chinese:
+                case SystemLanguage.ChineseSimplified:
+                case SystemLanguage.ChineseTraditional:
+                    selectedIndicator.transform.SetParent(chBtn.transform);
+                    break;
+            }
+            selectedIndicator.transform.localPosition= Vector3.zero;
+        }
+
+        void SetLanguage(SystemLanguage code)
+        {
+            AppSetting.Value.Language = code;
+            LanguageConverterManger.ChangeLanguage();
+            LanguageIndicator();
+        }
+        
+        languageBtn.onClick.AddListener(
+            () =>
+            {
+                CloseAllPanels();
+                languagePanel.gameObject.SetActive(true);
+                enBtn.onClick.AddListener(() => { SetLanguage(SystemLanguage.English); });
+                jpBtn.onClick.AddListener(() => { SetLanguage(SystemLanguage.Japanese); });
+                chBtn.onClick.AddListener(() => { SetLanguage(SystemLanguage.Chinese); });
+            }
+        );
+        LanguageIndicator();
         
         nickNameBtn.onClick.AddListener(() =>
         {
@@ -216,21 +263,21 @@ public class SettingLayer : UILayer
     
     void ResetSliders()
     {
-        effectsSoundsSlider.value = AppSetting.value.EffectsVolume;
-        bgmSlider.value = AppSetting.value.BgmVolume;
-        cvSlider.value = AppSetting.value.CvVolume;
+        effectsSoundsSlider.value = AppSetting.Value.EffectsVolume;
+        bgmSlider.value = AppSetting.Value.BgmVolume;
+        cvSlider.value = AppSetting.Value.CvVolume;
     }
     
     public void onBgmChange()
     {
-        AppSetting.value.BgmVolume = bgmSlider.value;
+        AppSetting.Value.BgmVolume = bgmSlider.value;
     }
     public void onCVsChange()
     {
-        AppSetting.value.CvVolume = cvSlider.value;        
+        AppSetting.Value.CvVolume = cvSlider.value;        
     }
     public void onEffectsSoundChange()
     {
-        AppSetting.value.EffectsVolume = effectsSoundsSlider.value;
+        AppSetting.Value.EffectsVolume = effectsSoundsSlider.value;
     }
 }
