@@ -3,21 +3,46 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Units.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Units.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BOWeaponSystem/Health System/AbstractShaderMesh.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BOWeaponSystem/Health System/AbstractShaderMesh.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Materials/M_BM_Skin_1_Bottom.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Materials/M_BM_Skin_1_Bottom.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Materials/M_BM_Skin_1_Top.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Materials/M_BM_Skin_1_Top.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Textures/Skin_2/Top/M_BM_Skin_2_Top.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Textures/Skin_2/Top/M_BM_Skin_2_Top.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Textures/Skin_2/bottom/M_BM_Skin_2_Bottom.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Textures/Skin_2/bottom/M_BM_Skin_2_Bottom.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_01.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_01.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_02.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_02.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_03.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_03.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_04.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_04.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_05.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_05.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_06.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_06.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_07.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_07.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_08.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_08.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_09.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_09.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_10.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_10.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_11.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_11.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_12.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_12.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_13.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_13.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_14.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_14.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_15.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_15.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_15_Hair.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_15_Hair.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_8_Hair.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_8_Hair.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/ModelResource/adam_new/close/Material #3.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/ModelResource/adam_new/close/Material #3.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Config/LanguageCodeForWorkFin.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/LanguageCodeForWorkFin.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/tetsuya.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/tetsuya.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Language/Translate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Language/Translate.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/unit.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/unit/human.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/unit/human/tetsuya.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/unit/human/tetsuya.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Singleton/GeneralModelPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/GeneralModelPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GvhProjectSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GvhProjectSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Material/RobotSoldier_Body_1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Material/RobotSoldier_Body_1.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Material/RobotSoldier_Head_1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Material/RobotSoldier_Head_1.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/sybill.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/sybill.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/男主角/kuziMat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/男主角/kuziMat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/男主角/lianMat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/男主角/lianMat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/男主角/shentiMat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/男主角/shentiMat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/男主角/toufaMat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/男主角/toufaMat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/男主角/xieziMat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/男主角/xieziMat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/男主角/yanqiu.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/男主角/yanqiu.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/男主角/yifuMat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/男主角/yifuMat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/动画/FBX/蒙皮文件/Material #5.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/动画/FBX/蒙皮文件/Material #5.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/动画/FBX/蒙皮文件/Material #6.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/动画/FBX/蒙皮文件/Material #6.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/动画/FBX/蒙皮文件/Material #9.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/动画/FBX/蒙皮文件/Material #9.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/学生妹fix/Material #8.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/学生妹fix/Material #8.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/拳击手fix/Material #7.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/拳击手fix/Material #7.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +251,8 @@
       <workItem from="1675990440766" duration="4953000" />
       <workItem from="1675999592005" duration="9659000" />
       <workItem from="1676018867213" duration="1204000" />
-      <workItem from="1676079122574" duration="2430000" />
+      <workItem from="1676079122574" duration="3447000" />
+      <workItem from="1676121427103" duration="2633000" />
     </task>
     <servers />
   </component>

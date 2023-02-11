@@ -8,7 +8,8 @@ public class AbstractShaderMesh : MonoBehaviour
     protected Renderer mesh = default;
 
     private static readonly int kPropertyBaseColor = Shader.PropertyToID("_BaseColor");
-    private static readonly int kPropertyEmissionColor = Shader.PropertyToID("_EmissionColor");
+    private static readonly int kPropertyEmissionColor2 = Shader.PropertyToID("_EmissionColor");
+    private static readonly int kPropertyEmissionColor1 = Shader.PropertyToID("_Emissive");
 
     public Renderer Mesh => mesh;
     public Material[] CurrentMaterials { get; set; } = default;
@@ -56,7 +57,12 @@ public class AbstractShaderMesh : MonoBehaviour
         {
             foreach (var m in CurrentMaterials)
             {
-                return m.GetColor(kPropertyEmissionColor);
+                if (m.HasProperty(kPropertyEmissionColor1))
+                {
+                    return m.GetColor(kPropertyEmissionColor1);
+                }
+                if (m.HasProperty(kPropertyEmissionColor2))
+                    return m.GetColor(kPropertyEmissionColor2);
             }
             return Color.clear;
         }
@@ -64,7 +70,13 @@ public class AbstractShaderMesh : MonoBehaviour
         {
             foreach (var m in CurrentMaterials)
             {
-                m.SetColor(kPropertyEmissionColor, value);
+                if (m.HasProperty(kPropertyEmissionColor1))
+                {
+                    m.SetColor(kPropertyEmissionColor1,value);
+                }
+                    
+                if (m.HasProperty(kPropertyEmissionColor2))
+                    m.SetColor(kPropertyEmissionColor2,value);
             }
         }
     }
