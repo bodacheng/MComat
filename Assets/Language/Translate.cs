@@ -41,13 +41,18 @@ public static class Translate
 		string[][] grid = CsvParser2.Parse(csv.text);
 		for(int i = 1 ; i < grid.Length ; i++)
 		{
-			Row row = new Row();
-			row.RECORD_ID = grid[i][0];
-			row.EN = grid[i][1];
-			row.JP = grid[i][2];
-			row.CH = grid[i][3];
+			if (grid[i].Length == 4)
+			{
+				Row row = new Row
+				{
+					RECORD_ID = grid[i][0],
+					EN = grid[i][1],
+					JP = grid[i][2],
+					CH = grid[i][3]
+				};
+				rowList.Add(row);
+			}
 
-			rowList.Add(row);
 		}
 		isLoaded = true;
 	}

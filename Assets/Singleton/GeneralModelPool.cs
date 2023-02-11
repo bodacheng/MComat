@@ -16,17 +16,8 @@ namespace Singleton
                 return null;
             }
 
-            GameObject tempModel;
-            if (unitConfig.REAL_NAME == "tetsuya")
-            {
-                var prefab = Resources.Load("unit/human/tetsuya");
-                tempModel = GameObject.Instantiate(prefab) as GameObject;
-            }
-            else
-            {
-                tempModel = await AddressablesLogic.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME);
-                tempModel.transform.SetParent(parent);
-            }
+            var tempModel = await AddressablesLogic.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME);
+            tempModel.transform.SetParent(parent);
             var odl = tempModel.GetComponent<OutsideDataLink>();
             if (odl == null)
             {
