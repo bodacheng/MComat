@@ -3,21 +3,30 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementStoneTagsGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementStoneTagsGroup.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SettingLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SettingLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Config/LanguageCode.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/LanguageCode.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Config/skill_name.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/skill_name.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Monster/UnitNameTable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Monster/UnitNameTable.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillNameTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillNameTable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/GotchaResultLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/GotchaResultLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SkillEditLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SkillEditLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/StoneListLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/StoneListLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/StoneProperty/close_show.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/StoneProperty/close_show.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/StoneProperty/far_show.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/StoneProperty/far_show.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/StoneProperty/near_show.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/StoneProperty/near_show.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UnitBox/SkillStoneDetail.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UnitBox/SkillStoneDetail.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/StoneBtnEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/StoneBtnEffect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/normal.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/normal.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/normal.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/normal.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/normal.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FrontLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FrontLayer.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,7 +240,7 @@
       <workItem from="1676079122574" duration="3447000" />
       <workItem from="1676121427103" duration="2633000" />
       <workItem from="1676172472280" duration="6517000" />
-      <workItem from="1676196114741" duration="5261000" />
+      <workItem from="1676196114741" duration="6699000" />
     </task>
     <servers />
   </component>

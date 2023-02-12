@@ -104,6 +104,7 @@ public class ElementStoneTagsGroup
         p.gameObject.name = "UIExTag"+ eX;
         _exTagEffects.Add(eX,p);
         p.gameObject.transform.position = pos;
+        p.gameObject.SetActive(true);
         p.Play(true);
     }
     
