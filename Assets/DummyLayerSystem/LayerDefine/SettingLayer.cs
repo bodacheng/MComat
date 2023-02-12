@@ -184,10 +184,11 @@ public class SettingLayer : UILayer
             selectedIndicator.transform.localPosition= Vector3.zero;
         }
 
-        void SetLanguage(SystemLanguage code)
+        async void SetLanguage(SystemLanguage code)
         {
             AppSetting.Value.Language = code;
             LanguageConverterManger.ChangeLanguage();
+            await SkillNameTable.LoadSkillNamesFromConfig();
             LanguageIndicator();
         }
         

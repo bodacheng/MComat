@@ -45,7 +45,7 @@ public partial class SkillConfigTable
     public static async UniTask LoadAllSkillConfigs()
     {
         await LoadAllSkillConfigFromLocalConfigFile();
-        await SkillNameTable.LoadAllSkillNamesFromLocalConfigFile();
+        await SkillNameTable.LoadSkillNamesFromConfig();
     }
     
     static void RefreshSkillConfigDicForReference()

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
 using Skill;
@@ -7,53 +8,58 @@ namespace mainMenu
 {
     public class SkillStoneDetail : MonoBehaviour
     {
-        [Space(2)]
         [Header("图标")]
-        [SerializeField] RectTransform IconShowT;
+        [SerializeField] RectTransform iconShowT;
         
-        [Space(2)]
         [Header("技能名字")]
-        [SerializeField] Text keyname;
-        [SerializeField] Text Showname;
+        [SerializeField] Text keyName;
+        [SerializeField] Text showName;
+
+        [Header("技能类型图标")] 
+        [SerializeField] GameObject atIcon;
+        [SerializeField] GameObject defenceIcon;
         
-        [Space(2)]
         [Header("EXTypes")]
-        [SerializeField] GameObject Ex1Icon, Ex2Icon, Ex3Icon;
+        [SerializeField] GameObject ex1Icon, ex2Icon, ex3Icon;
         
-        [Space(2)]
         [Header("Range")]
         [SerializeField] GameObject close, near, far;
         
-        [Space(2)]
         [Header("AT")]
         [SerializeField] Text AT;
         
-        [Space(2)]
         [Header("HP")]
         [SerializeField] Text HP;
         
-        [Space(2)]
         [Header("当前技能等级")]
-        [SerializeField] Text StoneTargetLevel;
-
-        [Space(2)]
-        [SerializeField] Transform tempT;
+        [SerializeField] Text stoneTargetLevel;
         
+        [Header("Intro")]
+        [SerializeField] Text skillIntro;
+        
+        [Header("tempT")]
+        [SerializeField] Transform tempT;
+
+        private void Awake()
+        {
+            Clear();
+        }
+
         // 额外生成一个技能石图像
         async void IconForShow(string skillID)
         {
             var item = await Stones.GenerateStoneModel(skillID, false);
-            if (IconShowT != null)
+            if (iconShowT != null)
             {
-                foreach (Transform child in IconShowT) 
+                foreach (Transform child in iconShowT) 
                 {
                     Destroy(child.gameObject);
                 }
-                item.transform.SetParent(IconShowT);
+                item.transform.SetParent(iconShowT);
                 item.gameObject.SetActive(true);
                 item.transform.localPosition = Vector3.zero;
                 item.transform.localScale = Vector3.one;
-                item.transform.GetComponent<RectTransform>().sizeDelta = IconShowT.transform.GetComponent<RectTransform>().sizeDelta;
+                item.transform.GetComponent<RectTransform>().sizeDelta = iconShowT.transform.GetComponent<RectTransform>().sizeDelta;
             }
             else
             {
@@ -63,14 +69,19 @@ namespace mainMenu
         
         public void Clear()
         {
-            keyname.text = "";
-            Showname.text = "";
-            ShowSkillStoneExType(Ex1Icon, Ex2Icon, Ex3Icon,-1);
+            keyName.text = string.Empty;
+            showName.text = string.Empty;
+            skillIntro.text = string.Empty;
+            stoneTargetLevel.text = string.Empty;
+            AT.text = string.Empty;
+            HP.text = string.Empty;
+            ShowSkillStoneExType(ex1Icon, ex2Icon, ex3Icon,-1);
             ShowSKillRanges(close, near, far, -10, -10); //即清空
-            StoneTargetLevel.text = "";
-            if (IconShowT != null)
+            atIcon.SetActive(false);
+            defenceIcon.SetActive(false);
+            if (iconShowT != null)
             {
-                foreach (Transform child in IconShowT)
+                foreach (Transform child in iconShowT)
                 {
                     Destroy(child.gameObject);
                 }
@@ -86,11 +97,7 @@ namespace mainMenu
                 return;
             }
             var skillConfig = SkillConfigTable.GetSkillConfig(currentStone.SkillId);
-            IconForShow(skillConfig.RECORD_ID);
-            keyname.text = skillConfig.REAL_NAME;
-            Showname.text = skillConfig.RECORD_ID + ":" + SkillNameTable.GetSkillName(skillConfig.RECORD_ID);
-            ShowSkillStoneExType(Ex1Icon, Ex2Icon, Ex3Icon, skillConfig.SP_LEVEL);
-            ShowSKillRanges(close, near, far, skillConfig.AIAttrs.AI_MIN_DIS, skillConfig.AIAttrs.AI_MAX_DIS);
+            RefreshInfo(skillConfig);
             var row = PowerEstimateTable.Find_RECORD_ID(skillConfig.RECORD_ID);
             float.TryParse(row.HP, out float hp);
             float.TryParse(row.EstimateDamage, out float at);
@@ -102,93 +109,79 @@ namespace mainMenu
             {
                 HP.text = "HP = " + FightGlobalSetting.StoneHpCal(hp, currentStone.Level);
             }
-            StoneTargetLevel.text = "LV:" + currentStone.Level;
-            transform.gameObject.SetActive(true);
-        }
-        
-        public void RefreshInfo(SkillConfig _ConfigOfStone)
-        {
-            IconForShow(_ConfigOfStone.RECORD_ID);
-            keyname.text = _ConfigOfStone.REAL_NAME;
-            Showname.text = _ConfigOfStone.RECORD_ID + ":" + SkillNameTable.GetSkillName(_ConfigOfStone.RECORD_ID);
-            ShowSkillStoneExType(Ex1Icon, Ex2Icon, Ex3Icon, _ConfigOfStone.SP_LEVEL);
-            ShowSKillRanges(close, near, far, _ConfigOfStone.AIAttrs.AI_MIN_DIS, _ConfigOfStone.AIAttrs.AI_MAX_DIS);
+            stoneTargetLevel.text = "LV:" + currentStone.Level;
+            skillIntro.text = SkillNameTable.GetSkillIntro(skillConfig.RECORD_ID);
             transform.gameObject.SetActive(true);
         }
         
         // 技能画面展示用
-        public void RefreshInfo(SkillEntity _SkillEntity)
+        public void RefreshInfo(SkillEntity skillEntity)
         {
-            if (_SkillEntity == null)
+            if (skillEntity == null)
             {
                 Clear();
                 return;
             }
-            SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(_SkillEntity.SkillID);
-            keyname.text = _SkillEntity.REAL_NAME;
-            Showname.text = skillConfig.SHOW_NAME;
-            ShowSkillStoneExType(Ex1Icon, Ex2Icon, Ex3Icon, _SkillEntity.SP_LEVEL);
-            ShowSKillRanges(close, near, far, _SkillEntity.AIAttrs.AI_MIN_DIS, _SkillEntity.AIAttrs.AI_MAX_DIS);
-            PowerEstimateTable.Row row = PowerEstimateTable.Find_RECORD_ID(skillConfig.RECORD_ID);
-            float.TryParse(row.HP, out float hp);
-            float.TryParse(row.EstimateDamage, out float at);
+            var skillConfig = SkillConfigTable.GetSkillConfig(skillEntity.SkillID);
+            RefreshInfo(skillConfig);
             if (AT != null)
             {
-                AT.text = "AT = " + _SkillEntity.AT;
+                AT.text = "AT = " + skillEntity.AT;
             }
             if (HP != null)
             {
-                HP.text = "HP = " + _SkillEntity.HP;
+                HP.text = "HP = " + skillEntity.HP;
             }
             transform.gameObject.SetActive(true);
         }
         
-        public static void ShowSKillRanges(GameObject close, GameObject near, GameObject far, float dis_min, float float_max)
+        public void RefreshInfo(SkillConfig config)
         {
-            if (SkillConfig.RangeLimit(dis_min, float_max, true, false, false))
-                close.SetActive(true);
-            else
-                close.SetActive(false);
-                
-            if (SkillConfig.RangeLimit(dis_min, float_max, false, true, false))
-                near.SetActive(true);
-            else
-                near.SetActive(false);
-                
-            if (SkillConfig.RangeLimit(dis_min, float_max, false, false, true))
-                far.SetActive(true);
-            else
-                far.SetActive(false);
+            IconForShow(config.RECORD_ID);
+            keyName.text = config.REAL_NAME;
+            showName.text = SkillNameTable.GetSkillName(config.RECORD_ID);
+            ShowSkillStoneExType(ex1Icon, ex2Icon, ex3Icon, config.SP_LEVEL);
+            ShowSKillRanges(close, near, far, config.AIAttrs.AI_MIN_DIS, config.AIAttrs.AI_MAX_DIS);
+            atIcon.SetActive(config.STATE_TYPE is BehaviorType.GI or BehaviorType.GM or BehaviorType.GR);
+            defenceIcon.SetActive(config.STATE_TYPE is BehaviorType.CT or BehaviorType.Def);
+            transform.gameObject.SetActive(true);
         }
         
-        public static void ShowSkillStoneExType(GameObject Ex1Icon, GameObject Ex2Icon, GameObject Ex3Icon, int eX)
+        public static void ShowSKillRanges(GameObject close, GameObject near, GameObject far, float disMIN, float disMAX)
+        {
+            close.SetActive(SkillConfig.RangeLimit(disMIN, disMAX, true, false, false));
+            near.SetActive(SkillConfig.RangeLimit(disMIN, disMAX, false, true, false));
+            far.SetActive(SkillConfig.RangeLimit(disMIN, disMAX, false, false, true));
+        }
+        
+        public static void ShowSkillStoneExType(GameObject ex1Icon, GameObject ex2Icon, GameObject ex3Icon, int eX)
         {
             switch (eX)
             {
                 case 0:
-                    Ex1Icon.SetActive(false);
-                    Ex2Icon.SetActive(false);
-                    Ex3Icon.SetActive(false);
+                    ex1Icon.SetActive(false);
+                    ex2Icon.SetActive(false);
+                    ex3Icon.SetActive(false);
                 break;
                 case 1:
-                    Ex1Icon.SetActive(true);
-                    Ex2Icon.SetActive(false);
-                    Ex3Icon.SetActive(false);
+                    ex1Icon.SetActive(true);
+                    ex2Icon.SetActive(false);
+                    ex3Icon.SetActive(false);
                 break;
                 case 2:
-                    Ex1Icon.SetActive(true);
-                    Ex2Icon.SetActive(true);
-                    Ex3Icon.SetActive(false);
+                    ex1Icon.SetActive(true);
+                    ex2Icon.SetActive(true);
+                    ex3Icon.SetActive(false);
                 break;
                 case 3:
-                    Ex1Icon.SetActive(true);
-                    Ex2Icon.SetActive(true);
-                    Ex3Icon.SetActive(true);
+                    ex1Icon.SetActive(true);
+                    ex2Icon.SetActive(true);
+                    ex3Icon.SetActive(true);
                 break;
                 case -1:
-                    Ex1Icon.SetActive(false);
-                    Ex2Icon.SetActive(false);
-                    Ex3Icon.SetActive(false);
+                    ex1Icon.SetActive(false);
+                    ex2Icon.SetActive(false);
+                    ex3Icon.SetActive(false);
                 break;
             }
         }
