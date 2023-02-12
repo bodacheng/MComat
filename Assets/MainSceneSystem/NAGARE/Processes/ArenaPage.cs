@@ -34,22 +34,27 @@ public class ArenaPage : MSceneProcess
         missionWatcher.Finish("gotServerTime", value);
     }
 
-    void CheckNewSeason()
+    bool CheckNewSeason(Action onClickRankResetLayer)
     {
         int lastSeasonPoint = PlayerPrefs.GetInt("arenapoint");
         if (lastSeasonPoint > PlayerAccountInfo.Me.arenaPoint)
         {
             var arenaNewSeason = UILayerLoader.Load<ArenaNewSeason>();
-            arenaNewSeason.Setup(lastSeasonPoint, PlayerAccountInfo.Me.arenaPoint,
-                UILayerLoader.Remove<ArenaNewSeason>);
+            arenaNewSeason.Setup(lastSeasonPoint, PlayerAccountInfo.Me.arenaPoint, () =>
+                {
+                    UILayerLoader.Remove<ArenaNewSeason>();
+                    onClickRankResetLayer.Invoke();
+                }
+            );
+            PlayerPrefs.SetInt("arenapoint", PlayerAccountInfo.Me.arenaPoint);
+            return true;
         }
         PlayerPrefs.SetInt("arenapoint", PlayerAccountInfo.Me.arenaPoint);
+        return false;
     }
     
     void EnterProcess()
     {
-        CheckNewSeason();
-        
         arenaLayer = UILayerLoader.Load<ArenaLayer>();
         arenaLayer.SetUp(
             LoadLeaderboardInfos,
@@ -117,11 +122,14 @@ public class ArenaPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        EnterProcess();
+        var showRankReset = CheckNewSeason(EnterProcess);
+        if (!showRankReset)
+            EnterProcess();
     }
     
     public override void ProcessEnd()
     {
+        UILayerLoader.Remove<ArenaNewSeason>();
         UILayerLoader.Remove<ArenaLayer>();
     }
     

@@ -2,11 +2,14 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Singleton;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ModelView
 {
     public partial class DedicatedCameraConnector : MonoBehaviour
     {
+        [SerializeField] private Text unitName;
+        
         static readonly IDictionary<string, Data_Center> saves = new Dictionary<string, Data_Center>();
 
         public static void ClearBackUpModels()
@@ -46,6 +49,9 @@ namespace ModelView
             Data_Center saveData = null;
             if (recordID != null)
                 saves.TryGetValue(recordID, out saveData);
+
+            var config = Units.GetUnitConfig(recordID);
+            unitName.text = Translate.Get(config?.REAL_NAME);
             
             if (recordID == null)
             {

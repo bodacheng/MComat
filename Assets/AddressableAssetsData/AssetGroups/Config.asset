@@ -42,7 +42,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - config
-  - m_GUID: 07b6bc4776f62485d8a9445bdaed9e04
+  - m_GUID: 0b7e9a68701b2457f8e322c57e0e682d
     m_Address: Config/LanguageCode
     m_ReadOnly: 0
     m_SerializedLabels:

@@ -3,20 +3,20 @@ using UnityEngine;
 
 public class LanguageConverterManger : MonoBehaviour
 {
-    public List<LanguageConverter> PreList = new();
-    public static List<LanguageConverter> list = new();
+    public List<LanguageConverter> preList = new();
+    public static List<LanguageConverter> List = new();
     
     void Awake()
     {
-        list = PreList;
+        List = preList;
         ChangeLanguage();
     }
     
     public static void ChangeLanguage()
     {
-        for (int i = 0; i < list.Count; i++)
+        for (int i = 0; i < List.Count; i++)
         {
-            list[i].Change();
+            List[i].Change();
         }
     }
 }

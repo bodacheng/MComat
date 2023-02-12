@@ -1,49 +1,99 @@
 Code,EN,JP,CH
-Front,Front,ホール,大厅
-Arcade,Arcade,クエスト,探险
-illegalword,illegal words,使用できない単語が含んでる,监测到非法字符
-NormalSkill,Normal Skill,Normal Skill,普通招数
-Ex1Skill,Ex1 Skill,Ex1 Skill,一费必杀技
-Ex2Skill,Ex2 Skill,Ex2 Skill,二费必杀技
-Ex3Skill,Ex3 Skill,Ex3 Skill,三费必杀技
-TryFilterRange,Choose different ranges of skills,Choose different ranges of skills,可以选择不同攻击距离的技能
-fill9Slots,Fill Nine Slots,"戦士の技を自由に装備、編集する画面です。
-左のボックスからストンーを選んで、9 slotsにドラッグしましょう。",尝试通过安装技能石为战士佩戴不同技能
-InvalidUsername,Invalid Username,Invalid Username,Invalid Username
-DuplicateUsername,Duplicate Username,Duplicate Username,Duplicate Username
-InvalidUsername,Invalid Username,使用できない単語が含んでる,监测到非法字符
-NoEnoughStoneToFill,No Enough Stones,No Enough Stones,技能石不足
-UnBalanced,Too much sp skill. Try use normal skill to balance your skill set,Too much sp skill. Try use normal skill to balance your skill set,必杀技过多
-CantEquipSameSkill,Cant Equip Same Skill,Cant Equip Same Skill,Cant Equip Same Skill
-NotFull,Not Full,全てのスロットを満たしましょう,不满
-AColumnNeedNormal,AColumnNeedNormal,AColumnNeedNormal,第一列需要普通招数
-BornSkillCantRemove,BornSkillCantRemove,BornSkillCantRemove,BornSkillCantRemove
-NotLegalButStillUpdate,NotLegalButStillUpdate,技能组非法，仍然更新？,NotLegalButStillUpdate
-SKillConfirm,Confirm,確定,Confirm
-OtherUnitUsing,其他角色使用中,其他角色使用中,其他角色使用中
-GotNewUnit,Joined your team !,加入队伍!,加入队伍!
-NoEnoughGD,No Enough golds,智慧宝石数量不足,智慧宝石数量不足
-NoArenaEnoughTicket,竞技场入场票不足,竞技场入场票不足,竞技场入场票不足
-EnterNickname,Enter Nickname( under 10 characters ),输入昵称（10文字以下）,输入昵称（10文字以下）
-ToNewStage, 最新へ, 最新へ,最新关卡
-Yes,Yes,Yes,Yes
-No,No,No,No
-story,,,2050年初，形如漩涡的诡异现象出现在世界各地上空，随即无数彩色石块从天而降。神奇的是，只要人接触了这种被称为“技能宝石”的石块，就能将其摄入体内，获得一项极具攻击性的能力。同时疑似外形人的生物不断出现并对人类发动攻击，普通民众为了保护自己而开始收集并配备技能宝石。更糟糕的是，一部分由此获得力量的人类将技能宝石看作征服世界的机会。怀着不同的目的，人们纷纷迈入战场。
-,,,按下后将依次释放技能组第一行技能
-,,,角色当前HP与能量值，必杀技在能量值不够的情况下无法释放。
-,,,点击可切换成自动或手动模式
-,,,普通技能
-,,,一级必杀技能（消耗一能量值）
-,,,一级必杀技能（消耗二能量值）
-,,,三级必杀技能（消耗三能量值）
-,,,请尝试用技能石填满技能槽
-,,,只有技能组完整的角色才能加入战斗
-,,,"以下是你的邮箱,点击下方按钮发送账户密码设置邮件，然后登陆邮箱设置你的密码。你可以在其他设备上靠输入该邮箱和设置的密码来登陆本账户。"
-TeamNotFull,TeamNotFull,TeamNotFull,TeamNotFull
-tetsuya,,,热爱足球的高中二年级学生。天生拥有电气超能力。
-adam,,,体操选手，自漩涡开始出现在天空，他擅长的体操动作忽然变的更有力而具攻击性。
-yuta,,,総合格闘技選手，曾拿过世界大赛冠军。为了确保乱世下自己仍是世界最强，踏上了战斗与收集技能石的旅途。
-yumi,,,女高中生。铁也的姐姐。
-maggie,,,自由职业者，喜欢美甲。战斗时为了保护手而戴着拳击手套。
-sybill,,,自称占卜师，四处宣扬技能石的降落是神在试图毁灭人类。
-martialDemon,,,世界各地神秘出现的怪物，被怀疑为外星人。会对人类展开攻击。他们的出现促使人们主动将技能石装备入体内寻求自我保护。
+Title,MUGEN COMBAT,ムゲンコンバット,无尽格斗
+,,,
+Adventure,Adventure,アドベンチャー,探险
+Arena,Arena,アリーナ,竞技场
+Gacha,Gacha,ガチャ,技能石许愿
+Units,Heroes,ユニット,战士
+Stones,Martial Stone,魔石,技能石
+Practice,Practice,練習,试验
+,,,
+TimeTillNextSeason,Till Next Season:,次のシーズンまで：,距离下一个赛季还有:
+,,,
+SkillStone,Martial Stone,魔石,技能石
+Gem,energy crystal,エネルギーの結晶,能量结晶
+Gold,wisdom crystal,知恵の結晶,智慧结晶
+NoEnoughGD,No Enough golds,,智慧宝石数量不足
+,,,
+NormalSkill,Normal Skill,Normal Skill,普通技
+Ex1Skill,Ex1 Skill,Ex1 Skill,一费必杀
+Ex2Skill,Ex2 Skill,Ex2 Skill,二费必杀
+Ex3Skill,Ex3 Skill,Ex3 Skill,三费必杀
+,,,
+illegalword,Contains words that cannot be used,使用できない単語が含んでる,含有非法字符
+InvalidUsername,Invalid Username,使用できない単語が含んでる,昵称不可用
+DuplicateUsername,Duplicate Username,他のプレイヤーが既に使ってる,昵称重复
+,,,
+GotNewUnit,Joined your team !,チームに加入しました！,加入队伍!
+NoEnoughArenaTicket,Donnot have enough ticket. Come back later !,体力が足りないです。,竞技场体力不足
+EnterNickname,Please Enter Your Name( under 10 characters ),ネームを入力してください( 10 桁以下の半角英数字 ),请输入昵称（10文字以下半角英数字）
+ToNewStage,To New Stage, 最新ステージへ,最新关卡
+,,,
+RankReset,New Season Rank Reset,新赛季段位重置,新赛季段位重置
+,,,
+Yes,Yes,はい,确定
+No,No,いいえ,取消
+,,,
+story_part1,,2050年初、渦巻のような不思議な現象が世界中の空に現れ、すぐに数え切れない数の色石が天から降りてきました。,2050年初，形如漩涡的诡异现象出现在世界各地上空，随即无数彩色石块从天而降。
+story_part2,,不思議なことに、人がこれら「スキルストーン」と呼ばれる石を触れるだけで体内に取り込んで、攻撃力が高い能力を手に入れることができます。,神奇的是，只要人接触了这种被称为“技能石”的石块，就能将其摄入体内，获得一项极具攻击性的能力。
+story_part3,,同時に外見人間のような生物が続々と現れ、人間に攻撃を仕掛けます。一般の人々は自分自身を守るために、スキルストーンを集めて装備するようになりました。,同时疑似外形人的生物不断出现并对人类发动攻击，普通民众开始为了保护自己而收集并配备技能石。
+story_part4,,さらに悪いことに、これらから力を得た人間がスキルストーンを世界征服の機会と見なします。異なる目的を持って、人々は戦場に向かって歩み始めます。,更糟糕的是，一些由此获得力量的人类将技能石看作征服世界的机会。怀着不同的目的，人们纷纷迈入战场。
+,,,
+PressToTriggerSkill,,,按下后将依次释放技能组第一行技能
+HpBarAndExBar,,,当前HP与能量值，必杀技在能量值不够的情况下无法释放。
+AutoMode,,,点击可切换成自动或手动模式
+,,,
+MailBindInstruction,,このアカウントはまだメールアドレスがバインドされていません。他のデバイスでログインしてこのアカウントをバインドするには、メールアドレスをバインドする必要があります。各アカウントは1つのメールアドレスだけをバインドすることができますので、メールアドレスを選択する際は注意してください。,本账户尚未绑定邮箱。如果要在其他设备登陆并绑定本账户，必须绑定邮箱。每个账户只能绑定一个邮箱，请谨慎选择邮箱地址。
+DeviceBindInstruction,,,本账户没有与当前设备进行绑定。点击下方按钮可以绑定。
+AccountTransfer,,,"以下是你的邮箱,点击下方按钮发送账户密码设置邮件。你可以在其他设备上靠输入所设置的邮箱和密码来登陆本账户。"
+,,,
+tetsuya,Tetsuya,铁也,铁也
+adam,Adam,亚当,亚当
+yuta,Yuta,悠太,悠太
+maggie,Maggie,玛吉,玛吉
+haruka,haruka,haruka,haruka
+sybill,Sybill,西比尔,西比尔
+demon,武魔,武魔,武魔
+,,,
+tetsuya_intro,,サッカーを愛する高校2年生。生まれつき電気の超能力を持っています。,热爱足球的高中二年级学生。天生拥有电气超能力。
+adam_intro,,,体操选手，自从世界被技能石颠覆，他擅长的体操动作忽然变的极具破坏力。
+yuta_intro,,,综合格斗选手，曾拿过世界大赛冠军。正在拼命确保自己在全新的世界下仍是一流强者。
+yumi_intro,,,高三学生。铁也的姐姐。爱好网球。
+maggie_intro,,,自由职业者，喜欢美甲。战斗时为了保护手而戴着拳击手套。
+sybill_intro,,,女小说家。自从世界被技能石颠覆，四处宣扬技能石是神试图毁灭人类的陷阱。
+demon_intro,,,世界各地出现的怪物，被怀疑为外星人。会对人类展开攻击。流传的说法是他们的大部分都是分身，本体只有一个。
+,,,
+SkillEditInstruction1,,,技能组拥有“平衡值”，平衡值要在0以上才合规，否则战士无法参战。装备一个普通技能会增加1点平衡值，装备一费必杀，二费必杀，三费必杀将分别减少1点，2点，3点平衡值。
+SkillEditInstruction2,,,一个蓝色闪光条代表+1平衡值，一个红色闪光条代表-1平衡值。显示一个或多个红色闪光条都代表当前平衡值为负数，该战士无法出战。
+,,,
+RandomFillStones,Auto Fill,ランダム装備,自动装备
+RemoveAllStones,Remove All,すべて解除,全部卸下
+fill9Slots,Fill Nine Slots,,"在这里可以进行技能组编辑。尝试用技能石为战士拼接出一套强力的技能组吧。
+请将9个技能槽填满技能石。"
+NotLegalButStillUpdate,,,当前技能组下战士无法战斗，仍要执行编辑？
+TryFillNineSlots,,,请尝试用技能石填满技能槽
+PlsFillAll,,,只有全部技能槽都装备技能石战士才能战斗
+OtherUnitUsing,,,其他战士使用中
+AColumnNeedNormal,AColumnNeedNormal,,技能槽第一竖列须包括至少一个普通技能
+UnBalanced,Too much sp skill. Try use normal skill to balance your skill set,,技能组能量过剩（必杀技过多）
+NoEnoughStoneToFill,No Enough Stones,,没有足够技能石可以完成技能组配置
+TryFilterRange,Choose different ranges of skills,,点选距离限制选项卡可只显示指定攻击范围的技能
+BornSkillCantRemove,BornSkillCantRemove,,战士的原生技能不可被卸载
+CantEquipSameSkill,Cant Equip Same Skill,,同一战士不可装备相同技能
+NotFull,Not Full,全てのスロットを満たしましょう,技能组未满
+SKillConfirm,Confirm,確定,保存技能组
+,,,
+TeamNotFull,,,队伍人员未满。必须有三名技能组完整的战士才能参与竞技场
+,,,
+LinkEmail,,,邮箱绑定
+LinkDevice,,,设备绑定
+Audio,,,音量
+Support,,,帮助
+Language,,,语言
+NickName,,,昵称
+,,,
+privacy,,,隐私政策
+contact,,,联系我们
+,,,
+AdvancedGacha,,,银河裂痕
+NormalGacha,,,星空裂痕

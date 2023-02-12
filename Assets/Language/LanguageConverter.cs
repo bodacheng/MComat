@@ -8,9 +8,9 @@ public class LanguageConverter : MonoBehaviour
     
     void Awake()
     {
-        if (!LanguageConverterManger.list.Contains(this))
+        if (!LanguageConverterManger.List.Contains(this))
         {
-            LanguageConverterManger.list.Add(this);
+            LanguageConverterManger.List.Add(this);
         }
         if (target == null)
             target = transform.GetComponent<Text>();

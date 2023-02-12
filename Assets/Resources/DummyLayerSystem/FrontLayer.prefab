@@ -468,6 +468,7 @@ GameObject:
   - component: {fileID: 3029729695142809751}
   - component: {fileID: 3029729695142809750}
   - component: {fileID: 3029729695142809749}
+  - component: {fileID: 3009553418118231515}
   m_Layer: 5
   m_Name: text
   m_TagString: Untagged
@@ -552,6 +553,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0.43529412, b: 1, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &3009553418118231515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3029729695142809747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: Gacha
+  target: {fileID: 3029729695142809750}
 --- !u!1 &3029729695274313077
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +655,7 @@ GameObject:
   - component: {fileID: 3029729695345646774}
   - component: {fileID: 3029729695345646773}
   - component: {fileID: 3029729695345646772}
+  - component: {fileID: 6486325254164121559}
   m_Layer: 5
   m_Name: text
   m_TagString: Untagged
@@ -724,6 +740,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0.43529412, b: 1, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &6486325254164121559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3029729695345646770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: Stones
+  target: {fileID: 3029729695345646773}
 --- !u!1 &3029729695545733451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,6 +1629,7 @@ GameObject:
   - component: {fileID: 3029729696356233906}
   - component: {fileID: 3029729696356233905}
   - component: {fileID: 3029729696356233904}
+  - component: {fileID: 2333604580216902264}
   m_Layer: 5
   m_Name: text
   m_TagString: Untagged
@@ -1683,6 +1714,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0.43529412, b: 1, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &2333604580216902264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3029729696356233934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: Practice
+  target: {fileID: 3029729696356233905}
 --- !u!1 &3029729696378452941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1834,6 +1879,7 @@ GameObject:
   - component: {fileID: 3029729696519322223}
   - component: {fileID: 3029729696519322222}
   - component: {fileID: 3029729696519322221}
+  - component: {fileID: 5094019772132010711}
   m_Layer: 5
   m_Name: text
   m_TagString: Untagged
@@ -1918,6 +1964,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0.43529412, b: 1, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &5094019772132010711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3029729696519322219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: Units
+  target: {fileID: 3029729696519322222}
 --- !u!1 &3029729696563248495
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,7 +2067,7 @@ GameObject:
   - component: {fileID: 3029729696566959915}
   - component: {fileID: 9010606935863365924}
   m_Layer: 5
-  m_Name: gotcha
+  m_Name: Gacha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2780,7 +2840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  languageCode: Arcade
+  languageCode: Adventure
   target: {fileID: 3029729696837263809}
 --- !u!1 &3029729696843820006
 GameObject:
@@ -2890,6 +2950,7 @@ GameObject:
   - component: {fileID: 3029729696851658713}
   - component: {fileID: 3029729696851658712}
   - component: {fileID: 3029729696851658711}
+  - component: {fileID: 7506269331227231322}
   m_Layer: 5
   m_Name: text
   m_TagString: Untagged
@@ -2974,6 +3035,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0.43529412, b: 1, a: 1}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &7506269331227231322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3029729696851658709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: Arena
+  target: {fileID: 3029729696851658712}
 --- !u!1 &3029729697057244325
 GameObject:
   m_ObjectHideFlags: 0
@@ -3064,7 +3139,7 @@ GameObject:
   - component: {fileID: 3029729697141004452}
   - component: {fileID: 918763791984473989}
   m_Layer: 5
-  m_Name: MemberEdit
+  m_Name: Units
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3510,6 +3585,7 @@ GameObject:
   - component: {fileID: 1232330821624067164}
   - component: {fileID: 4670046328476906474}
   - component: {fileID: 5535632929468285187}
+  - component: {fileID: 4990217640077277590}
   m_Layer: 5
   m_Name: icon
   m_TagString: Untagged
@@ -3572,6 +3648,20 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &4990217640077277590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863344831039380627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab989ca2c5da27a4f896b1983df81a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 5
+  direction: 0
 --- !u!1 &6940059798333572331
 GameObject:
   m_ObjectHideFlags: 0
@@ -18503,6 +18593,11 @@ PrefabInstance:
     - target: {fileID: 3850318373848056875, guid: 72d00ee42a0b94b3aa1db5764acd394f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976546595582927158, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8116354622187294142, guid: 72d00ee42a0b94b3aa1db5764acd394f,
