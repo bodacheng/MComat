@@ -127,6 +127,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - config
     - quest
     - unit
     - weapon
@@ -140,10 +141,8 @@ MonoBehaviour:
     - battle_ground
     - btn_effect
     - icon_frame
-    - pic
     - resource
     - unit_image
-    - config
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 7ed3c4f91e15949209e5cda4294e805b, type: 2}

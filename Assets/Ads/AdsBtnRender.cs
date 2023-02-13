@@ -13,7 +13,7 @@ public class AdsBtnRender : MonoBehaviour
     [Header("google ads")]
     [SerializeField] private GoogleMobileAdsManager googleMobileAdsManager;
     
-    private IDisposable disposeCountDown;
+    private IDisposable _disposeCountDown;
 
     void Start()
     {
@@ -30,8 +30,8 @@ public class AdsBtnRender : MonoBehaviour
         Currencies.AdTicket.Subscribe(
             x=>
             {
-                disposeCountDown?.Dispose();
-                remainCount.text = x.ToString();
+                _disposeCountDown?.Dispose();
+                remainCount.text = "Remain x"+ x;
                 if (x >= Currencies.AdTicketRechargeMax)
                 {
                     ticketChargeCountDown.text = string.Empty;
@@ -39,14 +39,14 @@ public class AdsBtnRender : MonoBehaviour
                 }
                 else
                 {
-                    disposeCountDown = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe((_) =>
+                    _disposeCountDown = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe((_) =>
                     {
                         ticketChargeCountDownT.gameObject.SetActive(true);
                         if (Currencies.SecondsToRechargeAdTicket > 0)
                         {
                             var minute = Currencies.SecondsToRechargeAdTicket / 60;
                             var seconds = Currencies.SecondsToRechargeAdTicket - minute * 60;
-                            ticketChargeCountDown.text = $"{minute :00}:{seconds:00}";
+                            ticketChargeCountDown.text = "Stamina up in "+ $"{minute :00}:{seconds:00}";
                             Currencies.SecondsToRechargeAdTicket -= 1;
                         }
                         else

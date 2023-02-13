@@ -20,6 +20,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     public void Enable(bool on)
     {
         _showAdButton.interactable = on;
+        _showAdButton.gameObject.SetActive(on);
     }
 
     void Awake()
@@ -78,13 +79,12 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
         {
             Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
-
             CloudScript.SubtractVirtualCurrency(
                 "AD",1,
                 CloudScript.RequestAdReward
             );
             
-            // Load another ad:
+            // Load another ad: 需要检查在实机上这里跑的是否有问题。在editor上产生一个造成广告再次观看时连续跑了两次的错误
             Advertisement.Load(_adUnitId, this);
         }
     }

@@ -7,6 +7,7 @@ public partial class CloudScript
     public static void RequestAdReward()
     {
         ProgressLayer.Loading(string.Empty);
+        Debug.Log("we are here");
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest
             {

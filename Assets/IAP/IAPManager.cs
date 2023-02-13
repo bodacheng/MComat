@@ -31,6 +31,11 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         }, error => Debug.LogError(error.GenerateErrorReport()));
     }
 
+    public decimal GetProductLocalPrice(string productId)
+    {
+        return _mStoreController.products.WithID(productId).metadata.localizedPrice;
+    }
+
     // This is invoked manually on Start to initialize UnityIAP
     void InitializePurchasing() {
         // If IAP is already initialized, return gently
@@ -67,6 +72,11 @@ public class IAPManager : MonoBehaviour, IStoreListener {
     // This is automatically invoked automatically when IAP service failed to initialized
     public void OnInitializeFailed(InitializationFailureReason error) {
         Debug.Log("OnInitializeFailed InitializationFailureReason:" + error);
+    }
+
+    public void OnInitializeFailed(InitializationFailureReason error, string? message)
+    {
+        throw new NotImplementedException();
     }
 
     // This is automatically invoked automatically when purchase failed

@@ -4,12 +4,12 @@ using UnityEngine.UI;
 public class ProductCell : MonoBehaviour
 {
     [SerializeField] private string product_id;
-    [SerializeField] private Text msg;
     [SerializeField] private Text price;
-    [SerializeField] private BOButton btn;
+    [SerializeField] private Button btn;
 
     void Start()
     {
-        btn.SetListener(()=> IAPManager.Target.BuyProductID(product_id));
+        price.text = IAPManager.Target.GetProductLocalPrice(product_id).ToString();
+        btn.onClick.AddListener(()=> IAPManager.Target.BuyProductID(product_id));
     }
 }
