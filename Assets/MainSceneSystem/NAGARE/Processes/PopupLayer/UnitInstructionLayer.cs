@@ -1,54 +1,64 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using UniRx;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using Random = UnityEngine.Random;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
+using NoSuchStudio.Common;
 
 public class UnitInstructionLayer : UILayer
 {
+    [SerializeField] private List<string> unitRecordIds;
+    [SerializeField] private Image bgImage;
     [SerializeField] private Image unitImage;
     [SerializeField] private Text unitName;
     [SerializeField] private Text unitIntro;
-    [SerializeField] private float unitImagePos = 100f;
+    [SerializeField] private float unitImageEndPosX = -100f;
+    [SerializeField] private float bgEndPosX = 100f;
+    [SerializeField] private float nameEndPosX = 100f;
     [SerializeField] private float emergeDuration = 2f;
-    
-    public async void RandomChangeUnitImage()
-    {
-        if (unitImageKeys.Count == 0) return;
-        int randomIndex = Random.Range(0, unitImageKeys.Count);
-        var value = await AddressablesLogic.LoadT<Sprite>(unitImageKeys[randomIndex]);
-        var bigCurtainRect = unitImage.transform.GetComponent<RectTransform>();
-        bigCurtainRect.sizeDelta = new Vector2(value.rect.width * bigCurtainRect.rect.height / value.rect.height, bigCurtainRect.rect.height);
-        unitImage.sprite = value;
 
-        float posX = bigCurtainRect.anchoredPosition.x;
-        DOTween.To(()=> posX, (value)=>posX = value, -unitImagePos, emergeDuration).
-            OnUpdate(
-                () =>
-                {
-                    bigCurtainRect.anchoredPosition = new Vector2(posX, bigCurtainRect.anchoredPosition.y);
-                }
-        );
+    private List<TweenerCore<float, float, FloatOptions>> _tweenerCores = new ();
+    
+    async void ChangeUnitTheme(string RECORD_ID)
+    {
+        var value = await AddressablesLogic.LoadT<Sprite>("unit_image/"+RECORD_ID);
+        var unitImageRect = unitImage.transform.GetComponent<RectTransform>();
+        unitImageRect.sizeDelta = new Vector2(value.rect.width * unitImageRect.rect.height / value.rect.height, unitImageRect.rect.height);
+        unitImage.sprite = value;
+        
+        var config = Units.GetUnitConfig(RECORD_ID);
+        unitName.text = Translate.Get(config.REAL_NAME);
+        unitIntro.text = Translate.Get(config.REAL_NAME+ "_intro");
+        
+        TweenerCore<float, float, FloatOptions> Move(RectTransform targetRect, float endXPos)
+        {
+            float posX = targetRect.anchoredPosition.x;
+            return DOTween.To(()=> posX, (value)=>posX = value, endXPos, emergeDuration).
+                OnUpdate(
+                    () =>
+                    {
+                        targetRect.anchoredPosition = new Vector2(posX, targetRect.anchoredPosition.y);
+                    }
+                ).SetEase(Ease.InSine);
+        }
+
+        _tweenerCores.Add(Move(unitImage.transform.GetComponent<RectTransform>(), unitImageEndPosX));
+        _tweenerCores.Add(Move(bgImage.transform.GetComponent<RectTransform>(), bgEndPosX));
+        _tweenerCores.Add(Move(unitName.transform.GetComponent<RectTransform>(), nameEndPosX));
     }
     
-    private static readonly List<string> unitImageKeys = new ();
-    public static async UniTask LoadUnitImage()
+    public void LoadUnitImage()
     {
-        var loadPath = Addressables.LoadResourceLocationsAsync( new List<string> {"unit_image"} , Addressables.MergeMode.Intersection);
-        await loadPath;
-        if (loadPath.Status == AsyncOperationStatus.Succeeded)
+        ChangeUnitTheme(unitRecordIds.Random());
+    }
+
+    void OnDestroy()
+    {
+        foreach (var tweener in _tweenerCores)
         {
-            foreach (var path in loadPath.Result)
-            {
-                if (!unitImageKeys.Contains(path.PrimaryKey))
-                    unitImageKeys.Add(path.PrimaryKey);
-            }
+            if (tweener != null && tweener.IsActive())
+                tweener.Kill();
         }
-        Addressables.Release(loadPath);
     }
 }

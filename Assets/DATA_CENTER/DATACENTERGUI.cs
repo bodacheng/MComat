@@ -195,34 +195,34 @@ public class DATACENTERGUI : Editor {
             switch (_myScript.element)
             {
                 case Element.darkMagic:
-                    bladeName = "D_enegryBlade";
+                    bladeName = "D_enegryBlade.prefab";
                     //shieldName = "dark_Shield"; 
                     break;
                 case Element.blueMagic:
-                    bladeName = "B_enegryBlade";
+                    bladeName = "B_enegryBlade.prefab";
                     //shieldName = "blue_Shield";
                     break;
                 case Element.greenMagic:
-                    bladeName = "G_enegryBlade";
+                    bladeName = "G_enegryBlade.prefab";
                     //shieldName = "green_Shield";
                     break;
                 case Element.lightMagic:
-                    bladeName = "W_enegryBlade";
+                    bladeName = "W_enegryBlade.prefab";
                     //shieldName = "light_Shield";
                     break;
                 case Element.redMagic:
-                    bladeName = "R_enegryBlade";
+                    bladeName = "R_enegryBlade.prefab";
                     //shieldName = "red_Shield";
                     break;
                 default:
-                    bladeName = "D_enegryBlade";
+                    bladeName = "D_enegryBlade.prefab";
                     //shieldName = "blue_Shield";
                     break;
             }
             
             if (_myScript.Personality_events.right_sword == null)
             {
-                var op = Addressables.LoadAssetAsync<GameObject>(bladeName);
+                var op = Addressables.LoadAssetAsync<GameObject>("BasicUnitComponent/"+ bladeName);
                 var prefab = op.WaitForCompletion();
                 Addressables.Release(op);
                 
@@ -235,7 +235,7 @@ public class DATACENTERGUI : Editor {
             }
             if (_myScript.Personality_events.left_sword == null)
             {
-                var op = Addressables.LoadAssetAsync<GameObject>(bladeName);
+                var op = Addressables.LoadAssetAsync<GameObject>("BasicUnitComponent/"+ bladeName);
                 var prefab = op.WaitForCompletion();
                 Addressables.Release(op);
                 

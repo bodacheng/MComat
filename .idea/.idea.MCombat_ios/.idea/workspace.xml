@@ -3,30 +3,259 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementStoneTagsGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementStoneTagsGroup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/StoneBtnEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/StoneBtnEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/normal.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/normal.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/normal.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/normal.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/normal.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FrontLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/FrontLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Default Local Group.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Default Local Group.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Schemas/Default Local Group_BundledAssetGroupSchema.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Schemas/Default Local Group_BundledAssetGroupSchema.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Unit_Icon.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Unit_Icon.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Unit_Image.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Unit_Image.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Units.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Units.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Addressables/AddressablesLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Addressables/AddressablesLogic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DATA_CENTER/DATACENTERGUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DATA_CENTER/DATACENTERGUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Materials/M_BM_Skin_1_Bottom.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Materials/M_BM_Skin_1_Bottom.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Materials/M_BM_Skin_1_Top.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Materials/M_BM_Skin_1_Top.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Textures/Skin_2/Top/M_BM_Skin_2_Top.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Textures/Skin_2/Top/M_BM_Skin_2_Top.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Textures/Skin_2/bottom/M_BM_Skin_2_Bottom.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Biomechanical_Mutant/Textures/Skin_2/bottom/M_BM_Skin_2_Bottom.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_01.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_01/Mesh.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_01/Mesh/Fighter_01_Mesh.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_01/Mesh/Fighter_01_Mesh.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_01/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_01/Textures/Fighter_01_Albedo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_01/Textures/Fighter_01_Albedo.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_01/Textures/Fighter_01_Ao.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_01/Textures/Fighter_01_Ao.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_01/Textures/Fighter_01_Metallic.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_01/Textures/Fighter_01_Metallic.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_01/Textures/Fighter_01_Normals.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_01/Textures/Fighter_01_Normals.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_02.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_02/Mesh.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_02/Mesh/Fighter_02_Mesh.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_02/Mesh/Fighter_02_Mesh.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_02/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_02/Textures/Fighter_02_Albedo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_02/Textures/Fighter_02_Albedo.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_02/Textures/Fighter_02_Ao.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_02/Textures/Fighter_02_Ao.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_02/Textures/Fighter_02_Metallic.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_02/Textures/Fighter_02_Metallic.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_02/Textures/Fighter_02_Normals.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_02/Textures/Fighter_02_Normals.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_05.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_05/Mesh.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_05/Mesh/Fighter_05_Mesh.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_05/Mesh/Fighter_05_Mesh.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_05/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_05/Textures/Fighter_05_Albedo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_05/Textures/Fighter_05_Albedo.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_05/Textures/Fighter_05_Ao.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_05/Textures/Fighter_05_Ao.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_05/Textures/Fighter_05_Metallic.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_05/Textures/Fighter_05_Metallic.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_05/Textures/Fighter_05_Normals.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_05/Textures/Fighter_05_Normals.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_07.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_07/Mesh.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_07/Mesh/Fighter_07_Mesh.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_07/Mesh/Fighter_07_Mesh.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_07/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_07/Textures/Fighter_07_Albedo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_07/Textures/Fighter_07_Albedo.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_07/Textures/Fighter_07_Ao.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_07/Textures/Fighter_07_Ao.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_07/Textures/Fighter_07_Metallic.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_07/Textures/Fighter_07_Metallic.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_07/Textures/Fighter_07_Normals.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_07/Textures/Fighter_07_Normals.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Mesh.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Mesh/Fighter_08_Mesh.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Mesh/Fighter_08_Mesh.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures/Character.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures/Character/Fighter_08_Albedo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures/Character/Fighter_08_Albedo.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures/Character/Fighter_08_Ao.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures/Character/Fighter_08_Ao.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures/Character/Fighter_08_Metallic.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures/Character/Fighter_08_Metallic.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures/Character/Fighter_08_Normals.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures/Character/Fighter_08_Normals.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures/Hair.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures/Hair/Fighter_08_Hair_Albedo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures/Hair/Fighter_08_Hair_Albedo.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures/Hair/Fighter_08_Hair_Normals.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_08/Textures/Hair/Fighter_08_Hair_Normals.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10/Mesh.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10/Mesh/Fighter_10_Mesh.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10/Mesh/Fighter_10_Mesh.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10/Textures/Fighter_10_Albedo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10/Textures/Fighter_10_Albedo.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10/Textures/Fighter_10_Ao.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10/Textures/Fighter_10_Ao.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10/Textures/Fighter_10_Emessive.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10/Textures/Fighter_10_Emessive.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10/Textures/Fighter_10_Metallic.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10/Textures/Fighter_10_Metallic.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10/Textures/Fighter_10_Normals.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_10/Textures/Fighter_10_Normals.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_11.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_11/Mesh.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_11/Mesh/Fighter_11_Mesh.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_11/Mesh/Fighter_11_Mesh.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_11/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_11/Textures/Fighter_11_Albedo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_11/Textures/Fighter_11_Albedo.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_11/Textures/Fighter_11_Ao.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_11/Textures/Fighter_11_Ao.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_11/Textures/Fighter_11_Metallic.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_11/Textures/Fighter_11_Metallic.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_11/Textures/Fighter_11_Normals.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_11/Textures/Fighter_11_Normals.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_12.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_12/Mesh.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_12/Mesh/Fighter_12_Mesh.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_12/Mesh/Fighter_12_Mesh.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_12/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_12/Textures/Fighter_12_Albedo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_12/Textures/Fighter_12_Albedo.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_12/Textures/Fighter_12_Ao.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_12/Textures/Fighter_12_Ao.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_12/Textures/Fighter_12_Metallic.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_12/Textures/Fighter_12_Metallic.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_12/Textures/Fighter_12_Normals.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_12/Textures/Fighter_12_Normals.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13/Mesh.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13/Mesh/Fighter_13_Mesh.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13/Mesh/Fighter_13_Mesh.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13/Textures/Fighter_13_Albedo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13/Textures/Fighter_13_Albedo.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13/Textures/Fighter_13_Ao.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13/Textures/Fighter_13_Ao.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13/Textures/Fighter_13_Emissive.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13/Textures/Fighter_13_Emissive.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13/Textures/Fighter_13_Metallic.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13/Textures/Fighter_13_Metallic.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13/Textures/Fighter_13_Normals.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_13/Textures/Fighter_13_Normals.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_14.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_14/Mesh.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_14/Mesh/FIghter_14_Mesh.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_14/Mesh/FIghter_14_Mesh.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_14/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_14/Textures/Fighter_14_Albedo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_14/Textures/Fighter_14_Albedo.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_14/Textures/Fighter_14_Ao.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_14/Textures/Fighter_14_Ao.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_14/Textures/Fighter_14_Metallic.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_14/Textures/Fighter_14_Metallic.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_14/Textures/Fighter_14_Normals.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_14/Textures/Fighter_14_Normals.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Mesh.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Mesh/Fighter_15_Mesh.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Mesh/Fighter_15_Mesh.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Textures/Fighter_15_Albedo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Textures/Fighter_15_Albedo.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Textures/Fighter_15_Ao.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Textures/Fighter_15_Ao.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Textures/Fighter_15_Metallic.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Textures/Fighter_15_Metallic.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Textures/Fighter_15_Normals.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Textures/Fighter_15_Normals.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Textures/Figther_15_Hair_Albedo.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Textures/Figther_15_Hair_Albedo.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Textures/Figther_15_Hair_Normals.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_15/Textures/Figther_15_Hair_Normals.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_04.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_04.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_05.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_05.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_06.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_06.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_07.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Materials/Fighter_07.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Stand.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Stand/Stand.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Stand/Stand.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Stand/Stand.obj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Stand/Stand.obj.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Material.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Material/RobotSoldier_Body_1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Material/RobotSoldier_Body_1.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Material/RobotSoldier_Head_1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Material/RobotSoldier_Head_1.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Meshes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Meshes/RobotSoldier.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Meshes/RobotSoldier.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Prefab/RobotSoldier_1.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Prefab/RobotSoldier_1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/SampleAnimationController.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/SampleAnimationController.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/SampleScene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/SampleScene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Body_1_D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Body_1_D.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Body_E.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Body_E.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Body_M.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Body_M.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Body_N.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Body_N.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Head_1_D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Head_1_D.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Head_1_E.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Head_1_E.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Head_M.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Head_M.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Head_N.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/RobotSoilder/Soldiers/RobotSoldier_1/Textures/RobotSoldier_Head_N.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/maksim1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/maksim1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/maksim1.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/maksim1.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/maksim2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/maksim2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/mutant_b.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/mutant_b.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/tetsuya_old2.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit/human/tetsuya_old2.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/1.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/10.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/10.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/10.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/10.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/11.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/11.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/11.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/11.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/12.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/12.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/12.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/12.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/13.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/14.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/4.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/4.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/6.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/6.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/6.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/7.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/7.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/7.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/8.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/8.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/8.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/9.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/9.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/9.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/9.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/bg/学生妹.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/bg/学生妹.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/PreparingProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/PreparingProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Monster/Units.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Monster/Units.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Launcher/StartUpPresentation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Launcher/StartUpPresentation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/PopupLayer/HighLightLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/PopupLayer/HighLightLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/PopupLayer/UnitInstructionLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/PopupLayer/UnitInstructionLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UnitInstructionLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UnitInstructionLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GvhProjectSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GvhProjectSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Search.settings" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Search.settings" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,7 +469,10 @@
       <workItem from="1676079122574" duration="3447000" />
       <workItem from="1676121427103" duration="2633000" />
       <workItem from="1676172472280" duration="6517000" />
-      <workItem from="1676196114741" duration="6699000" />
+      <workItem from="1676196114741" duration="6828000" />
+      <workItem from="1676253386335" duration="646000" />
+      <workItem from="1676255341421" duration="869000" />
+      <workItem from="1676261247402" duration="6249000" />
     </task>
     <servers />
   </component>

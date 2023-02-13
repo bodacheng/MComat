@@ -34,6 +34,7 @@ Material:
   - NORMAL_MAP
   - OUTLINE_PASS_DISABLED
   - SHADOWS_ENABLED
+  - SPECULAR
   - SPECULAR_MAP
   - _DETAILBLEND_MULTIPLY
   - _DETAILUV_UV1
@@ -242,7 +243,7 @@ Material:
     - _LightmapBrightness: 1
     - _LightmapUV: 0
     - _MatCapBlend: 0
-    - _MatCapBrightness: 2
+    - _MatCapBrightness: 3
     - _MatCapContrast: 1
     - _MatCapPerspective: 1
     - _MatCapStatic: 0
@@ -286,7 +287,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SourceBlend: 5
     - _SpecSource: 0
-    - _Specular: 0
+    - _Specular: 1
     - _SpecularBrightness: 1
     - _SpecularHair: 0
     - _SpecularHighlights: 1

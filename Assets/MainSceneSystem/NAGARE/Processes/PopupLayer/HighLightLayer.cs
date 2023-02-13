@@ -53,12 +53,10 @@ public class HighLightLayer : UILayer
     #endregion
     
     #region 黑幕
-    public static void DarkOff(Color color, float duration, bool randomChangeBg)
+    public static void DarkOff(Color color, float duration)
     {
         var highLightLayer = UILayerLoader.Load<HighLightLayer>();
         highLightLayer.bigCurtain.raycastTarget = true;
-        if (randomChangeBg)
-            highLightLayer.RandomChangeBg();
         highLightLayer.bigCurtain.DOColor(color, duration);
     }
     
@@ -76,32 +74,6 @@ public class HighLightLayer : UILayer
     }
     
     #endregion
-    
-    private static readonly List<string> BgKeys = new ();
-    public static async UniTask LoadBg()
-    {
-        var loadPath = Addressables.LoadResourceLocationsAsync( new List<string> {"pic"} , Addressables.MergeMode.Intersection);
-        await loadPath;
-        if (loadPath.Status == AsyncOperationStatus.Succeeded)
-        {
-            foreach (var path in loadPath.Result)
-            {
-                if (!BgKeys.Contains(path.PrimaryKey))
-                    BgKeys.Add(path.PrimaryKey);
-            }
-        }
-        Addressables.Release(loadPath);
-    }
-
-    async void RandomChangeBg()
-    {
-        if (BgKeys.Count == 0) return;
-        int randomIndex = Random.Range(0, BgKeys.Count);
-        var value = await AddressablesLogic.LoadT<Sprite>(BgKeys[randomIndex]);
-        var bigCurtainRect = bigCurtain.transform.GetComponent<RectTransform>();
-        bigCurtainRect.sizeDelta = new Vector2(value.rect.width * (float)Screen.height / value.rect.height   , Screen.height);
-        bigCurtain.sprite = value;
-    }
     
     public static void Close()
     {

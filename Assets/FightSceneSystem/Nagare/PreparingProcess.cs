@@ -131,7 +131,7 @@ public class PreparingProcess : FSceneProcess
     {
         //HighLightLayer.DarkOff(Color.white, 0, true);
         var unitInstructionLayer = UILayerLoader.Load<UnitInstructionLayer>();
-        unitInstructionLayer.RandomChangeUnitImage();
+        unitInstructionLayer.LoadUnitImage();
         EnterProcess().Forget();
     }
     

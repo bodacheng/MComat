@@ -12,8 +12,10 @@ Material:
   m_ValidKeywords:
   - AMBIENT
   - ANIME_SOFT
+  - BASE_CONTRAST
   - DIFFUSE
   - FOG
+  - MATCAP
   - MATCAP_PERSPECTIVE
   - NORMAL_MAP
   - OUTLINE_PASS_DISABLED
@@ -96,11 +98,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 2479f02323fc780419e6e0288a68f696, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCapTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b4a39e223b86cf24d82d7c34e6366131, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -169,7 +171,7 @@ Material:
     - _BumpScale: 1
     - _CameraFadeEnd: 0
     - _CameraFadeStart: 0
-    - _Contrast: 1
+    - _Contrast: 1.2
     - _Cull: 2
     - _Cutoff: 0.5
     - _Cutout: 0
@@ -216,7 +218,7 @@ Material:
     - _LightmapBrightness: 1
     - _LightmapUV: 0
     - _MatCapBlend: 0
-    - _MatCapBrightness: 1
+    - _MatCapBrightness: 2
     - _MatCapContrast: 1
     - _MatCapPerspective: 1
     - _MatCapStatic: 0

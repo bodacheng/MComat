@@ -18,8 +18,8 @@ public class StartUpPresentation : MonoBehaviour
 
     async UniTask OnStart()
     {
-        await HighLightLayer.LoadBg();
-        await UnitInstructionLayer.LoadUnitImage();
+        var unitInstructionLayer = UILayerLoader.Load<UnitInstructionLayer>();
+        unitInstructionLayer.LoadUnitImage();
         var bytes = await AddressablesLogic.GetWholeDownLoadSize(
             () =>
             {
@@ -48,7 +48,7 @@ public class StartUpPresentation : MonoBehaviour
         PopupLayer.ArrangeConfirmWindow(
             async ()=>
             {
-                HighLightLayer.DarkOff(Color.white, 0, true);
+                HighLightLayer.DarkOff(Color.white, 0);
                 UILayerLoader.Load<ProgressLayer>();
                 await AddressablesLogic.ResourcePrepareProcess(
                     () =>

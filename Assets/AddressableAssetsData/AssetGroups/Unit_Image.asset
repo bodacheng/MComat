@@ -18,17 +18,37 @@ MonoBehaviour:
   m_GUID: 14c6f32862b8d4c7781751c989f56232
   m_SerializeEntries:
   - m_GUID: 22a531618759e469f811bc48aa5b1b89
-    m_Address: "\u5C1D\u8BD5\u5220\u9664\u80CC\u666F1"
+    m_Address: unit_image/2
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_image
-  - m_GUID: 66501cd5d564c44c7af3577d19a802ec
-    m_Address: tachie2_
+  - m_GUID: c0446633e2db342d4962153d1f69d310
+    m_Address: unit_image/4
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_image
-  - m_GUID: f5fcb3ce88111481eb8807a40950370a
-    m_Address: "\u5B66\u751F\u59B9"
+  - m_GUID: 3b0292b20d6244621bbf8c91cb9a198f
+    m_Address: unit_image/3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit_image
+  - m_GUID: 864699e0d75d64391bed506f48d02501
+    m_Address: unit_image/5
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit_image
+  - m_GUID: 436c736224e614517a97183de81bde6e
+    m_Address: unit_image/1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit_image
+  - m_GUID: f1118497937c546e5b2eca6b7f52eb97
+    m_Address: unit_image/6
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit_image
+  - m_GUID: 863e4dd64b09c4cbe925103850312c6e
+    m_Address: unit_image/7
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_image

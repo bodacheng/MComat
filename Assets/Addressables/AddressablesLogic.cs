@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using DummyLayerSystem;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -78,6 +79,8 @@ public static class AddressablesLogic
         // Clear all cached AssetBundles
         // WARNING: This will cause all asset bundles to be re-downloaded at startup every time and should not be used in a production game
         //Addressables.ClearDependencyCacheAsync(label);
+        var unitInstructionLayer = UILayerLoader.Load<UnitInstructionLayer>();
+        unitInstructionLayer.LoadUnitImage();
         
         var downLoadTasks = new List<UniTask>();
         foreach (var label in downLoadLabel)
@@ -85,8 +88,6 @@ public static class AddressablesLogic
             downLoadTasks.Add(DownLoadMission(label, progressUIRefresh));
         }
         await UniTask.WhenAll(downLoadTasks);
-        await HighLightLayer.LoadBg();
-        await UnitInstructionLayer.LoadUnitImage();
         complete.Invoke();
     }
     

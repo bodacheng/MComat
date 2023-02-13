@@ -35,7 +35,7 @@ public static class Units
     static async UniTask LoadFile()
     {
         //暂时做如下处理
-        TextAsset CSV = await AddressablesLogic.LoadT<TextAsset>("Config/" + CommonSetting.UnitConfigFile);
+        var CSV = await AddressablesLogic.LoadT<TextAsset>("Config/" + CommonSetting.UnitConfigFile);
         if (CSV)
         {
             Load(CSV);
