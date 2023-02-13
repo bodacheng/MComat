@@ -4352,7 +4352,6 @@ MonoBehaviour:
   downLoadLabels:
   - default
   - config
-  - pic
   - basic_anim
   - skill_anim
   - hurt_anim

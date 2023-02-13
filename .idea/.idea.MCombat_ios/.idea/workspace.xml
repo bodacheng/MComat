@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/Shop/ad.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/Shop/product.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/Shop/product.prefab.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ads/AdsBtnRender.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ads/AdsBtnRender.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ads/RewardedAdsButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ads/RewardedAdsButton.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_04.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_04/Mesh.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_04/Mesh.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/Shop.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_04/Mesh/Fighter_04_Mesh.FBX" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_04/Mesh/Fighter_04_Mesh.FBX.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_04/Textures.meta" beforeDir="false" />
@@ -33,7 +37,7 @@
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Character/Fighter_09/Textures/Fighter_09_Normals.tga.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Demo_Scene.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Demo_Scene/Fighters_Scene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Demo_Scene/Fighters_Scene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Demo_Scene/Fighters_Scene.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/Shop/ad.prefab.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_1.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_1.png.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Icons/Fighter_10.png" beforeDir="false" />
@@ -117,12 +121,12 @@
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Prefabs/Fighter_15.prefab" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Fighters_(Pack)/Prefabs/Fighter_15.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/GUI Kit - Matt Metal/Prefabs/Prefabs_Component_Frames/_PrefabsPanel_Frames.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/GUI Kit - Matt Metal/Prefabs/Prefabs_Component_Frames/_PrefabsPanel_Frames.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ShopTopLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ShopTopLayer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/IAP/IAPManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/IAP/IAPManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/WatchAd.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/WatchAd.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ShopTopLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ShopTopLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/UI/ProductCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/ProductCell.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
@@ -338,7 +342,7 @@
       <workItem from="1676253386335" duration="646000" />
       <workItem from="1676255341421" duration="869000" />
       <workItem from="1676261247402" duration="7295000" />
-      <workItem from="1676282366468" duration="5704000" />
+      <workItem from="1676282366468" duration="6175000" />
     </task>
     <servers />
   </component>
