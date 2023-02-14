@@ -18,11 +18,16 @@ public class UnitInstructionLayer : UILayer
     [SerializeField] private float nameEndPosX = 100f;
     [SerializeField] private float emergeDuration = 2f;
 
-    private List<TweenerCore<float, float, FloatOptions>> _tweenerCores = new ();
+    private readonly List<TweenerCore<float, float, FloatOptions>> _tweenerCores = new ();
     
     async void ChangeUnitTheme(string RECORD_ID)
     {
         var value = await AddressablesLogic.LoadT<Sprite>("unit_image/"+RECORD_ID);
+        if (value == null)
+        {
+            return;
+        }
+        
         var unitImageRect = unitImage.transform.GetComponent<RectTransform>();
         unitImageRect.sizeDelta = new Vector2(value.rect.width * unitImageRect.rect.height / value.rect.height, unitImageRect.rect.height);
         unitImage.sprite = value;

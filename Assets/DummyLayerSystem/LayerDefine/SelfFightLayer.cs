@@ -8,15 +8,16 @@ namespace mainMenu
     public class SelfFightLayer : UILayer
     {
         [Header("Mode Buttons")] 
-        [SerializeField] Button RotationModeBtn, MultiModeBtn;
-        
-        [SerializeField] Toggle testMode;
+        [SerializeField] Button rotationModeBtn, multiModeBtn;
         
         [Header("模式选中框")]
-        [SerializeField] GameObject ModeFrame;
+        [SerializeField] GameObject modeFrame;
         
         [Header("选中框")]
         [SerializeField] GameObject selectedFrame;
+
+        [Header("删除")]
+        [SerializeField] Button removeBtn;
         
         [Header("共同战斗式按钮")]
         [SerializeField] RectTransform multiRaidTeam1T, multiRaidTeam2T;
@@ -27,6 +28,12 @@ namespace mainMenu
         [SerializeField] Transform RotationTeam1T, RotationTeam2T;
         [SerializeField] HeroIcon team11_R, team12_R, team13_R;
         [SerializeField] HeroIcon team21_R, team22_R, team23_R;
+        
+        [Header("选中角色的技能显示")]
+        [SerializeField] NineForShow nineForShow;
+
+        [Header("Start")]
+        [SerializeField] Button fightStartBtn;
         
         readonly MultiDic<Team, int, HeroIcon> _teamButtonDicM = new ();
         readonly MultiDic<Team, int, HeroIcon> _teamButtonDicR = new ();
@@ -51,8 +58,9 @@ namespace mainMenu
             IniRotationModeUnitIcons(new List<HeroIcon> { team11_R, team12_R, team13_R }, Team.player1);
             IniRotationModeUnitIcons(new List<HeroIcon> { team21_R, team22_R, team23_R }, Team.player2);
             
-            RotationModeBtn.onClick.AddListener(SwitchToRotationMode);
-            MultiModeBtn.onClick.AddListener(SwitchToMultiRaidMode);
+            rotationModeBtn.onClick.AddListener(SwitchToRotationMode);
+            multiModeBtn.onClick.AddListener(SwitchToMultiRaidMode);
+            fightStartBtn.onClick.AddListener(FightStart);
         }
         
         public void Clear()
@@ -80,8 +88,8 @@ namespace mainMenu
 
         void FrameRefresh(Transform t)
         {
-            ModeFrame.transform.SetParent(t);
-            ModeFrame.transform.localPosition = Vector3.zero;
+            modeFrame.transform.SetParent(t);
+            modeFrame.transform.localPosition = Vector3.zero;
         }
 
         public void SwitchToMultiRaidMode()
@@ -93,7 +101,7 @@ namespace mainMenu
             _stage.EventType= FightEventType.Self;
             _stage.team1Mode = TeamMode.MultiRaid;
             _stage.team2Mode = TeamMode.MultiRaid;
-            FrameRefresh(MultiModeBtn.transform);
+            FrameRefresh(multiModeBtn.transform);
         }
         
         public void SwitchToRotationMode()
@@ -105,25 +113,12 @@ namespace mainMenu
             _stage.EventType = FightEventType.Self;
             _stage.team1Mode = TeamMode.Rotation;
             _stage.team2Mode = TeamMode.Rotation;
-            FrameRefresh(RotationModeBtn.transform);
+            FrameRefresh(rotationModeBtn.transform);
         }
         
+        // btn feature
         public void FightStart()
         {
-            switch (_stage.team1Mode)
-            {
-                case TeamMode.MultiRaid:
-                    _selfFight.HeroSets = _team1PosKeySetM.LoadTeamDic();
-                    _selfFight.EnemySets = _team2PosKeySetM.LoadTeamDic();
-                    break;
-                case TeamMode.Rotation:
-                    _selfFight.HeroSets = _team1PosKeySetR.LoadTeamDic();
-                    _selfFight.EnemySets = _team2PosKeySetR.LoadTeamDic();
-                    break;
-            }
-            _stage.FightMembers = _selfFight;
-            _stage.Team1ID = PlayerAccountInfo.Me.PlayFabId;
-            _stage.Team2ID = PlayerAccountInfo.Me.PlayFabId + "_2";
             FightLoad.Go(_stage);
         }
         
@@ -135,6 +130,7 @@ namespace mainMenu
                 var unitsLayer = UILayerLoader.Get<UnitsLayer>();
                 unitsLayer.Selected.Value = instanceID;
                 UnitIconBtn(instanceID);
+                nineForShow.ShowStones_Acc(instanceID);
             }
             var unitsLayer = UILayerLoader.Get<UnitsLayer>();
             unitsLayer.SetUnitsIconOnClick(UnitIconButton);
@@ -229,8 +225,8 @@ namespace mainMenu
             {
                 Debug.Log("请检查changeIconOnPos函数执行顺序");
             }
-            var tar = teamButtonDic.Get(_focusingTeam, posNum);
-            if (tar == null)
+            var icon = teamButtonDic.Get(_focusingTeam, posNum);
+            if (icon == null)
             {
                 Debug.Log("严重错误");
             }
@@ -239,12 +235,14 @@ namespace mainMenu
             if (posInstanceId != null)
             {
                 var one = dataAccess.Units.Get(posInstanceId);
-                tar.ChangeIcon(one);
+                icon.ChangeIcon(one);
             }
             else
             {
-                tar.Clear();
+                icon.Clear();
             }
+
+            CheckIfTeamMemberEnough();
         }
         
         void IniMultiRaidModeUnitIcons(List<HeroIcon> icons, Team team)
@@ -293,6 +291,102 @@ namespace mainMenu
             if (unitsBoxSelect != null)
             {
                 UnitIconBtn(unitsBoxSelect);
+            }
+
+            var oneSet = CheckIfHaveUnitOnTeamSlot(_focusingPosNum);
+            nineForShow.ShowStones_Acc(oneSet?.instanceID);
+            removeBtn.gameObject.SetActive(oneSet != null && oneSet.instanceID != null);
+            removeBtn.onClick.RemoveAllListeners();
+            removeBtn.onClick.AddListener(() =>
+            {
+                RemoveSelect(_focusingPosNum);
+                removeBtn.gameObject.SetActive(false);
+            });
+        }
+
+        PosKeySet.OneSet CheckIfHaveUnitOnTeamSlot(int pos)
+        {
+            switch (_stage.team1Mode)
+            {
+                case TeamMode.MultiRaid:
+                    switch (_focusingTeam)
+                    {
+                        case Team.player1:
+                            return _team1PosKeySetM.GetPosMemInfo(pos);
+                        case Team.player2:
+                            return _team2PosKeySetM.GetPosMemInfo(pos);
+                    }
+                    break;
+                case TeamMode.Rotation:
+                    switch (_focusingTeam)
+                    {
+                        case Team.player1:
+                            return _team1PosKeySetR.GetPosMemInfo(pos);
+                        case Team.player2:
+                            return _team2PosKeySetR.GetPosMemInfo(pos);
+                    }
+                    break;
+            }
+            return null;
+        }
+        
+        void ArrangeStageInfo()
+        {
+            switch (_stage.team1Mode)
+            {
+                case TeamMode.MultiRaid:
+                    _selfFight.HeroSets = _team1PosKeySetM.LoadTeamDic();
+                    _selfFight.EnemySets = _team2PosKeySetM.LoadTeamDic();
+                    break;
+                case TeamMode.Rotation:
+                    _selfFight.HeroSets = _team1PosKeySetR.LoadTeamDic();
+                    _selfFight.EnemySets = _team2PosKeySetR.LoadTeamDic();
+                    break;
+            }
+            _stage.FightMembers = _selfFight;
+            _stage.Team1ID = PlayerAccountInfo.Me.PlayFabId;
+            _stage.Team2ID = PlayerAccountInfo.Me.PlayFabId + "_2";
+        }
+
+        void CheckIfTeamMemberEnough()
+        {
+            ArrangeStageInfo();
+            fightStartBtn.interactable = _stage.FightMembers.CheckFightLegal();
+        }
+
+        void RemoveSelect(int pos)
+        {
+            if (pos != -1)
+            {
+                switch (_stage.team1Mode)
+                {
+                    case TeamMode.MultiRaid:
+                        switch (_focusingTeam)
+                        {
+                            case Team.player1:
+                                _team1PosKeySetM.SetPosMemInfoByInstanceID(pos, null);
+                                ChangeIconOnPos(pos, _teamButtonDicM, _team1PosKeySetM);
+                                break;
+                            case Team.player2:
+                                _team2PosKeySetM.SetPosMemInfoByInstanceID(pos, null);
+                                ChangeIconOnPos(pos, _teamButtonDicM, _team2PosKeySetM);
+                                break;
+                        }
+                        break;
+                    case TeamMode.Rotation:
+                        switch (_focusingTeam)
+                        {
+                            case Team.player1:
+                                _team1PosKeySetR.SetPosMemInfoByInstanceID(pos, null);
+                                ChangeIconOnPos(pos, _teamButtonDicR, _team1PosKeySetR);
+                                break;
+                            case Team.player2:
+                                _team2PosKeySetR.SetPosMemInfoByInstanceID(pos, null);
+                                ChangeIconOnPos(pos, _teamButtonDicR, _team2PosKeySetR);
+                                break;
+                        }
+                        break;
+                }
             }
         }
     }

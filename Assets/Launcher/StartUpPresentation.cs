@@ -18,8 +18,6 @@ public class StartUpPresentation : MonoBehaviour
 
     async UniTask OnStart()
     {
-        var unitInstructionLayer = UILayerLoader.Load<UnitInstructionLayer>();
-        unitInstructionLayer.LoadUnitImage();
         var bytes = await AddressablesLogic.GetWholeDownLoadSize(
             () =>
             {

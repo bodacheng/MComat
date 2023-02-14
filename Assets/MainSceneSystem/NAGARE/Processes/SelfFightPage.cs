@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using DummyLayerSystem;
+﻿using DummyLayerSystem;
 using mainMenu;
 
 public class SelfFightPage : MSceneProcess
@@ -9,11 +8,11 @@ public class SelfFightPage : MSceneProcess
         Step = MainSceneStep.SelfFightFront;
     }
 
-    private SelfFightLayer selfFightLayer;
+    SelfFightLayer selfFightLayer;
     public override void ProcessEnter()
     {
         var layer = UILayerLoader.Load<UnitsLayer>();
-        layer.DisplayUnitIcons(dataAccess.Units.Dic, true);
+        layer.DisplayUnitIcons(dataAccess.Units.Dic, true, true);
         
         selfFightLayer = UILayerLoader.Load<SelfFightLayer>();
         selfFightLayer.INI();

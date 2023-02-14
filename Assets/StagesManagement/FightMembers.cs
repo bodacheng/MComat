@@ -15,6 +15,11 @@ public class FightMembers
 {
     [NonSerialized] public MultiDic<int, int, UnitInfo> HeroSets = new ();
     public MultiDic<int, int, UnitInfo> EnemySets = new ();
+
+    public bool CheckFightLegal()
+    {
+        return HeroSets.mDict.Count > 0 && EnemySets.mDict.Count > 0;
+    }
     
     public FightMembers()
     {
