@@ -9,12 +9,13 @@ namespace ModelView
     public partial class DedicatedCameraConnector : MonoBehaviour
     {
         [SerializeField] private Text unitName;
+        [SerializeField] private Vector3 modelPos = new Vector3(999,999,0);
         
-        static readonly IDictionary<string, Data_Center> saves = new Dictionary<string, Data_Center>();
+        static readonly IDictionary<string, Data_Center> Saves = new Dictionary<string, Data_Center>();
 
         public static void ClearBackUpModels()
         {
-            foreach (var save in saves)
+            foreach (var save in Saves)
             {
                 if (save.Value != null)
                     Destroy(save.Value.WholeT.gameObject);
@@ -40,7 +41,7 @@ namespace ModelView
         
         async UniTask _ShowModel(string recordID)
         {
-            foreach (var save in saves)
+            foreach (var save in Saves)
             {
                 if (save.Value != null)
                     save.Value.WholeT.gameObject.SetActive(false);
@@ -48,7 +49,7 @@ namespace ModelView
             
             Data_Center saveData = null;
             if (recordID != null)
-                saves.TryGetValue(recordID, out saveData);
+                Saves.TryGetValue(recordID, out saveData);
 
             var config = Units.GetUnitConfig(recordID);
             unitName.text = Translate.Get(config?.REAL_NAME);
@@ -73,10 +74,12 @@ namespace ModelView
                     _focusRId = null;
                     return;
                 }
-                DicAdd<string, Data_Center>.Add(saves, recordID, _focusingC);
+                DicAdd<string, Data_Center>.Add(Saves, recordID, _focusingC);
             }
             
-            _focusingC.WholeT.SetParent(transform); // 尽量确保模型总与图层一起被摧毁
+            _focusingC.WholeT.SetParent(transform); // 确保模型总与图层一起被摧毁
+            _focusingC.WholeT.position = modelPos;
+            
             _focusRId = recordID;
             _focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
             

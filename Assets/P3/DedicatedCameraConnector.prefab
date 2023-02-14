@@ -277,6 +277,7 @@ MonoBehaviour:
   extraZDis: 30
   extraZCameraDepth: 5
   unitName: {fileID: 6441782380435933900}
+  modelPos: {x: 999, y: 999, z: -999}
 --- !u!222 &8129782284400709095
 CanvasRenderer:
   m_ObjectHideFlags: 0

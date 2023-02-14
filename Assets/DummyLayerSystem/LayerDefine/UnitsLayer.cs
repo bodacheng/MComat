@@ -21,11 +21,9 @@ namespace mainMenu
         [Header("宠物栏parent")]
         [SerializeField] RectTransform unitBoxContainer;
         
-        readonly List<string> _typeOfUnitsIHave = new ();
-        
+        readonly List<string> typeOfUnitsIHave = new ();
         readonly IDictionary<string, HeroIcon> heroIcons = new Dictionary<string, HeroIcon>();
         public ReactiveProperty<string> Selected { get; } = new (null);
-
         private Action<string> onClick;
         public Action<string> OnClick => onClick;
         
@@ -66,16 +64,16 @@ namespace mainMenu
             var row = 1;
             for (var i = 0; i < icons.Count; i++)
             {
-                var _targetingIcon = icons[i];
-                if (_targetingIcon == null)
+                var targetingIcon = icons[i];
+                if (targetingIcon == null)
                 {
                     Debug.Log("严重错误");
                     return;
                 }
-                _targetingIcon.gameObject.SetActive(true);
-                _targetingIcon.transform.SetParent(unitBoxContainer);
-                _targetingIcon.transform.localScale = Vector3.one;
-                _targetingIcon.transform.localPosition = Vector3.zero;
+                targetingIcon.gameObject.SetActive(true);
+                targetingIcon.transform.SetParent(unitBoxContainer);
+                targetingIcon.transform.localScale = Vector3.one;
+                targetingIcon.transform.localPosition = Vector3.zero;
             }
             
             row = 1 + icons.Count / 7;
@@ -103,9 +101,9 @@ namespace mainMenu
             }
             if (clearBtnFeature)
                 targetingIcon.iconButton.onClick.RemoveAllListeners();
-            if (!_typeOfUnitsIHave.Contains(unitConfig.TYPE))
+            if (!typeOfUnitsIHave.Contains(unitConfig.TYPE))
             {
-                _typeOfUnitsIHave.Add(unitConfig.TYPE);
+                typeOfUnitsIHave.Add(unitConfig.TYPE);
             }
         }
         
@@ -120,7 +118,7 @@ namespace mainMenu
             {
                 AddUnitIcon(keyValuePair.Value.id, clearButtonFeature, withSkillCheck);
             }
-            filter.RefreshTypeDropDown(_typeOfUnitsIHave);
+            filter.RefreshTypeDropDown(typeOfUnitsIHave);
         }
         
         Action displayUnitIconsAfterAction;

@@ -13,9 +13,9 @@ namespace ModelView
         [SerializeField] private float rotateSpeed = 90;
         [SerializeField] private float extraZDis;
         [SerializeField] private float extraZCameraDepth = 30f;
-        private readonly Bounds _tempBoundary = new ();
-        private RectTransform _rect;
-        private bool _fixMode;
+        private readonly Bounds tempBoundary = new ();
+        private RectTransform rect;
+        private bool fixMode;
         
         public void Clear()
         {
@@ -33,8 +33,8 @@ namespace ModelView
         
         void Initialize(bool fixMode, Transform focus, Transform camerasHolder = null)
         {
-            _fixMode = fixMode;
-            _rect = transform.GetComponent<RectTransform>();
+            this.fixMode = fixMode;
+            rect = transform.GetComponent<RectTransform>();
             target = focus;
             target.SetParent(transform);
             _parentNodeRenderer = target.GetComponent<Renderer>();
@@ -48,14 +48,14 @@ namespace ModelView
                 }
             }
             
-            wid = _rect.rect.width;
-            hei = _rect.rect.height;
+            wid = rect.rect.width;
+            hei = rect.rect.height;
             camera.transform.SetParent(camerasHolder);
             PreScene.target.CameraStackToPostProcess(camera);
             
             // 初始化工作全部完成后才启用相机，否则会在之前造成黑屏
             camera.gameObject.SetActive(true);
-            if (!_fixMode)
+            if (!this.fixMode)
                 _basicOrthographicSize = CalMaxOrthographicSize();
         }
 
@@ -76,7 +76,7 @@ namespace ModelView
         void CameraPositionCal()
         {
             // 合成Bounds計算
-            _targetBounds = _tempBoundary;
+            _targetBounds = tempBoundary;
             if (_parentNodeRenderer != null)
             {
                 _targetBounds = _parentNodeRenderer.bounds;
@@ -87,7 +87,7 @@ namespace ModelView
                 if (render == null)
                     continue; 
 
-                if (_targetBounds == _tempBoundary)
+                if (_targetBounds == tempBoundary)
                 {
                     _targetBounds = render.bounds;
                 }
@@ -97,15 +97,15 @@ namespace ModelView
                 }
             }
             
-            if (_fixMode)
+            if (fixMode)
             {
                 _basicOrthographicSize = Mathf.Max(_targetBounds.extents.x, _targetBounds.extents.y);
             }
             
-            var viewCenter = GetCenterPosition(_rect);
+            var viewCenter = GetCenterPosition(rect);
             void CameraTreat(Camera _camera)
             {
-                _camera.orthographicSize = _basicOrthographicSize * (Screen.height / _rect.rect.height);
+                _camera.orthographicSize = _basicOrthographicSize * (Screen.height / rect.rect.height);
                 var cViewWidth = _camera.orthographicSize * 2 * _camera.aspect;
                 var cViewHeight = _camera.orthographicSize * 2;
                 _camera.transform.position = _targetBounds.center + Vector3.forward * (_targetBounds.extents.z + extraZDis)
@@ -205,7 +205,7 @@ namespace ModelView
         
         float CalMaxExtend()
         {
-            _targetBounds = _tempBoundary;
+            _targetBounds = tempBoundary;
             if (_parentNodeRenderer != null)
             {
                 _targetBounds = _parentNodeRenderer.bounds;
@@ -213,7 +213,7 @@ namespace ModelView
 
             foreach (Renderer render in _renderers)
             {
-                if (_targetBounds == _tempBoundary)
+                if (_targetBounds == tempBoundary)
                 {
                     _targetBounds = render.bounds;
                 }

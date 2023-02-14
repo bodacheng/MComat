@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using dataAccess;
+﻿using dataAccess;
 using UnityEngine;
 using UnityEngine.UI;
 using Singleton;
@@ -18,12 +17,14 @@ public class HeroIcon : MonoBehaviour {
     {
         frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 0.3f);
         Icon.color = new Color(1,1,1,0.3f);
+        iconButton.interactable = false;
     }
     
     public void LightOn()
     {
         frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 1f);
         Icon.color = new Color(1,1,1,1f);
+        iconButton.interactable = true;
     }
     
     public void CooldownCurtainUpdate(float proportion)
