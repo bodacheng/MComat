@@ -3,15 +3,43 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SelfFightLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SelfFightLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Launcher/StartUpPresentation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Launcher/StartUpPresentation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/BattleGround.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/BattleGround.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/ButtonEffects.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/ButtonEffects.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/iOS/addressables_content_state.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/iOS/addressables_content_state.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/UnitBtnEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/UnitBtnEffect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/EX3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/bluemagic/normal.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/EX3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/explosion0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/explosion0.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/explosion1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/explosion1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/explosion2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/explosion2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/explosion3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/explosion3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/darkmagic/normal.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/EX3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/explosion0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/explosion0.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/explosion1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/explosion1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/explosion2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/explosion2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/explosion3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/explosion3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/greenmagic/normal.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/EX3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/lightmagic/normal.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/EX3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/normal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/buttonEffects/redmagic/normal.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/PopupLayer/UnitInstructionLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/PopupLayer/UnitInstructionLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/SelfFightPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/SelfFightPage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SelfFightLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SelfFightLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TeamEditLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/TeamEditLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UnitsLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/UnitsLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMembers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMembers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ServerData/release/iOS/catalog_v1.hash" beforeDir="false" afterPath="$PROJECT_DIR$/ServerData/release/iOS/catalog_v1.hash" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ServerData/release/iOS/catalog_v1.json" beforeDir="false" afterPath="$PROJECT_DIR$/ServerData/release/iOS/catalog_v1.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,7 +252,7 @@
       <workItem from="1676255341421" duration="869000" />
       <workItem from="1676261247402" duration="7295000" />
       <workItem from="1676282366468" duration="6175000" />
-      <workItem from="1676336304947" duration="4673000" />
+      <workItem from="1676336304947" duration="5952000" />
     </task>
     <servers />
   </component>

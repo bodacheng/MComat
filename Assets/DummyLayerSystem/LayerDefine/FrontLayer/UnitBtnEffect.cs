@@ -12,11 +12,11 @@ public class UnitBtnEffect : MonoBehaviour
     
     private readonly List<string> _slotEffectNames = new()
     {
-        "frontLayerUnitBtn/stoneEffect.prefab",
-        "frontLayerUnitBtn/stoneEffect1.prefab",
-        "frontLayerUnitBtn/stoneEffect2.prefab",
-        "frontLayerUnitBtn/stoneEffect3.prefab",
-        "frontLayerUnitBtn/stoneEffect4.prefab"
+        "FrontLayerUnitBtn/stoneEffect.prefab",
+        "FrontLayerUnitBtn/stoneEffect1.prefab",
+        "FrontLayerUnitBtn/stoneEffect2.prefab",
+        "FrontLayerUnitBtn/stoneEffect3.prefab",
+        "FrontLayerUnitBtn/stoneEffect4.prefab"
     };
     
     private readonly List<SlotJob> _slotJobs = new();

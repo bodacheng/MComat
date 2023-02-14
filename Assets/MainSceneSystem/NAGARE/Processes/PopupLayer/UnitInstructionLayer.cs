@@ -22,6 +22,9 @@ public class UnitInstructionLayer : UILayer
     
     async void ChangeUnitTheme(string RECORD_ID)
     {
+        var config = Units.GetUnitConfig(RECORD_ID);
+        if (config == null)
+            return;
         var value = await AddressablesLogic.LoadT<Sprite>("unit_image/"+RECORD_ID);
         if (value == null)
         {
@@ -32,7 +35,7 @@ public class UnitInstructionLayer : UILayer
         unitImageRect.sizeDelta = new Vector2(value.rect.width * unitImageRect.rect.height / value.rect.height, unitImageRect.rect.height);
         unitImage.sprite = value;
         
-        var config = Units.GetUnitConfig(RECORD_ID);
+        
         unitName.text = Translate.Get(config.REAL_NAME);
         unitIntro.text = Translate.Get(config.REAL_NAME+ "_intro");
         
