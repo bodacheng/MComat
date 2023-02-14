@@ -933,8 +933,8 @@ var PROGRESSIVE_REWARD = "Reward";							// PROGRESSIVE_REWARD_TABLE property de
 var TRACKER_NEXT_GRANT = "NextEligibleGrant";				// CHECK_IN_TRACKER property containing the time at which we 
 var TRACKER_LOGIN_STREAK = "LoginStreak";					// CHECK_IN_TRACKER property containing the streak length
 var login_bonus_catalog = "Present";
-var normalDMAward = "normalLoginBonus";
-var extraDMAward = "sevenDaysLoginBonus";
+var normalDMAward = "normalLoginBonusDM";
+var extraDMAward = "sevenDaysLoginBonusDM";
 
 handlers.CheckInExample = function(args) {
 
