@@ -2,32 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementStoneTagsGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/BtnUI/ElementStoneTagsGroup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/GUI PRO Kit - Sci-Fi/Prefabs/Prefabs_DemoScene_Panels/Lobby_Main.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/GUI PRO Kit - Sci-Fi/Prefabs/Prefabs_DemoScene_Panels/Lobby_Main.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/GUI PRO Kit - Sci-Fi/Prefabs/Prefabs_DemoScene_Panels/Mission.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/GUI PRO Kit - Sci-Fi/Prefabs/Prefabs_DemoScene_Panels/Mission.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/GUI PRO Kit - Sci-Fi/Prefabs/Prefabs_DemoScene_Panels/Shop_04_Upgrade.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/GUI PRO Kit - Sci-Fi/Prefabs/Prefabs_DemoScene_Panels/Shop_04_Upgrade.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/GUI PRO Kit - Sci-Fi/Prefabs/Prefabs_DemoScene_Panels/Survivors_List.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/GUI PRO Kit - Sci-Fi/Prefabs/Prefabs_DemoScene_Panels/Survivors_List.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/GUI PRO Kit - Sci-Fi/Prefabs/Prefabs_DemoScene_Panels/Survivors_Search.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/GUI PRO Kit - Sci-Fi/Prefabs/Prefabs_DemoScene_Panels/Survivors_Search.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/CellPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/CellPrefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/Client/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/Client/Item.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/BasicSprites/ex1_default.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/BasicSprites/ex1_default.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/BasicSprites/ex2_default.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/BasicSprites/ex2_default.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/BasicSprites/ex3_default.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/BasicSprites/ex3_default.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/BasicSprites/normal_default.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/BasicSprites/normal_default.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SkillEditLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/SkillEditLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/StoneListLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/StoneListLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SimpleDragAndDrop/Scripts/Cell/StoneCell.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimpleDragAndDrop/Scripts/Cell/StoneCell.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Singleton/SkillIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/SkillIcon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SkillStoneBox/SkillStonesBox.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SkillStoneBox/SkillStonesBox.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SkillStoneBox/SkillStonesBox_Order.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SkillStoneBox/SkillStonesBox_Order.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UnitBox/SkillStoneBoxTabEffectsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UnitBox/SkillStoneBoxTabEffectsManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Addressables/AddressablesLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Addressables/AddressablesLogic.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -243,7 +218,7 @@
       <workItem from="1676255341421" duration="869000" />
       <workItem from="1676261247402" duration="7295000" />
       <workItem from="1676282366468" duration="6175000" />
-      <workItem from="1676336304947" duration="11874000" />
+      <workItem from="1676336304947" duration="12414000" />
     </task>
     <servers />
   </component>
