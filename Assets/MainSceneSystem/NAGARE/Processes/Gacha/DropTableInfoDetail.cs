@@ -13,6 +13,7 @@ public class DropTableInfoDetail : MSceneProcess
 
     public override void ProcessEnter<T>(T tableId)
     {
+        BackGroundPS.target.ChangeBGByElement(Element.lightMagic);
         _layer = UILayerLoader.Load<DropTableInfoLayer>();
         this.tableId = tableId as string;
         CloudScript.GetDropTableInfo(_layer.ShowDropTableInfo, this.tableId);
