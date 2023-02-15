@@ -28,31 +28,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     [Tooltip("Functional type of this cell")]
     public CellPhase cellPhase = CellPhase.SkillStoneBoxCell;
     
-    [Tooltip("Level")] 
-    [SerializeField] Text level;
-    
     SKStoneItem _myDadItem;
-    
-    void ShowLevel()
-    {
-        if (level == null)
-            return;
-        if (_myDadItem != null)
-        {
-            var info = Stones.Get(_myDadItem.instanceId);
-            if (info == null)
-            {
-                Debug.Log("Kinda logic error:"+ _myDadItem.instanceId);
-                Destroy(_myDadItem);
-                return;
-            }
-            level.text = info.Level.ToString();
-        }
-        else
-        {
-            level.text = string.Empty;
-        }
-    }
     
     /// <summary>
     /// Put item into this cell.(Keep old item in that cell safe)
@@ -92,7 +68,6 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                 ShowUsingUnit(_myDadItem, _charIcon);
             }
         }
-        ShowLevel();
     }
     
     // Show Character icon using this SkillStone

@@ -269,7 +269,6 @@ MonoBehaviour:
   _charIcon: {fileID: 4338741685466584463}
   _selected: {fileID: 2544887784164655690}
   cellPhase: 0
-  level: {fileID: 0}
 --- !u!114 &3324024561119886777
 MonoBehaviour:
   m_ObjectHideFlags: 0

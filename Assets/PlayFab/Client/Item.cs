@@ -30,7 +30,7 @@ public partial class PlayFabReadClient
 
     static async void OnGetUserInventory(GetUserInventoryResult result, Action<bool> finished)
     {
-        List<UniTask> stoneLoadTasks = new List<UniTask>();
+        var stoneLoadTasks = new List<UniTask>();
         foreach (var item in result.Inventory)
         {
             //Debug.Log(item.CatalogVersion + ":" + item.ItemId);

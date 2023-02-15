@@ -19,7 +19,6 @@ namespace mainMenu
             await zt.IniForSkillStoneBox(element, transform);
             ct.ThrowIfCancellationRequested();
             _btnEffects.Add(element, zt);
-            var path = FightGlobalSetting.EffectPathDefine(element);
             ct.ThrowIfCancellationRequested();
         }
         

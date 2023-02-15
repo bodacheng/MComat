@@ -17,6 +17,8 @@ namespace mainMenu
 
         [Header("order")] 
         [SerializeField] Button orderBtn;
+        [Header("Order Button")]
+        [SerializeField] Text orderButtonText;
         
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _tabEffects;

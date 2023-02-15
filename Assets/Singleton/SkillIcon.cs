@@ -6,8 +6,7 @@ public static class SkillIcon
 {
     public static async UniTask<GameObject> FindSkillIcon(string skillId)
     {
-        var skillConfig = SkillConfigTable.GetSkillConfig(skillId);
-        var prefab = GetDefaultSkillIconByResource(skillConfig.SP_LEVEL);
+        var prefab = GetDefaultSkillIconByResource();
         var returnValue = Object.Instantiate(prefab);
         var sprite = await AddressablesLogic.LoadT<Sprite>(skillId, returnValue);
         if (returnValue == null)
@@ -17,35 +16,9 @@ public static class SkillIcon
     }
     
     static GameObject _d, _ex1, _ex2, _ex3;
-    static GameObject GetDefaultSkillIconByResource(int spLevel)
+    static GameObject GetDefaultSkillIconByResource()
     {
-        switch (spLevel)
-        {
-            case 0:
-                if (_d == null)
-                {
-                    _d = Resources.Load<GameObject>("BasicSprites/normal_default");
-                }
-                return _d;
-            case 1:
-                if (_ex1 == null)
-                {
-                    _ex1 = Resources.Load<GameObject>("BasicSprites/ex1_default");
-                }
-                return _ex1;
-            case 2:
-                if (_ex2 == null)
-                {
-                    _ex2 = Resources.Load<GameObject>("BasicSprites/ex2_default");
-                }
-                return _ex2;
-            case 3:
-                if (_ex3 == null)
-                {
-                    _ex3 = Resources.Load<GameObject>("BasicSprites/ex3_default");
-                }
-                return _ex3;
-        }
-        return null;
+        var _d = Resources.Load<GameObject>("BasicSprites/stoneModel");
+        return _d;
     }
 }

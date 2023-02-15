@@ -8,40 +8,46 @@ namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
     {
-        [Header("Order Button")]
-        public Text orderButtonText;
-        
         int _orderType = 0;
+
+        private int OrderType
+        {
+            get => _orderType;
+            set
+            {
+                _orderType = value;
+                if (_orderType > 2)
+                {
+                    _orderType = 0;
+                }
+            }
+        }
         
         // 功能本身直接放按钮上，但text要适配到SkillStonesBox上。
         public void SwitchOrder()
         {
-            _orderType++;
-            if (_orderType == 5)
-            {
-                _orderType = 0;
-            }
+            OrderType++;
             Selected.gameObject.SetActive(false);
             RestFilter();
         }
               
         List<string> Order(List<string> targets)
         {
-            switch (_orderType)
+            switch (OrderType)
             {
-                case 4: // 等级降序
+                case 0: // 以技能ID
+                    orderButtonText.text = "Default";
+                    return ByDevID(targets, 1);
+                case 1: // 等级降序
+                    orderButtonText.text = "Level DES";
+                    return ByLevel(targets,0);
+                case 2: // 等级升序
                     orderButtonText.text = "Level ASC";
                 return ByLevel(targets, 1);
-                case 3: // 等级升序
-                    orderButtonText.text = "Level DES";
-                return ByLevel(targets,0);
-                case 0: // 以技能ID
-                    orderButtonText.text = "開発番号";
-                return ByDevID(targets, 1);
             }
             return targets;
         }
-
+        
         List<string> ByDevID(List<string> targets, int order) //1:升序 0:降序 
         {
             for (int i = 0; i < targets.Count - 1; i++)
