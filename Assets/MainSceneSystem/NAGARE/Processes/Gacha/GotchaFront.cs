@@ -44,6 +44,19 @@ public class GotchaFront : MSceneProcess
         for (var i = 0; i < dropTables.Count; i++)
         {
             var dropTable = dropTables[i];
+            if (_startIndex == i)
+            {
+                switch (dropTable.ItemId)
+                {
+                    case "GDGotcha":
+                        StarsFall.target.TriggerHoleEffect(StarsFall.GachaType.normal);
+                        break;
+                    case "DMGotcha":
+                        StarsFall.target.TriggerHoleEffect(StarsFall.GachaType.super);
+                        break;
+                }
+            }
+
             dropTable.parentT.gameObject.SetActive(_startIndex == i);
         }
     }

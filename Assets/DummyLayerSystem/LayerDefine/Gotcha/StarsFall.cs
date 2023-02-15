@@ -3,12 +3,22 @@ using UnityEngine;
 
 public class StarsFall : MonoBehaviour
 {
-    public Camera _camera;
+    public enum GachaType {
+        normal,
+        super
+    }
+    
+    [SerializeField] Camera _camera;
     [SerializeField] Transform center;
-    [SerializeField] private GameObject lookTarget;
+    [SerializeField] GameObject lookTarget;
     [SerializeField] float skySphereRadius = 650;
+
+    [SerializeField] ParticleSystem normalGachaEffect;
+    [SerializeField] ParticleSystem superGachaEffect;
     
     public static StarsFall target;
+
+    public Camera Camera => _camera;
 
     void Awake()
     {
@@ -19,6 +29,21 @@ public class StarsFall : MonoBehaviour
     public void LookReset()
     {
         _camera.transform.DOLookAt(lookTarget.transform.position, 1f);
+    }
+
+    public void TriggerHoleEffect(GachaType type)
+    {
+        switch (type)
+        {
+            case GachaType.normal:
+                superGachaEffect.Stop();
+                normalGachaEffect.Play();
+                break;
+            case GachaType.super:
+                normalGachaEffect.Stop();
+                superGachaEffect.Play();
+                break;
+        }
     }
     
     public Vector3 GetRandomStarPos()

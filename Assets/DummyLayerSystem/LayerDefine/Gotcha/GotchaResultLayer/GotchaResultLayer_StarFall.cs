@@ -26,8 +26,8 @@ public partial class GotchaResultLayer : UILayer
     async void StarFall(StoneOfPlayerInfo stone)
     {
         Vector3 targetPos = StarsFall.target.GetRandomStarPos();
-        Vector3 forwardOfCamera = targetPos - StarsFall.target._camera.transform.position;
-        Vector3 flashPos = StarsFall.target._camera.transform.position + forwardOfCamera.normalized * 200;
+        Vector3 forwardOfCamera = targetPos - StarsFall.target.Camera.transform.position;
+        Vector3 flashPos = StarsFall.target.Camera.transform.position + forwardOfCamera.normalized * 200;
         
         SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(stone.SkillId);
         string fallingstarname = "";
@@ -61,7 +61,7 @@ public partial class GotchaResultLayer : UILayer
 
         stoneFallingModels.Add(Star);
         stoneStartFlashModels.Add(flash);
-        StarsFall.target._camera.transform.DOLookAt(Star.transform.position, 1f);
+        StarsFall.target.Camera.transform.DOLookAt(Star.transform.position, 1f);
         Star.transform.DOMoveY(-600, 30f);
     }
     

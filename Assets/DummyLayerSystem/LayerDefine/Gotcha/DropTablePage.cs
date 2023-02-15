@@ -10,6 +10,7 @@ public class DropTablePage : MonoBehaviour
     [SerializeField] private int currencyCount;
     [SerializeField] private Button gotcha;
     [SerializeField] private Button openDropTableInfo;
+    public string ItemId => itemId;
 
     public void Setup(Action<string,string,int> nine, Action<string> dropTableInfo)
     {

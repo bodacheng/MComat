@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 5791999021421702946}
   - component: {fileID: 1922337899895912196}
   - component: {fileID: 3253193515042350833}
+  - component: {fileID: 6630772298969545691}
   m_Layer: 5
   m_Name: title
   m_TagString: Untagged
@@ -332,6 +333,20 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 0.78431374, b: 0, a: 1}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &6630772298969545691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456327377553039221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: AdvancedGacha
+  target: {fileID: 1922337899895912196}
 --- !u!1 &1815106710213499967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,6 +1191,7 @@ GameObject:
   - component: {fileID: 4200960316338086168}
   - component: {fileID: 6765538205937249114}
   - component: {fileID: 8885854285954014199}
+  - component: {fileID: 8904444767129909991}
   m_Layer: 5
   m_Name: title
   m_TagString: Untagged
@@ -1260,6 +1276,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0.43529412, b: 1, a: 1}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &8904444767129909991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5495537447618936154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: NormalGacha
+  target: {fileID: 6765538205937249114}
 --- !u!1 &5608501810583844336
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,7 +2036,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &21611828844812180
 RectTransform:
   m_ObjectHideFlags: 0

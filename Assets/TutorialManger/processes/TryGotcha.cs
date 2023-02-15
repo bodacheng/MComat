@@ -5,16 +5,16 @@ using PlayFab.ClientModels;
 
 public class TryGotcha : TutorialProcess
 {
-    private GotchaLayer _gotchaLayer;
-    private GotchaResultLayer _gotchaResultLayer;
-    private ReturnLayer _returnLayer;
+    private GotchaLayer gotchaLayer;
+    private GotchaResultLayer gotchaResultLayer;
+    private ReturnLayer returnLayer;
     
     public override void LocalUpdate()
     {
-        if (_gotchaLayer == null)
+        if (gotchaLayer == null)
         {
-            _gotchaLayer = UILayerLoader.Get<GotchaLayer>();
-            if (_gotchaLayer != null)
+            gotchaLayer = UILayerLoader.Get<GotchaLayer>();
+            if (gotchaLayer != null)
             {
                 var gotchaFront  = (GotchaFront)ProcessesRunner.Main.GetProcess(MainSceneStep.GotchaFront);
                 gotchaFront.SetExtraSuccessAction(
@@ -39,25 +39,25 @@ public class TryGotcha : TutorialProcess
             }
         }
         
-        if (_returnLayer == null)
-            _returnLayer = UILayerLoader.Get<ReturnLayer>();
-        if (_returnLayer != null)
-            _returnLayer.gameObject.SetActive(false);
+        if (returnLayer == null)
+            returnLayer = UILayerLoader.Get<ReturnLayer>();
+        if (returnLayer != null)
+            returnLayer.gameObject.SetActive(false);
         
-        if (_gotchaResultLayer == null)
+        if (gotchaResultLayer == null)
         {
-            _gotchaResultLayer = UILayerLoader.Get<GotchaResultLayer>();
-            if (_gotchaResultLayer != null)
+            gotchaResultLayer = UILayerLoader.Get<GotchaResultLayer>();
+            if (gotchaResultLayer != null)
             {
-                _returnLayer.gameObject.SetActive(true);
-                _returnLayer.ForceBackMode(true);
+                returnLayer.gameObject.SetActive(true);
+                returnLayer.ForceBackMode(true);
             }
         }
     }
 
     public override bool CanEnterOtherProcess()
     {
-        return PlayerAccountInfo.Me.tutorialProgress == "GotchaFinished" && _gotchaResultLayer != null && _gotchaResultLayer.ShowFinished;
+        return PlayerAccountInfo.Me.tutorialProgress == "GotchaFinished" && gotchaResultLayer != null && gotchaResultLayer.ShowFinished;
     }
     
     public override void ProcessEnd()
