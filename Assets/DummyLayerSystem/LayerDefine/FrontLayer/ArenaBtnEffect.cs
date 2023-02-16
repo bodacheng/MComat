@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using mainMenu;
 using UnityEngine;
 public class ArenaBtnEffect : MonoBehaviour

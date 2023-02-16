@@ -55,19 +55,19 @@ public partial class GotchaResultLayer : UILayer
         {
             case 0:
                 screenStarName = "normal_test_screenstar0";
-                explosionName = "screenStarExplostionTest0";
+                explosionName = "ButtonEffects/redmagic/explosion0.prefab";
                 break;
             case 1:
                 screenStarName = "normal_test_screenstar1";
-                explosionName = "screenStarExplostionTest1";
+                explosionName = "ButtonEffects/redmagic/explosion1.prefab";
                 break;
             case 2:
                 screenStarName = "normal_test_screenstar2";
-                explosionName = "screenStarExplostionTest2";
+                explosionName = "ButtonEffects/redmagic/explosion2.prefab";
                 break;
             case 3:
                 screenStarName = "normal_test_screenstar3";
-                explosionName = "screenStarExplostionTest3";
+                explosionName = "ButtonEffects/redmagic/explosion3.prefab";
                 break;
         }
         

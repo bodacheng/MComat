@@ -1,21 +1,22 @@
 using mainMenu;
-using Skill;
 using UnityEngine;
 
 public partial class GotchaResultLayer : UILayer
 {
+    [SerializeField] RectTransform stoneDetailT;
     [SerializeField] SkillStoneDetail _stoneDetail;
 
     public void ShowDetail(string skillId)
     {
-        _stoneDetail.gameObject.SetActive(true);
-         SkillConfig sc = SkillConfigTable.GetSkillConfig(skillId);
+        stoneDetailT.gameObject.SetActive(true);
+         var sc = SkillConfigTable.GetSkillConfig(skillId);
+         Debug.Log("skill config:"+ sc);
         _stoneDetail.RefreshInfo(sc);
     }
 
     void ClearDetail()
     {
-        _stoneDetail.gameObject.SetActive(false);
+        stoneDetailT.gameObject.SetActive(false);
         _stoneDetail.Clear();
     }
 }

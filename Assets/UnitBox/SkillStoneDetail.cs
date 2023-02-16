@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
 using Skill;
@@ -111,7 +110,6 @@ namespace mainMenu
             }
             stoneTargetLevel.text = "LV:" + currentStone.Level;
             skillIntro.text = SkillNameTable.GetSkillIntro(skillConfig.RECORD_ID);
-            transform.gameObject.SetActive(true);
         }
         
         // 技能画面展示用
@@ -132,7 +130,6 @@ namespace mainMenu
             {
                 HP.text = "HP = " + skillEntity.HP;
             }
-            transform.gameObject.SetActive(true);
         }
         
         public void RefreshInfo(SkillConfig config)
@@ -144,7 +141,6 @@ namespace mainMenu
             ShowSKillRanges(close, near, far, config.AIAttrs.AI_MIN_DIS, config.AIAttrs.AI_MAX_DIS);
             atIcon.SetActive(config.STATE_TYPE is BehaviorType.GI or BehaviorType.GM or BehaviorType.GR);
             defenceIcon.SetActive(config.STATE_TYPE is BehaviorType.CT or BehaviorType.Def);
-            transform.gameObject.SetActive(true);
         }
         
         public static void ShowSKillRanges(GameObject close, GameObject near, GameObject far, float disMIN, float disMAX)

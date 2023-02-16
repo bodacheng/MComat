@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 198992326210486402}
   - component: {fileID: 199086556701211102}
   m_Layer: 0
-  m_Name: Hit 25
+  m_Name: fireworkOrangeHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

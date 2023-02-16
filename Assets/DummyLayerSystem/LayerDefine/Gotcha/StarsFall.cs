@@ -20,6 +20,11 @@ public class StarsFall : MonoBehaviour
 
     public Camera Camera => _camera;
 
+    public Vector3 GetEffectCenter()
+    {
+        return normalGachaEffect.transform.position;
+    }
+
     void Awake()
     {
         target = this;

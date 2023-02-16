@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using dataAccess;
 using DG.Tweening;
-using Skill;
 
 public partial class GotchaResultLayer : UILayer
 {
@@ -25,13 +26,13 @@ public partial class GotchaResultLayer : UILayer
     
     async void StarFall(StoneOfPlayerInfo stone)
     {
-        Vector3 targetPos = StarsFall.target.GetRandomStarPos();
-        Vector3 forwardOfCamera = targetPos - StarsFall.target.Camera.transform.position;
-        Vector3 flashPos = StarsFall.target.Camera.transform.position + forwardOfCamera.normalized * 200;
+        var targetPos = StarsFall.target.GetRandomStarPos();
+        var forwardOfCamera = targetPos - StarsFall.target.Camera.transform.position;
+        var flashPos = StarsFall.target.Camera.transform.position + forwardOfCamera.normalized * 200;
         
-        SkillConfig skillConfig = SkillConfigTable.GetSkillConfig(stone.SkillId);
-        string fallingstarname = "";
-        string fallingstarexplosionname = "";
+        var skillConfig = SkillConfigTable.GetSkillConfig(stone.SkillId);
+        var fallingstarname = "";
+        var fallingstarexplosionname = "";
         switch(skillConfig.SP_LEVEL) // 这里应该是rarelevel
         {
             case 0:
@@ -51,29 +52,21 @@ public partial class GotchaResultLayer : UILayer
                 fallingstarexplosionname = "screenStarExplostionTest3";
             break;
         }
-        var Star = await AddressablesLogic.LoadTOnObject<ParticleSystem>(fallingstarname);
-        Star.gameObject.name = fallingstarname;
-        Star.transform.position = targetPos;
-
+        var star = await AddressablesLogic.LoadTOnObject<ParticleSystem>(fallingstarname);
+        star.gameObject.name = fallingstarname;
+        star.transform.position = targetPos;
+        
         var flash = await AddressablesLogic.LoadTOnObject<ParticleSystem>(fallingstarexplosionname);
         flash.gameObject.name = fallingstarexplosionname;
-        flash.transform.position = flashPos;
-
-        stoneFallingModels.Add(Star);
+        flash.transform.position = StarsFall.target.GetEffectCenter();
+        flash.transform.DOMove(flashPos, 1);
+        
+        await UniTask.Delay(TimeSpan.FromSeconds(1));
+        
+        stoneFallingModels.Add(star);
         stoneStartFlashModels.Add(flash);
-        StarsFall.target.Camera.transform.DOLookAt(Star.transform.position, 1f);
-        Star.transform.DOMoveY(-600, 30f);
-    }
-    
-    // 跳过整个星星下落动画
-    void SkipStarFallAnim()
-    {
-        if (starFallAnimWholeProcess != null)
-        {
-            StopCoroutine(starFallAnimWholeProcess);
-        }
-        SpeedOnce.gameObject.SetActive(false);
-        _starFallen = true;
+        StarsFall.target.Camera.transform.DOLookAt(star.transform.position, 1f);
+        star.transform.DOMoveY(-600, 30f);
     }
     
     // 一个星星下落动画
@@ -92,5 +85,16 @@ public partial class GotchaResultLayer : UILayer
             StopCoroutine(starFallAnimOneProcess);
         }
         _oneStarFallen = true;
+    }
+    
+    // 跳过整个星星下落动画
+    void SkipStarFallAnim()
+    {
+        if (starFallAnimWholeProcess != null)
+        {
+            StopCoroutine(starFallAnimWholeProcess);
+        }
+        SpeedOnce.gameObject.SetActive(false);
+        _starFallen = true;
     }
 }
