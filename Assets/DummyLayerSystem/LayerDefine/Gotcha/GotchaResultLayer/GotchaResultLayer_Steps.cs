@@ -16,18 +16,22 @@ public partial class GotchaResultLayer : UILayer
         await UniTask.DelayFrame(1);
         SpeedOnce.gameObject.SetActive(true);
         Skip.gameObject.SetActive(true);
+        
+        await PrepareEffects(results);
+        
         starFallAnimWholeProcess = StartCoroutine (StarFallAnim(results));
         
         while(!_starFallen)
             await UniTask.DelayFrame(1);
-        
-        ClearFallingStars();
+
+        FallingStarsFade();
         SpeedOnce.gameObject.SetActive(false);
         Skip.gameObject.SetActive(false);
         NineForShow.transform.gameObject.SetActive(true);
         
         await UniTask.DelayFrame(1);
         
+        StarsFall.target.LookReset();
         PosDecide();
         StarSortAnim(results);
         
@@ -67,6 +71,7 @@ public partial class GotchaResultLayer : UILayer
                     break;
             }
         }
+        
         await NineForShow.ShowStones(a1, a2, a3, b1, b2, b3, c1, c2, c3);
         showFinished = true;
     }

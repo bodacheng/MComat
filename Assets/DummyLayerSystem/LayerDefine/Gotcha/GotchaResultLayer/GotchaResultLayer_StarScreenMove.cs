@@ -11,11 +11,7 @@ public partial class GotchaResultLayer : UILayer
     readonly List<RectTransform> waitPos = new();
     #endregion
     
-    readonly List<ParticleSystem> stoneFallingModels = new();
-    readonly List<ParticleSystem> stoneStartFlashModels = new();
     readonly List<Vector3> slotScreenPos = new();
-    readonly List<ParticleSystem> screenStarModels = new();
-    readonly List<ParticleSystem> screenStarExplosionModels = new();
     
     void SetWaitPos()
     {
@@ -46,40 +42,22 @@ public partial class GotchaResultLayer : UILayer
     /// <param name="waitPos"></param>
     /// <param name="endPos"></param>
     /// <returns></returns>
-    async void StarScreenMoveAnim(StoneOfPlayerInfo info, Vector3 waitPos, Vector3 endPos)
+    void StarScreenMoveAnim(StoneOfPlayerInfo info, Vector3 waitPos, Vector3 endPos)
     {
-        var skillConfig = SkillConfigTable.GetSkillConfig(info.SkillId);
-        var screenStarName = "";
-        var explosionName = "";
-        switch(skillConfig.SP_LEVEL) // 这里应该是rarelevel
-        {
-            case 0:
-                screenStarName = "normal_test_screenstar0";
-                explosionName = "ButtonEffects/redmagic/explosion0.prefab";
-                break;
-            case 1:
-                screenStarName = "normal_test_screenstar1";
-                explosionName = "ButtonEffects/redmagic/explosion1.prefab";
-                break;
-            case 2:
-                screenStarName = "normal_test_screenstar2";
-                explosionName = "ButtonEffects/redmagic/explosion2.prefab";
-                break;
-            case 3:
-                screenStarName = "normal_test_screenstar3";
-                explosionName = "ButtonEffects/redmagic/explosion3.prefab";
-                break;
-        }
-        
-        var screenStar = await AddressablesLogic.LoadTOnObject<ParticleSystem>(screenStarName);
+        var effectSet = effectDic[info];
+        var screenStar = effectSet.stoneFigure;
+        screenStar.Play();
         screenStar.transform.position = waitPos;
-        screenStarModels.Add(screenStar);
-        screenStar.transform.DOMove(endPos, 2f).OnComplete(async () =>
-        {
-            var effect = await AddressablesLogic.LoadTOnObject<ParticleSystem>(explosionName);
-            effect.transform.position = endPos;
-            screenStarExplosionModels.Add(effect);
-        });
+        effectSet.RunSequence(
+            DOTween.Sequence().Append(screenStar.transform.DOMove(endPos, 2f).OnComplete(
+            () =>
+            {
+                screenStar.Stop();
+                var effect = effectSet.screenExplosionFigure;
+                effect.transform.position = endPos;
+                effect.Play(true);
+            })
+        ));
     }
     
     // 必须使用时候即时运行因为里面几个决定位置的运算要考虑当前相机位置等

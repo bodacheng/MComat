@@ -3,50 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/GachaEffects.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/GachaEffects.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/ArenaBtnEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/ArenaBtnEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_Detail.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_Detail.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_StarFall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_StarFall.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_StarScreenMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_StarScreenMove.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_Steps.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_Steps.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/StarsFall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/StarsFall.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Buff/V1/GreenBuff.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Buff/V1/GreenBuff.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Buff/V1/ModularBuff.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Buff/V1/ModularBuff.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Enchant/LightningEnchant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Enchant/LightningEnchant.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Flamethrower/V2/BlueFlamethrower2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Flamethrower/V2/BlueFlamethrower2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Front attack/GroundExplSkill.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Front attack/GroundExplSkill.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Front attack/GroundExplSpawner.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Front attack/GroundExplSpawner.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Front attack/SpikeSkill.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Front attack/SpikeSkill.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Front attack/SpikeSpawner.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Front attack/SpikeSpawner.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 19.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 19.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 21.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 21.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 23.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 23.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 24.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 24.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 25.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 25.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 7.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 7.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 9.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Hits/Hit 9.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/MuzzleFlash/Fire/ModularFireMuzzleFlash.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/MuzzleFlash/Fire/ModularFireMuzzleFlash.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/MuzzleFlash/Ring/RingMuzzleFlashRed.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/MuzzleFlash/Ring/RingMuzzleFlashRed.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Projectiles(transform)/Projectile 14.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Projectiles(transform)/Projectile 14.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/gachastar0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/gachastar0.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/gachastar1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/gachastar1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/gachastar2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/gachastar2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/gachastar3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/gachastar3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest0.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest2.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/HurtObjects/defaultmagic/darkball.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/HurtObjects/defaultmagic/darkball.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/GotchaResultLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/GotchaResultLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UnitBox/SkillStoneDetail.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UnitBox/SkillStoneDetail.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/MainScene/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/MainScene/MainMenuScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/NineForShow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/NineForShow.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +43,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Runtime/External/LibTessDotNet/Tess.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Build/AddressablesDataBuilderInput.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Graphs/GraphData.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4379fcb5ffcd422abdabe963856ef06326000/61/5791835c/ShortcutExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Nodes/Input/Matrix/Matrix3Node.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Diagnostics/Data/EventDataSet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer/ArcadeBtnEffect.cs" root0="FORCE_HIGHLIGHTING" />
@@ -79,6 +53,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Volume/Volume.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayFab/Client/Time.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Tests/Editor/ReflectionUtils.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/90dde477a5194f00a41b9bad5f3aa65d24800/ba/402e941f/ParticleSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../p3-client/Assets/App/Scripts/Contents/Quest/QuestListItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/RankingPage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c884d993da6242ae98d95c11d4715907157400/26/fbbae327/ColorUtility.cs" root0="SKIP_HIGHLIGHTING" />
@@ -265,7 +240,7 @@
       <workItem from="1676282366468" duration="6175000" />
       <workItem from="1676336304947" duration="12414000" />
       <workItem from="1676509659718" duration="4957000" />
-      <workItem from="1676523771121" duration="1456000" />
+      <workItem from="1676523771121" duration="15513000" />
     </task>
     <servers />
   </component>

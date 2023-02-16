@@ -75,6 +75,10 @@ public partial class NineForShow : MonoBehaviour
         _c2S = await Stones.GenerateStoneModel(c2SkillId, false);
         _c3S = await Stones.GenerateStoneModel(c3SkillId, false);
         
+        Parent();
+
+        return;
+        
         if (_a1S != null && A1Frame != null)
         {
             A1Frame.color = RefreshFrameColor(_a1S._SkillConfig.SP_LEVEL);
@@ -111,8 +115,6 @@ public partial class NineForShow : MonoBehaviour
         {
             C3Frame.color = RefreshFrameColor(_c3S._SkillConfig.SP_LEVEL);
         }
-        
-        Parent();
     }
     
     Color RefreshFrameColor(int spLevel)
