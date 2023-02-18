@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using dataAccess;
 using DG.Tweening;
@@ -19,77 +20,110 @@ public partial class GotchaResultLayer : UILayer
     Coroutine starFallAnimOneProcess;
     #endregion
 
-    private readonly Dictionary<StoneOfPlayerInfo, StoneFallEffectSet> effectDic = new();
+    #region effect resource key
+    [SerializeField] string stoneFigureSp0 = "gachastar0";
+    [SerializeField] string stoneFigureSp1 = "gachastar1";
+    [SerializeField] string stoneFigureSp2 = "gachastar2";
+    [SerializeField] string stoneFigureSp3 = "gachastar3";
+    [SerializeField] string flashSp0 = "screenStarExplostionTest0";
+    [SerializeField] string flashSp1 = "screenStarExplostionTest1";
+    [SerializeField] string flashSp2 = "screenStarExplostionTest2";
+    [SerializeField] string flashSp3 = "screenStarExplostionTest3";
+    [SerializeField] string explosionSp0 = "ButtonEffects/redmagic/explosion0.prefab";
+    [SerializeField] string explosionSp1 = "ButtonEffects/redmagic/explosion1.prefab";
+    [SerializeField] string explosionSp2 = "ButtonEffects/redmagic/explosion2.prefab";
+    [SerializeField] string explosionSp3 = "ButtonEffects/redmagic/explosion3.prefab";
+    #endregion
+    
+    private readonly Dictionary<StoneOfPlayerInfo, StoneFallEffectSet> _effectDic = new();
+
+    (string, string, string) GetEffectName(int spLevel)
+    {
+        string stoneFigureName = string.Empty;
+        string flashName = string.Empty;
+        string explosionName = string.Empty;
+            
+        switch(spLevel)
+        {
+            case 0:
+                stoneFigureName = stoneFigureSp0;
+                flashName = flashSp0;
+                explosionName = explosionSp0;
+                break;
+            case 1:
+                stoneFigureName = stoneFigureSp1;
+                flashName = flashSp1;
+                explosionName = explosionSp1;
+                break;
+            case 2:
+                stoneFigureName = stoneFigureSp2;
+                flashName = flashSp2;
+                explosionName = explosionSp2;
+                break;
+            case 3:
+                stoneFigureName = stoneFigureSp3;
+                flashName = flashSp3;
+                explosionName = explosionSp3;
+                break;
+        }
+        return (stoneFigureName, flashName, explosionName);
+    }
+    
     private class StoneFallEffectSet
     {
-        public ParticleSystem stoneFigure;
-        public ParticleSystem stoneFlashFigure;
-        public ParticleSystem screenExplosionFigure;
-        Sequence currentSequence;
+        public ParticleSystem StoneFigure;
+        public ParticleSystem StoneFlashFigure;
+        public ParticleSystem ScreenExplosionFigure;
+        Sequence _currentSequence;
+
+        private Func<int, (string, string, string)> _getEffectName;
+
+        public void Setup(Func<int, (string, string, string)> getEffectName)
+        {
+            this._getEffectName = getEffectName;
+        }
         
         public async UniTask Load(int spLevel)
         {
-            string stoneFigureName = string.Empty;
-            string flashName = string.Empty;
-            string explosionName = string.Empty;
+            var effectName = _getEffectName(spLevel);
+            var stoneFigureName = effectName.Item1;
+            var flashName = effectName.Item2;
+            var explosionName = effectName.Item3;
             
-            switch(spLevel) // 这里应该是rarelevel
-            {
-                case 0:
-                    stoneFigureName = "gachastar0";
-                    flashName = "screenStarExplostionTest0";
-                    explosionName = "ButtonEffects/redmagic/explosion0.prefab";
-                    break;
-                case 1:
-                    stoneFigureName = "gachastar1";
-                    flashName = "screenStarExplostionTest1";
-                    explosionName = "ButtonEffects/redmagic/explosion1.prefab";
-                    break;
-                case 2:
-                    stoneFigureName = "gachastar2";
-                    flashName = "screenStarExplostionTest2";
-                    explosionName = "ButtonEffects/redmagic/explosion2.prefab";
-                    break;
-                case 3:
-                    stoneFigureName = "gachastar3";
-                    flashName = "screenStarExplostionTest3";
-                    explosionName = "ButtonEffects/redmagic/explosion3.prefab";
-                    break;
-            }
-            stoneFigure = await AddressablesLogic.LoadTOnObject<ParticleSystem>(stoneFigureName);
-            stoneFlashFigure = await AddressablesLogic.LoadTOnObject<ParticleSystem>(flashName);
-            screenExplosionFigure = await AddressablesLogic.LoadTOnObject<ParticleSystem>(explosionName);
+            StoneFigure = await AddressablesLogic.LoadTOnObject<ParticleSystem>(stoneFigureName);
+            StoneFlashFigure = await AddressablesLogic.LoadTOnObject<ParticleSystem>(flashName);
+            ScreenExplosionFigure = await AddressablesLogic.LoadTOnObject<ParticleSystem>(explosionName);
             
-            stoneFigure.Stop(true);
-            stoneFlashFigure.Stop(true);
-            screenExplosionFigure.Stop(true);
+            StoneFigure.Stop(true);
+            StoneFlashFigure.Stop(true);
+            ScreenExplosionFigure.Stop(true);
         }
 
         public void Clear()
         {
-            if (stoneFigure != null)
-                Destroy(stoneFigure.gameObject);
-            if (stoneFlashFigure != null)
-                Destroy(stoneFlashFigure.gameObject);
-            if (screenExplosionFigure != null)
-                Destroy(screenExplosionFigure.gameObject);
+            if (StoneFigure != null)
+                Destroy(StoneFigure.gameObject);
+            if (StoneFlashFigure != null)
+                Destroy(StoneFlashFigure.gameObject);
+            if (ScreenExplosionFigure != null)
+                Destroy(ScreenExplosionFigure.gameObject);
 
             KillSequence();
         }
 
         void KillSequence()
         {
-            if (currentSequence != null)
+            if (_currentSequence != null)
             {
-                currentSequence.Kill();
-                currentSequence = null;
+                _currentSequence.Kill();
+                _currentSequence = null;
             }
         }
 
         public void RunSequence(Sequence task)
         {
             KillSequence();
-            currentSequence = task;
+            _currentSequence = task;
         }
     }
 
@@ -98,9 +132,10 @@ public partial class GotchaResultLayer : UILayer
         async UniTask Prepare(StoneOfPlayerInfo result)
         {
             var set = new StoneFallEffectSet();
+            set.Setup(GetEffectName);
             var skillConfig = SkillConfigTable.GetSkillConfig(result.SkillId);
             await set.Load(skillConfig.SP_LEVEL);
-            DicAdd<StoneOfPlayerInfo, StoneFallEffectSet>.Add(effectDic, result, set);
+            DicAdd<StoneOfPlayerInfo, StoneFallEffectSet>.Add(_effectDic, result, set);
         }
         var tasks = new List<UniTask>();
         foreach (var result in results)
@@ -138,19 +173,19 @@ public partial class GotchaResultLayer : UILayer
 
     void ClearAllParticle()
     {
-        foreach (var kv in effectDic)
+        foreach (var kv in _effectDic)
         {
             kv.Value.Clear();
         }
-        effectDic.Clear();
+        _effectDic.Clear();
     }
 
     void FallingStarsFade()
     {
-        foreach (var kv in effectDic)
+        foreach (var kv in _effectDic)
         {
-            kv.Value.stoneFlashFigure.Stop();
-            kv.Value.stoneFigure.Stop();
+            kv.Value.StoneFlashFigure.Stop();
+            kv.Value.StoneFigure.Stop();
         }
     }
 }

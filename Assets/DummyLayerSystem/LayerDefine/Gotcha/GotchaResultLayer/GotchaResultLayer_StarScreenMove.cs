@@ -7,6 +7,7 @@ using mainMenu;
 public partial class GotchaResultLayer : UILayer
 {
     #region 屏幕星星飞入位置
+    [SerializeField] private float starScreenMoveDuration = 2;
     [SerializeField] RectTransform starWaitPos1, starWaitPos2, starWaitPos3, starWaitPos4, starWaitPos5, starWaitPos6, starWaitPos7, starWaitPos8, starWaitPos9;
     readonly List<RectTransform> waitPos = new();
     #endregion
@@ -44,16 +45,16 @@ public partial class GotchaResultLayer : UILayer
     /// <returns></returns>
     void StarScreenMoveAnim(StoneOfPlayerInfo info, Vector3 waitPos, Vector3 endPos)
     {
-        var effectSet = effectDic[info];
-        var screenStar = effectSet.stoneFigure;
+        var effectSet = _effectDic[info];
+        var screenStar = effectSet.StoneFigure;
         screenStar.Play();
         screenStar.transform.position = waitPos;
         effectSet.RunSequence(
-            DOTween.Sequence().Append(screenStar.transform.DOMove(endPos, 2f).OnComplete(
+            DOTween.Sequence().Append(screenStar.transform.DOMove(endPos, starScreenMoveDuration).OnComplete(
             () =>
             {
                 screenStar.Stop();
-                var effect = effectSet.screenExplosionFigure;
+                var effect = effectSet.ScreenExplosionFigure;
                 effect.transform.position = endPos;
                 effect.Play(true);
             })
@@ -63,25 +64,22 @@ public partial class GotchaResultLayer : UILayer
     // 必须使用时候即时运行因为里面几个决定位置的运算要考虑当前相机位置等
     void PosDecide()
     {
-        // 星星落入格子
-        var a1ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.A1T.GetComponent<RectTransform>(), 5f);
-        var a2ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.A2T.GetComponent<RectTransform>(), 5f);
-        var a3screenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.A3T.GetComponent<RectTransform>(), 5f);
-        var b1ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.B1T.GetComponent<RectTransform>(), 5f);
-        var b2ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.B2T.GetComponent<RectTransform>(), 5f);
-        var b3ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.B3T.GetComponent<RectTransform>(), 5f);
-        var c1ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.C1T.GetComponent<RectTransform>(), 5f);
-        var c2ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.C2T.GetComponent<RectTransform>(), 5f);
-        var c3ScreenPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, NineForShow.C3T.GetComponent<RectTransform>(), 5f);
         slotScreenPos.Clear();
-        slotScreenPos.Add(a1ScreenPos);
-        slotScreenPos.Add(a2ScreenPos);
-        slotScreenPos.Add(a3screenPos);
-        slotScreenPos.Add(b1ScreenPos);
-        slotScreenPos.Add(b2ScreenPos);
-        slotScreenPos.Add(b3ScreenPos);
-        slotScreenPos.Add(c1ScreenPos);
-        slotScreenPos.Add(c2ScreenPos);
-        slotScreenPos.Add(c3ScreenPos);
+        // 星星落入格子
+        void Process(RectTransform t)
+        {
+            var pos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, t, 5f);
+            slotScreenPos.Add(pos);
+        }
+        
+        Process(NineForShow.A1T.GetComponent<RectTransform>());
+        Process(NineForShow.A2T.GetComponent<RectTransform>());
+        Process(NineForShow.A3T.GetComponent<RectTransform>());
+        Process(NineForShow.B1T.GetComponent<RectTransform>());
+        Process(NineForShow.B2T.GetComponent<RectTransform>());
+        Process(NineForShow.B3T.GetComponent<RectTransform>());
+        Process(NineForShow.C1T.GetComponent<RectTransform>());
+        Process(NineForShow.C2T.GetComponent<RectTransform>());
+        Process(NineForShow.C3T.GetComponent<RectTransform>());
     }
 }
