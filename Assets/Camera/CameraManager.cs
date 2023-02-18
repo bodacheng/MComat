@@ -5,7 +5,7 @@ public class CameraManager : MonoBehaviour
 {
     public static Camera _camera;
     public Transform StartPosRef;
-    public CameraMode CurrentMode;
+    CameraMode CurrentMode;
 
     public static Transform _StartPosRef;
 

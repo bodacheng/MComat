@@ -189,6 +189,7 @@ public partial class PlayFabReadClient
                             (x) =>
                             {
                                 Debug.Log("成功给予测试用账户额外财产"+ x.Logs);
+                                LoadItems(null);
                             }
                         );
                     }

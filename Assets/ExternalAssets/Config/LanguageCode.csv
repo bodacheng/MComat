@@ -29,6 +29,8 @@ NoEnoughArenaTicket,Donnot have enough ticket. Come back later !,体力が足り
 EnterNickname,Please Enter Your Name( under 10 characters ),ネームを入力してください( 10 桁以下の半角英数字 ),请输入昵称（10文字以下半角英数字）
 ToNewStage,To New Stage, 最新ステージへ,最新关卡
 ,,,
+RankAwardIntro,本周赛季内达到各个段位后获取的报酬如下,本周赛季内达到各个段位后获取的报酬如下,本周赛季内达到各个段位后获取的报酬如下
+PlsSetYourArenaTeam,请先设置你的竞技场队伍,请先设置你的竞技场队伍,请先设置你的竞技场队伍
 RankReset,New Season Rank Reset,新赛季段位重置,新赛季段位重置
 ,,,
 Yes,Yes,はい,确定

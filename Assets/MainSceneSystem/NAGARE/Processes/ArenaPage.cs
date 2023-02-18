@@ -103,6 +103,7 @@ public class ArenaPage : MSceneProcess
         {
             // 说明玩家的防御队伍没有登陆，因为arenaPoint是首次登陆防御队伍时候顺便登陆的
             // 强制玩家登陆防御队伍
+            arenaLayer.ShowMyTeamByLeaderInfo(null);
             LeaderBoardFinished(true);
             SetLoaded(true);
         }
@@ -142,8 +143,6 @@ public class ArenaPage : MSceneProcess
             {
                 if (leaderboardInfos == null || leaderboardInfos.Count == 0)
                 {
-                    // Debug.Log("玩家队伍未登录");
-                    arenaLayer.SetMyLeaderboardInfo(null);
                     arenaLayer.ShowMyTeamByLeaderInfo(null);
                     LeaderBoardFinished(true);
                     SetLoaded(true);
@@ -164,12 +163,7 @@ public class ArenaPage : MSceneProcess
                         _myLeaderboardInfo = leaderboardInfo;
                     }
                 }
-                if (_myLeaderboardInfo != null)
-                {
-                    arenaLayer.SetMyLeaderboardInfo(_myLeaderboardInfo);
-                    arenaLayer.ShowMyTeamByLeaderInfo(_myLeaderboardInfo);
-                }
-                
+                arenaLayer.ShowMyTeamByLeaderInfo(_myLeaderboardInfo);
                 arenaLayer.DisplayOpponents(exceptSelf, _myLeaderboardInfo);
                 LeaderBoardFinished(true);
                 SetLoaded(true);

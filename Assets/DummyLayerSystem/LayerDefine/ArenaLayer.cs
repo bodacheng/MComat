@@ -126,7 +126,7 @@ public class ArenaLayer : UILayer
         }
     }
     
-    public void SetMyLeaderboardInfo(LeaderboardInfo info)
+    public void ShowMyTeamByLeaderInfo(LeaderboardInfo info)
     {
         myScore.text = info != null? info.PlayerLeaderboardEntry.StatValue.ToString() : "";
         myRank.text = info != null ? info.PlayerLeaderboardEntry.Position.ToString() : "";
@@ -135,10 +135,7 @@ public class ArenaLayer : UILayer
         refreshBtn.gameObject.SetActive(info != null);
         arenaRankIcon.gameObject.SetActive(info != null);
         rewardBtn.gameObject.SetActive(info != null);
-    }
-
-    public void ShowMyTeamByLeaderInfo(LeaderboardInfo info)
-    {
+        
         var posKeySet = new PosKeySet();
         if (info != null)
         {
@@ -163,6 +160,8 @@ public class ArenaLayer : UILayer
                 target.ChangeIcon(unitInfo);
             }
         }
+        var teamDic = posKeySet.LoadTeamDic();
+        plsEditTeamIndicator.SetActive(teamDic.mDict.Count != 3);
         TeamSet.Arena3V3 = posKeySet;
     }
     

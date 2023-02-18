@@ -3,23 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/GachaEffects.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/GachaEffects.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_StarFall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_StarFall.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_StarScreenMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_StarScreenMove.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_Steps.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/GotchaResultLayer/GotchaResultLayer_Steps.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/StarsFall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/Gotcha/StarsFall.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/gachastar1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/gachastar1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/gachastar2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/gachastar2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/gachastar3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/gachastar3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest0.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/GachaEffects/screenStarExplostionTest3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/GotchaResultLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/GotchaResultLayer.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/MainScene/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/MainScene/MainMenuScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/NineForShow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/NineForShow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Camera/CameraManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Camera/CameraManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/ArenaPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/ArenaPage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/Client/Login.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/Client/Login.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Remote/TeamSet/PosKeySet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Remote/TeamSet/PosKeySet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArenaLayer.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArenaLayer.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

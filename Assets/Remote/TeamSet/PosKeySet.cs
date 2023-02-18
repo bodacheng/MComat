@@ -26,7 +26,7 @@ public class PosKeySet
     
     public PosKeySet()
     {
-        PosNumsWithLocalKeys = new OneSet[] { new OneSet(0, null), new OneSet(1, null), new OneSet(2, null) };
+        PosNumsWithLocalKeys = new[] { new OneSet(0, null), new OneSet(1, null), new OneSet(2, null) };
     }
     
     public TeamPos ToTeamPos()
@@ -131,9 +131,7 @@ public class PosKeySet
         var PosNumWithLocalKey1 = GetPosMemInfo(position1);
         var PosNumWithLocalKey2 = GetPosMemInfo(position2);
         
-        var temp = PosNumWithLocalKey2.instanceID;
-        PosNumWithLocalKey2.instanceID = PosNumWithLocalKey1.instanceID;
-        PosNumWithLocalKey1.instanceID = temp;
+        (PosNumWithLocalKey2.instanceID, PosNumWithLocalKey1.instanceID) = (PosNumWithLocalKey1.instanceID, PosNumWithLocalKey2.instanceID);
     }
     
     // 暂时不再使用。最初是selffight模式下队员要求不重复的队员指定模式
@@ -141,9 +139,7 @@ public class PosKeySet
     {
         var PosNumWithLocalKey1 = team1.GetPosMemInfo(position1);
         var PosNumWithLocalKey2 = team2.GetPosMemInfo(position2);
-        var temp = PosNumWithLocalKey2.instanceID;
-        PosNumWithLocalKey2.instanceID = PosNumWithLocalKey1.instanceID;
-        PosNumWithLocalKey1.instanceID = temp;
+        (PosNumWithLocalKey2.instanceID, PosNumWithLocalKey1.instanceID) = (PosNumWithLocalKey1.instanceID, PosNumWithLocalKey2.instanceID);
     }
     
     // 暂时不再使用。最初是selffight模式下队员要求不重复的队员指定模式
