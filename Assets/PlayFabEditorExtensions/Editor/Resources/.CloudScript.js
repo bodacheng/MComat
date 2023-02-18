@@ -71,7 +71,7 @@ function GrantItemToCurrentUser(itemIds, CatalogVersion)
     };
     var GrantItemsToUserResult = server.GrantItemsToUser(GrantItemsToUserRequest);
     log.info(GrantItemsToUserResult);
-    return JSON.stringify(GrantItemsToUserResult.ItemGrantResults);
+    return GrantItemsToUserResult.ItemGrantResults;
 }
 
 // 建立玩家初始数据
@@ -211,9 +211,9 @@ handlers.givePassiveSkill= function (args, context) {
     var grantResult = GrantItemToCurrentUser(itemIds, "stone");
     
     // 虽然是for循环体但其实只执行一圈
-    for (let i = 0; i < grantResult.ItemGrantResults.length; i++)
+    for (let i = 0; i < grantResult.length; i++)
     {
-        var got = grantResult.ItemGrantResults[i];
+        var got = grantResult[i];
         var request = {
             "PlayFabId": currentPlayerId,
             "ItemInstanceId": got.ItemInstanceId,
