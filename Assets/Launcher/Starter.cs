@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using IngameDebugConsole;
 using Unity.Collections;
 using UnityEngine;
 using UnityEditor;
@@ -27,6 +28,7 @@ public class Starter : MonoBehaviour
     [SerializeField] FightGlobalSetting fightGlobalSetting;
     [SerializeField] CommonSetting commonSetting;
     [SerializeField] DefaultIconSetting defaultIconSetting;
+    [SerializeField] DebugLogManager inGameDebugConsole;
     [SerializeField] List<string> downLoadLabels;
     public List<string> DownLoadLabels => downLoadLabels;
 
@@ -43,6 +45,9 @@ public class Starter : MonoBehaviour
         NativeLeakDetection.Mode = NativeLeakDetectionMode.EnabledWithStackTrace;
         AddressablesLogic.ReleaseAsyncOperationHandles();
         commonSetting.Initialise();
+
+        inGameDebugConsole.gameObject.SetActive(CommonSetting.DevMode);
+        
         fightGlobalSetting.Initialise();
         playFabSetting.Initialise();
         defaultIconSetting.Initialise();

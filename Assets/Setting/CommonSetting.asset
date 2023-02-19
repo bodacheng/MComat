@@ -14,5 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   devMode: 1
   maxStoneCount: 1000
+  unitConfigFile: mst_unit
+  skillConfigFile: mst_skill
+  skillAIFile: skill_ai_attrs
+  skillNameFile: skill_name
+  passiveSKillFile: unit_passive
   skillStaticAnalysis: SkillStaticAnalysis
   skillDynamicAnalysis: SkillDynamicAnalysis.csv
+  languageCodeFile: LanguageCode
