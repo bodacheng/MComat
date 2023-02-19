@@ -28,6 +28,9 @@ public class FrontLayer : UILayer
         
         SkillTestRBtn.onClick.AddListener(pre.BeginSkillTest_Rotation);
         SkillTestMBtn.onClick.AddListener(pre.BeginSkillTest_Multi);
+        
+        SkillTestRBtn.gameObject.SetActive(CommonSetting.DevMode);
+        // SkillTestMBtn.gameObject.SetActive(false);
     }
 
     #region 教程
