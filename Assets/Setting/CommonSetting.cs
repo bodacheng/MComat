@@ -16,6 +16,8 @@ public class CommonSetting : ScriptableObject
     [SerializeField] string skillAIFile = "skill_ai_attrs";
     [Tooltip("skill name文件")]
     [SerializeField] string skillNameFile = "skill_name";
+    [Tooltip("角色原生技能本地记录文件")]
+    [SerializeField] string passiveSKillFile = "unit_passive";
     
     [Tooltip("SkillStaticAnalysis后不加.csv")]
     [SerializeField] string skillStaticAnalysis = "SkillStaticAnalysis";
@@ -33,6 +35,7 @@ public class CommonSetting : ScriptableObject
     public static string SkillNameFile;
     public static string SkillStaticAnalysis;
     public static string SkillDynamicAnalysis;
+    public static string PassiveSKillFile;
     public static string LanguageCodeFile;
     
     public void Initialise()
@@ -46,5 +49,6 @@ public class CommonSetting : ScriptableObject
         SkillAIFile = skillAIFile;
         SkillNameFile = skillNameFile;
         LanguageCodeFile = languageCodeFile;
+        PassiveSKillFile = passiveSKillFile;
     }
 }

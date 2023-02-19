@@ -72,10 +72,10 @@ public class StartUpPresentation : MonoBehaviour
         );
     }
 
-    void Go()
+    async void Go()
     {
         HighLightLayer.Close();
-        starter.Initialise();
+        await starter.Initialise();
         if (frontSceneFight && PlayFabReadClient.CustomIdNoDefaultValue == null)
         {
             starter.EnterFrontScene();

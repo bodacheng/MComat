@@ -109,7 +109,7 @@ public partial class SkillSet
         
         var exceptSkIds = skillSet.SkillIDList();
         string skillId;
-        if (remainSlots.Count == 9 && origin != null)
+        if (remainSlots.Count == 8 && origin != null)
         {
             skillId = origin.RECORD_ID;
         }

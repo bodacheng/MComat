@@ -14,7 +14,7 @@ public class StarterGUI : Editor
         var s = (Starter)target;
         if (GUILayout.Button("Refresh"))
         {
-            s.Initialise();
+            s.Initialise().Forget();
         }
     }
 }
@@ -34,11 +34,11 @@ public class Starter : MonoBehaviour
     {
         if (Application.isEditor)
         {
-            Initialise();
+            Initialise().Forget();
         }
     }
 
-    public async void Initialise()
+    public async UniTask Initialise()
     {
         NativeLeakDetection.Mode = NativeLeakDetectionMode.EnabledWithStackTrace;
         AddressablesLogic.ReleaseAsyncOperationHandles();
@@ -52,7 +52,8 @@ public class Starter : MonoBehaviour
                 SkillConfigTable.LoadAllSkillConfigs(),
                 PowerEstimateTable.LoadFile(),
                 Units.LoadUnitConfigs(),
-                Translate.LoadLanguageCodes()
+                Translate.LoadLanguageCodes(),
+                UnitPassiveTable.Load()
             }
         );
         //MobileAds.Initialize(initStatus => { Debug.Log(initStatus);});

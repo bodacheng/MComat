@@ -24,7 +24,7 @@ public partial class SkillConfigTable
         public string EVENT_CODE;
     }
     
-    public static readonly List<Row> rowList = new List<Row>();
+    public static readonly List<Row> rowList = new();
     
     static bool isLoaded;
     public static bool IsLoaded()
@@ -32,7 +32,7 @@ public partial class SkillConfigTable
     	return isLoaded;
     }
 
-    static readonly List<string> AttackTypes = new List<string>()
+    static readonly List<string> AttackTypes = new()
     {
         "GR","GM","GI","CT"
     };
@@ -52,16 +52,15 @@ public partial class SkillConfigTable
     {
         IDictionary<string, SkillConfig> dic = new Dictionary<string, SkillConfig>();
         var all = RowsToSkillConfigList(rowList);
-        foreach (var _SkillConfig in all)
+        foreach (var skillConfig in all)
         {
-            if (!dic.ContainsKey(_SkillConfig.RECORD_ID))
+            if (!dic.ContainsKey(skillConfig.RECORD_ID))
             {
-                dic.Add(new KeyValuePair<string, SkillConfig>(_SkillConfig.RECORD_ID, _SkillConfig));
-                //Debug.Log("以下技能加入字典： RECORDID:"+keyValuePair.RECORD_ID + "  realname:"+ keyValuePair.REAL_NAME);
+                dic.Add(new KeyValuePair<string, SkillConfig>(skillConfig.RECORD_ID, skillConfig));
             }
             else
             {
-                Debug.Log("致命错误「技能配置文件」技能ID重复：" + _SkillConfig.RECORD_ID);
+                Debug.Log("致命错误「技能配置文件」技能ID重复：" + skillConfig.RECORD_ID);
             }
         }
         Debug.Log("已读取共"+ dic.Count + "个技能");

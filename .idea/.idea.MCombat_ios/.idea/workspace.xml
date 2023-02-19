@@ -3,49 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/1.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/10.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/10.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/11.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/11.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/12.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/12.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/13.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/13.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/14.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/14.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/15.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/15.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/16.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/16.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/17.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/17.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/18.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/18.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/19.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/19.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/2.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/2.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/20.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/20.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/21.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/21.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/22.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/22.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/23.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/23.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/24.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/24.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/25.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/25.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/26.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/26.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/27.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/27.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/28.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/28.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/29.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/29.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/3.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/3.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/30.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/30.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/4.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/4.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/5.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/5.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/6.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/6.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/7.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/7.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/8.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/8.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/9.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Stage/Arcade/9.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/1.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/10.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/10.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/11.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/11.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/12.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/12.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/4.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/4.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/6.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/6.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/7.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/7.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/8.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/8.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/9.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Unit_Icon/9.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightInfoGUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightInfoGUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/Members.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/Members.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Config.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Config.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/Soul/SkillSet/RandomSet/RandomSkillSet_Acc.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/Soul/SkillSet/RandomSet/RandomSkillSet_Acc.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Launcher/StartUpPresentation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Launcher/StartUpPresentation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Setting/CommonSetting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/CommonSetting.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/StageEditor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
@@ -121,6 +84,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Nodes/Utility/Logic/IsFrontFaceNode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Canvas/CanvasSizeCorrectInAwakeAndStart.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.scriptablebuildpipeline@1.19.6/Editor/Tasks/CalculateAssetDependencyData.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Singleton/UnitPassiveTable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Editor/Settings/AddressableAssetSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Ads/RewardedAdsButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4379fcb5ffcd422abdabe963856ef06326000/1d/7d9a4d3f/TweenerCore`3.cs" root0="SKIP_HIGHLIGHTING" />
@@ -270,7 +234,7 @@
       <workItem from="1676336304947" duration="12414000" />
       <workItem from="1676509659718" duration="4957000" />
       <workItem from="1676523771121" duration="15513000" />
-      <workItem from="1676765199020" duration="12163000" />
+      <workItem from="1676765199020" duration="16341000" />
     </task>
     <servers />
   </component>
