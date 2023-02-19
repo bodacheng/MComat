@@ -12,7 +12,9 @@ public partial class StageEditor {
     {
         EditorGUILayout.LabelField(" Enemies infos ");
         GUILayout.BeginHorizontal();
-
+        Rect rect = GUILayoutUtility.GetRect(GUIContent.none, GUIStyle.none, GUILayout.Height(50), GUILayout.Width(200));
+        GUI.BeginGroup(rect);
+        
         Texture2D GetIconTexture2D(Sprite icon)
         {
             var croppedTexture = new Texture2D(10,10);
@@ -35,7 +37,7 @@ public partial class StageEditor {
         var left = target.EnemySets.Get(0, 1);
         var leftIcon = left != null ? await UnitIconDic.Load(left.r_id) : null;
         _unitBtnContent = new GUIContent(GetIconTexture2D(leftIcon));
-        if (GUILayout.Button(_unitBtnContent, _focusingPosID == 1.ToString() ? _unitIconSelectedStyle : _unitIconStyle))
+        if (GUI.Button(new Rect(0, 0, 20, 20), _unitBtnContent, _focusingPosID == 1.ToString() ? _unitIconSelectedStyle : _unitIconStyle))
         {
             _selectedUnitIndex = 0;
             _focusingPosID = 1.ToString();
@@ -46,7 +48,7 @@ public partial class StageEditor {
         var mid = target.EnemySets.Get(0, 0);
         var midIcon = mid != null ? await UnitIconDic.Load(mid.r_id) : null;
         _unitBtnContent = new GUIContent(GetIconTexture2D(midIcon));
-        if (GUILayout.Button(_unitBtnContent, _focusingPosID == 0.ToString() ? _unitIconSelectedStyle : _unitIconStyle))
+        if (GUI.Button(new Rect(50, 0, 20, 20), _unitBtnContent, _focusingPosID == 0.ToString() ? _unitIconSelectedStyle : _unitIconStyle))
         {
             _selectedUnitIndex = 0;
             _focusingPosID = 0.ToString();
@@ -57,13 +59,15 @@ public partial class StageEditor {
         var right = target.EnemySets.Get(0, 2);
         var rightIcon = right != null ? await UnitIconDic.Load(right.r_id) : null;
         _unitBtnContent = new GUIContent(GetIconTexture2D(rightIcon));
-        if (GUILayout.Button(_unitBtnContent, _focusingPosID == 2.ToString() ? _unitIconSelectedStyle : _unitIconStyle))
+        if (GUI.Button(new Rect(100, 0, 20, 20), _unitBtnContent, _focusingPosID == 2.ToString() ? _unitIconSelectedStyle : _unitIconStyle))
         {
             _selectedUnitIndex = 0;
             _focusingPosID = 2.ToString();
             _focusingUnitInfo = target.EnemySets.Get(0, 2);
             _targetSlot = 0;
         }
+        
+        GUI.EndGroup();
         GUILayout.EndHorizontal();
     }
 }

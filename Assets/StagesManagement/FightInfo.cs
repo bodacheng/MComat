@@ -27,7 +27,7 @@ public class FightInfo : ScriptableObject
     public AIMode team1AIMode = AIMode.Aggressive;
     public AIMode team2AIMode = AIMode.Aggressive;
     
-    public int dumbAIDecisionDelay = 50;
+    public int dumbAIDecisionDelay = 20;
 
     public bool RunTutorial
     {
