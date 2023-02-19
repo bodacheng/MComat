@@ -12,7 +12,8 @@ public class CameraManager : MonoBehaviour
     readonly IDictionary<C_Mode, CameraMode> CModeDic = new Dictionary<C_Mode, CameraMode>()
     {
         {C_Mode.GodPlayerCertainYCamera,new GodPlayerCertainY(5f, 5f)},
-        {C_Mode.CertainYAntiVibration, new New2023(8.8f, 5f)},
+        {C_Mode.CertainYAntiVibration, new ChatGptFix(8.8f, 5f)},
+        //{C_Mode.CertainYAntiVibration, new New2023(8.8f, 5f)},
         {C_Mode.OneVOne, new OneVOneMode(16f)},
         {C_Mode.ApproachToCertainDis,  new LerpToCertainDistance(5f, 1f)},
         {C_Mode.keepTargetLeft, new keepTargetLeftCamera()},

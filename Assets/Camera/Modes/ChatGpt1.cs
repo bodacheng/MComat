@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using DG.Tweening;
 
-class New2023 : CameraMode
+class ChatGptFix : CameraMode
 {
     Vector3 cameraTargetPos;
     Vector3 enemiesCenter;
@@ -12,10 +12,14 @@ class New2023 : CameraMode
     Vector3 lookPoint;
     Vector3 frontWPos, backWPos;
     Quaternion ToRotation;
+    float autoChangeAngleLimit = 30f;
+    private float autoRotateSpeed = 100;
     float _changeSpeed;
     float _transitionSpeedPara = 10f;
     readonly float _lookPointHeight = 2.3f;
     readonly float _minXZ;
+    
+    public float angleLimit = 60f; // 连线与屏幕水平方向的夹角限制
 
     float TransitionSpeedPara
     {
@@ -23,7 +27,7 @@ class New2023 : CameraMode
         set => _transitionSpeedPara = Mathf.Clamp(value, 0.2f, 5f);
     }
     
-    public New2023(float XZDis, float YDis)
+    public ChatGptFix(float XZDis, float YDis)
     {
         _minXZ = XZDis;
         this.XZDis = XZDis;
@@ -53,13 +57,6 @@ class New2023 : CameraMode
     
     public override void LocalUpdate(Camera _camera)
     {
-        h = UltimateJoystick.GetHorizontalAxis("RotateCamera");
-        if (h != 0)
-        {
-            xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
-            xzOff.y = 0;
-        }
-        
         _changeSpeed = Time.deltaTime / (TransitionSpeedPara + Time.deltaTime); //分母里那个附加值越大，变得越慢。
         enemiesCenter = Vector3.zero;
         if (targets != null && targets.Count > 0)
@@ -78,10 +75,54 @@ class New2023 : CameraMode
         }
 
         enemiesCenter /= targets.Count;
-
         enemyScreenPos = _camera.WorldToScreenPoint(enemiesCenter);
         meScreenPos = _camera.WorldToScreenPoint(meCenter.position);
+        
+        h = UltimateJoystick.GetHorizontalAxis("RotateCamera");
+        if (h != 0)
+        {
+            xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
+            xzOff.y = 0;
+        }
+        else
+        {
+            float angleToHorizental = 0;
+            float CheckNeedForAutoRotate()
+            {
+                if (meScreenPos.x < enemyScreenPos.x)
+                {
+                    return Mathf.Abs(Vector3.Angle(enemyScreenPos - meScreenPos, Vector3.right));
+                }
+                else
+                {
+                    return Mathf.Abs(Vector3.Angle(enemyScreenPos - meScreenPos, -Vector3.right));
+                }
+            }
 
+            angleToHorizental = CheckNeedForAutoRotate();
+            if (angleToHorizental > autoChangeAngleLimit)
+            {
+                bool Clock()
+                {
+                    if (meScreenPos.x < enemyScreenPos.x)
+                    {
+                        return meScreenPos.y < enemyScreenPos.y;
+                    }
+                    else
+                    {
+                        return meScreenPos.y > enemyScreenPos.y;
+                    }
+                }
+                
+                // 如果夹角大于限制，则缓慢调整相机角度
+                Vector3 newOffset = Quaternion.Euler(0f, autoRotateSpeed *
+    ((angleToHorizental - autoChangeAngleLimit)/(90 - autoChangeAngleLimit)) * Time.deltaTime  // 分母是垂直情况下两个对象屏幕连线超出的"垂直界限"，分子是实际超过的界限。这个值是确保在垂直时候相机扭转最快，随后扭转变缓和
+    * (Clock() ? -1f : 1f), 0f) * xzOff;
+                // 如果调整后的夹角小于等于限制，则使用新的偏移量
+                xzOff = newOffset;
+            }
+        }
+        
         ePosX = (float)((decimal)enemyScreenPos.x / Screen.width);
         ePosY = (float)((decimal)enemyScreenPos.y / Screen.height);
         mPosX = (float)((decimal)meScreenPos.x / Screen.width);
