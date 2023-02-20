@@ -185,108 +185,85 @@ handlers.givePassiveSkill= function (args, context) {
     return { result : true };
 }
 
-handlers.completedLevel = function (args, context) {
 
-    var getRequest = {
-        PlayFabId: currentPlayerId,
-        StatisticNames: ["stageProgress"]
-    };
+
+handlers.completedLevel = function (args, context) {
     
-    var playerStats = server.GetPlayerStatistics(getRequest);
-    let stageProgress = 0;
-    for (i = 0; i < playerStats.Statistics.length; ++i) {
-        if (playerStats.Statistics[i].StatisticName == "stageProgress") {
-            stageProgress = playerStats.Statistics[i].Value;
+    var newLevelCompleted = Number(args.stage);
+    var playerStatResult = server.UpdatePlayerStatistics(
+        {
+            PlayFabId: currentPlayerId,
+            Statistics: [
+                {
+                    StatisticName: "stageProgress",
+                    Value: newLevelCompleted
+                }
+            ]
         }
-    }
+    );
+    return { playerStatResult };
+};
+
+handlers.claimQuestReward = function (args, context) {
     
     // 传递过来的这个level是玩家试图更新到的进度，但这个数值来自客户端，并不能完全信任
     // 关卡更新机制我们只有一个逻辑就是一次只更新一关
     var level = args.level;
-    if (level <= stageProgress) {
-        return {
-            firstTime: false,
-            progressLevel: Number(stageProgress)
-        };
-    } else {
-        var newLevelCompleted = Number(stageProgress) + 1;
-        var playerStatResult = server.UpdatePlayerStatistics(
-            {
-                PlayFabId: currentPlayerId,
-                Statistics: [
-                    {
-                        StatisticName: "stageProgress",
-                        Value: newLevelCompleted
-                    }
-                ]
-            }
-        );
-        
-        var titleDataRequest = {"Keys":"stage_awards"};
-        var titleDataResponse = server.GetTitleData(titleDataRequest);
-        
-        // 原则上这部分代码在正式版不应该有机会执行
-        if (!titleDataResponse.Data.hasOwnProperty("stage_awards")){
-            return {
-                firstTime: true,
-                progressLevel: newLevelCompleted
-            };
-        }
-        
-        var whole = titleDataResponse.Data["stage_awards"];
-        var objData = JSON.parse(whole);
-        var award;
-        let g = 0;
-        let d = 0;
-        
-        for (var i = 0; i < objData.length; i++) {
-            
-            if (objData[i].stageKey == newLevelCompleted){
-                if(objData[i].hasOwnProperty("award")){
-                    award = objData[i].award;
-                    break;
-                }
-            }
-        }
-        
-        if (award === undefined) {
-            return {
-                firstTime: true,
-                progressLevel: newLevelCompleted
-            };
-        }
+    var newLevelCompleted = Number(args.stage);
+    var titleDataRequest = { "Keys":"stage_awards" };
+    var titleDataResponse = server.GetTitleData(titleDataRequest);
 
-        if (award.hasOwnProperty("g")) {
-            g = Number(award.g);
-            
-            if (g > 0) {
-                server.AddUserVirtualCurrency({
-                    PlayFabID: currentPlayerId,
-                    VirtualCurrency: "GD",
-                    Amount: g
-                });
+    var whole = titleDataResponse.Data["stage_awards"];
+    var objData = JSON.parse(whole);
+    var award;
+    let g = 0;
+    let d = 0;
+
+    for (var i = 0; i < objData.length; i++) {
+
+        if (objData[i].stageKey == newLevelCompleted){
+            if(objData[i].hasOwnProperty("award")){
+                award = objData[i].award;
+                break;
             }
         }
-        
-        if (award.hasOwnProperty("d")) {
-            d = Number(award.d);
-            
-            if (d > 0) {
-                server.AddUserVirtualCurrency({
-                    PlayFabID: currentPlayerId,
-                    VirtualCurrency: "DM",
-                    Amount: d
-                });
-            }
-        }
-        
+    }
+
+    if (award === undefined) {
         return {
-            firstTime: true,
-            progressLevel: newLevelCompleted,
-            gold: g,
-            diamond: d
+            has_reward: false
         };
     }
+
+    if (award.hasOwnProperty("g")) {
+        g = Number(award.g);
+
+        if (g > 0) {
+            server.AddUserVirtualCurrency({
+                PlayFabID: currentPlayerId,
+                VirtualCurrency: "GD",
+                Amount: g
+            });
+        }
+    }
+
+    if (award.hasOwnProperty("d")) {
+        d = Number(award.d);
+
+        if (d > 0) {
+            server.AddUserVirtualCurrency({
+                PlayFabID: currentPlayerId,
+                VirtualCurrency: "DM",
+                Amount: d
+            });
+        }
+    }
+
+    return {
+        has_reward: true,
+        gold: g,
+        diamond: d
+    };
 };
 
 // 技能石背包只能10个10个的往上买。但是必须应该有一个最大值。这个数字是多少要看这游戏是个什么感觉

@@ -50,69 +50,51 @@ namespace FightScene
                 case FightEventType.Quest:
                     if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabId)
                     {
-                        CloudScript.ArcadeProgress(
-                            FightScene.Fight.ID,
-                            result =>
-                            {
-                                var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                                var level = jsonResult.ContainsKey("progressLevel") ? jsonResult["progressLevel"] : 0;
-                                var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
-                                var rewardDm = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
-                                var firstTime = jsonResult.ContainsKey("firstTime") ? jsonResult["firstTime"] : false;
-                                
-                                var levelInt = Convert.ToInt32(level);
-                                PlayerAccountInfo.Me.arcadeProcess = levelInt;
-                                var rewardGdInt = Convert.ToInt32(rewardGd);
-                                var rewardDmInt = Convert.ToInt32(rewardDm);
-                                var firstTimeBool = (bool)firstTime;
-                                
-                                var a = UILayerLoader.Load<ArenaFightOver>();
-                                a.Step2Anim();
-                                a.ShowAward(rewardDmInt, rewardGdInt).Forget();
-                                
-                                if (firstTimeBool)
-                                {
-                                    switch (levelInt)
-                                    {
-                                        case 1:
-                                            PopupLayer.ArrangeWarnWindowUnitIcon(" tetsuya  " + Translate.Get("GotNewUnit"), "2");
-                                            break;
-                                        case 5:
-                                            PopupLayer.ArrangeWarnWindowUnitIcon(" adam  " + Translate.Get("GotNewUnit"), "1");
-                                            break;
-                                        case 20:
-                                            PopupLayer.ArrangeWarnWindowUnitIcon(" maggie  " + Translate.Get("GotNewUnit"), "4");
-                                            break;
-                                        case 35:
-                                            PopupLayer.ArrangeWarnWindowUnitIcon(" yuta  " + Translate.Get("GotNewUnit"), "7");
-                                            break;
-                                        case 50:
-                                            PopupLayer.ArrangeWarnWindowUnitIcon(" sybill  " + Translate.Get("GotNewUnit"), "6");
-                                            break;
-                                        case 100:
-                                            PopupLayer.ArrangeWarnWindowUnitIcon(" et  " + Translate.Get("GotNewUnit"), "5");
-                                            break;
-                                    }
-                                    
-                                }
-                            }
-                        );
-                        
-                        if (FightScene.Fight.ID == "1")
+                        var levelInt = Convert.ToInt32(FightScene.Fight.ID);
+                        if (levelInt > PlayerAccountInfo.Me.arcadeProcess)
                         {
-                            PlayerAccountInfo.Me.tutorialProgress = "StageOneFinished";
-                            PlayFabReadClient.UpdateUserData(
-                                new UpdateUserDataRequest()
+                            CloudScript.ArcadeProgress(
+                                FightScene.Fight.ID,
+                                result =>
                                 {
-                                    Data = new Dictionary<string, string>()
+                                    var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                                    var has_reward = jsonResult.ContainsKey("has_reward") ? jsonResult["has_reward"] : false;
+                                    var has_rewardBool = (bool)has_reward;
+                                    var a = UILayerLoader.Load<ArenaFightOver>();
+                                    a.Step2Anim();
+                                    if (has_rewardBool)
                                     {
-                                        { "TutorialProgress", "StageOneFinished" }
+                                        var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
+                                        var rewardDm = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
+                                        PlayerAccountInfo.Me.arcadeProcess = levelInt;
+                                        var rewardGdInt = Convert.ToInt32(rewardGd);
+                                        var rewardDmInt = Convert.ToInt32(rewardDm);
+                                        a.ShowAward(rewardDmInt, rewardGdInt).Forget();
                                     }
-                                },
-                                () => {},
-                                PreScene.ReturnToLobby
+
+                                    if (FightScene.Fight.ID == "1")
+                                    {
+                                        PlayerAccountInfo.Me.tutorialProgress = "StageOneFinished";
+                                        PlayFabReadClient.UpdateUserData(
+                                            new UpdateUserDataRequest()
+                                            {
+                                                Data = new Dictionary<string, string>()
+                                                {
+                                                    { "TutorialProgress", "StageOneFinished" }
+                                                }
+                                            },
+                                            () => {},
+                                            PreScene.ReturnToLobby
+                                        );
+                                        ReturnLayer.ReturnMissionList.Clear(); // 直接回到 front scene
+                                    }
+                                }
                             );
-                            ReturnLayer.ReturnMissionList.Clear(); // 直接回到 front scene
+                        }
+                        else
+                        {
+                            var a = UILayerLoader.Load<ArenaFightOver>();
+                            a.Step2Anim();
                         }
                     }
                     else
