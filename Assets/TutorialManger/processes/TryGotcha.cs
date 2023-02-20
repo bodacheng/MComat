@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using mainMenu;
 using PlayFab.ClientModels;
@@ -49,8 +51,14 @@ public class TryGotcha : TutorialProcess
             gotchaResultLayer = UILayerLoader.Get<GotchaResultLayer>();
             if (gotchaResultLayer != null)
             {
-                returnLayer.gameObject.SetActive(true);
-                returnLayer.ForceBackMode(true);
+                async void DelayBack()
+                {
+                    returnLayer.gameObject.SetActive(false);
+                    await UniTask.Delay(TimeSpan.FromSeconds(3));
+                    returnLayer.gameObject.SetActive(true);
+                    returnLayer.ForceBackMode(true);
+                }
+                DelayBack();
             }
         }
     }

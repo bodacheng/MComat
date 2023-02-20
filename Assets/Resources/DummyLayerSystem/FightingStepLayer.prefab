@@ -59,6 +59,8 @@ GameObject:
   - component: {fileID: 4426366221117073943}
   - component: {fileID: 8654123632150089224}
   - component: {fileID: 6433263593749588490}
+  - component: {fileID: 1393739477025288895}
+  - component: {fileID: 7657225728561195264}
   m_Layer: 5
   m_Name: Attack1Intro
   m_TagString: Untagged
@@ -116,9 +118,9 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 96e17474f840a01459f0cc936c5d4d9b, type: 3}
-    m_FontSize: 40
+    m_FontSize: 50
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 40
     m_MaxSize: 60
     m_Alignment: 4
@@ -128,6 +130,35 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u6309\u4E0B\u540E\u5C06\u4F9D\u6B21\u91CA\u653E\u6280\u80FD\u7EC4\u7B2C\u4E00\u884C\u6280\u80FD"
+--- !u!114 &1393739477025288895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2432720627744690533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.9411765, b: 1, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &7657225728561195264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2432720627744690533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: AttackBtn1Intro
+  target: {fileID: 6433263593749588490}
 --- !u!1 &2530296702374746720
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,6 +264,8 @@ GameObject:
   - component: {fileID: 4292097555495819673}
   - component: {fileID: 7797638460681273514}
   - component: {fileID: 8702222061107586059}
+  - component: {fileID: 9036042722511585447}
+  - component: {fileID: 7045538283048039115}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -257,8 +290,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -142, y: 383}
-  m_SizeDelta: {x: 1200, y: 80}
+  m_AnchoredPosition: {x: -20, y: 383}
+  m_SizeDelta: {x: 1500, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7797638460681273514
 CanvasRenderer:
@@ -289,19 +322,48 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_Font: {fileID: 12800000, guid: 96e17474f840a01459f0cc936c5d4d9b, type: 3}
+    m_FontSize: 50
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 40
-    m_MaxSize: 40
+    m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "<- \u73A9\u5BB6\u5F53\u524DHP\u4E0E\u6C14\u503C\uFF0C\u8017\u6C14\u7684\u6280\u80FD\u5728\u6C14\u4E0D\u591F\u7684\u60C5\u51B5\u4E0B\u65E0\u6CD5\u91CA\u653E\u3002"
+  m_Text: "\u73A9\u5BB6\u5F53\u524DHP\u4E0E\u6C14\u503C\uFF0C\u8017\u6C14\u7684\u6280\u80FD\u5728\u6C14\u4E0D\u591F\u7684\u60C5\u51B5\u4E0B\u65E0\u6CD5\u91CA\u653E\u3002"
+--- !u!114 &9036042722511585447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009457132781488675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.9411765, b: 1, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &7045538283048039115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009457132781488675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: HPEXIntro
+  target: {fileID: 8702222061107586059}
 --- !u!1 &4545749101817524500
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,6 +412,8 @@ GameObject:
   - component: {fileID: 4693962976985261745}
   - component: {fileID: 6565789100321487970}
   - component: {fileID: 3566718589218947096}
+  - component: {fileID: 5289901976141918706}
+  - component: {fileID: 8095779984251326252}
   m_Layer: 5
   m_Name: Attack2Intro
   m_TagString: Untagged
@@ -407,9 +471,9 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 96e17474f840a01459f0cc936c5d4d9b, type: 3}
-    m_FontSize: 40
+    m_FontSize: 50
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 40
     m_MaxSize: 60
     m_Alignment: 4
@@ -418,7 +482,36 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6309\u4E0B\u540E\u5C06\u4F9D\u6B21\u91CA\u653E\u4E5D\u5BAB\u683C\u7B2C\u4E8C\u6A2A\u884C\u6280\u80FD->"
+  m_Text: "\u6309\u4E0B\u540E\u5C06\u4F9D\u6B21\u91CA\u653E\u4E5D\u5BAB\u683C\u7B2C\u4E8C\u6A2A\u884C\u6280\u80FD"
+--- !u!114 &5289901976141918706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5239226089203705298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.9411765, b: 1, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &8095779984251326252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5239226089203705298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: AttackBtn2Intro
+  target: {fileID: 3566718589218947096}
 --- !u!1 &5547412518576861934
 GameObject:
   m_ObjectHideFlags: 0
@@ -2284,6 +2377,8 @@ GameObject:
   - component: {fileID: 8779523748050324361}
   - component: {fileID: 4322873905303139974}
   - component: {fileID: 1072807331979037635}
+  - component: {fileID: 6277624933689755851}
+  - component: {fileID: 4809885910920512593}
   m_Layer: 5
   m_Name: Attack3Intro
   m_TagString: Untagged
@@ -2341,9 +2436,9 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 96e17474f840a01459f0cc936c5d4d9b, type: 3}
-    m_FontSize: 40
+    m_FontSize: 50
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 40
     m_MaxSize: 60
     m_Alignment: 4
@@ -2352,7 +2447,36 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6309\u4E0B\u540E\u5C06\u4F9D\u6B21\u91CA\u653E\u4E5D\u5BAB\u683C\u7B2C\u4E09\u6A2A\u884C\u6280\u80FD->"
+  m_Text: "\u6309\u4E0B\u540E\u5C06\u4F9D\u6B21\u91CA\u653E\u4E5D\u5BAB\u683C\u7B2C\u4E09\u6A2A\u884C\u6280\u80FD"
+--- !u!114 &6277624933689755851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6380204765882067249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.9411765, b: 1, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &4809885910920512593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6380204765882067249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: AttackBtn3Intro
+  target: {fileID: 1072807331979037635}
 --- !u!1 &6616606196548258040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2364,6 +2488,8 @@ GameObject:
   - component: {fileID: 5974639515933683210}
   - component: {fileID: 6116290279781122166}
   - component: {fileID: 2204794544558780499}
+  - component: {fileID: 9002350535410346735}
+  - component: {fileID: 1208135069675069486}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -2420,20 +2546,48 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_Font: {fileID: 12800000, guid: 96e17474f840a01459f0cc936c5d4d9b, type: 3}
+    m_FontSize: 50
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 40
-    m_MaxSize: 40
+    m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u81EA\u52A8\u6A21\u5F0F.\u70B9\u51FB\u53EF\u5207\u6362\u81EA\u52A8\u6216\u624B\u52A8 
-    ->"
+  m_Text: "\u81EA\u52A8\u6A21\u5F0F.\u70B9\u51FB\u53EF\u5207\u6362\u81EA\u52A8\u6216\u624B\u52A8"
+--- !u!114 &9002350535410346735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6616606196548258040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.9411765, b: 1, a: 1}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &1208135069675069486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6616606196548258040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: AutoBtnIntro
+  target: {fileID: 2204794544558780499}
 --- !u!1 &7415628284172283044
 GameObject:
   m_ObjectHideFlags: 0

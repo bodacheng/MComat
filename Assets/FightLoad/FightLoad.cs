@@ -30,12 +30,21 @@ public static class FightLoad
                 stage.Team2Auto = true;
                 break;
             default:
-                stage.Team1Auto = PlayerPrefs.GetInt("auto") == 1;
+                stage.Team1Auto = PlayerPrefs.GetInt("auto", 0) == 1;
                 stage.Team2Auto = true;
                 break;
         }
         
+        if (stage.ID == "1")
+        {
+            stage.RunTutorial = true;
+            stage.Team1Auto = false;
+            stage.Team2Auto = false;
+            Debug.Log("AI1模式："+stage.team1AIMode);
+        }
+        
         FightScene.FightScene.Fight =  FightInfo.Copy(stage);
+        
         Stones.ClearRender();
         HurtObjectManager.Clear();
         EffectsManager.Clear();

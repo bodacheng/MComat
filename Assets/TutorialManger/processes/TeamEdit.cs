@@ -1,4 +1,5 @@
-﻿using dataAccess;
+﻿using System;
+using dataAccess;
 using mainMenu;
 using DummyLayerSystem;
 using System.Collections.Generic;
@@ -15,9 +16,9 @@ public class TeamEdit : TutorialProcess
 
     private bool teamEditFinished = false;
     private readonly string _tutorialStep;
-    public TeamEdit(string TutorialStep)
+    public TeamEdit(string tutorialStep)
     {
-        _tutorialStep = TutorialStep;
+        _tutorialStep = tutorialStep;
     }
     
     public override void ProcessEnter()
@@ -90,7 +91,6 @@ public class TeamEdit : TutorialProcess
                 if (_tutorialStep == "teamEdit1")
                 {
                     qualified = qualified && unitCount > 0;
-                    Debug.Log(qualified +" : "+unitCount);
                 }
                 else if (_tutorialStep == "teamEdit2")
                 {
@@ -116,13 +116,31 @@ public class TeamEdit : TutorialProcess
                 _fightPrepareLayer.ForcePressTeamEdit();
             }
         }
-
+        
         if (_teamEditLayer == null)
         {
             _teamEditLayer = UILayerLoader.Get<TeamEditLayer>();
             if (_teamEditLayer != null)
             {
                 _teamEditLayer.SetTeamLegalCheck(TutorialLegal);
+            }
+        }
+        else
+        {
+            if (_teamEditLayer.CurrentIsLegal())
+            {
+                _teamEditLayer.SetInstruction(Translate.Get("SaveYourTeam"));
+            }
+            else
+            {
+                if (_tutorialStep == "teamEdit1")
+                {
+                    _teamEditLayer.SetInstruction(Translate.Get("TeamEditTutorial1"));
+                }
+                else if (_tutorialStep == "teamEdit2")
+                {
+                    _teamEditLayer.SetInstruction(Translate.Get("TeamEditTutorial2"));
+                }
             }
         }
         
@@ -135,5 +153,10 @@ public class TeamEdit : TutorialProcess
             if (_returnLayer != null)
                 _returnLayer.gameObject.SetActive(false);
         }
+    }
+    
+    public override void ProcessEnd()
+    {
+        _teamEditLayer.SetInstruction(String.Empty);
     }
 }

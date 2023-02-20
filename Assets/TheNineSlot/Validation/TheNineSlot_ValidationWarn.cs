@@ -10,12 +10,6 @@ namespace mainMenu
         {
             // 第一列技能必须有普通技能
             var valR = CheckEditBasedOnCurrent();
-            if (valR == SkillSet.SkillEditError.UnBalanced)
-            {
-                // Click NormalTab For User
-                plsTryNormalSkill.Invoke();
-            }
-            
             ValidationWarn(valR);
             return valR;
         }

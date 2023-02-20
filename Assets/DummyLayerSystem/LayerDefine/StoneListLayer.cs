@@ -31,16 +31,15 @@ public class StoneListLayer : UILayer
         }
     }
     
-    public void Setup()
+    public async void Setup()
     {
         var cts = new CancellationTokenSource();
         ReturnLayer.AddUniTaskCancel(cts);
         
         box.IniExTabs();
         box.GenerateCells();
-        box._tabEffects.SwitchElement(Element.blueMagic, 
-            ()=> box.IniExTabsEffects(PreScene.target.postProcessCamera),
-            cts.Token).Forget();
+        await box._tabEffects.SwitchElement(Element.blueMagic, cts.Token);
+        await box.IniExTabsEffects(PreScene.target.postProcessCamera);
         box.AddFeatureToCells(CellFeature_StoneShow);
         box.FilterFeatureRefresh(true);
         box.RestFilter();

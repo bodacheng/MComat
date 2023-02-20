@@ -8,8 +8,8 @@ using DummyLayerSystem;
 public class TitleBgLayer : UILayer
 {
     [SerializeField] Image targetImage;
-
     [SerializeField] Button touchScreenBtn;
+    [SerializeField] Button skipBtn;
     [SerializeField] LanguageConverter languageConverter;
     [SerializeField] Sprite targetSprite;
     [SerializeField] RectTransform content;
@@ -31,6 +31,12 @@ public class TitleBgLayer : UILayer
         if (storyMode)
         {
             touchScreenBtn.onClick.AddListener(() =>
+            {
+                UILayerLoader.Remove<TitleBgLayer>();
+                onClickProcess?.Invoke();
+            });
+            skipBtn.gameObject.SetActive(true);
+            skipBtn.onClick.AddListener(() =>
             {
                 UILayerLoader.Remove<TitleBgLayer>();
                 onClickProcess?.Invoke();
@@ -63,7 +69,6 @@ public class TitleBgLayer : UILayer
                     if (vScrollbar.value <= 0)
                         _disposable.Dispose();
                 }
-                
             }).AddTo(gameObject);
     }
 }

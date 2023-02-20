@@ -74,32 +74,6 @@ function GrantItemToCurrentUser(itemIds, CatalogVersion)
     return GrantItemsToUserResult.ItemGrantResults;
 }
 
-// 建立玩家初始数据
-handlers.buildBasicData = function (args, context) {
-
-    var playerData = server.GetUserReadOnlyData({
-        PlayFabId: currentPlayerId,
-        Keys: ["playerInitialized"]
-    });
-    
-    var initialized = playerData.Data["playerInitialized"];
-    if (initialized !== undefined) {
-        return { result: false };
-    }
-    
-    var updateUserDataResult = server.UpdateUserReadOnlyData(
-        {
-            PlayFabId: currentPlayerId,
-            Data: {
-                "stone_box_size": args.stone_box_size,
-                "playerInitialized" : true
-            }
-        }
-    );
-    
-    return { result: true };
-};
-
 handlers.advertisementReward = function (args, context) {
     var result = server.AddUserVirtualCurrency(
         {
@@ -161,25 +135,6 @@ handlers.grantDevItems = function (args, context) {
 
 // 给予玩家基本财产
 handlers.grantBasicItems = function (args, context) {
-
-    var playerData = server.GetUserReadOnlyData({
-        PlayFabId: currentPlayerId,
-        Keys: ["basicItemGranted"]
-    });
-
-    var basicItemGranted = playerData.Data["basicItemGranted"];
-    if (basicItemGranted !== undefined) {
-        return { result: false };
-    }
-
-    var updateUserDataResult = server.UpdateUserReadOnlyData(
-        {
-            PlayFabId: currentPlayerId,
-            Data: {
-                "basicItemGranted" : true
-            }
-        }
-    );
     
     var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
         {
@@ -240,24 +195,21 @@ handlers.completedLevel = function (args, context) {
     var playerStats = server.GetPlayerStatistics(getRequest);
     let stageProgress = 0;
     for (i = 0; i < playerStats.Statistics.length; ++i) {
-        if (playerStats.Statistics[i].StatisticName === "stageProgress") {
+        if (playerStats.Statistics[i].StatisticName == "stageProgress") {
             stageProgress = playerStats.Statistics[i].Value;
         }
     }
     
-    var lastLevelCompleted = stageProgress;
-    
     // 传递过来的这个level是玩家试图更新到的进度，但这个数值来自客户端，并不能完全信任
     // 关卡更新机制我们只有一个逻辑就是一次只更新一关
     var level = args.level;
-    if (level <= lastLevelCompleted) {
+    if (level <= stageProgress) {
         return {
             firstTime: false,
-            progressLevel: Number(lastLevelCompleted)
+            progressLevel: Number(stageProgress)
         };
     } else {
-        
-        var newLevelCompleted = Number(lastLevelCompleted) + 1;
+        var newLevelCompleted = Number(stageProgress) + 1;
         var playerStatResult = server.UpdatePlayerStatistics(
             {
                 PlayFabId: currentPlayerId,
@@ -270,18 +222,18 @@ handlers.completedLevel = function (args, context) {
             }
         );
         
-        var TitleDataRequest = {"Keys":"stage_awards"};
-        var TitleDataResponse = server.GetTitleData(TitleDataRequest);
+        var titleDataRequest = {"Keys":"stage_awards"};
+        var titleDataResponse = server.GetTitleData(titleDataRequest);
         
         // 原则上这部分代码在正式版不应该有机会执行
-        if (!TitleDataResponse.Data.hasOwnProperty("stage_awards")){
+        if (!titleDataResponse.Data.hasOwnProperty("stage_awards")){
             return {
                 firstTime: true,
                 progressLevel: newLevelCompleted
             };
         }
         
-        var whole = TitleDataResponse.Data["stage_awards"];
+        var whole = titleDataResponse.Data["stage_awards"];
         var objData = JSON.parse(whole);
         var award;
         let g = 0;
@@ -327,7 +279,7 @@ handlers.completedLevel = function (args, context) {
                 });
             }
         }
-
+        
         return {
             firstTime: true,
             progressLevel: newLevelCompleted,

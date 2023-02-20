@@ -24,13 +24,15 @@ public partial class SkillEditLayer : UILayer
     
     [Header("Tutorial")]
     [SerializeField] ClickNextTutorial clickNextTutorial1, clickNextTutorial2;
-    
+
+    public bool Initialized { get; set; } = false;
+
     public async UniTask Setup(Action<SkillEditLayer> toDo = null)
     {
+        Initialized = false;
         stonesBox.GenerateCells(9);
         gameObject.SetActive(false);
         nineSlot.PrintSkillInfo = skillStoneDetail.RefreshInfo;
-        nineSlot.plsTryNormalSkill = stonesBox.TriggerNormalTab;
         nineSlot.StartUp((x) =>
             {
                 connector.SkillShowRunWithPrepare(x).Forget();
@@ -44,15 +46,14 @@ public partial class SkillEditLayer : UILayer
         
         var cts = new CancellationTokenSource();
         ReturnLayer.AddUniTaskCancel(cts);
-        await stonesBox._tabEffects.SwitchElement
-            (unitConfig.element, 
-                ()=> stonesBox.IniExTabsEffects(PreScene.target.postProcessCamera),
-                cts.Token);
+        await stonesBox._tabEffects.SwitchElement(unitConfig.element, cts.Token);
+        await stonesBox.IniExTabsEffects(PreScene.target.postProcessCamera);
         stonesBox.FilterFeatureRefresh(true);
         skillStoneDetail.Clear();
         SkillEditButtonFeature(PreScene.target.Focusing);
         toDo?.Invoke(this);
         gameObject.SetActive(true);
+        Initialized = true;
     }
     
     public override void OnDestroy()

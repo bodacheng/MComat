@@ -138,6 +138,7 @@ public static class SVCenter
             // 从技能石盒子取出的石头安装到技能槽，要看如果这个技能石被其他角色使用中的话，那个角色会不会有问题
             if (!CheckIfOtherUnitOkAfterStoneRemove(fromItem))
                 return;
+            
             skillEditLayer.stonesBox._tabEffects.SkillButtonExplosion(fromItem._SkillConfig.SP_LEVEL, 
             PosCal.GetWorldPos(PreScene.target.postProcessCamera, to.GetComponent<RectTransform>(), 3), 
             skillEditLayer.stonesBox._tabEffects.transform);

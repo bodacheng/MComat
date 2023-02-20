@@ -76,6 +76,9 @@ namespace ModelView
                 }
                 DicAdd<string, Data_Center>.Add(Saves, recordID, _focusingC);
             }
+
+            if (this == null)
+                return; // 上方的await后layer可能已经被销毁
             
             _focusingC.WholeT.SetParent(transform); // 确保模型总与图层一起被摧毁
             _focusingC.WholeT.position = modelPos;

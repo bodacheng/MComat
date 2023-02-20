@@ -26,16 +26,29 @@ public class TeamEditLayer : UILayer
     
     [Header("技能编辑按钮")]
     [SerializeField] Button skillEditButton;
+
+    [Header("指示")]
+    [SerializeField] Text instruction;
     
-    public ReactiveProperty<int> focusingPos = new(-1);
+    readonly ReactiveProperty<int> _focusingPos = new(-1);
     readonly IDictionary<int, HeroIcon> _teamBtnDic = new Dictionary<int, HeroIcon>();
     private Func<string, bool> _teamLegal;
     private string _currentTeamMode;
+
+    public void SetInstruction(string value)
+    {
+        instruction.text = value;
+    }
     
     public void SetTeamLegalCheck(Func<string, bool> teamLegal)
     {
-        this._teamLegal = teamLegal;
+        _teamLegal = teamLegal;
         SetConfirmBtnActive();
+    }
+
+    public bool CurrentIsLegal()
+    {
+        return _teamLegal != null && _teamLegal(_currentTeamMode);
     }
 
     private void SetConfirmBtnActive()
@@ -52,9 +65,9 @@ public class TeamEditLayer : UILayer
     {
         var unitsLayer = UILayerLoader.Get<UnitsLayer>();
         if (unitsLayer == null) return;
-        if (focusingPos.Value != -1)
+        if (_focusingPos.Value != -1)
         {
-            ChangeTeamPos(instanceID, focusingPos.Value, teamMode);
+            ChangeTeamPos(instanceID, _focusingPos.Value, teamMode);
             unitsLayer.Selected.Value = null;
         }
         else
@@ -78,7 +91,7 @@ public class TeamEditLayer : UILayer
         var unitInfo = dataAccess.Units.Get(instanceID);
         if (unitInfo != null && Stones.GetEquippingStones(instanceID).Count != 9)
         {
-            focusingPos.Value = -1;
+            _focusingPos.Value = -1;
             Debug.Log("no enough skill");
             return;
         }
@@ -91,7 +104,7 @@ public class TeamEditLayer : UILayer
 
         if (returns.Count > 0)
         {
-            focusingPos.Value = -1;
+            _focusingPos.Value = -1;
         }
 
         SetConfirmBtnActive();
@@ -113,12 +126,12 @@ public class TeamEditLayer : UILayer
         }
     }
     
-    public void Ini(string teamMode, Action save, Func<string, bool> teamLegal)
+    public void Ini(string teamMode, Action save, Func<string, bool> teamLegal, bool isTutorial)
     {
         _currentTeamMode = teamMode;
         SetTeamLegalCheck(teamLegal);
 
-        focusingPos.Subscribe((x) =>
+        _focusingPos.Subscribe((x) =>
         {
             var posInstanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(x);
             removeButton.gameObject.SetActive(x != -1 && posInstanceID != null);
@@ -154,11 +167,12 @@ public class TeamEditLayer : UILayer
             if (PreScene.target.Focusing.id != null)
                 PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
         }
-        skillEditButton.onClick.AddListener(SkillEdit);
+        if (!isTutorial)
+            skillEditButton.onClick.AddListener(SkillEdit);
         
         void Remove()
         {
-            ChangeTeamPos(null, focusingPos.Value, teamMode);
+            ChangeTeamPos(null, _focusingPos.Value, teamMode);
         }
         removeButton.onClick.AddListener(Remove);
         
@@ -175,8 +189,8 @@ public class TeamEditLayer : UILayer
             }
             else
             {
-                focusingPos.Value = posNum;
-                var instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(focusingPos.Value);
+                _focusingPos.Value = posNum;
+                var instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(_focusingPos.Value);
                 PreScene.target.SetFocusingUnit(instanceID);
                 connector.ShowMyModel(instanceID).Forget();
                 if (PreScene.target.Focusing != null)

@@ -24,8 +24,8 @@ namespace FightScene
             _layer = UILayerLoader.Get<FightingStepLayer>();
             if (FightScene.Fight.EventType == FightEventType.Screensaver)
             {
-                var TitleScreenLayer = UILayerLoader.Load<TitleScreenLayer>();
-                TitleScreenLayer.Initialise();
+                var titleScreenLayer = UILayerLoader.Load<TitleScreenLayer>();
+                titleScreenLayer.Initialise();
                 HighLightLayer.LightUp(1f);
             }
             else
@@ -48,10 +48,10 @@ namespace FightScene
                 FightingStepLayer.Close();
             }
             
-            var data_Centers = new List<Data_Center>();
-            data_Centers.AddRange(RTFightManager.Target.team1.teamMembers.GetValues());
-            data_Centers.AddRange(RTFightManager.Target.team2.teamMembers.GetValues());
-            HitBoxLogTable.Instance.SkillLog(data_Centers);
+            var dataCenters = new List<Data_Center>();
+            dataCenters.AddRange(RTFightManager.Target.team1.teamMembers.GetValues());
+            dataCenters.AddRange(RTFightManager.Target.team2.teamMembers.GetValues());
+            HitBoxLogTable.Instance.SkillLog(dataCenters);
             RTFightManager.Target.Disposables.Clear();
             RTFightManager.Target.RefreshTimeDic.Clear();
             RTFightManager.Target.ClearUnitData();

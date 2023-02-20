@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class GotchaLayer : UILayer
 {
-    [SerializeField] private List<DropTablePage> dropTables;
-    [SerializeField] private Button left, right;
+    [SerializeField] List<DropTablePage> dropTables;
+    [SerializeField] Button left, right;
     
-    public void Setup(Action<string,string,int> execute, Action<string> dropTableInfo, Action<int, List<DropTablePage>> indexAction)
+    public void Setup(Action<string,string,int> execute, Action<string> dropTableInfo, Action<int, List<DropTablePage>> indexAction, bool tutorial)
     {
         for (var i = 0; i < dropTables.Count; i++)
         {
@@ -18,7 +18,16 @@ public class GotchaLayer : UILayer
         
         left.onClick.AddListener(() => { indexAction(-1, dropTables);});
         right.onClick.AddListener(() => { indexAction(1, dropTables);});
-        
-        indexAction(0, dropTables);
+
+        if (!tutorial)
+        {
+            indexAction(0, dropTables);
+        }
+        else
+        {
+            left.gameObject.SetActive(false);
+            right.gameObject.SetActive(false);
+            indexAction(1, dropTables);
+        }
     }
 }

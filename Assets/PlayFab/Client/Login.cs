@@ -110,11 +110,9 @@ public partial class PlayFabReadClient
     }
     
     static MissionWatcher _missionWatcher;
-    static bool _playerInitialized;
     static bool _tutorialProgressGot;
     public static void LoginSuccess(LoginResult result, LoginType loginType = LoginType.normal)
     {
-        _playerInitialized = false;
         _tutorialProgressGot = false;
         Debug.Log(" login success： " + result.EntityToken.EntityToken);
         ProgressLayer.Loading(">");
@@ -126,7 +124,7 @@ public partial class PlayFabReadClient
         _missionWatcher = new MissionWatcher(
             new List<string>
             {
-                "accountIsInitialized", "tutorialProgressGot", "accountInfoFinished"
+                "tutorialProgressGot", "accountInfoFinished"
             },
             ()=>
             {
@@ -137,7 +135,7 @@ public partial class PlayFabReadClient
                 PopupLayer.ArrangeWarnWindow("Network Error");
             }
         );
-        TryProcessWithLimitedTimes(CheckAccountInitialized, ()=> _playerInitialized, 0);
+        // 尝试建立并获取玩家测试进度信息，因为延迟没有迅速获得的情况下会多次尝试
         TryProcessWithLimitedTimes(()=> CheckTutorialProgressGot(loginType), ()=> _tutorialProgressGot, 0);
         GetAccountInfo(AccountInfoFinished);
     }
@@ -180,7 +178,7 @@ public partial class PlayFabReadClient
                     _tutorialProgressGot = true;
                     _missionWatcher.Finish("tutorialProgressGot", true);
                 }
-                else
+                else // 代表是新账户
                 {
                     if (loginType == LoginType.dev)
                     {
@@ -204,8 +202,7 @@ public partial class PlayFabReadClient
                         },
                         () =>
                         {
-                            PlayerAccountInfo.Me.tutorialProgress =
-                                loginType == LoginType.normal ? "Started" : "Finished";
+                            PlayerAccountInfo.Me.tutorialProgress = loginType == LoginType.normal ? "Started" : "Finished";
                             _tutorialProgressGot = true;
                             _missionWatcher.Finish("tutorialProgressGot", true);
                         },
@@ -218,41 +215,6 @@ public partial class PlayFabReadClient
             },
             errorCallback =>
             {
-                PopupLayer.ArrangeWarnWindow(errorCallback.ErrorMessage);
-            }
-        );
-    }
-
-    static void CheckAccountInitialized()
-    {
-        PlayFabClientAPI.GetUserReadOnlyData
-        (
-            new GetUserDataRequest
-            {
-                PlayFabId = PlayerAccountInfo.Me.PlayFabId,
-                Keys = new List<string> { "basicItemGranted", "playerInitialized" }
-            },
-            (obj) =>
-            {
-                string basicItemGranted = null;
-                if (obj.Data.ContainsKey("basicItemGranted"))
-                {
-                    basicItemGranted = obj.Data["basicItemGranted"].Value;
-                }
-                
-                string playerInitialized = null;
-                if (obj.Data.ContainsKey("playerInitialized"))
-                {
-                    playerInitialized = obj.Data["playerInitialized"].Value;
-                }
-                
-                _playerInitialized = basicItemGranted == "true" && playerInitialized == "true";
-                if (_playerInitialized)
-                {
-                    _missionWatcher.Finish("accountIsInitialized", true);
-                }
-            },
-            errorCallback => {
                 PopupLayer.ArrangeWarnWindow(errorCallback.ErrorMessage);
             }
         );

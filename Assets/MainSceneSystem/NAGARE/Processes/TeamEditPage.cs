@@ -21,7 +21,7 @@ public class TeamEditPage : MSceneProcess
     void EnterProcess(string teamMode)
     {
         var teamEditLayer = UILayerLoader.Load<TeamEditLayer>();
-        teamEditLayer.Ini(teamMode, Save, Legal);
+        teamEditLayer.Ini(teamMode, Save, Legal, PlayerAccountInfo.Me.tutorialProgress != "Finished");
         
         var unitsLayer = UILayerLoader.Load<UnitsLayer>();
         unitsLayer.SetDisplayUnitIconsAfterAction(() =>

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
@@ -33,7 +34,7 @@ namespace mainMenu
             Temp(EX3Tab,3);
         }
         
-        public async void IniExTabsEffects(Camera fxCamera)
+        public async UniTask IniExTabsEffects(Camera fxCamera)
         {
             void IniExTab(Button btn, int exLevel)
             {
@@ -44,11 +45,12 @@ namespace mainMenu
                 btn.onClick.AddListener(() =>
                 {
                     //NormalTabFeature(PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 3));
-                    _tabEffects.SkillButtonExplosion
-                        (exLevel, PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 5f), _tabEffects.transform);
+                    _tabEffects.SkillButtonExplosion(exLevel, PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 5f), _tabEffects.transform);
                 });
             }
+            
             await Observable.TimerFrame(5);
+            
             IniExTab(NormalTab,0);
             IniExTab(EX1Tab,1);
             IniExTab(EX2Tab,2);

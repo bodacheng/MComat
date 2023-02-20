@@ -36,7 +36,7 @@ namespace mainMenu
             _focusingEffectsGroup?.SetSelectedTabPos(ex);
         }
         
-        public async UniTask SwitchElement(Element element, Action refreshTabEffects, CancellationToken ct)
+        public async UniTask SwitchElement(Element element, CancellationToken ct)
         {
             ProgressLayer.Loading(">");
             await StartUp(element, ct);
@@ -48,7 +48,6 @@ namespace mainMenu
             }else{
                 Debug.Log("fatal error element tags");
             }
-            refreshTabEffects.Invoke();
             ProgressLayer.Close();
         }
         

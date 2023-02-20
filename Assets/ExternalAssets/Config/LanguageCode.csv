@@ -104,3 +104,13 @@ contact,,,联系我们
 AdvancedGacha,,,银河裂痕
 NormalGacha,,,星空裂痕
 DropTable,DropTable,アイテム一覧,掉落技能石一栏
+,,,
+AttackBtn1Intro,按下后将依次释放技能组第一行技能,按下后将依次释放技能组第一行技能,按下后将依次释放技能组第一行技能
+AttackBtn2Intro,按下后将依次释放技能组第二行技能,按下后将依次释放技能组第二行技能,按下后将依次释放技能组第二行技能
+AttackBtn3Intro,按下后将依次释放技能组第三行技能,按下后将依次释放技能组第三行技能,按下后将依次释放技能组第三行技能
+AutoBtnIntro,自动模式.点击可切换自动或手动,自动模式.点击可切换自动或手动,自动模式.点击可切换自动或手动
+HPEXIntro,玩家当前HP与气值，耗气的技能在气不够的情况下无法释放。,玩家当前HP与气值，耗气的技能在气不够的情况下无法释放。,玩家当前HP与气值，耗气的技能在气不够的情况下无法释放。
+,,,
+TeamEditTutorial1,尝试点击角色icon，再点击slot来适配角色,尝试点击角色icon，再点击slot来适配角色,尝试点击角色icon，再点击slot来适配角色
+TeamEditTutorial2,尝试点击角色icon，再点击slot来适配角色,尝试点击角色icon，再点击slot来适配角色,尝试点击角色icon，再点击slot来适配角色
+SaveYourTeam,点击确定保存队伍,点击确定保存队伍,点击确定保存队伍

@@ -43,7 +43,10 @@ public class SkillEditTry : TutorialProcess
         if (_skillEditLayer == null)
         {
             _skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
-            if (_skillEditLayer != null)
+        }
+        else
+        {
+            if (_skillEditLayer.Initialized)
             {
                 string nextTutorialProgress = null;
                 if (this._tutorialFlag == "openInstruction1")
@@ -79,6 +82,7 @@ public class SkillEditTry : TutorialProcess
                         );
                     }
                 );
+                _skillEditLayer.Initialized = false;
             }
         }
     }

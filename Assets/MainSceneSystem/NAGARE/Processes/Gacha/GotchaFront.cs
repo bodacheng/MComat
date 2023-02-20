@@ -76,7 +76,7 @@ public class GotchaFront : MSceneProcess
         
         BackGroundPS.target.Off();
         _layer = UILayerLoader.Load<GotchaLayer>();
-        _layer.Setup(NineTimes, DropTableInfo, MoveNext);
+        _layer.Setup(NineTimes, DropTableInfo, MoveNext, PlayerAccountInfo.Me.tutorialProgress != "Finished");
         
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
         upperInfoBar.Setup(null,
