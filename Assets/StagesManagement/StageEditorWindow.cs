@@ -12,6 +12,11 @@ public class StageEditorWindow : EditorWindow
     bool _initialized;
     void OnGUI()
     {
+        if (!Starter.ConfigInitialised)
+        {
+            EditorGUILayout.LabelField("Loading config");
+        }
+        
         if (!_initialized)
         {
             _target = new FightInfo();

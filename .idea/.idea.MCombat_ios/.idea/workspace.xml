@@ -2,31 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BOWeaponSystem/Weapon Marker Systems/BO_Marker_Manager_detect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BOWeaponSystem/Weapon Marker Systems/BO_Marker_Manager_detect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/Soul/SkillSet/RandomSet/RandomSkillSet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/Soul/SkillSet/RandomSet/RandomSkillSet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/Soul/SkillSet/RandomSet/RandomSkillSet_Acc.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/Soul/SkillSet/RandomSet/RandomSkillSet_Acc.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/BoxOverLoadFixLayer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/BoxOverLoadFixLayer.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable_Util.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable_Util.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/MSceneProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/MSceneProcess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/BoxOverLoadFix.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/BoxOverLoadFix.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/SkillEditPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/SkillEditPage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Remote/Stone/Util.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Remote/Stone/Util.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/BoxOverLoadFixLayer.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/BoxOverLoadFixLayer.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Setting/CommonSetting.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/CommonSetting.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Singleton/UnitPassiveTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/UnitPassiveTable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SkillStoneBox/SkillStonesBox_Cells.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SkillStoneBox/SkillStonesBox_Cells.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSelect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMembers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMembers.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Finish.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Finish.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightInfoGUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightInfoGUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/StageEditorWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/StageEditorWindow.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,7 +230,7 @@
       <workItem from="1676509659718" duration="4957000" />
       <workItem from="1676523771121" duration="15513000" />
       <workItem from="1676765199020" duration="17586000" />
-      <workItem from="1676856439814" duration="5381000" />
+      <workItem from="1676856439814" duration="6286000" />
     </task>
     <servers />
   </component>

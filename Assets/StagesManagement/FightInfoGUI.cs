@@ -13,6 +13,11 @@ public class FightInfoGUI : Editor
     
     public override void OnInspectorGUI()
     {
+        if (!Starter.ConfigInitialised)
+        {
+            EditorGUILayout.LabelField("Loading config");
+        }
+        
         DrawDefaultInspector();
         var fightInfo = (FightInfo)target;
         if (!initialized)

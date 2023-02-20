@@ -32,6 +32,8 @@ public class Starter : MonoBehaviour
     [SerializeField] List<string> downLoadLabels;
     public List<string> DownLoadLabels => downLoadLabels;
 
+    public static bool ConfigInitialised = false;
+
     void Awake()
     {
         if (Application.isEditor)
@@ -42,6 +44,7 @@ public class Starter : MonoBehaviour
 
     public async UniTask Initialise()
     {
+        ConfigInitialised = false;
         NativeLeakDetection.Mode = NativeLeakDetectionMode.EnabledWithStackTrace;
         AddressablesLogic.ReleaseAsyncOperationHandles();
         commonSetting.Initialise();
@@ -63,6 +66,7 @@ public class Starter : MonoBehaviour
         );
         //MobileAds.Initialize(initStatus => { Debug.Log(initStatus);});
         Debug.Log("Config Files Loaded With No Errors");
+        ConfigInitialised = true;
     }
     
     public void EnterFrontScene()
