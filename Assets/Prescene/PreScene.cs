@@ -159,7 +159,6 @@ namespace mainMenu
             
             // Shop
             var shopTop = new ShopTop();
-            var boxOverLoadFix = new BoxOverLoadFix();
 
             // Gotcha
             var gotchaFront = new GotchaFront();
@@ -187,7 +186,6 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.Arena, arenaPage);
             ProcessesRunner.Main.Add(MainSceneStep.Ranking, rankingPage);
             ProcessesRunner.Main.Add(MainSceneStep.ShopTop, shopTop);
-            ProcessesRunner.Main.Add(MainSceneStep.BoxOverLoadHelper, boxOverLoadFix);
             ProcessesRunner.Main.Add(MainSceneStep.MailBox, mailBox);
             ProcessesRunner.Main.Add(MainSceneStep.MailDetail, mailDetail);
             ProcessesRunner.Main.Add(MainSceneStep.GotchaFront, gotchaFront);

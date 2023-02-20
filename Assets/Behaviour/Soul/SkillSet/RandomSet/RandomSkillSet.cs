@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Skill;
 using UnityEngine;
 using mainMenu;
 using System.Linq;
@@ -9,21 +8,21 @@ public partial class SkillSet
     // exceptSkIDs : 除了这些技能ID。切记是技能ID
     static string RandomSkillIDOfStone(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs)
     {
-        IDictionary<string, string> _SkillIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(filterForm);
-        List<string> StoneSkillIDs = _SkillIDsAndNames.Keys.ToList();
-        if (StoneSkillIDs.Count == 0)
+        var skillIDsAndNames = SkillConfigTable.GetSkillIDAndNameDic(filterForm);
+        var stoneSkillIDs = skillIDsAndNames.Keys.ToList();
+        if (stoneSkillIDs.Count == 0)
         {
             return null;
-        }else{
-            for (int i = 0; i < exceptSkIDs.Count; i++)
-            {
-                if (StoneSkillIDs.Contains(exceptSkIDs[i]))
-                    StoneSkillIDs.Remove(exceptSkIDs[i]);
-            }
         }
         
-        int ranDom = Random.Range(0, StoneSkillIDs.Count);
-        return StoneSkillIDs[ranDom];
+        for (int i = 0; i < exceptSkIDs.Count; i++)
+        {
+            if (stoneSkillIDs.Contains(exceptSkIDs[i]))
+                stoneSkillIDs.Remove(exceptSkIDs[i]);
+        }
+        
+        int ranDom = Random.Range(0, stoneSkillIDs.Count);
+        return stoneSkillIDs[ranDom];
     }
 
     public static List<int> RemainSlotSPLevelCal(SkillSet current)

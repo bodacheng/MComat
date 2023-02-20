@@ -137,58 +137,6 @@ namespace mainMenu
             }
             return returnValue;
         }
-        
-        public static List<string> CheckIfExceedCellLimit()
-        {
-            var errorMessages = new List<string>();
-            var C_Types = Units.GetTypeList();
-            for (int i = 0; i < C_Types.Count; i++)
-            {
-                var filterForm0 = new StoneFilterForm
-                {
-                    Type = C_Types[i],
-                    ExType = new int[1] { 0 },
-                };
-                var filterForm1 = new StoneFilterForm
-                {
-                    Type = C_Types[i],
-                    ExType = new int[1] { 1 },
-                };
-                var filterForm2 = new StoneFilterForm
-                {
-                    Type = C_Types[i],
-                    ExType = new int[1] { 2 },
-                };
-                var filterForm3 = new StoneFilterForm
-                {
-                    Type = C_Types[i],
-                    ExType = new int[1] { 3 },
-                };
-                
-                var SkillStonesOfType_normal = Stones.TargetStonesFromAccount(filterForm0);
-                var SkillStonesOfType_EX1 = Stones.TargetStonesFromAccount(filterForm1);
-                var SkillStonesOfType_EX2 = Stones.TargetStonesFromAccount(filterForm2);
-                var SkillStonesOfType_EX3 = Stones.TargetStonesFromAccount(filterForm3);
-                
-                // if (SkillStonesOfType_normal.Count > PlayerAccountInfo.Me.StoneBoxSize)
-                // {
-                //     errorMessages.Add(C_Types[i]+"类角色的普通技能石数量超过限制");
-                // }
-                // if (SkillStonesOfType_EX1.Count > PlayerAccountInfo.Me.StoneBoxSize)
-                // {
-                //     errorMessages.Add(C_Types[i]+"类角色的一级必杀技能石数量超过限制");
-                // }
-                // if (SkillStonesOfType_EX2.Count > PlayerAccountInfo.Me.StoneBoxSize)
-                // {
-                //     errorMessages.Add(C_Types[i]+"类角色的二级必杀技能石数量超过限制");
-                // }
-                // if (SkillStonesOfType_EX3.Count > PlayerAccountInfo.Me.StoneBoxSize)
-                // {
-                //     errorMessages.Add(C_Types[i]+"类角色的三级必杀技能石数量超过限制");
-                // }
-            }
-            return errorMessages;
-        }
     }
 }
 

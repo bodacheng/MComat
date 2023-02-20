@@ -232,7 +232,7 @@ namespace HittingDetection
                                 }
                             }
 
-                            foreach (KeyValuePair<Collider,HitPointPara> Hit_C in BallDetectHitPool)
+                            foreach (var hitC in BallDetectHitPool)
                             {
                                 if (weaponHP > 0 && CurrentHP <= 0)
                                 {
@@ -240,15 +240,20 @@ namespace HittingDetection
                                 }
                                 if (SpecificTarget != SpecificTarget.flesh)
                                 {
-                                    if ((teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | (1 << Hit_C.Key.gameObject.layer)))
-                                        && !_usedTargets.Contains(Hit_C.Key.transform))
+                                    if (hitC.Key == null)
                                     {
-                                        HitBoxManager hit_hitbox = HitBoxesProcesser.Instance.GetHitBox(Hit_C.Key);
-                                        if (hit_hitbox != null && hit_hitbox.Enabled)
+                                        Debug.Log("HitBox系统逻辑错误");
+                                        continue;
+                                    }
+                                    if ((teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | (1 << hitC.Key.gameObject.layer)))
+                                        && !_usedTargets.Contains(hitC.Key.transform))
+                                    {
+                                        var hitBox = HitBoxesProcesser.Instance.GetHitBox(hitC.Key);
+                                        if (hitBox != null && hitBox.Enabled)
                                         {
-                                            _usedTargets.Add(Hit_C.Key.transform);
-                                            Hit_C.Value.exhaustEffect = true;
-                                            AddWeaponEnergyExhaust(Hit_C.Value);
+                                            _usedTargets.Add(hitC.Key.transform);
+                                            hitC.Value.exhaustEffect = true;
+                                            AddWeaponEnergyExhaust(hitC.Value);
                                             HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                             continue;
                                         }
@@ -260,8 +265,8 @@ namespace HittingDetection
                                     continue;
                                 }
 
-                                _boHitBox = Hit_C.Key.GetComponent<BO_Limb>();
-                                if (!_Targets_Raw_Hit.Contains(Hit_C.Key.transform) && !_usedTargets.Contains(Hit_C.Key.transform))
+                                _boHitBox = hitC.Key.GetComponent<BO_Limb>();
+                                if (!_Targets_Raw_Hit.Contains(hitC.Key.transform) && !_usedTargets.Contains(hitC.Key.transform))
                                 {
                                     //方式1：mainhealth所在层级有collider.注意看这行条件，主要就是考虑到防御问题  （* *）
                                     //if (_BO_Health != null && _Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform) == false)
@@ -287,9 +292,9 @@ namespace HittingDetection
                                     if (_Raw_Target_Instance != null)
                                     {
                                         _Targets_Raw_Hit.Add(_Raw_Target_Instance.Center.geometryCenter);
-                                        hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _attackerRef, Hit_C.Value.onBodyPos, Hit_C.Value.impactPos, Hit_C.Value.qua));
-                                        Hit_C.Value.exhaustEffect = false;
-                                        AddWeaponEnergyExhaust(Hit_C.Value);
+                                        hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _attackerRef, hitC.Value.onBodyPos, hitC.Value.impactPos, hitC.Value.qua));
+                                        hitC.Value.exhaustEffect = false;
+                                        AddWeaponEnergyExhaust(hitC.Value);
                                         HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                     }
                                     if (HitFlesh && _Raw_Target_Instance != null)

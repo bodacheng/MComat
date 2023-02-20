@@ -84,11 +84,11 @@ public partial class SkillConfigTable
         return row;
     }
     
-    public static SkillConfig RowToSkillConfig(Row row, SkillAIAttrs.Row aiRow)
+    static SkillConfig RowToSkillConfig(Row row, SkillAIAttrs.Row aiRow)
     {
         try
         {
-            SkillConfig _SkillConfig = new SkillConfig
+            var skillConfig = new SkillConfig
             {
                 TYPE = row.TYPE,
                 RECORD_ID = row.RECORD_ID,
@@ -100,52 +100,52 @@ public partial class SkillConfigTable
             switch (row.ATTACK_TYPE)
             {
                 case "GR":
-                    _SkillConfig.STATE_TYPE = BehaviorType.GR;
+                    skillConfig.STATE_TYPE = BehaviorType.GR;
                     break;
                 case "GI":
-                    _SkillConfig.STATE_TYPE = BehaviorType.GI;
+                    skillConfig.STATE_TYPE = BehaviorType.GI;
                     break;
                 case "GM":
-                    _SkillConfig.STATE_TYPE = BehaviorType.GM;
+                    skillConfig.STATE_TYPE = BehaviorType.GM;
                     break;
                 case "CT":
-                    _SkillConfig.STATE_TYPE = BehaviorType.CT;
+                    skillConfig.STATE_TYPE = BehaviorType.CT;
                     break;
                 case "NONE":
-                    _SkillConfig.STATE_TYPE = BehaviorType.NONE;
+                    skillConfig.STATE_TYPE = BehaviorType.NONE;
                     break;
             }
             
             if (!LegalStateType(row.ATTACK_TYPE))
             {
-                Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ _SkillConfig.RECORD_ID);
+                Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ skillConfig.RECORD_ID);
             }
             
-            _SkillConfig.AIAttrs.AI_MIN_DIS = float.Parse(aiRow.TRIGGER_DIS_MIN);
-            _SkillConfig.AIAttrs.AI_MAX_DIS = float.Parse(aiRow.TRIGGER_DIS_MAX);
-            _SkillConfig.AIAttrs.height = int.Parse(aiRow.TRIGGER_HEIGHT);
+            skillConfig.AIAttrs.AI_MIN_DIS = float.Parse(aiRow.TRIGGER_DIS_MIN);
+            skillConfig.AIAttrs.AI_MAX_DIS = float.Parse(aiRow.TRIGGER_DIS_MAX);
+            skillConfig.AIAttrs.height = int.Parse(aiRow.TRIGGER_HEIGHT);
             
             switch(row.SP_LEVEL)
             {
                 case "0":
-                    _SkillConfig.SP_LEVEL = 0;
+                    skillConfig.SP_LEVEL = 0;
                     break;
                 case "1":
-                    _SkillConfig.SP_LEVEL = 1;
+                    skillConfig.SP_LEVEL = 1;
                     break;
                 case "2":
-                    _SkillConfig.SP_LEVEL = 2;
+                    skillConfig.SP_LEVEL = 2;
                     break;
                 case "3":
-                    _SkillConfig.SP_LEVEL = 3;
+                    skillConfig.SP_LEVEL = 3;
                     break;
                 default:
-                    _SkillConfig.SP_LEVEL = -1;
+                    skillConfig.SP_LEVEL = -1;
                     break;
             }
-            _SkillConfig.SHOW_NAME = SkillNameTable.GetSkillName(row.RECORD_ID);
-            _SkillConfig.EVENT_CODE = row.EVENT_CODE;
-            return _SkillConfig;
+            skillConfig.SHOW_NAME = SkillNameTable.GetSkillName(row.RECORD_ID);
+            skillConfig.EVENT_CODE = row.EVENT_CODE;
+            return skillConfig;
         }
         catch(Exception e)
         {
@@ -157,34 +157,25 @@ public partial class SkillConfigTable
         
     public static IDictionary<string,string> GetSkillIDAndNameDic(SkillStonesBox.StoneFilterForm filterForm)
     {
-        Dictionary<string, string> SkillIDAndNameDic = new Dictionary<string, string>();
-        List<SkillConfig> list = GetSkillConfigsOfType(filterForm.Type);
-        foreach (SkillConfig one in list)
+        var skillIDAndNameDic = new Dictionary<string, string>();
+        var list = GetSkillConfigsOfType(filterForm.Type);
+        foreach (var one in list)
         {
             if (filterForm.BType != BehaviorType.NONE && filterForm.BType != one.STATE_TYPE)
-            {
                 continue;
-            }
+            if (!SkillConfig.RangeLimit(one.AIAttrs.AI_MIN_DIS, one.AIAttrs.AI_MAX_DIS, filterForm.Close,
+                filterForm.Near, filterForm.Far) || !filterForm.ExType.ToList().Contains(one.SP_LEVEL)) 
+                continue;
             
-            if (SkillConfig.RangeLimit(one.AIAttrs.AI_MIN_DIS, one.AIAttrs.AI_MAX_DIS, filterForm.Close, filterForm.Near, filterForm.Far)
-                && filterForm.ExType.ToList().Contains(one.SP_LEVEL))
+            if (!skillIDAndNameDic.ContainsKey(one.RECORD_ID))
             {
-                if (one.RECORD_ID == null)
-                {
-                    Debug.Log(one.REAL_NAME);
-                }
-                if (!SkillIDAndNameDic.ContainsKey(one.RECORD_ID))
-                {
-                    SkillIDAndNameDic.Add(one.RECORD_ID, one.REAL_NAME);
-                }
-                else
-                {
-                    Debug.Log("重复的技能ID？？："+one.RECORD_ID);
-                }
+                skillIDAndNameDic.Add(one.RECORD_ID, one.REAL_NAME);
+            }
+            else
+            {
+                Debug.Log("重复的技能ID？？："+one.RECORD_ID);
             }
         }
-        return SkillIDAndNameDic;
+        return skillIDAndNameDic;
     }
-    
-    
 }

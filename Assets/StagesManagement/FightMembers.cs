@@ -34,6 +34,17 @@ public class FightMembers
         }
     }
     
+    static UnitInfo ArrangeUnitInfo(string type, string unit_record_id)
+    {
+        var skillId = UnitPassiveTable.GetUnitPassiveRecordId(unit_record_id);
+        var unitInfo = new UnitInfo
+        {
+            r_id = unit_record_id,
+            set = SkillSet.RandomSkillSet(type, skillId,false)
+        };
+        return unitInfo;
+    }
+    
     public static FightMembers RandomFight()
     {
         var type = "human";
@@ -43,21 +54,9 @@ public class FightMembers
         var recordIds = unitIDsAndNames.Keys.ToList();
         var target = new FightMembers();
         
-        var char1 = new UnitInfo
-        {
-            r_id = recordIds[Indexes[0]],
-            set = SkillSet.RandomSkillSet(type, null,  false)
-        };
-        var char2 = new UnitInfo
-        {
-            r_id = recordIds[Indexes[1]],
-            set = SkillSet.RandomSkillSet(type, null,  false)
-        };
-        var char3 = new UnitInfo
-        {
-            r_id = recordIds[Indexes[2]],
-            set = SkillSet.RandomSkillSet(type, null,  false)
-        };
+        var char1 = ArrangeUnitInfo(type, recordIds[Indexes[0]]);
+        var char2 = ArrangeUnitInfo(type, recordIds[Indexes[1]]);
+        var char3 = ArrangeUnitInfo(type, recordIds[Indexes[2]]);
         
         target.EnemySets.Set(0, 0, char1);
         target.EnemySets.Set(0, 1, char2);
@@ -73,39 +72,13 @@ public class FightMembers
         var Indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 6);
         var recordIds = unitIDsAndNames.Keys.ToList();
         var target = new FightMembers();
+        var char1 = ArrangeUnitInfo(type, recordIds[Indexes[0]]);
+        var char2 = ArrangeUnitInfo(type, recordIds[Indexes[1]]);
+        var char3 = ArrangeUnitInfo(type, recordIds[Indexes[2]]);
+        var char4 = ArrangeUnitInfo(type, recordIds[Indexes[3]]);
+        var char5 = ArrangeUnitInfo(type, recordIds[Indexes[4]]);
+        var char6 = ArrangeUnitInfo(type, recordIds[Indexes[5]]);
         
-        var char1 = new UnitInfo
-        {
-            r_id = recordIds[Indexes[0]],
-            set = SkillSet.RandomSkillSet(type, null,false)
-        };
-        var char2 = new UnitInfo
-        {
-            r_id = recordIds[Indexes[1]],
-            set = SkillSet.RandomSkillSet(type, null,false)
-        };
-        var char3 = new UnitInfo
-        {
-            r_id = recordIds[Indexes[2]],
-            set = SkillSet.RandomSkillSet(type, null,false)
-        };
-
-        var char4 = new UnitInfo
-        {
-            r_id = recordIds[Indexes[3]],
-            set = SkillSet.RandomSkillSet(type, null,false)
-        };
-        var char5 = new UnitInfo
-        {
-            r_id = recordIds[Indexes[4]],
-            set = SkillSet.RandomSkillSet(type, null,false)
-        };
-        var char6 = new UnitInfo
-        {
-            r_id = recordIds[Indexes[5]],
-            set = SkillSet.RandomSkillSet(type, null,false)
-        };
-
         switch (teamMode)
         {
             case TeamMode.MultiRaid:
@@ -144,16 +117,8 @@ public class FightMembers
             Far = false
         };
         
-        var char1 = new UnitInfo
-        {
-            r_id = monsterIds[Indexes[0]],
-            set = SkillSet.RandomSkillSet(type, null, false, filterForm)
-        };
-        var char2 = new UnitInfo
-        {
-            r_id = monsterIds[Indexes[1]],
-            set = SkillSet.RandomSkillSet(type, null, false, filterForm)
-        };
+        var char1 = ArrangeUnitInfo(type, monsterIds[Indexes[0]]);
+        var char2 = ArrangeUnitInfo(type, monsterIds[Indexes[1]]);
         
         switch (teamMode)
         {

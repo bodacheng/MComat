@@ -2,7 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Launcher/Starter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BOWeaponSystem/Weapon Marker Systems/BO_Marker_Manager_detect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BOWeaponSystem/Weapon Marker Systems/BO_Marker_Manager_detect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/Soul/SkillSet/RandomSet/RandomSkillSet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/Soul/SkillSet/RandomSet/RandomSkillSet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/Soul/SkillSet/RandomSet/RandomSkillSet_Acc.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/Soul/SkillSet/RandomSet/RandomSkillSet_Acc.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/BoxOverLoadFixLayer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/BoxOverLoadFixLayer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/FrontLayer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable_Util.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/Skill/SkillConfig/SkillConfigTable/SkillConfigTable_Util.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/MSceneProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/MSceneProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/BoxOverLoadFix.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/BoxOverLoadFix.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/SkillEditPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/SkillEditPage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prescene/PreScene.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Remote/Stone/Util.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Remote/Stone/Util.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/BoxOverLoadFixLayer.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/BoxOverLoadFixLayer.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Setting/CommonSetting.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/CommonSetting.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Singleton/UnitPassiveTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Singleton/UnitPassiveTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SkillStoneBox/SkillStonesBox_Cells.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SkillStoneBox/SkillStonesBox_Cells.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/NineSlotSelect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSelect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMemberManager/SkillSelect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StagesManagement/FightMembers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StagesManagement/FightMembers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Finish.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TheNineSlot/TheNineSlot_Finish.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +69,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/Views/IncomingChanges/Gluon/IncomingChangesTab.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_InputField.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Graphic/RawImageTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/31/System.Collections.Generic.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Editor/Converter/RenderPipelineConverter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Layout/LayoutGroup.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1.19.19/Runtime/ResourceManager/AsyncOperations/AsyncOperationHandle.cs" root0="SKIP_HIGHLIGHTING" />
@@ -226,7 +251,8 @@
       <workItem from="1676336304947" duration="12414000" />
       <workItem from="1676509659718" duration="4957000" />
       <workItem from="1676523771121" duration="15513000" />
-      <workItem from="1676765199020" duration="16798000" />
+      <workItem from="1676765199020" duration="17586000" />
+      <workItem from="1676856439814" duration="5381000" />
     </task>
     <servers />
   </component>

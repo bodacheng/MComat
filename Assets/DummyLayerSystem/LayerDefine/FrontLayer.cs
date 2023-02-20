@@ -5,14 +5,14 @@ using ModelView;
 
 public class FrontLayer : UILayer
 {
-    [SerializeField] private Button ArcadeBtn;
-    [SerializeField] private Button ArenaBtn;
-    [SerializeField] private Button MemberBtn;
-    [SerializeField] private Button TrainBtn;
-    [SerializeField] private Button StonesBtn;
-    [SerializeField] private Button GotchaBtn;
-    [SerializeField] private Button SkillTestRBtn;
-    [SerializeField] private Button SkillTestMBtn;
+    [SerializeField] Button ArcadeBtn;
+    [SerializeField] Button ArenaBtn;
+    [SerializeField] Button MemberBtn;
+    [SerializeField] Button TrainBtn;
+    [SerializeField] Button StonesBtn;
+    [SerializeField] Button GotchaBtn;
+    [SerializeField] Button SkillTestRBtn;
+    [SerializeField] Button SkillTestMBtn;
     [SerializeField] DedicatedCameraConnector camConnector;
     
     public DedicatedCameraConnector CamConnector => camConnector;

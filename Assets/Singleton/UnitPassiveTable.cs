@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Skill;
 
 public class UnitPassiveTable
 {
@@ -25,6 +26,19 @@ public class UnitPassiveTable
 		return row?.SKILL_RECORD_ID;
 	}
 
+	public static List<string> GetPassiveSKillRecordIds()
+	{
+		var returnValue = new List<string>();
+		foreach (var row in rowList)
+		{
+			if (SkillConfigTable.GetSkillConfig(row.SKILL_RECORD_ID) != null)
+			{
+				returnValue.Add(row.SKILL_RECORD_ID);
+			}
+		}
+		return returnValue;
+	}
+
 	static void Load(TextAsset csv)
 	{
 		rowList.Clear();
@@ -38,19 +52,7 @@ public class UnitPassiveTable
 			rowList.Add(row);
 		}
 	}
-
-	public int NumRows()
-	{
-		return rowList.Count;
-	}
-
-	public Row GetAt(int i)
-	{
-		if(rowList.Count <= i)
-			return null;
-		return rowList[i];
-	}
-
+	
 	static Row Find_UNIT_RECORD_ID(string find)
 	{
 		return rowList.Find(x => x.UNIT_RECORD_ID == find);

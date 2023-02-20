@@ -15,13 +15,6 @@ public class SkillEditPage : MSceneProcess
     
     async UniTask EnterProcess()
     {
-        var CheckIfExceedLimit = SkillStonesBox.CheckIfExceedCellLimit();
-        if (CheckIfExceedLimit.Count > 0)
-        {
-            PreScene.target.trySwitchToStep(MainSceneStep.BoxOverLoadHelper, false);
-            return;
-        }
-
         var layer = UILayerLoader.Load<SkillEditLayer>();
         await layer.Setup((x) =>
         {

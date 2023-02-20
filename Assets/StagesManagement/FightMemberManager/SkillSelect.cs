@@ -58,7 +58,7 @@ public partial class StageEditor {
             GUILayout.Space(10f);
         }
         
-        SkillStonesBox.StoneFilterForm filterForm = new SkillStonesBox.StoneFilterForm
+        var filterForm = new SkillStonesBox.StoneFilterForm
         {
             Type = _focusingType,
             Close = _rangeFilter[0],

@@ -95,9 +95,15 @@ public partial class SkillSet
         A:
 
         var exceptSkIds = _skillSet.SkillIDList();
+        foreach (var passiveSKill in UnitPassiveTable.GetPassiveSKillRecordIds())
+        {
+            if (!exceptSkIds.Contains(passiveSKill))
+                exceptSkIds.Add(passiveSKill);
+        }
+        
         if (baseOnAcc)
         {
-            var stoneInfoModel = Stones.SearchStoneForRandomSet(filterForm, exceptSkIds);
+            var stoneInfoModel = Stones.SearchStoneForRandomSetFromAccount(filterForm, exceptSkIds);
             if (stoneInfoModel == null) // 如果账户已经没有符合要求的石头
             {
                 Debug.Log("无法为" + targetSlot + "找到合适技能石");
@@ -107,13 +113,13 @@ public partial class SkillSet
         }
         else
         {
-            var skid = RandomSkillIDOfStone(filterForm, exceptSkIds);
-            if (skid == null) // 如果账户已经没有符合要求的石头
+            var found = RandomSkillIDOfStone(filterForm, exceptSkIds);
+            if (found == null) // 如果账户已经没有符合要求的石头
             {
                 Debug.Log("无法为" + targetSlot + "找到合适技能石");
                 return null;
             }
-            skillId = skid;
+            skillId = found;
         }
 
         switch (targetSlot)

@@ -33,11 +33,13 @@ namespace dataAccess
         public static List<string> TargetStonesFromAccount(SkillStonesBox.StoneFilterForm filterForm)
         {
             var skillStonesOfTypeAndExType = new List<string>(); // instanceId list
+            var passiveSkill = UnitPassiveTable.GetPassiveSKillRecordIds();
+            
             foreach (var pair in Dic)
             {
-                if (pair.Value.Born == "true")
+                if (pair.Value.Born == "true" || passiveSkill.Contains(pair.Value.SkillId))
                 {
-                    continue;//原生技能不显示在技能石盒子内
+                    continue; //原生技能不显示在技能石盒子内
                 }
                 var skillConfig = SkillConfigTable.GetSkillConfig(pair.Value.SkillId);
                 if (skillConfig == null)
@@ -60,16 +62,16 @@ namespace dataAccess
         // extraList ：额外添加这些 技能石账户ID
         public static List<string> TargetStonesFromAccount_except(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptList, List<string> extraList, bool notUsing)
         {
-            var origin = TargetStonesFromAccount(filterForm);
-            var list = new List<string>();
-            for (var i = 0; i < origin.Count; i++)
+            var filteredList = TargetStonesFromAccount(filterForm);
+            var returnValue = new List<string>();
+            for (var i = 0; i < filteredList.Count; i++)
             {
-                if (extraList != null && extraList.Contains(origin[i]))
+                if (extraList != null && extraList.Contains(filteredList[i]))
                 {
-                    list.Add(origin[i]);
+                    returnValue.Add(filteredList[i]);
                     continue;
                 }
-                var infoModel = Get(origin[i]);
+                var infoModel = Get(filteredList[i]);
                 if (notUsing)
                 {
                     if (Units.Get(infoModel.UnitInstanceId) != null)
@@ -80,29 +82,28 @@ namespace dataAccess
 
                 if ((exceptList == null || !exceptList.Contains(infoModel.InstanceId)))
                 {
-                    list.Add(origin[i]);
+                    returnValue.Add(filteredList[i]);
                 }
             }
-            return list;
+            return returnValue;
         }
 
         // 从账户随机抽取符合要求的技能石
         // exceptSkIDs : 除了这些技能ID。切记是技能ID
-        public static StoneOfPlayerInfo SearchStoneForRandomSet(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIDs)
+        public static StoneOfPlayerInfo SearchStoneForRandomSetFromAccount(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptSkIds)
         {
-            StoneOfPlayerInfo infoModel;
-            List<string> exceptStones = new List<string>();
-            for (int i = 0; i < exceptSkIDs.Count; i++)
+            var exceptStones = new List<string>();
+            for (var i = 0; i < exceptSkIds.Count; i++)
             {
-                List<string> exceptAccIds = Stones.GetMyStonesBySkillID(exceptSkIDs[i]);
+                var exceptAccIds = GetMyStonesBySkillID(exceptSkIds[i]);
                 exceptStones.AddRange(exceptAccIds);
             }
-            List<string> stoneAccIDs = Stones.TargetStonesFromAccount_except(filterForm, exceptStones, null, true);
+            var stoneAccIDs = TargetStonesFromAccount_except(filterForm, exceptStones, null, true);
             if (stoneAccIDs.Count == 0)
                 return null;
-            int ranDom = Random.Range(0, stoneAccIDs.Count);
-            string stoneAccID = stoneAccIDs[ranDom];
-            infoModel = Stones.Get(stoneAccID);
+            var ranDom = Random.Range(0, stoneAccIDs.Count);
+            var stoneAccID = stoneAccIDs[ranDom];
+            var infoModel = Get(stoneAccID);
             return infoModel;
         }
 

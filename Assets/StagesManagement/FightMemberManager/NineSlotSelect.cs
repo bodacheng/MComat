@@ -16,11 +16,11 @@ public partial class StageEditor {
     
     void NineSlotPart()
     {
-        void SlotAnalyze(int _targetSlot)
+        void SlotAnalyze(int targetSlot)
         {
             string nowSkillID = null;
             SkillConfig defaultSkillConfig = null;
-            switch(_targetSlot)
+            switch(targetSlot)
             {
                 case 1:
                 nowSkillID = _focusingUnitInfo.set.a1;
@@ -128,9 +128,9 @@ public partial class StageEditor {
         GUILayout.EndHorizontal();
     }
     
-    bool Repeated(SkillSet _NineAndTwo, string recordID)
+    bool Repeated(SkillSet nineAndTwo, string recordID)
     {
-        var currentSkillList = _NineAndTwo.SkillIDList();
+        var currentSkillList = nineAndTwo.SkillIDList();
         var count = 0;
         for (var i = 0; i < currentSkillList.Count; i++)
         {

@@ -41,8 +41,7 @@
         Ranking = 25,
         
         ShopTop = 201,
-        BoxOverLoadHelper = 203,
-        
+
         QuestInfo = 8,
         ArcadeFront = 9,
         Arena = 3
