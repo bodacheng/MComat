@@ -3,11 +3,110 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9e8096-3c3c-4d33-926a-0ce476c05cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightOverProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightOverProcess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Arcade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/CloudScripts/Arcade.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ads/AdsInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ads/AdsInitializer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ads/GoogleMobileAdsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ads/GoogleMobileAdsManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/CHANGELOG.md.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/BuildPreProcessor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/BuildPreProcessor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAds.Editor.asmdef" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAds.Editor.asmdef.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsDependencies.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsDependencies.xml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsSKAdNetworkItems.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsSKAdNetworkItems.xml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsSettings.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsSettings.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsSettingsEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/GoogleMobileAdsSettingsEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/ManifestProcessor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/ManifestProcessor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/PListProcessor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/PListProcessor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/1024x768.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/1024x768.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/300x250.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/300x250.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/320x100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/320x100.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/320x480.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/320x480.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/320x50.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/320x50.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/468x60.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/468x60.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/480x320.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/480x320.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/728x90.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/728x90.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/768x1024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/768x1024.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/AdInspectorHome.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdImages/AdInspectorHome.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdInspector.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdInspector/768x1024.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AdInspector/768x1024.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AppOpen.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AppOpen/1024x768.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AppOpen/1024x768.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AppOpen/768x1024.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/AppOpen/768x1024.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/ADAPTIVE.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/ADAPTIVE.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/BANNER.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/BANNER.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/CENTER.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/CENTER.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/FULL_BANNER.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/FULL_BANNER.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/LARGE_BANNER.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/LARGE_BANNER.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/LEADERBOARD.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/LEADERBOARD.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/MEDIUM_RECTANGLE.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/MEDIUM_RECTANGLE.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/SMART_BANNER.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Banners/SMART_BANNER.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Interstitials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Interstitials/1024x768.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Interstitials/1024x768.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Interstitials/768x1024.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Interstitials/768x1024.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Rewarded.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Rewarded/1024x768.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Rewarded/1024x768.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Rewarded/768x1024.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Editor/Resources/DummyAds/Rewarded/768x1024.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Android.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Android.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Common.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Common.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Core.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Core.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Unity.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.Unity.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.iOS.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds.iOS.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds_version-7.2.0_manifest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/GoogleMobileAds_version-7.2.0_manifest.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Resources.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Resources/GoogleMobileAdsSettings.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/Resources/GoogleMobileAdsSettings.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/link.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/GoogleMobileAds/link.xml.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/iOS.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/iOS/GADUAdNetworkExtras.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/iOS/GADUAdNetworkExtras.h.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/iOS/unity-plugin-library.a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/iOS/unity-plugin-library.a.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -240,6 +339,7 @@
       <workItem from="1676868410891" duration="13972000" />
       <workItem from="1676884776507" duration="264000" />
       <workItem from="1676889960724" duration="4440000" />
+      <workItem from="1676939734468" duration="168000" />
     </task>
     <servers />
   </component>
