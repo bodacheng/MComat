@@ -25,5 +25,7 @@
 	<string>&lt;thin-for-all-variants&gt;</string>
 	<key>Bundle name</key>
 	<string>mcombat</string>
+	<key>embedsSwiftStandardLibraries</key>
+	<false/>
 </dict>
 </plist>
