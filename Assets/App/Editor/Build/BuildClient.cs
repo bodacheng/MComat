@@ -701,6 +701,9 @@ namespace Cocone.ProjectP3
 						project.AddFrameworkToProject(frameworkTargetGuid, "AdSupport.framework", true);
 					}
 				}
+				
+				project.SetBuildProperty(mainTargetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "NO");
+				project.SetBuildProperty(frameworkTargetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "NO");
 
 				// IOSカメラロールへのアクセス処理を使うためのフレームワーク追加
 				//project.AddFrameworkToProject(frameworkTargetGuid, "Photos.framework", false);
