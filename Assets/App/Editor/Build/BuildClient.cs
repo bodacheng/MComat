@@ -230,8 +230,8 @@ namespace Cocone.ProjectP3
 				"-BuildNumber", build_id,
 				"-OutputPath", output_path,
 				"-buildKind", "Dev",
-				"-keystorePass", "890710gxY", // TODO:unityから入力させたい
-				"-keyaliasPass", "890710gxY", // TODO:unityから入力させたい
+				"-keystorePass", "890710gxy", // TODO:unityから入力させたい
+				"-keyaliasPass", "890710gxy", // TODO:unityから入力させたい
 				"-androidArchitectures", "ARMv7;ARMv7;Arm64",
 			};
 
@@ -256,8 +256,8 @@ namespace Cocone.ProjectP3
 				"-BuildNumber", build_id,
 				"-OutputPath", output_path,
 				"-buildKind", "Release",
-				"-keystorePass", "890710gxY", // TODO:unityから入力させたい
-				"-keyaliasPass", "890710gxY", // TODO:unityから入力させたい
+				"-keystorePass", "890710gxy", // TODO:unityから入力させたい
+				"-keyaliasPass", "890710gxy", // TODO:unityから入力させたい
 				"-androidArchitectures", "ARMv7;ARM64",
 			};
 
