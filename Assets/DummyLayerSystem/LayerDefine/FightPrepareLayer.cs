@@ -7,6 +7,7 @@ public class FightPrepareLayer : UILayer
     [SerializeField] HeroIcon fighterIcon;
     [SerializeField] RectTransform myTeamShowT;
     [SerializeField] RectTransform enemyTeamShowT;
+    [SerializeField] float unitIconSize = 200;
     public Button editTeamButton; // 根据进入战斗模式决定是否显示
     public Button beginFight;
 
@@ -32,7 +33,7 @@ public class FightPrepareLayer : UILayer
         var icons = new List<HeroIcon>();
         foreach(var oneMember in HeroSets)
         {
-            var v = HeroIcon.ArrangeHeroIconToT(fighterIcon, oneMember, _ShowT);
+            var v = HeroIcon.ArrangeHeroIconToT(fighterIcon, oneMember, _ShowT, unitIconSize);
             icons.Add(v);
         }
         return icons;

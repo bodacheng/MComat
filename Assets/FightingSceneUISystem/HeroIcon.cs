@@ -125,13 +125,14 @@ public class HeroIcon : MonoBehaviour {
     }
     
     // 这个本身没问题但目前使用他的方式是有问题的。围绕SetParent(T);
-    public static HeroIcon ArrangeHeroIconToT(HeroIcon prefab, UnitInfo unitInfo, RectTransform T)
+    public static HeroIcon ArrangeHeroIconToT(HeroIcon prefab, UnitInfo unitInfo, RectTransform T, float iconSize = 100)
     {
         var icon = Instantiate(prefab);
         var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
         icon.unitInfo = unitInfo;
         icon.unitConfig = unitConfig;
         icon.ChangeIcon(unitInfo);
+        icon.GetComponent<RectTransform>().sizeDelta = new Vector2(iconSize,iconSize);
         icon.transform.SetParent(T);
         icon.transform.localPosition = Vector3.one;
         icon.transform.localScale = Vector3.one;

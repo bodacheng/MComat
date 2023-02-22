@@ -44,7 +44,9 @@ public class TryGotcha : TutorialProcess
         if (returnLayer == null)
             returnLayer = UILayerLoader.Get<ReturnLayer>();
         if (returnLayer != null)
-            returnLayer.gameObject.SetActive(false);
+        {
+            returnLayer.gameObject.SetActive(ProcessesRunner.Main.currentProcess.Step == MainSceneStep.DropTableInfo);
+        }
         
         if (gotchaResultLayer == null)
         {

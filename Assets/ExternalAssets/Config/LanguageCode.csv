@@ -26,7 +26,7 @@ DuplicateUsername,Duplicate Username,他のプレイヤーが既に使ってる,
 ,,,
 GotNewUnit,Joined your team !,チームに加入しました！,加入队伍!
 NoEnoughArenaTicket,Donnot have enough ticket. Come back later !,体力が足りないです。,竞技场体力不足
-EnterNickname,Please Enter Your Name( under 10 characters ),ネームを入力してください( 10 桁以下の半角英数字 ),请输入昵称（10文字以下半角英数字）
+EnterNickname,Enter Your Name( under 10 characters ),ネームを入力してください( 10 桁以下の半角英数字 ),请输入昵称（10文字以下半角英数字）
 ToNewStage,To New Stage, 最新ステージへ,最新关卡
 ,,,
 RankAwardIntro,本周赛季内达到各个段位后获取的报酬如下,本周赛季内达到各个段位后获取的报酬如下,本周赛季内达到各个段位后获取的报酬如下
@@ -111,6 +111,6 @@ AttackBtn3Intro,按下后将依次释放技能组第三行技能,按下后将依
 AutoBtnIntro,自动模式.点击可切换自动或手动,自动模式.点击可切换自动或手动,自动模式.点击可切换自动或手动
 HPEXIntro,玩家当前HP与气值，耗气的技能在气不够的情况下无法释放。,玩家当前HP与气值，耗气的技能在气不够的情况下无法释放。,玩家当前HP与气值，耗气的技能在气不够的情况下无法释放。
 ,,,
-TeamEditTutorial1,尝试点击角色icon，再点击slot来适配角色,尝试点击角色icon，再点击slot来适配角色,尝试点击角色icon，再点击slot来适配角色
-TeamEditTutorial2,尝试点击角色icon，再点击slot来适配角色,尝试点击角色icon，再点击slot来适配角色,尝试点击角色icon，再点击slot来适配角色
+TeamEditTutorial1,尝试点击角色铁也的头像，再点击队伍槽来让他加入战斗,尝试点击角色铁也的头像，再点击队伍槽来让他加入战斗,尝试点击角色铁也的头像，再点击队伍槽来让他加入战斗
+TeamEditTutorial2,尝试点击角色春香的头像，再点击队伍槽来让他加入战斗,尝试点击角色春香的头像，再点击队伍槽来让他加入战斗,尝试点击角色春香的头像，再点击队伍槽来让他加入战斗
 SaveYourTeam,点击确定保存队伍,点击确定保存队伍,点击确定保存队伍

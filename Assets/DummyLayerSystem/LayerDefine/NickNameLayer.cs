@@ -16,6 +16,11 @@ public class NickNameLayer : UILayer
     {
         OK.onClick.AddListener(async ()=>
         {
+            if (String.IsNullOrEmpty(nickNameInput.text))
+            {
+                return;
+            }
+            
             BWFManager.Instance.Load();
             await UniTask.WaitUntil(()=> BWFManager.Instance.isReady);
             var filteredWord = BadWordFilter(nickNameInput.text);

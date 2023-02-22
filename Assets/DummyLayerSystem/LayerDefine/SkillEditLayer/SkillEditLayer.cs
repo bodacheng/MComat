@@ -82,6 +82,11 @@ public partial class SkillEditLayer : UILayer
             var valid = nineSlot.CheckEditBasedOnCurrent();
             if (valid != SkillSet.SkillEditError.Perfect)
             {
+                if (PlayerAccountInfo.Me.tutorialProgress != "Finished")
+                {
+                    PopupLayer.ArrangeWarnWindow(Translate.Get("PlsFillAll"));
+                    return;
+                }
                 // 比如想给角色卸载全部技能的时候，虽然全部卸载后不能再战斗但是需要更新。
                 PopupLayer.ArrangeConfirmWindow(SkillEditConfirm, Translate.Get("NotLegalButStillUpdate"));
             }

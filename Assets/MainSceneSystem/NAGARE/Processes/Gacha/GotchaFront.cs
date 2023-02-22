@@ -81,10 +81,11 @@ public class GotchaFront : MSceneProcess
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
         upperInfoBar.Setup(null,
             null,null,
+            PlayerAccountInfo.Me.tutorialProgress == "Finished" ?
             () =>
             {
                 PreScene.target.trySwitchToStep(MainSceneStep.ShopTop);
-            });
+            }:null);
         
         SetLoaded(true);
     }
