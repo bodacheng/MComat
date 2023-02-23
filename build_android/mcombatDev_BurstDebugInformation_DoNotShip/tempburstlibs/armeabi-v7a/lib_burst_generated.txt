@@ -1,4 +1,4 @@
-Library: C:\Users\bodacheng\MComat\Temp\StagingArea\tempburstlibs\armeabi-v7a\lib_burst_generated
+Library: /Users/hakutaisei/MComatAndroid/Temp/StagingArea/tempburstlibs/armeabi-v7a/lib_burst_generated
 --platform=Android
 --backend=burst-llvm-14
 --target=ARMV7A_NEON32
@@ -141,9 +141,9 @@ Library: C:\Users\bodacheng\MComat\Temp\StagingArea\tempburstlibs\armeabi-v7a\li
 --compilation-defines=ENABLE_ASYNC_ASSETBUNDLE_UWR
 --compilation-defines=UNITASK_ADDRESSABLE_SUPPORT
 --compilation-defines=UNITASK_TEXTMESHPRO_SUPPORT
---generate-link-xml=Temp\burst.link.xml
---temp-folder=C:\Users\bodacheng\MComat\Temp\Burst
---output=C:\Users\bodacheng\MComat\Temp\StagingArea\tempburstlibs\armeabi-v7a\lib_burst_generated
+--generate-link-xml=Temp/burst.link.xml
+--temp-folder=/Users/hakutaisei/MComatAndroid/Temp/Burst
+--output=/Users/hakutaisei/MComatAndroid/Temp/StagingArea/tempburstlibs/armeabi-v7a/lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
 --pdb-search-paths=Temp/ManagedSymbols/
 
