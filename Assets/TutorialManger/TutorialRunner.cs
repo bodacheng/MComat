@@ -72,7 +72,7 @@ public class TutorialRunner
     void GenerateStep4Tutorial()
     {
         var goTo = new GoTo("unit");
-        var openSkillEdit = new OpenSkillEdit("2");
+        var openSkillEdit = new OpenSkillEdit("1");
         var skillEditTry = new SkillEditTry("openInstruction2");
         var forceBack = new ForceBack(
             () => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage
