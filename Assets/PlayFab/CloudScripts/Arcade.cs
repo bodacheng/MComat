@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using PlayFab.ServerModels;
-using UnityEngine;
 using ExecuteCloudScriptResult = PlayFab.ClientModels.ExecuteCloudScriptResult;
 
 public partial class CloudScript
@@ -37,7 +36,8 @@ public partial class CloudScript
                         foreach (var item in unitAward)
                         {
                             var unitConfig = Units.GetUnitConfig(item.ItemId);
-                            PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get(unitConfig.REAL_NAME) + Translate.Get("GotNewUnit"), item.ItemId);
+                            PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get(unitConfig.REAL_NAME) + "\n"
+                                                                 + Translate.Get("GotNewUnit"), item.ItemId);
                         }
                     }
                 }
