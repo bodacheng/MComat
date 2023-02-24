@@ -24,13 +24,14 @@ public partial class PlayFabReadClient
         }
     }
     
-    public static string CustomIdNoDefaultValue
+    public static string DontShowFrontFight
     {
         get
         {
-            var customId = PlayerPrefs.GetString(PLAYFAB_CUSTOM_ID, null);
+            var customId = PlayerPrefs.GetString("DontShowFrontFight", null);
             return customId;
         }
+        set => PlayerPrefs.SetString("DontShowFrontFight", value);
     }
 
     public enum LoginType

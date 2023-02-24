@@ -135,6 +135,7 @@ public class TutorialRunner
             case "Started":
                 Main.GenerateStep1Tutorial();
                 Main.StartToMove();
+                PlayFabReadClient.DontShowFrontFight = "false";
                 break;
             case "SkillEditFinished": // 技能编辑教程结束 
                 Main.GenerateStep2Tutorial();
@@ -153,6 +154,7 @@ public class TutorialRunner
                 Main.StartToMove();
                 break;
             case "Finished":
+                PlayFabReadClient.DontShowFrontFight = "true";
                 break;
             default:
                 break;

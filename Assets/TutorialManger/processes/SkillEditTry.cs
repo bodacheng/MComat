@@ -75,6 +75,7 @@ public class SkillEditTry : TutorialProcess
                             () =>
                             {
                                 PlayerAccountInfo.Me.tutorialProgress = nextTutorialProgress;
+                                PlayFabReadClient.DontShowFrontFight = "true";
                                 _skillEditFinished = true;
                                 _skillEditLayer.nineSlot.confirmBtnIndicator.SetActive(false);
                             },

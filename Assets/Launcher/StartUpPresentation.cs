@@ -76,7 +76,7 @@ public class StartUpPresentation : MonoBehaviour
     {
         HighLightLayer.Close();
         await starter.Initialise();
-        if (frontSceneFight && PlayFabReadClient.CustomIdNoDefaultValue == null)
+        if (frontSceneFight && PlayFabReadClient.DontShowFrontFight != "true")
         {
             starter.EnterFrontScene();
         }
