@@ -4,7 +4,6 @@
     <package>androidx.lifecycle:lifecycle-process:2.4.1</package>
     <package>com.google.android.gms:play-services-ads:21.3.0</package>
     <package>com.google.android.ump:user-messaging-platform:2.0.0</package>
-    <package>com.unity3d.mediation:admob-adapter:[1.0,2.0[</package>
     <package>com.unity3d.mediation:mediation-sdk:[1.0,2.0[</package>
     <package>com.unity3d.mediation:unityads-adapter:[1.0,2.0[</package>
   </packages>
@@ -66,7 +65,6 @@
     <file>Assets/Plugins/Android/com.squareup.okhttp3.okhttp-4.6.0.jar</file>
     <file>Assets/Plugins/Android/com.squareup.okio.okio-2.6.0.jar</file>
     <file>Assets/Plugins/Android/com.unity3d.ads.unity-ads-4.5.0.aar</file>
-    <file>Assets/Plugins/Android/com.unity3d.mediation.admob-adapter-1.1.0.aar</file>
     <file>Assets/Plugins/Android/com.unity3d.mediation.mediation-adapter-1.1.0.aar</file>
     <file>Assets/Plugins/Android/com.unity3d.mediation.mediation-logger-1.1.0.aar</file>
     <file>Assets/Plugins/Android/com.unity3d.mediation.mediation-sdk-1.1.0.aar</file>
