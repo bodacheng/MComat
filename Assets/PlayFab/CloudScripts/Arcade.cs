@@ -1,8 +1,18 @@
 using PlayFab.ClientModels;
 using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using PlayFab.ServerModels;
+using UnityEngine;
+using ExecuteCloudScriptResult = PlayFab.ClientModels.ExecuteCloudScriptResult;
 
 public partial class CloudScript
 {
+    /// <summary>
+    /// claimQuestRewardSuccess基于的是claimQuestReward的结果而不是completedLevel
+    /// </summary>
+    /// <param name="_stage"></param>
+    /// <param name="claimQuestRewardSuccess"></param>
     public static void ArcadeProgress(string _stage, Action<ExecuteCloudScriptResult> claimQuestRewardSuccess)
     {
         // 之所以把更新关卡进度和获取报酬分开处理，是因为当时把这些处理写到一个cloud函数里的时候，
@@ -17,38 +27,28 @@ public partial class CloudScript
             },
             (x) =>
             {
+                if (x.FunctionResult != null && !String.IsNullOrEmpty(x.FunctionResult.ToString()))
+                {
+                    var jsonResult = (PlayFab.Json.JsonObject)x.FunctionResult;
+                    if (jsonResult.ContainsKey("award_unit"))
+                    {
+                        var award_unit = jsonResult["award_unit"];
+                        var unitAward = JsonConvert.DeserializeObject<List<GrantedItemInstance>>(award_unit.ToString());
+                        foreach (var item in unitAward)
+                        {
+                            var unitConfig = Units.GetUnitConfig(item.ItemId);
+                            PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get(unitConfig.REAL_NAME) + Translate.Get("GotNewUnit"), item.ItemId);
+                        }
+                    }
+                }
+                
                 ExecuteCloudScriptMainSceneCommon(
                     new ExecuteCloudScriptRequest
                     {
                         FunctionName = "claimQuestReward",
                         FunctionParameter = new { stage = _stage }
                     },
-                    (x)=>
-                    {
-                        claimQuestRewardSuccess(x);
-                        var stageInt = Int32.Parse(_stage);
-                        switch (stageInt)
-                        {
-                            case 1:
-                                PopupLayer.ArrangeWarnWindowUnitIcon(" tetsuya  " + Translate.Get("GotNewUnit"), "2");
-                                break;
-                            case 5:
-                                PopupLayer.ArrangeWarnWindowUnitIcon(" adam  " + Translate.Get("GotNewUnit"), "1");
-                                break;
-                            case 20:
-                                PopupLayer.ArrangeWarnWindowUnitIcon(" maggie  " + Translate.Get("GotNewUnit"), "4");
-                                break;
-                            case 35:
-                                PopupLayer.ArrangeWarnWindowUnitIcon(" yuta  " + Translate.Get("GotNewUnit"), "7");
-                                break;
-                            case 50:
-                                PopupLayer.ArrangeWarnWindowUnitIcon(" sybill  " + Translate.Get("GotNewUnit"), "6");
-                                break;
-                            case 100:
-                                PopupLayer.ArrangeWarnWindowUnitIcon(" et  " + Translate.Get("GotNewUnit"), "5");
-                                break;
-                        }
-                    }
+                    claimQuestRewardSuccess
                 );
             }
         );

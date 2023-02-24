@@ -25,7 +25,7 @@ public partial class CloudScript
                 Currencies.CoinCount.Value += gdInt;
                 Currencies.DiamondCount.Value += dmInt;
                 
-                var claimedIds =JsonConvert.DeserializeObject<List<string>>(unLockedIdList.ToString());
+                var claimedIds = JsonConvert.DeserializeObject<List<string>>(unLockedIdList.ToString());
                 foreach (var data in _myMailList)
                 {
                     if (claimedIds.Contains(data.ItemInstanceId))

@@ -70,7 +70,7 @@ function GrantItemToCurrentUser(itemIds, CatalogVersion)
         "ItemIds" : itemIds
     };
     var GrantItemsToUserResult = server.GrantItemsToUser(GrantItemsToUserRequest);
-    log.info(GrantItemsToUserResult);
+    //log.info(GrantItemsToUserResult);
     return GrantItemsToUserResult.ItemGrantResults;
 }
 
@@ -201,7 +201,37 @@ handlers.completedLevel = function (args, context) {
             ]
         }
     );
-    return { playerStatResult };
+
+    var unit_award = []
+    switch (newLevelCompleted) {
+        case 1:
+            unit_award = ["2"];
+            break;
+        case 5:
+            unit_award = ["1"];
+            break;
+        case 20:
+            unit_award = ["4"];
+            break;
+        case 35:
+            unit_award = ["7"];
+            break;
+        case 50:
+            unit_award = ["6"];
+            break;
+        case 100:
+            unit_award = ["5"];
+            break;
+        default:
+            break;
+    }
+
+    if (unit_award.length > 0) {
+        var award_unit = GrantItemToCurrentUser(unit_award, "unit");
+        return { award_unit };
+    }else{
+        return null;
+    }
 };
 
 handlers.claimQuestReward = function (args, context) {
