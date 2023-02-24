@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d925f231-b143-4d93-a2e1-3e61378d5f2e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MComatAndroid/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MComatAndroid/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SettingLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/SettingLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Config/LanguageCode.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/LanguageCode.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Launcher/StartUpPresentation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Launcher/StartUpPresentation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFab/Client/Login.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFab/Client/Login.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/TutorialRunner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/TutorialRunner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TutorialManger/processes/SkillEditTry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TutorialManger/processes/SkillEditTry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1677158009433</updated>
       <workItem from="1677158027268" duration="328000" />
-      <workItem from="1677223721148" duration="3715000" />
+      <workItem from="1677223721148" duration="5551000" />
     </task>
     <servers />
   </component>
