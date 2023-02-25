@@ -26,9 +26,15 @@ public class CommonSetting : ScriptableObject
     
     [Tooltip("语言code文件")]
     [SerializeField] string languageCodeFile = "LanguageCode";
+
+    [Tooltip("audio source key")] 
+    [SerializeField] string lobbyThemeAddressKey = "music/lobby";
+    [SerializeField] string fightThemeAddressKey1 = "music/fight1";
+    [SerializeField] string fightThemeAddressKey2 = "music/fight2";
+    [SerializeField] string fightThemeAddressKey3 = "music/fight3"; 
     
     public static bool DevMode;
-    public static int MAXStoneCount;
+    public static int MaxStoneCount;
     public static string UnitConfigFile;
     public static string SkillConfigFile;
     public static string SkillAIFile;
@@ -37,11 +43,16 @@ public class CommonSetting : ScriptableObject
     public static string SkillDynamicAnalysis;
     public static string PassiveSKillFile;
     public static string LanguageCodeFile;
+
+    public static string LobbyThemeAddressKey;
+    public static string FightThemeAddressKey1;
+    public static string FightThemeAddressKey2;
+    public static string FightThemeAddressKey3;
     
     public void Initialise()
     {
         DevMode = devMode;
-        MAXStoneCount = maxStoneCount;
+        MaxStoneCount = maxStoneCount;
         SkillStaticAnalysis = skillStaticAnalysis;
         SkillDynamicAnalysis = skillDynamicAnalysis;
         UnitConfigFile = unitConfigFile;
@@ -50,5 +61,10 @@ public class CommonSetting : ScriptableObject
         SkillNameFile = skillNameFile;
         LanguageCodeFile = languageCodeFile;
         PassiveSKillFile = passiveSKillFile;
+
+        LobbyThemeAddressKey = lobbyThemeAddressKey;
+        FightThemeAddressKey1 = fightThemeAddressKey1;
+        FightThemeAddressKey2 = fightThemeAddressKey2;
+        FightThemeAddressKey3 = fightThemeAddressKey3;
     }
 }

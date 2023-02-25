@@ -16,7 +16,7 @@ namespace dataAccess
 
         public static bool TooManyStones()
         {
-            return Dic.Count > CommonSetting.MAXStoneCount;
+            return Dic.Count > CommonSetting.MaxStoneCount;
         }
         
         public static void ClearRender()

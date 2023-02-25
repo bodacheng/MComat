@@ -8,9 +8,25 @@ using PlayFab.ClientModels;
 public class FightInfo : ScriptableObject
 {
     public int battleGroundID;
+    public int fightBGM = 0;
     
     [SerializeField] private Sprite stageButtonSprite;
     [SerializeField] private List<UnitInfo> unitsData = new ();
+    
+    public string GetBGMKey()
+    {
+        switch (fightBGM)
+        {
+            case 0:
+                return CommonSetting.FightThemeAddressKey1;
+            case 1:
+                return CommonSetting.FightThemeAddressKey2;
+            case 2:
+                return CommonSetting.FightThemeAddressKey3;
+            default:
+                return null;
+        }
+    }
     
     public FightEventType EventType
     {
@@ -45,8 +61,8 @@ public class FightInfo : ScriptableObject
         set;
         get;
     }
-    public string Team1ID{ set; get; }
-    public string Team2ID{ set; get; }
+    public string Team1ID { set; get; }
+    public string Team2ID { set; get; }
     
     public PlayerLeaderboardEntry Team1LeaderboardEntry {
         set;
@@ -166,6 +182,7 @@ public class FightInfo : ScriptableObject
         stage.ID = source.ID;
         stage.FightMembers = source.FightMembers;
         stage.battleGroundID = source.battleGroundID;
+        stage.fightBGM = source.fightBGM;
         stage.team1Mode = source.team1Mode;
         stage.team2Mode = source.team2Mode;
         stage.Team1Auto = source.Team1Auto;
@@ -191,6 +208,7 @@ public class FightInfo : ScriptableObject
         var stage = CreateInstance<FightInfo>();
         stage.FightMembers = FightMembers.RandomSkillTest(teamMode);
         stage.battleGroundID = 0;
+        stage.fightBGM = 0;
         stage.Team1Auto = true;
         stage.Team2Auto = true;
         stage.team1Mode = teamMode;
@@ -204,6 +222,7 @@ public class FightInfo : ScriptableObject
         var stage = CreateInstance<FightInfo>();
         stage.FightMembers = FightMembers.RandomFight();
         stage.battleGroundID = 0;
+        stage.fightBGM = 0;
         stage.team1Mode = TeamMode.Rotation;
         stage.team2Mode = TeamMode.Rotation;
         stage.EventType = FightEventType.Arena;

@@ -27,6 +27,7 @@ public class PreparingProcess : FSceneProcess
         
         var tasks = new List<UniTask>
         {
+            AppSetting.PlayBGM(FightScene.FightScene.Fight.GetBGMKey()),
             AddressablesLogic.Essentials(),
             BoundaryControlByGod.target.ChangeBackGround(FightScene.FightScene.Fight.battleGroundID),
             RTFightManager.Target.LoadUnits(FightScene.FightScene.Fight),
@@ -35,6 +36,7 @@ public class PreparingProcess : FSceneProcess
             EffectsManager.IniEffectsPool("break_free", null, 3),
             EffectsManager.IniEffectsPool("memberShift", null, 3)
         };
+        
         await UniTask.WhenAll(tasks);
         
         var teamMembers = new Dictionary<TeamConfig, List<Data_Center>>();

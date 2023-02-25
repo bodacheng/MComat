@@ -5,7 +5,6 @@ using DummyLayerSystem;
 using mainMenu;
 using ModelView;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace FightScene
 {

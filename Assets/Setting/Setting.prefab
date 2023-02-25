@@ -3163,7 +3163,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8612624511278194158}
-        m_MethodName: onEffectsSoundChange
+        m_MethodName: OnEffectChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4474,7 +4474,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8612624511278194158}
-        m_MethodName: onBgmChange
+        m_MethodName: OnBgmChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5643,7 +5643,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8612624511278194158}
-        m_MethodName: onCVsChange
+        m_MethodName: OnCVsChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

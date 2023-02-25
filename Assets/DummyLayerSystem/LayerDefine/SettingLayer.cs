@@ -221,10 +221,10 @@ public class SettingLayer : UILayer
             });
         });
         
-        onBgmChange();
-        onCVsChange();
-        onEffectsSoundChange();
         ResetSliders();
+        OnBgmChange();
+        OnCVsChange();
+        OnEffectChange();
         
         linkDeviceBtn.onClick.AddListener(() =>
             {
@@ -271,16 +271,18 @@ public class SettingLayer : UILayer
         cvSlider.value = AppSetting.Value.CvVolume;
     }
     
-    public void onBgmChange()
+    public void OnBgmChange()
     {
         AppSetting.Value.BgmVolume = bgmSlider.value;
     }
-    public void onCVsChange()
-    {
-        AppSetting.Value.CvVolume = cvSlider.value;        
-    }
-    public void onEffectsSoundChange()
+    
+    public void OnEffectChange()
     {
         AppSetting.Value.EffectsVolume = effectsSoundsSlider.value;
+    }
+    
+    public void OnCVsChange()
+    {
+        AppSetting.Value.CvVolume = cvSlider.value;        
     }
 }

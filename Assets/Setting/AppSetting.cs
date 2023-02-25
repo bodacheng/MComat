@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.IO;
+using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using Json;
 
@@ -10,6 +11,15 @@ public class AppSetting
     public static AudioSource bgmSource;
 
     public SystemLanguage Language { get; set; } = SystemLanguage.English;
+
+    private string lobbyTheme ;
+    
+    public static async UniTask PlayBGM(string addressKey)
+    {
+        var clip = await AddressablesLogic.LoadT<AudioClip>(addressKey);
+        bgmSource.clip = clip;
+        bgmSource.Play();
+    }
     
     public float BgmVolume
     {
