@@ -33,10 +33,10 @@ namespace GoogleMobileAds.Editor
         }
 
         [SerializeField]
-        private string adMobAndroidAppId = string.Empty;
+        private string adMobAndroidAppId = "ca-app-pub-3094747799359437~1278891646";
 
         [SerializeField]
-        private string adMobIOSAppId = string.Empty;
+        private string adMobIOSAppId = "ca-app-pub-3094747799359437~9758804477";
 
         [SerializeField]
         private bool delayAppMeasurementInit;
