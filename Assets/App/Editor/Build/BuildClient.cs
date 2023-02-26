@@ -29,7 +29,6 @@ namespace Cocone.ProjectP3
 		public string keyaliasPass;
 		public string buildKind;
 		public string assetKind;
-		public bool forceTestLogin;
 		public HashSet<AndroidArchitecture> androidArchitectures;
 
 		public BuildTargetGroup TargetGroup
@@ -279,14 +278,19 @@ namespace Cocone.ProjectP3
 			var config = new PlayerBuildConfig
 			{
 				options = BuildOptions.None,
-				useAndroidAppBundle = false,
-				forceTestLogin = false,
+				useAndroidAppBundle = false
 			};
 
 			for (int i = 0; i < args.Length; i++)
 			{
 				switch (args[i])
 				{
+					case "-developmentBuild":
+						if (args[i + 1] == "true")
+						{
+							config.options = BuildOptions.Development;
+						}
+						break;
 					case "-BuildNumber":
 						config.buildNumber = int.Parse(args[i + 1]);
 						i++;
@@ -339,10 +343,6 @@ namespace Cocone.ProjectP3
 						config.buildKind = args[i + 1];
 						i++;
 						break;
-					
-					case "-forceTestLogin":
-						config.forceTestLogin = true;
-						break;
 				}
 			}
 			
@@ -356,7 +356,7 @@ namespace Cocone.ProjectP3
 		/**
 		 * ビルド種別に応じたシーンリストを返す
 		 */
-		private static string[] GetTargetScenes(PlayerBuildConfig.BuildKind kind, bool forceTestLogin)
+		private static string[] GetTargetScenes(PlayerBuildConfig.BuildKind kind)
 		{
 			return EditorBuildSettings.scenes.Select(x => x.path).ToArray();
 		}
@@ -465,7 +465,7 @@ namespace Cocone.ProjectP3
 				// ビルド番号を付与
 				PlayerSettings.Android.bundleVersionCode = config.buildNumber;
 				
-				//if (config.uploadToStore)
+				if (config.uploadToStore)
 				{
 					PlayerSettings.Android.useCustomKeystore = true;
 					if (!string.IsNullOrEmpty(BuildConfigurations.keystoreName))
@@ -490,7 +490,7 @@ namespace Cocone.ProjectP3
 			
 			var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
 			{
-				scenes = GetTargetScenes(GetBuildKind(config.buildKind), config.forceTestLogin),
+				scenes = GetTargetScenes(GetBuildKind(config.buildKind)),
 				locationPathName = config.GetOutputPath(PlayerSettings.productName),
 				target = config.buildTarget,
 				targetGroup = config.TargetGroup,
