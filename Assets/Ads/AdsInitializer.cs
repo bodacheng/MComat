@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Advertisements;
-using GoogleMobileAds.Api;
+//using GoogleMobileAds.Api;
 
 public class AdsInitializer : MonoBehaviour//, IUnityAdsInitializationListener
 {
@@ -15,10 +15,10 @@ public class AdsInitializer : MonoBehaviour//, IUnityAdsInitializationListener
         InitializeAds();
         
         // Google admob
-        MobileAds.Initialize(initStatus =>
-        {
-            Debug.Log("谷歌广告插件初始化状态："+initStatus);
-        });
+        // MobileAds.Initialize(initStatus =>
+        // {
+        //     Debug.Log("谷歌广告插件初始化状态："+initStatus);
+        // });
     }
  
     public void InitializeAds()
