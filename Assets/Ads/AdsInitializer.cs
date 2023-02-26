@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Advertisements;
 //using GoogleMobileAds.Api;
 
-public class AdsInitializer : MonoBehaviour//, IUnityAdsInitializationListener
+public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 {
     [SerializeField] string _androidGameId;
     [SerializeField] string _iOSGameId;
@@ -30,7 +30,7 @@ public class AdsInitializer : MonoBehaviour//, IUnityAdsInitializationListener
 #if UNITY_ANDROID
         _gameId = _androidGameId;
 #endif
-        //Advertisement.Initialize(_gameId, _testMode, this);
+        Advertisement.Initialize(_gameId, _testMode, this);
     }
  
     public void OnInitializationComplete()
@@ -38,8 +38,8 @@ public class AdsInitializer : MonoBehaviour//, IUnityAdsInitializationListener
         Debug.Log("Unity Ads initialization complete.");
     }
  
-    // public void OnInitializationFailed(UnityAdsInitializationError error, string message)
-    // {
-    //     Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
-    // }
+    public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+    {
+        Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
+    }
 }
