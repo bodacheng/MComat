@@ -449,10 +449,13 @@ namespace Cocone.ProjectP3
 			}
 			else if (config.buildTarget == BuildTarget.Android)
 			{
-				var originManifest = File.ReadAllText(AndroidManifestPath);
-				var text = originManifest.Replace("${app_id}", BuildConfigurations.applicationIdentifier);
-				File.WriteAllText(AndroidManifestPath, text);
-
+				if (File.Exists(AndroidManifestPath))
+				{
+					var originManifest = File.ReadAllText(AndroidManifestPath);
+					var text = originManifest.Replace("${app_id}", BuildConfigurations.applicationIdentifier);
+					File.WriteAllText(AndroidManifestPath, text);
+				}
+				
 				// architecturesの設定
 				if (config.androidArchitectures != null && config.androidArchitectures.Any())
 				{
