@@ -79,7 +79,7 @@ namespace Cocone.ProjectP3
 
 	public static class Client
 	{
-		private const string AndroidManifestPath = "Assets/AndroidManifest.xml";
+		private const string AndroidManifestPath = "Assets/Plugins/Android/AndroidManifest.xml";
 
 		/**
 		 * ビルド種別の取得
@@ -449,9 +449,9 @@ namespace Cocone.ProjectP3
 			}
 			else if (config.buildTarget == BuildTarget.Android)
 			{
-				//var originManifest = File.ReadAllText(AndroidManifestPath);
-				//var text = originManifest.Replace("${app_id}", BuildConfigurations.applicationIdentifier);
-				//File.WriteAllText(AndroidManifestPath, text);
+				var originManifest = File.ReadAllText(AndroidManifestPath);
+				var text = originManifest.Replace("${app_id}", BuildConfigurations.applicationIdentifier);
+				File.WriteAllText(AndroidManifestPath, text);
 
 				// architecturesの設定
 				if (config.androidArchitectures != null && config.androidArchitectures.Any())
