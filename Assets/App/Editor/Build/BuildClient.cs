@@ -465,7 +465,7 @@ namespace Cocone.ProjectP3
 				// ビルド番号を付与
 				PlayerSettings.Android.bundleVersionCode = config.buildNumber;
 				
-				if (config.uploadToStore)
+				//if (config.uploadToStore)
 				{
 					PlayerSettings.Android.useCustomKeystore = true;
 					if (!string.IsNullOrEmpty(BuildConfigurations.keystoreName))
