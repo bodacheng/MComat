@@ -8,11 +8,13 @@ public class StartUpPresentation : MonoBehaviour
     [SerializeField] Starter starter;
     [SerializeField] RectTransform t;
     [SerializeField] bool frontSceneFight;
-
+    [SerializeField] AudioSource audioSource;
+    
     void Start()
     {
         Screen.SetResolution(1920, 1080, true);
         UILayerLoader.SetHanger(t);
+        AppSetting.bgmSource = audioSource;
         OnStart().Forget();
     }
 
@@ -82,6 +84,8 @@ public class StartUpPresentation : MonoBehaviour
         }
         else
         {
+            AppSetting.Load();
+            await AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey);
             var titleBgLayer= UILayerLoader.Load<TitleBgLayer>();
             titleBgLayer.Setup(false);
             var titleScreenLayer = UILayerLoader.Load<TitleScreenLayer>();

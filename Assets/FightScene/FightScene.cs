@@ -54,7 +54,6 @@ namespace FightScene
             Screen.SetResolution(1920, 1080, true);
             
             AppSetting.bgmSource = audioSource;
-            AppSetting.Load();
             Application.targetFrameRate = 60;
             FightGlobalSetting._sceneStep = 1;
             

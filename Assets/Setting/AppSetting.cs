@@ -48,7 +48,7 @@ public class AppSetting
             _cvVolume = Mathf.Clamp(value, 0, 1);
         }
     }
-
+    
     public static void Save()
     {
         string json = JsonConvert.SerializeObject(Value);
@@ -62,7 +62,6 @@ public class AppSetting
         {
             var dataAsJson = File.ReadAllText(wholePath);
             Value = JsonConvert.DeserializeObject<AppSetting>(dataAsJson);
-            Debug.Log("基本程序设置读取成功");
         }
         else
         {
@@ -74,5 +73,6 @@ public class AppSetting
             };
             Save();
         }
+        Value.BgmVolume = Value.BgmVolume;
     }
 }
