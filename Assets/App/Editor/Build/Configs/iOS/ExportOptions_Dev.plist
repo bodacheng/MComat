@@ -25,5 +25,19 @@
 	<string>&lt;thin-for-all-variants&gt;</string>
 	<key>Bundle name</key>
 	<string>mcombatDev</string>
+	<key>SKAdNetworkItems</key>
+	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>su67r6k2v3.skadnetwork</string>
+		</dict>
+	</array>
+	<key>NSAdvertisingAttributionReportEndpoint</key>
+	<string>https://postbacks-is.com</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
