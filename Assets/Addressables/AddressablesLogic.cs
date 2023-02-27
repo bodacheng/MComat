@@ -14,7 +14,7 @@ public static class AddressablesLogic
     {
         await HurtObjectManager.CheckExistedKey();
         await EffectsManager.CheckExistedKey();
-        HurtObjectManager.ConstructDPool();
+        await HurtObjectManager.ConstructDPool();
     }
     
     static async UniTask<long> DownLoadSize(string label, Action exceptionProcess)
