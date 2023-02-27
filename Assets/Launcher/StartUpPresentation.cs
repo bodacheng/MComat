@@ -83,7 +83,7 @@ public class StartUpPresentation : MonoBehaviour
         }
         else
         {
-            await AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey);
+            await AppSetting.PlayBGM(CommonSetting.StartThemeAddressKey);
             var titleBgLayer= UILayerLoader.Load<TitleBgLayer>();
             titleBgLayer.Setup(false);
             var titleScreenLayer = UILayerLoader.Load<TitleScreenLayer>();

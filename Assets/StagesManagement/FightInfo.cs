@@ -21,10 +21,8 @@ public class FightInfo : ScriptableObject
                 return CommonSetting.FightThemeAddressKey1;
             case 1:
                 return CommonSetting.FightThemeAddressKey2;
-            case 2:
-                return CommonSetting.FightThemeAddressKey3;
             default:
-                return null;
+                return CommonSetting.FightThemeAddressKey1;
         }
     }
     

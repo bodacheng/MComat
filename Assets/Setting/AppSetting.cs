@@ -18,6 +18,7 @@ public class AppSetting
     {
         var clip = await AddressablesLogic.LoadT<AudioClip>(addressKey);
         BGMSource.clip = clip;
+        BGMSource.loop = true;
         BGMSource.Play();
     }
     

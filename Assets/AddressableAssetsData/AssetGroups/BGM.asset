@@ -23,17 +23,17 @@ MonoBehaviour:
     m_SerializedLabels:
     - music
   - m_GUID: 47a487b7ac156458fb3be6ba095ff1e0
-    m_Address: music/fight2
+    m_Address: music/fight1
     m_ReadOnly: 0
     m_SerializedLabels:
     - music
   - m_GUID: f1acd6908a0f945adaeb8b8cbf8d75e9
-    m_Address: music/fight3
+    m_Address: music/fight2
     m_ReadOnly: 0
     m_SerializedLabels:
     - music
   - m_GUID: 7901b554c073c41a3800c9a8aa962fa8
-    m_Address: music/fight1
+    m_Address: music/start
     m_ReadOnly: 0
     m_SerializedLabels:
     - music
