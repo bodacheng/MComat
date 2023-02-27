@@ -708,6 +708,10 @@ namespace Cocone.ProjectP3
 				project.SetBuildProperty(mainTargetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "NO");
 				project.SetBuildProperty(frameworkTargetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "NO");
 
+				// 我们自己加的。网上看到的所谓处理linker问题的办法
+				//project.SetBuildProperty(frameworkTargetGuid, "EXCLUDED_ARCHS", "i386");
+				//project.AddBuildProperty(frameworkTargetGuid, "EXCLUDED_ARCHS", "x86_64");
+				
 				// IOSカメラロールへのアクセス処理を使うためのフレームワーク追加
 				//project.AddFrameworkToProject(frameworkTargetGuid, "Photos.framework", false);
 
