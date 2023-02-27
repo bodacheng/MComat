@@ -72,6 +72,31 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.g
       value: 0.8603474
       objectReference: {fileID: 0}
+    - target: {fileID: 3921387121971976343, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921387121971976343, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921387121971976343, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921387121971976343, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0.7746937
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921387121971976343, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8569786055881421617, guid: f10d742e0ed7882459a1bd256a2afa0b,
         type: 3}
       propertyPath: m_RootOrder

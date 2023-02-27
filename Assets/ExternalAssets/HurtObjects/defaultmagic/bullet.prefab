@@ -4938,10 +4938,12 @@ MonoBehaviour:
   _WeaponMode: 2
   AT_weight: 1
   weaponHP: 1
+  heavyLevel: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
   element: 0
   muzzle: 
+  hitEffect: 
   ExplosionEffect: energy_resolve
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
@@ -5026,7 +5028,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 8c59cd70511d31747ad40e7e1c6b7964, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

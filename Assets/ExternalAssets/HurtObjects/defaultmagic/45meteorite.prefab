@@ -112,7 +112,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d9a322a5258933746a431aebb15655ce, type: 2}
+  - {fileID: 2100000, guid: 12fb1d84a82a2de4f8b3e8b1f2747b43, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1560,7 +1560,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 1
+    enabled: 0
     mode: 0
     timeMode: 0
     fps: 30
@@ -4988,10 +4988,12 @@ MonoBehaviour:
   _WeaponMode: 2
   AT_weight: 1
   weaponHP: 1
+  heavyLevel: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
   element: 0
   muzzle: 
+  hitEffect: 
   ExplosionEffect: energy_resolve
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
@@ -5112,7 +5114,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e27ffb73783582d4db2f0f006e0aaee6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 15ec042c5330b894397fe2b560e22a98, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -6561,7 +6563,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 1
+    enabled: 0
     mode: 0
     timeMode: 0
     fps: 30
@@ -9971,7 +9973,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d9a322a5258933746a431aebb15655ce, type: 2}
+  - {fileID: 2100000, guid: 12fb1d84a82a2de4f8b3e8b1f2747b43, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
