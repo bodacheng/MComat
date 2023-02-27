@@ -1,0 +1,109 @@
+apply plugin: 'com.android.application'
+
+dependencies {
+    implementation project(':unityLibrary')
+    }
+
+/**
+ * アプリ表示名の取得 (yamlファイルから取得/ iosと共通)
+ */
+def getAppDisplayName(BUILD_KIND) {
+    def yamlFile = "${projectDir}/../../../Assets/App/Editor/Build/Configs/" + BUILD_KIND + "BuildSettings.yaml"
+    def script = "cat " + yamlFile + """ | grep -o 'appDisplayName: .*\$' | sed -e 's/appDisplayName: ''//'"""
+    def appDisplayName = new ByteArrayOutputStream()
+        exec {
+            commandLine 'sh', '-c', script
+            standardOutput = appDisplayName
+        }
+    
+    return appDisplayName.toString()
+}
+
+/**
+ * ビルド種別を取得する
+ */
+def getBuildKind(id) {
+    switch (id) {
+        case "jp.coconeenterprise.poketriaalpha":
+            return "Dev"
+        case "jp.coconeenterprise.pokepiabeta":
+            return "Beta"
+        case "jp.cocone.pokepia":
+            return "Release"
+    }
+    
+    return ''
+}
+
+android {
+    compileSdkVersion **APIVERSION**
+    buildToolsVersion '**BUILDTOOLS**'
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion **MINSDKVERSION**
+        targetSdkVersion **TARGETSDKVERSION**
+        applicationId '**APPLICATIONID**'
+        ndk {
+            abiFilters **ABIFILTERS**
+        }
+        versionCode **VERSIONCODE**
+        versionName '**VERSIONNAME**'
+        
+        println '----- get application display name -----'
+        // ApplicationIDで振り分けする
+        def buildKind = getBuildKind(applicationId)
+        def appName = getAppDisplayName(buildKind)
+                
+        println "buildKind:${buildKind}"
+        println "appName:${appName}"
+        
+        // NOTE: パッケージ名が同じなので、名前判断がつかない。
+        // やむを得ず Devの場合は、Dev/QA というアプリ名とする(綺麗に直せたら直したいところ)
+        if (buildKind == 'Dev') {
+            // 空白を消しておく
+            appName = appName.replaceAll(" ", "")
+            appName += "/QA"
+        }
+        
+        // アプリ名定義
+        resValue "string", "app_custom_name", appName
+    }
+
+    aaptOptions {
+        noCompress = ['.ress', '.resource', '.obb'] + unityStreamingAssets.tokenize(', ')
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }**SIGN**
+
+    lintOptions {
+        abortOnError false
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled **MINIFY_DEBUG**
+            proguardFiles getDefaultProguardFile('proguard-android.txt')**SIGNCONFIG**
+            jniDebuggable true
+        }
+        release {
+            minifyEnabled **MINIFY_RELEASE**
+            proguardFiles getDefaultProguardFile('proguard-android.txt')**SIGNCONFIG**
+        }
+    }**PACKAGING_OPTIONS****PLAY_ASSET_PACKS****SPLITS**
+**BUILT_APK_LOCATION**
+    bundle {
+        language {
+            enableSplit = false
+        }
+        density {
+            enableSplit = false
+        }
+        abi {
+            enableSplit = true
+        }
+    }
+}**SPLITS_VERSION_CODE****LAUNCHER_SOURCE_BUILD_SETUP**
