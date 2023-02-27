@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.IO;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
@@ -8,8 +9,7 @@ public class AppSetting
 {
     public static AppSetting Value = new ();
     float _bgmVolume = 0.5f, _effectsVolume = 0.5f, _cvVolume = 0.5f;
-    public static AudioSource bgmSource;
-
+    
     public SystemLanguage Language { get; set; } = SystemLanguage.English;
 
     private string lobbyTheme ;
@@ -17,8 +17,19 @@ public class AppSetting
     public static async UniTask PlayBGM(string addressKey)
     {
         var clip = await AddressablesLogic.LoadT<AudioClip>(addressKey);
-        bgmSource.clip = clip;
-        bgmSource.Play();
+        BGMSource.clip = clip;
+        BGMSource.Play();
+    }
+    
+    private static AudioSource bgmSource;
+    public static AudioSource BGMSource
+    {
+        get => bgmSource;
+        set
+        {
+            value.volume = AppSetting.Value._bgmVolume;
+            bgmSource = value;
+        }
     }
     
     public float BgmVolume
@@ -27,7 +38,8 @@ public class AppSetting
         set
         {
             _bgmVolume = Mathf.Clamp(value, 0, 1);
-            bgmSource.volume = _bgmVolume;
+            if (BGMSource != null)
+                BGMSource.volume = _bgmVolume;
         }
     }
 
@@ -73,6 +85,5 @@ public class AppSetting
             };
             Save();
         }
-        Value.BgmVolume = Value.BgmVolume;
     }
 }

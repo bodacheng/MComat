@@ -222,9 +222,6 @@ public class SettingLayer : UILayer
         });
         
         ResetSliders();
-        OnBgmChange();
-        OnCVsChange();
-        OnEffectChange();
         
         linkDeviceBtn.onClick.AddListener(() =>
             {

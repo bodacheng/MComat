@@ -14,10 +14,12 @@ public class StartUpPresentation : MonoBehaviour
     {
         Screen.SetResolution(1920, 1080, true);
         UILayerLoader.SetHanger(t);
-        AppSetting.bgmSource = audioSource;
+        AppSetting.Load();
+        AppSetting.BGMSource = audioSource;
+        AppSetting.BGMSource.volume = AppSetting.Value.BgmVolume;
         OnStart().Forget();
     }
-
+    
     async UniTask OnStart()
     {
         var bytes = await AddressablesLogic.GetWholeDownLoadSize(
@@ -66,10 +68,7 @@ public class StartUpPresentation : MonoBehaviour
                     starter.DownLoadLabels
                 );
             },
-            () =>
-            {
-                Application.Quit();
-            },
+            Application.Quit,
             msg
         );
     }
@@ -84,7 +83,6 @@ public class StartUpPresentation : MonoBehaviour
         }
         else
         {
-            AppSetting.Load();
             await AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey);
             var titleBgLayer= UILayerLoader.Load<TitleBgLayer>();
             titleBgLayer.Setup(false);

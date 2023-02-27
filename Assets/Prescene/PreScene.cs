@@ -123,7 +123,7 @@ namespace mainMenu
             UILayerLoader.Clear();
             UILayerLoader.SetHanger(T.transform);
             UILayerLoader.SetEffectBg(effectBg.rectTransform);
-            AppSetting.bgmSource = audioSource;
+            AppSetting.BGMSource = audioSource;
             AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey).Forget();
             Time.timeScale = 1;
             FightGlobalSetting._sceneStep = 0;
