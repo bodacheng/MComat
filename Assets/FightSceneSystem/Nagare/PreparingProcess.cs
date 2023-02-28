@@ -34,7 +34,7 @@ public class PreparingProcess : FSceneProcess
             EffectsManager.IniEffectsPool("hit_ground", null, 3),
             EffectsManager.IniEffectsPool("wallCrack", null, 3),
             EffectsManager.IniEffectsPool("break_free", null, 3),
-            EffectsManager.IniEffectsPool("memberShift", null, 3)
+            EffectsManager.IniEffectsPool("membershift", null, 3)
         };
         
         await UniTask.WhenAll(tasks);

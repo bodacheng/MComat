@@ -123,15 +123,13 @@ public class DecompositionPool : ObjectPool<Decomposition> {
         }
         RG.isKinematic = true;//这个刚体不受物理影响
         
-        if (decomposition.audioSource == null)
+        decomposition.AudioSource = decomposition.transform.GetComponent<AudioSource>();
+        if (decomposition.AudioSource != null)
         {
-            decomposition.audioSource = decomposition.transform.GetComponent<AudioSource>();
-        }
-        if (decomposition.audioSource != null)
-        {
-            decomposition.audioSource.volume = AppSetting.Value.EffectsVolume;
-            decomposition.audioSource.minDistance = 20;
-            decomposition.audioSource.maxDistance = 80;
+            decomposition.AudioSource.playOnAwake = false;
+            decomposition.AudioSource.volume = AppSetting.Value.EffectsVolume;
+            decomposition.AudioSource.minDistance = 20;
+            decomposition.AudioSource.maxDistance = 80;
         }
         
         if (bbmm != null)

@@ -108,7 +108,7 @@ namespace FightScene
                     }
                     RMode_Unit.Value.WholeT.transform.position = targetPos;
                     RMode_Unit.Value.WholeT.transform.rotation = targetRot;
-                    EffectsManager.GenerateEffect("memberShift", null, RMode_Unit.Value.WholeT.transform.position, Quaternion.identity, RMode_Unit.Value.geometryCenter).Forget();
+                    EffectsManager.GenerateEffect("membershift", null, RMode_Unit.Value.WholeT.transform.position, Quaternion.identity, RMode_Unit.Value.geometryCenter).Forget();
                     unitChanged = true;
                 }
                 else

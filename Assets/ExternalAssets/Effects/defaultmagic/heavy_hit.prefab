@@ -57,7 +57,6 @@ MonoBehaviour:
   DestructionDelay: 0.35
   stop_emission_delay: 0.3
   to_be_faded_renderers: []
-  audioSource: {fileID: 82432052414197314}
   Attachments: []
   Counter: 0
 --- !u!198 &198033158543851000
@@ -4862,7 +4861,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0a09d86ee0ac0ea4c9d8c3c4aee7e296, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

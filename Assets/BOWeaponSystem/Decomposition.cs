@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 using HittingDetection;
 using UnityEngine.Animations;
@@ -12,8 +13,7 @@ public partial class Decomposition : MonoBehaviour {
     public float stop_emission_delay = 0.9f;
     
     public List<MeshRenderer> to_be_faded_renderers;
-    public AudioSource audioSource;
-    
+
     [Tooltip("附属物体。这个只能自己把握。")]
     public string[] Attachments;
 
@@ -28,12 +28,18 @@ public partial class Decomposition : MonoBehaviour {
     public bool hasParticle { get; set; }
     #endregion
 
+    public AudioSource AudioSource
+    {
+        get;
+        set;
+    }
+
     void Awake()
     {
         to_be_stop_emissions = gameObject.GetComponent<ParticleSystem>();
         hasParticle = to_be_stop_emissions != null;
     }
-
+    
     public void SetPool(DecompositionPool pool)
     {
         this.pool = pool;
@@ -76,10 +82,10 @@ public partial class Decomposition : MonoBehaviour {
             _HitBox.CurrentHP = _HitBox.weaponHP;
         if (hasParticle)
             to_be_stop_emissions.Play(true);
-        if (audioSource)
-        {
-            audioSource.volume = AppSetting.Value.EffectsVolume;
-        }
+        
+        if (AudioSource != null)
+            AudioSource.Play();
+        
         SetMaterialsAlpha(1f);
     }
     
