@@ -3,6 +3,7 @@
 using UnityEditor;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.Build.Pipeline.Utilities;
+using UnityEngine;
 #endif
 
 namespace Cocone.ProjectP3
@@ -21,7 +22,7 @@ namespace Cocone.ProjectP3
         private static void BatchBuildInternal(string[] args)
         {
             // 引数取得
-            string assetProfile = "P3Dev";
+            string assetProfile = "dev";
             BuildTarget buildTarget = BuildTarget.iOS;
             BuildTargetGroup buildTargetGroup = BuildTargetGroup.iOS;
             for (int i = 0; i < args.Length; i++)
@@ -46,7 +47,9 @@ namespace Cocone.ProjectP3
             }
 
             var settings = GetSettings();
+            Debug.Log(assetProfile);
             var profileId = settings.profileSettings.GetProfileId(assetProfile);
+            Debug.Log(profileId);
             settings.activeProfileId = profileId;
             
             // save addressable setting
@@ -88,7 +91,7 @@ namespace Cocone.ProjectP3
                 "-quit", "-batchmode",
                 "-executeMethod", unityMethod,
                 "-buildTarget", buildTarget,
-                "-assetProfile", "P3Test",
+                "-assetProfile", "dev",
                 "-useReleaseList"
             };
             BatchBuildInternal(args);
@@ -125,7 +128,7 @@ namespace Cocone.ProjectP3
                 "-quit", "-batchmode",
                 "-executeMethod", unityMethod,
                 "-buildTarget", buildTarget,
-                "-assetProfile", "P3Test"
+                "-assetProfile", "dev"
             };
             BatchBuildInternal(args);
         }
