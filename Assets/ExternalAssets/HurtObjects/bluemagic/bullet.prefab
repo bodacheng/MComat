@@ -14287,7 +14287,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2d10343cc91e75941b38400937a73b4b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a457a2da996b2ed4a97127375b3cbc09, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1.5
@@ -19073,7 +19073,6 @@ MonoBehaviour:
   DestructionDelay: 3.01
   stop_emission_delay: 3
   to_be_faded_renderers: []
-  audioSource: {fileID: 3921185842683053583}
   Attachments: []
   Counter: 0
 --- !u!114 &1831717953991139265
@@ -19094,10 +19093,12 @@ MonoBehaviour:
   _WeaponMode: 2
   AT_weight: 1
   weaponHP: 1
+  heavyLevel: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
   element: 0
   muzzle: n_muzzle
+  hitEffect: 
   ExplosionEffect: energy_resolve
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2

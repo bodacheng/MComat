@@ -2,17 +2,14 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TitleFX_V2
   m_Shader: {fileID: 4800000, guid: 5aeb7503c199c794b8e8a713c03678d7, type: 3}
-  m_ValidKeywords:
-  - _UPDOWNDIRECTION_ON
-  m_InvalidKeywords:
-  - _AUTOMANUALANIMATION_ON
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -90,10 +87,9 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
     m_Floats:
     - PixelSnap: 0
-    - _Animation_Factor: 2
+    - _Animation_Factor: 0.18390396
     - _AutoManualAnimation: 1
     - _ColorMask: 15
     - _DetailsMaskDistortionMult: 1

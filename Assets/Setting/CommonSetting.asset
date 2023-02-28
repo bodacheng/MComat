@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2fc58dd8a094ee2b1e75230d7aeca8, type: 3}
   m_Name: CommonSetting
   m_EditorClassIdentifier: 
-  devMode: 0
+  devMode: 1
   maxStoneCount: 1000
   unitConfigFile: mst_unit
   skillConfigFile: mst_skill
@@ -22,3 +22,7 @@ MonoBehaviour:
   skillStaticAnalysis: SkillStaticAnalysis
   skillDynamicAnalysis: SkillDynamicAnalysis.csv
   languageCodeFile: LanguageCode
+  startThemeAddressKey: music/start
+  lobbyThemeAddressKey: music/lobby
+  fightThemeAddressKey1: music/fight1
+  fightThemeAddressKey2: music/fight2

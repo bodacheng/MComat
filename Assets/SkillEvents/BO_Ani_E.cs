@@ -124,21 +124,24 @@ public partial class BO_Ani_E : MonoBehaviour
     public async void EffectOnBodyPart(AnimationEvent e)
 	{
         DecideTarget(e.stringParameter);
-		switch (e.intParameter) 
-		{
-			case 3:
-                effect = await EffectsManager.GenerateEffect("long_effect", magic_path, target.position, target.rotation,target);
-			    break;
-			case 1:
-                effect = await EffectsManager.GenerateEffect("short_effect", magic_path, target.position, target.rotation,target);
-                break;
-			case 2:
-                effect = await EffectsManager.GenerateEffect("normal_effect", magic_path, target.position, target.rotation,target);
-                break;
-			default:
-                effect = await EffectsManager.GenerateEffect("short_effect", magic_path, target.position, target.rotation,target);
-                break;
-		}
+        effect = await EffectsManager.GenerateEffect("normal_effect", magic_path, target.position, target.rotation,target);
+        
+        // 我真是不敢相信我们曾经把问题考虑的那么复杂
+		// switch (e.intParameter) 
+		// {
+		// 	case 3:
+  //               effect = await EffectsManager.GenerateEffect("long_effect", magic_path, target.position, target.rotation,target);
+		// 	    break;
+		// 	case 1:
+  //               effect = await EffectsManager.GenerateEffect("short_effect", magic_path, target.position, target.rotation,target);
+  //               break;
+		// 	case 2:
+  //               effect = await EffectsManager.GenerateEffect("normal_effect", magic_path, target.position, target.rotation,target);
+  //               break;
+		// 	default:
+  //               effect = await EffectsManager.GenerateEffect("short_effect", magic_path, target.position, target.rotation,target);
+  //               break;
+		// }
            
         if (EffectsOnBodyParts.ContainsKey(target))
         {
