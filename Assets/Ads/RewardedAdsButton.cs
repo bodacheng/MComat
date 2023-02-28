@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-//using UnityEngine.Advertisements;
+using UnityEngine.Advertisements;
  
-public class RewardedAdsButton : MonoBehaviour//, IUnityAdsLoadListener, IUnityAdsShowListener
+public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     [SerializeField] Button _showAdButton;
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
@@ -36,18 +36,18 @@ public class RewardedAdsButton : MonoBehaviour//, IUnityAdsLoadListener, IUnityA
         _showAdButton.interactable = false;
     }
 
-    // void Start()
-    // {
-    //     LoadAd();
-    // }
-    //
-    // // Load content to the Ad Unit:
-    // void LoadAd()
-    // {
-    //     // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
-    //     Debug.Log("Loading Ad: " + _adUnitId);
-    //     Advertisement.Load(_adUnitId, this);
-    // }
+    void Start()
+    {
+        LoadAd();
+    }
+    
+    // Load content to the Ad Unit:
+    void LoadAd()
+    {
+        // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
+        Debug.Log("Loading Ad: " + _adUnitId);
+        Advertisement.Load(_adUnitId, this);
+    }
  
     // If the ad successfully loads, add a listener to the button and enable it:
     public void OnUnityAdsAdLoaded(string adUnitId)
@@ -67,41 +67,41 @@ public class RewardedAdsButton : MonoBehaviour//, IUnityAdsLoadListener, IUnityA
     public void ShowAd()
     {
         // // Disable the button:
-        // _showAdButton.interactable = false;
+        _showAdButton.interactable = false;
         // // Then show the ad:
-        // Advertisement.Show(_adUnitId, this);
+        Advertisement.Show(_adUnitId, this);
     }
  
     // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
-    // public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
-    // {
-    //     Debug.Log("adUnitId："+adUnitId);
-    //     if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
-    //     {
-    //         Debug.Log("Unity Ads Rewarded Ad Completed");
-    //         // Grant a reward.
-    //         CloudScript.SubtractVirtualCurrency(
-    //             "AD",1,
-    //             CloudScript.RequestAdReward
-    //         );
-    //         
-    //         // Load another ad: 需要检查在实机上这里跑的是否有问题。在editor上产生一个造成广告再次观看时连续跑了两次的错误
-    //         Advertisement.Load(_adUnitId, this);
-    //     }
-    // }
+    public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
+    {
+        Debug.Log("adUnitId："+adUnitId);
+        if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
+        {
+            Debug.Log("Unity Ads Rewarded Ad Completed");
+            // Grant a reward.
+            CloudScript.SubtractVirtualCurrency(
+                "AD",1,
+                CloudScript.RequestAdReward
+            );
+            
+            // Load another ad: 需要检查在实机上这里跑的是否有问题。在editor上产生一个造成广告再次观看时连续跑了两次的错误
+            Advertisement.Load(_adUnitId, this);
+        }
+    }
     
     // Implement Load and Show Listener error callbacks:
-    // public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
-    // {
-    //     Debug.Log($"Error loading Ad Unit {adUnitId}: {error.ToString()} - {message}");
-    //     // Use the error details to determine whether to try to load another ad.
-    // }
-    //
-    // public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
-    // {
-    //     Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
-    //     // Use the error details to determine whether to try to load another ad.
-    // }
+    public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
+    {
+        Debug.Log($"Error loading Ad Unit {adUnitId}: {error.ToString()} - {message}");
+        // Use the error details to determine whether to try to load another ad.
+    }
+    
+    public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
+    {
+        Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
+        // Use the error details to determine whether to try to load another ad.
+    }
  
     public void OnUnityAdsShowStart(string adUnitId) { }
     public void OnUnityAdsShowClick(string adUnitId) { }
