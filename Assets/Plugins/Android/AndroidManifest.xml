@@ -63,7 +63,7 @@
 
     <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="${app_id}.fileprovider"
+            android:authorities="com.MCombat.BO.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
       <meta-data
