@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Advertisements;
+//using UnityEngine.Advertisements;
  
 public class RewardedAdsButton : MonoBehaviour//, IUnityAdsLoadListener, IUnityAdsShowListener
 {
