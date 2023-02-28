@@ -13,8 +13,8 @@ using UnityEditor;
 [Serializable]
 public class FightMembers
 {
-    [NonSerialized] public MultiDic<int, int, UnitInfo> HeroSets = new ();
-    public MultiDic<int, int, UnitInfo> EnemySets = new ();
+    [NonSerialized] public MultiDic<int, int, UnitInfo> HeroSets = new MultiDic<int, int, UnitInfo>();
+    public MultiDic<int, int, UnitInfo> EnemySets = new MultiDic<int, int, UnitInfo>();
 
     public bool CheckFightLegal()
     {

@@ -12,20 +12,20 @@ public partial class SKillAnalyzer
         public float startFrame;
     }
     
-    public static readonly List<string> AttackFrameStartMethodNames = new() {
+    public static readonly List<string> AttackFrameStartMethodNames = new List<string>() {
         "SetRightHandMarkerManager","SetLeftHandMarkerManager",
         "SetRightFootMarkerManager","SetLeftFootMarkerManager",
         "SetRightHandWeaponMarkerManager","SetLeftHandWeaponMarkerManager",
         "SetHeadMarkerManager","SetTailMarkerManager"
     };
     
-    static readonly List<string> AttackClearMethodNames = new() {
+    static readonly List<string> AttackClearMethodNames = new List<string>() {
         "SetRightHandMarkerManager","SetLeftHandMarkerManager",
         "SetRightFootMarkerManager","SetLeftFootMarkerManager",
         "SetRightHandWeaponMarkerManager","SetLeftHandWeaponMarkerManager",
         "SetHeadMarkerManager","SetTailMarkerManager"
     };
-    static readonly List<string> EffectsAttackFrameStartMethodNames = new()
+    static readonly List<string> EffectsAttackFrameStartMethodNames = new List<string>()
     {
         "MagicForward","Bullet_shoot_from_body_part","BlastAttack","ReleasePreparedMagic","ReleasePreparedMagicToAir"
     };

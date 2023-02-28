@@ -9,10 +9,10 @@ public partial class GotchaResultLayer : UILayer
     #region 屏幕星星飞入位置
     [SerializeField] private float starScreenMoveDuration = 2;
     [SerializeField] RectTransform starWaitPos1, starWaitPos2, starWaitPos3, starWaitPos4, starWaitPos5, starWaitPos6, starWaitPos7, starWaitPos8, starWaitPos9;
-    readonly List<RectTransform> waitPos = new();
+    readonly List<RectTransform> waitPos = new List<RectTransform>();
     #endregion
     
-    readonly List<Vector3> slotScreenPos = new();
+    readonly List<Vector3> slotScreenPos = new List<Vector3>();
     
     void SetWaitPos()
     {

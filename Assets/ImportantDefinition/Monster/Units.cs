@@ -60,7 +60,7 @@ public static class Units
         RefreshDic();
     }
     
-    public static readonly List<Row> rowList = new();
+    public static readonly List<Row> rowList = new List<Row>();
     static bool isLoaded;
 
 	public static bool IsLoaded()

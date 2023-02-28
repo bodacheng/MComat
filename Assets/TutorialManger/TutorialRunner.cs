@@ -17,7 +17,7 @@ public class TutorialRunner
     }
     
     TutorialProcess currentProcess;
-    readonly List<TutorialProcess> _tutorialProcesses = new ();
+    private readonly List<TutorialProcess> _tutorialProcesses = new List<TutorialProcess>();
     
     void GenerateStep1Tutorial()
     {

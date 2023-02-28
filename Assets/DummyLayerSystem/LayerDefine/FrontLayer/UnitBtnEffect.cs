@@ -10,7 +10,7 @@ public class UnitBtnEffect : MonoBehaviour
 {
     [SerializeField] private RectTransform[] nineSlots;
     
-    private readonly List<string> _slotEffectNames = new()
+    private readonly List<string> _slotEffectNames = new List<string>()
     {
         "FrontLayerUnitBtn/stoneEffect.prefab",
         "FrontLayerUnitBtn/stoneEffect1.prefab",
@@ -18,8 +18,8 @@ public class UnitBtnEffect : MonoBehaviour
         "FrontLayerUnitBtn/stoneEffect3.prefab",
         "FrontLayerUnitBtn/stoneEffect4.prefab"
     };
-    
-    private readonly List<SlotJob> _slotJobs = new();
+
+    private readonly List<SlotJob> _slotJobs = new List<SlotJob>();
     
     void Start()
     {

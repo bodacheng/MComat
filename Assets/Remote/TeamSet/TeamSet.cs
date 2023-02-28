@@ -2,8 +2,8 @@
 {
     public static partial class TeamSet
     {
-        public static PosKeySet Default = new ();
-        public static PosKeySet Arena3V3 = new ();
+        public static PosKeySet Default = new PosKeySet();
+        public static PosKeySet Arena3V3 = new PosKeySet();
 
         public static PosKeySet GetTargetSet(string mode)
         {

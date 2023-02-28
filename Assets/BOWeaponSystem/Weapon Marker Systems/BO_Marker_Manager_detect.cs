@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Log;
+using UnityEngine.Events;
 
 namespace HittingDetection
 {
@@ -323,7 +324,7 @@ namespace HittingDetection
         // 它在攻击到一个对象后不会立刻随着自身hp的减少而cleartargets，但如果它有着大于0的hp，它依然会随着打击到对象而掉血，并随着寿命结束而消失
         // 设想有一个地上火焰技能是ContinuousDamage，它可能有两种消失方式，一种是打击了不少对象hp为0了，一种是随着自身BO_destroyer的设置而时间已经尽。        
         // WeaponEnergyExhaust 这个函数在“与敌人武器发生接触”和“与敌人肉体产生接触”的时候是不同的处理逻辑
-        readonly List<UnityEngine.Events.UnityAction> WeaponEnergyExhaustMissions = new ();
+        private readonly List<UnityEngine.Events.UnityAction> WeaponEnergyExhaustMissions = new List<UnityAction>();
         void AddWeaponEnergyExhaust(HitPointPara hitPointPara)
         {
             if (weaponHP > 0 && CurrentHP > 0)

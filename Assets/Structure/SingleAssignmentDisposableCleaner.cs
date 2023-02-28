@@ -3,7 +3,7 @@ using UniRx;
 
 public class SingleAssignmentDisposableCleaner
 {
-    static readonly List<SingleAssignmentDisposable> list = new();
+    static readonly List<SingleAssignmentDisposable> list = new List<SingleAssignmentDisposable>();
     public static void Add(SingleAssignmentDisposable single)
     {
         if (!list.Contains(single))

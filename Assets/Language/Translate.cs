@@ -15,7 +15,7 @@ public static class Translate
 		public string CH;
 	}
 
-	static readonly List<Row> rowList = new();
+	static readonly List<Row> rowList = new List<Row>();
 	static bool isLoaded = false;
 
 	public static bool IsLoaded()

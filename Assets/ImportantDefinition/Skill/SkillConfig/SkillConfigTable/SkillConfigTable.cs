@@ -23,8 +23,8 @@ public partial class SkillConfigTable
         public string ATTACK_TYPE;
         public string EVENT_CODE;
     }
-    
-    public static readonly List<Row> rowList = new();
+
+    public static readonly List<Row> rowList = new List<Row>();
     
     static bool isLoaded;
     public static bool IsLoaded()
@@ -32,7 +32,7 @@ public partial class SkillConfigTable
     	return isLoaded;
     }
 
-    static readonly List<string> AttackTypes = new()
+    static readonly List<string> AttackTypes = new List<string>
     {
         "GR","GM","GI","CT"
     };

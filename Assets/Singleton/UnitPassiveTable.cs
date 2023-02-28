@@ -12,7 +12,7 @@ public class UnitPassiveTable
 		public string SKILL_RECORD_ID;
 	}
 
-	static readonly List<Row> rowList = new();
+	private static readonly List<Row> rowList = new List<Row>();
 	
 	public static async UniTask Load()
 	{

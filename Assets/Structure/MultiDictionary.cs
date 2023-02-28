@@ -12,7 +12,7 @@ public class MultiDic<Key1, Key2, Value>
     /// 字典结构
     /// </summary>
     ///
-    public Dictionary<(Key1, Key2), Value> mDict = new();
+    public Dictionary<(Key1, Key2), Value> mDict = new Dictionary<(Key1, Key2), Value>();
     
     public List<Value> GetValues()
     {

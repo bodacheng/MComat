@@ -14,8 +14,8 @@ namespace FightScene
         [Header("Basic Element")]
         public CameraManager _CameraManager;
         
-        public readonly TeamConfig heroTeamConfig = new("1", Team.player1, new List<Team>() { Team.player2 });
-        public readonly TeamConfig EnemyTeamConfig = new("2", Team.player2, new List<Team>() { Team.player1 });
+        public readonly TeamConfig heroTeamConfig = new TeamConfig("1", Team.player1, new List<Team>() { Team.player2 });
+        public readonly TeamConfig EnemyTeamConfig = new TeamConfig("2", Team.player2, new List<Team>() { Team.player1 });
         
         public static RTFightManager Target;
         public static Team playerTeam = Team.player1;
@@ -24,8 +24,8 @@ namespace FightScene
         public readonly IDictionary<Data_Center, ReactiveProperty<float>> RefreshTimeDic = new Dictionary<Data_Center, ReactiveProperty<float>>();
         
         FightInfo _loadFight;
-        
-        public readonly CompositeDisposable Disposables = new ();
+
+        public readonly CompositeDisposable Disposables = new CompositeDisposable();
         
         void Awake()
         {

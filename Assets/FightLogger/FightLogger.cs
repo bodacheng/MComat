@@ -5,16 +5,16 @@ using System.Linq;
 // 用于在每一局游戏里起记录数据的作用，包括胜利判断，都应该是由本模块来执行。
 public class FightLogger
 {
-    public static readonly FightLogger value = new ();
-    
-    public ReactiveProperty<bool> GameOver{ get; set; } = new(false);
+    public static readonly FightLogger value = new FightLogger();
+
+    public ReactiveProperty<bool> GameOver { get; set; } = new ReactiveProperty<bool>(false);
     Team winnerTeam = Team.none;
     int wholeTeamCount;
     
     readonly IDictionary<Team, List<Data_Center>> TeamDeadMemberDic = new Dictionary<Team, List<Data_Center>>();
-    readonly List<Team> deadTeam = new ();
-    readonly List<SingleAssignmentDisposable> WatchPlayers = new ();
-    readonly Dictionary<Team, string> IdDicRef = new ();
+    private readonly List<Team> deadTeam = new List<Team>();
+    private readonly List<SingleAssignmentDisposable> WatchPlayers = new List<SingleAssignmentDisposable>();
+    private readonly Dictionary<Team, string> IdDicRef = new Dictionary<Team, string>();
     
     public string GetWinnerId()
     {

@@ -9,7 +9,7 @@ public class StoneBtnEffect : MonoBehaviour
     [SerializeField] private RectTransform effectT1;
     [SerializeField] private RectTransform effectT2;
     
-    private readonly List<string> effect1List = new()
+    private readonly List<string> effect1List = new List<string>
     {
         "ButtonEffects/darkmagic/normal.prefab",
         "ButtonEffects/bluemagic/normal.prefab",
@@ -18,7 +18,7 @@ public class StoneBtnEffect : MonoBehaviour
         "ButtonEffects/lightmagic/normal.prefab",
     };
     
-    private readonly List<string> effect2List = new()
+    private readonly List<string> effect2List = new List<string>
     {
         "ButtonEffects/darkmagic/EX3.prefab",
         "ButtonEffects/bluemagic/EX3.prefab",

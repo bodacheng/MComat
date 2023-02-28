@@ -23,7 +23,7 @@ namespace FightScene
         
         public static FightScene target;
         
-        public ReactiveProperty<bool> LoadStageFinished { get; set; } = new(false);
+        public ReactiveProperty<bool> LoadStageFinished { get; set; } = new ReactiveProperty<bool>(false);
 
         public static FightInfo Fight;
 

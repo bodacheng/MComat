@@ -7,7 +7,7 @@ using Json;
 
 public class AppSetting
 {
-    public static AppSetting Value = new ();
+    public static AppSetting Value = new AppSetting();
     float _bgmVolume = 0.5f, _effectsVolume = 0.5f, _cvVolume = 0.5f;
     
     public SystemLanguage Language { get; set; } = SystemLanguage.English;
@@ -80,7 +80,8 @@ public class AppSetting
         {
             Value = new AppSetting
             {
-                Language = Application.systemLanguage is SystemLanguage.ChineseSimplified or SystemLanguage.ChineseTraditional ? 
+                Language = Application.systemLanguage == SystemLanguage.ChineseSimplified ||
+                           Application.systemLanguage == SystemLanguage.ChineseTraditional ? 
                     SystemLanguage.Chinese : Application.systemLanguage,
                 _bgmVolume = 0.5f, _effectsVolume = 0.5f, _cvVolume = 0.5f
             };

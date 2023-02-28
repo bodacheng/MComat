@@ -34,19 +34,19 @@ namespace mainMenu
 
         [Header("Start")]
         [SerializeField] Button fightStartBtn;
-        
-        readonly MultiDic<Team, int, HeroIcon> _teamButtonDicM = new ();
-        readonly MultiDic<Team, int, HeroIcon> _teamButtonDicR = new ();
+
+        private readonly MultiDic<Team, int, HeroIcon> _teamButtonDicM = new MultiDic<Team, int, HeroIcon>();
+        readonly MultiDic<Team, int, HeroIcon> _teamButtonDicR = new MultiDic<Team, int, HeroIcon>();
         readonly IDictionary<HeroIcon, int> _iconNumCheck = new Dictionary<HeroIcon, int>();
-        readonly FightMembers _selfFight = new() { };
+        private readonly FightMembers _selfFight = new FightMembers();
         FightInfo _stage;
         Team _focusingTeam;
         int _focusingPosNum = -1;
-        
-        PosKeySet _team1PosKeySetM = new ();
-        PosKeySet _team2PosKeySetM = new ();
-        PosKeySet _team1PosKeySetR = new ();
-        PosKeySet _team2PosKeySetR = new ();
+
+        PosKeySet _team1PosKeySetM = new PosKeySet();
+        PosKeySet _team2PosKeySetM = new PosKeySet();
+        PosKeySet _team1PosKeySetR = new PosKeySet();
+        PosKeySet _team2PosKeySetR = new PosKeySet();
         
         public void INI()
         {

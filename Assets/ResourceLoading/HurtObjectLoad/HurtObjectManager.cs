@@ -10,7 +10,7 @@ public static class HurtObjectManager
     static DecompositionPool default_hitBoxPool;
     static readonly IDictionary<string, DecompositionPool> HurtPoolDic = new Dictionary<string, DecompositionPool>();
     static AsyncOperationHandle<GameObject> _handle;
-    static readonly List<string> keyExists = new();
+    static readonly List<string> keyExists = new List<string>();
     public static async UniTask CheckExistedKey()
     {
         var locationHandle = Addressables.LoadResourceLocationsAsync("weapon");

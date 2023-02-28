@@ -10,8 +10,9 @@ using System.IO;
 public partial class PlayFabReadClient
 {
     #region MAIL
-    static readonly List<MailItemInstance> MyMailList = new ();
-    static readonly Dictionary<string, CatalogItem> CatalogItems = new ();
+
+    private static readonly List<MailItemInstance> MyMailList = new List<MailItemInstance>();
+    private static readonly Dictionary<string, CatalogItem> CatalogItems = new Dictionary<string, CatalogItem>();
     
     public static List<MailItemInstance> GetMailsData(bool onlyUnRead = false)
     {

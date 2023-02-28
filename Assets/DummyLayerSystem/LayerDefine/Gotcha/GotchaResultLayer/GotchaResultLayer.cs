@@ -35,7 +35,7 @@ public partial class GotchaResultLayer : UILayer
     [SerializeField] string explosionSp3 = "ButtonEffects/redmagic/explosion3.prefab";
     #endregion
     
-    private readonly Dictionary<StoneOfPlayerInfo, StoneFallEffectSet> _effectDic = new();
+    private readonly Dictionary<StoneOfPlayerInfo, StoneFallEffectSet> _effectDic = new Dictionary<StoneOfPlayerInfo, StoneFallEffectSet>();
 
     (string, string, string) GetEffectName(int spLevel)
     {

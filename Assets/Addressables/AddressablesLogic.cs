@@ -133,8 +133,8 @@ public static class AddressablesLogic
             return returnValue;
         }
     }
-    
-    private static readonly List<AsyncOperationHandle> LoadingHandlerList = new ();
+
+    private static readonly List<AsyncOperationHandle> LoadingHandlerList = new List<AsyncOperationHandle>();
     
     public static async UniTask<T> LoadT<T>(string prefabPathName, GameObject memoryReleaseTarget = null)
     {

@@ -9,7 +9,7 @@ public class UnitInfo
     public string id;
     public string r_id;
     public int level = 1;
-    public SkillSet set = new ();
+    public SkillSet set = new SkillSet();
     
     public UnitInfo Clone()
     {

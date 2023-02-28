@@ -10,7 +10,7 @@ public class ReturnLayer : UILayer
     [SerializeField] Button returnButton;
     [SerializeField] GameObject maskBg;
     
-    public static readonly List<Func<bool>> ReturnMissionList = new ();
+    public static readonly List<Func<bool>> ReturnMissionList = new List<Func<bool>>();
     
     void Setup()
     {
@@ -23,7 +23,7 @@ public class ReturnLayer : UILayer
         if (ReturnMissionList.Count == 0)
             return;
 
-        var targetMission = ReturnMissionList[^1];
+        var targetMission = ReturnMissionList[ReturnMissionList.Count - 1];
         ReturnMissionList.RemoveAt(ReturnMissionList.Count - 1);
         var success = targetMission.Invoke();
         

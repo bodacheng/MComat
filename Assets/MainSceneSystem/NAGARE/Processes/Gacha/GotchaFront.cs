@@ -79,13 +79,17 @@ public class GotchaFront : MSceneProcess
         _layer.Setup(NineTimes, DropTableInfo, MoveNext, PlayerAccountInfo.Me.tutorialProgress != "Finished");
         
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
-        upperInfoBar.Setup(null,
-            null,null,
-            PlayerAccountInfo.Me.tutorialProgress == "Finished" ?
-            () =>
+
+        Action openDmShop = null;
+        if (PlayerAccountInfo.Me.tutorialProgress == "Finished")
+        {
+            openDmShop = () =>
             {
                 PreScene.target.trySwitchToStep(MainSceneStep.ShopTop);
-            }:null);
+            };
+        }
+        
+        upperInfoBar.Setup(null, null,null, openDmShop);
         
         SetLoaded(true);
     }

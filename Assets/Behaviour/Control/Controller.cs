@@ -12,7 +12,7 @@ namespace Soul
 {
     public class Controller
     {
-        readonly SSIMultiDictionary _triggered = new ();
+        private readonly SSIMultiDictionary _triggered = new SSIMultiDictionary();
         
         public void Decision(BehaviorRunner runner, List<SkillEntity> Options, bool auto)
         {
@@ -166,7 +166,7 @@ namespace Soul
         }
 
         string _condition;
-        List<(string, string)> _finalConditionStateKeySet = new();
+        List<(string, string)> _finalConditionStateKeySet = new List<(string, string)>();
         int _decisionDelayCount = 0;
         private int DecisionDelayCount
         {

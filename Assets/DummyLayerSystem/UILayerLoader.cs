@@ -63,7 +63,7 @@ namespace DummyLayerSystem
             effectBg = _effectBg;
         }
 
-        private static readonly List<UILayer> Queues = new ();
+        private static readonly List<UILayer> Queues = new List<UILayer>();
         
         public static void Clear(string except = null)
         {

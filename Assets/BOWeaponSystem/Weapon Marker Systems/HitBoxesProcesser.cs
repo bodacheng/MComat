@@ -6,8 +6,8 @@ public class HitBoxesProcesser : MonoBehaviour
 {
     public static HitBoxesProcesser Instance;
     
-    private static readonly Dictionary<Collider, HitBoxManager> ColliderHitBox = new();
-    private readonly List<Decomposition> _processingDecompositions = new();
+    private static readonly Dictionary<Collider, HitBoxManager> ColliderHitBox = new Dictionary<Collider, HitBoxManager>();
+    private readonly List<Decomposition> _processingDecompositions = new List<Decomposition>();
     
     void Awake()
     {

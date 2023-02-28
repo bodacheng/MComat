@@ -15,7 +15,7 @@ using System.Linq;
  **/
 public class OmniShadeGUI : ShaderGUI {	
 	// Shader keywords which are automatically enabled/disabled based on usage
-	readonly List<(string keyword, string name, PropertyType type, Vector4 defaultValue)> props = new() {
+	readonly List<(string keyword, string name, PropertyType type, Vector4 defaultValue)> props = new List<(string keyword, string name, PropertyType type, Vector4 defaultValue)> {
 		("TOP_TEX", "_TopTex", PropertyType.Texture, Vector4.one),							// Triplanar
 		("TRIPLANAR_SHARPNESS", "_TriplanarSharpness", PropertyType.Float, Vector4.one),	// Triplanar
 		("BASE_CONTRAST", "_Contrast", PropertyType.Float, Vector4.one),
@@ -46,7 +46,7 @@ public class OmniShadeGUI : ShaderGUI {
 	};
 
 	// Parameters that are ON by default
-	readonly List<(string keyword, string name)> defaultOnParams = new() {
+	readonly List<(string keyword, string name)> defaultOnParams = new List<(string keyword, string name)>() {
 		("DIFFUSE", "_Diffuse" ),
 		("MATCAP_PERSPECTIVE", "_MatCapPerspective" ),
 		("AMBIENT", "_Ambient" ),
@@ -79,9 +79,9 @@ public class OmniShadeGUI : ShaderGUI {
 	ExpandType forceExpand = ExpandType.Active;
 	int prevPreset = -1;
 	List<Material> prevSelectedMats = new List<Material>();
-	readonly Dictionary<string, PropertyHeader> propertyHeaders = new();
+	readonly Dictionary<string, PropertyHeader> propertyHeaders = new Dictionary<string, PropertyHeader>();
 
-	static readonly Dictionary<string, GUIContent> toolTipsCache = new();
+	static readonly Dictionary<string, GUIContent> toolTipsCache = new Dictionary<string, GUIContent>();
 
 	public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties) {
 		this.RenderGUI(materialEditor, properties);

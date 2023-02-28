@@ -30,7 +30,7 @@ public class TeamEditLayer : UILayer
     [Header("指示")]
     [SerializeField] Text instruction;
     
-    readonly ReactiveProperty<int> _focusingPos = new(-1);
+    readonly ReactiveProperty<int> _focusingPos = new ReactiveProperty<int>(-1);
     readonly IDictionary<int, HeroIcon> _teamBtnDic = new Dictionary<int, HeroIcon>();
     private Func<string, bool> _teamLegal;
     private string _currentTeamMode;

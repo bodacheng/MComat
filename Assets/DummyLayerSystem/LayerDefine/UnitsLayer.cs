@@ -21,9 +21,9 @@ namespace mainMenu
         [Header("宠物栏parent")]
         [SerializeField] RectTransform unitBoxContainer;
         
-        readonly List<string> typeOfUnitsIHave = new ();
+        readonly List<string> typeOfUnitsIHave = new List<string>();
         readonly IDictionary<string, HeroIcon> heroIcons = new Dictionary<string, HeroIcon>();
-        public ReactiveProperty<string> Selected { get; } = new (null);
+        public ReactiveProperty<string> Selected { get; } = new ReactiveProperty<string> (null);
         private Action<string> onClick;
         public Action<string> OnClick => onClick;
         

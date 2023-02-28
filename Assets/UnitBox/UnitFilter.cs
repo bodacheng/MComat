@@ -13,11 +13,11 @@ public class UnitFilter : MonoBehaviour
     
     //关键词，貌似只是索引玩家对角色的自定义tag
     readonly string keyword;
-    readonly List<HeroIcon> _red = new ();
-    readonly List<HeroIcon> _blue = new ();
-    readonly List<HeroIcon> _green = new ();
-    readonly List<HeroIcon> _light = new ();
-    readonly List<HeroIcon> _dark = new ();
+    private readonly List<HeroIcon> _red = new List<HeroIcon>();
+    readonly List<HeroIcon> _blue = new List<HeroIcon>();
+    readonly List<HeroIcon> _green = new List<HeroIcon>();
+    readonly List<HeroIcon> _light = new List<HeroIcon>();
+    readonly List<HeroIcon> _dark = new List<HeroIcon>();
     
     public List<HeroIcon> OrderIcons(List<HeroIcon> origin_mainMenuIcons)
     {

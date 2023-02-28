@@ -9,7 +9,7 @@ public class MailBox : UILayer
     [SerializeField] Button readAll;
     [SerializeField] Button deleteAllRead;
 
-    readonly List<MailListView> _currentMailListViews = new();
+    readonly List<MailListView> _currentMailListViews = new List<MailListView>();
     
     public void Setup()
     {

@@ -7,7 +7,7 @@ namespace FightScene
 {
     public partial class UnitsManger : MonoBehaviour
     {
-        public ReactiveProperty<Data_Center> RMode_Unit = new ();
+        public ReactiveProperty<Data_Center> RMode_Unit = new ReactiveProperty<Data_Center>();
         Data_Center waitingMember;
         
         public void ToStartPos_Rotate()

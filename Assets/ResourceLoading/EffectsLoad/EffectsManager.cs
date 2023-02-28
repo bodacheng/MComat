@@ -11,7 +11,7 @@ public static class EffectsManager
 {
     // 以下的重点是主界面和战斗界面通用问题
     static readonly IDictionary<string, DecompositionPool> EffectPoolsDic = new Dictionary<string, DecompositionPool>();
-    static readonly List<string> KeyExists = new();
+    private static readonly List<string> KeyExists = new List<string>();
     static AsyncOperationHandle<GameObject> _handle;
     
     public static async UniTask CheckExistedKey()

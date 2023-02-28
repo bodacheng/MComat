@@ -53,7 +53,7 @@ namespace mainMenu
         SkillStoneSlot _b1Slot, _b2Slot, _b3Slot;
         SkillStoneSlot _c1Slot, _c2Slot, _c3Slot;
         SkillStoneSlot focusingSlot;
-        public readonly List<SkillStoneSlot> allSlot = new();
+        public readonly List<SkillStoneSlot> allSlot = new List<SkillStoneSlot>();
 
         public Action<string> PrintSkillInfo;
 

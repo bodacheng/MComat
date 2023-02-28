@@ -4,8 +4,9 @@ using UnityEngine;
 public class BuffsRunner
 {
     #region 自定义携程
-    public readonly List<CustomCoroutine> mySubMissions = new();
-    readonly List<CustomCoroutine> endedCustomCoroutines = new();
+
+    public readonly List<CustomCoroutine> mySubMissions = new List<CustomCoroutine>();
+    private readonly List<CustomCoroutine> endedCustomCoroutines = new List<CustomCoroutine>();
     
     public bool Freezing { get; set; } = false;
     #endregion

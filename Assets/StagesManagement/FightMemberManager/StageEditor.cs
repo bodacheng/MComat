@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using mainMenu;
 using Singleton;
@@ -26,7 +27,8 @@ public partial class StageEditor
         {
             foreach (var path in locationHandle.Result)
             {
-                string[] words = path.PrimaryKey.Split("unit/");
+                string[] words = path.PrimaryKey.Split(new [] {"unit/"}, StringSplitOptions.None);
+                Debug.Log("?"+ words[1]);
                 await UnitIconDic.Load(words[1]);
             }
         }
@@ -35,6 +37,7 @@ public partial class StageEditor
     
     public void OnGUIView(FightMembers target)
     {
+        Debug.Log(target.EnemySets);
         if (!Initialized)
         {
             UIParamIni();
@@ -51,6 +54,8 @@ public partial class StageEditor
             UnitIconInitialize();
             return;
         }
+        
+        Debug.Log(unitIconInitialized);
         
         GUILayout.Space(10);
         Members(target);

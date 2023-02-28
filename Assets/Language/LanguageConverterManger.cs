@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class LanguageConverterManger : MonoBehaviour
 {
-    public List<LanguageConverter> preList = new();
-    public static List<LanguageConverter> List = new();
+    public List<LanguageConverter> preList = new List<LanguageConverter>();
+    public static List<LanguageConverter> List = new List<LanguageConverter>();
     
     void Awake()
     {

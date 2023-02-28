@@ -10,13 +10,13 @@ public partial class SkillSet
     #region 基础进程实体
     SkillEntity _empty, _zhuangbi, _victory, _death, _hit, _getUp, _knockOff;
     #endregion
-    
-    readonly List<SkillEntity> _h1EList = new ();
-    readonly List<SkillEntity> _h2EList = new ();
-    readonly List<SkillEntity> _h3EList = new ();
-    readonly List<string> _h1List = new ();
-    readonly List<string> _h2List = new ();
-    readonly List<string> _h3List = new ();
+
+    private readonly List<SkillEntity> _h1EList = new List<SkillEntity>();
+    private readonly List<SkillEntity> _h2EList = new List<SkillEntity>();
+    private readonly List<SkillEntity> _h3EList = new List<SkillEntity>();
+    private readonly List<string> _h1List = new List<string>();
+    private readonly List<string> _h2List = new List<string>();
+    private readonly List<string> _h3List = new List<string>();
     
     /// <summary>
     /// 根据9个技能的id对技能组信息进行一个整理和补全，

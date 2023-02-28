@@ -4,7 +4,7 @@ using PlayFab.ClientModels;
 
 public class MailItemInstance : ItemInstance
 {
-    readonly Subject<bool> _read = new();
+    readonly Subject<bool> _read = new Subject<bool>();
     public IObservable<bool> ReadObservable => _read;
     
     public void Set()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public partial class StageEditor{
 
-    bool Initialized;
+    bool Initialized = false;
     GUIStyle _buttonStyle;
     GUIStyle _unitIconStyle, _unitIconSelectedStyle;
     GUIContent _unitBtnContent;

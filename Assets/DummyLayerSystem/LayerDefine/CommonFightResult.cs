@@ -13,7 +13,7 @@ public class CommonFightResult : UILayer
     [SerializeField] NineForShow nineForShowPrefab;
     
     // 战斗结束后统计技能石升级情况时的画面显示
-    readonly List<NineForShow> _nineForShows = new();
+    private readonly List<NineForShow> _nineForShows = new List<NineForShow>();
     
     public void Setup(Action r, Action a)
     {

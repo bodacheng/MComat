@@ -47,12 +47,12 @@ namespace HittingDetection
         Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
         bool HitFlesh;
         bool HitShield;
-        List<Marker> _markers = new ();
-        List<Transform> _usedTargets = new (); // 就是每一帧所碰撞到的所有collider的母体。所有collider。不论是否包含mainhealth什么的。是以武器启动周期为处理单位。处理过的单位才会加入至其中
-        readonly List<Transform> _Targets_Raw_Hit = new (); //Targets initialy hit by the blade (pre-check 这个是以一帧为单位处理，为了避免多个marker重复处理击中的bodyhealth。
-        readonly List<Transform> _shieldsHit = new ();
-        readonly List<Vector3> _shieldHitPos = new ();
-        readonly List<V_Damage> hitsOnHealthBody = new ();
+        private List<Marker> _markers = new List<Marker>();
+        List<Transform> _usedTargets = new List<Transform>(); // 就是每一帧所碰撞到的所有collider的母体。所有collider。不论是否包含mainhealth什么的。是以武器启动周期为处理单位。处理过的单位才会加入至其中
+        readonly List<Transform> _Targets_Raw_Hit = new List<Transform>(); //Targets initialy hit by the blade (pre-check 这个是以一帧为单位处理，为了避免多个marker重复处理击中的bodyhealth。
+        private readonly List<Transform> _shieldsHit = new List<Transform>();
+        private readonly List<Vector3> _shieldHitPos = new List<Vector3>();
+        private readonly List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
         readonly bool _traditionalDefendMode = false;
         
         public string GeneratedByStateKey { get; set; }

@@ -11,7 +11,7 @@ public class FightInfo : ScriptableObject
     public int fightBGM = 0;
     
     [SerializeField] private Sprite stageButtonSprite;
-    [SerializeField] private List<UnitInfo> unitsData = new ();
+    [SerializeField] private List<UnitInfo> unitsData = new List<UnitInfo>();
     
     public string GetBGMKey()
     {

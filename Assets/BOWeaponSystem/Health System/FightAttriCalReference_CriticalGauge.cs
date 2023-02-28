@@ -3,7 +3,7 @@ using UniRx;
 
 public partial class FightParamsReference
 {
-    public ReactiveProperty<int> CriticalGauge { get; set; } = new ();
+    public ReactiveProperty<int> CriticalGauge { get; set; } = new ReactiveProperty<int>();
         
     public void PlusEx(int add)
     {

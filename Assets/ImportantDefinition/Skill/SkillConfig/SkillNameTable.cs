@@ -18,7 +18,7 @@ public class SkillNameTable
     
     static readonly IDictionary<string, string> SkillNameDic = new Dictionary<string, string>();
     static readonly IDictionary<string, string> SkillIntroDic = new Dictionary<string, string>();
-	static readonly List<Row> rowList = new();
+	static readonly List<Row> rowList = new List<Row>();
 	static bool isLoaded;
     
     public static string GetSkillName(string recordId)

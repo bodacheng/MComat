@@ -13,7 +13,7 @@ namespace ModelView
         [SerializeField] private float rotateSpeed = 90;
         [SerializeField] private float extraZDis;
         [SerializeField] private float extraZCameraDepth = 30f;
-        private readonly Bounds tempBoundary = new ();
+        private readonly Bounds tempBoundary = new Bounds();
         private RectTransform rect;
         private bool fixMode;
         

@@ -24,11 +24,12 @@ namespace Soul
         SkillEntity _tempSKillEntity;
         
         #region 辅助模块：控制器
-        readonly Controller _controller = new();
+
+        private readonly Controller _controller = new Controller();
         public Controller Controller => _controller;
         #endregion
-        
-        readonly Empty_State _emptyState = new();
+
+        private readonly Empty_State _emptyState = new Empty_State();
         Behavior _nowBehavior;
         Behavior _lastBehavior;
         Behavior _tryBehavior;
