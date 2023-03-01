@@ -4,7 +4,10 @@ apply plugin: 'com.android.library'
 **APPLY_PLUGINS**
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation ('com.unity3d.ads:unity-ads:4.6.0') {
+        exclude group: 'com.unity3d.ads', module: 'unity-ads-4.6.0-runtime'
+    }
 **DEPS**}
 
 android {
