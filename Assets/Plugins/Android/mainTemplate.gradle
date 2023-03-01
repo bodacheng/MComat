@@ -19,7 +19,6 @@ apply plugin: 'com.android.library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':unityLibrary')
     implementation 'com.unity3d.ads:unity-ads:3.7.5'
     implementation 'com.unity.purchasing:4.0.3'
 
