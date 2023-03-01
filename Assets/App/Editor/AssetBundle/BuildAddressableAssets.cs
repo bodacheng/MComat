@@ -73,7 +73,7 @@ namespace Cocone.ProjectP3
                 "-quit", "-batchmode",
                 "-executeMethod", unityMethod,
                 "-buildTarget", buildTarget,
-                "-assetProfile", "P3Dev"
+                "-assetProfile", "release"
             };
             BatchBuildInternal(args);
         }
@@ -91,8 +91,7 @@ namespace Cocone.ProjectP3
                 "-quit", "-batchmode",
                 "-executeMethod", unityMethod,
                 "-buildTarget", buildTarget,
-                "-assetProfile", "dev",
-                "-useReleaseList"
+                "-assetProfile", "dev"
             };
             BatchBuildInternal(args);
         }
