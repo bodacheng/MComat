@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using dataAccess;
 using Skill;
 
@@ -6,6 +8,7 @@ namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
     {
+        [SerializeField] private bool skillEditStep;
         private StoneFilterForm _form;
         
         public void RestFilter()
@@ -35,7 +38,11 @@ namespace mainMenu
         
         void PutSkillStonesToBox()
         {
-            var targetSKs = Stones.TargetStonesFromAccount_except(_form, null, null, false);
+            string focusingUnitInstanceId = null;
+            if (skillEditStep)
+                focusingUnitInstanceId = PreScene.target.Focusing.id;
+            
+            var targetSKs = Stones.TargetStonesFromAccount_except(focusingUnitInstanceId, _form, null, null, false);
             targetSKs = Order(targetSKs);
             
             foreach (var cellPair in _cellsDic)

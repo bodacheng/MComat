@@ -30,11 +30,10 @@ namespace dataAccess
 
         #region 财产数据相关
         // 用于过滤显示在技能石盒内的技能石
-        public static List<string> TargetStonesFromAccount(SkillStonesBox.StoneFilterForm filterForm)
+        public static List<string> TargetStonesFromAccount(SkillStonesBox.StoneFilterForm filterForm, string skillEditFocusing)
         {
             var skillStonesOfTypeAndExType = new List<string>(); // instanceId list
             var passiveSkill = UnitPassiveTable.GetPassiveSKillRecordIds();
-            
             foreach (var pair in Dic)
             {
                 if (pair.Value.Born == "true" || passiveSkill.Contains(pair.Value.SkillId))
@@ -47,6 +46,12 @@ namespace dataAccess
                     Debug.Log("????"+ pair.Value.SkillId);
                     continue;
                 }
+
+                if (pair.Value.UnitInstanceId != null && skillEditFocusing != null && pair.Value.UnitInstanceId != skillEditFocusing)
+                {
+                    continue;
+                }
+                
                 var exs = filterForm.ExType.ToList();
                 if (skillConfig.TYPE == filterForm.Type 
                     && exs.Contains(skillConfig.SP_LEVEL) 
@@ -60,9 +65,9 @@ namespace dataAccess
         
         // exceptList ： 除了这些 技能石账户ID
         // extraList ：额外添加这些 技能石账户ID
-        public static List<string> TargetStonesFromAccount_except(SkillStonesBox.StoneFilterForm filterForm, List<string> exceptList, List<string> extraList, bool notUsing)
+        public static List<string> TargetStonesFromAccount_except(string skillEditFocusing, SkillStonesBox.StoneFilterForm filterForm, List<string> exceptList, List<string> extraList, bool notUsing)
         {
-            var filteredList = TargetStonesFromAccount(filterForm);
+            var filteredList = TargetStonesFromAccount(filterForm, skillEditFocusing);
             var returnValue = new List<string>();
             for (var i = 0; i < filteredList.Count; i++)
             {
@@ -98,7 +103,12 @@ namespace dataAccess
                 var exceptAccIds = GetMyStonesBySkillID(exceptSkIds[i]);
                 exceptStones.AddRange(exceptAccIds);
             }
-            var stoneAccIDs = TargetStonesFromAccount_except(filterForm, exceptStones, null, true);
+            
+            string focusingUnitInstanceId = null;
+            if (ProcessesRunner.Main.currentProcess.Step == MainSceneStep.UnitSkillEdit)
+                focusingUnitInstanceId = PreScene.target.Focusing.id;
+            
+            var stoneAccIDs = TargetStonesFromAccount_except(focusingUnitInstanceId, filterForm, exceptStones, null, true);
             if (stoneAccIDs.Count == 0)
                 return null;
             var ranDom = Random.Range(0, stoneAccIDs.Count);

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using dataAccess;
+using DummyLayerSystem;
 
 namespace mainMenu
 {
@@ -36,6 +37,8 @@ namespace mainMenu
                 }
             }
             NineSlotsStatusRefresh();
+            var skillEdit = UILayerLoader.Get<SkillEditLayer>();
+            skillEdit.stonesBox.RestFilter();
         }
     }
 }

@@ -3179,6 +3179,7 @@ MonoBehaviour:
   cellPrefab: {fileID: 9087381990746991603, guid: b3795898c2a1b4eeaa126e66fe7de953,
     type: 3}
   selectedFrame: {fileID: 2677751319738524578}
+  skillEditStep: 1
 --- !u!1 &2523835563385002529
 GameObject:
   m_ObjectHideFlags: 0

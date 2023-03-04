@@ -128,10 +128,10 @@ namespace mainMenu
                     ExType = new[] { 3 },
                 };
                 
-                var skillStonesOfTypeNormal = Stones.TargetStonesFromAccount(filterForm0);
-                var skillStonesOfTypeEx1 = Stones.TargetStonesFromAccount(filterForm1);
-                var skillStonesOfTypeEx2 = Stones.TargetStonesFromAccount(filterForm2);
-                var skillStonesOfTypeEx3 = Stones.TargetStonesFromAccount(filterForm3);
+                var skillStonesOfTypeNormal = Stones.TargetStonesFromAccount(filterForm0, null);
+                var skillStonesOfTypeEx1 = Stones.TargetStonesFromAccount(filterForm1, null);
+                var skillStonesOfTypeEx2 = Stones.TargetStonesFromAccount(filterForm2, null);
+                var skillStonesOfTypeEx3 = Stones.TargetStonesFromAccount(filterForm3, null);
                 
                 returnValue = Mathf.Max(returnValue, skillStonesOfTypeNormal.Count, skillStonesOfTypeEx1.Count, skillStonesOfTypeEx2.Count, skillStonesOfTypeEx3.Count);
             }

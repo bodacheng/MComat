@@ -57,9 +57,10 @@ public static class SVCenter
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
             var info = Stones.Get(item.instanceId);
-            if (dataAccess.Units.Get(info.UnitInstanceId) != null)
+            var unitInfo = dataAccess.Units.Get(info.UnitInstanceId);
+            if (unitInfo != null && unitInfo.id != PreScene.target.Focusing.id)
             {
-                PopupLayer.ArrangeWarnWindow("其他角色正在装备中！");
+                PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get("OtherUnitUsing"), dataAccess.Units.Get(info.UnitInstanceId).r_id);
                 return;
             }
 
@@ -72,9 +73,6 @@ public static class SVCenter
                 PopupLayer.ArrangeWarnWindow(Translate.Get("CantEquipSameSkill"));
                 return;
             }
-            
-            if (!CheckIfOtherUnitOkAfterStoneRemove(item))
-                return;
             layer.stonesBox._tabEffects.SkillButtonExplosion(item._SkillConfig.SP_LEVEL, 
                 PosCal.GetWorldPos(PreScene.target.postProcessCamera, to.GetComponent<RectTransform>(), 3), 
                 layer.stonesBox._tabEffects.transform);
@@ -107,9 +105,10 @@ public static class SVCenter
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
             var info = Stones.Get(fromItem.instanceId);
-            if (dataAccess.Units.Get(info.UnitInstanceId) != null)
+            var unitInfo = dataAccess.Units.Get(info.UnitInstanceId);
+            if (unitInfo != null && unitInfo.id != PreScene.target.Focusing.id)
             {
-                PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get("OtherUnitUsing"), dataAccess.Units.Get(info.UnitInstanceId).r_id);
+                PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get("OtherUnitUsing"), unitInfo.r_id);
                 return;
             }
             
@@ -134,10 +133,6 @@ public static class SVCenter
                     return;
                 }
             }
-            
-            // 从技能石盒子取出的石头安装到技能槽，要看如果这个技能石被其他角色使用中的话，那个角色会不会有问题
-            if (!CheckIfOtherUnitOkAfterStoneRemove(fromItem))
-                return;
             
             skillEditLayer.stonesBox._tabEffects.SkillButtonExplosion(fromItem._SkillConfig.SP_LEVEL, 
             PosCal.GetWorldPos(PreScene.target.postProcessCamera, to.GetComponent<RectTransform>(), 3), 
@@ -200,7 +195,7 @@ public static class SVCenter
         }
     }
     
-    // 尝试装载的技能石正被其他角色使用时候，对那个其他角色进行validation检验
+    // old 尝试装载的技能石正被其他角色使用时候，对那个其他角色进行validation检验
     static bool CheckIfOtherUnitOkAfterStoneRemove(SKStoneItem item)
     {
         var skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
