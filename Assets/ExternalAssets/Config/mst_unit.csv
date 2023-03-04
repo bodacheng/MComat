@@ -11,3 +11,4 @@ recordId,realName,monsterType,zokusei,rarityLevel,basicMovementPack,moveType,mot
 10,maksim1,human,2,1,warrior,Move1,Rush,1
 11,maksim2,human,5,1,warrior,Move1,Rush,1
 12,robot3,human,3,1,robot3,Move1,Rush,1
+13,NanoCyborg,human,3,1,energyman,Move1,Rush,1

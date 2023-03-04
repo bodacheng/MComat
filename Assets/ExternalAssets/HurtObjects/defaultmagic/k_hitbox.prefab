@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivateAfterTime: 0
   SpecificTarget: 0
-  damage_type: 3
+  damage_type: 7
   _WeaponMode: 3
   AT_weight: 0
   weaponHP: 1
@@ -78,7 +78,6 @@ MonoBehaviour:
   DestructionDelay: -1
   stop_emission_delay: -1
   to_be_faded_renderers: []
-  audioSource: {fileID: 0}
   Attachments: []
   Counter: 0
 --- !u!1 &1420864978612344187

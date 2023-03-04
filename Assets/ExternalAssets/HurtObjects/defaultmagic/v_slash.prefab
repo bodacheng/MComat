@@ -4761,7 +4761,6 @@ MonoBehaviour:
   DestructionDelay: 0.42
   stop_emission_delay: 0.4
   to_be_faded_renderers: []
-  audioSource: {fileID: 0}
   Attachments: []
   Counter: 0
 --- !u!114 &6297991647793654574
@@ -15416,7 +15415,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
   EmissionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
