@@ -79,6 +79,7 @@ namespace Cocone.ProjectP3
 
 	public static class Client
 	{
+		private static bool manual = false;
 		private const string AndroidManifestPath = "Assets/Plugins/Android/AndroidManifest.xml";
 
 		/**
@@ -218,7 +219,7 @@ namespace Cocone.ProjectP3
 			var workspace = ".";
 			var unityMethod = "Cocone.ProjectP3.Client.Build";
 			var buildTarget = "Android";
-			var build_id = "120";
+			var build_id = "100"; // 在这个位置执行的话缺乏个递增机制，jenkins里这个数字是来源于jenkins那个项目自带的buildid 
 			var output_path = "build_android";
 			
 			string[] args = {
@@ -227,13 +228,15 @@ namespace Cocone.ProjectP3
 				"-executeMethod", unityMethod,
 				"-buildTarget", buildTarget,
 				"-BuildNumber", build_id,
-				"-OutputPath", output_path,
-				"-buildKind", "Dev",
+				"-logFile", workspace+"/Logs/build_"+build_id+"_log.txt",
+				"-OutputPath", workspace +"/" +output_path,
+				"-buildKind", "Dev",//Dev，QA，Beta？
 				"-keystorePass", "890710gxy", // TODO:unityから入力させたい
 				"-keyaliasPass", "890710gxy", // TODO:unityから入力させたい
-				"-androidArchitectures", "ARMv7;ARMv7;Arm64",
+				"-androidArchitectures", "ARMv7;Arm64",// or Arm64
+				"-developmentBuild", "false"
 			};
-
+			manual = true;
 			Build(args);
 		}
 		
@@ -259,7 +262,7 @@ namespace Cocone.ProjectP3
 				"-keyaliasPass", "890710gxy", // TODO:unityから入力させたい
 				"-androidArchitectures", "ARMv7;ARM64",
 			};
-
+			manual = true;
 			Build(args);
 		}
 		
@@ -350,7 +353,8 @@ namespace Cocone.ProjectP3
 			playerBuildConfig = config;
 			var report = Build(config);
 			
-			EditorApplication.Exit(report.summary.result == BuildResult.Succeeded ? 0 : 1);
+			if (!manual)
+				EditorApplication.Exit(report.summary.result == BuildResult.Succeeded ? 0 : 1);
 		}
 
 		/**
