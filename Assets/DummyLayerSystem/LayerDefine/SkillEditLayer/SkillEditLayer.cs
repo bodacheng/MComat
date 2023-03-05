@@ -39,14 +39,19 @@ public partial class SkillEditLayer : UILayer
             }
         );
         
-        // 表现系
-        var unitConfig = Units.GetUnitConfig(PreScene.target.Focusing.r_id);
         stonesBox.AddFeatureToCells(StoneCellFeature);
         stonesBox.IniExTabs();
         
         var cts = new CancellationTokenSource();
         ReturnLayer.AddUniTaskCancel(cts);
-        await stonesBox._tabEffects.SwitchElement(unitConfig.element, cts.Token);
+
+        UnitConfig unitConfig = null;
+        if (PreScene.target.Focusing != null)
+        {
+            unitConfig = Units.GetUnitConfig(PreScene.target.Focusing.r_id);
+        }
+        
+        await stonesBox._tabEffects.SwitchElement(unitConfig != null? unitConfig.element : Element.lightMagic, cts.Token);
         await stonesBox.IniExTabsEffects(PreScene.target.postProcessCamera);
         stonesBox.FilterFeatureRefresh(true);
         skillStoneDetail.Clear();

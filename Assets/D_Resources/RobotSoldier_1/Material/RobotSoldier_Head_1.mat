@@ -2,15 +2,40 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: RobotSoldier_Head_1
   m_Shader: {fileID: 4800000, guid: a2a06e22c08354d9699356710b69ca9c, type: 3}
-  m_ShaderKeywords: AMBIENT ANIME_SOFT BASE_CONTRAST DIFFUSE EMISSIVE_MAP FOG MATCAP
-    MATCAP_PERSPECTIVE NORMAL_MAP SHADOWS_ENABLED SPECULAR_MAP
+  m_ValidKeywords:
+  - AMBIENT
+  - ANIME_SOFT
+  - BASE_CONTRAST
+  - DIFFUSE
+  - EMISSIVE_MAP
+  - FOG
+  - MATCAP
+  - MATCAP_PERSPECTIVE
+  - NORMAL_MAP
+  - SHADOWS_ENABLED
+  - SPECULAR
+  - SPECULAR_MAP
+  - _DETAILBLEND_MULTIPLY
+  - _DETAILUV_UV1
+  - _HEIGHTCOLORSBLEND_ALPHA_BLEND
+  - _LAYER1BLEND_ALPHA_BLEND
+  - _LAYER2BLEND_ALPHA_BLEND
+  - _LAYER3BLEND_ALPHA_BLEND
+  - _LIGHTMAPUV_UV1
+  - _MATCAPBLEND_MULTIPLY
+  - _NORMALUV_UV1
+  - _PLANTTYPE_PLANT
+  - _RIMBLEND_ADDITIVE
+  - _SHADOWOVERLAYANIMATION_SCROLL
+  - _SPECULARUV_UV1
+  m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -133,6 +158,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AlphaClip: 0
     - _AmbientBrightness: 1

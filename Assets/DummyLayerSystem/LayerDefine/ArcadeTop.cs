@@ -130,6 +130,9 @@ public class ArcadeTop : UILayer
 
     void Refresh()
     {
+        if (container.IsDestroyed())
+            return;
+        
         _stageButtons.Sort((a, b) => b.stageNo.CompareTo(a.stageNo));
         for (var i = 0; i < _stageButtons.Count; i++)
         {

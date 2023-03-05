@@ -56,7 +56,10 @@ public class OpenSkillEdit : TutorialProcess
         if (_unitsLayer == null)
         {
             _unitsLayer = UILayerLoader.Get<UnitsLayer>();
-            if (_unitsLayer != null && _focusUnitInfo != null)
+        }
+        else
+        {
+            if (_focusUnitInfo != null && _unitsLayer.Selected.Value != _focusUnitInfo.id)
             {
                 _unitsLayer.OnClick(_focusUnitInfo.id);
             }
