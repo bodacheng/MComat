@@ -24,12 +24,6 @@ namespace ModelView
                 DestroyImmediate(target.gameObject);
             DestroyImmediate(gameObject);
         }
-
-        private void OnDestroy()
-        {
-            if (target != null)
-                DestroyImmediate(target.gameObject);
-        }
         
         void Initialize(bool fixMode, Transform focus, Transform camerasHolder = null)
         {

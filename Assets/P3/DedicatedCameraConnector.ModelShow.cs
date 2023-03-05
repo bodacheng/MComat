@@ -20,6 +20,7 @@ namespace ModelView
                 if (save.Value != null)
                     Destroy(save.Value.WholeT.gameObject);
             }
+            Saves.Clear();
         }
         
         public async UniTask ShowMyModel(string instanceID)
@@ -59,7 +60,6 @@ namespace ModelView
                 _focusingC = null;
                 return;
             }
-
             if (saveData != null)
             {
                 _focusingC = saveData;
@@ -78,7 +78,9 @@ namespace ModelView
             }
 
             if (this == null)
+            {
                 return; // 上方的await后layer可能已经被销毁
+            }
             
             _focusingC.WholeT.SetParent(transform); // 确保模型总与图层一起被摧毁
             _focusingC.WholeT.position = modelPos;

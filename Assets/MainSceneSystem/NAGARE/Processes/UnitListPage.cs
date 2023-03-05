@@ -1,8 +1,7 @@
-﻿using System;
-using DummyLayerSystem;
+﻿using DummyLayerSystem;
 using UnityEngine;
 using mainMenu;
-using UniRx;
+using ModelView;
 
 public class UnitListPage : MSceneProcess
 {
@@ -18,21 +17,22 @@ public class UnitListPage : MSceneProcess
     {
         layer = UILayerLoader.Load<UnitsLayer>();
         unitOptionLayer = UILayerLoader.Load<UnitOptionLayer>();
+        
+        void UnitIconBtn(string instanceId)
+        {
+            layer.Selected.Value = instanceId;
+            PreScene.target.SetFocusingUnit(instanceId);
+            unitOptionLayer.RefreshMemberDetailPageByFocusingUnit();
+        }
         layer.SetDisplayUnitIconsAfterAction(
             () =>
             {
-                void UnitIconBtn(string instanceId)
-                {
-                    Debug.Log("onclick instanceId :"+ instanceId);
-                    layer.Selected.Value = instanceId;
-                    PreScene.target.SetFocusingUnit(instanceId);
-                    unitOptionLayer.RefreshMemberDetailPageByFocusingUnit();
-                }
                 layer.SetUnitsIconOnClick(UnitIconBtn);
             }
         );
         layer.DisplayUnitIcons(dataAccess.Units.Dic, true);
-        Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(_ => unitOptionLayer.RefreshMemberDetailPageByFocusingUnit()).AddTo(layer);
+        DedicatedCameraConnector.ClearBackUpModels();
+        UnitIconBtn(PreScene.target.Focusing.id);
         SetLoaded(true);
     }
     

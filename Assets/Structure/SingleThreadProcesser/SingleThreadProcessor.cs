@@ -1,13 +1,15 @@
 ﻿using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class SingleThreadProcessor
 {
-    List<UniTask> processQueue;
-    
+    private readonly ConcurrentQueue<UniTask> processQueue = new ConcurrentQueue<UniTask>();
+
     public async UniTask RunAsQueued(UniTask origin)
     {
         await WaitForTurn(origin);
@@ -21,18 +23,14 @@ public class SingleThreadProcessor
     
     private async UniTask WaitForTurn(UniTask origin)
     {
-        if (processQueue == null)
-            processQueue = new List<UniTask>();
-        processQueue.Add(origin);
-        await UniTask.WaitUntil(() => processQueue.IndexOf(origin) == 0).ContinueWith(
-            async () =>
-            {
-                await origin.ContinueWith(() =>
-                {
-                    Debug.Log(processQueue.IndexOf(origin) + ":"+ processQueue.Count);
-                    processQueue.Remove(origin);
-                });
-            });
+        await UniTask.WaitUntil(()=> processQueue.Count == 0);
+        processQueue.Enqueue(origin);
+        await UniTask.WaitUntil(() =>
+        {
+            var tempQueue = new List<UniTask>(processQueue);
+            return tempQueue.Contains(origin) && tempQueue.IndexOf(origin) == 0;
+        });
+        processQueue.TryDequeue(out _);
     }
 
     /// <summary>
