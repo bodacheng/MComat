@@ -23,7 +23,7 @@ namespace Soul
         public override void AI_State_enter(V_Damage value)
         {
             base.AI_State_enter();
-            FightParamsRef.ChangeLayerForLimbs(14);
+            //FightParamsRef.ChangeLayerForLimbs(14);
             
             FlyingStep = 0;
             _timeCounter = 0;
@@ -46,7 +46,6 @@ namespace Soul
             EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(value.from_weapon.element), value.DamageEffectPoint, value.CutRotation, null).Forget();
             _usedYCurve = value.from_weapon.damage_type == DamageType.high ? FightGlobalSetting.HDamageYAnimationCurve : FightGlobalSetting.KnockOffYAnimationCurve;
             _usedZCurve = value.from_weapon.damage_type == DamageType.high ? FightGlobalSetting.HDamageZAnimationCurve : FightGlobalSetting.KnockOffZAnimationCurve;
-            FightParamsRef.EnableAllLimbs(false);
         }
 
         public override bool Capacity_Exit_Condition()
@@ -57,8 +56,7 @@ namespace Soul
         public override void AI_State_exit()
         {
             base.AI_State_exit();
-            FightParamsRef.EnableAllLimbs(true);
-            FightParamsRef.ChangeLayerForLimbs(_DATA_CENTER._TeamConfig.mylayer);
+            //FightParamsRef.ChangeLayerForLimbs(_DATA_CENTER._TeamConfig.mylayer);
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             FightParamsRef.GettingDamage = false;
             _SkillCancelFlag.turn_off_flag();
