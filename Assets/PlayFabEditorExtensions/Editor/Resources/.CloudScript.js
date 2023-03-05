@@ -205,10 +205,10 @@ handlers.completedLevel = function (args, context) {
     var unit_award = []
     switch (newLevelCompleted) {
         case 1:
-            unit_award = ["1"];
+            unit_award = ["2"];
             break;
         case 5:
-            unit_award = ["2"];
+            unit_award = ["1"];
             break;
         case 20:
             unit_award = ["4"];
