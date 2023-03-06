@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -141,7 +140,11 @@ public partial class AnimationManger {
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/high", out _hurtClipsHigh);
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/press", out _hurtClipsPress);
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/lay", out _hurtClipsLay);
-        
+
+        if (Animator == null || Animator.gameObject == null)
+        {
+            return; // When the character model is displayed, there may be issues such as the menu suddenly closing
+        }
         animatorOverride = new AnimatorOverrideController(Animator.runtimeAnimatorController);
 
         // 以上内容为个性化动画片段对base层基础动画的覆盖

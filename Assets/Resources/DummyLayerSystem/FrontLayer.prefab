@@ -751,7 +751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  languageCode: Stones
+  languageCode: SkillGem
   target: {fileID: 3029729695345646773}
 --- !u!1 &3029729695545733451
 GameObject:
@@ -1976,7 +1976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  languageCode: Units
+  languageCode: Fighter
   target: {fileID: 3029729696519322222}
 --- !u!1 &3029729696563248495
 GameObject:
