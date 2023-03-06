@@ -37,7 +37,7 @@ public class StartUpPresentation : MonoBehaviour
         
         if (bytes > 0)
         {
-            DownLoadConfirm("Download size : " + bytes / 1048576 + "MB" + "\n\n" + "Start to download");
+            DownLoadConfirm("Download size : " + bytes / 1048576 + "MB" + "\n\n" + "Start to download", bytes);
         }
         else
         {
@@ -45,7 +45,7 @@ public class StartUpPresentation : MonoBehaviour
         }
     }
     
-    void DownLoadConfirm(string msg)
+    void DownLoadConfirm(string msg, float wholeBytes)
     {
         PopupLayer.ArrangeConfirmWindow(
             async ()=>
@@ -58,12 +58,9 @@ public class StartUpPresentation : MonoBehaviour
                         UILayerLoader.Remove<ProgressLayer>();
                         Go();
                     },
-                    (x,f) =>
+                    (x) =>
                     {
-                        if (f == 0)
-                            ProgressLayer.LoadingPercent(x, f, false);
-                        else
-                            ProgressLayer.LoadingPercent(x, f, true);
+                        ProgressLayer.LoadingPercent(x, AddressablesLogic.DownloadedBytes / wholeBytes);
                     },
                     starter.DownLoadLabels
                 );

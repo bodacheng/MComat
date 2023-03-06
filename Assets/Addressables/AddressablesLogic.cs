@@ -40,15 +40,18 @@ public static class AddressablesLogic
         }
     }
     
-    static async UniTask DownLoadMission(string label, Action<string, float> progressUIRefresh)
+    static async UniTask DownLoadMission(string label, Action<string> progressUIRefresh)
     {
-        progressUIRefresh("Downloading "+ label + " asset", 0);
         if (Sizes.ContainsKey(label))
         {
             var handle = Addressables.DownloadDependenciesAsync(label);
             while (!handle.IsDone)
             {
-                progressUIRefresh("Downloading "+ label + " asset", handle.GetDownloadStatus().Percent);
+                if (downloadedBytes.ContainsKey(label))
+                {
+                    downloadedBytes[label] = handle.GetDownloadStatus().DownloadedBytes;
+                }
+                progressUIRefresh("Downloading game asset");
                 await UniTask.DelayFrame(0);
             }
             Addressables.Release(handle);
@@ -73,14 +76,31 @@ public static class AddressablesLogic
         }
         return wholeSize;
     }
+
+    public static long DownloadedBytes
+    {
+        get {
+            long whole = 0;
+            foreach (var kv in downloadedBytes)
+            {
+                whole += kv.Value;
+            }
+            return whole;
+        }
+    }
     
-    public static async UniTask ResourcePrepareProcess(Action complete, Action<string, float> progressUIRefresh, List<string> downLoadLabel)
+    private static Dictionary<string, long> downloadedBytes = new Dictionary<string, long>();
+    public static async UniTask ResourcePrepareProcess(Action complete, Action<string> progressUIRefresh, List<string> downLoadLabel)
     {
         // Clear all cached AssetBundles
         // WARNING: This will cause all asset bundles to be re-downloaded at startup every time and should not be used in a production game
         //Addressables.ClearDependencyCacheAsync(label);
         //var unitInstructionLayer = UILayerLoader.Load<UnitInstructionLayer>();
         //unitInstructionLayer.LoadUnitImage();
+        foreach (var label in downLoadLabel)
+        {
+            downloadedBytes.Add(label, 0);
+        }
         
         var downLoadTasks = new List<UniTask>();
         foreach (var label in downLoadLabel)

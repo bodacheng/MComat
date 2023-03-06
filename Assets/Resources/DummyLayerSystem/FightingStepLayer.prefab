@@ -516,7 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  languageCode: HPEXIntro
+  languageCode: HpBarAndExBar
   target: {fileID: 8702222061107586059}
 --- !u!1 &4545749101817524500
 GameObject:
@@ -2743,7 +2743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  languageCode: AutoBtnIntro
+  languageCode: AutoMode
   target: {fileID: 2204794544558780499}
 --- !u!1 &7111989180763261610
 GameObject:

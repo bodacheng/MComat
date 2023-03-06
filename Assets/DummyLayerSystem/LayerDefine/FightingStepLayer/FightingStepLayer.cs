@@ -79,6 +79,7 @@ public class FightingStepLayer : UILayer
         
         Team1Auto.Initialize((() => RTFightManager.Target.team1.Auto), switchTeam1Auto);
         Team2Auto.Initialize((() => RTFightManager.Target.team2.Auto), switchTeam2Auto);
+        Team2Auto.gameObject.SetActive(CommonSetting.DevMode || FightScene.FightScene.Fight.EventType == FightEventType.Self);
         
         team1UI.teamMode = FightScene.FightScene.Fight.team1Mode;
         team2UI.teamMode = FightScene.FightScene.Fight.team2Mode;

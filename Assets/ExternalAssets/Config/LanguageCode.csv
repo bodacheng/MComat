@@ -54,15 +54,15 @@ yuta,Taka,タカ,鷹
 maggie,Maggie,マギー,玛吉
 haruka,Haruka,遥,遥
 sybill,Sybil,シビュラ,西比尔
-demon,Buma,武魔,武魔
+et,Buma,武魔,武魔
 ,,,
 tetsuya_intro,"A freshman in college who entered based on their soccer skills, has a natural electrical superpower.",サッカーで推薦入学した大学一年生、電気の超能力を持って生まれた,靠足球特长进入大学的大一学生，天生拥有电气超能力。
 adam_intro,A gymnast whose specialty moves suddenly became highly destructive after the world was overturned by skill gem.,体操選手。スキルジェムによって世界が覆されて以来、彼が得意とする体操技が突然破壊力を持つようになった,体操选手，自从世界被技能石颠覆，他擅长的体操动作忽然变的极具破坏力。
 yuta_intro,"After graduating from graduate school and joining a trading company, he quit after only one year and devoted himself entirely to training in mixed martial arts. The appearance of skill stones gave him a greater sense of purpose in life.",大学院を卒業後、商社に入社しましたが、わずか1年で辞職し、総合格闘技のトレーニングに全身全霊を傾けるようになりました。そして、スキルジェムにより、彼は人生におけるより大きな目的を見出すことができました,大学院毕业后入职商社，仅一年辞职，全身投入综合格斗技训练。而技能宝石的出现又让他找到了更大的人生意义。
-yumi_intro,A sophomore girl who is now passionate about collecting skill gems and live-streaming her battles with others,大学二年生、現在はスキルジェムを収集することに熱中し、他の人たちとの戦いを生中継しています,大二女生，如今热衷于收集技能宝石并直播自己与他人的对战。
+haruka_intro,A sophomore girl who is now passionate about collecting skill gems and live-streaming her battles with others,大学二年生、現在はスキルジェムを収集することに熱中し、他の人たちとの戦いを生中継しています,大二女生，如今热衷于收集技能宝石并直播自己与他人的对战。
 maggie_intro,"An HR staff member at an IT company who enjoys doing nails. After the arrival of the skill gems, she fell in love with fighting and now wears boxing gloves to protect her hands during battles.",IT企業の人事部の社員で、ネイルをすることが好きです。スキルジェムの登場後、格闘に魅了され、戦闘時には手を保護するためにボクシンググローブを着用しています ,IT公司人事部社员。喜欢美甲。技能宝石降临后爱上格斗，战斗时为了保护手而戴着拳击手套。
 sybill_intro,A self-proclaimed fortune teller who spreads the word that skill gems are a trap set by the gods to destroy humanity. Her main source of income comes from providing consultations on love fortunes.,自称占い師で、スキルジェムは神々が人類を滅ぼすために仕掛けた罠だと広めています。収入の主な源泉は恋愛運に関する相談を提供することです,自称占卜师。四处宣扬技能宝石是神试图毁灭人类的陷阱。主要收入来源是提供恋爱运势方面的咨询。
-demon_intro,"Strange creatures resembling aliens have appeared all over the world, and they are attacking humans. It is rumored that most of them are clones, with only one true body.",世界各地でエイリアンに似た奇妙な生物が出現し、人間を攻撃しています。これらの生物の多くは分身であり、本体は一体しかないという噂が広がっています。,世界各地出现的疑似外星人的怪物。会对人类展开攻击。流传的说法是他们大多是分身，本体只有一个。
+et_intro,"Strange creatures resembling aliens have appeared all over the world, and they are attacking humans. It is rumored that most of them are clones, with only one true body.",世界各地でエイリアンに似た奇妙な生物が出現し、人間を攻撃しています。これらの生物の多くは分身であり、本体は一体しかないという噂が広がっています。,世界各地出现的疑似外星人的怪物。会对人类展开攻击。流传的说法是他们大多是分身，本体只有一个。
 ,,,
 range_close,close,近,近
 range_near,near,中,中
@@ -73,7 +73,7 @@ SkillEditInstruction2,"A blue flashing bar represents +1 balance value, while a 
 ,,,
 RandomFillStones,Auto Fill,ランダム装備,自动装备
 RemoveAllStones,Remove All,すべて解除,全部卸下
-fill9Slots,You can edit the skill set here. Try to combine the skill gems to create a powerful skill set for the warrior.,ここではスキルセットの編集ができます。スキルジェムを使って、強力なスキルセットを作成しましょう,在这里可以进行技能组编辑。尝试用技能石为战士拼接出一套强力的技能组吧。
+Fill9Slots,You can edit the skill set here. Try to combine the skill gems to create a powerful skill set for the warrior.,ここではスキルセットの編集ができます。スキルジェムを使って、強力なスキルセットを作成しましょう,在这里可以进行技能组编辑。尝试用技能石为战士拼接出一套强力的技能组吧。
 NotLegalButStillUpdate,The current skill set cannot participate in battle. Do you still want to proceed with editing?,当前のスキルセットでは戦闘に参加できません。それでも編集を実行しますか,当前技能组下无法战斗，仍要执行编辑？
 TryFillNineSlots,Please try to fill all skill slots with skill gems,技能スロットにスキルジェムを埋めてください,请尝试用技能石填满技能槽
 PlsFillAll,"To participate in battle, you need to equip skill gems in all skill slots",戦闘に参加するには、全てのスキルスロットにスキルジェムを装備する必要があります,只有全部技能槽都装备技能石才能战斗
