@@ -40,7 +40,6 @@ story_part2,"What's magical is that simply by coming into contact with these sto
 story_part3,"At the same time, creatures resembling extraterrestrial beings continued to appear and launch attacks on humanity, prompting ordinary citizens to collect and equip skill gems to defend themselves.",同時に外見人間のような生物が続々と現れ、人間に攻撃を仕掛けます。一般の人々は自分自身を守るために、スキルジェムを集めて装備するようになりました。,同时疑似外形人的生物不断出现并对人类发动攻击，普通民众开始为了保护自己而收集并配备技能石。
 story_part4,"Some humans also saw the skill gems as an opportunity to conquer the world. With different motives, people flocked to the battlefield.",さらに、スキルジェムを世界征服のチャンスと見る人もいます。目的は異なっていても、人々は次々に戦場に進みました。,也有一些人类将技能宝石看作征服世界的机会。怀着不同的目的，人们纷纷迈入战场。
 ,,,
-PressToTriggerSkill,Repeatedly tapping or holding down will sequentially unleash the first row of skills in the skill set.,連打または長押しで、スキルセットの第一列のスキルを順次発動します。,按下后将依次释放技能组第一行技能
 HpBarAndExBar,"Health and energy values. If the energy value is insufficient, EX Skills cannot be unleashed.",体力とエネルギー値。エネルギー値が不足している場合、必殺技を発動することはできません,体力与能量值，必杀技在能量值不够的情况下无法释放
 AutoMode,Click to switch between automatic or manual mode,クリックして自動または手動モードに切り替えることができます,点击可切换成自动或手动模式
 ,,,
@@ -57,13 +56,13 @@ haruka,Haruka,遥,遥
 sybill,Sybil,シビュラ,西比尔
 demon,Buma,武魔,武魔
 ,,,
-tetsuya_intro,,サッカーを愛する高校2年生。生まれつき電気の超能力を持っています。,热爱足球的高中二年级学生。天生拥有电气超能力。
-adam_intro,,,体操选手，自从世界被技能石颠覆，他擅长的体操动作忽然变的极具破坏力。
-yuta_intro,,,综合格斗选手，曾拿过世界大赛冠军。正在拼命确保自己在全新的世界下仍是一流强者。
-yumi_intro,,,高三学生。铁也的姐姐。爱好网球。
-maggie_intro,,,自由职业者，喜欢美甲。战斗时为了保护手而戴着拳击手套。
-sybill_intro,,,女小说家。自从世界被技能石颠覆，四处宣扬技能石是神试图毁灭人类的陷阱。
-demon_intro,,,世界各地出现的怪物，被怀疑为外星人。会对人类展开攻击。流传的说法是他们的大部分都是分身，本体只有一个。
+tetsuya_intro,"A freshman in college who entered based on their soccer skills, has a natural electrical superpower.",サッカーで推薦入学した大学一年生、電気の超能力を持って生まれた,靠足球特长进入大学的大一学生，天生拥有电气超能力。
+adam_intro,A gymnast whose specialty moves suddenly became highly destructive after the world was overturned by skill gem.,体操選手。スキルジェムによって世界が覆されて以来、彼が得意とする体操技が突然破壊力を持つようになった,体操选手，自从世界被技能石颠覆，他擅长的体操动作忽然变的极具破坏力。
+yuta_intro,"After graduating from graduate school and joining a trading company, he quit after only one year and devoted himself entirely to training in mixed martial arts. The appearance of skill stones gave him a greater sense of purpose in life.",大学院を卒業後、商社に入社しましたが、わずか1年で辞職し、総合格闘技のトレーニングに全身全霊を傾けるようになりました。そして、スキルジェムにより、彼は人生におけるより大きな目的を見出すことができました,大学院毕业后入职商社，仅一年辞职，全身投入综合格斗技训练。而技能宝石的出现又让他找到了更大的人生意义。
+yumi_intro,A sophomore girl who is now passionate about collecting skill gems and live-streaming her battles with others,大学二年生、現在はスキルジェムを収集することに熱中し、他の人たちとの戦いを生中継しています,大二女生，如今热衷于收集技能宝石并直播自己与他人的对战。
+maggie_intro,"An HR staff member at an IT company who enjoys doing nails. After the arrival of the skill gems, she fell in love with fighting and now wears boxing gloves to protect her hands during battles.",IT企業の人事部の社員で、ネイルをすることが好きです。スキルジェムの登場後、格闘に魅了され、戦闘時には手を保護するためにボクシンググローブを着用しています ,IT公司人事部社员。喜欢美甲。技能宝石降临后爱上格斗，战斗时为了保护手而戴着拳击手套。
+sybill_intro,A self-proclaimed fortune teller who spreads the word that skill gems are a trap set by the gods to destroy humanity. Her main source of income comes from providing consultations on love fortunes.,自称占い師で、スキルジェムは神々が人類を滅ぼすために仕掛けた罠だと広めています。収入の主な源泉は恋愛運に関する相談を提供することです,自称占卜师。四处宣扬技能宝石是神试图毁灭人类的陷阱。主要收入来源是提供恋爱运势方面的咨询。
+demon_intro,"Strange creatures resembling aliens have appeared all over the world, and they are attacking humans. It is rumored that most of them are clones, with only one true body.",世界各地でエイリアンに似た奇妙な生物が出現し、人間を攻撃しています。これらの生物の多くは分身であり、本体は一体しかないという噂が広がっています。,世界各地出现的疑似外星人的怪物。会对人类展开攻击。流传的说法是他们大多是分身，本体只有一个。
 ,,,
 range_close,close,近,近
 range_near,near,中,中
@@ -82,34 +81,35 @@ OtherUnitUsing,Currently in use by another warrior,他の戦士が使用中で�
 AColumnNeedNormal,The first column of skill slots must include at least one normal skill.,スキルスロットの最初の列には、少なくとも1つの通常スキルが含まれている必要があります,技能槽第一竖列须包括至少一个普通技能
 UnBalanced,The energy of the skill set is excessive (too many EX skills),スキルセットにエネルギーが過剰です（必殺技が多すぎます）,技能组能量过剩（必杀技过多）
 NoEnoughStoneToFill,No enough skill gems,スキルセットを構成するための十分なスキルジェムがありません。,没有足够技能石可以完成技能组配置
-TryFilterRange,Choose different ranges of skills,,点选距离限制选项卡可只显示指定攻击范围的技能
-BornSkillCantRemove,BornSkillCantRemove,,战士的原生技能不可被卸载
-CantEquipSameSkill,Cant Equip Same Skill,,同一战士不可装备相同技能
-NotFull,Not Full,全てのスロットを満たしましょう,技能组未满
+TryFilterRange,Click on the distance limitation tab to display skills with specified attack ranges.,距離制限のタブをクリックすると、指定された攻撃範囲のスキルのみが表示されます,点选距离限制选项卡可只显示指定攻击范围的技能
+BornSkillCantRemove,The warrior's innate skills cannot be uninstalled,戦士の固有スキルはアンインストールできません,战士的原生技能不可被卸载
+CantEquipSameSkill,Same skill cannot be equipped for the same warrior,同じ戦士に同じスキルを装備することはできません,同一战士不可装备相同技能
+NotFull,The skill set is not complete,全てのスロットを満たしましょう,技能组未满
 SKillConfirm,Confirm,確定,保存技能组
 ,,,
-TeamNotFull,,,队伍人员未满。必须有三名技能组完整的战士才能参与竞技场
+TeamNotFull,You need three warriors with complete skill sets to participate in the arena,アリーナに参加するには、3人のスキルセットが完全な戦士が必要です,必须有三名技能组完整的战士才能参与竞技场
 ,,,
-LinkEmail,,,邮箱绑定
-LinkDevice,,,设备绑定
-Audio,,,音量
-Support,,,帮助
-Language,,,语言
-NickName,,,昵称
+Account,Account,アカウント,账户
+LinkEmail,Email binding,メールアドレスのバインド,邮箱绑定
+InputEmail,Please enter your email address,メールアドレスを入力してください,请在此输入邮箱
+LinkDevice,Device binding,デバイスのバインド,设备绑定
+Audio,Volume,音量,音量
+Support,Help,ヘルプ,帮助
+Language,Language,言語,言語
+NickName,Nickname,ニックネーム,昵称
 ,,,
-privacy,,,隐私政策
-contact,,,联系我们
+privacy,Privacy Policy,プライバシーポリシー,隐私政策
+contact,Contact us,お問い合わせ,联系我们
 ,,,
-AdvancedGacha,,,银河裂痕
-NormalGacha,,,星空裂痕
-DropTable,DropTable,アイテム一覧,掉落技能石一栏
+AdvancedGacha,Super Gem Vortex,スーパージェムボルテックス,超级宝石漩涡
+NormalGacha,Gem Vortex,ジェムボルテックス,宝石漩涡
+DropTable,Skill Gem Drop List,スキルジェムドロップリスト,掉落技能宝石一栏
 ,,,
-AttackBtn1Intro,按下后将依次释放技能组第一行技能,按下后将依次释放技能组第一行技能,按下后将依次释放技能组第一行技能
-AttackBtn2Intro,按下后将依次释放技能组第二行技能,按下后将依次释放技能组第二行技能,按下后将依次释放技能组第二行技能
-AttackBtn3Intro,按下后将依次释放技能组第三行技能,按下后将依次释放技能组第三行技能,按下后将依次释放技能组第三行技能
-AutoBtnIntro,自动模式.点击可切换自动或手动,自动模式.点击可切换自动或手动,自动模式.点击可切换自动或手动
-HPEXIntro,玩家当前HP与气值，耗气的技能在气不够的情况下无法释放。,玩家当前HP与气值，耗气的技能在气不够的情况下无法释放。,玩家当前HP与气值，耗气的技能在气不够的情况下无法释放。
+AttackBtn1Intro,Repeatedly tapping or holding down will sequentially unleash the first row of skills in the skill set,連打または長押しで、スキルセットの第一列のスキルを順次発動します,按下后将依次释放技能组第一行技能
+AttackBtn2Intro,Repeatedly tapping or holding down will sequentially unleash the second row of skills in the skill set,連打または長押しで、スキルセットの第二列のスキルを順次発動します,按下后将依次释放技能组第二行技能
+AttackBtn3Intro,Repeatedly tapping or holding down will sequentially unleash the third row of skills in the skill set,連打または長押しで、スキルセットの第三列のスキルを順次発動します,按下后将依次释放技能组第三行技能
+AutoBtnIntro,Click to switch between auto and manual mode,クリックして、自動または手動に切り替えます,点击可切换自动或手动
 ,,,
-TeamEditTutorial1,尝试点击角色铁也的头像，再点击队伍槽来让他加入战斗,尝试点击角色铁也的头像，再点击队伍槽来让他加入战斗,尝试点击角色铁也的头像，再点击队伍槽来让他加入战斗
-TeamEditTutorial2,尝试点击角色春香的头像，再点击队伍槽来让他加入战斗,尝试点击角色春香的头像，再点击队伍槽来让他加入战斗,尝试点击角色春香的头像，再点击队伍槽来让他加入战斗
-SaveYourTeam,点击确定保存队伍,点击确定保存队伍,点击确定保存队伍
+TeamEditTutorial1,Click on the fighter's icon and place them in the team slot.,ファイターのアイコンをクリックして、任意のチームスロットに配置してください,尝试点击角色头像，再点击队伍槽使其编入队伍
+TeamEditTutorial2,Add a new warrior to the team to have a total of two members,新しい戦士をチームに編成して、チームに2名のメンバーを含めてください,尝试将新战士编入队伍，使队伍包含两名队员
+SaveYourTeam,Click on "Confirm" to save the team,「確認」をクリックして、チームを保存してください,点击确定保存队伍

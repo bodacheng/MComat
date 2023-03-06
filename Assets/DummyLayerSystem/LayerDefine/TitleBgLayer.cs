@@ -15,9 +15,10 @@ public class TitleBgLayer : UILayer
     [SerializeField] RectTransform content;
     [SerializeField] Scrollbar vScrollbar;
     [SerializeField] List<string> subtitleCodes;
-    [SerializeField] int scrollDelayFromSeconds = 2;
+    [SerializeField] float scrollDelayFromSeconds = 1;
     [SerializeField] float scrollDelayInMilliSecond = 0.001f;
-
+    [SerializeField] float ScrollbarMinValue = 0;
+    [SerializeField] float ScrollbarMaxValue = 1;
     private float milliSecondCounter = 0;
     private IDisposable _disposable;
     public void Setup(bool storyMode, Action onClickProcess = null) // false: titleMode
@@ -52,7 +53,7 @@ public class TitleBgLayer : UILayer
             (_) =>
             {
                 milliSecondCounter += scrollDelayInMilliSecond;
-                vScrollbar.value = Mathf.Clamp(vScrollbar.value - scrollDelayInMilliSecond, 0, 1);
+                vScrollbar.value = Mathf.Clamp(vScrollbar.value - scrollDelayInMilliSecond, ScrollbarMinValue, ScrollbarMaxValue);
                 if (storyMode)
                 {
                     var indexOfSubtitleCodes = (int)((1 - vScrollbar.value) / (1f / subtitleCodes.Count));
