@@ -6,15 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="66cf282c-e08e-4b9f-b5b5-1a530f7e1269" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/App/Editor/Build/BuildClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/App/Editor/Build/BuildClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaLayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaLayer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ImportantDefinition/PlayerAccountInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ImportantDefinition/PlayerAccountInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/ArenaPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainSceneSystem/NAGARE/Processes/ArenaPage.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Setting/CommonSetting.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/CommonSetting.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
@@ -80,7 +74,7 @@
       <workItem from="1678072447354" duration="2222000" />
       <workItem from="1678097194749" duration="3031000" />
       <workItem from="1678151073101" duration="710000" />
-      <workItem from="1678169170675" duration="3378000" />
+      <workItem from="1678169170675" duration="4262000" />
     </task>
     <servers />
   </component>

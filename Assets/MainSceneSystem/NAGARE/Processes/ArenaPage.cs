@@ -155,7 +155,9 @@ public class ArenaPage : MSceneProcess
                     if (leaderboardInfo.PlayerLeaderboardEntry.PlayFabId != PlayerAccountInfo.Me.PlayFabId)
                     {
                         Debug.Log( "Opponent info loaded : " +leaderboardInfo.PlayerLeaderboardEntry.PlayFabId);
-                        exceptSelf.Add(leaderboardInfo);
+                        var info = exceptSelf.Find(x=> x.PlayerLeaderboardEntry.PlayFabId == leaderboardInfo.PlayerLeaderboardEntry.PlayFabId);
+                        if (info == null)
+                            exceptSelf.Add(leaderboardInfo);
                     }
                     else
                     {

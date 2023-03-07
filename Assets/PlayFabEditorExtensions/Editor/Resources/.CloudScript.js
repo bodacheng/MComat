@@ -602,7 +602,7 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
         }
     }
     
-    // 该返回值内存在元素重复的可能
+    // 该返回值内存在元素重复的可能(玩家很少情况下，higherPlayer已经在server.GetLeaderboardAroundUser结果内)
     return { teamInfos };
 }
 
