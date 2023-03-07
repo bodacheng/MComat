@@ -29100,7 +29100,6 @@ MonoBehaviour:
   DestructionDelay: 1.5
   stop_emission_delay: 1.3
   to_be_faded_renderers: []
-  audioSource: {fileID: 7743381156824896071}
   Attachments: []
   Counter: 0
 --- !u!114 &3094169540783839689
@@ -29124,7 +29123,7 @@ MonoBehaviour:
   heavyLevel: 1
   onGroundMagic: 1
   effectSpreadOnBody: 1
-  element: 0
+  element: 4
   muzzle: 
   hitEffect: 
   ExplosionEffect: energy_resolve

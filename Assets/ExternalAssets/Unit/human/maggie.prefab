@@ -5287,7 +5287,6 @@ MonoBehaviour:
   DestructionDelay: 0.6
   stop_emission_delay: 0.5
   to_be_faded_renderers: []
-  audioSource: {fileID: 0}
   Attachments: []
   Counter: 0
 --- !u!1 &726095452914015506
@@ -7397,7 +7396,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.5, z: 0.6}
+  m_Size: {x: 0.7, y: 0.4, z: 0.5}
   m_Center: {x: -0.05, y: 0.01, z: 0}
 --- !u!114 &8939690668090893263
 MonoBehaviour:
@@ -29309,7 +29308,6 @@ MonoBehaviour:
   DestructionDelay: 0.6
   stop_emission_delay: 0.5
   to_be_faded_renderers: []
-  audioSource: {fileID: 0}
   Attachments: []
   Counter: 0
 --- !u!1 &5270115720956515421

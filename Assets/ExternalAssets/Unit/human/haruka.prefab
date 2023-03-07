@@ -1323,7 +1323,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4, z: 0.4}
+  m_Size: {x: 0.35, y: 0.35, z: 0.35}
   m_Center: {x: -0.1, y: 0, z: 0}
 --- !u!1 &1603240308561893106
 GameObject:
@@ -11969,7 +11969,6 @@ MonoBehaviour:
   DestructionDelay: 0.6
   stop_emission_delay: 0.5
   to_be_faded_renderers: []
-  audioSource: {fileID: 0}
   Attachments: []
   Counter: 0
 --- !u!1 &2454189533185868230
@@ -28811,7 +28810,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.5, z: 0.65}
+  m_Size: {x: 0.7, y: 0.4, z: 0.65}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5315057383361843497
 MonoBehaviour:
@@ -56316,7 +56315,6 @@ MonoBehaviour:
   DestructionDelay: 0.6
   stop_emission_delay: 0.5
   to_be_faded_renderers: []
-  audioSource: {fileID: 0}
   Attachments: []
   Counter: 0
 --- !u!1 &8922767020880607225
