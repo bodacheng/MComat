@@ -701,11 +701,15 @@ handlers.RankClear = function (args, context) {
     };
 
     var playerStats = server.GetPlayerStatistics(getRequest);
-    let arenapoint = 0;
+    let arenapoint = -1;
     for (i = 0; i < playerStats.Statistics.length; ++i) {
         if (playerStats.Statistics[i].StatisticName === "arenapoint") {
             arenapoint = playerStats.Statistics[i].Value;
         }
+    }
+    
+    if (arenapoint == -1) {
+        return { arenapoint : arenapoint };
     }
     
     let targetPoint = Math.floor(arenapoint / 2);

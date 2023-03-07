@@ -704,7 +704,8 @@ namespace Cocone.ProjectP3
 				{
 					if (!String.IsNullOrEmpty((attString.AsString())))
 					{
-						project.AddFrameworkToProject(frameworkTargetGuid, "AppTrackingTransparency.framework", true);
+						// 我们将其删除了。cocone到底拿AppTrackingTransparency作何用不清楚
+						//project.AddFrameworkToProject(frameworkTargetGuid, "AppTrackingTransparency.framework", true);
 						project.AddFrameworkToProject(frameworkTargetGuid, "AdSupport.framework", true);
 					}
 				}
@@ -825,25 +826,25 @@ namespace Cocone.ProjectP3
 		private readonly static string CFBundleURLName = "pokepia";
 		private readonly static List<string> urlschemes = new List<string>
 		{
-			"pokepia",
-			"pokepiapromo",
+			"mcombat",
+			"mcombatpromo",
 		};
 
 		private readonly static List<string> allowUrlScheme = new List<string>
 		{
-			"sweetdays",
-			"ccnpokecolo",
-			"minime",
-			"sensil",
-			"niagho",
-			"mld",
-			"edenpoiyo",
-			"ccnstory",
-			"roomage",
-			"ccnpocketcolony",
-			"livlyisland",
-			"purenista",
-			"poketwin"
+			// "sweetdays",
+			// "ccnpokecolo",
+			// "minime",
+			// "sensil",
+			// "niagho",
+			// "mld",
+			// "edenpoiyo",
+			// "ccnstory",
+			// "roomage",
+			// "ccnpocketcolony",
+			// "livlyisland",
+			// "purenista",
+			// "poketwin"
 		};
 
 		
