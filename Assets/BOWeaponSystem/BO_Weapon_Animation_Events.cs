@@ -45,7 +45,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             BEs.left_foot = left_foot;
             BEs.head = head;
             BEs.tail = tail;
-            BEs.bodyPartsHitBoxRegisterDic = new Dictionary<Transform,Decomposition>();
+            BEs.bodyPartsHitBoxRegisterDic = new Dictionary<Transform, Decomposition>();
             if (BEs.right_hand != null)
                 BEs.bodyPartsHitBoxRegisterDic.Add(BEs.right_hand,null);
             if (BEs.left_hand != null)
@@ -69,39 +69,39 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         
         void RegisterBodyPartWeapon(Transform t)
         {
-            Decomposition target_hitbox = null;
+            Decomposition decomposition = null;
             if (t != null && !BEs.bodyPartsHitBoxRegisterDic.ContainsKey(t))
             {
                 BEs.bodyPartsHitBoxRegisterDic.Add(t, null);
             }
             if (BEs.bodyPartsHitBoxRegisterDic[t] == null)
             {
-                target_hitbox = HurtObjectManager.GetDPool().Rent();
-                BEs.bodyPartsHitBoxRegisterDic[t] = target_hitbox;
-                target_hitbox._HitBox.SetOwnerFACR(BEs.myownheath);
+                decomposition = HurtObjectManager.GetDPool().Rent();
+                BEs.bodyPartsHitBoxRegisterDic[t] = decomposition;
+                decomposition._HitBox.SetOwnerFACR(BEs.myownheath);
             }
             else
             {
-                target_hitbox = BEs.bodyPartsHitBoxRegisterDic[t];
+                decomposition = BEs.bodyPartsHitBoxRegisterDic[t];
             }
             ConstraintSource myConstraintSource = new ConstraintSource
             {
                 sourceTransform = t,
                 weight = 1
             };
-            target_hitbox.transform.position = t.position;
-            target_hitbox.GetPositionConstraint().SetSources(new List<ConstraintSource> { myConstraintSource });
-            target_hitbox.GetPositionConstraint().constraintActive = true;
-            target_hitbox.GetPositionConstraint().locked = true;
-            target_hitbox._HitBox.SetTeamConfig(BEs._TeamConfig);
-            target_hitbox._HitBox.SetReferenceTransformInfo(BEs.geometryCenter);//第二个参数是因为BE本身就在wholeT上
-            target_hitbox._HitBox.SetDetectionTargetsUnion(BEs._Used_Targets);
-            target_hitbox._HitBox.MarkersEnablingStarts();
+            decomposition.transform.position = t.position;
+            decomposition.GetPositionConstraint().SetSources(new List<ConstraintSource> { myConstraintSource });
+            decomposition.GetPositionConstraint().constraintActive = true;
+            decomposition.GetPositionConstraint().locked = true;
+            decomposition._HitBox.SetTeamConfig(BEs._TeamConfig);
+            decomposition._HitBox.SetReferenceTransformInfo(BEs.geometryCenter);//第二个参数是因为BE本身就在wholeT上
+            decomposition._HitBox.SetDetectionTargetsUnion(BEs._Used_Targets);
+            decomposition._HitBox.MarkersEnablingStarts();
             
             if (FightGlobalSetting.HitBoxLogger)
             {
-                target_hitbox._HitBox.GeneratedByStateKey = BEs.myownheath.Center._MyBehaviorRunner.GetNowState().StateKey;
-                target_hitbox._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
+                decomposition._HitBox.GeneratedByStateKey = BEs.myownheath.Center._MyBehaviorRunner.GetNowState().StateKey;
+                decomposition._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
             }
         }
         
@@ -114,12 +114,12 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             }
             if (BEs.bodyPartsHitBoxRegisterDic[t] != null)
             {
-                Decomposition target_hitbox = BEs.bodyPartsHitBoxRegisterDic[t];
+                Decomposition hitBox = BEs.bodyPartsHitBoxRegisterDic[t];
                 BEs.bodyPartsHitBoxRegisterDic[t] = null;
-                target_hitbox.GetPositionConstraint().constraintActive = false;
-                target_hitbox.CloseMarkers();
-                target_hitbox._HitBox.SetDetectionTargetsUnion(null);
-                target_hitbox.Phase = -1;
+                hitBox.GetPositionConstraint().constraintActive = false;
+                hitBox.CloseMarkers();
+                hitBox._HitBox.SetDetectionTargetsUnion(null);
+                hitBox.Phase = -1;
             }
         }
         
@@ -142,7 +142,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
     // 三个函数中都存在重复执行，都把本模块内的_Used_Targets给多次执行clear操作了。
     // 因为武器在作为飞行道具，伤害性特效的情况下，是自己保有一个单独的_Used_Targets列表，也是靠这三个函数来连带着对其进行清空
     // 所以找不太到一种能更好统合固化武器，特效武器这方面的写法，所以干脆就保持着这个让_Used_Targets重复被clear的状态。
-    List<Transform> toRefreshParts = new List<Transform>();
+    readonly List<Transform> toRefreshParts = new List<Transform>();
     public void ClearTargets()
 	{
         toRefreshParts.Clear();

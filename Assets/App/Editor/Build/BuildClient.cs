@@ -566,10 +566,10 @@ namespace Cocone.ProjectP3
 			plist.root.SetBoolean("ITSAppUsesNonExemptEncryption", false);
 			
 			// iOS14 AppTrackingポップアップの表示用
-			var attMessage = "許可をした場合、本サービスで収集したお客様の情報をアプリの品質の向上に役立たせていただきます。" +
-			                 "\n今後のサービス改善のため、トラッキングの設定をお願いします。" +
-			                 "\n※トラッキングの設定は端末の設定からいつでも変更可能です。";
-			plist.root.SetString("NSUserTrackingUsageDescription", attMessage);
+			// var attMessage = "許可をした場合、本サービスで収集したお客様の情報をアプリの品質の向上に役立たせていただきます。" +
+			//                  "\n今後のサービス改善のため、トラッキングの設定をお願いします。" +
+			//                  "\n※トラッキングの設定は端末の設定からいつでも変更可能です。";
+			// plist.root.SetString("NSUserTrackingUsageDescription", attMessage);
 			
 			//URL Schemes
 			AddURLSchemes(plist);
