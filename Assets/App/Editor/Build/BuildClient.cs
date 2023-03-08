@@ -516,24 +516,6 @@ namespace Cocone.ProjectP3
 			return report;
 		}
 		
-#if UNITY_ANDROID
-		//以下来自于网上一个中国人的说法
-		const string kWorkaroundFlag = "/D_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS";
-		public static void OnPostProcessBuild(BuildTarget buildTarget, string path)
-		{
-			var clEnv = Environment.GetEnvironmentVariable("_CL_");
-			if (string.IsNullOrEmpty(clEnv))
-			{
-				Environment.SetEnvironmentVariable("_CL_", kWorkaroundFlag);
-			}
-			else if (!clEnv.Contains(kWorkaroundFlag))
-			{
-				clEnv += " " + kWorkaroundFlag;
-				Environment.SetEnvironmentVariable("_CL_", clEnv);
-			}
-		}
-#endif
-		
 #if UNITY_IOS
 		/**
 		 * アプリケーションのデフォルト設定plistを取得
