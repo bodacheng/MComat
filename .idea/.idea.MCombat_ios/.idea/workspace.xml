@@ -5,45 +5,117 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="66cf282c-e08e-4b9f-b5b5-1a530f7e1269" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AnimControl/AnimationManger_ResourceLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AnimControl/AnimationManger_ResourceLoad.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Punch/Frank_FS3@Punch07_Crouch.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Punch/Frank_FS3@Punch07_Crouch.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Attack03.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Attack03.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Block.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Block.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Combo03_2.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Combo03_2.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Combo03_3.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Combo03_3.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Combo03_All.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Combo03_All.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Combo04_4.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Combo04_4.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Equip.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Equip.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Evade_L.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Evade_L.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Evade_R.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Evade_R.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Skill04.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/FBX Animation/Root_Motion/Frank_RPG_Mage_Skill04.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EffectsSystem/TrackControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsSystem/TrackControl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/attack_06.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/attack_06.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_back.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_back.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_backL45.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_backL45.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_backR45.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_backR45.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_front.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_front.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_front2.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_front2.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_frontL45.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_frontL45.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_frontR45.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_frontR45.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_left.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_left.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_right.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/run_right.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_back.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_back.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_backL45.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_backL45.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_backR45.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_backR45.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_front.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_front.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_frontL45.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_frontL45.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_frontR45.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_frontR45.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_left.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_left.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_right.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Generic/walk_right.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Humanoid/00_T-Pose.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/DarkSorcerer_AnimSet/Animations/Humanoid/00_T-Pose.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Animations/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Animations/Materials/Material.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Animations/Materials/Material.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Animations/Materials/Scene_Material.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Animations/Materials/Scene_Material.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Animations/Materials/Scene_Material2.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Animations/Materials/Scene_Material2.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@BackDash.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@BackDash.FBX.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@Charge_End.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@Charge_End.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@Charge_Start.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@Charge_Start.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@Dash.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@Dash.FBX.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@Idle.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@Idle.FBX.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@Idle_Lie.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@Idle_Lie.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@Idle_Prone.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@Idle_Prone.FBX.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@Jump_Long_B.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Basic_Move/Frank_FS3@Jump_Long_B.FBX.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Combo_Cut/Frank_FS3@Combo03_2.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Combo_Cut/Frank_FS3@Combo03_2.FBX.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Combo_Cut/Frank_FS3@Combo06_2.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Combo_Cut/Frank_FS3@Combo06_2.FBX.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Demo_Fury.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Demo_Fury.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Demo_Hit_Fury.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Demo_Hit_Fury.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Main Camera.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Main Camera.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Punch/Frank_FS3@Air_Punch02.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Asset/Animations/Punch/Frank_FS3@Air_Punch02.FBX.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/Camera_Animation.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/Camera_Animation.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/Frank_Mage_Mask.mask" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/Frank_Mage_Mask.mask.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/Frank_Warrior.mask" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Frank_Fighter/Assets/Animations/Frank_Warrior.mask.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/avoid_L.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/avoid_L.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/avoid_R.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/avoid_R.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/greeting.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/greeting.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/high_hit.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/high_hit.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/high_idle.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/high_idle.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/high_to_idle.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/high_to_idle.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/walk_frontL45.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/walk_frontL45.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/walk_frontR45.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/walk_frontR45.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/walk_left.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/walk_left.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/walk_right.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Monk_Set/Animation/Generic/walk_right.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/dead_06_inplace.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/dead_06_inplace.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/down_loop_inplace.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/down_loop_inplace.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/hit_front_inplace.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/hit_front_inplace.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/hit_left_inplace.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/hit_left_inplace.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/hit_right_inplace.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/hit_right_inplace.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/idle_inplace.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/idle_inplace.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/landing_inplace.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/landing_inplace.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/superhit_victim_inplace.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/generic_inplace/superhit_victim_inplace.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/idle_ground.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Generic/idle_ground.fbx.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Humanoid/00_T-pose.FBX" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/superhero_animset/Animation/Humanoid/00_T-pose.FBX.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/man.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/man.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/skill/fo_boom.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/skill/fo_boom.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/skill/fo_boom.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/skill/fo_boom.anim.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/skill/runesburst.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/skill/runesburst.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/woman.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/woman.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Config/SkillStaticAnalysis.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/SkillStaticAnalysis.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Config/mst_skill.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Config/mst_skill.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/HurtObjects/defaultmagic/curvedarkball.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/HurtObjects/defaultmagic/curvedarkball.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SKillAnalyzer/SKillAnalyzer_Common.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SKillAnalyzer/SKillAnalyzer_Common.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Setting/CommonSetting.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/CommonSetting.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SkillEvents/BO_Ani_E.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SkillEvents/BO_Ani_E.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/skill/onetwo.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/skill/onetwo.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/skill/onetwo.anim.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/skill/onetwo.anim.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +132,8 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_PostBuildProcessHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ads@3.7.5/Runtime/Advertisement/Utilities/MiniJSON.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Volume/VolumeProfile.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Editor/GlobalSettings/SerializedUniversalRenderPipelineGlobalSettings.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/UI/Images.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2Mcgi1Z0ShzboFWU3B6aaL5iOCD" />
   <component name="ProjectViewState">
@@ -108,7 +182,7 @@
       <workItem from="1678097194749" duration="3031000" />
       <workItem from="1678151073101" duration="710000" />
       <workItem from="1678169170675" duration="8056000" />
-      <workItem from="1678266104297" duration="1415000" />
+      <workItem from="1678266104297" duration="3183000" />
     </task>
     <servers />
   </component>
@@ -120,6 +194,25 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Behaviour/Defines/states/Hurts/Hurt_State.cs</url>
+          <line>67</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Behaviour/Defines/states/Hurts/Hurt_State.cs" initialLine="67" containingFunctionPresentation="method 'AI_State_exit'">
+            <startOffsets>
+              <option value="2749" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2750" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

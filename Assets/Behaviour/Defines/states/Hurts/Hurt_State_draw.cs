@@ -7,7 +7,7 @@ namespace Soul
     {
         void DrawDamageStart(V_Damage newValue)
         {
-            _Rigidbody.mass = 200;
+            _Rigidbody.mass = FightGlobalSetting._fighterRigidMass / 2;
             used_dizzy_time = FightGlobalSetting.HeavyHitLastingTime;
         }
 

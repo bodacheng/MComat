@@ -9,6 +9,7 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] AnimationCurve knockOffZAnimationCurve;
     [SerializeField] AnimationCurve hDamageYAnimationCurve;
     [SerializeField] AnimationCurve hDamageZAnimationCurve;
+    [SerializeField] int fighterRigidMass = 1000;
     [SerializeField] float AT_coefficient = 1;
     [SerializeField] float HP_coefficient = 1;
     [SerializeField] bool Team1Invincible = false;
@@ -36,6 +37,7 @@ public class FightGlobalSetting : ScriptableObject
     public static int _sceneStep;//0 :mainmenu 1: fightscene
     public static bool _hasDefend;
     public static bool _skillStoneHasExp;
+    public static int _fighterRigidMass;
     public static float AtCoefficient = 1;
     public static float HpCoefficient = 1;
     public static bool _Team1Invincible;
@@ -73,6 +75,7 @@ public class FightGlobalSetting : ScriptableObject
 
         AtCoefficient = AT_coefficient;
         HpCoefficient = HP_coefficient;
+        _fighterRigidMass = fighterRigidMass;
         _Team1Invincible = Team1Invincible;
         
         _NormalSkillExGet = NormalSkillExGet;

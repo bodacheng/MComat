@@ -142,6 +142,7 @@ public partial class Data_Center : MonoBehaviour
     {
         FightDataRef.IsDead.Value = false;
         BodyElementTagAndLayerSet(teamConfig);
+        _BasicPhysicSupport.Rigidbody.mass = FightGlobalSetting._fighterRigidMass;
         FightDataRef.FindAllSelfCollidersAndIgnoreCollision();
         FightDataRef.ChangeLayerForLimbs(teamConfig.mylayer);
         FightDataRef.EnableAllLimbs(true);
