@@ -39,9 +39,9 @@ public partial class BO_Ani_E : MonoBehaviour
         magic_path = FightGlobalSetting.EffectPathDefine(element);
     }
     
-    void DecideTarget(string bodypartName)
+    void DecideTarget(string bodyPartName)
     {
-        switch (bodypartName)
+        switch (bodyPartName)
         {
             case "right_hand":
                 target = right_hand;
@@ -81,12 +81,40 @@ public partial class BO_Ani_E : MonoBehaviour
     public void MagicForward(AnimationEvent e)
     {
         this.hiddenMethods.MagicForward_core(
-            e.stringParameter,_DATA_CENTER.geometryCenter.position + transform.forward * e.floatParameter,
+            e.stringParameter,
+            _DATA_CENTER.geometryCenter.position + transform.forward * e.floatParameter,
             transform.rotation,
             e.intParameter,
             null);
     }
 
+    public void MagicToEnemy(AnimationEvent e)
+    {
+        Vector3 nav_target;
+        if (_DATA_CENTER.Sensor.GetClosestEnemyColliderInSensorRange() != null)
+        {
+            nav_target = _DATA_CENTER.Sensor.GetClosestEnemyColliderInSensorRange().transform.position;
+            Debug.Log("1"+nav_target);
+        }
+        else if (_DATA_CENTER.Sensor.GetEnemiesByDistance(false).Count > 0)
+        {
+            nav_target = _DATA_CENTER.Sensor.GetEnemiesByDistance(false)[0].transform.position;
+            Debug.Log("2"+nav_target);
+        }
+        else
+        {
+            nav_target = _DATA_CENTER.geometryCenter.position + transform.forward * 5f;
+            Debug.Log("3"+nav_target);
+        }
+        
+        this.hiddenMethods.MagicForward_core(
+            e.stringParameter,
+            nav_target,
+            transform.rotation,
+            e.intParameter,
+            null);
+    }
+    
     public void ReleasePreparedMagic(AnimationEvent e)
     {
         DecideTarget(e.stringParameter);
@@ -98,13 +126,13 @@ public partial class BO_Ani_E : MonoBehaviour
         DecideTarget(e.stringParameter);
         hiddenMethods.ReleasePreparedMagic_core(target.position, transform.rotation, null, e.floatParameter, null);
     }
-
+    
     public void ReleasePreparedEffect(AnimationEvent e)
     {
         DecideTarget(e.stringParameter);
         hiddenMethods.ReleasePreparedEffect_core(target.position, transform.rotation, target);
     }
-
+    
     public void ReleasePreparedEffectToAir(AnimationEvent e)
     {
         DecideTarget(e.stringParameter);

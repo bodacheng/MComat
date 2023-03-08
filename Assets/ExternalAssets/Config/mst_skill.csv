@@ -32,3 +32,4 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK
 36,gangkick,human,2,4.5,5,GR,
 159,g_fire,human,0,1,5,GI,
 45,f_rushpunch,human,1,2,5,GR,
+118,fo_boom,human,3,4,5,GI,

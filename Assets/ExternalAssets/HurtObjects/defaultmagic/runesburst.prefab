@@ -1328,7 +1328,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 0, g: 0, b: 0, a: 0}
+        key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1343,7 +1343,7 @@ ParticleSystem:
         ctime5: 0
         ctime6: 0
         ctime7: 0
-        atime0: 10601
+        atime0: 43562
         atime1: 65535
         atime2: 0
         atime3: 0
@@ -5131,7 +5131,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 40
       minScalar: 11
       maxCurve:
         serializedVersion: 2
@@ -9980,7 +9980,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 25
       minScalar: 9
       maxCurve:
         serializedVersion: 2
@@ -14827,7 +14827,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 20
       minScalar: 3.5
       maxCurve:
         serializedVersion: 2
@@ -19513,8 +19513,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
-      minScalar: 0.5
+      scalar: 0.6
+      minScalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -19682,7 +19682,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.25
+      scalar: 1
       minScalar: 0.05
       maxCurve:
         serializedVersion: 2
@@ -29448,7 +29448,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 0.22794116, b: 0.22794116, a: 0.447}
-      maxColor: {r: 0, g: 0.28969336, b: 1, a: 0.8627451}
+      maxColor: {r: 0, g: 0.94070315, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 0.86795133, b: 0.31617647, a: 1}
@@ -29510,7 +29510,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 20
       minScalar: 3.5
       maxCurve:
         serializedVersion: 2
@@ -30201,9 +30201,9 @@ ParticleSystem:
       time: 0
       countCurve:
         serializedVersion: 2
-        minMaxState: 3
-        scalar: 20
-        minScalar: 10
+        minMaxState: 0
+        scalar: 1
+        minScalar: 1
         maxCurve:
           serializedVersion: 2
           m_Curve: []
@@ -34029,7 +34029,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 594cc92476cb81243b6d7eb2e34bbbc5, type: 2}
+  - {fileID: 2100000, guid: 9f16d70369f49d34cab5a334704f956e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -34130,7 +34130,7 @@ MonoBehaviour:
   enemyShieldLayer:
     serializedVersion: 2
     m_Bits: 0
-  radius: 3
+  radius: 5
 --- !u!1 &7961396959559145564
 GameObject:
   m_ObjectHideFlags: 0
@@ -34827,7 +34827,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1.22
+      value: 5
       mode: 0
       spread: 0
       speed:
@@ -35056,7 +35056,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 35
+        scalar: 100
         minScalar: 35
         maxCurve:
           serializedVersion: 2
@@ -39592,7 +39592,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1.22
+      value: 4
       mode: 0
       spread: 0
       speed:
@@ -44357,7 +44357,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1.15
+      value: 5
       mode: 0
       spread: 0
       speed:

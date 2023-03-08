@@ -199,6 +199,10 @@ public partial class AnimationManger {
                     {
                         tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element));
                     }
+                    if (e.functionName == "MagicToEnemy")
+                    {
+                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element));
+                    }
                     if (e.functionName == "PrepareOneMagic")
                     {
                         tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element));

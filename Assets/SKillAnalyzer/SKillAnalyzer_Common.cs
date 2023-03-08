@@ -27,7 +27,7 @@ public partial class SKillAnalyzer
     };
     static readonly List<string> EffectsAttackFrameStartMethodNames = new List<string>()
     {
-        "MagicForward","Bullet_shoot_from_body_part","BlastAttack","ReleasePreparedMagic","ReleasePreparedMagicToAir"
+        "MagicForward","Bullet_shoot_from_body_part","BlastAttack","ReleasePreparedMagic","ReleasePreparedMagicToAir","MagicToEnemy"
     };
     
     public static async UniTask<IDictionary<string, AnimationClip>> AllSkillAnims(string type)

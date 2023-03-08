@@ -32,4 +32,4 @@ RECORD_ID,REAL_NAME,SPLevel,EstimateDamage,AttackCount,HP
 36,gangkick,2,4.5,1,5
 159,g_fire,0,1,1,5
 45,f_rushpunch,1,2,1,5
-
+118,fo_boom,3,4,4,5

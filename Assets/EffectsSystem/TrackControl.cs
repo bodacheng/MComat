@@ -1,28 +1,33 @@
 ﻿using UnityEngine;
 
 public class TrackControl : MonoBehaviour {
-    //public List<EventKeyframe> listEventKeyframe = new List<EventKeyframe>();
-
-    public TrackMode _TrackMode = TrackMode.DefinedTrack;
-    float time_counter;
     
-    [Space(11)]
+    //public List<EventKeyframe> listEventKeyframe = new List<EventKeyframe>();
+    
+    public TrackMode _TrackMode = TrackMode.DefinedTrack;
+    
+    [Space(10)]
     [Header("DefinedTrack")]
-    public AnimationCurve xAnimationCurve;
-    public AnimationCurve zAnimationCurve;
-    public AnimationCurve yAnimationCurve;
-    public float Z_scale = 1f;
+    [SerializeField] AnimationCurve xAnimationCurve;
+    [SerializeField] AnimationCurve zAnimationCurve;
+    [SerializeField] AnimationCurve yAnimationCurve;
+    [SerializeField] float Z_scale = 1f;
     Matrix4x4 m;
 
-    [Space(11)]
+    [Space(10)]
     [Header("Navigation")]
-    public float navi_time = 5f;
-    public float DegreeOfControl = 1;
-    public float navRunSpeed = 10;
+    [SerializeField] float navi_time = 5f;
+    [SerializeField] float DegreeOfControl = 1;
+    [SerializeField] float navRunSpeed = 10;
 
-    public Sensor Sensor;
+    public Sensor Sensor
+    {
+        get;
+        set;
+    }
     Vector3 direction;
     Transform navTarget;
+    float time_counter;
     
     public void StartOff(Vector3 start, Quaternion startQ, float _Z_scale)
     {
