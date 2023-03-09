@@ -166,4 +166,4 @@ MonoBehaviour:
   resistanceMax: 10
   eXMax: 100
   hurtObjectPreLoadCount: 5
-  shadowMaterial: {fileID: 2100000, guid: 718b4d06a5b8d44538421fe070643d58, type: 2}
+  shadowMaterial: {fileID: 2100000, guid: ea7a57501503cd74f87a10d974771222, type: 2}
