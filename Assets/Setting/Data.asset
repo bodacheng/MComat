@@ -137,6 +137,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fighterRigidMass: 1000
+  onTouchEnemyBodyRigidDrag: 1000
   AT_coefficient: 1
   HP_coefficient: 1
   Team1Invincible: 0

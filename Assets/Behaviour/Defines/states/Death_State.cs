@@ -81,15 +81,16 @@ namespace Soul
                 if (_BasicPhysicSupport.AtRing)
                 {
                     _touchedBoundary = true;
-                    var pos = gameObject.transform.position;
+                    var pos = _DATA_CENTER.geometryCenter.position;
                     _xz = Vector3.zero - pos;
                     _xz.y = 0;
                     _xz = _xz.normalized;
-                    _effectP = pos.normalized * BoundaryControlByGod._BattleRingRadius;
+                    _effectP = pos.normalized * (BoundaryControlByGod._BattleRingRadius + 1.2f); // 这个0.5f是因为一些演出上的原因
                     _effectP.y = pos.y;
                     _quaV = Vector3.zero - pos.normalized;
                     _quaV.y = 0;
-                    EffectsManager.GenerateEffect("wallCrack", null, _effectP, Quaternion.LookRotation(_quaV, Vector3.up), null).Forget();
+                    if (_effectP.y > 1)
+                        EffectsManager.GenerateEffect("wallCrack", null, _effectP, Quaternion.LookRotation(_quaV, Vector3.up), null).Forget();
                 }
             }
             

@@ -25,7 +25,6 @@ namespace FightScene
         async UniTask BeforeFightCountDown()
         {
             AutoMoveToNext = false;
-            BoundaryControlByGod.target.ChangeMagicRingRadius(20f);
             //RealTimeGameProcessManager.target.CameraParaAdjustment(RealTimeGameProcessManager.playerTeam);
             var cd = UILayerLoader.Load<CountDownLayer>();
             await cd.BeforeFightCountDown();

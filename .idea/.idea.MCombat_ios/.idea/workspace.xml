@@ -6,7 +6,76 @@
   <component name="ChangeListManager">
     <list default="true" id="66cf282c-e08e-4b9f-b5b5-1a530f7e1269" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/Defines/states/Idle_State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/Defines/states/Idle_State.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/Defines/states/Death_State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/Defines/states/Death_State.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Behaviour/Defines/states/Knock_Off_State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Behaviour/Defines/states/Knock_Off_State.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BoundaryControl/BoundaryControlByGod.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BoundaryControl/BoundaryControlByGod.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/ShadowM.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/ShadowM.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/blue_Shield.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/blue_Shield.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/dark_Shield.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/dark_Shield.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/green_Shield.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/green_Shield.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/old.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/old/DUN.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/old/DUN.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/old/blue_Shield.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/old/blue_Shield.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/old/dark_Shield.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/old/dark_Shield.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/old/green_Shield.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/old/green_Shield.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/old/light_Shield.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/old/light_Shield.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/old/red_Shield.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/old/red_Shield.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/red_Shield.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/red_Shield.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian/ATField.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian/ATField.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian/FieldShield.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian/FieldShield.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian/FieldShield2NewUV.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian/FieldShield2NewUV.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian/FieldShieldNewUV.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian/FieldShieldNewUV.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian/FieldShieldTex.tga" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian/FieldShieldTex.tga.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian/Materials/No Name.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/saonian/Materials/No Name.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/spell_dust_blue.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/spell_dust_blue.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/spell_dust_dark.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/spell_dust_dark.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/spell_dust_green.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/spell_dust_green.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/spell_dust_red.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/Shield/spell_dust_red.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/dark_Shield 1.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/BasicCharComponent/dark_Shield 1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Magic Circle Fx/VFX_Meshes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Magic Circle Fx/VFX_Meshes/RayMesh_Default.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/Magic Circle Fx/VFX_Meshes/RayMesh_Default.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/ModelResource/adam_new/close/Material #4.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/ModelResource/adam_new/close/Material #4.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/FBX/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/FBX/Materials/Eff_MagicField_02.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/FBX/Materials/Eff_MagicField_02.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/FBX/Materials/test.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Effect3FromJapanNet/FBX/Materials/test.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Enchant/FireEnchant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EffectsResource/Prefabs/Enchant/FireEnchant.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/BasicPack/yuta/Idle.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Animations/human/BasicPack/yuta/Idle.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ExternalAssets/Effects/defaultmagic/wallCrack.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ExternalAssets/Effects/defaultmagic/wallCrack.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/CountDownProcess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/CountDownProcess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/ABLoadScene/Scene1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scene/fight_scene/FightScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene/fight_scene/FightScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Setting/Data.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/Data.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/RiderScriptEditorPersistedState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +153,17 @@
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="false" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

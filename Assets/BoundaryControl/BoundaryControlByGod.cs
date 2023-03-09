@@ -5,9 +5,10 @@ using Cysharp.Threading.Tasks;
 
 public class BoundaryControlByGod : MonoBehaviour {
     
-    public List<ParticleSystem> BattleRingPSs;
+    [SerializeField] List<ParticleSystem> BattleRingPSs;
+    [SerializeField] float BattleRingRadius = 20f;
+    
     ParticleSystem BattleRingPS;
-    float BattleRingRadius = 20f;
     public static float _BattleRingRadius;
     public static BoundaryControlByGod target;
     
@@ -39,18 +40,6 @@ public class BoundaryControlByGod : MonoBehaviour {
         {
             battleGround.GetComponent<BattleGround>().Set();
         }
-    }
-    
-    public void ChangeMagicRingRadius(float targetradius)
-    {
-        BattleRingRadius = targetradius;
-        _BattleRingRadius = BattleRingRadius;
-        var sh = BattleRingPS.shape;
-        void changeRadius(float x)
-        {
-            sh.radius = x;
-        }
-        DOTween.To(() => BattleRingRadius, x => BattleRingRadius = x, targetradius, 1).OnUpdate(() => changeRadius(BattleRingRadius));
     }
 }
 

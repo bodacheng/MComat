@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 82401763531869798}
   - component: {fileID: 23820525120005624}
   m_Layer: 0
-  m_Name: dark_Shield 1
+  m_Name: dark_Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
