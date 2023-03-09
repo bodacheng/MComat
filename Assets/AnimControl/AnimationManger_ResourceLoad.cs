@@ -155,19 +155,19 @@ public partial class AnimationManger {
                 if (animatorOverride["idle"])
                     animatorOverride["idle"] = animationClip;
             }
-
+            
             if (animationClip.name == "walk")
             {
                 if (animatorOverride["walk"])
                     animatorOverride["walk"] = animationClip;
             }
-
+            
             if (animationClip.name == "run")
             {
                 if (animatorOverride["run"])
                     animatorOverride["run"] = animationClip;
             }
-
+            
             if (animationClip.name == "air")
             {
                 if (animatorOverride["air"])
