@@ -19,11 +19,6 @@ namespace Soul
             this._clipName = clipName;
         }
         
-        public override void Pre_process_before_enter()
-        {
-            base.Pre_process_before_enter();
-        }
-        
         public override void AI_State_enter()
         {
             base.AI_State_enter();
@@ -35,7 +30,7 @@ namespace Soul
                 Animation_Manger.AnimationTrigger(_clipName, true, 0.1f);
             this._Rigidbody.velocity = Vector3.zero;
             this._Rigidbody.drag = FightGlobalSetting.OnTouchEnemyBodyRigidDrag;
-            if (Sensor.GetEnemiesByDistance(false).Count > 0)
+            if (Sensor.GetEnemiesByDistance(true).Count > 0)
             {
                 if (Sensor.GetEnemiesByDistance(false)[0] != null)
                 {
