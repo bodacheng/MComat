@@ -32,13 +32,15 @@ public partial class Data_Center : MonoBehaviour
     
     public Transform right_hand_t, left_hand_t, right_foot_t, left_foot_t,tail_t, head_t;
     public Transform left_arm_hitbox_t, right_arm_hitbox_t, left_leg_hitbox_t, right_leg_hitbox_t, spine_hitbox_t;
-    
-    protected bool Phase1Initialized, Phase2Initialized;
-    
+
+    private bool Phase1Initialized;
+    private bool Phase2Initialized;
+
     [Header("传统防御盾。可能真的用不到了")]
     public BO_Shield Shield;
     
     private UnitInfo unitInfo;
+    public UnitInfo UnitInfo => unitInfo;
     
     public bool IfPreparedForBattle()
     {
