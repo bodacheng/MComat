@@ -9,7 +9,6 @@ public class CommonSetting : ScriptableObject
     
     [Tooltip("unit定义文件")]
     [SerializeField] string unitConfigFile = "mst_unit";
-    
     [Tooltip("skill定义文件")]
     [SerializeField] string skillConfigFile = "mst_skill";
     [Tooltip("skill ai文件")]

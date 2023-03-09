@@ -47,7 +47,7 @@ public class BasicPhysicSupport : MonoBehaviour
         }
         
         // 与敌人的接触摩操功能
-        readonly List<Collider> _touchingEnemyCs = new List<Collider>();
+        private readonly List<Collider> _touchingEnemyCs = new List<Collider>();
         
         public bool TouchingEnemy()
         {
@@ -66,28 +66,24 @@ public class BasicPhysicSupport : MonoBehaviour
             return pos;
         }
         
-        public void AddTouchedEnemyBody(Collider C)
+        public void AddTouchedEnemyBody(Collider c)
         {
-            if (!_touchingEnemyCs.Contains(C))
-                _touchingEnemyCs.Add(C);
-            
-            // if (!lockedKept && touchingEnemyCs.Count > 0)
-            // {
-            //     lockedKept = true;
-            //     BO_Limb l = C.transform.GetComponent<BO_Limb>();
-            //     if (l != null)
-            //     {
-            //         keptEnemyPoint = l.Center.WholeT.position;
-            //         keptMePoint = _BasicPhysicSupport._DATA_CENTER.WholeT.position;
-            //         keptMePoint.y = 0;
-            //         keptEnemyPoint.y = 0;
-            //     }
-            // }
+            if (!_touchingEnemyCs.Contains(c))
+                _touchingEnemyCs.Add(c);
+            if (_touchingEnemyCs.Count > 0)
+            {
+                _BasicPhysicSupport.Rigidbody.drag = overrideOnEnemyDrag >= 0 ?
+                    overrideOnEnemyDrag : FightGlobalSetting.OnTouchEnemyBodyRigidDrag;
+            }
         }
-        public void RemoveTouchedEnemyBody(Collider C)
+        public void RemoveTouchedEnemyBody(Collider c)
         {
-            if (_touchingEnemyCs.Contains(C))
-                _touchingEnemyCs.Remove(C);
+            if (_touchingEnemyCs.Contains(c))
+                _touchingEnemyCs.Remove(c);
+            if (_touchingEnemyCs.Count == 0)
+            {
+                _BasicPhysicSupport.Rigidbody.drag = 0f;
+            }
         }
         
         public void ClearTouchedEnemyBody()
@@ -95,7 +91,9 @@ public class BasicPhysicSupport : MonoBehaviour
             _touchingEnemyCs.Clear();
             _BasicPhysicSupport.Rigidbody.drag = 0f;
         }
-
+        
+        public int overrideOnEnemyDrag = -1;
+        
         public bool Grounded => _BasicPhysicSupport._DATA_CENTER.WholeT.position.y <= floorY;
 
         readonly float floorY = 0f;
@@ -136,7 +134,6 @@ public class BasicPhysicSupport : MonoBehaviour
     void Awake()
     {
         hiddenMethods = new HiddenMethods(this);
-        Rigidbody.drag = 0;
     }
     
     void Update()
@@ -193,6 +190,16 @@ public class BasicPhysicSupport : MonoBehaviour
         hiddenMethods.EnemyTouchingDrag = open != 0;
         if (!hiddenMethods.EnemyTouchingDrag)
             hiddenMethods.ClearTouchedEnemyBody();
+
+        if (open == 0)
+        {
+            hiddenMethods.overrideOnEnemyDrag = -1;
+        }
+    }
+    
+    public void SetOverrideOnEnemyDrag(AnimationEvent e)
+    {
+        hiddenMethods.overrideOnEnemyDrag = e.intParameter;
     }
     
     void OnCollisionEnter(Collision collision)

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Singleton
@@ -28,6 +27,10 @@ namespace Singleton
             // 在角色生成的瞬间各个组件的awake和onenable就已经都开了，而一些数据的初始化是从下一行开始，所以要确保这个过程不会有一些因为变量没被初始化而形成的报错。
             d.element = unitConfig.element;
             await (d.Step1Initialize(unitConfig.TYPE, unitConfig.BASIC_MOVEMENT_PACK));
+            if (tempModel == null || d == null)
+            {
+                return null;
+            }
             tempModel.SetActive(true);
             return d;
         }

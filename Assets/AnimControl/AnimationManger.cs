@@ -82,7 +82,7 @@ public partial class AnimationManger
 
     public void AnimationTrigger(string clip, bool in_Transition,float Duration)
     {
-        PlayLayerAnim(clip,in_Transition, Duration);
+        PlayLayerAnim(clip, in_Transition, Duration);
     }
     
     public void AnimationTrigger(AnimationClip clip, bool in_Transition , float Duration)

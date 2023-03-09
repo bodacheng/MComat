@@ -4,29 +4,55 @@ namespace Soul
 {
     public class Idle_State : Behavior
     {
-        string clip_name;
-
-        public Idle_State(string clip_name)
+        readonly string _clipName;
+        
+        public Idle_State(string clipName)
         {
-            this.clip_name = clip_name;
+            this._clipName = clipName;
         }
-
+        
         public override void Pre_process_before_enter()
         {
             base.Pre_process_before_enter();
         }
-
+        
         public override void AI_State_enter()
         {
             base.AI_State_enter();
+            motionReset = false;
             this._Animator.SetFloat("speed", 0f);
-            Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
+            Animation_Manger.AnimationTrigger(_clipName, true, 0.1f);
             this._Rigidbody.velocity = Vector3.zero;
+            this._Rigidbody.drag = FightGlobalSetting.OnTouchEnemyBodyRigidDrag;
+            
+            if (Sensor.GetEnemiesByDistance(false).Count > 0)
+            {
+                if (Sensor.GetEnemiesByDistance(false)[0] != null)
+                {
+                    RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
+                }
+            }
         }
 
         public override bool Capacity_Exit_Condition()
         {
             return false;
+        }
+        
+        private bool motionReset = false;
+        public override void _State_Update()
+        {
+            if (!motionReset && _clipName == "victory" && !Animation_Manger._toUse.isLooping && AnimationCasualFinishedFlag())
+            {
+                Animation_Manger.PlayLayerAnim(null, true, 0.05f);
+                motionReset = true;
+            }
+        }
+
+        public override void AI_State_exit()
+        {
+            base.AI_State_exit();
+            this._Rigidbody.drag = 0;
         }
     }
 }
