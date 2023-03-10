@@ -124,7 +124,8 @@ public class ArcadeTop : UILayer
         }
         await UniTask.WhenAll(tasks);
         Refresh();
-        container.transform.gameObject.SetActive(true);
+        if (container != null)
+            container.transform.gameObject.SetActive(true);
         ProgressLayer.Close();
     }
 
