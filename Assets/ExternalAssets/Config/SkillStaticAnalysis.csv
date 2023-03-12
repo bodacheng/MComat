@@ -33,3 +33,11 @@ RECORD_ID,REAL_NAME,SPLevel,EstimateDamage,AttackCount,HP
 159,g_fire,0,1,1,5
 45,f_rushpunch,1,2,1,5
 118,fo_boom,3,4,4,5
+171,curvefireball,2,4.5,2,5
+162,mirrorcannon,2,5,5,5
+172,g_grenade,2,-999,0,5
+144,forwardpush_long,2,4,2,5
+9,downrotatekick,0,1,1,5
+137,thunder_near,2,5,1,5
+148,rotateleg_far,1,2,2,5
+161,psychoblast,2,5,1,5
