@@ -20,7 +20,7 @@ public partial class StageEditor
     public static void ExportStageAward()
     {
         var stageAwards = new List<StageAward>();
-        for (int i = 1; i <= 1000 ; i++)
+        for (int i = 1; i <= 100 ; i++)
         {
             var award = new StageAward
             {
@@ -28,7 +28,7 @@ public partial class StageEditor
                 award = new Award
                 {
                     g = 20,
-                    d = 5,
+                    d = 10,
                 }
             };
             stageAwards.Add(award);
