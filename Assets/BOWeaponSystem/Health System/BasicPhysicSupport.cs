@@ -138,7 +138,7 @@ public class BasicPhysicSupport : MonoBehaviour
     
     void Update()
     {
-        if (FightGlobalSetting._sceneStep == 1)
+        if (FightGlobalSetting.SceneStep == 1)
         {
             hiddenMethods.AutoSwitchGravity();
             LimitTargetToRange();

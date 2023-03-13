@@ -146,7 +146,7 @@ MonoBehaviour:
   Sp1SkillExGet: 0
   Sp2SkillExGet: 0
   Sp3SkillExGet: 0
-  slightHitLastingTime: 0.5
+  slightHitLastingTime: 0.2
   lightHitLastingTime: 0.5
   heavyHitLastingTime: 0.5
   superHitLastingTime: 0.5

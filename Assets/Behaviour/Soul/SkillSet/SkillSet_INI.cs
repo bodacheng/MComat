@@ -140,7 +140,7 @@ public partial class SkillSet
             _h3List.Add(R.REAL_NAME);
         }
 
-        if (D != null && FightGlobalSetting._hasDefend)
+        if (D != null && FightGlobalSetting.HasDefend)
         {
             _h1EList.Add(D);
             _h2EList.Add(D);
@@ -186,7 +186,7 @@ public partial class SkillSet
         _hit = new SkillEntity("Hit", BehaviorType.Hit, 0, 0,new AIAttrs(), _h1List.ToArray(),null,InputKey.Null, InputKey.Null, -1);
         _getUp = new SkillEntity("getUp",  BehaviorType.GetUp, 0, 0, new AIAttrs(), _h1List.ToArray(), null, InputKey.Any, InputKey.Null, -1);
         _knockOff = new SkillEntity("KnockOff",  BehaviorType.KnockOff, 0, 0, new AIAttrs(), R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, -1);
-        if (FightGlobalSetting._hasDefend)
+        if (FightGlobalSetting.HasDefend)
         {
             D.CasualTo = _h1List.ToArray();
             StateTransitionSetList.Add(D);
@@ -201,7 +201,7 @@ public partial class SkillSet
         StateTransitionSetList.Add(_hit);        
         StateTransitionSetList.Add(M);
         
-        if (D != null && FightGlobalSetting._hasDefend)
+        if (D != null && FightGlobalSetting.HasDefend)
         {
             StateTransitionSetList.Add(D);
         }

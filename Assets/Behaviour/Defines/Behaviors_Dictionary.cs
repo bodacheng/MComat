@@ -29,7 +29,7 @@ namespace Soul
             };
             BehaviorDic.Add("Move", move);
 
-            if (FightGlobalSetting._hasDefend)
+            if (FightGlobalSetting.HasDefend)
             {
                 Defend_State defend = new Defend_State("block", "block_break")
                 {

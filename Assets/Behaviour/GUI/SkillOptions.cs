@@ -27,7 +27,7 @@ public partial class BehaviorRunnerGUI : Editor {
             "KnockOff",
             "getUp"
         };
-        if (FightGlobalSetting._hasDefend)
+        if (FightGlobalSetting.HasDefend)
         {
             returnValue.Add("Defend");
         }

@@ -55,7 +55,7 @@ namespace FightScene
             
             AppSetting.BGMSource = audioSource;
             Application.targetFrameRate = 60;
-            FightGlobalSetting._sceneStep = 1;
+            FightGlobalSetting.SceneStep = 1;
             
             //Position_Set_Executor.Instance.P_sets.Clear();
             var preparingProcess = new PreparingProcess();

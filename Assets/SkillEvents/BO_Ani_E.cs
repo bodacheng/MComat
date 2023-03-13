@@ -220,7 +220,7 @@ public partial class BO_Ani_E : MonoBehaviour
         Vector3 targetPos(Vector3 direction, float step)
         {
             Vector3 temp = transform.position + direction * step;
-            if (FightGlobalSetting._sceneStep == 1)
+            if (FightGlobalSetting.SceneStep == 1)
             {
                 temp.y = 0;
                 dis_from_center = temp.magnitude;
@@ -271,7 +271,7 @@ public partial class BO_Ani_E : MonoBehaviour
                 }
             }
             
-            if (FightGlobalSetting._sceneStep == 1)
+            if (FightGlobalSetting.SceneStep == 1)
             {
                 temp.y = 0;
                 dis_from_center = temp.magnitude;

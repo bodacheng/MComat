@@ -143,7 +143,7 @@ public partial class SkillEditLayer : UILayer
             var stone = cell.GetItem();
             if (stone != null && stone._SkillConfig != null)
             {
-                if (FightGlobalSetting._skillStoneHasExp)
+                if (FightGlobalSetting.SkillStoneHasExp)
                     PreScene.target.trySwitchToStep(MainSceneStep.SkillStoneList, stone.instanceId, true);
             }
         }

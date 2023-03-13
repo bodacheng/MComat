@@ -61,10 +61,10 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         }
         
         //注意看0被空出来是和添加 删除有效武器列表中的0参数有关
-        void SetThisWeaponDamageTypeByNum(int heavynum, HitBoxManager theweapon)
+        void SetThisWeaponDamageTypeByNum(int heavyNum, HitBoxManager weapon)
         {
-            DamageType damageType = V_Damage.FormalIntToDamageType(heavynum);
-            theweapon.SetDamageType(damageType);
+            var damageType = V_Damage.FormalIntToDamageType(heavyNum);
+            weapon.SetDamageType(damageType);
         }
         
         void RegisterBodyPartWeapon(Transform t)

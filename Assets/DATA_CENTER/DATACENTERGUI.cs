@@ -94,7 +94,7 @@ public class DATACENTERGUI : Editor {
             _myScript._BasicPhysicSupport.Rigidbody = _myScript.WholeT.GetComponent<Rigidbody>(); //这个只在战斗模式需要
             _myScript._BasicPhysicSupport.Rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
             _myScript._BasicPhysicSupport.Rigidbody.useGravity = false;
-            _myScript._BasicPhysicSupport.Rigidbody.mass = FightGlobalSetting._fighterRigidMass;
+            _myScript._BasicPhysicSupport.Rigidbody.mass = FightGlobalSetting.FighterRigidMass;
             _myScript._BasicPhysicSupport.Rigidbody.drag = 0f;
             _myScript._BasicPhysicSupport.Rigidbody.angularDrag = 0.05f;
             _myScript._BasicPhysicSupport.Rigidbody.isKinematic = false;

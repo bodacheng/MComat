@@ -54,7 +54,7 @@ namespace Soul
         public override void AI_State_exit()
         {
             base.AI_State_exit();
-            _Rigidbody.mass = FightGlobalSetting._fighterRigidMass;
+            _Rigidbody.mass = FightGlobalSetting.FighterRigidMass;
             _BasicPhysicSupport.OpenEnemyTouchingDrag(0);
             FightParamsRef.GettingDamage = false;
             if (tween != null && tween.active && tween.IsPlaying())

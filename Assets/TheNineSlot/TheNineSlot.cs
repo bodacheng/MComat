@@ -104,7 +104,7 @@ namespace mainMenu
             // 前往技能石升级画面
             void GoToLevelUpPage()
             {
-                if (!FightGlobalSetting._skillStoneHasExp)
+                if (!FightGlobalSetting.SkillStoneHasExp)
                     return;
                 var stone = slot._cell.GetItem();
                 if (stone != null && stone._SkillConfig != null)

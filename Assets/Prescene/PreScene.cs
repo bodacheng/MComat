@@ -126,7 +126,7 @@ namespace mainMenu
             AppSetting.BGMSource = audioSource;
             AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey).Forget();
             Time.timeScale = 1;
-            FightGlobalSetting._sceneStep = 0;
+            FightGlobalSetting.SceneStep = 0;
             
             BasicPhase();
             ToInitialPhase();

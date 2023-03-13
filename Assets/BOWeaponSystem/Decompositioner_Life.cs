@@ -70,7 +70,7 @@ public partial class Decomposition : MonoBehaviour
                 break;
         }
         
-        if (FightGlobalSetting._sceneStep == 1)
+        if (FightGlobalSetting.SceneStep == 1)
         {
             temp2 = transform.position;
             temp2.y = 0;

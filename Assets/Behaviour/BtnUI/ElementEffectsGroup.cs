@@ -56,7 +56,7 @@ public class ElementEffectsGroup
         pressingExplosion.Stop(true);
         _rushBtn.Stop(true);
         
-        if (FightGlobalSetting._hasDefend)
+        if (FightGlobalSetting.HasDefend)
             _defendBtn.Stop(true);
     }
     
@@ -82,7 +82,7 @@ public class ElementEffectsGroup
         _rushBtn.gameObject.transform.position = rushBtnPos;
         _rushBtn.Play(true);
         
-        if (FightGlobalSetting._hasDefend)
+        if (FightGlobalSetting.HasDefend)
         {
             _defendBtn.gameObject.transform.position = defendBtnPos;
             _defendBtn.Play(true);
@@ -107,7 +107,7 @@ public class ElementEffectsGroup
             { Fire2, fire2Slot }
         };
 
-        if (FightGlobalSetting._hasDefend)
+        if (FightGlobalSetting.HasDefend)
         {
             _defendBtn = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/defend.prefab");
         }
@@ -122,7 +122,7 @@ public class ElementEffectsGroup
         triggerExplosion3 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion3.prefab");
         pressingExplosion = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/pressing.prefab");
         
-        if (FightGlobalSetting._hasDefend)
+        if (FightGlobalSetting.HasDefend)
             _defendBtn.transform.SetParent(targetRectT);
         _rushBtn.transform.SetParent(targetRectT);
         _aRefresh.transform.SetParent(targetRectT);

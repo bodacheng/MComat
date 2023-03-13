@@ -312,7 +312,7 @@ public class MobileInputsManager : MonoBehaviour {
         fire2 = false;
         acc = false;
         
-        if (FightGlobalSetting._hasDefend)
+        if (FightGlobalSetting.HasDefend)
         {
             Defend.gameObject.SetActive(true);
             defendButtonHover = false;
@@ -331,7 +331,7 @@ public class MobileInputsManager : MonoBehaviour {
         fire2 = false;
         acc = false;
         
-        if (FightGlobalSetting._hasDefend)
+        if (FightGlobalSetting.HasDefend)
         {
             Defend.gameObject.SetActive(false);
             defendButtonHover = false;
