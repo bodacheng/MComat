@@ -1,6 +1,5 @@
 ﻿using mainMenu;
 using dataAccess;
-using DG.Tweening;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
@@ -163,7 +162,6 @@ public class FrontPage : MSceneProcess
     public override void ProcessEnd()
     {
         UILayerLoader.Remove<FrontLayer>();
-        DOTween.To(() => CameraManager._camera.orthographicSize, x => CameraManager._camera.orthographicSize = x, 3f, 0.1f);
         UILayerLoader.Remove<UpperInfoBar>();
     }
 }

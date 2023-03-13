@@ -12,17 +12,15 @@ namespace mainMenu
     {
         public static PreScene target;
         
-        [Header("T")]
-        public GameObject T;
-        
         public Camera postProcessCamera;
         public Camera noPostProcessCamera;
         
+        [Header("T")]
+        [SerializeField] GameObject T;
         [Header("Shader转换器")]
-        public SwapAllModelShader _SwapAllModelShader;
-        
+        [SerializeField] SwapAllModelShader _SwapAllModelShader;
         [Header("AudioSource")]
-        public AudioSource audioSource;
+        [SerializeField] AudioSource audioSource;
 
         public RectTransform stonesTempContainer;
 
@@ -242,14 +240,14 @@ namespace mainMenu
             if (forward && ProcessesRunner.Main.currentProcess != null)
             {
                 var returnToStep = ProcessesRunner.Main.currentProcess.Step;
-                bool returnToCurrent()
+                bool ReturnToCurrent()
                 {
                     return trySwitchToStep(returnToStep, false);
                 }
                 
                 var success = ProcessesRunner.Main.ChangeProcess(next_step);
                 if (success)
-                    ReturnLayer.PUSH(returnToCurrent);
+                    ReturnLayer.PUSH(ReturnToCurrent);
                 return success;
             }
             else
@@ -263,14 +261,14 @@ namespace mainMenu
             if (forward && ProcessesRunner.Main.currentProcess != null)
             {
                 var returnToStep = ProcessesRunner.Main.currentProcess.Step;
-                bool returnToCurrent()
+                bool ReturnToCurrent()
                 {
                     Debug.Log("返回："+ returnToStep);
                     return trySwitchToStep(returnToStep, false);
                 }
                 var success = ProcessesRunner.Main.ChangeProcess(next_step, t);
                 if (success)
-                    ReturnLayer.PUSH(returnToCurrent);
+                    ReturnLayer.PUSH(ReturnToCurrent);
                 return success;
             }
             else

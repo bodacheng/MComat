@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2681d2472636491681fcaa3b0360550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  adsBtnRender: {fileID: 2043911981805196209}
 --- !u!1 &3961406562086600673
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,6 +489,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc2bc79c251664e34a88adb27efbb5bf, type: 3}
+--- !u!114 &2043911981805196209 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 80135160145429034, guid: fc2bc79c251664e34a88adb27efbb5bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2108209773975769499}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05687eaf016824491860e2bc499b5748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5210858142593553205 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6129806195452052142, guid: fc2bc79c251664e34a88adb27efbb5bf,

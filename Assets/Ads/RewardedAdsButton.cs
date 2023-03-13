@@ -11,10 +11,16 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     string _adUnitId = null; // This will remain null for unsupported platforms
 
     private Func<bool> enableCondition;
+    private Action watchedAdExtraProcess;
 
     public void SetEnableCondition(Func<bool> enableCondition)
     {
         this.enableCondition = enableCondition;
+    }
+
+    public void SetWatchedAdExtraProcess(Action watchedAdProcess)
+    {
+        this.watchedAdExtraProcess = watchedAdProcess;
     }
 
     public void Enable(bool on)
@@ -35,14 +41,9 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
         //Disable the button until the ad is ready to show:
         _showAdButton.interactable = false;
     }
-
-    void Start()
-    {
-        LoadAd();
-    }
     
     // Load content to the Ad Unit:
-    void LoadAd()
+    public void LoadAd()
     {
         // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
         Debug.Log("Loading Ad: " + _adUnitId);
@@ -59,7 +60,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
             // Configure the button to call the ShowAd() method when clicked:
             _showAdButton.onClick.AddListener(ShowAd);
             // Enable the button for users to click:
-            _showAdButton.interactable = enableCondition();
+            _showAdButton.interactable = enableCondition != null ? enableCondition() : true;
         }
     }
  
@@ -78,13 +79,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
         Debug.Log("adUnitId："+adUnitId);
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
-            Debug.Log("Unity Ads Rewarded Ad Completed");
-            // Grant a reward.
-            CloudScript.SubtractVirtualCurrency(
-                "AD",1,
-                CloudScript.RequestAdReward
-            );
-            
+            watchedAdExtraProcess.Invoke();
             // Load another ad: 需要检查在实机上这里跑的是否有问题。在editor上产生一个造成广告再次观看时连续跑了两次的错误
             Advertisement.Load(_adUnitId, this);
         }

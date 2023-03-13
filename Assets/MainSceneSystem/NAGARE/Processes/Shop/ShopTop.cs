@@ -12,6 +12,7 @@ public class ShopTop : MSceneProcess
     public override void ProcessEnter()
     {
         shopTopLayer = UILayerLoader.Load<ShopTopLayer>();
+        shopTopLayer.Initialize();
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
         upperInfoBar.Setup(null,
             null, 

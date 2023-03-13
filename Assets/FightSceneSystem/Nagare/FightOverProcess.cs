@@ -69,7 +69,7 @@ namespace FightScene
                                         PlayerAccountInfo.Me.arcadeProcess = levelInt;
                                         var rewardGdInt = Convert.ToInt32(rewardGd);
                                         var rewardDmInt = Convert.ToInt32(rewardDm);
-                                        a.ShowAward(rewardDmInt, rewardGdInt).Forget();
+                                        a.ShowAward(rewardDmInt, rewardGdInt, levelInt % 2 == 0).Forget();
                                     }
 
                                     if (FightScene.Fight.ID == "1")

@@ -25,6 +25,7 @@ public class ArenaFightOver : UILayer
     #endregion
     
     #region arcade
+    [SerializeField] private RewardedAdsButton watchAdBtn;
     [SerializeField] private Button againBtn;
     public Button AgainBtn => againBtn;
     #endregion
@@ -86,7 +87,7 @@ public class ArenaFightOver : UILayer
         );
     }
 
-    public async UniTask ShowAward(int awardDm, int awardGD)
+    public async UniTask ShowAward(int awardDm, int awardGD, bool extraAdReward = false)
     {
         async UniTask DM()
         {
@@ -122,6 +123,25 @@ public class ArenaFightOver : UILayer
             }
         }
         
+        if (extraAdReward)
+        {
+            watchAdBtn.gameObject.SetActive(true);
+            watchAdBtn.SetWatchedAdExtraProcess(async () =>
+            {
+                var currentDmValue = Currencies.DiamondCount.Value + 20;
+                _dmAwardTweenerCore = DOTween.To(
+                    () => Currencies.DiamondCount.Value,          // 何を対象にするのか
+                    num => Currencies.DiamondCount.Value = num,
+                    currentDmValue,
+                    3f
+                ).OnUpdate(()=> this.awardDmCurrency.text = Currencies.DiamondCount.Value+ " (+" + 20 + ")");
+            });
+            watchAdBtn.LoadAd();
+        }
+        else
+        {
+            watchAdBtn.gameObject.SetActive(false);
+        }
         await UniTask.WhenAll(DM(), GD());
     }
     

@@ -15,15 +15,23 @@ public class AdsBtnRender : MonoBehaviour
     
     private IDisposable _disposeCountDown;
 
-    void Start()
-    {
-        Setup();
-    }
-
-    void Setup()
+    
+    public void Setup()
     {
         // unity
+        rewardedAdsButton.LoadAd();
         rewardedAdsButton.SetEnableCondition(()=> Currencies.AdTicket.Value > 0);
+        rewardedAdsButton.SetWatchedAdExtraProcess(
+            () =>
+            {
+                Debug.Log("Unity Ads Rewarded Ad Completed");
+                // Grant a reward.
+                CloudScript.SubtractVirtualCurrency(
+                    "AD",1,
+                    CloudScript.RequestAdReward
+                );
+            }
+        );
         // google
         //googleMobileAdsManager.SetEnableCondition(()=> Currencies.AdTicket.Value > 0);
         
