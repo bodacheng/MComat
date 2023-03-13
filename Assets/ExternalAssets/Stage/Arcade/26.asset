@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: 26
   m_EditorClassIdentifier: 
   battleGroundID: 1
+  fightBGM: 0
   stageButtonSprite: {fileID: 0}
   unitsData:
   - id: 0
-    r_id: 12
+    r_id: 7
     level: 1
     set:
       a1: 5

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaf3bb8ad816a44358eca5831d97217e, type: 3}
-  m_Name: 7
+  m_Name: 34
   m_EditorClassIdentifier: 
   battleGroundID: 1
   fightBGM: 0
@@ -18,30 +18,43 @@ MonoBehaviour:
   unitsData:
   - id: 0
     r_id: 5
-    level: 1
+    level: 2
     set:
-      a1: 5
-      a2: 95
+      a1: 99
+      a2: 182
+      a3: 58
+      b1: 53
+      b2: 10
+      b3: 5
+      c1: 167
+      c2: 68
+      c3: 55
+  - id: 1
+    r_id: 1
+    level: 2
+    set:
+      a1: 113
+      a2: 167
       a3: 55
-      b1: 125
-      b2: 167
-      b3: 182
+      b1: 99
+      b2: 95
+      b3: 10
       c1: 53
       c2: 68
-      c3: 58
-  - id: 1
-    r_id: 3
-    level: 1
+      c3: 182
+  - id: 2
+    r_id: 6
+    level: 2
     set:
-      a1: 89
-      a2: 27
-      a3: 95
-      b1: 68
-      b2: 182
-      b3: 10
-      c1: 99
-      c2: 55
-      c3: 5
+      a1: 53
+      a2: 10
+      a3: 68
+      b1: 27
+      b2: 89
+      b3: 113
+      c1: 80
+      c2: 95
+      c3: 125
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0

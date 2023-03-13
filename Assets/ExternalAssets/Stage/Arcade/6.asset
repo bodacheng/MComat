@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 6
   m_EditorClassIdentifier: 
   battleGroundID: 1
+  fightBGM: 0
   stageButtonSprite: {fileID: 0}
   unitsData:
   - id: 0
@@ -28,6 +29,19 @@ MonoBehaviour:
       c1: 55
       c2: 27
       c3: 80
+  - id: 1
+    r_id: 1
+    level: 1
+    set:
+      a1: 182
+      a2: 125
+      a3: 176
+      b1: 99
+      b2: 55
+      b3: 113
+      c1: 9
+      c2: 53
+      c3: 5
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0

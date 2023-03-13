@@ -13,21 +13,9 @@ MonoBehaviour:
   m_Name: 3
   m_EditorClassIdentifier: 
   battleGroundID: 1
+  fightBGM: 0
   stageButtonSprite: {fileID: 0}
   unitsData:
-  - id: 0
-    r_id: 5
-    level: 1
-    set:
-      a1: 58
-      a2: 125
-      a3: 113
-      b1: 68
-      b2: 89
-      b3: 10
-      c1: 116
-      c2: 99
-      c3: 167
   - id: 1
     r_id: 1
     level: 1
