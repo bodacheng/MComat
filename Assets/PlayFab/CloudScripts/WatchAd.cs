@@ -7,7 +7,6 @@ public partial class CloudScript
     public static void RequestAdReward()
     {
         ProgressLayer.Loading(string.Empty);
-        Debug.Log("we are here");
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest
             {
@@ -34,7 +33,7 @@ public partial class CloudScript
                         Currencies.CoinCount.Value = intBalance;
                         break;
                 }
-                PopupLayer.ArrangeWarnWindow("YOU GOT "+ intBalanceChange+ " " + VirtualCurrency.ToString());
+                PopupLayer.ArrangeWarnWindow("YOU GOT "+ intBalanceChange+ " " + VirtualCurrency);
             },
             (x)=>
             {

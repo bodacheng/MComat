@@ -8,6 +8,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     [SerializeField] Button _showAdButton;
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
+    [SerializeField] bool reloadAfterWatched;
     string _adUnitId = null; // This will remain null for unsupported platforms
 
     private Func<bool> enableCondition;
@@ -76,12 +77,12 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
     public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
     {
-        Debug.Log("adUnitId："+adUnitId);
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
             watchedAdExtraProcess.Invoke();
             // Load another ad: 需要检查在实机上这里跑的是否有问题。在editor上产生一个造成广告再次观看时连续跑了两次的错误
-            Advertisement.Load(_adUnitId, this);
+            if (reloadAfterWatched)
+                Advertisement.Load(_adUnitId, this);
         }
     }
     

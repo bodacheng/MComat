@@ -58,11 +58,11 @@ namespace FightScene
                                 result =>
                                 {
                                     var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                                    var has_reward = jsonResult.ContainsKey("has_reward") ? jsonResult["has_reward"] : false;
-                                    var has_rewardBool = (bool)has_reward;
+                                    var hasReward = jsonResult.ContainsKey("has_reward") ? jsonResult["has_reward"] : false;
+                                    var hasRewardBool = (bool)hasReward;
                                     var a = UILayerLoader.Load<ArenaFightOver>();
                                     a.Step2Anim();
-                                    if (has_rewardBool)
+                                    if (hasRewardBool)
                                     {
                                         var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
                                         var rewardDm = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
@@ -71,7 +71,7 @@ namespace FightScene
                                         var rewardDmInt = Convert.ToInt32(rewardDm);
                                         a.ShowAward(rewardDmInt, rewardGdInt, levelInt % 2 == 0).Forget();
                                     }
-
+                                    
                                     if (FightScene.Fight.ID == "1")
                                     {
                                         PlayerAccountInfo.Me.tutorialProgress = "StageOneFinished";

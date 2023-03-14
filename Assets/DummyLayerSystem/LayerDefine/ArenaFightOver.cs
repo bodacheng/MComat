@@ -126,16 +126,19 @@ public class ArenaFightOver : UILayer
         if (extraAdReward)
         {
             watchAdBtn.gameObject.SetActive(true);
-            watchAdBtn.SetWatchedAdExtraProcess(async () =>
-            {
-                var currentDmValue = Currencies.DiamondCount.Value + 20;
-                _dmAwardTweenerCore = DOTween.To(
-                    () => Currencies.DiamondCount.Value,          // 何を対象にするのか
-                    num => Currencies.DiamondCount.Value = num,
-                    currentDmValue,
-                    3f
-                ).OnUpdate(()=> this.awardDmCurrency.text = Currencies.DiamondCount.Value+ " (+" + 20 + ")");
-            });
+            watchAdBtn.SetWatchedAdExtraProcess(
+                () =>
+                {
+                    var currentDmValue = Currencies.DiamondCount.Value + 20;
+                    _dmAwardTweenerCore = DOTween.To(
+                        () => Currencies.DiamondCount.Value,          // 何を対象にするのか
+                        num => Currencies.DiamondCount.Value = num,
+                        currentDmValue,
+                        3f
+                    ).OnUpdate(()=> this.awardDmCurrency.text = Currencies.DiamondCount.Value+ " (+" + 20 + ")");
+                    watchAdBtn.gameObject.SetActive(false);
+                }
+            );
             watchAdBtn.LoadAd();
         }
         else
