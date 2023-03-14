@@ -17,14 +17,12 @@ public class HeroIcon : MonoBehaviour {
     {
         frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 0.3f);
         Icon.color = new Color(1,1,1,0.3f);
-        iconButton.interactable = false;
     }
     
     public void LightOn()
     {
         frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 1f);
         Icon.color = new Color(1,1,1,1f);
-        iconButton.interactable = true;
     }
     
     public void CooldownCurtainUpdate(float proportion)
@@ -124,14 +122,14 @@ public class HeroIcon : MonoBehaviour {
         selectedFrame.gameObject.SetActive(true);
     }
     
-    // 这个本身没问题但目前使用他的方式是有问题的。围绕SetParent(T);
-    public static HeroIcon ArrangeHeroIconToT(HeroIcon prefab, UnitInfo unitInfo, RectTransform T, float iconSize = 100)
+    public static HeroIcon ArrangeHeroIconToParent(HeroIcon prefab, UnitInfo unitInfo, RectTransform T, 
+        float iconSize = 100, bool withSkillCheck = false)
     {
         var icon = Instantiate(prefab);
         var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
         icon.unitInfo = unitInfo;
         icon.unitConfig = unitConfig;
-        icon.ChangeIcon(unitInfo);
+        icon.ChangeIcon(unitInfo, withSkillCheck);
         icon.GetComponent<RectTransform>().sizeDelta = new Vector2(iconSize,iconSize);
         icon.transform.SetParent(T);
         icon.transform.localPosition = Vector3.one;

@@ -242,7 +242,7 @@ namespace mainMenu
                 icon.Clear();
             }
 
-            CheckIfTeamMemberEnough();
+            CheckFightLegal();
         }
         
         void IniMultiRaidModeUnitIcons(List<HeroIcon> icons, Team team)
@@ -348,10 +348,10 @@ namespace mainMenu
             _stage.Team2ID = PlayerAccountInfo.Me.PlayFabId + "_2";
         }
 
-        void CheckIfTeamMemberEnough()
+        void CheckFightLegal()
         {
             ArrangeStageInfo();
-            fightStartBtn.interactable = _stage.FightMembers.CheckFightLegal();
+            fightStartBtn.interactable = _stage.FightMembers.CheckStonesFull();
         }
 
         void RemoveSelect(int pos)

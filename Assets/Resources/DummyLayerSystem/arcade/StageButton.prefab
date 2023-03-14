@@ -281,10 +281,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 2152684406260312511}
+  unitIconPrefab: {fileID: 4599398632650404793, guid: ab04803d5c276457ea03841b256e73bf,
+    type: 3}
   iconsT: {fileID: 3416358146772154417}
-  MemberIcons: []
   text: {fileID: 3416358146278246509}
-  ID: 0
 --- !u!95 &3416358147097766513
 Animator:
   serializedVersion: 4

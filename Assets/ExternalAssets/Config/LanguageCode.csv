@@ -113,3 +113,5 @@ AutoBtnIntro,Click to switch between auto and manual mode,クリックして、�
 TeamEditTutorial1,Click on the fighter's icon and place them in the team slot.,ファイターのアイコンをクリックして、任意のチームスロットに配置してください,尝试点击角色头像，再点击队伍槽使其编入队伍
 TeamEditTutorial2,Add a new warrior to the team to have a total of two members,新しい戦士をチームに編成して、チームに2名のメンバーを含めてください,尝试将新战士编入队伍，使队伍包含两名队员
 SaveYourTeam,Click on "Confirm" to save the team,「確認」をクリックして、チームを保存してください,点击确定保存队伍
+,,,
+TeamUnitNotFull,Members' skills are incomplete,チームメンバーのスキルが不完全です,队员技能不完整

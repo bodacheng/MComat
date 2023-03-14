@@ -13,13 +13,12 @@ public class ArcadeTop : UILayer
     [SerializeField] VerticalLayoutGroup container;
     [SerializeField] Button jumpToNewStage;
     [SerializeField] StageButton iconPrefab;
-    [SerializeField] HeroIcon unitIconPrefab;
     [SerializeField] NineForShow nineForShow;
     [SerializeField] Button nextChapter;
     [SerializeField] Button lastChapter;
 
     List<int> _currentStages;
-    private readonly List<StageButton> _stageButtons = new List<StageButton>();
+    readonly List<StageButton> _stageButtons = new List<StageButton>();
     CancellationTokenSource _cts;
     public void Setup(CancellationTokenSource cts)
     {
@@ -88,33 +87,14 @@ public class ArcadeTop : UILayer
                 PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, one, true);
             }
             
-            stageBtn.button.onClick.AddListener(LoadThisStage);
-            stageBtn.text.text = "Stage" + stageNo;
+            stageBtn.Button.onClick.AddListener(LoadThisStage);
+            
             stageBtn.name = "Stage" + stageNo;
-            stageBtn.stageNo = stageNo;
+            stageBtn.StageNo = stageNo;
             
             if (one.FightMembers != null)
             {
-                var heroIcons = UnitInfosShow(one.FightMembers.EnemySets.GetValues(), stageBtn.iconsT);
-                for (var i = 0; i < heroIcons.Count; i++)
-                {
-                    var heroIcon = heroIcons[i];
-                    heroIcon.iconButton.onClick.RemoveAllListeners();
-                    heroIcon.iconButton.onClick.AddListener( 
-                        async () =>
-                        {
-                            ProgressLayer.Loading(">");
-                            await IconButtonFeature(heroIcon);
-                            ProgressLayer.Close();
-                        }
-                    );
-                    // 默认显示章节boss
-                    if (stageNo == _currentStages.Max() && i == 0)
-                    {
-                        await IconButtonFeature(heroIcon);
-                    }
-                }
-                stageBtn.UnitIcons = heroIcons;
+                stageBtn.LoadUnitIcons(one.FightMembers.EnemySets.GetValues(), IconButtonFeature, stageNo == _currentStages.Max());
             }
         }
         var tasks = new List<UniTask>();
@@ -134,15 +114,15 @@ public class ArcadeTop : UILayer
         if (container.IsDestroyed())
             return;
         
-        _stageButtons.Sort((a, b) => b.stageNo.CompareTo(a.stageNo));
+        _stageButtons.Sort((a, b) => b.StageNo.CompareTo(a.StageNo));
         for (var i = 0; i < _stageButtons.Count; i++)
         {
             var stageBtn = _stageButtons[i];
             var btnAnimator = stageBtn.GetComponent<Animator>();
             if (btnAnimator != null)
-                btnAnimator.enabled = PlayerAccountInfo.Me.arcadeProcess + 1 == stageBtn.stageNo;
+                btnAnimator.enabled = PlayerAccountInfo.Me.arcadeProcess + 1 == stageBtn.StageNo;
             
-            stageBtn.ChangeColorOfIcons(PlayerAccountInfo.Me.arcadeProcess + 1 >= stageBtn.stageNo);
+            stageBtn.ChangeColorOfIcons(PlayerAccountInfo.Me.arcadeProcess + 1 >= stageBtn.StageNo);
             stageBtn.transform.SetParent(container.transform);
             stageBtn.transform.localPosition = Vector3.zero;
             stageBtn.transform.localRotation = Quaternion.identity;
@@ -175,28 +155,5 @@ public class ArcadeTop : UILayer
             currentChapter * 5 + 5
         };
         return returnValue;
-    }
-    
-    List<HeroIcon> UnitInfosShow(List<UnitInfo> heroSets, RectTransform showT)
-    {
-        foreach (Transform t in showT)
-        {
-            Destroy(t.gameObject);
-        }
-        var icons = new List<HeroIcon>();
-        foreach (var unitInfo in heroSets)
-        {
-            void load(UnitInfo unitInfo)
-            {
-                var v = HeroIcon.ArrangeHeroIconToT(unitIconPrefab, unitInfo, showT);
-                icons.Add(v);
-            }
-            load(unitInfo);
-        }
-        for (var i = 0; i < icons.Count; i++)
-        {
-            icons[i].iconButton.targetGraphic.raycastTarget = true;
-        }
-        return icons;
     }
 }

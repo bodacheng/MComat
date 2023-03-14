@@ -18,8 +18,7 @@ public class QuestInfoPage : MSceneProcess
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
                 }
-                _layer.editTeamButton.onClick.RemoveAllListeners();
-                _layer.editTeamButton.onClick.AddListener(GoToTeamEditArena);
+                _layer.SetTeamEditFeature(GoToTeamEditArena);
                 break;
             case FightEventType.Quest:
                 FightScene.FightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arcade").LoadTeamDic();
@@ -27,18 +26,26 @@ public class QuestInfoPage : MSceneProcess
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);
                 }
-                _layer.editTeamButton.onClick.RemoveAllListeners();
-                _layer.editTeamButton.onClick.AddListener(GoToTeamEditArcade);
+                _layer.SetTeamEditFeature(GoToTeamEditArcade);
                 break;
         }
         _layer.StageMembersInfoShow(FightScene.FightScene.Fight);
-        _layer.beginFight.onClick.RemoveAllListeners();
+        
         void Go()
         {
+            if (!FightScene.FightScene.Fight.FightMembers.CheckStonesFull())
+            {
+                PopupLayer.ArrangeWarnWindow(Translate.Get("TeamUnitNotFull"));
+                return;
+            }
             switch (FightScene.FightScene.Fight.EventType)
             {
                 case FightEventType.Arena:
-                    
+                    if (FightScene.FightScene.Fight.FightMembers.HeroSets.GetValues().Count != 3)
+                    {
+                        PopupLayer.ArrangeWarnWindow(Translate.Get("TeamNotFull"));
+                        return;
+                    }
                     CloudScript.SubtractVirtualCurrency(
                         "TK",1,
                         () =>
@@ -48,12 +55,16 @@ public class QuestInfoPage : MSceneProcess
                     );
                     break;
                 default:
+                    if (FightScene.FightScene.Fight.FightMembers.HeroSets.GetValues().Count == 0)
+                    {
+                        PopupLayer.ArrangeWarnWindow(Translate.Get("TeamNotFull"));
+                        return;
+                    }
                     FightLoad.Go(FightScene.FightScene.Fight, true);
                     break;
             }
         }
-        _layer.beginFight.onClick.AddListener(Go);
-        
+        _layer.SetFightBeginFeature(Go);
         SetLoaded(true);
     }
     

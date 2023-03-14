@@ -16,9 +16,20 @@ public class FightMembers
     [NonSerialized] public MultiDic<int, int, UnitInfo> HeroSets = new MultiDic<int, int, UnitInfo>();
     public MultiDic<int, int, UnitInfo> EnemySets = new MultiDic<int, int, UnitInfo>();
 
-    public bool CheckFightLegal()
+    public bool CheckStonesFull()
     {
-        return HeroSets.mDict.Count > 0 && EnemySets.mDict.Count > 0;
+        bool TeamLegal(MultiDic<int, int, UnitInfo> team)
+        {
+            bool legal = team.GetValues().Count > 0;
+            if (!legal)
+                return legal;
+            foreach (var unit in team.GetValues())
+            {
+                legal = unit.set.CheckEdit() == SkillSet.SkillEditError.Perfect && legal;
+            }
+            return legal;
+        }
+        return TeamLegal(HeroSets) && TeamLegal(EnemySets);
     }
     
     public FightMembers()
