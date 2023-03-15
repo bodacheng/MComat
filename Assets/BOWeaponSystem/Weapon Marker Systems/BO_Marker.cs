@@ -46,7 +46,6 @@ namespace HittingDetection
             BallDetectModeDetection(other);
         }
         
-        float tempWHpCost;
         void BallDetectModeDetection(Collider other)
         {
             //_hits = Physics.SphereCastAll(_tempPos, radius, _dir, _dist, _layers, QueryTriggerInteraction.Collide);// 如果有能力把这个句子去掉最好。会极大幅度提高整个程序速度，但对于相应的代价得有替代方案
@@ -57,9 +56,7 @@ namespace HittingDetection
                 if (!BallDetectHitPool.Keys.Contains(other))
                 {
                     var tempM = HitBoxesProcesser.Instance.GetHitBox(other);
-                    tempWHpCost = 
-                        tempM != null ? 
-                            V_Damage.WpHpCost(owner.heavyLevel, tempM.heavyLevel) : 1;
+                    float tempWHpCost = tempM != null ? V_Damage.WpHpCost(owner.heavyLevel, tempM.heavyLevel) : 1;
                     var hitPointPara = new HitPointPara
                     {
                         onBodyPos = HitEffectPointCal(other.transform.position),
@@ -71,17 +68,15 @@ namespace HittingDetection
                 }
             }
         }
-
-        float temp;
-        Vector3 _temp;
+        
         Vector3 HitEffectPointCal(Vector3 colliderCenterPosition)
         {
-            temp = Mathf.Clamp((colliderCenterPosition - transform.position).magnitude,0,radius);
-            _temp = transform.position + (colliderCenterPosition - transform.position).normalized * temp;
-            _temp = new Vector3((float)Math.Round(_temp.x, 1, MidpointRounding.AwayFromZero),
-                                (float)Math.Round(_temp.y, 1, MidpointRounding.AwayFromZero),
-                                (float)Math.Round(_temp.z, 1, MidpointRounding.AwayFromZero));
-            return _temp;
+            var dis = Mathf.Clamp((colliderCenterPosition - transform.position).magnitude,0,radius);
+            var temp = transform.position + (colliderCenterPosition - transform.position).normalized * dis;
+            temp = new Vector3((float)Math.Round(temp.x, 1, MidpointRounding.AwayFromZero),
+                                (float)Math.Round(temp.y, 1, MidpointRounding.AwayFromZero),
+                                (float)Math.Round(temp.z, 1, MidpointRounding.AwayFromZero));
+            return temp;
         }
         
         void OnDrawGizmosSelected()

@@ -118,9 +118,9 @@ namespace HittingDetection
  
                             //_Raw_Target_Instance这个里面全是mainhealth，就是mainhealth，不是含着mainhealth的transform
                             //_Targets_Raw_Hit里面加入的全是_Raw_Target_Instance的transform，也就是mainhealth的transform
-                            _boHitBox = _hits[hit_target_index].collider.GetComponent<BO_Limb>();
                             if (!_Targets_Raw_Hit.Contains(_hits[hit_target_index].collider.transform) && !_usedTargets.Contains(_hits[hit_target_index].collider.transform))
                             {
+                                _boHitBox = _hits[hit_target_index].collider.GetComponent<BO_Limb>();
                                 //方式1：mainhealth所在层级有collider //注意看这行条件，主要就是考虑到防御问题  （* *）
                                 //if (_BO_Health != null && _Used_Targets.Contains(_markers[i]._hits[hit_target_index].collider.transform) == false)
                                 //{
@@ -265,10 +265,10 @@ namespace HittingDetection
                                 {
                                     continue;
                                 }
-
-                                _boHitBox = hitC.Key.GetComponent<BO_Limb>();
+                                
                                 if (!_Targets_Raw_Hit.Contains(hitC.Key.transform) && !_usedTargets.Contains(hitC.Key.transform))
                                 {
+                                    _boHitBox = hitC.Key.GetComponent<BO_Limb>();
                                     //方式1：mainhealth所在层级有collider.注意看这行条件，主要就是考虑到防御问题  （* *）
                                     //if (_BO_Health != null && _Used_Targets.Contains(BallDetectHitPool[hit_target_index].transform) == false)
                                     //{
@@ -281,15 +281,15 @@ namespace HittingDetection
                                     //方式2：hitbox模式
                                     if (_boHitBox != null)
                                     {
-                                        if (!_usedTargets.Contains(_boHitBox.Center.geometryCenter)) //注意看这行条件，主要就是考虑到防御问题 （* *）
+                                        if (!_usedTargets.Contains(_boHitBox.Center.geometryCenter)) // 注意看这行条件，主要就是考虑到防御问题 （* *）
                                         {
                                             HitFlesh = true;
-                                            _Raw_Target_Instance = _boHitBox.Center.FightDataRef;//从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
+                                            _Raw_Target_Instance = _boHitBox.Center.FightDataRef; // 从上往下看，其实这一段表达的意思是一轮攻击只对一个main——health造成伤害
                                             _usedTargets.Add(_boHitBox.transform);
                                             _usedTargets.Add(_boHitBox.Center.geometryCenter);
                                         }
                                     }
-
+                                    
                                     if (_Raw_Target_Instance != null)
                                     {
                                         _Targets_Raw_Hit.Add(_Raw_Target_Instance.Center.geometryCenter);
@@ -302,8 +302,8 @@ namespace HittingDetection
                                     {
                                         if (_Raw_Target_Instance.GetShield() != null)
                                         {
-                                            //一把武器一轮enablemarkers和disablemarkers之间只可能对一个敌人进行一次伤害或进行一次“被防御”，敌人不可能在一把武器的一轮攻击期间内既受伤一次又防御成功一次
-                                            //因此如果一轮攻击内敌人受伤了，也就再不用研究他能不能防御住所受攻击了。
+                                            // 一把武器一轮enablemarkers和disablemarkers之间只可能对一个敌人进行一次伤害或进行一次“被防御”，敌人不可能在一把武器的一轮攻击期间内既受伤一次又防御成功一次
+                                            // 因此如果一轮攻击内敌人受伤了，也就再不用研究他能不能防御住所受攻击了。
                                             _usedTargets.Add(_Raw_Target_Instance.GetShield().transform);
                                         }
                                     }
