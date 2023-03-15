@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using System.Collections.Generic;
 using Log;
 
@@ -103,20 +104,30 @@ namespace HittingDetection
             _markers = bms;
         }
         
+        Coroutine delayEnableMarkers;
         public void MarkersEnablingStarts()
         {
-            if (System.Math.Abs(ActivateAfterTime) < 0.001f)
+            if (System.Math.Abs(ActivateAfterTime) == 0)
             {
                 EnableMarkers();
             }
             else
             {
-                Invoke("EnableMarkers", ActivateAfterTime);
+                IEnumerator execution(float seconds)
+                {
+                    yield return new WaitForSeconds(seconds);
+                    _Raw_Target_Instance = null;
+                    ClearTargets();
+                    EnableMarkers();
+                }
+                delayEnableMarkers = StartCoroutine (execution(ActivateAfterTime));
             }
         }
-
+        
         public void Local_OnDisable()
         {
+            if (delayEnableMarkers != null)
+                StopCoroutine(delayEnableMarkers);
             _Raw_Target_Instance = null;
             _boHitBox = null;
             DisableMarkers();
@@ -156,10 +167,7 @@ namespace HittingDetection
 
         public void EnableMarkers()
         {
-            if (_usedTargets != null)
-            {
-                _usedTargets.Clear();
-            }
+            _usedTargets?.Clear();
             _shieldsHit.Clear();
             for (var i = 0; i < _markers.Count; i++)
             {

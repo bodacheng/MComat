@@ -94,17 +94,14 @@ public partial class BO_Ani_E : MonoBehaviour
         if (_DATA_CENTER.Sensor.GetClosestEnemyColliderInSensorRange() != null)
         {
             nav_target = _DATA_CENTER.Sensor.GetClosestEnemyColliderInSensorRange().transform.position;
-            Debug.Log("1"+nav_target);
         }
         else if (_DATA_CENTER.Sensor.GetEnemiesByDistance(false).Count > 0)
         {
             nav_target = _DATA_CENTER.Sensor.GetEnemiesByDistance(false)[0].transform.position;
-            Debug.Log("2"+nav_target);
         }
         else
         {
             nav_target = _DATA_CENTER.geometryCenter.position + transform.forward * 5f;
-            Debug.Log("3"+nav_target);
         }
         
         this.hiddenMethods.MagicForward_core(
