@@ -14,13 +14,10 @@ public partial class GotchaResultLayer : UILayer
         Reset();
         NineForShow.transform.gameObject.SetActive(false);
         await UniTask.DelayFrame(1);
+        await PrepareEffects(results);
+        starFallAnimWholeProcess = StartCoroutine (StarFallAnim(results));
         SpeedOnce.gameObject.SetActive(true);
         Skip.gameObject.SetActive(true);
-        
-        await PrepareEffects(results);
-        
-        starFallAnimWholeProcess = StartCoroutine (StarFallAnim(results));
-        
         while(!_starFallen)
             await UniTask.DelayFrame(1);
 
