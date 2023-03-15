@@ -51,6 +51,12 @@ namespace dataAccess
             var targetData = Stones.Get(instanceID);
             if (targetData == null)
                 return false;
+
+            if (targetData.Level >= PlayfabSetting._VersionMaxStoneLevel)
+            {
+                return false;
+            }
+            
             var infoModels = new List<string>();
             int usingCount = 0;
             foreach (var kv in Dic)

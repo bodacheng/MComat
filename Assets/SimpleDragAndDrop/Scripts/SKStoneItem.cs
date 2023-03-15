@@ -53,7 +53,10 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
     public void RenderStoneLevel()
     {
 	    var stoneInfo = Stones.Get(instanceId);
-	    info.text = stoneInfo != null? stoneInfo.Level.ToString() : String.Empty;
+	    info.text = stoneInfo != null ? 
+		    (stoneInfo.Level == PlayfabSetting._VersionMaxStoneLevel ? "MAX" : stoneInfo.Level.ToString()) 
+		    : 
+		    String.Empty;
     }
     
 	/// <summary>

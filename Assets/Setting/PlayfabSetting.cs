@@ -7,6 +7,7 @@ public class PlayfabSetting : ScriptableObject
     public string UnitCatalog;
     public string StoneCatalog;
     public string MailCatalog;
+    public int VersionMaxStoneLevel;
     public string GoldCode;
     public string DiamondCode;
     public string ArenaTicketCode;
@@ -19,6 +20,7 @@ public class PlayfabSetting : ScriptableObject
     public static string _UnitCatalog;
     public static string _StoneCatalog;
     public static string _MailCatalog;
+    public static int _VersionMaxStoneLevel;
     public static string _GoldCode;
     public static string _DiamondCode;
     public static string _ArenaTicketCode;
@@ -33,6 +35,7 @@ public class PlayfabSetting : ScriptableObject
         _UnitCatalog = UnitCatalog;
         _StoneCatalog = StoneCatalog;
         _MailCatalog = MailCatalog;
+        _VersionMaxStoneLevel = VersionMaxStoneLevel;
         _GoldCode = GoldCode;
         _DiamondCode = DiamondCode;
         _ArenaTicketCode = ArenaTicketCode;
