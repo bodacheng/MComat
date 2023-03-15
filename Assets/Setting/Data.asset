@@ -157,8 +157,6 @@ MonoBehaviour:
   CanGetUpAfterKnockoffToGround: 0.5
   GetupTime: 0.5
   SureToPushForwardDis: 5
-  roughMaterial: {fileID: 0}
-  smoothMaterial: {fileID: 0}
   defendHP: 0
   lightBlockLastingTime: 0.3
   heavyBlockLastingTime: 0.6

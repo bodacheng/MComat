@@ -26,13 +26,17 @@ public partial class CloudScript
                 ProgressLayer.Close();
                 Debug.Log(x.FunctionResult);
                 var returnValue = (PlayFab.Json.JsonObject) x.FunctionResult;
+                if (returnValue == null)
+                {
+                    Debug.Log("返回值为null?");
+                    return;
+                }
                 returnValue.TryGetValue("result", out var result);
                 if (result == null)
                 {
                     Debug.Log("返回值为null");
                     return;
                 }
-                
                 var resultJson = (PlayFab.Json.JsonObject) result;
                 resultJson.TryGetValue("Balance", out var Balance);
                 int.TryParse(Balance.ToString(), out int intBalance);

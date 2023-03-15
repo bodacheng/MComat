@@ -36,7 +36,7 @@ namespace FightScene
                                 var a = UILayerLoader.Load<ArenaFightOver>();
                                 a.Step2Anim();
                                 a.ShowArenaPoint(x,y);
-                                a.ShowAward(z,0).Forget();
+                                a.ShowAward(z,0);
                             }
                         );
                     }
@@ -60,8 +60,8 @@ namespace FightScene
                                     var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                                     var hasReward = jsonResult.ContainsKey("has_reward") ? jsonResult["has_reward"] : false;
                                     var hasRewardBool = (bool)hasReward;
-                                    var a = UILayerLoader.Load<ArenaFightOver>();
-                                    a.Step2Anim();
+                                    var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
+                                    arenaFightOver.Step2Anim();
                                     if (hasRewardBool)
                                     {
                                         var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
@@ -69,7 +69,7 @@ namespace FightScene
                                         PlayerAccountInfo.Me.arcadeProcess = levelInt;
                                         var rewardGdInt = Convert.ToInt32(rewardGd);
                                         var rewardDmInt = Convert.ToInt32(rewardDm);
-                                        a.ShowAward(rewardDmInt, rewardGdInt, levelInt % 2 == 0).Forget();
+                                        arenaFightOver.ShowAward(rewardDmInt, rewardGdInt, levelInt % 2 == 0);
                                     }
                                     
                                     if (FightScene.Fight.ID == "1")

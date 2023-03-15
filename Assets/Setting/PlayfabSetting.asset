@@ -19,3 +19,5 @@ MonoBehaviour:
   DiamondCode: DM
   ArenaTicketCode: TK
   AdTicketCode: AD
+  adTicketRewardDM: 20
+  adFightRewardDM: 10

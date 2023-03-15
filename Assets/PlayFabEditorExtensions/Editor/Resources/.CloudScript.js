@@ -75,10 +75,11 @@ function GrantItemToCurrentUser(itemIds, CatalogVersion)
 }
 
 handlers.advertisementReward = function (args, context) {
+    
     var result = server.AddUserVirtualCurrency(
         {
             PlayFabId :currentPlayerId,
-            Amount : 50,
+            Amount : args.DM,
             VirtualCurrency : "DM"
         }
     );
@@ -225,7 +226,7 @@ handlers.completedLevel = function (args, context) {
         default:
             break;
     }
-
+    
     if (unit_award.length > 0) {
         var award_unit = GrantItemToCurrentUser(unit_award, "unit");
         return { award_unit };

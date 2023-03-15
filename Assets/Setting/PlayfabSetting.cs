@@ -11,6 +11,8 @@ public class PlayfabSetting : ScriptableObject
     public string DiamondCode;
     public string ArenaTicketCode;
     public string AdTicketCode;
+    public int adTicketRewardDM;
+    public int adFightRewardDM;
 
     public static string _UnitCatalog;
     public static string _StoneCatalog;
@@ -19,6 +21,8 @@ public class PlayfabSetting : ScriptableObject
     public static string _DiamondCode;
     public static string _ArenaTicketCode;
     public static string _AdTicketCode;
+    public static int _adTicketRewardDM;
+    public static int _adFightRewardDM;
 
     public void Initialise()
     {
@@ -29,6 +33,8 @@ public class PlayfabSetting : ScriptableObject
         _DiamondCode = DiamondCode;
         _ArenaTicketCode = ArenaTicketCode;
         _AdTicketCode = AdTicketCode;
+        _adTicketRewardDM = adTicketRewardDM;
+        _adFightRewardDM = adFightRewardDM;
     }
 
     public static int ArenaPointToRank(int point)

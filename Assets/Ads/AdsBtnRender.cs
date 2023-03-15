@@ -24,11 +24,10 @@ public class AdsBtnRender : MonoBehaviour
         rewardedAdsButton.SetWatchedAdExtraProcess(
             () =>
             {
-                Debug.Log("Unity Ads Rewarded Ad Completed");
                 // Grant a reward.
                 CloudScript.SubtractVirtualCurrency(
                     "AD",1,
-                    CloudScript.RequestAdReward
+                    ()=> CloudScript.RequestAdReward(PlayfabSetting._adTicketRewardDM)
                 );
             }
         );

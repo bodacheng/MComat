@@ -1,16 +1,21 @@
+using System;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 
 public partial class CloudScript
 {
-    public static void RequestAdReward()
+    public static void RequestAdReward(int dm, Action success = null)
     {
         ProgressLayer.Loading(string.Empty);
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest
             {
-                FunctionName = "advertisementReward"
+                FunctionName = "advertisementReward",
+                FunctionParameter = new
+                {
+                    DM = dm
+                },
             },
             (x)=>
             {
@@ -33,7 +38,8 @@ public partial class CloudScript
                         Currencies.CoinCount.Value = intBalance;
                         break;
                 }
-                PopupLayer.ArrangeWarnWindow("YOU GOT "+ intBalanceChange+ " " + VirtualCurrency);
+                success?.Invoke();
+                //PopupLayer.ArrangeWarnWindow("YOU GOT "+ intBalanceChange+ " " + VirtualCurrency);
             },
             (x)=>
             {
