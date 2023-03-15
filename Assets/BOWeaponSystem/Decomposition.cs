@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 using HittingDetection;
 using UnityEngine.Animations;
@@ -9,8 +8,10 @@ public partial class Decomposition : MonoBehaviour {
     public HitBoxManager _HitBox;
     public TrackControl TrackControl;
     
-    public float DestructionDelay = 1.1f;//上面的值必须要大于下面的值
-    public float stop_emission_delay = 0.9f;
+    [Tooltip("物体实际销毁时间，一定要大于stop_emission_delay")]
+    [SerializeField] float DestructionDelay = 1.1f;//上面的值必须要大于下面的值
+    [Tooltip("武器实际失效时间，也是特效停止生成时间")]
+    [SerializeField] float stop_emission_delay = 0.9f;
     
     public List<MeshRenderer> to_be_faded_renderers;
 
