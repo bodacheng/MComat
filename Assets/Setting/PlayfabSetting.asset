@@ -19,5 +19,7 @@ MonoBehaviour:
   DiamondCode: DM
   ArenaTicketCode: TK
   AdTicketCode: AD
+  GDGotchaCode: GDGotcha
+  DMGotchaCode: DMGotcha
   adTicketRewardDM: 20
   adFightRewardDM: 10
