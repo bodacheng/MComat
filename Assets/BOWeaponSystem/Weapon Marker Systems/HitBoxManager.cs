@@ -128,8 +128,6 @@ namespace HittingDetection
         {
             if (delayEnableMarkers != null)
                 StopCoroutine(delayEnableMarkers);
-            _Raw_Target_Instance = null;
-            _boHitBox = null;
             DisableMarkers();
             SetTeamConfig(TeamConfig.DefaultSet);
         }
@@ -192,12 +190,9 @@ namespace HittingDetection
         
         public void ClearTargets()
         {
-            if (_usedTargets != null)
-            {
-                _usedTargets.Clear();
-            }
+            _usedTargets?.Clear();
             _shieldsHit.Clear();
-            for (int i = 0; i < _markers.Count; i++)
+            for (var i = 0; i < _markers.Count; i++)
             {
                 _markers[i].ClearMarkerProcess();
             }
