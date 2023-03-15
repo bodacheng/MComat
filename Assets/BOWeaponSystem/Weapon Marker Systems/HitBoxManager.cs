@@ -117,6 +117,8 @@ namespace HittingDetection
 
         public void Local_OnDisable()
         {
+            _Raw_Target_Instance = null;
+            _boHitBox = null;
             DisableMarkers();
             SetTeamConfig(TeamConfig.DefaultSet);
         }

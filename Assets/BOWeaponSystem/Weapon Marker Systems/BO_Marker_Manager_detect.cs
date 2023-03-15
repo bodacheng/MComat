@@ -182,7 +182,7 @@ namespace HittingDetection
                         {
                             if (_traditionalDefendMode)
                             {
-                                foreach (KeyValuePair<Collider,HitPointPara> Hit_C in BallDetectHitPool)
+                                foreach (var Hit_C in BallDetectHitPool)
                                 {
                                     if (_markers[i].enemyShieldLayer == (_markers[i].enemyShieldLayer | 1 << Hit_C.Key.gameObject.layer)　&&　!_shieldsHit.Contains(Hit_C.Key.transform))
                                     {
