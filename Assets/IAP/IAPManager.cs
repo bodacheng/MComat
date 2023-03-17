@@ -173,7 +173,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 // Pass in currency code in ISO format
                 CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
                 // Convert and set Purchase price
-                PurchasePrice = (uint)(e.purchasedProduct.metadata.localizedPrice * * DMAmount(e.purchasedProduct.definition.id)),
+                PurchasePrice = (uint)(e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id)),
                 // Pass in the receipt
                 ReceiptJson = googleReceipt.PayloadData.json,
                 // Pass in the signature
