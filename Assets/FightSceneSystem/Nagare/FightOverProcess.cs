@@ -36,7 +36,7 @@ namespace FightScene
                                 var a = UILayerLoader.Load<ArenaFightOver>();
                                 a.Step2Anim();
                                 a.ShowArenaPoint(x,y);
-                                a.ShowAward(z,0);
+                                a.ShowAward(z,0, 0);
                             }
                         );
                     }
@@ -69,7 +69,8 @@ namespace FightScene
                                         PlayerAccountInfo.Me.arcadeProcess = levelInt;
                                         var rewardGdInt = Convert.ToInt32(rewardGd);
                                         var rewardDmInt = Convert.ToInt32(rewardDm);
-                                        arenaFightOver.ShowAward(rewardDmInt, rewardGdInt, levelInt % 2 == 0);
+                                        arenaFightOver.ShowAward(rewardDmInt, rewardGdInt, 
+                                            levelInt % 5 == 0 ? PlayfabSetting._adFightRewardDM * 2 : PlayfabSetting._adFightRewardDM);
                                     }
                                     
                                     if (FightScene.Fight.ID == "1")

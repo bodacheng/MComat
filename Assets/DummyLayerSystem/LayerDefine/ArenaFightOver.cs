@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -103,14 +104,12 @@ public class ArenaFightOver : UILayer
         animator.SetTrigger("step2");
     }
     
-    public void ShowAward(int awardDm, int awardGd, bool extraAdReward = false)
+    public void ShowAward(int awardDm, int awardGd, int extraAdReward)
     {
         if (awardDm > 0)
         {
-            Debug.Log("DM:"+ Currencies.DiamondCount.Value);
             dmParent.gameObject.SetActive(true);
             Currencies.DiamondCount.Value += awardDm;
-            Debug.Log("DM after:"+ Currencies.DiamondCount.Value);
             awardDmCurrency.text = awardDm.ToString();
         }
         if (awardGd > 0)
@@ -120,16 +119,25 @@ public class ArenaFightOver : UILayer
             awardGdCurrency.text = awardGd.ToString();
         }
         
-        if (extraAdReward)
+        if (extraAdReward > 0)
         {
-            watchAdRewardText.text = "x"+PlayfabSetting._adFightRewardDM;
+            string awardText = String.Empty;
+            if (extraAdReward == 10)
+            {
+                awardText = "x2";
+            }
+            else if (extraAdReward == 20)
+            {
+                awardText = "x3";
+            }
+            watchAdRewardText.text = awardText;
             watchAdBtn.gameObject.SetActive(true);
             watchAdBtn.SetWatchedAdExtraProcess(
                 () =>
                 {
-                    CloudScript.RequestAdReward(PlayfabSetting._adFightRewardDM, () =>
+                    CloudScript.RequestAdReward(extraAdReward, () =>
                     {
-                        awardDmCurrency.text = (PlayfabSetting._adFightRewardDM + awardDm).ToString();
+                        awardDmCurrency.text = (extraAdReward + awardDm).ToString();
                         watchAdBtn.gameObject.SetActive(false);
                     });
                 }
