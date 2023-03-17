@@ -2,9 +2,8 @@
 
 namespace Soul
 {
-    public class G_Ani_MoveEscape_State : Behavior
+    public class GMoveEscapeState : Behavior
     {
-
         readonly string clip_name;
         Transform mainCam;
         Quaternion screenMovementSpace;
@@ -14,7 +13,7 @@ namespace Soul
         readonly UnityEngine.Events.UnityAction _breakFreeEnd;
         readonly CustomCoroutine _breakFreeCoroutine;
         
-        public G_Ani_MoveEscape_State(string _clip_name)
+        public GMoveEscapeState(string _clip_name)
         {
             clip_name = _clip_name;
             _breakFreeStart = () =>

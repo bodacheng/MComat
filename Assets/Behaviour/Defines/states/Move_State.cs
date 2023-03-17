@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NoSuchStudio.Common;
 using UnityEngine;
 
 namespace Soul
@@ -125,6 +126,13 @@ namespace Soul
                 return;
             }
             EnemiesByDistance = Sensor.GetEnemiesByDistance(true);
+            var closestEnemy = EnemiesByDistance.Count > 0 ? EnemiesByDistance[0] : null;
+            if (closestEnemy == null)
+            {
+                whereToGo = 6;
+                return;
+            }
+            
             switch (_AIMoveStyle)
             {
                 case AIMoveMode.normal:
@@ -136,29 +144,63 @@ namespace Soul
                     }
                     if (EnemiesByDistance.Count > 0)
                     {
-                        Collider threat = Sensor.GetSuddenThreatInRange(0, 5);
+                        var threat = Sensor.GetSuddenThreatInRange(0, 5);
                         whereToGo = threat != null ? 5 : Random.Range(0, 5);
+                        
+                        var meToEnemyVector = (closestEnemy.transform.position - gameObject.transform.position);
+                        var nextSkillRange = _AIStateRunner.CalAdviceDistanceFromEnemy();
+                        
+                        if (threat != null)
+                        {
+                            whereToGo = 5;
+                        }
+                        else
+                        {
+                            if (meToEnemyVector.magnitude < nextSkillRange.Item1)
+                            {
+                                Debug.Log("here we :"+ nextSkillRange.Item1 + " to "+ nextSkillRange.Item2);
+                                whereToGo = 2;
+                            }
+                            else
+                            {
+                                if (meToEnemyVector.magnitude < FightGlobalSetting._closeDis)
+                                {
+                                    whereToGo = 6;//stay
+                                }
+                                else
+                                {
+                                    whereToGo = (new List<int> { 1,3,4 }).Random();
+                                }
+                            }
+                        }
+                        
                         switch (whereToGo)
                         {
-                            case 0:
-                                moveDirection = AIMoveDirection.towardsEnemyRight;
-                                if (EnemiesByDistance[0] != null)
-                                    use_direction = GetVerticalDir(EnemiesByDistance[0].transform.position - gameObject.transform.position) + (EnemiesByDistance[0].transform.position - gameObject.transform.position).normalized;
-                                break;
                             case 1:
-                                moveDirection = AIMoveDirection.towardsEnemyLeft;
-                                if (EnemiesByDistance[0] != null)
-                                    use_direction = -GetVerticalDir(EnemiesByDistance[0].transform.position - gameObject.transform.position) + (EnemiesByDistance[0].transform.position - gameObject.transform.position).normalized;
-                                break;
-                            case 2:
-                            case 3:
-                            case 4:
                                 moveDirection = AIMoveDirection.towardsEnemy;
                                 if (closetEnemyT != null)
                                 {
-                                    targetPos = closetEnemyT.position + (gameObject.transform.position - closetEnemyT.position).normalized * _AIStateRunner.FixedSkillTriggerDis();
+                                    targetPos = closetEnemyT.position;
                                     targetPos.y = 0;
                                 }
+                                break;
+                            case 2:
+                                moveDirection = AIMoveDirection.backTowardsEnemy;
+                                if (closetEnemyT != null)
+                                {
+                                    targetPos = closetEnemyT.position + (-meToEnemyVector).normalized * nextSkillRange.Item2;
+                                    targetPos.y = 0;
+                                }
+                                break;
+                            case 3:
+                                moveDirection = AIMoveDirection.towardsEnemyRight;
+                                if (closestEnemy != null)
+                                    use_direction = GetVerticalDir(meToEnemyVector) + meToEnemyVector.normalized;
+                                break;
+                            case 4:
+                                moveDirection = AIMoveDirection.towardsEnemyLeft;
+                                if (closestEnemy != null)
+                                    use_direction = -GetVerticalDir(meToEnemyVector) + meToEnemyVector.normalized;
                                 break;
                             case 5:
                                 moveDirection = AIMoveDirection.RunAwayFromThreat;
@@ -201,7 +243,7 @@ namespace Soul
             }
         }
 
-        int whereToGo;
+        int whereToGo = 6;
         Vector3 targetPos;
         Transform closetEnemyT;
         public void _f_State_Update_SP()
@@ -236,7 +278,7 @@ namespace Soul
                     use_direction = Vector3.zero;
                     break;
                 case AIMoveDirection.backTowardsEnemy:
-                    use_direction = closetEnemyT.position - gameObject.transform.position;
+                    use_direction = gameObject.transform.position - closetEnemyT.position;
                     break;
                 case AIMoveDirection.towardsEnemy:
                     use_direction = targetPos - gameObject.transform.position;

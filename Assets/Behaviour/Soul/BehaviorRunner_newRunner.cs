@@ -6,7 +6,6 @@ namespace Soul
 {
     public partial class BehaviorRunner : MonoBehaviour
     {
-        // 这个纯粹为了按钮效果 按钮刷新。预告作用
         public List<SkillEntity> optionsForButtonRefresh = new List<SkillEntity>();
         readonly List<SkillEntity> _canTranTo = new List<SkillEntity>(); //可以启动的技能的列表
         readonly List<string> _forcedTransitions = new List<string>();
@@ -17,11 +16,6 @@ namespace Soul
             _forcedTransitions.Clear();
             optionsForButtonRefresh.Clear();
             
-            if (_nowBehavior != null)
-            {
-                SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out CurrentSKillEntity);
-            }
-                        
             #region Forced state transition 
             if (CurrentSKillEntity.ForcedTransitions != null)
             {
@@ -66,8 +60,6 @@ namespace Soul
             #region 按钮技能刷新
             InputsManager?.ButtonsFeatureLoad(optionsForButtonRefresh);
             #endregion
-            
-            CalAdviceDistanceFromEnemy();
         }
         
         // 获取接下来等待释放的技能，并非是真正可触发技能，但反应了是否够气
@@ -98,24 +90,25 @@ namespace Soul
             }
             return List;
         }
-
-        float min,max;
-        void CalAdviceDistanceFromEnemy()
-        {
-            min = 9999f;
-            max = 0f;
-            for (var index = 0; index < _canTranTo.Count; index++)
-            {
-                if (min > _canTranTo[index].AIAttrs.AI_MIN_DIS)
-                    min = _canTranTo[index].AIAttrs.AI_MIN_DIS;
-                if (max < _canTranTo[index].AIAttrs.AI_MAX_DIS)
-                    max = _canTranTo[index].AIAttrs.AI_MAX_DIS;
-            }
-        }
         
-        public float FixedSkillTriggerDis()
+        public (float, float) CalAdviceDistanceFromEnemy()
         {
-            return (min + max) / 2;
+            float min = 9999f;
+            float max = 0f;
+            for (var index = 0; index < CurrentSKillEntity.CasualTo.Length; index++)
+            {
+                BehaviourDic.TryGetValue(CurrentSKillEntity.CasualTo[index], out var state);
+                
+                if (state.StateType == BehaviorType.CT || state.StateType == BehaviorType.GM ||
+                    state.StateType == BehaviorType.GI || state.StateType == BehaviorType.GR)
+                {
+                    if (min > state.triggerAttackRangeMin)
+                        min = state.triggerAttackRangeMin;
+                    if (max < state.triggerAttackRangeMax)
+                        max = state.triggerAttackRangeMax;
+                }
+            }
+            return (min, max);
         }
     }
 }

@@ -126,12 +126,7 @@ namespace Soul
             // 关于动画模块的“技能动作清空”，我们是把它放在了move状态的开头，从而避免了清空函数与触发动画函数在同一帧执行。
             _lastBehavior = _nowBehavior;
             _nowBehavior = _tryBehavior;
-
-            if (_nowBehavior == null)
-            {
-                Debug.Log("尝试读取未定义的状态" + num);
-                return;
-            }
+            SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out CurrentSKillEntity);
             
             if (AI && !BeingControl())
             {
@@ -150,12 +145,8 @@ namespace Soul
             
             _lastBehavior = _nowBehavior;
             _nowBehavior = _tryBehavior;
+            SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out CurrentSKillEntity);
             
-            if (_nowBehavior == null)
-            {
-                Debug.Log("尝试读取未定义的状态" + num);
-                return;
-            }
             if (AI && !BeingControl())
                 _nowBehavior.AI_State_enter(damage);
             else

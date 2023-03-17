@@ -6,23 +6,23 @@ namespace Soul
 {
     public abstract partial class Behavior
     {
-        public GameObject gameObject;
-        public Rigidbody _Rigidbody;
-        public BehaviorRunner _AIStateRunner;
+        protected GameObject gameObject;
+        protected Rigidbody _Rigidbody;
+        protected BehaviorRunner _AIStateRunner;
         public Data_Center _DATA_CENTER;
-        public BO_Ani_E _BO_Ani_E;
-        public FightParamsReference FightParamsRef;
-        public ResistanceManager _ResistanceManager;
-        public BasicPhysicSupport _BasicPhysicSupport;
-        public Sensor Sensor;
-        public Animator _Animator;
-        public SkillCancelFlag _SkillCancelFlag;
-        public BO_Weapon_Animation_Events _Weapon_Animation_Events;
-        public ShaderManager shaderManager;
-        public AnimationManger Animation_Manger;
-        public BuffsRunner _BuffsRunner;
-        public BlendShapeProxy blendShapeProxy;
-        public Personality_events pEvents;
+        protected BO_Ani_E _BO_Ani_E;
+        protected FightParamsReference FightParamsRef;
+        protected ResistanceManager _ResistanceManager;
+        protected BasicPhysicSupport _BasicPhysicSupport;
+        protected Sensor Sensor;
+        protected Animator _Animator;
+        protected SkillCancelFlag _SkillCancelFlag;
+        protected BO_Weapon_Animation_Events _Weapon_Animation_Events;
+        protected ShaderManager shaderManager;
+        protected AnimationManger Animation_Manger;
+        protected BuffsRunner _BuffsRunner;
+        protected BlendShapeProxy blendShapeProxy;
+        protected Personality_events pEvents;
         
         public float AT;
         public string StateKey;

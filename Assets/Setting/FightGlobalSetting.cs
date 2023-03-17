@@ -11,6 +11,8 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] AnimationCurve hDamageZAnimationCurve;
     [SerializeField] int fighterRigidMass = 1000;
     [SerializeField] int onTouchEnemyBodyRigidDrag = 1000;
+    [SerializeField] float fighterMoveSpeed = 10;
+    [SerializeField] float closeDis = 2;
     [SerializeField] float AT_coefficient = 1;
     [SerializeField] float HP_coefficient = 1;
     [SerializeField] bool Team1Invincible = false;
@@ -38,6 +40,7 @@ public class FightGlobalSetting : ScriptableObject
     public static bool SkillStoneHasExp;
     public static int FighterRigidMass = 1000;
     public static int OnTouchEnemyBodyRigidDrag = 1000;
+    public static float _fighterMoveSpeed;
     static float AtCoefficient = 1;
     static float HpCoefficient = 1;
     public static bool _Team1Invincible;
@@ -51,6 +54,7 @@ public class FightGlobalSetting : ScriptableObject
     public static float _CanGetUpAfterKnockoffToGround;
     public static float _GetupTime;
     public static float _SureToPushForwardDis = 5f;
+    public static float _closeDis;
     public static float LightBlockLastingTime, HeavyBlockLastingTime, HighHitLastingTime;
     public static float NormalAttackPosFixingTime;
     public static AnimationCurve KnockOffYAnimationCurve, KnockOffZAnimationCurve;
@@ -71,6 +75,8 @@ public class FightGlobalSetting : ScriptableObject
         HasDefend = hasDefend;
         SkillStoneHasExp = skillStoneHasExp;
 
+        _closeDis = closeDis;
+        _fighterMoveSpeed = fighterMoveSpeed;
         AtCoefficient = AT_coefficient;
         HpCoefficient = HP_coefficient;
         FighterRigidMass = fighterRigidMass;

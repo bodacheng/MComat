@@ -22,7 +22,7 @@ namespace Soul
             BehaviorDic.Add("Victory", victory);
             BehaviorDic.Add("zhuangbi", zhuangbi);
             BehaviorDic.Add("Death", death);
-            Move_State move = new Move_State(AIMoveMode.normal, 10f, 1f)
+            Move_State move = new Move_State(AIMoveMode.normal, FightGlobalSetting._fighterMoveSpeed, 1f)
             {
                 StateType = BehaviorType.MV,
                 nextAttackCanRushFirst = false
@@ -81,7 +81,7 @@ namespace Soul
                                     BehaviorDic.Add("RushBack", RushBack);
                                     break;
                                 case "Rush":
-                                    G_Ani_MoveEscape_State Rush = new G_Ani_MoveEscape_State("rush")
+                                    GMoveEscapeState Rush = new GMoveEscapeState("rush")
                                     {
                                         nextAttackCanRushFirst = true,
                                         StateType = BehaviorType.AC
