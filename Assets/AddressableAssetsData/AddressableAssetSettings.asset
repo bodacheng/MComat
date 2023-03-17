@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: 
   m_DefaultGroup: 12326b1f1445842009fe2cbb9ff8f417
+  m_CachedHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
@@ -21,6 +24,7 @@ MonoBehaviour:
   m_IgnoreUnsupportedFilesInBuild: 0
   m_UniqueBundleIds: 0
   m_NonRecursiveBuilding: 1
+  m_CCDEnabled: 0
   m_maxConcurrentWebRequests: 500
   m_ContiguousBundles: 1
   m_StripUnityVersionFromBundleBuild: 0
@@ -34,6 +38,7 @@ MonoBehaviour:
   m_RemoteCatalogLoadPath:
     m_Id: b06b7dac454e04a1b8447caade86f7fc
   m_ContentStateBuildPath: 
+  m_BuildAddressablesWithPlayerBuild: 2
   m_overridePlayerVersion: v1
   m_GroupAssets:
   - {fileID: 11400000, guid: 20eef0358be72403ca33daddeac76145, type: 2}
@@ -53,6 +58,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ba5adffc70f3544b5b6c780931838e3b, type: 2}
   - {fileID: 11400000, guid: 7b154afc3c8fc423ca194cc2f124f6f9, type: 2}
   - {fileID: 11400000, guid: d62213ee1321e3547be20dd1c3886e0b, type: 2}
+  - {fileID: 11400000, guid: 9794fac7ffdbe4db7aa3edd16e8c51b8, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -168,7 +174,7 @@ MonoBehaviour:
           m_Key: HostingServiceUploadSpeed
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.String
-          m_Data: ServerData/dev/iOS;Library/com.unity.addressables/aa/iOS/iOS
+          m_Data: ServerData/release/iOS;Library/com.unity.addressables/aa/iOS/iOS
           m_Key: ContentRoot
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Boolean
