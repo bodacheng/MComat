@@ -16,7 +16,7 @@ public class DropTableInfoLayer : UILayer
             var node = tableInfo.Nodes[i];
             wholeWeight += node.Weight;
         }
-
+        
         foreach (var node in tableInfo.Nodes)
         {
             var nodeUI = Instantiate(prefab);

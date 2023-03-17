@@ -84,6 +84,27 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
     }
 
+    int DMAmount(string productId)
+    {
+        var rewardDMAmount = 0;
+        switch (productId)
+        {
+            case "diamond100":
+                rewardDMAmount = 100;
+                break;
+            case "diamond300":
+                rewardDMAmount = 300;
+                break;
+            case "diamond500":
+                rewardDMAmount = 500;
+                break;
+            case "diamond1000":
+                rewardDMAmount = 1000;
+                break;
+        }
+        return rewardDMAmount;
+    }
+    
     // This is invoked automatically when successful purchase is ready to be processed
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs e) {
         // NOTE: this code does not account for purchases that were pending and are
@@ -96,7 +117,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         if (!IsInitialized) {
             return PurchaseProcessingResult.Complete;
         }
-
+        
         // Test edge case where product is unknown
         if (e.purchasedProduct == null) {
             Debug.LogWarning("Attempted to process purchase with unknown product. Ignoring");
@@ -118,13 +139,15 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         var store = (string)wrapper["Store"];
         var payload = (string)wrapper["Payload"]; // For Apple this will be the base64 encoded ASN.1 receipt
 
-        Debug.Log("CurrencyCode:"+e.purchasedProduct.metadata.isoCurrencyCode);
-        Debug.Log("PurchasePrice:"+(int)e.purchasedProduct.metadata.localizedPrice);
-        PlayFabClientAPI.ValidateIOSReceipt(new ValidateIOSReceiptRequest
+        //Debug.Log("CurrencyCode:"+e.purchasedProduct.metadata.isoCurrencyCode);
+        //Debug.Log("PurchasePrice:"+(int)e.purchasedProduct.metadata.localizedPrice);
+        
+        PlayFabClientAPI.ValidateIOSReceipt(
+            new ValidateIOSReceiptRequest
             {
                 CatalogVersion = ProductCatalogVersion,
                 CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
-                PurchasePrice = (int)e.purchasedProduct.metadata.localizedPrice * 100,
+                PurchasePrice = (int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
                 ReceiptData = payload
             }, result => {
                 Debug.Log("Validation successful!");
@@ -150,7 +173,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 // Pass in currency code in ISO format
                 CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
                 // Convert and set Purchase price
-                PurchasePrice = (uint)(e.purchasedProduct.metadata.localizedPrice * 100),
+                PurchasePrice = (uint)(e.purchasedProduct.metadata.localizedPrice * * DMAmount(e.purchasedProduct.definition.id)),
                 // Pass in the receipt
                 ReceiptJson = googleReceipt.PayloadData.json,
                 // Pass in the signature

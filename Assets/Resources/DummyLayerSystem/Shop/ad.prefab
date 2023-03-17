@@ -567,7 +567,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 722.03503, y: -332}
-  m_SizeDelta: {x: 481.3567, y: 636.327}
+  m_SizeDelta: {x: 480, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6129806195452052140
 CanvasRenderer:
@@ -623,7 +623,6 @@ MonoBehaviour:
   ticketChargeCountDown: {fileID: 4949015320764910052}
   ticketChargeCountDownT: {fileID: 3024199052703906273}
   rewardedAdsButton: {fileID: 1904867252659184379}
-  googleMobileAdsManager: {fileID: 6039285711992232921}
 --- !u!1 &6129806195563141510
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,6 +879,7 @@ MonoBehaviour:
   _showAdButton: {fileID: 8433709854359858660}
   _androidAdUnitId: Rewarded_Android
   _iOSAdUnitId: Rewarded_iOS
+  reloadAfterWatched: 0
 --- !u!1 &8566140604765414282
 GameObject:
   m_ObjectHideFlags: 0
