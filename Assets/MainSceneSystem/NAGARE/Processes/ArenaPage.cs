@@ -55,6 +55,7 @@ public class ArenaPage : MSceneProcess
     
     void EnterProcess()
     {
+        BackGroundPS.target.ChangeBGByElement(Element.redMagic);
         arenaLayer = UILayerLoader.Load<ArenaLayer>();
         arenaLayer.SetUp(
             LoadLeaderboardInfos,
@@ -74,6 +75,7 @@ public class ArenaPage : MSceneProcess
             () =>
             {
                 arenaLayer.SetupArenaTicket();
+                ReturnLayer.MoveBack();
             },
             PreScene.ReturnToLobby
         );

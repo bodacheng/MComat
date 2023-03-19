@@ -12,6 +12,7 @@ public class ReturnLayer : UILayer
     
     public static readonly List<Func<bool>> ReturnMissionList = new List<Func<bool>>();
     
+    
     void Setup()
     {
         returnButton.onClick.RemoveAllListeners();
@@ -69,6 +70,15 @@ public class ReturnLayer : UILayer
                 triggerCts();
                 layer.returnButton.onClick.RemoveListener(triggerCts);
             });
+        }
+    }
+
+    public static void MoveBack()
+    {
+        var layer = UILayerLoader.Get<ReturnLayer>();
+        if (layer != null)
+        {
+            layer.transform.SetAsFirstSibling();
         }
     }
 }
