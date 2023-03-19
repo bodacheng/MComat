@@ -59,7 +59,7 @@ public partial class Data_Center : MonoBehaviour
         {
             Animation_Manger.AnimatorRef =  WholeT.GetComponent<Animator>();
             Sensor.Center = this.geometryCenter;
-            Sensor.sensor_radius = 15f;
+            Sensor.SensorRadius = 15f;
             FightDataRef.Center = this;
             _BasicPhysicSupport.Rigidbody.useGravity = false;
             _BasicPhysicSupport.Rigidbody.mass = 500f;

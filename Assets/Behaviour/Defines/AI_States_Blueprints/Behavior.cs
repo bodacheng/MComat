@@ -140,7 +140,7 @@ namespace Soul
         // Process when exit the state 
         public virtual void AI_State_exit()
         {
-            Sensor.OneRoundDetectionStart(5);
+            Sensor.DetectionStart(5, false);
             pEvents.CloseAllPersonalityEffects();
         }
         
@@ -410,6 +410,16 @@ namespace Soul
                 }
             }
         }
+        
+        /// <summary>
+        /// 获取某向量的垂直向量
+        /// </summary>
+        protected Vector3 GetVerticalDir(Vector3 _dir)
+        {
+            //（_dir.x,_dir.z）与（？，1）垂直，则_dir.x * ？ + _dir.z * 1 = 0
+            return Mathf.Approximately(_dir.z, 0) ? new Vector3(0, 0, -1) : new Vector3(-_dir.z / _dir.x, 0, 1).normalized;
+        }
+        
         #endregion
     }
 }

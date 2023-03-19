@@ -22,7 +22,7 @@ namespace Soul
             BehaviorDic.Add("Victory", victory);
             BehaviorDic.Add("zhuangbi", zhuangbi);
             BehaviorDic.Add("Death", death);
-            Move_State move = new Move_State(AIMoveMode.normal, FightGlobalSetting._fighterMoveSpeed, 1f)
+            Move_State move = new Move_State(Move_State.AIMoveMode.Normal, FightGlobalSetting._fighterMoveSpeed, 1f)
             {
                 StateType = BehaviorType.MV,
                 nextAttackCanRushFirst = false

@@ -166,7 +166,7 @@ namespace Soul
         {
             BehaviourDic.TryGetValue(_commandWaitingState.StateKey, out _tryBehavior);
             var move_State = (Move_State)_tryBehavior;
-            move_State._AIMoveStyle = AIMoveMode.test;
+            move_State.AIMoveStyle = Move_State.AIMoveMode.Test;
             ChangeToWaitingState();
         }
       

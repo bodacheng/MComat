@@ -118,7 +118,7 @@ namespace Soul
             _Rigidbody.velocity = Vector3.zero;
             _rushTimeCounter = 0f;
             _Animator.applyRootMotion = true;
-            Sensor.ContinuousDetectionStart(2);
+            Sensor.DetectionStart(2, true);
             Sensor.GetEnemiesByDistance(true);
             if (Sensor.GetEnemiesByDistance(false).Count == 0)
             {
@@ -136,7 +136,7 @@ namespace Soul
                 return;
             }
             float distance = Vector3.Distance(gameObject.transform.position, collider.transform.position);
-            if (distance < Sensor.sensor_radius / 3)//内环检测结果
+            if (distance < Sensor.SensorRadius / 3)//内环检测结果
             {
                 _phase = Phase.reachedFromBeginning;
                 Animation_Manger.AnimationTrigger(_clipName, true, 0.1f);
@@ -150,7 +150,7 @@ namespace Soul
                 return;
             }
 
-            if (distance < Sensor.sensor_radius * 2 / 3)
+            if (distance < Sensor.SensorRadius * 2 / 3)
             {
                 if (Sensor.GetEnemiesByDistance(false).Count > 0)
                 {
@@ -231,7 +231,7 @@ namespace Soul
                         Animation_Manger.AnimationTrigger(_clipName, true, 0.1f);
                         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                         _Rigidbody.velocity = Vector3.zero;
-                        Sensor.OneRoundDetectionStart(5);
+                        Sensor.DetectionStart(5, false);
                         _BuffsRunner.EndSubCoroutineOfState(_rushCoroutine);
                     }
                     break;

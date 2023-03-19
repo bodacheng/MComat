@@ -249,7 +249,7 @@ public partial class BO_Ani_E : MonoBehaviour
         
         Vector3 targetPos(Vector3 direction, float step)
         {
-            _DATA_CENTER.Sensor.OneRoundDetectionStart(5);
+            _DATA_CENTER.Sensor.DetectionStart(5, true);
             Collider collider = _DATA_CENTER.Sensor.GetClosestEnemyColliderInSensorRange();
             Vector3 temp;
             if (collider == null)
