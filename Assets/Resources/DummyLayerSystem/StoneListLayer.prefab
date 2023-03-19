@@ -815,7 +815,6 @@ MonoBehaviour:
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 2
-  level: {fileID: 5697903312945081969}
 --- !u!114 &6126916621370147497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3015,7 +3014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -690}
+  m_AnchoredPosition: {x: -115, y: -690}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5206352635089602921
@@ -3382,7 +3381,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -270}
+  m_AnchoredPosition: {x: -115, y: -270}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5206352635328973138
@@ -3671,7 +3670,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -900}
+  m_AnchoredPosition: {x: -115, y: -900}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5206352635361754200
@@ -4098,7 +4097,6 @@ MonoBehaviour:
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 2
-  level: {fileID: 8417763350767422483}
 --- !u!114 &5206352635566656078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4631,11 +4629,11 @@ RectTransform:
   m_Father: {fileID: 5206352636716566684}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 46, y: 115}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -1304, y: -50}
   m_SizeDelta: {x: 570, y: 750}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &5206352635975870673
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4818,7 +4816,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -480}
+  m_AnchoredPosition: {x: -115, y: -480}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5206352636192745321
@@ -5341,11 +5339,11 @@ RectTransform:
   m_Father: {fileID: 5206352636716566684}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 640, y: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -220, y: 0}
   m_SizeDelta: {x: 1070, y: 850}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &5206352636523679600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5391,6 +5389,7 @@ MonoBehaviour:
   EX2Tab: {fileID: 5206352635089602919}
   EX3Tab: {fileID: 5206352635361754198}
   orderBtn: {fileID: 3858296825970297919}
+  orderButtonText: {fileID: 3852074729856217961}
   _tabEffects: {fileID: 6927428563499935400}
   closeCheckBox: {fileID: 6007867260253646155}
   nearCheckBox: {fileID: 2012323267730553595}
@@ -5398,7 +5397,7 @@ MonoBehaviour:
   cellPrefab: {fileID: 9087381990746991603, guid: b3795898c2a1b4eeaa126e66fe7de953,
     type: 3}
   selectedFrame: {fileID: 5056399119111226684}
-  orderButtonText: {fileID: 3852074729856217961}
+  skillEditStep: 0
 --- !u!1 &5206352636544408859
 GameObject:
   m_ObjectHideFlags: 0
@@ -6163,7 +6162,6 @@ MonoBehaviour:
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 2
-  level: {fileID: 8165381875998704659}
 --- !u!114 &4525587888901697905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6760,7 +6758,6 @@ MonoBehaviour:
   _charIcon: {fileID: 0}
   _selected: {fileID: 0}
   cellPhase: 2
-  level: {fileID: 5587520644526474510}
 --- !u!114 &5048474447076285785
 MonoBehaviour:
   m_ObjectHideFlags: 0
