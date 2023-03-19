@@ -8,7 +8,7 @@ namespace Soul
         readonly string _clipName;
         private bool showVictoryMotion;
         private bool motionReset = false;
-
+        
         private readonly List<string> hasVictoryAnimUnit = new List<string>()
         {
             "1","2","3","4","5","6","7"
@@ -30,11 +30,21 @@ namespace Soul
                 Animation_Manger.AnimationTrigger(_clipName, true, 0.1f);
             this._Rigidbody.velocity = Vector3.zero;
             this._Rigidbody.drag = FightGlobalSetting.OnTouchEnemyBodyRigidDrag;
-            if (Sensor.GetEnemiesByDistance(true).Count > 0)
+            
+            if (_clipName == "victory")
             {
-                if (Sensor.GetEnemiesByDistance(false)[0] != null)
+                var deadEnemies = Sensor.GetActiveDeadEnemies();
+                var oneActive = deadEnemies.Find(x => x.gameObject.activeSelf);
+                RotateToTarget_Tween(oneActive.transform.position, 0.01f);
+            }
+            else
+            {
+                if (Sensor.GetEnemiesByDistance(true).Count > 0)
                 {
-                    RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
+                    if (Sensor.GetEnemiesByDistance(false)[0] != null)
+                    {
+                        RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
+                    }
                 }
             }
         }

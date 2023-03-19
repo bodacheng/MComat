@@ -46,7 +46,8 @@ namespace FightScene
                 center.FightDataRef.IsDead.Subscribe(x => {
                     if (x) 
                     {
-                        Sensor.AddOrRemoveSharedUnits(center, teamConfig.myTeam, false);
+                        Sensor.AddOrRemoveSharedDeadUnitInfo(center, teamConfig.myTeam, true);
+                        Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
                         if (FightLogger.value.GetWinnerTeam() == Team.none)
                             ToNewUnit();
                     }
@@ -78,7 +79,7 @@ namespace FightScene
             }
             else
             {
-                if (RMode_Unit != null)
+                if (RMode_Unit.Value != null)
                 {
                     targetPos = RMode_Unit.Value.transform.position;
                     targetRot = Quaternion.Euler(new Vector3(1,0,1));
@@ -91,10 +92,10 @@ namespace FightScene
                 {
                     if (RMode_Unit.Value != null && changeTo != null) //继承hit数
                     {
+                        Sensor.AddOrRemoveSharedUnitInfo(RMode_Unit.Value, teamConfig.myTeam, false);
                         changeTo.FightDataRef._comboHitCount.HitCount.Value = RMode_Unit.Value.FightDataRef._comboHitCount.HitCount.Value;
                     }
-                    Sensor.AddOrRemoveSharedUnits(RMode_Unit.Value, teamConfig.myTeam, false);
-                    Sensor.AddOrRemoveSharedUnits(changeTo, teamConfig.myTeam, true);
+                    Sensor.AddOrRemoveSharedUnitInfo(changeTo, teamConfig.myTeam, true);
                     RMode_Unit.Value = changeTo;
                     RMode_Unit.Value.WholeT.gameObject.SetActive(true);
                     
@@ -128,6 +129,11 @@ namespace FightScene
             
             //Refresh(TeamMembers);
             return unitChanged;
+        }
+
+        public void UnitStartOff()
+        {
+            RMode_Unit.Value._MyBehaviorRunner.ChangeToWaitingState();
         }
         
         // 计算时间统计可上场角色，更新上场冷却图标UI

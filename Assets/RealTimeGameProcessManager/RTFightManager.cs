@@ -52,7 +52,7 @@ namespace FightScene
                     team1.AllUnitsStartOff();
                     break;
                 case TeamMode.Rotation:
-                    team1.ChangeFightingUnit();
+                    team1.UnitStartOff();
                     break;
             }
             
@@ -62,7 +62,7 @@ namespace FightScene
                     team2.AllUnitsStartOff();
                     break;
                 case TeamMode.Rotation:
-                    team2.ChangeFightingUnit();
+                    team2.UnitStartOff();
                     break;
             }
         }

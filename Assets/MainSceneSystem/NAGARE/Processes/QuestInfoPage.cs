@@ -33,7 +33,7 @@ public class QuestInfoPage : MSceneProcess
         
         void Go()
         {
-            if (!FightScene.FightScene.Fight.FightMembers.CheckStonesFull())
+            if (!FightScene.FightScene.Fight.FightMembers.CheckStonesLegal(FightScene.FightScene.Fight.EventType))
             {
                 PopupLayer.ArrangeWarnWindow(Translate.Get("TeamUnitNotFull"));
                 return;

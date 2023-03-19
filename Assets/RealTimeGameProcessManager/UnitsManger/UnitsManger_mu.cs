@@ -7,14 +7,14 @@ namespace FightScene
     {
         public void AllUnitsStartOff(bool testMode = false)
         {
-            foreach (var oneMember in teamMembers.GetValues())
+            foreach (var member in teamMembers.GetValues())
             {
-                Sensor.AddOrRemoveSharedUnits(oneMember, teamConfig.myTeam, true);
+                Sensor.AddOrRemoveSharedUnitInfo(member, teamConfig.myTeam, true);
                 if (!testMode)
-                    oneMember._MyBehaviorRunner.ChangeToWaitingState();
+                    member._MyBehaviorRunner.ChangeToWaitingState();
                 else
                 {
-                    oneMember._MyBehaviorRunner.ChangeToTestMode();
+                    member._MyBehaviorRunner.ChangeToTestMode();
                 }
             }
         }
@@ -56,7 +56,8 @@ namespace FightScene
                 {
                     if (x)
                     {
-                        Sensor.AddOrRemoveSharedUnits(center, teamConfig.myTeam, false);
+                        Sensor.AddOrRemoveSharedDeadUnitInfo(center, teamConfig.myTeam, true);
+                        Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
                     }
                 }).AddTo(gameObject);
             }

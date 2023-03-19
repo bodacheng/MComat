@@ -54,18 +54,19 @@ namespace Soul
             _mainCam = CameraManager._camera.transform;
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _BasicPhysicSupport.Rigidbody.interpolation = RigidbodyInterpolation.None;
+            Sensor.DetectionStart(1, true);
         }
 
         public override void C_State_enter()
         {
             CommonEnter();
+            Sensor.DetectionStart(1, true);
         }
 
         // 整个enter阶段与状态运行中有关的就是决定use_direction和moveDirection。前者状态运行中会调整。
         public override void AI_State_enter()
         {
             CommonEnter();
-            Sensor.DetectionStart(-1, true);
             DecideDirection();
         }
 

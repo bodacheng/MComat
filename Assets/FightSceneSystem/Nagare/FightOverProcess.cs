@@ -142,7 +142,6 @@ namespace FightScene
         async void SkillTestReload()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(3));
-            RTFightManager.Target.ClearUnits();
             FightScene.Fight = FightInfo.RandomSkillTestStage(TeamMode.Rotation);
             LocalGameRestart();
         }

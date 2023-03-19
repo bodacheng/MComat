@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using Skill;
 
 namespace Soul
@@ -17,10 +16,8 @@ namespace Soul
                 { "Empty", empty_State }
             };
             Idle_State victory = new Idle_State("victory");
-            Idle_State zhuangbi = new Idle_State("zhuangbi");
             Death_State death = new Death_State();
             BehaviorDic.Add("Victory", victory);
-            BehaviorDic.Add("zhuangbi", zhuangbi);
             BehaviorDic.Add("Death", death);
             Move_State move = new Move_State(Move_State.AIMoveMode.Normal, FightGlobalSetting._fighterMoveSpeed, 1f)
             {

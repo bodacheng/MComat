@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,7 +61,7 @@ public partial class Sensor
             return _enemiesByDistance;
         }
         if (refresh)
-            _enemiesByDistance = FindTargetsByDistance(this._teamConfig.myEnemies.ToArray());
+            _enemiesByDistance = FindTargetsByDistance(this._teamConfig.myEnemies.ToArray(), SharedUnitDic);
         return _enemiesByDistance;
     }
     
@@ -75,8 +74,14 @@ public partial class Sensor
             return _alliesByDistance;
         }
         if (refresh)
-            _alliesByDistance = this.FindTargetsByDistance(new Team[] { this._teamConfig.myTeam });
+            _alliesByDistance = this.FindTargetsByDistance(new Team[] { this._teamConfig.myTeam }, SharedUnitDic);
         return _alliesByDistance;
+    }
+    
+    public List<GameObject> GetActiveDeadEnemies()
+    {
+        var _enemiesByDistance = FindTargetsByDistance(this._teamConfig.myEnemies.ToArray(), SharedDeadUnitDic);
+        return _enemiesByDistance;
     }
     
     Collider FindNearestCollider(List<Collider> list)

@@ -19,7 +19,6 @@ public partial class BehaviorRunnerGUI : Editor {
             "Empty",
             "Move",
             "Victory",
-            "zhuangbi",
             "Death",
             "RushBack",
             "Rush",

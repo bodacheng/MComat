@@ -96,8 +96,6 @@ public partial class SkillSet
             behaviorTransitionSets.Add(R);
         if (_empty != null)
             behaviorTransitionSets.Add(_empty);
-        if (_zhuangbi != null)
-            behaviorTransitionSets.Add(_zhuangbi);
         if (_victory != null)
             behaviorTransitionSets.Add(_victory);    
         if (_death != null)

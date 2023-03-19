@@ -351,7 +351,7 @@ namespace mainMenu
         void CheckFightLegal()
         {
             ArrangeStageInfo();
-            fightStartBtn.interactable = _stage.FightMembers.CheckStonesFull();
+            fightStartBtn.interactable = _stage.FightMembers.CheckStonesLegal(FightEventType.Self);
         }
 
         void RemoveSelect(int pos)

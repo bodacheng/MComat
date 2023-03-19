@@ -40,7 +40,6 @@ public static class FightLoad
             stage.RunTutorial = true;
             stage.Team1Auto = false;
             stage.Team2Auto = false;
-            Debug.Log("AI1模式："+stage.team1AIMode);
         }
         
         FightScene.FightScene.Fight =  FightInfo.Copy(stage);

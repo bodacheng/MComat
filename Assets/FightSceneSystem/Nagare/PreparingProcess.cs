@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using UniRx;
-using UnityEngine;
 
 public class PreparingProcess : FSceneProcess
 {
@@ -17,11 +16,12 @@ public class PreparingProcess : FSceneProcess
     
     async UniTask EnterProcess()
     {
+        RTFightManager.Target.ClearUnits();
+        Sensor.ClearFightingMember();
         UILayerLoader.Remove<ArenaFightOver>();
         RTFightManager.Target._CameraManager.Assign_Camera(C_Mode.NULL, null,null);
         CameraManager._camera.transform.position = CameraManager._StartPosRef.transform.position;
         CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
-        Sensor.ClearFightingMember();
         UILayerLoader.Load<ProgressLayer>();
         ProgressLayer.LoadingPercent("loading Essentials", 0.5f);
         

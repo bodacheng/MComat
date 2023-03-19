@@ -8,7 +8,7 @@ public partial class SkillSet
     SkillEntity A1, A2, A3, B1, B2, B3, C1, C2, C3, D, M, R;
     
     #region 基础进程实体
-    SkillEntity _empty, _zhuangbi, _victory, _death, _hit, _getUp, _knockOff;
+    SkillEntity _empty, _victory, _death, _hit, _getUp, _knockOff;
     #endregion
     
     private readonly List<SkillEntity> _h1EList = new List<SkillEntity>();
@@ -180,7 +180,6 @@ public partial class SkillSet
         var StateTransitionSetList = new List<SkillEntity>();
         
         _empty = new SkillEntity("Empty", BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,  -1);
-        _zhuangbi = new SkillEntity("zhuangbi", BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,  -1);
         _victory = new SkillEntity("Victory",BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);
         _death = new SkillEntity("Death", BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);
         _hit = new SkillEntity("Hit", BehaviorType.Hit, 0, 0,new AIAttrs(), _h1List.ToArray(),null,InputKey.Null, InputKey.Null, -1);
@@ -195,7 +194,6 @@ public partial class SkillSet
         StateTransitionSetList.Add(_getUp);
         StateTransitionSetList.Add(_knockOff);
         StateTransitionSetList.Add(_empty);
-        StateTransitionSetList.Add(_zhuangbi);
         StateTransitionSetList.Add(_victory);
         StateTransitionSetList.Add(_death);
         StateTransitionSetList.Add(_hit);        

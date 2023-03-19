@@ -62,12 +62,7 @@ public partial class AnimationManger {
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("block_break", animationClip));
                 }
-
-                if (animationClip.name == "zhuangbi")
-                {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("zhuangbi", animationClip));
-                }
-
+                
                 if (animationClip.name == "dash")
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("dash", animationClip));
