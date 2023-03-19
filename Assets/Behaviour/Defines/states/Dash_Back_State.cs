@@ -22,12 +22,7 @@ namespace Soul
             };
             breakFreeCoroutine = new CustomCoroutine(breakFreeStart, 0.6f, breakFreeEnd);
         }
-
-        public override void Pre_process_before_enter()
-        {
-            base.Pre_process_before_enter();
-        }
-
+        
         public override void _State_Update()
         {
             base._State_Update();
@@ -67,11 +62,6 @@ namespace Soul
         public override bool Capacity_Exit_Condition()
         {
             return AnimationCasualFinishedFlag();
-        }
-
-        public override void AI_State_exit()
-        {
-            base.AI_State_exit();
         }
     }
 }

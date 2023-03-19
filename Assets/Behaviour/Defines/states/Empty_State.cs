@@ -13,6 +13,7 @@ namespace Soul
         {
             base.AI_State_enter();
             _DATA_CENTER.CleanClear();
+            _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePosition;
         }
 
         public override void AI_State_exit()

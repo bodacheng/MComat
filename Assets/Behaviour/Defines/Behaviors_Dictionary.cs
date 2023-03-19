@@ -15,11 +15,11 @@ namespace Soul
             {
                 { "Empty", empty_State }
             };
-            Idle_State victory = new Idle_State("victory");
-            Death_State death = new Death_State();
+            var victory = new Idle_State("victory");
+            var death = new Death_State();
             BehaviorDic.Add("Victory", victory);
             BehaviorDic.Add("Death", death);
-            Move_State move = new Move_State(Move_State.AIMoveMode.Normal, FightGlobalSetting._fighterMoveSpeed, 1f)
+            var move = new Move_State(Move_State.AIMoveMode.Normal, FightGlobalSetting._fighterMoveSpeed, 1f)
             {
                 StateType = BehaviorType.MV,
                 nextAttackCanRushFirst = false
@@ -28,7 +28,7 @@ namespace Soul
 
             if (FightGlobalSetting.HasDefend)
             {
-                Defend_State defend = new Defend_State("block", "block_break")
+                var defend = new Defend_State("block", "block_break")
                 {
                     StateType = BehaviorType.Def,
                     nextAttackCanRushFirst = false
@@ -36,18 +36,18 @@ namespace Soul
                 BehaviorDic.Add("Defend", defend);
             }
 
-            Hurt_State hit = new Hurt_State()
+            var hit = new Hurt_State()
             {
                 nextAttackCanRushFirst = false,
                 StateType = BehaviorType.Hit
             };
 
-            Knock_Off_State knock_off = new Knock_Off_State()
+            var knock_off = new Knock_Off_State()
             {
                 StateType = BehaviorType.KnockOff,
                 nextAttackCanRushFirst = true
             };
-            GetUp getUp = new GetUp("getup")
+            var getUp = new GetUp("getup")
             {
                 StateType = BehaviorType.GetUp
             };
@@ -58,10 +58,10 @@ namespace Soul
             SkillTypeKeys = new List<string>();
             foreach (KeyValuePair<string, SkillEntity> valuePair in ToFormAttackStateList)
             {
-                SkillEntity _set = valuePair.Value;
+                var _set = valuePair.Value;
                 if (_set == null)
                     continue;
-
+                
                 if (!BehaviorDic.Keys.Contains(_set.REAL_NAME))
                 {
                     switch (_set.StateType)

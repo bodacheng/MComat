@@ -49,7 +49,7 @@ namespace Soul
         bool BtnTrigger(BehaviorRunner runner, List<SkillEntity> options, MobileInputsManager inputsManager)
         {
             // 主动退出当前状态的控制类条件是否激活
-            if (!BehaviourExitInputTrigger(runner.CurrentSKillEntity, inputsManager))
+            if (!BehaviourExitInputTrigger(runner.currentSKillEntity, inputsManager))
             {
                 return false;
             }

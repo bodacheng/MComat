@@ -23,12 +23,12 @@ namespace Soul
             }
         }
 
-        void AddAITriggerConditionToBehavior(SkillEntity behavior_define)
+        void AddAITriggerConditionToBehavior(SkillEntity behaviorDefine)
         {
-            switch(behavior_define.StateType)
+            switch(behaviorDefine.StateType)
             {
                 case BehaviorType.MV: //移动状态的触发条件。不添加的话移动状态不触发的。
-                    var fdsgfg = new KeyValuePair<string, string>("SpareOption", behavior_define.REAL_NAME);
+                    var fdsgfg = new KeyValuePair<string, string>("SpareOption", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(fdsgfg);
                     ConditionAndRespondPriority.Set(fdsgfg.Key, fdsgfg.Value, 10);
                     
@@ -46,58 +46,62 @@ namespace Soul
                     //RegisterConditionToRespond(keyValuePair3);
                     //ConditionAndRespondPriority.Set(keyValuePair3.Key, keyValuePair3.Value, 3);
 
-                    var keyValuePair4 = new KeyValuePair<string, string>("DangerousVeryClose", behavior_define.REAL_NAME);
+                    var keyValuePair4 = new KeyValuePair<string, string>("DangerousVeryClose", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(keyValuePair4);
                     ConditionAndRespondPriority.Set(keyValuePair4.Key, keyValuePair4.Value, 3);
                     
-                    BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, null);
+                    BehaviourAndStrategicExitCondition.Add(behaviorDefine.REAL_NAME, null);
                     break;
                 case BehaviorType.CT:
-                    var keyValuePair_ct = new KeyValuePair<string, string>("CT", behavior_define.REAL_NAME);
+                    var keyValuePair_ct = new KeyValuePair<string, string>("CT", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(keyValuePair_ct);
                     ConditionAndRespondPriority.Set(keyValuePair_ct.Key, keyValuePair_ct.Value, 1);
                     
-                    BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, null);
+                    var keyValuePair_ct2 = new KeyValuePair<string, string>("EnemyClose", behaviorDefine.REAL_NAME);
+                    RegisterConditionToRespond(keyValuePair_ct2);
+                    ConditionAndRespondPriority.Set(keyValuePair_ct2.Key, keyValuePair_ct.Value, 3);
+                    
+                    BehaviourAndStrategicExitCondition.Add(behaviorDefine.REAL_NAME, null);
                     break;
                 case BehaviorType.Def:
-                    var keyValuePair_def1 = new KeyValuePair<string, string>("DangerousVeryClose", behavior_define.REAL_NAME);
+                    var keyValuePair_def1 = new KeyValuePair<string, string>("DangerousVeryClose", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(keyValuePair_def1);
                     ConditionAndRespondPriority.Set(keyValuePair_def1.Key, keyValuePair_def1.Value, 2);
                     
-                    BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, "TimeToRespond");
+                    BehaviourAndStrategicExitCondition.Add(behaviorDefine.REAL_NAME, "TimeToRespond");
                     break;
                 case BehaviorType.GR:
-                    var keyValuePair = new KeyValuePair<string, string>("TimeToAttack", behavior_define.REAL_NAME);
+                    var keyValuePair = new KeyValuePair<string, string>("TimeToAttack", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(keyValuePair);
                     ConditionAndRespondPriority.Set(keyValuePair.Key, keyValuePair.Value, 2);
 
-                    KeyValuePair<string, string> eretet = new KeyValuePair<string, string>("TimeToAttack_Reluctant", behavior_define.REAL_NAME);
+                    KeyValuePair<string, string> eretet = new KeyValuePair<string, string>("TimeToAttack_Reluctant", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(eretet);
                     ConditionAndRespondPriority.Set(eretet.Key, eretet.Value, 3);
 
-                    BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, null);
+                    BehaviourAndStrategicExitCondition.Add(behaviorDefine.REAL_NAME, null);
                     break;
                 case BehaviorType.GI:
-                    var keyValuePairuu = new KeyValuePair<string, string>("TimeToAttack", behavior_define.REAL_NAME);
+                    var keyValuePairuu = new KeyValuePair<string, string>("TimeToAttack", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(keyValuePairuu);
                     ConditionAndRespondPriority.Set(keyValuePairuu.Key, keyValuePairuu.Value, 2);
                     
-                    var fgerte = new KeyValuePair<string, string>("TimeToAttack_Reluctant", behavior_define.REAL_NAME);
+                    var fgerte = new KeyValuePair<string, string>("TimeToAttack_Reluctant", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(fgerte);
                     ConditionAndRespondPriority.Set(fgerte.Key, fgerte.Value, 3);
                     
-                    BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, null);
+                    BehaviourAndStrategicExitCondition.Add(behaviorDefine.REAL_NAME, null);
                     break;
                 case BehaviorType.GM:
-                    var keyValuePairqq = new KeyValuePair<string, string>("TimeToAttack", behavior_define.REAL_NAME);
+                    var keyValuePairqq = new KeyValuePair<string, string>("TimeToAttack", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(keyValuePairqq);
                     ConditionAndRespondPriority.Set(keyValuePairqq.Key, keyValuePairqq.Value, 2);
                     
-                    var fdsfr = new KeyValuePair<string, string>("TimeToAttack_Reluctant", behavior_define.REAL_NAME);
+                    var fdsfr = new KeyValuePair<string, string>("TimeToAttack_Reluctant", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(fdsfr);
                     ConditionAndRespondPriority.Set(fdsfr.Key, fdsfr.Value, 3);
 
-                    BehaviourAndStrategicExitCondition.Add(behavior_define.REAL_NAME, null);
+                    BehaviourAndStrategicExitCondition.Add(behaviorDefine.REAL_NAME, null);
                     break;
             }
         }
@@ -107,9 +111,9 @@ namespace Soul
             nineAndTwo.SortNineAndTwo();
             //这上下两个函数之间存在一个chuanEndCasualT0的问题，从而必须一前一后紧密连接，下次review时候可以看看代码能不能整更利索一些。
             SkillEntityDic = nineAndTwo.GenerateBehaviourSets();
-            SkillEntity_List = nineAndTwo.SkillEntityList();//这一行于本游戏本身已经无用，但该列表牵扯到开发环境下角色技能详细的显示，以及框架本身保存xml战斗脚本的功能。
-            _States_Incubator = new BehaviorsIncubator(_emptyState, SkillEntityDic);
-            var behaviorDic = _States_Incubator.BehaviorDic; // 理解整个系统的关键
+            skillEntityList = nineAndTwo.SkillEntityList();//这一行于本游戏本身已经无用，但该列表牵扯到开发环境下角色技能详细的显示，以及框架本身保存xml战斗脚本的功能。
+            _statesIncubator = new BehaviorsIncubator(_emptyState, SkillEntityDic);
+            var behaviorDic = _statesIncubator.BehaviorDic; // 理解整个系统的关键
             BehaviourDic.Clear();
             ConditionAndRespondPriority.Clear();
             BehaviourAndStrategicExitCondition.Clear();

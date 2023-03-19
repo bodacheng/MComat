@@ -17,14 +17,14 @@ namespace Soul
             optionsForButtonRefresh.Clear();
             
             #region Forced state transition 
-            if (CurrentSKillEntity.ForcedTransitions != null)
+            if (currentSKillEntity.ForcedTransitions != null)
             {
-                for (var i = 0; i < CurrentSKillEntity.ForcedTransitions.Length; i++)
+                for (var i = 0; i < currentSKillEntity.ForcedTransitions.Length; i++)
                 {
-                    BehaviourDic.TryGetValue(CurrentSKillEntity.ForcedTransitions[i], out _tryBehavior);
+                    BehaviourDic.TryGetValue(currentSKillEntity.ForcedTransitions[i], out _tryBehavior);
                     if (_tryBehavior.Force_enter_condition())
                     {
-                        _forcedTransitions.Add(CurrentSKillEntity.ForcedTransitions[i]);
+                        _forcedTransitions.Add(currentSKillEntity.ForcedTransitions[i]);
                     }
                 }
             }
@@ -36,7 +36,7 @@ namespace Soul
             #endregion
 
             #region 查找已经可以触发的后续技能
-            foreach (var key in CurrentSKillEntity.CasualTo)
+            foreach (var key in currentSKillEntity.CasualTo)
             {
                 BehaviourDic.TryGetValue(key, out _tryBehavior);
                 if (_tryBehavior == null)
@@ -95,9 +95,9 @@ namespace Soul
         {
             float min = 9999f;
             float max = 0f;
-            for (var index = 0; index < CurrentSKillEntity.CasualTo.Length; index++)
+            for (var index = 0; index < currentSKillEntity.CasualTo.Length; index++)
             {
-                BehaviourDic.TryGetValue(CurrentSKillEntity.CasualTo[index], out var state);
+                BehaviourDic.TryGetValue(currentSKillEntity.CasualTo[index], out var state);
                 
                 if (state.StateType == BehaviorType.CT || state.StateType == BehaviorType.GM ||
                     state.StateType == BehaviorType.GI || state.StateType == BehaviorType.GR)

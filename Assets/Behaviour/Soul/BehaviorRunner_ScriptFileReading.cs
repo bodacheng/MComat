@@ -18,12 +18,12 @@ namespace Soul
 
         public List<string> PassSkillTypeKeys()//出于初始化的便利而存在的一个函数
         {
-            return _States_Incubator?.SkillTypeKeys;
+            return _statesIncubator?.SkillTypeKeys;
         }
 
         public void SaveTrans(string chracterType)
         {
-            this.SaveStateTransitionInfo(SkillEntity_List, AI_States_path, chracterType);
+            this.SaveStateTransitionInfo(skillEntityList, AI_States_path, chracterType);
         }
 
         public string ArrangeScriptPathForPlatfom(string PathInStringOrigin)
@@ -53,12 +53,12 @@ namespace Soul
                 {
                     toFormAttackStateList.Add(list[i].REAL_NAME, list[i]);
                 }
-                _States_Incubator = new BehaviorsIncubator(_emptyState, toFormAttackStateList);
+                _statesIncubator = new BehaviorsIncubator(_emptyState, toFormAttackStateList);
                 List<SkillEntity> after_list = new List<SkillEntity>();
                 List<string> alreadyInList = new List<string>();
                 foreach (SkillEntity s in list)
                 {
-                    if (!alreadyInList.Contains(s.REAL_NAME) && _States_Incubator.BehaviorDic.Keys.Contains(s.REAL_NAME))
+                    if (!alreadyInList.Contains(s.REAL_NAME) && _statesIncubator.BehaviorDic.Keys.Contains(s.REAL_NAME))
                     {
                         after_list.Add(s);
                         alreadyInList.Add(s.REAL_NAME);
@@ -156,8 +156,8 @@ namespace Soul
             {
                 _nowBehavior.AI_State_exit();
             }
-            SkillEntity_List = AIScriptReading.ReadKongfuBook(this, Script); //这个是一个状态清单，生成状态的是States_Dictionary类。
-            IDictionary<string, Behavior> Num_State_List = _States_Incubator.BehaviorDic; //理解整个系统的关键
+            skillEntityList = AIScriptReading.ReadKongfuBook(this, Script); //这个是一个状态清单，生成状态的是States_Dictionary类。
+            IDictionary<string, Behavior> Num_State_List = _statesIncubator.BehaviorDic; //理解整个系统的关键
             BehaviourDic = new Dictionary<string, Behavior>();
             foreach (KeyValuePair<string, Behavior> s in Num_State_List)
             {
@@ -165,13 +165,13 @@ namespace Soul
             }
             SkillEntityDic = new Dictionary<string, SkillEntity>();
             List<string> alreadyInList = new List<string>();//7.29 这个环节貌似是现在“同技能没法重复”bug的来源
-            foreach (SkillEntity _SE in SkillEntity_List)
+            foreach (SkillEntity _SE in skillEntityList)
             {
                 if (_SE.REAL_NAME != null
                     &&
                     !alreadyInList.Contains(_SE.REAL_NAME)
                     &&
-                    _States_Incubator.BehaviorDic.Keys.Contains(_SE.REAL_NAME))
+                    _statesIncubator.BehaviorDic.Keys.Contains(_SE.REAL_NAME))
                 {
                     List<string> new_casual_to = new List<string>();
                     if (_SE.CasualTo == null)
@@ -181,7 +181,7 @@ namespace Soul
                     }
                     foreach (string _State_Rate_Set in _SE.CasualTo)
                     {
-                        if (!_States_Incubator.BehaviorDic.Keys.Contains(_State_Rate_Set))
+                        if (!_statesIncubator.BehaviorDic.Keys.Contains(_State_Rate_Set))
                         {
                             Debug.Log(Script.name + "脚本中的状态" + _SE.REAL_NAME + "下存在没有定义的自然迁移状态" + _State_Rate_Set + ",从而已经做强行删除处理。");
                         }
@@ -201,7 +201,7 @@ namespace Soul
                     }
                     else
                     {
-                        if (!_States_Incubator.BehaviorDic.Keys.Contains(_SE.REAL_NAME))
+                        if (!_statesIncubator.BehaviorDic.Keys.Contains(_SE.REAL_NAME))
                         {
                             Debug.Log("脚本中描写的状态的键值:" + _SE.REAL_NAME + " 不存在于我们的定义");
                         }
@@ -218,7 +218,7 @@ namespace Soul
             {
                 toFormAttackStateList.Add(list[i].REAL_NAME, list[i]);
             }
-            _States_Incubator = new BehaviorsIncubator(_emptyState,toFormAttackStateList);
+            _statesIncubator = new BehaviorsIncubator(_emptyState,toFormAttackStateList);
             IDictionary<string, SkillEntity> stateTransitionSetDictionary = new Dictionary<string, SkillEntity>();
             List<SkillEntity> setsHaveInitialInput = new List<SkillEntity>();
             
@@ -226,7 +226,7 @@ namespace Soul
             
             foreach (SkillEntity _set in list)
             {
-                if (_States_Incubator.BehaviorDic.Keys.Contains(_set.REAL_NAME))
+                if (_statesIncubator.BehaviorDic.Keys.Contains(_set.REAL_NAME))
                 {
                     stateTransitionSetDictionary.Add(new KeyValuePair<string, SkillEntity>(_set.REAL_NAME, _set));
                 }
@@ -279,7 +279,7 @@ namespace Soul
             
             foreach (SkillEntity _set in list)
             {
-                if (!allChuans.Contains(_set) && !regularStates.Contains(_set) && _set.REAL_NAME != null && _States_Incubator.BehaviorDic.Keys.Contains(_set.REAL_NAME))
+                if (!allChuans.Contains(_set) && !regularStates.Contains(_set) && _set.REAL_NAME != null && _statesIncubator.BehaviorDic.Keys.Contains(_set.REAL_NAME))
                 {
                     allChuans.Add(_set);
                 }

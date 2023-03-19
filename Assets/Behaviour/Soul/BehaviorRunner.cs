@@ -8,8 +8,8 @@ namespace Soul
     public partial class BehaviorRunner : MonoBehaviour
     {
         #region 初始化相关
-        public List<SkillEntity> SkillEntity_List;
-        BehaviorsIncubator _States_Incubator;
+        public List<SkillEntity> skillEntityList;
+        BehaviorsIncubator _statesIncubator;
         #endregion
         
         #region 辅助模块：技能链接时机判断器
@@ -20,7 +20,7 @@ namespace Soul
         public readonly SingleFightLog SingleFightLog = new SingleFightLog();
         public IDictionary<string, Behavior> BehaviourDic = new Dictionary<string, Behavior>();
         public IDictionary<string, SkillEntity> SkillEntityDic;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
-        public SkillEntity CurrentSKillEntity;
+        public SkillEntity currentSKillEntity;
         SkillEntity _tempSKillEntity;
         
         #region 辅助模块：控制器
@@ -126,7 +126,7 @@ namespace Soul
             // 关于动画模块的“技能动作清空”，我们是把它放在了move状态的开头，从而避免了清空函数与触发动画函数在同一帧执行。
             _lastBehavior = _nowBehavior;
             _nowBehavior = _tryBehavior;
-            SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out CurrentSKillEntity);
+            SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out currentSKillEntity);
             
             if (AI && !BeingControl())
             {
@@ -145,7 +145,7 @@ namespace Soul
             
             _lastBehavior = _nowBehavior;
             _nowBehavior = _tryBehavior;
-            SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out CurrentSKillEntity);
+            SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out currentSKillEntity);
             
             if (AI && !BeingControl())
                 _nowBehavior.AI_State_enter(damage);
