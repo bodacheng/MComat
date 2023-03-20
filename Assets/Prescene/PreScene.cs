@@ -235,7 +235,7 @@ namespace mainMenu
         }
         
         [EnumAction(typeof(MainSceneStep))]
-        public bool trySwitchToStep(MainSceneStep next_step, bool forward = true)
+        public bool trySwitchToStep(MainSceneStep nextStep, bool forward = true)
         {
             if (forward && ProcessesRunner.Main.currentProcess != null)
             {
@@ -245,18 +245,23 @@ namespace mainMenu
                     return trySwitchToStep(returnToStep, false);
                 }
                 
-                var success = ProcessesRunner.Main.ChangeProcess(next_step);
+                var success = ProcessesRunner.Main.ChangeProcess(nextStep);
                 if (success)
                     ReturnLayer.PUSH(ReturnToCurrent);
                 return success;
             }
             else
             {
-                return ProcessesRunner.Main.ChangeProcess(next_step);
+                return ProcessesRunner.Main.ChangeProcess(nextStep);
             }
         }
         
-        public bool trySwitchToStep<T>(MainSceneStep next_step, T t, bool forward)
+        public bool ReEnterCurrent()
+        {
+            return ProcessesRunner.Main.ChangeProcess(ProcessesRunner.Main.currentProcess.Step);
+        }
+        
+        public bool trySwitchToStep<T>(MainSceneStep nextStep, T t, bool forward)
         {
             if (forward && ProcessesRunner.Main.currentProcess != null)
             {
@@ -266,14 +271,14 @@ namespace mainMenu
                     Debug.Log("返回："+ returnToStep);
                     return trySwitchToStep(returnToStep, false);
                 }
-                var success = ProcessesRunner.Main.ChangeProcess(next_step, t);
+                var success = ProcessesRunner.Main.ChangeProcess(nextStep, t);
                 if (success)
                     ReturnLayer.PUSH(ReturnToCurrent);
                 return success;
             }
             else
             {
-                return ProcessesRunner.Main.ChangeProcess(next_step, t);
+                return ProcessesRunner.Main.ChangeProcess(nextStep, t);
             }
         }
     }

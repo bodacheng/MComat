@@ -43,7 +43,10 @@ public class ArenaLayer : UILayer
         Func<PlayerLeaderboardEntry, PlayerLeaderboardEntry, int> plusCal, Action<FightInfo> tryBeginStage)
     {
         refreshBtn.onClick.RemoveAllListeners();
-        refreshBtn.onClick.AddListener(()=> loadData());
+        refreshBtn.onClick.AddListener(()=>
+        {
+            loadData();
+        });
         
         rankingPageBtn.onClick.RemoveAllListeners();
         rankingPageBtn.onClick.AddListener(()=> openRanking());
@@ -60,24 +63,29 @@ public class ArenaLayer : UILayer
         editMyTeamBtn.onClick.AddListener(GoToTeamEdit);
     }
     
-    private IDisposable disposeArenaCountDown;
-    public void SetSeasonCountDown(DateTime nextSeasonStartDate)
+    private IDisposable _disposeSeasonCountDown;
+    public void SetSeasonCountDown(TimeSpan timeUntilSettlement)
     {
-        disposeArenaCountDown = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe(
+        _disposeSeasonCountDown = 
+            Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe(
             (_) =>
             {
-                var difference = nextSeasonStartDate - DateTime.Now;
-                difference = difference.Subtract(TimeSpan.FromSeconds(1));
-                seasonCountDown.text = difference.ToString(@"dd\:hh\:mm\:ss");
+                timeUntilSettlement = timeUntilSettlement.Subtract(TimeSpan.FromSeconds(1));
+                seasonCountDown.text = timeUntilSettlement.ToString(@"dd\:hh\:mm\:ss");
+                if (timeUntilSettlement.TotalSeconds <= 0)
+                {
+                    _disposeSeasonCountDown.Dispose();
+                    PreScene.target.ReEnterCurrent();
+                }
             }).AddTo(gameObject);
     }
-
-    private IDisposable disposeCountDown;
+    
+    private IDisposable _disposeCountDown;
     public void SetupArenaTicket()
     {
         Currencies.ArenaTicket.Subscribe(x=>
         {
-            disposeCountDown?.Dispose();
+            _disposeCountDown?.Dispose();
             ticketCount.text = x.ToString();
             if (x >= Currencies.ArenaTicketRechargeMax)
             {
@@ -86,7 +94,7 @@ public class ArenaLayer : UILayer
             }
             else
             {
-                disposeCountDown = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe((_) =>
+                _disposeCountDown = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe((_) =>
                 {
                     ticketChargeCountDownT.gameObject.SetActive(true);
                     if (Currencies.SecondsToRechargeArenaTicket > 0)
