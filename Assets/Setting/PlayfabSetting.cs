@@ -16,6 +16,7 @@ public class PlayfabSetting : ScriptableObject
     public string DMGotchaCode;
     public int adTicketRewardDM;
     public int adFightRewardDM;
+    public string arenaPointCode = "arenapoint";
     
     public static string _UnitCatalog;
     public static string _StoneCatalog;
@@ -29,6 +30,7 @@ public class PlayfabSetting : ScriptableObject
     public static string _DMGotchaCode;
     public static int _adTicketRewardDM;
     public static int _adFightRewardDM;
+    public static string _arenaPointCode;
 
     public void Initialise()
     {
@@ -44,6 +46,7 @@ public class PlayfabSetting : ScriptableObject
         _DMGotchaCode = DMGotchaCode;
         _adTicketRewardDM = adTicketRewardDM;
         _adFightRewardDM = adFightRewardDM;
+        _arenaPointCode = arenaPointCode;
     }
 
     public static int ArenaPointToRank(int point)
