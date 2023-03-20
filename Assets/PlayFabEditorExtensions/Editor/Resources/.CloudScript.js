@@ -489,9 +489,20 @@ handlers.ArenaDefendTeamSave = function (args, context) {
         }
     };
     var Result = server.UpdateUserData(request);
+
+    var getRequest = {
+        PlayFabId: currentPlayerId,
+        StatisticNames: ["arenapoint"],
+    };
+    var playerStats = server.GetPlayerStatistics(getRequest);
+    let arenapoint = -999;
+    for (i = 0; i < playerStats.Statistics.length; ++i) {
+        if (playerStats.Statistics[i].StatisticName === "arenapoint") {
+            arenapoint = playerStats.Statistics[i].Value;
+        }
+    }
     
-    var arenaPointReset = false;
-    if (args.resetArenaPoint) {
+    if (arenapoint == -999) {
         var playerStatResult = server.UpdatePlayerStatistics(
             {
                 PlayFabId: currentPlayerId,
@@ -503,12 +514,10 @@ handlers.ArenaDefendTeamSave = function (args, context) {
                 ]
             }
         );
-        arenaPointReset = true;
     }
     
     return {
         success: true,
-        arenaPointReset : arenaPointReset,
         messageValue: members
     };
 }
