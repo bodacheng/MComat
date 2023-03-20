@@ -38,19 +38,14 @@ public partial class CloudScript
             {
                 var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
                 jsonResult.TryGetValue("success", out var succeed);
-                jsonResult.TryGetValue("arenaPointReset", out var arenaPointReset);
                 if ((bool)succeed)
                 {
-                    if ((bool)arenaPointReset)
-                    {
-                        PlayerAccountInfo.Me.arenaPoint = 0;
-                    }
                     finished.Invoke(true);
                     
                 }
                 else
                 {
-                    Debug.Log("通讯错误");
+                    finished.Invoke(false);
                 }
             },
             error =>

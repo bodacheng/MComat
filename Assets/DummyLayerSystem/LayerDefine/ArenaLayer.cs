@@ -50,7 +50,6 @@ public class ArenaLayer : UILayer
         
         rankingPageBtn.onClick.RemoveAllListeners();
         rankingPageBtn.onClick.AddListener(()=> openRanking());
-        
         arenaRankIcon.Set(PlayerAccountInfo.Me.arenaPoint);
         this.tryBeginStage = tryBeginStage;
         this.plusCal = plusCal;

@@ -26,20 +26,22 @@ public partial class ArenaPage : MSceneProcess
     
     void CheckSeasonRankAndEnter(Action onClickRankResetLayer)
     {
-        int lastSeasonPoint = PlayerPrefs.GetInt("arenapoint");
+        int lastSeasonPoint = PlayerPrefs.GetInt(PlayfabSetting._arenaPointCode, -1);
         if (lastSeasonPoint > PlayerAccountInfo.Me.arenaPoint)
         {
             var arenaNewSeason = UILayerLoader.Load<ArenaNewSeason>();
-            arenaNewSeason.Setup(lastSeasonPoint, PlayerAccountInfo.Me.arenaPoint, 
+            arenaNewSeason.Setup(
+                Mathf.Clamp(lastSeasonPoint,0, Int32.MaxValue), 
+                Mathf.Clamp(PlayerAccountInfo.Me.arenaPoint, 0, Int32.MaxValue), 
                 () =>
                 {
                     UILayerLoader.Remove<ArenaNewSeason>();
                     onClickRankResetLayer.Invoke();
                 }
             );
-            PlayerPrefs.SetInt("arenapoint", PlayerAccountInfo.Me.arenaPoint);
+            PlayerPrefs.SetInt(PlayfabSetting._arenaPointCode, PlayerAccountInfo.Me.arenaPoint);
         }
-        PlayerPrefs.SetInt("arenapoint", PlayerAccountInfo.Me.arenaPoint);
+        PlayerPrefs.SetInt(PlayfabSetting._arenaPointCode, PlayerAccountInfo.Me.arenaPoint);
         onClickRankResetLayer.Invoke();
     }
     

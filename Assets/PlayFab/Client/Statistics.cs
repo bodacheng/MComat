@@ -25,16 +25,14 @@ public partial class PlayFabReadClient
     {
         foreach (StatisticValue value in result.Statistics)
         {
-            switch (value.StatisticName)
+            if (value.StatisticName == PlayfabSetting._arenaPointCode)
             {
-                case "arenapoint":
-                    PlayerAccountInfo.Me.arenaPoint = value.Value;
-                    break;
-                case "stageProgress":
-                    PlayerAccountInfo.Me.arcadeProcess = value.Value;
-                    break;
-                default:
-                    break;
+                PlayerAccountInfo.Me.arenaPoint = value.Value;
+            }
+
+            if (value.StatisticName == "stageProgress")
+            {
+                PlayerAccountInfo.Me.arcadeProcess = value.Value;
             }
         }
     }
