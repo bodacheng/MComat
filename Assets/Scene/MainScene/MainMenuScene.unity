@@ -25305,6 +25305,7 @@ MonoBehaviour:
   T: {fileID: 228857932}
   _SwapAllModelShader: {fileID: 977937446}
   audioSource: {fileID: 746885324}
+  Canvas: {fileID: 228857934}
   stonesTempContainer: {fileID: 531992322}
   effectBg: {fileID: 1860414648}
 --- !u!1 &1062971629

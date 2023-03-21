@@ -21,6 +21,8 @@ namespace mainMenu
         [SerializeField] SwapAllModelShader _SwapAllModelShader;
         [Header("AudioSource")]
         [SerializeField] AudioSource audioSource;
+        [Header("Canvas")] 
+        [SerializeField] private Canvas Canvas;
 
         public RectTransform stonesTempContainer;
 
@@ -46,19 +48,20 @@ namespace mainMenu
         }
 
         [SerializeField] private RawImage effectBg;
-        RenderTexture effectRenderTexture;
+        RenderTexture _effectRenderTexture;
         void Awake()
         {
             target = this;
+            PosCal.canvas = this.Canvas;
             SetBgRenderTexture();
         }
         
         void SetBgRenderTexture()
         {
-            effectRenderTexture = new RenderTexture(Screen.width, Screen.height, 16);
-            effectRenderTexture.Create();
-            noPostProcessCamera.targetTexture = effectRenderTexture;
-            effectBg.texture = effectRenderTexture;
+            _effectRenderTexture = new RenderTexture(Screen.width, Screen.height, 16);
+            _effectRenderTexture.Create();
+            noPostProcessCamera.targetTexture = _effectRenderTexture;
+            effectBg.texture = _effectRenderTexture;
             effectBg.color = Color.white;
         }
         
