@@ -5605,9 +5605,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2473a78b576b34f3b8e11c777317ac8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillEntity_List: []
+  skillEntityList: []
   _SkillCancelFlag: {fileID: 553092051332711688}
-  CurrentSKillEntity:
+  currentSKillEntity:
     SkillID: 
     REAL_NAME: 
     StateType: 0
@@ -24020,7 +24020,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.3, z: 0.3}
+  m_Size: {x: 0.6, y: 0.3, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1202713853530570311
 MonoBehaviour:
@@ -46335,7 +46335,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.3, z: 0.3}
+  m_Size: {x: 0.6, y: 0.3, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7616492343219443359
 MonoBehaviour:
