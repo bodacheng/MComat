@@ -117,7 +117,7 @@ namespace mainMenu
             HurtObjectManager.Clear();
             EffectsManager.Clear();
             
-            Screen.SetResolution(1920, 1080, true);
+            //Screen.SetResolution(1920, 1080, true);
             UILayerLoader.Clear();
             UILayerLoader.SetHanger(T.transform);
             UILayerLoader.SetEffectBg(effectBg.rectTransform);
