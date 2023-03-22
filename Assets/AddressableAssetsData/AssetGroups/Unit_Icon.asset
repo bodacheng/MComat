@@ -17,17 +17,17 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: c845bb3d9f08e4184a1f183d5238c432
   m_SerializeEntries:
-  - m_GUID: 75b052a66ffd5475d8566cce6aa1b757
-    m_Address: unit/3
+  - m_GUID: bf61eaa5281644762bd3bedcd78c61a8
+    m_Address: unit/12
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
-  - m_GUID: 95103a9ffc8914827beda7ac63de5aaf
-    m_Address: unit/5
+  - m_GUID: eb2447058b41745c58f4610d29502c2f
+    m_Address: unit/6
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
-  - m_GUID: c258678ee0a3d40a39bf145fde13f45c
+  - m_GUID: fd450632d1ef24611ab5ff530c0953c6
     m_Address: unit/11
     m_ReadOnly: 0
     m_SerializedLabels:
@@ -37,18 +37,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
-  - m_GUID: 7b733cecda6ff4651972903d9016926b
-    m_Address: unit/6
+  - m_GUID: 6aa3f99a5112749ad845c15db153df8c
+    m_Address: unit/5
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
-  - m_GUID: 6277cedb8195044c2a77608b3609264d
-    m_Address: unit/4
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - unit_icon
-  - m_GUID: 3a65cc96141a44b2ba0f6f9b1f5eb678
+  - m_GUID: 0bef2032162b0459fb7e77581f990caa
     m_Address: unit/7
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit_icon
+  - m_GUID: 47a989365b9644584a44b6fbde76c291
+    m_Address: unit/4
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
@@ -57,22 +57,17 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
-  - m_GUID: d8ce4f97e9cef439191ce32809aadabd
-    m_Address: unit/2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - unit_icon
-  - m_GUID: 55d4e86be369a4701b337ff7d92ccc9f
+  - m_GUID: 616531cb4b49b41e3992f94c21fa4ab0
     m_Address: unit/10
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
-  - m_GUID: 35afb45e849af48aeb5ebb228f15a59c
-    m_Address: unit/12
+  - m_GUID: 462fb6ab50848408d853c87cd89594fe
+    m_Address: unit/2
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
-  - m_GUID: 2dfc421eb61c44dcdb236dd23932d167
+  - m_GUID: 0a17f2891253d40048ed5f067203740e
     m_Address: unit/1
     m_ReadOnly: 0
     m_SerializedLabels:
@@ -81,7 +76,12 @@ MonoBehaviour:
     m_Address: unit/13
     m_ReadOnly: 0
     m_SerializedLabels:
-    - unit_image
+    - unit_icon
+  - m_GUID: aecd36bf5e15a4bbd898989ede650621
+    m_Address: unit/3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit_icon
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

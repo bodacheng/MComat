@@ -6,23 +6,26 @@ using Singleton;
 public class HeroIcon : MonoBehaviour {
 
     public BOButton iconButton;
-    public Image Icon;
+    public Image icon;
+    public Image iconBg;
     public Image frame;
     public Image cooldownCurtain;
     
     public UnitInfo unitInfo;
     public UnitConfig unitConfig;
     
-    public void Grey()
+    void Grey()
     {
         frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 0.3f);
-        Icon.color = new Color(1,1,1,0.3f);
+        iconBg.color = new Color(iconBg.color.r, iconBg.color.g, iconBg.color.b, 0.3f);
+        icon.color = new Color(1,1,1,0.3f);
     }
     
-    public void LightOn()
+    void LightOn()
     {
         frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 1f);
-        Icon.color = new Color(1,1,1,1f);
+        iconBg.color = new Color(iconBg.color.r, iconBg.color.g, iconBg.color.b, 1f);
+        icon.color = new Color(1,1,1,1f);
     }
     
     public void CooldownCurtainUpdate(float proportion)
@@ -72,11 +75,10 @@ public class HeroIcon : MonoBehaviour {
     void ChangeIcon(Sprite sprite, Element element)
     {
         //Icon.GetComponent<RectTransform>().sizeDelta = new Vector2(frame.GetComponent<RectTransform>().sizeDelta.x * 0.8f, frame.GetComponent<RectTransform>().sizeDelta.y * 0.8f);
-        Icon.transform.SetSiblingIndex(frame.transform.GetSiblingIndex()- 1);
-        if (cooldownCurtain != null)
-        {
-            cooldownCurtain.transform.SetSiblingIndex(Icon.transform.GetSiblingIndex() - 1);
-        }
+        // if (cooldownCurtain != null)
+        // {
+        //     cooldownCurtain.transform.SetSiblingIndex(icon.transform.GetSiblingIndex() - 1);
+        // }
         
         var htmlString = "";
         switch (element)
@@ -102,9 +104,11 @@ public class HeroIcon : MonoBehaviour {
         }
 
         ColorUtility.TryParseHtmlString("#"+htmlString, out var color);
+        ColorUtility.TryParseHtmlString("#"+"FFE300FF", out var colorY);
         frame.color = color;
-        Icon.sprite = sprite;
-        Icon.gameObject.SetActive(sprite != null);
+        iconBg.color = colorY;
+        icon.sprite = sprite;
+        icon.gameObject.SetActive(sprite != null);
     }
     
     public static void SelectedFeature(HeroIcon unitIcon, GameObject selectedFrame, float localScale)
