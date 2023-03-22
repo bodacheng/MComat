@@ -8,7 +8,7 @@ public class AspectRatioScaler : MonoBehaviour
     public float ReferenceHeight = 1080f;
 
     private CanvasScaler _canvasScaler;
-
+    
     private void Awake()
     {
         _canvasScaler = GetComponent<CanvasScaler>();

@@ -2,9 +2,10 @@ using System;
 using System.Threading;
 using mainMenu;
 using UnityEngine;
-using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using ModelView;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public partial class SkillEditLayer : UILayer
 {
@@ -33,8 +34,11 @@ public partial class SkillEditLayer : UILayer
         stonesBox.GenerateCells(9);
         gameObject.SetActive(false);
         nineSlot.PrintSkillInfo = skillStoneDetail.RefreshInfo;
-        nineSlot.StartUp((x) =>
+        nineSlot.StartUp((x,stone) =>
             {
+                stonesBox._tabEffects.SkillButtonExplosion(stone._SkillConfig.SP_LEVEL, 
+                    PosCal.GetWorldPos(PreScene.target.postProcessCamera, stone.GetComponent<RectTransform>(), 3), 
+                    stonesBox._tabEffects.transform);
                 connector.SkillShowRunWithPrepare(x).Forget();
             }
         );
@@ -109,7 +113,7 @@ public partial class SkillEditLayer : UILayer
     
     void ForceClearAll()
     {
-        foreach (var slot in nineSlot.allSlot)
+        foreach (var slot in nineSlot.AllSlot)
         {
             slot._cell.RemoveToTemp();
         }

@@ -55,7 +55,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &621910441458213341
 RectTransform:
   m_ObjectHideFlags: 0
@@ -554,12 +554,12 @@ GameObject:
   - component: {fileID: 5758595764272838665}
   - component: {fileID: 1840796721828176456}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: StoryText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6327678705909562157
 RectTransform:
   m_ObjectHideFlags: 0
@@ -602,7 +602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -615,7 +615,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 50
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -932,6 +932,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7709466830879809649, guid: c417acb6e8a904e288639f908b2dd1ac,
         type: 3}
+      propertyPath: m_Text
+      value: press start
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709466830879809649, guid: c417acb6e8a904e288639f908b2dd1ac,
+        type: 3}
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
@@ -945,10 +950,30 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7709466830879809649, guid: c417acb6e8a904e288639f908b2dd1ac,
+        type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709466830879809649, guid: c417acb6e8a904e288639f908b2dd1ac,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709466830879809649, guid: c417acb6e8a904e288639f908b2dd1ac,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7709466830879809663, guid: c417acb6e8a904e288639f908b2dd1ac,
         type: 3}
       propertyPath: m_Name
       value: touchScreenText
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709466830879809663, guid: c417acb6e8a904e288639f908b2dd1ac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6307350184104753842, guid: c417acb6e8a904e288639f908b2dd1ac, type: 3}

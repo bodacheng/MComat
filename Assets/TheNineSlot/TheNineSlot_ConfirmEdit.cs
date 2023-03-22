@@ -43,12 +43,12 @@ namespace mainMenu
 
             // slot stoneid
             IDictionary<string, string> afterDic = new Dictionary<string, string>();
-            for (var i = 0; i < allSlot.Count; i++)
+            for (var i = 0; i < AllSlot.Count; i++)
             {
-                if (allSlot[i]._cell.GetItem() != null)
+                if (AllSlot[i]._cell.GetItem() != null)
                 {
                     if (!afterDic.ContainsKey((i + 1).ToString()))
-                        afterDic.Add((i + 1).ToString(), allSlot[i]._cell.GetItem().instanceId);
+                        afterDic.Add((i + 1).ToString(), AllSlot[i]._cell.GetItem().instanceId);
                     else
                         Debug.Log("严重逻辑错误。怎么办待定");
                 }

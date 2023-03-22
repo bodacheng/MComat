@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.Events;
 
 public class SingleThreadProcessor
 {
     private readonly ConcurrentQueue<UniTask> processQueue = new ConcurrentQueue<UniTask>();
-
+    public int TaskRunningCount => processQueue.Count;
+    
     public async UniTask RunAsQueued(UniTask origin)
     {
         await WaitForTurn(origin);

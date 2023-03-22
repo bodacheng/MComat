@@ -81,8 +81,8 @@ public class FrontPage : MSceneProcess
         }
         
         PreScene.target.SetFocusingUnit(focusInstanceID);
-        _frontLayer.CamConnector.ShowMyModel(focusInstanceID).Forget();
-
+        _frontLayer.ShowMyModel(focusInstanceID).Forget();
+        
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
         upperInfoBar.Setup(PlayerAccountInfo.Me.TitleDisplayName,
             () => PreScene.target.trySwitchToStep(MainSceneStep.Setting), 

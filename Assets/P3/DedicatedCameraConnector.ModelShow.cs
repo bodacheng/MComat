@@ -35,6 +35,7 @@ namespace ModelView
         string _focusRId;
         bool _ifShowingSkill = false;
         private readonly SingleThreadProcessor singleThreadProcessor = new SingleThreadProcessor();
+        public int TaskRunningCount => singleThreadProcessor.TaskRunningCount;
         public async UniTask ShowModel(string recordID)
         {
             await singleThreadProcessor.RunAsQueued(_ShowModel(recordID));

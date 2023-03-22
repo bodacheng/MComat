@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using Button = UnityEngine.UI.Button;
+using Slider = UnityEngine.UI.Slider;
 
 namespace mainMenu
 {
@@ -52,8 +54,8 @@ namespace mainMenu
         SkillStoneSlot _a1Slot, _a2Slot, _a3Slot;
         SkillStoneSlot _b1Slot, _b2Slot, _b3Slot;
         SkillStoneSlot _c1Slot, _c2Slot, _c3Slot;
-        SkillStoneSlot focusingSlot;
-        public readonly List<SkillStoneSlot> allSlot = new List<SkillStoneSlot>();
+        SkillStoneSlot _focusingSlot;
+        public readonly List<SkillStoneSlot> AllSlot = new List<SkillStoneSlot>();
 
         public Action<string> PrintSkillInfo;
 
@@ -75,21 +77,21 @@ namespace mainMenu
         
         public SkillStoneSlot GetFocusingStoneSlot()
         {
-            return focusingSlot;
+            return _focusingSlot;
         }
         
-        void SlotBehaviour(SkillStoneSlot slot, Action<string> playSkill)
+        void SlotBehaviour(SkillStoneSlot slot, Action<string, SKStoneItem> playSkill)
         {
             void ButtonFeature()
             {
-                focusingSlot = slot;
-                SelectedRender(focusingSlot._cell);
+                _focusingSlot = slot;
+                SelectedRender(_focusingSlot._cell);
                 slot._cell.UpdateMyItem();
-                var skillStone = slot._cell.GetItem();
-                if (skillStone != null && skillStone._SkillConfig != null)
+                var stone = slot._cell.GetItem();
+                if (stone != null && stone._SkillConfig != null)
                 {
-                    PrintSkillInfo.Invoke(skillStone.instanceId);
-                    playSkill.Invoke(skillStone._SkillConfig.REAL_NAME);
+                    PrintSkillInfo.Invoke(stone.instanceId);
+                    playSkill.Invoke(stone._SkillConfig.REAL_NAME, stone);
                 }else{
                     PrintSkillInfo.Invoke(null);
                 }
@@ -97,7 +99,7 @@ namespace mainMenu
             
             void DoubleClick()
             {
-                focusingSlot = null;
+                _focusingSlot = null;
                 SelectedRender(null);
             }
             
@@ -127,7 +129,7 @@ namespace mainMenu
             }));
         }
         
-        public void StartUp(Action<string> runSkill)
+        public void StartUp(Action<string, SKStoneItem> runSkill)
         {
             SelectedRender(null);
             
@@ -141,18 +143,18 @@ namespace mainMenu
             _c2Slot = new SkillStoneSlot(8, C2DragAndDropCell);
             _c3Slot = new SkillStoneSlot(9, C3DragAndDropCell);
 
-            allSlot.Clear();
-            allSlot.Add(_a1Slot);
-            allSlot.Add(_a2Slot);
-            allSlot.Add(_a3Slot);
-            allSlot.Add(_b1Slot);
-            allSlot.Add(_b2Slot);
-            allSlot.Add(_b3Slot);
-            allSlot.Add(_c1Slot);
-            allSlot.Add(_c2Slot);
-            allSlot.Add(_c3Slot);
+            AllSlot.Clear();
+            AllSlot.Add(_a1Slot);
+            AllSlot.Add(_a2Slot);
+            AllSlot.Add(_a3Slot);
+            AllSlot.Add(_b1Slot);
+            AllSlot.Add(_b2Slot);
+            AllSlot.Add(_b3Slot);
+            AllSlot.Add(_c1Slot);
+            AllSlot.Add(_c2Slot);
+            AllSlot.Add(_c3Slot);
             
-            foreach (var _slot in allSlot)
+            foreach (var _slot in AllSlot)
             {
                 SlotBehaviour(_slot, runSkill);
             }
@@ -162,7 +164,7 @@ namespace mainMenu
         public bool NineSlotsStatusRefresh()
         {
             var full = true;
-            foreach (var slot in allSlot)
+            foreach (var slot in AllSlot)
             {
                 slot._cell.UpdateMyItem();
                 if (slot._cell.GetItem() == null)
@@ -187,7 +189,7 @@ namespace mainMenu
         
          async void RefreshEffects()
          {
-             foreach (var slot in allSlot)
+             foreach (var slot in AllSlot)
             {
                 var item = slot._cell.GetItem();
                 await Task.Delay(1);// wait for the UI Layer to be stable.Otherwise pos caculation will be wrong at the start

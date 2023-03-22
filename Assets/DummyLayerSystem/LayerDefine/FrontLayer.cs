@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using mainMenu;
@@ -15,8 +16,6 @@ public class FrontLayer : UILayer
     [SerializeField] Button SkillTestMBtn;
     [SerializeField] DedicatedCameraConnector camConnector;
     
-    public DedicatedCameraConnector CamConnector => camConnector;
-    
     public void Initialise(PreScene pre)
     {
         ArcadeBtn.onClick.AddListener(()=> pre.trySwitchToStep(MainSceneStep.ArcadeFront));
@@ -31,6 +30,15 @@ public class FrontLayer : UILayer
         
         SkillTestRBtn.gameObject.SetActive(CommonSetting.DevMode);
         // SkillTestMBtn.gameObject.SetActive(false);
+    }
+    
+    public async UniTask ShowMyModel(string instanceID)
+    {
+        if (camConnector.TaskRunningCount == 0)
+        {
+            var info = dataAccess.Units.Get(instanceID);
+            await camConnector.ShowModel(info?.r_id);
+        }
     }
 
     #region 教程

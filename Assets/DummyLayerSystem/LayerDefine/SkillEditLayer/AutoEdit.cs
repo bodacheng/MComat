@@ -51,7 +51,7 @@ public partial class SkillEditLayer : UILayer
     
     void AddRandomStoneToSlot(string monsterOfPlayerId, int targetSlot, string skillID)
     {
-        if (nineSlot.allSlot[targetSlot - 1]._cell.GetItem() != null)
+        if (nineSlot.AllSlot[targetSlot - 1]._cell.GetItem() != null)
         {
             return;
         }
@@ -60,7 +60,7 @@ public partial class SkillEditLayer : UILayer
         var Options = Stones.GetMyStonesBySkillID(skillID);
         if (originSkillInfo != null && skillID == originSkillInfo.SkillId)
         {
-            nineSlot.allSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(originSkillInfo.InstanceId));
+            nineSlot.AllSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(originSkillInfo.InstanceId));
         }else{
             Options.OrderByDescending(x => Stones.Get(x).Level);
             string targetStoneId = null;
@@ -73,13 +73,13 @@ public partial class SkillEditLayer : UILayer
                     break;
                 }
             }
-            nineSlot.allSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(targetStoneId));
+            nineSlot.AllSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(targetStoneId));
         }
         
         var skillConfig = SkillConfigTable.GetSkillConfig(skillID);
         stonesBox._tabEffects.SkillButtonExplosion(skillConfig.SP_LEVEL,
             PosCal.GetWorldPos(PreScene.target.postProcessCamera, 
-                nineSlot.allSlot[targetSlot - 1]._cell.GetComponent<RectTransform>(), 
+                nineSlot.AllSlot[targetSlot - 1]._cell.GetComponent<RectTransform>(), 
                 3),
             stonesBox._tabEffects.transform);
     }

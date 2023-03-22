@@ -1,11 +1,32 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public static class PosCal
 {
     public static Canvas canvas;
-
+    static CanvasScaler canvasScaler => canvas.GetComponent<CanvasScaler>();
     private static float canvasWidth => canvas.GetComponent<RectTransform>().rect.width;
     private static float canvasHeight => canvas.GetComponent<RectTransform>().rect.height;
+
+    
+    /// <summary>
+    /// 当初那些九宫格特效是建立在referenceResolution：1920x1080来制作的
+    /// 也就是假设了屏幕也是那个尺寸，那么如果是不同屏幕就需要按屏幕空间比例进行拉伸。
+    /// </summary>
+    /// <returns></returns>
+    public static float EffectScaleRate()
+    {
+        if (canvasScaler.matchWidthOrHeight == 1)
+        {
+            return Screen.width / canvasScaler.referenceResolution.x;
+        }
+
+        if (canvasScaler.matchWidthOrHeight == 0)
+        {
+            return Screen.height / canvasScaler.referenceResolution.y;
+        }
+        return 1;
+    }
     
     /// <summary>
     /// 这个函数在目前所用的地方为什么能得到正确的值我们压根不理解。主要不理解rect.transform.position到底是什么
@@ -16,9 +37,9 @@ public static class PosCal
     /// <returns></returns>
     public static Vector3 GetWorldPos(Camera refC, RectTransform rect, float z_offset)
     {
-        Vector3 rectPos = rect.transform.position;
-        Vector2 trueAnchorPos = new Vector2(rectPos.x, rectPos.y);
-        Vector3 WorldPos = refC.ScreenToWorldPoint(trueAnchorPos);
+        var rectPos = rect.transform.position;
+        var trueAnchorPos = new Vector2(rectPos.x, rectPos.y);
+        var WorldPos = refC.ScreenToWorldPoint(trueAnchorPos);
         WorldPos = new Vector3(WorldPos.x, WorldPos.y, refC.transform.position.z + z_offset);
         return WorldPos;
     }
@@ -31,8 +52,8 @@ public static class PosCal
     /// <returns></returns>
     public static Vector3 GetWorldPos(Camera refC, Vector3 rectPos, float z_offset)
     {
-        Vector2 screenPos = new Vector2(Screen.width * rectPos.x/ canvasWidth, Screen.height * rectPos.y/ canvasHeight);
-        Vector3 WorldPos = refC.ScreenToWorldPoint(screenPos);
+        var screenPos = new Vector2(Screen.width * rectPos.x/ canvasWidth, Screen.height * rectPos.y/ canvasHeight);
+        var WorldPos = refC.ScreenToWorldPoint(screenPos);
         WorldPos = new Vector3(WorldPos.x, WorldPos.y, refC.transform.position.z + z_offset);
         return WorldPos;
     }

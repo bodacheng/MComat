@@ -17,7 +17,7 @@ namespace mainMenu
             var equipments = Stones.GetEquippingStones(_unitInfo.id);
             for (var i = 1; i <= 9; i++)
             {
-                allSlot[i - 1]._cell.RemoveToTemp();
+                AllSlot[i - 1]._cell.RemoveToTemp();
             }
 
             for (var i = 0; i < equipments.Count; i++)
@@ -25,9 +25,9 @@ namespace mainMenu
                 var usingPosInt = int.Parse(equipments[i].Slot);
                 if (equipments[i].InstanceId != null)
                 {
-                    allSlot[usingPosInt - 1].TakeASkillStoneFromBoxToSlot(equipments[i].InstanceId);
+                    AllSlot[usingPosInt - 1].TakeASkillStoneFromBoxToSlot(equipments[i].InstanceId);
                 }
-                allSlot[usingPosInt - 1]._cell.UpdateMyItem();
+                AllSlot[usingPosInt - 1]._cell.UpdateMyItem();
             }
             NineSlotsStatusRefresh();
         }
