@@ -23,7 +23,9 @@ public class TitleBgLayer : UILayer
     private IDisposable _disposable;
     public void Setup(bool storyMode, Action onClickProcess = null) // false: titleMode
     {
-        content.sizeDelta = new Vector2(content.rect.width ,  targetSprite.rect.height * content.rect.width / targetSprite.rect.width);
+        RectTransform parentRect = transform.GetComponent<RectTransform>();
+        content.sizeDelta = new Vector2(parentRect.rect.width ,  targetSprite.rect.height * parentRect.rect.width / targetSprite.rect.width);
+        content.anchoredPosition = Vector2.zero;
         targetImage.sprite = targetSprite;
         vScrollbar.value = 1;
         targetImage.color = Color.white;
@@ -49,7 +51,7 @@ public class TitleBgLayer : UILayer
             if (subtitleCodes.Count > codeIndex)
                 languageConverter.ChangeAtOnce(subtitleCodes[codeIndex]);
         }
-        _disposable = Observable.Timer(TimeSpan.FromSeconds(scrollDelayFromSeconds), TimeSpan.FromMilliseconds(0.1)).Subscribe(
+        _disposable = Observable.Timer(TimeSpan.FromSeconds(storyMode? scrollDelayFromSeconds : 0), TimeSpan.FromMilliseconds(0.1)).Subscribe(
             (_) =>
             {
                 milliSecondCounter += scrollDelayInMilliSecond;
@@ -67,7 +69,7 @@ public class TitleBgLayer : UILayer
                 }
                 else
                 {
-                    if (vScrollbar.value <= 0)
+                    if (vScrollbar.value <= ScrollbarMinValue)
                         _disposable.Dispose();
                 }
             }).AddTo(gameObject);
