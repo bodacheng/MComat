@@ -19,6 +19,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
         type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 1
       objectReference: {fileID: 0}
@@ -35,17 +40,32 @@ PrefabInstance:
     - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.atime1
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime3
       value: 65535
       objectReference: {fileID: 0}
     - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.ctime1
-      value: 20239
+      value: 8288
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.ctime2
+      value: 42020
       objectReference: {fileID: 0}
     - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key1.a
-      value: 0
+      value: 0.30012256
       objectReference: {fileID: 0}
     - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
         type: 3}
@@ -64,7 +84,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
         type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.b
+      value: 0.13110113
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
       propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920450910649636269, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_NumColorKeys
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3921076227039987535, guid: f10d742e0ed7882459a1bd256a2afa0b,
@@ -111,6 +151,21 @@ PrefabInstance:
         type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].outWeight
       value: 0.22572607
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921387121971976343, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921387121971976343, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921387121971976343, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3922361875938509731, guid: f10d742e0ed7882459a1bd256a2afa0b,
         type: 3}
