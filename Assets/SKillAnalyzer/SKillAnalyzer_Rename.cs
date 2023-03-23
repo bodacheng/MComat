@@ -1,5 +1,4 @@
-﻿#if UNITY_EDITOR
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
@@ -60,4 +59,3 @@ public partial class SKillAnalyzer
         }
     }
 }
-#endif
