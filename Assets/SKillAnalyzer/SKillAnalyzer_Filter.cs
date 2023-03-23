@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if UNITY_EDITOR
+using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Cysharp.Threading.Tasks;
@@ -72,3 +73,4 @@ public partial class SKillAnalyzer
         return startfilteroutcome && endfiltercoutcome;
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if UNITY_EDITOR
+using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using UnityEngine.AddressableAssets;
@@ -53,3 +54,4 @@ public partial class SKillAnalyzer
         return AnimationClips;
     }
 }
+#endif
