@@ -12,7 +12,7 @@ public class NickNameLayer : UILayer
     [SerializeField] private Button OK;
     [SerializeField] private Button Cancel;
     
-    public void Setup(Action<string> setNickName, bool showCloseBtn)
+    public void Setup(Action<string> setNickName, bool showCloseBtn, Action extraOnClose)
     {
         OK.onClick.AddListener(async ()=>
         {
@@ -35,7 +35,16 @@ public class NickNameLayer : UILayer
             }
         });
         Cancel.gameObject.SetActive(showCloseBtn);
-        Cancel.onClick.AddListener(UILayerLoader.Remove<NickNameLayer>);
+        if (showCloseBtn)
+        {
+            Cancel.onClick.AddListener(UILayerLoader.Remove<NickNameLayer>);
+            Cancel.onClick.AddListener(
+                () =>
+                {
+                    extraOnClose?.Invoke();
+                }
+            );
+        }
     }
 
     string BadWordFilter(string currentTxt)

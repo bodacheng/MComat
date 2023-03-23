@@ -94,12 +94,14 @@ TeamNotFull,You need three warriors with complete skill sets to participate in t
 Account,Account,アカウント,账户
 LinkEmail,Email binding,メールアドレスのバインド,邮箱绑定
 InputEmail,Please enter your email address,メールアドレスを入力してください,请在此输入邮箱
-LinkDevice,Device binding,デバイスのバインド,设备绑定
+LinkDevice,Device,デバイス,设备绑定
 Audio,Volume,音量,音量
 Support,Help,ヘルプ,帮助
 Language,Language,言語,言語
 NickName,Nickname,ニックネーム,昵称
 ,,,
+NicknameSet,Nickname set successfully,ニックネームが設定されました,昵称设置成功
+IfSetNickName,Sure to change nickname?,ニックネームを変更してもよろしいですか？ ,确定要修改昵称吗
 privacy,Privacy Policy,プライバシーポリシー,隐私政策
 contact,Contact us,お問い合わせ,联系我们
 ,,,

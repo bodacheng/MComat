@@ -18,11 +18,10 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         SKLevelUpMSlot,
         StoneMergeSlot
     }
-
-    public BOButton btn;
     
+    public BOButton btn;
     [Tooltip("using Stone Unit Icon")]
-    public HeroIcon _charIcon;
+    [SerializeField] HeroIcon unitIcon;
     [Tooltip("选中框，用来确保有一个选中框选中这个格子的时候不会有其他选中框选中他。")]
     public GameObject _selected;
     [Tooltip("Functional type of this cell")]
@@ -50,6 +49,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                 break;
         }
         item.transform.SetParent(transform, false);
+        item.transform.SetAsFirstSibling();
         item.transform.localScale = Vector3.one * 1.2f;
         item.transform.localPosition = Vector3.zero;
         item.MakeRaycast(true);
@@ -65,34 +65,34 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         {
             if (gameObject.activeSelf)
             {
-                ShowUsingUnit(_myDadItem, _charIcon);
+                ShowUsingUnit(_myDadItem, unitIcon);
             }
         }
     }
     
     // Show Character icon using this SkillStone
-    void ShowUsingUnit(SKStoneItem Item, HeroIcon targetIcon)
+    void ShowUsingUnit(SKStoneItem item, HeroIcon targetIcon)
     {
-        if (Item == null || Item.instanceId == null)
+        if (item == null || item.instanceId == null)
         {
             targetIcon.gameObject.SetActive(false);
             return;
         }
-        var SSInfo = Stones.Get(Item.instanceId);
-        if (SSInfo == null || SSInfo.UnitInstanceId == null)
+        var ssInfo = Stones.Get(item.instanceId);
+        if (ssInfo == null || ssInfo.UnitInstanceId == null)
         {
             targetIcon.gameObject.SetActive(false);
             return;
         }
-            
-        UnitInfo _one = dataAccess.Units.Get(SSInfo.UnitInstanceId);
-        if (_one == null)
+        
+        var unitInfo = dataAccess.Units.Get(ssInfo.UnitInstanceId);
+        if (unitInfo == null)
         {
             targetIcon.gameObject.SetActive(false);
             return;
         }
         targetIcon.gameObject.SetActive(true);
-        targetIcon.ChangeIcon(_one);
+        targetIcon.ChangeIcon(unitInfo);
     }
     
     /// <summary>

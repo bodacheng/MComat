@@ -42,7 +42,7 @@ public class SettingPage : MSceneProcess
         SettingLayer.Close();
     }
 
-    public static void SetNickName(Action<string> success, bool closeBtnOn)
+    public static void SetNickName(Action<string> success, bool closeBtnOn, Action extraOnClose = null)
     {
         var nickNameLayer = UILayerLoader.Load<NickNameLayer>();
         nickNameLayer.Setup(
@@ -86,8 +86,10 @@ public class SettingPage : MSceneProcess
                             }
                         );
                     }, 
-                    "Set as your nick name?");
-            },closeBtnOn
+                    Translate.Get("IfSetNickName"));
+            },
+            closeBtnOn,
+            extraOnClose
         );
     }
 }

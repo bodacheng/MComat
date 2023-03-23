@@ -206,20 +206,30 @@ public class SettingLayer : UILayer
         
         LanguageIndicator();
         
-        nickNameBtn.onClick.AddListener(() =>
-        {
-            CloseAllPanels();
-            nickNamePanel.gameObject.SetActive(true);
-            SetSelectedFrame(nickNameBtn.GetComponent<RectTransform>());
-            resetNickNameBtn.onClick.AddListener(() =>
+        nickNameBtn.onClick.AddListener(
+            () =>
             {
-                SettingPage.SetNickName((x) =>
-                {
-                    PopupLayer.ArrangeWarnWindow("Nickname Set");
-                    nickName.text = x;
-                }, true);
-            });
-        });
+                CloseAllPanels();
+                nickNamePanel.gameObject.SetActive(true);
+                SetSelectedFrame(nickNameBtn.GetComponent<RectTransform>());
+                resetNickNameBtn.onClick.AddListener(
+                    () =>
+                    {
+                        this.gameObject.SetActive(false);
+                        SettingPage.SetNickName((x) =>
+                        {
+                            PopupLayer.ArrangeWarnWindow(Translate.Get("NicknameSet"));
+                            nickName.text = x;
+                            this.gameObject.SetActive(true);
+                        }, 
+                        true, () =>
+                        {
+                            this.gameObject.SetActive(true);
+                        });
+                    }
+                );
+            }
+        );
         
         ResetSliders();
         
