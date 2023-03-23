@@ -84,19 +84,19 @@ public class HeroIcon : MonoBehaviour {
         switch (element)
         {
             case Element.blueMagic:
-                htmlString = "00ABFFFF";
+                htmlString = "004DFFFF";
                 break;
             case Element.darkMagic:
-                htmlString = "8D00FFFF";
+                htmlString = "7400FFFF";
                 break;
             case Element.redMagic:
-                htmlString = "FF5367FF";
+                htmlString = "FF001EFF";
                 break;
             case Element.lightMagic:
-                htmlString = "FFE300FF";
+                htmlString = "FFDF00FF";
                 break;
             case Element.greenMagic:
-                htmlString = "0FE500FF";
+                htmlString = "0FFF00FF";
                 break;
             case Element.Null:
                 htmlString = "FFFFFFFF";
@@ -104,9 +104,8 @@ public class HeroIcon : MonoBehaviour {
         }
 
         ColorUtility.TryParseHtmlString("#"+htmlString, out var color);
-        ColorUtility.TryParseHtmlString("#"+"FFE300FF", out var colorY);
         frame.color = color;
-        iconBg.color = colorY;
+        iconBg.color = color;
         icon.sprite = sprite;
         icon.gameObject.SetActive(sprite != null);
     }
