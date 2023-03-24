@@ -42,3 +42,5 @@ RECORD_ID,REAL_NAME,SPLevel,EstimateDamage,AttackCount,HP
 148,rotateleg_far,1,2,2,5
 161,psychoblast,2,5,1,5
 90,punchcombination,1,5,3,5
+184,yuta_punch,1,2,1,5
+179,witchmirror,1,2,1,5

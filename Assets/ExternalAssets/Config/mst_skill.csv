@@ -42,3 +42,5 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK
 148,rotateleg_far,human,1,1,5,GM,
 161,psychoblast,human,2,5,5,GR,
 90,punchcombination,human,1,0.5,5,GR,
+184,yuta_punch,human,1,1,5,GI,
+179,witchmirror,human,1,1,5,CT,

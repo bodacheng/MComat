@@ -987,6 +987,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - skill_icon
+  - m_GUID: 2d10fc2ab980c43f0b19cc0d50810c98
+    m_Address: 184
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - skill_icon
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

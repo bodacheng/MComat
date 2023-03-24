@@ -182,3 +182,4 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK
 181,flyingkick_c,human,0,1,5,GI,
 182,guardforarmor,human,0,0,5,CT,
 183,tetsuya_punch,human,1,2,5,GR,
+184,yuta_punch,human,1,1,5,GI,
