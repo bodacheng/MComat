@@ -616,6 +616,7 @@ MonoBehaviour:
   accountDiamondCoin: {fileID: 9174361986731485864}
   diamondPlus: {fileID: 7430151973283774133}
   accountIntelliCoin: {fileID: 9174361986707981505}
+  currencyTextChangeDuration: 2
 --- !u!1 &9174361986592848677
 GameObject:
   m_ObjectHideFlags: 0

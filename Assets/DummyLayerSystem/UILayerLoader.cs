@@ -101,6 +101,8 @@ namespace DummyLayerSystem
         
         public static T Load<T>(bool insertToTop = false)
         {
+            if (_hanger == null)
+                return default;
             var layerName = typeof(T).Name;
             var existed = Get<T>();
             if (existed != null)

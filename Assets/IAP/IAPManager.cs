@@ -33,7 +33,10 @@ public class IAPManager : MonoBehaviour, IStoreListener {
 
     public decimal GetProductLocalPrice(string productId)
     {
-        return _mStoreController.products.WithID(productId).metadata.localizedPrice;
+        var productInfo = _mStoreController.products.WithID(productId);
+        if (productInfo != null)
+            return productInfo.metadata.localizedPrice;
+        return Decimal.Zero;
     }
 
     // This is invoked manually on Start to initialize UnityIAP
