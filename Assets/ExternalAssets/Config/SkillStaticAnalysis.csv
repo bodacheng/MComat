@@ -41,3 +41,4 @@ RECORD_ID,REAL_NAME,SPLevel,EstimateDamage,AttackCount,HP
 137,thunder_near,2,5,1,5
 148,rotateleg_far,1,2,2,5
 161,psychoblast,2,5,1,5
+90,punchcombination,1,5,3,5
