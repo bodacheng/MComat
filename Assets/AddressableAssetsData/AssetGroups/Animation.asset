@@ -38,12 +38,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - knock_anim
-  - m_GUID: f5e3533a721264c30aef1bf838723716
-    m_Address: Animation/human/face_anim
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - anim
-    - basic_anim
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
