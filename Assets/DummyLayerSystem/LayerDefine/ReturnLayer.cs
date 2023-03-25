@@ -8,7 +8,8 @@ using UnityEngine;
 public class ReturnLayer : UILayer
 {
     [SerializeField] Button returnButton;
-    [SerializeField] GameObject maskBg;
+    [SerializeField] GameObject indicator;
+    [SerializeField] GameObject curtain;
     
     public static readonly List<Func<bool>> ReturnMissionList = new List<Func<bool>>();
     
@@ -51,7 +52,8 @@ public class ReturnLayer : UILayer
     
     public void ForceBackMode(bool on)
     {
-        maskBg.gameObject.SetActive(on);
+        curtain.gameObject.SetActive(on);
+        indicator.gameObject.SetActive(on);
         ToTop();
     }
 
