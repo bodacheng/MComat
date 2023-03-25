@@ -17,16 +17,16 @@
             return null;
         }
 
-        public static MultiDic<int, int, UnitInfo> ToDic(PosKeySet PosKeySet)
+        public static MultiDic<int, int, UnitInfo> ToDic(PosKeySet posKeySet)
         {
             var teamMembers = new MultiDic<int, int, UnitInfo>();
             for (var i = 0; i < 3; i++)
             {
-                if (PosKeySet.GetInstanceIdOnPos(i) == null)
+                if (posKeySet.GetInstanceIdOnPos(i) == null)
                 {
                     continue;
                 }
-                var info = Units.Get(PosKeySet.GetInstanceIdOnPos(i));
+                var info = Units.Get(posKeySet.GetInstanceIdOnPos(i));
                 if (info != null)
                 {
                     var unitInfo = UnitInfo.GetUnitInfo(info);

@@ -207,6 +207,7 @@ MonoBehaviour:
   nineForShow: {fileID: 4362441782267475170}
   saveBtn: {fileID: 4735525810446178949}
   skillEditButton: {fileID: 915743133412191350}
+  skillEditBtnColorSwapper: {fileID: 6949016810275075899}
   instruction: {fileID: 803863316951094226}
 --- !u!1 &602295577070903810
 GameObject:
@@ -219,6 +220,7 @@ GameObject:
   - component: {fileID: 4635313134236306304}
   - component: {fileID: 4761254103126305939}
   - component: {fileID: 3548598985984851413}
+  - component: {fileID: 8628302039400123588}
   m_Layer: 5
   m_Name: title
   m_TagString: Untagged
@@ -288,6 +290,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Confirm
+--- !u!114 &8628302039400123588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602295577070903810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: Confirm
+  target: {fileID: 3548598985984851413}
 --- !u!1 &1728708179819864231
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,6 +488,7 @@ GameObject:
   - component: {fileID: 4735525810446178946}
   - component: {fileID: 4735525810446178944}
   - component: {fileID: 4735525810446178949}
+  - component: {fileID: 6949016810275075899}
   m_Layer: 5
   m_Name: Confirm
   m_TagString: Untagged
@@ -569,6 +586,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6949016810275075899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4735525810446178950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 102c11c7685ec4c27b0b491b28e57186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - {fileID: 3548598985984851413}
+  images:
+  - {fileID: 4735525810046877477}
+  - {fileID: 5159093360140509511}
+  - {fileID: 5159093361005287496}
+  - {fileID: 5159093360605635363}
 --- !u!1 &5159093360140509513
 GameObject:
   m_ObjectHideFlags: 0

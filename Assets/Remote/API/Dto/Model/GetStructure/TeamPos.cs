@@ -28,12 +28,12 @@ namespace dataAccess
 
         public PosKeySet ToPosKeySet()
         {
-            PosKeySet PosKeySet = new PosKeySet();
-            List<PosKeySet.OneSet> posNumWithLocalKeys = new List<PosKeySet.OneSet>
+            var PosKeySet = new PosKeySet();
+            var posNumWithLocalKeys = new List<PosKeySet.OneSet>
             {
+                new PosKeySet.OneSet(0, f),
                 new PosKeySet.OneSet(1, l),
                 new PosKeySet.OneSet(2, r),
-                new PosKeySet.OneSet(0, f)
             };
             PosKeySet.PosNumsWithLocalKeys = posNumWithLocalKeys.ToArray();
             return PosKeySet;

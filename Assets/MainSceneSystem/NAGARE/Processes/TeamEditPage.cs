@@ -7,6 +7,7 @@ using DummyLayerSystem;
 public class TeamEditPage : MSceneProcess
 {
     string _teamMode;
+    private PosKeySet defaultPosKeySetBefore;
     
     void TeamSaveFinished(bool value)
     {
@@ -35,6 +36,12 @@ public class TeamEditPage : MSceneProcess
             teamEditLayer.UnitIconClick(PreScene.target.Focusing.id, this._teamMode);
             unitsLayer.Selected.Value = null;
         }
+
+        if (teamMode == "arcade")
+        {
+            defaultPosKeySetBefore = TeamSet.Default.Clone();
+        }
+        
         SetLoaded(true);
     }
     
@@ -51,6 +58,8 @@ public class TeamEditPage : MSceneProcess
     
     public override void ProcessEnd()
     {
+        if (_teamMode == "arcade")
+            TeamSet.Default = defaultPosKeySetBefore;
         UILayerLoader.Remove<UnitsLayer>();
         UILayerLoader.Remove<TeamEditLayer>();
     }
@@ -76,11 +85,12 @@ public class TeamEditPage : MSceneProcess
                 break;
         }
         
-        foreach (var set in targetTeamSet.PosNumsWithLocalKeys)
+        var teamDic = targetTeamSet.LoadTeamDic();
+        foreach (var kv in teamDic.mDict)
         {
-            if (set.instanceID != null && dataAccess.Units.Get(set.instanceID) != null)
+            if (kv.Value.id != null && dataAccess.Units.Get(kv.Value.id) != null)
             {
-                qualified = qualified && (Stones.GetEquippingStones(set.instanceID).Count == 9);
+                qualified = qualified && (Stones.GetEquippingStones(kv.Value.id).Count == 9);
                 unitCount += 1;
             }
             else
@@ -146,6 +156,7 @@ public class TeamEditPage : MSceneProcess
                     }
                 );
                 TeamSet.SaveTeamSet(_teamMode, TeamSaveFinished);
+                defaultPosKeySetBefore = TeamSet.Default;
                 break;
         }
     }

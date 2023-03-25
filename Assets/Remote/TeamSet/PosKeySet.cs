@@ -1,4 +1,5 @@
-﻿using dataAccess;
+﻿using System;
+using dataAccess;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ using UnityEngine;
 public class PosKeySet
 {
     [System.Serializable]
-    public class OneSet
+    public class OneSet : ICloneable
     {
         public string instanceID;
         public int posNum;
@@ -15,11 +16,28 @@ public class PosKeySet
         {
         }
 
-        public OneSet(int posNum, string monsterOfPlayerId)
+        public OneSet(int posNum, string instanceId)
         {
             this.posNum = posNum;
-            this.instanceID = monsterOfPlayerId;
+            this.instanceID = instanceId;
         }
+        
+        public object Clone()
+        {
+            return base.MemberwiseClone();
+        }
+    }
+
+    public PosKeySet Clone()
+    {
+        var posKeySet = new PosKeySet();
+        var sets = new List<OneSet>();
+        foreach (var p in PosNumsWithLocalKeys)
+        {
+            sets.Add((PosKeySet.OneSet)p.Clone());
+        }
+        posKeySet.PosNumsWithLocalKeys = sets.ToArray();
+        return posKeySet;
     }
 
     public OneSet[] PosNumsWithLocalKeys = {};
@@ -31,8 +49,8 @@ public class PosKeySet
     
     public TeamPos ToTeamPos()
     {
-        TeamPos model = new TeamPos();
-        for (int i = 0; i < PosNumsWithLocalKeys.Length; i++)
+        var model = new TeamPos();
+        for (var i = 0; i < PosNumsWithLocalKeys.Length; i++)
         {
             switch (PosNumsWithLocalKeys[i].posNum)
             {
@@ -78,7 +96,7 @@ public class PosKeySet
                 return;
             }
         }
-        Debug.Log("posNum not exists："+posNum);
+        Debug.Log("posNum not exists：" + posNum);
     }
     
     public List<OneSet> SetPosUnitByInstanceID(int targetPos, string instanceID)// 返回长度为2时，第一个元素是目标位置，第二个元素是被替换位置
@@ -128,21 +146,21 @@ public class PosKeySet
     
     public void ChangePosition(int position1, int position2)
     {
-        var PosNumWithLocalKey1 = GetPosMemInfo(position1);
-        var PosNumWithLocalKey2 = GetPosMemInfo(position2);
+        var posNumWithLocalKey1 = GetPosMemInfo(position1);
+        var posNumWithLocalKey2 = GetPosMemInfo(position2);
         
-        (PosNumWithLocalKey2.instanceID, PosNumWithLocalKey1.instanceID) = (PosNumWithLocalKey1.instanceID, PosNumWithLocalKey2.instanceID);
+        (posNumWithLocalKey2.instanceID, posNumWithLocalKey1.instanceID) = (posNumWithLocalKey1.instanceID, posNumWithLocalKey2.instanceID);
     }
     
-    // 暂时不再使用。最初是selffight模式下队员要求不重复的队员指定模式
+    // 暂时不再使用。最初是selfFight模式下队员要求不重复的队员指定模式
     public static void ChangePositionBetweenDifferentTeamSets(int position1, PosKeySet team1, int position2, PosKeySet team2)
     {
-        var PosNumWithLocalKey1 = team1.GetPosMemInfo(position1);
-        var PosNumWithLocalKey2 = team2.GetPosMemInfo(position2);
-        (PosNumWithLocalKey2.instanceID, PosNumWithLocalKey1.instanceID) = (PosNumWithLocalKey1.instanceID, PosNumWithLocalKey2.instanceID);
+        var posNumWithLocalKey1 = team1.GetPosMemInfo(position1);
+        var posNumWithLocalKey2 = team2.GetPosMemInfo(position2);
+        (posNumWithLocalKey2.instanceID, posNumWithLocalKey1.instanceID) = (posNumWithLocalKey1.instanceID, posNumWithLocalKey2.instanceID);
     }
     
-    // 暂时不再使用。最初是selffight模式下队员要求不重复的队员指定模式
+    // 暂时不再使用。最初是selfFight模式下队员要求不重复的队员指定模式
     public List<string> GetAllOnSetMonsterOfPlayerIds()
     {
         var onsetMonsterOfPlayerIds = new List<string>();
@@ -154,7 +172,7 @@ public class PosKeySet
         return onsetMonsterOfPlayerIds;
     }
     
-    // 暂时不再使用。最初是selffight模式下队员要求不重复的队员指定模式
+    // 暂时不再使用。最初是SelfFight模式下队员要求不重复的队员指定模式
     public OneSet GetPosMemInfoByLocalID(string localID)
     {
         if (PosNumsWithLocalKeys == null)

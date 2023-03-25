@@ -120,6 +120,8 @@ public class ArenaLayer : UILayer
         {
             Destroy(c.gameObject);
         }
+        if (leaderboards == null)
+            return;
         var ordered = leaderboards.OrderBy(x=> x.PlayerLeaderboardEntry.Position).ToList();
         for (var index = 0; index < Mathf.Min(ordered.Count, maxOpponentCount); index++)
         {

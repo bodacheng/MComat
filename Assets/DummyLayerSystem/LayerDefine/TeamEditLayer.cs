@@ -26,6 +26,7 @@ public class TeamEditLayer : UILayer
     
     [Header("技能编辑按钮")]
     [SerializeField] Button skillEditButton;
+    [SerializeField] private ConfirmBtnColorSwapper skillEditBtnColorSwapper;
 
     [Header("指示")]
     [SerializeField] Text instruction;
@@ -53,7 +54,9 @@ public class TeamEditLayer : UILayer
 
     private void SetConfirmBtnActive()
     {
-        saveBtn.interactable = _teamLegal(_currentTeamMode);
+        bool legal = _teamLegal(_currentTeamMode);
+        skillEditBtnColorSwapper.ChangeColor(legal ? Color.green : new Color(1,1,1,0.5f));
+        saveBtn.interactable = legal;
     }
     
     /// <summary>
@@ -106,7 +109,7 @@ public class TeamEditLayer : UILayer
         {
             _focusingPos.Value = -1;
         }
-
+        
         SetConfirmBtnActive();
     }
     
@@ -130,7 +133,6 @@ public class TeamEditLayer : UILayer
     {
         _currentTeamMode = teamMode;
         SetTeamLegalCheck(teamLegal);
-
         _focusingPos.Subscribe((x) =>
         {
             var posInstanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(x);
