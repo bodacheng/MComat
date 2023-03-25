@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7007343582443700653}
   - component: {fileID: 1062223919313163292}
   m_Layer: 7
-  m_Name: d_hitbox
+  m_Name: dHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -34240,7 +34240,7 @@ GameObject:
   - component: {fileID: 3190601643245082458}
   - component: {fileID: 2222781182347252339}
   m_Layer: 7
-  m_Name: hit_ground
+  m_Name: hitGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

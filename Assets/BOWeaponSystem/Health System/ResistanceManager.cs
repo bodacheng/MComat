@@ -56,7 +56,7 @@ public class ResistanceManager : MonoBehaviour
                 {
                     data_Center.FightDataRef.Resistance.Value += 1;
                     data_Center._SkillCancelFlag.turn_on_flag();
-                    EffectsManager.GenerateEffect("break_free", 
+                    EffectsManager.GenerateEffect(CommonSetting.BreakFreeEffectCode, 
                         FightGlobalSetting.EffectPathDefine(), data_Center.geometryCenter.position, data_Center.geometryCenter.rotation, data_Center.geometryCenter).Forget();
                 };
                 UnityEngine.Events.UnityAction eventEnd = () =>

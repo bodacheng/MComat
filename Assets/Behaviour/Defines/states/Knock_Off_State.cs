@@ -80,7 +80,7 @@ namespace Soul
                     _quaV = Vector3.zero - gameObject.transform.position.normalized;
                     _quaV.y = 0;
                     if (_effectP.y > 1)
-                        EffectsManager.GenerateEffect("wallCrack", null, _effectP, Quaternion.LookRotation(_quaV, Vector3.up), null).Forget();
+                        EffectsManager.GenerateEffect(CommonSetting.WallCrackEffectCode, null, _effectP, Quaternion.LookRotation(_quaV, Vector3.up), null).Forget();
                 }
             }
             
@@ -102,7 +102,7 @@ namespace Soul
                     _BasicPhysicSupport.SetUsingGravity(true);
                     _effectP = gameObject.transform.position;
                     _effectP.y = 0;
-                    EffectsManager.GenerateEffect("hit_ground", null, _effectP, Quaternion.LookRotation(Vector3.right), null).Forget();
+                    EffectsManager.GenerateEffect(CommonSetting.HitGroundEffectCode, null, _effectP, Quaternion.LookRotation(Vector3.right), null).Forget();
                     _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                     FlyingStep = 2;
                     break;

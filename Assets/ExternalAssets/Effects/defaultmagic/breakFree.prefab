@@ -19573,7 +19573,7 @@ GameObject:
   - component: {fileID: 5921986521243377298}
   - component: {fileID: 4613661621923699131}
   m_Layer: 7
-  m_Name: break_free
+  m_Name: breakFree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

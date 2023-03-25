@@ -7,10 +7,10 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public static class HurtObjectManager
 {
-    static DecompositionPool default_hitBoxPool;
+    static DecompositionPool _defaultHitBoxPool;
     static readonly IDictionary<string, DecompositionPool> HurtPoolDic = new Dictionary<string, DecompositionPool>();
     static AsyncOperationHandle<GameObject> _handle;
-    static readonly List<string> keyExists = new List<string>();
+    static readonly List<string> KeyExists = new List<string>();
     public static async UniTask CheckExistedKey()
     {
         var locationHandle = Addressables.LoadResourceLocationsAsync("weapon");
@@ -19,9 +19,9 @@ public static class HurtObjectManager
         {
             foreach (var weapon in locationHandle.Result)
             {
-                if (!keyExists.Contains(weapon.PrimaryKey))
+                if (!KeyExists.Contains(weapon.PrimaryKey))
                 {
-                    keyExists.Add(weapon.PrimaryKey);
+                    KeyExists.Add(weapon.PrimaryKey);
                 }
             }
         }
@@ -34,7 +34,7 @@ public static class HurtObjectManager
 
     static UniTask<GameObject> TryLoadWeaponPrefab(string key)
     {
-        if (!keyExists.Contains(key))
+        if (!KeyExists.Contains(key))
         {
             return default;
         }
@@ -47,7 +47,7 @@ public static class HurtObjectManager
     
     public static DecompositionPool GetDPool()
     {
-        return default_hitBoxPool;
+        return _defaultHitBoxPool;
     }
     
     public static void Clear()
@@ -62,35 +62,35 @@ public static class HurtObjectManager
     // 默认攻击物件池的创建
     public static async UniTask ConstructDPool()
     {
-        default_hitBoxPool?.Clear();
-        var resultObject = await AddressablesLogic.LoadT<GameObject>(FightGlobalSetting.EffectPathDefine(Element.Null) + "/d_hitbox.prefab");
+        _defaultHitBoxPool?.Clear();
+        var resultObject = await AddressablesLogic.LoadT<GameObject>(FightGlobalSetting.EffectPathDefine() + "/dHitBox.prefab");
         if (resultObject == null)
         {
             return;
         }
         
-        default_hitBoxPool = new DecompositionPool(resultObject);
-        default_hitBoxPool.PreloadAsync(20, 1).Subscribe(_ => Debug.Log("已经为对象池:d_hitbox预留物件"));
+        _defaultHitBoxPool = new DecompositionPool(resultObject);
+        _defaultHitBoxPool.PreloadAsync(20, 1);
     }
     
-    public static async UniTask ConstructHurtObjectPool(string resource_name, Element element)
+    public static async UniTask ConstructHurtObjectPool(string resourceName, Element element)
     {
         DecompositionPool poolToConstruct;
         GameObject weaponPrefab = null;
         
         ///////////////第二环节 ： 搜索属性魔法//////////////////
         string basicMagicForwardPath = FightGlobalSetting.EffectPathDefine(element);
-        if (HurtPoolDic.ContainsKey(basicMagicForwardPath + "/" + resource_name))
+        if (HurtPoolDic.ContainsKey(basicMagicForwardPath + "/" + resourceName))
         {
-            HurtPoolDic.TryGetValue(basicMagicForwardPath + "/" + resource_name, out poolToConstruct);
+            HurtPoolDic.TryGetValue(basicMagicForwardPath + "/" + resourceName, out poolToConstruct);
             if (poolToConstruct != null)
                 return;
         }
         
-        weaponPrefab = await TryLoadWeaponPrefab(basicMagicForwardPath + "/" + resource_name + ".prefab");
+        weaponPrefab = await TryLoadWeaponPrefab(basicMagicForwardPath + "/" + resourceName + ".prefab");
         if (weaponPrefab != null)
         {
-            poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resource_name,FightGlobalSetting._HurtObjectPreLoadCount);
+            poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resourceName,FightGlobalSetting._HurtObjectPreLoadCount);
             
             var decomposition = weaponPrefab.GetComponent<Decomposition>();
             if (decomposition != null)
@@ -103,7 +103,7 @@ public static class HurtObjectManager
                     }
                 }
             }else{
-                Debug.Log(resource_name + "没有Decompositioner！？");
+                Debug.Log(resourceName + "没有Decompositioner！？");
             }
             return;
         }
@@ -112,19 +112,19 @@ public static class HurtObjectManager
         if (basicMagicForwardPath != FightGlobalSetting.EffectPathDefine())
         {
             basicMagicForwardPath = FightGlobalSetting.EffectPathDefine();
-            if (HurtPoolDic.ContainsKey(basicMagicForwardPath + "/" + resource_name))
+            if (HurtPoolDic.ContainsKey(basicMagicForwardPath + "/" + resourceName))
             {
-                HurtPoolDic.TryGetValue(basicMagicForwardPath + "/" + resource_name, out poolToConstruct);
+                HurtPoolDic.TryGetValue(basicMagicForwardPath + "/" + resourceName, out poolToConstruct);
                 if (poolToConstruct != null)
                 {
                     return;
                 }
             }
             
-            weaponPrefab = await TryLoadWeaponPrefab(basicMagicForwardPath + "/" + resource_name + ".prefab");
+            weaponPrefab = await TryLoadWeaponPrefab(basicMagicForwardPath + "/" + resourceName + ".prefab");
             if (weaponPrefab != null)
             {
-                poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resource_name,FightGlobalSetting._HurtObjectPreLoadCount);
+                poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resourceName,FightGlobalSetting._HurtObjectPreLoadCount);
                 
                 var d = weaponPrefab.GetComponent<Decomposition>();
                 if (d != null)
@@ -137,7 +137,7 @@ public static class HurtObjectManager
                         }
                     }
                 }else{
-                    Debug.Log(resource_name + "没有Decompositioner！？");
+                    Debug.Log(resourceName + "没有Decompositioner！？");
                 }
             }
         }

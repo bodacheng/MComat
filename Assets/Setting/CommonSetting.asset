@@ -26,3 +26,7 @@ MonoBehaviour:
   lobbyThemeAddressKey: music/lobby
   fightThemeAddressKey1: music/fight1
   fightThemeAddressKey2: music/fight2
+  hitGroundEffectCode: hitGround
+  wallCrackEffectCode: wallCrack
+  breakFreeEffectCode: breakFree
+  memberShiftEffectCode: memberShift

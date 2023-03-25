@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // 本模块定义的所有关键词只在运行模式下有效
@@ -32,6 +33,12 @@ public class CommonSetting : ScriptableObject
     [SerializeField] string fightThemeAddressKey1 = "music/fight1";
     [SerializeField] string fightThemeAddressKey2 = "music/fight2";
 
+    [Tooltip("essential effects")] 
+    [SerializeField] private string hitGroundEffectCode = "hitGround";
+    [SerializeField] private string wallCrackEffectCode = "wallCrack";
+    [SerializeField] private string breakFreeEffectCode = "breakFree";
+    [SerializeField] private string memberShiftEffectCode = "memberShift";
+    
     public static bool DevMode;
     public static int MaxStoneCount;
     public static string UnitConfigFile;
@@ -47,7 +54,12 @@ public class CommonSetting : ScriptableObject
     public static string LobbyThemeAddressKey;
     public static string FightThemeAddressKey1;
     public static string FightThemeAddressKey2;
-
+    
+    public static string HitGroundEffectCode;
+    public static string WallCrackEffectCode;
+    public static string BreakFreeEffectCode;
+    public static string MemberShiftEffectCode;
+    
     public void Initialise()
     {
         DevMode = devMode;
@@ -65,5 +77,10 @@ public class CommonSetting : ScriptableObject
         StartThemeAddressKey = startThemeAddressKey;
         FightThemeAddressKey1 = fightThemeAddressKey1;
         FightThemeAddressKey2 = fightThemeAddressKey2;
+        
+        HitGroundEffectCode = hitGroundEffectCode;
+        WallCrackEffectCode = wallCrackEffectCode;
+        BreakFreeEffectCode = breakFreeEffectCode;
+        MemberShiftEffectCode = memberShiftEffectCode;
     }
 }
