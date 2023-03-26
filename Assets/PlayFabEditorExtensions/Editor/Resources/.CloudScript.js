@@ -722,7 +722,7 @@ handlers.RankClear = function (args, context) {
         return { arenapoint : arenapoint };
     }
     
-    let targetPoint = Math.floor(arenapoint / 2);
+    let targetPoint = Math.floor(clamp(arenapoint * 0.3, arenapoint * 0.3, 90));
     
     server.UpdatePlayerStatistics({
         PlayFabId: currentPlayerId,
