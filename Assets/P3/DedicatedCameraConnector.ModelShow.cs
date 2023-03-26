@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using Singleton;
 using UnityEngine;
 using UnityEngine.UI;
@@ -103,6 +106,9 @@ namespace ModelView
         
         public async UniTask SkillShowRunWithPrepare(string skillName)
         {
+            if (_ifShowingSkill)
+                return;
+            
             var unitConfig = Units.GetUnitConfig(_focusRId);
             if (unitConfig == null)
                 return;
@@ -114,7 +120,8 @@ namespace ModelView
                 _focusingC.Animation_Manger.AnimationTrigger(skillName, true, 0.05f);
             }
         }
-        
+
+        private TweenerCore<Vector3, Vector3, VectorOptions> resetModelPosTween;
         void SkillsPrintOutLateUpdate()
         {
             if (_focusingC != null && _focusingC.Animation_Manger != null && _focusingC.WholeT.gameObject.activeSelf)
@@ -124,6 +131,7 @@ namespace ModelView
                 {
                     _focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.05f);
                     _ifShowingSkill = false;
+                    resetModelPosTween = _focusingC.WholeT.transform.DOMove(modelPos, 1);
                 }
             }
         }

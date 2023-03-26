@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using DG.Tweening;
 using mainMenu;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ namespace ModelView
         
         public void Clear()
         {
+            if (resetModelPosTween != null)
+                resetModelPosTween.Kill();
             DestroyImmediate(camera.gameObject);
             if (target != null)
                 DestroyImmediate(target.gameObject);
