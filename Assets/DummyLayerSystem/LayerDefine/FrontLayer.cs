@@ -19,7 +19,15 @@ public class FrontLayer : UILayer
     public void Initialise(PreScene pre)
     {
         ArcadeBtn.onClick.AddListener(()=> pre.trySwitchToStep(MainSceneStep.ArcadeFront));
-        ArenaBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.Arena));
+        ArenaBtn.onClick.AddListener(() =>
+        {
+            if (PlayerAccountInfo.Me.arcadeProcess >= 5)
+                pre.trySwitchToStep(MainSceneStep.Arena);
+            else
+            {
+                PopupLayer.ArrangeWarnWindow(Translate.Get("PlsClearStage5"));
+            }
+        });
         MemberBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.UnitList));
         TrainBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SelfFightFront));
         StonesBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SkillStoneList));
