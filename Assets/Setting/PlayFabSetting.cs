@@ -1,22 +1,22 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayfabSetting", menuName = "ScriptableObjects/PlayfabSetting", order = 2)]
+[CreateAssetMenu(fileName = "PlayFabSetting", menuName = "ScriptableObjects/PlayFabSetting", order = 2)]
 
-public class PlayfabSetting : ScriptableObject
+public class PlayFabSetting : ScriptableObject
 {
-    public string UnitCatalog;
-    public string StoneCatalog;
-    public string MailCatalog;
-    public int VersionMaxStoneLevel;
-    public string GoldCode;
-    public string DiamondCode;
-    public string ArenaTicketCode;
-    public string AdTicketCode;
-    public string GDGotchaCode;
-    public string DMGotchaCode;
-    public int adTicketRewardDM;
-    public int adFightRewardDM;
-    public string arenaPointCode = "arenapoint";
+    [SerializeField] string UnitCatalog;
+    [SerializeField] string StoneCatalog;
+    [SerializeField] string MailCatalog;
+    [SerializeField] int VersionMaxStoneLevel;
+    [SerializeField] string GoldCode;
+    [SerializeField] string DiamondCode;
+    [SerializeField] string ArenaTicketCode;
+    [SerializeField] string AdTicketCode;
+    [SerializeField] string GDGotchaCode;
+    [SerializeField] string DMGotchaCode;
+    [SerializeField] int adTicketRewardDM;
+    [SerializeField] int adFightRewardDM;//指的是关卡战斗结束后观看广告获取的报酬，关卡号码是5的倍数的情况下是它2倍。
+    [SerializeField] string arenaPointCode = "arenapoint";
     
     public static string _UnitCatalog;
     public static string _StoneCatalog;

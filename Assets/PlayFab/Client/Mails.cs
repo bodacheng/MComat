@@ -33,7 +33,7 @@ public partial class PlayFabReadClient
         PlayFabClientAPI.GetCatalogItems(
             new GetCatalogItemsRequest
             {
-                CatalogVersion = PlayfabSetting._MailCatalog
+                CatalogVersion = PlayFabSetting._MailCatalog
             },
             (x)=>
             {
@@ -134,7 +134,7 @@ public partial class PlayFabReadClient
         PlayFabClientAPI.UnlockContainerItem(
             new UnlockContainerItemRequest
             {
-                CatalogVersion = PlayfabSetting._MailCatalog,
+                CatalogVersion = PlayFabSetting._MailCatalog,
                 ContainerItemId = itemId
             },
             resultCallback => {
@@ -143,13 +143,13 @@ public partial class PlayFabReadClient
 
                 foreach (var kv in resultCallback.VirtualCurrency)
                 {
-                    if (kv.Key == PlayfabSetting._GoldCode)
+                    if (kv.Key == PlayFabSetting._GoldCode)
                     {
                         Debug.Log("get gold:"+ kv.Value);
                         Currencies.CoinCount.Value += (int)kv.Value;
                         
                     }
-                    if (kv.Key == PlayfabSetting._DiamondCode)
+                    if (kv.Key == PlayFabSetting._DiamondCode)
                     {
                         Debug.Log("get diamond:"+ kv.Value);
                         Currencies.DiamondCount.Value += (int)kv.Value;

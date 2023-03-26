@@ -150,8 +150,8 @@ public partial class CloudScript
                 int.TryParse(currentPoint, out var currentPointInt);
 
                 var awardDM = 0;
-                var oldRank = PlayfabSetting.ArenaPointToRank(PlayerAccountInfo.Me.arenaPoint);
-                var newRank =  PlayfabSetting.ArenaPointToRank(currentPointInt);
+                var oldRank = PlayFabSetting.ArenaPointToRank(PlayerAccountInfo.Me.arenaPoint);
+                var newRank =  PlayFabSetting.ArenaPointToRank(currentPointInt);
                 if (newRank > oldRank)
                 {
                     switch (newRank)

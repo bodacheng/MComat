@@ -39,8 +39,7 @@ public class ArenaLayer : UILayer
     private Action<FightInfo> tryBeginStage;
     private int maxOpponentCount = 3;
     
-    public void SetUp(Action loadData, Action openRanking, 
-        Func<PlayerLeaderboardEntry, PlayerLeaderboardEntry, int> plusCal, Action<FightInfo> tryBeginStage)
+    public void SetUp(Action loadData, Action openRanking, Func<PlayerLeaderboardEntry, PlayerLeaderboardEntry, int> plusCal, Action<FightInfo> tryBeginStage)
     {
         refreshBtn.onClick.RemoveAllListeners();
         refreshBtn.onClick.AddListener(()=>

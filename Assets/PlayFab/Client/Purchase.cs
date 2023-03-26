@@ -13,10 +13,10 @@ public partial class PlayFabReadClient
             PlayFabClientAPI.PurchaseItem(
                 new PlayFab.ClientModels.PurchaseItemRequest()
                 {
-                    CatalogVersion = PlayfabSetting._StoneCatalog,
+                    CatalogVersion = PlayFabSetting._StoneCatalog,
                     ItemId = targetStoneConfig.RECORD_ID,
                     StoreId = "stone",
-                    VirtualCurrency = PlayfabSetting._GoldCode,
+                    VirtualCurrency = PlayFabSetting._GoldCode,
                     Price = 0
                 }, result =>
                 {

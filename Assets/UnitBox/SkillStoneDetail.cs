@@ -108,7 +108,7 @@ namespace mainMenu
             {
                 HP.text = "HP = " + FightGlobalSetting.StoneHpCal(hp, currentStone.Level);
             }
-            stoneTargetLevel.text = "LV:" + (currentStone.Level == PlayfabSetting._VersionMaxStoneLevel ? "MAX" : currentStone.Level.ToString());
+            stoneTargetLevel.text = "LV:" + (currentStone.Level == PlayFabSetting._VersionMaxStoneLevel ? "MAX" : currentStone.Level.ToString());
             skillIntro.text = SkillNameTable.GetSkillIntro(skillConfig.RECORD_ID);
         }
         

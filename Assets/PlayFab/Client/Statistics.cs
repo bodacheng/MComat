@@ -25,7 +25,7 @@ public partial class PlayFabReadClient
     {
         foreach (StatisticValue value in result.Statistics)
         {
-            if (value.StatisticName == PlayfabSetting._arenaPointCode)
+            if (value.StatisticName == PlayFabSetting._arenaPointCode)
             {
                 PlayerAccountInfo.Me.arenaPoint = value.Value;
             }

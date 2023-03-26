@@ -682,11 +682,11 @@ handlers.ArenaPointUp = function (args, context) {
     let plusPoint = 0;
     if (opponentPosition - mePosition >= 50)
     {
-        plusPoint = clamp(opponentPoint - mePoint, 10, 20);
+        plusPoint = clamp(opponentPoint - mePoint, 20, 30);
     }
     else
     {
-        plusPoint = clamp(opponentPoint - mePoint, 5, 10);
+        plusPoint = clamp(opponentPoint - mePoint, 10, 20);
     }
     
     let shouldPoint = mePoint + plusPoint;

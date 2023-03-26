@@ -52,7 +52,7 @@ namespace dataAccess
             if (targetData == null)
                 return false;
 
-            if (targetData.Level >= PlayfabSetting._VersionMaxStoneLevel)
+            if (targetData.Level >= PlayFabSetting._VersionMaxStoneLevel)
             {
                 return false;
             }

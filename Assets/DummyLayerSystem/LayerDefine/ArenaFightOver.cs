@@ -164,7 +164,7 @@ public class ArenaFightOver : UILayer
         ).OnUpdate(
             ()=>
             {
-                if (PlayfabSetting.ArenaPointToRank(arenaPointValue) > PlayfabSetting.ArenaPointToRank(oldPoint))
+                if (PlayFabSetting.ArenaPointToRank(arenaPointValue) > PlayFabSetting.ArenaPointToRank(oldPoint))
                 {
                     oldPoint = arenaPointValue;
                     arenaRankIcon.Set(arenaPointValue);

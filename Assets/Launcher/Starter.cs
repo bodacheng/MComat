@@ -24,7 +24,7 @@ public class StarterGUI : Editor
 [ExecuteInEditMode]
 public class Starter : MonoBehaviour
 {
-    [SerializeField] PlayfabSetting playFabSetting;
+    [SerializeField] PlayFabSetting playFabSetting;
     [SerializeField] FightGlobalSetting fightGlobalSetting;
     [SerializeField] CommonSetting commonSetting;
     [SerializeField] DefaultIconSetting defaultIconSetting;

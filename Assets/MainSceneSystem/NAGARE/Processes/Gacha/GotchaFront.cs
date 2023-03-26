@@ -46,12 +46,12 @@ public class GotchaFront : MSceneProcess
             var dropTable = dropTables[i];
             if (_startIndex == i)
             {
-                if (dropTable.ItemId == PlayfabSetting._GDGotchaCode)
+                if (dropTable.ItemId == PlayFabSetting._GDGotchaCode)
                 {
                     StarsFall.target.TriggerHoleEffect(StarsFall.GachaType.normal);
                 }
 
-                if (dropTable.ItemId == PlayfabSetting._DMGotchaCode)
+                if (dropTable.ItemId == PlayFabSetting._DMGotchaCode)
                 {
                     StarsFall.target.TriggerHoleEffect(StarsFall.GachaType.super);
                 }

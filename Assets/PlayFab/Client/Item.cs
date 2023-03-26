@@ -34,7 +34,7 @@ public partial class PlayFabReadClient
         foreach (var item in result.Inventory)
         {
             //Debug.Log(item.CatalogVersion + ":" + item.ItemId);
-            if (item.CatalogVersion == PlayfabSetting._UnitCatalog)
+            if (item.CatalogVersion == PlayFabSetting._UnitCatalog)
             {
                 var info = new UnitInfo
                 {
@@ -43,7 +43,7 @@ public partial class PlayFabReadClient
                 };
                 DicAdd<string, UnitInfo>.Add(dataAccess.Units.Dic, item.ItemInstanceId, info);
             }
-            else if (item.CatalogVersion == PlayfabSetting._StoneCatalog)
+            else if (item.CatalogVersion == PlayFabSetting._StoneCatalog)
             {
                 if (SkillConfigTable.GetSkillConfig(item.ItemId) != null)
                 {
@@ -63,7 +63,7 @@ public partial class PlayFabReadClient
                     // 可能是stone类型的bundle等等
                 }
             }
-            else if (item.CatalogVersion == PlayfabSetting._MailCatalog)
+            else if (item.CatalogVersion == PlayFabSetting._MailCatalog)
             {
                 var mailData = new MailItemInstance();
                 Copier<ItemInstance,MailItemInstance>.Copy(item, mailData);
@@ -76,19 +76,19 @@ public partial class PlayFabReadClient
         
         foreach (var kv in result.VirtualCurrency)
         {
-            if (kv.Key == PlayfabSetting._GoldCode)
+            if (kv.Key == PlayFabSetting._GoldCode)
             {
                 Currencies.CoinCount.Value = kv.Value;
             }
-            else if (kv.Key == PlayfabSetting._DiamondCode)
+            else if (kv.Key == PlayFabSetting._DiamondCode)
             {
                 Currencies.DiamondCount.Value = kv.Value;
             }
-            else if (kv.Key == PlayfabSetting._ArenaTicketCode)
+            else if (kv.Key == PlayFabSetting._ArenaTicketCode)
             {
                 Currencies.ArenaTicket.Value = kv.Value;
             }
-            else if (kv.Key == PlayfabSetting._AdTicketCode)
+            else if (kv.Key == PlayFabSetting._AdTicketCode)
             {
                 Currencies.AdTicket.Value = kv.Value;
             }
@@ -96,12 +96,12 @@ public partial class PlayFabReadClient
 
         foreach (var kv in result.VirtualCurrencyRechargeTimes)
         {
-            if (kv.Key == PlayfabSetting._ArenaTicketCode)
+            if (kv.Key == PlayFabSetting._ArenaTicketCode)
             {
                 Currencies.SecondsToRechargeArenaTicket = kv.Value.SecondsToRecharge;
                 Currencies.ArenaTicketRechargeMax = kv.Value.RechargeMax;
             }
-            if (kv.Key == PlayfabSetting._AdTicketCode)
+            if (kv.Key == PlayFabSetting._AdTicketCode)
             {
                 Currencies.SecondsToRechargeAdTicket = kv.Value.SecondsToRecharge;
                 Currencies.AdTicketRechargeMax = kv.Value.RechargeMax;

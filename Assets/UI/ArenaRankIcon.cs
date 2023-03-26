@@ -9,7 +9,7 @@ public class ArenaRankIcon : MonoBehaviour
     
     public void Set(int point)
     {
-        var rank = PlayfabSetting.ArenaPointToRank(point);
+        var rank = PlayFabSetting.ArenaPointToRank(point);
         _image.sprite = rankIcons[rank];
     }
     

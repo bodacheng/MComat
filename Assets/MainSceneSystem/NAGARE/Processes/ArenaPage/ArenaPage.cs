@@ -26,7 +26,7 @@ public partial class ArenaPage : MSceneProcess
     
     void CheckSeasonRankAndEnter(Action onClickRankResetLayer)
     {
-        int lastSeasonPoint = PlayerPrefs.GetInt(PlayfabSetting._arenaPointCode, -1);
+        int lastSeasonPoint = PlayerPrefs.GetInt(PlayFabSetting._arenaPointCode, -1);
         if (lastSeasonPoint > PlayerAccountInfo.Me.arenaPoint)
         {
             var arenaNewSeason = UILayerLoader.Load<ArenaNewSeason>();
@@ -39,9 +39,9 @@ public partial class ArenaPage : MSceneProcess
                     onClickRankResetLayer.Invoke();
                 }
             );
-            PlayerPrefs.SetInt(PlayfabSetting._arenaPointCode, PlayerAccountInfo.Me.arenaPoint);
+            PlayerPrefs.SetInt(PlayFabSetting._arenaPointCode, PlayerAccountInfo.Me.arenaPoint);
         }
-        PlayerPrefs.SetInt(PlayfabSetting._arenaPointCode, PlayerAccountInfo.Me.arenaPoint);
+        PlayerPrefs.SetInt(PlayFabSetting._arenaPointCode, PlayerAccountInfo.Me.arenaPoint);
         onClickRankResetLayer.Invoke();
     }
     
@@ -110,15 +110,16 @@ public partial class ArenaPage : MSceneProcess
         UILayerLoader.Remove<ArenaLayer>();
     }
     
+    // 以下数值设置的与CloudScript.ArenaPointUp一致
     int PlusPoint(PlayerLeaderboardEntry myInfo, PlayerLeaderboardEntry opponentInfo)
     {
         if (opponentInfo.Position - myInfo.Position >= 50)
         {
-            return Mathf.Clamp(opponentInfo.StatValue - myInfo.StatValue, 10, 20);
+            return Mathf.Clamp(opponentInfo.StatValue - myInfo.StatValue, 20, 30);
         }
         else
         {
-            return Mathf.Clamp(opponentInfo.StatValue - myInfo.StatValue, 5, 10);
+            return Mathf.Clamp(opponentInfo.StatValue - myInfo.StatValue, 10, 20);
         }
     }
 }
