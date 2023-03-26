@@ -3,99 +3,99 @@ using UniRx;
 
 public class HitBoxSubEventManger : MonoBehaviour
 {
-    public Decomposition decomposition;
-    public EventAndTriggerTime _event;
-    public string LandedEvent;
-    public string fadeEvent;
-    float time_count;
+    [SerializeField] Decomposition decomposition;
+    [SerializeField] EventAndTriggerTime _event;
+    [SerializeField] string LandedEvent;
+    [SerializeField] string fadeEvent;
     
-    SingleAssignmentDisposable clockEvent, landEvent, fadedEvent;
+    float _timeCount;
+    SingleAssignmentDisposable _clockEvent, _landEvent, _fadedEvent;
+
+    void DisposeEvents()
+    {
+        if (_clockEvent != null && !_clockEvent.IsDisposed)
+            _clockEvent.Dispose();
+        if (_landEvent != null && !_landEvent.IsDisposed)
+            _landEvent.Dispose();
+        if (_fadedEvent != null && !_fadedEvent.IsDisposed)
+            _fadedEvent.Dispose();
+    }
     
     void OnDestroy()
     {
-        if (clockEvent != null && !clockEvent.IsDisposed)
-            clockEvent.Dispose();
-        if (landEvent != null && !landEvent.IsDisposed)
-            landEvent.Dispose();
-        if (fadedEvent != null && !fadedEvent.IsDisposed)
-            fadedEvent.Dispose();
+        DisposeEvents();
     }
     
     void OnDisable()
     {
-        if (clockEvent != null && !clockEvent.IsDisposed)
-            clockEvent.Dispose();
-        if (landEvent != null && !landEvent.IsDisposed)
-            landEvent.Dispose();
-        if (fadedEvent != null && !fadedEvent.IsDisposed)
-            fadedEvent.Dispose();
+        DisposeEvents();
     }
 
     void OnEnable()
     {
-        time_count = 0;        
+        _timeCount = 0;        
         if (!string.IsNullOrEmpty(_event.event_name))
         {
-            clockEvent = new SingleAssignmentDisposable();
-            clockEvent.Disposable = Observable.EveryUpdate().Subscribe(_ =>
+            _clockEvent = new SingleAssignmentDisposable();
+            _clockEvent.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
-                    if (time_count > _event.time)
+                    if (_timeCount > _event.time)
                     {
                         decomposition.SpecialTriggerEvent(_event.event_name, this);
-                        clockEvent.Dispose();
+                        _clockEvent.Dispose();
                     }
                     if (!gameObject.activeSelf)
                     {
-                        clockEvent.Dispose();
+                        _clockEvent.Dispose();
                     }
                 }
             );
-            SingleAssignmentDisposableCleaner.Add(clockEvent);
+            SingleAssignmentDisposableCleaner.Add(_clockEvent);
         }
         
         if (!string.IsNullOrEmpty(LandedEvent))
         {
-            landEvent = new SingleAssignmentDisposable();
-            landEvent.Disposable = Observable.EveryUpdate().Subscribe(_ =>
+            _landEvent = new SingleAssignmentDisposable();
+            _landEvent.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
                     if (decomposition.transform.position.y <= 0)
                     {
                         decomposition.SpecialTriggerEvent(LandedEvent, this);
                         decomposition.Phase = -1;
-                        landEvent.Dispose();
+                        _landEvent.Dispose();
                     }
                     if (!gameObject.activeSelf)
                     {
-                        landEvent.Dispose();
+                        _landEvent.Dispose();
                     }
                 }
             );
-            SingleAssignmentDisposableCleaner.Add(landEvent);
+            SingleAssignmentDisposableCleaner.Add(_landEvent);
         }
         
         if (!string.IsNullOrEmpty(fadeEvent))
         {
-            fadedEvent = new SingleAssignmentDisposable();
-            fadedEvent.Disposable = Observable.EveryUpdate().Subscribe(_ =>
+            _fadedEvent = new SingleAssignmentDisposable();
+            _fadedEvent.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
                     if (decomposition._HitBox.weaponHP > 0 && decomposition._HitBox.CurrentHP <= 0)
                     {
                         decomposition.SpecialTriggerEvent(fadeEvent, this);
-                        fadedEvent.Dispose();
+                        _fadedEvent.Dispose();
                     }
                     if (!gameObject.activeSelf)
                     {
-                        fadedEvent.Dispose();
+                        _fadedEvent.Dispose();
                     }
                 }
             );
-            SingleAssignmentDisposableCleaner.Add(fadedEvent);
+            SingleAssignmentDisposableCleaner.Add(_fadedEvent);
         }
     }
     
     void Update()
     {
-        time_count += Time.deltaTime;
+        _timeCount += Time.deltaTime;
     }
     
     [System.Serializable]
