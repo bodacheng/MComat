@@ -632,6 +632,13 @@ function clampMin(value, min) {
         return value;
 }
 
+function clampMax(value, max) {
+    if (value > max) {
+        return max;
+    }else
+        return value;
+}
+
 handlers.GetLeaderboard = function (args, context) {
 
     var request = {
@@ -722,7 +729,7 @@ handlers.RankClear = function (args, context) {
         return { arenapoint : arenapoint };
     }
     
-    let targetPoint = Math.floor(clamp(arenapoint * 0.3, arenapoint * 0.3, 90));
+    let targetPoint = Math.floor(clampMax(arenapoint * 0.3, 90));
     
     server.UpdatePlayerStatistics({
         PlayFabId: currentPlayerId,
