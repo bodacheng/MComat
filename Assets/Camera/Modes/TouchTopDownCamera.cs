@@ -10,8 +10,8 @@ public class TouchTopDownCamera : CameraMode
 {
     readonly float height;
     readonly float battlefieldRadius;
-    Vector3 FirstPoint;
-    Vector3 SecondPoint;
+    Vector3 firstPoint;
+    Vector3 secondPoint;
     Sequence mainSequence;
     bool canTouch;
 
@@ -22,20 +22,20 @@ public class TouchTopDownCamera : CameraMode
     }
     
     Vector3 temp;
-    public override void Enter(Camera _camera)
+    public override void Enter(Camera camera)
     {
         mainSequence = DOTween.Sequence().OnStart(() =>
         {
             canTouch = false;
             sameHeightCenter = new Vector3(0,height,0);
-            temp = _camera.transform.forward;
+            temp = camera.transform.forward;
             temp.y = 0;
-        }).Append(_camera.transform.DOMoveY(height, 0.2f)).
-        Join(_camera.transform.DOLookAt(temp  - Vector3.up, 0.5f, AxisConstraint.None,Vector3.up)).AppendCallback(() => { canTouch = true; });
+        }).Append(camera.transform.DOMoveY(height, 0.2f)).
+        Join(camera.transform.DOLookAt(temp  - Vector3.up, 0.5f, AxisConstraint.None,Vector3.up)).AppendCallback(() => { canTouch = true; });
         mainSequence.Play();        
     }
     
-    public override void LocalUpdate(Camera _camera)
+    public override void LocalUpdate(Camera camera)
     {
         if (!canTouch)
         {
@@ -43,26 +43,29 @@ public class TouchTopDownCamera : CameraMode
         }
         if (Input.GetMouseButtonDown(0))
         {
-            FirstPoint = Input.mousePosition;
+            firstPoint = Input.mousePosition;
         }
         if(Input.GetMouseButton(0))
         {
-            SecondPoint = Input.mousePosition;
-            CameraDrag(_camera,FirstPoint,SecondPoint);
+            secondPoint = Input.mousePosition;
+            CameraDrag(camera,firstPoint, secondPoint);
         }
     }
 
-    Vector3 c_foward;
+    Vector3 cForward;
     Vector3 sameHeightCenter;
-    void CameraDrag(Camera _camera, Vector3 _FirstPoint, Vector3 _SecondPoint)
+    void CameraDrag(Camera camera, Vector3 _firstPoint, Vector3 _secondPoint)
     {
-        _camera.transform.position += ((_FirstPoint.x - _SecondPoint.x) / Screen.width)  * _camera.transform.right;
-        c_foward = _camera.transform.forward;
-        c_foward.y = 0;
-        _camera.transform.position += ((_FirstPoint.y - _SecondPoint.y) / Screen.height) * c_foward;
-        if (Vector3.Distance(_camera.transform.position, (sameHeightCenter - c_foward * 11f)) > battlefieldRadius)
+        var transform = camera.transform;
+        var position = transform.position;
+        position += ((_firstPoint.x - _secondPoint.x) / Screen.width)  * transform.right;
+        cForward = transform.forward;
+        cForward.y = 0;
+        position += ((_firstPoint.y - _secondPoint.y) / Screen.height) * cForward;
+        transform.position = position;
+        if (Vector3.Distance(camera.transform.position, (sameHeightCenter - cForward * 11f)) > battlefieldRadius)
         {
-            _camera.transform.position = (_camera.transform.position - (sameHeightCenter - c_foward * 11f)).normalized * battlefieldRadius + (sameHeightCenter - c_foward * 11f);
+            camera.transform.position = (camera.transform.position - (sameHeightCenter - cForward * 11f)).normalized * battlefieldRadius + (sameHeightCenter - cForward * 11f);
         }
     }
 }

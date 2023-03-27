@@ -116,13 +116,13 @@ public class PreparingProcess : FSceneProcess
         
         RTFightManager.Target.team1.RMode_Unit.Subscribe(x =>
             {
-                RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam);
+                RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.TeamMode);
             }
         ).AddTo(RTFightManager.Target.Disposables);
         
         RTFightManager.Target.team2.RMode_Unit.Subscribe(x =>
             {
-                RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam);
+                RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.TeamMode);
             }
         ).AddTo(RTFightManager.Target.Disposables);
         

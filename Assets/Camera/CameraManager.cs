@@ -20,7 +20,7 @@ public class CameraManager : MonoBehaviour
         {C_Mode.WatchOver, new WatchOverCamera(7f, 5f)},
         {C_Mode.StartAndEnd, new StartToEndMode()},
         {C_Mode.RoundBoundary, new CenterSurroundCamera(25f, 10f)},
-        {C_Mode.TopDown, new TouchTopDownCamera(12f, 20f)},
+        {C_Mode.TopDown, new ChatGptFix2()},
         {C_Mode.ScreenSaver, new New2023(8.8f, 5f)}//new ScreenSaverC(8.8f, 8.8f)}
     };
     

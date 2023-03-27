@@ -68,13 +68,17 @@ namespace FightScene
         }
         
         // 战斗模式相机。根据选择队伍做相应调整。
-        public void CameraAdjustment(Team myTeam)
+        public void CameraAdjustment(Team myTeam, TeamMode teamMode)
         {
-            var c_Mode = C_Mode.CertainYAntiVibration;
+            var cMode = C_Mode.CertainYAntiVibration;
+            if (teamMode == TeamMode.Rotation)
+                cMode = C_Mode.CertainYAntiVibration;
+            else
+                cMode = C_Mode.TopDown;
             var ts = myTeam == Team.player1 ? team1.GetFightingUnitTs() : team2.GetFightingUnitTs();
             if (ts.Count > 0)
             {
-                _CameraManager.Assign_Camera(c_Mode, ts[0], myTeam == Team.player1  ? team2.GetFightingUnitTs() : team1.GetFightingUnitTs());
+                _CameraManager.Assign_Camera(cMode, ts[0], myTeam == Team.player1  ? team2.GetFightingUnitTs() : team1.GetFightingUnitTs());
             }
             else
             {
