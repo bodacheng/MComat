@@ -5,8 +5,8 @@ public static class PosCal
 {
     public static Canvas canvas;
     static CanvasScaler canvasScaler => canvas.GetComponent<CanvasScaler>();
-    private static float canvasWidth => canvas.GetComponent<RectTransform>().rect.width;
-    private static float canvasHeight => canvas.GetComponent<RectTransform>().rect.height;
+    public static float canvasWidth => canvas.GetComponent<RectTransform>().rect.width;
+    public static float canvasHeight => canvas.GetComponent<RectTransform>().rect.height;
 
     
     /// <summary>

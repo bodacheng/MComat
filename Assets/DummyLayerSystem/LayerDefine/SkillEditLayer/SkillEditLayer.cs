@@ -4,7 +4,6 @@ using mainMenu;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using ModelView;
-using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
 
 public partial class SkillEditLayer : UILayer
@@ -62,6 +61,12 @@ public partial class SkillEditLayer : UILayer
         SkillEditButtonFeature(PreScene.target.Focusing);
         toDo?.Invoke(this);
         gameObject.SetActive(true);
+        
+        // Unit View Size Calulate
+        var unitViewSize = (PosCal.canvasWidth - (880 + 600) - 50);
+        if (unitViewSize > PosCal.canvasHeight)
+            unitViewSize = PosCal.canvasHeight;
+        connector.GetComponent<RectTransform>().sizeDelta = new Vector2(unitViewSize,unitViewSize);
         Initialized = true;
     }
     
