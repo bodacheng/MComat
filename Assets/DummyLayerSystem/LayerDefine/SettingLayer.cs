@@ -246,12 +246,12 @@ public class SettingLayer : UILayer
         
         privacyBtn.onClick.AddListener(() =>
         {
-            Application.OpenURL("https://hotaru-4.jimdosite.com/");
+            Application.OpenURL("https://mugencombat.webnode.jp/purofiru/");
         });
         
         contactBtn.onClick.AddListener(() =>
         {
-            Application.OpenURL("https://hotaru-4.jimdosite.com/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/");
+            Application.OpenURL("https://mugencombat.webnode.jp/o-weni-hewase/");
         });
         accountBtn.onClick.Invoke();
     }
