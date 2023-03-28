@@ -9,21 +9,28 @@ using DG.Tweening;
 public class TouchTopDownCamera : CameraMode
 {
     readonly float height;
-    readonly float battlefieldRadius;
+    readonly float battlefieldDiameter;
     Vector3 firstPoint;
     Vector3 secondPoint;
+    private Vector3 pivotPoint;
     Sequence mainSequence;
+    private float moveSpeed = 0.1f;
     bool canTouch;
-
-    public TouchTopDownCamera(float height,float battlefieldRadius)
+    float groundHeight = 0f;
+    float rotationSpeed = 0.5f;
+    private bool isRotating = false;
+    private float zoomDis;
+    private float disAwayFromFront = 10f;
+    public TouchTopDownCamera(float height, float battlefieldDiameter)
     {
         this.height = height;
-        this.battlefieldRadius = battlefieldRadius;
+        this.battlefieldDiameter = battlefieldDiameter;
     }
     
-    Vector3 temp;
+    Vector3 sameHeightCenter;
     public override void Enter(Camera camera)
     {
+        Vector3 temp = Vector3.zero;
         mainSequence = DOTween.Sequence().OnStart(() =>
         {
             canTouch = false;
@@ -32,40 +39,159 @@ public class TouchTopDownCamera : CameraMode
             temp.y = 0;
         }).Append(camera.transform.DOMoveY(height, 0.2f)).
         Join(camera.transform.DOLookAt(temp  - Vector3.up, 0.5f, AxisConstraint.None,Vector3.up)).AppendCallback(() => { canTouch = true; });
-        mainSequence.Play();        
+        mainSequence.Play();
+        zoomDis = Screen.width * 0.3f;
     }
     
+    private Touch t1, t2;
+    private float backDist = 0.0f;
     public override void LocalUpdate(Camera camera)
     {
         if (!canTouch)
         {
             return;
         }
-        if (Input.GetMouseButtonDown(0))
+
+        var frontC = camera.transform.forward;
+        frontC.y = 0;
+        frontC = frontC.normalized;
+        sameHeightCenter = new Vector3(0, height, 0) - frontC * disAwayFromFront;
+        
+        if (Input.touchCount >= 2)
         {
-            firstPoint = Input.mousePosition;
+            // タッチしている２点を取得
+            t1 = Input.GetTouch (0);
+            t2 = Input.GetTouch (1);
+            
+            if (t2.phase == TouchPhase.Began)
+            {
+                //2点タッチ開始時の距離を記憶
+                backDist = Vector2.Distance (t1.position, t2.position);
+                firstPoint = t2.position;
+            }
+            else if ((t1.phase == TouchPhase.Moved || t2.phase == TouchPhase.Moved) && (t1.phase != TouchPhase.Ended && t2.phase != TouchPhase.Ended))
+            {
+                var afterDist = Vector2.Distance(t1.position, t2.position);
+                
+                if (Mathf.Abs(afterDist - backDist) > zoomDis)
+                {
+                    //zoom
+                }
+                else
+                {
+                    //move
+                    secondPoint = t2.position;
+                    CameraDrag(camera, firstPoint, secondPoint);
+                }
+            }
+            else if (t1.phase == TouchPhase.Ended || t2.phase == TouchPhase.Ended)
+            {
+                
+            }
         }
-        if(Input.GetMouseButton(0))
+        else if (Input.touchCount >= 1)
         {
-            secondPoint = Input.mousePosition;
-            CameraDrag(camera,firstPoint, secondPoint);
+            t1 = Input.GetTouch (0);
+            if (t1.phase == TouchPhase.Began) // 触摸开始
+            {
+                firstPoint = t1.position;
+                isRotating = true;
+            }
+            else if (t1.phase == TouchPhase.Moved && isRotating) // 触摸移动
+            {
+                CameraRotate(camera, firstPoint,t1.position);
+                firstPoint = t1.position;
+            }
+            else if (t1.phase == TouchPhase.Ended) // 触摸结束
+            {
+                isRotating = false;
+            }
+        }
+
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                firstPoint = Input.mousePosition;
+            }
+            if (Input.GetMouseButton(0))
+            {
+                secondPoint = Input.mousePosition;
+                CameraDrag(camera, firstPoint, secondPoint);
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                firstPoint = Input.mousePosition;
+                isRotating = true;
+            }
+            else if (Input.GetMouseButton(1) && isRotating) // 触摸移动
+            {
+                CameraRotate(camera, firstPoint,Input.mousePosition);
+                firstPoint = Input.mousePosition;
+            }
+            else if (Input.GetMouseButtonUp(1))
+            {
+                isRotating = false;
+            }
+        }
+        
+        if (Vector3.Distance(camera.transform.position, sameHeightCenter) > battlefieldDiameter / 2)
+        {
+            camera.transform.position = sameHeightCenter + (camera.transform.position - sameHeightCenter).normalized * battlefieldDiameter / 2;
         }
     }
-
-    Vector3 cForward;
-    Vector3 sameHeightCenter;
+    
+    void CameraRotate(Camera camera, Vector3 _firstPoint, Vector3 _secondPoint)
+    {
+        float deltaX = _secondPoint.x - _firstPoint.x;
+        float rotationAngle = deltaX * rotationSpeed;
+        Vector3 pivotPoint = GetCenterScreenGroundPoint(camera);
+        camera.transform.RotateAround(pivotPoint, Vector3.up, rotationAngle);
+    }
+    
     void CameraDrag(Camera camera, Vector3 _firstPoint, Vector3 _secondPoint)
     {
         var transform = camera.transform;
         var position = transform.position;
-        position += ((_firstPoint.x - _secondPoint.x) / Screen.width)  * transform.right;
-        cForward = transform.forward;
-        cForward.y = 0;
-        position += ((_firstPoint.y - _secondPoint.y) / Screen.height) * cForward;
+
+        var Right = transform.right;
+        var Front = transform.forward;
+        Front.y = 0;
+        Front = Front.normalized;
+        
+        var rightDirectionMove = moveSpeed * battlefieldDiameter * (-(_secondPoint.x - _firstPoint.x) / Screen.width)  * Right;
+        var forwardDirectionMove = moveSpeed * battlefieldDiameter * (-(_secondPoint.y - _firstPoint.y) / Screen.height)  * Front;
+
+        position = position + rightDirectionMove + forwardDirectionMove;
+        
         transform.position = position;
-        if (Vector3.Distance(camera.transform.position, (sameHeightCenter - cForward * 11f)) > battlefieldRadius)
-        {
-            camera.transform.position = (camera.transform.position - (sameHeightCenter - cForward * 11f)).normalized * battlefieldRadius + (sameHeightCenter - cForward * 11f);
-        }
+    }
+    
+    private Vector3 GetCenterScreenGroundPoint(Camera camera)
+    {
+        // 获取摄像机的位置和角度
+        Vector3 cameraPosition = camera.transform.position;
+        Vector3 cameraForward = camera.transform.forward;
+
+        // 计算摄像机到地面的高度差
+        float heightDifference = cameraPosition.y - groundHeight;
+
+        // 计算摄像机forward在xz平面的投影
+        Vector3 cameraForwardXZ = new Vector3(cameraForward.x, 0, cameraForward.z);
+
+        // 计算夹角theta
+        float theta = Vector3.Angle(cameraForward, cameraForwardXZ);
+        float thetaRad = Mathf.Deg2Rad * theta;
+
+        // 使用相似三角形计算距离
+        float distanceToGround = heightDifference / Mathf.Tan(thetaRad);
+
+        // 计算投射点的位置
+        Vector3 groundPoint = cameraPosition + cameraForwardXZ.normalized * distanceToGround;
+
+        return groundPoint;
     }
 }

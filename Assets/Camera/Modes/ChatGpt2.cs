@@ -2,8 +2,8 @@ using UnityEngine;
 
 class ChatGptFix2 : CameraMode
 {
-    public float radius =20; // 竞技场半径
-    public float height = 10; // 相机高度
+    public float radius = 20; // 竞技场半径
+    public float height = 8; // 相机高度
     public float angle = 45; // 俯视角度
     public float rotationSpeed =100 ; // 旋转速度
     public float panSpeed = 100; // 平移速度
