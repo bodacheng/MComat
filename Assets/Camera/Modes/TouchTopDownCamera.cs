@@ -12,9 +12,8 @@ public class TouchTopDownCamera : CameraMode
     readonly float battlefieldDiameter;
     Vector3 firstPoint;
     Vector3 secondPoint;
-    private Vector3 pivotPoint;
+    Vector3 startFromPointWhenDrag, offSet;
     Sequence mainSequence;
-    private float moveSpeed = 0.1f;
     bool canTouch;
     float groundHeight = 0f;
     float rotationSpeed = 0.5f;
@@ -68,6 +67,8 @@ public class TouchTopDownCamera : CameraMode
                 //2点タッチ開始時の距離を記憶
                 backDist = Vector2.Distance (t1.position, t2.position);
                 firstPoint = t2.position;
+                startFromPointWhenDrag = camera.transform.position;
+                offSet = Vector3.zero;
             }
             else if ((t1.phase == TouchPhase.Moved || t2.phase == TouchPhase.Moved) && (t1.phase != TouchPhase.Ended && t2.phase != TouchPhase.Ended))
             {
@@ -113,6 +114,8 @@ public class TouchTopDownCamera : CameraMode
             if (Input.GetMouseButtonDown(0))
             {
                 firstPoint = Input.mousePosition;
+                startFromPointWhenDrag = camera.transform.position;
+                offSet = Vector3.zero;
             }
             if (Input.GetMouseButton(0))
             {
@@ -155,18 +158,15 @@ public class TouchTopDownCamera : CameraMode
     void CameraDrag(Camera camera, Vector3 _firstPoint, Vector3 _secondPoint)
     {
         var transform = camera.transform;
-        var position = transform.position;
-
         var Right = transform.right;
         var Front = transform.forward;
         Front.y = 0;
         Front = Front.normalized;
         
-        var rightDirectionMove = moveSpeed * battlefieldDiameter * (-(_secondPoint.x - _firstPoint.x) / Screen.width)  * Right;
-        var forwardDirectionMove = moveSpeed * battlefieldDiameter * (-(_secondPoint.y - _firstPoint.y) / Screen.height)  * Front;
-
-        position = position + rightDirectionMove + forwardDirectionMove;
-        
+        var rightDirectionMove = battlefieldDiameter * (-(_secondPoint.x - _firstPoint.x) / Screen.width)  * Right;
+        var forwardDirectionMove = battlefieldDiameter * (-(_secondPoint.y - _firstPoint.y) / Screen.height)  * Front;
+        offSet = (rightDirectionMove + forwardDirectionMove);
+        var position = startFromPointWhenDrag + offSet;
         transform.position = position;
     }
     
