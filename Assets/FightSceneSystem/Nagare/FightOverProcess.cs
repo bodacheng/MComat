@@ -142,7 +142,7 @@ namespace FightScene
         async void SkillTestReload()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(3));
-            FightScene.Fight = FightInfo.RandomSkillTestStage(TeamMode.Rotation);
+            FightScene.Fight = FightInfo.RandomSkillTestStage(FightScene.Fight.team1Mode);
             LocalGameRestart();
         }
     }

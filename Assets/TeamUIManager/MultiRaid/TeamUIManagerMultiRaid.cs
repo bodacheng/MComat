@@ -14,7 +14,7 @@ namespace FightScene
         {
             foreach (var center in teamMembers.GetValues())
             {
-                // SideCharIcon整备
+                // SideIcon整备
                 void Action1(Data_Center c)
                 {
                     if (teamConfig.myTeam == RTFightManager.playerTeam)
@@ -23,37 +23,37 @@ namespace FightScene
                     }
                 }
                 
-                SideUnitIcon _SideIcon;
+                SideUnitIcon sideIcon;
                 if (!(UnitIconDic.ContainsKey(center) && UnitIconDic[center] != null))
                 {
-                    _SideIcon = Instantiate(button_prefab);
-                    _SideIcon.name = center.name + " ICon";
-                    _SideIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
-                    _SideIcon.focusingCharIcon.iconButton.onClick.AddListener(() =>
+                    sideIcon = Instantiate(button_prefab);
+                    sideIcon.name = center.name + " ICon";
+                    sideIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
+                    sideIcon.focusingCharIcon.iconButton.onClick.AddListener(() =>
                     {
                         Action1(center);
                     });
                     var unitInfo = RTFightManager.Target.UnitInfoRef[center];
-                    _SideIcon.focusingCharIcon.ChangeIcon(unitInfo);
-                    _SideIcon.gameObject.SetActive(true);
+                    sideIcon.focusingCharIcon.ChangeIcon(unitInfo);
+                    sideIcon.gameObject.SetActive(true);
                 }
                 else
                 {
-                    _SideIcon = UnitIconDic[center];
+                    sideIcon = UnitIconDic[center];
                 }
-                _SideIcon.focusingCharIcon.CooldownCurtainUpdate(0);
+                sideIcon.focusingCharIcon.CooldownCurtainUpdate(0);
                 
                 if (teamConfig.myTeam == RTFightManager.playerTeam)
                 {
-                    _SideIcon.transform.SetParent(sideIconsContainer.transform);
-                    _SideIcon.transform.localScale = Vector3.one;
+                    sideIcon.transform.SetParent(sideIconsContainer.transform);
+                    sideIcon.transform.localScale = Vector3.one;
                 }
                 else
                 {
-                    _SideIcon.transform.SetParent(_targetCanvasT.transform);
-                    _SideIcon.transform.localScale = Vector3.one;
+                    sideIcon.transform.SetParent(_targetCanvasT.transform);
+                    sideIcon.transform.localScale = Vector3.one;
                 }
-                DicAdd<Data_Center, SideUnitIcon>.Add(UnitIconDic, center, _SideIcon);
+                DicAdd<Data_Center, SideUnitIcon>.Add(UnitIconDic, center, sideIcon);
                 
                 var maxHp = center.FightDataRef.CurrentHp.Value;
                 center.FightDataRef.CurrentHp.Subscribe(x =>

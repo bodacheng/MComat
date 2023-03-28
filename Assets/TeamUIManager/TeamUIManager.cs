@@ -53,10 +53,11 @@ namespace FightScene
                             foreach (var _one in teamMembers.GetValues())
                             {
                                 UnitIconDic.TryGetValue(_one, out var _tempSI);
-                                _tempSI.transform.position = 
-                                    Vector3.Lerp(_tempSI.transform.position, CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 2.8f), Time.deltaTime * 30);
+                                if (_tempSI != null)
+                                    _tempSI.transform.DOMove(CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 2.5f), 0.5f);
                             }
                         }).AddTo(gameObject);
+                        Refresh();
                     }
                     break;
                 case TeamMode.Rotation:
