@@ -89,7 +89,7 @@ public class FightMembers
     {
         var type = "human";
         var unitIDsAndNames = Units.GetMonsterIDsAndNamesDic(type);
-        var indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 6);
+        var indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 12);
         var recordIds = unitIDsAndNames.Keys.ToList();
         var target = new FightMembers();
         var char1 = ArrangeUnitInfo(type, recordIds[indexes[0]]);
@@ -99,12 +99,26 @@ public class FightMembers
         var char5 = ArrangeUnitInfo(type, recordIds[indexes[4]]);
         var char6 = ArrangeUnitInfo(type, recordIds[indexes[5]]);
         
+        var char7 = ArrangeUnitInfo(type, recordIds[indexes[6]]);
+        var char8 = ArrangeUnitInfo(type, recordIds[indexes[7]]);
+        var char9 = ArrangeUnitInfo(type, recordIds[indexes[8]]);
+        var char10 = ArrangeUnitInfo(type, recordIds[indexes[9]]);
+        var char11 = ArrangeUnitInfo(type, recordIds[indexes[10]]);
+        var char12 = ArrangeUnitInfo(type, recordIds[indexes[11]]);
+
         target.EnemySets.Set(0, 0, char1);
         target.EnemySets.Set(0, 1, char2);
         target.EnemySets.Set(0, 2, char3);
+        target.EnemySets.Set(0, 3, char7);
+        target.EnemySets.Set(0, 4, char8);
+        target.EnemySets.Set(0, 5, char9);
+        
         target.HeroSets.Set(0, 0, char4);
         target.HeroSets.Set(0, 1, char5);
         target.HeroSets.Set(0, 2, char6);
+        target.HeroSets.Set(0, 3, char10);
+        target.HeroSets.Set(0, 4, char11);
+        target.HeroSets.Set(0, 5, char12);
         
         return target;
     }

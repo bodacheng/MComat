@@ -90,7 +90,8 @@ namespace FightScene
         void RefreshResistanceBar(Data_Center dataCenter, int value)
         {
             UnitIconDic.TryGetValue(dataCenter, out var tempSi);
-            tempSi.RefreshResistanceBar(value);
+            if (tempSi != null)
+                tempSi.RefreshResistanceBar(value);
         }
         void RefreshHPBar(Data_Center dataCenter, float current_hp, float wholeHP)
         {
