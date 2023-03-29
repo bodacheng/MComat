@@ -4,7 +4,7 @@ using DG.Tweening;
 
 public class SideUnitIcon : MonoBehaviour {
     
-    [SerializeField] Slider HpBar;
+    public Slider HpBar;
     [SerializeField] Text HpText;
     
     [Header("浮动抵抗")]

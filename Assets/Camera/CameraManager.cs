@@ -20,7 +20,7 @@ public class CameraManager : MonoBehaviour
         {C_Mode.WatchOver, new WatchOverCamera(7f, 5f)},
         {C_Mode.StartAndEnd, new StartToEndMode()},
         {C_Mode.RoundBoundary, new CenterSurroundCamera(25f, 10f)},
-        {C_Mode.TopDown, new TouchTopDownCamera(11f, 41f)},
+        {C_Mode.TopDown, new TouchTopDownCamera(10f, 41f)},
         {C_Mode.ScreenSaver, new New2023(8.8f, 5f)}//new ScreenSaverC(8.8f, 8.8f)}
     };
     
@@ -36,6 +36,16 @@ public class CameraManager : MonoBehaviour
         if (CurrentMode != null)
         {
             CurrentMode.LocalUpdate(_camera);
+        }
+    }
+    
+    public void SetCurrentCameraParams(Transform me, List<Transform> targets)
+    {
+        if (CurrentMode != null)
+        {
+            //有些相机模式的enter函数内处理需要根据targets来
+            CurrentMode.SetMeCenter(me);
+            CurrentMode.targets = targets;
         }
     }
     

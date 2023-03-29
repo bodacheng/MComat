@@ -14,12 +14,14 @@ namespace FightScene
         [SerializeField] RectTransform _targetCanvasT;
         [SerializeField] SideUnitIcon button_prefab;
         [SerializeField] Text hitCombo;
+        [SerializeField] AutoSwitch TeamAuto;
 
         public TeamMode teamMode;
         public TeamConfig teamConfig;
         public MultiDic<int, int, Data_Center> teamMembers;
         public readonly IDictionary<Data_Center, SideUnitIcon> UnitIconDic = new Dictionary<Data_Center, SideUnitIcon>();
         private IDisposable barPosUpdate;
+        private int barPosUpdateInterval = 3;
         
         public SideUnitIcon GetSideIcon(Data_Center d)
         {
@@ -40,15 +42,20 @@ namespace FightScene
             }
         }
         
-        public void InsTeamUI(Action<Data_Center> changeUnit, ReactiveProperty<Data_Center> RMode_Unit)
+        public void InsTeamUI(Action<Data_Center> changeUnit, Func<bool> currentAutoState, Action<bool> switchTeamAuto, ReactiveProperty<Data_Center> RMode_Unit)
         {
+            TeamAuto.Initialize(currentAutoState, switchTeamAuto);
+            if (teamConfig.myTeam != RTFightManager.playerTeam)
+            {
+                TeamAuto.gameObject.SetActive(CommonSetting.DevMode || FightScene.Fight.EventType == FightEventType.Self);
+            }
             switch (teamMode)
             {
                 case TeamMode.MultiRaid:
-                    InsTeamUI_Multi();
+                    InsTeamUI_Multi(switchTeamAuto, currentAutoState);
                     if (teamConfig.myTeam != RTFightManager.playerTeam)
                     {
-                        barPosUpdate = Observable.IntervalFrame(30).Subscribe(_ =>
+                        barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                         {
                             foreach (var _one in teamMembers.GetValues())
                             {
@@ -66,7 +73,7 @@ namespace FightScene
                     RMode_Unit.Subscribe(Refresh).AddTo(gameObject);
                     if (teamConfig.myTeam != RTFightManager.playerTeam)
                     {
-                        barPosUpdate = Observable.IntervalFrame(30).Subscribe(_ =>
+                        barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                             {
                                 if (teamConfig.myTeam != RTFightManager.playerTeam)
                                 {
@@ -122,8 +129,9 @@ namespace FightScene
                 }
                 else
                 {
-                    _tempSI.gameObject.SetActive(fighting == _dt);
+                    _tempSI.gameObject.SetActive(true);
                     _tempSI.focusingCharIcon.gameObject.SetActive(false);
+                    _tempSI.HpBar.gameObject.SetActive(true);
                     _tempSI.ExBar.gameObject.SetActive(false);
                     _tempSI.transform.SetParent(_targetCanvasT.transform);
                 }

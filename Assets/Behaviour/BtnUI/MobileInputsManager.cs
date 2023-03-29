@@ -24,6 +24,7 @@ public class MobileInputsManager : MonoBehaviour {
     [SerializeField] Button Fire2;
     [SerializeField] Button Defend;
     [SerializeField] Button Dash;
+    [SerializeField] UltimateJoystick _joystick;
     [SerializeField] Transform effectsParent;
     
     readonly IDictionary<Element, ElementEffectsGroup> ElementEffects = new Dictionary<Element, ElementEffectsGroup>();
@@ -31,22 +32,29 @@ public class MobileInputsManager : MonoBehaviour {
     
     public bool inputting = false;
     
-    private BehaviorRunner watch;
+    private Data_Center watch;
+    public Data_Center CurrentFocus => watch;
     
     public void FocusUnit(Data_Center center)
     {
         if (watch != null)
         {
-            watch.InputsManager = null;
+            watch._MyBehaviorRunner.InputsManager = null;
         }
         if (center != null)
         {
             center._MyBehaviorRunner.InputsManager = this;
-            watch = center._MyBehaviorRunner;
+            watch = center;
             SwitchElementEffects(center.element);
-            SuddenRefreshButtons(watch);
-        }else{
+            SuddenRefreshButtons(watch._MyBehaviorRunner);
+            _joystick.gameObject.SetActive(true);
             TurnOffButtons();
+        }
+        else
+        {
+            watch = null;
+            TurnOffButtons();
+            _joystick.gameObject.SetActive(false);
         }
     }
     

@@ -17,10 +17,6 @@ public class FightingStepLayer : UILayer
     [SerializeField] TeamUIManager team1UI;
     [SerializeField] TeamUIManager team2UI;
     
-    [Header("Auto Button")]
-    [SerializeField] AutoSwitch Team1Auto;
-    [SerializeField] AutoSwitch Team2Auto;
-
     [Header("Tutorial")]
     [SerializeField] ClickNextTutorial clickNextTutorial;
     
@@ -77,10 +73,6 @@ public class FightingStepLayer : UILayer
         
         pauseButton.onClick.AddListener(pauseAction.Invoke);
         
-        Team1Auto.Initialize((() => RTFightManager.Target.team1.Auto), switchTeam1Auto);
-        Team2Auto.Initialize((() => RTFightManager.Target.team2.Auto), switchTeam2Auto);
-        Team2Auto.gameObject.SetActive(CommonSetting.DevMode || FightScene.FightScene.Fight.EventType == FightEventType.Self);
-        
         team1UI.teamMode = FightScene.FightScene.Fight.team1Mode;
         team2UI.teamMode = FightScene.FightScene.Fight.team2Mode;
         
@@ -92,8 +84,8 @@ public class FightingStepLayer : UILayer
         team2UI.teamMembers = RTFightManager.Target.team2.teamMembers;
         
         // 角色第二次初始化在这之前已经结束
-        team1UI.InsTeamUI(RTFightManager.Target.team1.ReadyForNextMember, RTFightManager.Target.team1.RMode_Unit);
-        team2UI.InsTeamUI(RTFightManager.Target.team2.ReadyForNextMember, RTFightManager.Target.team2.RMode_Unit);
+        team1UI.InsTeamUI(RTFightManager.Target.team1.ReadyForNextMember, (() => RTFightManager.Target.team1.Auto),switchTeam1Auto, RTFightManager.Target.team1.RMode_Unit);
+        team2UI.InsTeamUI(RTFightManager.Target.team2.ReadyForNextMember, (() => RTFightManager.Target.team2.Auto),switchTeam2Auto, RTFightManager.Target.team2.RMode_Unit);
 
         foreach (var d in RTFightManager.Target.team1.teamMembers.GetValues())
         {

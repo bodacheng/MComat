@@ -12,14 +12,16 @@ public class TouchTopDownCamera : CameraMode
     readonly float battlefieldDiameter;
     Vector3 firstPoint;
     Vector3 secondPoint;
-    Vector3 startFromPointWhenDrag, offSet;
+    Vector3 startFromPointWhenDrag;
     Sequence mainSequence;
     bool canTouch;
     float groundHeight = 0f;
+    private float followTargetSpeed = 2f;
     float rotationSpeed = 0.5f;
     private bool isRotating = false;
-    private float zoomDis;
     private float disAwayFromFront = 10f;
+
+    
     public TouchTopDownCamera(float height, float battlefieldDiameter)
     {
         this.height = height;
@@ -39,10 +41,8 @@ public class TouchTopDownCamera : CameraMode
         }).Append(camera.transform.DOMoveY(height, 0.2f)).
         Join(camera.transform.DOLookAt(temp  - Vector3.up, 0.5f, AxisConstraint.None,Vector3.up)).AppendCallback(() => { canTouch = true; });
         mainSequence.Play();
-        zoomDis = Screen.width * 0.3f;
     }
     
-    private Touch t1, t2;
     private float backDist = 0.0f;
     public override void LocalUpdate(Camera camera)
     {
@@ -50,49 +50,43 @@ public class TouchTopDownCamera : CameraMode
         {
             return;
         }
+        
+        var RotateCameraH = UltimateJoystick.GetHorizontalAxis("RotateCamera");
+        var RotateCameraV = UltimateJoystick.GetHorizontalAxis("RotateCamera");
 
-        var frontC = camera.transform.forward;
-        frontC.y = 0;
-        frontC = frontC.normalized;
-        sameHeightCenter = new Vector3(0, height, 0) - frontC * disAwayFromFront;
+        bool OnPad()
+        {
+            return RotateCameraH != 0 || RotateCameraV != 0;
+        }
         
         if (Input.touchCount >= 2)
         {
             // タッチしている２点を取得
-            t1 = Input.GetTouch (0);
-            t2 = Input.GetTouch (1);
-            
+            Touch t1 = Input.GetTouch (0);
+            Touch t2 = Input.GetTouch (1);
             if (t2.phase == TouchPhase.Began)
             {
                 //2点タッチ開始時の距離を記憶
                 backDist = Vector2.Distance (t1.position, t2.position);
                 firstPoint = t2.position;
                 startFromPointWhenDrag = camera.transform.position;
-                offSet = Vector3.zero;
             }
             else if ((t1.phase == TouchPhase.Moved || t2.phase == TouchPhase.Moved) && (t1.phase != TouchPhase.Ended && t2.phase != TouchPhase.Ended))
             {
-                var afterDist = Vector2.Distance(t1.position, t2.position);
-                
-                if (Mathf.Abs(afterDist - backDist) > zoomDis)
+                //move
+                secondPoint = (t2.position + t1.position)/2;
+                if (meCenter == null)
                 {
-                    //zoom
-                }
-                else
-                {
-                    //move
-                    secondPoint = t2.position;
-                    CameraDrag(camera, firstPoint, secondPoint);
+                    CameraDrag(camera, startFromPointWhenDrag, firstPoint, secondPoint);
                 }
             }
             else if (t1.phase == TouchPhase.Ended || t2.phase == TouchPhase.Ended)
             {
-                
             }
         }
         else if (Input.touchCount >= 1)
         {
-            t1 = Input.GetTouch (0);
+            Touch t1 = Input.GetTouch (0);
             if (t1.phase == TouchPhase.Began) // 触摸开始
             {
                 firstPoint = t1.position;
@@ -100,7 +94,8 @@ public class TouchTopDownCamera : CameraMode
             }
             else if (t1.phase == TouchPhase.Moved && isRotating) // 触摸移动
             {
-                CameraRotate(camera, firstPoint,t1.position);
+                if (OnPad())
+                    CameraRotate(camera, firstPoint, t1.position);
                 firstPoint = t1.position;
             }
             else if (t1.phase == TouchPhase.Ended) // 触摸结束
@@ -108,43 +103,77 @@ public class TouchTopDownCamera : CameraMode
                 isRotating = false;
             }
         }
-
-        if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
+        else // editor
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
             {
-                firstPoint = Input.mousePosition;
-                startFromPointWhenDrag = camera.transform.position;
-                offSet = Vector3.zero;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    firstPoint = Input.mousePosition;
+                    startFromPointWhenDrag = camera.transform.position;
+                }
+                if (Input.GetMouseButton(0))
+                {
+                    secondPoint = Input.mousePosition;
+                    if (meCenter == null)
+                    {
+                        CameraDrag(camera, startFromPointWhenDrag, firstPoint, secondPoint);
+                    }
+                }
             }
-            if (Input.GetMouseButton(0))
+            else
             {
-                secondPoint = Input.mousePosition;
-                CameraDrag(camera, firstPoint, secondPoint);
+                if (Input.GetMouseButtonDown(1))
+                {
+                    firstPoint = Input.mousePosition;
+                    isRotating = true;
+                }
+                else if (Input.GetMouseButton(1) && isRotating) // 触摸移动
+                {
+                    if (OnPad())
+                        CameraRotate(camera, firstPoint, Input.mousePosition);
+                    firstPoint = Input.mousePosition;
+                }
+                else if (Input.GetMouseButtonUp(1))
+                {
+                    isRotating = false;
+                }
             }
         }
-        else
+
+        if (meCenter != null)
         {
-            if (Input.GetMouseButtonDown(1))
-            {
-                firstPoint = Input.mousePosition;
-                isRotating = true;
-            }
-            else if (Input.GetMouseButton(1) && isRotating) // 触摸移动
-            {
-                CameraRotate(camera, firstPoint,Input.mousePosition);
-                firstPoint = Input.mousePosition;
-            }
-            else if (Input.GetMouseButtonUp(1))
-            {
-                isRotating = false;
-            }
+            var mePosOnGround= meCenter.position;
+            mePosOnGround.y = groundHeight;
+            camera.transform.position = Vector3.Lerp(camera.transform.position, mePosOnGround + (camera.transform.position - GetCenterScreenGroundPoint(camera)), Time.deltaTime * followTargetSpeed);
         }
         
+        //ClampHeightPos(camera);
+        
+        var cameraFront = camera.transform.forward;
+        cameraFront.y = 0;
+        cameraFront = cameraFront.normalized;
+        sameHeightCenter = new Vector3(0, camera.transform.position.y, 0) - cameraFront * disAwayFromFront;
         if (Vector3.Distance(camera.transform.position, sameHeightCenter) > battlefieldDiameter / 2)
         {
-            camera.transform.position = sameHeightCenter + (camera.transform.position - sameHeightCenter).normalized * battlefieldDiameter / 2;
+            camera.transform.position = sameHeightCenter +
+                                        (camera.transform.position - sameHeightCenter).normalized *
+                                        battlefieldDiameter / 2;
         }
+    }
+    
+    void CameraDrag(Camera camera, Vector3 startPoint, Vector3 _firstPoint, Vector3 _secondPoint)
+    {
+        var transform = camera.transform;
+        var Right = transform.right;
+        var Front = transform.forward;
+        Front.y = 0;
+        Front = Front.normalized;
+        
+        var rightDirectionMove = battlefieldDiameter * (-(_secondPoint.x - _firstPoint.x) / Screen.width)  * Right;
+        var forwardDirectionMove = battlefieldDiameter * (-(_secondPoint.y - _firstPoint.y) / Screen.height)  * Front;
+        var position = startPoint + rightDirectionMove + forwardDirectionMove;
+        transform.position = position;
     }
     
     void CameraRotate(Camera camera, Vector3 _firstPoint, Vector3 _secondPoint)
@@ -155,27 +184,12 @@ public class TouchTopDownCamera : CameraMode
         camera.transform.RotateAround(pivotPoint, Vector3.up, rotationAngle);
     }
     
-    void CameraDrag(Camera camera, Vector3 _firstPoint, Vector3 _secondPoint)
-    {
-        var transform = camera.transform;
-        var Right = transform.right;
-        var Front = transform.forward;
-        Front.y = 0;
-        Front = Front.normalized;
-        
-        var rightDirectionMove = battlefieldDiameter * (-(_secondPoint.x - _firstPoint.x) / Screen.width)  * Right;
-        var forwardDirectionMove = battlefieldDiameter * (-(_secondPoint.y - _firstPoint.y) / Screen.height)  * Front;
-        offSet = (rightDirectionMove + forwardDirectionMove);
-        var position = startFromPointWhenDrag + offSet;
-        transform.position = position;
-    }
-    
     private Vector3 GetCenterScreenGroundPoint(Camera camera)
     {
         // 获取摄像机的位置和角度
         Vector3 cameraPosition = camera.transform.position;
         Vector3 cameraForward = camera.transform.forward;
-
+        
         // 计算摄像机到地面的高度差
         float heightDifference = cameraPosition.y - groundHeight;
 
@@ -188,10 +202,9 @@ public class TouchTopDownCamera : CameraMode
 
         // 使用相似三角形计算距离
         float distanceToGround = heightDifference / Mathf.Tan(thetaRad);
-
         // 计算投射点的位置
         Vector3 groundPoint = cameraPosition + cameraForwardXZ.normalized * distanceToGround;
-
+        groundPoint.y = groundHeight;
         return groundPoint;
     }
 }

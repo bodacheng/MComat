@@ -30,7 +30,26 @@ namespace FightScene
                 _auto = value;
                 foreach (var dataCenter in teamMembers.GetValues())
                 {
-                    dataCenter._MyBehaviorRunner.AI = _auto;
+                    if (TeamMode == TeamMode.Rotation)
+                        dataCenter._MyBehaviorRunner.AI = _auto;
+                    else if (TeamMode == TeamMode.MultiRaid)
+                    {
+                        if (this.teamConfig.myTeam == RTFightManager.playerTeam)
+                        {
+                            if (InputsManager != null && InputsManager.CurrentFocus != null && InputsManager.CurrentFocus == dataCenter)
+                            {
+                                dataCenter._MyBehaviorRunner.AI = _auto;
+                            }
+                            else
+                            {
+                                dataCenter._MyBehaviorRunner.AI = true;
+                            }
+                        }
+                        else
+                        {
+                            dataCenter._MyBehaviorRunner.AI = _auto;
+                        }
+                    }
                 }
             }
             get => _auto;

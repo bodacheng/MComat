@@ -47,12 +47,12 @@ public class PreparingProcess : FSceneProcess
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.Target.EnemyTeamConfig, RTFightManager.Target.team2.teamMembers.GetValues());
         FightLogger.value.ReadyToLog(teamMembers);
         
-        RTFightManager.Target.team1.Auto = FightScene.FightScene.Fight.Team1Auto;
-        RTFightManager.Target.team2.Auto = FightScene.FightScene.Fight.RunTutorial ? false : FightScene.FightScene.Fight.Team2Auto;
         RTFightManager.Target.team1.TeamMode = FightScene.FightScene.Fight.team1Mode;
         RTFightManager.Target.team2.TeamMode = FightScene.FightScene.Fight.team2Mode;
         RTFightManager.Target.team1.teamConfig = RTFightManager.Target.heroTeamConfig;
         RTFightManager.Target.team2.teamConfig = RTFightManager.Target.EnemyTeamConfig;
+        RTFightManager.Target.team1.Auto = FightScene.FightScene.Fight.Team1Auto;
+        RTFightManager.Target.team2.Auto = FightScene.FightScene.Fight.RunTutorial ? false : FightScene.FightScene.Fight.Team2Auto;
         RTFightManager.Target.team1.TeamStandPoints = FightScene.FightScene.target.Team1StandPoints;
         RTFightManager.Target.team2.TeamStandPoints = FightScene.FightScene.target.Team2StandPoints;
         

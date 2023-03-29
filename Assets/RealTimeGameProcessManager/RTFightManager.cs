@@ -75,10 +75,15 @@ namespace FightScene
                 cMode = C_Mode.CertainYAntiVibration;
             else
                 cMode = C_Mode.TopDown;
+            
             var ts = myTeam == Team.player1 ? team1.GetFightingUnitTs() : team2.GetFightingUnitTs();
             if (ts.Count > 0)
             {
-                _CameraManager.Assign_Camera(cMode, ts[0], myTeam == Team.player1  ? team2.GetFightingUnitTs() : team1.GetFightingUnitTs());
+                _CameraManager.Assign_Camera(
+                    cMode, 
+                    cMode != C_Mode.TopDown? ts[0] : null, 
+                    myTeam == Team.player1  ? team2.GetFightingUnitTs() : team1.GetFightingUnitTs()
+                );
             }
             else
             {
