@@ -90,7 +90,7 @@ public class TouchTopDownCamera : CameraMode
                 var afterDist = Vector2.Distance (t1.position, t2.position);
                 if (Mathf.Abs(afterDist - backDist) >  zoomScreenDis)
                 {
-                    Height = startCameraHeight - ((afterDist - zoomScreenDis - backDist) / Screen.height) * zoomSpeed;
+                    Height = startCameraHeight - ((afterDist - zoomScreenDis +(afterDist - zoomScreenDis > 0 ? -backDist: backDist)) / Screen.height) * zoomSpeed;
                     camera.transform.position = new Vector3(camera.transform.position.x,Height, camera.transform.position.z);
                 }
                 else
