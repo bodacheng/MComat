@@ -136,7 +136,7 @@ public static class AddressablesLogic
     {
         var handle = Addressables.InstantiateAsync(prefabPathName);
         await handle.Task;
-        if (handle.Status != AsyncOperationStatus.Succeeded)
+        if (handle.IsValid() && handle.Status != AsyncOperationStatus.Succeeded)
         {
             Debug.Log($"Failed to load : {prefabPathName}");
             Addressables.ReleaseInstance(handle);

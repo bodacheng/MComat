@@ -97,6 +97,8 @@ namespace FightScene
                     }
                 }
             ).AddTo(this.gameObject);
+            
+            _inputsManager.FocusUnit(null);
         }
     }
 }

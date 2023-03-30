@@ -26,7 +26,7 @@ public class TouchTopDownCamera : CameraMode
     private float Height
     {
         get => height;
-        set => height = Mathf.Clamp(value, 7, 15);
+        set => height = Mathf.Clamp(value, 5, 15);
     }
     
     public TouchTopDownCamera(float height, float battlefieldDiameter)
@@ -49,6 +49,7 @@ public class TouchTopDownCamera : CameraMode
         Join(camera.transform.DOLookAt(temp  - Vector3.up, 0.5f, AxisConstraint.None,Vector3.up)).
         AppendCallback(() =>
         {
+            zoomScreenDis = Screen.width / 7;
             canTouch = true;
         });
         mainSequence.Play();
