@@ -14,6 +14,11 @@ public class FightPrepareLayer : UILayer
     [SerializeField] GameObject teamEditIndicator;
     [SerializeField] FightModeSwitch _fightModeSwitch;
 
+    public void FightModeSwitchOn(bool on)
+    {
+        _fightModeSwitch.gameObject.SetActive(on);
+    }
+    
     public void SetFightMode(TeamMode mode)
     {
         _fightModeSwitch.Set(mode);

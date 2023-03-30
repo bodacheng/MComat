@@ -90,7 +90,7 @@ namespace FightScene
             return true;
         }
         
-        public void localUpdate()
+        public void LocalUpdate()
         {
             switch (TeamMode)
             {
