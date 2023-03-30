@@ -49,14 +49,12 @@ public class MobileInputsManager : MonoBehaviour {
             focus.Value = center;
             SwitchElementEffects(center.element);
             SuddenRefreshButtons(focus.Value._MyBehaviorRunner);
-            joystick.gameObject.SetActive(true);
             TurnOnButtons();
         }
         else
         {
             focus.Value = null;
             TurnOffButtons();
-            joystick.gameObject.SetActive(false);
         }
     }
     
@@ -291,7 +289,7 @@ public class MobileInputsManager : MonoBehaviour {
         fire1 = false;
         fire2 = false;
         acc = false;
-        
+        joystick.gameObject.SetActive(true);
         if (FightGlobalSetting.HasDefend)
         {
             defendBtn.gameObject.SetActive(true);
@@ -310,7 +308,7 @@ public class MobileInputsManager : MonoBehaviour {
         fire1 = false;
         fire2 = false;
         acc = false;
-        
+        joystick.gameObject.SetActive(false);
         if (FightGlobalSetting.HasDefend)
         {
             defendBtn.gameObject.SetActive(false);

@@ -21,7 +21,8 @@ public class TouchTopDownCamera : CameraMode
     float rotationSpeed = 0.5f;
     private bool isRotating = false;
     private float disAwayFromFront = 10f;
-    
+    private float zoomScreenDis = 10;
+    private float zoomSpeed = 20;
     private float Height
     {
         get => height;
@@ -86,9 +87,9 @@ public class TouchTopDownCamera : CameraMode
             else if ((t1.phase == TouchPhase.Moved || t2.phase == TouchPhase.Moved) && (t1.phase != TouchPhase.Ended && t2.phase != TouchPhase.Ended))
             {
                 var afterDist = Vector2.Distance (t1.position, t2.position);
-                if (Mathf.Abs(afterDist - backDist) >  Screen.width / 5)
+                if (Mathf.Abs(afterDist - backDist) >  zoomScreenDis)
                 {
-                    Height = startCameraHeight - ((afterDist - Screen.width / 5) / Screen.height) * 20f;
+                    Height = startCameraHeight - ((afterDist - zoomScreenDis - backDist) / Screen.height) * zoomSpeed;
                     camera.transform.position = new Vector3(camera.transform.position.x,Height, camera.transform.position.z);
                 }
                 else
