@@ -68,11 +68,11 @@ public class PreparingProcess : FSceneProcess
         switch (RTFightManager.Target.team1.TeamMode)
         {
             case TeamMode.MultiRaid:
-                RTFightManager.Target.team1.Initialize_Multi(FightScene.FightScene.Fight.team1HpRate, FightScene.FightScene.Fight.team1CGMode, 
+                RTFightManager.Target.team1.InitializeMulti(FightScene.FightScene.Fight.team1HpRate, FightScene.FightScene.Fight.team1CGMode, 
                     FightScene.FightScene.Fight.team1AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay);
                 break;
             case TeamMode.Rotation:
-                RTFightManager.Target.team1.TeamsIni_Rotate(FightScene.FightScene.Fight.team1HpRate, FightScene.FightScene.Fight.team1CGMode, 
+                RTFightManager.Target.team1.TeamsIniRotate(FightScene.FightScene.Fight.team1HpRate, FightScene.FightScene.Fight.team1CGMode, 
                     FightScene.FightScene.Fight.team1AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay);
                 break;
         }
@@ -80,11 +80,11 @@ public class PreparingProcess : FSceneProcess
         switch (RTFightManager.Target.team2.TeamMode)
         {
             case TeamMode.MultiRaid:
-                RTFightManager.Target.team2.Initialize_Multi(FightScene.FightScene.Fight.team2HpRate, FightScene.FightScene.Fight.team2CGMode, 
+                RTFightManager.Target.team2.InitializeMulti(FightScene.FightScene.Fight.team2HpRate, FightScene.FightScene.Fight.team2CGMode, 
                     FightScene.FightScene.Fight.team2AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay);
                 break;
             case TeamMode.Rotation:
-                RTFightManager.Target.team2.TeamsIni_Rotate(FightScene.FightScene.Fight.team2HpRate, FightScene.FightScene.Fight.team2CGMode, 
+                RTFightManager.Target.team2.TeamsIniRotate(FightScene.FightScene.Fight.team2HpRate, FightScene.FightScene.Fight.team2CGMode, 
                     FightScene.FightScene.Fight.team2AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay);
                 break;
         }

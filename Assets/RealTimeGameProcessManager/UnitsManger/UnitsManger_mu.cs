@@ -47,7 +47,7 @@ namespace FightScene
             _startUnit = unit;
         }
         
-        public void Initialize_Multi(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode _aiMode, int aiDelayFrame)
+        public void InitializeMulti(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode _aiMode, int aiDelayFrame)
         {
             foreach (var center in teamMembers.GetValues())
             {

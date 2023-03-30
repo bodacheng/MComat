@@ -16,7 +16,7 @@ namespace FightScene
             foreach (var center in teamMembers.GetValues())
             {
                 // SideIcon整备
-                void Action1(Data_Center c)
+                void OnClickUnitIcon(Data_Center c)
                 {
                     if (teamConfig.myTeam == RTFightManager.playerTeam)
                     {
@@ -42,7 +42,7 @@ namespace FightScene
                     sideIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
                     sideIcon.focusingCharIcon.iconButton.onClick.AddListener(() =>
                     {
-                        Action1(center);
+                        OnClickUnitIcon(center);
                     });
                     var unitInfo = RTFightManager.Target.UnitInfoRef[center];
                     sideIcon.focusingCharIcon.ChangeIcon(unitInfo);

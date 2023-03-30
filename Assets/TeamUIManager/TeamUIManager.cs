@@ -42,7 +42,7 @@ namespace FightScene
             }
         }
         
-        public void InsTeamUI(Action<Data_Center> changeUnit, Func<bool> currentAutoState, Action<bool> switchTeamAuto, ReactiveProperty<Data_Center> RMode_Unit)
+        public void InsTeamUI(Action<Data_Center> changeUnit, Func<bool> currentAutoState, Action<bool> switchTeamAuto, ReactiveProperty<Data_Center> rModeUnit)
         {
             TeamAuto.Initialize(currentAutoState, switchTeamAuto);
             if (teamConfig.myTeam != RTFightManager.playerTeam)
@@ -57,11 +57,11 @@ namespace FightScene
                     {
                         barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                         {
-                            foreach (var _one in teamMembers.GetValues())
+                            foreach (var one in teamMembers.GetValues())
                             {
-                                UnitIconDic.TryGetValue(_one, out var _tempSI);
+                                UnitIconDic.TryGetValue(one, out var _tempSI);
                                 if (_tempSI != null)
-                                    _tempSI.transform.DOMove(CameraManager._camera.WorldToScreenPoint(_one.transform.position + Vector3.up * 2.5f), 0.5f);
+                                    _tempSI.transform.DOMove(CameraManager._camera.WorldToScreenPoint(one.transform.position + Vector3.up * 2.5f), 0.5f);
                             }
                         }).AddTo(gameObject);
                         Refresh();
@@ -69,19 +69,19 @@ namespace FightScene
                     break;
                 case TeamMode.Rotation:
                     IniTeamUI_Rotate(changeUnit);
-                    IniComboHit(RMode_Unit);
-                    RMode_Unit.Subscribe(Refresh).AddTo(gameObject);
+                    IniComboHit(rModeUnit);
+                    rModeUnit.Subscribe(Refresh).AddTo(gameObject);
                     if (teamConfig.myTeam != RTFightManager.playerTeam)
                     {
                         barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                             {
                                 if (teamConfig.myTeam != RTFightManager.playerTeam)
                                 {
-                                    if (RMode_Unit.Value == null)
+                                    if (rModeUnit.Value == null)
                                         return;
-                                    UnitIconDic.TryGetValue(RMode_Unit.Value, out var _tempSI);
-                                    if (_tempSI != null)
-                                        _tempSI.transform.DOMove(CameraManager._camera.WorldToScreenPoint(RMode_Unit.Value.transform.position + Vector3.up * 2.5f), 0.5f);
+                                    UnitIconDic.TryGetValue(rModeUnit.Value, out var tempSi);
+                                    if (tempSi != null)
+                                        tempSi.transform.DOMove(CameraManager._camera.WorldToScreenPoint(rModeUnit.Value.transform.position + Vector3.up * 2.5f), 0.5f);
                                     else
                                     {
                                         Debug.Log("潜在逻辑错误");
@@ -100,15 +100,15 @@ namespace FightScene
             if (tempSi != null)
                 tempSi.RefreshResistanceBar(value);
         }
-        void RefreshHPBar(Data_Center dataCenter, float current_hp, float wholeHP)
+        void RefreshHPBar(Data_Center dataCenter, float currentHp, float wholeHP)
         {
             UnitIconDic.TryGetValue(dataCenter, out var tempSi);
-            tempSi.RefreshHpBar(current_hp, wholeHP);
+            tempSi.RefreshHpBar(currentHp, wholeHP);
         }
-        void RefreshExBar(Data_Center dataCenter, int current_ex, int wholeEx)
+        void RefreshExBar(Data_Center dataCenter, int currentEx, int wholeEx)
         {
             UnitIconDic.TryGetValue(dataCenter, out var tempSi);
-            tempSi.RefreshExBar(current_ex, wholeEx);
+            tempSi.RefreshExBar(currentEx, wholeEx);
         }
         
         void Refresh(Data_Center fighting = null)

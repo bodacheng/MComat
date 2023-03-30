@@ -47,7 +47,7 @@ namespace Soul
         
         public bool BeingControl()
         {
-            return InputsManager!= null && InputsManager.inputting;
+            return InputsManager!= null && InputsManager.Inputting;
         }
         
         void Awake()

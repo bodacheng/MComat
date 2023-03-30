@@ -27,10 +27,11 @@ public class MobileInputsManager : MonoBehaviour {
     [SerializeField] UltimateJoystick _joystick;
     [SerializeField] Transform effectsParent;
     
-    readonly IDictionary<Element, ElementEffectsGroup> ElementEffects = new Dictionary<Element, ElementEffectsGroup>();
+    readonly IDictionary<Element, ElementEffectsGroup> _elementEffects = new Dictionary<Element, ElementEffectsGroup>();
     Element _focusing;
     
-    public bool inputting = false;
+    bool inputting = false;
+    public bool Inputting => inputting;
     
     private Data_Center watch;
     public Data_Center CurrentFocus => watch;
@@ -48,7 +49,7 @@ public class MobileInputsManager : MonoBehaviour {
             SwitchElementEffects(center.element);
             SuddenRefreshButtons(watch._MyBehaviorRunner);
             _joystick.gameObject.SetActive(true);
-            TurnOffButtons();
+            TurnOnButtons();
         }
         else
         {
@@ -60,23 +61,23 @@ public class MobileInputsManager : MonoBehaviour {
     
     public void Clear()
     {
-        ElementEffects.Clear();
+        _elementEffects.Clear();
         Destroy(gameObject);
     }
     
     // 切换输入按键表现层（红黄蓝绿）.这个函数使用的前提是所有用的上的控制器组都已经注册并初始化
     void SwitchElementEffects(Element element)
     {
-        if (ElementEffects.ContainsKey(_focusing))
+        if (_elementEffects.ContainsKey(_focusing))
         {
-            ElementEffects[_focusing].Close();
+            _elementEffects[_focusing].Close();
         }
         
-        if (ElementEffects.ContainsKey(element))
+        if (_elementEffects.ContainsKey(element))
         {
             _focusing = element;
             
-            ElementEffects[element].Open(
+            _elementEffects[element].Open(
                 PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Defend.GetComponent<RectTransform>(), 5), 
                 PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Dash.GetComponent<RectTransform>(), 5)
             );
@@ -87,20 +88,20 @@ public class MobileInputsManager : MonoBehaviour {
     
     public async UniTask ElementRegister(Element element, UnitInfo unitInfo)
     {
-        if (!ElementEffects.ContainsKey(element))
+        if (!_elementEffects.ContainsKey(element))
         {
             var elementEffect = new ElementEffectsGroup();
             await elementEffect.INICommon(effectsParent, element, Attack, Fire1, Fire2);
-            ElementEffects.Add(element, elementEffect);
+            _elementEffects.Add(element, elementEffect);
         }
-        await ElementEffects[element].INIBtn(Attack, Fire1, Fire2, unitInfo);
-        ElementEffects[element].Close();
+        await _elementEffects[element].INIBtn(Attack, Fire1, Fire2, unitInfo);
+        _elementEffects[element].Close();
     }
     
     public void SkillExplosion(InputKey key, int spLevel)
     {
         ParticleSystem _targetExplode;
-        if (!ElementEffects.ContainsKey(_focusing))
+        if (!_elementEffects.ContainsKey(_focusing))
         {
             Debug.Log("读取流程产生错误："+_focusing);
             return;
@@ -109,16 +110,16 @@ public class MobileInputsManager : MonoBehaviour {
         switch(spLevel)
         {
             case 0:
-                _targetExplode = ElementEffects[_focusing].triggerExplosion0;
+                _targetExplode = _elementEffects[_focusing].triggerExplosion0;
             break;
             case 1:
-                _targetExplode = ElementEffects[_focusing].triggerExplosion1;
+                _targetExplode = _elementEffects[_focusing].triggerExplosion1;
             break;
             case 2:
-                _targetExplode = ElementEffects[_focusing].triggerExplosion2;
+                _targetExplode = _elementEffects[_focusing].triggerExplosion2;
             break;
             case 3:
-                _targetExplode = ElementEffects[_focusing].triggerExplosion3;
+                _targetExplode = _elementEffects[_focusing].triggerExplosion3;
             break;
             default:
                 return;
@@ -142,7 +143,7 @@ public class MobileInputsManager : MonoBehaviour {
     //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
     public void BtnRefreshEffects()
     {
-        foreach (var keyValue in ElementEffects[_focusing].BtnRefreshEffects)
+        foreach (var keyValue in _elementEffects[_focusing].BtnRefreshEffects)
         {
             keyValue.Value.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, keyValue.Key.GetComponent<RectTransform>(),4);
             keyValue.Value.Play(true);
@@ -156,18 +157,18 @@ public class MobileInputsManager : MonoBehaviour {
     void StartPressing(Button targetBtn)
     {
         targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, targetBtn.GetComponent<RectTransform>(), 7);
-        if (ElementEffects.ContainsKey(_focusing))
+        if (_elementEffects.ContainsKey(_focusing))
         {
-            ElementEffects[_focusing].pressingExplosion.transform.position = targetPos;
-            ElementEffects[_focusing].pressingExplosion.Play();
+            _elementEffects[_focusing].pressingExplosion.transform.position = targetPos;
+            _elementEffects[_focusing].pressingExplosion.Play();
         }
     }
 
     void StopPressing()
     {
-        if (ElementEffects.ContainsKey(_focusing))
+        if (_elementEffects.ContainsKey(_focusing))
         {
-            ElementEffects[_focusing].pressingExplosion.Stop();
+            _elementEffects[_focusing].pressingExplosion.Stop();
         }
     }
     
@@ -186,7 +187,7 @@ public class MobileInputsManager : MonoBehaviour {
         inputting = (h > 0f || h < 0 || v > 0f || v < 0f);
     }
     
-    readonly Dictionary<InputKey, SkillEntity> Options_lastframe = new Dictionary<InputKey, SkillEntity>()
+    readonly Dictionary<InputKey, SkillEntity> _optionsLastFrame = new Dictionary<InputKey, SkillEntity>()
     {
         {InputKey.Attack1,null},
         {InputKey.Attack2,null},
@@ -194,53 +195,53 @@ public class MobileInputsManager : MonoBehaviour {
     };
     
     // 动态按钮系统是基于状态流动
-    SkillEntity Behavior_preview_button1, Behavior_preview_button2, Behavior_preview_button3;
+    SkillEntity _behaviorPreviewButton1, _behaviorPreviewButton2, _behaviorPreviewButton3;
     public void ButtonsFeatureLoad(List<SkillEntity> Options_preview)
     {
-        Behavior_preview_button1 = null; 
-        Behavior_preview_button2 = null;
-        Behavior_preview_button3 = null;
+        _behaviorPreviewButton1 = null; 
+        _behaviorPreviewButton2 = null;
+        _behaviorPreviewButton3 = null;
         
         for (var i = 0; i < Options_preview.Count; i++)
         {
             switch (Options_preview[i].EnterInput)
             {
                 case InputKey.Attack1:
-                    Behavior_preview_button1 = Options_preview[i];
+                    _behaviorPreviewButton1 = Options_preview[i];
                     break;
                 case InputKey.Attack2:
-                    Behavior_preview_button2 = Options_preview[i];
+                    _behaviorPreviewButton2 = Options_preview[i];
                     break;
                 case InputKey.Attack3:
-                    Behavior_preview_button3 = Options_preview[i];
+                    _behaviorPreviewButton3 = Options_preview[i];
                     break;
             }
         }
         
-        if (Options_lastframe[InputKey.Attack1] != Behavior_preview_button1)
+        if (_optionsLastFrame[InputKey.Attack1] != _behaviorPreviewButton1)
         {
-            RefreshPattern(Attack, Behavior_preview_button1 != null ? Behavior_preview_button1.SkillID : string.Empty);
+            RefreshPattern(Attack, _behaviorPreviewButton1 != null ? _behaviorPreviewButton1.SkillID : string.Empty);
         }
-        if (Options_lastframe[InputKey.Attack2] != Behavior_preview_button2)
+        if (_optionsLastFrame[InputKey.Attack2] != _behaviorPreviewButton2)
         {
-            RefreshPattern(Fire1, Behavior_preview_button2 != null ? Behavior_preview_button2.SkillID : string.Empty);
+            RefreshPattern(Fire1, _behaviorPreviewButton2 != null ? _behaviorPreviewButton2.SkillID : string.Empty);
         }
-        if (Options_lastframe[InputKey.Attack3] != Behavior_preview_button3)
+        if (_optionsLastFrame[InputKey.Attack3] != _behaviorPreviewButton3)
         {
-            RefreshPattern(Fire2, Behavior_preview_button3 != null ? Behavior_preview_button3.SkillID : string.Empty);
+            RefreshPattern(Fire2, _behaviorPreviewButton3 != null ? _behaviorPreviewButton3.SkillID : string.Empty);
         }
         
-        Options_lastframe[InputKey.Attack1] = Behavior_preview_button1;
-        Options_lastframe[InputKey.Attack2] = Behavior_preview_button2;
-        Options_lastframe[InputKey.Attack3] = Behavior_preview_button3;
+        _optionsLastFrame[InputKey.Attack1] = _behaviorPreviewButton1;
+        _optionsLastFrame[InputKey.Attack2] = _behaviorPreviewButton2;
+        _optionsLastFrame[InputKey.Attack3] = _behaviorPreviewButton3;
     }
     
     // 直接根据角色状态刷新按钮。因为动态按钮系统是基于状态流动
     void SuddenRefreshButtons(BehaviorRunner behaviorRunner)
     {
-        Options_lastframe[InputKey.Attack1] = null;
-        Options_lastframe[InputKey.Attack2] = null;
-        Options_lastframe[InputKey.Attack3] = null;
+        _optionsLastFrame[InputKey.Attack1] = null;
+        _optionsLastFrame[InputKey.Attack2] = null;
+        _optionsLastFrame[InputKey.Attack3] = null;
         ButtonsFeatureLoad(behaviorRunner.GetNextSkills());
     }
     
@@ -345,9 +346,9 @@ public class MobileInputsManager : MonoBehaviour {
             defendButtonHover = false;
         }
 
-        if (ElementEffects.ContainsKey(_focusing))
+        if (_elementEffects.ContainsKey(_focusing))
         {
-            ElementEffects[_focusing].Close();
+            _elementEffects[_focusing].Close();
         }
     }
     
@@ -360,9 +361,9 @@ public class MobileInputsManager : MonoBehaviour {
     void RefreshPattern(Button button, string skillId)//按钮切换也可以在这里做文章
     {
         targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, button.GetComponent<RectTransform>(), 5);
-        if (ElementEffects.ContainsKey(_focusing))
+        if (_elementEffects.ContainsKey(_focusing))
         {
-            ElementEffects[_focusing].RefreshBtn(button, skillId, targetPos);
+            _elementEffects[_focusing].RefreshBtn(button, skillId, targetPos);
         }
         else
         {

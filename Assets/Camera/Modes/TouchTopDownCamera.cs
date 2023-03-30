@@ -74,7 +74,7 @@ public class TouchTopDownCamera : CameraMode
             else if ((t1.phase == TouchPhase.Moved || t2.phase == TouchPhase.Moved) && (t1.phase != TouchPhase.Ended && t2.phase != TouchPhase.Ended))
             {
                 //move
-                secondPoint = (t2.position + t1.position)/2;
+                secondPoint = t2.position;
                 if (meCenter == null)
                 {
                     CameraDrag(camera, startFromPointWhenDrag, firstPoint, secondPoint);
