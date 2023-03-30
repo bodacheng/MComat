@@ -36,7 +36,7 @@ namespace FightScene
                     {
                         if (this.teamConfig.myTeam == RTFightManager.playerTeam)
                         {
-                            if (InputsManager != null && InputsManager.CurrentFocus != null && InputsManager.CurrentFocus == dataCenter)
+                            if (InputsManager != null && InputsManager.CurrentFocus != null && InputsManager.CurrentFocus.Value == dataCenter)
                             {
                                 dataCenter._MyBehaviorRunner.AI = _auto;
                             }

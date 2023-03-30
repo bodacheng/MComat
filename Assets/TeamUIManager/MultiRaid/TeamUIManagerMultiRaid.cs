@@ -20,7 +20,7 @@ namespace FightScene
                 {
                     if (teamConfig.myTeam == RTFightManager.playerTeam)
                     {
-                        if (_inputsManager.CurrentFocus == c)
+                        if (_inputsManager.CurrentFocus.Value == c)
                         {
                             _inputsManager.FocusUnit(null);
                             RTFightManager.Target._CameraManager.SetCurrentCameraParams(null, null);
@@ -82,6 +82,33 @@ namespace FightScene
                     RefreshResistanceBar(center, x);
                 }).AddTo(gameObject);
             }
+            
+            _inputsManager.CurrentFocus.Subscribe(
+                (x) =>
+                {
+                    if (x != null)
+                    {
+                        UnitIconDic.TryGetValue(x, out var targetIcon);
+                        if (targetIcon != null)
+                        {
+                            selectedFrame.SetParent(targetIcon.transform);
+                            selectedFrame.transform.localScale = Vector3.one;
+                            selectedFrame.SetAsFirstSibling();
+                        }
+                        else
+                        {
+                            foreach (var kv  in UnitIconDic)
+                            {
+                                Debug.Log("???:"+ kv.Value);   
+                            }
+                        }
+                    }
+                    else
+                    {
+                        selectedFrame.gameObject.SetActive(false);
+                    }
+                }
+            );
         }
     }
 }

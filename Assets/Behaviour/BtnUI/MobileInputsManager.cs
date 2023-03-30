@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Soul;
 using Skill;
+using UniRx;
 
 public enum InputKey
 {
@@ -33,21 +34,21 @@ public class MobileInputsManager : MonoBehaviour {
     bool inputting = false;
     public bool Inputting => inputting;
     
-    private Data_Center focus;
-    public Data_Center CurrentFocus => focus;
+    private ReactiveProperty<Data_Center> focus = new ReactiveProperty<Data_Center>();
+    public ReactiveProperty<Data_Center> CurrentFocus => focus;
     
     public void FocusUnit(Data_Center center)
     {
-        if (focus != null)
+        if (focus.Value != null)
         {
-            focus._MyBehaviorRunner.InputsManager = null;
+            focus.Value._MyBehaviorRunner.InputsManager = null;
         }
         if (center != null)
         {
             center._MyBehaviorRunner.InputsManager = this;
-            focus = center;
+            focus.Value = center;
             SwitchElementEffects(center.element);
-            SuddenRefreshButtons(focus._MyBehaviorRunner);
+            SuddenRefreshButtons(focus.Value._MyBehaviorRunner);
             _joystick.gameObject.SetActive(true);
             TurnOnButtons();
         }

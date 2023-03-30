@@ -14,8 +14,9 @@ namespace FightScene
         [SerializeField] RectTransform _targetCanvasT;
         [SerializeField] SideUnitIcon button_prefab;
         [SerializeField] Text hitCombo;
-        [SerializeField] AutoSwitch TeamAuto;
-
+        [SerializeField] AutoSwitch teamAutoSwitch;
+        [SerializeField] RectTransform selectedFrame;
+        
         public TeamMode teamMode;
         public TeamConfig teamConfig;
         public readonly IDictionary<Data_Center, SideUnitIcon> UnitIconDic = new Dictionary<Data_Center, SideUnitIcon>();
@@ -50,10 +51,10 @@ namespace FightScene
         
         public void InsTeamUI(Action<Data_Center> changeUnit, Func<bool> currentAutoState, Action<bool> switchTeamAuto, ReactiveProperty<Data_Center> rModeUnit)
         {
-            TeamAuto.Initialize(currentAutoState, switchTeamAuto);
+            teamAutoSwitch.Initialize(currentAutoState, switchTeamAuto);
             if (teamConfig.myTeam != RTFightManager.playerTeam)
             {
-                TeamAuto.gameObject.SetActive(CommonSetting.DevMode || FightScene.Fight.EventType == FightEventType.Self);
+                teamAutoSwitch.gameObject.SetActive(CommonSetting.DevMode || FightScene.Fight.EventType == FightEventType.Self);
             }
             switch (teamMode)
             {
