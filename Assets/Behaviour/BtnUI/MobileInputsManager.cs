@@ -54,7 +54,7 @@ public class MobileInputsManager : MonoBehaviour {
         }
         else
         {
-            focus = null;
+            focus.Value = null;
             TurnOffButtons();
             _joystick.gameObject.SetActive(false);
         }

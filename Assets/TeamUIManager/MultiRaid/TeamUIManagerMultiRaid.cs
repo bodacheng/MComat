@@ -33,24 +33,16 @@ namespace FightScene
                     }
                     switchTeamAuto(currentAutoState());
                 }
-                
-                SideUnitIcon sideIcon;
-                if (!(UnitIconDic.ContainsKey(center) && UnitIconDic[center] != null))
+
+                var sideIcon = Instantiate(button_prefab);
+                sideIcon.name = center.UnitInfo.r_id + "_icon";
+                sideIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
+                sideIcon.focusingCharIcon.iconButton.onClick.AddListener(() =>
                 {
-                    sideIcon = Instantiate(button_prefab);
-                    sideIcon.name = center.name + " ICon";
-                    sideIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
-                    sideIcon.focusingCharIcon.iconButton.onClick.AddListener(() =>
-                    {
-                        OnClickUnitIcon(center);
-                    });
-                    var unitInfo = RTFightManager.Target.UnitInfoRef[center];
-                    sideIcon.focusingCharIcon.ChangeIcon(unitInfo);
-                }
-                else
-                {
-                    sideIcon = UnitIconDic[center];
-                }
+                    OnClickUnitIcon(center);
+                });
+                var unitInfo = RTFightManager.Target.UnitInfoRef[center];
+                sideIcon.focusingCharIcon.ChangeIcon(unitInfo);
                 sideIcon.gameObject.SetActive(true);
                 sideIcon.focusingCharIcon.CooldownCurtainUpdate(0);
                 
@@ -82,7 +74,7 @@ namespace FightScene
                     RefreshResistanceBar(center, x);
                 }).AddTo(gameObject);
             }
-            
+
             _inputsManager.CurrentFocus.Subscribe(
                 (x) =>
                 {
@@ -92,23 +84,19 @@ namespace FightScene
                         if (targetIcon != null)
                         {
                             selectedFrame.SetParent(targetIcon.transform);
+                            selectedFrame.transform.localPosition = Vector3.zero;
                             selectedFrame.transform.localScale = Vector3.one;
+                            selectedFrame.gameObject.SetActive(true);
                             selectedFrame.SetAsFirstSibling();
-                        }
-                        else
-                        {
-                            foreach (var kv  in UnitIconDic)
-                            {
-                                Debug.Log("???:"+ kv.Value);   
-                            }
                         }
                     }
                     else
                     {
+                        selectedFrame.SetParent(transform);
                         selectedFrame.gameObject.SetActive(false);
                     }
                 }
-            );
+            ).AddTo(this.gameObject);
         }
     }
 }
