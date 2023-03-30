@@ -77,13 +77,12 @@ public class MobileInputsManager : MonoBehaviour {
         if (_elementEffects.ContainsKey(element))
         {
             _focusing = element;
-            
             _elementEffects[element].Open(
                 PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, defendBtn.GetComponent<RectTransform>(), 5), 
                 PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, dashBtn.GetComponent<RectTransform>(), 5)
             );
         }else{
-            Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
+            Debug.Log("检查手机控制器渲染模块加载顺序");
         }
     }
     
@@ -92,40 +91,21 @@ public class MobileInputsManager : MonoBehaviour {
         if (!_elementEffects.ContainsKey(element))
         {
             var elementEffect = new ElementEffectsGroup();
-            await elementEffect.INICommon(effectsParent, element, a1Btn, a2Btn, a3Btn);
+            await elementEffect.InitializeCommon(effectsParent, element, a1Btn, a2Btn, a3Btn);
             _elementEffects.Add(element, elementEffect);
         }
-        await _elementEffects[element].INIBtn(a1Btn, a2Btn, a3Btn, unitInfo);
+        await _elementEffects[element].InitializeBtn(a1Btn, a2Btn, a3Btn, unitInfo);
         _elementEffects[element].Close(ParticleSystemStopBehavior.StopEmittingAndClear);
     }
     
     public void SkillExplosion(InputKey key, int spLevel)
     {
-        ParticleSystem targetExplode;
         if (!_elementEffects.ContainsKey(_focusing))
         {
             Debug.Log("读取流程产生错误："+_focusing);
             return;
         }
-        
-        switch(spLevel)
-        {
-            case 0:
-                targetExplode = _elementEffects[_focusing].triggerExplosion0;
-            break;
-            case 1:
-                targetExplode = _elementEffects[_focusing].triggerExplosion1;
-            break;
-            case 2:
-                targetExplode = _elementEffects[_focusing].triggerExplosion2;
-            break;
-            case 3:
-                targetExplode = _elementEffects[_focusing].triggerExplosion3;
-            break;
-            default:
-                return;
-        }
-    
+        var targetExplode = _elementEffects[_focusing].GetExplosionEffect(spLevel);
         switch (key)
         {
             case InputKey.Attack1:
@@ -138,17 +118,13 @@ public class MobileInputsManager : MonoBehaviour {
                 targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, a3Btn.GetComponent<RectTransform>(), 3);
                 break;
         }
-        targetExplode.Play();
+        targetExplode?.Play();
     }
 
     //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
-    public void BtnRefreshEffects()
+    public void BtnRefreshFrames()
     {
-        foreach (var keyValue in _elementEffects[_focusing].BtnRefreshEffects)
-        {
-            keyValue.Value.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, keyValue.Key.GetComponent<RectTransform>(),4);
-            keyValue.Value.Play(true);
-        }
+        _elementEffects[_focusing].BtnRefreshEffect();
     }
     
     // 等把机动和防御分离后，要做这样的事情：
@@ -157,20 +133,12 @@ public class MobileInputsManager : MonoBehaviour {
     // 而防御与机动则是确定一直显示。
     void StartPressing(Button targetBtn)
     {
-        targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, targetBtn.GetComponent<RectTransform>(), 7);
-        if (_elementEffects.ContainsKey(_focusing))
-        {
-            _elementEffects[_focusing].pressingExplosion.transform.position = targetPos;
-            _elementEffects[_focusing].pressingExplosion.Play();
-        }
+        _elementEffects[_focusing].StartPressing(targetBtn);
     }
 
     void StopPressing()
     {
-        if (_elementEffects.ContainsKey(_focusing))
-        {
-            _elementEffects[_focusing].pressingExplosion.Stop();
-        }
+        _elementEffects[_focusing].StopPressing();
     }
     
     // 如果不是对准角色，不会跑。
@@ -358,10 +326,9 @@ public class MobileInputsManager : MonoBehaviour {
         CheckIfPlayerIsInputting();
     }
     
-    Vector3 targetPos;
-    void RefreshPattern(Button button, string skillId)//按钮切换也可以在这里做文章
+    void RefreshPattern(Button button, string skillId) //按钮切换也可以在这里做文章
     {
-        targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, button.GetComponent<RectTransform>(), 5);
+        Vector3 targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, button.GetComponent<RectTransform>(), 5);
         if (_elementEffects.ContainsKey(_focusing))
         {
             _elementEffects[_focusing].RefreshBtn(button, skillId, targetPos);

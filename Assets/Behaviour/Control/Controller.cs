@@ -14,17 +14,17 @@ namespace Soul
     {
         private readonly SSIMultiDictionary _triggered = new SSIMultiDictionary();
         
-        public void Decision(BehaviorRunner runner, List<SkillEntity> Options, bool auto)
+        public void Decision(BehaviorRunner runner, List<SkillEntity> options, bool auto)
         {
             bool changed = false;
             
             #region 按键触发
             if (runner.InputsManager != null)
             {
-                changed = BtnTrigger(runner, Options, runner.InputsManager);
-                if (changed)
+                changed = BtnTrigger(runner, options, runner.InputsManager);
+                if (changed && runner.InputsManager.CurrentFocus.Value != null)
                 {
-                    runner.InputsManager.BtnRefreshEffects();
+                    runner.InputsManager.BtnRefreshFrames();
                 }
             }
             #endregion
@@ -37,7 +37,7 @@ namespace Soul
             #region AI决策
             if (auto)
             {
-                changed = AI_RUNs(runner, Options);
+                changed = AI_RUNs(runner, options);
             }
             #endregion
             
