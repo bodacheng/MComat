@@ -133,12 +133,14 @@ public class MobileInputsManager : MonoBehaviour {
     // 而防御与机动则是确定一直显示。
     void StartPressing(Button targetBtn)
     {
-        _elementEffects[_focusing].StartPressing(targetBtn);
+        if (_elementEffects.ContainsKey(_focusing))
+            _elementEffects[_focusing].StartPressing(targetBtn);
     }
 
     void StopPressing()
     {
-        _elementEffects[_focusing].StopPressing();
+        if (_elementEffects.ContainsKey(_focusing))
+            _elementEffects[_focusing].StopPressing();
     }
     
     // 如果不是对准角色，不会跑。

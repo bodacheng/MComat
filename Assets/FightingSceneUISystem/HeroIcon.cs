@@ -40,6 +40,8 @@ public class HeroIcon : MonoBehaviour {
         {
             this.unitConfig = Units.GetUnitConfig(unitInfo.r_id);
             var pic = await UnitIconDic.Load(unitInfo.r_id, gameObject);
+            if (gameObject == null)
+                return;
             ChangeIcon(pic, unitConfig.element);
             
             if (withSkillCheck)

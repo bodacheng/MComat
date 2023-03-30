@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using DG.Tweening;
 
 //本相机控制模式也是基于圆形战场，并且相机的朝向固定为Vector3.foward，偏朝下俯视。
@@ -8,7 +9,7 @@ using DG.Tweening;
 
 public class TouchTopDownCamera : CameraMode
 {
-    readonly float height;
+    float height;
     readonly float battlefieldDiameter;
     Vector3 firstPoint;
     Vector3 secondPoint;
@@ -20,7 +21,12 @@ public class TouchTopDownCamera : CameraMode
     float rotationSpeed = 0.5f;
     private bool isRotating = false;
     private float disAwayFromFront = 10f;
-
+    
+    private float Height
+    {
+        get => height;
+        set => height = Mathf.Clamp(value, 7, 15);
+    }
     
     public TouchTopDownCamera(float height, float battlefieldDiameter)
     {
@@ -39,11 +45,16 @@ public class TouchTopDownCamera : CameraMode
             temp = camera.transform.forward;
             temp.y = 0;
         }).Append(camera.transform.DOMoveY(height, 0.2f)).
-        Join(camera.transform.DOLookAt(temp  - Vector3.up, 0.5f, AxisConstraint.None,Vector3.up)).AppendCallback(() => { canTouch = true; });
+        Join(camera.transform.DOLookAt(temp  - Vector3.up, 0.5f, AxisConstraint.None,Vector3.up)).
+        AppendCallback(() =>
+        {
+            canTouch = true;
+        });
         mainSequence.Play();
     }
     
     private float backDist = 0.0f;
+    float startCameraHeight;
     public override void LocalUpdate(Camera camera)
     {
         if (!canTouch)
@@ -70,14 +81,24 @@ public class TouchTopDownCamera : CameraMode
                 backDist = Vector2.Distance (t1.position, t2.position);
                 firstPoint = t2.position;
                 startFromPointWhenDrag = camera.transform.position;
+                startCameraHeight = height;
             }
             else if ((t1.phase == TouchPhase.Moved || t2.phase == TouchPhase.Moved) && (t1.phase != TouchPhase.Ended && t2.phase != TouchPhase.Ended))
             {
-                //move
-                secondPoint = t2.position;
-                if (meCenter == null)
+                var afterDist = Vector2.Distance (t1.position, t2.position);
+                if (Mathf.Abs(afterDist - backDist) >  Screen.width / 5)
                 {
-                    CameraDrag(camera, startFromPointWhenDrag, firstPoint, secondPoint);
+                    Height = startCameraHeight - ((afterDist - Screen.width / 5) / Screen.height) * 20f;
+                    camera.transform.position = new Vector3(camera.transform.position.x,Height, camera.transform.position.z);
+                }
+                else
+                {
+                    //move
+                    secondPoint = t2.position;
+                    if (meCenter == null)
+                    {
+                        CameraDrag(camera, startFromPointWhenDrag, firstPoint, secondPoint);
+                    }
                 }
             }
             else if (t1.phase == TouchPhase.Ended || t2.phase == TouchPhase.Ended)
@@ -105,7 +126,13 @@ public class TouchTopDownCamera : CameraMode
         }
         else // editor
         {
-            if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
+            float scrollWheelValue = Input.GetAxis("Mouse ScrollWheel");
+            if (scrollWheelValue != 0)
+            {
+                Height += scrollWheelValue;
+                camera.transform.position = new Vector3(camera.transform.position.x,Height, camera.transform.position.z);
+            }
+            else if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
             {
                 if (Input.GetMouseButtonDown(0))
                 {
