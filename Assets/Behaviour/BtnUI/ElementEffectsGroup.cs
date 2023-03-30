@@ -23,11 +23,8 @@ public class ElementEffectsGroup
 
     ParticleSystem _defendBtn;
     ParticleSystem _rushBtn;
-    ParticleSystem _aRefresh;
-    ParticleSystem _fire1Refresh;
-    ParticleSystem _fire2Refresh;
     
-    public void Close()
+    public void Close(ParticleSystemStopBehavior systemStopBehavior)
     {
         foreach(var kv in btnEffectsSets)
         {
@@ -44,20 +41,20 @@ public class ElementEffectsGroup
             }
         }
         
-        triggerExplosion0.Stop(true);
-        triggerExplosion1.Stop(true);
-        triggerExplosion2.Stop(true);
-        triggerExplosion3.Stop(true);
+        triggerExplosion0.Stop(true, systemStopBehavior);
+        triggerExplosion1.Stop(true, systemStopBehavior);
+        triggerExplosion2.Stop(true, systemStopBehavior);
+        triggerExplosion3.Stop(true, systemStopBehavior);
         
         foreach (var keyValue in BtnRefreshEffects)
         {
-            keyValue.Value.Stop(true);
+            keyValue.Value.Stop(true, systemStopBehavior);
         }
-        pressingExplosion.Stop(true);
-        _rushBtn.Stop(true);
+        pressingExplosion.Stop(true, systemStopBehavior);
+        _rushBtn.Stop(true, systemStopBehavior);
         
         if (FightGlobalSetting.HasDefend)
-            _defendBtn.Stop(true);
+            _defendBtn.Stop(true, systemStopBehavior);
     }
     
     public void Open(Vector3 defendBtnPos, Vector3 rushBtnPos)
@@ -113,9 +110,9 @@ public class ElementEffectsGroup
         }
         
         _rushBtn = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/rush.prefab");
-        _aRefresh = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
-        _fire1Refresh = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
-        _fire2Refresh = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
+        ParticleSystem _aRefresh = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
+        ParticleSystem _fire1Refresh = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
+        ParticleSystem _fire2Refresh = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
         triggerExplosion0 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
         triggerExplosion1 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion1.prefab");
         triggerExplosion2 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion2.prefab");

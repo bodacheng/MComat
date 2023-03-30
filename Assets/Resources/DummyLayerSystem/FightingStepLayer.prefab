@@ -2514,12 +2514,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea83739f2ff7497fa8f201622e9132b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attack: {fileID: 5714480301642041410}
-  Fire1: {fileID: 5714480301408580934}
-  Fire2: {fileID: 5714480300668427163}
-  Defend: {fileID: 5714480301820124979}
-  Dash: {fileID: 5714480301703364042}
-  _joystick: {fileID: 8430255970167091705}
+  a1Btn: {fileID: 5714480301642041410}
+  a2Btn: {fileID: 5714480301408580934}
+  a3Btn: {fileID: 5714480300668427163}
+  defendBtn: {fileID: 5714480301820124979}
+  dashBtn: {fileID: 5714480301703364042}
+  joystick: {fileID: 8430255970167091705}
   effectsParent: {fileID: 5788849479198898695}
 --- !u!1 &5714480302156832987
 GameObject:

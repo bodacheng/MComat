@@ -20,21 +20,21 @@ public enum InputKey
 
 public class MobileInputsManager : MonoBehaviour {
 
-    [SerializeField] Button Attack;
-    [SerializeField] Button Fire1;
-    [SerializeField] Button Fire2;
-    [SerializeField] Button Defend;
-    [SerializeField] Button Dash;
-    [SerializeField] UltimateJoystick _joystick;
+    [SerializeField] Button a1Btn;
+    [SerializeField] Button a2Btn;
+    [SerializeField] Button a3Btn;
+    [SerializeField] Button defendBtn;
+    [SerializeField] Button dashBtn;
+    [SerializeField] UltimateJoystick joystick;
     [SerializeField] Transform effectsParent;
     
     readonly IDictionary<Element, ElementEffectsGroup> _elementEffects = new Dictionary<Element, ElementEffectsGroup>();
     Element _focusing;
     
-    bool inputting = false;
-    public bool Inputting => inputting;
+    bool _inputting = false;
+    public bool Inputting => _inputting;
     
-    private ReactiveProperty<Data_Center> focus = new ReactiveProperty<Data_Center>();
+    private readonly ReactiveProperty<Data_Center> focus = new ReactiveProperty<Data_Center>();
     public ReactiveProperty<Data_Center> CurrentFocus => focus;
     
     public void FocusUnit(Data_Center center)
@@ -49,14 +49,14 @@ public class MobileInputsManager : MonoBehaviour {
             focus.Value = center;
             SwitchElementEffects(center.element);
             SuddenRefreshButtons(focus.Value._MyBehaviorRunner);
-            _joystick.gameObject.SetActive(true);
+            joystick.gameObject.SetActive(true);
             TurnOnButtons();
         }
         else
         {
             focus.Value = null;
             TurnOffButtons();
-            _joystick.gameObject.SetActive(false);
+            joystick.gameObject.SetActive(false);
         }
     }
     
@@ -71,7 +71,7 @@ public class MobileInputsManager : MonoBehaviour {
     {
         if (_elementEffects.ContainsKey(_focusing))
         {
-            _elementEffects[_focusing].Close();
+            _elementEffects[_focusing].Close(ParticleSystemStopBehavior.StopEmitting);
         }
         
         if (_elementEffects.ContainsKey(element))
@@ -79,8 +79,8 @@ public class MobileInputsManager : MonoBehaviour {
             _focusing = element;
             
             _elementEffects[element].Open(
-                PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Defend.GetComponent<RectTransform>(), 5), 
-                PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Dash.GetComponent<RectTransform>(), 5)
+                PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, defendBtn.GetComponent<RectTransform>(), 5), 
+                PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, dashBtn.GetComponent<RectTransform>(), 5)
             );
         }else{
             Debug.Log("见鬼了。检查手机控制器渲染模块加载顺序");
@@ -92,11 +92,11 @@ public class MobileInputsManager : MonoBehaviour {
         if (!_elementEffects.ContainsKey(element))
         {
             var elementEffect = new ElementEffectsGroup();
-            await elementEffect.INICommon(effectsParent, element, Attack, Fire1, Fire2);
+            await elementEffect.INICommon(effectsParent, element, a1Btn, a2Btn, a3Btn);
             _elementEffects.Add(element, elementEffect);
         }
-        await _elementEffects[element].INIBtn(Attack, Fire1, Fire2, unitInfo);
-        _elementEffects[element].Close();
+        await _elementEffects[element].INIBtn(a1Btn, a2Btn, a3Btn, unitInfo);
+        _elementEffects[element].Close(ParticleSystemStopBehavior.StopEmittingAndClear);
     }
     
     public void SkillExplosion(InputKey key, int spLevel)
@@ -129,13 +129,13 @@ public class MobileInputsManager : MonoBehaviour {
         switch (key)
         {
             case InputKey.Attack1:
-                targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Attack.GetComponent<RectTransform>(), 3);
+                targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, a1Btn.GetComponent<RectTransform>(), 3);
                 break;
             case InputKey.Attack2:
-                targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Fire1.GetComponent<RectTransform>(), 3);
+                targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, a2Btn.GetComponent<RectTransform>(), 3);
                 break;
             case InputKey.Attack3:
-                targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Fire2.GetComponent<RectTransform>(), 3);
+                targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, a3Btn.GetComponent<RectTransform>(), 3);
                 break;
         }
         targetExplode.Play();
@@ -178,14 +178,14 @@ public class MobileInputsManager : MonoBehaviour {
     static float v;
     void CheckIfPlayerIsInputting()
     {
-        inputting = defendButtonHover || attack || fire1 || fire2;
-        if (inputting)
+        _inputting = defendButtonHover || attack || fire1 || fire2;
+        if (_inputting)
         {
             return;
         }
         h = UnityEngine.Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("joystick");
         v = UnityEngine.Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("joystick");
-        inputting = (h > 0f || h < 0 || v > 0f || v < 0f);
+        _inputting = (h > 0f || h < 0 || v > 0f || v < 0f);
     }
     
     readonly Dictionary<InputKey, SkillEntity> _optionsLastFrame = new Dictionary<InputKey, SkillEntity>()
@@ -221,15 +221,15 @@ public class MobileInputsManager : MonoBehaviour {
         
         if (_optionsLastFrame[InputKey.Attack1] != _behaviorPreviewButton1)
         {
-            RefreshPattern(Attack, _behaviorPreviewButton1 != null ? _behaviorPreviewButton1.SkillID : string.Empty);
+            RefreshPattern(a1Btn, _behaviorPreviewButton1 != null ? _behaviorPreviewButton1.SkillID : string.Empty);
         }
         if (_optionsLastFrame[InputKey.Attack2] != _behaviorPreviewButton2)
         {
-            RefreshPattern(Fire1, _behaviorPreviewButton2 != null ? _behaviorPreviewButton2.SkillID : string.Empty);
+            RefreshPattern(a2Btn, _behaviorPreviewButton2 != null ? _behaviorPreviewButton2.SkillID : string.Empty);
         }
         if (_optionsLastFrame[InputKey.Attack3] != _behaviorPreviewButton3)
         {
-            RefreshPattern(Fire2, _behaviorPreviewButton3 != null ? _behaviorPreviewButton3.SkillID : string.Empty);
+            RefreshPattern(a3Btn, _behaviorPreviewButton3 != null ? _behaviorPreviewButton3.SkillID : string.Empty);
         }
         
         _optionsLastFrame[InputKey.Attack1] = _behaviorPreviewButton1;
@@ -255,7 +255,7 @@ public class MobileInputsManager : MonoBehaviour {
     public static bool attack;
     public void AttackDown()
     {
-        StartPressing(Attack);
+        StartPressing(a1Btn);
         attack = true;
     }
     public void AttackUp()
@@ -268,7 +268,7 @@ public class MobileInputsManager : MonoBehaviour {
     public void Fire1Down()
     {
         fire1 = true;
-        StartPressing(Fire1);
+        StartPressing(a2Btn);
     }
     public void Fire1Up()
     {
@@ -280,7 +280,7 @@ public class MobileInputsManager : MonoBehaviour {
     public void Fire2Down()
     {
         fire2 = true;
-        StartPressing(Fire2);
+        StartPressing(a3Btn);
     }
     public void Fire2Up()
     {
@@ -291,7 +291,7 @@ public class MobileInputsManager : MonoBehaviour {
     public void DefendDown()
     {
         defendButtonHover = true;
-        StartPressing(Defend);
+        StartPressing(defendBtn);
     }
     public void DefendUp()
     {
@@ -303,7 +303,7 @@ public class MobileInputsManager : MonoBehaviour {
     public void RushDown()
     {
         acc = true;
-        StartPressing(Dash);
+        StartPressing(dashBtn);
     }
     public void RushUp()
     {
@@ -313,10 +313,10 @@ public class MobileInputsManager : MonoBehaviour {
 
     public void TurnOnButtons()
     {
-        Attack.gameObject.SetActive(true);
-        Fire1.gameObject.SetActive(true);
-        Fire2.gameObject.SetActive(true);
-        Dash.gameObject.SetActive(true);
+        a1Btn.gameObject.SetActive(true);
+        a2Btn.gameObject.SetActive(true);
+        a3Btn.gameObject.SetActive(true);
+        dashBtn.gameObject.SetActive(true);
         attack = false;
         fire1 = false;
         fire2 = false;
@@ -324,17 +324,17 @@ public class MobileInputsManager : MonoBehaviour {
         
         if (FightGlobalSetting.HasDefend)
         {
-            Defend.gameObject.SetActive(true);
+            defendBtn.gameObject.SetActive(true);
             defendButtonHover = false;
         }
     }
 
     void TurnOffButtons()
     {
-        Attack.gameObject.SetActive(false);
-        Fire1.gameObject.SetActive(false);
-        Fire2.gameObject.SetActive(false);
-        Dash.gameObject.SetActive(false);
+        a1Btn.gameObject.SetActive(false);
+        a2Btn.gameObject.SetActive(false);
+        a3Btn.gameObject.SetActive(false);
+        dashBtn.gameObject.SetActive(false);
         
         attack = false;
         fire1 = false;
@@ -343,13 +343,13 @@ public class MobileInputsManager : MonoBehaviour {
         
         if (FightGlobalSetting.HasDefend)
         {
-            Defend.gameObject.SetActive(false);
+            defendBtn.gameObject.SetActive(false);
             defendButtonHover = false;
         }
 
         if (_elementEffects.ContainsKey(_focusing))
         {
-            _elementEffects[_focusing].Close();
+            _elementEffects[_focusing].Close(ParticleSystemStopBehavior.StopEmittingAndClear);
         }
     }
     
