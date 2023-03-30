@@ -33,27 +33,27 @@ public class MobileInputsManager : MonoBehaviour {
     bool inputting = false;
     public bool Inputting => inputting;
     
-    private Data_Center watch;
-    public Data_Center CurrentFocus => watch;
+    private Data_Center focus;
+    public Data_Center CurrentFocus => focus;
     
     public void FocusUnit(Data_Center center)
     {
-        if (watch != null)
+        if (focus != null)
         {
-            watch._MyBehaviorRunner.InputsManager = null;
+            focus._MyBehaviorRunner.InputsManager = null;
         }
         if (center != null)
         {
             center._MyBehaviorRunner.InputsManager = this;
-            watch = center;
+            focus = center;
             SwitchElementEffects(center.element);
-            SuddenRefreshButtons(watch._MyBehaviorRunner);
+            SuddenRefreshButtons(focus._MyBehaviorRunner);
             _joystick.gameObject.SetActive(true);
             TurnOnButtons();
         }
         else
         {
-            watch = null;
+            focus = null;
             TurnOffButtons();
             _joystick.gameObject.SetActive(false);
         }
@@ -100,7 +100,7 @@ public class MobileInputsManager : MonoBehaviour {
     
     public void SkillExplosion(InputKey key, int spLevel)
     {
-        ParticleSystem _targetExplode;
+        ParticleSystem targetExplode;
         if (!_elementEffects.ContainsKey(_focusing))
         {
             Debug.Log("读取流程产生错误："+_focusing);
@@ -110,16 +110,16 @@ public class MobileInputsManager : MonoBehaviour {
         switch(spLevel)
         {
             case 0:
-                _targetExplode = _elementEffects[_focusing].triggerExplosion0;
+                targetExplode = _elementEffects[_focusing].triggerExplosion0;
             break;
             case 1:
-                _targetExplode = _elementEffects[_focusing].triggerExplosion1;
+                targetExplode = _elementEffects[_focusing].triggerExplosion1;
             break;
             case 2:
-                _targetExplode = _elementEffects[_focusing].triggerExplosion2;
+                targetExplode = _elementEffects[_focusing].triggerExplosion2;
             break;
             case 3:
-                _targetExplode = _elementEffects[_focusing].triggerExplosion3;
+                targetExplode = _elementEffects[_focusing].triggerExplosion3;
             break;
             default:
                 return;
@@ -128,16 +128,16 @@ public class MobileInputsManager : MonoBehaviour {
         switch (key)
         {
             case InputKey.Attack1:
-                _targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Attack.GetComponent<RectTransform>(), 3);
+                targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Attack.GetComponent<RectTransform>(), 3);
                 break;
             case InputKey.Attack2:
-                _targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Fire1.GetComponent<RectTransform>(), 3);
+                targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Fire1.GetComponent<RectTransform>(), 3);
                 break;
             case InputKey.Attack3:
-                _targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Fire2.GetComponent<RectTransform>(), 3);
+                targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, Fire2.GetComponent<RectTransform>(), 3);
                 break;
         }
-        _targetExplode.Play();
+        targetExplode.Play();
     }
 
     //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变

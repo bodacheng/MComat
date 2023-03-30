@@ -18,11 +18,17 @@ namespace FightScene
 
         public TeamMode teamMode;
         public TeamConfig teamConfig;
-        public MultiDic<int, int, Data_Center> teamMembers;
         public readonly IDictionary<Data_Center, SideUnitIcon> UnitIconDic = new Dictionary<Data_Center, SideUnitIcon>();
         private IDisposable barPosUpdate;
         private int barPosUpdateInterval = 3;
         
+        MultiDic<int, int, Data_Center> teamMembers;
+        public MultiDic<int, int, Data_Center> TeamMembers
+        {
+            get => teamMembers;
+            set => teamMembers = value;
+        }
+
         public SideUnitIcon GetSideIcon(Data_Center d)
         {
             return UnitIconDic[d];

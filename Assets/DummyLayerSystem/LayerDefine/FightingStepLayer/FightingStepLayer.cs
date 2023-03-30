@@ -80,8 +80,8 @@ public class FightingStepLayer : UILayer
         team2UI.teamConfig = RTFightManager.Target.EnemyTeamConfig;
         team1UI.teamConfig.playID = FightScene.FightScene.Fight.Team1ID;
         team2UI.teamConfig.playID = FightScene.FightScene.Fight.Team2ID;
-        team1UI.teamMembers = RTFightManager.Target.team1.teamMembers;
-        team2UI.teamMembers = RTFightManager.Target.team2.teamMembers;
+        team1UI.TeamMembers = RTFightManager.Target.team1.teamMembers;
+        team2UI.TeamMembers = RTFightManager.Target.team2.teamMembers;
         
         // 角色第二次初始化在这之前已经结束
         team1UI.InsTeamUI(RTFightManager.Target.team1.ReadyForNextMember, (() => RTFightManager.Target.team1.Auto),switchTeam1Auto, RTFightManager.Target.team1.RMode_Unit);
