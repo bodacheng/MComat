@@ -12,6 +12,17 @@ public class FightPrepareLayer : UILayer
     [SerializeField] Button editTeamButton; // 根据进入战斗模式决定是否显示
     [SerializeField] Button beginFight;
     [SerializeField] GameObject teamEditIndicator;
+    [SerializeField] FightModeSwitch _fightModeSwitch;
+
+    public void SetFightMode(TeamMode mode)
+    {
+        _fightModeSwitch.Set(mode);
+    }
+
+    public TeamMode GetSetFightMode()
+    {
+        return _fightModeSwitch.TeamMode;
+    }
     
     public void SetFightBeginFeature(Action fightBegin)
     {

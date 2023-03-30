@@ -121,3 +121,6 @@ TeamEditTutorial2,Add a new warrior to the team to have a total of two members,�
 SaveYourTeam,Click on "Confirm" to save the team,「確認」をクリックして、チームを保存してください,点击确定保存队伍
 ,,,
 TeamUnitNotFull,Members' skills are incomplete,チームメンバーのスキルが不完全です,队员技能不完整
+,,,
+TeamModeM,War,War,战争
+TeamModeR,Duel,Duel,对决

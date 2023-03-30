@@ -38,6 +38,10 @@ public class QuestInfoPage : MSceneProcess
                 PopupLayer.ArrangeWarnWindow(Translate.Get("TeamUnitNotFull"));
                 return;
             }
+
+            FightScene.FightScene.Fight.team1Mode= _layer.GetSetFightMode();
+            FightScene.FightScene.Fight.team2Mode= _layer.GetSetFightMode();
+            
             switch (FightScene.FightScene.Fight.EventType)
             {
                 case FightEventType.Arena:
@@ -64,6 +68,8 @@ public class QuestInfoPage : MSceneProcess
                     break;
             }
         }
+        
+        _layer.SetFightMode(FightScene.FightScene.Fight.team1Mode);
         _layer.SetFightBeginFeature(Go);
         SetLoaded(true);
     }
