@@ -14,14 +14,10 @@ public class FightPrepareLayer : UILayer
     [SerializeField] GameObject teamEditIndicator;
     [SerializeField] FightModeSwitch _fightModeSwitch;
 
-    public void FightModeSwitchOn(bool on)
-    {
-        _fightModeSwitch.gameObject.SetActive(on);
-    }
     
-    public void SetFightMode(TeamMode mode)
+    public void SetFightMode(int fightMode)
     {
-        _fightModeSwitch.Set(mode);
+        _fightModeSwitch.Setup(fightMode, PlayerPrefs.GetInt("preferAdventureMode",  2));
     }
 
     public TeamMode GetSetFightMode()

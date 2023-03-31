@@ -52,6 +52,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - config
+  - m_GUID: f82352243f33a48c79e9de4316104397
+    m_Address: Config/stage_mode
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

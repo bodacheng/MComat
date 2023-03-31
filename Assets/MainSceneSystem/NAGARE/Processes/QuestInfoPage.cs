@@ -1,5 +1,4 @@
-﻿using System;
-using dataAccess;
+﻿using dataAccess;
 using DummyLayerSystem;
 using mainMenu;
 public class QuestInfoPage : MSceneProcess
@@ -70,20 +69,18 @@ public class QuestInfoPage : MSceneProcess
             }
         }
 
-        bool FightModeSwitchOn()
+        int FightMode()
         {
             switch (FightScene.FightScene.Fight.EventType)
             {
                 case FightEventType.Quest:
-                    int idInt = Int32.Parse(FightScene.FightScene.Fight.ID);
-                    return idInt > 5;
+                    return FightScene.FightScene.Fight.ArcadeFightMode;
                 default:
-                    return true;
+                    return 0;
             }
         }
         
-        _layer.FightModeSwitchOn(FightModeSwitchOn());
-        _layer.SetFightMode(FightScene.FightScene.Fight.team1Mode);
+        _layer.SetFightMode(FightMode());
         _layer.SetFightBeginFeature(Go);
         SetLoaded(true);
     }

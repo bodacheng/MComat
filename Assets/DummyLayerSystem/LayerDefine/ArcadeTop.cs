@@ -19,9 +19,11 @@ public class ArcadeTop : UILayer
 
     List<int> _currentStages;
     readonly List<StageButton> _stageButtons = new List<StageButton>();
+    private StageModeTable stageModeTable;
     CancellationTokenSource _cts;
-    public void Setup(CancellationTokenSource cts)
+    public void Setup(StageModeTable stageModeTable, CancellationTokenSource cts)
     {
+        this.stageModeTable = stageModeTable;
         _cts = cts; 
         nextChapter.onClick.AddListener(ShowNextStages);
         lastChapter.onClick.AddListener(ShowLastStages);
@@ -84,6 +86,7 @@ public class ArcadeTop : UILayer
             void LoadThisStage()
             {
                 one.EventType = FightEventType.Quest;
+                one.ArcadeFightMode = stageModeTable.GetModeById(one.ID);
                 PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, one, true);
             }
             

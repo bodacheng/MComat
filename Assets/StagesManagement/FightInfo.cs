@@ -10,7 +10,6 @@ public class FightInfo : ScriptableObject
     public int battleGroundID;
     public int fightBGM = 0;
     
-    [SerializeField] private Sprite stageButtonSprite;
     [SerializeField] private List<UnitInfo> unitsData = new List<UnitInfo>();
     
     public string GetBGMKey()
@@ -40,8 +39,13 @@ public class FightInfo : ScriptableObject
     public TeamMode team2Mode = TeamMode.Rotation;
     public AIMode team1AIMode = AIMode.Aggressive;
     public AIMode team2AIMode = AIMode.Aggressive;
-    
     public int dumbAIDecisionDelay = 20;
+
+    public int ArcadeFightMode
+    {
+        get;
+        set;
+    }
 
     public bool RunTutorial
     {
@@ -196,7 +200,6 @@ public class FightInfo : ScriptableObject
         stage.Team1LeaderboardEntry = source.Team1LeaderboardEntry;
         stage.Team2LeaderboardEntry = source.Team2LeaderboardEntry;
         stage.RunTutorial = source.RunTutorial;
-        stage.stageButtonSprite = source.stageButtonSprite;
         stage.EventType = source.EventType;
         return stage;
     }

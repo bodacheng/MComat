@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 2932593853097283732}
   - component: {fileID: 1046813911995523789}
   - component: {fileID: 7156272307788542025}
+  - component: {fileID: 6108737665849082403}
   m_Layer: 5
   m_Name: FightMode
   m_TagString: Untagged
@@ -333,7 +334,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0d80e7206d741c1a3c41684b78789d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  btn: {fileID: 7156272307788542025}
   modeText: {fileID: 4183534920214455500}
+  animator: {fileID: 6108737665849082403}
 --- !u!114 &1046813911995523789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,19 +410,27 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1046813911995523789}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2932593853097283732}
-        m_TargetAssemblyTypeName: FightModeSwitch, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!95 &6108737665849082403
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046813911995523791}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b39c0e94bfe524eeca9dc6de4a62e186, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1065882688895915130
 GameObject:
   m_ObjectHideFlags: 0

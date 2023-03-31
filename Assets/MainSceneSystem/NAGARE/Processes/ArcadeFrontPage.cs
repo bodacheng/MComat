@@ -11,18 +11,22 @@ public class ArcadeFrontPage : MSceneProcess
     }
     
     ArcadeTop _arcadeTop;
+    StageModeTable stageModeTable;
     CancellationTokenSource _cts;
+    
     public override void ProcessEnter()
     {
+        stageModeTable = new StageModeTable();
         _arcadeTop = UILayerLoader.Load<ArcadeTop>();
         _cts = new CancellationTokenSource();
-        _arcadeTop.Setup(_cts);
+        _arcadeTop.Setup(stageModeTable, _cts);
         ReturnLayer.AddUniTaskCancel(_cts);
         Load().Forget();
     }
 
     async UniTask Load()
     {
+        await stageModeTable.LoadStageMode();
         var stages = _arcadeTop.NewStages(PlayerAccountInfo.Me.arcadeProcess);
         await _arcadeTop.ShowStages(stages, _cts.Token);
         SetLoaded(true);
