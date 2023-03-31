@@ -4,19 +4,13 @@ using DG.Tweening;
 
 public class SideUnitIcon : MonoBehaviour {
     
-    public Slider HpBar;
+    [SerializeField] Slider HpBar;
     [SerializeField] Text HpText;
-    
-    [Header("浮动抵抗")]
     [SerializeField] Slider ResistBar;
-    
-    [Header("浮动Ex条")]
-    public Slider ExBar;
-    
-    [Header("必杀技点")]
     [SerializeField] GameObject[] charges;
-    
-    public HeroIcon focusingCharIcon;
+    [SerializeField] HeroIcon focusingCharIcon;
+
+    public HeroIcon Icon => focusingCharIcon;
     
     public void RefreshResistanceBar(float resistance)
     {
@@ -29,13 +23,8 @@ public class SideUnitIcon : MonoBehaviour {
         DOTween.To(() => HpBar.value, (x) => HpBar.value = x, currentHp / wholeHp, 0.2f);
     }
     
-    public void RefreshExBar(int currentEx, int wholeEx)
+    public void RefreshExBar(int currentEx)
     {
-        if (currentEx > 0 && !ExBar.fillRect.gameObject.activeSelf)
-        {
-            ExBar.fillRect.gameObject.SetActive(true);
-        }
-        DOTween.To(() => ExBar.value, (x) => ExBar.value = x, (float)currentEx / wholeEx, 0.1f).OnComplete(() => { if (System.Math.Abs(ExBar.value) < 0.1) ExBar.fillRect.gameObject.SetActive(false); });
         if (currentEx >= 90)
         {
             charges[2].SetActive(true);
@@ -66,5 +55,13 @@ public class SideUnitIcon : MonoBehaviour {
         ResistBar.transform.SetParent(transform);
         ResistBar.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,15,0);
         ResistBar.transform.localScale = Vector3.one;
+    }
+
+    public void GreyOut()
+    {
+        HpBar.gameObject.SetActive(false);
+        HpText.gameObject.SetActive(false);
+        ResistBar.gameObject.SetActive(false);
+        focusingCharIcon.CooldownCurtainUpdate(1);
     }
 }

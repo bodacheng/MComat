@@ -36,15 +36,15 @@ namespace FightScene
 
                 var sideIcon = Instantiate(unitIconPrefab);
                 sideIcon.name = center.UnitInfo.r_id + "_icon";
-                sideIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
-                sideIcon.focusingCharIcon.iconButton.onClick.AddListener(() =>
+                sideIcon.Icon.iconButton.onClick.RemoveAllListeners();
+                sideIcon.Icon.iconButton.onClick.AddListener(() =>
                 {
                     OnClickUnitIcon(center);
                 });
                 var unitInfo = RTFightManager.Target.UnitInfoRef[center];
-                sideIcon.focusingCharIcon.ChangeIcon(unitInfo);
+                sideIcon.Icon.ChangeIcon(unitInfo);
                 sideIcon.gameObject.SetActive(true);
-                sideIcon.focusingCharIcon.CooldownCurtainUpdate(0);
+                sideIcon.Icon.CooldownCurtainUpdate(0);
                 
                 if (TeamConfig.myTeam == RTFightManager.playerTeam)
                 {
@@ -66,13 +66,25 @@ namespace FightScene
                 
                 center.FightDataRef.CriticalGauge.Subscribe(x =>
                 {
-                    RefreshExBar(center, x, FightGlobalSetting._EXMax);
+                    RefreshExBar(center, x);
                 }).AddTo(gameObject);
                 
                 center.FightDataRef.Resistance.Subscribe(x =>
-                {
-                    RefreshResistanceBar(center, x);
-                }).AddTo(gameObject);
+                    {
+                        RefreshResistanceBar(center, x);
+                    }
+                ).AddTo(gameObject);
+                
+                center.FightDataRef.IsDead.Subscribe(x =>
+                    {
+                        if (x)
+                        {
+                            center.FightDataRef.Resistance.Value = 0;
+                            center.FightDataRef.CriticalGauge.Value = 0;
+                            sideIcon.GreyOut();
+                        }
+                    }
+                ).AddTo(sideIcon.gameObject);
             }
 
             inputsManager.CurrentFocus.Subscribe(
