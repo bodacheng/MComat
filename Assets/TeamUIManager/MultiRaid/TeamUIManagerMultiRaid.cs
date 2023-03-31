@@ -13,28 +13,28 @@ namespace FightScene
         
         void InsTeamUI_Multi(Action<bool> switchTeamAuto, Func<bool> currentAutoState)//这个环节应该能够同时把HP bar也适配好。
         {
-            foreach (var center in teamMembers.GetValues())
+            foreach (var center in _teamMembers.GetValues())
             {
                 // SideIcon整备
                 void OnClickUnitIcon(Data_Center c)
                 {
-                    if (teamConfig.myTeam == RTFightManager.playerTeam)
+                    if (TeamConfig.myTeam == RTFightManager.playerTeam)
                     {
-                        if (_inputsManager.CurrentFocus.Value == c)
+                        if (inputsManager.CurrentFocus.Value == c)
                         {
-                            _inputsManager.FocusUnit(null);
+                            inputsManager.FocusUnit(null);
                             RTFightManager.Target._CameraManager.SetCurrentCameraParams(null, null);
                         }
                         else
                         {
-                            _inputsManager.FocusUnit(c);
+                            inputsManager.FocusUnit(c);
                             RTFightManager.Target._CameraManager.SetCurrentCameraParams(c.WholeT, null);
                         }
                     }
                     switchTeamAuto(currentAutoState());
                 }
 
-                var sideIcon = Instantiate(button_prefab);
+                var sideIcon = Instantiate(unitIconPrefab);
                 sideIcon.name = center.UnitInfo.r_id + "_icon";
                 sideIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
                 sideIcon.focusingCharIcon.iconButton.onClick.AddListener(() =>
@@ -46,7 +46,7 @@ namespace FightScene
                 sideIcon.gameObject.SetActive(true);
                 sideIcon.focusingCharIcon.CooldownCurtainUpdate(0);
                 
-                if (teamConfig.myTeam == RTFightManager.playerTeam)
+                if (TeamConfig.myTeam == RTFightManager.playerTeam)
                 {
                     sideIcon.transform.SetParent(sideIconsContainer.transform);
                     sideIcon.transform.localScale = Vector3.one;
@@ -75,7 +75,7 @@ namespace FightScene
                 }).AddTo(gameObject);
             }
 
-            _inputsManager.CurrentFocus.Subscribe(
+            inputsManager.CurrentFocus.Subscribe(
                 (x) =>
                 {
                     if (x != null)
@@ -98,7 +98,7 @@ namespace FightScene
                 }
             ).AddTo(this.gameObject);
             
-            _inputsManager.FocusUnit(null);
+            inputsManager.FocusUnit(null);
         }
     }
 }

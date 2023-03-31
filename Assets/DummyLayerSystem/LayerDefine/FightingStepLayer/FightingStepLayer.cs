@@ -11,7 +11,7 @@ public class FightingStepLayer : UILayer
     [SerializeField] Button pauseButton;
     
     [Header("MobileInputsManager")]
-    [SerializeField] MobileInputsManager InputsManager;
+    [SerializeField] MobileInputsManager inputsManager;
     
     [Header("TeamUIManager")]
     [SerializeField] TeamUIManager team1UI;
@@ -49,8 +49,8 @@ public class FightingStepLayer : UILayer
         var layer = UILayerLoader.Get<FightingStepLayer>();
         if (layer == null)
             return;
-        layer.InputsManager.FocusUnit(null);
-        layer.InputsManager.Clear();
+        layer.inputsManager.FocusUnit(null);
+        layer.inputsManager.Clear();
         layer.team1UI.Clear();
         layer.team2UI.Clear();
         UILayerLoader.Remove<FightingStepLayer>();
@@ -68,18 +68,18 @@ public class FightingStepLayer : UILayer
     {
         Initialized = false;
         
-        RTFightManager.Target.team1.InputsManager = InputsManager;
-        RTFightManager.Target.team2.InputsManager = InputsManager;
+        RTFightManager.Target.team1.InputsManager = inputsManager;
+        RTFightManager.Target.team2.InputsManager = inputsManager;
         
         pauseButton.onClick.AddListener(pauseAction.Invoke);
         
-        team1UI.teamMode = FightScene.FightScene.Fight.team1Mode;
-        team2UI.teamMode = FightScene.FightScene.Fight.team2Mode;
+        team1UI.TeamMode = FightScene.FightScene.Fight.team1Mode;
+        team2UI.TeamMode = FightScene.FightScene.Fight.team2Mode;
         
-        team1UI.teamConfig = RTFightManager.Target.heroTeamConfig;
-        team2UI.teamConfig = RTFightManager.Target.EnemyTeamConfig;
-        team1UI.teamConfig.playID = FightScene.FightScene.Fight.Team1ID;
-        team2UI.teamConfig.playID = FightScene.FightScene.Fight.Team2ID;
+        team1UI.TeamConfig = RTFightManager.Target.heroTeamConfig;
+        team2UI.TeamConfig = RTFightManager.Target.EnemyTeamConfig;
+        team1UI.TeamConfig.playID = FightScene.FightScene.Fight.Team1ID;
+        team2UI.TeamConfig.playID = FightScene.FightScene.Fight.Team2ID;
         team1UI.TeamMembers = RTFightManager.Target.team1.teamMembers;
         team2UI.TeamMembers = RTFightManager.Target.team2.teamMembers;
         
@@ -89,11 +89,11 @@ public class FightingStepLayer : UILayer
 
         foreach (var d in RTFightManager.Target.team1.teamMembers.GetValues())
         {
-            await InputsManager.ElementRegister(d.element, RTFightManager.Target.UnitInfoRef[d]);
+            await inputsManager.ElementRegister(d.element, RTFightManager.Target.UnitInfoRef[d]);
         }
         foreach (var d in RTFightManager.Target.team2.teamMembers.GetValues())
         {
-            await InputsManager.ElementRegister(d.element, RTFightManager.Target.UnitInfoRef[d]);
+            await inputsManager.ElementRegister(d.element, RTFightManager.Target.UnitInfoRef[d]);
         }
         Initialized = true;
     }

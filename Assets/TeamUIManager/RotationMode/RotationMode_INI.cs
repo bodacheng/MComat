@@ -12,9 +12,9 @@ namespace FightScene
         
         void IniTeamUI_Rotate(Action<Data_Center> ChangeUnit)
         {
-            foreach (var center in teamMembers.GetValues())
+            foreach (var center in _teamMembers.GetValues())
             {
-                var sideIcon = Instantiate(button_prefab);
+                var sideIcon = Instantiate(unitIconPrefab);
                 sideIcon.name = center.name + " ICon";
                 sideIcon.focusingCharIcon.iconButton.onClick.RemoveAllListeners();
                 sideIcon.focusingCharIcon.iconButton.onClick.AddListener(() => { ChangeUnit(center); });
@@ -23,7 +23,7 @@ namespace FightScene
                 sideIcon.gameObject.SetActive(true);
                 sideIcon.focusingCharIcon.CooldownCurtainUpdate(0);
                 
-                if (teamConfig.myTeam == RTFightManager.playerTeam)
+                if (TeamConfig.myTeam == RTFightManager.playerTeam)
                 {
                     sideIcon.transform.SetParent(sideIconsContainer.transform);
                     sideIcon.transform.localScale = Vector3.one;
@@ -83,8 +83,8 @@ namespace FightScene
                 if (x != null)
                 {
                     rotationModeHitCombo = Instantiate(hitCombo);
-                    rotationModeHitCombo.name = teamConfig.myTeam + "HitCombo";
-                    rotationModeHitCombo.color = teamConfig.myTeam == RTFightManager.playerTeam ? Color.yellow : Color.blue;
+                    rotationModeHitCombo.name = TeamConfig.myTeam + "HitCombo";
+                    rotationModeHitCombo.color = TeamConfig.myTeam == RTFightManager.playerTeam ? Color.yellow : Color.blue;
                     rotationModeHitCombo.gameObject.SetActive(true);
                     if (rotationModeHitCombo.gameObject.transform.parent != _targetCanvasT)
                     {
@@ -103,7 +103,7 @@ namespace FightScene
                         else
                         {
                             rotationModeHitCombo.text = null;
-                            switch (teamConfig.myTeam)
+                            switch (TeamConfig.myTeam)
                             {
                                 case Team.player1:
                                     rotationModeHitCombo.rectTransform.DOAnchorPos(new Vector2(-200, Screen.height + 100), 1);

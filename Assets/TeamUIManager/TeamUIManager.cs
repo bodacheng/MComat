@@ -9,25 +9,25 @@ namespace FightScene
 {
     public partial class TeamUIManager : MonoBehaviour
     {
-        [SerializeField] MobileInputsManager _inputsManager;
+        [SerializeField] MobileInputsManager inputsManager;
         [SerializeField] RectTransform sideIconsContainer;
         [SerializeField] RectTransform _targetCanvasT;
-        [SerializeField] SideUnitIcon button_prefab;
+        [SerializeField] SideUnitIcon unitIconPrefab;
         [SerializeField] Text hitCombo;
         [SerializeField] AutoSwitch teamAutoSwitch;
         [SerializeField] RectTransform selectedFrame;
         
-        public TeamMode teamMode;
-        public TeamConfig teamConfig;
+        public TeamMode TeamMode { get; set; }
+        public TeamConfig TeamConfig { get; set; }
         public readonly IDictionary<Data_Center, SideUnitIcon> UnitIconDic = new Dictionary<Data_Center, SideUnitIcon>();
         private IDisposable barPosUpdate;
         private int barPosUpdateInterval = 3;
         
-        MultiDic<int, int, Data_Center> teamMembers;
+        MultiDic<int, int, Data_Center> _teamMembers;
         public MultiDic<int, int, Data_Center> TeamMembers
         {
-            get => teamMembers;
-            set => teamMembers = value;
+            get => _teamMembers;
+            set => _teamMembers = value;
         }
 
         public SideUnitIcon GetSideIcon(Data_Center d)
@@ -38,7 +38,7 @@ namespace FightScene
         public void Clear()
         {
             barPosUpdate?.Dispose();
-            switch (teamMode)
+            switch (TeamMode)
             {
                 case TeamMode.MultiRaid:
                     MultiClear();
@@ -52,19 +52,19 @@ namespace FightScene
         public void InsTeamUI(Action<Data_Center> changeUnit, Func<bool> currentAutoState, Action<bool> switchTeamAuto, ReactiveProperty<Data_Center> rModeUnit)
         {
             teamAutoSwitch.Initialize(currentAutoState, switchTeamAuto);
-            if (teamConfig.myTeam != RTFightManager.playerTeam)
+            if (TeamConfig.myTeam != RTFightManager.playerTeam)
             {
                 teamAutoSwitch.gameObject.SetActive(CommonSetting.DevMode || FightScene.Fight.EventType == FightEventType.Self);
             }
-            switch (teamMode)
+            switch (TeamMode)
             {
                 case TeamMode.MultiRaid:
                     InsTeamUI_Multi(switchTeamAuto, currentAutoState);
-                    if (teamConfig.myTeam != RTFightManager.playerTeam)
+                    if (TeamConfig.myTeam != RTFightManager.playerTeam)
                     {
                         barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                         {
-                            foreach (var one in teamMembers.GetValues())
+                            foreach (var one in _teamMembers.GetValues())
                             {
                                 UnitIconDic.TryGetValue(one, out var _tempSI);
                                 if (_tempSI != null)
@@ -78,11 +78,11 @@ namespace FightScene
                     IniTeamUI_Rotate(changeUnit);
                     IniComboHit(rModeUnit);
                     rModeUnit.Subscribe(Refresh).AddTo(gameObject);
-                    if (teamConfig.myTeam != RTFightManager.playerTeam)
+                    if (TeamConfig.myTeam != RTFightManager.playerTeam)
                     {
                         barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                             {
-                                if (teamConfig.myTeam != RTFightManager.playerTeam)
+                                if (TeamConfig.myTeam != RTFightManager.playerTeam)
                                 {
                                     if (rModeUnit.Value == null)
                                         return;
@@ -120,12 +120,12 @@ namespace FightScene
         
         void Refresh(Data_Center fighting = null)
         {
-            foreach (var _dt in teamMembers.GetValues())
+            foreach (var _dt in _teamMembers.GetValues())
             {
                 UnitIconDic.TryGetValue(_dt, out var _tempSI);
                 if (_tempSI == null)
                     continue;
-                if (teamConfig.myTeam == RTFightManager.playerTeam)
+                if (TeamConfig.myTeam == RTFightManager.playerTeam)
                 {
                     _tempSI.transform.localScale = Vector3.one;
                     _tempSI.transform.SetParent(sideIconsContainer.transform);
