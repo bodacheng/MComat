@@ -11,12 +11,12 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     [SerializeField] bool reloadAfterWatched;
     string _adUnitId = null; // This will remain null for unsupported platforms
 
-    private Func<bool> enableCondition;
+    private Func<bool> extraEnableCondition;
     private Action watchedAdExtraProcess;
-
-    public void SetEnableCondition(Func<bool> enableCondition)
+    
+    public void SetExtraEnableCondition(Func<bool> extraEnableCondition)
     {
-        this.enableCondition = enableCondition;
+        this.extraEnableCondition = extraEnableCondition;
     }
 
     public void SetWatchedAdExtraProcess(Action watchedAdProcess)
@@ -61,7 +61,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
             // Configure the button to call the ShowAd() method when clicked:
             _showAdButton.onClick.AddListener(ShowAd);
             // Enable the button for users to click:
-            _showAdButton.interactable = enableCondition != null ? enableCondition() : true;
+            _showAdButton.interactable = extraEnableCondition != null ? extraEnableCondition() : true;
         }
     }
  
@@ -84,6 +84,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
             if (reloadAfterWatched)
                 Advertisement.Load(_adUnitId, this);
         }
+        AppSetting.Value.UnMute();
     }
     
     // Implement Load and Show Listener error callbacks:
@@ -96,10 +97,14 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
     {
         Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
+        AppSetting.Value.UnMute();
         // Use the error details to determine whether to try to load another ad.
     }
- 
-    public void OnUnityAdsShowStart(string adUnitId) { }
+
+    public void OnUnityAdsShowStart(string adUnitId)
+    {
+        AppSetting.Value.Mute();
+    }
     public void OnUnityAdsShowClick(string adUnitId) { }
  
     void OnDestroy()

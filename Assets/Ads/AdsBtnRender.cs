@@ -14,13 +14,12 @@ public class AdsBtnRender : MonoBehaviour
     //[SerializeField] private GoogleMobileAdsManager googleMobileAdsManager;
     
     private IDisposable _disposeCountDown;
-
     
     public void Setup()
     {
         // unity
         rewardedAdsButton.LoadAd();
-        rewardedAdsButton.SetEnableCondition(()=> Currencies.AdTicket.Value > 0);
+        rewardedAdsButton.SetExtraEnableCondition(()=> Currencies.AdTicket.Value > 0);
         rewardedAdsButton.SetWatchedAdExtraProcess(
             () =>
             {

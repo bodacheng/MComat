@@ -32,6 +32,20 @@ public class AppSetting
             bgmSource = value;
         }
     }
+
+    public void Mute()
+    {
+        BgmVolume = 0;
+        EffectsVolume = 0;
+        CvVolume = 0;
+    }
+    
+    public void UnMute()
+    {
+        BgmVolume = _bgmVolume;
+        EffectsVolume = _effectsVolume;
+        CvVolume = _cvVolume;
+    }
     
     public float BgmVolume
     {
@@ -47,19 +61,13 @@ public class AppSetting
     public float EffectsVolume
     {
         get => _effectsVolume;
-        set
-        {
-            _effectsVolume = Mathf.Clamp(value, 0, 1);
-        }
+        set => _effectsVolume = Mathf.Clamp(value, 0, 1);
     }
     
     public float CvVolume
     {
         get => _cvVolume;
-        set
-        {
-            _cvVolume = Mathf.Clamp(value, 0, 1);
-        }
+        set => _cvVolume = Mathf.Clamp(value, 0, 1);
     }
     
     public static void Save()
