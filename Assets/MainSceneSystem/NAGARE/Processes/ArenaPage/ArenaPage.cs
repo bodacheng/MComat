@@ -100,6 +100,7 @@ public partial class ArenaPage : MSceneProcess
         if (filteredWord.Contains("*"))
         {
             PopupLayer.ArrangeWarnWindow(Translate.Get("illegalword"));
+            input.text = _myLeaderboardInfo != null ? _myLeaderboardInfo.OneWord : string.Empty;
         }
         else
         {
