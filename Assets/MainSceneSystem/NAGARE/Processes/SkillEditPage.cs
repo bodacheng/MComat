@@ -19,7 +19,7 @@ public class SkillEditPage : MSceneProcess
         {
             x.connector.ShowMyModel(PreScene.target.Focusing != null ? PreScene.target.Focusing.id : null).Forget();
         });
-        
+        ReturnLayer.MoveFront();
         SetLoaded(true);
     }
     

@@ -19873,8 +19873,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
-      minScalar: 2
+      scalar: 0.5
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -20734,7 +20734,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 10
+        scalar: 5
         minScalar: 0
         maxCurve:
           serializedVersion: 2
@@ -20842,7 +20842,7 @@ ParticleSystem:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-      cycleCount: 150
+      cycleCount: 100
       repeatInterval: 0.01
       probability: 1
   SizeModule:
@@ -21196,7 +21196,7 @@ ParticleSystem:
         ctime7: 0
         atime0: 0
         atime1: 13107
-        atime2: 39321
+        atime2: 57054
         atime3: 65535
         atime4: 0
         atime5: 0

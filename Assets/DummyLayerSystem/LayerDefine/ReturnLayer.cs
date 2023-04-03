@@ -83,4 +83,13 @@ public class ReturnLayer : UILayer
             layer.transform.SetAsFirstSibling();
         }
     }
+    
+    public static void MoveFront()
+    {
+        var layer = UILayerLoader.Get<ReturnLayer>();
+        if (layer != null)
+        {
+            layer.transform.SetAsFirstSibling();
+        }
+    }
 }
