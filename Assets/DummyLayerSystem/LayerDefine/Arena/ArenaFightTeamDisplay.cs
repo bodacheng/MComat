@@ -12,6 +12,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
     [SerializeField] Text arenaPoint;
     [SerializeField] Text plusArenaPoint;
     [SerializeField] HeroIcon member1, member2, member3;
+    [SerializeField] Text oneWord;
     [SerializeField] Button bigButton;
 
     void SetUpCommonInfo(LeaderboardInfo info, Action<UnitInfo> onClickUnitIcon = null)
@@ -19,6 +20,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         displayName.text = info.PlayerLeaderboardEntry.DisplayName;
         rank.text = info.PlayerLeaderboardEntry.Position.ToString();
         arenaPoint.text =  info.PlayerLeaderboardEntry.StatValue.ToString();
+        oneWord.text = info.OneWord;
         rankIcon.Set(info.PlayerLeaderboardEntry.StatValue);
         
         for (var index = 0; index < info.Team.Length; index++)
@@ -49,9 +51,11 @@ public class ArenaFightTeamDisplay : MonoBehaviour
     {
         SetUpCommonInfo(info);
         var stage = LeaderBoardInfoToFightInfo(info);
+        stage.Team1OneWord = myInfo.OneWord;
+        stage.Team2OneWord = info.OneWord;
         stage.Team1LeaderboardEntry = myInfo.PlayerLeaderboardEntry;
         stage.Team2LeaderboardEntry = info.PlayerLeaderboardEntry;
-        
+
         bigButton.onClick.AddListener(()=> tryBeginStage(stage));
         plusArenaPoint.text = "+" + plusCal(myInfo.PlayerLeaderboardEntry, info.PlayerLeaderboardEntry);
         plusArenaPoint.gameObject.SetActive(true);

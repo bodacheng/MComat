@@ -4,6 +4,9 @@ using DummyLayerSystem;
 using mainMenu;
 using PlayFab.ClientModels;
 using UnityEngine;
+using Crosstales.BWF;
+using Cysharp.Threading.Tasks;
+using UnityEngine.UI;
 
 public partial class ArenaPage : MSceneProcess
 {
@@ -63,6 +66,7 @@ public partial class ArenaPage : MSceneProcess
                     {
                         PreScene.target.trySwitchToStep(MainSceneStep.Ranking);
                     },
+                    UpdateOneWord,
                     PlusPoint,
                     PrepareForIt
                 );
@@ -80,6 +84,45 @@ public partial class ArenaPage : MSceneProcess
         
         LoadLeaderboardInfos();
         PlayFabReadClient.LoadItems(ItemsLoadFinished);
+    }
+    
+    // Checks if there is anything entered into the input field.
+    async void UpdateOneWord(InputField input)
+    {
+        if (String.IsNullOrEmpty(input.text))
+        {
+            return;
+        }
+        
+        BWFManager.Instance.Load();
+        await UniTask.WaitUntil(()=> BWFManager.Instance.isReady);
+        var filteredWord = BadWordFilter(input.text);
+        if (filteredWord.Contains("*"))
+        {
+            PopupLayer.ArrangeWarnWindow(Translate.Get("illegalword"));
+        }
+        else
+        {
+            PlayFabReadClient.UpdateUserData(
+                new UpdateUserDataRequest()
+                {
+                    Data = new Dictionary<string, string>()
+                    {
+                        { "OneWord", input.text }
+                    }
+                },
+                () =>
+                {
+                },
+                PreScene.ReturnToLobby
+            );
+        }
+    }
+    
+    string BadWordFilter(string currentTxt)
+    {
+        currentTxt = BWFManager.Instance.ReplaceAll(currentTxt);
+        return currentTxt;
     }
     
     void PrepareForIt(FightInfo stage)

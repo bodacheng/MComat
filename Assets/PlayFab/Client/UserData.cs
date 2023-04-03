@@ -80,7 +80,7 @@ public partial class PlayFabReadClient
             new GetUserDataRequest()
             {
                 PlayFabId = PlayerAccountInfo.Me.PlayFabId,
-                Keys = new List<string> { "stone_box_size", "arenaCountToday" }
+                Keys = new List<string> { "arenaCountToday" }
             },
             (obj) => {
                 finished.Invoke(true);

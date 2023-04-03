@@ -20,6 +20,7 @@ public class ArenaLayer : UILayer
     [SerializeField] Button editMyTeamBtn;
     [SerializeField] Text myScore;
     [SerializeField] Text myRank; // playfab 提供的实际排名
+    [SerializeField] InputField oneWord;
     [SerializeField] GameObject plsEditTeamIndicator;
     [SerializeField] ArenaRankIcon arenaRankIcon;
     #endregion
@@ -28,10 +29,6 @@ public class ArenaLayer : UILayer
     [SerializeField] RectTransform enemiesT;
     [SerializeField] ArenaFightTeamDisplay arenaFightTeamDisplayPrefab;
     
-    #region reward indicator
-    [SerializeField] Button questionBtn;
-    #endregion
-    
     [SerializeField] Button rankingPageBtn;
     [SerializeField] Button rewardBtn;
 
@@ -39,7 +36,8 @@ public class ArenaLayer : UILayer
     private Action<FightInfo> tryBeginStage;
     private int maxOpponentCount = 3;
     
-    public void SetUp(Action loadData, Action openRanking, Func<PlayerLeaderboardEntry, PlayerLeaderboardEntry, int> plusCal, Action<FightInfo> tryBeginStage)
+    public void SetUp(Action loadData, Action openRanking, 
+        Action<InputField> updateOneWord, Func<PlayerLeaderboardEntry, PlayerLeaderboardEntry, int> plusCal, Action<FightInfo> tryBeginStage)
     {
         refreshBtn.onClick.RemoveAllListeners();
         refreshBtn.onClick.AddListener(()=>
@@ -59,6 +57,8 @@ public class ArenaLayer : UILayer
         }
         editMyTeamBtn.onClick.RemoveAllListeners();
         editMyTeamBtn.onClick.AddListener(GoToTeamEdit);
+        
+        oneWord.onSubmit.AddListener(delegate{updateOneWord(oneWord);});
     }
     
     private IDisposable _disposeSeasonCountDown;
@@ -143,6 +143,8 @@ public class ArenaLayer : UILayer
         refreshBtn.gameObject.SetActive(info != null);
         arenaRankIcon.gameObject.SetActive(info != null);
         rewardBtn.gameObject.SetActive(info != null);
+
+        oneWord.text = info != null ? info.OneWord : String.Empty;
         
         var posKeySet = new PosKeySet();
         if (info != null)

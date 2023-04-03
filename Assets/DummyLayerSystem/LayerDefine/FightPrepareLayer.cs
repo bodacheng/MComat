@@ -14,6 +14,8 @@ public class FightPrepareLayer : UILayer
     [SerializeField] GameObject teamEditIndicator;
     [SerializeField] FightModeSwitch _fightModeSwitch;
 
+    [SerializeField] Text team1OneWord;
+    [SerializeField] Text team2OneWord;
     
     public void SetFightMode(int fightMode)
     {
@@ -44,10 +46,13 @@ public class FightPrepareLayer : UILayer
         // 强制玩家点击EditTeamButton按钮，待制作
     }
         
-    public void StageMembersInfoShow(FightInfo stage)
+    public void StageMembersInfoShow(FightInfo stage, string oneWordTeam1, string oneWordTeam2)
     {
         MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT, true);
         MemberInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT, false);
+
+        team1OneWord.text = oneWordTeam1;
+        team2OneWord.text = oneWordTeam2;
     }
     
     List<HeroIcon> MemberInfosShow(List<UnitInfo> heroSets, RectTransform _showT, bool withSkillCheck)

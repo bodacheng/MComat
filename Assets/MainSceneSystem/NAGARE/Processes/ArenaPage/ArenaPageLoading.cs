@@ -1,9 +1,5 @@
-using System;
 using System.Collections.Generic;
-using DummyLayerSystem;
 using mainMenu;
-using PlayFab.ClientModels;
-using UnityEngine;
 
 public partial class ArenaPage : MSceneProcess
 {

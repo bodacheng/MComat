@@ -29,7 +29,7 @@ public class QuestInfoPage : MSceneProcess
                 _layer.SetTeamEditFeature(GoToTeamEditArcade);
                 break;
         }
-        _layer.StageMembersInfoShow(FightScene.FightScene.Fight);
+        _layer.StageMembersInfoShow(FightScene.FightScene.Fight, FightScene.FightScene.Fight.Team1OneWord, FightScene.FightScene.Fight.Team2OneWord);
         
         void Go()
         {

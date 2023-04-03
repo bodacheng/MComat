@@ -24,7 +24,6 @@ public class NickNameLayer : UILayer
             BWFManager.Instance.Load();
             await UniTask.WaitUntil(()=> BWFManager.Instance.isReady);
             var filteredWord = BadWordFilter(nickNameInput.text);
-            Debug.Log(filteredWord);
             if (filteredWord.Contains("*"))
             {
                 PopupLayer.ArrangeWarnWindow(Translate.Get("illegalword"));

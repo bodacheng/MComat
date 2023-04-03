@@ -527,7 +527,7 @@ function AddTeamInfoItem(Leaderboard) {
     var playerTeamData = server.GetUserData(
         {
             PlayFabId: Leaderboard.PlayFabId,
-            Keys: ["DefendTeam"]
+            Keys: ["DefendTeam","OneWord"]
         }
     );
     
@@ -535,17 +535,19 @@ function AddTeamInfoItem(Leaderboard) {
     if (playerTeamData.Data["DefendTeam"] != null) {
         var item = {
             "PlayerLeaderboardEntry": Leaderboard,
-            "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value)
+            "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value),
+            "OneWord": playerTeamData.Data["OneWord"] != null ? playerTeamData.Data["OneWord"].Value : ""
         };
         return item;
     }
     return null;
 }
 
-function ArrangeMyTeamInfoItem(Leaderboard, DefendTeam) {
+function ArrangeMyTeamInfoItem(Leaderboard, DefendTeam, OneWord) {
     var item = {
         "PlayerLeaderboardEntry": Leaderboard,
-        "Team": JSON.parse(DefendTeam)
+        "Team": JSON.parse(DefendTeam),
+        "OneWord":OneWord
     };
     return item;
 }
@@ -556,7 +558,7 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     var myTeamData = server.GetUserData(
         {
             PlayFabId: currentPlayerId,
-            Keys: ["DefendTeam"]
+            Keys: ["DefendTeam","OneWord"]
         }
     );
 
@@ -600,7 +602,7 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     
     for (let i = 0; i < result.Leaderboard.length; i++) {
         if (result.Leaderboard[i].PlayFabId == currentPlayerId){
-            var item = ArrangeMyTeamInfoItem(result.Leaderboard[i], myTeamData.Data["DefendTeam"].Value);
+            var item = ArrangeMyTeamInfoItem(result.Leaderboard[i], myTeamData.Data["DefendTeam"].Value, myTeamData.Data["OneWord"].Value);
             if (item != null) {
                 teamInfos.push(item);
             }

@@ -52,6 +52,18 @@ public class FightInfo : ScriptableObject
         set;
         get;
     }
+
+    public string Team1OneWord
+    {
+        set;
+        get;
+    }
+    
+    public string Team2OneWord
+    {
+        set;
+        get;
+    }
     
     public void Awake()
     {
