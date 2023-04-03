@@ -32,7 +32,8 @@ namespace mainMenu
         [Header("选中角色的技能显示")]
         [SerializeField] NineForShow nineForShow;
 
-        [Header("Start")]
+        [Header("Start")] 
+        [SerializeField] FightModeSwitch _fightModeSwitch;
         [SerializeField] Button fightStartBtn;
 
         private readonly MultiDic<Team, int, HeroIcon> _teamButtonDicM = new MultiDic<Team, int, HeroIcon>();
@@ -60,7 +61,17 @@ namespace mainMenu
             
             rotationModeBtn.onClick.AddListener(SwitchToRotationMode);
             multiModeBtn.onClick.AddListener(SwitchToMultiRaidMode);
+
+            _fightModeSwitch.Setup(0,PlayerPrefs.GetInt("preferAdventureMode",  2));
             fightStartBtn.onClick.AddListener(FightStart);
+        }
+        
+        // btn feature
+        public void FightStart()
+        {
+            _stage.team1Mode = _fightModeSwitch.TeamMode;
+            _stage.team2Mode = _fightModeSwitch.TeamMode;
+            FightLoad.Go(_stage);
         }
         
         public void Clear()
@@ -114,12 +125,6 @@ namespace mainMenu
             _stage.team1Mode = TeamMode.Rotation;
             _stage.team2Mode = TeamMode.Rotation;
             FrameRefresh(rotationModeBtn.transform);
-        }
-        
-        // btn feature
-        public void FightStart()
-        {
-            FightLoad.Go(_stage);
         }
         
         #region Icon Feature 必须在unit box生成所有角色头像之后执行
