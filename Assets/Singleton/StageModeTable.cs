@@ -19,7 +19,7 @@ public class StageModeTable
 	
 	public async UniTask LoadStageMode()
 	{
-		var csv = await AddressablesLogic.LoadT<TextAsset>("Config/stage_mode");
+		var csv = await AddressablesLogic.LoadT<TextAsset>("Config/" + CommonSetting.StageModeFile);
 		if (csv != null)
 		{
 			Load(csv);

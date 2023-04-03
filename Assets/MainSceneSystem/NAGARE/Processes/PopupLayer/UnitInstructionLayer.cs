@@ -32,10 +32,9 @@ public class UnitInstructionLayer : UILayer
             return;
         }
         
-        var targetBgWidth = bgImage.rectTransform.rect.width *
-                            (bgValue.rect.height / bgImage.rectTransform.rect.height);
+        var targetBgWidth = bgValue.rect.width * (Screen.height/bgValue.rect.height);
         
-        bgImage.rectTransform.sizeDelta = new Vector2(targetBgWidth, bgImage.rectTransform.rect.height);
+        bgImage.rectTransform.sizeDelta = new Vector2(targetBgWidth, bgImage.rectTransform.sizeDelta.y);
         bgImage.rectTransform.anchoredPosition = new Vector2();
         bgImage.color = Color.white;
         bgImage.sprite = bgValue;
