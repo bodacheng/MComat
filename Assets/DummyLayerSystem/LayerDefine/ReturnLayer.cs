@@ -64,7 +64,8 @@ public class ReturnLayer : UILayer
         {
             void triggerCts()
             {
-                cts.Cancel();
+                if (cts != null && !cts.IsCancellationRequested)
+                    cts.Cancel();
             }
             
             layer.returnButton.onClick.AddListener(() =>

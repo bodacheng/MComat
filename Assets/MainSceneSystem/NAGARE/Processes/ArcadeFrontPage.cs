@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using mainMenu;
 
@@ -12,8 +11,7 @@ public class ArcadeFrontPage : MSceneProcess
     
     ArcadeTop _arcadeTop;
     StageModeTable stageModeTable;
-    CancellationTokenSource _cts;
-    
+
     public override void ProcessEnter()
     {
         PlayFabReadClient.GetStageRewardInfo(Enter, PreScene.ReturnToLobby);
@@ -23,9 +21,7 @@ public class ArcadeFrontPage : MSceneProcess
     {
         stageModeTable = new StageModeTable();
         _arcadeTop = UILayerLoader.Load<ArcadeTop>();
-        _cts = new CancellationTokenSource();
-        _arcadeTop.Setup(stageModeTable, _cts);
-        ReturnLayer.AddUniTaskCancel(_cts);
+        _arcadeTop.Setup(stageModeTable);
         Load().Forget();
     }
 
@@ -33,14 +29,13 @@ public class ArcadeFrontPage : MSceneProcess
     {
         await stageModeTable.LoadStageMode();
         var stages = _arcadeTop.NewStages(PlayerAccountInfo.Me.arcadeProcess);
-        await _arcadeTop.ShowStages(stages, _cts.Token);
+        await _arcadeTop.ShowStages(stages);
         SetLoaded(true);
     }
     
     public override void ProcessEnd()
     {
         UILayerLoader.Remove<ArcadeTop>();
-        _cts.Dispose();
     }
 }
 

@@ -21,11 +21,9 @@ public class ArcadeTop : UILayer
     List<int> _currentStages;
     readonly List<StageButton> _stageButtons = new List<StageButton>();
     private StageModeTable stageModeTable;
-    CancellationTokenSource _cts;
-    public void Setup(StageModeTable stageModeTable, CancellationTokenSource cts)
+    public void Setup(StageModeTable stageModeTable)
     {
         this.stageModeTable = stageModeTable;
-        _cts = cts; 
         nextChapter.onClick.AddListener(ShowNextStages);
         lastChapter.onClick.AddListener(ShowLastStages);
         jumpToNewStage.onClick.AddListener(ToNew);
@@ -49,20 +47,20 @@ public class ArcadeTop : UILayer
     void ToNew()
     {
         var stages = NewStages(PlayerAccountInfo.Me.arcadeProcess);
-        ShowStages(stages, _cts.Token).Forget();
+        ShowStages(stages).Forget();
     }
 
     void ShowNextStages()
     {
-        ShowStages(NewStages(_currentStages.Max() + 1), _cts.Token).Forget();
+        ShowStages(NewStages(_currentStages.Max() + 1)).Forget();
     }
     
     void ShowLastStages()
     {
-        ShowStages(NewStages(_currentStages.Min() - 2), _cts.Token).Forget();
+        ShowStages(NewStages(_currentStages.Min() - 2)).Forget();
     }
     
-    public async UniTask ShowStages(List<int> stages, CancellationToken token)
+    public async UniTask ShowStages(List<int> stages)
     {
         ProgressLayer.Loading("Loading stages");
         container.transform.gameObject.SetActive(false);
@@ -73,9 +71,6 @@ public class ArcadeTop : UILayer
         _currentStages = stages;
         async UniTask LoadStage(int stageNo)
         {
-            if (token.IsCancellationRequested)
-                return;
-            
             var one = await AddressablesLogic.LoadT<FightInfo>("Arcade/" + stageNo + ".asset");
             if (one == null)
             {
@@ -130,6 +125,7 @@ public class ArcadeTop : UILayer
             var reward = rewardDic[stageBtn.StageNo.ToString()];
             stageBtn.ShowRewards(reward.d,reward.g);
             stageBtn.ChangeColorOfIcons(PlayerAccountInfo.Me.arcadeProcess + 1 >= stageBtn.StageNo);
+            stageBtn.AwardRender(PlayerAccountInfo.Me.arcadeProcess + 1> stageBtn.StageNo);
             stageBtn.transform.SetParent(container.transform);
             stageBtn.transform.localPosition = Vector3.zero;
             stageBtn.transform.localRotation = Quaternion.identity;
