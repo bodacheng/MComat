@@ -15,7 +15,7 @@ namespace Singleton
                 return null;
             }
 
-            var tempModel = await AddressablesLogic.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME);
+            var tempModel = await AddressablesLogic.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME, new Vector3(-999,-999, -999));
             tempModel.transform.SetParent(parent);
             var odl = tempModel.GetComponent<OutsideDataLink>();
             if (odl == null)

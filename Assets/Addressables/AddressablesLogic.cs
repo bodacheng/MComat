@@ -111,9 +111,9 @@ public static class AddressablesLogic
         complete.Invoke();
     }
     
-    public static async UniTask<GameObject> LoadObject(string prefabPathName)
+    public static async UniTask<GameObject> LoadObject(string prefabPathName, Vector3 pos = new Vector3())
     {
-        var handle = Addressables.InstantiateAsync(prefabPathName);
+        var handle = Addressables.InstantiateAsync(prefabPathName, pos, Quaternion.identity);
         await handle.Task;
         if (handle.Status != AsyncOperationStatus.Succeeded)
         {
