@@ -12,7 +12,8 @@ public class ArcadeTop : UILayer
     [SerializeField] DedicatedCameraConnector connector;
     [SerializeField] VerticalLayoutGroup container;
     [SerializeField] Button jumpToNewStage;
-    [SerializeField] StageButton iconPrefab;
+    [SerializeField] StageButton normalStagePrefab;
+    [SerializeField] StageButton bossStagePrefab;
     [SerializeField] NineForShow nineForShow;
     [SerializeField] Button nextChapter;
     [SerializeField] Button lastChapter;
@@ -81,7 +82,7 @@ public class ArcadeTop : UILayer
                 return;
             }
             
-            var stageBtn = Instantiate(iconPrefab);
+            var stageBtn = Instantiate(stageNo % 5 == 0 ? bossStagePrefab : normalStagePrefab);
             _stageButtons.Add(stageBtn);
             void LoadThisStage()
             {
@@ -125,6 +126,9 @@ public class ArcadeTop : UILayer
             if (btnAnimator != null)
                 btnAnimator.enabled = PlayerAccountInfo.Me.arcadeProcess + 1 == stageBtn.StageNo;
             
+            var rewardDic = PlayFabReadClient.StageAwards;
+            var reward = rewardDic[stageBtn.StageNo.ToString()];
+            stageBtn.ShowRewards(reward.d,reward.g);
             stageBtn.ChangeColorOfIcons(PlayerAccountInfo.Me.arcadeProcess + 1 >= stageBtn.StageNo);
             stageBtn.transform.SetParent(container.transform);
             stageBtn.transform.localPosition = Vector3.zero;

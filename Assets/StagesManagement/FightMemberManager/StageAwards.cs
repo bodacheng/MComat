@@ -5,18 +5,6 @@ using Newtonsoft.Json;
 
 public partial class StageEditor
 {
-    public class StageAward
-    {
-        public string stageKey;
-        public Award award;
-    }
-
-    public class Award
-    {
-        public int g;
-        public int d;
-    }
-    
     public static void ExportStageAward()
     {
         var stageAwards = new List<StageAward>();

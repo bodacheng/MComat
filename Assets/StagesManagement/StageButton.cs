@@ -9,7 +9,9 @@ public class StageButton : MonoBehaviour
     [SerializeField] Button button;
     [SerializeField] HeroIcon unitIconPrefab;
     [SerializeField] RectTransform iconsT;
-    [SerializeField] Text text;
+    [SerializeField] Text id;
+    [SerializeField] Text rewardDM;
+    [SerializeField] Text rewardGD;
     
     public Button Button => button;
 
@@ -20,17 +22,23 @@ public class StageButton : MonoBehaviour
         set
         {
             stageNo = value;
-            text.text = "Stage" + value;
+            id.text = value.ToString();
         }
     }
 
     List<HeroIcon> UnitIcons { get; set; }
 
+    public void ShowRewards(int awardDM, int awardGD)
+    {
+        rewardDM.text = awardDM.ToString();
+        rewardGD.text = awardGD.ToString();
+    }
+    
     public void ChangeColorOfIcons(bool on)
     {
         var buttonImage = GetComponent<Image>();
-        buttonImage.color = new Color(1, 1, 1, on ? 1 : 0.3f);
-        text.color = new Color(1, 1, 1, on ? 1 : 0.3f);
+        buttonImage.color = new Color(buttonImage.color.r, buttonImage.color.g, buttonImage.color.b, on ? 1 : 0.3f);
+        id.color = new Color(id.color.r, id.color.g, id.color.b, on ? 1 : 0.3f);
         button.targetGraphic.raycastTarget = on;
     }
     

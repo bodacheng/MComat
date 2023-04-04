@@ -16,6 +16,11 @@ public class ArcadeFrontPage : MSceneProcess
     
     public override void ProcessEnter()
     {
+        PlayFabReadClient.GetStageRewardInfo(Enter, PreScene.ReturnToLobby);
+    }
+    
+    void Enter()
+    {
         stageModeTable = new StageModeTable();
         _arcadeTop = UILayerLoader.Load<ArcadeTop>();
         _cts = new CancellationTokenSource();
@@ -37,4 +42,16 @@ public class ArcadeFrontPage : MSceneProcess
         UILayerLoader.Remove<ArcadeTop>();
         _cts.Dispose();
     }
+}
+
+public class StageAward
+{
+    public string stageKey;
+    public Award award;
+}
+
+public class Award
+{
+    public int g;
+    public int d;
 }
