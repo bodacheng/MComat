@@ -1017,10 +1017,9 @@ handlers.CheckIn = function(args) {
 
     var GetUserReadOnlyDataRequest = {
         "PlayFabId": currentPlayerId,
-        "Keys": [ CHECK_IN_TRACKER ]
+        "Keys": [CHECK_IN_TRACKER]
     };
     var GetUserReadOnlyDataResponse = server.GetUserReadOnlyData(GetUserReadOnlyDataRequest);
-    
     // need to ensure that our data field exists
     var tracker = {}; // this would be the first login ever (across any title), so we have to make sure our record exists.
     if(GetUserReadOnlyDataResponse.Data.hasOwnProperty(CHECK_IN_TRACKER))
@@ -1042,14 +1041,22 @@ handlers.CheckIn = function(args) {
         };
     }
     
-    if(Date.now() > parseInt(tracker[TRACKER_NEXT_GRANT]))
+    var nowDate = Date.now();
+    // 计算24小时（以毫秒为单位）
+    //const millisecondsIn24Hours = 24 * 60 * 60 * 1000;
+    // 计算24小时后的时间戳
+    //const timestampIn24Hours = nowDate + 2 * millisecondsIn24Hours;
+    // 将时间戳转换为日期对象
+    //nowDate = new Date(timestampIn24Hours);
+    
+    if(nowDate > parseInt(tracker[TRACKER_NEXT_GRANT]))
     {
         // Eligible for an item grant.
         // check to ensure that it has been less than 24 hours since the last grant window opened
         var timeWindow = new Date(parseInt(tracker[TRACKER_NEXT_GRANT]));
         timeWindow.setDate(timeWindow.getDate() + 1); // add 1 day 
         
-        if(Date.now() > timeWindow.getTime()) // 指的是目前这次登陆起码在上次登陆基础上跳过了一天
+        if(nowDate > timeWindow.getTime()) // 指的是目前这次登陆起码在上次登陆基础上跳过了一天
         {
             // streak ended :(			
             tracker = ResetTracker();
@@ -1064,7 +1071,7 @@ handlers.CheckIn = function(args) {
         }else{ // 指的是现在这一天正好是上次登陆日期+1 （ Date.now() == timeWindow.getTime() ），不存在 Date.now() < timeWindow.getTime()
             // streak continues
             tracker[TRACKER_LOGIN_STREAK] += 1;
-            var dateObj = new Date(Date.now());
+            var dateObj = new Date(nowDate);
             dateObj.setDate(dateObj.getDate() + 1); // add one day 
             tracker[TRACKER_NEXT_GRANT] = dateObj.getTime();
 
@@ -1072,12 +1079,12 @@ handlers.CheckIn = function(args) {
             log.info("Your consecutive login streak increased to: " + tracker[TRACKER_LOGIN_STREAK]);
             UpdateTrackerData(tracker);
 
-            var remainder = Math.round(tracker[TRACKER_LOGIN_STREAK] % 7);
+            var remainder =  Number(tracker[TRACKER_LOGIN_STREAK] % 7);
             var award;
-            if (remainder == 0){
-                award = normalDMAward;
-            }else{
+            if (remainder == 0) {
                 award = extraDMAward;
+            }else{
+                award = normalDMAward;
             }
             GrantItemToCurrentUser([award], login_bonus_catalog);
             return {
@@ -1103,7 +1110,7 @@ function ResetTracker()
     dateObj.setDate(dateObj.getDate() + 1); // add one day
     
     reset[TRACKER_NEXT_GRANT] = dateObj.getTime();
-    return JSON.stringify(reset);
+    return reset;
 }
 
 
@@ -1113,7 +1120,7 @@ function UpdateTrackerData(data)
         "PlayFabId": currentPlayerId,
         "Data": {}
     };
-    UpdateUserReadOnlyDataRequest.Data[CHECK_IN_TRACKER] = data;//JSON.stringify(data);
+    UpdateUserReadOnlyDataRequest.Data[CHECK_IN_TRACKER] = JSON.stringify(data);
     server.UpdateUserReadOnlyData(UpdateUserReadOnlyDataRequest);
 }
 

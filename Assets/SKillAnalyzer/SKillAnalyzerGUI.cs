@@ -67,14 +67,14 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
-            CloudScript.ArcadeProgress("2", 
-                result => {});
+            // CloudScript.ArcadeProgress("2", 
+            //     result => {});
 
 
-            // CloudScript.CheckIn(() =>
-            // {
-            //     
-            // });
+            CloudScript.CheckIn(() =>
+            {
+                
+            });
 
             // CloudScript.GetLeaderboardAroundUser(
             //     (x) =>
