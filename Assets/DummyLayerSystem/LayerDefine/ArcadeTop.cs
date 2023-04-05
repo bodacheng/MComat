@@ -1,9 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using mainMenu;
 using System.Linq;
-using System.Threading;
 using Cysharp.Threading.Tasks;
 using ModelView;
 
@@ -21,12 +21,17 @@ public class ArcadeTop : UILayer
     List<int> _currentStages;
     readonly List<StageButton> _stageButtons = new List<StageButton>();
     private StageModeTable stageModeTable;
-    public void Setup(StageModeTable stageModeTable)
+    private Func<int, UniTask<FightInfo>> loadStageAsset;
+    int MaxStageNum; 
+    
+    public void Setup(StageModeTable stageModeTable, Func<int, UniTask<FightInfo>> loadStageAsset, int MaxStageNum)
     {
         this.stageModeTable = stageModeTable;
+        this.loadStageAsset = loadStageAsset;
         nextChapter.onClick.AddListener(ShowNextStages);
         lastChapter.onClick.AddListener(ShowLastStages);
         jumpToNewStage.onClick.AddListener(ToNew);
+        this.MaxStageNum = MaxStageNum;
     }
     
     async UniTask IconButtonFeature(HeroIcon heroIcon)
@@ -69,33 +74,6 @@ public class ArcadeTop : UILayer
         }
         _stageButtons.Clear();
         _currentStages = stages;
-        async UniTask LoadStage(int stageNo)
-        {
-            var one = await AddressablesLogic.LoadT<FightInfo>("Arcade/" + stageNo + ".asset");
-            if (one == null)
-            {
-                return;
-            }
-            
-            var stageBtn = Instantiate(stageNo % 5 == 0 ? bossStagePrefab : normalStagePrefab);
-            _stageButtons.Add(stageBtn);
-            void LoadThisStage()
-            {
-                one.EventType = FightEventType.Quest;
-                one.ArcadeFightMode = stageModeTable.GetModeById(one.ID);
-                PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, one, true);
-            }
-            
-            stageBtn.Button.onClick.AddListener(LoadThisStage);
-            
-            stageBtn.name = "Stage" + stageNo;
-            stageBtn.StageNo = stageNo;
-            
-            if (one.FightMembers != null)
-            {
-                stageBtn.LoadUnitIcons(one.FightMembers.EnemySets.GetValues(), IconButtonFeature, stageNo == _currentStages.Max());
-            }
-        }
         var tasks = new List<UniTask>();
         for (var index = 0; index < _currentStages.Count; index++)
         {
@@ -106,6 +84,35 @@ public class ArcadeTop : UILayer
         if (container != null)
             container.transform.gameObject.SetActive(true);
         ProgressLayer.Close();
+    }
+    
+    async UniTask LoadStage(int stageNo)
+    {
+        var one = await loadStageAsset(stageNo);
+        if (one == null)
+        {
+            return;
+        }
+        
+        var stageBtn = Instantiate(stageNo % 5 == 0 ? bossStagePrefab : normalStagePrefab);
+        _stageButtons.Add(stageBtn);
+        void LoadThisStage()
+        {
+            if (PlayerAccountInfo.Me.arcadeProcess + 1 >=  stageNo)
+            {
+                one.EventType = FightEventType.Quest;
+                one.ArcadeFightMode = stageModeTable.GetModeById(one.ID);
+                PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, one, true);
+            }
+        }
+        stageBtn.Button.onClick.AddListener(LoadThisStage);
+        stageBtn.name = "Stage" + stageNo;
+        stageBtn.StageNo = stageNo;
+            
+        if (one.FightMembers != null)
+        {
+            stageBtn.LoadUnitIcons(one.FightMembers.EnemySets.GetValues(), IconButtonFeature, stageNo == _currentStages.Max());
+        }
     }
 
     void Refresh()
@@ -131,12 +138,13 @@ public class ArcadeTop : UILayer
             stageBtn.transform.localRotation = Quaternion.identity;
             stageBtn.transform.localScale = Vector3.one;
         }
-        
-        nextChapter.gameObject.SetActive(PlayerAccountInfo.Me.arcadeProcess + 1 > _currentStages.Max());
-        lastChapter.gameObject.SetActive(_currentStages.Min() > 5);
+
+        int _currentStagesMax = _currentStages.Count > 0 ? _currentStages.Max() : PlayerAccountInfo.Me.arcadeProcess;
+        nextChapter.gameObject.SetActive((PlayerAccountInfo.Me.arcadeProcess + 1 > _currentStagesMax) && (MaxStageNum > _currentStagesMax));
+        lastChapter.gameObject.SetActive(_currentStages.Count == 0 || _currentStages.Min() > 5);
         
         var progressChapter = PlayerAccountInfo.Me.arcadeProcess / 5;
-        var currentChapter = _currentStages.Min() / 5;
+        var currentChapter = _currentStages.Count != 0 ? _currentStages.Min() / 5 : MaxStageNum / 5;
         
         jumpToNewStage.gameObject.SetActive(progressChapter != currentChapter);
         
@@ -148,15 +156,19 @@ public class ArcadeTop : UILayer
     
     public List<int> NewStages(int progress)
     {
+        if (progress >= MaxStageNum)
+            progress = MaxStageNum - 2;
+            
         var currentChapter = progress / 5;
-        var returnValue = new List<int>()
+        var returnValue = new List<int>();
+        for (int stageNoPlus = 1; stageNoPlus <= 5; stageNoPlus++)
         {
-            currentChapter * 5 + 1, 
-            currentChapter * 5 + 2, 
-            currentChapter * 5 + 3, 
-            currentChapter * 5 + 4 ,
-            currentChapter * 5 + 5
-        };
+            int targetNo = stageNoPlus + currentChapter * 5;
+            if (targetNo <= MaxStageNum)
+            {
+                returnValue.Add(targetNo);
+            }
+        }
         return returnValue;
     }
 }

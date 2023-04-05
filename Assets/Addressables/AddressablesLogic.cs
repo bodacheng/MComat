@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using DummyLayerSystem;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceLocations;
 
 public static class AddressablesLogic
 {
@@ -89,7 +89,7 @@ public static class AddressablesLogic
         }
     }
     
-    private static Dictionary<string, long> downloadedBytes = new Dictionary<string, long>();
+    private static readonly Dictionary<string, long> downloadedBytes = new Dictionary<string, long>();
     public static async UniTask ResourcePrepareProcess(Action complete, Action<string> progressUIRefresh, List<string> downLoadLabel)
     {
         // Clear all cached AssetBundles
@@ -163,6 +163,33 @@ public static class AddressablesLogic
         if (handle.Status != AsyncOperationStatus.Succeeded)
         {
             Debug.Log($"Failed to load : {prefabPathName}");
+            Addressables.Release(handle);
+            return default;
+        }
+        else
+        {
+            if (memoryReleaseTarget == null)
+            {
+                LoadingHandlerList.Add(handle);
+            }
+            else
+            {
+                memoryReleaseTarget.AddOnDestroyCallback( () =>
+                {
+                    Addressables.ReleaseInstance(handle);
+                });
+            }
+            return handle.Result;
+        }
+    }
+    
+    public static async UniTask<T> LoadT<T>(IResourceLocation location, GameObject memoryReleaseTarget = null)
+    {
+        var handle = Addressables.LoadAssetAsync<T>(location);
+        await handle.Task;
+        if (handle.Status != AsyncOperationStatus.Succeeded)
+        {
+            Debug.Log($"Failed to load : {location}");
             Addressables.Release(handle);
             return default;
         }
