@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
@@ -35,16 +34,14 @@ public class AppSetting
 
     public void Mute()
     {
-        BgmVolume = 0;
-        EffectsVolume = 0;
-        CvVolume = 0;
+        if (bgmSource != null)
+            bgmSource.mute = true;
     }
     
     public void UnMute()
     {
-        BgmVolume = _bgmVolume;
-        EffectsVolume = _effectsVolume;
-        CvVolume = _cvVolume;
+        if (bgmSource != null)
+            bgmSource.mute = false;
     }
     
     public float BgmVolume
