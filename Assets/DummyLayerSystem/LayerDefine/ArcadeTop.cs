@@ -20,18 +20,18 @@ public class ArcadeTop : UILayer
     
     List<int> _currentStages;
     readonly List<StageButton> _stageButtons = new List<StageButton>();
-    private StageModeTable stageModeTable;
-    private Func<int, UniTask<FightInfo>> loadStageAsset;
-    int MaxStageNum; 
+    private StageModeTable _stageModeTable;
+    private Func<int, UniTask<FightInfo>> _loadStageAsset;
+    int _maxStageNum; 
     
-    public void Setup(StageModeTable stageModeTable, Func<int, UniTask<FightInfo>> loadStageAsset, int MaxStageNum)
+    public void Setup(StageModeTable stageModeTable, Func<int, UniTask<FightInfo>> loadStageAsset, int maxStageNum)
     {
-        this.stageModeTable = stageModeTable;
-        this.loadStageAsset = loadStageAsset;
+        this._stageModeTable = stageModeTable;
+        this._loadStageAsset = loadStageAsset;
         nextChapter.onClick.AddListener(ShowNextStages);
         lastChapter.onClick.AddListener(ShowLastStages);
         jumpToNewStage.onClick.AddListener(ToNew);
-        this.MaxStageNum = MaxStageNum;
+        this._maxStageNum = maxStageNum;
     }
     
     async UniTask IconButtonFeature(HeroIcon heroIcon)
@@ -89,7 +89,7 @@ public class ArcadeTop : UILayer
     
     async UniTask LoadStage(int stageNo)
     {
-        var one = await loadStageAsset(stageNo);
+        var one = await _loadStageAsset(stageNo);
         if (one == null)
         {
             return;
@@ -102,7 +102,7 @@ public class ArcadeTop : UILayer
             if (PlayerAccountInfo.Me.arcadeProcess + 1 >=  stageNo)
             {
                 one.EventType = FightEventType.Quest;
-                one.ArcadeFightMode = stageModeTable.GetModeById(one.ID);
+                one.ArcadeFightMode = _stageModeTable.GetModeById(one.ID);
                 PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, one, true);
             }
         }
@@ -141,11 +141,11 @@ public class ArcadeTop : UILayer
         }
 
         int _currentStagesMax = _currentStages.Count > 0 ? _currentStages.Max() : PlayerAccountInfo.Me.arcadeProcess;
-        nextChapter.gameObject.SetActive((PlayerAccountInfo.Me.arcadeProcess + 1 > _currentStagesMax) && (MaxStageNum > _currentStagesMax));
+        nextChapter.gameObject.SetActive((PlayerAccountInfo.Me.arcadeProcess + 1 > _currentStagesMax) && (_maxStageNum > _currentStagesMax));
         lastChapter.gameObject.SetActive(_currentStages.Count == 0 || _currentStages.Min() > 5);
         
         var progressChapter = PlayerAccountInfo.Me.arcadeProcess / 5;
-        var currentChapter = _currentStages.Count != 0 ? _currentStages.Min() / 5 : MaxStageNum / 5;
+        var currentChapter = _currentStages.Count != 0 ? _currentStages.Min() / 5 : _maxStageNum / 5;
         
         jumpToNewStage.gameObject.SetActive(progressChapter != currentChapter);
         
@@ -157,15 +157,15 @@ public class ArcadeTop : UILayer
     
     public List<int> NewStages(int progress)
     {
-        if (progress >= MaxStageNum)
-            progress = MaxStageNum - 2;
+        if (progress >= _maxStageNum)
+            progress = _maxStageNum - 2;
             
         var currentChapter = progress / 5;
         var returnValue = new List<int>();
         for (int stageNoPlus = 1; stageNoPlus <= 5; stageNoPlus++)
         {
             int targetNo = stageNoPlus + currentChapter * 5;
-            if (targetNo <= MaxStageNum)
+            if (targetNo <= _maxStageNum)
             {
                 returnValue.Add(targetNo);
             }

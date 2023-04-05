@@ -52,18 +52,18 @@ public class StageButton : MonoBehaviour
         button.targetGraphic.raycastTarget = on;
     }
     
-    public void LoadUnitIcons(List<UnitInfo> units, Func<HeroIcon, UniTask> IconButtonFeature, bool clickBoss = false)
+    public void LoadUnitIcons(List<UnitInfo> units, Func<HeroIcon, UniTask> iconButtonFeature, bool clickBoss = false)
     {
         var heroIcons = UnitInfosShow(units, iconsT);
         for (var i = 0; i < heroIcons.Count; i++)
         {
             var heroIcon = heroIcons[i];
             heroIcon.iconButton.onClick.RemoveAllListeners();
-            heroIcon.iconButton.onClick.AddListener( 
+            heroIcon.iconButton.onClick.AddListener(
                 async () =>
                 {
                     ProgressLayer.Loading(">");
-                    await IconButtonFeature(heroIcon);
+                    await iconButtonFeature(heroIcon);
                     ProgressLayer.Close();
                 }
             );

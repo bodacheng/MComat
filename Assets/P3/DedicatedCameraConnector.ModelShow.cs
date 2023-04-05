@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using DG.Tweening.Core;
@@ -37,11 +38,11 @@ namespace ModelView
         
         string _focusRId;
         bool _ifShowingSkill = false;
-        private readonly SingleThreadProcessor singleThreadProcessor = new SingleThreadProcessor();
-        public int TaskRunningCount => singleThreadProcessor.TaskRunningCount;
+        private readonly SingleThreadProcessor _singleThreadProcessor = new SingleThreadProcessor();
+        public int TaskRunningCount => _singleThreadProcessor.TaskRunningCount;
         public async UniTask ShowModel(string recordID)
         {
-            await singleThreadProcessor.RunAsQueued(_ShowModel(recordID));
+            await _singleThreadProcessor.RunAsQueued(_ShowModel(recordID));
         }
         
         async UniTask _ShowModel(string recordID)
@@ -72,6 +73,15 @@ namespace ModelView
             {
                 ProgressLayer.Loading(">");
                 _focusingC = await GeneralModelPool.GetModel(recordID, transform);
+                if (Saves.ContainsKey(recordID))
+                {
+                    var oldModel = Saves[recordID];
+                    if (oldModel != null)
+                    {
+                        Destroy(oldModel.WholeT.gameObject);
+                    }
+                }
+                
                 ProgressLayer.Close();
                 if (_focusingC == null)
                 {
@@ -99,6 +109,11 @@ namespace ModelView
             await UniTask.DelayFrame(5);// 否则Unity对mesh的尺寸计算有错误。算是Unity的bug
             if (_focusingC != null && _focusingC.WholeT != null)
             {
+                foreach (var save in Saves)
+                {
+                    if (save.Value != null && save.Value != _focusingC)
+                        save.Value.WholeT.gameObject.SetActive(false);
+                }
                 Initialize(false,_focusingC.WholeT.gameObject.transform, transform);
                 ItemDetailStartDirection(0,0,0);
             }

@@ -18,7 +18,7 @@ public class ArcadeFrontPage : MSceneProcess
     StageModeTable stageModeTable;
     private readonly IDictionary<string, IResourceLocation> locationKeyDic = new Dictionary<string, IResourceLocation>();
 
-    int MaxStageNum = -999; 
+    int _maxStageNum = -999; 
     async UniTask CheckExistedKey()
     {
         var locationHandle = Addressables.LoadResourceLocationsAsync("quest");
@@ -29,9 +29,9 @@ public class ArcadeFrontPage : MSceneProcess
             {
                 locationKeyDic.Add(stageLocation.PrimaryKey, stageLocation);
                 int id = Int32.Parse(stageLocation.PrimaryKey);
-                if (id > MaxStageNum)
+                if (id > _maxStageNum)
                 {
-                    MaxStageNum = id;
+                    _maxStageNum = id;
                 }
             }
         }
@@ -62,7 +62,7 @@ public class ArcadeFrontPage : MSceneProcess
     async UniTask Load()
     {
         await CheckExistedKey();
-        _arcadeTop.Setup(stageModeTable, LoadStage, MaxStageNum);
+        _arcadeTop.Setup(stageModeTable, LoadStage, _maxStageNum);
         await stageModeTable.LoadStageMode();
         var stages = _arcadeTop.NewStages(PlayerAccountInfo.Me.arcadeProcess);
         await _arcadeTop.ShowStages(stages);
