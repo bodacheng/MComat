@@ -17,7 +17,7 @@ public class ArcadeTop : UILayer
     [SerializeField] NineForShow nineForShow;
     [SerializeField] Button nextChapter;
     [SerializeField] Button lastChapter;
-
+    
     List<int> _currentStages;
     readonly List<StageButton> _stageButtons = new List<StageButton>();
     private StageModeTable stageModeTable;
@@ -36,6 +36,7 @@ public class ArcadeTop : UILayer
     
     async UniTask IconButtonFeature(HeroIcon heroIcon)
     {
+        BackGroundPS.target.ChangeBGByElement(heroIcon.unitConfig.element);
         // 显示模型
         await connector.ShowModel(heroIcon.unitConfig.RECORD_ID);
         // 显示技能组
