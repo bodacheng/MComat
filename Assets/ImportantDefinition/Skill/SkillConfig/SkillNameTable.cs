@@ -38,6 +38,7 @@ public class SkillNameTable
 	static void PrepareSkillNames(SystemLanguage language)
     {
 	    SkillNameDic.Clear();
+	    SkillIntroDic.Clear();
         foreach (var row in rowList)
         {
             if (!SkillNameDic.ContainsKey(row.RECORD_ID))
@@ -158,5 +159,4 @@ public class SkillNameTable
 	{
 		return rowList.FindAll(x => x.CN_NAME == find);
 	}
-
 }

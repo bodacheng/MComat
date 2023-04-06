@@ -54,7 +54,7 @@ namespace Soul
                     break;
                 }
                 
-                victim.PlusEx(temp + 5);
+                victim.PlusEx(FightGlobalSetting._getHurtExGet);
                 switch(gaugeMode)
                 {
                     case CriticalGaugeMode.DoubleGain:

@@ -19610,7 +19610,7 @@ MonoBehaviour:
   damage_type: 1
   _WeaponMode: 2
   AT_weight: 1
-  weaponHP: -1
+  weaponHP: 2
   heavyLevel: 1
   onGroundMagic: 1
   effectSpreadOnBody: 1

@@ -166,7 +166,7 @@ public class PowerEstimateTable
             #endregion
                         
             #region MagicForward
-            if (clip.events[i].functionName == "MagicForward")
+            if (clip.events[i].functionName == "MagicForward" || clip.events[i].functionName == "MagicToEnemy")
             {
                 var magicObjectName = clip.events[i].stringParameter;
                 var hurtObject = await AddressablesLogic.LoadObject("defaultmagic/" + magicObjectName + ".prefab");

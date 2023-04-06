@@ -103248,7 +103248,7 @@ AnimationClip:
     messageOptions: 0
   - time: 0.083333336
     functionName: PrepareOneMagic
-    data: g_fire
+    data: g_fire2
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -103260,25 +103260,11 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 0.11666667
-    functionName: SetRightFootMarkerManager
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
   - time: 0.13333334
     functionName: ReleasePreparedMagicToAir
     data: right_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 10
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.18333334
-    functionName: ClearMarkerManagers
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.45

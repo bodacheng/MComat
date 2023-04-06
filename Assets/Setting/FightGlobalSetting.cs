@@ -16,10 +16,11 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] float AT_coefficient = 1;
     [SerializeField] float HP_coefficient = 1;
     [SerializeField] bool Team1Invincible = false;
-    [SerializeField] int NormalSkillExGet = 20;
-    [SerializeField] int Sp1SkillExGet = 15;
-    [SerializeField] int Sp2SkillExGet = 10;
-    [SerializeField] int Sp3SkillExGet = 5;
+    [SerializeField] int NormalSkillExGet = 30;
+    [SerializeField] int Sp1SkillExGet = 0;
+    [SerializeField] int Sp2SkillExGet = 0;
+    [SerializeField] int Sp3SkillExGet = 0;
+    [SerializeField] int getHurtExGet = 10;
     [SerializeField] float slightHitLastingTime = 0.2f, lightHitLastingTime = 0.3f, heavyHitLastingTime = 0.6f, superHitLastingTime = 1f, highHitLastingTime = 0.8f;
     [SerializeField] float normalAttackPosFixingTime = 0.1f;
     [SerializeField] float knockOffExtent = 20f;
@@ -48,6 +49,7 @@ public class FightGlobalSetting : ScriptableObject
     public static int _Sp1SkillExGet;
     public static int _Sp2SkillExGet;
     public static int _Sp3SkillExGet;
+    public static int _getHurtExGet;
     public static float SlightHitLastingTime, LightHitLastingTime, HeavyHitLastingTime, SuperHitLastingTime;
     public static float KnockOffExtent;
     public static float _MaxKnockoffLaidGroundTime;
@@ -87,6 +89,7 @@ public class FightGlobalSetting : ScriptableObject
         _Sp1SkillExGet = Sp1SkillExGet;
         _Sp2SkillExGet = Sp2SkillExGet;
         _Sp3SkillExGet = Sp3SkillExGet;
+        _getHurtExGet = getHurtExGet;
         
         SlightHitLastingTime = slightHitLastingTime;
         LightHitLastingTime = lightHitLastingTime;

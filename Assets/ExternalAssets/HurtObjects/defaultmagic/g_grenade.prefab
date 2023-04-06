@@ -43833,7 +43833,7 @@ MonoBehaviour:
   SpecificTarget: 0
   damage_type: 2
   _WeaponMode: 2
-  AT_weight: 1
+  AT_weight: 0
   weaponHP: 1
   heavyLevel: 1
   onGroundMagic: 0

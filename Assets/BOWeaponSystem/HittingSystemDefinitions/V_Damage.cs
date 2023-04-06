@@ -101,6 +101,11 @@ namespace HittingDetection
                     case 3:
                         return 0.2f;
                 }
+
+                if (meLevel - counterLevel > 3)
+                {
+                    return 0.1f;
+                }
             }
             return 1;
         }
