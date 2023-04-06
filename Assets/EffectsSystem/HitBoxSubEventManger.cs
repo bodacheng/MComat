@@ -64,6 +64,7 @@ public class HitBoxSubEventManger : MonoBehaviour
                         decomposition.Phase = -1;
                         _landEvent.Dispose();
                     }
+                    
                     if (!gameObject.activeSelf)
                     {
                         _landEvent.Dispose();

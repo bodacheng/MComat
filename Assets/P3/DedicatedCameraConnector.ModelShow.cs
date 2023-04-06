@@ -13,7 +13,7 @@ namespace ModelView
     public partial class DedicatedCameraConnector : MonoBehaviour
     {
         [SerializeField] private Text unitName;
-        [SerializeField] private Vector3 modelPos = new Vector3(999,999,0);
+        [SerializeField] private Vector3 modelPos = new Vector3(999,0,0);
         
         static readonly IDictionary<string, Data_Center> Saves = new Dictionary<string, Data_Center>();
 

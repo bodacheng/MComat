@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2294097266338321041}
   - component: {fileID: 2294097266356672465}
   - component: {fileID: 2294097266356776561}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HollowSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9828,7 +9828,7 @@ GameObject:
   - component: {fileID: 7186178408013224360}
   - component: {fileID: 7022605721081063362}
   - component: {fileID: 7023246038771063016}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14665,7 +14665,7 @@ GameObject:
   - component: {fileID: 7186437195382424458}
   - component: {fileID: 7022919283642279258}
   - component: {fileID: 7023149789146753152}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hit 20
   m_TagString: Untagged
   m_Icon: {fileID: 0}

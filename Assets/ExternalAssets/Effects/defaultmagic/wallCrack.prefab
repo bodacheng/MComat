@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1290979493737676350}
   - component: {fileID: 4917572489785052121}
   - component: {fileID: 1380377209864143645}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: wallCrack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4844,7 +4844,7 @@ GameObject:
   - component: {fileID: 7083826070892227694}
   - component: {fileID: 7083826070906388300}
   - component: {fileID: 7083826070907614644}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CloudWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9573,7 +9573,7 @@ GameObject:
   - component: {fileID: 7083826070892271228}
   - component: {fileID: 7083826070906389286}
   - component: {fileID: 7083826070907581336}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Embers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14311,7 +14311,7 @@ GameObject:
   - component: {fileID: 7083826070892277810}
   - component: {fileID: 7083826070906367550}
   - component: {fileID: 7083826070906465990}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Softglow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19022,7 +19022,7 @@ GameObject:
   - component: {fileID: 7083826070892184710}
   - component: {fileID: 7083826070906351196}
   - component: {fileID: 7083826070907529854}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23760,7 +23760,7 @@ GameObject:
   - component: {fileID: 7083826070892212142}
   - component: {fileID: 7083826070906373888}
   - component: {fileID: 7083826070907545948}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Force
   m_TagString: Untagged
   m_Icon: {fileID: 0}
