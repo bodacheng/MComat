@@ -27,7 +27,7 @@ public class ArcadeFrontPage : MSceneProcess
         {
             foreach (var stageLocation in locationHandle.Result)
             {
-                locationKeyDic.Add(stageLocation.PrimaryKey, stageLocation);
+                DicAdd<string, IResourceLocation>.Add(locationKeyDic, stageLocation.PrimaryKey, stageLocation);
                 int id = Int32.Parse(stageLocation.PrimaryKey);
                 if (id > _maxStageNum)
                 {

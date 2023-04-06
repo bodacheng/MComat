@@ -42,18 +42,16 @@ public class SingleThreadProcessor
             }
         });
 
-        lock (processListLock)
+        try
         {
-            processList.RemoveAt(0);
+            await origin;
         }
-    }
-
-    /// <summary>
-    /// 不考虑与其他任务执行顺序的执行一个UniTask
-    /// </summary>
-    /// <param name="_process"></param>
-    public void RunFreely(UniTask _process)
-    {
-        _process.Forget();
+        finally
+        {
+            lock (processListLock)
+            {
+                processList.RemoveAt(0);
+            }
+        }
     }
 }
