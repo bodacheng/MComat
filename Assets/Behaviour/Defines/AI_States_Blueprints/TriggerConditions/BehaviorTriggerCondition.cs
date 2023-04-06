@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Soul
 {
@@ -30,7 +31,7 @@ namespace Soul
         {
             var nearestEnemyMeat = Sensor.GetTargetRangeEnemyCollider(0, 5);
             var threat = Sensor.GetSuddenThreatInRange(5, 15);
-            return nearestEnemyMeat == null && (threat != null);
+            return nearestEnemyMeat.Count == 0 && (threat != null);
         }
         
         public bool CT()
@@ -72,8 +73,8 @@ namespace Soul
 
         public bool EnemyClose()
         {
-            tempCollider1 = Sensor.GetTargetRangeEnemyCollider(0, 5);
-            return tempCollider1 != null;
+            var colliders = Sensor.GetTargetRangeEnemyCollider(0, 5);
+            return colliders.Count > 0;
         }
 
         public bool TimeToAttack()
@@ -85,21 +86,39 @@ namespace Soul
             
             // 从移动状态到攻击的话技能释放范围要求精准，但连招情况明明敌人在眼前但因为按技能最好范围而言“不够远”而不释放的话，会很奇怪
             //if (_AIStateRunner.GetNowState() == _AIStateRunner.commandWaitingState)
-                tempCollider1 = Sensor.GetTargetRangeEnemyCollider(triggerAttackRangeMin, triggerAttackRangeMax);
+                var targetRangeEnemyColliders = Sensor.GetTargetRangeEnemyCollider(triggerAttackRangeMin, triggerAttackRangeMax);
             //else
                 //tar = Sensor.GetTargetRangeEnemyCollider(Mathf.Clamp(triggerAtttackRangeMin - 3f, 0, triggerAtttackRangeMin - 3f), triggerAtttackRangeMax);
             switch (TriggerAttackHeight)
             {
                 case -1:// 只适合砸地
-                    return (tempCollider1 != null) && tempCollider1.transform.position.y < 0.5f;
+                    return HasLowCollider(targetRangeEnemyColliders);
                 case 0:// 只适合中段
-                    return (tempCollider1 != null) && tempCollider1.transform.position.y >= 0.8f;
+                    return HasMidCollider(targetRangeEnemyColliders);
                 case 1:// 只适合对空和打脑袋
-                    return (tempCollider1 != null) && tempCollider1.transform.position.y >= 1f;
-                case 2:// 全高度适合
-                    break;
+                    return HasHighCollider(targetRangeEnemyColliders);
+                //case 2:// 全高度适合
+                default:
+                    return targetRangeEnemyColliders.Count > 0;
             }
-            return tempCollider1 != null;
+        }
+        
+        bool HasLowCollider(List<Collider> inColliders)
+        {
+            var finds = inColliders.FindAll(x=> x.transform.position.y < 0.5f);
+            return finds.Count > 0;
+        }
+        
+        bool HasMidCollider(List<Collider> inColliders)
+        {
+            var finds = inColliders.FindAll(x=> x.transform.position.y >= 0.8f);
+            return finds.Count > 0;
+        }
+        
+        bool HasHighCollider(List<Collider> inColliders)
+        {
+            var finds = inColliders.FindAll(x=> x.transform.position.y >= 1f);
+            return finds.Count > 0;
         }
         
         public bool TimeToAttack_Reluctant()
@@ -111,22 +130,22 @@ namespace Soul
             
             // 从移动状态到攻击的话技能释放范围要求精准，但连招情况明明敌人在眼前但因为按技能最好范围而言“不够远”而不释放的话，会很奇怪
             //if (_AIStateRunner.GetNowState() == _AIStateRunner.commandWaitingState)
-                tempCollider1 = Sensor.GetTargetRangeEnemyCollider(0, triggerAttackRangeMax);
+            var targetRangeEnemyColliders = Sensor.GetTargetRangeEnemyCollider(0, triggerAttackRangeMax);
             //else
                 //tar = Sensor.GetTargetRangeEnemyCollider(Mathf.Clamp(triggerAtttackRangeMin - 3f, 0, triggerAtttackRangeMin - 3f), triggerAtttackRangeMax);
             
             switch (TriggerAttackHeight)
             {
                 case -1:// 只适合砸地
-                    return (tempCollider1 != null) && tempCollider1.transform.position.y < 0.5f;
+                    return HasLowCollider(targetRangeEnemyColliders);
                 case 0:// 只适合中段
-                    return (tempCollider1 != null) && tempCollider1.transform.position.y >= 0.8f;
+                    return HasMidCollider(targetRangeEnemyColliders);
                 case 1:// 只适合对空和打脑袋
-                    return (tempCollider1 != null) && tempCollider1.transform.position.y >= 1f;
-                case 2:// 全高度适合
-                    break;
+                    return HasHighCollider(targetRangeEnemyColliders);
+                //case 2:// 全高度适合
+                default:
+                    return targetRangeEnemyColliders.Count > 0;
             }
-            return tempCollider1 != null;
         }
 
         public bool TimeToRespond()

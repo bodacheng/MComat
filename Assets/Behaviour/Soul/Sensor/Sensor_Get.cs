@@ -3,17 +3,18 @@ using UnityEngine;
 
 public partial class Sensor
 {
-    public Collider GetTargetRangeEnemyCollider(float min, float max)
+    public List<Collider> GetTargetRangeEnemyCollider(float min, float max)
     {
+        var returnValue = new List<Collider>();
         for (var i = 0; i < _detectedEnemies.Count; i++)
         {
             var to_me = Vector3.Distance(Center.position, _detectedEnemies[i].transform.position);
             if (to_me >= min && to_me <= max)
             {
-                return _detectedEnemies[i];
+                returnValue.Add(_detectedEnemies[i]);
             }
         }
-        return null;
+        return returnValue;
     }
     
     public Collider GetClosestEnemyColliderInSensorRange()
