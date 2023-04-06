@@ -37,11 +37,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - config
-  - m_GUID: 748b934bcc8e446789b50cef9fd249ad
-    m_Address: Config/SkillStaticAnalysis
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - config
   - m_GUID: 0b7e9a68701b2457f8e322c57e0e682d
     m_Address: Config/LanguageCode
     m_ReadOnly: 0
@@ -54,6 +49,11 @@ MonoBehaviour:
     - config
   - m_GUID: f82352243f33a48c79e9de4316104397
     m_Address: Config/stage_mode
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+  - m_GUID: 51d4bf73a53b04fc0a3cf967d3ecd761
+    m_Address: Config/SkillStaticAnalysis
     m_ReadOnly: 0
     m_SerializedLabels:
     - config
