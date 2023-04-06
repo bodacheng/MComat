@@ -21,4 +21,12 @@ public partial class PlayFabReadClient
             fail
         );
     }
+    
+    public static void DevUserLogin(string id)
+    {
+        PlayFabReadClient.LoginByCustomId(
+            id,
+            PlayFabReadClient.LoginSuccess,
+            PlayFabReadClient.LoginFail);
+    }
 }
