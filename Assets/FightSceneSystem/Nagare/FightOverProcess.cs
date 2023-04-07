@@ -84,8 +84,7 @@ namespace FightScene
                                                     { "TutorialProgress", "StageOneFinished" }
                                                 }
                                             },
-                                            () => {},
-                                            PreScene.ReturnToLobby
+                                            () => {}
                                         );
                                         ReturnLayer.ReturnMissionList.Clear(); // 直接回到 front scene
                                     }

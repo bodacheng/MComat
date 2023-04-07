@@ -49,7 +49,7 @@ public class ArcadeFrontPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        PlayFabReadClient.GetStageRewardInfo(Enter, PreScene.ReturnToLobby);
+        PlayFabReadClient.GetStageRewardInfo(Enter);
     }
     
     void Enter()

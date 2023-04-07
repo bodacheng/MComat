@@ -1,4 +1,3 @@
-using UnityEngine;
 using System;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -30,8 +29,8 @@ public partial class PlayFabReadClient
             },
             errorCallback =>
             {
-                Debug.Log(errorCallback.Error);
                 success.Invoke(false);
+                ErrorReport(errorCallback);
             }
         );
     }

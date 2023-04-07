@@ -38,8 +38,7 @@ public partial class CloudScript
             {
                 var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
                 jsonResult.TryGetValue("success", out var succeed);
-                object arenaPointObject = null;
-                jsonResult.TryGetValue("arenapoint", out arenaPointObject);
+                jsonResult.TryGetValue("arenapoint", out var arenaPointObject);
                 if (arenaPointObject != null)
                 {
                     Int32.TryParse(arenaPointObject.ToString(), out var arenaPoint);

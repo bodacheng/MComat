@@ -22,10 +22,8 @@ public partial class PlayFabReadClient
                 {
                     Debug.Log("成功购买" + targetStoneConfig.RECORD_ID);
                     PurchaseStones(stones, i + 1);
-                }, error =>
-                {
-                    Debug.Log(error.GenerateErrorReport());
-                }
+                }, 
+                ErrorReport
             );
         }
     }

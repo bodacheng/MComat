@@ -9,7 +9,7 @@ public partial class PlayFabReadClient
     /// </summary>
     /// <param name="success"></param>
     /// <param name="fail"></param>
-    public static void LoginByCustomId(string customId, Action<LoginResult, LoginType> success, Action<PlayFabError> fail)
+    public static void LoginByCustomId(string customId, Action<LoginResult, LoginType> success)
     {
         PlayFabClientAPI.LoginWithCustomID(
             new LoginWithCustomIDRequest
@@ -18,15 +18,12 @@ public partial class PlayFabReadClient
                 CreateAccount = true
             },
             (x)=>success.Invoke(x, LoginType.dev),
-            fail
+            ErrorReport
         );
     }
     
     public static void DevUserLogin(string id)
     {
-        PlayFabReadClient.LoginByCustomId(
-            id,
-            PlayFabReadClient.LoginSuccess,
-            PlayFabReadClient.LoginFail);
+        LoginByCustomId(id, LoginSuccess);
     }
 }

@@ -65,23 +65,6 @@ public class SettingPage : MSceneProcess
                             (playFabError) =>
                             {
                                 nickNameLayer.LoadingRender(false);
-                                Debug.Log("nick name setting fail:"+ playFabError.Error);
-                                switch (playFabError.Error)
-                                {
-                                    case PlayFabErrorCode.InvalidUsername:
-                                        PopupLayer.ArrangeWarnWindow(Translate.Get("InvalidUsername"));
-                                        break;
-                                    case PlayFabErrorCode.DuplicateUsername:
-                                        PopupLayer.ArrangeWarnWindow(Translate.Get("DuplicateUsername"));
-                                        break;
-                                    case PlayFabErrorCode.InvalidParams:
-                                        PopupLayer.ArrangeWarnWindow(Translate.Get("InvalidUsername"));
-                                        break;
-                                    default:
-                                        PreScene.ReturnToLobby();
-                                        break;
-                                }
-                                
                                 ProgressLayer.Close();
                             }
                         );

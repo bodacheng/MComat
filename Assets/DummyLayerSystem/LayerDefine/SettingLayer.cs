@@ -106,10 +106,6 @@ public class SettingLayer : UILayer
                     () =>
                     {
                         PopupLayer.ArrangeWarnWindow(" Email Sent ");
-                    },
-                    (x)=>
-                    {
-                        PopupLayer.ArrangeWarnWindow(x.ErrorMessage);
                     }
                 );
             }

@@ -46,7 +46,7 @@ public partial class PlayFabReadClient
             (x) =>
             {
                 finished?.Invoke(false);
-                Debug.Log(x.ErrorMessage);
+                ErrorReport(x);
             }
         );
     }
@@ -169,9 +169,7 @@ public partial class PlayFabReadClient
                 if (target != null)
                     saveToLocal.Invoke(target);
             },
-            errorCallback => {
-                Debug.Log(errorCallback.Error);
-            }
+            ErrorReport
         );
     }
     

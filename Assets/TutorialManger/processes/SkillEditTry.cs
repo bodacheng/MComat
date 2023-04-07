@@ -78,8 +78,7 @@ public class SkillEditTry : TutorialProcess
                                 PlayFabReadClient.DontShowFrontFight = "true";
                                 _skillEditFinished = true;
                                 _skillEditLayer.nineSlot.confirmBtnIndicator.SetActive(false);
-                            },
-                            PreScene.ReturnToLobby
+                            }
                         );
                     }
                 );

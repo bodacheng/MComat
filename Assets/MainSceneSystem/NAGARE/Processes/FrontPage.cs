@@ -102,10 +102,6 @@ public class FrontPage : MSceneProcess
                         {
                             PopupLayer.ArrangeWarnWindow("Account linked to device.");
                             PlayerAccountInfo.Me.currentLinkedDeviceId = PlayFabReadClient.CustomId;
-                        },
-                        (x) =>
-                        {
-                            PopupLayer.ArrangeWarnWindow("绑定失败"+ x.Error);
                         }
                     );
                     UILayerLoader.Remove<AskIfLinkDeviceLayer>();
@@ -154,8 +150,7 @@ public class FrontPage : MSceneProcess
                 {
                     EnterProcess();
                 }
-            },
-            PreScene.ReturnToLobby
+            }
         );
     }
     

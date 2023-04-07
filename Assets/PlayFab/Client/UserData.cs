@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 public partial class PlayFabReadClient
 {
-    public static void UpdateUserData(UpdateUserDataRequest req, Action finished, Action fail)
+    public static void UpdateUserData(UpdateUserDataRequest req, Action finished, Action fail = null)
     {
         PlayFabClientAPI.UpdateUserData
         (
@@ -17,8 +17,8 @@ public partial class PlayFabReadClient
                 finished.Invoke();
             },
             errorCallback => {
-                Debug.Log("fail:" + errorCallback.ErrorMessage);
-                fail.Invoke();
+                fail?.Invoke();
+                ErrorReport(errorCallback);
             }
         );
     }
@@ -67,8 +67,8 @@ public partial class PlayFabReadClient
                 finished.Invoke(true);
             },
             errorCallback => {
-                Debug.Log(errorCallback);
                 finished.Invoke(false);
+                ErrorReport(errorCallback);
             }
         );
     }
@@ -86,8 +86,8 @@ public partial class PlayFabReadClient
                 finished.Invoke(true);
             },
             errorCallback => {
-                Debug.Log(errorCallback.ErrorMessage);
                 finished.Invoke(false);
+                ErrorReport(errorCallback);
             }
         );
     }
@@ -100,7 +100,10 @@ public partial class PlayFabReadClient
                 DisplayName = displayName
             },
             finished.Invoke,
-            error
-        );
+            (x)=>
+            {
+                error(x);
+                ErrorReport(x);
+            });
     }
 }

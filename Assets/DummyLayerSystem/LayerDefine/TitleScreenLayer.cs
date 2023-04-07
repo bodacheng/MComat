@@ -64,22 +64,18 @@ public class TitleScreenLayer : UILayer
     {
         PlayFabReadClient.PlayFabEmailLogin(
             id.text.Trim(), password.text.Trim(), 
-            PlayFabReadClient.LoginSuccess,
-            PlayFabReadClient.LoginFail);
+            PlayFabReadClient.LoginSuccess);
     }
     
     void TouchScreenLogin()
     {
-        PlayFabReadClient.LoginByDevice(
-            PlayFabReadClient.LoginSuccess,
-            PlayFabReadClient.LoginFail);
+        PlayFabReadClient.LoginByDevice(PlayFabReadClient.LoginSuccess);
     }
 
     void DevUserLogin()
     {
         PlayFabReadClient.LoginByCustomId(
             devId.text,
-            PlayFabReadClient.LoginSuccess,
-            PlayFabReadClient.LoginFail);
+            PlayFabReadClient.LoginSuccess);
     }
 }

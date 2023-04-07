@@ -12,10 +12,6 @@ public partial class PlayFabReadClient
                     {
                         PopupLayer.ArrangeWarnWindow(" 已经关联账户 ");
                         success.Invoke();
-                    },
-                    (x) =>
-                    {
-                        PopupLayer.ArrangeWarnWindow("绑定失败"+ x.Error);
                     }
                 );
             },
@@ -33,10 +29,6 @@ public partial class PlayFabReadClient
                     {
                         PopupLayer.ArrangeWarnWindow(" 已经与当前设备断开链接 ");
                         success.Invoke();
-                    },
-                    () =>
-                    {
-                        PopupLayer.ArrangeWarnWindow(" 未能与设备切断绑定，");
                     }
                 );
             },

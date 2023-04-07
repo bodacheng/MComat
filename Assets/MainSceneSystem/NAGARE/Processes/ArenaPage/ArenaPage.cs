@@ -79,7 +79,6 @@ public partial class ArenaPage : MSceneProcess
             ()=>
             {
                 SetLoaded(true);
-                PreScene.ReturnToLobby();
             });
         
         LoadLeaderboardInfos();
@@ -114,8 +113,7 @@ public partial class ArenaPage : MSceneProcess
                 },
                 () =>
                 {
-                },
-                PreScene.ReturnToLobby
+                }
             );
         }
     }

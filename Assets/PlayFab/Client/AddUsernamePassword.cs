@@ -11,7 +11,6 @@ public partial class PlayFabReadClient
     /// <param name="PlayFabUsername"></param>
     public static void AddUserNameAndEmail(string PlayFabUsername, string email, Action success)
     {
-        Debug.Log("尝试把Username设置成"+ PlayFabUsername);
         var guidValue = Guid.NewGuid();
         Debug.Log(guidValue.ToString());
         PlayFabClientAPI.AddUsernamePassword(new PlayFab.ClientModels.AddUsernamePasswordRequest
@@ -26,10 +25,7 @@ public partial class PlayFabReadClient
                 Debug.Log("我们把玩家的PlayFab username设置成了他的PlayFabId:" + result.Username);
                 success.Invoke();
             },
-            (x) =>
-            {
-                Debug.Log("添加username失败："+ x.Error);
-            }
+            ErrorReport
         );
     }
     
@@ -39,11 +35,8 @@ public partial class PlayFabReadClient
     /// 但是，玩家不能改username，这个是我们自己定的规矩，我们希望这个username就是玩家的playfabid。
     /// </summary>
     /// <param name="email"></param>
-    public static void SendPwResetEmail(string email, Action success = null, Action<PlayFabError> fail = null)
+    public static void SendPwResetEmail(string email, Action success = null)
     {
-        Debug.Log("send mail to this address:" + email.Trim() );
-        Debug.Log("titleID:" + PlayFabSettings.TitleId );
-
         PlayFabClientAPI.SendAccountRecoveryEmail(
             new SendAccountRecoveryEmailRequest
             {
@@ -55,11 +48,7 @@ public partial class PlayFabReadClient
                 Debug.Log(x);
                 success?.Invoke();
             },
-            (x)=>
-            {
-                Debug.Log(x);
-                fail?.Invoke(x);
-            }
+            ErrorReport
         );
     }
     

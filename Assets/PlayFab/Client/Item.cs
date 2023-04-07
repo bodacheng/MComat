@@ -1,4 +1,3 @@
-using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using dataAccess;
@@ -22,8 +21,8 @@ public partial class PlayFabReadClient
                 OnGetUserInventory(result, finished);
             },
             errorCallback => {
-                Debug.Log(errorCallback.ErrorMessage);
                 finished?.Invoke(false);
+                ErrorReport(errorCallback);
             }
         );
     }

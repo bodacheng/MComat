@@ -14,7 +14,7 @@ public class SkillEditPage : MSceneProcess
     
     async UniTask EnterProcess()
     {
-        var layer = UILayerLoader.Load<SkillEditLayer>();
+        layer = UILayerLoader.Load<SkillEditLayer>();
         await layer.Setup((x) =>
         {
             x.connector.ShowMyModel(PreScene.target.Focusing != null ? PreScene.target.Focusing.id : null).Forget();
@@ -31,11 +31,9 @@ public class SkillEditPage : MSceneProcess
     public override void ProcessEnter()
     {
         PlayFabReadClient.LoadItems(ItemsLoadFinished);
-        
         missionWatcher = new MissionWatcher(
             new List<string>() {"itemsLoadFinished"},
-            ()=>EnterProcess().Forget(),
-            PreScene.ReturnToLobby
+            ()=>EnterProcess().Forget()
         );
     }
     

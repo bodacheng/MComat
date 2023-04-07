@@ -33,8 +33,7 @@ public class TryGotcha : TutorialProcess
                             () =>
                             {
                                 PlayerAccountInfo.Me.tutorialProgress = "GotchaFinished";
-                            },
-                            PreScene.ReturnToLobby
+                            }
                         );
                     }
                 );

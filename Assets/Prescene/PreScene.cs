@@ -135,12 +135,6 @@ namespace mainMenu
             AddressablesLogic.Essentials().Forget();
         }
         
-        public static void ReturnToLobby()
-        {
-            ProgressLayer.Loading(">");
-            PopupLayer.ArrangeConfirmWindow((() => { SceneManager.LoadScene(0);}), "Network Error. Return to lobby.");
-        }
-        
         void BasicPhase()
         {
             Application.targetFrameRate = 60;

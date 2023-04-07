@@ -57,7 +57,7 @@ public partial class PlayFabReadClient
     /// <param name="pw"></param>
     /// <param name="success"></param>
     /// <param name="fail"></param>
-    public static void PlayFabEmailLogin(string email, string pw, Action<LoginResult, LoginType> success, Action<PlayFabError> fail)
+    public static void PlayFabEmailLogin(string email, string pw, Action<LoginResult, LoginType> success)
     {
         Debug.Log("try login by email:"+ email +"\n"
         + "pw:"+ pw +"\n" + "TitleId:"+ PlayFabSettings.TitleId);
@@ -70,11 +70,7 @@ public partial class PlayFabReadClient
                 TitleId = PlayFabSettings.TitleId
             },
             (x)=>success.Invoke(x, LoginType.normal),
-            (x)=>
-            {
-                Debug.Log(x.Error);
-                fail.Invoke(x);
-            }
+            ErrorReport
         );
     }
     
@@ -83,7 +79,7 @@ public partial class PlayFabReadClient
     /// </summary>
     /// <param name="success"></param>
     /// <param name="fail"></param>
-    public static void LoginByDevice(Action<LoginResult, LoginType> success, Action<PlayFabError> fail)
+    public static void LoginByDevice(Action<LoginResult, LoginType> success)
     {
 #if UNITY_IOS
             PlayFabClientAPI.LoginWithIOSDeviceID(
@@ -93,7 +89,7 @@ public partial class PlayFabReadClient
                     CreateAccount = true
                 },
                 (x)=> success.Invoke(x, LoginType.normal),
-                fail
+                ErrorReport
             );
 #endif
 
@@ -105,7 +101,7 @@ public partial class PlayFabReadClient
                 CreateAccount = true
             },
             (x)=>success.Invoke(x, LoginType.normal),
-            fail
+            ErrorReport
         );
 #endif
     }
@@ -219,20 +215,6 @@ public partial class PlayFabReadClient
                 PopupLayer.ArrangeWarnWindow(errorCallback.ErrorMessage);
             }
         );
-    }
-    
-    public static void LoginFail(PlayFabError error)
-    {
-        Debug.Log(error.Error);
-        PopupLayer.ArrangeWarnWindow(error.ErrorMessage);
-        switch (error.Error)
-        {
-            case PlayFabErrorCode.AccountDeleted:
-                break;
-            case PlayFabErrorCode.ConnectionError:
-                break;
-            //...
-        }
     }
     
     static void EnterMainScene()
