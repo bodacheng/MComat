@@ -514,6 +514,11 @@ handlers.ArenaDefendTeamSave = function (args, context) {
                 ]
             }
         );
+        return {
+            success: true,
+            messageValue: members,
+            arenapoint : 0
+        };
     }
     
     return {
