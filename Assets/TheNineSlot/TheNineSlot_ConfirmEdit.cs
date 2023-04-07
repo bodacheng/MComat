@@ -105,24 +105,7 @@ namespace mainMenu
                 extraSkillEditSuccess?.Invoke();
             }
             
-            void Error()
-            {
-                var skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
-                if (skillEditLayer != null)
-                {
-                    ReadANineAndTwo(unitInfo);
-                    SelectedRender(null);
-                }
-                
-                var skillConfirmLog = new MainSceneLog()
-                {
-                    step = ProcessesRunner.Main.currentProcess.Step,
-                    description = "failed"
-                };
-                MainSceneLogger.Logs.Add(skillConfirmLog);
-            }
-            
-            CloudScript.UpdateSkillEdit(toEditStones, Success, Error);
+            CloudScript.UpdateSkillEdit(toEditStones, Success);
         }
     }
 }

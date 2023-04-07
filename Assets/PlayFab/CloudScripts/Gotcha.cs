@@ -31,9 +31,7 @@ public partial class CloudScript
                     }
                     success(tableInfo.Value);
                 }
-            }, (x) =>
-            {
-                Debug.Log(x);
-            });
+            }
+        );
     }
 }

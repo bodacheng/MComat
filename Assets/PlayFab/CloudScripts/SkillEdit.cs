@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 public partial class CloudScript
 {
     // k v : stoneid , equipingMonster, slot
-    public static void UpdateSkillEdit(IDictionary<string, Tuple<string, string>> ToEditStones, Action<IDictionary<string, Tuple<string, string>>> success, Action fail)
+    public static void UpdateSkillEdit(IDictionary<string, Tuple<string, string>> ToEditStones, Action<IDictionary<string, Tuple<string, string>>> success)
     {
         var Items = new List<PlayFab.ServerModels.UpdateUserInventoryItemDataRequest>();
         foreach (var pair in ToEditStones)
@@ -33,27 +33,25 @@ public partial class CloudScript
                 GeneratePlayStreamEvent = true, // Optional - Shows this event in PlayStream
             },
         (ExecuteCloudScriptResult result) => {
-            var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-            jsonResult.TryGetValue("changedStone", out var changedStone); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
-            
-            var ChangedDic = new Dictionary<string, Tuple<string, string>>();
-            var json = JsonConvert.SerializeObject(changedStone);
-            var changedStoneList = JsonConvert.DeserializeObject<List<StoneOfPlayerInfo>>(
-                json,
-                new JsonSerializerSettings
+                var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                jsonResult.TryGetValue("changedStone", out var changedStone); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
+                
+                var ChangedDic = new Dictionary<string, Tuple<string, string>>();
+                var json = JsonConvert.SerializeObject(changedStone);
+                var changedStoneList = JsonConvert.DeserializeObject<List<StoneOfPlayerInfo>>(
+                    json,
+                    new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        MissingMemberHandling = MissingMemberHandling.Ignore
+                    });
+                
+                foreach (var stone in changedStoneList)
                 {
-                    NullValueHandling = NullValueHandling.Ignore,
-                    MissingMemberHandling = MissingMemberHandling.Ignore
-                });
-            
-            foreach (var stone in changedStoneList)
-            {
-                ChangedDic.Add(stone.InstanceId, new Tuple<string, string>(stone.UnitInstanceId, stone.Slot));
+                    ChangedDic.Add(stone.InstanceId, new Tuple<string, string>(stone.UnitInstanceId, stone.Slot));
+                }
+                success.Invoke(ChangedDic);
             }
-            success.Invoke(ChangedDic);
-        },
-        error => {
-            fail.Invoke();
-        });
+        );
     }
 }

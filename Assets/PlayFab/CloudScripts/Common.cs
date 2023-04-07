@@ -21,13 +21,11 @@ public partial class CloudScript
             {
                 resultCallback(x);
                 ProgressLayer.Close();
-            }, 
+            },
             (x)=>
             {
-                Debug.Log(x.Error);
                 errorCallback?.Invoke(x);
-                ProgressLayer.Close();
-                PopupLayer.ArrangeWarnWindow(x.ErrorMessage);
+                PlayFabReadClient.ErrorReport(x);
             },
             customData, extraHeaders);
     }

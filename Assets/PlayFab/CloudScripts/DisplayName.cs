@@ -14,8 +14,8 @@ public partial class CloudScript
             result =>
             {
                 Debug.Log("The player's display name is now: " + result.DisplayName);
-            }, 
-            error => 
-                Debug.LogError(error.GenerateErrorReport()));
+            },
+            PlayFabReadClient.ErrorReport
+        );
     }
 }

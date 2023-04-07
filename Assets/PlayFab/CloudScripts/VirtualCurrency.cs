@@ -58,12 +58,7 @@ public partial class CloudScript
                 }
                 success.Invoke();
             },
-            (x)=>
-            {
-                Debug.Log(x.Error);
-                ProgressLayer.Close();
-                PopupLayer.ArrangeWarnWindow(x.ErrorMessage);
-            }
+            PlayFabReadClient.ErrorReport
         );
     }
 }

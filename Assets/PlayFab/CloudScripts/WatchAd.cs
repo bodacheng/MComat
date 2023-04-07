@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 
@@ -41,12 +40,7 @@ public partial class CloudScript
                 success?.Invoke();
                 //PopupLayer.ArrangeWarnWindow("YOU GOT "+ intBalanceChange+ " " + VirtualCurrency);
             },
-            (x)=>
-            {
-                Debug.Log(x.Error);
-                ProgressLayer.Close();
-                PopupLayer.ArrangeWarnWindow(x.ErrorMessage);
-            }
+            PlayFabReadClient.ErrorReport
         );
     }
 }

@@ -185,9 +185,6 @@ public partial class CloudScript
                     success.Invoke(PlayerAccountInfo.Me.arenaPoint , currentPointInt, awardDM);
                     PlayerAccountInfo.Me.arenaPoint = currentPointInt;
                 }
-            },
-            error => {
-                Debug.Log(error.Error);
             }
         );
     }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public partial class PlayFabReadClient
 {
-    static void ErrorReport(PlayFabError error)
+    public static void ErrorReport(PlayFabError error)
     {
         Debug.Log("error.ErrorMessage:"+ error.ErrorMessage);
         switch (error.Error)
