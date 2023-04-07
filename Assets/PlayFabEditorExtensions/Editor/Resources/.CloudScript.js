@@ -433,7 +433,7 @@ handlers.updateStone = function (args, context) {
     
     // 是否有足够的金币升级？
     
-    let needGD = 100 + 10 * (currentLv -1);
+    let needGD = 10;
     if (GD < needGD) {
         return {  success: false, stoneId: args.target, level:0};
     }

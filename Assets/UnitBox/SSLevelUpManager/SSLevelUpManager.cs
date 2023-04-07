@@ -94,7 +94,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
         
         confirmLevelUp.gameObject.SetActive(true);
-        var needGD = target.Level * 10 + 100;
+        var needGD = 10;
         gdCount.text = needGD.ToString();
         void Confirm()
         {
