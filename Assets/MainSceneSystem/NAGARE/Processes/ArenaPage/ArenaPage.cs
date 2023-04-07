@@ -44,8 +44,11 @@ public partial class ArenaPage : MSceneProcess
             );
             PlayerPrefs.SetInt(PlayFabSetting._arenaPointCode, PlayerAccountInfo.Me.arenaPoint);
         }
+        else
+        {
+            onClickRankResetLayer.Invoke();
+        }
         PlayerPrefs.SetInt(PlayFabSetting._arenaPointCode, PlayerAccountInfo.Me.arenaPoint);
-        onClickRankResetLayer.Invoke();
     }
     
     void EnterProcess()
