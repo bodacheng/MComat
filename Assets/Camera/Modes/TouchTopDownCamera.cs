@@ -23,6 +23,7 @@ public class TouchTopDownCamera : CameraMode
     private float disAwayFromFront = 10f;
     private float zoomScreenDis = 10;
     private float zoomSpeed = 20;
+    private float headDownDegree = 3f;
     private float Height
     {
         get => height;
@@ -46,7 +47,7 @@ public class TouchTopDownCamera : CameraMode
             temp = camera.transform.forward;
             temp.y = 0;
         }).Append(camera.transform.DOMoveY(height, 0.2f)).
-        Join(camera.transform.DOLookAt(temp  - Vector3.up, 0.5f, AxisConstraint.None,Vector3.up)).
+        Join(camera.transform.DOLookAt(temp  - headDownDegree * Vector3.up, 0.5f, AxisConstraint.None,Vector3.up)).
         AppendCallback(() =>
         {
             zoomScreenDis = Screen.width / 7;

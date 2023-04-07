@@ -50,10 +50,10 @@ public class SideUnitIcon : MonoBehaviour {
     public void RecallBars()
     {
         HpBar.transform.SetParent(transform);
-        HpBar.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,15,0);
+        HpBar.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,12,0);
         HpBar.transform.localScale = Vector3.one;
         ResistBar.transform.SetParent(transform);
-        ResistBar.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,15,0);
+        ResistBar.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,12,0);
         ResistBar.transform.localScale = Vector3.one;
     }
 
