@@ -65,7 +65,7 @@ public class Starter : MonoBehaviour
             }
         );
         //MobileAds.Initialize(initStatus => { Debug.Log(initStatus);});
-        Debug.Log("Config Files Loaded With No Errors");
+        Debug.Log("刷新结束");
         ConfigInitialised = true;
     }
     

@@ -602,7 +602,7 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     
     for (let i = 0; i < result.Leaderboard.length; i++) {
         if (result.Leaderboard[i].PlayFabId == currentPlayerId){
-            var item = ArrangeMyTeamInfoItem(result.Leaderboard[i], myTeamData.Data["DefendTeam"].Value, myTeamData.Data["OneWord"].Value);
+            var item = ArrangeMyTeamInfoItem(result.Leaderboard[i], myTeamData.Data["DefendTeam"].Value, myTeamData.Data["OneWord"] != null ? myTeamData.Data["OneWord"].Value : "");
             if (item != null) {
                 teamInfos.push(item);
             }
