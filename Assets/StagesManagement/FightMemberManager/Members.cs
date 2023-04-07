@@ -17,13 +17,11 @@ public partial class StageEditor {
         
         Texture2D GetIconTexture2D(Sprite icon)
         {
-            var croppedTexture = new Texture2D(10,10);
             if (icon == null)
             {
                 icon = DefaultIconSetting._unitSlotEmpty;
             }
-            
-            croppedTexture = new Texture2D( (int)icon.rect.width, (int)icon.rect.height );
+            var croppedTexture = new Texture2D( (int)icon.textureRect.width, (int)icon.textureRect.height );
             var pixels = icon.texture.GetPixels(
                 (int)icon.textureRect.x, 
                 (int)icon.textureRect.y, 
