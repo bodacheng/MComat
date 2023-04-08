@@ -5083,7 +5083,6 @@ MonoBehaviour:
   DestructionDelay: 0.2
   stop_emission_delay: 0.1
   to_be_faded_renderers: []
-  audioSource: {fileID: 0}
   Attachments:
   - boltp
   Counter: 0

@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1254426735839430, guid: 3213f732814384068bcacc20ab04ba34, type: 3}
       propertyPath: m_Name
-      value: kof99xie (1)
+      value: kof99xie
       objectReference: {fileID: 0}
     - target: {fileID: 4797347898798868, guid: 3213f732814384068bcacc20ab04ba34, type: 3}
       propertyPath: m_RootOrder

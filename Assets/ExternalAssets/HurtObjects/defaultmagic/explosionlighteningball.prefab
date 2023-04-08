@@ -4960,7 +4960,6 @@ MonoBehaviour:
   DestructionDelay: 2.1
   stop_emission_delay: 2
   to_be_faded_renderers: []
-  audioSource: {fileID: 0}
   Attachments:
   - explosionlighteningball_big
   Counter: 0
@@ -4982,10 +4981,12 @@ MonoBehaviour:
   _WeaponMode: 2
   AT_weight: 1
   weaponHP: 4
+  heavyLevel: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
   element: 0
   muzzle: 
+  hitEffect: 
   ExplosionEffect: energy_resolve
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2

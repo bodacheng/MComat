@@ -4966,7 +4966,6 @@ MonoBehaviour:
   DestructionDelay: 6.2
   stop_emission_delay: 6
   to_be_faded_renderers: []
-  audioSource: {fileID: 0}
   Attachments:
   - s_pillarblast
   Counter: 0

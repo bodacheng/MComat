@@ -78,7 +78,6 @@ MonoBehaviour:
   DestructionDelay: -1
   stop_emission_delay: -1
   to_be_faded_renderers: []
-  audioSource: {fileID: 0}
   Attachments: []
   Counter: 0
 --- !u!1 &1420864978612344187

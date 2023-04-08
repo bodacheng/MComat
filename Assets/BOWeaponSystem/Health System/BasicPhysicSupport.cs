@@ -146,6 +146,7 @@ public class BasicPhysicSupport : MonoBehaviour
     }
     
     private Vector3 pos;
+    private float pushIntoRingSpeed = 1;
     void LimitTargetToRange()
     {
         var originY = _DATA_CENTER.WholeT.position.y;
@@ -156,7 +157,7 @@ public class BasicPhysicSupport : MonoBehaviour
         {
             pos = pos.normalized * BoundaryControlByGod._BattleRingRadius;
             pos.y = originY;
-            _DATA_CENTER.WholeT.position = pos;
+            _DATA_CENTER.WholeT.position = Vector3.Lerp(_DATA_CENTER.WholeT.position, pos, pushIntoRingSpeed * Time.deltaTime);
             AtRing = true;
         }
         else
