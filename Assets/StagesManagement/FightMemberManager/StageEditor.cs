@@ -18,7 +18,6 @@ public partial class StageEditor
     string _focusingType = "human";
     int stageLevel = 1;
     
-    private static bool unitIconInitialized = false;
     async void UnitIconInitialize()
     {
         AsyncOperationHandle<IList<IResourceLocation>> locationHandle = Addressables.LoadResourceLocationsAsync("unit_icon");
@@ -31,7 +30,6 @@ public partial class StageEditor
                 await UnitIconDic.Load(words[1]);
             }
         }
-        unitIconInitialized = true;
     }
     
     public void OnGUIView(FightMembers target)
@@ -45,12 +43,6 @@ public partial class StageEditor
                 stageLevel = unitInfo.level;
             }
             Initialized = true;
-        }
-        
-        if (!unitIconInitialized)
-        {
-            UnitIconInitialize();
-            return;
         }
         
         GUILayout.Space(10);

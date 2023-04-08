@@ -27,20 +27,20 @@ MonoBehaviour:
       b3: 156
       c1: 150
       c2: 176
-      c3: 137
+      c3: 118
   - id: 1
     r_id: 2
     level: 4
     set:
-      a1: 95
-      a2: 167
-      a3: 159
-      b1: 39
-      b2: 98
-      b3: 10
-      c1: 9
-      c2: 183
-      c3: 172
+      a1: 80
+      a2: 27
+      a3: 125
+      b1: 167
+      b2: 113
+      b3: 99
+      c1: 53
+      c2: 95
+      c3: 183
   team1HpRate: 1
   team2HpRate: 0.9
   team1CGMode: 0

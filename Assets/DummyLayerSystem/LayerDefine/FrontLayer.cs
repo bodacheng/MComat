@@ -35,9 +35,8 @@ public class FrontLayer : UILayer
         
         SkillTestRBtn.onClick.AddListener(pre.BeginSkillTest_Rotation);
         SkillTestMBtn.onClick.AddListener(pre.BeginSkillTest_Multi);
-        
-        SkillTestRBtn.gameObject.SetActive(CommonSetting.DevMode);
-        // SkillTestMBtn.gameObject.SetActive(false);
+        SkillTestRBtn.gameObject.SetActive(CommonSetting.DevMode); 
+        SkillTestMBtn.gameObject.SetActive(CommonSetting.DevMode);
     }
     
     public async UniTask ShowMyModel(string instanceID)
