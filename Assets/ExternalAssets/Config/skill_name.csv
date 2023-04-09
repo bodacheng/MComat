@@ -13,6 +13,7 @@ RECORD_ID,EN_NAME,JP_NAME,CN_NAME,EN_INTRO,JP_INTRO,CN_INTRO
 68,,,前踢,,,
 80,,,前双拳,,,
 89,,,拳,,,
+90,,,乱击,,,
 95,,,扭击,,,
 98,,,回旋拳,,,
 99,,,筋斗踢,,,
@@ -32,4 +33,4 @@ RECORD_ID,EN_NAME,JP_NAME,CN_NAME,EN_INTRO,JP_INTRO,CN_INTRO
 180,,,刀锋踢,,,
 182,,,防御,,,如果被敌人击中，则可瞬间反击
 183,,,闪电拳,,,
-90,,,乱击,,,
+184,,,反击破坏拳,,,
