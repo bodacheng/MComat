@@ -58,12 +58,12 @@ public class ArcadeTop : UILayer
 
     void ShowNextStages()
     {
-        ShowStages(NewStages(_currentStages.Max() + 1)).Forget();
+        ShowStages(NewStages( _currentStages.Count > 0 ? _currentStages.Max() + 1:0)).Forget();
     }
     
     void ShowLastStages()
     {
-        ShowStages(NewStages(_currentStages.Min() - 2)).Forget();
+        ShowStages(NewStages(_currentStages.Count > 0 ?_currentStages.Min() - 2:0)).Forget();
     }
     
     public async UniTask ShowStages(List<int> stages)
@@ -109,7 +109,7 @@ public class ArcadeTop : UILayer
         stageBtn.Button.onClick.AddListener(LoadThisStage);
         stageBtn.name = "Stage" + stageNo;
         stageBtn.StageNo = stageNo;
-            
+        
         if (one.FightMembers != null)
         {
             stageBtn.LoadUnitIcons(one.FightMembers.EnemySets.GetValues(), IconButtonFeature, stageNo == _currentStages.Max());
@@ -143,8 +143,10 @@ public class ArcadeTop : UILayer
         int _currentStagesMax = _currentStages.Count > 0 ? _currentStages.Max() : PlayerAccountInfo.Me.arcadeProcess;
         nextChapter.gameObject.SetActive((PlayerAccountInfo.Me.arcadeProcess + 1 > _currentStagesMax) && (_maxStageNum > _currentStagesMax));
         lastChapter.gameObject.SetActive(_currentStages.Count == 0 || _currentStages.Min() > 5);
-        
-        var progressChapter = PlayerAccountInfo.Me.arcadeProcess / 5;
+
+        var progressChapter = PlayerAccountInfo.Me.arcadeProcess == _maxStageNum
+            ? (PlayerAccountInfo.Me.arcadeProcess - 1) / 5
+            : PlayerAccountInfo.Me.arcadeProcess / 5;
         var currentChapter = _currentStages.Count != 0 ? _currentStages.Min() / 5 : _maxStageNum / 5;
         
         jumpToNewStage.gameObject.SetActive(progressChapter != currentChapter);
@@ -157,9 +159,15 @@ public class ArcadeTop : UILayer
     
     public List<int> NewStages(int progress)
     {
-        if (progress >= _maxStageNum)
-            progress = _maxStageNum - 2;
-            
+        if (progress > _maxStageNum)
+        {
+            progress = _maxStageNum;
+        }
+        else if (progress == _maxStageNum)
+        {
+            progress -= 1;
+        }
+
         var currentChapter = progress / 5;
         var returnValue = new List<int>();
         for (int stageNoPlus = 1; stageNoPlus <= 5; stageNoPlus++)
