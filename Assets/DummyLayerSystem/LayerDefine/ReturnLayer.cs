@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using DummyLayerSystem;
+using mainMenu;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class ReturnLayer : UILayer
     [SerializeField] GameObject indicator;
     [SerializeField] GameObject curtain;
     
-    public static readonly List<Func<bool>> ReturnMissionList = new List<Func<bool>>();
+    public static readonly List<ReturnAction> ReturnMissionList = new List<ReturnAction>();
     
     
     void Setup()
@@ -25,9 +26,9 @@ public class ReturnLayer : UILayer
         if (ReturnMissionList.Count == 0)
             return;
 
-        var targetMission = ReturnMissionList[ReturnMissionList.Count - 1];
+        var targetMission = ReturnMissionList[^1];
         ReturnMissionList.RemoveAt(ReturnMissionList.Count - 1);
-        var success = targetMission.Invoke();
+        var success = targetMission.returnAction.Invoke();
         
         if (success)
         {
@@ -43,11 +44,26 @@ public class ReturnLayer : UILayer
         }
     }
     
-    public static void PUSH(Func<bool> returnAction)
+    public static void PUSH(ReturnAction returnAction)
     {
-        ReturnMissionList.Add(returnAction);
-        var returnLayer = UILayerLoader.Load<ReturnLayer>();
-        returnLayer.Setup();
+        void RegisterReturn()
+        {
+            ReturnMissionList.Add(returnAction);
+            var returnLayer = UILayerLoader.Load<ReturnLayer>();
+            returnLayer.Setup();
+        }
+        if (ReturnMissionList.Count > 0)
+        {
+            var last = ReturnMissionList[^1];
+            if (last.returnToStep != returnAction.returnToStep)
+            {
+                RegisterReturn();
+            }
+        }
+        else
+        {
+            RegisterReturn();
+        }
     }
     
     public void ForceBackMode(bool on)

@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using DummyLayerSystem;
 using ModelView;
@@ -154,7 +155,7 @@ namespace mainMenu
             
             // Shop
             var shopTop = new ShopTop();
-
+            
             // Gotcha
             var gotchaFront = new GotchaFront();
             var gotchaResult = new GotchaResult();
@@ -242,9 +243,15 @@ namespace mainMenu
                     return trySwitchToStep(returnToStep, false);
                 }
                 
+                ReturnAction returnAction = new ReturnAction
+                {
+                    returnToStep = returnToStep,
+                    returnAction = ReturnToCurrent
+                };
+                
                 var success = ProcessesRunner.Main.ChangeProcess(nextStep);
                 if (success)
-                    ReturnLayer.PUSH(ReturnToCurrent);
+                    ReturnLayer.PUSH(returnAction);
                 return success;
             }
             else
@@ -268,9 +275,15 @@ namespace mainMenu
                     Debug.Log("返回："+ returnToStep);
                     return trySwitchToStep(returnToStep, false);
                 }
+                
+                ReturnAction returnAction = new ReturnAction
+                {
+                    returnToStep = returnToStep,
+                    returnAction = ReturnToCurrent
+                };
                 var success = ProcessesRunner.Main.ChangeProcess(nextStep, t);
                 if (success)
-                    ReturnLayer.PUSH(ReturnToCurrent);
+                    ReturnLayer.PUSH(returnAction);
                 return success;
             }
             else
@@ -278,5 +291,11 @@ namespace mainMenu
                 return ProcessesRunner.Main.ChangeProcess(nextStep, t);
             }
         }
+    }
+    
+    public class ReturnAction
+    {
+        public MainSceneStep returnToStep;
+        public Func<bool> returnAction;
     }
 }
