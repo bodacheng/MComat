@@ -110,7 +110,7 @@ public class ArcadeTop : UILayer
         stageBtn.Button.onClick.AddListener(LoadThisStage);
         stageBtn.name = "Stage" + stageNo;
         stageBtn.StageNo = stageNo;
-        
+        stageBtn.CriticalGaugeMode = one.team2CGMode;
         if (one.FightMembers != null)
         {
             stageBtn.LoadUnitIcons(one.FightMembers.EnemySets.GetValues(), IconButtonFeature, stageNo == _currentStages.Max());
@@ -140,7 +140,7 @@ public class ArcadeTop : UILayer
             stageBtn.transform.localRotation = Quaternion.identity;
             stageBtn.transform.localScale = Vector3.one;
         }
-
+        
         int _currentStagesMax = _currentStages.Count > 0 ? _currentStages.Max() : PlayerAccountInfo.Me.arcadeProcess;
         nextChapter.gameObject.SetActive((PlayerAccountInfo.Me.arcadeProcess + 1 > _currentStagesMax) && (_maxStageNum > _currentStagesMax));
         lastChapter.gameObject.SetActive(_currentStages.Count == 0 || _currentStages.Min() > 5);

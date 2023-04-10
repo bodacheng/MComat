@@ -14,8 +14,13 @@ public class StageButton : MonoBehaviour
     [SerializeField] Text rewardGD;
     [SerializeField] Image rewardDMIcon;
     [SerializeField] Image rewardGDIcon;
-    
+
     public Button Button => button;
+
+    public CriticalGaugeMode CriticalGaugeMode {
+        set;
+        get;
+    }
 
     private int stageNo;
     public int StageNo
