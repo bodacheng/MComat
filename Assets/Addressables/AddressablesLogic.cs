@@ -153,6 +153,38 @@ public static class AddressablesLogic
             return returnValue;
         }
     }
+    
+    public static async UniTask<T> LoadTOnObject<T>(string prefabPathName, GameObject memoryReleaseTarget = null)
+    {
+        var handle = Addressables.InstantiateAsync(prefabPathName);
+        await handle.Task;
+        if (handle.IsValid() && handle.Status != AsyncOperationStatus.Succeeded)
+        {
+            Debug.Log($"Failed to load : {prefabPathName}");
+            Addressables.ReleaseInstance(handle);
+            return default;
+        }
+        else
+        {
+            var _object = handle.Result; // インスタンス化されたもの
+            if (memoryReleaseTarget == null)
+            {
+                _object.AddOnDestroyCallback( () =>
+                {
+                    Addressables.ReleaseInstance(handle);
+                });
+            }
+            else
+            {
+                memoryReleaseTarget.AddOnDestroyCallback( () =>
+                {
+                    Addressables.ReleaseInstance(handle);
+                });
+            }
+            var returnValue = _object.GetComponent<T>();
+            return returnValue;
+        }
+    }
 
     private static readonly List<AsyncOperationHandle> LoadingHandlerList = new List<AsyncOperationHandle>();
     

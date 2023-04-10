@@ -1,13 +1,20 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
 
 // 抽卡技能石细节显示
 public partial class NineForShow : MonoBehaviour
 {
-    public async UniTask ShowStones_DataInfo(UnitInfo unitInfo)
+    public async UniTask SkillSetInfoOfUnitOnArcadePage(UnitInfo unitInfo)
     {
+        await SkillSetStateRender(
+            PreScene.target.postProcessCamera,
+            unitInfo.set.a1, unitInfo.set.a2, unitInfo.set.a3,
+            unitInfo.set.b1, unitInfo.set.b2, unitInfo.set.b3,
+            unitInfo.set.c1, unitInfo.set.c2, unitInfo.set.c3
+        );
         await ShowStones(
             unitInfo.set.a1, unitInfo.set.a2, unitInfo.set.a3,
             unitInfo.set.b1, unitInfo.set.b2, unitInfo.set.b3,

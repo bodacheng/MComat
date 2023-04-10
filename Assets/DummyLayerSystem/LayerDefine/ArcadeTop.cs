@@ -40,7 +40,8 @@ public class ArcadeTop : UILayer
         // 显示模型
         await connector.ShowModel(heroIcon.unitConfig.RECORD_ID);
         // 显示技能组
-        await nineForShow.ShowStones_DataInfo(heroIcon.unitInfo);
+        await nineForShow.SkillSetInfoOfUnitOnArcadePage(heroIcon.unitInfo);
+        
         nineForShow.AddOnClickToSlots(
             (RECORD_ID) =>
             {

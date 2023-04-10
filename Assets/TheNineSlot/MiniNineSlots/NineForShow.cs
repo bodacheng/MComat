@@ -2,12 +2,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
+using mainMenu;
+using UniRx;
 
 public partial class NineForShow : MonoBehaviour
 {
     public Button A1T, A2T, A3T, B1T, B2T, B3T, C1T, C2T, C3T;
     public Image A1Frame, A2Frame, A3Frame, B1Frame, B2Frame, B3Frame, C1Frame, C2Frame, C3Frame;
-    
+    [SerializeField] private string abnormalSkillSetEffectKey = "defaultmagic/abnormalSkillSet.prefab";
     SKStoneItem _a1S, _a2S, _a3S, _b1S, _b2S, _b3S, _c1S, _c2S, _c3S;
     
     public void ClearCurrent()
@@ -56,6 +58,39 @@ public partial class NineForShow : MonoBehaviour
         {
             Destroy(_c3S.gameObject);
             _c3S = null;
+        }
+    }
+
+    private ParticleSystem abnormalSkillSet;
+    async UniTask SkillSetStateRender(Camera fxCamera,
+        string a1SkillId, string a2SkillId, string a3SkillId,
+        string b1SkillId, string b2SkillId, string b3SkillId,
+        string c1SkillId, string c2SkillId, string c3SkillId)
+    {
+        var valR = SkillSet.CheckEdit(
+            a1SkillId, a2SkillId, a3SkillId,
+            b1SkillId, b2SkillId, b3SkillId,
+            c1SkillId, c2SkillId, c3SkillId);
+
+        if (valR == SkillSet.SkillEditError.UnBalanced || valR == SkillSet.SkillEditError.RepeatedSkill || valR == SkillSet.SkillEditError.NoNormalStart)
+        {
+            var worldPos = PosCal.GetWorldPos(fxCamera, transform.GetComponent<RectTransform>(), 5f);
+            if (abnormalSkillSet == null)
+            {
+                abnormalSkillSet = await AddressablesLogic.LoadTOnObject<ParticleSystem>(abnormalSkillSetEffectKey, gameObject);
+                abnormalSkillSet.gameObject.transform.position = worldPos;
+                abnormalSkillSet.transform.localScale = 
+                    new Vector3(abnormalSkillSet.transform.localScale.x * PosCal.EffectScaleRate(),
+                        abnormalSkillSet.transform.localScale.y * PosCal.EffectScaleRate(),
+                        abnormalSkillSet.transform.localScale.z);
+                abnormalSkillSet.transform.SetParent(transform);
+            }
+            abnormalSkillSet.gameObject.SetActive(true);
+        }
+        else
+        {
+            if (abnormalSkillSet != null)
+                abnormalSkillSet.gameObject.SetActive(false);
         }
     }
     
