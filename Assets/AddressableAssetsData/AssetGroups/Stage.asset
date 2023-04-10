@@ -287,6 +287,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - quest
+  - m_GUID: 758922f20fe82475cb2567cdc1b5f9e0
+    m_Address: 55
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - quest
+  - m_GUID: 1328611870c184a1a8e08bcfbe41f375
+    m_Address: 56
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - quest
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
