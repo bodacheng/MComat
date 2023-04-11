@@ -72,6 +72,11 @@ public partial class NineForShow : MonoBehaviour
             b1SkillId, b2SkillId, b3SkillId,
             c1SkillId, c2SkillId, c3SkillId);
 
+        if (this == null)
+        {
+            return;
+        }
+
         if (valR == SkillSet.SkillEditError.UnBalanced || valR == SkillSet.SkillEditError.RepeatedSkill || valR == SkillSet.SkillEditError.NoNormalStart)
         {
             var worldPos = PosCal.GetWorldPos(fxCamera, transform.GetComponent<RectTransform>(), 5f);
