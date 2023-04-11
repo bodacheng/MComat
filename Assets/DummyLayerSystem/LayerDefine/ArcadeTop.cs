@@ -36,6 +36,7 @@ public class ArcadeTop : UILayer
     
     async UniTask IconButtonFeature(HeroIcon heroIcon)
     {
+        ProgressLayer.Loading(string.Empty);
         BackGroundPS.target.ChangeBGByElement(heroIcon.unitConfig.element);
         // 显示模型
         await connector.ShowModel(heroIcon.unitConfig.RECORD_ID);
@@ -49,6 +50,7 @@ public class ArcadeTop : UILayer
                 connector.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
             }
         );
+        ProgressLayer.Close();
     }
 
     void ToNew()

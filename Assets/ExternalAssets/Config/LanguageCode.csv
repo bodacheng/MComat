@@ -122,6 +122,7 @@ AttackBtn2Intro,Repeatedly tapping or holding down will sequentially unleash the
 AttackBtn3Intro,Repeatedly tapping or holding down will sequentially unleash the third row of skills in the skill set,連打または長押しで、スキルセットの第三列のスキルを順次発動します,按下后将依次释放技能组第三行技能
 AutoBtnIntro,Click to switch between auto and manual mode,クリックして、自動または手動に切り替えます,点击可切换自动或手动
 ,,,
+MakeYourTeam,Choose characters,キャラクターを選ぶ,选择出战角色
 TeamEditTutorial1,Click on the fighter's icon and place them in the team slot.,ファイターのアイコンをクリックして、任意のチームスロットに配置してください,尝试点击角色头像，再点击队伍槽使其编入队伍
 TeamEditTutorial2,Add a new warrior to the team to have a total of two members,新しい戦士をチームに編成して、チームに2名のメンバーを含めてください,尝试将新战士编入队伍，使队伍包含两名队员
 SaveYourTeam,Click on "Confirm" to save the team,「確認」をクリックして、チームを保存してください,点击确定保存队伍

@@ -49,8 +49,8 @@ public class FightPrepareLayer : UILayer
     public void StageMembersInfoShow(FightInfo stage, string oneWordTeam1, string oneWordTeam2)
     {
         MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT, true);
+        teamEditIndicator.SetActive(stage.FightMembers.HeroSets.GetValues().Count == 0);
         MemberInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT, false);
-
         team1OneWord.text = oneWordTeam1;
         team2OneWord.text = oneWordTeam2;
     }
