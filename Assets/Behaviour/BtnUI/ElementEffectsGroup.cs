@@ -76,10 +76,6 @@ public class ElementEffectsGroup
                 {
                     pair.Value.gameObject.SetActive(false);
                 }
-                else
-                {
-                    Debug.Log("错误"+kv.Value );
-                }
             }
         }
 
@@ -98,7 +94,7 @@ public class ElementEffectsGroup
             keyValue.Value.Stop(true, systemStopBehavior);
         }
         _pressingExplosion.Stop(true, systemStopBehavior);
-        _rushBtn.Stop(true, systemStopBehavior);
+        _rushBtn.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         
         if (FightGlobalSetting.HasDefend)
             _defendBtn.Stop(true, systemStopBehavior);
@@ -193,10 +189,13 @@ public class ElementEffectsGroup
     {
         async UniTask Process(Button btn, string skillID, IDictionary<string, GameObject> dic)
         {
-            var icon = await Stones.GenerateStoneModel(skillID, false);
-            if (icon == null) return;
-            DicAdd<string, GameObject>.Add(dic, skillID, icon.gameObject);
-            Parent(icon.transform, btn.transform);
+            if (!dic.ContainsKey(skillID))
+            {
+                var icon = await Stones.GenerateStoneModel(skillID, false);
+                if (icon == null) return;
+                DicAdd<string, GameObject>.Add(dic, skillID, icon.gameObject);
+                Parent(icon.transform, btn.transform);
+            }
         }
         
         await Process(a1Btn, unitInfo.set.a1, _aEffects);
