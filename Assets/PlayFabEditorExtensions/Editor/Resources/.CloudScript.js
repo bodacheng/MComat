@@ -429,7 +429,7 @@ handlers.updateStone = function (args, context) {
         }
     }
     
-    var GD = items.VirtualCurrency["GD"];
+    var GD = Number(items.VirtualCurrency["GD"]);
     
     // 是否有足够的金币升级？
     
