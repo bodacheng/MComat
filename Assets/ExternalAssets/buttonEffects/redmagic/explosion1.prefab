@@ -7,6 +7,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4024582138786360293, guid: 2abdffac5fe364aca81b6d07e8e94cc5,
+        type: 3}
+      propertyPath: ColorModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024582138786360293, guid: 2abdffac5fe364aca81b6d07e8e94cc5,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.40392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024582138786360293, guid: 2abdffac5fe364aca81b6d07e8e94cc5,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024582138786360293, guid: 2abdffac5fe364aca81b6d07e8e94cc5,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024582138786360293, guid: 2abdffac5fe364aca81b6d07e8e94cc5,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024582138786360293, guid: 2abdffac5fe364aca81b6d07e8e94cc5,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6735039258447141723, guid: 2abdffac5fe364aca81b6d07e8e94cc5,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.02020948
+      objectReference: {fileID: 0}
     - target: {fileID: 6735039258465286207, guid: 2abdffac5fe364aca81b6d07e8e94cc5,
         type: 3}
       propertyPath: m_Name

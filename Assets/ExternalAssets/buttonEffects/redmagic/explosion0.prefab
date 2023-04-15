@@ -67,5 +67,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: explosion0
       objectReference: {fileID: 0}
+    - target: {fileID: 7245172904032798168, guid: b7b83ff582a8341b3826b147190b70c5,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.031644676
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7b83ff582a8341b3826b147190b70c5, type: 3}
