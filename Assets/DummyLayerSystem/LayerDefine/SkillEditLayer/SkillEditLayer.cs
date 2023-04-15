@@ -30,6 +30,7 @@ public partial class SkillEditLayer : UILayer
     public async UniTask Setup(Action<SkillEditLayer> toDo = null)
     {
         Initialized = false;
+        stonesBox.SetBoxHeight( 90 + 200 + 100);//90是那个距离条filter的高度，200是skillStoneDetail的高度，120是主观的额外空间
         stonesBox.GenerateCells(9);
         gameObject.SetActive(false);
         nineSlot.PrintSkillInfo = skillStoneDetail.RefreshInfo;
@@ -63,9 +64,11 @@ public partial class SkillEditLayer : UILayer
         gameObject.SetActive(true);
         
         // Unit View Size Calulate
-        var unitViewSize = (PosCal.canvasWidth - (880 + 600) - 50);
-        if (unitViewSize > PosCal.canvasHeight)
-            unitViewSize = PosCal.canvasHeight;
+        var unitViewSize = (PosCal.canvasWidth - (900 + 420));
+        if (unitViewSize > PosCal.canvasHeight - 200)
+        {
+            unitViewSize = PosCal.canvasHeight -200;
+        }
         connector.GetComponent<RectTransform>().sizeDelta = new Vector2(unitViewSize,unitViewSize);
         Initialized = true;
     }

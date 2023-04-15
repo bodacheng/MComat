@@ -71,10 +71,26 @@ public static class PosCal
     /// 目标Anchor，比如说0，0代表 anchor在左下角
     /// </param>
     /// <returns></returns>
-    public static Vector3 ConvertAnchorPos(Vector3 anchoredPosition, Vector2 formerAnchor, Vector2 targetAnchor)
+    // public static Vector3 ConvertAnchorPos(Vector3 anchoredPosition, Vector2 formerAnchor, Vector2 targetAnchor)
+    // {
+    //     float newX = canvasWidth - anchoredPosition.x * (targetAnchor.x - formerAnchor.x) / 1;
+    //     float newY = canvasHeight - anchoredPosition.y * (targetAnchor.y - formerAnchor.y) / 1;
+    //     
+    //     Debug.Log("目标屏幕位置："+ new Vector3(newX, newY, 0));
+    //     return new Vector3(newX, newY, 0);
+    // }
+    
+    public static Vector2 CalculateAnchoredPositionInNewAnchor(RectTransform uiElement, Vector2 targetAnchor)
     {
-        float newX = canvasWidth - anchoredPosition.x * (targetAnchor.x - formerAnchor.x) / 1;
-        float newY = canvasHeight - anchoredPosition.y * (targetAnchor.y - formerAnchor.y) / 1;
-        return new Vector3(newX, newY, 0);
+        RectTransform parent = uiElement.parent as RectTransform;
+        Vector2 parentSize = parent.rect.size;
+        
+        // Calculate the current position in the parent RectTransform space.
+        Vector2 currentPositionInParentSpace = uiElement.anchorMin * parentSize + uiElement.anchoredPosition;
+
+        // Calculate the new anchored position in the target anchor without modifying the RectTransform.
+        Vector2 newPositionInTargetAnchor = currentPositionInParentSpace - targetAnchor * parentSize;
+        
+        return newPositionInTargetAnchor;
     }
 }

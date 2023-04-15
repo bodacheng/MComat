@@ -137,10 +137,10 @@ public class ElementStoneTagsGroup
         DicAdd<int, ParticleSystem>.Add(_slotEffects, slotNum, slotEffect);
         slotEffect.gameObject.name = "slotEffect"+ slotNum;
         slotEffect.gameObject.transform.position = pos;
-        slotEffect.transform.localScale = 
-            new Vector3(slotEffect.transform.localScale.x * PosCal.EffectScaleRate(),
-                slotEffect.transform.localScale.y * PosCal.EffectScaleRate(),
-                slotEffect.transform.localScale.z);
+        // slotEffect.transform.localScale = 
+        //     new Vector3(slotEffect.transform.localScale.x * PosCal.EffectScaleRate(),
+        //         slotEffect.transform.localScale.y * PosCal.EffectScaleRate(),
+        //         slotEffect.transform.localScale.z);
         slotEffect.Play(true);
     }
     

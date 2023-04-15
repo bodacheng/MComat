@@ -106,7 +106,7 @@ public class ReturnLayer : UILayer
         var layer = UILayerLoader.Get<ReturnLayer>();
         if (layer != null)
         {
-            layer.transform.SetAsFirstSibling();
+            layer.transform.SetAsLastSibling();
         }
     }
 }

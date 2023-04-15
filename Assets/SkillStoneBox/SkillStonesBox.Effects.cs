@@ -39,7 +39,7 @@ namespace mainMenu
             void IniExTab(Button btn, int exLevel)
             {
                 var worldPos = PosCal.GetWorldPos(fxCamera, 
-                    PosCal.ConvertAnchorPos(btn.GetComponent<RectTransform>().anchoredPosition, Vector2.one, Vector2.zero),
+                    PosCal.CalculateAnchoredPositionInNewAnchor(btn.GetComponent<RectTransform>(), Vector2.zero),
                     5f);
                 _tabEffects.RefreshTagEffect(worldPos, exLevel);
                 btn.onClick.AddListener(() =>

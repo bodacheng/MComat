@@ -18,6 +18,14 @@ public class FrontLayer : UILayer
     
     public void Initialise(PreScene pre)
     {
+        // Unit View Size Calulate
+        var unitViewSize = (PosCal.canvasWidth - 940);
+        if (unitViewSize > PosCal.canvasHeight -150)
+        {
+            unitViewSize = PosCal.canvasHeight -150;
+        }
+        camConnector.GetComponent<RectTransform>().sizeDelta = new Vector2(unitViewSize,unitViewSize);
+        
         ArcadeBtn.onClick.AddListener(()=> pre.trySwitchToStep(MainSceneStep.ArcadeFront));
         ArenaBtn.onClick.AddListener(() =>
         {

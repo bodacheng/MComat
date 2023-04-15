@@ -84,10 +84,10 @@ public partial class NineForShow : MonoBehaviour
             {
                 abnormalSkillSet = await AddressablesLogic.LoadTOnObject<ParticleSystem>(abnormalSkillSetEffectKey, gameObject);
                 abnormalSkillSet.gameObject.transform.position = worldPos;
-                abnormalSkillSet.transform.localScale = 
-                    new Vector3(abnormalSkillSet.transform.localScale.x * PosCal.EffectScaleRate(),
-                        abnormalSkillSet.transform.localScale.y * PosCal.EffectScaleRate(),
-                        abnormalSkillSet.transform.localScale.z);
+                // abnormalSkillSet.transform.localScale = 
+                //     new Vector3(abnormalSkillSet.transform.localScale.x * PosCal.EffectScaleRate(),
+                //         abnormalSkillSet.transform.localScale.y * PosCal.EffectScaleRate(),
+                //         abnormalSkillSet.transform.localScale.z);
                 abnormalSkillSet.transform.SetParent(transform);
             }
             abnormalSkillSet.gameObject.SetActive(true);

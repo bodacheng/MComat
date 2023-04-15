@@ -119,7 +119,7 @@ namespace mainMenu
 
             t.transform.position = 
                 PosCal.GetWorldPos(PreScene.target.postProcessCamera, 
-                    PosCal.ConvertAnchorPos(button.GetComponent<RectTransform>().anchoredPosition, Vector2.one, Vector2.zero )
+                    PosCal.CalculateAnchoredPositionInNewAnchor(button.GetComponent<RectTransform>(), Vector2.zero )
                     , 20f);
             renderPs.Add(t);
         }

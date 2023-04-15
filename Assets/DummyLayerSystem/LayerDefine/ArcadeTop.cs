@@ -32,6 +32,12 @@ public class ArcadeTop : UILayer
         lastChapter.onClick.AddListener(ShowLastStages);
         jumpToNewStage.onClick.AddListener(ToNew);
         this._maxStageNum = maxStageNum;
+        
+        // Unit View Size Calulate
+        var unitViewSize = (PosCal.canvasWidth - (1100 + 100));
+        if (unitViewSize > PosCal.canvasHeight)
+            unitViewSize = PosCal.canvasHeight;
+        connector.GetComponent<RectTransform>().sizeDelta = new Vector2(unitViewSize,unitViewSize);
     }
     
     async UniTask IconButtonFeature(HeroIcon heroIcon)

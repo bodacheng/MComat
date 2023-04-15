@@ -29452,7 +29452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db71889765b54d3b84704872029f82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReferenceWidth: 1980
+  ReferenceWidth: 1920
   ReferenceHeight: 1080
 --- !u!1 &259311712
 GameObject:

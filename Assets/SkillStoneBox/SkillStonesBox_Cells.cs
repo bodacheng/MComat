@@ -16,9 +16,20 @@ namespace mainMenu
         
         public static GameObject Selected;
         readonly IDictionary<int, StoneCell> _cellsDic = new Dictionary<int, StoneCell>();
+
+        public void SetBoxHeight(float sizeNeedToRemain)
+        {
+            var gridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
+            var stoneBoxRect = transform.GetComponent<RectTransform>();
+            var temp = PosCal.canvasHeight - sizeNeedToRemain;
+            temp =  (gridLayoutGroup.cellSize.y + gridLayoutGroup.spacing.y) * 
+                    Mathf.Floor(temp / (gridLayoutGroup.cellSize.y + gridLayoutGroup.spacing.y));
+            stoneBoxRect.sizeDelta = new Vector2(stoneBoxRect.sizeDelta.x, temp);
+        }
         
         public void GenerateCells(int extraCellNum = 0)
         {
+            var gridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
             foreach (var kv in _cellsDic)
             {
                 kv.Value.gameObject.SetActive(false);
@@ -26,7 +37,6 @@ namespace mainMenu
             
             var hang = 1;
             var cellCount = BoxLength();
-            var gridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
             cellCount += extraCellNum;
             cellCount = ((cellCount / gridLayoutGroup.constraintCount) + 1) * gridLayoutGroup.constraintCount;
             for (int i = 0; i < cellCount; i++)
