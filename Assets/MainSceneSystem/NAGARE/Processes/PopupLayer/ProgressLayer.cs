@@ -4,10 +4,10 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UniRx;
 using DummyLayerSystem;
-using DuloGames.UI;
+
 public class ProgressLayer : UILayer
 {
-    [SerializeField] UIProgressBar progressBar;
+    [SerializeField] Slider progressBar;
     [SerializeField] Text percentage;
     [SerializeField] Text info;
     [SerializeField] Image bigCurtain;
@@ -64,10 +64,10 @@ public class ProgressLayer : UILayer
         {
             current = DOTween.To
             (
-                () => layer.progressBar.fillAmount,
+                () => layer.progressBar.value,
                 (x) =>
                 {
-                    layer.progressBar.fillAmount = x;
+                    layer.progressBar.value = x;
                     layer.percentage.text = ((int)(x * 100)) + "%";
                 },
                 progress,
@@ -79,7 +79,7 @@ public class ProgressLayer : UILayer
         }
         else
         {
-            layer.progressBar.fillAmount = progress;
+            layer.progressBar.value = progress;
         }
     }
     
