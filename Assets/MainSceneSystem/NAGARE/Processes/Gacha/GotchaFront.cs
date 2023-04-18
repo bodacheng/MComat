@@ -40,7 +40,7 @@ public class GotchaFront : MSceneProcess
                 _startIndex = dropTables.Count - 1;
             }
         }
-
+        
         for (var i = 0; i < dropTables.Count; i++)
         {
             var dropTable = dropTables[i];
@@ -50,7 +50,7 @@ public class GotchaFront : MSceneProcess
                 {
                     StarsFall.target.TriggerHoleEffect(StarsFall.GachaType.normal);
                 }
-
+                
                 if (dropTable.ItemId == PlayFabSetting._DMGotchaCode)
                 {
                     StarsFall.target.TriggerHoleEffect(StarsFall.GachaType.super);

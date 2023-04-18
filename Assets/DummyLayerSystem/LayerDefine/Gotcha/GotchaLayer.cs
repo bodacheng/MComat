@@ -13,7 +13,7 @@ public class GotchaLayer : UILayer
         for (var i = 0; i < dropTables.Count; i++)
         {
             var dropTable = dropTables[i];
-            dropTable.Setup(execute, dropTableInfo);
+            dropTable.Setup(execute, dropTableInfo, tutorial);
         }
         
         left.onClick.AddListener(() => { indexAction(-1, dropTables);});

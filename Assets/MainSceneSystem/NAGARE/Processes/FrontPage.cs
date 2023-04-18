@@ -144,6 +144,7 @@ public class FrontPage : MSceneProcess
                 ProgressLayer.Close();
                 if (PlayerAccountInfo.Me.TitleDisplayName == null)
                 {
+                    BackGroundPS.target.ChangeBGByElement(Element.lightMagic);
                     SettingPage.SetNickName((_) => EnterProcess(), false);
                 }
                 else

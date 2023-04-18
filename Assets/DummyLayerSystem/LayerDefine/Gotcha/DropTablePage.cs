@@ -12,9 +12,10 @@ public class DropTablePage : MonoBehaviour
     [SerializeField] private Button openDropTableInfo;
     public string ItemId => itemId;
 
-    public void Setup(Action<string,string,int> nine, Action<string> dropTableInfo)
+    public void Setup(Action<string,string,int> nine, Action<string> dropTableInfo, bool tutorial)
     {
         gotcha.onClick.AddListener(() => { nine(itemId, currencyCode, currencyCount);});
+        openDropTableInfo.gameObject.SetActive(!tutorial);
         openDropTableInfo.onClick.AddListener(()=> dropTableInfo.Invoke(itemId));
     }
 }
