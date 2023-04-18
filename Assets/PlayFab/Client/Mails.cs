@@ -92,7 +92,6 @@ public partial class PlayFabReadClient
                 try
                 {
                     var dataAsJson = File.ReadAllText(file);
-                    //Debug.Log("邮件信息已经读取："+ dataAsJson);
                     var mailOfPlayerModel = JsonConvert.DeserializeObject<MailItemInstance>(dataAsJson);
                     AddMailData(mailOfPlayerModel);
                 }
@@ -145,13 +144,10 @@ public partial class PlayFabReadClient
                 {
                     if (kv.Key == PlayFabSetting._GoldCode)
                     {
-                        Debug.Log("get gold:"+ kv.Value);
                         Currencies.CoinCount.Value += (int)kv.Value;
-                        
                     }
                     if (kv.Key == PlayFabSetting._DiamondCode)
                     {
-                        Debug.Log("get diamond:"+ kv.Value);
                         Currencies.DiamondCount.Value += (int)kv.Value;
                     }
                 }
@@ -160,7 +156,6 @@ public partial class PlayFabReadClient
                 {
                     if (data.ItemInstanceId == resultCallback.UnlockedItemInstanceId)
                     {
-                        Debug.Log(resultCallback.UnlockedItemInstanceId + " is unlocked");
                         data.RemainingUses = 0;
                         data.Set();
                         target = data;

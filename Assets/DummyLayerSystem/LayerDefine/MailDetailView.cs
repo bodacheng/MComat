@@ -27,7 +27,14 @@ public class MailDetailView : UILayer
         
         if (instance.ItemId.Contains("LoginBonus"))
         {
-            message.text = message.text.Replace("$streak", PlayerAccountInfo.Me.loginStreak.ToString());
+            title.text = Translate.Get(instance.ItemId);
+            if (instance.CustomData != null && instance.CustomData.ContainsKey("streak"))
+            {
+                int streak = Convert.ToInt32(instance.CustomData["streak"]);
+                message.text = Translate.Get(instance.ItemId+ "Intro").
+                    Replace("$streak", instance.CustomData["streak"]).
+                    Replace("$extraRemain", (((streak/ 7)+1)*7 -streak).ToString());
+            }
         }
         
         if (instance.NotClaimed())

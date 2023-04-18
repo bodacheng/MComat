@@ -32,7 +32,6 @@ public partial class PlayFabReadClient
         var stoneLoadTasks = new List<UniTask>();
         foreach (var item in result.Inventory)
         {
-            //Debug.Log(item.CatalogVersion + ":" + item.ItemId);
             if (item.CatalogVersion == PlayFabSetting._UnitCatalog)
             {
                 var info = new UnitInfo
@@ -46,7 +45,7 @@ public partial class PlayFabReadClient
             {
                 if (SkillConfigTable.GetSkillConfig(item.ItemId) != null)
                 {
-                    var Info = new StoneOfPlayerInfo
+                    var info = new StoneOfPlayerInfo
                     {
                         InstanceId = item.ItemInstanceId,
                         SkillId = item.ItemId,
@@ -55,7 +54,7 @@ public partial class PlayFabReadClient
                         Slot = (item.CustomData != null && item.CustomData.ContainsKey("slot")) ? item.CustomData["slot"] : null,
                         Born = (item.CustomData != null && item.CustomData.ContainsKey("born")) ? item.CustomData["born"] : null
                     };
-                    stoneLoadTasks.Add( Stones.Add(Info));
+                    stoneLoadTasks.Add( Stones.Add(info));
                 }
                 else
                 {

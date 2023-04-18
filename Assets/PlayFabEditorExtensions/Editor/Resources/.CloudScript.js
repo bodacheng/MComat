@@ -74,6 +74,33 @@ function GrantItemToCurrentUser(itemIds, CatalogVersion)
     return GrantItemsToUserResult.ItemGrantResults;
 }
 
+function GrantItemToCurrentUserAndSetCustomData(itemIds, CatalogVersion, customData)
+{
+    var GrantItemsToUserRequest = {
+        "CatalogVersion": CatalogVersion,
+        "PlayFabId" : currentPlayerId,
+        "ItemIds" : itemIds
+    };
+    
+    var GrantItemsToUserResult = server.GrantItemsToUser(GrantItemsToUserRequest);
+
+    if (customData) {
+        for (var i = 0; i < GrantItemsToUserResult.ItemGrantResults.length; i++) {
+            var itemInstanceId = GrantItemsToUserResult.ItemGrantResults[i].ItemInstanceId;
+            var UpdateUserInventoryItemDataRequest = {
+                "PlayFabId": currentPlayerId,
+                "ItemInstanceId": itemInstanceId,
+                "Data": customData
+            };
+            server.UpdateUserInventoryItemCustomData(UpdateUserInventoryItemDataRequest);
+        }
+    }
+    
+    //log.info(GrantItemsToUserResult);
+    return GrantItemsToUserResult.ItemGrantResults;
+}
+
+
 handlers.advertisementReward = function (args, context) {
     
     var result = server.AddUserVirtualCurrency(
@@ -1020,6 +1047,10 @@ handlers.CheckInExample = function(args) {
 // 但是不知道为什么这种值貌似是可以用于比较计算但单独拿出来竟说没定义
 handlers.CheckIn = function(args) {
 
+    var loginBonusCustomData = {
+        "streak": 1
+    }
+    
     var GetUserReadOnlyDataRequest = {
         "PlayFabId": currentPlayerId,
         "Keys": [CHECK_IN_TRACKER]
@@ -1037,7 +1068,7 @@ handlers.CheckIn = function(args) {
         // write back updated data to PlayFab
         UpdateTrackerData(tracker);
         log.info("This was your first login, Login tomorrow to get a bonus!");
-        GrantItemToCurrentUser([normalDMAward], login_bonus_catalog);
+        GrantItemToCurrentUserAndSetCustomData([normalDMAward], login_bonus_catalog, loginBonusCustomData);
         
         return {
             message: "FirstLogin",
@@ -1050,7 +1081,7 @@ handlers.CheckIn = function(args) {
     // 计算24小时（以毫秒为单位）
     //const millisecondsIn24Hours = 24 * 60 * 60 * 1000;
     // 计算24小时后的时间戳
-    //const timestampIn24Hours = nowDate + 2 * millisecondsIn24Hours;
+    //const timestampIn24Hours = nowDate + 3 * millisecondsIn24Hours;
     // 将时间戳转换为日期对象
     //nowDate = new Date(timestampIn24Hours);
     
@@ -1067,9 +1098,9 @@ handlers.CheckIn = function(args) {
             tracker = ResetTracker();
             UpdateTrackerData(tracker);
             log.info("Your consecutive login streak has been broken. Login tomorrow to get a bonus!");
-            GrantItemToCurrentUser([normalDMAward], login_bonus_catalog);
-            return { 
-                message: "LoginStreakBroken", 
+            GrantItemToCurrentUserAndSetCustomData([normalDMAward], login_bonus_catalog,loginBonusCustomData);
+            return {
+                message: "LoginStreakBroken",
                 award : normalDMAward,
                 streak : 1
             };
@@ -1091,7 +1122,8 @@ handlers.CheckIn = function(args) {
             }else{
                 award = normalDMAward;
             }
-            GrantItemToCurrentUser([award], login_bonus_catalog);
+            loginBonusCustomData["streak"] = tracker[TRACKER_LOGIN_STREAK];
+            GrantItemToCurrentUserAndSetCustomData([award], login_bonus_catalog, loginBonusCustomData);
             return {
                 message: "LoginStreak",
                 award : award,

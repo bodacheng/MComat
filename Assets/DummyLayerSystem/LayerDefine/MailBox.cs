@@ -8,7 +8,7 @@ public class MailBox : UILayer
     [SerializeField] VerticalLayoutGroup mailBoxT;
     [SerializeField] Button readAll;
     [SerializeField] Button deleteAllRead;
-
+    
     readonly List<MailListView> _currentMailListViews = new List<MailListView>();
     
     public void Setup()

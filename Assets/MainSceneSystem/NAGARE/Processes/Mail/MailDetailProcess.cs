@@ -5,7 +5,7 @@ using DummyLayerSystem;
 
 public class MailDetailProcess : MSceneProcess
 {
-    private string mailId;
+    private string _mailId;
     
     public MailDetailProcess()
     {
@@ -15,7 +15,7 @@ public class MailDetailProcess : MSceneProcess
     MailDetailView _mailDetailViewLayer;
     public override void ProcessEnter<String>(String id)
     {
-        this.mailId = id.ToString();
+        this._mailId = id.ToString();
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
         upperInfoBar.Setup(null, null,null, null);
         _mailDetailViewLayer = UILayerLoader.Load<MailDetailView>();
@@ -27,7 +27,7 @@ public class MailDetailProcess : MSceneProcess
     
     public override void ProcessEnter()
     {
-        ProcessEnter(mailId);
+        ProcessEnter(_mailId);
     }
     
     public override void ProcessEnd()

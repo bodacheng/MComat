@@ -69,7 +69,11 @@ public partial class PlayFabReadClient
                 Password = pw,
                 TitleId = PlayFabSettings.TitleId
             },
-            (x)=>success.Invoke(x, LoginType.normal),
+            (x)=>
+            {
+                DeleteAllLocalMails();
+                success.Invoke(x, LoginType.normal);
+            },
             ErrorReport
         );
     }
@@ -111,7 +115,6 @@ public partial class PlayFabReadClient
     public static void LoginSuccess(LoginResult result, LoginType loginType = LoginType.normal)
     {
         _tutorialProgressGot = false;
-        Debug.Log(" login success： " + result.EntityToken.EntityToken);
         ProgressLayer.Loading(">");
         PlayerAccountInfo.Me = new PlayerAccountInfo
         {

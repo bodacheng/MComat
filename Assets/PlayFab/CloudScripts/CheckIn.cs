@@ -17,10 +17,6 @@ public partial class CloudScript
                 jsonResult.TryGetValue("award", out var award);
                 jsonResult.TryGetValue("streak", out var streak);
                 Debug.Log("Checkin Result: "+ messageValue + " award:"+award + " streak:"+ streak);
-                if (PlayerAccountInfo.Me != null)
-                {
-                    int.TryParse(streak.ToString(), out PlayerAccountInfo.Me.loginStreak);
-                }
                 success.Invoke();
             },true
         );
