@@ -50,9 +50,6 @@ story_part2,"What's magical is that simply by coming into contact with these sto
 story_part3,"At the same time, creatures resembling extraterrestrial beings continued to appear and launch attacks on humanity, prompting ordinary citizens to collect and equip skill gems to defend themselves.",同時に外見人間のような生物が続々と現れ、人間に攻撃を仕掛けます。一般の人々は自分自身を守るために、スキルジェムを集めて装備するようになりました。,同时疑似外形人的生物不断出现并对人类发动攻击，普通民众开始为了保护自己而收集并配备技能石。
 story_part4,"Some humans also saw the skill gems as an opportunity to conquer the world. With different motives, people flocked to the battlefield.",さらに、スキルジェムを世界征服のチャンスと見る人もいます。目的は異なっていても、人々は次々に戦場に進みました。,也有一些人类将技能宝石看作征服世界的机会。怀着不同的目的，人们纷纷迈入战场。
 ,,,
-HpBarAndExBar,"Health and energy values. If the energy value is insufficient, EX Skills cannot be unleashed.",体力とエネルギー値。エネルギー値が不足している場合、必殺技を発動することはできません,体力与能量值，必杀技在能量值不够的情况下无法释放
-AutoMode,Click to switch between automatic or manual mode,クリックして自動または手動モードに切り替えることができます,点击可切换成自动或手动模式
-,,,
 MailBindInstruction,"This account has not yet been bound to an email address. If you wish to log in on another device and bind this account, you must first bind an email address. Please note that each account can only be bound to one email address, so please choose your email address carefully.",このアカウントはまだメールアドレスがバインドされていません。他のデバイスでログインしてこのアカウントをバインドするには、メールアドレスをバインドする必要があります。各アカウントは1つのメールアドレスだけをバインドすることができますので、メールアドレスを選択する際は注意してください。,本账户尚未绑定邮箱。如果要在其他设备登陆并绑定本账户，必须绑定邮箱。每个账户只能绑定一个邮箱，请谨慎选择邮箱地址。
 DeviceBindInstruction,"The current account is already bound to this device, so you can log in to this account automatically when the app opens. If you want to bind this device to another account, please click the button below. If you unbind the current account from this device, you will not be able to log in to this account directly. If you want to keep the current account, please set up the email address and password for this account. Also note that deleting the game program will also unbind this account from the device.",現在のアカウントはすでにデバイスにバインドされているため、アプリを開くと自動的にこのアカウントにログインできます。このデバイスを別のアカウントにバインドする場合は、下のボタンをクリックしてください。現在のアカウントとデバイスのバインドを解除すると、このアカウントに直接ログインできなくなります。現在のアカウントを維持する場合は、このアカウントのメールアドレスとパスワードを設定してください。また、ゲームプログラムを削除すると、アカウントとデバイスのバインドが解除されます。,当前账户已经和设备进行了绑定，你可以在程序打开后直接登陆本账户。如果你希望将本设备和其他账户进行绑定，请点击下方按钮。解除当前账户与设备的绑定会使您无法直接登陆目前账户，如果希望保留当前账户，请设置好本账户的邮箱与密码。删除游戏程序也会让本账户与设备的绑定被解除。
 DeviceNotBindInstruction,This account is not currently bound to this device. Click the button below to bind it.,このアカウントは現在のデバイスにバインドされていません。下のボタンをクリックすると、バインドできます。,本账户没有与当前设备进行绑定。点击下方按钮可以绑定。
@@ -86,6 +83,7 @@ RemoveAllStones,Remove All,すべて解除,全部卸下
 Fill9Slots,You can edit the skill set here. Try to combine the skill gems to create a powerful skill set for the warrior.,ここではスキルセットの編集ができます。スキルジェムを使って、強力なスキルセットを作成しましょう,在这里可以进行技能组编辑。尝试用技能石为战士拼接出一套强力的技能组吧。
 NotLegalButStillUpdate,The current skill set cannot participate in battle. Do you still want to proceed with editing?,当前のスキルセットでは戦闘に参加できません。それでも編集を実行しますか,当前技能组下无法战斗，仍要执行编辑？
 TryFillNineSlots,Please try to fill all skill slots with skill gems,技能スロットにスキルジェムを埋めてください,请尝试用技能石填满技能槽
+TryAutoFillSlots,The autocomplete feature can instantly fill the empty skill slots for you,自動補完機能により、空いているスキルスロットをすぐに埋めることができます,自动补全功能可以立刻替你填满空余的技能槽
 PlsFillAll,"To participate in battle, you need to equip skill gems in all skill slots",戦闘に参加するには、全てのスキルスロットにスキルジェムを装備する必要があります,只有全部技能槽都装备技能石才能战斗
 OtherUnitUsing,Currently in use by another warrior,他の戦士が使用中です,其他战士使用中
 AColumnNeedNormal,The first column of skill slots must include at least one normal skill.,スキルスロットの最初の列には、少なくとも1つの通常スキルが含まれている必要があります,技能槽第一竖列须包括至少一个普通技能
@@ -121,6 +119,7 @@ AttackBtn1Intro,Repeatedly tapping or holding down will sequentially unleash the
 AttackBtn2Intro,Repeatedly tapping or holding down will sequentially unleash the second row of skills in the skill set,連打または長押しで、スキルセットの第二列のスキルを順次発動します,按下后将依次释放技能组第二行技能
 AttackBtn3Intro,Repeatedly tapping or holding down will sequentially unleash the third row of skills in the skill set,連打または長押しで、スキルセットの第三列のスキルを順次発動します,按下后将依次释放技能组第三行技能
 AutoBtnIntro,Click to switch between auto and manual mode,クリックして、自動または手動に切り替えます,点击可切换自动或手动
+HpBarAndExBar,"Health and energy. If the energy is insufficient, EX Skills cannot be unleashed.",体力とエネルギー値。エネルギー値が不足している場合、必殺技を発動できません,体力与能量值，必杀技在能量值不够的情况下无法释放
 ,,,
 MakeYourTeam,Choose characters,キャラクターを選ぶ,选择出战角色
 TeamEditTutorial1,Click on the fighter's icon and place them in the team slot.,ファイターのアイコンをクリックして、任意のチームスロットに配置してください,尝试点击角色头像，再点击队伍槽使其编入队伍
