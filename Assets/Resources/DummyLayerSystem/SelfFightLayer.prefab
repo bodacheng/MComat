@@ -4312,6 +4312,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4423945225808414745}
     m_Modifications:
+    - target: {fileID: 921281390952611101, guid: 749034bf813fc4895acf7443cf239678,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.81960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 921281390952611101, guid: 749034bf813fc4895acf7443cf239678,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.81960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 921281390952611101, guid: 749034bf813fc4895acf7443cf239678,
+        type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.81960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 921281390952611101, guid: 749034bf813fc4895acf7443cf239678,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 921281390952611101, guid: 749034bf813fc4895acf7443cf239678,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 921281390952611101, guid: 749034bf813fc4895acf7443cf239678,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6167615834534979992, guid: 749034bf813fc4895acf7443cf239678,
         type: 3}
       propertyPath: m_Text
