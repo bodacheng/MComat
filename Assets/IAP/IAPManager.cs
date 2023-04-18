@@ -150,7 +150,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
             {
                 CatalogVersion = ProductCatalogVersion,
                 CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
-                PurchasePrice = (int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
+                PurchasePrice = (int)e.purchasedProduct.metadata.localizedPrice,//(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
                 ReceiptData = payload
             }, result => {
                 Debug.Log("Validation successful!");
