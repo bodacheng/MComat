@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using dataAccess;
 using Cysharp.Threading.Tasks;
+using mainMenu;
 
 public partial class NineForShow : MonoBehaviour
 {
@@ -46,10 +47,19 @@ public partial class NineForShow : MonoBehaviour
             }
         }
 
-        ShowStones(
-            A1SkillID, A2SkillID, A3SkillID,
-            B1SkillID, B2SkillID, B3SkillID,
-            C1SkillID, C2SkillID, C3SkillID
+        UniTask.WhenAll(        
+            ShowStones(
+                A1SkillID, A2SkillID, A3SkillID,
+                B1SkillID, B2SkillID, B3SkillID,
+                C1SkillID, C2SkillID, C3SkillID
+            ),
+            SkillSetStateRender(
+                PreScene.target.postProcessCamera,
+                A1SkillID, A2SkillID, A3SkillID,
+                B1SkillID, B2SkillID, B3SkillID,
+                C1SkillID, C2SkillID, C3SkillID,
+                false
+            )
         ).Forget();
     }
 }

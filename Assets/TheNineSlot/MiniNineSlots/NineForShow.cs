@@ -1,15 +1,16 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
-using mainMenu;
-using UniRx;
 
 public partial class NineForShow : MonoBehaviour
 {
     public Button A1T, A2T, A3T, B1T, B2T, B3T, C1T, C2T, C3T;
-    public Image A1Frame, A2Frame, A3Frame, B1Frame, B2Frame, B3Frame, C1Frame, C2Frame, C3Frame;
-    [SerializeField] private string abnormalSkillSetEffectKey = "defaultmagic/abnormalSkillSet.prefab";
+    [SerializeField] Image A1Frame, A2Frame, A3Frame, B1Frame, B2Frame, B3Frame, C1Frame, C2Frame, C3Frame;
+    [SerializeField] string abnormalSkillSetEffectKey = "defaultmagic/abnormalSkillSet.prefab";
+    [SerializeField] string notQualifiedEffectKey = "defaultmagic/skillSetWarn.prefab";
     SKStoneItem _a1S, _a2S, _a3S, _b1S, _b2S, _b3S, _c1S, _c2S, _c3S;
     
     public void ClearCurrent()
@@ -61,62 +62,95 @@ public partial class NineForShow : MonoBehaviour
         }
     }
 
-    private ParticleSystem abnormalSkillSet;
-    async UniTask SkillSetStateRender(Camera fxCamera,
+    void OnDestroy()
+    {
+        // 当游戏物体被销毁时，取消CancellationTokenSource
+        _cancellationTokenSource?.Cancel();
+    }
+
+    private CancellationTokenSource _cancellationTokenSource;
+    private List<ParticleSystem> effects = new List<ParticleSystem>();
+
+    void DestroyEffects()
+    {
+        foreach (var effect in effects)
+        {
+            if (effect != null)
+                Destroy(effect.gameObject);
+        }
+        effects.Clear();
+    }
+    
+    async UniTask SkillSetStateRender(
+        Camera fxCamera,
         string a1SkillId, string a2SkillId, string a3SkillId,
         string b1SkillId, string b2SkillId, string b3SkillId,
-        string c1SkillId, string c2SkillId, string c3SkillId)
+        string c1SkillId, string c2SkillId, string c3SkillId,
+        bool bossMode)
     {
         var valR = SkillSet.CheckEdit(
             a1SkillId, a2SkillId, a3SkillId,
             b1SkillId, b2SkillId, b3SkillId,
             c1SkillId, c2SkillId, c3SkillId);
-
-        if (this == null)
-        {
-            return;
-        }
-
+        
         if (valR == SkillSet.SkillEditError.UnBalanced || valR == SkillSet.SkillEditError.RepeatedSkill || valR == SkillSet.SkillEditError.NoNormalStart)
         {
-            var worldPos = PosCal.GetWorldPos(fxCamera, transform.GetComponent<RectTransform>(), 5f);
-            if (abnormalSkillSet == null)
-            {
-                abnormalSkillSet = await AddressablesLogic.LoadTOnObject<ParticleSystem>(abnormalSkillSetEffectKey, gameObject);
-                abnormalSkillSet.gameObject.transform.position = worldPos;
-                // abnormalSkillSet.transform.localScale = 
-                //     new Vector3(abnormalSkillSet.transform.localScale.x * PosCal.EffectScaleRate(),
-                //         abnormalSkillSet.transform.localScale.y * PosCal.EffectScaleRate(),
-                //         abnormalSkillSet.transform.localScale.z);
-                abnormalSkillSet.transform.SetParent(transform);
-            }
-            abnormalSkillSet.gameObject.SetActive(true);
+            await AddEffect(bossMode? abnormalSkillSetEffectKey : notQualifiedEffectKey, fxCamera);
         }
         else
         {
-            if (abnormalSkillSet != null)
-                abnormalSkillSet.gameObject.SetActive(false);
+            DestroyEffects();
         }
     }
-    
-    public async UniTask ShowStones(string a1SkillId, string a2SkillId, string a3SkillId,
-                                    string b1SkillId, string b2SkillId, string b3SkillId,
-                                    string c1SkillId, string c2SkillId, string c3SkillId)
+
+    async UniTask AddEffect(string address,Camera fxCamera)
+    {
+        var worldPos = PosCal.GetWorldPos(fxCamera, transform.GetComponent<RectTransform>(), 5f);
+        _cancellationTokenSource = new CancellationTokenSource();
+        var abnormalSkillSet = await AddressablesLogic.LoadTOnObject<ParticleSystem>(address, gameObject, _cancellationTokenSource);
+        if (abnormalSkillSet == null)
+        {
+            return;
+        }
+        effects.Add(abnormalSkillSet);
+        abnormalSkillSet.gameObject.transform.position = worldPos;
+        abnormalSkillSet.transform.SetParent(transform);
+    }
+
+    public async UniTask ShowStones(
+        string a1SkillId, string a2SkillId, string a3SkillId,
+        string b1SkillId, string b2SkillId, string b3SkillId,
+        string c1SkillId, string c2SkillId, string c3SkillId)
     {
         ClearCurrent();
         
-        _a1S = await Stones.GenerateStoneModel(a1SkillId, false);
-        _a2S = await Stones.GenerateStoneModel(a2SkillId, false);
-        _a3S = await Stones.GenerateStoneModel(a3SkillId, false);
-        _b1S = await Stones.GenerateStoneModel(b1SkillId, false);
-        _b2S = await Stones.GenerateStoneModel(b2SkillId, false);
-        _b3S = await Stones.GenerateStoneModel(b3SkillId, false);
-        _c1S = await Stones.GenerateStoneModel(c1SkillId, false);
-        _c2S = await Stones.GenerateStoneModel(c2SkillId, false);
-        _c3S = await Stones.GenerateStoneModel(c3SkillId, false);
+        var tasks =  new[]
+        {
+            Stones.GenerateStoneModel(a1SkillId, false),
+            Stones.GenerateStoneModel(a2SkillId, false),
+            Stones.GenerateStoneModel(a3SkillId, false),
+            Stones.GenerateStoneModel(b1SkillId, false),
+            Stones.GenerateStoneModel(b2SkillId, false),
+            Stones.GenerateStoneModel(b3SkillId, false),
+            Stones.GenerateStoneModel(c1SkillId, false),
+            Stones.GenerateStoneModel(c2SkillId, false),
+            Stones.GenerateStoneModel(c3SkillId, false)
+        };
+        
+        var results = await UniTask.WhenAll(tasks);
+        
+        _a1S = results[0];
+        _a2S = results[1];
+        _a3S = results[2];
+        _b1S = results[3];
+        _b2S = results[4];
+        _b3S = results[5];
+        _c1S = results[6];
+        _c2S = results[7];
+        _c3S = results[8];
         
         Parent();
-
+        
         return;
         
         if (_a1S != null && A1Frame != null)

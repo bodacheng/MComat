@@ -44,10 +44,11 @@ public class ArcadeTop : UILayer
     {
         ProgressLayer.Loading(string.Empty);
         BackGroundPS.target.ChangeBGByElement(heroIcon.unitConfig.element);
-        // 显示模型
-        await connector.ShowModel(heroIcon.unitConfig.RECORD_ID);
-        // 显示技能组
-        await nineForShow.SkillSetInfoOfUnitOnArcadePage(heroIcon.unitInfo);
+        
+        await UniTask.WhenAll(
+            connector.ShowModel(heroIcon.unitConfig.RECORD_ID), 
+            nineForShow.SkillSetInfoOfUnitOnArcadePage(heroIcon.unitInfo)
+        );
         
         nineForShow.AddOnClickToSlots(
             (RECORD_ID) =>

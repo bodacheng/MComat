@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -154,36 +155,51 @@ public static class AddressablesLogic
         }
     }
     
-    public static async UniTask<T> LoadTOnObject<T>(string prefabPathName, GameObject memoryReleaseTarget = null)
+    public static async UniTask<T> LoadTOnObject<T>(string prefabPathName, GameObject memoryReleaseTarget = null, CancellationTokenSource _cancellationTokenSource = null)
     {
-        var handle = Addressables.InstantiateAsync(prefabPathName);
-        await handle.Task;
-        if (handle.IsValid() && handle.Status != AsyncOperationStatus.Succeeded)
+        try
         {
-            Debug.Log($"Failed to load : {prefabPathName}");
-            Addressables.ReleaseInstance(handle);
-            return default;
-        }
-        else
-        {
-            var _object = handle.Result; // インスタンス化されたもの
-            if (memoryReleaseTarget == null)
+            var handle = Addressables.InstantiateAsync(prefabPathName);
+            if (_cancellationTokenSource != null)
             {
-                _object.AddOnDestroyCallback( () =>
-                {
-                    Addressables.ReleaseInstance(handle);
-                });
+                await handle.ToUniTask(cancellationToken: _cancellationTokenSource.Token);
+                // 检查是否已取消
+                _cancellationTokenSource.Token.ThrowIfCancellationRequested();
+            }
+        
+            await handle.Task;
+            if (handle.IsValid() && handle.Status != AsyncOperationStatus.Succeeded)
+            {
+                Debug.Log($"Failed to load : {prefabPathName}");
+                Addressables.ReleaseInstance(handle);
+                return default;
             }
             else
             {
-                memoryReleaseTarget.AddOnDestroyCallback( () =>
+                var _object = handle.Result; // インスタンス化されたもの
+                if (memoryReleaseTarget == null)
                 {
-                    Addressables.ReleaseInstance(handle);
-                });
+                    _object.AddOnDestroyCallback( () =>
+                    {
+                        Addressables.ReleaseInstance(handle);
+                    });
+                }
+                else
+                {
+                    memoryReleaseTarget.AddOnDestroyCallback( () =>
+                    {
+                        Addressables.ReleaseInstance(handle);
+                    });
+                }
+                var returnValue = _object.GetComponent<T>();
+                return returnValue;
             }
-            var returnValue = _object.GetComponent<T>();
-            return returnValue;
         }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+        return default;
     }
 
     private static readonly List<AsyncOperationHandle> LoadingHandlerList = new List<AsyncOperationHandle>();
