@@ -4,7 +4,7 @@ using PlayFab.ClientModels;
 
 public partial class CloudScript
 {
-    public static void RequestAdReward(int dm, Action success = null)
+    public static void RequestAdReward(int gd, Action success = null)
     {
         ProgressLayer.Loading(string.Empty);
         PlayFabClientAPI.ExecuteCloudScript(
@@ -13,7 +13,7 @@ public partial class CloudScript
                 FunctionName = "advertisementReward",
                 FunctionParameter = new
                 {
-                    DM = dm
+                    GD = gd
                 },
             },
             (x)=>

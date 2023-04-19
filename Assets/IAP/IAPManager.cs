@@ -133,14 +133,10 @@ public class IAPManager : MonoBehaviour, IStoreListener {
             return PurchaseProcessingResult.Complete;
         }
         
-        Debug.Log("Processing transaction: " + e.purchasedProduct.transactionID);
-        Debug.Log("receipt:"+ e.purchasedProduct.receipt);
-        
         #if UNITY_IOS
-        var wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(e.purchasedProduct.receipt);
-     
-        var store = (string)wrapper["Store"];
-        var payload = (string)wrapper["Payload"]; // For Apple this will be the base64 encoded ASN.1 receipt
+        //var wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(e.purchasedProduct.receipt);
+        //var store = (string)wrapper["Store"];
+        //var payload = (string)wrapper["Payload"]; // For Apple this will be the base64 encoded ASN.1 receipt
 
         //Debug.Log("CurrencyCode:"+e.purchasedProduct.metadata.isoCurrencyCode);
         //Debug.Log("PurchasePrice:"+(int)e.purchasedProduct.metadata.localizedPrice);
@@ -150,8 +146,8 @@ public class IAPManager : MonoBehaviour, IStoreListener {
             {
                 CatalogVersion = ProductCatalogVersion,
                 CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
-                PurchasePrice = (int)e.purchasedProduct.metadata.localizedPrice,//(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
-                ReceiptData = payload
+                PurchasePrice = (int)(e.purchasedProduct.metadata.localizedPrice * 100),//(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
+                ReceiptData = e.purchasedProduct.receipt
             }, result => {
                 Debug.Log("Validation successful!");
                 _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
@@ -176,7 +172,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 // Pass in currency code in ISO format
                 CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
                 // Convert and set Purchase price
-                PurchasePrice = (uint)e.purchasedProduct.metadata.localizedPrice,//(uint)(e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id)),
+                PurchasePrice = (uint)(e.purchasedProduct.metadata.localizedPrice * 100),//(uint)(e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id)),
                 // Pass in the receipt
                 ReceiptJson = googleReceipt.PayloadData.json,
                 // Pass in the signature

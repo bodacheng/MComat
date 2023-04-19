@@ -22,5 +22,6 @@ MonoBehaviour:
   AdTicketCode: AD
   GDGotchaCode: GDGotcha
   DMGotchaCode: DMGotcha
-  adTicketRewardDM: 20
+  adTicketRewardGD: 20
   adFightRewardDM: 10
+  arenaPointCode: arenapoint
