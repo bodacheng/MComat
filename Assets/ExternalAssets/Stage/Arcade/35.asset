@@ -16,35 +16,22 @@ MonoBehaviour:
   fightBGM: 0
   unitsData:
   - id: 0
-    r_id: 8
+    r_id: 7
     level: 2
     set:
-      a1: 167
-      a2: 150
-      a3: 125
-      b1: 80
-      b2: 182
-      b3: 116
-      c1: 10
-      c2: 115
-      c3: 27
-  - id: 1
-    r_id: 13
-    level: 2
-    set:
-      a1: 80
-      a2: 45
-      a3: 102
-      b1: 162
-      b2: 98
-      b3: 53
-      c1: 68
-      c2: 10
-      c3: 125
+      a1: 169
+      a2: 113
+      a3: 89
+      b1: 95
+      b2: 150
+      b3: 58
+      c1: 184
+      c2: 5
+      c3: 99
   team1HpRate: 1
-  team2HpRate: 0.9
+  team2HpRate: 1.5
   team1CGMode: 0
-  team2CGMode: 1
+  team2CGMode: 2
   team1Mode: 2
   team2Mode: 2
   team1AIMode: 0

@@ -17,7 +17,7 @@ MonoBehaviour:
   unitsData:
   - id: 2
     r_id: 5
-    level: 4
+    level: 3
     set:
       a1: 161
       a2: 180
@@ -28,6 +28,32 @@ MonoBehaviour:
       c1: 162
       c2: 115
       c3: 169
+  - id: 1
+    r_id: 1
+    level: 3
+    set:
+      a1: 166
+      a2: 53
+      a3: 125
+      b1: 68
+      b2: 99
+      b3: 9
+      c1: 116
+      c2: 95
+      c3: 63
+  - id: 2
+    r_id: 5
+    level: 3
+    set:
+      a1: 45
+      a2: 172
+      a3: 4
+      b1: 171
+      b2: 144
+      b3: 161
+      c1: 169
+      c2: 63
+      c3: 36
   team1HpRate: 1
   team2HpRate: 0.9
   team1CGMode: 0

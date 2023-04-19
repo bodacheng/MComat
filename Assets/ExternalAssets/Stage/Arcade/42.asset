@@ -17,7 +17,7 @@ MonoBehaviour:
   unitsData:
   - id: 0
     r_id: 6
-    level: 2
+    level: 3
     set:
       a1: 182
       a2: 10
@@ -30,7 +30,7 @@ MonoBehaviour:
       c3: 68
   - id: 1
     r_id: 4
-    level: 2
+    level: 3
     set:
       a1: 27
       a2: 95
@@ -43,7 +43,7 @@ MonoBehaviour:
       c3: 55
   - id: 2
     r_id: 1
-    level: 2
+    level: 3
     set:
       a1: 125
       a2: 95

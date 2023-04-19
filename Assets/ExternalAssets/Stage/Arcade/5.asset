@@ -19,19 +19,19 @@ MonoBehaviour:
     r_id: 2
     level: 1
     set:
-      a1: 115
-      a2: 68
-      a3: 10
-      b1: 80
-      b2: 182
-      b3: 27
-      c1: 99
-      c2: 125
-      c3: 95
+      a1: 68
+      a2: 183
+      a3: 180
+      b1: 115
+      b2: 55
+      b3: 159
+      c1: 89
+      c2: 116
+      c3: 99
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0
-  team2CGMode: 0
+  team2CGMode: 1
   team1Mode: 2
   team2Mode: 2
   team1AIMode: 0

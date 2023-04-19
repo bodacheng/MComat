@@ -28,7 +28,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - unit_icon
   - m_GUID: fd450632d1ef24611ab5ff530c0953c6
-    m_Address: unit/11
+    m_Address: unit/10
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
@@ -58,7 +58,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - unit_icon
   - m_GUID: 616531cb4b49b41e3992f94c21fa4ab0
-    m_Address: unit/10
+    m_Address: unit/11
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon

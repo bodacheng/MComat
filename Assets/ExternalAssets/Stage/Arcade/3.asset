@@ -16,18 +16,18 @@ MonoBehaviour:
   fightBGM: 0
   unitsData:
   - id: 0
-    r_id: 12
+    r_id: 11
     level: 1
     set:
-      a1: 113
-      a2: 80
-      a3: 53
-      b1: 27
-      b2: 55
-      b3: 125
-      c1: 5
-      c2: 159
-      c3: 99
+      a1: 80
+      a2: 182
+      a3: 159
+      b1: 125
+      b2: 10
+      b3: 167
+      c1: 68
+      c2: 95
+      c3: 89
   - id: 2
     r_id: 10
     level: 1
