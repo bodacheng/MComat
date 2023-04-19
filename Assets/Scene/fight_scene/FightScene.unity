@@ -417,11 +417,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 738825846}
-  - {fileID: 1106599299}
   - {fileID: 1912671346}
+  - {fileID: 1106599299}
   - {fileID: 922880504}
-  - {fileID: 1698761244}
   - {fileID: 633524412}
+  - {fileID: 1698761244}
   m_Father: {fileID: 3000649885868365690}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -435,7 +435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 312692739}
   m_Layer: 0
-  m_Name: 6
+  m_Name: 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -454,7 +454,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3000649885559932621}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &327152704
 GameObject:
@@ -718,7 +718,13 @@ MonoBehaviour:
   teamMembers:
     _SerializableSets: []
   TeamMode: 0
-  TeamStandPoints: []
+  TeamStandPoints:
+  - {fileID: 3000649886621752040}
+  - {fileID: 3000649885788242078}
+  - {fileID: 3000649885632960557}
+  - {fileID: 3000649885858378209}
+  - {fileID: 312692739}
+  - {fileID: 1698814516}
   RMode_Unit:
     value: {fileID: 0}
 --- !u!224 &472979790
@@ -751,7 +757,7 @@ GameObject:
   m_Component:
   - component: {fileID: 633524412}
   m_Layer: 0
-  m_Name: 6
+  m_Name: 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -770,7 +776,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 199458739}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &634139912
 GameObject:
@@ -1362,7 +1368,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 199458739}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1142809863
 GameObject:
@@ -1396,7 +1402,13 @@ MonoBehaviour:
   teamMembers:
     _SerializableSets: []
   TeamMode: 0
-  TeamStandPoints: []
+  TeamStandPoints:
+  - {fileID: 738825846}
+  - {fileID: 1912671346}
+  - {fileID: 1106599299}
+  - {fileID: 922880504}
+  - {fileID: 633524412}
+  - {fileID: 1698761244}
   RMode_Unit:
     value: {fileID: 0}
 --- !u!224 &1142809865
@@ -1645,7 +1657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1698761244}
   m_Layer: 0
-  m_Name: 5
+  m_Name: 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1664,7 +1676,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 199458739}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1698814515
 GameObject:
@@ -1676,7 +1688,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1698814516}
   m_Layer: 0
-  m_Name: 5
+  m_Name: 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1695,7 +1707,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3000649885559932621}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &1744962906
 PrefabInstance:
@@ -6641,7 +6653,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 199458739}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1916553716
 GameObject:
@@ -7010,20 +7022,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   T: {fileID: 3000649885718481873}
-  Team1StandPoints:
-  - {fileID: 3000649886621752040}
-  - {fileID: 3000649885788242078}
-  - {fileID: 3000649885632960557}
-  - {fileID: 3000649885858378209}
-  - {fileID: 1698814516}
-  - {fileID: 312692739}
-  Team2StandPoints:
-  - {fileID: 738825846}
-  - {fileID: 1912671346}
-  - {fileID: 1106599299}
-  - {fileID: 922880504}
-  - {fileID: 1698761244}
-  - {fileID: 633524412}
   fxCamera: {fileID: 1050871294}
   audioSource: {fileID: 3000649885118306805}
 --- !u!1 &3000649884765589351
@@ -7421,11 +7419,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3000649886621752040}
-  - {fileID: 3000649885632960557}
   - {fileID: 3000649885788242078}
+  - {fileID: 3000649885632960557}
   - {fileID: 3000649885858378209}
-  - {fileID: 1698814516}
   - {fileID: 312692739}
+  - {fileID: 1698814516}
   m_Father: {fileID: 3000649885868365690}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7512,7 +7510,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3000649885559932621}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &3000649885718481869
 GameObject:
@@ -7642,7 +7640,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3000649885559932621}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &3000649885788242079
 GameObject:

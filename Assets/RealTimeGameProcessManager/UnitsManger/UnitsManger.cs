@@ -10,10 +10,8 @@ namespace FightScene
         
         public TeamMode TeamMode;
         public TeamConfig teamConfig;
-        
-        [HideInInspector]
         public Transform[] TeamStandPoints;
-
+        
         Data_Center _startUnit;
         
         public MobileInputsManager InputsManager

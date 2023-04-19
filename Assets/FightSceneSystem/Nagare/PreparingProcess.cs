@@ -53,8 +53,6 @@ public class PreparingProcess : FSceneProcess
         RTFightManager.Target.team2.teamConfig = RTFightManager.Target.EnemyTeamConfig;
         RTFightManager.Target.team1.Auto = FightScene.FightScene.Fight.Team1Auto;
         RTFightManager.Target.team2.Auto = FightScene.FightScene.Fight.RunTutorial ? false : FightScene.FightScene.Fight.Team2Auto;
-        RTFightManager.Target.team1.TeamStandPoints = FightScene.FightScene.target.Team1StandPoints;
-        RTFightManager.Target.team2.TeamStandPoints = FightScene.FightScene.target.Team2StandPoints;
         
         if (FightScene.FightScene.Fight.EventType == FightEventType.Screensaver)
         {
