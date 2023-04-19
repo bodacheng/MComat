@@ -9,7 +9,7 @@ namespace Soul
     {
         void PushToMidStart(V_Damage newValue, float dis, bool Grounded)
         {
-            used_dizzy_time = FightGlobalSetting.HeavyHitLastingTime;
+            _usedDizzyTime = FightGlobalSetting.HeavyHitLastingTime;
             Vector3 MidDistanceFromMe = newValue.attacker.Center.geometryCenter.transform.position + newValue.attacker.Center.WholeT.transform.forward * dis;
             if (Grounded)
             {
@@ -20,21 +20,21 @@ namespace Soul
             {
                 Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.1f);
             }
-            tween = gameObject.transform.DOMove(MidDistanceFromMe, 0.3f);
-            physicMissionDisposable = new SingleAssignmentDisposable();
-            physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
+            _tween = gameObject.transform.DOMove(MidDistanceFromMe, 0.3f);
+            _physicMissionDisposable = new SingleAssignmentDisposable();
+            _physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
                     if (gameObject == null)
                     {
-                        physicMissionDisposable.Dispose();
+                        _physicMissionDisposable.Dispose();
                         return;
                     }
                     
                     if (Vector3.Distance(MidDistanceFromMe, gameObject.transform.position) < 0.3f || _BasicPhysicSupport.AtRing)
                     {
-                        tween.Kill(false);
+                        _tween.Kill(false);
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-                        physicMissionDisposable.Dispose();
+                        _physicMissionDisposable.Dispose();
                     }
                 }
             ).AddTo(gameObject);

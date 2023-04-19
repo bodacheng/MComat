@@ -64,7 +64,7 @@ public class SkillCancelFlag : MonoBehaviour {
             {
                 if (_C.Sensor.GetEnemiesByDistance(false)[0] != null)
                 {
-                    _C._MyBehaviorRunner.GetNowState().RotateToTarget_Tween(_C.Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
+                    _C._MyBehaviorRunner.GetNowState().RotateToTargetTween(_C.Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
                 }
             }
             AttackApproachLoopCounter = 0f;
@@ -81,7 +81,7 @@ public class SkillCancelFlag : MonoBehaviour {
             {
                 if (_C.Sensor.GetEnemiesByDistance(false)[0] != null)
                 {
-                    _C._MyBehaviorRunner.GetNowState().RotateToTarget_Tween(_C.Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
+                    _C._MyBehaviorRunner.GetNowState().RotateToTargetTween(_C.Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
                 }
             }
             AttackApproachLoopCounter = 0f;

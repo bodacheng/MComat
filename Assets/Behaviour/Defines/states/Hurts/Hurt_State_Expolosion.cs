@@ -8,14 +8,14 @@ namespace Soul
     {
         void ExplosionDamageStart(V_Damage newValue)
         {
-            used_dizzy_time = FightGlobalSetting.HeavyHitLastingTime;
-            physicMissionDisposable = new SingleAssignmentDisposable();
-            physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
+            _usedDizzyTime = FightGlobalSetting.HeavyHitLastingTime;
+            _physicMissionDisposable = new SingleAssignmentDisposable();
+            _physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
                     if (TimeCounter > FightGlobalSetting.NormalAttackPosFixingTime)
                     {
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-                        physicMissionDisposable.Dispose();
+                        _physicMissionDisposable.Dispose();
                     }
                 }
             ).AddTo(gameObject);

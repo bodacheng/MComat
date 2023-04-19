@@ -225,7 +225,7 @@ namespace Soul
             return Vector3.SignedAngle(_Rigidbody.transform.forward, _lookDir, Vector3.up);
         }
         
-        public void RotateToTarget_Tween(Vector3 target, float duration)
+        public void RotateToTargetTween(Vector3 target, float duration)
         {
             _BasicPhysicSupport.RotateToTarget_Tween(target, duration);
         }

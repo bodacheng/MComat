@@ -35,7 +35,7 @@ namespace Soul
             {
                 var deadEnemies = Sensor.GetActiveDeadEnemies();
                 var oneActive = deadEnemies.Find(x => x.gameObject.activeSelf);
-                RotateToTarget_Tween(oneActive.transform.position, 0.01f);
+                RotateToTargetTween(oneActive.transform.position, 0.01f);
             }
             else
             {
@@ -43,7 +43,7 @@ namespace Soul
                 {
                     if (Sensor.GetEnemiesByDistance(false)[0] != null)
                     {
-                        RotateToTarget_Tween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
+                        RotateToTargetTween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
                     }
                 }
             }

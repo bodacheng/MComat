@@ -101,7 +101,7 @@ namespace Soul
                 }
             }
 
-            RotateToTarget_Tween(gameObject.transform.position + use_direction, 0.1f);
+            RotateToTargetTween(gameObject.transform.position + use_direction, 0.1f);
         }
         
         float h;
@@ -126,7 +126,7 @@ namespace Soul
                 use_direction = (screenMovementForward * v) + (screenMovementRight * h);
             }
             
-            RotateToTarget_Tween(gameObject.transform.position + use_direction, 0.1f);
+            RotateToTargetTween(gameObject.transform.position + use_direction, 0.1f);
         }
     }
 }

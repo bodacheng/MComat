@@ -8,11 +8,11 @@ namespace Soul
 {
     public partial class Hurt_State : Behavior
     {
-        float used_dizzy_time;
+        float _usedDizzyTime;
         float TimeCounter { set; get; }
         V_Damage target;
-        SingleAssignmentDisposable physicMissionDisposable;
-        Tween tween;
+        SingleAssignmentDisposable _physicMissionDisposable;
+        Tween _tween;
         
         void PlayHurtAnim(V_Damage newValue)
         {
@@ -26,26 +26,26 @@ namespace Soul
             if (Vector3.Angle(_DATA_CENTER.WholeT.forward, point - _DATA_CENTER.WholeT.position) > 160)
             {
                 Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("back"), true, 0.1f);
-                RotateToTarget_Tween(_DATA_CENTER.WholeT.position + (_DATA_CENTER.WholeT.position - newValue.DamageEffectPoint), 0.1f);
+                RotateToTargetTween(_DATA_CENTER.WholeT.position + (_DATA_CENTER.WholeT.position - newValue.DamageEffectPoint), 0.1f);
             }
             else
             {
                 if (newValue.DamageEffectPoint.y > _DATA_CENTER.head_t.position.y)
                 {
                     Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("press"), true, 0.1f);
-                    RotateToTarget_Tween(newValue.DamageEffectPoint, 0.1f);
+                    RotateToTargetTween(newValue.DamageEffectPoint, 0.1f);
                 }
                 else
                 {
                     if (newValue.DamageEffectPoint.y > _DATA_CENTER.geometryCenter.position.y)
                     {
                         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("high"), true, 0.1f);
-                        RotateToTarget_Tween(newValue.DamageEffectPoint, 0.1f);
+                        RotateToTargetTween(newValue.DamageEffectPoint, 0.1f);
                     }
                     else
                     {
                         Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("low"), true, 0.1f);
-                        RotateToTarget_Tween(newValue.DamageEffectPoint, 0.1f);
+                        RotateToTargetTween(newValue.DamageEffectPoint, 0.1f);
                     }
                 }
             }
@@ -57,9 +57,9 @@ namespace Soul
             _Rigidbody.mass = FightGlobalSetting.FighterRigidMass;
             _BasicPhysicSupport.OpenEnemyTouchingDrag(0);
             FightParamsRef.GettingDamage = false;
-            if (tween != null && tween.active && tween.IsPlaying())
-                tween.Kill();
-            physicMissionDisposable?.Dispose();
+            if (_tween != null && _tween.active && _tween.IsPlaying())
+                _tween.Kill();
+            _physicMissionDisposable?.Dispose();
             if (_BuffsRunner.Freezing)
             {
                 return;
@@ -110,27 +110,27 @@ namespace Soul
             switch (target.from_weapon.damage_type)
             {
                 case DamageType.slight_damage_forward:
-                    used_dizzy_time = FightGlobalSetting.SlightHitLastingTime;
+                    _usedDizzyTime = FightGlobalSetting.SlightHitLastingTime;
                     NormalStart(target);
                     break;
                 case DamageType.light_damage_forward:
-                    used_dizzy_time = FightGlobalSetting.LightHitLastingTime;
+                    _usedDizzyTime = FightGlobalSetting.LightHitLastingTime;
                     NormalStart(target);
                     break;
                 case DamageType.stable_damage:
-                    used_dizzy_time = FightGlobalSetting.LightHitLastingTime;
+                    _usedDizzyTime = FightGlobalSetting.LightHitLastingTime;
                     NormalStart(target);
                     break;
                 case DamageType.stable_damage_forward:
-                    used_dizzy_time = FightGlobalSetting.LightHitLastingTime;
+                    _usedDizzyTime = FightGlobalSetting.LightHitLastingTime;
                     HeavyStart(target);
                     break;
                 case DamageType.heavy_damage_forward:
-                    used_dizzy_time = FightGlobalSetting.HeavyHitLastingTime;
+                    _usedDizzyTime = FightGlobalSetting.HeavyHitLastingTime;
                     HeavyStart(target);
                     break;
                 case DamageType.supper_damage_forward:
-                    used_dizzy_time = FightGlobalSetting.SuperHitLastingTime;
+                    _usedDizzyTime = FightGlobalSetting.SuperHitLastingTime;
                     HeavyStart(target);
                     EffectsManager.GenerateEffect("electric_s_e", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, _DATA_CENTER.geometryCenter).Forget();
                     break;
@@ -183,7 +183,7 @@ namespace Soul
 
         public override bool Capacity_Exit_Condition()
         {
-            return TimeCounter > used_dizzy_time && !_BuffsRunner.Freezing;
+            return TimeCounter > _usedDizzyTime && !_BuffsRunner.Freezing;
         }
     }
 }

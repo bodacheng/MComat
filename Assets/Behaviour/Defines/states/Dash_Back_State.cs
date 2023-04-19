@@ -55,7 +55,7 @@ namespace Soul
                 if (temp != null)
                     threatsComingPosition = temp.transform.position;
             }
-            RotateToTarget_Tween(threatsComingPosition, 0.01f);
+            RotateToTargetTween(threatsComingPosition, 0.01f);
             Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
         }
 

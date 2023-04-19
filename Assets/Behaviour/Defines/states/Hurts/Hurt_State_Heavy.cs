@@ -12,8 +12,8 @@ namespace Soul
             _Rigidbody.velocity = CalFixPushVector(newValue.impactComingPoint, newValue.attacker.Center.WholeT.position, gameObject.transform.position, 
                 newValue.from_weapon.damage_type, newValue.from_weapon._WeaponMode);
             
-            physicMissionDisposable = new SingleAssignmentDisposable();
-            physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
+            _physicMissionDisposable = new SingleAssignmentDisposable();
+            _physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
                     if (TimeCounter > FightGlobalSetting.NormalAttackPosFixingTime)
                     {
@@ -23,7 +23,7 @@ namespace Soul
                         {
                             _Rigidbody.velocity = Vector3.zero;
                         }
-                        physicMissionDisposable.Dispose();
+                        _physicMissionDisposable.Dispose();
                     }
                 }
             ).AddTo(gameObject);
