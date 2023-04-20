@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -30,9 +29,8 @@ public class ArenaFightOver : UILayer
     #endregion
     
     #region arcade
-    [SerializeField] private RewardedAdsButton watchAdBtn;
-    [SerializeField] private Text watchAdRewardText;
     [SerializeField] private Button againBtn;
+    [SerializeField] private RectTransform adBtnParent;
     public Button AgainBtn => againBtn;
     #endregion
     
@@ -119,35 +117,13 @@ public class ArenaFightOver : UILayer
             awardGdCurrency.text = awardGd.ToString();
         }
         
-        if (extraAdReward > 0)
-        {
-            string awardText = String.Empty;
-            if (extraAdReward == 10)
+        FightScene.FightScene.target.ShowAds(
+            extraAdReward, adBtnParent, 
+            () =>
             {
-                awardText = "x2";
+                awardDmCurrency.text = (extraAdReward + awardDm).ToString();
             }
-            else if (extraAdReward == 20)
-            {
-                awardText = "x3";
-            }
-            watchAdRewardText.text = awardText;
-            watchAdBtn.gameObject.SetActive(true);
-            watchAdBtn.SetWatchedAdExtraProcess(
-                () =>
-                {
-                    CloudScript.RequestAdReward(extraAdReward, () =>
-                    {
-                        awardDmCurrency.text = (extraAdReward + awardDm).ToString();
-                        watchAdBtn.gameObject.SetActive(false);
-                    });
-                }
-            );
-            watchAdBtn.LoadAd();
-        }
-        else
-        {
-            watchAdBtn.gameObject.SetActive(false);
-        }
+        );
     }
     
     public void ShowArenaPoint(int oldPoint, int currentPoint)

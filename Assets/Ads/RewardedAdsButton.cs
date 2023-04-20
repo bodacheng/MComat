@@ -9,10 +9,16 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     [SerializeField] bool reloadAfterWatched;
+    [SerializeField] private Text text;
     string _adUnitId = null; // This will remain null for unsupported platforms
 
     private Func<bool> extraEnableCondition;
     private Action watchedAdExtraProcess;
+
+    public String Text
+    {
+        set => text.text = value;
+    }
     
     public void SetExtraEnableCondition(Func<bool> extraEnableCondition)
     {
@@ -32,15 +38,19 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
 
     void Awake()
     {
+        IniUnitId();
+        //Disable the button until the ad is ready to show:
+        _showAdButton.interactable = false;
+    }
+
+    void IniUnitId()
+    {
         // Get the Ad Unit ID for the current platform:
 #if UNITY_IOS
         _adUnitId = _iOSAdUnitId;
 #elif UNITY_ANDROID
         _adUnitId = _androidAdUnitId;
 #endif
-
-        //Disable the button until the ad is ready to show:
-        _showAdButton.interactable = false;
     }
     
     // Load content to the Ad Unit:

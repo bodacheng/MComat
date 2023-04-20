@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UniRx;
 using System.Collections.Generic;
 using DummyLayerSystem;
@@ -10,19 +11,50 @@ namespace FightScene
 {
     public class FightScene : MonoBehaviour
     {
-        public RectTransform T;
+        [SerializeField] RectTransform T;
+        [SerializeField] AudioSource audioSource;
         
         [Header("FX")]
         public Camera fxCamera;
         
-        [Header("AudioSource")]
-        public AudioSource audioSource;
-        
+        [SerializeField] RewardedAdsButton watchAdBtnPrefab;
+
         public static FightScene target;
         
         public ReactiveProperty<bool> LoadStageFinished { get; set; } = new ReactiveProperty<bool>(false);
 
         public static FightInfo Fight;
+        
+        private RewardedAdsButton watchBtn;
+        public void ShowAds(int extraAdReward, RectTransform btnTarget, Action afterWatched)
+        {
+            if (extraAdReward > 0 && watchBtn != null)
+            {
+                watchBtn.transform.SetParent(btnTarget);
+                watchBtn.transform.localPosition = Vector3.zero;
+                
+                string awardText = String.Empty;
+                if (extraAdReward == 10)
+                {
+                    awardText = "x2";
+                }
+                else if (extraAdReward == 20)
+                {
+                    awardText = "x3";
+                }
+                watchBtn.Text = awardText;
+                watchBtn.SetWatchedAdExtraProcess(
+                    () =>
+                    {
+                        CloudScript.RequestAdReward(
+                            extraAdReward, 
+                            afterWatched
+                        );
+                    }
+                );
+                watchBtn.gameObject.SetActive(true);
+            }
+        }
 
         void Awake()
         {
@@ -86,6 +118,14 @@ namespace FightScene
             }
             FSceneProcessesRunner.Main.ArrangeProcessOrder();
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
+
+            if (Fight.EventType == FightEventType.Quest)
+            {
+                watchBtn = GameObject.Instantiate(watchAdBtnPrefab);
+                watchBtn.LoadAd();
+                watchBtn.gameObject.SetActive(false);
+                watchBtn.transform.SetParent(transform);
+            }
         }
         
         void Update()

@@ -9,7 +9,7 @@ public class ProductCell : MonoBehaviour
 
     void Start()
     {
-        price.text = IAPManager.Target.GetProductLocalPrice(product_id).ToString();
+        price.text = IAPManager.Target.GetProductLocalPriceString(product_id).ToString();
         btn.onClick.AddListener(()=> IAPManager.Target.BuyProductID(product_id));
     }
 }

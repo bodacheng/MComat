@@ -31,12 +31,12 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         }, error => Debug.LogError(error.GenerateErrorReport()));
     }
 
-    public decimal GetProductLocalPrice(string productId)
+    public string GetProductLocalPriceString(string productId)
     {
         var productInfo = _mStoreController.products.WithID(productId);
         if (productInfo != null)
-            return productInfo.metadata.localizedPrice;
-        return Decimal.Zero;
+            return productInfo.metadata.localizedPriceString;
+        return "Not Available";
     }
 
     // This is invoked manually on Start to initialize UnityIAP
@@ -134,9 +134,9 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         }
         
         #if UNITY_IOS
-        //var wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(e.purchasedProduct.receipt);
-        //var store = (string)wrapper["Store"];
-        //var payload = (string)wrapper["Payload"]; // For Apple this will be the base64 encoded ASN.1 receipt
+        var wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(e.purchasedProduct.receipt);
+        var store = (string)wrapper["Store"];
+        var payload = (string)wrapper["Payload"]; // For Apple this will be the base64 encoded ASN.1 receipt
 
         //Debug.Log("CurrencyCode:"+e.purchasedProduct.metadata.isoCurrencyCode);
         //Debug.Log("PurchasePrice:"+(int)e.purchasedProduct.metadata.localizedPrice);
@@ -147,7 +147,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 CatalogVersion = ProductCatalogVersion,
                 CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
                 PurchasePrice = (int)(e.purchasedProduct.metadata.localizedPrice * 100),//(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
-                ReceiptData = e.purchasedProduct.receipt
+                ReceiptData = payload
             }, result => {
                 Debug.Log("Validation successful!");
                 _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
