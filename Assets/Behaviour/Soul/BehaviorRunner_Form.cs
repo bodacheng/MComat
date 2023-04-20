@@ -12,14 +12,14 @@ namespace Soul
         public readonly IDictionary<string, string> BehaviourAndStrategicExitCondition = new Dictionary<string, string>();
         public List<string> AllConditionCodes;
 
-        void RegisterConditionToRespond(KeyValuePair<string, string> ConditionAndBeheviourCode)//string target_beheviour,string condition_code
+        void RegisterConditionToRespond(KeyValuePair<string, string> conditionAndBehaviourCode)//string target_beheviour,string condition_code
         {
-            if (ConditionAndRespond.ContainsKey(ConditionAndBeheviourCode.Key))
+            if (ConditionAndRespond.ContainsKey(conditionAndBehaviourCode.Key))
             {
-                ConditionAndRespond[ConditionAndBeheviourCode.Key].Add(ConditionAndBeheviourCode.Value);
+                ConditionAndRespond[conditionAndBehaviourCode.Key].Add(conditionAndBehaviourCode.Value);
             }
             else{
-                ConditionAndRespond.Add(ConditionAndBeheviourCode.Key,new List<string>() { ConditionAndBeheviourCode.Value});
+                ConditionAndRespond.Add(conditionAndBehaviourCode.Key,new List<string>() { conditionAndBehaviourCode.Value});
             }
         }
 

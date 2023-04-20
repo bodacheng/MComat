@@ -16,8 +16,11 @@ public class ProgressLayer : UILayer
     public static void Loading(string description, float curtainAlpha = 0.8f)
     {
         var layer = UILayerLoader.Load<ProgressLayer>(true);
-        layer.DarkOff(curtainAlpha,0.5f);
-        layer.info.text = description;
+        if (layer != null)
+        {
+            layer.DarkOff(curtainAlpha,0.5f);
+            layer.info.text = description;
+        }
     }
     
     #region 黑幕

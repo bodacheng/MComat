@@ -51,7 +51,7 @@ namespace Soul
             {
                 return false;
             }
-            tempCollider1 = Sensor.GetSuddenThreatInRange(0, 3);
+            tempCollider1 = Sensor.GetSuddenThreatInRange(0, 5);
             //tempCollider2 = Sensor.GetClosestEnemyColliderInSensorRange();
             
             // if (tempCollider2 != null && tempCollider1 != null)
