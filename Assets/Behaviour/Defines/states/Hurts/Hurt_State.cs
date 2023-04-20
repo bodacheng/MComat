@@ -23,32 +23,22 @@ namespace Soul
             }
             Vector3 point = newValue.DamageEffectPoint;
             point.y = 0;
-            if (Vector3.Angle(_DATA_CENTER.WholeT.forward, point - _DATA_CENTER.WholeT.position) > 160)
+            
+            string hurtAnimKey;
+            var meToAttacker = Vector3.Distance(_DATA_CENTER.WholeT.position, newValue.attacker.Center.WholeT.position);
+            var rotateToTarget = meToAttacker <= FightGlobalSetting._closeDis
+                ? newValue.attacker.Center.WholeT.position
+                : newValue.DamageEffectPoint;
+            if (newValue.DamageEffectPoint.y > _DATA_CENTER.head_t.position.y + 0.1)
             {
-                Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("back"), true, 0.1f);
-                RotateToTargetTween(_DATA_CENTER.WholeT.position + (_DATA_CENTER.WholeT.position - newValue.DamageEffectPoint), 0.1f);
+                hurtAnimKey = "press";
             }
             else
             {
-                if (newValue.DamageEffectPoint.y > _DATA_CENTER.head_t.position.y)
-                {
-                    Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("press"), true, 0.1f);
-                    RotateToTargetTween(newValue.DamageEffectPoint, 0.1f);
-                }
-                else
-                {
-                    if (newValue.DamageEffectPoint.y > _DATA_CENTER.geometryCenter.position.y)
-                    {
-                        Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("high"), true, 0.1f);
-                        RotateToTargetTween(newValue.DamageEffectPoint, 0.1f);
-                    }
-                    else
-                    {
-                        Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("low"), true, 0.1f);
-                        RotateToTargetTween(newValue.DamageEffectPoint, 0.1f);
-                    }
-                }
+                hurtAnimKey = newValue.DamageEffectPoint.y > _DATA_CENTER.geometryCenter.position.y ? "high" : "low";
             }
+            Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim(hurtAnimKey), true, 0.1f);
+            RotateToTargetTween(rotateToTarget, 0.1f);
         }
 
         public override void AI_State_exit()
