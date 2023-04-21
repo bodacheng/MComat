@@ -9,7 +9,7 @@ using UnityEngine;
 public class FightInfoGUI : Editor
 {
     private StageEditor _stageEditor;
-    private bool initialized = false;
+    private bool _initialized = false;
     
     public override void OnInspectorGUI()
     {
@@ -20,11 +20,11 @@ public class FightInfoGUI : Editor
         
         DrawDefaultInspector();
         var fightInfo = (FightInfo)target;
-        if (!initialized)
+        if (!_initialized)
         {
             fightInfo.Open();
             _stageEditor = new StageEditor();
-            initialized = true;
+            _initialized = true;
         }
         _stageEditor.OnGUIView(fightInfo.FightMembers);
         

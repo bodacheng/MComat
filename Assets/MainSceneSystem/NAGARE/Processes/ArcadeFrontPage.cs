@@ -44,6 +44,7 @@ public class ArcadeFrontPage : MSceneProcess
         if (location == null)
             return null;
         var one = await AddressablesLogic.LoadT<FightInfo>(location);
+        one.FightMembers.SetEnemyLevel(one.stageRefLevel);
         return one;
     }
     

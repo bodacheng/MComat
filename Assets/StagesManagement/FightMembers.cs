@@ -54,12 +54,12 @@ public class FightMembers
         }
     }
     
-    static UnitInfo ArrangeUnitInfo(string type, string unit_record_id)
+    static UnitInfo ArrangeUnitInfo(string type, string unitRecordID)
     {
-        var skillId = UnitPassiveTable.GetUnitPassiveRecordId(unit_record_id);
+        var skillId = UnitPassiveTable.GetUnitPassiveRecordId(unitRecordID);
         var unitInfo = new UnitInfo
         {
-            r_id = unit_record_id,
+            r_id = unitRecordID,
             set = SkillSet.RandomSkillSet(type, skillId,false)
         };
         return unitInfo;
@@ -70,13 +70,13 @@ public class FightMembers
         var type = "human";
         
         var unitIDsAndNames = Units.GetMonsterIDsAndNamesDic(type);
-        var Indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 3);
+        var indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 3);
         var recordIds = unitIDsAndNames.Keys.ToList();
         var target = new FightMembers();
         
-        var char1 = ArrangeUnitInfo(type, recordIds[Indexes[0]]);
-        var char2 = ArrangeUnitInfo(type, recordIds[Indexes[1]]);
-        var char3 = ArrangeUnitInfo(type, recordIds[Indexes[2]]);
+        var char1 = ArrangeUnitInfo(type, recordIds[indexes[0]]);
+        var char2 = ArrangeUnitInfo(type, recordIds[indexes[1]]);
+        var char3 = ArrangeUnitInfo(type, recordIds[indexes[2]]);
         
         target.EnemySets.Set(0, 0, char1);
         target.EnemySets.Set(0, 1, char2);

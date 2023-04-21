@@ -16,8 +16,7 @@ public partial class StageEditor
     IDictionary<string, string> _unitIDsAndNames;
     UnitInfo _focusingUnitInfo;
     string _focusingType = "human";
-    int stageLevel = 1;
-    
+
     async void UnitIconInitialize()
     {
         AsyncOperationHandle<IList<IResourceLocation>> locationHandle = Addressables.LoadResourceLocationsAsync("unit_icon");
@@ -37,21 +36,12 @@ public partial class StageEditor
         if (!Initialized)
         {
             UIParamIni();
-            // 认为所有敌人等级一致的简化处理
-            foreach (var unitInfo in target.EnemySets.GetValues())
-            {
-                stageLevel = unitInfo.level;
-            }
             Initialized = true;
         }
         
         GUILayout.Space(10);
         Members(target);
         GUILayout.Space(10);
-        
-        stageLevel =  EditorGUILayout.IntField("Stage Level:", stageLevel);
-        target.SetEnemyLevel(stageLevel);
-        GUILayout.Space(5);
         
         // 指定站位人员的添加与删除 //
         GUILayout.BeginHorizontal();
@@ -88,12 +78,12 @@ public partial class StageEditor
         
         GUILayout.BeginHorizontal();
 
-        void Random(SkillStonesBox.StoneFilterForm form, string unit_record_id, bool noSpLimit = false)
+        void Random(SkillStonesBox.StoneFilterForm form, string unitRecordID, bool noSpLimit = false)
         {
             _targetSlot = 0;
             if (string.IsNullOrEmpty(_focusingType))
                 return;
-            var passiveSKillRecordId = UnitPassiveTable.GetUnitPassiveRecordId(unit_record_id);
+            var passiveSKillRecordId = UnitPassiveTable.GetUnitPassiveRecordId(unitRecordID);
             _focusingUnitInfo.set = SkillSet.RandomSkillSet(_focusingType, passiveSKillRecordId,  false, form, noSpLimit);
         }
         

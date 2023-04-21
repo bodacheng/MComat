@@ -38,7 +38,7 @@ public class QuestInfoPage : MSceneProcess
                 PopupLayer.ArrangeWarnWindow(Translate.Get("TeamUnitNotFull"));
                 return;
             }
-
+            
             FightScene.FightScene.Fight.team1Mode= _layer.GetSetFightMode();
             FightScene.FightScene.Fight.team2Mode= _layer.GetSetFightMode();
             

@@ -40,7 +40,8 @@ public class FightInfo : ScriptableObject
     public AIMode team1AIMode = AIMode.Aggressive;
     public AIMode team2AIMode = AIMode.Aggressive;
     public int dumbAIDecisionDelay = 20;
-
+    public int stageRefLevel = 1;
+    
     public int ArcadeFightMode
     {
         get;
@@ -151,7 +152,7 @@ public class FightInfo : ScriptableObject
         var one = FightMembers.EnemySets.Get(0, 0);
         var two = FightMembers.EnemySets.Get(0, 1);
         var three = FightMembers.EnemySets.Get(0, 2);
-
+        
         if (one != default)
             unitsData.Add(one);
         if (two != default)
