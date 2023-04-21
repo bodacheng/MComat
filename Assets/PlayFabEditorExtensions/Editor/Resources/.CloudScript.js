@@ -62,6 +62,38 @@ handlers.test = function (args, context) {
     };
 };
 
+handlers.GrantItemIfNotOwned = function (args, context) {
+    var playFabItemCategory = args.itemCategory;
+    var playFabItemId = args.checkitemId;
+    var playFabContainerItemId = args.giveContainerItemId;
+
+    var request = {
+        "PlayFabId": currentPlayerId
+    };
+    
+    // 获取玩家的物品列表
+    var inventoryResult = server.GetUserInventory(request);
+    
+    // 检查玩家是否已经拥有了这个物品
+    var playerHasItem = false;
+    for (var i = 0; i < inventoryResult.Inventory.length; i++) {
+
+        //log.info("playFabItemCategory:"+ inventoryResult.Inventory[i].CatalogVersion);
+        if (inventoryResult.Inventory[i].ItemId == playFabItemId &&  
+            inventoryResult.Inventory[i].CatalogVersion == playFabItemCategory
+        )
+        {
+            playerHasItem = true;
+            break;
+        }
+    }
+    // 如果玩家没有这个物品，发放物品
+    if (!playerHasItem) {
+        GrantItemToCurrentUser([playFabContainerItemId] , playFabItemCategory);
+    }
+    return { itemGranted: !playerHasItem };
+};
+
 function GrantItemToCurrentUser(itemIds, CatalogVersion)
 {
     var GrantItemsToUserRequest = {

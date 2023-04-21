@@ -34,12 +34,22 @@ public partial class PlayFabReadClient
         {
             if (item.CatalogVersion == PlayFabSetting._UnitCatalog)
             {
-                var info = new UnitInfo
+                if (item.ItemClass == "GiftBox")
                 {
-                    id = item.ItemInstanceId,
-                    r_id = item.ItemId
-                };
-                DicAdd<string, UnitInfo>.Add(dataAccess.Units.Dic, item.ItemInstanceId, info);
+                    var mailData = new MailItemInstance();
+                    Copier<ItemInstance,MailItemInstance>.Copy(item, mailData);
+                    AddMailData(mailData);
+                }
+                else
+                {
+                    var info = new UnitInfo
+                    {
+                        id = item.ItemInstanceId,
+                        r_id = item.ItemId
+                    };
+                    DicAdd<string, UnitInfo>.Add(dataAccess.Units.Dic, item.ItemInstanceId, info);
+                }
+
             }
             else if (item.CatalogVersion == PlayFabSetting._StoneCatalog)
             {

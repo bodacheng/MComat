@@ -118,7 +118,7 @@ namespace FightScene
             }
             FSceneProcessesRunner.Main.ArrangeProcessOrder();
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
-
+            
             if (Fight.EventType == FightEventType.Quest)
             {
                 watchBtn = GameObject.Instantiate(watchAdBtnPrefab);

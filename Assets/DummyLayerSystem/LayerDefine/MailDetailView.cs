@@ -60,6 +60,7 @@ public class MailDetailView : UILayer
             claimPresentBtn.onClick.AddListener(
                 () => PlayFabReadClient.ClaimPresent(
                     instance.ItemId, 
+                    instance.CatalogVersion,
                     (x)=>
                     {
                         PlayFabReadClient.SaveReadMailAsJson(x);

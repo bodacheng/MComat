@@ -62,6 +62,7 @@ public class MailListView : MonoBehaviour
         claimBtn.onClick.AddListener(
             () => PlayFabReadClient.ClaimPresent(
                 mailData.ItemId,
+                mailData.CatalogVersion,
                 x =>
                 {
                     PlayFabReadClient.SaveReadMailAsJson(x);

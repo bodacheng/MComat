@@ -128,27 +128,30 @@ public partial class PlayFabReadClient
         }
     }
     
-    public static void ClaimPresent(string itemId, Action<ItemInstance> saveToLocal)
+    public static void ClaimPresent(string itemId, string itemCatalog, Action<ItemInstance> saveToLocal)
     {
         PlayFabClientAPI.UnlockContainerItem(
             new UnlockContainerItemRequest
             {
-                CatalogVersion = PlayFabSetting._MailCatalog,
+                CatalogVersion = itemCatalog,
                 ContainerItemId = itemId
             },
             resultCallback => {
                 Debug.Log(":"+ resultCallback.UnlockedItemInstanceId);
                 ItemInstance target = null;
 
-                foreach (var kv in resultCallback.VirtualCurrency)
+                if (resultCallback.VirtualCurrency != null)
                 {
-                    if (kv.Key == PlayFabSetting._GoldCode)
+                    foreach (var kv in resultCallback.VirtualCurrency)
                     {
-                        Currencies.CoinCount.Value += (int)kv.Value;
-                    }
-                    if (kv.Key == PlayFabSetting._DiamondCode)
-                    {
-                        Currencies.DiamondCount.Value += (int)kv.Value;
+                        if (kv.Key == PlayFabSetting._GoldCode)
+                        {
+                            Currencies.CoinCount.Value += (int)kv.Value;
+                        }
+                        if (kv.Key == PlayFabSetting._DiamondCode)
+                        {
+                            Currencies.DiamondCount.Value += (int)kv.Value;
+                        }
                     }
                 }
                 
