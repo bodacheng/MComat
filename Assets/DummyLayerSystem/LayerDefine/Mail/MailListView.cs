@@ -40,7 +40,8 @@ public class MailListView : MonoBehaviour
     public void PassMailInfo(MailItemInstance mailData, Action sort)
     {
         _itemInstanceId = mailData.ItemInstanceId;
-        title.text = Translate.Get(mailData.ItemId);
+        title.text = mailData.CatalogVersion == PlayFabSetting._MailCatalog 
+            ? Translate.Get(mailData.ItemId) : mailData.DisplayName;
         _iconRefresh(mailIcon, mailData.ItemId);
         if (mailData.Expiration.HasValue)
         {

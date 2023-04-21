@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using UniRx;
 using UnityEngine;
 
 namespace Singleton

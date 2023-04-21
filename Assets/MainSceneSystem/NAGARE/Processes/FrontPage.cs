@@ -21,6 +21,11 @@ public class FrontPage : MSceneProcess
         missionWatcher.Finish("mailCatalogFinished", value);
     }
     
+    void UnitCatalogFinished(bool value)
+    {
+        missionWatcher.Finish("unitCatalogFinished", value);
+    }
+    
     void ItemsLoadFinished(bool value)
     {
         missionWatcher.Finish("itemsLoadFinished", value);
@@ -129,14 +134,15 @@ public class FrontPage : MSceneProcess
         PlayFabReadClient.GetStatistics(StatisticsLoadFinished);
         
         //AccountCharsSet.LoadTutorial();
-        PlayFabReadClient.GetMailCatalogItems(MailCatalogFinished);
+        PlayFabReadClient.GetMailCatalogItems(PlayFabSetting._MailCatalog, MailCatalogFinished);
+        PlayFabReadClient.GetMailCatalogItems(PlayFabSetting._UnitCatalog, UnitCatalogFinished);
         PlayFabReadClient.LoadItems(ItemsLoadFinished);
         PlayFabReadClient.LoadTeamSet("arcade", ArcadeTFinished);
         
         missionWatcher = new MissionWatcher(
             new List<string>
             {
-                "mailCatalogFinished","itemsLoadFinished", "statisticsFinished", 
+                "mailCatalogFinished","unitCatalogFinished","itemsLoadFinished", "statisticsFinished", 
                 "userReadOnlyDataLoadLoaded", "arcadeTFinished"
             },
             () =>

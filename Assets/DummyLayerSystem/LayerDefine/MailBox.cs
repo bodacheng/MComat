@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Singleton;
 
 public class MailBox : UILayer
 {
@@ -72,7 +74,7 @@ public class MailBox : UILayer
         mailBoxT.GetComponent<RectTransform>().sizeDelta = new Vector2(mailBoxT.GetComponent<RectTransform>().sizeDelta.x, rectHeight);
     }
     
-    public static void LoadPic(Image mailIcon, string itemId)
+    public static async void LoadPic(Image mailIcon, string itemId)
     {
         if (itemId.Contains("DM"))
         {
@@ -81,6 +83,15 @@ public class MailBox : UILayer
         else if (itemId.Contains("GD"))
         {
             mailIcon.sprite = DefaultIconSetting._coinIcon;
+        }
+        else if (itemId.Contains("UnitGift"))
+        {
+            string[] words = itemId.Split(new [] {"UnitGift"}, StringSplitOptions.None);
+            if (words.Length > 1)
+            {
+                var pic = await UnitIconDic.Load(words[1], mailIcon.gameObject);
+                mailIcon.sprite = pic;
+            }
         }
         else
         {

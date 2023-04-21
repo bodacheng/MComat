@@ -28,12 +28,12 @@ public partial class PlayFabReadClient
         return item;
     }
 
-    public static void GetMailCatalogItems(Action<bool> finished)
+    public static void GetMailCatalogItems(string itemCatalog, Action<bool> finished)
     {
         PlayFabClientAPI.GetCatalogItems(
             new GetCatalogItemsRequest
             {
-                CatalogVersion = PlayFabSetting._MailCatalog
+                CatalogVersion = itemCatalog
             },
             (x)=>
             {
