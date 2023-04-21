@@ -30,6 +30,10 @@ public class SettingLayer : UILayer
     [SerializeField] Slider effectsSoundsSlider;
     #endregion
 
+    #region PlayFab Id
+    [SerializeField] Text playFabId;
+    #endregion
+
     #region Email
     [SerializeField] RectTransform emailSettingT;
     [SerializeField] RectTransform emailT;
@@ -93,6 +97,7 @@ public class SettingLayer : UILayer
         
         CurrentEmail.gameObject.SetActive(true);
         CurrentEmail.text = PlayerAccountInfo.Me.Email;
+        playFabId.text = PlayerAccountInfo.Me.PlayFabId;
         
         EmailInput.gameObject.SetActive(false);
         EmailConfirmBtn.gameObject.SetActive(false);

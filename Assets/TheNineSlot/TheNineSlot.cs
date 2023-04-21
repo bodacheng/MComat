@@ -32,6 +32,9 @@ namespace mainMenu
         public Button ConfirmSkillChangeButton;
         [SerializeField] ConfirmBtnColorSwapper confirmBtnColorSwapper;
 
+        [Header("OverHeat Indicator")]  
+        [SerializeField] GameObject overHeatIndicator;
+        
         [Header("Confirm Indicator")] 
         public GameObject confirmBtnIndicator;
         

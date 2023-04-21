@@ -19,6 +19,7 @@ namespace mainMenu
             confirmBtnColorSwapper.ChangeColor(skillEditError == SkillSet.SkillEditError.Perfect ? Color.green : Color.white);
             validationWarn.gameObject.SetActive(true);
             normalSkillIndicator.gameObject.SetActive(false);
+            overHeatIndicator.gameObject.SetActive(skillEditError == SkillSet.SkillEditError.UnBalanced);
             switch(skillEditError)
             {
                 case SkillSet.SkillEditError.RepeatedSkill:
@@ -26,7 +27,7 @@ namespace mainMenu
                 break;
                 case SkillSet.SkillEditError.UnBalanced:
                     validationWarn.text = Translate.Get("UnBalanced");
-                break;
+                    break;
                 case SkillSet.SkillEditError.NoNormalStart:
                     normalSkillIndicator.gameObject.SetActive(true);
                     validationWarn.text = Translate.Get("AColumnNeedNormal");

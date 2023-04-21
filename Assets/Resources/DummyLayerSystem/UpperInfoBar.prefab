@@ -653,7 +653,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 297, y: -95}
+  m_AnchoredPosition: {x: 230, y: -95}
   m_SizeDelta: {x: 500, y: 90}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &9174361986592848672
@@ -686,9 +686,9 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 96e17474f840a01459f0cc936c5d4d9b, type: 3}
-    m_FontSize: 20
+    m_FontSize: 35
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 200
     m_Alignment: 3
@@ -697,7 +697,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BODACHENG
+  m_Text: HDAISEI
 --- !u!114 &3261771247556781067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,8 +710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 0.78431374, b: 0, a: 1}
-  m_EffectDistance: {x: 5, y: -5}
+  m_EffectColor: {r: 1, g: 0.8901961, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
 --- !u!1 &9174361986707981511
 GameObject:
