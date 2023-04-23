@@ -17,7 +17,7 @@ public class TouchTopDownCamera : CameraMode
     Sequence mainSequence;
     bool canTouch;
     float groundHeight = 0f;
-    private float followTargetSpeed = 2f;
+    private float followTargetSpeed = 10f;
     float rotationSpeed = 0.5f;
     private bool isRotating = false;
     private float disAwayFromFront = 10f;

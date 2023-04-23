@@ -28,7 +28,7 @@ namespace FightScene
                         else
                         {
                             inputsManager.FocusUnit(c);
-                            RTFightManager.Target._CameraManager.SetCurrentCameraParams(c.WholeT, null);
+                            RTFightManager.Target._CameraManager.SetCurrentCameraParams(c.geometryCenter, null);
                         }
                     }
                     switchTeamAuto(currentAutoState());
