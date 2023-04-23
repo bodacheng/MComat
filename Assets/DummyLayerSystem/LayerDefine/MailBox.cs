@@ -90,7 +90,8 @@ public class MailBox : UILayer
             if (words.Length > 1)
             {
                 var pic = await UnitIconDic.Load(words[1], mailIcon.gameObject);
-                mailIcon.sprite = pic;
+                if (mailIcon != null)
+                    mailIcon.sprite = pic;
             }
         }
         else

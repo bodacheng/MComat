@@ -5,16 +5,14 @@ using UnityEngine.UI;
 public class AutoSwitch : MonoBehaviour
 {
     [SerializeField] private Button Btn;
-    [SerializeField] private GameObject onObject;
-    [SerializeField] private GameObject offObject;
+    [SerializeField] private Animator animator;
     
     private Action<bool> _action;
     private Func<bool> currentState;
     
     void Switch(bool on)
     {
-        onObject.SetActive(on);
-        offObject.SetActive(!on);
+        animator.SetBool("auto", on);
     }
     
     public void Initialize(Func<bool> state, Action<bool> action)
