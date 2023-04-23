@@ -85,7 +85,7 @@ public partial class SkillEditLayer : UILayer
             Debug.Log("到达了没道理到达的地方");
             return;
         }
-        nineSlot.ReadANineAndTwo(_unitInfo);
+        nineSlot.ReadANineAndTwo(_unitInfo.id);
         var unitInfo = Units.GetUnitConfig(_unitInfo.r_id);
         stonesBox.FocusingType = unitInfo.TYPE;
         stonesBox.RestFilter();

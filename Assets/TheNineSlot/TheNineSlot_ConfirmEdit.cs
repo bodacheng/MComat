@@ -89,7 +89,7 @@ namespace mainMenu
                 var skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
                 if (skillEditLayer != null)
                 {
-                    ReadANineAndTwo(unitInfo);
+                    ReadANineAndTwo(unitInfo.id);
                     skillEditLayer.stonesBox.RestFilter();
                     SelectedRender(null);
                     skillEditLayer.SkillEditConfirmAnimation();

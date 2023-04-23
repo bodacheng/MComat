@@ -1,8 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
+using dataAccess;
 using UnityEngine;
 using UnityEngine.UI;
 using mainMenu;
 using ModelView;
+using NoSuchStudio.Common;
+using UniRx;
 
 public class FrontLayer : UILayer
 {
@@ -15,6 +21,7 @@ public class FrontLayer : UILayer
     [SerializeField] Button SkillTestRBtn;
     [SerializeField] Button SkillTestMBtn;
     [SerializeField] DedicatedCameraConnector camConnector;
+    [SerializeField] private float skillShowInterval = 5;
     
     public void Initialise(PreScene pre)
     {
@@ -46,6 +53,21 @@ public class FrontLayer : UILayer
         SkillTestRBtn.gameObject.SetActive(CommonSetting.DevMode); 
         SkillTestMBtn.gameObject.SetActive(CommonSetting.DevMode);
     }
+
+    private IDisposable _disposeShowSkill;
+    private List<string> skillList;
+    void RegisterRandomShowSkill()
+    {
+        if (skillList.Count > 3) // 3 是随便写的。反正就是身上只有一个被动技能的时候别运行的意思
+        {
+            _disposeShowSkill = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(skillShowInterval)).
+                Subscribe((_) =>
+                {
+                    var skillId = skillList.Random();
+                    camConnector.SkillShowRunWithPrepare(skillId).Forget();
+                }).AddTo(gameObject);
+        }
+    }
     
     public async UniTask ShowMyModel(string instanceID)
     {
@@ -53,6 +75,13 @@ public class FrontLayer : UILayer
         {
             var info = dataAccess.Units.Get(instanceID);
             await camConnector.ShowModel(info?.r_id);
+            var equipments = Stones.GetEquippingStones(info?.id);
+            skillList = equipments.Select(x=>
+            {
+                var skillConfig =  SkillConfigTable.GetSkillConfig(x.SkillId);
+                return skillConfig.REAL_NAME;
+            }).ToList();
+            RegisterRandomShowSkill();
         }
     }
 

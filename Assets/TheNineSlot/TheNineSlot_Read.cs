@@ -5,16 +5,16 @@ namespace mainMenu
 {
     public partial class TheNineSlot : MonoBehaviour
     {
-        public void ReadANineAndTwo(UnitInfo _unitInfo)
+        public void ReadANineAndTwo(string unitInstanceId)
         {
             ForceClearAll();
             
-            if (_unitInfo == null)
+            if (unitInstanceId == null)
             {
                 Debug.Log("严重错误");
                 return;
             }
-            var equipments = Stones.GetEquippingStones(_unitInfo.id);
+            var equipments = Stones.GetEquippingStones(unitInstanceId);
             for (var i = 1; i <= 9; i++)
             {
                 AllSlot[i - 1]._cell.RemoveToTemp();
@@ -35,7 +35,7 @@ namespace mainMenu
         // 撤销编辑
         public void ResetNineSlot()
         {
-            ReadANineAndTwo(PreScene.target.Focusing);
+            ReadANineAndTwo(PreScene.target.Focusing.id);
             ValidateWarn();
         }
     }
