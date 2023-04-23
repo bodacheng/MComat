@@ -4,11 +4,18 @@ using UnityEngine.UI;
 
 public class AutoSwitch : MonoBehaviour
 {
-    [SerializeField] private Button Btn;
+    [SerializeField] private Button btn;
     [SerializeField] private Animator animator;
     
     private Action<bool> _action;
-    private Func<bool> currentState;
+    private Func<bool> _currentState;
+
+    private bool startState;
+
+    void OnEnable()
+    {
+        Switch(startState);
+    }
     
     void Switch(bool on)
     {
@@ -18,14 +25,15 @@ public class AutoSwitch : MonoBehaviour
     public void Initialize(Func<bool> state, Action<bool> action)
     {
         _action = action;
-        currentState = state;
-        Btn.onClick.AddListener(() =>
+        _currentState = state;
+        btn.onClick.AddListener(() =>
         {
-            var changedState = !this.currentState();
+            var changedState = !this._currentState();
             _action.Invoke(changedState);
             Switch(changedState);
         });
-        
-        Switch(this.currentState());
+
+        startState = this._currentState();
+        Switch(this._currentState());
     }
 }
