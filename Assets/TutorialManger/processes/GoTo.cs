@@ -26,8 +26,10 @@ public class GoTo : TutorialProcess
         if (_upperInfoBar == null)
         {
             _upperInfoBar = UILayerLoader.Get<UpperInfoBar>();
-            if (_upperInfoBar != null){}
+            if (_upperInfoBar != null)
+            {
                 _upperInfoBar.Interactable(false);
+            }
         }
     }
     
