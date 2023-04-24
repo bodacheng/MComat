@@ -9,6 +9,8 @@ using Button = UnityEngine.UI.Button;
 public partial class SkillEditLayer : UILayer
 {
     public DedicatedCameraConnector connector;
+    [SerializeField] float cameraConnectorRightSpace = 1320;
+    [SerializeField] float cameraConnectorVerticalSpace = 200;
     
     [Header("九宫格")]
     public TheNineSlot nineSlot;
@@ -63,13 +65,7 @@ public partial class SkillEditLayer : UILayer
         toDo?.Invoke(this);
         gameObject.SetActive(true);
         
-        // Unit View Size Calulate
-        var unitViewSize = (PosCal.canvasWidth - (900 + 420));
-        if (unitViewSize > PosCal.canvasHeight - 200)
-        {
-            unitViewSize = PosCal.canvasHeight -200;
-        }
-        connector.GetComponent<RectTransform>().sizeDelta = new Vector2(unitViewSize,unitViewSize);
+        CameraConnectorCal(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
         Initialized = true;
     }
     

@@ -10,6 +10,9 @@ using ModelView;
 public class ArcadeTop : UILayer
 {
     [SerializeField] DedicatedCameraConnector connector;
+    [SerializeField] float cameraConnectorRightSpace = 1200;
+    [SerializeField] float cameraConnectorVerticalSpace = 150;
+    
     [SerializeField] VerticalLayoutGroup container;
     [SerializeField] Button jumpToNewStage;
     [SerializeField] StageButton normalStagePrefab;
@@ -33,11 +36,7 @@ public class ArcadeTop : UILayer
         jumpToNewStage.onClick.AddListener(ToNew);
         this._maxStageNum = maxStageNum;
         
-        // Unit View Size Calulate
-        var unitViewSize = (PosCal.canvasWidth - (1100 + 100));
-        if (unitViewSize > PosCal.canvasHeight - 150)
-            unitViewSize = PosCal.canvasHeight - 150;
-        connector.GetComponent<RectTransform>().sizeDelta = new Vector2(unitViewSize,unitViewSize);
+        CameraConnectorCal(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
     }
     
     async UniTask IconButtonFeature(HeroIcon heroIcon)

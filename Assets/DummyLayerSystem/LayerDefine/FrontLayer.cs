@@ -21,15 +21,13 @@ public class FrontLayer : UILayer
     [SerializeField] Button SkillTestRBtn;
     [SerializeField] Button SkillTestMBtn;
     [SerializeField] DedicatedCameraConnector camConnector;
+    [SerializeField] float cameraConnectorRightSpace = 940;
+    [SerializeField] float cameraConnectorVerticalSpace = 150;
     [SerializeField] float skillShowInterval = 5;
     
     public void Initialise(PreScene pre)
     {
-        // Unit View Size Calulate
-        var unitViewSize = (PosCal.canvasWidth - 940);
-        if (unitViewSize > PosCal.canvasHeight - 150)
-            unitViewSize = PosCal.canvasHeight - 150;
-        camConnector.GetComponent<RectTransform>().sizeDelta = new Vector2(unitViewSize,unitViewSize);
+        CameraConnectorCal(camConnector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
         
         ArcadeBtn.onClick.AddListener(()=> pre.trySwitchToStep(MainSceneStep.ArcadeFront));
         ArenaBtn.onClick.AddListener(() =>

@@ -9,11 +9,15 @@ public class RankingLayer : UILayer
     [SerializeField] VerticalLayoutGroup enemiesT;
     [SerializeField] ArenaFightTeamDisplay myArenaFightTeamDisplay;
     [SerializeField] ArenaFightTeamDisplay arenaFightTeamDisplayPrefab;
-    [SerializeField] DedicatedCameraConnector _cameraConnector;
+    [SerializeField] DedicatedCameraConnector connector;
+    [SerializeField] float cameraConnectorRightSpace = 795;
+    [SerializeField] float cameraConnectorVerticalSpace = 150;
     [SerializeField] NineForShow miniNineForShow;
     
     void OnClickUnitIcon(UnitInfo unitInfo)
     {
+        CameraConnectorCal(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+        
         var set = unitInfo.set;
         miniNineForShow.ShowStones(
             set.a1, set.a2, set.a3,
@@ -24,10 +28,10 @@ public class RankingLayer : UILayer
         miniNineForShow.AddOnClickToSlots((RECORD_ID) =>
         {
             var skillConfig = SkillConfigTable.GetSkillConfig(RECORD_ID);
-            _cameraConnector.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
+            connector.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
         });
         
-        _cameraConnector.ShowModel(unitInfo.r_id).Forget();
+        connector.ShowModel(unitInfo.r_id).Forget();
     }
 
     public void SetMyLeaderboardInfo(LeaderboardInfo myTeamInfo)

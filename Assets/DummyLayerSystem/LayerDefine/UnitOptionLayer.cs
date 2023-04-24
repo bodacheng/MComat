@@ -8,6 +8,8 @@ namespace mainMenu
     public class UnitOptionLayer : UILayer
     {
         [SerializeField] DedicatedCameraConnector _connector;
+        [SerializeField] float cameraConnectorRightSpace = 1044;
+        [SerializeField] float cameraConnectorVerticalSpace = 150;
         
         [Header("角色明细T，技能显示T")]
         [SerializeField] RectTransform MemberInfoT;
@@ -17,9 +19,7 @@ namespace mainMenu
         [SerializeField] GameObject clickSkillEditIndicator;
         
         [Header("部下详细")]
-        [SerializeField] Text focusingUnitName;
         [SerializeField] Button SkillShowButton, SkillEditButton;
-        
         
         public override void OnDestroy()
         {
@@ -28,11 +28,7 @@ namespace mainMenu
 
         public void RefreshMemberDetailPageByFocusingUnit()
         {
-            // Unit View Size Calulate
-            var unitViewSize = (PosCal.canvasWidth - 1044);
-            if (unitViewSize > PosCal.canvasHeight - 150)
-                unitViewSize = PosCal.canvasHeight - 150;
-            _connector.GetComponent<RectTransform>().sizeDelta = new Vector2(unitViewSize, unitViewSize);
+            CameraConnectorCal(_connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
             
             if (PreScene.target.Focusing == null || PreScene.target.Focusing.id == null || PreScene.target.Focusing.r_id == null)
             {
