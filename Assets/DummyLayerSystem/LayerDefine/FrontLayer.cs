@@ -27,10 +27,8 @@ public class FrontLayer : UILayer
     {
         // Unit View Size Calulate
         var unitViewSize = (PosCal.canvasWidth - 940);
-        if (unitViewSize > 724) // 右边那些主按钮从上到下的总高度
-        {
-            unitViewSize = 724;
-        }
+        if (unitViewSize > PosCal.canvasHeight - 150)
+            unitViewSize = PosCal.canvasHeight - 150;
         camConnector.GetComponent<RectTransform>().sizeDelta = new Vector2(unitViewSize,unitViewSize);
         
         ArcadeBtn.onClick.AddListener(()=> pre.trySwitchToStep(MainSceneStep.ArcadeFront));

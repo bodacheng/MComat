@@ -28,7 +28,11 @@ namespace mainMenu
 
         public void RefreshMemberDetailPageByFocusingUnit()
         {
-            _connector.GetComponent<RectTransform>().sizeDelta = new Vector2(PosCal.canvasHeight -200, PosCal.canvasHeight -200);
+            // Unit View Size Calulate
+            var unitViewSize = (PosCal.canvasWidth - 1044);
+            if (unitViewSize > PosCal.canvasHeight - 150)
+                unitViewSize = PosCal.canvasHeight - 150;
+            _connector.GetComponent<RectTransform>().sizeDelta = new Vector2(unitViewSize, unitViewSize);
             
             if (PreScene.target.Focusing == null || PreScene.target.Focusing.id == null || PreScene.target.Focusing.r_id == null)
             {

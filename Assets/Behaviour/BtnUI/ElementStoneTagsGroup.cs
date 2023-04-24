@@ -108,7 +108,7 @@ public class ElementStoneTagsGroup
         p.Play(true);
     }
     
-    public async void RefreshSlotEffects(int slotNum, int eX, Vector3 pos, Transform parent)
+    public async void RefreshSlotEffects(int slotNum, int eX, Vector3 pos, Transform releaseTarget)
     {
         if (_slotEffects.ContainsKey(slotNum) && _slotEffects[slotNum] != null)
         {
@@ -132,15 +132,16 @@ public class ElementStoneTagsGroup
                 effectName = "SlotEffects/normal";
                 break;
         }
-        var slotEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>(effectName);
-        slotEffect.transform.SetParent(parent);
-        DicAdd<int, ParticleSystem>.Add(_slotEffects, slotNum, slotEffect);
-        slotEffect.gameObject.name = "slotEffect"+ slotNum;
-        slotEffect.gameObject.transform.position = pos;
+        var slotEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>(effectName, releaseTarget.gameObject);
         // slotEffect.transform.localScale = 
         //     new Vector3(slotEffect.transform.localScale.x * PosCal.EffectScaleRate(),
         //         slotEffect.transform.localScale.y * PosCal.EffectScaleRate(),
         //         slotEffect.transform.localScale.z);
+        
+        //slotEffect.transform.SetParent(parent);
+        DicAdd<int, ParticleSystem>.Add(_slotEffects, slotNum, slotEffect);
+        slotEffect.gameObject.name = "slotEffect"+ slotNum;
+        slotEffect.gameObject.transform.position = pos;
         slotEffect.Play(true);
     }
     

@@ -7,20 +7,20 @@ using UnityEngine.UI;
 // 抽卡技能石细节显示
 public partial class NineForShow : MonoBehaviour
 {
-    public async UniTask SkillSetInfoOfUnitOnArcadePage(UnitInfo unitInfo)
+    public async UniTask SkillSetInfoOfUnitOnArcadePage(SkillSet set)
     {
         await UniTask.WhenAll(
             SkillSetStateRender(
                 PreScene.target.postProcessCamera,
-                unitInfo.set.a1, unitInfo.set.a2, unitInfo.set.a3,
-                unitInfo.set.b1, unitInfo.set.b2, unitInfo.set.b3,
-                unitInfo.set.c1, unitInfo.set.c2, unitInfo.set.c3, 
+                set.a1, set.a2, set.a3,
+                set.b1, set.b2, set.b3,
+                set.c1, set.c2, set.c3, 
                 true
             ),
             ShowStones(
-                unitInfo.set.a1, unitInfo.set.a2, unitInfo.set.a3,
-                unitInfo.set.b1, unitInfo.set.b2, unitInfo.set.b3,
-                unitInfo.set.c1, unitInfo.set.c2, unitInfo.set.c3
+                set.a1, set.a2, set.a3,
+                set.b1, set.b2, set.b3,
+                set.c1, set.c2, set.c3
             )
         );
     }

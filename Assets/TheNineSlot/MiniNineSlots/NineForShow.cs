@@ -103,7 +103,7 @@ public partial class NineForShow : MonoBehaviour
         }
     }
 
-    async UniTask AddEffect(string address,Camera fxCamera)
+    async UniTask AddEffect(string address, Camera fxCamera)
     {
         var worldPos = PosCal.GetWorldPos(fxCamera, transform.GetComponent<RectTransform>(), 5f);
         _cancellationTokenSource = new CancellationTokenSource();
@@ -114,7 +114,7 @@ public partial class NineForShow : MonoBehaviour
         }
         effects.Add(abnormalSkillSet);
         abnormalSkillSet.gameObject.transform.position = worldPos;
-        abnormalSkillSet.transform.SetParent(transform);
+        //abnormalSkillSet.transform.SetParent(transform);
     }
 
     public async UniTask ShowStones(

@@ -35,8 +35,8 @@ public class ArcadeTop : UILayer
         
         // Unit View Size Calulate
         var unitViewSize = (PosCal.canvasWidth - (1100 + 100));
-        if (unitViewSize > PosCal.canvasHeight)
-            unitViewSize = PosCal.canvasHeight;
+        if (unitViewSize > PosCal.canvasHeight - 150)
+            unitViewSize = PosCal.canvasHeight - 150;
         connector.GetComponent<RectTransform>().sizeDelta = new Vector2(unitViewSize,unitViewSize);
     }
     
@@ -47,7 +47,7 @@ public class ArcadeTop : UILayer
         
         await UniTask.WhenAll(
             connector.ShowModel(heroIcon.unitConfig.RECORD_ID), 
-            nineForShow.SkillSetInfoOfUnitOnArcadePage(heroIcon.unitInfo)
+            nineForShow.SkillSetInfoOfUnitOnArcadePage(heroIcon.unitInfo.set)
         );
         
         nineForShow.AddOnClickToSlots(
