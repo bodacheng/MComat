@@ -5,9 +5,25 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Object = UnityEngine.Object;
 
-public partial class AnimationManger {
+public partial class AnimationManger
+{
+    private FacialAnimManager facialAnimManager;
 
-    public async UniTask PreloadBasicPersonalAnims(string type, string basicPackName)
+    public void CasualFace()
+    {
+        if (facialAnimManager != null)
+            facialAnimManager.CasualFace();
+    }
+    
+    public void TriggerExpression(Facial facial)
+    {
+        if (facialAnimManager != null)
+        {
+            facialAnimManager.TriggerExpression(facial);
+        }
+    }
+    
+    public async UniTask PreloadBasicPersonalAnims(string type, string basicPackName, FacialAnimManager facialAnimManager = null)
     {
         var basicAnims = new List<AnimationClip>();
         var basicPackKey = type + "/" + basicPackName;
@@ -169,6 +185,10 @@ public partial class AnimationManger {
                     animatorOverride["air"] = animationClip;
             }
         }
+
+        this.facialAnimManager = facialAnimManager;
+        this.facialAnimManager?.INI(Animator, animatorOverride);
+        
         Animator.runtimeAnimatorController = animatorOverride;
     }
     

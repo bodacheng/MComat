@@ -6,14 +6,12 @@ AvatarMask:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: zhujiaofacemask
-  m_Mask: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_Name: tetsuya
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
   m_Elements:
   - m_Path: 
     m_Weight: 1
   - m_Path: Bip001
-    m_Weight: 0
-  - m_Path: Bip001/Bip001 Footsteps
     m_Weight: 0
   - m_Path: Bip001/Bip001 Pelvis
     m_Weight: 0
@@ -378,287 +376,151 @@ AvatarMask:
     m_Weight: 0
   - m_Path: Bip001/Bip001 Pelvis/Bone071/Bone072/Bone073
     m_Weight: 0
-  - m_Path: Bone_root_Hair
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bip001 HeadNub
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone026
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone026/Bone027
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone028
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone029
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone030
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone030/Bone031
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone032
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone033
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone034
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone035
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone036
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone036/Bone037
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone038
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone039
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone040
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone041
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone041/Bone042
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone043
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone044
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone045
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone046
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone047
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone048
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone049
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone050
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone074
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone074/Bone075
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone076
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone077
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone078
-    m_Weight: 0
-  - m_Path: Bone_root_Hair/Bone078/Bone079
-    m_Weight: 0
-  - m_Path: Con_face_all
-    m_Weight: 1
-  - m_Path: Con_face_all/Con_face01
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face01/Con_R_EyeBrow
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face01/Text002
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face02
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face02/Con_L_EyeBrow
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face02/Text001
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face03
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face03/Con_R_EyeBall
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face03/Text003
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face04
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face04/Con_L_EyeBall
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face04/Text004
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face05
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face05/Con_L_Eyelip
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face05/Text006
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face06
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face06/Con_R_Eyelip
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face06/Text005
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face07
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face07/Con_Up_Lips
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face07/Text007
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face08
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face08/Con_R_Zuijiao
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face08/Text010
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face09
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face09/Con_L_Zuijiao
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face09/Text011
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face10
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face10/Con_Chin
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face10/Text009
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face11
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face11/Con_Down_Lips
-    m_Weight: 0
-  - m_Path: Con_face_all/Con_face11/Text008
-    m_Weight: 0
   - m_Path: kuzi
     m_Weight: 0
   - m_Path: lian
     m_Weight: 0
   - m_Path: Point001
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face01
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face01/Con_Face01
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face02
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face02/Con_Face02
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face03
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face03/Con_Face03
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face04
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face04/Con_Face04
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face05
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face05/Con_Face05
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face06
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face06/Con_Face06
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face07
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face07/Con_Face07
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face08
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face08/Con_Face08
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face11
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face11/Con_Face11
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face09
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face09/Con_Face09
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face10
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face10/Con_Face10
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face13
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face13/Con_Face13
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face22
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face22/Con_Face22
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face24
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face24/Con_Face24
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face14
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face14/Con_Face14
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face16
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face16/Con_Face16
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face17
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face17/Con_Face17
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face18
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face18/Con_Face18
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face19
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face19/Con_Face19
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face20
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face20/Con_Face20
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face21
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face21/Con_Face21
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face23
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face23/Con_Face23
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face25
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face25/Hp_Face26
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face25/Hp_Face26/Con_Face25
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face27
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face27/Hp_Face28
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face27/Hp_Face28/Con_Face26
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face29
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face29/Hp_Face30
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face29/Hp_Face30/Con_Face27
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face31
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face31/Hp_Face32
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face31/Hp_Face32/Con_Face28
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face33
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face33/Hp_Face34
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face33/Hp_Face34/Con_Face29
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face35
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face35/Hp_Face36
-    m_Weight: 1
-  - m_Path: Point001/Hp_Face35/Hp_Face36/Con_Face30
-    m_Weight: 1
-  - m_Path: Point001/Point003
-    m_Weight: 1
-  - m_Path: Point004
-    m_Weight: 1
-  - m_Path: Point004/Point002
-    m_Weight: 1
-  - m_Path: Point004/Point002/Hp_Face12
-    m_Weight: 1
-  - m_Path: Point004/Point002/Hp_Face12/Con_Face12
-    m_Weight: 1
-  - m_Path: Point004/Point002/Hp_Face15
-    m_Weight: 1
-  - m_Path: Point004/Point002/Hp_Face15/Con_Face15
-    m_Weight: 1
-  - m_Path: shangshen
     m_Weight: 0
-  - m_Path: toufa
+  - m_Path: Point001/Hp_Face01
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face01/Con_Face01
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face02
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face02/Con_Face02
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face03
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face03/Con_Face03
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face04
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face04/Con_Face04
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face05
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face05/Con_Face05
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face06
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face06/Con_Face06
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face07
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face07/Con_Face07
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face08
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face08/Con_Face08
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face11
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face11/Con_Face11
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face09
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face09/Con_Face09
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face10
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face10/Con_Face10
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face13
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face13/Con_Face13
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face22
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face22/Con_Face22
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face24
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face11/Con_Face11/Hp_Face24/Con_Face24
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face14
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face14/Con_Face14
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face16
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face16/Con_Face16
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face17
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face17/Con_Face17
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face18
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face18/Con_Face18
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face19
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face19/Con_Face19
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face20
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face20/Con_Face20
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face21
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face21/Con_Face21
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face23
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face23/Con_Face23
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face25
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face25/Hp_Face26
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face25/Hp_Face26/Con_Face25
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face27
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face27/Hp_Face28
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face27/Hp_Face28/Con_Face26
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face29
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face29/Hp_Face30
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face29/Hp_Face30/Con_Face27
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face31
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face31/Hp_Face32
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face31/Hp_Face32/Con_Face28
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face33
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face33/Hp_Face34
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face33/Hp_Face34/Con_Face29
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face35
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face35/Hp_Face36
+    m_Weight: 0
+  - m_Path: Point001/Hp_Face35/Hp_Face36/Con_Face30
+    m_Weight: 0
+  - m_Path: Point001/Point003
+    m_Weight: 0
+  - m_Path: Point004
+    m_Weight: 0
+  - m_Path: Point004/Point002
+    m_Weight: 0
+  - m_Path: Point004/Point002/Hp_Face12
+    m_Weight: 0
+  - m_Path: Point004/Point002/Hp_Face12/Con_Face12
+    m_Weight: 0
+  - m_Path: Point004/Point002/Hp_Face15
+    m_Weight: 0
+  - m_Path: Point004/Point002/Hp_Face15/Con_Face15
+    m_Weight: 0
+  - m_Path: shangshen
     m_Weight: 0
   - m_Path: xiezi
     m_Weight: 0

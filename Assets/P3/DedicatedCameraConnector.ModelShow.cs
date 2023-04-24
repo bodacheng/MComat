@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using DG.Tweening.Core;
@@ -115,6 +114,7 @@ namespace ModelView
                         save.Value.WholeT.gameObject.SetActive(false);
                 }
                 Initialize(false,_focusingC.WholeT.gameObject.transform, transform);
+                _focusingC.Animation_Manger.CasualFace();
                 ItemDetailStartDirection(0,0,0);
             }
         }
@@ -137,6 +137,7 @@ namespace ModelView
                 }
                 _ifShowingSkill = true;
                 _focusingC.Animation_Manger.AnimationTrigger(skillName, true, 0.05f);
+                _focusingC.Animation_Manger.TriggerExpression(Facial.aggressive);
             }
         }
 
@@ -148,7 +149,8 @@ namespace ModelView
                 if (_focusingC.Animation_Manger.GetBool("in_transition") == false && 
                     _focusingC.Animation_Manger.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
                 {
-                    _focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.05f);
+                    _focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.25f);
+                    _focusingC.Animation_Manger.TriggerExpression(Facial.smile);
                     _ifShowingSkill = false;
                     resetModelPosTween = _focusingC.WholeT.transform.DOMove(modelPos, 1);
                 }

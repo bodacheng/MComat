@@ -18646,6 +18646,7 @@ GameObject:
   - component: {fileID: 1196598186832140473}
   - component: {fileID: 2181148972522528234}
   - component: {fileID: 7234616545516129551}
+  - component: {fileID: 4975358160934762626}
   m_Layer: 0
   m_Name: tetsuya
   m_TagString: Untagged
@@ -18703,7 +18704,7 @@ Animator:
   m_GameObject: {fileID: 3669803289984295455}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 942433344ad0c4e8f9b3b2bb5227cead, type: 3}
-  m_Controller: {fileID: 9100000, guid: a7980b15d03d447b08d873db5a38b219, type: 2}
+  m_Controller: {fileID: 9100000, guid: 73aeb856ef9c74931a1367f941531f7f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -18711,13 +18712,11 @@ Animator:
   m_StabilizeFeet: 0
   m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
     are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Bip001 Spine1'\n\tTransform 'Bip001 Neck'\n\tTransform
-    'Bip001 Spine'\n\tTransform 'Bip001'\n\tTransform 'Bip001 Spine2'\n\tTransform
-    'Bip001 Pelvis'\n\tTransform 'Bip001 R Foot'\n\tTransform 'Bip001 R Toe0'\n\tTransform
-    'Bip001 Spine1'\n\tTransform 'Bip001 Head'\n\tand more ...\n\tFrom animation
-    clip '\u75BC\u75DB'\n\tFrom animation clip '\u51F6\u72E0'\n\tFrom animation clip
-    '\u5927\u7B110408'\n\tFrom animation clip '\u5403\u60CA1'\n\tFrom animation clip
-    '\u6124\u6012'\n\tFrom animation clip '\u5FAE\u7B11'\n\tFrom animation clip '\u90AA\u6076'"
+    by Humanoid clips.\n\tTransform 'Face_Bone17'\n\tTransform 'Face_Bone18'\n\tTransform
+    'Face_Bone10'\n\tTransform 'Face_Bone17'\n\tTransform 'Face_Bone18'\n\tTransform
+    'Face_Bone10'\n\tTransform 'Face_Bone12'\n\tTransform 'Bip001 Spine1'\n\tTransform
+    'Bip001 Head'\n\tTransform 'Bip001 Neck'\n\tand more ...\n\tFrom animation clip
+    '\u60B2\u4F24'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -18911,6 +18910,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _C: {fileID: 4108938776797320783}
+--- !u!114 &4975358160934762626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3669803289984295455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d744f12bd816b421dbc95f661f798e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winkAnimation: {fileID: 7400000, guid: e5fbb789a5146401bb32c6e71ed7a947, type: 2}
+  smileAnimation: {fileID: 7400000, guid: c2a4eddd4678e4e4c88d43159c40292b, type: 2}
+  hitAnimation: {fileID: 7400000, guid: db3f5d70438c0433c8228f4cee490fa4, type: 2}
+  aggressiveAnimation: {fileID: 7400000, guid: c97b4a2940ba74deeb7719edb8f70cdc, type: 2}
 --- !u!1 &3684381711359869949
 GameObject:
   m_ObjectHideFlags: 0

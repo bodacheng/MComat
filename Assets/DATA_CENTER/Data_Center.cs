@@ -35,7 +35,9 @@ public partial class Data_Center : MonoBehaviour
 
     private bool Phase1Initialized;
     private bool Phase2Initialized;
-
+    
+    private FacialAnimManager _facialAnimManager;
+    
     [Header("传统防御盾。可能真的用不到了")]
     public BO_Shield Shield;
     
@@ -58,6 +60,7 @@ public partial class Data_Center : MonoBehaviour
         if (!Phase1Initialized)
         {
             Animation_Manger.AnimatorRef =  WholeT.GetComponent<Animator>();
+            _facialAnimManager = WholeT.GetComponent<FacialAnimManager>();
             Sensor.Center = this.geometryCenter;
             Sensor.SensorRadius = 15f;
             FightDataRef.Center = this;
@@ -65,8 +68,9 @@ public partial class Data_Center : MonoBehaviour
             _BasicPhysicSupport.Rigidbody.mass = 500f;
             BodyElementTagAndLayerSet(TeamConfig.DefaultSet);
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(FightDataRef,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
-            await Animation_Manger.PreloadBasicPersonalAnims(type, basicPackName);
+            await Animation_Manger.PreloadBasicPersonalAnims(type, basicPackName, _facialAnimManager);
             _BO_Ani_E.BasicMagicAndEffectsPathDefine(element);
+            
             //if (this.blendShapeProxy != null && this.blendShapeProxy.VRMBlendShapeProxy != null)
             //    this.blendShapeProxy.VRMBlendShapeProxy.AvaterRemerge(this.WholeT);
             //else

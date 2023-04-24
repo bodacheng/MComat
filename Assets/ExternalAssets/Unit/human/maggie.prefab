@@ -46370,6 +46370,7 @@ GameObject:
   - component: {fileID: 553092051332711688}
   - component: {fileID: 3790496988237131684}
   - component: {fileID: 7642936246264388938}
+  - component: {fileID: 3613476211896068937}
   m_Layer: 0
   m_Name: maggie
   m_TagString: Untagged
@@ -46404,21 +46405,13 @@ Animator:
   m_GameObject: {fileID: 8247529187760450524}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: a74cd1f4a8c16403b9e6ae5320f8b068, type: 3}
-  m_Controller: {fileID: 9100000, guid: 2d7761215ca3d48c289a83579d70a537, type: 2}
+  m_Controller: {fileID: 9100000, guid: a7980b15d03d447b08d873db5a38b219, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Bip001 Spine1'\n\tTransform 'Bip001 Head'\n\tTransform
-    'Bip001 Neck'\n\tTransform 'Bip001 Spine'\n\tTransform 'Bip001'\n\tTransform
-    'Bip001 Spine2'\n\tTransform 'Bip001 Pelvis'\n\tTransform 'Bip001 Spine1'\n\tTransform
-    'Bip001 Head'\n\tTransform 'Bip001 Neck'\n\tand more ...\n\tFrom animation clip
-    '\u75DB\u82E6'\n\tFrom animation clip '\u51F6\u72E0'\n\tFrom animation clip '\u5927\u7B11'\n\tFrom
-    animation clip '\u5403\u60CA'\n\tFrom animation clip '\u6124\u6012'\n\tFrom animation
-    clip '\u5FAE\u7B11'\n\tFrom animation clip '\u90AA\u6076'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -46628,6 +46621,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _C: {fileID: 3767136506963129980}
+--- !u!114 &3613476211896068937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8247529187760450524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d744f12bd816b421dbc95f661f798e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winkAnimation: {fileID: 7400000, guid: bde688e17be7243498a3452441eb1928, type: 2}
+  smileAnimation: {fileID: 7400000, guid: 8467a696cab824519970eaa800245f3a, type: 2}
+  hitAnimation: {fileID: 7400000, guid: 50d74dcdb9ba247cc9caddce1016f86e, type: 2}
+  aggressiveAnimation: {fileID: 7400000, guid: 1e9d66da1bc8f4b2fa509716f8559b8d, type: 2}
 --- !u!1 &8248161369083867085
 GameObject:
   m_ObjectHideFlags: 0

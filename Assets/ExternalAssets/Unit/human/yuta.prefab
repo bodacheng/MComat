@@ -5218,6 +5218,7 @@ GameObject:
   - component: {fileID: 4562726832573691765}
   - component: {fileID: 4175809735991298275}
   - component: {fileID: 3774915240240689551}
+  - component: {fileID: 9155094391306290330}
   m_Layer: 0
   m_Name: yuta
   m_TagString: Untagged
@@ -5258,15 +5259,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Bip001 Spine1'\n\tTransform 'Bip001 Neck'\n\tTransform
-    'Bip001 Spine'\n\tTransform 'Bip001'\n\tTransform 'Bip001 Spine2'\n\tTransform
-    'Bip001 Pelvis'\n\tTransform 'Bip001 R Foot'\n\tTransform 'Bip001 R Hand'\n\tTransform
-    'Bip001 R Finger1'\n\tTransform 'Bip001 L Finger11'\n\tand more ...\n\tFrom animation
-    clip '\u75BC\u75DB'\n\tFrom animation clip '\u51F6\u72E0'\n\tFrom animation clip
-    '\u5927\u7B110408'\n\tFrom animation clip '\u5403\u60CA1'\n\tFrom animation clip
-    '\u6124\u6012'\n\tFrom animation clip '\u5FAE\u7B11'\n\tFrom animation clip '\u90AA\u6076'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -5476,6 +5469,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _C: {fileID: 6530159608908039965}
+--- !u!114 &9155094391306290330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105395777112079292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d744f12bd816b421dbc95f661f798e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winkAnimation: {fileID: 7400000, guid: c77bc63d021ca4db6918a8970e02413c, type: 2}
+  smileAnimation: {fileID: 7400000, guid: 578a05b13551648b6a59e7dd398222c1, type: 2}
+  hitAnimation: {fileID: 7400000, guid: 96b960e1dd8854bc7a7977cfd9bfc8bd, type: 2}
+  aggressiveAnimation: {fileID: 7400000, guid: afbbe61db003f454891b790a5b9bf3ca, type: 2}
 --- !u!1 &1147716907504303280
 GameObject:
   m_ObjectHideFlags: 0
