@@ -21,15 +21,15 @@ public class FrontLayer : UILayer
     [SerializeField] Button SkillTestRBtn;
     [SerializeField] Button SkillTestMBtn;
     [SerializeField] DedicatedCameraConnector camConnector;
-    [SerializeField] private float skillShowInterval = 5;
+    [SerializeField] float skillShowInterval = 5;
     
     public void Initialise(PreScene pre)
     {
         // Unit View Size Calulate
         var unitViewSize = (PosCal.canvasWidth - 940);
-        if (unitViewSize > PosCal.canvasHeight -150)
+        if (unitViewSize > 724) // 右边那些主按钮从上到下的总高度
         {
-            unitViewSize = PosCal.canvasHeight -150;
+            unitViewSize = 724;
         }
         camConnector.GetComponent<RectTransform>().sizeDelta = new Vector2(unitViewSize,unitViewSize);
         

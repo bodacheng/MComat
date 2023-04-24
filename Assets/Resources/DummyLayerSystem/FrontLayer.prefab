@@ -2171,6 +2171,7 @@ MonoBehaviour:
   SkillTestRBtn: {fileID: 3029729696143825650}
   SkillTestMBtn: {fileID: 3029729695899950762}
   camConnector: {fileID: 3850757717107606116}
+  skillShowInterval: 5
   indicator: {fileID: 8151383610826493773}
 --- !u!1 &3029729696728328397
 GameObject:
@@ -18499,7 +18500,7 @@ PrefabInstance:
     - target: {fileID: 3850318373848056875, guid: 72d00ee42a0b94b3aa1db5764acd394f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3850318373848056875, guid: 72d00ee42a0b94b3aa1db5764acd394f,
         type: 3}
@@ -18530,6 +18531,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DedicatedCameraConnector
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972680166109506118, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972680166109506118, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972680166109506118, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972680166109506118, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972680166109506118, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972680166109506118, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972680166109506118, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972680166109506118, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72d00ee42a0b94b3aa1db5764acd394f, type: 3}

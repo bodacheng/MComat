@@ -28,6 +28,8 @@ namespace mainMenu
 
         public void RefreshMemberDetailPageByFocusingUnit()
         {
+            _connector.GetComponent<RectTransform>().sizeDelta = new Vector2(PosCal.canvasHeight -200, PosCal.canvasHeight -200);
+            
             if (PreScene.target.Focusing == null || PreScene.target.Focusing.id == null || PreScene.target.Focusing.r_id == null)
             {
                 SkillShowButton.onClick.RemoveAllListeners();
