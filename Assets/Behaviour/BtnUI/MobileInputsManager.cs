@@ -165,24 +165,24 @@ public class MobileInputsManager : MonoBehaviour {
     
     // 动态按钮系统是基于状态流动
     SkillEntity _behaviorPreviewButton1, _behaviorPreviewButton2, _behaviorPreviewButton3;
-    public void ButtonsFeatureLoad(List<SkillEntity> Options_preview)
+    public void ButtonsFeatureLoad(List<SkillEntity> optionsPreview)
     {
         _behaviorPreviewButton1 = null; 
         _behaviorPreviewButton2 = null;
         _behaviorPreviewButton3 = null;
         
-        for (var i = 0; i < Options_preview.Count; i++)
+        for (var i = 0; i < optionsPreview.Count; i++)
         {
-            switch (Options_preview[i].EnterInput)
+            switch (optionsPreview[i].EnterInput)
             {
                 case InputKey.Attack1:
-                    _behaviorPreviewButton1 = Options_preview[i];
+                    _behaviorPreviewButton1 = optionsPreview[i];
                     break;
                 case InputKey.Attack2:
-                    _behaviorPreviewButton2 = Options_preview[i];
+                    _behaviorPreviewButton2 = optionsPreview[i];
                     break;
                 case InputKey.Attack3:
-                    _behaviorPreviewButton3 = Options_preview[i];
+                    _behaviorPreviewButton3 = optionsPreview[i];
                     break;
             }
         }
