@@ -149,11 +149,14 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 PurchasePrice = (int)(e.purchasedProduct.metadata.localizedPrice * 100),//(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
                 ReceiptData = payload
             }, result => {
-                Debug.Log("Validation successful!");
+                ProgressLayer.Close();
+                PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseSuccess"));
                 _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
                 PlayFabReadClient.LoadItems(null);
             },
             error => {
+                ProgressLayer.Close();
+                PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseFail"));
                 Debug.Log("Validation failed: " + error.GenerateErrorReport());
             }
         );
@@ -193,7 +196,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         // If IAP service has not been initialized, fail hard
         
         if (!IsInitialized) throw new Exception("IAP Service is not initialized!");
-
+        ProgressLayer.Loading(Translate.Get("PurchaseProcessing"));
         // Pass in the product id to initiate purchase
         _mStoreController.InitiatePurchase(productId);
     }
