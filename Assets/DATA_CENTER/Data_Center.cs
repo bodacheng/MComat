@@ -167,11 +167,10 @@ public partial class Data_Center : MonoBehaviour
             FightDataRef.Resistance.Value = Mathf.Clamp(x, 0, FightGlobalSetting._ResistanceMax);
         }).AddTo(gameObject);
         
-        if (FightDataRef.CriticalGaugeMode == CriticalGaugeMode.Unlimited)
-            FightDataRef.CriticalGauge.Value = FightGlobalSetting._EXMax;
-        this._MyBehaviorRunner.SetAt(unitInfo.level);
-        this._MyBehaviorRunner.AIMode = aiMode;
-        this._MyBehaviorRunner.Controller.DecisionDelay = aiDelayFrame;
+        FightDataRef.CriticalGauge.Value = FightGlobalSetting._EXMax;
+        _MyBehaviorRunner.SetAt(unitInfo.level);
+        _MyBehaviorRunner.AIMode = aiMode;
+        _MyBehaviorRunner.Controller.DecisionDelay = aiDelayFrame;
     }
 
     //我们希望datacenter是整个角色初始化的出发点，那么这个地方应该也可以做到根据情况决定一些组件加载还是不加载。
