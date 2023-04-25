@@ -140,6 +140,7 @@ sevenDaysLoginBonusDM,7-day consecutive login bonus,7日連続ログイン特典
 normalLoginBonusDMIntro,This is your $streak 's day logging into the game! Log in for another $extraRemain days and you will receive extra rewards!,これはゲームにログインする第$streak日です！さらに$extraRemain日間ログインすると、追加の報酬がもらえます！,这是你第$streak天登陆游戏！再登陆$extraRemain天你将获得额外奖励！
 sevenDaysLoginBonusDMIntro,Thank you for logging in for seven consecutive days! Wishing you happiness and joy every day.,連続7日間ログインしていただきありがとうございます！毎日幸せで楽しい日々をお過ごしください。,感谢你连续七天登陆！祝你开心快乐每一天！
 ,,,
+GotAdWatchedReward,Reward retrieval successful,報酬の取得成功,获取广告报酬成功
 PurchaseProcessing,"Processing the purchase, please do not close the program.",購入処理中です。プログラムを閉じないでください。,正在处理购买，请勿关闭程序
 PurchaseSuccess,Purchase successful,購入成功,购买成功
 PurchaseFail,Purchase failed,購入失敗,购买失败
