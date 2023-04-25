@@ -102,7 +102,7 @@ namespace ModelView
             var viewCenter = GetCenterPosition(rect);
             void CameraTreat(Camera _camera)
             {
-                _camera.orthographicSize = _basicOrthographicSize * (PosCal.canvasHeight / rect.rect.height);
+                _camera.orthographicSize = _basicOrthographicSize * (PosCal.CanvasHeight / rect.rect.height);
                 var cViewWidth = _camera.orthographicSize * 2 * _camera.aspect;
                 var cViewHeight = _camera.orthographicSize * 2;
                 _camera.transform.position = _targetBounds.center + Vector3.forward * (_targetBounds.extents.z + extraZDis)

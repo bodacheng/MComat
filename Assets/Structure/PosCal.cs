@@ -3,29 +3,27 @@ using UnityEngine.UI;
 
 public static class PosCal
 {
-    public static Canvas canvas;
-    static CanvasScaler canvasScaler => canvas.GetComponent<CanvasScaler>();
-    public static float canvasWidth => canvas.GetComponent<RectTransform>().rect.width;
-    public static float canvasHeight => canvas.GetComponent<RectTransform>().rect.height;
-
+    public static Canvas Canvas;
+    static CanvasScaler CanvasScaler => Canvas.GetComponent<CanvasScaler>();
+    public static float CanvasWidth => Canvas.GetComponent<RectTransform>().rect.width;
+    public static float CanvasHeight => Canvas.GetComponent<RectTransform>().rect.height;
     
     /// <summary>
-    /// 当初那些九宫格特效是建立在referenceResolution：1920x1080来制作的
-    /// 也就是假设了屏幕也是那个尺寸，那么如果是不同屏幕就需要按屏幕空间比例进行拉伸。
+    /// 九宫格的slot特效在比1920x1080更长的设备上并不会出现尺寸变不匹配问题
+    /// 但是如果在长宽比例更低的设备上，比如ipad，就是出现尺寸错误
+    /// 我们没有理清内部的具体逻辑，但是我们认为更低的长宽比设备上，这个设备长宽比/参考长宽比的数字就是slot特效的scale应该乘以的数字
+    /// 而事实证明似乎没错
     /// </summary>
     /// <returns></returns>
-    public static float EffectScaleRate()
+    public static float TempRate()
     {
-        if (canvasScaler.matchWidthOrHeight == 1)
+        float screenAspect = (float)Screen.width / Screen.height;
+        float refAspect = CanvasScaler.referenceResolution.x / CanvasScaler.referenceResolution.y;
+        if (screenAspect >= refAspect)
         {
-            return Screen.width / canvasScaler.referenceResolution.x;
+            return 1;
         }
-
-        if (canvasScaler.matchWidthOrHeight == 0)
-        {
-            return Screen.height / canvasScaler.referenceResolution.y;
-        }
-        return 1;
+        return screenAspect / refAspect;
     }
     
     /// <summary>
@@ -33,29 +31,29 @@ public static class PosCal
     /// </summary>
     /// <param name="refC"></param>
     /// <param name="rect"></param>
-    /// <param name="z_offset"></param>
+    /// <param name="zOffset"></param>
     /// <returns></returns>
-    public static Vector3 GetWorldPos(Camera refC, RectTransform rect, float z_offset)
+    public static Vector3 GetWorldPos(Camera refC, RectTransform rect, float zOffset)
     {
         var rectPos = rect.transform.position;
         var trueAnchorPos = new Vector2(rectPos.x, rectPos.y);
-        var WorldPos = refC.ScreenToWorldPoint(trueAnchorPos);
-        WorldPos = new Vector3(WorldPos.x, WorldPos.y, refC.transform.position.z + z_offset);
-        return WorldPos;
+        var worldPos = refC.ScreenToWorldPoint(trueAnchorPos);
+        worldPos = new Vector3(worldPos.x, worldPos.y, refC.transform.position.z + zOffset);
+        return worldPos;
     }
     
     /// 这个是一律和ConvertAnchorPos配合使用，rectPos指的是UI元素在Canvas内的anchoredPosition，它并不等同于Screen Position。
     /// 前者的最大值是Canvas的长和宽，后者的最大值是设备分辨率
     /// </param>
     /// <param name="rectPos"> 这个值是UI元素的坐标，指的应该是我们希望把某个特效给定到的位置 </param>
-    /// <param name="z_offset"></param>
+    /// <param name="zOffset"></param>
     /// <returns></returns>
-    public static Vector3 GetWorldPos(Camera refC, Vector3 rectPos, float z_offset)
+    public static Vector3 GetWorldPos(Camera refC, Vector3 rectPos, float zOffset)
     {
-        var screenPos = new Vector2(Screen.width * rectPos.x/ canvasWidth, Screen.height * rectPos.y/ canvasHeight);
-        var WorldPos = refC.ScreenToWorldPoint(screenPos);
-        WorldPos = new Vector3(WorldPos.x, WorldPos.y, refC.transform.position.z + z_offset);
-        return WorldPos;
+        var screenPos = new Vector2(Screen.width * rectPos.x/ CanvasWidth, Screen.height * rectPos.y/ CanvasHeight);
+        var worldPos = refC.ScreenToWorldPoint(screenPos);
+        worldPos = new Vector3(worldPos.x, worldPos.y, refC.transform.position.z + zOffset);
+        return worldPos;
     }
     
     /// <summary>

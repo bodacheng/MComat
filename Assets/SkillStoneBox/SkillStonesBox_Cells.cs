@@ -21,7 +21,7 @@ namespace mainMenu
         {
             var gridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
             var stoneBoxRect = transform.GetComponent<RectTransform>();
-            var temp = PosCal.canvasHeight - sizeNeedToRemain;
+            var temp = PosCal.CanvasHeight - sizeNeedToRemain;
             temp =  (gridLayoutGroup.cellSize.y + gridLayoutGroup.spacing.y) * 
                     Mathf.Floor(temp / (gridLayoutGroup.cellSize.y + gridLayoutGroup.spacing.y));
             stoneBoxRect.sizeDelta = new Vector2(stoneBoxRect.sizeDelta.x, temp);

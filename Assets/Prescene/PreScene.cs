@@ -53,7 +53,7 @@ namespace mainMenu
         void Awake()
         {
             target = this;
-            PosCal.canvas = this.Canvas;
+            PosCal.Canvas = this.Canvas;
             SetBgRenderTexture();
         }
         
