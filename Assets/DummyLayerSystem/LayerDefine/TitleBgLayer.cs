@@ -19,11 +19,11 @@ public class TitleBgLayer : UILayer
     [SerializeField] float scrollDelayInMilliSecond = 0.001f;
     [SerializeField] float ScrollbarMinValue = 0;
     [SerializeField] float ScrollbarMaxValue = 1;
-    private float milliSecondCounter = 0;
-    private IDisposable _disposable;
+    float milliSecondCounter = 0;
+    IDisposable _disposable;
     public void Setup(bool storyMode, Action onClickProcess = null) // false: titleMode
     {
-        RectTransform parentRect = transform.GetComponent<RectTransform>();
+        var parentRect = transform.GetComponent<RectTransform>();
         content.sizeDelta = new Vector2(parentRect.rect.width ,  targetSprite.rect.height * parentRect.rect.width / targetSprite.rect.width);
         content.anchoredPosition = Vector2.zero;
         targetImage.sprite = targetSprite;
