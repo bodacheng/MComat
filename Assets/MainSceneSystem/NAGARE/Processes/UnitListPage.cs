@@ -15,9 +15,9 @@ public class UnitListPage : MSceneProcess
 
     public override void ProcessEnter()
     {
-        layer = UILayerLoader.Load<UnitsLayer>();
         unitOptionLayer = UILayerLoader.Load<UnitOptionLayer>();
-        
+        layer = UILayerLoader.Load<UnitsLayer>();
+        ReturnLayer.MoveFront();
         void UnitIconBtn(string instanceId)
         {
             layer.Selected.Value = instanceId;

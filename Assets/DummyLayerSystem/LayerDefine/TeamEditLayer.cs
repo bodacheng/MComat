@@ -12,6 +12,8 @@ using UniRx;
 public class TeamEditLayer : UILayer
 {
     [SerializeField] DedicatedCameraConnector connector;
+    [SerializeField] Image view2D;
+    [SerializeField] Animator unitOutAnimator;
     [SerializeField] Button removeButton;
     [SerializeField] HeroIcon team1Front, team1Left, team1Right;
     
@@ -80,7 +82,18 @@ public class TeamEditLayer : UILayer
         
         PreScene.target.SetFocusingUnit(instanceID);
         nineForShow.ShowStones_Acc(instanceID);
-        connector.ShowMyModel(instanceID).Forget();
+        
+        var unitInfo = dataAccess.Units.Get(instanceID);
+        if (unitInfo != null)
+        {
+            UniTask.WhenAll(
+                connector.ShowMyModel(instanceID), 
+                Set2DView(unitInfo.r_id, view2D, unitOutAnimator)).Forget();
+        }
+        else
+        {
+            connector.ShowMyModel(instanceID).Forget();
+        }
     }
     
     /// <summary>
@@ -194,7 +207,19 @@ public class TeamEditLayer : UILayer
                 _focusingPos.Value = posNum;
                 var instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(_focusingPos.Value);
                 PreScene.target.SetFocusingUnit(instanceID);
-                connector.ShowMyModel(instanceID).Forget();
+                
+                var unitInfo = dataAccess.Units.Get(instanceID);
+                if (unitInfo != null)
+                {
+                    UniTask.WhenAll(
+                        connector.ShowMyModel(instanceID), 
+                        Set2DView(unitInfo.r_id, view2D, unitOutAnimator)).Forget();
+                }
+                else
+                {
+                    connector.ShowMyModel(instanceID).Forget();
+                }
+                
                 if (PreScene.target.Focusing != null)
                     nineForShow.ShowStones_Acc(PreScene.target.Focusing.id);
                 else

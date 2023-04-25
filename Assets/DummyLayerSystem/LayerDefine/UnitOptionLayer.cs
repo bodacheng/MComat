@@ -10,6 +10,8 @@ namespace mainMenu
         [SerializeField] DedicatedCameraConnector _connector;
         [SerializeField] float cameraConnectorRightSpace = 1044;
         [SerializeField] float cameraConnectorVerticalSpace = 150;
+        [SerializeField] Image view2D;
+        [SerializeField] Animator unitOutAnimator;
         
         [Header("角色明细T，技能显示T")]
         [SerializeField] RectTransform MemberInfoT;
@@ -71,7 +73,7 @@ namespace mainMenu
             UnitModelRender(UnitInfo.GetUnitInfo(PreScene.target.Focusing));
         }
         
-        void UnitModelRender(UnitInfo info)
+        async void UnitModelRender(UnitInfo info)
         {
             if (info == null)
             {
@@ -79,10 +81,10 @@ namespace mainMenu
                 _connector.ShowMyModel(null).Forget();
             }else
             {
-                _connector.ShowMyModel(info.id).Forget();
+                UniTask.WhenAll(_connector.ShowMyModel(info.id), Set2DView(info.r_id, view2D, unitOutAnimator)).Forget();
             }
         }
-
+        
         #region 教程
         public void PlsClickSkillEdit()
         {
