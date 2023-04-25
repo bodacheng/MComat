@@ -2651,8 +2651,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -880, y: -5}
-  m_SizeDelta: {x: 420, y: -100}
+  m_AnchoredPosition: {x: -880, y: -27.5}
+  m_SizeDelta: {x: 420, y: -55}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &8765915280003568652
 MonoBehaviour:
@@ -4556,6 +4556,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connector: {fileID: 8609518065019232744}
+  cameraConnectorRightSpace: 1320
+  cameraConnectorVerticalSpace: 200
   nineSlot: {fileID: 3223205477154158133}
   stonesBox: {fileID: 2351650544814400329}
   skillStoneDetail: {fileID: 1058373452942944366}
@@ -6104,7 +6106,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2677751319763802289
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6122,7 +6124,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

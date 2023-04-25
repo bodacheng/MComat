@@ -136,7 +136,16 @@ namespace mainMenu
         {
             IconForShow(config.RECORD_ID);
             keyName.text = config.REAL_NAME;
-            showName.text = SkillNameTable.GetSkillName(config.RECORD_ID);
+
+            if (PlayerAccountInfo.Me.TitleDisplayName.Contains("IconDev"))
+            {
+                showName.text = config.RECORD_ID +"."+ SkillNameTable.GetSkillName(config.RECORD_ID);
+            }
+            else
+            {
+                showName.text = SkillNameTable.GetSkillName(config.RECORD_ID);    
+            }
+            
             ShowSkillStoneExType(ex1Icon, ex2Icon, ex3Icon, config.SP_LEVEL);
             ShowSKillRanges(close, near, far, config.AIAttrs.AI_MIN_DIS, config.AIAttrs.AI_MAX_DIS);
             atIcon.SetActive(config.STATE_TYPE == BehaviorType.GI ||
