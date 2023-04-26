@@ -5259,7 +5259,13 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'Bip001 R Foot'\n\tTransform 'Bip001 R Hand'\n\tTransform
+    'Bip001 R Finger1'\n\tTransform 'Bip001 L Finger11'\n\tTransform 'Bip001 R Finger11'\n\tTransform
+    'Bip001 L Finger3'\n\tTransform 'Bip001 R Toe0'\n\tTransform 'Bip001 Spine1'\n\tTransform
+    'Bip001 L Finger2'\n\tTransform 'Bip001 L Finger12'\n\tand more ...\n\tFrom animation
+    clip '\u5FAE\u7B11'\n\tFrom animation clip '\u5927\u7B11'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -52321,6 +52327,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: b52864f2ef9914c0389ad209221e9518, type: 2}
+  - {fileID: 2100000, guid: 5832d3e2524b35641bab3811346d78bc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
