@@ -67,7 +67,7 @@ public class StageButton : MonoBehaviour
             heroIcon.iconButton.onClick.AddListener(
                 async () =>
                 {
-                    ProgressLayer.Loading(">");
+                    ProgressLayer.Loading(string.Empty);
                     await iconButtonFeature(heroIcon);
                     ProgressLayer.Close();
                 }

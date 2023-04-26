@@ -21,7 +21,7 @@ public class TitleBgLayer : UILayer
     [SerializeField] float ScrollbarMaxValue = 1;
     float milliSecondCounter = 0;
     IDisposable _disposable;
-    public void Setup(bool storyMode, Action onClickProcess = null) // false: titleMode
+    public void Setup() // false: titleMode
     {
         var parentRect = transform.GetComponent<RectTransform>();
         content.sizeDelta = new Vector2(parentRect.rect.width ,  targetSprite.rect.height * parentRect.rect.width / targetSprite.rect.width);
@@ -29,8 +29,11 @@ public class TitleBgLayer : UILayer
         targetImage.sprite = targetSprite;
         vScrollbar.value = 1;
         targetImage.color = Color.white;
+    }
+    
+    public void Rotate(bool storyMode, Action onClickProcess = null)
+    {
         languageConverter.gameObject.SetActive(storyMode);
-
         if (storyMode)
         {
             touchScreenBtn.onClick.AddListener(() =>

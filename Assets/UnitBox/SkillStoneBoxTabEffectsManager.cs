@@ -38,7 +38,7 @@ namespace mainMenu
         
         public async UniTask SwitchElement(Element element, CancellationToken ct)
         {
-            ProgressLayer.Loading(">");
+            ProgressLayer.Loading(string.Empty);
             await StartUp(element, ct);
             ct.ThrowIfCancellationRequested();
             _focusingEffectsGroup?.CloseTagEffects();

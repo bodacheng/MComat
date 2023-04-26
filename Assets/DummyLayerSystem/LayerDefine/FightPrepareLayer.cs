@@ -19,7 +19,7 @@ public class FightPrepareLayer : UILayer
     
     public void SetFightMode(int fightMode)
     {
-        _fightModeSwitch.Setup(fightMode, PlayerPrefs.GetInt("preferAdventureMode",  2));
+        _fightModeSwitch.Setup(fightMode, PlayerPrefs.GetInt("preferAdventureMode",  PlayerPrefs.GetInt("preferAdventureMode", 2)));
     }
 
     public TeamMode GetSetFightMode()

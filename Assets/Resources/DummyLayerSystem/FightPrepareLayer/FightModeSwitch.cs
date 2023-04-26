@@ -14,12 +14,12 @@ public class FightModeSwitch : MonoBehaviour
     {
         if (_teamMode == TeamMode.Rotation)
         {
-            PlayerPrefs.GetInt("preferAdventureMode", 1);
+            PlayerPrefs.SetInt("preferAdventureMode", 1);
             SetMode(TeamMode.MultiRaid);
         }
         else if (_teamMode == TeamMode.MultiRaid)
         {
-            PlayerPrefs.GetInt("preferAdventureMode", 2);
+            PlayerPrefs.SetInt("preferAdventureMode", 2);
             SetMode(TeamMode.Rotation);
         }
     }

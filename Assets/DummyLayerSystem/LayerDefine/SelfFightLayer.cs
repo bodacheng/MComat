@@ -62,7 +62,7 @@ namespace mainMenu
             rotationModeBtn.onClick.AddListener(SwitchToRotationMode);
             multiModeBtn.onClick.AddListener(SwitchToMultiRaidMode);
 
-            _fightModeSwitch.Setup(0,PlayerPrefs.GetInt("preferAdventureMode",  2));
+            _fightModeSwitch.Setup(0,PlayerPrefs.GetInt("preferAdventureMode",  PlayerPrefs.GetInt("preferAdventureMode", 2)));
             fightStartBtn.onClick.AddListener(FightStart);
         }
         

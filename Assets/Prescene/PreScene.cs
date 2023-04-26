@@ -42,9 +42,9 @@ namespace mainMenu
             var unitConfig = Units.GetUnitConfig(_focusing.r_id);
             if (unitConfig == null)
             {
-                Debug.Log("Error r id:" + _focusing.r_id);
                 return;
             }
+            PlayerPrefs.SetString("showUnit", instanceID);
             BackGroundPS.target.ChangeBGByElement(unitConfig.element);
         }
 

@@ -70,7 +70,7 @@ namespace ModelView
             }
             else
             {
-                ProgressLayer.Loading(">");
+                ProgressLayer.Loading(string.Empty);
                 _focusingC = await GeneralModelPool.GetModel(recordID, transform);
                 if (Saves.ContainsKey(recordID))
                 {

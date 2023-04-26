@@ -115,7 +115,7 @@ public partial class PlayFabReadClient
     public static void LoginSuccess(LoginResult result, LoginType loginType = LoginType.normal)
     {
         _tutorialProgressGot = false;
-        ProgressLayer.Loading(">");
+        ProgressLayer.Loading(string.Empty);
         PlayerAccountInfo.Me = new PlayerAccountInfo
         {
             PlayFabId = result.PlayFabId

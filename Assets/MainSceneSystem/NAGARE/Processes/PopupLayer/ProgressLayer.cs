@@ -74,11 +74,8 @@ public class ProgressLayer : UILayer
                     layer.percentage.text = ((int)(x * 100)) + "%";
                 },
                 progress,
-                3f
-            ).SetEase(Ease.OutFlash).OnCompleteAsObservable().Subscribe(_ => 
-            {
-                Debug.Log("Percent Load Completed.");
-            }).AddTo(layer.gameObject);
+                1
+            ).SetEase(Ease.OutFlash).OnCompleteAsObservable().Subscribe(_ => { }).AddTo(layer.gameObject);
         }
         else
         {

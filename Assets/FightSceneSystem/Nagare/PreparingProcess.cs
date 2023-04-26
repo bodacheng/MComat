@@ -23,7 +23,7 @@ public class PreparingProcess : FSceneProcess
         CameraManager._camera.transform.position = CameraManager._StartPosRef.transform.position;
         CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
         UILayerLoader.Load<ProgressLayer>();
-        ProgressLayer.LoadingPercent("loading Essentials", 0.5f);
+        ProgressLayer.LoadingPercent(Translate.Get("LoadingBattle"), 0.5f);
         
         var tasks = new List<UniTask>
         {
@@ -36,7 +36,7 @@ public class PreparingProcess : FSceneProcess
             EffectsManager.IniEffectsPool(CommonSetting.BreakFreeEffectCode, null, 3),
             EffectsManager.IniEffectsPool(CommonSetting.MemberShiftEffectCode, null, 3)
         };
-        
+        ProgressLayer.LoadingPercent(Translate.Get("LoadingBattle"), 0.7f);
         await UniTask.WhenAll(tasks);
         
         var teamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
@@ -88,10 +88,10 @@ public class PreparingProcess : FSceneProcess
         }
         
         RTFightManager.Target.SetGame(FightScene.FightScene.Fight);
-        ProgressLayer.LoadingPercent("loading UI", 1f);
+        ProgressLayer.LoadingPercent(Translate.Get("LoadingBattleAboutToEnd"), 0.8f);
         fightingStepLayer = UILayerLoader.Load<FightingStepLayer>();
         await fightingStepLayer.Setup(false);
-        
+        ProgressLayer.LoadingPercent(Translate.Get("LoadingBattleAboutToEnd"), 1f);
         switch (RTFightManager.Target.team1.TeamMode)
         {
             case TeamMode.MultiRaid:

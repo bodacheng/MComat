@@ -3,6 +3,7 @@ using dataAccess;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
+using UnityEngine;
 
 public class FrontPage : MSceneProcess
 {
@@ -49,7 +50,8 @@ public class FrontPage : MSceneProcess
         if (PlayerAccountInfo.Me.tutorialProgress == "Started")
         {
             var titleBgLayer = UILayerLoader.Load<TitleBgLayer>();
-            titleBgLayer.Setup(true, _EnterProcess);
+            titleBgLayer.Setup();
+            titleBgLayer.Rotate(true, _EnterProcess);
         }
         else
         {
@@ -64,9 +66,6 @@ public class FrontPage : MSceneProcess
         _frontLayer = UILayerLoader.Load<FrontLayer>();
         _frontLayer.Initialise(PreScene.target);
         
-        // 相机的这个锁定，在所有技能展示结束后应该是按以下这两行的标准进行归位。 
-        //_CameraManager.Assign_SToEMode(PreScene.target.MemDetailWatchPos.position, PreScene.target.MemDetailTargetPos, 3f, 15f);
-
         string focusInstanceID;
         if (PreScene.target.Focusing != null && dataAccess.Units.Get(PreScene.target.Focusing.id) != null)
         {
@@ -74,8 +73,8 @@ public class FrontPage : MSceneProcess
         }
         else
         {
-            focusInstanceID = TeamSet.Default.GetInstanceIdOnPos(0);
-            if (focusInstanceID == null)
+            focusInstanceID = PlayerPrefs.GetString("showUnit", null);
+            if (string.IsNullOrEmpty(focusInstanceID) || dataAccess.Units.Get(focusInstanceID) == null)
             {
                 foreach (var keyValuePair in dataAccess.Units.Dic)
                 {

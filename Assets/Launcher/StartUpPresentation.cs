@@ -30,14 +30,14 @@ public class StartUpPresentation : MonoBehaviour
                     {
                         SceneManager.LoadScene(0);
                     }), 
-                " 下载错误。请检查网络 ");
+                "Download Failed");
             },
             starter.DownLoadLabels
         );
         
         if (bytes > 0)
         {
-            DownLoadConfirm("Download size : " + bytes / 1048576 + "MB" + "\n\n" + "Start to download", bytes);
+            DownLoadConfirm("Download Size :" + bytes / 1048576 + "MB" + "\n\n" + "Start to download", bytes);
         }
         else
         {
@@ -51,11 +51,14 @@ public class StartUpPresentation : MonoBehaviour
             async ()=>
             {
                 HighLightLayer.DarkOff(Color.white, 0);
+                var titleBgLayer= UILayerLoader.Load<TitleBgLayer>();
+                titleBgLayer.Setup();
                 UILayerLoader.Load<ProgressLayer>();
                 await AddressablesLogic.ResourcePrepareProcess(
                     () =>
                     {
                         UILayerLoader.Remove<ProgressLayer>();
+                        UILayerLoader.Remove<TitleBgLayer>();
                         Go();
                     },
                     (x) =>
@@ -82,7 +85,8 @@ public class StartUpPresentation : MonoBehaviour
         {
             await AppSetting.PlayBGM(CommonSetting.StartThemeAddressKey);
             var titleBgLayer= UILayerLoader.Load<TitleBgLayer>();
-            titleBgLayer.Setup(false);
+            titleBgLayer.Setup();
+            titleBgLayer.Rotate(false);
             var titleScreenLayer = UILayerLoader.Load<TitleScreenLayer>();
             titleScreenLayer.Initialise();
         }
