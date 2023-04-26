@@ -29,36 +29,25 @@ public class Personality_events : MonoBehaviour
     {
         if (right_sword != null)
         {
-            if (_on)
-            {
-                right_sword.SetActive(true);
-            }
-            else
-            {
-                right_sword.SetActive(false);
-            }
+            right_sword.SetActive(_on);
         }
     }
+    
     public void turn_on_Left_energy_blade()
     {
         turnLeftEnergyBlade(true);
     }
+    
     public void turn_off_Left_energy_blade()
     {
         turnLeftEnergyBlade(false);
     }
+    
     void turnLeftEnergyBlade(bool _on)
     {
         if (left_sword != null)
         {
-            if (_on)
-            {
-                left_sword.SetActive(true);
-            }
-            else
-            {
-                left_sword.SetActive(false);
-            }
+            left_sword.SetActive(_on);
         }
     }
 }
