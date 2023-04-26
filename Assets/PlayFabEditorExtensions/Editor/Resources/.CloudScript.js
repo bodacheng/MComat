@@ -79,9 +79,9 @@ handlers.GrantItemIfNotOwned = function (args, context) {
     for (var i = 0; i < inventoryResult.Inventory.length; i++) {
 
         //log.info("playFabItemCategory:"+ inventoryResult.Inventory[i].CatalogVersion);
-        if (inventoryResult.Inventory[i].ItemId == playFabItemId &&  
-            inventoryResult.Inventory[i].CatalogVersion == playFabItemCategory
-        )
+        if ((inventoryResult.Inventory[i].ItemId == playFabItemId || inventoryResult.Inventory[i].ItemId == playFabContainerItemId)
+            &&
+            inventoryResult.Inventory[i].CatalogVersion == playFabItemCategory)
         {
             playerHasItem = true;
             break;
