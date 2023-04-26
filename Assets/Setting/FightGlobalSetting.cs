@@ -34,6 +34,7 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] int resistanceMax = 10;
     [SerializeField] int eXMax = 120;
     [SerializeField] int hurtObjectPreLoadCount = 5;
+    [SerializeField] int energyResolveAfterExtendBoundary = 5;
     [SerializeField] Material shadowMaterial;
 
     public static int SceneStep;//0 :mainmenu 1: fightscene
@@ -69,6 +70,7 @@ public class FightGlobalSetting : ScriptableObject
     public static int _HurtObjectPreLoadCount;
     public static Material _shadowMaterial;
     public static int _defendHP;
+    public static int _energyResolveAfterExtendBoundary;
     
     public void Initialise()
     {
@@ -121,6 +123,8 @@ public class FightGlobalSetting : ScriptableObject
         _EXMax = eXMax;
         
         _shadowMaterial = shadowMaterial;
+        
+        _energyResolveAfterExtendBoundary = energyResolveAfterExtendBoundary;
     }
     
     // 900血，10攻击力，1打1的话接近40秒左右游戏结束。但如果存在大量远距离对火立回那么就不太好说这个时间。。

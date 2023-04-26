@@ -1543,15 +1543,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4339536312853020, guid: d2b1e7b8fb7bab94dbfc08d09557e5c7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4339536312853020, guid: d2b1e7b8fb7bab94dbfc08d09557e5c7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4339536312853020, guid: d2b1e7b8fb7bab94dbfc08d09557e5c7, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4339536312853020, guid: d2b1e7b8fb7bab94dbfc08d09557e5c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1592,6 +1592,18 @@ PrefabInstance:
     - target: {fileID: 4339536312853020, guid: d2b1e7b8fb7bab94dbfc08d09557e5c7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4611443240419036, guid: d2b1e7b8fb7bab94dbfc08d09557e5c7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4611443240419036, guid: d2b1e7b8fb7bab94dbfc08d09557e5c7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4611443240419036, guid: d2b1e7b8fb7bab94dbfc08d09557e5c7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2b1e7b8fb7bab94dbfc08d09557e5c7, type: 3}
@@ -6716,12 +6728,12 @@ PrefabInstance:
     - target: {fileID: 580516407111906336, guid: 3667ab1130c011c4a8c2b9306f1612e5,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.265
+      value: 0.195
       objectReference: {fileID: 0}
     - target: {fileID: 580516407111906336, guid: 3667ab1130c011c4a8c2b9306f1612e5,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.265
+      value: 0.195
       objectReference: {fileID: 0}
     - target: {fileID: 580516407111906336, guid: 3667ab1130c011c4a8c2b9306f1612e5,
         type: 3}
@@ -6786,7 +6798,7 @@ PrefabInstance:
     - target: {fileID: 2841199245577064839, guid: 3667ab1130c011c4a8c2b9306f1612e5,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 53
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 2841199245591382249, guid: 3667ab1130c011c4a8c2b9306f1612e5,
         type: 3}
@@ -7581,7 +7593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BattleRingPSs:
   - {fileID: 5869328030720998988}
-  BattleRingRadius: 14
+  BattleRingRadius: 10
 --- !u!1 &3000649885939633402
 GameObject:
   m_ObjectHideFlags: 0

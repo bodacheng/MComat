@@ -1,3 +1,5 @@
+using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UniRx;
 
@@ -19,13 +21,13 @@ namespace FightScene
             }
         }
         
-        public void ToStartPos_Multi()
+        public void ToStartPosMulti()
         {
             Data_Center unit = null;
             foreach (var kv in teamMembers.mDict)
             {
-                var _DataCenter = teamMembers.Get(kv.Key.Item1, kv.Key.Item2);
-                if (_DataCenter == null)
+                var dataCenter = teamMembers.Get(kv.Key.Item1, kv.Key.Item2);
+                if (dataCenter == null)
                 {
                     continue;
                 }
@@ -33,10 +35,10 @@ namespace FightScene
                     unit = kv.Value;
                 if (TeamStandPoints[kv.Key.Item2] != null)
                 {
-                    _DataCenter.WholeT.transform.position = TeamStandPoints[kv.Key.Item2].position;
-                    _DataCenter.WholeT.transform.rotation = TeamStandPoints[kv.Key.Item2].rotation;
-                    _DataCenter.WholeT.parent = null;
-                    _DataCenter.WholeT.gameObject.SetActive(true);
+                    dataCenter.WholeT.transform.position = TeamStandPoints[kv.Key.Item2].position;
+                    dataCenter.WholeT.transform.rotation = TeamStandPoints[kv.Key.Item2].rotation;
+                    dataCenter.WholeT.parent = null;
+                    dataCenter.WholeT.gameObject.SetActive(true);
                 }
                 else
                 {
@@ -47,17 +49,23 @@ namespace FightScene
             _startUnit = unit;
         }
         
-        public void InitializeMulti(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode _aiMode, int aiDelayFrame)
+        public void InitializeMulti(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode aiMode, int aiDelayFrame)
         {
             foreach (var center in teamMembers.GetValues())
             {
-                center.Step3Initialize(teamConfig, teamCGMode, _aiMode, aiDelayFrame, teamHpRate, RTFightManager.Target.UnitInfoRef[center]);
-                center.FightDataRef.IsDead.Subscribe(x => 
+                center.Step3Initialize(teamConfig, teamCGMode, aiMode, aiDelayFrame, teamHpRate, RTFightManager.Target.UnitInfoRef[center]);
+                center.FightDataRef.IsDead.Subscribe(async x => 
                 {
                     if (x)
                     {
                         Sensor.AddOrRemoveSharedDeadUnitInfo(center, teamConfig.myTeam, true);
                         Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
+                        await UniTask.Delay(TimeSpan.FromSeconds(1));
+                        if (center != null)
+                        {
+                            EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null, center.geometryCenter.position, Quaternion.identity, center.geometryCenter).Forget();
+                            center.WholeT.gameObject.SetActive(false);
+                        }
                     }
                 }).AddTo(gameObject);
             }

@@ -26,7 +26,7 @@ public partial class Decomposition : MonoBehaviour {
     public float Counter;
     public int Phase { get; set; }
     public bool IsWeapon { get; set; }
-    public bool hasParticle { get; set; }
+    bool hasParticle { get; set; }
     #endregion
 
     public AudioSource AudioSource
@@ -95,9 +95,9 @@ public partial class Decomposition : MonoBehaviour {
         HitBoxesProcesser.AddToDecompositionProcessorList(this);
     }
 
-    public void EnergyResolve()
+    void EnergyResolve()
     {
-        StopEmissions(true);
+        StopEmissions(false);
         if (pool == null)
         {
             Debug.Log("严重逻辑问题"+ gameObject.name);

@@ -95,7 +95,7 @@ public class PreparingProcess : FSceneProcess
         switch (RTFightManager.Target.team1.TeamMode)
         {
             case TeamMode.MultiRaid:
-                RTFightManager.Target.team1.ToStartPos_Multi();
+                RTFightManager.Target.team1.ToStartPosMulti();
                 break;
             case TeamMode.Rotation:
                 RTFightManager.Target.team1.ToStartPos_Rotate();
@@ -105,7 +105,7 @@ public class PreparingProcess : FSceneProcess
         switch (RTFightManager.Target.team2.TeamMode)
         {
             case TeamMode.MultiRaid:
-                RTFightManager.Target.team2.ToStartPos_Multi();
+                RTFightManager.Target.team2.ToStartPosMulti();
                 break;
             case TeamMode.Rotation:
                 RTFightManager.Target.team2.ToStartPos_Rotate();
