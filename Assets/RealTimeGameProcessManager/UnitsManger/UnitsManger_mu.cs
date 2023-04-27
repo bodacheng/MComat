@@ -70,7 +70,7 @@ namespace FightScene
                                     center.WholeT.gameObject.SetActive(false);
                                 }
                                 disposable.Dispose();
-                            }).AddTo(center.WholeT.gameObject);
+                            }).AddTo(this);
                     }
                 }).AddTo(gameObject);
             }

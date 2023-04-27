@@ -35,7 +35,9 @@ namespace ModelView
             target = focus;
             target.SetParent(transform);
             _parentNodeRenderer = target.GetComponent<Renderer>();
-            _renderers = target.GetComponentsInChildren<Renderer>().ToArray();
+            _renderers = target.GetComponentsInChildren<Renderer>()
+                .Where(x => x.GetComponent<ParticleSystem>() == null)
+                .ToArray();
             
             foreach (var mesh in _renderers)
             {
