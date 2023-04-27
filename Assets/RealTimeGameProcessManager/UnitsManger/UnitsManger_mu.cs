@@ -54,18 +54,23 @@ namespace FightScene
             foreach (var center in teamMembers.GetValues())
             {
                 center.Step3Initialize(teamConfig, teamCGMode, aiMode, aiDelayFrame, teamHpRate, RTFightManager.Target.UnitInfoRef[center]);
-                center.FightDataRef.IsDead.Subscribe(async x => 
+                center.FightDataRef.IsDead.Subscribe(x => 
                 {
                     if (x)
                     {
                         Sensor.AddOrRemoveSharedDeadUnitInfo(center, teamConfig.myTeam, true);
                         Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
-                        await UniTask.Delay(TimeSpan.FromSeconds(1));
-                        if (center != null)
-                        {
-                            EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null, center.geometryCenter.position, Quaternion.identity, center.geometryCenter).Forget();
-                            center.WholeT.gameObject.SetActive(false);
-                        }
+                        var disposable = new SerialDisposable();
+                        disposable.Disposable = Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(
+                            (_) =>
+                            {
+                                if (center != null)
+                                {
+                                    EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null, center.geometryCenter.position, Quaternion.identity, center.geometryCenter).Forget();
+                                    center.WholeT.gameObject.SetActive(false);
+                                }
+                                disposable.Dispose();
+                            }).AddTo(center.WholeT.gameObject);
                     }
                 }).AddTo(gameObject);
             }
