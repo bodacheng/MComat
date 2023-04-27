@@ -85,7 +85,13 @@ MonoBehaviour:
   - m_GUID: f17d85e625c6d314aa50d3d3de82bbcf
     m_Address: human/NanoCyborg
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - unit
+  - m_GUID: c6d41cd21953f4e55b15fe370a64f040
+    m_Address: human/adam_naked
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

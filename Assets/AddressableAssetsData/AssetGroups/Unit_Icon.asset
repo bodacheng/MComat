@@ -82,6 +82,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
+  - m_GUID: 85b9bad740f2f4764b5c5f3dbe6575d6
+    m_Address: unit/14
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit_icon
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

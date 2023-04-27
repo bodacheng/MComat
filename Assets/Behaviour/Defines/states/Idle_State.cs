@@ -35,7 +35,8 @@ namespace Soul
             {
                 var deadEnemies = Sensor.GetActiveDeadEnemies();
                 var oneActive = deadEnemies.Find(x => x.gameObject.activeSelf);
-                RotateToTargetTween(oneActive.transform.position, 0.01f);
+                if (oneActive != null)
+                    RotateToTargetTween(oneActive.transform.position, 0.01f);
             }
             else
             {
