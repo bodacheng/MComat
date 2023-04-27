@@ -66,7 +66,7 @@ namespace FightScene
                             {
                                 if (center != null)
                                 {
-                                    EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null, center.geometryCenter.position, Quaternion.identity, center.geometryCenter).Forget();
+                                    EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null, center.geometryCenter.position, Quaternion.identity, null).Forget();
                                     center.WholeT.gameObject.SetActive(false);
                                 }
                                 disposable.Dispose();
