@@ -17,6 +17,11 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.key0.g
       value: 0.7231324
       objectReference: {fileID: 0}
+    - target: {fileID: 8285391474138540455, guid: 3260109345895474fa5111e6ad67e49d,
+        type: 3}
+      propertyPath: element
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8313648247387466359, guid: 3260109345895474fa5111e6ad67e49d,
         type: 3}
       propertyPath: m_Layer

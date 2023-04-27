@@ -125,7 +125,7 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK
 124,frank_hadogen,human,3,8,5,GI,
 125,frank_riseup,human,0,1,5,CT,
 126,frank_riseup2,human,1,1,5,CT,
-127,frank_riseup3,human,1,1,5,CT,
+127,speedCT,human,1,1,5,CT,
 128,frank_smashground,human,1,2,5,GI,
 129,frankfury,human,3,1.5,5,GI,
 130,hellfirekick,human,1,2,5,GI,

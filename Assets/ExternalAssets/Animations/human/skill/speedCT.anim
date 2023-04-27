@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: frank_riseup3
+  m_Name: speedCT
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -561238,6 +561238,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.5
     functionName: ResistanceClear
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.71666664
+    functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

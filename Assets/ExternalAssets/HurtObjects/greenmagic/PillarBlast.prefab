@@ -139,6 +139,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8285391474138540455, guid: 3260109345895474fa5111e6ad67e49d,
         type: 3}
+      propertyPath: element
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8285391474138540455, guid: 3260109345895474fa5111e6ad67e49d,
+        type: 3}
       propertyPath: zokusei
       value: 5
       objectReference: {fileID: 0}

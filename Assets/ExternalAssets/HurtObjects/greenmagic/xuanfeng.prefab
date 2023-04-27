@@ -57,6 +57,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114599007408712698, guid: 208596648e4ca412399a79bd4510b2f1,
         type: 3}
+      propertyPath: element
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114599007408712698, guid: 208596648e4ca412399a79bd4510b2f1,
+        type: 3}
       propertyPath: zokusei
       value: 5
       objectReference: {fileID: 0}
@@ -99,6 +104,21 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537841595482775638, guid: 208596648e4ca412399a79bd4510b2f1,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537841595482775638, guid: 208596648e4ca412399a79bd4510b2f1,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.27395415
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537841595482775638, guid: 208596648e4ca412399a79bd4510b2f1,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3537841595482775640, guid: 208596648e4ca412399a79bd4510b2f1,
         type: 3}
