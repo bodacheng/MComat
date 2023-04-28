@@ -16,8 +16,7 @@ public class ResistanceManager : MonoBehaviour
     
     void Awake()
     {
-        ColorUtility.TryParseHtmlString("00FFB4", out ResistColor);
-        ResistColor.a = 0.5f;
+        ColorUtility.TryParseHtmlString("#0046BC00", out ResistColor);
         OpenResistRender();
     }
     

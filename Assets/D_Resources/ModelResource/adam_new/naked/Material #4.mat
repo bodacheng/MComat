@@ -16,7 +16,6 @@ Material:
   - DIFFUSE
   - FOG
   - MATCAP
-  - MATCAP_CONTRAST
   - MATCAP_PERSPECTIVE
   - NORMAL_MAP
   - SHADOWS_ENABLED
@@ -190,7 +189,7 @@ Material:
     - _DiffuseBrightness: 1
     - _DiffuseContrast: 1
     - _DiffusePerPixel: 0
-    - _DiffuseWrap: 0
+    - _DiffuseWrap: 0.5
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _Flat: 0
@@ -222,8 +221,8 @@ Material:
     - _LightmapBrightness: 1
     - _LightmapUV: 0
     - _MatCapBlend: 0
-    - _MatCapBrightness: 2
-    - _MatCapContrast: 1.1
+    - _MatCapBrightness: 1
+    - _MatCapContrast: 1
     - _MatCapPerspective: 1
     - _MatCapStatic: 0
     - _Metallic: 0
