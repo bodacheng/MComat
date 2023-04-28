@@ -31,52 +31,7 @@ namespace HittingDetection
     
         public static DamageType FormalIntToDamageType(int num)
         {
-            DamageType damageType;
-            switch (num)
-            {
-                case -1:
-                    damageType = DamageType.slight_damage_forward;
-                    break;
-                case 1:
-                    damageType = DamageType.light_damage_forward;
-                    break;
-                case 2:
-                    damageType = DamageType.heavy_damage_forward;
-                    break;
-                case 3:
-                    damageType = DamageType.supper_damage_forward;
-                    break;
-                case 4:
-                    damageType = DamageType.stable_damage;
-                    break;
-                case 5:
-                    damageType = DamageType.draw;
-                    break;
-                case 6:
-                    damageType = DamageType.explosion;
-                    break;
-                case 7:
-                    damageType = DamageType.push_to_mid;
-                    break;
-                case 8:
-                    damageType = DamageType.high;
-                    break;
-                case 9:
-                    damageType = DamageType.push_to_mid_slight;
-                    break;
-                case 10:
-                    damageType = DamageType.same_height_to_mid;
-                    break;
-                case 11:
-                    damageType = DamageType.time_pause;
-                    break;
-                case 12:
-                    damageType = DamageType.sekka;
-                    break;
-                default:
-                    damageType = DamageType.light_damage_forward;
-                    break;
-            }
+            var damageType = (DamageType)num;
             return damageType;
         }
         

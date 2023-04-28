@@ -99625,7 +99625,7 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: -1
+    intParameter: 15
     messageOptions: 0
   - time: 0.43333334
     functionName: ClearMarkerManagers
@@ -99639,7 +99639,7 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 1
+    intParameter: 9
     messageOptions: 0
   - time: 0.71666664
     functionName: ClearMarkerManagers

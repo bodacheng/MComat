@@ -18,7 +18,8 @@
         time_pause = 11,
         sekka = 12,
         stable_damage_forward = 13,
-        stable_draw = 14
+        stable_draw = 14,
+        pull_slight = 15
     }
     
     public enum WeaponMode
