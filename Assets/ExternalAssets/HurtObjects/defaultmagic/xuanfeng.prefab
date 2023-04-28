@@ -69,7 +69,7 @@ MonoBehaviour:
   element: 4
   muzzle: 
   hitEffect: 
-  ExplosionEffect: 
+  ExplosionEffect: xuanfeng_dissolve
   ContinuousDamage: 1
   ContinuousDamageInterval: 0.2
 --- !u!114 &114691658621571252
@@ -86,8 +86,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 0}
   TrackControl: {fileID: 0}
-  DestructionDelay: 5
-  stop_emission_delay: 4
+  DestructionDelay: 6
+  stop_emission_delay: 5
   to_be_faded_renderers: []
   Attachments: []
   Counter: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb83fdad46fda4137a42516f12609e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _TrackMode: 2
+  _TrackMode: 1
   xAnimationCurve:
     serializedVersion: 2
     m_Curve: []
@@ -123,8 +123,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 2.573434
-      value: 4.98997
+      time: 2
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
