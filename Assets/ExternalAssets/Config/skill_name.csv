@@ -34,7 +34,7 @@ RECORD_ID,EN_NAME,JP_NAME,CN_NAME,EN_INTRO,JP_INTRO,CN_INTRO
 162,Stardust Splash,星屑飛沫,星尘溅射,,,
 166,Divine Demon Fire,鬼神火,鬼神烧,,,
 167,Flying Kick,フライングキック,飞踢,,,
-169,Triple Energy Wave,三方向エネルギー波,三向能量波,,,
+169,Triple Energy Wave,三方向エネルギー波,三向平行波,,,
 171,S Curse,Sカース,S魔咒,,,以S轨道向前飞行的能量球
 172,Energy Bomb,エネルギーボム,能量炸弹,,,
 175,Arcane Explosion,アーケインエクスプロージョン,奥术爆破,,,向敌人脚下位置施展咒术，1秒后发生爆破
@@ -44,3 +44,10 @@ RECORD_ID,EN_NAME,JP_NAME,CN_NAME,EN_INTRO,JP_INTRO,CN_INTRO
 182,Defense,防御,防御,,,如果被敌人击中，则可瞬间反击
 183,Thunder Punch,雷拳,闪电拳,,,
 184,Counter Break Fist,反撃破壊拳,反击破坏拳,,,在释放后的一段时间能够抵抗敌人的攻击，随即施展附带超能力的拳击
+143,,,元素冲击,,,
+170,,,三向光波,,,
+140,,,超能龙卷风,,,
+127,,,超速反击,,,
+145,,,天降螺旋脚,,,
+17,,,刀刃,,,
+59,,,地震山摇,,,
