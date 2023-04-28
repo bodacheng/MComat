@@ -147,3 +147,6 @@ PurchaseFail,Purchase failed,購入失敗,购买失败
 ,,,
 LoadingBattle,Generating battlefield,戦場生成中,战场生成中
 LoadingBattleAboutToEnd,The battle is about to begin,戦いがもうすぐ始まる,战斗即将开始
+,,,
+DownloadingAsset,Downloading resources,リソースをダウンロード中です,正在下载资源
+NeedToUpdate,"New version detected, please update the program.",新しいバージョンが検出されました。プログラムをアップデートしてください。,监测到新版本，请更新程序

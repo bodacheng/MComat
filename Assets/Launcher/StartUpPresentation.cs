@@ -10,6 +10,28 @@ public class StartUpPresentation : MonoBehaviour
     [SerializeField] bool frontSceneFight;
     [SerializeField] AudioSource audioSource;
     
+    void OpenAppStoreLink()
+    {
+        string storeLink = "";
+        if (Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            storeLink = "https://apps.apple.com/app/idYOUR_APP_ID";
+        }
+        else if (Application.platform == RuntimePlatform.Android)
+        {
+            storeLink = "https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME";
+        }
+
+        if (!string.IsNullOrEmpty(storeLink))
+        {
+            Application.OpenURL(storeLink);
+        }
+        else
+        {
+            Debug.LogError("Unable to open App Store link.");
+        }
+    }
+    
     void Start()
     {
         //Screen.SetResolution(1920, 1080, true);
@@ -22,6 +44,15 @@ public class StartUpPresentation : MonoBehaviour
     
     async UniTask OnStart()
     {
+        bool needToUpdate = await AddressablesLogic.VersionConfirm();
+        if (needToUpdate)
+        {
+            PopupLayer.ArrangeWarnWindow(
+                OpenAppStoreLink,
+                Translate.Get("NeedToUpdate"));
+            return;
+        }
+        
         var bytes = await AddressablesLogic.GetWholeDownLoadSize(
             () =>
             {

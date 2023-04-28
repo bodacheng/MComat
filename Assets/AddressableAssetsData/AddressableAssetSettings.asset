@@ -55,10 +55,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bd7d61d6c13c74492a27bf7d63f0aa6d, type: 2}
   - {fileID: 11400000, guid: dd076f9729c324d72af36d69ca39375c, type: 2}
   - {fileID: 11400000, guid: 30004e7e366ad4ca38bf13921238d8ce, type: 2}
-  - {fileID: 11400000, guid: ba5adffc70f3544b5b6c780931838e3b, type: 2}
   - {fileID: 11400000, guid: 7b154afc3c8fc423ca194cc2f124f6f9, type: 2}
   - {fileID: 11400000, guid: d62213ee1321e3547be20dd1c3886e0b, type: 2}
   - {fileID: 11400000, guid: 9794fac7ffdbe4db7aa3edd16e8c51b8, type: 2}
+  - {fileID: 11400000, guid: ba5adffc70f3544b5b6c780931838e3b, type: 2}
+  - {fileID: 11400000, guid: 52ac939f0ebd544bbaf6a42c5c7c5cec, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -144,6 +145,7 @@ MonoBehaviour:
     - resource
     - unit_image
     - music
+    - app_version
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 7ed3c4f91e15949209e5cda4294e805b, type: 2}

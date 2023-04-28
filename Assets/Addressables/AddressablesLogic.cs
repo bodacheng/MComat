@@ -6,11 +6,43 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
+using Newtonsoft.Json.Linq;
 
 public static class AddressablesLogic
 {
     private static readonly IDictionary<string, long> Sizes = new Dictionary<string, long>();
 
+    public static async UniTask<bool> VersionConfirm() // false : need to update
+    {
+        await DownLoadMission("app_version", (x)=>{});
+        AsyncOperationHandle<TextAsset> handle = Addressables.LoadAssetAsync<TextAsset>("app_version");
+        while (!handle.IsDone)
+        {
+            await UniTask.DelayFrame(0);
+        }
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            TextAsset appVersionJson = handle.Result;
+            ParseVersion(appVersionJson.text);
+        }
+        
+        void ParseVersion(string jsonText)
+        {
+            JObject jsonNode = JObject.Parse(jsonText);
+            string serverVersion = jsonNode["version"].ToString();
+            CompareVersions(serverVersion);
+        }
+
+        bool needToUpdate = false;
+        void CompareVersions(string serverVersion)
+        {
+            string currentVersion = Application.version;
+            needToUpdate = currentVersion != serverVersion;
+        }
+        Addressables.Release(handle);
+        return needToUpdate;
+    }
+    
     public static async UniTask Essentials()
     {
         await HurtObjectManager.CheckExistedKey();
@@ -52,7 +84,7 @@ public static class AddressablesLogic
                 {
                     downloadedBytes[label] = handle.GetDownloadStatus().DownloadedBytes;
                 }
-                progressUIRefresh("Downloading game asset");
+                progressUIRefresh(Translate.Get("DownloadingAsset"));
                 await UniTask.DelayFrame(0);
             }
             Addressables.Release(handle);
