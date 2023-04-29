@@ -42,7 +42,7 @@ public class AnimationResourceLoader
             return;
         }
         
-        var result = await AddressablesLogic.LoadT<AnimationClip>("Animation/"+ type+"/skill/"+ key +".anim");
+        var result = await AddressablesLogic.LoadT<AnimationClip>(type+"/skill/"+ key +".anim");
         if (result != null)
         {
             DicAdd<string, AnimationClip>.Add(AnimationClipDic, clipKey, result);

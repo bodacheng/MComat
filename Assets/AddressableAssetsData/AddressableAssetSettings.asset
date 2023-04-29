@@ -42,6 +42,7 @@ MonoBehaviour:
   m_overridePlayerVersion: v2
   m_GroupAssets:
   - {fileID: 11400000, guid: 20eef0358be72403ca33daddeac76145, type: 2}
+  - {fileID: 11400000, guid: 52ac939f0ebd544bbaf6a42c5c7c5cec, type: 2}
   - {fileID: 11400000, guid: f59a3750178bf4db295798b6b11144c0, type: 2}
   - {fileID: 11400000, guid: 8ebbfed416f964995878b3c6250dc139, type: 2}
   - {fileID: 11400000, guid: bc1da1cc9abe140ba888edf0b05b8b9f, type: 2}
@@ -59,7 +60,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d62213ee1321e3547be20dd1c3886e0b, type: 2}
   - {fileID: 11400000, guid: 9794fac7ffdbe4db7aa3edd16e8c51b8, type: 2}
   - {fileID: 11400000, guid: ba5adffc70f3544b5b6c780931838e3b, type: 2}
-  - {fileID: 11400000, guid: 52ac939f0ebd544bbaf6a42c5c7c5cec, type: 2}
+  - {fileID: 11400000, guid: d436bb1e2211446af9e56651dbff5829, type: 2}
+  - {fileID: 11400000, guid: faf656e66aa704cb18c587e755e63005, type: 2}
+  - {fileID: 11400000, guid: f8e757b7f771a459880cc52e2bec50b4, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -146,6 +149,10 @@ MonoBehaviour:
     - unit_image
     - music
     - app_version
+    - gacha_effect
+    - slot_effect
+    - layer_effect
+    - unit_bg
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 7ed3c4f91e15949209e5cda4294e805b, type: 2}

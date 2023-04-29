@@ -10,34 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Animation
+  m_Name: SkillAnim
   m_EditorClassIdentifier: 
-  m_GroupName: Animation
+  m_GroupName: SkillAnim
   m_Data:
     m_SerializedData: []
   m_GUID: 0585100253e4349a6a5d57cdf17ea8e4
   m_SerializeEntries:
-  - m_GUID: fe18baae7ba7848ff9b2e5eb922f4614
-    m_Address: Animation/human/BasicPack
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - anim
-    - basic_anim
   - m_GUID: e56f84544fec544048d0cea7986efd29
-    m_Address: Animation/human/skill
+    m_Address: human/skill
     m_ReadOnly: 0
     m_SerializedLabels:
     - skill_anim
-  - m_GUID: 816994435414445a6a750007d6f37276
-    m_Address: Animation/human/basic_hurts
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - hurt_anim
-  - m_GUID: 6ac2ea0a5dc5a43af98c78da5db37388
-    m_Address: Animation/human/basic_knockoffs
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - knock_anim
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

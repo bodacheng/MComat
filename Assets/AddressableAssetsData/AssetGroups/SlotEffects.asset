@@ -21,22 +21,22 @@ MonoBehaviour:
     m_Address: SlotEffects/ex2
     m_ReadOnly: 0
     m_SerializedLabels:
-    - effect
+    - slot_effect
   - m_GUID: b865ba9c039810d4eaac76ecea00f777
     m_Address: SlotEffects/normal
     m_ReadOnly: 0
     m_SerializedLabels:
-    - effect
+    - slot_effect
   - m_GUID: 9474b6c41563310429b735a9c0cceb49
     m_Address: SlotEffects/ex1
     m_ReadOnly: 0
     m_SerializedLabels:
-    - effect
+    - slot_effect
   - m_GUID: 10c46ec9beba6bf47bd84e51232744ae
     m_Address: SlotEffects/ex3
     m_ReadOnly: 0
     m_SerializedLabels:
-    - effect
+    - slot_effect
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

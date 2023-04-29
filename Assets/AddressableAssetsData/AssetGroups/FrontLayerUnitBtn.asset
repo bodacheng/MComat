@@ -21,32 +21,32 @@ MonoBehaviour:
     m_Address: FrontLayerUnitBtn/stoneEffect.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - btn_effect
+    - layer_effect
   - m_GUID: aa8e5a58f26264ebaa00d5549cba904b
     m_Address: FrontLayerUnitBtn/stoneEffect1.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - btn_effect
+    - layer_effect
   - m_GUID: afa8dc06b0aec4329a75d78d963d4d8c
     m_Address: FrontLayerUnitBtn/stoneEffect2.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - btn_effect
+    - layer_effect
   - m_GUID: bee1ea1a4874a4484992801dc420ec1c
     m_Address: FrontLayerUnitBtn/stoneEffect3.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - btn_effect
+    - layer_effect
   - m_GUID: fc4b8dfcc36c94b00807bed5e0239d7e
     m_Address: FrontLayerUnitBtn/stoneEffect4.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - btn_effect
+    - layer_effect
   - m_GUID: ef1f17870bd7646ffb792b8c63ad97dc
     m_Address: FrontLayerArcadeBtn/runShadow.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - btn_effect
+    - layer_effect
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

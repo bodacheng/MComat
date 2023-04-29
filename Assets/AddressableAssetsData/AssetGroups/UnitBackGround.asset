@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Background
+  m_Name: UnitBackGround
   m_EditorClassIdentifier: 
-  m_GroupName: Background
+  m_GroupName: UnitBackGround
   m_Data:
     m_SerializedData: []
   m_GUID: 2185b192fc0364d0385d4e61d7cef4d9
@@ -21,37 +21,37 @@ MonoBehaviour:
     m_Address: unit_bg/3
     m_ReadOnly: 0
     m_SerializedLabels:
-    - unit_image
+    - unit_bg
   - m_GUID: 3f6a27772592c445c92fefb19ccf9b20
     m_Address: unit_bg/1
     m_ReadOnly: 0
     m_SerializedLabels:
-    - unit_image
+    - unit_bg
   - m_GUID: 6154bb773a2a346b68dad15b74f695e0
     m_Address: unit_bg/5
     m_ReadOnly: 0
     m_SerializedLabels:
-    - unit_image
+    - unit_bg
   - m_GUID: e353500b3ef164c71b8f12a0e74971f8
     m_Address: unit_bg/2
     m_ReadOnly: 0
     m_SerializedLabels:
-    - unit_image
+    - unit_bg
   - m_GUID: e9ec816c0b84344ff8b9b4d8f8b521c9
     m_Address: unit_bg/7
     m_ReadOnly: 0
     m_SerializedLabels:
-    - unit_image
+    - unit_bg
   - m_GUID: 3afe8c74aa1e54941acc012b9b2d7561
     m_Address: unit_bg/4
     m_ReadOnly: 0
     m_SerializedLabels:
-    - unit_image
+    - unit_bg
   - m_GUID: aa1831e99bf864d318bbed65609b2695
     m_Address: unit_bg/6
     m_ReadOnly: 0
     m_SerializedLabels:
-    - unit_image
+    - unit_bg
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
