@@ -29,9 +29,7 @@ public class Starter : MonoBehaviour
     [SerializeField] CommonSetting commonSetting;
     [SerializeField] DefaultIconSetting defaultIconSetting;
     [SerializeField] DebugLogManager inGameDebugConsole;
-    [SerializeField] List<string> downLoadLabels;
-    public List<string> DownLoadLabels => downLoadLabels;
-
+    
     public static bool ConfigInitialised = false;
 
     void Awake()
@@ -41,6 +39,8 @@ public class Starter : MonoBehaviour
             Initialise().Forget();
         }
     }
+
+    public List<string> DownLoadLabels => commonSetting.DownLoadLabels;
 
     public async UniTask Initialise()
     {

@@ -41,6 +41,11 @@ public class CommonSetting : ScriptableObject
     [SerializeField] private string breakFreeEffectCode = "breakFree";
     [SerializeField] private string memberShiftEffectCode = "memberShift";
     
+    [Tooltip("downLoad labels")] 
+    [SerializeField] List<string> downLoadLabels;
+
+    public List<string> DownLoadLabels => downLoadLabels;
+    
     public static bool DevMode;
     public static int MaxStoneCount;
     public static string UnitConfigFile;

@@ -31,3 +31,18 @@ MonoBehaviour:
   wallCrackEffectCode: wallCrack
   breakFreeEffectCode: breakFree
   memberShiftEffectCode: memberShift
+  downLoadLabels:
+  - config
+  - quest
+  - unit
+  - weapon
+  - effect
+  - basic_anim
+  - hurt_anim
+  - knock_anim
+  - skill_anim
+  - skill_icon
+  - unit_icon
+  - btn_effect
+  - unit_image
+  - unit_bg
