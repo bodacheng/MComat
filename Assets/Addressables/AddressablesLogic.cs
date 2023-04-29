@@ -129,7 +129,8 @@ public static class AddressablesLogic
         //unitInstructionLayer.LoadUnitImage();
         foreach (var label in downLoadLabel)
         {
-            downloadedBytes.Add(label, 0);
+            if (!downloadedBytes.ContainsKey(label))
+                downloadedBytes.Add(label, 0);
         }
         
         var downLoadTasks = new List<UniTask>();
