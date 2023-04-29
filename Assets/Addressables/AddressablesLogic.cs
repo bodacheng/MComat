@@ -75,20 +75,17 @@ public static class AddressablesLogic
     
     static async UniTask DownLoadMission(string label, Action<string> progressUIRefresh)
     {
-        if (Sizes.ContainsKey(label))
+        var handle = Addressables.DownloadDependenciesAsync(label);
+        while (!handle.IsDone)
         {
-            var handle = Addressables.DownloadDependenciesAsync(label);
-            while (!handle.IsDone)
+            if (downloadedBytes.ContainsKey(label))
             {
-                if (downloadedBytes.ContainsKey(label))
-                {
-                    downloadedBytes[label] = handle.GetDownloadStatus().DownloadedBytes;
-                }
-                progressUIRefresh(Translate.Get("DownloadingAsset"));
-                await UniTask.DelayFrame(0);
+                downloadedBytes[label] = handle.GetDownloadStatus().DownloadedBytes;
             }
-            Addressables.Release(handle);
+            progressUIRefresh(Translate.Get("DownloadingAsset"));
+            await UniTask.DelayFrame(0);
         }
+        Addressables.Release(handle);
     }
     
     public static async UniTask<long> GetWholeDownLoadSize(Action exception, List<string> downLoadLabel)
@@ -138,7 +135,8 @@ public static class AddressablesLogic
         var downLoadTasks = new List<UniTask>();
         foreach (var label in downLoadLabel)
         {
-            downLoadTasks.Add(DownLoadMission(label, progressUIRefresh));
+            if (Sizes.ContainsKey(label))
+                downLoadTasks.Add(DownLoadMission(label, progressUIRefresh));
         }
         await UniTask.WhenAll(downLoadTasks);
         complete.Invoke();
