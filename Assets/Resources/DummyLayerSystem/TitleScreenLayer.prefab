@@ -165,7 +165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4193525625303527116
 RectTransform:
   m_ObjectHideFlags: 0
@@ -179,13 +179,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1786442450832376254}
-  m_Father: {fileID: 2765050249069523412}
+  m_Father: {fileID: 4749662998632384038}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -520, y: 80}
-  m_SizeDelta: {x: 160, y: 160}
+  m_AnchoredPosition: {x: -554, y: 110}
+  m_SizeDelta: {x: 160, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &1370426389420053985
 CanvasRenderer:
@@ -215,8 +215,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fd87723c759e4834d95466fa7d2d2d5d, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 187eac8a029844c4399ac8a503eb7879, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2072,6 +2072,7 @@ RectTransform:
   - {fileID: 2765050249069523412}
   - {fileID: 4821403674555003584}
   - {fileID: 8262668342976084231}
+  - {fileID: 4193525625303527116}
   - {fileID: 5020884453776482102}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -2744,7 +2745,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -98}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4674540085724619785
@@ -2820,7 +2821,6 @@ RectTransform:
   - {fileID: 4749662998383573919}
   - {fileID: 4749662999949542142}
   - {fileID: 4568152193663266287}
-  - {fileID: 4193525625303527116}
   m_Father: {fileID: 4749662998632384038}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3366,7 +3366,7 @@ PrefabInstance:
     - target: {fileID: 4432170427925743813, guid: 6719fbcd8a2624baaaed811fff902c54,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4432170427925743813, guid: 6719fbcd8a2624baaaed811fff902c54,
         type: 3}

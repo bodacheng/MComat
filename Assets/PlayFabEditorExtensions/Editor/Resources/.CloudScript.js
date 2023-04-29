@@ -101,9 +101,16 @@ function GrantItemToCurrentUser(itemIds, CatalogVersion)
         "PlayFabId" : currentPlayerId,
         "ItemIds" : itemIds
     };
-    var GrantItemsToUserResult = server.GrantItemsToUser(GrantItemsToUserRequest);
-    //log.info(GrantItemsToUserResult);
-    return GrantItemsToUserResult.ItemGrantResults;
+    
+    if (CatalogVersion == "unit") {
+        var GrantUnitsToUserResult = server.GrantItemIfNotOwned(GrantItemsToUserRequest);
+        //log.info(GrantItemsToUserResult);
+        return GrantUnitsToUserResult.ItemGrantResults;
+    }else{
+        var GrantItemsToUserResult = server.GrantItemsToUser(GrantItemsToUserRequest);
+        //log.info(GrantItemsToUserResult);
+        return GrantItemsToUserResult.ItemGrantResults;
+    }
 }
 
 function GrantItemToCurrentUserAndSetCustomData(itemIds, CatalogVersion, customData)
