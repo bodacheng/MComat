@@ -26,7 +26,7 @@ MonoBehaviour:
       b2: 55
       b3: 159
       c1: 89
-      c2: 116
+      c2: 80
       c3: 99
   team1HpRate: 1
   team2HpRate: 1
@@ -37,3 +37,4 @@ MonoBehaviour:
   team1AIMode: 0
   team2AIMode: 0
   dumbAIDecisionDelay: 0
+  stageRefLevel: 1

@@ -166,4 +166,5 @@ MonoBehaviour:
   resistanceMax: 10
   eXMax: 90
   hurtObjectPreLoadCount: 5
+  energyResolveAfterExtendBoundary: 5
   shadowMaterial: {fileID: 2100000, guid: ea7a57501503cd74f87a10d974771222, type: 2}

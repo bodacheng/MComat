@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using PlayFab.ServerModels;
+using UnityEngine;
 using ExecuteCloudScriptResult = PlayFab.ClientModels.ExecuteCloudScriptResult;
 
 public partial class CloudScript
@@ -32,12 +33,20 @@ public partial class CloudScript
                     if (jsonResult.ContainsKey("award_unit"))
                     {
                         var award_unit = jsonResult["award_unit"];
-                        var unitAward = JsonConvert.DeserializeObject<List<GrantedItemInstance>>(award_unit.ToString());
-                        foreach (var item in unitAward)
+                        try
                         {
-                            var unitConfig = Units.GetUnitConfig(item.ItemId);
-                            PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get(unitConfig.REAL_NAME) + "\n"
-                                                                 + Translate.Get("GotNewUnit"), item.ItemId);
+                            var unitAward = JsonConvert.DeserializeObject<List<GrantedItemInstance>>(award_unit.ToString());
+                            foreach (var item in unitAward)
+                            {
+                                var unitConfig = Units.GetUnitConfig(item.ItemId);
+                                PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get(unitConfig.REAL_NAME) + "\n"
+                                    + Translate.Get("GotNewUnit"), item.ItemId);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            // 能获得角色报酬，但已经有了这个角色的情况下，返回的award_unit的值不能被Deserialize。这个try catch是个简化处理
+                            Debug.Log(e);
                         }
                     }
                 }

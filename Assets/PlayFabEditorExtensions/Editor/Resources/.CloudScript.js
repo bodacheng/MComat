@@ -62,7 +62,7 @@ handlers.test = function (args, context) {
     };
 };
 
-handlers.GrantItemIfNotOwned = function (args, context) {
+handlers.GrantContainerIfNotOwnedFromConsole = function (args, context) {
     var playFabItemCategory = args.itemCategory;
     var playFabItemId = args.checkitemId;
     var playFabContainerItemId = args.giveContainerItemId;
@@ -89,10 +89,46 @@ handlers.GrantItemIfNotOwned = function (args, context) {
     }
     // 如果玩家没有这个物品，发放物品
     if (!playerHasItem) {
-        GrantItemToCurrentUser([playFabContainerItemId] , playFabItemCategory);
+        var GrantItemsToUserRequest = {
+            "CatalogVersion": playFabItemCategory,
+            "PlayFabId" : currentPlayerId,
+            "ItemIds" : [playFabContainerItemId]
+        };
+        server.GrantItemsToUser(GrantItemsToUserRequest);
     }
     return { itemGranted: !playerHasItem };
 };
+
+function GrantItemIfNotOwnedByUser(itemId, playFabItemCategory) {
+    
+    var checkRequest = {
+        "PlayFabId": currentPlayerId
+    };
+
+    // 获取玩家的物品列表
+    var inventoryResult = server.GetUserInventory(checkRequest);
+
+    // 检查玩家是否已经拥有了这个物品
+    var playerHasItem = false;
+    for (var i = 0; i < inventoryResult.Inventory.length; i++) {
+        if (inventoryResult.Inventory[i].ItemId == itemId && inventoryResult.Inventory[i].CatalogVersion == playFabItemCategory)
+        {
+            playerHasItem = true;
+            break;
+        }
+    }
+    // 如果玩家没有这个物品，发放物品
+    if (!playerHasItem) {
+        var GrantItemsToUserRequest = {
+            "CatalogVersion": playFabItemCategory,
+            "PlayFabId" : currentPlayerId,
+            "ItemIds" : [itemId]
+        };
+        var GrantItemsToUserResult = server.GrantItemsToUser(GrantItemsToUserRequest);
+        return GrantItemsToUserResult.ItemGrantResults;
+    }
+    return { };
+}
 
 function GrantItemToCurrentUser(itemIds, CatalogVersion)
 {
@@ -102,15 +138,8 @@ function GrantItemToCurrentUser(itemIds, CatalogVersion)
         "ItemIds" : itemIds
     };
     
-    if (CatalogVersion == "unit") {
-        var GrantUnitsToUserResult = server.GrantItemIfNotOwned(GrantItemsToUserRequest);
-        //log.info(GrantItemsToUserResult);
-        return GrantUnitsToUserResult.ItemGrantResults;
-    }else{
-        var GrantItemsToUserResult = server.GrantItemsToUser(GrantItemsToUserRequest);
-        //log.info(GrantItemsToUserResult);
-        return GrantItemsToUserResult.ItemGrantResults;
-    }
+    var GrantItemsToUserResult = server.GrantItemsToUser(GrantItemsToUserRequest);
+    return GrantItemsToUserResult.ItemGrantResults;
 }
 
 function GrantItemToCurrentUserAndSetCustomData(itemIds, CatalogVersion, customData)
@@ -138,7 +167,6 @@ function GrantItemToCurrentUserAndSetCustomData(itemIds, CatalogVersion, customD
     //log.info(GrantItemsToUserResult);
     return GrantItemsToUserResult.ItemGrantResults;
 }
-
 
 handlers.advertisementReward = function (args, context) {
     
@@ -253,7 +281,6 @@ handlers.givePassiveSkill= function (args, context) {
 }
 
 
-
 handlers.completedLevel = function (args, context) {
     
     var newLevelCompleted = Number(args.stage);
@@ -269,32 +296,32 @@ handlers.completedLevel = function (args, context) {
         }
     );
 
-    var unit_award = []
+    var unit_award = -1;
     switch (newLevelCompleted) {
         case 1:
-            unit_award = ["1"];
+            unit_award = "1";
             break;
         case 5:
-            unit_award = ["2"];
+            unit_award = "2";
             break;
         case 20:
-            unit_award = ["4"];
+            unit_award = "4";
             break;
         case 35:
-            unit_award = ["7"];
+            unit_award = "7";
             break;
         case 50:
-            unit_award = ["6"];
+            unit_award = "6";
             break;
         case 100:
-            unit_award = ["5"];
+            unit_award = "5";
             break;
         default:
             break;
     }
     
-    if (unit_award.length > 0) {
-        var award_unit = GrantItemToCurrentUser(unit_award, "unit");
+    if (unit_award != -1) {
+        var award_unit = GrantItemIfNotOwnedByUser(unit_award, "unit");
         return { award_unit };
     }else{
         return null;
