@@ -72,26 +72,7 @@ public partial class PlayFabReadClient
             }
         );
     }
-
-    public static void GetBasicReadOnlyData(Action<bool> finished)
-    {
-        PlayFabClientAPI.GetUserReadOnlyData
-        (
-            new GetUserDataRequest()
-            {
-                PlayFabId = PlayerAccountInfo.Me.PlayFabId,
-                Keys = new List<string> { "arenaCountToday" }
-            },
-            (obj) => {
-                finished.Invoke(true);
-            },
-            errorCallback => {
-                finished.Invoke(false);
-                ErrorReport(errorCallback);
-            }
-        );
-    }
-
+    
     public static void UpdateUserTitleDisplayName(string displayName, Action<UpdateUserTitleDisplayNameResult> finished, Action<PlayFabError> error)
     {
         PlayFabClientAPI.UpdateUserTitleDisplayName(

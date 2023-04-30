@@ -62,6 +62,15 @@ handlers.test = function (args, context) {
     };
 };
 
+handlers.BeginnerBundleBought = function (args, context) {
+    var updateUserDataResult = server.UpdateUserReadOnlyData({
+        PlayFabId: currentPlayerId,
+        Data: {
+            "BeginnerBundleBought": true
+        }
+    });
+}
+
 handlers.GrantContainerIfNotOwnedFromConsole = function (args, context) {
     var playFabItemCategory = args.itemCategory;
     var playFabItemId = args.checkitemId;

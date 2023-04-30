@@ -7,11 +7,6 @@ using UnityEngine;
 
 public class FrontPage : MSceneProcess
 {
-    void UserReadOnlyDataLoadFinished(bool value)
-    {
-        missionWatcher.Finish("userReadOnlyDataLoadLoaded", value);
-    }
-    
     void StatisticsLoadFinished(bool value)
     {
         missionWatcher.Finish("statisticsFinished", value);
@@ -129,7 +124,6 @@ public class FrontPage : MSceneProcess
     public override void ProcessEnter()
     {
         ProgressLayer.Loading(">");
-        PlayFabReadClient.GetBasicReadOnlyData(UserReadOnlyDataLoadFinished);
         PlayFabReadClient.GetStatistics(StatisticsLoadFinished);
         
         //AccountCharsSet.LoadTutorial();
@@ -141,8 +135,7 @@ public class FrontPage : MSceneProcess
         missionWatcher = new MissionWatcher(
             new List<string>
             {
-                "mailCatalogFinished","unitCatalogFinished","itemsLoadFinished", "statisticsFinished", 
-                "userReadOnlyDataLoadLoaded", "arcadeTFinished"
+                "mailCatalogFinished","unitCatalogFinished","itemsLoadFinished", "statisticsFinished", "arcadeTFinished"
             },
             () =>
             {

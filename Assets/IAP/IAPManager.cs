@@ -2,6 +2,8 @@ using PlayFab;
 using PlayFab.ClientModels;
 using System;
 using System.Collections.Generic;
+using DummyLayerSystem;
+using mainMenu;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
@@ -19,7 +21,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         RefreshIAPItems();
     }
     
-    private void RefreshIAPItems() {
+    void RefreshIAPItems() {
         PlayFabClientAPI.GetCatalogItems(new GetCatalogItemsRequest
             {
                 CatalogVersion = ProductCatalogVersion
@@ -147,7 +149,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         PlayFabClientAPI.ValidateIOSReceipt(
             new ValidateIOSReceiptRequest
             {
-                CatalogVersion = ProductCatalogVersion,
+                CatalogVersion = e.purchasedProduct.definition.id != "BeginnerBundle" ? ProductCatalogVersion : "stone",
                 CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
                 PurchasePrice = (int)(e.purchasedProduct.metadata.localizedPrice * 100),//(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
                 ReceiptData = payload
@@ -155,6 +157,17 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 ProgressLayer.Close();
                 PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseSuccess"));
                 _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
+                if (e.purchasedProduct.definition.id == "BeginnerBundle")
+                {
+                    CloudScript.Common("BeginnerBundleBought", 
+                        (x) =>
+                        {
+                            var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
+                            if (shopTopLayer != null)
+                                shopTopLayer.ShowBeginnerBundle(false);
+                        }
+                    );
+                }
                 PlayFabReadClient.LoadItems(null);
             },
             error => {

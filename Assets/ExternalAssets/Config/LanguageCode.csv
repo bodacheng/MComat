@@ -150,3 +150,5 @@ LoadingBattleAboutToEnd,The battle is about to begin,戦いがもうすぐ始ま
 ,,,
 DownloadingAsset,Downloading resources,リソースをダウンロード中です,正在下载资源
 NeedToUpdate,"New version detected, please update the program.",新しいバージョンが検出されました。プログラムをアップデートしてください。,监测到新版本，请更新程序
+,,,
+BeginnerBundle,BeginnerBundle,BeginnerBundle,新手大礼包
