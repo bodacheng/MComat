@@ -33,6 +33,7 @@ MonoBehaviour:
   memberShiftEffectCode: memberShift
   downLoadLabels:
   - config
+  - battle_ground
   - quest
   - unit
   - weapon
@@ -43,6 +44,10 @@ MonoBehaviour:
   - skill_anim
   - skill_icon
   - unit_icon
+  - layer_effect
+  - gacha_effect
+  - slot_effect
   - btn_effect
   - unit_image
   - unit_bg
+  - music
