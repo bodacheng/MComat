@@ -59,6 +59,9 @@ public class IAPManager : MonoBehaviour, IStoreListener {
             builder.AddProduct(item.ItemId, ProductType.Consumable);
         }
         
+        // 新手礼包
+        builder.AddProduct("BeginnerBundle", ProductType.Consumable);
+        
         // Trigger IAP service initialization
         UnityPurchasing.Initialize(this, builder);
     }
