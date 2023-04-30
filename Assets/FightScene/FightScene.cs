@@ -33,15 +33,7 @@ namespace FightScene
                 watchBtn.transform.SetParent(btnTarget);
                 watchBtn.transform.localPosition = Vector3.zero;
                 
-                string awardText = String.Empty;
-                if (extraAdReward == 10)
-                {
-                    awardText = "x2";
-                }
-                else if (extraAdReward == 20)
-                {
-                    awardText = "x3";
-                }
+                string awardText = "x2"; // 简化处理 
                 watchBtn.Text = awardText;
                 watchBtn.SetWatchedAdExtraProcess(
                     () =>

@@ -70,7 +70,7 @@ namespace FightScene
                                         var rewardGdInt = Convert.ToInt32(rewardGd);
                                         var rewardDmInt = Convert.ToInt32(rewardDm);
                                         arenaFightOver.ShowAward(rewardDmInt, rewardGdInt, 
-                                            levelInt % 5 == 0 ? PlayFabSetting._adFightRewardDM * 2 : PlayFabSetting._adFightRewardDM);
+                                            levelInt % 5 == 0 ? PlayFabSetting._adBossFightRewardDM : PlayFabSetting._adNormalFightRewardDM);
                                     }
                                     
                                     if (FightScene.Fight.ID == "1")

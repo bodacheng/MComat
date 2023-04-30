@@ -33,10 +33,10 @@ public class TitleScreenLayer : UILayer
         accountLoginBtn.onClick.AddListener(()=> SwitchTab(2));
         cancelBtn.onClick.AddListener(()=> SwitchTab(1));
         loginBtn.onClick.AddListener(EmailLogin);
-
+        
+        devEnter.gameObject.SetActive(CommonSetting.DevMode);
         if (CommonSetting.DevMode)
         {
-            devEnter.gameObject.SetActive(true);
             devLoginBtn.onClick.AddListener(DevUserLogin);
         }
         

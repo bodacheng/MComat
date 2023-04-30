@@ -15,7 +15,8 @@ public class PlayFabSetting : ScriptableObject
     [SerializeField] string GDGotchaCode;
     [SerializeField] string DMGotchaCode;
     [SerializeField] int adTicketRewardGD;
-    [SerializeField] int adFightRewardDM;//指的是关卡战斗结束后观看广告获取的报酬，关卡号码是5的倍数的情况下是它2倍。
+    [SerializeField] int adNormalFightRewardDM = 5; //指的是普通关卡战斗结束后观看广告获取的报酬
+    [SerializeField] int adBossFightRewardDM = 10;  //指的是BOSS关卡战斗结束后观看广告获取的报酬
     [SerializeField] string arenaPointCode = "arenapoint";
     
     public static string _UnitCatalog;
@@ -29,7 +30,8 @@ public class PlayFabSetting : ScriptableObject
     public static string _GDGotchaCode;
     public static string _DMGotchaCode;
     public static int _adTicketRewardGD;
-    public static int _adFightRewardDM;
+    public static int _adNormalFightRewardDM;
+    public static int _adBossFightRewardDM;
     public static string _arenaPointCode;
 
     public void Initialise()
@@ -45,7 +47,8 @@ public class PlayFabSetting : ScriptableObject
         _GDGotchaCode = GDGotchaCode;
         _DMGotchaCode = DMGotchaCode;
         _adTicketRewardGD = adTicketRewardGD;
-        _adFightRewardDM = adFightRewardDM;
+        _adNormalFightRewardDM = adNormalFightRewardDM;
+        _adBossFightRewardDM = adBossFightRewardDM;
         _arenaPointCode = arenaPointCode;
     }
 
