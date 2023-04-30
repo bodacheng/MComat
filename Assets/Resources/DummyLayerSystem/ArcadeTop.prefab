@@ -364,11 +364,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connector: {fileID: 8765277457727503852}
+  cameraConnectorRightSpace: 1200
+  cameraConnectorVerticalSpace: 150
   container: {fileID: 1908153239558740498}
   jumpToNewStage: {fileID: 287933490346035037}
   normalStagePrefab: {fileID: 3416358147097766526, guid: 8beb627230cfe453fa023b5c8bcd53eb,
     type: 3}
-  bossStagePrefab: {fileID: 3416358147097766526, guid: 0a10d798386294dabbaabdcfc96fe634,
+  bossStagePrefab: {fileID: 3416358147097766526, guid: 967683786cbd7154d8c4a5db05e0dbad,
     type: 3}
   nineForShow: {fileID: 5340505936988530625}
   nextChapter: {fileID: 1205889481844079161}

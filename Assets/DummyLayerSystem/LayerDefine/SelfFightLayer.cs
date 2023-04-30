@@ -34,7 +34,7 @@ namespace mainMenu
 
         [Header("Start")] 
         [SerializeField] FightModeSwitch _fightModeSwitch;
-        [SerializeField] Button fightStartBtn;
+        [SerializeField] FightBeginBtn fightStartBtn;
 
         private readonly MultiDic<Team, int, HeroIcon> _teamButtonDicM = new MultiDic<Team, int, HeroIcon>();
         readonly MultiDic<Team, int, HeroIcon> _teamButtonDicR = new MultiDic<Team, int, HeroIcon>();
@@ -63,7 +63,7 @@ namespace mainMenu
             multiModeBtn.onClick.AddListener(SwitchToMultiRaidMode);
 
             _fightModeSwitch.Setup(0,PlayerPrefs.GetInt("preferAdventureMode",  PlayerPrefs.GetInt("preferAdventureMode", 2)));
-            fightStartBtn.onClick.AddListener(FightStart);
+            fightStartBtn.SetAction(FightStart);
         }
         
         // btn feature
@@ -356,7 +356,7 @@ namespace mainMenu
         void CheckFightLegal()
         {
             ArrangeStageInfo();
-            fightStartBtn.interactable = _stage.FightMembers.CheckStonesLegal(FightEventType.Self);
+            fightStartBtn.Enable(_stage.FightMembers.CheckStonesLegal(FightEventType.Self));
         }
 
         void RemoveSelect(int pos)

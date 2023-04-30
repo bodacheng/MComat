@@ -30,6 +30,31 @@ public class QuestInfoPage : MSceneProcess
                 break;
         }
         _layer.StageMembersInfoShow(FightScene.FightScene.Fight, FightScene.FightScene.Fight.Team1OneWord, FightScene.FightScene.Fight.Team2OneWord);
+
+        bool CanFightCheck()
+        {
+            if (!FightScene.FightScene.Fight.FightMembers.CheckStonesLegal(FightScene.FightScene.Fight.EventType))
+            {
+                return false;
+            }
+            
+            switch (FightScene.FightScene.Fight.EventType)
+            {
+                case FightEventType.Arena:
+                    if (FightScene.FightScene.Fight.FightMembers.HeroSets.GetValues().Count != 3)
+                    {
+                        return false;
+                    }
+                    break;
+                default:
+                    if (FightScene.FightScene.Fight.FightMembers.HeroSets.GetValues().Count == 0)
+                    {
+                        return false;
+                    }
+                    break;
+            }
+            return true;
+        }
         
         void Go()
         {
@@ -82,6 +107,7 @@ public class QuestInfoPage : MSceneProcess
         
         _layer.SetFightMode(FightMode());
         _layer.SetFightBeginFeature(Go);
+        _layer.SetFightBeginEnableRender(CanFightCheck());
         SetLoaded(true);
     }
     

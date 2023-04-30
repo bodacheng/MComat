@@ -10,33 +10,36 @@ public class FightPrepareLayer : UILayer
     [SerializeField] RectTransform enemyTeamShowT;
     [SerializeField] float unitIconSize = 200;
     [SerializeField] Button editTeamButton; // 根据进入战斗模式决定是否显示
-    [SerializeField] Button beginFight;
     [SerializeField] GameObject teamEditIndicator;
-    [SerializeField] FightModeSwitch _fightModeSwitch;
-
+    [SerializeField] FightModeSwitch fightModeSwitch;
+    [SerializeField] FightBeginBtn beginFight;
     [SerializeField] Text team1OneWord;
     [SerializeField] Text team2OneWord;
     
     public void SetFightMode(int fightMode)
     {
-        _fightModeSwitch.Setup(fightMode, PlayerPrefs.GetInt("preferAdventureMode",  PlayerPrefs.GetInt("preferAdventureMode", 2)));
+        fightModeSwitch.Setup(fightMode, PlayerPrefs.GetInt("preferAdventureMode",  PlayerPrefs.GetInt("preferAdventureMode", 2)));
     }
 
     public TeamMode GetSetFightMode()
     {
-        return _fightModeSwitch.TeamMode;
+        return fightModeSwitch.TeamMode;
     }
     
     public void SetFightBeginFeature(Action fightBegin)
     {
-        beginFight.onClick.RemoveAllListeners();
-        beginFight.onClick.AddListener(()=>fightBegin());
+        beginFight.SetAction(fightBegin);
+    }
+    
+    public void SetFightBeginEnableRender(bool canFight)
+    {
+        beginFight.Enable(canFight);
     }
 
     public void SetTeamEditFeature(Action teamEdit)
     {
         editTeamButton.onClick.RemoveAllListeners();
-        editTeamButton.onClick.AddListener(()=>teamEdit());
+        editTeamButton.onClick.AddListener(()=> teamEdit());
     }
     
     public void ForcePressTeamEdit()
