@@ -4907,7 +4907,7 @@ MonoBehaviour:
   effectSpreadOnBody: 1
   element: 4
   muzzle: 
-  hitEffect: dark_boom
+  hitEffect: electric_s_e
   ExplosionEffect: energy_resolve
   ContinuousDamage: 1
   ContinuousDamageInterval: 0.2
