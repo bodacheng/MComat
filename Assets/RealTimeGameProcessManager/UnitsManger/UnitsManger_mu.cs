@@ -61,16 +61,15 @@ namespace FightScene
                         Sensor.AddOrRemoveSharedDeadUnitInfo(center, teamConfig.myTeam, true);
                         Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
                         var disposable = new SerialDisposable();
-                        disposable.Disposable = Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(
-                            (_) =>
+                        disposable.Disposable = Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(async (_) =>
                             {
                                 if (center != null)
                                 {
-                                    EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null, center.geometryCenter.position, Quaternion.identity, null).Forget();
+                                    await EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null, center.geometryCenter.position, Quaternion.identity, null);
                                     center.WholeT.gameObject.SetActive(false);
                                 }
                                 disposable.Dispose();
-                            }).AddTo(this);
+                            }).AddTo(center);
                     }
                 }).AddTo(gameObject);
             }
