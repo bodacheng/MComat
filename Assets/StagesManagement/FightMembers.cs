@@ -126,23 +126,9 @@ public class FightMembers
     public static FightMembers ScreenSaver(TeamMode teamMode)
     {
         var type = "human";
-        var unitIDsAndNames = Units.GetMonsterIDsAndNamesDic(type);
-        var Indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 6);
-        var monsterIds = unitIDsAndNames.Keys.ToList();
-
         var target = new FightMembers();
-        var filterForm = new SkillStonesBox.StoneFilterForm
-        {
-            Type = type,
-            ExType = new int[1] { 0 },
-            Close = false,
-            Near = false,
-            Far = false
-        };
-        
-        var char1 = ArrangeUnitInfo(type, monsterIds[Indexes[0]]);
-        var char2 = ArrangeUnitInfo(type, monsterIds[Indexes[1]]);
-        
+        var char1 = ArrangeUnitInfo(type, "1");
+        var char2 = ArrangeUnitInfo(type, "2");
         switch (teamMode)
         {
             case TeamMode.MultiRaid:
@@ -154,7 +140,6 @@ public class FightMembers
                 target.HeroSets.Set(0, 0, char2);
                 break;
         }
-        
         return target;
     }
     

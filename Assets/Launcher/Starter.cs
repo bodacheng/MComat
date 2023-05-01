@@ -71,7 +71,7 @@ public class Starter : MonoBehaviour
     
     public void EnterFrontScene()
     {
-        var stage = FightInfo.RandomSkillTestStage(TeamMode.Rotation);
+        var stage = FightInfo.ScreenSaverStage(TeamMode.Rotation);
         stage.EventType = FightEventType.Screensaver;
         FightLoad.Go(stage);
     }

@@ -231,6 +231,20 @@ public class FightInfo : ScriptableObject
         return stage;
     }
     
+    public static FightInfo ScreenSaverStage(TeamMode teamMode)
+    {
+        var stage = CreateInstance<FightInfo>();
+        stage.FightMembers = FightMembers.ScreenSaver(teamMode);
+        stage.battleGroundID = 1;
+        stage.fightBGM = 0;
+        stage.Team1Auto = true;
+        stage.Team2Auto = true;
+        stage.team1Mode = teamMode;
+        stage.team2Mode = teamMode;
+        stage.EventType = FightEventType.SkillTest;
+        return stage;
+    }
+    
     public static FightInfo RandomStage()
     {
         var stage = CreateInstance<FightInfo>();
