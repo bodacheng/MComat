@@ -78,17 +78,15 @@ public partial class AnimationManger
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("block_break", animationClip));
                 }
+                // if (animationClip.name == "dash")
+                // {
+                //     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("dash", animationClip));
+                // }
+                // if (animationClip.name == "rushback")
+                // {
+                //     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rushback", animationClip));
+                // }
                 
-                if (animationClip.name == "dash")
-                {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("dash", animationClip));
-                }
-
-                if (animationClip.name == "rushback")
-                {
-                    toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rushback", animationClip));
-                }
-
                 if (animationClip.name == "getup")
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("getup", animationClip));

@@ -167,7 +167,6 @@ namespace Soul
                         Animation_Manger.AnimationTrigger(_dashClipName, true, 0.05f);
                     else
                     {
-                        Debug.Log("here:" + _clipName);
                         Animation_Manger.PlayLayerAnim(null, true, 0f);
                     }
                     _BuffsRunner.RunSubCoroutineOfState(_rushCoroutine);

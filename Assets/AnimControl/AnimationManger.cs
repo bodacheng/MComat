@@ -43,7 +43,6 @@ public partial class AnimationManger
         {
             DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed, 0.1f).SetEase(Ease.InExpo);
         });
-        
     }
 
     public AnimationClip TryAnimationClip(string clip_name)
