@@ -1,6 +1,7 @@
 ﻿using dataAccess;
 using DummyLayerSystem;
 using mainMenu;
+
 public class QuestInfoPage : MSceneProcess
 {
     private FightPrepareLayer _layer;

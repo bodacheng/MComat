@@ -9,14 +9,12 @@ public class ResistanceManager : MonoBehaviour
     
     int temp;
     readonly List<SingleAssignmentDisposable> disposableTasks = new List<SingleAssignmentDisposable>();
-
-    Color ResistColor;
-    
+    Color resistColor;
     SingleAssignmentDisposable ResistColorChange;
     
     void Awake()
     {
-        ColorUtility.TryParseHtmlString("#0046BC00", out ResistColor);
+        ColorUtility.TryParseHtmlString("#0046BC00", out resistColor);
         OpenResistRender();
     }
     
@@ -29,7 +27,7 @@ public class ResistanceManager : MonoBehaviour
                 {
                     if (data_Center._ShaderManager != null)
                     {
-                        data_Center._ShaderManager.RimEffectsUp(ResistColor, 0.2f);
+                        data_Center._ShaderManager.RimEffectsUp(resistColor, 0.2f);
                     }
                 }
                 else
@@ -84,7 +82,7 @@ public class ResistanceManager : MonoBehaviour
                 {
                     data_Center._SkillCancelFlag.turn_on_flag();
                     data_Center.FightDataRef.Resistance.Value += 1;
-                    data_Center._ShaderManager.FlatColor(speedBuff, 0.5f);
+                    data_Center._ShaderManager.RimEffectsUp(speedBuff, 0.5f);
                     data_Center.Animation_Manger.Speed = 2f;
                     EffectsManager.GenerateEffect("speedupbuff", FightGlobalSetting.EffectPathDefine(), data_Center.WholeT.position, data_Center.WholeT.rotation, data_Center.WholeT).Forget();
                 };
@@ -92,7 +90,7 @@ public class ResistanceManager : MonoBehaviour
                 {
                     data_Center.Animation_Manger.Speed = 1f;
                     data_Center.FightDataRef.Resistance.Value = 0;
-                    data_Center._ShaderManager.FlatColor(Color.clear, 0);
+                    data_Center._ShaderManager.RimEffectsClear(0.2f);
                 };
                 
                 CustomCoroutine eventCoroutine3 = new CustomCoroutine(

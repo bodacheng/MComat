@@ -30,7 +30,7 @@ namespace Soul
                 {
                     if (time_counter < 0f)
                     {
-                        Animation_Manger.AnimationTrigger(defend_clip_name, true, 0.1f);
+                        Animation_Manger.AnimationTrigger(defend_clip_name, true, CommonSetting.CharacterAnimDuration);
                     }
                 }
             }
@@ -96,7 +96,7 @@ namespace Soul
             _Weapon_Animation_Events.ClearMarkerManagers();
             Sensor.DetectionStart(-1, true);
             _Animator.SetFloat("speed", 0f);
-            Animation_Manger.AnimationTrigger(defend_clip_name, false, 0.1f);
+            Animation_Manger.AnimationTrigger(defend_clip_name, false, CommonSetting.CharacterAnimDuration);
             _Rigidbody.velocity = Vector3.zero;
             used_block_least_time = FightGlobalSetting.LightBlockLastingTime;
             TimeCounter = used_block_least_time;

@@ -1,11 +1,13 @@
 using dataAccess;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StoneContentCell : MonoBehaviour
 {
     [SerializeField] private RectTransform stoneIconParent;
+    [SerializeField] private Text skillName;
     [SerializeField] private string skillId;
-
+    
     void Start()
     {
         Render();
@@ -13,6 +15,7 @@ public class StoneContentCell : MonoBehaviour
 
     async void Render()
     {
+        skillName.text = SkillNameTable.GetSkillName(skillId);
         var icon = await Stones.GenerateStoneModel(skillId, false);
         if (this == null)
         {

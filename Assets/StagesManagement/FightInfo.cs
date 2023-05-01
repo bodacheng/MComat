@@ -197,6 +197,7 @@ public class FightInfo : ScriptableObject
         stage.ID = source.ID;
         stage.FightMembers = source.FightMembers;
         stage.battleGroundID = source.battleGroundID;
+        stage.stageRefLevel = source.stageRefLevel;
         stage.fightBGM = source.fightBGM;
         stage.team1Mode = source.team1Mode;
         stage.team2Mode = source.team2Mode;

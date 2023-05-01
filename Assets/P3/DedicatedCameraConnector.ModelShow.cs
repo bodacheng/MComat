@@ -136,7 +136,7 @@ namespace ModelView
                     return;
                 }
                 _ifShowingSkill = true;
-                _focusingC.Animation_Manger.AnimationTrigger(skillName, true, 0.05f);
+                _focusingC.Animation_Manger.AnimationTrigger(skillName, true, CommonSetting.CharacterAnimDuration);
                 _focusingC.Animation_Manger.TriggerExpression(Facial.aggressive);
             }
         }

@@ -40,6 +40,9 @@ public class CommonSetting : ScriptableObject
     [SerializeField] private string wallCrackEffectCode = "wallCrack";
     [SerializeField] private string breakFreeEffectCode = "breakFree";
     [SerializeField] private string memberShiftEffectCode = "memberShift";
+
+    [Tooltip("角色动画平滑区间")] 
+    [SerializeField] private float characterAnimDuration = 0.25f;
     
     [Tooltip("downLoad labels")] 
     [SerializeField] List<string> downLoadLabels;
@@ -68,6 +71,8 @@ public class CommonSetting : ScriptableObject
     public static string BreakFreeEffectCode;
     public static string MemberShiftEffectCode;
     
+    public static float CharacterAnimDuration;
+    
     public void Initialise()
     {
         DevMode = devMode;
@@ -91,5 +96,7 @@ public class CommonSetting : ScriptableObject
         WallCrackEffectCode = wallCrackEffectCode;
         BreakFreeEffectCode = breakFreeEffectCode;
         MemberShiftEffectCode = memberShiftEffectCode;
+
+        CharacterAnimDuration = characterAnimDuration;
     }
 }

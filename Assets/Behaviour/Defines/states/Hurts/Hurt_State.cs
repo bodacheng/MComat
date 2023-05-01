@@ -108,7 +108,7 @@ namespace Soul
                     NormalStart(target);
                     break;
                 case DamageType.pull_slight:
-                    PushToMidStart(target, 0.025f, true, false);
+                    PushToMidStart(target, 0.01f, true, false);
                     break;
                 case DamageType.stable_damage:
                     _usedDizzyTime = FightGlobalSetting.LightHitLastingTime;

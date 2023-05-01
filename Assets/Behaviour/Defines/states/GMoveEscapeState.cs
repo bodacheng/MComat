@@ -52,7 +52,7 @@ namespace Soul
             _Rigidbody.velocity = Vector3.zero;
             pEvents.CloseAllPersonalityEffects();
             _Animator.applyRootMotion = true;
-            Animation_Manger.AnimationTrigger(clip_name, true, 0.1f);
+            Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
         }
 
         Vector3 damagingWeaponComingDirection;
