@@ -14,8 +14,6 @@ public class ShopTop : MSceneProcess
     
     public override void ProcessEnter()
     {
-        shopTopLayer = UILayerLoader.Load<ShopTopLayer>();
-        shopTopLayer.Initialize();
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
         upperInfoBar.Setup(null,
             null, 
@@ -35,13 +33,19 @@ public class ShopTop : MSceneProcess
                     Keys = stoneProductIds
                 },
                 (obj) => {
+                    shopTopLayer = UILayerLoader.Load<ShopTopLayer>();
+                    shopTopLayer.Initialize();
                     shopTopLayer.ShowStoneBundle(stoneProductIds);
                 },
                 errorCallback => {
                 }
             );
         }
-
+        else
+        {
+            shopTopLayer = UILayerLoader.Load<ShopTopLayer>();
+            shopTopLayer.Initialize();
+        }
         
         SetLoaded(true);
     }

@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adsBtnRender: {fileID: 2043911981805196209}
-  productParent: {fileID: 7861395056697032319}
+  productParent: {fileID: 2362620361001312236}
   stoneBundleProductCells:
   - {fileID: 4399163651557933598}
 --- !u!1 &2904046931105250747
@@ -172,7 +172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1680, y: 332}
+  m_AnchoredPosition: {x: -719.9999, y: 332}
   m_SizeDelta: {x: 2400, y: 664}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1322378558116638800

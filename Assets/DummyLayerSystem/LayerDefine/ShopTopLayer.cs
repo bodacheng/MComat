@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace mainMenu
 {
     public class ShopTopLayer : UILayer
     {
         [SerializeField] AdsBtnRender adsBtnRender;
-        [SerializeField] RectTransform productParent;
+        [SerializeField] ScrollRect productParent;
         [SerializeField] ProductCell[] stoneBundleProductCells;
         
         public void Initialize()
@@ -17,7 +18,7 @@ namespace mainMenu
 
         void RefreshSize()
         {
-            var rectTransform = productParent.GetComponent<RectTransform>();
+            var rectTransform = productParent.content.GetComponent<RectTransform>();
             int activeChildCount = 0;
             // 遍历所有子物体
             for (int i = 0; i < rectTransform.childCount; i++)
@@ -30,7 +31,8 @@ namespace mainMenu
                     activeChildCount++;
                 }
             }
-            productParent.sizeDelta = new Vector2(480 * activeChildCount,productParent.sizeDelta.y);
+            productParent.content.sizeDelta = new Vector2(480 * activeChildCount, productParent.content.sizeDelta.y);
+            productParent.horizontalNormalizedPosition = 0;
         }
 
         public void ShowStoneBundle(List<string> showTargetProductIds)
