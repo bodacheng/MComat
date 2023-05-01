@@ -920,6 +920,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: icon (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7279669547941911428, guid: 2f695346ebbb44f0ca19ef1eca911fce,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279669547941911428, guid: 2f695346ebbb44f0ca19ef1eca911fce,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f695346ebbb44f0ca19ef1eca911fce, type: 3}
 --- !u!224 &1652806928296674575 stripped
@@ -1049,6 +1059,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: icon (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279669547941911428, guid: 2f695346ebbb44f0ca19ef1eca911fce,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279669547941911428, guid: 2f695346ebbb44f0ca19ef1eca911fce,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f695346ebbb44f0ca19ef1eca911fce, type: 3}
@@ -1180,6 +1200,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: icon (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7279669547941911428, guid: 2f695346ebbb44f0ca19ef1eca911fce,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279669547941911428, guid: 2f695346ebbb44f0ca19ef1eca911fce,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f695346ebbb44f0ca19ef1eca911fce, type: 3}
 --- !u!224 &4046475727093516426 stripped
@@ -1309,6 +1339,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: icon (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279669547941911428, guid: 2f695346ebbb44f0ca19ef1eca911fce,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279669547941911428, guid: 2f695346ebbb44f0ca19ef1eca911fce,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f695346ebbb44f0ca19ef1eca911fce, type: 3}
@@ -1579,6 +1619,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: icon (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279669547941911428, guid: 2f695346ebbb44f0ca19ef1eca911fce,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279669547941911428, guid: 2f695346ebbb44f0ca19ef1eca911fce,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f695346ebbb44f0ca19ef1eca911fce, type: 3}

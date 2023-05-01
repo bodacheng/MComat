@@ -52,7 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adsBtnRender: {fileID: 2043911981805196209}
   productParent: {fileID: 7861395056697032319}
-  beginnerBundleParent: {fileID: 7716946616427247506}
+  stoneBundleProductCells:
+  - {fileID: 4399163651557933598}
 --- !u!1 &2904046931105250747
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -719.99976, y: 332}
+  m_AnchoredPosition: {x: -1680, y: 332}
   m_SizeDelta: {x: 2400, y: 664}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1322378558116638800
@@ -653,12 +654,27 @@ PrefabInstance:
     - target: {fileID: 217738790755579682, guid: 028f4f05968ba4b01aaac77f464491e5,
         type: 3}
       propertyPath: product_id
-      value: diamond150
+      value: diamond250
       objectReference: {fileID: 0}
     - target: {fileID: 952506719997307644, guid: 028f4f05968ba4b01aaac77f464491e5,
         type: 3}
       propertyPath: m_Text
-      value: x150
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179715465619391483, guid: 028f4f05968ba4b01aaac77f464491e5,
+        type: 3}
+      propertyPath: m_Text
+      value: +50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224639558784437264, guid: 028f4f05968ba4b01aaac77f464491e5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 62
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863318925654862927, guid: 028f4f05968ba4b01aaac77f464491e5,
+        type: 3}
+      propertyPath: m_Text
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 6129806193970328024, guid: 028f4f05968ba4b01aaac77f464491e5,
         type: 3}
@@ -780,7 +796,7 @@ PrefabInstance:
     - target: {fileID: 6129806195452052143, guid: 028f4f05968ba4b01aaac77f464491e5,
         type: 3}
       propertyPath: m_Name
-      value: diamond150
+      value: diamond250
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 028f4f05968ba4b01aaac77f464491e5, type: 3}
@@ -1094,6 +1110,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa7bb82b343f94d7bb2831b30a96c6fe, type: 3}
+--- !u!114 &4399163651557933598 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1380924891581201437, guid: fa7bb82b343f94d7bb2831b30a96c6fe,
+    type: 3}
+  m_PrefabInstance: {fileID: 3325626677498412547}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dedc68cc306104929af1d2a04ebd99ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7716946616427247506 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4989678154677651857, guid: fa7bb82b343f94d7bb2831b30a96c6fe,
@@ -1110,12 +1138,27 @@ PrefabInstance:
     - target: {fileID: 217738790755579682, guid: 028f4f05968ba4b01aaac77f464491e5,
         type: 3}
       propertyPath: product_id
-      value: diamond500
+      value: diamond2500_2
       objectReference: {fileID: 0}
     - target: {fileID: 952506719997307644, guid: 028f4f05968ba4b01aaac77f464491e5,
         type: 3}
       propertyPath: m_Text
-      value: x500
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179715465619391483, guid: 028f4f05968ba4b01aaac77f464491e5,
+        type: 3}
+      propertyPath: m_Text
+      value: +1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224639558784437264, guid: 028f4f05968ba4b01aaac77f464491e5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863318925654862927, guid: 028f4f05968ba4b01aaac77f464491e5,
+        type: 3}
+      propertyPath: m_Text
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 6129806193970328024, guid: 028f4f05968ba4b01aaac77f464491e5,
         type: 3}
@@ -1237,7 +1280,7 @@ PrefabInstance:
     - target: {fileID: 6129806195452052143, guid: 028f4f05968ba4b01aaac77f464491e5,
         type: 3}
       propertyPath: m_Name
-      value: diamond500
+      value: diamond2500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 028f4f05968ba4b01aaac77f464491e5, type: 3}
@@ -1257,12 +1300,27 @@ PrefabInstance:
     - target: {fileID: 217738790755579682, guid: 028f4f05968ba4b01aaac77f464491e5,
         type: 3}
       propertyPath: product_id
-      value: diamond250
+      value: diamond1000
       objectReference: {fileID: 0}
     - target: {fileID: 952506719997307644, guid: 028f4f05968ba4b01aaac77f464491e5,
         type: 3}
       propertyPath: m_Text
-      value: x250
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179715465619391483, guid: 028f4f05968ba4b01aaac77f464491e5,
+        type: 3}
+      propertyPath: m_Text
+      value: +300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2224639558784437264, guid: 028f4f05968ba4b01aaac77f464491e5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 98
+      objectReference: {fileID: 0}
+    - target: {fileID: 2863318925654862927, guid: 028f4f05968ba4b01aaac77f464491e5,
+        type: 3}
+      propertyPath: m_Text
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 6129806193970328024, guid: 028f4f05968ba4b01aaac77f464491e5,
         type: 3}
@@ -1384,7 +1442,7 @@ PrefabInstance:
     - target: {fileID: 6129806195452052143, guid: 028f4f05968ba4b01aaac77f464491e5,
         type: 3}
       propertyPath: m_Name
-      value: diamond250
+      value: diamond1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 028f4f05968ba4b01aaac77f464491e5, type: 3}
@@ -1409,7 +1467,7 @@ PrefabInstance:
     - target: {fileID: 952506719997307644, guid: 028f4f05968ba4b01aaac77f464491e5,
         type: 3}
       propertyPath: m_Text
-      value: x50
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6129806193970328025, guid: 028f4f05968ba4b01aaac77f464491e5,
         type: 3}
@@ -1535,6 +1593,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: diamond50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9068802462144801723, guid: 028f4f05968ba4b01aaac77f464491e5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 028f4f05968ba4b01aaac77f464491e5, type: 3}

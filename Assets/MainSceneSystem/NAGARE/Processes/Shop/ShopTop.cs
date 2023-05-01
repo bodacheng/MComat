@@ -2,7 +2,7 @@
 using mainMenu;
 using PlayFab;
 using PlayFab.ClientModels;
-using System.Collections.Generic;
+using System.Linq;
 
 public class ShopTop : MSceneProcess
 {
@@ -21,22 +21,27 @@ public class ShopTop : MSceneProcess
             null, 
             null,
             null);
-        PlayFabClientAPI.GetUserReadOnlyData
-        (
-            new GetUserDataRequest()
-            {
-                PlayFabId = PlayerAccountInfo.Me.PlayFabId,
-                Keys = new List<string> { "BeginnerBundleBought" }
-            },
-            (obj) => {
-                if (!obj.Data.ContainsKey("BeginnerBundleBought"))
+
+        var stoneCatalog = IAPManager.StoneCatalog;
+        var stoneProductIds = stoneCatalog.Select(x=> x.ItemId).ToList();
+
+        if (stoneProductIds.Count > 0)
+        {
+            PlayFabClientAPI.GetUserReadOnlyData
+            (
+                new GetUserDataRequest()
                 {
-                    shopTopLayer.ShowBeginnerBundle(true);
+                    PlayFabId = PlayerAccountInfo.Me.PlayFabId,
+                    Keys = stoneProductIds
+                },
+                (obj) => {
+                    shopTopLayer.ShowStoneBundle(stoneProductIds);
+                },
+                errorCallback => {
                 }
-            },
-            errorCallback => {
-            }
-        );
+            );
+        }
+
         
         SetLoaded(true);
     }

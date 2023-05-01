@@ -2,18 +2,68 @@ using PlayFab;
 using PlayFab.ClientModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
 public class IAPManager : MonoBehaviour, IStoreListener {
-    // Items list, configurable via inspector
-    private static List<CatalogItem> _catalog;
+
     public static IAPManager Target;
     // The Unity Purchasing system
     private static IStoreController _mStoreController;
+    // Items list, configurable via inspector
+    private static List<CatalogItem> _productCatalog;
+    private static List<CatalogItem> _stoneCatalog;
+    private string productClassName = "Product";
     private string ProductCatalogVersion = "Product";
+    private string StoneProductCatalogVersion = "stone";
+    private bool productCatalogInitialised = false;
+    private bool stoneCatalogInitialised = false;
+
+    public static List<CatalogItem> StoneCatalog => _stoneCatalog;
+
+    string ProductCatalog(string productId)
+    {
+        var productProductIds = _productCatalog.Select(x=> x.ItemId).ToList();
+        var stoneProductIds = _stoneCatalog.Select(x=> x.ItemId).ToList();
+        if (productProductIds.Contains(productId))
+        {
+            return ProductCatalogVersion;
+        }
+        if (stoneProductIds.Contains(productId))
+        {
+            return StoneProductCatalogVersion;
+        }
+        return null;
+    }
+    
+    private bool StoneProductCatalogInitialised
+    {
+        get => stoneCatalogInitialised;
+        set {
+            stoneCatalogInitialised = value;
+            if (productCatalogInitialised && stoneCatalogInitialised)
+            {
+                InitializePurchasing();
+            }
+        }
+    }
+    
+    private bool ProductCatalogInitialised
+    {
+        get => productCatalogInitialised;
+        set {
+            productCatalogInitialised = value;
+            if (productCatalogInitialised && stoneCatalogInitialised)
+            {
+                InitializePurchasing();
+            }
+        }
+    }
+    
     // Bootstrap the whole thing
     public void Start() {
         // Make PlayFab log in
@@ -22,15 +72,35 @@ public class IAPManager : MonoBehaviour, IStoreListener {
     }
     
     void RefreshIAPItems() {
-        PlayFabClientAPI.GetCatalogItems(new GetCatalogItemsRequest
+        if (IsInitialized)
+        {
+            return;
+        }
+        PlayFabClientAPI.GetCatalogItems(
+            new GetCatalogItemsRequest
             {
                 CatalogVersion = ProductCatalogVersion
             },
         result => {
-            _catalog = result.Catalog;
-            // Make UnityIAP initialize
-            InitializePurchasing();
-        }, error => Debug.LogError(error.GenerateErrorReport()));
+                _productCatalog = result.Catalog;
+                // Make UnityIAP initialize
+                ProductCatalogInitialised = true;
+            }, 
+        error => Debug.LogError(error.GenerateErrorReport())
+        );
+        
+        PlayFabClientAPI.GetCatalogItems(
+            new GetCatalogItemsRequest
+            {
+                CatalogVersion = StoneProductCatalogVersion
+            },
+            result => {
+                _stoneCatalog = result.Catalog;
+                // Make UnityIAP initialize
+                StoneProductCatalogInitialised = true;
+            }, 
+            error => Debug.LogError(error.GenerateErrorReport())
+        );
     }
 
     public string GetProductLocalPriceString(string productId)
@@ -56,13 +126,15 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.GooglePlay));
 #endif
         // Register each item from the catalog
-        foreach (var item in _catalog) {
-            Debug.Log("Add product:"+ item.ItemId);
-            builder.AddProduct(item.ItemId, ProductType.Consumable);
+        foreach (var item in _productCatalog) {
+            if (item.ItemClass == productClassName)
+                builder.AddProduct(item.ItemId, ProductType.Consumable);
         }
         
-        // 新手礼包
-        builder.AddProduct("BeginnerBundle", ProductType.Consumable);
+        foreach (var item in _stoneCatalog) {
+            if (item.ItemClass == productClassName)
+                builder.AddProduct(item.ItemId, ProductType.Consumable);
+        }
         
         // Trigger IAP service initialization
         UnityPurchasing.Initialize(this, builder);
@@ -138,6 +210,8 @@ public class IAPManager : MonoBehaviour, IStoreListener {
             return PurchaseProcessingResult.Complete;
         }
         
+        var boughtItemCatalog = ProductCatalog(e.purchasedProduct.definition.id);
+        
         #if UNITY_IOS
         var wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(e.purchasedProduct.receipt);
         var store = (string)wrapper["Store"];
@@ -149,7 +223,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         PlayFabClientAPI.ValidateIOSReceipt(
             new ValidateIOSReceiptRequest
             {
-                CatalogVersion = e.purchasedProduct.definition.id != "BeginnerBundle" ? ProductCatalogVersion : "stone",
+                CatalogVersion = boughtItemCatalog,
                 CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
                 PurchasePrice = (int)(e.purchasedProduct.metadata.localizedPrice * 100),//(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
                 ReceiptData = payload
@@ -157,17 +231,15 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 ProgressLayer.Close();
                 PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseSuccess"));
                 _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
-                if (e.purchasedProduct.definition.id == "BeginnerBundle")
-                {
-                    CloudScript.Common("BeginnerBundleBought", 
-                        (x) =>
-                        {
-                            var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
-                            if (shopTopLayer != null)
-                                shopTopLayer.ShowBeginnerBundle(false);
-                        }
-                    );
-                }
+                CloudScript.BoughtBundle(
+                    e.purchasedProduct.definition.id, 
+                    () =>
+                    {
+                        var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
+                        if (shopTopLayer != null)
+                            shopTopLayer.DisableStoneBundle(e.purchasedProduct.definition.id);
+                    }
+                );
                 PlayFabReadClient.LoadItems(null);
             },
             error => {
@@ -188,6 +260,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         
         PlayFabClientAPI.ValidateGooglePlayPurchase(
             new ValidateGooglePlayPurchaseRequest() {
+                CatalogVersion = boughtItemCatalog,
                 // Pass in currency code in ISO format
                 CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
                 // Convert and set Purchase price
@@ -199,6 +272,16 @@ public class IAPManager : MonoBehaviour, IStoreListener {
             }, result => {
                 Debug.Log("Validation successful!");
                 _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
+                CloudScript.BoughtBundle(
+                    e.purchasedProduct.definition.id, 
+                    () =>
+                    {
+                        var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
+                        if (shopTopLayer != null)
+                            shopTopLayer.DisableStoneBundle(e.purchasedProduct.definition.id);
+                    }
+                );
+                PlayFabReadClient.LoadItems(null);
             },
             error => Debug.Log("Validation failed: " + error.GenerateErrorReport())
         );

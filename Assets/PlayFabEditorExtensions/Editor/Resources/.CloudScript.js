@@ -62,11 +62,14 @@ handlers.test = function (args, context) {
     };
 };
 
-handlers.BeginnerBundleBought = function (args, context) {
+handlers.BundleBought = function (args, context) {
+
+    const key = args.bundleProductId;
+    
     var updateUserDataResult = server.UpdateUserReadOnlyData({
         PlayFabId: currentPlayerId,
         Data: {
-            "BeginnerBundleBought": true
+            [key]: true
         }
     });
 }
