@@ -36,6 +36,7 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] int hurtObjectPreLoadCount = 5;
     [SerializeField] int energyResolveAfterExtendBoundary = 5;
     [SerializeField] Material shadowMaterial;
+    [SerializeField] PhysicMaterial _physicMaterial;
 
     public static int SceneStep;//0 :mainmenu 1: fightscene
     public static bool HasDefend;
@@ -71,6 +72,7 @@ public class FightGlobalSetting : ScriptableObject
     public static Material _shadowMaterial;
     public static int _defendHP;
     public static int _energyResolveAfterExtendBoundary;
+    public static PhysicMaterial PhysicMaterial;
     
     public void Initialise()
     {
@@ -123,7 +125,7 @@ public class FightGlobalSetting : ScriptableObject
         _EXMax = eXMax;
         
         _shadowMaterial = shadowMaterial;
-        
+        PhysicMaterial = _physicMaterial;
         _energyResolveAfterExtendBoundary = energyResolveAfterExtendBoundary;
     }
     

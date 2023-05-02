@@ -82,8 +82,7 @@ public partial class FightParamsReference
                 limb.INI();
                 if (limb.myColliderMustEquip != null && !_myColliders.Contains(limb.myColliderMustEquip))
                 {
-                    var physicMaterial = Resources.Load<PhysicMaterial>("physics/temp");
-                    limb.myColliderMustEquip.material = physicMaterial;
+                    limb.myColliderMustEquip.material = FightGlobalSetting.PhysicMaterial;
                     _myColliders.Add(limb.myColliderMustEquip);
                 }
             }
