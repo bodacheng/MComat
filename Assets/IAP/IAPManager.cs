@@ -16,19 +16,19 @@ public class IAPManager : MonoBehaviour, IStoreListener {
     private static IStoreController _mStoreController;
     // Items list, configurable via inspector
     private static List<CatalogItem> _productCatalog;
-    private static List<CatalogItem> _stoneCatalog;
+    private static List<CatalogItem> _stoneProductCatalog;
     private string productClassName = "Product";
     private string ProductCatalogVersion = "Product";
     private string StoneProductCatalogVersion = "stone";
     private bool productCatalogInitialised = false;
     private bool stoneCatalogInitialised = false;
 
-    public static List<CatalogItem> StoneCatalog => _stoneCatalog;
+    public static List<CatalogItem> StoneProductCatalog => _stoneProductCatalog;
 
     string ProductCatalog(string productId)
     {
         var productProductIds = _productCatalog.Select(x=> x.ItemId).ToList();
-        var stoneProductIds = _stoneCatalog.Select(x=> x.ItemId).ToList();
+        var stoneProductIds = _stoneProductCatalog.Select(x=> x.ItemId).ToList();
         if (productProductIds.Contains(productId))
         {
             return ProductCatalogVersion;
@@ -95,7 +95,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 CatalogVersion = StoneProductCatalogVersion
             },
             result => {
-                _stoneCatalog = result.Catalog;
+                _stoneProductCatalog = result.Catalog.FindAll(x=>x.ItemClass == ProductCatalogVersion);
                 // Make UnityIAP initialize
                 StoneProductCatalogInitialised = true;
             }, 
@@ -131,7 +131,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 builder.AddProduct(item.ItemId, ProductType.Consumable);
         }
         
-        foreach (var item in _stoneCatalog) {
+        foreach (var item in _stoneProductCatalog) {
             if (item.ItemClass == productClassName)
                 builder.AddProduct(item.ItemId, ProductType.Consumable);
         }

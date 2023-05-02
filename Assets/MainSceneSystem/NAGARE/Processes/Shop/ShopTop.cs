@@ -1,4 +1,5 @@
-﻿using DummyLayerSystem;
+﻿using System.Collections.Generic;
+using DummyLayerSystem;
 using mainMenu;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -20,9 +21,8 @@ public class ShopTop : MSceneProcess
             null,
             null);
 
-        var stoneCatalog = IAPManager.StoneCatalog;
+        var stoneCatalog = IAPManager.StoneProductCatalog;
         var stoneProductIds = stoneCatalog.Select(x=> x.ItemId).ToList();
-
         if (stoneProductIds.Count > 0)
         {
             PlayFabClientAPI.GetUserReadOnlyData
@@ -32,10 +32,19 @@ public class ShopTop : MSceneProcess
                     PlayFabId = PlayerAccountInfo.Me.PlayFabId,
                     Keys = stoneProductIds
                 },
-                (obj) => {
+                (obj) =>
+                {
+                    var showStoneBundleIds = new List<string>();
+                    foreach (var productId in stoneProductIds)
+                    {
+                        if (!obj.Data.ContainsKey(productId))
+                        {
+                            showStoneBundleIds.Add(productId);
+                        }
+                    }
                     shopTopLayer = UILayerLoader.Load<ShopTopLayer>();
                     shopTopLayer.Initialize();
-                    shopTopLayer.ShowStoneBundle(stoneProductIds);
+                    shopTopLayer.ShowStoneBundle(showStoneBundleIds);
                 },
                 errorCallback => {
                 }
