@@ -2,8 +2,6 @@ using PlayFab;
 using PlayFab.ClientModels;
 using dataAccess;
 using System;
-using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 
 public partial class PlayFabReadClient
 {
@@ -26,10 +24,9 @@ public partial class PlayFabReadClient
             }
         );
     }
-
+    
     static async void OnGetUserInventory(GetUserInventoryResult result, Action<bool> finished)
     {
-        var stoneLoadTasks = new List<UniTask>();
         foreach (var item in result.Inventory)
         {
             if (item.CatalogVersion == PlayFabSetting._UnitCatalog)
@@ -49,7 +46,6 @@ public partial class PlayFabReadClient
                     };
                     DicAdd<string, UnitInfo>.Add(dataAccess.Units.Dic, item.ItemInstanceId, info);
                 }
-
             }
             else if (item.CatalogVersion == PlayFabSetting._StoneCatalog)
             {
@@ -64,7 +60,7 @@ public partial class PlayFabReadClient
                         Slot = (item.CustomData != null && item.CustomData.ContainsKey("slot")) ? item.CustomData["slot"] : null,
                         Born = (item.CustomData != null && item.CustomData.ContainsKey("born")) ? item.CustomData["born"] : null
                     };
-                    stoneLoadTasks.Add( Stones.Add(info));
+                    Stones.Add(info);
                 }
                 else
                 {
@@ -78,8 +74,7 @@ public partial class PlayFabReadClient
                 AddMailData(mailData);
             }
         }
-
-        await UniTask.WhenAll(stoneLoadTasks);
+        
         LoadReadMails(); // 本地逻辑。读取已读邮件。放在这里是希望和远程读取未读邮件的动作保持步调一致
         
         foreach (var kv in result.VirtualCurrency)

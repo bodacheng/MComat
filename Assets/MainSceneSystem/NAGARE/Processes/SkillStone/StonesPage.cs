@@ -1,4 +1,5 @@
-﻿using DummyLayerSystem;
+﻿using dataAccess;
+using DummyLayerSystem;
 using mainMenu;
 
 public class StonesPage : MSceneProcess
@@ -13,19 +14,16 @@ public class StonesPage : MSceneProcess
     public override void ProcessEnter()
     {
         EnterProcess();
-        SetLoaded(true);
     }
     
     //EnterProcess()内绝不能出现triggerMainProcess
-    void EnterProcess()
+    async void EnterProcess()
     {
-        CommonEnterProcess();
-    }
-    
-    void CommonEnterProcess()
-    {
+        await Stones.RenderAll();
         layer = UILayerLoader.Load<StoneListLayer>();
         layer.Setup();
+        ReturnLayer.MoveFront();
+        SetLoaded(true);
     }
     
     public override void ProcessEnd()

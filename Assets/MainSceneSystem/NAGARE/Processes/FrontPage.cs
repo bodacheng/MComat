@@ -123,7 +123,7 @@ public class FrontPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        ProgressLayer.Loading(">");
+        ProgressLayer.Loading(string.Empty);
         PlayFabReadClient.GetStatistics(StatisticsLoadFinished);
         
         //AccountCharsSet.LoadTutorial();
@@ -151,6 +151,7 @@ public class FrontPage : MSceneProcess
                 }
             }
         );
+        Stones.RenderAll().Forget(); // 在背后运行，从而加快石头列表和技能编辑画面的读取速度
     }
     
     public override void ProcessEnd()

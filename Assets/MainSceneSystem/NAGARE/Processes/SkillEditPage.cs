@@ -1,6 +1,7 @@
 ﻿using mainMenu;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using dataAccess;
 using DummyLayerSystem;
 
 public class SkillEditPage : MSceneProcess
@@ -14,6 +15,7 @@ public class SkillEditPage : MSceneProcess
     
     async UniTask EnterProcess()
     {
+        await Stones.RenderAll();
         layer = UILayerLoader.Load<SkillEditLayer>();
         await layer.Setup((x) =>
         {

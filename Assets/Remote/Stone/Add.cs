@@ -1,4 +1,6 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using mainMenu;
 using UnityEngine;
 
@@ -6,12 +8,21 @@ namespace dataAccess
 {
     public static partial class Stones
     {
-        public static async UniTask Add(StoneOfPlayerInfo one)
+        public static void Add(StoneOfPlayerInfo one)
         {
             DicAdd<string, StoneOfPlayerInfo>.Add(Dic, one.InstanceId, one);
-            await GenerateStoneModelByAccID(one.InstanceId);
         }
-
+        
+        public static async UniTask RenderAll()
+        {
+            var stoneLoadTasks = new List<UniTask>();
+            foreach (var kv in Dic)
+            {
+                stoneLoadTasks.Add(GenerateStoneModelByAccID(kv.Key));
+            }
+            await UniTask.WhenAll(stoneLoadTasks);
+        }
+        
         /// <summary>
         /// 生成账户用技能石图标，生成的模型会加入统一技能石字典作为备用
         /// </summary>
