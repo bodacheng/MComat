@@ -31,6 +31,8 @@ Ex3Skill,EX3 Skill,コスト3必殺技,三费必杀
 illegalword,Contains words that cannot be used,使用できない単語が含んでる,含有非法字符
 InvalidUsername,Invalid Username,使用できない単語が含んでる,昵称不可用
 DuplicateUsername,Duplicate Username,他のプレイヤーが既に使ってる,昵称重复
+AccountNotFound,Account Not Found,アカウントが見つかりません,没有找到账户
+InvalidEmailOrPassword,Invalid email or password,メールアドレスまたはパスワードが無効です,无效的邮箱或密码
 ,,,
 GotNewUnit,Joined your team !,チームに加入しました！,加入队伍!
 NoEnoughArenaTicket,Donnot have enough ticket. Come back later !,体力が足りないです。,竞技场体力不足

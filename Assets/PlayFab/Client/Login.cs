@@ -59,9 +59,6 @@ public partial class PlayFabReadClient
     /// <param name="fail"></param>
     public static void PlayFabEmailLogin(string email, string pw, Action<LoginResult, LoginType> success)
     {
-        Debug.Log("try login by email:"+ email +"\n"
-        + "pw:"+ pw +"\n" + "TitleId:"+ PlayFabSettings.TitleId);
-        
         PlayFabClientAPI.LoginWithEmailAddress(
             new LoginWithEmailAddressRequest()
             {

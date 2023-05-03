@@ -7,7 +7,7 @@ public partial class PlayFabReadClient
 {
     public static void ErrorReport(PlayFabError error)
     {
-        Debug.Log("error.ErrorMessage:"+ error.ErrorMessage);
+        Debug.Log("error.ErrorMessage:"+ error.Error);
         switch (error.Error)
         {
             case PlayFabErrorCode.NotAuthorizedByTitle:
@@ -48,6 +48,12 @@ public partial class PlayFabReadClient
                 break;
             case PlayFabErrorCode.InvalidParams:
                 PopupLayer.ArrangeWarnWindow(Translate.Get("InvalidUsername"));
+                break;
+            case PlayFabErrorCode.AccountNotFound:
+                PopupLayer.ArrangeWarnWindow(Translate.Get("AccountNotFound"));
+                break;
+            case PlayFabErrorCode.InvalidEmailOrPassword:
+                PopupLayer.ArrangeWarnWindow(Translate.Get("InvalidEmailOrPassword"));
                 break;
             default:
                 PopupLayer.ArrangeWarnWindow(Translate.Get("ConnectionError"));
