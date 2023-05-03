@@ -19,28 +19,28 @@ MonoBehaviour:
     r_id: 11
     level: 1
     set:
-      a1: 80
-      a2: 53
-      a3: 27
-      b1: 176
-      b2: 113
-      b3: 161
-      c1: 99
-      c2: 5
-      c3: 55
+      a1: 89
+      a2: 9
+      a3: 53
+      b1: 5
+      b2: 125
+      b3: 115
+      c1: 182
+      c2: 167
+      c3: 99
   - id: 2
     r_id: 11
     level: 1
     set:
-      a1: 113
-      a2: 182
-      a3: 80
-      b1: 5
-      b2: 99
-      b3: 68
-      c1: 95
-      c2: 10
-      c3: 58
+      a1: 9
+      a2: 10
+      a3: 53
+      b1: 89
+      b2: 167
+      b3: 95
+      c1: 159
+      c2: 27
+      c3: 80
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0
@@ -50,3 +50,4 @@ MonoBehaviour:
   team1AIMode: 0
   team2AIMode: 1
   dumbAIDecisionDelay: 10
+  stageRefLevel: 1

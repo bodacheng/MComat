@@ -19,15 +19,15 @@ MonoBehaviour:
     r_id: 11
     level: 1
     set:
-      a1: 80
-      a2: 182
-      a3: 159
-      b1: 125
-      b2: 10
-      b3: 167
-      c1: 68
-      c2: 95
-      c3: 89
+      a1: 95
+      a2: 113
+      a3: 167
+      b1: 5
+      b2: 58
+      b3: 9
+      c1: 89
+      c2: 53
+      c3: 182
   - id: 2
     r_id: 10
     level: 1
@@ -50,3 +50,4 @@ MonoBehaviour:
   team1AIMode: 0
   team2AIMode: 1
   dumbAIDecisionDelay: 10
+  stageRefLevel: 1
