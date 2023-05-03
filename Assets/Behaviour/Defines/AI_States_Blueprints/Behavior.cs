@@ -116,8 +116,6 @@ namespace Soul
         // Process when entering the state 
         public virtual void AI_State_enter()
         {
-            if (this._DATA_CENTER.UnitInfo != null && this.SkillConfig != null)
-                Debug.Log(this._DATA_CENTER.UnitInfo.r_id + " : " +SkillConfig.REAL_NAME+ " : "+ Attack);
             FightParamsRef.AT = Attack;
             FightParamsRef.CostCriticalGaugeBySPLevel(spLevel);
             BehaviorFrameCounter = 0;
