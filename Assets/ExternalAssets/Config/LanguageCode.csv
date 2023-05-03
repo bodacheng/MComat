@@ -111,7 +111,7 @@ Language,Language,言語,言語
 NickName,Nickname,ニックネーム,昵称
 ,,,
 NicknameSet,Nickname set successfully,ニックネームが設定されました,昵称设置成功
-IfSetNickName,Sure to change nickname?,ニックネームを変更してもよろしいですか？ ,确定要修改昵称吗
+IfSetNickName,Are you sure about this nickname?,このニックネームでよろしいですか？,确定这个昵称吗
 privacy,Privacy Policy,プライバシーポリシー,隐私政策
 contact,Contact us,お問い合わせ,联系我们
 ,,,
