@@ -207,7 +207,6 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 PurchasePrice = (int)(e.purchasedProduct.metadata.localizedPrice * 100),//(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
                 ReceiptData = payload
             }, result => {
-                ProgressLayer.Close();
                 PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseSuccess"));
                 _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
                 if (boughtItemCatalog == StoneProductCatalogVersion){
@@ -218,10 +217,14 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                             var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
                             if (shopTopLayer != null)
                                 shopTopLayer.DisableStoneBundle(e.purchasedProduct.definition.id);
+                            ProgressLayer.Close();
                         }
                     );
                 }
-
+                else
+                {
+                    ProgressLayer.Close();
+                }
                 PlayFabReadClient.LoadItems(null);
             },
             error => {
@@ -252,7 +255,6 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 // Pass in the signature
                 Signature = googleReceipt.PayloadData.signature
             }, result => {
-                ProgressLayer.Close();
                 PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseSuccess"));
                 _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
                 if (boughtItemCatalog == StoneProductCatalogVersion)
@@ -264,8 +266,11 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                             var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
                             if (shopTopLayer != null)
                                 shopTopLayer.DisableStoneBundle(e.purchasedProduct.definition.id);
+                            ProgressLayer.Close();
                         }
                     );
+                }else{
+                    ProgressLayer.Close();
                 }
                 PlayFabReadClient.LoadItems(null);
             },
