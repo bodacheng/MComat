@@ -85,7 +85,7 @@ public class StartUpPresentation : MonoBehaviour
             {
                 HighLightLayer.DarkOff(Color.white, 0);
                 var titleBgLayer= UILayerLoader.Load<TitleBgLayer>();
-                titleBgLayer.Setup();
+                titleBgLayer.Setup(0.9f);
                 UILayerLoader.Load<ProgressLayer>();
                 await AddressablesLogic.ResourcePrepareProcess(
                     () =>
@@ -118,7 +118,7 @@ public class StartUpPresentation : MonoBehaviour
         {
             await AppSetting.PlayBGM(CommonSetting.StartThemeAddressKey);
             var titleBgLayer= UILayerLoader.Load<TitleBgLayer>();
-            titleBgLayer.Setup();
+            titleBgLayer.Setup(1);
             titleBgLayer.Rotate(false);
             var titleScreenLayer = UILayerLoader.Load<TitleScreenLayer>();
             titleScreenLayer.Initialise();

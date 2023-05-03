@@ -45,7 +45,7 @@ public class FrontPage : MSceneProcess
         if (PlayerAccountInfo.Me.tutorialProgress == "Started")
         {
             var titleBgLayer = UILayerLoader.Load<TitleBgLayer>();
-            titleBgLayer.Setup();
+            titleBgLayer.Setup(1);
             titleBgLayer.Rotate(true, _EnterProcess);
         }
         else

@@ -21,13 +21,13 @@ public class TitleBgLayer : UILayer
     [SerializeField] float ScrollbarMaxValue = 1;
     float milliSecondCounter = 0;
     IDisposable _disposable;
-    public void Setup() // false: titleMode
+    public void Setup(float scrollValue) // false: titleMode
     {
         var parentRect = transform.GetComponent<RectTransform>();
         content.sizeDelta = new Vector2(parentRect.rect.width ,  targetSprite.rect.height * parentRect.rect.width / targetSprite.rect.width);
         content.anchoredPosition = Vector2.zero;
         targetImage.sprite = targetSprite;
-        vScrollbar.value = 1;
+        vScrollbar.value = scrollValue;
         targetImage.color = Color.white;
     }
     

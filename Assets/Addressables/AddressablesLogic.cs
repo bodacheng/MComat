@@ -106,7 +106,7 @@ public static class AddressablesLogic
         }
         return wholeSize;
     }
-
+    
     public static long DownloadedBytes
     {
         get {
