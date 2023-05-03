@@ -82,7 +82,24 @@ public static class AddressablesLogic
             {
                 downloadedBytes[label] = handle.GetDownloadStatus().DownloadedBytes;
             }
-            progressUIRefresh(Translate.Get("DownloadingAsset"));
+
+            var text = string.Empty;
+            switch (AppSetting.Value.Language)
+            {
+                case SystemLanguage.English:
+                    text = "Downloading Assets";
+                    break;
+                case SystemLanguage.Japanese:
+                    text = "リソースをダウンロード中です";
+                    break;
+                case SystemLanguage.Chinese:
+                    text = "正在下载资源";
+                    break;
+                default:
+                    text = "リソースをダウンロード中です";
+                    break;
+            }
+            progressUIRefresh(text);
             await UniTask.DelayFrame(0);
         }
         Addressables.Release(handle);
