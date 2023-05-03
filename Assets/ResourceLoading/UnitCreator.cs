@@ -13,7 +13,7 @@ public class UnitCreator {
             return dataCenter;
         }
         var unitConfig = Units.RowToUnitConfigInfo(Units.Find_RECORD_ID(info.r_id));
-        await dataCenter.Step2Initialize (unitConfig.TYPE, unitConfig.element, info.set);
+        await dataCenter.Step2Initialize(unitConfig.TYPE, unitConfig.element, info.set);
         return dataCenter;
     }
 }

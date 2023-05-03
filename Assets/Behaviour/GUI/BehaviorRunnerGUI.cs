@@ -208,9 +208,11 @@ public partial class BehaviorRunnerGUI : Editor {
                 myScript.skillEntityList[i].SP_LEVEL = EditorGUILayout.IntPopup("SPLevel", myScript.skillEntityList[i].SP_LEVEL,exoptions_display,exoptions);
                 GUI.backgroundColor = Color.blue;
                 
-                ButtonStyle = new GUIStyle(GUI.skin.button);
-                ButtonStyle.normal.textColor = Color.white;
-                ButtonStyle.fixedWidth = 100f;
+                ButtonStyle = new GUIStyle(GUI.skin.button)
+                {
+                    normal = { textColor = Color.white },
+                    fixedWidth = 100f
+                };
                 if (GUILayout.Button("Delete",ButtonStyle))
                 {
                     myScript.skillEntityList.RemoveAt(i);
@@ -227,7 +229,7 @@ public partial class BehaviorRunnerGUI : Editor {
             if (GUILayout.Button("Add"))
             {
                 GUI.color = Color.green;
-                myScript.skillEntityList.Add(new SkillEntity("Empty", 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, 0));
+                myScript.skillEntityList.Add(new SkillEntity("Empty", 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, 0));
                 InitializeList(-1, myScript.skillEntityList.Count);
             }
         }

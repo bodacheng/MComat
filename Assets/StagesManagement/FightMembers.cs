@@ -45,7 +45,7 @@ public class FightMembers
     {
     }
     
-    public void SetEnemyLevel(int level)
+    public void SetEnemyLevel(float level)
     {
         foreach (var unitInfo in EnemySets.GetValues())
         {

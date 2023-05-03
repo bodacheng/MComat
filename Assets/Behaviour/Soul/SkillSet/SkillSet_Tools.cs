@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Skill;
 
 public partial class SkillSet
@@ -37,27 +38,23 @@ public partial class SkillSet
     }
     
     // 获取平均技能等级
-    public int GetAerLevel(List<float> levels)
+    public float GetAerLevel(List<float> levels)
     {
         float aver = 0;
         foreach (var t in levels)
         {
             aver += t;
         }
-        aver /= levels.Count;
-        // 取小数点后一位
-        var intValue = (int)(aver * 10);
-        intValue /= 10;
-        return intValue;
+        return (float)Math.Round(aver / levels.Count, 1);
     }
     
-    public static float INI_Hp(List<SkillEntity> sklist, float lv)
+    public static float INI_Hp(List<string> skillIds, float lv)
     {
         float wholeHp = 0;
-        for (var index = 0; index < sklist.Count; index++)
+        foreach (var skillId in skillIds)
         {
-            sklist[index].SetLv(lv);
-            wholeHp += sklist[index].HP;
+            var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skillId);
+            wholeHp += FightGlobalSetting.StoneHpCal(skillConfig.HP_WEIGHT, lv);
         }
         return wholeHp;
     }
@@ -144,39 +141,39 @@ public partial class SkillSet
     
     public SkillConfig GetA1Config()
     {
-        return SkillConfigTable.GetSkillConfig(a1);
+        return SkillConfigTable.GetSkillConfigByRecordId(a1);
     }
     public SkillConfig GetA2Config()
     {
-        return SkillConfigTable.GetSkillConfig(a2);
+        return SkillConfigTable.GetSkillConfigByRecordId(a2);
     }
     public SkillConfig GetA3Config()
     {
-        return SkillConfigTable.GetSkillConfig(a3);
+        return SkillConfigTable.GetSkillConfigByRecordId(a3);
     }
     public SkillConfig GetB1Config()
     {
-        return SkillConfigTable.GetSkillConfig(b1);
+        return SkillConfigTable.GetSkillConfigByRecordId(b1);
     }
     public SkillConfig GetB2Config()
     {
-        return SkillConfigTable.GetSkillConfig(b2);
+        return SkillConfigTable.GetSkillConfigByRecordId(b2);
     }
     public SkillConfig GetB3Config()
     {
-        return SkillConfigTable.GetSkillConfig(b3);
+        return SkillConfigTable.GetSkillConfigByRecordId(b3);
     }
     public SkillConfig GetC1Config()
     {
-        return SkillConfigTable.GetSkillConfig(c1);
+        return SkillConfigTable.GetSkillConfigByRecordId(c1);
     }
     public SkillConfig GetC2Config()
     {
-        return SkillConfigTable.GetSkillConfig(c2);
+        return SkillConfigTable.GetSkillConfigByRecordId(c2);
     }
     public SkillConfig GetC3Config()
     {
-        return SkillConfigTable.GetSkillConfig(c3);
+        return SkillConfigTable.GetSkillConfigByRecordId(c3);
     }
         
     public SkillEntity GetM_STS()

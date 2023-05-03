@@ -4,7 +4,6 @@ namespace Soul
 {
     public class Dash_Back_State : Behavior
     {
-        readonly string clip_name;
         readonly UnityEngine.Events.UnityAction breakFreeStart;
         readonly UnityEngine.Events.UnityAction breakFreeEnd;
         readonly CustomCoroutine breakFreeCoroutine;
@@ -26,7 +25,7 @@ namespace Soul
         public override void _State_Update()
         {
             base._State_Update();
-            if (BeheviourFrameCounter == 5)
+            if (BehaviorFrameCounter == 5)
             {
                 _BuffsRunner.RunSubCoroutineOfState(breakFreeCoroutine);
             }

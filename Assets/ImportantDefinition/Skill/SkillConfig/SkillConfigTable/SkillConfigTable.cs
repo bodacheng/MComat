@@ -63,7 +63,6 @@ public partial class SkillConfigTable
                 Debug.Log("致命错误「技能配置文件」技能ID重复：" + skillConfig.RECORD_ID);
             }
         }
-        Debug.Log("已读取共"+ dic.Count + "个技能");
         SkillConfigRefDic = dic;
     }
     
@@ -72,7 +71,7 @@ public partial class SkillConfigTable
     /// </summary>
     /// <param name="id">SKill ID</param>
     /// <returns></returns>
-    public static SkillConfig GetSkillConfig(string id)
+    public static SkillConfig GetSkillConfigByRecordId(string id)
     {
         if (id != null)
         {

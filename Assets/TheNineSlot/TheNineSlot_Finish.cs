@@ -57,7 +57,7 @@ public partial class SkillSet
         }
         
         // 已经有技能石的格子不做修改
-        if (SkillConfigTable.GetSkillConfig(skillId) != null)
+        if (SkillConfigTable.GetSkillConfigByRecordId(skillId) != null)
             return SkillSetRandomFix(type, _skillSet, targetSlot + 1, baseOnAcc);
 
         skillId = null;
@@ -67,8 +67,8 @@ public partial class SkillSet
         if (targetSlot == 7)
         {
             // 第一列技能必须有普通技能
-            var a1SkillConfig = SkillConfigTable.GetSkillConfig(_skillSet.a1);
-            var b1SkillConfig = SkillConfigTable.GetSkillConfig(_skillSet.b1);
+            var a1SkillConfig = SkillConfigTable.GetSkillConfigByRecordId(_skillSet.a1);
+            var b1SkillConfig = SkillConfigTable.GetSkillConfigByRecordId(_skillSet.b1);
             if (a1SkillConfig.SP_LEVEL != 0 && b1SkillConfig.SP_LEVEL != 0)
             {
                 filterForm = new SkillStonesBox.StoneFilterForm

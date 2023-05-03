@@ -76,7 +76,7 @@ public partial class SkillEditLayer : UILayer
             nineSlot.AllSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(targetStoneId));
         }
         
-        var skillConfig = SkillConfigTable.GetSkillConfig(skillID);
+        var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skillID);
         stonesBox._tabEffects.SkillButtonExplosion(skillConfig.SP_LEVEL,
             PosCal.GetWorldPos(PreScene.target.postProcessCamera, 
                 nineSlot.AllSlot[targetSlot - 1]._cell.GetComponent<RectTransform>(), 

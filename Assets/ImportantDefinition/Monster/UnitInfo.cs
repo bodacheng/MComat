@@ -8,7 +8,7 @@ public class UnitInfo
 {
     public string id;
     public string r_id;
-    public int level = 1;
+    public float level = 1;
     public SkillSet set = new SkillSet();
     
     public UnitInfo Clone()
@@ -86,7 +86,7 @@ public class UnitInfo
                         set.c3 = t.SkillId;
                         break;
                 }
-                var sc = SkillConfigTable.GetSkillConfig(t.SkillId);
+                var sc = SkillConfigTable.GetSkillConfigByRecordId(t.SkillId);
                 if (t.Born == "true" && sc.EVENT_CODE == "Born")
                 {
                 }else

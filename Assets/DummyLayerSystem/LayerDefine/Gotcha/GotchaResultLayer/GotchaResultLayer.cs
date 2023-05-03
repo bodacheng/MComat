@@ -133,7 +133,7 @@ public partial class GotchaResultLayer : UILayer
         {
             var set = new StoneFallEffectSet();
             set.Setup(GetEffectName);
-            var skillConfig = SkillConfigTable.GetSkillConfig(result.SkillId);
+            var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(result.SkillId);
             await set.Load(skillConfig.SP_LEVEL);
             DicAdd<StoneOfPlayerInfo, StoneFallEffectSet>.Add(_effectDic, result, set);
         }

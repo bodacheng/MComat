@@ -74,7 +74,7 @@ public class FrontLayer : UILayer
             var equipments = Stones.GetEquippingStones(info?.id);
             skillList = equipments.Select(x=>
             {
-                var skillConfig =  SkillConfigTable.GetSkillConfig(x.SkillId);
+                var skillConfig =  SkillConfigTable.GetSkillConfigByRecordId(x.SkillId);
                 return skillConfig.REAL_NAME;
             }).ToList();
             RegisterRandomShowSkill();

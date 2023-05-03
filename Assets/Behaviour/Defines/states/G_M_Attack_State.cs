@@ -4,21 +4,13 @@ namespace Soul
 {
     public class G_M_Attack_State : Behavior
     {
-
-        readonly string clip_name;
-
         #region Constructor
         public G_M_Attack_State(string clip_name)
         {
             this.clip_name = clip_name;
         }
         #endregion
-
-        public override void Pre_process_before_enter()
-        {
-            base.Pre_process_before_enter();
-        }
-
+        
         #region Capacity Enter Exit
         public override void AI_State_enter()
         {

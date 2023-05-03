@@ -9,7 +9,7 @@ namespace Soul
         // 技能动画列表（不包括基础动画）
         public readonly List<string> SkillTypeKeys;
 
-        public BehaviorsIncubator(Empty_State empty_State, IDictionary<string, SkillEntity> ToFormAttackStateList)
+        public BehaviorsIncubator(Empty_State empty_State, IDictionary<string, SkillEntity> toFormAttackStateList)
         {
             BehaviorDic = new Dictionary<string, Behavior>
             {
@@ -56,11 +56,13 @@ namespace Soul
             BehaviorDic.Add("getUp", getUp);
 
             SkillTypeKeys = new List<string>();
-            foreach (KeyValuePair<string, SkillEntity> valuePair in ToFormAttackStateList)
+            foreach (KeyValuePair<string, SkillEntity> valuePair in toFormAttackStateList)
             {
                 var _set = valuePair.Value;
                 if (_set == null)
                     continue;
+
+                SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByRecordId(_set.SkillID);
                 
                 if (!BehaviorDic.Keys.Contains(_set.REAL_NAME))
                 {
@@ -91,8 +93,8 @@ namespace Soul
                             G_Attack_State _GI_Attack = new G_Attack_State(null, 0f, 0f, 10f, _set.REAL_NAME)
                             {
                                 StateType = BehaviorType.GI,
-                                AT = _set.AT,
-                                nextAttackCanRushFirst = false
+                                nextAttackCanRushFirst = false,
+                                SkillConfig = skillConfig
                             };
                             BehaviorDic.Add(_set.REAL_NAME, _GI_Attack);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
@@ -101,8 +103,8 @@ namespace Soul
                             G_M_Attack_State _GM_Attack = new G_M_Attack_State(_set.REAL_NAME)
                             {
                                 StateType = BehaviorType.GM,
-                                AT = _set.AT,
-                                nextAttackCanRushFirst = false
+                                nextAttackCanRushFirst = false,
+                                SkillConfig = skillConfig
                             };
                             BehaviorDic.Add(_set.REAL_NAME, _GM_Attack);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
@@ -111,8 +113,8 @@ namespace Soul
                             G_Attack_State _GR_Attack = new G_Attack_State("dash", 40f, 1.4f, 10f, _set.REAL_NAME)
                             {
                                 StateType = BehaviorType.GR,
-                                AT = _set.AT,
-                                nextAttackCanRushFirst = false
+                                nextAttackCanRushFirst = false,
+                                SkillConfig = skillConfig
                             };
                             BehaviorDic.Add(_set.REAL_NAME, _GR_Attack);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
@@ -121,8 +123,8 @@ namespace Soul
                             Counter_State counter = new Counter_State(_set.REAL_NAME)
                             {
                                 StateType = BehaviorType.CT,
-                                AT = _set.AT,
-                                nextAttackCanRushFirst = false
+                                nextAttackCanRushFirst = false,
+                                SkillConfig = skillConfig
                             };
                             BehaviorDic.Add(_set.REAL_NAME, counter);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);

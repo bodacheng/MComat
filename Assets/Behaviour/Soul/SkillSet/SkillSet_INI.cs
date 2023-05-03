@@ -26,15 +26,15 @@ public partial class SkillSet
     /// </summary>
     public void SortNineAndTwo()
     {
-        var aConfig1 = a1 != null ? SkillConfigTable.GetSkillConfig(a1) : null;
-        var aConfig2 = a2 != null ? SkillConfigTable.GetSkillConfig(a2) : null;
-        var aConfig3 = a3 != null ? SkillConfigTable.GetSkillConfig(a3) : null;
-        var bConfig1 = b1 != null ? SkillConfigTable.GetSkillConfig(b1) : null;
-        var bConfig2 = b2 != null ? SkillConfigTable.GetSkillConfig(b2) : null;
-        var bConfig3 = b3 != null ? SkillConfigTable.GetSkillConfig(b3) : null;
-        var cConfig1 = c1 != null ? SkillConfigTable.GetSkillConfig(c1) : null;
-        var cConfig2 = c2 != null ? SkillConfigTable.GetSkillConfig(c2) : null;
-        var cConfig3 = c3 != null ? SkillConfigTable.GetSkillConfig(c3) : null;
+        var aConfig1 = a1 != null ? SkillConfigTable.GetSkillConfigByRecordId(a1) : null;
+        var aConfig2 = a2 != null ? SkillConfigTable.GetSkillConfigByRecordId(a2) : null;
+        var aConfig3 = a3 != null ? SkillConfigTable.GetSkillConfigByRecordId(a3) : null;
+        var bConfig1 = b1 != null ? SkillConfigTable.GetSkillConfigByRecordId(b1) : null;
+        var bConfig2 = b2 != null ? SkillConfigTable.GetSkillConfigByRecordId(b2) : null;
+        var bConfig3 = b3 != null ? SkillConfigTable.GetSkillConfigByRecordId(b3) : null;
+        var cConfig1 = c1 != null ? SkillConfigTable.GetSkillConfigByRecordId(c1) : null;
+        var cConfig2 = c2 != null ? SkillConfigTable.GetSkillConfigByRecordId(c2) : null;
+        var cConfig3 = c3 != null ? SkillConfigTable.GetSkillConfigByRecordId(c3) : null;
         
         A1 = aConfig1 != null ? GetSkillEntity(a1) : null;
         A2 = aConfig2 != null ? GetSkillEntity(a2) : null;
@@ -179,12 +179,12 @@ public partial class SkillSet
         IDictionary<string, SkillEntity> seDic = new Dictionary<string, SkillEntity>();
         var StateTransitionSetList = new List<SkillEntity>();
         
-        _empty = new SkillEntity("Empty", BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,  -1);
-        _victory = new SkillEntity("Victory",BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);
-        _death = new SkillEntity("Death", BehaviorType.NONE, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);
-        _hit = new SkillEntity("Hit", BehaviorType.Hit, 0, 0,new AIAttrs(), _h1List.ToArray(),null,InputKey.Null, InputKey.Null, -1);
-        _getUp = new SkillEntity("getUp",  BehaviorType.GetUp, 0, 0, new AIAttrs(), _h1List.ToArray(), null, InputKey.Any, InputKey.Null, -1);
-        _knockOff = new SkillEntity("KnockOff",  BehaviorType.KnockOff, 0, 0, new AIAttrs(), R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, -1);
+        _empty = new SkillEntity("Empty", BehaviorType.NONE, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,  -1);
+        _victory = new SkillEntity("Victory",BehaviorType.NONE, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);
+        _death = new SkillEntity("Death", BehaviorType.NONE, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);
+        _hit = new SkillEntity("Hit", BehaviorType.Hit, new AIAttrs(), _h1List.ToArray(),null,InputKey.Null, InputKey.Null, -1);
+        _getUp = new SkillEntity("getUp",  BehaviorType.GetUp, new AIAttrs(), _h1List.ToArray(), null, InputKey.Any, InputKey.Null, -1);
+        _knockOff = new SkillEntity("KnockOff", BehaviorType.KnockOff, new AIAttrs(), R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, -1);
         if (FightGlobalSetting.HasDefend)
         {
             D.CasualTo = _h1List.ToArray();
@@ -275,7 +275,7 @@ public partial class SkillSet
     
     SkillEntity GetSkillEntity(string skillId)
     {
-        var sc = SkillConfigTable.GetSkillConfig(skillId);
+        var sc = SkillConfigTable.GetSkillConfigByRecordId(skillId);
         if (sc == null)
         {
             return null;
@@ -285,8 +285,6 @@ public partial class SkillSet
             sc.RECORD_ID,
             sc.REAL_NAME,
             sc.STATE_TYPE,
-            FightGlobalSetting.ATCal(sc.ATTACK_WEIGHT, 1),
-            FightGlobalSetting.StoneHpCal(sc.HP_WEIGHT, 1),
             sc.AIAttrs,
             null,
             null,

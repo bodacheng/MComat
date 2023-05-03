@@ -23,7 +23,7 @@ public partial class SkillSet
         
         bool HasStone(string skillID)
         {
-            var skillConfig = SkillConfigTable.GetSkillConfig(skillID);
+            var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skillID);
             return skillConfig != null;
         }
         
@@ -51,15 +51,15 @@ public partial class SkillSet
     // 当前总分。不问技能组是否合法
     public static int SkillBalancePoint(string a1SkillId, string a2SkillId, string a3SkillId, string b1SkillId, string b2SkillId, string b3SkillId, string c1SkillId, string c2SkillId, string c3SkillId)
     {
-        var skillConfigA1 = SkillConfigTable.GetSkillConfig(a1SkillId);
-        var skillConfigA2 = SkillConfigTable.GetSkillConfig(a2SkillId);
-        var skillConfigA3 = SkillConfigTable.GetSkillConfig(a3SkillId);
-        var skillConfigB1 = SkillConfigTable.GetSkillConfig(b1SkillId);
-        var skillConfigB2 = SkillConfigTable.GetSkillConfig(b2SkillId);
-        var skillConfigB3 = SkillConfigTable.GetSkillConfig(b3SkillId);
-        var skillConfigC1 = SkillConfigTable.GetSkillConfig(c1SkillId);
-        var skillConfigC2 = SkillConfigTable.GetSkillConfig(c2SkillId);
-        var skillConfigC3 = SkillConfigTable.GetSkillConfig(c3SkillId);
+        var skillConfigA1 = SkillConfigTable.GetSkillConfigByRecordId(a1SkillId);
+        var skillConfigA2 = SkillConfigTable.GetSkillConfigByRecordId(a2SkillId);
+        var skillConfigA3 = SkillConfigTable.GetSkillConfigByRecordId(a3SkillId);
+        var skillConfigB1 = SkillConfigTable.GetSkillConfigByRecordId(b1SkillId);
+        var skillConfigB2 = SkillConfigTable.GetSkillConfigByRecordId(b2SkillId);
+        var skillConfigB3 = SkillConfigTable.GetSkillConfigByRecordId(b3SkillId);
+        var skillConfigC1 = SkillConfigTable.GetSkillConfigByRecordId(c1SkillId);
+        var skillConfigC2 = SkillConfigTable.GetSkillConfigByRecordId(c2SkillId);
+        var skillConfigC3 = SkillConfigTable.GetSkillConfigByRecordId(c3SkillId);
         
         var skillConfigs = new List<SkillConfig>();
         
@@ -125,7 +125,7 @@ public partial class SkillSet
         
         for (var i = 0; i < checkSame.Count; i++)
         {
-            if (i != checkSame.Count - 1 && SkillConfigTable.GetSkillConfig(checkSame[i]) != null)
+            if (i != checkSame.Count - 1 && SkillConfigTable.GetSkillConfigByRecordId(checkSame[i]) != null)
             {
                 for (var y = i + 1; y < checkSame.Count; y++)
                 {
@@ -143,9 +143,9 @@ public partial class SkillSet
     {
         // 第一列技能必须有普通技能
         var normalSkillsOfAList = new List<string>();            
-        var skillConfigA1 = SkillConfigTable.GetSkillConfig(a1Skill);
-        var skillConfigB1 = SkillConfigTable.GetSkillConfig(a2Skill);
-        var skillConfigC1 = SkillConfigTable.GetSkillConfig(a3Skill);
+        var skillConfigA1 = SkillConfigTable.GetSkillConfigByRecordId(a1Skill);
+        var skillConfigB1 = SkillConfigTable.GetSkillConfigByRecordId(a2Skill);
+        var skillConfigC1 = SkillConfigTable.GetSkillConfigByRecordId(a3Skill);
         
         if (skillConfigA1 != null && skillConfigA1.SP_LEVEL == 0)
             normalSkillsOfAList.Add(skillConfigA1.REAL_NAME);

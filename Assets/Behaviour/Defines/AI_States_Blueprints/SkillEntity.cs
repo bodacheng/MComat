@@ -15,8 +15,6 @@ namespace Skill
         public string SkillID;
         public string REAL_NAME;
         public BehaviorType StateType;
-        public float AT;
-        public float HP;
         public AIAttrs AIAttrs = new AIAttrs();
         public string[] CasualTo = { };
         public bool CAN_BE_CANCELLED_TO = true;
@@ -31,21 +29,9 @@ namespace Skill
         {
         }
         
-        public void SetLv(float level)
-        {
-            var sc = SkillConfigTable.GetSkillConfig(SkillID);
-            if (sc != null)
-            {
-                AT = FightGlobalSetting.ATCal(sc.ATTACK_WEIGHT, level);
-                HP = FightGlobalSetting.StoneHpCal(sc.HP_WEIGHT, level);
-            }
-        }
-        
         public SkillEntity( string SkillID,
                             string REAL_NAME,
                             BehaviorType _attackType,
-                            float _AT,
-                            float _HP,
                             AIAttrs AIAttrs,
                             string[] _casual_to_state_nums,
                             string[] _forced_to_state_nums,
@@ -55,8 +41,6 @@ namespace Skill
             this.SkillID = SkillID;
             this.REAL_NAME = REAL_NAME;
             this.StateType = _attackType;
-            this.AT = _AT;
-            this.HP = _HP;
             this.CasualTo = _casual_to_state_nums;
             this.ForcedTransitions = _forced_to_state_nums;
             this.EnterInput = _enterInput;
@@ -76,8 +60,6 @@ namespace Skill
         
         public SkillEntity( string REAL_NAME,
                             BehaviorType _BType,
-                            float _AT,
-                            float _HP,
                             AIAttrs aIAttrs,
                             bool can_be_cancelled_to,
                             InputKey enterInput, InputKey exitInput,
@@ -86,8 +68,6 @@ namespace Skill
             SkillID = null;
             this.REAL_NAME = REAL_NAME;
             StateType = _BType;
-            AT = _AT;
-            HP = _HP;
             CAN_BE_CANCELLED_TO = can_be_cancelled_to;
             EnterInput = enterInput;
             ExitInput = exitInput;
@@ -97,8 +77,6 @@ namespace Skill
         
         public SkillEntity( string REAL_NAME,
                             BehaviorType _attackType,
-                            float _AT,
-                            float _HP,
                             AIAttrs aIAttrs,
                             string[] _casual_to_state_nums,
                             string[] _forced_to_state_nums,
@@ -108,8 +86,6 @@ namespace Skill
             this.SkillID = null;
             this.REAL_NAME = REAL_NAME;
             this.StateType = _attackType;
-            this.AT = _AT;
-            this.HP = _HP;
             this.CasualTo = _casual_to_state_nums;
             this.ForcedTransitions = _forced_to_state_nums;
             this.EnterInput = _enterInput;
@@ -130,8 +106,6 @@ namespace Skill
         public SkillEntity( string SkillID,
                             string REAL_NAME,
                             BehaviorType _BType,
-                            float _AT,
-                            float _HP,
                             float AITriggerDistanceMin,float AITriggerDistanceMax,
                             bool can_be_cancelled_to,
                             InputKey enterInput, InputKey exitInput,
@@ -140,8 +114,6 @@ namespace Skill
             this.SkillID = SkillID;
             this.REAL_NAME = REAL_NAME;
             StateType = _BType;
-            AT = _AT;
-            HP = _HP;
             CAN_BE_CANCELLED_TO = can_be_cancelled_to;
             EnterInput = enterInput;
             ExitInput = exitInput;
@@ -160,8 +132,6 @@ namespace Skill
                     {
                         REAL_NAME = "Rush",
                         StateType = BehaviorType.AC,
-                        AT = 0,
-                        HP = 0,
                         AIAttrs = new AIAttrs
                         {
                             AI_MIN_DIS = -1,
@@ -179,8 +149,6 @@ namespace Skill
                     {
                         REAL_NAME = "RushBack",
                         StateType = BehaviorType.AC,
-                        AT = 0,
-                        HP = 0,
                         AIAttrs = new AIAttrs
                         {
                             AI_MIN_DIS = -1,
@@ -206,8 +174,6 @@ namespace Skill
             {
                 REAL_NAME = "Defend",
                 StateType = BehaviorType.Def,
-                AT = 0,
-                HP = 0,
                 AIAttrs = new AIAttrs
                 {
                     AI_MIN_DIS = -1,
@@ -231,8 +197,6 @@ namespace Skill
                     {
                         REAL_NAME = "Move",
                         StateType = BehaviorType.MV,
-                        AT = 0,
-                        HP = 0,
                         AIAttrs = new AIAttrs
                         {
                             AI_MIN_DIS = -1,
@@ -250,8 +214,6 @@ namespace Skill
                     {
                         REAL_NAME = "Move",
                         StateType = BehaviorType.MV,
-                        AT = 0,
-                        HP = 0,
                         AIAttrs = new AIAttrs
                         {
                             AI_MIN_DIS = -1,
@@ -269,8 +231,6 @@ namespace Skill
                     {
                         REAL_NAME = "Move",
                         StateType = BehaviorType.MV,
-                        AT = 0,
-                        HP = 0,
                         AIAttrs = new AIAttrs
                         {
                             AI_MIN_DIS = -1,
@@ -288,8 +248,6 @@ namespace Skill
                     {
                         REAL_NAME = "Move",
                         StateType = BehaviorType.MV,
-                        AT = 0,
-                        HP = 0,
                         AIAttrs = new AIAttrs
                         {
                             AI_MIN_DIS = -1,

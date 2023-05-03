@@ -5,7 +5,6 @@ namespace Soul
 {
     public class Idle_State : Behavior
     {
-        readonly string _clipName;
         private bool showVictoryMotion;
         private bool motionReset = false;
         
@@ -16,7 +15,7 @@ namespace Soul
         
         public Idle_State(string clipName)
         {
-            this._clipName = clipName;
+            this.clip_name = clipName;
         }
         
         public override void AI_State_enter()
@@ -27,11 +26,11 @@ namespace Soul
             motionReset = false;
             this._Animator.SetFloat("speed", 0f);
             if (showVictoryMotion)
-                Animation_Manger.AnimationTrigger(_clipName, true, CommonSetting.CharacterAnimDuration);
+                Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
             this._Rigidbody.velocity = Vector3.zero;
             this._Rigidbody.drag = FightGlobalSetting.OnTouchEnemyBodyRigidDrag;
             
-            if (_clipName == "victory")
+            if (clip_name == "victory")
             {
                 var deadEnemies = Sensor.GetActiveDeadEnemies();
                 var oneActive = deadEnemies.Find(x => x.gameObject.activeSelf);
@@ -57,7 +56,7 @@ namespace Soul
         
         public override void _State_Update()
         {
-            if (showVictoryMotion && !motionReset && _clipName == "victory" && !Animation_Manger._toUse.isLooping && AnimationCasualFinishedFlag())
+            if (showVictoryMotion && !motionReset && clip_name == "victory" && !Animation_Manger._toUse.isLooping && AnimationCasualFinishedFlag())
             {
                 Animation_Manger.PlayLayerAnim(null, true, 0.05f);
                 motionReset = true;

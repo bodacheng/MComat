@@ -56,8 +56,8 @@ namespace mainMenu
                 {
                     StoneOfPlayerInfo myStone1 = Stones.Get(targets[j]);
                     StoneOfPlayerInfo myStone2 = Stones.Get(targets[j + 1]);
-                    SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfig(myStone1.SkillId);
-                    SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfig(myStone2.SkillId);
+                    SkillConfig skillConfig1 = SkillConfigTable.GetSkillConfigByRecordId(myStone1.SkillId);
+                    SkillConfig skillConfig2 = SkillConfigTable.GetSkillConfigByRecordId(myStone2.SkillId);
 
                     if (order == 1 ? int.Parse(skillConfig1.RECORD_ID) > int.Parse(skillConfig2.RECORD_ID) : int.Parse(skillConfig2.RECORD_ID) < int.Parse(skillConfig1.RECORD_ID))
                     {

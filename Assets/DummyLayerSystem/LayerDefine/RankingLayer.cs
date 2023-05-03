@@ -27,7 +27,7 @@ public class RankingLayer : UILayer
         
         miniNineForShow.AddOnClickToSlots((RECORD_ID) =>
         {
-            var skillConfig = SkillConfigTable.GetSkillConfig(RECORD_ID);
+            var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(RECORD_ID);
             connector.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
         });
         

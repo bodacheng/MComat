@@ -4,7 +4,6 @@ namespace Soul
 {
     public class Counter_State : Behavior
     {
-        readonly string clip_name;
         public Counter_State(string _clip_name)
         {
             clip_name = _clip_name;

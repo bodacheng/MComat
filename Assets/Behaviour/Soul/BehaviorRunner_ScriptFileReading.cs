@@ -67,42 +67,42 @@ namespace Soul
                 
                 if (!alreadyInList.Contains("Empty"))
                 {
-                    SkillEntity Empty = new SkillEntity("Empty", 0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, 0);
+                    SkillEntity Empty = new SkillEntity("Empty", 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, 0);
                     after_list.Add(Empty);
                     alreadyInList.Add("Empty");
                 }
                 
                 if (!alreadyInList.Contains("Victory"))
                 {
-                    SkillEntity Victory =  new SkillEntity("Victory",  0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, 0);
+                    SkillEntity Victory =  new SkillEntity("Victory",0,new AIAttrs(), null, null, InputKey.Null, InputKey.Null, 0);
                     after_list.Add(Victory);
                     alreadyInList.Add("Victory");
                 }
                 
                 if (!alreadyInList.Contains("Death"))
                 {
-                    SkillEntity Death = new SkillEntity("Death",  0, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, 0);
+                    SkillEntity Death = new SkillEntity("Death", 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, 0);
                     after_list.Add(Death);
                     alreadyInList.Add("Death");
                 }
                 
                 if (!alreadyInList.Contains("Hit"))
                 {
-                    SkillEntity Hit = new SkillEntity("Hit",BehaviorType.Hit, 0, 0, new AIAttrs(),null,null,InputKey.Null, InputKey.Null,0);
+                    SkillEntity Hit = new SkillEntity("Hit",BehaviorType.Hit, new AIAttrs(),null,null,InputKey.Null, InputKey.Null,0);
                     after_list.Add(Hit);
                     alreadyInList.Add("Hit");
                 }
                 
                 if (!alreadyInList.Contains("KnockOff"))
                 {
-                    SkillEntity KnockOff = new SkillEntity("KnockOff",  BehaviorType.Hit, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,0);
+                    SkillEntity KnockOff = new SkillEntity("KnockOff",  BehaviorType.Hit, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,0);
                     after_list.Add(KnockOff);
                     alreadyInList.Add("KnockOff");
                 }
                 
                 if (!alreadyInList.Contains("getUp"))
                 {
-                    SkillEntity getUp = new SkillEntity("getUp",  BehaviorType.GetUp, 0, 0, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,0);
+                    SkillEntity getUp = new SkillEntity("getUp",  BehaviorType.GetUp, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,0);
                     after_list.Add(getUp);
                     alreadyInList.Add("getUp");
                 }

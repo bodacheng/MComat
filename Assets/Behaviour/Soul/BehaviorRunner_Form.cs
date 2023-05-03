@@ -142,12 +142,9 @@ namespace Soul
         {
             foreach (var kv in BehaviourDic)
             {
-                var sc = SkillConfigTable.GetSkillConfig(kv.Key);
-                if (sc == null)
+                if (kv.Value.SkillConfig == null)
                     continue;
-                kv.Value.AT = FightGlobalSetting.ATCal(sc.ATTACK_WEIGHT, level);
-                SkillEntityDic.TryGetValue(kv.Key, out var skillEntity);
-                skillEntity.AT = kv.Value.AT;
+                kv.Value.Attack = FightGlobalSetting.ATCal(kv.Value.SkillConfig.ATTACK_WEIGHT, level);
             }
         }
     }

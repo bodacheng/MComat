@@ -37,4 +37,4 @@ MonoBehaviour:
   team1AIMode: 0
   team2AIMode: 0
   dumbAIDecisionDelay: 20
-  stageRefLevel: 2
+  stageRefLevel: 1.5

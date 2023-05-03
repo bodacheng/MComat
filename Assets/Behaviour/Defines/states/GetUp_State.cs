@@ -4,18 +4,12 @@ namespace Soul
 {
     public class GetUp : Behavior
     {
-        readonly string clip_name;
         float counter;
-        public GetUp(string _clip_name)
+        public GetUp(string clipName)
         {
-            clip_name = _clip_name;
+            clip_name = clipName;
         }
-
-        public override void Pre_process_before_enter()
-        {
-            base.Pre_process_before_enter();
-        }
-
+        
         // On what condition can we exit this state 
         public override bool Capacity_Exit_Condition()
         {

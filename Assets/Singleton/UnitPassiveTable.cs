@@ -31,7 +31,7 @@ public class UnitPassiveTable
 		var returnValue = new List<string>();
 		foreach (var row in rowList)
 		{
-			if (SkillConfigTable.GetSkillConfig(row.SKILL_RECORD_ID) != null)
+			if (SkillConfigTable.GetSkillConfigByRecordId(row.SKILL_RECORD_ID) != null)
 			{
 				returnValue.Add(row.SKILL_RECORD_ID);
 			}

@@ -52,7 +52,7 @@ public class ArcadeTop : UILayer
         nineForShow.AddOnClickToSlots(
             (RECORD_ID) =>
             {
-                var skillConfig = SkillConfigTable.GetSkillConfig(RECORD_ID);
+                var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(RECORD_ID);
                 connector.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
             }
         );

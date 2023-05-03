@@ -23,15 +23,17 @@ namespace Soul
         protected BuffsRunner _BuffsRunner;
         protected BlendShapeProxy blendShapeProxy;
         protected Personality_events pEvents;
-        
-        public float AT;
+
+        public SkillConfig SkillConfig;
+        public float Attack;
         public string StateKey;
+        protected string clip_name;
         public int spLevel;
         public float triggerAttackRangeMin, triggerAttackRangeMax;
         public int TriggerAttackHeight;
-        protected bool AbsorbEnergyFinished;
         public BehaviorType StateType;
         public bool nextAttackCanRushFirst;
+        bool AbsorbEnergyFinished;
         int temp;
 
         public void EnergyAbsorb(CriticalGaugeMode gaugeMode, FightParamsReference victim)
@@ -114,16 +116,18 @@ namespace Soul
         // Process when entering the state 
         public virtual void AI_State_enter()
         {
-            FightParamsRef.AT = AT;
+            if (this._DATA_CENTER.UnitInfo != null && this.SkillConfig != null)
+                Debug.Log(this._DATA_CENTER.UnitInfo.r_id + " : " +SkillConfig.REAL_NAME+ " : "+ Attack);
+            FightParamsRef.AT = Attack;
             FightParamsRef.CostCriticalGaugeBySPLevel(spLevel);
-            BeheviourFrameCounter = 0;
+            BehaviorFrameCounter = 0;
             AbsorbEnergyFinished = false;
         }
         
         // Process when entering the state 
         public virtual void AI_State_enter(V_Damage newValue)
         {
-            FightParamsRef.AT = AT;
+            FightParamsRef.AT = Attack;
             FightParamsRef.CostCriticalGaugeBySPLevel(spLevel);
         }
 
@@ -145,10 +149,10 @@ namespace Soul
         }
         
         // Process when exit the state
-        protected int BeheviourFrameCounter;
+        protected int BehaviorFrameCounter;
         public virtual void _State_Update()
         {
-            BeheviourFrameCounter++;
+            BehaviorFrameCounter++;
         }
 
         // Local update of the state 

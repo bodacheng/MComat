@@ -44,7 +44,7 @@ namespace dataAccess
             }
             
             item.Inherent = info.Born == "true";
-            item._SkillConfig = SkillConfigTable.GetSkillConfig(Dic[instanceId].SkillId);
+            item._SkillConfig = SkillConfigTable.GetSkillConfigByRecordId(Dic[instanceId].SkillId);
             item.gameObject.name = "stone_" + item._SkillConfig.TYPE + "_" + item._SkillConfig.REAL_NAME;
             item.instanceId = instanceId;
             item.gameObject.transform.SetParent(PreScene.target.stonesTempContainer);
@@ -55,7 +55,7 @@ namespace dataAccess
         // 有两种模式，1: “账户技能石” 2 ：纯粹展示用技能石
         public static async UniTask<SKStoneItem> GenerateStoneModel(string skillID, bool openStoneFeature)
         {
-            var skillConfig = SkillConfigTable.GetSkillConfig(skillID);
+            var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skillID);
             if (skillConfig == null)
             {
                 return null;

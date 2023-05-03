@@ -27,7 +27,7 @@ public partial class StageEditor {
         }
         _selectedUnitIndex = EditorGUILayout.Popup("角色名：", _selectedUnitIndex, _unitIDsAndNames.Values.ToArray());
         _focusingUnitInfo.r_id =  _unitIDsAndNames.Count > _selectedUnitIndex ? _unitIDsAndNames.ElementAt(_selectedUnitIndex).Key : null;
-        _focusingUnitInfo.level = EditorGUILayout.IntField("Unit Level:", _focusingUnitInfo.level);
+        _focusingUnitInfo.level = EditorGUILayout.FloatField("Unit Level:", _focusingUnitInfo.level);
         return _focusingUnitInfo.r_id;
     }
 }

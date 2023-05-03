@@ -169,7 +169,7 @@ namespace mainMenu
             float wholeHp = 0;
             for (var index = 0; index < skillIDs.Count; index++)
             {
-                var skillConfig = SkillConfigTable.GetSkillConfig(skillIDs[index]);
+                var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skillIDs[index]);
                 wholeHp += FightGlobalSetting.StoneHpCal(skillConfig.HP_WEIGHT, level[index]);
             }
             return wholeHp;

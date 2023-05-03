@@ -14,7 +14,6 @@ namespace Soul
 {
     public class G_Attack_State : Behavior
     {
-        readonly string _clipName;
         readonly string _dashClipName;
         readonly int _skillEmergentLevel;
         readonly bool _isEventAttackLaunchState;
@@ -38,21 +37,21 @@ namespace Soul
         }
 
         #region Constructor
-        public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime, float approachingSpeed, string clip_name)
+        public G_Attack_State(string dashClipName, float rushSpeed, float maxRushTime, float approachingSpeed, string clipName)
         {
             this._rushSpeed = rushSpeed;
             this._maxRushTime = maxRushTime;
             _approachSpeed = approachingSpeed;
-            this._clipName = clip_name;
-            this._dashClipName = dash_clip_name;
+            this.clip_name = clipName;
+            this._dashClipName = dashClipName;
         }
 
-        public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime, string clip_name, bool EventLauncher_Or_Ender)
+        public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime, string clipName, bool EventLauncher_Or_Ender)
         {
             this._maxRushTime = maxRushTime;
             this._dashClipName = dash_clip_name;
             this._rushSpeed = rushSpeed;
-            this._clipName = clip_name;
+            this.clip_name = clipName;
             _isEventAttackLaunchState = EventLauncher_Or_Ender;
             _isEventAttackEndState = !EventLauncher_Or_Ender;
         }
@@ -61,7 +60,7 @@ namespace Soul
         #region Capacity Enter Exit
         public override bool Capacity_Exit_Condition()
         {
-            return AnimationCasualFinishedFlag() && this.Animation_Manger._toUse.name == _clipName;
+            return AnimationCasualFinishedFlag() && this.Animation_Manger._toUse.name == clip_name;
         }
 
         #endregion
@@ -124,14 +123,14 @@ namespace Soul
             {
                 //一般来说下面这些情况不跑？
                 _phase = Phase.noRushState;
-                Animation_Manger.AnimationTrigger(_clipName, true, CommonSetting.CharacterAnimDuration);
+                Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
                 return;
             }
 
             collider = Sensor.GetClosestEnemyColliderInSensorRange();
             if (collider == null)
             {
-                Animation_Manger.AnimationTrigger(_clipName, true, CommonSetting.CharacterAnimDuration);
+                Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
                 _phase = Phase.farFromReach;
                 return;
             }
@@ -139,7 +138,7 @@ namespace Soul
             if (distance < Sensor.SensorRadius / 3)//内环检测结果
             {
                 _phase = Phase.reachedFromBeginning;
-                Animation_Manger.AnimationTrigger(_clipName, true, CommonSetting.CharacterAnimDuration);
+                Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
                 if (Sensor.GetEnemiesByDistance(false).Count > 0)
                 {
                     if (Sensor.GetEnemiesByDistance(false)[0] != null)
@@ -174,12 +173,12 @@ namespace Soul
                 else
                 {
                     _phase = Phase.reachedFromBeginning;//这个环节最绕脑子，大概指的是如果外环也有敌人，就当“已经到达”。但其实从出发点将，一般的普通近距离攻击在中距离下也不会触发才对
-                    Animation_Manger.AnimationTrigger(_clipName, true, CommonSetting.CharacterAnimDuration);
+                    Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
                     return;
                 }
             }
 
-            Animation_Manger.AnimationTrigger(_clipName, true, CommonSetting.CharacterAnimDuration);
+            Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
             _phase = Phase.farFromReach;
             return;
         }
@@ -207,7 +206,7 @@ namespace Soul
                         }
                         if (_phase == Phase.reached)
                         {
-                            Animation_Manger.AnimationTrigger(_clipName, true, CommonSetting.CharacterAnimDuration);
+                            Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
                             _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                             _Rigidbody.velocity = Vector3.zero;
                             Sensor.GetEnemiesByDistance(true);
@@ -227,7 +226,7 @@ namespace Soul
                     }
                     if (_phase == Phase.reached)
                     {
-                        Animation_Manger.AnimationTrigger(_clipName, true, CommonSetting.CharacterAnimDuration);
+                        Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
                         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                         _Rigidbody.velocity = Vector3.zero;
                         Sensor.DetectionStart(5, false);

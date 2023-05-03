@@ -4,7 +4,6 @@ namespace Soul
 {
     public class GMoveEscapeState : Behavior
     {
-        readonly string clip_name;
         Transform mainCam;
         Quaternion screenMovementSpace;
         Vector3 screenMovementForward, screenMovementRight, use_direction;
@@ -30,7 +29,7 @@ namespace Soul
         public override void _State_Update()
         {
             base._State_Update();
-            if (BeheviourFrameCounter == 5)
+            if (BehaviorFrameCounter == 5)
                 _BuffsRunner.RunSubCoroutineOfState(_breakFreeCoroutine);
         }
         

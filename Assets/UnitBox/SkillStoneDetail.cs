@@ -95,7 +95,7 @@ namespace mainMenu
                 Clear();
                 return;
             }
-            var skillConfig = SkillConfigTable.GetSkillConfig(currentStone.SkillId);
+            var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(currentStone.SkillId);
             RefreshInfo(skillConfig);
             var row = PowerEstimateTable.Find_RECORD_ID(skillConfig.RECORD_ID);
             float.TryParse(row.HP, out float hp);
@@ -113,22 +113,22 @@ namespace mainMenu
         }
         
         // 技能画面展示用
-        public void RefreshInfo(SkillEntity skillEntity)
+        public void RefreshInfo(SkillEntity skillEntity, int level)
         {
             if (skillEntity == null)
             {
                 Clear();
                 return;
             }
-            var skillConfig = SkillConfigTable.GetSkillConfig(skillEntity.SkillID);
+            var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skillEntity.SkillID);
             RefreshInfo(skillConfig);
             if (AT != null)
             {
-                AT.text = "AT = " + skillEntity.AT;
+                AT.text = "AT = " + FightGlobalSetting.ATCal(skillConfig.ATTACK_WEIGHT, level);
             }
             if (HP != null)
             {
-                HP.text = "HP = " + skillEntity.HP;
+                HP.text = "HP = " + FightGlobalSetting.StoneHpCal(skillConfig.HP_WEIGHT, level);
             }
         }
         

@@ -170,7 +170,7 @@ public partial class Data_Center : MonoBehaviour
     /// <param name="lv"> 两种模式，如果带入-1，将按照角色等级来初始化，用于玩家账户队伍。带入其他值则按其他值来，用于关卡队伍 </param>
     public void Step3Initialize(TeamConfig teamConfig, CriticalGaugeMode criticalGaugeMode, AIMode aiMode, int aiDelayFrame, float teamHpRate, UnitInfo unitInfo)
     {
-        Debug.Log(teamConfig.myTeam + " : "+unitInfo.id + " : " + unitInfo.level);
+        this.unitInfo = unitInfo;
         FightDataRef.IsDead.Value = false;
         BodyElementTagAndLayerSet(teamConfig);
         _BasicPhysicSupport.Rigidbody.mass = FightGlobalSetting.FighterRigidMass;
@@ -179,8 +179,7 @@ public partial class Data_Center : MonoBehaviour
         FightDataRef.EnableAllLimbs(true);
         FightDataRef._comboHitCount.HitCount.Value = 0;
         FightDataRef.CriticalGaugeMode = criticalGaugeMode;
-        this.unitInfo = unitInfo;
-        var hp = SkillSet.INI_Hp(unitInfo.set.SkillEntityList(), unitInfo.level) * teamHpRate;
+        var hp = SkillSet.INI_Hp(unitInfo.set.SkillIDList(), unitInfo.level) * teamHpRate;
         FightDataRef.CurrentHp.Value = hp;
         FightDataRef.CurrentHp.Subscribe(x =>
         {

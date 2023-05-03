@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "FightGlobalSetting", menuName = "ScriptableObjects/FightGlobalSetting", order = 1)]
 public class FightGlobalSetting : ScriptableObject
@@ -145,11 +146,11 @@ public class FightGlobalSetting : ScriptableObject
     // Ex3 ：60
     public static float ATCal(float originAT, float level)
     {
-        return AtCoefficient * originAT * (10 + level) / 11;
+        return AtCoefficient * originAT * level;
     }
     public static float StoneHpCal(float originHP, float level)
     {
-        return HpCoefficient * originHP * (10 + level) / 11;
+        return HpCoefficient * originHP * level;
     }
     
     public static string EffectPathDefine(Element element = Element.Null)

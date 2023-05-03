@@ -49,7 +49,7 @@ public partial class PlayFabReadClient
             }
             else if (item.CatalogVersion == PlayFabSetting._StoneCatalog)
             {
-                if (SkillConfigTable.GetSkillConfig(item.ItemId) != null)
+                if (SkillConfigTable.GetSkillConfigByRecordId(item.ItemId) != null)
                 {
                     var info = new StoneOfPlayerInfo
                     {

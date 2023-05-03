@@ -12,7 +12,7 @@ public partial class SkillSet
     public static SkillSet RandomSkillSet(string type, string originSkill, bool baseOnAcc, SkillStonesBox.StoneFilterForm filterForm = null, bool noSpLimit = false)
     {
         var skillSet = new SkillSet();
-        var originSkillConfig = SkillConfigTable.GetSkillConfig(originSkill);
+        var originSkillConfig = SkillConfigTable.GetSkillConfigByRecordId(originSkill);
         
         skillSet = RandomSkillSetRec(type, skillSet, new List<int>()
         {
@@ -43,7 +43,7 @@ public partial class SkillSet
             bool hasNormal = false;
             foreach (var skillId in currentStartSkills)
             {
-                var skillConfig = SkillConfigTable.GetSkillConfig(skillId);
+                var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skillId);
                 hasNormal = skillConfig.SP_LEVEL == 0;
             }
 
