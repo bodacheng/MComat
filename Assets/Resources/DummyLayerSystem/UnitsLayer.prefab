@@ -2893,6 +2893,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: selectedframe
       objectReference: {fileID: 0}
+    - target: {fileID: 296860811016753503, guid: fd2aea057417b40dea91e1c0f9948435,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 296860811016753503, guid: fd2aea057417b40dea91e1c0f9948435,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd2aea057417b40dea91e1c0f9948435, type: 3}
 --- !u!224 &3577659869478130329 stripped

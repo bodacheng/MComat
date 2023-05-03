@@ -96,7 +96,7 @@ namespace FightScene
                         if (targetIcon != null)
                         {
                             selectedFrame.SetParent(targetIcon.transform);
-                            selectedFrame.transform.localPosition = Vector3.zero;
+                            selectedFrame.transform.localPosition = new Vector3(0,4.5f,0);
                             selectedFrame.transform.localScale = Vector3.one;
                             selectedFrame.gameObject.SetActive(true);
                             selectedFrame.SetAsFirstSibling();

@@ -104,10 +104,11 @@ public class HeroIcon : MonoBehaviour {
                 htmlString = "FFFFFFFF";
                 break;
         }
-
+        
         ColorUtility.TryParseHtmlString("#"+htmlString, out var color);
+        //ColorUtility.TryParseHtmlString("#4992FF", out var bgColor);
         frame.color = color;
-        iconBg.color = color;
+        iconBg.color = new Color(color.r,color.g,color.b,0.7f);
         icon.sprite = sprite;
         icon.gameObject.SetActive(sprite != null);
     }
@@ -124,6 +125,7 @@ public class HeroIcon : MonoBehaviour {
         selectedFrame.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
         selectedFrame.GetComponent<RectTransform>().localScale = new Vector3(localScale, localScale, localScale);
         selectedFrame.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+        selectedFrame.transform.SetAsFirstSibling();
         selectedFrame.gameObject.SetActive(true);
     }
     
