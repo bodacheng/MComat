@@ -98,7 +98,7 @@ public class PreparingProcess : FSceneProcess
                 RTFightManager.Target.team1.ToStartPosMulti();
                 break;
             case TeamMode.Rotation:
-                RTFightManager.Target.team1.ToStartPos_Rotate();
+                RTFightManager.Target.team1.ToStartPosRotate();
                 break;
         }
         
@@ -108,7 +108,7 @@ public class PreparingProcess : FSceneProcess
                 RTFightManager.Target.team2.ToStartPosMulti();
                 break;
             case TeamMode.Rotation:
-                RTFightManager.Target.team2.ToStartPos_Rotate();
+                RTFightManager.Target.team2.ToStartPosRotate();
                 break;
         }
         

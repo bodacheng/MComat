@@ -10,22 +10,21 @@ namespace FightScene
         public ReactiveProperty<Data_Center> RMode_Unit = new ReactiveProperty<Data_Center>();
         Data_Center waitingMember;
         
-        public void ToStartPos_Rotate()
+        public void ToStartPosRotate()
         {
             Data_Center unit = null;
-            foreach (var kv in teamMembers.mDict)
+            for (int i = 0; i < 3;i++)
             {
-                if (kv.Value == null)
+                var dataCenter = teamMembers.Get(0,i);
+                if (dataCenter == null)
                 {
                     continue;
                 }
-                
                 if (unit == null)
-                    unit = kv.Value;
-                kv.Value.WholeT.parent = null;
-                kv.Value.WholeT.gameObject.SetActive(true);
+                    unit = dataCenter;
+                dataCenter.WholeT.parent = null;
+                dataCenter.WholeT.gameObject.SetActive(true);
             }
-
             _startUnit = unit;
             ChangeFightingUnit(unit, true, TeamStandPoints[0]);
         }
