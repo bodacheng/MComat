@@ -163,27 +163,6 @@ public class IAPManager : MonoBehaviour, IStoreListener {
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason) {
         Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
     }
-
-    int DMAmount(string productId)
-    {
-        var rewardDMAmount = 0;
-        switch (productId)
-        {
-            case "diamond100":
-                rewardDMAmount = 100;
-                break;
-            case "diamond300":
-                rewardDMAmount = 300;
-                break;
-            case "diamond500":
-                rewardDMAmount = 500;
-                break;
-            case "diamond1000":
-                rewardDMAmount = 1000;
-                break;
-        }
-        return rewardDMAmount;
-    }
     
     // This is invoked automatically when successful purchase is ready to be processed
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs e) {
@@ -231,15 +210,18 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 ProgressLayer.Close();
                 PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseSuccess"));
                 _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
-                CloudScript.BoughtBundle(
-                    e.purchasedProduct.definition.id, 
-                    () =>
-                    {
-                        var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
-                        if (shopTopLayer != null)
-                            shopTopLayer.DisableStoneBundle(e.purchasedProduct.definition.id);
-                    }
-                );
+                if (boughtItemCatalog == StoneProductCatalogVersion){
+                    CloudScript.BoughtBundle(
+                        e.purchasedProduct.definition.id, 
+                        () =>
+                        {
+                            var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
+                            if (shopTopLayer != null)
+                                shopTopLayer.DisableStoneBundle(e.purchasedProduct.definition.id);
+                        }
+                    );
+                }
+
                 PlayFabReadClient.LoadItems(null);
             },
             error => {
@@ -270,17 +252,21 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 // Pass in the signature
                 Signature = googleReceipt.PayloadData.signature
             }, result => {
-                Debug.Log("Validation successful!");
+                ProgressLayer.Close();
+                PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseSuccess"));
                 _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
-                CloudScript.BoughtBundle(
-                    e.purchasedProduct.definition.id, 
-                    () =>
-                    {
-                        var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
-                        if (shopTopLayer != null)
-                            shopTopLayer.DisableStoneBundle(e.purchasedProduct.definition.id);
-                    }
-                );
+                if (boughtItemCatalog == StoneProductCatalogVersion)
+                {
+                    CloudScript.BoughtBundle(
+                        e.purchasedProduct.definition.id, 
+                        () =>
+                        {
+                            var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
+                            if (shopTopLayer != null)
+                                shopTopLayer.DisableStoneBundle(e.purchasedProduct.definition.id);
+                        }
+                    );
+                }
                 PlayFabReadClient.LoadItems(null);
             },
             error => Debug.Log("Validation failed: " + error.GenerateErrorReport())
