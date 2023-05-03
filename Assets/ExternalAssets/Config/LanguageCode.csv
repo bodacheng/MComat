@@ -53,7 +53,7 @@ story_part3,"At the same time, creatures resembling extraterrestrial beings cont
 story_part4,"Some humans also saw the skill gems as an opportunity to conquer the world. With different motives, people flocked to the battlefield.",さらに、スキルジェムを世界征服のチャンスと見る人もいます。目的は異なっていても、人々は次々に戦場に進みました。,也有一些人类将技能宝石看作征服世界的机会。怀着不同的目的，人们纷纷迈入战场。
 ,,,
 MailBindInstruction,"This account has not yet been bound to an email address. If you wish to log in on another device and bind this account, you must first bind an email address. Please note that each account can only be bound to one email address, so please choose your email address carefully.",このアカウントはまだメールアドレスがバインドされていません。他のデバイスでログインしてこのアカウントをバインドするには、メールアドレスをバインドする必要があります。各アカウントは1つのメールアドレスだけをバインドすることができますので、メールアドレスを選択する際は注意してください。,本账户尚未绑定邮箱。如果要在其他设备登陆并绑定本账户，必须绑定邮箱。每个账户只能绑定一个邮箱，请谨慎选择邮箱地址。
-DeviceBindInstruction,"The current account is already bound to this device, so you can log in to this account automatically when the app opens. If you want to bind this device to another account, please click the button below. If you unbind the current account from this device, you will not be able to log in to this account directly. If you want to keep the current account, please set up the email address and password for this account. Also note that deleting the game program will also unbind this account from the device.",現在のアカウントはすでにデバイスにバインドされているため、アプリを開くと自動的にこのアカウントにログインできます。このデバイスを別のアカウントにバインドする場合は、下のボタンをクリックしてください。現在のアカウントとデバイスのバインドを解除すると、このアカウントに直接ログインできなくなります。現在のアカウントを維持する場合は、このアカウントのメールアドレスとパスワードを設定してください。また、ゲームプログラムを削除すると、アカウントとデバイスのバインドが解除されます。,当前账户已经和设备进行了绑定，你可以在程序打开后直接登陆本账户。如果你希望将本设备和其他账户进行绑定，请点击下方按钮。解除当前账户与设备的绑定会使您无法直接登陆目前账户，如果希望保留当前账户，请设置好本账户的邮箱与密码。删除游戏程序也会让本账户与设备的绑定被解除。
+DeviceBindInstruction,"The current account has already been bound to the device, so you can log in to this account directly when you open the app",現在のアカウントは既にデバイスにバインドされています。アプリを開くと、このアカウントで直接ログインできます。,当前账户已经和设备进行了绑定，你可以在程序打开后直接登陆本账户。
 DeviceNotBindInstruction,This account is not currently bound to this device. Click the button below to bind it.,このアカウントは現在のデバイスにバインドされていません。下のボタンをクリックすると、バインドできます。,本账户没有与当前设备进行绑定。点击下方按钮可以绑定。
 AccountTransfer,Below is your email. Click the button below to send an account password setting email. You can log in to this account on other devices by entering the email address and password you set.,以下はあなたのメールアドレスです。下のボタンをクリックしてアカウントのパスワード設定メールを送信してください。他のデバイスでログインする場合は、このメールアドレスと設定したパスワードを入力することで、このアカウントにログインできます。,"以下是你的邮箱,点击下方按钮发送账户密码设置邮件。你可以在其他设备上靠输入所设置的邮箱和密码来登陆本账户。"
 ,,,
@@ -132,8 +132,8 @@ SaveYourTeam,Click on "Confirm" to save the team,「確認」をクリックし�
 ,,,
 TeamUnitNotFull,Members' skills are incomplete,チームメンバーのスキルが不完全です,队员技能不完整
 ,,,
-TeamModeM,War,War,战争
-TeamModeR,Duel,Duel,对决
+TeamModeM,Co-op,Co-op,战争
+TeamModeR,1V1,1V1,对决
 ,,,
 normalLoginBonusDM,"Login gift
 
@@ -153,5 +153,5 @@ LoadingBattleAboutToEnd,The battle is about to begin,戦いがもうすぐ始ま
 DownloadingAsset,Downloading resources,リソースをダウンロード中です,正在下载资源
 NeedToUpdate,"New version detected, please update the program.",新しいバージョンが検出されました。プログラムをアップデートしてください。,监测到新版本，请更新程序
 ,,,
-BeginnerBundle,BeginnerBundle,BeginnerBundle,新手大礼包
+OneTimeBundle,Super Value Gift Pack,超お得なパック,超值礼包
 CanOnlyBuyOnce,One-time Purchase,1回限り,限购1次

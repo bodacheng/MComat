@@ -49,7 +49,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
                 break;
         }
         item.transform.SetParent(transform, false);
-        item.transform.SetAsFirstSibling();
+        item.transform.SetAsLastSibling();
         item.transform.localScale = Vector3.one * 1.2f;
         item.transform.localPosition = Vector3.zero;
         item.MakeRaycast(true);

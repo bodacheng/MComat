@@ -47,7 +47,7 @@ RECORD_ID,EN_NAME,JP_NAME,CN_NAME,EN_INTRO,JP_INTRO,CN_INTRO
 143,Elemental Impact,エレメントインパクト,元素冲击,,,
 170,Tri-directional Light,三方向光波,三向光波,,,
 140,Tornado,竜巻,龙卷风,,,
-127,High-Speed Counter,超高速反撃,超速反击,,,
+127,High-Speed Counter,超高速反撃,超速反击,"If nemy attacks withstood,will get accelerated buff for one second",敵の攻撃に耐えることができれば、1秒間加速状態が維持されます,在释放后可如果抵抗住敌人的攻击，将维持一秒加速状态
 145,Heavenly Spiral Drill,天降螺旋ドリル,天降螺旋脚,,,
 17,Vector Blade,ベクトル刃,矢量刀刃,,,
 59,Heavenly Shock Strike,天降震撃,地震山摇,,,
