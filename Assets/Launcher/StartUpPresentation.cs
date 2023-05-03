@@ -47,9 +47,23 @@ public class StartUpPresentation : MonoBehaviour
         bool needToUpdate = await AddressablesLogic.VersionConfirm();
         if (needToUpdate)
         {
-            PopupLayer.ArrangeWarnWindow(
-                OpenAppStoreLink,
-                Translate.Get("NeedToUpdate"));
+            var text = string.Empty;
+            switch (AppSetting.Value.Language)
+            {
+                case SystemLanguage.English:
+                    text = "New version detected, please update the program";
+                    break;
+                case SystemLanguage.Japanese:
+                    text = "新しいバージョンが検出されました。プログラムをアップデートしてください";
+                    break;
+                case SystemLanguage.Chinese:
+                    text = "监测到新版本，请更新程序";
+                    break;
+                default:
+                    text = "New version detected, please update the program";
+                    break;
+            }
+            PopupLayer.ArrangeWarnWindow(text);
             return;
         }
         
