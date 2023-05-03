@@ -149,13 +149,15 @@ public class BasicPhysicSupport : MonoBehaviour
     private float pushIntoRingSpeed = 1;
     void LimitTargetToRange()
     {
+        var maxLimbDisFromCenter = _DATA_CENTER.GetFarthestPositionFromZero();
         var originY = _DATA_CENTER.WholeT.position.y;
         pos = _DATA_CENTER.WholeT.position;
         pos.y = 0;
-        var dis_from_center = pos.magnitude;
-        if (dis_from_center > BoundaryControlByGod._BattleRingRadius)
+        var disFromCenter = maxLimbDisFromCenter.magnitude;
+        if (disFromCenter > BoundaryControlByGod._BattleRingRadius)
         {
-            pos = pos.normalized * BoundaryControlByGod._BattleRingRadius;
+            var sa = maxLimbDisFromCenter - maxLimbDisFromCenter.normalized * BoundaryControlByGod._BattleRingRadius;
+            pos = pos - sa;
             pos.y = originY;
             _DATA_CENTER.WholeT.position = Vector3.Lerp(_DATA_CENTER.WholeT.position, pos, pushIntoRingSpeed * Time.deltaTime);
             AtRing = true;

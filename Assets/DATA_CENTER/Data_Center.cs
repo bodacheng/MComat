@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UniRx;
@@ -48,11 +49,30 @@ public partial class Data_Center : MonoBehaviour
     {
         return Phase1Initialized && Phase2Initialized;
     }
-
+    
     void Awake()
     {
         if (geometryCenter == null)
             geometryCenter = gameObject.transform; 
+    }
+    
+    private List<Transform> posCalTrans = new List<Transform>();
+    public Vector3 GetFarthestPositionFromZero()
+    {
+        float maxDistance = 0f;
+        Vector3 returnValue = Vector3.zero;
+        foreach (Transform t in posCalTrans)
+        {
+            var noYPos = t.position;
+            noYPos.y = 0;
+            float distance = Vector3.Distance(noYPos, Vector3.zero);
+            if (distance > maxDistance)
+            {
+                maxDistance = distance;
+                returnValue = noYPos;
+            }
+        }
+        return returnValue;
     }
 
     public async UniTask Step1Initialize(string type, string basicPackName)
@@ -70,6 +90,10 @@ public partial class Data_Center : MonoBehaviour
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(FightDataRef,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
             await Animation_Manger.PreloadBasicPersonalAnims(type, basicPackName, _facialAnimManager);
             _BO_Ani_E.BasicMagicAndEffectsPathDefine(element);
+            posCalTrans = new List<Transform>()
+            {
+                right_hand_t, left_hand_t, right_foot_t, left_foot_t, WholeT
+            };
             
             //if (this.blendShapeProxy != null && this.blendShapeProxy.VRMBlendShapeProxy != null)
             //    this.blendShapeProxy.VRMBlendShapeProxy.AvaterRemerge(this.WholeT);
