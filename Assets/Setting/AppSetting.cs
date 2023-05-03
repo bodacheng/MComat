@@ -85,8 +85,8 @@ public class AppSetting
         {
             Value = new AppSetting
             {
-                Language = Application.systemLanguage == SystemLanguage.ChineseSimplified ||
-                           Application.systemLanguage == SystemLanguage.ChineseTraditional ? 
+                Language = (Application.systemLanguage == SystemLanguage.ChineseSimplified ||
+                           Application.systemLanguage == SystemLanguage.ChineseTraditional) ? 
                     SystemLanguage.Chinese : Application.systemLanguage,
                 _bgmVolume = 0.5f, _effectsVolume = 0.5f, _cvVolume = 0.5f
             };
