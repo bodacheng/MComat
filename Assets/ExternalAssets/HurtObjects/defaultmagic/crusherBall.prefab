@@ -4900,7 +4900,7 @@ MonoBehaviour:
   SpecificTarget: 0
   damage_type: 14
   _WeaponMode: 3
-  AT_weight: 0.5
+  AT_weight: 1
   weaponHP: 10
   heavyLevel: 0
   onGroundMagic: 0
