@@ -123,6 +123,7 @@ public class FrontPage : MSceneProcess
     
     public override void ProcessEnter()
     {
+        BackGroundPS.target.ChangeBGByElement(Element.lightMagic);
         ProgressLayer.Loading(string.Empty);
         PlayFabReadClient.GetStatistics(StatisticsLoadFinished);
         
@@ -142,7 +143,6 @@ public class FrontPage : MSceneProcess
                 ProgressLayer.Close();
                 if (PlayerAccountInfo.Me.TitleDisplayName == null)
                 {
-                    BackGroundPS.target.ChangeBGByElement(Element.lightMagic);
                     SettingPage.SetNickName((_) => EnterProcess(), false);
                 }
                 else

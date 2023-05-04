@@ -25,7 +25,7 @@ public partial class PlayFabReadClient
         );
     }
     
-    static async void OnGetUserInventory(GetUserInventoryResult result, Action<bool> finished)
+    static void OnGetUserInventory(GetUserInventoryResult result, Action<bool> finished)
     {
         foreach (var item in result.Inventory)
         {

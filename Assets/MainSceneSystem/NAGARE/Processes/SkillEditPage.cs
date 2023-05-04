@@ -15,7 +15,9 @@ public class SkillEditPage : MSceneProcess
     
     async UniTask EnterProcess()
     {
+        ProgressLayer.Loading(string.Empty);
         await Stones.RenderAll();
+        ProgressLayer.Close();
         layer = UILayerLoader.Load<SkillEditLayer>();
         await layer.Setup((x) =>
         {

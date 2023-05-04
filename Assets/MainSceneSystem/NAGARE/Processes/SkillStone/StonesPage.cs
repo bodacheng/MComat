@@ -19,7 +19,9 @@ public class StonesPage : MSceneProcess
     //EnterProcess()内绝不能出现triggerMainProcess
     async void EnterProcess()
     {
+        ProgressLayer.Loading(string.Empty);
         await Stones.RenderAll();
+        ProgressLayer.Close();
         layer = UILayerLoader.Load<StoneListLayer>();
         layer.Setup();
         ReturnLayer.MoveFront();
