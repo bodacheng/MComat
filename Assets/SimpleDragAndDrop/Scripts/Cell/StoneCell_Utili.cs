@@ -9,22 +9,22 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Image))]
 public partial class StoneCell : MonoBehaviour, IDropHandler
 {
-    public static void SelectedRender(StoneCell cell, GameObject _Selected)
+    public static void SelectedRender(StoneCell cell, GameObject _selected)
     {
         if (cell == null)
         {
-            _Selected.SetActive(false);
+            _selected.SetActive(false);
             return;
         }
-        _Selected.SetActive(true);
-        _Selected.transform.SetParent(cell.GetComponent<RectTransform>());
-        _Selected.transform.localPosition = Vector3.zero;
+        _selected.SetActive(true);
+        _selected.transform.SetParent(cell.GetComponent<RectTransform>());
+        _selected.transform.localPosition = Vector3.zero;
 
-        var rect = _Selected.GetComponent<RectTransform>();
+        var rect = _selected.GetComponent<RectTransform>();
         
         rect.localPosition = new Vector3(0, 0, 0);
         rect.localScale = Vector3.one;
         rect.anchoredPosition = Vector3.zero;
-        _Selected.transform.SetAsFirstSibling();
+        _selected.transform.SetAsFirstSibling();
     }
 }
