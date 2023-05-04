@@ -179,7 +179,7 @@ public class TeamEditLayer : UILayer
         
         void SkillEdit()
         {
-            if (PreScene.target.Focusing.id != null)
+            if (PreScene.target.Focusing != null && PreScene.target.Focusing.id != null)
                 PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
         }
         if (!isTutorial)
