@@ -22,6 +22,7 @@ public class DropTableInfoLayer : UILayer
             var nodeUI = Instantiate(prefab);
             nodeUI.Setup(node.ResultItem, (double) node.Weight / wholeWeight);
             nodeUI.gameObject.transform.SetParent(resultT.transform);
+            nodeUI.transform.localScale = Vector3.one;
             rectHeight += (nodeUI.GetComponent<RectTransform>().rect.height + resultT.spacing);
         }
         resultT.GetComponent<RectTransform>().sizeDelta = 

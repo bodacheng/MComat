@@ -98,6 +98,9 @@ BornSkillCantRemove,The warrior's innate skills cannot be uninstalled,戦士の�
 CantEquipSameSkill,Same skill cannot be equipped for the same warrior,同じ戦士に同じスキルを装備することはできません,同一战士不可装备相同技能
 NotFull,The skill set is not complete,全てのスロットを満たしましょう,技能组未满
 SKillConfirm,Confirm,確定,保存技能组
+StoneLevelUp,Upgrade,アップグレード,升级
+StoneLevelUpIntro,"Merge five gems for an upgrade, retaining at least three afterwards.",5つの同種類ジェムで融合しアップグレード可能、融合後3つ以上残るが必要。,五颗相同宝石可融合升级，融合后需保留三颗以上。
+IfStoneLevelUp,Do you want to merge the skill gems?,スキルジェムを融合しますか？,要融合技能石吗
 ,,,
 TeamNotFull,You need three warriors with complete skill sets to participate in the arena,アリーナに参加するには、3人のスキルセットが完全な戦士が必要です,必须有三名技能组完整的战士才能参与竞技场
 ,,,

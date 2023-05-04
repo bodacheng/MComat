@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 7463075774193399648}
   - component: {fileID: 7138180014281389013}
   m_Layer: 5
-  m_Name: Confirm
+  m_Name: ConfirmLevelUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -89,6 +89,7 @@ public partial class SSLevelUpManager : MonoBehaviour
                     await Stones.RemoveStoneLocal(instanceId);
                 }
                 
+                Currencies.CoinCount.Value -= 10;
                 // RemoveStoneLocal会销毁作为材料的技能石模型，
                 // 而CloseLevelUpPage内部有对材料的操作，
                 // 他们在同一帧执行的话会有一定错误
