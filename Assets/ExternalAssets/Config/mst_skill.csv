@@ -44,7 +44,7 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK
 182,guardforarmor,human,0,0,3,CT,
 183,tetsuya_punch,human,1,2,3,GR,
 184,yuta_punch,human,1,2,3,GI,
-143,crusher2,human,2,4,3,GM,
+143,crusher2,human,3,4,3,GM,
 170,threewayboltp,human,1,1,3,GI,
 140,xuanfeng_big,human,3,8,3,GI,
 127,speedCT,human,1,0,3,CT,
