@@ -19152,7 +19152,7 @@ MonoBehaviour:
   _WeaponMode: 3
   AT_weight: 0.5
   weaponHP: 10
-  heavyLevel: 1
+  heavyLevel: 0
   onGroundMagic: 0
   effectSpreadOnBody: 1
   element: 2

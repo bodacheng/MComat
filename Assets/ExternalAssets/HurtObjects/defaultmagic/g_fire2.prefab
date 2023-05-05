@@ -4920,10 +4920,10 @@ MonoBehaviour:
   _WeaponMode: 2
   AT_weight: 1
   weaponHP: 2
-  heavyLevel: 1
+  heavyLevel: 0
   onGroundMagic: 1
   effectSpreadOnBody: 0
-  element: 0
+  element: 1
   muzzle: 
   hitEffect: 
   ExplosionEffect: energy_resolve

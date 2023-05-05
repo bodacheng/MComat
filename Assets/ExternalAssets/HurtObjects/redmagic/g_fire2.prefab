@@ -22,6 +22,11 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.key1.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3736440156664121327, guid: c3f52d57fc5b940a8b5c5332931dbd6d,
+        type: 3}
+      propertyPath: element
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5888146865048227192, guid: c3f52d57fc5b940a8b5c5332931dbd6d,
         type: 3}
       propertyPath: m_RootOrder
