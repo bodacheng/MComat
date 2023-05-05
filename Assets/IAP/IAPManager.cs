@@ -3,7 +3,6 @@ using PlayFab.ClientModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using mainMenu;
 using UnityEngine;
@@ -162,6 +161,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
     // This is automatically invoked automatically when purchase failed
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason) {
         Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
+        ProgressLayer.Close();
     }
     
     // This is invoked automatically when successful purchase is ready to be processed
