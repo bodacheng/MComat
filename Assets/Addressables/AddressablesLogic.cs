@@ -37,6 +37,8 @@ public static class AddressablesLogic
         void CompareVersions(string serverVersion)
         {
             string currentVersion = Application.version;
+            Debug.Log("currentVersion:"+ currentVersion);
+            Debug.Log("serverVersion:"+ serverVersion);
             needToUpdate = currentVersion != serverVersion;
         }
         Addressables.Release(handle);
