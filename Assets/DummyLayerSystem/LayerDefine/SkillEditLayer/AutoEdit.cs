@@ -49,27 +49,29 @@ public partial class SkillEditLayer : UILayer
         stonesBox.RestFilter();
     }
     
-    void AddRandomStoneToSlot(string monsterOfPlayerId, int targetSlot, string skillID)
+    void AddRandomStoneToSlot(string unitInstanceId, int targetSlot, string skillID)
     {
         if (nineSlot.AllSlot[targetSlot - 1]._cell.GetItem() != null)
         {
             return;
         }
         
-        var originSkillInfo = Stones.GetOriginSkillOfUnit(monsterOfPlayerId);
-        var Options = Stones.GetMyStonesBySkillID(skillID);
+        var originSkillInfo = Stones.GetOriginSkillOfUnit(unitInstanceId);
+        var options = Stones.GetMyStonesBySkillID(skillID);
         if (originSkillInfo != null && skillID == originSkillInfo.SkillId)
         {
             nineSlot.AllSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(originSkillInfo.InstanceId));
         }else{
-            Options.OrderByDescending(x => Stones.Get(x).Level);
+            options.OrderByDescending(x => Stones.Get(x).Level);
             string targetStoneId = null;
-            for (int i = 0; i < Options.Count; i++)
+            for (int i = options.Count -1 ; i >= 0; i--)
             {
-                StoneOfPlayerInfo stoneInfo = Stones.Get(Options[i]);
-                if (dataAccess.Units.Get(stoneInfo.UnitInstanceId) == null)
+                var stoneInfo = Stones.Get(options[i]);
+                if ((unitInstanceId != stoneInfo.UnitInstanceId && dataAccess.Units.Get(stoneInfo.UnitInstanceId) == null)
+                    ||
+                    unitInstanceId == stoneInfo.UnitInstanceId)
                 {
-                    targetStoneId = Options[i];
+                    targetStoneId = options[i];
                     break;
                 }
             }
