@@ -100,36 +100,20 @@ namespace mainMenu
             var row = PowerEstimateTable.Find_RECORD_ID(skillConfig.RECORD_ID);
             float.TryParse(row.HP, out float hp);
             float.TryParse(row.EstimateDamage, out float at);
-            if (AT != null)
+            var passiveSkill = UnitPassiveTable.GetPassiveSKillRecordIds();
+            if (passiveSkill.Contains(currentStone.SkillId))
             {
-                AT.text = "AT = " + FightGlobalSetting.ATCal(at, currentStone.Level);
+                stoneTargetLevel.text = Translate.Get("BornSkill");
+                AT.text = "AT = " + FightGlobalSetting.ATCal(at, currentStone.Level) + "?";
+                HP.text = "HP = " + FightGlobalSetting.StoneHpCal(hp, currentStone.Level) + "?";
             }
-            if (HP != null)
+            else
             {
+                stoneTargetLevel.text = "LV:" + (currentStone.Level == PlayFabSetting._VersionMaxStoneLevel ? "MAX" : currentStone.Level.ToString());
+                AT.text = "AT = " + FightGlobalSetting.ATCal(at, currentStone.Level);
                 HP.text = "HP = " + FightGlobalSetting.StoneHpCal(hp, currentStone.Level);
             }
-            stoneTargetLevel.text = "LV:" + (currentStone.Level == PlayFabSetting._VersionMaxStoneLevel ? "MAX" : currentStone.Level.ToString());
             skillIntro.text = SkillNameTable.GetSkillIntro(skillConfig.RECORD_ID);
-        }
-        
-        // 技能画面展示用
-        public void RefreshInfo(SkillEntity skillEntity, int level)
-        {
-            if (skillEntity == null)
-            {
-                Clear();
-                return;
-            }
-            var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skillEntity.SkillID);
-            RefreshInfo(skillConfig);
-            if (AT != null)
-            {
-                AT.text = "AT = " + FightGlobalSetting.ATCal(skillConfig.ATTACK_WEIGHT, level);
-            }
-            if (HP != null)
-            {
-                HP.text = "HP = " + FightGlobalSetting.StoneHpCal(skillConfig.HP_WEIGHT, level);
-            }
         }
         
         public void RefreshInfo(SkillConfig config)
