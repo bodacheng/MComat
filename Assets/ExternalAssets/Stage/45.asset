@@ -55,7 +55,7 @@ MonoBehaviour:
       c2: 45
       c3: 55
   team1HpRate: 1
-  team2HpRate: 0.9
+  team2HpRate: 1
   team1CGMode: 0
   team2CGMode: 0
   team1Mode: 2
