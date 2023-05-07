@@ -9,6 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1477631363713055142, guid: f10d742e0ed7882459a1bd256a2afa0b,
         type: 3}
+      propertyPath: element
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1477631363713055142, guid: f10d742e0ed7882459a1bd256a2afa0b,
+        type: 3}
       propertyPath: zokusei
       value: 4
       objectReference: {fileID: 0}

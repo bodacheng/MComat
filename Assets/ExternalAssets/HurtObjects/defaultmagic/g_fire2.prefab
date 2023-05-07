@@ -4925,8 +4925,8 @@ MonoBehaviour:
   effectSpreadOnBody: 0
   element: 1
   muzzle: 
-  hitEffect: 
-  ExplosionEffect: energy_resolve
+  hitEffect: fireExplosion
+  ExplosionEffect: fireExplosion
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
 --- !u!114 &1770699953389059476
