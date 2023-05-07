@@ -23943,10 +23943,10 @@ MonoBehaviour:
   heavyLevel: 1
   onGroundMagic: 1
   effectSpreadOnBody: 1
-  element: 0
+  element: 4
   muzzle: 
-  hitEffect: 
-  ExplosionEffect: energy_resolve
+  hitEffect: fireExplosion
+  ExplosionEffect: fireExplosion
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.5
 --- !u!114 &8285377075919577095

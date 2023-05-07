@@ -4697,7 +4697,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: c3205f22c5abc104ca3fed12ab264aea, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9454,7 +9453,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 1ae55ae61d1144248b1cbd80a738177c, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14283,7 +14281,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 1ae55ae61d1144248b1cbd80a738177c, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14417,10 +14414,10 @@ MonoBehaviour:
   heavyLevel: 1
   onGroundMagic: 1
   effectSpreadOnBody: 1
-  element: 0
+  element: 1
   muzzle: 
-  hitEffect: 
-  ExplosionEffect: energy_resolve
+  hitEffect: fireExplosion
+  ExplosionEffect: fireExplosion
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
 --- !u!82 &1157780814860735481
@@ -19260,7 +19257,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 0}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24050,7 +24046,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: b9e879cde921eb241bbc716410ae2b8e, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
