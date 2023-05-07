@@ -32,28 +32,28 @@ MonoBehaviour:
     r_id: 1
     level: 2
     set:
-      a1: 113
-      a2: 167
-      a3: 55
-      b1: 99
-      b2: 95
-      b3: 10
-      c1: 53
-      c2: 68
-      c3: 182
+      a1: 144
+      a2: 63
+      a3: 182
+      b1: 176
+      b2: 27
+      b3: 159
+      c1: 113
+      c2: 9
+      c3: 95
   - id: 2
     r_id: 6
     level: 2
     set:
-      a1: 53
-      a2: 10
-      a3: 68
-      b1: 27
-      b2: 89
-      b3: 113
-      c1: 80
-      c2: 95
-      c3: 125
+      a1: 80
+      a2: 45
+      a3: 10
+      b1: 9
+      b2: 166
+      b3: 179
+      c1: 27
+      c2: 99
+      c3: 144
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0
