@@ -15,7 +15,7 @@ public class ResultTableNode : MonoBehaviour
     public void Setup(string recordId, double weight)
     {
         var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(recordId);
-        name.text = skillConfig.REAL_NAME;
+        name.text = SkillNameTable.GetSkillName(recordId);
         rate.text = Math.Round(weight * 100, 2) + "%";
         IconForShow(recordId);
         SkillStoneDetail.ShowSKillRanges(close, near, far, skillConfig.AIAttrs.AI_MIN_DIS, skillConfig.AIAttrs.AI_MAX_DIS);

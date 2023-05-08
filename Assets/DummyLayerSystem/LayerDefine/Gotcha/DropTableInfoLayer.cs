@@ -1,3 +1,4 @@
+using System.Linq;
 using PlayFab.ServerModels;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,9 @@ public class DropTableInfoLayer : UILayer
     {
         float rectHeight = 0;
         var wholeWeight = 0;
+        
+        tableInfo.Nodes = tableInfo.Nodes.OrderBy(x=> x.Weight).ToList();
+        
         for (var i = 0; i < tableInfo.Nodes.Count; i++)
         {
             var node = tableInfo.Nodes[i];

@@ -62,9 +62,9 @@ public partial class SkillEditLayer : UILayer
         {
             nineSlot.AllSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(originSkillInfo.InstanceId));
         }else{
-            options.OrderByDescending(x => Stones.Get(x).Level);
+            options = options.OrderByDescending(x => Stones.Get(x).Level).ToList();
             string targetStoneId = null;
-            for (int i = options.Count -1 ; i >= 0; i--)
+            for (int i = 0 ; i < options.Count; i++)
             {
                 var stoneInfo = Stones.Get(options[i]);
                 if ((unitInstanceId != stoneInfo.UnitInstanceId && dataAccess.Units.Get(stoneInfo.UnitInstanceId) == null)
