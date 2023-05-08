@@ -14,6 +14,7 @@ public static class AddressablesLogic
 
     public static async UniTask<bool> VersionConfirm() // false : need to update
     {
+        bool needToUpdate = false;
         await DownLoadMission("app_version", (x)=>{});
         AsyncOperationHandle<TextAsset> handle = Addressables.LoadAssetAsync<TextAsset>("app_version");
         while (!handle.IsDone)
@@ -32,8 +33,7 @@ public static class AddressablesLogic
             string serverVersion = jsonNode["version"].ToString();
             CompareVersions(serverVersion);
         }
-
-        bool needToUpdate = false;
+        
         void CompareVersions(string serverVersion)
         {
             string currentVersion = Application.version;
