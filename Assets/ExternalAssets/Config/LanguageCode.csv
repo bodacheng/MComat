@@ -82,7 +82,7 @@ range_far,far,遠,远
 SkillEditInstruction1,"The skill set has a ""balance value"", which must be above 0 to be compliant, otherwise the warrior cannot participate in the battle. Equipping a normal skill will add 1 point of balance value. Equipping a 1-cost, 2-cost, or 3-cost ultimate skill will reduce the balance value by 1, 2, or 3 points, respectively.",スキルセットは「バランス値」を有しており、バランス値が0以上でなければ戦士は戦闘に参加できません。通常スキルを1つ装備すると1ポイントのバランス値が加算されます。一費必殺、二費必殺、三費必殺を装備すると、それぞれバランス値が1ポイント、2ポイント、3ポイント減少します。,技能组拥有“平衡值”，平衡值要在0以上才合规，否则战士无法参战。装备一个普通技能会增加1点平衡值，装备一费必杀，二费必杀，三费必杀将分别减少1点，2点，3点平衡值。
 SkillEditInstruction2,"A blue flashing bar represents +1 balance value, while a red flashing bar represents -1 balance value. Displaying one or more red flashing bars indicates that the current balance value is negative and the warrior cannot participate in the battle.",青い点滅するバーが表示された場合、バランス値は1増加したことを示します。赤い点滅するバーが表示された場合、バランス値は1減少したことを示します。赤い点滅するバーが1つ以上表示されている場合、現在のバランス値が負であるため、その戦士は戦闘に参加できません。,一个蓝色闪光条代表+1平衡值，一个红色闪光条代表-1平衡值。显示一个或多个红色闪光条都代表当前平衡值为负数，该战士无法出战。
 ,,,
-RandomFillStones,Auto Fill,ランダム装備,自动装备
+RandomFillStones,Auto Fill,自動補完,自动补全
 RemoveAllStones,Remove All,すべて解除,全部卸下
 Fill9Slots,You can edit the skill set here. Try to combine the skill gems to create a powerful skill set for the warrior.,ここではスキルセットの編集ができます。スキルジェムを使って、強力なスキルセットを作成しましょう,在这里可以进行技能组编辑。尝试用技能石为战士拼接出一套强力的技能组吧。
 NotLegalButStillUpdate,The current skill set cannot participate in battle. Do you still want to proceed with editing?,当前のスキルセットでは戦闘に参加できません。それでも編集を実行しますか,当前技能组下无法战斗，仍要执行编辑？
