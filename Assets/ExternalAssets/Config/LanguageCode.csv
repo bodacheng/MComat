@@ -82,6 +82,9 @@ range_far,far,遠,远
 SkillEditInstruction1,"The skill set has a ""balance value"", which must be above 0 to be compliant, otherwise the warrior cannot participate in the battle. Equipping a normal skill will add 1 point of balance value. Equipping a 1-cost, 2-cost, or 3-cost ultimate skill will reduce the balance value by 1, 2, or 3 points, respectively.",スキルセットは「バランス値」を有しており、バランス値が0以上でなければ戦士は戦闘に参加できません。通常スキルを1つ装備すると1ポイントのバランス値が加算されます。一費必殺、二費必殺、三費必殺を装備すると、それぞれバランス値が1ポイント、2ポイント、3ポイント減少します。,技能组拥有“平衡值”，平衡值要在0以上才合规，否则战士无法参战。装备一个普通技能会增加1点平衡值，装备一费必杀，二费必杀，三费必杀将分别减少1点，2点，3点平衡值。
 SkillEditInstruction2,"A blue flashing bar represents +1 balance value, while a red flashing bar represents -1 balance value. Displaying one or more red flashing bars indicates that the current balance value is negative and the warrior cannot participate in the battle.",青い点滅するバーが表示された場合、バランス値は1増加したことを示します。赤い点滅するバーが表示された場合、バランス値は1減少したことを示します。赤い点滅するバーが1つ以上表示されている場合、現在のバランス値が負であるため、その戦士は戦闘に参加できません。,一个蓝色闪光条代表+1平衡值，一个红色闪光条代表-1平衡值。显示一个或多个红色闪光条都代表当前平衡值为负数，该战士无法出战。
 ,,,
+ArenaUnlocked,The arena is now open!,アリーナが開放されました!,竞技场已开启！
+TutorialCompleted,Clear level 5 to obtain new character Tetsuya and unlock the arena!,ステージ5をクリアすると、新しいキャラクター鉄也を入手し、アリーナがアンロックされます！,闯过第五关即可获取新角色铁也并解锁竞技场！
+,,,
 RandomFillStones,Auto Fill,自動補完,自动补全
 RemoveAllStones,Remove All,すべて解除,全部卸下
 Fill9Slots,You can edit the skill set here. Try to combine the skill gems to create a powerful skill set for the warrior.,ここではスキルセットの編集ができます。スキルジェムを使って、強力なスキルセットを作成しましょう,在这里可以进行技能组编辑。尝试用技能石为战士拼接出一套强力的技能组吧。
@@ -130,10 +133,11 @@ AutoBtnIntro,Click to switch between auto and manual mode,クリックして、�
 HpBarAndExBar,"Health and energy. If the energy is insufficient, EX Skills cannot be unleashed.",体力とエネルギー値。エネルギー値が不足している場合、必殺技を発動できません,体力与能量值，必杀技在能量值不够的情况下无法释放
 ,,,
 MakeYourTeam,Choose characters,キャラクターを選ぶ,选择出战角色
+HasExtraSeat,Warriors available for battle,戦いに参加できる戦士がいます,有可以参战的战士
 TeamEditTutorial1,Click on the fighter's icon and place them in the team slot.,ファイターのアイコンをクリックして、任意のチームスロットに配置してください,尝试点击角色头像，再点击队伍槽使其编入队伍
 TeamEditTutorial2,Add a new warrior to the team to have a total of two members,新しい戦士をチームに編成して、チームに2名のメンバーを含めてください,尝试将新战士编入队伍，使队伍包含两名队员
 SaveYourTeam,Click on "Confirm" to save the team,「確認」をクリックして、チームを保存してください,点击确定保存队伍
-,,,
+ClickToEdit,Click to edit the warrior's skills,戦士のスキルを編集するにはクリックしてください,点击来编辑战士的技能
 TeamUnitNotFull,Members' skills are incomplete,チームメンバーのスキルが不完全です,队员技能不完整
 ,,,
 TeamModeM,Co-op,Co-op,战争

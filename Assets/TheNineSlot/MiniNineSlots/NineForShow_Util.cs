@@ -15,7 +15,7 @@ public partial class NineForShow : MonoBehaviour
                 set.a1, set.a2, set.a3,
                 set.b1, set.b2, set.b3,
                 set.c1, set.c2, set.c3, 
-                true
+                true, false
             ),
             ShowStones(
                 set.a1, set.a2, set.a3,

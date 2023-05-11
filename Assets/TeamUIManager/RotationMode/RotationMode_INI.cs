@@ -86,7 +86,6 @@ namespace FightScene
                 {
                     rotationModeHitCombo = Instantiate(hitCombo);
                     rotationModeHitCombo.name = TeamConfig.myTeam + "HitCombo";
-                    rotationModeHitCombo.color = TeamConfig.myTeam == RTFightManager.playerTeam ? Color.yellow : Color.blue;
                     rotationModeHitCombo.gameObject.SetActive(true);
                     if (rotationModeHitCombo.gameObject.transform.parent != _targetCanvasT)
                     {

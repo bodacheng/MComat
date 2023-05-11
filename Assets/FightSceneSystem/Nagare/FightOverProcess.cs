@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
-using mainMenu;
-using UnityEngine;
 using PlayFab.ClientModels;
 
 namespace FightScene
@@ -21,7 +19,6 @@ namespace FightScene
             // quest结束：显示技能石经验获得情况和报酬信息？
             // 自我战斗结束：显示战斗分析？
             // 技能测试：显示战斗分析？
-            Debug.Log(" winner id " + FightLogger.value.GetWinnerId());
             
             switch (FightScene.Fight.EventType)
             {

@@ -28,7 +28,7 @@ public class TeamEditLayer : UILayer
     
     [Header("技能编辑按钮")]
     [SerializeField] Button skillEditButton;
-    [SerializeField] private ConfirmBtnColorSwapper skillEditBtnColorSwapper;
+    [SerializeField] ConfirmBtnColorSwapper skillEditBtnColorSwapper;
 
     [Header("指示")]
     [SerializeField] Text instruction;
@@ -224,7 +224,7 @@ public class TeamEditLayer : UILayer
                     nineForShow.ShowStones_Acc(PreScene.target.Focusing.id);
                 else
                 {
-                    // empty slot
+                    nineForShow.ShowStones_Acc(null);
                 };
             }
         }

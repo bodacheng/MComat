@@ -11,6 +11,7 @@ public class FightPrepareLayer : UILayer
     [SerializeField] float unitIconSize = 200;
     [SerializeField] Button editTeamButton; // 根据进入战斗模式决定是否显示
     [SerializeField] GameObject teamEditIndicator;
+    [SerializeField] Text teamEditIndicatorText;
     [SerializeField] FightModeSwitch fightModeSwitch;
     [SerializeField] FightBeginBtn beginFight;
     [SerializeField] Text team1OneWord;
@@ -52,7 +53,21 @@ public class FightPrepareLayer : UILayer
     public void StageMembersInfoShow(FightInfo stage, string oneWordTeam1, string oneWordTeam2)
     {
         MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT, true);
-        teamEditIndicator.SetActive(stage.FightMembers.HeroSets.GetValues().Count == 0);
+        if (dataAccess.Units.Dic.Count >= 3 && stage.FightMembers.HeroSets.GetValues().Count < 3)
+        {
+            teamEditIndicatorText.text = Translate.Get("HasExtraSeat");
+            teamEditIndicator.SetActive(true);
+        }
+        else if (dataAccess.Units.Dic.Count > 0 && stage.FightMembers.HeroSets.GetValues().Count == 0)
+        {
+            teamEditIndicatorText.text = Translate.Get("MakeYourTeam");
+            teamEditIndicator.SetActive(true);
+        }
+        else
+        {
+            teamEditIndicator.SetActive(false);
+        }
+        
         MemberInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT, false);
         team1OneWord.text = oneWordTeam1;
         team2OneWord.text = oneWordTeam2;

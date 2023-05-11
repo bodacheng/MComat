@@ -4,6 +4,8 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
+using DummyLayerSystem;
+using mainMenu;
 
 public partial class NineForShow : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public partial class NineForShow : MonoBehaviour
     [SerializeField] Image A1Frame, A2Frame, A3Frame, B1Frame, B2Frame, B3Frame, C1Frame, C2Frame, C3Frame;
     [SerializeField] string abnormalSkillSetEffectKey = "defaultmagic/abnormalSkillSet.prefab";
     [SerializeField] string notQualifiedEffectKey = "defaultmagic/skillSetWarn.prefab";
+    [SerializeField] GameObject editSkillIndicator;
     SKStoneItem _a1S, _a2S, _a3S, _b1S, _b2S, _b3S, _c1S, _c2S, _c3S;
     
     public void ClearCurrent()
@@ -86,7 +89,7 @@ public partial class NineForShow : MonoBehaviour
         string a1SkillId, string a2SkillId, string a3SkillId,
         string b1SkillId, string b2SkillId, string b3SkillId,
         string c1SkillId, string c2SkillId, string c3SkillId,
-        bool bossMode)
+        bool bossMode, bool showEditSkillIndicator)
     {
         var valR = SkillSet.CheckEdit(
             a1SkillId, a2SkillId, a3SkillId,
@@ -100,6 +103,16 @@ public partial class NineForShow : MonoBehaviour
         else
         {
             DestroyEffects();
+        }
+        // 下面这个环节纯粹是为了队伍编辑画面的技能编辑引导
+        if (editSkillIndicator != null)
+        {
+            editSkillIndicator.SetActive(showEditSkillIndicator &&
+                                         (PreScene.target.Focusing != null && PreScene.target.Focusing.id != null) &&
+                                         (valR == SkillSet.SkillEditError.UnBalanced 
+                                          || valR == SkillSet.SkillEditError.RepeatedSkill 
+                                          || valR == SkillSet.SkillEditError.NoNormalStart
+                                          || valR == SkillSet.SkillEditError.NotFull));
         }
     }
 

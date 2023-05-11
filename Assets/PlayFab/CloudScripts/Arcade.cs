@@ -27,6 +27,11 @@ public partial class CloudScript
             },
             (x) =>
             {
+                if (_stage == "2")
+                {
+                    PopupLayer.ArrangeWarnWindow(Translate.Get("TutorialCompleted"));
+                }
+                
                 if (x.FunctionResult != null && !String.IsNullOrEmpty(x.FunctionResult.ToString()))
                 {
                     var jsonResult = (PlayFab.Json.JsonObject)x.FunctionResult;
@@ -39,9 +44,20 @@ public partial class CloudScript
                             foreach (var item in unitAward)
                             {
                                 var unitConfig = Units.GetUnitConfig(item.ItemId);
-                                PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get(unitConfig.REAL_NAME) + "\n"
-                                    + Translate.Get("GotNewUnit"), item.ItemId);
+                                if (_stage == "5")
+                                {
+                                    PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get(unitConfig.REAL_NAME) + "\n" + Translate.Get("GotNewUnit"), item.ItemId,
+                                    ()=>
+                                    {
+                                        PopupLayer.ArrangeWarnWindow(Translate.Get("ArenaUnlocked"));
+                                    });
+                                }
+                                else
+                                {
+                                    PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get(unitConfig.REAL_NAME) + "\n" + Translate.Get("GotNewUnit"), item.ItemId);
+                                }
                             }
+                            PlayFabReadClient.LoadItems(null);
                         }
                         catch (Exception e)
                         {
