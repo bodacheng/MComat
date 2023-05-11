@@ -63,7 +63,12 @@ public class StartUpPresentation : MonoBehaviour
                     text = "New version detected, please update the program";
                     break;
             }
-            PopupLayer.ArrangeWarnWindow(text);
+            PopupLayer.ArrangeWarnWindow(() =>
+            {
+                #if UNITY_ANDROID
+                Application.OpenURL("https://play.google.com/store/apps/details?id=com.MCombat.BO");
+                #endif
+            },text);
             return;
         }
         
