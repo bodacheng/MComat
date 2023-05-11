@@ -21,7 +21,8 @@ public class MailDetailView : UILayer
     private IDisposable disposeCountDown;
     public void Read(MailItemInstance instance)
     {
-        title.text = instance.DisplayName;
+        var translatedTitle = Translate.Get(instance.DisplayName);
+        title.text = string.IsNullOrEmpty(translatedTitle) ? instance.DisplayName : translatedTitle;
         var catalogItem = PlayFabReadClient.GetCatalogItemByDisplayName(instance.DisplayName);
         message.text = catalogItem != null ? catalogItem.Description : String.Empty;
         
