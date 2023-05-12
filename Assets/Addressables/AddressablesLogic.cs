@@ -37,9 +37,28 @@ public static class AddressablesLogic
         void CompareVersions(string serverVersion)
         {
             string currentVersion = Application.version;
-            Debug.Log("currentVersion:"+ currentVersion);
-            Debug.Log("serverVersion:"+ serverVersion);
-            needToUpdate = currentVersion != serverVersion;
+            Debug.Log("currentVersion:" + currentVersion);
+            Debug.Log("serverVersion:" + serverVersion);
+            
+            string[] serverVersionParts = serverVersion.Split('.');
+            string[] currentVersionParts = currentVersion.Split('.');
+            
+            for (int i = 0; i < serverVersionParts.Length && i < currentVersionParts.Length; i++)
+            {
+                int serverVersionPart = int.Parse(serverVersionParts[i]);
+                int currentVersionPart = int.Parse(currentVersionParts[i]);
+
+                if (serverVersionPart > currentVersionPart)
+                {
+                    needToUpdate = true;
+                    break;
+                }
+                else if (serverVersionPart < currentVersionPart)
+                {
+                    needToUpdate = false;
+                    break;
+                }
+            }
         }
         Addressables.Release(handle);
         return needToUpdate;
