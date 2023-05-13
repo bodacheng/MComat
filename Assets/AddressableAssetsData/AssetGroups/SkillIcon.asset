@@ -750,7 +750,8 @@ MonoBehaviour:
   - m_GUID: 57bae81e5791c40728f3283fb573aa67
     m_Address: 113
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - skill_icon
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
