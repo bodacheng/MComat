@@ -1,7 +1,5 @@
 ﻿using DummyLayerSystem;
-using UnityEngine;
 using mainMenu;
-using ModelView;
 
 public class UnitListPage : MSceneProcess
 {

@@ -1,5 +1,6 @@
 ﻿using UnityEngine.SceneManagement;
 using dataAccess;
+using mainMenu;
 using UnityEngine;
 
 public static class FightLoad
@@ -43,10 +44,7 @@ public static class FightLoad
         }
         
         FightScene.FightScene.Fight =  FightInfo.Copy(stage);
-        
-        Stones.ClearRender();
-        HurtObjectManager.Clear();
-        EffectsManager.Clear();
+        PreScene.target.CashClear();
         SceneManager.LoadScene(2);
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 using NoSuchStudio.Common;
@@ -25,8 +26,15 @@ public class UnitInstructionLayer : UILayer
         if (config == null)
             return;
         
-        var value = await AddressablesLogic.LoadT<Sprite>("unit_image/"+RECORD_ID);
-        var bgValue = await AddressablesLogic.LoadT<Sprite>("unit_bg/"+RECORD_ID);
+        var loadTasks = new[]
+        {
+            AddressablesLogic.LoadT<Sprite>("unit_image/"+RECORD_ID),
+            AddressablesLogic.LoadT<Sprite>("unit_bg/"+RECORD_ID)
+        };
+
+        var results = await UniTask.WhenAll(loadTasks);
+        var value = results[0];
+        var bgValue = results[1];
         if (value == null || bgValue == null)
         {
             return;
@@ -36,7 +44,9 @@ public class UnitInstructionLayer : UILayer
         
         bgImage.rectTransform.sizeDelta = new Vector2(targetBgWidth, bgImage.rectTransform.sizeDelta.y);
         bgImage.rectTransform.anchoredPosition = new Vector2();
-        bgImage.color = Color.white;
+        
+        bgImage.color = Color.black; // Start from transparent
+        bgImage.DOColor(Color.white, 0.2f).SetEase(Ease.Linear);
         bgImage.sprite = bgValue;
         
         var unitImageRect = unitImage.transform.GetComponent<RectTransform>();

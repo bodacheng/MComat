@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using dataAccess;
 using UnityEngine;
 using DummyLayerSystem;
 using ModelView;
@@ -114,16 +117,15 @@ namespace mainMenu
             pCameraData.cameraStack.Add(camera);
         }
 
-        void Start()
+        async void Start()
         {
-            AnimationResourceLoader.Instance.Clear();
-            DedicatedCameraConnector.ClearBackUpModels();
-            HurtObjectManager.Clear();
-            EffectsManager.Clear();
-            
-            //Screen.SetResolution(1920, 1080, true);
+            CashClear();
             UILayerLoader.Clear();
             UILayerLoader.SetHanger(T.transform);
+            var unitInstructionLayer = UILayerLoader.Load<UnitInstructionLayer>();
+            unitInstructionLayer.LoadUnitImage();
+            await UniTask.WhenAll(AddressablesLogic.Essentials(), PrepareModelOftenUse());
+            UILayerLoader.Remove<UnitInstructionLayer>();
             UILayerLoader.SetEffectBg(effectBg.rectTransform);
             AppSetting.BGMSource = audioSource;
             AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey).Forget();
@@ -132,8 +134,30 @@ namespace mainMenu
             
             BasicPhase();
             ToInitialPhase();
-            
-            AddressablesLogic.Essentials().Forget();
+        }
+
+        async UniTask PrepareModelOftenUse()
+        {
+            await UniTask.WhenAll(new List<UniTask>()
+            {
+                DedicatedCameraConnector.PrepareModel("1"),
+                DedicatedCameraConnector.PrepareModel("2"),
+                DedicatedCameraConnector.PrepareModel("3"),
+                DedicatedCameraConnector.PrepareModel("4"),
+                DedicatedCameraConnector.PrepareModel("5"),
+                DedicatedCameraConnector.PrepareModel("6"),
+                DedicatedCameraConnector.PrepareModel("7")
+            });
+        }
+
+        public void CashClear()
+        {
+            Stones.ClearRender();
+            HurtObjectManager.Clear();
+            EffectsManager.Clear();
+            AnimationResourceLoader.Instance.Clear();
+            DedicatedCameraConnector.ClearBackUpModels();
+            AddressablesLogic.ReleaseAsyncOperationHandles();
         }
         
         void BasicPhase()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -66,9 +67,12 @@ public static class AddressablesLogic
     
     public static async UniTask Essentials()
     {
-        await HurtObjectManager.CheckExistedKey();
-        await EffectsManager.CheckExistedKey();
-        await HurtObjectManager.ConstructDPool();
+        await UniTask.WhenAll(new List<UniTask>()
+        {
+            HurtObjectManager.CheckExistedKey(),
+            EffectsManager.CheckExistedKey(),
+            HurtObjectManager.ConstructDPool()
+        });
     }
     
     static async UniTask<long> DownLoadSize(string label, Action exceptionProcess)

@@ -119,6 +119,29 @@ namespace ModelView
             }
         }
         
+        public static async UniTask PrepareModel(string recordID)
+        {
+            Data_Center saveData = null;
+            if (recordID != null)
+                Saves.TryGetValue(recordID, out saveData);
+
+            var config = Units.GetUnitConfig(recordID);
+            if (config == null)
+            {
+                return;
+            }
+            if (saveData == null)
+            {
+                saveData = await GeneralModelPool.GetModel(recordID);
+                if (saveData == null)
+                {
+                    return;
+                }
+                saveData.WholeT.gameObject.SetActive(false);
+                DicAdd<string, Data_Center>.Add(Saves, recordID, saveData);
+            }
+        }
+        
         public async UniTask SkillShowRunWithPrepare(string skillName)
         {
             if (_ifShowingSkill)

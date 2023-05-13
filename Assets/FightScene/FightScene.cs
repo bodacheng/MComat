@@ -4,7 +4,6 @@ using UniRx;
 using System.Collections.Generic;
 using DummyLayerSystem;
 using mainMenu;
-using ModelView;
 using UnityEngine.SceneManagement;
 
 namespace FightScene
@@ -55,12 +54,6 @@ namespace FightScene
         
         void Start()
         {
-            AnimationResourceLoader.Instance.Clear();
-            DedicatedCameraConnector.ClearBackUpModels();
-            AddressablesLogic.ReleaseAsyncOperationHandles();
-            HurtObjectManager.Clear();
-            EffectsManager.Clear();
-            
             UILayerLoader.Clear();
             UILayerLoader.SetHanger(T);
             
@@ -70,9 +63,6 @@ namespace FightScene
             {
                 return;
             }
-            
-            //QualitySettings.vSyncCount = 1;
-            //Screen.SetResolution(1920, 1080, true);
             
             AppSetting.BGMSource = audioSource;
             Application.targetFrameRate = 60;
