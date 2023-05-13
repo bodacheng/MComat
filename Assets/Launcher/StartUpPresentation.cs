@@ -72,8 +72,6 @@ public class StartUpPresentation : MonoBehaviour
             return;
         }
         
-        Debug.Log(" 没有强制升级程序 ");
-        
         var bytes = await AddressablesLogic.GetWholeDownLoadSize(
             () =>
             {

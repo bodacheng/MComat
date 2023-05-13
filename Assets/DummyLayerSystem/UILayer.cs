@@ -28,6 +28,10 @@ public class UILayer : MonoBehaviour
     protected async UniTask Set2DView(string recordId, Image view2D, Animator unitOutAnimator)
     {
         var value = await AddressablesLogic.LoadT<Sprite>("unit_image/"+recordId);
+        if (unitOutAnimator == null)
+        {
+            return;
+        }
         if (value == null)
         {
             unitOutAnimator.SetTrigger("reset");
