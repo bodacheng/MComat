@@ -150,7 +150,7 @@ namespace mainMenu
             });
         }
 
-        public void CashClear()
+        public static void CashClear()
         {
             Stones.ClearRender();
             HurtObjectManager.Clear();

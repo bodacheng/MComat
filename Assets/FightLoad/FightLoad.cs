@@ -1,5 +1,4 @@
 ﻿using UnityEngine.SceneManagement;
-using dataAccess;
 using mainMenu;
 using UnityEngine;
 
@@ -44,7 +43,7 @@ public static class FightLoad
         }
         
         FightScene.FightScene.Fight =  FightInfo.Copy(stage);
-        PreScene.target.CashClear();
+        PreScene.CashClear();
         SceneManager.LoadScene(2);
     }
 }
