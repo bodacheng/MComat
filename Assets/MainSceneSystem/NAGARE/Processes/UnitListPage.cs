@@ -31,7 +31,6 @@ public class UnitListPage : MSceneProcess
             }
         );
         layer.DisplayUnitIcons(dataAccess.Units.Dic, true);
-        DedicatedCameraConnector.ClearBackUpModels();
         UnitIconBtn(PreScene.target.Focusing.id);
         SetLoaded(true);
     }
