@@ -2,6 +2,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using dataAccess;
 using System;
+using System.Linq;
 
 public partial class PlayFabReadClient
 {
@@ -10,7 +11,6 @@ public partial class PlayFabReadClient
         dataAccess.Units.Dic.Clear();
         Stones.ClearData();
         Stones.ClearRender();
-        MyMailList.Clear();
         
         PlayFabClientAPI.GetUserInventory(
             new GetUserInventoryRequest(),
@@ -27,15 +27,20 @@ public partial class PlayFabReadClient
     
     static void OnGetUserInventory(GetUserInventoryResult result, Action<bool> finished)
     {
+        void _AddMailData(ItemInstance item)
+        {
+            var mailData = new MailItemInstance();
+            Copier<ItemInstance,MailItemInstance>.Copy(item, mailData);
+            AddMailData(mailData);
+        }
+        
         foreach (var item in result.Inventory)
         {
             if (item.CatalogVersion == PlayFabSetting._UnitCatalog)
             {
                 if (item.ItemClass == "GiftBox")
                 {
-                    var mailData = new MailItemInstance();
-                    Copier<ItemInstance,MailItemInstance>.Copy(item, mailData);
-                    AddMailData(mailData);
+                    _AddMailData(item);
                 }
                 else
                 {
@@ -55,10 +60,10 @@ public partial class PlayFabReadClient
                     {
                         InstanceId = item.ItemInstanceId,
                         SkillId = item.ItemId,
-                        Level = (item.CustomData != null && item.CustomData.ContainsKey("level")) ? Convert.ToInt32(item.CustomData["level"]) : 1,
-                        UnitInstanceId = (item.CustomData != null && item.CustomData.ContainsKey("unitInstanceId")) ? item.CustomData["unitInstanceId"] : null,
-                        Slot = (item.CustomData != null && item.CustomData.ContainsKey("slot")) ? item.CustomData["slot"] : null,
-                        Born = (item.CustomData != null && item.CustomData.ContainsKey("born")) ? item.CustomData["born"] : null
+                        Level = Convert.ToInt32(item.CustomData.GetOrDefault("level", "1")),
+                        UnitInstanceId = item.CustomData.GetOrDefault("unitInstanceId"),
+                        Slot = item.CustomData.GetOrDefault("slot"),
+                        Born = item.CustomData.GetOrDefault("born")
                     };
                     Stones.Add(info);
                 }
@@ -69,13 +74,11 @@ public partial class PlayFabReadClient
             }
             else if (item.CatalogVersion == PlayFabSetting._MailCatalog)
             {
-                var mailData = new MailItemInstance();
-                Copier<ItemInstance,MailItemInstance>.Copy(item, mailData);
-                AddMailData(mailData);
+                _AddMailData(item);
             }
         }
         
-        LoadReadMails(); // 本地逻辑。读取已读邮件。放在这里是希望和远程读取未读邮件的动作保持步调一致
+        MyMailList = MyMailList.OrderByDescending(x => x.NotClaimed()).ToList();
         
         foreach (var kv in result.VirtualCurrency)
         {
@@ -96,7 +99,7 @@ public partial class PlayFabReadClient
                 Currencies.AdTicket.Value = kv.Value;
             }
         }
-
+        
         foreach (var kv in result.VirtualCurrencyRechargeTimes)
         {
             if (kv.Key == PlayFabSetting._ArenaTicketCode)

@@ -119,13 +119,10 @@ namespace mainMenu
 
         async void Start()
         {
+            await UniTask.WhenAll(PlayFabReadClient.LoadReadMailsAsync(),AddressablesLogic.Essentials());
             CashClear();
             UILayerLoader.Clear();
             UILayerLoader.SetHanger(T.transform);
-            var unitInstructionLayer = UILayerLoader.Load<UnitInstructionLayer>();
-            unitInstructionLayer.LoadUnitImage();
-            await UniTask.WhenAll(AddressablesLogic.Essentials(), PrepareModelOftenUse());
-            UILayerLoader.Remove<UnitInstructionLayer>();
             UILayerLoader.SetEffectBg(effectBg.rectTransform);
             AppSetting.BGMSource = audioSource;
             AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey).Forget();

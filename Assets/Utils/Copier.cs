@@ -1,4 +1,4 @@
-using UnityEngine;
+using System.Linq;
 
 public static class Copier<TParent, TChild> where TParent : class
     where TChild : class
@@ -8,16 +8,14 @@ public static class Copier<TParent, TChild> where TParent : class
         var parentFields = parent.GetType().GetFields();
         var childFields = child.GetType().GetFields();
 
+        var childFieldsDict = childFields.ToDictionary(field => field.Name);
+
         foreach (var parentField in parentFields)
         {
-            foreach (var childField in childFields)
+            if (childFieldsDict.TryGetValue(parentField.Name, out var childField)
+                && parentField.FieldType == childField.FieldType)
             {
-                if (parentField.Name == childField.Name && parentField.FieldType == childField.FieldType)
-                {
-                    //Debug.Log(parentField.Name +" : "+ parentField.GetValue(parent));
-                    childField.SetValue(child, parentField.GetValue(parent));
-                    break;
-                }
+                childField.SetValue(child, parentField.GetValue(parent));
             }
         }
     }

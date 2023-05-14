@@ -6,12 +6,13 @@ using System;
 using Newtonsoft.Json;
 using Json;
 using System.IO;
+using Cysharp.Threading.Tasks;
 
 public partial class PlayFabReadClient
 {
     #region MAIL
 
-    private static readonly List<MailItemInstance> MyMailList = new List<MailItemInstance>();
+    private static List<MailItemInstance> MyMailList = new List<MailItemInstance>();
     private static readonly Dictionary<string, CatalogItem> CatalogItems = new Dictionary<string, CatalogItem>();
     
     public static List<MailItemInstance> GetMailsData(bool onlyUnRead = false)
@@ -70,7 +71,9 @@ public partial class PlayFabReadClient
     /// <param name="mailData"></param>
     static void AddMailData(MailItemInstance mailData)
     {
-        MyMailList.Add(mailData);
+        var exist = MyMailList.Find(x=> x.ItemInstanceId == mailData.ItemInstanceId);
+        if (exist == null)
+            MyMailList.Add(mailData);
     }
     
     public static void SaveReadMailAsJson(ItemInstance mailOfPlayer)
@@ -78,11 +81,11 @@ public partial class PlayFabReadClient
         var json = JsonConvert.SerializeObject(mailOfPlayer);
         LocalJson.SaveToJsonFile_persistentDataPath("readmail", mailOfPlayer.ItemInstanceId + ".json", json);
     }
-    
+
     /// <summary>
     /// 已读取邮件的获取
     /// </summary>
-    static void LoadReadMails()
+    public static async UniTask LoadReadMailsAsync()
     {
         var path = Application.persistentDataPath + "/readmail";
         if (Directory.Exists(path))
@@ -91,8 +94,11 @@ public partial class PlayFabReadClient
             {
                 try
                 {
-                    var dataAsJson = File.ReadAllText(file);
+                    // Run the IO operation on a background thread
+                    var dataAsJson = await UniTask.Run(() => File.ReadAllText(file));
                     var mailOfPlayerModel = JsonConvert.DeserializeObject<MailItemInstance>(dataAsJson);
+                    // Switch back to the main thread to modify Unity objects
+                    await UniTask.Yield(); // Switch back to the main thread
                     AddMailData(mailOfPlayerModel);
                 }
                 catch (Exception e)
@@ -102,7 +108,7 @@ public partial class PlayFabReadClient
             }
         }
     }
-    
+
     public static void DeleteAllLocalMails()
     {
         var toDelete = MyMailList.FindAll(x => (x.RemainingUses.Value <= 0));
