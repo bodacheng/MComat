@@ -27,6 +27,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - battle_ground
+  - m_GUID: 20e84f904415347b49bb9f1dafd45019
+    m_Address: battleGround/2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - battle_ground
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
