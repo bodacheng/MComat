@@ -19,6 +19,9 @@ public class FightingStepLayer : UILayer
     
     [Header("Tutorial")]
     [SerializeField] ClickNextTutorial clickNextTutorial;
+
+    [Header("教程强制点自动环节黑幕")] 
+    [SerializeField] GameObject forceClickAutoBtnBlackMask;
     
     public async UniTask Setup(bool active = true)
     {
@@ -96,5 +99,17 @@ public class FightingStepLayer : UILayer
             await inputsManager.ElementRegister(d.element, RTFightManager.Target.UnitInfoRef[d]);
         }
         Initialized = true;
+    }
+
+    public void ForceClickAutoBtn()
+    {
+        forceClickAutoBtnBlackMask.SetActive(true);
+        team1UI.AutoSwitch.transform.SetAsLastSibling();
+        team1UI.AutoSwitch.AddExtraProcessOnClick(
+            () =>
+            {
+                clickNextTutorial.gameObject.SetActive(false);
+            }
+        );
     }
 }

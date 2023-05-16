@@ -10,14 +10,17 @@ public partial class PlayFabReadClient
 {
     public static void UpdateUserData(UpdateUserDataRequest req, Action finished, Action fail = null)
     {
+        ProgressLayer.Loading(Translate.Get("Updating"));
         PlayFabClientAPI.UpdateUserData
         (
             req,
             obj => {
                 finished.Invoke();
+                ProgressLayer.Close();
             },
             errorCallback => {
                 fail?.Invoke();
+                ProgressLayer.Close();
                 ErrorReport(errorCallback);
             }
         );

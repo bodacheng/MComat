@@ -5,6 +5,7 @@ LoginByEmail,Login,ログイン,登陆
 NotAuthorizedByTitle,Server under maintenance,サーバーメンテナンス中,服务器维护中
 ReturnToLobbyForConnectionError,Connection error. Return to title.,通信エラー。タイトルに戻る,通信错误。返回标题
 ConnectionError,Connection error,通信エラー,通信错误
+Updating,Data updating,データ更新中,数据更新中
 ,,,
 Adventure,Adventure,アドベンチャー,探险
 Arena,Arena,アリーナ,竞技场

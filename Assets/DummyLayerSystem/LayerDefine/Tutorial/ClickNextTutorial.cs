@@ -34,6 +34,9 @@ public class ClickNextTutorial : MonoBehaviour
         {
             ClosePages();
             TutorialLayers[pageIndex].SetActive(true);
+            var specialEventPage = TutorialLayers[pageIndex].GetComponent<TutorialLayerSpecialEvent>();
+            if (specialEventPage != null)
+                specialEventPage.onClick.Invoke();
         }
         else
         {

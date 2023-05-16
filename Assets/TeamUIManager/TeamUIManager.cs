@@ -16,7 +16,8 @@ namespace FightScene
         [SerializeField] Text hitCombo;
         [SerializeField] AutoSwitch teamAutoSwitch;
         [SerializeField] RectTransform selectedFrame;
-        
+
+        public AutoSwitch AutoSwitch => teamAutoSwitch;
         public TeamMode TeamMode { get; set; }
         public TeamConfig TeamConfig { get; set; }
         public readonly IDictionary<Data_Center, SideUnitIcon> UnitIconDic = new Dictionary<Data_Center, SideUnitIcon>();
