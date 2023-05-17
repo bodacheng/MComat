@@ -196,6 +196,21 @@ public partial class Data_Center : MonoBehaviour
         _MyBehaviorRunner.AIMode = aiMode;
         _MyBehaviorRunner.Controller.DecisionDelay = aiDelayFrame;
     }
+    
+    // for tutorial
+    public void StartAutoModeHalfHp()
+    {
+        var fullHp = FightDataRef.CurrentHp.Value / 2;
+        IDisposable disposeTask = null;
+        disposeTask = FightDataRef.CurrentHp.Subscribe(x =>
+        {
+            if (x <= fullHp)
+            {
+                disposeTask.Dispose();
+                _MyBehaviorRunner.AI = true;
+            }
+        }).AddTo(gameObject);
+    }
 
     //我们希望datacenter是整个角色初始化的出发点，那么这个地方应该也可以做到根据情况决定一些组件加载还是不加载。
     //关于角色初始化，我们需要把所有进行初始化的内容都拿出来进行一个归类工作。其实当下我们的系统里最不稳的一个事情在于

@@ -53,6 +53,14 @@ namespace FightScene
                 }).AddTo(gameObject);
             }
         }
+
+        public void TutorialSpecial()
+        {
+            foreach (var center in teamMembers.GetValues())
+            {
+                center.StartAutoModeHalfHp();
+            }
+        }
         
         // 切换队员
         public bool ChangeFightingUnit(Data_Center changeTo = null, bool emptyState = false, Transform iniStandPoint = null)

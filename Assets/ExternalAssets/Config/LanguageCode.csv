@@ -127,11 +127,14 @@ AdvancedGacha,Super Gem Vortex,スーパージェムボルテックス,超级宝
 NormalGacha,Gem Vortex,ジェムボルテックス,宝石漩涡
 DropTable,Skill Gem Drop List,スキルジェムドロップリスト,掉落技能宝石一栏
 ,,,
-AttackBtn1Intro,Repeatedly tapping or holding down will sequentially unleash the first row of skills in the skill set,連打または長押しで、スキルセットの第一列のスキルを順次発動します,按下后将依次释放技能组第一行技能
-AttackBtn2Intro,Repeatedly tapping or holding down will sequentially unleash the second row of skills in the skill set,連打または長押しで、スキルセットの第二列のスキルを順次発動します,按下后将依次释放技能组第二行技能
-AttackBtn3Intro,Repeatedly tapping or holding down will sequentially unleash the third row of skills in the skill set,連打または長押しで、スキルセットの第三列のスキルを順次発動します,按下后将依次释放技能组第三行技能
+FightIntroBegin,Let's go through a simple combat operation guide,簡単な戦闘操作の説明をさせていただきます,让我们进行一个简单的战斗操作说明
+JoystickIntro,Control direction using a joystick,ジョイスティックを使って方向を制御する,通过遥控杆控制方向
+AttackBtn1Intro,first row of skills in the skill set,スキルセットの一行目のスキル,技能组第一行技能
+AttackBtn2Intro,second row of skills in the skill set,スキルセットの二行目のスキル,技能组第二行技能
+AttackBtn3Intro,third row of skills in the skill set,スキルセットの三行目のスキル,技能组第三行技能
 AutoBtnIntro,Click to switch between auto and manual mode,クリックして、自動または手動に切り替えます,点击可切换自动或手动
 HpBarAndExBar,"Health and energy. If the energy is insufficient, EX Skills cannot be unleashed.",体力とエネルギー値。エネルギー値が不足している場合、必殺技を発動できません,体力与能量值，必杀技在能量值不够的情况下无法释放
+JustUseAI,We recommend using auto mode!,自動戦闘を推奨します！,干脆就用AI战斗吧！
 ,,,
 MakeYourTeam,Choose characters,キャラクターを選ぶ,选择出战角色
 HasExtraSeat,Warriors available for battle,戦いに参加できる戦士がいます,有可以参战的战士

@@ -87,6 +87,9 @@ public class PreparingProcess : FSceneProcess
                 break;
         }
         
+        if (FightScene.FightScene.Fight.RunTutorial)
+            RTFightManager.Target.team2.TutorialSpecial();
+        
         RTFightManager.Target.SetGame(FightScene.FightScene.Fight);
         ProgressLayer.LoadingPercent(Translate.Get("LoadingBattleAboutToEnd"), 0.8f);
         fightingStepLayer = UILayerLoader.Load<FightingStepLayer>();
