@@ -2740,7 +2740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.07450981, g: 0, b: 1, a: 0.3254902}
+  m_Color: {r: 0.39607844, g: 0.39607844, b: 0.39607844, a: 0.3254902}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4484,7 +4484,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cb87b5f0f2356b84b81b5c1713c79627, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 85b1e2e4b252275458a64b510d6989e8, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4750,6 +4750,7 @@ MonoBehaviour:
   interval: 1
   toChange:
   - {fileID: 2523835564432070111}
+  textTarget: {fileID: 0}
 --- !u!1 &2523835564471563440
 GameObject:
   m_ObjectHideFlags: 0
@@ -6089,6 +6090,7 @@ MonoBehaviour:
   interval: 1
   toChange:
   - {fileID: 2677751319738524580}
+  textTarget: {fileID: 0}
 --- !u!1 &2677751319763802288
 GameObject:
   m_ObjectHideFlags: 0
@@ -6367,7 +6369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.9411765, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10289,6 +10291,7 @@ MonoBehaviour:
   interval: 0.5
   toChange:
   - {fileID: 5766309198858059972}
+  textTarget: {fileID: 0}
 --- !u!1 &7263793455155530351
 GameObject:
   m_ObjectHideFlags: 0
@@ -10384,6 +10387,7 @@ MonoBehaviour:
   interval: 1
   toChange:
   - {fileID: 8757157060257791120}
+  textTarget: {fileID: 0}
 --- !u!1 &7301965656616930677
 GameObject:
   m_ObjectHideFlags: 0
@@ -14724,6 +14728,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2523835563789991230}
     m_Modifications:
+    - target: {fileID: 1200073160048959679, guid: aa29d6732e4224e078a15020c0d19335,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.74509805
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200073160048959679, guid: aa29d6732e4224e078a15020c0d19335,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.74509805
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200073160048959679, guid: aa29d6732e4224e078a15020c0d19335,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.74509805
+      objectReference: {fileID: 0}
     - target: {fileID: 1990939020251591217, guid: aa29d6732e4224e078a15020c0d19335,
         type: 3}
       propertyPath: m_Pivot.x

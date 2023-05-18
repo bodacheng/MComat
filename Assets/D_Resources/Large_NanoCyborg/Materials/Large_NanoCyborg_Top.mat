@@ -18,7 +18,6 @@ Material:
   - EMISSIVE_MAP
   - FOG
   - LIGHT_MAP
-  - MATCAP
   - MATCAP_PERSPECTIVE
   - NORMAL_MAP
   - OUTLINE_PASS_DISABLED
@@ -105,7 +104,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCapTex:
-        m_Texture: {fileID: 2800000, guid: b4a39e223b86cf24d82d7c34e6366131, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -148,9 +147,9 @@ Material:
     m_Floats:
     - _AmbientBrightness: 1
     - _Anime: 0
-    - _AnimeSoftness: 0.01
-    - _AnimeThreshold1: 0.45
-    - _AnimeThreshold2: 0.85
+    - _AnimeSoftness: 0.05
+    - _AnimeThreshold1: 0.2
+    - _AnimeThreshold2: 0.4
     - _BlendOp: 0
     - _Brightness: 1
     - _BumpScale: 1
@@ -258,8 +257,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _AnimeColor1: {r: 1, g: 1, b: 1, a: 1}
-    - _AnimeColor2: {r: 1.35, g: 1.35, b: 1.35, a: 1}
-    - _AnimeColor3: {r: 2, g: 2, b: 2, a: 1}
+    - _AnimeColor2: {r: 0.8627451, g: 0.8627451, b: 0.8627451, a: 1}
+    - _AnimeColor3: {r: 2.2056756, g: 2.2056756, b: 2.2056756, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
