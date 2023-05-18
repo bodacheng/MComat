@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 8322460592287290730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6032163208750347131}
@@ -1654,9 +1654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d10f17363d0d849b9473481496e210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 1.23, y: 57.79, z: 28.01}
-  ros: {x: 0, y: 0, z: 0, w: 0}
-  scale: {x: 3.5, y: 3.5, z: 3.5}
+  pos: {x: 23.18, y: 41.32, z: -0.16}
+  ros: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
+  scale: {x: 2.5, y: 2.5, z: 2.5}
 --- !u!1001 &8322460590199541434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12404,6 +12404,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Railing_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457589943681817564, guid: 9929433be6e5f0748952866eb1682aa9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2265793265421140326, guid: 9929433be6e5f0748952866eb1682aa9,
         type: 3}
@@ -28554,6 +28559,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Walkway_Corner_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4919999293162887205, guid: 612717fb5e7d81945bedf2564e9e85c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5696079252581368479, guid: 612717fb5e7d81945bedf2564e9e85c0,
         type: 3}
       propertyPath: m_RootOrder
@@ -36500,6 +36510,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Walkway_Stairs_01_Railing_01
       objectReference: {fileID: 0}
+    - target: {fileID: 4859594225807708725, guid: 21548b3ef8c86c14180323225f9d3c38,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5204876526931052687, guid: 21548b3ef8c86c14180323225f9d3c38,
         type: 3}
       propertyPath: m_RootOrder
@@ -42557,6 +42572,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Base_Pillar_Metal_02
       objectReference: {fileID: 0}
+    - target: {fileID: 816357600588384781, guid: 4f813a63e797fb647aa0f807c83c77f8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f813a63e797fb647aa0f807c83c77f8, type: 3}
 --- !u!4 &8313866554588061112 stripped
@@ -42631,6 +42651,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Walkway_Corner_01_Railing_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 820717808317797918, guid: cb3a978f0e6a5f04cabecb7064b49abb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb3a978f0e6a5f04cabecb7064b49abb, type: 3}
@@ -52257,6 +52282,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Walkway_Stairs_01_Railing_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859594225807708725, guid: 21548b3ef8c86c14180323225f9d3c38,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5204876526931052687, guid: 21548b3ef8c86c14180323225f9d3c38,
         type: 3}
@@ -66281,6 +66311,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Walkway_Half_01_Railing_01
       objectReference: {fileID: 0}
+    - target: {fileID: 8901769235901799847, guid: c1e0ba2b4c3e16143aad67a71c563afc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1e0ba2b4c3e16143aad67a71c563afc, type: 3}
 --- !u!4 &269633820617451010 stripped
@@ -69601,6 +69636,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Walkway_01
       objectReference: {fileID: 0}
+    - target: {fileID: 5608795021508850258, guid: e9746fe3ff461b944951bde739fecad2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9746fe3ff461b944951bde739fecad2, type: 3}
 --- !u!4 &3882929875374505054 stripped
@@ -72391,6 +72431,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Walkway_Corner_01
       objectReference: {fileID: 0}
+    - target: {fileID: 4919999293162887205, guid: 612717fb5e7d81945bedf2564e9e85c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5696079252581368479, guid: 612717fb5e7d81945bedf2564e9e85c0,
         type: 3}
       propertyPath: m_RootOrder
@@ -72690,6 +72735,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Railing_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457589943681817564, guid: 9929433be6e5f0748952866eb1682aa9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2265793265421140326, guid: 9929433be6e5f0748952866eb1682aa9,
         type: 3}
@@ -80697,6 +80747,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Walkway_Half_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3865978668643187787, guid: 4a283e51acef79b4c997fc7bca89c8f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4534394411333101297, guid: 4a283e51acef79b4c997fc7bca89c8f5,
         type: 3}
       propertyPath: m_RootOrder
@@ -81176,6 +81231,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Walkway_Half_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3865978668643187787, guid: 4a283e51acef79b4c997fc7bca89c8f5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4534394411333101297, guid: 4a283e51acef79b4c997fc7bca89c8f5,
         type: 3}
@@ -93297,6 +93357,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Walkway_Stairs_01_Railing_01
       objectReference: {fileID: 0}
+    - target: {fileID: 4859594225807708725, guid: 21548b3ef8c86c14180323225f9d3c38,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5204876526931052687, guid: 21548b3ef8c86c14180323225f9d3c38,
         type: 3}
       propertyPath: m_RootOrder
@@ -103614,6 +103679,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Walkway_Stairs_01_Railing_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4859594225807708725, guid: 21548b3ef8c86c14180323225f9d3c38,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5204876526931052687, guid: 21548b3ef8c86c14180323225f9d3c38,
         type: 3}
       propertyPath: m_RootOrder
@@ -107865,6 +107935,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Walkway_Stairs_01
       objectReference: {fileID: 0}
+    - target: {fileID: 4907213251865259652, guid: b769726e8bf4546468d7cb20c06b6cd7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5715697807176037438, guid: b769726e8bf4546468d7cb20c06b6cd7,
         type: 3}
       propertyPath: m_RootOrder
@@ -111035,6 +111110,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Disco_Ball_01
       objectReference: {fileID: 0}
+    - target: {fileID: 5047528622080889254, guid: 4fa8c2c2924636346bebcb44ba7efe4c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5568626333146139420, guid: 4fa8c2c2924636346bebcb44ba7efe4c,
         type: 3}
       propertyPath: m_RootOrder
@@ -111604,6 +111684,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Walkway_Stairs_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907213251865259652, guid: b769726e8bf4546468d7cb20c06b6cd7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5715697807176037438, guid: b769726e8bf4546468d7cb20c06b6cd7,
         type: 3}
@@ -116623,6 +116708,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Walkway_Corner_01_Railing_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 820717808317797918, guid: cb3a978f0e6a5f04cabecb7064b49abb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb3a978f0e6a5f04cabecb7064b49abb, type: 3}
@@ -124788,6 +124878,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Walkway_Half_01_Railing_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8901769235901799847, guid: c1e0ba2b4c3e16143aad67a71c563afc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1e0ba2b4c3e16143aad67a71c563afc, type: 3}

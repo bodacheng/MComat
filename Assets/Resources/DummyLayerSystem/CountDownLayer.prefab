@@ -704,7 +704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CountDown: {fileID: 1619758728662871305}
-  startTimestamp: 10
+  startTimestamp: 3
 --- !u!1 &1619758729144689405
 GameObject:
   m_ObjectHideFlags: 0
