@@ -16,13 +16,15 @@ namespace FightScene
         [SerializeField] Text hitCombo;
         [SerializeField] AutoSwitch teamAutoSwitch;
         [SerializeField] RectTransform selectedFrame;
-
+        [SerializeField] int barPosUpdateInterval = 2;
+        [SerializeField] int teamIndicatorCloseDelay = 5;
         public AutoSwitch AutoSwitch => teamAutoSwitch;
         public TeamMode TeamMode { get; set; }
         public TeamConfig TeamConfig { get; set; }
         public readonly IDictionary<Data_Center, SideUnitIcon> UnitIconDic = new Dictionary<Data_Center, SideUnitIcon>();
         private IDisposable barPosUpdate;
-        private int barPosUpdateInterval = 3;
+        private IDisposable teamIndicatorCloseDisposable;
+        
         
         MultiDic<int, int, Data_Center> _teamMembers;
         public MultiDic<int, int, Data_Center> TeamMembers
@@ -34,6 +36,7 @@ namespace FightScene
         public void Clear()
         {
             barPosUpdate?.Dispose();
+            teamIndicatorCloseDisposable?.Dispose();
             switch (TeamMode)
             {
                 case TeamMode.MultiRaid:
@@ -56,43 +59,12 @@ namespace FightScene
             {
                 case TeamMode.MultiRaid:
                     InsTeamUI_Multi(switchTeamAuto, currentAutoState);
-                    if (TeamConfig.myTeam != RTFightManager.playerTeam)
-                    {
-                        barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
-                        {
-                            foreach (var one in _teamMembers.GetValues())
-                            {
-                                UnitIconDic.TryGetValue(one, out var tempSi);
-                                if (tempSi != null)
-                                    tempSi.transform.DOMove(CameraManager._camera.WorldToScreenPoint(one.transform.position + Vector3.up * 2.5f), 0.5f);
-                            }
-                        }).AddTo(gameObject);
-                        Refresh();
-                    }
+                    Refresh();
                     break;
                 case TeamMode.Rotation:
                     IniTeamUI_Rotate(changeUnit);
                     IniComboHit(rModeUnit);
                     rModeUnit.Subscribe(Refresh).AddTo(gameObject);
-                    if (TeamConfig.myTeam != RTFightManager.playerTeam)
-                    {
-                        barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
-                            {
-                                if (TeamConfig.myTeam != RTFightManager.playerTeam)
-                                {
-                                    if (rModeUnit.Value == null)
-                                        return;
-                                    UnitIconDic.TryGetValue(rModeUnit.Value, out var tempSi);
-                                    if (tempSi != null)
-                                        tempSi.transform.DOMove(CameraManager._camera.WorldToScreenPoint(rModeUnit.Value.transform.position + Vector3.up * 2.5f), 0.5f);
-                                    else
-                                    {
-                                        Debug.Log("潜在逻辑错误");
-                                    }
-                                }
-                            }
-                        ).AddTo(gameObject);
-                    }
                     break;
             }
         }
@@ -113,7 +85,7 @@ namespace FightScene
             tempSi?.RefreshExBar(currentEx);
         }
         
-        void Refresh(Data_Center fighting = null)
+        public void Refresh(Data_Center fighting = null)
         {
             foreach (var dataCenter in _teamMembers.GetValues())
             {
@@ -133,6 +105,96 @@ namespace FightScene
                     tempSi.Icon.gameObject.SetActive(false);
                     tempSi.transform.SetParent(_targetCanvasT.transform);
                 }
+            }
+            
+            barPosUpdate?.Dispose();
+            teamIndicatorCloseDisposable?.Dispose();
+            switch (TeamMode)
+            {
+                case TeamMode.Rotation:
+                    if (TeamConfig.myTeam != RTFightManager.playerTeam)
+                    {
+                        barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
+                            {
+                                if (fighting == null)
+                                    return;
+                                UnitIconDic.TryGetValue(fighting, out var tempSi);
+                                tempSi.transform.DOMove(CameraManager._camera.WorldToScreenPoint(fighting.transform.position + Vector3.up * 2.5f), 0.5f);
+                            }
+                        ).AddTo(gameObject);
+                    }
+                    else
+                    {
+                        if (fighting != null)
+                        {
+                            UnitIconDic.TryGetValue(fighting, out var tempSi);
+                            tempSi.TeamIndicator.gameObject.SetActive(true);
+                        }
+                        barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
+                            {
+                                if (fighting == null)
+                                    return;
+                                UnitIconDic.TryGetValue(fighting, out var tempSi);
+                                tempSi.TeamIndicator.transform.DOMove(CameraManager._camera.WorldToScreenPoint(fighting.transform.position + Vector3.up * 1.5f), 0.5f);
+                            }
+                        ).AddTo(gameObject);
+                        
+                        teamIndicatorCloseDisposable = Observable.Timer(TimeSpan.FromSeconds(teamIndicatorCloseDelay)).Subscribe(_ =>
+                        {
+                            barPosUpdate.Dispose();
+                            if (fighting == null)
+                                return;
+                            UnitIconDic.TryGetValue(fighting, out var tempSi);
+                            tempSi.TeamIndicator.gameObject.SetActive(false);
+                            // Add your code here to execute after disposing barPosUpdate
+                            teamIndicatorCloseDisposable.Dispose();
+                        }).AddTo(gameObject);
+                    }
+                    break;
+                case TeamMode.MultiRaid:
+                    if (TeamConfig.myTeam != RTFightManager.playerTeam)
+                    {
+                        barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
+                        {
+                            foreach (var one in _teamMembers.GetValues())
+                            {
+                                UnitIconDic.TryGetValue(one, out var tempSi);
+                                if (tempSi != null)
+                                    tempSi.transform.DOMove(CameraManager._camera.WorldToScreenPoint(one.transform.position + Vector3.up * 2.5f), 0.5f);
+                            }
+                        }).AddTo(gameObject);
+                    }
+                    else
+                    {
+                        foreach (var one in _teamMembers.GetValues())
+                        {
+                            UnitIconDic.TryGetValue(one, out var tempSi);
+                            Debug.Log(tempSi.TeamIndicator + ": opened");
+                            tempSi.TeamIndicator.gameObject.SetActive(true);
+                        }
+                        barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
+                        {
+                            foreach (var one in _teamMembers.GetValues())
+                            {
+                                UnitIconDic.TryGetValue(one, out var tempSi);
+                                tempSi.TeamIndicator.transform.DOMove(CameraManager._camera.WorldToScreenPoint(one.transform.position + Vector3.up * 1.5f), 0.5f);
+                            }
+                        }).AddTo(gameObject);
+                        
+                        teamIndicatorCloseDisposable = Observable.Timer(TimeSpan.FromSeconds(teamIndicatorCloseDelay)).Subscribe(_ =>
+                        {
+                            barPosUpdate.Dispose();
+                            foreach (var one in _teamMembers.GetValues())
+                            {
+                                UnitIconDic.TryGetValue(one, out var tempSi);
+                                tempSi.TeamIndicator.gameObject.SetActive(false);
+                                Debug.Log(tempSi.TeamIndicator + ": closed");
+                            }
+                            
+                            teamIndicatorCloseDisposable.Dispose();
+                        }).AddTo(gameObject);
+                    }
+                    break;
             }
         }
         

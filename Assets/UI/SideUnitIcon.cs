@@ -1,28 +1,40 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
 public class SideUnitIcon : MonoBehaviour {
     
-    [SerializeField] Slider HpBar;
-    [SerializeField] Text HpText;
-    [SerializeField] Slider ResistBar;
+    [SerializeField] Slider hpBar;
+    [SerializeField] Text hpText;
+    [SerializeField] Slider resistBar;
     [SerializeField] GameObject[] charges;
     [SerializeField] HeroIcon focusingCharIcon;
-
+    [SerializeField] Text teamIndicator;
     public HeroIcon Icon => focusingCharIcon;
-    
+    public Text TeamIndicator => teamIndicator;
+
+    private Tweener resistBarTweener;
     public void RefreshResistanceBar(float resistance)
     {
-        DOTween.To(() => ResistBar.value, (x) => ResistBar.value = x, resistance / 10f, 0.2f);
+        resistBarTweener?.Kill();
+        resistBarTweener = DOTween.To(() => resistBar.value, (x) => resistBar.value = x, resistance / 10f, 0.2f);
     }
     
+    private Tweener hpBarTweener;
     public void RefreshHpBar(float currentHp, float wholeHp)
     {
-        HpText.text = Mathf.Ceil(currentHp).ToString();
-        DOTween.To(() => HpBar.value, (x) => HpBar.value = x, currentHp / wholeHp, 0.2f);
+        hpText.text = Mathf.Ceil(currentHp).ToString();
+        hpBarTweener?.Kill();
+        hpBarTweener = DOTween.To(() => hpBar.value, (x) => hpBar.value = x, currentHp / wholeHp, 0.2f);
     }
-    
+
+    void OnDestroy()
+    {
+        resistBarTweener?.Kill();
+        hpBarTweener?.Kill();
+    }
+
     public void RefreshExBar(int currentEx)
     {
         if (currentEx >= 90)
@@ -49,19 +61,19 @@ public class SideUnitIcon : MonoBehaviour {
     
     public void RecallBars()
     {
-        HpBar.transform.SetParent(transform);
-        HpBar.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,12,0);
-        HpBar.transform.localScale = Vector3.one;
-        ResistBar.transform.SetParent(transform);
-        ResistBar.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,12,0);
-        ResistBar.transform.localScale = Vector3.one;
+        hpBar.transform.SetParent(transform);
+        hpBar.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,12,0);
+        hpBar.transform.localScale = Vector3.one;
+        resistBar.transform.SetParent(transform);
+        resistBar.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,12,0);
+        resistBar.transform.localScale = Vector3.one;
     }
 
     public void GreyOut()
     {
-        HpBar.gameObject.SetActive(false);
-        HpText.gameObject.SetActive(false);
-        ResistBar.gameObject.SetActive(false);
+        hpBar.gameObject.SetActive(false);
+        hpText.gameObject.SetActive(false);
+        resistBar.gameObject.SetActive(false);
         focusingCharIcon.CooldownCurtainUpdate(1);
     }
 }

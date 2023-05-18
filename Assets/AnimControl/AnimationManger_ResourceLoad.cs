@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -105,10 +106,10 @@ public partial class AnimationManger
 
         async UniTask LoadHurtAnim(string type, string address, List<string> tags)
         {
-            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(type + "/" + address))
+            var key = type + "/" + address;
+            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(key))
             {
-                AnimationResourceLoader.SeriesAnimationClipsDic.Add(type + "/" + address,
-                    new List<AnimationClip>());
+                AnimationResourceLoader.SeriesAnimationClipsDic.Add(key, new List<AnimationClip>());
                 var humanHurtAnimsObjects = new List<AnimationClip>();
                 var loadPath = Addressables.LoadResourceLocationsAsync(tags, Addressables.MergeMode.Intersection);
                 await loadPath;
@@ -116,7 +117,7 @@ public partial class AnimationManger
                 {
                     foreach (var path in loadPath.Result)
                     {
-                        if (path.PrimaryKey.Contains(type + "/" + address))
+                        if (path.PrimaryKey.Contains(key))
                         {
                             Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey);
                             if (value != null)
@@ -127,22 +128,32 @@ public partial class AnimationManger
                         }
                     }
                 }
-
+                
                 Addressables.Release(loadPath);
                 foreach (var clip in humanHurtAnimsObjects)
                 {
-                    AnimationResourceLoader.SeriesAnimationClipsDic[type + "/" + address].Add(clip);
+                    if (AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(key))
+                    {
+                        AnimationResourceLoader.SeriesAnimationClipsDic[key].Add(clip);
+                    }
+                    else
+                    {
+                        Debug.Log(key+ " ： 动画读取逻辑错误");
+                        AnimationResourceLoader.SeriesAnimationClipsDic.Add(key, new List<AnimationClip>(){clip});
+                    }
                 }
             }
         }
 
-        await LoadHurtAnim(type, "basic_hurts/back", new List<string> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_hurts/high", new List<string> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_hurts/lay", new List<string> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_hurts/low", new List<string> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_hurts/press", new List<string> { "hurt_anim" });
-        await LoadHurtAnim(type, "basic_knockoffs", new List<string> { "knock_anim" });
-
+        await UniTask.WhenAll(
+            LoadHurtAnim(type, "basic_hurts/back", new List<string> { "hurt_anim" }),
+            LoadHurtAnim(type, "basic_hurts/high", new List<string> { "hurt_anim" }),
+            LoadHurtAnim(type, "basic_hurts/lay", new List<string> { "hurt_anim" }),
+            LoadHurtAnim(type, "basic_hurts/low", new List<string> { "hurt_anim" }),
+            LoadHurtAnim(type, "basic_hurts/press", new List<string> { "hurt_anim" }),
+            LoadHurtAnim(type, "basic_knockoffs", new List<string> { "knock_anim" })
+        );
+        
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_knockoffs", out knockoffAnimations);
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/back", out _hurtClipsBack);
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(type + "/basic_hurts/low", out _hurtClipsLow);

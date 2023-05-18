@@ -58,7 +58,7 @@ namespace FightScene
         {
             foreach (var center in teamMembers.GetValues())
             {
-                center.StartAutoModeHalfHp();
+                center.StartAutoModeWhenGetHurt();
             }
         }
         

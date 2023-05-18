@@ -198,13 +198,13 @@ public partial class Data_Center : MonoBehaviour
     }
     
     // for tutorial
-    public void StartAutoModeHalfHp()
+    public void StartAutoModeWhenGetHurt()
     {
-        var fullHp = FightDataRef.CurrentHp.Value / 2;
+        var fullHp = FightDataRef.CurrentHp.Value;
         IDisposable disposeTask = null;
         disposeTask = FightDataRef.CurrentHp.Subscribe(x =>
         {
-            if (x <= fullHp)
+            if (x < fullHp)
             {
                 disposeTask.Dispose();
                 _MyBehaviorRunner.AI = true;

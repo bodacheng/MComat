@@ -34,6 +34,7 @@ namespace FightScene
             }
             if (FightScene.Fight.RunTutorial)
                 _layer.OpenTutorial();
+            _layer.Temp();
             RTFightManager.Target.ModeStart();
         }
         
