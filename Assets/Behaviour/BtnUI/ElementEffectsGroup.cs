@@ -197,18 +197,18 @@ public class ElementEffectsGroup
                 Parent(icon.transform, btn.transform);
             }
         }
-        
-        await Process(a1Btn, unitInfo.set.a1, _aEffects);
-        await Process(a1Btn, unitInfo.set.a2, _aEffects);
-        await Process(a1Btn, unitInfo.set.a3, _aEffects);
-        
-        await Process(a2Btn, unitInfo.set.b1, _bEffects);
-        await Process(a2Btn, unitInfo.set.b2, _bEffects);
-        await Process(a2Btn, unitInfo.set.b3, _bEffects);
-        
-        await Process(a3Btn, unitInfo.set.c1, _cEffects);
-        await Process(a3Btn, unitInfo.set.c2, _cEffects);
-        await Process(a3Btn, unitInfo.set.c3, _cEffects);
+
+        await UniTask.WhenAll(
+            Process(a1Btn, unitInfo.set.a1, _aEffects),
+            Process(a1Btn, unitInfo.set.a2, _aEffects),
+            Process(a1Btn, unitInfo.set.a3, _aEffects),
+            Process(a2Btn, unitInfo.set.b1, _bEffects),
+            Process(a2Btn, unitInfo.set.b2, _bEffects),
+            Process(a2Btn, unitInfo.set.b3, _bEffects),
+            Process(a3Btn, unitInfo.set.c1, _cEffects),
+            Process(a3Btn, unitInfo.set.c2, _cEffects),
+            Process(a3Btn, unitInfo.set.c3, _cEffects)
+        );
         
         void Parent(Transform t, Transform target)
         {

@@ -67,12 +67,18 @@ namespace Soul
         {
             var List = new List<SkillEntity>();
             var currentSKillEntity = new SkillEntity();
+            
             if (_nowBehavior != null)
             {
-                SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out currentSKillEntity);
+                if (_nowBehavior.StateKey == "Empty")
+                {
+                    SkillEntityDic.TryGetValue("Move", out currentSKillEntity);
+                }else
+                    SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out currentSKillEntity);
             }
             if (currentSKillEntity == null)
                 return List;
+            
             foreach (var _Key in currentSKillEntity.CasualTo)
             {
                 BehaviourDic.TryGetValue(_Key, out _tryBehavior);

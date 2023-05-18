@@ -25,15 +25,16 @@ public class FightingStepLayer : UILayer
 
     public void PreparingMode(bool preparingMode)
     {
+        if (team1UI.TeamMode == TeamMode.MultiRaid)
+        {
+            team1UI.Refresh();
+        }
+        if (team2UI.TeamMode == TeamMode.MultiRaid)
+        {
+            team2UI.Refresh();
+        }
         inputsManager.PreparingMode(preparingMode);
         pauseButton.gameObject.SetActive(!preparingMode);
-        
-    }
-    
-    public void Temp()
-    {
-        if (team1UI.TeamMode == TeamMode.MultiRaid)
-            team1UI.Refresh();
     }
     
     public async UniTask Setup(bool active = true)

@@ -12,8 +12,6 @@ namespace FightScene
         public TeamConfig teamConfig;
         public Transform[] TeamStandPoints;
         
-        Data_Center _startUnit;
-        
         public MobileInputsManager InputsManager
         {
             set;

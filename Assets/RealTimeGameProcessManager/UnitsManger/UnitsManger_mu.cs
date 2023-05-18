@@ -45,8 +45,6 @@ namespace FightScene
                     Debug.Log("站位逻辑错误。出现了系统未安排的站位点");
                 }
             }
-            
-            _startUnit = unit;
         }
         
         public void InitializeMulti(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode aiMode, int aiDelayFrame)

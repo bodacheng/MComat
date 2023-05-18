@@ -25,7 +25,6 @@ namespace FightScene
                 dataCenter.WholeT.parent = null;
                 dataCenter.WholeT.gameObject.SetActive(true);
             }
-            _startUnit = unit;
             ChangeFightingUnit(unit, true, TeamStandPoints[0]);
         }
         
@@ -63,15 +62,8 @@ namespace FightScene
         }
         
         // 切换队员
-        bool ChangeFightingUnit(Data_Center changeTo = null, bool emptyState = false, Transform iniStandPoint = null)
+        bool ChangeFightingUnit(Data_Center changeTo, bool emptyState = false, Transform iniStandPoint = null)
         {
-            if (changeTo == null)
-            {
-                changeTo = _startUnit;
-                if (changeTo == null)
-                    return false;
-            }
-            
             if (changeTo.FightDataRef.IsDead.Value)
             {
                 return false;
@@ -131,7 +123,7 @@ namespace FightScene
             
             if (teamConfig.myTeam == RTFightManager.playerTeam && InputsManager != null)
             {
-                InputsManager.FocusUnit(RMode_Unit.Value);
+                InputsManager.FocusUnit(RMode_Unit.Value, true);
             }
             
             //Refresh(TeamMembers);
@@ -156,7 +148,7 @@ namespace FightScene
                     }
                 }
             
-                if (waitingMember != null && CanChangeToThisMember(waitingMember))
+                if (waitingMember != null &&  RMode_Unit.Value != waitingMember && CanChangeToThisMember(waitingMember))
                 {
                     RTFightManager.Target.RefreshTimeDic[RMode_Unit.Value].Value = 10f;
                     ChangeFightingUnit(waitingMember);
@@ -165,9 +157,9 @@ namespace FightScene
             }
             if (FSceneProcessesRunner.Main.CurrentStep() == SceneStep.CountDown)
             {
-                if (waitingMember != null)
+                if (waitingMember != null && RMode_Unit.Value != waitingMember)
                 {
-                    ChangeFightingUnit(waitingMember);
+                    ChangeFightingUnit(waitingMember, true, TeamStandPoints[0]);
                 }
             }
         }

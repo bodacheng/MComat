@@ -46,7 +46,7 @@ public class MobileInputsManager : MonoBehaviour {
     private readonly ReactiveProperty<Data_Center> focus = new ReactiveProperty<Data_Center>();
     public ReactiveProperty<Data_Center> CurrentFocus => focus;
     
-    public void FocusUnit(Data_Center center)
+    public void FocusUnit(Data_Center center, bool force = false)
     {
         if (focus.Value != null)
         {
@@ -57,7 +57,7 @@ public class MobileInputsManager : MonoBehaviour {
             center._MyBehaviorRunner.InputsManager = this;
             focus.Value = center;
             SwitchElementEffects(center.element);
-            SuddenRefreshButtons(focus.Value._MyBehaviorRunner);
+            SuddenRefreshButtons(focus.Value._MyBehaviorRunner, force);
             TurnOnButtons();
         }
         else
@@ -174,7 +174,7 @@ public class MobileInputsManager : MonoBehaviour {
     
     // 动态按钮系统是基于状态流动
     SkillEntity _behaviorPreviewButton1, _behaviorPreviewButton2, _behaviorPreviewButton3;
-    public void ButtonsFeatureLoad(List<SkillEntity> optionsPreview)
+    public void ButtonsFeatureLoad(List<SkillEntity> optionsPreview, bool force = false)
     {
         _behaviorPreviewButton1 = null; 
         _behaviorPreviewButton2 = null;
@@ -196,15 +196,15 @@ public class MobileInputsManager : MonoBehaviour {
             }
         }
         
-        if (_optionsLastFrame[InputKey.Attack1] != _behaviorPreviewButton1)
+        if (_optionsLastFrame[InputKey.Attack1] != _behaviorPreviewButton1 || force)
         {
             RefreshPattern(a1Btn, _behaviorPreviewButton1 != null ? _behaviorPreviewButton1.SkillID : string.Empty);
         }
-        if (_optionsLastFrame[InputKey.Attack2] != _behaviorPreviewButton2)
+        if (_optionsLastFrame[InputKey.Attack2] != _behaviorPreviewButton2 || force)
         {
             RefreshPattern(a2Btn, _behaviorPreviewButton2 != null ? _behaviorPreviewButton2.SkillID : string.Empty);
         }
-        if (_optionsLastFrame[InputKey.Attack3] != _behaviorPreviewButton3)
+        if (_optionsLastFrame[InputKey.Attack3] != _behaviorPreviewButton3 || force)
         {
             RefreshPattern(a3Btn, _behaviorPreviewButton3 != null ? _behaviorPreviewButton3.SkillID : string.Empty);
         }
@@ -215,12 +215,15 @@ public class MobileInputsManager : MonoBehaviour {
     }
     
     // 直接根据角色状态刷新按钮。因为动态按钮系统是基于状态流动
-    void SuddenRefreshButtons(BehaviorRunner behaviorRunner)
+    void SuddenRefreshButtons(BehaviorRunner behaviorRunner, bool force = false)
     {
         _optionsLastFrame[InputKey.Attack1] = null;
         _optionsLastFrame[InputKey.Attack2] = null;
         _optionsLastFrame[InputKey.Attack3] = null;
-        ButtonsFeatureLoad(behaviorRunner.GetNextSkills());
+        
+        
+        
+        ButtonsFeatureLoad(behaviorRunner.GetNextSkills(), force);
     }
     
     public static bool defendButtonHover;

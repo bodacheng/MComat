@@ -119,13 +119,23 @@ namespace mainMenu
 
         async void Start()
         {
-            await UniTask.WhenAll(PlayFabReadClient.LoadReadMailsAsync(),AddressablesLogic.Essentials());
+            AppSetting.BGMSource = audioSource;
+            await UniTask.WhenAll(
+                PlayFabReadClient.LoadReadMailsAsync(),
+                AddressablesLogic.Essentials(),
+                AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey));
             CashClear();
             UILayerLoader.Clear();
-            UILayerLoader.SetHanger(T.transform);
+            if (T != null)
+            {
+                UILayerLoader.SetHanger(T.transform);
+            }
+            else
+            {
+                Debug.Log("不可理解的错误");
+            }
+            
             UILayerLoader.SetEffectBg(effectBg.rectTransform);
-            AppSetting.BGMSource = audioSource;
-            AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey).Forget();
             Time.timeScale = 1;
             FightGlobalSetting.SceneStep = 0;
             

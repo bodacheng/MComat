@@ -59,7 +59,6 @@ namespace FightScene
             {
                 case TeamMode.MultiRaid:
                     InsTeamUI_Multi(switchTeamAuto, currentAutoState);
-                    Refresh();
                     break;
                 case TeamMode.Rotation:
                     IniTeamUI_Rotate(changeUnit);
@@ -98,6 +97,7 @@ namespace FightScene
                     tempSi.transform.SetParent(sideIconsContainer.transform);
                     tempSi.Icon.gameObject.SetActive(true);
                     tempSi.RecallBars();
+                    tempSi.TeamIndicator.gameObject.SetActive(false);
                 }
                 else
                 {

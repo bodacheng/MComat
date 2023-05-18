@@ -30,7 +30,7 @@ MonoBehaviour:
   hitGroundEffectCode: hitGround
   wallCrackEffectCode: wallCrack
   breakFreeEffectCode: breakFree
-  memberShiftEffectCode: membershift
+  memberShiftEffectCode: memberShift
   characterAnimDuration: 0.15
   downLoadLabels:
   - config
