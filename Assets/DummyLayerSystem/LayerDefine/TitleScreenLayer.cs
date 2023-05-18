@@ -25,10 +25,13 @@ public class TitleScreenLayer : UILayer
     [SerializeField] InputField devId;
     [SerializeField] Button devEnter;
     [SerializeField] Button devLoginBtn;
+
+    [SerializeField] Text version;
     
     private float titleAnimFactor = 0;
     public void Initialise()
     {
+        version.text = Application.version;
         touchScreenBtn.onClick.AddListener(TouchScreenLogin);
         accountLoginBtn.onClick.AddListener(()=> SwitchTab(2));
         cancelBtn.onClick.AddListener(()=> SwitchTab(1));
