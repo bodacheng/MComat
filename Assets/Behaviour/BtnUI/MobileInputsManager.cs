@@ -30,6 +30,15 @@ public class MobileInputsManager : MonoBehaviour {
     
     readonly IDictionary<Element, ElementEffectsGroup> _elementEffects = new Dictionary<Element, ElementEffectsGroup>();
     Element _focusing;
+
+    public void PreparingMode(bool preparingMode)
+    {
+        a1Btn.interactable = !preparingMode;
+        a2Btn.interactable = !preparingMode;
+        a3Btn.interactable = !preparingMode;
+        dashBtn.interactable = !preparingMode;
+        joystick.enabled = !preparingMode;
+    }
     
     bool _inputting = false;
     public bool Inputting => _inputting;

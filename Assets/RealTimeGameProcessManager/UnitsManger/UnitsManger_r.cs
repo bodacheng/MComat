@@ -63,7 +63,7 @@ namespace FightScene
         }
         
         // 切换队员
-        public bool ChangeFightingUnit(Data_Center changeTo = null, bool emptyState = false, Transform iniStandPoint = null)
+        bool ChangeFightingUnit(Data_Center changeTo = null, bool emptyState = false, Transform iniStandPoint = null)
         {
             if (changeTo == null)
             {
@@ -146,19 +146,29 @@ namespace FightScene
         // 计算时间统计可上场角色，更新上场冷却图标UI
         void WaitUnitChange()
         {
-            for (var i = 0; i < teamMembers.GetValues().Count; i++)
+            if (FSceneProcessesRunner.Main.CurrentStep() == SceneStep.Fighting)
             {
-                if (RTFightManager.Target.RefreshTimeDic[teamMembers.GetValues()[i]].Value > 0)
+                for (var i = 0; i < teamMembers.GetValues().Count; i++)
                 {
-                    RTFightManager.Target.RefreshTimeDic[teamMembers.GetValues()[i]].Value -= Time.deltaTime; // 角色切换倒计时;
+                    if (RTFightManager.Target.RefreshTimeDic[teamMembers.GetValues()[i]].Value > 0)
+                    {
+                        RTFightManager.Target.RefreshTimeDic[teamMembers.GetValues()[i]].Value -= Time.deltaTime; // 角色切换倒计时;
+                    }
+                }
+            
+                if (waitingMember != null && CanChangeToThisMember(waitingMember))
+                {
+                    RTFightManager.Target.RefreshTimeDic[RMode_Unit.Value].Value = 10f;
+                    ChangeFightingUnit(waitingMember);
+                    waitingMember = null;
                 }
             }
-            
-            if (waitingMember != null && CanChangeToThisMember(waitingMember))
+            if (FSceneProcessesRunner.Main.CurrentStep() == SceneStep.CountDown)
             {
-                RTFightManager.Target.RefreshTimeDic[RMode_Unit.Value].Value = 10f;
-                ChangeFightingUnit(waitingMember);
-                waitingMember = null;
+                if (waitingMember != null)
+                {
+                    ChangeFightingUnit(waitingMember);
+                }
             }
         }
         

@@ -74,7 +74,7 @@ namespace FightScene
             {
                 tasks.Add(LoadOneUnit(kv.Key.Item1, kv.Key.Item2, kv.Value));
             }
-
+            
             await UniTask.WhenAll(tasks);
         }
         

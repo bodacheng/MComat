@@ -18,6 +18,11 @@ namespace FightScene
                 return instance_main;
             }
         }
+
+        public SceneStep CurrentStep()
+        {
+            return currentProcess.Step;
+        }
         
         public FSceneProcess lastProcess;
         public FSceneProcess currentProcess;

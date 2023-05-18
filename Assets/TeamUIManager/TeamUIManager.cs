@@ -169,7 +169,6 @@ namespace FightScene
                         foreach (var one in _teamMembers.GetValues())
                         {
                             UnitIconDic.TryGetValue(one, out var tempSi);
-                            Debug.Log(tempSi.TeamIndicator + ": opened");
                             tempSi.TeamIndicator.gameObject.SetActive(true);
                         }
                         barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
@@ -188,9 +187,7 @@ namespace FightScene
                             {
                                 UnitIconDic.TryGetValue(one, out var tempSi);
                                 tempSi.TeamIndicator.gameObject.SetActive(false);
-                                Debug.Log(tempSi.TeamIndicator + ": closed");
                             }
-                            
                             teamIndicatorCloseDisposable.Dispose();
                         }).AddTo(gameObject);
                     }

@@ -77,6 +77,10 @@ public class FrontLayer : UILayer
                 var skillConfig =  SkillConfigTable.GetSkillConfigByRecordId(x.SkillId);
                 return skillConfig.REAL_NAME;
             }).ToList();
+            if (this == null)
+            {
+                return;
+            }
             RegisterRandomShowSkill();
         }
     }

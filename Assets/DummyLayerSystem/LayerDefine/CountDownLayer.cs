@@ -1,4 +1,3 @@
-using System.Collections;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,9 +5,8 @@ using UnityEngine.UI;
 public class CountDownLayer : UILayer
 {
     [Header("CountDownText")]
-    public Text CountDown;
-    
-    float startTimestamp = 3f;
+    [SerializeField] Text CountDown;
+    [SerializeField] float startTimestamp = 3f;
     
     public async UniTask BeforeFightCountDown()
     {

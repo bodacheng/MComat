@@ -31,6 +31,7 @@ namespace FightScene
             else
             {
                 _layer.gameObject.SetActive(true);
+                _layer.PreparingMode(false);
             }
             if (FightScene.Fight.RunTutorial)
                 _layer.OpenTutorial();

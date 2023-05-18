@@ -5,6 +5,7 @@ namespace FightScene
 {
     public class CountDownProcess : FSceneProcess
     {
+        private FightingStepLayer fightingStepLayer;
         bool AutoMoveToNext;
         public CountDownProcess()
         {
@@ -19,6 +20,10 @@ namespace FightScene
             //{
             //    ((OneVOneMode)nowC).xzMax = 100f;
             //}
+            
+            fightingStepLayer = UILayerLoader.Load<FightingStepLayer>();
+            fightingStepLayer.gameObject.SetActive(true);
+            fightingStepLayer.PreparingMode(true);
             BeforeFightCountDown().Forget();
         }
         
@@ -39,6 +44,15 @@ namespace FightScene
         public override bool CanEnterOtherProcess()
         {
             return AutoMoveToNext;
+        }
+        
+        public override void LocalUpdate()
+        {
+            if (fightingStepLayer != null)
+            {
+                RTFightManager.Target.team1.LocalUpdate();
+                RTFightManager.Target.team2.LocalUpdate();
+            }
         }
     }
 }
