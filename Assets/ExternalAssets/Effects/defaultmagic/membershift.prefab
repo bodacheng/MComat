@@ -19569,7 +19569,7 @@ GameObject:
   - component: {fileID: 6477973190029077607}
   - component: {fileID: 6278529497677076932}
   m_Layer: 7
-  m_Name: memberShift
+  m_Name: membershift
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
