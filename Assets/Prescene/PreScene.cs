@@ -120,10 +120,11 @@ namespace mainMenu
         async void Start()
         {
             AppSetting.BGMSource = audioSource;
+            await AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey);
             await UniTask.WhenAll(
                 PlayFabReadClient.LoadReadMailsAsync(),
-                AddressablesLogic.Essentials(),
-                AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey));
+                AddressablesLogic.Essentials()
+            );
             CashClear();
             UILayerLoader.Clear();
             if (T != null)
