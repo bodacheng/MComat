@@ -16,8 +16,6 @@ public class AppSetting
     public static async UniTask PlayBGM(string addressKey)
     {
         var clip = await AddressablesLogic.LoadT<AudioClip>(addressKey);
-        if (BGMSource == null)
-            return;
         BGMSource.clip = clip;
         BGMSource.loop = true;
         BGMSource.Play();

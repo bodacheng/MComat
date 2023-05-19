@@ -119,8 +119,6 @@ namespace mainMenu
 
         async void Start()
         {
-            AppSetting.BGMSource = audioSource;
-            await AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey);
             await UniTask.WhenAll(
                 PlayFabReadClient.LoadReadMailsAsync(),
                 AddressablesLogic.Essentials()
@@ -135,6 +133,9 @@ namespace mainMenu
             {
                 Debug.Log("不可理解的错误");
             }
+            
+            AppSetting.BGMSource = audioSource;
+            await AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey);
             
             UILayerLoader.SetEffectBg(effectBg.rectTransform);
             Time.timeScale = 1;
