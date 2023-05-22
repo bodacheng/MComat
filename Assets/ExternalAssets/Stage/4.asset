@@ -42,7 +42,7 @@ MonoBehaviour:
       c2: 9
       c3: 182
   team1HpRate: 1
-  team2HpRate: 1
+  team2HpRate: 0.7
   team1CGMode: 0
   team2CGMode: 0
   team1Mode: 2
@@ -50,3 +50,4 @@ MonoBehaviour:
   team1AIMode: 0
   team2AIMode: 1
   dumbAIDecisionDelay: 10
+  stageRefLevel: 1
