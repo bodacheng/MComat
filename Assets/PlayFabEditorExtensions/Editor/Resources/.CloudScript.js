@@ -142,6 +142,45 @@ function GrantItemIfNotOwnedByUser(itemId, playFabItemCategory) {
     return { };
 }
 
+function GrantItemsIfNotOwnedByUser(itemIds, playFabItemCategory) {
+
+    var checkRequest = {
+        "PlayFabId": currentPlayerId
+    };
+
+    // 获取玩家的物品列表
+    var inventoryResult = server.GetUserInventory(checkRequest);
+
+    // 创建一个集合用于存放玩家已经拥有的物品ID
+    var ownedItems = new Set();
+    for (var i = 0; i < inventoryResult.Inventory.length; i++) {
+        if (inventoryResult.Inventory[i].CatalogVersion == playFabItemCategory) {
+            ownedItems.add(inventoryResult.Inventory[i].ItemId);
+        }
+    }
+
+    // 检查要发放的物品是否已经被玩家拥有，如果没有，将其添加到要发放的物品列表中
+    var itemsToGrant = [];
+    for (var i = 0; i < itemIds.length; i++) {
+        if (!ownedItems.has(itemIds[i])) {
+            itemsToGrant.push(itemIds[i]);
+        }
+    }
+
+    // 如果存在需要发放的物品，发放物品
+    if (itemsToGrant.length > 0) {
+        var GrantItemsToUserRequest = {
+            "CatalogVersion": playFabItemCategory,
+            "PlayFabId" : currentPlayerId,
+            "ItemIds" : itemsToGrant
+        };
+        var GrantItemsToUserResult = server.GrantItemsToUser(GrantItemsToUserRequest);
+        return GrantItemsToUserResult.ItemGrantResults;
+    }
+
+    return { };
+}
+
 function GrantItemToCurrentUser(itemIds, CatalogVersion)
 {
     var GrantItemsToUserRequest = {
@@ -234,8 +273,8 @@ handlers.grantDevItems = function (args, context) {
         if (itemInfo.Bundle == null && itemInfo.Container == null)
             stoneIds.push(itemInfo.ItemId);
     }
-    var stoneResult = GrantItemToCurrentUser(stoneIds , "stone");
-    var unitResult = GrantItemToCurrentUser(["1","2","4","5","6","7"] , "unit");
+    var stoneResult = GrantItemsIfNotOwnedByUser(stoneIds , "stone");
+    var unitResult = GrantItemsIfNotOwnedByUser(["1","2","4","5","6","7"] , "unit");
     
     return { result: true };
 };
