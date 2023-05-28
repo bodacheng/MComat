@@ -11371,8 +11371,6 @@ MonoBehaviour:
     SkillID: 
     REAL_NAME: 
     StateType: 0
-    AT: 0
-    HP: 0
     CasualTo: []
     CAN_BE_CANCELLED_TO: 1
     EnterInput: -1

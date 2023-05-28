@@ -16078,15 +16078,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Bip001 Spine1'\n\tTransform 'Bip001 Neck'\n\tTransform
-    'Bip001 Spine'\n\tTransform 'Bip001'\n\tTransform 'Bip001 Spine2'\n\tTransform
-    'Bip001 Pelvis'\n\tTransform 'Bip001 R Foot'\n\tTransform 'Bip001 R Hand'\n\tTransform
-    'Bip001 R Finger1'\n\tTransform 'Bip001 L Finger11'\n\tand more ...\n\tFrom animation
-    clip '\u75BC\u75DB'\n\tFrom animation clip '\u51F6\u72E0'\n\tFrom animation clip
-    '\u5927\u7B110408'\n\tFrom animation clip '\u5403\u60CA1'\n\tFrom animation clip
-    '\u6124\u6012'\n\tFrom animation clip '\u5FAE\u7B11'\n\tFrom animation clip '\u90AA\u6076'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -16563,14 +16555,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2473a78b576b34f3b8e11c777317ac8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillEntity_List: []
+  skillEntityList: []
   _SkillCancelFlag: {fileID: 1122967317810658548}
-  CurrentSKillEntity:
+  currentSKillEntity:
     SkillID: 
     REAL_NAME: 
     StateType: 0
-    AT: 0
-    HP: 0
     CasualTo: []
     CAN_BE_CANCELLED_TO: 1
     EnterInput: -1
@@ -21830,7 +21820,6 @@ MonoBehaviour:
   DestructionDelay: 0.6
   stop_emission_delay: 0.5
   to_be_faded_renderers: []
-  audioSource: {fileID: 0}
   Attachments: []
   Counter: 0
 --- !u!1 &6416922431750398188
@@ -51771,7 +51760,6 @@ MonoBehaviour:
   DestructionDelay: 0.6
   stop_emission_delay: 0.5
   to_be_faded_renderers: []
-  audioSource: {fileID: 0}
   Attachments: []
   Counter: 0
 --- !u!1 &7758172466594323604

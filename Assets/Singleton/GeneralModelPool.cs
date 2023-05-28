@@ -5,7 +5,7 @@ namespace Singleton
 {
     public static class GeneralModelPool
     {
-        public static async UniTask<Data_Center> GetModel(string rId, Transform parent = null)
+        public static async UniTask<Data_Center> GetModel(string rId, Transform parent = null, Vector3 pos = new Vector3())
         {
             //以上这个信息就包括了全部的“我的角色”信息，下面别的信息都是据此各种由此索引出来的。
             var unitConfig = Units.RowToUnitConfigInfo(Units.Find_RECORD_ID(rId));
@@ -15,7 +15,7 @@ namespace Singleton
                 return null;
             }
 
-            var tempModel = await AddressablesLogic.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME, new Vector3(-999,-999, -999));
+            var tempModel = await AddressablesLogic.LoadObject(unitConfig.TYPE + "/" + unitConfig.REAL_NAME, pos);
             tempModel.transform.SetParent(parent);
             var odl = tempModel.GetComponent<OutsideDataLink>();
             if (odl == null)

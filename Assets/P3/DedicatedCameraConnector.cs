@@ -14,6 +14,7 @@ namespace ModelView
         [SerializeField] private float rotateSpeed = 90;
         [SerializeField] private float extraZDis;
         [SerializeField] private float extraZCameraDepth = 30f;
+        [SerializeField] private float followSpeed = 2;
         private readonly Bounds tempBoundary = new Bounds();
         private RectTransform rect;
         private bool fixMode;
@@ -56,6 +57,8 @@ namespace ModelView
             camera.gameObject.SetActive(true);
             if (!this.fixMode)
                 _basicOrthographicSize = CalMaxOrthographicSize();
+            
+            CameraTreat(camera, true);
         }
 
         void Update()
@@ -101,18 +104,20 @@ namespace ModelView
                 _basicOrthographicSize = Mathf.Max(_targetBounds.extents.x, _targetBounds.extents.y);
             }
             
+            CameraTreat(camera, false);
+        }
+        
+        void CameraTreat(Camera _camera, bool resetPos)
+        {
             var viewCenter = GetCenterPosition(rect);
-            void CameraTreat(Camera _camera)
-            {
-                _camera.orthographicSize = _basicOrthographicSize * (PosCal.CanvasHeight / rect.rect.height);
-                var cViewWidth = _camera.orthographicSize * 2 * _camera.aspect;
-                var cViewHeight = _camera.orthographicSize * 2;
-                _camera.transform.position = _targetBounds.center + Vector3.forward * (_targetBounds.extents.z + extraZDis)
-                                                                 + (0.5f -　(viewCenter.x / Screen.width)) * cViewWidth * _camera.transform.right 
-                                                                 + (0.5f - (viewCenter.y / Screen.height)) * cViewHeight * Vector3.up;
-                _camera.farClipPlane = _targetBounds.extents.z * 2 + extraZDis + extraZCameraDepth;
-            }
-            CameraTreat(camera);
+            _camera.orthographicSize = _basicOrthographicSize * (PosCal.CanvasHeight / rect.rect.height);
+            var cViewWidth = _camera.orthographicSize * 2 * _camera.aspect;
+            var cViewHeight = _camera.orthographicSize * 2;
+            var pos = _targetBounds.center + Vector3.forward * (_targetBounds.extents.z + extraZDis)
+                                           + (0.5f -　(viewCenter.x / Screen.width)) * cViewWidth * _camera.transform.right 
+                                           + (0.5f - (viewCenter.y / Screen.height)) * cViewHeight * Vector3.up;
+            _camera.transform.position = resetPos ? pos : Vector3.Lerp(_camera.transform.position, pos, Time.deltaTime * followSpeed);
+            _camera.farClipPlane = _targetBounds.extents.z * 2 + extraZDis + extraZCameraDepth;
         }
         
         static Vector2 GetCenterPosition(RectTransform rect)

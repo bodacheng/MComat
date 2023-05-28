@@ -71,7 +71,8 @@ namespace ModelView
             else
             {
                 ProgressLayer.Loading(string.Empty);
-                _focusingC = await GeneralModelPool.GetModel(recordID, transform);
+                _focusingC = await GeneralModelPool.GetModel(recordID, transform, modelPos- new Vector3(0,0, 200));
+                await UniTask.DelayFrame(2);
                 if (Saves.ContainsKey(recordID))
                 {
                     var oldModel = Saves[recordID];
