@@ -6,6 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="66cf282c-e08e-4b9f-b5b5-1a530f7e1269" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCombat_ios/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V3.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V3.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V5.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Resources/OrangedKeys/TitleFX/Materials/VA/TitleFX_V5.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaFightOver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DummyLayerSystem/LayerDefine/ArenaFightOver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightResultAnim.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightSceneSystem/Nagare/FightResultAnim.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArenaFightOver.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/DummyLayerSystem/ArenaFightOver.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Setting/CommonSetting.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setting/CommonSetting.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/动画/FBX/蒙皮文件/Material #5.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/动画/FBX/蒙皮文件/Material #5.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/动画/FBX/蒙皮文件/Material #9.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/动画/FBX/蒙皮文件/Material #9.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/学生妹fix/Material #8.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/学生妹fix/Material #8.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/拳击手fix/Material #7.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/模型外包存货/西安最终/拳击手fix/Material #7.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,13 +28,13 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Utilities/ColorUtils.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Graphs/VectorShaderProperty.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.31/UnityEditor.TestRunner/TestRunner/Callbacks/TestRunnerCallback.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_PostBuildProcessHandler.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Runtime/Passes/DrawObjectsPass.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Volume/VolumeProfile.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Editor/GlobalSettings/SerializedUniversalRenderPipelineGlobalSettings.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.16/Editor/PlasticSCM/UI/Images.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.1.31/UnityEditor.TestRunner/TestRunner/Callbacks/TestRunnerCallback.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Runtime/Passes/DrawObjectsPass.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.6/Editor/GlobalSettings/SerializedUniversalRenderPipelineGlobalSettings.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.6/Editor/Data/Graphs/VectorShaderProperty.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Editor/TMP_PostBuildProcessHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.6/Runtime/Volume/VolumeProfile.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2Mcgi1Z0ShzboFWU3B6aaL5iOCD" />
   <component name="ProjectViewState">
@@ -75,6 +86,7 @@
       <workItem from="1678266104297" duration="3300000" />
       <workItem from="1678322277379" duration="5148000" />
       <workItem from="1678693168204" duration="10614000" />
+      <workItem from="1685246934309" duration="637000" />
     </task>
     <servers />
   </component>

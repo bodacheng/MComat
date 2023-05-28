@@ -9,7 +9,7 @@ namespace FightScene
     public class FightResultAnim : FSceneProcess
     {
         private bool animEnd = false;
-
+        
         public FightResultAnim()
         {
             Step = SceneStep.FightResultAnim;

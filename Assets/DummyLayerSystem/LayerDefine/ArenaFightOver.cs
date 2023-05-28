@@ -13,6 +13,8 @@ public class ArenaFightOver : UILayer
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject winObject;
     [SerializeField] private GameObject loseObject;
+    [SerializeField] private Image winImage;
+    [SerializeField] private Image loseImage;
     [SerializeField] private Button returnBtn;
     [SerializeField] private RectTransform dmParent;
     [SerializeField] private Text currentDmCurrency;
@@ -39,6 +41,7 @@ public class ArenaFightOver : UILayer
     private TweenerCore<int, int, NoOptions> _dmAwardTweenerCore;
     private TweenerCore<int, int, NoOptions> _gdAwardTweenerCore;
     
+    private float resultAnimFactor = 0;
     void Awake()
     {
         againBtn.onClick.AddListener(() =>
@@ -90,10 +93,24 @@ public class ArenaFightOver : UILayer
         if (FightLogger.value.GetWinnerTeam() == Team.player1)
         {
             winObject.SetActive(true);
+            DOTween.To(() => resultAnimFactor, (x) => resultAnimFactor = x, 2, 1).
+                OnUpdate(
+                    () =>
+                    {
+                        winImage.material.SetFloat("_Animation_Factor", resultAnimFactor);
+                    }
+            );
         }
         else
         {
             loseObject.SetActive(true);
+            DOTween.To(() => resultAnimFactor, (x) => resultAnimFactor = x, 2, 1).
+                OnUpdate(
+                    () =>
+                    {
+                        loseImage.material.SetFloat("_Animation_Factor", resultAnimFactor);
+                    }
+                );
         }
     }
     
