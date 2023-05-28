@@ -387,6 +387,21 @@ PrefabInstance:
       propertyPath: m_Text
       value: x20
       objectReference: {fileID: 0}
+    - target: {fileID: 1523163117158937322, guid: fc2bc79c251664e34a88adb27efbb5bf,
+        type: 3}
+      propertyPath: _iOSAdUnitId
+      value: Interstitial_iOS
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523163117158937322, guid: fc2bc79c251664e34a88adb27efbb5bf,
+        type: 3}
+      propertyPath: _androidAdUnitId
+      value: Interstitial_Android
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523163117158937322, guid: fc2bc79c251664e34a88adb27efbb5bf,
+        type: 3}
+      propertyPath: reloadAfterWatched
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1904867252659184379, guid: fc2bc79c251664e34a88adb27efbb5bf,
         type: 3}
       propertyPath: reloadAfterWatched
