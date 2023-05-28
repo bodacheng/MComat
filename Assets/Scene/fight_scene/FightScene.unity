@@ -6812,6 +6812,11 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.scalar
       value: 39
       objectReference: {fileID: 0}
+    - target: {fileID: 2841199245577103399, guid: 3667ab1130c011c4a8c2b9306f1612e5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 42ede497b2e72d24598689799219ef6d, type: 2}
     - target: {fileID: 2841199245591382249, guid: 3667ab1130c011c4a8c2b9306f1612e5,
         type: 3}
       propertyPath: m_IsActive

@@ -14105,6 +14105,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2738100317381966482, guid: 72d00ee42a0b94b3aa1db5764acd394f,
         type: 3}
+      propertyPath: followSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2738100317381966482, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
       propertyPath: extraZCameraDepth
       value: 30
       objectReference: {fileID: 0}
