@@ -52348,7 +52348,7 @@ MonoBehaviour:
     rootBones:
     - {fileID: 5584025466154481413}
     - {fileID: 1227056399127496095}
-    connectionMode: 0
+    connectionMode: 1
     rotationalInterpolation: 0.5
     rootRotation: 0.5
     updateMode: 0
@@ -52366,9 +52366,9 @@ MonoBehaviour:
     gravity: 0
     gravityDirection:
       x: 0
-      y: 0
+      y: -1
       z: 0
-    gravityFalloff: 1
+    gravityFalloff: 0
     stablizationTimeAfterReset: 0.1
     damping:
       value: 0.1
@@ -52427,7 +52427,7 @@ MonoBehaviour:
     inertiaConstraint:
       movementInertia: 1
       rotationInertia: 1
-      depthInertia: 1
+      depthInertia: 0
       centrifualAcceleration: 0
       movementSpeedLimit:
         value: 5
@@ -52474,7 +52474,7 @@ MonoBehaviour:
       useAngleRestoration: 1
       stiffness:
         value: 0.15
-        useCurve: 1
+        useCurve: 0
         curve:
           serializedVersion: 2
           m_Curve:
@@ -52511,21 +52511,21 @@ MonoBehaviour:
           m_Curve:
           - serializedVersion: 3
             time: 0
-            value: 0.199749
-            inSlope: 0.800251
-            outSlope: 0.800251
-            tangentMode: 34
+            value: 0
+            inSlope: 0
+            outSlope: 1
+            tangentMode: 0
             weightedMode: 0
             inWeight: 0
-            outWeight: 0.33333334
+            outWeight: 0
           - serializedVersion: 3
             time: 1
             value: 1
-            inSlope: 0.800251
-            outSlope: 0.800251
-            tangentMode: 34
+            inSlope: 1
+            outSlope: 0
+            tangentMode: 0
             weightedMode: 0
-            inWeight: 0.33333334
+            inWeight: 0
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
@@ -52662,7 +52662,7 @@ MonoBehaviour:
       - Value: 1
       - Value: 2
       - Value: 2
-      maxConnectionDistance: 0.04685831
+      maxConnectionDistance: 0.15921211
       userEdit: 0
   gizmoSerializeData:
     always: 0

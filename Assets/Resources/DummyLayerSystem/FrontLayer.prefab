@@ -2171,6 +2171,8 @@ MonoBehaviour:
   SkillTestRBtn: {fileID: 3029729696143825650}
   SkillTestMBtn: {fileID: 3029729695899950762}
   camConnector: {fileID: 3850757717107606116}
+  cameraConnectorRightSpace: 940
+  cameraConnectorVerticalSpace: 150
   skillShowInterval: 5
   indicator: {fileID: 8151383610826493773}
 --- !u!1 &3029729696728328397
@@ -18411,6 +18413,11 @@ PrefabInstance:
         type: 3}
       propertyPath: resolution
       value: 1028
+      objectReference: {fileID: 0}
+    - target: {fileID: 2738100317381966482, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: followSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3850318373848056875, guid: 72d00ee42a0b94b3aa1db5764acd394f,
         type: 3}
