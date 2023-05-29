@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.unity.addressables": "1.19.19",
-    "com.unity.ads": "4.4.1",
+    "com.unity.ads": "4.4.2",
     "com.unity.burst": "1.8.4",
     "com.unity.collab-proxy": "1.15.16",
     "com.unity.collections": "1.4.0",

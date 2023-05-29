@@ -57,15 +57,12 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     public void LoadAd()
     {
         // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
-        Debug.Log("Loading Ad: " + _adUnitId);
         Advertisement.Load(_adUnitId, this);
     }
  
     // If the ad successfully loads, add a listener to the button and enable it:
     public void OnUnityAdsAdLoaded(string adUnitId)
     {
-        Debug.Log("Ad Loaded: " + adUnitId);
- 
         if (adUnitId.Equals(_adUnitId))
         {
             // Configure the button to call the ShowAd() method when clicked:
@@ -102,6 +99,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     {
         Debug.Log($"Error loading Ad Unit {adUnitId}: {error.ToString()} - {message}");
         // Use the error details to determine whether to try to load another ad.
+        Advertisement.Load(_adUnitId, this);
     }
     
     public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
@@ -109,13 +107,21 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
         Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
         AppSetting.Value.UnMute();
         // Use the error details to determine whether to try to load another ad.
+        Advertisement.Load(_adUnitId, this);
     }
 
     public void OnUnityAdsShowStart(string adUnitId)
     {
         AppSetting.Value.Mute();
     }
-    public void OnUnityAdsShowClick(string adUnitId) { }
+
+    public void OnUnityAdsShowClick(string adUnitId)
+    {
+        watchedAdExtraProcess.Invoke();
+        // Load another ad: 需要检查在实机上这里跑的是否有问题。在editor上产生一个造成广告再次观看时连续跑了两次的错误
+        if (reloadAfterWatched)
+            Advertisement.Load(_adUnitId, this);
+    }
  
     void OnDestroy()
     {
