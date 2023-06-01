@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using mainMenu;
 using UnityEngine;
+using DG.Tweening;
 using Cysharp.Threading.Tasks;
 using ModelView;
 using Button = UnityEngine.UI.Button;
@@ -28,7 +30,11 @@ public partial class SkillEditLayer : UILayer
     [SerializeField] ClickNextTutorial clickNextTutorial1, clickNextTutorial2;
 
     public bool Initialized { get; set; } = false;
-
+    
+    // For Transition Effects
+    private readonly List<Tween> _tweens = new List<Tween>();
+    private readonly List<GameObject> _transitionEffects = new List<GameObject>();
+    
     public async UniTask Setup(Action<SkillEditLayer> toDo = null)
     {
         Initialized = false;
@@ -38,6 +44,36 @@ public partial class SkillEditLayer : UILayer
         nineSlot.PrintSkillInfo = skillStoneDetail.RefreshInfo;
         nineSlot.StartUp((x,stone) =>
             {
+                var slot = nineSlot.GetSlotByCell(stone.GetCell());
+                async void TransitionEffect(SkillStoneSlot start, SkillStoneSlot end)
+                {
+                    var startPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera,
+                        start._cell.GetComponent<RectTransform>(), 3);
+                    var endPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera,
+                        end._cell.GetComponent<RectTransform>(), 3);
+                    
+                    var transitionEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>("gachastar0");
+                    _transitionEffects.Add(transitionEffect.gameObject);
+                    if (this == null)
+                    {
+                        Destroy(transitionEffect.gameObject);
+                        return;
+                    }
+                    transitionEffect.transform.position = startPos;
+                    var tween = transitionEffect.transform.DOMove(endPos, 1).OnComplete(
+                        async () =>
+                        {
+                            transitionEffect.Clear(true);
+                            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+                            if (transitionEffect != null)
+                            {
+                                Destroy(transitionEffect.gameObject);
+                            }
+                        }
+                    );
+                    _tweens.Add(tween);
+                }
+                nineSlot.ShowTransition(slot, TransitionEffect);
                 stonesBox._tabEffects.SkillButtonExplosion(stone._SkillConfig.SP_LEVEL, 
                     PosCal.GetWorldPos(PreScene.target.postProcessCamera, stone.GetComponent<RectTransform>(), 3), 
                     stonesBox._tabEffects.transform);
@@ -71,6 +107,17 @@ public partial class SkillEditLayer : UILayer
     
     public override void OnDestroy()
     {
+        foreach (var tween in _tweens)
+        {
+            tween.Kill();
+        }
+
+        foreach (var effect in _transitionEffects)
+        {
+            if (effect != null)
+                Destroy(effect);
+        }
+        _tweens.Clear();
         stonesBox._tabEffects.CloseShowingTagEffects();
     }
 

@@ -62,6 +62,53 @@ namespace mainMenu
 
         public Action<string> PrintSkillInfo;
 
+        public SkillStoneSlot GetSlotByCell(StoneCell cell)
+        {
+            foreach (var slot in AllSlot)
+            {
+                if (slot._cell == cell)
+                {
+                    return slot;
+                }
+            }
+            return null;
+        }
+
+        public void ShowTransition(SkillStoneSlot slot, Action<SkillStoneSlot, SkillStoneSlot> effectTrigger)
+        {
+            SkillStoneSlot endSlot1 = null, endSlot2 = null, endSlot3 = null;
+            if (slot == _a1Slot || slot == _b1Slot ||slot == _c1Slot)
+            {
+                endSlot1 = _a2Slot;
+                endSlot2 = _b2Slot;
+                endSlot3 = _c2Slot;
+            }
+            if (slot == _a2Slot || slot == _b2Slot ||slot == _c2Slot)
+            {
+                endSlot1 = _a3Slot;
+                endSlot2 = _b3Slot;
+                endSlot3 = _c3Slot;
+            }
+            if (slot == _a3Slot || slot == _b3Slot ||slot == _c3Slot)
+            {
+                endSlot1 = _a1Slot;
+                endSlot2 = _b1Slot;
+                endSlot3 = _c1Slot;
+            }
+
+            void Tr(SkillStoneSlot start, SkillStoneSlot end)
+            {
+                if (end._cell.GetItem() != null)
+                {
+                    effectTrigger(start, end);
+                }
+            }
+            
+            Tr(slot, endSlot1);
+            Tr(slot, endSlot2);
+            Tr(slot, endSlot3);
+        }
+
         void SelectedRender(StoneCell cell)
         {
             if (cell == null)
@@ -119,7 +166,6 @@ namespace mainMenu
             }
             
             slot._cell.btn.SetListener(ButtonFeature);
-            
             slot._cell.btn.ActivateHold = true;
             slot._cell.btn.ActivateDoubleClick = true;
             slot._cell.btn.onHold.AddListener(GoToLevelUpPage);

@@ -30,7 +30,7 @@ namespace mainMenu
                 kv.Value.Clear();
             }
         }
-
+        
         public void SetSelectedTabPos(int ex)
         {
             _focusingEffectsGroup?.SetSelectedTabPos(ex);
