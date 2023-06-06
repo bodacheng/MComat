@@ -28,6 +28,13 @@ public class QuestInfoPage : MSceneProcess
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);
                 }
                 _layer.SetTeamEditFeature(GoToTeamEditArcade);
+                _layer.SetArcadeFeature(
+                    () =>
+                    {
+                        PreScene.target.trySwitchToStep(MainSceneStep.ArcadeFront);
+                    },
+                    FightScene.FightScene.Fight.ID
+                );
                 break;
         }
         _layer.StageMembersInfoShow(FightScene.FightScene.Fight, FightScene.FightScene.Fight.Team1OneWord, FightScene.FightScene.Fight.Team2OneWord);

@@ -16,12 +16,14 @@ public class FightPrepareLayer : UILayer
     [SerializeField] FightBeginBtn beginFight;
     [SerializeField] Text team1OneWord;
     [SerializeField] Text team2OneWord;
+    [SerializeField] Text arcadeStageNoText;
+    [SerializeField] Button toArcadeFrontBtn;
     
     public void SetFightMode(int fightMode)
     {
         fightModeSwitch.Setup(fightMode, PlayerPrefs.GetInt("preferAdventureMode",  PlayerPrefs.GetInt("preferAdventureMode", 2)));
     }
-
+    
     public TeamMode GetSetFightMode()
     {
         return fightModeSwitch.TeamMode;
@@ -41,6 +43,13 @@ public class FightPrepareLayer : UILayer
     {
         editTeamButton.onClick.RemoveAllListeners();
         editTeamButton.onClick.AddListener(()=> teamEdit());
+    }
+
+    public void SetArcadeFeature(Action toArcadeFront, string arcadeStageNo)
+    {
+        arcadeStageNoText.text = "Stage " + arcadeStageNo;
+        toArcadeFrontBtn.gameObject.SetActive(true);
+        toArcadeFrontBtn.onClick.AddListener(()=>toArcadeFront());
     }
     
     public void ForcePressTeamEdit()

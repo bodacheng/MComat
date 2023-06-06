@@ -177,6 +177,7 @@ public class FightInfo : ScriptableObject
                 break;
         }
         FightMembers.HeroSets = TeamSet.ToDic(set);
+        Team1ID = PlayerAccountInfo.Me.PlayFabId;
     }
     
     public static FightInfo ArenaStage(FightMembers fightUnits)

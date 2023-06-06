@@ -101,19 +101,5 @@ namespace FightScene
                 one.CleanClear();
             }
         }
-        
-        public void ClearUnits()
-        {
-            foreach (var one in team1.teamMembers.GetValues())
-            {
-                Destroy(one.WholeT.gameObject);
-            }
-            foreach (var one in team2.teamMembers.GetValues())
-            {
-                Destroy(one.WholeT.gameObject);
-            }
-            team1.teamMembers.Clear();
-            team2.teamMembers.Clear();
-        }
     }
 }

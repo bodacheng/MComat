@@ -16,7 +16,6 @@ public class PreparingProcess : FSceneProcess
     
     async UniTask EnterProcess()
     {
-        RTFightManager.Target.ClearUnits();
         Sensor.ClearFightingMember();
         UILayerLoader.Remove<ArenaFightOver>();
         RTFightManager.Target._CameraManager.Assign_Camera(C_Mode.NULL, null,null);

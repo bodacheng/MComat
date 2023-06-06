@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using mainMenu;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using ModelView;
@@ -23,18 +22,16 @@ public class ArcadeTop : UILayer
     
     List<int> _currentStages;
     readonly List<StageButton> _stageButtons = new List<StageButton>();
-    private StageModeTable _stageModeTable;
-    private Func<int, UniTask<FightInfo>> _loadStageAsset;
+    private ArcadeModeManager arcadeModeManager;
     int _maxStageNum; 
     
-    public void Setup(StageModeTable stageModeTable, Func<int, UniTask<FightInfo>> loadStageAsset, int maxStageNum)
+    public void Setup(ArcadeModeManager arcadeModeManager)
     {
-        this._stageModeTable = stageModeTable;
-        this._loadStageAsset = loadStageAsset;
+        this.arcadeModeManager = arcadeModeManager;
         nextChapter.onClick.AddListener(ShowNextStages);
         lastChapter.onClick.AddListener(ShowLastStages);
         jumpToNewStage.onClick.AddListener(ToNew);
-        this._maxStageNum = maxStageNum;
+        this._maxStageNum = arcadeModeManager.MaxStageNum;
         
         CameraConnectorCal(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
     }
@@ -98,7 +95,7 @@ public class ArcadeTop : UILayer
     
     async UniTask LoadStage(int stageNo)
     {
-        var one = await _loadStageAsset(stageNo);
+        var one = await arcadeModeManager.LoadStage(stageNo);
         if (one == null)
         {
             return;
@@ -106,16 +103,12 @@ public class ArcadeTop : UILayer
         
         var stageBtn = Instantiate(stageNo % 5 == 0 ? bossStagePrefab : normalStagePrefab);
         _stageButtons.Add(stageBtn);
-        void LoadThisStage()
-        {
-            if (PlayerAccountInfo.Me.arcadeProcess + 1 >=  stageNo)
+        stageBtn.Button.onClick.AddListener(
+            ()=>
             {
-                one.EventType = FightEventType.Quest;
-                one.ArcadeFightMode = _stageModeTable.GetModeById(one.ID);
-                PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, one, true);
+                arcadeModeManager.DirectToArcadeStage(stageNo);
             }
-        }
-        stageBtn.Button.onClick.AddListener(LoadThisStage);
+        );
         stageBtn.name = "Stage" + stageNo;
         stageBtn.StageNo = stageNo;
         stageBtn.CriticalGaugeMode = one.team2CGMode;

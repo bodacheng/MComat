@@ -133,5 +133,14 @@ namespace FightScene
                 center.FightDataRef.Invincible = _Invincible;
             }
         }
+
+        public void Clear()
+        {
+            foreach (var one in teamMembers.GetValues())
+            {
+                Destroy(one.WholeT.gameObject);
+            }
+            teamMembers.Clear();
+        }
     }
 }

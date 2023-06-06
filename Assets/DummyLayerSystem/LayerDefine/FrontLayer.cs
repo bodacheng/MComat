@@ -29,7 +29,11 @@ public class FrontLayer : UILayer
     {
         CameraConnectorCal(camConnector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
         
-        ArcadeBtn.onClick.AddListener(()=> pre.trySwitchToStep(MainSceneStep.ArcadeFront));
+        ArcadeBtn.onClick.AddListener(
+        ()=>
+            {
+                PlayerAccountInfo.Me.ArcadeModeManager.DirectToArcadeStage(PlayerAccountInfo.Me.arcadeProcess + 1);
+            });
         ArenaBtn.onClick.AddListener(() =>
         {
             if (PlayerAccountInfo.Me.arcadeProcess >= 5)

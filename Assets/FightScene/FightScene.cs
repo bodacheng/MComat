@@ -123,7 +123,8 @@ namespace FightScene
             dataCenters.AddRange(RTFightManager.Target.team1.teamMembers.GetValues());
             dataCenters.AddRange(RTFightManager.Target.team2.teamMembers.GetValues());
             RTFightManager.Target.ClearUnitData();
-            RTFightManager.Target.ClearUnits();
+            RTFightManager.Target.team1.Clear();
+            RTFightManager.Target.team2.Clear();
             FightLogger.value.WatchMissionsAbandon();
             FSceneProcessesRunner.Main.Clear();
             MainMenuNote.GoingTo = MainSceneStep.FrontPage;

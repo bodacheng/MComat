@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using PlayFab.ClientModels;
+using UnityEngine;
 
 namespace FightScene
 {
@@ -69,6 +70,7 @@ namespace FightScene
                                         arenaFightOver.ShowAward(rewardDmInt, rewardGdInt, 
                                             levelInt % 5 == 0 ? PlayFabSetting._adBossFightRewardDM : PlayFabSetting._adNormalFightRewardDM);
                                     }
+                                    arenaFightOver.LoadNextArcadeStage();
                                     
                                     if (FightScene.Fight.ID == "1")
                                     {
@@ -138,6 +140,8 @@ namespace FightScene
         async void SkillTestReload()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(3));
+            RTFightManager.Target.team1.Clear();
+            RTFightManager.Target.team2.Clear();
             FightScene.Fight = FightInfo.RandomSkillTestStage(FightScene.Fight.team1Mode);
             LocalGameRestart();
         }

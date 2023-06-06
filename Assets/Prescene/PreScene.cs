@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using dataAccess;
 using UnityEngine;
 using DummyLayerSystem;
 using ModelView;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace mainMenu
@@ -15,18 +13,16 @@ namespace mainMenu
     public class PreScene : MonoBehaviour
     {
         public static PreScene target;
-        
+
         public Camera postProcessCamera;
         public Camera noPostProcessCamera;
         
         [Header("T")]
         [SerializeField] GameObject T;
-        [Header("Shader转换器")]
-        [SerializeField] SwapAllModelShader _SwapAllModelShader;
         [Header("AudioSource")]
         [SerializeField] AudioSource audioSource;
         [Header("Canvas")] 
-        [SerializeField] private Canvas Canvas;
+        [SerializeField] Canvas Canvas;
 
         public RectTransform stonesTempContainer;
 
@@ -121,7 +117,8 @@ namespace mainMenu
         {
             await UniTask.WhenAll(
                 PlayFabReadClient.LoadReadMailsAsync(),
-                AddressablesLogic.Essentials()
+                AddressablesLogic.Essentials(),
+                PlayerAccountInfo.Me.ArcadeModeManager.Initialize()
             );
             CashClear();
             UILayerLoader.Clear();
@@ -184,7 +181,7 @@ namespace mainMenu
             var unitListPage = new UnitListPage();
             var memberDetailEdit = new SkillEditPage();
             var memberDetailSkillShow = new SkillShowPage();
-            var arcadeFrontPage = new ArcadeFrontPage();
+            var arcadeFrontPage = new ArcadeFrontPage(PlayerAccountInfo.Me.ArcadeModeManager);
             
             // Shop
             var shopTop = new ShopTop();
@@ -242,15 +239,7 @@ namespace mainMenu
             ProcessesRunner.Main.ProcessNagare();
             TutorialRunner.Main.Process();
         }
-
-        public void AskIfLoadFight(FightInfo stage)
-        {
-            PopupLayer.ArrangeConfirmWindow(
-                delegate {
-                    FightLoad.Go(stage, true);
-                }, "开打？");
-        }
-
+        
         public void BeginSkillTest_Rotation()
         {
             var stage = FightInfo.RandomSkillTestStage(TeamMode.Rotation);
@@ -331,4 +320,6 @@ namespace mainMenu
         public MainSceneStep returnToStep;
         public Func<bool> returnAction;
     }
+    
+    
 }
