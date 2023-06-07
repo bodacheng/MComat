@@ -8,6 +8,7 @@ public class BoundaryControlByGod : MonoBehaviour {
     [SerializeField] float BattleRingRadius = 20f;
     
     ParticleSystem BattleRingPS;
+    GameObject battleGround;
     public static float _BattleRingRadius;
     public static BoundaryControlByGod target;
     
@@ -32,12 +33,19 @@ public class BoundaryControlByGod : MonoBehaviour {
         }
     }
 
+    private int currentBackGroundNum = -1;
     public async UniTask ChangeBackGround(int number)
     {
-        var battleGround = await AddressablesLogic.LoadObject("battleGround/" +number);
-        if (battleGround != null)
+        if (currentBackGroundNum != number)
         {
-            battleGround.GetComponent<BattleGround>().Set();
+            if (battleGround != null)
+                Destroy(this.battleGround);
+            
+            battleGround = await AddressablesLogic.LoadObject("battleGround/" +number);
+            if (battleGround != null)
+            {
+                battleGround.GetComponent<BattleGround>().Set();
+            }
         }
     }
 }

@@ -12,13 +12,14 @@ namespace Soul
         float TimeCounter { set; get; }
         V_Damage target;
         SingleAssignmentDisposable _physicMissionDisposable;
+        private float hurtAnimDuration = 0.05f;
         Tween _tween;
         
         void PlayHurtAnim(V_Damage newValue)
         {
             if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && _BasicPhysicSupport.hiddenMethods.Grounded)
             {
-                Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("lay"), true, 0.1f);
+                Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("lay"), true, hurtAnimDuration);
                 return;
             }
             Vector3 point = newValue.DamageEffectPoint;
@@ -37,7 +38,7 @@ namespace Soul
             {
                 hurtAnimKey = newValue.DamageEffectPoint.y > _DATA_CENTER.geometryCenter.position.y ? "high" : "low";
             }
-            Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim(hurtAnimKey), true, 0.1f);
+            Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim(hurtAnimKey), true, hurtAnimDuration);
             RotateToTargetTween(rotateToTarget, 0.1f);
         }
 

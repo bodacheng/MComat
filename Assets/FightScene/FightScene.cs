@@ -100,14 +100,14 @@ namespace FightScene
             }
             FSceneProcessesRunner.Main.ArrangeProcessOrder();
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
-            
-            if (Fight.EventType == FightEventType.Quest)
-            {
-                watchBtn = GameObject.Instantiate(watchAdBtnPrefab);
-                watchBtn.LoadAd();
-                watchBtn.gameObject.SetActive(false);
-                watchBtn.transform.SetParent(transform);
-            }
+        }
+
+        public void LoadAds()
+        {
+            watchBtn = Instantiate(watchAdBtnPrefab);
+            watchBtn.LoadAd();
+            watchBtn.gameObject.SetActive(false);
+            watchBtn.transform.SetParent(transform);
         }
         
         void Update()

@@ -74,6 +74,7 @@ public class SideUnitIcon : MonoBehaviour {
         hpBar.gameObject.SetActive(false);
         hpText.gameObject.SetActive(false);
         resistBar.gameObject.SetActive(false);
+        teamIndicator.gameObject.SetActive(false);
         focusingCharIcon.CooldownCurtainUpdate(1);
     }
 }

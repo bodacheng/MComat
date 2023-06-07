@@ -16,6 +16,11 @@ public class PreparingProcess : FSceneProcess
     
     async UniTask EnterProcess()
     {
+        if (FightScene.FightScene.Fight.EventType == FightEventType.Quest)
+        {
+            FightScene.FightScene.target.LoadAds();
+        }
+        
         Sensor.ClearFightingMember();
         UILayerLoader.Remove<ArenaFightOver>();
         RTFightManager.Target._CameraManager.Assign_Camera(C_Mode.NULL, null,null);

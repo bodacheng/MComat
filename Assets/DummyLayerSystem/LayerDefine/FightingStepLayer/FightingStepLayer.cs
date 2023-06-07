@@ -108,10 +108,11 @@ public class FightingStepLayer : UILayer
         {
             await inputsManager.ElementRegister(d.element, RTFightManager.Target.UnitInfoRef[d]);
         }
-        foreach (var d in RTFightManager.Target.team2.teamMembers.GetValues())
-        {
-            await inputsManager.ElementRegister(d.element, RTFightManager.Target.UnitInfoRef[d]);
-        }
+        
+        // foreach (var d in RTFightManager.Target.team2.teamMembers.GetValues())
+        // {
+        //     await inputsManager.ElementRegister(d.element, RTFightManager.Target.UnitInfoRef[d]);
+        // }
         Initialized = true;
     }
 
