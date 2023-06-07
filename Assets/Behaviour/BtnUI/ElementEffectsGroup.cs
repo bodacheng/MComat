@@ -132,9 +132,17 @@ public class ElementEffectsGroup
     public async UniTask InitializeCommon(Transform targetRectT, Element element, Button a1Btn, Button a2Btn, Button a3Btn)
     {
         var path = FightGlobalSetting.EffectPathDefine(element);
-        var attackSlot = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
-        var fire1Slot = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
-        var fire2Slot = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab");
+        
+        var tasks = new List<UniTask<ParticleSystem>> 
+        {
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab"),
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab"),
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab")
+        };
+        var results = await UniTask.WhenAll(tasks);
+        var attackSlot = results[0];
+        var fire1Slot = results[1];
+        var fire2Slot = results[2];
         
         attackSlot.transform.SetParent(targetRectT);
         fire1Slot.transform.SetParent(targetRectT);
@@ -152,31 +160,31 @@ public class ElementEffectsGroup
             _defendBtn = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/defend.prefab");
         }
         
-        _rushBtn = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/rush.prefab");
-        var a1Refresh = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
-        var a2Refresh = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
-        var a3Refresh = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab");
-        _triggerExplosion0 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab");
-        _triggerExplosion1 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion1.prefab");
-        _triggerExplosion2 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion2.prefab");
-        _triggerExplosion3 = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion3.prefab");
-        _pressingExplosion = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/pressing.prefab");
-        
-        if (FightGlobalSetting.HasDefend)
-            _defendBtn.transform.SetParent(targetRectT);
-        _rushBtn.transform.SetParent(targetRectT);
-        a1Refresh.gameObject.name = "a1Refresh";
-        a2Refresh.gameObject.name = "a2Refresh";
-        a3Refresh.gameObject.name = "a3Refresh";
-        a1Refresh.transform.SetParent(targetRectT);
-        a2Refresh.transform.SetParent(targetRectT);
-        a3Refresh.transform.SetParent(targetRectT);
-        _triggerExplosion0.transform.SetParent(targetRectT);
-        _triggerExplosion1.transform.SetParent(targetRectT);
-        _triggerExplosion2.transform.SetParent(targetRectT);
-        _triggerExplosion3.transform.SetParent(targetRectT);
-        _pressingExplosion.transform.SetParent(targetRectT);
+        var tasks2 = new List<UniTask<ParticleSystem>> 
+        {
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/rush.prefab"),
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab"),
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab"),
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab"),
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion0.prefab"),
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion1.prefab"),
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion2.prefab"),
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion3.prefab"),
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/pressing.prefab")
+        };
 
+        var results2 = await UniTask.WhenAll(tasks2);
+
+        _rushBtn = results2[0];
+        var a1Refresh = results2[1];
+        var a2Refresh = results2[2];
+        var a3Refresh = results2[3];
+        _triggerExplosion0 = results2[4];
+        _triggerExplosion1 = results2[5];
+        _triggerExplosion2 = results2[6];
+        _triggerExplosion3 = results2[7];
+        _pressingExplosion = results2[8];
+        
         _btnRefreshEffects = new Dictionary<Button, ParticleSystem>
         {
             { a1Btn, a1Refresh },

@@ -33,8 +33,10 @@ namespace FightScene
         
         public async UniTask LoadUnits(FightInfo info)
         {
-            await UniTask.WhenAll(team1._UnitsLoad(info.FightMembers.HeroSets, UnitInfoRef), 
-                team2._UnitsLoad(info.FightMembers.EnemySets, UnitInfoRef));
+            await UniTask.WhenAll(
+                team1._UnitsLoad(info.FightMembers.HeroSets, UnitInfoRef), 
+                team2._UnitsLoad(info.FightMembers.EnemySets, UnitInfoRef)
+            );
         }
         
         public void SetGame(FightInfo stage)

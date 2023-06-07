@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using UnityEngine;
@@ -95,7 +96,6 @@ public class FightingStepLayer : UILayer
         
         team1UI.TeamMode = FightScene.FightScene.Fight.team1Mode;
         team2UI.TeamMode = FightScene.FightScene.Fight.team2Mode;
-        
         team1UI.TeamConfig = RTFightManager.Target.heroTeamConfig;
         team2UI.TeamConfig = RTFightManager.Target.EnemyTeamConfig;
         team1UI.TeamConfig.playID = FightScene.FightScene.Fight.Team1ID;
@@ -107,10 +107,12 @@ public class FightingStepLayer : UILayer
         team1UI.InsTeamUI(RTFightManager.Target.team1.ReadyForNextMember, (() => RTFightManager.Target.team1.Auto),switchTeam1Auto, RTFightManager.Target.team1.RMode_Unit);
         team2UI.InsTeamUI(RTFightManager.Target.team2.ReadyForNextMember, (() => RTFightManager.Target.team2.Auto),switchTeam2Auto, RTFightManager.Target.team2.RMode_Unit);
 
+        var inputEffectsLoading = new List<UniTask>();
         foreach (var d in RTFightManager.Target.team1.teamMembers.GetValues())
         {
-            await inputsManager.ElementRegister(d.element, RTFightManager.Target.UnitInfoRef[d]);
+            inputEffectsLoading.Add(inputsManager.ElementRegister(d.element, RTFightManager.Target.UnitInfoRef[d]));
         }
+        await UniTask.WhenAll(inputEffectsLoading);
         
         // foreach (var d in RTFightManager.Target.team2.teamMembers.GetValues())
         // {

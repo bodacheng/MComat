@@ -85,7 +85,6 @@ namespace FightScene
                                             },
                                             () => {}
                                         );
-                                        ReturnLayer.ReturnMissionList.Clear(); // 直接回到 front scene
                                     }
                                 }
                             );
@@ -140,8 +139,6 @@ namespace FightScene
         async void SkillTestReload()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(3));
-            RTFightManager.Target.team1.Clear();
-            RTFightManager.Target.team2.Clear();
             FightScene.Fight = FightInfo.RandomSkillTestStage(FightScene.Fight.team1Mode);
             LocalGameRestart();
         }

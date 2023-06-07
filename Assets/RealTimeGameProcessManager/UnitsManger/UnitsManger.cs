@@ -55,24 +55,19 @@ namespace FightScene
         {
             async UniTask LoadOneUnit(int key1, int key2, UnitInfo info)
             {
-                var _one = info;
                 var center = teamMembers.Get(key1, key2);
                 if (center == null)
                 {
-                    center = await UnitCreator.CreateUnit(_one);
+                    center = await UnitCreator.CreateUnit(info);
                 }
-                
                 teamMembers.Set(key1, key2, center);
-                DicAdd<Data_Center, UnitInfo>.Add(unitInfoRef, center, _one);
+                DicAdd<Data_Center, UnitInfo>.Add(unitInfoRef, center, info);
             }
-            
             var tasks = new List<UniTask>();
-            
             foreach (var kv in membersSets.mDict)
             {
                 tasks.Add(LoadOneUnit(kv.Key.Item1, kv.Key.Item2, kv.Value));
             }
-            
             await UniTask.WhenAll(tasks);
         }
         
@@ -133,7 +128,7 @@ namespace FightScene
                 center.FightDataRef.Invincible = _Invincible;
             }
         }
-
+        
         public void Clear()
         {
             foreach (var one in teamMembers.GetValues())

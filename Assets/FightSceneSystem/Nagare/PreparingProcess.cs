@@ -16,6 +16,9 @@ public class PreparingProcess : FSceneProcess
     
     async UniTask EnterProcess()
     {
+        RTFightManager.Target.team1.Clear();
+        RTFightManager.Target.team2.Clear();
+        
         if (FightScene.FightScene.Fight.EventType == FightEventType.Quest)
         {
             FightScene.FightScene.target.LoadAds();
@@ -69,24 +72,32 @@ public class PreparingProcess : FSceneProcess
         switch (RTFightManager.Target.team1.TeamMode)
         {
             case TeamMode.MultiRaid:
-                RTFightManager.Target.team1.InitializeMulti(FightScene.FightScene.Fight.team1HpRate, FightScene.FightScene.Fight.team1CGMode, 
-                    FightScene.FightScene.Fight.team1AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay);
+                RTFightManager.Target.team1.InitializeMulti(
+                    FightScene.FightScene.Fight.team1HpRate, FightScene.FightScene.Fight.team1CGMode, 
+                    FightScene.FightScene.Fight.team1AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay
+                );
                 break;
             case TeamMode.Rotation:
-                RTFightManager.Target.team1.TeamsIniRotate(FightScene.FightScene.Fight.team1HpRate, FightScene.FightScene.Fight.team1CGMode, 
-                    FightScene.FightScene.Fight.team1AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay);
+                RTFightManager.Target.team1.TeamsIniRotate(
+                    FightScene.FightScene.Fight.team1HpRate, FightScene.FightScene.Fight.team1CGMode, 
+                    FightScene.FightScene.Fight.team1AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay
+                );
                 break;
         }
         
         switch (RTFightManager.Target.team2.TeamMode)
         {
             case TeamMode.MultiRaid:
-                RTFightManager.Target.team2.InitializeMulti(FightScene.FightScene.Fight.team2HpRate, FightScene.FightScene.Fight.team2CGMode, 
-                    FightScene.FightScene.Fight.team2AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay);
+                RTFightManager.Target.team2.InitializeMulti(
+                    FightScene.FightScene.Fight.team2HpRate, FightScene.FightScene.Fight.team2CGMode, 
+                    FightScene.FightScene.Fight.team2AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay
+                );
                 break;
             case TeamMode.Rotation:
-                RTFightManager.Target.team2.TeamsIniRotate(FightScene.FightScene.Fight.team2HpRate, FightScene.FightScene.Fight.team2CGMode, 
-                    FightScene.FightScene.Fight.team2AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay);
+                RTFightManager.Target.team2.TeamsIniRotate(
+                    FightScene.FightScene.Fight.team2HpRate, FightScene.FightScene.Fight.team2CGMode, 
+                    FightScene.FightScene.Fight.team2AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay
+                );
                 break;
         }
         
