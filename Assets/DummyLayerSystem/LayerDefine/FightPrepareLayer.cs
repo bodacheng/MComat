@@ -48,7 +48,7 @@ public class FightPrepareLayer : UILayer
     public void SetArcadeFeature(Action toArcadeFront, string arcadeStageNo)
     {
         arcadeStageNoText.text = "Stage " + arcadeStageNo;
-        toArcadeFrontBtn.gameObject.SetActive(true);
+        toArcadeFrontBtn.gameObject.SetActive(PlayerAccountInfo.Me.tutorialProgress == "Finished");
         toArcadeFrontBtn.onClick.AddListener(()=>toArcadeFront());
     }
     

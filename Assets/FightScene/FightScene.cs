@@ -127,6 +127,8 @@ namespace FightScene
             RTFightManager.Target.team2.Clear();
             FightLogger.value.WatchMissionsAbandon();
             FSceneProcessesRunner.Main.Clear();
+            if (Fight.EventType == FightEventType.Quest)
+                ProcessesRunner.Main.Clear();
             MainMenuNote.GoingTo = MainSceneStep.FrontPage;
             HitBoxesProcesser.Instance.Clear();
             SingleAssignmentDisposableCleaner.Clear();

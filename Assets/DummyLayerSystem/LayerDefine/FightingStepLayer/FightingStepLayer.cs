@@ -23,6 +23,9 @@ public class FightingStepLayer : UILayer
     [Header("教程强制点自动环节黑幕")] 
     [SerializeField] GameObject forceClickAutoBtnBlackMask;
 
+    public TeamUIManager Team1UI => team1UI;
+    public TeamUIManager Team2UI => team2UI;
+    
     public void PreparingMode(bool preparingMode)
     {
         if (team1UI.TeamMode == TeamMode.MultiRaid)

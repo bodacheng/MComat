@@ -8,8 +8,8 @@ public class CameraManager : MonoBehaviour
     [SerializeField] Transform topDownModeEndRef;
     CameraMode CurrentMode;
     public Transform TopDownModeEndRef => topDownModeEndRef;
-    
-    IDictionary<C_Mode, CameraMode> CModeDic = new Dictionary<C_Mode, CameraMode>()
+
+    readonly IDictionary<C_Mode, CameraMode> CModeDic = new Dictionary<C_Mode, CameraMode>()
     {
         {C_Mode.GodPlayerCertainYCamera,new GodPlayerCertainY(5f, 5f)},
         {C_Mode.CertainYAntiVibration, new ChatGptFix(8.8f, 5f)},

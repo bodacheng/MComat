@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class TeamEdit : TutorialProcess
 {
-    private ArcadeTop _arcadeTop;
     private TeamEditLayer _teamEditLayer;
     private ReturnLayer _returnLayer;
     private FightPrepareLayer _fightPrepareLayer;
@@ -142,9 +141,6 @@ public class TeamEdit : TutorialProcess
                 }
             }
         }
-        
-        if (_arcadeTop == null)
-            _arcadeTop = UILayerLoader.Get<ArcadeTop>();
         
         if (_returnLayer == null)
         {

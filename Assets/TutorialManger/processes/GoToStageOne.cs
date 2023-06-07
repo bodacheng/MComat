@@ -3,8 +3,6 @@
 public class GoToStageOne : TutorialProcess
 {
     private ReturnLayer _returnLayer;
-    private ArcadeTop _arcadeTop;
-    private ArcadeFrontPage _arcadeFrontPage;
     private FightPrepareLayer _fightPrepareLayer;
     private FightingStepLayer _fightingLayer;
     
@@ -26,14 +24,6 @@ public class GoToStageOne : TutorialProcess
     {
         if (_returnLayer == null)
             _returnLayer = UILayerLoader.Get<ReturnLayer>();
-        
-        if (_arcadeTop == null)
-            _arcadeTop = UILayerLoader.Get<ArcadeTop>();
-        
-        if (_returnLayer != null && _arcadeTop != null)
-        {
-            _returnLayer.gameObject.SetActive(false);
-        }
         
         if (_fightPrepareLayer == null)
         {

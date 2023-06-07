@@ -38,7 +38,7 @@ public class GoTo : TutorialProcess
         switch (_goto)
         {
             case "arcade":
-                return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.ArcadeFront;
+                return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.QuestInfo;
             case "arena":
                 return ProcessesRunner.Main.currentProcess.Step == MainSceneStep.Arena;
             case "unit":

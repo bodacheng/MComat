@@ -50,7 +50,7 @@ public class ArenaFightOver : UILayer
         Int32.TryParse(FightScene.FightScene.Fight.ID, out var nowStageNo);
         var nextStageNo = nowStageNo + 1;
         var nextFight = await PlayerAccountInfo.Me.ArcadeModeManager.LoadStage(nextStageNo);
-        if (nextFight != null)
+        if (nextFight != null && PlayerAccountInfo.Me.tutorialProgress == "Finished")
         {
             nextBtn.gameObject.SetActive(true);
             nextBtn.onClick.AddListener(() =>
