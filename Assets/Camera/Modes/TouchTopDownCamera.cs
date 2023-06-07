@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
 
 //本相机控制模式也是基于圆形战场，并且相机的朝向固定为Vector3.foward，偏朝下俯视。
@@ -9,6 +8,7 @@ using DG.Tweening;
 
 public class TouchTopDownCamera : CameraMode
 {
+    float startPosSetDuration = 0.3f;
     float height;
     readonly float battlefieldDiameter;
     Vector3 firstPoint;
@@ -23,14 +23,13 @@ public class TouchTopDownCamera : CameraMode
     private float disAwayFromFront = 10f;
     private float zoomScreenDis = 10;
     private float zoomSpeed = 20;
-    private float headDownDegree = 3f;
     private float Height
     {
         get => height;
         set => height = Mathf.Clamp(value, 5, 15);
     }
     
-    public TouchTopDownCamera(float height, float battlefieldDiameter)
+    public TouchTopDownCamera(float height, float battlefieldDiameter)// height == 9
     {
         this.height = height;
         this.battlefieldDiameter = battlefieldDiameter;
@@ -40,14 +39,15 @@ public class TouchTopDownCamera : CameraMode
     public override void Enter(Camera camera)
     {
         Vector3 temp = Vector3.zero;
+        Height = cameraManager.TopDownModeEndRef.position.y;
         mainSequence = DOTween.Sequence().OnStart(() =>
         {
             canTouch = false;
             sameHeightCenter = new Vector3(0,height,0);
             temp = camera.transform.forward;
             temp.y = 0;
-        }).Append(camera.transform.DOMoveY(height, 0.2f)).
-        Join(camera.transform.DOLookAt(temp  - headDownDegree * Vector3.up, 0.5f, AxisConstraint.None,Vector3.up)).
+        }).Append(camera.transform.DOMove(cameraManager.TopDownModeEndRef.position, startPosSetDuration)).
+        Join(camera.transform.DORotateQuaternion(cameraManager.TopDownModeEndRef.rotation, startPosSetDuration)).
         AppendCallback(() =>
         {
             zoomScreenDis = Screen.width / 7;

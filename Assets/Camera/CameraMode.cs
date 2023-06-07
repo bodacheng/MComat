@@ -3,6 +3,7 @@ using UnityEngine;
 
 public abstract class CameraMode
 {
+    public CameraManager cameraManager;
     protected Transform meCenter;
     public Transform target;
     public List<Transform> targets;

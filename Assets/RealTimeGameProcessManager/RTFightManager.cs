@@ -79,7 +79,7 @@ namespace FightScene
             if (ts.Count > 0)
             {
                 _CameraManager.Assign_Camera(
-                    cMode, 
+                    cMode,
                     cMode != C_Mode.TopDown? ts[0] : null, 
                     myTeam == Team.player1  ? team2.GetFightingUnitTs() : team1.GetFightingUnitTs()
                 );

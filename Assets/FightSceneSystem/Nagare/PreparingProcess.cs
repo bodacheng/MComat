@@ -24,8 +24,7 @@ public class PreparingProcess : FSceneProcess
         Sensor.ClearFightingMember();
         UILayerLoader.Remove<ArenaFightOver>();
         RTFightManager.Target._CameraManager.Assign_Camera(C_Mode.NULL, null,null);
-        CameraManager._camera.transform.position = CameraManager._StartPosRef.transform.position;
-        CameraManager._camera.transform.rotation = CameraManager._StartPosRef.transform.rotation;
+        RTFightManager.Target._CameraManager.SetPosToStart();
         UILayerLoader.Load<ProgressLayer>();
         ProgressLayer.LoadingPercent(Translate.Get("LoadingBattle"), 0.5f);
         
