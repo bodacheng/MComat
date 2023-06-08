@@ -17,6 +17,7 @@ public class FightPrepareLayer : UILayer
     [SerializeField] Text team1OneWord;
     [SerializeField] Text team2OneWord;
     [SerializeField] Text arcadeStageNoText;
+    [SerializeField] RewardUI rewardUI;
     [SerializeField] Button toArcadeFrontBtn;
     
     public void SetFightMode(int fightMode)
@@ -49,7 +50,14 @@ public class FightPrepareLayer : UILayer
     {
         arcadeStageNoText.text = "Stage " + arcadeStageNo;
         toArcadeFrontBtn.gameObject.SetActive(PlayerAccountInfo.Me.tutorialProgress == "Finished");
-        toArcadeFrontBtn.onClick.AddListener(()=>toArcadeFront());
+        toArcadeFrontBtn.onClick.AddListener(()=> toArcadeFront());
+        
+        var rewardDic = PlayFabReadClient.StageAwards;
+        var reward = rewardDic[arcadeStageNo];
+        rewardUI.ShowRewards(reward.d,reward.g);
+        int.TryParse(arcadeStageNo, out var arcadeStageNoInt);
+        rewardUI.AwardRender(PlayerAccountInfo.Me.arcadeProcess + 1 > arcadeStageNoInt);
+        rewardUI.gameObject.SetActive(true);
     }
     
     public void ForcePressTeamEdit()

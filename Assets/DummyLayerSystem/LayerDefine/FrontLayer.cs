@@ -32,7 +32,7 @@ public class FrontLayer : UILayer
         ArcadeBtn.onClick.AddListener(
         ()=>
             {
-                PlayerAccountInfo.Me.ArcadeModeManager.DirectToArcadeStage(PlayerAccountInfo.Me.arcadeProcess + 1);
+                PlayerAccountInfo.Me.ArcadeModeManager.DirectToArcadeStage(PlayerAccountInfo.Me.arcadeProcess + 1, true);
             });
         ArenaBtn.onClick.AddListener(() =>
         {

@@ -15,15 +15,10 @@ public class ArcadeFrontPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        PlayFabReadClient.GetStageRewardInfo(Enter);
-    }
-    
-    void Enter()
-    {
         _arcadeTop = UILayerLoader.Load<ArcadeTop>();
         Load().Forget();
     }
-
+    
     async UniTask Load()
     {
         await arcadeModeManager.Initialize();

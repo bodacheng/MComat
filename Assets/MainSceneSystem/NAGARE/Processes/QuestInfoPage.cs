@@ -31,7 +31,7 @@ public class QuestInfoPage : MSceneProcess
                 _layer.SetArcadeFeature(
                     () =>
                     {
-                        PreScene.target.trySwitchToStep(MainSceneStep.ArcadeFront);
+                        PreScene.target.trySwitchToStep(MainSceneStep.ArcadeFront, false);
                     },
                     FightScene.FightScene.Fight.ID
                 );

@@ -10,12 +10,12 @@ public partial class PlayFabReadClient
     private static IDictionary<string, Award> stageAward;
     public static IDictionary<string, Award> StageAwards => stageAward;
     
-    public static void GetStageRewardInfo(Action success)
+    public static void GetStageRewardInfo(Action<bool> finished)
     {
         PlayFabClientAPI.GetTitleData(
             new GetTitleDataRequest
             {
-                Keys = new List<string>(){"stage_awards"}
+                Keys = new List<string>() {"stage_awards"}
             }, 
             result =>
             {
@@ -29,8 +29,13 @@ public partial class PlayFabReadClient
                         stageAward.Add(kv.stageKey, kv.award);
                     }
                 }
-                success.Invoke();
+                finished.Invoke(true);
             },
-            ErrorReport);
+            (x) =>
+            {
+                finished(false);
+                ErrorReport(x);
+            }
+        );
     }
 }

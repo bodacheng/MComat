@@ -106,7 +106,7 @@ public class ArcadeTop : UILayer
         stageBtn.Button.onClick.AddListener(
             ()=>
             {
-                arcadeModeManager.DirectToArcadeStage(stageNo);
+                arcadeModeManager.DirectToArcadeStage(stageNo, false);
             }
         );
         stageBtn.name = "Stage" + stageNo;
@@ -133,9 +133,9 @@ public class ArcadeTop : UILayer
             
             var rewardDic = PlayFabReadClient.StageAwards;
             var reward = rewardDic[stageBtn.StageNo.ToString()];
-            stageBtn.ShowRewards(reward.d,reward.g);
+            stageBtn.RewardUI.ShowRewards(reward.d,reward.g);
+            stageBtn.RewardUI.AwardRender(PlayerAccountInfo.Me.arcadeProcess + 1 > stageBtn.StageNo);
             stageBtn.ChangeColorOfIcons(PlayerAccountInfo.Me.arcadeProcess + 1 >= stageBtn.StageNo);
-            stageBtn.AwardRender(PlayerAccountInfo.Me.arcadeProcess + 1> stageBtn.StageNo);
             stageBtn.transform.SetParent(container.transform);
             stageBtn.transform.localPosition = Vector3.zero;
             stageBtn.transform.localRotation = Quaternion.identity;
