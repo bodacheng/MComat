@@ -75,16 +75,12 @@ public class FightPrepareLayer : UILayer
             teamEditIndicatorText.text = Translate.Get("HasExtraSeat");
             teamEditIndicator.SetActive(true);
         }
-        else if (dataAccess.Units.Dic.Count > 0 && stage.FightMembers.HeroSets.GetValues().Count == 0)
+        else //if (dataAccess.Units.Dic.Count > 0 && stage.FightMembers.HeroSets.GetValues().Count == 0)
         {
             teamEditIndicatorText.text = Translate.Get("MakeYourTeam");
             teamEditIndicator.SetActive(true);
         }
-        else
-        {
-            teamEditIndicator.SetActive(false);
-        }
-        
+
         MemberInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT, false);
         team1OneWord.text = oneWordTeam1;
         team2OneWord.text = oneWordTeam2;

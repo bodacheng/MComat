@@ -32,6 +32,8 @@ public class ArenaFightOver : UILayer
     #endregion
     
     #region arcade
+    [SerializeField] private Text stageTitle;
+    [SerializeField] private Text nextStageTitle;
     [SerializeField] private Button againBtn;
     [SerializeField] private Button nextBtn;
     [SerializeField] private RectTransform adBtnParent;
@@ -52,6 +54,7 @@ public class ArenaFightOver : UILayer
         var nextFight = await PlayerAccountInfo.Me.ArcadeModeManager.LoadStage(nextStageNo);
         if (nextFight != null && PlayerAccountInfo.Me.tutorialProgress == "Finished")
         {
+            nextStageTitle.text = "Stage " + nextStageNo;
             nextBtn.gameObject.SetActive(true);
             nextBtn.onClick.AddListener(() =>
             {
@@ -127,6 +130,11 @@ public class ArenaFightOver : UILayer
     
     public void Step1Anim()
     {
+        if (FightScene.FightScene.Fight.EventType == FightEventType.Quest)
+        {
+            stageTitle.text = "Stage " + FightScene.FightScene.Fight.ID;
+        }
+        
         if (FightLogger.value.GetWinnerTeam() == Team.player1)
         {
             winObject.SetActive(true);
@@ -170,14 +178,17 @@ public class ArenaFightOver : UILayer
             Currencies.CoinCount.Value += awardGd;
             awardGdCurrency.text = awardGd.ToString();
         }
-        
-        FightScene.FightScene.target.ShowAds(
-            extraAdReward, adBtnParent, 
-            () =>
-            {
-                awardDmCurrency.text = (extraAdReward + awardDm).ToString();
-            }
-        );
+
+        if (PlayerAccountInfo.Me.tutorialProgress == "Finished")
+        {
+            FightScene.FightScene.target.ShowAds(
+                extraAdReward, adBtnParent, 
+                () =>
+                {
+                    awardDmCurrency.text = (extraAdReward + awardDm).ToString();
+                }
+            );
+        }
     }
     
     public void ShowArenaPoint(int oldPoint, int currentPoint)
