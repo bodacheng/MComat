@@ -64,7 +64,7 @@ namespace ModelView
         void Update()
         {
             if (target != null) CameraPositionCal();
-            if (_ifShowingSkill)
+            if (IfShowingSkill)
             {
                 SkillsPrintOutLateUpdate();
             }

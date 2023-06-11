@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -20,6 +19,16 @@ namespace mainMenu
             ct.ThrowIfCancellationRequested();
             _btnEffects.Add(element, zt);
             ct.ThrowIfCancellationRequested();
+        }
+
+        public void TurnShowingTagEffects(bool on)
+        {
+            if (!on)
+                _focusingEffectsGroup?.CloseTagEffects();
+            else
+            {
+                _focusingEffectsGroup?.OpenTagEffects();
+            }
         }
         
         public void CloseShowingTagEffects()

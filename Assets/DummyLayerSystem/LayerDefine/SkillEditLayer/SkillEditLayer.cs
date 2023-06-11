@@ -5,6 +5,7 @@ using mainMenu;
 using UnityEngine;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
+using DummyLayerSystem;
 using ModelView;
 using Button = UnityEngine.UI.Button;
 
@@ -19,6 +20,7 @@ public partial class SkillEditLayer : UILayer
     
     [Header("技能石盒")]
     public SkillStonesBox stonesBox;
+    [SerializeField] RectTransform stoneBoxRect;
     
     [Header("技能信息")]
     [SerializeField] SkillStoneDetail skillStoneDetail;
@@ -28,12 +30,107 @@ public partial class SkillEditLayer : UILayer
     
     [Header("Tutorial")]
     [SerializeField] ClickNextTutorial clickNextTutorial1, clickNextTutorial2;
-
+    [SerializeField] GameObject mask;
+    
     public bool Initialized { get; set; } = false;
     
     // For Transition Effects
     private readonly List<Tween> _tweens = new List<Tween>();
     private readonly List<GameObject> _transitionEffects = new List<GameObject>();
+    
+    async void ShowCombo()
+    {
+        stonesBox._tabEffects.TurnShowingTagEffects(false);
+        
+        nineSlot.comboShowBtn.gameObject.SetActive(false);
+        nineSlot.comboCloseBtn.gameObject.SetActive(false);
+        
+        var valid = nineSlot.CheckEditBasedOnCurrent();
+        if (valid != SkillSet.SkillEditError.Perfect)
+            return;
+
+        stoneBoxRect.gameObject.SetActive(false);
+        nineSlot.IntroAboutCombo(true);
+        var returnLayer = UILayerLoader.Get<ReturnLayer>();
+        returnLayer?.gameObject.SetActive(false);
+        mask.gameObject.SetActive(true);
+        var list = nineSlot.GetRandomComboStones();
+        for (var i = 0; i < list.Count; i++)
+        {
+            var stone = list[i];
+            connector.FocusingC._MyBehaviorRunner._SkillCancelFlag.Cancel_Flag = false;
+            await RunSkillAndShowTransition_Combo(stone, i < list.Count - 1 ? list[i+1] : null);
+            await UniTask.WaitUntil(() => connector.FocusingC._MyBehaviorRunner._SkillCancelFlag.Cancel_Flag);
+        }
+        
+        mask.gameObject.SetActive(false);
+        returnLayer?.gameObject.SetActive(true);
+        
+        nineSlot.comboShowBtn.gameObject.SetActive(true);
+        nineSlot.comboCloseBtn.gameObject.SetActive(true);
+    }
+
+    void CloseComboShow()
+    {
+        nineSlot.IntroAboutCombo(false);
+        stoneBoxRect.gameObject.SetActive(true);
+        nineSlot.comboCloseBtn.gameObject.SetActive(false);
+        stonesBox._tabEffects.TurnShowingTagEffects(true);
+    }
+    
+    async UniTask RunSkillAndShowTransition_Combo(SKStoneItem stone, SKStoneItem endStone)
+    {
+        if (endStone != null)
+        {
+            var slot = nineSlot.GetSlotByCell(stone.GetCell());
+            var endSlot = nineSlot.GetSlotByCell(endStone.GetCell());
+            TransitionEffect(slot, endSlot);
+        }
+        //nineSlot.ShowTransition(slot, TransitionEffect);
+        stonesBox._tabEffects.SkillButtonExplosion(stone._SkillConfig.SP_LEVEL, 
+            PosCal.GetWorldPos(PreScene.target.postProcessCamera, stone.GetComponent<RectTransform>(), 3), 
+            stonesBox._tabEffects.transform);
+        await connector.SkillShowRunWithPrepare(stone._SkillConfig.REAL_NAME, false);
+    }
+    
+    async UniTask RunSkillAndShowTransition(SKStoneItem stone)
+    {
+        var slot = nineSlot.GetSlotByCell(stone.GetCell());
+        nineSlot.ShowTransition(slot, TransitionEffect);
+        // stonesBox._tabEffects.SkillButtonExplosion(stone._SkillConfig.SP_LEVEL, 
+        //     PosCal.GetWorldPos(PreScene.target.postProcessCamera, stone.GetComponent<RectTransform>(), 3), 
+        //     stonesBox._tabEffects.transform);
+        await connector.SkillShowRunWithPrepare(stone._SkillConfig.REAL_NAME, true);
+    }
+    
+    async void TransitionEffect(SkillStoneSlot start, SkillStoneSlot end)
+    {
+        var startPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera,
+            start._cell.GetComponent<RectTransform>(), 3);
+        var endPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera,
+            end._cell.GetComponent<RectTransform>(), 3);
+                    
+        var transitionEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>("gachastar0");
+        _transitionEffects.Add(transitionEffect.gameObject);
+        if (this == null)
+        {
+            Destroy(transitionEffect.gameObject);
+            return;
+        }
+        transitionEffect.transform.position = startPos;
+        var tween = transitionEffect.transform.DOMove(endPos, 1).OnComplete(
+            async () =>
+            {
+                transitionEffect.Clear(true);
+                await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+                if (transitionEffect != null)
+                {
+                    Destroy(transitionEffect.gameObject);
+                }
+            }
+        );
+        _tweens.Add(tween);
+    }
     
     public async UniTask Setup(Action<SkillEditLayer> toDo = null)
     {
@@ -42,45 +139,12 @@ public partial class SkillEditLayer : UILayer
         stonesBox.GenerateCells(9);
         gameObject.SetActive(false);
         nineSlot.PrintSkillInfo = skillStoneDetail.RefreshInfo;
-        nineSlot.StartUp((x,stone) =>
+        nineSlot.StartUp(
+            x=>
             {
-                var slot = nineSlot.GetSlotByCell(stone.GetCell());
-                async void TransitionEffect(SkillStoneSlot start, SkillStoneSlot end)
-                {
-                    var startPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera,
-                        start._cell.GetComponent<RectTransform>(), 3);
-                    var endPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera,
-                        end._cell.GetComponent<RectTransform>(), 3);
-                    
-                    var transitionEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>("gachastar0");
-                    _transitionEffects.Add(transitionEffect.gameObject);
-                    if (this == null)
-                    {
-                        Destroy(transitionEffect.gameObject);
-                        return;
-                    }
-                    transitionEffect.transform.position = startPos;
-                    var tween = transitionEffect.transform.DOMove(endPos, 1).OnComplete(
-                        async () =>
-                        {
-                            transitionEffect.Clear(true);
-                            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
-                            if (transitionEffect != null)
-                            {
-                                Destroy(transitionEffect.gameObject);
-                            }
-                        }
-                    );
-                    _tweens.Add(tween);
-                }
-                nineSlot.ShowTransition(slot, TransitionEffect);
-                stonesBox._tabEffects.SkillButtonExplosion(stone._SkillConfig.SP_LEVEL, 
-                    PosCal.GetWorldPos(PreScene.target.postProcessCamera, stone.GetComponent<RectTransform>(), 3), 
-                    stonesBox._tabEffects.transform);
-                connector.SkillShowRunWithPrepare(x).Forget();
+                RunSkillAndShowTransition(x).Forget();
             }
         );
-        
         stonesBox.AddFeatureToCells(StoneCellFeature);
         stonesBox.IniExTabs();
         
@@ -102,6 +166,12 @@ public partial class SkillEditLayer : UILayer
         gameObject.SetActive(true);
         
         CameraConnectorCal(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+        
+        nineSlot.comboShowBtn.onClick.RemoveAllListeners();
+        nineSlot.comboShowBtn.onClick.AddListener(ShowCombo);
+        nineSlot.comboCloseBtn.onClick.RemoveAllListeners();
+        nineSlot.comboCloseBtn.onClick.AddListener(CloseComboShow);
+        
         Initialized = true;
     }
     

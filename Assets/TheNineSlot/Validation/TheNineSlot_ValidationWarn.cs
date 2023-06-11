@@ -11,6 +11,7 @@ namespace mainMenu
             // 第一列技能必须有普通技能
             var valR = CheckEditBasedOnCurrent();
             ValidationWarn(valR);
+            comboShowBtn.gameObject.SetActive(valR == SkillSet.SkillEditError.Perfect);
             return valR;
         }
         
@@ -39,6 +40,17 @@ namespace mainMenu
                     validationWarn.gameObject.SetActive(false);
                     break;
             }
+        }
+        
+        public void IntroAboutCombo(bool on)
+        {
+            validationWarnSide.gameObject.SetActive(on);
+            validationWarnSide.text = Translate.Get("IntroOfCombo");
+            
+            randomBtn.gameObject.SetActive(!on);
+            removeAllBtn.gameObject.SetActive(!on);
+            ConfirmSkillChangeButton.gameObject.SetActive(!on);
+            ResetButton.gameObject.SetActive(!on);
         }
     }
 }

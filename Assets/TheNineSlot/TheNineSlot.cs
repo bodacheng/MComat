@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using NoSuchStudio.Common;
 using UnityEngine;
 using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
@@ -15,6 +16,8 @@ namespace mainMenu
         
         [Header("Validation Warning")]
         [SerializeField] Text validationWarn;
+
+        [SerializeField] Text validationWarnSide;
         
         [Header("九格")]
         [SerializeField] StoneCell
@@ -54,6 +57,8 @@ namespace mainMenu
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _tabEffects;
         
+        public Button comboShowBtn, comboCloseBtn;
+        
         SkillStoneSlot _a1Slot, _a2Slot, _a3Slot;
         SkillStoneSlot _b1Slot, _b2Slot, _b3Slot;
         SkillStoneSlot _c1Slot, _c2Slot, _c3Slot;
@@ -61,6 +66,43 @@ namespace mainMenu
         public readonly List<SkillStoneSlot> AllSlot = new List<SkillStoneSlot>();
 
         public Action<string> PrintSkillInfo;
+
+        // For Combo Instruction
+        public List<SKStoneItem> GetRandomComboStones()
+        {
+            var returnValue = new List<SKStoneItem>();
+            void AddStoneItem(SkillStoneSlot slot)
+            {
+                if (slot._cell.GetItem() != null)
+                {
+                    returnValue.Add(slot._cell.GetItem());
+                }
+            }
+
+            var list1 = new List<SkillStoneSlot>()
+            {
+                _a1Slot, _b1Slot, _c1Slot
+            };
+            var list2 = new List<SkillStoneSlot>()
+            {
+                _a2Slot, _b2Slot, _c2Slot
+            };
+            var list3 = new List<SkillStoneSlot>()
+            {
+                _a3Slot, _b3Slot, _c3Slot
+            };
+
+            var ComboList = new List<SkillStoneSlot>()
+            {
+                list1.Random(), list2.Random(), list3.Random(),list1.Random()
+            };
+            
+            AddStoneItem(ComboList[0]);
+            AddStoneItem(ComboList[1]);
+            AddStoneItem(ComboList[2]);
+            AddStoneItem(ComboList[3]);
+            return returnValue;
+        }
 
         public SkillStoneSlot GetSlotByCell(StoneCell cell)
         {
@@ -130,7 +172,7 @@ namespace mainMenu
             return _focusingSlot;
         }
         
-        void SlotBehaviour(SkillStoneSlot slot, Action<string, SKStoneItem> playSkill)
+        void SlotBehaviour(SkillStoneSlot slot, Action<SKStoneItem> playSkill)
         {
             void ButtonFeature()
             {
@@ -141,7 +183,7 @@ namespace mainMenu
                 if (stone != null && stone._SkillConfig != null)
                 {
                     PrintSkillInfo.Invoke(stone.instanceId);
-                    playSkill.Invoke(stone._SkillConfig.REAL_NAME, stone);
+                    playSkill.Invoke(stone);
                 }else{
                     PrintSkillInfo.Invoke(null);
                 }
@@ -178,7 +220,7 @@ namespace mainMenu
             }));
         }
         
-        public void StartUp(Action<string, SKStoneItem> runSkill)
+        public void StartUp(Action<SKStoneItem> runSkill)
         {
             SelectedRender(null);
             

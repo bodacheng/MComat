@@ -36,7 +36,8 @@ namespace ModelView
         public Data_Center FocusingC => _focusingC;
         
         string _focusRId;
-        bool _ifShowingSkill = false;
+        bool IfShowingSkill { get; set; } = false;
+
         private readonly SingleThreadProcessor _singleThreadProcessor = new SingleThreadProcessor();
         public int TaskRunningCount => _singleThreadProcessor.TaskRunningCount;
         public async UniTask ShowModel(string recordID)
@@ -143,9 +144,9 @@ namespace ModelView
             }
         }
         
-        public async UniTask SkillShowRunWithPrepare(string skillName)
+        public async UniTask SkillShowRunWithPrepare(string skillName, bool waitLastMotionEnd = true)
         {
-            if (_ifShowingSkill)
+            if (IfShowingSkill && waitLastMotionEnd)
                 return;
             
             var unitConfig = Units.GetUnitConfig(_focusRId);
@@ -159,7 +160,7 @@ namespace ModelView
                 {
                     return;
                 }
-                _ifShowingSkill = true;
+                IfShowingSkill = true;
                 _focusingC.Animation_Manger.AnimationTrigger(skillName, true,0.25f);
                 _focusingC.Animation_Manger.TriggerExpression(Facial.aggressive);
             }
@@ -175,7 +176,7 @@ namespace ModelView
                 {
                     _focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.25f);
                     _focusingC.Animation_Manger.TriggerExpression(Facial.smile);
-                    _ifShowingSkill = false;
+                    IfShowingSkill = false;
                     resetModelPosTween = _focusingC.WholeT.transform.DOMove(modelPos, 1);
                 }
             }
