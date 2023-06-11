@@ -11,7 +11,7 @@ namespace mainMenu
             // 第一列技能必须有普通技能
             var valR = CheckEditBasedOnCurrent();
             ValidationWarn(valR);
-            comboShowBtn.gameObject.SetActive(valR == SkillSet.SkillEditError.Perfect);
+            comboShowBtn.gameObject.SetActive(valR == SkillSet.SkillEditError.Perfect && PlayerAccountInfo.Me.tutorialProgress == "Finished");
             return valR;
         }
         

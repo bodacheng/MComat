@@ -2,14 +2,16 @@ using DummyLayerSystem;
 
 public class ForceBack : TutorialProcess
 {
+    private readonly bool forceBack;
     private ReturnLayer _returnLayer;
     
     public delegate bool WaitOverDelegate();
     readonly WaitOverDelegate _waitForThis;
     
-    public ForceBack(WaitOverDelegate waitOverDelegate)
+    public ForceBack(WaitOverDelegate waitOverDelegate, bool forBack = true)
     {
         _waitForThis = waitOverDelegate;
+        this.forceBack = forBack;
     }
     
     public override void ProcessEnter()
@@ -35,7 +37,10 @@ public class ForceBack : TutorialProcess
         if (_returnLayer != null)
         {
             _returnLayer.gameObject.SetActive(true);
-            _returnLayer.ForceBackMode(true);
+            if (forceBack)
+                _returnLayer.ForceBackMode(true);
+            else
+                _returnLayer.HalfForceBackMode();
         }
     }
 }

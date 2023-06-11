@@ -38,7 +38,7 @@ public partial class SkillEditLayer : UILayer
     private readonly List<Tween> _tweens = new List<Tween>();
     private readonly List<GameObject> _transitionEffects = new List<GameObject>();
     
-    async void ShowCombo()
+    public async UniTask ShowCombo()
     {
         stonesBox._tabEffects.TurnShowingTagEffects(false);
         
@@ -67,7 +67,7 @@ public partial class SkillEditLayer : UILayer
         returnLayer?.gameObject.SetActive(true);
         
         nineSlot.comboShowBtn.gameObject.SetActive(true);
-        nineSlot.comboCloseBtn.gameObject.SetActive(true);
+        nineSlot.comboCloseBtn.gameObject.SetActive(true && PlayerAccountInfo.Me.tutorialProgress == "Finished");
     }
 
     void CloseComboShow()
@@ -168,7 +168,7 @@ public partial class SkillEditLayer : UILayer
         CameraConnectorCal(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
         
         nineSlot.comboShowBtn.onClick.RemoveAllListeners();
-        nineSlot.comboShowBtn.onClick.AddListener(ShowCombo);
+        nineSlot.comboShowBtn.onClick.AddListener(()=> ShowCombo().Forget());
         nineSlot.comboCloseBtn.onClick.RemoveAllListeners();
         nineSlot.comboCloseBtn.onClick.AddListener(CloseComboShow);
         

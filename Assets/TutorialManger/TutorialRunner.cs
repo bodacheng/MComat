@@ -24,15 +24,16 @@ public class TutorialRunner
         var goToUnitList = new GoTo("unit");
         var openSkillEdit = new OpenSkillEdit("3");
         var skillEditTry = new SkillEditTry("openInstruction1");
-        var forceBack = new ForceBack(
-            () => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage
-        );
-        
+        var explainCombo = new ExplainCombo();
+        var forceBack1 = new ForceBack(() => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.UnitList, false);
+        var forceBack2 = new ForceBack(() => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage);
         _tutorialProcesses.Clear();
         _tutorialProcesses.Add(goToUnitList);
         _tutorialProcesses.Add(openSkillEdit);
         _tutorialProcesses.Add(skillEditTry);
-        _tutorialProcesses.Add(forceBack);
+        _tutorialProcesses.Add(explainCombo);
+        _tutorialProcesses.Add(forceBack1);
+        _tutorialProcesses.Add(forceBack2);
     }
     
     void GenerateStep2Tutorial()
@@ -59,9 +60,7 @@ public class TutorialRunner
     {
         var goTo = new GoTo("gotcha");
         var tryGotcha = new TryGotcha();
-        var forceBack = new ForceBack(
-            () => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage
-        );
+        var forceBack = new ForceBack(() => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage);
         
         _tutorialProcesses.Clear();
         _tutorialProcesses.Add(goTo);
@@ -74,9 +73,7 @@ public class TutorialRunner
         var goTo = new GoTo("unit");
         var openSkillEdit = new OpenSkillEdit("1");
         var skillEditTry = new SkillEditTry("openInstruction2");
-        var forceBack = new ForceBack(
-            () => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage
-        );
+        var forceBack = new ForceBack(() => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage);
         _tutorialProcesses.Clear();
         _tutorialProcesses.Add(goTo);
         _tutorialProcesses.Add(openSkillEdit);

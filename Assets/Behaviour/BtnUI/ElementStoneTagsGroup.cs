@@ -33,15 +33,18 @@ public class ElementStoneTagsGroup
         }
         foreach(var keyValuePair in _btnPressedEffects)
         {
-            keyValuePair.Value.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            if (keyValuePair.Value != null)
+                keyValuePair.Value.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
         foreach(var keyValuePair in _exTagEffects)
         {
-            keyValuePair.Value.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            if (keyValuePair.Value != null)
+                keyValuePair.Value.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
         foreach(var keyValuePair in _slotEffects)
         {
-            keyValuePair.Value.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            if (keyValuePair.Value != null)
+                keyValuePair.Value.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
         _selectedTab.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
@@ -50,20 +53,26 @@ public class ElementStoneTagsGroup
     {
         foreach(var keyValuePair in _btnEffectsSetsForStoneBox)
         {
-            keyValuePair.Value.gameObject.SetActive(true);
-            keyValuePair.Value.Play(true);
+            if (keyValuePair.Value != null)
+            {
+                keyValuePair.Value.gameObject.SetActive(true);
+                keyValuePair.Value.Play(true);
+            }
         }
         foreach(var keyValuePair in _btnPressedEffects)
         {
-            keyValuePair.Value.Play(true);
+            if (keyValuePair.Value != null)
+                keyValuePair.Value.Play(true);
         }
         foreach(var keyValuePair in _exTagEffects)
         {
-            keyValuePair.Value.Play(true);
+            if (keyValuePair.Value != null)
+                keyValuePair.Value.Play(true);
         }
         foreach(var keyValuePair in _slotEffects)
         {
-            keyValuePair.Value.Play(true);
+            if (keyValuePair.Value != null)
+                keyValuePair.Value.Play(true);
         }
         _selectedTab.Play(true);
     }

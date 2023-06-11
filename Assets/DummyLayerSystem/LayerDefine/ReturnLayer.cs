@@ -72,6 +72,13 @@ public class ReturnLayer : UILayer
         indicator.gameObject.SetActive(on);
         ToTop();
     }
+    
+    public void HalfForceBackMode()
+    {
+        indicator.gameObject.SetActive(true);
+        curtain.gameObject.SetActive(false);
+        ToTop();
+    }
 
     public static void AddUniTaskCancel(CancellationTokenSource cts)
     {
