@@ -19,7 +19,7 @@ namespace Soul
         {
             if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && _BasicPhysicSupport.hiddenMethods.Grounded)
             {
-                Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim("lay"), true, hurtAnimDuration);
+                AnimationManger.AnimationTrigger(AnimationManger.GetRandomHurtAnim("lay"), true, hurtAnimDuration);
                 return;
             }
             Vector3 point = newValue.DamageEffectPoint;
@@ -38,7 +38,7 @@ namespace Soul
             {
                 hurtAnimKey = newValue.DamageEffectPoint.y > _DATA_CENTER.geometryCenter.position.y ? "high" : "low";
             }
-            Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomHurtAnim(hurtAnimKey), true, hurtAnimDuration);
+            AnimationManger.AnimationTrigger(AnimationManger.GetRandomHurtAnim(hurtAnimKey), true, hurtAnimDuration);
             RotateToTargetTween(rotateToTarget, 0.1f);
         }
 
@@ -156,8 +156,8 @@ namespace Soul
                     return;
             }
             
-            Animation_Manger.SetTrigger("face_reset");
-            Animation_Manger.SetTrigger("hurt");
+            AnimationManger.SetTrigger("face_reset");
+            AnimationManger.SetTrigger("hurt");
         }
 
         public override void _State_FixedUpdate1()

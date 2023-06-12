@@ -352,7 +352,7 @@ namespace HittingDetection
             if (_WeaponMode == WeaponMode.EnergyFromBodyWeapon)
             {
                 if (_attackerRef != null)
-                    _attackerRef.Center.Animation_Manger.FrameFreeze();
+                    _attackerRef.Center.AnimationManger.FrameFreeze();
                 else
                 {
                     Debug.Log("武器引用逻辑错误:"+this.gameObject.name);

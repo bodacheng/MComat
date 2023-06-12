@@ -60,7 +60,7 @@ namespace Soul
         #region Capacity Enter Exit
         public override bool Capacity_Exit_Condition()
         {
-            return AnimationCasualFinishedFlag() && this.Animation_Manger._toUse.name == clip_name;
+            return AnimationCasualFinishedFlag() && this.AnimationManger._toUse.name == clip_name;
         }
 
         #endregion
@@ -123,14 +123,14 @@ namespace Soul
             {
                 //一般来说下面这些情况不跑？
                 _phase = Phase.noRushState;
-                Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
+                AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
                 return;
             }
 
             collider = Sensor.GetClosestEnemyColliderInSensorRange();
             if (collider == null)
             {
-                Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
+                AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
                 _phase = Phase.farFromReach;
                 return;
             }
@@ -138,7 +138,7 @@ namespace Soul
             if (distance < Sensor.SensorRadius / 3)//内环检测结果
             {
                 _phase = Phase.reachedFromBeginning;
-                Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
+                AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
                 if (Sensor.GetEnemiesByDistance(false).Count > 0)
                 {
                     if (Sensor.GetEnemiesByDistance(false)[0] != null)
@@ -162,23 +162,23 @@ namespace Soul
                 if (_AIStateRunner.GetLastState().nextAttackCanRushFirst && StateType == BehaviorType.GR)
                 {
                     _phase = Phase.needToRush;
-                    if (Animation_Manger.TryAnimationClip(_dashClipName) != null)
-                        Animation_Manger.AnimationTrigger(_dashClipName, true, CommonSetting.CharacterAnimDuration);
+                    if (AnimationManger.TryAnimationClip(_dashClipName) != null)
+                        AnimationManger.AnimationTrigger(_dashClipName, true, CommonSetting.CharacterAnimDuration);
                     else
                     {
-                        Animation_Manger.PlayLayerAnim(null, true, 0f);
+                        AnimationManger.PlayLayerAnim(null, true, 0f);
                     }
                     _BuffsRunner.RunSubCoroutineOfState(_rushCoroutine);
                 }
                 else
                 {
                     _phase = Phase.reachedFromBeginning;//这个环节最绕脑子，大概指的是如果外环也有敌人，就当“已经到达”。但其实从出发点将，一般的普通近距离攻击在中距离下也不会触发才对
-                    Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
+                    AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
                     return;
                 }
             }
 
-            Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
+            AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
             _phase = Phase.farFromReach;
             return;
         }
@@ -206,7 +206,7 @@ namespace Soul
                         }
                         if (_phase == Phase.reached)
                         {
-                            Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
+                            AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
                             _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                             _Rigidbody.velocity = Vector3.zero;
                             Sensor.GetEnemiesByDistance(true);
@@ -226,7 +226,7 @@ namespace Soul
                     }
                     if (_phase == Phase.reached)
                     {
-                        Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
+                        AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
                         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                         _Rigidbody.velocity = Vector3.zero;
                         Sensor.DetectionStart(5, false);

@@ -19,7 +19,7 @@ namespace Soul
         protected SkillCancelFlag _SkillCancelFlag;
         protected BO_Weapon_Animation_Events _Weapon_Animation_Events;
         protected ShaderManager shaderManager;
-        protected AnimationManger Animation_Manger;
+        protected AnimationManger AnimationManger;
         protected BuffsRunner _BuffsRunner;
         protected BlendShapeProxy blendShapeProxy;
         protected Personality_events pEvents;
@@ -78,7 +78,7 @@ namespace Soul
             this.FightParamsRef = _DATA_CENTER.FightDataRef;
             this.shaderManager = _DATA_CENTER._ShaderManager;
             this._AIStateRunner = _DATA_CENTER._MyBehaviorRunner;
-            this.Animation_Manger = _DATA_CENTER.Animation_Manger;
+            this.AnimationManger = _DATA_CENTER.AnimationManger;
             this._SkillCancelFlag = _DATA_CENTER._SkillCancelFlag;
             this._BO_Ani_E = _DATA_CENTER._BO_Ani_E;
             this._Weapon_Animation_Events = _DATA_CENTER.bO_Weapon_Animation_Events;

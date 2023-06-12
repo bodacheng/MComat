@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -220,6 +219,10 @@ public partial class AnimationManger
                 foreach (AnimationEvent e in clip.events)
                 {
                     if (e.functionName == "MagicForward")
+                    {
+                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element));
+                    }
+                    if (e.functionName == "MagicForwardOnBody")
                     {
                         tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element));
                     }

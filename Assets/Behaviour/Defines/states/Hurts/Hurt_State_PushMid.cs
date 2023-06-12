@@ -19,7 +19,7 @@ namespace Soul
             }
             else
             {
-                Animation_Manger.AnimationTrigger(Animation_Manger.GetRandomKnockOffAnim(), true, 0.1f);
+                AnimationManger.AnimationTrigger(AnimationManger.GetRandomKnockOffAnim(), true, 0.1f);
             }
             _tween = gameObject.transform.DOMove(MidDistanceFromMe, 0.3f);
             _physicMissionDisposable = new SingleAssignmentDisposable();

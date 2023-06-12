@@ -23,6 +23,8 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] int Sp3SkillExGet = 0;
     [SerializeField] int getHurtExGet = 10;
     [SerializeField] float slightHitLastingTime = 0.2f, lightHitLastingTime = 0.3f, heavyHitLastingTime = 0.6f, superHitLastingTime = 1f, highHitLastingTime = 0.8f;
+    [SerializeField] float hurtFreezeInDuration = 0.01f;
+    [SerializeField] float hurtFreezeOutDuration = 0.2f;
     [SerializeField] float normalAttackPosFixingTime = 0.1f;
     [SerializeField] float knockOffExtent = 20f;
     [SerializeField] float MaxKnockoffLaidGroundTime = 2f;
@@ -54,6 +56,8 @@ public class FightGlobalSetting : ScriptableObject
     public static int _Sp3SkillExGet;
     public static int _getHurtExGet;
     public static float SlightHitLastingTime, LightHitLastingTime, HeavyHitLastingTime, SuperHitLastingTime;
+    public static float HurtFreezeInDuration;
+    public static float HurtFreezeOutDuration;
     public static float KnockOffExtent;
     public static float _MaxKnockoffLaidGroundTime;
     public static float _CanGetUpAfterKnockoffToGround;
@@ -101,6 +105,8 @@ public class FightGlobalSetting : ScriptableObject
         HeavyHitLastingTime = heavyHitLastingTime;
         SuperHitLastingTime = superHitLastingTime;
         HighHitLastingTime = highHitLastingTime;
+        HurtFreezeInDuration = hurtFreezeInDuration;
+        HurtFreezeOutDuration = hurtFreezeOutDuration;
         NormalAttackPosFixingTime = normalAttackPosFixingTime;
         
         KnockOffExtent = knockOffExtent;

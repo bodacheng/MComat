@@ -17,8 +17,8 @@ namespace Soul
             base.AI_State_enter();
             _BasicPhysicSupport.OpenEnemyTouchingDrag(1);
             _Rigidbody.velocity = Vector3.zero;
-            Animation_Manger.SetTrigger("face_reset");
-            Animation_Manger.SetTrigger("confident");
+            AnimationManger.SetTrigger("face_reset");
+            AnimationManger.SetTrigger("confident");
             _Animator.SetFloat("speed", 0f);
             _SkillCancelFlag.turn_off_flag();
             _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
@@ -30,7 +30,7 @@ namespace Soul
                     RotateToTargetTween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
             }
             _Animator.applyRootMotion = true;
-            Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
+            AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
         }
 
         public override void AI_State_exit()

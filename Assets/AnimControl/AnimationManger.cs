@@ -37,14 +37,15 @@ public partial class AnimationManger
         set => Animator = value;
     }
 
+    private Sequence animFreezeSequence;
+    public Sequence AnimFreezeSequence => animFreezeSequence;
     public void FrameFreeze()
     {
-        DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed - 1, 0.01f).OnComplete(() =>
-        {
-            DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed, 0.1f).SetEase(Ease.InExpo);
-        });
+        animFreezeSequence = DOTween.Sequence();
+        animFreezeSequence.Append(DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed - 1, FightGlobalSetting.HurtFreezeInDuration))
+            .Append(DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed, FightGlobalSetting.HurtFreezeOutDuration).SetEase(Ease.InExpo));
     }
-
+    
     public AnimationClip TryAnimationClip(string clip_name)
     {
         if (clip_name != null)

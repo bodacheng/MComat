@@ -49,7 +49,7 @@ namespace Soul
             _timeCounter = 0f;
             _Animator.applyRootMotion = false;
             _Weapon_Animation_Events.ClearMarkerManagers();
-            Animation_Manger.PlayLayerAnim(null, true, 0.05f);
+            AnimationManger.PlayLayerAnim(null, true, 0.05f);
             pEvents.CloseAllPersonalityEffects();
             _mainCam = CameraManager._camera.transform;
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;

@@ -175,14 +175,14 @@ public partial class BO_Ani_E : MonoBehaviour
             }
         }
         
-        public void MagicForward_core(string objectname, Vector3 pos, Quaternion qua, int speedGrade, string logForStateKey)
+        public void MagicForward_core(string objectName, Vector3 pos, Quaternion qua, int speedGrade, string logForStateKey, bool asFlyerWeapon = true)
         {
-            if (string.IsNullOrEmpty(objectname))
+            if (string.IsNullOrEmpty(objectName))
             {
                 return;
             }
             
-            Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool(objectname, Ani_E.magic_path);
+            Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool(objectName, Ani_E.magic_path);
             if (Ani_E.target_pool != null)
             {
                 Ani_E.processingHitBox = Ani_E.target_pool.Rent();
@@ -190,7 +190,7 @@ public partial class BO_Ani_E : MonoBehaviour
                 Ani_E.processingHitBox.transform.position = pos;
                 Ani_E.processingHitBox.transform.rotation = qua;
                 Ani_E.processingHitBox._HitBox.SetReferenceTransformInfo(Ani_E.processingHitBox.transform);
-                Ani_E.processingHitBox._HitBox._WeaponMode = WeaponMode.FlyerWeapon;
+                Ani_E.processingHitBox._HitBox._WeaponMode = asFlyerWeapon ? WeaponMode.FlyerWeapon : WeaponMode.EnergyFromBodyWeapon;
                 Ani_E.processingHitBox.SetBOAniE(Ani_E);
                 if (Ani_E.processingHitBox.TrackControl != null && Ani_E.processingHitBox.TrackControl._TrackMode == TrackControl.TrackMode.Navigation)
                 {

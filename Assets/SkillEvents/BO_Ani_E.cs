@@ -87,6 +87,17 @@ public partial class BO_Ani_E : MonoBehaviour
             e.intParameter,
             null);
     }
+    
+    public void MagicForwardOnBody(AnimationEvent e)
+    {
+        this.hiddenMethods.MagicForward_core(
+            e.stringParameter,
+            _DATA_CENTER.geometryCenter.position + transform.forward * e.floatParameter,
+            transform.rotation,
+            e.intParameter,
+            null, 
+            false);
+    }
 
     public void MagicToEnemy(AnimationEvent e)
     {

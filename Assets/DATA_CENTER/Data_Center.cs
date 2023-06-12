@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using UniRx;
 using Soul;
@@ -18,7 +19,7 @@ public partial class Data_Center : MonoBehaviour
     public Transform WholeT;
     public AudioSource _AudioSource;
     public readonly Sensor Sensor = new Sensor();
-    public readonly AnimationManger Animation_Manger = new AnimationManger();
+    public readonly AnimationManger AnimationManger = new AnimationManger();
     public readonly FightParamsReference FightDataRef = new FightParamsReference();
     public readonly BuffsRunner buffsRunner = new BuffsRunner();
     public SkillCancelFlag _SkillCancelFlag;
@@ -55,7 +56,12 @@ public partial class Data_Center : MonoBehaviour
         if (geometryCenter == null)
             geometryCenter = gameObject.transform; 
     }
-    
+
+    private void OnDestroy()
+    {
+        AnimationManger.AnimFreezeSequence?.Kill();
+    }
+
     private List<Transform> posCalTrans = new List<Transform>();
     public Vector3 GetFarthestPositionFromZero()
     {
@@ -79,7 +85,7 @@ public partial class Data_Center : MonoBehaviour
     {
         if (!Phase1Initialized)
         {
-            Animation_Manger.AnimatorRef =  WholeT.GetComponent<Animator>();
+            AnimationManger.AnimatorRef =  WholeT.GetComponent<Animator>();
             _facialAnimManager = WholeT.GetComponent<FacialAnimManager>();
             Sensor.Center = this.geometryCenter;
             Sensor.SensorRadius = 15f;
@@ -88,7 +94,7 @@ public partial class Data_Center : MonoBehaviour
             _BasicPhysicSupport.Rigidbody.mass = 500f;
             BodyElementTagAndLayerSet(TeamConfig.DefaultSet);
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(FightDataRef,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
-            await Animation_Manger.PreloadBasicPersonalAnims(type, basicPackName, _facialAnimManager);
+            await AnimationManger.PreloadBasicPersonalAnims(type, basicPackName, _facialAnimManager);
             _BO_Ani_E.BasicMagicAndEffectsPathDefine(element);
             posCalTrans = new List<Transform>()
             {
@@ -155,7 +161,7 @@ public partial class Data_Center : MonoBehaviour
         //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
         // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
         var toLoadSkillAnimsNames = _MyBehaviorRunner.PassSkillTypeKeys();
-        tasks.Add(Animation_Manger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, element));
+        tasks.Add(AnimationManger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, element));
         await UniTask.WhenAll(tasks);
     }
 

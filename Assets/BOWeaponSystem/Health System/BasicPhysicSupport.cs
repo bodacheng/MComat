@@ -120,7 +120,7 @@ public class BasicPhysicSupport : MonoBehaviour
         public void RecoverRootPosChange( )
         {
             if (!TouchingEnemy() && _BasicPhysicSupport.Rigidbody.velocity == Vector3.zero)
-                _BasicPhysicSupport._DATA_CENTER.WholeT.transform.position += _BasicPhysicSupport._DATA_CENTER.Animation_Manger.AnimatorRef.deltaPosition;
+                _BasicPhysicSupport._DATA_CENTER.WholeT.transform.position += _BasicPhysicSupport._DATA_CENTER.AnimationManger.AnimatorRef.deltaPosition;
         }
         
         public void LockPos()

@@ -24,7 +24,7 @@ namespace Soul
             _Animator.SetFloat("speed", 0f);
             Sensor.DetectionStart(5, false);
             _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-            Animation_Manger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
+            AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
         }
 
         public override void C_State_enter()

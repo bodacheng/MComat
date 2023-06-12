@@ -157973,7 +157973,7 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.13333334
-    functionName: MagicForward
+    functionName: MagicForwardOnBody
     data: adam_spin
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0.3
@@ -157987,7 +157987,7 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.68333334
-    functionName: MagicForward
+    functionName: MagicForwardOnBody
     data: adam_spin
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0.3

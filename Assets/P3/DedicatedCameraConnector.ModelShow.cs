@@ -101,7 +101,7 @@ namespace ModelView
             _focusingC.WholeT.position = modelPos;
             
             _focusRId = recordID;
-            _focusingC.Animation_Manger.AnimatorRef.applyRootMotion = true;
+            _focusingC.AnimationManger.AnimatorRef.applyRootMotion = true;
             
             // 这个短暂变色是为了掩盖一些模型刚加载瞬间有些渲染没到位的尴尬。比如裙子摇晃 
             _focusingC._ShaderManager.FlatColorForAShortTime(Color.black, 0f, 1f);
@@ -116,7 +116,7 @@ namespace ModelView
                         save.Value.WholeT.gameObject.SetActive(false);
                 }
                 Initialize(false,_focusingC.WholeT.gameObject.transform, transform);
-                _focusingC.Animation_Manger.CasualFace();
+                _focusingC.AnimationManger.CasualFace();
                 ItemDetailStartDirection(0,0,0);
             }
         }
@@ -153,29 +153,29 @@ namespace ModelView
             if (unitConfig == null)
                 return;
             
-            if (_focusingC.Animation_Manger != null)
+            if (_focusingC.AnimationManger != null)
             {
-                await _focusingC.Animation_Manger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, skillName, unitConfig.element);
+                await _focusingC.AnimationManger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, skillName, unitConfig.element);
                 if (_focusingC == null)
                 {
                     return;
                 }
                 IfShowingSkill = true;
-                _focusingC.Animation_Manger.AnimationTrigger(skillName, true,0.25f);
-                _focusingC.Animation_Manger.TriggerExpression(Facial.aggressive);
+                _focusingC.AnimationManger.AnimationTrigger(skillName, true,0.25f);
+                _focusingC.AnimationManger.TriggerExpression(Facial.aggressive);
             }
         }
 
         private TweenerCore<Vector3, Vector3, VectorOptions> resetModelPosTween;
         void SkillsPrintOutLateUpdate()
         {
-            if (_focusingC != null && _focusingC.Animation_Manger != null && _focusingC.WholeT.gameObject.activeSelf)
+            if (_focusingC != null && _focusingC.AnimationManger != null && _focusingC.WholeT.gameObject.activeSelf)
             {
-                if (_focusingC.Animation_Manger.GetBool("in_transition") == false && 
-                    _focusingC.Animation_Manger.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
+                if (_focusingC.AnimationManger.GetBool("in_transition") == false && 
+                    _focusingC.AnimationManger.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
                 {
-                    _focusingC.Animation_Manger.PlayLayerAnim(null, true, 0.25f);
-                    _focusingC.Animation_Manger.TriggerExpression(Facial.smile);
+                    _focusingC.AnimationManger.PlayLayerAnim(null, true, 0.25f);
+                    _focusingC.AnimationManger.TriggerExpression(Facial.smile);
                     IfShowingSkill = false;
                     resetModelPosTween = _focusingC.WholeT.transform.DOMove(modelPos, 1);
                 }
