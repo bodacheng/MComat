@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BackGroundPS : MonoBehaviour
 {
-    [SerializeField] List<ParticleSystem> BCPs;
+    [SerializeField] List<GameObject> BCPs;
     public static BackGroundPS target;
     
     int playingNo = 0;
@@ -91,7 +91,6 @@ public class BackGroundPS : MonoBehaviour
             {
                 if (BCPs[i].gameObject.activeSelf) continue;
                 BCPs[i].gameObject.SetActive(true);
-                BCPs[i].Play(true);
             }else{
                 BCPs[i].gameObject.SetActive(false);
             }
