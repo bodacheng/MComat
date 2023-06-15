@@ -206212,7 +206212,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.35
-    functionName: MagicForward
+    functionName: MagicForwardOnBody
     data: diagonalSlash
     objectReferenceParameter: {fileID: 0}
     floatParameter: -0.1

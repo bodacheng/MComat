@@ -9698,7 +9698,7 @@ MonoBehaviour:
   hitEffect: dark_boom
   ExplosionEffect: energy_resolve
   ContinuousDamage: 1
-  ContinuousDamageInterval: 0.2
+  ContinuousDamageInterval: 0.3
 --- !u!114 &3829198492329961209
 MonoBehaviour:
   m_ObjectHideFlags: 0
