@@ -99,7 +99,7 @@ public class MobileInputsManager : MonoBehaviour {
         {
             var elementEffect = new ElementEffectsGroup();
             await elementEffect.InitializeCommon(effectsParent, element, a1Btn, a2Btn, a3Btn);
-            _elementEffects.Add(element, elementEffect);
+            DicAdd<Element,ElementEffectsGroup>.Add(_elementEffects, element, elementEffect);
         }
         await _elementEffects[element].InitializeBtn(a1Btn, a2Btn, a3Btn, unitInfo);
         _elementEffects[element].Close(ParticleSystemStopBehavior.StopEmittingAndClear);

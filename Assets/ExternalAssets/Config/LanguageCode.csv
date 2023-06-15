@@ -121,6 +121,9 @@ Support,Help,ヘルプ,帮助
 Language,Language,言語,言語
 NickName,Nickname,ニックネーム,昵称
 ,,,
+LinkDevice,Bind the account to the device,アカウントをデバイスにバインドする,将账户绑定设备
+LinkedDevice,The account has been bound to the device,アカウントはデバイスにバインドされました,账户已与设备绑定
+ResetMailPw,Send password setting email,パスワード設定メールを送信する,发送密码设置邮件
 NicknameSet,Nickname set successfully,ニックネームが設定されました,昵称设置成功
 IfSetNickName,Are you sure about this nickname?,このニックネームでよろしいですか？,确定这个昵称吗
 privacy,Privacy Policy,プライバシーポリシー,隐私政策
