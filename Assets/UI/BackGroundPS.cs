@@ -55,7 +55,7 @@ public class BackGroundPS : MonoBehaviour
     
     void Default()
     {
-        SwitchBG(0);
+        SwitchBG(-1);
     }
     
     void Red()

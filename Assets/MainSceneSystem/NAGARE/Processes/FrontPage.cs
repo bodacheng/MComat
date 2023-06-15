@@ -128,7 +128,6 @@ public class FrontPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        BackGroundPS.target.ChangeBGByElement(Element.lightMagic);
         ProgressLayer.Loading(string.Empty);
         PlayFabReadClient.GetStatistics(StatisticsLoadFinished);
         
