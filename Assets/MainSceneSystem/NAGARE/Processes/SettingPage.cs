@@ -51,7 +51,7 @@ public class SettingPage : MSceneProcess
                 PopupLayer.ArrangeConfirmWindow(
                     () =>
                     {
-                        ProgressLayer.Loading(">");
+                        ProgressLayer.Loading("");
                         nickNameLayer.LoadingRender(true);
                         PlayFabReadClient.UpdateUserTitleDisplayName(
                             x,

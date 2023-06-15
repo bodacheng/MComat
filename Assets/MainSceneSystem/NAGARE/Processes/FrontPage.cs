@@ -147,14 +147,7 @@ public class FrontPage : MSceneProcess
             () =>
             {
                 ProgressLayer.Close();
-                if (PlayerAccountInfo.Me.TitleDisplayName == null)
-                {
-                    SettingPage.SetNickName((_) => EnterProcess(), false);
-                }
-                else
-                {
-                    EnterProcess();
-                }
+                EnterProcess();
             }
         );
         Stones.RenderAll().Forget(); // 在背后运行，从而加快石头列表和技能编辑画面的读取速度
