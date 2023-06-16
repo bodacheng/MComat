@@ -73,7 +73,7 @@ namespace mainMenu
             UnitModelRender(UnitInfo.GetUnitInfo(PreScene.target.Focusing));
         }
         
-        async void UnitModelRender(UnitInfo info)
+        void UnitModelRender(UnitInfo info)
         {
             if (info == null)
             {

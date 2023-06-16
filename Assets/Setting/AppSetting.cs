@@ -27,7 +27,10 @@ public class AppSetting
         get => bgmSource;
         set
         {
-            value.volume = AppSetting.Value._bgmVolume;
+            if (value != null)
+            {
+                value.volume = AppSetting.Value._bgmVolume;
+            }
             bgmSource = value;
         }
     }

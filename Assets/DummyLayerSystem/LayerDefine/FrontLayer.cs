@@ -20,7 +20,11 @@ public class FrontLayer : UILayer
     [SerializeField] Button GotchaBtn;
     [SerializeField] Button SkillTestRBtn;
     [SerializeField] Button SkillTestMBtn;
+    [SerializeField] Image view2D;
+    [SerializeField] Animator unitOutAnimator;
     [SerializeField] DedicatedCameraConnector camConnector;
+    [SerializeField] Button viewSwitchBtn;// 默认是非active
+    [SerializeField] Text viewText;
     [SerializeField] float cameraConnectorRightSpace = 940;
     [SerializeField] float cameraConnectorVerticalSpace = 150;
     [SerializeField] float skillShowInterval = 5;
@@ -28,6 +32,9 @@ public class FrontLayer : UILayer
     public void Initialise(PreScene pre)
     {
         CameraConnectorCal(camConnector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+        CameraConnectorCal(view2D.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+        view2D.GetComponent<RectTransform>().anchoredPosition =
+            camConnector.GetComponent<RectTransform>().anchoredPosition + new Vector2(camConnector.GetComponent<RectTransform>().sizeDelta.x / 2,0);
         
         ArcadeBtn.onClick.AddListener(
         ()=>
@@ -52,12 +59,15 @@ public class FrontLayer : UILayer
         SkillTestMBtn.onClick.AddListener(pre.BeginSkillTest_Multi);
         SkillTestRBtn.gameObject.SetActive(CommonSetting.DevMode); 
         SkillTestMBtn.gameObject.SetActive(CommonSetting.DevMode);
+        
+        viewSwitchBtn.onClick.AddListener(ViewSwitch);
     }
 
     private IDisposable _disposeShowSkill;
     private List<string> skillList;
     void RegisterRandomShowSkill()
     {
+        _disposeShowSkill?.Dispose();
         if (skillList.Count > 3) // 3 是随便写的。反正就是身上只有一个被动技能的时候别运行的意思
         {
             _disposeShowSkill = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(skillShowInterval)).
@@ -68,24 +78,55 @@ public class FrontLayer : UILayer
                 }).AddTo(gameObject);
         }
     }
+
+    private bool view3D = false;
+
+    void ViewSwitch()
+    {
+        view3D = !view3D;
+        ShowMyModel(instanceID);
+    }
     
+    private string instanceID;
     public async UniTask ShowMyModel(string instanceID)
     {
-        if (camConnector.TaskRunningCount == 0)
+        this.instanceID = instanceID;
+        var info = dataAccess.Units.Get(instanceID);
+        viewText.text = view3D ? "3D" : "2D";
+        if (view3D)
         {
-            var info = dataAccess.Units.Get(instanceID);
-            await camConnector.ShowModel(info?.r_id);
-            var equipments = Stones.GetEquippingStones(info?.id);
-            skillList = equipments.Select(x=>
+            camConnector.gameObject.SetActive(true);
+            view2D.gameObject.SetActive(false);
+            
+            if (camConnector.TaskRunningCount == 0)
             {
-                var skillConfig =  SkillConfigTable.GetSkillConfigByRecordId(x.SkillId);
-                return skillConfig.REAL_NAME;
-            }).ToList();
-            if (this == null)
-            {
-                return;
+                await camConnector.ShowModel(info?.r_id);
+                var equipments = Stones.GetEquippingStones(info?.id);
+                skillList = equipments.Select(x=>
+                {
+                    var skillConfig =  SkillConfigTable.GetSkillConfigByRecordId(x.SkillId);
+                    return skillConfig.REAL_NAME;
+                }).ToList();
+                if (this == null)
+                {
+                    return;
+                }
+                RegisterRandomShowSkill();
             }
-            RegisterRandomShowSkill();
+        }
+        else
+        {
+            camConnector.gameObject.SetActive(false);
+            view2D.gameObject.SetActive(true);
+            var sprite = await Set2DView(info.r_id, view2D, unitOutAnimator);
+            if (sprite == null)
+            {
+                ViewSwitch();
+            }
+            else
+            {
+                viewSwitchBtn.gameObject.SetActive(true);
+            }
         }
     }
 

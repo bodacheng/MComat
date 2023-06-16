@@ -25,22 +25,23 @@ public class UILayer : MonoBehaviour
         target.sizeDelta = new Vector2(unitViewSize, unitViewSize);
     }
     
-    protected async UniTask Set2DView(string recordId, Image view2D, Animator unitOutAnimator)
+    protected async UniTask<Sprite> Set2DView(string recordId, Image view2D, Animator unitOutAnimator)
     {
         var value = await AddressablesLogic.LoadT<Sprite>("unit_image/"+recordId);
         if (unitOutAnimator == null)
         {
-            return;
+            return null;
         }
         if (value == null)
         {
             unitOutAnimator.SetTrigger("reset");
-            return;
+            return null;
         }
         var unitImageRect = view2D.GetComponent<RectTransform>();
         unitImageRect.sizeDelta = new Vector2(value.rect.width * unitImageRect.rect.height / value.rect.height, unitImageRect.rect.height);
         view2D.sprite = value;
         unitOutAnimator.SetTrigger("select");
+        return value;
     }
 
     protected void ToTop()
