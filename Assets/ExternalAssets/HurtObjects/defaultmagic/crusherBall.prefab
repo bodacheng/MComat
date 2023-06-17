@@ -4910,7 +4910,7 @@ MonoBehaviour:
   hitEffect: electric_s_e
   ExplosionEffect: energy_resolve
   ContinuousDamage: 1
-  ContinuousDamageInterval: 0.2
+  ContinuousDamageInterval: 0.3
 --- !u!114 &4503853854820000584
 MonoBehaviour:
   m_ObjectHideFlags: 0
