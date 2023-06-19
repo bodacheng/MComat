@@ -48,6 +48,9 @@ Confirm,Confirm,確定,确定
 Yes,Yes,はい,确定
 No,No,いいえ,取消
 ,,,
+FightResume,Resume,再開,战斗继续
+FightQuit,Quit,停止,退出战斗
+,,,
 story_part1,"At the beginning of 2050, strange vortex-like phenomena appeared in the sky all over the world, followed by countless colored stones falling from the sky.",2050年初め、渦巻きのような不気味な現象が世界各地の空に現れ、数え切れない数の色石が天から降りてきました。,2050年初，形如漩涡的诡异现象出现在世界各地上空，随即无数彩色石块从天而降。
 story_part2,"What's magical is that simply by coming into contact with these stones called 'skill gems', a person can ingest them into their body and gain an extremely powerful offensive ability.",不思議なことに、「スキルジェム」と呼ばれるこの石を人が触れるだけで、その石を体内に摂り込み、攻撃力を持つ能力を得ることができます。,神奇的是，只要人接触了这种被称为“技能宝石”的石块，就能将其摄入体内，获得一项极具攻击性的能力。
 story_part3,"At the same time, creatures resembling extraterrestrial beings continued to appear and launch attacks on humanity, prompting ordinary citizens to collect and equip skill gems to defend themselves.",同時に外見人間のような生物が続々と現れ、人間に攻撃を仕掛けます。一般の人々は自分自身を守るために、スキルジェムを集めて装備するようになりました。,同时疑似外形人的生物不断出现并对人类发动攻击，普通民众开始为了保护自己而收集并配备技能石。
