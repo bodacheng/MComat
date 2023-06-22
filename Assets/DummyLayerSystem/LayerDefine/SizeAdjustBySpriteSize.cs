@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class SizeAdjustBySpriteSize : MonoBehaviour
 {
@@ -26,6 +28,7 @@ public class SizeAdjustBySpriteSize : MonoBehaviour
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(SizeAdjustBySpriteSize))]
 public class SizeAdjustBySpriteSizeGUI : Editor
 {
@@ -39,3 +42,4 @@ public class SizeAdjustBySpriteSizeGUI : Editor
         }
     }
 }
+#endif
