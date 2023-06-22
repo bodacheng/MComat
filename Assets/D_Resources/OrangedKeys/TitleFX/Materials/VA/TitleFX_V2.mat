@@ -31,7 +31,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Main:
-        m_Texture: {fileID: 2800000, guid: fd54d269042d74135b03449235b8c825, type: 3}
+        m_Texture: {fileID: 2800000, guid: f3a5aa34ac2f14ec0b9cd97a46d58b03, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainMASK:
@@ -47,7 +47,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Outline:
-        m_Texture: {fileID: 2800000, guid: fd54d269042d74135b03449235b8c825, type: 3}
+        m_Texture: {fileID: 2800000, guid: f3a5aa34ac2f14ec0b9cd97a46d58b03, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture0:
@@ -93,7 +93,7 @@ Material:
     m_Ints: []
     m_Floats:
     - PixelSnap: 0
-    - _Animation_Factor: 2
+    - _Animation_Factor: 1.7568711
     - _AutoManualAnimation: 1
     - _ColorMask: 15
     - _DetailsMaskDistortionMult: 1
@@ -120,5 +120,5 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color0: {r: 1, g: 0.235066, b: 0, a: 0}
     - _MainColor: {r: 1, g: 0, b: 0.15225315, a: 1}
-    - _OutlineColor: {r: 9.395974, g: 1.77617, b: 67.84972, a: 1}
+    - _OutlineColor: {r: 10.714309, g: 0, b: 90.584694, a: 1}
   m_BuildTextureStacks: []

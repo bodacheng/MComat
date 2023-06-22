@@ -101,14 +101,13 @@ public class StartUpPresentation : MonoBehaviour
             async ()=>
             {
                 HighLightLayer.DarkOff(Color.white, 0);
-                var titleBgLayer= UILayerLoader.Load<TitleBgLayer>();
-                titleBgLayer.Setup(0.67f);
+                var imageBg = UILayerLoader.Load<ImageBg>();
                 UILayerLoader.Load<ProgressLayer>();
                 await AddressablesLogic.ResourcePrepareProcess(
                     () =>
                     {
                         UILayerLoader.Remove<ProgressLayer>();
-                        UILayerLoader.Remove<TitleBgLayer>();
+                        UILayerLoader.Remove<ImageBg>();
                         Go();
                     },
                     (x) =>
