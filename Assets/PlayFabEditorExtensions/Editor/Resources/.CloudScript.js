@@ -224,8 +224,8 @@ handlers.advertisementReward = function (args, context) {
     var result = server.AddUserVirtualCurrency(
         {
             PlayFabId :currentPlayerId,
-            Amount : args.GD,
-            VirtualCurrency : "GD"
+            Amount : args.Amount,
+            VirtualCurrency : args.VirtualCurrency
         }
     );
     return { result };

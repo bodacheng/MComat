@@ -97,7 +97,7 @@ public class ArenaFightOver : UILayer
             {
                 int.TryParse(currentDmCurrency.text, out int currentValue);
                 int targetValue = currentValue;
-                DOTween.To(
+                _dmAwardTweenerCore = DOTween.To(
                     () => targetValue,
                     setterValue => targetValue = setterValue,
                     x,
@@ -115,7 +115,7 @@ public class ArenaFightOver : UILayer
             {
                 int.TryParse(currentGdCurrency.text, out int currentValue);
                 int targetValue = currentValue;
-                DOTween.To(
+                _gdAwardTweenerCore = DOTween.To(
                     () => targetValue,
                     setterValue => targetValue = setterValue,
                     x,

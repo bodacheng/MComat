@@ -38,6 +38,7 @@ namespace FightScene
                     () =>
                     {
                         CloudScript.RequestAdReward(
+                            "DM",
                             extraAdReward, 
                             afterWatched
                         );

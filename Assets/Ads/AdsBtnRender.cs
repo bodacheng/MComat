@@ -26,7 +26,7 @@ public class AdsBtnRender : MonoBehaviour
                 // Grant a reward.
                 CloudScript.SubtractVirtualCurrency(
                     "AD",1,
-                    ()=> CloudScript.RequestAdReward(PlayFabSetting._adTicketRewardGD)
+                    ()=> CloudScript.RequestAdReward("GD", PlayFabSetting._adTicketRewardGD)
                 );
             }
         );
