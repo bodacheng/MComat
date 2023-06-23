@@ -42,11 +42,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - layer_effect
-  - m_GUID: ef1f17870bd7646ffb792b8c63ad97dc
-    m_Address: FrontLayerArcadeBtn/runShadow.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - layer_effect
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
