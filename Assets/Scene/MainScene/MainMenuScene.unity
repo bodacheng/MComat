@@ -809,8 +809,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollSpeed: 1
   img: {fileID: 785572749}
-  _x: 0.1
-  _y: 0.1
+  _x: 0.01
+  _y: 0.01
 --- !u!222 &785572751
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -899,8 +899,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollSpeed: 1
   img: {fileID: 899111947}
-  _x: 0.1
-  _y: 0.1
+  _x: 0.01
+  _y: 0.01
 --- !u!222 &899111949
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -997,7 +997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollSpeed: 1
   img: {fileID: 918013386}
-  _x: 0.1
+  _x: 0.01
   _y: 0
 --- !u!1 &1006720100
 GameObject:
@@ -1060,8 +1060,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollSpeed: 1
   img: {fileID: 1006720105}
-  _x: -0.1
-  _y: -0.1
+  _x: -0.01
+  _y: -0.01
 --- !u!114 &1006720105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1082,7 +1082,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: a60f9c1005c58489da68140a9245adea, type: 3}
+  m_Texture: {fileID: 2800000, guid: eb31f5ddde923483fa24a4adfcd1cf0b, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1980,8 +1980,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollSpeed: 1
   img: {fileID: 1911195684}
-  _x: -0.1
-  _y: -0.1
+  _x: -0.01
+  _y: -0.01
 --- !u!114 &1911195684
 MonoBehaviour:
   m_ObjectHideFlags: 0
