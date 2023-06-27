@@ -24,16 +24,14 @@ Material:
   m_Shader: {fileID: 4800000, guid: a2a06e22c08354d9699356710b69ca9c, type: 3}
   m_ValidKeywords:
   - AMBIENT
-  - ANIME
   - ANIME_SOFT
-  - BASE_CONTRAST
-  - DIFFUSE
+  - BASE_SATURATION
   - EMISSIVE_MAP
   - FOG
+  - MATCAP
   - MATCAP_PERSPECTIVE
   - NORMAL_MAP
   - SHADOWS_ENABLED
-  - SPECULAR
   - SPECULAR_MAP
   - _DETAILBLEND_MULTIPLY
   - _DETAILUV_UV1
@@ -120,7 +118,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCapTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b4a39e223b86cf24d82d7c34e6366131, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -179,7 +177,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AmbientBrightness: 1
-    - _Anime: 1
+    - _Anime: 0
     - _AnimeSoftness: 0.05
     - _AnimeThreshold1: 0.2
     - _AnimeThreshold2: 0.4
@@ -191,7 +189,7 @@ Material:
     - _CameraFadeStart: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Contrast: 1.2
+    - _Contrast: 1
     - _Cull: 2
     - _Cutoff: 0.5
     - _Cutout: 0
@@ -204,7 +202,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DetailUV: 0
     - _DetailVertexColors: 0
-    - _Diffuse: 1
+    - _Diffuse: 0
     - _DiffuseBrightness: 1
     - _DiffuseContrast: 1
     - _DiffusePerPixel: 0
@@ -241,7 +239,7 @@ Material:
     - _LightmapUV: 0
     - _MatCapAccurate: 0
     - _MatCapBlend: 0
-    - _MatCapBrightness: 2
+    - _MatCapBrightness: 1.5
     - _MatCapContrast: 1
     - _MatCapPerspective: 1
     - _MatCapStatic: 0
@@ -272,7 +270,7 @@ Material:
     - _RimBlend: 1
     - _RimContrast: 5
     - _RimInverse: 0
-    - _Saturation: 1
+    - _Saturation: 1.5
     - _ShadowOverlayAnimation: 0
     - _ShadowOverlayBrightness: 1
     - _ShadowOverlaySpeedU: 0.1
@@ -285,7 +283,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SourceBlend: 5
     - _SpecSource: 0
-    - _Specular: 1
+    - _Specular: 0
     - _SpecularBrightness: 0.75
     - _SpecularHair: 0
     - _SpecularHighlights: 1

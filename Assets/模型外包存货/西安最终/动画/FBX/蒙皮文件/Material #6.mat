@@ -24,12 +24,11 @@ Material:
   m_Shader: {fileID: 4800000, guid: a2a06e22c08354d9699356710b69ca9c, type: 3}
   m_ValidKeywords:
   - AMBIENT
-  - ANIME
   - ANIME_SOFT
   - BASE_SATURATION
-  - DIFFUSE
   - EMISSIVE_MAP
   - FOG
+  - MATCAP
   - MATCAP_PERSPECTIVE
   - NORMAL_MAP
   - SHADOWS_ENABLED
@@ -118,7 +117,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCapTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b4a39e223b86cf24d82d7c34e6366131, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -177,13 +176,13 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AmbientBrightness: 1
-    - _Anime: 1
+    - _Anime: 0
     - _AnimeSoftness: 0.05
     - _AnimeThreshold1: 0.2
     - _AnimeThreshold2: 0.3
     - _Blend: 0
     - _BlendOp: 0
-    - _Brightness: 1.3
+    - _Brightness: 1
     - _BumpScale: 1
     - _CameraFadeEnd: 0
     - _CameraFadeStart: 0
@@ -202,7 +201,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DetailUV: 0
     - _DetailVertexColors: 0
-    - _Diffuse: 1
+    - _Diffuse: 0
     - _DiffuseBrightness: 1
     - _DiffuseContrast: 1
     - _DiffusePerPixel: 0
@@ -238,7 +237,7 @@ Material:
     - _LightmapBrightness: 1
     - _LightmapUV: 0
     - _MatCapBlend: 0
-    - _MatCapBrightness: 2
+    - _MatCapBrightness: 1.5
     - _MatCapContrast: 1
     - _MatCapPerspective: 1
     - _MatCapStatic: 0
@@ -269,7 +268,7 @@ Material:
     - _RimBlend: 1
     - _RimContrast: 5
     - _RimInverse: 0
-    - _Saturation: 2
+    - _Saturation: 1.5
     - _ShadowOverlayAnimation: 0
     - _ShadowOverlayBrightness: 1
     - _ShadowOverlaySpeedU: 0.1

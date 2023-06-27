@@ -12,8 +12,7 @@ Material:
   m_ValidKeywords:
   - AMBIENT
   - ANIME_SOFT
-  - BASE_CONTRAST
-  - DIFFUSE
+  - BASE_SATURATION
   - FOG
   - MATCAP
   - MATCAP_PERSPECTIVE
@@ -172,7 +171,7 @@ Material:
     - _CameraFadeStart: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Contrast: 1.5
+    - _Contrast: 1
     - _Cull: 2
     - _Cutoff: 0.5
     - _Cutout: 0
@@ -185,7 +184,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DetailUV: 0
     - _DetailVertexColors: 0
-    - _Diffuse: 1
+    - _Diffuse: 0
     - _DiffuseBrightness: 1
     - _DiffuseContrast: 1
     - _DiffusePerPixel: 0
@@ -221,7 +220,7 @@ Material:
     - _LightmapBrightness: 1
     - _LightmapUV: 0
     - _MatCapBlend: 0
-    - _MatCapBrightness: 1
+    - _MatCapBrightness: 1.5
     - _MatCapContrast: 1
     - _MatCapPerspective: 1
     - _MatCapStatic: 0
@@ -252,7 +251,7 @@ Material:
     - _RimBlend: 1
     - _RimContrast: 5
     - _RimInverse: 0
-    - _Saturation: 1
+    - _Saturation: 1.5
     - _ShadowOverlayAnimation: 0
     - _ShadowOverlayBrightness: 1
     - _ShadowOverlaySpeedU: 0.1

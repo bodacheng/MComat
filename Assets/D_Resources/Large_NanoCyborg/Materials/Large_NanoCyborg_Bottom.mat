@@ -12,17 +12,15 @@ Material:
   m_ValidKeywords:
   - AMBIENT
   - ANIME_SOFT
-  - BASE_CONTRAST
   - BASE_SATURATION
-  - DIFFUSE
   - EMISSIVE_MAP
   - FOG
   - LIGHT_MAP
+  - MATCAP
   - MATCAP_PERSPECTIVE
   - NORMAL_MAP
   - OUTLINE_PASS_DISABLED
   - SHADOWS_ENABLED
-  - SPECULAR
   - SPECULAR_MAP
   - _DETAILBLEND_MULTIPLY
   - _DETAILUV_UV1
@@ -104,7 +102,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCapTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b4a39e223b86cf24d82d7c34e6366131, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -155,7 +153,7 @@ Material:
     - _BumpScale: 1
     - _CameraFadeEnd: 0
     - _CameraFadeStart: 0
-    - _Contrast: 3
+    - _Contrast: 1
     - _Cull: 2
     - _Cutoff: 0.5
     - _Cutout: 0
@@ -167,7 +165,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DetailUV: 0
     - _DetailVertexColors: 0
-    - _Diffuse: 1
+    - _Diffuse: 0
     - _DiffuseBrightness: 1
     - _DiffuseContrast: 3
     - _DiffusePerPixel: 0
@@ -201,7 +199,7 @@ Material:
     - _LightmapBrightness: 0
     - _LightmapUV: 0
     - _MatCapBlend: 0
-    - _MatCapBrightness: 2
+    - _MatCapBrightness: 1.5
     - _MatCapContrast: 1
     - _MatCapPerspective: 1
     - _MatCapStatic: 0
@@ -230,7 +228,7 @@ Material:
     - _RimBlend: 1
     - _RimContrast: 5
     - _RimInverse: 0
-    - _Saturation: 2
+    - _Saturation: 1.5
     - _ShadowOverlayAnimation: 0
     - _ShadowOverlayBrightness: 1
     - _ShadowOverlaySpeedU: 0.1
@@ -239,7 +237,7 @@ Material:
     - _ShadowsEnabled: 1
     - _SmoothnessTextureChannel: 0
     - _SourceBlend: 5
-    - _Specular: 1
+    - _Specular: 0
     - _SpecularBrightness: 1
     - _SpecularHair: 0
     - _SpecularHighlights: 1

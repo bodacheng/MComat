@@ -89985,7 +89985,7 @@ GameObject:
   - component: {fileID: 9158785530946104591}
   - component: {fileID: 3444268081158992882}
   m_Layer: 3
-  m_Name: polySurface109
+  m_Name: skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
