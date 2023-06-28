@@ -30,9 +30,18 @@ public class FacialAnimManager : MonoBehaviour
     public void CasualFace()
     {
         casualFace?.Dispose();
+        int blinkCount = 0;
         casualFace = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(3)).Subscribe((_) =>
         {
-            TriggerExpression(Facial.wink);
+            blinkCount++;
+            if (blinkCount % (10 / 3) == 0)
+            {
+                TriggerExpression(Facial.smile);
+            }
+            else
+            {
+                TriggerExpression(Facial.wink);
+            }
         }).AddTo(gameObject);
     }
     

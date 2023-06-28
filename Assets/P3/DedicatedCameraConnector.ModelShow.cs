@@ -175,7 +175,6 @@ namespace ModelView
                     _focusingC.AnimationManger.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
                 {
                     _focusingC.AnimationManger.PlayLayerAnim(null, true, 0.25f);
-                    _focusingC.AnimationManger.TriggerExpression(Facial.smile);
                     IfShowingSkill = false;
                     resetModelPosTween = _focusingC.WholeT.transform.DOMove(modelPos, 1);
                 }

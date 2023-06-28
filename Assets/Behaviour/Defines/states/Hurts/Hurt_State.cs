@@ -22,7 +22,7 @@ namespace Soul
                 AnimationManger.AnimationTrigger(AnimationManger.GetRandomHurtAnim("lay"), true, hurtAnimDuration);
                 return;
             }
-            Vector3 point = newValue.DamageEffectPoint;
+            var point = newValue.DamageEffectPoint;
             point.y = 0;
             
             string hurtAnimKey;
@@ -39,6 +39,7 @@ namespace Soul
                 hurtAnimKey = newValue.DamageEffectPoint.y > _DATA_CENTER.geometryCenter.position.y ? "high" : "low";
             }
             AnimationManger.AnimationTrigger(AnimationManger.GetRandomHurtAnim(hurtAnimKey), true, hurtAnimDuration);
+            AnimationManger.TriggerExpression(Facial.hit);
             RotateToTargetTween(rotateToTarget, 0.1f);
         }
 

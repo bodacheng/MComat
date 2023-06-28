@@ -17,10 +17,7 @@ public partial class AnimationManger
     
     public void TriggerExpression(Facial facial)
     {
-        if (facialAnimManager != null)
-        {
-            facialAnimManager.TriggerExpression(facial);
-        }
+        facialAnimManager?.TriggerExpression(facial);
     }
     
     public async UniTask PreloadBasicPersonalAnims(string type, string basicPackName, FacialAnimManager facialAnimManager = null)
