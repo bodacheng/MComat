@@ -113,6 +113,7 @@ public class FightingStepLayer : UILayer
             inputEffectsLoading.Add(inputsManager.ElementRegister(d.element, RTFightManager.Target.UnitInfoRef[d]));
         }
         await UniTask.WhenAll(inputEffectsLoading);
+        inputsManager.GroupSkillIcons();
         
         // foreach (var d in RTFightManager.Target.team2.teamMembers.GetValues())
         // {

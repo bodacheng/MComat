@@ -3,15 +3,9 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using dataAccess;
 
 public class ElementEffectsGroup
 {
-    //攻击键系成员
-    IDictionary<Button, IDictionary<string, GameObject>> btnEffectsSets = new Dictionary<Button, IDictionary<string, GameObject>>();
-    readonly IDictionary<string, GameObject> _aEffects = new Dictionary<string, GameObject>();
-    readonly IDictionary<string, GameObject> _bEffects = new Dictionary<string, GameObject>();
-    readonly IDictionary<string, GameObject> _cEffects = new Dictionary<string, GameObject>();
     IDictionary<Button, ParticleSystem> _btnRefreshEffects = new Dictionary<Button, ParticleSystem>();
     ParticleSystem _triggerExplosion0;
     ParticleSystem _triggerExplosion1;
@@ -68,17 +62,6 @@ public class ElementEffectsGroup
     
     public void Close(ParticleSystemStopBehavior systemStopBehavior)
     {
-        foreach(var kv in btnEffectsSets)
-        {
-            foreach(var pair in kv.Value)
-            {
-                if (pair.Value != null)
-                {
-                    pair.Value.gameObject.SetActive(false);
-                }
-            }
-        }
-
         foreach (var kv in _buttonSlotEffects)
         {
             kv.Value.Stop(true, systemStopBehavior);
@@ -102,13 +85,6 @@ public class ElementEffectsGroup
     
     public void Open(Vector3 defendBtnPos, Vector3 rushBtnPos)
     {
-        foreach(var keyValuePair in btnEffectsSets)
-        {
-            foreach(var exPPair in keyValuePair.Value)
-            {
-                exPPair.Value.gameObject.SetActive(false);
-            }
-        }
         _triggerExplosion0.Stop(true);
         _triggerExplosion1.Stop(true);
         _triggerExplosion2.Stop(true);
@@ -193,60 +169,14 @@ public class ElementEffectsGroup
         };
     }
     
-    public async UniTask InitializeBtn(Button a1Btn, Button a2Btn, Button a3Btn, UnitInfo unitInfo)
+    public void RefreshSlotEffect(Button button, string skillId, Vector3 pos)
     {
-        async UniTask Process(Button btn, string skillID, IDictionary<string, GameObject> dic)
-        {
-            if (!dic.ContainsKey(skillID))
-            {
-                var icon = await Stones.GenerateStoneModel(skillID, false);
-                if (icon == null) return;
-                DicAdd<string, GameObject>.Add(dic, skillID, icon.gameObject);
-                Parent(icon.transform, btn.transform);
-            }
-        }
-
-        await UniTask.WhenAll(
-            Process(a1Btn, unitInfo.set.a1, _aEffects),
-            Process(a1Btn, unitInfo.set.a2, _aEffects),
-            Process(a1Btn, unitInfo.set.a3, _aEffects),
-            Process(a2Btn, unitInfo.set.b1, _bEffects),
-            Process(a2Btn, unitInfo.set.b2, _bEffects),
-            Process(a2Btn, unitInfo.set.b3, _bEffects),
-            Process(a3Btn, unitInfo.set.c1, _cEffects),
-            Process(a3Btn, unitInfo.set.c2, _cEffects),
-            Process(a3Btn, unitInfo.set.c3, _cEffects)
-        );
-        
-        void Parent(Transform t, Transform target)
-        {
-            t.SetParent(target);
-            t.localPosition = Vector3.zero;
-            t.localScale = Vector3.one;
-        }
-        
-        btnEffectsSets = new Dictionary<Button, IDictionary<string, GameObject>>
-        {
-            { a1Btn, _aEffects },
-            { a2Btn, _bEffects },
-            { a3Btn, _cEffects }
-        };
-    }
-    
-    public void RefreshBtn(Button button, string skillId, Vector3 pos)
-    {
-        var target = btnEffectsSets[button];
         if (skillId == String.Empty)
         {
             _buttonSlotEffects[button].transform.position = pos;
             _buttonSlotEffects[button].Play(true);
         }else{
             _buttonSlotEffects[button].Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        }
-        
-        foreach(var pair in target)
-        {
-            pair.Value.gameObject.SetActive(pair.Key == skillId);
         }
     }
 }

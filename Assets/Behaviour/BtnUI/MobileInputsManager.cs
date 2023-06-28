@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using dataAccess;
 using UnityEngine;
 using UnityEngine.UI;
 using Soul;
@@ -28,8 +29,37 @@ public class MobileInputsManager : MonoBehaviour {
     [SerializeField] UltimateJoystick joystick;
     [SerializeField] Transform effectsParent;
     
+    //攻击键系成员
+    readonly IDictionary<string, GameObject> _aIcons = new Dictionary<string, GameObject>();
+    readonly IDictionary<string, GameObject> _bIcons = new Dictionary<string, GameObject>();
+    readonly IDictionary<string, GameObject> _cIcons = new Dictionary<string, GameObject>();
+    IDictionary<Button, IDictionary<string, GameObject>> btnIcons = new Dictionary<Button, IDictionary<string, GameObject>>();
     readonly IDictionary<Element, ElementEffectsGroup> _elementEffects = new Dictionary<Element, ElementEffectsGroup>();
     Element _focusing;
+
+    async UniTask AddGemIcon(string skillID, IDictionary<string, GameObject> dic, Button btn)
+    {
+        if (!dic.ContainsKey(skillID))
+        {
+            var icon = await Stones.GenerateStoneModel(skillID, false);
+            if (icon == null) return;
+            if (dic.ContainsKey(skillID))
+            {
+                Destroy(icon.gameObject);
+                return;
+            }
+            DicAdd<string, GameObject>.Add(dic, skillID, icon.gameObject);
+            Parent(icon.transform, btn.transform);
+        }
+        
+        void Parent(Transform t, Transform target)
+        {
+            t.SetParent(target);
+            t.localPosition = Vector3.zero;
+            t.localScale = Vector3.one;
+            t.gameObject.SetActive(false);
+        }
+    }
 
     public void PreparingMode(bool preparingMode)
     {
@@ -70,6 +100,17 @@ public class MobileInputsManager : MonoBehaviour {
     public void Clear()
     {
         _elementEffects.Clear();
+        foreach (var kv in btnIcons)
+        {
+            foreach (var kvv in kv.Value)
+            {
+                Destroy(kvv.Value);
+            }
+        }
+        btnIcons.Clear();
+        _aIcons.Clear();
+        _bIcons.Clear();
+        _cIcons.Clear();
         Destroy(gameObject);
     }
     
@@ -101,8 +142,30 @@ public class MobileInputsManager : MonoBehaviour {
             await elementEffect.InitializeCommon(effectsParent, element, a1Btn, a2Btn, a3Btn);
             DicAdd<Element,ElementEffectsGroup>.Add(_elementEffects, element, elementEffect);
         }
-        await _elementEffects[element].InitializeBtn(a1Btn, a2Btn, a3Btn, unitInfo);
+        
+        await UniTask.WhenAll(
+            AddGemIcon(unitInfo.set.a1, _aIcons, a1Btn),
+            AddGemIcon(unitInfo.set.a2, _aIcons, a1Btn),
+            AddGemIcon(unitInfo.set.a3, _aIcons, a1Btn),
+            AddGemIcon(unitInfo.set.b1, _bIcons, a2Btn),
+            AddGemIcon(unitInfo.set.b2, _bIcons, a2Btn),
+            AddGemIcon(unitInfo.set.b3, _bIcons, a2Btn),
+            AddGemIcon(unitInfo.set.c1, _cIcons, a3Btn),
+            AddGemIcon(unitInfo.set.c2, _cIcons, a3Btn),
+            AddGemIcon(unitInfo.set.c3, _cIcons, a3Btn)
+        );
+        
         _elementEffects[element].Close(ParticleSystemStopBehavior.StopEmittingAndClear);
+    }
+
+    public void GroupSkillIcons()
+    {
+        btnIcons = new Dictionary<Button, IDictionary<string, GameObject>>
+        {
+            { a1Btn, _aIcons },
+            { a2Btn, _bIcons },
+            { a3Btn, _cIcons }
+        };
     }
     
     public void SkillExplosion(InputKey key, int spLevel)
@@ -221,8 +284,6 @@ public class MobileInputsManager : MonoBehaviour {
         _optionsLastFrame[InputKey.Attack2] = null;
         _optionsLastFrame[InputKey.Attack3] = null;
         
-        
-        
         ButtonsFeatureLoad(behaviorRunner.GetNextSkills(), force);
     }
     
@@ -331,6 +392,17 @@ public class MobileInputsManager : MonoBehaviour {
         {
             _elementEffects[_focusing].Close(ParticleSystemStopBehavior.StopEmittingAndClear);
         }
+        
+        foreach(var kv in btnIcons)
+        {
+            foreach(var pair in kv.Value)
+            {
+                if (pair.Value != null)
+                {
+                    pair.Value.gameObject.SetActive(false);
+                }
+            }
+        }
     }
     
     void Update()
@@ -341,9 +413,15 @@ public class MobileInputsManager : MonoBehaviour {
     void RefreshPattern(Button button, string skillId) //按钮切换也可以在这里做文章
     {
         Vector3 targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, button.GetComponent<RectTransform>(), 5);
+        var target = btnIcons[button];
+        foreach(var pair in target)
+        {
+            pair.Value.gameObject.SetActive(pair.Key == skillId);
+        }
+        
         if (_elementEffects.ContainsKey(_focusing))
         {
-            _elementEffects[_focusing].RefreshBtn(button, skillId, targetPos);
+            _elementEffects[_focusing].RefreshSlotEffect(button, skillId, targetPos);
         }
         else
         {
