@@ -21,6 +21,8 @@ namespace mainMenu
         [SerializeField] GameObject T;
         [Header("AudioSource")]
         [SerializeField] AudioSource audioSource;
+        [Header("UIAudioSource")]
+        [SerializeField] AudioSource uiAudioSource;
         [Header("Canvas")] 
         [SerializeField] Canvas Canvas;
 
@@ -131,6 +133,7 @@ namespace mainMenu
                 Debug.Log("不可理解的错误");
             }
             
+            AppSetting.UiAudioSource = uiAudioSource;
             AppSetting.BGMSource = audioSource;
             await AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey);
             

@@ -11,7 +11,7 @@ public class AppSetting
     
     public SystemLanguage Language { get; set; } = SystemLanguage.English;
 
-    private string lobbyTheme ;
+    private string lobbyTheme;
     
     public static async UniTask PlayBGM(string addressKey)
     {
@@ -20,6 +20,22 @@ public class AppSetting
         BGMSource.loop = true;
         BGMSource.Play();
     }
+
+    private static AudioSource uiAudioSource;
+
+    public static AudioSource UiAudioSource
+    {
+        get => uiAudioSource;
+        set
+        {
+            if (value != null)
+            {
+                value.volume = AppSetting.Value._bgmVolume;
+            }
+            uiAudioSource = value;
+        }
+    }
+    
     
     private static AudioSource bgmSource;
     public static AudioSource BGMSource
@@ -95,5 +111,22 @@ public class AppSetting
             };
             Save();
         }
+        
+        BOButton.SetPlaySeMethod(
+            (x) =>
+            {
+                switch (x)
+                {
+                    case SeType.Tap:
+                        if (UiAudioSource != null)
+                        {
+                            UiAudioSource.PlayOneShot(CommonSetting.BtnTapSound);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        );
     }
 }

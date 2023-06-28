@@ -12,12 +12,12 @@ using UniRx;
 
 public class FrontLayer : UILayer
 {
-    [SerializeField] Button ArcadeBtn;
-    [SerializeField] Button ArenaBtn;
-    [SerializeField] Button MemberBtn;
-    [SerializeField] Button TrainBtn;
-    [SerializeField] Button StonesBtn;
-    [SerializeField] Button GotchaBtn;
+    [SerializeField] BOButton ArcadeBtn;
+    [SerializeField] BOButton ArenaBtn;
+    [SerializeField] BOButton MemberBtn;
+    [SerializeField] BOButton TrainBtn;
+    [SerializeField] BOButton StonesBtn;
+    [SerializeField] BOButton GotchaBtn;
     [SerializeField] Button SkillTestRBtn;
     [SerializeField] Button SkillTestMBtn;
     [SerializeField] Image view2D;

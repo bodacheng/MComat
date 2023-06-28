@@ -6,7 +6,6 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using Cysharp.Threading.Tasks;
-using UniRx;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -15,14 +14,13 @@ using UnityEditor.UI;
 
 public enum SeType
 {
-    // UI
-    None
+    Tap
 }
 
     public class BOButton : Button
     {
-        static System.Action<string> playSe;
-        public static void SetPlaySeMethod(System.Action<string> playSe)
+        static System.Action<SeType> playSe;
+        public static void SetPlaySeMethod(System.Action<SeType> playSe)
         {
             if (playSe == null)
             {
@@ -58,6 +56,9 @@ public enum SeType
         private bool activateDoubleClick = false;
         [SerializeField]
         private bool activateHold = false;
+        
+        [SerializeField]
+        private SeType sound = default;
 
         [SerializeField]
         private Sprite disableSprite = default;
@@ -193,7 +194,7 @@ public enum SeType
                 {
                     if (interactable)
                     {
-                        //playSe?.Invoke(sound.ToName());
+                        playSe?.Invoke(sound);
                     }
                     base.OnPointerClick(eventData);
                 }
@@ -321,6 +322,7 @@ public enum SeType
         SerializedProperty onHoldProperty;
         
         SerializedProperty textProperty;
+        SerializedProperty soundProperty;
 
         protected override void OnEnable()
         {
@@ -335,6 +337,8 @@ public enum SeType
             onHoldProperty = serializedObject.FindProperty("hold");
             
             textProperty = serializedObject.FindProperty("text");
+            
+            soundProperty = serializedObject.FindProperty("sound");
         }
 
         public override void OnInspectorGUI()
@@ -356,6 +360,7 @@ public enum SeType
             }
 
             EditorGUILayout.PropertyField(activateHoldProperty);
+            EditorGUILayout.PropertyField(soundProperty);
             if (activateHoldProperty.boolValue)
             {
                 EditorGUILayout.PropertyField(onHoldProperty);

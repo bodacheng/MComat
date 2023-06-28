@@ -9,6 +9,7 @@ public class StartUpPresentation : MonoBehaviour
     [SerializeField] RectTransform t;
     [SerializeField] bool frontSceneFight;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource uiAudioSource;
     
     void OpenAppStoreLink()
     {
@@ -39,6 +40,8 @@ public class StartUpPresentation : MonoBehaviour
         AppSetting.Load();
         AppSetting.BGMSource = audioSource;
         AppSetting.BGMSource.volume = AppSetting.Value.BgmVolume;
+        AppSetting.UiAudioSource = uiAudioSource;
+        AppSetting.UiAudioSource.volume = AppSetting.Value.BgmVolume;
         OnStart().Forget();
     }
     

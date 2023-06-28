@@ -12,6 +12,7 @@ namespace FightScene
     {
         [SerializeField] RectTransform T;
         [SerializeField] AudioSource audioSource;
+        [SerializeField] AudioSource uiAudioSource;
         
         [Header("FX")]
         public Camera fxCamera;
@@ -66,6 +67,7 @@ namespace FightScene
             }
             
             AppSetting.BGMSource = audioSource;
+            AppSetting.UiAudioSource = uiAudioSource;
             Application.targetFrameRate = 60;
             FightGlobalSetting.SceneStep = 1;
             

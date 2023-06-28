@@ -41,6 +41,9 @@ public class CommonSetting : ScriptableObject
     [SerializeField] private string breakFreeEffectCode = "breakFree";
     [SerializeField] private string memberShiftEffectCode = "memberShift";
 
+    [Tooltip("sound effects")] 
+    [SerializeField] AudioClip btnTapSound;
+
     [Tooltip("角色动画平滑区间")] 
     [SerializeField] private float characterAnimDuration = 0.25f;
     
@@ -72,6 +75,8 @@ public class CommonSetting : ScriptableObject
     public static string MemberShiftEffectCode;
     
     public static float CharacterAnimDuration;
+
+    public static AudioClip BtnTapSound;
     
     public void Initialise()
     {
@@ -98,5 +103,7 @@ public class CommonSetting : ScriptableObject
         MemberShiftEffectCode = memberShiftEffectCode;
 
         CharacterAnimDuration = characterAnimDuration;
+
+        BtnTapSound = btnTapSound;
     }
 }
