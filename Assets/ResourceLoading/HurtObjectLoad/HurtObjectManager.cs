@@ -10,31 +10,10 @@ public static class HurtObjectManager
     static DecompositionPool _defaultHitBoxPool;
     static readonly IDictionary<string, DecompositionPool> HurtPoolDic = new Dictionary<string, DecompositionPool>();
     static AsyncOperationHandle<GameObject> _handle;
-    static readonly List<string> KeyExists = new List<string>();
-    public static async UniTask CheckExistedKey()
-    {
-        var locationHandle = Addressables.LoadResourceLocationsAsync("weapon");
-        await locationHandle.Task;
-        if (locationHandle.Status == AsyncOperationStatus.Succeeded)
-        {
-            foreach (var weapon in locationHandle.Result)
-            {
-                if (!KeyExists.Contains(weapon.PrimaryKey))
-                {
-                    KeyExists.Add(weapon.PrimaryKey);
-                }
-            }
-        }
-        else
-        {
-            Debug.Log(" 注册武器列表失败？");
-        }
-        Addressables.Release(locationHandle);
-    }
-
+    
     static UniTask<GameObject> TryLoadWeaponPrefab(string key)
     {
-        if (!KeyExists.Contains(key))
+        if (!AddressablesLogic.CheckKeyExist("weapon", key))
         {
             return default;
         }

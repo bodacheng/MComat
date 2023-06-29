@@ -27,14 +27,16 @@ public class UILayer : MonoBehaviour
     
     protected async UniTask<Sprite> Set2DView(string recordId, Image view2D, Animator unitOutAnimator)
     {
-        var value = await AddressablesLogic.LoadT<Sprite>("unit_image/"+recordId);
-        if (unitOutAnimator == null)
-        {
-            return null;
-        }
-        if (value == null)
+        string key = "unit_image/" + recordId;
+        if (!AddressablesLogic.CheckKeyExist("unit_image", key))
         {
             unitOutAnimator.SetTrigger("reset");
+            return null;
+        }
+        
+        var value = await AddressablesLogic.LoadT<Sprite>(key);
+        if (unitOutAnimator == null)
+        {
             return null;
         }
         var unitImageRect = view2D.GetComponent<RectTransform>();

@@ -123,7 +123,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             }
         }
         
-        public void RegisterBodyPartWeapon(Transform t, int hit_type) //hit_type == 0: clear ;hit_type != 0 : in
+        public void RegisterBodyPartWeapon(Transform t, int hit_type) // hit_type == 0: clear ;hit_type != 0 : in
         {
             if (hit_type != 0)
             {

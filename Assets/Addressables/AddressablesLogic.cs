@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -12,6 +11,42 @@ using Newtonsoft.Json.Linq;
 public static class AddressablesLogic
 {
     private static readonly IDictionary<string, long> Sizes = new Dictionary<string, long>();
+    private static readonly IDictionary<string, List<string>> KeyExists = new Dictionary<string, List<string>>();
+
+    public static async UniTask CheckExistedKey(string tag)
+    {
+        if (KeyExists.ContainsKey(tag))
+        {
+            return;
+        }
+        KeyExists.Add(tag, new List<string>());
+        var locationHandle = Addressables.LoadResourceLocationsAsync(tag);
+        await locationHandle.Task;
+        if (locationHandle.Status == AsyncOperationStatus.Succeeded)
+        {
+            foreach (var weapon in locationHandle.Result)
+            {
+                if (!KeyExists[tag].Contains(weapon.PrimaryKey))
+                {
+                    KeyExists[tag].Add(weapon.PrimaryKey);
+                }
+            }
+        }
+        else
+        {
+            Debug.Log(" error ");
+        }
+        Addressables.Release(locationHandle);
+    }
+
+    public static bool CheckKeyExist(string tag, string primaryKey)
+    {
+        if (!KeyExists.ContainsKey(tag))
+        {
+            return false;
+        }
+        return KeyExists[tag].Contains(primaryKey);
+    }
 
     public static async UniTask<bool> VersionConfirm() // false : need to update
     {
@@ -69,8 +104,9 @@ public static class AddressablesLogic
     {
         await UniTask.WhenAll(new List<UniTask>()
         {
-            HurtObjectManager.CheckExistedKey(),
-            EffectsManager.CheckExistedKey(),
+            CheckExistedKey("weapon"),
+            CheckExistedKey("effect"),
+            CheckExistedKey("unit_image"),
             HurtObjectManager.ConstructDPool()
         });
     }

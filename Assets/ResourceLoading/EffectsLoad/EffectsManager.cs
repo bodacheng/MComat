@@ -3,41 +3,17 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Animations;
-using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceLocations;
 
 public static class EffectsManager
 {
     // 以下的重点是主界面和战斗界面通用问题
     static readonly IDictionary<string, DecompositionPool> EffectPoolsDic = new Dictionary<string, DecompositionPool>();
-    private static readonly List<string> KeyExists = new List<string>();
     static AsyncOperationHandle<GameObject> _handle;
-    
-    public static async UniTask CheckExistedKey()
-    {
-        AsyncOperationHandle<IList<IResourceLocation>> locationHandle = Addressables.LoadResourceLocationsAsync("effect");
-        await locationHandle.Task;
-        if (locationHandle.Status == AsyncOperationStatus.Succeeded)
-        {
-            foreach (var weapon in locationHandle.Result)
-            {
-                if (!KeyExists.Contains(weapon.PrimaryKey))
-                {
-                    KeyExists.Add(weapon.PrimaryKey);
-                }
-            }
-        }
-        else
-        {
-            Debug.Log("注册特效列表失败？");
-        }
-        Addressables.Release(locationHandle);
-    }
     
     static UniTask<GameObject> TryLoadEffectPrefab(string key)
     {
-        if (!KeyExists.Contains(key))
+        if (!AddressablesLogic.CheckKeyExist("effect", key))
         {
             return default;
         }

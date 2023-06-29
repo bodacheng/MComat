@@ -84,12 +84,13 @@ public class FrontLayer : UILayer
     void ViewSwitch()
     {
         view3D = !view3D;
-        ShowMyModel(instanceID);
+        ShowMyModel(instanceID).Forget();
     }
     
     private string instanceID;
     public async UniTask ShowMyModel(string instanceID)
     {
+        ProgressLayer.Loading(string.Empty);
         this.instanceID = instanceID;
         var info = dataAccess.Units.Get(instanceID);
         viewText.text = view3D ? "3D" : "2D";
@@ -128,6 +129,7 @@ public class FrontLayer : UILayer
                 viewSwitchBtn.gameObject.SetActive(true);
             }
         }
+        ProgressLayer.Close();
     }
 
     #region 教程

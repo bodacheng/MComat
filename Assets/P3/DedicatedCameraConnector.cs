@@ -21,8 +21,7 @@ namespace ModelView
         
         public void Clear()
         {
-            if (resetModelPosTween != null)
-                resetModelPosTween.Kill();
+            resetModelPosTween?.Kill();
             DestroyImmediate(camera.gameObject);
             if (target != null)
                 DestroyImmediate(target.gameObject);
