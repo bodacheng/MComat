@@ -148,6 +148,8 @@ namespace ModelView
         {
             if (IfShowingSkill && waitLastMotionEnd)
                 return;
+
+            await HurtObjectManager.ConstructDPool();
             
             var unitConfig = Units.GetUnitConfig(_focusRId);
             if (unitConfig == null)

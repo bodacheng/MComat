@@ -106,8 +106,7 @@ public static class AddressablesLogic
         {
             CheckExistedKey("weapon"),
             CheckExistedKey("effect"),
-            CheckExistedKey("unit_image"),
-            HurtObjectManager.ConstructDPool()
+            CheckExistedKey("unit_image")
         });
     }
     
@@ -254,6 +253,10 @@ public static class AddressablesLogic
         }
         else
         {
+            if (!handle.IsValid())
+            {
+                return default;
+            }
             var _object = handle.Result; // インスタンス化されたもの
             _object.AddOnDestroyCallback( () =>
             {

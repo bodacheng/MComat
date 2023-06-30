@@ -34,6 +34,7 @@ public class PreparingProcess : FSceneProcess
         var tasks = new List<UniTask>
         {
             AppSetting.PlayBGM(FightScene.FightScene.Fight.GetBGMKey()),
+            HurtObjectManager.ConstructDPool(),
             AddressablesLogic.Essentials(),
             BoundaryControlByGod.target.ChangeBackGround(FightScene.FightScene.Fight.battleGroundID),
             RTFightManager.Target.LoadUnits(FightScene.FightScene.Fight),

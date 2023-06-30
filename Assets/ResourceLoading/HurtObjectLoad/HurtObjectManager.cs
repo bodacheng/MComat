@@ -2,7 +2,6 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UniRx;
-using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 public static class HurtObjectManager
@@ -49,7 +48,7 @@ public static class HurtObjectManager
         }
         
         _defaultHitBoxPool = new DecompositionPool(resultObject);
-        _defaultHitBoxPool.PreloadAsync(20, 1);
+        _defaultHitBoxPool.PreloadAsync(10, 1);
     }
     
     public static async UniTask ConstructHurtObjectPool(string resourceName, Element element)
