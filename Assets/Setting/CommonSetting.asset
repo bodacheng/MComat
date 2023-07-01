@@ -31,6 +31,7 @@ MonoBehaviour:
   wallCrackEffectCode: wallCrack
   breakFreeEffectCode: breakFree
   memberShiftEffectCode: membershift
+  btnTapSound: {fileID: 8300000, guid: bfc5803fa8fa8924bbeaa34f4f689bb1, type: 3}
   characterAnimDuration: 0.15
   downLoadLabels:
   - config

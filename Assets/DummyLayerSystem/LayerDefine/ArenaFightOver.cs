@@ -34,8 +34,12 @@ public class ArenaFightOver : UILayer
     #region arcade
     [SerializeField] private Text stageTitle;
     [SerializeField] private Text nextStageTitle;
+    [SerializeField] private Button againFor1v1Btn;
+    [SerializeField] private Button againForMultiBtn;
     [SerializeField] private Button againBtn;
     [SerializeField] private Button nextBtn;
+    [SerializeField] private Button nextFor1v1Btn;
+    [SerializeField] private Button nextForMultiBtn;
     [SerializeField] private RectTransform adBtnParent;
     public Button AgainBtn => againBtn;
     #endregion
@@ -47,6 +51,32 @@ public class ArenaFightOver : UILayer
     
     private float resultAnimFactor = 0;
     
+    void NextFight(int mode, FightInfo nextFight)
+    {
+        switch (mode)
+        {
+            case 0:
+                nextFight.team1Mode =(TeamMode)PlayerPrefs.GetInt("preferAdventureMode", PlayerPrefs.GetInt("preferAdventureMode", 2));
+                break;
+            case 1:
+                nextFight.team1Mode = TeamMode.MultiRaid;
+                break;
+            case 2:
+                nextFight.team1Mode = TeamMode.Rotation;
+                break;
+        }
+                
+        nextFight.team2Mode = nextFight.team1Mode;
+        nextFight.EventType = FightEventType.Quest;
+        nextFight.Team1Auto = FightScene.FightScene.Fight.Team1Auto;
+        nextFight.Team2Auto = true;
+        nextFight.LoadMyTeam();
+        RTFightManager.Target.team2.Clear();
+        FightScene.FightScene.Fight = nextFight;
+        FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
+        UILayerLoader.Remove<ArenaFightOver>();
+    }
+    
     public async void LoadNextArcadeStage()
     {
         Int32.TryParse(FightScene.FightScene.Fight.ID, out var nowStageNo);
@@ -56,29 +86,19 @@ public class ArenaFightOver : UILayer
         {
             nextStageTitle.text = "Stage " + nextStageNo;
             nextBtn.gameObject.SetActive(true);
+            nextFor1v1Btn.gameObject.SetActive(nextFight.ArcadeFightMode == 0 || nextFight.ArcadeFightMode == 2);
+            nextForMultiBtn.gameObject.SetActive(nextFight.ArcadeFightMode == 0 || nextFight.ArcadeFightMode == 1);
             nextBtn.onClick.AddListener(() =>
             {
-                switch (nextFight.ArcadeFightMode)
-                {
-                    case 0:
-                        nextFight.team1Mode =(TeamMode)PlayerPrefs.GetInt("preferAdventureMode", PlayerPrefs.GetInt("preferAdventureMode", 2));
-                        break;
-                    case 1:
-                        nextFight.team1Mode = TeamMode.MultiRaid;
-                        break;
-                    case 2:
-                        nextFight.team1Mode = TeamMode.Rotation;
-                        break;
-                }
-                nextFight.team2Mode = nextFight.team1Mode;
-                nextFight.EventType = FightEventType.Quest;
-                nextFight.Team1Auto = FightScene.FightScene.Fight.Team1Auto;
-                nextFight.Team2Auto = true;
-                nextFight.LoadMyTeam();
-                RTFightManager.Target.team2.Clear();
-                FightScene.FightScene.Fight = nextFight;
-                FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
-                UILayerLoader.Remove<ArenaFightOver>();
+                NextFight(nextFight.ArcadeFightMode, nextFight);
+            });
+            nextFor1v1Btn.onClick.AddListener(() =>
+            {
+                NextFight(2, nextFight);
+            });
+            nextForMultiBtn.onClick.AddListener(() =>
+            {
+                NextFight(1, nextFight);
             });
         }
     } 
@@ -90,6 +110,17 @@ public class ArenaFightOver : UILayer
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
             UILayerLoader.Remove<ArenaFightOver>();
         });
+        againFor1v1Btn.gameObject.SetActive(FightScene.FightScene.Fight.ArcadeFightMode is 0 or 2);
+        againForMultiBtn.gameObject.SetActive(FightScene.FightScene.Fight.ArcadeFightMode is 0 or 1);
+        againFor1v1Btn.onClick.AddListener(() =>
+        {
+            NextFight(2, FightScene.FightScene.Fight);
+        });
+        againForMultiBtn.onClick.AddListener(() =>
+        {
+            NextFight(1, FightScene.FightScene.Fight);
+        });
+        
         returnBtn.onClick.AddListener(FightScene.FightScene.target.ReturnToFront);
         currentDmCurrency.text = Currencies.DiamondCount.Value.ToString();
         Currencies.DiamondCount.Subscribe(
