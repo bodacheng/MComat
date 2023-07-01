@@ -65,7 +65,7 @@ public class ArenaFightOver : UILayer
                 nextFight.team1Mode = TeamMode.Rotation;
                 break;
         }
-                
+        
         nextFight.team2Mode = nextFight.team1Mode;
         nextFight.EventType = FightEventType.Quest;
         nextFight.Team1Auto = FightScene.FightScene.Fight.Team1Auto;

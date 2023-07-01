@@ -108,7 +108,17 @@ namespace FightScene
                         FightScene.target.ReturnToFront, 
                         () =>
                         {
-                            LocalGameRestart();
+                            LocalGameRestart(0);
+                            UILayerLoader.Remove<CommonFightResult>();
+                        },
+                        () =>
+                        {
+                            LocalGameRestart(2);
+                            UILayerLoader.Remove<CommonFightResult>();
+                        },
+                        () =>
+                        {
+                            LocalGameRestart(1);
                             UILayerLoader.Remove<CommonFightResult>();
                         }
                     );
@@ -131,8 +141,21 @@ namespace FightScene
         {
         }
         
-        void LocalGameRestart()
+        void LocalGameRestart(int mode)
         {
+            switch (mode)
+            {
+                case 0:
+                    break;
+                case 1:
+                    FightScene.Fight.team1Mode = TeamMode.MultiRaid;
+                    FightScene.Fight.team2Mode = TeamMode.MultiRaid;
+                    break;
+                case 2:
+                    FightScene.Fight.team1Mode = TeamMode.Rotation;
+                    FightScene.Fight.team2Mode = TeamMode.Rotation;
+                    break;
+            }
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
         }
         
@@ -140,7 +163,7 @@ namespace FightScene
         {
             await UniTask.Delay(TimeSpan.FromSeconds(3));
             FightScene.Fight = FightInfo.RandomSkillTestStage(FightScene.Fight.team1Mode);
-            LocalGameRestart();
+            LocalGameRestart(0);
         }
     }
 }
