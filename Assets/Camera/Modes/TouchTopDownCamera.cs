@@ -20,34 +20,39 @@ public class TouchTopDownCamera : CameraMode
     private float followTargetSpeed = 10f;
     float rotationSpeed = 0.5f;
     private bool isRotating = false;
-    private float disAwayFromFront = 10f;
+    private float disAwayFromFront = 15f;
     private float zoomScreenDis = 10;
     private float zoomSpeed = 20;
     private float Height
     {
         get => height;
-        set => height = Mathf.Clamp(value, 5, 15);
+        set => height = Mathf.Clamp(value, 10, 20);
     }
+    float fieldOfView;
     
-    public TouchTopDownCamera(float height, float battlefieldDiameter)// height == 9
+    public TouchTopDownCamera(float height, float battlefieldDiameter, float fieldOfView)// height == 9
     {
         this.height = height;
         this.battlefieldDiameter = battlefieldDiameter;
+        this.fieldOfView = fieldOfView;
     }
     
     Vector3 sameHeightCenter;
-    public override void Enter(Camera camera)
+    public override void Enter(Camera _camera)
     {
+        _camera.fieldOfView = this.fieldOfView;
+        CameraManager._subCamera.fieldOfView = this.fieldOfView;
+        
         Vector3 temp = Vector3.zero;
         Height = cameraManager.TopDownModeEndRef.position.y;
         mainSequence = DOTween.Sequence().OnStart(() =>
         {
             canTouch = false;
             sameHeightCenter = new Vector3(0,height,0);
-            temp = camera.transform.forward;
+            temp = _camera.transform.forward;
             temp.y = 0;
-        }).Append(camera.transform.DOMove(cameraManager.TopDownModeEndRef.position, startPosSetDuration)).
-        Join(camera.transform.DORotateQuaternion(cameraManager.TopDownModeEndRef.rotation, startPosSetDuration)).
+        }).Append(_camera.transform.DOMove(cameraManager.TopDownModeEndRef.position, startPosSetDuration)).
+        Join(_camera.transform.DORotateQuaternion(cameraManager.TopDownModeEndRef.rotation, startPosSetDuration)).
         AppendCallback(() =>
         {
             zoomScreenDis = Screen.width / 7;

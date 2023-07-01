@@ -13,25 +13,25 @@ class ChatGptFix : CameraMode
     Vector3 frontWPos, backWPos;
     Quaternion ToRotation;
     float autoChangeAngleLimit = 30f;
-    private float autoRotateSpeed = 100;
+    float autoRotateSpeed = 100;
     float _changeSpeed;
     float _transitionSpeedPara = 10f;
-    readonly float _lookPointHeight = 2.3f;
+    readonly float _lookPointHeight = 2f;
     readonly float _minXZ;
+    float fieldOfView;
     
-    public float angleLimit = 60f; // 连线与屏幕水平方向的夹角限制
-
     float TransitionSpeedPara
     {
         get => _transitionSpeedPara;
         set => _transitionSpeedPara = Mathf.Clamp(value, 0.2f, 5f);
     }
     
-    public ChatGptFix(float XZDis, float YDis)
+    public ChatGptFix(float XZDis, float YDis, float fieldOfView)
     {
         _minXZ = XZDis;
         this.XZDis = XZDis;
         this.YDis = YDis;
+        this.fieldOfView = fieldOfView;
     }
 
     private float XZDistance
@@ -42,10 +42,12 @@ class ChatGptFix : CameraMode
 
     public override void Enter(Camera _camera)
     {
+        _camera.fieldOfView = this.fieldOfView;
+        CameraManager._subCamera.fieldOfView = this.fieldOfView;
         LocalUpdate(_camera);
         xzOff = _camera.transform.position - lookPoint;
         xzOff.y = 0;
-        TransitionSpeedPara =5f;
+        TransitionSpeedPara = 5f;
         DOTween.To(()=> TransitionSpeedPara, (x) => TransitionSpeedPara = x, 0.001f, 1f);
     }
 

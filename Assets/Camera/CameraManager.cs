@@ -4,6 +4,9 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     public static Camera _camera;
+    public static Camera _subCamera;
+    [SerializeField] Camera mainCamera;
+    [SerializeField] Camera subCamera; // unit camera
     [SerializeField] Transform StartPosRef;
     [SerializeField] Transform topDownModeEndRef;
     CameraMode CurrentMode;
@@ -11,16 +14,14 @@ public class CameraManager : MonoBehaviour
 
     readonly IDictionary<C_Mode, CameraMode> CModeDic = new Dictionary<C_Mode, CameraMode>()
     {
-        {C_Mode.GodPlayerCertainYCamera,new GodPlayerCertainY(5f, 5f)},
-        {C_Mode.CertainYAntiVibration, new ChatGptFix(8.8f, 5f)},
+        {C_Mode.CertainYAntiVibration, new ChatGptFix(15f, 5.5f, 25f)},
         //{C_Mode.CertainYAntiVibration, new New2023(8.8f, 5f)},
-        {C_Mode.OneVOne, new OneVOneMode(16f)},
         {C_Mode.ApproachToCertainDis,  new LerpToCertainDistance(5f, 1f)},
         {C_Mode.keepTargetLeft, new keepTargetLeftCamera()},
         {C_Mode.WatchOver, new WatchOverCamera(7f, 5f)},
         {C_Mode.StartAndEnd, new StartToEndMode()},
         {C_Mode.RoundBoundary, new CenterSurroundCamera(25f, 10f)},
-        {C_Mode.TopDown, new TouchTopDownCamera(9f, 20f)},
+        {C_Mode.TopDown, new TouchTopDownCamera(12f, 20f, 25)},
         {C_Mode.ScreenSaver, new New2023(8.8f, 5f)}//new ScreenSaverC(8.8f, 8.8f)}
     };
 
@@ -32,7 +33,8 @@ public class CameraManager : MonoBehaviour
     
     void Awake()
     {
-        _camera = gameObject.GetComponent<Camera>();
+        _camera = mainCamera;
+        _subCamera = subCamera;
         _camera.depthTextureMode = DepthTextureMode.Depth;
 
         foreach (var kv in CModeDic)
