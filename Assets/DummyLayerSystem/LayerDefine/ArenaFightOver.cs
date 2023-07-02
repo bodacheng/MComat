@@ -86,8 +86,8 @@ public class ArenaFightOver : UILayer
         {
             nextStageTitle.text = "Stage " + nextStageNo;
             nextBtn.gameObject.SetActive(true);
-            nextFor1v1Btn.gameObject.SetActive(nextFight.ArcadeFightMode == 0 || nextFight.ArcadeFightMode == 2);
-            nextForMultiBtn.gameObject.SetActive(nextFight.ArcadeFightMode == 0 || nextFight.ArcadeFightMode == 1);
+            nextFor1v1Btn.gameObject.SetActive(nextFight.ArcadeFightMode is 0 or 2);
+            nextForMultiBtn.gameObject.SetActive(nextFight.ArcadeFightMode is 0 or 1);
             nextBtn.onClick.AddListener(() =>
             {
                 NextFight(nextFight.ArcadeFightMode, nextFight);
@@ -103,15 +103,26 @@ public class ArenaFightOver : UILayer
         }
     } 
     
-    void Awake()
+    public void Setup()
     {
+        switch (FightScene.FightScene.Fight.EventType)
+        {
+            case FightEventType.Arena:
+                break;
+            case FightEventType.Quest:
+                Debug.Log("FightScene.FightScene.Fight.ArcadeFightMode:"+ FightScene.FightScene.Fight.ArcadeFightMode);
+                againFor1v1Btn.gameObject.SetActive(FightScene.FightScene.Fight.ArcadeFightMode is 0 or 2);
+                againForMultiBtn.gameObject.SetActive(FightScene.FightScene.Fight.ArcadeFightMode is 0 or 1);
+                break;
+            default:
+                break;
+        }
+        
         againBtn.onClick.AddListener(() =>
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
             UILayerLoader.Remove<ArenaFightOver>();
         });
-        againFor1v1Btn.gameObject.SetActive(FightScene.FightScene.Fight.ArcadeFightMode is 0 or 2);
-        againForMultiBtn.gameObject.SetActive(FightScene.FightScene.Fight.ArcadeFightMode is 0 or 1);
         againFor1v1Btn.onClick.AddListener(() =>
         {
             NextFight(2, FightScene.FightScene.Fight);
@@ -120,8 +131,8 @@ public class ArenaFightOver : UILayer
         {
             NextFight(1, FightScene.FightScene.Fight);
         });
-        
         returnBtn.onClick.AddListener(FightScene.FightScene.target.ReturnToFront);
+        
         currentDmCurrency.text = Currencies.DiamondCount.Value.ToString();
         Currencies.DiamondCount.Subscribe(
             x =>

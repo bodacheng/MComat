@@ -37,10 +37,10 @@ public class ArcadeModeManager
         locationKeyDic.TryGetValue(stageNo.ToString(), out var location);
         if (location == null)
             return null;
-        var one = await AddressablesLogic.LoadT<FightInfo>(location);
-        one.ArcadeFightMode = _stageModeTable.GetModeById(one.ID);
-        one.FightMembers.SetEnemyLevel(one.stageRefLevel);
-        return one;
+        var fightInfo = await AddressablesLogic.LoadT<FightInfo>(location);
+        fightInfo.ArcadeFightMode = _stageModeTable.GetModeById(fightInfo.ID);
+        fightInfo.FightMembers.SetEnemyLevel(fightInfo.stageRefLevel);
+        return fightInfo;
     }
 
     public async void DirectToArcadeStage(int stageNo, bool forward)

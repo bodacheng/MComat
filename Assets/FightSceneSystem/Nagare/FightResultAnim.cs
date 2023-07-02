@@ -57,6 +57,7 @@ namespace FightScene
             }
             Time.timeScale = 1f;
             var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
+            arenaFightOver.Setup();
             arenaFightOver.Step1Anim();
             await UniTask.Delay(TimeSpan.FromSeconds(1));
         }

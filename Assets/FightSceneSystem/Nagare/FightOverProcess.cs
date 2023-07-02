@@ -32,6 +32,7 @@ namespace FightScene
                             (x,y, z) =>
                             {
                                 var a = UILayerLoader.Load<ArenaFightOver>();
+                                a.Setup();
                                 a.Step2Anim();
                                 a.ShowArenaPoint(x,y);
                                 a.ShowAward(z,0, 0);
@@ -41,6 +42,7 @@ namespace FightScene
                     else
                     {
                         var a = UILayerLoader.Load<ArenaFightOver>();
+                        a.Setup();
                         a.Step2Anim();
                     }
                     //FightOverControl.target.ShowSKillSets(RealTimeGameProcessManager.target.FightTeam1);
@@ -59,6 +61,7 @@ namespace FightScene
                                     var hasReward = jsonResult.ContainsKey("has_reward") ? jsonResult["has_reward"] : false;
                                     var hasRewardBool = (bool)hasReward;
                                     var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
+                                    arenaFightOver.Setup();
                                     arenaFightOver.Step2Anim();
                                     if (hasRewardBool)
                                     {
@@ -92,12 +95,14 @@ namespace FightScene
                         else
                         {
                             var a = UILayerLoader.Load<ArenaFightOver>();
+                            a.Setup();
                             a.Step2Anim();
                         }
                     }
                     else
                     {
                         var a = UILayerLoader.Load<ArenaFightOver>();
+                        a.Setup();
                         a.Step2Anim();
                         a.AgainBtn.gameObject.SetActive(true);
                     }
