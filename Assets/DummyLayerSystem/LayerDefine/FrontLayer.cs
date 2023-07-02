@@ -93,6 +93,11 @@ public class FrontLayer : UILayer
         ProgressLayer.Loading(string.Empty);
         this.instanceID = instanceID;
         var info = dataAccess.Units.Get(instanceID);
+        if (info == null)
+        {
+            Debug.Log("error unit info:"+ instanceID);
+            return;
+        }
         viewText.text = view3D ? "3D" : "2D";
         if (view3D)
         {
