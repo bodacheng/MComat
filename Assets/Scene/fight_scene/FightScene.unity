@@ -217,7 +217,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148376872}
   m_LocalRotation: {x: 0.23021138, y: -0.6685826, z: 0.23021138, w: 0.6685826}
-  m_LocalPosition: {x: 15, y: 13, z: 0}
+  m_LocalPosition: {x: 25, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6899,12 +6899,12 @@ PrefabInstance:
     - target: {fileID: 580516407111906336, guid: 3667ab1130c011c4a8c2b9306f1612e5,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.195
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 580516407111906336, guid: 3667ab1130c011c4a8c2b9306f1612e5,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.195
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 580516407111906336, guid: 3667ab1130c011c4a8c2b9306f1612e5,
         type: 3}
@@ -6969,7 +6969,7 @@ PrefabInstance:
     - target: {fileID: 2841199245577064839, guid: 3667ab1130c011c4a8c2b9306f1612e5,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 39
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2841199245577103399, guid: 3667ab1130c011c4a8c2b9306f1612e5,
         type: 3}
@@ -7773,7 +7773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BattleRingPSs:
   - {fileID: 5869328030720998988}
-  BattleRingRadius: 10
+  BattleRingRadius: 8.5
 --- !u!1 &3000649885939633402
 GameObject:
   m_ObjectHideFlags: 0

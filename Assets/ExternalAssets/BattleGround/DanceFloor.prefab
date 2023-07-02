@@ -7440,6 +7440,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
       objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
 --- !u!4 &504642698682742530 stripped
@@ -9455,6 +9460,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
       objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
 --- !u!4 &504642698651038824 stripped
@@ -9529,6 +9539,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
@@ -12384,6 +12399,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
@@ -18806,6 +18826,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
       objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
 --- !u!4 &504642698486832227 stripped
@@ -19851,6 +19876,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 17.847
       objectReference: {fileID: 0}
+    - target: {fileID: 7367303790241271970, guid: c2ace4e886d2f8441940aee6f3e996e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8349826523051056736, guid: c2ace4e886d2f8441940aee6f3e996e4,
         type: 3}
       propertyPath: m_RootOrder
@@ -19910,6 +19940,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Speaker_02 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695142836756514010, guid: c2ace4e886d2f8441940aee6f3e996e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2ace4e886d2f8441940aee6f3e996e4, type: 3}
@@ -21336,6 +21371,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_GantryEnd_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312747852698945634, guid: ba74158835cee9842a245eaf32d1a6c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3121934932333253336, guid: ba74158835cee9842a245eaf32d1a6c9,
         type: 3}
@@ -25866,6 +25906,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -17.907001
       objectReference: {fileID: 0}
+    - target: {fileID: 7367303790241271970, guid: c2ace4e886d2f8441940aee6f3e996e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8349826523051056736, guid: c2ace4e886d2f8441940aee6f3e996e4,
         type: 3}
       propertyPath: m_RootOrder
@@ -25925,6 +25970,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Speaker_02 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695142836756514010, guid: c2ace4e886d2f8441940aee6f3e996e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2ace4e886d2f8441940aee6f3e996e4, type: 3}
@@ -26892,6 +26942,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Gantry_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
@@ -29884,6 +29939,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 26.335001
       objectReference: {fileID: 0}
+    - target: {fileID: 4207093564237467209, guid: b71897a4d48bdcd4a9b408cf42c90964,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7188203835777982255, guid: b71897a4d48bdcd4a9b408cf42c90964,
         type: 3}
       propertyPath: m_RootOrder
@@ -29943,6 +30003,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Light_Stage_Spot_01 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7532958539356423573, guid: b71897a4d48bdcd4a9b408cf42c90964,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b71897a4d48bdcd4a9b408cf42c90964, type: 3}
@@ -34505,6 +34570,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_GantryEnd_01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2312747852698945634, guid: ba74158835cee9842a245eaf32d1a6c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3121934932333253336, guid: ba74158835cee9842a245eaf32d1a6c9,
         type: 3}
       propertyPath: m_RootOrder
@@ -35870,6 +35940,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
       objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
 --- !u!4 &504642699270655125 stripped
@@ -37135,6 +37210,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_GantryEnd_01
       objectReference: {fileID: 0}
+    - target: {fileID: 2312747852698945634, guid: ba74158835cee9842a245eaf32d1a6c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3121934932333253336, guid: ba74158835cee9842a245eaf32d1a6c9,
         type: 3}
       propertyPath: m_RootOrder
@@ -38084,6 +38164,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
@@ -47632,6 +47717,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Speaker_Large_02
       objectReference: {fileID: 0}
+    - target: {fileID: 4622958108823411023, guid: 1a1dd78ad67e3cf41b1afc3df80383fa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5432426663149175797, guid: 1a1dd78ad67e3cf41b1afc3df80383fa,
         type: 3}
       propertyPath: m_RootOrder
@@ -50091,6 +50181,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_GantryEnd_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312747852698945634, guid: ba74158835cee9842a245eaf32d1a6c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3121934932333253336, guid: ba74158835cee9842a245eaf32d1a6c9,
         type: 3}
@@ -53603,6 +53698,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_GantryEnd_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2312747852698945634, guid: ba74158835cee9842a245eaf32d1a6c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3121934932333253336, guid: ba74158835cee9842a245eaf32d1a6c9,
         type: 3}
       propertyPath: m_RootOrder
@@ -54802,6 +54902,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
@@ -56313,6 +56418,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
       objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
 --- !u!4 &504642698929194792 stripped
@@ -56397,6 +56507,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
@@ -58332,6 +58447,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
@@ -62074,6 +62194,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 15.711
       objectReference: {fileID: 0}
+    - target: {fileID: 4207093564237467209, guid: b71897a4d48bdcd4a9b408cf42c90964,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7188203835777982255, guid: b71897a4d48bdcd4a9b408cf42c90964,
         type: 3}
       propertyPath: m_RootOrder
@@ -62133,6 +62258,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Light_Stage_Spot_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7532958539356423573, guid: b71897a4d48bdcd4a9b408cf42c90964,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b71897a4d48bdcd4a9b408cf42c90964, type: 3}
@@ -67246,6 +67376,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Gantry_01 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
 --- !u!4 &504642697676898448 stripped
@@ -70441,6 +70576,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
       objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
 --- !u!4 &504642697622218822 stripped
@@ -71896,6 +72036,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 15.711
       objectReference: {fileID: 0}
+    - target: {fileID: 4207093564237467209, guid: b71897a4d48bdcd4a9b408cf42c90964,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7188203835777982255, guid: b71897a4d48bdcd4a9b408cf42c90964,
         type: 3}
       propertyPath: m_RootOrder
@@ -71955,6 +72100,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Light_Stage_Spot_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7532958539356423573, guid: b71897a4d48bdcd4a9b408cf42c90964,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b71897a4d48bdcd4a9b408cf42c90964, type: 3}
@@ -75542,6 +75692,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 18.049002
       objectReference: {fileID: 0}
+    - target: {fileID: 7367303790241271970, guid: c2ace4e886d2f8441940aee6f3e996e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8349826523051056736, guid: c2ace4e886d2f8441940aee6f3e996e4,
         type: 3}
       propertyPath: m_RootOrder
@@ -75601,6 +75756,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Speaker_02 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695142836756514010, guid: c2ace4e886d2f8441940aee6f3e996e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2ace4e886d2f8441940aee6f3e996e4, type: 3}
@@ -76687,6 +76847,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -34.251003
       objectReference: {fileID: 0}
+    - target: {fileID: 7367303790241271970, guid: c2ace4e886d2f8441940aee6f3e996e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8349826523051056736, guid: c2ace4e886d2f8441940aee6f3e996e4,
         type: 3}
       propertyPath: m_RootOrder
@@ -76746,6 +76911,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Speaker_02 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695142836756514010, guid: c2ace4e886d2f8441940aee6f3e996e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2ace4e886d2f8441940aee6f3e996e4, type: 3}
@@ -77136,6 +77306,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
@@ -77867,6 +78042,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 27.319002
       objectReference: {fileID: 0}
+    - target: {fileID: 7367303790241271970, guid: c2ace4e886d2f8441940aee6f3e996e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8349826523051056736, guid: c2ace4e886d2f8441940aee6f3e996e4,
         type: 3}
       propertyPath: m_RootOrder
@@ -77926,6 +78106,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Speaker_02 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695142836756514010, guid: c2ace4e886d2f8441940aee6f3e996e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2ace4e886d2f8441940aee6f3e996e4, type: 3}
@@ -81152,6 +81337,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -13.580001
       objectReference: {fileID: 0}
+    - target: {fileID: 7367303790241271970, guid: c2ace4e886d2f8441940aee6f3e996e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8349826523051056736, guid: c2ace4e886d2f8441940aee6f3e996e4,
         type: 3}
       propertyPath: m_RootOrder
@@ -81211,6 +81401,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Speaker_02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695142836756514010, guid: c2ace4e886d2f8441940aee6f3e996e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2ace4e886d2f8441940aee6f3e996e4, type: 3}
@@ -86112,6 +86307,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
       objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
 --- !u!4 &504642697396495023 stripped
@@ -86255,6 +86455,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
@@ -87121,6 +87326,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
@@ -88832,6 +89042,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
       objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
 --- !u!4 &504642697316543500 stripped
@@ -88906,6 +89121,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
@@ -90467,6 +90687,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Gantry_01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
 --- !u!4 &504642697289388505 stripped
@@ -90777,6 +91002,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
       objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
 --- !u!4 &504642697295979574 stripped
@@ -90946,6 +91176,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_GantryEnd_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312747852698945634, guid: ba74158835cee9842a245eaf32d1a6c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3121934932333253336, guid: ba74158835cee9842a245eaf32d1a6c9,
         type: 3}
@@ -100323,6 +100558,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 26.335001
       objectReference: {fileID: 0}
+    - target: {fileID: 4207093564237467209, guid: b71897a4d48bdcd4a9b408cf42c90964,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7188203835777982255, guid: b71897a4d48bdcd4a9b408cf42c90964,
         type: 3}
       propertyPath: m_RootOrder
@@ -100382,6 +100622,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Light_Stage_Spot_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7532958539356423573, guid: b71897a4d48bdcd4a9b408cf42c90964,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b71897a4d48bdcd4a9b408cf42c90964, type: 3}
@@ -100973,6 +101218,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -17.907001
       objectReference: {fileID: 0}
+    - target: {fileID: 7367303790241271970, guid: c2ace4e886d2f8441940aee6f3e996e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8349826523051056736, guid: c2ace4e886d2f8441940aee6f3e996e4,
         type: 3}
       propertyPath: m_RootOrder
@@ -101032,6 +101282,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Speaker_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8695142836756514010, guid: c2ace4e886d2f8441940aee6f3e996e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2ace4e886d2f8441940aee6f3e996e4, type: 3}
@@ -101722,6 +101977,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
@@ -105319,6 +105579,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
       objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
 --- !u!4 &504642698134263634 stripped
@@ -105928,6 +106193,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Gantry_01 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
@@ -107710,6 +107980,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Speaker_Large_02 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4622958108823411023, guid: 1a1dd78ad67e3cf41b1afc3df80383fa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5432426663149175797, guid: 1a1dd78ad67e3cf41b1afc3df80383fa,
         type: 3}
       propertyPath: m_RootOrder
@@ -109179,6 +109454,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_GantryEnd_01 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2312747852698945634, guid: ba74158835cee9842a245eaf32d1a6c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3121934932333253336, guid: ba74158835cee9842a245eaf32d1a6c9,
         type: 3}
@@ -122677,6 +122957,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Prop_Gantry_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 9166048589140364312, guid: e806d7fbf5f37bb44bbdf176f3c80aef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e806d7fbf5f37bb44bbdf176f3c80aef, type: 3}
