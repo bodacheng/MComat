@@ -38,6 +38,7 @@ public class ArcadeModeManager
         if (location == null)
             return null;
         var fightInfo = await AddressablesLogic.LoadT<FightInfo>(location);
+        fightInfo.EventType = FightEventType.Quest;
         fightInfo.ArcadeFightMode = _stageModeTable.GetModeById(fightInfo.ID);
         fightInfo.FightMembers.SetEnemyLevel(fightInfo.stageRefLevel);
         return fightInfo;

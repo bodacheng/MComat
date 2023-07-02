@@ -41,7 +41,10 @@ public class UnitInstructionLayer : UILayer
         }
         
         var targetBgWidth = bgValue.rect.width * (Screen.height/bgValue.rect.height);
-        
+        if (bgImage == null)
+        {
+            return;
+        }
         bgImage.rectTransform.sizeDelta = new Vector2(targetBgWidth, bgImage.rectTransform.sizeDelta.y);
         bgImage.rectTransform.anchoredPosition = new Vector2();
         
