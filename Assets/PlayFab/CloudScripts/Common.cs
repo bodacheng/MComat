@@ -6,7 +6,7 @@ using System;
 
 public partial class CloudScript
 {
-    static void ExecuteCloudScriptMainSceneCommon(
+    public static void ExecuteCloudScriptMainSceneCommon(
         ExecuteCloudScriptRequest request, 
         Action<ExecuteCloudScriptResult> resultCallback, 
         Action<PlayFabError> errorCallback = null, 

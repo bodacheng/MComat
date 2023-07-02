@@ -64,8 +64,21 @@ public class SKillAnalyzerGUI : EditorWindow
 
         if (GUILayout.Button("任意函数测试"))
         {
-
-            PlayFabReadClient.DevUserLogin("helloMACTEST2");
+            CloudScript.ExecuteCloudScriptMainSceneCommon(
+                new ExecuteCloudScriptRequest
+                {
+                    FunctionName = "claimQuestReward",
+                    FunctionParameter = new { stage = 10 },
+                    GeneratePlayStreamEvent = true
+                },
+                (x) =>
+                {
+                    Debug.Log(x);
+                }
+            );
+            
+            
+            //PlayFabReadClient.DevUserLogin("helloMACTEST2");
 
             // CloudScript.ArcadeProgress("2", 
             //     result => {});

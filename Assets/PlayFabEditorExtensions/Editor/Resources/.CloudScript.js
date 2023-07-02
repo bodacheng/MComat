@@ -221,6 +221,40 @@ function GrantItemToCurrentUserAndSetCustomData(itemIds, CatalogVersion, customD
 
 handlers.advertisementReward = function (args, context) {
     
+    if (args.stage != undefined) {
+
+        var newLevelCompleted = Number(args.stage);
+        
+        // Get the player's existing level ad status data.
+        var playerData = server.GetUserReadOnlyData({
+            PlayFabId: currentPlayerId,
+            Keys: ["LevelAdStatus"]
+        });
+
+        // Initialize the LevelAdStatus data if it doesn't exist.
+        var levelAdStatus;
+        if (!playerData.Data.LevelAdStatus) {
+            levelAdStatus = [];
+        } else {
+            // Parse the LevelAdStatus data into an array.
+            levelAdStatus = JSON.parse(playerData.Data.LevelAdStatus.Value || '[]');
+        }
+
+        // If the level index is out of range, expand the levelAdStatus array.
+        while(newLevelCompleted > levelAdStatus.length) {
+            levelAdStatus.push(null);
+        }
+
+        // Update the level ad status.
+        levelAdStatus[newLevelCompleted - 1] = 1;
+
+        // Save the updated level ad status data.
+        server.UpdateUserReadOnlyData({
+            PlayFabId: currentPlayerId,
+            Data: { "LevelAdStatus": JSON.stringify(levelAdStatus) }
+        });
+    }
+    
     var result = server.AddUserVirtualCurrency(
         {
             PlayFabId :currentPlayerId,
@@ -433,7 +467,36 @@ handlers.claimQuestReward = function (args, context) {
             });
         }
     }
+    
+    // Get the player's existing level ad status data.
+    var playerData = server.GetUserReadOnlyData({
+        PlayFabId: currentPlayerId,
+        Keys: ["LevelAdStatus"]
+    });
+    
+    // Initialize the LevelAdStatus data if it doesn't exist.
+    var levelAdStatus;
+    if (!playerData.Data.LevelAdStatus) {
+        levelAdStatus = [];
+    } else {
+        // Parse the LevelAdStatus data into an array.
+        levelAdStatus = JSON.parse(playerData.Data.LevelAdStatus.Value || '[]');
+    }
+    
+    // If the level index is out of range, expand the levelAdStatus array.
+    while(newLevelCompleted > levelAdStatus.length) {
+        levelAdStatus.push(null);
+    }
 
+    // Update the level ad status.
+    levelAdStatus[newLevelCompleted - 1] = 0;
+
+    // Save the updated level ad status data.
+    var newPlayData = server.UpdateUserReadOnlyData({
+        PlayFabId: currentPlayerId,
+        Data: { "LevelAdStatus": JSON.stringify(levelAdStatus) }
+    });
+    
     return {
         has_reward: true,
         gold: g,

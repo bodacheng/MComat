@@ -4,18 +4,25 @@ using PlayFab.ClientModels;
 
 public partial class CloudScript
 {
-    public static void RequestAdReward(string virtualCurrency, int amount, Action success = null)
+    public static void RequestAdReward(string virtualCurrency, int amount, Action success = null, int markAsAdWatched = -1)
     {
         ProgressLayer.Loading(string.Empty);
         PlayFabClientAPI.ExecuteCloudScript(
             new ExecuteCloudScriptRequest
             {
                 FunctionName = "advertisementReward",
-                FunctionParameter = new
-                {
-                    Amount = amount,
-                    VirtualCurrency = virtualCurrency
-                },
+                FunctionParameter = markAsAdWatched == -1 ? 
+                    new
+                    {
+                        Amount = amount,
+                        VirtualCurrency = virtualCurrency
+                    }:
+                    new
+                    {
+                        Amount = amount,
+                        VirtualCurrency = virtualCurrency,
+                        stage = markAsAdWatched
+                    }
             },
             (x)=>
             {

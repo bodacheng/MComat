@@ -204,7 +204,7 @@ public class ArenaFightOver : UILayer
         animator.SetTrigger("step2");
     }
     
-    public void ShowAward(int awardDm, int awardGd, int extraAdReward)
+    public void ShowAward(int awardDm, int awardGd, int extraAdReward, int finishedStage = -1)
     {
         if (awardDm > 0)
         {
@@ -222,11 +222,13 @@ public class ArenaFightOver : UILayer
         if (PlayerAccountInfo.Me.tutorialProgress == "Finished")
         {
             FightScene.FightScene.target.ShowAds(
-                extraAdReward, adBtnParent, 
+                extraAdReward, 
+                adBtnParent, 
                 () =>
                 {
                     awardDmCurrency.text = (extraAdReward + awardDm).ToString();
-                }
+                },
+                finishedStage
             );
         }
     }

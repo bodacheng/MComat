@@ -26,7 +26,7 @@ namespace FightScene
         public static FightInfo Fight;
         
         private RewardedAdsButton watchBtn;
-        public void ShowAds(int extraAdReward, RectTransform btnTarget, Action afterWatched)
+        public void ShowAds(int extraAdReward, RectTransform btnTarget, Action afterWatched, int finishedStage = -1)
         {
             if (extraAdReward > 0 && watchBtn != null)
             {
@@ -41,7 +41,8 @@ namespace FightScene
                         CloudScript.RequestAdReward(
                             "DM",
                             extraAdReward, 
-                            afterWatched
+                            afterWatched,
+                            finishedStage
                         );
                     }
                 );

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using PlayFab.ClientModels;
-using UnityEngine;
 
 namespace FightScene
 {
@@ -71,7 +70,8 @@ namespace FightScene
                                         var rewardGdInt = Convert.ToInt32(rewardGd);
                                         var rewardDmInt = Convert.ToInt32(rewardDm);
                                         arenaFightOver.ShowAward(rewardDmInt, rewardGdInt, 
-                                            levelInt % 5 == 0 ? PlayFabSetting._adBossFightRewardDM : PlayFabSetting._adNormalFightRewardDM);
+                                            levelInt % 5 == 0 ? PlayFabSetting._adBossFightRewardDM : PlayFabSetting._adNormalFightRewardDM,
+                                            levelInt);
                                     }
                                     arenaFightOver.LoadNextArcadeStage();
                                     
