@@ -108,6 +108,10 @@ namespace ModelView
             _focusingC.WholeT.gameObject.SetActive(true);
             
             await UniTask.DelayFrame(5);// 否则Unity对mesh的尺寸计算有错误。算是Unity的bug
+            if (this == null)
+            {
+                return;
+            }
             if (_focusingC != null && _focusingC.WholeT != null)
             {
                 foreach (var save in Saves)
