@@ -265,6 +265,67 @@ handlers.advertisementReward = function (args, context) {
     return { result };
 }
 
+handlers.setNoAdsStatus = function(args, context) {
+    var playerId = currentPlayerId;
+
+    // 检查验证是否成功，这可以通过传递的参数来判断
+    var isVerified = args.isVerified;
+
+    if(isVerified) {
+        // 如果验证成功，设置IsVIP为true
+        server.UpdateUserData({
+            PlayFabId: playerId,
+            Data: {"noAds": "1"}
+        });
+        
+        var userSkippedAdRewards = GetUserSkippedAdRewards();
+        if (userSkippedAdRewards > 0) {
+            var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
+                {
+                    PlayFabId :currentPlayerId,
+                    Amount : userSkippedAdRewards,
+                    VirtualCurrency : "DM"
+                }
+            );
+            
+            return { rewardedDM : userSkippedAdRewards };
+        }
+    }
+    return { rewardedDM : 0 };
+};
+
+function GetUserSkippedAdRewards() {
+    // 获取玩家现有的关卡广告状态数据
+    var playerData = server.GetUserReadOnlyData({
+        PlayFabId: currentPlayerId,
+        Keys: ["LevelAdStatus"]
+    });
+
+    // 如果LevelAdStatus数据不存在，则直接返回0
+    if (!playerData.Data.LevelAdStatus) {
+        return 0;
+    }
+
+    // 将LevelAdStatus数据解析为数组
+    var levelAdStatus = JSON.parse(playerData.Data.LevelAdStatus.Value || '[]');
+
+    var rewardDM = 0;
+    // 遍历levelAdStatus数组，并根据其值计算rewardDM
+    for (var index = 0; index < levelAdStatus.length; index++) {
+        if (levelAdStatus[index] == 0 || levelAdStatus[index] == null) {
+            // 每五个关卡奖励10点，其他奖励5点
+            rewardDM += (index + 1) % 5 == 0 ? 10 : 5;
+        }
+    }
+    // 返回计算得到的奖励值
+    return rewardDM;
+}
+
+handlers.GetSkippedAdRewards = function (args, context) {
+    var rewardDM = GetUserSkippedAdRewards();
+    return { rewardDM: rewardDM };
+}
+
 handlers.SubtractVirtualCurrency = function (args, context) {
     var result = server.SubtractUserVirtualCurrency(
         {

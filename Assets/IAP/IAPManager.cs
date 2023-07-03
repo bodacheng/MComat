@@ -71,10 +71,9 @@ public class IAPManager : MonoBehaviour, IStoreListener {
     }
     
     void RefreshIAPItems() {
+        
         if (IsInitialized)
-        {
             return;
-        }
         PlayFabClientAPI.GetCatalogItems(
             new GetCatalogItemsRequest
             {
@@ -134,6 +133,25 @@ public class IAPManager : MonoBehaviour, IStoreListener {
             if (item.ItemClass == productClassName)
                 builder.AddProduct(item.ItemId, ProductType.Consumable);
         }
+        
+        builder.AddProduct("noAds", ProductType.NonConsumable);
+        
+        // Trigger IAP service initialization
+        UnityPurchasing.Initialize(this, builder);
+    }
+
+    void InitializePurchasingNoAds()
+    {
+#if UNITY_IOS
+        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.AppleAppStore));
+#endif
+
+#if UNITY_ANDROID
+        // Create a builder for IAP service
+        var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.GooglePlay));
+#endif
+        
+        builder.AddProduct("noAds", ProductType.NonConsumable);
         
         // Trigger IAP service initialization
         UnityPurchasing.Initialize(this, builder);
@@ -198,18 +216,33 @@ public class IAPManager : MonoBehaviour, IStoreListener {
 
         //Debug.Log("CurrencyCode:"+e.purchasedProduct.metadata.isoCurrencyCode);
         //Debug.Log("PurchasePrice:"+(int)e.purchasedProduct.metadata.localizedPrice);
-        
-        PlayFabClientAPI.ValidateIOSReceipt(
-            new ValidateIOSReceiptRequest
+
+        ValidateIOSReceiptRequest validateIOSReceiptRequest;
+        if (e.purchasedProduct.definition.id == "noAds")
+        {
+            validateIOSReceiptRequest = new ValidateIOSReceiptRequest
+            {
+                PurchasePrice = (int)(e.purchasedProduct.metadata.localizedPrice * 100), //(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
+                ReceiptData = payload
+            };
+        }
+        else
+        {
+            validateIOSReceiptRequest = new ValidateIOSReceiptRequest
             {
                 CatalogVersion = boughtItemCatalog,
                 CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
-                PurchasePrice = (int)(e.purchasedProduct.metadata.localizedPrice * 100),//(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
+                PurchasePrice = (int)(e.purchasedProduct.metadata.localizedPrice * 100), //(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
                 ReceiptData = payload
-            }, result => {
+            };
+        }
+        
+        PlayFabClientAPI.ValidateIOSReceipt(
+                validateIOSReceiptRequest,
+                result => {
                 PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseSuccess"));
                 _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
-                if (boughtItemCatalog == StoneProductCatalogVersion){
+                if (boughtItemCatalog == StoneProductCatalogVersion) {
                     CloudScript.BoughtBundle(
                         e.purchasedProduct.definition.id, 
                         () =>
@@ -220,6 +253,26 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                             ProgressLayer.Close();
                         }
                     );
+                }
+                else if (e.purchasedProduct.definition.id == "noAds")
+                {
+                    // 收据验证成功，调用Cloud Script来设置IsVIP标志
+                    PlayFabClientAPI.ExecuteCloudScript(
+                        new ExecuteCloudScriptRequest
+                        {
+                            FunctionName = "setNoAdsStatus", // 云脚本的函数名
+                            FunctionParameter = new { isVerified = true }, // 传递给云脚本的参数
+                        }, 
+                        (x) =>
+                        {
+                            Debug.Log(x);
+                            ProgressLayer.Close();
+                        }, 
+                        y =>
+                        {
+                            Debug.Log(y);
+                            ProgressLayer.Close();
+                        });
                 }
                 else
                 {
