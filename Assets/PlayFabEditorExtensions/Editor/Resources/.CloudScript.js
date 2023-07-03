@@ -312,7 +312,7 @@ function GetUserSkippedAdRewards() {
     var rewardDM = 0;
     // 遍历levelAdStatus数组，并根据其值计算rewardDM
     for (var index = 0; index < levelAdStatus.length; index++) {
-        if (levelAdStatus[index] == 0 || levelAdStatus[index] == null) {
+        if (levelAdStatus[index] == 0 || levelAdStatus[index] == "null" || levelAdStatus[index] == null) {
             // 每五个关卡奖励10点，其他奖励5点
             rewardDM += (index + 1) % 5 == 0 ? 10 : 5;
         }
