@@ -296,8 +296,22 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         // This will not only validate a receipt, but will also grant player corresponding items
         // only if receipt is valid.
         
-        PlayFabClientAPI.ValidateGooglePlayPurchase(
-            new ValidateGooglePlayPurchaseRequest() {
+        ValidateGooglePlayPurchaseRequest validateGooglePlayPurchase;
+        if (e.purchasedProduct.definition.id == "noAds")
+        {
+            validateGooglePlayPurchase = new ValidateGooglePlayPurchaseRequest
+            {
+                PurchasePrice = (uint)(e.purchasedProduct.metadata.localizedPrice * 100),//(uint)(e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id)),
+                // Pass in the receipt
+                ReceiptJson = googleReceipt.PayloadData.json,
+                // Pass in the signature
+                Signature = googleReceipt.PayloadData.signature
+            };
+        }
+        else
+        {
+            validateGooglePlayPurchase = new ValidateGooglePlayPurchaseRequest
+            {
                 CatalogVersion = boughtItemCatalog,
                 // Pass in currency code in ISO format
                 CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
@@ -307,7 +321,12 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 ReceiptJson = googleReceipt.PayloadData.json,
                 // Pass in the signature
                 Signature = googleReceipt.PayloadData.signature
-            }, result => {
+            };
+        }
+        
+        PlayFabClientAPI.ValidateGooglePlayPurchase(
+            validateGooglePlayPurchase, 
+            result => {
                 PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseSuccess"));
                 _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
                 if (boughtItemCatalog == StoneProductCatalogVersion)
@@ -322,7 +341,28 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                             ProgressLayer.Close();
                         }
                     );
-                }else{
+                }
+                else if (e.purchasedProduct.definition.id == "noAds")
+                {
+                    // 收据验证成功，调用Cloud Script来设置IsVIP标志
+                    PlayFabClientAPI.ExecuteCloudScript(
+                        new ExecuteCloudScriptRequest
+                        {
+                            FunctionName = "setNoAdsStatus", // 云脚本的函数名
+                            FunctionParameter = new { isVerified = true }, // 传递给云脚本的参数
+                        }, 
+                        (x) =>
+                        {
+                            Debug.Log(x);
+                            ProgressLayer.Close();
+                        }, 
+                        y =>
+                        {
+                            Debug.Log(y);
+                            ProgressLayer.Close();
+                        });
+                }
+                else{
                     ProgressLayer.Close();
                 }
                 PlayFabReadClient.LoadItems(null);
