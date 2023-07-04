@@ -219,7 +219,9 @@ public class ArenaFightOver : UILayer
             awardGdCurrency.text = awardGd.ToString();
         }
 
-        if (PlayerAccountInfo.Me.tutorialProgress == "Finished")
+        if (PlayerAccountInfo.Me.tutorialProgress == "Finished"
+            &&
+            !PlayerAccountInfo.Me.noAdsState)
         {
             FightScene.FightScene.target.ShowAds(
                 extraAdReward, 

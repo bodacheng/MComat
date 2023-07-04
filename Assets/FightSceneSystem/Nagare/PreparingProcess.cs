@@ -19,7 +19,9 @@ public class PreparingProcess : FSceneProcess
         RTFightManager.Target.team1.Clear();
         RTFightManager.Target.team2.Clear();
         
-        if (FightScene.FightScene.Fight.EventType == FightEventType.Quest)
+        if (FightScene.FightScene.Fight.EventType == FightEventType.Quest 
+            &&
+            !PlayerAccountInfo.Me.noAdsState)
         {
             FightScene.FightScene.target.LoadAds();
         }
