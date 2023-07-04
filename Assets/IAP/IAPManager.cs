@@ -16,6 +16,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
     // Items list, configurable via inspector
     private static List<CatalogItem> _productCatalog;
     private static List<CatalogItem> _stoneProductCatalog;
+    private string noAdsServiceName = "noads";
     private string productClassName = "Product";
     private string ProductCatalogVersion = "Product";
     private string StoneProductCatalogVersion = "stone";
@@ -134,7 +135,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 builder.AddProduct(item.ItemId, ProductType.Consumable);
         }
         
-        builder.AddProduct("noAds", ProductType.NonConsumable);
+        builder.AddProduct(noAdsServiceName, ProductType.NonConsumable);
         
         // Trigger IAP service initialization
         UnityPurchasing.Initialize(this, builder);
@@ -151,7 +152,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.GooglePlay));
 #endif
         
-        builder.AddProduct("noAds", ProductType.NonConsumable);
+        builder.AddProduct(noAdsServiceName, ProductType.NonConsumable);
         
         // Trigger IAP service initialization
         UnityPurchasing.Initialize(this, builder);
@@ -218,7 +219,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         //Debug.Log("PurchasePrice:"+(int)e.purchasedProduct.metadata.localizedPrice);
 
         ValidateIOSReceiptRequest validateIOSReceiptRequest;
-        if (e.purchasedProduct.definition.id == "noAds")
+        if (e.purchasedProduct.definition.id == noAdsServiceName)
         {
             validateIOSReceiptRequest = new ValidateIOSReceiptRequest
             {
@@ -254,7 +255,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                         }
                     );
                 }
-                else if (e.purchasedProduct.definition.id == "noAds")
+                else if (e.purchasedProduct.definition.id == noAdsServiceName)
                 {
                     // 收据验证成功，调用Cloud Script来设置IsVIP标志
                     PlayFabClientAPI.ExecuteCloudScript(
@@ -290,6 +291,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         
         #if UNITY_ANDROID
         // Deserialize receipt
+        Debug.Log("e.purchasedProduct.receipt :" + e.purchasedProduct.receipt);
         var googleReceipt = GooglePurchase.FromJson(e.purchasedProduct.receipt);
 
         // Invoke receipt validation
@@ -297,7 +299,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         // only if receipt is valid.
         
         ValidateGooglePlayPurchaseRequest validateGooglePlayPurchase;
-        if (e.purchasedProduct.definition.id == "noAds")
+        if (e.purchasedProduct.definition.id == noAdsServiceName)
         {
             validateGooglePlayPurchase = new ValidateGooglePlayPurchaseRequest
             {
@@ -342,7 +344,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                         }
                     );
                 }
-                else if (e.purchasedProduct.definition.id == "noAds")
+                else if (e.purchasedProduct.definition.id == noAdsServiceName)
                 {
                     // 收据验证成功，调用Cloud Script来设置IsVIP标志
                     PlayFabClientAPI.ExecuteCloudScript(
