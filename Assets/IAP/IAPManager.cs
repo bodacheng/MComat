@@ -37,6 +37,11 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         {
             return StoneProductCatalogVersion;
         }
+
+        if (productId == noAdsServiceName)
+        {
+            return ProductCatalogVersion;
+        }
         return null;
     }
     
@@ -223,6 +228,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         {
             validateIOSReceiptRequest = new ValidateIOSReceiptRequest
             {
+                CatalogVersion = boughtItemCatalog,
                 PurchasePrice = (int)(e.purchasedProduct.metadata.localizedPrice * 100), //(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
                 ReceiptData = payload
             };
@@ -307,6 +313,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         {
             validateGooglePlayPurchase = new ValidateGooglePlayPurchaseRequest
             {
+                CatalogVersion = boughtItemCatalog,
                 PurchasePrice = (uint)(e.purchasedProduct.metadata.localizedPrice * 100),//(uint)(e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id)),
                 // Pass in the receipt
                 ReceiptJson = googleReceipt.PayloadData.json,
