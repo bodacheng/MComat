@@ -55,6 +55,7 @@ MonoBehaviour:
   stoneBundleProductCells:
   - {fileID: 4399163651557933598}
   - {fileID: 7484773855068082255}
+  noAdsCell: {fileID: 5336195429074797273}
 --- !u!1 &2904046931105250747
 GameObject:
   m_ObjectHideFlags: 0
@@ -2332,3 +2333,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8547128091998886425}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5336195429074797273 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4364136264271272128, guid: 650df4bb7482c412382260a65c86fad2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8547128091998886425}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dedc68cc306104929af1d2a04ebd99ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
