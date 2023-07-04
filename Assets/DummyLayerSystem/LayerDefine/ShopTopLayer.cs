@@ -9,11 +9,18 @@ namespace mainMenu
         [SerializeField] AdsBtnRender adsBtnRender;
         [SerializeField] ScrollRect productParent;
         [SerializeField] ProductCell[] stoneBundleProductCells;
+        [SerializeField] ProductCell noAdsCell;
         
         public void Initialize()
         {
+            ShowNoAdsProduct();
             adsBtnRender.Setup();
             RefreshSize();
+        }
+
+        public void ShowNoAdsProduct()
+        {
+            noAdsCell.gameObject.SetActive(!PlayerAccountInfo.Me.noAdsState);
         }
 
         void RefreshSize()

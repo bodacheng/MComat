@@ -266,6 +266,10 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                         }, 
                         (x) =>
                         {
+                            PlayerAccountInfo.Me.noAdsState = true;
+                            var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
+                            if (shopTopLayer != null)
+                                shopTopLayer.ShowNoAdsProduct();
                             Debug.Log(x);
                             ProgressLayer.Close();
                         }, 
@@ -355,6 +359,10 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                         }, 
                         (x) =>
                         {
+                            PlayerAccountInfo.Me.noAdsState = true;
+                            var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
+                            if (shopTopLayer != null)
+                                shopTopLayer.ShowNoAdsProduct();
                             Debug.Log(x);
                             ProgressLayer.Close();
                         }, 
