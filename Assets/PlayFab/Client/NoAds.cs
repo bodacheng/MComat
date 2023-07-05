@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public partial class PlayFabReadClient
 {
-    private static string noAdsServicePlayerDataKey = "noads";
+    private static string noAdsServicePlayerDataKey = "noAds";
     public static void LoadNoAdsState(Action<bool> finished)
     {
         PlayFabClientAPI.GetUserData(
@@ -21,6 +21,7 @@ public partial class PlayFabReadClient
                 {
                     var userData = obj.Data[noAdsServicePlayerDataKey];
                     Int32.TryParse(userData.Value, out var state);
+                    Debug.Log("noAdsServicePlayerDataKey:"+ state);
                     PlayerAccountInfo.Me.noAdsState = state == 1;
                 }
                 else
