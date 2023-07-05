@@ -16,7 +16,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
     // Items list, configurable via inspector
     private static List<CatalogItem> _productCatalog;
     private static List<CatalogItem> _stoneProductCatalog;
-    private string noAdsServiceName = "noads";
+    private string noAdsServiceName = "vip";
     private string productClassName = "Product";
     private string ProductCatalogVersion = "Product";
     private string StoneProductCatalogVersion = "stone";
