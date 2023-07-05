@@ -140,7 +140,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 builder.AddProduct(item.ItemId, ProductType.Consumable);
         }
         
-        builder.AddProduct(noAdsServiceName, ProductType.NonConsumable);
+        builder.AddProduct(noAdsServiceName, ProductType.Consumable);
         
         // Trigger IAP service initialization
         UnityPurchasing.Initialize(this, builder);
@@ -157,7 +157,7 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.GooglePlay));
 #endif
         
-        builder.AddProduct(noAdsServiceName, ProductType.NonConsumable);
+        builder.AddProduct(noAdsServiceName, ProductType.Consumable);
         
         // Trigger IAP service initialization
         UnityPurchasing.Initialize(this, builder);
