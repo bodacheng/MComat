@@ -384,8 +384,12 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                 }
                 PlayFabReadClient.LoadItems(null);
             },
-            error => Debug.Log("Validation failed: " + error.GenerateErrorReport())
-        );
+            error =>
+            {
+                ProgressLayer.Close();
+                PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseFail"));
+                Debug.Log("Validation failed: " + error.GenerateErrorReport());
+            });
         #endif
         
         return PurchaseProcessingResult.Complete;
