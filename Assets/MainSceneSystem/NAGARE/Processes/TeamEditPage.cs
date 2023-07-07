@@ -115,13 +115,17 @@ public class TeamEditPage : MSceneProcess
     
     void Save()
     {
-        ProgressLayer.Loading(">");
+        ProgressLayer.Loading(string.Empty);
         switch (_teamMode)
         {
             case "arena":
                 missionWatcher = new MissionWatcher(
                     new List<string>() {"teamSavedFinished"},
-                    ProgressLayer.Close
+                    () =>
+                    {
+                        ReturnLayer.POP();
+                        ProgressLayer.Close();
+                    }
                 );
                 
                 bool qualified = Legal(_teamMode);
@@ -142,6 +146,7 @@ public class TeamEditPage : MSceneProcess
                     ()=>
                     {
                         _extraArcadeTeamEditSuccess?.Invoke();
+                        ReturnLayer.POP();
                         ProgressLayer.Close();
                     }
                 );
