@@ -45,8 +45,8 @@ public class TeamEdit : TutorialProcess
                 teamEditFinished = true;
                 if (_returnLayer != null)
                 {
-                    _returnLayer.gameObject.SetActive(true);
-                    _returnLayer.ForceBackMode(true);
+                    _returnLayer.gameObject.SetActive(false);
+                    //_returnLayer.ForceBackMode(true);
                 }
             }
         );
@@ -105,15 +105,6 @@ public class TeamEdit : TutorialProcess
     
     public override void LocalUpdate()
     {
-        if (_fightPrepareLayer == null)
-        {
-            _fightPrepareLayer = UILayerLoader.Get<FightPrepareLayer>();
-            if (_fightPrepareLayer != null)
-            {
-                _fightPrepareLayer.ForcePressTeamEdit();
-            }
-        }
-        
         if (_teamEditLayer == null)
         {
             _teamEditLayer = UILayerLoader.Get<TeamEditLayer>();
@@ -151,6 +142,6 @@ public class TeamEdit : TutorialProcess
     
     public override void ProcessEnd()
     {
-        _teamEditLayer.SetInstruction(String.Empty);
+        //_teamEditLayer.SetInstruction(String.Empty);
     }
 }
