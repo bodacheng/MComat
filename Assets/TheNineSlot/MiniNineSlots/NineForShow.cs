@@ -4,7 +4,6 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
-using DummyLayerSystem;
 using mainMenu;
 
 public partial class NineForShow : MonoBehaviour

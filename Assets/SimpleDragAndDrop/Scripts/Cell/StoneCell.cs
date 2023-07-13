@@ -120,8 +120,8 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         {
             firstCell.UpdateMyItem();
             secondCell.UpdateMyItem();
-            SKStoneItem firstItem = firstCell.GetItem();                // Get item from first cell
-            SKStoneItem secondItem = secondCell.GetItem();              // Get item from second cell
+            var firstItem = firstCell.GetItem();                // Get item from first cell
+            var secondItem = secondCell.GetItem();              // Get item from second cell
 
             if (firstItem != null)
             {

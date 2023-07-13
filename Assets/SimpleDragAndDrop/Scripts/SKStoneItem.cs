@@ -35,7 +35,7 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
 	{
 		if (canvas == null)
 		{
-			GameObject canvasObj = new GameObject(canvasName);
+			var canvasObj = new GameObject(canvasName);
 			canvas = canvasObj.AddComponent<Canvas>();
 			canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 			canvas.sortingOrder = canvasSortOrder;
@@ -87,12 +87,12 @@ public partial class SKStoneItem : MonoBehaviour, IBeginDragHandler, IDragHandle
         transform.GetComponent<Image>().color = new Color(transform.GetComponent<Image>().color.r, transform.GetComponent<Image>().color.g, transform.GetComponent<Image>().color.b,0);
         dragging.transform.SetParent(canvas.transform);
         dragging.name = "Icon";
-        Image iconImage = dragging.GetComponent<Image>();
+        var iconImage = dragging.GetComponent<Image>();
         iconImage.raycastTarget = false;
         
-        RectTransform iconRect = dragging.GetComponent<RectTransform>();
+        var iconRect = dragging.GetComponent<RectTransform>();
         // Set icon's dimensions
-        RectTransform myRect = GetComponent<RectTransform>();
+        var myRect = GetComponent<RectTransform>();
         iconRect.pivot = new Vector2(0.5f, 0.5f);
         iconRect.anchorMin = new Vector2(0.5f, 0.5f);
         iconRect.anchorMax = new Vector2(0.5f, 0.5f);

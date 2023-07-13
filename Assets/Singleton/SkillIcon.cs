@@ -15,7 +15,6 @@ public static class SkillIcon
         return returnValue;
     }
     
-    static GameObject _d, _ex1, _ex2, _ex3;
     static GameObject GetDefaultSkillIconByResource()
     {
         var _d = Resources.Load<GameObject>("BasicSprites/stoneModel");
