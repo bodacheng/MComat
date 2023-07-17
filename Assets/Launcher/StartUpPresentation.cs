@@ -105,6 +105,7 @@ public class StartUpPresentation : MonoBehaviour
             {
                 HighLightLayer.DarkOff(Color.white, 0);
                 var imageBg = UILayerLoader.Load<ImageBg>();
+                imageBg.Setup();
                 UILayerLoader.Load<ProgressLayer>();
                 await AddressablesLogic.ResourcePrepareProcess(
                     () =>
