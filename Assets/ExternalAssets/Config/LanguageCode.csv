@@ -1,5 +1,5 @@
 Code,EN,JP,CH
-Title,MUGEN COMBAT,ムゲンコンバット,无尽格斗
+Title,Gem Warrior,ジェムコンバット,魔石格斗
 PressStart,Press Start,タップしてスタート,Press Start
 LoginByEmail,Login,ログイン,登陆
 NotAuthorizedByTitle,Server under maintenance,サーバーメンテナンス中,服务器维护中
@@ -9,10 +9,10 @@ Updating,Data updating,データ更新中,数据更新中
 ,,,
 Adventure,Adventure,アドベンチャー,探险
 Arena,Arena,アリーナ,竞技场
-Gacha,Skill Gem Gacha,スキルジェムガチャ,许愿
+Gacha,Skill Gem Gacha,ガチャ,许愿
 Fighter,Fighter,ファイター,战士
 SkillGem,Skill Gem,スキルジェム,技能宝石
-Practice,Practice,練習,试验
+Practice,Practice,プラクティス,试验
 PlsClearStage5,Unlock after clearing the 5th level,第5ステージクリア後にアンロック,战胜第5关敌人后开启
 ,,,
 TimeTillNextSeason,Till Next Season,次のシーズンまで,距离下一个赛季还有
