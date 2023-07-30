@@ -118,10 +118,16 @@ namespace mainMenu
         
         public void RefreshInfo(SkillConfig config)
         {
+            if (config == null)
+            {
+                Debug.Log("skill config error");
+                return;
+            }
+            
             IconForShow(config.RECORD_ID);
             keyName.text = config.REAL_NAME;
 
-            if (PlayerAccountInfo.Me.TitleDisplayName.Contains("IconDev"))
+            if (PlayerAccountInfo.Me.TitleDisplayName != null && PlayerAccountInfo.Me.TitleDisplayName.Contains("IconDev"))
             {
                 showName.text = config.RECORD_ID +"."+ SkillNameTable.GetSkillName(config.RECORD_ID);
             }
@@ -132,11 +138,8 @@ namespace mainMenu
             
             ShowSkillStoneExType(ex1Icon, ex2Icon, ex3Icon, config.SP_LEVEL);
             ShowSKillRanges(close, near, far, config.AIAttrs.AI_MIN_DIS, config.AIAttrs.AI_MAX_DIS);
-            atIcon.SetActive(config.STATE_TYPE == BehaviorType.GI ||
-                             config.STATE_TYPE == BehaviorType.GM || 
-                             config.STATE_TYPE == BehaviorType.GR);
-            defenceIcon.SetActive(config.STATE_TYPE == BehaviorType.CT || 
-                                  config.STATE_TYPE == BehaviorType.Def);
+            atIcon.SetActive(config.STATE_TYPE is BehaviorType.GI or BehaviorType.GM or BehaviorType.GR);
+            defenceIcon.SetActive(config.STATE_TYPE is BehaviorType.CT or BehaviorType.Def);
         }
         
         public static void ShowSKillRanges(GameObject close, GameObject near, GameObject far, float disMIN, float disMAX)
