@@ -9,7 +9,8 @@ using Newtonsoft.Json;
 public class NoAdsProductCell : MonoBehaviour
 {
     [SerializeField] private Text rewardedAdDMCount;
-
+    [SerializeField] private Text extraText;
+    
     void Start()
     {
         RequestAdRewards();
@@ -37,8 +38,13 @@ public class NoAdsProductCell : MonoBehaviour
             {
                 int reward = Convert.ToInt32(jsonResult["rewardDM"]);
                 Debug.Log("Received ad reward: " + reward);
-                rewardedAdDMCount.text = reward.ToString();
-                // 在这里，你可以根据返回的奖励值来更新游戏状态或UI
+                if (reward > 0)
+                {
+                    rewardedAdDMCount.text = reward.ToString();
+                    extraText.text = Translate.Get("skippedAdRewardsIntro");
+                    rewardedAdDMCount.gameObject.SetActive(true);
+                    extraText.gameObject.SetActive(true);
+                }
             }
             else
             {
