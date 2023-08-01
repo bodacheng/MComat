@@ -7,6 +7,7 @@ using DummyLayerSystem;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.Purchasing;
+using Newtonsoft.Json;
 
 public class IAPManager : MonoBehaviour, IStoreListener {
 
@@ -272,11 +273,34 @@ public class IAPManager : MonoBehaviour, IStoreListener {
                         }, 
                         (x) =>
                         {
+                            var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(x.FunctionResult));
+                            if (jsonResult.ContainsKey("rewardDM"))
+                            {
+                                int reward = Convert.ToInt32(jsonResult["rewardDM"]);
+                                if (reward > 0)
+                                {
+                                    Currencies.DiamondCount.Value += reward;
+                                }
+                            }
+                            else
+                            {
+                                Debug.LogError("Reward not found in cloud script result");
+                            }
+                            var buyNoAdsLayer = UILayerLoader.Get<BuyNoAds>();
+                            if (buyNoAdsLayer != null)
+                                UILayerLoader.Remove<BuyNoAds>();
+
+                            var arenaFightOver = UILayerLoader.Get<ArenaFightOver>();
+                            if (arenaFightOver != null)
+                                arenaFightOver.AdBtnParent.gameObject.SetActive(false);
+                            
                             PlayerAccountInfo.Me.noAdsState = true;
                             var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
                             if (shopTopLayer != null)
                                 shopTopLayer.ShowNoAdsProduct();
-                            Debug.Log(x);
+                            
+                            
+                            
                             ProgressLayer.Close();
                         }, 
                         y =>

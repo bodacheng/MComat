@@ -288,10 +288,10 @@ handlers.setNoAdsStatus = function(args, context) {
                 }
             );
             
-            return { rewardedDM : userSkippedAdRewards };
+            return { rewardDM : userSkippedAdRewards };
         }
     }
-    return { rewardedDM : 0 };
+    return { rewardDM : 0 };
 };
 
 function GetUserSkippedAdRewards() {
