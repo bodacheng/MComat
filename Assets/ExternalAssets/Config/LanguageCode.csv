@@ -183,6 +183,6 @@ NeedToUpdate,"New version detected, please update the program.",新しいバー�
 OneTimeBundle,Super Value Gift Pack,超お得なパック,超值礼包
 CanOnlyBuyOnce,One-time Purchase,1回限り,限购1次
 buyVip,VIP,VIP購入,VIP资格
-buyVipIntro,,,一次性买断VIP资格，从此所有关卡不需观看广告也能获得翻倍报酬！（普通关卡2倍，BOSS关卡3倍）
-skippedAdRewardsIntro,,,至今未观看广告所遗漏报酬将被补发！
-totalSkippedReward,,,立刻获得
+buyVipIntro,"Purchase VIP membership in a one-time payment, and from then on, receive double rewards for all levels without watching ads! (Regular levels 2x, BOSS levels 3x)",一括でVIPメンバーシップを購入すると、今後はすべてのレベルで広告を見ずに報酬が倍になります！（通常のレベル2倍、BOSSレベル3倍）"（いっかつでVIPメンバーシップをこうにゅうすると、こんごはすべてのレベルでこうこくをみずにほうしゅうがばいになります！（つうじょうのレベル2ばい、BOSSレベル3ばい）,一次性买断VIP资格，从此所有关卡不需观看广告也能获得翻倍报酬！（普通关卡2倍，BOSS关卡3倍）
+skippedAdRewardsIntro,Rewards for ads not watched until now will be reissued!,今まで未視聴の広告の報酬が付与されます！,至今未观看广告的报酬将被补发！
+totalSkippedReward,Obtain Immediately,すぐに取得,立刻获得
