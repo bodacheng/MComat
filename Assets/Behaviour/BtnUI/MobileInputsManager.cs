@@ -413,10 +413,17 @@ public class MobileInputsManager : MonoBehaviour {
     void RefreshPattern(Button button, string skillId) //按钮切换也可以在这里做文章
     {
         Vector3 targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, button.GetComponent<RectTransform>(), 5);
-        var target = btnIcons[button];
-        foreach(var pair in target)
+        if (btnIcons.ContainsKey(button))
         {
-            pair.Value.gameObject.SetActive(pair.Key == skillId);
+            var target = btnIcons[button];
+            foreach(var pair in target)
+            {
+                pair.Value.gameObject.SetActive(pair.Key == skillId);
+            }
+        }
+        else
+        {
+            Debug.Log("战斗按键指示器逻辑错误："+ button);
         }
         
         if (_elementEffects.ContainsKey(_focusing))

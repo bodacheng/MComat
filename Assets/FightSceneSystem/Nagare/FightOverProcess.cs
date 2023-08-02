@@ -144,6 +144,7 @@ namespace FightScene
         
         public override void ProcessEnd()
         {
+            
         }
         
         void LocalGameRestart(int mode)
