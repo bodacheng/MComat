@@ -185,3 +185,4 @@ CanOnlyBuyOnce,One-time Purchase,1回限り,限购1次
 buyVip,VIP,VIP購入,VIP资格
 buyVipIntro,,,一次性买断VIP资格，从此所有关卡不需观看广告也能获得翻倍报酬！（普通关卡2倍，BOSS关卡3倍）
 skippedAdRewardsIntro,,,至今未观看广告所遗漏报酬将被补发！
+totalSkippedReward,,,立刻获得
