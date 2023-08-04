@@ -29,7 +29,10 @@ public class UnitListPage : MSceneProcess
             }
         );
         layer.DisplayUnitIcons(dataAccess.Units.Dic, true);
-        UnitIconBtn(PreScene.target.Focusing.id);
+        if (PlayerAccountInfo.Me.tutorialProgress == "Finished")
+        {
+            UnitIconBtn(PreScene.target.Focusing.id);
+        }
         SetLoaded(true);
     }
     

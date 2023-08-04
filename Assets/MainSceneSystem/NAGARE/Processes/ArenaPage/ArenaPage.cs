@@ -144,6 +144,7 @@ public partial class ArenaPage : MSceneProcess
         if (PlayerAccountInfo.Me.TitleDisplayName == null)
         {
             SettingPage.SetNickName((_) => Enter(), false);
+            SetLoaded(true);
         }
         else
         {
@@ -165,6 +166,7 @@ public partial class ArenaPage : MSceneProcess
     {
         UILayerLoader.Remove<ArenaNewSeason>();
         UILayerLoader.Remove<ArenaLayer>();
+        UILayerLoader.Remove<NickNameLayer>();
     }
     
     // 以下数值设置的与CloudScript.ArenaPointUp一致
