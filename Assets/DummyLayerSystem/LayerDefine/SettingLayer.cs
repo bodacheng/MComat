@@ -26,7 +26,6 @@ public class SettingLayer : UILayer
     
     #region Sound
     [SerializeField] Slider bgmSlider;
-    [SerializeField] Slider cvSlider;
     [SerializeField] Slider effectsSoundsSlider;
     #endregion
 
@@ -276,7 +275,6 @@ public class SettingLayer : UILayer
     {
         effectsSoundsSlider.value = AppSetting.Value.EffectsVolume;
         bgmSlider.value = AppSetting.Value.BgmVolume;
-        cvSlider.value = AppSetting.Value.CvVolume;
     }
     
     public void OnBgmChange()
@@ -287,10 +285,5 @@ public class SettingLayer : UILayer
     public void OnEffectChange()
     {
         AppSetting.Value.EffectsVolume = effectsSoundsSlider.value;
-    }
-    
-    public void OnCVsChange()
-    {
-        AppSetting.Value.CvVolume = cvSlider.value;        
     }
 }

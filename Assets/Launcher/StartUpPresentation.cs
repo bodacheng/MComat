@@ -41,7 +41,7 @@ public class StartUpPresentation : MonoBehaviour
         AppSetting.BGMSource = audioSource;
         AppSetting.BGMSource.volume = AppSetting.Value.BgmVolume;
         AppSetting.UiAudioSource = uiAudioSource;
-        AppSetting.UiAudioSource.volume = AppSetting.Value.BgmVolume;
+        AppSetting.UiAudioSource.volume = AppSetting.Value.EffectsVolume;
         OnStart().Forget();
     }
     

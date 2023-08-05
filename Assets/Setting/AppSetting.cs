@@ -7,7 +7,7 @@ using Json;
 public class AppSetting
 {
     public static AppSetting Value = new AppSetting();
-    float _bgmVolume = 0.5f, _effectsVolume = 0.5f, _cvVolume = 0.5f;
+    float _bgmVolume = 0.5f, _effectsVolume = 0.5f;
     
     public SystemLanguage Language { get; set; } = SystemLanguage.English;
 
@@ -30,7 +30,7 @@ public class AppSetting
         {
             if (value != null)
             {
-                value.volume = AppSetting.Value._bgmVolume;
+                value.volume = AppSetting.Value._effectsVolume;
             }
             uiAudioSource = value;
         }
@@ -77,15 +77,14 @@ public class AppSetting
     public float EffectsVolume
     {
         get => _effectsVolume;
-        set => _effectsVolume = Mathf.Clamp(value, 0, 1);
+        set
+        {
+            _effectsVolume = Mathf.Clamp(value, 0, 1);
+            if (UiAudioSource != null)
+                UiAudioSource.volume = _effectsVolume;
+        }
     }
-    
-    public float CvVolume
-    {
-        get => _cvVolume;
-        set => _cvVolume = Mathf.Clamp(value, 0, 1);
-    }
-    
+
     public static void Save()
     {
         string json = JsonConvert.SerializeObject(Value);
@@ -107,7 +106,7 @@ public class AppSetting
                 Language = (Application.systemLanguage == SystemLanguage.ChineseSimplified ||
                            Application.systemLanguage == SystemLanguage.ChineseTraditional) ? 
                     SystemLanguage.Chinese : Application.systemLanguage,
-                _bgmVolume = 0.5f, _effectsVolume = 0.5f, _cvVolume = 0.5f
+                _bgmVolume = 0.5f, _effectsVolume = 0.5f
             };
             Save();
         }
