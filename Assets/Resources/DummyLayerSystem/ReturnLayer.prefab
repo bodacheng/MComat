@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6c66ea8e4544b1e9fdd61f99df7b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  returnButton: {fileID: 3875049384089849795}
+  returnButton: {fileID: 459526452471278700}
   indicator: {fileID: 4463092804942914950}
   curtain: {fileID: 4239098444007544518}
 --- !u!1001 &3165027021796828847
@@ -247,26 +247,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: back
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2173725335058901356, guid: f530828d146274dae910feec60928b5e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f530828d146274dae910feec60928b5e, type: 3}
---- !u!224 &3875049384089849794 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2173725335058901357, guid: f530828d146274dae910feec60928b5e,
-    type: 3}
-  m_PrefabInstance: {fileID: 3165027021796828847}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3875049384089849795 stripped
+--- !u!114 &459526452471278700 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2173725335058901356, guid: f530828d146274dae910feec60928b5e,
+  m_CorrespondingSourceObject: {fileID: 3282279227197770435, guid: f530828d146274dae910feec60928b5e,
     type: 3}
   m_PrefabInstance: {fileID: 3165027021796828847}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f06d2816ba830496b87fa3769f55cfb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &3875049384089849794 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2173725335058901357, guid: f530828d146274dae910feec60928b5e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3165027021796828847}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4463092804942914950 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1593280364817613609, guid: f530828d146274dae910feec60928b5e,

@@ -9,7 +9,7 @@ public class TitleBgLayer : UILayer
 {
     [SerializeField] Image targetImage;
     [SerializeField] Button touchScreenBtn;
-    [SerializeField] Button skipBtn;
+    [SerializeField] BOButton skipBtn;
     [SerializeField] LanguageConverter languageConverter;
     [SerializeField] Sprite targetSprite;
     [SerializeField] RectTransform content;

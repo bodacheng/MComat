@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class FightBeginBtn : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private Button btn;
+    [SerializeField] private BOButton btn;
 
     public void SetAction(Action action)
     {

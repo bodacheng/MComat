@@ -44,8 +44,8 @@ public class SettingLayer : UILayer
     #endregion
 
     #region linkDevice
-    [SerializeField] Button linkDeviceBtn;
-    [SerializeField] Button unLinkDeviceBtn;
+    [SerializeField] BOButton linkDeviceBtn;
+    [SerializeField] BOButton unLinkDeviceBtn;
     [SerializeField] Text linkInstruction;
     #endregion
     

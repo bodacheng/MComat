@@ -10,7 +10,7 @@ public class MailDetailView : UILayer
     [SerializeField] Text message;
     [SerializeField] RectTransform expirationT;
     [SerializeField] Text expiration;
-    [SerializeField] Button claimPresentBtn;
+    [SerializeField] BOButton claimPresentBtn;
 
     private Action<Image, string> _iconRefresh;
     public void Setup(Action<Image, string> iconRefresh)

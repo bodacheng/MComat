@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DropTablePage : MonoBehaviour
 {
@@ -8,8 +7,8 @@ public class DropTablePage : MonoBehaviour
     [SerializeField] private string itemId;
     [SerializeField] private string currencyCode;
     [SerializeField] private int currencyCount;
-    [SerializeField] private Button gotcha;
-    [SerializeField] private Button openDropTableInfo;
+    [SerializeField] private BOButton gotcha;
+    [SerializeField] private BOButton openDropTableInfo;
     public string ItemId => itemId;
 
     public void Setup(Action<string,string,int> nine, Action<string> dropTableInfo, bool tutorial)

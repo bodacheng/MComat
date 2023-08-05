@@ -545,7 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NineForShow: {fileID: 2862010233716647956}
-  Skip: {fileID: 2675247796507632391}
+  Skip: {fileID: 3093456851285706824}
   SpeedOnce: {fileID: 55140319860829196}
   stoneFigureSp0: gachastar0
   stoneFigureSp1: gachastar1
@@ -1080,16 +1080,16 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2008997427530808863}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2675247796507632391 stripped
+--- !u!114 &3093456851285706824 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4521903430479797528, guid: 7edc842b9af9b44cfb31a4895f940176,
+  m_CorrespondingSourceObject: {fileID: 3535130105720845911, guid: 7edc842b9af9b44cfb31a4895f940176,
     type: 3}
   m_PrefabInstance: {fileID: 2008997427530808863}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f06d2816ba830496b87fa3769f55cfb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8104971807006538626

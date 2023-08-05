@@ -8,7 +8,7 @@ using mainMenu;
 
 public partial class NineForShow : MonoBehaviour
 {
-    public Button A1T, A2T, A3T, B1T, B2T, B3T, C1T, C2T, C3T;
+    public BOButton A1T, A2T, A3T, B1T, B2T, B3T, C1T, C2T, C3T;
     [SerializeField] Image A1Frame, A2Frame, A3Frame, B1Frame, B2Frame, B3Frame, C1Frame, C2Frame, C3Frame;
     [SerializeField] string abnormalSkillSetEffectKey = "defaultmagic/abnormalSkillSet.prefab";
     [SerializeField] string notQualifiedEffectKey = "defaultmagic/skillSetWarn.prefab";

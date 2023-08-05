@@ -228,7 +228,7 @@ MonoBehaviour:
   message: {fileID: 5263684349207064922}
   expirationT: {fileID: 6674192794132632781}
   expiration: {fileID: 5263684350142791238}
-  claimPresentBtn: {fileID: 2615947786757926783}
+  claimPresentBtn: {fileID: 4676803475881853721}
 --- !u!1 &5263684349970836896
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,15 +803,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6039317284488953373}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2615947786757926783 stripped
+--- !u!114 &4676803475881853721 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8611517680571896162, guid: e7101589f298a4942b9880a3e3b7277e,
+  m_CorrespondingSourceObject: {fileID: 1380530208839777540, guid: e7101589f298a4942b9880a3e3b7277e,
     type: 3}
   m_PrefabInstance: {fileID: 6039317284488953373}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f06d2816ba830496b87fa3769f55cfb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

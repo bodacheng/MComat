@@ -8,8 +8,8 @@ public class MailBox : UILayer
 {
     [SerializeField] MailListView mailListViewPrefab;
     [SerializeField] VerticalLayoutGroup mailBoxT;
-    [SerializeField] Button readAll;
-    [SerializeField] Button deleteAllRead;
+    [SerializeField] BOButton readAll;
+    [SerializeField] BOButton deleteAllRead;
     
     readonly List<MailListView> _currentMailListViews = new List<MailListView>();
     

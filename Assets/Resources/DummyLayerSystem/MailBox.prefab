@@ -320,8 +320,8 @@ MonoBehaviour:
   mailListViewPrefab: {fileID: 5041226132193086383, guid: ee3761ed8e8d84a4c8e55abc83e9b672,
     type: 3}
   mailBoxT: {fileID: 1682121644798879510}
-  readAll: {fileID: 8854938149303215112}
-  deleteAllRead: {fileID: 2067189496971079722}
+  readAll: {fileID: 2182537219773368430}
+  deleteAllRead: {fileID: 8638888857391498411}
 --- !u!1 &1682121645038213436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,16 +1017,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7101589f298a4942b9880a3e3b7277e, type: 3}
---- !u!114 &8854938149303215112 stripped
+--- !u!114 &2182537219773368430 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8611517680571896162, guid: e7101589f298a4942b9880a3e3b7277e,
+  m_CorrespondingSourceObject: {fileID: 1380530208839777540, guid: e7101589f298a4942b9880a3e3b7277e,
     type: 3}
   m_PrefabInstance: {fileID: 964138522271167850}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f06d2816ba830496b87fa3769f55cfb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &8854938149303215115 stripped
@@ -1175,15 +1175,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8977109161470639604}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2067189496971079722 stripped
+--- !u!114 &8638888857391498411 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6928006123974659550, guid: 40bbc1c4c6c5d4950a57c917b4834809,
+  m_CorrespondingSourceObject: {fileID: 825960406865033567, guid: 40bbc1c4c6c5d4950a57c917b4834809,
     type: 3}
   m_PrefabInstance: {fileID: 8977109161470639604}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f06d2816ba830496b87fa3769f55cfb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

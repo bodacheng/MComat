@@ -2,12 +2,11 @@
 using System.Threading;
 using DummyLayerSystem;
 using mainMenu;
-using UnityEngine.UI;
 using UnityEngine;
 
 public class ReturnLayer : UILayer
 {
-    [SerializeField] Button returnButton;
+    [SerializeField] BOButton returnButton;
     [SerializeField] GameObject indicator;
     [SerializeField] GameObject curtain;
     

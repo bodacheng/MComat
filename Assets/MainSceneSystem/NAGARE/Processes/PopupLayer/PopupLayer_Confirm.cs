@@ -10,8 +10,8 @@ public partial class PopupLayer : UILayer
     [Header("Validation")]
     [SerializeField] RectTransform ValidationWindow;
     [SerializeField] Text ValidationIntro;
-    [SerializeField] Button YesButton;
-    [SerializeField] Button NoButton;
+    [SerializeField] BOButton YesButton;
+    [SerializeField] BOButton NoButton;
 
     private static readonly Color windowBgColor = new Color(0,0,0,0.5f);
     

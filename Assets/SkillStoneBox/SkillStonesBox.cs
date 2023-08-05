@@ -10,13 +10,13 @@ namespace mainMenu
         
         [Header("type按钮")]
         [SerializeField] Dropdown types;
-        [SerializeField] Button NormalTab;
-        [SerializeField] Button EX1Tab;
-        [SerializeField] Button EX2Tab;
-        [SerializeField] Button EX3Tab;
+        [SerializeField] BOButton NormalTab;
+        [SerializeField] BOButton EX1Tab;
+        [SerializeField] BOButton EX2Tab;
+        [SerializeField] BOButton EX3Tab;
 
         [Header("order")] 
-        [SerializeField] Button orderBtn;
+        [SerializeField] BOButton orderBtn;
         [Header("Order Button")]
         [SerializeField] Text orderButtonText;
         
