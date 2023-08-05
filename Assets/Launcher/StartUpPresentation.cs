@@ -75,19 +75,38 @@ public class StartUpPresentation : MonoBehaviour
             return;
         }
         
+        var r_text = string.Empty;
+        switch (AppSetting.Value.Language)
+        {
+            case SystemLanguage.English:
+                r_text = "Inspecting resources";
+                break;
+            case SystemLanguage.Japanese:
+                r_text = "リソースを検査中";
+                break;
+            case SystemLanguage.Chinese:
+                r_text = "检查资源中";
+                break;
+        }
+        ProgressLayer.Loading(r_text);
+        
         var bytes = await AddressablesLogic.GetWholeDownLoadSize(
             () =>
             {
                 PopupLayer.ArrangeConfirmWindow(
-                    (() =>
+                    (
+                        () =>
                     {
                         SceneManager.LoadScene(0);
-                    }), 
-                "Download Failed");
+                    }
+                ), 
+                "Download Failed"
+                );
             },
             starter.DownLoadLabels
         );
         
+        ProgressLayer.Close();
         if (bytes > 0)
         {
             DownLoadConfirm("Download Size :" + bytes / 1048576 + "MB" + "\n\n" + "Start to download", bytes);

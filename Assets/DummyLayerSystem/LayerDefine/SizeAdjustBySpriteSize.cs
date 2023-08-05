@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 #if UNITY_EDITOR
@@ -8,6 +9,12 @@ public class SizeAdjustBySpriteSize : MonoBehaviour
 {
     [SerializeField] Image image;
     [SerializeField] bool fixedHeight = true;
+
+    #region real time size change
+    [SerializeField] bool changeSizeRealTime;
+    [SerializeField] float upDownSizeInterval = 100;
+    #endregion
+
     
     public void AdjustSize()
     {
@@ -24,6 +31,19 @@ public class SizeAdjustBySpriteSize : MonoBehaviour
             rectTransform.sizeDelta = new Vector2(
                 rectTransform.rect.width, 
                 sprite.rect.height * rectTransform.rect.width / sprite.rect.width);
+        }
+    }
+
+    void Start()
+    {
+        if (changeSizeRealTime)
+        {
+            var sprite = image.sprite;
+            var rectTransform = transform.GetComponent<RectTransform>();
+            var targetHeight = Screen.height - upDownSizeInterval * 2;
+            rectTransform.sizeDelta = new Vector2(
+                sprite.rect.width * targetHeight / sprite.rect.height, 
+                targetHeight);
         }
     }
 }
