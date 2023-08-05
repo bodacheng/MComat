@@ -10,6 +10,7 @@ public class StartUpPresentation : MonoBehaviour
     [SerializeField] bool frontSceneFight;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioSource uiAudioSource;
+    [SerializeField] Canvas canvas;
     
     void OpenAppStoreLink()
     {
@@ -35,7 +36,7 @@ public class StartUpPresentation : MonoBehaviour
     
     void Start()
     {
-        //Screen.SetResolution(1920, 1080, true);
+        PosCal.Canvas = this.canvas;
         UILayerLoader.SetHanger(t);
         AppSetting.Load();
         AppSetting.BGMSource = audioSource;

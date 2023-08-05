@@ -13,8 +13,7 @@ public class ImageBg : UILayer
     
     void AdjustSize(Image myImage)
     {
-        float canvasHeight = myImage.canvas.pixelRect.height;
-        float newHeight = canvasHeight - 2 * topAndBottomMargin;
+        float newHeight = PosCal.CanvasHeight - 2 * topAndBottomMargin;
         float aspectRatio = myImage.sprite.rect.width / myImage.sprite.rect.height;
 
         float newWidth = newHeight * aspectRatio;
