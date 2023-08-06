@@ -47,7 +47,7 @@ public partial class PlayFabReadClient
                 PopupLayer.ArrangeWarnWindow(Translate.Get("DuplicateUsername"));
                 break;
             case PlayFabErrorCode.InvalidParams:
-                PopupLayer.ArrangeWarnWindow(Translate.Get("InvalidUsername"));
+                PopupLayer.ArrangeWarnWindow(Translate.Get("InvalidParams"));
                 break;
             case PlayFabErrorCode.AccountNotFound:
                 PopupLayer.ArrangeWarnWindow(Translate.Get("AccountNotFound"));

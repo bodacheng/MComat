@@ -1,10 +1,9 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AutoSwitch : MonoBehaviour
 {
-    [SerializeField] private Button btn;
+    [SerializeField] private BOButton btn;
     [SerializeField] private Animator animator;
     
     private Action<bool> _action;

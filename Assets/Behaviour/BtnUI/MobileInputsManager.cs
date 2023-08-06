@@ -21,11 +21,11 @@ public enum InputKey
 
 public class MobileInputsManager : MonoBehaviour {
 
-    [SerializeField] Button a1Btn;
-    [SerializeField] Button a2Btn;
-    [SerializeField] Button a3Btn;
-    [SerializeField] Button defendBtn;
-    [SerializeField] Button dashBtn;
+    [SerializeField] BOButton a1Btn;
+    [SerializeField] BOButton a2Btn;
+    [SerializeField] BOButton a3Btn;
+    [SerializeField] BOButton defendBtn;
+    [SerializeField] BOButton dashBtn;
     [SerializeField] UltimateJoystick joystick;
     [SerializeField] Transform effectsParent;
     

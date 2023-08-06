@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using UnityEngine;
-using UnityEngine.UI;
 using FightScene;
 
 public class FightingStepLayer : UILayer
 {
     [Header("Pause Button")]
-    [SerializeField] Button pauseButton;
+    [SerializeField] BOButton pauseButton;
     
     [Header("MobileInputsManager")]
     [SerializeField] MobileInputsManager inputsManager;

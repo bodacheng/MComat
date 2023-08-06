@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 133c13e27409e49729eb8ffa94ced0b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: 6627930914810964217}
+  btn: {fileID: 2462201152036790829}
   animator: {fileID: 2472616226885705146}
 --- !u!1 &2809870878222129075
 GameObject:
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 5262452460312104088}
   - component: {fileID: 3007332893013959155}
   - component: {fileID: 6874167072507922864}
-  - component: {fileID: 6627930914810964217}
+  - component: {fileID: 2462201152036790829}
   m_Layer: 5
   m_Name: Button (Legacy)
   m_TagString: Untagged
@@ -410,7 +410,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6627930914810964217
+--- !u!114 &2462201152036790829
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -419,7 +419,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7302747040647036953}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f06d2816ba830496b87fa3769f55cfb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -435,7 +435,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -454,3 +454,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  doubleClick:
+    m_PersistentCalls:
+      m_Calls: []
+  hold:
+    m_PersistentCalls:
+      m_Calls: []
+  disableTransitionOverride: 0
+  activateDoubleClick: 0
+  activateHold: 0
+  sound: 0
+  disableSprite: {fileID: 0}
+  text: {fileID: 0}
