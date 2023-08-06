@@ -183,7 +183,6 @@ namespace mainMenu
             var questInfo = new QuestInfoPage();
             var unitListPage = new UnitListPage();
             var memberDetailEdit = new SkillEditPage();
-            var memberDetailSkillShow = new SkillShowPage();
             var arcadeFrontPage = new ArcadeFrontPage(PlayerAccountInfo.Me.ArcadeModeManager);
             
             // Shop
@@ -209,7 +208,6 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.QuestInfo, questInfo);
             ProcessesRunner.Main.Add(MainSceneStep.UnitList, unitListPage);
             ProcessesRunner.Main.Add(MainSceneStep.UnitSkillEdit, memberDetailEdit);
-            ProcessesRunner.Main.Add(MainSceneStep.UnitSkillShow, memberDetailSkillShow);
             ProcessesRunner.Main.Add(MainSceneStep.FrontPage, frontPage);
             ProcessesRunner.Main.Add(MainSceneStep.ArcadeFront, arcadeFrontPage);
             ProcessesRunner.Main.Add(MainSceneStep.Arena, arenaPage);

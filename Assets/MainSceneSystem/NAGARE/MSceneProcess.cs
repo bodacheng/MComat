@@ -32,7 +32,6 @@
         TeamEditFront = 2,
         UnitList = 5,
         UnitSkillEdit = 16,
-        UnitSkillShow = 17,
         SkillStoneList = 15,
         SkillStones_Sell = 100,
         GotchaFront = 6,

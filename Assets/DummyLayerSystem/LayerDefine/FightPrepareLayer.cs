@@ -9,7 +9,7 @@ public class FightPrepareLayer : UILayer
     [SerializeField] RectTransform myTeamShowT;
     [SerializeField] RectTransform enemyTeamShowT;
     [SerializeField] float unitIconSize = 200;
-    [SerializeField] Button editTeamButton; // 根据进入战斗模式决定是否显示
+    [SerializeField] BOButton editTeamButton; // 根据进入战斗模式决定是否显示
     [SerializeField] GameObject teamEditIndicator;
     [SerializeField] Text teamEditIndicatorText;
     [SerializeField] FightModeSwitch fightModeSwitch;

@@ -24,10 +24,10 @@ public class TeamEditLayer : UILayer
     [SerializeField] NineForShow nineForShow;
     
     [Header("队伍保存")]
-    [SerializeField] Button saveBtn;
+    [SerializeField] BOButton saveBtn;
     
     [Header("技能编辑按钮")]
-    [SerializeField] Button skillEditButton;
+    [SerializeField] BOButton skillEditButton;
     [SerializeField] ConfirmBtnColorSwapper skillEditBtnColorSwapper;
 
     [Header("指示")]

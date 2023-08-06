@@ -22,8 +22,8 @@ public class MailListView : MonoBehaviour
     [SerializeField] Text title;
     [SerializeField] Text expiration;
     [SerializeField] GameObject unReadFlag;
-    [SerializeField] Button claimBtn;
-    [SerializeField] Button detailBtn;
+    [SerializeField] BOButton claimBtn;
+    [SerializeField] BOButton detailBtn;
     
     [SerializeField] Color unreadc = new Color(0.4f,0.4f,1, 1);
     [SerializeField] Color readc = new Color(0.4f,0.4f,1, 0.6f); 

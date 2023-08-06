@@ -6,7 +6,7 @@ using Cysharp.Threading.Tasks;
 
 public class StageButton : MonoBehaviour
 {
-    [SerializeField] Button button;
+    [SerializeField] BOButton button;
     [SerializeField] HeroIcon unitIconPrefab;
     [SerializeField] RectTransform iconsT;
     [SerializeField] Text id;

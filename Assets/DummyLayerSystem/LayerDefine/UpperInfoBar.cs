@@ -6,14 +6,15 @@ using DG.Tweening;
 
 public class UpperInfoBar : UILayer
 {
-    [SerializeField] Button settingBtn;
-    [SerializeField] Button mailBtn;
+    [SerializeField] BOButton settingBtn;
+    [SerializeField] BOButton mailBtn;
     [SerializeField] GameObject unReadFlag;
     [SerializeField] Text titleDisplayName;
     [SerializeField] Text accountDiamondCoin;
-    [SerializeField] Button diamondPlus;
+    [SerializeField] BOButton diamondPlus;
     [SerializeField] Text accountIntelliCoin;
     [SerializeField] float currencyTextChangeDuration = 2f;
+    
     public void Interactable(bool on)
     {
         settingBtn.interactable = on;

@@ -43,6 +43,8 @@ public class CommonSetting : ScriptableObject
 
     [Tooltip("sound effects")] 
     [SerializeField] AudioClip btnTapSound;
+    [SerializeField] AudioClip btnConfirmSound;
+    [SerializeField] AudioClip exTabSound;
 
     [Tooltip("角色动画平滑区间")] 
     [SerializeField] private float characterAnimDuration = 0.25f;
@@ -77,6 +79,8 @@ public class CommonSetting : ScriptableObject
     public static float CharacterAnimDuration;
 
     public static AudioClip BtnTapSound;
+    public static AudioClip BtnConfirmSound;
+    public static AudioClip ExTabSound;
     
     public void Initialise()
     {
@@ -105,5 +109,7 @@ public class CommonSetting : ScriptableObject
         CharacterAnimDuration = characterAnimDuration;
 
         BtnTapSound = btnTapSound;
+        BtnConfirmSound = btnConfirmSound;
+        ExTabSound = exTabSound;
     }
 }

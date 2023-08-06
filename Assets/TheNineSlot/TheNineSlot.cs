@@ -26,13 +26,13 @@ namespace mainMenu
         C1DragAndDropCell, C2DragAndDropCell, C3DragAndDropCell;
         
         [Header("Remove all")]
-        public Button removeAllBtn;
+        public BOButton removeAllBtn;
     
         [Header("Random all")]
-        public Button randomBtn;
+        public BOButton randomBtn;
         
         [Header("技能石编辑确认")]
-        public Button ConfirmSkillChangeButton;
+        public BOButton ConfirmSkillChangeButton;
         [SerializeField] ConfirmBtnColorSwapper confirmBtnColorSwapper;
 
         [Header("OverHeat Indicator")]  
@@ -42,7 +42,7 @@ namespace mainMenu
         public GameObject confirmBtnIndicator;
         
         [Header("技能石编辑确认")]
-        public Button ResetButton;
+        public BOButton ResetButton;
         
         [Header("EXPoint+")]
         [SerializeField] List<GameObject> remainCharges;//固定是9个长度
@@ -57,7 +57,7 @@ namespace mainMenu
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _tabEffects;
         
-        public Button comboShowBtn, comboCloseBtn;
+        public BOButton comboShowBtn, comboCloseBtn;
         
         SkillStoneSlot _a1Slot, _a2Slot, _a3Slot;
         SkillStoneSlot _b1Slot, _b2Slot, _b3Slot;

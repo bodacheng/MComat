@@ -114,16 +114,25 @@ public class AppSetting
         BOButton.SetPlaySeMethod(
             (x) =>
             {
+                AudioClip clip = null;
                 switch (x)
                 {
                     case SeType.Tap:
-                        if (UiAudioSource != null)
-                        {
-                            UiAudioSource.PlayOneShot(CommonSetting.BtnTapSound);
-                        }
+                        clip = CommonSetting.BtnTapSound;
+                        break;
+                    case SeType.Confirm:
+                        clip = CommonSetting.BtnConfirmSound;
+                        break;
+                    case SeType.ExTab:
+                        clip = CommonSetting.ExTabSound;
                         break;
                     default:
+                        clip = CommonSetting.BtnTapSound;
                         break;
+                }
+                if (UiAudioSource != null)
+                {
+                    UiAudioSource.PlayOneShot(clip);
                 }
             }
         );

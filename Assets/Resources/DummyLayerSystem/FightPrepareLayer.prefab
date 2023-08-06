@@ -641,7 +641,7 @@ MonoBehaviour:
   myTeamShowT: {fileID: 5614356700318546432}
   enemyTeamShowT: {fileID: 1805342110505306726}
   unitIconSize: 200
-  editTeamButton: {fileID: 7090545318509655610}
+  editTeamButton: {fileID: 3122314446051631056}
   teamEditIndicator: {fileID: 2153183825879536808}
   teamEditIndicatorText: {fileID: 1675448305959260588}
   fightModeSwitch: {fileID: 2932593853097283732}
@@ -662,7 +662,7 @@ GameObject:
   - component: {fileID: 7090545318509655611}
   - component: {fileID: 7090545318509655620}
   - component: {fileID: 7090545318509655621}
-  - component: {fileID: 7090545318509655610}
+  - component: {fileID: 3122314446051631056}
   m_Layer: 5
   m_Name: EditTeam
   m_TagString: Untagged
@@ -729,7 +729,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7090545318509655610
+--- !u!114 &3122314446051631056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -738,7 +738,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7090545318509655608}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f06d2816ba830496b87fa3769f55cfb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -751,10 +751,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9372549, g: 1, b: 0, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 1, g: 0.8901961, b: 0, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -773,6 +773,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  doubleClick:
+    m_PersistentCalls:
+      m_Calls: []
+  hold:
+    m_PersistentCalls:
+      m_Calls: []
+  disableTransitionOverride: 0
+  activateDoubleClick: 0
+  activateHold: 0
+  sound: 0
+  disableSprite: {fileID: 0}
+  text: {fileID: 0}
 --- !u!1 &7180023111379748633
 GameObject:
   m_ObjectHideFlags: 0

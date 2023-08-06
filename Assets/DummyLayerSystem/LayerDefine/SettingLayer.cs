@@ -7,12 +7,12 @@ public class SettingLayer : UILayer
     [SerializeField] RectTransform selectedFrame;
     
     #region Btns
-    [SerializeField] Button accountBtn;
-    [SerializeField] Button volumeBtn;
-    [SerializeField] Button deviceBtn;
-    [SerializeField] Button supportBtn;
-    [SerializeField] Button languageBtn;
-    [SerializeField] Button nickNameBtn;
+    [SerializeField] BOButton accountBtn;
+    [SerializeField] BOButton volumeBtn;
+    [SerializeField] BOButton deviceBtn;
+    [SerializeField] BOButton supportBtn;
+    [SerializeField] BOButton languageBtn;
+    [SerializeField] BOButton nickNameBtn;
     #endregion
     
     #region Panels
@@ -38,8 +38,8 @@ public class SettingLayer : UILayer
     [SerializeField] RectTransform emailT;
     [SerializeField] InputField CurrentEmail;
     [SerializeField] InputField EmailInput;
-    [SerializeField] Button EmailConfirmBtn;
-    [SerializeField] Button SendPwResetBtn;
+    [SerializeField] BOButton EmailConfirmBtn;
+    [SerializeField] BOButton SendPwResetBtn;
     #endregion
 
     #region linkDevice
@@ -49,20 +49,20 @@ public class SettingLayer : UILayer
     #endregion
     
     #region Support
-    [SerializeField] Button privacyBtn;
-    [SerializeField] Button contactBtn;
+    [SerializeField] BOButton privacyBtn;
+    [SerializeField] BOButton contactBtn;
     #endregion
     
     #region Support
-    [SerializeField] Button chBtn;
-    [SerializeField] Button jpBtn;
-    [SerializeField] Button enBtn;
+    [SerializeField] BOButton chBtn;
+    [SerializeField] BOButton jpBtn;
+    [SerializeField] BOButton enBtn;
     [SerializeField] GameObject selectedIndicator;
     #endregion
     
     #region nickName
     [SerializeField] Text nickName;
-    [SerializeField] Button resetNickNameBtn;
+    [SerializeField] BOButton resetNickNameBtn;
     #endregion
 
     public void AccountPhase_EmailToBeSet()

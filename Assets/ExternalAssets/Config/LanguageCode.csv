@@ -30,6 +30,7 @@ Ex2Skill,EX2 Skill,コスト2必殺技,二费必杀
 Ex3Skill,EX3 Skill,コスト3必殺技,三费必杀
 ,,,
 illegalword,Contains words that cannot be used,使用できない単語が含んでる,含有非法字符
+InvalidParams,Invalid Params,入力された内容は使用できません,无效的输入
 InvalidUsername,Invalid Username,使用できない単語が含んでる,昵称不可用
 DuplicateUsername,Duplicate Username,他のプレイヤーが既に使ってる,昵称重复
 AccountNotFound,Account Not Found,アカウントが見つかりません,没有找到账户

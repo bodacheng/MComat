@@ -1210,8 +1210,7 @@ MonoBehaviour:
   MemberInfoT: {fileID: 7350828441340975044}
   _NineForShow: {fileID: 3588841461583543746}
   clickSkillEditIndicator: {fileID: 3207762172225437514}
-  SkillShowButton: {fileID: 7350828440633716043}
-  SkillEditButton: {fileID: 140172873115886934}
+  skillEditButton: {fileID: 7739922428162420813}
 --- !u!95 &1653027377911761984
 Animator:
   serializedVersion: 4
@@ -2072,18 +2071,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33785a0a0f404bec93eee5ee37434ac, type: 3}
---- !u!114 &140172873115886934 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7490222825170406146, guid: c33785a0a0f404bec93eee5ee37434ac,
-    type: 3}
-  m_PrefabInstance: {fileID: 7350828440686816852}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3588841461583543746 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6326787604693422998, guid: c33785a0a0f404bec93eee5ee37434ac,
@@ -2102,3 +2089,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7350828440686816852}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7739922428162420813 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 966824720547372569, guid: c33785a0a0f404bec93eee5ee37434ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 7350828440686816852}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06d2816ba830496b87fa3769f55cfb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

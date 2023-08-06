@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FightModeSwitch : MonoBehaviour
 {
-    [SerializeField] private Button btn;
+    [SerializeField] private BOButton btn;
     [SerializeField] private Text modeText;
     [SerializeField] private Animator animator;
     

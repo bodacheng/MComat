@@ -11,10 +11,12 @@ using UnityEditor;
 using UnityEditor.UI;
 #endif
 
-public enum SeType
-{
-    Tap
-}
+    public enum SeType
+    {
+        Tap,
+        Confirm,
+        ExTab
+    }
 
     public class BOButton : Button
     {
