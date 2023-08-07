@@ -57,9 +57,13 @@ public class FightingStepLayer : UILayer
             {
                 var pauseLayer = UILayerLoader.Load<FightScenePauseSupport>();
                 pauseLayer.Setup(
-                    ()=>{ Time.timeScale = 0; },
+                    ()=> { Time.timeScale = 0; },
                     FightScene.FightScene.target.ReturnToFront,
-                    ()=>{ Time.timeScale = 1; }
+                    () =>
+                    {
+                        Time.timeScale = 1;
+                        UILayerLoader.Remove<FightScenePauseSupport>();
+                    }
                 );
             });
     }
@@ -91,7 +95,7 @@ public class FightingStepLayer : UILayer
         RTFightManager.Target.team1.InputsManager = inputsManager;
         RTFightManager.Target.team2.InputsManager = inputsManager;
         
-        pauseButton.onClick.AddListener(pauseAction.Invoke);
+        pauseButton.SetListener(pauseAction.Invoke);
         
         team1UI.TeamMode = FightScene.FightScene.Fight.team1Mode;
         team2UI.TeamMode = FightScene.FightScene.Fight.team2Mode;

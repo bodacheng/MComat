@@ -18,6 +18,9 @@ using UnityEditor.UI;
         ExTab
     }
 
+/// <summary>
+/// 这个按钮扩展的bug：如果你设置Time.timeScale = 0，这个按钮会失效
+/// </summary>
     public class BOButton : Button
     {
         static System.Action<SeType> playSe;
