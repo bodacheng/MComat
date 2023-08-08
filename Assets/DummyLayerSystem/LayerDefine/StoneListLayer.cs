@@ -2,14 +2,13 @@ using System.Threading;
 using mainMenu;
 using UnityEngine;
 using dataAccess;
-using UnityEngine.UI;
 
 public class StoneListLayer : UILayer
 {
     public SkillStonesBox box;
     public SSLevelUpManager levelManager;
     [SerializeField] SkillStoneDetail skillStoneDetail;
-    [SerializeField] Button openPowerUpBtn;
+    [SerializeField] BOButton openPowerUpBtn;
     
     string _targetStoneID;
     public string TargetStoneID
@@ -22,11 +21,12 @@ public class StoneListLayer : UILayer
             skillStoneDetail.gameObject.SetActive(info != null);
             openPowerUpBtn.gameObject.SetActive(Stones.StoneCanLevelUp(_targetStoneID));
             if (info == null) return;
-            openPowerUpBtn.onClick.RemoveAllListeners();
-            openPowerUpBtn.onClick.AddListener(() =>
-            {
-                levelManager.OpenLevelUpPage();
-            });
+            openPowerUpBtn.SetListener(
+                () =>
+                {
+                    levelManager.OpenLevelUpPage();
+                }
+            );
         }
     }
     

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public partial class SSLevelUpManager : MonoBehaviour
 {
-    [SerializeField] Button cancelBtn;
-    [SerializeField] Button autoAdd;
-    [SerializeField] Button confirmLevelUp;
+    [SerializeField] BOButton cancelBtn;
+    [SerializeField] BOButton autoAdd;
+    [SerializeField] BOButton confirmLevelUp;
     [SerializeField] Text gdCount;
     
     [Header("升级对象技能石参数")]

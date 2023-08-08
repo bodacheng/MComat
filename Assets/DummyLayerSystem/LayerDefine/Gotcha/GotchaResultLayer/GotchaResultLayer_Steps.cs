@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using dataAccess;
+using DummyLayerSystem;
 
 public partial class GotchaResultLayer : UILayer
 {
@@ -10,6 +11,12 @@ public partial class GotchaResultLayer : UILayer
     // Gotcha总动画过程 点击画面的话进入下一个星星
     public async UniTask WholeAnimProcess(List<StoneOfPlayerInfo> results)
     {
+        var returnLayer = UILayerLoader.Load<ReturnLayer>();
+        if (returnLayer != null)
+        {
+            returnLayer.gameObject.SetActive(false);
+        }
+        
         showFinished = false;
         Reset();
         NineForShow.transform.gameObject.SetActive(false);
@@ -71,5 +78,10 @@ public partial class GotchaResultLayer : UILayer
         
         await NineForShow.ShowStones(a1, a2, a3, b1, b2, b3, c1, c2, c3);
         showFinished = true;
+        
+        if (returnLayer != null)
+        {
+            returnLayer.gameObject.SetActive(true);
+        }
     }
 }
