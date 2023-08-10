@@ -37,7 +37,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
-  - m_GUID: 734af955539d042dd9da37434dd5d86f
+  - m_GUID: 1e63144ad21b24c09a9f85c3115d3cb7
     m_Address: unit/3
     m_ReadOnly: 0
     m_SerializedLabels:
@@ -47,7 +47,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
-  - m_GUID: 2c523523fdd36443fb3fcfa2ec37e456
+  - m_GUID: 491ac11cee8234c9a95df9294c2e7f3e
     m_Address: unit/4
     m_ReadOnly: 0
     m_SerializedLabels:
