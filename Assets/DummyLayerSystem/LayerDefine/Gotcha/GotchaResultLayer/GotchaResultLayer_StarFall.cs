@@ -27,14 +27,16 @@ public partial class GotchaResultLayer : UILayer
         var targetPos = StarsFall.target.GetRandomStarPos();
         var effectSet = _effectDic[stone];
         var star = effectSet.StoneFigure;
-        star.Play();
+        star.ParticleSystem.Play();
+        star.PlaySoundOnce();
         star.transform.position =  StarsFall.target.GetEffectCenter();
         StarsFall.target.Camera.transform.DOLookAt(targetPos, 1f);
         var sequence = DOTween.Sequence().Append(star.transform.DOMove(targetPos, 1).OnComplete(() =>
         {
             var flash = effectSet.StoneFlashFigure;
             flash.transform.position = targetPos;
-            flash.Play();
+            flash.ParticleSystem.Play();
+            flash.PlaySoundOnce();
         })).Append(star.transform.DOMoveY(-600, 30f));
         effectSet.RunSequence(sequence);
     }

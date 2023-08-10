@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5796086602460285, guid: fffd28e4ead204e7aa9991b98db9eabf, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8c27f4478ecf7cc448cd2568607927a4, type: 3}
     - target: {fileID: 1222089484127045008, guid: fffd28e4ead204e7aa9991b98db9eabf,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.b

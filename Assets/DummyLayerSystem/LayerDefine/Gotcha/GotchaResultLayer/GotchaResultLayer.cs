@@ -71,9 +71,9 @@ public partial class GotchaResultLayer : UILayer
     
     private class StoneFallEffectSet
     {
-        public ParticleSystem StoneFigure;
-        public ParticleSystem StoneFlashFigure;
-        public ParticleSystem ScreenExplosionFigure;
+        public UIObject StoneFigure;
+        public UIObject StoneFlashFigure;
+        public UIObject ScreenExplosionFigure;
         Sequence _currentSequence;
 
         private Func<int, (string, string, string)> _getEffectName;
@@ -90,13 +90,13 @@ public partial class GotchaResultLayer : UILayer
             var flashName = effectName.Item2;
             var explosionName = effectName.Item3;
             
-            StoneFigure = await AddressablesLogic.LoadTOnObject<ParticleSystem>(stoneFigureName);
-            StoneFlashFigure = await AddressablesLogic.LoadTOnObject<ParticleSystem>(flashName);
-            ScreenExplosionFigure = await AddressablesLogic.LoadTOnObject<ParticleSystem>(explosionName);
+            StoneFigure = await AddressablesLogic.LoadTOnObject<UIObject>(stoneFigureName);
+            StoneFlashFigure = await AddressablesLogic.LoadTOnObject<UIObject>(flashName);
+            ScreenExplosionFigure = await AddressablesLogic.LoadTOnObject<UIObject>(explosionName);
             
-            StoneFigure.Stop(true);
-            StoneFlashFigure.Stop(true);
-            ScreenExplosionFigure.Stop(true);
+            StoneFigure.ParticleSystem.Stop(true);
+            StoneFlashFigure.ParticleSystem.Stop(true);
+            ScreenExplosionFigure.ParticleSystem.Stop(true);
         }
 
         public void Clear()
@@ -184,8 +184,8 @@ public partial class GotchaResultLayer : UILayer
     {
         foreach (var kv in _effectDic)
         {
-            kv.Value.StoneFlashFigure.Stop();
-            kv.Value.StoneFigure.Stop();
+            kv.Value.StoneFlashFigure.ParticleSystem.Stop();
+            kv.Value.StoneFigure.ParticleSystem.Stop();
         }
     }
 }

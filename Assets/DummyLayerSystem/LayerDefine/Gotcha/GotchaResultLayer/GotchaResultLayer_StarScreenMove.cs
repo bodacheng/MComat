@@ -47,16 +47,16 @@ public partial class GotchaResultLayer : UILayer
     {
         var effectSet = _effectDic[info];
         var screenStar = effectSet.StoneFigure;
-        screenStar.Play();
+        screenStar.ParticleSystem.Play();
         screenStar.transform.position = waitPos;
         effectSet.RunSequence(
             DOTween.Sequence().Append(screenStar.transform.DOMove(endPos, starScreenMoveDuration).OnComplete(
             () =>
             {
-                screenStar.Stop();
-                var effect = effectSet.ScreenExplosionFigure;
-                effect.transform.position = endPos;
-                effect.Play(true);
+                screenStar.ParticleSystem.Stop();
+                effectSet.ScreenExplosionFigure.transform.position = endPos;
+                effectSet.ScreenExplosionFigure.ParticleSystem.Play(true);
+                effectSet.ScreenExplosionFigure.PlaySoundOnce();
             })
         ));
     }
