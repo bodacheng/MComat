@@ -49,6 +49,11 @@ Confirm,Confirm,確定,确定
 Yes,Yes,はい,确定
 No,No,いいえ,取消
 ,,,
+PowerTips,Power Up Tips,戦闘力を向上させる方法,如何提高战斗力
+PowerTip1,・Try using skill gems to edit a more powerful skill set for the warrior.,・編集でもっと強力なスキルセットを創り出す,・ 尝试为战士编辑出更有力的技能组
+PowerTip2,・Obtain more powerful skill gems through gacha,・ガチャを通じて、より強力なスキルジェムを取得する,・通过许愿获取更强力的技能石
+PowerTip3,・Upgrade the skill gems equipped by the warrior,・戦士が装備しているスキルジェムをアップグレードする,・升级战士所装备的技能石
+,,,
 FightResume,Resume,再開,战斗继续
 FightQuit,Quit,停止,退出战斗
 ,,,

@@ -16,6 +16,7 @@ public class ArenaFightOver : UILayer
     [SerializeField] private GameObject loseObject;
     [SerializeField] private Image winImage;
     [SerializeField] private Image loseImage;
+    [SerializeField] private RectTransform powerUpTip;
     [SerializeField] private Button returnBtn;
     [SerializeField] private RectTransform dmParent;
     [SerializeField] private Text currentDmCurrency;
@@ -190,6 +191,7 @@ public class ArenaFightOver : UILayer
         else
         {
             loseObject.SetActive(true);
+            powerUpTip.gameObject.SetActive(true);
             DOTween.To(() => resultAnimFactor, (x) => resultAnimFactor = x, 2, 1).
                 OnUpdate(
                     () =>

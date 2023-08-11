@@ -135,7 +135,7 @@ public partial class ArenaPage : MSceneProcess
         }
         else
         {
-            PopupLayer.ArrangeWarnWindow(Translate.Get("NoArenaEnoughTicket"));
+            PopupLayer.ArrangeWarnWindow(Translate.Get("NoEnoughArenaTicket"));
         }
     }
     
