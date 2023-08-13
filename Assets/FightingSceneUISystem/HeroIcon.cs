@@ -78,6 +78,8 @@ public class HeroIcon : MonoBehaviour {
     void AdjustSize(Image icon)
     {
         var sprite = icon.sprite;
+        if (sprite == null)
+            return;
         var iconRect = icon.GetComponent<RectTransform>();
         var wholeParentRect = transform.GetComponent<RectTransform>();
         float spriteAspectRatio = sprite.rect.width / sprite.rect.height;

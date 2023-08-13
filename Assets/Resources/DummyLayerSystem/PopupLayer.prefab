@@ -520,7 +520,7 @@ PrefabInstance:
     - target: {fileID: 4599398632650404797, guid: ab04803d5c276457ea03841b256e73bf,
         type: 3}
       propertyPath: m_Name
-      value: UnitIconPrefab
+      value: UnitIcon
       objectReference: {fileID: 0}
     - target: {fileID: 4599398632650404797, guid: ab04803d5c276457ea03841b256e73bf,
         type: 3}
