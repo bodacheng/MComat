@@ -29,7 +29,7 @@ MonoBehaviour:
       c2: 10
       c3: 182
   - id: 1
-    r_id: 11
+    r_id: 10
     level: 1
     set:
       a1: 159
@@ -42,7 +42,7 @@ MonoBehaviour:
       c2: 5
       c3: 89
   - id: 2
-    r_id: 11
+    r_id: 10
     level: 1
     set:
       a1: 9
