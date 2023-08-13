@@ -1,4 +1,5 @@
-﻿using dataAccess;
+﻿using Cysharp.Threading.Tasks;
+using dataAccess;
 using UnityEngine;
 using UnityEngine.UI;
 using Singleton;
@@ -74,7 +75,28 @@ public class HeroIcon : MonoBehaviour {
         ChangeIcon(null, Element.Null);
     }
     
-    void ChangeIcon(Sprite sprite, Element element)
+    void AdjustSize(Image icon)
+    {
+        var sprite = icon.sprite;
+        var iconRect = icon.GetComponent<RectTransform>();
+        var wholeParentRect = transform.GetComponent<RectTransform>();
+        float spriteAspectRatio = sprite.rect.width / sprite.rect.height;
+        
+        if (spriteAspectRatio < 1)
+        {
+            iconRect.sizeDelta = new Vector2(
+                sprite.rect.width * wholeParentRect.rect.height / sprite.rect.height, 
+                wholeParentRect.rect.height);
+        }
+        else
+        {
+            iconRect.sizeDelta = new Vector2(
+                wholeParentRect.rect.width, 
+                sprite.rect.height * wholeParentRect.rect.width / sprite.rect.width);
+        }
+    }
+    
+    async void ChangeIcon(Sprite sprite, Element element)
     {
         //Icon.GetComponent<RectTransform>().sizeDelta = new Vector2(frame.GetComponent<RectTransform>().sizeDelta.x * 0.8f, frame.GetComponent<RectTransform>().sizeDelta.y * 0.8f);
         // if (cooldownCurtain != null)
@@ -110,6 +132,8 @@ public class HeroIcon : MonoBehaviour {
         frame.color = color;
         iconBg.color = new Color(color.r,color.g,color.b,0.7f);
         icon.sprite = sprite;
+        await UniTask.DelayFrame(1);
+        AdjustSize(icon);
         icon.gameObject.SetActive(sprite != null);
     }
     

@@ -32,7 +32,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
-  - m_GUID: 7506d6259b3a049bab20f3f70cb2b2e2
+  - m_GUID: 8cc89ae161b884c5ba6cbe8693aa9eff
     m_Address: unit/9
     m_ReadOnly: 0
     m_SerializedLabels:
@@ -52,12 +52,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
-  - m_GUID: f02e4b5b5a403443d9135b2e471d87e0
+  - m_GUID: 5759022ed0177406a956108d387b1653
     m_Address: unit/8
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
-  - m_GUID: 616531cb4b49b41e3992f94c21fa4ab0
+  - m_GUID: aa1539a43a39e465f90722c7be050237
     m_Address: unit/11
     m_ReadOnly: 0
     m_SerializedLabels:
@@ -72,7 +72,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
-  - m_GUID: a772f737f1554483680785ad15b5e736
+  - m_GUID: 81108bee8bd644faca4d1017b8fc54ff
     m_Address: unit/13
     m_ReadOnly: 0
     m_SerializedLabels:
