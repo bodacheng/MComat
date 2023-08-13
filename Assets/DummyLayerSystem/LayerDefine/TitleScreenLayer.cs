@@ -12,14 +12,14 @@ public class TitleScreenLayer : UILayer
     [SerializeField] RectTransform mainTab;
     [SerializeField] Image title;
     [SerializeField] BOButton touchScreenBtn;
-    [SerializeField] Button accountLoginBtn;
+    [SerializeField] BOButton accountLoginBtn;
     
     // Login by pw
     [SerializeField] RectTransform loginByPwTab;
     [SerializeField] InputField id;
     [SerializeField] InputField password;
-    [SerializeField] Button loginBtn;
-    [SerializeField] Button cancelBtn;
+    [SerializeField] BOButton loginBtn;
+    [SerializeField] BOButton cancelBtn;
 
     // Dev login
     [SerializeField] InputField devId;
@@ -65,6 +65,7 @@ public class TitleScreenLayer : UILayer
     
     void EmailLogin()
     {
+        ProgressLayer.Loading("");
         PlayFabReadClient.PlayFabEmailLogin(
             id.text.Trim(), password.text.Trim(), 
             PlayFabReadClient.LoginSuccess);
@@ -72,6 +73,7 @@ public class TitleScreenLayer : UILayer
     
     void TouchScreenLogin()
     {
+        ProgressLayer.Loading("");
         PlayFabReadClient.LoginByDevice(PlayFabReadClient.LoginSuccess);
     }
 

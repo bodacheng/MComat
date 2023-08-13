@@ -9,5 +9,6 @@ public partial class PopupLayer : UILayer
     static void Close()
     {
         UILayerLoader.Remove<PopupLayer>();
+        ProgressLayer.Close();
     }
 }
