@@ -15,49 +15,23 @@ MonoBehaviour:
   battleGroundID: 1
   fightBGM: 0
   unitsData:
-  - id: 0
-    r_id: 5
-    level: 5
-    set:
-      a1: 80
-      a2: 144
-      a3: 159
-      b1: 89
-      b2: 95
-      b3: 68
-      c1: 63
-      c2: 115
-      c3: 27
-  - id: 1
-    r_id: 1
-    level: 5
-    set:
-      a1: 182
-      a2: 167
-      a3: 58
-      b1: 9
-      b2: 125
-      b3: 176
-      c1: 53
-      c2: 127
-      c3: 118
   - id: 2
     r_id: 6
     level: 5
     set:
-      a1: 27
-      a2: 156
-      a3: 113
-      b1: 125
-      b2: 9
-      b3: 58
-      c1: 179
-      c2: 68
-      c3: 36
+      a1: 179
+      a2: 115
+      a3: 170
+      b1: 169
+      b2: 113
+      b3: 140
+      c1: 171
+      c2: 115
+      c3: 113
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0
-  team2CGMode: 0
+  team2CGMode: 2
   team1Mode: 2
   team2Mode: 2
   team1AIMode: 0
