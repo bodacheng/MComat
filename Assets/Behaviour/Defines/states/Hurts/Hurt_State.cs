@@ -57,6 +57,7 @@ namespace Soul
                 return;
             }
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            AnimationManger.SetTrigger("face_reset");
         }
 
         public override void AI_State_enter(V_Damage newValue)
