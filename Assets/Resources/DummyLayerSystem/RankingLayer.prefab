@@ -378,7 +378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7921341815278388031
 RectTransform:
   m_ObjectHideFlags: 0
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 394053893937562525}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.57746476
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -521,7 +521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 109.04205}
+  m_AnchoredPosition: {x: 0, y: 0.0010028516}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6369979575886727234
@@ -1357,62 +1357,62 @@ PrefabInstance:
     - target: {fileID: 3572121503524961300, guid: e455e59daa00b4012959c0fe39d6b042,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3572121503524961300, guid: e455e59daa00b4012959c0fe39d6b042,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3572121503524961300, guid: e455e59daa00b4012959c0fe39d6b042,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 116.66667
       objectReference: {fileID: 0}
     - target: {fileID: 3572121503524961300, guid: e455e59daa00b4012959c0fe39d6b042,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 5204339390850871962, guid: e455e59daa00b4012959c0fe39d6b042,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5204339390850871962, guid: e455e59daa00b4012959c0fe39d6b042,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5204339390850871962, guid: e455e59daa00b4012959c0fe39d6b042,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 3.3333435
       objectReference: {fileID: 0}
     - target: {fileID: 5204339390850871962, guid: e455e59daa00b4012959c0fe39d6b042,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 8259361201329278096, guid: e455e59daa00b4012959c0fe39d6b042,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8259361201329278096, guid: e455e59daa00b4012959c0fe39d6b042,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8259361201329278096, guid: e455e59daa00b4012959c0fe39d6b042,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 230
       objectReference: {fileID: 0}
     - target: {fileID: 8259361201329278096, guid: e455e59daa00b4012959c0fe39d6b042,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e455e59daa00b4012959c0fe39d6b042, type: 3}
@@ -1580,6 +1580,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DedicatedCameraConnector
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888260407500299821, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: m_EffectColor.b
+      value: 0.54901963
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888260407500299821, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: m_EffectColor.g
+      value: 0.54901963
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888260407500299821, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: m_EffectColor.r
+      value: 0.54901963
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888260407500299821, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: m_EffectDistance.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888260407500299821, guid: 72d00ee42a0b94b3aa1db5764acd394f,
+        type: 3}
+      propertyPath: m_EffectDistance.y
+      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72d00ee42a0b94b3aa1db5764acd394f, type: 3}

@@ -18,6 +18,7 @@ public class ArenaLayer : UILayer
     #region 玩家队伍
     [SerializeField] HeroIcon member1, member2, member3;
     [SerializeField] Button editMyTeamBtn;
+    [SerializeField] Text nickName;
     [SerializeField] Text myScore;
     [SerializeField] Text myRank; // playfab 提供的实际排名
     [SerializeField] InputField oneWord;
@@ -136,6 +137,7 @@ public class ArenaLayer : UILayer
     
     public void ShowMyTeamByLeaderInfo(LeaderboardInfo info)
     {
+        nickName.text = info.PlayerLeaderboardEntry.DisplayName;
         myScore.text = info != null? info.PlayerLeaderboardEntry.StatValue.ToString() : "";
         myRank.text = info != null ? info.PlayerLeaderboardEntry.Position.ToString() : "";
         
