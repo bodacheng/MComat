@@ -32,7 +32,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_bg
-  - m_GUID: cb5c624bcbffc44bf89beaba78a294e7
+  - m_GUID: f69459ab20f6d45e6bf23e730e88c670
     m_Address: unit_bg/7
     m_ReadOnly: 0
     m_SerializedLabels:
