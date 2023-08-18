@@ -29,7 +29,7 @@ RECORD_ID,EN_NAME,JP_NAME,CN_NAME,EN_INTRO,JP_INTRO,CN_INTRO
 148,Spiral Flying Kick,螺旋飛び蹴り,螺旋飞踢,,,
 150,Spiral Kick,螺旋キック,螺旋脚,,,
 156,Spiral Flying Claw,螺旋飛爪,螺旋飞爪,,,
-159,Demon Fire,鬼火,鬼火,,,
+159,Demon Fire,魔炎,魔炎,,,
 161,Psychic Blast,超能力爆破,超能爆破,Trigger a magical explosion at the enemy's feet after channeling for 1 second,敵の足元に1秒後に魔法爆発を引き起こす,引导一秒后在敌人脚下施展魔法爆破
 162,Stardust Splash,星屑飛沫,星尘溅射,,,
 166,Divine Demon Fire,鬼神火,鬼神烧,,,
@@ -39,7 +39,7 @@ RECORD_ID,EN_NAME,JP_NAME,CN_NAME,EN_INTRO,JP_INTRO,CN_INTRO
 172,Energy Bomb,エネルギーボム,能量炸弹,"Release an energy-condensed bomb that, upon hitting the ground, explodes and causes area of effect damage",エネルギーが凝縮された爆弾を放つ。地面に落ちた後に爆発し、範囲攻撃を与える,释放一个能量凝聚成的炸弹，如果落地后爆炸则造成范围攻击
 175,Arcane Explosion,アーケインエクスプロージョン,奥术爆破,,,
 176,Thomas Combo,トーマスコンボ,托马斯连环,An attack technique evolved from Adam's gymnastic abilities,アダムの体操能力から進化した攻撃術,亚当的体操能力所演变成的攻击术
-179,Spell Counter,魔法反撃,咒术反击,"Release a magical shield that, upon taking damage, transforms into energy to counterattack",魔法の盾を放ち、攻撃を受けた後、エネルギーとなって反撃する,释放一个魔盾，受到攻击后化作能量反击
+179,Spell Counter,呪術反撃,咒术反击,"Release a magical shield that, upon taking damage, transforms into energy to counterattack",魔法の盾を放ち、攻撃を受けた後、エネルギーとなって反撃する,释放一个魔盾，受到攻击后化作能量反击
 180,Blade Kick,刃蹴り,刀锋踢,,,
 182,Defense,防御,防御,"After activation, quickly resist the enemy's attack and launch a counterattack",発動後、敵の攻撃に迅速に抵抗し、反撃を行うことができる,在释放后可迅速抵抗敌人的攻击，并发动反攻
 183,Thunder Punch,雷拳,闪电拳,,,
