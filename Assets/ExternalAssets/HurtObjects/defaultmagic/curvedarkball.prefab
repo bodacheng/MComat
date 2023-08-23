@@ -9877,7 +9877,7 @@ MonoBehaviour:
   damage_type: 5
   _WeaponMode: 2
   AT_weight: 1
-  weaponHP: 5
+  weaponHP: 3
   heavyLevel: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
