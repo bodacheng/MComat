@@ -534,6 +534,14 @@ namespace Cocone.ProjectP3
 			plist.root.SetString("CFBundleDevelopmentRegion", "Japan");
 			var localizations = plist.root.CreateArray("CFBundleLocalizations");
 			localizations.AddString ("Japanese");
+			localizations.AddString("English");
+			localizations.AddString("Chinese");
+			
+			// 各言語に応じた表示名の設定
+			var localizedInfo = plist.root.CreateDict("CFBundleDisplayName");
+			localizedInfo.SetString("ja", "ジェムコンバット");
+			localizedInfo.SetString("en", "Gem Warrior");
+			localizedInfo.SetString("zh", "魔石格斗");
 			
 			if (BuildConfigurations != null)
 			{
