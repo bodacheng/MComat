@@ -35,6 +35,9 @@ namespace mainMenu
         
         [Header("Intro")]
         [SerializeField] Text skillIntro;
+
+        [Header("第三行parent")] 
+        [SerializeField] RectTransform line3T;
         
         [Header("tempT")]
         [SerializeField] Transform tempT;
@@ -71,6 +74,7 @@ namespace mainMenu
             keyName.text = string.Empty;
             showName.text = string.Empty;
             skillIntro.text = string.Empty;
+            line3T.gameObject.SetActive(false);
             stoneTargetLevel.text = string.Empty;
             AT.text = string.Empty;
             HP.text = string.Empty;
@@ -113,20 +117,13 @@ namespace mainMenu
                 AT.text = "AT = " + FightGlobalSetting.ATCal(at, currentStone.Level);
                 HP.text = "HP = " + FightGlobalSetting.StoneHpCal(hp, currentStone.Level);
             }
-            skillIntro.text = SkillNameTable.GetSkillIntro(skillConfig.RECORD_ID);
         }
         
         public void RefreshInfo(SkillConfig config)
         {
-            if (config == null)
-            {
-                Debug.Log("skill config error");
-                return;
-            }
-            
             IconForShow(config.RECORD_ID);
             keyName.text = config.REAL_NAME;
-
+            
             if (PlayerAccountInfo.Me.TitleDisplayName != null && PlayerAccountInfo.Me.TitleDisplayName.Contains("IconDev"))
             {
                 showName.text = config.RECORD_ID +"."+ SkillNameTable.GetSkillName(config.RECORD_ID);
@@ -140,6 +137,21 @@ namespace mainMenu
             ShowSKillRanges(close, near, far, config.AIAttrs.AI_MIN_DIS, config.AIAttrs.AI_MAX_DIS);
             atIcon.SetActive(config.STATE_TYPE is BehaviorType.GI or BehaviorType.GM or BehaviorType.GR);
             defenceIcon.SetActive(config.STATE_TYPE is BehaviorType.CT or BehaviorType.Def);
+            
+            var intro = SkillNameTable.GetSkillIntro(config.RECORD_ID);
+            skillIntro.text = intro;
+            line3T.gameObject.SetActive(!string.IsNullOrEmpty(intro));
+            
+            PowerShow(config.RECORD_ID, 1);
+        }
+
+        void PowerShow(string RECORD_ID, int level)
+        {
+            var row = PowerEstimateTable.Find_RECORD_ID(RECORD_ID);
+            float.TryParse(row.HP, out float hp);
+            float.TryParse(row.EstimateDamage, out float at);
+            AT.text = "AT = " + FightGlobalSetting.ATCal(at, level);
+            HP.text = "HP = " + FightGlobalSetting.StoneHpCal(hp, level);
         }
         
         public static void ShowSKillRanges(GameObject close, GameObject near, GameObject far, float disMIN, float disMAX)

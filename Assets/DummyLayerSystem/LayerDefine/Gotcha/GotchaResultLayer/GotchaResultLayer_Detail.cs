@@ -9,8 +9,7 @@ public partial class GotchaResultLayer : UILayer
     public void ShowDetail(string skillId)
     {
         stoneDetailT.gameObject.SetActive(true);
-         var sc = SkillConfigTable.GetSkillConfigByRecordId(skillId);
-         Debug.Log("skill config:"+ sc);
+        var sc = SkillConfigTable.GetSkillConfigByRecordId(skillId);
         _stoneDetail.RefreshInfo(sc);
     }
 

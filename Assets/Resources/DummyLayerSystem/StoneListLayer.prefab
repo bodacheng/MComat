@@ -4674,6 +4674,7 @@ MonoBehaviour:
   HP: {fileID: 3424812506623486448}
   stoneTargetLevel: {fileID: 2564457415675642663}
   skillIntro: {fileID: 4504917024341403157}
+  line3T: {fileID: 2579208834690628930}
   tempT: {fileID: 1102668300763384593}
 --- !u!1 &5206352636048624673
 GameObject:
