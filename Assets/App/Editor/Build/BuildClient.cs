@@ -549,11 +549,11 @@ namespace Cocone.ProjectP3
 					plist.root.SetString("CFBundleExecutable", BuildConfigurations.cfBundleExecutableName);	
 				}
 				
-				if (!string.IsNullOrEmpty(BuildConfigurations.appDisplayName))
-				{
-					// アプリの表示名を変更する
-					plist.root.SetString("CFBundleDisplayName", BuildConfigurations.appDisplayName);	
-				}
+				// if (!string.IsNullOrEmpty(BuildConfigurations.appDisplayName))
+				// {
+				// 	// アプリの表示名を変更する
+				// 	plist.root.SetString("CFBundleDisplayName", BuildConfigurations.appDisplayName);	
+				// }
 			}
 			
 			// LLVMの中間コードBitCodeを再コンパイルするかどうか
