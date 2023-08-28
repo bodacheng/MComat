@@ -39,13 +39,6 @@ namespace mainMenu
                 return;
             }
             
-            var Ref = Units.GetUnitConfig(PreScene.target.Focusing.r_id);
-            if (Ref == null)
-            {
-                Debug.Log("No this monster:" + PreScene.target.Focusing.r_id);
-                return;
-            }
-            
             // mini nineslot show
             _NineForShow.ShowStones_Acc(PreScene.target.Focusing.id);
             MemberInfoT.gameObject.SetActive(true);
@@ -69,7 +62,8 @@ namespace mainMenu
             {
                 Debug.Log("角色详细信息读取错误.尝试将“对准”中的角色信息至空");
                 _connector.ShowMyModel(null).Forget();
-            }else
+            }
+            else
             {
                 UniTask.WhenAll(_connector.ShowMyModel(info.id), Set2DView(info.r_id, view2D, unitOutAnimator)).Forget();
             }

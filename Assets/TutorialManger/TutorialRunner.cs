@@ -139,6 +139,9 @@ public class TutorialRunner
                 Main.StartToMove();
                 break;
             case "GotchaFinished":
+                var _focusUnitInfo = dataAccess.Units.GetByRId("1");
+                if (_focusUnitInfo != null)
+                    PreScene.target.SetFocusingUnit(_focusUnitInfo.id);
                 GenerateStep4Tutorial();
                 Main.StartToMove();
                 break;

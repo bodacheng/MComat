@@ -10,7 +10,7 @@ public class UnitListPage : MSceneProcess
     {
         Step = MainSceneStep.UnitList;
     }
-
+    
     public override void ProcessEnter()
     {
         unitOptionLayer = UILayerLoader.Load<UnitOptionLayer>();
@@ -29,10 +29,7 @@ public class UnitListPage : MSceneProcess
             }
         );
         layer.DisplayUnitIcons(dataAccess.Units.Dic, true);
-        if (PlayerAccountInfo.Me.tutorialProgress == "Finished")
-        {
-            UnitIconBtn(PreScene.target.Focusing.id);
-        }
+        UnitIconBtn(PreScene.target.Focusing.id);
         SetLoaded(true);
     }
     
