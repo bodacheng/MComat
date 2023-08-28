@@ -284,6 +284,13 @@ public class IAPManager : MonoBehaviour, IStoreListener {
             }
             PlayFabReadClient.LoadItems(null);
         }
+
+        void ValidateFail(PlayFabError error)
+        {
+            ProgressLayer.Close();
+            PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseFail"));
+            Debug.Log("Validation failed: " + error.GenerateErrorReport());
+        }
         
         #if UNITY_IOS
         var wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(e.purchasedProduct.receipt);
@@ -315,78 +322,9 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         }
         
         PlayFabClientAPI.ValidateIOSReceipt(
-                validateIOSReceiptRequest,
-                result => {
-                PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseSuccess"));
-                _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
-                if (boughtItemCatalog == StoneProductCatalogVersion) {
-                    CloudScript.BoughtBundle(
-                        e.purchasedProduct.definition.id, 
-                        () =>
-                        {
-                            var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
-                            if (shopTopLayer != null)
-                                shopTopLayer.DisableStoneBundle(e.purchasedProduct.definition.id);
-                            ProgressLayer.Close();
-                        }
-                    );
-                }
-                else if (e.purchasedProduct.definition.id == noAdsServiceName)
-                {
-                    // 收据验证成功，调用Cloud Script来设置IsVIP标志
-                    PlayFabClientAPI.ExecuteCloudScript(
-                        new ExecuteCloudScriptRequest
-                        {
-                            FunctionName = "setNoAdsStatus", // 云脚本的函数名
-                            FunctionParameter = new { isVerified = true }, // 传递给云脚本的参数
-                        }, 
-                        (x) =>
-                        {
-                            var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(x.FunctionResult));
-                            if (jsonResult.ContainsKey("rewardDM"))
-                            {
-                                int reward = Convert.ToInt32(jsonResult["rewardDM"]);
-                                if (reward > 0)
-                                {
-                                    Currencies.DiamondCount.Value += reward;
-                                }
-                            }
-                            else
-                            {
-                                Debug.LogError("Reward not found in cloud script result");
-                            }
-                            var buyNoAdsLayer = UILayerLoader.Get<BuyNoAds>();
-                            if (buyNoAdsLayer != null)
-                                UILayerLoader.Remove<BuyNoAds>();
-
-                            var arenaFightOver = UILayerLoader.Get<ArenaFightOver>();
-                            if (arenaFightOver != null)
-                                arenaFightOver.AdBtnParent.gameObject.SetActive(false);
-                            
-                            PlayerAccountInfo.Me.noAdsState = true;
-                            var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
-                            if (shopTopLayer != null)
-                                shopTopLayer.ShowNoAdsProduct();
-                            
-                            ProgressLayer.Close();
-                        }, 
-                        y =>
-                        {
-                            Debug.Log(y);
-                            ProgressLayer.Close();
-                        });
-                }
-                else
-                {
-                    ProgressLayer.Close();
-                }
-                PlayFabReadClient.LoadItems(null);
-            },
-            error => {
-                ProgressLayer.Close();
-                PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseFail"));
-                Debug.Log("Validation failed: " + error.GenerateErrorReport());
-            }
+            validateIOSReceiptRequest,
+            result => { ValidateSuccess();},
+            ValidateFail
         );
         #endif
         
@@ -430,16 +368,9 @@ public class IAPManager : MonoBehaviour, IStoreListener {
         
         PlayFabClientAPI.ValidateGooglePlayPurchase(
             validateGooglePlayPurchase, 
-            result =>
-            {
-                ValidateSuccess();
-            },
-            error =>
-            {
-                ProgressLayer.Close();
-                PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseFail"));
-                Debug.Log("Validation failed: " + error.GenerateErrorReport());
-            });
+            result =>{ ValidateSuccess();},
+            ValidateFail
+        );
         #endif
         
         return PurchaseProcessingResult.Complete;
