@@ -137,6 +137,9 @@ public class ArenaLayer : UILayer
     
     public void ShowMyTeamByLeaderInfo(LeaderboardInfo info)
     {
+        if (info == null)
+            return;
+        
         nickName.text = info.PlayerLeaderboardEntry.DisplayName;
         myScore.text = info != null? info.PlayerLeaderboardEntry.StatValue.ToString() : "";
         myRank.text = info != null ? info.PlayerLeaderboardEntry.Position.ToString() : "";
@@ -175,22 +178,5 @@ public class ArenaLayer : UILayer
         var teamDic = posKeySet.LoadTeamDic();
         plsEditTeamIndicator.SetActive(teamDic.mDict.Count != 3);
         TeamSet.Arena3V3 = posKeySet;
-    }
-    
-    public void ShowMyTeamByUserData()
-    {
-        var pos1InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(0);
-        var pos2InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(1);
-        var pos3InstanceID = TeamSet.Arena3V3.GetInstanceIdOnPos(2);
-        
-        var info1 = dataAccess.Units.Get(pos1InstanceID);
-        var info2 = dataAccess.Units.Get(pos2InstanceID);
-        var info3 = dataAccess.Units.Get(pos3InstanceID);
-        
-        plsEditTeamIndicator.SetActive(info1 == null || info2 == null || info3 == null);
-        
-        member1.ChangeIcon(info1);
-        member2.ChangeIcon(info2);
-        member3.ChangeIcon(info3);
     }
 }
