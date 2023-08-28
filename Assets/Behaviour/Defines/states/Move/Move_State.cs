@@ -55,6 +55,7 @@ namespace Soul
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             _BasicPhysicSupport.Rigidbody.interpolation = RigidbodyInterpolation.None;
             Sensor.DetectionStart(1, true);
+            AnimationManger.CasualFace();
         }
 
         public override void C_State_enter()

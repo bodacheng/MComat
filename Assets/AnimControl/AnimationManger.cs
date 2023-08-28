@@ -55,10 +55,8 @@ public partial class AnimationManger
             {
                 return _toUse;
             }
-
             Debug.Log("邪门了." + clip_name);
         }
-
         return null;
     }
     

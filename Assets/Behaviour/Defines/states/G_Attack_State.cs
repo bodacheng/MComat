@@ -105,8 +105,7 @@ namespace Soul
         {
             base.AI_State_enter();
             collider = null;
-            //Animation_Manger.Animator.SetTrigger("face_reset");
-            //Animation_Manger.Animator.SetTrigger("confident");
+            AnimationManger.TriggerExpression(Facial.aggressive);
             _Animator.SetFloat("speed", 0f);
             _BasicPhysicSupport.OpenEnemyTouchingDrag(1);
             _SkillCancelFlag.turn_off_flag();

@@ -57,7 +57,7 @@ namespace Soul
                 return;
             }
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-            AnimationManger.SetTrigger("face_reset");
+            AnimationManger.CasualFace();
         }
 
         public override void AI_State_enter(V_Damage newValue)
@@ -158,8 +158,7 @@ namespace Soul
                     return;
             }
             
-            AnimationManger.SetTrigger("face_reset");
-            AnimationManger.SetTrigger("hurt");
+            AnimationManger.TriggerExpression(Facial.hit);
         }
 
         public override void _State_FixedUpdate1()
