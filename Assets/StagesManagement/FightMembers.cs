@@ -3,8 +3,6 @@ using System;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using System.IO;
-using mainMenu;
-using System.Collections.Generic;
 using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;

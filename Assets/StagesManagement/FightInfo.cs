@@ -134,6 +134,26 @@ public class FightInfo : ScriptableObject
         AssetDatabase.Refresh();
         return fightInfo;
     }
+    
+    public static GangbangInfo CreateGangbangInfoAsset(FightMembers targetTeam, string path, string fileName)
+    {
+        var gangbangInfo = CreateInstance<GangbangInfo>();
+        if (!Directory.Exists(path))
+        {
+            //if it doesn't, create it
+            Directory.CreateDirectory(path);
+        }
+        
+        gangbangInfo.FightMembers = targetTeam;
+        gangbangInfo.SaveDicToData();
+        gangbangInfo.team1Mode = TeamMode.Rotation;
+        gangbangInfo.team2Mode = TeamMode.Rotation;
+        
+        AssetDatabase.CreateAsset(gangbangInfo, path + "/" + fileName + ".asset");
+        Debug.Log("Generated：" + path + "/" + fileName + ".asset");
+        AssetDatabase.Refresh();
+        return gangbangInfo;
+    }
     #endif
 
     public void Open()

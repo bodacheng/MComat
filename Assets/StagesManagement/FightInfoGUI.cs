@@ -26,6 +26,7 @@ public class FightInfoGUI : Editor
             _stageEditor = new StageEditor();
             _initialized = true;
         }
+        
         _stageEditor.OnGUIView(fightInfo.FightMembers);
         
         if (GUILayout.Button("Save"))

@@ -31,7 +31,8 @@ public partial class StageEditor
         }
     }
     
-    public void OnGUIView(FightMembers target)
+    public void OnGUIView(FightMembers target,
+        Func<string, GangbangInfo.SoldierGroupSet> gangbangGet = null)
     {
         if (!Initialized)
         {
@@ -40,7 +41,7 @@ public partial class StageEditor
         }
         
         GUILayout.Space(10);
-        Members(target);
+        Members(target, gangbangGet);
         GUILayout.Space(10);
         
         // 指定站位人员的添加与删除 //
