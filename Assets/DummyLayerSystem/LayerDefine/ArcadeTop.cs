@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using ModelView;
+using mainMenu;
 
 public class ArcadeTop : UILayer
 {
@@ -19,21 +20,41 @@ public class ArcadeTop : UILayer
     [SerializeField] NineForShow nineForShow;
     [SerializeField] Button nextChapter;
     [SerializeField] Button lastChapter;
-    
+
+    private MainSceneStep step;
     List<int> _currentStages;
     readonly List<StageButton> _stageButtons = new List<StageButton>();
-    private ArcadeModeManager arcadeModeManager;
-    int _maxStageNum; 
     
-    public void Setup(ArcadeModeManager arcadeModeManager)
+    LoadStageDelegate LoadStageMethod;
+    LoadGangbangDelegate LoadGangbangMethod;
+    Action<int, bool> directToStage;
+    int _maxStageNum;
+
+    void SetupCommon()
     {
-        this.arcadeModeManager = arcadeModeManager;
         nextChapter.onClick.AddListener(ShowNextStages);
         lastChapter.onClick.AddListener(ShowLastStages);
         jumpToNewStage.onClick.AddListener(ToNew);
-        this._maxStageNum = arcadeModeManager.MaxStageNum;
         
         CameraConnectorCal(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+    }
+    
+    public void SetupArcade(int maxStageNum, LoadStageDelegate loadFightInfo, Action<int, bool> directToStage)
+    {
+        step = MainSceneStep.ArcadeFront;
+        this.LoadStageMethod = loadFightInfo;
+        this.directToStage = directToStage;
+        this._maxStageNum = maxStageNum;
+        SetupCommon();
+    }
+    
+    public void SetupGangbangArcade(int maxStageNum, LoadGangbangDelegate loadFightInfo, Action<int, bool> directToStage)
+    {
+        step = MainSceneStep.GangBangFront;
+        this.LoadGangbangMethod = loadFightInfo;
+        this.directToStage = directToStage;
+        this._maxStageNum = maxStageNum;
+        SetupCommon();
     }
     
     async UniTask IconButtonFeature(HeroIcon heroIcon)
@@ -95,7 +116,7 @@ public class ArcadeTop : UILayer
     
     async UniTask LoadStage(int stageNo)
     {
-        var one = await arcadeModeManager.LoadStage(stageNo);
+        var one = step == MainSceneStep.ArcadeFront ? await LoadStageMethod(stageNo) : await LoadGangbangMethod(stageNo);
         if (one == null)
         {
             return;
@@ -106,7 +127,7 @@ public class ArcadeTop : UILayer
         stageBtn.Button.onClick.AddListener(
             ()=>
             {
-                arcadeModeManager.DirectToArcadeStage(stageNo, false);
+                directToStage(stageNo, false);
             }
         );
         stageBtn.name = "Stage" + stageNo;

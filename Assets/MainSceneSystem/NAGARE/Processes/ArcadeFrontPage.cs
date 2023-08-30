@@ -2,6 +2,7 @@
 using DummyLayerSystem;
 using mainMenu;
 
+public delegate UniTask<FightInfo> LoadStageDelegate(int stageNo);
 public class ArcadeFrontPage : MSceneProcess
 {
     readonly ArcadeModeManager arcadeModeManager;
@@ -22,7 +23,7 @@ public class ArcadeFrontPage : MSceneProcess
     async UniTask Load()
     {
         await arcadeModeManager.Initialize();
-        _arcadeTop.Setup(arcadeModeManager);
+        _arcadeTop.SetupArcade(arcadeModeManager.MaxStageNum, arcadeModeManager.LoadStage, arcadeModeManager.DirectToArcadeStage);
         var stages = _arcadeTop.NewStages(PlayerAccountInfo.Me.arcadeProcess);
         await _arcadeTop.ShowStages(stages);
         SetLoaded(true);

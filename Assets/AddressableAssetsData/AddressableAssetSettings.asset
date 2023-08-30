@@ -49,7 +49,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f9a3e2bb524ae934e997e90db6c92418, type: 2}
   - {fileID: 11400000, guid: c15cdbec953304ebebe76c7c1222d34a, type: 2}
   - {fileID: 11400000, guid: 86984773aed939e469945d1a67b1087e, type: 2}
-  - {fileID: 11400000, guid: 68d02a7a477e04d458f6a52441d5b1f2, type: 2}
   - {fileID: 11400000, guid: bd7d61d6c13c74492a27bf7d63f0aa6d, type: 2}
   - {fileID: 11400000, guid: dd076f9729c324d72af36d69ca39375c, type: 2}
   - {fileID: 11400000, guid: 30004e7e366ad4ca38bf13921238d8ce, type: 2}
@@ -61,6 +60,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: faf656e66aa704cb18c587e755e63005, type: 2}
   - {fileID: 11400000, guid: f8e757b7f771a459880cc52e2bec50b4, type: 2}
   - {fileID: 11400000, guid: fa66f8c8726ed4c288b8eeeae193c209, type: 2}
+  - {fileID: 11400000, guid: 68d02a7a477e04d458f6a52441d5b1f2, type: 2}
+  - {fileID: 11400000, guid: 421c454ff09414180983855911567f66, type: 2}
   - {fileID: 11400000, guid: 52ac939f0ebd544bbaf6a42c5c7c5cec, type: 2}
   - {fileID: 11400000, guid: c4227ddaf9fe444baac86a56bf502883, type: 2}
   m_BuildSettings:
@@ -158,6 +159,7 @@ MonoBehaviour:
     - Preload
     - Locale-zh-Hans
     - Locale-ja
+    - quest_gangbang
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 7ed3c4f91e15949209e5cda4294e805b, type: 2}

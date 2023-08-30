@@ -1,0 +1,36 @@
+using Cysharp.Threading.Tasks;
+using DummyLayerSystem;
+using mainMenu;
+
+public delegate UniTask<GangbangInfo> LoadGangbangDelegate(int stageNo);
+public class GangbangFrontPage : MSceneProcess
+{
+    readonly GangbangModeManager gangbangModeManager;
+    ArcadeTop _arcadeTop;
+    
+    public GangbangFrontPage(GangbangModeManager gangbangModeManager)
+    {
+        Step = MainSceneStep.GangBangFront;
+        this.gangbangModeManager = gangbangModeManager;
+    }
+    
+    public override void ProcessEnter()
+    {
+        _arcadeTop = UILayerLoader.Load<ArcadeTop>();
+        Load().Forget();
+    }
+    
+    async UniTask Load()
+    {
+        await gangbangModeManager.Initialize();
+        _arcadeTop.SetupGangbangArcade(gangbangModeManager.MaxStageNum, gangbangModeManager.LoadStage, gangbangModeManager.DirectToArcadeStage);
+        var stages = _arcadeTop.NewStages(PlayerAccountInfo.Me.arcadeProcess);
+        await _arcadeTop.ShowStages(stages);
+        SetLoaded(true);
+    }
+    
+    public override void ProcessEnd()
+    {
+        UILayerLoader.Remove<ArcadeTop>();
+    }
+}

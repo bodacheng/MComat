@@ -301,6 +301,7 @@ public enum FightEventType
 {
     Screensaver = 0,
     Quest = 1,
+    Gangbang = 3,
     Arena = 2,
     Self = 4,
     SkillTest = 5

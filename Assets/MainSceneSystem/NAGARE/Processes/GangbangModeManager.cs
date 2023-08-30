@@ -9,12 +9,11 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 public class GangbangModeManager
 {
     private readonly IDictionary<string, IResourceLocation> locationKeyDic = new Dictionary<string, IResourceLocation>();
-    private readonly StageModeTable _stageModeTable = new StageModeTable();
     int _maxStageNum = -999;
     public int MaxStageNum => _maxStageNum;
     public async UniTask Initialize()
     {
-        var locationHandle = Addressables.LoadResourceLocationsAsync("quest");
+        var locationHandle = Addressables.LoadResourceLocationsAsync("quest_gangbang");
         await locationHandle.Task;
         if (locationHandle.Status == AsyncOperationStatus.Succeeded)
         {
@@ -29,7 +28,6 @@ public class GangbangModeManager
             }
         }
         Addressables.Release(locationHandle);
-        await _stageModeTable.LoadStageMode();
     }
     
     public async UniTask<GangbangInfo> LoadStage(int stageNo)
@@ -38,8 +36,7 @@ public class GangbangModeManager
         if (location == null)
             return null;
         var fightInfo = await AddressablesLogic.LoadT<GangbangInfo>(location);
-        fightInfo.EventType = FightEventType.Quest;
-        fightInfo.ArcadeFightMode = _stageModeTable.GetModeById(fightInfo.ID);
+        fightInfo.EventType = FightEventType.Gangbang;
         fightInfo.FightMembers.SetEnemyLevel(fightInfo.stageRefLevel);
         return fightInfo;
     }
@@ -47,7 +44,7 @@ public class GangbangModeManager
     public async void DirectToArcadeStage(int stageNo, bool forward)
     {
         var stage = await LoadStage(stageNo);
-        stage.EventType = FightEventType.Quest;
+        stage.EventType = FightEventType.Gangbang;
         PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, forward);
     }
 }

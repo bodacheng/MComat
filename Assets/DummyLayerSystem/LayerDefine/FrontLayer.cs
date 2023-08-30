@@ -13,6 +13,7 @@ using UniRx;
 public class FrontLayer : UILayer
 {
     [SerializeField] BOButton ArcadeBtn;
+    [SerializeField] BOButton GangbangBtn;
     [SerializeField] BOButton ArenaBtn;
     [SerializeField] BOButton MemberBtn;
     [SerializeField] BOButton TrainBtn;
@@ -41,6 +42,13 @@ public class FrontLayer : UILayer
             {
                 PlayerAccountInfo.Me.ArcadeModeManager.DirectToArcadeStage(PlayerAccountInfo.Me.arcadeProcess + 1, true);
             });
+        
+        GangbangBtn.onClick.AddListener(
+            ()=>
+            {
+                PlayerAccountInfo.Me.GangbangModeManager.DirectToArcadeStage(1, true);
+            });
+        
         ArenaBtn.onClick.AddListener(() =>
         {
             if (PlayerAccountInfo.Me.arcadeProcess >= 5)

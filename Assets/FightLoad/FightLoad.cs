@@ -4,6 +4,12 @@ using UnityEngine;
 
 public static class FightLoad
 {
+    public static void Go(GangbangInfo stage,  bool loadWithMyTeam = false)
+    {
+        // 
+        Go(stage, loadWithMyTeam);
+    }
+    
     public static void Go(FightInfo stage, bool loadWithMyTeam = false)
     {
         if (loadWithMyTeam)

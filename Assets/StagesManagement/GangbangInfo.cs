@@ -31,4 +31,9 @@ public class GangbangInfo : FightInfo
         }
         return s;
     }
+
+    public FightInfo ConvertToFightInfo()
+    {
+        
+    }
 }

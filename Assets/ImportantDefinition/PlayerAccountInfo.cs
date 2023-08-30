@@ -17,5 +17,7 @@ public class PlayerAccountInfo
     public string tutorialProgress = string.Empty;
     
     private readonly ArcadeModeManager _arcadeModeManager = new ArcadeModeManager();
+    private readonly GangbangModeManager _gangbangModeManager = new GangbangModeManager();
     public ArcadeModeManager ArcadeModeManager => _arcadeModeManager;
+    public GangbangModeManager GangbangModeManager => _gangbangModeManager;
 }

@@ -1,6 +1,7 @@
 ﻿using dataAccess;
 using DummyLayerSystem;
 using mainMenu;
+using UnityEngine;
 
 public class QuestInfoPage : MSceneProcess
 {
@@ -8,6 +9,14 @@ public class QuestInfoPage : MSceneProcess
     
     void EnterProcess(FightInfo stage)
     {
+        if (stage is GangbangInfo)
+        {
+            Debug.Log("DIAO :"+ stage);
+        }
+        else
+        {
+            Debug.Log("Yinjia :"+ stage);
+        }
         FightScene.FightScene.Fight = stage;
         _layer = UILayerLoader.Load<FightPrepareLayer>();
         
@@ -32,6 +41,21 @@ public class QuestInfoPage : MSceneProcess
                     () =>
                     {
                         PreScene.target.trySwitchToStep(MainSceneStep.ArcadeFront, false);
+                    },
+                    FightScene.FightScene.Fight.ID
+                );
+                break;
+            case FightEventType.Gangbang:
+                FightScene.FightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arcade").LoadTeamDic();
+                void GoToTeamEditGangbang()
+                {
+                    PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);
+                }
+                _layer.SetTeamEditFeature(GoToTeamEditGangbang);
+                _layer.SetArcadeFeature(
+                    () =>
+                    {
+                        PreScene.target.trySwitchToStep(MainSceneStep.GangBangFront, false);
                     },
                     FightScene.FightScene.Fight.ID
                 );
@@ -64,44 +88,6 @@ public class QuestInfoPage : MSceneProcess
             return true;
         }
         
-        void Go()
-        {
-            if (!FightScene.FightScene.Fight.FightMembers.CheckStonesLegal(FightScene.FightScene.Fight.EventType))
-            {
-                PopupLayer.ArrangeWarnWindow(Translate.Get("TeamUnitNotFull"));
-                return;
-            }
-            
-            FightScene.FightScene.Fight.team1Mode= _layer.GetSetFightMode();
-            FightScene.FightScene.Fight.team2Mode= _layer.GetSetFightMode();
-            
-            switch (FightScene.FightScene.Fight.EventType)
-            {
-                case FightEventType.Arena:
-                    if (FightScene.FightScene.Fight.FightMembers.HeroSets.GetValues().Count != 3)
-                    {
-                        PopupLayer.ArrangeWarnWindow(Translate.Get("TeamNotFull"));
-                        return;
-                    }
-                    CloudScript.SubtractVirtualCurrency(
-                        "TK",1,
-                        () =>
-                        {
-                            FightLoad.Go(FightScene.FightScene.Fight, true);
-                        }
-                    );
-                    break;
-                default:
-                    if (FightScene.FightScene.Fight.FightMembers.HeroSets.GetValues().Count == 0)
-                    {
-                        PopupLayer.ArrangeWarnWindow(Translate.Get("TeamNotFull"));
-                        return;
-                    }
-                    FightLoad.Go(FightScene.FightScene.Fight, true);
-                    break;
-            }
-        }
-
         int FightMode()
         {
             switch (FightScene.FightScene.Fight.EventType)
@@ -112,9 +98,17 @@ public class QuestInfoPage : MSceneProcess
                     return 0;
             }
         }
+
+        if (FightScene.FightScene.Fight.EventType == FightEventType.Gangbang)
+        {
+            
+        }
+        else
+        {
+            _layer.SetFightMode(FightMode());
+            _layer.SetFightBeginFeature(()=> GoToFight(FightScene.FightScene.Fight));
+        }
         
-        _layer.SetFightMode(FightMode());
-        _layer.SetFightBeginFeature(Go);
         _layer.SetFightBeginEnableRender(CanFightCheck());
         SetLoaded(true);
     }
@@ -131,11 +125,61 @@ public class QuestInfoPage : MSceneProcess
     
     public override void ProcessEnter<T>(T t)
     {
-        EnterProcess(t as FightInfo);
+        if (t is GangbangInfo)
+        {
+            EnterProcess(t as GangbangInfo);
+        }
+        else
+        {
+            EnterProcess(t as FightInfo);
+        }
     }
     
     public override void ProcessEnd()
     {
         UILayerLoader.Remove<FightPrepareLayer>();
+    }
+
+    void GoToGangbang()
+    {
+        
+    }
+    
+    void GoToFight(FightInfo fightInfo)
+    {
+        if (!fightInfo.FightMembers.CheckStonesLegal(fightInfo.EventType))
+        {
+            PopupLayer.ArrangeWarnWindow(Translate.Get("TeamUnitNotFull"));
+            return;
+        }
+            
+        fightInfo.team1Mode = _layer.GetSetFightMode();
+        fightInfo.team2Mode = _layer.GetSetFightMode();
+            
+        switch (fightInfo.EventType)
+        {
+            case FightEventType.Arena:
+                if (fightInfo.FightMembers.HeroSets.GetValues().Count != 3)
+                {
+                    PopupLayer.ArrangeWarnWindow(Translate.Get("TeamNotFull"));
+                    return;
+                }
+                CloudScript.SubtractVirtualCurrency(
+                    "TK",1,
+                    () =>
+                    {
+                        FightLoad.Go(fightInfo, true);
+                    }
+                );
+                break;
+            default:
+                if (fightInfo.FightMembers.HeroSets.GetValues().Count == 0)
+                {
+                    PopupLayer.ArrangeWarnWindow(Translate.Get("TeamNotFull"));
+                    return;
+                }
+                FightLoad.Go(fightInfo, true);
+                break;
+        }
     }
 }
