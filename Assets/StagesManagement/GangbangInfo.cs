@@ -25,7 +25,7 @@ public class GangbangInfo : FightInfo
         var s = soldierGroupSet.Find(x => x.id == id);
         if (s == null)
         {
-            s = new SoldierGroupSet(id, 0);
+            s = new SoldierGroupSet(id, 1);
             soldierGroupSet.Add(s);
             return s;
         }
@@ -34,6 +34,19 @@ public class GangbangInfo : FightInfo
 
     public FightInfo ConvertToFightInfo()
     {
-        
+        var newInfo = new FightInfo();
+        int id = 0;
+        foreach (var unitInfo in UnitsData)
+        {
+            var solderGroupSet = Get(unitInfo.id);
+            for (var i = 0; i < solderGroupSet.Count; i++)
+            {
+                var newUnitInfo = unitInfo.DeepCopy();
+                newUnitInfo.id = id.ToString();
+                newInfo.UnitsData.Add(newUnitInfo);
+                id++;
+            }
+        }
+        return newInfo;
     }
 }

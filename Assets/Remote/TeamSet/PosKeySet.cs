@@ -47,27 +47,6 @@ public class PosKeySet
         PosNumsWithLocalKeys = new[] { new OneSet(0, null), new OneSet(1, null), new OneSet(2, null) };
     }
     
-    public TeamPos ToTeamPos()
-    {
-        var model = new TeamPos();
-        for (var i = 0; i < PosNumsWithLocalKeys.Length; i++)
-        {
-            switch (PosNumsWithLocalKeys[i].posNum)
-            {
-                case 1:
-                    model.l = PosNumsWithLocalKeys[i].instanceID;
-                break;
-                case 2:
-                    model.r = PosNumsWithLocalKeys[i].instanceID;
-                break;
-                case 0:
-                    model.f = PosNumsWithLocalKeys[i].instanceID;
-                break;
-            }
-        }
-        return model;
-    }
-    
     public MultiDic<int, int, UnitInfo> LoadTeamDic()
     {
         var multiDictionary = new MultiDic<int, int, UnitInfo>();

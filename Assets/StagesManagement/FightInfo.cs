@@ -10,7 +10,9 @@ public class FightInfo : ScriptableObject
     public int battleGroundID;
     public int fightBGM = 0;
     
-    [SerializeField] private List<UnitInfo> unitsData = new List<UnitInfo>();
+    [SerializeField] List<UnitInfo> unitsData = new List<UnitInfo>();
+
+    public List<UnitInfo> UnitsData => unitsData;
     
     public string GetBGMKey()
     {

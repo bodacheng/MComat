@@ -11,12 +11,10 @@ public class QuestInfoPage : MSceneProcess
     {
         if (stage is GangbangInfo)
         {
-            Debug.Log("DIAO :"+ stage);
+            var bangInfo = (GangbangInfo)stage;
+            stage = bangInfo.ConvertToFightInfo();
         }
-        else
-        {
-            Debug.Log("Yinjia :"+ stage);
-        }
+        
         FightScene.FightScene.Fight = stage;
         _layer = UILayerLoader.Load<FightPrepareLayer>();
         
