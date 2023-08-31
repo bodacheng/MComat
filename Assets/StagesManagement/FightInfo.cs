@@ -248,7 +248,7 @@ public class FightInfo : ScriptableObject
         MultiDic<int, int, UnitInfo> newHeroSets = new MultiDic<int, int, UnitInfo>();
         foreach (var unitInfo in this.FightMembers.HeroSets.GetValues())
         {
-            for (var i = 0; i < 3; i++)
+            for (var i = 0; i < 10; i++)
             {
                 var newUnitInfo = unitInfo.DeepCopy();
                 newUnitInfo.id = id.ToString();
