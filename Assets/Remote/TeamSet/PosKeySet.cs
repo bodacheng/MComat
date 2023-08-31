@@ -1,5 +1,4 @@
 ﻿using System;
-using dataAccess;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,7 +43,13 @@ public class PosKeySet
     
     public PosKeySet()
     {
-        PosNumsWithLocalKeys = new[] { new OneSet(0, null), new OneSet(1, null), new OneSet(2, null) };
+        var list = new List<OneSet>();
+        for (var i = 0; i <= 20; i++) // 这里要重新想
+        {
+            list.Add(new OneSet(i, null));
+        }
+        PosNumsWithLocalKeys = list.ToArray();
+        // PosNumsWithLocalKeys = new[] { new OneSet(0, null), new OneSet(1, null), new OneSet(2, null) };
     }
     
     public MultiDic<int, int, UnitInfo> LoadTeamDic()

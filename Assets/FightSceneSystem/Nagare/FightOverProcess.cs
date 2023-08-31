@@ -132,6 +132,12 @@ namespace FightScene
                 case FightEventType.SkillTest:
                     SkillTestReload();
                     break;
+                case FightEventType.Gangbang:
+                    var ab = UILayerLoader.Load<ArenaFightOver>();
+                    ab.Setup();
+                    ab.Step2Anim();
+                    ab.AgainBtn.gameObject.SetActive(true);
+                    break;
             }
             
             SingleAssignmentDisposableCleaner.Clear();

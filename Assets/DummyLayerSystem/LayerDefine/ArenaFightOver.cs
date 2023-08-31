@@ -112,6 +112,8 @@ public class ArenaFightOver : UILayer
                 againFor1v1Btn.gameObject.SetActive(FightScene.FightScene.Fight.ArcadeFightMode is 0 or 2);
                 againForMultiBtn.gameObject.SetActive(FightScene.FightScene.Fight.ArcadeFightMode is 0 or 1);
                 break;
+            case FightEventType.Gangbang:
+                break;
             default:
                 break;
         }

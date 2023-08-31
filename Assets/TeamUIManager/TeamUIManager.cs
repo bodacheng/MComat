@@ -193,6 +193,11 @@ namespace FightScene
                     }
                     break;
             }
+
+            if (FightScene.Fight.EventType == FightEventType.Gangbang)
+            {
+                sideIconsContainer.gameObject.SetActive(false);
+            }
         }
         
         public SideUnitIcon GetSideIcon(Data_Center d)

@@ -17,7 +17,7 @@ public class GangbangInfo : FightInfo
         }
 
         public string id;
-        public int Count;
+        public int Count = 3;
     }
     
     public SoldierGroupSet Get(string id)
@@ -32,9 +32,11 @@ public class GangbangInfo : FightInfo
         return s;
     }
 
+    // 获取的是新instance
     public FightInfo ConvertToFightInfo()
     {
-        var newInfo = new FightInfo();
+        var newInfo = FightInfo.Copy(this);
+        var unitsData = new List<UnitInfo>();
         int id = 0;
         foreach (var unitInfo in UnitsData)
         {
@@ -43,10 +45,12 @@ public class GangbangInfo : FightInfo
             {
                 var newUnitInfo = unitInfo.DeepCopy();
                 newUnitInfo.id = id.ToString();
-                newInfo.UnitsData.Add(newUnitInfo);
+                unitsData.Add(newUnitInfo);
                 id++;
             }
         }
+        newInfo.UnitsData = unitsData;
+        newInfo.Open();
         return newInfo;
     }
 }

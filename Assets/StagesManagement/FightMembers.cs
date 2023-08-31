@@ -32,10 +32,10 @@ public class FightMembers
         {
             case FightEventType.Quest:
                 return TeamLegal(HeroSets);
-                break;
+            case FightEventType.Gangbang:
+                return true; // 待修正
             default:
                 return TeamLegal(HeroSets) && TeamLegal(EnemySets);
-                break;
         }
     }
     

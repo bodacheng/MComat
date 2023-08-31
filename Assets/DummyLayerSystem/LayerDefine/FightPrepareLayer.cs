@@ -61,6 +61,15 @@ public class FightPrepareLayer : UILayer
         rewardUI.gameObject.SetActive(true);
     }
     
+    public void SetGangbangFeature(Action toArcadeFront, string arcadeStageNo)
+    {
+        arcadeStageNoText.gameObject.SetActive(true);
+        arcadeStageNoText.text = "Stage " + arcadeStageNo;
+        toArcadeFrontBtn.gameObject.SetActive(PlayerAccountInfo.Me.tutorialProgress == "Finished");
+        toArcadeFrontBtn.onClick.AddListener(()=> toArcadeFront());
+        rewardUI.gameObject.SetActive(false);
+    }
+    
     public void ForcePressTeamEdit()
     {
         teamEditIndicator.gameObject.SetActive(true);

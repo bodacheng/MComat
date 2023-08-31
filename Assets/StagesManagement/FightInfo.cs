@@ -10,10 +10,15 @@ public class FightInfo : ScriptableObject
     public int battleGroundID;
     public int fightBGM = 0;
     
+    // 底下这个记录的是敌人的信息
     [SerializeField] List<UnitInfo> unitsData = new List<UnitInfo>();
 
-    public List<UnitInfo> UnitsData => unitsData;
-    
+    public List<UnitInfo> UnitsData
+    {
+        get => unitsData;
+        set => unitsData = value;
+    }
+
     public string GetBGMKey()
     {
         switch (fightBGM)
@@ -171,16 +176,11 @@ public class FightInfo : ScriptableObject
     public void SaveDicToData()
     {
         unitsData = new List<UnitInfo>();
-        var one = FightMembers.EnemySets.Get(0, 0);
-        var two = FightMembers.EnemySets.Get(0, 1);
-        var three = FightMembers.EnemySets.Get(0, 2);
-        
-        if (one != default)
-            unitsData.Add(one);
-        if (two != default)
-            unitsData.Add(two);
-        if (three != default)
-            unitsData.Add(three);
+        foreach (var info in FightMembers.EnemySets.GetValues())
+        {
+            if (info != default)
+                unitsData.Add(info);
+        }
     }
     
     public void LoadMyTeam()
@@ -240,6 +240,23 @@ public class FightInfo : ScriptableObject
         stage.RunTutorial = source.RunTutorial;
         stage.EventType = source.EventType;
         return stage;
+    }
+    
+    public void ConvertHeroSetsToGangbang()
+    {
+        int id = 0;
+        MultiDic<int, int, UnitInfo> newHeroSets = new MultiDic<int, int, UnitInfo>();
+        foreach (var unitInfo in this.FightMembers.HeroSets.GetValues())
+        {
+            for (var i = 0; i < 3; i++)
+            {
+                var newUnitInfo = unitInfo.DeepCopy();
+                newUnitInfo.id = id.ToString();
+                newHeroSets.Set(0,id, newUnitInfo);
+                id++;
+            }
+        }
+        this.FightMembers.HeroSets = newHeroSets;
     }
     
     public static FightInfo RandomSkillTestStage(TeamMode teamMode)

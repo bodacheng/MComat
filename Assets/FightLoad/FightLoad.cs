@@ -34,13 +34,17 @@ public static class FightLoad
                 stage.Team1Auto = true;
                 stage.Team2Auto = true;
                 break;
+            case FightEventType.Gangbang:
+                stage.Team1Auto = true;
+                stage.Team2Auto = true;
+                break;
             default:
                 stage.Team1Auto = PlayerPrefs.GetInt("auto", 0) == 1;
                 stage.Team2Auto = true;
                 break;
         }
         
-        if (stage.ID == "1")
+        if (stage.ID == "1" && stage.EventType == FightEventType.Quest)
         {
             stage.RunTutorial = true;
             stage.Team1Auto = false;
