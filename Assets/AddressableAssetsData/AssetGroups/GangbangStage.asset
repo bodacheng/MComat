@@ -52,6 +52,21 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - quest_gangbang
+  - m_GUID: 64d8d0a7b6be84b69930548cde7d9edd
+    m_Address: 8
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - quest_gangbang
+  - m_GUID: 73b2ccb141d4f468393ea0a5e1dcd3fc
+    m_Address: 9
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - quest_gangbang
+  - m_GUID: d1cca3fa1529147dfa9232843f29ecf5
+    m_Address: 10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - quest_gangbang
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
