@@ -8,8 +8,9 @@ using mainMenu;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using Newtonsoft.Json;
+using UnityEngine.Purchasing.Extension;
 
-public class IAPManager : MonoBehaviour, IStoreListener {
+public class IAPManager : MonoBehaviour, IDetailedStoreListener {
 
     public static IAPManager Target;
     // The Unity Purchasing system
@@ -180,7 +181,13 @@ public class IAPManager : MonoBehaviour, IStoreListener {
 
     public void OnInitializeFailed(InitializationFailureReason error, string? message)
     {
+        Debug.Log("OnInitializeFailed InitializationFailureReason:" + error);
         throw new NotImplementedException();
+    }
+
+    public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
+    {
+        Debug.Log("failureDescription " + failureDescription.productId + " : " + failureDescription.reason);
     }
 
     // This is automatically invoked automatically when purchase failed
