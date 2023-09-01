@@ -179,10 +179,10 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
         Debug.Log("OnInitializeFailed InitializationFailureReason:" + error);
     }
 
-    public void OnInitializeFailed(InitializationFailureReason error, string? message)
+    public void OnInitializeFailed(InitializationFailureReason error, string message)
     {
         Debug.Log("OnInitializeFailed InitializationFailureReason:" + error);
-        throw new NotImplementedException();
+        Debug.Log("error message:" + message);
     }
 
     public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
