@@ -134,12 +134,18 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
         // Register each item from the catalog
         foreach (var item in _productCatalog) {
             if (item.ItemClass == productClassName)
+            {
+                Debug.Log(productClassName + ":"+ item.ItemId);
                 builder.AddProduct(item.ItemId, ProductType.Consumable);
+            }
         }
         
         foreach (var item in _stoneProductCatalog) {
             if (item.ItemClass == productClassName)
+            {
+                Debug.Log(productClassName + ":"+ item.ItemId);
                 builder.AddProduct(item.ItemId, ProductType.Consumable);
+            }
         }
         
         builder.AddProduct(noAdsServiceName, ProductType.Consumable);
@@ -188,6 +194,7 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
     public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
     {
         Debug.Log("failureDescription " + failureDescription.productId + " : " + failureDescription.reason);
+        ProgressLayer.Close();
     }
 
     // This is automatically invoked automatically when purchase failed
@@ -222,7 +229,6 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
         }
         
         var boughtItemCatalog = ProductCatalog(e.purchasedProduct.definition.id);
-        
         
         void ValidateSuccess()
         {
@@ -326,6 +332,10 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
                 PurchasePrice = (int)(e.purchasedProduct.metadata.localizedPrice * 100), //(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
                 ReceiptData = payload
             };
+            Debug.Log("CatalogVersion:"+ boughtItemCatalog);
+            Debug.Log("CurrencyCode:"+ e.purchasedProduct.metadata.isoCurrencyCode);
+            Debug.Log("PurchasePrice:"+ (int)(e.purchasedProduct.metadata.localizedPrice * 100));
+            Debug.Log("ReceiptData:"+ payload);
         }
         
         PlayFabClientAPI.ValidateIOSReceipt(
