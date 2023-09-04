@@ -313,30 +313,17 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
         //Debug.Log("CurrencyCode:"+e.purchasedProduct.metadata.isoCurrencyCode);
         //Debug.Log("PurchasePrice:"+(int)e.purchasedProduct.metadata.localizedPrice);
 
-        ValidateIOSReceiptRequest validateIOSReceiptRequest;
-        if (e.purchasedProduct.definition.id == noAdsServiceName)
+        var validateIOSReceiptRequest = new ValidateIOSReceiptRequest
         {
-            validateIOSReceiptRequest = new ValidateIOSReceiptRequest
-            {
-                CatalogVersion = boughtItemCatalog,
-                PurchasePrice = (int)(e.purchasedProduct.metadata.localizedPrice * 100), //(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
-                ReceiptData = payload
-            };
-        }
-        else
-        {
-            validateIOSReceiptRequest = new ValidateIOSReceiptRequest
-            {
-                CatalogVersion = boughtItemCatalog,
-                CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
-                PurchasePrice = (int)(e.purchasedProduct.metadata.localizedPrice * 100), //(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
-                ReceiptData = payload
-            };
-            Debug.Log("CatalogVersion:"+ boughtItemCatalog);
-            Debug.Log("CurrencyCode:"+ e.purchasedProduct.metadata.isoCurrencyCode);
-            Debug.Log("PurchasePrice:"+ (int)(e.purchasedProduct.metadata.localizedPrice * 100));
-            Debug.Log("ReceiptData:"+ payload);
-        }
+            CatalogVersion = boughtItemCatalog,
+            CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
+            PurchasePrice = (int)(e.purchasedProduct.metadata.localizedPrice * 100), //(int)e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id),
+            ReceiptData = payload
+        };
+        Debug.Log("CatalogVersion:"+ boughtItemCatalog);
+        Debug.Log("CurrencyCode:"+ e.purchasedProduct.metadata.isoCurrencyCode);
+        Debug.Log("PurchasePrice:"+ (int)(e.purchasedProduct.metadata.localizedPrice * 100));
+        Debug.Log("ReceiptData:"+ payload);
         
         PlayFabClientAPI.ValidateIOSReceipt(
             validateIOSReceiptRequest,
@@ -355,33 +342,18 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
         // only if receipt is valid.
         
         ValidateGooglePlayPurchaseRequest validateGooglePlayPurchase;
-        if (e.purchasedProduct.definition.id == noAdsServiceName)
+        validateGooglePlayPurchase = new ValidateGooglePlayPurchaseRequest
         {
-            validateGooglePlayPurchase = new ValidateGooglePlayPurchaseRequest
-            {
-                CatalogVersion = boughtItemCatalog,
-                PurchasePrice = (uint)(e.purchasedProduct.metadata.localizedPrice * 100),//(uint)(e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id)),
-                // Pass in the receipt
-                ReceiptJson = googleReceipt.PayloadData.json,
-                // Pass in the signature
-                Signature = googleReceipt.PayloadData.signature
-            };
-        }
-        else
-        {
-            validateGooglePlayPurchase = new ValidateGooglePlayPurchaseRequest
-            {
-                CatalogVersion = boughtItemCatalog,
-                // Pass in currency code in ISO format
-                CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
-                // Convert and set Purchase price
-                PurchasePrice = (uint)(e.purchasedProduct.metadata.localizedPrice * 100),//(uint)(e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id)),
-                // Pass in the receipt
-                ReceiptJson = googleReceipt.PayloadData.json,
-                // Pass in the signature
-                Signature = googleReceipt.PayloadData.signature
-            };
-        }
+            CatalogVersion = boughtItemCatalog,
+            // Pass in currency code in ISO format
+            CurrencyCode = e.purchasedProduct.metadata.isoCurrencyCode,
+            // Convert and set Purchase price
+            PurchasePrice = (uint)(e.purchasedProduct.metadata.localizedPrice * 100),//(uint)(e.purchasedProduct.metadata.localizedPrice * DMAmount(e.purchasedProduct.definition.id)),
+            // Pass in the receipt
+            ReceiptJson = googleReceipt.PayloadData.json,
+            // Pass in the signature
+            Signature = googleReceipt.PayloadData.signature
+        };
         
         PlayFabClientAPI.ValidateGooglePlayPurchase(
             validateGooglePlayPurchase, 
