@@ -340,9 +340,8 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
         // Invoke receipt validation
         // This will not only validate a receipt, but will also grant player corresponding items
         // only if receipt is valid.
-        
-        ValidateGooglePlayPurchaseRequest validateGooglePlayPurchase;
-        validateGooglePlayPurchase = new ValidateGooglePlayPurchaseRequest
+
+        var validateGooglePlayPurchase = new ValidateGooglePlayPurchaseRequest
         {
             CatalogVersion = boughtItemCatalog,
             // Pass in currency code in ISO format
