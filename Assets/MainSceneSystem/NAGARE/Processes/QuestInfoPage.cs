@@ -49,11 +49,12 @@ public class QuestInfoPage : MSceneProcess
             case FightEventType.Gangbang:
                 FightScene.FightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arcade").LoadTeamDic();
                 stage.FightMembers.HeroSets = TeamSet.GetTargetSet("arcade").LoadTeamDic(); // 为了队员显示
-                void GoToTeamEditGangbang()
-                {
-                    PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);
-                }
-                _layer.SetTeamEditFeature(GoToTeamEditGangbang);
+                _layer.SetTeamEditFeature(
+                    () =>
+                    {
+                        PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);
+                    }
+                );
                 _layer.SetGangbangFeature(
                     () =>
                     {
@@ -63,31 +64,14 @@ public class QuestInfoPage : MSceneProcess
                 );
                 break;
         }
-        _layer.StageMembersInfoShow(stage, FightScene.FightScene.Fight.Team1OneWord, FightScene.FightScene.Fight.Team2OneWord);
 
-        bool CanFightCheck()
+        if (stage is GangbangInfo)
         {
-            if (!FightScene.FightScene.Fight.FightMembers.CheckStonesLegal(FightScene.FightScene.Fight.EventType))
-            {
-                return false;
-            }
-            
-            switch (FightScene.FightScene.Fight.EventType)
-            {
-                case FightEventType.Arena:
-                    if (FightScene.FightScene.Fight.FightMembers.HeroSets.GetValues().Count != 3)
-                    {
-                        return false;
-                    }
-                    break;
-                default:
-                    if (FightScene.FightScene.Fight.FightMembers.HeroSets.GetValues().Count == 0)
-                    {
-                        return false;
-                    }
-                    break;
-            }
-            return true;
+            _layer.GangbangStageMembersInfoShow((GangbangInfo)stage, stage.Team1OneWord, stage.Team2OneWord);
+        }
+        else
+        {
+            _layer.StageMembersInfoShow(stage, stage.Team1OneWord, stage.Team2OneWord);
         }
         
         int FightMode()
@@ -143,6 +127,31 @@ public class QuestInfoPage : MSceneProcess
         UILayerLoader.Remove<FightPrepareLayer>();
     }
     
+    bool CanFightCheck()
+    {
+        if (!FightScene.FightScene.Fight.FightMembers.CheckStonesLegal(FightScene.FightScene.Fight.EventType))
+        {
+            return false;
+        }
+            
+        switch (FightScene.FightScene.Fight.EventType)
+        {
+            case FightEventType.Arena:
+                if (FightScene.FightScene.Fight.FightMembers.HeroSets.GetValues().Count != 3)
+                {
+                    return false;
+                }
+                break;
+            default:
+                if (FightScene.FightScene.Fight.FightMembers.HeroSets.GetValues().Count == 0)
+                {
+                    return false;
+                }
+                break;
+        }
+        return true;
+    }
+    
     void GoToFight(FightInfo fightInfo)
     {
         if (!fightInfo.FightMembers.CheckStonesLegal(fightInfo.EventType))
@@ -188,5 +197,10 @@ public class QuestInfoPage : MSceneProcess
                 FightLoad.Go(fightInfo, true);
                 break;
         }
+    }
+
+    void SetTeamUnitCount(GangbangInfo gangbangInfo)
+    {
+        
     }
 }

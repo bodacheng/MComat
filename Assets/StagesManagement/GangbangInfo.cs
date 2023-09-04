@@ -3,8 +3,22 @@ using UnityEngine;
 using System;
 
 public class GangbangInfo : FightInfo
-{
-    [SerializeField] private List<SoldierGroupSet> soldierGroupSet = new List<SoldierGroupSet>();
+{ 
+    private readonly List<SoldierGroupSet> team1GroupSet = new List<SoldierGroupSet>();
+    [SerializeField] private List<SoldierGroupSet> team2GroupSet = new List<SoldierGroupSet>();
+    
+    int SetTeamUnitCount(int team, string instanceID, int count)
+    {
+        var sets = team == 1 ? team1GroupSet : team2GroupSet;
+        int ifWholeCount = GetIfGroupWholeUnitCount(team, instanceID, count);
+        if (ifWholeCount <= 30)
+        {
+            var set = GetSoldierGroupSet(instanceID, team);
+            set.Count = count;
+        }
+        return GetGroupWholeUnitCount(team);
+    }
+    
     
     // Start is called before the first frame update
     [Serializable]
@@ -20,16 +34,54 @@ public class GangbangInfo : FightInfo
         public int Count = 3;
     }
     
-    public SoldierGroupSet Get(string id)
+    public SoldierGroupSet GetTeam1GroupSet(string id)
     {
-        var s = soldierGroupSet.Find(x => x.id == id);
+        return GetSoldierGroupSet(id, 1);
+    }
+    
+    public SoldierGroupSet GetTeam2GroupSet(string id)
+    {
+        return GetSoldierGroupSet(id, 2);
+    }
+    
+    SoldierGroupSet GetSoldierGroupSet(string id, int team)
+    {
+        List<SoldierGroupSet> set = team == 1 ? team1GroupSet : team2GroupSet;
+        var s = set.Find(x => x.id == id);
         if (s == null)
         {
             s = new SoldierGroupSet(id, 1);
-            soldierGroupSet.Add(s);
+            set.Add(s);
             return s;
         }
         return s;
+    }
+
+    int GetGroupWholeUnitCount(int team)
+    {
+        List<SoldierGroupSet> sets = team == 1 ? team1GroupSet : team2GroupSet;
+        int count = 0;
+        foreach (var set in sets)
+        {
+            count += set.Count;
+        }
+
+        return count;
+    }
+
+    int GetIfGroupWholeUnitCount(int team, string instanceID, int count)
+    {
+        List<SoldierGroupSet> sets = team == 1 ? team1GroupSet : team2GroupSet;
+        int wholeCount = 0;
+        foreach (var set in sets)
+        {
+            if (set.id != instanceID)
+                wholeCount += set.Count;
+            else
+                wholeCount += count;
+        }
+
+        return wholeCount;
     }
 
     // 获取的是新instance
@@ -40,7 +92,7 @@ public class GangbangInfo : FightInfo
         int id = 0;
         foreach (var unitInfo in UnitsData)
         {
-            var solderGroupSet = Get(unitInfo.id);
+            var solderGroupSet = GetTeam2GroupSet(unitInfo.id);
             for (var i = 0; i < solderGroupSet.Count; i++)
             {
                 var newUnitInfo = unitInfo.DeepCopy();

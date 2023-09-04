@@ -25,7 +25,7 @@ public class GangbangInfoGUI : Editor
             _stageEditor = new StageEditor();
             _initialized = true;
         }
-        _stageEditor.OnGUIView(gangbangInfo.FightMembers, gangbangInfo.Get);
+        _stageEditor.OnGUIView(gangbangInfo.FightMembers, gangbangInfo.GetTeam2GroupSet);
         
         if (GUILayout.Button("Save"))
         {

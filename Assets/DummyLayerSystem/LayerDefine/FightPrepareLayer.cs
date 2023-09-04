@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class FightPrepareLayer : UILayer
 {
     [SerializeField] HeroIcon fighterIcon;
+    [SerializeField] GangbangHeroIcon gangbangFighterIcon;
     [SerializeField] RectTransform myTeamShowT;
     [SerializeField] RectTransform enemyTeamShowT;
     [SerializeField] float unitIconSize = 200;
@@ -96,6 +97,25 @@ public class FightPrepareLayer : UILayer
         team2OneWord.text = oneWordTeam2;
     }
     
+    public void GangbangStageMembersInfoShow(GangbangInfo stage, string oneWordTeam1, string oneWordTeam2)
+    {
+        GangbangInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT, true);
+        if (dataAccess.Units.Dic.Count >= 3 && stage.FightMembers.HeroSets.GetValues().Count < 3)
+        {
+            teamEditIndicatorText.text = Translate.Get("HasExtraSeat");
+            teamEditIndicator.SetActive(true);
+        }
+        else //if (dataAccess.Units.Dic.Count > 0 && stage.FightMembers.HeroSets.GetValues().Count == 0)
+        {
+            teamEditIndicatorText.text = Translate.Get("MakeYourTeam");
+            teamEditIndicator.SetActive(true);
+        }
+        
+        GangbangInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT, false);
+        team1OneWord.text = oneWordTeam1;
+        team2OneWord.text = oneWordTeam2;
+    }
+    
     List<HeroIcon> MemberInfosShow(List<UnitInfo> heroSets, RectTransform _showT, bool withSkillCheck)
     {
         foreach (Transform transform in _showT)
@@ -106,6 +126,21 @@ public class FightPrepareLayer : UILayer
         foreach(var oneMember in heroSets)
         {
             var v = HeroIcon.ArrangeHeroIconToParent(fighterIcon, oneMember, _showT, unitIconSize, withSkillCheck);
+            icons.Add(v);
+        }
+        return icons;
+    }
+    
+    List<GangbangHeroIcon> GangbangInfosShow(List<UnitInfo> heroSets, RectTransform _showT, bool withSkillCheck)
+    {
+        foreach (Transform transform in _showT)
+        {
+            Destroy(transform.gameObject);
+        }
+        var icons = new List<GangbangHeroIcon>();
+        foreach(var oneMember in heroSets)
+        {
+            var v = GangbangHeroIcon.ArrangeGangbangHeroIconToParent(gangbangFighterIcon, oneMember, _showT, unitIconSize, withSkillCheck);
             icons.Add(v);
         }
         return icons;
