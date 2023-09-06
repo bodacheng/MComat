@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,31 +7,36 @@ public class GangbangHeroIcon : HeroIcon
     [SerializeField] BOButton minusBtn;
     [SerializeField] BOButton plusBtn;
     [SerializeField] Text count;
-
-    private Func<int, int> TeamCountSet;
-
-    void SetUp()
+    
+    void SetUp(Func<int, int> countSet, Func<int> countGet)
     {
+        count.text = countGet().ToString();
         plusBtn.SetListener(
             () =>
             {
-                count.text = TeamCountSet(1).ToString();
+                var currentCount = countGet();
+                var newWholeCount = countSet(currentCount + 1);
+                count.text = countGet().ToString();
             }
         );
         
         minusBtn.SetListener(
             () =>
             {
-                count.text = TeamCountSet(0).ToString();
+                var currentCount = countGet();
+                var newWholeCount = countSet(currentCount - 1);
+                count.text = countGet().ToString();
             }
         );
     }
     
     public static GangbangHeroIcon ArrangeGangbangHeroIconToParent(
-        GangbangHeroIcon prefab, UnitInfo unitInfo, RectTransform T, 
-        float iconSize = 100, bool withSkillCheck = false)
+        Func<int, int> TeamCountSet, Func<int> TeamCountGet,
+        GangbangHeroIcon prefab, UnitInfo unitInfo,
+        RectTransform T, float iconSize = 100, bool withSkillCheck = false)
     {
         var icon = Instantiate(prefab);
+        icon.SetUp(TeamCountSet, TeamCountGet);
         var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
         icon.unitInfo = unitInfo;
         icon.unitConfig = unitConfig;
@@ -43,8 +46,6 @@ public class GangbangHeroIcon : HeroIcon
         icon.transform.localPosition = Vector3.one;
         icon.transform.localScale = Vector3.one;
         icon.gameObject.SetActive(true);
-        
-        icon.SetUp();
         return icon;
     }
 }

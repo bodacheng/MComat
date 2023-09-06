@@ -21,7 +21,7 @@ public class GangbangInfoGUI : Editor
         var gangbangInfo = (GangbangInfo)target;
         if (!_initialized)
         {
-            gangbangInfo.Open();
+            gangbangInfo.OpenAndSetEnemyDataOnPlace();
             _stageEditor = new StageEditor();
             _initialized = true;
         }

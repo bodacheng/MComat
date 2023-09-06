@@ -64,10 +64,10 @@ MonoBehaviour:
   team2AIMode: 0
   dumbAIDecisionDelay: 20
   stageRefLevel: 1
-  soldierGroupSet:
-  - id: 0
-    Count: 10
-  - id: 1
-    Count: 10
+  team2GroupSet:
   - id: 2
-    Count: 10
+    Count: 1
+  - id: 0
+    Count: 1
+  - id: 1
+    Count: 1

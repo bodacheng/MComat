@@ -22,7 +22,7 @@ public class FightInfoGUI : Editor
         var fightInfo = (FightInfo)target;
         if (!_initialized)
         {
-            fightInfo.Open();
+            fightInfo.OpenAndSetEnemyDataOnPlace();
             _stageEditor = new StageEditor();
             _initialized = true;
         }

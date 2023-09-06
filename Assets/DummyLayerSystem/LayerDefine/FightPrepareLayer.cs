@@ -20,6 +20,9 @@ public class FightPrepareLayer : UILayer
     [SerializeField] Text arcadeStageNoText;
     [SerializeField] RewardUI rewardUI;
     [SerializeField] Button toArcadeFrontBtn;
+
+    private Func<int, string, int, int> SetTeamUnitCount;
+    private Func<int, string, int> GetTeamUnitCount;
     
     public void SetFightMode(int fightMode)
     {
@@ -62,13 +65,18 @@ public class FightPrepareLayer : UILayer
         rewardUI.gameObject.SetActive(true);
     }
     
-    public void SetGangbangFeature(Action toArcadeFront, string arcadeStageNo)
+    public void SetGangbangFeature(
+        Action toArcadeFront, string arcadeStageNo, 
+        Func<int, string ,int, int> setTeamUnitCount, Func<int, string, int> getTeamUnitCount)
     {
         arcadeStageNoText.gameObject.SetActive(true);
         arcadeStageNoText.text = "Stage " + arcadeStageNo;
         toArcadeFrontBtn.gameObject.SetActive(PlayerAccountInfo.Me.tutorialProgress == "Finished");
         toArcadeFrontBtn.onClick.AddListener(()=> toArcadeFront());
         rewardUI.gameObject.SetActive(false);
+        
+        SetTeamUnitCount = setTeamUnitCount;
+        GetTeamUnitCount = getTeamUnitCount;
     }
     
     public void ForcePressTeamEdit()
@@ -99,7 +107,7 @@ public class FightPrepareLayer : UILayer
     
     public void GangbangStageMembersInfoShow(GangbangInfo stage, string oneWordTeam1, string oneWordTeam2)
     {
-        GangbangInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT, true);
+        GangbangInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT, true, 1);
         if (dataAccess.Units.Dic.Count >= 3 && stage.FightMembers.HeroSets.GetValues().Count < 3)
         {
             teamEditIndicatorText.text = Translate.Get("HasExtraSeat");
@@ -110,8 +118,7 @@ public class FightPrepareLayer : UILayer
             teamEditIndicatorText.text = Translate.Get("MakeYourTeam");
             teamEditIndicator.SetActive(true);
         }
-        
-        GangbangInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT, false);
+        GangbangInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT, false, 2);
         team1OneWord.text = oneWordTeam1;
         team2OneWord.text = oneWordTeam2;
     }
@@ -131,19 +138,19 @@ public class FightPrepareLayer : UILayer
         return icons;
     }
     
-    List<GangbangHeroIcon> GangbangInfosShow(List<UnitInfo> heroSets, RectTransform _showT, bool withSkillCheck)
+    void GangbangInfosShow(List<UnitInfo> unitSets, RectTransform _showT, bool withSkillCheck, int team)
     {
         foreach (Transform transform in _showT)
         {
             Destroy(transform.gameObject);
         }
-        var icons = new List<GangbangHeroIcon>();
-        foreach(var oneMember in heroSets)
+        foreach(var oneMember in unitSets)
         {
-            var v = GangbangHeroIcon.ArrangeGangbangHeroIconToParent(gangbangFighterIcon, oneMember, _showT, unitIconSize, withSkillCheck);
-            icons.Add(v);
+            var v = GangbangHeroIcon.ArrangeGangbangHeroIconToParent(
+                (x) => SetTeamUnitCount(team, oneMember.id, x),
+                ()=> GetTeamUnitCount(team, oneMember.id),
+                gangbangFighterIcon, oneMember, _showT, unitIconSize, withSkillCheck);
         }
-        return icons;
     }
 
     public void TutorialForceFightBegin()

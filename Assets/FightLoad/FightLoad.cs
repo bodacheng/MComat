@@ -10,48 +10,30 @@ public static class FightLoad
         Go(stage, loadWithMyTeam);
     }
     
-    public static void Go(FightInfo stage, bool loadWithMyTeam = false)
+    public static void Go(FightInfo fightInfo)
     {
-        if (loadWithMyTeam)
-        {
-            stage.LoadMyTeam();
-        }
-        
-        if (stage.FightMembers.HeroSets.GetValues().Count < 1 || stage.FightMembers.EnemySets.GetValues().Count < 1)
-        {
-            string error = Translate.Get("TeamNotFull");
-            PopupLayer.ArrangeWarnWindow(error);
-            return;
-        }
-
-        switch (stage.EventType)
+        switch (fightInfo.EventType)
         {
             case FightEventType.Screensaver:
-                stage.Team1Auto = true;
-                stage.Team2Auto = true;
-                break;
             case FightEventType.SkillTest:
-                stage.Team1Auto = true;
-                stage.Team2Auto = true;
-                break;
             case FightEventType.Gangbang:
-                stage.Team1Auto = true;
-                stage.Team2Auto = true;
+                fightInfo.Team1Auto = true;
+                fightInfo.Team2Auto = true;
                 break;
             default:
-                stage.Team1Auto = PlayerPrefs.GetInt("auto", 0) == 1;
-                stage.Team2Auto = true;
+                fightInfo.Team1Auto = PlayerPrefs.GetInt("auto", 0) == 1;
+                fightInfo.Team2Auto = true;
                 break;
         }
         
-        if (stage.ID == "1" && stage.EventType == FightEventType.Quest)
+        if (fightInfo.ID == "1" && fightInfo.EventType == FightEventType.Quest)
         {
-            stage.RunTutorial = true;
-            stage.Team1Auto = false;
-            stage.Team2Auto = false;
+            fightInfo.RunTutorial = true;
+            fightInfo.Team1Auto = false;
+            fightInfo.Team2Auto = false;
         }
         
-        FightScene.FightScene.Fight =  FightInfo.Copy(stage);
+        FightScene.FightScene.Fight =  FightInfo.Copy(fightInfo);
         PreScene.CashClear();
         SceneManager.LoadScene(2);
     }

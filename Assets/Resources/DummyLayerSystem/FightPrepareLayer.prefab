@@ -638,6 +638,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fighterIcon: {fileID: 4599398632650404793, guid: ab04803d5c276457ea03841b256e73bf,
     type: 3}
+  gangbangFighterIcon: {fileID: 7152094702800314639, guid: 16c574654c57a4c7f93e1d20cfc1fdab,
+    type: 3}
   myTeamShowT: {fileID: 5614356700318546432}
   enemyTeamShowT: {fileID: 1805342110505306726}
   unitIconSize: 200
@@ -686,10 +688,10 @@ RectTransform:
   m_Father: {fileID: 7090545318320839565}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 518, y: -617}
+  m_SizeDelta: {x: 700, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7090545318509655620
 CanvasRenderer:

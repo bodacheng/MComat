@@ -75,7 +75,7 @@ public class FightInfo : ScriptableObject
     
     public void Awake()
     {
-        Open();
+        OpenAndSetEnemyDataOnPlace();
     }
 
     public string ID
@@ -163,7 +163,7 @@ public class FightInfo : ScriptableObject
     }
     #endif
 
-    public void Open()
+    public void OpenAndSetEnemyDataOnPlace()
     {
         ID = this.name;
         FightMembers = new FightMembers();
@@ -240,23 +240,6 @@ public class FightInfo : ScriptableObject
         stage.RunTutorial = source.RunTutorial;
         stage.EventType = source.EventType;
         return stage;
-    }
-    
-    public void ConvertHeroSetsToGangbang()
-    {
-        int id = 0;
-        MultiDic<int, int, UnitInfo> newHeroSets = new MultiDic<int, int, UnitInfo>();
-        foreach (var unitInfo in this.FightMembers.HeroSets.GetValues())
-        {
-            for (var i = 0; i < 10; i++)
-            {
-                var newUnitInfo = unitInfo.DeepCopy();
-                newUnitInfo.id = id.ToString();
-                newHeroSets.Set(0,id, newUnitInfo);
-                id++;
-            }
-        }
-        this.FightMembers.HeroSets = newHeroSets;
     }
     
     public static FightInfo RandomSkillTestStage(TeamMode teamMode)
