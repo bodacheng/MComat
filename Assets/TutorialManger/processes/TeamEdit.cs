@@ -66,6 +66,9 @@ public class TeamEdit : TutorialProcess
             case "arcade":
                 targetTeamSet = TeamSet.Default;
                 break;
+            case "gangbang":
+                targetTeamSet = TeamSet.Gangbang;
+                break;
         }
         
         foreach (var set in targetTeamSet.PosNumsWithLocalKeys)
@@ -94,6 +97,8 @@ public class TeamEdit : TutorialProcess
                     qualified = qualified && unitCount > 1;
                 }
                 break;
+            case "gangbang":
+                return true;
         }
         return qualified;
     }

@@ -194,6 +194,9 @@ public class FightInfo : ScriptableObject
             case FightEventType.Arena:
                 set = TeamSet.Arena3V3;
                 break;
+            case FightEventType.Gangbang:
+                set = TeamSet.Gangbang;
+                break;
             default:
                 set = TeamSet.Default;
                 break;

@@ -1,28 +1,30 @@
 using System.Collections.Generic;
-using UnityEngine;
 using System;
+using UnityEngine;
 
 public class GangbangInfo : FightInfo
 {
     private List<SoldierGroupSet> team1GroupSet = new List<SoldierGroupSet>();
     [SerializeField] private List<SoldierGroupSet> team2GroupSet = new List<SoldierGroupSet>();
     
+    public List<SoldierGroupSet> Team1GroupSet => team1GroupSet;
+    
     public int SetTeamUnitCount(int team, string instanceID, int count)
     {
+        if (count < 0)
+            count = 0;
         int ifWholeCount = GetIfGroupWholeUnitCount(team, instanceID, count);
-        Debug.Log("队伍总数："+ ifWholeCount);
-        if (ifWholeCount <= 30)
+        if (ifWholeCount <= CommonSetting.GangbangModeMaxUnitPerTeam)
         {
             var set = GetSoldierGroupSet(instanceID, team);
             set.Count = count;
         }
-        Debug.Log("队伍新总数："+ GetGroupWholeUnitCount(team));
         return GetGroupWholeUnitCount(team);
     }
 
-    public int GetTeamUnitCount(int team, string instanceID)
+    public int GetTeamUnitCount(int team, string instanceID, bool useLocalData = false)
     {
-        var set = GetSoldierGroupSet(instanceID, team);
+        var set = GetSoldierGroupSet(instanceID, team, useLocalData);
         return set.Count;
     }
     
@@ -50,13 +52,13 @@ public class GangbangInfo : FightInfo
         return GetSoldierGroupSet(id, 2);
     }
     
-    SoldierGroupSet GetSoldierGroupSet(string id, int team)
+    SoldierGroupSet GetSoldierGroupSet(string id, int team, bool useLocalSet = false)
     {
         var sets = team == 1 ? team1GroupSet : team2GroupSet;
         var s = sets.Find(x => x.id == id);
         if (s == null)
         {
-            s = new SoldierGroupSet(id, 1);
+            s = new SoldierGroupSet(id, useLocalSet ? PlayerPrefs.GetInt("gangbangPos"+ id, 1) : 1);
             sets.Add(s);
             return s;
         }
@@ -69,7 +71,6 @@ public class GangbangInfo : FightInfo
         int wholeUnitCount = 0;
         foreach (var set in sets)
         {
-            Debug.Log(set.id +":"+ set.Count);
             wholeUnitCount += set.Count;
         }
         return wholeUnitCount;

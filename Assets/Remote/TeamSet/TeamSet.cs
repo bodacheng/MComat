@@ -4,6 +4,7 @@
     {
         public static PosKeySet Default = new PosKeySet();
         public static PosKeySet Arena3V3 = new PosKeySet();
+        public static PosKeySet Gangbang = new PosKeySet();
 
         public static PosKeySet GetTargetSet(string mode)
         {
@@ -13,6 +14,8 @@
                     return Default;
                 case "arena":
                     return Arena3V3;
+                case "gangbang":
+                    return Gangbang;
             }
             return null;
         }

@@ -14,13 +14,14 @@ namespace dataAccess
             switch (Mode)
             {
                 case "arcade":
-                    var f = Default.GetInstanceIdOnPos(0);
-                    var l = Default.GetInstanceIdOnPos(1);
-                    var r = Default.GetInstanceIdOnPos(2);
-                    
-                    form.l = l;
-                    form.f = f;
-                    form.r = r;
+                    form.f = Default.GetInstanceIdOnPos(0);
+                    form.l = Default.GetInstanceIdOnPos(1);
+                    form.r = Default.GetInstanceIdOnPos(2);
+                    break;
+                case "gangbang":
+                    form.f = Gangbang.GetInstanceIdOnPos(0);
+                    form.l = Gangbang.GetInstanceIdOnPos(1);
+                    form.r = Gangbang.GetInstanceIdOnPos(2);
                     break;
                 case "arena":
                     return; // arena模式的队伍编辑不再和arcade相同
@@ -39,13 +40,16 @@ namespace dataAccess
                 case "arena":
                     targetModeCode = "arena";
                     break;
+                case "gangbang":
+                    targetModeCode = "gangbang";
+                    break;
             }
             PlayFabReadClient.UpdateUserData(
                 new UpdateUserDataRequest()
                 {
                     Data = new Dictionary<string, string>()
                     {
-                        {targetModeCode, JsonConvert.SerializeObject(form) }
+                        { targetModeCode, JsonConvert.SerializeObject(form) }
                     }
                 },
                 ()=>success(true),

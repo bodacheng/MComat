@@ -40,23 +40,28 @@ public class QuestInfoPage : MSceneProcess
                 break;
             case FightEventType.Gangbang:
                 controllingGangbangInfo = GangbangInfo.Copy((GangbangInfo)stage);
-                controllingGangbangInfo.FightMembers.HeroSets = TeamSet.GetTargetSet("arcade").LoadTeamDic(); // 为了队员显示
+                controllingGangbangInfo.FightMembers.HeroSets = TeamSet.GetTargetSet("gangbang").LoadTeamDic(); // 为了队员显示
                 _layer.SetTeamEditFeature(
                     () =>
                     {
-                        PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);
+                        PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "gangbang", true);
                     }
                 );
+                
                 _layer.SetGangbangFeature(
                     () => { PreScene.target.trySwitchToStep(MainSceneStep.GangBangFront, false); },
                     FightScene.FightScene.Fight.ID,
                     (x, y ,z)=>
                     {
-                        int returnValue = controllingGangbangInfo.SetTeamUnitCount(x,y,z);
-                        return returnValue;
+                        var whole = controllingGangbangInfo.SetTeamUnitCount(x, y, z);
+                        if (x == 1) // 本地存储各个gangbang人数
+                        {
+                            PlayerPrefs.SetInt("gangbangPos"+ y, controllingGangbangInfo.GetTeamUnitCount(x,y));
+                            PlayerPrefs.Save();
+                        }
+                        return whole;
                     },
-                    controllingGangbangInfo.GetTeamUnitCount
-                );
+                    (x,y)=> controllingGangbangInfo.GetTeamUnitCount(x,y,x == 1));
                 break;
         }
 

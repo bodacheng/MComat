@@ -37,6 +37,11 @@ public class FrontPage : MSceneProcess
         missionWatcher.Finish("arcadeTFinished", value);
     }
     
+    void GangbangTFinished(bool value)
+    {
+        missionWatcher.Finish("gangbangTFinished", value);
+    }
+    
     void LoadNoAdsFinished(bool value)
     {
         missionWatcher.Finish("loadNoAdsFinished", value);
@@ -142,13 +147,14 @@ public class FrontPage : MSceneProcess
         PlayFabReadClient.LoadItems(ItemsLoadFinished);
         PlayFabReadClient.GetStageRewardInfo(StageRewardFinished);
         PlayFabReadClient.LoadTeamSet("arcade", ArcadeTFinished);
+        PlayFabReadClient.LoadTeamSet("gangbang", GangbangTFinished);
         PlayFabReadClient.LoadNoAdsState(LoadNoAdsFinished);
 
         missionWatcher = new MissionWatcher(
             new List<string>
             {
                 "mailCatalogFinished","unitCatalogFinished","itemsLoadFinished", 
-                "statisticsFinished", "arcadeTFinished", "stageRewardsFinished", "loadNoAdsFinished"
+                "statisticsFinished", "arcadeTFinished", "gangbangTFinished","stageRewardsFinished", "loadNoAdsFinished"
             },
             () =>
             {

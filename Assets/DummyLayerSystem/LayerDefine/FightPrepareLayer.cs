@@ -6,7 +6,6 @@ using System.Collections.Generic;
 public class FightPrepareLayer : UILayer
 {
     [SerializeField] HeroIcon fighterIcon;
-    [SerializeField] GangbangHeroIcon gangbangFighterIcon;
     [SerializeField] RectTransform myTeamShowT;
     [SerializeField] RectTransform enemyTeamShowT;
     [SerializeField] float unitIconSize = 200;
@@ -21,8 +20,13 @@ public class FightPrepareLayer : UILayer
     [SerializeField] RewardUI rewardUI;
     [SerializeField] Button toArcadeFrontBtn;
 
-    private Func<int, string, int, int> SetTeamUnitCount;
-    private Func<int, string, int> GetTeamUnitCount;
+    #region Gangbang
+    [SerializeField] GangbangHeroIcon gangbangFighterIcon;
+    [SerializeField] private Text team1WholeCount;
+    [SerializeField] private Text team2WholeCount;
+    private Func<int, string, int, int> _setTeamUnitCount;
+    private Func<int, string, int> _getTeamUnitCount;
+    #endregion
     
     public void SetFightMode(int fightMode)
     {
@@ -75,8 +79,20 @@ public class FightPrepareLayer : UILayer
         toArcadeFrontBtn.onClick.AddListener(()=> toArcadeFront());
         rewardUI.gameObject.SetActive(false);
         
-        SetTeamUnitCount = setTeamUnitCount;
-        GetTeamUnitCount = getTeamUnitCount;
+        _setTeamUnitCount = (i, s, arg3) =>
+        {
+            var returnValue = setTeamUnitCount(i, s, arg3);
+            if (i == 1)
+            {
+                team1WholeCount.text = returnValue.ToString();
+            }
+            else
+            {
+                team2WholeCount.text = returnValue.ToString();
+            }
+            return setTeamUnitCount(i,s,arg3);
+        };
+        _getTeamUnitCount = getTeamUnitCount;
     }
     
     public void ForcePressTeamEdit()
@@ -144,12 +160,33 @@ public class FightPrepareLayer : UILayer
         {
             Destroy(transform.gameObject);
         }
+
+        int wholeTeamCount = 0;
         foreach(var oneMember in unitSets)
         {
-            var v = GangbangHeroIcon.ArrangeGangbangHeroIconToParent(
-                (x) => SetTeamUnitCount(team, oneMember.id, x),
-                ()=> GetTeamUnitCount(team, oneMember.id),
-                gangbangFighterIcon, oneMember, _showT, unitIconSize, withSkillCheck);
+            GangbangHeroIcon.ArrangeGangbangHeroIconToParent(
+                (x) => _setTeamUnitCount(team, oneMember.id, x),
+                ()=> _getTeamUnitCount(team, oneMember.id),
+                gangbangFighterIcon, oneMember, _showT, unitIconSize, withSkillCheck, team == 1);
+
+            wholeTeamCount += _getTeamUnitCount(team, oneMember.id);
+        }
+
+        if (wholeTeamCount > CommonSetting.GangbangModeMaxUnitPerTeam)
+        {
+            foreach (var oneMember in unitSets)
+            {
+                _setTeamUnitCount(team, oneMember.id, CommonSetting.GangbangModeMaxUnitPerTeam / unitSets.Count);
+            }
+        }
+        
+        if (team == 1)
+        {
+            team1WholeCount.text = wholeTeamCount.ToString();
+        }
+        else
+        {
+            team2WholeCount.text = wholeTeamCount.ToString();
         }
     }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "FightGlobalSetting", menuName = "ScriptableObjects/FightGlobalSetting", order = 1)]
 public class FightGlobalSetting : ScriptableObject

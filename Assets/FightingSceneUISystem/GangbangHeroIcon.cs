@@ -8,35 +8,43 @@ public class GangbangHeroIcon : HeroIcon
     [SerializeField] BOButton plusBtn;
     [SerializeField] Text count;
     
-    void SetUp(Func<int, int> countSet, Func<int> countGet)
+    void SetUp(Func<int, int> countSet, Func<int> countGet, bool enableCountSet = true)
     {
         count.text = countGet().ToString();
-        plusBtn.SetListener(
-            () =>
-            {
-                var currentCount = countGet();
-                var newWholeCount = countSet(currentCount + 1);
-                count.text = countGet().ToString();
-            }
-        );
+        if (enableCountSet)
+        {
+            plusBtn.SetListener(
+                () =>
+                {
+                    var currentCount = countGet();
+                    countSet(currentCount + 1);
+                    count.text = countGet().ToString();
+                }
+            );
         
-        minusBtn.SetListener(
-            () =>
-            {
-                var currentCount = countGet();
-                var newWholeCount = countSet(currentCount - 1);
-                count.text = countGet().ToString();
-            }
-        );
+            minusBtn.SetListener(
+                () =>
+                {
+                    var currentCount = countGet();
+                    countSet(currentCount - 1);
+                    count.text = countGet().ToString();
+                }
+            );
+        }
+        else
+        {
+            plusBtn.gameObject.SetActive(false);
+            minusBtn.gameObject.SetActive(false);
+        }
     }
     
-    public static GangbangHeroIcon ArrangeGangbangHeroIconToParent(
+    public static void ArrangeGangbangHeroIconToParent(
         Func<int, int> TeamCountSet, Func<int> TeamCountGet,
         GangbangHeroIcon prefab, UnitInfo unitInfo,
-        RectTransform T, float iconSize = 100, bool withSkillCheck = false)
+        RectTransform T, float iconSize = 100, bool withSkillCheck = false, bool enableCountSet = true)
     {
         var icon = Instantiate(prefab);
-        icon.SetUp(TeamCountSet, TeamCountGet);
+        icon.SetUp(TeamCountSet, TeamCountGet, enableCountSet);
         var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
         icon.unitInfo = unitInfo;
         icon.unitConfig = unitConfig;
@@ -46,6 +54,5 @@ public class GangbangHeroIcon : HeroIcon
         icon.transform.localPosition = Vector3.one;
         icon.transform.localScale = Vector3.one;
         icon.gameObject.SetActive(true);
-        return icon;
     }
 }

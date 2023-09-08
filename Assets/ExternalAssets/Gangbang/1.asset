@@ -66,8 +66,8 @@ MonoBehaviour:
   stageRefLevel: 1
   team2GroupSet:
   - id: 0
-    Count: 2
+    Count: 10
   - id: 1
-    Count: 3
+    Count: 10
   - id: 2
-    Count: 3
+    Count: 10

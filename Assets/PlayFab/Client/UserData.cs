@@ -39,13 +39,17 @@ public partial class PlayFabReadClient
                 if (obj.Data.ContainsKey(targetModeCode))
                 {
                     var userData = obj.Data[targetModeCode];
+                    var value = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
                     switch (mode)
                     {
                         case "arcade":
-                            TeamSet.Default = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
+                            TeamSet.Default = value;
                             break;
                         case "arena":
-                            TeamSet.Arena3V3 = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
+                            TeamSet.Arena3V3 = value;
+                            break;
+                        case "gangbang":
+                            TeamSet.Gangbang = value;
                             break;
                         default:
                             Debug.Log("队伍阵型信息不明");
@@ -61,6 +65,9 @@ public partial class PlayFabReadClient
                             break;
                         case "arena":
                             TeamSet.Arena3V3 = new PosKeySet();
+                            break;
+                        case "gangbang":
+                            TeamSet.Gangbang = new PosKeySet();
                             break;
                         default:
                             Debug.Log("队伍阵型信息不明");

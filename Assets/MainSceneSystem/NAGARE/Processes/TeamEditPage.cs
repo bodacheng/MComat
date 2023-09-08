@@ -41,7 +41,10 @@ public class TeamEditPage : MSceneProcess
         {
             defaultPosKeySetBefore = TeamSet.Default.Clone();
         }
-        
+        if (teamMode == "gangbang")
+        {
+            defaultPosKeySetBefore = TeamSet.Gangbang.Clone();
+        }
         SetLoaded(true);
     }
     
@@ -60,6 +63,8 @@ public class TeamEditPage : MSceneProcess
     {
         if (_teamMode == "arcade")
             TeamSet.Default = defaultPosKeySetBefore;
+        if (_teamMode == "gangbang")
+            TeamSet.Gangbang = defaultPosKeySetBefore;
         UILayerLoader.Remove<UnitsLayer>();
         UILayerLoader.Remove<TeamEditLayer>();
     }
@@ -82,6 +87,9 @@ public class TeamEditPage : MSceneProcess
                 break;
             case "arcade":
                 targetTeamSet = TeamSet.Default;
+                break;
+            case "gangbang":
+                targetTeamSet = TeamSet.Gangbang;
                 break;
         }
         
@@ -107,6 +115,7 @@ public class TeamEditPage : MSceneProcess
                 qualified = qualified && unitCount == 3;
                 break;
             case "arcade":
+            case "gangbang":
                 qualified = qualified && unitCount > 0;
                 break;
         }
@@ -120,7 +129,7 @@ public class TeamEditPage : MSceneProcess
         {
             case "arena":
                 missionWatcher = new MissionWatcher(
-                    new List<string>() {"teamSavedFinished"},
+                    new List<string>() { "teamSavedFinished" },
                     () =>
                     {
                         ReturnLayer.POP();
@@ -152,6 +161,21 @@ public class TeamEditPage : MSceneProcess
                 );
                 TeamSet.SaveTeamSet(_teamMode, TeamSaveFinished);
                 defaultPosKeySetBefore = TeamSet.Default;
+                break;
+            case "gangbang":
+                missionWatcher = new MissionWatcher(
+                    new List<string>() {
+                        "teamSavedFinished"
+                    },
+                    ()=>
+                    {
+                        _extraArcadeTeamEditSuccess?.Invoke();
+                        ReturnLayer.POP();
+                        ProgressLayer.Close();
+                    }
+                );
+                TeamSet.SaveTeamSet(_teamMode, TeamSaveFinished);
+                defaultPosKeySetBefore = TeamSet.Gangbang;
                 break;
         }
     }
