@@ -8,7 +8,7 @@ using DummyLayerSystem;
 using FightScene;
 using UniRx;
 
-public class ArenaFightOver : UILayer
+public partial class ArenaFightOver : UILayer
 {
     #region common
     [SerializeField] private Animator animator;
@@ -100,7 +100,7 @@ public class ArenaFightOver : UILayer
                 NextFight(1, nextFight);
             });
         }
-    } 
+    }
     
     public void Setup()
     {
@@ -113,6 +113,8 @@ public class ArenaFightOver : UILayer
                 againForMultiBtn.gameObject.SetActive(FightScene.FightScene.Fight.ArcadeFightMode is 0 or 1);
                 break;
             case FightEventType.Gangbang:
+                againFor1v1Btn.gameObject.SetActive(false);
+                againForMultiBtn.gameObject.SetActive(false);
                 break;
             default:
                 break;

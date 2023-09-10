@@ -64,7 +64,7 @@ public class QuestInfoPage : MSceneProcess
                     (x,y)=> controllingGangbangInfo.GetTeamUnitCount(x,y,x == 1));
                 break;
         }
-
+        
         if (stage is GangbangInfo)
         {
             _layer.GangbangStageMembersInfoShow(controllingGangbangInfo, stage.Team1OneWord, stage.Team2OneWord);
@@ -161,7 +161,7 @@ public class QuestInfoPage : MSceneProcess
         
         fightInfo.team1Mode = _layer.GetSetFightMode();
         fightInfo.team2Mode = _layer.GetSetFightMode();
-            
+        
         switch (fightInfo.EventType)
         {
             case FightEventType.Arena:
@@ -182,11 +182,13 @@ public class QuestInfoPage : MSceneProcess
             case FightEventType.Gangbang:
                 if (fightInfo.FightMembers.HeroSets.GetValues().Count < 1 || fightInfo.FightMembers.EnemySets.GetValues().Count < 1)
                 {
-                    Debug.Log(fightInfo.FightMembers.HeroSets.GetValues().Count + ":" + fightInfo.FightMembers.EnemySets.GetValues().Count);
                     PopupLayer.ArrangeWarnWindow(Translate.Get("TeamNotFull"));
                     return;
                 }
-                ((GangbangInfo)fightInfo).ConvertTeamToGangbang();
+                var bangBangInfo = ((GangbangInfo)fightInfo);
+                bangBangInfo.ConvertTeamToGangbang();
+                FightScene.FightScene.team1GroupSet = bangBangInfo.Team1GroupSet;
+                fightInfo.Team1ID = PlayerAccountInfo.Me.PlayFabId;
                 FightLoad.Go(fightInfo);
                 break;
             default:

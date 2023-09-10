@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 2157983156181763251}
   - component: {fileID: 7050316916199589813}
   - component: {fileID: 1759285401046051682}
-  - component: {fileID: 1469989006510056096}
+  - component: {fileID: 6693019067278792285}
   m_Layer: 5
   m_Name: FrontBtn
   m_TagString: Untagged
@@ -583,7 +583,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1469989006510056096
+--- !u!114 &6693019067278792285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -592,7 +592,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6701477789051118867}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f06d2816ba830496b87fa3769f55cfb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -614,7 +614,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 21300000, guid: 703398fdfa5127744b4a6bde0524becd, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 703398fdfa5127744b4a6bde0524becd, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -627,6 +627,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  doubleClick:
+    m_PersistentCalls:
+      m_Calls: []
+  hold:
+    m_PersistentCalls:
+      m_Calls: []
+  disableTransitionOverride: 0
+  activateDoubleClick: 0
+  activateHold: 0
+  sound: 0
+  disableSprite: {fileID: 0}
+  text: {fileID: 0}
 --- !u!1 &6953865740430023876
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,7 +824,7 @@ MonoBehaviour:
   team2OneWord: {fileID: 7235223705160284358}
   arcadeStageNoText: {fileID: 8981576542843726879}
   rewardUI: {fileID: 5769257263969408133}
-  toArcadeFrontBtn: {fileID: 1469989006510056096}
+  toArcadeFrontBtn: {fileID: 6693019067278792285}
   gangbangFighterIcon: {fileID: 7152094702800314639, guid: 16c574654c57a4c7f93e1d20cfc1fdab,
     type: 3}
   team1WholeCount: {fileID: 8471271465059834588}

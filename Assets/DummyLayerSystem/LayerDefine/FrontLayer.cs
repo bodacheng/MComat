@@ -46,7 +46,7 @@ public class FrontLayer : UILayer
         GangbangBtn.onClick.AddListener(
             ()=>
             {
-                PlayerAccountInfo.Me.GangbangModeManager.DirectToArcadeStage(1, true);
+                PlayerAccountInfo.Me.GangbangModeManager.DirectToGangStage(PlayerAccountInfo.Me.gangbangProcess + 1, true);
             });
         
         ArenaBtn.onClick.AddListener(() =>

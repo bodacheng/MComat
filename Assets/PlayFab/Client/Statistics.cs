@@ -33,6 +33,11 @@ public partial class PlayFabReadClient
             {
                 PlayerAccountInfo.Me.arcadeProcess = value.Value;
             }
+            
+            if (value.StatisticName == "gangbangProgress")
+            {
+                PlayerAccountInfo.Me.gangbangProcess = value.Value;
+            }
         }
     }
 }

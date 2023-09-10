@@ -11,9 +11,9 @@ public partial class CloudScript
     /// <summary>
     /// claimQuestRewardSuccess基于的是claimQuestReward的结果而不是completedLevel
     /// </summary>
-    /// <param name="_stage"></param>
+    /// <param name="stage"></param>
     /// <param name="claimQuestRewardSuccess"></param>
-    public static void ArcadeProgress(string _stage, Action<ExecuteCloudScriptResult> claimQuestRewardSuccess)
+    public static void ArcadeProgress(string stage, Action<ExecuteCloudScriptResult> claimQuestRewardSuccess)
     {
         // 之所以把更新关卡进度和获取报酬分开处理，是因为当时把这些处理写到一个cloud函数里的时候，
         // 竟然有一定概率playfab不给执行关卡进度更新所触发的角色获取rule，于是我们才决定在这个部分不要把各种处理集中在一个瞬间
@@ -23,11 +23,15 @@ public partial class CloudScript
             new ExecuteCloudScriptRequest()
             {
                 FunctionName = "completedLevel",
-                FunctionParameter = new { stage = _stage },
+                FunctionParameter = new
+                {
+                    stage = stage,
+                    stageType = "arcade"
+                },
             },
             (x) =>
             {
-                if (_stage == "2")
+                if (stage == "2")
                 {
                     PopupLayer.ArrangeWarnWindow(Translate.Get("TutorialCompleted"));
                 }
@@ -44,7 +48,7 @@ public partial class CloudScript
                             foreach (var item in unitAward)
                             {
                                 var unitConfig = Units.GetUnitConfig(item.ItemId);
-                                if (_stage == "5")
+                                if (stage == "5")
                                 {
                                     PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get(unitConfig.REAL_NAME) + "\n" + Translate.Get("GotNewUnit"), item.ItemId,
                                     ()=>
@@ -71,7 +75,11 @@ public partial class CloudScript
                     new ExecuteCloudScriptRequest
                     {
                         FunctionName = "claimQuestReward",
-                        FunctionParameter = new { stage = _stage }
+                        FunctionParameter = new
+                        {
+                            stage = stage,
+                            stageType = "arcade"
+                        }
                     },
                     claimQuestRewardSuccess
                 );

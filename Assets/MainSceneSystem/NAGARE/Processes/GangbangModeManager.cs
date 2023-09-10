@@ -37,11 +37,12 @@ public class GangbangModeManager
             return null;
         var fightInfo = await AddressablesLogic.LoadT<GangbangInfo>(location);
         fightInfo.EventType = FightEventType.Gangbang;
+        fightInfo.ArcadeFightMode = 1;
         fightInfo.FightMembers.SetEnemyLevel(fightInfo.stageRefLevel);
         return fightInfo;
     }
 
-    public async void DirectToArcadeStage(int stageNo, bool forward)
+    public async void DirectToGangStage(int stageNo, bool forward)
     {
         var stage = await LoadStage(stageNo);
         stage.EventType = FightEventType.Gangbang;

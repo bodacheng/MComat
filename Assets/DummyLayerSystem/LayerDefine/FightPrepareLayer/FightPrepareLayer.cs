@@ -1,0 +1,102 @@
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
+
+public partial class FightPrepareLayer : UILayer
+{
+    [SerializeField] HeroIcon fighterIcon;
+    [SerializeField] RectTransform myTeamShowT;
+    [SerializeField] RectTransform enemyTeamShowT;
+    [SerializeField] float unitIconSize = 200;
+    [SerializeField] BOButton editTeamButton; // 根据进入战斗模式决定是否显示
+    [SerializeField] GameObject teamEditIndicator;
+    [SerializeField] Text teamEditIndicatorText;
+    [SerializeField] FightModeSwitch fightModeSwitch;
+    [SerializeField] FightBeginBtn beginFight;
+    [SerializeField] Text team1OneWord;
+    [SerializeField] Text team2OneWord;
+    [SerializeField] Text arcadeStageNoText;
+    [SerializeField] RewardUI rewardUI;
+    [SerializeField] BOButton toArcadeFrontBtn;
+    
+    public void SetFightMode(int fightMode)
+    {
+        fightModeSwitch.Setup(fightMode, PlayerPrefs.GetInt("preferAdventureMode",  PlayerPrefs.GetInt("preferAdventureMode", 2)));
+    }
+    
+    public TeamMode GetSetFightMode()
+    {
+        return fightModeSwitch.TeamMode;
+    }
+    
+    public void SetFightBeginFeature(Action fightBegin)
+    {
+        beginFight.SetAction(fightBegin);
+    }
+    
+    public void SetFightBeginEnableRender(bool canFight)
+    {
+        beginFight.Enable(canFight);
+    }
+
+    public void SetTeamEditFeature(Action teamEdit)
+    {
+        editTeamButton.onClick.RemoveAllListeners();
+        editTeamButton.onClick.AddListener(()=> teamEdit());
+    }
+
+    public void SetArcadeFeature(Action toArcadeFront, string arcadeStageNo)
+    {
+        arcadeStageNoText.gameObject.SetActive(true);
+        arcadeStageNoText.text = "Stage " + arcadeStageNo;
+        toArcadeFrontBtn.gameObject.SetActive(PlayerAccountInfo.Me.tutorialProgress == "Finished");
+        toArcadeFrontBtn.SetListener(toArcadeFront);
+        
+        var rewardDic = PlayFabReadClient.StageAwards;
+        var reward = rewardDic[arcadeStageNo];
+        rewardUI.ShowRewards(reward.d,reward.g);
+        int.TryParse(arcadeStageNo, out var arcadeStageNoInt);
+        rewardUI.AwardRender(PlayerAccountInfo.Me.arcadeProcess + 1 > arcadeStageNoInt);
+        rewardUI.gameObject.SetActive(true);
+    }
+    
+    public void StageMembersInfoShow(FightInfo stage, string oneWordTeam1, string oneWordTeam2)
+    {
+        MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT, true);
+        if (dataAccess.Units.Dic.Count >= 3 && stage.FightMembers.HeroSets.GetValues().Count < 3)
+        {
+            teamEditIndicatorText.text = Translate.Get("HasExtraSeat");
+            teamEditIndicator.SetActive(true);
+        }
+        else //if (dataAccess.Units.Dic.Count > 0 && stage.FightMembers.HeroSets.GetValues().Count == 0)
+        {
+            teamEditIndicatorText.text = Translate.Get("MakeYourTeam");
+            teamEditIndicator.SetActive(true);
+        }
+
+        MemberInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT, false);
+        team1OneWord.text = oneWordTeam1;
+        team2OneWord.text = oneWordTeam2;
+    }
+    
+    List<HeroIcon> MemberInfosShow(List<UnitInfo> heroSets, RectTransform _showT, bool withSkillCheck)
+    {
+        foreach (Transform transform in _showT)
+        {
+            Destroy(transform.gameObject);
+        }
+        var icons = new List<HeroIcon>();
+        foreach(var oneMember in heroSets)
+        {
+            var v = HeroIcon.ArrangeHeroIconToParent(fighterIcon, oneMember, _showT, unitIconSize, withSkillCheck);
+            icons.Add(v);
+        }
+        return icons;
+    }
+    
+    public void TutorialForceFightBegin()
+    {
+        editTeamButton.gameObject.SetActive(false);
+    }
+}

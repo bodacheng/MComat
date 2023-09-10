@@ -7,8 +7,18 @@ public class GangbangInfo : FightInfo
     private List<SoldierGroupSet> team1GroupSet = new List<SoldierGroupSet>();
     [SerializeField] private List<SoldierGroupSet> team2GroupSet = new List<SoldierGroupSet>();
     
-    public List<SoldierGroupSet> Team1GroupSet => team1GroupSet;
+    public List<SoldierGroupSet> Team1GroupSet
+    {
+        get => team1GroupSet;
+        set => team1GroupSet = value;
+    }
     
+    public List<SoldierGroupSet> Team2GroupSet
+    {
+        get => team2GroupSet;
+        set => team2GroupSet = value;
+    }
+
     public int SetTeamUnitCount(int team, string instanceID, int count)
     {
         if (count < 0)
@@ -149,7 +159,6 @@ public class GangbangInfo : FightInfo
         stage.Team2LeaderboardEntry = source.Team2LeaderboardEntry;
         stage.RunTutorial = source.RunTutorial;
         stage.EventType = source.EventType;
-
         stage.UnitsData = new List<UnitInfo>(source.UnitsData);
         stage.team1GroupSet = new List<SoldierGroupSet>(source.team1GroupSet);
         stage.team2GroupSet = new List<SoldierGroupSet>(source.team2GroupSet);

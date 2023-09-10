@@ -33,35 +33,6 @@
 //log.debug(playstreamEvent.Entity);
 //var currentPlayerId = playstreamEvent.Entity.Id;
 
-handlers.test = function (args, context) {
-
-    var stageKey = "stage_awards";
-    
-    //get title data
-    var TitleDataRequest = {"Keys":[stageKey]};
-    var TitleDataResponse = server.GetTitleData(TitleDataRequest);
-    if(!TitleDataResponse.Data.hasOwnProperty(stageKey))
-    {
-
-    }
-    else
-    {
-        var whole = TitleDataResponse.Data[stageKey];
-        var objData = JSON.parse(whole);
-        
-        for (var i = 0; i < objData.length; i++) {
-            log.debug(objData[i].award.g);
-        }
-    }
-
-    //log.debug("报酬信息未找到？ ..." + stageKey);
-    return {
-        success: true,
-        gold: 0,
-        diamond: 0
-    };
-};
-
 handlers.BundleBought = function (args, context) {
 
     const key = args.bundleProductId;
@@ -298,25 +269,35 @@ function GetUserSkippedAdRewards() {
     // 获取玩家现有的关卡广告状态数据
     var playerData = server.GetUserReadOnlyData({
         PlayFabId: currentPlayerId,
-        Keys: ["LevelAdStatus"]
+        Keys: ["LevelAdStatus", "GangbangLevelAdStatus"]
     });
-
-    // 如果LevelAdStatus数据不存在，则直接返回0
-    if (!playerData.Data.LevelAdStatus) {
-        return 0;
-    }
-
-    // 将LevelAdStatus数据解析为数组
-    var levelAdStatus = JSON.parse(playerData.Data.LevelAdStatus.Value || '[]');
-
+    
     var rewardDM = 0;
-    // 遍历levelAdStatus数组，并根据其值计算rewardDM
-    for (var index = 0; index < levelAdStatus.length; index++) {
-        if (levelAdStatus[index] == 0 || levelAdStatus[index] == "null" || levelAdStatus[index] == null) {
-            // 每五个关卡奖励10点，其他奖励5点
-            rewardDM += (index + 1) % 5 == 0 ? 10 : 5;
+    
+    if (playerData.Data.LevelAdStatus) {
+        // 将LevelAdStatus数据解析为数组
+        var levelAdStatus = JSON.parse(playerData.Data.LevelAdStatus.Value || '[]');
+        // 遍历levelAdStatus数组，并根据其值计算rewardDM
+        for (var index = 0; index < levelAdStatus.length; index++) {
+            if (levelAdStatus[index] == 0 || levelAdStatus[index] == "null" || levelAdStatus[index] == null) {
+                // 每五个关卡奖励10点，其他奖励5点
+                rewardDM += (index + 1) % 5 == 0 ? 10 : 5;
+            }
         }
     }
+    
+    if (playerData.Data.GangbangLevelAdStatus) {
+        // 将LevelAdStatus数据解析为数组
+        var gangbangLevelAdStatus = JSON.parse(playerData.Data.GangbangLevelAdStatus.Value || '[]');
+        // 遍历levelAdStatus数组，并根据其值计算rewardDM
+        for (var index = 0; index < gangbangLevelAdStatus.length; index++) {
+            if (gangbangLevelAdStatus[index] == 0 || gangbangLevelAdStatus[index] == "null" || gangbangLevelAdStatus[index] == null) {
+                // 每五个关卡奖励10点，其他奖励5点
+                rewardDM += (index + 1) % 5 == 0 ? 10 : 5;
+            }
+        }
+    }
+    
     // 返回计算得到的奖励值
     return rewardDM;
 }
@@ -426,16 +407,17 @@ handlers.givePassiveSkill= function (args, context) {
     return { result : true };
 }
 
-
 handlers.completedLevel = function (args, context) {
     
     var newLevelCompleted = Number(args.stage);
+    var stageType = args.stageType;
+    var stageProgressKey = stageType === "gangbang" ? "gangbangProgress" : "stageProgress";
     var playerStatResult = server.UpdatePlayerStatistics(
         {
             PlayFabId: currentPlayerId,
             Statistics: [
                 {
-                    StatisticName: "stageProgress",
+                    StatisticName: stageProgressKey,
                     Value: newLevelCompleted
                 }
             ]
@@ -443,27 +425,29 @@ handlers.completedLevel = function (args, context) {
     );
 
     var unit_award = -1;
-    switch (newLevelCompleted) {
-        case 1:
-            unit_award = "1";
-            break;
-        case 5:
-            unit_award = "2";
-            break;
-        case 20:
-            unit_award = "4";
-            break;
-        case 35:
-            unit_award = "7";
-            break;
-        case 50:
-            unit_award = "6";
-            break;
-        case 100:
-            unit_award = "5";
-            break;
-        default:
-            break;
+    if (stageType !== "gangbangProgress") {
+        switch (newLevelCompleted) {
+            case 1:
+                unit_award = "1";
+                break;
+            case 5:
+                unit_award = "2";
+                break;
+            case 20:
+                unit_award = "4";
+                break;
+            case 35:
+                unit_award = "7";
+                break;
+            case 50:
+                unit_award = "6";
+                break;
+            case 100:
+                unit_award = "5";
+                break;
+            default:
+                break;
+        }
     }
     
     if (unit_award != -1) {
@@ -478,16 +462,21 @@ handlers.claimQuestReward = function (args, context) {
     
     // 传递过来的这个level是玩家试图更新到的进度，但这个数值来自客户端，并不能完全信任
     // 关卡更新机制我们只有一个逻辑就是一次只更新一关
+
+    var stageType = args.stageType;
+    var stageAwardsKey = stageType === "gangbang" ? "gangbang_awards" : "stage_awards";
+    var adStatusKey = stageType === "gangbang" ? "GangbangLevelAdStatus" : "LevelAdStatus";
+    
     var level = args.level;
     var newLevelCompleted = Number(args.stage);
-    var titleDataRequest = { "Keys":"stage_awards" };
+    var titleDataRequest = { "Keys": stageAwardsKey };
     var titleDataResponse = server.GetTitleData(titleDataRequest);
 
-    var whole = titleDataResponse.Data["stage_awards"];
+    var whole = titleDataResponse.Data[stageAwardsKey];
     var objData = JSON.parse(whole);
     var award;
     let g = 0;
-    let d = 0;
+    var d = 0;
 
     for (var i = 0; i < objData.length; i++) {
 
@@ -507,56 +496,69 @@ handlers.claimQuestReward = function (args, context) {
 
     if (award.hasOwnProperty("g")) {
         g = Number(award.g);
-
-        if (g > 0) {
-            server.AddUserVirtualCurrency({
-                PlayFabID: currentPlayerId,
-                VirtualCurrency: "GD",
-                Amount: g
-            });
-        }
     }
 
     if (award.hasOwnProperty("d")) {
         d = Number(award.d);
-
-        if (d > 0) {
-            server.AddUserVirtualCurrency({
-                PlayFabID: currentPlayerId,
-                VirtualCurrency: "DM",
-                Amount: d
-            });
-        }
     }
     
     // Get the player's existing level ad status data.
     var playerData = server.GetUserReadOnlyData({
         PlayFabId: currentPlayerId,
-        Keys: ["LevelAdStatus"]
+        Keys: [adStatusKey]
     });
-    
+
     // Initialize the LevelAdStatus data if it doesn't exist.
     var levelAdStatus;
-    if (!playerData.Data.LevelAdStatus) {
-        levelAdStatus = [];
-    } else {
-        // Parse the LevelAdStatus data into an array.
-        levelAdStatus = JSON.parse(playerData.Data.LevelAdStatus.Value || '[]');
+    if (adStatusKey === "LevelAdStatus") {
+        if (!playerData.Data.LevelAdStatus) {
+            levelAdStatus = [];
+        } else {
+            // Parse the LevelAdStatus data into an array.
+            levelAdStatus = JSON.parse(playerData.Data.LevelAdStatus.Value || '[]');
+        }
+    }else{
+        if (!playerData.Data.GangbangLevelAdStatus) {
+            levelAdStatus = [];
+        } else {
+            // Parse the LevelAdStatus data into an array.
+            levelAdStatus = JSON.parse(playerData.Data.GangbangLevelAdStatus.Value || '[]');
+        }
     }
     
     // If the level index is out of range, expand the levelAdStatus array.
     while(newLevelCompleted > levelAdStatus.length) {
         levelAdStatus.push(null);
     }
-
+    
     // Update the level ad status.
-    levelAdStatus[newLevelCompleted - 1] = 0;
-
+    if (levelAdStatus[newLevelCompleted - 1] === null) {
+        levelAdStatus[newLevelCompleted - 1] = 0;
+        var extraD = newLevelCompleted % 5 === 0 ? 10 : 5,
+        d = extraD + d;
+    }
+    
     // Save the updated level ad status data.
     var newPlayData = server.UpdateUserReadOnlyData({
         PlayFabId: currentPlayerId,
-        Data: { "LevelAdStatus": JSON.stringify(levelAdStatus) }
+        Data: { adStatusKey: JSON.stringify(levelAdStatus) }
     });
+    
+    if (g > 0) {
+        server.AddUserVirtualCurrency({
+            PlayFabID: currentPlayerId,
+            VirtualCurrency: "GD",
+            Amount: g
+        });
+    }
+    
+    if (d > 0) {
+        server.AddUserVirtualCurrency({
+            PlayFabID: currentPlayerId,
+            VirtualCurrency: "DM",
+            Amount: d
+        });
+    }
     
     return {
         has_reward: true,

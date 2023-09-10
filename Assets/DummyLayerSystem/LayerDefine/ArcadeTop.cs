@@ -79,7 +79,7 @@ public class ArcadeTop : UILayer
 
     void ToNew()
     {
-        var stages = NewStages(PlayerAccountInfo.Me.arcadeProcess);
+        var stages = NewStages(step == MainSceneStep.ArcadeFront ? PlayerAccountInfo.Me.arcadeProcess : PlayerAccountInfo.Me.gangbangProcess);
         ShowStages(stages).Forget();
     }
 
@@ -108,7 +108,8 @@ public class ArcadeTop : UILayer
             tasks.Add(LoadStage(_currentStages[index]));
         }
         await UniTask.WhenAll(tasks);
-        Refresh();
+        Refresh(step == MainSceneStep.ArcadeFront ? PlayerAccountInfo.Me.arcadeProcess : PlayerAccountInfo.Me.gangbangProcess,  
+            step == MainSceneStep.ArcadeFront ? PlayFabReadClient.StageAwards : PlayFabReadClient.GangbangAwards);
         if (container != null)
             container.transform.gameObject.SetActive(true);
         ProgressLayer.Close();
@@ -139,7 +140,7 @@ public class ArcadeTop : UILayer
         }
     }
 
-    void Refresh()
+    void Refresh(int progress, IDictionary<string, Award> stageAwards)
     {
         if (container.IsDestroyed())
             return;
@@ -150,26 +151,26 @@ public class ArcadeTop : UILayer
             var stageBtn = _stageButtons[i];
             var btnAnimator = stageBtn.GetComponent<Animator>();
             if (btnAnimator != null)
-                btnAnimator.enabled = PlayerAccountInfo.Me.arcadeProcess + 1 == stageBtn.StageNo;
+                btnAnimator.enabled = progress + 1 == stageBtn.StageNo;
             
-            var rewardDic = PlayFabReadClient.StageAwards;
+            var rewardDic = stageAwards;
             var reward = rewardDic[stageBtn.StageNo.ToString()];
             stageBtn.RewardUI.ShowRewards(reward.d,reward.g);
-            stageBtn.RewardUI.AwardRender(PlayerAccountInfo.Me.arcadeProcess + 1 > stageBtn.StageNo);
-            stageBtn.ChangeColorOfIcons(PlayerAccountInfo.Me.arcadeProcess + 1 >= stageBtn.StageNo);
+            stageBtn.RewardUI.AwardRender(progress + 1 > stageBtn.StageNo);
+            stageBtn.ChangeColorOfIcons(progress + 1 >= stageBtn.StageNo);
             stageBtn.transform.SetParent(container.transform);
             stageBtn.transform.localPosition = Vector3.zero;
             stageBtn.transform.localRotation = Quaternion.identity;
             stageBtn.transform.localScale = Vector3.one;
         }
         
-        int _currentStagesMax = _currentStages.Count > 0 ? _currentStages.Max() : PlayerAccountInfo.Me.arcadeProcess;
-        nextChapter.gameObject.SetActive((PlayerAccountInfo.Me.arcadeProcess + 1 > _currentStagesMax) && (_maxStageNum > _currentStagesMax));
+        int currentStagesMax = _currentStages.Count > 0 ? _currentStages.Max() : progress;
+        nextChapter.gameObject.SetActive((progress + 1 > currentStagesMax) && (_maxStageNum > currentStagesMax));
         lastChapter.gameObject.SetActive(_currentStages.Count == 0 || _currentStages.Min() > 5);
 
-        var progressChapter = PlayerAccountInfo.Me.arcadeProcess == _maxStageNum
-            ? (PlayerAccountInfo.Me.arcadeProcess - 1) / 5
-            : PlayerAccountInfo.Me.arcadeProcess / 5;
+        var progressChapter = progress == _maxStageNum
+            ? (progress - 1) / 5
+            : progress / 5;
         var currentChapter = _currentStages.Count != 0 ? _currentStages.Min() / 5 : _maxStageNum / 5;
         
         jumpToNewStage.gameObject.SetActive(progressChapter != currentChapter);

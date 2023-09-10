@@ -3,15 +3,16 @@ using DummyLayerSystem;
 using mainMenu;
 
 public delegate UniTask<GangbangInfo> LoadGangbangDelegate(int stageNo);
+
 public class GangbangFrontPage : MSceneProcess
 {
-    readonly GangbangModeManager gangbangModeManager;
+    readonly GangbangModeManager _gangbangModeManager;
     ArcadeTop _arcadeTop;
     
     public GangbangFrontPage(GangbangModeManager gangbangModeManager)
     {
         Step = MainSceneStep.GangBangFront;
-        this.gangbangModeManager = gangbangModeManager;
+        this._gangbangModeManager = gangbangModeManager;
     }
     
     public override void ProcessEnter()
@@ -22,9 +23,9 @@ public class GangbangFrontPage : MSceneProcess
     
     async UniTask Load()
     {
-        await gangbangModeManager.Initialize();
-        _arcadeTop.SetupGangbangArcade(gangbangModeManager.MaxStageNum, gangbangModeManager.LoadStage, gangbangModeManager.DirectToArcadeStage);
-        var stages = _arcadeTop.NewStages(PlayerAccountInfo.Me.arcadeProcess);
+        await _gangbangModeManager.Initialize();
+        _arcadeTop.SetupGangbangArcade(_gangbangModeManager.MaxStageNum, _gangbangModeManager.LoadStage, _gangbangModeManager.DirectToGangStage);
+        var stages = _arcadeTop.NewStages(PlayerAccountInfo.Me.gangbangProcess);
         await _arcadeTop.ShowStages(stages);
         SetLoaded(true);
     }

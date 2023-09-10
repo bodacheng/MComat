@@ -24,6 +24,7 @@ namespace FightScene
         public ReactiveProperty<bool> LoadStageFinished { get; set; } = new ReactiveProperty<bool>(false);
 
         public static FightInfo Fight;
+        public static List<GangbangInfo.SoldierGroupSet> team1GroupSet;
         
         private RewardedAdsButton watchBtn;
         public void ShowAds(int extraAdReward, RectTransform btnTarget, Action afterWatched, int finishedStage = -1)
