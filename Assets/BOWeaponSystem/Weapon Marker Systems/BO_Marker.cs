@@ -7,11 +7,11 @@ namespace HittingDetection
     public class BO_Marker : Marker
     {
         public float radius;
-        readonly IDictionary<Collider, HitPointPara> BallDetectHitPool = new Dictionary<Collider, HitPointPara>();
+        readonly IDictionary<Collider, HitPointPara> _ballDetectHitPool = new Dictionary<Collider, HitPointPara>();
         
         public IDictionary<Collider, HitPointPara> GetBallDetectHitPool()
         {
-            return BallDetectHitPool;
+            return _ballDetectHitPool;
         }
         
         public override void LocalAwake()
@@ -23,7 +23,7 @@ namespace HittingDetection
         
         public override bool HitCheck()
         {
-            return BallDetectHitPool.Count > 0;
+            return _ballDetectHitPool.Count > 0;
         }
         
         public override void ClearMarkerProcess()
@@ -33,7 +33,7 @@ namespace HittingDetection
         
         protected override void ClearDetection()
         {
-            BallDetectHitPool.Clear();
+            _ballDetectHitPool.Clear();
         }
         
         protected override void OnTriggerEnter(Collider other)
@@ -53,7 +53,7 @@ namespace HittingDetection
             //BallDetectHitPool = Physics.OverlapSphere(this.transform.position, radius, _layers, QueryTriggerInteraction.Collide);
             if (_layers == (_layers | (1 << other.gameObject.layer)))
             {
-                if (!BallDetectHitPool.Keys.Contains(other))
+                if (!_ballDetectHitPool.Keys.Contains(other))
                 {
                     var tempM = HitBoxesProcesser.Instance.GetHitBox(other);
                     float tempWHpCost = tempM != null ? V_Damage.WpHpCost(owner.heavyLevel, tempM.heavyLevel) : 1;
@@ -64,7 +64,7 @@ namespace HittingDetection
                         qua = Quaternion.LookRotation(other.transform.position - HitEffectPointCal(other.transform.position), Vector3.up),
                         WeaponHpCost = tempWHpCost
                     };
-                    BallDetectHitPool.Add(other, hitPointPara);
+                    _ballDetectHitPool.Add(other, hitPointPara);
                 }
             }
         }
