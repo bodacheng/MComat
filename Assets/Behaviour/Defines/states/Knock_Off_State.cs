@@ -91,8 +91,6 @@ namespace Soul
                     gameObject.transform.position +=
                         _xz * (_usedZCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedZCurve.Evaluate(_timeCounter)) + Vector3.up * yDiffer;
                     if (_BasicPhysicSupport.hiddenMethods.Grounded && yDiffer < 0)
-                        // time_counter > 0.5f 这个数字是为了确保角色真能飞起来。
-                        // 否则很有可能因为动画本身等复杂缘故，刚飞起来就被判断落地
                     {
                         FlyingStep = 1;
                     }
@@ -121,6 +119,7 @@ namespace Soul
                     }
                     break;
             }
+            _Rigidbody.velocity = Vector3.zero; //如果没有这一行的话会出现个非常意外的问题，就是产生一个向上的固定velocity，超过了角色自身下坠，导致FlyingStep一直为0
             _timeCounter += Time.deltaTime;
         }
     }
