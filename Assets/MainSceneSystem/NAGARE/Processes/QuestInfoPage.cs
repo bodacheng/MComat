@@ -10,13 +10,13 @@ public class QuestInfoPage : MSceneProcess
     
     void EnterProcess(FightInfo stage)
     {
-        FightScene.FightScene.Fight = stage;
+        FightLoad.Fight = stage;
         _layer = UILayerLoader.Load<FightPrepareLayer>();
         
-        switch (FightScene.FightScene.Fight.EventType)
+        switch (FightLoad.Fight.EventType)
         {
             case FightEventType.Arena:
-                FightScene.FightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arena").LoadTeamDic();
+                FightLoad.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arena").LoadTeamDic();
                 void GoToTeamEditArena()
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
@@ -24,7 +24,7 @@ public class QuestInfoPage : MSceneProcess
                 _layer.SetTeamEditFeature(GoToTeamEditArena);
                 break;
             case FightEventType.Quest:
-                FightScene.FightScene.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arcade").LoadTeamDic();
+                FightLoad.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arcade").LoadTeamDic();
                 void GoToTeamEditArcade()
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arcade", true);
@@ -35,7 +35,7 @@ public class QuestInfoPage : MSceneProcess
                     {
                         PreScene.target.trySwitchToStep(MainSceneStep.ArcadeFront, false);
                     },
-                    FightScene.FightScene.Fight.ID
+                    FightLoad.Fight.ID
                 );
                 break;
             case FightEventType.Gangbang:
@@ -50,7 +50,7 @@ public class QuestInfoPage : MSceneProcess
                 
                 _layer.SetGangbangFeature(
                     () => { PreScene.target.trySwitchToStep(MainSceneStep.GangBangFront, false); },
-                    FightScene.FightScene.Fight.ID,
+                    FightLoad.Fight.ID,
                     (x, y ,z)=>
                     {
                         var whole = controllingGangbangInfo.SetTeamUnitCount(x, y, z);
@@ -74,7 +74,7 @@ public class QuestInfoPage : MSceneProcess
             _layer.StageMembersInfoShow(stage, stage.Team1OneWord, stage.Team2OneWord);
         }
         
-        if (FightScene.FightScene.Fight.EventType == FightEventType.Gangbang)
+        if (FightLoad.Fight.EventType == FightEventType.Gangbang)
         {
             _layer.SetFightMode(1);
             _layer.SetFightBeginFeature(()=> GoToFight(controllingGangbangInfo));
@@ -83,16 +83,16 @@ public class QuestInfoPage : MSceneProcess
         {
             int FightMode()
             {
-                switch (FightScene.FightScene.Fight.EventType)
+                switch (FightLoad.Fight.EventType)
                 {
                     case FightEventType.Quest:
-                        return FightScene.FightScene.Fight.ArcadeFightMode;
+                        return FightLoad.Fight.ArcadeFightMode;
                     default:
                         return 0;
                 }
             }
             _layer.SetFightMode(FightMode());
-            _layer.SetFightBeginFeature(()=> GoToFight(FightScene.FightScene.Fight));
+            _layer.SetFightBeginFeature(()=> GoToFight(FightLoad.Fight));
         }
         
         _layer.SetFightBeginEnableRender(CanFightCheck());
@@ -106,7 +106,7 @@ public class QuestInfoPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        EnterProcess(FightScene.FightScene.Fight);
+        EnterProcess(FightLoad.Fight);
     }
     
     public override void ProcessEnter<T>(T t)
@@ -128,21 +128,21 @@ public class QuestInfoPage : MSceneProcess
     
     bool CanFightCheck()
     {
-        if (!FightScene.FightScene.Fight.FightMembers.CheckStonesLegal(FightScene.FightScene.Fight.EventType))
+        if (!FightLoad.Fight.FightMembers.CheckStonesLegal(FightLoad.Fight.EventType))
         {
             return false;
         }
             
-        switch (FightScene.FightScene.Fight.EventType)
+        switch (FightLoad.Fight.EventType)
         {
             case FightEventType.Arena:
-                if (FightScene.FightScene.Fight.FightMembers.HeroSets.GetValues().Count != 3)
+                if (FightLoad.Fight.FightMembers.HeroSets.GetValues().Count != 3)
                 {
                     return false;
                 }
                 break;
             default:
-                if (FightScene.FightScene.Fight.FightMembers.HeroSets.GetValues().Count == 0)
+                if (FightLoad.Fight.FightMembers.HeroSets.GetValues().Count == 0)
                 {
                     return false;
                 }

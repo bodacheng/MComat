@@ -22,8 +22,7 @@ namespace FightScene
         public static FightScene target;
         
         public ReactiveProperty<bool> LoadStageFinished { get; set; } = new ReactiveProperty<bool>(false);
-
-        public static FightInfo Fight;
+        
         public static List<GangbangInfo.SoldierGroupSet> team1GroupSet;
         
         private RewardedAdsButton watchBtn;
@@ -63,7 +62,7 @@ namespace FightScene
             
             //HighLightLayer.DarkOff(Color.white, 0, true);
             Time.timeScale = 1;
-            if (Fight == null)
+            if (FightLoad.Fight == null)
             {
                 return;
             }
@@ -81,7 +80,7 @@ namespace FightScene
             var fightOverProcess = new FightOverProcess();
             
             FSceneProcessesRunner.Main.Clear();
-            switch(Fight.EventType)
+            switch(FightLoad.Fight.EventType)
             {
                 case FightEventType.Arena:
                 case FightEventType.Quest:
@@ -133,7 +132,7 @@ namespace FightScene
             RTFightManager.Target.team2.Clear();
             FightLogger.value.WatchMissionsAbandon();
             FSceneProcessesRunner.Main.Clear();
-            if (Fight.EventType == FightEventType.Quest)
+            if (FightLoad.Fight.EventType == FightEventType.Quest)
                 ProcessesRunner.Main.Clear();
             MainMenuNote.GoingTo = MainSceneStep.FrontPage;
             HitBoxesProcesser.Instance.Clear();

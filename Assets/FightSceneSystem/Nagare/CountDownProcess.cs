@@ -24,7 +24,7 @@ namespace FightScene
             fightingStepLayer = UILayerLoader.Load<FightingStepLayer>();
             fightingStepLayer.gameObject.SetActive(true);
             fightingStepLayer.PreparingMode(true);
-            if (FightScene.Fight.RunTutorial)
+            if (FightLoad.Fight.RunTutorial)
             {
                 fightingStepLayer.Team1UI.AutoSwitch.gameObject.SetActive(false);
             }
@@ -43,7 +43,7 @@ namespace FightScene
         public override void ProcessEnd()
         {
             UILayerLoader.Remove<CountDownLayer>();
-            if (FightScene.Fight.RunTutorial)
+            if (FightLoad.Fight.RunTutorial)
             {
                 fightingStepLayer.Team1UI.AutoSwitch.gameObject.SetActive(true);
             }

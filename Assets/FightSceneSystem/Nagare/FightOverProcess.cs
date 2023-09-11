@@ -21,14 +21,14 @@ namespace FightScene
             // 自我战斗结束：显示战斗分析？
             // 技能测试：显示战斗分析？
             
-            switch (FightScene.Fight.EventType)
+            switch (FightLoad.Fight.EventType)
             {
                 case FightEventType.Arena:
                     if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabId)
                     {
                         CloudScript.ArenaPointUp(
-                            FightScene.Fight.Team1LeaderboardEntry,
-                            FightScene.Fight.Team2LeaderboardEntry,
+                            FightLoad.Fight.Team1LeaderboardEntry,
+                            FightLoad.Fight.Team2LeaderboardEntry,
                             (x,y, z) =>
                             {
                                 var a = UILayerLoader.Load<ArenaFightOver>();
@@ -50,11 +50,11 @@ namespace FightScene
                 case FightEventType.Quest:
                     if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabId)
                     {
-                        var levelInt = Convert.ToInt32(FightScene.Fight.ID);
+                        var levelInt = Convert.ToInt32(FightLoad.Fight.ID);
                         if (levelInt > PlayerAccountInfo.Me.arcadeProcess)
                         {
                             CloudScript.ArcadeProgress(
-                                FightScene.Fight.ID,
+                                FightLoad.Fight.ID,
                                 result =>
                                 {
                                     var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
@@ -76,7 +76,7 @@ namespace FightScene
                                     }
                                     arenaFightOver.LoadNextArcadeStage();
                                     
-                                    if (FightScene.Fight.ID == "1")
+                                    if (FightLoad.Fight.ID == "1")
                                     {
                                         PlayerAccountInfo.Me.tutorialProgress = "StageOneFinished";
                                         PlayFabReadClient.UpdateUserData(
@@ -111,11 +111,11 @@ namespace FightScene
                 case FightEventType.Gangbang:
                     if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabId)
                     {
-                        var levelInt = Convert.ToInt32(FightScene.Fight.ID);
+                        var levelInt = Convert.ToInt32(FightLoad.Fight.ID);
                         if (levelInt > PlayerAccountInfo.Me.gangbangProcess)
                         {
                             CloudScript.GangbangProgress(
-                                FightScene.Fight.ID,
+                                FightLoad.Fight.ID,
                                 result =>
                                 {
                                     var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
@@ -202,12 +202,12 @@ namespace FightScene
                 case 0:
                     break;
                 case 1:
-                    FightScene.Fight.team1Mode = TeamMode.MultiRaid;
-                    FightScene.Fight.team2Mode = TeamMode.MultiRaid;
+                    FightLoad.Fight.team1Mode = TeamMode.MultiRaid;
+                    FightLoad.Fight.team2Mode = TeamMode.MultiRaid;
                     break;
                 case 2:
-                    FightScene.Fight.team1Mode = TeamMode.Rotation;
-                    FightScene.Fight.team2Mode = TeamMode.Rotation;
+                    FightLoad.Fight.team1Mode = TeamMode.Rotation;
+                    FightLoad.Fight.team2Mode = TeamMode.Rotation;
                     break;
             }
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
@@ -216,7 +216,7 @@ namespace FightScene
         async void SkillTestReload()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(3));
-            FightScene.Fight = FightInfo.RandomSkillTestStage(FightScene.Fight.team1Mode);
+            FightLoad.Fight = FightInfo.RandomSkillTestStage(FightLoad.Fight.team1Mode);
             LocalGameRestart(0);
         }
     }

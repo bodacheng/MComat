@@ -42,7 +42,7 @@ public class FightingStepLayer : UILayer
     
     public async UniTask Setup(bool active = true)
     {
-        gameObject.SetActive(active && FightScene.FightScene.Fight.EventType != FightEventType.Screensaver);
+        gameObject.SetActive(active && FightLoad.Fight.EventType != FightEventType.Screensaver);
         await StartUp(
             (x) =>
             {
@@ -97,12 +97,12 @@ public class FightingStepLayer : UILayer
         
         pauseButton.SetListener(pauseAction.Invoke);
         
-        team1UI.TeamMode = FightScene.FightScene.Fight.team1Mode;
-        team2UI.TeamMode = FightScene.FightScene.Fight.team2Mode;
+        team1UI.TeamMode = FightLoad.Fight.team1Mode;
+        team2UI.TeamMode = FightLoad.Fight.team2Mode;
         team1UI.TeamConfig = RTFightManager.Target.heroTeamConfig;
         team2UI.TeamConfig = RTFightManager.Target.EnemyTeamConfig;
-        team1UI.TeamConfig.playID = FightScene.FightScene.Fight.Team1ID;
-        team2UI.TeamConfig.playID = FightScene.FightScene.Fight.Team2ID;
+        team1UI.TeamConfig.playID = FightLoad.Fight.Team1ID;
+        team2UI.TeamConfig.playID = FightLoad.Fight.Team2ID;
         team1UI.TeamMembers = RTFightManager.Target.team1.teamMembers;
         team2UI.TeamMembers = RTFightManager.Target.team2.teamMembers;
         

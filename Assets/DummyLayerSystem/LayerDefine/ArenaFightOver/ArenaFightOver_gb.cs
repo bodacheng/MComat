@@ -6,7 +6,7 @@ public partial class ArenaFightOver : UILayer
 {
     public async void LoadNextGangbangStage()
     {
-        Int32.TryParse(FightScene.FightScene.Fight.ID, out var nowStageNo);
+        Int32.TryParse(FightLoad.Fight.ID, out var nowStageNo);
         var nextStageNo = nowStageNo + 1;
         var nextFight = await PlayerAccountInfo.Me.GangbangModeManager.LoadStage(nextStageNo);
         if (nextFight != null)
@@ -21,7 +21,7 @@ public partial class ArenaFightOver : UILayer
                 newFightInstance.LoadMyTeam();
                 newFightInstance.Team1GroupSet = FightScene.FightScene.team1GroupSet;
                 newFightInstance.ConvertTeamToGangbang();
-                FightScene.FightScene.Fight = newFightInstance;
+                FightLoad.Fight = newFightInstance;
                 FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
                 UILayerLoader.Remove<ArenaFightOver>();
             });

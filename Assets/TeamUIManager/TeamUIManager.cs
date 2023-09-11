@@ -53,7 +53,7 @@ namespace FightScene
             teamAutoSwitch.Initialize(currentAutoState, switchTeamAuto);
             if (TeamConfig.myTeam != RTFightManager.playerTeam)
             {
-                teamAutoSwitch.gameObject.SetActive(CommonSetting.DevMode || FightScene.Fight.EventType == FightEventType.Self);
+                teamAutoSwitch.gameObject.SetActive(CommonSetting.DevMode || FightLoad.Fight.EventType == FightEventType.Self);
             }
             switch (TeamMode)
             {
@@ -194,7 +194,7 @@ namespace FightScene
                     break;
             }
 
-            if (FightScene.Fight.EventType == FightEventType.Gangbang)
+            if (FightLoad.Fight.EventType == FightEventType.Gangbang)
             {
                 sideIconsContainer.gameObject.SetActive(false);
             }

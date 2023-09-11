@@ -19,7 +19,7 @@ public class PreparingProcess : FSceneProcess
         RTFightManager.Target.team1.Clear();
         RTFightManager.Target.team2.Clear();
         
-        if ((FightScene.FightScene.Fight.EventType == FightEventType.Quest || FightScene.FightScene.Fight.EventType == FightEventType.Gangbang)
+        if ((FightLoad.Fight.EventType == FightEventType.Quest || FightLoad.Fight.EventType == FightEventType.Gangbang)
             &&
             !PlayerAccountInfo.Me.noAdsState)
         {
@@ -35,11 +35,11 @@ public class PreparingProcess : FSceneProcess
         
         var tasks = new List<UniTask>
         {
-            AppSetting.PlayBGM(FightScene.FightScene.Fight.GetBGMKey()),
+            AppSetting.PlayBGM(FightLoad.Fight.GetBGMKey()),
             HurtObjectManager.ConstructDPool(),
             AddressablesLogic.Essentials(),
-            BoundaryControlByGod.target.ChangeBackGround(FightScene.FightScene.Fight.battleGroundID),
-            RTFightManager.Target.LoadUnits(FightScene.FightScene.Fight),
+            BoundaryControlByGod.target.ChangeBackGround(FightLoad.Fight.battleGroundID),
+            RTFightManager.Target.LoadUnits(FightLoad.Fight),
             EffectsManager.IniEffectsPool(CommonSetting.HitGroundEffectCode, null, 3),
             EffectsManager.IniEffectsPool(CommonSetting.WallCrackEffectCode, null, 3),
             EffectsManager.IniEffectsPool(CommonSetting.BreakFreeEffectCode, null, 3),
@@ -49,21 +49,21 @@ public class PreparingProcess : FSceneProcess
         await UniTask.WhenAll(tasks);
         
         var teamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
-        RTFightManager.Target.heroTeamConfig.playID = FightScene.FightScene.Fight.Team1ID;
-        RTFightManager.Target.EnemyTeamConfig.playID = FightScene.FightScene.Fight.Team2ID;
+        RTFightManager.Target.heroTeamConfig.playID = FightLoad.Fight.Team1ID;
+        RTFightManager.Target.EnemyTeamConfig.playID = FightLoad.Fight.Team2ID;
         
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.Target.heroTeamConfig, RTFightManager.Target.team1.teamMembers.GetValues());
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.Target.EnemyTeamConfig, RTFightManager.Target.team2.teamMembers.GetValues());
         FightLogger.value.ReadyToLog(teamMembers);
         
-        RTFightManager.Target.team1.TeamMode = FightScene.FightScene.Fight.team1Mode;
-        RTFightManager.Target.team2.TeamMode = FightScene.FightScene.Fight.team2Mode;
+        RTFightManager.Target.team1.TeamMode = FightLoad.Fight.team1Mode;
+        RTFightManager.Target.team2.TeamMode = FightLoad.Fight.team2Mode;
         RTFightManager.Target.team1.teamConfig = RTFightManager.Target.heroTeamConfig;
         RTFightManager.Target.team2.teamConfig = RTFightManager.Target.EnemyTeamConfig;
-        RTFightManager.Target.team1.Auto = FightScene.FightScene.Fight.Team1Auto;
-        RTFightManager.Target.team2.Auto = FightScene.FightScene.Fight.RunTutorial ? false : FightScene.FightScene.Fight.Team2Auto;
+        RTFightManager.Target.team1.Auto = FightLoad.Fight.Team1Auto;
+        RTFightManager.Target.team2.Auto = FightLoad.Fight.RunTutorial ? false : FightLoad.Fight.Team2Auto;
         
-        if (FightScene.FightScene.Fight.EventType == FightEventType.Screensaver)
+        if (FightLoad.Fight.EventType == FightEventType.Screensaver)
         {
             RTFightManager.Target.team1.TurnAllUnitsInvincible(true);
             RTFightManager.Target.team2.TurnAllUnitsInvincible(true);
@@ -76,14 +76,14 @@ public class PreparingProcess : FSceneProcess
         {
             case TeamMode.MultiRaid:
                 RTFightManager.Target.team1.InitializeMulti(
-                    FightScene.FightScene.Fight.team1HpRate, FightScene.FightScene.Fight.team1CGMode, 
-                    FightScene.FightScene.Fight.team1AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay
+                    FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode, 
+                    FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay
                 );
                 break;
             case TeamMode.Rotation:
                 RTFightManager.Target.team1.TeamsIniRotate(
-                    FightScene.FightScene.Fight.team1HpRate, FightScene.FightScene.Fight.team1CGMode, 
-                    FightScene.FightScene.Fight.team1AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay
+                    FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode, 
+                    FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay
                 );
                 break;
         }
@@ -92,22 +92,22 @@ public class PreparingProcess : FSceneProcess
         {
             case TeamMode.MultiRaid:
                 RTFightManager.Target.team2.InitializeMulti(
-                    FightScene.FightScene.Fight.team2HpRate, FightScene.FightScene.Fight.team2CGMode, 
-                    FightScene.FightScene.Fight.team2AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay
+                    FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode, 
+                    FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay
                 );
                 break;
             case TeamMode.Rotation:
                 RTFightManager.Target.team2.TeamsIniRotate(
-                    FightScene.FightScene.Fight.team2HpRate, FightScene.FightScene.Fight.team2CGMode, 
-                    FightScene.FightScene.Fight.team2AIMode, FightScene.FightScene.Fight.dumbAIDecisionDelay
+                    FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode, 
+                    FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay
                 );
                 break;
         }
         
-        if (FightScene.FightScene.Fight.RunTutorial)
+        if (FightLoad.Fight.RunTutorial)
             RTFightManager.Target.team2.TutorialSpecial();
         
-        RTFightManager.Target.SetGame(FightScene.FightScene.Fight);
+        RTFightManager.Target.SetGame(FightLoad.Fight);
         ProgressLayer.LoadingPercent(Translate.Get("LoadingBattleAboutToEnd"), 0.8f);
         fightingStepLayer = UILayerLoader.Load<FightingStepLayer>();
         await fightingStepLayer.Setup(false);

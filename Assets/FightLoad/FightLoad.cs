@@ -4,11 +4,7 @@ using UnityEngine;
 
 public static class FightLoad
 {
-    public static void Go(GangbangInfo stage,  bool loadWithMyTeam = false)
-    {
-        // 
-        Go(stage, loadWithMyTeam);
-    }
+    public static FightInfo Fight;
     
     public static void Go(FightInfo fightInfo)
     {
@@ -33,7 +29,7 @@ public static class FightLoad
             fightInfo.Team2Auto = false;
         }
         
-        FightScene.FightScene.Fight =  FightInfo.Copy(fightInfo);
+        Fight =  FightInfo.Copy(fightInfo);
         PreScene.CashClear();
         SceneManager.LoadScene(2);
     }

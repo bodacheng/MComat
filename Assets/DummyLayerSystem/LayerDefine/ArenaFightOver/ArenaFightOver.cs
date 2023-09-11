@@ -68,17 +68,17 @@ public partial class ArenaFightOver : UILayer
                 break;
         }
         fight.team2Mode = fight.team1Mode;
-        fight.Team1Auto = FightScene.FightScene.Fight.Team1Auto;
+        fight.Team1Auto = FightLoad.Fight.Team1Auto;
         fight.Team2Auto = true;
         fight.LoadMyTeam();
-        FightScene.FightScene.Fight = fight;
+        FightLoad.Fight = fight;
         FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
         UILayerLoader.Remove<ArenaFightOver>();
     }
     
     public async void LoadNextArcadeStage()
     {
-        Int32.TryParse(FightScene.FightScene.Fight.ID, out var nowStageNo);
+        Int32.TryParse(FightLoad.Fight.ID, out var nowStageNo);
         var nextStageNo = nowStageNo + 1;
         var nextFight = await PlayerAccountInfo.Me.ArcadeModeManager.LoadStage(nextStageNo);
         if (nextFight != null && PlayerAccountInfo.Me.tutorialProgress == "Finished")
@@ -104,13 +104,13 @@ public partial class ArenaFightOver : UILayer
     
     public void Setup()
     {
-        switch (FightScene.FightScene.Fight.EventType)
+        switch (FightLoad.Fight.EventType)
         {
             case FightEventType.Arena:
                 break;
             case FightEventType.Quest:
-                againFor1v1Btn.gameObject.SetActive(FightScene.FightScene.Fight.ArcadeFightMode is 0 or 2);
-                againForMultiBtn.gameObject.SetActive(FightScene.FightScene.Fight.ArcadeFightMode is 0 or 1);
+                againFor1v1Btn.gameObject.SetActive(FightLoad.Fight.ArcadeFightMode is 0 or 2);
+                againForMultiBtn.gameObject.SetActive(FightLoad.Fight.ArcadeFightMode is 0 or 1);
                 break;
             case FightEventType.Gangbang:
                 againFor1v1Btn.gameObject.SetActive(false);
@@ -129,11 +129,11 @@ public partial class ArenaFightOver : UILayer
         );
         againFor1v1Btn.SetListener(() =>
         {
-            NextFight(2, FightScene.FightScene.Fight);
+            NextFight(2, FightLoad.Fight);
         });
         againForMultiBtn.SetListener(() =>
         {
-            NextFight(1, FightScene.FightScene.Fight);
+            NextFight(1, FightLoad.Fight);
         });
         returnBtn.onClick.AddListener(FightScene.FightScene.target.ReturnToFront);
         
@@ -176,9 +176,9 @@ public partial class ArenaFightOver : UILayer
     
     public void Step1Anim()
     {
-        if (FightScene.FightScene.Fight.EventType == FightEventType.Quest)
+        if (FightLoad.Fight.EventType == FightEventType.Quest)
         {
-            stageTitle.text = "Stage " + FightScene.FightScene.Fight.ID;
+            stageTitle.text = "Stage " + FightLoad.Fight.ID;
         }
         
         if (FightLogger.value.GetWinnerTeam() == Team.player1)
