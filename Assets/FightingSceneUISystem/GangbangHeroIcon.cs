@@ -13,23 +13,24 @@ public class GangbangHeroIcon : HeroIcon
         count.text = countGet().ToString();
         if (enableCountSet)
         {
-            plusBtn.SetListener(
-                () =>
-                {
-                    var currentCount = countGet();
-                    countSet(currentCount + 1);
-                    count.text = countGet().ToString();
-                }
-            );
-        
-            minusBtn.SetListener(
-                () =>
-                {
-                    var currentCount = countGet();
-                    countSet(currentCount - 1);
-                    count.text = countGet().ToString();
-                }
-            );
+            void Plus()
+            {
+                var currentCount = countGet();
+                countSet(currentCount + 1);
+                count.text = countGet().ToString();
+            }
+            plusBtn.SetListener(Plus);
+            plusBtn.onHold.AddListener(Plus);
+
+            void Minus()
+            {
+                var currentCount = countGet();
+                countSet(currentCount - 1);
+                count.text = countGet().ToString();
+            }
+            
+            minusBtn.SetListener(Minus);
+            minusBtn.onHold.AddListener(Minus);
         }
         else
         {

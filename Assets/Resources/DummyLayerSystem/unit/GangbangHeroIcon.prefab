@@ -273,6 +273,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -532,6 +533,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 1
+  repeatHold: 1
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -741,6 +743,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 1
+  repeatHold: 1
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}

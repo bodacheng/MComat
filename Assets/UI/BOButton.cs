@@ -37,6 +37,7 @@ using UnityEditor.UI;
 
         private const float DoubleClickInterval = 0.22f;
         private const float HoldTime = 0.8f;
+        private const float RepeatHoldInterval = 0.1f;
 
         public static bool AnyProcess
         {
@@ -60,6 +61,8 @@ using UnityEditor.UI;
         private bool activateDoubleClick = false;
         [SerializeField]
         private bool activateHold = false;
+        [SerializeField]
+        private bool repeatHold = false;
         
         [SerializeField]
         private SeType sound = default;
@@ -259,6 +262,11 @@ using UnityEditor.UI;
         {
             yield return new WaitForSeconds(time);
             complete?.Invoke();
+            while (repeatHold)
+            {
+                yield return new WaitForSeconds(RepeatHoldInterval);
+                complete?.Invoke();
+            }
         }
         
         public void SetListener(System.Action action)
@@ -324,6 +332,7 @@ using UnityEditor.UI;
 
         SerializedProperty onDoubleClickProperty;
         SerializedProperty onHoldProperty;
+        SerializedProperty onHoldRepeatProperty;
         
         SerializedProperty textProperty;
         SerializedProperty soundProperty;
@@ -339,7 +348,7 @@ using UnityEditor.UI;
 
             onDoubleClickProperty = serializedObject.FindProperty("doubleClick");
             onHoldProperty = serializedObject.FindProperty("hold");
-            
+            onHoldRepeatProperty = serializedObject.FindProperty("repeatHold");
             textProperty = serializedObject.FindProperty("text");
             
             soundProperty = serializedObject.FindProperty("sound");
@@ -368,6 +377,7 @@ using UnityEditor.UI;
             if (activateHoldProperty.boolValue)
             {
                 EditorGUILayout.PropertyField(onHoldProperty);
+                EditorGUILayout.PropertyField(onHoldRepeatProperty);
             }
             serializedObject.ApplyModifiedProperties();
         }
