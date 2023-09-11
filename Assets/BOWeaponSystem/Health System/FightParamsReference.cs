@@ -7,8 +7,6 @@ using Log;
 
 public partial class FightParamsReference
 {
-    public static readonly List<Collider> AllMeatColliders = new List<Collider>();
-    
     public Data_Center Center;
     
     public readonly ComboHitCount _comboHitCount = new ComboHitCount();
@@ -98,7 +96,6 @@ public partial class FightParamsReference
             {
                 Physics.IgnoreCollision(_myColliders[i], _myColliders[y]);
             }
-            AllMeatColliders.Add(_myColliders[i]);
         }
     }
     
