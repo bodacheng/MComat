@@ -50,7 +50,7 @@ public partial class Sensor
     
     public Collider[] EnemyAndTeammateBetweenMeAndEnemy()
     {
-        return jiaMateAMMate != null && nearestEnemy != null ? (new Collider[2] { jiaMateAMMate, nearestEnemy }) : null;
+        return _jiaMateAmMate != null && _nearestEnemy != null ? (new Collider[2] { _jiaMateAmMate, _nearestEnemy }) : null;
     }
     
     List<GameObject> _enemiesByDistance = new List<GameObject>();

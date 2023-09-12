@@ -5,8 +5,8 @@ public partial class Sensor
 {
     LayerMask _layers;
     LayerMask _meAndEnemyLayerMask;
-    readonly Collider[] _hits = new Collider[5] ; //What was hit in this frame?
-    readonly RaycastHit[] _spherecastHits= new RaycastHit[5] ;
+    readonly Collider[] _hits = new Collider[30] ; //What was hit in this frame?
+    readonly RaycastHit[] _spherecastHits= new RaycastHit[30] ;
     TeamConfig _teamConfig = TeamConfig.DefaultSet;
     
     int _detectionInterval = -1; // -1 会保持检测器停止
@@ -36,7 +36,7 @@ public partial class Sensor
     readonly List<Collider> _damagingWeaponAround = new List<Collider>();
     Collider _nearestDamagingWeapon;    
     Data_Center _selfDataCenter;
-    Collider jiaMateAMMate, nearestEnemy;
+    Collider _jiaMateAmMate, _nearestEnemy;
     public float SensorRadius
     {
         get;
@@ -176,9 +176,6 @@ public partial class Sensor
 
     void SphereCastSortProcess()
     {
-        if (_spherecastHits == null)
-            return;
-        
         float mateToMe = SensorRadius, enemyToMe = SensorRadius;
         foreach (var raycastHit in _spherecastHits)
         {
@@ -190,7 +187,7 @@ public partial class Sensor
                         var toMe = Vector3.Distance(Center.position, raycastHit.collider.transform.position);
                         if (toMe < mateToMe)
                         {
-                            jiaMateAMMate = raycastHit.collider;
+                            _jiaMateAmMate = raycastHit.collider;
                             mateToMe = toMe;
                         }
                     }
@@ -200,28 +197,24 @@ public partial class Sensor
                     var toMe = Vector3.Distance(Center.position, raycastHit.collider.transform.position);
                     if (toMe < enemyToMe)
                     {
-                        nearestEnemy = raycastHit.collider;
+                        _nearestEnemy = raycastHit.collider;
                         enemyToMe = toMe;
                     }
                 }
             }
         }
 
-        if (jiaMateAMMate != null && nearestEnemy != null)
+        if (_jiaMateAmMate != null && _nearestEnemy != null)
         {
-            if (Vector3.Distance(Center.position, jiaMateAMMate.transform.position) < Vector3.Distance(Center.position, nearestEnemy.transform.position))
+            if (Vector3.Distance(Center.position, _jiaMateAmMate.transform.position) < Vector3.Distance(Center.position, _nearestEnemy.transform.position))
                 return;//意思就是说让jiamateammate和nearestenemy不为空
         }
-        jiaMateAMMate = null;
-        nearestEnemy = null;
+        _jiaMateAmMate = null;
+        _nearestEnemy = null;
     }
 
     void SensorDetectionResultSortProcess() //这个函数的调用必须要确保每次都在update函数之后
     {
-        if (_hits == null)
-        {
-            return;
-        }
         foreach (Collider hit in _hits)
         {
             if (hit != null)
