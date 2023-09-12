@@ -51,7 +51,7 @@ public static class HurtObjectManager
         _defaultHitBoxPool.PreloadAsync(10, 1);
     }
     
-    public static async UniTask ConstructHurtObjectPool(string resourceName, Element element)
+    public static async UniTask ConstructHurtObjectPool(string resourceName, Element element, int preloadCount)
     {
         DecompositionPool poolToConstruct;
         GameObject weaponPrefab = null;
@@ -68,7 +68,7 @@ public static class HurtObjectManager
         weaponPrefab = await TryLoadWeaponPrefab(basicMagicForwardPath + "/" + resourceName + ".prefab");
         if (weaponPrefab != null)
         {
-            poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resourceName,FightGlobalSetting._HurtObjectPreLoadCount);
+            poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resourceName, preloadCount);
             
             var decomposition = weaponPrefab.GetComponent<Decomposition>();
             if (decomposition != null)
@@ -77,7 +77,7 @@ public static class HurtObjectManager
                 {
                     for (var i = 0; i < decomposition.Attachments.Length; i++)
                     {
-                        await ConstructHurtObjectPool(decomposition.Attachments[i], element);
+                        await ConstructHurtObjectPool(decomposition.Attachments[i], element, preloadCount);
                     }
                 }
             }else{
@@ -102,7 +102,7 @@ public static class HurtObjectManager
             weaponPrefab = await TryLoadWeaponPrefab(basicMagicForwardPath + "/" + resourceName + ".prefab");
             if (weaponPrefab != null)
             {
-                poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resourceName,FightGlobalSetting._HurtObjectPreLoadCount);
+                poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resourceName, preloadCount);
                 
                 var d = weaponPrefab.GetComponent<Decomposition>();
                 if (d != null)
@@ -111,7 +111,7 @@ public static class HurtObjectManager
                     {
                         for (int i = 0; i < d.Attachments.Length; i++)
                         {
-                            await ConstructHurtObjectPool(d.Attachments[i], element);
+                            await ConstructHurtObjectPool(d.Attachments[i], element, preloadCount);
                         }
                     }
                 }else{

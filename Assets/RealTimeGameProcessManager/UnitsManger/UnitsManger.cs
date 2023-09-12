@@ -58,7 +58,7 @@ namespace FightScene
                 var center = teamMembers.Get(key1, key2);
                 if (center == null)
                 {
-                    center = await UnitCreator.CreateUnit(info);
+                    center = await UnitCreator.CreateUnit(info, membersSets.GetValues().Count);
                 }
                 teamMembers.Set(key1, key2, center);
                 DicAdd<Data_Center, UnitInfo>.Add(unitInfoRef, center, info);

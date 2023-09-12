@@ -197,7 +197,7 @@ public partial class AnimationManger
         Animator.runtimeAnimatorController = animatorOverride;
     }
     
-    public async UniTask PreloadPersonalAnimResourceMode(string animPath, string key, Element element)
+    public async UniTask PreloadPersonalAnimResourceMode(string animPath, string key, Element element, int preloadCount)
     {
         if (toLoadAnims.ContainsKey(key))
         {
@@ -217,35 +217,35 @@ public partial class AnimationManger
                 {
                     if (e.functionName == "MagicForward")
                     {
-                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element));
+                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element, preloadCount));
                     }
                     if (e.functionName == "MagicForwardOnBody")
                     {
-                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element));
+                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element, preloadCount));
                     }
                     if (e.functionName == "MagicToEnemy")
                     {
-                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element));
+                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element, preloadCount));
                     }
                     if (e.functionName == "PrepareOneMagic")
                     {
-                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element));
+                        tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element, preloadCount));
                     }
                     if (e.functionName == "Bullet_shoot_from_body_part")
                     {
                         switch (e.intParameter)
                         {
                             case 1:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("bullet", element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("bullet", element, preloadCount));
                                 break;
                             case 2:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("big_bullet", element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("big_bullet", element, preloadCount));
                                 break;
                             case 3:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("super_bullet", element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("super_bullet", element, preloadCount));
                                 break;
                             default:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("bullet", element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("bullet", element, preloadCount));
                                 break;
                         }
                     }
@@ -254,16 +254,16 @@ public partial class AnimationManger
                         switch (e.intParameter)
                         {
                             case 0:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element, preloadCount));
                                 break;
                             case 1:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element, preloadCount));
                                 break;
                             case 2:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("big_blast", element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("big_blast", element, preloadCount));
                                 break;
                             default:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element, preloadCount));
                                 break;
                         }
                     }
@@ -277,12 +277,12 @@ public partial class AnimationManger
         }
     }
     
-    public async UniTask PreloadPersonalAnimsResourceMode(string type, List<string> toLoadSkillAnimsNames,Element element)
+    public async UniTask PreloadPersonalAnimsResourceMode(string type, List<string> toLoadSkillAnimsNames, Element element, int preloadCount)
     {
         var tasks = new List<UniTask>();
         foreach (var animName in toLoadSkillAnimsNames)
         {
-            tasks.Add(PreloadPersonalAnimResourceMode(type, animName, element));
+            tasks.Add(PreloadPersonalAnimResourceMode(type, animName, element, preloadCount));
         }
         await UniTask.WhenAll(tasks);
     }

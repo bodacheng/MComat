@@ -161,7 +161,7 @@ namespace ModelView
             
             if (_focusingC.AnimationManger != null)
             {
-                await _focusingC.AnimationManger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, skillName, unitConfig.element);
+                await _focusingC.AnimationManger.PreloadPersonalAnimResourceMode(unitConfig.TYPE, skillName, unitConfig.element, 1);
                 if (_focusingC == null)
                 {
                     return;

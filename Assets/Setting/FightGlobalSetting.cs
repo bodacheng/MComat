@@ -35,7 +35,6 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] float attackDrawingDistance = 1f;
     [SerializeField] int resistanceMax = 10;
     [SerializeField] int eXMax = 120;
-    [SerializeField] int hurtObjectPreLoadCount = 5;
     [SerializeField] int energyResolveAfterExtendBoundary = 5;
     [SerializeField] Material shadowMaterial;
     [SerializeField] PhysicMaterial _physicMaterial;
@@ -72,7 +71,6 @@ public class FightGlobalSetting : ScriptableObject
     public static int _ResistanceMax = 120;
     public static int _EXMax;
     public static bool HitBoxLogger = true;
-    public static int _HurtObjectPreLoadCount;
     public static Material _shadowMaterial;
     public static int _defendHP;
     public static int _energyResolveAfterExtendBoundary;
@@ -80,8 +78,6 @@ public class FightGlobalSetting : ScriptableObject
     
     public void Initialise()
     {
-        _HurtObjectPreLoadCount = hurtObjectPreLoadCount;
-        
         HasDefend = hasDefend;
         SkillStoneHasExp = skillStoneHasExp;
 
