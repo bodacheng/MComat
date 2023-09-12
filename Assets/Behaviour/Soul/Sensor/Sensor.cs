@@ -240,16 +240,16 @@ public partial class Sensor
         _nearestDamagingWeapon = FindNearestCollider(_damagingWeaponAround);
     }
 
-    float p1_to_me, p2_to_me;
+    float _p1ToMe, _p2ToMe;
     int HorizontalDistanceCompare(Vector3 p1, Vector3 p2)
     {
-        p1.y = Center.position.y;
-        p1_to_me = (p1 - Center.position).magnitude;
+        var position = Center.position;
+        p1.y = position.y;
+        _p1ToMe = (p1 - position).sqrMagnitude;
+        p2.y = position.y;
+        _p2ToMe = (p2 - position).sqrMagnitude;
         
-        p2.y = Center.position.y;
-        p2_to_me = (p2 - Center.position).magnitude;
-        
-        return p1_to_me > p2_to_me ? 1 : p1_to_me < p2_to_me ? -1 : 0;
+        return _p1ToMe > _p2ToMe ? 1 : _p1ToMe < _p2ToMe ? -1 : 0;
     }
     
     //void OnDrawGizmosSelected()
