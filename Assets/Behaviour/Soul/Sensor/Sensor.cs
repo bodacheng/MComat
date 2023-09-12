@@ -179,6 +179,7 @@ public partial class Sensor
         float mateToMe = SensorRadius, enemyToMe = SensorRadius;
         foreach (var raycastHit in _spherecastHits)
         {
+            if (raycastHit.collider != null)
             {
                 if (_teamConfig.myTeamLayerMask == (_teamConfig.myTeamLayerMask | (1 << raycastHit.collider.gameObject.layer)))
                 {

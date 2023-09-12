@@ -41,11 +41,11 @@ namespace Soul
                     break;
             }
             
-            var EnemyAndTeammateBetweenMeAndEnemy = Sensor.EnemyAndTeammateBetweenMeAndEnemy();
-            if (EnemyAndTeammateBetweenMeAndEnemy != null)
+            var enemyAndTeammateBetweenMeAndEnemy = Sensor.EnemyAndTeammateBetweenMeAndEnemy();
+            if (enemyAndTeammateBetweenMeAndEnemy != null)
             {
-                var temp = (EnemyAndTeammateBetweenMeAndEnemy[1].transform.position - this.gameObject.transform.position).normalized +
-                           (gameObject.transform.position - EnemyAndTeammateBetweenMeAndEnemy[0].transform.position).normalized;
+                var temp = (enemyAndTeammateBetweenMeAndEnemy[1].transform.position - this.gameObject.transform.position).normalized +
+                           (gameObject.transform.position - enemyAndTeammateBetweenMeAndEnemy[0].transform.position).normalized;
                 temp.y = 0;
                 _useDirection = Vector3.RotateTowards(_useDirection, temp, 10 * Time.fixedDeltaTime, 0).normalized;//里面的参数都是些很微妙的东西
             }

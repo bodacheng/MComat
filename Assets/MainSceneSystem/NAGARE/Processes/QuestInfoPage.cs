@@ -6,7 +6,7 @@ using UnityEngine;
 public class QuestInfoPage : MSceneProcess
 {
     private FightPrepareLayer _layer;
-    private GangbangInfo controllingGangbangInfo;
+    private GangbangInfo _controllingGangbangInfo;
     
     void EnterProcess(FightInfo stage)
     {
@@ -39,8 +39,8 @@ public class QuestInfoPage : MSceneProcess
                 );
                 break;
             case FightEventType.Gangbang:
-                controllingGangbangInfo = GangbangInfo.Copy((GangbangInfo)stage);
-                controllingGangbangInfo.FightMembers.HeroSets = TeamSet.GetTargetSet("gangbang").LoadTeamDic(); // 为了队员显示
+                _controllingGangbangInfo = GangbangInfo.Copy((GangbangInfo)stage);
+                _controllingGangbangInfo.FightMembers.HeroSets = TeamSet.GetTargetSet("gangbang").LoadTeamDic(); // 为了队员显示
                 _layer.SetTeamEditFeature(
                     () =>
                     {
@@ -53,21 +53,21 @@ public class QuestInfoPage : MSceneProcess
                     FightLoad.Fight.ID,
                     (x, y ,z)=>
                     {
-                        var whole = controllingGangbangInfo.SetTeamUnitCount(x, y, z);
+                        var whole = _controllingGangbangInfo.SetTeamUnitCount(x, y, z);
                         if (x == 1) // 本地存储各个gangbang人数
                         {
-                            PlayerPrefs.SetInt("gangbangPos"+ y, controllingGangbangInfo.GetTeamUnitCount(x,y));
+                            PlayerPrefs.SetInt("gangbangPos"+ y, _controllingGangbangInfo.GetTeamUnitCount(x,y));
                             PlayerPrefs.Save();
                         }
                         return whole;
                     },
-                    (x,y)=> controllingGangbangInfo.GetTeamUnitCount(x,y,x == 1));
+                    (x,y)=> _controllingGangbangInfo.GetTeamUnitCount(x,y,x == 1));
                 break;
         }
         
         if (stage is GangbangInfo)
         {
-            _layer.GangbangStageMembersInfoShow(controllingGangbangInfo, stage.Team1OneWord, stage.Team2OneWord);
+            _layer.GangbangStageMembersInfoShow(_controllingGangbangInfo, stage.Team1OneWord, stage.Team2OneWord);
         }
         else
         {
@@ -77,7 +77,7 @@ public class QuestInfoPage : MSceneProcess
         if (FightLoad.Fight.EventType == FightEventType.Gangbang)
         {
             _layer.SetFightMode(1);
-            _layer.SetFightBeginFeature(()=> GoToFight(controllingGangbangInfo));
+            _layer.SetFightBeginFeature(()=> GoToFight(_controllingGangbangInfo));
         }
         else
         {
