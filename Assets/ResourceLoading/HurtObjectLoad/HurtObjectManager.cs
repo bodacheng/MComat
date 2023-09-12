@@ -152,12 +152,12 @@ public static class HurtObjectManager
         return null;
     }
     
-    static DecompositionPool ConstructHitBoxPoolWithPrefabAndKey(GameObject prefab, string key, int ini_count)
+    static DecompositionPool ConstructHitBoxPoolWithPrefabAndKey(GameObject prefab, string key, int iniCount)
     {
         if (prefab != null)
         {
             var poolToConstruct = new DecompositionPool(prefab);
-            poolToConstruct.PreloadAsync(ini_count, 1).Subscribe(_ => {});
+            poolToConstruct.PreloadAsync(iniCount, 1).Subscribe(_ => {});
             DicAdd<string, DecompositionPool>.Add(HurtPoolDic, key, poolToConstruct);
             return poolToConstruct;
         }

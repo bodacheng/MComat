@@ -1,6 +1,5 @@
 using System;
 using DummyLayerSystem;
-using FightScene;
 
 public partial class ArenaFightOver : UILayer
 {
@@ -19,11 +18,10 @@ public partial class ArenaFightOver : UILayer
             {
                 var newFightInstance = GangbangInfo.Copy(nextFight);
                 newFightInstance.LoadMyTeam();
-                newFightInstance.Team1GroupSet = FightScene.FightScene.team1GroupSet;
                 newFightInstance.ConvertTeamToGangbang();
-                FightLoad.Fight = newFightInstance;
-                FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
+                newFightInstance.Team1GroupSet = FightScene.FightScene.team1GroupSet;
                 UILayerLoader.Remove<ArenaFightOver>();
+                FightLoad.Go(newFightInstance, true);
             });
         }
     }

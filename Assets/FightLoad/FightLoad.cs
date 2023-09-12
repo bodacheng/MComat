@@ -1,12 +1,13 @@
 ﻿using UnityEngine.SceneManagement;
 using mainMenu;
 using UnityEngine;
+using FightScene;
 
 public static class FightLoad
 {
     public static FightInfo Fight;
     
-    public static void Go(FightInfo fightInfo)
+    public static void Go(FightInfo fightInfo, bool inSceneLoad = false)
     {
         switch (fightInfo.EventType)
         {
@@ -30,7 +31,17 @@ public static class FightLoad
         }
         
         Fight =  FightInfo.Copy(fightInfo);
-        PreScene.CashClear();
-        SceneManager.LoadScene(2);
+
+        if (!inSceneLoad)
+        {
+            PreScene.CashClear();
+            SceneManager.LoadScene(2);
+        }
+        else
+        {
+            FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
+        }
     }
+    
+    
 }

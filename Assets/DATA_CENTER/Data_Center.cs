@@ -148,7 +148,6 @@ public partial class Data_Center : MonoBehaviour
             EffectsManager.IniEffectsPool("normal_effect", FightGlobalSetting.EffectPathDefine(element), 3),
             EffectsManager.IniEffectsPool("long_effect", FightGlobalSetting.EffectPathDefine(element), 3),
             EffectsManager.IniEffectsPool("Sparks", FightGlobalSetting.EffectPathDefine(element), 3),
-            EffectsManager.IniEffectsPool("hitwave", FightGlobalSetting.EffectPathDefine(element), 3),
             EffectsManager.IniEffectsPool("light_hit", FightGlobalSetting.EffectPathDefine(element), 3),
             EffectsManager.IniEffectsPool("heavy_hit", FightGlobalSetting.EffectPathDefine(element), 3),
             EffectsManager.IniEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(element), 3),
