@@ -5,8 +5,8 @@ public partial class Sensor
 {
     LayerMask _layers;
     LayerMask _meAndEnemyLayerMask;
-    Collider[] _hits; //What was hit in this frame?
-    RaycastHit[] _spherecastHits;
+    readonly Collider[] _hits = new Collider[10] ; //What was hit in this frame?
+    readonly RaycastHit[] _spherecastHits= new RaycastHit[10] ;
     TeamConfig _teamConfig = TeamConfig.DefaultSet;
     
     int _detectionInterval = -1; // -1 会保持检测器停止

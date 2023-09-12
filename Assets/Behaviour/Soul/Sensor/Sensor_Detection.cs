@@ -26,7 +26,7 @@ public partial class Sensor
     
     void SensorDetectProcess()
     {
-        _hits = Physics.OverlapSphere(Center.position, SensorRadius, _layers);// 这个东西消耗太大，起码可以考虑减少运行次数 // FIXUPDATE
-        _spherecastHits = Physics.SphereCastAll(Center.position, 1f, _selfDataCenter.WholeT.forward, SensorRadius, _meAndEnemyLayerMask, QueryTriggerInteraction.Collide);
+         Physics.OverlapSphereNonAlloc(Center.position, SensorRadius, _hits, _layers);// 这个东西消耗太大，起码可以考虑减少运行次数 // FIXUPDATE
+         Physics.SphereCastNonAlloc(Center.position, 1f, _selfDataCenter.WholeT.forward, _spherecastHits,SensorRadius, _meAndEnemyLayerMask, QueryTriggerInteraction.Collide);
     }
 }
