@@ -254,16 +254,16 @@ public partial class AnimationManger
                         switch (e.intParameter)
                         {
                             case 0:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element, preloadCount));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element, 1));
                                 break;
                             case 1:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element, preloadCount));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element, 1));
                                 break;
                             case 2:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("big_blast", element, preloadCount));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("big_blast", element, 1));
                                 break;
                             default:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element, preloadCount));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element, 1));
                                 break;
                         }
                     }
