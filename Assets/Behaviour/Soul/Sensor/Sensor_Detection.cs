@@ -19,7 +19,7 @@ public partial class Sensor
 
     public void DetectionStart(int detectionResultKeepFrames, bool continuous)
     {
-        DetectionInterval = 1;
+        DetectionInterval = 3;
         _continuousDetection = continuous;
         _detectionResultKeepFrames = detectionResultKeepFrames;
     }

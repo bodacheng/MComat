@@ -143,8 +143,8 @@ public class GangbangInfo : FightInfo
         stage.battleGroundID = source.battleGroundID;
         stage.stageRefLevel = source.stageRefLevel;
         stage.fightBGM = source.fightBGM;
-        stage.team1Mode = source.team1Mode;
-        stage.team2Mode = source.team2Mode;
+        stage.team1Mode = TeamMode.MultiRaid;
+        stage.team2Mode = TeamMode.MultiRaid;
         stage.Team1Auto = source.Team1Auto;
         stage.Team2Auto = source.Team2Auto;
         stage.team1AIMode = source.team1AIMode;
