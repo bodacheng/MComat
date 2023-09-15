@@ -56,12 +56,13 @@ namespace HittingDetection
                 if (!_ballDetectHitPool.Keys.Contains(other))
                 {
                     var tempM = HitBoxesProcesser.Instance.GetHitBox(other);
-                    float tempWHpCost = tempM != null ? V_Damage.WpHpCost(owner.heavyLevel, tempM.heavyLevel) : 1;
+                    var tempWHpCost = tempM != null ? V_Damage.WpHpCost(owner.heavyLevel, tempM.heavyLevel) : 1;
+                    var oPosition = other.transform.position;
                     var hitPointPara = new HitPointPara
                     {
-                        onBodyPos = HitEffectPointCal(other.transform.position),
+                        onBodyPos = HitEffectPointCal(oPosition),
                         impactPos = transform.position,
-                        qua = Quaternion.LookRotation(other.transform.position - HitEffectPointCal(other.transform.position), Vector3.up),
+                        qua = Quaternion.LookRotation(oPosition - HitEffectPointCal(oPosition), Vector3.up),
                         WeaponHpCost = tempWHpCost
                     };
                     _ballDetectHitPool.Add(other, hitPointPara);

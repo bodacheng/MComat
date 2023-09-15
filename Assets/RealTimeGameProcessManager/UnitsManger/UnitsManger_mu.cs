@@ -58,7 +58,8 @@ namespace FightScene
                         Sensor.AddOrRemoveSharedDeadUnitInfo(center, teamConfig.myTeam, true);
                         Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
                         var disposable = new SerialDisposable();
-                        disposable.Disposable = Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(async (_) =>
+                        disposable.Disposable = Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(
+                            async (_) =>
                             {
                                 if (center != null)
                                 {

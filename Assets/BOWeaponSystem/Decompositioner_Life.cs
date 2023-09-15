@@ -3,8 +3,8 @@ using HittingDetection;
 
 public partial class Decomposition : MonoBehaviour
 {
-    Vector3 temp, temp2;
-    float dis_from_center;
+    Vector3 _tempPos;
+    float _disFromCenter;
     public void Life()
     {
         if (Phase == 1 && IsWeapon)
@@ -42,7 +42,7 @@ public partial class Decomposition : MonoBehaviour
         switch (Phase)
         {
             case 1:
-                if (DestructionDelay > 0 && stop_emission_delay > 0)//如果能量自身有寿命
+                if (DestructionDelay > 0 && stop_emission_delay > 0) //如果能量自身有寿命
                 {
                     if (Counter > stop_emission_delay)
                     {
@@ -53,14 +53,14 @@ public partial class Decomposition : MonoBehaviour
                 }
                 break;
             case 2:
-                if (DestructionDelay > 0 && stop_emission_delay > 0)//如果能量自身有寿命
+                if (DestructionDelay > 0 && stop_emission_delay > 0) //如果能量自身有寿命
                 {
                     if (DestructionDelay > stop_emission_delay)
                     {
                         SetMaterialsAlpha((DestructionDelay - Counter) / (DestructionDelay - stop_emission_delay));
                     }
                 }
-                if (Counter > DestructionDelay || DestructionDelay <= 0)//DestructionDelay <= 0 代表这个物件没有生存寿命
+                if (Counter > DestructionDelay || DestructionDelay <= 0) //DestructionDelay <= 0 代表这个物件没有生存寿命
                 {
                     Phase = -1;
                 }
@@ -72,10 +72,10 @@ public partial class Decomposition : MonoBehaviour
         
         if (FightGlobalSetting.SceneStep == 1)
         {
-            temp2 = transform.position;
-            temp2.y = 0;
-            dis_from_center = temp2.magnitude;
-            if (dis_from_center > BoundaryControlByGod._BattleRingRadius + FightGlobalSetting._energyResolveAfterExtendBoundary)
+            _tempPos = transform.position;
+            _tempPos.y = 0;
+            _disFromCenter = _tempPos.magnitude;
+            if (_disFromCenter > BoundaryControlByGod._BattleRingRadius + FightGlobalSetting._energyResolveAfterExtendBoundary)
             {
                 Phase = -1;
             }

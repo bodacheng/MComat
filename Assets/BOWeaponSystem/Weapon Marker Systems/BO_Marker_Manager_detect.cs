@@ -11,7 +11,7 @@ namespace HittingDetection
         FightParamsReference _Raw_Target_Instance;//A single target which was hit.
         BO_Limb _boHitBox;
         Vector3 _TrailModeStartPoint;
-        IDictionary<Collider, HitPointPara> BallDetectHitPool;
+        IDictionary<Collider, HitPointPara> _ballDetectHitPool;
 
         void DetectProcess()
         {
@@ -177,12 +177,12 @@ namespace HittingDetection
 
                     if (_markers[i] is BO_Marker) //其实是针对球形检测的特殊形式把下面那个大for循环按照marker里的BallDetectHitPool重新循环跑了一次
                     {
-                        BallDetectHitPool = ((BO_Marker)_markers[i]).GetBallDetectHitPool();
-                        if (BallDetectHitPool != null)
+                        _ballDetectHitPool = ((BO_Marker)_markers[i]).GetBallDetectHitPool();
+                        if (_ballDetectHitPool != null)
                         {
                             if (_traditionalDefendMode)
                             {
-                                foreach (var Hit_C in BallDetectHitPool)
+                                foreach (var Hit_C in _ballDetectHitPool)
                                 {
                                     if (_markers[i].enemyShieldLayer == (_markers[i].enemyShieldLayer | 1 << Hit_C.Key.gameObject.layer)　&&　!_shieldsHit.Contains(Hit_C.Key.transform))
                                     {
@@ -233,7 +233,7 @@ namespace HittingDetection
                                 }
                             }
 
-                            foreach (var hitC in BallDetectHitPool)
+                            foreach (var hitC in _ballDetectHitPool)
                             {
                                 if (weaponHP > 0 && CurrentHP <= 0)
                                 {
