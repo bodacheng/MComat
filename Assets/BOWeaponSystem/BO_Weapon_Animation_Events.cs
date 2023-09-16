@@ -107,17 +107,11 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
         
         public void RemoveBodyPartWeapon(Transform t)
         {
-            if (!BEs.bodyPartsHitBoxRegisterDic.ContainsKey(t))
+            Decomposition hitBox = BEs.bodyPartsHitBoxRegisterDic[t];
+            BEs.bodyPartsHitBoxRegisterDic[t] = null;
+            if (hitBox != null)
             {
-                Debug.Log("邪门1："+ t);
-                return;
-            }
-            if (BEs.bodyPartsHitBoxRegisterDic[t] != null)
-            {
-                Decomposition hitBox = BEs.bodyPartsHitBoxRegisterDic[t];
-                BEs.bodyPartsHitBoxRegisterDic[t] = null;
                 hitBox.GetPositionConstraint().constraintActive = false;
-                hitBox.CloseMarkers();
                 hitBox._HitBox.SetDetectionTargetsUnion(null);
                 hitBox.Phase = -1;
             }

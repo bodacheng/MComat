@@ -97,6 +97,7 @@ public partial class Decomposition : MonoBehaviour {
 
     void EnergyResolve()
     {
+        CloseMarkers();
         StopEmissions(false);
         if (pool == null)
         {
@@ -107,11 +108,11 @@ public partial class Decomposition : MonoBehaviour {
         pool.Return(this);
     }
     
-    public void CloseMarkers()
+    void CloseMarkers()
     {
         if (IsWeapon)
         {
-            _HitBox.Local_OnDisable();// 与Local_OnDisable()内的Local_OnDisable看起来重复，意思就是说
+            _HitBox.Local_OnDisable();
             _HitBox.SetOwnerFACR(null);
         }
     }

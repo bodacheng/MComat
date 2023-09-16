@@ -46,10 +46,10 @@ namespace Soul
             this._dashClipName = dashClipName;
         }
 
-        public G_Attack_State(string dash_clip_name, float rushSpeed, float maxRushTime, string clipName, bool EventLauncher_Or_Ender)
+        public G_Attack_State(string dashClipName, float rushSpeed, float maxRushTime, string clipName, bool EventLauncher_Or_Ender)
         {
             this._maxRushTime = maxRushTime;
-            this._dashClipName = dash_clip_name;
+            this._dashClipName = dashClipName;
             this._rushSpeed = rushSpeed;
             this.clip_name = clipName;
             _isEventAttackLaunchState = EventLauncher_Or_Ender;
@@ -158,18 +158,18 @@ namespace Soul
                     }
                 }
                 //也就是说能不能可不可能发生冲刺，完全取决于上一个状态了。如果我们想完全关闭这个功能，那确保所有状态nextAttackStateCanRushFirst是fale就行
-                if (_AIStateRunner.GetLastState().nextAttackCanRushFirst && StateType == BehaviorType.GR)
-                {
-                    _phase = Phase.needToRush;
-                    if (AnimationManger.TryAnimationClip(_dashClipName) != null)
-                        AnimationManger.AnimationTrigger(_dashClipName, true, CommonSetting.CharacterAnimDuration);
-                    else
-                    {
-                        AnimationManger.PlayLayerAnim(null, true, 0f);
-                    }
-                    _BuffsRunner.RunSubCoroutineOfState(_rushCoroutine);
-                }
-                else
+                // if (_AIStateRunner.GetLastState().nextAttackCanRushFirst && StateType == BehaviorType.GR)
+                // {
+                //     _phase = Phase.needToRush;
+                //     if (AnimationManger.TryAnimationClip(_dashClipName) != null)
+                //         AnimationManger.AnimationTrigger(_dashClipName, true, CommonSetting.CharacterAnimDuration);
+                //     else
+                //     {
+                //         AnimationManger.PlayLayerAnim(null, true, 0f);
+                //     }
+                //     _BuffsRunner.RunSubCoroutineOfState(_rushCoroutine);
+                // }
+                // else
                 {
                     _phase = Phase.reachedFromBeginning;//这个环节最绕脑子，大概指的是如果外环也有敌人，就当“已经到达”。但其实从出发点将，一般的普通近距离攻击在中距离下也不会触发才对
                     AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);

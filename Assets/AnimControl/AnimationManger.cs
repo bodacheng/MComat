@@ -48,7 +48,7 @@ public partial class AnimationManger
     
     public AnimationClip TryAnimationClip(string clip_name)
     {
-        if (clip_name != null)
+        if (!string.IsNullOrEmpty(clip_name))
         {
             toLoadAnims.TryGetValue(clip_name, out _toUse);
             if (_toUse != null)

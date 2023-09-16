@@ -60,9 +60,9 @@ public class HitBoxesProcesser : MonoBehaviour
         }
     }
 
-    void AddToHitBoxesProcessorList(Decomposition _poolObject)
+    void AddToHitBoxesProcessorList(Decomposition poolObject)
     {
-        if (!_processingDecompositions.Contains(_poolObject))
-            _processingDecompositions.Add(_poolObject);
+        if (!_processingDecompositions.Contains(poolObject))
+            _processingDecompositions.Add(poolObject);
     }
 }

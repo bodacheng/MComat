@@ -41,7 +41,8 @@ namespace HittingDetection
         #endregion
 
         #region realtime param
-        bool Enabled;
+        bool _enabled;
+        public bool Enabled => _enabled;
         public float CurrentHP { get; set; }
         FightParamsReference _attackerRef;
         TeamConfig teamConfig = TeamConfig.DefaultSet;
@@ -104,7 +105,7 @@ namespace HittingDetection
             _markers = bms;
         }
         
-        Coroutine delayEnableMarkers;
+        Coroutine _delayEnableMarkers;
         public void MarkersEnablingStarts()
         {
             if (System.Math.Abs(ActivateAfterTime) == 0)
@@ -113,21 +114,21 @@ namespace HittingDetection
             }
             else
             {
-                IEnumerator execution(float seconds)
+                IEnumerator Execution(float seconds)
                 {
                     yield return new WaitForSeconds(seconds);
                     _Raw_Target_Instance = null;
                     ClearTargets();
                     EnableMarkers();
                 }
-                delayEnableMarkers = StartCoroutine (execution(ActivateAfterTime));
+                _delayEnableMarkers = StartCoroutine (Execution(ActivateAfterTime));
             }
         }
         
         public void Local_OnDisable()
         {
-            if (delayEnableMarkers != null)
-                StopCoroutine(delayEnableMarkers);
+            if (_delayEnableMarkers != null)
+                StopCoroutine(_delayEnableMarkers);
             DisableMarkers();
             SetTeamConfig(TeamConfig.DefaultSet);
         }
@@ -146,9 +147,9 @@ namespace HittingDetection
         {
             return _attackerRef;
         }
-        public void SetDetectionTargetsUnion(List<Transform> Used_Targets)
+        public void SetDetectionTargetsUnion(List<Transform> usedTargets)
         {
-            _usedTargets = Used_Targets;
+            _usedTargets = usedTargets;
         }
 
         public void SetTeamConfig(TeamConfig teamConfig)
@@ -156,10 +157,10 @@ namespace HittingDetection
             this.teamConfig = teamConfig;
             for (var i = 0; i < _markers.Count; i++)
             {
-                var _Marker = _markers[i];
-                _Marker._layers = teamConfig.mySensorAndWeaponTargetLayerMask;
-                _Marker.enemyShieldLayer = teamConfig.enemyShieldLayerMask;
-                _Marker.gameObject.layer = teamConfig.myWeaponLayer;
+                var marker = _markers[i];
+                marker._layers = teamConfig.mySensorAndWeaponTargetLayerMask;
+                marker.enemyShieldLayer = teamConfig.enemyShieldLayerMask;
+                marker.gameObject.layer = teamConfig.myWeaponLayer;
             }
         }
 
@@ -171,16 +172,13 @@ namespace HittingDetection
             {
                 _markers[i].EnableMarkerProcess(teamConfig.myWeaponLayer);
             }
-            Enabled = true;
+            _enabled = true;
         }
 
         public void DisableMarkers()
         {
-            Enabled = false;
-            if (_usedTargets != null)
-            {
-                _usedTargets.Clear();
-            }
+            _enabled = false;
+            _usedTargets?.Clear();
             _shieldsHit.Clear();
             for (var i = 0; i < _markers.Count; i++)
             {
@@ -205,7 +203,7 @@ namespace HittingDetection
 
         public void LocalUpdate()
         {
-            if (Enabled)
+            if (_enabled)
             {
                 HitFlesh = false;
                 HitShield = false;
@@ -223,7 +221,7 @@ namespace HittingDetection
 
         public void LocalLateUpdate()
         {
-            if (Enabled)
+            if (_enabled)
             {
                 TreatProcess();
                 ClearMarkersDetections();

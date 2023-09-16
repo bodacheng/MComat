@@ -94,7 +94,7 @@ namespace HittingDetection
                                 if ((teamConfig.enemyWeaponLayerMask == (teamConfig.enemyWeaponLayerMask | (1 << _hits[hit_target_index].collider.gameObject.layer))) && !_usedTargets.Contains(_hits[hit_target_index].collider.transform))
                                 {
                                     HitBoxManager hit_hitbox = HitBoxesProcesser.Instance.GetHitBox(_hits[hit_target_index].collider);
-                                    if (hit_hitbox != null && hit_hitbox.Enabled)
+                                    if (hit_hitbox != null && hit_hitbox._enabled)
                                     {
                                         _usedTargets.Add(_hits[hit_target_index].collider.transform);
                                         HitPointPara hitPointPara = new HitPointPara
@@ -104,7 +104,7 @@ namespace HittingDetection
                                             WeaponHpCost = 1,
                                             exhaustEffect = true
                                         };
-                                        AddWeaponEnergyExhaust(hitPointPara);// 因难以解决的问题已经停用
+                                        AddWeaponEnergyExhaust(hitPointPara); // 因难以解决的问题已经停用
                                         HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                         continue;//这里不退出循环的话就可能造成一个HP只有1的能量球既打碎了敌人的一个同血量能量球，又对敌人产生一点伤害。
                                     }
@@ -158,7 +158,7 @@ namespace HittingDetection
                                         exhaustEffect = false
                                     };
                                     
-                                    AddWeaponEnergyExhaust(hitPointPara);// 因难以解决的问题已经停用
+                                    AddWeaponEnergyExhaust(hitPointPara); // 因难以解决的问题已经停用
                                     HitBoxLifeEnding = HitBoxLifeEnding.touched;
                                 }
                                 if (HitFlesh && _Raw_Target_Instance != null)
@@ -250,7 +250,7 @@ namespace HittingDetection
                                         && !_usedTargets.Contains(hitC.Key.transform))
                                     {
                                         var hitBox = HitBoxesProcesser.Instance.GetHitBox(hitC.Key);
-                                        if (hitBox != null && hitBox.Enabled)
+                                        if (hitBox != null && hitBox._enabled)
                                         {
                                             _usedTargets.Add(hitC.Key.transform);
                                             hitC.Value.exhaustEffect = true;
@@ -324,39 +324,34 @@ namespace HittingDetection
         // 它在攻击到一个对象后不会立刻随着自身hp的减少而cleartargets，但如果它有着大于0的hp，它依然会随着打击到对象而掉血，并随着寿命结束而消失
         // 设想有一个地上火焰技能是ContinuousDamage，它可能有两种消失方式，一种是打击了不少对象hp为0了，一种是随着自身BO_destroyer的设置而时间已经尽。        
         // WeaponEnergyExhaust 这个函数在“与敌人武器发生接触”和“与敌人肉体产生接触”的时候是不同的处理逻辑
-        private readonly List<UnityEngine.Events.UnityAction> WeaponEnergyExhaustMissions = new List<UnityAction>();
+        private readonly List<UnityEngine.Events.UnityAction> _weaponEnergyExhaustMissions = new List<UnityAction>();
         void AddWeaponEnergyExhaust(HitPointPara hitPointPara)
         {
             if (weaponHP > 0 && CurrentHP > 0)
             {
                 CurrentHP -= hitPointPara.WeaponHpCost;
-                UnityEngine.Events.UnityAction wC = WeaponEnergyExhaust;
-                WeaponEnergyExhaustMissions.Add(wC);
+                UnityEngine.Events.UnityAction wC = AttackerFreeze;
+                _weaponEnergyExhaustMissions.Add(wC);
                 if (!ContinuousDamage)
                 {
-                    WeaponEnergyExhaustMissions.Add(ClearTargets);
+                    _weaponEnergyExhaustMissions.Add(ClearTargets);
                 }
             }
             if (weaponHP <= 0)
             {
-                UnityEngine.Events.UnityAction we_C = WeaponEnergyExhaust;
-                WeaponEnergyExhaustMissions.Add(we_C);
+                UnityEngine.Events.UnityAction we_C = AttackerFreeze;
+                _weaponEnergyExhaustMissions.Add(we_C);
             }
             
             if (hitPointPara.exhaustEffect && !string.IsNullOrEmpty(ExplosionEffect))
                 EffectsManager.GenerateEffect(ExplosionEffect, FightGlobalSetting.EffectPathDefine(element), hitPointPara.onBodyPos, hitPointPara.qua, null).Forget();
         }
         
-        void WeaponEnergyExhaust()
+        void AttackerFreeze()
         {
             if (_WeaponMode == WeaponMode.EnergyFromBodyWeapon)
             {
-                if (_attackerRef != null)
-                    _attackerRef.Center.AnimationManger.FrameFreeze();
-                else
-                {
-                    Debug.Log("武器引用逻辑错误:"+this.gameObject.name);
-                }
+                _attackerRef.Center.AnimationManger.FrameFreeze();
             }
         }
     }
