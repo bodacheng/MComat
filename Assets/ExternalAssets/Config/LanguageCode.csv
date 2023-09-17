@@ -162,6 +162,7 @@ AutoBtnIntro,Click to switch between auto and manual mode,クリックして、�
 HpBarAndExBar,"Health and energy. If the energy is insufficient, EX Skills cannot be unleashed.",体力とエネルギー値。エネルギー値が不足している場合、必殺技を発動できません,体力与能量值，必杀技在能量值不够的情况下无法释放
 JustUseAI,We recommend using auto mode!,自動戦闘を推奨します！,干脆就用AI战斗吧！
 ,,,
+Edit,Edit,編成,编成
 MakeYourTeam,Choose characters,キャラクターを選ぶ,选择出战角色
 HasExtraSeat,Warriors available for battle,戦いに参加できる戦士がいます,有可以参战的战士
 TeamEditTutorial1,Click on the fighter's icon and place them in the team slot.,ファイターのアイコンをクリックして、任意のチームスロットに配置してください,尝试点击角色头像，再点击队伍槽使其编入队伍
