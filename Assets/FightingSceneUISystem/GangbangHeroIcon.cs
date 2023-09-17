@@ -39,10 +39,10 @@ public class GangbangHeroIcon : HeroIcon
         }
     }
     
-    public static void ArrangeGangbangHeroIconToParent(
+    public static GangbangHeroIcon ArrangeGangbangHeroIconToParent(
         Func<int, int> TeamCountSet, Func<int> TeamCountGet,
         GangbangHeroIcon prefab, UnitInfo unitInfo,
-        RectTransform T, float iconSize = 100, bool withSkillCheck = false, bool enableCountSet = true)
+        RectTransform T, bool withSkillCheck = false, bool enableCountSet = true, float iconSize = 100)
     {
         var icon = Instantiate(prefab);
         icon.SetUp(TeamCountSet, TeamCountGet, enableCountSet);
@@ -55,5 +55,6 @@ public class GangbangHeroIcon : HeroIcon
         icon.transform.localPosition = Vector3.one;
         icon.transform.localScale = Vector3.one;
         icon.gameObject.SetActive(true);
+        return icon;
     }
 }

@@ -47,6 +47,10 @@ public class ArcadeModeManager
     public async void DirectToArcadeStage(int stageNo, bool forward)
     {
         var stage = await LoadStage(stageNo);
+        if (stage == null)
+        {
+            stage = await LoadStage(stageNo - 1);
+        }
         stage.EventType = FightEventType.Quest;
         PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, forward);
     }

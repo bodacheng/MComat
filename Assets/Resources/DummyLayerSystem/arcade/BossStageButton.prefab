@@ -257,6 +257,8 @@ MonoBehaviour:
   button: {fileID: 6786550524391087841}
   unitIconPrefab: {fileID: 4599398632650404793, guid: ab04803d5c276457ea03841b256e73bf,
     type: 3}
+  gangbangIconPrefab: {fileID: 7152094702800314639, guid: ac490051369d246c0bfef71ccf23ad10,
+    type: 3}
   iconsT: {fileID: 3416358146772154417}
   id: {fileID: 3416358146278246509}
   rewardUI: {fileID: 1021311259970643203}
@@ -333,6 +335,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}

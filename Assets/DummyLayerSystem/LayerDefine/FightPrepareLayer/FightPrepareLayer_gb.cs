@@ -89,7 +89,7 @@ public partial class FightPrepareLayer : UILayer
             GangbangHeroIcon.ArrangeGangbangHeroIconToParent(
                 (x) => _setTeamUnitCount(team, unitInfo.id, x),
                 ()=> _getTeamUnitCount(team, unitInfo.id),
-                gangbangFighterIcon, unitInfo, showT, unitIconSize, withSkillCheck, team == 1);
+                gangbangFighterIcon, unitInfo, showT, withSkillCheck, team == 1, unitIconSize);
 
             wholeTeamCount += _getTeamUnitCount(team, unitInfo.id);
         }

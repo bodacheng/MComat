@@ -136,7 +136,20 @@ public class ArcadeTop : UILayer
         stageBtn.CriticalGaugeMode = one.team2CGMode;
         if (one.FightMembers != null)
         {
-            stageBtn.LoadUnitIcons(one.FightMembers.EnemySets.GetValues(), IconButtonFeature, stageNo == _currentStages.Max());
+            if (one is GangbangInfo)
+            {
+                var gb = (GangbangInfo)one;
+                stageBtn.LoadUnitIconsGangbang(
+                    one.FightMembers.EnemySets.GetValues(), 
+                    (x)=> gb.GetTeam2GroupSet(x).Count,
+                    IconButtonFeature, 
+                    stageNo == _currentStages.Max());
+            }
+            else
+            {
+                stageBtn.LoadUnitIcons(one.FightMembers.EnemySets.GetValues(), IconButtonFeature, stageNo == _currentStages.Max());
+            }
+            
         }
     }
 

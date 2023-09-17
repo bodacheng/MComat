@@ -45,6 +45,10 @@ public class GangbangModeManager
     public async void DirectToGangStage(int stageNo, bool forward)
     {
         var stage = await LoadStage(stageNo);
+        if (stage == null)
+        {
+            stage = await LoadStage(stageNo - 1);
+        }
         stage.EventType = FightEventType.Gangbang;
         PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, forward);
     }

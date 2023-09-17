@@ -4,10 +4,11 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
-public class StageButton : MonoBehaviour
+public partial class StageButton : MonoBehaviour
 {
     [SerializeField] BOButton button;
     [SerializeField] HeroIcon unitIconPrefab;
+    [SerializeField] GangbangHeroIcon gangbangIconPrefab;
     [SerializeField] RectTransform iconsT;
     [SerializeField] Text id;
     [SerializeField] RewardUI rewardUI;
@@ -30,8 +31,6 @@ public class StageButton : MonoBehaviour
             id.text = value.ToString();
         }
     }
-    
-    List<HeroIcon> UnitIcons { get; set; }
     
     public void ChangeColorOfIcons(bool on)
     {
@@ -61,7 +60,6 @@ public class StageButton : MonoBehaviour
                 heroIcon.iconButton.onClick.Invoke();
             }
         }
-        UnitIcons = heroIcons;
     } 
     
     List<HeroIcon> UnitInfosShow(List<UnitInfo> heroSets, RectTransform showT)
