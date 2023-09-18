@@ -51,14 +51,15 @@ public class QuestInfoPage : MSceneProcess
                 _layer.SetGangbangFeature(
                     () => { PreScene.target.trySwitchToStep(MainSceneStep.GangBangFront, false); },
                     FightLoad.Fight.ID,
-                    (x, y ,z)=>
+                    (x, y ,z, f)=>
                     {
-                        var whole = _controllingGangbangInfo.SetTeamUnitCount(x, y, z);
+                        var whole = _controllingGangbangInfo.SetTeamUnitCount(x, y, z, f);
                         if (x == 1) // 本地存储各个gangbang人数
                         {
                             PlayerPrefs.SetInt("gangbangPos"+ y, _controllingGangbangInfo.GetTeamUnitCount(x,y));
                             PlayerPrefs.Save();
                         }
+                        _layer.SetFightBeginEnableRender(CanFightCheck());
                         return whole;
                     },
                     (x,y)=> _controllingGangbangInfo.GetTeamUnitCount(x,y,x == 1));
@@ -141,6 +142,9 @@ public class QuestInfoPage : MSceneProcess
                     return false;
                 }
                 break;
+            case FightEventType.Gangbang:
+                return _controllingGangbangInfo.GetGroupWholeUnitCount(1) > 0
+                    && _controllingGangbangInfo.GetGroupWholeUnitCount(2) > 0;
             default:
                 if (FightLoad.Fight.FightMembers.HeroSets.GetValues().Count == 0)
                 {

@@ -19,12 +19,12 @@ public class GangbangInfo : FightInfo
         set => team2GroupSet = value;
     }
 
-    public int SetTeamUnitCount(int team, string instanceID, int count)
+    public int SetTeamUnitCount(int team, string instanceID, int count, bool force = false)
     {
         if (count < 0)
             count = 0;
         int ifWholeCount = GetIfGroupWholeUnitCount(team, instanceID, count);
-        if (ifWholeCount <= CommonSetting.GangbangModeMaxUnitPerTeam)
+        if (ifWholeCount <= CommonSetting.GangbangModeMaxUnitPerTeam || force)
         {
             var set = GetSoldierGroupSet(instanceID, team);
             set.Count = count;
@@ -75,7 +75,7 @@ public class GangbangInfo : FightInfo
         return s;
     }
 
-    int GetGroupWholeUnitCount(int team)
+    public int GetGroupWholeUnitCount(int team)
     {
         var sets = team == 1 ? team1GroupSet : team2GroupSet;
         int wholeUnitCount = 0;

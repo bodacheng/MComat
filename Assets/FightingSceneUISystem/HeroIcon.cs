@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using dataAccess;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,14 +16,14 @@ public class HeroIcon : MonoBehaviour {
     public UnitInfo unitInfo;
     public UnitConfig unitConfig;
     
-    void Grey()
+    protected void Grey()
     {
         frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 0.3f);
         iconBg.color = new Color(iconBg.color.r, iconBg.color.g, iconBg.color.b, 0.3f);
         icon.color = new Color(1,1,1,0.3f);
     }
     
-    void LightOn()
+    protected void LightOn()
     {
         frame.color = new Color(frame.color.r, frame.color.g, frame.color.b, 1f);
         iconBg.color = new Color(iconBg.color.r, iconBg.color.g, iconBg.color.b, 1f);
@@ -34,7 +35,7 @@ public class HeroIcon : MonoBehaviour {
         cooldownCurtain.fillAmount = proportion;
     }
 
-    public async void ChangeIcon(UnitInfo unitInfo, bool withSkillCheck = false)
+    public async void ChangeIcon(UnitInfo unitInfo, bool withSkillCheck = false, Func<int> teamCountGet = null)
     {
         this.unitInfo = unitInfo;
         if (unitInfo != null)
@@ -44,17 +45,12 @@ public class HeroIcon : MonoBehaviour {
             if (this == null)
                 return;
             ChangeIcon(pic, unitConfig.element);
-            
-            if (withSkillCheck)
+            LightOn();
+            if ((withSkillCheck && Stones.GetEquippingStones(unitInfo.id).Count != 9) 
+                ||
+                (teamCountGet != null && teamCountGet() == 0))
             {
-                if (Stones.GetEquippingStones(unitInfo.id).Count == 9)
-                    LightOn();
-                else
-                    Grey();
-            }
-            else
-            {
-                LightOn();
+                Grey();
             }
         }
         else

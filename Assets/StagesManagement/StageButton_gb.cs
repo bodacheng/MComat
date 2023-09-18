@@ -36,13 +36,13 @@ public partial class StageButton : MonoBehaviour
         var icons = new List<GangbangHeroIcon>();
         foreach (var unitInfo in heroSets)
         {
-            void load(UnitInfo unitInfo)
+            void Load(UnitInfo unitInfo)
             {
                 var v = GangbangHeroIcon.ArrangeGangbangHeroIconToParent
                     (null,()=>TeamCountGet(unitInfo.id), gangbangIconPrefab, unitInfo, showT, false, false);
                 icons.Add(v);
             }
-            load(unitInfo);
+            Load(unitInfo);
         }
         for (var i = 0; i < icons.Count; i++)
         {

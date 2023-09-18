@@ -9,13 +9,13 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] GangbangHeroIcon gangbangFighterIcon;
     [SerializeField] private Text team1WholeCount;
     [SerializeField] private Text team2WholeCount;
-    private Func<int, string, int, int> _setTeamUnitCount;
+    private Func<int, string, int, bool, int> _setTeamUnitCount;
     private Func<int, string, int> _getTeamUnitCount;
     #endregion
     
     public void SetGangbangFeature(
         Action toGangbangFront, string gangbangStageNo, 
-        Func<int, string ,int, int> setTeamUnitCount, Func<int, string, int> getTeamUnitCount)
+        Func<int, string ,int, bool, int> setTeamUnitCount, Func<int, string, int> getTeamUnitCount)
     {
         arcadeStageNoText.gameObject.SetActive(true);
         arcadeStageNoText.text = "Stage " + gangbangStageNo;
@@ -29,18 +29,18 @@ public partial class FightPrepareLayer : UILayer
         rewardUI.AwardRender(PlayerAccountInfo.Me.gangbangProcess + 1 > arcadeStageNoInt);
         rewardUI.gameObject.SetActive(true);
         
-        _setTeamUnitCount = (i, s, arg3) =>
+        _setTeamUnitCount = (i, s, arg3 ,f) =>
         {
-            var returnValue = setTeamUnitCount(i, s, arg3);
+            var returnValue = setTeamUnitCount(i, s, arg3,f);
             if (i == 1)
             {
-                team1WholeCount.text = returnValue.ToString();
+                team1WholeCount.text =  Translate.Get("WholeUnitCount")+ ":"+  returnValue + "/" + CommonSetting.GangbangModeMaxUnitPerTeam;
             }
             else
             {
-                team2WholeCount.text = returnValue.ToString();
+                team2WholeCount.text = Translate.Get("WholeUnitCount")+ ":"+  returnValue + "/" + CommonSetting.GangbangModeMaxUnitPerTeam;
             }
-            return setTeamUnitCount(i,s,arg3);
+            return setTeamUnitCount(i,s,arg3,f);
         };
         _getTeamUnitCount = getTeamUnitCount;
     }
@@ -79,7 +79,7 @@ public partial class FightPrepareLayer : UILayer
         {
             foreach (var unitInfo in unitSets)
             {
-                _setTeamUnitCount(team, unitInfo.id, CommonSetting.GangbangModeMaxUnitPerTeam / unitSets.Count);
+                _setTeamUnitCount(team, unitInfo.id, CommonSetting.GangbangModeMaxUnitPerTeam / unitSets.Count, true);
             }
         }
         
@@ -87,7 +87,7 @@ public partial class FightPrepareLayer : UILayer
         foreach(var unitInfo in unitSets)
         {
             GangbangHeroIcon.ArrangeGangbangHeroIconToParent(
-                (x) => _setTeamUnitCount(team, unitInfo.id, x),
+                (x) => _setTeamUnitCount(team, unitInfo.id, x, false),
                 ()=> _getTeamUnitCount(team, unitInfo.id),
                 gangbangFighterIcon, unitInfo, showT, withSkillCheck, team == 1, unitIconSize);
 
@@ -96,11 +96,11 @@ public partial class FightPrepareLayer : UILayer
         
         if (team == 1)
         {
-            team1WholeCount.text = wholeTeamCount.ToString();
+            team1WholeCount.text = Translate.Get("WholeUnitCount")+ ":"+  wholeTeamCount + "/" + CommonSetting.GangbangModeMaxUnitPerTeam;
         }
         else
         {
-            team2WholeCount.text = wholeTeamCount.ToString();
+            team2WholeCount.text = Translate.Get("WholeUnitCount")+ ":"+  wholeTeamCount + "/" + CommonSetting.GangbangModeMaxUnitPerTeam;
         }
     }
 }

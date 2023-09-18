@@ -13,11 +13,25 @@ public class GangbangHeroIcon : HeroIcon
         count.text = countGet().ToString();
         if (enableCountSet)
         {
+            void ShowActive(int newCount)
+            {
+                if (newCount > 0)
+                {
+                    LightOn();
+                }
+                else
+                {
+                    Grey();
+                }
+            }
+            
             void Plus()
             {
                 var currentCount = countGet();
                 countSet(currentCount + 1);
-                count.text = countGet().ToString();
+                var newCount = countGet();
+                count.text = newCount.ToString();
+                ShowActive(newCount);
             }
             plusBtn.SetListener(Plus);
             plusBtn.onHold.AddListener(Plus);
@@ -26,11 +40,14 @@ public class GangbangHeroIcon : HeroIcon
             {
                 var currentCount = countGet();
                 countSet(currentCount - 1);
-                count.text = countGet().ToString();
+                var newCount = countGet();
+                count.text = newCount.ToString();
+                ShowActive(newCount);
             }
             
             minusBtn.SetListener(Minus);
             minusBtn.onHold.AddListener(Minus);
+            ShowActive(countGet());
         }
         else
         {
@@ -40,17 +57,17 @@ public class GangbangHeroIcon : HeroIcon
     }
     
     public static GangbangHeroIcon ArrangeGangbangHeroIconToParent(
-        Func<int, int> TeamCountSet, Func<int> TeamCountGet,
+        Func<int, int> teamCountSet, Func<int> teamCountGet,
         GangbangHeroIcon prefab, UnitInfo unitInfo,
         RectTransform T, bool withSkillCheck = false, bool enableCountSet = true, float iconSize = 100)
     {
         var icon = Instantiate(prefab);
-        icon.SetUp(TeamCountSet, TeamCountGet, enableCountSet);
         var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
         icon.unitInfo = unitInfo;
         icon.unitConfig = unitConfig;
-        icon.ChangeIcon(unitInfo, withSkillCheck);
+        icon.ChangeIcon(unitInfo, withSkillCheck, teamCountGet);
         icon.GetComponent<RectTransform>().sizeDelta = new Vector2(iconSize,iconSize);
+        icon.SetUp(teamCountSet, teamCountGet, enableCountSet);
         icon.transform.SetParent(T);
         icon.transform.localPosition = Vector3.one;
         icon.transform.localScale = Vector3.one;
