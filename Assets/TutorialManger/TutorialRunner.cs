@@ -82,10 +82,12 @@ public class TutorialRunner
     void GenerateStep5Tutorial()
     {
         var goTo = new GoTo("arcade");
+        //var forceTeamEdit = new ForceToTeamEdit("teamEdit2");
         var teamEdit2 = new TeamEdit("teamEdit2");
 
         _tutorialProcesses.Clear();
         _tutorialProcesses.Add(goTo);
+        //_tutorialProcesses.Add(forceTeamEdit);
         _tutorialProcesses.Add(teamEdit2);
     }
     

@@ -19,6 +19,8 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] Text arcadeStageNoText;
     [SerializeField] RewardUI rewardUI;
     [SerializeField] BOButton toArcadeFrontBtn;
+
+    public GameObject TeamEditIndicator => teamEditIndicator;
     
     public void SetFightMode(int fightMode)
     {

@@ -14,6 +14,7 @@ public class FightBeginBtn : MonoBehaviour
     
     public void Enable(bool on)
     {
+        btn.interactable = on;
         animator.SetBool("On", on);
     }
 }

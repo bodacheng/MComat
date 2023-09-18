@@ -59,7 +59,10 @@ public class QuestInfoPage : MSceneProcess
                             PlayerPrefs.SetInt("gangbangPos"+ y, _controllingGangbangInfo.GetTeamUnitCount(x,y));
                             PlayerPrefs.Save();
                         }
-                        _layer.SetFightBeginEnableRender(CanFightCheck());
+                        
+                        var canFight = CanFightCheck();
+                        _layer.TeamEditIndicator.gameObject.SetActive(!canFight);
+                        _layer.SetFightBeginEnableRender(canFight);
                         return whole;
                     },
                     (x,y)=> _controllingGangbangInfo.GetTeamUnitCount(x,y,x == 1));
@@ -95,8 +98,10 @@ public class QuestInfoPage : MSceneProcess
             _layer.SetFightMode(FightMode());
             _layer.SetFightBeginFeature(()=> GoToFight(FightLoad.Fight));
         }
-        
-        _layer.SetFightBeginEnableRender(CanFightCheck());
+
+        var canFight = CanFightCheck();
+        _layer.TeamEditIndicator.gameObject.SetActive(!canFight);
+        _layer.SetFightBeginEnableRender(canFight);
         SetLoaded(true);
     }
     
@@ -133,13 +138,29 @@ public class QuestInfoPage : MSceneProcess
         {
             return false;
         }
-            
+        
         switch (FightLoad.Fight.EventType)
         {
             case FightEventType.Arena:
                 if (FightLoad.Fight.FightMembers.HeroSets.GetValues().Count != 3)
                 {
                     return false;
+                }
+                break;
+            case FightEventType.Quest:
+                if (PlayerAccountInfo.Me.tutorialProgress == "SkillEditFinished2")
+                {
+                    if (FightLoad.Fight.FightMembers.HeroSets.GetValues().Count < 2)
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (FightLoad.Fight.FightMembers.HeroSets.GetValues().Count == 0)
+                    {
+                        return false;
+                    }
                 }
                 break;
             case FightEventType.Gangbang:

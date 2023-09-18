@@ -1,5 +1,4 @@
-﻿using System;
-using dataAccess;
+﻿using dataAccess;
 using mainMenu;
 using DummyLayerSystem;
 using System.Collections.Generic;
@@ -11,8 +10,7 @@ public class TeamEdit : TutorialProcess
     private ReturnLayer _returnLayer;
     private FightPrepareLayer _fightPrepareLayer;
     private TeamEditPage _teamEditPage;
-
-    private bool teamEditFinished = false;
+    private bool _teamEditFinished = false;
     private readonly string _tutorialStep;
     public TeamEdit(string tutorialStep)
     {
@@ -42,7 +40,7 @@ public class TeamEdit : TutorialProcess
                     );
                 }
                 
-                teamEditFinished = true;
+                _teamEditFinished = true;
                 if (_returnLayer != null)
                 {
                     _returnLayer.gameObject.SetActive(false);
@@ -105,7 +103,7 @@ public class TeamEdit : TutorialProcess
     
     public override bool CanEnterOtherProcess()
     {
-        return teamEditFinished;
+        return _teamEditFinished;
     }
     
     public override void LocalUpdate()
