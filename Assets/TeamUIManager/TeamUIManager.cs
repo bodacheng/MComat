@@ -18,6 +18,7 @@ namespace FightScene
         [SerializeField] RectTransform selectedFrame;
         [SerializeField] int barPosUpdateInterval = 2;
         [SerializeField] int teamIndicatorCloseDelay = 5;
+        
         public AutoSwitch AutoSwitch => teamAutoSwitch;
         public TeamMode TeamMode { get; set; }
         public TeamConfig TeamConfig { get; set; }

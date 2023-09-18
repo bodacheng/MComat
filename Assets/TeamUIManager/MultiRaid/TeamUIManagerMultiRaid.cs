@@ -1,11 +1,29 @@
 ﻿using System;
 using UnityEngine;
 using UniRx;
+using UnityEngine.UI;
 
 namespace FightScene
 {
     public partial class TeamUIManager : MonoBehaviour
     {
+        [SerializeField] Text liveUnitCount;
+        public Text LiveUnitCount => liveUnitCount;
+        
+        void SetLiveUnitCount()
+        {
+            int liveCount = 0;
+            foreach (var dc in _teamMembers.GetValues())
+            {
+                if (!dc.FightDataRef.IsDead.Value)
+                {
+                    liveCount++;
+                }
+            }
+            liveUnitCount.text = (TeamConfig.myTeam == RTFightManager.playerTeam ? "Player:":"Enemy:") +
+                liveCount +  "/" + _teamMembers.GetValues().Count;
+        }
+        
         void MultiClear()
         {
             UnitIconDic.Clear();
@@ -82,6 +100,7 @@ namespace FightScene
                             center.FightDataRef.Resistance.Value = 0;
                             center.FightDataRef.CriticalGauge.Value = 0;
                             sideIcon.GreyOut();
+                            SetLiveUnitCount();
                         }
                     }
                 ).AddTo(sideIcon.gameObject);
@@ -111,6 +130,7 @@ namespace FightScene
             ).AddTo(this.gameObject);
             
             inputsManager.FocusUnit(null);
+            SetLiveUnitCount();
         }
     }
 }

@@ -110,6 +110,9 @@ public class FightingStepLayer : UILayer
         team1UI.InsTeamUI(RTFightManager.Target.team1.ReadyForNextMember, (() => RTFightManager.Target.team1.Auto),switchTeam1Auto, RTFightManager.Target.team1.RMode_Unit);
         team2UI.InsTeamUI(RTFightManager.Target.team2.ReadyForNextMember, (() => RTFightManager.Target.team2.Auto),switchTeam2Auto, RTFightManager.Target.team2.RMode_Unit);
 
+        team1UI.LiveUnitCount.gameObject.SetActive(FightLoad.Fight.EventType == FightEventType.Gangbang);
+        team2UI.LiveUnitCount.gameObject.SetActive(FightLoad.Fight.EventType == FightEventType.Gangbang);
+        
         var inputEffectsLoading = new List<UniTask>();
         foreach (var d in RTFightManager.Target.team1.teamMembers.GetValues())
         {
