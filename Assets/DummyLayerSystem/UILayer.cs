@@ -25,7 +25,17 @@ public class UILayer : MonoBehaviour
         target.sizeDelta = new Vector2(unitViewSize, unitViewSize);
     }
     
-    protected async UniTask<Sprite> Set2DView(string recordId, Image view2D, Animator unitOutAnimator)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="recordId"></param>
+    /// <param name="view2D"></param>
+    /// <param name="unitOutAnimator"></param>
+    /// <param name="distanceToVerticalEdge"> 图片自身的pivot距离高度上（或下？）边缘的距离 </param>
+    /// <param name="seenHeightProportionalOfWhole"> 漏出在画面中的高度是图片实际高度的百分之几 </param>
+    /// <returns></returns>
+    protected async UniTask<Sprite> Set2DView(string recordId, Image view2D, Animator unitOutAnimator, 
+        float distanceToVerticalEdge ,float seenHeightProportionalOfWhole, float originX ,float extraYokoSpace)
     {
         string key = "unit_image/" + recordId;
         if (!AddressablesLogic.CheckKeyExist("unit_image", key))
@@ -40,7 +50,13 @@ public class UILayer : MonoBehaviour
             return null;
         }
         var unitImageRect = view2D.GetComponent<RectTransform>();
-        unitImageRect.sizeDelta = new Vector2(value.rect.width * unitImageRect.rect.height / value.rect.height, unitImageRect.rect.height);
+
+        float seenHeight = PosCal.CanvasHeight - distanceToVerticalEdge;
+        float wholeHeight = seenHeight / seenHeightProportionalOfWhole;
+
+        var anchoredPosition = unitImageRect.anchoredPosition;
+        unitImageRect.anchoredPosition = new Vector2(originX + extraYokoSpace, anchoredPosition.y);
+        unitImageRect.sizeDelta = new Vector2(value.rect.width * wholeHeight / value.rect.height, wholeHeight);
         view2D.sprite = value;
         unitOutAnimator.SetTrigger("select");
         return value;

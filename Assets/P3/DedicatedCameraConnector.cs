@@ -7,6 +7,53 @@ namespace ModelView
 {
     public partial class DedicatedCameraConnector : MonoBehaviour
     {
+        public static float Unit2DViewYoKoSpaceWhenAtRight(string unit_id)
+        {
+            switch (unit_id)
+            {
+                case "1":
+                    return 220;
+                case "2":
+                    return 210;
+                case "3":
+                    return 0;
+                case "4":
+                    return 0;
+                case "5":
+                    return 100;
+                case "6":
+                    return 365;
+                case "7":
+                    return 0;
+                default:
+                    return 0;
+            }
+        }
+        
+        public static float Unit2DViewYoKoSpaceWhenAtLeft(string unit_id)
+        {
+            switch (unit_id)
+            {
+                case "1":
+                    return 30;
+                case "2":
+                    return 140;
+                case "3":
+                    return 145;
+                case "4":
+                    return 175;
+                case "5":
+                    return 100;
+                case "6":
+                    return 0;
+                case "7":
+                    return 190;
+                default:
+                    return 0;
+            }
+        }
+        
+        
         [SerializeField] private Transform target;
         [SerializeField] private Camera camera;
         [SerializeField] private float upDownRotateRangeMin = -10;

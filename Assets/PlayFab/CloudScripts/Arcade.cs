@@ -1,6 +1,7 @@
 using PlayFab.ClientModels;
 using System;
 using System.Collections.Generic;
+using DummyLayerSystem;
 using Newtonsoft.Json;
 using PlayFab.ServerModels;
 using UnityEngine;
@@ -50,10 +51,16 @@ public partial class CloudScript
                                 var unitConfig = Units.GetUnitConfig(item.ItemId);
                                 if (stage == "5")
                                 {
+                                    var fightOverLayer = UILayerLoader.Get<ArenaFightOver>();
+                                    fightOverLayer.NextBtn.gameObject.SetActive(false);
                                     PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get(unitConfig.REAL_NAME) + "\n" + Translate.Get("GotNewUnit"), item.ItemId,
                                     ()=>
                                     {
-                                        PopupLayer.ArrangeWarnWindow(Translate.Get("ArenaUnlocked"));
+                                        PopupLayer.ArrangeWarnWindow(() =>
+                                            {
+                                                PopupLayer.ArrangeWarnWindow(Translate.Get("GangbangUnlocked"));
+                                            },
+                                        Translate.Get("ArenaUnlocked"));
                                     });
                                 }
                                 else

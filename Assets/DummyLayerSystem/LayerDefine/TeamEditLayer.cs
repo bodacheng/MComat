@@ -88,7 +88,8 @@ public class TeamEditLayer : UILayer
         {
             UniTask.WhenAll(
                 connector.ShowMyModel(instanceID), 
-                Set2DView(unitInfo.r_id, view2D, unitOutAnimator)).Forget();
+                Set2DView(unitInfo.r_id, view2D, unitOutAnimator,
+                    0, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(unitInfo.r_id))).Forget();
         }
         else
         {
@@ -213,7 +214,8 @@ public class TeamEditLayer : UILayer
                 {
                     UniTask.WhenAll(
                         connector.ShowMyModel(instanceID), 
-                        Set2DView(unitInfo.r_id, view2D, unitOutAnimator)).Forget();
+                        Set2DView(unitInfo.r_id, view2D, unitOutAnimator,
+                            0, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(unitInfo.r_id))).Forget();
                 }
                 else
                 {

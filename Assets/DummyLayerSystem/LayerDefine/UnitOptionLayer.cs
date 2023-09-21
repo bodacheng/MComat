@@ -65,7 +65,8 @@ namespace mainMenu
             }
             else
             {
-                UniTask.WhenAll(_connector.ShowMyModel(info.id), Set2DView(info.r_id, view2D, unitOutAnimator)).Forget();
+                UniTask.WhenAll(_connector.ShowMyModel(info.id), Set2DView(info.r_id, view2D, unitOutAnimator, 
+                    10, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(info.r_id))).Forget();
             }
         }
         

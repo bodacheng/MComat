@@ -33,9 +33,8 @@ public class FrontLayer : UILayer
     public void Initialise(PreScene pre)
     {
         CameraConnectorCal(camConnector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
-        CameraConnectorCal(view2D.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
-        view2D.GetComponent<RectTransform>().anchoredPosition =
-            camConnector.GetComponent<RectTransform>().anchoredPosition + new Vector2(camConnector.GetComponent<RectTransform>().sizeDelta.x / 2,0);
+        // CameraConnectorCal(view2D.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+        // view2D.GetComponent<RectTransform>().anchoredPosition = camConnector.GetComponent<RectTransform>().anchoredPosition + new Vector2(camConnector.GetComponent<RectTransform>().sizeDelta.x / 2,0);
         
         ArcadeBtn.onClick.AddListener(
         ()=>
@@ -48,6 +47,7 @@ public class FrontLayer : UILayer
             {
                 PlayerAccountInfo.Me.GangbangModeManager.DirectToGangStage(PlayerAccountInfo.Me.gangbangProcess + 1, true);
             });
+        GangbangBtn.gameObject.SetActive(PlayerAccountInfo.Me.arcadeProcess >= 5);
         
         ArenaBtn.onClick.AddListener(() =>
         {
@@ -132,7 +132,8 @@ public class FrontLayer : UILayer
         {
             camConnector.gameObject.SetActive(false);
             view2D.gameObject.SetActive(true);
-            var sprite = await Set2DView(info.r_id, view2D, unitOutAnimator);
+            var sprite = await Set2DView(info.r_id, view2D, unitOutAnimator, 
+                10, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtLeft(info.r_id));
             if (sprite == null)
             {
                 ViewSwitch();

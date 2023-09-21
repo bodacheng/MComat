@@ -13,6 +13,7 @@ Gacha,Gacha,ガチャ,许愿
 Fighter,Fighter,ファイター,战士
 SkillGem,Skill Gem,スキルジェム,技能宝石
 Practice,Practice,プラクティス,试验
+Chaos,Chaos,混沌,混沌
 PlsClearStage5,Unlock after clearing the 5th level,第5ステージクリア後にアンロック,战胜第5关敌人后开启
 ,,,
 TimeTillNextSeason,Till Next Season,次のシーズンまで,距离下一个赛季还有
@@ -107,6 +108,7 @@ SkillEditInstruction2,"A blue flashing bar represents +1 balance value, while a 
 IntroOfCombo,"The first column skill is the initially triggered skill, and after any skill in the left column is activated, it can be followed by any skill in the adjacent right column (The third column skills can follow the first column skills)",第一列のスキルは最初にトリガーされるスキルで、左列の任意のスキルが発動された後、隣接する右列の任意のスキルに続けることができます（第三列のスキルは第一列のスキルに続けることができます）,第一列技能为最初触发技能，左列任意技能发动后可被相邻右列任意技能接续（第三列技能可被第一列技能接续）
 ,,,
 ArenaUnlocked,The arena is now open!,アリーナが開放されました!,竞技场已开启！
+GangbangUnlocked,The Chaos Battle is now open!,混沌チャレンジが開放されました!,混沌模式已开启！
 TutorialCompleted,Clear level 5 to obtain new character Tetsuya and unlock the arena!,ステージ5をクリアすると、新しいキャラクター鉄也を入手し、アリーナがアンロックされます！,闯过第五关即可获取新角色铁也并解锁竞技场！
 ,,,
 RandomFillStones,Auto Fill,自動補完,自动补全

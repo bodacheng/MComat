@@ -43,6 +43,7 @@ public partial class ArenaFightOver : UILayer
     [SerializeField] private BOButton nextForMultiBtn;
     [SerializeField] private RectTransform adBtnParent;
     public Button AgainBtn => againBtn;
+    public Button NextBtn => nextBtn;
     public RectTransform AdBtnParent => adBtnParent;
     #endregion
     
