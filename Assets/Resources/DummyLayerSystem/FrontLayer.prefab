@@ -32,10 +32,10 @@ RectTransform:
   m_Children:
   - {fileID: 3029729696566959913}
   - {fileID: 3029729696378452942}
-  - {fileID: 3029729697141004451}
   - {fileID: 3029729695545733452}
-  - {fileID: 3029729696832101438}
+  - {fileID: 3029729697141004451}
   - {fileID: 3029729696172826183}
+  - {fileID: 3029729696832101438}
   - {fileID: 8161839264297942348}
   m_Father: {fileID: 3029729696647541648}
   m_RootOrder: 3
@@ -673,7 +673,7 @@ RectTransform:
   - {fileID: 7501210711898293651}
   - {fileID: 963717935795661747}
   m_Father: {fileID: 9164111607502142108}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1240,7 +1240,7 @@ RectTransform:
   - {fileID: 6635625456209066160}
   - {fileID: 1590516011832334435}
   m_Father: {fileID: 9164111607502142108}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2159,7 +2159,7 @@ RectTransform:
   - {fileID: 3029729696837263839}
   - {fileID: 2951503057951996935}
   m_Father: {fileID: 9164111607502142108}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2505,7 +2505,7 @@ RectTransform:
   - {fileID: 7407960787879410914}
   - {fileID: 8888333117568551343}
   m_Father: {fileID: 9164111607502142108}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3820,7 +3820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5762567975242312275
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3839,7 +3839,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 324, y: -46}
-  m_SizeDelta: {x: 450, y: 300}
+  m_SizeDelta: {x: 500, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5444645810463248863
 CanvasRenderer:
@@ -3869,7 +3869,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 74d185566d32ed349931608f17e81b0f, type: 3}
+  m_Texture: {fileID: 2800000, guid: fbac785819efd4235b46f3e019626509, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0

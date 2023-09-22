@@ -34,11 +34,11 @@ public partial class FightPrepareLayer : UILayer
             var returnValue = setTeamUnitCount(i, s, arg3,f);
             if (i == 1)
             {
-                team1WholeCount.text =  Translate.Get("WholeUnitCount")+ ":"+  returnValue + "/" + CommonSetting.GangbangModeMaxUnitPerTeam;
+                team1WholeCount.text =  Translate.Get("WholeUnitCount")+ " "+  returnValue + "/" + CommonSetting.GangbangModeMaxUnitPerTeam;
             }
             else
             {
-                team2WholeCount.text = Translate.Get("WholeUnitCount")+ ":"+  returnValue + "/" + CommonSetting.GangbangModeMaxUnitPerTeam;
+                team2WholeCount.text = Translate.Get("WholeUnitCount")+ " "+  returnValue + "/" + CommonSetting.GangbangModeMaxUnitPerTeam;
             }
             return setTeamUnitCount(i,s,arg3,f);
         };

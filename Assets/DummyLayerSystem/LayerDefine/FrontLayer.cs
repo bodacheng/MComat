@@ -158,30 +158,31 @@ public class FrontLayer : UILayer
         StonesBtn.interactable = btnCode == "stones";
         GotchaBtn.interactable = btnCode == "gotcha";
 
-        Vector3 localPos = Vector3.zero;
+        Transform localPos = null;
         switch (btnCode)
         {
             case "arcade":
-                localPos = ArcadeBtn.transform.localPosition;
+                localPos = ArcadeBtn.transform;
                 break;
             case "arena":
-                localPos = ArenaBtn.transform.localPosition;
+                localPos = ArenaBtn.transform;
                 break;
             case "unit":
-                localPos = MemberBtn.transform.localPosition;
+                localPos = MemberBtn.transform;
                 break;
             case "train":
-                localPos = TrainBtn.transform.localPosition;
+                localPos = TrainBtn.transform;
                 break;
             case "stones":
-                localPos = StonesBtn.transform.localPosition;
+                localPos = StonesBtn.transform;
                 break;
             case "gotcha":
-                localPos = GotchaBtn.transform.localPosition;
+                localPos = GotchaBtn.transform;
                 break;
         }
 
-        indicator.transform.localPosition = localPos;
+        indicator.transform.SetParent(localPos);
+        indicator.transform.localPosition = Vector3.zero;
         indicator.SetActive(true);
     }
     #endregion

@@ -26,6 +26,17 @@ public static class PosCal
         return screenAspect / refAspect;
     }
     
+    public static float TempToko() // 这完全是个主观数值，目的是让手机比较长的时候立绘更靠中间一点。没有太多道理
+    {
+        float screenAspect = (float)Screen.width / Screen.height;
+        float refAspect = CanvasScaler.referenceResolution.x / CanvasScaler.referenceResolution.y;
+        if (screenAspect <= refAspect)
+        {
+            return 0;
+        }
+        return (((screenAspect / refAspect) -1)/2) * CanvasScaler.referenceResolution.x;
+    }
+    
     /// <summary>
     /// 这个函数在目前所用的地方为什么能得到正确的值我们压根不理解。主要不理解rect.transform.position到底是什么
     /// </summary>

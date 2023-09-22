@@ -32,25 +32,37 @@ namespace ModelView
         
         public static float Unit2DViewYoKoSpaceWhenAtLeft(string unit_id)
         {
+            float returnValue;
             switch (unit_id)
             {
                 case "1":
-                    return 30;
+                    returnValue = 30;
+                    break;
                 case "2":
-                    return 140;
+                    returnValue = 140;
+                    break;
                 case "3":
-                    return 145;
+                    returnValue = 145;
+                    break;
                 case "4":
-                    return 175;
+                    returnValue = 175;
+                    break;
                 case "5":
-                    return 100;
+                    returnValue = 100;
+                    break;
                 case "6":
-                    return 0;
+                    returnValue = 0;
+                    break;
                 case "7":
-                    return 190;
+                    returnValue = 190;
+                    break;
                 default:
-                    return 0;
+                    returnValue = 0;
+                    break;
             }
+
+            returnValue += PosCal.TempToko() ;
+            return returnValue;
         }
         
         

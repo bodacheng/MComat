@@ -37,6 +37,12 @@ public partial class CloudScript
                     PopupLayer.ArrangeWarnWindow(Translate.Get("TutorialCompleted"));
                 }
                 
+                if (stage == "5")
+                {
+                    var fightOverLayer = UILayerLoader.Get<ArenaFightOver>();
+                    fightOverLayer.NextBtn.gameObject.SetActive(false);
+                }
+                
                 if (x.FunctionResult != null && !String.IsNullOrEmpty(x.FunctionResult.ToString()))
                 {
                     var jsonResult = (PlayFab.Json.JsonObject)x.FunctionResult;
@@ -51,8 +57,6 @@ public partial class CloudScript
                                 var unitConfig = Units.GetUnitConfig(item.ItemId);
                                 if (stage == "5")
                                 {
-                                    var fightOverLayer = UILayerLoader.Get<ArenaFightOver>();
-                                    fightOverLayer.NextBtn.gameObject.SetActive(false);
                                     PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get(unitConfig.REAL_NAME) + "\n" + Translate.Get("GotNewUnit"), item.ItemId,
                                     ()=>
                                     {
