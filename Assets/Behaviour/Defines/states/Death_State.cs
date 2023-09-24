@@ -85,7 +85,7 @@ namespace Soul
                     _xz = Vector3.zero - pos;
                     _xz.y = 0;
                     _xz = _xz.normalized;
-                    _effectP = pos.normalized * (BoundaryControlByGod._BattleRingRadius + 1.2f); // 这个0.5f是因为一些演出上的原因
+                    _effectP = pos.normalized * (BoundaryControlByGod._BattleRingRadius+ 0.5f); // 这个0.5f是因为一些演出上的原因
                     _effectP.y = pos.y;
                     _quaV = Vector3.zero - pos.normalized;
                     _quaV.y = 0;

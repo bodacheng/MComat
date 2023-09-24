@@ -57,11 +57,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit
-  - m_GUID: 900549ee7a1937643adaa1c38d34d6c5
-    m_Address: human/adam7
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - unit
   - m_GUID: 6ca3efb6cefae4338ba0c93e213760a3
     m_Address: human/adam
     m_ReadOnly: 0
@@ -74,11 +69,6 @@ MonoBehaviour:
     - unit
   - m_GUID: 1e1e05d63558f44b681b57faaf71bb49
     m_Address: human/tetsuya
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - unit
-  - m_GUID: 7e0719823db6b4587bf9bfa8dd0dc763
-    m_Address: human/maksim1
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit
