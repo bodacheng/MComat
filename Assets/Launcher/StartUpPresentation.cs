@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -48,7 +49,24 @@ public class StartUpPresentation : MonoBehaviour
     
     async UniTask OnStart()
     {
+        var wText = String.Empty;
+        switch (AppSetting.Value.Language)
+        {
+            case SystemLanguage.English:
+                wText = "Checking program version...";
+                break;
+            case SystemLanguage.Japanese:
+                wText = "プログラムのバージョンを確認中...";
+                break;
+            case SystemLanguage.Chinese:
+                wText = "正在检测程序版本";
+                break;
+        }
+        
+        ProgressLayer.Loading(wText);
         bool needToUpdate = await AddressablesLogic.VersionConfirm();
+        ProgressLayer.Close();
+        
         if (needToUpdate)
         {
             var text = string.Empty;
@@ -72,24 +90,28 @@ public class StartUpPresentation : MonoBehaviour
                 #if UNITY_ANDROID
                 Application.OpenURL("https://play.google.com/store/apps/details?id=com.MCombat.BO");
                 #endif
+                
+                #if UNITY_IOS
+                Application.Quit();
+                #endif
             }, text);
             return;
         }
         
-        var r_text = string.Empty;
+        var rText = string.Empty;
         switch (AppSetting.Value.Language)
         {
             case SystemLanguage.English:
-                r_text = "Inspecting resources";
+                rText = "Inspecting resources";
                 break;
             case SystemLanguage.Japanese:
-                r_text = "リソースを検査中";
+                rText = "リソースを検査中";
                 break;
             case SystemLanguage.Chinese:
-                r_text = "检查资源中";
+                rText = "检查资源中";
                 break;
         }
-        ProgressLayer.Loading(r_text);
+        ProgressLayer.Loading(rText);
         
         var bytes = await AddressablesLogic.GetWholeDownLoadSize(
             () =>
@@ -97,10 +119,10 @@ public class StartUpPresentation : MonoBehaviour
                 PopupLayer.ArrangeConfirmWindow(
                     (
                         () =>
-                    {
-                        SceneManager.LoadScene(0);
-                    }
-                ), 
+                        {
+                            SceneManager.LoadScene(0);
+                        }
+                    ),
                 "Download Failed"
                 );
             },

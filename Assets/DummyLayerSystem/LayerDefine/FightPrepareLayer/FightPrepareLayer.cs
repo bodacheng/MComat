@@ -19,8 +19,6 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] Text arcadeStageNoText;
     [SerializeField] RewardUI rewardUI;
     [SerializeField] BOButton toArcadeFrontBtn;
-
-    public GameObject TeamEditIndicator => teamEditIndicator;
     
     public void SetFightMode(int fightMode)
     {
@@ -66,7 +64,8 @@ public partial class FightPrepareLayer : UILayer
     public void StageMembersInfoShow(FightInfo stage, string oneWordTeam1, string oneWordTeam2)
     {
         MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT, true);
-        if (dataAccess.Units.Dic.Count >= 3 && stage.FightMembers.HeroSets.GetValues().Count < 3)
+        if (dataAccess.Units.Dic.Count > stage.FightMembers.HeroSets.GetValues().Count
+            && stage.FightMembers.HeroSets.GetValues().Count < 3)
         {
             teamEditIndicatorText.text = Translate.Get("HasExtraSeat");
             teamEditIndicator.SetActive(true);

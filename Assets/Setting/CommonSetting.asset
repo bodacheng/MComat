@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   devMode: 0
   maxStoneCount: 1000
+  gangbangModeMaxUnitPerTeam: 24
   unitConfigFile: mst_unit
   skillConfigFile: mst_skill
   skillAIFile: skill_ai_attrs

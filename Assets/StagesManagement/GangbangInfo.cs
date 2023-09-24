@@ -68,7 +68,7 @@ public class GangbangInfo : FightInfo
         var s = sets.Find(x => x.id == id);
         if (s == null)
         {
-            s = new SoldierGroupSet(id, useLocalSet ? PlayerPrefs.GetInt("gangbangPos"+ id, 1) : 1);
+            s = new SoldierGroupSet(id, useLocalSet ? PlayerPrefs.GetInt("gangbangPos"+ id, 8) : 8);
             sets.Add(s);
             return s;
         }
