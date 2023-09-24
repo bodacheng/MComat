@@ -37,7 +37,7 @@ public partial class StageButton : MonoBehaviour
         var buttonImage = GetComponent<Image>();
         buttonImage.color = new Color(buttonImage.color.r, buttonImage.color.g, buttonImage.color.b, on ? 1 : 0.3f);
         id.color = new Color(id.color.r, id.color.g, id.color.b, on ? 1 : 0.3f);
-        button.targetGraphic.raycastTarget = on;
+        button.interactable = on;
     }
     
     public void LoadUnitIcons(List<UnitInfo> units, Func<HeroIcon, UniTask> iconButtonFeature, bool clickBoss = false)

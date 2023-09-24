@@ -20,7 +20,7 @@ public class TouchTopDownCamera : CameraMode
     private float followTargetSpeed = 10f;
     float rotationSpeed = 0.5f;
     private bool isRotating = false;
-    private float disAwayFromFront = 15f;
+    private float disAwayFromFront = 15.5f;
     private float zoomScreenDis = 10;
     private float zoomSpeed = 20;
     private float Height
