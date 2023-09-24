@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4b2df92746254722a503aadf73dfd1f, type: 3}
-  m_Name: 3
+  m_Name: 19
   m_EditorClassIdentifier: 
   battleGroundID: 0
   fightBGM: 0
@@ -19,15 +19,28 @@ MonoBehaviour:
     r_id: 7
     level: 1
     set:
-      a1: 55
-      a2: 99
-      a3: 58
-      b1: 184
+      a1: 53
+      a2: 63
+      a3: 159
+      b1: 5
+      b2: 80
+      b3: 184
+      c1: 167
+      c2: 170
+      c3: 98
+  - id: 1
+    r_id: 2
+    level: 1
+    set:
+      a1: 45
+      a2: 113
+      a3: 183
+      b1: 27
       b2: 95
-      b3: 182
-      c1: 5
-      c2: 10
-      c3: 125
+      b3: 89
+      c1: 80
+      c2: 5
+      c3: 169
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0
@@ -37,11 +50,11 @@ MonoBehaviour:
   team1AIMode: 0
   team2AIMode: 0
   dumbAIDecisionDelay: 20
-  stageRefLevel: 1
+  stageRefLevel: 2
   team2GroupSet:
   - id: 0
-    Count: 24
+    Count: 12
   - id: 1
-    Count: 10
+    Count: 12
   - id: 2
     Count: 10

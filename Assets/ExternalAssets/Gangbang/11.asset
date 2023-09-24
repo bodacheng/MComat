@@ -16,58 +16,32 @@ MonoBehaviour:
   fightBGM: 0
   unitsData:
   - id: 0
-    r_id: 10
+    r_id: 3
     level: 1
     set:
-      a1: 162
-      a2: 58
-      a3: 68
-      b1: 137
+      a1: 116
+      a2: 55
+      a3: 10
+      b1: 171
       b2: 113
-      b3: 95
-      c1: 53
-      c2: 9
-      c3: 170
-  - id: 1
-    r_id: 10
-    level: 1
-    set:
-      a1: 99
-      a2: 156
-      a3: 53
-      b1: 9
-      b2: 167
-      b3: 10
-      c1: 59
-      c2: 27
-      c3: 89
-  - id: 2
-    r_id: 10
-    level: 1
-    set:
-      a1: 63
-      a2: 59
-      a3: 145
-      b1: 156
-      b2: 162
-      b3: 102
-      c1: 170
-      c2: 150
-      c3: 169
+      b3: 172
+      c1: 125
+      c2: 95
+      c3: 167
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0
-  team2CGMode: 2
-  team1Mode: 2
-  team2Mode: 2
+  team2CGMode: 0
+  team1Mode: 1
+  team2Mode: 1
   team1AIMode: 0
   team2AIMode: 0
   dumbAIDecisionDelay: 20
-  stageRefLevel: 1
+  stageRefLevel: 2
   team2GroupSet:
   - id: 0
-    Count: 10
+    Count: 24
   - id: 1
-    Count: 10
+    Count: 24
   - id: 2
     Count: 10

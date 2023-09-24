@@ -19,41 +19,15 @@ MonoBehaviour:
     r_id: 5
     level: 1
     set:
-      a1: 145
-      a2: 45
-      a3: 140
-      b1: 36
-      b2: 116
-      b3: 143
-      c1: 144
-      c2: 162
-      c3: 17
-  - id: 1
-    r_id: 5
-    level: 1
-    set:
-      a1: 156
-      a2: 166
-      a3: 63
-      b1: 115
-      b2: 127
-      b3: 162
-      c1: 175
-      c2: 172
-      c3: 116
-  - id: 2
-    r_id: 5
-    level: 1
-    set:
-      a1: 148
-      a2: 115
-      a3: 118
+      a1: 167
+      a2: 113
+      a3: 127
       b1: 145
-      b2: 171
-      b3: 166
-      c1: 140
-      c2: 102
-      c3: 116
+      b2: 182
+      b3: 36
+      c1: 58
+      c2: 89
+      c3: 10
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0
@@ -66,7 +40,7 @@ MonoBehaviour:
   stageRefLevel: 1
   team2GroupSet:
   - id: 0
-    Count: 5
+    Count: 10
   - id: 1
     Count: 14
   - id: 2

@@ -16,44 +16,18 @@ MonoBehaviour:
   fightBGM: 0
   unitsData:
   - id: 0
-    r_id: 1
+    r_id: 4
     level: 1
     set:
-      a1: 39
-      a2: 116
-      a3: 68
-      b1: 166
+      a1: 80
+      a2: 5
+      a3: 90
+      b1: 9
       b2: 182
-      b3: 176
-      c1: 167
-      c2: 95
-      c3: 9
-  - id: 1
-    r_id: 3
-    level: 1
-    set:
-      a1: 125
-      a2: 95
-      a3: 116
-      b1: 53
-      b2: 80
-      b3: 167
-      c1: 36
-      c2: 171
-      c3: 9
-  - id: 2
-    r_id: 6
-    level: 1
-    set:
-      a1: 179
-      a2: 125
-      a3: 159
-      b1: 167
-      b2: 17
-      b3: 150
-      c1: 55
-      c2: 89
-      c3: 10
+      b3: 55
+      c1: 113
+      c2: 99
+      c3: 27
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0
@@ -66,8 +40,8 @@ MonoBehaviour:
   stageRefLevel: 1
   team2GroupSet:
   - id: 0
-    Count: 10
+    Count: 24
   - id: 1
-    Count: 10
+    Count: 24
   - id: 2
     Count: 10
