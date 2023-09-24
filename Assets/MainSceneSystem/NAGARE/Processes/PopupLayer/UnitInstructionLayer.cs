@@ -14,6 +14,8 @@ public class UnitInstructionLayer : UILayer
     [SerializeField] private Image unitImage;
     [SerializeField] private Text unitName;
     [SerializeField] private Text unitIntro;
+    [SerializeField] private Text gameTipTitle;
+    [SerializeField] private Text gameTip;
     [SerializeField] private float unitImageEndPosX = -100f;
     [SerializeField] private float nameEndPosX = 100f;
     [SerializeField] private float emergeDuration = 2f;
@@ -58,11 +60,16 @@ public class UnitInstructionLayer : UILayer
         
         unitName.text = Translate.Get(config.REAL_NAME);
         unitIntro.text = Translate.Get(config.REAL_NAME+ "_intro");
+
+        var tip = Translate.GetRandomGameTip();
+
+        gameTipTitle.text = tip[0];
+        gameTip.text = tip[1];
         
         TweenerCore<float, float, FloatOptions> Move(RectTransform targetRect, float endXPos)
         {
             float posX = targetRect.anchoredPosition.x;
-            return DOTween.To(()=> posX, (value)=>posX = value, endXPos, emergeDuration).
+            return DOTween.To(()=> posX, (value)=> posX = value, endXPos, emergeDuration).
                 OnUpdate(
                     () =>
                     {

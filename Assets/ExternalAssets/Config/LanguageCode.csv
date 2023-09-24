@@ -167,6 +167,8 @@ JustUseAI,We recommend using auto mode!,自動戦闘を推奨します！,干脆
 Edit,Edit,編成,编成
 MakeYourTeam,Choose characters,キャラクターを選ぶ,选择出战角色
 HasExtraSeat,Warriors available for battle,戦いに参加できる戦士がいます,有可以参战的战士
+HasExtraSeatButFight,You have fighters available for battle that haven't been added to the team. Do you still want to start the fight?,参戦できる戦士が編成されていません。それでも戦いを開始しますか？,你有可以参战的战士未编辑入队，仍然开始战斗吗
+HasExtraSeatForGangbangButFight,The number of fighters participating in the battle has not reached the maximum limit. Do you still want to start the fight?,参戦する戦士の数が設定上限に達していません。それでも戦いを開始しますか？,参战战士数未达到可设置上线，仍然开始战斗吗
 TeamEditTutorial1,Click on the fighter's icon and place them in the team slot.,ファイターのアイコンをクリックして、任意のチームスロットに配置してください,尝试点击角色头像，再点击队伍槽使其编入队伍
 TeamEditTutorial2,Add a new warrior to the team to have a total of two members,新しい戦士をチームに編成して、チームに2名のメンバーを含めてください,尝试将新战士编入队伍，使队伍包含两名队员
 SaveYourTeam,Click on "Confirm" to save the team,「確認」をクリックして、チームを保存してください,点击确定保存队伍
@@ -177,9 +179,7 @@ WholeUnitCount,count,人数,人数
 TeamModeM,Co-op,Co-op,战争
 TeamModeR,1V1,1V1,对决
 ,,,
-normalLoginBonusDM,"Login gift
-
-",ログインギフト,登陆礼物
+normalLoginBonusDM,Login gift,ログインギフト,登陆礼物
 sevenDaysLoginBonusDM,7-day consecutive login bonus,7日連続ログイン特典,7日连续登陆特典
 normalLoginBonusDMIntro,This is your $streak 's day logging into the game! Log in for another $extraRemain days and you will receive extra rewards!,これはゲームにログインする第$streak日です！さらに$extraRemain日間ログインすると、追加の報酬がもらえます！,这是你第$streak天登陆游戏！再登陆$extraRemain天你将获得额外奖励！
 sevenDaysLoginBonusDMIntro,Thank you for logging in for seven consecutive days! Wishing you happiness and joy every day.,連続7日間ログインしていただきありがとうございます！毎日幸せで楽しい日々をお過ごしください。,感谢你连续七天登陆！祝你开心快乐每一天！
@@ -204,3 +204,11 @@ buyVip,VIP,VIP購入,VIP资格
 buyVipIntro,"Purchase VIP membership in a one-time payment, and from then on, receive double rewards for all levels without watching ads! (Regular levels 2x, BOSS levels 3x)",一括でVIPメンバーシップを購入すると、今後はすべてのレベルで広告を見ずに報酬が倍になります！（通常のレベル2倍、BOSSレベル3倍）"（いっかつでVIPメンバーシップをこうにゅうすると、こんごはすべてのレベルでこうこくをみずにほうしゅうがばいになります！（つうじょうのレベル2ばい、BOSSレベル3ばい）,一次性买断VIP资格，从此所有关卡不需观看广告也能获得翻倍报酬！（普通关卡2倍，BOSS关卡3倍）
 skippedAdRewardsIntro,Rewards for ads not watched until now will be reissued!,今まで未視聴の広告の報酬が付与されます！,至今未观看广告的报酬将被补发！
 totalSkippedReward,Obtain Immediately,すぐに取得,立刻获得
+,,,
+TipTitle1,Skill combo,連続技,技能连招
+TipTitle2,Skill energy,スキルエネルギー,必杀技能量
+TipTitle3,Skill release distance,スキル発動距離,技能释放距离
+,,,
+GameTip1,"The first column of the nine skill slots is the starting skill, which can be followed by the second column skill. Similarly, the second column can be followed by the third column skill. The third column skill can be followed by the first column skill. However, the prerequisite for following up with any skill is that the required energy is sufficient.",9つのスキルスロットの第1列はスタートスキルであり、第2列のスキルを続けて発動することができます。同様に、第2列は第3列のスキルを続けて発動することができます。そして、第3列のスキルは第1列のスキルで続けて発動することができます。しかし、いずれのスキルを続けて発動するための前提は、必要なエネルギーが十分であることです。,九个技能槽的第一竖列是首发技能，可接续释放第二竖列技能，同理第二竖列可接续第三竖列技能。而第三竖列技能则可被第一竖列技能接续。但接续释放任何技能的前提是所需相应能量足够。
+GameTip2,"The ultimate move cannot be released if there isn't enough energy. If one of the columns in the nine skill slots is all ultimate moves, and there is not enough energy to activate any skill in that column when the combo reaches it, the combo will be interrupted.",必殺技は、必要なエネルギーが足りない場合には発動できません。9つのスキルスロットのうちの一つの列がすべて必殺技であり、コンボがその列に達したときにその列のどのスキルも発動するのに十分なエネルギーがない場合、コンボは中断されます。,必杀技在所需能量不够的情况下无法释放。九个技能槽中某一竖列如果都是必杀技，并且在连招运行到该列时能量不够用于发动该列的任何技能，会导致连招中断。
+GameTip3,"Each skill has its optimal release distance from the enemy. In automatic mode, the AI will autonomously choose which skill to release based on the distance from the enemy.",各スキルには敵との最適な発動距離があります。自動モードでは、AIは敵との距離に基づいてスキルを自動的に選択して発動します。,每个技能都有所对应的最佳距敌释放距离。自动模式下，AI会根据与敌人的距离自主选择技能释放。

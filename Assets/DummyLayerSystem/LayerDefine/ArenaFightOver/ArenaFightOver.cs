@@ -82,7 +82,7 @@ public partial class ArenaFightOver : UILayer
         Int32.TryParse(FightLoad.Fight.ID, out var nowStageNo);
         var nextStageNo = nowStageNo + 1;
         var nextFight = await PlayerAccountInfo.Me.ArcadeModeManager.LoadStage(nextStageNo);
-        if (nextFight != null && PlayerAccountInfo.Me.tutorialProgress == "Finished")
+        if (nextFight != null && PlayerAccountInfo.Me.tutorialProgress == "Finished" && nowStageNo != 5)
         {
             nextStageTitle.text = "Stage " + nextStageNo;
             nextBtn.gameObject.SetActive(true);

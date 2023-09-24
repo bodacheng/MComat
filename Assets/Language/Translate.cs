@@ -3,7 +3,9 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
+using NoSuchStudio.Common;
 
 public static class Translate
 {
@@ -37,6 +39,15 @@ public static class Translate
         }
     }
 
+    private static readonly IDictionary<string, string> GameTipsRecordIds = new Dictionary<string, string>();
+
+    public static string[] GetRandomGameTip()
+    {
+	    var key = GameTipsRecordIds.Keys.ToList().Random();
+	    return new string[2] { Get(key), Get(GameTipsRecordIds[key]) };
+
+    }
+    
     static void Load(TextAsset csv)
 	{
 		rowList.Clear();
@@ -45,16 +56,21 @@ public static class Translate
 		{
 			if (grid[i].Length == 4)
 			{
-				Row row = new Row
+				var row = new Row
 				{
 					RECORD_ID = grid[i][0],
 					EN = grid[i][1],
 					JP = grid[i][2],
 					CH = grid[i][3]
 				};
+				if (row.RECORD_ID.Contains("GameTip"))
+				{
+					var splits = row.RECORD_ID.Split("GameTip");
+					var num = splits[1];
+					DicAdd<string,string>.Add(GameTipsRecordIds, "TipTitle"+ num, row.RECORD_ID);
+				}
 				rowList.Add(row);
 			}
-
 		}
 		isLoaded = true;
 	}

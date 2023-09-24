@@ -73,8 +73,8 @@ public partial class FightPrepareLayer : UILayer
         }
         else //if (dataAccess.Units.Dic.Count > 0 && stage.FightMembers.HeroSets.GetValues().Count == 0)
         {
-            teamEditIndicatorText.text = Translate.Get("MakeYourTeam");
-            teamEditIndicator.SetActive(true);
+            teamEditIndicatorText.text = string.Empty; // Translate.Get("MakeYourTeam");
+            teamEditIndicator.SetActive(false);
         }
 
         MemberInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT, false);

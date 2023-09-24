@@ -48,15 +48,16 @@ public partial class FightPrepareLayer : UILayer
     public void GangbangStageMembersInfoShow(GangbangInfo stage, string oneWordTeam1, string oneWordTeam2)
     {
         GangbangInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT, true, 1);
-        if (dataAccess.Units.Dic.Count >= 3 && stage.FightMembers.HeroSets.GetValues().Count < 3)
+        //teamEditIndicator.SetActive(stage.GetGroupWholeUnitCount(1) < CommonSetting.GangbangModeMaxUnitPerTeam);
+        if (stage.FightMembers.HeroSets.GetValues().Count < 1)
         {
             teamEditIndicatorText.text = Translate.Get("HasExtraSeat");
             teamEditIndicator.SetActive(true);
         }
         else //if (dataAccess.Units.Dic.Count > 0 && stage.FightMembers.HeroSets.GetValues().Count == 0)
         {
-            teamEditIndicatorText.text = Translate.Get("MakeYourTeam");
-            teamEditIndicator.SetActive(true);
+            teamEditIndicatorText.text = string.Empty; // Translate.Get("MakeYourTeam");
+            teamEditIndicator.SetActive(false);
         }
         GangbangInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT, false, 2);
         team1OneWord.text = oneWordTeam1;

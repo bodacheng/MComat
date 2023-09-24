@@ -61,7 +61,7 @@ public class QuestInfoPage : MSceneProcess
                         }
                         
                         var canFight = CanFightCheck();
-                        _layer.TeamEditIndicator.gameObject.SetActive(!canFight);
+                        //_layer.TeamEditIndicator.gameObject.SetActive(!canFight);
                         _layer.SetFightBeginEnableRender(canFight);
                         return whole;
                     },
@@ -100,7 +100,7 @@ public class QuestInfoPage : MSceneProcess
         }
 
         var canFight = CanFightCheck();
-        _layer.TeamEditIndicator.gameObject.SetActive(!canFight);
+        //_layer.TeamEditIndicator.gameObject.SetActive(!canFight);
         _layer.SetFightBeginEnableRender(canFight);
         SetLoaded(true);
     }
@@ -210,7 +210,16 @@ public class QuestInfoPage : MSceneProcess
                     PopupLayer.ArrangeWarnWindow(Translate.Get("TeamNotFull"));
                     return;
                 }
+                
                 var bangBangInfo = ((GangbangInfo)fightInfo);
+                if (bangBangInfo.GetGroupWholeUnitCount(1) < CommonSetting.GangbangModeMaxUnitPerTeam)
+                {
+                    PopupLayer.ArrangeConfirmWindow(
+                        () => { FightLoad.Go(fightInfo);},
+                        Translate.Get("HasExtraSeatForGangbangButFight"));
+                    return;
+                }
+                
                 bangBangInfo.ConvertTeamToGangbang();
                 FightScene.FightScene.team1GroupSet = bangBangInfo.Team1GroupSet;
                 fightInfo.Team1ID = PlayerAccountInfo.Me.PlayFabId;
@@ -221,6 +230,13 @@ public class QuestInfoPage : MSceneProcess
                 if (fightInfo.FightMembers.HeroSets.GetValues().Count < 1 || fightInfo.FightMembers.EnemySets.GetValues().Count < 1)
                 {
                     PopupLayer.ArrangeWarnWindow(Translate.Get("TeamNotFull"));
+                    return;
+                }
+                if (dataAccess.Units.Dic.Count >= 3 && fightInfo.FightMembers.HeroSets.GetValues().Count < 3)
+                {
+                    PopupLayer.ArrangeConfirmWindow(
+                        () => { FightLoad.Go(fightInfo);},
+                        Translate.Get("HasExtraSeatButFight"));
                     return;
                 }
                 
