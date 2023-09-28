@@ -28,6 +28,19 @@ MonoBehaviour:
       c1: 80
       c2: 144
       c3: 68
+  - id: 1
+    r_id: 12
+    level: 1
+    set:
+      a1: 9
+      a2: 5
+      a3: 167
+      b1: 4
+      b2: 171
+      b3: 80
+      c1: 161
+      c2: 89
+      c3: 159
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0
@@ -37,11 +50,11 @@ MonoBehaviour:
   team1AIMode: 0
   team2AIMode: 0
   dumbAIDecisionDelay: 20
-  stageRefLevel: 2
+  stageRefLevel: 1.2
   team2GroupSet:
   - id: 0
-    Count: 10
+    Count: 16
   - id: 1
-    Count: 14
+    Count: 4
   - id: 2
     Count: 11
