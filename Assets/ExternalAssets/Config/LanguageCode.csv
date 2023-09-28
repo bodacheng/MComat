@@ -59,10 +59,10 @@ PowerTip3,・Upgrade the skill gems equipped by the warrior,・戦士が装備�
 FightResume,Resume,再開,战斗继续
 FightQuit,Quit,停止,退出战斗
 ,,,
-story_part1,"At the beginning of 2050, strange vortex-like phenomena appeared in the sky all over the world, followed by countless colored stones falling from the sky.",2050年初め、渦巻きのような不気味な現象が世界各地の空に現れ、数え切れない数の色石が天から降りてきました。,2050年初，形如漩涡的诡异现象出现在世界各地上空，随即无数彩色石块从天而降。
-story_part2,"What's magical is that simply by coming into contact with these stones called 'skill gems', a person can ingest them into their body and gain an extremely powerful offensive ability.",不思議なことに、「スキルジェム」と呼ばれるこの石を人が触れるだけで、その石を体内に摂り込み、攻撃力を持つ能力を得ることができます。,神奇的是，只要人接触了这种被称为“技能宝石”的石块，就能将其摄入体内，获得一项极具攻击性的能力。
-story_part3,"At the same time, creatures resembling extraterrestrial beings continued to appear and launch attacks on humanity, prompting ordinary citizens to collect and equip skill gems to defend themselves.",同時に外見人間のような生物が続々と現れ、人間に攻撃を仕掛けます。一般の人々は自分自身を守るために、スキルジェムを集めて装備するようになりました。,同时疑似外形人的生物不断出现并对人类发动攻击，普通民众开始为了保护自己而收集并配备技能石。
-story_part4,"Some humans also saw the skill gems as an opportunity to conquer the world. With different motives, people flocked to the battlefield.",さらに、スキルジェムを世界征服のチャンスと見る人もいます。目的は異なっていても、人々は次々に戦場に進みました。,也有一些人类将技能宝石看作征服世界的机会。怀着不同的目的，人们纷纷迈入战场。
+story_part1,"Mysterious phenomena resembling whirlpools appeared in the skies all over the world, followed by countless colorful stones falling from the heavens.",渦巻きのような奇妙な現象が世界中の空に現れ、無数の色とりどりの石が空から降ってきました。,形如漩涡的诡异现象出现在世界各地上空，随即无数彩色石块从天而降。
+story_part2,"Upon touching these stones, known as ""Magic Crystals,"" one can absorb them into their body. Not only does this grant a fragment of memories from ancient people of an unknown era, but it also bestows a highly aggressive power.",人々が「魔晶」と呼ばれるこの石に触れると、体内に取り込むことができます。それにより、未知の時代の古代人の記憶の一部を得るだけでなく、非常に攻撃的な能力も得ることができます。,人接触了这种被称为“魔晶”的石块后就能将其摄入体内，由此不光能获得一段来自未知年代古人的记忆，还能获得一项极具攻击性的能力。
+story_part3,"These fragmented memories from the distant past piece together a message: on the day of the Magic Crystals' descent, a crystal known as the ""Emperor"" will be among them.",これらの古代の記憶の断片は、魔晶が降りてくる日に、「帝王」と呼ばれる魔晶も含まれているという情報を組み立てます。,这些来自远古的记忆断片拼凑出一个信息，就是魔晶降临之日，一颗被称为“帝王”的魔晶也会在其中，
+story_part4,Whoever obtains it will possess a supernatural ability to dictate the fate of the world.,「帝王」を手に入れた人は、世界の運命を支配する超能力を持つことになります。,获得它的人将拥有主宰世界命运的超能力。
 ,,,
 MailBindInstruction,"This account has not yet been bound to an email address. If you wish to log in on another device and bind this account, you must first bind an email address. Please note that each account can only be bound to one email address, so please choose your email address carefully.",このアカウントはまだメールアドレスがバインドされていません。他のデバイスでログインしてこのアカウントをバインドするには、メールアドレスをバインドする必要があります。各アカウントは1つのメールアドレスだけをバインドすることができますので、メールアドレスを選択する際は注意してください。,本账户尚未绑定邮箱。如果要在其他设备登陆并绑定本账户，必须绑定邮箱。每个账户只能绑定一个邮箱，请谨慎选择邮箱地址。
 DeviceBindInstruction,"The current account has already been bound to the device, so you can log in to this account directly when you open the app",現在のアカウントは既にデバイスにバインドされています。アプリを開くと、このアカウントで直接ログインできます。,当前账户已经和设备进行了绑定，你可以在程序打开后直接登陆本账户。
@@ -208,7 +208,11 @@ totalSkippedReward,Obtain Immediately,すぐに取得,立刻获得
 TipTitle1,Skill combo,連続技,技能连招
 TipTitle2,Skill energy,スキルエネルギー,必杀技能量
 TipTitle3,Skill release distance,スキル発動距離,技能释放距离
+TipTitle4,War mode camera operation,戦争モードのカメラ操作,战争模式相机操作
+TipTitle5,Defensive skill configuration.,防御系スキルの配置,防御类技能的配置
 ,,,
 GameTip1,"The first column of the nine skill slots is the starting skill, which can be followed by the second column skill. Similarly, the second column can be followed by the third column skill. The third column skill can be followed by the first column skill. However, the prerequisite for following up with any skill is that the required energy is sufficient.",9つのスキルスロットの第1列はスタートスキルであり、第2列のスキルを続けて発動することができます。同様に、第2列は第3列のスキルを続けて発動することができます。そして、第3列のスキルは第1列のスキルで続けて発動することができます。しかし、いずれのスキルを続けて発動するための前提は、必要なエネルギーが十分であることです。,九个技能槽的第一竖列是首发技能，可接续释放第二竖列技能，同理第二竖列可接续第三竖列技能。而第三竖列技能则可被第一竖列技能接续。但接续释放任何技能的前提是所需相应能量足够。
 GameTip2,"The ultimate move cannot be released if there isn't enough energy. If one of the columns in the nine skill slots is all ultimate moves, and there is not enough energy to activate any skill in that column when the combo reaches it, the combo will be interrupted.",必殺技は、必要なエネルギーが足りない場合には発動できません。9つのスキルスロットのうちの一つの列がすべて必殺技であり、コンボがその列に達したときにその列のどのスキルも発動するのに十分なエネルギーがない場合、コンボは中断されます。,必杀技在所需能量不够的情况下无法释放。九个技能槽中某一竖列如果都是必杀技，并且在连招运行到该列时能量不够用于发动该列的任何技能，会导致连招中断。
 GameTip3,"Each skill has its optimal release distance from the enemy. In automatic mode, the AI will autonomously choose which skill to release based on the distance from the enemy.",各スキルには敵との最適な発動距離があります。自動モードでは、AIは敵との距離に基づいてスキルを自動的に選択して発動します。,每个技能都有所对应的最佳距敌释放距离。自动模式下，AI会根据与敌人的距离自主选择技能释放。
+GameTip4,"In war mode, swiping the center of the screen with one finger rotates the camera, while using two fingers allows you to zoom out or zoom in the camera.",戦争モード下で、画面の中央を一本の指でスワイプするとカメラが回転し、二本の指で操作するとカメラをズームアウトまたはズームインできます。,战争模式下，单指划动屏幕中央可旋转相机，双指操作可拉远，拉近相机
+GameTip5,It is recommended to place defensive skills in the first vertical column of the skill slot.,防御系のスキルは、スキルスロットの第1縦列に配置することを推奨します。,防御类技能建议配置在技能槽第一竖列
