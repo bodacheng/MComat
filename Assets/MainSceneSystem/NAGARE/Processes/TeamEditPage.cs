@@ -143,7 +143,7 @@ public class TeamEditPage : MSceneProcess
                 bool qualified = Legal(_teamMode);
                 if (qualified)
                 {
-                    CloudScript.ArenaDefendTeamSave(TeamSet.ToDic(TeamSet.Arena3V3) , TeamSaveFinished);
+                    CloudScript.ArenaDefendTeamSave(TeamSet.Arena3V3.LoadTeamDic(), TeamSaveFinished);
                 }
                 else
                 {

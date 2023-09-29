@@ -46,12 +46,10 @@ public class HeroIcon : MonoBehaviour {
                 return;
             ChangeIcon(pic, unitConfig.element);
             LightOn();
-            warnFlag.SetActive(false);
             if ((withSkillCheck && unitInfoFormal.set.CheckEdit() != SkillSet.SkillEditError.Perfect) 
                 ||
                 (teamCountGet != null && teamCountGet() == 0))
             {
-                warnFlag.SetActive(true);
                 Grey();
             }
         }

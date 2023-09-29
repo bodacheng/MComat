@@ -92,7 +92,7 @@ public class StartUpPresentation : MonoBehaviour
                 #endif
                 
                 #if UNITY_IOS
-                Application.Quit();
+                Application.OpenURL("https://apps.apple.com/app/%E9%AD%94%E6%99%B6%E9%97%98%E5%A3%AB/id1640836926");
                 #endif
             }, text);
             return;

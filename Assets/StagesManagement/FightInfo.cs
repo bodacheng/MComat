@@ -201,7 +201,8 @@ public class FightInfo : ScriptableObject
                 set = TeamSet.Default;
                 break;
         }
-        FightMembers.HeroSets = TeamSet.ToDic(set);
+        
+        FightMembers.HeroSets = set.LoadTeamDic();
         Team1ID = PlayerAccountInfo.Me.PlayFabId;
     }
     
