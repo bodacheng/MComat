@@ -70,7 +70,8 @@ public class GangbangHeroIcon : HeroIcon
         icon.transform.SetParent(T);
         icon.transform.localPosition = Vector3.one;
         icon.transform.localScale = Vector3.one;
-        icon.WarnFlag.SetActive(showIllegalFlag && unitInfo.set.CheckEdit() != SkillSet.SkillEditError.Perfect);
+        if (icon.WarnFlag != null)
+            icon.WarnFlag.SetActive(showIllegalFlag && unitInfo.set.CheckEdit() != SkillSet.SkillEditError.Perfect);
         icon.iconButton.interactable = true;
         icon.iconButton.SetListener(
             ()=>

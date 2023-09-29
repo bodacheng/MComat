@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.13333334, g: 0.13333334, b: 0.13333334, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.13333334, g: 0.13333334, b: 0.13333334, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -825,7 +825,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "2050\u5E74\u521D\u3081\u3001\u6E26\u5DFB\u304D\u306E\u3088\u3046\u306A\u4E0D\u6C17\u5473\u306A\u73FE\u8C61\u304C\u4E16\u754C\u5404\u5730\u306E\u7A7A\u306B\u73FE\u308C\u3001\u6570\u3048\u5207\u308C\u306A\u3044\u6570\u306E\u8272\u77F3\u304C\u5929\u304B\u3089\u964D\u308A\u3066\u304D\u307E\u3057\u305F\u3002"
+  m_Text: 
 --- !u!1 &8621867618913198268
 GameObject:
   m_ObjectHideFlags: 0
