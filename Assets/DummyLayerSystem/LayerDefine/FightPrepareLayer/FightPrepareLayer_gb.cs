@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using mainMenu;
 
 public partial class FightPrepareLayer : UILayer
 {
@@ -47,24 +48,33 @@ public partial class FightPrepareLayer : UILayer
     
     public void GangbangStageMembersInfoShow(GangbangInfo stage, string oneWordTeam1, string oneWordTeam2)
     {
-        GangbangInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT, true, 1);
-        //teamEditIndicator.SetActive(stage.GetGroupWholeUnitCount(1) < CommonSetting.GangbangModeMaxUnitPerTeam);
+        GangbangInfosShow(stage.FightMembers.HeroSets.GetValues(), (x) =>
+        {
+            PreScene.target.Focusing.id = x;
+            PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
+        },myTeamShowT, true, 1);
+        
         if (stage.FightMembers.HeroSets.GetValues().Count < 1)
         {
             teamEditIndicatorText.text = Translate.Get("HasExtraSeat");
             teamEditIndicator.SetActive(true);
         }
-        else //if (dataAccess.Units.Dic.Count > 0 && stage.FightMembers.HeroSets.GetValues().Count == 0)
+        else
         {
             teamEditIndicatorText.text = string.Empty; // Translate.Get("MakeYourTeam");
             teamEditIndicator.SetActive(false);
         }
-        GangbangInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT, false, 2);
+        GangbangInfosShow(stage.FightMembers.EnemySets.GetValues(), 
+            (x) =>
+            {
+                
+            },
+            enemyTeamShowT, false, 2);
         team1OneWord.text = oneWordTeam1;
         team2OneWord.text = oneWordTeam2;
     }
     
-    void GangbangInfosShow(List<UnitInfo> unitSets, RectTransform showT, bool withSkillCheck, int team)
+    void GangbangInfosShow(List<UnitInfo> unitSets, Action<string> iconBehaviour, RectTransform showT, bool withSkillCheck, int team)
     {
         foreach (Transform t in showT)
         {
@@ -90,7 +100,8 @@ public partial class FightPrepareLayer : UILayer
             GangbangHeroIcon.ArrangeGangbangHeroIconToParent(
                 (x) => _setTeamUnitCount(team, unitInfo.id, x, false),
                 ()=> _getTeamUnitCount(team, unitInfo.id),
-                gangbangFighterIcon, unitInfo, showT, withSkillCheck, team == 1, unitIconSize);
+                gangbangFighterIcon, unitInfo, iconBehaviour,
+                showT, withSkillCheck, team == 1, true, unitIconSize);
 
             wholeTeamCount += _getTeamUnitCount(team, unitInfo.id);
         }

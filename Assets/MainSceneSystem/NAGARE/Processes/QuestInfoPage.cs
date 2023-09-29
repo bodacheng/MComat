@@ -6,7 +6,7 @@ using UnityEngine;
 public class QuestInfoPage : MSceneProcess
 {
     private FightPrepareLayer _layer;
-    private GangbangInfo _controllingGangbangInfo;
+    private GangbangInfo _controllingGangbangInfo = null;
     
     void EnterProcess(FightInfo stage)
     {
@@ -60,7 +60,7 @@ public class QuestInfoPage : MSceneProcess
                             PlayerPrefs.Save();
                         }
                         
-                        var canFight = CanFightCheck();
+                        var canFight = CanFightCheck(FightLoad.Fight, _controllingGangbangInfo);
                         //_layer.TeamEditIndicator.gameObject.SetActive(!canFight);
                         _layer.SetFightBeginEnableRender(canFight);
                         return whole;
@@ -98,8 +98,8 @@ public class QuestInfoPage : MSceneProcess
             _layer.SetFightMode(FightMode());
             _layer.SetFightBeginFeature(()=> GoToFight(FightLoad.Fight));
         }
-
-        var canFight = CanFightCheck();
+        
+        var canFight = CanFightCheck(FightLoad.Fight, _controllingGangbangInfo);
         //_layer.TeamEditIndicator.gameObject.SetActive(!canFight);
         _layer.SetFightBeginEnableRender(canFight);
         SetLoaded(true);
@@ -129,20 +129,16 @@ public class QuestInfoPage : MSceneProcess
     
     public override void ProcessEnd()
     {
+        _controllingGangbangInfo = null;
         UILayerLoader.Remove<FightPrepareLayer>();
     }
     
-    bool CanFightCheck()
+    bool CanFightCheck(FightInfo fight, GangbangInfo refGangbangInfo = null)
     {
-        if (!FightLoad.Fight.FightMembers.CheckStonesLegal(FightLoad.Fight.EventType))
-        {
-            return false;
-        }
-        
-        switch (FightLoad.Fight.EventType)
+        switch (fight.EventType)
         {
             case FightEventType.Arena:
-                if (FightLoad.Fight.FightMembers.HeroSets.GetValues().Count != 3)
+                if (fight.FightMembers.HeroSets.GetValues().Count != 3)
                 {
                     return false;
                 }
@@ -150,39 +146,59 @@ public class QuestInfoPage : MSceneProcess
             case FightEventType.Quest:
                 if (PlayerAccountInfo.Me.tutorialProgress == "SkillEditFinished2")
                 {
-                    if (FightLoad.Fight.FightMembers.HeroSets.GetValues().Count < 2)
+                    if (fight.FightMembers.HeroSets.GetValues().Count < 2)
                     {
                         return false;
                     }
                 }
                 else
                 {
-                    if (FightLoad.Fight.FightMembers.HeroSets.GetValues().Count == 0)
+                    if (fight.FightMembers.HeroSets.GetValues().Count == 0)
                     {
                         return false;
                     }
                 }
                 break;
             case FightEventType.Gangbang:
-                return _controllingGangbangInfo.GetGroupWholeUnitCount(1) > 0
-                    && _controllingGangbangInfo.GetGroupWholeUnitCount(2) > 0;
+                var unitCountFit = refGangbangInfo.GetGroupWholeUnitCount(1) > 0
+                                   && refGangbangInfo.GetGroupWholeUnitCount(2) > 0;
+                if (!unitCountFit)
+                    return false;
+                break;
             default:
-                if (FightLoad.Fight.FightMembers.HeroSets.GetValues().Count == 0)
+                if (fight.FightMembers.HeroSets.GetValues().Count == 0)
                 {
                     return false;
                 }
                 break;
         }
+
+        if (fight.EventType == FightEventType.Gangbang)
+        {
+            var instanceIds = refGangbangInfo.GetNonZeroInstanceIds(1);
+            if (!fight.FightMembers.CheckStonesLegal(fight.EventType, instanceIds))
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if (!fight.FightMembers.CheckStonesLegal(fight.EventType))
+            {
+                return false;
+            }
+        }
+        
         return true;
     }
     
     void GoToFight(FightInfo fightInfo)
     {
-        if (!fightInfo.FightMembers.CheckStonesLegal(fightInfo.EventType))
-        {
-            PopupLayer.ArrangeWarnWindow(Translate.Get("TeamUnitNotFull"));
-            return;
-        }
+        // if (!fightInfo.FightMembers.CheckStonesLegal(fightInfo.EventType))
+        // {
+        //     PopupLayer.ArrangeWarnWindow(Translate.Get("TeamUnitNotFull"));
+        //     return;
+        // }
         
         fightInfo.team1Mode = _layer.GetSetFightMode();
         fightInfo.team2Mode = _layer.GetSetFightMode();

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 
 public partial class StageButton : MonoBehaviour
@@ -40,21 +41,22 @@ public partial class StageButton : MonoBehaviour
         button.interactable = on;
     }
     
-    public void LoadUnitIcons(List<UnitInfo> units, Func<HeroIcon, UniTask> iconButtonFeature, bool clickBoss = false)
+    public void LoadUnitIcons(List<UnitInfo> units, Func<UnitInfo, UniTask> iconButtonFeature, bool clickBoss = false)
     {
-        var heroIcons = UnitInfosShow(units, iconsT);
+        var heroIcons = UnitInfosShow(units, 
+            async (x) =>
+            {
+                ProgressLayer.Loading(string.Empty);
+                var targetUnitInfo = units.FirstOrDefault(info => info.id == x);
+                await iconButtonFeature(targetUnitInfo);
+                ProgressLayer.Close();
+            },
+            iconsT
+        );
+        
         for (var i = 0; i < heroIcons.Count; i++)
         {
             var heroIcon = heroIcons[i];
-            heroIcon.iconButton.onClick.RemoveAllListeners();
-            heroIcon.iconButton.onClick.AddListener(
-                async () =>
-                {
-                    ProgressLayer.Loading(string.Empty);
-                    await iconButtonFeature(heroIcon);
-                    ProgressLayer.Close();
-                }
-            );
             if (clickBoss && i == 0)
             {
                 heroIcon.iconButton.onClick.Invoke();
@@ -62,7 +64,7 @@ public partial class StageButton : MonoBehaviour
         }
     } 
     
-    List<HeroIcon> UnitInfosShow(List<UnitInfo> heroSets, RectTransform showT)
+    List<HeroIcon> UnitInfosShow(List<UnitInfo> heroSets, Action<string> iconFeature, RectTransform showT)
     {
         foreach (Transform t in showT)
         {
@@ -73,7 +75,7 @@ public partial class StageButton : MonoBehaviour
         {
             void load(UnitInfo unitInfo)
             {
-                var v = HeroIcon.ArrangeHeroIconToParent(unitIconPrefab, unitInfo, showT);
+                var v = HeroIcon.ArrangeHeroIconToParent(unitIconPrefab, unitInfo, iconFeature, showT);
                 icons.Add(v);
             }
             load(unitInfo);

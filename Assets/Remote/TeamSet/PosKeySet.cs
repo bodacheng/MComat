@@ -123,9 +123,9 @@ public class PosKeySet
         return null;
     }
     
-    public string GetInstanceIdOnPos(int PosNum)
+    public string GetInstanceIdOnPos(int posNum)
     {
-        return GetPosMemInfo(PosNum) != null ? GetPosMemInfo(PosNum).instanceID ?? null : null;
+        return GetPosMemInfo(posNum) != null ? GetPosMemInfo(posNum).instanceID ?? null : null;
     }
     
     public void ChangePosition(int position1, int position2)

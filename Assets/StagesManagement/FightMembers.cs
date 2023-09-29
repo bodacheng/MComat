@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using System.IO;
@@ -14,26 +15,27 @@ public class FightMembers
     [NonSerialized] public MultiDic<int, int, UnitInfo> HeroSets = new MultiDic<int, int, UnitInfo>();
     public MultiDic<int, int, UnitInfo> EnemySets = new MultiDic<int, int, UnitInfo>();
     
-    bool TeamLegal(MultiDic<int, int, UnitInfo> team)
+    public static bool TeamLegal(MultiDic<int, int, UnitInfo> team, List<string> checkInstanceIds = null)
     {
         bool legal = team.GetValues().Count > 0;
         if (!legal)
-            return legal;
+            return false;
         foreach (var unit in team.GetValues())
         {
+            if (checkInstanceIds != null && !checkInstanceIds.Contains(unit.id))
+                continue;
             legal = unit.set.CheckEdit() == SkillSet.SkillEditError.Perfect && legal;
         }
         return legal;
     }
     
-    public bool CheckStonesLegal(FightEventType eventType)
+    public bool CheckStonesLegal(FightEventType eventType, List<string> checkInstanceIds = null)
     {
         switch (eventType)
         {
             case FightEventType.Quest:
-                return TeamLegal(HeroSets);
             case FightEventType.Gangbang:
-                return true; // 待修正
+                return TeamLegal(HeroSets, checkInstanceIds);//checkInstanceIds 是针对Gangbang的
             default:
                 return TeamLegal(HeroSets) && TeamLegal(EnemySets);
         }

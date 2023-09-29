@@ -1,4 +1,5 @@
 using System;
+using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,12 +59,11 @@ public class GangbangHeroIcon : HeroIcon
     
     public static GangbangHeroIcon ArrangeGangbangHeroIconToParent(
         Func<int, int> teamCountSet, Func<int> teamCountGet,
-        GangbangHeroIcon prefab, UnitInfo unitInfo,
-        RectTransform T, bool withSkillCheck = false, bool enableCountSet = true, float iconSize = 100)
+        GangbangHeroIcon prefab, UnitInfo unitInfo, Action<string> iconBehaviour,
+        RectTransform T, bool withSkillCheck = false, bool enableCountSet = true, bool showIllegalFlag = false, float iconSize = 100)
     {
         var icon = Instantiate(prefab);
         var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
-        icon.unitInfo = unitInfo;
         icon.unitConfig = unitConfig;
         icon.ChangeIcon(unitInfo, withSkillCheck, teamCountGet);
         icon.GetComponent<RectTransform>().sizeDelta = new Vector2(iconSize,iconSize);
@@ -71,6 +71,14 @@ public class GangbangHeroIcon : HeroIcon
         icon.transform.SetParent(T);
         icon.transform.localPosition = Vector3.one;
         icon.transform.localScale = Vector3.one;
+        icon.WarnFlag.SetActive(showIllegalFlag && unitInfo.set.CheckEdit() != SkillSet.SkillEditError.Perfect);
+        icon.iconButton.interactable = true;
+        icon.iconButton.SetListener(
+            ()=>
+            {
+                iconBehaviour(unitInfo.id);
+            }
+        );
         icon.gameObject.SetActive(true);
         return icon;
     }

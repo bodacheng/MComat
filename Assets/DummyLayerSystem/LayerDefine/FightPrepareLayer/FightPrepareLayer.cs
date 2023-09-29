@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using mainMenu;
 
 public partial class FightPrepareLayer : UILayer
 {
@@ -63,7 +64,13 @@ public partial class FightPrepareLayer : UILayer
     
     public void StageMembersInfoShow(FightInfo stage, string oneWordTeam1, string oneWordTeam2)
     {
-        MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), myTeamShowT, true);
+        MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), 
+            (x) =>
+            {
+                PreScene.target.Focusing.id = x;
+                PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
+            },
+            myTeamShowT, true);
         if (dataAccess.Units.Dic.Count > stage.FightMembers.HeroSets.GetValues().Count
             && stage.FightMembers.HeroSets.GetValues().Count < 3)
         {
@@ -76,21 +83,25 @@ public partial class FightPrepareLayer : UILayer
             teamEditIndicator.SetActive(false);
         }
 
-        MemberInfosShow(stage.FightMembers.EnemySets.GetValues(), enemyTeamShowT, false);
+        MemberInfosShow(stage.FightMembers.EnemySets.GetValues(),
+            (x) =>
+            {
+            },
+            enemyTeamShowT, false);
         team1OneWord.text = oneWordTeam1;
         team2OneWord.text = oneWordTeam2;
     }
     
-    List<HeroIcon> MemberInfosShow(List<UnitInfo> heroSets, RectTransform _showT, bool withSkillCheck)
+    List<HeroIcon> MemberInfosShow(List<UnitInfo> heroSets, Action<string> iconBehaviour, RectTransform _showT, bool withSkillCheck)
     {
-        foreach (Transform transform in _showT)
+        foreach (Transform t in _showT)
         {
-            Destroy(transform.gameObject);
+            Destroy(t.gameObject);
         }
         var icons = new List<HeroIcon>();
         foreach(var oneMember in heroSets)
         {
-            var v = HeroIcon.ArrangeHeroIconToParent(fighterIcon, oneMember, _showT, unitIconSize, withSkillCheck);
+            var v = HeroIcon.ArrangeHeroIconToParent(fighterIcon, oneMember, iconBehaviour, _showT, unitIconSize, withSkillCheck, true);
             icons.Add(v);
         }
         return icons;

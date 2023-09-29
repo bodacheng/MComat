@@ -12,6 +12,20 @@ public class GangbangInfo : FightInfo
         get => team1GroupSet;
         set => team1GroupSet = value;
     }
+
+    public List<string> GetNonZeroInstanceIds(int team)
+    {
+        var sets = team == 1 ? team1GroupSet : team2GroupSet;
+        List<string> returnValue = new List<string>();
+        foreach (var set in sets)
+        {
+            if (set.Count > 0)
+            {
+                returnValue.Add(set.id);
+            }
+        }
+        return returnValue;
+    }
     
     public List<SoldierGroupSet> Team2GroupSet
     {

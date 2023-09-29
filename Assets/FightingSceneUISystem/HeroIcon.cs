@@ -1,6 +1,5 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using dataAccess;
 using UnityEngine;
 using UnityEngine.UI;
 using Singleton;
@@ -8,13 +7,14 @@ using Singleton;
 public class HeroIcon : MonoBehaviour {
 
     public BOButton iconButton;
-    public Image icon;
-    public Image iconBg;
-    public Image frame;
-    public Image cooldownCurtain;
+    [SerializeField] Image icon;
+    [SerializeField] Image iconBg;
+    [SerializeField] Image frame;
+    [SerializeField] Image cooldownCurtain;
+    [SerializeField] GameObject warnFlag;
     
-    public UnitInfo unitInfo;
     public UnitConfig unitConfig;
+    public GameObject WarnFlag => warnFlag;
     
     protected void Grey()
     {
@@ -37,7 +37,7 @@ public class HeroIcon : MonoBehaviour {
 
     public async void ChangeIcon(UnitInfo unitInfo, bool withSkillCheck = false, Func<int> teamCountGet = null)
     {
-        this.unitInfo = unitInfo;
+        var unitInfoFormal = UnitInfo.GetUnitInfo(unitInfo);
         if (unitInfo != null)
         {
             this.unitConfig = Units.GetUnitConfig(unitInfo.r_id);
@@ -46,10 +46,12 @@ public class HeroIcon : MonoBehaviour {
                 return;
             ChangeIcon(pic, unitConfig.element);
             LightOn();
-            if ((withSkillCheck && Stones.GetEquippingStones(unitInfo.id).Count != 9) 
+            warnFlag.SetActive(false);
+            if ((withSkillCheck && unitInfoFormal.set.CheckEdit() != SkillSet.SkillEditError.Perfect) 
                 ||
                 (teamCountGet != null && teamCountGet() == 0))
             {
+                warnFlag.SetActive(true);
                 Grey();
             }
         }
@@ -151,18 +153,25 @@ public class HeroIcon : MonoBehaviour {
         selectedFrame.gameObject.SetActive(true);
     }
     
-    public static HeroIcon ArrangeHeroIconToParent(HeroIcon prefab, UnitInfo unitInfo, RectTransform T, 
-        float iconSize = 100, bool withSkillCheck = false)
+    public static HeroIcon ArrangeHeroIconToParent(HeroIcon prefab, UnitInfo unitInfo, Action<string> iconBehaviour, 
+        RectTransform T, float iconSize = 100, bool withSkillCheck = false, bool showIllegalFlag = false)
     {
         var icon = Instantiate(prefab);
         var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
-        icon.unitInfo = unitInfo;
         icon.unitConfig = unitConfig;
         icon.ChangeIcon(unitInfo, withSkillCheck);
         icon.GetComponent<RectTransform>().sizeDelta = new Vector2(iconSize,iconSize);
         icon.transform.SetParent(T);
         icon.transform.localPosition = Vector3.one;
         icon.transform.localScale = Vector3.one;
+        icon.warnFlag.SetActive(showIllegalFlag && unitInfo.set.CheckEdit() != SkillSet.SkillEditError.Perfect);
+        icon.iconButton.interactable = true;
+        icon.iconButton.SetListener(
+            () =>
+            {
+                iconBehaviour(unitInfo.id);
+            }
+        );
         icon.gameObject.SetActive(true);
         return icon;
     }

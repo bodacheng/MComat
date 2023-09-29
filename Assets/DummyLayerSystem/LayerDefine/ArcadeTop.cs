@@ -57,14 +57,16 @@ public class ArcadeTop : UILayer
         SetupCommon();
     }
     
-    async UniTask IconButtonFeature(HeroIcon heroIcon)
+    async UniTask IconButtonFeature(UnitInfo unitInfo)
     {
+        UnitConfig unitConfig = Units.GetUnitConfig(unitInfo.r_id);
+        
         ProgressLayer.Loading(string.Empty);
-        BackGroundPS.target.ChangeBGByElement(heroIcon.unitConfig.element);
+        BackGroundPS.target.ChangeBGByElement(unitConfig.element);
         
         await UniTask.WhenAll(
-            connector.ShowModel(heroIcon.unitConfig.RECORD_ID), 
-            nineForShow.SkillSetInfoOfUnitOnArcadePage(heroIcon.unitInfo.set)
+            connector.ShowModel(unitConfig.RECORD_ID), 
+            nineForShow.SkillSetInfoOfUnitOnArcadePage(unitInfo.set)
         );
         
         nineForShow.AddOnClickToSlots(

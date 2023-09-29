@@ -94,6 +94,9 @@ public class TeamEditPage : MSceneProcess
         }
         
         var teamDic = targetTeamSet.LoadTeamDic();
+        qualified = FightMembers.TeamLegal(teamDic);
+        if (!qualified)
+            return false;
         foreach (var kv in teamDic.mDict)
         {
             if (kv.Value.id != null && dataAccess.Units.Get(kv.Value.id) != null)

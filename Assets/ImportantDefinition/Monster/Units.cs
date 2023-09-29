@@ -30,7 +30,7 @@ public static class Units
     {
         if (RECORD_ID == null)
             return null;
-        return Dic.ContainsKey(RECORD_ID) ? Dic[RECORD_ID] : null;
+        return Dic.TryGetValue(RECORD_ID, out var value) ? value : null;
     }
     static async UniTask LoadFile()
     {
