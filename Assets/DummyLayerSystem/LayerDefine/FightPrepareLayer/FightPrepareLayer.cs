@@ -2,7 +2,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
+using Cysharp.Threading.Tasks;
 using mainMenu;
+using ModelView;
 
 public partial class FightPrepareLayer : UILayer
 {
@@ -20,6 +23,10 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] Text arcadeStageNoText;
     [SerializeField] RewardUI rewardUI;
     [SerializeField] BOButton toArcadeFrontBtn;
+    [SerializeField] Image view2D;
+    [SerializeField] Animator unitOutAnimator;
+    [SerializeField] NineForShow nineForShow;
+    [SerializeField] DedicatedCameraConnector connector;
     
     public void SetFightMode(int fightMode)
     {
@@ -60,6 +67,13 @@ public partial class FightPrepareLayer : UILayer
         int.TryParse(arcadeStageNo, out var arcadeStageNoInt);
         rewardUI.AwardRender(PlayerAccountInfo.Me.arcadeProcess + 1 > arcadeStageNoInt);
         rewardUI.gameObject.SetActive(true);
+        nineForShow.AddOnClickToSlots(
+            (RECORD_ID) =>
+            {
+                var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(RECORD_ID);
+                connector.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
+            }
+        );
     }
     
     public void StageMembersInfoShow(FightInfo stage, string oneWordTeam1, string oneWordTeam2)
@@ -83,13 +97,31 @@ public partial class FightPrepareLayer : UILayer
             teamEditIndicator.SetActive(false);
         }
 
-        MemberInfosShow(stage.FightMembers.EnemySets.GetValues(),
+        var icons = MemberInfosShow(stage.FightMembers.EnemySets.GetValues(),
             (x) =>
             {
+                FocusTeam2Unit(x, stage.FightMembers.EnemySets.GetValues());
             },
             enemyTeamShowT, false);
+        icons.FirstOrDefault()?.iconButton.onClick.Invoke();
         team1OneWord.text = oneWordTeam1;
         team2OneWord.text = oneWordTeam2;
+    }
+
+    async void FocusTeam2Unit(string instanceId, List<UnitInfo> team2Units)
+    {
+        ProgressLayer.Loading(String.Empty);
+        var info = team2Units.FirstOrDefault((x) => x.id == instanceId);
+        if (info != null)
+        {
+            await UniTask.WhenAll(
+                nineForShow.SkillSetInfoOfUnitOnArcadePage(info.set),
+                Set2DView(info.r_id, view2D, unitOutAnimator,
+                    0, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(info.r_id)),
+                connector.ShowModel(info.r_id)
+            );
+        }
+        ProgressLayer.Close();
     }
     
     List<HeroIcon> MemberInfosShow(List<UnitInfo> heroSets, Action<string> iconBehaviour, RectTransform _showT, bool withSkillCheck)
