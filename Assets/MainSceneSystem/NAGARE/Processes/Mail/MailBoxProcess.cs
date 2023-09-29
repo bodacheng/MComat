@@ -16,7 +16,7 @@ public class MailBoxProcess : MSceneProcess
         _mailBox = UILayerLoader.Load<MailBox>();
         _mailBox.Setup();
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
-        upperInfoBar.Setup(null, null,null, null);
+        upperInfoBar.Setup(null, null,null, null, PlayerAccountInfo.Me.noAdsState);
         SetLoaded(true);
     }
     

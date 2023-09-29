@@ -17,7 +17,7 @@ public class MailDetailProcess : MSceneProcess
     {
         this._mailId = id.ToString();
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
-        upperInfoBar.Setup(null, null,null, null);
+        upperInfoBar.Setup(null, null,null, null, PlayerAccountInfo.Me.noAdsState);
         _mailDetailViewLayer = UILayerLoader.Load<MailDetailView>();
         _mailDetailViewLayer.Setup(MailBox.LoadPic);
         var mail = PlayFabReadClient.Get(id.ToString());

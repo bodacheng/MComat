@@ -19,7 +19,8 @@ public class ShopTop : MSceneProcess
         upperInfoBar.Setup(null,
             null, 
             null,
-            null);
+            null,
+            PlayerAccountInfo.Me.noAdsState);
 
         var stoneCatalog = IAPManager.StoneProductCatalog;
         var stoneProductIds = stoneCatalog.Select(x=> x.ItemId).ToList();

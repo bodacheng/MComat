@@ -13,6 +13,7 @@ public class UpperInfoBar : UILayer
     [SerializeField] Text accountDiamondCoin;
     [SerializeField] BOButton diamondPlus;
     [SerializeField] Text accountIntelliCoin;
+    [SerializeField] GameObject vipFlg;
     [SerializeField] float currencyTextChangeDuration = 2f;
     
     public void Interactable(bool on)
@@ -22,7 +23,7 @@ public class UpperInfoBar : UILayer
         diamondPlus.interactable = on;
     }
     
-    public void Setup(string titleDisplayName, Action openSetting, Action openMail, Action openDmShop)
+    public void Setup(string titleDisplayName, Action openSetting, Action openMail, Action openDmShop, bool isVip)
     {
         this.titleDisplayName.text = titleDisplayName;
         accountDiamondCoin.text = Currencies.DiamondCount.Value.ToString();
@@ -87,5 +88,7 @@ public class UpperInfoBar : UILayer
         {
             diamondPlus.gameObject.SetActive(false);
         }
+        
+        vipFlg.SetActive(isVip);
     }
 }

@@ -101,7 +101,8 @@ public class FrontPage : MSceneProcess
         upperInfoBar.Setup(PlayerAccountInfo.Me.TitleDisplayName,
             () => PreScene.target.trySwitchToStep(MainSceneStep.Setting), 
             () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox),
-            () => PreScene.target.trySwitchToStep(MainSceneStep.ShopTop));
+            () => PreScene.target.trySwitchToStep(MainSceneStep.ShopTop),
+            PlayerAccountInfo.Me.noAdsState);
         
         // If account isn't linked to device, ask if link. Only ask once
         if (PlayerAccountInfo.Me.currentLinkedDeviceId != PlayFabReadClient.CustomId && !_askedIfLinkDevice)

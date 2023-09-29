@@ -88,7 +88,7 @@ public class GotchaFront : MSceneProcess
             };
         }
         
-        upperInfoBar.Setup(null, null,null, openDmShop);
+        upperInfoBar.Setup(null, null,null, openDmShop, PlayerAccountInfo.Me.noAdsState);
         
         SetLoaded(true);
     }
