@@ -541,7 +541,7 @@ handlers.claimQuestReward = function (args, context) {
     // Save the updated level ad status data.
     var newPlayData = server.UpdateUserReadOnlyData({
         PlayFabId: currentPlayerId,
-        Data: { adStatusKey: JSON.stringify(levelAdStatus) }
+        Data: {[adStatusKey]:JSON.stringify(levelAdStatus)}
     });
     
     if (g > 0) {
