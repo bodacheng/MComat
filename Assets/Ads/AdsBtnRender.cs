@@ -37,7 +37,7 @@ public class AdsBtnRender : MonoBehaviour
             x=>
             {
                 _disposeCountDown?.Dispose();
-                remainCount.text = "Remain x"+ x;
+                remainCount.text =  Translate.Get("AdWatchRemains") + x;
                 if (x >= Currencies.AdTicketRechargeMax)
                 {
                     ticketChargeCountDown.text = string.Empty;

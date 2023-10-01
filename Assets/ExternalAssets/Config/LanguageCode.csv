@@ -97,11 +97,15 @@ maggie_intro,"An HR staff member at an IT company who enjoys doing nails. After 
 sybill_intro,A self-proclaimed fortune teller who spreads the word that skill gems are a trap set by the gods to destroy humanity. Her main source of income comes from providing consultations on love fortunes.,自称占い師で、スキルジェムは神々が人類を滅ぼすために仕掛けた罠だと広めています。収入の主な源泉は恋愛運に関する相談を提供することです,自称占卜师。四处宣扬技能宝石是神试图毁灭人类的陷阱。主要收入来源是提供恋爱运势方面的咨询。
 et_intro,"Strange creatures resembling aliens have appeared all over the world, and they are attacking humans. It is rumored that most of them are clones, with only one true body.",世界各地でエイリアンに似た奇妙な生物が出現し、人間を攻撃しています。これらの生物の多くは分身であり、本体は一体しかないという噂が広がっています。,世界各地出现的疑似外星人的怪物。会对人类展开攻击。流传的说法是他们大多是分身，本体只有一个。
 ,,,
+at_title,Attack,攻撃力,攻击力
+hp_title,Health,体力,体力
+level_title,Level,レベル,等级
+,,,
 range_close,close,近,近
 range_near,near,中,中
 range_far,far,遠,远
 ,,,
-RandomShowCombo,Random Combo Move,連続技の展示,展示连招
+RandomShowCombo,Combo Move Show,連続技展示,展示连招
 ,,,
 SkillEditInstruction1,"The skill set has a ""balance value"", which must be above 0 to be compliant, otherwise the warrior cannot participate in the battle. Equipping a normal skill will add 1 point of balance value. Equipping a 1-cost, 2-cost, or 3-cost ultimate skill will reduce the balance value by 1, 2, or 3 points, respectively.",スキルセットは「バランス値」を有しており、バランス値が0以上でなければ戦士は戦闘に参加できません。通常スキルを1つ装備すると1ポイントのバランス値が加算されます。一費必殺、二費必殺、三費必殺を装備すると、それぞれバランス値が1ポイント、2ポイント、3ポイント減少します。,技能组拥有“平衡值”，平衡值要在0以上才合规，否则战士无法参战。装备一个普通技能会增加1点平衡值，装备一费必杀，二费必杀，三费必杀将分别减少1点，2点，3点平衡值。
 SkillEditInstruction2,"A blue flashing bar represents +1 balance value, while a red flashing bar represents -1 balance value. Displaying one or more red flashing bars indicates that the current balance value is negative and the warrior cannot participate in the battle.",青い点滅するバーが表示された場合、バランス値は1増加したことを示します。赤い点滅するバーが表示された場合、バランス値は1減少したことを示します。赤い点滅するバーが1つ以上表示されている場合、現在のバランス値が負であるため、その戦士は戦闘に参加できません。,一个蓝色闪光条代表+1平衡值，一个红色闪光条代表-1平衡值。显示一个或多个红色闪光条都代表当前平衡值为负数，该战士无法出战。
@@ -120,7 +124,10 @@ TryAutoFillSlots,The autocomplete feature can instantly fill the empty skill slo
 PlsFillAll,"To participate in battle, you need to equip skill gems in all skill slots",戦闘に参加するには、全てのスキルスロットにスキルジェムを装備する必要があります,只有全部技能槽都装备技能石才能战斗
 OtherUnitUsing,Currently in use by another warrior,他の戦士が使用中です,其他战士使用中
 AColumnNeedNormal,The first column of skill slots must include at least one normal skill.,スキルスロットの最初の列には、少なくとも1つの通常スキルが含まれている必要があります,技能槽第一竖列须包括至少一个普通技能
-UnBalanced,The energy of the skill set is excessive (too many EX skills),スキルセットにエネルギーが過剰です（必殺技が多すぎます）,技能组能量过剩（必杀技过多）
+UnBalanced,"Energy overload
+(too many EX skills)","エネルギーが過剰です
+（必殺技が多すぎます）","技能组能量过剩
+（必杀技过多）"
 NoEnoughStoneToFill,No enough skill gems,スキルセットを構成するための十分なスキルジェムがありません。,没有足够技能石可以完成技能组配置
 TryFilterRange,Use distance filter to display skills with specified attack ranges.,距離制限のタブをクリックすると、指定された攻撃範囲のスキルのみが表示されます,点选距离限制选项卡可只显示指定攻击范围的技能
 BornSkillCantRemove,The warrior's innate skills cannot be uninstalled,戦士の固有スキルはアンインストールできません,战士的原生技能不可被卸载
@@ -168,15 +175,19 @@ Player,Player,味方,我方
 Enemy,Enemy,敵,敌方
 Edit,Edit,編成,编成
 MakeYourTeam,Choose characters,キャラクターを選ぶ,选择出战角色
-HasExtraSeat,Warriors available for battle,戦いに参加できる戦士がいます,有可以参战的战士
+HasExtraSeat,Warrior available for battle,参戦できる戦士がいます,有可以参战的角色
 HasExtraSeatButFight,You have fighters available for battle that haven't been added to the team. Do you still want to start the fight?,参戦できる戦士が編成されていません。それでも戦いを開始しますか？,你有可以参战的战士未编辑入队，仍然开始战斗吗
-HasExtraSeatForGangbangButFight,The number of fighters participating in the battle has not reached the maximum limit. Do you still want to start the fight?,参戦する戦士の数が設定上限に達していません。それでも戦いを開始しますか？,参战战士数未达到可设置上线，仍然开始战斗吗
+HasExtraSeatForGangbangButFight,"The number of fighters participating in the battle has not reached the maximum limit. 
+Do you still want to start the fight?","戦士の数が設定上限に達していません。
+それでも戦いを開始しますか？","参战战士数未达到可设置上限，
+仍然开始战斗吗"
 TeamEditTutorial1,Click on the fighter's icon and place them in the team slot.,ファイターのアイコンをクリックして、任意のチームスロットに配置してください,尝试点击角色头像，再点击队伍槽使其编入队伍
 TeamEditTutorial2,Add a new warrior to the team to have a total of two members,新しい戦士をチームに編成して、チームに2名のメンバーを含めてください,尝试将新战士编入队伍，使队伍包含两名队员
 SaveYourTeam,Click on "Confirm" to save the team,「確認」をクリックして、チームを保存してください,点击确定保存队伍
 ClickToEdit,Click to edit the warrior's skills,戦士のスキルを編集するにはクリックしてください,点击来编辑战士的技能
 TeamUnitNotFull,Members' skills are incomplete,チームメンバーのスキルが不完全です,队员技能不完整
 WholeUnitCount,count,人数,人数
+Stages,Stages,ステージリスト,关卡列表
 ,,,
 TeamModeM,Co-op,Co-op,战争
 TeamModeR,1V1,1V1,对决
@@ -188,6 +199,7 @@ sevenDaysLoginBonusDMIntro,Thank you for logging in for seven consecutive days! 
 ThankYouGiftBonusDM50,Thank you !,ありがとうございます！,感谢!
 NewWarrior,A new warrior has joined your team!,新しい戦士があなたのチームに参加しました！,一名新的战士参与到你的队伍！
 ,,,
+AdWatchRemains,Remains x,残り視聴回数 x,剩余观看次数 x
 GotAdWatchedReward,Reward retrieval successful,報酬の取得成功,获取广告报酬成功
 PurchaseProcessing,"Processing the purchase, please do not close the program.",購入処理中です。プログラムを閉じないでください。,正在处理购买，请勿关闭程序
 PurchaseSuccess,Purchase successful,購入成功,购买成功

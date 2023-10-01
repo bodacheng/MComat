@@ -22,6 +22,8 @@ public partial class FightPrepareLayer : UILayer
         Action toGangbangFront, string gangbangStageNo, 
         Func<int, string ,int, bool, int> setTeamUnitCount, Func<int, string, int> getTeamUnitCount)
     {
+        fightModeSwitch.gameObject.SetActive(false);
+        
         arcadeStageNoText.gameObject.SetActive(true);
         arcadeStageNoText.text = "Stage " + gangbangStageNo;
         toArcadeFrontBtn.gameObject.SetActive(PlayerAccountInfo.Me.tutorialProgress == "Finished");
@@ -64,7 +66,7 @@ public partial class FightPrepareLayer : UILayer
         {
             PreScene.target.Focusing.id = x;
             PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
-        },myTeamShowT, true, 1);
+        }, myTeamShowT, true, 1, PlayerAccountInfo.Me.tutorialProgress == "Finished");
         
         if (stage.FightMembers.HeroSets.GetValues().Count < 1)
         {
@@ -87,7 +89,8 @@ public partial class FightPrepareLayer : UILayer
         team2OneWord.text = oneWordTeam2;
     }
     
-    List<GangbangHeroIcon> GangbangInfosShow(List<UnitInfo> unitSets, Action<string> iconBehaviour, RectTransform showT, bool withSkillCheck, int team)
+    List<GangbangHeroIcon> GangbangInfosShow(List<UnitInfo> unitSets, Action<string> iconBehaviour, RectTransform showT, 
+        bool withSkillCheck, int team, bool btnInteractive = true)
     {
         foreach (Transform t in showT)
         {
@@ -115,6 +118,7 @@ public partial class FightPrepareLayer : UILayer
                 ()=> _getTeamUnitCount(team, unitInfo.id),
                 gangbangFighterIcon, unitInfo, iconBehaviour,
                 showT, withSkillCheck, team == 1, true, unitIconSize);
+            v.iconButton.interactable = btnInteractive;
             icons.Add(v);
             wholeTeamCount += _getTeamUnitCount(team, unitInfo.id);
         }

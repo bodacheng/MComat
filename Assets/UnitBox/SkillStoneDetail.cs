@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using dataAccess;
 using Skill;
@@ -23,6 +24,9 @@ namespace mainMenu
         
         [Header("Range")]
         [SerializeField] GameObject close, near, far;
+
+        [Header("property titles")] [SerializeField]
+        private Text ATTitle, HPTitle, LevelTitle;
         
         [Header("AT")]
         [SerializeField] Text AT;
@@ -75,6 +79,11 @@ namespace mainMenu
             showName.text = string.Empty;
             skillIntro.text = string.Empty;
             line3T.gameObject.SetActive(false);
+            
+            ATTitle.text = string.Empty;
+            HPTitle.text = string.Empty;
+            LevelTitle.text = string.Empty;
+            
             stoneTargetLevel.text = string.Empty;
             AT.text = string.Empty;
             HP.text = string.Empty;
@@ -104,18 +113,24 @@ namespace mainMenu
             var row = PowerEstimateTable.Find_RECORD_ID(skillConfig.RECORD_ID);
             float.TryParse(row.HP, out float hp);
             float.TryParse(row.EstimateDamage, out float at);
+            
+            ATTitle.text = Translate.Get("at_title");
+            HPTitle.text = Translate.Get("hp_title");
+            LevelTitle.text = Translate.Get("level_title");
+            
             var passiveSkill = UnitPassiveTable.GetPassiveSKillRecordIds();
             if (passiveSkill.Contains(currentStone.SkillId))
             {
-                stoneTargetLevel.text = Translate.Get("BornSkill");
-                AT.text = "AT = " + FightGlobalSetting.ATCal(at, currentStone.Level) + "?";
-                HP.text = "HP = " + FightGlobalSetting.StoneHpCal(hp, currentStone.Level) + "?";
+                LevelTitle.text = Translate.Get("BornSkill");
+                stoneTargetLevel.text = String.Empty;
+                AT.text = FightGlobalSetting.ATCal(at, currentStone.Level) + "?";
+                HP.text = FightGlobalSetting.StoneHpCal(hp, currentStone.Level) + "?";
             }
             else
             {
-                stoneTargetLevel.text = "LV:" + (currentStone.Level == PlayFabSetting._VersionMaxStoneLevel ? "MAX" : currentStone.Level.ToString());
-                AT.text = "AT = " + FightGlobalSetting.ATCal(at, currentStone.Level);
-                HP.text = "HP = " + FightGlobalSetting.StoneHpCal(hp, currentStone.Level);
+                stoneTargetLevel.text = (currentStone.Level == PlayFabSetting._VersionMaxStoneLevel ? "MAX" : currentStone.Level.ToString());
+                AT.text = FightGlobalSetting.ATCal(at, currentStone.Level).ToString();
+                HP.text = FightGlobalSetting.StoneHpCal(hp, currentStone.Level).ToString();
             }
         }
         

@@ -84,7 +84,7 @@ public partial class FightPrepareLayer : UILayer
                 PreScene.target.Focusing.id = x;
                 PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
             },
-            myTeamShowT, true);
+            myTeamShowT, true, PlayerAccountInfo.Me.tutorialProgress == "Finished");
         if (dataAccess.Units.Dic.Count > stage.FightMembers.HeroSets.GetValues().Count
             && stage.FightMembers.HeroSets.GetValues().Count < 3)
         {
@@ -124,7 +124,7 @@ public partial class FightPrepareLayer : UILayer
         ProgressLayer.Close();
     }
     
-    List<HeroIcon> MemberInfosShow(List<UnitInfo> heroSets, Action<string> iconBehaviour, RectTransform _showT, bool withSkillCheck)
+    List<HeroIcon> MemberInfosShow(List<UnitInfo> heroSets, Action<string> iconBehaviour, RectTransform _showT, bool withSkillCheck, bool btnInteractive = true)
     {
         foreach (Transform t in _showT)
         {
@@ -134,6 +134,7 @@ public partial class FightPrepareLayer : UILayer
         foreach(var oneMember in heroSets)
         {
             var v = HeroIcon.ArrangeHeroIconToParent(fighterIcon, oneMember, iconBehaviour, _showT, unitIconSize, withSkillCheck, true);
+            v.iconButton.interactable = btnInteractive;
             icons.Add(v);
         }
         return icons;

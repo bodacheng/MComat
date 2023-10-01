@@ -860,6 +860,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -977,7 +978,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3671121612523978919
 CanvasRenderer:
@@ -1011,7 +1012,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 96e17474f840a01459f0cc936c5d4d9b, type: 3}
     m_FontSize: 22
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
@@ -1020,7 +1021,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RandomShowCombo
+  m_Text: "\u9023\u7D9A\u6280\u5C55\u793A"
 --- !u!114 &6658848570459180332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1701,6 +1702,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -2817,7 +2819,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u30B9\u30AD\u30EB\u30BB\u30C3\u30C8\u306B\u30A8\u30CD\u30EB\u30AE\u30FC\u304C\u904E\u5270\u3067\u3059\uFF08\u5FC5\u6BBA\u6280\u304C\u591A\u3059\u304E\u307E\u3059\uFF09"
+  m_Text: 
 --- !u!114 &3937858991391583815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2831,7 +2833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0.54901963, g: 0.54901963, b: 0.54901963, a: 1}
-  m_EffectDistance: {x: 3, y: -3}
+  m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
 --- !u!1 &2523835563065999404
 GameObject:
@@ -3110,6 +3112,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 2
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -3244,6 +3247,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -3378,6 +3382,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 2
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -3512,6 +3517,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 2
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -3714,6 +3720,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -4152,6 +4159,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -4324,6 +4332,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -4579,6 +4588,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 2
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -5332,6 +5342,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -5817,6 +5828,7 @@ GameObject:
   - component: {fileID: 2677751319256295860}
   - component: {fileID: 2677751319256295862}
   - component: {fileID: 2677751319256295861}
+  - component: {fileID: 8595835381633140359}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -5886,6 +5898,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: CLOSE
+--- !u!114 &8595835381633140359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677751319256295859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: range_close
+  target: {fileID: 2677751319256295861}
 --- !u!1 &2677751319349505027
 GameObject:
   m_ObjectHideFlags: 0
@@ -5897,6 +5923,7 @@ GameObject:
   - component: {fileID: 2677751319349505028}
   - component: {fileID: 2677751319349505030}
   - component: {fileID: 2677751319349505029}
+  - component: {fileID: 4433297207285562755}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -5966,6 +5993,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: FAR
+--- !u!114 &4433297207285562755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677751319349505027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: range_far
+  target: {fileID: 2677751319349505029}
 --- !u!1 &2677751319363009366
 GameObject:
   m_ObjectHideFlags: 0
@@ -6055,6 +6096,7 @@ GameObject:
   - component: {fileID: 2677751319407198431}
   - component: {fileID: 2677751319407198401}
   - component: {fileID: 2677751319407198400}
+  - component: {fileID: 8561525620630765432}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -6124,6 +6166,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: CLOSE
+--- !u!114 &8561525620630765432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677751319407198430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: range_close
+  target: {fileID: 2677751319407198400}
 --- !u!1 &2677751319452292013
 GameObject:
   m_ObjectHideFlags: 0
@@ -6135,6 +6191,7 @@ GameObject:
   - component: {fileID: 2677751319452292014}
   - component: {fileID: 2677751319452291664}
   - component: {fileID: 2677751319452292015}
+  - component: {fileID: 5796896527928824291}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -6204,6 +6261,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: NEAR
+--- !u!114 &5796896527928824291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677751319452292013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: range_near
+  target: {fileID: 2677751319452292015}
 --- !u!1 &2677751319560839987
 GameObject:
   m_ObjectHideFlags: 0
@@ -6215,6 +6286,7 @@ GameObject:
   - component: {fileID: 2677751319560839988}
   - component: {fileID: 2677751319560839990}
   - component: {fileID: 2677751319560839989}
+  - component: {fileID: 8204645296894656762}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -6284,6 +6356,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: NEAR
+--- !u!114 &8204645296894656762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677751319560839987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: range_near
+  target: {fileID: 2677751319560839989}
 --- !u!1 &2677751319725486341
 GameObject:
   m_ObjectHideFlags: 0
@@ -7003,6 +7089,7 @@ GameObject:
   - component: {fileID: 2677751320226644184}
   - component: {fileID: 2677751320226644186}
   - component: {fileID: 2677751320226644185}
+  - component: {fileID: 9091728223344310788}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -7072,6 +7159,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: FAR
+--- !u!114 &9091728223344310788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677751320226644183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: range_far
+  target: {fileID: 2677751320226644185}
 --- !u!1 &2677751320409064071
 GameObject:
   m_ObjectHideFlags: 0
@@ -7297,6 +7398,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -7979,6 +8081,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -8177,6 +8280,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -8839,6 +8943,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -9677,6 +9782,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -10623,6 +10729,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -11454,6 +11561,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -12217,6 +12325,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -12368,6 +12477,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -13753,6 +13863,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1228876882596573354, guid: d223a7ec974a54392bba246b17de68c9,
+        type: 3}
+      propertyPath: m_ChildForceExpandWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228876882596573354, guid: d223a7ec974a54392bba246b17de68c9,
+        type: 3}
+      propertyPath: m_ChildForceExpandHeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1228876882596573355, guid: d223a7ec974a54392bba246b17de68c9,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -14028,6 +14148,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3338896144330386145, guid: d223a7ec974a54392bba246b17de68c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3338896144330386150, guid: d223a7ec974a54392bba246b17de68c9,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -14137,6 +14262,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7506824027561170016, guid: d223a7ec974a54392bba246b17de68c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7506824027561170023, guid: d223a7ec974a54392bba246b17de68c9,
         type: 3}
