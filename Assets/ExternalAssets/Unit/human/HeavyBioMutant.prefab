@@ -6140,7 +6140,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.3, z: 0.3}
+  m_Size: {x: 0.5, y: 0.35, z: 0.35}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3587637928762318472
 MonoBehaviour:
@@ -6202,7 +6202,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.3, z: 0.3}
+  m_Size: {x: 0.5, y: 0.35, z: 0.35}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6062213238184994304
 MonoBehaviour:
@@ -7127,8 +7127,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400051136990694577}
-  - component: {fileID: 5791977242431173843}
   - component: {fileID: 3590349387789721662}
+  - component: {fileID: 8417561938101561239}
   m_Layer: 0
   m_Name: spine_02
   m_TagString: Untagged
@@ -7152,19 +7152,6 @@ Transform:
   m_Father: {fileID: 400051136990694575}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5791977242431173843
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 400051136990925137}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.3, z: 0.6}
-  m_Center: {x: 0.1, y: 0, z: 0}
 --- !u!114 &3590349387789721662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7179,6 +7166,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Center: {fileID: 3777892945144332487}
   myColliderMustEquip: {fileID: 0}
+--- !u!136 &8417561938101561239
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400051136990925137}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.35
+  m_Height: 1
+  m_Direction: 0
+  m_Center: {x: 0.2, y: 0, z: 0}
 --- !u!1 &400051136990925139
 GameObject:
   m_ObjectHideFlags: 0

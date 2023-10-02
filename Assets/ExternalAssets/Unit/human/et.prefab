@@ -5580,7 +5580,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.3, z: 0.3}
+  m_Size: {x: 0.6, y: 0.35, z: 0.35}
   m_Center: {x: -0.1, y: 0, z: 0}
 --- !u!114 &6858777148729336541
 MonoBehaviour:
@@ -10823,7 +10823,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.3, z: 0.3}
+  m_Size: {x: 0.6, y: 0.35, z: 0.35}
   m_Center: {x: -0.1, y: 0, z: 0}
 --- !u!114 &7206054502172281076
 MonoBehaviour:

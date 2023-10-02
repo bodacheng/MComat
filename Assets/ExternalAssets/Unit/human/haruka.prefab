@@ -51532,7 +51532,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3015273736213018221}
   m_LocalRotation: {x: -0.5144016, y: 0.48517108, z: 0.5144016, w: 0.4851712}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.045, y: -0.003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56742,7 +56742,7 @@ MonoBehaviour:
       - Value: 2
       - Value: 2
       - Value: 2
-      maxConnectionDistance: 0.11049006
+      maxConnectionDistance: 0.110490054
       userEdit: 0
   gizmoSerializeData:
     always: 0
