@@ -148,6 +148,9 @@ namespace mainMenu
                 showName.text = SkillNameTable.GetSkillName(config.RECORD_ID);    
             }
             
+            ATTitle.text = Translate.Get("at_title");
+            HPTitle.text = Translate.Get("hp_title");
+            
             ShowSkillStoneExType(ex1Icon, ex2Icon, ex3Icon, config.SP_LEVEL);
             ShowSKillRanges(close, near, far, config.AIAttrs.AI_MIN_DIS, config.AIAttrs.AI_MAX_DIS);
             atIcon.SetActive(config.STATE_TYPE is BehaviorType.GI or BehaviorType.GM or BehaviorType.GR);
@@ -165,8 +168,8 @@ namespace mainMenu
             var row = PowerEstimateTable.Find_RECORD_ID(RECORD_ID);
             float.TryParse(row.HP, out float hp);
             float.TryParse(row.EstimateDamage, out float at);
-            AT.text = "AT = " + FightGlobalSetting.ATCal(at, level);
-            HP.text = "HP = " + FightGlobalSetting.StoneHpCal(hp, level);
+            AT.text = FightGlobalSetting.ATCal(at, level).ToString();
+            HP.text = FightGlobalSetting.StoneHpCal(hp, level).ToString();
         }
         
         public static void ShowSKillRanges(GameObject close, GameObject near, GameObject far, float disMIN, float disMAX)

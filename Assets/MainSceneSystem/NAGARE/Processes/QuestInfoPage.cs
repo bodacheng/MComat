@@ -228,18 +228,24 @@ public class QuestInfoPage : MSceneProcess
                 }
                 
                 var bangBangInfo = ((GangbangInfo)fightInfo);
+
+                void RealFight()
+                {
+                    bangBangInfo.ConvertTeamToGangbang();
+                    FightScene.FightScene.team1GroupSet = bangBangInfo.Team1GroupSet;
+                    fightInfo.Team1ID = PlayerAccountInfo.Me.PlayFabId;
+                    FightLoad.Go(fightInfo);
+                }
+                
                 if (bangBangInfo.GetGroupWholeUnitCount(1) < CommonSetting.GangbangModeMaxUnitPerTeam)
                 {
                     PopupLayer.ArrangeConfirmWindow(
-                        () => { FightLoad.Go(fightInfo);},
+                        RealFight,
                         Translate.Get("HasExtraSeatForGangbangButFight"));
                     return;
                 }
-                
-                bangBangInfo.ConvertTeamToGangbang();
-                FightScene.FightScene.team1GroupSet = bangBangInfo.Team1GroupSet;
-                fightInfo.Team1ID = PlayerAccountInfo.Me.PlayFabId;
-                FightLoad.Go(fightInfo);
+
+                RealFight();
                 break;
             default:
                 fightInfo.LoadMyTeam();

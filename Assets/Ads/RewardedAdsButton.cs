@@ -90,6 +90,11 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
             // Load another ad: 需要检查在实机上这里跑的是否有问题。在editor上产生一个造成广告再次观看时连续跑了两次的错误
             if (reloadAfterWatched)
                 Advertisement.Load(_adUnitId, this);
+            else
+            {
+                _showAdButton.gameObject.SetActive(false);
+            }
+                
         }
         AppSetting.Value.UnMute();
     }

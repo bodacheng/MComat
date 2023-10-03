@@ -112,7 +112,7 @@ public partial class SSLevelUpManager : MonoBehaviour
                         // 具体待定。但不应该是RefreshSkillLevelUpModule，这个在CloseLevelUpPage会跑一次才对
                     });
                 }, 
-                "技ストーンを強化しますか ?");
+                Translate.Get("IfStoneLevelUp"));
         }
         confirmLevelUp.onClick.RemoveAllListeners();
         confirmLevelUp.onClick.AddListener(Confirm);
