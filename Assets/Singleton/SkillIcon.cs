@@ -11,7 +11,8 @@ public static class SkillIcon
         var sprite = await AddressablesLogic.LoadT<Sprite>(skillId, returnValue);
         if (returnValue == null)
             return null;
-        returnValue.GetComponent<Image>().sprite = sprite;
+        if (sprite != null)
+            returnValue.GetComponent<Image>().sprite = sprite;
         return returnValue;
     }
     

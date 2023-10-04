@@ -51,3 +51,10 @@ RECORD_ID,REAL_NAME,SPLevel,EstimateDamage,AttackCount,HP
 145,frank_super,3,8,8,5
 17,bfstab,2,5,1,5
 59,highsmashground,3,8,1,5
+3,backfistround_r,0,1,1,2
+42,fangentou,0,1,2,2
+173,fivewayboltp,2,5,0,2
+37,slidekick,0,1,1,2
+103,stab,0,1.5,1,2
+12,forwardcombination,1,4,2,2
+154,earthshatter,3,7,1,2
