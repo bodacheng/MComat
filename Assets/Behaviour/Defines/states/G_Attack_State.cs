@@ -252,6 +252,7 @@ namespace Soul
 
             if (_BasicPhysicSupport.hiddenMethods.TouchingEnemy() && _BasicPhysicSupport.hiddenMethods.Grounded)
             {
+                _Rigidbody.velocity = Vector3.zero;
                 _Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             }
             else

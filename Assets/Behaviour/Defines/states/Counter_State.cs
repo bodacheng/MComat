@@ -32,6 +32,19 @@ namespace Soul
             }
         }
 
+        public override void _State_FixedUpdate1()
+        {
+            if (_BasicPhysicSupport.hiddenMethods.TouchingEnemy() && _BasicPhysicSupport.hiddenMethods.Grounded)
+            {
+                _Rigidbody.velocity = Vector3.zero;
+                _Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            }
+            else
+            {
+                _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            }
+        }
+
         public override bool Capacity_Exit_Condition()
         {
             return AnimationCasualFinishedFlag();
