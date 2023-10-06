@@ -16,7 +16,7 @@ MonoBehaviour:
   fightBGM: 0
   unitsData:
   - id: 0
-    r_id: 5
+    r_id: 15
     level: 1
     set:
       a1: 5
