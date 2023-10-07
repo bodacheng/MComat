@@ -956,7 +956,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Stage 11
+  m_Text: 
 --- !u!114 &5049788193910407903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1086,7 +1086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3931436192285680771
 RectTransform:
   m_ObjectHideFlags: 0
