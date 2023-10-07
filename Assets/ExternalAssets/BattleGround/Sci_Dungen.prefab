@@ -554,9 +554,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d10f17363d0d849b9473481496e210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 8.240057, y: 0.06386065, z: 30.49387}
+  pos: {x: 6, y: 0.05, z: 15}
   ros: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
-  scale: {x: 3, y: 3, z: 3}
+  scale: {x: 1.5, y: 1.5, z: 1.5}
 --- !u!1 &8109173969924784490
 GameObject:
   m_ObjectHideFlags: 0
