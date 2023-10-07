@@ -9,7 +9,6 @@ public partial class CloudScript
     public static void UpdateStone(SkillStoneLevelUpForm form, Action<string, List<string>> success)
     {
         var Items = new List<PlayFab.AdminModels.RevokeInventoryItem>();
-
         if (form.M1Stone == null || form.M2Stone == null || form.M3Stone == null || form.M4Stone == null)
         {
             Debug.Log("error");
