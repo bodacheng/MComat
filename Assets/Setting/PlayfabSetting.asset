@@ -15,7 +15,7 @@ MonoBehaviour:
   UnitCatalog: unit
   StoneCatalog: stone
   MailCatalog: Present
-  VersionMaxStoneLevel: 10
+  VersionMaxStoneLevel: 100
   GoldCode: GD
   DiamondCode: DM
   ArenaTicketCode: TK

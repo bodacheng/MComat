@@ -48,20 +48,13 @@ public partial class SkillConfigTable
         await SkillNameTable.LoadSkillNamesFromConfig();
     }
     
-    static void RefreshSkillConfigDicForReference()
+    public static void RefreshSkillConfigDicForReference()
     {
         IDictionary<string, SkillConfig> dic = new Dictionary<string, SkillConfig>();
         var all = RowsToSkillConfigList(rowList);
         foreach (var skillConfig in all)
         {
-            if (!dic.ContainsKey(skillConfig.RECORD_ID))
-            {
-                dic.Add(new KeyValuePair<string, SkillConfig>(skillConfig.RECORD_ID, skillConfig));
-            }
-            else
-            {
-                Debug.Log("致命错误「技能配置文件」技能ID重复：" + skillConfig.RECORD_ID);
-            }
+            DicAdd<string, SkillConfig>.Add(dic, skillConfig.RECORD_ID, skillConfig);
         }
         SkillConfigRefDic = dic;
     }

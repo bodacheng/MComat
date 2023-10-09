@@ -59,6 +59,24 @@ public class SkillNameTable
                     break;
                 }
             }
+            else
+            {
+	            switch (language)
+	            {
+		            case SystemLanguage.English:
+			            SkillNameDic[row.RECORD_ID] = row.EN_NAME;
+			            break;
+		            case SystemLanguage.Japanese:
+			            SkillNameDic[row.RECORD_ID] = row.JP_NAME;
+			            break;
+		            case SystemLanguage.Chinese:
+			            SkillNameDic[row.RECORD_ID] = row.CN_NAME;
+			            break;
+		            default:
+			            SkillNameDic[row.RECORD_ID] = row.EN_NAME;
+			            break;
+	            }
+            }
             
             if (!SkillIntroDic.ContainsKey(row.RECORD_ID))
             {
@@ -75,6 +93,24 @@ public class SkillNameTable
 			            break;
 		            default:
 			            SkillIntroDic.Add(row.RECORD_ID, row.EN_INTRO);
+			            break;
+	            }
+            }
+            else
+            {
+	            switch (language)
+	            {
+		            case SystemLanguage.English:
+			            SkillIntroDic[row.RECORD_ID] = row.EN_INTRO;
+			            break;
+		            case SystemLanguage.Japanese:
+			            SkillIntroDic[row.RECORD_ID] = row.JP_INTRO;
+			            break;
+		            case SystemLanguage.Chinese:
+			            SkillIntroDic[row.RECORD_ID] = row.CN_INTRO;
+			            break;
+		            default:
+			            SkillIntroDic[row.RECORD_ID] = row.EN_INTRO;
 			            break;
 	            }
             }

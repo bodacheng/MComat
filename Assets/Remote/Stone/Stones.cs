@@ -75,7 +75,6 @@ namespace dataAccess
             }
             usingCount = Mathf.Clamp(usingCount, 3, Int32.MaxValue);
             // 队伍最多3个人所以起码保留3个石头，而升级一个石头则
-            Debug.Log("盈余技能石数量："+(infoModels.Count - usingCount));
             return infoModels.Count - usingCount >= 4;
         }
         

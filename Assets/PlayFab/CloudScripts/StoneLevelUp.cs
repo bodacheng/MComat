@@ -9,40 +9,23 @@ public partial class CloudScript
     public static void UpdateStone(SkillStoneLevelUpForm form, Action<string, List<string>> success)
     {
         var Items = new List<PlayFab.AdminModels.RevokeInventoryItem>();
-        if (form.M1Stone == null || form.M2Stone == null || form.M3Stone == null || form.M4Stone == null)
+        var itemInstanceIds = new List<string>();
+        if (form.stoneInstances.Count < 4)
         {
             Debug.Log("error");
             return;
         }
         
-        var resource1 = new PlayFab.AdminModels.RevokeInventoryItem()
+        foreach (var stoneInstanceId in form.stoneInstances)
         {
-            ItemInstanceId = form.M1Stone,
-            PlayFabId = PlayerAccountInfo.Me.PlayFabId
-        };
-        
-        var resource2 = new PlayFab.AdminModels.RevokeInventoryItem()
-        {
-            ItemInstanceId = form.M2Stone,
-            PlayFabId = PlayerAccountInfo.Me.PlayFabId
-        };
-        
-        var resource3 = new PlayFab.AdminModels.RevokeInventoryItem()
-        {
-            ItemInstanceId = form.M3Stone,
-            PlayFabId = PlayerAccountInfo.Me.PlayFabId
-        };
-        
-        var resource4 = new PlayFab.AdminModels.RevokeInventoryItem()
-        {
-            ItemInstanceId = form.M4Stone,
-            PlayFabId = PlayerAccountInfo.Me.PlayFabId
-        };
-        
-        Items.Add(resource1);
-        Items.Add(resource2);
-        Items.Add(resource3);
-        Items.Add(resource4);
+            var resource = new PlayFab.AdminModels.RevokeInventoryItem()
+            {
+                ItemInstanceId = stoneInstanceId,
+                PlayFabId = PlayerAccountInfo.Me.PlayFabId
+            };
+            Items.Add(resource);
+            itemInstanceIds.Add(resource.ItemInstanceId);
+        }
         
         ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest()
@@ -53,7 +36,7 @@ public partial class CloudScript
                     targetItemInstanceId = form.targetStoneID,
                     resources = Items,
                     addLevel = form.addLevel
-                }, 
+                },
                 GeneratePlayStreamEvent = true,
             },
             (result) => {
@@ -69,13 +52,7 @@ public partial class CloudScript
                     targetInfo.Level = newLevel;
                     success.Invoke(
                         form.targetStoneID,
-                        new List<string>()
-                        {
-                            form.M1Stone,
-                            form.M2Stone,
-                            form.M3Stone,
-                            form.M4Stone,
-                        }
+                        itemInstanceIds
                     );
                 }
             }

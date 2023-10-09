@@ -20,7 +20,12 @@ public partial class SSLevelUpManager : MonoBehaviour
     [SerializeField] StoneCell cell3;
     [SerializeField] StoneCell cell4;
 
+    [SerializeField] BOButton levelUpAllStonesBtn;
+    [SerializeField] Animator levelUpAllStonesBtnAnimator;
     [SerializeField] StoneListLayer _stoneListLayer;
+
+    public BOButton LevelUpAllStonesBtn => levelUpAllStonesBtn;
+    public Animator LevelUpAllStonesBtnAnimator => levelUpAllStonesBtnAnimator;
 
     public void INI()
     {
@@ -43,6 +48,12 @@ public partial class SSLevelUpManager : MonoBehaviour
         {
             cell.SetOnDropAction(MSlotOnDropAction);
         }
+        
+        levelUpAllStonesBtn.SetListener(
+            () =>
+            {
+                ConfirmUpdateAll(s => { });
+            });
     }
     
     void MSlotOnDropAction(StoneCell source, StoneCell to)
@@ -104,10 +115,25 @@ public partial class SSLevelUpManager : MonoBehaviour
                 return;
             }
             
+            List<string> mInstanceIds = new List<string>();
+            var item1 = cell1.GetItem();
+            var item2 = cell2.GetItem();
+            var item3 = cell3.GetItem();
+            var item4 = cell4.GetItem();
+            if (item1 != null)
+                mInstanceIds.Add(item1.instanceId);
+            if (item2 != null)
+                mInstanceIds.Add(item2.instanceId);
+            if (item3 != null)
+                mInstanceIds.Add(item3.instanceId);
+            if (item4 != null)
+                mInstanceIds.Add(item4.instanceId);
+            
             PopupLayer.ArrangeConfirmWindow(
                 ()=>
                 {
-                    LevelUpStone(instanceId, x =>
+                    LevelUpStone(instanceId, mInstanceIds,
+                        x =>
                     {
                         // 具体待定。但不应该是RefreshSkillLevelUpModule，这个在CloseLevelUpPage会跑一次才对
                     });

@@ -49,7 +49,8 @@ namespace DummyLayerSystem
             {"ReturnLayer", "DummyLayerSystem/ReturnLayer"},
             {"LoginLayer", "DummyLayerSystem/LoginLayer"},
             {"FightScenePauseSupport", "DummyLayerSystem/FightScenePauseSupport"},
-            {"BuyNoAds", "DummyLayerSystem/BuyNoAds"}
+            {"BuyNoAds", "DummyLayerSystem/BuyNoAds"},
+            {"StoneUpdatesConfirm", "DummyLayerSystem/StoneUpdatesConfirm"}
         };
 
         private static Transform _hanger;

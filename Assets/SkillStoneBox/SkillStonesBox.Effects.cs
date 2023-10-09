@@ -58,5 +58,24 @@ namespace mainMenu
             
             _tabEffects.SetSelectedTabPos(focusingExType);
         }
+
+        public void PressTab(int exLevel)
+        {
+            switch (exLevel)
+            {
+                case 0:
+                    NormalTab.onClick.Invoke();
+                    break;
+                case 1:
+                    EX1Tab.onClick.Invoke();
+                    break;
+                case 2:
+                    EX2Tab.onClick.Invoke();
+                    break;
+                case 3:
+                    EX3Tab.onClick.Invoke();
+                    break;
+            }
+        }
     }
 }

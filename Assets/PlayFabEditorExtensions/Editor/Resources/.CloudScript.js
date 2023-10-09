@@ -703,7 +703,7 @@ handlers.updateStone = function (args, context) {
     
     // 是否有足够的金币升级？
     
-    let needGD = 10;
+    let needGD = args.needGD ? Number(args.needGD) : 10;//这是升级到1.4.0版本阶段的一个过度写法
     if (GD < needGD) {
         return {  success: false, stoneId: args.target, level:0};
     }

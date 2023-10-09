@@ -134,6 +134,8 @@ public class FrontPage : MSceneProcess
             _frontLayer.PlsClickBtn("stones");
         }
         
+        SSLevelUpManager.CalUpdateAllForms();
+        _frontLayer.HasStoneToBeUpdateBadge.SetActive(SSLevelUpManager.HasStoneToBeUpdate());
         SetLoaded(true);
     }
     

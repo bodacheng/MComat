@@ -189,6 +189,7 @@ public class SettingLayer : UILayer
             AppSetting.Value.Language = code;
             LanguageConverterManger.ChangeLanguage();
             await SkillNameTable.LoadSkillNamesFromConfig();
+            SkillConfigTable.RefreshSkillConfigDicForReference();
             LanguageIndicator();
         }
         

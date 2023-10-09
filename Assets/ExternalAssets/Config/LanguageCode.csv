@@ -135,10 +135,25 @@ BornSkillCantRemove,The warrior's innate skills cannot be uninstalled,戦士の�
 CantEquipSameSkill,Same skill cannot be equipped for the same warrior,同じ戦士に同じスキルを装備することはできません,同一战士不可装备相同技能
 NotFull,The skill set is not complete,全てのスロットを満たしましょう,技能组未满
 SKillConfirm,Confirm,確定,保存技能组
-StoneLevelUp,Upgrade,アップグレード,升级
+StoneLevelUp,Merge,融合,融合
 StoneLevelUpIntro,"Merge five gems for an upgrade, retaining at least three afterwards.",5つの同種類ジェムで融合しアップグレード可能、融合後3つ以上残るが必要。,五颗相同宝石可融合升级，融合后需保留三颗以上。
 IfStoneLevelUp,Do you want to merge the skill gems?,スキルジェムを融合しますか？,要融合技能石吗
 BornSkill,inherent skill,固有スキル,原生技能
+AutoMerge,Auto Merge,オート融合,自动融合
+AutoMergeIntro,"A gem's level can be increased by merging four gems of the same kind. Merge is only possible if, after the merge, there are still three or more gems of that kind remaining.
+Gems that are equipped cannot be used as merge materials. The auto-merge function will merge all your mergeable gems, with the strategy to produce a gem with the highest possible level. If you wish to evenly level up multiple gems of the same kind, you can choose to merge them manually.","宝石のレベルは、同じ種類の宝石4つを融合することで上げることができます。
+融合後も同じ種類の宝石が3つ以上残っている場合のみ、融合が可能です。
+装備中の宝石は融合材料として使えません。
+自動融合機能を使用すると、融合可能な宝石を全て融合します。
+融合の方針は、できるだけ高レベルのスキル石を生成することです。複数の同じ宝石を持っていて、それらのレベルを均等に上げたい場合は、手動での融合を選択してください。","一颗宝石可通过融合四颗同种宝石使等级提升，
+只有在融合后该种类宝石仍有三颗以上的情况下才能融合。
+装备中的宝石无法作为融合材料。
+自动融合能将您所拥有的所有能融合的宝石进行融合，融合策略是尽量生产出一颗等级高的技能石。
+如果您希望尽量让拥有的复数颗相同宝石等级平均提升，可选择手动融合它们。"
+AutoMergeFinished,Merge completed,融合完了,融合完成
+GemsThatCanBeMerged,Mergeable Gems,融合可能なジェム,可融合技能石
+ExecuteAutoMerge,Execute Merge,融合実行,进行融合
+ShowLevel,Show Level,レベル表示,显示等级
 ,,,
 TeamNotFull,You need three warriors with complete skill sets to participate in the arena,アリーナに参加するには、3人のスキルセットが完全な戦士が必要です,必须有三名技能组完整的战士才能参与竞技场
 ,,,

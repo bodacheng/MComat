@@ -18,6 +18,7 @@ public class FrontLayer : UILayer
     [SerializeField] BOButton MemberBtn;
     [SerializeField] BOButton TrainBtn;
     [SerializeField] BOButton StonesBtn;
+    [SerializeField] GameObject hasStoneToBeUpdateBadge;
     [SerializeField] BOButton GotchaBtn;
     [SerializeField] Button SkillTestRBtn;
     [SerializeField] Button SkillTestMBtn;
@@ -29,6 +30,8 @@ public class FrontLayer : UILayer
     [SerializeField] float cameraConnectorRightSpace = 940;
     [SerializeField] float cameraConnectorVerticalSpace = 150;
     [SerializeField] float skillShowInterval = 5;
+
+    public GameObject HasStoneToBeUpdateBadge => hasStoneToBeUpdateBadge;
     
     public void Initialise(PreScene pre)
     {
