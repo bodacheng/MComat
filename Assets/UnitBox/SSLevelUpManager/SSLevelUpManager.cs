@@ -134,9 +134,12 @@ public partial class SSLevelUpManager : MonoBehaviour
                 {
                     LevelUpStone(instanceId, mInstanceIds,
                         x =>
-                    {
-                        // 具体待定。但不应该是RefreshSkillLevelUpModule，这个在CloseLevelUpPage会跑一次才对
-                    });
+                        {
+                            CalUpdateAllForms();
+                            LevelUpAllStonesBtn.interactable = SSLevelUpManager.HasStoneToBeUpdate();
+                            LevelUpAllStonesBtnAnimator.SetBool("on", SSLevelUpManager.HasStoneToBeUpdate());
+                            // 具体待定。但不应该是RefreshSkillLevelUpModule，这个在CloseLevelUpPage会跑一次才对
+                        });
                 }, 
                 Translate.Get("IfStoneLevelUp"));
         }

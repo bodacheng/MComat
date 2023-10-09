@@ -46,6 +46,7 @@ public partial class SkillConfigTable
     {
         await LoadAllSkillConfigFromLocalConfigFile();
         await SkillNameTable.LoadSkillNamesFromConfig();
+        RefreshSkillConfigDicForReference();
     }
     
     public static void RefreshSkillConfigDicForReference()
@@ -66,12 +67,9 @@ public partial class SkillConfigTable
     /// <returns></returns>
     public static SkillConfig GetSkillConfigByRecordId(string id)
     {
-        if (id != null)
-        {
-            SkillConfigRefDic.TryGetValue(id, out SkillConfig skillConfig);
-            return skillConfig;
-        }
-        return null;
+        if (string.IsNullOrEmpty(id)) return null;
+        SkillConfigRefDic.TryGetValue(id, out SkillConfig skillConfig);
+        return skillConfig;
     }
     
     public static List<SkillConfig> GetSkillConfigsOfType(string type)
@@ -91,7 +89,6 @@ public partial class SkillConfigTable
         var aiCsv = await AddressablesLogic.LoadT<TextAsset>("Config/" + CommonSetting.SkillAIFile);
         Load(csv);
         SkillAIAttrs.Load(aiCsv);
-        RefreshSkillConfigDicForReference();
     }
     
     public static void SaveByCurrentRows(string filePath)

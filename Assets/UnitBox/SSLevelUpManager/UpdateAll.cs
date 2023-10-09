@@ -16,30 +16,33 @@ public partial class SSLevelUpManager : MonoBehaviour
         return UpdateAllStoneForms.Count > 0;
     }
     
-    static SkillStoneLevelUpForm DecideForm(string skillRecordId)
+    public static SkillStoneLevelUpForm DecideForm(string skillRecordId, string targetStoneInstanceId = null)
     {
         var instanceIds = Stones.GetMyStonesBySkillID(skillRecordId);
-        string targetStoneInstanceId = null;
-        int hightestLevel = 0;
-        foreach (var instanceId in instanceIds)
+        if (targetStoneInstanceId == null)
         {
-            var stoneInfo = Stones.Get(instanceId);
-            if (dataAccess.Units.Get(stoneInfo.UnitInstanceId) != null) // 尽量升级装备中技能
+            int hightestLevel = 0;
+            foreach (var instanceId in instanceIds)
             {
-                targetStoneInstanceId = stoneInfo.InstanceId;
-                break;
-            }
-            if (stoneInfo.Level > hightestLevel)
-            {
-                targetStoneInstanceId = stoneInfo.InstanceId;
+                var stoneInfo = Stones.Get(instanceId);
+                if (dataAccess.Units.Get(stoneInfo.UnitInstanceId) != null) // 尽量升级装备中技能
+                {
+                    targetStoneInstanceId = stoneInfo.InstanceId;
+                    break;
+                }
+                if (stoneInfo.Level > hightestLevel)
+                {
+                    targetStoneInstanceId = stoneInfo.InstanceId;
+                }
             }
         }
-
+        
         if (targetStoneInstanceId == null)
             return null;
         
         var wholeMInstanceIds = new List<string>();
         var mSet = new List<string>();
+        var alreadyUsing = 0;// 除了 targetStoneInstanceId 之外
         foreach (var instanceId in instanceIds)
         {
             var info = Stones.Get(instanceId);
@@ -56,9 +59,20 @@ public partial class SSLevelUpManager : MonoBehaviour
                     mSet = new List<string>();
                 }
             }
+
+            if (instanceId != targetStoneInstanceId &&
+                dataAccess.Units.Get(info.UnitInstanceId) != null)
+            {
+                alreadyUsing += 1;
+            }
         }
         
         if (wholeMInstanceIds.Count < 4)
+        {
+            return null;
+        }
+
+        if (instanceIds.Count - wholeMInstanceIds.Count < 3)
         {
             return null;
         }

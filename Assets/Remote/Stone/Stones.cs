@@ -48,34 +48,12 @@ namespace dataAccess
 
         public static bool StoneCanLevelUp(string instanceID)
         {
-            var targetData = Stones.Get(instanceID);
-            if (targetData == null)
+            var stoneInfo = Stones.Get(instanceID);
+            if (stoneInfo == null)
                 return false;
 
-            if (targetData.Level >= PlayFabSetting._VersionMaxStoneLevel)
-            {
-                return false;
-            }
-            
-            var infoModels = new List<string>();
-            int usingCount = 0;
-            foreach (var kv in Dic)
-            {
-                if (kv.Value.SkillId == targetData.SkillId)
-                {
-                    var itemData = Stones.Get(kv.Value.InstanceId);
-                    if (itemData.UnitInstanceId != null && itemData.InstanceId != instanceID)
-                    {
-                        usingCount++;
-                    }
-                        
-                    if (itemData.UnitInstanceId == null && kv.Value.InstanceId != targetData.InstanceId)
-                        infoModels.Add(kv.Value.InstanceId);
-                }
-            }
-            usingCount = Mathf.Clamp(usingCount, 3, Int32.MaxValue);
-            // 队伍最多3个人所以起码保留3个石头，而升级一个石头则
-            return infoModels.Count - usingCount >= 4;
+            var form = SSLevelUpManager.DecideForm(stoneInfo.SkillId, stoneInfo.InstanceId);
+            return form != null;
         }
         
         public static SKStoneItem GetRenderModel(string itemId)
