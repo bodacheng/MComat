@@ -166,7 +166,7 @@ MonoBehaviour:
   hurtFreezeInDuration: 0.01
   hurtFreezeOutDuration: 0.2
   normalAttackPosFixingTime: 0.03
-  knockOffExtent: 10
+  knockOffExtent: 7
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5
   GetupTime: 0.5
