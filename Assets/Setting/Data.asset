@@ -158,14 +158,14 @@ MonoBehaviour:
   Sp2SkillExGet: 0
   Sp3SkillExGet: 0
   getHurtExGet: 10
-  slightHitLastingTime: 0.2
-  lightHitLastingTime: 0.5
-  heavyHitLastingTime: 0.5
-  superHitLastingTime: 0.5
-  highHitLastingTime: 0.5
+  slightHitLastingTime: 0.1
+  lightHitLastingTime: 0.3
+  heavyHitLastingTime: 0.3
+  superHitLastingTime: 0.4
+  highHitLastingTime: 0.4
   hurtFreezeInDuration: 0.01
   hurtFreezeOutDuration: 0.2
-  normalAttackPosFixingTime: 0.1
+  normalAttackPosFixingTime: 0.03
   knockOffExtent: 10
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5
@@ -177,7 +177,6 @@ MonoBehaviour:
   attackDrawingDistance: 1
   resistanceMax: 10
   eXMax: 90
-  hurtObjectPreLoadCount: 5
   energyResolveAfterExtendBoundary: 5
   shadowMaterial: {fileID: 2100000, guid: ea7a57501503cd74f87a10d974771222, type: 2}
   _physicMaterial: {fileID: 13400000, guid: 14a74fe52c92e416ea176cf990c64822, type: 2}
