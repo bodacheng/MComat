@@ -97,6 +97,7 @@ public partial class NineForShow : MonoBehaviour
         
         if (valR == SkillSet.SkillEditError.UnBalanced || valR == SkillSet.SkillEditError.RepeatedSkill || valR == SkillSet.SkillEditError.NoNormalStart)
         {
+            await UniTask.DelayFrame(5);
             await AddEffect(bossMode? abnormalSkillSetEffectKey : notQualifiedEffectKey, fxCamera);
         }
         else

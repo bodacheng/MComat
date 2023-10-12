@@ -42,7 +42,6 @@ public partial class SSLevelUpManager : MonoBehaviour
         
         var wholeMInstanceIds = new List<string>();
         var mSet = new List<string>();
-        var alreadyUsing = 0;// 除了 targetStoneInstanceId 之外
         foreach (var instanceId in instanceIds)
         {
             var info = Stones.Get(instanceId);
@@ -52,27 +51,23 @@ public partial class SSLevelUpManager : MonoBehaviour
                 mSet.Add(instanceId);
                 if (mSet.Count == 4)
                 {
-                    foreach (var id in mSet)
+                    if (instanceIds.Count - wholeMInstanceIds.Count - 4 < 3)
                     {
-                        wholeMInstanceIds.Add(id);
+                        break;
                     }
-                    mSet = new List<string>();
+                    else
+                    {
+                        foreach (var id in mSet)
+                        {
+                            wholeMInstanceIds.Add(id);
+                        }
+                        mSet = new List<string>();
+                    }
                 }
-            }
-
-            if (instanceId != targetStoneInstanceId &&
-                dataAccess.Units.Get(info.UnitInstanceId) != null)
-            {
-                alreadyUsing += 1;
             }
         }
         
         if (wholeMInstanceIds.Count < 4)
-        {
-            return null;
-        }
-
-        if (instanceIds.Count - wholeMInstanceIds.Count < 3)
         {
             return null;
         }
