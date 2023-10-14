@@ -280,6 +280,11 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.m_NumColorKeys
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3363382651743599603, guid: acaf9375599be4b59be6373f701a63dd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5632893a0e345054998ef42f1e5748ed, type: 2}
     - target: {fileID: 3363382651758757649, guid: acaf9375599be4b59be6373f701a63dd,
         type: 3}
       propertyPath: m_LocalPosition.x
