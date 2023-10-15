@@ -19304,7 +19304,7 @@ GameObject:
   - component: {fileID: 7464688226250506818}
   - component: {fileID: 7464688226265634246}
   - component: {fileID: 7464688226264197572}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LineTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24128,7 +24128,7 @@ GameObject:
   - component: {fileID: 7464688226250409720}
   - component: {fileID: 7464688226265703058}
   - component: {fileID: 7464688226264206590}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24367,7 +24367,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.34
+      scalar: 0.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
