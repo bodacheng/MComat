@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba14bb9a94146b4eb104d70829d4421, type: 3}
   m_Name: DefaultIconSetting
   m_EditorClassIdentifier: 
-  coinIcon: {fileID: 21300000, guid: eb1d71b79a13351429885d8dccb6dc5c, type: 3}
+  coinIcon: {fileID: 21300000, guid: 7efb6e023b39d48c38188ace0d90c24d, type: 3}
   diamondIcon: {fileID: 21300000, guid: 3d90b23ce063e4724a4a69281f5ea5c8, type: 3}
   unitSlotEmpty: {fileID: 21300000, guid: 336cfcae5676656479a1817215e69f0d, type: 3}
