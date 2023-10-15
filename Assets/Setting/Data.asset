@@ -176,6 +176,7 @@ MonoBehaviour:
   heavyBlockLastingTime: 0.6
   attackDrawingDistance: 1
   resistanceMax: 10
+  toEnemyNearestDis: 0.5
   eXMax: 90
   energyResolveAfterExtendBoundary: 5
   shadowMaterial: {fileID: 2100000, guid: ea7a57501503cd74f87a10d974771222, type: 2}

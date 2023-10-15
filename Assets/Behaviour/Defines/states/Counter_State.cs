@@ -36,8 +36,10 @@ namespace Soul
         {
             if (_BasicPhysicSupport.hiddenMethods.TouchingEnemy() && _BasicPhysicSupport.hiddenMethods.Grounded)
             {
-                _Rigidbody.velocity = Vector3.zero;
-                _Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+                if (_BasicPhysicSupport.ToNearestEnemyXZ() >= FightGlobalSetting.ToEnemyNearestDis)
+                {
+                    _Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+                }
             }
             else
             {

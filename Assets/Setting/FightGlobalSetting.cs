@@ -34,6 +34,7 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] float lightBlockLastingTime = 0.3f, heavyBlockLastingTime = 0.5f;
     [SerializeField] float attackDrawingDistance = 1f;
     [SerializeField] int resistanceMax = 10;
+    [SerializeField] float toEnemyNearestDis = 1;
     [SerializeField] int eXMax = 120;
     [SerializeField] int energyResolveAfterExtendBoundary = 5;
     [SerializeField] Material shadowMaterial;
@@ -69,6 +70,7 @@ public class FightGlobalSetting : ScriptableObject
     public static AnimationCurve HDamageZAnimationCurve;
     public static float _attackDrawingDistance;
     public static int _ResistanceMax = 120;
+    public static float ToEnemyNearestDis = 1;
     public static int _EXMax;
     public static bool HitBoxLogger = true;
     public static Material _shadowMaterial;
@@ -123,6 +125,8 @@ public class FightGlobalSetting : ScriptableObject
 
         _attackDrawingDistance = attackDrawingDistance;
 
+        ToEnemyNearestDis = toEnemyNearestDis;
+        
         _ResistanceMax = resistanceMax;
         _EXMax = eXMax;
         

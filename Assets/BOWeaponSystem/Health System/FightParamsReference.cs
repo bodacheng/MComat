@@ -247,10 +247,10 @@ public partial class FightParamsReference
                     _damagecolor = Color.green;
                     break;
                 case Element.darkMagic:
-                    _damagecolor = new Color(1f, 0f, 1f);
+                    _damagecolor = new Color(0.8f, 0f, 1f);
                     break;
                 case Element.lightMagic:
-                    _damagecolor = new Color(0f, 1f, 1f);
+                    _damagecolor = new Color(1f, 1f, 0f);
                     break;
                 default:
                     _damagecolor = Color.white;

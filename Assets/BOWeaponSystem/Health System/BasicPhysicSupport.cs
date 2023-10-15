@@ -144,6 +144,24 @@ public class BasicPhysicSupport : MonoBehaviour
             LimitTargetToRange();
         }
     }
+
+    public float ToNearestEnemyXZ()
+    {
+        var enemies = _DATA_CENTER.Sensor.GetEnemiesByDistance(false);
+        if (enemies.Count > 0)
+        {
+            var nearest = enemies[0];
+            var p2 = nearest.transform.position;
+            p2.y = 0;
+            var p1 = _DATA_CENTER.WholeT.position;
+            p1.y = 0;
+            return Vector3.Distance(p1, p2);
+        }
+        else
+        {
+            return Mathf.Infinity;
+        }
+    }
     
     private Vector3 pos;
     private float pushIntoRingSpeed = 1;
