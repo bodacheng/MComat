@@ -26,6 +26,8 @@ public class FightingStepLayer : UILayer
     public TeamUIManager Team1UI => team1UI;
     public TeamUIManager Team2UI => team2UI;
     
+    public MobileInputsManager InputsManager => inputsManager;
+    
     public void PreparingMode(bool preparingMode)
     {
         if (team1UI.TeamMode == TeamMode.MultiRaid)

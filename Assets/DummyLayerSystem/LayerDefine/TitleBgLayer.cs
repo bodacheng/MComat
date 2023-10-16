@@ -33,7 +33,6 @@ public class TitleBgLayer : UILayer
     
     public void Rotate(bool storyMode, Action onClickProcess = null)
     {
-        languageConverter.gameObject.SetActive(storyMode);
         if (storyMode)
         {
             touchScreenBtn.onClick.AddListener(() =>
@@ -61,6 +60,7 @@ public class TitleBgLayer : UILayer
                 vScrollbar.value = Mathf.Clamp(vScrollbar.value - scrollDelayInMilliSecond, ScrollbarMinValue, ScrollbarMaxValue);
                 if (storyMode)
                 {
+                    languageConverter.gameObject.SetActive(storyMode);
                     var indexOfSubtitleCodes = (int)((1 - vScrollbar.value) / (1f / subtitleCodes.Count));
                     ChangeSubtitle(indexOfSubtitleCodes);
                     if (milliSecondCounter >= 1.2)
