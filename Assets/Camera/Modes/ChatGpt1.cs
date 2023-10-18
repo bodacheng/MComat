@@ -75,9 +75,21 @@ class ChatGptFix : CameraMode
                 h = 0;
         }   
     }
-    
+
+    private Vector3 mePos;
+    public Vector3 MePos
+    {
+        get => mePos;
+        set => mePos = value;
+    }
+
     public override void LocalUpdate(Camera _camera)
     {
+        if (meCenter != null)
+        {
+            mePos = meCenter.position;
+        }
+        
         _changeSpeed = Time.deltaTime / (TransitionSpeedPara + Time.deltaTime); //分母里那个附加值越大，变得越慢。
         bool hasTargets = targets != null && targets.Count > 0;
         
@@ -95,12 +107,12 @@ class ChatGptFix : CameraMode
         }
         else
         {
-            enemiesCenter = meCenter.position;
+            //enemiesCenter = mePos;
         }
         
         enemyScreenPos = _camera.WorldToScreenPoint(enemiesCenter);
-        meScreenPos = _camera.WorldToScreenPoint(meCenter.position);
-
+        meScreenPos = _camera.WorldToScreenPoint(mePos);
+        
         if (CanSetH)
         {
             h = UltimateJoystick.GetHorizontalAxis("RotateCamera");
@@ -116,20 +128,13 @@ class ChatGptFix : CameraMode
             float angleToHorizental = 0;
             float CheckNeedForAutoRotate()
             {
-                if (hasTargets)
+                if (meScreenPos.x < enemyScreenPos.x)
                 {
-                    if (meScreenPos.x < enemyScreenPos.x)
-                    {
-                        return Mathf.Abs(Vector3.Angle(enemyScreenPos - meScreenPos, Vector3.right));
-                    }
-                    else
-                    {
-                        return Mathf.Abs(Vector3.Angle(enemyScreenPos - meScreenPos, -Vector3.right));
-                    }
+                    return Mathf.Abs(Vector3.Angle(enemyScreenPos - meScreenPos, Vector3.right));
                 }
                 else
                 {
-                    return -1;
+                    return Mathf.Abs(Vector3.Angle(enemyScreenPos - meScreenPos, -Vector3.right));
                 }
             }
             
@@ -161,22 +166,22 @@ class ChatGptFix : CameraMode
         ePosY = (float)((decimal)enemyScreenPos.y / Screen.height);
         mPosX = (float)((decimal)meScreenPos.x / Screen.width);
         mPosY = (float)((decimal)meScreenPos.y / Screen.height);
-        
+            
         enemyScreenPos = new Vector2((enemyScreenPos.x /Screen.width),(enemyScreenPos.y /Screen.height));
         meScreenPos = new Vector2((meScreenPos.x /Screen.width), (meScreenPos.y /Screen.height));
         
         // 判断我与敌人哪个更接近相机位置
         if (enemyScreenPos.y >= meScreenPos.y)
         {
-            frontWPos = meCenter.position;
+            frontWPos = mePos;
             backWPos = enemiesCenter;
         }
         else
         {
             frontWPos = enemiesCenter;
-            backWPos = meCenter.position;
+            backWPos = mePos;
         }
-        
+            
         if (ePosX >= 0.3 && ePosX <= 0.7 &&
             mPosX >= 0.3 && mPosX <= 0.7 &&
             ePosY >= 0.3 && ePosY <= 0.7 &&

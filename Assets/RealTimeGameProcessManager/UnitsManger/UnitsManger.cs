@@ -119,6 +119,15 @@ namespace FightScene
             }
             return transforms;
         }
+
+        public Transform GetRModeUnitT()
+        {
+            if (RMode_Unit.Value != null)
+            {
+                return RMode_Unit.Value.geometryCenter;
+            }
+            return null;
+        }
         
         // 全队无敌
         public void TurnAllUnitsInvincible(bool _Invincible)
