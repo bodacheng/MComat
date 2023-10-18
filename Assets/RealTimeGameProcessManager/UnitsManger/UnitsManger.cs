@@ -108,7 +108,7 @@ namespace FightScene
                     }
                     return transforms;
                 case TeamMode.Rotation:
-                    if (RMode_Unit.Value != null)
+                    if (RMode_Unit.Value != null && RMode_Unit.Value._MyBehaviorRunner.GetNowState().StateKey != "Death")
                     {
                         transforms = new List<Transform>
                         {

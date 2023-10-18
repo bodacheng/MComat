@@ -25,6 +25,12 @@ public class CameraManager : MonoBehaviour
         {C_Mode.ScreenSaver, new New2023(8.8f, 5f)}//new ScreenSaverC(8.8f, 8.8f)}
     };
 
+    public CameraMode GetMode(C_Mode mode)
+    {
+        CModeDic.TryGetValue(mode, out var c);
+        return c;
+    }
+
     public void SetPosToStart()
     {
         _camera.transform.position = StartPosRef.position;
@@ -63,8 +69,7 @@ public class CameraManager : MonoBehaviour
     
     public void Assign_Camera(C_Mode num, Transform me, List<Transform> targets)
     {
-        if (CurrentMode != null)
-            CurrentMode.Exit(_camera);
+        CurrentMode?.Exit(_camera);
         CModeDic.TryGetValue(num, out CurrentMode);
         if (CurrentMode != null)
         {

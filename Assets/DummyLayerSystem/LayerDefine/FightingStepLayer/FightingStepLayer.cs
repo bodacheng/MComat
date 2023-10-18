@@ -141,4 +141,19 @@ public class FightingStepLayer : UILayer
             }
         );
     }
+
+    private void OnDisable()
+    {
+        var c = RTFightManager.Target._CameraManager.GetMode(C_Mode.CertainYAntiVibration);
+        var mode = ((ChatGptFix)c);
+        mode.CanSetH = false;
+    }
+
+    public override void OnDestroy()
+    {
+        var c = RTFightManager.Target._CameraManager.GetMode(C_Mode.CertainYAntiVibration);
+        var mode = ((ChatGptFix)c);
+        mode.CanSetH = false;
+        base.OnDestroy();
+    }
 }
