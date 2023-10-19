@@ -19,6 +19,7 @@ class ChatGptFix : CameraMode
     readonly float _lookPointHeight = 2f;
     readonly float _minXZ;
     float fieldOfView;
+    private float screenDifferForRotate = 1;
     
     public Vector3 XZOff
     {
@@ -125,40 +126,43 @@ class ChatGptFix : CameraMode
         }
         else
         {
-            float angleToHorizental = 0;
-            float CheckNeedForAutoRotate()
+            if (Vector3.Distance(meScreenPos, enemyScreenPos) > screenDifferForRotate)
             {
-                if (meScreenPos.x < enemyScreenPos.x)
-                {
-                    return Mathf.Abs(Vector3.Angle(enemyScreenPos - meScreenPos, Vector3.right));
-                }
-                else
-                {
-                    return Mathf.Abs(Vector3.Angle(enemyScreenPos - meScreenPos, -Vector3.right));
-                }
-            }
-            
-            angleToHorizental = CheckNeedForAutoRotate();
-            if (angleToHorizental > autoChangeAngleLimit)
-            {
-                bool Clock()
+                float angleToHorizental = 0;
+                float CheckNeedForAutoRotate()
                 {
                     if (meScreenPos.x < enemyScreenPos.x)
                     {
-                        return meScreenPos.y < enemyScreenPos.y;
+                        return Mathf.Abs(Vector3.Angle(enemyScreenPos - meScreenPos, Vector3.right));
                     }
                     else
                     {
-                        return meScreenPos.y > enemyScreenPos.y;
+                        return Mathf.Abs(Vector3.Angle(enemyScreenPos - meScreenPos, -Vector3.right));
                     }
                 }
+            
+                angleToHorizental = CheckNeedForAutoRotate();
+                if (angleToHorizental > autoChangeAngleLimit)
+                {
+                    bool Clock()
+                    {
+                        if (meScreenPos.x < enemyScreenPos.x)
+                        {
+                            return meScreenPos.y < enemyScreenPos.y;
+                        }
+                        else
+                        {
+                            return meScreenPos.y > enemyScreenPos.y;
+                        }
+                    }
                 
-                // 如果夹角大于限制，则缓慢调整相机角度
-                Vector3 newOffset = Quaternion.Euler(0f, autoRotateSpeed *
-    ((angleToHorizental - autoChangeAngleLimit)/(90 - autoChangeAngleLimit)) * Time.deltaTime  // 分母是垂直情况下两个对象屏幕连线超出的"垂直界限"，分子是实际超过的界限。这个值是确保在垂直时候相机扭转最快，随后扭转变缓和
-    * (Clock() ? -1f : 1f), 0f) * xzOff;
-                // 如果调整后的夹角小于等于限制，则使用新的偏移量
-                xzOff = newOffset;
+                    // 如果夹角大于限制，则缓慢调整相机角度
+                    Vector3 newOffset = Quaternion.Euler(0f, autoRotateSpeed *
+                                                             ((angleToHorizental - autoChangeAngleLimit)/(90 - autoChangeAngleLimit)) * Time.deltaTime  // 分母是垂直情况下两个对象屏幕连线超出的"垂直界限"，分子是实际超过的界限。这个值是确保在垂直时候相机扭转最快，随后扭转变缓和
+                                                             * (Clock() ? -1f : 1f), 0f) * xzOff;
+                    // 如果调整后的夹角小于等于限制，则使用新的偏移量
+                    xzOff = newOffset;
+                }
             }
         }
         
