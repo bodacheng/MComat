@@ -176726,7 +176726,7 @@ AnimationClip:
     data: left_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 3
+    intParameter: 1
     messageOptions: 0
   - time: 0.35
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward

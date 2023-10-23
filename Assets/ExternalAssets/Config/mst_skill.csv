@@ -58,3 +58,6 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK
 103,stab,human,0,1.5,2,GR,
 12,forwardcombination,human,1,2,2,GR,
 154,earthshatter,human,3,7,2,GR,
+44,frictionkick,human,1,2,5,GR,
+107,upanddown,human,1,2,5,GR,
+117,zhaohuan,human,1,2,5,GI,
