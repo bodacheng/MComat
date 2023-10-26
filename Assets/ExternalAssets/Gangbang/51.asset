@@ -17,7 +17,7 @@ MonoBehaviour:
   unitsData:
   - id: 0
     r_id: 2
-    level: 1
+    level: 2
     set:
       a1: 175
       a2: 148
@@ -40,7 +40,7 @@ MonoBehaviour:
   stageRefLevel: 2
   team2GroupSet:
   - id: 0
-    Count: 4
+    Count: 24
   - id: 1
     Count: 10
   - id: 2
