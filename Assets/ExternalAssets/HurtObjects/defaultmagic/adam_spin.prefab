@@ -24053,7 +24053,7 @@ MonoBehaviour:
   damage_type: 2
   _WeaponMode: 3
   AT_weight: 1
-  weaponHP: 1
+  weaponHP: 2
   heavyLevel: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
@@ -24061,7 +24061,7 @@ MonoBehaviour:
   muzzle: 
   hitEffect: 
   ExplosionEffect: energy_resolve
-  ContinuousDamage: 0
+  ContinuousDamage: 1
   ContinuousDamageInterval: 0.2
 --- !u!114 &7849681240981046104
 MonoBehaviour:

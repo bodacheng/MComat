@@ -84,7 +84,7 @@ class ChatGptFix : CameraMode
         set => mePos = value;
     }
 
-    private const float AutoRotateLeastInterval = 2;
+    private const float AutoRotateLeastInterval = 3;
     private float _autoRotateTimer;
     private bool _currentRotateClockWiseDirection;
     

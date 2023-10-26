@@ -10,18 +10,18 @@ namespace Soul
         void PushToMidStart(V_Damage newValue, float dis, bool Grounded, bool push = true)
         {
             _usedDizzyTime = FightGlobalSetting.HeavyHitLastingTime;
-            Vector3 MidDistanceFromMe = newValue.attacker.Center.geometryCenter.transform.position + 
-                                        (push ? 1f : -1f) * newValue.attacker.Center.WholeT.transform.forward * dis;
+            Vector3 midDistanceFromMe = newValue.attacker.Center.geometryCenter.transform.position + 
+                                        (push ? 1f : -0.5f) * newValue.attacker.Center.WholeT.transform.forward * dis;
             if (Grounded)
             {
                 PlayHurtAnim(newValue);
-                MidDistanceFromMe.y = 0;
+                midDistanceFromMe.y = 0;
             }
             else
             {
                 AnimationManger.AnimationTrigger(AnimationManger.GetRandomKnockOffAnim(), true, 0.1f);
             }
-            _tween = gameObject.transform.DOMove(MidDistanceFromMe, 0.3f);
+            _tween = gameObject.transform.DOMove(midDistanceFromMe, 0.3f);
             _physicMissionDisposable = new SingleAssignmentDisposable();
             _physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
                 {
@@ -31,7 +31,7 @@ namespace Soul
                         return;
                     }
                     
-                    if (Vector3.Distance(MidDistanceFromMe, gameObject.transform.position) < 0.3f || _BasicPhysicSupport.AtRing)
+                    if (Vector3.Distance(midDistanceFromMe, gameObject.transform.position) < 0.3f || _BasicPhysicSupport.AtRing)
                     {
                         _tween.Kill(false);
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
