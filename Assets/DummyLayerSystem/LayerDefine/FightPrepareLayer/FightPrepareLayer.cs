@@ -18,6 +18,8 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] Text teamEditIndicatorText;
     [SerializeField] FightModeSwitch fightModeSwitch;
     [SerializeField] FightBeginBtn beginFight;
+    [SerializeField] Text team1Name;
+    [SerializeField] Text team2Name;
     [SerializeField] Text team1OneWord;
     [SerializeField] Text team2OneWord;
     [SerializeField] Text arcadeStageNoText;
@@ -76,7 +78,7 @@ public partial class FightPrepareLayer : UILayer
         );
     }
     
-    public void StageMembersInfoShow(FightInfo stage, string oneWordTeam1, string oneWordTeam2)
+    public void StageMembersInfoShow(FightInfo stage)
     {
         MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), 
             (x) =>
@@ -104,8 +106,18 @@ public partial class FightPrepareLayer : UILayer
             },
             enemyTeamShowT, false);
         icons.FirstOrDefault()?.iconButton.onClick.Invoke();
-        team1OneWord.text = oneWordTeam1;
-        team2OneWord.text = oneWordTeam2;
+
+        if (stage.EventType == FightEventType.Arena)
+        {
+            team1Name.text = stage.Team1LeaderboardEntry?.DisplayName;
+            team2Name.text = stage.Team2LeaderboardEntry?.DisplayName;
+            team1OneWord.text = stage.Team1OneWord;
+            team2OneWord.text = stage.Team2OneWord;
+        }
+        else
+        {
+            team1Name.text = "YOU";
+        }
     }
 
     async void FocusTeam2Unit(string instanceId, List<UnitInfo> team2Units)

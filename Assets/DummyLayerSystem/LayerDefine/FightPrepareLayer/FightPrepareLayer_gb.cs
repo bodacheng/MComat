@@ -60,7 +60,7 @@ public partial class FightPrepareLayer : UILayer
         _getTeamUnitCount = getTeamUnitCount;
     }
     
-    public void GangbangStageMembersInfoShow(GangbangInfo stage, string oneWordTeam1, string oneWordTeam2)
+    public void GangbangStageMembersInfoShow(GangbangInfo stage)
     {
         GangbangInfosShow(stage.FightMembers.HeroSets.GetValues(), (x) =>
         {
@@ -85,8 +85,7 @@ public partial class FightPrepareLayer : UILayer
             },
             enemyTeamShowT, false, 2);
         icons.FirstOrDefault()?.iconButton.onClick.Invoke();
-        team1OneWord.text = oneWordTeam1;
-        team2OneWord.text = oneWordTeam2;
+        team1Name.text = "YOU";
     }
     
     List<GangbangHeroIcon> GangbangInfosShow(List<UnitInfo> unitSets, Action<string> iconBehaviour, RectTransform showT, 

@@ -62,13 +62,13 @@ namespace FightScene
                         center.FightDataRef.Resistance.Value = 0;
                         center.FightDataRef.CriticalGauge.Value = 0;
                         sideIcon.GreyOut();
-                        if (FightLogger.value.GetWinnerTeam() == Team.none)
-                        {
-                            RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.TeamMode);
-                            var c = RTFightManager.Target._CameraManager.GetMode(C_Mode.CertainYAntiVibration);
-                            var mode = ((ChatGptFix)c);
-                            mode.MePos = center.WholeT.position;
-                        }
+                        // if (FightLogger.value.GetWinnerTeam() == Team.none)
+                        // {
+                        //     RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.TeamMode);
+                        //     var c = RTFightManager.Target._CameraManager.GetMode(C_Mode.CertainYAntiVibration);
+                        //     var mode = ((ChatGptFix)c);
+                        //     mode.MePos = center.WholeT.position;
+                        // }
                     }
                 }).AddTo(sideIcon.gameObject);
             }

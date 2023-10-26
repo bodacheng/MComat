@@ -71,11 +71,11 @@ public class QuestInfoPage : MSceneProcess
         
         if (stage is GangbangInfo)
         {
-            _layer.GangbangStageMembersInfoShow(_controllingGangbangInfo, stage.Team1OneWord, stage.Team2OneWord);
+            _layer.GangbangStageMembersInfoShow(_controllingGangbangInfo);
         }
         else
         {
-            _layer.StageMembersInfoShow(stage, stage.Team1OneWord, stage.Team2OneWord);
+            _layer.StageMembersInfoShow(stage);
         }
         
         if (FightLoad.Fight.EventType == FightEventType.Gangbang)

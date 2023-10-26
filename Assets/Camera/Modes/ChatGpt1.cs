@@ -84,7 +84,11 @@ class ChatGptFix : CameraMode
         set => mePos = value;
     }
 
-    public override void LocalUpdate(Camera _camera)
+    private const float AutoRotateLeastInterval = 2;
+    private float _autoRotateTimer;
+    private bool _currentRotateClockWiseDirection;
+    
+    public override void LocalUpdate(Camera camera)
     {
         if (meCenter != null)
         {
@@ -111,8 +115,8 @@ class ChatGptFix : CameraMode
             //enemiesCenter = mePos;
         }
         
-        enemyScreenPos = _camera.WorldToScreenPoint(enemiesCenter);
-        meScreenPos = _camera.WorldToScreenPoint(mePos);
+        enemyScreenPos = camera.WorldToScreenPoint(enemiesCenter);
+        meScreenPos = camera.WorldToScreenPoint(mePos);
         
         if (CanSetH)
         {
@@ -144,6 +148,8 @@ class ChatGptFix : CameraMode
                 angleToHorizental = CheckNeedForAutoRotate();
                 if (angleToHorizental > autoChangeAngleLimit)
                 {
+                    _autoRotateTimer += Time.deltaTime;
+                    
                     bool Clock()
                     {
                         if (meScreenPos.x < enemyScreenPos.x)
@@ -155,11 +161,17 @@ class ChatGptFix : CameraMode
                             return meScreenPos.y > enemyScreenPos.y;
                         }
                     }
-                
+
+                    if (_autoRotateTimer > AutoRotateLeastInterval)
+                    {
+                        _currentRotateClockWiseDirection = Clock();
+                        _autoRotateTimer = 0;
+                    }
+                    
                     // 如果夹角大于限制，则缓慢调整相机角度
                     Vector3 newOffset = Quaternion.Euler(0f, autoRotateSpeed *
                                                              ((angleToHorizental - autoChangeAngleLimit)/(90 - autoChangeAngleLimit)) * Time.deltaTime  // 分母是垂直情况下两个对象屏幕连线超出的"垂直界限"，分子是实际超过的界限。这个值是确保在垂直时候相机扭转最快，随后扭转变缓和
-                                                             * (Clock() ? -1f : 1f), 0f) * xzOff;
+                                                             * (_currentRotateClockWiseDirection ? -1f : 1f), 0f) * xzOff;
                     // 如果调整后的夹角小于等于限制，则使用新的偏移量
                     xzOff = newOffset;
                 }
@@ -208,10 +220,10 @@ class ChatGptFix : CameraMode
         
         if (hasTargets || h != 0)
         {
-            _camera.transform.position = Vector3.Lerp(_camera.transform.position, cameraTargetPos, _changeSpeed);
+            camera.transform.position = Vector3.Lerp(camera.transform.position, cameraTargetPos, _changeSpeed);
             rotateToDirection = lookPoint - cameraTargetPos;
             ToRotation = Quaternion.LookRotation(rotateToDirection.normalized);
-            _camera.transform.rotation = Quaternion.Slerp(_camera.transform.rotation, ToRotation, _changeSpeed);
+            camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, ToRotation, _changeSpeed);
         }
     }
 }

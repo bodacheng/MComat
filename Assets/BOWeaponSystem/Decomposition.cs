@@ -161,7 +161,7 @@ public partial class Decomposition : MonoBehaviour {
             }
         }
     }
-        
+    
     public void SpecialTriggerEvent(string defined_event_code, HitBoxSubEventManger hitBoxSubEventManger)//这个就只能在这自定义了
     {
         if (BO_Ani_E == null)
