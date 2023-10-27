@@ -148,12 +148,12 @@ public partial class FightParamsReference
     float _d;
     public void ApplyDamage(V_Damage dmg)
 	{
-        if (Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Def && Center.FightDataRef.Resistance.Value > 0)
-        {
-            Center._MyBehaviorRunner.ChangeState("Defend", dmg);
-            HitEffect(dmg);
-            return;
-        }
+        // if (Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Def && Center.FightDataRef.Resistance.Value > 0)
+        // {
+        //     Center._MyBehaviorRunner.ChangeState("Defend", dmg);
+        //     HitEffect(dmg);
+        //     return;
+        // }
         
         HitEffect(dmg);
         if (Center.FightDataRef.Resistance.Value > 0)

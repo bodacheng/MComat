@@ -45,7 +45,6 @@ public static class Translate
     {
 	    var key = GameTipsRecordIds.Keys.ToList().Random();
 	    return new string[2] { Get(key), Get(GameTipsRecordIds[key]) };
-
     }
     
     static void Load(TextAsset csv)

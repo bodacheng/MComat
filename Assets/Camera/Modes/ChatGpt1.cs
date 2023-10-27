@@ -130,26 +130,25 @@ class ChatGptFix : CameraMode
         }
         else
         {
-            if (Vector3.Distance(meScreenPos, enemyScreenPos) > screenDifferForRotate)
+            if (Vector2.Distance(meScreenPos, enemyScreenPos) > screenDifferForRotate)
             {
                 float angleToHorizental = 0;
                 float CheckNeedForAutoRotate()
                 {
                     if (meScreenPos.x < enemyScreenPos.x)
                     {
-                        return Mathf.Abs(Vector3.Angle(enemyScreenPos - meScreenPos, Vector3.right));
+                        return Mathf.Abs(Vector2.Angle(enemyScreenPos - meScreenPos, Vector3.right));
                     }
                     else
                     {
-                        return Mathf.Abs(Vector3.Angle(enemyScreenPos - meScreenPos, -Vector3.right));
+                        return Mathf.Abs(Vector2.Angle(enemyScreenPos - meScreenPos, -Vector3.right));
                     }
                 }
             
                 angleToHorizental = CheckNeedForAutoRotate();
                 if (angleToHorizental > autoChangeAngleLimit)
                 {
-                    _autoRotateTimer += Time.deltaTime;
-                    
+                    //_autoRotateTimer += Time.deltaTime;
                     bool Clock()
                     {
                         if (meScreenPos.x < enemyScreenPos.x)
@@ -162,11 +161,12 @@ class ChatGptFix : CameraMode
                         }
                     }
 
-                    if (_autoRotateTimer > AutoRotateLeastInterval)
-                    {
-                        _currentRotateClockWiseDirection = Clock();
-                        _autoRotateTimer = 0;
-                    }
+                    // if (_autoRotateTimer > AutoRotateLeastInterval)
+                    // {
+                    //     _currentRotateClockWiseDirection = Clock();
+                    //     _autoRotateTimer = 0;
+                    // }
+                    _currentRotateClockWiseDirection = Clock();
                     
                     // 如果夹角大于限制，则缓慢调整相机角度
                     Vector3 newOffset = Quaternion.Euler(0f, autoRotateSpeed *

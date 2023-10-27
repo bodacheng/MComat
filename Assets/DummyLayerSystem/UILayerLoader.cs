@@ -41,6 +41,7 @@ namespace DummyLayerSystem
             {"DropTableInfoLayer", "DummyLayerSystem/DropTableInfoLayer"},
             {"StoneListLayer", "DummyLayerSystem/StoneListLayer"},
             {"SkillEditLayer", "DummyLayerSystem/SkillEditLayer"},
+            {"SkillEditTipLayer", "DummyLayerSystem/SkillEditTipLayer"},
             {"UnitOptionLayer", "DummyLayerSystem/UnitOptionLayer"},
             {"StoneMergeLayer", "DummyLayerSystem/StoneMergeLayer"},
             {"ShopTopLayer", "DummyLayerSystem/ShopTopLayer"},

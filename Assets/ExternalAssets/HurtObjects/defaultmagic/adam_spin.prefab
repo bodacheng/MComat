@@ -24078,7 +24078,7 @@ MonoBehaviour:
   _HitBox: {fileID: 7849606445396193538}
   TrackControl: {fileID: 0}
   DestructionDelay: 3
-  stop_emission_delay: 0.2
+  stop_emission_delay: 0.42
   to_be_faded_renderers: []
   Attachments: []
   Counter: 0

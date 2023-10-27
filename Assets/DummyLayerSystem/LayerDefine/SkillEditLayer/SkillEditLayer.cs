@@ -131,6 +131,11 @@ public partial class SkillEditLayer : UILayer
         );
         _tweens.Add(tween);
     }
+
+    public void OpenTip()
+    {
+        UILayerLoader.Load<SkillEditTipLayer>();
+    }
     
     public async UniTask Setup(Action<SkillEditLayer> toDo = null)
     {

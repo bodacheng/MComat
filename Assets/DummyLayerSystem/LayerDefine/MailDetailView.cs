@@ -18,11 +18,11 @@ public class MailDetailView : UILayer
         this._iconRefresh = iconRefresh;
     }
     
-    private IDisposable disposeCountDown;
+    private IDisposable _disposeCountDown;
     public void Read(MailItemInstance instance)
     {
         var translatedTitle = Translate.Get(instance.DisplayName);
-        title.text = string.IsNullOrEmpty(translatedTitle) ? instance.DisplayName : translatedTitle;
+        title.text = instance.DisplayName; //string.IsNullOrEmpty(translatedTitle) ? instance.DisplayName : translatedTitle;
         var catalogItem = PlayFabReadClient.GetCatalogItemByDisplayName(instance.DisplayName);
         message.text = catalogItem != null ? catalogItem.Description : String.Empty;
         
@@ -43,7 +43,7 @@ public class MailDetailView : UILayer
             expirationT.gameObject.SetActive(instance.Expiration.HasValue);
             if (instance.Expiration.HasValue)
             {
-                disposeCountDown = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe((_) =>
+                _disposeCountDown = Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe((_) =>
                 {
                     var difference = instance.Expiration.Value - DateTime.Now;
                     difference = difference.Subtract(TimeSpan.FromSeconds(1));
@@ -51,7 +51,7 @@ public class MailDetailView : UILayer
                     if (difference.TotalSeconds <= 0)
                     {
                         expirationT.gameObject.SetActive(false);
-                        disposeCountDown.Dispose();
+                        _disposeCountDown.Dispose();
                     }
                 }).AddTo(gameObject);
             }

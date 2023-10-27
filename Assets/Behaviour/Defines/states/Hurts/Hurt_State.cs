@@ -66,8 +66,8 @@ namespace Soul
             base.AI_State_enter();
             if (_AIStateRunner.GetLastState().StateKey == "KnockOff")
             {
-                var knockOffState = (Knock_Off_State)_AIStateRunner.GetLastState();
-                if (knockOffState.FlyingStep == 0 || knockOffState.FlyingStep == 1)
+                //var knockOffState = (Knock_Off_State)_AIStateRunner.GetLastState();
+                //if (knockOffState.FlyingStep == 0 || knockOffState.FlyingStep == 1)
                     _AIStateRunner.ChangeState("KnockOff", target);
                 return;
             }
