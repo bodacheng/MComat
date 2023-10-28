@@ -135,9 +135,6 @@ MonoBehaviour:
   - 2
   - 3
   - 4
-  - 5
-  - 6
-  - 7
   bgImage: {fileID: 206743753813286962}
   unitImage: {fileID: 5638066698805041378}
   unitName: {fileID: 850153195338523841}

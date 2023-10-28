@@ -32637,6 +32637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d744f12bd816b421dbc95f661f798e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultAnimation: {fileID: 7400000, guid: c2a4eddd4678e4e4c88d43159c40292b, type: 2}
   winkAnimation: {fileID: 7400000, guid: e5fbb789a5146401bb32c6e71ed7a947, type: 2}
   smileAnimation: {fileID: 7400000, guid: c2a4eddd4678e4e4c88d43159c40292b, type: 2}
   hitAnimation: {fileID: 7400000, guid: db3f5d70438c0433c8228f4cee490fa4, type: 2}

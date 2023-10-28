@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FacialAnimManager : MonoBehaviour
 {
+    [SerializeField] AnimationClip defaultAnimation;
     [SerializeField] AnimationClip winkAnimation;
     [SerializeField] AnimationClip smileAnimation;
     [SerializeField] AnimationClip hitAnimation;
@@ -19,6 +20,7 @@ public class FacialAnimManager : MonoBehaviour
     public void INI(Animator animator, AnimatorOverrideController animatorOverride)
     {
         this.animator = animator;
+        animatorOverride["null"] = defaultAnimation;
         animatorOverride["wink"] = winkAnimation;
         animatorOverride["smile"] = smileAnimation;
         animatorOverride["hit"] = hitAnimation;

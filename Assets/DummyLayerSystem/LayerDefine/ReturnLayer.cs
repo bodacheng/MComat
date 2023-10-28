@@ -12,7 +12,6 @@ public class ReturnLayer : UILayer
     
     public static readonly List<ReturnAction> ReturnMissionList = new List<ReturnAction>();
     
-    
     void Setup()
     {
         returnButton.onClick.RemoveAllListeners();

@@ -134,7 +134,8 @@ public partial class SkillEditLayer : UILayer
 
     public void OpenTip()
     {
-        UILayerLoader.Load<SkillEditTipLayer>();
+        if (PlayerAccountInfo.Me.tutorialProgress == "Finished")
+            UILayerLoader.Load<SkillEditTipLayer>();
     }
     
     public async UniTask Setup(Action<SkillEditLayer> toDo = null)
@@ -279,7 +280,6 @@ public partial class SkillEditLayer : UILayer
         }
         
         cell.btn.SetListener(ButtonFeature);
-
         cell.btn.ActivateHold = true;
         cell.btn.ActivateDoubleClick = true;
         
