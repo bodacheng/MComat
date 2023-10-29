@@ -250,3 +250,4 @@ GameTip2,"・The ultimate move cannot be released if there isn't enough energy. 
 GameTip3,"・Each skill has its optimal release distance from the enemy. In automatic mode, the AI will autonomously choose which skill to release based on the distance from the enemy.",・各スキルには敵との最適な発動距離があります。自動モードでは、AIは敵との距離に基づいてスキルを自動的に選択して発動します。,・每个技能都有所对应的最佳距敌释放距离。自动模式下，AI会根据与敌人的距离自主选择技能释放。
 GameTip4,"・In war mode, swiping the center of the screen with one finger rotates the camera, while using two fingers allows you to zoom out or zoom in the camera.",・戦争モード下で、画面の中央を一本の指でスワイプするとカメラが回転し、二本の指で操作するとカメラをズームアウトまたはズームインできます。,・战争模式下，单指划动屏幕中央可旋转相机，双指操作可拉远，拉近相机
 GameTip5,・It is recommended to place defensive skills in the first vertical column of the skill slot.,・防御系のスキルは、スキルスロットの第1縦列に配置することを推奨します。,・防御类技能建议配置在技能槽第一竖列
+GameTip6,"・When activated by different characters, certain skills may exhibit different effects.",・一部のスキルは異なるキャラクターが発動すると、異なる効果を示します。,・部分技能被不同角色发动时会呈现出不同的效果
