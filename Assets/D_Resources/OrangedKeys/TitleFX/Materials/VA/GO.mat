@@ -112,13 +112,13 @@ Material:
     - _UpDownDirection: 0
     - _UseUIAlphaClip: 0
     - _VignetteMaskFallof: 0.5
-    - _VignetteMaskSize: 0.439
+    - _VignetteMaskSize: 0.643
     - _XTiling: 1.2
     - _YTiling: 1
     - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color0: {r: 1, g: 0.235066, b: 0, a: 0}
-    - _MainColor: {r: 406.69348, g: 406.69348, b: 406.69348, a: 1}
+    - _MainColor: {r: 542.96765, g: 542.96765, b: 542.96765, a: 1}
     - _OutlineColor: {r: 66.81093, g: 58.06604, b: 0, a: 1}
   m_BuildTextureStacks: []
