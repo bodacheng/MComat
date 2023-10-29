@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Soul
@@ -32,10 +33,9 @@ namespace Soul
             
             if (clip_name == "victory")
             {
-                var deadEnemies = Sensor.GetActiveDeadEnemies();
-                var oneActive = deadEnemies.Find(x => x.gameObject.activeSelf);
-                if (oneActive != null)
-                    RotateToTargetTween(oneActive.transform.position, 0.01f);
+                var deadEnemy = Sensor.GetLastDeadEnemies();
+                if (deadEnemy != null)
+                    RotateToTargetTween(deadEnemy.transform.position, 0.01f);
             }
             else
             {

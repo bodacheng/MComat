@@ -48,6 +48,18 @@ namespace FightScene
                         Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
                         if (FightLogger.value.GetWinnerTeam() == Team.none)
                             ToNewUnit();
+                        
+                        var disposable = new SerialDisposable();
+                        disposable.Disposable = Observable.Timer(TimeSpan.FromSeconds(1)).Subscribe(
+                            async (_) =>
+                            {
+                                if (center != null)
+                                {
+                                    await EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null, center.geometryCenter.position, Quaternion.identity, null);
+                                    center.WholeT.gameObject.SetActive(false);
+                                }
+                                disposable.Dispose();
+                            }).AddTo(center);
                     }
                 }).AddTo(gameObject);
             }

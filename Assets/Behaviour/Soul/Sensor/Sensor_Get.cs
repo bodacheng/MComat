@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public partial class Sensor
@@ -79,10 +80,10 @@ public partial class Sensor
         return _alliesByDistance;
     }
     
-    public List<GameObject> GetActiveDeadEnemies()
+    public GameObject GetLastDeadEnemies()
     {
         var _enemiesByDistance = FindTargetsByDistance(this._teamConfig.myEnemies.ToArray(), SharedDeadUnitDic);
-        return _enemiesByDistance;
+        return _enemiesByDistance.LastOrDefault();
     }
     
     Collider FindNearestCollider(List<Collider> list)
