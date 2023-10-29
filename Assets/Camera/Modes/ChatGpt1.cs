@@ -19,14 +19,8 @@ class ChatGptFix : CameraMode
     readonly float _lookPointHeight = 2f;
     readonly float _minXZ;
     float fieldOfView;
-    private float screenDifferForRotate = 1;
+    private float screenDifferForRotate = 150;
     
-    public Vector3 XZOff
-    {
-        get => xzOff;
-        set => xzOff = value;
-    }
-
     float TransitionSpeedPara
     {
         get => _transitionSpeedPara;
@@ -78,13 +72,6 @@ class ChatGptFix : CameraMode
     }
 
     private Vector3 mePos;
-    public Vector3 MePos
-    {
-        get => mePos;
-        set => mePos = value;
-    }
-
-    private const float AutoRotateLeastInterval = 3;
     private float _autoRotateTimer;
     private bool _currentRotateClockWiseDirection;
     
@@ -97,7 +84,6 @@ class ChatGptFix : CameraMode
         
         _changeSpeed = Time.deltaTime / (TransitionSpeedPara + Time.deltaTime); //分母里那个附加值越大，变得越慢。
         bool hasTargets = targets != null && targets.Count > 0;
-        
         if (hasTargets)
         {
             enemiesCenter = Vector3.zero;
@@ -109,10 +95,6 @@ class ChatGptFix : CameraMode
                 }
             }
             enemiesCenter /= targets.Count;
-        }
-        else
-        {
-            //enemiesCenter = mePos;
         }
         
         enemyScreenPos = camera.WorldToScreenPoint(enemiesCenter);
@@ -132,7 +114,7 @@ class ChatGptFix : CameraMode
         {
             if (Vector2.Distance(meScreenPos, enemyScreenPos) > screenDifferForRotate)
             {
-                float angleToHorizental = 0;
+                float angleToHorizontal = 0;
                 float CheckNeedForAutoRotate()
                 {
                     if (meScreenPos.x < enemyScreenPos.x)
@@ -144,11 +126,10 @@ class ChatGptFix : CameraMode
                         return Mathf.Abs(Vector2.Angle(enemyScreenPos - meScreenPos, -Vector3.right));
                     }
                 }
-            
-                angleToHorizental = CheckNeedForAutoRotate();
-                if (angleToHorizental > autoChangeAngleLimit)
+                
+                angleToHorizontal = CheckNeedForAutoRotate();
+                if (angleToHorizontal > autoChangeAngleLimit)
                 {
-                    //_autoRotateTimer += Time.deltaTime;
                     bool Clock()
                     {
                         if (meScreenPos.x < enemyScreenPos.x)
@@ -160,20 +141,11 @@ class ChatGptFix : CameraMode
                             return meScreenPos.y > enemyScreenPos.y;
                         }
                     }
-
-                    // if (_autoRotateTimer > AutoRotateLeastInterval)
-                    // {
-                    //     _currentRotateClockWiseDirection = Clock();
-                    //     _autoRotateTimer = 0;
-                    // }
                     _currentRotateClockWiseDirection = Clock();
-                    
                     // 如果夹角大于限制，则缓慢调整相机角度
-                    Vector3 newOffset = Quaternion.Euler(0f, autoRotateSpeed *
-                                                             ((angleToHorizental - autoChangeAngleLimit)/(90 - autoChangeAngleLimit)) * Time.deltaTime  // 分母是垂直情况下两个对象屏幕连线超出的"垂直界限"，分子是实际超过的界限。这个值是确保在垂直时候相机扭转最快，随后扭转变缓和
-                                                             * (_currentRotateClockWiseDirection ? -1f : 1f), 0f) * xzOff;
-                    // 如果调整后的夹角小于等于限制，则使用新的偏移量
-                    xzOff = newOffset;
+                    xzOff = Quaternion.Euler(0f, autoRotateSpeed *
+                                                 ((angleToHorizontal - autoChangeAngleLimit)/(90 - autoChangeAngleLimit)) * Time.deltaTime  // 分母是垂直情况下两个对象屏幕连线超出的"垂直界限"，分子是实际超过的界限。这个值是确保在垂直时候相机扭转最快，随后扭转变缓和
+                                                 * (_currentRotateClockWiseDirection ? -1f : 1f), 0f) * xzOff;
                 }
             }
         }
@@ -182,22 +154,6 @@ class ChatGptFix : CameraMode
         ePosY = (float)((decimal)enemyScreenPos.y / Screen.height);
         mPosX = (float)((decimal)meScreenPos.x / Screen.width);
         mPosY = (float)((decimal)meScreenPos.y / Screen.height);
-            
-        enemyScreenPos = new Vector2((enemyScreenPos.x /Screen.width),(enemyScreenPos.y /Screen.height));
-        meScreenPos = new Vector2((meScreenPos.x /Screen.width), (meScreenPos.y /Screen.height));
-        
-        // 判断我与敌人哪个更接近相机位置
-        if (enemyScreenPos.y >= meScreenPos.y)
-        {
-            frontWPos = mePos;
-            backWPos = enemiesCenter;
-        }
-        else
-        {
-            frontWPos = enemiesCenter;
-            backWPos = mePos;
-        }
-            
         if (ePosX >= 0.3 && ePosX <= 0.7 &&
             mPosX >= 0.3 && mPosX <= 0.7 &&
             ePosY >= 0.3 && ePosY <= 0.7 &&
@@ -211,6 +167,18 @@ class ChatGptFix : CameraMode
                  mPosY <= 0.2 || mPosY >= 0.8)
         {
             XZDistance += _changeSpeed;
+        }
+        
+        // 判断我与敌人哪个更接近相机位置
+        if (enemyScreenPos.y >= meScreenPos.y)
+        {
+            frontWPos = mePos;
+            backWPos = enemiesCenter;
+        }
+        else
+        {
+            frontWPos = enemiesCenter;
+            backWPos = mePos;
         }
         
         lookPoint = (backWPos - frontWPos) * 0.5f + frontWPos;
