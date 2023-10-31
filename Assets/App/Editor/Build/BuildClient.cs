@@ -705,7 +705,7 @@ namespace Cocone.ProjectP3
 					if (!String.IsNullOrEmpty((attString.AsString())))
 					{
 						// 我们将其删除了。cocone到底拿AppTrackingTransparency作何用不清楚
-						//project.AddFrameworkToProject(frameworkTargetGuid, "AppTrackingTransparency.framework", true);
+						project.AddFrameworkToProject(frameworkTargetGuid, "AppTrackingTransparency.framework", true);
 						project.AddFrameworkToProject(frameworkTargetGuid, "AdSupport.framework", true);
 					}
 				}
