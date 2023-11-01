@@ -176721,13 +176721,6 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.33333334
-    functionName: EffectOnBodyPart
-    data: left_foot
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
   - time: 0.35
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
     data: 
@@ -176736,15 +176729,15 @@ AnimationClip:
     intParameter: 1
     messageOptions: 0
   - time: 0.43333334
-    functionName: SetLeftFootMarkerManager
-    data: 
+    functionName: PrepareOneMagic
+    data: ground_dark_explosion
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 9
     messageOptions: 0
-  - time: 0.6666667
-    functionName: ClearMarkerManagers
-    data: 
+  - time: 0.56666666
+    functionName: ReleasePreparedMagicToAir
+    data: left_foot
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

@@ -83933,7 +83933,7 @@ AnimationClip:
   m_Events:
   - time: 0.55
     functionName: MagicForward
-    data: magic_forward
+    data: ground_huge_green_explosion
     objectReferenceParameter: {fileID: 0}
     floatParameter: 3
     intParameter: 0
