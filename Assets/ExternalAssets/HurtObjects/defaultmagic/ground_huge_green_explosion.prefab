@@ -20108,8 +20108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 6363047987515568028}
   TrackControl: {fileID: 0}
-  DestructionDelay: 3
-  stop_emission_delay: 2.2
+  DestructionDelay: 1
+  stop_emission_delay: 0.5
   to_be_faded_renderers: []
   Attachments: []
   Counter: 0
@@ -20139,7 +20139,7 @@ MonoBehaviour:
   hitEffect: 
   ExplosionEffect: energy_resolve
   ContinuousDamage: 1
-  ContinuousDamageInterval: 0.2
+  ContinuousDamageInterval: 0.1
 --- !u!82 &-2234957680418317177
 AudioSource:
   m_ObjectHideFlags: 0

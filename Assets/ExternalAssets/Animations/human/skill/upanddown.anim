@@ -176735,7 +176735,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 9
     messageOptions: 0
-  - time: 0.56666666
+  - time: 0.51666665
+    functionName: SetLeftFootMarkerManager
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
+  - time: 0.55
+    functionName: ClearMarkerManagers
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.55
     functionName: ReleasePreparedMagicToAir
     data: left_foot
     objectReferenceParameter: {fileID: 0}
