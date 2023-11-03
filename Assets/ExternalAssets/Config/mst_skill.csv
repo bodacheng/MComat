@@ -61,4 +61,5 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK
 44,frictionkick,human,2,2,2,GR,
 107,upanddown,human,1,1.5,2,GI,
 117,zhaohuan,human,3,8.3,2,GI,
-136,rotatehadogen,human,2,5,5,GI,
+136,rotatehadogen,human,2,5,2,GI,
+77,fo_huge,human,3,8,2,GR,替换了原先的a_combo4

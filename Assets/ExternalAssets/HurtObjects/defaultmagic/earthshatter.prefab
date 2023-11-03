@@ -44213,7 +44213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivateAfterTime: 0
   SpecificTarget: 0
-  damage_type: 6
+  damage_type: 14
   _WeaponMode: 2
   AT_weight: 1
   weaponHP: 3
@@ -68867,7 +68867,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
+      scalar: 0.7
       minScalar: 0.2
       maxCurve:
         serializedVersion: 2
@@ -69559,7 +69559,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 3
-        scalar: 200
+        scalar: 300
         minScalar: 100
         maxCurve:
           serializedVersion: 2

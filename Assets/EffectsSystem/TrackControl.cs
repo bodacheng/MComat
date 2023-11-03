@@ -36,7 +36,7 @@ public class TrackControl : MonoBehaviour {
         {
             case TrackMode.DefinedTrack:
                 this.Z_scale = _Z_scale;
-                m = Matrix4x4.TRS(start, startQ, Vector3.one * 1);
+                m = Matrix4x4.TRS(start, startQ, Vector3.one);
             break;
             case TrackMode.Navigation:
                 m = Matrix4x4.TRS(start, startQ, Vector3.one * 1);
