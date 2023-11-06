@@ -49,6 +49,9 @@ public class CommonSetting : ScriptableObject
     [Tooltip("角色动画平滑区间")] 
     [SerializeField] private float characterAnimDuration = 0.25f;
     
+    [Tooltip("角色阴影材质")] 
+    [SerializeField] Material shadowMaterial;
+    
     [Tooltip("downLoad labels")] 
     [SerializeField] List<string> downLoadLabels;
 
@@ -78,7 +81,7 @@ public class CommonSetting : ScriptableObject
     public static string MemberShiftEffectCode;
     
     public static float CharacterAnimDuration;
-
+    public static Material ShadowMaterial;
     public static AudioClip BtnTapSound;
     public static AudioClip BtnConfirmSound;
     public static AudioClip ExTabSound;
@@ -109,7 +112,7 @@ public class CommonSetting : ScriptableObject
         MemberShiftEffectCode = memberShiftEffectCode;
 
         CharacterAnimDuration = characterAnimDuration;
-
+        ShadowMaterial = shadowMaterial;
         BtnTapSound = btnTapSound;
         BtnConfirmSound = btnConfirmSound;
         ExTabSound = exTabSound;

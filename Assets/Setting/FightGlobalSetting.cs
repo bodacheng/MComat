@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "FightGlobalSetting", menuName = "ScriptableObjects/FightGlobalSetting", order = 1)]
 public class FightGlobalSetting : ScriptableObject
@@ -37,9 +38,9 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] float toEnemyNearestDis = 1;
     [SerializeField] int eXMax = 120;
     [SerializeField] int energyResolveAfterExtendBoundary = 5;
-    [SerializeField] Material shadowMaterial;
     [SerializeField] PhysicMaterial _physicMaterial;
 
+    static string fightParamKey = "Config/fight_params";
     public static int SceneStep;//0 :mainmenu 1: fightscene
     public static bool HasDefend;
     public static bool SkillStoneHasExp;
@@ -73,7 +74,6 @@ public class FightGlobalSetting : ScriptableObject
     public static float ToEnemyNearestDis = 1;
     public static int _EXMax;
     public static bool HitBoxLogger = true;
-    public static Material _shadowMaterial;
     public static int _defendHP;
     public static int _energyResolveAfterExtendBoundary;
     public static PhysicMaterial PhysicMaterial;
@@ -130,7 +130,6 @@ public class FightGlobalSetting : ScriptableObject
         _ResistanceMax = resistanceMax;
         _EXMax = eXMax;
         
-        _shadowMaterial = shadowMaterial;
         PhysicMaterial = _physicMaterial;
         _energyResolveAfterExtendBoundary = energyResolveAfterExtendBoundary;
     }
@@ -186,5 +185,11 @@ public class FightGlobalSetting : ScriptableObject
                 break;
         }
         return personalEffectPath;
+    }
+
+    public static async UniTask LoadFightParams()
+    {
+        var data = await AddressablesLogic.LoadT<FightGlobalSetting>(fightParamKey);
+        data.Initialise();
     }
 }

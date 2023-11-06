@@ -25,7 +25,6 @@ public class StarterGUI : Editor
 public class Starter : MonoBehaviour
 {
     [SerializeField] PlayFabSetting playFabSetting;
-    [SerializeField] FightGlobalSetting fightGlobalSetting;
     [SerializeField] CommonSetting commonSetting;
     [SerializeField] DefaultIconSetting defaultIconSetting;
     [SerializeField] DebugLogManager inGameDebugConsole;
@@ -48,10 +47,7 @@ public class Starter : MonoBehaviour
         NativeLeakDetection.Mode = NativeLeakDetectionMode.EnabledWithStackTrace;
         AddressablesLogic.ReleaseAsyncOperationHandles();
         commonSetting.Initialise();
-
         inGameDebugConsole.gameObject.SetActive(CommonSetting.DevMode);
-        
-        fightGlobalSetting.Initialise();
         playFabSetting.Initialise();
         defaultIconSetting.Initialise();
         await UniTask.WhenAll(
@@ -61,7 +57,8 @@ public class Starter : MonoBehaviour
                 PowerEstimateTable.LoadFile(),
                 Units.LoadUnitConfigs(),
                 Translate.LoadLanguageCodes(),
-                UnitPassiveTable.Load()
+                UnitPassiveTable.Load(),
+                FightGlobalSetting.LoadFightParams()
             }
         );
         //MobileAds.Initialize(initStatus => { Debug.Log(initStatus);});

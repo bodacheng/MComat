@@ -14,16 +14,17 @@ public class ShaderManager : MonoBehaviour
         foreach (var mesh in meshes)
         {
             mesh.gameObject.layer = 3;
-            var shadowMesh = Instantiate(mesh);
-            shadowMesh.transform.parent = mesh.transform;
-            shadowMesh.transform.localPosition = Vector3.zero;
-            shadowMesh.transform.localScale = Vector3.one * 0.9f;
-            shadowMesh.gameObject.name = "shadow_" + shadowMesh.gameObject.name;
-            shadowMesh.gameObject.layer = 0;
-            shadowMesh.Mesh.material = FightGlobalSetting._shadowMaterial;
+            var shadowMesh = Instantiate(mesh, mesh.transform, true);
+            var transform1 = shadowMesh.transform;
+            transform1.localPosition = Vector3.zero;
+            transform1.localScale = Vector3.one * 0.9f;
+            var o = shadowMesh.gameObject;
+            o.name = "shadow_" + o.name;
+            o.layer = 0;
+            shadowMesh.Mesh.material = CommonSetting.ShadowMaterial;
             shadowMesh.Mesh.shadowCastingMode = ShadowCastingMode.On;
         }
-
+        
         // for (int i = 0; i < pOFXes.Count; i++)
         // {
         //     // Rim
