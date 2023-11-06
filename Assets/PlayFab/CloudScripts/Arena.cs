@@ -195,4 +195,5 @@ public class LeaderboardInfo
     public PlayerLeaderboardEntry PlayerLeaderboardEntry;
     public MultiDic<int, int, UnitInfo>.SerializableSet[] Team;
     public string OneWord;
+    public string plusPoint;
 }

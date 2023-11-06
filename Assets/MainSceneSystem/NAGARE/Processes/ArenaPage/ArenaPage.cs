@@ -70,7 +70,6 @@ public partial class ArenaPage : MSceneProcess
                         PreScene.target.trySwitchToStep(MainSceneStep.Ranking);
                     },
                     UpdateOneWord,
-                    PlusPoint,
                     PrepareForIt
                 );
                 arenaLayer.SetupArenaTicket();
@@ -167,18 +166,5 @@ public partial class ArenaPage : MSceneProcess
         UILayerLoader.Remove<ArenaNewSeason>();
         UILayerLoader.Remove<ArenaLayer>();
         UILayerLoader.Remove<NickNameLayer>();
-    }
-    
-    // 以下数值设置的与CloudScript.ArenaPointUp一致
-    int PlusPoint(PlayerLeaderboardEntry myInfo, PlayerLeaderboardEntry opponentInfo)
-    {
-        if (opponentInfo.Position - myInfo.Position >= 50)
-        {
-            return Mathf.Clamp(opponentInfo.StatValue - myInfo.StatValue, 20, 30);
-        }
-        else
-        {
-            return Mathf.Clamp(opponentInfo.StatValue - myInfo.StatValue, 10, 20);
-        }
     }
 }

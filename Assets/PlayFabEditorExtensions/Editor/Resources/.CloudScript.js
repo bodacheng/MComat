@@ -797,7 +797,20 @@ handlers.ArenaDefendTeamSave = function (args, context) {
     };
 }
 
-function AddTeamInfoItem(Leaderboard) {
+function arenaPlusPoint(mePosition, opponentPosition, mePoint, opponentPoint) {
+    let plusPoint = 0;
+    if (opponentPosition - mePosition >= 50)
+    {
+        plusPoint = clamp(opponentPoint - mePoint, 20, 30);
+    }
+    else
+    {
+        plusPoint = clamp(opponentPoint - mePoint, 10, 20);
+    }
+    return plusPoint;
+}
+
+function AddTeamInfoItem(Leaderboard, mePosition, mePoint) {
     
     var playerTeamData = server.GetUserData(
         {
@@ -811,7 +824,8 @@ function AddTeamInfoItem(Leaderboard) {
         var item = {
             "PlayerLeaderboardEntry": Leaderboard,
             "Team": JSON.parse(playerTeamData.Data["DefendTeam"].Value),
-            "OneWord": playerTeamData.Data["OneWord"] != null ? playerTeamData.Data["OneWord"].Value : ""
+            "OneWord": playerTeamData.Data["OneWord"] != null ? playerTeamData.Data["OneWord"].Value : "",
+            "plusPoint": arenaPlusPoint(mePosition, Leaderboard.Position, mePoint, Leaderboard.StatValue)
         };
         return item;
     }
@@ -822,7 +836,8 @@ function ArrangeMyTeamInfoItem(Leaderboard, DefendTeam, OneWord) {
     var item = {
         "PlayerLeaderboardEntry": Leaderboard,
         "Team": JSON.parse(DefendTeam),
-        "OneWord":OneWord
+        "OneWord":OneWord,
+        "plusPoint":""
     };
     return item;
 }
@@ -843,7 +858,7 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     
     var request = {
         "PlayFabId": currentPlayerId,
-        "MaxResultsCount": 3,
+        "MaxResultsCount": 4,
         "StatisticName": "arenapoint",
         "ProfileConstraints" : {
             "ShowDisplayName" : true
@@ -851,38 +866,19 @@ handlers.GetLeaderboardAroundUser = function (args, context) {
     };
     
     var result = server.GetLeaderboardAroundUser(request);
-    // 结果列表里分数高的在前
-    var chooseHighest = result.Leaderboard[0];
-    var requestForAHigherPlayer = {
-        "MaxResultsCount": 1,
-        "StatisticName": "arenapoint",
-        "ProfileConstraints" : {
-            "ShowDisplayName" : true
-        },
-        "StartPosition" : clampMin(chooseHighest.Position - 50, 0)// playfab 不提供指定分数获取排行榜名单功能，只能给个更高位置
-    };
-
-    var higherPlayer = undefined;
-    var higherPlayerResult = server.GetLeaderboard(requestForAHigherPlayer);
-    if (higherPlayerResult.Leaderboard.length > 0) {
-        higherPlayer = higherPlayerResult.Leaderboard[0];
-    }
-    var higherPlayerItem;
-    if (higherPlayer != undefined) 
-        higherPlayerItem = AddTeamInfoItem(higherPlayer);
-    
-    if (higherPlayerItem != null) {
-        teamInfos.push(higherPlayerItem);
+    var myTeam;
+    for (let i = 0; i < result.Leaderboard.length; i++) {
+        if (result.Leaderboard[i].PlayFabId == currentPlayerId){
+            myTeam = ArrangeMyTeamInfoItem(result.Leaderboard[i], myTeamData.Data["DefendTeam"].Value, myTeamData.Data["OneWord"] != null ? myTeamData.Data["OneWord"].Value : "");
+            if (myTeam != null) {
+                teamInfos.push(myTeam);
+            }
+        }
     }
     
     for (let i = 0; i < result.Leaderboard.length; i++) {
-        if (result.Leaderboard[i].PlayFabId == currentPlayerId){
-            var item = ArrangeMyTeamInfoItem(result.Leaderboard[i], myTeamData.Data["DefendTeam"].Value, myTeamData.Data["OneWord"] != null ? myTeamData.Data["OneWord"].Value : "");
-            if (item != null) {
-                teamInfos.push(item);
-            }
-        }else{
-            var item = AddTeamInfoItem(result.Leaderboard[i]);
+        if (result.Leaderboard[i].PlayFabId != currentPlayerId) {
+            var item = AddTeamInfoItem(result.Leaderboard[i], myTeam.PlayerLeaderboardEntry.Position, myTeam.PlayerLeaderboardEntry.StatValue);
             if (item != null) {
                 teamInfos.push(item);
             }
@@ -962,17 +958,7 @@ handlers.ArenaPointUp = function (args, context) {
     let opponentPosition = args.opponentPosition;
     let mePoint = args.mePoint;
     let opponentPoint = args.opponentPoint;
-    
-    let plusPoint = 0;
-    if (opponentPosition - mePosition >= 50)
-    {
-        plusPoint = clamp(opponentPoint - mePoint, 20, 30);
-    }
-    else
-    {
-        plusPoint = clamp(opponentPoint - mePoint, 10, 20);
-    }
-    
+    let plusPoint = arenaPlusPoint(mePosition, opponentPosition, mePoint, opponentPoint);
     let shouldPoint = mePoint + plusPoint;
     var playerStatResult = server.UpdatePlayerStatistics({
         PlayFabId: currentPlayerId,

@@ -47,7 +47,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
     }
     
     // 本函数唯一用途是竞技场的挑战玩家选择画面里每组敌人图标按钮的外观与功能加载
-    public void AddFightToList(LeaderboardInfo info, LeaderboardInfo myInfo, Func<PlayerLeaderboardEntry, PlayerLeaderboardEntry, int> plusCal, Action<FightInfo> tryBeginStage)
+    public void AddFightToList(LeaderboardInfo info, LeaderboardInfo myInfo, Action<FightInfo> tryBeginStage)
     {
         SetUpCommonInfo(info);
         var stage = LeaderBoardInfoToFightInfo(info);
@@ -57,7 +57,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         stage.Team2LeaderboardEntry = info.PlayerLeaderboardEntry;
 
         bigButton.onClick.AddListener(()=> tryBeginStage(stage));
-        plusArenaPoint.text = "+" + plusCal(myInfo.PlayerLeaderboardEntry, info.PlayerLeaderboardEntry);
+        plusArenaPoint.text = "+" + info.plusPoint;
         plusArenaPoint.gameObject.SetActive(true);
     }
     

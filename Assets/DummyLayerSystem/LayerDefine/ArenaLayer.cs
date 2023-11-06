@@ -32,13 +32,12 @@ public class ArenaLayer : UILayer
     
     [SerializeField] Button rankingPageBtn;
     [SerializeField] Button rewardBtn;
-
-    private Func<PlayerLeaderboardEntry, PlayerLeaderboardEntry, int> plusCal;
+    
     private Action<FightInfo> tryBeginStage;
     private int maxOpponentCount = 3;
     
     public void SetUp(Action loadData, Action openRanking, 
-        Action<InputField> updateOneWord, Func<PlayerLeaderboardEntry, PlayerLeaderboardEntry, int> plusCal, Action<FightInfo> tryBeginStage)
+        Action<InputField> updateOneWord, Action<FightInfo> tryBeginStage)
     {
         refreshBtn.onClick.RemoveAllListeners();
         refreshBtn.onClick.AddListener(()=>
@@ -50,7 +49,6 @@ public class ArenaLayer : UILayer
         rankingPageBtn.onClick.AddListener(()=> openRanking());
         arenaRankIcon.Set(PlayerAccountInfo.Me.arenaPoint);
         this.tryBeginStage = tryBeginStage;
-        this.plusCal = plusCal;
         
         void GoToTeamEdit()
         {
@@ -127,7 +125,7 @@ public class ArenaLayer : UILayer
         {
             var leaderInfo = ordered[index];
             var o = Instantiate(arenaFightTeamDisplayPrefab);
-            o.AddFightToList(leaderInfo, myInfo, plusCal, tryBeginStage);
+            o.AddFightToList(leaderInfo, myInfo, tryBeginStage);
             o.transform.SetParent(enemiesT);
             o.transform.localPosition = Vector3.zero;
             o.transform.localScale = Vector3.one;
