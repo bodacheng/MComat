@@ -82,6 +82,11 @@ public class BackGroundPS : MonoBehaviour
     {
         SwitchBG(4);
     }
+
+    public void Void()
+    {
+        SwitchBG(5);
+    }
     
     void SwitchBG(int index)
     {

@@ -17,6 +17,8 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] GameObject teamEditIndicator;
     [SerializeField] Text teamEditIndicatorText;
     [SerializeField] FightModeSwitch fightModeSwitch;
+    [SerializeField] GameObject enemyDoubleExModeFlg;
+    [SerializeField] GameObject enemyInfiniteExModeFlg;
     [SerializeField] FightBeginBtn beginFight;
     [SerializeField] Text team1Name;
     [SerializeField] Text team2Name;
@@ -118,8 +120,11 @@ public partial class FightPrepareLayer : UILayer
         {
             team1Name.text = "YOU";
         }
+        
+        enemyDoubleExModeFlg.SetActive(stage.team2CGMode == CriticalGaugeMode.DoubleGain);
+        enemyInfiniteExModeFlg.SetActive(stage.team2CGMode == CriticalGaugeMode.Unlimited);
     }
-
+    
     async void FocusTeam2Unit(string instanceId, List<UnitInfo> team2Units)
     {
         ProgressLayer.Loading(String.Empty);

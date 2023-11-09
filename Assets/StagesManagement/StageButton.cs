@@ -13,13 +13,19 @@ public partial class StageButton : MonoBehaviour
     [SerializeField] RectTransform iconsT;
     [SerializeField] Text id;
     [SerializeField] RewardUI rewardUI;
+    [SerializeField] GameObject enemyDoubleExModeFlg;
+    [SerializeField] GameObject enemyInfiniteExModeFlg;
     
     public Button Button => button;
     public RewardUI RewardUI => rewardUI;
-
-    public CriticalGaugeMode CriticalGaugeMode {
-        set;
-        get;
+    
+    public CriticalGaugeMode CriticalGaugeMode
+    {
+        set
+        {
+            enemyDoubleExModeFlg.SetActive(value == CriticalGaugeMode.DoubleGain);
+            enemyInfiniteExModeFlg.SetActive(value == CriticalGaugeMode.Unlimited);
+        }
     }
 
     private int stageNo;

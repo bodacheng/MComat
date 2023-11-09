@@ -53,7 +53,7 @@ public partial class ArenaPage : MSceneProcess
     
     void EnterProcess()
     {
-        BackGroundPS.target.ChangeBGByElement(Element.redMagic);
+        BackGroundPS.target.Void();
         missionWatcher = new MissionWatcher(
             new List<string>
             {
