@@ -920,7 +920,7 @@ handlers.GetLeaderboard = function (args, context) {
         "ProfileConstraints" : {
             "ShowDisplayName" : true
         },
-        "StartPosition" : 1
+        "StartPosition" : 0
     };
     var Result = server.GetLeaderboard(request);
     let teamInfos = [];

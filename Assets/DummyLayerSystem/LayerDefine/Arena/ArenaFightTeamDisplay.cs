@@ -18,7 +18,7 @@ public class ArenaFightTeamDisplay : MonoBehaviour
     void SetUpCommonInfo(LeaderboardInfo info, Action<UnitInfo> onClickUnitIcon = null)
     {
         displayName.text = info.PlayerLeaderboardEntry.DisplayName;
-        rank.text = info.PlayerLeaderboardEntry.Position.ToString();
+        rank.text = (info.PlayerLeaderboardEntry.Position+1).ToString();
         arenaPoint.text =  info.PlayerLeaderboardEntry.StatValue.ToString();
         oneWord.text = info.OneWord;
         rankIcon.Set(info.PlayerLeaderboardEntry.StatValue);

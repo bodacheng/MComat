@@ -67,7 +67,7 @@ public partial class CloudScript
             new ExecuteCloudScriptRequest
             {
                 FunctionName = "GetLeaderboardAroundUser",
-                GeneratePlayStreamEvent = true
+                GeneratePlayStreamEvent = false
             },
             (result) => {
                 try
