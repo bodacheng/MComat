@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using dataAccess;
 using mainMenu;
-using PlayFab.ClientModels;
 using UniRx;
 using UnityEngine.UI;
 
@@ -139,8 +138,8 @@ public class ArenaLayer : UILayer
             return;
         
         nickName.text = info.PlayerLeaderboardEntry.DisplayName;
-        myScore.text = info != null? info.PlayerLeaderboardEntry.StatValue.ToString() : "";
-        myRank.text = info != null ? info.PlayerLeaderboardEntry.Position.ToString() : "";
+        myScore.text = Translate.Get("RankingScore") +" : " + info.PlayerLeaderboardEntry.StatValue;
+        myRank.text = info.PlayerLeaderboardEntry.Position.ToString();
         
         rankingPageBtn.gameObject.SetActive(info != null);
         refreshBtn.gameObject.SetActive(info != null);

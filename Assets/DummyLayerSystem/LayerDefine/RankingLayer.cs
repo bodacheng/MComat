@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using ModelView;
 using UnityEngine;
@@ -42,17 +43,23 @@ public class RankingLayer : UILayer
     public void DisplayOpponents(List<LeaderboardInfo> leaderboards)
     {
         float rectHeight = 0;
+        UnitInfo firstShowUnitInfo = null;
         foreach (var t in leaderboards)
         {
-            var o = Instantiate(arenaFightTeamDisplayPrefab);
+            var o = Instantiate(arenaFightTeamDisplayPrefab, enemiesT.transform, true);
             o.ArenaRankingShow(t, OnClickUnitIcon);
-            o.transform.SetParent(enemiesT.transform);
-            o.transform.localPosition = Vector3.zero;
-            o.transform.localScale = Vector3.one;
+            var transform1 = o.transform;
+            transform1.localPosition = Vector3.zero;
+            transform1.localScale = Vector3.one;
             o.gameObject.SetActive(true);
-            
             rectHeight += o.GetComponent<RectTransform>().rect.height + enemiesT.spacing;
+
+            if (firstShowUnitInfo == null)
+                firstShowUnitInfo = t.Team.FirstOrDefault()?.value;
         }
+        if (firstShowUnitInfo != null)
+            OnClickUnitIcon(firstShowUnitInfo);
+        
         enemiesT.GetComponent<RectTransform>().sizeDelta = 
             new Vector2(enemiesT.GetComponent<RectTransform>().sizeDelta.x, rectHeight);
     }

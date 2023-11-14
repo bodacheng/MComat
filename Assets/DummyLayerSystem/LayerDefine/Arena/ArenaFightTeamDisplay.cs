@@ -1,5 +1,4 @@
 ﻿using System;
-using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,9 +39,13 @@ public class ArenaFightTeamDisplay : MonoBehaviour
                     target = member3;
                     break;
             }
-            target.ChangeIcon(unitInfo);
-            if (onClickUnitIcon != null)
-                target.iconButton.SetListener(() => { onClickUnitIcon(unitInfo); });
+
+            if (target != null)
+            {
+                target.ChangeIcon(unitInfo);
+                if (onClickUnitIcon != null)
+                    target.iconButton.SetListener(() => { onClickUnitIcon(unitInfo); });
+            }
         }
     }
     
