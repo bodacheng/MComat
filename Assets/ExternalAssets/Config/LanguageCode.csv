@@ -222,7 +222,15 @@ NewWarrior,A new warrior has joined your team!,新しい戦士があなたのチ
 AdWatchRemains,Remains x,残り視聴回数 x,剩余观看次数 x
 GotAdWatchedReward,Reward retrieval successful,報酬の取得成功,获取广告报酬成功
 PurchaseProcessing,"Processing the purchase, please do not close the program.",購入処理中です。プログラムを閉じないでください。,正在处理购买，请勿关闭程序
-PurchaseSuccess,Purchase successful,購入成功,购买成功
+PurchaseSuccess,Purchase successful！,購入成功！,购买成功！
+PurchaseStoneBundleSuccess,"Purchase Successful! 
+Skill Gems have been added to your list.","購入成功！
+スキルジェムがリストに追加されました","购买成功！
+技能石已经追加到列表"
+PurchaseVIPSuccess,"Purchase Successful! 
+You became VIP !","購入成功！
+VIP になりました！","购买成功！
+你已获得VIP特权！"
 PurchaseFail,Purchase failed,購入失敗,购买失败
 ,,,
 LoadingBattle,Generating battlefield,戦場生成中,战场生成中

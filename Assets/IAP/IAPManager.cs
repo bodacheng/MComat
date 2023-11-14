@@ -232,12 +232,26 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
         
         void ValidateSuccess()
         {
-            PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseSuccess"));
+            switch (e.purchasedProduct.definition.id)
+            {
+                case "vip":
+                    PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseVIPSuccess"));
+                    break;
+                case "beginnerbundle1":
+                case "beginnerbundle2":
+                case "beginnerbundle3":
+                    PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseStoneBundleSuccess"));
+                    break;
+                default:
+                    PopupLayer.ArrangeWarnWindow(Translate.Get("PurchaseSuccess"));
+                    break;
+            }
+            
             _mStoreController.ConfirmPendingPurchase(e.purchasedProduct);
             if (boughtItemCatalog == StoneProductCatalogVersion)
             {
                 CloudScript.BoughtBundle(
-                    e.purchasedProduct.definition.id, 
+                    e.purchasedProduct.definition.id,
                     () =>
                     {
                         var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
