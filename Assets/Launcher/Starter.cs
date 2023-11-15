@@ -57,6 +57,7 @@ public class Starter : MonoBehaviour
                 PowerEstimateTable.LoadFile(),
                 Units.LoadUnitConfigs(),
                 Translate.LoadLanguageCodes(),
+                ShortStory.LoadLanguageCodes(),
                 UnitPassiveTable.Load(),
                 FightGlobalSetting.LoadFightParams()
             }

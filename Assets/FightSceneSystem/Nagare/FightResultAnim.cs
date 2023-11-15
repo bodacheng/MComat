@@ -23,9 +23,7 @@ namespace FightScene
 
         async UniTask EnterProcess()
         {
-            animEnd = false;
             await FinalMomentAnim();
-            animEnd = true;
         }
 
         public override bool CanEnterOtherProcess()
@@ -35,6 +33,7 @@ namespace FightScene
 
         async UniTask FinalMomentAnim()
         {
+            animEnd = false;
             Time.timeScale = 0.4f;
             await UniTask.Delay(TimeSpan.FromSeconds(1));
             var winners = new List<Data_Center>();
@@ -57,9 +56,36 @@ namespace FightScene
             }
             Time.timeScale = 1f;
             var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
-            arenaFightOver.Setup();
-            arenaFightOver.Step1Anim();
-            await UniTask.Delay(TimeSpan.FromSeconds(1));
+
+            async UniTask EndPart()
+            {
+                arenaFightOver.Step1Anim();
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+                animEnd = true;
+            }
+            
+            switch (FightLoad.Fight.EventType)
+            {
+                case FightEventType.Gangbang:
+                case FightEventType.Quest:
+                    bool hasShortStory = arenaFightOver.LoadStory();
+                    if (hasShortStory)
+                    {
+                        arenaFightOver.Setup(async () =>
+                        {
+                            await EndPart();
+                        });
+                    }
+                    else
+                    {
+                        arenaFightOver.Setup();
+                        await EndPart();
+                    }
+                    break;
+                default:
+                    await EndPart();
+                    break;
+            }
         }
     }
 }

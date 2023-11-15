@@ -28,6 +28,9 @@ public class CommonSetting : ScriptableObject
     
     [Tooltip("语言code文件")]
     [SerializeField] string languageCodeFile = "LanguageCode";
+    
+    [Tooltip("短故事文件")]
+    [SerializeField] string shortStoryFile = "short_story";
 
     [Tooltip("audio source key")]
     [SerializeField] string startThemeAddressKey = "music/start";
@@ -68,6 +71,7 @@ public class CommonSetting : ScriptableObject
     public static string SkillDynamicAnalysis;
     public static string PassiveSKillFile;
     public static string LanguageCodeFile;
+    public static string ShortStoryFile;
     public static string StageModeFile;
 
     public static string StartThemeAddressKey;
@@ -98,6 +102,7 @@ public class CommonSetting : ScriptableObject
         SkillAIFile = skillAIFile;
         SkillNameFile = skillNameFile;
         LanguageCodeFile = languageCodeFile;
+        ShortStoryFile = shortStoryFile;
         StageModeFile = stageModeFile;
         PassiveSKillFile = passiveSKillFile;
 
