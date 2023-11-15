@@ -31,6 +31,9 @@ public class CommonSetting : ScriptableObject
     
     [Tooltip("短故事文件")]
     [SerializeField] string shortStoryFile = "short_story";
+        
+    [Tooltip("GB短故事文件")]
+    [SerializeField] string gbShortStoryFile = "gb_short_story";
 
     [Tooltip("audio source key")]
     [SerializeField] string startThemeAddressKey = "music/start";
@@ -72,6 +75,7 @@ public class CommonSetting : ScriptableObject
     public static string PassiveSKillFile;
     public static string LanguageCodeFile;
     public static string ShortStoryFile;
+    public static string GBShortStoryFile;
     public static string StageModeFile;
 
     public static string StartThemeAddressKey;
@@ -103,6 +107,7 @@ public class CommonSetting : ScriptableObject
         SkillNameFile = skillNameFile;
         LanguageCodeFile = languageCodeFile;
         ShortStoryFile = shortStoryFile;
+        GBShortStoryFile = gbShortStoryFile;
         StageModeFile = stageModeFile;
         PassiveSKillFile = passiveSKillFile;
 

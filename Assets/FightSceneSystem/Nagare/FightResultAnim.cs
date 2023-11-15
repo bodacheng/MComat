@@ -68,13 +68,10 @@ namespace FightScene
             {
                 case FightEventType.Gangbang:
                 case FightEventType.Quest:
-                    bool hasShortStory = arenaFightOver.LoadStory();
-                    if (hasShortStory)
+                    if (FightLogger.value.GetWinnerTeam() == Team.player1 && arenaFightOver.LoadStory())
                     {
-                        FightScene.target.storyBgCamera.gameObject.SetActive(true);
                         arenaFightOver.Setup(async () =>
                         {
-                            FightScene.target.storyBgCamera.gameObject.SetActive(false);
                             await EndPart();
                         });
                     }

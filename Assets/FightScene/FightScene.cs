@@ -16,8 +16,6 @@ namespace FightScene
         
         [Header("FX")]
         public Camera fxCamera;
-        [Header("StoryBgCamera")]
-        public Camera storyBgCamera;
         
         [SerializeField] RewardedAdsButton watchAdBtnPrefab;
 

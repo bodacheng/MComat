@@ -41,7 +41,6 @@ public partial class ArenaFightOver : UILayer
     [SerializeField] private BOButton nextBtn;
     [SerializeField] private BOButton nextFor1v1Btn;
     [SerializeField] private BOButton nextForMultiBtn;
-    [SerializeField] private BOButton storyMaskBtn;
     [SerializeField] private RectTransform adBtnParent;
     public Button AgainBtn => againBtn;
     public Button NextBtn => nextBtn;
@@ -107,14 +106,14 @@ public partial class ArenaFightOver : UILayer
     public void Setup(Action onClickStoryMask = null)
     {
         if (onClickStoryMask != null)
+        {
             storyMaskBtn.SetListener(()=>
             {
-                storyMaskBtn.gameObject.SetActive(false);
+                storyBgImage.gameObject.SetActive(false);
                 onClickStoryMask();
             });
-        else
-            storyMaskBtn.gameObject.SetActive(false);
-        
+        }
+
         switch (FightLoad.Fight.EventType)
         {
             case FightEventType.Arena:
@@ -284,5 +283,6 @@ public partial class ArenaFightOver : UILayer
         _arenaPointTweenerCore?.Kill();
         _dmAwardTweenerCore?.Kill();
         _gdAwardTweenerCore?.Kill();
+        storyBgColorChangeTween?.Kill();
     }
 }

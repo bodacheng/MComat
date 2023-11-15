@@ -58,6 +58,7 @@ public class Starter : MonoBehaviour
                 Units.LoadUnitConfigs(),
                 Translate.LoadLanguageCodes(),
                 ShortStory.LoadLanguageCodes(),
+                GBShortStory.LoadLanguageCodes(),
                 UnitPassiveTable.Load(),
                 FightGlobalSetting.LoadFightParams()
             }
