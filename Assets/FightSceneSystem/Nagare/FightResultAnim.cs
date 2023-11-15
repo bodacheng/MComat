@@ -71,8 +71,10 @@ namespace FightScene
                     bool hasShortStory = arenaFightOver.LoadStory();
                     if (hasShortStory)
                     {
+                        FightScene.target.storyBgCamera.gameObject.SetActive(true);
                         arenaFightOver.Setup(async () =>
                         {
+                            FightScene.target.storyBgCamera.gameObject.SetActive(false);
                             await EndPart();
                         });
                     }
