@@ -54,17 +54,17 @@ public partial class ArenaFightOver : UILayer
     
     private float resultAnimFactor = 0;
     
-    void NextFight(int mode, FightInfo fight)
+    void NextFight(TeamMode mode, FightInfo fight)
     {
         switch (mode)
         {
-            case 0:
+            case TeamMode.Keep:
                 fight.team1Mode =(TeamMode)PlayerPrefs.GetInt("preferAdventureMode", PlayerPrefs.GetInt("preferAdventureMode", 2));
                 break;
-            case 1:
+            case TeamMode.MultiRaid:
                 fight.team1Mode = TeamMode.MultiRaid;
                 break;
-            case 2:
+            case TeamMode.Rotation:
                 fight.team1Mode = TeamMode.Rotation;
                 break;
         }
@@ -90,15 +90,15 @@ public partial class ArenaFightOver : UILayer
             nextForMultiBtn.gameObject.SetActive(nextFight.ArcadeFightMode is 0 or 1);
             nextBtn.SetListener(() =>
             {
-                NextFight(nextFight.ArcadeFightMode, nextFight);
+                NextFight((TeamMode)nextFight.ArcadeFightMode, nextFight);
             });
             nextFor1v1Btn.SetListener(() =>
             {
-                NextFight(2, nextFight);
+                NextFight(TeamMode.Rotation, nextFight);
             });
             nextForMultiBtn.SetListener(() =>
             {
-                NextFight(1, nextFight);
+                NextFight(TeamMode.MultiRaid, nextFight);
             });
         }
     }
@@ -133,17 +133,18 @@ public partial class ArenaFightOver : UILayer
         againBtn.SetListener(
             () =>
             {
+                NextFight(FightLoad.Fight.team1Mode, FightLoad.Fight);
                 FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
                 UILayerLoader.Remove<ArenaFightOver>();
             }
         );
         againFor1v1Btn.SetListener(() =>
         {
-            NextFight(2, FightLoad.Fight);
+            NextFight(TeamMode.Rotation, FightLoad.Fight);
         });
         againForMultiBtn.SetListener(() =>
         {
-            NextFight(1, FightLoad.Fight);
+            NextFight(TeamMode.MultiRaid, FightLoad.Fight);
         });
         returnBtn.onClick.AddListener(FightScene.FightScene.target.ReturnToFront);
         

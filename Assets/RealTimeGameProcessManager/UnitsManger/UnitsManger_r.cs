@@ -28,10 +28,14 @@ namespace FightScene
             ChangeFightingUnit(unit, true, TeamStandPoints[0]);
         }
         
-        async void ToNewUnit()
+        void ToNewUnit()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(2));
-            RandomToAliveUnit();
+            var disposable = new SerialDisposable();
+            disposable.Disposable = Observable.Timer(TimeSpan.FromSeconds(2)).Subscribe((_) =>
+                {
+                    RandomToAliveUnit();
+                    disposable.Dispose();
+                }).AddTo(RTFightManager.Target.Disposables);
         }
         
         public void TeamsIniRotate(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode aiMode, int aiDelayFrame)

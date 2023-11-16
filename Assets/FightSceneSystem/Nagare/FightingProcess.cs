@@ -54,7 +54,7 @@ namespace FightScene
             dataCenters.AddRange(RTFightManager.Target.team1.teamMembers.GetValues());
             dataCenters.AddRange(RTFightManager.Target.team2.teamMembers.GetValues());
             HitBoxLogTable.Instance.SkillLog(dataCenters);
-            RTFightManager.Target.Disposables.Clear();
+            RTFightManager.Target.Disposables.Dispose();
             RTFightManager.Target.RefreshTimeDic.Clear();
             RTFightManager.Target.ClearUnitData();
             FightLogger.value.WatchMissionsAbandon();

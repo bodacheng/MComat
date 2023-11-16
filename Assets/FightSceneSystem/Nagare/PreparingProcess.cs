@@ -25,6 +25,8 @@ public class PreparingProcess : FSceneProcess
         {
             FightScene.FightScene.target.LoadAds();
         }
+
+        RTFightManager.Target.Disposables = new CompositeDisposable();
         
         Sensor.ClearFightingMember();
         UILayerLoader.Remove<ArenaFightOver>();

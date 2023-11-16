@@ -315,6 +315,7 @@ public enum FightEventType
 
 public enum TeamMode
 {
+    Keep = 0,
     MultiRaid = 1,
     Rotation = 2
 }

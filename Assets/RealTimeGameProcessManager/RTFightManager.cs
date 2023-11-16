@@ -24,7 +24,7 @@ namespace FightScene
         
         FightInfo _loadFight;
 
-        public readonly CompositeDisposable Disposables = new CompositeDisposable();
+        public CompositeDisposable Disposables = new CompositeDisposable();
         
         void Awake()
         {
