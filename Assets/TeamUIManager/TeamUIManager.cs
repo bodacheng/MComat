@@ -13,7 +13,8 @@ namespace FightScene
         [SerializeField] RectTransform sideIconsContainer;
         [SerializeField] RectTransform _targetCanvasT;
         [SerializeField] SideUnitIcon unitIconPrefab;
-        [SerializeField] Text hitCombo;
+        [SerializeField] Text rotationModeHitCombo;
+        [SerializeField] Animation comboTextAnim;
         [SerializeField] AutoSwitch teamAutoSwitch;
         [SerializeField] RectTransform selectedFrame;
         [SerializeField] int barPosUpdateInterval = 2;

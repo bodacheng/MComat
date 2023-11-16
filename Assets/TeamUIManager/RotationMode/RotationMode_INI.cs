@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 using UniRx;
 using System;
-using UnityEngine.UI;
 using DG.Tweening;
 
 namespace FightScene
 {
     public partial class TeamUIManager : MonoBehaviour
     {
-        Text rotationModeHitCombo;
-        
         void IniTeamUI_Rotate(Action<Data_Center> ChangeUnit)
         {
             foreach (var center in _teamMembers.GetValues())
@@ -84,14 +81,8 @@ namespace FightScene
         {
             RMode_Unit.Subscribe(x =>
             {
-                if (rotationModeHitCombo != null)
-                {
-                    Destroy(rotationModeHitCombo.gameObject);
-                }
-                
                 if (x != null)
                 {
-                    rotationModeHitCombo = Instantiate(hitCombo);
                     rotationModeHitCombo.name = TeamConfig.myTeam + "HitCombo";
                     rotationModeHitCombo.gameObject.SetActive(true);
                     if (rotationModeHitCombo.gameObject.transform.parent != _targetCanvasT)
@@ -103,30 +94,33 @@ namespace FightScene
                     
                     x.FightDataRef._comboHitCount.HitCount.Subscribe(h =>
                     {
+                        Vector2 GetComboTextShouldBePos(Vector3 unitWorldPos)
+                        {
+                            var mePos = CameraManager._camera.WorldToScreenPoint(unitWorldPos);
+                            if (CameraManager._camera.WorldToViewportPoint(unitWorldPos).x < 0.5)
+                            {
+                                mePos = new Vector3(mePos.x / 2 , mePos.y, mePos.z);
+                            }
+                            else
+                            {
+                                mePos = new Vector3((mePos.x + Screen.width) / 2 , mePos.y, mePos.z);
+                            }
+                            return mePos;
+                        }
+                        
                         if (h > 1)
                         {
-                            rotationModeHitCombo.text = h + "Hits!";
-                            rotationModeHitCombo.transform.DOMove(CameraManager._camera.WorldToScreenPoint(x.transform.position + Vector3.up * 1f + Vector3.right * 3.2f), 1);
+                            rotationModeHitCombo.text = h + h > 3 ? " Combo!!!": " Combo!";
+                            comboTextAnim.Play();
+                            rotationModeHitCombo.transform.DOMove(GetComboTextShouldBePos(x.transform.position), 0.5f);
                         }
                         else
                         {
                             rotationModeHitCombo.text = null;
-                            switch (TeamConfig.myTeam)
-                            {
-                                case Team.player1:
-                                    rotationModeHitCombo.rectTransform.DOAnchorPos(new Vector2(-200, Screen.height + 100), 1);
-                                    break;
-                                case Team.player2:
-                                    rotationModeHitCombo.rectTransform.DOAnchorPos(new Vector2(Screen.width + 200, Screen.height + 100), 1);
-                                    break;
-                                default:
-                                    rotationModeHitCombo.rectTransform.DOAnchorPos(new Vector2(-100, -100), 1);
-                                    break;
-                            }
                         }
-                    }).AddTo(rotationModeHitCombo.gameObject);
+                    }).AddTo(RTFightManager.Target.Disposables);
                 }
-            }).AddTo(gameObject);
+            }).AddTo(RTFightManager.Target.Disposables);
         }
     }
 }

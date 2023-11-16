@@ -13,7 +13,7 @@ namespace FightScene
         public void ToStartPosRotate()
         {
             Data_Center unit = null;
-            for (int i = 0; i < 3;i++)
+            for (int i = 0; i < 3; i++)
             {
                 var dataCenter = teamMembers.Get(0,i);
                 if (dataCenter == null)
