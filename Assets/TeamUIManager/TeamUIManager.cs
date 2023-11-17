@@ -24,8 +24,8 @@ namespace FightScene
         public TeamMode TeamMode { get; set; }
         public TeamConfig TeamConfig { get; set; }
         public readonly IDictionary<Data_Center, SideUnitIcon> UnitIconDic = new Dictionary<Data_Center, SideUnitIcon>();
-        private IDisposable barPosUpdate;
-        private IDisposable teamIndicatorCloseDisposable;
+        private IDisposable _barPosUpdate;
+        private IDisposable _teamIndicatorCloseDisposable;
         
         
         MultiDic<int, int, Data_Center> _teamMembers;
@@ -37,8 +37,8 @@ namespace FightScene
         
         public void Clear()
         {
-            barPosUpdate?.Dispose();
-            teamIndicatorCloseDisposable?.Dispose();
+            _barPosUpdate?.Dispose();
+            _teamIndicatorCloseDisposable?.Dispose();
             switch (TeamMode)
             {
                 case TeamMode.MultiRaid:
@@ -114,14 +114,14 @@ namespace FightScene
                 }
             }
             
-            barPosUpdate?.Dispose();
-            teamIndicatorCloseDisposable?.Dispose();
+            _barPosUpdate?.Dispose();
+            _teamIndicatorCloseDisposable?.Dispose();
             switch (TeamMode)
             {
                 case TeamMode.Rotation:
                     if (TeamConfig.myTeam != RTFightManager.playerTeam)
                     {
-                        barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
+                        _barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                             {
                                 if (fighting == null)
                                     return;
@@ -137,7 +137,7 @@ namespace FightScene
                             UnitIconDic.TryGetValue(fighting, out var tempSi);
                             tempSi.TeamIndicator.gameObject.SetActive(true);
                         }
-                        barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
+                        _barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                             {
                                 if (fighting == null)
                                     return;
@@ -146,22 +146,22 @@ namespace FightScene
                             }
                         ).AddTo(gameObject);
                         
-                        teamIndicatorCloseDisposable = Observable.Timer(TimeSpan.FromSeconds(teamIndicatorCloseDelay)).Subscribe(_ =>
+                        _teamIndicatorCloseDisposable = Observable.Timer(TimeSpan.FromSeconds(teamIndicatorCloseDelay)).Subscribe(_ =>
                         {
-                            barPosUpdate.Dispose();
+                            _barPosUpdate.Dispose();
                             if (fighting == null)
                                 return;
                             UnitIconDic.TryGetValue(fighting, out var tempSi);
                             tempSi.TeamIndicator.gameObject.SetActive(false);
                             // Add your code here to execute after disposing barPosUpdate
-                            teamIndicatorCloseDisposable.Dispose();
+                            _teamIndicatorCloseDisposable.Dispose();
                         }).AddTo(gameObject);
                     }
                     break;
                 case TeamMode.MultiRaid:
                     if (TeamConfig.myTeam != RTFightManager.playerTeam)
                     {
-                        barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
+                        _barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                         {
                             foreach (var one in _teamMembers.GetValues())
                             {
@@ -178,7 +178,7 @@ namespace FightScene
                             UnitIconDic.TryGetValue(one, out var tempSi);
                             tempSi.TeamIndicator.gameObject.SetActive(true);
                         }
-                        barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
+                        _barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                         {
                             foreach (var one in _teamMembers.GetValues())
                             {
@@ -187,15 +187,15 @@ namespace FightScene
                             }
                         }).AddTo(gameObject);
                         
-                        teamIndicatorCloseDisposable = Observable.Timer(TimeSpan.FromSeconds(teamIndicatorCloseDelay)).Subscribe(_ =>
+                        _teamIndicatorCloseDisposable = Observable.Timer(TimeSpan.FromSeconds(teamIndicatorCloseDelay)).Subscribe(_ =>
                         {
-                            barPosUpdate.Dispose();
+                            _barPosUpdate.Dispose();
                             foreach (var one in _teamMembers.GetValues())
                             {
                                 UnitIconDic.TryGetValue(one, out var tempSi);
                                 tempSi.TeamIndicator.gameObject.SetActive(false);
                             }
-                            teamIndicatorCloseDisposable.Dispose();
+                            _teamIndicatorCloseDisposable.Dispose();
                         }).AddTo(gameObject);
                     }
                     break;

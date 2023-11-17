@@ -110,9 +110,10 @@ namespace FightScene
                         
                         if (h > 1)
                         {
-                            rotationModeHitCombo.text = h + h > 3 ? " Combo!!!": " Combo!";
+                            rotationModeHitCombo.text = h + ( h > 3 ? " Combo!!!": " Combo!" );
                             comboTextAnim.Play();
-                            rotationModeHitCombo.transform.DOMove(GetComboTextShouldBePos(x.transform.position), 0.5f);
+                            rotationModeHitCombo.transform.DOMove(GetComboTextShouldBePos(x.transform.position), 
+                                h == 2 ? 0 : 0.5f);
                         }
                         else
                         {

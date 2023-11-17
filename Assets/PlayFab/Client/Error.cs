@@ -56,7 +56,19 @@ public partial class PlayFabReadClient
                 PopupLayer.ArrangeWarnWindow(Translate.Get("InvalidEmailOrPassword"));
                 break;
             default:
-                PopupLayer.ArrangeWarnWindow(Translate.Get("ConnectionError"));
+                PopupLayer.ArrangeWarnWindow(
+                    ()=>
+                    {
+                        if (SceneManager.GetActiveScene().buildIndex != 0)
+                        {
+                            SceneManager.LoadScene(0);
+                        }
+                        else
+                        {
+                            UILayerLoader.Remove<PopupLayer>();
+                        }
+                    },
+                    Translate.Get("ConnectionError"));
                 break;
         }
     }
