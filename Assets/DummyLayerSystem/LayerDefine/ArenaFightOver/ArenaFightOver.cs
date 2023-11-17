@@ -146,7 +146,11 @@ public partial class ArenaFightOver : UILayer
         {
             NextFight(TeamMode.MultiRaid, FightLoad.Fight);
         });
-        returnBtn.onClick.AddListener(FightScene.FightScene.target.ReturnToFront);
+        returnBtn.onClick.AddListener(()=>
+        {
+            OnDestroy();
+            FightScene.FightScene.target.ReturnToFront();
+        });
         
         currentDmCurrency.text = Currencies.DiamondCount.Value.ToString();
         Currencies.DiamondCount.Subscribe(
