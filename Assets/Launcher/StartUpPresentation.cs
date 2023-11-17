@@ -132,7 +132,7 @@ public class StartUpPresentation : MonoBehaviour
         ProgressLayer.Close();
         if (bytes > 0)
         {
-            DownLoadConfirm("Download Size :" + bytes / 1048576 + "MB" + "\n\n" + "Start to download", bytes);
+            DownLoadConfirm("Download Size :" + Math.Round((double)bytes / 1048576, 1) + "MB" + "\n\n" + "Start to download", bytes);
         }
         else
         {
