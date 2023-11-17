@@ -61,6 +61,19 @@ public class CommonSetting : ScriptableObject
     [Tooltip("downLoad labels")] 
     [SerializeField] List<string> downLoadLabels;
 
+    [Tooltip("unit icon colors")] 
+    [SerializeField] private Color lightBgColor;
+    [SerializeField] private Color lightFrameColor;
+    [SerializeField] private Color darkBgColor;
+    [SerializeField] private Color darkFrameColor;
+    [SerializeField] private Color redBgColor;
+    [SerializeField] private Color redFrameColor;
+    [SerializeField] private Color blueBgColor;
+    [SerializeField] private Color blueFrameColor;
+    [SerializeField] private Color greenBgColor;
+    [SerializeField] private Color greenFrameColor;
+    
+
     public List<string> DownLoadLabels => downLoadLabels;
     
     public static bool DevMode;
@@ -94,6 +107,17 @@ public class CommonSetting : ScriptableObject
     public static AudioClip BtnConfirmSound;
     public static AudioClip ExTabSound;
     
+    public static Color _lightBgColor;
+    public static Color _lightFrameColor;
+    public static Color _darkBgColor;
+    public static Color _darkFrameColor;
+    public static Color _redBgColor;
+    public static Color _redFrameColor;
+    public static Color _blueBgColor;
+    public static Color _blueFrameColor;
+    public static Color _greenBgColor;
+    public static Color _greenFrameColor;
+    
     public void Initialise()
     {
         DevMode = devMode;
@@ -126,5 +150,16 @@ public class CommonSetting : ScriptableObject
         BtnTapSound = btnTapSound;
         BtnConfirmSound = btnConfirmSound;
         ExTabSound = exTabSound;
+        
+        _lightBgColor = lightBgColor;
+        _lightFrameColor = lightFrameColor;
+        _darkBgColor = darkBgColor;
+        _darkFrameColor = darkFrameColor;
+        _redBgColor = redBgColor;
+        _redFrameColor = redFrameColor;
+        _blueBgColor = blueBgColor;
+        _blueFrameColor = blueFrameColor;
+        _greenBgColor = greenBgColor;
+        _greenFrameColor = greenFrameColor;
     }
 }

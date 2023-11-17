@@ -101,34 +101,38 @@ public class HeroIcon : MonoBehaviour {
         // {
         //     cooldownCurtain.transform.SetSiblingIndex(icon.transform.GetSiblingIndex() - 1);
         // }
-        
-        var htmlString = "";
+
+        Color color = Color.clear, frameColor = Color.clear;
         switch (element)
         {
             case Element.blueMagic:
-                htmlString = "004DFFFF";
+                color = CommonSetting._blueBgColor;
+                frameColor = CommonSetting._blueFrameColor;
                 break;
             case Element.darkMagic:
-                htmlString = "7400FFFF";
+                color = CommonSetting._darkBgColor;
+                frameColor = CommonSetting._darkFrameColor;
                 break;
             case Element.redMagic:
-                htmlString = "FF001EFF";
+                color = CommonSetting._redBgColor;
+                frameColor = CommonSetting._redFrameColor;
                 break;
             case Element.lightMagic:
-                htmlString = "FFDF00FF";
+                color = CommonSetting._lightBgColor;
+                frameColor = CommonSetting._lightFrameColor;
                 break;
             case Element.greenMagic:
-                htmlString = "0FFF00FF";
+                color = CommonSetting._greenBgColor;
+                frameColor = CommonSetting._greenFrameColor;
                 break;
             case Element.Null:
-                htmlString = "FFFFFFFF";
+                color = CommonSetting._blueBgColor;
+                frameColor = CommonSetting._blueFrameColor;
                 break;
         }
         
-        ColorUtility.TryParseHtmlString("#"+htmlString, out var color);
-        //ColorUtility.TryParseHtmlString("#4992FF", out var bgColor);
-        frame.color = color;
-        iconBg.color = new Color(color.r,color.g,color.b,0.7f);
+        frame.color = frameColor;
+        iconBg.color = new Color(color.r,color.g,color.b,1f);
         icon.sprite = sprite;
         await UniTask.DelayFrame(1);
         AdjustSize(icon);

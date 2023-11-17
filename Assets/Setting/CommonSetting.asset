@@ -24,6 +24,8 @@ MonoBehaviour:
   skillStaticAnalysis: SkillStaticAnalysis
   skillDynamicAnalysis: SkillDynamicAnalysis.csv
   languageCodeFile: LanguageCode
+  shortStoryFile: short_story
+  gbShortStoryFile: gb_short_story
   startThemeAddressKey: music/start
   lobbyThemeAddressKey: music/lobby
   fightThemeAddressKey1: music/fight1
@@ -53,3 +55,13 @@ MonoBehaviour:
   - btn_effect
   - unit_image
   - quest_gangbang
+  lightBgColor: {r: 1, g: 0.69411767, b: 0, a: 1}
+  lightFrameColor: {r: 0.9843137, g: 1, b: 0, a: 1}
+  darkBgColor: {r: 0.5058824, g: 0, b: 1, a: 1}
+  darkFrameColor: {r: 0.9843137, g: 0.23137255, b: 1, a: 1}
+  redBgColor: {r: 0.7647059, g: 0, b: 0, a: 1}
+  redFrameColor: {r: 1, g: 0, b: 0.07450981, a: 1}
+  blueBgColor: {r: 0.101960786, g: 0.5058824, b: 0.7921569, a: 1}
+  blueFrameColor: {r: 0, g: 1, b: 0.9529412, a: 1}
+  greenBgColor: {r: 0.007843138, g: 0.50980395, b: 0, a: 1}
+  greenFrameColor: {r: 0, g: 1, b: 0.043137256, a: 1}
