@@ -32,13 +32,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit
-  - m_GUID: 4f7c92ef88828496eb7ce3b7de705e86
-    m_Address: human/mutant
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - unit
-  - m_GUID: 769cccabaf2be43048fc2638d22361e4
-    m_Address: human/maksim2
+  - m_GUID: 4f4883883ac28404fa61878c09ac0b9b
+    m_Address: human/earth_golem
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit
@@ -94,6 +89,11 @@ MonoBehaviour:
     - unit
   - m_GUID: 03f2228b049054295ac8a84dcde92a44
     m_Address: human/fire_golem
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+  - m_GUID: 6ff42477e1f2d47dfb851c413fb563b8
+    m_Address: human/ice_golem
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit

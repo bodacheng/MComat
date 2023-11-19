@@ -26,7 +26,6 @@ Material:
   - AMBIENT
   - ANIME_SOFT
   - BASE_SATURATION
-  - EMISSIVE_MAP
   - FOG
   - MATCAP
   - MATCAP_PERSPECTIVE
@@ -86,7 +85,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveTex:
-        m_Texture: {fileID: 2800000, guid: 5246018d188625049813d0cb7579d961, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightColorsTex:
