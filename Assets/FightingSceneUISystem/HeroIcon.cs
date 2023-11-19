@@ -125,14 +125,14 @@ public class HeroIcon : MonoBehaviour {
                 color = CommonSetting._greenBgColor;
                 frameColor = CommonSetting._greenFrameColor;
                 break;
-            case Element.Null:
-                color = CommonSetting._blueBgColor;
-                frameColor = CommonSetting._blueFrameColor;
+            default:
+                color = CommonSetting._emptyBgColor;
+                frameColor = CommonSetting._emptyFrameColor;
                 break;
         }
         
         frame.color = frameColor;
-        iconBg.color = new Color(color.r,color.g,color.b,1f);
+        iconBg.color = color;
         icon.sprite = sprite;
         await UniTask.DelayFrame(1);
         AdjustSize(icon);

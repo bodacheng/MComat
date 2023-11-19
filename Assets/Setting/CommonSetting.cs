@@ -61,7 +61,9 @@ public class CommonSetting : ScriptableObject
     [Tooltip("downLoad labels")] 
     [SerializeField] List<string> downLoadLabels;
 
-    [Tooltip("unit icon colors")] 
+    [Tooltip("unit icon colors")]
+    [SerializeField] private Color emptyBgColor;
+    [SerializeField] private Color emptyFrameColor;
     [SerializeField] private Color lightBgColor;
     [SerializeField] private Color lightFrameColor;
     [SerializeField] private Color darkBgColor;
@@ -107,6 +109,8 @@ public class CommonSetting : ScriptableObject
     public static AudioClip BtnConfirmSound;
     public static AudioClip ExTabSound;
     
+    public static Color _emptyBgColor;
+    public static Color _emptyFrameColor;
     public static Color _lightBgColor;
     public static Color _lightFrameColor;
     public static Color _darkBgColor;
@@ -150,7 +154,9 @@ public class CommonSetting : ScriptableObject
         BtnTapSound = btnTapSound;
         BtnConfirmSound = btnConfirmSound;
         ExTabSound = exTabSound;
-        
+
+        _emptyBgColor = emptyBgColor;
+        _emptyFrameColor = emptyFrameColor;
         _lightBgColor = lightBgColor;
         _lightFrameColor = lightFrameColor;
         _darkBgColor = darkBgColor;

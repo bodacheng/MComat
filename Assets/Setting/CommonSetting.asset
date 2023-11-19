@@ -55,6 +55,8 @@ MonoBehaviour:
   - btn_effect
   - unit_image
   - quest_gangbang
+  emptyBgColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+  emptyFrameColor: {r: 1, g: 1, b: 1, a: 1}
   lightBgColor: {r: 1, g: 0.69411767, b: 0, a: 1}
   lightFrameColor: {r: 0.9843137, g: 1, b: 0, a: 1}
   darkBgColor: {r: 0.5058824, g: 0, b: 1, a: 1}
