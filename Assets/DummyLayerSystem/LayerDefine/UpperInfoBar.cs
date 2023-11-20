@@ -16,6 +16,8 @@ public class UpperInfoBar : UILayer
     [SerializeField] GameObject vipFlg;
     [SerializeField] float currencyTextChangeDuration = 2f;
     
+    private TweenTextScaleManager _tweenTextScaleManager = new TweenTextScaleManager();
+    
     public void Interactable(bool on)
     {
         settingBtn.interactable = on;
@@ -38,6 +40,7 @@ public class UpperInfoBar : UILayer
                 currencyTextChangeDuration
             ).OnUpdate(() =>
             {
+                _tweenTextScaleManager.AddNew(accountDiamondCoin.transform, accountDiamondCoin.transform.localScale * 1.2f, accountDiamondCoin.transform.localScale, 0.1f);
                 accountDiamondCoin.text = targetValue.ToString();
             });
         }).AddTo(this.gameObject);
@@ -54,6 +57,7 @@ public class UpperInfoBar : UILayer
                 currencyTextChangeDuration
             ).OnUpdate(() =>
             {
+                _tweenTextScaleManager.AddNew(accountIntelliCoin.transform, accountIntelliCoin.transform.localScale * 1.2f, accountIntelliCoin.transform.localScale, 0.1f);
                 accountIntelliCoin.text = targetValue.ToString();
             });
         }).AddTo(this.gameObject);
@@ -90,5 +94,11 @@ public class UpperInfoBar : UILayer
         }
         
         vipFlg.SetActive(isVip);
+    }
+
+    public override void OnDestroy()
+    {
+        _tweenTextScaleManager.Clear();
+        base.OnDestroy();
     }
 }

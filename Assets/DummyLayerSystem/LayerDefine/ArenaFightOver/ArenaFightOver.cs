@@ -24,7 +24,7 @@ public partial class ArenaFightOver : UILayer
     [SerializeField] private RectTransform gdParent;
     [SerializeField] private Text currentGdCurrency;
     [SerializeField] private Text awardGdCurrency;
-    [SerializeField] private float currencyTextChangeDuration = 2f;
+    [SerializeField] private float currencyTextChangeDuration = 3f;
     #endregion
     
     #region arena
@@ -51,6 +51,7 @@ public partial class ArenaFightOver : UILayer
     private TweenerCore<int, int, NoOptions> _arenaPointTweenerCore;
     private TweenerCore<int, int, NoOptions> _dmAwardTweenerCore;
     private TweenerCore<int, int, NoOptions> _gdAwardTweenerCore;
+    private TweenTextScaleManager _tweenTextScaleManager = new TweenTextScaleManager();
     
     private float resultAnimFactor = 0;
     
@@ -165,6 +166,7 @@ public partial class ArenaFightOver : UILayer
                     currencyTextChangeDuration
                 ).OnUpdate(() =>
                 {
+                    _tweenTextScaleManager.AddNew(currentDmCurrency.transform, currentDmCurrency.transform.localScale * 1.2f, currentDmCurrency.transform.localScale, 0.1f);
                     currentDmCurrency.text = targetValue.ToString();
                 });
             }
@@ -183,6 +185,7 @@ public partial class ArenaFightOver : UILayer
                     currencyTextChangeDuration
                 ).OnUpdate(() =>
                 {
+                    _tweenTextScaleManager.AddNew(currentGdCurrency.transform, currentGdCurrency.transform.localScale * 1.2f, currentGdCurrency.transform.localScale, 0.1f);
                     currentGdCurrency.text = targetValue.ToString();
                 });
             }
@@ -232,13 +235,15 @@ public partial class ArenaFightOver : UILayer
         {
             dmParent.gameObject.SetActive(true);
             Currencies.DiamondCount.Value += awardDm;
-            awardDmCurrency.text = awardDm.ToString();
+            awardDmCurrency.text = "+" + awardDm;
+            _tweenTextScaleManager.AddNew(awardDmCurrency.transform, awardDmCurrency.transform.localScale * 1.2f, awardDmCurrency.transform.localScale, 0.1f);
         }
         if (awardGd > 0)
         {
             gdParent.gameObject.SetActive(true);
             Currencies.CoinCount.Value += awardGd;
-            awardGdCurrency.text = awardGd.ToString();
+            awardGdCurrency.text = "+" + awardGd;
+            _tweenTextScaleManager.AddNew(awardGdCurrency.transform, awardGdCurrency.transform.localScale * 1.2f, awardGdCurrency.transform.localScale, 0.1f);
         }
 
         if (PlayerAccountInfo.Me.tutorialProgress == "Finished"
@@ -250,7 +255,8 @@ public partial class ArenaFightOver : UILayer
                 adBtnParent, 
                 () =>
                 {
-                    awardDmCurrency.text = (extraAdReward + awardDm).ToString();
+                    awardDmCurrency.text = "+" + (extraAdReward + awardDm);
+                    _tweenTextScaleManager.AddNew(awardDmCurrency.transform, awardDmCurrency.transform.localScale * 1.2f, awardDmCurrency.transform.localScale, 0.1f);
                 },
                 finishedStage
             );
@@ -277,6 +283,7 @@ public partial class ArenaFightOver : UILayer
                     arenaRankIcon.Set(arenaPointValue);
                     arenaRankIcon.RankUpAnim();
                 }
+                _tweenTextScaleManager.AddNew(arenaPoint.transform, arenaPoint.transform.localScale * 1.2f, arenaPoint.transform.localScale, 0.1f);
                 arenaPoint.text = arenaPointValue.ToString();
             }
         );
@@ -289,5 +296,6 @@ public partial class ArenaFightOver : UILayer
         _dmAwardTweenerCore?.Kill();
         _gdAwardTweenerCore?.Kill();
         storyBgColorChangeTween?.Kill();
+        _tweenTextScaleManager.Clear();
     }
 }
