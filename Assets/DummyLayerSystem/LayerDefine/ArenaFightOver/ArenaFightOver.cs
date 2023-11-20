@@ -51,9 +51,55 @@ public partial class ArenaFightOver : UILayer
     private TweenerCore<int, int, NoOptions> _arenaPointTweenerCore;
     private TweenerCore<int, int, NoOptions> _dmAwardTweenerCore;
     private TweenerCore<int, int, NoOptions> _gdAwardTweenerCore;
-    private TweenTextScaleManager _tweenTextScaleManager = new TweenTextScaleManager();
+    private readonly TweenTextScaleManager _tweenTextScaleManager = new TweenTextScaleManager();
+    private float rewardTextChangeHalfDuration = 0.05f;
     
     private float resultAnimFactor = 0;
+    
+    private string diamond;
+    private string DiamondText
+    {
+        set
+        {
+            if (diamond != value)
+            {
+                _tweenTextScaleManager.AddNew(currentDmCurrency.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
+            }
+            diamond = value;
+            currentDmCurrency.text = diamond;
+        }
+        get => diamond;
+    }
+    
+    private string gold;
+    private string GoldText
+    {
+        set
+        {
+            if (gold != value)
+            {
+                _tweenTextScaleManager.AddNew(currentGdCurrency.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
+            }
+            gold = value;
+            currentGdCurrency.text = gold;
+        }
+        get => gold;
+    }
+    
+    private string arena;
+    private string ArenaText
+    {
+        set
+        {
+            if (arena != value)
+            {
+                _tweenTextScaleManager.AddNew(arenaPoint.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
+            }
+            arena = value;
+            arenaPoint.text = arena;
+        }
+        get => arena;
+    }
     
     void NextFight(TeamMode mode, FightInfo fight)
     {
@@ -153,11 +199,11 @@ public partial class ArenaFightOver : UILayer
             FightScene.FightScene.target.ReturnToFront();
         });
         
-        currentDmCurrency.text = Currencies.DiamondCount.Value.ToString();
+        DiamondText = Currencies.DiamondCount.Value.ToString();
         Currencies.DiamondCount.Subscribe(
             x =>
             {
-                int.TryParse(currentDmCurrency.text, out int currentValue);
+                int.TryParse(DiamondText, out int currentValue);
                 int targetValue = currentValue;
                 _dmAwardTweenerCore = DOTween.To(
                     () => targetValue,
@@ -166,17 +212,16 @@ public partial class ArenaFightOver : UILayer
                     currencyTextChangeDuration
                 ).OnUpdate(() =>
                 {
-                    _tweenTextScaleManager.AddNew(currentDmCurrency.transform, currentDmCurrency.transform.localScale * 1.2f, currentDmCurrency.transform.localScale, 0.1f);
-                    currentDmCurrency.text = targetValue.ToString();
+                    DiamondText = targetValue.ToString();
                 });
             }
         ).AddTo(this.gameObject);
         
-        currentGdCurrency.text = Currencies.CoinCount.Value.ToString();
+        GoldText = Currencies.CoinCount.Value.ToString();
         Currencies.CoinCount.Subscribe(
             x =>
             {
-                int.TryParse(currentGdCurrency.text, out int currentValue);
+                int.TryParse(GoldText, out int currentValue);
                 int targetValue = currentValue;
                 _gdAwardTweenerCore = DOTween.To(
                     () => targetValue,
@@ -185,8 +230,7 @@ public partial class ArenaFightOver : UILayer
                     currencyTextChangeDuration
                 ).OnUpdate(() =>
                 {
-                    _tweenTextScaleManager.AddNew(currentGdCurrency.transform, currentGdCurrency.transform.localScale * 1.2f, currentGdCurrency.transform.localScale, 0.1f);
-                    currentGdCurrency.text = targetValue.ToString();
+                    GoldText = targetValue.ToString();
                 });
             }
         ).AddTo(this.gameObject);
@@ -236,14 +280,14 @@ public partial class ArenaFightOver : UILayer
             dmParent.gameObject.SetActive(true);
             Currencies.DiamondCount.Value += awardDm;
             awardDmCurrency.text = "+" + awardDm;
-            _tweenTextScaleManager.AddNew(awardDmCurrency.transform, awardDmCurrency.transform.localScale * 1.2f, awardDmCurrency.transform.localScale, 0.1f);
+            _tweenTextScaleManager.AddNew(awardDmCurrency.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
         }
         if (awardGd > 0)
         {
             gdParent.gameObject.SetActive(true);
             Currencies.CoinCount.Value += awardGd;
             awardGdCurrency.text = "+" + awardGd;
-            _tweenTextScaleManager.AddNew(awardGdCurrency.transform, awardGdCurrency.transform.localScale * 1.2f, awardGdCurrency.transform.localScale, 0.1f);
+            _tweenTextScaleManager.AddNew(awardGdCurrency.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
         }
 
         if (PlayerAccountInfo.Me.tutorialProgress == "Finished"
@@ -256,7 +300,7 @@ public partial class ArenaFightOver : UILayer
                 () =>
                 {
                     awardDmCurrency.text = "+" + (extraAdReward + awardDm);
-                    _tweenTextScaleManager.AddNew(awardDmCurrency.transform, awardDmCurrency.transform.localScale * 1.2f, awardDmCurrency.transform.localScale, 0.1f);
+                    _tweenTextScaleManager.AddNew(awardDmCurrency.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
                 },
                 finishedStage
             );
@@ -283,8 +327,7 @@ public partial class ArenaFightOver : UILayer
                     arenaRankIcon.Set(arenaPointValue);
                     arenaRankIcon.RankUpAnim();
                 }
-                _tweenTextScaleManager.AddNew(arenaPoint.transform, arenaPoint.transform.localScale * 1.2f, arenaPoint.transform.localScale, 0.1f);
-                arenaPoint.text = arenaPointValue.ToString();
+                ArenaText = arenaPointValue.ToString();
             }
         );
     }

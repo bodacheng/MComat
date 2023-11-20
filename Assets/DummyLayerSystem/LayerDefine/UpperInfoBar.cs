@@ -3,6 +3,8 @@ using UnityEngine;
 using System;
 using UniRx;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 
 public class UpperInfoBar : UILayer
 {
@@ -15,8 +17,41 @@ public class UpperInfoBar : UILayer
     [SerializeField] Text accountIntelliCoin;
     [SerializeField] GameObject vipFlg;
     [SerializeField] float currencyTextChangeDuration = 2f;
+
+    private string gold;
+    private string GoldText
+    {
+        set
+        {
+            if (gold != value)
+            {
+                _tweenTextScaleManager.AddNew(accountIntelliCoin.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
+            }
+            gold = value;
+            accountIntelliCoin.text = gold;
+        }
+        get => gold;
+    }
     
-    private TweenTextScaleManager _tweenTextScaleManager = new TweenTextScaleManager();
+    private string diamond;
+    private string DiamondText
+    {
+        set
+        {
+            if (diamond != value)
+            {
+                _tweenTextScaleManager.AddNew(accountDiamondCoin.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
+            }
+            diamond = value;
+            accountDiamondCoin.text = diamond;
+        }
+        get => diamond;
+    }
+    
+    private readonly TweenTextScaleManager _tweenTextScaleManager = new TweenTextScaleManager();
+    private float rewardTextChangeHalfDuration = 0.05f;
+    private TweenerCore<int, int, NoOptions> gdTween;
+    private TweenerCore<int, int, NoOptions> dmTween;
     
     public void Interactable(bool on)
     {
@@ -28,37 +63,36 @@ public class UpperInfoBar : UILayer
     public void Setup(string titleDisplayName, Action openSetting, Action openMail, Action openDmShop, bool isVip)
     {
         this.titleDisplayName.text = titleDisplayName;
-        accountDiamondCoin.text = Currencies.DiamondCount.Value.ToString();
+        DiamondText = Currencies.DiamondCount.Value.ToString();
         Currencies.DiamondCount.Subscribe(x =>
         {
-            int.TryParse(accountDiamondCoin.text, out int currentValue);
+            int.TryParse(DiamondText, out int currentValue);
             int targetValue = currentValue;
-            DOTween.To(
+            dmTween = DOTween.To(
                 () => targetValue,
                 setterValue => targetValue = setterValue,
                 x,
                 currencyTextChangeDuration
             ).OnUpdate(() =>
             {
-                _tweenTextScaleManager.AddNew(accountDiamondCoin.transform, accountDiamondCoin.transform.localScale * 1.2f, accountDiamondCoin.transform.localScale, 0.1f);
-                accountDiamondCoin.text = targetValue.ToString();
+                DiamondText = targetValue.ToString();
             });
         }).AddTo(this.gameObject);
         
-        accountIntelliCoin.text = Currencies.CoinCount.Value.ToString();
+        GoldText = Currencies.CoinCount.Value.ToString();
         Currencies.CoinCount.Subscribe(x =>
         {
-            int.TryParse(accountIntelliCoin.text, out int currentValue);
+            int.TryParse(GoldText, out int currentValue);
             int targetValue = currentValue;
-            DOTween.To(
+            
+            gdTween = DOTween.To(
                 () => targetValue,
                 setterValue => targetValue = setterValue,
                 x,
                 currencyTextChangeDuration
             ).OnUpdate(() =>
             {
-                _tweenTextScaleManager.AddNew(accountIntelliCoin.transform, accountIntelliCoin.transform.localScale * 1.2f, accountIntelliCoin.transform.localScale, 0.1f);
-                accountIntelliCoin.text = targetValue.ToString();
+                GoldText = targetValue.ToString();
             });
         }).AddTo(this.gameObject);
         
@@ -99,6 +133,8 @@ public class UpperInfoBar : UILayer
     public override void OnDestroy()
     {
         _tweenTextScaleManager.Clear();
+        gdTween?.Kill();
+        dmTween?.Kill();
         base.OnDestroy();
     }
 }
