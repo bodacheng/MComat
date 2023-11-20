@@ -32,11 +32,11 @@ public class BoundaryControlByGod : MonoBehaviour {
             }
         }
     }
-
-    private int currentBackGroundNum = -1;
+    
+    private readonly int _currentBackGroundNum = -1;
     public async UniTask ChangeBackGround(int number)
     {
-        if (currentBackGroundNum != number)
+        if (_currentBackGroundNum != number)
         {
             if (battleGround != null)
                 Destroy(this.battleGround);
