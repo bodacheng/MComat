@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using DummyLayerSystem;
@@ -25,24 +26,20 @@ namespace mainMenu
         [SerializeField] FightModeSwitch _fightModeSwitch;
         [SerializeField] FightBeginBtn fightStartBtn;
 
-        [Header("战场选择")] 
-        [SerializeField] private Text battleFieldName;
-        [SerializeField] private BOButton leftSwitchBattleField;
-        [SerializeField] private BOButton rightSwitchBattleField;
-        
+        [Header("战场选择")]
+        [SerializeField] BattleGroundSwitch battleGroundSwitch;
+
         readonly MultiDic<Team, int, HeroIcon> _teamButtonDicR = new MultiDic<Team, int, HeroIcon>();
         readonly IDictionary<HeroIcon, int> _iconNumCheck = new Dictionary<HeroIcon, int>();
         private readonly FightMembers _selfFight = new FightMembers();
         FightInfo _stage;
         Team _focusingTeam;
         int _focusingPosNum = -1;
-        private Func<bool, int> switchBattleGround;
-        private Func<string> getBattleFieldName;
         
         PosKeySet _team1PosKeySetR = new PosKeySet();
         PosKeySet _team2PosKeySetR = new PosKeySet();
         
-        public void INI(Func<bool, int> switchBattleGround, Func<string> getBattleFieldName)
+        public async UniTask INI()
         {
             _stage = ScriptableObject.CreateInstance<FightInfo>();
             _stage.EventType = FightEventType.Self;
@@ -52,23 +49,13 @@ namespace mainMenu
             
             _fightModeSwitch.Setup(0,PlayerPrefs.GetInt("preferAdventureMode",  PlayerPrefs.GetInt("preferAdventureMode", 2)));
             fightStartBtn.SetAction(FightStart);
-
-            this.switchBattleGround = switchBattleGround;
-            this.getBattleFieldName = getBattleFieldName;
             
-            this.switchBattleGround(true);
-            leftSwitchBattleField.SetListener(()=> SwitchBattleGround(false));
-            rightSwitchBattleField.SetListener(()=> SwitchBattleGround(true));
-        }
-
-        void SwitchBattleGround(bool left)
-        {
-            _stage.battleGroundID = this.switchBattleGround(left);
-            battleFieldName.text = getBattleFieldName();
+            await battleGroundSwitch.INI();
         }
         
         void FightStart()
         {
+            _stage.battleGroundID = battleGroundSwitch.BattleFieldIndex;
             _stage.team1Mode = _fightModeSwitch.TeamMode;
             _stage.team2Mode = _fightModeSwitch.TeamMode;
             FightLoad.Go(_stage);

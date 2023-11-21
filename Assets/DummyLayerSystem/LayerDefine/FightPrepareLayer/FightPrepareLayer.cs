@@ -31,6 +31,10 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] Animator unitOutAnimator;
     [SerializeField] NineForShow nineForShow;
     [SerializeField] DedicatedCameraConnector connector;
+    [Header("战场选择")]
+    [SerializeField] BattleGroundSwitch battleGroundSwitch;
+
+    public BattleGroundSwitch BattleGroundSwitch => battleGroundSwitch;
     
     public void SetFightMode(int fightMode)
     {

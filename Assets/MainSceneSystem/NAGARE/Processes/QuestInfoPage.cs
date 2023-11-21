@@ -1,4 +1,5 @@
-﻿using dataAccess;
+﻿using Cysharp.Threading.Tasks;
+using dataAccess;
 using DummyLayerSystem;
 using mainMenu;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class QuestInfoPage : MSceneProcess
     private FightPrepareLayer _layer;
     private GangbangInfo _controllingGangbangInfo = null;
     
-    void EnterProcess(FightInfo stage)
+    async UniTask EnterProcess(FightInfo stage)
     {
         FightLoad.Fight = stage;
         _layer = UILayerLoader.Load<FightPrepareLayer>();
@@ -21,6 +22,9 @@ public class QuestInfoPage : MSceneProcess
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
                 }
+                
+                await _layer.BattleGroundSwitch.INI();
+                _layer.BattleGroundSwitch.gameObject.SetActive(true);
                 _layer.SetTeamEditFeature(GoToTeamEditArena);
                 break;
             case FightEventType.Quest:
@@ -112,18 +116,18 @@ public class QuestInfoPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        EnterProcess(FightLoad.Fight);
+        EnterProcess(FightLoad.Fight).Forget();
     }
     
     public override void ProcessEnter<T>(T t)
     {
         if (t is GangbangInfo)
         {
-            EnterProcess(t as GangbangInfo);
+            EnterProcess(t as GangbangInfo).Forget();
         }
         else
         {
-            EnterProcess(t as FightInfo);
+            EnterProcess(t as FightInfo).Forget();
         }
     }
     
@@ -216,6 +220,7 @@ public class QuestInfoPage : MSceneProcess
                     () =>
                     {
                         fightInfo.LoadMyTeam();
+                        fightInfo.battleGroundID = _layer.BattleGroundSwitch.BattleFieldIndex;
                         FightLoad.Go(fightInfo);
                     }
                 );
