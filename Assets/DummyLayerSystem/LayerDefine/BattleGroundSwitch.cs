@@ -75,6 +75,8 @@ namespace mainMenu
             leftSwitchBattleField.SetListener(() => this.SwitchBattleField(false));
             rightSwitchBattleField.SetListener(() => this.SwitchBattleField(true));
             touchBtn.SetListener(() => this.SwitchBattleField(true));
+
+            this.SwitchBattleField(true);
         }
     }
 }
