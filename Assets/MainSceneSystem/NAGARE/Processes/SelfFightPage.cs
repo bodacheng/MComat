@@ -61,11 +61,10 @@ public class SelfFightPage : MSceneProcess
     int SwitchBattleField(bool plusIndex)
     {
         _choosingBattleFieldId = _battleFieldKeys.IndexOf("battleGround/" + _choosingBattleFieldId);
-        Debug.Log(_choosingBattleFieldId);
         if (plusIndex)
-            BattleFieldIndex++;
+            BattleFieldIndex += 1;
         else
-            BattleFieldIndex--;
+            BattleFieldIndex -= 1;
         return BattleFieldIndex;
     }
 

@@ -42,8 +42,8 @@ public partial class ArenaFightOver : UILayer
     [SerializeField] private BOButton nextFor1v1Btn;
     [SerializeField] private BOButton nextForMultiBtn;
     [SerializeField] private RectTransform adBtnParent;
-    public Button AgainBtn => againBtn;
-    public Button NextBtn => nextBtn;
+    public BOButton AgainBtn => againBtn;
+    public BOButton NextBtn => nextBtn;
     public RectTransform AdBtnParent => adBtnParent;
     #endregion
     
@@ -181,8 +181,6 @@ public partial class ArenaFightOver : UILayer
             () =>
             {
                 NextFight(FightLoad.Fight.team1Mode, FightLoad.Fight);
-                FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
-                UILayerLoader.Remove<ArenaFightOver>();
             }
         );
         againFor1v1Btn.SetListener(() =>
