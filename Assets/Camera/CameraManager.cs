@@ -18,7 +18,7 @@ public class CameraManager : MonoBehaviour
         //{C_Mode.CertainYAntiVibration, new New2023(8.8f, 5f)},
         {C_Mode.ApproachToCertainDis,  new LerpToCertainDistance(5f, 1f)},
         {C_Mode.keepTargetLeft, new keepTargetLeftCamera()},
-        {C_Mode.WatchOver, new WatchOverCamera(7f, 5f)},
+        {C_Mode.WatchOver, new MCamera(10f, 10f, 30f)},
         {C_Mode.StartAndEnd, new StartToEndMode()},
         {C_Mode.RoundBoundary, new CenterSurroundCamera(25f, 10f)},
         {C_Mode.TopDown, new TouchTopDownCamera(12f, 20f, 25)},
@@ -57,17 +57,7 @@ public class CameraManager : MonoBehaviour
         }
     }
     
-    public void SetCurrentCameraParams(Transform me, List<Transform> targets)
-    {
-        if (CurrentMode != null)
-        {
-            //有些相机模式的enter函数内处理需要根据targets来
-            CurrentMode.SetMeCenter(me);
-            CurrentMode.targets = targets;
-        }
-    }
-    
-    public void Assign_Camera(C_Mode num, Transform me, List<Transform> targets)
+    public void Assign_Camera(C_Mode num, Transform me, List<Transform> targets, List<Transform> mes = null)
     {
         CurrentMode?.Exit(_camera);
         CModeDic.TryGetValue(num, out CurrentMode);
@@ -76,6 +66,7 @@ public class CameraManager : MonoBehaviour
             //有些相机模式的enter函数内处理需要根据targets来
             CurrentMode.SetMeCenter(me);
             CurrentMode.targets = targets;
+            CurrentMode.myTeamTargets = mes;
             CurrentMode.Enter(_camera);
         }
     }

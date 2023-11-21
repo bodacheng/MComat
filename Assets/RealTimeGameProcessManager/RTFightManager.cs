@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using UniRx;
@@ -69,30 +70,57 @@ namespace FightScene
         }
         
         // 战斗模式相机。根据选择队伍做相应调整。
-        public void CameraAdjustment(Team myTeam, TeamMode teamMode)
+        public void CameraAdjustment(Team myTeam, TeamMode teamMode, FightEventType eventType, Transform me = null)
         {
-            var cMode = C_Mode.CertainYAntiVibration;
+            C_Mode cMode;
             if (teamMode == TeamMode.Rotation)
                 cMode = C_Mode.CertainYAntiVibration;
             else
-                cMode = C_Mode.TopDown;
+            {
+                cMode = eventType == FightEventType.Gangbang ? C_Mode.TopDown : C_Mode.WatchOver;
+            }
             
             var ts = myTeam == Team.player1 ? team1.GetFightingUnitTs() : team2.GetFightingUnitTs();
-            var tsOpponents = myTeam == Team.player1
-                ? new List<Transform>() { team2.GetRModeUnitT() }
-                : new List<Transform>() { team1.GetRModeUnitT() };
-            if (ts.Count > 0)
+            var tsOpponents = GetOpponents();
+            
+            List<Transform> GetOpponents()
             {
-                _CameraManager.Assign_Camera(
-                    cMode,
-                    cMode != C_Mode.TopDown? ts[0] : null, 
-                    tsOpponents
-                );
+                List<Transform> returnValue;
+                if (teamMode == TeamMode.Rotation)
+                {
+                    returnValue = myTeam == Team.player1
+                        ? new List<Transform>() { team2.GetRModeUnitT() }
+                        : new List<Transform>() { team1.GetRModeUnitT() };
+                }
+                else
+                {
+                    returnValue = myTeam == Team.player1
+                        ? team2.GetFightingUnitTs()
+                        : team1.GetFightingUnitTs();
+                }
+                return returnValue;
+            }
+            
+            if (eventType == FightEventType.Gangbang)
+            {
+                _CameraManager.Assign_Camera(cMode, null, null);
             }
             else
             {
-                var tsT = myTeam == Team.player1 ? team1.GetRModeUnitT() : team2.GetRModeUnitT();
-                _CameraManager.Assign_Camera(C_Mode.CertainYAntiVibration, tsT, tsOpponents);
+                if (cMode == C_Mode.WatchOver)
+                {
+                    var center = (me != null ? me : null);
+                    _CameraManager.Assign_Camera(cMode, center, tsOpponents, ts);
+                }
+                else
+                {
+                    var center = (me != null ? me : ( ts.Count > 0 ? ts[0]: null ));
+                    _CameraManager.Assign_Camera(
+                        cMode,
+                        center,
+                        tsOpponents
+                    );
+                }
             }
         }
         

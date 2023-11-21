@@ -66,6 +66,10 @@ namespace FightScene
                                 {
                                     await EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null, center.geometryCenter.position, Quaternion.identity, null);
                                     center.WholeT.gameObject.SetActive(false);
+                                    if (InputsManager.CurrentFocus.Value == center)
+                                    {
+                                        InputsManager.FocusUnit(null);
+                                    }
                                 }
                                 disposable.Dispose();
                             }).AddTo(center);

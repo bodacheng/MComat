@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
@@ -34,30 +35,33 @@ namespace FightScene
             foreach (var center in _teamMembers.GetValues())
             {
                 // SideIcon整备
-                void OnClickUnitIcon(Data_Center c)
+                void ClickUnitIcon(Data_Center c)
                 {
+                    if (c.FightDataRef.IsDead.Value)
+                    {
+                        return;
+                    }
+                    
                     if (TeamConfig.myTeam == RTFightManager.playerTeam)
                     {
                         if (inputsManager.CurrentFocus.Value == c)
                         {
                             inputsManager.FocusUnit(null);
-                            RTFightManager.Target._CameraManager.SetCurrentCameraParams(null, null);
                         }
                         else
                         {
                             inputsManager.FocusUnit(c);
-                            RTFightManager.Target._CameraManager.SetCurrentCameraParams(c.geometryCenter, null);
                         }
                     }
                     switchTeamAuto(currentAutoState());
                 }
-
+                
                 var sideIcon = Instantiate(unitIconPrefab);
                 sideIcon.name = center.UnitInfo.r_id + "_icon";
                 sideIcon.Icon.iconButton.onClick.RemoveAllListeners();
                 sideIcon.Icon.iconButton.onClick.AddListener(() =>
                 {
-                    OnClickUnitIcon(center);
+                    ClickUnitIcon(center);
                 });
                 var unitInfo = RTFightManager.Target.UnitInfoRef[center];
                 sideIcon.Icon.ChangeIcon(unitInfo);
@@ -105,7 +109,7 @@ namespace FightScene
                     }
                 ).AddTo(sideIcon.gameObject);
             }
-
+            
             inputsManager.CurrentFocus.Subscribe(
                 (x) =>
                 {
@@ -125,6 +129,29 @@ namespace FightScene
                     {
                         selectedFrame.SetParent(transform);
                         selectedFrame.gameObject.SetActive(false);
+                    }
+                    
+                    if (TeamConfig.myTeam == RTFightManager.playerTeam)
+                    {
+                        RTFightManager.Target.CameraAdjustment(Team.player1, TeamMode.MultiRaid, FightLoad.Fight.EventType,x != null ? x.geometryCenter : null);
+                        _teamIndicatorCloseDisposable?.Dispose();
+                        _barPosUpdate?.Dispose();
+                        foreach (var one in _teamMembers.GetValues())
+                        {
+                            UnitIconDic.TryGetValue(one, out var tempSi);
+                            tempSi.TeamIndicator.gameObject.SetActive(inputsManager.CurrentFocus.Value == one);
+                            if (x == one)
+                            {
+                                _barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
+                                {
+                                    UnitIconDic.TryGetValue(one, out var tempSi);
+                                    _textScaleManager.AddNew(tempSi.TeamIndicator.transform,
+                                        tempSi.TeamIndicator.transform.DOMove(
+                                            CameraManager._camera.WorldToScreenPoint(one.transform.position + Vector3.up * 1.5f), 0.5f)
+                                    );
+                                }).AddTo(gameObject);
+                            }
+                        }
                     }
                 }
             ).AddTo(this.gameObject);

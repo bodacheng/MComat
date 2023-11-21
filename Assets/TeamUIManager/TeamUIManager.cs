@@ -26,6 +26,7 @@ namespace FightScene
         public readonly IDictionary<Data_Center, SideUnitIcon> UnitIconDic = new Dictionary<Data_Center, SideUnitIcon>();
         private IDisposable _barPosUpdate;
         private IDisposable _teamIndicatorCloseDisposable;
+        private TweenTextScaleManager _textScaleManager = new TweenTextScaleManager();
         
         
         MultiDic<int, int, Data_Center> _teamMembers;
@@ -48,6 +49,7 @@ namespace FightScene
                     RotateClear();
                     break;
             }
+            _textScaleManager.Clear();
         }
         
         public void InsTeamUI(Action<Data_Center> changeUnit, Func<bool> currentAutoState, Action<bool> switchTeamAuto, ReactiveProperty<Data_Center> rModeUnit)
@@ -104,7 +106,6 @@ namespace FightScene
                     tempSi.transform.SetParent(sideIconsContainer.transform);
                     tempSi.Icon.gameObject.SetActive(true);
                     tempSi.RecallBars();
-                    tempSi.TeamIndicator.gameObject.SetActive(false);
                 }
                 else
                 {
@@ -119,6 +120,14 @@ namespace FightScene
             switch (TeamMode)
             {
                 case TeamMode.Rotation:
+                    foreach (var dataCenter in _teamMembers.GetValues())
+                    {
+                        UnitIconDic.TryGetValue(dataCenter, out var tempSi);
+                        if (tempSi == null)
+                            continue;
+                        tempSi.TeamIndicator.gameObject.SetActive(false);
+                    }
+                    
                     if (TeamConfig.myTeam != RTFightManager.playerTeam)
                     {
                         _barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
@@ -126,7 +135,7 @@ namespace FightScene
                                 if (fighting == null)
                                     return;
                                 UnitIconDic.TryGetValue(fighting, out var tempSi);
-                                tempSi.transform.DOMove(CameraManager._camera.WorldToScreenPoint(fighting.transform.position + Vector3.up * 2.5f), 0.5f);
+                                _textScaleManager.AddNew(tempSi.transform, tempSi.transform.DOMove(CameraManager._camera.WorldToScreenPoint(fighting.transform.position + Vector3.up * 2.5f), 0.5f));
                             }
                         ).AddTo(gameObject);
                     }
@@ -142,7 +151,7 @@ namespace FightScene
                                 if (fighting == null)
                                     return;
                                 UnitIconDic.TryGetValue(fighting, out var tempSi);
-                                tempSi.TeamIndicator.transform.DOMove(CameraManager._camera.WorldToScreenPoint(fighting.transform.position + Vector3.up * 1.5f), 0.5f);
+                                _textScaleManager.AddNew(tempSi.TeamIndicator.transform, tempSi.TeamIndicator.transform.DOMove(CameraManager._camera.WorldToScreenPoint(fighting.transform.position + Vector3.up * 1.5f), 0.5f));
                             }
                         ).AddTo(gameObject);
                         
@@ -161,13 +170,20 @@ namespace FightScene
                 case TeamMode.MultiRaid:
                     if (TeamConfig.myTeam != RTFightManager.playerTeam)
                     {
+                        foreach (var dataCenter in _teamMembers.GetValues())
+                        {
+                            UnitIconDic.TryGetValue(dataCenter, out var tempSi);
+                            if (tempSi == null)
+                                continue;
+                            tempSi.TeamIndicator.gameObject.SetActive(false);
+                        }
                         _barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                         {
                             foreach (var one in _teamMembers.GetValues())
                             {
                                 UnitIconDic.TryGetValue(one, out var tempSi);
                                 if (tempSi != null)
-                                    tempSi.transform.DOMove(CameraManager._camera.WorldToScreenPoint(one.transform.position + Vector3.up * 2.5f), 0.5f);
+                                    _textScaleManager.AddNew(tempSi.transform, tempSi.transform.DOMove(CameraManager._camera.WorldToScreenPoint(one.transform.position + Vector3.up * 2.5f), 0.5f));
                             }
                         }).AddTo(gameObject);
                     }
@@ -176,31 +192,42 @@ namespace FightScene
                         foreach (var one in _teamMembers.GetValues())
                         {
                             UnitIconDic.TryGetValue(one, out var tempSi);
-                            tempSi.TeamIndicator.gameObject.SetActive(true);
+                            if (inputsManager.CurrentFocus.Value == null)
+                                tempSi.TeamIndicator.gameObject.SetActive(true);
+                            else
+                                tempSi.TeamIndicator.gameObject.SetActive(one == inputsManager.CurrentFocus.Value);
                         }
-                        _barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
-                        {
-                            foreach (var one in _teamMembers.GetValues())
-                            {
-                                UnitIconDic.TryGetValue(one, out var tempSi);
-                                tempSi.TeamIndicator.transform.DOMove(CameraManager._camera.WorldToScreenPoint(one.transform.position + Vector3.up * 1.5f), 0.5f);
-                            }
-                        }).AddTo(gameObject);
                         
-                        _teamIndicatorCloseDisposable = Observable.Timer(TimeSpan.FromSeconds(teamIndicatorCloseDelay)).Subscribe(_ =>
+                        if (inputsManager.CurrentFocus.Value == null)
                         {
-                            _barPosUpdate.Dispose();
-                            foreach (var one in _teamMembers.GetValues())
+                            _barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                             {
-                                UnitIconDic.TryGetValue(one, out var tempSi);
-                                tempSi.TeamIndicator.gameObject.SetActive(false);
-                            }
-                            _teamIndicatorCloseDisposable.Dispose();
-                        }).AddTo(gameObject);
+                                foreach (var one in _teamMembers.GetValues())
+                                {
+                                    UnitIconDic.TryGetValue(one, out var tempSi);
+                                    _textScaleManager.AddNew(tempSi.TeamIndicator.transform,tempSi.TeamIndicator.transform.DOMove(CameraManager._camera.WorldToScreenPoint(one.transform.position + Vector3.up * 1.5f), 0.5f));
+                                }
+                            }).AddTo(gameObject);
+                        
+                            _teamIndicatorCloseDisposable = Observable.Timer(TimeSpan.FromSeconds(teamIndicatorCloseDelay)).Subscribe(_ =>
+                            {
+                                _barPosUpdate.Dispose();
+                                foreach (var one in _teamMembers.GetValues())
+                                {
+                                    UnitIconDic.TryGetValue(one, out var tempSi);
+                                    tempSi.TeamIndicator.gameObject.SetActive(false);
+                                }
+                                _teamIndicatorCloseDisposable.Dispose();
+                            }).AddTo(gameObject);
+                        }
+                        else
+                        {
+                            inputsManager.CurrentFocus.SetValueAndForceNotify(inputsManager.CurrentFocus.Value); // for refresh
+                        }
                     }
                     break;
             }
-
+            
             if (FightLoad.Fight.EventType == FightEventType.Gangbang)
             {
                 sideIconsContainer.gameObject.SetActive(false);

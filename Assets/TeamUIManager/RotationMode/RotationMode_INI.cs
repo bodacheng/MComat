@@ -112,8 +112,11 @@ namespace FightScene
                         {
                             rotationModeHitCombo.text = h + ( h > 3 ? " Combo!!!": " Combo!" );
                             comboTextAnim.Play();
-                            rotationModeHitCombo.transform.DOMove(GetComboTextShouldBePos(x.transform.position), 
-                                h == 2 ? 0 : 0.5f);
+                            _textScaleManager.AddNew(
+                                rotationModeHitCombo.transform,
+                                rotationModeHitCombo.transform.DOMove(GetComboTextShouldBePos(x.transform.position), 
+                                h == 2 ? 0 : 0.5f)
+                            );
                         }
                         else
                         {

@@ -5,12 +5,13 @@ public abstract class CameraMode
 {
     public CameraManager cameraManager;
     protected Transform meCenter;
-    public Transform target;
+    protected Transform target;
+    public List<Transform> myTeamTargets;
     public List<Transform> targets;
 
     // 整个这一套玩意混乱在，下面这些不同的变量，在不同的相机模式下可能完全是不同的作用。
     // 只是有节约变量数的意义。
-    public bool auto = true;
+    protected bool auto = true;
     protected float speed;
     protected float XZDis, YDis;
     protected float XZrosOffset, YrosOffset;
