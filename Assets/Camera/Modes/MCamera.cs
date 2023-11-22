@@ -27,12 +27,14 @@ class MCamera : CameraMode
         get => _transitionSpeedPara;
         set => _transitionSpeedPara = Mathf.Clamp(value, 0.2f, 5f);
     }
-    
+
+    private float disToH; // 相机距离中心点的横轴距离与高的比值
     public MCamera(float XZDis, float YDis, float fieldOfView)
     {
         _minXZ = XZDis;
         this.XZDis = XZDis;
         this.YDis = YDis;
+        this.disToH = (float) ((decimal)this.YDis/ (decimal)this.XZDis);
         this.fieldOfView = fieldOfView;
     }
 
@@ -176,9 +178,10 @@ class MCamera : CameraMode
                 var ePosX = (float)((decimal)screenPos.x / Screen.width);
                 var ePosY = (float)((decimal)screenPos.y / Screen.height);
 
-                float edge = 0.2f;
-                shouldZoomIn &= (ePosX >= edge && ePosX <= (1 - edge) && ePosY >= edge && ePosY <= (1 - edge));
-                shouldZoomOut |= (ePosX < edge || ePosX > (1 - edge) || ePosY < edge || ePosY > (1 - edge));
+                float edgeForIn = 0.3f;
+                float edgeForOut = 0.15f;
+                shouldZoomIn &= (ePosX >= edgeForIn && ePosX <= (1 - edgeForIn) && ePosY >= edgeForIn && ePosY <= (1 - edgeForIn));
+                shouldZoomOut |= (ePosX < edgeForOut || ePosX > (1 - edgeForOut) || ePosY < edgeForOut || ePosY > (1 - edgeForOut));
             }
             
             if (shouldZoomIn)
@@ -195,6 +198,8 @@ class MCamera : CameraMode
         wholeTargets.AddRange(myTeamTargets);
         wholeTargets.AddRange(targets);
         AdjustXZDis(wholeTargets);
+        
+        YDis = XZDistance * disToH;
         
         // 判断我与敌人哪个更接近相机位置
         if (enemyScreenPos.y >= meScreenPos.y)
