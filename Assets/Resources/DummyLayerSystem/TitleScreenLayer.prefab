@@ -2134,6 +2134,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -2414,6 +2415,7 @@ MonoBehaviour:
   disableTransitionOverride: 0
   activateDoubleClick: 0
   activateHold: 0
+  repeatHold: 0
   sound: 0
   disableSprite: {fileID: 0}
   text: {fileID: 0}
@@ -3561,6 +3563,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2765050249069523412}
     m_Modifications:
+    - target: {fileID: 2263930724546349286, guid: c417acb6e8a904e288639f908b2dd1ac,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263930724546349286, guid: c417acb6e8a904e288639f908b2dd1ac,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263930724546349286, guid: c417acb6e8a904e288639f908b2dd1ac,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.972549
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263930724546349286, guid: c417acb6e8a904e288639f908b2dd1ac,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2263930724546349287, guid: c417acb6e8a904e288639f908b2dd1ac,
         type: 3}
       propertyPath: m_Pivot.x
