@@ -52,11 +52,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
-  - m_GUID: 5759022ed0177406a956108d387b1653
-    m_Address: unit/8
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - unit_icon
   - m_GUID: c1bd35424f62e40ed91d99883ab6bd12
     m_Address: unit/6
     m_ReadOnly: 0

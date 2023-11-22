@@ -13,10 +13,11 @@ Material:
   - AMBIENT
   - ANIME
   - ANIME_SOFT
+  - BASE_CONTRAST
   - BASE_SATURATION
   - DIFFUSE
-  - FOG
   - MATCAP
+  - MATCAP_CONTRAST
   - MATCAP_PERSPECTIVE
   - NORMAL_MAP
   - OUTLINE_PASS_DISABLED
@@ -144,7 +145,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AmbientBrightness: 1
+    - _AmbientBrightness: 2.5
     - _Anime: 1
     - _AnimeSoftness: 0.25
     - _AnimeThreshold1: 0.2
@@ -154,7 +155,7 @@ Material:
     - _BumpScale: 1
     - _CameraFadeEnd: 0
     - _CameraFadeStart: 0
-    - _Contrast: 1
+    - _Contrast: 1.3
     - _Cull: 2
     - _Cutoff: 0.5
     - _Cutout: 0
@@ -173,7 +174,7 @@ Material:
     - _DiffuseWrap: 1
     - _DstBlend: 0
     - _Flat: 0
-    - _Fog: 1
+    - _Fog: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -201,13 +202,13 @@ Material:
     - _LightmapUV: 0
     - _MatCapBlend: 0
     - _MatCapBrightness: 3
-    - _MatCapContrast: 1
+    - _MatCapContrast: 3
     - _MatCapPerspective: 1
     - _MatCapStatic: 0
     - _Metallic: 0
     - _MixedLighting: 0
     - _Mode: 0
-    - _NormalStrength: 1
+    - _NormalStrength: 2
     - _NormalUV: 0
     - _OcclusionStrength: 1
     - _Outline: 0
@@ -271,7 +272,7 @@ Material:
     - _MatCapRot: {r: 0, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimColor: {r: 0, g: 0.70708036, b: 1, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimDirection: {r: 0, g: 0, b: 0, a: 0}
     - _ShadowColor: {r: 0.3, g: 0.3, b: 0.3, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}

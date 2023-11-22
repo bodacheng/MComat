@@ -6,7 +6,7 @@ recordId,realName,monsterType,zokusei,rarityLevel,basicMovementPack,moveType,mot
 5,et,human,4,1,et,Move1,Rush,1
 6,sybill,human,3,1,sybill,Move1,Rush,1
 7,yuta,human,5,1,yuta,Move1,Rush,1
-8,earth_golem,human,3,1,yuta,Move1,Rush,1
+8,earth_golem,human,5,1,yuta,Move1,Rush,1
 9,mutant_b,human,2,1,yuta,Move1,Rush,1
 10,HeavyBioMutant,human,2,1,tetsuya,Move1,Rush,1
 11,fire_golem,human,3,1,tetsuya,Move1,Rush,1
