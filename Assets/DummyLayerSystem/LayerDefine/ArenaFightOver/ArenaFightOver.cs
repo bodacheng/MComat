@@ -118,7 +118,8 @@ public partial class ArenaFightOver : UILayer
         fight.team2Mode = fight.team1Mode;
         fight.Team1Auto = FightLoad.Fight.Team1Auto;
         fight.Team2Auto = true;
-        fight.LoadMyTeam();
+        if (fight.EventType != FightEventType.Gangbang) // 因为gangbang模式只用NextFight这个函数重开当前战斗，开启下一场战斗是有单独的函数。
+            fight.LoadMyTeam();
         FightLoad.Fight = fight;
         FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
         UILayerLoader.Remove<ArenaFightOver>();

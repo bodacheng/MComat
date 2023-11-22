@@ -1,16 +1,13 @@
-using System;
 using DummyLayerSystem;
 
 public partial class ArenaFightOver : UILayer
 {
-    public async void LoadNextGangbangStage()
+    public async void LoadNextGangbangStage(int stageNo)
     {
-        Int32.TryParse(FightLoad.Fight.ID, out var nowStageNo);
-        var nextStageNo = nowStageNo + 1;
-        var nextFight = await PlayerAccountInfo.Me.GangbangModeManager.LoadStage(nextStageNo);
+        var nextFight = await PlayerAccountInfo.Me.GangbangModeManager.LoadStage(stageNo);
         if (nextFight != null)
         {
-            nextStageTitle.text = "Stage " + nextStageNo;
+            nextStageTitle.text = "Stage " + stageNo;
             nextBtn.gameObject.SetActive(true);
             nextFor1v1Btn.gameObject.SetActive(false);
             nextForMultiBtn.gameObject.SetActive(false);

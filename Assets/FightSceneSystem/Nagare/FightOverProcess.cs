@@ -136,7 +136,9 @@ namespace FightScene
                                             levelInt % 5 == 0 ? PlayFabSetting._adBossFightRewardDM : PlayFabSetting._adNormalFightRewardDM,
                                             levelInt);
                                     }
-                                    arenaFightOver.LoadNextGangbangStage();
+                                    Int32.TryParse(FightLoad.Fight.ID, out var nowStageNo);
+                                    var nextStageNo = nowStageNo + 1;
+                                    arenaFightOver.LoadNextGangbangStage(nextStageNo);
                                 }
                             );
                         }

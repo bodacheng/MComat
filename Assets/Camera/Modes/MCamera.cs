@@ -169,7 +169,7 @@ class MCamera : CameraMode
         void AdjustXZDis(List<Transform> targets)
         {
             bool shouldZoomOut = false;
-            bool shouldZoomIn = false;
+            bool shouldZoomIn = true;
             foreach (var target in targets)
             {
                 var screenPos = camera.WorldToScreenPoint(target.position);
