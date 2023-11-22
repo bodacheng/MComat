@@ -96,6 +96,6 @@ STAGE_ID,MODE_NUM(0:optional;1:multiraid;2:rotation)
 95,2
 96,0
 97,0
-98,0
+98,1
 99,2
 100,2

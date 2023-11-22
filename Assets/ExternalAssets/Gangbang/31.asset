@@ -29,31 +29,31 @@ MonoBehaviour:
       c2: 159
       c3: 53
   - id: 1
-    r_id: 13
+    r_id: 8
+    level: 1
+    set:
+      a1: 42
+      a2: 68
+      a3: 103
+      b1: 53
+      b2: 10
+      b3: 89
+      c1: 162
+      c2: 166
+      c3: 107
+  - id: 2
+    r_id: 8
     level: 1
     set:
       a1: 95
-      a2: 98
+      a2: 80
       a3: 53
-      b1: 27
-      b2: 80
-      b3: 89
-      c1: 99
-      c2: 125
-      c3: 180
-  - id: 2
-    r_id: 13
-    level: 1
-    set:
-      a1: 182
-      a2: 167
-      a3: 150
-      b1: 144
-      b2: 5
-      b3: 4
-      c1: 80
-      c2: 53
-      c3: 58
+      b1: 45
+      b2: 107
+      b3: 37
+      c1: 10
+      c2: 39
+      c3: 166
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0

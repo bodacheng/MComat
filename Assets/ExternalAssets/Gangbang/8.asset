@@ -16,7 +16,7 @@ MonoBehaviour:
   fightBGM: 0
   unitsData:
   - id: 2
-    r_id: 7
+    r_id: 16
     level: 1
     set:
       a1: 10
@@ -25,7 +25,7 @@ MonoBehaviour:
       b1: 113
       b2: 184
       b3: 27
-      c1: 145
+      c1: 154
       c2: 58
       c3: 55
   team1HpRate: 1

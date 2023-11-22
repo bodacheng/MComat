@@ -19,15 +19,15 @@ MonoBehaviour:
     r_id: 4
     level: 1
     set:
-      a1: 27
+      a1: 171
       a2: 127
-      a3: 169
-      b1: 159
-      b2: 53
-      b3: 95
-      c1: 90
-      c2: 9
-      c3: 89
+      a3: 182
+      b1: 37
+      b2: 90
+      b3: 55
+      c1: 103
+      c2: 167
+      c3: 45
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0

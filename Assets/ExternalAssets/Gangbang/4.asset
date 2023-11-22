@@ -20,12 +20,12 @@ MonoBehaviour:
     level: 1
     set:
       a1: 159
-      a2: 166
+      a2: 80
       a3: 150
       b1: 89
       b2: 9
       b3: 99
-      c1: 102
+      c1: 3
       c2: 58
       c3: 5
   team1HpRate: 1
