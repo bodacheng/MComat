@@ -26,8 +26,8 @@ MonoBehaviour:
       b2: 113
       b3: 140
       c1: 171
-      c2: 115
-      c3: 113
+      c2: 136
+      c3: 173
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0

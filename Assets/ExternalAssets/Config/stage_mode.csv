@@ -38,7 +38,7 @@ STAGE_ID,MODE_NUM(0:optional;1:multiraid;2:rotation)
 37,0
 38,0
 39,0
-40,0
+40,1
 41,0
 42,0
 43,0
@@ -83,7 +83,7 @@ STAGE_ID,MODE_NUM(0:optional;1:multiraid;2:rotation)
 82,0
 83,0
 84,0
-85,0
+85,1
 86,0
 87,0
 88,0
