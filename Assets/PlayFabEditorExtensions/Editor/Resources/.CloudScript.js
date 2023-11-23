@@ -801,11 +801,11 @@ function arenaPlusPoint(mePosition, opponentPosition, mePoint, opponentPoint) {
     let plusPoint = 0;
     if (opponentPosition - mePosition >= 50)
     {
-        plusPoint = clamp(opponentPoint - mePoint, 20, 30);
+        plusPoint = clamp(opponentPoint - mePoint, 50, 60);
     }
     else
     {
-        plusPoint = clamp(opponentPoint - mePoint, 10, 20);
+        plusPoint = clamp(opponentPoint - mePoint, 40, 50);
     }
     return plusPoint;
 }
