@@ -38,6 +38,7 @@
         GotchaResult = 24,
         DropTableInfo = 26,
         Ranking = 25,
+        ArenaAward = 27,
         
         ShopTop = 201,
 

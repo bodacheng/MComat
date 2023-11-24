@@ -69,6 +69,10 @@ public partial class ArenaPage : MSceneProcess
                     {
                         PreScene.target.trySwitchToStep(MainSceneStep.Ranking);
                     },
+                    () =>
+                    {
+                        PreScene.target.trySwitchToStep(MainSceneStep.ArenaAward);
+                    },
                     UpdateOneWord,
                     PrepareForIt
                 );

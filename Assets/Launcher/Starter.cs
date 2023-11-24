@@ -64,7 +64,6 @@ public class Starter : MonoBehaviour
             }
         );
         //MobileAds.Initialize(initStatus => { Debug.Log(initStatus);});
-        Debug.Log("刷新结束");
         ConfigInitialised = true;
     }
     

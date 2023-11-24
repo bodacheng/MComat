@@ -28,6 +28,7 @@ public partial class ArenaFightOver : UILayer
     #endregion
     
     #region arena
+    [SerializeField] private RectTransform arenaRankParent;
     [SerializeField] private ArenaRankIcon arenaRankIcon;
     [SerializeField] private Text arenaPoint;
     #endregion
@@ -308,9 +309,8 @@ public partial class ArenaFightOver : UILayer
     
     public void ShowArenaPoint(int oldPoint, int currentPoint)
     {
-        arenaPoint.gameObject.SetActive(true);
+        arenaRankParent.gameObject.SetActive(true);
         arenaRankIcon.Set(oldPoint);
-        arenaRankIcon.gameObject.SetActive(true);
         arenaPointValue = oldPoint;
         _arenaPointTweenerCore = DOTween.To(
             () => arenaPointValue,          // 何を対象にするのか

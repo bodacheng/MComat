@@ -196,6 +196,7 @@ namespace mainMenu
             var dropTableInfo = new DropTableInfoDetail();
             var arenaPage = new ArenaPage();
             var rankingPage = new RankingPage();
+            var arenaAwardPage = new ArenaAwardPage();
             
             // mail
             var mailBox = new MailBoxProcess();
@@ -215,6 +216,7 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.GangBangFront, gangbangFrontPage);
             ProcessesRunner.Main.Add(MainSceneStep.Arena, arenaPage);
             ProcessesRunner.Main.Add(MainSceneStep.Ranking, rankingPage);
+            ProcessesRunner.Main.Add(MainSceneStep.ArenaAward, arenaAwardPage);
             ProcessesRunner.Main.Add(MainSceneStep.ShopTop, shopTop);
             ProcessesRunner.Main.Add(MainSceneStep.MailBox, mailBox);
             ProcessesRunner.Main.Add(MainSceneStep.MailDetail, mailDetail);

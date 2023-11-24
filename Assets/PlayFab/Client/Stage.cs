@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using System.Collections.Generic;
@@ -12,15 +11,20 @@ public partial class PlayFabReadClient
     private static IDictionary<string, Award> _gangbangAward;
     public static IDictionary<string, Award> GangbangAwards => _gangbangAward;
     
+    private static IDictionary<string, Award> _arenaAward;
+    public static IDictionary<string, Award> ArenaAwards => _arenaAward;
+    
     public static void GetStageRewardInfo(Action<bool> finished)
     {
         PlayFabClientAPI.GetTitleData(
             new GetTitleDataRequest
             {
-                Keys = new List<string>() {"stage_awards", "gangbang_awards"}
+                Keys = new List<string>() {"stage_awards", "gangbang_awards","arena_awards"}
             }, 
             result =>
             {
+                #region adventure
+                
                 var stageAwardObject = result.Data["stage_awards"];
                 var stageAwards = JsonConvert.DeserializeObject<List<StageAward>>(stageAwardObject);
                 _stageAward = new Dictionary<string, Award>();
@@ -32,6 +36,10 @@ public partial class PlayFabReadClient
                     }
                 }
                 
+                #endregion
+
+                #region gangbang
+                
                 var gangbangAwardObject = result.Data["gangbang_awards"];
                 var gangbangAwards = JsonConvert.DeserializeObject<List<StageAward>>(gangbangAwardObject);
                 _gangbangAward = new Dictionary<string, Award>();
@@ -42,6 +50,22 @@ public partial class PlayFabReadClient
                         _gangbangAward.Add(kv.stageKey, kv.award);
                     }
                 }
+                
+                #endregion
+
+                #region arena
+
+                var arenaAwardObject = result.Data["arena_awards"];
+                var arenaAwards = JsonConvert.DeserializeObject<List<StageAward>>(arenaAwardObject);
+                _arenaAward = new Dictionary<string, Award>();
+                foreach (var kv in arenaAwards)
+                {
+                    if (!_arenaAward.ContainsKey(kv.stageKey))
+                    {
+                        _arenaAward.Add(kv.stageKey, kv.award);
+                    }
+                }
+                #endregion
                 
                 finished.Invoke(true);
             },

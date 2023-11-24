@@ -35,7 +35,7 @@ public class ArenaLayer : UILayer
     private Action<FightInfo> tryBeginStage;
     private int maxOpponentCount = 3;
     
-    public void SetUp(Action loadData, Action openRanking, 
+    public void SetUp(Action loadData, Action openRanking, Action openAwardPage,
         Action<InputField> updateOneWord, Action<FightInfo> tryBeginStage)
     {
         refreshBtn.onClick.RemoveAllListeners();
@@ -44,10 +44,11 @@ public class ArenaLayer : UILayer
             loadData();
         });
         
-        rankingPageBtn.onClick.RemoveAllListeners();
-        rankingPageBtn.onClick.AddListener(()=> openRanking());
+        rankingPageBtn.onClick.AddListener(()=>openRanking());
         arenaRankIcon.Set(PlayerAccountInfo.Me.arenaPoint);
         this.tryBeginStage = tryBeginStage;
+        
+        rewardBtn.onClick.AddListener(()=>openAwardPage());
         
         void GoToTeamEdit()
         {
@@ -145,7 +146,6 @@ public class ArenaLayer : UILayer
         refreshBtn.gameObject.SetActive(info != null);
         arenaRankIcon.gameObject.SetActive(info != null);
         rewardBtn.gameObject.SetActive(info != null);
-
         oneWord.text = info != null ? info.OneWord : String.Empty;
         
         var posKeySet = new PosKeySet();

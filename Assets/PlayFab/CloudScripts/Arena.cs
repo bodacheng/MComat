@@ -160,24 +160,10 @@ public partial class CloudScript
                 var newRank =  PlayFabSetting.ArenaPointToRank(currentPointInt);
                 if (newRank > oldRank)
                 {
-                    switch (newRank)
-                    {
-                        case 5:
-                            awardDM = 100;
-                            break;
-                        case 4:
-                            awardDM = 100;
-                            break;
-                        case 3:
-                            awardDM = 100;
-                            break;
-                        case 2:
-                            awardDM = 100;
-                            break;
-                        case 1:
-                            awardDM = 100;
-                            break;
-                    }
+                    var key =  ((currentPointInt / 100) * 100).ToString();
+                    PlayFabReadClient.ArenaAwards.TryGetValue(key, out var award);
+                    if (award != null)
+                        awardDM = award.d;
                 }
                 
                 if (PlayerAccountInfo.Me != null)
