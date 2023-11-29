@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +20,9 @@ namespace mainMenu
         
         [Header("选中角色的技能显示")]
         [SerializeField] NineForShow nineForShow;
+        
+        [Header("技能编辑")]
+        [SerializeField] BOButton skillEditButton;
 
         [Header("Start")]
         [SerializeField] FightModeSwitch _fightModeSwitch;
@@ -49,6 +51,16 @@ namespace mainMenu
             
             _fightModeSwitch.Setup(0,PlayerPrefs.GetInt("preferAdventureMode",  PlayerPrefs.GetInt("preferAdventureMode", 2)));
             fightStartBtn.SetAction(FightStart);
+            
+            void SkillEdit()
+            {
+                if (nineForShow.InstanceID != null)
+                {
+                    PreScene.target.SetFocusingUnit(nineForShow.InstanceID);;
+                    PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit, true);
+                }
+            }
+            skillEditButton.SetListener(SkillEdit);
             
             await battleGroundSwitch.INI();
         }

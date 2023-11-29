@@ -199,6 +199,7 @@ MonoBehaviour:
   team22_R: {fileID: 3596930340419655366}
   team23_R: {fileID: 50137065411801095}
   nineForShow: {fileID: 9184234314139233624}
+  skillEditButton: {fileID: 2725643461103100119}
   _fightModeSwitch: {fileID: 5042603795466824328}
   fightStartBtn: {fileID: 2903622936447845289}
   battleGroundSwitch: {fileID: 5369012562501267706}
@@ -1422,6 +1423,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2934578652825812686}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2725643461103100119 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 966824720547372569, guid: c33785a0a0f404bec93eee5ee37434ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 2934578652825812686}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06d2816ba830496b87fa3769f55cfb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9184234314139233624 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6326787604693422998, guid: c33785a0a0f404bec93eee5ee37434ac,

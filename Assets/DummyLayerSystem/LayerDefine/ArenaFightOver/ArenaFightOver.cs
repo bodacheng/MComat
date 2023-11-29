@@ -6,6 +6,7 @@ using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 using DummyLayerSystem;
 using FightScene;
+using mainMenu;
 using UniRx;
 
 public partial class ArenaFightOver : UILayer
@@ -36,12 +37,15 @@ public partial class ArenaFightOver : UILayer
     #region arcade
     [SerializeField] private Text stageTitle;
     [SerializeField] private Text nextStageTitle;
+    [SerializeField] private float normalAgainBtnWidth;
+    [SerializeField] private float longerAgainBtnWidth;
     [SerializeField] private BOButton againFor1v1Btn;
     [SerializeField] private BOButton againForMultiBtn;
     [SerializeField] private BOButton againBtn;
     [SerializeField] private BOButton nextBtn;
     [SerializeField] private BOButton nextFor1v1Btn;
     [SerializeField] private BOButton nextForMultiBtn;
+    [SerializeField] private BOButton gotchaBtn;
     [SerializeField] private RectTransform adBtnParent;
     public BOButton AgainBtn => againBtn;
     public BOButton NextBtn => nextBtn;
@@ -163,6 +167,7 @@ public partial class ArenaFightOver : UILayer
             });
         }
 
+        var againBtnRect = againBtn.transform.GetComponent<RectTransform>();
         switch (FightLoad.Fight.EventType)
         {
             case FightEventType.Arena:
@@ -170,12 +175,15 @@ public partial class ArenaFightOver : UILayer
             case FightEventType.Quest:
                 againFor1v1Btn.gameObject.SetActive(FightLoad.Fight.ArcadeFightMode is 0 or 2);
                 againForMultiBtn.gameObject.SetActive(FightLoad.Fight.ArcadeFightMode is 0 or 1);
+                againBtnRect.sizeDelta = new Vector2(longerAgainBtnWidth, againBtnRect.sizeDelta.y);
                 break;
             case FightEventType.Gangbang:
                 againFor1v1Btn.gameObject.SetActive(false);
                 againForMultiBtn.gameObject.SetActive(false);
+                againBtnRect.sizeDelta = new Vector2(normalAgainBtnWidth, againBtnRect.sizeDelta.y);
                 break;
             default:
+                againBtnRect.sizeDelta = new Vector2(normalAgainBtnWidth, againBtnRect.sizeDelta.y);
                 break;
         }
         
@@ -271,6 +279,16 @@ public partial class ArenaFightOver : UILayer
     public void Step2Anim()
     {
         animator.SetTrigger("step2");
+        
+        if (Currencies.DiamondCount.Value >= 90 && PlayerAccountInfo.Me.tutorialProgress == "Finished")
+        {
+            gotchaBtn.SetListener(() =>
+            {
+                ReturnLayer.ReturnMissionList.Clear();
+                FightScene.FightScene.target.ReturnToFront(MainSceneStep.GotchaFront);
+            });
+            gotchaBtn.gameObject.SetActive(true);
+        }
     }
     
     public void ShowAward(int awardDm, int awardGd, int extraAdReward, int finishedStage = -1)

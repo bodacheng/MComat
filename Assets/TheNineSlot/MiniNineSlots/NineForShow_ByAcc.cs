@@ -5,9 +5,12 @@ using mainMenu;
 
 public partial class NineForShow : MonoBehaviour
 {
+    private string instanceID;
+    public string InstanceID => instanceID;
     public void ShowStones_Acc(string instanceID)
     {
-        var skillStoneOfPlayerInfoModels = Stones.GetEquippingStones(instanceID);
+        this.instanceID = instanceID;
+        var skillStoneOfPlayerInfoModels = Stones.GetEquippingStones(this.instanceID);
         
         string A1SkillID = null, A2SkillID = null, A3SkillID = null;
         string B1SkillID = null, B2SkillID = null, B3SkillID = null;

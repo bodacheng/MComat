@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using DummyLayerSystem;
 using mainMenu;
@@ -14,8 +15,19 @@ public class ReturnLayer : UILayer
     
     void Setup()
     {
-        returnButton.onClick.RemoveAllListeners();
-        returnButton.onClick.AddListener(POP);
+        returnButton.SetListener(POP);
+    }
+
+    public static void Stack(MainSceneStep step, Func<MainSceneStep, bool> returnAct)
+    {
+        ReturnAction returnAction = new ReturnAction
+        {
+            returnToStep = step,
+            returnAction = ()=> returnAct(step)
+        };
+        ReturnMissionList.Add(returnAction);
+        var returnLayer = UILayerLoader.Load<ReturnLayer>();
+        returnLayer.Setup();
     }
     
     public static void POP()

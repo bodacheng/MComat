@@ -160,7 +160,7 @@ namespace FightScene
                 case FightEventType.Self:
                     var c = UILayerLoader.Load<CommonFightResult>();
                     c.Setup(
-                        FightScene.target.ReturnToFront, 
+                        ()=>FightScene.target.ReturnToFront(), 
                         () =>
                         {
                             LocalGameRestart(0);

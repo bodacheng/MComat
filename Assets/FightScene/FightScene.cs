@@ -121,12 +121,9 @@ namespace FightScene
             TutorialRunner.Main.Process();
         }
         
-        public void ReturnToFront()
+        public void ReturnToFront(MainSceneStep mainSceneStep = MainSceneStep.FrontPage)
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);
-            var dataCenters = new List<Data_Center>();
-            dataCenters.AddRange(RTFightManager.Target.team1.teamMembers.GetValues());
-            dataCenters.AddRange(RTFightManager.Target.team2.teamMembers.GetValues());
             RTFightManager.Target.ClearUnitData();
             RTFightManager.Target.team1.Clear();
             RTFightManager.Target.team2.Clear();
@@ -134,7 +131,7 @@ namespace FightScene
             FSceneProcessesRunner.Main.Clear();
             if (FightLoad.Fight.EventType == FightEventType.Quest)
                 ProcessesRunner.Main.Clear();
-            MainMenuNote.GoingTo = MainSceneStep.FrontPage;
+            MainMenuNote.GoingTo = mainSceneStep;
             HitBoxesProcesser.Instance.Clear();
             SingleAssignmentDisposableCleaner.Clear();
             SceneManager.LoadScene(1);

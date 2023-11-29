@@ -236,6 +236,10 @@ namespace mainMenu
             }
             else
             {
+                if (MainMenuNote.GoingTo != MainSceneStep.FrontPage)
+                {
+                    ReturnLayer.Stack(MainSceneStep.FrontPage, (x)=> trySwitchToStep(x, false));
+                }
                 trySwitchToStep(MainMenuNote.GoingTo, false);
             }
         }
