@@ -57,6 +57,26 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - gacha_effect
+  - m_GUID: ba8db827643896b44bbda4cf5310a5de
+    m_Address: gachaResultEffect2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
+  - m_GUID: 4b10863adad46d24ab58d2595ef40b85
+    m_Address: gachaResultEffect3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
+  - m_GUID: 8da3759130e52a94897f0dc4f818c389
+    m_Address: gachaResultEffect1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
+  - m_GUID: 44744cb0e5ffab748b08ce782a3e3da4
+    m_Address: gachaResultEffect0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

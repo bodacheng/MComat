@@ -555,10 +555,10 @@ MonoBehaviour:
   flashSp1: screenStarExplostionTest1
   flashSp2: screenStarExplostionTest2
   flashSp3: screenStarExplostionTest3
-  explosionSp0: ButtonEffects/redmagic/explosion0.prefab
-  explosionSp1: ButtonEffects/redmagic/explosion1.prefab
-  explosionSp2: ButtonEffects/redmagic/explosion2.prefab
-  explosionSp3: ButtonEffects/redmagic/explosion3.prefab
+  explosionSp0: gachaResultEffect0
+  explosionSp1: gachaResultEffect1
+  explosionSp2: gachaResultEffect2
+  explosionSp3: gachaResultEffect3
   stoneDetailT: {fileID: 1623021430512196109}
   _stoneDetail: {fileID: 3598465911558610903}
   starScreenMoveDuration: 2

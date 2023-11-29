@@ -9,6 +9,7 @@ public class StarsFall : MonoBehaviour
     }
     
     [SerializeField] Camera _camera;
+    [SerializeField] Camera _eCamera;
     [SerializeField] Transform center;
     [SerializeField] GameObject lookTarget;
     [SerializeField] float skySphereRadius = 650;
@@ -20,6 +21,7 @@ public class StarsFall : MonoBehaviour
     public static StarsFall target;
 
     public Camera Camera => _camera;
+    public Camera ECamera => _eCamera;
 
     public Vector3 GetEffectCenter()
     {
