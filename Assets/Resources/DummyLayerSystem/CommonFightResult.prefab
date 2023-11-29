@@ -135,6 +135,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button_Again
       objectReference: {fileID: 0}
+    - target: {fileID: 2119961500042881059, guid: fd46a30c821b2419c96ec4658694a68b,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3840941720863263399, guid: fd46a30c821b2419c96ec4658694a68b,
         type: 3}
       propertyPath: m_Color.a
