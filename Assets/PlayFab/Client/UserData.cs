@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 
 public partial class PlayFabReadClient
 {
+    public static readonly IDictionary<string, string> MyTimeLimitBundleBoughtLog = new Dictionary<string, string>();
+    
     public static void UpdateUserData(UpdateUserDataRequest req, Action finished, Action fail = null)
     {
         ProgressLayer.Loading(Translate.Get("Updating"));
@@ -25,55 +27,67 @@ public partial class PlayFabReadClient
             }
         );
     }
-
-    public static void LoadTeamSet(string mode, Action<bool> finished)
+    
+    public static void GetAllUserData(List<string> keys, Action<bool> finished)
     {
-        var targetModeCode = mode;
         PlayFabClientAPI.GetUserData(
             new GetUserDataRequest()
             {
                 PlayFabId = PlayerAccountInfo.Me.PlayFabId,
-                Keys = new List<string>() { targetModeCode }
+                Keys = keys
             },
             obj => {
-                if (obj.Data.ContainsKey(targetModeCode))
+                foreach (var key in keys)
                 {
-                    var userData = obj.Data[targetModeCode];
-                    var value = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
-                    switch (mode)
+                    if (obj.Data.ContainsKey(key))
                     {
-                        case "arcade":
-                            TeamSet.Default = value;
-                            break;
-                        case "arena":
-                            TeamSet.Arena3V3 = value;
-                            break;
-                        case "gangbang":
-                            TeamSet.Gangbang = value;
-                            break;
-                        default:
-                            Debug.Log("队伍阵型信息不明");
-                            break;
+                        var userData = obj.Data[key];
+                        PosKeySet value;
+                        switch (key)
+                        {
+                            case "arcade":
+                                value = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
+                                TeamSet.Default = value;
+                                break;
+                            case "arena": // 因为一些特殊处理这个地方现在其实没用。
+                                value = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
+                                TeamSet.Arena3V3 = value;
+                                break;
+                            case "gangbang":
+                                value = JsonConvert.DeserializeObject<TeamPos>(userData.Value).ToPosKeySet();
+                                TeamSet.Gangbang = value;
+                                break;
+                            case "noAds":
+                                Int32.TryParse(userData.Value, out var state);
+                                PlayerAccountInfo.Me.noAdsState = state == 1;
+                                break;
+                        }
+                        
+                        if (key == PlayFabSetting._timeLimitBuyCode)
+                        {
+                            DicAdd<string,string>.Add(MyTimeLimitBundleBoughtLog, key, userData.Value);
+                        }
+                    }
+                    else
+                    {
+                        switch (key)
+                        {
+                            case "arcade":
+                                TeamSet.Default = new PosKeySet();
+                                break;
+                            case "arena":
+                                TeamSet.Arena3V3 = new PosKeySet();
+                                break;
+                            case "gangbang":
+                                TeamSet.Gangbang = new PosKeySet();
+                                break;
+                            case "noAds":
+                                PlayerAccountInfo.Me.noAdsState = false;
+                                break;
+                        }
                     }
                 }
-                else
-                {
-                    switch (mode)
-                    {
-                        case "arcade":
-                            TeamSet.Default = new PosKeySet();
-                            break;
-                        case "arena":
-                            TeamSet.Arena3V3 = new PosKeySet();
-                            break;
-                        case "gangbang":
-                            TeamSet.Gangbang = new PosKeySet();
-                            break;
-                        default:
-                            Debug.Log("队伍阵型信息不明");
-                            break;
-                    }
-                }
+                
                 finished.Invoke(true);
             },
             errorCallback => {
@@ -98,3 +112,15 @@ public partial class PlayFabReadClient
             });
     }
 }
+
+[Serializable]
+public class TimeLimitedBuyData // 針對的title
+{
+    public string startTime;
+    public string endTime;
+    public string message;
+    public string eventID;
+    public int dmAmount;
+}
+
+

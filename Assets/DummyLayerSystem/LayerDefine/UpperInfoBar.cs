@@ -14,6 +14,7 @@ public class UpperInfoBar : UILayer
     [SerializeField] Text titleDisplayName;
     [SerializeField] Text accountDiamondCoin;
     [SerializeField] BOButton diamondPlus;
+    [SerializeField] GameObject hasTimeLimitSaleFlag;
     [SerializeField] Text accountIntelliCoin;
     [SerializeField] GameObject vipFlg;
     [SerializeField] float currencyTextChangeDuration = 2f;
@@ -25,7 +26,7 @@ public class UpperInfoBar : UILayer
         {
             if (gold != value)
             {
-                _tweenTextScaleManager.AddNew(accountIntelliCoin.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
+                _tweenTextScaleManager.AddNew(accountIntelliCoin.transform, Vector3.one * 1.2f, Vector3.one, RewardTextChangeHalfDuration);
             }
             gold = value;
             accountIntelliCoin.text = gold;
@@ -40,7 +41,7 @@ public class UpperInfoBar : UILayer
         {
             if (diamond != value)
             {
-                _tweenTextScaleManager.AddNew(accountDiamondCoin.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
+                _tweenTextScaleManager.AddNew(accountDiamondCoin.transform, Vector3.one * 1.2f, Vector3.one, RewardTextChangeHalfDuration);
             }
             diamond = value;
             accountDiamondCoin.text = diamond;
@@ -49,9 +50,9 @@ public class UpperInfoBar : UILayer
     }
     
     private readonly TweenTextScaleManager _tweenTextScaleManager = new TweenTextScaleManager();
-    private float rewardTextChangeHalfDuration = 0.05f;
-    private TweenerCore<int, int, NoOptions> gdTween;
-    private TweenerCore<int, int, NoOptions> dmTween;
+    private const float RewardTextChangeHalfDuration = 0.05f;
+    private TweenerCore<int, int, NoOptions> _gdTween;
+    private TweenerCore<int, int, NoOptions> _dmTween;
     
     public void Interactable(bool on)
     {
@@ -68,7 +69,7 @@ public class UpperInfoBar : UILayer
         {
             int.TryParse(DiamondText, out int currentValue);
             int targetValue = currentValue;
-            dmTween = DOTween.To(
+            _dmTween = DOTween.To(
                 () => targetValue,
                 setterValue => targetValue = setterValue,
                 x,
@@ -85,7 +86,7 @@ public class UpperInfoBar : UILayer
             int.TryParse(GoldText, out int currentValue);
             int targetValue = currentValue;
             
-            gdTween = DOTween.To(
+            _gdTween = DOTween.To(
                 () => targetValue,
                 setterValue => targetValue = setterValue,
                 x,
@@ -96,7 +97,7 @@ public class UpperInfoBar : UILayer
             });
         }).AddTo(this.gameObject);
         
-        unReadFlag.gameObject.SetActive(PlayFabReadClient.GetMailsData(true).Count > 0);
+        unReadFlag.SetActive(PlayFabReadClient.GetMailsData(true).Count > 0);
         if (openSetting != null)
         {
             settingBtn.onClick.AddListener(openSetting.Invoke);
@@ -127,14 +128,16 @@ public class UpperInfoBar : UILayer
             diamondPlus.gameObject.SetActive(false);
         }
         
+        hasTimeLimitSaleFlag.SetActive(ShopTop.HasTimeLimitSale(PlayFabReadClient.TimeLimitedBuyData));
+        
         vipFlg.SetActive(isVip);
     }
 
     public override void OnDestroy()
     {
         _tweenTextScaleManager.Clear();
-        gdTween?.Kill();
-        dmTween?.Kill();
+        _gdTween?.Kill();
+        _dmTween?.Kill();
         base.OnDestroy();
     }
 }

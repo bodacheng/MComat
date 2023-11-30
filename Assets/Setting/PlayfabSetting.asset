@@ -26,3 +26,4 @@ MonoBehaviour:
   adNormalFightRewardDM: 5
   adBossFightRewardDM: 10
   arenaPointCode: arenapoint
+  timeLimitBuyCode: timelimitbundle

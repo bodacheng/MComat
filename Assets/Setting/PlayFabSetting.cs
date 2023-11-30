@@ -18,6 +18,7 @@ public class PlayFabSetting : ScriptableObject
     [SerializeField] int adNormalFightRewardDM = 5; //指的是普通关卡战斗结束后观看广告获取的报酬
     [SerializeField] int adBossFightRewardDM = 10;  //指的是BOSS关卡战斗结束后观看广告获取的报酬
     [SerializeField] string arenaPointCode = "arenapoint";
+    [SerializeField] string timeLimitBuyCode = "timeLimitBundle";
     
     public static string _UnitCatalog;
     public static string _StoneCatalog;
@@ -33,6 +34,7 @@ public class PlayFabSetting : ScriptableObject
     public static int _adNormalFightRewardDM;
     public static int _adBossFightRewardDM;
     public static string _arenaPointCode;
+    public static string _timeLimitBuyCode;
 
     public void Initialise()
     {
@@ -50,8 +52,9 @@ public class PlayFabSetting : ScriptableObject
         _adNormalFightRewardDM = adNormalFightRewardDM;
         _adBossFightRewardDM = adBossFightRewardDM;
         _arenaPointCode = arenaPointCode;
+        _timeLimitBuyCode = timeLimitBuyCode;
     }
-
+    
     public static int ArenaPointToRank(int point)
     {
         var rank = point / 100;

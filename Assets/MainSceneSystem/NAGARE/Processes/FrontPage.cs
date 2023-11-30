@@ -1,6 +1,7 @@
 ﻿using mainMenu;
 using dataAccess;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using UnityEngine;
@@ -35,16 +36,6 @@ public class FrontPage : MSceneProcess
     void ArcadeTFinished(bool value)
     {
         missionWatcher.Finish("arcadeTFinished", value);
-    }
-    
-    void GangbangTFinished(bool value)
-    {
-        missionWatcher.Finish("gangbangTFinished", value);
-    }
-    
-    void LoadNoAdsFinished(bool value)
-    {
-        missionWatcher.Finish("loadNoAdsFinished", value);
     }
     
     public FrontPage()
@@ -148,16 +139,14 @@ public class FrontPage : MSceneProcess
         PlayFabReadClient.GetMailCatalogItems(PlayFabSetting._MailCatalog, MailCatalogFinished);
         PlayFabReadClient.GetMailCatalogItems(PlayFabSetting._UnitCatalog, UnitCatalogFinished);
         PlayFabReadClient.LoadItems(ItemsLoadFinished);
-        PlayFabReadClient.GetStageRewardInfo(StageRewardFinished);
-        PlayFabReadClient.LoadTeamSet("arcade", ArcadeTFinished);
-        PlayFabReadClient.LoadTeamSet("gangbang", GangbangTFinished);
-        PlayFabReadClient.LoadNoAdsState(LoadNoAdsFinished);
-
+        PlayFabReadClient.GetAllTitleData(StageRewardFinished);
+        PlayFabReadClient.GetAllUserData( new List<string>(){"arcade", "gangbang", "noAds", PlayFabSetting._timeLimitBuyCode}, ArcadeTFinished);
+        
         missionWatcher = new MissionWatcher(
             new List<string>
             {
                 "mailCatalogFinished","unitCatalogFinished","itemsLoadFinished", 
-                "statisticsFinished", "arcadeTFinished", "gangbangTFinished","stageRewardsFinished", "loadNoAdsFinished"
+                "statisticsFinished", "arcadeTFinished","stageRewardsFinished"
             },
             () =>
             {

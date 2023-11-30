@@ -39,7 +39,7 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
         {
             return StoneProductCatalogVersion;
         }
-
+        
         if (productId == noAdsServiceName)
         {
             return ProductCatalogVersion;
@@ -104,7 +104,7 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
                 _stoneProductCatalog = result.Catalog.FindAll(x=>x.ItemClass == ProductCatalogVersion);
                 // Make UnityIAP initialize
                 StoneProductCatalogInitialised = true;
-            }, 
+            },
             error => Debug.LogError(error.GenerateErrorReport())
         );
     }
@@ -304,7 +304,27 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
                     {
                         Debug.Log(y);
                         ProgressLayer.Close();
-                    });
+                    }
+                );
+            }
+            else if (e.purchasedProduct.definition.id == PlayFabSetting._timeLimitBuyCode)
+            {
+                PlayFabReadClient.UpdateUserData(
+                    new UpdateUserDataRequest()
+                    {
+                        Data = new Dictionary<string, string>()
+                        {
+                            { PlayFabSetting._timeLimitBuyCode, PlayFabReadClient.TimeLimitedBuyData.eventID }
+                        }
+                    },
+                    () =>
+                    {
+                        var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
+                        if (shopTopLayer != null)
+                            shopTopLayer.TimeLimitedBundleCell.ShowTimeLimitedBundle(PlayFabReadClient.TimeLimitedBuyData);
+                        ProgressLayer.Close();
+                    }
+                );
             }
             else{
                 ProgressLayer.Close();

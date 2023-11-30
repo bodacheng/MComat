@@ -10,6 +10,9 @@ namespace mainMenu
         [SerializeField] ScrollRect productParent;
         [SerializeField] ProductCell[] stoneBundleProductCells;
         [SerializeField] ProductCell noAdsCell;
+
+        [SerializeField] TimeLimitedBundleCell timeLimitedBundleCell;
+        public TimeLimitedBundleCell TimeLimitedBundleCell => timeLimitedBundleCell;
         
         public void Initialize()
         {

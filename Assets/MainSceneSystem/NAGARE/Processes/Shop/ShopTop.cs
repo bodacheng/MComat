@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using DummyLayerSystem;
 using mainMenu;
-using PlayFab;
-using PlayFab.ClientModels;
 using System.Linq;
 
-public class ShopTop : MSceneProcess
+public partial class ShopTop : MSceneProcess
 {
     private ShopTopLayer shopTopLayer;
     public ShopTop()
@@ -21,43 +19,19 @@ public class ShopTop : MSceneProcess
             null,
             null,
             PlayerAccountInfo.Me.noAdsState);
-
-        var stoneCatalog = IAPManager.StoneProductCatalog;
-        var stoneProductIds = stoneCatalog.Select(x=> x.ItemId).ToList();
-        if (stoneProductIds.Count > 0)
-        {
-            PlayFabClientAPI.GetUserReadOnlyData
-            (
-                new GetUserDataRequest()
-                {
-                    PlayFabId = PlayerAccountInfo.Me.PlayFabId,
-                    Keys = stoneProductIds
-                },
-                (obj) =>
-                {
-                    var showStoneBundleIds = new List<string>();
-                    foreach (var productId in stoneProductIds)
-                    {
-                        if (!obj.Data.ContainsKey(productId))
-                        {
-                            showStoneBundleIds.Add(productId);
-                        }
-                    }
-                    shopTopLayer = UILayerLoader.Load<ShopTopLayer>();
-                    shopTopLayer.Initialize();
-                    shopTopLayer.ShowStoneBundle(showStoneBundleIds);
-                },
-                errorCallback => {
-                }
-            );
-        }
-        else
-        {
-            shopTopLayer = UILayerLoader.Load<ShopTopLayer>();
-            shopTopLayer.Initialize();
-        }
         
-        SetLoaded(true);
+        var stoneCatalog = IAPManager.StoneProductCatalog;
+        var productIds = stoneCatalog.Select(x=> x.ItemId).ToList();
+        PlayFabReadClient.GetAllReadOnlyUserData(productIds, (x) =>
+        {
+            if (x)
+            {
+                shopTopLayer = UILayerLoader.Load<ShopTopLayer>();
+                shopTopLayer.Initialize();
+                shopTopLayer.ShowStoneBundle(PlayFabReadClient.ShowStoneBundleIds);
+            }
+            SetLoaded(true);
+        });
     }
     
     public override void ProcessEnd()
@@ -65,9 +39,42 @@ public class ShopTop : MSceneProcess
         UILayerLoader.Remove<UpperInfoBar>();
         UILayerLoader.Remove<ShopTopLayer>();
     }
-    
-    public override void LocalUpdate()
+
+    public static bool HasTimeLimitSale(TimeLimitedBuyData data)
     {
-    
+        if (data == null)
+        {
+            return false;
+        }
+        
+        DateTime startTime = DateTime.Parse(data.startTime);
+        DateTime endTime = DateTime.Parse(data.endTime);
+        DateTime currentTime = DateTime.UtcNow;
+        bool on = currentTime >= startTime && currentTime <= endTime;
+        
+        if (!on)
+        {
+            return on;
+        }
+        
+        PlayFabReadClient.MyTimeLimitBundleBoughtLog.TryGetValue(PlayFabSetting._timeLimitBuyCode, out var eventId);
+        
+        if (eventId == null) // 完全没买过
+        {
+            on = true;
+        }
+        else //  买过
+        {
+            if (eventId != data.eventID) 
+            {
+                on = true;
+            }
+            else // 已经在本活动期间买过
+            {
+                on = false;
+            }
+        }
+
+        return on;
     }
 }
