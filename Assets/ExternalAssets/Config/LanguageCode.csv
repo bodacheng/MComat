@@ -239,6 +239,7 @@ You became VIP !","購入成功！
 VIP になりました！","购买成功！
 你已获得VIP特权！"
 PurchaseFail,Purchase failed,購入失敗,购买失败
+TimeRemains,Til End:,終了まで：,时间剩余：
 ,,,
 LoadingBattle,Generating battlefield,戦場生成中,战场生成中
 LoadingBattleAboutToEnd,The battle is about to begin,戦いがもうすぐ始まる,战斗即将开始
