@@ -11,16 +11,14 @@ public class TimeLimitedBundleCell : MonoBehaviour
     
     private IDisposable _disposeSeasonCountDown;
     
-    void Start()
-    {
-        ShowTimeLimitedBundle(PlayFabReadClient.TimeLimitedBuyData);
-    }
-    
     public void ShowTimeLimitedBundle(TimeLimitedBuyData data)
     {
         var on = ShopTop.HasTimeLimitSale(data);
         if (!on)
+        {
+            gameObject.SetActive(false);
             return;
+        }
         
         gameObject.SetActive(true);
         msg.text = data.message;

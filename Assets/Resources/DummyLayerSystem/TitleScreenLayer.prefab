@@ -1187,7 +1187,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Username
+  m_Text: mail address
 --- !u!1 &2498640933804124190
 GameObject:
   m_ObjectHideFlags: 0
@@ -3576,12 +3576,12 @@ PrefabInstance:
     - target: {fileID: 2263930724546349286, guid: c417acb6e8a904e288639f908b2dd1ac,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.972549
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2263930724546349286, guid: c417acb6e8a904e288639f908b2dd1ac,
         type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.827451
       objectReference: {fileID: 0}
     - target: {fileID: 2263930724546349287, guid: c417acb6e8a904e288639f908b2dd1ac,
         type: 3}

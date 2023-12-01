@@ -57,7 +57,7 @@ MonoBehaviour:
   - {fileID: 7484773855068082255}
   - {fileID: 5215598267638685177}
   noAdsCell: {fileID: 8135144357352643768}
-  timeLimitedBundleCell: {fileID: 0}
+  timeLimitedBundleCell: {fileID: 4881852321842979717}
 --- !u!1 &2904046931105250747
 GameObject:
   m_ObjectHideFlags: 0
@@ -2945,6 +2945,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 106733ac4e0d71149abb7fc58808ddb5, type: 3}
+--- !u!114 &4881852321842979717 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4326652898400230837, guid: 106733ac4e0d71149abb7fc58808ddb5,
+    type: 3}
+  m_PrefabInstance: {fileID: 9202130783829147184}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ea63b8f81900b642aa6c93a60d8ba9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4890538796510348330 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4353333971712915994, guid: 106733ac4e0d71149abb7fc58808ddb5,

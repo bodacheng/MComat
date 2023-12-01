@@ -10,14 +10,18 @@ namespace mainMenu
         [SerializeField] ScrollRect productParent;
         [SerializeField] ProductCell[] stoneBundleProductCells;
         [SerializeField] ProductCell noAdsCell;
-
         [SerializeField] TimeLimitedBundleCell timeLimitedBundleCell;
-        public TimeLimitedBundleCell TimeLimitedBundleCell => timeLimitedBundleCell;
         
         public void Initialize()
         {
             ShowNoAdsProduct();
             adsBtnRender.Setup();
+            RefreshSize();
+        }
+
+        public void ShowTimeLimitedBundle()
+        {
+            timeLimitedBundleCell.ShowTimeLimitedBundle(PlayFabReadClient.TimeLimitedBuyData);
             RefreshSize();
         }
 

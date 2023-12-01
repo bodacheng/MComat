@@ -319,9 +319,10 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
                     },
                     () =>
                     {
+                        DicAdd<string,string>.Add(PlayFabReadClient.MyTimeLimitBundleBoughtLog, PlayFabSetting._timeLimitBuyCode, PlayFabReadClient.TimeLimitedBuyData.eventID);
                         var shopTopLayer = UILayerLoader.Get<ShopTopLayer>();
                         if (shopTopLayer != null)
-                            shopTopLayer.TimeLimitedBundleCell.ShowTimeLimitedBundle(PlayFabReadClient.TimeLimitedBuyData);
+                            shopTopLayer.ShowTimeLimitedBundle();
                         ProgressLayer.Close();
                     }
                 );

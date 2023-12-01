@@ -29,6 +29,7 @@ public partial class ShopTop : MSceneProcess
                 shopTopLayer = UILayerLoader.Load<ShopTopLayer>();
                 shopTopLayer.Initialize();
                 shopTopLayer.ShowStoneBundle(PlayFabReadClient.ShowStoneBundleIds);
+                shopTopLayer.ShowTimeLimitedBundle();
             }
             SetLoaded(true);
         });

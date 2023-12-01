@@ -7,11 +7,9 @@ public partial class ArenaFightOver : UILayer
         var nextFight = await PlayerAccountInfo.Me.GangbangModeManager.LoadStage(stageNo);
         if (nextFight != null)
         {
-            nextStageTitle.text = "Stage " + stageNo;
-            nextBtn.gameObject.SetActive(true);
-            nextFor1v1Btn.gameObject.SetActive(false);
-            nextForMultiBtn.gameObject.SetActive(false);
-            nextBtn.SetListener(() =>
+            nextTab.SetUp(-1, "Stage " + stageNo);
+            nextTab.gameObject.SetActive(true);
+            nextTab.SetUpAction(() =>
             {
                 var newFightInstance = GangbangInfo.Copy(nextFight);
                 newFightInstance.LoadMyTeam();

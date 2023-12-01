@@ -31,7 +31,8 @@ public class RankingLayer : UILayer
             var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(RECORD_ID);
             connector.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
         });
-        
+        var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
+        BackGroundPS.target.ChangeBGByElement(unitConfig.element);
         connector.ShowModel(unitInfo.r_id).Forget();
     }
 

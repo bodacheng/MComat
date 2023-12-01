@@ -95,7 +95,6 @@ public class GotchaFront : MSceneProcess
     
     public override void ProcessEnd()
     {
-        UILayerLoader.Remove<UpperInfoBar>();
         UILayerLoader.Remove<GotchaLayer>();
         StarsFall.target.gameObject.SetActive(false);
     }
@@ -127,7 +126,12 @@ public class GotchaFront : MSceneProcess
                 }
                 break;
         }
-        
+        var returnLayer = UILayerLoader.Load<ReturnLayer>();
+        if (returnLayer != null)
+        {
+            returnLayer.gameObject.SetActive(false);
+        }
+        UILayerLoader.Remove<UpperInfoBar>();
         UILayerLoader.Remove<GotchaLayer>();// 点击按钮瞬间关闭layer。
         PlayFabClientAPI.PurchaseItem(
             new PurchaseItemRequest

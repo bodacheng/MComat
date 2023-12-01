@@ -35,20 +35,12 @@ public partial class ArenaFightOver : UILayer
     #endregion
     
     #region arcade
-    [SerializeField] private Text stageTitle;
-    [SerializeField] private Text nextStageTitle;
-    [SerializeField] private float normalAgainBtnWidth;
-    [SerializeField] private float longerAgainBtnWidth;
-    [SerializeField] private BOButton againFor1v1Btn;
-    [SerializeField] private BOButton againForMultiBtn;
-    [SerializeField] private BOButton againBtn;
-    [SerializeField] private BOButton nextBtn;
-    [SerializeField] private BOButton nextFor1v1Btn;
-    [SerializeField] private BOButton nextForMultiBtn;
+    [SerializeField] private NextOrAgainBtn againTab;
+    [SerializeField] private NextOrAgainBtn nextTab;
     [SerializeField] private BOButton gotchaBtn;
     [SerializeField] private RectTransform adBtnParent;
-    public BOButton AgainBtn => againBtn;
-    public BOButton NextBtn => nextBtn;
+    public NextOrAgainBtn AgainBtn => againTab;
+    public NextOrAgainBtn NextBtn => nextTab;
     public RectTransform AdBtnParent => adBtnParent;
     #endregion
     
@@ -137,22 +129,22 @@ public partial class ArenaFightOver : UILayer
         var nextFight = await PlayerAccountInfo.Me.ArcadeModeManager.LoadStage(nextStageNo);
         if (nextFight != null && PlayerAccountInfo.Me.tutorialProgress == "Finished" && nowStageNo != 5)
         {
-            nextStageTitle.text = "Stage " + nextStageNo;
-            nextBtn.gameObject.SetActive(true);
-            nextFor1v1Btn.gameObject.SetActive(nextFight.ArcadeFightMode is 0 or 2);
-            nextForMultiBtn.gameObject.SetActive(nextFight.ArcadeFightMode is 0 or 1);
-            nextBtn.SetListener(() =>
-            {
-                NextFight((TeamMode)nextFight.ArcadeFightMode, nextFight);
-            });
-            nextFor1v1Btn.SetListener(() =>
-            {
-                NextFight(TeamMode.Rotation, nextFight);
-            });
-            nextForMultiBtn.SetListener(() =>
-            {
-                NextFight(TeamMode.MultiRaid, nextFight);
-            });
+            nextTab.SetUp(nextFight.ArcadeFightMode, "Stage " + nextStageNo);
+            nextTab.gameObject.SetActive(true);
+            nextTab.SetUpAction(
+                () =>
+                {
+                    NextFight((TeamMode)nextFight.ArcadeFightMode, nextFight);
+                },
+                () =>
+                {
+                    NextFight(TeamMode.Rotation, nextFight);
+                },
+                () =>
+                {
+                    NextFight(TeamMode.MultiRaid, nextFight);
+                }
+            );
         }
     }
     
@@ -166,41 +158,34 @@ public partial class ArenaFightOver : UILayer
                 onClickStoryMask();
             });
         }
-
-        var againBtnRect = againBtn.transform.GetComponent<RectTransform>();
+        
         switch (FightLoad.Fight.EventType)
         {
             case FightEventType.Arena:
                 break;
             case FightEventType.Quest:
-                againFor1v1Btn.gameObject.SetActive(FightLoad.Fight.ArcadeFightMode is 0 or 2);
-                againForMultiBtn.gameObject.SetActive(FightLoad.Fight.ArcadeFightMode is 0 or 1);
-                againBtnRect.sizeDelta = new Vector2(longerAgainBtnWidth, againBtnRect.sizeDelta.y);
+                againTab.SetUp(FightLoad.Fight.ArcadeFightMode, "Stage " + FightLoad.Fight.ID);
                 break;
             case FightEventType.Gangbang:
-                againFor1v1Btn.gameObject.SetActive(false);
-                againForMultiBtn.gameObject.SetActive(false);
-                againBtnRect.sizeDelta = new Vector2(normalAgainBtnWidth, againBtnRect.sizeDelta.y);
+                againTab.SetUp(-1, "Stage " + FightLoad.Fight.ID);
                 break;
             default:
-                againBtnRect.sizeDelta = new Vector2(normalAgainBtnWidth, againBtnRect.sizeDelta.y);
+                againTab.SetUp(-1, null);
                 break;
         }
         
-        againBtn.SetListener(
+        againTab.SetUpAction(
             () =>
             {
                 NextFight(FightLoad.Fight.team1Mode, FightLoad.Fight);
+            },
+            ()=> NextFight(TeamMode.Rotation, FightLoad.Fight),
+            () =>
+            {
+                NextFight(TeamMode.MultiRaid, FightLoad.Fight);
             }
         );
-        againFor1v1Btn.SetListener(() =>
-        {
-            NextFight(TeamMode.Rotation, FightLoad.Fight);
-        });
-        againForMultiBtn.SetListener(() =>
-        {
-            NextFight(TeamMode.MultiRaid, FightLoad.Fight);
-        });
+        
         returnBtn.onClick.AddListener(()=>
         {
             OnDestroy();
@@ -246,11 +231,6 @@ public partial class ArenaFightOver : UILayer
     
     public void Step1Anim()
     {
-        if (FightLoad.Fight.EventType == FightEventType.Quest)
-        {
-            stageTitle.text = "Stage " + FightLoad.Fight.ID;
-        }
-        
         if (FightLogger.value.GetWinnerTeam() == Team.player1)
         {
             winObject.SetActive(true);
@@ -279,7 +259,11 @@ public partial class ArenaFightOver : UILayer
     public void Step2Anim()
     {
         animator.SetTrigger("step2");
-        
+        GuideGocha();
+    }
+
+    void GuideGocha()
+    {
         if (Currencies.DiamondCount.Value >= 90 && PlayerAccountInfo.Me.tutorialProgress == "Finished")
         {
             gotchaBtn.SetListener(() =>
@@ -297,6 +281,7 @@ public partial class ArenaFightOver : UILayer
         {
             dmParent.gameObject.SetActive(true);
             Currencies.DiamondCount.Value += awardDm;
+            GuideGocha();
             awardDmCurrency.text = "+" + awardDm;
             _tweenTextScaleManager.AddNew(awardDmCurrency.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
         }
