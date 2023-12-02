@@ -144,7 +144,7 @@ MonoBehaviour:
   AT_coefficient: 1
   HP_coefficient: 1
   Team1Invincible: 0
-  NormalSkillExGet: 30
+  NormalSkillExGet: 60
   Sp1SkillExGet: 0
   Sp2SkillExGet: 0
   Sp3SkillExGet: 0
@@ -170,5 +170,4 @@ MonoBehaviour:
   toEnemyNearestDis: 0.5
   eXMax: 90
   energyResolveAfterExtendBoundary: 5
-  shadowMaterial: {fileID: 2100000, guid: ea7a57501503cd74f87a10d974771222, type: 2}
   _physicMaterial: {fileID: 13400000, guid: 14a74fe52c92e416ea176cf990c64822, type: 2}
