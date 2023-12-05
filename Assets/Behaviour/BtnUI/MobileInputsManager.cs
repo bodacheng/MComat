@@ -16,6 +16,7 @@ public enum InputKey
     Acc = 5,
     Defend = 3,
     Defend_Cancel = 4,
+    DreamCombo = 6,
     Any = 6
 }
 
@@ -287,13 +288,13 @@ public class MobileInputsManager : MonoBehaviour {
         ButtonsFeatureLoad(behaviorRunner.GetNextSkills(), force);
     }
     
-    public static bool defendButtonHover;
+    public bool defendButtonHover;
     public bool DefendExitTrigger()
     {
         return !defendButtonHover;
     }
     
-    public static bool attack;
+    public bool attack;
     public void AttackDown()
     {
         StartPressing(a1Btn);
@@ -305,7 +306,7 @@ public class MobileInputsManager : MonoBehaviour {
         attack = false;
     }
     
-    public static bool fire1;
+    public bool fire1;
     public void Fire1Down()
     {
         fire1 = true;
@@ -317,7 +318,7 @@ public class MobileInputsManager : MonoBehaviour {
         StopPressing();
     }
     
-    public static bool fire2;
+    public bool fire2;
     public void Fire2Down()
     {
         fire2 = true;
@@ -340,7 +341,7 @@ public class MobileInputsManager : MonoBehaviour {
         StopPressing();
     }
     
-    public static bool acc;
+    public bool acc;
     public void RushDown()
     {
         acc = true;
@@ -352,7 +353,20 @@ public class MobileInputsManager : MonoBehaviour {
         StopPressing();
     }
 
-    public void TurnOnButtons()
+    public bool dreamCombo;
+    public void DreamComboDown()
+    {
+        dreamCombo = true;
+        StartPressing(dashBtn);
+    }
+    
+    public void DreamComboUp()
+    {
+        dreamCombo = false;
+        StopPressing();
+    }
+    
+    void TurnOnButtons()
     {
         a1Btn.gameObject.SetActive(true);
         a2Btn.gameObject.SetActive(true);

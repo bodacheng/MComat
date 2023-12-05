@@ -10,13 +10,9 @@ namespace Soul
         readonly List<SkillEntity> _canTranTo = new List<SkillEntity>(); //可以启动的技能的列表
         readonly List<string> _forcedTransitions = new List<string>();
         
-        void BehaviourTransitionEngine()
+        bool ForceTransitionEngine()
         {
-            _canTranTo.Clear();
             _forcedTransitions.Clear();
-            optionsForButtonRefresh.Clear();
-            
-            #region Forced state transition 
             if (currentSKillEntity.ForcedTransitions != null)
             {
                 for (var i = 0; i < currentSKillEntity.ForcedTransitions.Length; i++)
@@ -31,19 +27,18 @@ namespace Soul
             if (_forcedTransitions.Count > 0)
             {
                 ChangeState(_forcedTransitions[0]);
-                return; // Once a state is forced to trigger, there is no need for the rest of codes to run at this frame
+                return true; // Once a state is forced to trigger, there is no need for the rest of codes to run at this frame
             }
-            #endregion
-
+            return false;
+        }
+        
+        void BehaviourTransitionEngine()
+        {
+            _canTranTo.Clear();
             #region 查找已经可以触发的后续技能
             foreach (var key in currentSKillEntity.CasualTo)
             {
                 BehaviourDic.TryGetValue(key, out _tryBehavior);
-                if (_tryBehavior == null)
-                {
-                    Debug.Log("没找到"+key);
-                    return;
-                }
                 if (!_tryBehavior.Capacity_enter_condition())
                 {
                     continue;
@@ -56,10 +51,31 @@ namespace Soul
                 }
             }
             #endregion
-            
-            #region 按钮技能刷新
-            InputsManager?.ButtonsFeatureLoad(optionsForButtonRefresh);
-            #endregion
+        }
+
+        SkillEntity GetNextSkillEntityOnSequence()
+        {
+            var index = fixedSkillSequence.IndexOf(currentSKillEntity);
+            if (index < fixedSkillSequence.Count - 1)
+            {
+                var nextSkillOnSequence = fixedSkillSequence[index + 1];
+                return nextSkillOnSequence;
+            }
+            return null;
+        }
+        
+        void BehaviourSequenceEngine()
+        {
+            _canTranTo.Clear();
+            var nextSkillOnSequence = GetNextSkillEntityOnSequence();
+            if (nextSkillOnSequence != null)
+            {
+                optionsForButtonRefresh.Add(nextSkillOnSequence);
+                if ((nextSkillOnSequence.CAN_BE_CANCELLED_TO && _SkillCancelFlag.Cancel_Flag) || _nowBehavior.Capacity_Exit_Condition())
+                {
+                    _canTranTo.Add(nextSkillOnSequence);
+                }
+            }
         }
         
         // 获取接下来等待释放的技能，并非是真正可触发技能，但反应了是否够气

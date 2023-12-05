@@ -128,6 +128,11 @@ namespace Soul
                     s.Value.TriggerAttackHeight = SkillEntityDic[s.Key].AIAttrs.height;
                     AddAITriggerConditionToBehavior(SkillEntityDic[s.Key]);
                     BehaviourDic.Add(new KeyValuePair<string, Behavior>(s.Key, s.Value));
+
+                    if (SkillEntityDic[s.Key].SP_LEVEL > 0)
+                    {
+                        fixedSkillSequence.Add(SkillEntityDic[s.Key]);
+                    }
                 }
                 else
                 {

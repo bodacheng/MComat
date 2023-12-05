@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Skill;
 
@@ -22,10 +23,6 @@ namespace Soul
             if (runner.InputsManager != null)
             {
                 changed = BtnTrigger(runner, options, runner.InputsManager);
-                if (changed && runner.InputsManager.CurrentFocus.Value != null)
-                {
-                    runner.InputsManager.BtnRefreshFrames();
-                }
             }
             #endregion
             
@@ -44,6 +41,24 @@ namespace Soul
             A:
             if (!changed)
                 AutoReset(runner);
+            
+            if (changed && runner.InputsManager != null && runner.InputsManager.CurrentFocus.Value != null)
+            {
+                runner.InputsManager.BtnRefreshFrames();
+            }
+        }
+
+        public void RunFixedSequence(BehaviorRunner runner, List<SkillEntity> options)
+        {
+            bool changed = Sequence_RUNs(runner, options.FirstOrDefault());
+            
+            if (!changed)
+                AutoReset(runner);
+            
+            if (changed && runner.InputsManager != null && runner.InputsManager.CurrentFocus.Value != null)
+            {
+                runner.InputsManager.BtnRefreshFrames();
+            }
         }
 
         bool BtnTrigger(BehaviorRunner runner, List<SkillEntity> options, MobileInputsManager inputsManager)
@@ -53,22 +68,28 @@ namespace Soul
             {
                 return false;
             }
+
+            if (inputsManager.dreamCombo)
+            {
+                runner.RunSequenceEngine();
+                return true;
+            }
             
             for (var i = 0; i < options.Count; i++)
             {
                 switch (options[i].EnterInput)
                 {
                     case InputKey.Attack1:
-                    if (MobileInputsManager.attack)
+                    if (inputsManager.attack)
                     {
                         inputsManager.SkillExplosion(options[i].EnterInput, options[i].SP_LEVEL);
                         runner.SingleFightLog.WriteLog(
-                        new SingleFightLog.BehaviourFightRecord
-                        {
-                            AI_Decided = false,
-                            stateKey = options[i].REAL_NAME,
-                            whyIDidThis = null
-                        }
+                            new SingleFightLog.BehaviourFightRecord
+                            {
+                                AI_Decided = false,
+                                stateKey = options[i].REAL_NAME,
+                                whyIDidThis = null
+                            }
                         );
                         runner.SingleFightLog.AnalysisLog(runner.ConditionAndRespondPriority);
                         runner.ChangeState(options[i].REAL_NAME);
@@ -76,7 +97,7 @@ namespace Soul
                     }
                     break;
                     case InputKey.Attack2:
-                    if (MobileInputsManager.fire1)
+                    if (inputsManager.fire1)
                     {
                         inputsManager.SkillExplosion(options[i].EnterInput, options[i].SP_LEVEL);
                         runner.SingleFightLog.WriteLog(
@@ -93,7 +114,7 @@ namespace Soul
                     }
                     break;
                     case InputKey.Attack3:
-                    if (MobileInputsManager.fire2)
+                    if (inputsManager.fire2)
                     {
                         inputsManager.SkillExplosion(options[i].EnterInput, options[i].SP_LEVEL);
                         runner.SingleFightLog.WriteLog(
@@ -110,7 +131,7 @@ namespace Soul
                     }
                     break;
                     case InputKey.Acc:
-                    if (MobileInputsManager.acc)
+                    if (inputsManager.acc)
                     {
                         runner.SingleFightLog.WriteLog(
                         new SingleFightLog.BehaviourFightRecord
@@ -126,7 +147,7 @@ namespace Soul
                     }
                     break;
                     case InputKey.Defend:
-                    if (MobileInputsManager.defendButtonHover)
+                    if (inputsManager.defendButtonHover)
                     {
                         runner.SingleFightLog.WriteLog(
                         new SingleFightLog.BehaviourFightRecord
@@ -142,12 +163,12 @@ namespace Soul
                     }
                     break;
                     case InputKey.Null:
-                        if (!MobileInputsManager.defendButtonHover && !MobileInputsManager.acc && !MobileInputsManager.fire2 && !MobileInputsManager.fire1 && !MobileInputsManager.attack)
+                        if (!inputsManager.defendButtonHover && !inputsManager.acc && !inputsManager.fire2 && !inputsManager.fire1 && !inputsManager.attack)
                         {
                             runner.ChangeState(options[i].REAL_NAME);
                             return true;
                         }
-                    break;
+                        break;
                 }
             }
             return false;
@@ -242,6 +263,17 @@ namespace Soul
                     behaviorRunner.InputsManager?.SkillExplosion(se.EnterInput, se.SP_LEVEL);
                     return true;
                 }
+            }
+            return false;
+        }
+        
+        bool Sequence_RUNs(BehaviorRunner behaviorRunner, SkillEntity option) // AI根据目前可作出的行为作出选择
+        {
+            if (option != null)
+            {
+                behaviorRunner.ChangeState(option.REAL_NAME);
+                behaviorRunner.InputsManager?.SkillExplosion(option.EnterInput, option.SP_LEVEL);
+                return true;
             }
             return false;
         }

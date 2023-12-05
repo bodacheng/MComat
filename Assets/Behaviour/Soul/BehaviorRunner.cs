@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using HittingDetection;
 using Skill;
@@ -22,6 +23,8 @@ namespace Soul
         public IDictionary<string, SkillEntity> SkillEntityDic;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
         public SkillEntity currentSKillEntity;
         SkillEntity _tempSKillEntity;
+        
+        private readonly List<SkillEntity> fixedSkillSequence = new List<SkillEntity>();
         
         #region 辅助模块：控制器
 
@@ -76,15 +79,48 @@ namespace Soul
             BehaviourDic.TryGetValue(key, out var state);
             return state;
         }
+
+        private bool onFixedSequence = false;
+        public bool OnFixedSequence => onFixedSequence;
+        
+        
+        public void RunSequenceEngine()
+        {
+            SkillEntity first = fixedSkillSequence.FirstOrDefault();
+            if (first != null)
+            {
+                _canTranTo.Clear();
+                _canTranTo.Add(first);
+                _controller.RunFixedSequence(this, _canTranTo);
+                onFixedSequence = true;
+            }
+        }
         
         void Update()
         {
             if (IfRunning())
             {
-                BehaviourTransitionEngine();
+                optionsForButtonRefresh.Clear();
+                if (!ForceTransitionEngine())
+                {
+                    if (!onFixedSequence)
+                        BehaviourTransitionEngine(); // 梦幻连段开始的时候应该是有单独的函数和这个并列
+                    else
+                        BehaviourSequenceEngine();
+                }
+                
+                #region 按钮技能刷新
+                InputsManager?.ButtonsFeatureLoad(optionsForButtonRefresh);
+                #endregion
                 
                 #region 决策制定
-                _controller.Decision(this, _canTranTo, AI && !BeingControl());
+                if (!onFixedSequence)
+                    _controller.Decision(this, _canTranTo, AI && !BeingControl()); // 梦幻连段开始的时候应该是有单独的函数和这个并列
+                else
+                {
+                    _controller.RunFixedSequence(this, _canTranTo);
+                    onFixedSequence = GetNextSkillEntityOnSequence() != null;
+                }
                 #endregion
                 
                 _nowBehavior?._State_Update();
