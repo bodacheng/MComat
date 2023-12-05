@@ -69,9 +69,9 @@ namespace Soul
                 return false;
             }
 
-            if (inputsManager.dreamCombo)
+            if (inputsManager.dreamCombo && !runner.OnFixedSequence)
             {
-                runner.RunSequenceEngine();
+                runner.StartOffSequenceEngine();
                 return true;
             }
             
@@ -271,6 +271,11 @@ namespace Soul
         {
             if (option != null)
             {
+                var index = behaviorRunner.fixedSkillSequence.IndexOf(option);
+                if (index == 0)
+                {
+                    behaviorRunner.sequenceBeginAct?.Invoke();
+                }
                 behaviorRunner.ChangeState(option.REAL_NAME);
                 behaviorRunner.InputsManager?.SkillExplosion(option.EnterInput, option.SP_LEVEL);
                 return true;

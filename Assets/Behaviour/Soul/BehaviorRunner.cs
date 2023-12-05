@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using HittingDetection;
@@ -24,7 +25,7 @@ namespace Soul
         public SkillEntity currentSKillEntity;
         SkillEntity _tempSKillEntity;
         
-        private readonly List<SkillEntity> fixedSkillSequence = new List<SkillEntity>();
+        public readonly List<SkillEntity> fixedSkillSequence = new List<SkillEntity>();
         
         #region 辅助模块：控制器
 
@@ -80,20 +81,27 @@ namespace Soul
             return state;
         }
 
-        private bool onFixedSequence = false;
         public bool OnFixedSequence => onFixedSequence;
+        private bool onFixedSequence = false;
         
-        
-        public void RunSequenceEngine()
+        public void StartOffSequenceEngine()
         {
             SkillEntity first = fixedSkillSequence.FirstOrDefault();
             if (first != null)
             {
+                onFixedSequence = true;
                 _canTranTo.Clear();
                 _canTranTo.Add(first);
                 _controller.RunFixedSequence(this, _canTranTo);
-                onFixedSequence = true;
             }
+        }
+
+        public Action sequenceBeginAct;
+        private Action sequenceEndAct;
+        public void RegisterSequenceCommand(Action onStart, Action onEnd)
+        {
+            this.sequenceBeginAct = onStart;
+            this.sequenceEndAct = onEnd;
         }
         
         void Update()
@@ -119,7 +127,6 @@ namespace Soul
                 else
                 {
                     _controller.RunFixedSequence(this, _canTranTo);
-                    onFixedSequence = GetNextSkillEntityOnSequence() != null;
                 }
                 #endregion
                 
@@ -162,7 +169,31 @@ namespace Soul
             // 关于动画模块的“技能动作清空”，我们是把它放在了move状态的开头，从而避免了清空函数与触发动画函数在同一帧执行。
             _lastBehavior = _nowBehavior;
             _nowBehavior = _tryBehavior;
+
+            void EndSequence()
+            {
+                this.sequenceEndAct?.Invoke();
+                onFixedSequence = false;
+            }
+
+            if (onFixedSequence)
+            {
+                var nextSkillEntityOnSequence = GetNextSkillEntityOnSequence();
+                if (nextSkillEntityOnSequence == null)
+                {
+                    EndSequence();
+                }
+            }
+            
             SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out currentSKillEntity);
+            
+            if (onFixedSequence)
+            {
+                if (!fixedSkillSequence.Contains(currentSKillEntity))
+                {
+                    EndSequence();
+                }
+            }
             
             if (AI && !BeingControl())
             {

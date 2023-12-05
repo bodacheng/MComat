@@ -141,6 +141,15 @@ public partial class Data_Center : MonoBehaviour
         
         _MyBehaviorRunner.FormFightingSetsByNineAndTwo(skillSet);
         _MyBehaviorRunner.INIStates(this);
+        _MyBehaviorRunner.RegisterSequenceCommand(
+            () =>
+            {
+                AnimationManger.Speed = 2f;
+            },
+            () =>
+            {
+                AnimationManger.Speed = 1f;
+            });
         
         var tasks = new List<UniTask>
         {

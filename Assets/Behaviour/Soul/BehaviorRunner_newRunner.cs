@@ -98,11 +98,6 @@ namespace Soul
             foreach (var _Key in currentSKillEntity.CasualTo)
             {
                 BehaviourDic.TryGetValue(_Key, out _tryBehavior);
-                if (_tryBehavior == null)
-                {
-                    Debug.Log("没找到"+_Key);
-                    continue;
-                }
                 if (!_tryBehavior.Capacity_enter_condition())
                 {
                     continue;

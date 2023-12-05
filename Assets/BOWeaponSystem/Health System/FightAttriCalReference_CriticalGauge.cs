@@ -4,16 +4,23 @@ using UniRx;
 public partial class FightParamsReference
 {
     public ReactiveProperty<int> CriticalGauge { get; set; } = new ReactiveProperty<int>();
+    public ReactiveProperty<int> DreamComboGauge { get; set; } = new ReactiveProperty<int>();
         
     public void PlusEx(int add)
     {
         CriticalGauge.Value = Mathf.Clamp(CriticalGauge.Value + add, 0, FightGlobalSetting._EXMax);
     }
+
+    public void PlusDreamGauge(int add)
+    {
+        DreamComboGauge.Value = Mathf.Clamp(DreamComboGauge.Value + add, 0, FightGlobalSetting._DreamComboGaugeMax);
+    }
     
     public void CostCriticalGaugeBySPLevel(int level)
     {
-        if (CriticalGaugeMode == CriticalGaugeMode.Unlimited)
+        if (CriticalGaugeMode == CriticalGaugeMode.Unlimited || Center._MyBehaviorRunner.OnFixedSequence)
             return;
+        
         switch (level)
         {
             case 0:

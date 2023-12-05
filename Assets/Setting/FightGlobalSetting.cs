@@ -37,6 +37,7 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] int resistanceMax = 10;
     [SerializeField] float toEnemyNearestDis = 1;
     [SerializeField] int eXMax = 120;
+    [SerializeField] int dreamComboGaugeMax = 1000;
     [SerializeField] int energyResolveAfterExtendBoundary = 5;
     [SerializeField] PhysicMaterial _physicMaterial;
 
@@ -73,6 +74,7 @@ public class FightGlobalSetting : ScriptableObject
     public static int _ResistanceMax = 120;
     public static float ToEnemyNearestDis = 1;
     public static int _EXMax;
+    public static int _DreamComboGaugeMax;
     public static bool HitBoxLogger = true;
     public static int _defendHP;
     public static int _energyResolveAfterExtendBoundary;
@@ -129,7 +131,7 @@ public class FightGlobalSetting : ScriptableObject
         
         _ResistanceMax = resistanceMax;
         _EXMax = eXMax;
-        
+        _DreamComboGaugeMax = dreamComboGaugeMax;
         PhysicMaterial = _physicMaterial;
         _energyResolveAfterExtendBoundary = energyResolveAfterExtendBoundary;
     }
