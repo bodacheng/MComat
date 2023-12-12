@@ -62,4 +62,9 @@ public partial class FightParamsReference
         }
         return false;
     }
+
+    public bool HasPlentyDreamGauge()
+    {
+        return DreamComboGauge.Value >= FightGlobalSetting._DreamComboGaugeMax;
+    }
 }

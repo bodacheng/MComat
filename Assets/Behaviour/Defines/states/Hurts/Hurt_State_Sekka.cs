@@ -11,12 +11,12 @@ namespace Soul
             pasuestart = () =>
             {
                 _BuffsRunner.Freezing = true;
-                AnimationManger.Speed = 0;
+                AnimationManger.AddSpeedBuff("sekka", 0);
                 _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
             };
             pasueend = () =>
             {
-                AnimationManger.Speed = 1;
+                AnimationManger.RemoveSpeedBuff("sekka");
                 shaderManager.FlatColor(Color.white, 0);
                 _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
                 _BuffsRunner.Freezing = false;

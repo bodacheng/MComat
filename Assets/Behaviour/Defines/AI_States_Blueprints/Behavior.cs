@@ -57,6 +57,7 @@ namespace Soul
                 }
                 
                 victim.PlusEx(FightGlobalSetting._getHurtExGet);
+                victim.PlusDreamGauge(FightGlobalSetting._getHurtExGet);
                 switch(gaugeMode)
                 {
                     case CriticalGaugeMode.DoubleGain:
@@ -66,6 +67,7 @@ namespace Soul
                         break;
                 }
                 FightParamsRef.PlusEx(temp);
+                FightParamsRef.PlusDreamGauge(temp);
                 AbsorbEnergyFinished = true;
             }
         }

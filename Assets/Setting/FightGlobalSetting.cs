@@ -37,7 +37,7 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] int resistanceMax = 10;
     [SerializeField] float toEnemyNearestDis = 1;
     [SerializeField] int eXMax = 120;
-    [SerializeField] int dreamComboGaugeMax = 1000;
+    [SerializeField] int dreamComboGaugeMax = 200;
     [SerializeField] int energyResolveAfterExtendBoundary = 5;
     [SerializeField] PhysicMaterial _physicMaterial;
 

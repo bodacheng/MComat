@@ -12,6 +12,7 @@ namespace mainMenu
             var valR = CheckEditBasedOnCurrent();
             ValidationWarn(valR);
             comboShowBtn.gameObject.SetActive(valR == SkillSet.SkillEditError.Perfect && PlayerAccountInfo.Me.tutorialProgress == "Finished");
+            dreamComboShowBtn.gameObject.SetActive(valR == SkillSet.SkillEditError.Perfect && PlayerAccountInfo.Me.tutorialProgress == "Finished");
             return valR;
         }
         

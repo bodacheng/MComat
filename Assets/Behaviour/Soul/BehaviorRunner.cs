@@ -83,7 +83,25 @@ namespace Soul
 
         public bool OnFixedSequence => onFixedSequence;
         private bool onFixedSequence = false;
-        
+
+        public Func<bool> SuperComboCondition { get; set; }
+
+        public bool SuperComboStrategyCondition()
+        {
+            SkillEntity first = fixedSkillSequence.FirstOrDefault();
+            for (var y = 0; y < AllConditionCodes.Count; y++)
+            {
+                var _condition = AllConditionCodes[y];
+                if (ConditionAndRespond[_condition].Contains(first.REAL_NAME))
+                {
+                    BehaviourDic.TryGetValue(first.REAL_NAME, out var tryBehavior);
+                    if (tryBehavior.CheckTriggerCondition(_condition))
+                        return true;
+                }
+            }
+            return false;
+        }
+
         public void StartOffSequenceEngine()
         {
             SkillEntity first = fixedSkillSequence.FirstOrDefault();
@@ -93,6 +111,8 @@ namespace Soul
                 _canTranTo.Clear();
                 _canTranTo.Add(first);
                 _controller.RunFixedSequence(this, _canTranTo);
+                
+                InputsManager?.SkillExplosion(InputKey.DreamCombo, 3);
             }
         }
 

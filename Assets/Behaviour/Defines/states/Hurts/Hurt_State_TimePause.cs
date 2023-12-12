@@ -14,13 +14,13 @@ namespace Soul
             pasuestart = () =>
             {
                 _BuffsRunner.Freezing = true;
-                AnimationManger.Speed = 0;
+                AnimationManger.AddSpeedBuff("pasue", 0);
                 _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                 shaderManager.FlatColor(gold, 0.5f);
             };
             pasueend = () =>
             {
-                AnimationManger.Speed = 1;
+                AnimationManger.RemoveSpeedBuff("pasue");
                 shaderManager.FlatColor(Color.white, 0);
                 _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
                 _BuffsRunner.Freezing = false;

@@ -14,7 +14,20 @@ public class ElementEffectsGroup
     IDictionary<Button, ParticleSystem> _buttonSlotEffects;
     ParticleSystem _defendBtn;
     ParticleSystem _rushBtn;
+    ParticleSystem _dreamComboBtn;
     ParticleSystem _pressingExplosion; // 这个不需要对象池。
+
+    public void DreamComboEffectOn(bool on)
+    {
+        if (on)
+        {
+            _dreamComboBtn.Play(true);
+        }
+        else
+        {
+            _dreamComboBtn.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+    }
     
     public void StartPressing(Button targetBtn)
     {
@@ -78,12 +91,13 @@ public class ElementEffectsGroup
         }
         _pressingExplosion.Stop(true, systemStopBehavior);
         _rushBtn.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        _dreamComboBtn.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         
         if (FightGlobalSetting.HasDefend)
             _defendBtn.Stop(true, systemStopBehavior);
     }
     
-    public void Open(Vector3 defendBtnPos, Vector3 rushBtnPos)
+    public void Open(Vector3 defendBtnPos, Vector3 rushBtnPos, Vector3 dreamComboPos)
     {
         _triggerExplosion0.Stop(true);
         _triggerExplosion1.Stop(true);
@@ -97,6 +111,8 @@ public class ElementEffectsGroup
         _pressingExplosion.Stop(true);
         _rushBtn.gameObject.transform.position = rushBtnPos;
         _rushBtn.Play(true);
+
+        _dreamComboBtn.transform.position = dreamComboPos;
         
         if (FightGlobalSetting.HasDefend)
         {
@@ -146,7 +162,8 @@ public class ElementEffectsGroup
             AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion1.prefab"),
             AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion2.prefab"),
             AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/explosion3.prefab"),
-            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/pressing.prefab")
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/pressing.prefab"),
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/dreamCombo.prefab")
         };
 
         var results2 = await UniTask.WhenAll(tasks2);
@@ -160,6 +177,7 @@ public class ElementEffectsGroup
         _triggerExplosion2 = results2[6];
         _triggerExplosion3 = results2[7];
         _pressingExplosion = results2[8];
+        _dreamComboBtn = results2[9];
         
         _btnRefreshEffects = new Dictionary<Button, ParticleSystem>
         {

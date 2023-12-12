@@ -141,16 +141,23 @@ public partial class Data_Center : MonoBehaviour
         
         _MyBehaviorRunner.FormFightingSetsByNineAndTwo(skillSet);
         _MyBehaviorRunner.INIStates(this);
+        Decomposition dreamBuffEffect = null;
         _MyBehaviorRunner.RegisterSequenceCommand(
-            () =>
+            async () =>
             {
-                AnimationManger.Speed = 2f;
+                AnimationManger.AddSpeedBuff("dreamCombo", 1.5f);
+                this.FightDataRef.DreamComboGauge.Value = 0;
+                EffectsManager.GenerateEffect("super_combo_explosion", FightGlobalSetting.EffectPathDefine(), WholeT.position, WholeT.rotation, WholeT).Forget();
+                dreamBuffEffect = await EffectsManager.GenerateEffect("dream_buff", FightGlobalSetting.EffectPathDefine(), geometryCenter.position, geometryCenter.rotation, geometryCenter);
             },
             () =>
             {
-                AnimationManger.Speed = 1f;
+                if (dreamBuffEffect != null)
+                    dreamBuffEffect.Phase = 0;
+                AnimationManger.RemoveSpeedBuff("dreamCombo");
             });
-        
+        _MyBehaviorRunner.SuperComboCondition = this.FightDataRef.HasPlentyDreamGauge;
+
         var tasks = new List<UniTask>
         {
             EffectsManager.IniEffectsPool("short_effect", FightGlobalSetting.EffectPathDefine(element), 1),
@@ -163,7 +170,9 @@ public partial class Data_Center : MonoBehaviour
             EffectsManager.IniEffectsPool("resistanceUp", FightGlobalSetting.EffectPathDefine(element), 1),
             EffectsManager.IniEffectsPool("on_enable_effect", FightGlobalSetting.EffectPathDefine(element), 1),
             EffectsManager.IniEffectsPool("FlashStart", FightGlobalSetting.EffectPathDefine(element), 1),
-            EffectsManager.IniEffectsPool("FlashEnd", FightGlobalSetting.EffectPathDefine(element), 1)
+            EffectsManager.IniEffectsPool("FlashEnd", FightGlobalSetting.EffectPathDefine(element), 1),
+            EffectsManager.IniEffectsPool("super_combo_explosion", FightGlobalSetting.EffectPathDefine(element), 1),
+            EffectsManager.IniEffectsPool("dream_buff", FightGlobalSetting.EffectPathDefine(element), 1)
         };
         
         //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招

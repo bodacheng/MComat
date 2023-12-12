@@ -69,7 +69,7 @@ namespace Soul
                 return false;
             }
 
-            if (inputsManager.dreamCombo && !runner.OnFixedSequence)
+            if (inputsManager.dreamCombo && !runner.OnFixedSequence && runner.SuperComboCondition())
             {
                 runner.StartOffSequenceEngine();
                 return true;
@@ -211,9 +211,19 @@ namespace Soul
         bool AI_RUNs(BehaviorRunner behaviorRunner, List<SkillEntity> options) // AI根据目前可作出的行为作出选择
         {
             _triggered.Main.Clear();
-            
+
             if (behaviorRunner.GetNowState().Strategic_exit_condition())
             {
+                // 首先看超级连招的条件是不是满足。
+                if (!behaviorRunner.OnFixedSequence)
+                {
+                    if (behaviorRunner.SuperComboStrategyCondition() && behaviorRunner.SuperComboCondition())
+                    {
+                        behaviorRunner.StartOffSequenceEngine();
+                        return true;
+                    }
+                }
+                
                 for (var y = 0; y < behaviorRunner.AllConditionCodes.Count; y++)
                 {
                     _condition = behaviorRunner.AllConditionCodes[y];

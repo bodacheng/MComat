@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 
@@ -24,10 +25,45 @@ public partial class AnimationManger
     public float Speed
     {
         get => speed;
-        set
+        private set
         {
             speed = value;
             Animator.speed = speed;
+        }
+    }
+
+    public class SpeedBuff
+    {
+        public readonly string reasonKey;
+        public readonly float speed;
+
+        public SpeedBuff(string reasonKey, float speed)
+        {
+            this.reasonKey = reasonKey;
+            this.speed = speed;
+        }
+    }
+
+    private readonly List<SpeedBuff> SpeedBuffs = new List<SpeedBuff>();
+
+    public void AddSpeedBuff(string reasonKey, float speed)
+    {
+        SpeedBuffs.Add(new SpeedBuff(reasonKey,speed));
+        SpeedBuff maxSpeedBuff = SpeedBuffs.OrderByDescending(buff => buff.speed).FirstOrDefault();
+        Speed = maxSpeedBuff.speed;
+    }
+    
+    public void RemoveSpeedBuff(string reasonKey)
+    {
+        SpeedBuffs.RemoveAll(x=> x.reasonKey == reasonKey);
+        if (SpeedBuffs.Count > 0)
+        {
+            SpeedBuff maxSpeedBuff = SpeedBuffs.OrderByDescending(buff => buff.speed).FirstOrDefault();
+            Speed = maxSpeedBuff.speed;
+        }
+        else
+        {
+            Speed = 1;
         }
     }
 

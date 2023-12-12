@@ -38,11 +38,12 @@ public partial class SkillEditLayer : UILayer
     private readonly List<Tween> _tweens = new List<Tween>();
     private readonly List<GameObject> _transitionEffects = new List<GameObject>();
     
-    public async UniTask ShowCombo()
+    public async UniTask ShowCombo(bool dreamCombo)
     {
         stonesBox._tabEffects.TurnShowingTagEffects(false);
         
         nineSlot.comboShowBtn.gameObject.SetActive(false);
+        nineSlot.dreamComboShowBtn.gameObject.SetActive(false);
         nineSlot.comboCloseBtn.gameObject.SetActive(false);
         
         var valid = nineSlot.CheckEditBasedOnCurrent();
@@ -54,7 +55,7 @@ public partial class SkillEditLayer : UILayer
         var returnLayer = UILayerLoader.Get<ReturnLayer>();
         returnLayer?.gameObject.SetActive(false);
         mask.gameObject.SetActive(true);
-        var list = nineSlot.GetRandomComboStones();
+        var list = dreamCombo ? nineSlot.GetDreamComboStones() : nineSlot.GetRandomComboStones();
         for (var i = 0; i < list.Count; i++)
         {
             var stone = list[i];
@@ -67,9 +68,10 @@ public partial class SkillEditLayer : UILayer
         returnLayer?.gameObject.SetActive(true);
         
         nineSlot.comboShowBtn.gameObject.SetActive(true);
-        nineSlot.comboCloseBtn.gameObject.SetActive(true && PlayerAccountInfo.Me.tutorialProgress == "Finished");
+        nineSlot.dreamComboShowBtn.gameObject.SetActive(true);
+        nineSlot.comboCloseBtn.gameObject.SetActive(PlayerAccountInfo.Me.tutorialProgress == "Finished");
     }
-
+    
     void CloseComboShow()
     {
         nineSlot.IntroAboutCombo(false);
@@ -173,10 +175,9 @@ public partial class SkillEditLayer : UILayer
         
         CameraConnectorCal(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
         
-        nineSlot.comboShowBtn.onClick.RemoveAllListeners();
-        nineSlot.comboShowBtn.onClick.AddListener(()=> ShowCombo().Forget());
-        nineSlot.comboCloseBtn.onClick.RemoveAllListeners();
-        nineSlot.comboCloseBtn.onClick.AddListener(CloseComboShow);
+        nineSlot.comboShowBtn.SetListener(()=> ShowCombo(false).Forget());
+        nineSlot.dreamComboShowBtn.SetListener(()=> ShowCombo(true).Forget());
+        nineSlot.comboCloseBtn.SetListener(CloseComboShow);
         
         Initialized = true;
     }

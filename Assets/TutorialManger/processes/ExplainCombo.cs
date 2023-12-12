@@ -21,7 +21,7 @@ public class ExplainCombo : TutorialProcess
         if (_skillEditLayer == null)
         {
             _skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
-            await _skillEditLayer.ShowCombo();
+            await _skillEditLayer.ShowCombo(false);
         }
         
         await UniTask.Delay(TimeSpan.FromSeconds(1));

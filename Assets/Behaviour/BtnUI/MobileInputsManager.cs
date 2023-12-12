@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using dataAccess;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.UI;
 using Soul;
 using Skill;
 using UniRx;
+using RengeGames.HealthBars;
 
 public enum InputKey
 {
@@ -27,8 +29,10 @@ public class MobileInputsManager : MonoBehaviour {
     [SerializeField] BOButton a3Btn;
     [SerializeField] BOButton defendBtn;
     [SerializeField] BOButton dashBtn;
+    [SerializeField] BOButton dreamComboBtn;
     [SerializeField] UltimateJoystick joystick;
     [SerializeField] Transform effectsParent;
+    [SerializeField] RadialSegmentedHealthBar radialSegmentedHealthBar;
     
     //攻击键系成员
     readonly IDictionary<string, GameObject> _aIcons = new Dictionary<string, GameObject>();
@@ -68,6 +72,7 @@ public class MobileInputsManager : MonoBehaviour {
         a2Btn.interactable = !preparingMode;
         a3Btn.interactable = !preparingMode;
         dashBtn.interactable = !preparingMode;
+        dreamComboBtn.interactable = !preparingMode;
         joystick.enabled = !preparingMode;
     }
     
@@ -76,7 +81,8 @@ public class MobileInputsManager : MonoBehaviour {
     
     private readonly ReactiveProperty<Data_Center> focus = new ReactiveProperty<Data_Center>();
     public ReactiveProperty<Data_Center> CurrentFocus => focus;
-    
+
+    private IDisposable watchDreamComboGauge;
     public void FocusUnit(Data_Center center, bool force = false)
     {
         if (focus.Value != null)
@@ -89,6 +95,23 @@ public class MobileInputsManager : MonoBehaviour {
             focus.Value = center;
             SwitchElementEffects(center.element);
             SuddenRefreshButtons(focus.Value._MyBehaviorRunner, force);
+            watchDreamComboGauge?.Dispose();
+            watchDreamComboGauge = center.FightDataRef.DreamComboGauge.Subscribe(
+                (x) =>
+                {
+                    var percent = (float)x / FightGlobalSetting._DreamComboGaugeMax;
+                    if (percent == 1)
+                    {
+                        DreamComboEffectOn();
+                    }
+                    else
+                    {
+                        DreamComboEffectOff();
+                    }
+                    radialSegmentedHealthBar.SetPercent(percent);
+                }
+            ).AddTo(this.gameObject);
+            
             TurnOnButtons();
         }
         else
@@ -128,7 +151,8 @@ public class MobileInputsManager : MonoBehaviour {
             _focusing = element;
             _elementEffects[element].Open(
                 PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, defendBtn.GetComponent<RectTransform>(), 5), 
-                PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, dashBtn.GetComponent<RectTransform>(), 5)
+                PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, dashBtn.GetComponent<RectTransform>(), 5),
+                PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, dreamComboBtn.GetComponent<RectTransform>(), 5)
             );
         }else{
             Debug.Log("检查手机控制器渲染模块加载顺序");
@@ -188,6 +212,9 @@ public class MobileInputsManager : MonoBehaviour {
             case InputKey.Attack3:
                 targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, a3Btn.GetComponent<RectTransform>(), 3);
                 break;
+            case InputKey.DreamCombo:
+                targetExplode.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, dreamComboBtn.GetComponent<RectTransform>(), 3);
+                break;
         }
         targetExplode?.Play();
     }
@@ -212,6 +239,18 @@ public class MobileInputsManager : MonoBehaviour {
     {
         if (_elementEffects.ContainsKey(_focusing))
             _elementEffects[_focusing].StopPressing();
+    }
+
+    void DreamComboEffectOn()
+    {
+        if (_elementEffects.ContainsKey(_focusing))
+            _elementEffects[_focusing].DreamComboEffectOn(true);
+    }
+    
+    void DreamComboEffectOff()
+    {
+        if (_elementEffects.ContainsKey(_focusing))
+            _elementEffects[_focusing].DreamComboEffectOn(false);
     }
     
     // 如果不是对准角色，不会跑。
@@ -357,7 +396,7 @@ public class MobileInputsManager : MonoBehaviour {
     public void DreamComboDown()
     {
         dreamCombo = true;
-        StartPressing(dashBtn);
+        StartPressing(dreamComboBtn);
     }
     
     public void DreamComboUp()
@@ -372,6 +411,7 @@ public class MobileInputsManager : MonoBehaviour {
         a2Btn.gameObject.SetActive(true);
         a3Btn.gameObject.SetActive(true);
         dashBtn.gameObject.SetActive(true);
+        dreamComboBtn.gameObject.SetActive(true);
         attack = false;
         fire1 = false;
         fire2 = false;
@@ -390,6 +430,7 @@ public class MobileInputsManager : MonoBehaviour {
         a2Btn.gameObject.SetActive(false);
         a3Btn.gameObject.SetActive(false);
         dashBtn.gameObject.SetActive(false);
+        dreamComboBtn.gameObject.SetActive(false);
         
         attack = false;
         fire1 = false;

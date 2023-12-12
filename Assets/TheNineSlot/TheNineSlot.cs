@@ -57,7 +57,7 @@ namespace mainMenu
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _tabEffects;
         
-        public BOButton comboShowBtn, comboCloseBtn;
+        public BOButton comboShowBtn,dreamComboShowBtn, comboCloseBtn;
         
         SkillStoneSlot _a1Slot, _a2Slot, _a3Slot;
         SkillStoneSlot _b1Slot, _b2Slot, _b3Slot;
@@ -68,7 +68,7 @@ namespace mainMenu
         public Action<string> PrintSkillInfo;
 
         // For Combo Instruction
-        public List<SKStoneItem> GetRandomComboStones()
+        public List<SKStoneItem> GetDreamComboStones()
         {
             var returnValue = new List<SKStoneItem>();
             void AddStoneItem(SkillStoneSlot slot)
@@ -79,6 +79,32 @@ namespace mainMenu
                 }
             }
 
+            var list1 = new List<SkillStoneSlot>()
+            {
+                _a1Slot, _a2Slot, _a3Slot, _b1Slot, _b2Slot, _b3Slot,_c1Slot, _c2Slot, _c3Slot
+            };
+            for (var index = 0; index < list1.Count; index++)
+            {
+                var item = list1[index];
+                if (item._cell.GetItem()._SkillConfig.SP_LEVEL > 0)
+                {
+                    AddStoneItem(item);
+                }
+            }
+            return returnValue;
+        }
+        
+        public List<SKStoneItem> GetRandomComboStones()
+        {
+            var returnValue = new List<SKStoneItem>();
+            void AddStoneItem(SkillStoneSlot slot)
+            {
+                if (slot._cell.GetItem() != null)
+                {
+                    returnValue.Add(slot._cell.GetItem());
+                }
+            }
+            
             var list1 = new List<SkillStoneSlot>()
             {
                 _a1Slot, _b1Slot, _c1Slot
