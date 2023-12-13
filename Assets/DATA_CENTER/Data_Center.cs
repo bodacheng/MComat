@@ -142,19 +142,26 @@ public partial class Data_Center : MonoBehaviour
         _MyBehaviorRunner.FormFightingSetsByNineAndTwo(skillSet);
         _MyBehaviorRunner.INIStates(this);
         Decomposition dreamBuffEffect = null;
+        bool superDreamEnded = false;
         _MyBehaviorRunner.RegisterSequenceCommand(
             async () =>
             {
+                superDreamEnded = false;
                 AnimationManger.AddSpeedBuff("dreamCombo", 1.5f);
                 this.FightDataRef.DreamComboGauge.Value = 0;
                 EffectsManager.GenerateEffect("super_combo_explosion", FightGlobalSetting.EffectPathDefine(), WholeT.position, WholeT.rotation, WholeT).Forget();
-                dreamBuffEffect = await EffectsManager.GenerateEffect("dream_buff", FightGlobalSetting.EffectPathDefine(), geometryCenter.position, geometryCenter.rotation, geometryCenter);
+                dreamBuffEffect = await EffectsManager.GenerateEffect("dream_buff", FightGlobalSetting.EffectPathDefine(), geometryCenter.position, default, geometryCenter);
+                if (superDreamEnded)
+                {
+                    dreamBuffEffect.Phase = -1;
+                }
             },
             () =>
             {
                 if (dreamBuffEffect != null)
-                    dreamBuffEffect.Phase = 0;
+                    dreamBuffEffect.Phase = -1;
                 AnimationManger.RemoveSpeedBuff("dreamCombo");
+                superDreamEnded = true;
             });
         _MyBehaviorRunner.SuperComboCondition = this.FightDataRef.HasPlentyDreamGauge;
 

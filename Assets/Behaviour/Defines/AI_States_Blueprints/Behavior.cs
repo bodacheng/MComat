@@ -67,7 +67,7 @@ namespace Soul
                         break;
                 }
                 FightParamsRef.PlusEx(temp);
-                FightParamsRef.PlusDreamGauge(temp);
+                FightParamsRef.PlusDreamGauge(FightGlobalSetting._NormalSkillExGet);
                 AbsorbEnergyFinished = true;
             }
         }

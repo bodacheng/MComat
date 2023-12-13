@@ -88,7 +88,9 @@ namespace Soul
 
         public bool SuperComboStrategyCondition()
         {
-            SkillEntity first = fixedSkillSequence.FirstOrDefault();
+            var first = fixedSkillSequence.FirstOrDefault();
+            if (first == null)
+                return false;
             for (var y = 0; y < AllConditionCodes.Count; y++)
             {
                 var _condition = AllConditionCodes[y];
@@ -104,7 +106,7 @@ namespace Soul
 
         public void StartOffSequenceEngine()
         {
-            SkillEntity first = fixedSkillSequence.FirstOrDefault();
+            var first = fixedSkillSequence.FirstOrDefault();
             if (first != null)
             {
                 onFixedSequence = true;
@@ -174,6 +176,14 @@ namespace Soul
             }
         }
         
+        void EndSequence()
+        {
+            processingProcessedSequenceIndex = -1;
+            this.sequenceEndAct?.Invoke();
+            onFixedSequence = false;
+        }
+        
+        private int processingProcessedSequenceIndex = -1;
         public void ChangeState(string num)
         {
             _SkillCancelFlag.turn_off_flag();
@@ -189,27 +199,11 @@ namespace Soul
             // 关于动画模块的“技能动作清空”，我们是把它放在了move状态的开头，从而避免了清空函数与触发动画函数在同一帧执行。
             _lastBehavior = _nowBehavior;
             _nowBehavior = _tryBehavior;
-
-            void EndSequence()
-            {
-                this.sequenceEndAct?.Invoke();
-                onFixedSequence = false;
-            }
-
-            if (onFixedSequence)
-            {
-                var nextSkillEntityOnSequence = GetNextSkillEntityOnSequence();
-                if (nextSkillEntityOnSequence == null)
-                {
-                    EndSequence();
-                }
-            }
-            
             SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out currentSKillEntity);
             
             if (onFixedSequence)
             {
-                if (!fixedSkillSequence.Contains(currentSKillEntity))
+                if (!SequenceFengLiuShuiZhuan())
                 {
                     EndSequence();
                 }
@@ -233,6 +227,14 @@ namespace Soul
             _lastBehavior = _nowBehavior;
             _nowBehavior = _tryBehavior;
             SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out currentSKillEntity);
+            
+            if (onFixedSequence)
+            {
+                if (!SequenceFengLiuShuiZhuan())
+                {
+                    EndSequence();
+                }
+            }
             
             if (AI && !BeingControl())
                 _nowBehavior.AI_State_enter(damage);
