@@ -35,6 +35,7 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] float lightBlockLastingTime = 0.3f, heavyBlockLastingTime = 0.5f;
     [SerializeField] float attackDrawingDistance = 1f;
     [SerializeField] int resistanceMax = 10;
+    [SerializeField] float dreamComboResistTime = 0.5f;
     [SerializeField] float toEnemyNearestDis = 1;
     [SerializeField] int eXMax = 120;
     [SerializeField] int dreamComboGaugeMax = 200;
@@ -67,6 +68,7 @@ public class FightGlobalSetting : ScriptableObject
     public static float _closeDis;
     public static float LightBlockLastingTime, HeavyBlockLastingTime, HighHitLastingTime;
     public static float NormalAttackPosFixingTime;
+    public static float _dreamComboResistTime;
     public static AnimationCurve KnockOffYAnimationCurve, KnockOffZAnimationCurve;
     public static AnimationCurve HDamageYAnimationCurve;
     public static AnimationCurve HDamageZAnimationCurve;
@@ -126,7 +128,7 @@ public class FightGlobalSetting : ScriptableObject
         HeavyBlockLastingTime = heavyBlockLastingTime;
 
         _attackDrawingDistance = attackDrawingDistance;
-
+        _dreamComboResistTime = dreamComboResistTime;
         ToEnemyNearestDis = toEnemyNearestDis;
         
         _ResistanceMax = resistanceMax;

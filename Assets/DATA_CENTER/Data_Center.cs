@@ -154,6 +154,7 @@ public partial class Data_Center : MonoBehaviour
                 if (superDreamEnded)
                 {
                     dreamBuffEffect.Phase = -1;
+                    _ResistanceManager.DreamComboStart();
                 }
             },
             () =>

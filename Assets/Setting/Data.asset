@@ -167,6 +167,7 @@ MonoBehaviour:
   heavyBlockLastingTime: 0.6
   attackDrawingDistance: 1
   resistanceMax: 10
+  dreamComboResistTime: 1
   toEnemyNearestDis: 0.5
   eXMax: 90
   dreamComboGaugeMax: 300

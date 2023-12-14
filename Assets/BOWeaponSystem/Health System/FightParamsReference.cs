@@ -23,7 +23,14 @@ public partial class FightParamsReference
     
     public ReactiveProperty<bool> IsDead { get; set; } = new ReactiveProperty<bool>(false);
     public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
-    public ReactiveProperty<int> Resistance { get; set; } = new ReactiveProperty<int>(0);
+    private readonly ReactiveProperty<int> _resistance = new ReactiveProperty<int>(0);
+
+    public ReactiveProperty<int> Resistance
+    {
+        get => _resistance;
+        set => _resistance.Value = value.Value >= 0 ? value.Value : 0;
+    }
+    
     public float AT { get; set; }
     public CriticalGaugeMode CriticalGaugeMode{ get; set; }
     public bool Invincible { get; set; }

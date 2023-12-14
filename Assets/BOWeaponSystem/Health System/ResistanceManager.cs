@@ -40,8 +40,8 @@ public class ResistanceManager : MonoBehaviour
             }
         ).AddTo(this.gameObject);
     }
-    
-    Color speedBuff = new Color(0.2f, 0.2f, 1f);
+
+    readonly Color speedBuff = new Color(0.2f, 0.2f, 1f);
     public void ResistanceUp(AnimationEvent R)
     {
         data_Center.FightDataRef.Resistance.Value += R.intParameter;                      
@@ -57,7 +57,7 @@ public class ResistanceManager : MonoBehaviour
                 };
                 UnityEngine.Events.UnityAction eventEnd = () =>
                 {
-                    data_Center.FightDataRef.Resistance.Value = 0;
+                    data_Center.FightDataRef.Resistance.Value -= 1;
                 };
                 CustomCoroutine eventCoroutine = new CustomCoroutine(eventStart, 0.8f, 
                 () =>
@@ -89,16 +89,13 @@ public class ResistanceManager : MonoBehaviour
                 UnityEngine.Events.UnityAction eventEnd3 = () =>
                 {
                     data_Center.AnimationManger.RemoveSpeedBuff("speedup");
-                    data_Center.FightDataRef.Resistance.Value = 0;
+                    data_Center.FightDataRef.Resistance.Value -= 1;
                     data_Center._ShaderManager.RimEffectsClear(0.2f);
                 };
                 
                 CustomCoroutine eventCoroutine3 = new CustomCoroutine(
                     eventStart3, 0.8f,
-                     () =>
-                     {
-                         return data_Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit;
-                     }, eventEnd3);
+                     () => data_Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit, eventEnd3);
                 temp = data_Center.FightDataRef.Resistance.Value;
                 var disposable3 = new SingleAssignmentDisposable();
                 disposableTasks.Add(disposable3);
@@ -137,6 +134,21 @@ public class ResistanceManager : MonoBehaviour
                 });
                 break;
         }
+    }
+
+    public void DreamComboStart()
+    {
+        UnityEngine.Events.UnityAction eventStart = () =>
+        {
+            data_Center.FightDataRef.Resistance.Value += 2;
+        };
+        UnityEngine.Events.UnityAction eventEnd = () =>
+        {
+            data_Center.FightDataRef.Resistance.Value -= 2;
+        };
+        CustomCoroutine eventCoroutine = new CustomCoroutine(eventStart, FightGlobalSetting._dreamComboResistTime,
+            () => data_Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit, eventEnd);
+        data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine);
     }
     
     public void ResistanceClear()
