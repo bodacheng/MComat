@@ -140,11 +140,11 @@ public class ResistanceManager : MonoBehaviour
     {
         UnityEngine.Events.UnityAction eventStart = () =>
         {
-            data_Center.FightDataRef.Resistance.Value += 2;
+            data_Center.FightDataRef.Resistance.Value += FightGlobalSetting._dreamComboResistUpCount;
         };
         UnityEngine.Events.UnityAction eventEnd = () =>
         {
-            data_Center.FightDataRef.Resistance.Value -= 2;
+            data_Center.FightDataRef.Resistance.Value -= FightGlobalSetting._dreamComboResistUpCount;
         };
         CustomCoroutine eventCoroutine = new CustomCoroutine(eventStart, FightGlobalSetting._dreamComboResistTime,
             () => data_Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit, eventEnd);

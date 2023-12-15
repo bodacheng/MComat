@@ -157,7 +157,7 @@ MonoBehaviour:
   hurtFreezeInDuration: 0.01
   hurtFreezeOutDuration: 0.2
   normalAttackPosFixingTime: 0.03
-  knockOffExtent: 7
+  knockOffExtent: 10
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5
   GetupTime: 0.5
@@ -167,9 +167,10 @@ MonoBehaviour:
   heavyBlockLastingTime: 0.6
   attackDrawingDistance: 1
   resistanceMax: 10
-  dreamComboResistTime: 1
   toEnemyNearestDis: 0.5
   eXMax: 90
-  dreamComboGaugeMax: 300
+  dreamComboGaugeMax: 270
+  dreamComboResistTime: 1
+  dreamComboResistUpCount: 5
   energyResolveAfterExtendBoundary: 5
   _physicMaterial: {fileID: 13400000, guid: 14a74fe52c92e416ea176cf990c64822, type: 2}

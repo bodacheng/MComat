@@ -55,6 +55,10 @@ public partial class SkillEditLayer : UILayer
         var returnLayer = UILayerLoader.Get<ReturnLayer>();
         returnLayer?.gameObject.SetActive(false);
         mask.gameObject.SetActive(true);
+        EffectsManager.GenerateEffect("super_combo_explosion", FightGlobalSetting.EffectPathDefine(), 
+            connector.FocusingC.WholeT.position, connector.FocusingC.WholeT.rotation, connector.FocusingC.WholeT).Forget();
+        connector.FocusingC.AnimationManger.AddSpeedBuff("dreamCombo", 1.2f);
+        
         var list = dreamCombo ? nineSlot.GetDreamComboStones() : nineSlot.GetRandomComboStones();
         for (var i = 0; i < list.Count; i++)
         {
@@ -63,6 +67,8 @@ public partial class SkillEditLayer : UILayer
             await RunSkillAndShowTransition_Combo(stone, i < list.Count - 1 ? list[i+1] : null);
             await UniTask.WaitUntil(() => connector.FocusingC._MyBehaviorRunner._SkillCancelFlag.Cancel_Flag);
         }
+        
+        connector.FocusingC.AnimationManger.RemoveSpeedBuff("dreamCombo");
         
         mask.gameObject.SetActive(false);
         returnLayer?.gameObject.SetActive(true);
