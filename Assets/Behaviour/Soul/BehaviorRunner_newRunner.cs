@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Skill;
 
@@ -55,6 +56,12 @@ namespace Soul
 
         SkillEntity GetNextSkillEntityOnSequence()
         {
+            if (dreamComboStart)
+            {
+                dreamComboStart = false;
+                return fixedSkillSequence.FirstOrDefault();
+            }
+            
             var index = fixedSkillSequence.IndexOf(currentSKillEntity);
             if (index == -1)
                 return null;

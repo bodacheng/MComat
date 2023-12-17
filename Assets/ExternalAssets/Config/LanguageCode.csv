@@ -116,7 +116,8 @@ range_close,close,近,近
 range_near,near,中,中
 range_far,far,遠,远
 ,,,
-RandomShowCombo,Combo Move Show,連続技展示,展示连招
+RandomShowCombo,Combo,スキルコンボ,普通连招
+ShowDreamCombo,Dream Combo,ドリームコンボ,梦幻连招
 ,,,
 SkillEditInstruction1,"The skill set has a ""balance value"", which must be above 0 to be compliant, otherwise the warrior cannot participate in the battle. Equipping a normal skill will add 1 point of balance value. Equipping a 1-cost, 2-cost, or 3-cost ultimate skill will reduce the balance value by 1, 2, or 3 points, respectively.",スキルセットは「バランス値」を有しており、バランス値が0以上でなければ戦士は戦闘に参加できません。通常スキルを1つ装備すると1ポイントのバランス値が加算されます。一費必殺、二費必殺、三費必殺を装備すると、それぞれバランス値が1ポイント、2ポイント、3ポイント減少します。,技能组拥有“平衡值”，平衡值要在0以上才合规，否则战士无法参战。装备一个普通技能会增加1点平衡值，装备一费必杀，二费必杀，三费必杀将分别减少1点，2点，3点平衡值。
 SkillEditInstruction2,"A blue flashing bar represents +1 balance value, while a red flashing bar represents -1 balance value. Displaying one or more red flashing bars indicates that the current balance value is negative and the warrior cannot participate in the battle.",青い点滅するバーが表示された場合、バランス値は1増加したことを示します。赤い点滅するバーが表示された場合、バランス値は1減少したことを示します。赤い点滅するバーが1つ以上表示されている場合、現在のバランス値が負であるため、その戦士は戦闘に参加できません。,一个蓝色闪光条代表+1平衡值，一个红色闪光条代表-1平衡值。显示一个或多个红色闪光条都代表当前平衡值为负数，该战士无法出战。
@@ -194,6 +195,7 @@ AttackBtn1Intro,first row of skills in the skill set,スキルセットの一行
 AttackBtn2Intro,second row of skills in the skill set,スキルセットの二行目のスキル,技能组第二行技能
 AttackBtn3Intro,third row of skills in the skill set,スキルセットの三行目のスキル,技能组第三行技能
 AutoBtnIntro,Click to switch between auto and manual mode,クリックして、自動または手動に切り替えます,点击可切换自动或手动
+DreamComboIntro,Click to trigger Dream Combo!,クリックしてドリームコンボを発動！,点击发动梦幻连招！
 HpBarAndExBar,"Health and energy. If the energy is insufficient, EX Skills cannot be unleashed.",体力とエネルギー値。エネルギー値が不足している場合、必殺技を発動できません,体力与能量值，必杀技在能量值不够的情况下无法释放
 JustUseAI,We recommend using auto mode!,自動戦闘を推奨します！,干脆就用AI战斗吧！
 ,,,

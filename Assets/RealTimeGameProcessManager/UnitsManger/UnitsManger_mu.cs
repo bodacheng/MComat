@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UniRx;
+using Random = System.Random;
 
 namespace FightScene
 {
@@ -46,11 +47,11 @@ namespace FightScene
             }
         }
         
-        public void InitializeMulti(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode aiMode, int aiDelayFrame)
+        public void InitializeMulti(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode aiMode, int aiDelayFrame, Func<bool> AITriggerDreamComboRateCondition)
         {
             foreach (var center in teamMembers.GetValues())
             {
-                center.Step3Initialize(teamConfig, teamCGMode, aiMode, aiDelayFrame, teamHpRate, RTFightManager.Target.UnitInfoRef[center]);
+                center.Step3Initialize(teamConfig, teamCGMode, aiMode, aiDelayFrame, AITriggerDreamComboRateCondition, teamHpRate, RTFightManager.Target.UnitInfoRef[center]);
                 center.FightDataRef.IsDead.Subscribe(x => 
                 {
                     if (x)

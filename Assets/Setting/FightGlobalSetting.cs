@@ -40,6 +40,7 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] int dreamComboGaugeMax = 180;
     [SerializeField] float dreamComboResistTime = 0.5f;
     [SerializeField] int dreamComboResistUpCount = 5;
+    [SerializeField] int player1DreamComboAIRateNumM;//玩家队伍共斗模式下非控制队员DreamCombo触发率数字。
     [SerializeField] int energyResolveAfterExtendBoundary = 5;
     [SerializeField] PhysicMaterial _physicMaterial;
 
@@ -71,6 +72,7 @@ public class FightGlobalSetting : ScriptableObject
     public static float NormalAttackPosFixingTime;
     public static float _dreamComboResistTime;
     public static int _dreamComboResistUpCount;
+    public static int _player1DreamComboAIRateNumM;
     public static AnimationCurve KnockOffYAnimationCurve, KnockOffZAnimationCurve;
     public static AnimationCurve HDamageYAnimationCurve;
     public static AnimationCurve HDamageZAnimationCurve;
@@ -139,6 +141,8 @@ public class FightGlobalSetting : ScriptableObject
         _DreamComboGaugeMax = dreamComboGaugeMax;
         PhysicMaterial = _physicMaterial;
         _energyResolveAfterExtendBoundary = energyResolveAfterExtendBoundary;
+        
+        _player1DreamComboAIRateNumM = player1DreamComboAIRateNumM;
     }
     
     // 900血，10攻击力，1打1的话接近40秒左右游戏结束。但如果存在大量远距离对火立回那么就不太好说这个时间。。

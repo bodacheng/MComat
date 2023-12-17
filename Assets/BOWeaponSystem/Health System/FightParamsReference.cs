@@ -237,7 +237,7 @@ public partial class FightParamsReference
         return _eventAttackSuccessList;
     }
     
-    Color _damagecolor;
+    Color _damageColor;
     public void RunShaderChangeProcess(Element element, float time)
     {
         if (Center._ShaderManager != null)
@@ -245,26 +245,26 @@ public partial class FightParamsReference
             switch (element)
             {
                 case Element.redMagic:
-                    _damagecolor = Color.red;
+                    _damageColor = Color.red;
                     break;
                 case Element.blueMagic:
-                    _damagecolor = Color.blue;
+                    _damageColor = Color.blue;
                     break;
                 case Element.greenMagic:
-                    _damagecolor = Color.green;
+                    _damageColor = Color.green;
                     break;
                 case Element.darkMagic:
-                    _damagecolor = new Color(0.8f, 0f, 1f);
+                    _damageColor = new Color(0.8f, 0f, 1f);
                     break;
                 case Element.lightMagic:
-                    _damagecolor = new Color(1f, 1f, 0f);
+                    _damageColor = new Color(1f, 1f, 0f);
                     break;
                 default:
-                    _damagecolor = Color.white;
+                    _damageColor = Color.white;
                     break;
             }
-            _damagecolor.a = 0.5f;
-            Center._ShaderManager.RimEffectsForAShortTime(_damagecolor, time);
+            _damageColor.a = 0.5f;
+            Center._ShaderManager.RimEffectsForAShortTime(_damageColor, time);
         }
     }
     

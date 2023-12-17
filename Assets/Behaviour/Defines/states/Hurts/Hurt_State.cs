@@ -28,8 +28,7 @@ namespace Soul
             string hurtAnimKey;
             var meToAttacker = Vector3.Distance(_DATA_CENTER.WholeT.position, newValue.attacker.Center.WholeT.position);
             var rotateToTarget = meToAttacker <= FightGlobalSetting._closeDis
-                ? newValue.attacker.Center.WholeT.position
-                : newValue.DamageEffectPoint;
+                ? newValue.attacker.Center.WholeT.position : newValue.DamageEffectPoint;
             if (newValue.DamageEffectPoint.y > _DATA_CENTER.head_t.position.y + 0.1)
             {
                 hurtAnimKey = "press";

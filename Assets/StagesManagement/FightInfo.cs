@@ -47,6 +47,7 @@ public class FightInfo : ScriptableObject
     public AIMode team1AIMode = AIMode.Aggressive;
     public AIMode team2AIMode = AIMode.Aggressive;
     public int dumbAIDecisionDelay = 20;
+    public int dreamComboAIRateNum = 5;
     public float stageRefLevel = 1;
     
     public int ArcadeFightMode
@@ -243,6 +244,7 @@ public class FightInfo : ScriptableObject
         stage.Team2LeaderboardEntry = source.Team2LeaderboardEntry;
         stage.RunTutorial = source.RunTutorial;
         stage.EventType = source.EventType;
+        stage.dreamComboAIRateNum = source.dreamComboAIRateNum;
         return stage;
     }
     

@@ -171,7 +171,7 @@ public class GangbangInfo : FightInfo
         stage.team2CGMode = source.team2CGMode;
         stage.Team1LeaderboardEntry = source.Team1LeaderboardEntry;
         stage.Team2LeaderboardEntry = source.Team2LeaderboardEntry;
-        stage.RunTutorial = source.RunTutorial;
+        stage.RunTutorial = false;
         stage.EventType = source.EventType;
         stage.UnitsData = new List<UnitInfo>(source.UnitsData);
         stage.team1GroupSet = new List<SoldierGroupSet>(source.team1GroupSet);

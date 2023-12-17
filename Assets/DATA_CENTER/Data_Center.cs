@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using FightScene;
 using UnityEngine;
 using UniRx;
 using Soul;
@@ -199,7 +200,8 @@ public partial class Data_Center : MonoBehaviour
     /// <param name="aiDelayFrame"></param>
     /// <param name="teamHpRate"></param>
     /// <param name="lv"> 两种模式，如果带入-1，将按照角色等级来初始化，用于玩家账户队伍。带入其他值则按其他值来，用于关卡队伍 </param>
-    public void Step3Initialize(TeamConfig teamConfig, CriticalGaugeMode criticalGaugeMode, AIMode aiMode, int aiDelayFrame, float teamHpRate, UnitInfo unitInfo)
+    public void Step3Initialize(TeamConfig teamConfig, CriticalGaugeMode criticalGaugeMode, AIMode aiMode, int aiDelayFrame, Func<bool> AITriggerDreamComboRateCondition,
+        float teamHpRate, UnitInfo unitInfo)
     {
         this.unitInfo = unitInfo;
         FightDataRef.IsDead.Value = false;
@@ -226,6 +228,15 @@ public partial class Data_Center : MonoBehaviour
         _MyBehaviorRunner.SetAt(unitInfo.level);
         _MyBehaviorRunner.AIMode = aiMode;
         _MyBehaviorRunner.Controller.DecisionDelay = aiDelayFrame;
+        _MyBehaviorRunner.AITriggerDreamComboRateCondition = () =>
+            {
+                if (teamConfig.myTeam == Team.player1 && 
+                    RTFightManager.Target.team1.InputsManager.CurrentFocus.Value == this)
+                {
+                    return false;
+                }
+                return AITriggerDreamComboRateCondition();
+            };
     }
     
     // for tutorial

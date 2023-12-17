@@ -8,6 +8,7 @@ public class AutoSwitch : MonoBehaviour
     
     private Action<bool> _action;
     private Func<bool> _currentState;
+    public Func<bool> CurrentState => _currentState;
 
     private bool startState;
 
@@ -20,6 +21,12 @@ public class AutoSwitch : MonoBehaviour
     {
         animator.SetBool("auto", on);
     }
+
+    public void ChangeAutoState(bool on)
+    {
+        _action?.Invoke(on);
+        Switch(on);
+    }
     
     public void Initialize(Func<bool> state, Action<bool> action)
     {
@@ -28,10 +35,9 @@ public class AutoSwitch : MonoBehaviour
         btn.onClick.AddListener(() =>
         {
             var changedState = !this._currentState();
-            _action.Invoke(changedState);
-            Switch(changedState);
+            ChangeAutoState(changedState);
         });
-
+        
         startState = this._currentState();
         Switch(this._currentState());
     }

@@ -19,10 +19,13 @@ public class FightingStepLayer : UILayer
     
     [Header("Tutorial")]
     [SerializeField] ClickNextTutorial clickNextTutorial;
+    
+    [Header("DreamCombo Tutorial")]
+    [SerializeField] GameObject clickTriggerDreamCombo;
 
     [Header("教程强制点自动环节黑幕")] 
     [SerializeField] GameObject forceClickAutoBtnBlackMask;
-
+    
     public TeamUIManager Team1UI => team1UI;
     public TeamUIManager Team2UI => team2UI;
     
@@ -87,7 +90,7 @@ public class FightingStepLayer : UILayer
         pauseButton.gameObject.SetActive(false);
         clickNextTutorial.Open();
     }
-
+    
     public bool Initialized { get; set; } = false;
 
     async UniTask StartUp(Action<bool> switchTeam1Auto, Action<bool> switchTeam2Auto, Action pauseAction)
@@ -140,6 +143,22 @@ public class FightingStepLayer : UILayer
                 clickNextTutorial.gameObject.SetActive(false);
             }
         );
+    }
+    
+    public void ForceClickDreamComboBtn(Action afterClick)
+    {
+        clickTriggerDreamCombo.SetActive(true);
+        void Call()
+        {
+            clickTriggerDreamCombo.SetActive(false);
+        }
+        inputsManager.DreamComboBtn.onClick.AddListener(Call);
+        inputsManager.DreamComboBtn.onClick.AddListener(() =>
+        {
+            inputsManager.DreamComboBtn.onClick.RemoveListener(Call);
+            afterClick.Invoke();
+        });
+        inputsManager.DreamComboBtn.transform.SetAsLastSibling();
     }
 
     private void OnDisable()

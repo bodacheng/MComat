@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using Skill;
+using Random = UnityEngine.Random;
 
 // 20200226
 // 整个状态迁移系统进行了大翻修，而最初的动机就是想到如果AI系统要具备一定自我改善能力的话，最起码AI系统自身应该更独立。
@@ -34,7 +35,7 @@ namespace Soul
             #region AI决策
             if (auto)
             {
-                changed = AI_RUNs(runner, options);
+                changed = AI_RUNs(runner, options, runner.AITriggerDreamComboRateCondition);
             }
             #endregion
             
@@ -208,7 +209,7 @@ namespace Soul
             set;
         }
         
-        bool AI_RUNs(BehaviorRunner behaviorRunner, List<SkillEntity> options) // AI根据目前可作出的行为作出选择
+        bool AI_RUNs(BehaviorRunner behaviorRunner, List<SkillEntity> options, Func<bool> AITriggerDreamComboRateCondition = null) // AI根据目前可作出的行为作出选择
         {
             _triggered.Main.Clear();
 
@@ -217,7 +218,8 @@ namespace Soul
                 // 首先看超级连招的条件是不是满足。
                 if (!behaviorRunner.OnFixedSequence)
                 {
-                    if (behaviorRunner.SuperComboStrategyCondition() && behaviorRunner.SuperComboCondition())
+                    if ((AITriggerDreamComboRateCondition == null || AITriggerDreamComboRateCondition()) 
+                        &&  behaviorRunner.SuperComboStrategyCondition() && behaviorRunner.SuperComboCondition())
                     {
                         behaviorRunner.StartOffSequenceEngine();
                         return true;

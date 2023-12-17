@@ -26,7 +26,8 @@ namespace Soul
         SkillEntity _tempSKillEntity;
         
         public readonly List<SkillEntity> fixedSkillSequence = new List<SkillEntity>();
-        
+        public Func<bool> AITriggerDreamComboRateCondition;
+
         #region 辅助模块：控制器
 
         private readonly Controller _controller = new Controller();
@@ -83,6 +84,7 @@ namespace Soul
 
         public bool OnFixedSequence => onFixedSequence;
         private bool onFixedSequence = false;
+        private bool dreamComboStart = false;
 
         public Func<bool> SuperComboCondition { get; set; }
 
@@ -103,21 +105,7 @@ namespace Soul
             }
             return false;
         }
-
-        public void StartOffSequenceEngine()
-        {
-            var first = fixedSkillSequence.FirstOrDefault();
-            if (first != null)
-            {
-                onFixedSequence = true;
-                _canTranTo.Clear();
-                _canTranTo.Add(first);
-                _controller.RunFixedSequence(this, _canTranTo);
-                
-                InputsManager?.SkillExplosion(InputKey.DreamCombo, 3);
-            }
-        }
-
+        
         public Action sequenceBeginAct;
         private Action sequenceEndAct;
         public void RegisterSequenceCommand(Action onStart, Action onEnd)
@@ -126,6 +114,18 @@ namespace Soul
             this.sequenceEndAct = onEnd;
         }
         
+        public void StartOffSequenceEngine()
+        {
+            var first = fixedSkillSequence.FirstOrDefault();
+            if (first != null)
+            {
+                dreamComboStart = true;
+                onFixedSequence = true;
+                _SkillCancelFlag.Cancel_Flag = true;
+                InputsManager?.SkillExplosion(InputKey.DreamCombo, 3);
+            }
+        }
+
         void Update()
         {
             if (IfRunning())

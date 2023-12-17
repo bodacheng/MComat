@@ -1,4 +1,5 @@
-﻿using FightScene;
+﻿using System;
+using FightScene;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
@@ -79,13 +80,16 @@ public class PreparingProcess : FSceneProcess
             case TeamMode.MultiRaid:
                 RTFightManager.Target.team1.InitializeMulti(
                     FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode, 
-                    FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay
+                    FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay,
+                    CreateRandomBoolFunc(
+                        FightLoad.Fight.EventType == FightEventType.Gangbang ? 100: FightGlobalSetting._player1DreamComboAIRateNumM)
                 );
                 break;
             case TeamMode.Rotation:
                 RTFightManager.Target.team1.TeamsIniRotate(
                     FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode, 
-                    FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay
+                    FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay,
+                    CreateRandomBoolFunc(0)
                 );
                 break;
         }
@@ -95,13 +99,16 @@ public class PreparingProcess : FSceneProcess
             case TeamMode.MultiRaid:
                 RTFightManager.Target.team2.InitializeMulti(
                     FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode, 
-                    FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay
+                    FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay,
+                    CreateRandomBoolFunc(
+                        FightLoad.Fight.EventType == FightEventType.Gangbang ? 100: FightLoad.Fight.dreamComboAIRateNum)
                 );
                 break;
             case TeamMode.Rotation:
                 RTFightManager.Target.team2.TeamsIniRotate(
                     FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode, 
-                    FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay
+                    FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay,
+                    CreateRandomBoolFunc(FightLoad.Fight.dreamComboAIRateNum)
                 );
                 break;
         }
@@ -170,5 +177,17 @@ public class PreparingProcess : FSceneProcess
                && RTFightManager.Target.team1.IfAllUnitsPreparedForBattle()
                && RTFightManager.Target.team2.IfAllUnitsPreparedForBattle()
                && (fightingStepLayer != null && fightingStepLayer.Initialized);
+    }
+    
+    Func<bool> CreateRandomBoolFunc(int probabilityPercentage)
+    {
+        // 使用Random类生成随机数
+        Random random = new Random();
+
+        // 生成一个介于0到99之间的随机数
+        int randomNumber = random.Next(100);
+
+        // 如果随机数小于等于给定的概率百分比，返回true；否则返回false
+        return () => randomNumber <= probabilityPercentage;
     }
 }

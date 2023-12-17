@@ -13,7 +13,8 @@ public partial class FightParamsReference
 
     public void PlusDreamGauge(int add)
     {
-        DreamComboGauge.Value = Mathf.Clamp(DreamComboGauge.Value + add, 0, FightGlobalSetting._DreamComboGaugeMax);
+        if (!Center._MyBehaviorRunner.OnFixedSequence)
+            DreamComboGauge.Value = Mathf.Clamp(DreamComboGauge.Value + add, 0, FightGlobalSetting._DreamComboGaugeMax);
     }
     
     public void CostCriticalGaugeBySPLevel(int level)

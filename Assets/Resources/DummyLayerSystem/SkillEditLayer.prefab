@@ -12887,7 +12887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  languageCode: RandomShowCombo
+  languageCode: ShowDreamCombo
   target: {fileID: 4507234766956715121}
 --- !u!1001 &463797793569938880
 PrefabInstance:
