@@ -170,7 +170,7 @@ MonoBehaviour:
   toEnemyNearestDis: 0.5
   eXMax: 90
   dreamComboGaugeMax: 270
-  dreamComboResistTime: 1
+  dreamComboResistTime: 3
   dreamComboResistUpCount: 5
   player1DreamComboAIRateNumM: 5
   energyResolveAfterExtendBoundary: 5
