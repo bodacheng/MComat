@@ -142,7 +142,7 @@ MonoBehaviour:
   fighterMoveSpeed: 10
   closeDis: 2
   AT_coefficient: 1
-  HP_coefficient: 2
+  HP_coefficient: 1
   Team1Invincible: 0
   NormalSkillExGet: 30
   Sp1SkillExGet: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   toEnemyNearestDis: 0.5
   eXMax: 90
   dreamComboGaugeMax: 270
-  dreamComboResistTime: 3
+  dreamComboResistTime: 0.5
   dreamComboResistUpCount: 5
   player1DreamComboAIRateNumM: 5
   energyResolveAfterExtendBoundary: 5

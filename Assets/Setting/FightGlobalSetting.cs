@@ -38,6 +38,7 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] float toEnemyNearestDis = 1;
     [SerializeField] int eXMax = 120;
     [SerializeField] int dreamComboGaugeMax = 180;
+    [SerializeField] float dreamComboSpeed = 1.7f;
     [SerializeField] float dreamComboResistTime = 0.5f;
     [SerializeField] int dreamComboResistUpCount = 5;
     [SerializeField] int player1DreamComboAIRateNumM;//玩家队伍共斗模式下非控制队员DreamCombo触发率数字。
@@ -81,6 +82,7 @@ public class FightGlobalSetting : ScriptableObject
     public static float ToEnemyNearestDis = 1;
     public static int _EXMax;
     public static int _DreamComboGaugeMax;
+    public static float DreamComboSpeed;
     public static bool HitBoxLogger = true;
     public static int _defendHP;
     public static int _energyResolveAfterExtendBoundary;
@@ -139,6 +141,8 @@ public class FightGlobalSetting : ScriptableObject
         _ResistanceMax = resistanceMax;
         _EXMax = eXMax;
         _DreamComboGaugeMax = dreamComboGaugeMax;
+        DreamComboSpeed = dreamComboSpeed;
+        
         PhysicMaterial = _physicMaterial;
         _energyResolveAfterExtendBoundary = energyResolveAfterExtendBoundary;
         

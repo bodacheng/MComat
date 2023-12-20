@@ -148,15 +148,13 @@ public partial class Data_Center : MonoBehaviour
             async () =>
             {
                 superDreamEnded = false;
-                AnimationManger.AddSpeedBuff("dreamCombo", 1.5f);
+                AnimationManger.AddSpeedBuff("dreamCombo", FightGlobalSetting.DreamComboSpeed);
                 this.FightDataRef.DreamComboGauge.Value = 0;
                 EffectsManager.GenerateEffect("super_combo_explosion", FightGlobalSetting.EffectPathDefine(), WholeT.position, WholeT.rotation, WholeT).Forget();
                 dreamBuffEffect = await EffectsManager.GenerateEffect("dream_buff", FightGlobalSetting.EffectPathDefine(), geometryCenter.position, default, geometryCenter);
                 if (superDreamEnded)
-                {
                     dreamBuffEffect.Phase = -1;
-                    _ResistanceManager.DreamComboStart();
-                }
+                this.FightDataRef.DreamComboStart();
             },
             () =>
             {
@@ -268,7 +266,7 @@ public partial class Data_Center : MonoBehaviour
             //Shield.EnableShieldCollider();   
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (_MyBehaviorRunner.IfRunning())
         {
@@ -286,7 +284,7 @@ public partial class Data_Center : MonoBehaviour
         buffsRunner.EndAllCoroutines();
         _ResistanceManager.ResistanceClear();
         Personality_events.CloseAllPersonalityEffects();
-        //FightDataRef.Clear();
+        FightDataRef.GetHitTriggerEvents.Clear();
     }
 
     float p1_to_me, p2_to_me;

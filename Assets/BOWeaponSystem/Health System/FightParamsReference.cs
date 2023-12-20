@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UniRx;
@@ -151,6 +152,31 @@ public partial class FightParamsReference
         }
     }
 
+    public class GetHitTriggerEvent
+    {
+        public readonly string EventKey;
+        public readonly Action EventProcess;
+
+        public GetHitTriggerEvent(string eventKey, Action eventProcess)
+        {
+            this.EventKey = eventKey;
+            this.EventProcess = eventProcess;
+        }
+    }
+    
+    private readonly List<GetHitTriggerEvent> _getHitTriggerEvent = new List<GetHitTriggerEvent>();
+    public List<GetHitTriggerEvent> GetHitTriggerEvents => _getHitTriggerEvent;
+
+    public void AddGetHitTriggerEvent(string eventKey, Action process)
+    {
+        _getHitTriggerEvent.Add(new GetHitTriggerEvent(eventKey, process));
+    }
+    
+    public void RemoveEventKey(string eventKey)
+    {
+        _getHitTriggerEvent.RemoveAll(x=> x.EventKey == eventKey);
+    }
+
     // 受攻击方运行
     float _d;
     public void ApplyDamage(V_Damage dmg)
@@ -163,6 +189,16 @@ public partial class FightParamsReference
         // }
         
         HitEffect(dmg);
+
+        if (_getHitTriggerEvent.Count > 0)
+        {
+            foreach (var kv in _getHitTriggerEvent)
+            {
+                kv.EventProcess.Invoke();
+            }
+            _getHitTriggerEvent.Clear();
+        }
+        
         if (Center.FightDataRef.Resistance.Value > 0)
         {
             Center.FightDataRef.Resistance.Value -= 1;
@@ -208,6 +244,23 @@ public partial class FightParamsReference
     }
     
     public int GetBeHitCount() => _beHitCount.GetBeHitCount(); //自己被揍计数
+    
+    public void DreamComboStart()
+    {
+        UnityEngine.Events.UnityAction eventStart = () =>
+        {
+            Center._ShaderManager.RimEffectsUp(CommonSetting.DreamColor, 0.2f);
+            Resistance.Value += FightGlobalSetting._dreamComboResistUpCount;
+        };
+        UnityEngine.Events.UnityAction eventEnd = () =>
+        {
+            Resistance.Value -= FightGlobalSetting._dreamComboResistUpCount;
+            Center._ShaderManager.RimEffectsClear(0.2f);
+        };
+        CustomCoroutine eventCoroutine = new CustomCoroutine(eventStart, FightGlobalSetting._dreamComboResistTime,
+            () => Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit, eventEnd);
+        Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine);
+    }
 
     E_Damage _managingEDamage;
     // event 攻击系列。暂时不再使用

@@ -39,6 +39,9 @@ MonoBehaviour:
   exTabSound: {fileID: 8300000, guid: bfc5803fa8fa8924bbeaa34f4f689bb1, type: 3}
   characterAnimDuration: 0.15
   shadowMaterial: {fileID: 2100000, guid: ea7a57501503cd74f87a10d974771222, type: 2}
+  resistColor: {r: 0, g: 0.5254902, b: 0.7921569, a: 0.49019608}
+  speedColor: {r: 0.18431373, g: 1, b: 0.9411765, a: 0.3764706}
+  dreamColor: {r: 1, g: 0.33333334, b: 0.47058824, a: 0.8352941}
   downLoadLabels:
   - config
   - battle_ground

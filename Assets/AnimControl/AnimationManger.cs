@@ -44,21 +44,21 @@ public partial class AnimationManger
         }
     }
 
-    private readonly List<SpeedBuff> SpeedBuffs = new List<SpeedBuff>();
+    private readonly List<SpeedBuff> _speedBuffs = new List<SpeedBuff>();
 
     public void AddSpeedBuff(string reasonKey, float speed)
     {
-        SpeedBuffs.Add(new SpeedBuff(reasonKey,speed));
-        SpeedBuff maxSpeedBuff = SpeedBuffs.OrderByDescending(buff => buff.speed).FirstOrDefault();
+        _speedBuffs.Add(new SpeedBuff(reasonKey,speed));
+        SpeedBuff maxSpeedBuff = _speedBuffs.OrderByDescending(buff => buff.speed).FirstOrDefault();
         Speed = maxSpeedBuff.speed;
     }
     
     public void RemoveSpeedBuff(string reasonKey)
     {
-        SpeedBuffs.RemoveAll(x=> x.reasonKey == reasonKey);
-        if (SpeedBuffs.Count > 0)
+        _speedBuffs.RemoveAll(x=> x.reasonKey == reasonKey);
+        if (_speedBuffs.Count > 0)
         {
-            SpeedBuff maxSpeedBuff = SpeedBuffs.OrderByDescending(buff => buff.speed).FirstOrDefault();
+            SpeedBuff maxSpeedBuff = _speedBuffs.OrderByDescending(buff => buff.speed).FirstOrDefault();
             Speed = maxSpeedBuff.speed;
         }
         else

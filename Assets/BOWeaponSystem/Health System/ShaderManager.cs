@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine.Rendering;
 
 public class ShaderManager : MonoBehaviour
 {
     [SerializeField] List<DummyMesh> meshes;
+    private List<TweenerCore<Color, Color, ColorOptions>> _tweenerCores = new List<TweenerCore<Color, Color, ColorOptions>>();
     
     void Start()
     {
@@ -60,33 +63,63 @@ public class ShaderManager : MonoBehaviour
     #region Rim
     public void RimEffectsUp(Color color, float duration)
     {
+        ClearDoing();
         meshes.ForEach(x =>
         {
             if (x.CurrentMaterials != null)
-                DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, color, duration);
+                _tweenerCores.Add(DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, color, duration));
         });
     }
 
     public void RimEffectsClear(float duration)
     {
+        ClearDoing();
+        bool cleard = false;
         meshes.ForEach(x =>
         {
             if (x.CurrentMaterials != null)
-                DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, Color.clear, duration);
+                _tweenerCores.Add(DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, Color.clear, duration).
+                    OnComplete(() =>
+                    {
+                        if (!cleard)
+                        {
+                            ClearDoing();
+                            cleard = true;
+                        }
+                    }));
         });
+    }
+
+    public bool HasDoing()
+    {
+        return _tweenerCores.Count > 0;
+    }
+
+    void ClearDoing()
+    {
+        if (_tweenerCores.Count > 0)
+        {
+            foreach (var tweener in _tweenerCores)
+            {
+                tweener?.Kill();
+            }
+            _tweenerCores.Clear();
+        }
     }
 
     public void RimEffectsForAShortTime(Color targetColor, float duration)
     {
+        ClearDoing();
         meshes.ForEach(x =>
         {
             if (x.CurrentMaterials != null)
-            DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, targetColor, duration).OnComplete(
-                () =>
-                {
-                    DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, Color.clear, duration);
-                }
-            );
+                _tweenerCores.Add(
+                    DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, targetColor, duration).OnComplete(
+                    () =>
+                    {
+                        _tweenerCores.Add(DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, Color.clear, duration));
+                    })
+                );
         });
     }
     #endregion
@@ -94,23 +127,27 @@ public class ShaderManager : MonoBehaviour
     #region 纯色
     public void FlatColor(Color targetColor, float duration)
     {
+        ClearDoing();
         meshes.ForEach(x =>
         {
             if (x.CurrentMaterials != null)
-            DOTween.To(() => x.BaseColor, c => x.BaseColor = c, targetColor, duration);
+                _tweenerCores.Add(DOTween.To(() => x.BaseColor, c => x.BaseColor = c, targetColor, duration));
         });
     }
     
     public void FlatColorForAShortTime(Color targetColor, float addTime, float fadeTime)
     {
+        ClearDoing();
         meshes.ForEach(x =>
         {
             if (x.CurrentMaterials != null)
-            DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, targetColor, addTime).OnComplete(
-                () =>
-                {
-                    DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, Color.clear, fadeTime);
-                }
+                _tweenerCores.Add(
+                    DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, targetColor, addTime).OnComplete(
+                    () =>
+                    {
+                        _tweenerCores.Add(DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, Color.clear, fadeTime));
+                    }
+                )
             );
         });
     }

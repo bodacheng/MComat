@@ -6,15 +6,10 @@ using Cysharp.Threading.Tasks;
 public class ResistanceManager : MonoBehaviour
 {
     public Data_Center data_Center;
-    
-    int temp;
-    readonly List<SingleAssignmentDisposable> disposableTasks = new List<SingleAssignmentDisposable>();
-    Color resistColor;
-    SingleAssignmentDisposable ResistColorChange;
+    SingleAssignmentDisposable _resistColorChange;
     
     void Awake()
     {
-        ColorUtility.TryParseHtmlString("#0046BC00", out resistColor);
         OpenResistRender();
     }
     
@@ -23,28 +18,26 @@ public class ResistanceManager : MonoBehaviour
         data_Center.FightDataRef.Resistance.Subscribe(
             x => 
             {
+                if (x > 0 && data_Center._ShaderManager.HasDoing()) // 其他染色任务优先
+                {
+                    return;
+                }
                 if (x > 0)
                 {
-                    if (data_Center._ShaderManager != null)
-                    {
-                        data_Center._ShaderManager.RimEffectsUp(resistColor, 0.2f);
-                    }
+                    data_Center._ShaderManager.RimEffectsUp(CommonSetting.ResistColor, 0.2f);
                 }
                 else
                 {
-                    if (data_Center._ShaderManager != null)
-                    {
-                        data_Center._ShaderManager.RimEffectsClear(0.3f);
-                    }
+                    data_Center._ShaderManager.RimEffectsClear(0.2f);
                 }
             }
         ).AddTo(this.gameObject);
     }
 
-    readonly Color speedBuff = new Color(0.2f, 0.2f, 1f);
+    
     public void ResistanceUp(AnimationEvent R)
     {
-        data_Center.FightDataRef.Resistance.Value += R.intParameter;                      
+        data_Center.FightDataRef.Resistance.Value += R.intParameter;
         switch (R.stringParameter)
         {
             case "resistup":
@@ -58,23 +51,14 @@ public class ResistanceManager : MonoBehaviour
                 UnityEngine.Events.UnityAction eventEnd = () =>
                 {
                     data_Center.FightDataRef.Resistance.Value -= 1;
+                    data_Center.FightDataRef.RemoveEventKey("resistup");
                 };
                 CustomCoroutine eventCoroutine = new CustomCoroutine(eventStart, 0.8f, 
-                () =>
+                () => data_Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit, eventEnd);
+                
+                data_Center.FightDataRef.AddGetHitTriggerEvent("resistup", () =>
                 {
-                    return data_Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit;
-                }, eventEnd);
-                temp = data_Center.FightDataRef.Resistance.Value;
-                var disposable = new SingleAssignmentDisposable();
-                disposableTasks.Add(disposable);
-                disposable.Disposable = Observable.EveryUpdate()
-                .Subscribe(_ =>
-                {
-                    if (data_Center.FightDataRef.Resistance.Value < temp)
-                    {
-                        data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine);
-                        disposable.Dispose();
-                    }
+                    data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine);
                 });
                 break;
             case "speedup":
@@ -82,13 +66,14 @@ public class ResistanceManager : MonoBehaviour
                 {
                     data_Center._SkillCancelFlag.turn_on_flag();
                     data_Center.FightDataRef.Resistance.Value += 1;
-                    data_Center._ShaderManager.RimEffectsUp(speedBuff, 0.5f);
+                    data_Center._ShaderManager.RimEffectsUp(CommonSetting.SpeedColor, 0.2f);
                     data_Center.AnimationManger.AddSpeedBuff("speedup", 2);
                     EffectsManager.GenerateEffect("speedupbuff", FightGlobalSetting.EffectPathDefine(), data_Center.WholeT.position, data_Center.WholeT.rotation, data_Center.WholeT).Forget();
                 };
                 UnityEngine.Events.UnityAction eventEnd3 = () =>
                 {
                     data_Center.AnimationManger.RemoveSpeedBuff("speedup");
+                    data_Center.FightDataRef.RemoveEventKey("speedup");
                     data_Center.FightDataRef.Resistance.Value -= 1;
                     data_Center._ShaderManager.RimEffectsClear(0.2f);
                 };
@@ -96,17 +81,10 @@ public class ResistanceManager : MonoBehaviour
                 CustomCoroutine eventCoroutine3 = new CustomCoroutine(
                     eventStart3, 0.8f,
                      () => data_Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit, eventEnd3);
-                temp = data_Center.FightDataRef.Resistance.Value;
-                var disposable3 = new SingleAssignmentDisposable();
-                disposableTasks.Add(disposable3);
-                disposable3.Disposable = Observable.EveryUpdate()
-                .Subscribe(_ =>
+                
+                data_Center.FightDataRef.AddGetHitTriggerEvent("speedup", () =>
                 {
-                    if (data_Center.FightDataRef.Resistance.Value < temp)
-                    {
-                        data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine3);
-                        disposable3.Dispose();
-                    }
+                    data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine3);
                 });
                 break;
             case "magic_release":
@@ -116,54 +94,24 @@ public class ResistanceManager : MonoBehaviour
                 };
                 UnityEngine.Events.UnityAction eventEnd2 = () =>
                 {
+                    data_Center.FightDataRef.RemoveEventKey("magic_release");
                     data_Center._SkillCancelFlag.turn_on_flag();
                     data_Center.FightDataRef.Resistance.Value = 0;
                 };
                 var eventCoroutine2 = new CustomCoroutine(eventStart2, 0.2f, eventEnd2);
-                temp = data_Center.FightDataRef.Resistance.Value;
-                var disposable2 = new SingleAssignmentDisposable();
-                disposableTasks.Add(disposable2);
-                disposable2.Disposable = Observable.EveryUpdate()
-                .Subscribe(_ =>
+                
+                data_Center.FightDataRef.AddGetHitTriggerEvent("magic_release", () =>
                 {
-                    if (data_Center.FightDataRef.Resistance.Value < temp)
-                    {
-                        data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine2);
-                        disposable2.Dispose();
-                    }
+                    data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine2);
                 });
                 break;
         }
     }
-
-    public void DreamComboStart()
-    {
-        UnityEngine.Events.UnityAction eventStart = () =>
-        {
-            data_Center.FightDataRef.Resistance.Value += FightGlobalSetting._dreamComboResistUpCount;
-        };
-        UnityEngine.Events.UnityAction eventEnd = () =>
-        {
-            data_Center.FightDataRef.Resistance.Value -= FightGlobalSetting._dreamComboResistUpCount;
-        };
-        CustomCoroutine eventCoroutine = new CustomCoroutine(eventStart, FightGlobalSetting._dreamComboResistTime,
-            () => data_Center._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.Hit, eventEnd);
-        data_Center.buffsRunner.RunSubCoroutineOfState(eventCoroutine);
-    }
     
+    // 这里面建立在一个前提上是我们认为这个游戏里所有防反技能的吸收伤害期间结束时都同时会Resistance.Value = 0.
     public void ResistanceClear()
     {
-        if (disposableTasks.Count > 0)
-        {
-            foreach (var _d in disposableTasks)
-            {
-                if (!_d.IsDisposed)
-                {
-                    _d.Dispose();
-                }
-            }
-            disposableTasks.Clear();
-        }
         data_Center.FightDataRef.Resistance.Value = 0;
+        data_Center.FightDataRef.GetHitTriggerEvents.Clear();
     }
 }

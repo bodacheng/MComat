@@ -57,6 +57,15 @@ public class CommonSetting : ScriptableObject
     
     [Tooltip("角色阴影材质")] 
     [SerializeField] Material shadowMaterial;
+
+    [Tooltip("抵抗颜色")] 
+    [SerializeField] private Color resistColor;
+    
+    [Tooltip("加速颜色")] 
+    [SerializeField] private Color speedColor;
+    
+    [Tooltip("梦幻颜色")] 
+    [SerializeField] private Color dreamColor;
     
     [Tooltip("downLoad labels")] 
     [SerializeField] List<string> downLoadLabels;
@@ -122,6 +131,10 @@ public class CommonSetting : ScriptableObject
     public static Color _greenBgColor;
     public static Color _greenFrameColor;
     
+    public static Color ResistColor;
+    public static Color DreamColor;
+    public static Color SpeedColor;
+    
     public void Initialise()
     {
         DevMode = devMode;
@@ -167,5 +180,9 @@ public class CommonSetting : ScriptableObject
         _blueFrameColor = blueFrameColor;
         _greenBgColor = greenBgColor;
         _greenFrameColor = greenFrameColor;
+
+        ResistColor = resistColor;
+        DreamColor = dreamColor;
+        SpeedColor = speedColor;
     }
 }
