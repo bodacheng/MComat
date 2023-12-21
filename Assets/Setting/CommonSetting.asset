@@ -45,13 +45,12 @@ MonoBehaviour:
   downLoadLabels:
   - config
   - quest
+  - quest_gangbang
   - unit
   - weapon
   - effect
   - skill_anim
   - unit_icon
-  - btn_effect
-  - quest_gangbang
   emptyBgColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   emptyFrameColor: {r: 1, g: 1, b: 1, a: 1}
   lightBgColor: {r: 1, g: 0.69411767, b: 0, a: 1}
