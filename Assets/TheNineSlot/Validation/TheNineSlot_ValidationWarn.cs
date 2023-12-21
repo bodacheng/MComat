@@ -43,10 +43,10 @@ namespace mainMenu
             }
         }
         
-        public void IntroAboutCombo(bool on)
+        public void IntroAboutCombo(bool on, bool DreamCombo = false)
         {
             validationWarnSide.gameObject.SetActive(on);
-            validationWarnSide.text = Translate.Get("IntroOfCombo");
+            validationWarnSide.text = Translate.Get(DreamCombo ? "IntroOfDreamCombo" : "IntroOfCombo");
             
             randomBtn.gameObject.SetActive(!on);
             removeAllBtn.gameObject.SetActive(!on);

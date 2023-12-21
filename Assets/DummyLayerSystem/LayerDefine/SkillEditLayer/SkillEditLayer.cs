@@ -51,7 +51,7 @@ public partial class SkillEditLayer : UILayer
             return;
 
         stoneBoxRect.gameObject.SetActive(false);
-        nineSlot.IntroAboutCombo(true);
+        nineSlot.IntroAboutCombo(true, dreamCombo);
         var returnLayer = UILayerLoader.Get<ReturnLayer>();
         returnLayer?.gameObject.SetActive(false);
         mask.gameObject.SetActive(true);

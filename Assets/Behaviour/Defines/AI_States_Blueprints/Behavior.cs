@@ -57,7 +57,7 @@ namespace Soul
                 }
                 
                 victim.PlusEx(FightGlobalSetting._getHurtExGet);
-                victim.PlusDreamGauge(FightGlobalSetting._getHurtExGet);
+                victim.PlusDreamGauge(FightGlobalSetting._NormalSkillExGet);
                 switch(gaugeMode)
                 {
                     case CriticalGaugeMode.DoubleGain:

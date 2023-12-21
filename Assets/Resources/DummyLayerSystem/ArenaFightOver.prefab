@@ -167,7 +167,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 96e17474f840a01459f0cc936c5d4d9b, type: 3}
     m_FontSize: 60
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 80
     m_Alignment: 4
@@ -196,7 +196,7 @@ MonoBehaviour:
   AutomaticUnrevealAfterSeconds: 1
   UnrevealDelay: 0
   revealMinHorizontalDistance: 0
-  revealMaxHorizontalDistance: 50
+  revealMaxHorizontalDistance: 0
   revealMinVerticalDistance: 0
   revealMaxVerticalDistance: 50
   unrevealMinHorizontalDistance: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
   UnrevealLetterOpacityEnd: 0
   RevealSmoothOverlap: 1
   UnrevealSmoothOverlap: 1
-  RevealSmoothOverlapSmoothness: 0.19
+  RevealSmoothOverlapSmoothness: 0.2
   UnrevealSmoothOverlapSmoothness: 0.125
   RevealRandomRotation: 0
   UnrevealRandomRotation: 0
@@ -817,6 +817,7 @@ MonoBehaviour:
   storyBgToColor: {r: 0.23921569, g: 0.007843138, b: 0.3882353, a: 0.8235294}
   gbStoryBgToColor: {r: 0.023529412, g: 0.22352941, b: 0.7647059, a: 0.8235294}
   storyBgColorChangeDuration: 2
+  storyLayerAudio: {fileID: 4558438811483184101}
 --- !u!95 &7760643232347634469
 Animator:
   serializedVersion: 4

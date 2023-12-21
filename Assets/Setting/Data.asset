@@ -157,7 +157,7 @@ MonoBehaviour:
   hurtFreezeInDuration: 0.01
   hurtFreezeOutDuration: 0.2
   normalAttackPosFixingTime: 0.03
-  knockOffExtent: 10
+  knockOffExtent: 15
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5
   GetupTime: 0.5
@@ -169,7 +169,8 @@ MonoBehaviour:
   resistanceMax: 10
   toEnemyNearestDis: 0.5
   eXMax: 90
-  dreamComboGaugeMax: 270
+  dreamComboGaugeMax: 300
+  dreamComboSpeed: 1.7
   dreamComboResistTime: 0.5
   dreamComboResistUpCount: 5
   player1DreamComboAIRateNumM: 5

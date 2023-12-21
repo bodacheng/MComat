@@ -13,7 +13,8 @@ public partial class ArenaFightOver : UILayer
     [SerializeField] private Color storyBgToColor;
     [SerializeField] private Color gbStoryBgToColor;
     [SerializeField] private float storyBgColorChangeDuration;
-
+    [SerializeField] private AudioSource storyLayerAudio;
+    
     private TweenerCore<Color, Color, ColorOptions> storyBgColorChangeTween;
     public bool LoadStory()
     {
@@ -30,6 +31,8 @@ public partial class ArenaFightOver : UILayer
             default:
                 break;
         }
+        
+        storyLayerAudio.volume = AppSetting.Value.BgmVolume;
         
         bool notNull = !string.IsNullOrEmpty(shortStory.text);
         storyBgImage.gameObject.SetActive(notNull);
