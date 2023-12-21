@@ -285,14 +285,8 @@ However, the prerequisite for following up with any skill is that the required e
 しかし、いずれのスキルを続けて発動するための前提は、必要なエネルギーが十分であることです。","・九个技能槽的第一竖列是首发技能，可接续释放第二竖列技能，
 同理第二竖列可接续第三竖列技能。而第三竖列技能则可被第一竖列技能接续。
 但接续释放任何技能的前提是所需相应能量足够。"
-GameTip2,"・The ultimate move cannot be released if there isn't enough energy. 
-
-If one of the columns in the nine skill slots is all ultimate moves, 
-and there is not enough energy to activate any skill in that column when the combo reaches it, 
-the combo will be interrupted.","・必殺技は、必要なエネルギーが足りない場合には発動できません。
-
-9つのスキルスロットのうちの一つの列がすべて必殺技であり、
-コンボがその列に達したときにその列のどのスキルも発動するのに十分なエネルギーがない場合、コンボは中断されます。","・必杀技在所需能量不够的情况下无法释放。九个技能槽中某一竖列如果都是必杀技，
+GameTip2,"・The ultimate move cannot be released if there isn't enough energy. If one of the columns in the nine skill slots is all ultimate moves, 
+and there is not enough energy to activate any skill in that column when the combo reaches it, the combo will be interrupted.",・必殺技は、必要なエネルギーが足りない場合には発動できません。9つのスキルスロットのうちの一つの列がすべて必殺技であり、コンボがその列に達したときにその列のどのスキルも発動するのに十分なエネルギーがない場合、コンボは中断されます。,"・必杀技在所需能量不够的情况下无法释放。九个技能槽中某一竖列如果都是必杀技，
 并且在连招运行到该列时能量不够用于发动该列的任何技能，会导致连招中断。"
 GameTip3,"・Each skill has its optimal release distance from the enemy. 
 In automatic mode , the AI will autonomously choose which skill to release based on the distance from the enemy.","・各スキルには敵との最適な発動距離があります。

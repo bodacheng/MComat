@@ -205,7 +205,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -100, y: -20}
+  m_SizeDelta: {x: -100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7933434140446843539
 CanvasRenderer:
@@ -377,7 +377,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -100, y: -20}
+  m_SizeDelta: {x: -100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6820326016506429799
 CanvasRenderer:
@@ -657,7 +657,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -100, y: -20}
+  m_SizeDelta: {x: -100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5678320868076253180
 CanvasRenderer:
@@ -752,7 +752,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -100, y: -20}
+  m_SizeDelta: {x: -100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7513454482738578823
 CanvasRenderer:
@@ -795,10 +795,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30FBThe ultimate move cannot be released if there isn't enough energy.
-    \r\nIf one of the columns in the nine skill slots is all ultimate moves, \rand
-    there is not enough energy to activate any skill in that column when the combo
-    reaches it, \rthe combo will be interrupted."
+  m_Text: "\u30FB\u5FC5\u6BBA\u6280\u306F\u3001\u5FC5\u8981\u306A\u30A8\u30CD\u30EB\u30AE\u30FC\u304C\u8DB3\u308A\u306A\u3044\u5834\u5408\u306B\u306F\u767A\u52D5\u3067\u304D\u307E\u305B\u3093\u30029\u3064\u306E\u30B9\u30AD\u30EB\u30B9\u30ED\u30C3\u30C8\u306E\u3046\u3061\u306E\u4E00\u3064\u306E\u5217\u304C\u3059\u3079\u3066\u5FC5\u6BBA\u6280\u3067\u3042\u308A\u3001\u30B3\u30F3\u30DC\u304C\u305D\u306E\u5217\u306B\u9054\u3057\u305F\u3068\u304D\u306B\u305D\u306E\u5217\u306E\u3069\u306E\u30B9\u30AD\u30EB\u3082\u767A\u52D5\u3059\u308B\u306E\u306B\u5341\u5206\u306A\u30A8\u30CD\u30EB\u30AE\u30FC\u304C\u306A\u3044\u5834\u5408\u3001\u30B3\u30F3\u30DC\u306F\u4E2D\u65AD\u3055\u308C\u307E\u3059\u3002"
 --- !u!114 &722207941626211591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1004,7 +1001,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -100, y: -20}
+  m_SizeDelta: {x: -100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7358751031606633811
 CanvasRenderer:
