@@ -58,13 +58,13 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: cecf0fbb3d560cc4dae3dfd6d02f762c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1.4
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1.75
   MaxDistance: 500
   Pan2D: 0

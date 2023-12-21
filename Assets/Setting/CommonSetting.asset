@@ -46,6 +46,7 @@ MonoBehaviour:
   - config
   - btn_effect
   - slot_effect
+  - gacha_effect
   - quest
   - quest_gangbang
   - unit
