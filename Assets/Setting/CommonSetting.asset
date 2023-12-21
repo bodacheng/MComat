@@ -45,6 +45,7 @@ MonoBehaviour:
   downLoadLabels:
   - config
   - btn_effect
+  - slot_effect
   - quest
   - quest_gangbang
   - unit
