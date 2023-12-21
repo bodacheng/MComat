@@ -37,4 +37,5 @@ MonoBehaviour:
   team1AIMode: 0
   team2AIMode: 0
   dumbAIDecisionDelay: 20
+  dreamComboAIRateNum: 40
   stageRefLevel: 2.8
