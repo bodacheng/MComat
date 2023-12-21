@@ -11,7 +11,7 @@
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>com.MCombat.BO</key>
-		<string>MCombat_Release</string>
+		<string>release</string>
 	</dict>
 	<key>signingCertificate</key>
 	<string>iPhone Distribution</string>
