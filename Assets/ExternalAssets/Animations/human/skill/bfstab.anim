@@ -251374,6 +251374,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.5
+    functionName: ResistanceUp
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 2
+    messageOptions: 0
   - time: 0.51666665
     functionName: OpenEnemyTouchingDrag
     data: 
@@ -251402,6 +251409,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.6666667
+    functionName: ResistanceClear
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.71666664
     functionName: ReleasePreparedMagicToAir
     data: right_hand
@@ -251416,7 +251430,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.05
+  - time: 0.85
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}
