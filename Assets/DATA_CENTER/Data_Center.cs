@@ -163,8 +163,9 @@ public partial class Data_Center : MonoBehaviour
                 AnimationManger.RemoveSpeedBuff("dreamCombo");
                 superDreamEnded = true;
             });
-        _MyBehaviorRunner.SuperComboCondition = this.FightDataRef.HasPlentyDreamGauge;
-
+        
+        _MyBehaviorRunner.SuperComboCondition = ()=> this.FightDataRef.HasPlentyDreamGauge() && !FightDataRef.IsDead.Value;
+        
         var tasks = new List<UniTask>
         {
             EffectsManager.IniEffectsPool("short_effect", FightGlobalSetting.EffectPathDefine(element), 1),
