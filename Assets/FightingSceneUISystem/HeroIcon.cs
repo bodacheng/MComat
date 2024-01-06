@@ -3,8 +3,9 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using Singleton;
+using UnityEngine.EventSystems;
 
-public class HeroIcon : MonoBehaviour {
+public class HeroIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
 
     public BOButton iconButton;
     [SerializeField] Image icon;
@@ -15,6 +16,12 @@ public class HeroIcon : MonoBehaviour {
     
     public UnitConfig unitConfig;
     public GameObject WarnFlag => warnFlag;
+
+    public string InstanceID
+    {
+        get;
+        set;
+    }
     
     protected void Grey()
     {
@@ -139,7 +146,7 @@ public class HeroIcon : MonoBehaviour {
         icon.gameObject.SetActive(sprite != null);
     }
     
-    public static void SelectedFeature(HeroIcon unitIcon, GameObject selectedFrame, float localScale)
+    public static void SelectedFeature(Transform unitIcon, GameObject selectedFrame, float localScale)
     {
         if (unitIcon == null)
         {
@@ -176,5 +183,106 @@ public class HeroIcon : MonoBehaviour {
         );
         icon.gameObject.SetActive(true);
         return icon;
+    }
+    
+    public static GameObject dragging;                                          // Icon of dragged item
+    public static HeroIcon draggedItem;                                      // Item that is dragged now
+    public static HeroCell sourceCell;                                         // From this cell dragged item is
+    static Canvas canvas;                                                       // Canvas for item drag operation
+    static readonly string canvasName = "DragAndDropCanvas";                    // Name of canvas
+    static readonly int canvasSortOrder = 100;                                  // Sort order for canvas
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (dragging != null)
+        {
+            DestroyImmediate(dragging);
+        }
+
+        sourceCell = GetCell();                       							// Remember source cell
+        draggedItem = this;                                                     // Set as dragged item
+        
+        // version 2
+        dragging = Instantiate(this.gameObject);
+        dragging.transform.SetParent(canvas.transform);
+        dragging.name = "Icon";
+        
+        var iconRect = dragging.GetComponent<RectTransform>();
+        // Set icon's dimensions
+        var myRect = GetComponent<RectTransform>();
+        iconRect.pivot = new Vector2(0.5f, 0.5f);
+        iconRect.anchorMin = new Vector2(0.5f, 0.5f);
+        iconRect.anchorMax = new Vector2(0.5f, 0.5f);
+        iconRect.sizeDelta = new Vector2(myRect.rect.width, myRect.rect.height);
+        //OnItemDragStartEvent?.Invoke(this);                                         // Notify all items about drag start for raycast disabling
+    }
+    
+    /// <summary>
+    /// Gets DaD cell which contains this item.
+    /// </summary>
+    /// <returns>The cell.</returns>
+    public HeroCell GetCell()
+    {
+        return GetComponentInParent<HeroCell>();
+    }
+    
+    /// <summary>
+    /// Every frame on this item drag.
+    /// </summary>
+    /// <param name="data"></param>
+    public void OnDrag(PointerEventData data)
+    {
+        if (dragging != null)
+        {
+            dragging.transform.position = Input.mousePosition;                          // Item's icon follows to cursor in screen pixels
+        }
+    }
+
+    /// <summary>
+    /// This item is dropped.
+    /// </summary>
+    /// <param name="eventData"></param>
+    /// 这个环节里很多操作看起来和DummyControlUnit里的.DropEventEnd很像，不要被迷惑，真正处理适配技能石功能的主要是DummyControlUnit那边，
+    /// 这个环节处理的是把石头从9宫拖出来扔到空白区域的情况。
+    /// 这个空白区域应该覆盖技能石头盒子，因为玩家想撤销添加技能操作的时候会本能的把石头向盒子方向移动。
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        ResetConditions();
+    }
+    
+    /// <summary>
+    /// Enable item's raycast.
+    /// </summary>
+    /// <param name="condition"> true - enable, false - disable </param>
+    public void MakeRaycast(bool condition)
+    {
+        if (GetComponent<Image>() != null)
+        {
+            GetComponent<Image>().raycastTarget = condition;
+        }
+    }
+    
+    /// <summary>
+    /// Resets all temporary conditions.
+    /// </summary>
+    void ResetConditions()
+    {
+        if (dragging != null)
+        {
+            Destroy(dragging);
+        }
+        draggedItem = null;
+        dragging = null;
+        sourceCell = null;
+    }
+    
+    void Awake()
+    {
+        if (canvas == null)
+        {
+            var canvasObj = new GameObject(canvasName);
+            canvas = canvasObj.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.sortingOrder = canvasSortOrder;
+        }
     }
 }

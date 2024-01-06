@@ -15,7 +15,10 @@ public class TeamEditLayer : UILayer
     [SerializeField] Image view2D;
     [SerializeField] Animator unitOutAnimator;
     [SerializeField] Button removeButton;
-    [SerializeField] HeroIcon team1Front, team1Left, team1Right;
+    [SerializeField] HeroCell team1Front, team1Left, team1Right;
+    
+    [Header("角色属性框")]
+    [SerializeField] HeroIcon noMagic;
     
     [Header("选中框")]
     [SerializeField] GameObject selectedFrame;
@@ -34,7 +37,7 @@ public class TeamEditLayer : UILayer
     [SerializeField] Text instruction;
     
     readonly ReactiveProperty<int> _focusingPos = new ReactiveProperty<int>(-1);
-    readonly IDictionary<int, HeroIcon> _teamBtnDic = new Dictionary<int, HeroIcon>();
+    readonly IDictionary<int, HeroCell> _teamBtnDic = new Dictionary<int, HeroCell>();
     private Func<string, bool> _teamLegal;
     private string _currentTeamMode;
 
@@ -109,7 +112,6 @@ public class TeamEditLayer : UILayer
         if (unitInfo != null && Stones.GetEquippingStones(instanceID).Count != 9)
         {
             _focusingPos.Value = -1;
-            Debug.Log("no enough skill");
             return;
         }
         
@@ -130,16 +132,24 @@ public class TeamEditLayer : UILayer
     // 纯渲染函数
     void ChangeIconOnPos(int posNum, string teamMode)
     {
-        if (_teamBtnDic.ContainsKey(posNum))
+        var cell = _teamBtnDic[posNum];
+        var posInstanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(posNum);
+        var info = dataAccess.Units.Get(posInstanceID);
+        if (info != null)
         {
-            var icon = _teamBtnDic[posNum];
-            var posInstanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(posNum);
-            var info = dataAccess.Units.Get(posInstanceID);
-            icon.ChangeIcon(info, true);
+            var targetingIcon = Instantiate(noMagic);
+            targetingIcon.name = info.id + "_icon";
+            targetingIcon.InstanceID = posInstanceID;
+            targetingIcon.ChangeIcon(info);
+            targetingIcon.iconButton.SetListener(() =>
+            {
+                SetPos(posNum, teamMode);
+            });
+            cell.AddItem(targetingIcon);
         }
         else
         {
-            Debug.Log("posNum not exists:" + posNum);
+            cell.Clear();
         }
     }
     
@@ -154,19 +164,23 @@ public class TeamEditLayer : UILayer
             switch (x)
             {
                 case 0:
-                    HeroIcon.SelectedFeature(team1Front, selectedFrame, 1f);
+                    HeroIcon.SelectedFeature(team1Front.transform, selectedFrame, 1f);
                     break;
                 case 1:
-                    HeroIcon.SelectedFeature(team1Left, selectedFrame, 1f);
+                    HeroIcon.SelectedFeature(team1Left.transform, selectedFrame, 1f);
                     break;
                 case 2:
-                    HeroIcon.SelectedFeature(team1Right, selectedFrame, 1f);
+                    HeroIcon.SelectedFeature(team1Right.transform, selectedFrame, 1f);
                     break;
                 default:
                     HeroIcon.SelectedFeature(null, selectedFrame, 1f);
                     break;
             }
         }).AddTo(gameObject);
+        
+        team1Front.TeamEdit = (s) => { ChangeTeamPos(s,0,teamMode); };
+        team1Left.TeamEdit = (s) => { ChangeTeamPos(s,1,teamMode); };
+        team1Right.TeamEdit = (s) => { ChangeTeamPos(s,2,teamMode); };
         
         _teamBtnDic.Clear();
         _teamBtnDic.Add(0, team1Front);
@@ -186,55 +200,54 @@ public class TeamEditLayer : UILayer
         if (!isTutorial)
             skillEditButton.onClick.AddListener(SkillEdit);
         
-        void Remove()
-        {
-            ChangeTeamPos(null, _focusingPos.Value, teamMode);
-        }
         removeButton.onClick.AddListener(Remove);
-        
-        void SetPos(int posNum)
+        team1Front.iconButton.onClick.AddListener(() => SetPos(0, teamMode));
+        team1Left.iconButton.onClick.AddListener(() => SetPos(1, teamMode));
+        team1Right.iconButton.onClick.AddListener(() => SetPos(2, teamMode));
+        saveBtn.onClick.AddListener(()=>save());
+    }
+    
+    void Remove()
+    {
+        ChangeTeamPos(null, _focusingPos.Value, _currentTeamMode);
+    }
+    
+    void SetPos(int posNum, string teamMode)
+    {
+        var unitsLayer = UILayerLoader.Get<UnitsLayer>();
+        if (unitsLayer == null) return;
+        var selectedInstanceID = unitsLayer.Selected.Value;
+        if (selectedInstanceID != null)
         {
-            var unitsLayer = UILayerLoader.Get<UnitsLayer>();
-            if (unitsLayer == null) return;
-            var selectedInstanceID = unitsLayer.Selected.Value;
-            if (selectedInstanceID != null)
+            Remove();
+            unitsLayer.Selected.Value = null;
+            ChangeTeamPos(selectedInstanceID, posNum, teamMode);
+        }
+        else
+        {
+            _focusingPos.Value = posNum;
+            var instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(_focusingPos.Value);
+            PreScene.target.SetFocusingUnit(instanceID);
+                
+            var unitInfo = dataAccess.Units.Get(instanceID);
+            if (unitInfo != null)
             {
-                Remove();
-                unitsLayer.Selected.Value = null;
-                ChangeTeamPos(selectedInstanceID, posNum, teamMode);
+                UniTask.WhenAll(
+                    connector.ShowMyModel(instanceID), 
+                    Set2DView(unitInfo.r_id, view2D, unitOutAnimator,
+                        0, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(unitInfo.r_id))).Forget();
             }
             else
             {
-                _focusingPos.Value = posNum;
-                var instanceID = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(_focusingPos.Value);
-                PreScene.target.SetFocusingUnit(instanceID);
-                
-                var unitInfo = dataAccess.Units.Get(instanceID);
-                if (unitInfo != null)
-                {
-                    UniTask.WhenAll(
-                        connector.ShowMyModel(instanceID), 
-                        Set2DView(unitInfo.r_id, view2D, unitOutAnimator,
-                            0, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(unitInfo.r_id))).Forget();
-                }
-                else
-                {
-                    connector.ShowMyModel(instanceID).Forget();
-                }
-                
-                if (PreScene.target.Focusing != null)
-                    nineForShow.ShowStones_Acc(PreScene.target.Focusing.id);
-                else
-                {
-                    nineForShow.ShowStones_Acc(null);
-                };
+                connector.ShowMyModel(instanceID).Forget();
             }
+                
+            if (PreScene.target.Focusing != null)
+                nineForShow.ShowStones_Acc(PreScene.target.Focusing.id);
+            else
+            {
+                nineForShow.ShowStones_Acc(null);
+            };
         }
-        
-        team1Front.iconButton.onClick.AddListener(() => SetPos(0));
-        team1Left.iconButton.onClick.AddListener(() => SetPos(1));
-        team1Right.iconButton.onClick.AddListener(() => SetPos(2));
-        
-        saveBtn.onClick.AddListener(()=>save());
     }
 }

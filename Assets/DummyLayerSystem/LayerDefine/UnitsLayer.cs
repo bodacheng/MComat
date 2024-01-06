@@ -39,8 +39,7 @@ namespace mainMenu
             this.onClick = onClick;
             foreach (var kv in heroIcons)
             {
-                kv.Value.iconButton.onClick.RemoveAllListeners();
-                kv.Value.iconButton.onClick.AddListener(()=> { onClick.Invoke(kv.Key); });
+                kv.Value.iconButton.SetListener(()=> { onClick.Invoke(kv.Key);});
             }
         }
         
@@ -50,7 +49,7 @@ namespace mainMenu
             Selected.Subscribe(x =>
             {
                 var targetingIcon = GetUnitIcon(x);
-                HeroIcon.SelectedFeature(targetingIcon, selectedFrame, 1f);
+                HeroIcon.SelectedFeature(targetingIcon?.transform, selectedFrame, 1f);
             }).AddTo(gameObject);
             
             unitBoxContainer.gameObject.SetActive(true);
@@ -96,6 +95,7 @@ namespace mainMenu
                 targetingIcon = Instantiate(noMagic);
                 targetingIcon.name = unitConfig.REAL_NAME + "_icon";
                 targetingIcon.ChangeIcon(unitInfo, withSkillCheck);
+                targetingIcon.InstanceID = instanceID;
                 DicAdd<string, HeroIcon>.Add(heroIcons, instanceID, targetingIcon);
             }
             if (clearBtnFeature)
