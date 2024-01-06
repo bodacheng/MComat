@@ -27,18 +27,19 @@ public class GotchaFront : MSceneProcess
         if (direction > 0)
         {
             _startIndex = _startIndex + 1;
-            if (_startIndex == dropTables.Count)
-            {
-                _startIndex = 0;
-            }
         }
         else if (direction < 0)
         {
             _startIndex = _startIndex - 1;
-            if (_startIndex < 0)
-            {
-                _startIndex = dropTables.Count - 1;
-            }
+        }
+
+        if (_startIndex == dropTables.Count)
+        {
+            _startIndex = 0;
+        }
+        if (_startIndex < 0)
+        {
+            _startIndex = dropTables.Count - 1;
         }
         
         for (var i = 0; i < dropTables.Count; i++)
@@ -63,16 +64,14 @@ public class GotchaFront : MSceneProcess
     public override void ProcessEnter()
     {
         StarsFall.target.gameObject.SetActive(true);
-        
         if (Stones.TooManyStones())
         {
             ReturnLayer.ReturnMissionList.Clear();
             PreScene.target.trySwitchToStep(MainSceneStep.FrontPage, false);
             return;
         }
-
-        StarsFall.target.LookReset();
         
+        StarsFall.target.LookReset();
         BackGroundPS.target.Off();
         _layer = UILayerLoader.Load<GotchaLayer>();
         _layer.Setup(NineTimes, DropTableInfo, MoveNext, PlayerAccountInfo.Me.tutorialProgress != "Finished");
@@ -87,9 +86,7 @@ public class GotchaFront : MSceneProcess
                 PreScene.target.trySwitchToStep(MainSceneStep.ShopTop);
             };
         }
-        
         upperInfoBar.Setup(null, null,null, openDmShop, PlayerAccountInfo.Me.noAdsState);
-        
         SetLoaded(true);
     }
     

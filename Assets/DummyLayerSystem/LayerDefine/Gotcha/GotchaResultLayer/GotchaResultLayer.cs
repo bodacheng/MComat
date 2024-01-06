@@ -42,7 +42,7 @@ public partial class GotchaResultLayer : UILayer
         string stoneFigureName = string.Empty;
         string flashName = string.Empty;
         string explosionName = string.Empty;
-            
+        
         switch(spLevel)
         {
             case 0:
@@ -75,9 +75,9 @@ public partial class GotchaResultLayer : UILayer
         public UIObject StoneFlashFigure;
         public UIObject ScreenExplosionFigure;
         Sequence _currentSequence;
-
+        
         private Func<int, (string, string, string)> _getEffectName;
-
+        
         public void Setup(Func<int, (string, string, string)> getEffectName)
         {
             this._getEffectName = getEffectName;

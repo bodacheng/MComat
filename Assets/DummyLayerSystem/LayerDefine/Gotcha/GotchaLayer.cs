@@ -19,7 +19,7 @@ public class GotchaLayer : UILayer
         left.onClick.AddListener(() => { indexAction(-1, dropTables);});
         right.onClick.AddListener(() => { indexAction(1, dropTables);});
         
-        indexAction(1, dropTables);
+        indexAction(0, dropTables);
         if (tutorial)
         {
             left.gameObject.SetActive(false);

@@ -16,7 +16,7 @@ public partial class GotchaResultLayer : UILayer
         NineForShow.transform.gameObject.SetActive(false);
         await UniTask.DelayFrame(1);
         await PrepareEffects(results);
-
+        
         StarsFall.target.StartGachaEffect(true);
         
         starFallAnimWholeProcess = StartCoroutine (StarFallAnim(results));
