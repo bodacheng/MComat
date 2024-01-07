@@ -99,6 +99,27 @@ public static class AddressablesLogic
         Addressables.Release(handle);
         return needToUpdate;
     }
+
+    public static async UniTask DownLoadConfig()
+    {
+        await DownLoadMission("config", (x)=>{});
+
+    }
+
+    public static async UniTask<CommonSetting> GetCommonSetting()
+    {
+        AsyncOperationHandle<CommonSetting> handle = Addressables.LoadAssetAsync<CommonSetting>("Config/commonSetting");
+        while (!handle.IsDone)
+        {
+            await UniTask.DelayFrame(0);
+        }
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            CommonSetting commonSetting = handle.Result;
+            return commonSetting;
+        }
+        return null;
+    }
     
     public static async UniTask Essentials()
     {

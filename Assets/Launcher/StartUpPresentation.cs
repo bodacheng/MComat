@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using UnityEngine;
@@ -49,27 +50,26 @@ public class StartUpPresentation : MonoBehaviour
     
     async UniTask OnStart()
     {
-        var wText = String.Empty;
+        string text = String.Empty;
         switch (AppSetting.Value.Language)
         {
             case SystemLanguage.English:
-                wText = "Checking program version...";
+                text = "Checking program version...";
                 break;
             case SystemLanguage.Japanese:
-                wText = "プログラムのバージョンを確認中...";
+                text = "プログラムのバージョンを確認中...";
                 break;
             case SystemLanguage.Chinese:
-                wText = "正在检测程序版本";
+                text = "正在检测程序版本";
                 break;
         }
         
-        ProgressLayer.Loading(wText);
+        ProgressLayer.Loading(text);
         bool needToUpdate = await AddressablesLogic.VersionConfirm();
         ProgressLayer.Close();
         
         if (needToUpdate)
         {
-            var text = string.Empty;
             switch (AppSetting.Value.Language)
             {
                 case SystemLanguage.English:
@@ -98,20 +98,24 @@ public class StartUpPresentation : MonoBehaviour
             return;
         }
         
-        var rText = string.Empty;
         switch (AppSetting.Value.Language)
         {
             case SystemLanguage.English:
-                rText = "Inspecting resources";
+                text = "Inspecting resources";
                 break;
             case SystemLanguage.Japanese:
-                rText = "リソースを検査中";
+                text = "リソースを検査中";
                 break;
             case SystemLanguage.Chinese:
-                rText = "检查资源中";
+                text = "检查资源中";
                 break;
         }
-        ProgressLayer.Loading(rText);
+        ProgressLayer.Loading(text);
+        
+        // 告诉用户检查资源中，其实也把config文件下载了，合起来几十kb而已。
+        await AddressablesLogic.DownLoadConfig();
+        CommonSetting commonSetting = await AddressablesLogic.GetCommonSetting();
+        commonSetting.Initialise();
         
         var bytes = await AddressablesLogic.GetWholeDownLoadSize(
             () =>
@@ -126,13 +130,14 @@ public class StartUpPresentation : MonoBehaviour
                 "Download Failed"
                 );
             },
-            starter.DownLoadLabels
+            commonSetting.DownLoadLabels
         );
         
         ProgressLayer.Close();
         if (bytes > 0)
         {
-            DownLoadConfirm("Download Size :" + Math.Round((double)bytes / 1048576, 1) + "MB" + "\n\n" + "Start to download", bytes);
+            DownLoadConfirm("Download Size :" + Math.Round((double)bytes / 1048576, 1) + "MB" + "\n\n" + "Start to download", 
+                bytes, commonSetting.DownLoadLabels);
         }
         else
         {
@@ -140,7 +145,7 @@ public class StartUpPresentation : MonoBehaviour
         }
     }
     
-    void DownLoadConfirm(string msg, float wholeBytes)
+    void DownLoadConfirm(string msg, float wholeBytes, List<string> downLoadLabels)
     {
         PopupLayer.ArrangeConfirmWindow(
             async ()=>
@@ -160,7 +165,7 @@ public class StartUpPresentation : MonoBehaviour
                     {
                         ProgressLayer.LoadingPercent(x, AddressablesLogic.DownloadedBytes / wholeBytes);
                     },
-                    starter.DownLoadLabels
+                    downLoadLabels
                 );
             },
             Application.Quit,

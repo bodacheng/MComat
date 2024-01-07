@@ -15,8 +15,16 @@ public class StarterGUI : Editor
         var s = (Starter)target;
         if (GUILayout.Button("Refresh"))
         {
-            s.Initialise().Forget();
+            Refresh(s);
         }
+    }
+
+    async void Refresh(Starter starter)
+    {
+        await AddressablesLogic.DownLoadConfig();
+        CommonSetting commonSetting = await AddressablesLogic.GetCommonSetting();
+        commonSetting.Initialise();
+        await starter.Initialise();
     }
 }
 #endif
@@ -25,28 +33,16 @@ public class StarterGUI : Editor
 public class Starter : MonoBehaviour
 {
     [SerializeField] PlayFabSetting playFabSetting;
-    [SerializeField] CommonSetting commonSetting;
     [SerializeField] DefaultIconSetting defaultIconSetting;
     [SerializeField] DebugLogManager inGameDebugConsole;
     
     public static bool ConfigInitialised = false;
-
-    void Awake()
-    {
-        if (Application.isEditor)
-        {
-            Initialise().Forget();
-        }
-    }
-
-    public List<string> DownLoadLabels => commonSetting.DownLoadLabels;
-
+    
     public async UniTask Initialise()
     {
         ConfigInitialised = false;
         NativeLeakDetection.Mode = NativeLeakDetectionMode.EnabledWithStackTrace;
         AddressablesLogic.ReleaseAsyncOperationHandles();
-        commonSetting.Initialise();
         inGameDebugConsole.gameObject.SetActive(CommonSetting.DevMode);
         playFabSetting.Initialise();
         defaultIconSetting.Initialise();

@@ -84,7 +84,6 @@ public class CommonSetting : ScriptableObject
     [SerializeField] private Color greenBgColor;
     [SerializeField] private Color greenFrameColor;
     
-
     public List<string> DownLoadLabels => downLoadLabels;
     
     public static bool DevMode;
@@ -151,7 +150,7 @@ public class CommonSetting : ScriptableObject
         GBShortStoryFile = gbShortStoryFile;
         StageModeFile = stageModeFile;
         PassiveSKillFile = passiveSKillFile;
-
+        
         LobbyThemeAddressKey = lobbyThemeAddressKey;
         StartThemeAddressKey = startThemeAddressKey;
         FightThemeAddressKey1 = fightThemeAddressKey1;
@@ -161,13 +160,13 @@ public class CommonSetting : ScriptableObject
         WallCrackEffectCode = wallCrackEffectCode;
         BreakFreeEffectCode = breakFreeEffectCode;
         MemberShiftEffectCode = memberShiftEffectCode;
-
+        
         CharacterAnimDuration = characterAnimDuration;
         ShadowMaterial = shadowMaterial;
         BtnTapSound = btnTapSound;
         BtnConfirmSound = btnConfirmSound;
         ExTabSound = exTabSound;
-
+        
         _emptyBgColor = emptyBgColor;
         _emptyFrameColor = emptyFrameColor;
         _lightBgColor = lightBgColor;
@@ -180,7 +179,7 @@ public class CommonSetting : ScriptableObject
         _blueFrameColor = blueFrameColor;
         _greenBgColor = greenBgColor;
         _greenFrameColor = greenFrameColor;
-
+        
         ResistColor = resistColor;
         DreamColor = dreamColor;
         SpeedColor = speedColor;
