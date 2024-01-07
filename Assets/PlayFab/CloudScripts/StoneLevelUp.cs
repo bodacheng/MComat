@@ -43,8 +43,6 @@ public partial class CloudScript
                 var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                 jsonResult.TryGetValue("success", out var successReturn);
                 jsonResult.TryGetValue("level", out var level);
-                
-                Debug.Log(successReturn + ", Level:" + level);
                 var newLevel = Convert.ToInt32(level);
                 if ((bool)successReturn)
                 {

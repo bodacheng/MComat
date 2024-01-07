@@ -24,11 +24,11 @@ public partial class CloudScript
                 var result = JsonConvert.DeserializeObject<GetRandomResultTablesResult>(messageValue.ToString());
                 foreach (var tableInfo in result.Tables)
                 {
-                    Debug.Log("Table:"+ tableInfo.Key);
-                    foreach (var stoneRate in tableInfo.Value.Nodes)
-                    {
-                        Debug.Log(stoneRate.ResultItem + ":"+ stoneRate.Weight);
-                    }
+                    // Debug.Log("Table:"+ tableInfo.Key);
+                    // foreach (var stoneRate in tableInfo.Value.Nodes)
+                    // {
+                    //     Debug.Log(stoneRate.ResultItem + ":"+ stoneRate.Weight);
+                    // }
                     success(tableInfo.Value);
                 }
             }

@@ -11,9 +11,6 @@ public partial class SSLevelUpManager : MonoBehaviour
     [SerializeField] BOButton confirmLevelUp;
     [SerializeField] Text gdCount;
     
-    [Header("升级对象技能石参数")]
-    [SerializeField] SkillStoneDetail focusingSSD;
-    
     [Header("融合技能槽")]
     [SerializeField] StoneCell cell1;
     [SerializeField] StoneCell cell2;
