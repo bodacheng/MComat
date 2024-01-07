@@ -97,7 +97,6 @@ public partial class SSLevelUpManager : MonoBehaviour
             }
         }
     }
-
     
     void ConfirmUpdateAll(Action<string> refreshStoneData)
     {
@@ -149,7 +148,7 @@ public partial class SSLevelUpManager : MonoBehaviour
             _returnLayer.gameObject.SetActive(true);
 
         CalUpdateAllForms();
-        LevelUpAllStonesBtn.interactable = false;
+        LevelUpAllStonesBtn.interactable = HasStoneToBeUpdate();
         LevelUpAllStonesBtnAnimator.SetBool("on", false);
     }
 }

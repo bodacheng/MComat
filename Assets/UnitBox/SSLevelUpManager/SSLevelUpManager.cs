@@ -107,43 +107,48 @@ public partial class SSLevelUpManager : MonoBehaviour
         confirmLevelUp.gameObject.SetActive(true);
         var needGD = 10;
         gdCount.text = needGD.ToString();
-        void Confirm()
-        {
-            if (Currencies.CoinCount.Value < needGD)
+        confirmLevelUp.SetListener(
+            () =>
             {
-                PopupLayer.ArrangeWarnWindow(Translate.Get("NoEnoughGD"));
-                return;
+                Confirm(instanceId, needGD);
             }
-            
-            List<string> mInstanceIds = new List<string>();
-            var item1 = cell1.GetItem();
-            var item2 = cell2.GetItem();
-            var item3 = cell3.GetItem();
-            var item4 = cell4.GetItem();
-            if (item1 != null)
-                mInstanceIds.Add(item1.instanceId);
-            if (item2 != null)
-                mInstanceIds.Add(item2.instanceId);
-            if (item3 != null)
-                mInstanceIds.Add(item3.instanceId);
-            if (item4 != null)
-                mInstanceIds.Add(item4.instanceId);
-            
-            PopupLayer.ArrangeConfirmWindow(
-                ()=>
-                {
-                    LevelUpStone(instanceId, mInstanceIds,
-                        x =>
-                        {
-                            CalUpdateAllForms();
-                            LevelUpAllStonesBtn.interactable = SSLevelUpManager.HasStoneToBeUpdate();
-                            LevelUpAllStonesBtnAnimator.SetBool("on", SSLevelUpManager.HasStoneToBeUpdate());
-                            // 具体待定。但不应该是RefreshSkillLevelUpModule，这个在CloseLevelUpPage会跑一次才对
-                        });
-                }, 
-                Translate.Get("IfStoneLevelUp"));
+        );
+    }
+    
+    void Confirm(string instanceId, int needGD)
+    {
+        if (Currencies.CoinCount.Value < needGD)
+        {
+            PopupLayer.ArrangeWarnWindow(Translate.Get("NoEnoughGD"));
+            return;
         }
-        confirmLevelUp.onClick.RemoveAllListeners();
-        confirmLevelUp.onClick.AddListener(Confirm);
+            
+        List<string> mInstanceIds = new List<string>();
+        var item1 = cell1.GetItem();
+        var item2 = cell2.GetItem();
+        var item3 = cell3.GetItem();
+        var item4 = cell4.GetItem();
+        if (item1 != null)
+            mInstanceIds.Add(item1.instanceId);
+        if (item2 != null)
+            mInstanceIds.Add(item2.instanceId);
+        if (item3 != null)
+            mInstanceIds.Add(item3.instanceId);
+        if (item4 != null)
+            mInstanceIds.Add(item4.instanceId);
+            
+        PopupLayer.ArrangeConfirmWindow(
+            ()=>
+            {
+                LevelUpStone(instanceId, mInstanceIds,
+                    x =>
+                    {
+                        CalUpdateAllForms();
+                        LevelUpAllStonesBtn.interactable = HasStoneToBeUpdate();
+                        LevelUpAllStonesBtnAnimator.SetBool("on", HasStoneToBeUpdate());
+                        // 具体待定。但不应该是RefreshSkillLevelUpModule，这个在CloseLevelUpPage会跑一次才对
+                    });
+            }, 
+            Translate.Get("IfStoneLevelUp"));
     }
 }

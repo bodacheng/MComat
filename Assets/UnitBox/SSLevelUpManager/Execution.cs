@@ -11,12 +11,6 @@ public partial class SSLevelUpManager : MonoBehaviour
     void LevelUpStone(string InstanceId, List<string> mInstanceIds, Action<string> refreshStoneData)
     {
         var target = Stones.Get(InstanceId);
-        if (target == null)
-        {
-            Debug.Log("逻辑顺序错误？");
-            return;
-        }
-
         if (target.Born == "true")
         {
             Debug.Log("原生技能石不需升级");
@@ -24,12 +18,11 @@ public partial class SSLevelUpManager : MonoBehaviour
         }
         
         var materialInstanceIds = new List<string>();
-        
         var form = new SkillStoneLevelUpForm
         {
             targetStoneID = InstanceId
         };
-
+        
         foreach (var instanceId in mInstanceIds)
         {
             form.stoneInstances.Add(instanceId);

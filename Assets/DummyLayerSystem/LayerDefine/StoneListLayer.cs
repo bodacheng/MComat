@@ -18,6 +18,10 @@ public class StoneListLayer : UILayer
         {
             _targetStoneID = value;
             var info = Stones.Get(_targetStoneID);
+            if (info != null)
+            {
+                skillStoneDetail.RefreshInfo(_targetStoneID);
+            }
             skillStoneDetail.gameObject.SetActive(info != null);
             openPowerUpBtn.gameObject.SetActive(Stones.StoneCanLevelUp(_targetStoneID));
             if (info == null) return;
@@ -60,7 +64,6 @@ public class StoneListLayer : UILayer
             if (stone != null && stone._SkillConfig != null)
             {
                 StoneCell.SelectedRender(cell, SkillStonesBox.Selected);
-                skillStoneDetail.RefreshInfo(stone.instanceId);
                 TargetStoneID = stone.instanceId;
             }else{
                 skillStoneDetail.Clear();
