@@ -24,7 +24,6 @@ public class GotchaLayer : UILayer
         {
             left.gameObject.SetActive(false);
             right.gameObject.SetActive(false);
-            indexAction(1, dropTables);
         }
     }
 }

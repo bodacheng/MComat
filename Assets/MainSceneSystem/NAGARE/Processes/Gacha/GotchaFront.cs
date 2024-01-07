@@ -15,7 +15,7 @@ public class GotchaFront : MSceneProcess
         Step = MainSceneStep.GotchaFront;
     }
     
-    private int _startIndex = 0;
+    private int _startIndex = 1;
     private Action _extraSuccessAction;
     public void SetExtraSuccessAction(Action extraSuccessAction)
     {
