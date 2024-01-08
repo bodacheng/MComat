@@ -1011,7 +1011,21 @@ handlers.DeleteNoDisplayNameUser = function (args, context) {
     };
     var accountInfo = server.GetUserAccountInfo(getRequest);
     var displayName = accountInfo.UserInfo.TitleInfo.DisplayName;
-    if (displayName == "" || displayName == null) {
+
+    var getStatisticRequest = {
+        PlayFabId: currentPlayerId,
+        StatisticNames: ["stageProgress"],
+    };
+
+    var playerStats = server.GetPlayerStatistics(getStatisticRequest);
+    let stageProgress = 100;
+    for (i = 0; i < playerStats.Statistics.length; ++i) {
+        if (playerStats.Statistics[i].StatisticName === "stageProgress") {
+            stageProgress = playerStats.Statistics[i].Value;
+        }
+    }
+    
+    if ((displayName == "" || displayName == null) && stageProgress < 3) {
         var deleted = server.DeletePlayer(getRequest);
         return { deleted };
     }
