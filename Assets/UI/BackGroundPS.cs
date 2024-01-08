@@ -48,14 +48,9 @@ public class BackGroundPS : MonoBehaviour
                 Red();
             break;
             default:
-                Default();
+                Void();
             break;
         }
-    }
-    
-    void Default()
-    {
-        SwitchBG(-1);
     }
     
     void Red()
