@@ -16,7 +16,6 @@ namespace mainMenu
         
         [Header("Validation Warning")]
         [SerializeField] Text validationWarn;
-
         [SerializeField] Text validationWarnSide;
         
         [Header("九格")]
@@ -34,7 +33,7 @@ namespace mainMenu
         [Header("技能石编辑确认")]
         public BOButton ConfirmSkillChangeButton;
         [SerializeField] ConfirmBtnColorSwapper confirmBtnColorSwapper;
-
+        
         [Header("OverHeat Indicator")]  
         [SerializeField] GameObject overHeatIndicator;
         
@@ -57,7 +56,7 @@ namespace mainMenu
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _tabEffects;
         
-        public BOButton comboShowBtn,dreamComboShowBtn, comboCloseBtn;
+        public BOButton comboShowBtn, dreamComboShowBtn, comboCloseBtn;
         
         SkillStoneSlot _a1Slot, _a2Slot, _a3Slot;
         SkillStoneSlot _b1Slot, _b2Slot, _b3Slot;

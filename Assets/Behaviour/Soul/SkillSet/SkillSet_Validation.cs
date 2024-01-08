@@ -9,11 +9,12 @@ public partial class SkillSet
         RepeatedSkill,
         NoNormalStart,
         NotFull,
+        NoAtLeastTwoEx, // Tutorial
         Perfect
     }
     
     // 判断技能组是否合法。包括了首技能有无普攻，有无重复，总点数是否平衡 这三方面
-    public static SkillEditError CheckEdit(string a1, string a2, string a3, string b1, string b2, string b3, string c1, string c2, string c3)
+    public static SkillEditError CheckEdit(string a1, string a2, string a3, string b1, string b2, string b3, string c1, string c2, string c3, bool atLeastTwoExSkill = false)
     {
         var wholePoint = SkillBalancePoint(a1, a2, a3, b1, b2, b3, c1, c2, c3);
         if (wholePoint < 0)
@@ -43,6 +44,11 @@ public partial class SkillSet
         if (!CheckRepeat(a1, a2, a3, b1, b2, b3, c1, c2, c3))
         {
             return SkillEditError.RepeatedSkill;
+        }
+
+        if (atLeastTwoExSkill && !CheckAtLeastTwoEx(a1, a2, a3, b1, b2, b3, c1, c2, c3))
+        {
+            return SkillEditError.NoAtLeastTwoEx;
         }
         
         return SkillEditError.Perfect;
@@ -136,6 +142,35 @@ public partial class SkillSet
         }
         
         return true;
+    }
+    
+    static bool CheckAtLeastTwoEx(string a1, string a2, string a3, string b1, string b2, string b3, string c1, string c2, string c3)
+    {
+        // 检查技能重复
+        var ids = new List<string>
+        {
+            a1,
+            a2,
+            a3,
+            b1,
+            b2,
+            b3,
+            c1,
+            c2,
+            c3
+        };
+
+        int exCount = 0;
+        foreach (var id in ids)
+        {
+            var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(id);
+            if (skillConfig.SP_LEVEL != 0)
+            {
+                exCount++;
+            }
+        }
+        
+        return exCount >= 2;
     }
     
     // 检查起始技能有没有普通技能

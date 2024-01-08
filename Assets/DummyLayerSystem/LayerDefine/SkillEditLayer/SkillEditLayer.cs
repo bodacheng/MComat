@@ -46,10 +46,6 @@ public partial class SkillEditLayer : UILayer
         nineSlot.dreamComboShowBtn.gameObject.SetActive(false);
         nineSlot.comboCloseBtn.gameObject.SetActive(false);
         
-        var valid = nineSlot.CheckEditBasedOnCurrent();
-        if (valid != SkillSet.SkillEditError.Perfect)
-            return;
-
         stoneBoxRect.gameObject.SetActive(false);
         nineSlot.IntroAboutCombo(true, dreamCombo);
         var returnLayer = UILayerLoader.Get<ReturnLayer>();
@@ -222,12 +218,32 @@ public partial class SkillEditLayer : UILayer
         }
         void SkillSetUpdate()
         {
-            var valid = nineSlot.CheckEditBasedOnCurrent();
+            var valid = nineSlot.CheckEditBasedOnCurrent(PlayerAccountInfo.Me.tutorialProgress != "Finished");
             if (valid != SkillSet.SkillEditError.Perfect)
             {
                 if (PlayerAccountInfo.Me.tutorialProgress != "Finished")
                 {
-                    PopupLayer.ArrangeWarnWindow(Translate.Get("PlsFillAll"));
+                    switch (valid)
+                    {
+                        case SkillSet.SkillEditError.NoAtLeastTwoEx:
+                            PopupLayer.ArrangeWarnWindow(Translate.Get("AtLeastTwoEx"));
+                            break;
+                        case SkillSet.SkillEditError.UnBalanced:
+                            PopupLayer.ArrangeWarnWindow(Translate.Get("UnBalanced"));
+                            break;
+                        case SkillSet.SkillEditError.RepeatedSkill:
+                            PopupLayer.ArrangeWarnWindow(Translate.Get("CantEquipSameSkill"));
+                            break;
+                        case SkillSet.SkillEditError.NoNormalStart:
+                            PopupLayer.ArrangeWarnWindow(Translate.Get("AColumnNeedNormal"));
+                            break;
+                        case SkillSet.SkillEditError.NotFull:
+                            PopupLayer.ArrangeWarnWindow(Translate.Get("PlsFillAll"));
+                            break;
+                        default:
+                            PopupLayer.ArrangeWarnWindow(Translate.Get("PlsFillAll"));
+                            break;
+                    }
                     return;
                 }
                 // 比如想给角色卸载全部技能的时候，虽然全部卸载后不能再战斗但是需要更新。

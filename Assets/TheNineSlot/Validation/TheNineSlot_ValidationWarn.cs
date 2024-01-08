@@ -9,7 +9,7 @@ namespace mainMenu
         public SkillSet.SkillEditError ValidateWarn()
         {
             // 第一列技能必须有普通技能
-            var valR = CheckEditBasedOnCurrent();
+            var valR = CheckEditBasedOnCurrent(PlayerAccountInfo.Me.tutorialProgress != "Finished");
             ValidationWarn(valR);
             comboShowBtn.gameObject.SetActive(valR == SkillSet.SkillEditError.Perfect && PlayerAccountInfo.Me.tutorialProgress == "Finished");
             dreamComboShowBtn.gameObject.SetActive(valR == SkillSet.SkillEditError.Perfect && PlayerAccountInfo.Me.tutorialProgress == "Finished");
@@ -36,6 +36,9 @@ namespace mainMenu
                     break;
                 case SkillSet.SkillEditError.NotFull:
                     validationWarn.text = Translate.Get("NotFull");//"全てのスロットを満たしましょう！";
+                    break;
+                case SkillSet.SkillEditError.NoAtLeastTwoEx:
+                    validationWarn.text = Translate.Get("AtLeastTwoEx");
                     break;
                 case SkillSet.SkillEditError.Perfect:
                     validationWarn.gameObject.SetActive(false);

@@ -145,6 +145,10 @@ NoEnoughStoneToFill,No enough skill gems,スキルセットを構成するため
 TryFilterRange,Use distance filter to display skills with specified attack ranges.,距離制限のタブをクリックすると、指定された攻撃範囲のスキルのみが表示されます,点选距离限制选项卡可只显示指定攻击范围的技能
 BornSkillCantRemove,The warrior's innate skills cannot be uninstalled,戦士の固有スキルはアンインストールできません,战士的原生技能不可被卸载
 CantEquipSameSkill,Same skill cannot be equipped for the same warrior,同じ戦士に同じスキルを装備することはできません,同一战士不可装备相同技能
+AtLeastTwoEx,"Please equip at least two EX skills 
+so the warrior can launch dream combo.","ドリームコンボを発動するために
+少なくとも2つの必殺技を装備してください。","请装备至少两个必杀技
+以便发动梦幻连招"
 NotFull,The skill set is not complete,全てのスロットを満たしましょう,技能组未满
 SKillConfirm,Confirm,確定,保存技能组
 StoneLevelUp,Merge,融合,融合

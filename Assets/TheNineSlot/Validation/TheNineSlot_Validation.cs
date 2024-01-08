@@ -6,12 +6,13 @@ namespace mainMenu
     public partial class TheNineSlot : MonoBehaviour
     {
         // 基于当前九宫格对技能编辑进行合法判断 包括首发技能检测
-        public SkillSet.SkillEditError CheckEditBasedOnCurrent()
+        public SkillSet.SkillEditError CheckEditBasedOnCurrent(bool atLeastTwoExSkill)
         {
             var nineSkillIds = GetCurrentNineSlotAllSkillIds();
             return SkillSet.CheckEdit(nineSkillIds[0], nineSkillIds[1], nineSkillIds[2], 
                                         nineSkillIds[3], nineSkillIds[4], nineSkillIds[5],
-                                        nineSkillIds[6], nineSkillIds[7], nineSkillIds[8]);
+                                        nineSkillIds[6], nineSkillIds[7], nineSkillIds[8],
+                                        atLeastTwoExSkill);
         }
         
         // 基于角色存档对技能编辑进行合法判断. 必须接受完整validation检测
