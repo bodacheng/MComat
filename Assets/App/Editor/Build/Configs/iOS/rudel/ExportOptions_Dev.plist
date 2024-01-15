@@ -11,7 +11,7 @@
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>com.MCombat.BO</key>
-		<string>test</string>
+		<string>test_rudel</string>
 	</dict>
 	<key>signingCertificate</key>
 	<string>Apple Distribution</string>
