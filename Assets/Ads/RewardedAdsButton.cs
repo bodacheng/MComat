@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Advertisements;
+using GoogleMobileAds.Api;
  
-public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
+public class RewardedAdsButton : MonoBehaviour
 {
     [SerializeField] Button _showAdButton;
     [SerializeField] string _androidAdUnitId = "Interstitial_Android";
@@ -40,7 +40,8 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     {
         IniUnitId();
         //Disable the button until the ad is ready to show:
-        _showAdButton.interactable = false;
+        //_showAdButton.interactable = false;
+        _showAdButton.onClick.AddListener(ShowAd);
     }
 
     void IniUnitId()
@@ -57,7 +58,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     public void LoadAd()
     {
         // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
-        Advertisement.Load(_adUnitId, this);
+        LoadRewardedInterstitialAd();
     }
  
     // If the ad successfully loads, add a listener to the button and enable it:
@@ -75,62 +76,117 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     // Implement a method to execute when the user clicks the button:
     public void ShowAd()
     {
-        // // Disable the button:
-        _showAdButton.interactable = false;
-        // // Then show the ad:
-        Advertisement.Show(_adUnitId, this);
-    }
- 
-    // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
-    public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
-    {
-        if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
+        const string rewardMsg =
+            "Rewarded interstitial ad rewarded the user. Type: {0}, amount: {1}.";
+
+        if (_rewardedInterstitialAd != null && _rewardedInterstitialAd.CanShowAd())
         {
+            _rewardedInterstitialAd.Show((Reward reward) =>
+            {
+                // TODO: Reward the user.
+                Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
+            });
+        }
+    }
+    
+    private void RegisterEventHandlers(RewardedInterstitialAd ad)
+    {
+        // Raised when the ad is estimated to have earned money.
+        ad.OnAdPaid += (AdValue adValue) =>
+        {
+            Debug.Log(String.Format("Rewarded interstitial ad paid {0} {1}.",
+                adValue.Value,
+                adValue.CurrencyCode));
+        };
+        // Raised when an impression is recorded for an ad.
+        ad.OnAdImpressionRecorded += () =>
+        {
+            Debug.Log("Rewarded interstitial ad recorded an impression.");
+        };
+        // Raised when a click is recorded for an ad.
+        ad.OnAdClicked += () =>
+        {
+            Debug.Log("Rewarded interstitial ad was clicked.");
+        };
+        // Raised when an ad opened full screen content.
+        ad.OnAdFullScreenContentOpened += () =>
+        {
+            Debug.Log("Rewarded interstitial ad full screen content opened.");
+            AppSetting.Value.Mute();
+        };
+        // Raised when the ad closed full screen content.
+        ad.OnAdFullScreenContentClosed += () =>
+        {
+            Debug.Log("Rewarded interstitial ad full screen content closed.");
             watchedAdExtraProcess.Invoke();
             // Load another ad: 需要检查在实机上这里跑的是否有问题。在editor上产生一个造成广告再次观看时连续跑了两次的错误
             if (reloadAfterWatched)
-                Advertisement.Load(_adUnitId, this);
+                LoadAd();
             else
             {
                 _showAdButton.gameObject.SetActive(false);
             }
-                
-        }
-        AppSetting.Value.UnMute();
+            AppSetting.Value.UnMute();
+        };
+        // Raised when the ad failed to open full screen content.
+        ad.OnAdFullScreenContentFailed += (AdError error) =>
+        {
+            Debug.LogError("Rewarded interstitial ad failed to open " +
+                           "full screen content with error : " + error);
+        };
     }
     
-    // Implement Load and Show Listener error callbacks:
-    public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
-    {
-        Debug.Log($"Error loading Ad Unit {adUnitId}: {error.ToString()} - {message}");
-        // Use the error details to determine whether to try to load another ad.
-        Advertisement.Load(_adUnitId, this);
-    }
-    
-    public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
-    {
-        Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
-        AppSetting.Value.UnMute();
-        // Use the error details to determine whether to try to load another ad.
-        Advertisement.Load(_adUnitId, this);
-    }
-
     public void OnUnityAdsShowStart(string adUnitId)
     {
         AppSetting.Value.Mute();
     }
-
-    public void OnUnityAdsShowClick(string adUnitId)
-    {
-        watchedAdExtraProcess.Invoke();
-        // Load another ad: 需要检查在实机上这里跑的是否有问题。在editor上产生一个造成广告再次观看时连续跑了两次的错误
-        if (reloadAfterWatched)
-            Advertisement.Load(_adUnitId, this);
-    }
- 
+    
     void OnDestroy()
     {
         // Clean up the button listeners:
         _showAdButton.onClick.RemoveAllListeners();
+    }
+    
+    // These ad units are configured to always serve test ads.
+    
+    private RewardedInterstitialAd _rewardedInterstitialAd;
+
+    /// <summary>
+    /// Loads the rewarded interstitial ad.
+    /// </summary>
+    public void LoadRewardedInterstitialAd()
+    {
+        // Clean up the old ad before loading a new one.
+        if (_rewardedInterstitialAd != null)
+        {
+            _rewardedInterstitialAd.Destroy();
+            _rewardedInterstitialAd = null;
+        }
+
+        Debug.Log("Loading the rewarded interstitial ad.");
+
+        // create our request used to load the ad.
+        var adRequest = new AdRequest();
+        adRequest.Keywords.Add("unity-admob-sample");
+
+        // send the request to load the ad.
+        RewardedInterstitialAd.Load(_adUnitId, adRequest,
+            (RewardedInterstitialAd ad, LoadAdError error) =>
+            {
+                // if error is not null, the load request failed.
+                if (error != null || ad == null)
+                {
+                    Debug.LogError("rewarded interstitial ad failed to load an ad " +
+                                   "with error : " + error);
+                    return;
+                }
+
+                Debug.Log("Rewarded interstitial ad loaded with response : "
+                          + ad.GetResponseInfo());
+
+                _rewardedInterstitialAd = ad;
+            });
+
+        RegisterEventHandlers(_rewardedInterstitialAd);
     }
 }

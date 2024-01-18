@@ -1,9 +1,8 @@
 using System;
 using UnityEngine;
-using UnityEngine.Advertisements;
-//using GoogleMobileAds.Api;
+using GoogleMobileAds.Api;
 
-public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
+public class AdsInitializer : MonoBehaviour
 {
     [SerializeField] string _androidGameId;
     [SerializeField] string _iOSGameId;
@@ -24,21 +23,11 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
 #if UNITY_ANDROID
         _gameId = _androidGameId;
 #endif
-        Advertisement.Initialize(_gameId, _testMode, this);
+        //Advertisement.Initialize(_gameId, _testMode, this);
         // Google admob
-        // MobileAds.Initialize(initStatus =>
-        // {
-        //     Debug.Log("谷歌广告插件初始化状态："+initStatus);
-        // });
-    }
-    
-    public void OnInitializationComplete()
-    {
-        Debug.Log("Unity Ads initialization complete.");
-    }
-    
-    public void OnInitializationFailed(UnityAdsInitializationError error, string message)
-    {
-        Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
+        MobileAds.Initialize(initStatus =>
+        {
+            Debug.Log("谷歌广告插件初始化状态："+initStatus);
+        });
     }
 }
