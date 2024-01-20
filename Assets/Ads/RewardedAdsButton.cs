@@ -58,7 +58,7 @@ public class RewardedAdsButton : MonoBehaviour
     public void LoadAd()
     {
         // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
-        LoadRewardedInterstitialAd();
+        LoadInterstitialAd();
     }
  
     // If the ad successfully loads, add a listener to the button and enable it:
@@ -79,43 +79,43 @@ public class RewardedAdsButton : MonoBehaviour
         const string rewardMsg =
             "Rewarded interstitial ad rewarded the user. Type: {0}, amount: {1}.";
 
-        if (_rewardedInterstitialAd != null && _rewardedInterstitialAd.CanShowAd())
+        if (_interstitialAd != null && _interstitialAd.CanShowAd())
         {
-            _rewardedInterstitialAd.Show((Reward reward) =>
-            {
-                // TODO: Reward the user.
-                Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
-            });
+            _interstitialAd.Show();
+        } 
+        else
+        {
+            Debug.LogError("Interstitial ad is not ready yet.");
         }
     }
     
-    private void RegisterEventHandlers(RewardedInterstitialAd ad)
+    private void RegisterEventHandlers(InterstitialAd interstitialAd)
     {
         // Raised when the ad is estimated to have earned money.
-        ad.OnAdPaid += (AdValue adValue) =>
+        interstitialAd.OnAdPaid += (AdValue adValue) =>
         {
             Debug.Log(String.Format("Rewarded interstitial ad paid {0} {1}.",
                 adValue.Value,
                 adValue.CurrencyCode));
         };
         // Raised when an impression is recorded for an ad.
-        ad.OnAdImpressionRecorded += () =>
+        interstitialAd.OnAdImpressionRecorded += () =>
         {
             Debug.Log("Rewarded interstitial ad recorded an impression.");
         };
         // Raised when a click is recorded for an ad.
-        ad.OnAdClicked += () =>
+        interstitialAd.OnAdClicked += () =>
         {
             Debug.Log("Rewarded interstitial ad was clicked.");
         };
         // Raised when an ad opened full screen content.
-        ad.OnAdFullScreenContentOpened += () =>
+        interstitialAd.OnAdFullScreenContentOpened += () =>
         {
             Debug.Log("Rewarded interstitial ad full screen content opened.");
             AppSetting.Value.Mute();
         };
         // Raised when the ad closed full screen content.
-        ad.OnAdFullScreenContentClosed += () =>
+        interstitialAd.OnAdFullScreenContentClosed += () =>
         {
             Debug.Log("Rewarded interstitial ad full screen content closed.");
             watchedAdExtraProcess.Invoke();
@@ -129,7 +129,7 @@ public class RewardedAdsButton : MonoBehaviour
             AppSetting.Value.UnMute();
         };
         // Raised when the ad failed to open full screen content.
-        ad.OnAdFullScreenContentFailed += (AdError error) =>
+        interstitialAd.OnAdFullScreenContentFailed += (AdError error) =>
         {
             Debug.LogError("Rewarded interstitial ad failed to open " +
                            "full screen content with error : " + error);
@@ -149,18 +149,18 @@ public class RewardedAdsButton : MonoBehaviour
     
     // These ad units are configured to always serve test ads.
     
-    private RewardedInterstitialAd _rewardedInterstitialAd;
+    private InterstitialAd _interstitialAd;
 
     /// <summary>
     /// Loads the rewarded interstitial ad.
     /// </summary>
-    public void LoadRewardedInterstitialAd()
+    public void LoadInterstitialAd()
     {
         // Clean up the old ad before loading a new one.
-        if (_rewardedInterstitialAd != null)
+        if (_interstitialAd != null)
         {
-            _rewardedInterstitialAd.Destroy();
-            _rewardedInterstitialAd = null;
+            _interstitialAd.Destroy();
+            _interstitialAd = null;
         }
 
         Debug.Log("Loading the rewarded interstitial ad.");
@@ -170,8 +170,8 @@ public class RewardedAdsButton : MonoBehaviour
         adRequest.Keywords.Add("unity-admob-sample");
 
         // send the request to load the ad.
-        RewardedInterstitialAd.Load(_adUnitId, adRequest,
-            (RewardedInterstitialAd ad, LoadAdError error) =>
+        InterstitialAd.Load(_adUnitId, adRequest,
+            (InterstitialAd ad, LoadAdError error) =>
             {
                 // if error is not null, the load request failed.
                 if (error != null || ad == null)
@@ -184,9 +184,9 @@ public class RewardedAdsButton : MonoBehaviour
                 Debug.Log("Rewarded interstitial ad loaded with response : "
                           + ad.GetResponseInfo());
 
-                _rewardedInterstitialAd = ad;
+                _interstitialAd = ad;
             });
 
-        RegisterEventHandlers(_rewardedInterstitialAd);
+        RegisterEventHandlers(_interstitialAd);
     }
 }
