@@ -909,7 +909,7 @@ PlayerSettings:
     Legacy Analytics: 1
     Purchasing: 1
     UNet: 1
-    Unity Ads: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
