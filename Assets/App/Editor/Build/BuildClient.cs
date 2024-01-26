@@ -501,19 +501,21 @@ namespace Cocone.ProjectP3
 				}
 			}
 			
-			var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
-			{
-				scenes = GetTargetScenes(GetBuildKind(config.buildKind)),
-				locationPathName = config.GetOutputPath(PlayerSettings.productName),
-				target = config.buildTarget,
-				targetGroup = config.TargetGroup,
-				options = config.options,
-			});
+			var report = BuildPipeline.BuildPlayer(
+				new BuildPlayerOptions
+				{
+					// scenes = GetTargetScenes(GetBuildKind(config.buildKind)),
+					// locationPathName = config.GetOutputPath(PlayerSettings.productName),
+					// target = config.buildTarget,
+					// targetGroup = config.TargetGroup,
+					// options = config.options,
+				}
+			);
 			
-			if (File.Exists(backupPath))
-			{
-				File.Copy(backupPath, mainTemplatePath, true);
-			}
+			// if (File.Exists(backupPath))
+			// {
+			// 	File.Copy(backupPath, mainTemplatePath, true);
+			// }
 			
 			Debug.Log(
 				$"[Result:{report.summary.result}] " +
