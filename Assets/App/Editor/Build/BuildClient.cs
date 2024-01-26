@@ -390,23 +390,21 @@ namespace Cocone.ProjectP3
 				}
 				
 				// addDefineSymbolsの設定
-				if (BuildConfigurations.addDefineSymbols != null && BuildConfigurations.addDefineSymbols.Any())
-				{
-					// 既存シンボルを取得
-					var currentSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(group);
-					var currentSymbolsList = currentSymbols.Split(';').ToList();
-
-					// シンボルを追加（重複していたら削除）
-					foreach (var symbol in BuildConfigurations.addDefineSymbols)
-					{
-						currentSymbolsList.Add(symbol);
-					}
-
-					currentSymbolsList = currentSymbolsList.Distinct().ToList();
-
-					// シンボルを再設定
-					PlayerSettings.SetScriptingDefineSymbolsForGroup(group, currentSymbolsList.ToArray());
-				}
+				// if (BuildConfigurations.addDefineSymbols != null && BuildConfigurations.addDefineSymbols.Any())
+				// {
+				// 	// 既存シンボルを取得
+				// 	var currentSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(group);
+				// 	var currentSymbolsList = currentSymbols.Split(';').ToList();
+				// 	// シンボルを追加（重複していたら削除）
+				// 	foreach (var symbol in BuildConfigurations.addDefineSymbols)
+				// 	{
+				// 		currentSymbolsList.Add(symbol);
+				// 	}
+				// 	currentSymbolsList = currentSymbolsList.Distinct().ToList();
+				//
+				// 	// シンボルを再設定
+				// 	PlayerSettings.SetScriptingDefineSymbolsForGroup(group, currentSymbolsList.ToArray());
+				// }
 			}
 		}
 
@@ -435,16 +433,15 @@ namespace Cocone.ProjectP3
 			ConfigurationSetter.SetAppCenterParam(GetBuildKind(config.buildKind) != PlayerBuildConfig.BuildKind.Release);
 
 			// 既存シンボルを取得
-			var currentSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(config.TargetGroup);
-			var currentSymbolsList = currentSymbols.Split(';').ToList();
-
-			if (GetBuildKind(config.buildKind) == PlayerBuildConfig.BuildKind.Release)
-			{
-				// DEBUG関連シンボル削除
-				currentSymbolsList.RemoveAll(x => x.StartsWith("DEBUG_"));
-			}
-			// シンボルを再設定
-			PlayerSettings.SetScriptingDefineSymbolsForGroup(config.TargetGroup, currentSymbolsList.ToArray());
+			// var currentSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(config.TargetGroup);
+			// var currentSymbolsList = currentSymbols.Split(';').ToList();
+			// if (GetBuildKind(config.buildKind) == PlayerBuildConfig.BuildKind.Release)
+			// {
+			// 	// DEBUG関連シンボル削除
+			// 	currentSymbolsList.RemoveAll(x => x.StartsWith("DEBUG_"));
+			// }
+			// // シンボルを再設定
+			// PlayerSettings.SetScriptingDefineSymbolsForGroup(config.TargetGroup, currentSymbolsList.ToArray());
 			
 			if (config.buildTarget == BuildTarget.iOS)
 			{
