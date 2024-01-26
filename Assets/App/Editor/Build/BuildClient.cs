@@ -426,15 +426,6 @@ namespace Cocone.ProjectP3
 		
 		private static BuildReport Build(PlayerBuildConfig config)
 		{
-			// Android特殊处理
-			string mainTemplatePath = "Assets/Plugins/Android/mainTemplate.gradle";
-			string backupPath = mainTemplatePath + ".backup";
-			// Backup mainTemplate.gradle
-			if (File.Exists(mainTemplatePath))
-			{
-				File.Copy(mainTemplatePath, backupPath, true);
-			}
-			
 			// Yamlの読み込みと設定
 			SetPlayerSettingsByBuildConfiguration(GetBuildKind(config.buildKind), config.buildTarget, config.TargetGroup);
 			
@@ -508,14 +499,9 @@ namespace Cocone.ProjectP3
 					locationPathName = config.GetOutputPath(PlayerSettings.productName),
 					target = config.buildTarget,
 					targetGroup = config.TargetGroup,
-					//options = config.options,
+					options = config.options,
 				}
 			);
-			
-			// if (File.Exists(backupPath))
-			// {
-			// 	File.Copy(backupPath, mainTemplatePath, true);
-			// }
 			
 			Debug.Log(
 				$"[Result:{report.summary.result}] " +
