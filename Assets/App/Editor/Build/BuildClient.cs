@@ -499,11 +499,6 @@ namespace Cocone.ProjectP3
 					PlayerSettings.Android.keystorePass = config.keystorePass;
 					PlayerSettings.Android.keyaliasPass = config.keyaliasPass;
 				}
-				
-				if (File.Exists(backupPath))
-				{
-					File.Copy(backupPath, mainTemplatePath, true);
-				}
 			}
 			
 			var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
@@ -514,7 +509,12 @@ namespace Cocone.ProjectP3
 				targetGroup = config.TargetGroup,
 				options = config.options,
 			});
-
+			
+			if (File.Exists(backupPath))
+			{
+				File.Copy(backupPath, mainTemplatePath, true);
+			}
+			
 			Debug.Log(
 				$"[Result:{report.summary.result}] " +
 				$"[Output:{report.summary.outputPath}] " +
