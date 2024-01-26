@@ -500,8 +500,7 @@ namespace Cocone.ProjectP3
 					PlayerSettings.Android.keyaliasPass = config.keyaliasPass;
 				}
 				
-				// Restore mainTemplate.gradle if it is empty
-				if (new FileInfo(mainTemplatePath).Length == 0 && File.Exists(backupPath))
+				if (File.Exists(backupPath))
 				{
 					File.Copy(backupPath, mainTemplatePath, true);
 				}
