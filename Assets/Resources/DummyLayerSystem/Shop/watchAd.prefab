@@ -34,7 +34,6 @@ RectTransform:
   m_Children:
   - {fileID: 6163598721173987997}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -137,8 +136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _showAdButton: {fileID: 1730796717693479287}
-  _androidAdUnitId: Rewarded_Android
-  _iOSAdUnitId: Rewarded_iOS
+  _androidAdUnitId: ca-app-pub-9232931129246316/7800743321
+  _iOSAdUnitId: ca-app-pub-9232931129246316/2104157226
   reloadAfterWatched: 0
   text: {fileID: 0}
 --- !u!1 &6239382249358545513
@@ -172,7 +171,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1910464613658802215}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
