@@ -15,11 +15,10 @@ public class AdsBtnRender : MonoBehaviour
     
     private IDisposable _disposeCountDown;
     
-    public void Setup()
+    public void SetupForMainScene()
     {
         // unity
-        rewardedAdsButton.LoadAd();
-        rewardedAdsButton.SetExtraEnableCondition(()=> Currencies.AdTicket.Value > 0);
+        rewardedAdsButton.LoadInterstitialAd();
         rewardedAdsButton.SetWatchedAdExtraProcess(
             () =>
             {
@@ -62,7 +61,7 @@ public class AdsBtnRender : MonoBehaviour
                         }
                     }).AddTo(gameObject);
                 }
-                rewardedAdsButton.Enable(x > 0);
+                rewardedAdsButton.HasTicket = x > 0;
                 //googleMobileAdsManager.Enable(x > 0);
             }
         ).AddTo(gameObject);

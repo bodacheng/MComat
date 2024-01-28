@@ -15,7 +15,7 @@ namespace mainMenu
         public void Initialize()
         {
             ShowNoAdsProduct();
-            adsBtnRender.Setup();
+            adsBtnRender.SetupForMainScene();
             RefreshSize();
         }
 

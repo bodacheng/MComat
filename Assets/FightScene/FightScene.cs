@@ -110,7 +110,8 @@ namespace FightScene
         public void LoadAds()
         {
             watchBtn = Instantiate(watchAdBtnPrefab);
-            watchBtn.LoadAd();
+            watchBtn.HasTicket = true;
+            watchBtn.LoadInterstitialAd();
             watchBtn.gameObject.SetActive(false);
             watchBtn.transform.SetParent(transform);
         }
