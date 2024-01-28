@@ -91,6 +91,9 @@ MonoBehaviour:
   _iOSAdUnitId: ca-app-pub-9232931129246316/2104157226
   reloadAfterWatched: 0
   text: {fileID: 1110466407306221726}
+  colorImages:
+  - {fileID: 1724971013979414754}
+  - {fileID: 8689171847827675591}
 --- !u!1 &1492116959420535775
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,11 +212,23 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1724971013979414754}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5862124372405645925}
+        m_TargetAssemblyTypeName: RewardedAdsButton, Assembly-CSharp
+        m_MethodName: ShowAd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2249976207355205423
 GameObject:
   m_ObjectHideFlags: 0

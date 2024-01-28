@@ -9,11 +9,13 @@ public class RewardedAdsButton : MonoBehaviour
     [SerializeField] string _androidAdUnitId = "Interstitial_Android";
     [SerializeField] string _iOSAdUnitId = "Interstitial_iOS";
     [SerializeField] bool reloadAfterWatched;
-    [SerializeField] private Text text;
+    [SerializeField] Text text;
     string _adUnitId = null; // This will remain null for unsupported platforms
 
     private InterstitialAd _interstitialAd;
     private Action watchedAdExtraProcess;
+
+    [SerializeField] Image[] colorImages;
 
     public String Text
     {
@@ -33,8 +35,8 @@ public class RewardedAdsButton : MonoBehaviour
         set
         {
             adIsReady = value;
-            _showAdButton.interactable = adIsReady;
-            _showAdButton.gameObject.SetActive(HasTicket);
+            _showAdButton.interactable = adIsReady && hasTicket;
+            SetColor();
         }
     }
 
@@ -46,18 +48,23 @@ public class RewardedAdsButton : MonoBehaviour
         set
         {
             hasTicket = value;
-            _showAdButton.gameObject.SetActive(hasTicket);
-            _showAdButton.interactable = AdIsReady;
+            _showAdButton.interactable = adIsReady && hasTicket;
+            SetColor();
+        }
+    }
+
+    void SetColor()
+    {
+        foreach (var image in colorImages)
+        {
+            var color = image.color;
+            image.color = new Color(color.r, color.g, color.b, _showAdButton.interactable ? 1:0.5f);
         }
     }
     
     void Awake()
     {
         IniUnitId();
-        //Disable the button until the ad is ready to show:
-        _showAdButton.gameObject.SetActive(false);
-        _showAdButton.interactable = false;
-        _showAdButton.onClick.AddListener(ShowAd);
     }
 
     void IniUnitId()
