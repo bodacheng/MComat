@@ -47,7 +47,7 @@ namespace dataAccess
                     continue;
                 }
 
-                if (pair.Value.UnitInstanceId != null && skillEditFocusing != null && pair.Value.UnitInstanceId != skillEditFocusing)
+                if (pair.Value.unitInstanceId != null && skillEditFocusing != null && pair.Value.unitInstanceId != skillEditFocusing)
                 {
                     continue;
                 }
@@ -79,7 +79,7 @@ namespace dataAccess
                 var infoModel = Get(filteredList[i]);
                 if (notUsing)
                 {
-                    if (Units.Get(infoModel.UnitInstanceId) != null)
+                    if (Units.Get(infoModel.unitInstanceId) != null)
                     {
                         continue;
                     }
@@ -126,7 +126,7 @@ namespace dataAccess
             var targetStones = new List<StoneOfPlayerInfo>();
             foreach(var pair in Dic)
             {
-                if (pair.Value.UnitInstanceId == instanceId)
+                if (pair.Value.unitInstanceId == instanceId)
                 {
                     targetStones.Add(pair.Value);
                 }
@@ -140,7 +140,7 @@ namespace dataAccess
             StoneOfPlayerInfo targetStone = null;
             foreach(var keyValuePair in Dic)
             {
-                if (keyValuePair.Value.UnitInstanceId == instanceId && keyValuePair.Value.Born == "true")
+                if (keyValuePair.Value.unitInstanceId == instanceId && keyValuePair.Value.Born == "true")
                 {
                     targetStone = keyValuePair.Value;
                 }

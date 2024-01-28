@@ -79,13 +79,13 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             return;
         }
         var ssInfo = Stones.Get(item.instanceId);
-        if (ssInfo == null || ssInfo.UnitInstanceId == null)
+        if (ssInfo == null || ssInfo.unitInstanceId == null)
         {
             targetIcon.gameObject.SetActive(false);
             return;
         }
         
-        var unitInfo = dataAccess.Units.Get(ssInfo.UnitInstanceId);
+        var unitInfo = dataAccess.Units.Get(ssInfo.unitInstanceId);
         if (unitInfo == null)
         {
             targetIcon.gameObject.SetActive(false);

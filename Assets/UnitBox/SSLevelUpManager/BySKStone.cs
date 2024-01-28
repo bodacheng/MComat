@@ -45,7 +45,7 @@ public partial class SSLevelUpManager : MonoBehaviour
                 var stoneInstanceID = stones[stones.Count-1];
                 var itemModel = Stones.GetRenderModel(stoneInstanceID);
                 var itemData = Stones.Get(stoneInstanceID);
-                if (_stoneListLayer.TargetStoneID != stoneInstanceID && dataAccess.Units.Get(itemData.UnitInstanceId) == null)
+                if (_stoneListLayer.TargetStoneID != stoneInstanceID && dataAccess.Units.Get(itemData.unitInstanceId) == null)
                 {
                     _materialSlots[slotIndex].AddItem(itemModel);
                     slotIndex += 1;

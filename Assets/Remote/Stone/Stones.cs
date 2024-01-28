@@ -97,8 +97,8 @@ namespace dataAccess
                     return;
                 }
                 var stoneOfPlayerInfo = Dic[kv.Key];
-                stoneOfPlayerInfo.UnitInstanceId = kv.Value.Item1;
-                stoneOfPlayerInfo.Slot = kv.Value.Item2;
+                stoneOfPlayerInfo.unitInstanceId = kv.Value.Item1;
+                stoneOfPlayerInfo.slot = kv.Value.Item2;
             }
         }
     }

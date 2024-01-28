@@ -67,9 +67,9 @@ public partial class SkillEditLayer : UILayer
             for (int i = 0 ; i < options.Count; i++)
             {
                 var stoneInfo = Stones.Get(options[i]);
-                if ((unitInstanceId != stoneInfo.UnitInstanceId && dataAccess.Units.Get(stoneInfo.UnitInstanceId) == null)
+                if ((unitInstanceId != stoneInfo.unitInstanceId && dataAccess.Units.Get(stoneInfo.unitInstanceId) == null)
                     ||
-                    unitInstanceId == stoneInfo.UnitInstanceId)
+                    unitInstanceId == stoneInfo.unitInstanceId)
                 {
                     targetStoneId = options[i];
                     break;

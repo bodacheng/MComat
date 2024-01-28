@@ -25,7 +25,7 @@ public partial class SSLevelUpManager : MonoBehaviour
             foreach (var instanceId in instanceIds)
             {
                 var stoneInfo = Stones.Get(instanceId);
-                if (dataAccess.Units.Get(stoneInfo.UnitInstanceId) != null) // 尽量升级装备中技能
+                if (dataAccess.Units.Get(stoneInfo.unitInstanceId) != null) // 尽量升级装备中技能
                 {
                     targetStoneInstanceId = stoneInfo.InstanceId;
                     break;
@@ -46,7 +46,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         {
             var info = Stones.Get(instanceId);
             if (instanceId != targetStoneInstanceId && 
-                dataAccess.Units.Get(info.UnitInstanceId) == null)
+                dataAccess.Units.Get(info.unitInstanceId) == null)
             {
                 mSet.Add(instanceId);
                 if (mSet.Count == 4)

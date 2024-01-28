@@ -35,20 +35,12 @@ public partial class CloudScript
         (ExecuteCloudScriptResult result) => {
                 var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                 jsonResult.TryGetValue("changedStone", out var changedStone); // note how "messageValue" directly corresponds to the JSON values set in CloudScript
-                
                 var ChangedDic = new Dictionary<string, Tuple<string, string>>();
-                var json = JsonConvert.SerializeObject(changedStone);
-                var changedStoneList = JsonConvert.DeserializeObject<List<StoneOfPlayerInfo>>(
-                    json,
-                    new JsonSerializerSettings
-                    {
-                        NullValueHandling = NullValueHandling.Ignore,
-                        MissingMemberHandling = MissingMemberHandling.Ignore
-                    });
-                
+                var json = PlayFab.Json.PlayFabSimpleJson.SerializeObject(changedStone);
+                var changedStoneList = PlayFab.Json.PlayFabSimpleJson.DeserializeObject<List<StoneOfPlayerInfo>>(json);
                 foreach (var stone in changedStoneList)
                 {
-                    ChangedDic.Add(stone.InstanceId, new Tuple<string, string>(stone.UnitInstanceId, stone.Slot));
+                    ChangedDic.Add(stone.InstanceId, new Tuple<string, string>(stone.unitInstanceId, stone.slot));
                 }
                 success.Invoke(ChangedDic);
             }

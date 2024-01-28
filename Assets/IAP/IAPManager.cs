@@ -7,7 +7,6 @@ using DummyLayerSystem;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.Purchasing;
-using Newtonsoft.Json;
 using UnityEngine.Purchasing.Extension;
 
 public class IAPManager : MonoBehaviour, IDetailedStoreListener {
@@ -272,7 +271,7 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
                     }, 
                     (x) =>
                     {
-                        var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(x.FunctionResult));
+                        var jsonResult = PlayFab.Json.PlayFabSimpleJson.DeserializeObject<Dictionary<string, object>>(PlayFab.Json.PlayFabSimpleJson.SerializeObject(x.FunctionResult));
                         if (jsonResult.ContainsKey("rewardDM"))
                         {
                             int reward = Convert.ToInt32(jsonResult["rewardDM"]);

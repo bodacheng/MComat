@@ -56,7 +56,7 @@ public class UnitInfo
             var levels = new List<float>();
             foreach (var t in targets)
             {
-                switch (t.Slot)
+                switch (t.slot)
                 {
                     case "1":
                         set.a1 = t.SkillId;
@@ -113,7 +113,7 @@ public class UnitInfo
         string a1 = null, a2 = null, a3 = null, b1 = null, b2 = null, b3 = null, c1 = null, c2 = null, c3 = null;
         for (var i = 0; i < equipments.Count; i++)
         {
-            switch (equipments[i].Slot)
+            switch (equipments[i].slot)
             {
                 case "1":
                     a1 = equipments[i].SkillId;

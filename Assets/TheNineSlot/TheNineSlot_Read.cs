@@ -22,7 +22,7 @@ namespace mainMenu
 
             for (var i = 0; i < equipments.Count; i++)
             {
-                var usingPosInt = int.Parse(equipments[i].Slot);
+                var usingPosInt = int.Parse(equipments[i].slot);
                 if (equipments[i].InstanceId != null)
                 {
                     AllSlot[usingPosInt - 1].TakeASkillStoneFromBoxToSlot(equipments[i].InstanceId);

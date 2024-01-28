@@ -18,7 +18,7 @@ public partial class NineForShow : MonoBehaviour
         
         for (var i = 0; i < skillStoneOfPlayerInfoModels.Count; i++)
         {
-            switch(skillStoneOfPlayerInfoModels[i].Slot)
+            switch(skillStoneOfPlayerInfoModels[i].slot)
             {
                 case "1":
                     A1SkillID = skillStoneOfPlayerInfoModels[i].SkillId;

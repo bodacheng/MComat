@@ -69,7 +69,7 @@ public partial class SSLevelUpManager : MonoBehaviour
                     PopupLayer.ArrangeWarnWindow("这个是被动技能，不能用作材料");
                     return;
                 }
-                if (m.UnitInstanceId != null)
+                if (m.unitInstanceId != null)
                 {
                     PopupLayer.ArrangeWarnWindow("このストーンは装備中です");
                     return;

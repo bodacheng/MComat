@@ -57,10 +57,10 @@ public static class SVCenter
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
             var info = Stones.Get(item.instanceId);
-            var unitInfo = dataAccess.Units.Get(info.UnitInstanceId);
+            var unitInfo = dataAccess.Units.Get(info.unitInstanceId);
             if (unitInfo != null && unitInfo.id != PreScene.target.Focusing.id)
             {
-                PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get("OtherUnitUsing"), dataAccess.Units.Get(info.UnitInstanceId).r_id);
+                PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get("OtherUnitUsing"), dataAccess.Units.Get(info.unitInstanceId).r_id);
                 return;
             }
 
@@ -105,7 +105,7 @@ public static class SVCenter
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
             var info = Stones.Get(fromItem.instanceId);
-            var unitInfo = dataAccess.Units.Get(info.UnitInstanceId);
+            var unitInfo = dataAccess.Units.Get(info.unitInstanceId);
             if (unitInfo != null && unitInfo.id != PreScene.target.Focusing.id)
             {
                 PopupLayer.ArrangeWarnWindowUnitIcon(Translate.Get("OtherUnitUsing"), unitInfo.r_id);
@@ -204,9 +204,9 @@ public static class SVCenter
             PopupLayer.ArrangeWarnWindow(Translate.Get("BornSkillCantRemove"));
             return false;
         }
-        if (dataAccess.Units.CheckExist(Stones.Get(item.instanceId).UnitInstanceId))
+        if (dataAccess.Units.CheckExist(Stones.Get(item.instanceId).unitInstanceId))
         {
-            var unitInstanceID = Stones.Get(item.instanceId).UnitInstanceId;
+            var unitInstanceID = Stones.Get(item.instanceId).unitInstanceId;
             var valR = skillEditLayer.nineSlot.CheckEditAfterOneStoneRemoved(unitInstanceID, item._SkillConfig.RECORD_ID);
             if (valR != SkillSet.SkillEditError.Perfect)
             {

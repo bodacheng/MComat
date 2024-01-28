@@ -22,10 +22,10 @@ namespace mainMenu
             for (var i = 0; i < equipping.Count; i++)
             {
                 var stone = Stones.Get(equipping[i].InstanceId);
-                if (stone.Slot != null)
+                if (stone.slot != null)
                 {
-                    if (!beforeDic.ContainsKey(stone.Slot))
-                        beforeDic.Add(stone.Slot, stone.InstanceId);
+                    if (!beforeDic.ContainsKey(stone.slot))
+                        beforeDic.Add(stone.slot, stone.InstanceId);
                     else
                     {
                         Debug.Log("unit :"+ unitInfo.id+ " has multi stones on one slot.");

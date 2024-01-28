@@ -61,8 +61,8 @@ public partial class PlayFabReadClient
                         InstanceId = item.ItemInstanceId,
                         SkillId = item.ItemId,
                         Level = Convert.ToInt32(item.CustomData.GetOrDefault("level", "1")),
-                        UnitInstanceId = item.CustomData.GetOrDefault("unitInstanceId"),
-                        Slot = item.CustomData.GetOrDefault("slot"),
+                        unitInstanceId = item.CustomData.GetOrDefault("unitInstanceId"),
+                        slot = item.CustomData.GetOrDefault("slot"),
                         Born = item.CustomData.GetOrDefault("born")
                     };
                     Stones.Add(info);
