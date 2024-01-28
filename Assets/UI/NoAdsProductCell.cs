@@ -4,7 +4,6 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.UI;
-using Newtonsoft.Json;
 
 public class NoAdsProductCell : MonoBehaviour
 {
@@ -30,13 +29,14 @@ public class NoAdsProductCell : MonoBehaviour
         // 检查返回值并处理
         if (result.FunctionResult != null)
         {
+            var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
             // 将FunctionResult解析为JSON对象
-            var jsonResult = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(result.FunctionResult));
+            var resultDic = PlayFab.Json.PlayFabSimpleJson.DeserializeObject<Dictionary<string, object>>(PlayFab.Json.PlayFabSimpleJson.SerializeObject(jsonResult));
         
             // 从JSON对象中提取reward值
-            if (jsonResult.ContainsKey("rewardDM"))
+            if (resultDic.ContainsKey("rewardDM"))
             {
-                int reward = Convert.ToInt32(jsonResult["rewardDM"]);
+                int reward = Convert.ToInt32(resultDic["rewardDM"]);
                 Debug.Log("Received ad reward: " + reward);
                 if (reward > 0)
                 {
