@@ -17,6 +17,7 @@ public class DropTableInfoDetail : MSceneProcess
         _layer = UILayerLoader.Load<DropTableInfoLayer>();
         this.tableId = tableId as string;
         CloudScript.GetDropTableInfo(_layer.ShowDropTableInfo, this.tableId);
+        UILayerLoader.Remove<UpperInfoBar>();
     }
     
     public override void ProcessEnter()

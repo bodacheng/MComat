@@ -3,7 +3,6 @@ using PlayFab.ClientModels;
 using System.Collections.Generic;
 using System;
 using dataAccess;
-using Newtonsoft.Json;
 
 public partial class CloudScript
 {
@@ -80,13 +79,8 @@ public partial class CloudScript
                     }
                     
                     jsonResult.TryGetValue("teamInfos", out var teamInfos);
-                    var json = JsonConvert.SerializeObject(teamInfos);
-                    var opponents = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(
-                        json,
-                        new JsonSerializerSettings
-                        {
-                            NullValueHandling = NullValueHandling.Ignore
-                        });
+                    var json = PlayFab.Json.PlayFabSimpleJson.SerializeObject(teamInfos);
+                    var opponents = PlayFab.Json.PlayFabSimpleJson.DeserializeObject<List<LeaderboardInfo>>(json);
                     success.Invoke(opponents);
                 }
                 catch (Exception e)
@@ -111,13 +105,8 @@ public partial class CloudScript
                 {
                     var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
                     jsonResult.TryGetValue("teamInfos", out var teamInfos);
-                    var json = JsonConvert.SerializeObject(teamInfos);
-                    var opponents = JsonConvert.DeserializeObject<List<LeaderboardInfo>>(
-                        json,
-                        new JsonSerializerSettings
-                        {
-                            NullValueHandling = NullValueHandling.Ignore
-                        });
+                    var json = PlayFab.Json.PlayFabSimpleJson.SerializeObject(teamInfos);
+                    var opponents = PlayFab.Json.PlayFabSimpleJson.DeserializeObject<List<LeaderboardInfo>>(json);
                     success.Invoke(opponents);
                 }
                 catch (Exception e)
