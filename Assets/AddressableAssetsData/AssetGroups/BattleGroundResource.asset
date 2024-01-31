@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: BattleGroundResource
+  m_EditorClassIdentifier: 
+  m_GroupName: BattleGroundResource
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 2eb264aa24bdb4b6ab98bfa2b10d5c5c
+  m_SerializeEntries:
+  - m_GUID: 44032c16152924bf48e6432434d4a57b
+    m_Address: Assets/D_Asset/enviroments/Top-Down Dungeons2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: febbd14b4e118407285ecb2dee91c20b
+    m_Address: Assets/D_Asset/enviroments/Top-Down SF
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 513ac5fd96288574bbe1abd3eb50d296
+    m_Address: Assets/D_Asset/PolygonNightclubs
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 3d6679ebad89447b4b9e3560ae0e6c38, type: 2}
+    - {fileID: 11400000, guid: 48d9bcd54023e4e7ab120af3ce0ece3a, type: 2}
