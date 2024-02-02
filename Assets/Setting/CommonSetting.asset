@@ -43,7 +43,6 @@ MonoBehaviour:
   speedColor: {r: 0.18431373, g: 1, b: 0.9411765, a: 0.3764706}
   dreamColor: {r: 1, g: 0.33333334, b: 0.47058824, a: 0.8352941}
   downLoadLabels:
-  - btn_effect
   - slot_effect
   - gacha_effect
   - quest
