@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2fc58dd8a094ee2b1e75230d7aeca8, type: 3}
   m_Name: commonSetting
   m_EditorClassIdentifier: 
-  devMode: 1
+  devMode: 0
   maxStoneCount: 1000
   gangbangModeMaxUnitPerTeam: 24
   unitConfigFile: mst_unit
@@ -43,8 +43,6 @@ MonoBehaviour:
   speedColor: {r: 0.18431373, g: 1, b: 0.9411765, a: 0.3764706}
   dreamColor: {r: 1, g: 0.33333334, b: 0.47058824, a: 0.8352941}
   downLoadLabels:
-  - slot_effect
-  - gacha_effect
   - quest
   - quest_gangbang
   - unit
