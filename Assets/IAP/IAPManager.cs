@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DummyLayerSystem;
 using mainMenu;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Extension;
@@ -79,7 +80,7 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
     
     void RefreshIAPItems() {
         
-        if (IsInitialized)
+        if (IsInitialized.Value)
             return;
         PlayFabClientAPI.GetCatalogItems(
             new GetCatalogItemsRequest
@@ -120,7 +121,7 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
     void InitializePurchasing() {
         // If IAP is already initialized, return gently
         
-        if (IsInitialized) return;
+        if (IsInitialized.Value) return;
         
 #if UNITY_IOS
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.AppleAppStore));
@@ -171,11 +172,12 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
     }
 
     // We are initialized when StoreController and Extensions are set and we are logged in
-    public bool IsInitialized => _mStoreController != null;
+    public ReactiveProperty<bool> IsInitialized = new ReactiveProperty<bool>();
 
     // This is automatically invoked automatically when IAP service is initialized
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions) {
         Debug.Log("Initialized ：" + controller);
+        IsInitialized.SetValueAndForceNotify(true);
         _mStoreController = controller;
     }
 
@@ -211,7 +213,7 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
 
         Debug.Log("ProcessPurchase");
         
-        if (!IsInitialized) {
+        if (!IsInitialized.Value) {
             return PurchaseProcessingResult.Complete;
         }
         
@@ -402,7 +404,7 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
     public void BuyProductID(string productId) {
         // If IAP service has not been initialized, fail hard
         
-        if (!IsInitialized) throw new Exception("IAP Service is not initialized!");
+        if (!IsInitialized.Value) throw new Exception("IAP Service is not initialized!");
         ProgressLayer.Loading(Translate.Get("PurchaseProcessing"));
         // Pass in the product id to initiate purchase
         _mStoreController.InitiatePurchase(productId);

@@ -127,6 +127,11 @@ public class UpperInfoBar : UILayer
         {
             diamondPlus.gameObject.SetActive(false);
         }
+
+        IAPManager.Target.IsInitialized.Subscribe(x =>
+        {
+            diamondPlus.interactable = x;
+        }).AddTo(this.gameObject);
         
         hasTimeLimitSaleFlag.SetActive(ShopTop.HasTimeLimitSale(PlayFabReadClient.TimeLimitedBuyData));
         

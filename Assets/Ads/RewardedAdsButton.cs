@@ -149,10 +149,10 @@ public class RewardedAdsButton : MonoBehaviour
         }
 
         Debug.Log("Loading the rewarded interstitial ad.");
-
+        
         // create our request used to load the ad.
         var adRequest = new AdRequest();
-        adRequest.Keywords.Add("unity-admob-sample");
+        // adRequest.Keywords.Add("unity-admob-sample");
 
         // send the request to load the ad.
         InterstitialAd.Load(_adUnitId, adRequest,
@@ -161,14 +161,12 @@ public class RewardedAdsButton : MonoBehaviour
                 // if error is not null, the load request failed.
                 if (error != null || ad == null)
                 {
-                    Debug.LogError("rewarded interstitial ad failed to load an ad " +
-                                   "with error : " + error);
+                    Debug.LogError("rewarded interstitial ad failed to load an ad with error : " + error);
                     return;
                 }
-
-                Debug.Log("Rewarded interstitial ad loaded with response : "
-                          + ad.GetResponseInfo());
-
+                
+                Debug.Log("Rewarded interstitial ad loaded with response : " + ad.GetResponseInfo());
+                
                 _interstitialAd = ad;
                 AdIsReady = true;
                 RegisterEventHandlers(_interstitialAd);
