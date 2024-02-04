@@ -21,6 +21,7 @@ public partial class ArenaFightOver : UILayer
     [SerializeField] private Button returnBtn;
     [SerializeField] private RectTransform dmParent;
     [SerializeField] private Text currentDmCurrency;
+    [SerializeField] private RectTransform vipSymbol;
     [SerializeField] private Text awardDmCurrency;
     [SerializeField] private RectTransform gdParent;
     [SerializeField] private Text currentGdCurrency;
@@ -308,6 +309,7 @@ public partial class ArenaFightOver : UILayer
                 finishedStage
             );
         }
+        vipSymbol.gameObject.SetActive(PlayerAccountInfo.Me.noAdsState);
     }
     
     public void ShowArenaPoint(int oldPoint, int currentPoint)

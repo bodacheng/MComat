@@ -464,6 +464,7 @@ handlers.claimQuestReward = function (args, context) {
     // 关卡更新机制我们只有一个逻辑就是一次只更新一关
 
     var stageType = args.stageType;
+    var isVip = args.isVip;
     var stageAwardsKey = stageType === "gangbang" ? "gangbang_awards" : "stage_awards";
     var adStatusKey = stageType === "gangbang" ? "GangbangLevelAdStatus" : "LevelAdStatus";
     
@@ -534,8 +535,12 @@ handlers.claimQuestReward = function (args, context) {
     // Update the level ad status.
     if (levelAdStatus[newLevelCompleted - 1] === null) {
         levelAdStatus[newLevelCompleted - 1] = 0;
-        var extraD = newLevelCompleted % 5 === 0 ? 10 : 5,
-        d = extraD + d;
+        if (isVip !== undefined){
+            if (isVip === true) {
+                var extraD = newLevelCompleted % 5 === 0 ? 10 : 5,
+                d = extraD + d;
+            }
+        }
     }
     
     // Save the updated level ad status data.

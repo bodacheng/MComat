@@ -89,6 +89,7 @@ public partial class CloudScript
                         FunctionParameter = new
                         {
                             stage = stage,
+                            isVip = PlayerAccountInfo.Me.noAdsState,
                             stageType = "arcade"
                         }
                     },
