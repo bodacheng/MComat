@@ -152,7 +152,7 @@ public class RewardedAdsButton : MonoBehaviour
         
         // create our request used to load the ad.
         var adRequest = new AdRequest();
-        adRequest.Keywords.Add("unity-admob-sample");
+        //adRequest.Keywords.Add("unity-admob-sample");
 
         // send the request to load the ad.
         InterstitialAd.Load(_adUnitId, adRequest,
