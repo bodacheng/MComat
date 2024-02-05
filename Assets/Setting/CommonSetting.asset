@@ -26,6 +26,8 @@ MonoBehaviour:
   languageCodeFile: LanguageCode
   shortStoryFile: short_story
   gbShortStoryFile: gb_short_story
+  admob_interstitial_iosKey: ca-app-pub-9232931129246316/2104157226
+  admob_interstitial_androidKey: ca-app-pub-9232931129246316/7800743321
   startThemeAddressKey: music/start
   lobbyThemeAddressKey: music/lobby
   fightThemeAddressKey1: music/fight1

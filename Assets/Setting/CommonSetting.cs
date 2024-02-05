@@ -35,6 +35,11 @@ public class CommonSetting : ScriptableObject
     [Tooltip("GB短故事文件")]
     [SerializeField] string gbShortStoryFile = "gb_short_story";
 
+    [Tooltip("admob interstitial ios Key")] 
+    [SerializeField] string admob_interstitial_iosKey;
+    [Tooltip("admob interstitial android Key")] 
+    [SerializeField] string admob_interstitial_androidKey;
+    
     [Tooltip("audio source key")]
     [SerializeField] string startThemeAddressKey = "music/start";
     [SerializeField] string lobbyThemeAddressKey = "music/lobby";
@@ -101,6 +106,9 @@ public class CommonSetting : ScriptableObject
     public static string GBShortStoryFile;
     public static string StageModeFile;
 
+    public static string Admob_interstitial_iosKey;
+    public static string Admob_interstitial_androidKey;
+
     public static string StartThemeAddressKey;
     public static string LobbyThemeAddressKey;
     public static string FightThemeAddressKey1;
@@ -150,6 +158,9 @@ public class CommonSetting : ScriptableObject
         GBShortStoryFile = gbShortStoryFile;
         StageModeFile = stageModeFile;
         PassiveSKillFile = passiveSKillFile;
+
+        Admob_interstitial_iosKey = admob_interstitial_iosKey;
+        Admob_interstitial_androidKey = admob_interstitial_androidKey;
         
         LobbyThemeAddressKey = lobbyThemeAddressKey;
         StartThemeAddressKey = startThemeAddressKey;

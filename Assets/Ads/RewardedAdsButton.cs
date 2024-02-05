@@ -6,8 +6,6 @@ using GoogleMobileAds.Api;
 public class RewardedAdsButton : MonoBehaviour
 {
     [SerializeField] Button _showAdButton;
-    [SerializeField] string _androidAdUnitId = "Interstitial_Android";
-    [SerializeField] string _iOSAdUnitId = "Interstitial_iOS";
     [SerializeField] bool reloadAfterWatched;
     [SerializeField] Text text;
     string _adUnitId = null; // This will remain null for unsupported platforms
@@ -71,9 +69,9 @@ public class RewardedAdsButton : MonoBehaviour
     {
         // Get the Ad Unit ID for the current platform:
 #if UNITY_IOS
-        _adUnitId = _iOSAdUnitId;
+        _adUnitId = CommonSetting.Admob_interstitial_iosKey;
 #elif UNITY_ANDROID
-        _adUnitId = _androidAdUnitId;
+        _adUnitId = CommonSetting.Admob_interstitial_androidKey;
 #endif
     }
     
