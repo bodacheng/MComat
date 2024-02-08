@@ -858,7 +858,7 @@ PlayerSettings:
     WebGL: CT_BWF
     Windows Store Apps: CT_BWF
     XboxOne: CT_BWF
-    iPhone: 
+    iPhone: CT_BWF;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API
     tvOS: CT_BWF
   additionalCompilerArguments: {}
   platformArchitecture:
