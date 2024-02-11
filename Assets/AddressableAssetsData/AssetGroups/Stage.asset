@@ -624,7 +624,7 @@ MonoBehaviour:
     - quest
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c791a56791db14bb7b7ab43f5a44258f
-    m_Address: 102
+    m_Address: 112
     m_ReadOnly: 0
     m_SerializedLabels:
     - quest
@@ -727,6 +727,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3249df490377d47b2bc80083429750bc
     m_Address: 120
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - quest
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed0f9611888a7448bafa47fb537c7027
+    m_Address: 102
     m_ReadOnly: 0
     m_SerializedLabels:
     - quest
