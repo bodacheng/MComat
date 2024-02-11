@@ -50,6 +50,7 @@ MonoBehaviour:
   team1AIMode: 0
   team2AIMode: 0
   dumbAIDecisionDelay: 20
+  dreamComboAIRateNum: 20
   stageRefLevel: 1.2
   team2GroupSet:
   - id: 0
