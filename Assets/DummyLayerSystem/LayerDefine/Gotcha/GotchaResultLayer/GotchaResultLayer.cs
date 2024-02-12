@@ -68,6 +68,8 @@ public partial class GotchaResultLayer : UILayer
         }
         return (stoneFigureName, flashName, explosionName);
     }
+
+    private string gotchaId;
     
     private class StoneFallEffectSet
     {
@@ -145,8 +147,13 @@ public partial class GotchaResultLayer : UILayer
         await UniTask.WhenAll(tasks);
     }
     
-    public void Setup()
+    public void Setup(string gotchaId, Action<string, string, int> nine)
     {
+        this.gotchaId = gotchaId;
+        
+        GDGotchaBtn.Setup(nine);
+        DMGotchaBtn.Setup(nine);
+        
         Skip.onClick.AddListener(SkipStarFallAnim);
         SpeedOnce.onClick.AddListener(SpeedOneGotchaAnim);
         SetWaitPos();

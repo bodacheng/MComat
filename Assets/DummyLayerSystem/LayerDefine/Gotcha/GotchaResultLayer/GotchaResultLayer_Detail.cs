@@ -5,7 +5,9 @@ public partial class GotchaResultLayer : UILayer
 {
     [SerializeField] RectTransform stoneDetailT;
     [SerializeField] SkillStoneDetail _stoneDetail;
-
+    [SerializeField] GotchaBtn GDGotchaBtn;
+    [SerializeField] GotchaBtn DMGotchaBtn;
+    
     public void ShowDetail(string skillId)
     {
         stoneDetailT.gameObject.SetActive(true);

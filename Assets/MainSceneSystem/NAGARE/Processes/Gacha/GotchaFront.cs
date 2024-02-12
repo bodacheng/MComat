@@ -100,18 +100,22 @@ public class GotchaFront : MSceneProcess
     {
         PreScene.target.trySwitchToStep(MainSceneStep.DropTableInfo, dropTableId, true);
     }
-    
-    /// <summary>
-    /// 缺少消费关联处理
-    /// </summary>
+
+    private bool processingGotcha = false;
     void NineTimes(string itemId, string currencyCode, int currencyCount)
     {
+        if (processingGotcha)
+        {
+            return;
+        }
+        processingGotcha = true;
         switch (currencyCode)
         {
             case "DM":
                 if (Currencies.DiamondCount.Value < currencyCount)
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.ShopTop);
+                    processingGotcha = false;
                     return;
                 }
                 break;
@@ -119,6 +123,7 @@ public class GotchaFront : MSceneProcess
                 if (Currencies.CoinCount.Value < currencyCount)
                 {
                     PopupLayer.ArrangeWarnWindow(Translate.Get("NoEnoughGD"));
+                    processingGotcha = false;
                     return;
                 }
                 break;
@@ -141,7 +146,7 @@ public class GotchaFront : MSceneProcess
             },
             (x) =>
             {
-                var gotStones = new List<StoneOfPlayerInfo> ();
+                var gotStones = new List<StoneOfPlayerInfo>();
                 if (x.Items.Count > 0)
                 {
                     foreach (var skillId in x.Items[0].BundleContents)
@@ -157,12 +162,14 @@ public class GotchaFront : MSceneProcess
                 PlayFabReadClient.LoadItems(null);
                 
                 GotchaResult.Result = gotStones;
-                PreScene.target.trySwitchToStep(MainSceneStep.GotchaResult, true);
+                PreScene.target.trySwitchToStep(MainSceneStep.GotchaResult, itemId, true);
                 _extraSuccessAction?.Invoke();
+                processingGotcha = false;
             },
             (x) =>
             {
                 PopupLayer.ArrangeWarnWindow(x.ErrorMessage);
+                processingGotcha = false;
             });
     }
 }
