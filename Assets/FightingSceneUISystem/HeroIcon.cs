@@ -53,11 +53,18 @@ public class HeroIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 return;
             ChangeIcon(pic, unitConfig.element);
             LightOn();
-            if ((withSkillCheck && unitInfoFormal.set.CheckEdit() != SkillSet.SkillEditError.Perfect) 
+            var skillEditCheck = unitInfoFormal.set.CheckEdit();
+            if ((withSkillCheck && skillEditCheck != SkillSet.SkillEditError.Perfect) 
                 ||
                 (teamCountGet != null && teamCountGet() == 0))
             {
                 Grey();
+            }
+            
+            var unitListItem = transform.GetComponent<UnitListItem>();
+            if (unitListItem != null)
+            {
+                unitListItem.DecideSkillEquipFlg(skillEditCheck);
             }
         }
         else

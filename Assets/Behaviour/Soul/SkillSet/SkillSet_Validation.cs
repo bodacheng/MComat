@@ -5,10 +5,11 @@ public partial class SkillSet
 {
     public enum SkillEditError
     {
+        Empty,
+        NotFull,
         UnBalanced,
         RepeatedSkill,
         NoNormalStart,
-        NotFull,
         NoAtLeastTwoEx, // Tutorial
         Perfect
     }
@@ -16,16 +17,31 @@ public partial class SkillSet
     // 判断技能组是否合法。包括了首技能有无普攻，有无重复，总点数是否平衡 这三方面
     public static SkillEditError CheckEdit(string a1, string a2, string a3, string b1, string b2, string b3, string c1, string c2, string c3, bool atLeastTwoExSkill = false)
     {
-        var wholePoint = SkillBalancePoint(a1, a2, a3, b1, b2, b3, c1, c2, c3);
-        if (wholePoint < 0)
+        bool IsEmpty(string skillId)
         {
-            return SkillEditError.UnBalanced;
+            if (!HasStone(skillId))
+            {
+                return true;
+            }
+            var passiveSkills = UnitPassiveTable.GetPassiveSKillRecordIds();
+            return passiveSkills.Contains(skillId);
         }
         
         bool HasStone(string skillID)
         {
             var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skillID);
             return skillConfig != null;
+        }
+        
+        if (IsEmpty(a1) && IsEmpty(a2) && IsEmpty(a3) && IsEmpty(b1) && IsEmpty(b2) && IsEmpty(b3) && IsEmpty(c1) && IsEmpty(c2) && IsEmpty(c3))
+        {
+            return SkillEditError.Empty;
+        }
+        
+        var wholePoint = SkillBalancePoint(a1, a2, a3, b1, b2, b3, c1, c2, c3);
+        if (wholePoint < 0)
+        {
+            return SkillEditError.UnBalanced;
         }
         
         if (!(HasStone(a1) && HasStone(a2) && HasStone(a3) &&

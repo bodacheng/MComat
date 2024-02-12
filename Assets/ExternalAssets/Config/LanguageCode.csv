@@ -124,6 +124,9 @@ SkillEditInstruction2,"A blue flashing bar represents +1 balance value, while a 
 IntroOfCombo,"The first column skill is the initially triggered skill, and after any skill in the left column is activated, it can be followed by any skill in the adjacent right column (The third column skills can follow the first column skills)",第一列のスキルは最初にトリガーされるスキルで、左列の任意のスキルが発動された後、隣接する右列の任意のスキルに続けることができます（第三列のスキルは第一列のスキルに続けることができます）,第一列技能为最初触发技能，左列任意技能发动后可被相邻右列任意技能接续（第三列技能可被第一列技能接续）
 IntroOfDreamCombo,"The dream combo will release all non-normal skills in sequence from top to bottom, left to right, and it will not consume energy",ドリームコンボは、上から下へ、左から右への順序で全ての必殺技を順次発動し、エネルギーを消耗しない。, 梦幻连招会以从上到下，从左到右顺序依次释放所有非普通技能，并且不会消耗能量。
 ,,,
+qualifiedToFight,Ready for Battle,スキル完備,技能完备
+illegalToFight,Misconfigured,配置不当,配置不当
+,,,
 ArenaUnlocked,The arena is now open!,アリーナが開放されました!,竞技场已开启！
 GangbangUnlocked,The Chaos Battle is now open!,混沌チャレンジが開放されました!,混沌模式已开启！
 TutorialCompleted,Clear level 5 to obtain new character Tetsuya and unlock the arena!,ステージ5をクリアすると、新しいキャラクター鉄也を入手し、アリーナがアンロックされます！,闯过第五关即可获取新角色铁也并解锁竞技场！

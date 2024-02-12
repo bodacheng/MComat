@@ -44,18 +44,18 @@ public class UnitFilter : MonoBehaviour
         }
     }
 
-    List<HeroIcon> TypeFilter(List<HeroIcon> origin_mainMenuIcons)
+    List<HeroIcon> TypeFilter(List<HeroIcon> originMainMenuIcons)
     {
         var new_mainMenuIcons = new List<HeroIcon>();
         if (typeDropDown.options.Count > 0 && typeDropDown.options[typeDropDown.value] != null)
         {
-            for (var i = 0; i < origin_mainMenuIcons.Count; i++)
+            for (var i = 0; i < originMainMenuIcons.Count; i++)
             {
-                if (origin_mainMenuIcons[i] != null)
+                if (originMainMenuIcons[i] != null)
                 {
-                    if (origin_mainMenuIcons[i].unitConfig.TYPE == typeDropDown.options[typeDropDown.value].text)
+                    if (originMainMenuIcons[i].unitConfig.TYPE == typeDropDown.options[typeDropDown.value].text)
                     {
-                        new_mainMenuIcons.Add(origin_mainMenuIcons[i]);
+                        new_mainMenuIcons.Add(originMainMenuIcons[i]);
                     }
                 }
                 else
@@ -66,7 +66,7 @@ public class UnitFilter : MonoBehaviour
             return new_mainMenuIcons;
         }
         Debug.Log("typeDropDown错误。当前type 有：" + typeDropDown.options.Count + "个值");
-        return origin_mainMenuIcons;
+        return originMainMenuIcons;
     }
     
     List<HeroIcon> OrderIconsByZokusei(List<HeroIcon> origin_mainMenuIcons)
