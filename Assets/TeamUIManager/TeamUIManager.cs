@@ -93,6 +93,12 @@ namespace FightScene
             tempSi?.RefreshExBar(currentEx);
         }
         
+        void RefreshSuperComboFlg(Data_Center dataCenter, bool on)
+        {
+            UnitIconDic.TryGetValue(dataCenter, out var tempSi);
+            tempSi?.DreamComboFlg.SetActive(on);
+        }
+        
         public void Refresh(Data_Center fighting = null)
         {
             foreach (var dataCenter in _teamMembers.GetValues())

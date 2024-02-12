@@ -91,6 +91,11 @@ namespace FightScene
                     RefreshExBar(center, x);
                 }).AddTo(gameObject);
                 
+                center.FightDataRef.DreamComboGauge.Subscribe(x =>
+                {
+                    RefreshSuperComboFlg(center,center.FightDataRef.HasPlentyDreamGauge());
+                }).AddTo(RTFightManager.Target.Disposables);
+                
                 center.FightDataRef.Resistance.Subscribe(x =>
                     {
                         RefreshResistanceBar(center, x);
@@ -118,8 +123,8 @@ namespace FightScene
                         UnitIconDic.TryGetValue(x, out var targetIcon);
                         if (targetIcon != null)
                         {
-                            selectedFrame.SetParent(targetIcon.transform);
-                            selectedFrame.transform.localPosition = new Vector3(0,4.5f,0);
+                            selectedFrame.SetParent(targetIcon.Icon.transform);
+                            selectedFrame.transform.localPosition = Vector3.zero;
                             selectedFrame.transform.localScale = Vector3.one;
                             selectedFrame.gameObject.SetActive(true);
                             selectedFrame.SetAsFirstSibling();

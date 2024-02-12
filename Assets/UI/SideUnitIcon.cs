@@ -8,11 +8,12 @@ public class SideUnitIcon : MonoBehaviour {
     [SerializeField] Text hpText;
     [SerializeField] Slider resistBar;
     [SerializeField] GameObject[] charges;
+    [SerializeField] GameObject dreamComboFlg;
     [SerializeField] HeroIcon focusingCharIcon;
     [SerializeField] Text teamIndicator;
     public HeroIcon Icon => focusingCharIcon;
     public Text TeamIndicator => teamIndicator;
-
+    public GameObject DreamComboFlg => dreamComboFlg;
     private Tweener resistBarTweener;
     public void RefreshResistanceBar(float resistance)
     {

@@ -48,6 +48,11 @@ namespace FightScene
                     RefreshExBar(center, x);
                 }).AddTo(RTFightManager.Target.Disposables);
                 
+                center.FightDataRef.DreamComboGauge.Subscribe(x =>
+                {
+                    RefreshSuperComboFlg(center,center.FightDataRef.HasPlentyDreamGauge());
+                }).AddTo(RTFightManager.Target.Disposables);
+                
                 center.FightDataRef.Resistance.Subscribe(x =>
                 {
                     RefreshResistanceBar(center, x);
