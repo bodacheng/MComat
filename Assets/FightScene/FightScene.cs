@@ -17,7 +17,7 @@ namespace FightScene
         [Header("FX")]
         public Camera fxCamera;
         
-        [SerializeField] RewardedAdsButton watchAdBtnPrefab;
+        [SerializeField] InterstitialAdsButton watchAdBtnPrefab;
 
         public static FightScene target;
         
@@ -25,7 +25,7 @@ namespace FightScene
         
         public static List<GangbangInfo.SoldierGroupSet> team1GroupSet;
         
-        private RewardedAdsButton watchBtn;
+        private InterstitialAdsButton watchBtn;
         public void ShowAds(int extraAdReward, RectTransform btnTarget, Action afterWatched, int finishedStage = -1)
         {
             if (extraAdReward > 0 && watchBtn != null)

@@ -8,7 +8,7 @@ public class AdsBtnRender : MonoBehaviour
     [SerializeField] private Text remainCount;
     [SerializeField] private Text ticketChargeCountDown;
     [SerializeField] private RectTransform ticketChargeCountDownT;
-    [SerializeField] private RewardedAdsButton rewardedAdsButton;
+    [SerializeField] private InterstitialAdsButton interstitialAdsButton;
 
     //[Header("google ads")]
     //[SerializeField] private GoogleMobileAdsManager googleMobileAdsManager;
@@ -18,8 +18,8 @@ public class AdsBtnRender : MonoBehaviour
     public void SetupForMainScene()
     {
         // unity
-        rewardedAdsButton.LoadInterstitialAd();
-        rewardedAdsButton.SetWatchedAdExtraProcess(
+        interstitialAdsButton.LoadInterstitialAd();
+        interstitialAdsButton.SetWatchedAdExtraProcess(
             () =>
             {
                 // Grant a reward.
@@ -61,7 +61,7 @@ public class AdsBtnRender : MonoBehaviour
                         }
                     }).AddTo(gameObject);
                 }
-                rewardedAdsButton.HasTicket = x > 0;
+                interstitialAdsButton.HasTicket = x > 0;
                 //googleMobileAdsManager.Enable(x > 0);
             }
         ).AddTo(gameObject);

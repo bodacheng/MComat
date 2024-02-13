@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using GoogleMobileAds.Api;
 
-public class RewardedAdsButton : MonoBehaviour
+public class InterstitialAdsButton : MonoBehaviour
 {
     [SerializeField] Button _showAdButton;
     [SerializeField] bool reloadAfterWatched;
