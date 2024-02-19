@@ -8,8 +8,6 @@ namespace mainMenu
     public class UnitOptionLayer : UILayer
     {
         [SerializeField] DedicatedCameraConnector _connector;
-        [SerializeField] float cameraConnectorRightSpace = 1044;
-        [SerializeField] float cameraConnectorVerticalSpace = 150;
         [SerializeField] Image view2D;
         [SerializeField] Animator unitOutAnimator;
         
@@ -30,7 +28,7 @@ namespace mainMenu
 
         public void RefreshMemberDetailPageByFocusingUnit()
         {
-            ResizeCameraConnectorRefLeft(_connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+            ResizeCameraConnectorRefTop(_connector.GetComponent<RectTransform>(), -(Screen.height - Screen.safeArea.size.y));
             
             if (PreScene.target.Focusing == null || PreScene.target.Focusing.id == null || PreScene.target.Focusing.r_id == null)
             {

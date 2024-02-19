@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UniRx;
+using UnityEngine.UI;
 
 namespace mainMenu
 {
@@ -18,7 +19,7 @@ namespace mainMenu
         [SerializeField] GameObject selectedFrame;
         
         [Header("宠物栏parent")]
-        [SerializeField] RectTransform unitBoxContainer;
+        [SerializeField] GridLayoutGroup grid;
         
         readonly List<string> typeOfUnitsIHave = new List<string>();
         readonly IDictionary<string, HeroIcon> heroIcons = new Dictionary<string, HeroIcon>();
@@ -52,14 +53,13 @@ namespace mainMenu
                 HeroIcon.SelectedFeature(targetingIcon?.transform, selectedFrame, 1f);
             }).AddTo(gameObject);
             
-            unitBoxContainer.gameObject.SetActive(true);
+            grid.gameObject.SetActive(true);
             UnitIconsGenerate(dic, clearBtnFeature, withSkillCheck);
             foreach (var keyValuePair in heroIcons)
             {
                 keyValuePair.Value.gameObject.SetActive(false);
             }
             var icons = filter.OrderIcons(heroIcons.Values.ToList());
-            var row = 1;
             for (var i = 0; i < icons.Count; i++)
             {
                 var targetingIcon = icons[i];
@@ -69,13 +69,12 @@ namespace mainMenu
                     return;
                 }
                 targetingIcon.gameObject.SetActive(true);
-                targetingIcon.transform.SetParent(unitBoxContainer);
+                targetingIcon.transform.SetParent(grid.transform);
                 targetingIcon.transform.localScale = Vector3.one;
                 targetingIcon.transform.localPosition = Vector3.zero;
             }
-            
-            row = 1 + icons.Count / 7;
-            unitBoxContainer.sizeDelta = new Vector2(unitBoxContainer.rect.width, noMagic.GetComponent<RectTransform>().rect.height * row);
+
+            SetGridGroupSize(grid, grid.transform.GetComponent<RectTransform>().offsetMin.x);
             displayUnitIconsAfterAction?.Invoke();
         }
 

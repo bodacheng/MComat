@@ -27,15 +27,13 @@ public class FrontLayer : UILayer
     [SerializeField] DedicatedCameraConnector camConnector;
     [SerializeField] Button viewSwitchBtn;// 默认是非active
     [SerializeField] Text viewText;
-    [SerializeField] float cameraConnectorRightSpace = 940;
-    [SerializeField] float cameraConnectorVerticalSpace = 150;
     [SerializeField] float skillShowInterval = 5;
 
     public GameObject HasStoneToBeUpdateBadge => hasStoneToBeUpdateBadge;
     
     public void Initialise(PreScene pre)
     {
-        ResizeCameraConnectorRefLeft(camConnector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+        ResizeCameraConnectorRefTop(camConnector.GetComponent<RectTransform>(), -(Screen.height - Screen.safeArea.size.y));
         // CameraConnectorCal(view2D.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
         // view2D.GetComponent<RectTransform>().anchoredPosition = camConnector.GetComponent<RectTransform>().anchoredPosition + new Vector2(camConnector.GetComponent<RectTransform>().sizeDelta.x / 2,0);
         
