@@ -175,7 +175,7 @@ public partial class SkillEditLayer : UILayer
         toDo?.Invoke(this);
         gameObject.SetActive(true);
         
-        CameraConnectorCal(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+        ResizeCameraConnectorRefLeft(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
         
         nineSlot.comboShowBtn.SetListener(()=> ShowCombo(false).Forget());
         nineSlot.dreamComboShowBtn.SetListener(()=> ShowCombo(true).Forget());

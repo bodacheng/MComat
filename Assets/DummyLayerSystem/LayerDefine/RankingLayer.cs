@@ -17,7 +17,7 @@ public class RankingLayer : UILayer
     
     void OnClickUnitIcon(UnitInfo unitInfo)
     {
-        CameraConnectorCal(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+        ResizeCameraConnectorRefLeft(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
         
         var set = unitInfo.set;
         miniNineForShow.ShowStones(

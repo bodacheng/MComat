@@ -36,7 +36,7 @@ public class ArcadeTop : UILayer
         lastChapter.onClick.AddListener(ShowLastStages);
         jumpToNewStage.onClick.AddListener(ToNew);
         
-        CameraConnectorCal(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+        ResizeCameraConnectorRefLeft(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
     }
     
     public void SetupArcade(int maxStageNum, LoadStageDelegate loadFightInfo, Action<int, bool> directToStage)
