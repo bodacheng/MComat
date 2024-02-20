@@ -35,6 +35,7 @@ public class MobileInputsManager : MonoBehaviour {
     [SerializeField] UltimateJoystick joystick;
     [SerializeField] Transform effectsParent;
     [SerializeField] RadialSegmentedHealthBar radialSegmentedHealthBar;
+    [SerializeField] float buttonStretchEdgeDis = 5f;
     
     //攻击键系成员
     readonly IDictionary<string, GameObject> _aIcons = new Dictionary<string, GameObject>();
@@ -57,14 +58,28 @@ public class MobileInputsManager : MonoBehaviour {
                 return;
             }
             DicAdd<string, GameObject>.Add(dic, skillID, icon.gameObject);
-            Parent(icon.transform, btn.transform);
+            Parent(icon.transform, btn.transform, buttonStretchEdgeDis);
         }
         
-        void Parent(Transform t, Transform target)
+        void Parent(Transform t, Transform target, float edgeDis)
         {
             t.SetParent(target);
             t.localPosition = Vector3.zero;
             t.localScale = Vector3.one;
+            
+            var rectTransform = t.GetComponent<RectTransform>();
+
+            // 设置四个方向的offset为0
+            rectTransform.offsetMin = new Vector2(edgeDis, edgeDis); // Left, Bottom
+            rectTransform.offsetMax = new Vector2(-edgeDis, -edgeDis); // Right, Top
+
+            // 设置锚点为中心点
+            rectTransform.anchorMin = new Vector2(0, 0);
+            rectTransform.anchorMax = new Vector2(1, 1);
+            
+            // 设置轴心点为中心
+            rectTransform.pivot = new Vector2(0.5f, 0.5f);
+            
             t.gameObject.SetActive(false);
         }
     }
