@@ -21,7 +21,7 @@ public class SkillEditPage : MSceneProcess
         layer = UILayerLoader.Load<SkillEditLayer>();
         await layer.Setup((x) =>
         {
-            x.connector.ShowMyModel(PreScene.target.Focusing != null ? PreScene.target.Focusing.id : null).Forget();
+            x.CamConnector.ShowMyModel(PreScene.target.Focusing != null ? PreScene.target.Focusing.id : null).Forget();
         });
         ReturnLayer.MoveFront();
         SetLoaded(true);

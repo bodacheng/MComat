@@ -11,9 +11,9 @@ using Button = UnityEngine.UI.Button;
 
 public partial class SkillEditLayer : UILayer
 {
-    public DedicatedCameraConnector connector;
-    [SerializeField] float cameraConnectorRightSpace = 1320;
-    [SerializeField] float cameraConnectorVerticalSpace = 200;
+    [SerializeField] DedicatedCameraConnector camConnector;
+    
+    public DedicatedCameraConnector CamConnector=>camConnector;
     
     [Header("九宫格")]
     public TheNineSlot nineSlot;
@@ -52,19 +52,19 @@ public partial class SkillEditLayer : UILayer
         returnLayer?.gameObject.SetActive(false);
         mask.gameObject.SetActive(true);
         EffectsManager.GenerateEffect("super_combo_explosion", FightGlobalSetting.EffectPathDefine(), 
-            connector.FocusingC.WholeT.position, connector.FocusingC.WholeT.rotation, connector.FocusingC.WholeT).Forget();
-        connector.FocusingC.AnimationManger.AddSpeedBuff("dreamCombo", 1.2f);
+            camConnector.FocusingC.WholeT.position, camConnector.FocusingC.WholeT.rotation, camConnector.FocusingC.WholeT).Forget();
+        camConnector.FocusingC.AnimationManger.AddSpeedBuff("dreamCombo", 1.2f);
         
         var list = dreamCombo ? nineSlot.GetDreamComboStones() : nineSlot.GetRandomComboStones();
         for (var i = 0; i < list.Count; i++)
         {
             var stone = list[i];
-            connector.FocusingC._MyBehaviorRunner._SkillCancelFlag.Cancel_Flag = false;
+            camConnector.FocusingC._MyBehaviorRunner._SkillCancelFlag.Cancel_Flag = false;
             await RunSkillAndShowTransition_Combo(stone, i < list.Count - 1 ? list[i+1] : null);
-            await UniTask.WaitUntil(() => connector.FocusingC._MyBehaviorRunner._SkillCancelFlag.Cancel_Flag);
+            await UniTask.WaitUntil(() => camConnector.FocusingC._MyBehaviorRunner._SkillCancelFlag.Cancel_Flag);
         }
         
-        connector.FocusingC.AnimationManger.RemoveSpeedBuff("dreamCombo");
+        camConnector.FocusingC.AnimationManger.RemoveSpeedBuff("dreamCombo");
         
         mask.gameObject.SetActive(false);
         returnLayer?.gameObject.SetActive(true);
@@ -94,7 +94,7 @@ public partial class SkillEditLayer : UILayer
         stonesBox._tabEffects.SkillButtonExplosion(stone._SkillConfig.SP_LEVEL, 
             PosCal.GetWorldPos(PreScene.target.postProcessCamera, stone.GetComponent<RectTransform>(), 3), 
             stonesBox._tabEffects.transform);
-        await connector.SkillShowRunWithPrepare(stone._SkillConfig.REAL_NAME, false);
+        await camConnector.SkillShowRunWithPrepare(stone._SkillConfig.REAL_NAME, false);
     }
     
     async UniTask RunSkillAndShowTransition(SKStoneItem stone)
@@ -104,7 +104,7 @@ public partial class SkillEditLayer : UILayer
         // stonesBox._tabEffects.SkillButtonExplosion(stone._SkillConfig.SP_LEVEL, 
         //     PosCal.GetWorldPos(PreScene.target.postProcessCamera, stone.GetComponent<RectTransform>(), 3), 
         //     stonesBox._tabEffects.transform);
-        await connector.SkillShowRunWithPrepare(stone._SkillConfig.REAL_NAME, true);
+        await camConnector.SkillShowRunWithPrepare(stone._SkillConfig.REAL_NAME, true);
     }
     
     async void TransitionEffect(SkillStoneSlot start, SkillStoneSlot end)
@@ -145,8 +145,7 @@ public partial class SkillEditLayer : UILayer
     public async UniTask Setup(Action<SkillEditLayer> toDo = null)
     {
         Initialized = false;
-        stonesBox.SetBoxHeight( 90 + 200 + 100);//90是那个距离条filter的高度，200是skillStoneDetail的高度，120是主观的额外空间
-        SetGridGroupSize(stonesBox.Grid,0);
+        //stonesBox.SetBoxHeight( 90 + 200 + 100);//90是那个距离条filter的高度，200是skillStoneDetail的高度，120是主观的额外空间
         stonesBox.GenerateCells(9);
         gameObject.SetActive(false);
         nineSlot.PrintSkillInfo = skillStoneDetail.RefreshInfo;
@@ -176,7 +175,8 @@ public partial class SkillEditLayer : UILayer
         toDo?.Invoke(this);
         gameObject.SetActive(true);
         
-        ResizeCameraConnectorRefLeft(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+        //ResizeCameraConnectorRefLeft(camConnector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+        ResizeCameraConnectorRefTop(camConnector.GetComponent<RectTransform>(), -(Screen.height - Screen.safeArea.size.y));
         
         nineSlot.comboShowBtn.SetListener(()=> ShowCombo(false).Forget());
         nineSlot.dreamComboShowBtn.SetListener(()=> ShowCombo(true).Forget());
@@ -315,7 +315,7 @@ public partial class SkillEditLayer : UILayer
     public void SkillEditConfirmAnimation()
     {
         var personalEffectsPath = FightGlobalSetting.EffectPathDefine();
-        EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, connector.FocusingC.WholeT.position, Quaternion.identity, null).Forget();
+        EffectsManager.GenerateEffect("skillEditConfirmEffect", personalEffectsPath, camConnector.FocusingC.WholeT.position, Quaternion.identity, null).Forget();
     }
     
     public void OpenTutorial1()
