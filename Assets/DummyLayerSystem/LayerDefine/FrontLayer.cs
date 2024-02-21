@@ -33,7 +33,8 @@ public class FrontLayer : UILayer
     
     public void Initialise(PreScene pre)
     {
-        ResizeCameraConnectorRefTop(camConnector.GetComponent<RectTransform>(), -(Screen.height - Screen.safeArea.size.y));
+        ResizeCameraConnectorRefTopAndSideWidth(camConnector.GetComponent<RectTransform>(), 
+            ((Screen.height - Screen.safeArea.size.y) + 150), 900);
         // CameraConnectorCal(view2D.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
         // view2D.GetComponent<RectTransform>().anchoredPosition = camConnector.GetComponent<RectTransform>().anchoredPosition + new Vector2(camConnector.GetComponent<RectTransform>().sizeDelta.x / 2,0);
         

@@ -28,7 +28,7 @@ namespace mainMenu
 
         public void RefreshMemberDetailPageByFocusingUnit()
         {
-            ResizeCameraConnectorRefTop(_connector.GetComponent<RectTransform>(), -(Screen.height - Screen.safeArea.size.y));
+            ResizeCameraConnectorRefTopAndSideWidth(_connector.GetComponent<RectTransform>(), -(Screen.height - Screen.safeArea.size.y));
             
             if (PreScene.target.Focusing == null || PreScene.target.Focusing.id == null || PreScene.target.Focusing.r_id == null)
             {

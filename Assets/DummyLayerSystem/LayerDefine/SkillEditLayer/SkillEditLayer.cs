@@ -146,6 +146,7 @@ public partial class SkillEditLayer : UILayer
     {
         Initialized = false;
         //stonesBox.SetBoxHeight( 90 + 200 + 100);//90是那个距离条filter的高度，200是skillStoneDetail的高度，120是主观的额外空间
+        SetGridGroupSize(stonesBox.Grid,0);
         stonesBox.GenerateCells(9);
         gameObject.SetActive(false);
         nineSlot.PrintSkillInfo = skillStoneDetail.RefreshInfo;
@@ -176,7 +177,7 @@ public partial class SkillEditLayer : UILayer
         gameObject.SetActive(true);
         
         //ResizeCameraConnectorRefLeft(camConnector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
-        ResizeCameraConnectorRefTop(camConnector.GetComponent<RectTransform>(), -(Screen.height - Screen.safeArea.size.y));
+        ResizeCameraConnectorRefTopAndSideWidth(camConnector.GetComponent<RectTransform>(), (Screen.height - Screen.safeArea.size.y),1200);
         
         nineSlot.comboShowBtn.SetListener(()=> ShowCombo(false).Forget());
         nineSlot.dreamComboShowBtn.SetListener(()=> ShowCombo(true).Forget());
