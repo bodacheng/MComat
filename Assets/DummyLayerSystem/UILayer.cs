@@ -4,13 +4,7 @@ using UnityEngine.UI;
 
 public class UILayer : MonoBehaviour
 {
-    private string index;
-    
-    public string Index
-    {
-        get => index;
-        set => index = value;
-    }
+    public string Index { get; set; }
 
     public virtual void OnDestroy()
     {
@@ -26,24 +20,27 @@ public class UILayer : MonoBehaviour
     }
     
     /// <summary>
-    /// 
+    /// 这个使用的前提是privot (0.5,0)
+    /// 四周stretch，保持顶部距离和距离屏幕两边距离，整出个正方形。
     /// </summary>
     /// <param name="target"></param>
     /// <param name="cameraConnectorSideMinSpace"></param>
-    /// <param name="verticalSpace"></param>
-    protected void ResizeCameraConnectorRefTop(RectTransform target, float verticalSpace)
+    /// <param name="toTopEdgeSpace"></param>
+    protected void ResizeCameraConnectorRefTopAndSideWidth(RectTransform target, float toTopEdgeSpace, float toDownEdgeSpace = 0)
     {
         // 获取父对象的宽度
-        float parentWidth = target.rect.width;
+        float minHeight = PosCal.CanvasHeight - toDownEdgeSpace - toTopEdgeSpace;
         
         // 计算新的高度，这里的70是左边界和右边界的值
-        float newHeight = parentWidth - (target.offsetMin.x + target.offsetMax.x);
+        float newHeight = PosCal.CanvasWidth - (target.offsetMin.x + target.offsetMax.x);
+        newHeight = Mathf.Min(minHeight, newHeight);
         
         // 设置新的高度
         target.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
-        target.anchoredPosition = new Vector2(0, verticalSpace);
+        target.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, newHeight);
+        target.anchoredPosition = new Vector2(0, -toTopEdgeSpace);
     }
-
+    
     protected void SetGridGroupSize(GridLayoutGroup grid, float paddingLeftRight)
     {
         // 获取父对象的宽度

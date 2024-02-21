@@ -13,7 +13,10 @@ namespace mainMenu
         
         [Header("选中框")]
         [SerializeField] GameObject selectedFrame;
-        
+
+        [SerializeField] GridLayoutGroup grid;
+        [SerializeField] ScrollRect scrollRect;
+        public GridLayoutGroup Grid=> grid;
         public static GameObject Selected;
         readonly IDictionary<int, StoneCell> _cellsDic = new Dictionary<int, StoneCell>();
 
@@ -29,7 +32,6 @@ namespace mainMenu
         
         public void GenerateCells(int extraCellNum = 0)
         {
-            var gridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
             foreach (var kv in _cellsDic)
             {
                 kv.Value.gameObject.SetActive(false);
@@ -38,7 +40,7 @@ namespace mainMenu
             var hang = 1;
             var cellCount = BoxLength();
             cellCount += extraCellNum;
-            cellCount = ((cellCount / gridLayoutGroup.constraintCount) + 1) * gridLayoutGroup.constraintCount;
+            cellCount = ((cellCount / grid.constraintCount) + 1) * grid.constraintCount;
             for (int i = 0; i < cellCount; i++)
             {
                 if (!_cellsDic.ContainsKey(i))
@@ -60,8 +62,24 @@ namespace mainMenu
                 _cellsDic[i]._selected.SetActive(false);
             }
             
-            hang = cellCount / gridLayoutGroup.constraintCount + 1;
-            BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (gridLayoutGroup.cellSize.x + gridLayoutGroup.spacing.x) * hang);
+            hang = cellCount / grid.constraintCount + 1;
+            BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (grid.cellSize.x + grid.spacing.x) * hang);
+
+            var linesToShowInViewPort = 0;
+            while (true)
+            {
+                if ((linesToShowInViewPort+1) * (grid.cellSize.y + grid.spacing.y) < scrollRect.viewport.rect.height)
+                {
+                    linesToShowInViewPort++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            var viewPortHeight = linesToShowInViewPort * (grid.cellSize.y + grid.spacing.y);
+            scrollRect.viewport.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, viewPortHeight);
         }
         
         public void AddFeatureToCells(Action<StoneCell> action)
