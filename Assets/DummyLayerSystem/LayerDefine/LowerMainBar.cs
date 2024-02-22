@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using DummyLayerSystem;
 using UnityEngine;
 using mainMenu;
 
@@ -14,9 +13,36 @@ public class LowerMainBar : UILayer
     
     public void Initialise(PreScene pre)
     {
-        playTab.SetListener(() => pre.trySwitchToStep(MainSceneStep.FrontPage));
-        fighterTab.SetListener(() => pre.trySwitchToStep(MainSceneStep.UnitList));
-        stoneTab.SetListener(() => pre.trySwitchToStep(MainSceneStep.SkillStoneList));
-        gotchaTab.SetListener(() => pre.trySwitchToStep(MainSceneStep.GotchaFront));
+        playTab.SetListener(() =>
+        {
+            ReturnLayer.ReturnMissionList.Clear();
+            pre.trySwitchToStep(MainSceneStep.FrontPage);
+        });
+        fighterTab.SetListener(() =>
+        {
+            ReturnLayer.ReturnMissionList.Clear();
+            pre.trySwitchToStep(MainSceneStep.UnitList);
+        });
+        stoneTab.SetListener(() =>
+        {
+            ReturnLayer.ReturnMissionList.Clear();
+            pre.trySwitchToStep(MainSceneStep.SkillStoneList);
+        });
+        gotchaTab.SetListener(() =>
+        {
+            ReturnLayer.ReturnMissionList.Clear();
+            pre.trySwitchToStep(MainSceneStep.GotchaFront);
+        });
+    }
+
+    public static void Open()
+    {
+        var lowerMainBar = UILayerLoader.Load<LowerMainBar>();
+        lowerMainBar.Initialise(PreScene.target);
+        lowerMainBar.backBtn.gameObject.SetActive(ReturnLayer.ReturnMissionList.Count > 0);
+        if (ReturnLayer.ReturnMissionList.Count > 0)
+        {
+            lowerMainBar.backBtn.SetListener(ReturnLayer.POP);
+        }
     }
 }

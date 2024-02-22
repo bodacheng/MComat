@@ -127,6 +127,7 @@ public class FrontPage : MSceneProcess
         
         SSLevelUpManager.CalUpdateAllForms();
         _frontLayer.HasStoneToBeUpdateBadge.SetActive(SSLevelUpManager.HasStoneToBeUpdate());
+        LowerMainBar.Open();
         SetLoaded(true);
     }
     
