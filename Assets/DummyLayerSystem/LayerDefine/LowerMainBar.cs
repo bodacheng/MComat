@@ -8,10 +8,9 @@ public class LowerMainBar : UILayer
     [SerializeField] private BOButton fighterTab;
     [SerializeField] private BOButton stoneTab;
     [SerializeField] private BOButton gotchaTab;
+    [SerializeField] GameObject hasStoneToBeUpdateBadge;
     
-    [SerializeField] private BOButton backBtn;
-    
-    public void Initialise(PreScene pre)
+    void Initialise(PreScene pre)
     {
         playTab.SetListener(() =>
         {
@@ -33,16 +32,14 @@ public class LowerMainBar : UILayer
             ReturnLayer.ReturnMissionList.Clear();
             pre.trySwitchToStep(MainSceneStep.GotchaFront);
         });
+        
+        hasStoneToBeUpdateBadge.SetActive(SSLevelUpManager.HasStoneToBeUpdate());
     }
 
     public static void Open()
     {
         var lowerMainBar = UILayerLoader.Load<LowerMainBar>();
         lowerMainBar.Initialise(PreScene.target);
-        lowerMainBar.backBtn.gameObject.SetActive(ReturnLayer.ReturnMissionList.Count > 0);
-        if (ReturnLayer.ReturnMissionList.Count > 0)
-        {
-            lowerMainBar.backBtn.SetListener(ReturnLayer.POP);
-        }
+        lowerMainBar.transform.SetAsLastSibling();
     }
 }

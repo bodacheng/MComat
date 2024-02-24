@@ -15,11 +15,7 @@ public class FrontLayer : UILayer
     [SerializeField] BOButton ArcadeBtn;
     [SerializeField] BOButton GangbangBtn;
     [SerializeField] BOButton ArenaBtn;
-    [SerializeField] BOButton MemberBtn;
     [SerializeField] BOButton TrainBtn;
-    [SerializeField] BOButton StonesBtn;
-    [SerializeField] GameObject hasStoneToBeUpdateBadge;
-    [SerializeField] BOButton GotchaBtn;
     [SerializeField] Button SkillTestRBtn;
     [SerializeField] Button SkillTestMBtn;
     [SerializeField] Image view2D;
@@ -28,13 +24,11 @@ public class FrontLayer : UILayer
     [SerializeField] Button viewSwitchBtn;// 默认是非active
     [SerializeField] Text viewText;
     [SerializeField] float skillShowInterval = 5;
-
-    public GameObject HasStoneToBeUpdateBadge => hasStoneToBeUpdateBadge;
     
     public void Initialise(PreScene pre)
     {
         ResizeCameraConnectorRefTopAndSideWidth(camConnector.GetComponent<RectTransform>(), 
-            ((Screen.height - Screen.safeArea.size.y) + 150), 900);
+            ((Screen.height - Screen.safeArea.size.y) + 150), 750);
         // CameraConnectorCal(view2D.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
         // view2D.GetComponent<RectTransform>().anchoredPosition = camConnector.GetComponent<RectTransform>().anchoredPosition + new Vector2(camConnector.GetComponent<RectTransform>().sizeDelta.x / 2,0);
         
@@ -60,11 +54,8 @@ public class FrontLayer : UILayer
                 PopupLayer.ArrangeWarnWindow(Translate.Get("PlsClearStage5"));
             }
         });
-        MemberBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.UnitList));
         TrainBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SelfFightFront));
-        StonesBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SkillStoneList));
-        GotchaBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.GotchaFront));
-        
+
         SkillTestRBtn.onClick.AddListener(pre.BeginSkillTest_Rotation);
         SkillTestMBtn.onClick.AddListener(pre.BeginSkillTest_Multi);
         SkillTestRBtn.gameObject.SetActive(CommonSetting.DevMode); 
@@ -155,10 +146,10 @@ public class FrontLayer : UILayer
     {
         ArcadeBtn.interactable = btnCode == "arcade";
         ArenaBtn.interactable = btnCode == "arena";
-        MemberBtn.interactable = btnCode == "unit";
+        //MemberBtn.interactable = btnCode == "unit";
         TrainBtn.interactable = btnCode == "train";
-        StonesBtn.interactable = btnCode == "stones";
-        GotchaBtn.interactable = btnCode == "gotcha";
+        //StonesBtn.interactable = btnCode == "stones";
+        //GotchaBtn.interactable = btnCode == "gotcha";
 
         Transform localPos = null;
         switch (btnCode)
@@ -170,16 +161,16 @@ public class FrontLayer : UILayer
                 localPos = ArenaBtn.transform;
                 break;
             case "unit":
-                localPos = MemberBtn.transform;
+                //localPos = MemberBtn.transform;
                 break;
             case "train":
                 localPos = TrainBtn.transform;
                 break;
             case "stones":
-                localPos = StonesBtn.transform;
+                //localPos = StonesBtn.transform;
                 break;
             case "gotcha":
-                localPos = GotchaBtn.transform;
+                //localPos = GotchaBtn.transform;
                 break;
         }
 

@@ -23,6 +23,7 @@ public class SkillEditPage : MSceneProcess
         {
             x.CamConnector.ShowMyModel(PreScene.target.Focusing != null ? PreScene.target.Focusing.id : null).Forget();
         });
+        LowerMainBar.Open();
         ReturnLayer.MoveFront();
         SetLoaded(true);
     }
