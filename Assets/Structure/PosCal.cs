@@ -19,10 +19,6 @@ public static class PosCal
     {
         float screenAspect = (float)Screen.width / Screen.height;
         float refAspect = CanvasScaler.referenceResolution.x / CanvasScaler.referenceResolution.y;
-        if (screenAspect >= refAspect)
-        {
-            return 1;
-        }
         return screenAspect / refAspect;
     }
     
