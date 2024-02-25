@@ -10,7 +10,6 @@ namespace mainMenu
         [SerializeField] DedicatedCameraConnector _connector;
         [SerializeField] Image view2D;
         [SerializeField] Animator unitOutAnimator;
-        
         [Header("角色明细T，技能显示T")]
         [SerializeField] RectTransform MemberInfoT;
         
@@ -28,7 +27,7 @@ namespace mainMenu
 
         public void RefreshMemberDetailPageByFocusingUnit()
         {
-            ResizeCameraConnectorRefTopAndSideWidth(_connector.GetComponent<RectTransform>(), -(Screen.height - Screen.safeArea.size.y));
+            ResizeCameraConnectorRefTopAndSideWidth(_connector.GetComponent<RectTransform>(), -(Screen.height - Screen.safeArea.size.y), 860);
             
             if (PreScene.target.Focusing == null || PreScene.target.Focusing.id == null || PreScene.target.Focusing.r_id == null)
             {
@@ -63,8 +62,8 @@ namespace mainMenu
             }
             else
             {
-                UniTask.WhenAll(_connector.ShowMyModel(info.id), Set2DView(info.r_id, view2D, unitOutAnimator, 
-                    10, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(info.r_id))).Forget();
+                _connector.ShowMyModel(info.id).Forget();
+                // Set2DView(info.r_id, view2D, unitOutAnimator, 10, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(info.r_id));
             }
         }
         
