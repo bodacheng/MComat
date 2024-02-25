@@ -19,6 +19,10 @@ public static class PosCal
     {
         float screenAspect = (float)Screen.width / Screen.height;
         float refAspect = CanvasScaler.referenceResolution.x / CanvasScaler.referenceResolution.y;
+        if (screenAspect >= refAspect) // 这个处理（分歧，这种情况返回1）在横版项目是需要的，纵版却不需要，原因还没理解
+        {
+            return 1;
+        }
         return screenAspect / refAspect;
     }
     
