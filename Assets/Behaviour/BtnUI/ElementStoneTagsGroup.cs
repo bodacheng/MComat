@@ -81,10 +81,19 @@ public class ElementStoneTagsGroup
     {
         _btnEffectsSetsForStoneBox = new Dictionary<int, ParticleSystem>();
         
-        var normalTab = await CreateOneButtonIcon(element, 0);
-        var ex1Tab = await CreateOneButtonIcon(element, 1);
-        var ex2Tab = await CreateOneButtonIcon(element, 2);
-        var ex3Tab = await CreateOneButtonIcon(element, 3);
+        var tasks = new[] {
+            CreateOneButtonIcon(element, 0),
+            CreateOneButtonIcon(element, 1),
+            CreateOneButtonIcon(element, 2),
+            CreateOneButtonIcon(element, 3)
+        };
+        
+        var results = await UniTask.WhenAll(tasks);
+        
+        var normalTab = results[0];
+        var ex1Tab = results[1];
+        var ex2Tab = results[2];
+        var ex3Tab = results[3];
         
         normalTab.transform.SetParent(effectObjectParent);
         ex1Tab.transform.SetParent(effectObjectParent);
@@ -102,7 +111,7 @@ public class ElementStoneTagsGroup
         await LoadPressedEffect(element, effectObjectParent);
     }
     
-    public static UniTask<GameObject> CreateOneButtonIcon(Element element, int spLevel)
+    static UniTask<GameObject> CreateOneButtonIcon(Element element, int spLevel)
     {
         var path = FightGlobalSetting.EffectPathDefine(element);
         switch(spLevel)

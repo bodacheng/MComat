@@ -10,7 +10,7 @@ namespace mainMenu
         readonly IDictionary<Element, ElementStoneTagsGroup> _btnEffects = new Dictionary<Element, ElementStoneTagsGroup>();
         ElementStoneTagsGroup _focusingEffectsGroup;
         
-        public async UniTask StartUp(Element element, CancellationToken ct = default)
+        async UniTask StartUp(Element element, CancellationToken ct = default)
         {
             if (_btnEffects.ContainsKey(element))
                 return;
