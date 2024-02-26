@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CanvasScaler))]
 public class AspectRatioScaler : MonoBehaviour
 {
-    public float ReferenceWidth = 1980f;
-    public float ReferenceHeight = 1080f;
+    [SerializeField] float referenceWidth = 1980f;
+    [SerializeField] float referenceHeight = 1080f;
 
     private CanvasScaler _canvasScaler;
     
@@ -19,7 +20,7 @@ public class AspectRatioScaler : MonoBehaviour
     {
         float screenWidth = Screen.width;
         float screenHeight = Screen.height;
-        float targetAspectRatio = ReferenceWidth / ReferenceHeight;
+        float targetAspectRatio = referenceWidth / referenceHeight;
         float currentAspectRatio = screenWidth / screenHeight;
 
         if (currentAspectRatio >= targetAspectRatio)
