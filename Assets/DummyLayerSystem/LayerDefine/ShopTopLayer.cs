@@ -45,7 +45,7 @@ namespace mainMenu
                     activeChildCount++;
                 }
             }
-            productParent.content.sizeDelta = new Vector2(480 * activeChildCount, productParent.content.sizeDelta.y);
+            productParent.content.sizeDelta = new Vector2(productParent.content.sizeDelta.x, 500 * activeChildCount);
             productParent.horizontalNormalizedPosition = 0;
         }
 

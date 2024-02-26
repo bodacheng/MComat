@@ -11,6 +11,8 @@ public partial class GotchaResultLayer : UILayer
     // Gotcha总动画过程 点击画面的话进入下一个星星
     public async UniTask WholeAnimProcess(List<StoneOfPlayerInfo> results)
     {
+        UILayerLoader.Remove<LowerMainBar>();
+        
         showFinished = false;
         Reset();
         NineForShow.transform.gameObject.SetActive(false);
@@ -91,5 +93,6 @@ public partial class GotchaResultLayer : UILayer
         {
             returnLayer.gameObject.SetActive(true);
         }
+        LowerMainBar.Open();
     }
 }

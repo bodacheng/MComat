@@ -25,6 +25,7 @@ public class GotchaResult : MSceneProcess
         StarsFall.target.gameObject.SetActive(true);
         layer.NineForShow.AddOnClickToSlots(layer.ShowDetail);
         layer.WholeAnimProcess(Result).Forget();
+        
         SetLoaded(true);
     }
     
