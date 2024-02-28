@@ -134,6 +134,7 @@ namespace DummyLayerSystem
             rt.offsetMax = Vector2.zero;
             rt.localPosition = Vector3.zero;
             rt.localScale = Vector3.one;
+            t.ResizeAreas();
             Queues.Add(t);
             var returnValue = (T) Convert.ChangeType(t, typeof(T));
             

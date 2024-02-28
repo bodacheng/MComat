@@ -4,13 +4,34 @@ using UnityEngine.UI;
 
 public class UILayer : MonoBehaviour
 {
-    public string Index { get; set; }
+    [SerializeField] private RectTransform top;
+    [SerializeField] private RectTransform middle;
+    [SerializeField] private RectTransform bottom;
+    
+    public void ResizeAreas()
+    {
+        if (top == null ||middle == null || bottom == null)
+        {
+            return;
+        }
+        
+        float topAreaHeight = PosCal.CanvasHeight - middle.offsetMin.y - middle.rect.height - PosCal.VTopSafeAreaHeight;
+        
+        top.anchoredPosition = new Vector2(0, - PosCal.VTopSafeAreaHeight);
+        top.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, topAreaHeight);
 
+        float downArenaHeight = PosCal.CanvasHeight + middle.offsetMax.y - middle.rect.height - PosCal.VBottomSafeAreaHeight;
+        bottom.anchoredPosition = new Vector2(0, PosCal.VBottomSafeAreaHeight);
+        bottom.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, downArenaHeight);
+    }
+    
+    public string Index { get; set; }
+    
     public virtual void OnDestroy()
     {
         
     }
-
+    
     protected void ResizeCameraConnectorRefLeft(RectTransform target, float cameraConnectorRightSpace, float cameraConnectorVerticalSpace)
     {
         var unitViewSize = (PosCal.CanvasWidth - cameraConnectorRightSpace);

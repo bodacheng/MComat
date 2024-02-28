@@ -64,7 +64,7 @@ public class UpperInfoBar : UILayer
     public void Setup(string titleDisplayName, Action openSetting, Action openMail, Action openDmShop, bool isVip)
     {
         var rect = transform.GetComponent<RectTransform>();
-        rect.offsetMax = new Vector2(rect.offsetMax.x, -PosCal.VTopSafeArenaHeight);
+        rect.offsetMax = new Vector2(rect.offsetMax.x, -PosCal.VTopSafeAreaHeight);
         
         Debug.Log("安全区域size："+ Screen.safeArea.size);
         Debug.Log("安全区域width："+ Screen.safeArea.width);
