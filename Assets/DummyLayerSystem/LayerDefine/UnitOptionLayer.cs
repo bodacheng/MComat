@@ -27,7 +27,8 @@ namespace mainMenu
 
         public void RefreshMemberDetailPageByFocusingUnit()
         {
-            ResizeCameraConnectorRefTopAndSideWidth(_connector.GetComponent<RectTransform>(), PosCal.VTopSafeAreaHeight, 860);
+            var camRect = _connector.GetComponent<RectTransform>();
+            ResizeCameraConnectorAsMaxSquare(camRect, camRect.rect.width, camRect.rect.height);
             
             if (PreScene.target.Focusing == null || PreScene.target.Focusing.id == null || PreScene.target.Focusing.r_id == null)
             {

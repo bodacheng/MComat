@@ -61,6 +61,18 @@ public class UILayer : MonoBehaviour
         target.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, newHeight);
         target.anchoredPosition = new Vector2(0, -toTopEdgeSpace);
     }
+
+    protected void ResizeCameraConnectorAsMaxSquare(RectTransform target, float maxWidth, float maxHeight)
+    {
+        if (maxWidth > maxHeight)
+        {
+            target.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,  maxHeight);
+        }
+        else
+        {
+            target.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,  maxWidth);
+        }
+    }
     
     protected void SetGridGroupSize(GridLayoutGroup grid, float paddingLeftRight)
     {

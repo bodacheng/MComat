@@ -66,10 +66,6 @@ public class UpperInfoBar : UILayer
         var rect = transform.GetComponent<RectTransform>();
         rect.offsetMax = new Vector2(rect.offsetMax.x, -PosCal.VTopSafeAreaHeight);
         
-        Debug.Log("安全区域size："+ Screen.safeArea.size);
-        Debug.Log("安全区域width："+ Screen.safeArea.width);
-        Debug.Log("安全区域height："+ Screen.safeArea.height);
-        
         this.titleDisplayName.text = titleDisplayName;
         DiamondText = Currencies.DiamondCount.Value.ToString();
         Currencies.DiamondCount.Subscribe(x =>
