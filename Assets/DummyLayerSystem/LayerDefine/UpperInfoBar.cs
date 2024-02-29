@@ -63,9 +63,6 @@ public class UpperInfoBar : UILayer
     
     public void Setup(string titleDisplayName, Action openSetting, Action openMail, Action openDmShop, bool isVip)
     {
-        var rect = transform.GetComponent<RectTransform>();
-        rect.offsetMax = new Vector2(rect.offsetMax.x, -PosCal.VTopSafeAreaHeight);
-        
         this.titleDisplayName.text = titleDisplayName;
         DiamondText = Currencies.DiamondCount.Value.ToString();
         Currencies.DiamondCount.Subscribe(x =>
