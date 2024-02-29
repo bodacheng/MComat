@@ -177,7 +177,10 @@ public partial class SkillEditLayer : UILayer
         gameObject.SetActive(true);
         
         //ResizeCameraConnectorRefLeft(camConnector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
-        ResizeCameraConnectorRefTopAndSideWidth(camConnector.GetComponent<RectTransform>(), PosCal.VTopSafeAreaHeight,1100);
+        //ResizeCameraConnectorRefTopAndSideWidth(camConnector.GetComponent<RectTransform>(), PosCal.VTopSafeAreaHeight,1100);
+        var camRect = camConnector.GetComponent<RectTransform>();
+        ResizeCameraConnectorAsMaxSquare(camRect, camRect.rect.width, camRect.rect.height);
+        
         
         nineSlot.comboShowBtn.SetListener(()=> ShowCombo(false).Forget());
         nineSlot.dreamComboShowBtn.SetListener(()=> ShowCombo(true).Forget());

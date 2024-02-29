@@ -14,6 +14,10 @@ public class UILayer : MonoBehaviour
         {
             return;
         }
+
+        var midAreaSizeHelper = middle.GetComponent<MidAreaSizeHelper>();
+        if (midAreaSizeHelper != null)
+            midAreaSizeHelper.Resize();
         
         float topAreaHeight = PosCal.CanvasHeight - middle.offsetMin.y - middle.rect.height - PosCal.VTopSafeAreaHeight;
         
