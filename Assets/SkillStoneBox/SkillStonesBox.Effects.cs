@@ -38,14 +38,12 @@ namespace mainMenu
         {
             void IniExTab(Button btn, int exLevel)
             {
-                var worldPos = PosCal.GetWorldPos(fxCamera, 
-                    RectTransformUtility.WorldToScreenPoint(null,btn.GetComponent<RectTransform>().position),
-                    5f);
+                var worldPos = PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 5f);
                 _tabEffects.RefreshTagEffect(worldPos, exLevel);
                 btn.onClick.AddListener(() =>
                 {
                     //NormalTabFeature(PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 3));
-                    _tabEffects.SkillButtonExplosion(exLevel, PosCal.GetWorldPos(fxCamera, btn.GetComponent<RectTransform>(), 5f), _tabEffects.transform);
+                    _tabEffects.SkillButtonExplosion(exLevel, worldPos, _tabEffects.transform);
                 });
             }
             
