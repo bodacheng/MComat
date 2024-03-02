@@ -137,8 +137,7 @@ public partial class FightPrepareLayer : UILayer
         {
             await UniTask.WhenAll(
                 nineForShow.SkillSetInfoOfUnitOnArcadePage(info.set),
-                Set2DView(info.r_id, view2D, unitOutAnimator,
-                    0, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(info.r_id)),
+                //Set2DView(info.r_id, view2D, unitOutAnimator, 0, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(info.r_id)),
                 connector.ShowModel(info.r_id)
             );
         }
