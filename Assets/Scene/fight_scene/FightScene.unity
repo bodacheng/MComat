@@ -8792,7 +8792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0827442c0802748b39f7c78aec998deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  T: {fileID: 3000649885718481873}
+  canvas: {fileID: 3000649885718481872}
   audioSource: {fileID: 3000649885118306805}
   uiAudioSource: {fileID: 1664172698}
   fxCamera: {fileID: 1050871294}
@@ -9453,8 +9453,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db71889765b54d3b84704872029f82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReferenceWidth: 1980
-  ReferenceHeight: 1080
+  referenceWidth: 1980
+  referenceHeight: 1080
 --- !u!4 &3000649885788242078
 Transform:
   m_ObjectHideFlags: 0

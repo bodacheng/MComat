@@ -10,10 +10,10 @@ namespace FightScene
 {
     public class FightScene : MonoBehaviour
     {
-        [SerializeField] RectTransform T;
+        [SerializeField] Canvas canvas;
         [SerializeField] AudioSource audioSource;
         [SerializeField] AudioSource uiAudioSource;
-        
+
         [Header("FX")]
         public Camera fxCamera;
         
@@ -53,12 +53,13 @@ namespace FightScene
         void Awake()
         {
             target = this;
+            PosCal.Canvas = this.canvas;
         }
         
         void Start()
         {
             UILayerLoader.Clear();
-            UILayerLoader.SetHanger(T);
+            UILayerLoader.SetHanger(canvas.GetComponent<RectTransform>());
             
             //HighLightLayer.DarkOff(Color.white, 0, true);
             Time.timeScale = 1;
