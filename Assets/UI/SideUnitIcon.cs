@@ -11,6 +11,9 @@ public class SideUnitIcon : MonoBehaviour {
     [SerializeField] GameObject dreamComboFlg;
     [SerializeField] HeroIcon focusingCharIcon;
     [SerializeField] Text teamIndicator;
+    
+    [SerializeField] RectTransform hpBarHanger;
+
     public HeroIcon Icon => focusingCharIcon;
     public Text TeamIndicator => teamIndicator;
     public GameObject DreamComboFlg => dreamComboFlg;
@@ -61,11 +64,11 @@ public class SideUnitIcon : MonoBehaviour {
     
     public void RecallBars()
     {
-        hpBar.transform.SetParent(transform);
-        hpBar.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,12,0);
+        hpBar.transform.SetParent(hpBarHanger);
+        hpBar.transform.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         hpBar.transform.localScale = Vector3.one;
-        resistBar.transform.SetParent(transform);
-        resistBar.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0,12,0);
+        resistBar.transform.SetParent(hpBarHanger);
+        resistBar.transform.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         resistBar.transform.localScale = Vector3.one;
     }
 

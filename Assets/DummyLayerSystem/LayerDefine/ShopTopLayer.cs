@@ -10,6 +10,7 @@ namespace mainMenu
         [SerializeField] ScrollRect productParent;
         [SerializeField] ProductCell[] stoneBundleProductCells;
         [SerializeField] ProductCell noAdsCell;
+        [SerializeField] float cellHeight = 450;
         [SerializeField] TimeLimitedBundleCell timeLimitedBundleCell;
         
         public void Initialize()
@@ -45,7 +46,7 @@ namespace mainMenu
                     activeChildCount++;
                 }
             }
-            productParent.content.sizeDelta = new Vector2(productParent.content.sizeDelta.x, 500 * activeChildCount);
+            productParent.content.sizeDelta = new Vector2(productParent.content.sizeDelta.x, cellHeight * activeChildCount);
             productParent.horizontalNormalizedPosition = 0;
         }
 
