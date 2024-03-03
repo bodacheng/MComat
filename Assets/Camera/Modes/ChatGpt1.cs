@@ -15,6 +15,7 @@ class ChatGptFix : CameraMode
     float autoChangeAngleLimit = 30f;
     float autoRotateSpeed = 100;
     float _changeSpeed;
+    private float speedUpRate = 2;
     float _transitionSpeedPara = 10f;
     readonly float _lookPointHeight = 2f;
     readonly float _minXZ;
@@ -83,6 +84,7 @@ class ChatGptFix : CameraMode
         }
         
         _changeSpeed = Time.deltaTime / (TransitionSpeedPara + Time.deltaTime); //分母里那个附加值越大，变得越慢。
+        _changeSpeed *= speedUpRate;
         bool hasTargets = targets != null && targets.Count > 0;
         if (hasTargets)
         {
