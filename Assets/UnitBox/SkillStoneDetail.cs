@@ -39,9 +39,6 @@ namespace mainMenu
         
         [Header("Intro")]
         [SerializeField] Text skillIntro;
-
-        [Header("第三行parent")] 
-        [SerializeField] RectTransform line3T;
         
         [Header("tempT")]
         [SerializeField] Transform tempT;
@@ -73,8 +70,7 @@ namespace mainMenu
             keyName.text = string.Empty;
             showName.text = string.Empty;
             skillIntro.text = string.Empty;
-            line3T.gameObject.SetActive(false);
-            
+
             ATTitle.text = string.Empty;
             HPTitle.text = string.Empty;
             LevelTitle.text = string.Empty;
@@ -153,8 +149,7 @@ namespace mainMenu
             
             var intro = SkillNameTable.GetSkillIntro(config.RECORD_ID);
             skillIntro.text = intro;
-            line3T.gameObject.SetActive(!string.IsNullOrEmpty(intro));
-            
+
             PowerShow(config.RECORD_ID, 1);
         }
 
