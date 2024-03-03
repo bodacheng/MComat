@@ -7,6 +7,7 @@ public class DropTableInfoLayer : UILayer
 {
     [SerializeField] ResultTableNode prefab;
     [SerializeField] VerticalLayoutGroup resultT;
+    [SerializeField] RectTransform viewPortRect;
     
     public void ShowDropTableInfo(RandomResultTableListing tableInfo)
     {
@@ -20,17 +21,24 @@ public class DropTableInfoLayer : UILayer
             var node = tableInfo.Nodes[i];
             wholeWeight += node.Weight;
         }
-        
+
+        float itemHeight = -1;
         foreach (var node in tableInfo.Nodes)
         {
             var nodeUI = Instantiate(prefab);
             nodeUI.Setup(node.ResultItem, (double) node.Weight / wholeWeight);
             nodeUI.gameObject.transform.SetParent(resultT.transform);
+            nodeUI.gameObject.SetActive(true);
             nodeUI.transform.localScale = Vector3.one;
-            rectHeight += (nodeUI.GetComponent<RectTransform>().rect.height + resultT.spacing);
+            if (itemHeight < 0)
+                itemHeight = nodeUI.GetComponent<RectTransform>().rect.height;
+            rectHeight += (itemHeight + resultT.spacing);
         }
-        resultT.GetComponent<RectTransform>().sizeDelta = 
-            new Vector2(resultT.GetComponent<RectTransform>().sizeDelta.x, rectHeight);
+        
+        rectHeight -= resultT.spacing;
+        resultT.GetComponent<RectTransform>().sizeDelta = new Vector2(resultT.GetComponent<RectTransform>().sizeDelta.x, rectHeight);
+        viewPortRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 
+            PosCal.AdjustedViewPortHeight(viewPortRect.rect.height, itemHeight, resultT.spacing));
     }
 }
 

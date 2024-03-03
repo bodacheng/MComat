@@ -22,11 +22,10 @@ namespace mainMenu
 
         public void SetBoxHeight(float sizeNeedToRemain)
         {
-            var gridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
             var stoneBoxRect = transform.GetComponent<RectTransform>();
             var temp = PosCal.CanvasHeight - sizeNeedToRemain;
-            temp =  (gridLayoutGroup.cellSize.y + gridLayoutGroup.spacing.y) * 
-                    Mathf.Floor(temp / (gridLayoutGroup.cellSize.y + gridLayoutGroup.spacing.y));
+            temp =  (grid.cellSize.y + grid.spacing.y) * 
+                    Mathf.Floor(temp / (grid.cellSize.y + grid.spacing.y));
             stoneBoxRect.sizeDelta = new Vector2(stoneBoxRect.sizeDelta.x, temp);
         }
         
@@ -52,9 +51,9 @@ namespace mainMenu
                 
                 //CellsDictionary[i].RemoveItemWithOutDestroy();//根据之前经验，这个东西有出错的可能
                 _cellsDic[i].gameObject.SetActive(true);
-                if (_cellsDic[i].transform.parent != BoxT)
+                if (_cellsDic[i].transform.parent != grid.transform)
                 {
-                    _cellsDic[i].transform.SetParent(BoxT);
+                    _cellsDic[i].transform.SetParent(grid.transform);
                     _cellsDic[i].transform.localPosition = Vector3.zero;
                     _cellsDic[i].transform.localScale = Vector3.one;
                 }
@@ -63,23 +62,12 @@ namespace mainMenu
             }
             
             hang = cellCount / grid.constraintCount + 1;
-            BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (grid.cellSize.x + grid.spacing.x) * hang);
+            var gridRect = grid.GetComponent<RectTransform>();
+            gridRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, (grid.cellSize.y + grid.spacing.y) * hang);
 
-            var linesToShowInViewPort = 0;
-            while (true)
-            {
-                if ((linesToShowInViewPort+1) * (grid.cellSize.y + grid.spacing.y) < scrollRect.viewport.rect.height)
-                {
-                    linesToShowInViewPort++;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            var viewPortHeight = linesToShowInViewPort * (grid.cellSize.y + grid.spacing.y);
-            scrollRect.viewport.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, viewPortHeight);
+            var viewPortHeight = PosCal.AdjustedViewPortHeight(scrollRect.GetComponent<RectTransform>().rect.height, grid.cellSize.y, grid.spacing.y);
+            viewPortHeight += grid.spacing.y;// 因为有的格子有角色使用图标，所以留出一些空间
+            scrollRect.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, viewPortHeight);
         }
         
         public void AddFeatureToCells(Action<StoneCell> action)

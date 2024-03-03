@@ -57,7 +57,7 @@ public class GotchaFront : MSceneProcess
                     StarsFall.target.TriggerHoleEffect(StarsFall.GachaType.Super);
                 }
             }
-            dropTable.parentT.gameObject.SetActive(_startIndex == i);
+            dropTable.Show(_startIndex == i);
         }
     }
      

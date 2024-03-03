@@ -5,9 +5,6 @@ namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
     {
-        [Header("画面主模块parent")]
-        [SerializeField] RectTransform BoxT;
-        
         [Header("type按钮")]
         [SerializeField] Dropdown types;
         [SerializeField] BOButton NormalTab;

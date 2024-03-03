@@ -106,4 +106,22 @@ public static class PosCal
         
         return newPositionInTargetAnchor;
     }
+
+    public static float AdjustedViewPortHeight(float originHeight, float itemHeight, float space)
+    {
+        var linesToShowInViewPort = 0;
+        while (true)
+        {
+            if ((linesToShowInViewPort + 1) * (itemHeight + space) < originHeight)
+            {
+                linesToShowInViewPort++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        var viewPortHeight = linesToShowInViewPort * (itemHeight + space) - space;
+        return viewPortHeight;
+    }
 }
