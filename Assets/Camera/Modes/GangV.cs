@@ -1,23 +1,65 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
 public class GangV : CameraMode
 {
     readonly Vector3 centerOnGround = Vector3.zero;
-    readonly float distance = 25f; // Distance from the target
-    readonly float height = 22f; // Height above the target
+    float distance = 25f; // Distance from the target
+    float height = 22f; // Height above the target
     readonly float rotationSpeed = 1f; // Speed at which the camera rotates
+    private float zoomOutSpeed = 5;
     Vector3 firstPoint;
     Vector3 secondPoint;
     bool isRotating = false;
-
+    bool canTouch;
+    CancellationTokenSource cancelSource;
+    
     public GangV(float distance, float height)
     {
         this.distance = distance;
         this.height = height;
     }
 
+    async UniTask GetBoundaryInsideView(Camera _camera, CancellationToken token)
+    {
+        canTouch = false;
+        var right = _camera.transform.right;
+        right.y = 0;
+        
+        var point1 = centerOnGround + right * BoundaryControlByGod._BattleRingRadius;
+        var point2 = centerOnGround - right * BoundaryControlByGod._BattleRingRadius;
+        
+        bool OK(Vector2 screenPoint)
+        {
+            float posX = (float)((decimal)screenPoint.x / Screen.width);
+            return (posX <= 1 &&  posX >= 0) ;
+        }
+        
+        var transform = _camera.transform;
+        var tempF = transform.forward;
+        tempF.y = 0;
+        
+        await UniTask.WaitUntil(
+            () => {
+                var startPos = centerOnGround + tempF * distance + Vector3.up * height;
+                transform.position = startPos;
+                _camera.transform.LookAt(centerOnGround);
+                distance += (Time.deltaTime * zoomOutSpeed);
+                height += (Time.deltaTime * zoomOutSpeed);
+                var screenBoundP1 = _camera.WorldToScreenPoint(point1);
+                var screenBoundP2 = _camera.WorldToScreenPoint(point2);
+                return OK(screenBoundP1) && OK(screenBoundP2);
+            },cancellationToken:token
+        );
+        canTouch = true;
+    }
+    
     public override void LocalUpdate(Camera _camera)
     {
+        if (!canTouch)
+            return;
+        
         var RotateCameraH = UltimateJoystick.GetHorizontalAxis("RotateCamera");
         var RotateCameraV = UltimateJoystick.GetHorizontalAxis("RotateCamera");
 
@@ -68,11 +110,9 @@ public class GangV : CameraMode
     
     public override void Enter(Camera _camera)
     {
-        var tempF = _camera.transform.forward;
-        tempF.y = 0;
-        var startPos = Vector3.zero + tempF * distance + Vector3.up * height;
-        _camera.transform.position = startPos;
-        _camera.transform.LookAt(centerOnGround);
+        cancelSource?.Cancel();
+        cancelSource = new CancellationTokenSource();
+        GetBoundaryInsideView(_camera, cancelSource.Token).Forget();
     }
     
     void CameraRotate(Camera camera, Vector3 _firstPoint, Vector3 _secondPoint)

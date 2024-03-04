@@ -16,6 +16,7 @@ class MCamera : CameraMode
     float autoChangeAngleLimit = 30f;
     float autoRotateSpeed = 100;
     float _changeSpeed;
+    float zoomSpeedExtra = 6;
     float _transitionSpeedPara = 10f;
     readonly float _lookPointHeight = 2f;
     readonly float _minXZ;
@@ -41,7 +42,7 @@ class MCamera : CameraMode
     private float XZDistance
     {
         get => XZDis;
-        set => XZDis = Mathf.Clamp(value, _minXZ , _minXZ + 10f);
+        set => XZDis = Mathf.Clamp(value, _minXZ , _minXZ + 60f);
     }
 
     public override void Enter(Camera _camera)
@@ -178,19 +179,19 @@ class MCamera : CameraMode
                 var ePosX = (float)((decimal)screenPos.x / Screen.width);
                 var ePosY = (float)((decimal)screenPos.y / Screen.height);
 
-                float edgeForIn = 0.3f;
-                float edgeForOut = 0.15f;
+                float edgeForIn = 0.15f;
+                float edgeForOut = 0.1f;
                 shouldZoomIn &= (ePosX >= edgeForIn && ePosX <= (1 - edgeForIn) && ePosY >= edgeForIn && ePosY <= (1 - edgeForIn));
                 shouldZoomOut |= (ePosX < edgeForOut || ePosX > (1 - edgeForOut) || ePosY < edgeForOut || ePosY > (1 - edgeForOut));
             }
             
             if (shouldZoomIn)
             {
-                XZDistance -= _changeSpeed;
+                XZDistance -= _changeSpeed * zoomSpeedExtra;
             }
             else if (shouldZoomOut)
             {
-                XZDistance += _changeSpeed;
+                XZDistance += _changeSpeed * zoomSpeedExtra;
             }
         }
         
