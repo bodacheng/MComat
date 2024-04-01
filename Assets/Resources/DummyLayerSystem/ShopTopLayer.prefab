@@ -381,6 +381,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 80135160145429034, guid: fc2bc79c251664e34a88adb27efbb5bf,
         type: 3}
+      propertyPath: admobAdsButton
+      value: 
+      objectReference: {fileID: 604187507812803441}
+    - target: {fileID: 80135160145429034, guid: fc2bc79c251664e34a88adb27efbb5bf,
+        type: 3}
       propertyPath: rewardedAdsButton
       value: 
       objectReference: {fileID: 604187507812803441}
@@ -398,6 +403,11 @@ PrefabInstance:
         type: 3}
       propertyPath: text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523163117158937322, guid: fc2bc79c251664e34a88adb27efbb5bf,
+        type: 3}
+      propertyPath: adType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1523163117158937322, guid: fc2bc79c251664e34a88adb27efbb5bf,
         type: 3}

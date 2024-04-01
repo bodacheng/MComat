@@ -17,7 +17,7 @@ namespace FightScene
         [Header("FX")]
         public Camera fxCamera;
         
-        [SerializeField] InterstitialAdsButton watchAdBtnPrefab;
+        [SerializeField] AdmobAdsButton watchAdBtnPrefab;
 
         public static FightScene target;
         
@@ -25,7 +25,7 @@ namespace FightScene
         
         public static List<GangbangInfo.SoldierGroupSet> team1GroupSet;
         
-        private InterstitialAdsButton watchBtn;
+        private AdmobAdsButton watchBtn;
         public void ShowAds(int extraAdReward, RectTransform btnTarget, Action afterWatched, int finishedStage = -1)
         {
             if (extraAdReward > 0 && watchBtn != null)
@@ -38,6 +38,7 @@ namespace FightScene
                 watchBtn.SetWatchedAdExtraProcess(
                     () =>
                     {
+                        watchBtn.ShowAdButton.gameObject.SetActive(false);
                         CloudScript.RequestAdReward(
                             "DM",
                             extraAdReward, 
@@ -46,6 +47,10 @@ namespace FightScene
                         );
                     }
                 );
+                if (watchBtn.AdIsReady && finishedStage >= 3)
+                {
+                    watchBtn.ShowAd();
+                }
                 watchBtn.gameObject.SetActive(true);
             }
         }
@@ -111,7 +116,7 @@ namespace FightScene
         {
             watchBtn = Instantiate(watchAdBtnPrefab);
             watchBtn.HasTicket = true;
-            watchBtn.LoadInterstitialAd();
+            watchBtn.LoadAd();
             watchBtn.gameObject.SetActive(false);
             watchBtn.transform.SetParent(transform);
         }
