@@ -63,23 +63,12 @@ namespace mainMenu
             }
             
             hang = cellCount / grid.constraintCount + 1;
-            BoxT.sizeDelta = new Vector2(BoxT.sizeDelta.x, (grid.cellSize.x + grid.spacing.x) * hang);
-
-            var linesToShowInViewPort = 0;
-            while (true)
-            {
-                if ((linesToShowInViewPort+1) * (grid.cellSize.y + grid.spacing.y) < scrollRect.viewport.rect.height)
-                {
-                    linesToShowInViewPort++;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            var viewPortHeight = linesToShowInViewPort * (grid.cellSize.y + grid.spacing.y);
-            scrollRect.viewport.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, viewPortHeight);
+            var viewPortHeight = PosCal.AdjustedViewPortHeight(scrollRect.GetComponent<RectTransform>().rect.height, grid.cellSize.y, grid.spacing.y);
+            viewPortHeight += 20;// 因为有的格子有角色使用图标，所以留出一些空间。这是个主观数值，和那个角色图标的尺寸有关
+            scrollRect.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, viewPortHeight);
+            
+            var gridRect = grid.GetComponent<RectTransform>();
+            gridRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, (grid.cellSize.y + grid.spacing.y) * hang);
         }
         
         public void AddFeatureToCells(Action<StoneCell> action)
