@@ -80,7 +80,7 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
     
     void RefreshIAPItems() {
         
-        if (IsInitialized.Value)
+        if (IsInitialized.Value || PlayerAccountInfo.Me == null)
             return;
         PlayFabClientAPI.GetCatalogItems(
             new GetCatalogItemsRequest
