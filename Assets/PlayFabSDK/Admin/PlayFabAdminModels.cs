@@ -409,6 +409,10 @@ namespace PlayFab.AdminModels
         /// </summary>
         public DateTime? Expires;
         /// <summary>
+        /// Whether or not the Microsoft family members are included in the ban.
+        /// </summary>
+        public bool? IncludeMicrosoftFamily;
+        /// <summary>
         /// The IP address on which the ban was applied. May affect multiple players.
         /// </summary>
         public string IPAddress;
@@ -458,6 +462,10 @@ namespace PlayFab.AdminModels
         /// The duration in hours for the ban. Leave this blank for a permanent ban.
         /// </summary>
         public uint? DurationInHours;
+        /// <summary>
+        /// Whether the Microsoft family members should be included in the ban. May affect multiple players.
+        /// </summary>
+        public bool? IncludeMicrosoftFamily;
         /// <summary>
         /// IP address to be banned. May affect multiple players.
         /// </summary>
@@ -2614,6 +2622,11 @@ namespace PlayFab.AdminModels
         InvalidAttributeStatisticsSpecified,
         LeaderboardNotFound,
         TokenSigningKeyNotFound,
+        LeaderboardNameConflict,
+        LinkedStatisticColumnMismatch,
+        NoLinkedStatisticToLeaderboard,
+        StatDefinitionAlreadyLinkedToLeaderboard,
+        LinkingStatsNotAllowedForEntityType,
         MatchmakingEntityInvalid,
         MatchmakingPlayerAttributesInvalid,
         MatchmakingQueueNotFound,
@@ -2819,14 +2832,24 @@ namespace PlayFab.AdminModels
         TrueSkillDuplicatePlayerInMatchResult,
         TrueSkillInvalidRanksInMatchResult,
         TrueSkillNoWinnerInMatchResult,
-        TrueSkillMissingRequiredConditionInMatchResult,
-        TrueSkillMissingRequiredEventInMatchResult,
-        TrueSkillUnknownEventInMatchResult,
-        TrueSkillUnknownConditionName,
+        TrueSkillMissingRequiredCondition,
+        TrueSkillMissingRequiredEvent,
+        TrueSkillUnknownEventName,
+        TrueSkillUnknownConditionKey,
         TrueSkillUnknownConditionValue,
-        TrueSkillUnknownScenarioId,
         TrueSkillUnknownModelId,
-        TrueSkillNoActiveModelInScenario,
+        TrueSkillNoPlayerInMatchResultTeam,
+        TrueSkillPlayersInMatchResultExceedingLimit,
+        TrueSkillInvalidPreMatchPartyInMatchResult,
+        TrueSkillInvalidTimestampInMatchResult,
+        TrueSkillInvalidPlayerSecondsPlayedInMatchResult,
+        TrueSkillNoTeamInMatchResult,
+        TrueSkillNotEnoughTeamsInMatchResult,
+        TrueSkillScenarioConfigDoesNotExist,
+        TrueSkillNoModelInScenario,
+        TrueSkillNotSupportedForTitle,
+        TrueSkillModelIsNotActive,
+        TrueSkillUnauthorizedToQueryOtherPlayerSkills,
         StateShareUnauthorized,
         StateShareStateNotFound,
         StateShareLinkNotFound
@@ -6652,6 +6675,10 @@ namespace PlayFab.AdminModels
         /// The updated expiration date for the ban. Null for no change.
         /// </summary>
         public DateTime? Expires;
+        /// <summary>
+        /// The updated decision to ban the Microsoft family members to be updated. Null for no change.
+        /// </summary>
+        public bool? IncludeMicrosoftFamily;
         /// <summary>
         /// The updated IP address for the ban. Null for no change.
         /// </summary>
