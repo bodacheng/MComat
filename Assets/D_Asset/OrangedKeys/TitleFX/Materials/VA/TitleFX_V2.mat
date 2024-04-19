@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: TitleFX_V2
   m_Shader: {fileID: 4800000, guid: 5aeb7503c199c794b8e8a713c03678d7, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _UPDOWNDIRECTION_ON
   m_InvalidKeywords:
@@ -19,6 +21,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -93,7 +96,7 @@ Material:
     m_Ints: []
     m_Floats:
     - PixelSnap: 0
-    - _Animation_Factor: 2
+    - _Animation_Factor: 1.993778
     - _AutoManualAnimation: 1
     - _ColorMask: 15
     - _DetailsMaskDistortionMult: 1
