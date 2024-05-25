@@ -45,6 +45,11 @@ namespace FightScene
                 }
             }
         }
+        
+        public void ProcessFixedUpdate()
+        {
+            currentProcess?.LocalFixedUpdate();
+        }
     
         public void AddNewProcess(SceneStep step, FSceneProcess _process)
         {

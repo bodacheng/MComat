@@ -51,7 +51,15 @@ public class ArcadeModeManager
         {
             stage = await LoadStage(stageNo - 1);
         }
-        stage.EventType = FightEventType.Quest;
-        PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, forward);
+
+        if (stage != null)
+        {
+            stage.EventType = FightEventType.Quest;
+            PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, forward);
+        }
+        else
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.ArcadeFront, forward);
+        }
     }
 }

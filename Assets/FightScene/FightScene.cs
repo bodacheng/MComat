@@ -127,6 +127,11 @@ namespace FightScene
             TutorialRunner.Main.Process();
         }
         
+        void FixedUpdate()
+        {
+            FSceneProcessesRunner.Main.ProcessFixedUpdate();
+        }
+        
         public void ReturnToFront(MainSceneStep mainSceneStep = MainSceneStep.FrontPage)
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);

@@ -236,6 +236,18 @@ public partial class Data_Center : MonoBehaviour
                 }
                 return AITriggerDreamComboRateCondition();
             };
+        
+        BoundaryControlByGod.target.SensorUnity.SensorDetectionResultClearProcesses.Add(
+            () =>
+            {
+                this.Sensor.SensorDetectionResultClearProcess();
+            });
+        
+        BoundaryControlByGod.target.SensorUnity.SensorDetectionResultSortProcesses.Add(
+            (x) =>
+            {
+                this.Sensor.SensorDetectionResultSortProcess(x);
+            });
     }
     
     // for tutorial
@@ -271,7 +283,6 @@ public partial class Data_Center : MonoBehaviour
     {
         if (_MyBehaviorRunner.IfRunning())
         {
-            Sensor.SensorFixedUpdate();
             buffsRunner.BuffsRunnerFixedUpdate();
             FightDataRef.HealthBodyFixedUpdate();
             _SkillCancelFlag.hiddenMethods.SkillCancelFlagFixedUpdate();
@@ -280,7 +291,6 @@ public partial class Data_Center : MonoBehaviour
     
     public void CleanClear()
     {
-        Sensor.Stop();
         bO_Weapon_Animation_Events.ClearMarkerManagers();
         buffsRunner.EndAllCoroutines();
         _ResistanceManager.ResistanceClear();

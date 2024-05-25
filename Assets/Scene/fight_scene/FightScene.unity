@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4342583, g: 0.48125356, b: 0.56220603, a: 1}
+  m_IndirectSpecularColor: {r: 0.4341423, g: 0.4810813, b: 0.5620145, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1676,12 +1676,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &1013157160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1830,12 +1830,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!20 &1050871294
 Camera:
   m_ObjectHideFlags: 0
@@ -9083,12 +9083,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!82 &3000649885118306805
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9453,8 +9453,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db71889765b54d3b84704872029f82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReferenceWidth: 1980
-  ReferenceHeight: 1080
+  referenceWidth: 1980
+  referenceHeight: 1080
 --- !u!4 &3000649885788242078
 Transform:
   m_ObjectHideFlags: 0
@@ -9584,6 +9584,7 @@ MonoBehaviour:
   BattleRingPSs:
   - {fileID: 5869328030720998988}
   BattleRingRadius: 8.5
+  sensorUnity: {fileID: 3000649885939633403}
 --- !u!1 &3000649885939633402
 GameObject:
   m_ObjectHideFlags: 0
@@ -9594,6 +9595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3000649885939633396}
   - component: {fileID: 3000649885939633397}
+  - component: {fileID: 3000649885939633403}
   m_Layer: 0
   m_Name: BoundaryControllByGod
   m_TagString: Untagged
@@ -9601,6 +9603,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3000649885939633403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3000649885939633402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5866cf2f84574940b99fdc1c78912ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layers:
+    serializedVersion: 2
+    m_Bits: 7680
 --- !u!4 &3000649886621752040
 Transform:
   m_ObjectHideFlags: 0
