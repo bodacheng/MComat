@@ -7,11 +7,10 @@ namespace Soul
 {
     public partial class Hurt_State : Behavior
     {
-        void PushToMidStart(V_Damage newValue, float dis, bool Grounded, bool push = true)
+        void PushToMidStart(V_Damage newValue, float dis, bool Grounded)
         {
-            _usedDizzyTime = FightGlobalSetting.HeavyHitLastingTime;
             Vector3 midDistanceFromMe = newValue.attacker.Center.geometryCenter.transform.position + 
-                                        (push ? 1f : -0.5f) * newValue.attacker.Center.WholeT.transform.forward * dis;
+                                        newValue.attacker.Center.WholeT.transform.forward * dis;
             if (Grounded)
             {
                 PlayHurtAnim(newValue);
