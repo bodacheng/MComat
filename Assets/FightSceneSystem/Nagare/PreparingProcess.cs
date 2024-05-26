@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using UniRx;
+using UnityEngine;
+using Random = System.Random;
 
 public class PreparingProcess : FSceneProcess
 {
@@ -36,6 +38,10 @@ public class PreparingProcess : FSceneProcess
         UILayerLoader.Load<ProgressLayer>();
         ProgressLayer.LoadingPercent(Translate.Get("LoadingBattle"), 0.5f);
         
+        var effectPreloadCount = FightLoad.Fight.team1Mode == TeamMode.Rotation ? 1 :
+            Mathf.Max(RTFightManager.Target.team1.teamMembers.GetValues().Count,
+                RTFightManager.Target.team2.teamMembers.GetValues().Count);
+        
         var tasks = new List<UniTask>
         {
             AppSetting.PlayBGM(FightLoad.Fight.GetBGMKey()),
@@ -43,11 +49,41 @@ public class PreparingProcess : FSceneProcess
             AddressablesLogic.Essentials(),
             BoundaryControlByGod.target.ChangeBackGround(FightLoad.Fight.battleGroundID),
             RTFightManager.Target.LoadUnits(FightLoad.Fight),
-            EffectsManager.IniEffectsPool(CommonSetting.HitGroundEffectCode, null, 3),
-            EffectsManager.IniEffectsPool(CommonSetting.WallCrackEffectCode, null, 3),
-            EffectsManager.IniEffectsPool(CommonSetting.BreakFreeEffectCode, null, 3),
-            EffectsManager.IniEffectsPool(CommonSetting.MemberShiftEffectCode, null, 3)
+            EffectsManager.IniEffectsPool(CommonSetting.HitGroundEffectCode, null, effectPreloadCount),
+            EffectsManager.IniEffectsPool(CommonSetting.WallCrackEffectCode, null, effectPreloadCount)
         };
+        
+        List<Element> allElements = new List<Element>();
+        void AddBasicEffectLoadingTask(List<UnitInfo> list)
+        {
+            foreach (var unit in list)
+            {
+                var unitConfig = Units.RowToUnitConfigInfo(Units.Find_RECORD_ID(unit.r_id));
+                if (!allElements.Contains(unitConfig.element))
+                {
+                    allElements.Add(unitConfig.element);
+                    tasks.AddRange(
+                        new UniTask[]
+                        {
+                            EffectsManager.IniEffectsPool("light_hit", FightGlobalSetting.EffectPathDefine(unitConfig.element), effectPreloadCount),
+                            EffectsManager.IniEffectsPool("heavy_hit", FightGlobalSetting.EffectPathDefine(unitConfig.element), effectPreloadCount),
+                            EffectsManager.IniEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(unitConfig.element), effectPreloadCount),
+                            EffectsManager.IniEffectsPool("electric_s_e", FightGlobalSetting.EffectPathDefine(unitConfig.element), effectPreloadCount),
+                            EffectsManager.IniEffectsPool("super_combo_explosion", null, effectPreloadCount),
+                            EffectsManager.IniEffectsPool("dream_buff", null, effectPreloadCount)
+                        }
+                    );
+                }
+            }
+        }
+        
+        AddBasicEffectLoadingTask(FightLoad.Fight.FightMembers.HeroSets.GetValues());
+        AddBasicEffectLoadingTask(FightLoad.Fight.FightMembers.EnemySets.GetValues());
+        
+        if (FightLoad.Fight.team1Mode == TeamMode.Rotation && FightLoad.Fight.team2Mode == TeamMode.Rotation)
+        {
+            tasks.Add(EffectsManager.IniEffectsPool(CommonSetting.MemberShiftEffectCode, null, 1));
+        }
         ProgressLayer.LoadingPercent(Translate.Get("LoadingBattle"), 0.7f);
         await UniTask.WhenAll(tasks);
         
