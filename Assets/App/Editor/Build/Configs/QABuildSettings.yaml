@@ -1,7 +1,0 @@
-applicationIdentifier: com.MCombat.BO
-productName: mcombatQA
-cfBundleName: mcombatQA
-cfBundleExecutableName: mcombatQA
-appDisplayName: MCombatQA
-keystoreName: Assets/App/Editor/Build/Configs/Android/mcombat.keystore
-keyaliasName: mcombat

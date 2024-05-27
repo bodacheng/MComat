@@ -49,7 +49,15 @@ public class GangbangModeManager
         {
             stage = await LoadStage(stageNo - 1);
         }
-        stage.EventType = FightEventType.Gangbang;
-        PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, forward);
+        
+        if (stage != null)
+        {
+            stage.EventType = FightEventType.Gangbang;
+            PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, forward);
+        }
+        else
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.GangBangFront, forward);
+        }
     }
 }
