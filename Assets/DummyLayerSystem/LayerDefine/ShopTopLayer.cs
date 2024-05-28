@@ -14,9 +14,11 @@ namespace mainMenu
         
         public void Initialize()
         {
+            #if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
             ShowNoAdsProduct();
             adsBtnRender.SetupForMainScene();
             RefreshSize();
+            #endif 
         }
 
         public void ShowTimeLimitedBundle()

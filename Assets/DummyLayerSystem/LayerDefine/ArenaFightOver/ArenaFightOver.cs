@@ -298,6 +298,7 @@ public partial class ArenaFightOver : UILayer
             &&
             !PlayerAccountInfo.Me.noAdsState)
         {
+#if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
             FightScene.FightScene.target.ShowAds(
                 extraAdReward, 
                 adBtnParent, 
@@ -308,6 +309,7 @@ public partial class ArenaFightOver : UILayer
                 },
                 finishedStage
             );
+#endif
         }
         vipSymbol.gameObject.SetActive(PlayerAccountInfo.Me.noAdsState);
     }

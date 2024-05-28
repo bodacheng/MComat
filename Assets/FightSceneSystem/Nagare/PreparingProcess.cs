@@ -26,7 +26,9 @@ public class PreparingProcess : FSceneProcess
             &&
             !PlayerAccountInfo.Me.noAdsState)
         {
+#if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
             FightScene.FightScene.target.LoadAds();
+#endif
         }
 
         RTFightManager.Target.Disposables = new CompositeDisposable();
