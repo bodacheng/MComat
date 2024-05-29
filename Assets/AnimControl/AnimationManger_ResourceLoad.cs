@@ -163,6 +163,8 @@ public partial class AnimationManger
         }
         animatorOverride = new AnimatorOverrideController(Animator.runtimeAnimatorController);
 
+        
+        
         // 以上内容为个性化动画片段对base层基础动画的覆盖
         foreach (var animationClip in basicAnims)
         {
@@ -184,13 +186,13 @@ public partial class AnimationManger
                     animatorOverride["run"] = animationClip;
             }
             
-            if (animationClip.name == "air")
-            {
-                if (animatorOverride["air"])
-                    animatorOverride["air"] = animationClip;
-            }
+            // if (animationClip.name == "air")
+            // {
+            //     if (animatorOverride["air"])
+            //         animatorOverride["air"] = animationClip;
+            // }
         }
-
+        
         this.facialAnimManager = facialAnimManager;
         this.facialAnimManager?.INI(Animator, animatorOverride);
         
