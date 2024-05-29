@@ -182,6 +182,51 @@ namespace FightScene
                 case FightEventType.SkillTest:
                     SkillTestReload();
                     break;
+                case FightEventType.Event:
+                    if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabId)
+                    {
+                        var battleID = FightLoad.Fight.ID;
+                        if (!PlayerAccountInfo.Me.EventModeManager.CompletedLevels.Contains(battleID))
+                        {
+                            CloudScript.EventBattleProgress(
+                                battleID,
+                                result =>
+                                {
+                                    PlayerAccountInfo.Me.EventModeManager.CompletedLevels.Add(battleID);
+                                    var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                                    var hasReward = jsonResult.TryGetValue("has_reward", out var value) ? value : false;
+                                    var hasRewardBool = (bool)hasReward;
+                                    var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
+                                    arenaFightOver.Setup();
+                                    arenaFightOver.Step2Anim();
+                                    if (hasRewardBool)
+                                    {
+                                        var rewardGd = jsonResult.TryGetValue("gold", out var value1) ? value1 : 0;
+                                        var rewardDm = jsonResult.TryGetValue("diamond", out var value2) ? value2 : 0;
+                                        var rewardGdInt = Convert.ToInt32(rewardGd);
+                                        var rewardDmInt = Convert.ToInt32(rewardDm);
+                                        arenaFightOver.ShowAward(rewardDmInt, rewardGdInt);
+                                        if (!PlayerAccountInfo.Me.noAdsState)
+                                            FightScene.target.JustShowAds();
+                                    }
+                                }
+                            );
+                        }
+                        else
+                        {
+                            var a = UILayerLoader.Load<ArenaFightOver>();
+                            a.Setup();
+                            a.Step2Anim();
+                        }
+                    }
+                    else
+                    {
+                        var a = UILayerLoader.Load<ArenaFightOver>();
+                        a.Setup();
+                        a.Step2Anim();
+                        a.AgainBtn.gameObject.SetActive(true);
+                    }
+                    break;
             }
             
             SingleAssignmentDisposableCleaner.Clear();

@@ -887,6 +887,7 @@ MonoBehaviour:
   loseImage: {fileID: 3542192992934000395}
   powerUpTip: {fileID: 1976508227116629651}
   returnBtn: {fileID: 4861472520470722894}
+  awardParent: {fileID: 2273744180302767901}
   dmParent: {fileID: 5542000028063766489}
   currentDmCurrency: {fileID: 4176154513225696847}
   vipSymbol: {fileID: 5077328966084205415}

@@ -22,7 +22,7 @@ public class PreparingProcess : FSceneProcess
         RTFightManager.Target.team1.Clear();
         RTFightManager.Target.team2.Clear();
         
-        if ((FightLoad.Fight.EventType == FightEventType.Quest || FightLoad.Fight.EventType == FightEventType.Gangbang)
+        if ((FightLoad.Fight.EventType == FightEventType.Quest || FightLoad.Fight.EventType == FightEventType.Gangbang || FightLoad.Fight.EventType == FightEventType.Event)
             &&
             !PlayerAccountInfo.Me.noAdsState)
         {

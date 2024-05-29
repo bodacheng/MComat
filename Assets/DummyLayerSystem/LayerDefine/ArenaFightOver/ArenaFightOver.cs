@@ -19,6 +19,7 @@ public partial class ArenaFightOver : UILayer
     [SerializeField] private Image loseImage;
     [SerializeField] private RectTransform powerUpTip;
     [SerializeField] private Button returnBtn;
+    [SerializeField] private RectTransform awardParent;
     [SerializeField] private RectTransform dmParent;
     [SerializeField] private Text currentDmCurrency;
     [SerializeField] private RectTransform vipSymbol;
@@ -97,6 +98,15 @@ public partial class ArenaFightOver : UILayer
             arenaPoint.text = arena;
         }
         get => arena;
+    }
+    
+    void Awake()
+    {
+        powerUpTip.gameObject.SetActive(false);
+        arenaRankParent.gameObject.SetActive(false);
+        dmParent.gameObject.SetActive(false);
+        gdParent.gameObject.SetActive(false);
+        awardParent.gameObject.SetActive(false);
     }
     
     void NextFight(TeamMode mode, FightInfo fight)
@@ -276,6 +286,27 @@ public partial class ArenaFightOver : UILayer
         }
     }
     
+    public void ShowAward(int awardDm, int awardGd)
+    {
+        awardParent.gameObject.SetActive(awardDm > 0 || awardGd > 0);
+        if (awardDm > 0)
+        {
+            dmParent.gameObject.SetActive(true);
+            Currencies.DiamondCount.Value += awardDm;
+            GuideGocha();
+            awardDmCurrency.text = "+" + awardDm;
+            _tweenTextScaleManager.AddNew(awardDmCurrency.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
+        }
+        if (awardGd > 0)
+        {
+            gdParent.gameObject.SetActive(true);
+            Currencies.CoinCount.Value += awardGd;
+            awardGdCurrency.text = "+" + awardGd;
+            _tweenTextScaleManager.AddNew(awardGdCurrency.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
+        }
+        vipSymbol.gameObject.SetActive(PlayerAccountInfo.Me.noAdsState);
+    }
+    
     public void ShowAward(int awardDm, int awardGd, int extraAdReward, int finishedStage = -1)
     {
         if (awardDm > 0)
@@ -293,7 +324,7 @@ public partial class ArenaFightOver : UILayer
             awardGdCurrency.text = "+" + awardGd;
             _tweenTextScaleManager.AddNew(awardGdCurrency.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
         }
-
+        
         if (PlayerAccountInfo.Me.tutorialProgress == "Finished"
             &&
             !PlayerAccountInfo.Me.noAdsState)
@@ -316,6 +347,7 @@ public partial class ArenaFightOver : UILayer
     
     public void ShowArenaPoint(int oldPoint, int currentPoint)
     {
+        awardParent.gameObject.SetActive(currentPoint > oldPoint);
         arenaRankParent.gameObject.SetActive(true);
         arenaRankIcon.Set(oldPoint);
         arenaPointValue = oldPoint;

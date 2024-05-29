@@ -15,6 +15,7 @@ public class FrontLayer : UILayer
     [SerializeField] BOButton ArcadeBtn;
     [SerializeField] BOButton GangbangBtn;
     [SerializeField] BOButton ArenaBtn;
+    [SerializeField] BOButton EventFightBtn;
     [SerializeField] BOButton MemberBtn;
     [SerializeField] BOButton TrainBtn;
     [SerializeField] BOButton StonesBtn;
@@ -61,6 +62,17 @@ public class FrontLayer : UILayer
                 PopupLayer.ArrangeWarnWindow(Translate.Get("PlsClearStage5"));
             }
         });
+        
+        EventFightBtn.SetListener(() =>
+        {
+            if (PlayerAccountInfo.Me.arcadeProcess >= 5)
+                pre.trySwitchToStep(MainSceneStep.EventFight);
+            else
+            {
+                PopupLayer.ArrangeWarnWindow(Translate.Get("PlsClearStage5"));
+            }
+        });
+        
         MemberBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.UnitList));
         TrainBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SelfFightFront));
         StonesBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SkillStoneList));
@@ -160,7 +172,8 @@ public class FrontLayer : UILayer
         TrainBtn.interactable = btnCode == "train";
         StonesBtn.interactable = btnCode == "stones";
         GotchaBtn.interactable = btnCode == "gotcha";
-
+        EventFightBtn.interactable = btnCode == "event";
+        
         Transform localPos = null;
         switch (btnCode)
         {
