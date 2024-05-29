@@ -16,6 +16,11 @@ Practice,Practice,プラクティス,试验
 Chaos,Chaos,混沌,混沌
 PlsClearStage5,Unlock after clearing the 5th level,第5ステージクリア後にアンロック,战胜第5关敌人后开启
 ,,,
+EventFightTitle,Barrage Witch,弾幕魔女,弹幕魔女
+EasyMode,EASY,簡単,轻松模式
+NormalMode,NORMAL,普通,普通模式
+HardMode,HELL,地獄,地狱模式
+,,,
 TimeTillNextSeason,Till Next Season,次のシーズンまで,距离下一个赛季还有
 TimeTillArenaTicket,Until Next,チャージまで,体力补充剩余
 ArenaIsRefreshingPoint,Remaining time in the arena score settlement,競技場スコアの精算中。残り時間,竞技场分数清算中，剩余时间
