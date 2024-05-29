@@ -71,17 +71,6 @@ public partial class NineForShow : MonoBehaviour
     }
 
     private CancellationTokenSource _cancellationTokenSource;
-    private List<ParticleSystem> effects = new List<ParticleSystem>();
-
-    void DestroyEffects()
-    {
-        foreach (var effect in effects)
-        {
-            if (effect != null)
-                Destroy(effect.gameObject);
-        }
-        effects.Clear();
-    }
     
     async UniTask SkillSetStateRender(
         Camera fxCamera,
@@ -102,7 +91,8 @@ public partial class NineForShow : MonoBehaviour
         }
         else
         {
-            DestroyEffects();
+            if (nineSlotEffect != null)
+                Destroy(nineSlotEffect.gameObject);
         }
         // 下面这个环节纯粹是为了队伍编辑画面的技能编辑引导
         if (editSkillIndicator != null)
@@ -116,17 +106,19 @@ public partial class NineForShow : MonoBehaviour
         }
     }
 
+    private ParticleSystem nineSlotEffect;
     async UniTask AddEffect(string address, Camera fxCamera)
     {
+        if (nineSlotEffect != null && nineSlotEffect.gameObject.activeSelf)
+            return;
         var worldPos = PosCal.GetWorldPos(fxCamera, transform.GetComponent<RectTransform>(), 5f);
         _cancellationTokenSource = new CancellationTokenSource();
-        var abnormalSkillSet = await AddressablesLogic.LoadTOnObject<ParticleSystem>(address, gameObject, _cancellationTokenSource);
-        if (abnormalSkillSet == null)
+        nineSlotEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>(address, gameObject, _cancellationTokenSource);
+        if (nineSlotEffect == null)
         {
             return;
         }
-        effects.Add(abnormalSkillSet);
-        abnormalSkillSet.gameObject.transform.position = worldPos;
+        nineSlotEffect.gameObject.transform.position = worldPos;
         //abnormalSkillSet.transform.SetParent(transform);
     }
 
