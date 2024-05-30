@@ -309,6 +309,7 @@ public partial class ArenaFightOver : UILayer
     
     public void ShowAward(int awardDm, int awardGd, int extraAdReward, int finishedStage = -1)
     {
+        awardParent.gameObject.SetActive(awardDm > 0 || awardGd > 0);
         if (awardDm > 0)
         {
             dmParent.gameObject.SetActive(true);

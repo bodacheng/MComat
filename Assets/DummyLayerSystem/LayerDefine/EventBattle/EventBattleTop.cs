@@ -5,6 +5,8 @@ using ModelView;
 public class EventBattleTop : UILayer
 {
     [SerializeField] private DedicatedCameraConnector connector;
+    [SerializeField] float cameraConnectorRightSpace = 940;
+    [SerializeField] float cameraConnectorVerticalSpace = 150;
     [SerializeField] private NineForShow nineForShow;
     [SerializeField] private EventBattleButton easyModeBtn;
     [SerializeField] private EventBattleButton normalModeBtn;
@@ -16,8 +18,7 @@ public class EventBattleTop : UILayer
     
     public void SetupCommon()
     {
-        var camRect = connector.GetComponent<RectTransform>();
-        //ResizeCameraConnectorAsMaxSquare(camRect, camRect.rect.width, camRect.rect.height);
+        ResizeCameraConnectorRefLeft(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
     }
 
     public async UniTask IconButtonFeature(UnitInfo unitInfo)

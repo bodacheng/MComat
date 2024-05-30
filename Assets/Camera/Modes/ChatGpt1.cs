@@ -186,7 +186,7 @@ class ChatGptFix : CameraMode
         cameraTargetPos.y = YDis;
         lookPoint.y = _lookPointHeight;
         
-        if (hasTargets || h != 0)
+        if ((hasTargets && meCenter != null) || h != 0)
         {
             camera.transform.position = Vector3.Lerp(camera.transform.position, cameraTargetPos, _changeSpeed);
             rotateToDirection = lookPoint - cameraTargetPos;
