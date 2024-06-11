@@ -29,7 +29,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - event_stage
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 475fe1fd097d445008d8b151ef475e0b
+  - m_GUID: 6d8a1acc7cd874ca4b3b3ed80caea8bf
     m_Address: normal
     m_ReadOnly: 0
     m_SerializedLabels:
