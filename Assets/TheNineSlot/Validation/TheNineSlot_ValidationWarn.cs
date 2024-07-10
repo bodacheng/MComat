@@ -19,14 +19,14 @@ namespace mainMenu
         public void ValidationWarn(SkillSet.SkillEditError skillEditError)
         {
             confirmBtnColorSwapper.ChangeColor(skillEditError == SkillSet.SkillEditError.Perfect ? Color.green : Color.white);
-            validationWarn.gameObject.SetActive(true);
+            validationWarn.gameObject.SetActive(PlayerAccountInfo.Me.tutorialProgress == "Finished");
             normalSkillIndicator.gameObject.SetActive(false);
             overHeatIndicator.gameObject.SetActive(skillEditError == SkillSet.SkillEditError.UnBalanced);
             switch(skillEditError)
             {
-                case SkillSet.SkillEditError.RepeatedSkill:
-                    validationWarn.text = Translate.Get("CantEquipSameSkill");
-                break;
+                // case SkillSet.SkillEditError.RepeatedSkill:
+                //     validationWarn.text = Translate.Get("CantEquipSameSkill");
+                // break;
                 case SkillSet.SkillEditError.UnBalanced:
                     validationWarn.text = Translate.Get("UnBalanced");
                     break;

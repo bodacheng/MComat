@@ -17,66 +17,84 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 822f6f330b0de4d9386e6c621bab1a1a
   m_SerializeEntries:
-  - m_GUID: fffd28e4ead204e7aa9991b98db9eabf
-    m_Address: gachastar0
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - gacha_effect
-  - m_GUID: 4b4257c41358e4e718e6a64c15950ea0
-    m_Address: gachastar1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - gacha_effect
-  - m_GUID: 117e2af522d7e476e9a653de3592d180
-    m_Address: gachastar2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - gacha_effect
-  - m_GUID: 4cc2f8dc371a849adaa01c17e4ed14ed
-    m_Address: gachastar3
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - gacha_effect
-  - m_GUID: b3cb710725b3c47f8adda571c07f763d
-    m_Address: screenStarExplostionTest0
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - gacha_effect
-  - m_GUID: 961d8b82f21f54954a8fcfefe0fbb4ad
-    m_Address: screenStarExplostionTest1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - gacha_effect
-  - m_GUID: b411754e9a5974c41a82814c68f4f929
-    m_Address: screenStarExplostionTest2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - gacha_effect
-  - m_GUID: cf3c0218dce574049a094b56e4d72390
-    m_Address: screenStarExplostionTest3
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - gacha_effect
-  - m_GUID: ba8db827643896b44bbda4cf5310a5de
-    m_Address: gachaResultEffect2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - gacha_effect
-  - m_GUID: 4b10863adad46d24ab58d2595ef40b85
-    m_Address: gachaResultEffect3
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - gacha_effect
-  - m_GUID: 8da3759130e52a94897f0dc4f818c389
+  - m_GUID: 5c63a4ceffbbf45f9924c46b2dea5c8e
     m_Address: gachaResultEffect1
     m_ReadOnly: 0
     m_SerializedLabels:
     - gacha_effect
-  - m_GUID: 44744cb0e5ffab748b08ce782a3e3da4
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 68cfaf25a47cd4d2f879fefebb616964
+    m_Address: screenStarExplostionTest1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd7d9d32b6f6b4026b899d0dec6fef8a
+    m_Address: screenStarExplostionTest0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 513bfccdcf6d945b4b044be082531d61
+    m_Address: gachaResultEffect3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ed0ebaa9914b40b9b16e0d477eaf786
+    m_Address: normal_test_screenstar0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac2b4fc91e70d486da0bd76f89396cc6
+    m_Address: gachastar0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ab71911e6d22466789114aed910382e
+    m_Address: gachaResultEffect2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b7d0392291d8414498fabd4839e73ee
     m_Address: gachaResultEffect0
     m_ReadOnly: 0
     m_SerializedLabels:
     - gacha_effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9b1ec54002dc4ef586367d8a7b51062
+    m_Address: gachastar2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ded07bdd004a54b0888313d42d3b733d
+    m_Address: gachastar1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79049b1af43b545098b55a6241664806
+    m_Address: gachastar3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c84b48e0de6449d98ba46b1b2fc9f51
+    m_Address: screenStarExplostionTest3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b9eb2bc1eca84149b759573df3b07b4
+    m_Address: screenStarExplostionTest2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - gacha_effect
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

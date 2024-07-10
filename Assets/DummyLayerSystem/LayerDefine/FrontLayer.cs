@@ -168,10 +168,7 @@ public class FrontLayer : UILayer
         }
         ProgressLayer.Close();
     }
-
-    #region 教程
-    [SerializeField] private GameObject indicator;
-
+    
     public void PlsClickBtn(MainSceneStep btnCode)
     {
         ArcadeBtn.interactable = btnCode == MainSceneStep.QuestInfo;
@@ -200,5 +197,4 @@ public class FrontLayer : UILayer
                 break;
         }
     }
-    #endregion
 }
