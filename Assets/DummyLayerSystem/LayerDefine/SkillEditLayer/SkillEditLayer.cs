@@ -28,10 +28,6 @@ public partial class SkillEditLayer : UILayer
     [Header("技能展示器模式切换角色按钮")]
     [SerializeField] Button unitSwitcher;
     
-    [Header("Tutorial")]
-    [SerializeField] ClickNextTutorial clickNextTutorial1, clickNextTutorial2;
-    [SerializeField] GameObject mask;
-    
     public bool Initialized { get; set; } = false;
     
     // For Transition Effects
@@ -326,5 +322,15 @@ public partial class SkillEditLayer : UILayer
     public void OpenTutorial2()
     {
         clickNextTutorial2.Open();
+    }
+    
+    public void OpenAutoEditIndicator()
+    {
+        clickAutoEditIndicator.SetActive(true);
+    }
+    
+    public void CloseAutoEditIndicator()
+    {
+        clickAutoEditIndicator.SetActive(false);
     }
 }

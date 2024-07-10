@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using PlayFab.ClientModels;
-using UnityEngine;
 
 namespace FightScene
 {
@@ -34,8 +33,8 @@ namespace FightScene
                                 var a = UILayerLoader.Load<ArenaFightOver>();
                                 a.Setup();
                                 a.Step2Anim();
-                                a.ShowArenaPoint(x,y);
                                 a.ShowAward(z,0, 0);
+                                a.ShowArenaPoint(x,y);
                             }
                         );
                     }
@@ -57,24 +56,27 @@ namespace FightScene
                                 FightLoad.Fight.ID,
                                 result =>
                                 {
-                                    var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                                    var hasReward = jsonResult.ContainsKey("has_reward") ? jsonResult["has_reward"] : false;
-                                    var hasRewardBool = (bool)hasReward;
-                                    var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
-                                    arenaFightOver.Setup();
-                                    arenaFightOver.Step2Anim();
-                                    if (hasRewardBool)
+                                    void Next()
                                     {
-                                        var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
-                                        var rewardDm = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
-                                        PlayerAccountInfo.Me.arcadeProcess = levelInt;
-                                        var rewardGdInt = Convert.ToInt32(rewardGd);
-                                        var rewardDmInt = Convert.ToInt32(rewardDm);
-                                        arenaFightOver.ShowAward(rewardDmInt, rewardGdInt, 
-                                            levelInt % 5 == 0 ? PlayFabSetting._adBossFightRewardDM : PlayFabSetting._adNormalFightRewardDM,
-                                            levelInt);
+                                        var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                                        var hasReward = jsonResult.ContainsKey("has_reward") ? jsonResult["has_reward"] : false;
+                                        var hasRewardBool = (bool)hasReward;
+                                        var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
+                                        arenaFightOver.Setup();
+                                        arenaFightOver.Step2Anim();
+                                        if (hasRewardBool)
+                                        {
+                                            var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
+                                            var rewardDm = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
+                                            PlayerAccountInfo.Me.arcadeProcess = levelInt;
+                                            var rewardGdInt = Convert.ToInt32(rewardGd);
+                                            var rewardDmInt = Convert.ToInt32(rewardDm);
+                                            arenaFightOver.ShowAward(rewardDmInt, rewardGdInt, 
+                                                levelInt % 5 == 0 ? PlayFabSetting._adBossFightRewardDM : PlayFabSetting._adNormalFightRewardDM,
+                                                levelInt);
+                                        }
+                                        arenaFightOver.LoadNextArcadeStage();
                                     }
-                                    arenaFightOver.LoadNextArcadeStage();
                                     
                                     if (FightLoad.Fight.ID == "1")
                                     {
@@ -87,8 +89,26 @@ namespace FightScene
                                                     { "TutorialProgress", "StageOneFinished" }
                                                 }
                                             },
-                                            () => {}
+                                            Next
                                         );
+                                    }
+                                    else if (FightLoad.Fight.ID == "2")
+                                    {
+                                        PlayerAccountInfo.Me.tutorialProgress = "Finished";
+                                        PlayFabReadClient.UpdateUserData(
+                                            new UpdateUserDataRequest()
+                                            {
+                                                Data = new Dictionary<string, string>()
+                                                {
+                                                    { "TutorialProgress", "Finished" }
+                                                }
+                                            },
+                                            Next
+                                        );
+                                    }
+                                    else
+                                    {
+                                        Next();
                                     }
                                 }
                             );
@@ -240,6 +260,12 @@ namespace FightScene
         public override void ProcessEnd()
         {
             
+        }
+        
+        public override void LocalUpdate()
+        {
+            if (FightLoad.Fight.EventType != FightEventType.Gangbang && FightLoad.Fight.team1Mode != TeamMode.MultiRaid)
+                RTFightManager.Target._CameraManager.VisibilityControl.LocalUpdate();
         }
         
         void LocalGameRestart(int mode)

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace mainMenu
 {
-    public class PreScene : MonoBehaviour
+    public partial class PreScene : MonoBehaviour
     {
         public static PreScene target;
 
@@ -117,6 +117,8 @@ namespace mainMenu
 
         async void Start()
         {
+            TutorialRunner.Main.Shutdown();
+            
             await UniTask.WhenAll(
                 PlayFabReadClient.LoadReadMailsAsync(),
                 AddressablesLogic.Essentials(),
@@ -234,21 +236,38 @@ namespace mainMenu
             {
                 //ReturnLayer.AddFeatureToReturnButton();
                 //从战斗画面返回后，进入战斗前的菜单往上跳一节，指的是站前准备画面
+                Debug.Log("来到这个位置？："+ ReturnLayer.ReturnMissionList.Count);
                 ReturnLayer.POP();
             }
             else
             {
-                if (MainMenuNote.GoingTo != MainSceneStep.FrontPage)
+                if (PlayerAccountInfo.Me.tutorialProgress != "Finished")
                 {
-                    ReturnLayer.Stack(MainSceneStep.FrontPage, (x)=> trySwitchToStep(x, false));
+                    DataLoading(
+                        () =>
+                        {
+                            TutorialRunner.Main.TutorialCheck();
+                        }
+                    );
                 }
-                trySwitchToStep(MainMenuNote.GoingTo, false);
+                else
+                {
+                    if (MainMenuNote.GoingTo != MainSceneStep.FrontPage)
+                    {
+                        ReturnLayer.Stack(MainSceneStep.FrontPage, (x)=> trySwitchToStep(x, false));
+                    }
+                    trySwitchToStep(MainMenuNote.GoingTo, false);
+                }
             }
         }
         
         void Update()
         {
             ProcessesRunner.Main.ProcessNagare();
+        }
+
+        void LateUpdate()
+        {
             TutorialRunner.Main.Process();
         }
         

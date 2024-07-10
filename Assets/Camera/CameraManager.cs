@@ -9,8 +9,10 @@ public class CameraManager : MonoBehaviour
     [SerializeField] Camera subCamera; // unit camera
     [SerializeField] Transform StartPosRef;
     [SerializeField] Transform topDownModeEndRef;
+    [SerializeField] VisibilityControl visibilityControl;
     CameraMode CurrentMode;
     public Transform TopDownModeEndRef => topDownModeEndRef;
+    public VisibilityControl VisibilityControl => visibilityControl;
 
     readonly IDictionary<C_Mode, CameraMode> CModeDic = new Dictionary<C_Mode, CameraMode>()
     {

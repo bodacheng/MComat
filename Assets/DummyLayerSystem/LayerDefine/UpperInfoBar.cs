@@ -54,7 +54,7 @@ public class UpperInfoBar : UILayer
     private TweenerCore<int, int, NoOptions> _gdTween;
     private TweenerCore<int, int, NoOptions> _dmTween;
     
-    public void Interactable(bool on)
+    public void SetInteractive(bool on)
     {
         settingBtn.interactable = on;
         mailBtn.interactable = on;

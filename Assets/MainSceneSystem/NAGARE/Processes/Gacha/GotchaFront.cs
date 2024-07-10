@@ -16,8 +16,8 @@ public class GotchaFront : MSceneProcess
     }
     
     private int _startIndex = 1;
-    private Action _extraSuccessAction;
-    public void SetExtraSuccessAction(Action extraSuccessAction)
+    private Action<Action> _extraSuccessAction;
+    public void SetExtraSuccessAction(Action<Action> extraSuccessAction)
     {
         this._extraSuccessAction = extraSuccessAction;
     }
@@ -26,11 +26,11 @@ public class GotchaFront : MSceneProcess
     {
         if (direction > 0)
         {
-            _startIndex = _startIndex + 1;
+            _startIndex += 1;
         }
         else if (direction < 0)
         {
-            _startIndex = _startIndex - 1;
+            _startIndex -= 1;
         }
 
         if (_startIndex == dropTables.Count)
@@ -57,13 +57,13 @@ public class GotchaFront : MSceneProcess
                     StarsFall.target.TriggerHoleEffect(StarsFall.GachaType.Super);
                 }
             }
-            dropTable.parentT.gameObject.SetActive(_startIndex == i);
+            dropTable.Show(_startIndex == i);
         }
     }
      
     public override void ProcessEnter()
     {
-        StarsFall.target.gameObject.SetActive(true);
+        StarsFall.target.Turn(true);
         if (Stones.TooManyStones())
         {
             ReturnLayer.ReturnMissionList.Clear();
@@ -93,7 +93,7 @@ public class GotchaFront : MSceneProcess
     public override void ProcessEnd()
     {
         UILayerLoader.Remove<GotchaLayer>();
-        StarsFall.target.gameObject.SetActive(false);
+        StarsFall.target.Turn(false);
     }
     
     void DropTableInfo(string dropTableId)
@@ -101,21 +101,21 @@ public class GotchaFront : MSceneProcess
         PreScene.target.trySwitchToStep(MainSceneStep.DropTableInfo, dropTableId, true);
     }
 
-    private bool processingGotcha = false;
+    private bool _processingGotcha = false;
     void NineTimes(string itemId, string currencyCode, int currencyCount)
     {
-        if (processingGotcha)
+        if (_processingGotcha)
         {
             return;
         }
-        processingGotcha = true;
+        _processingGotcha = true;
         switch (currencyCode)
         {
             case "DM":
                 if (Currencies.DiamondCount.Value < currencyCount)
                 {
                     PreScene.target.trySwitchToStep(MainSceneStep.ShopTop);
-                    processingGotcha = false;
+                    _processingGotcha = false;
                     return;
                 }
                 break;
@@ -123,7 +123,7 @@ public class GotchaFront : MSceneProcess
                 if (Currencies.CoinCount.Value < currencyCount)
                 {
                     PopupLayer.ArrangeWarnWindow(Translate.Get("NoEnoughGD"));
-                    processingGotcha = false;
+                    _processingGotcha = false;
                     return;
                 }
                 break;
@@ -158,18 +158,29 @@ public class GotchaFront : MSceneProcess
                         gotStones.Add(stoneOfPlayerInfo);
                     }
                 }
-                
-                PlayFabReadClient.LoadItems(null);
-                
-                GotchaResult.Result = gotStones;
-                PreScene.target.trySwitchToStep(MainSceneStep.GotchaResult, itemId, true);
-                _extraSuccessAction?.Invoke();
-                processingGotcha = false;
+
+                void Next()
+                {
+                    PlayFabReadClient.LoadItems(null);
+                    GotchaResult.Result = gotStones;
+                    PreScene.target.trySwitchToStep(MainSceneStep.GotchaResult, itemId, true);
+                    _processingGotcha = false;
+                }
+
+                if (_extraSuccessAction != null)
+                {
+                    _extraSuccessAction.Invoke(Next);
+                }
+                else
+                {
+                    Next();
+                }
             },
             (x) =>
             {
                 PopupLayer.ArrangeWarnWindow(x.ErrorMessage);
-                processingGotcha = false;
+                _processingGotcha = false;
             });
     }
 }
+

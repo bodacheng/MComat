@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using mainMenu;
+using UnityEngine;
 
 public class TutorialRunner
 {
@@ -15,80 +16,75 @@ public class TutorialRunner
             return _instance;
         }
     }
+
+    public void Shutdown()
+    {
+        currentProcess = null;
+        _tutorialProcesses.Clear();
+    }
     
     TutorialProcess currentProcess;
     private readonly List<TutorialProcess> _tutorialProcesses = new List<TutorialProcess>();
     
     void GenerateStep1Tutorial()
     {
-        var goToUnitList = new GoTo("unit");
-        var openSkillEdit = new OpenSkillEdit("3");
         var skillEditTry = new SkillEditTry("openInstruction1");
-        var explainCombo = new ExplainCombo();
-        var forceBack1 = new ForceBack(() => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.UnitList, false);
-        var forceBack2 = new ForceBack(() => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage);
         _tutorialProcesses.Clear();
-        _tutorialProcesses.Add(goToUnitList);
-        _tutorialProcesses.Add(openSkillEdit);
         _tutorialProcesses.Add(skillEditTry);
-        _tutorialProcesses.Add(explainCombo);
-        _tutorialProcesses.Add(forceBack1);
-        _tutorialProcesses.Add(forceBack2);
     }
     
     void GenerateStep2Tutorial()
     {
-        var goTo = new GoTo("arcade");
-        var teamEdit1 = new TeamEdit("teamEdit1");
-
         bool StageOneFinished()
         {
             return PlayerAccountInfo.Me.tutorialProgress == "StageOneFinished";
         }
         
         var waitFighting = new WaitProcess(StageOneFinished);
-        
         _tutorialProcesses.Clear();
-        _tutorialProcesses.Add(goTo);
-        _tutorialProcesses.Add(teamEdit1);
         _tutorialProcesses.Add(waitFighting);
+        PlayerAccountInfo.Me.ArcadeModeManager.DirectToArcadeStage(PlayerAccountInfo.Me.arcadeProcess + 1, false);
     }
 
     void GenerateStep3Tutorial()
     {
-        var goTo = new GoTo("gotcha");
+        if (ProcessesRunner.Main.currentProcess == null || ProcessesRunner.Main.currentProcess.Step != MainSceneStep.FrontPage)
+        {
+            ReturnLayer.Stack(MainSceneStep.FrontPage, (x)=> PreScene.target.trySwitchToStep(x, false));
+        }
+        
         var tryGotcha = new TryGotcha();
         var forceBack = new ForceBack(() => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage);
         
         _tutorialProcesses.Clear();
-        _tutorialProcesses.Add(goTo);
         _tutorialProcesses.Add(tryGotcha);
         _tutorialProcesses.Add(forceBack);
     }
 
     void GenerateStep4Tutorial()
     {
-        var goTo = new GoTo("unit");
+        PreScene.target.trySwitchToStep(MainSceneStep.FrontPage, false);
+        var goTo = new GoTo(MainSceneStep.UnitList);
         var openSkillEdit = new OpenSkillEdit("1");
         var skillEditTry = new SkillEditTry("openInstruction2");
-        var forceBack = new ForceBack(() => ProcessesRunner.Main.currentProcess.Step == MainSceneStep.FrontPage);
         _tutorialProcesses.Clear();
         _tutorialProcesses.Add(goTo);
         _tutorialProcesses.Add(openSkillEdit);
         _tutorialProcesses.Add(skillEditTry);
-        _tutorialProcesses.Add(forceBack);
     }
     
     void GenerateStep5Tutorial()
     {
-        var goTo = new GoTo("arcade");
-        //var forceTeamEdit = new ForceToTeamEdit("teamEdit2");
-        var teamEdit2 = new TeamEdit("teamEdit2");
-
+        PlayerAccountInfo.Me.ArcadeModeManager.DirectToArcadeStage(PlayerAccountInfo.Me.arcadeProcess + 1, false);
+        
+        bool StageTwoFinished()
+        {
+            return PlayerAccountInfo.Me.tutorialProgress == "Finished";
+        }
+        
+        var waitFighting = new WaitProcess(StageTwoFinished);
         _tutorialProcesses.Clear();
-        _tutorialProcesses.Add(goTo);
-        //_tutorialProcesses.Add(forceTeamEdit);
-        _tutorialProcesses.Add(teamEdit2);
+        _tutorialProcesses.Add(waitFighting);
     }
     
     public void Process()
@@ -102,23 +98,32 @@ public class TutorialRunner
             }
         }
     }
-
-    void StartToMove()
+    
+    public void MoveToNext()
     {
-        ChangeProcess(_tutorialProcesses[0]);
-    }
-
-    void MoveToNext()
-    {
-        ChangeProcess(_tutorialProcesses.Count > 1 ? _tutorialProcesses[1] : null);
-        _tutorialProcesses.RemoveAt(0);
+        var index = 0;
+        TutorialProcess toBeRemove = currentProcess;
+        if (currentProcess != null)
+        {
+            index = _tutorialProcesses.IndexOf(currentProcess)+ 1;
+            toBeRemove = currentProcess;
+        }
+        var toRunProcess = _tutorialProcesses.Count > index ? _tutorialProcesses[index] : null;
+        ChangeProcess(toRunProcess);
+        if (toBeRemove != null)
+            _tutorialProcesses.Remove(toBeRemove);
     }
     
     void ChangeProcess(TutorialProcess nextProcess)
     {
         currentProcess?.ProcessEnd();
         currentProcess = nextProcess;
-        currentProcess?.ProcessEnter();
+        if (currentProcess != null)
+        {
+            currentProcess.ProcessEnter();
+        }
+        else
+            TutorialCheck();
     }
     
     // 所有的教程链都是以FrontPage为起点
@@ -129,27 +134,24 @@ public class TutorialRunner
         {
             case "Started":
                 Main.GenerateStep1Tutorial();
-                Main.StartToMove();
+                Main.MoveToNext();
                 PlayFabReadClient.DontShowFrontFight = "false";
                 break;
             case "SkillEditFinished": // 技能编辑教程结束 
                 Main.GenerateStep2Tutorial();
-                Main.StartToMove();
+                Main.MoveToNext();
                 break;
             case "StageOneFinished": // 第一关结束
                 GenerateStep3Tutorial();
-                Main.StartToMove();
+                Main.MoveToNext();
                 break;
             case "GotchaFinished":
-                var _focusUnitInfo = dataAccess.Units.GetByRId("1");
-                if (_focusUnitInfo != null)
-                    PreScene.target.SetFocusingUnit(_focusUnitInfo.id);
                 GenerateStep4Tutorial();
-                Main.StartToMove();
+                Main.MoveToNext();
                 break;
             case "SkillEditFinished2":
                 GenerateStep5Tutorial();
-                Main.StartToMove();
+                Main.MoveToNext();
                 break;
             case "Finished":
                 PlayFabReadClient.DontShowFrontFight = "true";

@@ -106,6 +106,11 @@ public class CommonSetting : ScriptableObject
     public static bool DevMode;
     public static int GangbangModeMaxUnitPerTeam;
     public static int MaxStoneCount;
+    public static int SkillSetCostLimit = 15;
+    public static int Sp0Cost = 1;
+    public static int Sp1Cost = 2;
+    public static int Sp2Cost = 3;
+    public static int Sp3Cost = 4;
     public static string UnitConfigFile;
     public static string SkillConfigFile;
     public static string SkillAIFile;

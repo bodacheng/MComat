@@ -22,16 +22,18 @@ public class GotchaResult : MSceneProcess
         this.gotchaId = gotchaId as string;
         layer = UILayerLoader.Load<GotchaResultLayer>();
         layer.Setup(this.gotchaId, NineTimes);
-        StarsFall.target.gameObject.SetActive(true);
+        StarsFall.target.Turn(true);
         layer.NineForShow.AddOnClickToSlots(layer.ShowDetail);
         layer.WholeAnimProcess(Result).Forget();
+        
         SetLoaded(true);
     }
     
     public override void ProcessEnd()
     {
-        StarsFall.target.gameObject.SetActive(false);
+        StarsFall.target.Turn(false);
         GotchaResultLayer.Close();
+        StoneLevelUpProccessor.CalUpdateAllForms();
     }
     
     private bool processingGotcha = false;

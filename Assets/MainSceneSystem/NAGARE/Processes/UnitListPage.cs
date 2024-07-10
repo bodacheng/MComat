@@ -1,4 +1,5 @@
-﻿using DummyLayerSystem;
+﻿using System.Linq;
+using DummyLayerSystem;
 using mainMenu;
 
 public class UnitListPage : MSceneProcess
@@ -13,6 +14,7 @@ public class UnitListPage : MSceneProcess
     
     public override void ProcessEnter()
     {
+        UILayerLoader.Remove<UpperInfoBar>();
         unitOptionLayer = UILayerLoader.Load<UnitOptionLayer>();
         layer = UILayerLoader.Load<UnitsLayer>();
         ReturnLayer.MoveFront();
@@ -29,7 +31,18 @@ public class UnitListPage : MSceneProcess
             }
         );
         layer.DisplayUnitIcons(dataAccess.Units.Dic, true);
-        UnitIconBtn(PreScene.target.Focusing.id);
+        if (PreScene.target.Focusing != null)
+        {
+            UnitIconBtn(PreScene.target.Focusing.id);
+        }
+        else
+        {
+            var kv = dataAccess.Units.Dic.FirstOrDefault();
+            if (kv.Value != null)
+            {
+                UnitIconBtn(kv.Value.id);
+            }
+        }
         SetLoaded(true);
     }
     

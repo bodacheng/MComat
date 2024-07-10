@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using mainMenu;
 using PlayFab.ClientModels;
@@ -10,7 +8,12 @@ public class TryGotcha : TutorialProcess
     private GotchaLayer gotchaLayer;
     private GotchaResultLayer gotchaResultLayer;
     private ReturnLayer returnLayer;
-    
+
+    public override void ProcessEnter()
+    {
+        PreScene.target.trySwitchToStep(MainSceneStep.GotchaFront);
+    }
+
     public override void LocalUpdate()
     {
         if (gotchaLayer == null)
@@ -20,7 +23,7 @@ public class TryGotcha : TutorialProcess
             {
                 var gotchaFront  = (GotchaFront)ProcessesRunner.Main.GetProcess(MainSceneStep.GotchaFront);
                 gotchaFront.SetExtraSuccessAction(
-                    () =>
+                    (x) =>
                     {
                         PlayFabReadClient.UpdateUserData(
                             new UpdateUserDataRequest()
@@ -33,6 +36,7 @@ public class TryGotcha : TutorialProcess
                             () =>
                             {
                                 PlayerAccountInfo.Me.tutorialProgress = "GotchaFinished";
+                                x.Invoke();
                             }
                         );
                     }
@@ -50,17 +54,6 @@ public class TryGotcha : TutorialProcess
         if (gotchaResultLayer == null)
         {
             gotchaResultLayer = UILayerLoader.Get<GotchaResultLayer>();
-            if (gotchaResultLayer != null)
-            {
-                async void DelayBack()
-                {
-                    returnLayer.gameObject.SetActive(false);
-                    await UniTask.Delay(TimeSpan.FromSeconds(3));
-                    returnLayer.gameObject.SetActive(true);
-                    returnLayer.ForceBackMode(true);
-                }
-                DelayBack();
-            }
         }
     }
 
@@ -71,7 +64,5 @@ public class TryGotcha : TutorialProcess
     
     public override void ProcessEnd()
     {
-        var gotchaFront  = (GotchaFront)ProcessesRunner.Main.GetProcess(MainSceneStep.GotchaFront);
-        gotchaFront.SetExtraSuccessAction(null);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using DummyLayerSystem;
 using mainMenu;
-using UnityEngine;
 
 public class OpenSkillEdit : TutorialProcess
 {
@@ -8,6 +7,7 @@ public class OpenSkillEdit : TutorialProcess
     UnitListPage _unitListPage;
     UnitsLayer _unitsLayer;
     UnitOptionLayer _unitOptionLayer;
+    UpperInfoBar _upperInfoBar;
 
     UnitInfo _focusUnitInfo;
     readonly string _focusUnitRId;
@@ -44,15 +44,23 @@ public class OpenSkillEdit : TutorialProcess
             _returnLayer.gameObject.SetActive(false);
         }
         
+        if (_upperInfoBar == null)
+        {
+            _upperInfoBar = UILayerLoader.Get<UpperInfoBar>();
+            if (_upperInfoBar != null)
+            {
+                _upperInfoBar.SetInteractive(false);
+            }
+        }
+        
         if (_unitOptionLayer == null)
             _unitOptionLayer = UILayerLoader.Get<UnitOptionLayer>();
         
         if (_unitListPage.GetLoaded() && _unitOptionLayer != null)
         {
             _unitOptionLayer.PlsClickSkillEdit();
-            HighLightLayer.HighLightRect(_unitOptionLayer._NineForShow.GetComponent<RectTransform>());
         }
-
+        
         if (_unitsLayer == null)
         {
             _unitsLayer = UILayerLoader.Get<UnitsLayer>();

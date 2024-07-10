@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 // 抽卡技能石细节显示
 public partial class NineForShow : MonoBehaviour
@@ -56,5 +57,46 @@ public partial class NineForShow : MonoBehaviour
         {
             onClickStone(item._SkillConfig.RECORD_ID);
         }
+    }
+    
+    public static async UniTask RefreshSlotEffects(int slotNum, int eX, Vector3 pos, Transform releaseTarget, 
+        IDictionary<int, ParticleSystem> _slotEffects, float scale = 1, int targetLayer = 0)
+    {
+        if (_slotEffects.ContainsKey(slotNum) && _slotEffects[slotNum] != null)
+        {
+            Destroy(_slotEffects[slotNum].gameObject);
+        }
+        
+        string effectName;
+        switch (eX)
+        {
+            case -1:
+                return;
+            case 1:
+                effectName = "SlotEffects/ex1";
+                break;
+            case 2:
+                effectName = "SlotEffects/ex2";
+                break;
+            case 3:
+                effectName = "SlotEffects/ex3";
+                break;
+            default:
+                effectName = "SlotEffects/normal";
+                break;
+        }
+        var slotEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>(effectName, releaseTarget.gameObject);
+
+        var slotT = slotEffect.transform;
+
+        var oldScale = slotT.localScale;
+        slotT.localScale = new Vector3(oldScale.x * PosCal.TempRate() * scale, oldScale.y * PosCal.TempRate() * scale, oldScale.z);
+        
+        //slotEffect.transform.SetParent(parent);
+        DicAdd<int, ParticleSystem>.Add(_slotEffects, slotNum, slotEffect);
+        slotEffect.gameObject.name = "slotEffect"+ slotNum;
+        slotEffect.gameObject.layer = targetLayer;
+        slotT.position = pos;
+        slotEffect.Play(true);
     }
 }

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using NoSuchStudio.Common;
 using UnityEngine;
 using UnityEngine.UI;
-using Button = UnityEngine.UI.Button;
 using Slider = UnityEngine.UI.Slider;
 
 namespace mainMenu
@@ -13,6 +12,12 @@ namespace mainMenu
     {
         [Header("CurrentHp")]
         [SerializeField] Text _HP;
+        
+        [Header("over heat bar")] 
+        [SerializeField] Slider overHeatBar;
+        
+        [Header("OverHeat Indicator")]  
+        [SerializeField] GameObject overHeatIndicator;
         
         [Header("Validation Warning")]
         [SerializeField] Text validationWarn;
@@ -34,27 +39,16 @@ namespace mainMenu
         public BOButton ConfirmSkillChangeButton;
         [SerializeField] ConfirmBtnColorSwapper confirmBtnColorSwapper;
         
-        [Header("OverHeat Indicator")]  
-        [SerializeField] GameObject overHeatIndicator;
-        
         [Header("Confirm Indicator")] 
         public GameObject confirmBtnIndicator;
         
         [Header("技能石编辑确认")]
         public BOButton ResetButton;
-        
-        [Header("EXPoint+")]
-        [SerializeField] List<GameObject> remainCharges;//固定是9个长度
-        [Header("EXPoint-")]
-        [SerializeField] List<GameObject> burdenCharges;//固定是9个长度
-        [Header("over heat bar")] 
-        [SerializeField] Slider overHeatBar;
+
+        [SerializeField] Text currentCostText;
         
         [Header("选中框")]
         [SerializeField] GameObject selectedFrame;
-        
-        [Header("type特效管理")]
-        public SkillStoneBoxTabEffectsManager _tabEffects;
         
         public BOButton comboShowBtn, dreamComboShowBtn, comboCloseBtn;
         
@@ -63,7 +57,7 @@ namespace mainMenu
         SkillStoneSlot _c1Slot, _c2Slot, _c3Slot;
         SkillStoneSlot _focusingSlot;
         public readonly List<SkillStoneSlot> AllSlot = new List<SkillStoneSlot>();
-
+        readonly IDictionary<int, ParticleSystem> _slotEffects = new Dictionary<int, ParticleSystem>();
         public Action<string> PrintSkillInfo;
 
         // For Combo Instruction
@@ -143,6 +137,9 @@ namespace mainMenu
 
         public void ShowTransition(SkillStoneSlot slot, Action<SkillStoneSlot, SkillStoneSlot> effectTrigger)
         {
+            if (slot == null)
+                return;
+                
             SkillStoneSlot endSlot1 = null, endSlot2 = null, endSlot3 = null;
             if (slot == _a1Slot || slot == _b1Slot ||slot == _c1Slot)
             {
@@ -238,11 +235,13 @@ namespace mainMenu
             slot._cell.btn.onHold.AddListener(GoToLevelUpPage);
             slot._cell.btn.onDoubleClick.AddListener(DoubleClick);
             
-            slot._cell.SetOnDropAction(((from, to) =>
-            {
-                StoneCell.Install(from, to);
-                ValidateWarn();
-            }));
+            slot._cell.SetOnDropAction(
+                (from, to) =>
+                {
+                    StoneCell.Install(from, to);
+                    ValidateWarn();
+                }
+            );
         }
         
         public void StartUp(Action<SKStoneItem> runSkill)
@@ -270,10 +269,27 @@ namespace mainMenu
             AllSlot.Add(_c2Slot);
             AllSlot.Add(_c3Slot);
             
-            foreach (var _slot in AllSlot)
+            foreach (var slot in AllSlot)
             {
-                SlotBehaviour(_slot, runSkill);
+                SlotBehaviour(slot, runSkill);
             }
+        }
+
+        public List<SkillStoneSlot> GetEmptySlots()
+        {
+            List<SkillStoneSlot> returnValue = new List<SkillStoneSlot>();
+            foreach (var slot in AllSlot)
+            {
+                if (slot._cell.GetItem() == null && slot._cell.gameObject.activeSelf)
+                    returnValue.Add(slot);
+            }
+            return returnValue;
+        }
+
+        private Action _extraOnNineSlotChanged;
+        public void SetExtraOnNineSlotChanged(Action extraOnNineSlotChanged)
+        {
+            _extraOnNineSlotChanged = extraOnNineSlotChanged;
         }
         
         // 当前技能编辑形成的各项参数更新
@@ -300,19 +316,21 @@ namespace mainMenu
             RefreshEffects();
             var valR = ValidateWarn();
             //ConfirmSkillChangeButton.gameObject.SetActive(valR == SkillSet.SkillEditError.Perfect);
+            
+            _extraOnNineSlotChanged?.Invoke();
             return full;
         }
         
          async void RefreshEffects()
          {
-             foreach (var slot in AllSlot)
+            await UniTask.DelayFrame(1);// wait for the UI Layer to be stable.Otherwise pos caculation will be wrong at the start
+            foreach (var slot in AllSlot)
             {
                 var item = slot._cell.GetItem();
-                await Task.Delay(1);// wait for the UI Layer to be stable.Otherwise pos caculation will be wrong at the start
-                if (slot != null && slot._cell != null)
+                if (slot._cell != null)
                 {
                     var worldPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, slot._cell.GetComponent<RectTransform>(), 5f);
-                    _tabEffects.RefreshSlotEffect(slot.num, worldPos, item != null ? item._SkillConfig.SP_LEVEL : -1);
+                    await NineForShow.RefreshSlotEffects(slot.num, item != null ? item._SkillConfig.SP_LEVEL : -1, worldPos, transform, _slotEffects);
                 }
             }
          }

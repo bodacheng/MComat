@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using dataAccess;
+using DummyLayerSystem;
 using UnityEngine;
 using UnityEngine.UI;
 using mainMenu;
@@ -16,7 +17,8 @@ public class FrontLayer : UILayer
     [SerializeField] BOButton GangbangBtn;
     [SerializeField] BOButton ArenaBtn;
     [SerializeField] BOButton EventFightBtn;
-    [SerializeField] BOButton MemberBtn;
+    [SerializeField] BOButton UnitBtn;
+    [SerializeField] GameObject unitBtnIndicator;
     [SerializeField] BOButton TrainBtn;
     [SerializeField] BOButton StonesBtn;
     [SerializeField] GameObject hasStoneToBeUpdateBadge;
@@ -31,8 +33,14 @@ public class FrontLayer : UILayer
     [SerializeField] float cameraConnectorRightSpace = 940;
     [SerializeField] float cameraConnectorVerticalSpace = 150;
     [SerializeField] float skillShowInterval = 5;
-
+    
     public GameObject HasStoneToBeUpdateBadge => hasStoneToBeUpdateBadge;
+    
+    public void RefreshBadge()
+    {
+        StoneLevelUpProccessor.CalUpdateAllForms();
+        hasStoneToBeUpdateBadge.SetActive(StoneLevelUpProccessor.HasStoneToBeUpdate());
+    }
     
     public void Initialise(PreScene pre)
     {
@@ -41,7 +49,7 @@ public class FrontLayer : UILayer
         // view2D.GetComponent<RectTransform>().anchoredPosition = camConnector.GetComponent<RectTransform>().anchoredPosition + new Vector2(camConnector.GetComponent<RectTransform>().sizeDelta.x / 2,0);
         
         ArcadeBtn.onClick.AddListener(
-        ()=>
+            ()=>
             {
                 PlayerAccountInfo.Me.ArcadeModeManager.DirectToArcadeStage(PlayerAccountInfo.Me.arcadeProcess + 1, true);
             });
@@ -73,7 +81,7 @@ public class FrontLayer : UILayer
             }
         });
         
-        MemberBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.UnitList));
+        UnitBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.UnitList));
         TrainBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SelfFightFront));
         StonesBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.SkillStoneList));
         GotchaBtn.onClick.AddListener(() => pre.trySwitchToStep(MainSceneStep.GotchaFront));
@@ -164,42 +172,33 @@ public class FrontLayer : UILayer
     #region 教程
     [SerializeField] private GameObject indicator;
 
-    public void PlsClickBtn(string btnCode)
+    public void PlsClickBtn(MainSceneStep btnCode)
     {
-        ArcadeBtn.interactable = btnCode == "arcade";
-        ArenaBtn.interactable = btnCode == "arena";
-        MemberBtn.interactable = btnCode == "unit";
-        TrainBtn.interactable = btnCode == "train";
-        StonesBtn.interactable = btnCode == "stones";
-        GotchaBtn.interactable = btnCode == "gotcha";
-        EventFightBtn.interactable = btnCode == "event";
+        ArcadeBtn.interactable = btnCode == MainSceneStep.QuestInfo;
+        ArenaBtn.interactable = btnCode == MainSceneStep.Arena;
+        GangbangBtn.interactable = btnCode == MainSceneStep.GotchaFront;
+        TrainBtn.interactable = btnCode == MainSceneStep.SelfFightFront;
+        EventFightBtn.interactable = btnCode == MainSceneStep.EventFight;
         
-        Transform localPos = null;
+        //ArcadeBtn.Indicator.SetActive(false);
+        //ArenaBtn.Indicator.SetActive(false);
+        //GangbangBtn.Indicator.SetActive(false);
+        
         switch (btnCode)
         {
-            case "arcade":
-                localPos = ArcadeBtn.transform;
+            case MainSceneStep.QuestInfo:
+                //ArcadeBtn.Indicator.SetActive(true);
                 break;
-            case "arena":
-                localPos = ArenaBtn.transform;
+            case MainSceneStep.Arena:
+                //ArenaBtn.Indicator.SetActive(true);
                 break;
-            case "unit":
-                localPos = MemberBtn.transform;
+            case MainSceneStep.SelfFightFront:
+                //GangbangBtn.Indicator.SetActive(true);
                 break;
-            case "train":
-                localPos = TrainBtn.transform;
-                break;
-            case "stones":
-                localPos = StonesBtn.transform;
-                break;
-            case "gotcha":
-                localPos = GotchaBtn.transform;
+            case MainSceneStep.UnitList:
+                unitBtnIndicator.SetActive(true);
                 break;
         }
-
-        indicator.transform.SetParent(localPos);
-        indicator.transform.localPosition = Vector3.zero;
-        indicator.SetActive(true);
     }
     #endregion
 }
