@@ -141,7 +141,7 @@ public partial class SkillEditLayer : UILayer
     public async UniTask Setup(Action<SkillEditLayer> toDo = null)
     {
         Initialized = false;
-        stonesBox.SetBoxHeight( 90 + 200 + 100);//90是那个距离条filter的高度，200是skillStoneDetail的高度，120是主观的额外空间
+        stonesBox.SetBoxHeight( 100 + 200 + 20);//90是那个距离条filter的高度，200是skillStoneDetail的高度，120是主观的额外空间
         SetGridGroupSize(stonesBox.Grid,0);
         stonesBox.GenerateCells(9);
         gameObject.SetActive(false);
