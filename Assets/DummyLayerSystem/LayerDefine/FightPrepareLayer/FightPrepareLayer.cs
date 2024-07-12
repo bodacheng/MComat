@@ -165,6 +165,8 @@ public partial class FightPrepareLayer : UILayer
         var info = team2Units.FirstOrDefault((x) => x.id == instanceId);
         if (info != null)
         {
+            var unitConfig = Units.GetUnitConfig(info.r_id);
+            BackGroundPS.target.ChangeBGByElement(unitConfig.element);
             await UniTask.WhenAll(
                 nineForShow.SkillSetInfoOfUnitOnArcadePage(info.set),
                 Set2DView(info.r_id, view2D, unitOutAnimator,

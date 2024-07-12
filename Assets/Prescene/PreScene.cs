@@ -246,7 +246,6 @@ namespace mainMenu
             {
                 //ReturnLayer.AddFeatureToReturnButton();
                 //从战斗画面返回后，进入战斗前的菜单往上跳一节，指的是站前准备画面
-                Debug.Log("来到这个位置？："+ ReturnLayer.ReturnMissionList.Count);
                 ReturnLayer.POP();
             }
             else
