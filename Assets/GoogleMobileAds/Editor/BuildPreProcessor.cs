@@ -29,6 +29,8 @@ public class BuildPreProcessor : IPreprocessBuild
         {
             AssetDatabase.CreateFolder("Assets", "GoogleMobileAds");
         }
+        
+        SessionState.SetBool("SelfDeclaredAndroidDependenciesDisabled:com.unity.purchasing", true);
 
         /*
          * Handle importing GMA via Unity Package Manager.
