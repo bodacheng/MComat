@@ -136,29 +136,27 @@ public class FightingStepLayer : UILayer
     public void ForceClickAutoBtn()
     {
         forceClickAutoBtnBlackMask.SetActive(true);
-        team1UI.AutoSwitch.transform.SetAsLastSibling();
-        team1UI.AutoSwitch.AddExtraProcessOnClick(
-            () =>
+        clickNextTutorial.Button.onClick.AddListener(
+            ()=>
             {
-                clickNextTutorial.gameObject.SetActive(false);
-            }
-        );
+                team1UI.AutoSwitch.ChangeAutoState(true);
+                forceClickAutoBtnBlackMask.SetActive(false);
+            });
+    }
+
+    bool preTeam1AIState;
+    public void TutorialModeForceOnClickDreamCombo()
+    {
+        clickTriggerDreamCombo.SetActive(false);
+        inputsManager.DreamComboDown();
+        Team1UI.AutoSwitch.ChangeAutoState(preTeam1AIState);
+        Team2UI.AutoSwitch.ChangeAutoState(true);
     }
     
-    public void ForceClickDreamComboBtn(Action afterClick)
+    public void ForceClickDreamComboBtn()
     {
+        preTeam1AIState = Team1UI.AutoSwitch.CurrentState();
         clickTriggerDreamCombo.SetActive(true);
-        void Call()
-        {
-            clickTriggerDreamCombo.SetActive(false);
-        }
-        inputsManager.DreamComboBtn.onClick.AddListener(Call);
-        inputsManager.DreamComboBtn.onClick.AddListener(() =>
-        {
-            inputsManager.DreamComboBtn.onClick.RemoveListener(Call);
-            afterClick.Invoke();
-        });
-        inputsManager.DreamComboBtn.transform.SetAsLastSibling();
     }
 
     private void OnDisable()
@@ -176,3 +174,4 @@ public class FightingStepLayer : UILayer
         base.OnDestroy();
     }
 }
+

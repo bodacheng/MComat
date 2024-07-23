@@ -166,28 +166,10 @@ public partial class Data_Center : MonoBehaviour
         
         _MyBehaviorRunner.SuperComboCondition = ()=> this.FightDataRef.HasPlentyDreamGauge() && !FightDataRef.IsDead.Value;
         
-        var tasks = new List<UniTask>
-        {
-            EffectsManager.IniEffectsPool("short_effect", FightGlobalSetting.EffectPathDefine(element), 1),
-            EffectsManager.IniEffectsPool("normal_effect", FightGlobalSetting.EffectPathDefine(element), 1),
-            EffectsManager.IniEffectsPool("long_effect", FightGlobalSetting.EffectPathDefine(element), 1),
-            EffectsManager.IniEffectsPool("Sparks", FightGlobalSetting.EffectPathDefine(element), 1),
-            EffectsManager.IniEffectsPool("light_hit", FightGlobalSetting.EffectPathDefine(element), preloadCount),
-            EffectsManager.IniEffectsPool("heavy_hit", FightGlobalSetting.EffectPathDefine(element), preloadCount),
-            EffectsManager.IniEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(element), preloadCount),
-            EffectsManager.IniEffectsPool("resistanceUp", FightGlobalSetting.EffectPathDefine(element), 1),
-            EffectsManager.IniEffectsPool("on_enable_effect", FightGlobalSetting.EffectPathDefine(element), 1),
-            EffectsManager.IniEffectsPool("FlashStart", FightGlobalSetting.EffectPathDefine(element), 1),
-            EffectsManager.IniEffectsPool("FlashEnd", FightGlobalSetting.EffectPathDefine(element), 1),
-            EffectsManager.IniEffectsPool("super_combo_explosion", FightGlobalSetting.EffectPathDefine(element), 1),
-            EffectsManager.IniEffectsPool("dream_buff", FightGlobalSetting.EffectPathDefine(element), 1)
-        };
-        
         //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
         // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
         var toLoadSkillAnimsNames = _MyBehaviorRunner.PassSkillTypeKeys();
-        tasks.Add(AnimationManger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, element, preloadCount));
-        await UniTask.WhenAll(tasks);
+        await AnimationManger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, element, preloadCount);
     }
 
     /// <summary>
@@ -199,7 +181,9 @@ public partial class Data_Center : MonoBehaviour
     /// <param name="aiDelayFrame"></param>
     /// <param name="teamHpRate"></param>
     /// <param name="lv"> 两种模式，如果带入-1，将按照角色等级来初始化，用于玩家账户队伍。带入其他值则按其他值来，用于关卡队伍 </param>
-    public void Step3Initialize(TeamConfig teamConfig, CriticalGaugeMode criticalGaugeMode, AIMode aiMode, int aiDelayFrame, Func<bool> AITriggerDreamComboRateCondition,
+    private float teamHpRate;
+    public void Step3Initialize(TeamConfig teamConfig, CriticalGaugeMode criticalGaugeMode, 
+        AIMode aiMode, int aiDelayFrame, Func<bool> AITriggerDreamComboRateCondition,
         float teamHpRate, UnitInfo unitInfo)
     {
         this.unitInfo = unitInfo;
@@ -211,12 +195,7 @@ public partial class Data_Center : MonoBehaviour
         FightDataRef.EnableAllLimbs(true);
         FightDataRef._comboHitCount.HitCount.Value = 0;
         FightDataRef.CriticalGaugeMode = criticalGaugeMode;
-        var hp = SkillSet.INI_Hp(unitInfo.set.SkillIDList(), unitInfo.level) * teamHpRate;
-        FightDataRef.CurrentHp.Value = hp;
-        FightDataRef.CurrentHp.Subscribe(x =>
-        {
-            FightDataRef.CurrentHp.Value = Mathf.Clamp(x, 0, hp);
-        }).AddTo(gameObject);
+
         
         FightDataRef.Resistance.Subscribe(x =>
         {
@@ -224,7 +203,8 @@ public partial class Data_Center : MonoBehaviour
         }).AddTo(gameObject);
         
         FightDataRef.CriticalGauge.Value = FightGlobalSetting._EXMax;
-        _MyBehaviorRunner.SetAt(unitInfo.level);
+        this.teamHpRate = teamHpRate;
+        SetAT();
         _MyBehaviorRunner.AIMode = aiMode;
         _MyBehaviorRunner.Controller.DecisionDelay = aiDelayFrame;
         _MyBehaviorRunner.AITriggerDreamComboRateCondition = () =>
@@ -248,6 +228,17 @@ public partial class Data_Center : MonoBehaviour
             {
                 this.Sensor.SensorDetectionResultSortProcess(x);
             });
+    }
+
+    public void SetAT()
+    {
+        _MyBehaviorRunner.SetAt(unitInfo.level);
+        var hp = SkillSet.INI_Hp(unitInfo.set.SkillIDList(), unitInfo.level) * teamHpRate;
+        FightDataRef.CurrentHp.Value = hp;
+        FightDataRef.CurrentHp.Subscribe(x =>
+        {
+            FightDataRef.CurrentHp.Value = Mathf.Clamp(x, 0, hp);
+        }).AddTo(gameObject);
     }
     
     // for tutorial
