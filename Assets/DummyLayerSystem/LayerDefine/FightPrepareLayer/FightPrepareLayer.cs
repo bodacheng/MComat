@@ -28,6 +28,7 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] RewardUI rewardUI;
     [SerializeField] BOButton toArcadeFrontBtn;
     [SerializeField] Image view2D;
+    [SerializeField] Animator layerAnimator;
     [SerializeField] Animator unitOutAnimator;
     [SerializeField] NineForShow nineForShow;
     [SerializeField] DedicatedCameraConnector connector;
@@ -35,6 +36,11 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] BattleGroundSwitch battleGroundSwitch;
 
     public BattleGroundSwitch BattleGroundSwitch => battleGroundSwitch;
+
+    public void SetLayerAnimatorTrigger(string code)
+    {
+        layerAnimator.SetTrigger(code);
+    }
     
     public void SetFightMode(int fightMode)
     {
@@ -51,11 +57,12 @@ public partial class FightPrepareLayer : UILayer
         beginFight.SetAction(fightBegin);
     }
     
-    public void SetFightBeginEnableRender(bool canFight)
+    public void SetFightBeginEnableRender(bool canFight, bool guide = false)
     {
-        beginFight.Enable(canFight);
+        beginFight.Enable(canFight, guide);
     }
-
+    
+    
     public void SetTeamEditFeature(Action teamEdit)
     {
         editTeamButton.onClick.RemoveAllListeners();
@@ -123,8 +130,12 @@ public partial class FightPrepareLayer : UILayer
                 PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
             },
             myTeamShowT, true, PlayerAccountInfo.Me.tutorialProgress == "Finished");
-        if (dataAccess.Units.Dic.Count > stage.FightMembers.HeroSets.GetValues().Count
-            && stage.FightMembers.HeroSets.GetValues().Count < 3)
+
+        bool hasExtraSeat = (stage.EventType != FightEventType.Quest &&
+                             (dataAccess.Units.Dic.Count > stage.FightMembers.HeroSets.GetValues().Count
+                              && stage.FightMembers.HeroSets.GetValues().Count < 3));
+        
+        if (hasExtraSeat)
         {
             teamEditIndicatorText.text = Translate.Get("HasExtraSeat");
             teamEditIndicator.SetActive(true);
@@ -165,12 +176,9 @@ public partial class FightPrepareLayer : UILayer
         var info = team2Units.FirstOrDefault((x) => x.id == instanceId);
         if (info != null)
         {
-            var unitConfig = Units.GetUnitConfig(info.r_id);
-            BackGroundPS.target.ChangeBGByElement(unitConfig.element);
             await UniTask.WhenAll(
                 nineForShow.SkillSetInfoOfUnitOnArcadePage(info.set),
-                Set2DView(info.r_id, view2D, unitOutAnimator,
-                    0, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(info.r_id)),
+                //Set2DView(info.r_id, view2D, unitOutAnimator, 0, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(info.r_id)),
                 connector.ShowModel(info.r_id)
             );
         }

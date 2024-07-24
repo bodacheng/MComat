@@ -11,6 +11,10 @@ public class QuestInfoPage : MSceneProcess
     
     async UniTask EnterProcess(FightInfo stage)
     {
+        var represent = stage.GetRepresentUnitInfo();
+        UnitConfig unitConfig = Units.GetUnitConfig(represent.r_id);
+        BackGroundPS.target.ChangeBGByElement(unitConfig.element);
+        
         FightLoad.Fight = stage;
         _layer = UILayerLoader.Load<FightPrepareLayer>();
         
@@ -23,11 +27,28 @@ public class QuestInfoPage : MSceneProcess
                     PreScene.target.trySwitchToStep(MainSceneStep.TeamEditFront, "arena", true);
                 }
                 
+                _layer.SetLayerAnimatorTrigger("normal");
                 await _layer.BattleGroundSwitch.INI();
                 _layer.BattleGroundSwitch.gameObject.SetActive(true);
                 _layer.SetTeamEditFeature(GoToTeamEditArena);
+                
                 break;
             case FightEventType.Quest:
+                _layer.SetLayerAnimatorTrigger("evolution");
+                
+                var arcadeTeam = TeamSet.GetTargetSet("arcade");
+                // 处理以前的旧逻辑
+                if (arcadeTeam.PosNumsWithLocalKeys.Length > 1)
+                {
+                    for (var index = 0; index < arcadeTeam.PosNumsWithLocalKeys.Length; index++)
+                    {
+                        if (index > 0)
+                        {
+                            arcadeTeam.SetPosUnitByInstanceID(index, null);
+                        }
+                    }
+                }
+                
                 FightLoad.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arcade").LoadTeamDic();
                 void GoToTeamEditArcade()
                 {
@@ -43,11 +64,13 @@ public class QuestInfoPage : MSceneProcess
                 );
                 break;
             case FightEventType.Event:
+                _layer.SetLayerAnimatorTrigger("normal");
                 FightLoad.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet("arcade").LoadTeamDic();
                 _layer.SetTeamEditFeature(GoToTeamEditArcade);
                 _layer.SetEventFeature(FightLoad.Fight.ID);
                 break;
             case FightEventType.Gangbang:
+                _layer.SetLayerAnimatorTrigger("normal");
                 _controllingGangbangInfo = GangbangInfo.Copy((GangbangInfo)stage);
                 _controllingGangbangInfo.FightMembers.HeroSets = TeamSet.GetTargetSet("gangbang").LoadTeamDic(); // 为了队员显示
                 _layer.SetTeamEditFeature(
@@ -96,6 +119,11 @@ public class QuestInfoPage : MSceneProcess
         {
             int FightMode()
             {
+                if (FightLoad.Fight.EvolutionMode)
+                {
+                    return 3;
+                }
+                
                 switch (FightLoad.Fight.EventType)
                 {
                     case FightEventType.Quest:
@@ -111,7 +139,7 @@ public class QuestInfoPage : MSceneProcess
         
         var canFight = CanFightCheck(FightLoad.Fight, _controllingGangbangInfo);
         //_layer.TeamEditIndicator.gameObject.SetActive(!canFight);
-        _layer.SetFightBeginEnableRender(canFight);
+        _layer.SetFightBeginEnableRender(canFight, PlayerAccountInfo.Me.tutorialProgress != "Finished");
         SetLoaded(true);
     }
     
@@ -154,6 +182,11 @@ public class QuestInfoPage : MSceneProcess
                 }
                 break;
             case FightEventType.Quest:
+                if (fight.FightMembers.HeroSets.GetValues().Count != 1)
+                {
+                    return false;
+                }
+                break;
             case FightEventType.Event:
                 if (PlayerAccountInfo.Me.tutorialProgress == "SkillEditFinished2")
                 {
@@ -258,6 +291,17 @@ public class QuestInfoPage : MSceneProcess
                 }
 
                 RealFight();
+                break;
+            case FightEventType.Quest:
+                fightInfo.LoadMyTeam();
+                if (fightInfo.FightMembers.HeroSets.GetValues().Count != 1)
+                {
+                    PopupLayer.ArrangeConfirmWindow(
+                        () => { FightLoad.Go(fightInfo);},
+                        Translate.Get("Error"));// 按理说不应该出现这个问题
+                    return;
+                }
+                FightLoad.Go(fightInfo);
                 break;
             default:
                 fightInfo.LoadMyTeam();
