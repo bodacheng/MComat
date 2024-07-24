@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaf3bb8ad816a44358eca5831d97217e, type: 3}
-  m_Name: normal_2
+  m_Name: easy_3
   m_EditorClassIdentifier: 
   battleGroundID: 2
   fightBGM: 0
   unitsData:
   - id: 0
-    r_id: 1
-    level: 6
+    r_id: 3
+    level: 1
     set:
-      a1: 36
-      a2: 161
-      a3: 4
-      b1: 45
-      b2: 42
-      b3: 176
-      c1: 63
-      c2: 176
-      c3: 10
+      a1: 159
+      a2: 102
+      a3: 44
+      b1: 63
+      b2: 159
+      b3: 144
+      c1: 116
+      c2: 136
+      c3: 140
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0
@@ -37,5 +37,5 @@ MonoBehaviour:
   team1AIMode: 0
   team2AIMode: 0
   dumbAIDecisionDelay: 20
-  dreamComboAIRateNum: 100
-  stageRefLevel: 7
+  dreamComboAIRateNum: 80
+  stageRefLevel: 2

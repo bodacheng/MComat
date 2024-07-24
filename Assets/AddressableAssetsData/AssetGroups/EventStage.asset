@@ -23,14 +23,14 @@ MonoBehaviour:
     m_SerializedLabels:
     - event_stage
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 43c607c23ab09474ab9eb44da44d992b
-    m_Address: hard
+  - m_GUID: e7b2b8d3b75314d4296e48db54ad8a2f
+    m_Address: normal
     m_ReadOnly: 0
     m_SerializedLabels:
     - event_stage
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6d8a1acc7cd874ca4b3b3ed80caea8bf
-    m_Address: normal
+  - m_GUID: 9359bfdc2b640412dbc5f7647c9c4ce8
+    m_Address: hard
     m_ReadOnly: 0
     m_SerializedLabels:
     - event_stage
