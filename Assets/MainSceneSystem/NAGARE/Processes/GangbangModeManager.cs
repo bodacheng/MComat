@@ -38,7 +38,7 @@ public class GangbangModeManager
         var fightInfo = await AddressablesLogic.LoadT<GangbangInfo>(location);
         fightInfo.EventType = FightEventType.Gangbang;
         fightInfo.ArcadeFightMode = 1;
-        fightInfo.FightMembers.SetEnemyLevel(fightInfo.stageRefLevel);
+        fightInfo.SetUnitLevelByRefLevel();
         return fightInfo;
     }
 
@@ -49,15 +49,7 @@ public class GangbangModeManager
         {
             stage = await LoadStage(stageNo - 1);
         }
-        
-        if (stage != null)
-        {
-            stage.EventType = FightEventType.Gangbang;
-            PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, forward);
-        }
-        else
-        {
-            PreScene.target.trySwitchToStep(MainSceneStep.GangBangFront, forward);
-        }
+        stage.EventType = FightEventType.Gangbang;
+        PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, stage, forward);
     }
 }
