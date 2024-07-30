@@ -17,7 +17,7 @@ MonoBehaviour:
   unitsData:
   - id: 0
     r_id: 7
-    level: 1
+    level: 1.1
     set:
       a1: 116
       a2: 89
@@ -28,6 +28,46 @@ MonoBehaviour:
       c1: 68
       c2: 53
       c3: 125
+  - id: 1
+    r_id: 12
+    level: 1.1
+    set:
+      a1: 27
+      a2: 159
+      a3: 125
+      b1: 99
+      b2: 53
+      b3: 80
+      c1: 102
+      c2: 127
+      c3: 166
+  - id: 2
+    r_id: 12
+    level: 1.1
+    set:
+      a1: 95
+      a2: 3
+      a3: 98
+      b1: 12
+      b2: 89
+      b3: 162
+      c1: 167
+      c2: 144
+      c3: 58
+  - id: 3
+    r_id: 6
+    level: 1.1
+    set:
+      a1: 42
+      a2: 68
+      a3: 179
+      b1: 10
+      b2: 95
+      b3: 45
+      c1: 3
+      c2: 63
+      c3: 162
+  evolutionMode: 1
   team1HpRate: 1
   team2HpRate: 0.7
   team1CGMode: 0
