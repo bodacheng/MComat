@@ -23,7 +23,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -120
+        value: 800
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -34,7 +34,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: middle/Teams/mid/V
+    path: Teams/PlayerTeam/EditTeam
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -55,7 +55,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: middle/Teams/mid/FightBeginBtn
+    path: Teams/mid/FightBeginBtn
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -76,7 +76,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: middle/Teams/mid/FightBeginBtn
+    path: Teams/mid/FightBeginBtn
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -86,7 +86,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 800
+        value: -120
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -97,7 +97,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: middle/Teams/PlayerTeam/EditTeam
+    path: Teams/mid/V
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -110,7 +110,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3072872714
+      path: 410660088
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
@@ -119,7 +119,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 896188928
+      path: 2022705522
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
@@ -128,7 +128,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 896188928
+      path: 2022705522
       attribute: 538195251
       script: {fileID: 0}
       typeID: 224
@@ -137,7 +137,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 163930446
+      path: 1206135171
       attribute: 1460864421
       script: {fileID: 0}
       typeID: 224
@@ -173,7 +173,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -120
+        value: 800
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -184,7 +184,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: middle/Teams/mid/V
+    path: Teams/PlayerTeam/EditTeam
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -205,7 +205,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: middle/Teams/mid/FightBeginBtn
+    path: Teams/mid/FightBeginBtn
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -226,7 +226,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.y
-    path: middle/Teams/mid/FightBeginBtn
+    path: Teams/mid/FightBeginBtn
     classID: 224
     script: {fileID: 0}
     flags: 0
@@ -236,7 +236,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 800
+        value: -120
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -247,7 +247,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_AnchoredPosition.x
-    path: middle/Teams/PlayerTeam/EditTeam
+    path: Teams/mid/V
     classID: 224
     script: {fileID: 0}
     flags: 0
