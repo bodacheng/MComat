@@ -2610,6 +2610,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExMode
       objectReference: {fileID: 0}
+    - target: {fileID: 6551163430126375730, guid: 9226096eed650418080867b25090147f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7327817466640146522, guid: 9226096eed650418080867b25090147f,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2693,7 +2698,7 @@ PrefabInstance:
     - target: {fileID: 7327817466640146522, guid: 9226096eed650418080867b25090147f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 777
+      value: 946
       objectReference: {fileID: 0}
     - target: {fileID: 7327817466640146522, guid: 9226096eed650418080867b25090147f,
         type: 3}
@@ -2713,6 +2718,11 @@ PrefabInstance:
     - target: {fileID: 7327817466640146522, guid: 9226096eed650418080867b25090147f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7880661184691106932, guid: 9226096eed650418080867b25090147f,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -112,6 +112,9 @@ public class EventModeManager
             return;
         }
         
+        if (layer == null)
+            return;
+        
         if (easyModePath != null)
         {
             layer.EasyModeBtn.Setup(() =>
