@@ -1,8 +1,6 @@
 ﻿using dataAccess;
 using mainMenu;
 using DummyLayerSystem;
-using System.Collections.Generic;
-using PlayFab.ClientModels;
 
 public class TeamEdit : TutorialProcess
 {
@@ -20,34 +18,6 @@ public class TeamEdit : TutorialProcess
     public override void ProcessEnter()
     {
         _teamEditPage = (TeamEditPage)ProcessesRunner.Main.GetProcess(MainSceneStep.TeamEditFront);
-        _teamEditPage.SetExtraArcadeTeamEditSuccess(
-            () =>
-            {
-                if (_tutorialStep == "teamEdit2") // 总教程结束于第二次队伍编辑结束
-                {
-                    PlayFabReadClient.UpdateUserData(
-                        new UpdateUserDataRequest()
-                        {
-                            Data = new Dictionary<string, string>()
-                            {
-                                { "TutorialProgress", "Finished" }
-                            }
-                        },
-                        () =>
-                        {
-                            PlayerAccountInfo.Me.tutorialProgress = "Finished";
-                        }
-                    );
-                }
-                
-                _teamEditFinished = true;
-                if (_returnLayer != null)
-                {
-                    _returnLayer.gameObject.SetActive(false);
-                    //_returnLayer.ForceBackMode(true);
-                }
-            }
-        );
     }
     
     private bool TutorialLegal(string teamMode)
@@ -92,7 +62,10 @@ public class TeamEdit : TutorialProcess
                 }
                 else if (_tutorialStep == "teamEdit2")
                 {
-                    qualified = qualified && unitCount > 1;
+                    var onsSet = TeamSet.Default.GetPosMemInfo(0);
+                    var fullInfo = dataAccess.Units.Get(onsSet.instanceID);
+                    var unitConfig = Units.GetUnitConfig(fullInfo.r_id);
+                    qualified = qualified && unitConfig.REAL_NAME == "adam";
                 }
                 break;
             case "gangbang":

@@ -1779,7 +1779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArcadeBtn: {fileID: 3586524594811959468}
   GangbangBtn: {fileID: 6088514173515245877}
-  ArenaBtn: {fileID: 2673233873830652949}
+  ArenaBtn: {fileID: 7714293634163954096}
   EventFightBtn: {fileID: 2673233873830652949}
   UnitBtn: {fileID: 3728248872901105933}
   unitBtnIndicator: {fileID: 7940082526360899759}

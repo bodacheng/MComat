@@ -79,17 +79,6 @@ namespace mainMenu
                                 }
                             });
                             break;
-                        case "SkillEditFinished2":
-                            var adam = dataAccess.Units.GetByRId("1");
-                            TeamSet.GetTargetSet("arcade").SetPosUnitByInstanceID(0, adam.id);
-                            TeamSet.SaveTeamSet("arcade", (x) =>
-                            {
-                                if (x)
-                                {
-                                    Next();
-                                }
-                            });
-                            break;
                         default:
                             Next();
                             break;
