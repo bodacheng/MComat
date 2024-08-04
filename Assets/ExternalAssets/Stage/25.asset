@@ -28,6 +28,7 @@ MonoBehaviour:
       c1: 182
       c2: 80
       c3: 53
+  evolutionMode: 1
   team1HpRate: 1
   team2HpRate: 2
   team1CGMode: 0

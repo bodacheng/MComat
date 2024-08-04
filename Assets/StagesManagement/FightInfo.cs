@@ -98,21 +98,22 @@ public class FightInfo : ScriptableObject
 
     private List<List<int>> EnemyForEvolutionTeamUnitSets = new List<List<int>>
     {
-        new List<int>(){10,10,10,4},
-        new List<int>(){1,2,3,4},
-        new List<int>(){11,12,16,9},
-        new List<int>(){9,9,9,11},
-        new List<int>(){13,13,13,8},
+        new List<int>(){8,11,16,1},
+        new List<int>(){8,11,16,2},
+        new List<int>(){8,11,16,3},
+        new List<int>(){9,9,9,2},
+        new List<int>(){13,13,13,5},
         new List<int>(){12,12,12,6},
-        new List<int>(){10,10,7,14},
-        new List<int>(){9,9,9,8},
-        new List<int>(){11,11,11,13},
-        new List<int>(){16,16,16,15},
-        new List<int>(){4,3,4,3},
-        new List<int>(){12,12,12,5},
-        new List<int>(){9,6,8,5},
-        new List<int>(){1,7,14,3},
-        new List<int>(){15,15,4,2},
+        new List<int>(){10,10,10,14},
+        new List<int>(){9,9,9,1},
+        new List<int>(){11,11,11,15},
+        new List<int>(){16,16,16,3},
+        new List<int>(){1,2,3,7},
+        new List<int>(){5,5,5,6},
+        new List<int>(){3,6,4,14},
+        new List<int>(){13,13,13,12},
+        new List<int>(){15,15,15,15},
+        new List<int>(){9,9,9,10},
     };
 
     // 我们设想这个玩法下玩家一共进化三次
