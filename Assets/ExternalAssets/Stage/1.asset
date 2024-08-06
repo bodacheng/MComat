@@ -12,70 +12,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf3bb8ad816a44358eca5831d97217e, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  battleGroundID: 2
+  battleGroundID: 1
   fightBGM: 2
   unitsData:
   - id: 0
     r_id: 8
-    level: 1
+    level: 0.5
     set:
-      a1: 80
-      a2: 99
-      a3: 5
-      b1: 55
-      b2: 37
-      b3: 53
-      c1: 182
+      a1: 95
+      a2: 159
+      a3: 42
+      b1: 3
+      b2: 113
+      b3: 9
+      c1: 27
       c2: 89
-      c3: 113
+      c3: 182
   - id: 1
     r_id: 11
-    level: 1
+    level: 0.5
     set:
-      a1: 99
-      a2: 80
-      a3: 107
-      b1: 113
-      b2: 89
-      b3: 53
-      c1: 167
-      c2: 37
-      c3: 39
+      a1: 98
+      a2: 37
+      a3: 113
+      b1: 125
+      b2: 53
+      b3: 99
+      c1: 115
+      c2: 103
+      c3: 89
   - id: 2
     r_id: 16
-    level: 1
+    level: 0.5
     set:
-      a1: 12
-      a2: 63
-      a3: 10
-      b1: 95
-      b2: 172
-      b3: 55
-      c1: 5
-      c2: 113
-      c3: 125
+      a1: 68
+      a2: 55
+      a3: 103
+      b1: 127
+      b2: 37
+      b3: 102
+      c1: 45
+      c2: 125
+      c3: 63
   - id: 3
     r_id: 1
-    level: 1
+    level: 0.5
     set:
-      a1: 136
-      a2: 53
-      a3: 98
-      b1: 55
-      b2: 176
-      b3: 68
-      c1: 9
-      c2: 167
-      c3: 172
+      a1: 53
+      a2: 182
+      a3: 140
+      b1: 9
+      b2: 95
+      b3: 98
+      c1: 102
+      c2: 176
+      c3: 103
   evolutionMode: 1
   team1HpRate: 1
-  team2HpRate: 1
+  team2HpRate: 3
   team1CGMode: 0
   team2CGMode: 0
   team1Mode: 2
   team2Mode: 2
   team1AIMode: 0
-  team2AIMode: 1
+  team2AIMode: 0
   dumbAIDecisionDelay: 20
-  dreamComboAIRateNum: 0
-  stageRefLevel: 1
+  dreamComboAIRateNum: 100
+  stageRefLevel: 0.5
