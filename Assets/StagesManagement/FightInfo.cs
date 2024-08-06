@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEditor;
 using dataAccess;
 using System.IO;
+using System.Linq;
+using mainMenu;
+using NoSuchStudio.Common;
 using PlayFab.ClientModels;
 
 public class FightInfo : ScriptableObject
@@ -13,6 +16,11 @@ public class FightInfo : ScriptableObject
     // 底下这个记录的是敌人的信息
     [SerializeField] List<UnitInfo> unitsData = new List<UnitInfo>();
 
+    public UnitInfo GetRepresentUnitInfo()
+    {
+        return FightMembers.EnemySets.GetValues().FirstOrDefault(x => x != null && x.id != null && Units.GetUnitConfig(x.r_id) != null);
+    }
+    
     public List<UnitInfo> UnitsData
     {
         get => unitsData;
@@ -38,6 +46,7 @@ public class FightInfo : ScriptableObject
         get;
     }
     
+    [SerializeField] bool evolutionMode;
     public float team1HpRate = 1f;
     public float team2HpRate = 1f;
     public CriticalGaugeMode team1CGMode = CriticalGaugeMode.Normal;
@@ -48,8 +57,133 @@ public class FightInfo : ScriptableObject
     public AIMode team2AIMode = AIMode.Aggressive;
     public int dumbAIDecisionDelay = 20;
     public int dreamComboAIRateNum = 5;
-    public float stageRefLevel = 1;
+
+    public float stageRefLevel;
+
+    public void SetUnitLevelByRefLevel()
+    {
+        if (!EvolutionMode)
+        {
+            foreach (var data in UnitsData)
+            {
+                data.level = stageRefLevel;
+            }
+        }
+        else
+        {
+            // 原本希望让敌人按登场顺序逐渐等级提升。。。
+            for (var index = 0; index < UnitsData.Count; index++)
+            {
+                var unitInfo = UnitsData[index];
+                unitInfo.level = stageRefLevel;
+            }
+        }
+    }
     
+    // 首发版本我们未必把进化模式的等级分配想的太过复杂。。
+    public bool EvolutionMode
+    {
+        get => evolutionMode;
+        set
+        {
+            if (value)
+            {
+                team1Mode = TeamMode.Rotation;
+                team2Mode = TeamMode.Rotation;
+                AutoFillEvolution(FightMembers, "human");
+            }
+            evolutionMode = value;
+        }
+    }
+
+    private List<List<int>> EnemyForEvolutionTeamUnitSets = new List<List<int>>
+    {
+        new List<int>(){8,11,16,1},
+        new List<int>(){8,11,16,2},
+        new List<int>(){8,11,16,3},
+        new List<int>(){9,9,9,2},
+        new List<int>(){13,13,13,5},
+        new List<int>(){12,12,12,6},
+        new List<int>(){10,10,10,14},
+        new List<int>(){9,9,9,1},
+        new List<int>(){11,11,11,15},
+        new List<int>(){16,16,16,3},
+        new List<int>(){1,2,3,7},
+        new List<int>(){5,5,5,6},
+        new List<int>(){3,6,4,14},
+        new List<int>(){13,13,13,12},
+        new List<int>(){15,15,15,15},
+        new List<int>(){9,9,9,10},
+    };
+
+    // 我们设想这个玩法下玩家一共进化三次
+    private readonly int _evolutionEnemyCount = 4;
+    void AutoFillEvolution(FightMembers target, string type)
+    {
+        var enemyRSet = EnemyForEvolutionTeamUnitSets.Random();
+        var recordIds = Units.GetMonsterIDsAndNamesDic(type).Keys.ToList();
+        for (var index = 0; index < _evolutionEnemyCount; index++)
+        {
+            var currentUnit = target.EnemySets.Get(0, index);
+            var config = Units.GetUnitConfig(currentUnit?.r_id);
+            if (currentUnit != null && config != null) continue;
+            
+            var unitInfo = new UnitInfo
+            {
+                id = index.ToString(),
+                r_id = enemyRSet.Count > index ? enemyRSet[index].ToString() : recordIds.Random()
+            };
+            target.EnemySets.Set(0, index, unitInfo);
+            SaveDicToData();
+        }
+        
+        for (var index = 0; index < UnitsData.Count; index++)
+        {
+            var unitInfo = UnitsData[index];
+            if (unitInfo.set.CheckEdit() != SkillSet.SkillEditError.Empty)
+            {
+                continue;
+            }
+            
+            var form = new SkillStonesBox.StoneFilterForm
+            {
+                Type = type,
+                ExType = new[] { 0 }
+            };
+            var passiveSKillRecordId = UnitPassiveTable.GetUnitPassiveRecordId(unitInfo.r_id);
+            switch (index)
+            {
+                case 0:
+                    unitInfo.set =  SkillSet.RandomSkillSet(type, passiveSKillRecordId,  false, form, false);
+                    break;
+                case 1:
+                    form = new SkillStonesBox.StoneFilterForm
+                    {
+                        Type = type,
+                        ExType = new[] { 0 , 1 }
+                    };
+                    unitInfo.set =  SkillSet.RandomSkillSet(type, passiveSKillRecordId,  false, form, false);
+                    break;
+                case 2:
+                    form = new SkillStonesBox.StoneFilterForm
+                    {
+                        Type = type,
+                        ExType = new[] { 0, 1, 2 }
+                    };
+                    unitInfo.set =  SkillSet.RandomSkillSet(type, passiveSKillRecordId,  false, form, false);
+                    break;
+                default:
+                    form = new SkillStonesBox.StoneFilterForm
+                    {
+                        Type = type,
+                        ExType = new[] { 0, 1, 2, 3 }
+                    };
+                    unitInfo.set =  SkillSet.RandomSkillSet(type, passiveSKillRecordId,  false, form, false);
+                    break;
+            }
+        }
+    }
+
     public int ArcadeFightMode
     {
         get;
@@ -198,6 +332,9 @@ public class FightInfo : ScriptableObject
             case FightEventType.Gangbang:
                 set = TeamSet.Gangbang;
                 break;
+            case FightEventType.Event:
+                set = TeamSet.Origin;
+                break;
             default:
                 set = TeamSet.Default;
                 break;
@@ -243,6 +380,7 @@ public class FightInfo : ScriptableObject
         stage.Team1LeaderboardEntry = source.Team1LeaderboardEntry;
         stage.Team2LeaderboardEntry = source.Team2LeaderboardEntry;
         stage.RunTutorial = source.RunTutorial;
+        stage.evolutionMode = source.evolutionMode;
         stage.EventType = source.EventType;
         stage.dreamComboAIRateNum = source.dreamComboAIRateNum;
         return stage;
@@ -266,7 +404,7 @@ public class FightInfo : ScriptableObject
     {
         var stage = CreateInstance<FightInfo>();
         stage.FightMembers = FightMembers.ScreenSaver(teamMode);
-        stage.battleGroundID = 1;
+        stage.battleGroundID = 0;
         stage.fightBGM = 0;
         stage.Team1Auto = true;
         stage.Team2Auto = true;

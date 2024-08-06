@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using dataAccess;
 using mainMenu;
 using UnityEngine;
 
@@ -82,8 +83,11 @@ public class TutorialRunner
             return PlayerAccountInfo.Me.tutorialProgress == "Finished";
         }
         
+        
+        var goTo = new GoTo(MainSceneStep.ArcadeFront);
         var waitFighting = new WaitProcess(StageTwoFinished);
         _tutorialProcesses.Clear();
+        _tutorialProcesses.Add(goTo);
         _tutorialProcesses.Add(waitFighting);
     }
     
@@ -150,8 +154,18 @@ public class TutorialRunner
                 Main.MoveToNext();
                 break;
             case "SkillEditFinished2":
-                GenerateStep5Tutorial();
-                Main.MoveToNext();
+                
+                var adam = dataAccess.Units.GetByRId("1");
+                TeamSet.GetTargetSet("arcade").SetPosUnitByInstanceID(0, adam.id);
+                TeamSet.SaveTeamSet("arcade", (x) =>
+                {
+                    if (x)
+                    {
+                        GenerateStep5Tutorial();
+                        Main.MoveToNext();
+                    }
+                });
+                
                 break;
             case "Finished":
                 PlayFabReadClient.DontShowFrontFight = "true";

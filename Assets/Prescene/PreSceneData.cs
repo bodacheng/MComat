@@ -50,7 +50,7 @@ namespace mainMenu
             PlayFabReadClient.GetMailCatalogItems(PlayFabSetting._UnitCatalog, UnitCatalogFinished);
             PlayFabReadClient.LoadItems(ItemsLoadFinished);
             PlayFabReadClient.GetAllTitleData(StageRewardFinished);
-            PlayFabReadClient.GetAllUserData( new List<string>(){"arcade", "gangbang", "noAds", PlayFabSetting._timeLimitBuyCode}, ArcadeTFinished);
+            PlayFabReadClient.GetAllUserData( new List<string>(){"arcade", "gangbang", "origin", "noAds", PlayFabSetting._timeLimitBuyCode}, ArcadeTFinished);
 
             void Next()
             {
@@ -71,17 +71,6 @@ namespace mainMenu
                     {
                         case "Started":
                             TeamSet.GetTargetSet("arcade").SetPosUnitByInstanceID(0, GetFocusInstanceID());
-                            TeamSet.SaveTeamSet("arcade", (x) =>
-                            {
-                                if (x)
-                                {
-                                    Next();
-                                }
-                            });
-                            break;
-                        case "SkillEditFinished2":
-                            var adam = dataAccess.Units.GetByRId("1");
-                            TeamSet.GetTargetSet("arcade").SetPosUnitByInstanceID(0, adam.id);
                             TeamSet.SaveTeamSet("arcade", (x) =>
                             {
                                 if (x)

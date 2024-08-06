@@ -16,44 +16,58 @@ MonoBehaviour:
   fightBGM: 0
   unitsData:
   - id: 0
-    r_id: 3
-    level: 2
+    r_id: 9
+    level: 1.4
     set:
-      a1: 68
-      a2: 10
-      a3: 27
-      b1: 55
-      b2: 95
-      b3: 58
-      c1: 125
-      c2: 53
-      c3: 89
+      a1: 
+      a2: 
+      a3: 
+      b1: 
+      b2: 
+      b3: 
+      c1: 
+      c2: 
+      c3: 
   - id: 1
-    r_id: 4
-    level: 2
+    r_id: 9
+    level: 1.4
     set:
-      a1: 58
-      a2: 125
-      a3: 10
-      b1: 182
-      b2: 55
-      b3: 167
-      c1: 27
-      c2: 113
-      c3: 89
+      a1: 
+      a2: 
+      a3: 
+      b1: 
+      b2: 
+      b3: 
+      c1: 
+      c2: 
+      c3: 
   - id: 2
-    r_id: 7
-    level: 2
+    r_id: 9
+    level: 1.4
     set:
-      a1: 89
-      a2: 53
-      a3: 167
-      b1: 182
-      b2: 68
-      b3: 80
-      c1: 58
-      c2: 5
-      c3: 113
+      a1: 
+      a2: 
+      a3: 
+      b1: 
+      b2: 
+      b3: 
+      c1: 
+      c2: 
+      c3: 
+  - id: 3
+    r_id: 2
+    level: 1.4
+    set:
+      a1: 
+      a2: 
+      a3: 
+      b1: 
+      b2: 
+      b3: 
+      c1: 
+      c2: 
+      c3: 
+  evolutionMode: 1
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0

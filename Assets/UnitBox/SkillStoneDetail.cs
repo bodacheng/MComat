@@ -39,15 +39,14 @@ namespace mainMenu
         
         [Header("Intro")]
         [SerializeField] Text skillIntro;
-
-        [Header("第三行parent")] 
-        [SerializeField] RectTransform line3T;
         
         [Header("tempT")]
         [SerializeField] Transform tempT;
         
+        public Text SkillIntro => skillIntro;
+        
         // 额外生成一个技能石图像
-        async void IconForShow(string skillID)
+        public async void IconForShow(string skillID, float size)
         {
             var item = await Stones.GenerateStoneModel(skillID, false);
             if (iconShowT != null)
@@ -60,7 +59,7 @@ namespace mainMenu
                 item.gameObject.SetActive(true);
                 item.transform.localPosition = Vector3.zero;
                 item.transform.localScale = Vector3.one;
-                item.transform.GetComponent<RectTransform>().sizeDelta = iconShowT.transform.GetComponent<RectTransform>().sizeDelta;
+                item.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(size, size);
             }
             else
             {
@@ -73,8 +72,7 @@ namespace mainMenu
             keyName.text = string.Empty;
             showName.text = string.Empty;
             skillIntro.text = string.Empty;
-            line3T.gameObject.SetActive(false);
-            
+
             ATTitle.text = string.Empty;
             HPTitle.text = string.Empty;
             LevelTitle.text = string.Empty;
@@ -131,7 +129,8 @@ namespace mainMenu
         
         public void RefreshInfo(SkillConfig config)
         {
-            IconForShow(config.RECORD_ID);
+            if (iconShowT != null)
+                IconForShow(config.RECORD_ID, iconShowT.transform.GetComponent<RectTransform>().sizeDelta.x);
             keyName.text = config.REAL_NAME;
             
             if (PlayerAccountInfo.Me.TitleDisplayName != null && PlayerAccountInfo.Me.TitleDisplayName.Contains("IconDev"))
@@ -153,8 +152,7 @@ namespace mainMenu
             
             var intro = SkillNameTable.GetSkillIntro(config.RECORD_ID);
             skillIntro.text = intro;
-            line3T.gameObject.SetActive(!string.IsNullOrEmpty(intro));
-            
+
             PowerShow(config.RECORD_ID, 1);
         }
 

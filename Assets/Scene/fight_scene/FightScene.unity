@@ -8792,7 +8792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0827442c0802748b39f7c78aec998deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  T: {fileID: 3000649885718481873}
+  canvas: {fileID: 3000649885718481872}
   audioSource: {fileID: 3000649885118306805}
   uiAudioSource: {fileID: 1664172698}
   fxCamera: {fileID: 1050871294}

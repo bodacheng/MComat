@@ -1,13 +1,16 @@
-﻿using System;
-using mainMenu;
+﻿using mainMenu;
 using dataAccess;
 using System.Collections.Generic;
 using DummyLayerSystem;
+using UnityEngine;
 
 public class TeamEditPage : MSceneProcess
 {
     string _teamMode;
     private PosKeySet defaultPosKeySetBefore;
+
+    private TeamEditLayer teamEditLayer;
+    private TeamSingleSelectLayer teamSingleSelectLayer;
     
     void TeamSaveFinished(bool value)
     {
@@ -21,30 +24,67 @@ public class TeamEditPage : MSceneProcess
     
     void EnterProcess(string teamMode)
     {
-        var teamEditLayer = UILayerLoader.Load<TeamEditLayer>();
-        teamEditLayer.Ini(teamMode, Save, Legal, PlayerAccountInfo.Me.tutorialProgress != "Finished");
-        
+        int currentIndex;
         var unitsLayer = UILayerLoader.Load<UnitsLayer>();
-        unitsLayer.SetDisplayUnitIconsAfterAction(() =>
+        switch (teamMode)
         {
-            unitsLayer.SetUnitsIconOnClick((x) => teamEditLayer.UnitIconClick(x, this._teamMode));
-        });
+            case "arcade":
+                teamSingleSelectLayer = UILayerLoader.Load<TeamSingleSelectLayer>();
+                teamSingleSelectLayer.Ini(teamMode, Save, Legal, PlayerAccountInfo.Me.tutorialProgress != "Finished");
+                unitsLayer.SetDisplayUnitIconsAfterAction(() =>
+                {
+                    unitsLayer.SetUnitsIconOnClick(
+                        (x) => 
+                            teamSingleSelectLayer.ChangeTeamPos(x, 0,this._teamMode)
+                    );
+                });
+                currentIndex = teamSingleSelectLayer.transform.GetSiblingIndex();
+                // 只有当当前索引大于0时，才能向上移动
+                if (currentIndex > 0)
+                {
+                    teamSingleSelectLayer.transform.SetSiblingIndex(currentIndex - 1);
+                }
+                break;
+            default:
+                teamEditLayer = UILayerLoader.Load<TeamEditLayer>();
+                teamEditLayer.Ini(teamMode, Save, Legal, PlayerAccountInfo.Me.tutorialProgress != "Finished");
+                unitsLayer.SetDisplayUnitIconsAfterAction(() =>
+                {
+                    unitsLayer.SetUnitsIconOnClick((x) => teamEditLayer.UnitIconClick(x, this._teamMode));
+                });
+                currentIndex = teamEditLayer.transform.GetSiblingIndex();
+                // 只有当当前索引大于0时，才能向上移动
+                if (currentIndex > 0)
+                {
+                    teamEditLayer.transform.SetSiblingIndex(currentIndex - 1);
+                }
+                break;
+        }
+        
         unitsLayer.DisplayUnitIcons(dataAccess.Units.Dic, true, true);
         if (PreScene.target.Focusing != null)
         {
             // Just wanna show a model when enter team edit page
-            teamEditLayer.UnitIconClick(PreScene.target.Focusing.id, this._teamMode);
+            teamEditLayer?.UnitIconClick(PreScene.target.Focusing.id, this._teamMode);
             unitsLayer.Selected.Value = null;
         }
 
         if (teamMode == "arcade")
         {
             defaultPosKeySetBefore = TeamSet.Default.Clone();
+            var currentSelected = TeamSet.GetTargetSet(teamMode).GetInstanceIdOnPos(0);
+            teamSingleSelectLayer.ChangeTeamPos(currentSelected, 0, this._teamMode);
+            unitsLayer.Selected.Value = currentSelected;
+        }
+        if (teamMode == "origin")
+        {
+            defaultPosKeySetBefore = TeamSet.Origin.Clone();
         }
         if (teamMode == "gangbang")
         {
             defaultPosKeySetBefore = TeamSet.Gangbang.Clone();
         }
+        unitsLayer.transform.SetAsLastSibling();
         SetLoaded(true);
     }
     
@@ -63,18 +103,15 @@ public class TeamEditPage : MSceneProcess
     {
         if (_teamMode == "arcade")
             TeamSet.Default = defaultPosKeySetBefore;
+        if (_teamMode == "origin")
+            TeamSet.Origin = defaultPosKeySetBefore;
         if (_teamMode == "gangbang")
             TeamSet.Gangbang = defaultPosKeySetBefore;
         UILayerLoader.Remove<UnitsLayer>();
         UILayerLoader.Remove<TeamEditLayer>();
+        UILayerLoader.Remove<TeamSingleSelectLayer>();
     }
-
-    private Action _extraArcadeTeamEditSuccess;
-    public void SetExtraArcadeTeamEditSuccess(Action extraArcadeTeamEditSuccess)
-    {
-        this._extraArcadeTeamEditSuccess = extraArcadeTeamEditSuccess;
-    }
-
+    
     private bool Legal(string teamMode)
     {
         var qualified = true;
@@ -87,6 +124,9 @@ public class TeamEditPage : MSceneProcess
                 break;
             case "arcade":
                 targetTeamSet = TeamSet.Default;
+                break;
+            case "origin":
+                targetTeamSet = TeamSet.Origin;
                 break;
             case "gangbang":
                 targetTeamSet = TeamSet.Gangbang;
@@ -115,6 +155,7 @@ public class TeamEditPage : MSceneProcess
         switch (teamMode)
         {
             case "arena":
+            case "origin":
                 qualified = qualified && unitCount == 3;
                 break;
             case "arcade":
@@ -157,7 +198,6 @@ public class TeamEditPage : MSceneProcess
                     },
                     ()=>
                     {
-                        _extraArcadeTeamEditSuccess?.Invoke();
                         ReturnLayer.POP();
                         ProgressLayer.Close();
                     }
@@ -172,13 +212,26 @@ public class TeamEditPage : MSceneProcess
                     },
                     ()=>
                     {
-                        _extraArcadeTeamEditSuccess?.Invoke();
                         ReturnLayer.POP();
                         ProgressLayer.Close();
                     }
                 );
                 TeamSet.SaveTeamSet(_teamMode, TeamSaveFinished);
                 defaultPosKeySetBefore = TeamSet.Gangbang;
+                break;
+            case "origin":
+                missionWatcher = new MissionWatcher(
+                    new List<string>() {
+                        "teamSavedFinished"
+                    },
+                    ()=>
+                    {
+                        ReturnLayer.POP();
+                        ProgressLayer.Close();
+                    }
+                );
+                TeamSet.SaveTeamSet(_teamMode, TeamSaveFinished);
+                defaultPosKeySetBefore = TeamSet.Origin;
                 break;
         }
     }

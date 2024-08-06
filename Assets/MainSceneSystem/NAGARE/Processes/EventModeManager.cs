@@ -84,7 +84,7 @@ public class EventModeManager
         var fightInfo = await AddressablesLogic.LoadT<FightInfo>(location);
         fightInfo.EventType = FightEventType.Event;
         fightInfo.ArcadeFightMode = _stageModeTable.GetModeById(fightInfo.ID);
-        fightInfo.FightMembers.SetEnemyLevel(fightInfo.stageRefLevel);
+        fightInfo.SetUnitLevelByRefLevel();
         return fightInfo;
     }
     
@@ -111,6 +111,9 @@ public class EventModeManager
             Debug.Log("No completed event battles found.");
             return;
         }
+        
+        if (layer == null)
+            return;
         
         if (easyModePath != null)
         {

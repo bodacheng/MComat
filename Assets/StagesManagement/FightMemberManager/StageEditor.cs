@@ -31,17 +31,24 @@ public partial class StageEditor
         }
     }
     
-    public void OnGUIView(FightMembers target,
-        Func<string, GangbangInfo.SoldierGroupSet> gangbangGet = null)
+    public async void OnGUIView(FightMembers target, Func<string, GangbangInfo.SoldierGroupSet> gangbangGet = null, Action after = null)
     {
+        if (Running)
+            return;
+        
         if (!Initialized)
         {
             UIParamIni();
             Initialized = true;
         }
         
+        Running = true;
+        
+        if (_focusingPosID != null)
+            _focusingUnitInfo = target.EnemySets.Get(0, int.Parse(_focusingPosID));
+        
         GUILayout.Space(10);
-        Members(target, gangbangGet);
+        await Members(target, gangbangGet);
         GUILayout.Space(10);
         
         // 指定站位人员的添加与删除 //
@@ -63,17 +70,20 @@ public partial class StageEditor
             if (GUILayout.Button("Delete", _addDeleteMember))
             {
                 target.EnemySets.Set(0, int.Parse(_focusingPosID), null);
-                _focusingUnitInfo = null;
                 _targetSlot = 0;
             }
         }
         GUILayout.EndHorizontal();
         
         if (_focusingUnitInfo == null)
+        {
+            if (_focusingPosID != null)
+                _focusingUnitInfo = target.EnemySets.Get(0, int.Parse(_focusingPosID));
             goto A;
+        }
         
         UnitSelect();
-            
+        
         // 九宫格
         NineSlotPart();
         
@@ -145,7 +155,7 @@ public partial class StageEditor
                 NineSlotPart();// 为了刷新格子颜色
             }
         }
-                        
+        
         var defaultSkillConfig = SkillConfigTable.GetSkillConfigByRecordId(GetFocusSkillId());
         if (defaultSkillConfig == null)
         {
@@ -160,6 +170,9 @@ public partial class StageEditor
         // 基础进程
         GUILayout.Space(10);
         BasicStates(_focusingUnitInfo);
+
+        after?.Invoke();
+        Running = false;
     }
 }
 #endif

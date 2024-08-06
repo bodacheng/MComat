@@ -39,6 +39,7 @@ public class StartUpPresentation : MonoBehaviour
     void Start()
     {
         PosCal.Canvas = this.canvas;
+        PosCal.TestIni();
         UILayerLoader.SetHanger(t);
         AppSetting.Load();
         AppSetting.BGMSource = audioSource;

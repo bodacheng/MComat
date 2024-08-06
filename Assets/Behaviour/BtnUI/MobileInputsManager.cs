@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using dataAccess;
 using DummyLayerSystem;
-using FightScene;
 using UnityEngine;
 using UnityEngine.UI;
 using Soul;
@@ -44,8 +43,7 @@ public class MobileInputsManager : MonoBehaviour {
     IDictionary<Button, IDictionary<string, GameObject>> btnIcons = new Dictionary<Button, IDictionary<string, GameObject>>();
     readonly IDictionary<Element, ElementEffectsGroup> _elementEffects = new Dictionary<Element, ElementEffectsGroup>();
     Element _focusing;
-    public BOButton DreamComboBtn => dreamComboBtn;
-
+    
     async UniTask AddGemIcon(string skillID, IDictionary<string, GameObject> dic, Button btn)
     {
         if (!dic.ContainsKey(skillID))
@@ -130,29 +128,6 @@ public class MobileInputsManager : MonoBehaviour {
                 }
             ).AddTo(this.gameObject);
             
-            if (FightLoad.Fight.RunTutorial)
-            {
-                IDisposable dreamComboIntro = null;
-                dreamComboIntro = center.FightDataRef.DreamComboGauge.Subscribe(
-                    (x) =>
-                    {
-                        var percent = (float)x / FightGlobalSetting._DreamComboGaugeMax;
-                        if (percent == 1)
-                        {
-                            var _layer = UILayerLoader.Get<FightingStepLayer>();
-                            var preTeam1AIState = _layer.Team1UI.AutoSwitch.CurrentState();
-                            _layer.Team1UI.AutoSwitch.ChangeAutoState(false);
-                            _layer.Team2UI.AutoSwitch.ChangeAutoState(false);
-                            _layer.ForceClickDreamComboBtn(() =>
-                            {
-                                _layer.Team1UI.AutoSwitch.ChangeAutoState(preTeam1AIState);
-                                _layer.Team2UI.AutoSwitch.ChangeAutoState(true);
-                            });
-                            dreamComboIntro?.Dispose();
-                        }
-                    }
-                ).AddTo(this.gameObject);
-            }
             TurnOnButtons();
         }
         else
@@ -222,6 +197,11 @@ public class MobileInputsManager : MonoBehaviour {
         );
         
         _elementEffects[element].Close(ParticleSystemStopBehavior.StopEmittingAndClear);
+    }
+
+    public ElementEffectsGroup GetCurrentElementEffectsGroup()
+    {
+        return _elementEffects[_focusing];
     }
 
     public void GroupSkillIcons()

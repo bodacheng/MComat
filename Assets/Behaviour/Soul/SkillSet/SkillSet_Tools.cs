@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using dataAccess;
 using Skill;
 
@@ -191,5 +192,64 @@ public partial class SkillSet
     public SkillEntity GetM_STS()
     {
         return M;
+    }
+    
+    public int GetLowestSpLevel()
+    {
+        var sp = new List<int>()
+        {
+            GetA1Config() != null ? GetA1Config().SP_LEVEL : 0, 
+            GetA2Config() != null ? GetA2Config().SP_LEVEL : 0,
+            GetA3Config() != null ? GetA3Config().SP_LEVEL : 0,
+            
+            GetB1Config() != null ? GetB1Config().SP_LEVEL : 0, 
+            GetB2Config() != null ? GetB2Config().SP_LEVEL : 0,
+            GetB3Config() != null ? GetB3Config().SP_LEVEL : 0,
+            
+            GetC1Config() != null ? GetC1Config().SP_LEVEL : 0, 
+            GetC2Config() != null ? GetC2Config().SP_LEVEL : 0,
+            GetC3Config() != null ? GetC3Config().SP_LEVEL : 0,
+        };
+        
+        return sp.Min();
+    }
+    
+    // 这个的运行是建立在九宫格满的前提上
+    public int RecommendedTargetReplaceSlot(bool mugen)
+    {
+        var list = SkillIDList();
+        var A1Config = SkillConfigTable.GetSkillConfigByRecordId(list[0]);
+        var B1Config = SkillConfigTable.GetSkillConfigByRecordId(list[3]);
+        var C1Config = SkillConfigTable.GetSkillConfigByRecordId(list[6]);
+
+        int normalSkillCountAtFirstRow = 0;
+
+        void temp(int sp)
+        {
+            if (sp == 0)
+            {
+                normalSkillCountAtFirstRow += 1;
+            }
+        }
+        
+        temp(A1Config.SP_LEVEL);
+        temp(B1Config.SP_LEVEL);
+        temp(C1Config.SP_LEVEL);
+        
+        List<int> hopeSearchOrder = new List<int>()
+        {
+            0,3,6,1,4,7,2,5,8
+        };
+        for (int order = 0; order <= hopeSearchOrder.Count; order++)
+        {
+            var index = hopeSearchOrder[order];
+            var config = SkillConfigTable.GetSkillConfigByRecordId(list[index]);
+            if (config.SP_LEVEL == 0 && (mugen || ((index != 0 && index != 3 && index != 6))||
+                                         normalSkillCountAtFirstRow > 1))
+            {
+                return index + 1;
+            }
+        }
+        return 0;
     }
 }
