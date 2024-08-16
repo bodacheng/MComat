@@ -544,8 +544,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1282471775083872734}
-  - component: {fileID: 1282471775083872720}
-  - component: {fileID: 1282471775083872735}
   m_Layer: 0
   m_Name: lowerarm_r
   m_TagString: Untagged
@@ -571,41 +569,6 @@ Transform:
   - {fileID: 3353409111356608483}
   m_Father: {fileID: 6961916083147284047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1282471775083872720
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1368490511034936486}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.6, y: 0.3, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1282471775083872735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1368490511034936486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Center: {fileID: 6269414736765691316}
-  myColliderMustEquip: {fileID: 1282471775083872720}
 --- !u!1 &1514200134488747637
 GameObject:
   m_ObjectHideFlags: 0
@@ -51918,7 +51881,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.6, y: 0.3, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0.1, y: 0, z: 0}
 --- !u!114 &2244658449601501316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53309,8 +53272,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6598021307951252397}
-  - component: {fileID: 8034199829989975026}
-  - component: {fileID: 8034199829989975025}
   m_Layer: 0
   m_Name: lowerarm_l
   m_TagString: Untagged
@@ -53336,41 +53297,6 @@ Transform:
   - {fileID: 8631929883222547883}
   m_Father: {fileID: 7308877617721271916}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8034199829989975026
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8034199829989975024}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.6, y: 0.3, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8034199829989975025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8034199829989975024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Center: {fileID: 6269414736765691316}
-  myColliderMustEquip: {fileID: 8034199829989975026}
 --- !u!1 &8215710428105926324
 GameObject:
   m_ObjectHideFlags: 0
@@ -53491,7 +53417,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.6, y: 0.3, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.1, y: 0, z: 0}
 --- !u!114 &8554893613748351996
 MonoBehaviour:
   m_ObjectHideFlags: 0

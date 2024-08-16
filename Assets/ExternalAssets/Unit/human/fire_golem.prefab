@@ -1333,8 +1333,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3938529754622540073}
-  - component: {fileID: 3938529754622540071}
-  - component: {fileID: 3938529754622540072}
   m_Layer: 0
   m_Name: lowerarm_r
   m_TagString: Untagged
@@ -1360,41 +1358,6 @@ Transform:
   - {fileID: 715374601189455636}
   m_Father: {fileID: 5186325377002333880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3938529754622540071
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3862378084879111249}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.6, y: 0.3, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3938529754622540072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3862378084879111249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Center: {fileID: 8098978209473191235}
-  myColliderMustEquip: {fileID: 3938529754622540071}
 --- !u!1 &3920799966225820817
 GameObject:
   m_ObjectHideFlags: 0
@@ -2034,8 +1997,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9004058856076573530}
-  - component: {fileID: 5195747233522096901}
-  - component: {fileID: 5195747233522096902}
   m_Layer: 0
   m_Name: lowerarm_l
   m_TagString: Untagged
@@ -2061,41 +2022,6 @@ Transform:
   - {fileID: 5813848909193995612}
   m_Father: {fileID: 4758738831305842331}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5195747233522096901
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5195747233522096903}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.6, y: 0.3, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5195747233522096902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5195747233522096903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Center: {fileID: 8098978209473191235}
-  myColliderMustEquip: {fileID: 5195747233522096901}
 --- !u!1 &5215876303031656235
 GameObject:
   m_ObjectHideFlags: 0
@@ -3098,7 +3024,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.6, y: 0.3, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.1, y: 0, z: 0}
 --- !u!114 &5898907179539860235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54190,7 +54116,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.6, y: 0.3, z: 0.3}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0.1, y: 0, z: 0}
 --- !u!114 &4053967878877110387
 MonoBehaviour:
   m_ObjectHideFlags: 0

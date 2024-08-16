@@ -59,8 +59,9 @@ namespace FightScene
             RTFightManager.Target.Disposables.Dispose();
             RTFightManager.Target.RefreshTimeDic.Clear();
             RTFightManager.Target.ClearUnitData();
+            HitBoxesProcesser.Instance.AllProcessingFade();
+            RTFightManager.Target.EvolutionManager.EvolutionCount = 0;
             FightLogger.value.WatchMissionsAbandon();
-            
             BoundaryControlByGod.target.SensorUnity.Stop();
         }
 
