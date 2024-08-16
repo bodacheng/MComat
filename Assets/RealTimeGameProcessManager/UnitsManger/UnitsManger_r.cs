@@ -69,7 +69,7 @@ namespace FightScene
                                 HitBoxesProcesser.Instance.AllProcessingFade();
                                 RTFightManager.Target.team1.RMode_Unit.Value._MyBehaviorRunner.ChangeToWaitingState();
                                 var inBattleEvolution = UILayerLoader.Load<InBattleEvolution>();
-                                var fightingLayer = UILayerLoader.Load<FightingStepLayer>();
+                                var fightingLayer = FightingStepLayer.Open();
                                 fightingLayer.gameObject.SetActive(false);
                                 RTFightManager.Target.team1.InputsManager.FocusUnit(null);
                                 RTFightManager.Target.EvolutionManager.EvolutionCount++;
