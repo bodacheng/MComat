@@ -20,7 +20,9 @@ class ChatGptFix : CameraMode
     readonly float _minXZ;
     float fieldOfView;
     private float screenDifferForRotate = 150;
-    
+
+    public bool AutoRotateCamera { get; set; } = false;
+
     float TransitionSpeedPara
     {
         get => _transitionSpeedPara;
@@ -51,6 +53,7 @@ class ChatGptFix : CameraMode
         xzOff.y = 0;
         TransitionSpeedPara = 5f;
         DOTween.To(()=> TransitionSpeedPara, (x) => TransitionSpeedPara = x, 0.001f, 1f);
+        AutoRotateCamera = AppSetting.Value.AutoRotateCamera;
     }
 
     float h;
@@ -96,6 +99,10 @@ class ChatGptFix : CameraMode
             }
             enemiesCenter /= targets.Count;
         }
+        else
+        {
+            enemiesCenter = mePos + meCenter.forward * 10f;
+        }
         
         enemyScreenPos = camera.WorldToScreenPoint(enemiesCenter);
         meScreenPos = camera.WorldToScreenPoint(mePos);
@@ -112,7 +119,7 @@ class ChatGptFix : CameraMode
         }
         else
         {
-            if (Vector2.Distance(meScreenPos, enemyScreenPos) > screenDifferForRotate)
+            if (AutoRotateCamera && hasTargets && meCenter != null && Vector2.Distance(meScreenPos, enemyScreenPos) > screenDifferForRotate)
             {
                 float angleToHorizontal = 0;
                 float CheckNeedForAutoRotate()

@@ -195,8 +195,7 @@ public class BasicPhysicSupport : MonoBehaviour
     private Tweener rotateTween;
     public void RotateToTarget_Tween(Vector3 target, float duration)
     {
-        if (rotateTween != null)
-            rotateTween.Kill();
+        rotateTween?.Kill();
         rotateTween = _DATA_CENTER.WholeT.DOLookAt(target, duration, AxisConstraint.Y, Vector3.up);
     }
 
