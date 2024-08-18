@@ -262,6 +262,7 @@ namespace mainMenu
                 }
                 else
                 {
+                    PlayFabReadClient.DontShowFrontFight = "True";
                     if (MainMenuNote.GoingTo != MainSceneStep.FrontPage)
                     {
                         ReturnLayer.Stack(MainSceneStep.FrontPage, (x)=> trySwitchToStep(x, false));
