@@ -338,12 +338,17 @@ public partial class ArenaFightOver : UILayer
                     awardDmCurrency.text = "+" + (extraAdReward + awardDm);
                     _tweenTextScaleManager.AddNew(awardDmCurrency.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
                 },
-                finishedStage
+                finishedStage,
+                finishedStage >= 3 || oldStage
             );
+            if (oldStage)
+            {
+                adBtnParent.gameObject.SetActive((false));
+            }
 #endif
         }
         
-        vipSymbol.gameObject.SetActive(PlayerAccountInfo.Me.noAdsState);
+        vipSymbol.gameObject.SetActive(PlayerAccountInfo.Me.noAdsState && !oldStage);
     }
     
     public void ShowArenaPoint(int oldPoint, int currentPoint)

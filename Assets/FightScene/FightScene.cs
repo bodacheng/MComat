@@ -26,7 +26,7 @@ namespace FightScene
         public static List<GangbangInfo.SoldierGroupSet> team1GroupSet;
         
         private AdmobAdsButton watchBtn;
-        public void ShowAds(int extraAdReward, RectTransform btnTarget, Action afterWatched, int finishedStage = -1)
+        public void ShowAds(int extraAdReward, RectTransform btnTarget, Action afterWatched, int finishedStage = -1, bool showAdImmediately = true)
         {
             if (extraAdReward > 0 && watchBtn != null)
             {
@@ -47,7 +47,7 @@ namespace FightScene
                         );
                     }
                 );
-                if (watchBtn.AdIsReady && finishedStage >= 3)
+                if (watchBtn.AdIsReady && showAdImmediately)
                 {
                     watchBtn.ShowAd();
                 }
