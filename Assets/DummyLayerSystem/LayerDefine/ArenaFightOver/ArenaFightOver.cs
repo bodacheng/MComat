@@ -307,10 +307,10 @@ public partial class ArenaFightOver : UILayer
         vipSymbol.gameObject.SetActive(PlayerAccountInfo.Me.noAdsState);
     }
     
-    public void ShowAward(int awardDm, int awardGd, int extraAdReward, int finishedStage = -1)
+    public void ShowAward(int awardDm, int awardGd, int extraAdReward, int finishedStage = -1, bool oldStage = false)
     {
-        awardParent.gameObject.SetActive(awardDm > 0 || awardGd > 0);
-        if (awardDm > 0)
+        awardParent.gameObject.SetActive(awardDm > 0 || awardGd > 0 || extraAdReward > 0);
+        if (awardDm > 0 || extraAdReward > 0)
         {
             dmParent.gameObject.SetActive(true);
             Currencies.DiamondCount.Value += awardDm;
@@ -326,9 +326,8 @@ public partial class ArenaFightOver : UILayer
             _tweenTextScaleManager.AddNew(awardGdCurrency.transform, Vector3.one * 1.2f, Vector3.one, rewardTextChangeHalfDuration);
         }
         
-        if (PlayerAccountInfo.Me.tutorialProgress == "Finished"
-            &&
-            !PlayerAccountInfo.Me.noAdsState)
+        if (PlayerAccountInfo.Me.tutorialProgress == "Finished" && 
+            (!PlayerAccountInfo.Me.noAdsState || oldStage))
         {
 #if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
             FightScene.FightScene.target.ShowAds(
@@ -343,6 +342,7 @@ public partial class ArenaFightOver : UILayer
             );
 #endif
         }
+        
         vipSymbol.gameObject.SetActive(PlayerAccountInfo.Me.noAdsState);
     }
     

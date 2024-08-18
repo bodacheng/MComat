@@ -119,6 +119,7 @@ namespace FightScene
                             var a = UILayerLoader.Load<ArenaFightOver>();
                             a.Setup();
                             a.Step2Anim();
+                            a.ShowAward(0, 0, PlayFabSetting._adNormalFightRewardDM, -1, true);
                         }
                     }
                     else
@@ -168,6 +169,7 @@ namespace FightScene
                             var a = UILayerLoader.Load<ArenaFightOver>();
                             a.Setup();
                             a.Step2Anim();
+                            a.ShowAward(0, 0, PlayFabSetting._adNormalFightRewardDM, -1, true);
                         }
                     }
                     else
