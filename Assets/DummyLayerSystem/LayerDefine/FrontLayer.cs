@@ -51,13 +51,13 @@ public class FrontLayer : UILayer
         ArcadeBtn.onClick.AddListener(
             ()=>
             {
-                PlayerAccountInfo.Me.ArcadeModeManager.DirectToArcadeStage(PlayerAccountInfo.Me.arcadeProcess + 1, true);
+                ArcadeModeManager.Instance.DirectToArcadeStage(PlayerAccountInfo.Me.arcadeProcess + 1, true);
             });
         
         GangbangBtn.onClick.AddListener(
             ()=>
             {
-                PlayerAccountInfo.Me.GangbangModeManager.DirectToGangStage(PlayerAccountInfo.Me.gangbangProcess + 1, true);
+                GangbangModeManager.Instance.DirectToGangStage(PlayerAccountInfo.Me.gangbangProcess + 1, true);
             });
         GangbangBtn.gameObject.SetActive(PlayerAccountInfo.Me.arcadeProcess >= 5);
         
