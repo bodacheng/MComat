@@ -160,7 +160,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Height: 0.7
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -15690,7 +15690,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.15, z: 0.15}
   m_Center: {x: 0, y: 0, z: 0}
@@ -15701,7 +15701,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2439163678658420598}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
   m_Name: 
@@ -15887,7 +15887,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.15, z: 0.15}
   m_Center: {x: 0, y: 0, z: 0}
@@ -15898,7 +15898,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3062124538504860610}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
   m_Name: 
@@ -37074,7 +37074,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.15, z: 0.15}
   m_Center: {x: 0, y: 0, z: 0}
@@ -37085,7 +37085,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7324392188856558703}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
   m_Name: 
@@ -52434,7 +52434,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.3, y: 0.15, z: 0.15}
   m_Center: {x: 0, y: 0, z: 0}
@@ -52445,7 +52445,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8759751237019374413}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
   m_Name: 

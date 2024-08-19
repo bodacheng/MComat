@@ -51,7 +51,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.3, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3039080491058549}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
   m_Name: 
@@ -51729,7 +51729,7 @@ Transform:
   m_GameObject: {fileID: 3015273736213018221}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5144016, y: 0.48517108, z: 0.5144016, w: 0.4851712}
-  m_LocalPosition: {x: -0.04, y: -0.088, z: 0}
+  m_LocalPosition: {x: 0.001, y: -0.086, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -51768,7 +51768,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.6
   m_Height: 1.2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -52109,7 +52109,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.3, z: 0.3}
   m_Center: {x: 0, y: 0, z: 0}
@@ -52120,7 +52120,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3557597872661083562}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
   m_Name: 
@@ -54178,7 +54178,7 @@ MonoBehaviour:
       - Value: 1
       - Value: 2
       - Value: 2
-      maxConnectionDistance: 0.13936539
+      maxConnectionDistance: 0.1393654
       userEdit: 0
   gizmoSerializeData:
     always: 0
@@ -56968,7 +56968,7 @@ MonoBehaviour:
       - Value: 2
       - Value: 2
       - Value: 2
-      maxConnectionDistance: 0.11049006
+      maxConnectionDistance: 0.110490054
       userEdit: 0
   gizmoSerializeData:
     always: 0

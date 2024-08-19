@@ -50115,7 +50115,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.6, y: 0.3, z: 0.3}
   m_Center: {x: 0.1, y: 0, z: 0}
@@ -50126,7 +50126,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905333711608965800}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
   m_Name: 
@@ -51055,7 +51055,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.6, y: 0.3, z: 0.3}
   m_Center: {x: -0.1, y: 0, z: 0}
@@ -51066,7 +51066,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2410735022381383146}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8e3ee333b7291b4ab2bd79c0ae076c9, type: 3}
   m_Name: 
@@ -52870,9 +52870,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.7
-  m_Height: 1.1
+  m_Height: 1
   m_Direction: 0
-  m_Center: {x: 0.05, y: -0.05, z: 0}
+  m_Center: {x: 0.2, y: -0.05, z: 0}
 --- !u!1 &5546385186206535004
 GameObject:
   m_ObjectHideFlags: 0
