@@ -116,6 +116,7 @@ namespace Soul
         public void StartOffSequenceEngine()
         {
             var first = fixedSkillSequence.FirstOrDefault();
+            sequenceBeginAct?.Invoke();
             if (first != null)
             {
                 onFixedSequence = true;
@@ -229,11 +230,7 @@ namespace Soul
             
             if (onFixedSequence)
             {
-                _sequenceIndex += 1;
-                if (_sequenceIndex == fixedSkillSequence.Count)
-                {
-                    EndSequence();
-                }
+                EndSequence();
             }
             
             if (AI && !BeingControl())
