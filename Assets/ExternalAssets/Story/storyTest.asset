@@ -15,11 +15,11 @@ MonoBehaviour:
   _storyScenes:
   - Pic: {fileID: 21300000, guid: d912ad50556914e409d5d05e52aec3a3, type: 3}
     Lines:
-    - gfddf
-    - ert
-    - vcgdg
-  - Pic: {fileID: 21300000, guid: 392c287362ae34de4b3a10a399214755, type: 3}
+    - 1_1
+    - 1_2
+    - 1_3
+  - Pic: {fileID: 21300000, guid: 83e2108bbc2f14c8e930399754971489, type: 3}
     Lines:
-    - vbdfg
-    - wer
-    - xcvdfg
+    - 1_4
+    - 1_5
+    - 1_6

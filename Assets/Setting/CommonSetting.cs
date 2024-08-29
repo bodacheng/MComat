@@ -34,6 +34,9 @@ public class CommonSetting : ScriptableObject
         
     [Tooltip("GB短故事文件")]
     [SerializeField] string gbShortStoryFile = "gb_short_story";
+    
+    [Tooltip("故事对话")]
+    [SerializeField] string storyFile = "story";
 
     [Tooltip("admob interstitial ios Key")] 
     [SerializeField] string admob_interstitial_iosKey;
@@ -121,6 +124,7 @@ public class CommonSetting : ScriptableObject
     public static string LanguageCodeFile;
     public static string ShortStoryFile;
     public static string GBShortStoryFile;
+    public static string StoryFile;
     public static string StageModeFile;
 
     public static string Admob_interstitial_iosKey;
@@ -182,6 +186,7 @@ public class CommonSetting : ScriptableObject
         ShortStoryFile = shortStoryFile;
         GBShortStoryFile = gbShortStoryFile;
         StageModeFile = stageModeFile;
+        StoryFile = storyFile;
         PassiveSKillFile = passiveSKillFile;
 
         Admob_interstitial_iosKey = admob_interstitial_iosKey;

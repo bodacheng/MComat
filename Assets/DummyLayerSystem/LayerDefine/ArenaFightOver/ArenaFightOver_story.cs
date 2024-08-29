@@ -18,6 +18,7 @@ public partial class ArenaFightOver : UILayer
 
     [SerializeField] private BOButton storyPicOnClickBtn;
     [SerializeField] private Image storyPicBgImage;
+    [SerializeField] private SizeAdjustBySpriteSize sizeAdjustBySpriteSize;
     [SerializeField] private Text storyLineText;
     
     private TweenerCore<Color, Color, ColorOptions> storyBgColorChangeTween;
@@ -31,7 +32,13 @@ public partial class ArenaFightOver : UILayer
     {
         if (FightLoad.Fight.StoryInfo != null)
         {
-            storyPicBgImage.color = Color.white;
+            RectTransform rectTransform = storyPicBgImage.GetComponent<RectTransform>();
+            // 获取当前宽度
+            float currentWidth = rectTransform.sizeDelta.x;
+            // 设置新的大小，宽度保持不变，高度设置为目标值
+            rectTransform.sizeDelta = new Vector2(currentWidth, PosCal.CanvasHeight);
+            
+            storyBgColorChangeTween = storyPicBgImage.DOColor(Color.white, storyBgColorChangeDuration);
             storyPicBgImage.gameObject.SetActive(true);
             storyPicOnClickBtn.SetListener(() => { OnClick(FightLoad.Fight.StoryInfo); });
             DisplayCurrentScene(FightLoad.Fight.StoryInfo);
@@ -74,12 +81,13 @@ public partial class ArenaFightOver : UILayer
     private void DisplayCurrentScene(StoryInfo _storyInfo)
     {
         storyPicBgImage.sprite = _storyInfo.StoryScenes[_currentSceneIndex].Pic;
+        sizeAdjustBySpriteSize.AdjustSize();
         DisplayCurrentLine(_storyInfo);
     }
 
     private void DisplayCurrentLine(StoryInfo _storyInfo)
     {
-        storyLineText.text = _storyInfo.StoryScenes[_currentSceneIndex].Lines[_currentLineIndex];
+        storyLineText.text =  Story.Get(_storyInfo.StoryScenes[_currentSceneIndex].Lines[_currentLineIndex]);
     }
     
     bool clickedOnShortStory = false;
