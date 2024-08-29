@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine.UI;
 using UnityEngine;
 using DG.Tweening;
@@ -14,9 +15,76 @@ public partial class ArenaFightOver : UILayer
     [SerializeField] private Color gbStoryBgToColor;
     [SerializeField] private float storyBgColorChangeDuration;
     [SerializeField] private AudioSource storyLayerAudio;
+
+    [SerializeField] private BOButton storyPicOnClickBtn;
+    [SerializeField] private Image storyPicBgImage;
+    [SerializeField] private Text storyLineText;
     
     private TweenerCore<Color, Color, ColorOptions> storyBgColorChangeTween;
-    public bool LoadStory()
+
+    
+    private int _currentSceneIndex = 0;
+    private int _currentLineIndex = 0;
+    
+    bool picStoryEnded = false;
+    public async UniTask LoadStory()
+    {
+        if (FightLoad.Fight.StoryInfo != null)
+        {
+            storyPicBgImage.color = Color.white;
+            storyPicBgImage.gameObject.SetActive(true);
+            storyPicOnClickBtn.SetListener(() => { OnClick(FightLoad.Fight.StoryInfo); });
+            DisplayCurrentScene(FightLoad.Fight.StoryInfo);
+            storyPicBgImage.gameObject.SetActive(true);
+        }
+        else
+        {
+            picStoryEnded = true;
+        }
+
+        await UniTask.WaitUntil(()=> picStoryEnded);
+    }
+    
+    private void OnClick(StoryInfo storyInfo)
+    {
+        // 如果还有未显示的文字，显示下一句
+        if (_currentLineIndex < storyInfo.StoryScenes[_currentSceneIndex].Lines.Count - 1)
+        {
+            _currentLineIndex++;
+            DisplayCurrentLine(storyInfo);
+        }
+        else
+        {
+            // 如果当前场景还有未显示的图片，切换到下一张图片
+            if (_currentSceneIndex < storyInfo.StoryScenes.Count - 1)
+            {
+                _currentSceneIndex++;
+                _currentLineIndex = 0;
+                DisplayCurrentScene(storyInfo);
+            }
+            else
+            {
+                // 剧情播放完毕，可以在这里实现一些游戏逻辑，比如回到主菜单或进入下一关
+                storyPicBgImage.gameObject.SetActive(false);
+                picStoryEnded = true;
+            }
+        }
+    }
+    
+    private void DisplayCurrentScene(StoryInfo _storyInfo)
+    {
+        storyPicBgImage.sprite = _storyInfo.StoryScenes[_currentSceneIndex].Pic;
+        DisplayCurrentLine(_storyInfo);
+    }
+
+    private void DisplayCurrentLine(StoryInfo _storyInfo)
+    {
+        storyLineText.text = _storyInfo.StoryScenes[_currentSceneIndex].Lines[_currentLineIndex];
+    }
+    
+    bool clickedOnShortStory = false;
+    
+    public async UniTask LoadShortMessage()
     {
         var code = FightLoad.Fight.ID;
 
@@ -40,9 +108,17 @@ public partial class ArenaFightOver : UILayer
         if (notNull)
         {
             storyBgImage.color = storyBgFromColor;
-            storyBgColorChangeTween = storyBgImage.DOColor(FightLoad.Fight.EventType == FightEventType.Quest ? storyBgToColor : gbStoryBgToColor
-                , storyBgColorChangeDuration);
+            storyBgColorChangeTween = storyBgImage.DOColor(FightLoad.Fight.EventType == FightEventType.Quest ? storyBgToColor : gbStoryBgToColor, storyBgColorChangeDuration);
+            storyMaskBtn.SetListener(()=>
+            {
+                storyBgImage.gameObject.SetActive(false);
+                clickedOnShortStory = true;
+            });
         }
-        return notNull;
+        else
+        {
+            clickedOnShortStory = true;
+        }
+        await UniTask.WaitUntil(()=> clickedOnShortStory);
     }
 }

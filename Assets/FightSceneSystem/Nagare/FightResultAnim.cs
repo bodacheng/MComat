@@ -68,18 +68,13 @@ namespace FightScene
             {
                 case FightEventType.Gangbang:
                 case FightEventType.Quest:
-                    if (FightLogger.value.GetWinnerTeam() == Team.player1 && arenaFightOver.LoadStory())
+                    if (FightLogger.value.GetWinnerTeam() == Team.player1)
                     {
-                        arenaFightOver.Setup(async () =>
-                        {
-                            await EndPart();
-                        });
+                        await arenaFightOver.LoadShortMessage();
+                        await arenaFightOver.LoadStory();
                     }
-                    else
-                    {
-                        arenaFightOver.Setup();
-                        await EndPart();
-                    }
+                    arenaFightOver.Setup();
+                    await EndPart();
                     break;
                 default:
                     await EndPart();

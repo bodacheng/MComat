@@ -159,17 +159,8 @@ public partial class ArenaFightOver : UILayer
         }
     }
     
-    public void Setup(Action onClickStoryMask = null)
+    public void Setup()
     {
-        if (onClickStoryMask != null)
-        {
-            storyMaskBtn.SetListener(()=>
-            {
-                storyBgImage.gameObject.SetActive(false);
-                onClickStoryMask();
-            });
-        }
-        
         switch (FightLoad.Fight.EventType)
         {
             case FightEventType.Arena:

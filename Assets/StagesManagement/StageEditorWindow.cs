@@ -45,6 +45,11 @@ public class StageEditorWindow : EditorWindow
         {
             FightInfo.CreateGangbangInfoAsset(_target.FightMembers, _pathAndNameForLocalSave, _fileName);
         }
+        
+        if (GUILayout.Button("Save Story"))
+        {
+            StoryInfo.CreateStoryAsset(_pathAndNameForLocalSave, _fileName);
+        }
     }
 }
 #endif
