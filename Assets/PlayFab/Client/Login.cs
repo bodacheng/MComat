@@ -105,6 +105,18 @@ public partial class PlayFabReadClient
             ErrorReport
         );
 #endif
+        
+#if UNITY_STANDALONE_WIN
+        PlayFabClientAPI.LoginWithCustomID(
+            new LoginWithCustomIDRequest
+            {
+                CustomId = CustomId,
+                CreateAccount = true
+            },
+            (x)=>success.Invoke(x, LoginType.normal),
+            ErrorReport
+        );
+#endif
     }
     
     static MissionWatcher _missionWatcher;

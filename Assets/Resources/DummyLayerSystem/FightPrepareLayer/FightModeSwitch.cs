@@ -34,6 +34,7 @@ public class FightModeSwitch : MonoBehaviour
                 SetMode(TeamMode.MultiRaid);
             break;
             case 2:
+            case 3:
                 btn.interactable = false;
                 animator.enabled = false;
                 SetMode(TeamMode.Rotation);
