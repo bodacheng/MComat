@@ -131,6 +131,9 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
         // Create a builder for IAP service
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.GooglePlay));
 #endif
+      
+
+#if UNITY_IOS || UNITY_ANDROID        
         // Register each item from the catalog
         foreach (var item in _productCatalog) {
             if (item.ItemClass == productClassName)
@@ -152,6 +155,7 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
         
         // Trigger IAP service initialization
         UnityPurchasing.Initialize(this, builder);
+#endif
     }
 
     void InitializePurchasingNoAds()
@@ -165,10 +169,12 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.GooglePlay));
 #endif
         
+#if UNITY_IOS || UNITY_ANDROID  
         builder.AddProduct(noAdsServiceName, ProductType.Consumable);
         
         // Trigger IAP service initialization
         UnityPurchasing.Initialize(this, builder);
+#endif
     }
 
     // We are initialized when StoreController and Extensions are set and we are logged in
