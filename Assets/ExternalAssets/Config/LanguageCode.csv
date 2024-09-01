@@ -92,6 +92,9 @@ Once the account is deleted, it cannot be recovered.","現在のアカウント�
 一旦删除账户，账号将无法恢复"
 AccountDeleted,The account has been deleted.,アカウントは削除されました,账户已经删除
 ,,,
+DeleteAllReadMail,Delete all read messages,既読メッセージをすべて削除,删除所有已读
+ClaimAllMailGift,Retrieve all,一括取得,获取全部
+,,,
 tetsuya,Tetsuya,铁也,铁也
 adam,Adam,アダム,亚当
 yuta,Taka,タカ,鷹
