@@ -71,7 +71,13 @@ public class InBattleEvolution : UILayer
                     await RTFightManager.Target.EvolutionManager.ChangeSkill(focusUnit, nineForShow.ClickedSlot, skills[index]);
                     var t = skillOptions[index].Btn.transform.GetComponentInChildren<SKStoneItem>();
                     var clickedSlot = nineForShow.GetClickedSlot();
-                    t.transform.DOMove( clickedSlot.transform.position, animEndInSeconds).SetEase(Ease.InBack);
+                    t.transform.DOMove(clickedSlot.transform.position, animEndInSeconds).SetEase(Ease.InBack).OnComplete(
+                        () =>
+                        {
+                            var stone = clickedSlot.transform.GetComponentInChildren<SKStoneItem>();
+                            if (stone != null)
+                                Destroy(stone.gameObject);
+                        });
                     for (var a = 0; a < skillOptions.Length; a++)
                     {
                         if (a != index)
