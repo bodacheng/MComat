@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71badc16c2e6428a8cddb82f54caa68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoRoateCamera: {fileID: 136126618981595507}
+  autoRotateCamera: {fileID: 136126618981595507}
   bgmSlider: {fileID: 221554564749375074}
   effectsSoundsSlider: {fileID: 1955875879583475047}
 --- !u!1 &5997510582147332882

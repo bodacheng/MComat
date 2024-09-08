@@ -9,7 +9,7 @@ public class FightScenePauseSupport : UILayer
     private Action resumeAction;
     private Action returnAction;
 
-    [SerializeField] Toggle autoRoateCamera;
+    [SerializeField] Toggle autoRotateCamera;
     
     #region Sound
     [SerializeField] Slider bgmSlider;
@@ -22,16 +22,15 @@ public class FightScenePauseSupport : UILayer
         this.returnAction = returnToFront;
         runNow.Invoke();
         ResetSliders();
-        autoRoateCamera.onValueChanged.AddListener(x =>
-        {
-            var c = RTFightManager.Target._CameraManager.GetMode(C_Mode.CertainYAntiVibration);
-            var mode = ((ChatGptFix)c);
-            mode.AutoRotateCamera = x;
-            AppSetting.Value.AutoRotateCamera = x;
-        });
         
-        autoRoateCamera.gameObject.SetActive(FightLoad.Fight.team1Mode == TeamMode.Rotation);
-        autoRoateCamera.isOn = AppSetting.Value.AutoRotateCamera;
+        var c = RTFightManager.Target._CameraManager.GetMode(C_Mode.CertainYAntiVibration);
+        var mode = ((ChatGptFix)c);
+        autoRotateCamera.onValueChanged.AddListener(x =>
+        {
+            mode.AutoRotateCamera = x;
+        });
+        autoRotateCamera.SetIsOnWithoutNotify(mode.AutoRotateCamera);
+        autoRotateCamera.gameObject.SetActive(FightLoad.Fight.team1Mode == TeamMode.Rotation);
     }
 
     public void Resume()

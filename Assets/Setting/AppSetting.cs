@@ -84,9 +84,7 @@ public class AppSetting
                 UiAudioSource.volume = _effectsVolume;
         }
     }
-
-    public bool AutoRotateCamera { get; set; }
-
+    
     public static void Save()
     {
         string json = JsonConvert.SerializeObject(Value);
@@ -109,7 +107,6 @@ public class AppSetting
                            Application.systemLanguage == SystemLanguage.ChineseTraditional) ? 
                     SystemLanguage.Chinese : Application.systemLanguage,
                 _bgmVolume = 0.5f, _effectsVolume = 0.5f,
-                AutoRotateCamera = true
             };
             Save();
         }
