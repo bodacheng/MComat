@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleGroundID: 1
   fightBGM: 0
-  storyInfo: {fileID: 11400000, guid: bad8e1607bdfd4de2a5312ce8ce097bc, type: 2}
+  storyInfo: {fileID: 0}
   unitsData:
   - id: 0
     r_id: 9
