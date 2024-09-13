@@ -133,11 +133,11 @@ class ChatGptFix : CameraMode
                 {
                     if (meScreenPos.x < enemyScreenPos.x)
                     {
-                        return Mathf.Abs(Vector2.Angle(enemyScreenPos - meScreenPos, Vector3.right));
+                        return Mathf.Abs(Vector2.Angle(enemyScreenPos - meScreenPos, Vector2.right));
                     }
                     else
                     {
-                        return Mathf.Abs(Vector2.Angle(enemyScreenPos - meScreenPos, -Vector3.right));
+                        return Mathf.Abs(Vector2.Angle(enemyScreenPos - meScreenPos, -Vector2.right));
                     }
                 }
                 
@@ -164,10 +164,11 @@ class ChatGptFix : CameraMode
             }
         }
         
-        ePosX = (float)((decimal)enemyScreenPos.x / Screen.width);
-        ePosY = (float)((decimal)enemyScreenPos.y / Screen.height);
-        mPosX = (float)((decimal)meScreenPos.x / Screen.width);
-        mPosY = (float)((decimal)meScreenPos.y / Screen.height);
+        ePosX = (enemyScreenPos.x / Screen.width);
+        ePosY =(enemyScreenPos.y / Screen.height);
+        mPosX = (meScreenPos.x / Screen.width);
+        mPosY =(meScreenPos.y / Screen.height);
+        
         if (ePosX >= 0.3 && ePosX <= 0.7 &&
             mPosX >= 0.3 && mPosX <= 0.7 &&
             ePosY >= 0.3 && ePosY <= 0.7 &&
