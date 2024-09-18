@@ -164,10 +164,10 @@ class ChatGptFix : CameraMode
             }
         }
         
-        ePosX = (enemyScreenPos.x / Screen.width);
-        ePosY =(enemyScreenPos.y / Screen.height);
-        mPosX = (meScreenPos.x / Screen.width);
-        mPosY =(meScreenPos.y / Screen.height);
+        ePosX = enemyScreenPos.x / Screen.width;
+        ePosY = enemyScreenPos.y / Screen.height;
+        mPosX = meScreenPos.x / Screen.width;
+        mPosY = meScreenPos.y / Screen.height;
         
         if (ePosX >= 0.3 && ePosX <= 0.7 &&
             mPosX >= 0.3 && mPosX <= 0.7 &&

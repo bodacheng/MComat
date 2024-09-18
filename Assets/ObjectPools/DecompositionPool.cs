@@ -84,7 +84,6 @@ public class DecompositionPool : ObjectPool<Decomposition> {
         if (decomposition.AudioSource != null)
         {
             decomposition.AudioSource.playOnAwake = false;
-            decomposition.AudioSource.volume = AppSetting.Value.EffectsVolume;
             decomposition.AudioSource.minDistance = 20;
             decomposition.AudioSource.maxDistance = 80;
         }

@@ -83,9 +83,12 @@ public partial class Decomposition : MonoBehaviour {
             _HitBox.CurrentHP = _HitBox.weaponHP;
         if (hasParticle)
             to_be_stop_emissions.Play(true);
-        
+
         if (AudioSource != null)
+        {
+            AudioSource.volume = AppSetting.Value.EffectsVolume;
             AudioSource.Play();
+        }
         
         SetMaterialsAlpha(1f);
     }
