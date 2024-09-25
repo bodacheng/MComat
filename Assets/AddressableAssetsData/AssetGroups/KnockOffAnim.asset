@@ -22,6 +22,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - knock_anim
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c72f17efbf26641ae86580506444b5c7
+    m_Address: e_dragon/basic_knockoffs
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - knock_anim
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:

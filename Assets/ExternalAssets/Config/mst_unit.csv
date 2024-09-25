@@ -15,3 +15,4 @@ recordId,realName,monsterType,zokusei,rarityLevel,basicMovementPack,moveType,mot
 14,adam_naked,human,5,1,adam,Move1,Rush,1
 15,baruk,human,2,1,baruk,Move2,Rush,1
 16,ice_golem,human,4,1,adam,Move1,Rush,1
+17,g_e_dragon,e_dragon,5,1,e_dragon,Move1,Rush,1

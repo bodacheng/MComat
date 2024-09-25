@@ -22,6 +22,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - hurt_anim
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c6f0112cad0b4702a669e78885d4f30
+    m_Address: e_dragon/basic_hurts
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - hurt_anim
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
