@@ -163,7 +163,7 @@ public class FightInfo : ScriptableObject
             switch (index)
             {
                 case 0:
-                    unitInfo.set =  SkillSet.RandomSkillSet(type, passiveSKillRecordId,  false, form, false);
+                    unitInfo.set =  SkillSet.RandomSkillSet(passiveSKillRecordId,  false, form, false);
                     break;
                 case 1:
                     form = new SkillStonesBox.StoneFilterForm
@@ -171,7 +171,7 @@ public class FightInfo : ScriptableObject
                         Type = type,
                         ExType = new[] { 0 , 1 }
                     };
-                    unitInfo.set =  SkillSet.RandomSkillSet(type, passiveSKillRecordId,  false, form, false);
+                    unitInfo.set =  SkillSet.RandomSkillSet(passiveSKillRecordId, false, form, false);
                     break;
                 case 2:
                     form = new SkillStonesBox.StoneFilterForm
@@ -179,7 +179,7 @@ public class FightInfo : ScriptableObject
                         Type = type,
                         ExType = new[] { 0, 1, 2 }
                     };
-                    unitInfo.set =  SkillSet.RandomSkillSet(type, passiveSKillRecordId,  false, form, false);
+                    unitInfo.set =  SkillSet.RandomSkillSet(passiveSKillRecordId, false, form, false);
                     break;
                 default:
                     form = new SkillStonesBox.StoneFilterForm
@@ -187,7 +187,7 @@ public class FightInfo : ScriptableObject
                         Type = type,
                         ExType = new[] { 0, 1, 2, 3 }
                     };
-                    unitInfo.set =  SkillSet.RandomSkillSet(type, passiveSKillRecordId,  false, form, false);
+                    unitInfo.set =  SkillSet.RandomSkillSet(passiveSKillRecordId, false, form, false);
                     break;
             }
         }

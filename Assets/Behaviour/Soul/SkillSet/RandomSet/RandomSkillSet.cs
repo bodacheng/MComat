@@ -17,14 +17,16 @@ public partial class SkillSet
         }
         
         if (exceptSkIDs != null)
+        {
             for (int i = 0; i < exceptSkIDs.Count; i++)
             {
                 if (stoneSkillIDs.Contains(exceptSkIDs[i]))
                     stoneSkillIDs.Remove(exceptSkIDs[i]);
             }
+        }
         
         int ranDom = Random.Range(0, stoneSkillIDs.Count);
-        return stoneSkillIDs[ranDom];
+        return stoneSkillIDs.Count > 0 && ranDom < stoneSkillIDs.Count ? stoneSkillIDs[ranDom] : null;
     }
     
     public static List<int> RemainSlotSPLevelCal(SkillSet current)

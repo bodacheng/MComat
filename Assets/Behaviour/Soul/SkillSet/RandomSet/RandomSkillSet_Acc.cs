@@ -4,17 +4,18 @@ using dataAccess;
 using UnityEngine;
 using Skill;
 using mainMenu;
-using NoSuchStudio.Common;
+using System;
+using Random = System.Random;
 
 public partial class SkillSet
 {
     // 随机技能组
-    public static SkillSet RandomSkillSet(string type, string originSkill, bool baseOnAcc, SkillStonesBox.StoneFilterForm filterForm = null, bool noSpLimit = false)
+    public static SkillSet RandomSkillSet(string originSkill, bool baseOnAcc, SkillStonesBox.StoneFilterForm filterForm = null, bool noSpLimit = false)
     {
         var skillSet = new SkillSet();
         var originSkillConfig = SkillConfigTable.GetSkillConfigByRecordId(originSkill);
         
-        skillSet = RandomSkillSetRec(type, skillSet, new List<int>()
+        skillSet = RandomSkillSetRec(skillSet, new List<int>()
         {
             1,2,3,4,5,6,7,8,9
         }, originSkillConfig, baseOnAcc, filterForm, noSpLimit);
@@ -22,7 +23,7 @@ public partial class SkillSet
         return skillSet;
     }
     
-    static SkillStonesBox.StoneFilterForm DecideRemainForm(SkillSet skillSet, string type, SkillStonesBox.StoneFilterForm form, int targetSlot, bool noSpLimit = false)
+    static SkillStonesBox.StoneFilterForm DecideRemainForm(SkillSet skillSet, SkillStonesBox.StoneFilterForm form, int targetSlot, bool noSpLimit = false)
     {
         if (noSpLimit)
         {
@@ -46,12 +47,12 @@ public partial class SkillSet
                 var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skillId);
                 hasNormal = skillConfig.SP_LEVEL == 0;
             }
-
+            
             if (!hasNormal)
             {
                 form = new SkillStonesBox.StoneFilterForm
                 {
-                    Type = type,
+                    Type = form.Type,
                     ExType = new [] { 0 }
                 };
                 return form;
@@ -74,7 +75,7 @@ public partial class SkillSet
             {
                 form = new SkillStonesBox.StoneFilterForm
                 {
-                    Type = type,
+                    Type = form.Type,
                     ExType = RemainSlotSPLevelCal(skillSet).ToArray()
                 };
             }
@@ -83,7 +84,7 @@ public partial class SkillSet
         
         form = new SkillStonesBox.StoneFilterForm
         {
-            Type = type,
+            Type = form.Type,
             ExType = RemainSlotSPLevelCal(skillSet).ToArray()
         };
 
@@ -100,12 +101,14 @@ public partial class SkillSet
     /// <param name="origin"></param>
     /// <param name="baseOnAcc"></param>
     /// <returns></returns>
-    static SkillSet RandomSkillSetRec(string type, SkillSet skillSet, List<int> remainSlots, SkillConfig origin, bool baseOnAcc, 
+    static SkillSet RandomSkillSetRec(SkillSet skillSet, List<int> remainSlots, SkillConfig origin, bool baseOnAcc, 
         SkillStonesBox.StoneFilterForm filterForm, bool noSpLimit = false)
     {
-        var targetSlot = remainSlots.Random();
+        Random random = new Random();
+        int randomIndex = random.Next(remainSlots.Count); // Get a random index
+        int targetSlot = remainSlots[randomIndex]; // Get the random item
         remainSlots.Remove(targetSlot);
-        filterForm = DecideRemainForm(skillSet, type, filterForm, targetSlot, noSpLimit);
+        filterForm = DecideRemainForm(skillSet, filterForm, targetSlot, noSpLimit);
         
         var exceptSkIds = skillSet.SkillIDList();
         foreach (var passiveSKill in UnitPassiveTable.GetPassiveSKillRecordIds())
@@ -125,8 +128,12 @@ public partial class SkillSet
                 var stoneInfoModel = Stones.SearchStoneForRandomSetFromAccount(filterForm, exceptSkIds);
                 if (stoneInfoModel == null) // 如果账户已经没有符合要求的石头
                 {
-                    Debug.Log("无法为" + targetSlot + "找到合适技能石");
-                    return skillSet;
+                    stoneInfoModel = Stones.SearchStoneForRandomSetFromAccount(new SkillStonesBox.StoneFilterForm(filterForm.Type), exceptSkIds);
+                    if (stoneInfoModel == null)
+                    {
+                        Debug.Log("无法为" + targetSlot + "找到合适技能石");
+                        return skillSet;
+                    }
                 }
                 skillId = stoneInfoModel.SkillId;
             }
@@ -135,8 +142,12 @@ public partial class SkillSet
                 var found = RandomSkillIDOfStone(filterForm, exceptSkIds);
                 if (found == null) // 如果账户已经没有符合要求的石头
                 {
-                    Debug.Log("无法为" + targetSlot + "找到合适技能石");
-                    return skillSet;
+                    found = RandomSkillIDOfStone(new SkillStonesBox.StoneFilterForm(filterForm.Type), exceptSkIds);
+                    if (found == null)
+                    {
+                        Debug.Log("无法为" + targetSlot + "找到合适技能石");
+                        return skillSet;
+                    }
                 }
                 skillId = found;
             }
@@ -176,6 +187,6 @@ public partial class SkillSet
         {
             return skillSet;
         }
-        return RandomSkillSetRec(type, skillSet, remainSlots, origin, baseOnAcc, filterForm, noSpLimit);
+        return RandomSkillSetRec(skillSet, remainSlots, origin, baseOnAcc, filterForm, noSpLimit);
     }
 }

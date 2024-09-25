@@ -15,6 +15,12 @@ public partial class StageEditor {
         {
             _unitIDsAndNames.Add(keyValuePair.Key, keyValuePair.Value);
         }
+
+        if (_unitIDsAndNames.Count == 0)
+        {
+            return null;
+        }
+        
         var index = 0;
         foreach (var keyValuePair in _unitIDsAndNames)
         {

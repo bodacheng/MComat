@@ -32,6 +32,15 @@ namespace mainMenu
             public bool Close;
             public bool Near;
             public bool Far;
+
+            public StoneFilterForm()
+            {
+            }
+            
+            public StoneFilterForm(string type)
+            {
+                Type = type;
+            }
         }
         
         void PutSkillStonesToBox()

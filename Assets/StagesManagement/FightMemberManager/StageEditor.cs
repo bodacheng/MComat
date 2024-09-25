@@ -82,7 +82,11 @@ public partial class StageEditor
             goto A;
         }
         
-        UnitSelect();
+        var selectedUnit = UnitSelect();
+        if (selectedUnit == null)
+        {
+            return;
+        }
         
         // 九宫格
         NineSlotPart();
@@ -95,7 +99,7 @@ public partial class StageEditor
             if (string.IsNullOrEmpty(_focusingType))
                 return;
             var passiveSKillRecordId = UnitPassiveTable.GetUnitPassiveRecordId(unitRecordID);
-            _focusingUnitInfo.set = SkillSet.RandomSkillSet(_focusingType, passiveSKillRecordId,  false, form, noSpLimit);
+            _focusingUnitInfo.set = SkillSet.RandomSkillSet(passiveSKillRecordId, false, form, noSpLimit);
         }
         
         if (GUILayout.Button("一般", _buttonStyle))

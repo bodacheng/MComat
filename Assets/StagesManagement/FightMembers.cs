@@ -46,13 +46,13 @@ public class FightMembers
     {
     }
     
-    static UnitInfo ArrangeUnitInfo(string type, string unitRecordID)
+    static UnitInfo ArrangeUnitInfo(string unitRecordID)
     {
         var skillId = UnitPassiveTable.GetUnitPassiveRecordId(unitRecordID);
         var unitInfo = new UnitInfo
         {
             r_id = unitRecordID,
-            set = SkillSet.RandomSkillSet(type, skillId,false)
+            set = SkillSet.RandomSkillSet(skillId ,false)
         };
         return unitInfo;
     }
@@ -66,9 +66,9 @@ public class FightMembers
         var recordIds = unitIDsAndNames.Keys.ToList();
         var target = new FightMembers();
         
-        var char1 = ArrangeUnitInfo(type, recordIds[indexes[0]]);
-        var char2 = ArrangeUnitInfo(type, recordIds[indexes[1]]);
-        var char3 = ArrangeUnitInfo(type, recordIds[indexes[2]]);
+        var char1 = ArrangeUnitInfo(recordIds[indexes[0]]);
+        var char2 = ArrangeUnitInfo(recordIds[indexes[1]]);
+        var char3 = ArrangeUnitInfo(recordIds[indexes[2]]);
         
         target.EnemySets.Set(0, 0, char1);
         target.EnemySets.Set(0, 1, char2);
@@ -84,20 +84,19 @@ public class FightMembers
         var indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 12);
         var recordIds = unitIDsAndNames.Keys.ToList();
         var target = new FightMembers();
-        var char1 = ArrangeUnitInfo(type, recordIds[indexes[0]]);
-        var char2 = ArrangeUnitInfo(type, recordIds[indexes[1]]);
-        var char3 = ArrangeUnitInfo(type, recordIds[indexes[2]]);
-        var char4 = ArrangeUnitInfo(type, recordIds[indexes[3]]);
-        var char5 = ArrangeUnitInfo(type, recordIds[indexes[4]]);
-        var char6 = ArrangeUnitInfo(type, recordIds[indexes[5]]);
+        var char1 = ArrangeUnitInfo(recordIds[indexes[0]]);
+        var char2 = ArrangeUnitInfo(recordIds[indexes[1]]);
+        var char3 = ArrangeUnitInfo(recordIds[indexes[2]]);
+        var char4 = ArrangeUnitInfo(recordIds[indexes[3]]);
+        var char5 = ArrangeUnitInfo(recordIds[indexes[4]]);
+        var char6 = ArrangeUnitInfo(recordIds[indexes[5]]);
+        var char7 = ArrangeUnitInfo(recordIds[indexes[6]]);
+        var char8 = ArrangeUnitInfo(recordIds[indexes[7]]);
+        var char9 = ArrangeUnitInfo(recordIds[indexes[8]]);
+        var char10 = ArrangeUnitInfo(recordIds[indexes[9]]);
+        var char11 = ArrangeUnitInfo(recordIds[indexes[10]]);
+        var char12 = ArrangeUnitInfo(recordIds[indexes[11]]);
         
-        var char7 = ArrangeUnitInfo(type, recordIds[indexes[6]]);
-        var char8 = ArrangeUnitInfo(type, recordIds[indexes[7]]);
-        var char9 = ArrangeUnitInfo(type, recordIds[indexes[8]]);
-        var char10 = ArrangeUnitInfo(type, recordIds[indexes[9]]);
-        var char11 = ArrangeUnitInfo(type, recordIds[indexes[10]]);
-        var char12 = ArrangeUnitInfo(type, recordIds[indexes[11]]);
-
         target.EnemySets.Set(0, 0, char1);
         target.EnemySets.Set(0, 1, char2);
         target.EnemySets.Set(0, 2, char3);
@@ -119,8 +118,8 @@ public class FightMembers
     {
         var type = "human";
         var target = new FightMembers();
-        var char1 = ArrangeUnitInfo(type, "1");
-        var char2 = ArrangeUnitInfo(type, "2");
+        var char1 = ArrangeUnitInfo("1");
+        var char2 = ArrangeUnitInfo("2");
         switch (teamMode)
         {
             case TeamMode.MultiRaid:
