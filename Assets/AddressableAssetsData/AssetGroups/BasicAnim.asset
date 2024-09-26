@@ -24,7 +24,7 @@ MonoBehaviour:
     - anim
     - basic_anim
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: aad2723fdad8945a3b067336c1bae9e8
+  - m_GUID: 9410cd3aaa6604e5b864ae7c11a5be44
     m_Address: e_dragon/BasicPack
     m_ReadOnly: 0
     m_SerializedLabels:
