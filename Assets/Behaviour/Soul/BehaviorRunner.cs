@@ -249,14 +249,6 @@ namespace Soul
             }
         }
         
-        public void ChangeToTestMode()
-        {
-            BehaviourDic.TryGetValue(_commandWaitingState.StateKey, out _tryBehavior);
-            var move_State = (Move_State)_tryBehavior;
-            move_State.AIMoveStyle = Move_State.AIMoveMode.Test;
-            ChangeToWaitingState();
-        }
-      
         public void INIStates(Data_Center data_Center)
         {
             if (BehaviourDic == null)

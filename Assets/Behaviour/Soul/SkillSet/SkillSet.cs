@@ -33,7 +33,7 @@ public partial class SkillSet {
         b1 = null; b2 = null; b3 = null;
         c1 = null; c2 = null; c3 = null;
         
-        _moveType = MoveType.Move_normal;
+        _moveType = MoveType.normal;
         _def = false;
         _rushType = RushType.Rush;
     }

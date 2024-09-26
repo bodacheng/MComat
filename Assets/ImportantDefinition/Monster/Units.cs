@@ -181,13 +181,13 @@ public static class Units
                 };
                 switch (Config.MoveType)
                 {
-                    case MoveType.Move_normal:
+                    case MoveType.normal:
                         row.MOVE_TYPE = "Move1";
                         break;
-                    case MoveType.Move_slow:
+                    case MoveType.slow:
                         row.MOVE_TYPE = "Move2";
                         break;
-                    case MoveType.Move_fast:
+                    case MoveType.fast:
                         row.MOVE_TYPE = "Move3";
                         break;
                     default:
@@ -291,13 +291,13 @@ public static class Units
         };
         switch (config.MoveType)
         {
-            case MoveType.Move_normal:
+            case MoveType.normal:
                 row.MOVE_TYPE = "Move1";
                 break;
-            case MoveType.Move_slow:
+            case MoveType.slow:
                 row.MOVE_TYPE = "Move2";
                 break;
-            case MoveType.Move_fast:
+            case MoveType.fast:
                 row.MOVE_TYPE = "Move3";
                 break;
         }
@@ -356,17 +356,14 @@ public static class Units
 
         switch (row.MOVE_TYPE)
         {
-            case "Move1":
-                _Config.MoveType = MoveType.Move_normal;
+            case "slow":
+                _Config.MoveType = MoveType.slow;
                 break;
-            case "Move2":
-                _Config.MoveType = MoveType.Move_slow;
-                break;
-            case "Move3":
-                _Config.MoveType = MoveType.Move_fast;
+            case "fast":
+                _Config.MoveType = MoveType.fast;
                 break;
             default:
-                _Config.MoveType = MoveType.Move_normal;
+                _Config.MoveType = MoveType.normal;
                 break;
         }
 

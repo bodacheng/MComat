@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NoSuchStudio.Common;
+using Skill;
 using UnityEngine;
 
 namespace Soul
@@ -8,7 +9,7 @@ namespace Soul
     {
         readonly float speed;
         readonly float timeLimit;
-        public AIMoveMode AIMoveStyle;
+        MoveType moveType;
         float _timeCounter;
         Vector3 _useDirection;
         AIMoveDirection _moveDirection;
@@ -17,11 +18,6 @@ namespace Soul
         Vector3 _screenMovementForward, _screenMovementRight;
         List<GameObject> _enemiesByDistance = new List<GameObject>();
         
-        public enum AIMoveMode
-        {
-            Test = 0,
-            Normal = 1
-        }
         enum AIMoveDirection
         {
             Stay,
@@ -32,11 +28,24 @@ namespace Soul
             RunToBattleGroundCenter
         }
         
-        public Move_State(AIMoveMode aiMoveStyle, float speed, float timeLimit)
+        public Move_State(MoveType moveType)
         {
-            AIMoveStyle = aiMoveStyle;
-            this.speed = speed;
-            this.timeLimit = timeLimit;
+            this.moveType = moveType;
+            switch (moveType)
+            {
+                case MoveType.slow:
+                    this.speed = FightGlobalSetting._fighterMoveSpeed / 2;
+                    this.timeLimit = 3;
+                    break;
+                case MoveType.fast:
+                    this.speed = FightGlobalSetting._fighterMoveSpeed * 2;
+                    this.timeLimit = 1;
+                    break;
+                default:
+                    this.speed = FightGlobalSetting._fighterMoveSpeed;
+                    this.timeLimit = 1;
+                    break;
+            }
         }
 
         public override bool Capacity_enter_condition()
@@ -119,13 +128,6 @@ namespace Soul
         private GameObject closestEnemy;
         void DecideDirection()
         {
-            if (AIMoveStyle == AIMoveMode.Test)
-            {
-                _moveDirection = AIMoveDirection.Stay;
-                _useDirection = Vector3.zero;
-                return;
-            }
-            
             if (_BasicPhysicSupport.AtRing)
             {
                 _moveDirection = AIMoveDirection.RunToBattleGroundCenter;

@@ -112,7 +112,7 @@ namespace Soul
             //这上下两个函数之间存在一个chuanEndCasualT0的问题，从而必须一前一后紧密连接，下次review时候可以看看代码能不能整更利索一些。
             SkillEntityDic = nineAndTwo.GenerateBehaviourSets();
             skillEntityList = nineAndTwo.SkillEntityList();
-            _statesIncubator = new BehaviorsIncubator(_emptyState, SkillEntityDic);
+            _statesIncubator = new BehaviorsIncubator(_emptyState, nineAndTwo.MSkillEntity, SkillEntityDic);
             var behaviorDic = _statesIncubator.BehaviorDic; // 理解整个系统的关键
             BehaviourDic.Clear();
             ConditionAndRespondPriority.Clear();
@@ -143,7 +143,7 @@ namespace Soul
             }
             
             AllConditionCodes = ConditionAndRespond.Keys.ToList();
-            _commandWaitingState = BehaviourDic[nineAndTwo.GetM_STS().REAL_NAME];
+            _commandWaitingState = BehaviourDic[nineAndTwo.MSkillEntity.REAL_NAME];
         }
         
         public void SetAt(float level)

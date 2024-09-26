@@ -189,87 +189,31 @@ namespace Skill
 
         public static SkillEntity GetM_SE(MoveType moveType)
         {
-            SkillEntity M_SE;
-            switch (moveType)
+            SkillEntity M_SE = new SkillEntity
             {
-                case MoveType.Move_normal:
-                    M_SE = new SkillEntity
-                    {
-                        REAL_NAME = "Move",
-                        StateType = BehaviorType.MV,
-                        AIAttrs = new AIAttrs
-                        {
-                            AI_MIN_DIS = -1,
-                            AI_MAX_DIS = -1
-                        },
-                        CasualTo = null,
-                        ForcedTransitions = null,
-                        EnterInput = InputKey.Null,
-                        ExitInput = InputKey.Null,
-                        SP_LEVEL = -1
-                    };
-                    break;
-                case MoveType.Move_slow:
-                    M_SE = new SkillEntity
-                    {
-                        REAL_NAME = "Move",
-                        StateType = BehaviorType.MV,
-                        AIAttrs = new AIAttrs
-                        {
-                            AI_MIN_DIS = -1,
-                            AI_MAX_DIS = -1
-                        },
-                        CasualTo = null,
-                        ForcedTransitions = null,
-                        EnterInput = InputKey.Null,
-                        ExitInput = InputKey.Null,
-                        SP_LEVEL = -1
-                    };
-                    break;
-                case MoveType.Move_fast:
-                    M_SE = new SkillEntity()
-                    {
-                        REAL_NAME = "Move",
-                        StateType = BehaviorType.MV,
-                        AIAttrs = new AIAttrs
-                        {
-                            AI_MIN_DIS = -1,
-                            AI_MAX_DIS = -1
-                        },
-                        CasualTo = null,
-                        ForcedTransitions = null,
-                        EnterInput = InputKey.Null,
-                        ExitInput = InputKey.Null,
-                        SP_LEVEL = -1
-                    };
-                    break;
-                default:
-                    M_SE = new SkillEntity
-                    {
-                        REAL_NAME = "Move",
-                        StateType = BehaviorType.MV,
-                        AIAttrs = new AIAttrs
-                        {
-                            AI_MIN_DIS = -1,
-                            AI_MAX_DIS = -1
-                        },
-                        CasualTo = null,
-                        ForcedTransitions = null,
-                        EnterInput = InputKey.Null,
-                        ExitInput = InputKey.Null,
-                        SP_LEVEL = -1
-                    };
-                    break;
-            }
+                SkillID = moveType.ToString(),
+                REAL_NAME = "Move",
+                StateType = BehaviorType.MV,
+                AIAttrs = new AIAttrs
+                {
+                    AI_MIN_DIS = -1,
+                    AI_MAX_DIS = -1
+                },
+                CasualTo = null,
+                ForcedTransitions = null,
+                EnterInput = InputKey.Null,
+                ExitInput = InputKey.Null,
+                SP_LEVEL = -1
+            };
             return M_SE;
         }
     }
     
     public enum MoveType
     {
-        Move_normal = 1,
-        Move_slow = 2,
-        Move_fast = 3
+        normal = 1,
+        slow = 2,
+        fast = 3
     }
     
     public enum RushType

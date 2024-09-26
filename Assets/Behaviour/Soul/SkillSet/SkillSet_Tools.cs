@@ -188,11 +188,6 @@ public partial class SkillSet
     {
         return SkillConfigTable.GetSkillConfigByRecordId(c3);
     }
-        
-    public SkillEntity GetM_STS()
-    {
-        return M;
-    }
     
     public int GetLowestSpLevel()
     {

@@ -6,6 +6,7 @@ using System.Linq;
 public partial class SkillSet
 {
     SkillEntity A1, A2, A3, B1, B2, B3, C1, C2, C3, D, M, R;
+    public SkillEntity MSkillEntity => M;
     
     #region 基础进程实体
     SkillEntity _empty, _victory, _death, _hit, _getUp, _knockOff;
@@ -215,7 +216,7 @@ public partial class SkillSet
         if (A2 != null)
         {
             StateTransitionSetList.Add(A2);
-        }            
+        }
         if (A3 != null)
         {
             StateTransitionSetList.Add(A3);
@@ -223,7 +224,7 @@ public partial class SkillSet
         if (B1 != null)
         {
             StateTransitionSetList.Add(B1);
-        }            
+        }
         if (B2 != null)
         {
             StateTransitionSetList.Add(B2);

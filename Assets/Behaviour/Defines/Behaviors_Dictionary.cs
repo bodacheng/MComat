@@ -9,7 +9,7 @@ namespace Soul
         // 技能动画列表（不包括基础动画）
         public readonly List<string> SkillTypeKeys;
 
-        public BehaviorsIncubator(Empty_State empty_State, IDictionary<string, SkillEntity> toFormAttackStateList)
+        public BehaviorsIncubator(Empty_State empty_State, SkillEntity moveState, IDictionary<string, SkillEntity> toFormAttackStateList)
         {
             BehaviorDic = new Dictionary<string, Behavior>
             {
@@ -19,13 +19,7 @@ namespace Soul
             var death = new Death_State();
             BehaviorDic.Add("Victory", victory);
             BehaviorDic.Add("Death", death);
-            var move = new Move_State(Move_State.AIMoveMode.Normal, FightGlobalSetting._fighterMoveSpeed, 1f)
-            {
-                StateType = BehaviorType.MV,
-                nextAttackCanRushFirst = false
-            };
-            BehaviorDic.Add("Move", move);
-
+            
             if (FightGlobalSetting.HasDefend)
             {
                 var defend = new Defend_State("block", "block_break")
@@ -35,7 +29,28 @@ namespace Soul
                 };
                 BehaviorDic.Add("Defend", defend);
             }
-
+            
+            MoveType moveType;
+            switch (moveState.SkillID)
+            {
+                case "slow":
+                    moveType = MoveType.slow;
+                    break;
+                case "fast":
+                    moveType = MoveType.fast;
+                    break;
+                default:
+                    moveType = MoveType.normal;
+                    break;
+            }
+                            
+            var move = new Move_State(moveType)
+            {
+                StateType = BehaviorType.MV,
+                nextAttackCanRushFirst = false
+            };
+            BehaviorDic.Add("Move", move);
+            
             var hit = new Hurt_State()
             {
                 nextAttackCanRushFirst = false,

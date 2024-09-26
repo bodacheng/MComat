@@ -6,17 +6,12 @@ namespace FightScene
 {
     public partial class UnitsManger : MonoBehaviour
     {
-        public void AllUnitsStartOff(bool testMode = false)
+        public void AllUnitsStartOff()
         {
             foreach (var member in teamMembers.GetValues())
             {
                 Sensor.AddOrRemoveSharedUnitInfo(member, teamConfig.myTeam, true);
-                if (!testMode)
-                    member._MyBehaviorRunner.ChangeToWaitingState();
-                else
-                {
-                    member._MyBehaviorRunner.ChangeToTestMode();
-                }
+                member._MyBehaviorRunner.ChangeToWaitingState();
             }
         }
 
