@@ -23,17 +23,6 @@ public partial class SkillEditLayer : UILayer
         }
     }
     
-    void RandomAll()
-    {
-        var info = PreScene.target.Focusing;
-        var unitConfig = Units.GetUnitConfig(info.r_id);
-        var originSkillInfo = Stones.GetOriginSkillOfUnit(info.id);
-        // 这一步仅仅是根据账户拥有技能石的情况来确定了可行的技能组，也就是说根据手上的石头这个技能组能拼出来，但没提供具体的石头，所以防重复工作在实际装备技能石的时候（AddRandomStoneToSlot）也要做
-        var targetSkillSet = SkillSet.RandomSkillSet(originSkillInfo?.SkillId, true);
-        ForceClearAll();
-        Finish(info, targetSkillSet);
-    }
-
     void Finish(UnitInfo info, SkillSet targetSkillSet)
     {
         AddRandomStoneToSlot(info.id, 1, targetSkillSet.a1);

@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using System.IO;
 using System.Linq;
+using mainMenu;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -49,10 +50,11 @@ public class FightMembers
     static UnitInfo ArrangeUnitInfo(string unitRecordID)
     {
         var skillId = UnitPassiveTable.GetUnitPassiveRecordId(unitRecordID);
+        var unitConfig = Units.GetUnitConfig(unitRecordID);
         var unitInfo = new UnitInfo
         {
             r_id = unitRecordID,
-            set = SkillSet.RandomSkillSet(skillId ,false)
+            set = SkillSet.RandomSkillSet(skillId ,false, new SkillStonesBox.StoneFilterForm(unitConfig.TYPE))
         };
         return unitInfo;
     }

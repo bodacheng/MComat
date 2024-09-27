@@ -10,7 +10,7 @@ using Random = System.Random;
 public partial class SkillSet
 {
     // 随机技能组
-    public static SkillSet RandomSkillSet(string originSkill, bool baseOnAcc, SkillStonesBox.StoneFilterForm filterForm = null, bool noSpLimit = false)
+    public static SkillSet RandomSkillSet(string originSkill, bool baseOnAcc, SkillStonesBox.StoneFilterForm filterForm, bool noSpLimit = false)
     {
         var skillSet = new SkillSet();
         var originSkillConfig = SkillConfigTable.GetSkillConfigByRecordId(originSkill);
