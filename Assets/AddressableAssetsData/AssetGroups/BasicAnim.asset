@@ -21,7 +21,6 @@ MonoBehaviour:
     m_Address: human/BasicPack
     m_ReadOnly: 0
     m_SerializedLabels:
-    - anim
     - basic_anim
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9410cd3aaa6604e5b864ae7c11a5be44
