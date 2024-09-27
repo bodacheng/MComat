@@ -8,6 +8,7 @@ namespace Soul
     {
         void PushToMidStart(V_Damage newValue, float dis)
         {
+            _BasicPhysicSupport.OpenEnemyTouchingDrag(1);
             Vector3 midDistanceFromMe = newValue.attacker.Center.geometryCenter.transform.position + 
                                         newValue.attacker.Center.WholeT.transform.forward * dis;
             float originY = _DATA_CENTER.WholeT.position.y;
@@ -34,7 +35,7 @@ namespace Soul
                         mySequence.Kill();
                         return;
                     }
-                    if (_BasicPhysicSupport.AtRing || _BasicPhysicSupport.hiddenMethods.TouchingEnemy())
+                    if (_BasicPhysicSupport.AtRing || (_BasicPhysicSupport.hiddenMethods.TouchingEnemy() && TimeCounter > 0.2f))
                     {
                         mySequence.Kill();
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
