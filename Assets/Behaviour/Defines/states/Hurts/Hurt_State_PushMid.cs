@@ -34,7 +34,7 @@ namespace Soul
                         mySequence.Kill();
                         return;
                     }
-                    if (_BasicPhysicSupport.AtRing)
+                    if (_BasicPhysicSupport.AtRing || _BasicPhysicSupport.hiddenMethods.TouchingEnemy())
                     {
                         mySequence.Kill();
                         _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
