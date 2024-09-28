@@ -1,4 +1,4 @@
-RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,EVENT_CODE
+b,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,EVENT_CODE
 3,backfistround_r,human,0,1,3,GR,
 4,spinningkick,human,2,0.7,3,GR,
 5,doublepunch,human,0,0.6,3,GR,
@@ -72,3 +72,6 @@ RECORD_ID,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK
 191,El_Attack_Tail_Right,e_dragon,0,1,3,GR,
 192,El_Attack_FireBall,e_dragon,1,1,3,GI,
 193,El_Attack_FireBreath,e_dragon,3,1,3,GI,
+194,El_Attack_FireBreath_Swipe,e_dragon,3,1,3,GI,
+195,El_Attack_Bite_Front,e_dragon,0,1,3,GR,
+196,El_Fly_Forward,e_dragon,1,0,3,CT,
