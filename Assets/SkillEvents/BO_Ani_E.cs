@@ -151,7 +151,13 @@ public partial class BO_Ani_E : MonoBehaviour
     public void Bullet_shoot_from_body_part(AnimationEvent e)
 	{
         DecideTarget(e.stringParameter);
-        hiddenMethods.Bullet_shoot_from_Core(target.position, transform.rotation,e.intParameter, e.floatParameter,null);
+        hiddenMethods.Bullet_shoot_from_Core(target.position, transform.rotation, e.intParameter, e.floatParameter,null);
+    }
+    
+    public void Bullet_shoot_from_body_part_TD(AnimationEvent e)
+    {
+        DecideTarget(e.stringParameter);
+        hiddenMethods.Bullet_shoot_from_Core(target.position, target.rotation, e.intParameter, e.floatParameter,null);
     }
     
     Transform target;

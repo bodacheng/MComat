@@ -233,7 +233,7 @@ public partial class AnimationManger
                     {
                         tasks.Add(HurtObjectManager.ConstructHurtObjectPool(e.stringParameter, element, preloadCount));
                     }
-                    if (e.functionName == "Bullet_shoot_from_body_part")
+                    if (e.functionName is "Bullet_shoot_from_body_part" or "Bullet_shoot_from_body_part_TD")
                     {
                         switch (e.intParameter)
                         {

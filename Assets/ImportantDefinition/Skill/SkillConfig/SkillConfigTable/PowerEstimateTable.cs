@@ -200,7 +200,9 @@ public class PowerEstimateTable
             #endregion
             
             #region 几个固定魔法
-            if (clip.events[i].functionName == "Bullet_shoot_from_body_part" || clip.events[i].functionName == "BlastAttack")
+            if (clip.events[i].functionName == "Bullet_shoot_from_body_part" ||
+                clip.events[i].functionName == "Bullet_shoot_from_body_part_TD"
+                || clip.events[i].functionName == "BlastAttack")
             {
                 amount += skillATRef;
                 attackCount++;
