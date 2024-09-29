@@ -61,7 +61,7 @@ public class TeamEditPage : MSceneProcess
                 break;
         }
         
-        unitsLayer.DisplayUnitIcons(dataAccess.Units.Dic, true, true);
+        unitsLayer.IniUnitIcons(dataAccess.Units.Dic, true, true);
         if (PreScene.target.Focusing != null)
         {
             // Just wanna show a model when enter team edit page

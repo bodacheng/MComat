@@ -44,7 +44,7 @@ namespace mainMenu
         }
         
         //icon的排列，显示   
-        public void DisplayUnitIcons(IDictionary<string, UnitInfo> dic, bool clearBtnFeature, bool withSkillCheck = false)
+        public void IniUnitIcons(IDictionary<string, UnitInfo> dic, bool clearBtnFeature, bool withSkillCheck = false)
         {
             Selected.Subscribe(x =>
             {
@@ -54,6 +54,11 @@ namespace mainMenu
             
             unitBoxContainer.gameObject.SetActive(true);
             UnitIconsGenerate(dic, clearBtnFeature, withSkillCheck);
+            DisplayIcons();
+        }
+
+        public void DisplayIcons()
+        {
             foreach (var keyValuePair in heroIcons)
             {
                 keyValuePair.Value.gameObject.SetActive(false);
@@ -63,11 +68,6 @@ namespace mainMenu
             for (var i = 0; i < icons.Count; i++)
             {
                 var targetingIcon = icons[i];
-                if (targetingIcon == null)
-                {
-                    Debug.Log("严重错误");
-                    return;
-                }
                 targetingIcon.gameObject.SetActive(true);
                 targetingIcon.transform.SetParent(unitBoxContainer);
                 targetingIcon.transform.localScale = Vector3.one;
@@ -104,11 +104,6 @@ namespace mainMenu
             {
                 typeOfUnitsIHave.Add(unitConfig.TYPE);
             }
-        }
-        
-        public void OnTypeChangeMyMonsterBox()
-        {
-            DisplayUnitIcons(dataAccess.Units.Dic, false);
         }
         
         void UnitIconsGenerate(IDictionary<string, UnitInfo> dic, bool clearButtonFeature, bool withSkillCheck)

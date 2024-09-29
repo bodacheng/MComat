@@ -19,7 +19,7 @@ public class SelfFightPage : MSceneProcess
     async UniTask SetUp()
     {
         var layer = UILayerLoader.Load<UnitsLayer>();
-        layer.DisplayUnitIcons(dataAccess.Units.Dic, true, true);
+        layer.IniUnitIcons(dataAccess.Units.Dic, true, true);
         
         selfFightLayer = UILayerLoader.Load<SelfFightLayer>();
         await selfFightLayer.INI();

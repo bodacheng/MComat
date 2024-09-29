@@ -34,14 +34,19 @@ public class UnitFilter : MonoBehaviour
     public void RefreshTypeDropDown(List<string> types)
     {
         typeDropDown.options.Clear();
-        for (int i = 0; i < types.Count; i++)
+        for (var i = 0; i < types.Count; i++)
         {
-            Dropdown.OptionData m_NewData = new Dropdown.OptionData
+            var m_NewData = new Dropdown.OptionData
             {
                 text = types[i]
             };
             typeDropDown.options.Add(m_NewData);
+            if (types[i] == "human")
+            {
+                typeDropDown.value = i;
+            }
         }
+        typeDropDown.gameObject.SetActive(types.Count > 1);
     }
 
     List<HeroIcon> TypeFilter(List<HeroIcon> originMainMenuIcons)
@@ -58,14 +63,9 @@ public class UnitFilter : MonoBehaviour
                         new_mainMenuIcons.Add(originMainMenuIcons[i]);
                     }
                 }
-                else
-                {
-                    Debug.Log("丢失角色头像");
-                }
             }
             return new_mainMenuIcons;
         }
-        Debug.Log("typeDropDown错误。当前type 有：" + typeDropDown.options.Count + "个值");
         return originMainMenuIcons;
     }
     

@@ -30,7 +30,7 @@ public class UnitListPage : MSceneProcess
                 layer.SetUnitsIconOnClick(UnitIconBtn);
             }
         );
-        layer.DisplayUnitIcons(dataAccess.Units.Dic, true);
+        layer.IniUnitIcons(dataAccess.Units.Dic, true);
         if (PreScene.target.Focusing != null)
         {
             UnitIconBtn(PreScene.target.Focusing.id);
