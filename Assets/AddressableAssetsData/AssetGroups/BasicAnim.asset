@@ -17,14 +17,14 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: b9dd2d761aca64481a7b825a015e8800
   m_SerializeEntries:
-  - m_GUID: fe18baae7ba7848ff9b2e5eb922f4614
-    m_Address: human/BasicPack
+  - m_GUID: 9410cd3aaa6604e5b864ae7c11a5be44
+    m_Address: e_dragon/BasicPack
     m_ReadOnly: 0
     m_SerializedLabels:
     - basic_anim
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9410cd3aaa6604e5b864ae7c11a5be44
-    m_Address: e_dragon/BasicPack
+  - m_GUID: fe18baae7ba7848ff9b2e5eb922f4614
+    m_Address: human/BasicPack
     m_ReadOnly: 0
     m_SerializedLabels:
     - basic_anim

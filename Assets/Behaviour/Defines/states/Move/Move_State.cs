@@ -56,7 +56,6 @@ namespace Soul
         void CommonEnter()
         {
             _timeCounter = 0f;
-            _Animator.applyRootMotion = false;
             _Weapon_Animation_Events.ClearMarkerManagers();
             AnimationManger.PlayLayerAnim(null, true, 0.05f);
             pEvents.CloseAllPersonalityEffects();
