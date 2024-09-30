@@ -79,12 +79,17 @@ public class FightMembers
         return target;
     }
     
-    public static FightMembers RandomSkillTest(TeamMode teamMode)
+    public static FightMembers RandomSkillTest()
     {
-        var type = "human";
-        var unitIDsAndNames = Units.GetMonsterIDsAndNamesDic(type);
+        var unitIDsAndNames = Units.GetMonsterIDsAndNamesDic("human");
         var indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 12);
+        
+        var unitIDsAndNamesDragon = Units.GetMonsterIDsAndNamesDic("e_dragon");
+        var indexesD = RandomSelect.Get(0, unitIDsAndNamesDragon.Count - 1, 1);
+        
         var recordIds = unitIDsAndNames.Keys.ToList();
+        var recordIdsD = unitIDsAndNamesDragon.Keys.ToList();
+        
         var target = new FightMembers();
         var char1 = ArrangeUnitInfo(recordIds[indexes[0]]);
         var char2 = ArrangeUnitInfo(recordIds[indexes[1]]);
@@ -94,24 +99,24 @@ public class FightMembers
         var char6 = ArrangeUnitInfo(recordIds[indexes[5]]);
         var char7 = ArrangeUnitInfo(recordIds[indexes[6]]);
         var char8 = ArrangeUnitInfo(recordIds[indexes[7]]);
-        var char9 = ArrangeUnitInfo(recordIds[indexes[8]]);
+        var char9 = ArrangeUnitInfo(recordIdsD[indexesD[0]]);
         var char10 = ArrangeUnitInfo(recordIds[indexes[9]]);
         var char11 = ArrangeUnitInfo(recordIds[indexes[10]]);
-        var char12 = ArrangeUnitInfo(recordIds[indexes[11]]);
+        var char12 = ArrangeUnitInfo(recordIdsD[indexesD[0]]);
         
         target.EnemySets.Set(0, 0, char1);
         target.EnemySets.Set(0, 1, char2);
-        target.EnemySets.Set(0, 2, char3);
+        target.EnemySets.Set(0, 2, char9);
         target.EnemySets.Set(0, 3, char7);
         target.EnemySets.Set(0, 4, char8);
-        target.EnemySets.Set(0, 5, char9);
+        target.EnemySets.Set(0, 5, char3);
         
         target.HeroSets.Set(0, 0, char4);
         target.HeroSets.Set(0, 1, char5);
-        target.HeroSets.Set(0, 2, char6);
+        target.HeroSets.Set(0, 2, char12);
         target.HeroSets.Set(0, 3, char10);
         target.HeroSets.Set(0, 4, char11);
-        target.HeroSets.Set(0, 5, char12);
+        target.HeroSets.Set(0, 5, char6);
         
         return target;
     }
