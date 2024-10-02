@@ -72,7 +72,7 @@ namespace Soul
                 return;
             }
             
-            _Animator.applyRootMotion = false;
+            //_Animator.applyRootMotion = false;
             PlayHurtAnim(newValue);
             FightParamsRef.GettingDamage = true;
             _Weapon_Animation_Events.ClearMarkerManagers();
