@@ -30,7 +30,7 @@ namespace Soul
                 {
                     if (time_counter < 0f)
                     {
-                        AnimationManger.AnimationTrigger(defend_clip_name, true, CommonSetting.CharacterAnimDuration);
+                        AnimationManger.AnimationTrigger(defend_clip_name, true, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
                     }
                 }
             }
@@ -95,7 +95,7 @@ namespace Soul
             FightParamsRef.Resistance.Value = DefendHP > 0 ? 10 : 0;
             _Weapon_Animation_Events.ClearMarkerManagers();
             _Animator.SetFloat("speed", 0f);
-            AnimationManger.AnimationTrigger(defend_clip_name, false, CommonSetting.CharacterAnimDuration);
+            AnimationManger.AnimationTrigger(defend_clip_name, false, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
             _Rigidbody.velocity = Vector3.zero;
             used_block_least_time = FightGlobalSetting.LightBlockLastingTime;
             TimeCounter = used_block_least_time;

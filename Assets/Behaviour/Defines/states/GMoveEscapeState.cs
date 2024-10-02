@@ -51,7 +51,7 @@ namespace Soul
             _Rigidbody.velocity = Vector3.zero;
             pEvents.CloseAllPersonalityEffects();
             _Animator.applyRootMotion = true;
-            AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
+            AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
         }
 
         Vector3 damagingWeaponComingDirection;
@@ -63,10 +63,13 @@ namespace Soul
             use_direction = gameObject.transform.forward;
             threat = Sensor.GetSuddenThreatInRange(0, 5);
             
-            if (_BasicPhysicSupport.AtRing)
+            use_direction = Vector3.zero - gameObject.transform.position;
+            use_direction.y = 0;
+            
+            if (use_direction.magnitude + 4f > BoundaryControlByGod._BattleRingRadius)
             {
-                use_direction = Vector3.zero - gameObject.transform.position;
-                use_direction.y = 0;
+                // use_direction = Vector3.zero - gameObject.transform.position;
+                // use_direction.y = 0;
             }
             else
             {

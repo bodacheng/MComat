@@ -23,7 +23,7 @@ namespace Soul
             counter = 0f;
             _Animator.SetFloat("speed", 0f);
             _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-            AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
+            AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
         }
 
         public override void C_State_enter()

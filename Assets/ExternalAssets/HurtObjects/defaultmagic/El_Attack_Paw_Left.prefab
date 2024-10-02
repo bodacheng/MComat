@@ -19591,10 +19591,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb9f9ab3fbc9415f9514539f68c47e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _HitBox: {fileID: 0}
+  _HitBox: {fileID: 3351721857206593416}
   TrackControl: {fileID: 0}
-  DestructionDelay: 1.1
-  stop_emission_delay: 0.9
+  DestructionDelay: 1.5
+  stop_emission_delay: 1
   to_be_faded_renderers: []
   Attachments: []
   Counter: 0
@@ -19612,7 +19612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivateAfterTime: 0
   SpecificTarget: 0
-  damage_type: 1
+  damage_type: 9
   _WeaponMode: 3
   AT_weight: 1
   weaponHP: -1

@@ -23,7 +23,7 @@ namespace Soul
             _Animator.SetFloat("speed", 0f);
             _SkillCancelFlag.TurnRotationAdjustmentStartFlagWithoutstepfoward(1);
             pEvents.CloseAllPersonalityEffects();
-            AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
+            AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
             _Rigidbody.velocity = Vector3.zero;
             _Animator.applyRootMotion = true;
             if (threat != null)

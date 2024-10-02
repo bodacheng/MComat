@@ -72,8 +72,14 @@ public class CommonSetting : ScriptableObject
     [Tooltip("AI检测帧数间隔")] 
     [SerializeField] private int aiDetectInterval = 1;
 
-    [Tooltip("角色动画平滑区间")] 
-    [SerializeField] private float characterAnimDuration = 0.25f;
+    [System.Serializable]
+    public class AnimationDuration
+    {
+        public string type;
+        public float duration;
+    }
+    
+    [Tooltip("角色动画平滑区间")] [SerializeField] private List<AnimationDuration> characterAnimDurationList;
     
     [Tooltip("角色阴影材质")] 
     [SerializeField] Material shadowMaterial;
@@ -148,7 +154,7 @@ public class CommonSetting : ScriptableObject
     
     public static int AIDetectInterval = 1;
     
-    public static float CharacterAnimDuration;
+    public static readonly Dictionary<string, float> CharacterAnimDuration = new Dictionary<string, float>();
     public static Material ShadowMaterial;
     public static AudioClip BtnTapSound;
     public static AudioClip BtnConfirmSound;
@@ -206,7 +212,10 @@ public class CommonSetting : ScriptableObject
         MemberShiftEffectCode = memberShiftEffectCode;
         
         AIDetectInterval = aiDetectInterval;
-        CharacterAnimDuration = characterAnimDuration;
+        foreach (var animDuration in characterAnimDurationList)
+        {
+            CharacterAnimDuration[animDuration.type] = animDuration.duration;
+        }
         ShadowMaterial = shadowMaterial;
         BtnTapSound = btnTapSound;
         BtnConfirmSound = btnConfirmSound;

@@ -187,18 +187,21 @@ namespace Soul
         public override void _State_FixedUpdate1()
         {
             TimeCounter += Time.fixedDeltaTime;
-            switch (target.from_weapon.damage_type)
+            if (_BasicPhysicSupport.Weight == Weight.normal)
             {
-                case DamageType.high:
-                    HighDamageUpdate();
-                    break;
-                case DamageType.draw:
-                case DamageType.stable_draw:
-                    DrawDamageUpdate(target);
-                    break;
+                switch (target.from_weapon.damage_type)
+                {
+                    case DamageType.high:
+                        HighDamageUpdate();
+                        break;
+                    case DamageType.draw:
+                    case DamageType.stable_draw:
+                        DrawDamageUpdate(target);
+                        break;
+                }
             }
         }
-
+        
         public override bool Capacity_Exit_Condition()
         {
             return TimeCounter > _usedDizzyTime && !_BuffsRunner.Freezing;

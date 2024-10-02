@@ -54,7 +54,8 @@ namespace Soul
                     threatsComingPosition = temp.transform.position;
             }
             RotateToTargetTween(threatsComingPosition, 0.01f);
-            AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration);
+            
+            AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
         }
 
         public override bool Capacity_Exit_Condition()
