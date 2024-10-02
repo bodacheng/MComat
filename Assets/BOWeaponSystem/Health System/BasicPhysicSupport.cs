@@ -2,11 +2,21 @@
 using UnityEngine;
 using DG.Tweening;
 
+public enum Weight
+{
+    normal,
+    heavy
+}
+
 public class BasicPhysicSupport : MonoBehaviour
 {
     public Data_Center _DATA_CENTER;
     public Animator animator;
     public Rigidbody Rigidbody;
+
+    [SerializeField] private Weight weight = Weight.normal;
+    public Weight Weight => weight;
+    
     public HiddenMethods hiddenMethods;
     
     public bool AtRing
