@@ -11,7 +11,7 @@ namespace Soul
         
         private readonly List<string> hasVictoryAnimUnit = new List<string>()
         {
-            "1","2","3","4","5","6","7"
+            "1","2","3","4","5","6","7","17"
         };
         
         public Idle_State(string clipName)
