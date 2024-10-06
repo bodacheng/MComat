@@ -14,6 +14,7 @@ public class SettingLayer : UILayer
     [SerializeField] BOButton supportBtn;
     [SerializeField] BOButton languageBtn;
     [SerializeField] BOButton nickNameBtn;
+    [SerializeField] BOButton controlBtn;
     #endregion
     
     #region Panels
@@ -23,6 +24,7 @@ public class SettingLayer : UILayer
     [SerializeField] RectTransform supportPanel;
     [SerializeField] RectTransform languagePanel;
     [SerializeField] RectTransform nickNamePanel;
+    [SerializeField] RectTransform controlPanel;
     #endregion
     
     #region Sound
@@ -231,6 +233,14 @@ public class SettingLayer : UILayer
                         });
                     }
                 );
+            }
+        );
+        
+        controlBtn.onClick.AddListener(
+            () =>
+            {
+                CloseAllPanels();
+                controlPanel.gameObject.SetActive(true);
             }
         );
         
