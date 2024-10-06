@@ -139,6 +139,7 @@ public class SettingLayer : UILayer
             supportPanel.gameObject.SetActive(false);
             nickNamePanel.gameObject.SetActive(false);
             languagePanel.gameObject.SetActive(false);
+            controlPanel.gameObject.SetActive(false);
         }
         
         volumeBtn.onClick.AddListener(() =>
@@ -241,6 +242,7 @@ public class SettingLayer : UILayer
             {
                 CloseAllPanels();
                 controlPanel.gameObject.SetActive(true);
+                SetSelectedFrame(controlBtn.GetComponent<RectTransform>());
             }
         );
         

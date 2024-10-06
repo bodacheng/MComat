@@ -45,23 +45,13 @@ namespace EasyKeyBinding
         [SerializeField] public Text Fire1KeyBindingText;
         [SerializeField] public Text Fire2KeyBindingText;
         [SerializeField] public Text Fire3KeyBindingText;
-
-        // Initializes the key codes.  Each key in your project should have a keycode defined here.  Add new keycodes here.  Delete unused ones.
-        KeyCode UpKeyCode;
-        KeyCode DownKeyCode;
-        KeyCode LeftKeyCode;
-        KeyCode RightKeyCode;
-        KeyCode JumpKeyCode;
-        KeyCode Fire1KeyCode;
-        KeyCode Fire2KeyCode;
-        KeyCode Fire3KeyCode;
-
+        
         void Start()
         {
             // Set the factory default key bindings here.  This array will set the key bindings for new users who opened the program for the first time or for resetting the key bindings to factory default.
             // Every key you plan to use must be assigned a factory default.
             // See the KeyCode page in the Unity documentation for the various key names that can be used here:  https://docs.unity3d.com/ScriptReference/KeyCode.html
-            KeyBindings.DefaultKeyBindArray = new string[] { "W", "S", "A", "D", "Space", "Mouse0", "Mouse1", "Mouse2" };
+            KeyBindings.DefaultKeyBindArray = new string[] { "UpArrow", "DownArrow", "LeftArrow", "RightArrow", "Space", "Z", "X", "C" };
 
             // Loads the saved key bindings
             LoadKeyBindings();
@@ -73,97 +63,97 @@ namespace EasyKeyBinding
             // This section decides what actions are taken when each key is pressed.  Add all your actions here.  Delete the ones below which are only for the sample scene.
 
             // Executes when the up key is pressed
-            if (Input.GetKeyDown(UpKeyCode))
+            if (Input.GetKeyDown(AppSetting.Value.UpKeyCode))
             {
                 UpIndicator.color = Color.green;
             }
 
             // Executes when the up key is released
-            if (Input.GetKeyUp(UpKeyCode))
+            if (Input.GetKeyUp(AppSetting.Value.UpKeyCode))
             {
                 UpIndicator.color = Color.white;
             }
 
             // Executes when the down key is pressed
-            if (Input.GetKeyDown(DownKeyCode))
+            if (Input.GetKeyDown(AppSetting.Value.DownKeyCode))
             {
                 DownIndicator.color = Color.green;
             }
 
             // Executes when the down key is released
-            if (Input.GetKeyUp(DownKeyCode))
+            if (Input.GetKeyUp(AppSetting.Value.DownKeyCode))
             {
                 DownIndicator.color = Color.white;
             }
 
             // Executes when the left key is pressed
-            if (Input.GetKeyDown(LeftKeyCode))
+            if (Input.GetKeyDown(AppSetting.Value.LeftKeyCode))
             {
                 LeftIndicator.color = Color.green;
             }
 
             // Executes when the left key is released
-            if (Input.GetKeyUp(LeftKeyCode))
+            if (Input.GetKeyUp(AppSetting.Value.LeftKeyCode))
             {
                 LeftIndicator.color = Color.white;
             }
 
             // Executes when the right key is pressed
-            if (Input.GetKeyDown(RightKeyCode))
+            if (Input.GetKeyDown(AppSetting.Value.RightKeyCode))
             {
                 RightIndicator.color = Color.green;
             }
 
             // Executes when the right key is released
-            if (Input.GetKeyUp(RightKeyCode))
+            if (Input.GetKeyUp(AppSetting.Value.RightKeyCode))
             {
                 RightIndicator.color = Color.white;
             }
 
             // Executes when the jump key is pressed
-            if (Input.GetKeyDown(JumpKeyCode))
+            if (Input.GetKeyDown(AppSetting.Value.JumpKeyCode))
             {
                 JumpIndicator.color = Color.green;
             }
 
             // Executes when the jump key is released
-            if (Input.GetKeyUp(JumpKeyCode))
+            if (Input.GetKeyUp(AppSetting.Value.JumpKeyCode))
             {
                 JumpIndicator.color = Color.white;
             }
 
             // Executes when the fire1 key is pressed
-            if (Input.GetKeyDown(Fire1KeyCode))
+            if (Input.GetKeyDown(AppSetting.Value.Fire1KeyCode))
             {
                 Fire1Indicator.color = Color.green;
             }
 
             // Executes when the fire1 key is released
-            if (Input.GetKeyUp(Fire1KeyCode))
+            if (Input.GetKeyUp(AppSetting.Value.Fire1KeyCode))
             {
                 Fire1Indicator.color = Color.white;
             }
 
             // Executes when the fire2 key is pressed
-            if (Input.GetKeyDown(Fire2KeyCode))
+            if (Input.GetKeyDown(AppSetting.Value.Fire2KeyCode))
             {
                 Fire2Indicator.color = Color.green;
             }
 
             // Executes when the fire2 key is released
-            if (Input.GetKeyUp(Fire2KeyCode))
+            if (Input.GetKeyUp(AppSetting.Value.Fire2KeyCode))
             {
                 Fire2Indicator.color = Color.white;
             }
 
             // Executes when the fire3 key is pressed
-            if (Input.GetKeyDown(Fire3KeyCode))
+            if (Input.GetKeyDown(AppSetting.Value.Fire3KeyCode))
             {
                 Fire3Indicator.color = Color.green;
             }
 
             // Executes when the fire3 key is released
-            if (Input.GetKeyUp(Fire3KeyCode))
+            if (Input.GetKeyUp(AppSetting.Value.Fire3KeyCode))
             {
                 Fire3Indicator.color = Color.white;
             }
@@ -228,14 +218,14 @@ namespace EasyKeyBinding
         // Assigns the key bindings to key codes so they can be called.  Any new key codes should be added here.
         void AssignKeyBindings()
         {
-            UpKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[0]);
-            DownKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[1]);
-            LeftKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[2]);
-            RightKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[3]);
-            JumpKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[4]);
-            Fire1KeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[5]);
-            Fire2KeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[6]);
-            Fire3KeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[7]);
+            AppSetting.Value.UpKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[0]);
+            AppSetting.Value.DownKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[1]);
+            AppSetting.Value.LeftKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[2]);
+            AppSetting.Value.RightKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[3]);
+            AppSetting.Value.JumpKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[4]);
+            AppSetting.Value.Fire1KeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[5]);
+            AppSetting.Value.Fire2KeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[6]);
+            AppSetting.Value.Fire3KeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[7]);
         }
 
         // Loads the fields for the key bindings panel when it is opened

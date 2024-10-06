@@ -10,6 +10,16 @@ public class AppSetting
     float _bgmVolume = 0.5f, _effectsVolume = 0.5f;
 
     public SystemLanguage Language { get; set; } = SystemLanguage.English;
+    
+    // Initializes the key codes.  Each key in your project should have a keycode defined here.  Add new keycodes here.  Delete unused ones.
+    public KeyCode UpKeyCode;
+    public KeyCode DownKeyCode;
+    public KeyCode LeftKeyCode;
+    public KeyCode RightKeyCode;
+    public KeyCode JumpKeyCode;
+    public KeyCode Fire1KeyCode;
+    public KeyCode Fire2KeyCode;
+    public KeyCode Fire3KeyCode;
 
     private string lobbyTheme;
     

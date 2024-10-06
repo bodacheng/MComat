@@ -116,8 +116,12 @@ namespace Soul
             screenMovementForward = screenMovementSpace * Vector3.forward;
             screenMovementRight = screenMovementSpace * Vector3.right;
 
-            h = UnityEngine.Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("joystick");
-            v = UnityEngine.Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("joystick");
+            h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
+                    (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f) +                                    
+                    UltimateJoystick.GetHorizontalAxis("joystick");
+            v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
+                    (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f) +
+                    UltimateJoystick.GetVerticalAxis("joystick");
 
             if (System.Math.Abs(h) < 0.001f && System.Math.Abs(v) < 0.001f)
             {

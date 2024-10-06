@@ -61,9 +61,13 @@ namespace Soul
             _screenMovementForward = _screenMovementSpace * Vector3.forward;
             _screenMovementRight = _screenMovementSpace * Vector3.right;
             //get movement input, set direction to move in
-                
-            var h = Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("joystick");
-            var v = Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("joystick");
+
+            var h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
+                        (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f) +                                    
+                        UltimateJoystick.GetHorizontalAxis("joystick");
+            var v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
+                    (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f) +
+                    UltimateJoystick.GetVerticalAxis("joystick");
             _useDirection = (_screenMovementForward * v) + (_screenMovementRight * h);
             _useDirection.y = 0;
             _useDirection = _useDirection.normalized;

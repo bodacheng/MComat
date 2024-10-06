@@ -9,7 +9,6 @@ namespace Soul
     {
         readonly float speed;
         readonly float timeLimit;
-        MoveType moveType;
         float _timeCounter;
         Vector3 _useDirection;
         AIMoveDirection _moveDirection;
@@ -30,7 +29,6 @@ namespace Soul
         
         public Move_State(MoveType moveType)
         {
-            this.moveType = moveType;
             switch (moveType)
             {
                 case MoveType.slow:

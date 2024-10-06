@@ -285,8 +285,12 @@ public class MobileInputsManager : MonoBehaviour {
         {
             return;
         }
-        h = UnityEngine.Input.GetAxis("Horizontal") + UltimateJoystick.GetHorizontalAxis("joystick");
-        v = UnityEngine.Input.GetAxis("Vertical") + UltimateJoystick.GetVerticalAxis("joystick");
+        h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
+            (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f) +                                    
+            UltimateJoystick.GetHorizontalAxis("joystick");
+        v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
+            (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f) +
+            UltimateJoystick.GetVerticalAxis("joystick");
         _inputting = (h > 0f || h < 0 || v > 0f || v < 0f);
     }
     
@@ -484,6 +488,54 @@ public class MobileInputsManager : MonoBehaviour {
     
     void Update()
     {
+        // Executes when the jump key is pressed
+        if (Input.GetKey(AppSetting.Value.JumpKeyCode))
+        {
+            RushDown();
+        }
+
+        // Executes when the jump key is released
+        if (Input.GetKeyUp(AppSetting.Value.JumpKeyCode))
+        {
+            RushUp();
+        }
+
+        // Executes when the fire1 key is pressed
+        if (Input.GetKey(AppSetting.Value.Fire1KeyCode))
+        {
+            AttackDown();
+        }
+
+        // Executes when the fire1 key is released
+        if (Input.GetKeyUp(AppSetting.Value.Fire1KeyCode))
+        {
+            AttackUp();
+        }
+
+        // Executes when the fire2 key is pressed
+        if (Input.GetKey(AppSetting.Value.Fire2KeyCode))
+        {
+            Fire1Down();
+        }
+
+        // Executes when the fire2 key is released
+        if (Input.GetKeyUp(AppSetting.Value.Fire2KeyCode))
+        {
+            Fire1Up();
+        }
+
+        // Executes when the fire3 key is pressed
+        if (Input.GetKey(AppSetting.Value.Fire3KeyCode))
+        {
+            Fire2Down();
+        }
+
+        // Executes when the fire3 key is released
+        if (Input.GetKeyUp(AppSetting.Value.Fire3KeyCode))
+        {
+            Fire2Up();
+        }
+        
         CheckIfPlayerIsInputting();
     }
     
