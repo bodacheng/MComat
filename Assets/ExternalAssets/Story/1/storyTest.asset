@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e974cff1cb374675b589dba6b999185, type: 3}
+  m_Name: storyTest
+  m_EditorClassIdentifier: 
+  _storyScenes:
+  - Pic: {fileID: 21300000, guid: 27edb267b745f4899ae907d929a25427, type: 3}
+    Lines:
+    - 1_1
+    - 1_2
+  - Pic: {fileID: 21300000, guid: 62b036634b0d942879b57154ec3b19a4, type: 3}
+    Lines:
+    - 1_3
+    - 1_4
+  - Pic: {fileID: 21300000, guid: 98cddb00479ec4c78bcaec0b7e25b594, type: 3}
+    Lines:
+    - 1_5
+  - Pic: {fileID: 21300000, guid: 80fd97808f9554eff8c8242dd6fdc13c, type: 3}
+    Lines:
+    - 1_6
+    - 1_7
