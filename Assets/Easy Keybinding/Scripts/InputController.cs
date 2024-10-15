@@ -2,8 +2,6 @@
 
 using System;
 using System.IO;
-using System.Collections;
-using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,6 +32,7 @@ namespace EasyKeyBinding
         [SerializeField] public Image Fire1Indicator;
         [SerializeField] public Image Fire2Indicator;
         [SerializeField] public Image Fire3Indicator;
+        [SerializeField] public Image DreamComboIndicator;
 
         // The text object in each key binding prefab should be included here.  Add the text object for new key binding prefabs here.  This text will display the letter or key name associated with that key binding.
         [Header("Keybinding Button Prefab Text Objects")]
@@ -45,13 +44,14 @@ namespace EasyKeyBinding
         [SerializeField] public Text Fire1KeyBindingText;
         [SerializeField] public Text Fire2KeyBindingText;
         [SerializeField] public Text Fire3KeyBindingText;
+        [SerializeField] public Text DreamComboText;
         
         void Start()
         {
             // Set the factory default key bindings here.  This array will set the key bindings for new users who opened the program for the first time or for resetting the key bindings to factory default.
             // Every key you plan to use must be assigned a factory default.
             // See the KeyCode page in the Unity documentation for the various key names that can be used here:  https://docs.unity3d.com/ScriptReference/KeyCode.html
-            KeyBindings.DefaultKeyBindArray = new string[] { "UpArrow", "DownArrow", "LeftArrow", "RightArrow", "Space", "Z", "X", "C" };
+            KeyBindings.DefaultKeyBindArray = new string[] { "UpArrow", "DownArrow", "LeftArrow", "RightArrow", "Space", "Z", "X", "C", "V" };
 
             // Loads the saved key bindings
             LoadKeyBindings();
@@ -120,6 +120,18 @@ namespace EasyKeyBinding
             if (Input.GetKeyUp(AppSetting.Value.JumpKeyCode))
             {
                 JumpIndicator.color = Color.white;
+            }
+            
+            // Executes when the DreamCombo key is pressed
+            if (Input.GetKeyDown(AppSetting.Value.DreamComboKeyCode))
+            {
+                DreamComboIndicator.color = Color.green;
+            }
+
+            // Executes when the DreamCombo key is released
+            if (Input.GetKeyUp(AppSetting.Value.DreamComboKeyCode))
+            {
+                DreamComboIndicator.color = Color.white;
             }
 
             // Executes when the fire1 key is pressed
@@ -226,6 +238,7 @@ namespace EasyKeyBinding
             AppSetting.Value.Fire1KeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[5]);
             AppSetting.Value.Fire2KeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[6]);
             AppSetting.Value.Fire3KeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[7]);
+            AppSetting.Value.DreamComboKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), KeyBindings.KeyBindArray[8]);
         }
 
         // Loads the fields for the key bindings panel when it is opened
@@ -243,6 +256,7 @@ namespace EasyKeyBinding
             Fire1KeyBindingText.text = KeyBindingText(5);
             Fire2KeyBindingText.text = KeyBindingText(6);
             Fire3KeyBindingText.text = KeyBindingText(7);
+            DreamComboText.text = KeyBindingText(8);
         }
 
         // Sets the index of the key to be bound in the key bindings panel.  This method should be selected under On Click () in the Button component of the inspector for the BindKey prefab.

@@ -17,6 +17,7 @@ public class AppSetting
     public KeyCode LeftKeyCode;
     public KeyCode RightKeyCode;
     public KeyCode JumpKeyCode;
+    public KeyCode DreamComboKeyCode;
     public KeyCode Fire1KeyCode;
     public KeyCode Fire2KeyCode;
     public KeyCode Fire3KeyCode;

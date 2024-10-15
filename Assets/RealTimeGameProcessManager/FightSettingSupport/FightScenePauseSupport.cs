@@ -16,8 +16,14 @@ public class FightScenePauseSupport : UILayer
     [SerializeField] Slider effectsSoundsSlider;
     #endregion
     
+    #region control
+    [SerializeField] private EasyKeyBinding.KeyBindingUpdater keyBindingUpdater;
+    #endregion
+    
     public void Setup(Action runNow, Action returnToFront, Action resumeAction)
     {
+        keyBindingUpdater.INI();
+        
         this.resumeAction = resumeAction;
         this.returnAction = returnToFront;
         runNow.Invoke();

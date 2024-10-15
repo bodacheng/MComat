@@ -499,6 +499,18 @@ public class MobileInputsManager : MonoBehaviour {
         {
             RushUp();
         }
+        
+        // Executes when the jump key is pressed
+        if (Input.GetKey(AppSetting.Value.DreamComboKeyCode))
+        {
+            DreamComboDown();
+        }
+
+        // Executes when the jump key is released
+        if (Input.GetKeyUp(AppSetting.Value.DreamComboKeyCode))
+        {
+            DreamComboUp();
+        }
 
         // Executes when the fire1 key is pressed
         if (Input.GetKey(AppSetting.Value.Fire1KeyCode))

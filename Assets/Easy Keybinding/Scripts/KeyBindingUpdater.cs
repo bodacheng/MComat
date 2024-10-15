@@ -1,8 +1,5 @@
 // Copyright 2024 Charged Software LLC
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +19,7 @@ namespace EasyKeyBinding
         [SerializeField] public Text Fire1IndicatorText;
         [SerializeField] public Text Fire2IndicatorText;
         [SerializeField] public Text Fire3IndicatorText;
+        [SerializeField] public Text DreamComboIndicatorText;
 
         bool initkeybindingindicators = false;
 
@@ -30,11 +28,16 @@ namespace EasyKeyBinding
             // Update the key binding indicator text at startup for the sample scene indicators.  Only needed for sample scene.
             if (!initkeybindingindicators)
             {
-                if (KeyBindings.KeyBindArray != null)
-                {
-                    UpdateKeyBindings();
-                    initkeybindingindicators = true;
-                }
+                INI();
+            }
+        }
+
+        public void INI()
+        {
+            if (KeyBindings.KeyBindArray != null)
+            {
+                UpdateKeyBindings();
+                initkeybindingindicators = true;
             }
         }
 
@@ -51,6 +54,7 @@ namespace EasyKeyBinding
             Fire1IndicatorText.text = InputController.KeyBindingText(5);
             Fire2IndicatorText.text = InputController.KeyBindingText(6);
             Fire3IndicatorText.text = InputController.KeyBindingText(7);
+            DreamComboIndicatorText.text = InputController.KeyBindingText(8);
         }
     }
 }

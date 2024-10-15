@@ -68,7 +68,7 @@ public class SettingLayer : UILayer
     [SerializeField] Text nickName;
     [SerializeField] BOButton resetNickNameBtn;
     #endregion
-
+    
     public void AccountPhase_EmailToBeSet()
     {
         emailSettingT.gameObject.SetActive(true);
