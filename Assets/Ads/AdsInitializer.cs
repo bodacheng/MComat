@@ -5,10 +5,12 @@ public class AdsInitializer : MonoBehaviour
 {
     private string _gameId;
 
+#if UNITY_IOS || UNITY_ANDROID
     void Awake()
     {
         InitializeAds();
     }
+#endif
     
     void InitializeAds()
     {
