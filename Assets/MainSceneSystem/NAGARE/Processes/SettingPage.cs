@@ -1,8 +1,6 @@
 using System;
 using DummyLayerSystem;
 using mainMenu;
-using PlayFab;
-using UnityEngine;
 
 public class SettingPage : MSceneProcess
 {
@@ -15,7 +13,11 @@ public class SettingPage : MSceneProcess
     
     public override void ProcessEnter()
     {
+#if UNITY_IOS || UNITY_ANDROID
         _layer = UILayerLoader.Load<SettingLayer>();
+#else
+        _layer = UILayerLoader.Load<SettingLayer>(false, "SettingLayer_st");
+#endif
         _layer.Initialise();
         PlayFabReadClient.GetAccountInfo(
             (x) =>

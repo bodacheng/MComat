@@ -28,7 +28,8 @@ namespace DummyLayerSystem
             {"CountDownLayer", "DummyLayerSystem/CountDownLayer"},
             {"FightingStepLayer", "DummyLayerSystem/FightingStepLayer"},
             {"InBattleEvolution", "DummyLayerSystem/InBattleEvolution"},
-            {"SettingLayer", "DummyLayerSystem/SettingLayer"},
+            {"SettingLayer", "DummyLayerSystem/Setting/SettingLayer"},
+            {"SettingLayer_st", "DummyLayerSystem/Setting/SettingLayer_st"},
             {"AskIfLinkDeviceLayer", "DummyLayerSystem/AskIfLinkDeviceLayer"},
             {"UnitsLayer", "DummyLayerSystem/UnitsLayer"},
             {"PopupLayer", "DummyLayerSystem/PopupLayer"},
@@ -53,7 +54,8 @@ namespace DummyLayerSystem
             {"BoxOverLoadFixLayer", "DummyLayerSystem/BoxOverLoadFixLayer"},
             {"ReturnLayer", "DummyLayerSystem/ReturnLayer"},
             {"LoginLayer", "DummyLayerSystem/LoginLayer"},
-            {"FightScenePauseSupport", "DummyLayerSystem/FightScenePauseSupport"},
+            {"FightScenePauseSupport", "DummyLayerSystem/Pause/FightScenePauseSupport"},
+            {"FightScenePauseSupport_st", "DummyLayerSystem/Pause/FightScenePauseSupport_st"},
             {"BuyNoAds", "DummyLayerSystem/BuyNoAds"},
             {"StoneUpdatesConfirm", "DummyLayerSystem/StoneUpdatesConfirm"}
         };
@@ -107,11 +109,12 @@ namespace DummyLayerSystem
             }
         }
         
-        public static T Load<T>(bool insertToTop = false)
+        public static T Load<T>(bool insertToTop = false, string key = null)
         {
             if (_hanger == null)
                 return default;
-            var layerName = typeof(T).Name;
+            string className = typeof(T).Name;
+            var layerName = key != null ? key : className;
             var existed = Get<T>();
             if (existed != null)
             {
@@ -126,7 +129,7 @@ namespace DummyLayerSystem
             var path = Paths[layerName];
             var UILayerPrefab = Resources.Load<UILayer>(path);
             var t = GameObject.Instantiate(UILayerPrefab);
-            t.Index = layerName;
+            t.Index = className;
             t.transform.SetParent(_hanger.transform);
             t.transform.localPosition = Vector3.zero;
             var rt = t.GetComponent<RectTransform>();
