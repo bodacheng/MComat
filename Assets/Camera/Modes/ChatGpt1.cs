@@ -93,7 +93,7 @@ class ChatGptFix : CameraMode
         }
         
         _changeSpeed = Time.deltaTime / (TransitionSpeedPara + Time.deltaTime); //分母里那个附加值越大，变得越慢。
-        bool hasTargets = targets != null && targets.Count > 0;
+        var hasTargets = targets != null && targets.Count > 0;
         if (hasTargets)
         {
             enemiesCenter = Vector3.zero;
@@ -201,7 +201,7 @@ class ChatGptFix : CameraMode
         cameraTargetPos.y = YDis;
         lookPoint.y = _lookPointHeight;
         
-        if ((hasTargets && meCenter != null) || h != 0)
+        if (hasTargets || meCenter != null || h != 0)
         {
             camera.transform.position = Vector3.Lerp(camera.transform.position, cameraTargetPos, _changeSpeed);
             rotateToDirection = lookPoint - cameraTargetPos;
