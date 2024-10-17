@@ -76,9 +76,8 @@ class ChatGptFix : CameraMode
         set
         {
             _canSetH = value;
-            if (!_canSetH)
-                h = 0;
-        }   
+            h = 0;
+        }
     }
 
     private Vector3 mePos;
