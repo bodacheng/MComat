@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine.UI;
 using UnityEngine;
@@ -30,25 +31,32 @@ public partial class ArenaFightOver : UILayer
     bool picStoryEnded = false;
     public async UniTask LoadStory()
     {
-        if (FightLoad.Fight.StoryInfo != null)
+        if (!String.IsNullOrEmpty(FightLoad.Fight.StoryKey))
         {
-            RectTransform rectTransform = storyPicBgImage.GetComponent<RectTransform>();
-            // 获取当前宽度
-            float currentWidth = rectTransform.sizeDelta.x;
-            // 设置新的大小，宽度保持不变，高度设置为目标值
-            rectTransform.sizeDelta = new Vector2(currentWidth, PosCal.CanvasHeight);
+            var story = await StoryManager.Instance.LoadStory(FightLoad.Fight.StoryKey);
+            if (story == null)
+            {
+                picStoryEnded = true;
+            }
+            else
+            {
+                RectTransform rectTransform = storyPicBgImage.GetComponent<RectTransform>();
+                // 获取当前宽度
+                float currentWidth = rectTransform.sizeDelta.x;
+                // 设置新的大小，宽度保持不变，高度设置为目标值
+                rectTransform.sizeDelta = new Vector2(currentWidth, PosCal.CanvasHeight);
             
-            storyBgColorChangeTween = storyPicBgImage.DOColor(Color.white, storyBgColorChangeDuration);
-            storyPicBgImage.gameObject.SetActive(true);
-            storyPicOnClickBtn.SetListener(() => { OnClick(FightLoad.Fight.StoryInfo); });
-            DisplayCurrentScene(FightLoad.Fight.StoryInfo);
-            storyPicBgImage.gameObject.SetActive(true);
+                storyBgColorChangeTween = storyPicBgImage.DOColor(Color.white, storyBgColorChangeDuration);
+                storyPicBgImage.gameObject.SetActive(true);
+                storyPicOnClickBtn.SetListener(() => { OnClick(story); });
+                DisplayCurrentScene(story);
+                storyPicBgImage.gameObject.SetActive(true);
+            }
         }
         else
         {
             picStoryEnded = true;
         }
-
         await UniTask.WaitUntil(()=> picStoryEnded);
     }
     

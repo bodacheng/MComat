@@ -124,7 +124,8 @@ namespace mainMenu
                 PlayFabReadClient.LoadReadMailsAsync(),
                 AddressablesLogic.Essentials(),
                 ArcadeModeManager.Instance.Initialize(),
-                GangbangModeManager.Instance.Initialize()
+                GangbangModeManager.Instance.Initialize(),
+                StoryManager.Instance.Initialize()
             );
             CashClear();
             UILayerLoader.Clear();

@@ -13,12 +13,13 @@ public class FightInfo : ScriptableObject
     public int battleGroundID;
     public int fightBGM = 0;
     
-    [SerializeField] StoryInfo storyInfo;
+    [SerializeField] string storyKey;
     
     // 底下这个记录的是敌人的信息
     [SerializeField] List<UnitInfo> unitsData = new List<UnitInfo>();
     
-    
+    public string StoryKey => storyKey;
+
     public UnitInfo GetRepresentUnitInfo()
     {
         return FightMembers.EnemySets.GetValues().FirstOrDefault(x => x != null && x.id != null && Units.GetUnitConfig(x.r_id) != null);
@@ -29,13 +30,7 @@ public class FightInfo : ScriptableObject
         get => unitsData;
         set => unitsData = value;
     }
-
-    public StoryInfo StoryInfo
-    {
-        get => storyInfo;
-        set => storyInfo = value;
-    }
-
+    
     public string GetBGMKey()
     {
         switch (fightBGM)
@@ -392,7 +387,7 @@ public class FightInfo : ScriptableObject
         stage.evolutionMode = source.evolutionMode;
         stage.EventType = source.EventType;
         stage.dreamComboAIRateNum = source.dreamComboAIRateNum;
-        stage.StoryInfo = source.StoryInfo;
+        stage.storyKey = source.storyKey;
         return stage;
     }
     
