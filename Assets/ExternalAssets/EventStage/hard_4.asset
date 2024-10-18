@@ -20,15 +20,15 @@ MonoBehaviour:
     r_id: 17
     level: 12
     set:
-      a1: 189
-      a2: 192
-      a3: 187
-      b1: 195
-      b2: 190
-      b3: 191
-      c1: 186
-      c2: 193
-      c3: 196
+      a1: 190
+      a2: 193
+      a3: 188
+      b1: 194
+      b2: 193
+      b3: 192
+      c1: 192
+      c2: 195
+      c3: 187
   evolutionMode: 0
   team1HpRate: 1
   team2HpRate: 1
