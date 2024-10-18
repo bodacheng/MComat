@@ -1,6 +1,6 @@
 ProfileDev: dev
-BuildDev: ServerData/dev/2.1.0/
-UploadDev: s3://mcombat/dev/2.1.0
+BuildDev: ServerData/dev/2.1.1/
+UploadDev: s3://mcombat/dev/2.1.1
 ProfileRelease: release
-BuildRelease: ServerData/release/2.1.0/
-UploadRelease: s3://mcombat/release/2.1.0
+BuildRelease: ServerData/release/2.1.1/
+UploadRelease: s3://mcombat/release/2.1.1
