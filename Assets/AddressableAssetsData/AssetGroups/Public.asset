@@ -17,8 +17,80 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 90d86ee747b974ade8c69a8f00d2c647
   m_SerializeEntries:
+  - m_GUID: 4ba51bcdd8b1423449a7cc578297fd18
+    m_Address: Assets/EffectsResource/textures/Dark_bllue.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5e1a134d192fcbe4aa05e9d8a5f04a78
+    m_Address: Assets/EffectsResource/textures/fire4x4_modular.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 630a3f4a68ab5c447952208de02137f5
+    m_Address: Assets/EffectsResource/textures/bigglow_modular.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ec7de1e2d58baf45ac3071983c20993
+    m_Address: Assets/EffectsResource/textures/fire1.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 707c7399dea3873468f73f9fd0dcc3a0
+    m_Address: Assets/D_Asset/Game_Portal/Textures/Glow_Main.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 78abf9d170e5efa4daf5ff6b008e0ce1
+    m_Address: Assets/EffectsResource/textures/Magical_Orb_20.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 842061ee1c34c1d4e91618b2b6642917
     m_Address: Assets/Fantasy_Golem_Man_2/Meshes/SKM_Fantasy_Golem_Man_2.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8428bd00ef3f5834fa75a70201d65b5a
+    m_Address: Assets/EffectsResource/textures/smokedissolve.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91c2f0460582c824b98907d3b48cc15a
+    m_Address: Assets/EffectsResource/textures/Yellow.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b416258e44600d54e87cf544fefa3ed5
+    m_Address: Assets/EffectsResource/textures/Pink.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4a39e223b86cf24d82d7c34e6366131
+    m_Address: Assets/D_Asset/JMO Assets/MatCap Shaders/Textures/Toon/MatCap_Toon.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e711a4f7f6b8bfc48b65135b3a25e80f
+    m_Address: Assets/EffectsResource/textures/Red.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f8d5c193cad8f5449a28999e5ca04652
+    m_Address: Assets/EffectsResource/textures/Green.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
