@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Public
+  m_EditorClassIdentifier: 
+  m_GroupName: Public
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 90d86ee747b974ade8c69a8f00d2c647
+  m_SerializeEntries:
+  - m_GUID: 842061ee1c34c1d4e91618b2b6642917
+    m_Address: Assets/Fantasy_Golem_Man_2/Meshes/SKM_Fantasy_Golem_Man_2.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 9b5281ebae23a4ae1ae4cb9010ba3553, type: 2}
+    - {fileID: 11400000, guid: cbad20aab6bcf48ceb579571a194fab9, type: 2}

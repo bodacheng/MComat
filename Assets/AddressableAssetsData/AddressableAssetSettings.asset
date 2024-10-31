@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: c865438658e084f57a8ef2542b6b8c95
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: 1b74da9d0d2285d124e0cbca08775b46
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
@@ -62,6 +62,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f5013da29efeb4b6189e99c1266607b5, type: 2}
   - {fileID: 11400000, guid: dd076f9729c324d72af36d69ca39375c, type: 2}
   - {fileID: 11400000, guid: 421c454ff09414180983855911567f66, type: 2}
+  - {fileID: 11400000, guid: 057dbc99136274d2e9711e39ad9f24d7, type: 2}
   - {fileID: 11400000, guid: c4227ddaf9fe444baac86a56bf502883, type: 2}
   - {fileID: 11400000, guid: d436bb1e2211446af9e56651dbff5829, type: 2}
   - {fileID: 11400000, guid: 98b69fa6dfb014349a2189b3d4899098, type: 2}
@@ -170,6 +171,7 @@ MonoBehaviour:
     - quest_gangbang
     - event_stage
     - story
+    - public
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 7ed3c4f91e15949209e5cda4294e805b, type: 2}
