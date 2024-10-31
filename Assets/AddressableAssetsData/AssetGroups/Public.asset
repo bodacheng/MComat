@@ -17,80 +17,260 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 90d86ee747b974ade8c69a8f00d2c647
   m_SerializeEntries:
+  - m_GUID: 0d1fb353c40bd6345af42a3b4f0bdb1a
+    m_Address: Trail21
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1fe1832970320174484977050bfb76f4
+    m_Address: ground_lightning
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28cc404f794e4354fbfef6ed011b4641
+    m_Address: smallglow01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2dd400ab29834834cb5fa454e5b6b3c1
+    m_Address: modular_aura06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2ea55beb9345a33498fc16106277de3a
+    m_Address: fire4x4_purple
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3584f2bf4afb5284d91edb6a29126e62
+    m_Address: Noise69
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 377f73880c6a5044aa97ceeeedb8ad2d
+    m_Address: Flare2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4000721759898ed438063ff5c2cfc889
+    m_Address: light_particle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4ba51bcdd8b1423449a7cc578297fd18
-    m_Address: Assets/EffectsResource/textures/Dark_bllue.png
+    m_Address: Dark_bllue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5632893a0e345054998ef42f1e5748ed
+    m_Address: Glow_Main
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c03bc4b80b50384a9904843f3769487
+    m_Address: Trail6
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5e1a134d192fcbe4aa05e9d8a5f04a78
-    m_Address: Assets/EffectsResource/textures/fire4x4_modular.png
+    m_Address: fire4x4_modular
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61f631dd684e8444cad16197ffba70bf
+    m_Address: glow_smoke_dusty
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 630a3f4a68ab5c447952208de02137f5
-    m_Address: Assets/EffectsResource/textures/bigglow_modular.png
+    m_Address: bigglow_modular
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ce04723dedf8af4fa258fa76caace12
+    m_Address: Noise69bcg2
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6ec7de1e2d58baf45ac3071983c20993
-    m_Address: Assets/EffectsResource/textures/fire1.png
+    m_Address: fire1
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 707c7399dea3873468f73f9fd0dcc3a0
-    m_Address: Assets/D_Asset/Game_Portal/Textures/Glow_Main.png
+    m_Address: Glow_Main
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 73ec9295a9aa444f9b5b456a3f6cf93c
+    m_Address: UniqueProjectilesVol2_10X10_2K
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 78abf9d170e5efa4daf5ff6b008e0ce1
-    m_Address: Assets/EffectsResource/textures/Magical_Orb_20.png
+    m_Address: Magical_Orb_20
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8222466244f58594c8105d7023742bcd
+    m_Address: bigglow_modular
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 82f16bfe1d124c54e877ead985da0dc0
+    m_Address: Flare6cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83b0aff793ac32b49853992300b25a8f
+    m_Address: ground_light
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83e7e28af5ce6e447971585469a133fe
+    m_Address: WaterSplash2
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 842061ee1c34c1d4e91618b2b6642917
-    m_Address: Assets/Fantasy_Golem_Man_2/Meshes/SKM_Fantasy_Golem_Man_2.fbx
+    m_Address: SKM_Fantasy_Golem_Man_2
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8428bd00ef3f5834fa75a70201d65b5a
-    m_Address: Assets/EffectsResource/textures/smokedissolve.png
+    m_Address: smokedissolve
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87cb893449346e248954843aef223546
+    m_Address: Circle102
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 91c2f0460582c824b98907d3b48cc15a
-    m_Address: Assets/EffectsResource/textures/Yellow.png
+    m_Address: Yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ee27d8670d11a149a37ab74ca7d8b11
+    m_Address: TC_kouqiang_D
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a2a06e22c08354d9699356710b69ca9c
+    m_Address: OmniShade URP
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a7980b15d03d447b08d873db5a38b219
+    m_Address: adam
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b416258e44600d54e87cf544fefa3ed5
-    m_Address: Assets/EffectsResource/textures/Pink.png
+    m_Address: Pink
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b4a39e223b86cf24d82d7c34e6366131
-    m_Address: Assets/D_Asset/JMO Assets/MatCap Shaders/Textures/Toon/MatCap_Toon.png
+    m_Address: MatCap_Toon
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b68b99c2e57cef4419465c63c527201b
+    m_Address: Blend_CenterGlow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c20c5eebb5a4af546b323e2de5054f7c
+    m_Address: Circle134
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9b3eaae0aa575c4db6feb3ae6fea5a7
+    m_Address: QuadToCircle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d752321c319e6e848822bd54f453c5bd
+    m_Address: ElectricLine01_4x4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d97cbb4fc7bccdf4db4770ebb71d7d44
+    m_Address: Gem_for_URP
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd93ece84d407cd44931653f592c0cb4
+    m_Address: Noise29
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e55efdef48fb88042bd462e055df8423
+    m_Address: firering
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7061965d8dab6c4cb3d8b1e3a15784e
+    m_Address: Circle116
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e711a4f7f6b8bfc48b65135b3a25e80f
-    m_Address: Assets/EffectsResource/textures/Red.png
+    m_Address: Red
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7c824ca80d0d9d45a23d790757a915b
+    m_Address: lensflare
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f8d5c193cad8f5449a28999e5ca04652
-    m_Address: Assets/EffectsResource/textures/Green.png
+    m_Address: Green
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
