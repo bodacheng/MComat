@@ -200,13 +200,12 @@ public class ArcadeTop : UILayer
     {
         if (progress > _maxStageNum)
         {
-            progress = _maxStageNum;
+            progress = _maxStageNum - 1;
         }
         else if (progress == _maxStageNum)
         {
             progress -= 1;
         }
-
         var currentChapter = progress / 5;
         var returnValue = new List<int>();
         for (int stageNoPlus = 1; stageNoPlus <= 5; stageNoPlus++)

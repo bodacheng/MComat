@@ -145,20 +145,20 @@ class ChatGptFix : CameraMode
                 {
                     bool Clock()
                     {
-                        if (meScreenPos.x < enemyScreenPos.x)
+                        if (meScreenPos.y < enemyScreenPos.y)
                         {
-                            return meScreenPos.y < enemyScreenPos.y;
+                            return meScreenPos.x > enemyScreenPos.x;
                         }
                         else
                         {
-                            return meScreenPos.y > enemyScreenPos.y;
+                            return meScreenPos.x < enemyScreenPos.x;
                         }
                     }
                     _currentRotateClockWiseDirection = Clock();
                     // 如果夹角大于限制，则缓慢调整相机角度
                     xzOff = Quaternion.Euler(0f, autoRotateSpeed *
                                                  ((angleToHorizontal - autoChangeAngleLimit)/(90 - autoChangeAngleLimit)) * Time.deltaTime  // 分母是垂直情况下两个对象屏幕连线超出的"垂直界限"，分子是实际超过的界限。这个值是确保在垂直时候相机扭转最快，随后扭转变缓和
-                                                 * (_currentRotateClockWiseDirection ? -1f : 1f), 0f) * xzOff;
+                                                 * (_currentRotateClockWiseDirection ? 1f : -1f), 0f) * xzOff;
                 }
             }
         }
