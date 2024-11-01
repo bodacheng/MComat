@@ -143,7 +143,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 2.1.1
+  bundleVersion: 2.1.2
   preloadedAssets:
   - {fileID: 11400000, guid: 8fe6699e962ce410b90ad22fcf85c7ad, type: 2}
   metroInputSource: 0
@@ -860,7 +860,7 @@ PlayerSettings:
     WebGL: CT_BWF
     Windows Store Apps: CT_BWF
     XboxOne: CT_BWF
-    iPhone: CT_BWF;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API
+    iPhone: CT_BWF;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;STEAMWORKS_NET
     tvOS: CT_BWF
   additionalCompilerArguments: {}
   platformArchitecture:
