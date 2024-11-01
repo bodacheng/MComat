@@ -155,8 +155,8 @@ MonoBehaviour:
   superHitLastingTime: 0.4
   highHitLastingTime: 0.4
   hurtFreezeInDuration: 0.01
-  hurtFreezeOutDuration: 0.2
-  normalAttackPosFixingTime: 0.03
+  hurtFreezeOutDuration: 0.3
+  normalAttackPosFixingTime: 0.01
   knockOffExtent: 15
   MaxKnockoffLaidGroundTime: 1
   CanGetUpAfterKnockoffToGround: 0.5
