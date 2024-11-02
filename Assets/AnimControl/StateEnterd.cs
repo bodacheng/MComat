@@ -12,6 +12,6 @@ public class StateEnterd : StateMachineBehaviour
         //    Debug.Log("full_body_state2");
         //if (stateInfo.IsName("Full Body.full_body_state3"))
             //Debug.Log("full_body_state3");
-        animator.SetBool("in_transition",false);
+        animator.SetBool("in_transition", false);
     }
 }

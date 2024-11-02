@@ -106,83 +106,19 @@ public partial class AnimationManger
         return Animator.GetCurrentAnimatorStateInfo(layerIndex);
     }
     
-    public void SetTrigger(string anim)
+    public void AnimationTrigger(string clip, float returnDuration)
     {
-        if (parameters.Contains(anim))
-        {
-            Animator.SetTrigger(anim);
-        }
-    }
-
-    public void AnimationTrigger(string clip, bool in_Transition,float Duration)
-    {
-        PlayLayerAnim(clip, in_Transition, Duration);
+        AnimationClip clipx = TryAnimationClip(clip);
+        PlayLayerAnim_clip(clipx, returnDuration);
     }
     
-    public void AnimationTrigger(AnimationClip clip, bool in_Transition , float Duration)
+    public void AnimationTrigger(AnimationClip clip, float returnDuration)
     {
-        PlayLayerAnim_clip(clip,in_Transition,Duration);
+        PlayLayerAnim_clip(clip, returnDuration);
     }
     
     AnimatorStateInfo AnimatorStateInfo;
     AnimatorOverrideController animatorOverride;
-    
-    public void PlayLayerAnim(string clip_name, bool in_transition,float Duration)
-    {
-        AnimatorStateInfo = Animator.GetCurrentAnimatorStateInfo(1);
-        if (Animator.GetBool("in_transition"))
-        {
-            Animator.SetBool("in_transition", in_transition);
-            Animator.Play("null", 1);//Animator.GetNextAnimatorStateInfo(1).fullPathHash
-            Animator.Update(0);
-            if (!string.IsNullOrEmpty(clip_name))
-            {
-                to_be_override_anim_name = "fullbody_empty1";
-                animatorOverride[to_be_override_anim_name] = TryAnimationClip(clip_name);
-                Animator.CrossFade("full_body_state1", Duration);
-            }else{
-            }
-        }
-        else
-        {
-            Animator.SetBool("in_transition", in_transition);
-            if (AnimatorStateInfo.IsName("Full Body.null"))
-            {
-                if (!string.IsNullOrEmpty(clip_name))
-                {
-                    to_be_override_anim_name = "fullbody_empty1";
-                }
-                else
-                {
-                    Animator.SetBool("in_transition", false);
-                    return;
-                }
-            }
-            if (AnimatorStateInfo.IsName("Full Body.full_body_state1"))
-            {
-                to_be_override_anim_name = !string.IsNullOrEmpty(clip_name) ? "fullbody_empty2" : null;
-            }
-            if (AnimatorStateInfo.IsName("Full Body.full_body_state2"))
-            {
-                to_be_override_anim_name = !string.IsNullOrEmpty(clip_name) ? "fullbody_empty1" : null;
-            }
-            
-            if (!string.IsNullOrEmpty(clip_name))
-            {
-                animatorOverride[to_be_override_anim_name] = TryAnimationClip(clip_name);                    
-                if (to_be_override_anim_name == "fullbody_empty2")
-                {
-                    Animator.CrossFade("full_body_state2", Duration);
-                }
-                if (to_be_override_anim_name == "fullbody_empty1")
-                {
-                    Animator.CrossFade("full_body_state1", Duration);
-                }
-            }else{
-                Animator.CrossFade("null", Duration);
-            }       
-        }
-    }
 }
 
 // 下面这些不用了。改使用了crossfade后animator不会被判定为迁移。

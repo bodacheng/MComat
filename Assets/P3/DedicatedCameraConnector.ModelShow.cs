@@ -167,7 +167,7 @@ namespace ModelView
                     return;
                 }
                 IfShowingSkill = true;
-                _focusingC.AnimationManger.AnimationTrigger(skillName, true,0.25f);
+                _focusingC.AnimationManger.AnimationTrigger(skillName, 0.25f);
                 _focusingC.AnimationManger.TriggerExpression(Facial.aggressive);
             }
         }
@@ -180,7 +180,7 @@ namespace ModelView
                 if (_focusingC.AnimationManger.GetBool("in_transition") == false && 
                     _focusingC.AnimationManger.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1f)
                 {
-                    _focusingC.AnimationManger.PlayLayerAnim(null, true, 0.25f);
+                    _focusingC.AnimationManger.AnimationTrigger(string.Empty, 0.25f);
                     IfShowingSkill = false;
                     resetModelPosTween = _focusingC.WholeT.transform.DOMove(modelPos, 1);
                 }

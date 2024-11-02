@@ -29,7 +29,7 @@ namespace Soul
                     RotateToTargetTween(Sensor.GetEnemiesByDistance(false)[0].transform.position, 0.01f);
             }
             _Animator.applyRootMotion = true;
-            AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
+            AnimationManger.AnimationTrigger(clip_name, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
         }
 
         public override void AI_State_exit()

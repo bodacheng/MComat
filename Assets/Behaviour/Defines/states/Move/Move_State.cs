@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NoSuchStudio.Common;
 using Skill;
 using UnityEngine;
@@ -55,7 +56,7 @@ namespace Soul
         {
             _timeCounter = 0f;
             _Weapon_Animation_Events.ClearMarkerManagers();
-            AnimationManger.PlayLayerAnim(null, true, 0.05f);
+            AnimationManger.AnimationTrigger(String.Empty,  0.1f);
             pEvents.CloseAllPersonalityEffects();
             _mainCam = CameraManager._camera.transform;
             _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;

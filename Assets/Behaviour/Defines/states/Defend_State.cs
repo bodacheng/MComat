@@ -30,7 +30,7 @@ namespace Soul
                 {
                     if (time_counter < 0f)
                     {
-                        AnimationManger.AnimationTrigger(defend_clip_name, true, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
+                        AnimationManger.AnimationTrigger(defend_clip_name,  CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
                     }
                 }
             }
@@ -95,7 +95,7 @@ namespace Soul
             FightParamsRef.Resistance.Value = DefendHP > 0 ? 10 : 0;
             _Weapon_Animation_Events.ClearMarkerManagers();
             _Animator.SetFloat("speed", 0f);
-            AnimationManger.AnimationTrigger(defend_clip_name, false, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
+            AnimationManger.AnimationTrigger(defend_clip_name, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
             _Rigidbody.velocity = Vector3.zero;
             used_block_least_time = FightGlobalSetting.LightBlockLastingTime;
             TimeCounter = used_block_least_time;
@@ -120,25 +120,25 @@ namespace Soul
             switch (newValue.from_weapon.damage_type)
             {
                 case DamageType.light_damage_forward:
-                    AnimationManger.AnimationTrigger(block_break_name, true, 0.05f);
+                    AnimationManger.AnimationTrigger(block_break_name,  0.05f);
                     _Rigidbody.velocity = fixDesV3;
                     used_block_least_time = FightGlobalSetting.LightBlockLastingTime;
                     DefendHPfade(newValue);
                     break;
                 case DamageType.heavy_damage_forward:
-                    AnimationManger.AnimationTrigger(block_break_name, true, 0.05f);
+                    AnimationManger.AnimationTrigger(block_break_name, 0.05f);
                     _Rigidbody.velocity = fixDesV3;
                     used_block_least_time = FightGlobalSetting.HeavyBlockLastingTime;
                     DefendHPfade(newValue);
                     break;
                 case DamageType.supper_damage_forward:
-                    AnimationManger.AnimationTrigger(block_break_name, true, 0.05f);
+                    AnimationManger.AnimationTrigger(block_break_name,  0.05f);
                     _Rigidbody.velocity = fixDesV3 - gameObject.transform.position;
                     used_block_least_time = FightGlobalSetting.HeavyBlockLastingTime;
                     DefendHPfade(newValue);
                     break;
                 default:
-                    AnimationManger.AnimationTrigger(block_break_name, true, 0.05f);
+                    AnimationManger.AnimationTrigger(block_break_name,  0.05f);
                     _Rigidbody.velocity = fixDesV3;
                     used_block_least_time = FightGlobalSetting.LightBlockLastingTime;
                     DefendHPfade(newValue);

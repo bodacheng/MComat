@@ -19,11 +19,9 @@ namespace Soul
         {
             if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && _BasicPhysicSupport.hiddenMethods.Grounded)
             {
-                AnimationManger.AnimationTrigger(AnimationManger.GetRandomHurtAnim("lay"), true, hurtAnimDuration);
+                AnimationManger.AnimationTrigger(AnimationManger.GetRandomHurtAnim("lay"), hurtAnimDuration);
                 return;
             }
-            var point = newValue.DamageEffectPoint;
-            point.y = 0;
             
             string hurtAnimKey;
             var meToAttacker = Vector3.Distance(_DATA_CENTER.WholeT.position, newValue.attacker.Center.WholeT.position);
@@ -37,7 +35,11 @@ namespace Soul
             {
                 hurtAnimKey = newValue.DamageEffectPoint.y > _DATA_CENTER.geometryCenter.position.y ? "high" : "low";
             }
-            AnimationManger.AnimationTrigger(AnimationManger.GetRandomHurtAnim(hurtAnimKey), true, hurtAnimDuration);
+
+            var obj = AnimationManger.GetRandomHurtAnim(hurtAnimKey);
+            if (obj == null)
+                Debug.Log("here goes:"+ hurtAnimKey);
+            AnimationManger.AnimationTrigger(obj, hurtAnimDuration);
             AnimationManger.TriggerExpression(Facial.hit);
             mySequence = DOTween.Sequence();
             mySequence.Append(RotateToTargetTween(rotateToTarget, 0.1f));

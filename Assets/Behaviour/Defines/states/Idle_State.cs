@@ -27,7 +27,7 @@ namespace Soul
             motionReset = false;
             this._Animator.SetFloat("speed", 0f);
             if (showVictoryMotion)
-                AnimationManger.AnimationTrigger(clip_name, true, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
+                AnimationManger.AnimationTrigger(clip_name,  CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
             this._Rigidbody.velocity = Vector3.zero;
             this._Rigidbody.drag = FightGlobalSetting.OnTouchEnemyBodyRigidDrag;
             
@@ -58,7 +58,7 @@ namespace Soul
         {
             if (showVictoryMotion && !motionReset && clip_name == "victory" && !AnimationManger._toUse.isLooping && AnimationCasualFinishedFlag())
             {
-                AnimationManger.PlayLayerAnim(null, true, 0.05f);
+                AnimationManger.AnimationTrigger(string.Empty,  0.05f);
                 motionReset = true;
             }
         }

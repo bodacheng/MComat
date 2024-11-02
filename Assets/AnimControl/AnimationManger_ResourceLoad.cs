@@ -128,14 +128,9 @@ public partial class AnimationManger
                 Addressables.Release(loadPath);
                 foreach (var clip in humanHurtAnimsObjects)
                 {
-                    if (AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(key))
+                    if (AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(key, out var value))
                     {
-                        AnimationResourceLoader.SeriesAnimationClipsDic[key].Add(clip);
-                    }
-                    else
-                    {
-                        Debug.Log(key+ " ： 动画读取逻辑错误");
-                        AnimationResourceLoader.SeriesAnimationClipsDic.Add(key, new List<AnimationClip>(){clip});
+                        value.Add(clip);
                     }
                 }
             }
@@ -162,8 +157,6 @@ public partial class AnimationManger
             return; // When the character model is displayed, there may be issues such as the menu suddenly closing
         }
         animatorOverride = new AnimatorOverrideController(Animator.runtimeAnimatorController);
-
-        
         
         // 以上内容为个性化动画片段对base层基础动画的覆盖
         foreach (var animationClip in basicAnims)
@@ -195,7 +188,6 @@ public partial class AnimationManger
         
         this.facialAnimManager = facialAnimManager;
         this.facialAnimManager?.INI(Animator, animatorOverride);
-        
         Animator.runtimeAnimatorController = animatorOverride;
     }
     
