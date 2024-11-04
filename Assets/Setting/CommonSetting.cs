@@ -7,7 +7,9 @@ public class CommonSetting : ScriptableObject
 {
     [SerializeField] bool devMode;
     [SerializeField] int maxStoneCount = 30;
-    [SerializeField] int gangbangModeMaxUnitPerTeam = 30;
+    [SerializeField] int gangbangModeMaxUnitPerTeam1 = 24;
+    [SerializeField] int gangbangModeMaxUnitPerTeam2 = 72;
+    [SerializeField] int gangbangModeMaxUnitPerTeam3 = 100;
     [Tooltip("unit定义文件")]
     [SerializeField] string unitConfigFile = "mst_unit";
     [Tooltip("skill定义文件")]
@@ -113,7 +115,9 @@ public class CommonSetting : ScriptableObject
     public List<string> DownLoadLabels => downLoadLabels;
     
     public static bool DevMode;
-    public static int GangbangModeMaxUnitPerTeam;
+    public static int GangbangModeMaxUnitPerTeam1;
+    public static int GangbangModeMaxUnitPerTeam2;
+    public static int GangbangModeMaxUnitPerTeam3;
     public static int MaxStoneCount;
     public static int SkillSetCostLimit = 15;
     public static int Sp0Cost = 1;
@@ -181,7 +185,9 @@ public class CommonSetting : ScriptableObject
     {
         DevMode = devMode;
         MaxStoneCount = maxStoneCount;
-        GangbangModeMaxUnitPerTeam = gangbangModeMaxUnitPerTeam;
+        GangbangModeMaxUnitPerTeam1 = gangbangModeMaxUnitPerTeam1;
+        GangbangModeMaxUnitPerTeam2 = gangbangModeMaxUnitPerTeam2;
+        GangbangModeMaxUnitPerTeam3 = gangbangModeMaxUnitPerTeam3;
         SkillStaticAnalysis = skillStaticAnalysis;
         SkillDynamicAnalysis = skillDynamicAnalysis;
         UnitConfigFile = unitConfigFile;

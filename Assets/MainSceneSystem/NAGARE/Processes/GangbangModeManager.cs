@@ -39,6 +39,12 @@ public class GangbangModeManager
         if (location == null)
             return null;
         var fightInfo = await AddressablesLogic.LoadT<GangbangInfo>(location);
+
+        foreach (var set in fightInfo.Team2GroupSet)
+        {
+            set.OriginCount = set.Count;
+        }
+        
         fightInfo.EventType = FightEventType.Gangbang;
         fightInfo.ArcadeFightMode = 1;
         fightInfo.SetUnitLevelByRefLevel();

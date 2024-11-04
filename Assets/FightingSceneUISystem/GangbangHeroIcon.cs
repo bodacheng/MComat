@@ -7,10 +7,13 @@ public class GangbangHeroIcon : HeroIcon
     [SerializeField] BOButton minusBtn;
     [SerializeField] BOButton plusBtn;
     [SerializeField] Text count;
+
+    private Func<int> countGet;
     
     void SetUp(Func<int, int> countSet, Func<int> countGet, bool enableCountSet = true)
     {
-        count.text = countGet().ToString();
+        this.countGet = countGet;
+        RefreshCount();
         if (enableCountSet)
         {
             void ShowActive(int newCount)
@@ -30,7 +33,7 @@ public class GangbangHeroIcon : HeroIcon
                 var currentCount = countGet();
                 countSet(currentCount + 1);
                 var newCount = countGet();
-                count.text = newCount.ToString();
+                RefreshCount();
                 ShowActive(newCount);
             }
             plusBtn.SetListener(Plus);
@@ -41,7 +44,7 @@ public class GangbangHeroIcon : HeroIcon
                 var currentCount = countGet();
                 countSet(currentCount - 1);
                 var newCount = countGet();
-                count.text = newCount.ToString();
+                RefreshCount();
                 ShowActive(newCount);
             }
             
@@ -54,6 +57,11 @@ public class GangbangHeroIcon : HeroIcon
             plusBtn.gameObject.SetActive(false);
             minusBtn.gameObject.SetActive(false);
         }
+    }
+
+    public void RefreshCount()
+    {
+        count.text = countGet().ToString();
     }
     
     public static GangbangHeroIcon ArrangeGangbangHeroIconToParent(
