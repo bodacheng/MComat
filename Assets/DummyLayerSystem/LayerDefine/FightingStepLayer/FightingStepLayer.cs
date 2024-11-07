@@ -4,6 +4,8 @@ using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using UnityEngine;
 using FightScene;
+using UnityEngine.UI;
+using UniRx;
 
 public class FightingStepLayer : UILayer
 {
@@ -25,6 +27,9 @@ public class FightingStepLayer : UILayer
 
     [Header("教程强制点自动环节黑幕")] 
     [SerializeField] GameObject forceClickAutoBtnBlackMask;
+
+    [Header("fps")] 
+    [SerializeField] private Text fps;
     
     public TeamUIManager Team1UI => team1UI;
     public TeamUIManager Team2UI => team2UI;
@@ -107,6 +112,15 @@ public class FightingStepLayer : UILayer
     
     public bool Initialized { get; set; } = false;
 
+    private float deltaTime = 0.0f;
+    private void ShowFps()
+    {
+        // 计算帧率
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        // 在 Text 上显示帧率
+        fps.text = $"FPS: {Mathf.Ceil(1.0f / deltaTime)}";
+    }
+
     async UniTask StartUp(Action<bool> switchTeam1Auto, Action<bool> switchTeam2Auto, Action pauseAction)
     {
         Initialized = false;
@@ -131,6 +145,15 @@ public class FightingStepLayer : UILayer
 
         team1UI.LiveUnitCount.gameObject.SetActive(FightLoad.Fight.EventType == FightEventType.Gangbang);
         team2UI.LiveUnitCount.gameObject.SetActive(FightLoad.Fight.EventType == FightEventType.Gangbang);
+
+        if (FightLoad.Fight.EventType == FightEventType.Gangbang)
+        {
+            fps.gameObject.SetActive(true);
+            Observable.EveryUpdate().Subscribe((_) =>
+            {
+                ShowFps();
+            }).AddTo(fps.gameObject);
+        }
         
         var inputEffectsLoading = new List<UniTask>();
         foreach (var d in RTFightManager.Target.team1.teamMembers.GetValues())
