@@ -81,34 +81,6 @@ MonoBehaviour:
   m_ProfileSettings:
     m_Profiles:
     - m_InheritedParent: 
-      m_Id: 4b03e1e645aca4a45a3124cb03a3f7d6
-      m_ProfileName: release
-      m_Values:
-      - m_Id: 7453e66a70ffb41e893c0afd44486595
-        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
-      - m_Id: 8b470904cb666498391e21708d37dff3
-        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
-      - m_Id: b06b7dac454e04a1b8447caade86f7fc
-        m_Value: https://mcombat.s3.ap-northeast-1.amazonaws.com/release/2.1.2/[BuildTarget]
-      - m_Id: cd58eb709aef248a0a61cfcf5029d3c5
-        m_Value: ServerData/release/2.1.2/[BuildTarget]
-      - m_Id: eda21008cba8e428482d4e8f9aadebdf
-        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
-    - m_InheritedParent: 
-      m_Id: ba89d062b8f2f4dc28fe182a21c15a13
-      m_ProfileName: dev
-      m_Values:
-      - m_Id: 7453e66a70ffb41e893c0afd44486595
-        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
-      - m_Id: 8b470904cb666498391e21708d37dff3
-        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
-      - m_Id: b06b7dac454e04a1b8447caade86f7fc
-        m_Value: https://mcombat.s3.ap-northeast-1.amazonaws.com/dev/2.1.2/[BuildTarget]
-      - m_Id: cd58eb709aef248a0a61cfcf5029d3c5
-        m_Value: ServerData/dev/2.1.2/[BuildTarget]
-      - m_Id: eda21008cba8e428482d4e8f9aadebdf
-        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
-    - m_InheritedParent: 
       m_Id: e103ffdc792314f4fa1d4a74f33b63bb
       m_ProfileName: Default
       m_Values:
@@ -120,6 +92,34 @@ MonoBehaviour:
         m_Value: https://mcombat.s3.ap-northeast-1.amazonaws.com/[BuildTarget]
       - m_Id: cd58eb709aef248a0a61cfcf5029d3c5
         m_Value: ServerData/[BuildTarget]
+      - m_Id: eda21008cba8e428482d4e8f9aadebdf
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+    - m_InheritedParent: 
+      m_Id: 4b03e1e645aca4a45a3124cb03a3f7d6
+      m_ProfileName: release
+      m_Values:
+      - m_Id: 7453e66a70ffb41e893c0afd44486595
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: 8b470904cb666498391e21708d37dff3
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: b06b7dac454e04a1b8447caade86f7fc
+        m_Value: https://mcombat.s3.ap-northeast-1.amazonaws.com/release/2.1.3/[BuildTarget]
+      - m_Id: cd58eb709aef248a0a61cfcf5029d3c5
+        m_Value: ServerData/dev/2.1.3/[BuildTarget]
+      - m_Id: eda21008cba8e428482d4e8f9aadebdf
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+    - m_InheritedParent: 
+      m_Id: ba89d062b8f2f4dc28fe182a21c15a13
+      m_ProfileName: dev
+      m_Values:
+      - m_Id: 7453e66a70ffb41e893c0afd44486595
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: 8b470904cb666498391e21708d37dff3
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: b06b7dac454e04a1b8447caade86f7fc
+        m_Value: https://mcombat.s3.ap-northeast-1.amazonaws.com/dev/2.1.3/[BuildTarget]
+      - m_Id: cd58eb709aef248a0a61cfcf5029d3c5
+        m_Value: ServerData/dev/2.1.3/[BuildTarget]
       - m_Id: eda21008cba8e428482d4e8f9aadebdf
         m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
     m_ProfileEntryNames:
