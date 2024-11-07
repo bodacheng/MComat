@@ -14,9 +14,18 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] Text team2Flg;
     [SerializeField] Text team1WholeCount;
     [SerializeField] Text team2WholeCount;
+
+    [SerializeField] Text groupCount1;
+    [SerializeField] Text groupCount2;
+    [SerializeField] Text groupCount3;
+    
     [SerializeField] BOButton countSet1;
     [SerializeField] BOButton countSet2;
     [SerializeField] BOButton countSet3;
+
+    [SerializeField] GameObject countSelectedFrame1;
+    [SerializeField] GameObject countSelectedFrame2;
+    [SerializeField] GameObject countSelectedFrame3;
     
     private Func<int, string, int, int, int> _setTeamUnitCount;
     private Func<int, string, int> _getTeamUnitCount;
@@ -38,8 +47,8 @@ public partial class FightPrepareLayer : UILayer
         void UnitCountSetting(int maxUnitPerTeam)
         {
             _selectedMaxTeamCount = maxUnitPerTeam;
-            int team1UnitCount = stage.GangbangAutoAdjustTeamUnitByMaxCount(1, stage.FightMembers.HeroSets.GetValues(), _selectedMaxTeamCount, true);
-            int team2UnitCount = stage.GangbangAutoAdjustTeamUnitByMaxCount(2, stage.FightMembers.EnemySets.GetValues(), _selectedMaxTeamCount, true);
+            var team1UnitCount = stage.GangbangAutoAdjustTeamUnitByMaxCount(1, stage.FightMembers.HeroSets.GetValues(), _selectedMaxTeamCount, true);
+            var team2UnitCount = stage.GangbangAutoAdjustTeamUnitByMaxCount(2, stage.FightMembers.EnemySets.GetValues(), _selectedMaxTeamCount, true);
             RefreshCountDisplay(1, team1UnitCount, _selectedMaxTeamCount);
             RefreshCountDisplay(2, team2UnitCount, _selectedMaxTeamCount);
             foreach (var icon in _gangbangHeroIconsE)
@@ -51,18 +60,31 @@ public partial class FightPrepareLayer : UILayer
                 icon.RefreshCount();
             }
         }
+
+        groupCount1.text = CommonSetting.GangbangModeMaxUnitPerTeam1.ToString();
+        groupCount2.text = CommonSetting.GangbangModeMaxUnitPerTeam2.ToString();
+        groupCount3.text = CommonSetting.GangbangModeMaxUnitPerTeam3.ToString();
         
         countSet1.SetListener(() =>
         {
             UnitCountSetting(CommonSetting.GangbangModeMaxUnitPerTeam1);
+            countSelectedFrame1.SetActive(true);
+            countSelectedFrame2.SetActive(false);
+            countSelectedFrame3.SetActive(false);
         });
         countSet2.SetListener(() =>
         {
             UnitCountSetting(CommonSetting.GangbangModeMaxUnitPerTeam2);
+            countSelectedFrame1.SetActive(false);
+            countSelectedFrame2.SetActive(true);
+            countSelectedFrame3.SetActive(false);
         });
         countSet3.SetListener(() =>
         {
             UnitCountSetting(CommonSetting.GangbangModeMaxUnitPerTeam3);
+            countSelectedFrame1.SetActive(false);
+            countSelectedFrame2.SetActive(false);
+            countSelectedFrame3.SetActive(true);
         });
         
         arcadeStageNoText.gameObject.SetActive(true);

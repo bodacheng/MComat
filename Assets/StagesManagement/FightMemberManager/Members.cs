@@ -36,7 +36,7 @@ public partial class StageEditor {
             var unitInfo = target.EnemySets.Get(0, posNum);
             var sprite = unitInfo != null ? await UnitIconDic.Load(unitInfo.r_id) : null;
             _unitBtnContent = new GUIContent(GetIconTexture2D(sprite));
-            if (GUI.Button(new Rect(posNum * 40, 0, 20, 20), _unitBtnContent, _focusingPosID == posNum.ToString() ? _unitIconSelectedStyle : _unitIconStyle))
+            if (GUI.Button(new Rect(posNum * 100, 0, 20, 20), _unitBtnContent, _focusingPosID == posNum.ToString() ? _unitIconSelectedStyle : _unitIconStyle))
             {
                 _selectedUnitIndex = 0;
                 _focusingPosID = posNum.ToString();
@@ -50,12 +50,12 @@ public partial class StageEditor {
                 if (info != null)
                 {
                     gangbangGet(info.id).Count =
-                        EditorGUI.IntField(new Rect(posNum * 70 + 30, 0, 20, 20), gangbangGet(info.id).Count);
+                        EditorGUI.IntField(new Rect(posNum * 100 + 30, 0, 20, 20), gangbangGet(info.id).Count);
                 }
             }
         }
-        
         EditorGUILayout.LabelField(" Enemies infos ");
+        
         GUILayout.BeginHorizontal();
         var rect = GUILayoutUtility.GetRect(GUIContent.none, GUIStyle.none, GUILayout.Height(50), GUILayout.Width(400));
         GUI.BeginGroup(rect);
@@ -68,7 +68,8 @@ public partial class StageEditor {
             tasks.Add(UnitSlot(i, gangbangGet));
         }
         await UniTask.WhenAll(tasks.ToArray());
-        if (GUI.Button(new Rect(_unitCount * 40, 0, 20, 20), "+"))
+        
+        if (GUI.Button(new Rect(_unitCount * 100, 0, 30, 30), "+"))
         {
             _unitCount++;
         }
