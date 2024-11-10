@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class GangbangInfo : FightInfo
+public partial class FightInfo : ScriptableObject
 {
     private List<SoldierGroupSet> team1GroupSet = new List<SoldierGroupSet>();
     [SerializeField] private List<SoldierGroupSet> team2GroupSet = new List<SoldierGroupSet>();
@@ -145,38 +145,6 @@ public class GangbangInfo : FightInfo
             }
         }
         this.FightMembers.EnemySets = newEnemySets;
-    }
-    
-    public static GangbangInfo Copy(GangbangInfo source)
-    {
-        var stage = CreateInstance<GangbangInfo>();
-        
-        stage.ID = source.ID;
-        stage.ArcadeFightMode = source.ArcadeFightMode;
-        stage.FightMembers = source.FightMembers;
-        stage.battleGroundID = source.battleGroundID;
-        stage.stageRefLevel = source.stageRefLevel;
-        stage.fightBGM = source.fightBGM;
-        stage.team1Mode = TeamMode.MultiRaid;
-        stage.team2Mode = TeamMode.MultiRaid;
-        stage.Team1Auto = source.Team1Auto;
-        stage.Team2Auto = source.Team2Auto;
-        stage.team1AIMode = source.team1AIMode;
-        stage.team2AIMode = source.team2AIMode;
-        stage.Team1ID = source.Team1ID;
-        stage.Team2ID = source.Team2ID;
-        stage.team1HpRate = source.team1HpRate;
-        stage.team2HpRate = source.team2HpRate;
-        stage.team1CGMode = source.team1CGMode;
-        stage.team2CGMode = source.team2CGMode;
-        stage.Team1LeaderboardEntry = source.Team1LeaderboardEntry;
-        stage.Team2LeaderboardEntry = source.Team2LeaderboardEntry;
-        stage.RunTutorial = false;
-        stage.EventType = source.EventType;
-        stage.UnitsData = new List<UnitInfo>(source.UnitsData);
-        stage.team1GroupSet = new List<SoldierGroupSet>(source.team1GroupSet);
-        stage.team2GroupSet = new List<SoldierGroupSet>(source.team2GroupSet);
-        return stage;
     }
     
     public int GangbangAutoAdjustTeamUnitByMaxCount(int team, List<UnitInfo> unitSets, int selectedMaxTeamCount, bool adaptMode = false)

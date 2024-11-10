@@ -75,14 +75,14 @@ namespace FightScene
         }
         
         // 战斗模式相机。根据选择队伍做相应调整。
-        public void CameraAdjustment(Team myTeam, TeamMode teamMode, FightEventType eventType, Transform me = null)
+        public void CameraAdjustment(Team myTeam, TeamMode teamMode, FightEventType eventType, FightMode fightMode, Transform me = null)
         {
             C_Mode cMode;
             if (teamMode == TeamMode.Rotation)
                 cMode = C_Mode.CertainYAntiVibration;
             else
             {
-                cMode = eventType == FightEventType.Gangbang ? C_Mode.TopDown : C_Mode.WatchOver;
+                cMode = fightMode == FightMode.Group ? C_Mode.TopDown : C_Mode.WatchOver;
             }
             
             var ts = myTeam == Team.player1 ? team1.GetFightingUnitTs() : team2.GetFightingUnitTs();
@@ -106,7 +106,7 @@ namespace FightScene
                 return returnValue;
             }
             
-            if (eventType == FightEventType.Gangbang)
+            if (fightMode == FightMode.Group)
             {
                 _CameraManager.Assign_Camera(cMode, null, null);
             }

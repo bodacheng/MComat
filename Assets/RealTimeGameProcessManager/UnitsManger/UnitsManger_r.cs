@@ -64,7 +64,7 @@ namespace FightScene
                         Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
                         if (FightLogger.value.GetWinnerTeam() == Team.none)
                         {
-                            if (teamConfig.myTeam == Team.player2 && FightLoad.Fight.EvolutionMode)
+                            if (teamConfig.myTeam == Team.player2 && FightLoad.Fight.FightMode == FightMode.Evolve)
                             {
                                 HitBoxesProcesser.Instance.AllProcessingFade();
                                 RTFightManager.Target.team1.RMode_Unit.Value._MyBehaviorRunner.ChangeToWaitingState();
@@ -145,7 +145,7 @@ namespace FightScene
                                 disposable.Dispose();
                             }).AddTo(center);
                         
-                        RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.TeamMode, FightLoad.Fight.EventType);
+                        RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.TeamMode, FightLoad.Fight.EventType, FightLoad.Fight.FightMode);
                     }
                 }).AddTo(gameObject);
             }

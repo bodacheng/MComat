@@ -124,7 +124,6 @@ namespace mainMenu
                 PlayFabReadClient.LoadReadMailsAsync(),
                 AddressablesLogic.Essentials(),
                 ArcadeModeManager.Instance.Initialize(),
-                GangbangModeManager.Instance.Initialize(),
                 StoryManager.Instance.Initialize()
             );
             CashClear();
@@ -199,7 +198,6 @@ namespace mainMenu
             var unitListPage = new UnitListPage();
             var memberDetailEdit = new SkillEditPage();
             var arcadeFrontPage = new ArcadeFrontPage();
-            var gangbangFrontPage = new GangbangFrontPage();
             var eventFrontPage = new EventFightPage();
             
             // Shop
@@ -228,7 +226,6 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.UnitSkillEdit, memberDetailEdit);
             ProcessesRunner.Main.Add(MainSceneStep.FrontPage, frontPage);
             ProcessesRunner.Main.Add(MainSceneStep.ArcadeFront, arcadeFrontPage);
-            ProcessesRunner.Main.Add(MainSceneStep.GangBangFront, gangbangFrontPage);
             ProcessesRunner.Main.Add(MainSceneStep.EventFight, eventFrontPage);
             ProcessesRunner.Main.Add(MainSceneStep.Arena, arenaPage);
             ProcessesRunner.Main.Add(MainSceneStep.Ranking, rankingPage);

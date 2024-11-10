@@ -23,7 +23,7 @@ namespace FightScene
         
         public ReactiveProperty<bool> LoadStageFinished { get; set; } = new ReactiveProperty<bool>(false);
         
-        public static List<GangbangInfo.SoldierGroupSet> team1GroupSet;
+        public static List<FightInfo.SoldierGroupSet> team1GroupSet;
         
         private AdmobAdsButton watchBtn;
         public void ShowAds(int extraAdReward, RectTransform btnTarget, Action afterWatched, int finishedStage = -1, bool showAdImmediately = true)
@@ -102,7 +102,6 @@ namespace FightScene
             {
                 case FightEventType.Arena:
                 case FightEventType.Quest:
-                case FightEventType.Gangbang:
                 case FightEventType.Event:
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.Preparing, preparingProcess);
                     FSceneProcessesRunner.Main.AddNewProcess(SceneStep.CountDown, countDownProcess);

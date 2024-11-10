@@ -138,7 +138,7 @@ namespace FightScene
                     
                     if (TeamConfig.myTeam == RTFightManager.playerTeam)
                     {
-                        RTFightManager.Target.CameraAdjustment(Team.player1, TeamMode.MultiRaid, FightLoad.Fight.EventType,x != null ? x.geometryCenter : null);
+                        RTFightManager.Target.CameraAdjustment(Team.player1, TeamMode.MultiRaid, FightLoad.Fight.EventType, FightLoad.Fight.FightMode,x != null ? x.geometryCenter : null);
                         _teamIndicatorCloseDisposable?.Dispose();
                         _barPosUpdate?.Dispose();
                         foreach (var one in _teamMembers.GetValues())

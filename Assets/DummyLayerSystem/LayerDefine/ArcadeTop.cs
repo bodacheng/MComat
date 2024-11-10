@@ -26,7 +26,6 @@ public class ArcadeTop : UILayer
     readonly List<StageButton> _stageButtons = new List<StageButton>();
     
     LoadStageDelegate LoadStageMethod;
-    LoadGangbangDelegate LoadGangbangMethod;
     Action<int, bool> directToStage;
     int _maxStageNum;
 
@@ -43,15 +42,6 @@ public class ArcadeTop : UILayer
     {
         step = MainSceneStep.ArcadeFront;
         this.LoadStageMethod = loadFightInfo;
-        this.directToStage = directToStage;
-        this._maxStageNum = maxStageNum;
-        SetupCommon();
-    }
-    
-    public void SetupGangbangArcade(int maxStageNum, LoadGangbangDelegate loadFightInfo, Action<int, bool> directToStage)
-    {
-        step = MainSceneStep.GangBangFront;
-        this.LoadGangbangMethod = loadFightInfo;
         this.directToStage = directToStage;
         this._maxStageNum = maxStageNum;
         SetupCommon();
@@ -119,7 +109,7 @@ public class ArcadeTop : UILayer
     
     async UniTask LoadStage(int stageNo)
     {
-        var one = step == MainSceneStep.ArcadeFront ? await LoadStageMethod(stageNo) : await LoadGangbangMethod(stageNo);
+        var one = await LoadStageMethod(stageNo);
         if (one == null)
         {
             return;
@@ -135,15 +125,14 @@ public class ArcadeTop : UILayer
         );
         stageBtn.name = "Stage" + stageNo;
         stageBtn.StageNo = stageNo;
-        stageBtn.CriticalGaugeMode = one.EvolutionMode ? CriticalGaugeMode.Normal : one.team2CGMode;
+        stageBtn.CriticalGaugeMode = one.FightMode == FightMode.Evolve ? CriticalGaugeMode.Normal : one.team2CGMode;
         if (one.FightMembers != null)
         {
-            if (one is GangbangInfo)
+            if (one.FightMode is FightMode.Group)
             {
-                var gb = (GangbangInfo)one;
                 stageBtn.LoadUnitIconsGangbang(
                     one.FightMembers.EnemySets.GetValues(), 
-                    (x)=> gb.GetTeam2GroupSet(x).Count,
+                    (x)=> one.GetTeam2GroupSet(x).Count,
                     IconButtonFeature, 
                     stageNo == _currentStages.Max());
             }
@@ -151,8 +140,8 @@ public class ArcadeTop : UILayer
             {
                 stageBtn.LoadUnitIcons(one.FightMembers.EnemySets.GetValues(), IconButtonFeature, stageNo == _currentStages.Max());
             }
-            
         }
+        stageBtn.SetFightModeFlg(one.FightMode);
     }
 
     void Refresh(int progress, IDictionary<string, Award> stageAwards)

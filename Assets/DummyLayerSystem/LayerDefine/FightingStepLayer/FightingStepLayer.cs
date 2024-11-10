@@ -143,10 +143,10 @@ public class FightingStepLayer : UILayer
         team1UI.InsTeamUI(RTFightManager.Target.team1.ReadyForNextMember, (() => RTFightManager.Target.team1.Auto),switchTeam1Auto, RTFightManager.Target.team1.RMode_Unit);
         team2UI.InsTeamUI(RTFightManager.Target.team2.ReadyForNextMember, (() => RTFightManager.Target.team2.Auto),switchTeam2Auto, RTFightManager.Target.team2.RMode_Unit);
 
-        team1UI.LiveUnitCount.gameObject.SetActive(FightLoad.Fight.EventType == FightEventType.Gangbang);
-        team2UI.LiveUnitCount.gameObject.SetActive(FightLoad.Fight.EventType == FightEventType.Gangbang);
+        team1UI.LiveUnitCount.gameObject.SetActive(FightLoad.Fight.FightMode == FightMode.Group);
+        team2UI.LiveUnitCount.gameObject.SetActive(FightLoad.Fight.FightMode == FightMode.Group);
 
-        if (FightLoad.Fight.EventType == FightEventType.Gangbang)
+        if (FightLoad.Fight.FightMode == FightMode.Group)
         {
             fps.gameObject.SetActive(true);
             Observable.EveryUpdate().Subscribe((_) =>

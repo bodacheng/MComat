@@ -36,23 +36,29 @@ public class BoundaryControlByGod : MonoBehaviour {
         
         var detectColliderCount = 0;
         // 我们这里是大致的认为每个角色的所有hit box加上可能放出来的武器collider一共10个
-        switch (FightLoad.Fight.EventType)
+
+        if (FightLoad.Fight.FightMode == FightMode.Group)
         {
-            case FightEventType.Gangbang:
+            foreach (var set in FightLoad.Fight.Team2GroupSet)
+            {
+                detectColliderCount += set.Count * 5;
+            }
+            foreach (var set in FightLoad.Fight.Team1GroupSet)
+            {
+                detectColliderCount += set.Count * 5;
+            }
+        }
+        else
+        {
+            if (FightLoad.Fight.team1Mode == TeamMode.MultiRaid)
+            {
                 detectColliderCount = (FightLoad.Fight.FightMembers.HeroSets.GetValues().Count +
                                        FightLoad.Fight.FightMembers.EnemySets.GetValues().Count) * 10;
-                break;
-            default:
-                if (FightLoad.Fight.team1Mode == TeamMode.MultiRaid)
-                {
-                    detectColliderCount = (FightLoad.Fight.FightMembers.HeroSets.GetValues().Count +
-                                           FightLoad.Fight.FightMembers.EnemySets.GetValues().Count) * 10;
-                }
-                else
-                {
-                    detectColliderCount = 20;
-                }
-                break;
+            }
+            else
+            {
+                detectColliderCount = 20;
+            }
         }
         
         SensorUnity.Setup(BattleRingRadius, Vector3.zero, detectColliderCount);

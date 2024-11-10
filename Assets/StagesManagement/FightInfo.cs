@@ -8,15 +8,25 @@ using mainMenu;
 using NoSuchStudio.Common;
 using PlayFab.ClientModels;
 
-public class FightInfo : ScriptableObject
+public partial class FightInfo : ScriptableObject
 {
     public int battleGroundID;
     public int fightBGM = 0;
-    
     [SerializeField] string storyKey;
-    
     // 底下这个记录的是敌人的信息
     [SerializeField] List<UnitInfo> unitsData = new List<UnitInfo>();
+    [SerializeField] FightMode fightMode;
+    public float team1HpRate = 1f;
+    public float team2HpRate = 1f;
+    public CriticalGaugeMode team1CGMode = CriticalGaugeMode.Normal;
+    public CriticalGaugeMode team2CGMode = CriticalGaugeMode.Normal;
+    public TeamMode team1Mode = TeamMode.Rotation;
+    public TeamMode team2Mode = TeamMode.Rotation;
+    public AIMode team1AIMode = AIMode.Aggressive;
+    public AIMode team2AIMode = AIMode.Aggressive;
+    public int dumbAIDecisionDelay = 20;
+    public int dreamComboAIRateNum = 5;
+    public float stageRefLevel;
     
     public string StoryKey => storyKey;
 
@@ -50,23 +60,31 @@ public class FightInfo : ScriptableObject
         get;
     }
     
-    [SerializeField] bool evolutionMode;
-    public float team1HpRate = 1f;
-    public float team2HpRate = 1f;
-    public CriticalGaugeMode team1CGMode = CriticalGaugeMode.Normal;
-    public CriticalGaugeMode team2CGMode = CriticalGaugeMode.Normal;
-    public TeamMode team1Mode = TeamMode.Rotation;
-    public TeamMode team2Mode = TeamMode.Rotation;
-    public AIMode team1AIMode = AIMode.Aggressive;
-    public AIMode team2AIMode = AIMode.Aggressive;
-    public int dumbAIDecisionDelay = 20;
-    public int dreamComboAIRateNum = 5;
-
-    public float stageRefLevel;
-
+    public FightMode FightMode
+    {
+        get => fightMode;
+        set
+        {
+            fightMode = value;
+            switch (fightMode)
+            {
+                case FightMode.Evolve:
+                case FightMode.Rotate:
+                    team1Mode = TeamMode.Rotation;
+                    team2Mode = TeamMode.Rotation;
+                    break;
+                case FightMode.Multi:
+                case FightMode.Group:
+                    team1Mode = TeamMode.MultiRaid;
+                    team2Mode = TeamMode.MultiRaid;
+                    break;
+            }
+        }
+    }
+    
     public void SetUnitLevelByRefLevel()
     {
-        if (!EvolutionMode)
+        if (fightMode != FightMode.Evolve)
         {
             foreach (var data in UnitsData)
             {
@@ -84,22 +102,6 @@ public class FightInfo : ScriptableObject
         }
     }
     
-    // 首发版本我们未必把进化模式的等级分配想的太过复杂。。
-    public bool EvolutionMode
-    {
-        get => evolutionMode;
-        set
-        {
-            if (value)
-            {
-                team1Mode = TeamMode.Rotation;
-                team2Mode = TeamMode.Rotation;
-                AutoFillEvolution(FightMembers, "human");
-            }
-            evolutionMode = value;
-        }
-    }
-
     private List<List<int>> EnemyForEvolutionTeamUnitSets = new List<List<int>>
     {
         new List<int>(){8,11,16,1},
@@ -122,7 +124,7 @@ public class FightInfo : ScriptableObject
 
     // 我们设想这个玩法下玩家一共进化三次
     private readonly int _evolutionEnemyCount = 4;
-    void AutoFillEvolution(FightMembers target, string type)
+    public void AutoFillEvolution(FightMembers target, string type)
     {
         var enemyRSet = EnemyForEvolutionTeamUnitSets.Random();
         var recordIds = Units.GetMonsterIDsAndNamesDic(type).Keys.ToList();
@@ -281,25 +283,6 @@ public class FightInfo : ScriptableObject
         return fightInfo;
     }
     
-    public static GangbangInfo CreateGangbangInfoAsset(FightMembers targetTeam, string path, string fileName)
-    {
-        var gangbangInfo = CreateInstance<GangbangInfo>();
-        if (!Directory.Exists(path))
-        {
-            //if it doesn't, create it
-            Directory.CreateDirectory(path);
-        }
-        
-        gangbangInfo.FightMembers = targetTeam;
-        gangbangInfo.SaveDicToData();
-        gangbangInfo.team1Mode = TeamMode.Rotation;
-        gangbangInfo.team2Mode = TeamMode.Rotation;
-        
-        AssetDatabase.CreateAsset(gangbangInfo, path + "/" + fileName + ".asset");
-        Debug.Log("Generated：" + path + "/" + fileName + ".asset");
-        AssetDatabase.Refresh();
-        return gangbangInfo;
-    }
     #endif
 
     public void OpenAndSetEnemyDataOnPlace()
@@ -328,13 +311,24 @@ public class FightInfo : ScriptableObject
         switch (EventType)
         {
             case FightEventType.Quest:
-                set = TeamSet.Default;
+                if (fightMode == FightMode.Group)
+                {
+                    set = TeamSet.Gangbang;
+                }
+                else
+                {
+                    if (fightMode == FightMode.Evolve)
+                    {
+                        set = TeamSet.Default;
+                    }
+                    else
+                    {
+                        set = TeamSet.Origin;
+                    }
+                }
                 break;
             case FightEventType.Arena:
                 set = TeamSet.Arena3V3;
-                break;
-            case FightEventType.Gangbang:
-                set = TeamSet.Gangbang;
                 break;
             case FightEventType.Event:
                 set = TeamSet.Origin;
@@ -384,10 +378,14 @@ public class FightInfo : ScriptableObject
         stage.Team1LeaderboardEntry = source.Team1LeaderboardEntry;
         stage.Team2LeaderboardEntry = source.Team2LeaderboardEntry;
         stage.RunTutorial = source.RunTutorial;
-        stage.evolutionMode = source.evolutionMode;
+        stage.fightMode = source.fightMode;
         stage.EventType = source.EventType;
         stage.dreamComboAIRateNum = source.dreamComboAIRateNum;
         stage.storyKey = source.storyKey;
+        
+        stage.UnitsData = new List<UnitInfo>(source.UnitsData);
+        stage.team1GroupSet = new List<SoldierGroupSet>(source.team1GroupSet);
+        stage.team2GroupSet = new List<SoldierGroupSet>(source.team2GroupSet);
         return stage;
     }
     
@@ -452,7 +450,6 @@ public enum FightEventType
 {
     Screensaver = 0,
     Quest = 1,
-    Gangbang = 3,
     Arena = 2,
     Self = 4,
     SkillTest = 5,
@@ -464,4 +461,12 @@ public enum TeamMode
     Keep = 0,
     MultiRaid = 1,
     Rotation = 2
+}
+
+public enum FightMode
+{
+    Rotate,
+    Evolve,
+    Multi,
+    Group
 }

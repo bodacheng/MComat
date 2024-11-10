@@ -45,7 +45,6 @@
         QuestInfo = 8,
         ArcadeFront = 9,
         EventFight = 12,
-        GangBangFront = 13,
         Arena = 3
     }
 }

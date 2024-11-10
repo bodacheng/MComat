@@ -31,7 +31,7 @@ public partial class StageEditor
         }
     }
     
-    public async void OnGUIView(FightMembers target, Func<string, GangbangInfo.SoldierGroupSet> gangbangGet = null, Action after = null)
+    public async void OnGUIView(FightMembers target, Func<string, FightInfo.SoldierGroupSet> gangbangGet = null, Action after = null)
     {
         if (Running)
             return;

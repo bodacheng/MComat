@@ -58,11 +58,11 @@ namespace FightScene
             if (TeamConfig.myTeam != RTFightManager.playerTeam)
             {
                 teamAutoSwitch.gameObject.SetActive((CommonSetting.DevMode || FightLoad.Fight.EventType == FightEventType.Self)
-                                                    && FightLoad.Fight.EventType != FightEventType.Gangbang);
+                                                    && FightLoad.Fight.FightMode != FightMode.Group);
             }
             else
             {
-                teamAutoSwitch.gameObject.SetActive(FightLoad.Fight.EventType != FightEventType.Gangbang);
+                teamAutoSwitch.gameObject.SetActive(FightLoad.Fight.FightMode != FightMode.Group);
             }
             switch (TeamMode)
             {
@@ -234,7 +234,7 @@ namespace FightScene
                     break;
             }
             
-            if (FightLoad.Fight.EventType == FightEventType.Gangbang)
+            if (FightLoad.Fight.FightMode == FightMode.Group)
             {
                 sideIconsContainer.gameObject.SetActive(false);
             }

@@ -126,7 +126,7 @@ public partial class ArenaFightOver : UILayer
         fight.team2Mode = fight.team1Mode;
         fight.Team1Auto = FightLoad.Fight.Team1Auto;
         fight.Team2Auto = true;
-        if (fight.EventType != FightEventType.Gangbang) // 因为gangbang模式只用NextFight这个函数重开当前战斗，开启下一场战斗是有单独的函数。
+        if (fight.FightMode != FightMode.Group) // 因为gangbang模式只用NextFight这个函数重开当前战斗，开启下一场战斗是有单独的函数。
             fight.LoadMyTeam();
         FightLoad.Fight = fight;
         FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
@@ -166,10 +166,14 @@ public partial class ArenaFightOver : UILayer
             case FightEventType.Arena:
                 break;
             case FightEventType.Quest:
-                againTab.SetUp(FightLoad.Fight.ArcadeFightMode, "Stage " + FightLoad.Fight.ID);
-                break;
-            case FightEventType.Gangbang:
-                againTab.SetUp(-1, "Stage " + FightLoad.Fight.ID);
+                if (FightLoad.Fight.FightMode == FightMode.Group)
+                {
+                    againTab.SetUp(-1, "Stage " + FightLoad.Fight.ID);
+                }
+                else
+                {
+                    againTab.SetUp(FightLoad.Fight.ArcadeFightMode, "Stage " + FightLoad.Fight.ID);
+                }
                 break;
             default:
                 againTab.SetUp(-1, null);

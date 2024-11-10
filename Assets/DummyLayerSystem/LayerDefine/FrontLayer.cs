@@ -14,7 +14,6 @@ using UniRx;
 public class FrontLayer : UILayer
 {
     [SerializeField] BOButton ArcadeBtn;
-    [SerializeField] BOButton GangbangBtn;
     [SerializeField] BOButton ArenaBtn;
     [SerializeField] BOButton EventFightBtn;
     [SerializeField] BOButton UnitBtn;
@@ -53,13 +52,6 @@ public class FrontLayer : UILayer
             {
                 ArcadeModeManager.Instance.DirectToArcadeStage(PlayerAccountInfo.Me.arcadeProcess + 1, true);
             });
-        
-        GangbangBtn.onClick.AddListener(
-            ()=>
-            {
-                GangbangModeManager.Instance.DirectToGangStage(PlayerAccountInfo.Me.gangbangProcess + 1, true);
-            });
-        GangbangBtn.gameObject.SetActive(PlayerAccountInfo.Me.arcadeProcess >= 5);
         
         ArenaBtn.onClick.AddListener(() =>
         {
@@ -173,7 +165,6 @@ public class FrontLayer : UILayer
     {
         ArcadeBtn.interactable = btnCode == MainSceneStep.QuestInfo;
         ArenaBtn.interactable = btnCode == MainSceneStep.Arena;
-        GangbangBtn.interactable = btnCode == MainSceneStep.GotchaFront;
         TrainBtn.interactable = btnCode == MainSceneStep.SelfFightFront;
         EventFightBtn.interactable = btnCode == MainSceneStep.EventFight;
         

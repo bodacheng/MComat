@@ -58,7 +58,6 @@ MonoBehaviour:
   dreamColor: {r: 1, g: 0.33333334, b: 0.47058824, a: 0.8352941}
   downLoadLabels:
   - quest
-  - quest_gangbang
   - event_stage
   - unit
   - weapon

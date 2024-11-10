@@ -15,6 +15,11 @@ public partial class StageButton : MonoBehaviour
     [SerializeField] RewardUI rewardUI;
     [SerializeField] GameObject enemyDoubleExModeFlg;
     [SerializeField] GameObject enemyInfiniteExModeFlg;
+
+    [SerializeField] GameObject rModeFlg;
+    [SerializeField] GameObject mModeFlg;
+    [SerializeField] GameObject eModeFlg;
+    [SerializeField] GameObject gModeFlg;
     
     public Button Button => button;
     public RewardUI RewardUI => rewardUI;
@@ -45,6 +50,14 @@ public partial class StageButton : MonoBehaviour
         buttonImage.color = new Color(buttonImage.color.r, buttonImage.color.g, buttonImage.color.b, on ? 1 : 0.3f);
         id.color = new Color(id.color.r, id.color.g, id.color.b, on ? 1 : 0.3f);
         button.interactable = on;
+    }
+
+    public void SetFightModeFlg(FightMode fightMode)
+    {
+        gModeFlg.SetActive(fightMode == FightMode.Group);
+        eModeFlg.SetActive(fightMode == FightMode.Evolve);
+        rModeFlg.SetActive(fightMode == FightMode.Rotate);
+        mModeFlg.SetActive(fightMode == FightMode.Multi);
     }
     
     public void LoadUnitIcons(List<UnitInfo> units, Func<UnitInfo, UniTask> iconButtonFeature, bool clickBoss = false)

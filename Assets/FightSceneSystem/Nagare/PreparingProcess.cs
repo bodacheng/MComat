@@ -22,7 +22,7 @@ public class PreparingProcess : FSceneProcess
         RTFightManager.Target.team1.Clear();
         RTFightManager.Target.team2.Clear();
         
-        if ((FightLoad.Fight.EventType == FightEventType.Quest || FightLoad.Fight.EventType == FightEventType.Gangbang || FightLoad.Fight.EventType == FightEventType.Event))
+        if ((FightLoad.Fight.EventType == FightEventType.Quest || FightLoad.Fight.FightMode == FightMode.Group || FightLoad.Fight.EventType == FightEventType.Event))
         {
 #if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
             FightScene.FightScene.target.LoadAds();
@@ -118,7 +118,7 @@ public class PreparingProcess : FSceneProcess
                     FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode, 
                     FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay,
                     CreateRandomBoolFunc(
-                        FightLoad.Fight.EventType == FightEventType.Gangbang ? 100: FightGlobalSetting._player1DreamComboAIRateNumM)
+                        FightLoad.Fight.FightMode == FightMode.Group ? 100: FightGlobalSetting._player1DreamComboAIRateNumM)
                 );
                 break;
             case TeamMode.Rotation:
@@ -137,7 +137,7 @@ public class PreparingProcess : FSceneProcess
                     FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode, 
                     FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay,
                     CreateRandomBoolFunc(
-                        FightLoad.Fight.EventType == FightEventType.Gangbang ? 100 : 
+                        FightLoad.Fight.FightMode == FightMode.Group ? 100 : 
                             (FightLoad.Fight.EventType == FightEventType.Arena ? 
                                 FightGlobalSetting.ArenaEnemyDreamComboAIRate: FightLoad.Fight.dreamComboAIRateNum))
                 );
@@ -182,13 +182,13 @@ public class PreparingProcess : FSceneProcess
         
         RTFightManager.Target.team1.RMode_Unit.Subscribe(x =>
             {
-                RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.TeamMode, FightLoad.Fight.EventType);
+                RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.TeamMode, FightLoad.Fight.EventType, FightLoad.Fight.FightMode);
             }
         ).AddTo(RTFightManager.Target.Disposables);
         
         RTFightManager.Target.team2.RMode_Unit.Subscribe(x =>
             {
-                RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.TeamMode, FightLoad.Fight.EventType);
+                RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.TeamMode, FightLoad.Fight.EventType, FightLoad.Fight.FightMode);
             }
         ).AddTo(RTFightManager.Target.Disposables);
         

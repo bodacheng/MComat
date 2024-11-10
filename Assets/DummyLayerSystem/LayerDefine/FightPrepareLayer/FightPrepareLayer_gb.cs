@@ -41,7 +41,7 @@ public partial class FightPrepareLayer : UILayer
         set => _selectedMaxTeamCount = value;
     }
     
-    public void SetGangbangFeature(GangbangInfo stage, Action toGangbangFront, string gangbangStageNo, 
+    public void SetGangbangFeature(FightInfo stage, Action toGangbangFront, string gangbangStageNo, 
         Func<int, string, int, int, int> setTeamUnitCount, Func<int, string, int> getTeamUnitCount)
     {
         void UnitCountSetting(int maxUnitPerTeam)
@@ -114,7 +114,7 @@ public partial class FightPrepareLayer : UILayer
         _getTeamUnitCount = getTeamUnitCount;
     }
     
-    public void GangbangStageUnitsDisplay(GangbangInfo stage)
+    public void GangbangStageUnitsDisplay(FightInfo stage)
     {
         _gangbangHeroIconsM = GangbangInfosShow(stage.FightMembers.HeroSets.GetValues(), (x) =>
         {

@@ -130,56 +130,56 @@ namespace FightScene
                         a.AgainBtn.gameObject.SetActive(true);
                     }
                     break;
-                case FightEventType.Gangbang:
-                    if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabId)
-                    {
-                        var levelInt = Convert.ToInt32(FightLoad.Fight.ID);
-                        if (levelInt > PlayerAccountInfo.Me.gangbangProcess)
-                        {
-                            CloudScript.GangbangProgress(
-                                FightLoad.Fight.ID,
-                                result =>
-                                {
-                                    var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-                                    var hasReward = jsonResult.ContainsKey("has_reward") ? jsonResult["has_reward"] : false;
-                                    var hasRewardBool = (bool)hasReward;
-                                    var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
-                                    arenaFightOver.Setup();
-                                    arenaFightOver.Step2Anim();
-                                    if (hasRewardBool)
-                                    {
-                                        var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
-                                        var rewardDm = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
-                                        PlayerAccountInfo.Me.gangbangProcess = levelInt;
-                                        var rewardGdInt = Convert.ToInt32(rewardGd);
-                                        var rewardDmInt = Convert.ToInt32(rewardDm);
-                                        arenaFightOver.ShowAward(
-                                            rewardDmInt, rewardGdInt, 
-                                            levelInt % 5 == 0 ? PlayFabSetting._adBossFightRewardDM : PlayFabSetting._adNormalFightRewardDM,
-                                            levelInt);
-                                    }
-                                    Int32.TryParse(FightLoad.Fight.ID, out var nowStageNo);
-                                    var nextStageNo = nowStageNo + 1;
-                                    arenaFightOver.LoadNextGangbangStage(nextStageNo);
-                                }
-                            );
-                        }
-                        else
-                        {
-                            var a = UILayerLoader.Load<ArenaFightOver>();
-                            a.Setup();
-                            a.Step2Anim();
-                            a.ShowAward(0, 0, PlayFabSetting._adNormalFightRewardDM, -1, true);
-                        }
-                    }
-                    else
-                    {
-                        var a = UILayerLoader.Load<ArenaFightOver>();
-                        a.Setup();
-                        a.Step2Anim();
-                        a.AgainBtn.gameObject.SetActive(true);
-                    }
-                    break;
+                // case FightEventType.Gangbang:
+                //     if (FightLogger.value.GetWinnerId() == PlayerAccountInfo.Me.PlayFabId)
+                //     {
+                //         var levelInt = Convert.ToInt32(FightLoad.Fight.ID);
+                //         if (levelInt > PlayerAccountInfo.Me.gangbangProcess)
+                //         {
+                //             CloudScript.GangbangProgress(
+                //                 FightLoad.Fight.ID,
+                //                 result =>
+                //                 {
+                //                     var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                //                     var hasReward = jsonResult.ContainsKey("has_reward") ? jsonResult["has_reward"] : false;
+                //                     var hasRewardBool = (bool)hasReward;
+                //                     var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
+                //                     arenaFightOver.Setup();
+                //                     arenaFightOver.Step2Anim();
+                //                     if (hasRewardBool)
+                //                     {
+                //                         var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
+                //                         var rewardDm = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
+                //                         PlayerAccountInfo.Me.gangbangProcess = levelInt;
+                //                         var rewardGdInt = Convert.ToInt32(rewardGd);
+                //                         var rewardDmInt = Convert.ToInt32(rewardDm);
+                //                         arenaFightOver.ShowAward(
+                //                             rewardDmInt, rewardGdInt, 
+                //                             levelInt % 5 == 0 ? PlayFabSetting._adBossFightRewardDM : PlayFabSetting._adNormalFightRewardDM,
+                //                             levelInt);
+                //                     }
+                //                     Int32.TryParse(FightLoad.Fight.ID, out var nowStageNo);
+                //                     var nextStageNo = nowStageNo + 1;
+                //                     arenaFightOver.LoadNextGangbangStage(nextStageNo);
+                //                 }
+                //             );
+                //         }
+                //         else
+                //         {
+                //             var a = UILayerLoader.Load<ArenaFightOver>();
+                //             a.Setup();
+                //             a.Step2Anim();
+                //             a.ShowAward(0, 0, PlayFabSetting._adNormalFightRewardDM, -1, true);
+                //         }
+                //     }
+                //     else
+                //     {
+                //         var a = UILayerLoader.Load<ArenaFightOver>();
+                //         a.Setup();
+                //         a.Step2Anim();
+                //         a.AgainBtn.gameObject.SetActive(true);
+                //     }
+                //     break;
                 case FightEventType.Self:
                     var c = UILayerLoader.Load<CommonFightResult>();
                     c.Setup(
@@ -267,7 +267,7 @@ namespace FightScene
         
         public override void LocalUpdate()
         {
-            if (FightLoad.Fight.EventType != FightEventType.Gangbang && FightLoad.Fight.team1Mode != TeamMode.MultiRaid)
+            if (FightLoad.Fight.FightMode != FightMode.Group && FightLoad.Fight.team1Mode != TeamMode.MultiRaid)
                 RTFightManager.Target._CameraManager.VisibilityControl.LocalUpdate();
         }
         

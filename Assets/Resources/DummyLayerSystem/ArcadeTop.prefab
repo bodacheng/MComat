@@ -484,7 +484,7 @@ MonoBehaviour:
   jumpToNewStage: {fileID: 287933490346035037}
   normalStagePrefab: {fileID: 3416358147097766526, guid: 8beb627230cfe453fa023b5c8bcd53eb,
     type: 3}
-  bossStagePrefab: {fileID: 3416358147097766526, guid: d241d53239c674729b7cd974a44d7de2,
+  bossStagePrefab: {fileID: 3416358147097766526, guid: c8edfffd2b83448d180e15b15886283b,
     type: 3}
   nineForShow: {fileID: 5340505936988530625}
   nextChapter: {fileID: 1205889481844079161}

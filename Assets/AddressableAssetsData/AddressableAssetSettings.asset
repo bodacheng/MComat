@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: c865438658e084f57a8ef2542b6b8c95
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: 45aeba50afc8c1d371ff2dd65e14fa3d
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
@@ -61,7 +61,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c99a0d2e4a5ec42dab3f54d54dc5578a, type: 2}
   - {fileID: 11400000, guid: f5013da29efeb4b6189e99c1266607b5, type: 2}
   - {fileID: 11400000, guid: dd076f9729c324d72af36d69ca39375c, type: 2}
-  - {fileID: 11400000, guid: 421c454ff09414180983855911567f66, type: 2}
   - {fileID: 11400000, guid: 057dbc99136274d2e9711e39ad9f24d7, type: 2}
   - {fileID: 11400000, guid: c4227ddaf9fe444baac86a56bf502883, type: 2}
   - {fileID: 11400000, guid: d436bb1e2211446af9e56651dbff5829, type: 2}
@@ -168,7 +167,6 @@ MonoBehaviour:
     - Preload
     - Locale-zh-Hans
     - Locale-ja
-    - quest_gangbang
     - event_stage
     - story
     - public

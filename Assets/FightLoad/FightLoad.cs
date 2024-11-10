@@ -9,11 +9,16 @@ public static class FightLoad
     
     public static void Go(FightInfo fightInfo, bool inSceneLoad = false)
     {
+        if (fightInfo.FightMode == FightMode.Group)
+        {
+            fightInfo.Team1Auto = true;
+            fightInfo.Team2Auto = true;
+        }
+        
         switch (fightInfo.EventType)
         {
             case FightEventType.Screensaver:
             case FightEventType.SkillTest:
-            case FightEventType.Gangbang:
                 fightInfo.Team1Auto = true;
                 fightInfo.Team2Auto = true;
                 break;

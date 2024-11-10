@@ -28,27 +28,29 @@ public class FightInfoGUI : Editor
             _initialized = true;
         }
         
-        fightInfo.EvolutionMode = EditorGUILayout.Toggle("进化模式", fightInfo.EvolutionMode);
-        if (fightInfo.EvolutionMode)
+        if (fightInfo.FightMode == FightMode.Evolve)
         {
             if (GUILayout.Button("进化模式随机全部队员"))
             {
                 fightInfo.FightMembers = new FightMembers();
                 fightInfo.UnitsData = new List<UnitInfo>();
-                fightInfo.EvolutionMode = true;
+                fightInfo.AutoFillEvolution(fightInfo.FightMembers, "human");
                 SaveProcess();
                 return;
             }
         }
         
         fightInfo.SetUnitLevelByRefLevel();
-        _stageEditor.OnGUIView(fightInfo.FightMembers,null, ()=>
-        {
-            if (GUILayout.Button("Save"))
+        _stageEditor.OnGUIView(
+            fightInfo.FightMembers, 
+            fightInfo.FightMode == FightMode.Group ? fightInfo.GetTeam2GroupSet : null, ()=>
             {
-                SaveProcess();
+                if (GUILayout.Button("Save"))
+                {
+                    SaveProcess();
+                }
             }
-        });
+        );
 
         void SaveProcess()
         {

@@ -35,7 +35,6 @@ public class FightMembers
         switch (eventType)
         {
             case FightEventType.Quest:
-            case FightEventType.Gangbang:
             case FightEventType.Event:
                 return TeamLegal(HeroSets, checkInstanceIds);//checkInstanceIds 是针对Gangbang的
             default:

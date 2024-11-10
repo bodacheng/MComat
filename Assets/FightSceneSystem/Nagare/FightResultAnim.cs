@@ -66,7 +66,6 @@ namespace FightScene
             
             switch (FightLoad.Fight.EventType)
             {
-                case FightEventType.Gangbang:
                 case FightEventType.Quest:
                     if (FightLogger.value.GetWinnerTeam() == Team.player1)
                     {

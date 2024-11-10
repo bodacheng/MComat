@@ -109,9 +109,6 @@ public partial class ArenaFightOver : UILayer
             case FightEventType.Quest:
                 shortStory.text = ShortStory.Get(code);
                 break;
-            case FightEventType.Gangbang:
-                shortStory.text = GBShortStory.Get(code);
-                break;
             default:
                 break;
         }

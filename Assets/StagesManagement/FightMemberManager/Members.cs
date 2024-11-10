@@ -29,9 +29,9 @@ public partial class StageEditor {
     string _focusingPosID;
     int _unitCount = 3;
     
-    async UniTask Members(FightMembers target, Func<string, GangbangInfo.SoldierGroupSet> gangbangGet = null)
+    async UniTask Members(FightMembers target, Func<string, FightInfo.SoldierGroupSet> gangbangGet = null)
     {
-        async UniTask UnitSlot(int posNum, Func<string, GangbangInfo.SoldierGroupSet> gangbangGet = null)
+        async UniTask UnitSlot(int posNum, Func<string, FightInfo.SoldierGroupSet> gangbangGet = null)
         {
             var unitInfo = target.EnemySets.Get(0, posNum);
             var sprite = unitInfo != null ? await UnitIconDic.Load(unitInfo.r_id) : null;
