@@ -332,13 +332,6 @@ public class QuestInfoPage : MSceneProcess
                 else
                 {
                     fightInfo.LoadMyTeam();
-                    if (fightInfo.FightMembers.HeroSets.GetValues().Count != 1)
-                    {
-                        PopupLayer.ArrangeConfirmWindow(
-                            () => { FightLoad.Go(fightInfo);},
-                            Translate.Get("Error"));// 按理说不应该出现这个问题
-                        return;
-                    }
                     FightLoad.Go(fightInfo);
                 }
                 break;
