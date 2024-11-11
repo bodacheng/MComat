@@ -1,4 +1,5 @@
 using System;
+using dataAccess;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -114,7 +115,7 @@ public partial class ArenaFightOver : UILayer
         switch (mode)
         {
             case TeamMode.Keep:
-                fight.team1Mode =(TeamMode)PlayerPrefs.GetInt("preferAdventureMode", PlayerPrefs.GetInt("preferAdventureMode", 2));
+                fight.team1Mode = (TeamMode)PlayerPrefs.GetInt("preferAdventureMode", PlayerPrefs.GetInt("preferAdventureMode", 2));
                 break;
             case TeamMode.MultiRaid:
                 fight.team1Mode = TeamMode.MultiRaid;
@@ -126,8 +127,7 @@ public partial class ArenaFightOver : UILayer
         fight.team2Mode = fight.team1Mode;
         fight.Team1Auto = FightLoad.Fight.Team1Auto;
         fight.Team2Auto = true;
-        if (fight.FightMode != FightMode.Group) // 因为gangbang模式只用NextFight这个函数重开当前战斗，开启下一场战斗是有单独的函数。
-            fight.LoadMyTeam();
+        fight.LoadMyTeam();
         FightLoad.Fight = fight;
         FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
         UILayerLoader.Remove<ArenaFightOver>();
@@ -138,14 +138,15 @@ public partial class ArenaFightOver : UILayer
         Int32.TryParse(FightLoad.Fight.ID, out var nowStageNo);
         var nextStageNo = nowStageNo + 1;
         var nextFight = await ArcadeModeManager.Instance.LoadStage(nextStageNo);
-        if (nextFight != null && PlayerAccountInfo.Me.tutorialProgress == "Finished" && nowStageNo != 5)
+        
+        if (nextFight != null && QuestInfoPage.CanFightCheck(nextFight) && PlayerAccountInfo.Me.tutorialProgress == "Finished" && nowStageNo != 5)
         {
-            nextTab.SetUp(nextFight.ArcadeFightMode, "Stage " + nextStageNo);
+            nextTab.SetUp("Stage " + nextStageNo);
             nextTab.gameObject.SetActive(true);
             nextTab.SetUpAction(
                 () =>
                 {
-                    NextFight((TeamMode)nextFight.ArcadeFightMode, nextFight);
+                    NextFight(nextFight.team2Mode, nextFight);
                 },
                 () =>
                 {
@@ -168,15 +169,15 @@ public partial class ArenaFightOver : UILayer
             case FightEventType.Quest:
                 if (FightLoad.Fight.FightMode == FightMode.Group)
                 {
-                    againTab.SetUp(-1, "Stage " + FightLoad.Fight.ID);
+                    againTab.SetUp("Stage " + FightLoad.Fight.ID);
                 }
                 else
                 {
-                    againTab.SetUp(FightLoad.Fight.ArcadeFightMode, "Stage " + FightLoad.Fight.ID);
+                    againTab.SetUp("Stage " + FightLoad.Fight.ID);
                 }
                 break;
             default:
-                againTab.SetUp(-1, null);
+                againTab.SetUp(null);
                 break;
         }
         

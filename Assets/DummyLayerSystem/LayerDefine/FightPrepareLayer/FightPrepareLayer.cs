@@ -42,9 +42,9 @@ public partial class FightPrepareLayer : UILayer
         layerAnimator.SetTrigger(code);
     }
     
-    public void SetFightMode(int fightMode)
+    public void SetFightMode(TeamMode fightMode)
     {
-        fightModeSwitch.Setup(fightMode, PlayerPrefs.GetInt("preferAdventureMode",  PlayerPrefs.GetInt("preferAdventureMode", 2)));
+        fightModeSwitch.Setup(fightMode);
     }
     
     public TeamMode GetSetFightMode()

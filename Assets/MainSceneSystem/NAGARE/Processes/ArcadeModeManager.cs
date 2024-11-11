@@ -9,7 +9,6 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 public class ArcadeModeManager
 {
     private readonly IDictionary<string, IResourceLocation> locationKeyDic = new Dictionary<string, IResourceLocation>();
-    private readonly StageModeTable _stageModeTable = new StageModeTable();
     int _maxStageNum = -999;
     public int MaxStageNum => _maxStageNum;
 
@@ -32,7 +31,6 @@ public class ArcadeModeManager
             }
         }
         Addressables.Release(locationHandle);
-        await _stageModeTable.LoadStageMode();
     }
     
     public async UniTask<FightInfo> LoadStage(int stageNo)
@@ -42,7 +40,6 @@ public class ArcadeModeManager
             return null;
         var fightInfo = await AddressablesLogic.LoadT<FightInfo>(location);
         fightInfo.EventType = FightEventType.Quest;
-        fightInfo.ArcadeFightMode = 3; //_stageModeTable.GetModeById(fightInfo.ID);
         fightInfo.SetUnitLevelByRefLevel();
         return fightInfo;
     }

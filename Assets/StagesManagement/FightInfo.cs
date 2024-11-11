@@ -189,13 +189,7 @@ public partial class FightInfo : ScriptableObject
             }
         }
     }
-
-    public int ArcadeFightMode
-    {
-        get;
-        set;
-    }
-
+    
     public bool RunTutorial
     {
         set;
@@ -358,7 +352,6 @@ public partial class FightInfo : ScriptableObject
         var stage = CreateInstance<FightInfo>();
         
         stage.ID = source.ID;
-        stage.ArcadeFightMode = source.ArcadeFightMode;
         stage.FightMembers = source.FightMembers;
         stage.battleGroundID = source.battleGroundID;
         stage.stageRefLevel = source.stageRefLevel;

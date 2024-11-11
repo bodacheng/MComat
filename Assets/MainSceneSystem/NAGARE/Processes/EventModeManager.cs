@@ -13,7 +13,6 @@ public class EventModeManager
 {
     private IResourceLocation easyModePath, normalModePath, hardModePath;
     private FightInfo easyMode, normalMode, hardMode;
-    private readonly StageModeTable _stageModeTable = new StageModeTable();
     private List<string> completedLevels;
     
     public static readonly EventModeManager Instance = new EventModeManager();
@@ -60,8 +59,7 @@ public class EventModeManager
             }
         }
         Addressables.Release(locationHandle);
-        await _stageModeTable.LoadStageMode();
-
+        
         if (easyModePath != null)
             easyMode = await LoadStage(easyModePath);
         if (normalModePath != null)
@@ -85,7 +83,6 @@ public class EventModeManager
     {
         var fightInfo = await AddressablesLogic.LoadT<FightInfo>(location);
         fightInfo.EventType = FightEventType.Event;
-        fightInfo.ArcadeFightMode = _stageModeTable.GetModeById(fightInfo.ID);
         fightInfo.SetUnitLevelByRefLevel();
         return fightInfo;
     }

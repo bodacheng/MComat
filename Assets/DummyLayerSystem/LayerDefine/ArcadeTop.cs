@@ -28,7 +28,8 @@ public class ArcadeTop : UILayer
     LoadStageDelegate LoadStageMethod;
     Action<int, bool> directToStage;
     int _maxStageNum;
-
+    int _stageCountPerPage = 3;
+    
     void SetupCommon()
     {
         nextChapter.onClick.AddListener(ShowNextStages);
@@ -115,7 +116,7 @@ public class ArcadeTop : UILayer
             return;
         }
         
-        var stageBtn = Instantiate(stageNo % 5 == 0 ? bossStagePrefab : normalStagePrefab);
+        var stageBtn = Instantiate(stageNo % _stageCountPerPage == 0 ? bossStagePrefab : normalStagePrefab);
         _stageButtons.Add(stageBtn);
         stageBtn.Button.onClick.AddListener(
             ()=>
@@ -170,12 +171,12 @@ public class ArcadeTop : UILayer
         
         int currentStagesMax = _currentStages.Count > 0 ? _currentStages.Max() : progress;
         nextChapter.gameObject.SetActive((progress + 1 > currentStagesMax) && (_maxStageNum > currentStagesMax));
-        lastChapter.gameObject.SetActive(_currentStages.Count == 0 || _currentStages.Min() > 5);
+        lastChapter.gameObject.SetActive(_currentStages.Count == 0 || _currentStages.Min() > _stageCountPerPage);
 
         var progressChapter = progress == _maxStageNum
-            ? (progress - 1) / 5
-            : progress / 5;
-        var currentChapter = _currentStages.Count != 0 ? _currentStages.Min() / 5 : _maxStageNum / 5;
+            ? (progress - 1) / _stageCountPerPage
+            : progress / _stageCountPerPage;
+        var currentChapter = _currentStages.Count != 0 ? _currentStages.Min() / _stageCountPerPage : _maxStageNum / _stageCountPerPage;
         
         jumpToNewStage.gameObject.SetActive(progressChapter != currentChapter);
         
@@ -195,11 +196,11 @@ public class ArcadeTop : UILayer
         {
             progress -= 1;
         }
-        var currentChapter = progress / 5;
+        var currentChapter = progress / _stageCountPerPage;
         var returnValue = new List<int>();
-        for (int stageNoPlus = 1; stageNoPlus <= 5; stageNoPlus++)
+        for (int stageNoPlus = 1; stageNoPlus <= _stageCountPerPage; stageNoPlus++)
         {
-            int targetNo = stageNoPlus + currentChapter * 5;
+            int targetNo = stageNoPlus + currentChapter * _stageCountPerPage;
             if (targetNo <= _maxStageNum)
             {
                 returnValue.Add(targetNo);

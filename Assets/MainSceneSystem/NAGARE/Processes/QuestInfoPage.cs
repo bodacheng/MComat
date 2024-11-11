@@ -135,28 +135,28 @@ public class QuestInfoPage : MSceneProcess
         
         if (FightLoad.Fight.FightMode == FightMode.Group)
         {
-            _layer.SetFightMode(1);
             _layer.SetFightBeginFeature(()=> GoToFight(FightLoad.Fight, _layer.SelectedMaxTeamCount));
         }
         else
         {
-            int FightMode()
+            TeamMode GetTeamMode()
             {
-                if (FightLoad.Fight.FightMode == global::FightMode.Evolve)
+                if (FightLoad.Fight.EventType == FightEventType.Arena)
                 {
-                    return 3;
+                    return TeamMode.Keep;
                 }
                 
-                switch (FightLoad.Fight.EventType)
+                switch (FightLoad.Fight.FightMode)
                 {
-                    case FightEventType.Quest:
-                    case FightEventType.Event:
-                        return FightLoad.Fight.ArcadeFightMode;
-                    default:
-                        return 0;
+                    case FightMode.Evolve:
+                    case FightMode.Rotate:
+                        return TeamMode.Rotation;
+                    case FightMode.Multi:
+                        return TeamMode.MultiRaid;
                 }
+                return TeamMode.Keep;
             }
-            _layer.SetFightMode(FightMode());
+            _layer.SetFightMode(GetTeamMode());
             _layer.SetFightBeginFeature(()=> GoToFight(FightLoad.Fight));
         }
         
@@ -186,7 +186,7 @@ public class QuestInfoPage : MSceneProcess
         UILayerLoader.Remove<FightPrepareLayer>();
     }
     
-    bool CanFightCheck(FightInfo fight)
+    public static bool CanFightCheck(FightInfo fight)
     {
         switch (fight.EventType)
         {
@@ -272,9 +272,17 @@ public class QuestInfoPage : MSceneProcess
         //     PopupLayer.ArrangeWarnWindow(Translate.Get("TeamUnitNotFull"));
         //     return;
         // }
-        
-        fightInfo.team1Mode = _layer.GetSetFightMode();
-        fightInfo.team2Mode = _layer.GetSetFightMode();
+
+        switch (fightInfo.EventType)
+        {
+            case FightEventType.Arena:
+            case FightEventType.Self:
+                fightInfo.team1Mode = _layer.GetSetFightMode();
+                fightInfo.team2Mode = _layer.GetSetFightMode();
+                break;
+            default:
+                break;
+        }
         
         switch (fightInfo.EventType)
         {

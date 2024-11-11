@@ -14,12 +14,12 @@ public class NextOrAgainBtn : MonoBehaviour
     [SerializeField] private float normalAgainBtnWidth = 250;
     [SerializeField] private float longerAgainBtnWidth = 400;
 
-    public void SetUp(int fightMode, string title)
+    public void SetUp(string title)
     {
         stageTitle.text = title;
-        
-        var showAgainFor1v1Btn = fightMode is 0 or 2;
-        var showAgainForMultiBtn = fightMode is 0 or 1;
+
+        var showAgainFor1v1Btn = false;
+        var showAgainForMultiBtn = false;
         
         againFor1v1Btn.gameObject.SetActive(showAgainFor1v1Btn);
         againForMultiBtn.gameObject.SetActive(showAgainForMultiBtn);

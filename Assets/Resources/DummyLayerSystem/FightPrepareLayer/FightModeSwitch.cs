@@ -24,26 +24,25 @@ public class FightModeSwitch : MonoBehaviour
         }
     }
 
-    public void Setup(int arcadeFightMode, int defaultMode)
+    public void Setup(TeamMode teamMode)
     {
-        switch (arcadeFightMode)
+        switch (teamMode)
         {
-            case 1:
+            case TeamMode.MultiRaid:
                 btn.interactable = false;
                 animator.enabled = false;
                 SetMode(TeamMode.MultiRaid);
             break;
-            case 2:
-            case 3:
+            case TeamMode.Rotation:
                 btn.interactable = false;
                 animator.enabled = false;
                 SetMode(TeamMode.Rotation);
             break;
-            default:
+            case TeamMode.Keep:
                 btn.onClick.AddListener(OnClick);
                 btn.interactable = true;
                 animator.enabled = true;
-                SetMode((TeamMode)defaultMode);
+                SetMode((TeamMode)PlayerPrefs.GetInt("preferAdventureMode", 2));
             break;
         }
     }
