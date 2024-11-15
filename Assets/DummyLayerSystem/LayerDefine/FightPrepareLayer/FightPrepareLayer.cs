@@ -16,6 +16,10 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] BOButton editTeamButton; // 根据进入战斗模式决定是否显示
     [SerializeField] GameObject teamEditIndicator;
     [SerializeField] Text teamEditIndicatorText;
+    [SerializeField] GameObject modeFlgR;
+    [SerializeField] GameObject modeFlgM;
+    [SerializeField] GameObject modeFlgE;
+    [SerializeField] GameObject modeFlgG;
     [SerializeField] FightModeSwitch fightModeSwitch;
     [SerializeField] GameObject enemyDoubleExModeFlg;
     [SerializeField] GameObject enemyInfiniteExModeFlg;
@@ -42,7 +46,7 @@ public partial class FightPrepareLayer : UILayer
         layerAnimator.SetTrigger(code);
     }
     
-    public void SetFightMode(TeamMode fightMode)
+    public void SetTeamMode(TeamMode fightMode)
     {
         fightModeSwitch.Setup(fightMode);
     }
@@ -69,12 +73,33 @@ public partial class FightPrepareLayer : UILayer
         editTeamButton.onClick.AddListener(()=> teamEdit());
     }
 
+    public void SetFightModeFlg(FightMode fightMode)
+    {
+        switch (fightMode)
+        {
+            case FightMode.Evolve:
+                modeFlgE.SetActive(true);
+                break;
+            case FightMode.Group:
+                modeFlgG.SetActive(true);
+                break;
+            case FightMode.Multi:
+                modeFlgM.SetActive(true);
+                break;
+            case FightMode.Rotate:
+                modeFlgR.SetActive(true);
+                break;
+        }
+    }
+
     public void SetArcadeFeature(Action toArcadeFront, string arcadeStageNo)
     {
         arcadeStageNoText.gameObject.SetActive(true);
         arcadeStageNoText.text = "Stage " + arcadeStageNo;
         toArcadeFrontBtn.gameObject.SetActive(PlayerAccountInfo.Me.tutorialProgress == "Finished");
         toArcadeFrontBtn.SetListener(toArcadeFront);
+        
+        fightModeSwitch.gameObject.SetActive(false);
         
         var rewardDic = PlayFabReadClient.StageAwards;
         var reward = rewardDic[arcadeStageNo];

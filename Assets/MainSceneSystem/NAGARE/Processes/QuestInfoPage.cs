@@ -24,6 +24,8 @@ public class QuestInfoPage : MSceneProcess
             _layer = UILayerLoader.Load<FightPrepareLayer>(false, "FightPrepareLayer_gb");
         }
         
+        _layer.SetFightModeFlg(FightLoad.Fight.FightMode);
+        
         string teamKey;
         switch (FightLoad.Fight.EventType)
         {
@@ -88,9 +90,9 @@ public class QuestInfoPage : MSceneProcess
                 }
                 else
                 {
+                    _layer.SetLayerAnimatorTrigger("evolution");
                     if (FightLoad.Fight.FightMode == FightMode.Evolve)
                     {
-                        _layer.SetLayerAnimatorTrigger("evolution");
                         var arcadeTeam = TeamSet.GetTargetSet(teamKey);
                         // 处理以前的旧逻辑
                         if (arcadeTeam.PosNumsWithLocalKeys.Length > 1)
@@ -103,10 +105,6 @@ public class QuestInfoPage : MSceneProcess
                                 }
                             }
                         }
-                    }
-                    else
-                    {
-                        _layer.SetLayerAnimatorTrigger("normal");
                     }
                     
                     _layer.SetArcadeFeature(
@@ -156,7 +154,7 @@ public class QuestInfoPage : MSceneProcess
                 }
                 return TeamMode.Keep;
             }
-            _layer.SetFightMode(GetTeamMode());
+            _layer.SetTeamMode(GetTeamMode());
             _layer.SetFightBeginFeature(()=> GoToFight(FightLoad.Fight));
         }
         
