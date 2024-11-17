@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: c865438658e084f57a8ef2542b6b8c95
   m_currentHash:
     serializedVersion: 2
-    Hash: 45aeba50afc8c1d371ff2dd65e14fa3d
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
@@ -102,9 +102,9 @@ MonoBehaviour:
       - m_Id: 8b470904cb666498391e21708d37dff3
         m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
       - m_Id: b06b7dac454e04a1b8447caade86f7fc
-        m_Value: https://mcombat.s3.ap-northeast-1.amazonaws.com/release/2.1.3/[BuildTarget]
+        m_Value: https://mcombat.s3.ap-northeast-1.amazonaws.com/release/2.2.0/[BuildTarget]
       - m_Id: cd58eb709aef248a0a61cfcf5029d3c5
-        m_Value: ServerData/release/2.1.3/[BuildTarget]
+        m_Value: ServerData/release/2.2.0/[BuildTarget]
       - m_Id: eda21008cba8e428482d4e8f9aadebdf
         m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
     - m_InheritedParent: 
@@ -116,9 +116,9 @@ MonoBehaviour:
       - m_Id: 8b470904cb666498391e21708d37dff3
         m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
       - m_Id: b06b7dac454e04a1b8447caade86f7fc
-        m_Value: https://mcombat.s3.ap-northeast-1.amazonaws.com/dev/2.1.3/[BuildTarget]
+        m_Value: https://mcombat.s3.ap-northeast-1.amazonaws.com/dev/2.2.0/[BuildTarget]
       - m_Id: cd58eb709aef248a0a61cfcf5029d3c5
-        m_Value: ServerData/dev/2.1.3/[BuildTarget]
+        m_Value: ServerData/dev/2.2.0/[BuildTarget]
       - m_Id: eda21008cba8e428482d4e8f9aadebdf
         m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
     m_ProfileEntryNames:
@@ -200,7 +200,7 @@ MonoBehaviour:
           m_Key: HostingServiceUploadSpeed
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.String
-          m_Data: ServerData/dev/2.1.3/iOS;Library/com.unity.addressables/aa/iOS/iOS
+          m_Data: ServerData/dev/2.2.0/iOS;Library/com.unity.addressables/aa/iOS/iOS
           m_Key: ContentRoot
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Boolean
