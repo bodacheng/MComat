@@ -54,6 +54,7 @@ public class QuestInfoPage : MSceneProcess
                 teamKey = "origin";
                 break;
         }
+        
         FightLoad.Fight.FightMembers.HeroSets = TeamSet.GetTargetSet(teamKey).LoadTeamDic();
         _layer.SetTeamEditFeature(() =>
         {
@@ -66,6 +67,7 @@ public class QuestInfoPage : MSceneProcess
                 _layer.SetLayerAnimatorTrigger("normal");
                 await _layer.BattleGroundSwitch.INI();
                 _layer.BattleGroundSwitch.gameObject.SetActive(true);
+                _layer.SetFightMode(FightMode.Evolve);// 不是rotate或multi的任意值
                 break;
             case FightEventType.Quest:
                 if (FightLoad.Fight.FightMode == FightMode.Group)
@@ -117,7 +119,7 @@ public class QuestInfoPage : MSceneProcess
                 }
                 break;
             case FightEventType.Event:
-                _layer.SetLayerAnimatorTrigger("normal");
+                _layer.SetLayerAnimatorTrigger("evolution");
                 _layer.SetEventFeature(FightLoad.Fight.ID);
                 break;
         }
@@ -125,36 +127,11 @@ public class QuestInfoPage : MSceneProcess
         if (stage.FightMode is FightMode.Group)
         {
             _layer.GangbangStageUnitsDisplay(FightLoad.Fight);
-        }
-        else
-        {
-            _layer.StageMembersInfoShow(stage);
-        }
-        
-        if (FightLoad.Fight.FightMode == FightMode.Group)
-        {
             _layer.SetFightBeginFeature(()=> GoToFight(FightLoad.Fight, _layer.SelectedMaxTeamCount));
         }
         else
         {
-            TeamMode GetTeamMode()
-            {
-                if (FightLoad.Fight.EventType == FightEventType.Arena)
-                {
-                    return TeamMode.Keep;
-                }
-                
-                switch (FightLoad.Fight.FightMode)
-                {
-                    case FightMode.Evolve:
-                    case FightMode.Rotate:
-                        return TeamMode.Rotation;
-                    case FightMode.Multi:
-                        return TeamMode.MultiRaid;
-                }
-                return TeamMode.Keep;
-            }
-            _layer.SetTeamMode(GetTeamMode());
+            _layer.StageMembersInfoShow(stage);
             _layer.SetFightBeginFeature(()=> GoToFight(FightLoad.Fight));
         }
         
@@ -275,8 +252,7 @@ public class QuestInfoPage : MSceneProcess
         {
             case FightEventType.Arena:
             case FightEventType.Self:
-                fightInfo.team1Mode = _layer.GetSetFightMode();
-                fightInfo.team2Mode = _layer.GetSetFightMode();
+                fightInfo.FightMode = _layer.GetSettingFightMode();
                 break;
             default:
                 break;

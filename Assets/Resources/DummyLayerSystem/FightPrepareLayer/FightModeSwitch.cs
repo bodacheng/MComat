@@ -7,54 +7,54 @@ public class FightModeSwitch : MonoBehaviour
     [SerializeField] private Text modeText;
     [SerializeField] private Animator animator;
     
-    private TeamMode _teamMode;
-    public TeamMode TeamMode => _teamMode;
+    private FightMode _fightMode;
+    public FightMode FightMode => _fightMode;
     
     void OnClick()
     {
-        if (_teamMode == TeamMode.Rotation)
-        {
-            PlayerPrefs.SetInt("preferAdventureMode", 1);
-            SetMode(TeamMode.MultiRaid);
-        }
-        else if (_teamMode == TeamMode.MultiRaid)
+        if (_fightMode == FightMode.Rotate)
         {
             PlayerPrefs.SetInt("preferAdventureMode", 2);
-            SetMode(TeamMode.Rotation);
+            SetMode(FightMode.Multi);
+        }
+        else if (_fightMode == FightMode.Multi)
+        {
+            PlayerPrefs.SetInt("preferAdventureMode", 1);
+            SetMode(FightMode.Rotate);
         }
     }
 
-    public void Setup(TeamMode teamMode)
+    public void Setup(FightMode fightMode)
     {
-        switch (teamMode)
+        switch (fightMode)
         {
-            case TeamMode.MultiRaid:
+            case FightMode.Multi:
                 btn.interactable = false;
                 animator.enabled = false;
-                SetMode(TeamMode.MultiRaid);
+                SetMode(FightMode.Multi);
             break;
-            case TeamMode.Rotation:
+            case FightMode.Rotate:
                 btn.interactable = false;
                 animator.enabled = false;
-                SetMode(TeamMode.Rotation);
+                SetMode(FightMode.Rotate);
             break;
-            case TeamMode.Keep:
+            default:
                 btn.onClick.AddListener(OnClick);
                 btn.interactable = true;
                 animator.enabled = true;
-                SetMode((TeamMode)PlayerPrefs.GetInt("preferAdventureMode", 2));
+                SetMode((FightMode)PlayerPrefs.GetInt("preferAdventureMode", 1));
             break;
         }
     }
 
-    void SetMode(TeamMode mode)
+    void SetMode(FightMode mode)
     {
-        _teamMode = mode;
-        if (_teamMode == TeamMode.Rotation)
+        _fightMode = mode;
+        if (_fightMode == FightMode.Rotate)
         {
             modeText.text = Translate.Get("TeamModeR");
         }
-        if (_teamMode == TeamMode.MultiRaid)
+        if (_fightMode == FightMode.Multi)
         {
             modeText.text = Translate.Get("TeamModeM");
         }

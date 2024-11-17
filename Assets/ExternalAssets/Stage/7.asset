@@ -68,13 +68,11 @@ MonoBehaviour:
       c1: 55
       c2: 9
       c3: 117
-  fightMode: 0
+  fightMode: 4
   team1HpRate: 1
   team2HpRate: 3
   team1CGMode: 0
   team2CGMode: 0
-  team1Mode: 2
-  team2Mode: 2
   team1AIMode: 0
   team2AIMode: 0
   dumbAIDecisionDelay: 20

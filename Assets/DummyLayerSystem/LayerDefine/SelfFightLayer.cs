@@ -50,7 +50,7 @@ namespace mainMenu
             IniCells(new List<HeroCell> { team11_R, team12_R, team13_R }, Team.player1);
             IniCells(new List<HeroCell> { team21_R, team22_R, team23_R }, Team.player2);
             
-            _fightModeSwitch.Setup(TeamMode.Keep);
+            _fightModeSwitch.Setup(FightMode.Evolve);// 不是rotate或multi的任意值
             fightStartBtn.SetAction(FightStart);
             
             void SkillEdit()
@@ -68,8 +68,7 @@ namespace mainMenu
         void FightStart()
         {
             _stage.battleGroundID = battleGroundSwitch.BattleFieldIndex;
-            _stage.team1Mode = _fightModeSwitch.TeamMode;
-            _stage.team2Mode = _fightModeSwitch.TeamMode;
+            _stage.FightMode = _fightModeSwitch.FightMode;
             FightLoad.Go(_stage);
         }
         

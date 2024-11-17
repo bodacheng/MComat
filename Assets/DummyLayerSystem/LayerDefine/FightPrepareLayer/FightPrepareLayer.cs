@@ -46,14 +46,14 @@ public partial class FightPrepareLayer : UILayer
         layerAnimator.SetTrigger(code);
     }
     
-    public void SetTeamMode(TeamMode fightMode)
+    public void SetFightMode(FightMode fightMode)
     {
         fightModeSwitch.Setup(fightMode);
     }
     
-    public TeamMode GetSetFightMode()
+    public FightMode GetSettingFightMode()
     {
-        return fightModeSwitch.TeamMode;
+        return fightModeSwitch.FightMode;
     }
     
     public void SetFightBeginFeature(Action fightBegin)

@@ -29,15 +29,14 @@ MonoBehaviour:
       c1: 190
       c2: 186
       c3: 191
-  evolutionMode: 0
+  fightMode: 1
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0
   team2CGMode: 2
-  team1Mode: 2
-  team2Mode: 2
   team1AIMode: 0
   team2AIMode: 0
   dumbAIDecisionDelay: 20
   dreamComboAIRateNum: 80
   stageRefLevel: 2
+  team2GroupSet: []

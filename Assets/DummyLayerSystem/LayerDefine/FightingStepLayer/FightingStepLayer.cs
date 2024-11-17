@@ -46,14 +46,8 @@ public class FightingStepLayer : UILayer
     
     public void PreparingMode(bool preparingMode)
     {
-        if (team1UI.TeamMode == TeamMode.MultiRaid)
-        {
-            team1UI.Refresh();
-        }
-        if (team2UI.TeamMode == TeamMode.MultiRaid)
-        {
-            team2UI.Refresh();
-        }
+        team1UI.Refresh();
+        team2UI.Refresh();
         inputsManager.PreparingMode(preparingMode);
         pauseButton.gameObject.SetActive(!preparingMode);
     }
@@ -130,8 +124,8 @@ public class FightingStepLayer : UILayer
         
         pauseButton.SetListener(pauseAction.Invoke);
         
-        team1UI.TeamMode = FightLoad.Fight.team1Mode;
-        team2UI.TeamMode = FightLoad.Fight.team2Mode;
+        team1UI.FightMode = FightLoad.Fight.FightMode;
+        team2UI.FightMode = FightLoad.Fight.FightMode;
         team1UI.TeamConfig = RTFightManager.Target.heroTeamConfig;
         team2UI.TeamConfig = RTFightManager.Target.EnemyTeamConfig;
         team1UI.TeamConfig.playID = FightLoad.Fight.Team1ID;

@@ -15,13 +15,11 @@ public partial class FightInfo : ScriptableObject
     [SerializeField] string storyKey;
     // 底下这个记录的是敌人的信息
     [SerializeField] List<UnitInfo> unitsData = new List<UnitInfo>();
-    [SerializeField] FightMode fightMode;
+    [SerializeField] FightMode fightMode = FightMode.Rotate;
     public float team1HpRate = 1f;
     public float team2HpRate = 1f;
     public CriticalGaugeMode team1CGMode = CriticalGaugeMode.Normal;
     public CriticalGaugeMode team2CGMode = CriticalGaugeMode.Normal;
-    public TeamMode team1Mode = TeamMode.Rotation;
-    public TeamMode team2Mode = TeamMode.Rotation;
     public AIMode team1AIMode = AIMode.Aggressive;
     public AIMode team2AIMode = AIMode.Aggressive;
     public int dumbAIDecisionDelay = 20;
@@ -29,6 +27,12 @@ public partial class FightInfo : ScriptableObject
     public float stageRefLevel;
     
     public string StoryKey => storyKey;
+    
+    public FightMode FightMode
+    {
+        get => fightMode;
+        set => fightMode = value;
+    }
 
     public UnitInfo GetRepresentUnitInfo()
     {
@@ -58,28 +62,6 @@ public partial class FightInfo : ScriptableObject
     {
         set;
         get;
-    }
-    
-    public FightMode FightMode
-    {
-        get => fightMode;
-        set
-        {
-            fightMode = value;
-            switch (fightMode)
-            {
-                case FightMode.Evolve:
-                case FightMode.Rotate:
-                    team1Mode = TeamMode.Rotation;
-                    team2Mode = TeamMode.Rotation;
-                    break;
-                case FightMode.Multi:
-                case FightMode.Group:
-                    team1Mode = TeamMode.MultiRaid;
-                    team2Mode = TeamMode.MultiRaid;
-                    break;
-            }
-        }
     }
     
     public void SetUnitLevelByRefLevel()
@@ -268,8 +250,6 @@ public partial class FightInfo : ScriptableObject
         
         fightInfo.FightMembers = targetTeam;
         fightInfo.SaveDicToData();
-        fightInfo.team1Mode = TeamMode.Rotation;
-        fightInfo.team2Mode = TeamMode.Rotation;
         
         AssetDatabase.CreateAsset(fightInfo, path + "/" + fileName + ".asset");
         Debug.Log("Generated：" + path + "/" + fileName + ".asset");
@@ -341,8 +321,6 @@ public partial class FightInfo : ScriptableObject
         var stage = CreateInstance<FightInfo>();
         stage.FightMembers = fightUnits;
         stage.battleGroundID = 0;
-        stage.team1Mode = TeamMode.Rotation;
-        stage.team2Mode = TeamMode.Rotation;
         stage.EventType = FightEventType.Arena;
         return stage;
     }
@@ -356,8 +334,6 @@ public partial class FightInfo : ScriptableObject
         stage.battleGroundID = source.battleGroundID;
         stage.stageRefLevel = source.stageRefLevel;
         stage.fightBGM = source.fightBGM;
-        stage.team1Mode = source.team1Mode;
-        stage.team2Mode = source.team2Mode;
         stage.Team1Auto = source.Team1Auto;
         stage.Team2Auto = source.Team2Auto;
         stage.team1AIMode = source.team1AIMode;
@@ -382,7 +358,7 @@ public partial class FightInfo : ScriptableObject
         return stage;
     }
     
-    public static FightInfo RandomSkillTestStage(TeamMode teamMode)
+    public static FightInfo RandomSkillTestStage(FightMode fightMode)
     {
         var stage = CreateInstance<FightInfo>();
         stage.FightMembers = FightMembers.RandomSkillTest();
@@ -390,22 +366,19 @@ public partial class FightInfo : ScriptableObject
         stage.fightBGM = 0;
         stage.Team1Auto = true;
         stage.Team2Auto = true;
-        stage.team1Mode = teamMode;
-        stage.team2Mode = teamMode;
+        stage.fightMode = fightMode;
         stage.EventType = FightEventType.SkillTest;
         return stage;
     }
     
-    public static FightInfo ScreenSaverStage(TeamMode teamMode)
+    public static FightInfo ScreenSaverStage(FightMode fightMode)
     {
         var stage = CreateInstance<FightInfo>();
-        stage.FightMembers = FightMembers.ScreenSaver(teamMode);
+        stage.FightMembers = FightMembers.ScreenSaver(fightMode);
         stage.battleGroundID = 0;
         stage.fightBGM = 0;
         stage.Team1Auto = true;
         stage.Team2Auto = true;
-        stage.team1Mode = teamMode;
-        stage.team2Mode = teamMode;
         stage.EventType = FightEventType.SkillTest;
         return stage;
     }
@@ -416,8 +389,6 @@ public partial class FightInfo : ScriptableObject
         stage.FightMembers = FightMembers.RandomFight();
         stage.battleGroundID = 0;
         stage.fightBGM = 0;
-        stage.team1Mode = TeamMode.Rotation;
-        stage.team2Mode = TeamMode.Rotation;
         stage.EventType = FightEventType.Arena;
         return stage;
     }
@@ -449,17 +420,10 @@ public enum FightEventType
     Event = 6
 }
 
-public enum TeamMode
-{
-    Keep = 0,
-    MultiRaid = 1,
-    Rotation = 2
-}
-
 public enum FightMode
 {
-    Rotate,
-    Evolve,
-    Multi,
-    Group
+    Rotate = 1,
+    Multi = 2,
+    Evolve = 3,
+    Group = 4
 }

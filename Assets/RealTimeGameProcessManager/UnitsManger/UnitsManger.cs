@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using UnityEngine.Serialization;
 
 namespace FightScene
 {
@@ -8,7 +9,7 @@ namespace FightScene
     {
         public MultiDic<int, int, Data_Center> teamMembers;
         
-        public TeamMode TeamMode;
+        public FightMode FightMode;
         public TeamConfig teamConfig;
         public Transform[] TeamStandPoints;
         
@@ -26,9 +27,9 @@ namespace FightScene
                 _auto = value;
                 foreach (var dataCenter in teamMembers.GetValues())
                 {
-                    if (TeamMode == TeamMode.Rotation)
+                    if (FightMode is FightMode.Rotate or FightMode.Evolve)
                         dataCenter._MyBehaviorRunner.AI = _auto;
-                    else if (TeamMode == TeamMode.MultiRaid)
+                    else if (FightMode is FightMode.Multi or FightMode.Group)
                     {
                         if (this.teamConfig.myTeam == RTFightManager.playerTeam)
                         {
@@ -83,12 +84,13 @@ namespace FightScene
         
         public void LocalUpdate()
         {
-            switch (TeamMode)
+            switch (FightMode)
             {
-                case TeamMode.MultiRaid:
-                    break;
-                case TeamMode.Rotation:
+                case FightMode.Evolve:
+                case FightMode.Rotate:
                     WaitUnitChange();
+                    break;
+                default:
                     break;
             }
         }
@@ -96,9 +98,10 @@ namespace FightScene
         public List<Transform> GetFightingUnitTs()
         {
             var transforms = new List<Transform>();
-            switch (TeamMode)
+            switch (FightMode)
             {
-                case TeamMode.MultiRaid:
+                case FightMode.Multi:
+                case FightMode.Group:
                     foreach (var unit in teamMembers.GetValues())
                     {
                         if (unit._MyBehaviorRunner.GetNowState().StateKey != "Death")
@@ -107,7 +110,8 @@ namespace FightScene
                         }
                     }
                     return transforms;
-                case TeamMode.Rotation:
+                case FightMode.Evolve:
+                case FightMode.Rotate:
                     if (RMode_Unit.Value != null && RMode_Unit.Value._MyBehaviorRunner.GetNowState().StateKey != "Death")
                     {
                         transforms = new List<Transform>

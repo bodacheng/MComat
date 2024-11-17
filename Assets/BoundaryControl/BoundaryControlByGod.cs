@@ -50,7 +50,7 @@ public class BoundaryControlByGod : MonoBehaviour {
         }
         else
         {
-            if (FightLoad.Fight.team1Mode == TeamMode.MultiRaid)
+            if (FightLoad.Fight.FightMode == FightMode.Multi)
             {
                 detectColliderCount = (FightLoad.Fight.FightMembers.HeroSets.GetValues().Count +
                                        FightLoad.Fight.FightMembers.EnemySets.GetValues().Count) * 10;

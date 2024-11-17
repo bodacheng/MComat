@@ -145,7 +145,7 @@ namespace FightScene
                                 disposable.Dispose();
                             }).AddTo(center);
                         
-                        RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.TeamMode, FightLoad.Fight.EventType, FightLoad.Fight.FightMode);
+                        RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.FightMode);
                     }
                 }).AddTo(gameObject);
             }

@@ -21,7 +21,7 @@ namespace FightScene
         [SerializeField] int teamIndicatorCloseDelay = 5;
         
         public AutoSwitch AutoSwitch => teamAutoSwitch;
-        public TeamMode TeamMode { get; set; }
+        public FightMode FightMode { get; set; }
         public TeamConfig TeamConfig { get; set; }
         public readonly IDictionary<Data_Center, SideUnitIcon> UnitIconDic = new Dictionary<Data_Center, SideUnitIcon>();
         private IDisposable _barPosUpdate;
@@ -40,12 +40,14 @@ namespace FightScene
         {
             _barPosUpdate?.Dispose();
             _teamIndicatorCloseDisposable?.Dispose();
-            switch (TeamMode)
+            switch (FightMode)
             {
-                case TeamMode.MultiRaid:
+                case FightMode.Multi:
+                case FightMode.Group:
                     MultiClear();
                     break;
-                case TeamMode.Rotation:
+                case FightMode.Rotate:
+                case FightMode.Evolve:
                     RotateClear();
                     break;
             }
@@ -64,12 +66,14 @@ namespace FightScene
             {
                 teamAutoSwitch.gameObject.SetActive(FightLoad.Fight.FightMode != FightMode.Group);
             }
-            switch (TeamMode)
+            switch (FightMode)
             {
-                case TeamMode.MultiRaid:
+                case FightMode.Multi:
+                case FightMode.Group:
                     InsTeamUI_Multi(switchTeamAuto, currentAutoState);
                     break;
-                case TeamMode.Rotation:
+                case FightMode.Rotate:
+                case FightMode.Evolve:
                     IniTeamUI_Rotate(changeUnit);
                     IniComboHit(rModeUnit);
                     rModeUnit.Subscribe(Refresh).AddTo(gameObject);
@@ -123,9 +127,10 @@ namespace FightScene
             
             _barPosUpdate?.Dispose();
             _teamIndicatorCloseDisposable?.Dispose();
-            switch (TeamMode)
+            switch (FightMode)
             {
-                case TeamMode.Rotation:
+                case FightMode.Rotate:
+                case FightMode.Evolve:
                     foreach (var dataCenter in _teamMembers.GetValues())
                     {
                         UnitIconDic.TryGetValue(dataCenter, out var tempSi);
@@ -173,7 +178,8 @@ namespace FightScene
                         }).AddTo(gameObject);
                     }
                     break;
-                case TeamMode.MultiRaid:
+                case FightMode.Multi:
+                case FightMode.Group:
                     if (TeamConfig.myTeam != RTFightManager.playerTeam)
                     {
                         foreach (var dataCenter in _teamMembers.GetValues())

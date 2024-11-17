@@ -38,9 +38,10 @@ public class PreparingProcess : FSceneProcess
         UILayerLoader.Load<ProgressLayer>();
         ProgressLayer.LoadingPercent(Translate.Get("LoadingBattle"), 0.5f);
         
-        var effectPreloadCount = FightLoad.Fight.team1Mode == TeamMode.Rotation ? 1 :
-            Mathf.Max(RTFightManager.Target.team1.teamMembers.GetValues().Count,
-                RTFightManager.Target.team2.teamMembers.GetValues().Count);
+        var effectPreloadCount = FightLoad.Fight.FightMode is (FightMode.Rotate or FightMode.Evolve) ? 
+            1 
+            :
+            Mathf.Max(RTFightManager.Target.team1.teamMembers.GetValues().Count, RTFightManager.Target.team2.teamMembers.GetValues().Count);
         
         var tasks = new List<UniTask>
         {
@@ -80,7 +81,7 @@ public class PreparingProcess : FSceneProcess
         AddBasicEffectLoadingTask(FightLoad.Fight.FightMembers.HeroSets.GetValues());
         AddBasicEffectLoadingTask(FightLoad.Fight.FightMembers.EnemySets.GetValues());
         
-        if (FightLoad.Fight.team1Mode == TeamMode.Rotation && FightLoad.Fight.team2Mode == TeamMode.Rotation)
+        if ( FightLoad.Fight.FightMode is (FightMode.Rotate or FightMode.Evolve))
         {
             tasks.Add(EffectsManager.IniEffectsPool(CommonSetting.MemberShiftEffectCode, null, 1));
         }
@@ -95,8 +96,8 @@ public class PreparingProcess : FSceneProcess
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.Target.EnemyTeamConfig, RTFightManager.Target.team2.teamMembers.GetValues());
         FightLogger.value.ReadyToLog(teamMembers);
         
-        RTFightManager.Target.team1.TeamMode = FightLoad.Fight.team1Mode;
-        RTFightManager.Target.team2.TeamMode = FightLoad.Fight.team2Mode;
+        RTFightManager.Target.team1.FightMode = FightLoad.Fight.FightMode;
+        RTFightManager.Target.team2.FightMode = FightLoad.Fight.FightMode;
         RTFightManager.Target.team1.teamConfig = RTFightManager.Target.heroTeamConfig;
         RTFightManager.Target.team2.teamConfig = RTFightManager.Target.EnemyTeamConfig;
         RTFightManager.Target.team1.Auto = FightLoad.Fight.Team1Auto;
@@ -111,28 +112,16 @@ public class PreparingProcess : FSceneProcess
             RTFightManager.Target.team2.TurnAllUnitsInvincible(false);
         }
         
-        switch (RTFightManager.Target.team1.TeamMode)
+        switch (FightLoad.Fight.FightMode)
         {
-            case TeamMode.MultiRaid:
+            case FightMode.Multi:
+            case FightMode.Group:
                 RTFightManager.Target.team1.InitializeMulti(
-                    FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode, 
+                    FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode,
                     FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay,
                     CreateRandomBoolFunc(
-                        FightLoad.Fight.FightMode == FightMode.Group ? 100: FightGlobalSetting._player1DreamComboAIRateNumM)
-                );
-                break;
-            case TeamMode.Rotation:
-                RTFightManager.Target.team1.TeamsIniRotate(
-                    FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode, 
-                    FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay,
-                    CreateRandomBoolFunc(0)
-                );
-                break;
-        }
-        
-        switch (RTFightManager.Target.team2.TeamMode)
-        {
-            case TeamMode.MultiRaid:
+                        FightLoad.Fight.FightMode == FightMode.Group ? 100 : 
+                            FightGlobalSetting._player1DreamComboAIRateNumM));
                 RTFightManager.Target.team2.InitializeMulti(
                     FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode, 
                     FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay,
@@ -142,7 +131,13 @@ public class PreparingProcess : FSceneProcess
                                 FightGlobalSetting.ArenaEnemyDreamComboAIRate: FightLoad.Fight.dreamComboAIRateNum))
                 );
                 break;
-            case TeamMode.Rotation:
+            case FightMode.Rotate:
+            case FightMode.Evolve:
+                RTFightManager.Target.team1.TeamsIniRotate(
+                    FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode, 
+                    FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay,
+                    CreateRandomBoolFunc(0)
+                );
                 RTFightManager.Target.team2.TeamsIniRotate(
                     FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode, 
                     FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay,
@@ -160,35 +155,30 @@ public class PreparingProcess : FSceneProcess
         fightingStepLayer = FightingStepLayer.Open();
         await fightingStepLayer.Setup(false);
         ProgressLayer.LoadingPercent(Translate.Get("LoadingBattleAboutToEnd"), 1f);
-        switch (RTFightManager.Target.team1.TeamMode)
-        {
-            case TeamMode.MultiRaid:
-                RTFightManager.Target.team1.ToStartPosMulti();
-                break;
-            case TeamMode.Rotation:
-                RTFightManager.Target.team1.ToStartPosRotate();
-                break;
-        }
         
-        switch (RTFightManager.Target.team2.TeamMode)
+        switch (FightLoad.Fight.FightMode)
         {
-            case TeamMode.MultiRaid:
+            case FightMode.Multi:
+            case FightMode.Group:
+                RTFightManager.Target.team1.ToStartPosMulti();
                 RTFightManager.Target.team2.ToStartPosMulti();
                 break;
-            case TeamMode.Rotation:
+            case FightMode.Rotate:
+            case FightMode.Evolve:
+                RTFightManager.Target.team1.ToStartPosRotate();
                 RTFightManager.Target.team2.ToStartPosRotate();
                 break;
         }
         
         RTFightManager.Target.team1.RMode_Unit.Subscribe(x =>
             {
-                RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.TeamMode, FightLoad.Fight.EventType, FightLoad.Fight.FightMode);
+                RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.FightMode);
             }
         ).AddTo(RTFightManager.Target.Disposables);
         
         RTFightManager.Target.team2.RMode_Unit.Subscribe(x =>
             {
-                RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.TeamMode, FightLoad.Fight.EventType, FightLoad.Fight.FightMode);
+                RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.FightMode);
             }
         ).AddTo(RTFightManager.Target.Disposables);
         

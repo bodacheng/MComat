@@ -186,17 +186,17 @@ namespace FightScene
                         ()=>FightScene.target.ReturnToFront(), 
                         () =>
                         {
-                            LocalGameRestart(0);
+                            LocalGameRestart(FightLoad.Fight.FightMode);
                             UILayerLoader.Remove<CommonFightResult>();
                         },
                         () =>
                         {
-                            LocalGameRestart(2);
+                            LocalGameRestart(FightMode.Rotate);
                             UILayerLoader.Remove<CommonFightResult>();
                         },
                         () =>
                         {
-                            LocalGameRestart(1);
+                            LocalGameRestart(FightMode.Multi);
                             UILayerLoader.Remove<CommonFightResult>();
                         }
                     );
@@ -267,32 +267,20 @@ namespace FightScene
         
         public override void LocalUpdate()
         {
-            if (FightLoad.Fight.FightMode != FightMode.Group && FightLoad.Fight.team1Mode != TeamMode.MultiRaid)
+            if (FightLoad.Fight.FightMode != FightMode.Group && FightLoad.Fight.FightMode != FightMode.Multi)
                 RTFightManager.Target._CameraManager.VisibilityControl.LocalUpdate();
         }
         
-        void LocalGameRestart(int mode)
+        void LocalGameRestart(FightMode mode)
         {
-            switch (mode)
-            {
-                case 0:
-                    break;
-                case 1:
-                    FightLoad.Fight.team1Mode = TeamMode.MultiRaid;
-                    FightLoad.Fight.team2Mode = TeamMode.MultiRaid;
-                    break;
-                case 2:
-                    FightLoad.Fight.team1Mode = TeamMode.Rotation;
-                    FightLoad.Fight.team2Mode = TeamMode.Rotation;
-                    break;
-            }
+            FightLoad.Fight.FightMode = mode;
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
         }
         
         async void SkillTestReload()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(3));
-            FightLoad.Fight = FightInfo.RandomSkillTestStage(FightLoad.Fight.team1Mode);
+            FightLoad.Fight = FightInfo.RandomSkillTestStage(FightLoad.Fight.FightMode);
             LocalGameRestart(0);
         }
     }

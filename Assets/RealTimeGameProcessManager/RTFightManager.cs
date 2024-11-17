@@ -53,32 +53,26 @@ namespace FightScene
         
         public void ModeStart()
         {
-            switch (_loadFight.team1Mode)
+            switch (_loadFight.FightMode)
             {
-                case TeamMode.MultiRaid:
+                case FightMode.Multi:
+                case FightMode.Group:
                     team1.AllUnitsStartOff();
-                    break;
-                case TeamMode.Rotation:
-                    team1.UnitStartOff();
-                    break;
-            }
-            
-            switch (_loadFight.team2Mode)
-            {
-                case TeamMode.MultiRaid:
                     team2.AllUnitsStartOff();
                     break;
-                case TeamMode.Rotation:
+                case FightMode.Rotate:
+                case FightMode.Evolve:
+                    team1.UnitStartOff();
                     team2.UnitStartOff();
                     break;
             }
         }
         
         // 战斗模式相机。根据选择队伍做相应调整。
-        public void CameraAdjustment(Team myTeam, TeamMode teamMode, FightEventType eventType, FightMode fightMode, Transform me = null)
+        public void CameraAdjustment(Team myTeam, FightMode fightMode, Transform me = null)
         {
             C_Mode cMode;
-            if (teamMode == TeamMode.Rotation)
+            if (fightMode is FightMode.Rotate or FightMode.Evolve)
                 cMode = C_Mode.CertainYAntiVibration;
             else
             {
@@ -91,7 +85,7 @@ namespace FightScene
             List<Transform> GetOpponents()
             {
                 List<Transform> returnValue;
-                if (teamMode == TeamMode.Rotation)
+                if (fightMode is FightMode.Rotate or FightMode.Evolve)
                 {
                     returnValue = myTeam == Team.player1
                         ? new List<Transform>() { team2.GetRModeUnitT() }

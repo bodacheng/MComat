@@ -110,21 +110,8 @@ public partial class ArenaFightOver : UILayer
         awardParent.gameObject.SetActive(false);
     }
     
-    void NextFight(TeamMode mode, FightInfo fight)
+    void NextFight(FightInfo fight)
     {
-        switch (mode)
-        {
-            case TeamMode.Keep:
-                fight.team1Mode = (TeamMode)PlayerPrefs.GetInt("preferAdventureMode", PlayerPrefs.GetInt("preferAdventureMode", 2));
-                break;
-            case TeamMode.MultiRaid:
-                fight.team1Mode = TeamMode.MultiRaid;
-                break;
-            case TeamMode.Rotation:
-                fight.team1Mode = TeamMode.Rotation;
-                break;
-        }
-        fight.team2Mode = fight.team1Mode;
         fight.Team1Auto = FightLoad.Fight.Team1Auto;
         fight.Team2Auto = true;
         fight.LoadMyTeam();
@@ -146,15 +133,15 @@ public partial class ArenaFightOver : UILayer
             nextTab.SetUpAction(
                 () =>
                 {
-                    NextFight(nextFight.team2Mode, nextFight);
+                    NextFight(nextFight);
                 },
                 () =>
                 {
-                    NextFight(TeamMode.Rotation, nextFight);
+                    NextFight(nextFight);
                 },
                 () =>
                 {
-                    NextFight(TeamMode.MultiRaid, nextFight);
+                    NextFight(nextFight);
                 }
             );
         }
@@ -184,12 +171,12 @@ public partial class ArenaFightOver : UILayer
         againTab.SetUpAction(
             () =>
             {
-                NextFight(FightLoad.Fight.team1Mode, FightLoad.Fight);
+                NextFight(FightLoad.Fight);
             },
-            ()=> NextFight(TeamMode.Rotation, FightLoad.Fight),
+            ()=> NextFight(FightLoad.Fight),
             () =>
             {
-                NextFight(TeamMode.MultiRaid, FightLoad.Fight);
+                NextFight(FightLoad.Fight);
             }
         );
         

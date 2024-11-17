@@ -9,36 +9,6 @@ public static class FightLoad
     
     public static void Go(FightInfo fightInfo, bool inSceneLoad = false)
     {
-        switch (fightInfo.EventType)
-        {
-            case FightEventType.Quest:
-                switch (fightInfo.FightMode)
-                {
-                    case FightMode.Group:
-                    case FightMode.Multi:
-                        fightInfo.team1Mode = TeamMode.MultiRaid;
-                        fightInfo.team2Mode = TeamMode.MultiRaid;
-                        break;
-                    case FightMode.Evolve:
-                    case FightMode.Rotate:
-                        fightInfo.team1Mode = TeamMode.Rotation;
-                        fightInfo.team2Mode = TeamMode.Rotation;
-                        break;
-                }
-                break;
-            case FightEventType.Event:
-                break;
-            case FightEventType.Screensaver:
-                fightInfo.team1Mode = TeamMode.Rotation;
-                fightInfo.team2Mode = TeamMode.Rotation;
-                break;
-            case FightEventType.Arena:
-            case FightEventType.Self:
-                break;
-            default:
-                break;
-        }
-        
         if (fightInfo.FightMode == FightMode.Group)
         {
             fightInfo.Team1Auto = true;

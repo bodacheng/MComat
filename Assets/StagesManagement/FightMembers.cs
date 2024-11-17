@@ -120,19 +120,21 @@ public class FightMembers
         return target;
     }
     
-    public static FightMembers ScreenSaver(TeamMode teamMode)
+    public static FightMembers ScreenSaver(FightMode fightMode)
     {
         var type = "human";
         var target = new FightMembers();
         var char1 = ArrangeUnitInfo("1");
         var char2 = ArrangeUnitInfo("2");
-        switch (teamMode)
+        switch (fightMode)
         {
-            case TeamMode.MultiRaid:
+            case FightMode.Multi:
+            case FightMode.Group:
                 target.EnemySets.Set(0, 0, char1);
                 target.HeroSets.Set(0, 0, char2);
                 break;
-            case TeamMode.Rotation:
+            case FightMode.Rotate:
+            case FightMode.Evolve:
                 target.EnemySets.Set(0, 0, char1);
                 target.HeroSets.Set(0, 0, char2);
                 break;
