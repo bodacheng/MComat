@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleGroundID: 2
   fightBGM: 0
+  storyKey: 
   unitsData:
   - id: 0
     r_id: 16
@@ -67,15 +68,14 @@ MonoBehaviour:
       c1: 68
       c2: 159
       c3: 103
-  evolutionMode: 1
+  fightMode: 1
   team1HpRate: 1
-  team2HpRate: 3
+  team2HpRate: 1
   team1CGMode: 0
   team2CGMode: 0
-  team1Mode: 2
-  team2Mode: 2
   team1AIMode: 0
   team2AIMode: 0
   dumbAIDecisionDelay: 20
   dreamComboAIRateNum: 100
   stageRefLevel: 0.6
+  team2GroupSet: []

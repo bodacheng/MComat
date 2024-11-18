@@ -70,7 +70,7 @@ MonoBehaviour:
       c3: 9
   fightMode: 1
   team1HpRate: 1
-  team2HpRate: 3
+  team2HpRate: 1
   team1CGMode: 0
   team2CGMode: 0
   team1AIMode: 0
