@@ -14,7 +14,7 @@ public partial class FightParamsReference
     public void PlusDreamGauge(int add)
     {
         if (!Center._MyBehaviorRunner.OnFixedSequence)
-            DreamComboGauge.Value = Mathf.Clamp(DreamComboGauge.Value + add, 0, FightGlobalSetting._DreamComboGaugeMax);
+            DreamComboGauge.Value = Mathf.Clamp(DreamComboGauge.Value + add, 0, FightGlobalSetting.DreamComboGaugeMax);
     }
     
     public void CostCriticalGaugeBySPLevel(int level)
@@ -66,6 +66,6 @@ public partial class FightParamsReference
 
     public bool HasPlentyDreamGauge()
     {
-        return DreamComboGauge.Value >= FightGlobalSetting._DreamComboGaugeMax;
+        return DreamComboGauge.Value >= FightGlobalSetting.DreamComboGaugeMax;
     }
 }

@@ -39,7 +39,7 @@ namespace FightScene
                 }).AddTo(RTFightManager.Target.Disposables);
         }
         
-        public void TeamsIniRotate(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode aiMode, int aiDelayFrame, 
+        public void TeamsIniRotate(float teamHpRate, CriticalGaugeMode teamCgMode, AIMode aiMode, int aiDelayFrame, 
             Func<bool> aiTriggerDreamComboRateCondition, bool evolutionMode = false)
         {
             var list = teamMembers.GetValues();
@@ -49,11 +49,11 @@ namespace FightScene
                 //  时间刷新整备
                 RTFightManager.Target.RefreshTimeDic.Add(center, new ReactiveProperty<float>(0));
                 if (!evolutionMode)
-                    center.Step3Initialize(teamConfig, teamCGMode, aiMode, aiDelayFrame, aiTriggerDreamComboRateCondition, teamHpRate, RTFightManager.Target.UnitInfoRef[center]);
+                    center.Step3Initialize(teamConfig, teamCgMode, aiMode, aiDelayFrame, aiTriggerDreamComboRateCondition, teamHpRate, RTFightManager.Target.UnitInfoRef[center]);
                 else
                 {
-                    float HPRate = index > 2 ? teamHpRate : 1;
-                    center.Step3Initialize(teamConfig, teamCGMode, aiMode, aiDelayFrame, aiTriggerDreamComboRateCondition, HPRate, RTFightManager.Target.UnitInfoRef[center]);
+                    var hpRate = teamHpRate * (index * FightGlobalSetting.EvolutionModeEnemyHpIncreaseRate + 1);
+                    center.Step3Initialize(teamConfig, teamCgMode, aiMode, aiDelayFrame, aiTriggerDreamComboRateCondition, hpRate, RTFightManager.Target.UnitInfoRef[center]);
                 }
                 
                 center.FightDataRef.IsDead.Subscribe(x =>

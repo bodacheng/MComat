@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "FightGlobalSetting", menuName = "ScriptableObjects/FightGlobalSetting", order = 1)]
 public class FightGlobalSetting : ScriptableObject
@@ -16,6 +17,7 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] float closeDis = 2;
     [SerializeField] float AT_coefficient = 1;
     [SerializeField] float HP_coefficient = 1;
+    [SerializeField] float levelPowerAverager = 0.6f;
     [SerializeField] bool Team1Invincible = false;
     [SerializeField] int NormalSkillExGet = 30;
     [SerializeField] int Sp1SkillExGet = 0;
@@ -44,6 +46,7 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] int player1DreamComboAIRateNumM;//玩家队伍共斗模式下非控制队员DreamCombo触发率数字。
     [SerializeField] int arenaEnemyDreamComboAIRate;
     [SerializeField] int energyResolveAfterExtendBoundary = 5;
+    [SerializeField] float evolutionModeEnemyHpIncreaseRate = 0.5f;
     [SerializeField] PhysicMaterial _physicMaterial;
 
     static string fightParamKey = "Config/fight_params";
@@ -55,6 +58,7 @@ public class FightGlobalSetting : ScriptableObject
     public static float _fighterMoveSpeed;
     static float AtCoefficient = 1;
     static float HpCoefficient = 1;
+    static float LevelPowerAverager;
     public static bool _Team1Invincible;
     public static int _NormalSkillExGet;
     public static int _Sp1SkillExGet;
@@ -83,11 +87,12 @@ public class FightGlobalSetting : ScriptableObject
     public static int _ResistanceMax = 120;
     public static float ToEnemyNearestDis = 1;
     public static int _EXMax;
-    public static int _DreamComboGaugeMax;
+    public static int DreamComboGaugeMax;
     public static float DreamComboSpeed;
     public static bool HitBoxLogger = true;
     public static int _defendHP;
-    public static int _energyResolveAfterExtendBoundary;
+    public static float EvolutionModeEnemyHpIncreaseRate;
+    public static int EnergyResolveAfterExtendBoundary;
     public static PhysicMaterial PhysicMaterial;
     
     public void Initialise()
@@ -99,6 +104,7 @@ public class FightGlobalSetting : ScriptableObject
         _fighterMoveSpeed = fighterMoveSpeed;
         AtCoefficient = AT_coefficient;
         HpCoefficient = HP_coefficient;
+        LevelPowerAverager = levelPowerAverager;
         FighterRigidMass = fighterRigidMass;
         OnTouchEnemyBodyRigidDrag = onTouchEnemyBodyRigidDrag;
         _Team1Invincible = Team1Invincible;
@@ -142,11 +148,13 @@ public class FightGlobalSetting : ScriptableObject
         
         _ResistanceMax = resistanceMax;
         _EXMax = eXMax;
-        _DreamComboGaugeMax = dreamComboGaugeMax;
+        DreamComboGaugeMax = dreamComboGaugeMax;
         DreamComboSpeed = dreamComboSpeed;
         
         PhysicMaterial = _physicMaterial;
-        _energyResolveAfterExtendBoundary = energyResolveAfterExtendBoundary;
+        EnergyResolveAfterExtendBoundary = energyResolveAfterExtendBoundary;
+
+        EvolutionModeEnemyHpIncreaseRate = evolutionModeEnemyHpIncreaseRate;
         
         _player1DreamComboAIRateNumM = player1DreamComboAIRateNumM;
         ArenaEnemyDreamComboAIRate = arenaEnemyDreamComboAIRate;
@@ -166,13 +174,13 @@ public class FightGlobalSetting : ScriptableObject
     // ex1 ：20
     // Ex2 ：40
     // Ex3 ：60
-    public static float ATCal(float originAT, float level)
+    public static float ATCal(float originAt, float level)
     {
-        return AtCoefficient * originAT * level;
+        return AtCoefficient * originAt * (level > 1 ? (1 + (level - 1) * LevelPowerAverager) : level);
     }
-    public static float StoneHpCal(float originHP, float level)
+    public static float StoneHpCal(float originHp, float level)
     {
-        return HpCoefficient * originHP * level;
+        return HpCoefficient * originHp * (level > 1 ? (1 + (level - 1) * LevelPowerAverager) : level);
     }
     
     public static string EffectPathDefine(Element element = Element.Null)

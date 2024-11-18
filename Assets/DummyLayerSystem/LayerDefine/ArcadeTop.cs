@@ -121,7 +121,7 @@ public class ArcadeTop : UILayer
         stageBtn.Button.onClick.AddListener(
             ()=>
             {
-                directToStage(stageNo, false);
+                directToStage(stageNo, true);
             }
         );
         stageBtn.name = "Stage" + stageNo;

@@ -115,35 +115,49 @@ public class PreparingProcess : FSceneProcess
         switch (FightLoad.Fight.FightMode)
         {
             case FightMode.Multi:
+                RTFightManager.Target.team1.InitializeMulti(
+                    FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode,
+                    FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay,
+                    CreateRandomBoolFunc(FightGlobalSetting._player1DreamComboAIRateNumM));
+                RTFightManager.Target.team2.InitializeMulti(
+                    FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode,
+                    FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay,
+                    CreateRandomBoolFunc(
+                        FightLoad.Fight.EventType == FightEventType.Arena ? 
+                            FightGlobalSetting.ArenaEnemyDreamComboAIRate : FightLoad.Fight.dreamComboAIRateNum));
+                break;
             case FightMode.Group:
                 RTFightManager.Target.team1.InitializeMulti(
                     FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode,
                     FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay,
-                    CreateRandomBoolFunc(
-                        FightLoad.Fight.FightMode == FightMode.Group ? 100 : 
-                            FightGlobalSetting._player1DreamComboAIRateNumM));
+                    CreateRandomBoolFunc(100));
                 RTFightManager.Target.team2.InitializeMulti(
                     FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode, 
                     FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay,
-                    CreateRandomBoolFunc(
-                        FightLoad.Fight.FightMode == FightMode.Group ? 100 : 
-                            (FightLoad.Fight.EventType == FightEventType.Arena ? 
-                                FightGlobalSetting.ArenaEnemyDreamComboAIRate: FightLoad.Fight.dreamComboAIRateNum))
-                );
+                    CreateRandomBoolFunc(100));
                 break;
             case FightMode.Rotate:
-            case FightMode.Evolve:
                 RTFightManager.Target.team1.TeamsIniRotate(
                     FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode, 
                     FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay,
-                    CreateRandomBoolFunc(0)
-                );
+                    CreateRandomBoolFunc(FightGlobalSetting._player1DreamComboAIRateNumM));
                 RTFightManager.Target.team2.TeamsIniRotate(
                     FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode, 
                     FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay,
                     CreateRandomBoolFunc(FightLoad.Fight.EventType == FightEventType.Arena ? 
-                        FightGlobalSetting.ArenaEnemyDreamComboAIRate: FightLoad.Fight.dreamComboAIRateNum)
-                );
+                        FightGlobalSetting.ArenaEnemyDreamComboAIRate: FightLoad.Fight.dreamComboAIRateNum));
+                break;
+            case FightMode.Evolve:
+                RTFightManager.Target.team1.TeamsIniRotate(
+                    FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode, 
+                    FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay,
+                    CreateRandomBoolFunc(FightGlobalSetting._player1DreamComboAIRateNumM));
+                RTFightManager.Target.team2.TeamsIniRotate(
+                    FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode, 
+                    FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay,
+                    CreateRandomBoolFunc(FightLoad.Fight.EventType == FightEventType.Arena ? 
+                        FightGlobalSetting.ArenaEnemyDreamComboAIRate: FightLoad.Fight.dreamComboAIRateNum), 
+                    true);
                 break;
         }
         

@@ -24,8 +24,6 @@ public class QuestInfoPage : MSceneProcess
             _layer = UILayerLoader.Load<FightPrepareLayer>(false, "FightPrepareLayer_gb");
         }
         
-        _layer.SetFightModeFlg(FightLoad.Fight.FightMode);
-        
         string teamKey;
         switch (FightLoad.Fight.EventType)
         {
@@ -33,6 +31,8 @@ public class QuestInfoPage : MSceneProcess
                 teamKey = "arena";
                 break;
             case FightEventType.Quest:
+                _layer.SetFightModeFlg(FightLoad.Fight.FightMode);
+                
                 if (FightLoad.Fight.FightMode == FightMode.Group)
                 {
                     teamKey = "gangbang";
@@ -49,6 +49,10 @@ public class QuestInfoPage : MSceneProcess
                             break;
                     }
                 }
+                break;
+            case FightEventType.Event:
+                _layer.SetFightModeFlg(FightLoad.Fight.FightMode);
+                teamKey = "origin";
                 break;
             default:
                 teamKey = "origin";
@@ -73,7 +77,7 @@ public class QuestInfoPage : MSceneProcess
                 if (FightLoad.Fight.FightMode == FightMode.Group)
                 {
                     _layer.SetGangbangFeature(FightLoad.Fight,
-                        () => { PreScene.target.trySwitchToStep(MainSceneStep.ArcadeFront, false); },
+                        () => { PreScene.target.trySwitchToStep(MainSceneStep.ArcadeFront); },
                         FightLoad.Fight.ID,
                         (x, y ,z, maxCount) =>
                         {
@@ -112,7 +116,7 @@ public class QuestInfoPage : MSceneProcess
                     _layer.SetArcadeFeature(
                         () =>
                         {
-                            PreScene.target.trySwitchToStep(MainSceneStep.ArcadeFront, false);
+                            PreScene.target.trySwitchToStep(MainSceneStep.ArcadeFront);
                         },
                         FightLoad.Fight.ID
                     );

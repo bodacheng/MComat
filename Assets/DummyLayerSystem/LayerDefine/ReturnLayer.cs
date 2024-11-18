@@ -57,6 +57,9 @@ public class ReturnLayer : UILayer
     {
         void RegisterReturn()
         {
+            var exist = ReturnMissionList.Find(x => x.returnToStep == returnAction.returnToStep);
+            if (exist != null)
+                ReturnMissionList.Remove(exist);
             ReturnMissionList.Add(returnAction);
             var returnLayer = UILayerLoader.Load<ReturnLayer>();
             returnLayer.Setup();
