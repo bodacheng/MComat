@@ -29,8 +29,6 @@ public partial class PlayFabReadClient
     }
     
 #if UNITY_STANDALONE_WIN
-using Steamworks;
-
     static string GetSteamAuthTicket()
     {
         byte[] ticketBlob = new byte[1024];
