@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Text;
 using Cysharp.Threading.Tasks;
 using mainMenu;
-using Steamworks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+#if UNITY_STANDALONE_WIN
+using Steamworks;
+#endif
 
 public partial class PlayFabReadClient
 {
@@ -26,6 +28,9 @@ public partial class PlayFabReadClient
         }
     }
     
+#if UNITY_STANDALONE_WIN
+using Steamworks;
+
     static string GetSteamAuthTicket()
     {
         byte[] ticketBlob = new byte[1024];
@@ -48,6 +53,7 @@ public partial class PlayFabReadClient
         }
         return sb.ToString();
     }
+#endif
     
     public static string DontShowFrontFight
     {
