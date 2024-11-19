@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using IngameDebugConsole;
-using Unity.Collections;
 using UnityEngine;
 using UnityEditor;
 
@@ -15,11 +14,11 @@ public class StarterGUI : Editor
         var s = (Starter)target;
         if (GUILayout.Button("Refresh"))
         {
-            Refresh(s);
+            Refresh(s).Forget();
         }
     }
 
-    async void Refresh(Starter starter)
+    async UniTask Refresh(Starter starter)
     {
         await AddressablesLogic.DownLoadConfig();
         CommonSetting commonSetting = await AddressablesLogic.GetCommonSetting();
@@ -35,11 +34,15 @@ public class Starter : MonoBehaviour
     [SerializeField] PlayFabSetting playFabSetting;
     [SerializeField] DefaultIconSetting defaultIconSetting;
     [SerializeField] DebugLogManager inGameDebugConsole;
+    [SerializeField] SteamManager SteamManager;
     
     public static bool ConfigInitialised = false;
     
     public async UniTask Initialise()
     {
+#if UNITY_STANDALONE_WIN
+        SteamManager.gameObject.SetActive(true);
+#endif
         ConfigInitialised = false;
         AddressablesLogic.ReleaseAsyncOperationHandles();
         inGameDebugConsole.gameObject.SetActive(CommonSetting.DevMode);

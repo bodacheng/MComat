@@ -2,8 +2,10 @@ using PlayFab;
 using PlayFab.ClientModels;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Cysharp.Threading.Tasks;
 using mainMenu;
+using Steamworks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +24,29 @@ public partial class PlayFabReadClient
             PlayerPrefs.Save();
             return customId;
         }
+    }
+    
+    static string GetSteamAuthTicket()
+    {
+        byte[] ticketBlob = new byte[1024];
+        uint ticketSize;
+        SteamNetworkingIdentity identity = new SteamNetworkingIdentity();
+        identity.SetSteamID(SteamUser.GetSteamID());
+
+        HAuthTicket hTicket = SteamUser.GetAuthSessionTicket(ticketBlob, ticketBlob.Length, out ticketSize, ref identity);
+        if (hTicket == HAuthTicket.Invalid)
+        {
+            Debug.LogError("Failed to get auth session ticket.");
+            return null;
+        }
+        
+        Array.Resize(ref ticketBlob, (int)ticketSize);
+        StringBuilder sb = new StringBuilder();
+        foreach (byte b in ticketBlob)
+        {
+            sb.AppendFormat("{0:x2}", b);
+        }
+        return sb.ToString();
     }
     
     public static string DontShowFrontFight
@@ -107,15 +132,32 @@ public partial class PlayFabReadClient
 #endif
         
 #if UNITY_STANDALONE_WIN
-        PlayFabClientAPI.LoginWithCustomID(
-            new LoginWithCustomIDRequest
-            {
-                CustomId = CustomId,
-                CreateAccount = true
-            },
-            (x)=>success.Invoke(x, LoginType.normal),
-            ErrorReport
-        );
+        if (SteamManager.Initialized) {
+            // Execute PlayFab API call to log in with steam ticket
+            PlayFabClientAPI.LoginWithSteam(
+                new LoginWithSteamRequest 
+                {
+                    CreateAccount = true,
+                    SteamTicket = GetSteamAuthTicket()
+                }, 
+                (x)=>success.Invoke(x, LoginType.normal),
+                ErrorReport
+            );
+        }
+        else
+        {
+            PlayFabClientAPI.LoginWithCustomID(
+                new LoginWithCustomIDRequest
+                {
+                    CustomId = CustomId,
+                    CreateAccount = true
+                },
+                (x)=>success.Invoke(x, LoginType.normal),
+                ErrorReport
+            );
+        }
+        
+
 #endif
     }
     

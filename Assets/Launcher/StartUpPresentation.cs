@@ -142,7 +142,7 @@ public class StartUpPresentation : MonoBehaviour
         }
         else
         {
-            Go(); // no asset to download.begin directly 
+            Go().Forget(); // no asset to download.begin directly 
         }
     }
     
@@ -174,7 +174,7 @@ public class StartUpPresentation : MonoBehaviour
         );
     }
 
-    async void Go()
+    async UniTask Go()
     {
         HighLightLayer.Close();
         await starter.Initialise();
