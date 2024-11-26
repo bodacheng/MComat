@@ -383,10 +383,10 @@ public partial class FightInfo : ScriptableObject
         return stage;
     }
     
-    public static FightInfo RandomStage()
+    public static FightInfo RandomStage(int mode = 0)
     {
         var stage = CreateInstance<FightInfo>();
-        stage.FightMembers = FightMembers.RandomFight();
+        stage.FightMembers = FightMembers.RandomFight(mode);
         stage.battleGroundID = 0;
         stage.fightBGM = 0;
         stage.EventType = FightEventType.Arena;

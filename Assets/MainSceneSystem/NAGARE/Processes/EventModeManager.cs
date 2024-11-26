@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using mainMenu;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
@@ -14,6 +13,10 @@ public class EventModeManager
     private IResourceLocation easyModePath, normalModePath, hardModePath;
     private FightInfo easyMode, normalMode, hardMode;
     private List<string> completedLevels;
+
+    public FightInfo EasyMode => easyMode;
+    public FightInfo NormalMode => normalMode;
+    public FightInfo HardMode => hardMode;
     
     public static readonly EventModeManager Instance = new EventModeManager();
 
@@ -67,6 +70,20 @@ public class EventModeManager
         if (hardModePath != null)
             hardMode = await LoadStage(hardModePath);
     }
+    
+    public void InitializeRandomMode(string uniqueId)
+    {
+        Debug.Log("日期字符串："+ uniqueId);
+        easyMode = LoadRandomStage();
+        easyMode.stageRefLevel = 2;
+        easyMode.ID = "easy_"+ uniqueId;
+        normalMode = LoadRandomStage(1);
+        normalMode.stageRefLevel = 5;
+        normalMode.ID = "normal_"+ uniqueId;
+        hardMode = LoadRandomStage(2);
+        hardMode.stageRefLevel = 10;
+        hardMode.ID = "hard_"+ uniqueId;
+    }
 
     public UnitInfo GetRepresentativeUnit()
     {
@@ -87,7 +104,28 @@ public class EventModeManager
         return fightInfo;
     }
     
-    public void OnCloudScriptSuccess(ExecuteCloudScriptResult result, EventBattleTop layer)
+    FightInfo LoadRandomStage(int mode = 0)
+    {
+        FightInfo fightInfo = FightInfo.RandomStage(mode);
+        fightInfo.EventType = FightEventType.Event;
+        fightInfo.SetUnitLevelByRefLevel();
+        fightInfo.SaveDicToData();
+        switch (mode)
+        {
+            case 1:
+                fightInfo.team2CGMode = CriticalGaugeMode.DoubleGain;
+                break;
+            case 2:
+                fightInfo.team2CGMode = CriticalGaugeMode.Unlimited;
+                break;
+            default:
+                fightInfo.team2CGMode = CriticalGaugeMode.Normal;
+                break;
+        }
+        return fightInfo;
+    }
+    
+    public void OnCloudScriptSuccess(ExecuteCloudScriptResult result)
     {
         if (result.Error != null) {
             Debug.LogError("Cloud Script Error: " + result.Error.Message);
@@ -108,34 +146,6 @@ public class EventModeManager
         else
         {
             Debug.Log("No completed event battles found.");
-            return;
-        }
-        
-        if (layer == null)
-            return;
-        
-        if (easyModePath != null)
-        {
-            layer.EasyModeBtn.Setup(() =>
-            {
-                PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, easyMode, true);
-            }, PlayFabReadClient.EventAwards["easy"],  CompletedLevels.Contains(easyMode.ID), easyMode.team2CGMode);
-        }
-        
-        if (normalModePath != null)
-        {
-            layer.NormalModeBtn.Setup(() =>
-            {
-                PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, normalMode, true);
-            }, PlayFabReadClient.EventAwards["normal"],CompletedLevels.Contains(normalMode.ID), normalMode.team2CGMode);
-        }
-        
-        if (hardModePath != null)
-        {
-            layer.HardModeBtn.Setup(() =>
-            {
-                PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, hardMode, true);
-            }, PlayFabReadClient.EventAwards["hard"],CompletedLevels.Contains(hardMode.ID), hardMode.team2CGMode);
         }
     }
 }

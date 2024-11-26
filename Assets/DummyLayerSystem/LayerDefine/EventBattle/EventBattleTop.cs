@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using mainMenu;
 using UnityEngine;
 using ModelView;
 
@@ -16,9 +18,24 @@ public class EventBattleTop : UILayer
     public EventBattleButton NormalModeBtn => normalModeBtn;
     public EventBattleButton HardModeBtn => hardModeBtn;
     
-    public void SetupCommon()
+    public void SetupCommon(List<string> completedLevels, FightInfo easyMode, FightInfo normalMode, FightInfo hardMode)
     {
         ResizeCameraConnectorRefLeft(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+        
+        EasyModeBtn.Setup(() =>
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, easyMode, true);
+        }, PlayFabReadClient.EventAwards["easy"],  completedLevels.Contains(easyMode.ID), easyMode.team2CGMode);
+        
+        NormalModeBtn.Setup(() =>
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, normalMode, true);
+        }, PlayFabReadClient.EventAwards["normal"],  completedLevels.Contains(normalMode.ID), normalMode.team2CGMode);
+        
+        HardModeBtn.Setup(() =>
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.QuestInfo, hardMode, true);
+        }, PlayFabReadClient.EventAwards["hard"],  completedLevels.Contains(hardMode.ID), hardMode.team2CGMode);
     }
 
     public async UniTask IconButtonFeature(UnitInfo unitInfo)
