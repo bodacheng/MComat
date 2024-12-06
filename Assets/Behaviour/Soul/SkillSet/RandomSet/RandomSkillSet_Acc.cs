@@ -104,7 +104,7 @@ public partial class SkillSet
     static SkillSet RandomSkillSetRec(SkillSet skillSet, List<int> remainSlots, SkillConfig origin, bool baseOnAcc, 
         SkillStonesBox.StoneFilterForm filterForm, bool noSpLimit = false)
     {
-        Random random = new Random();
+        var random = new Random();
         int randomIndex = random.Next(remainSlots.Count); // Get a random index
         int targetSlot = remainSlots[randomIndex]; // Get the random item
         remainSlots.Remove(targetSlot);

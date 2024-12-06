@@ -10,13 +10,13 @@ using UnityEngine;
 
 public class EventModeManager
 {
-    private IResourceLocation easyModePath, normalModePath, hardModePath;
-    private FightInfo easyMode, normalMode, hardMode;
-    private List<string> completedLevels;
-
-    public FightInfo EasyMode => easyMode;
-    public FightInfo NormalMode => normalMode;
-    public FightInfo HardMode => hardMode;
+    private IResourceLocation _easyModePath, _normalModePath, _hardModePath;
+    private FightInfo _easyMode, _normalMode, _hardMode;
+    private List<string> _completedLevels;
+    
+    public FightInfo EasyMode => _easyMode;
+    public FightInfo NormalMode => _normalMode;
+    public FightInfo HardMode => _hardMode;
     
     public static readonly EventModeManager Instance = new EventModeManager();
 
@@ -24,15 +24,15 @@ public class EventModeManager
     {
         get
         {
-            if (completedLevels != null)
-                return completedLevels;
+            if (_completedLevels != null)
+                return _completedLevels;
             else
             {
-                completedLevels = new List<string>();
-                return completedLevels;
+                _completedLevels = new List<string>();
+                return _completedLevels;
             }
         }
-        set => completedLevels = value;
+        set => _completedLevels = value;
     }
     
     /// <summary>
@@ -49,49 +49,48 @@ public class EventModeManager
             {
                 if (stageLocation.PrimaryKey.Contains("easy"))
                 {
-                    easyModePath = stageLocation;
+                    _easyModePath = stageLocation;
                 }
                 if (stageLocation.PrimaryKey.Contains("normal"))
                 {
-                    normalModePath = stageLocation;
+                    _normalModePath = stageLocation;
                 }
                 if (stageLocation.PrimaryKey.Contains("hard"))
                 {
-                    hardModePath = stageLocation;
+                    _hardModePath = stageLocation;
                 }
             }
         }
         Addressables.Release(locationHandle);
         
-        if (easyModePath != null)
-            easyMode = await LoadStage(easyModePath);
-        if (normalModePath != null)
-            normalMode = await LoadStage(normalModePath);
-        if (hardModePath != null)
-            hardMode = await LoadStage(hardModePath);
+        if (_easyModePath != null)
+            _easyMode = await LoadStage(_easyModePath);
+        if (_normalModePath != null)
+            _normalMode = await LoadStage(_normalModePath);
+        if (_hardModePath != null)
+            _hardMode = await LoadStage(_hardModePath);
     }
     
     public void InitializeRandomMode(string uniqueId)
     {
-        Debug.Log("日期字符串："+ uniqueId);
-        easyMode = LoadRandomStage();
-        easyMode.stageRefLevel = 2;
-        easyMode.ID = "easy_"+ uniqueId;
-        normalMode = LoadRandomStage(1);
-        normalMode.stageRefLevel = 5;
-        normalMode.ID = "normal_"+ uniqueId;
-        hardMode = LoadRandomStage(2);
-        hardMode.stageRefLevel = 10;
-        hardMode.ID = "hard_"+ uniqueId;
+        _easyMode = LoadRandomStage(CriticalGaugeMode.Normal, 3);
+        _easyMode.stageRefLevel = 2;
+        _easyMode.ID = "easy_"+ uniqueId;
+        _normalMode = LoadRandomStage(CriticalGaugeMode.DoubleGain, 2);
+        _normalMode.stageRefLevel = 5;
+        _normalMode.ID = "normal_"+ uniqueId;
+        _hardMode = LoadRandomStage(CriticalGaugeMode.Unlimited, 1);
+        _hardMode.stageRefLevel = 10;
+        _hardMode.ID = "hard_"+ uniqueId;
     }
 
     public UnitInfo GetRepresentativeUnit()
     {
-        var unit1 = hardMode?.UnitsData.FirstOrDefault();
+        var unit1 = _hardMode?.UnitsData.FirstOrDefault();
         if (unit1 != null) return unit1;
-        var unit2 = normalMode?.UnitsData.FirstOrDefault();
+        var unit2 = _normalMode?.UnitsData.FirstOrDefault();
         if (unit2 != null) return unit2;
-        var unit3 = easyMode?.UnitsData.FirstOrDefault();
+        var unit3 = _easyMode?.UnitsData.FirstOrDefault();
         if (unit3 != null) return unit3;
         return null;
     }
@@ -103,25 +102,14 @@ public class EventModeManager
         fightInfo.SetUnitLevelByRefLevel();
         return fightInfo;
     }
-    
-    FightInfo LoadRandomStage(int mode = 0)
+
+    FightInfo LoadRandomStage(CriticalGaugeMode mode = CriticalGaugeMode.Normal, int unitCount = 3)
     {
-        FightInfo fightInfo = FightInfo.RandomStage(mode);
+        var fightInfo = FightInfo.RandomStage(mode, unitCount);
         fightInfo.EventType = FightEventType.Event;
         fightInfo.SetUnitLevelByRefLevel();
         fightInfo.SaveDicToData();
-        switch (mode)
-        {
-            case 1:
-                fightInfo.team2CGMode = CriticalGaugeMode.DoubleGain;
-                break;
-            case 2:
-                fightInfo.team2CGMode = CriticalGaugeMode.Unlimited;
-                break;
-            default:
-                fightInfo.team2CGMode = CriticalGaugeMode.Normal;
-                break;
-        }
+        fightInfo.team2CGMode = mode;
         return fightInfo;
     }
     

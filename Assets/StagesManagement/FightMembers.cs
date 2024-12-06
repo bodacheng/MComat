@@ -46,18 +46,18 @@ public class FightMembers
     {
     }
     
-    static UnitInfo ArrangeUnitInfo(string unitRecordID, int mode = 0)
+    static UnitInfo ArrangeUnitInfo(string unitRecordID, CriticalGaugeMode mode = CriticalGaugeMode.Normal)
     {
         var skillId = UnitPassiveTable.GetUnitPassiveRecordId(unitRecordID);
         var unitConfig = Units.GetUnitConfig(unitRecordID);
         SkillStonesBox.StoneFilterForm form = new SkillStonesBox.StoneFilterForm(unitConfig.TYPE);
         switch (mode)
         {
-            case 1:
-                form.ExType = new[] {1,2};
+            case CriticalGaugeMode.DoubleGain:
+                form.ExType = new[] { 1, 2, 3 };
                 break;
-            case 2:
-                form.ExType = new[] { 2, 3 };
+            case CriticalGaugeMode.Unlimited:
+                form.ExType = new[] { 1, 2, 3 };
                 break;
             default:
                 break;
@@ -67,25 +67,22 @@ public class FightMembers
         {
             id = unitRecordID,
             r_id = unitRecordID,
-            set = SkillSet.RandomSkillSet(skillId ,false, form)
+            set = SkillSet.RandomSkillSet(skillId ,false, form, mode == CriticalGaugeMode.Unlimited)
         };
         return unitInfo;
     }
     
-    public static FightMembers RandomFight(int mode = 0)
+    public static FightMembers RandomFight(CriticalGaugeMode mode = CriticalGaugeMode.Normal, int unitCount = 3)
     {
         var unitIDsAndNames = Units.GetMonsterIDsAndNamesDic("human");
-        var indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 3);
+        var indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, unitCount);
         var recordIds = unitIDsAndNames.Keys.ToList();
         var target = new FightMembers();
-        var char1 = ArrangeUnitInfo(recordIds[indexes[0]], mode);
-        var char2 = ArrangeUnitInfo(recordIds[indexes[1]], mode);
-        var char3 = ArrangeUnitInfo(recordIds[indexes[2]], mode);
-        
-        target.EnemySets.Set(0, 0, char1);
-        target.EnemySets.Set(0, 1, char2);
-        target.EnemySets.Set(0, 2, char3);
-        
+        for (int i = 0; i < unitCount; i++)
+        {
+            var unit = ArrangeUnitInfo(recordIds[indexes[i]], mode);
+            target.EnemySets.Set(0, i, unit);
+        }
         return target;
     }
     
