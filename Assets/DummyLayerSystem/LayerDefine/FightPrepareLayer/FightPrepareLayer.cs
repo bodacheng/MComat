@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using dataAccess;
 using mainMenu;
 using ModelView;
 
@@ -156,10 +157,36 @@ public partial class FightPrepareLayer : UILayer
             },
             myTeamShowT, true, PlayerAccountInfo.Me.tutorialProgress == "Finished");
 
-        bool hasExtraSeat = (stage.EventType != FightEventType.Quest &&
-                             (dataAccess.Units.Dic.Count > stage.FightMembers.HeroSets.GetValues().Count
-                              && stage.FightMembers.HeroSets.GetValues().Count < 3));
+        string teamKey;
+        switch (stage.EventType)
+        {
+            case FightEventType.Arena:
+                teamKey = "arena";
+                break;
+            case FightEventType.Quest:
+                if (FightLoad.Fight.FightMode == FightMode.Group)
+                {
+                    teamKey = "gangbang";
+                }
+                else
+                {
+                    switch (FightLoad.Fight.FightMode)
+                    {
+                        case FightMode.Evolve:
+                            teamKey = "arcade";
+                            break;
+                        default:
+                            teamKey = "origin";
+                            break;
+                    }
+                }
+                break;
+            default:
+                teamKey = "origin";
+                break;
+        }
         
+        bool hasExtraSeat = !TeamSet.Legal(teamKey);
         if (hasExtraSeat)
         {
             teamEditIndicatorText.text = Translate.Get("HasExtraSeat");

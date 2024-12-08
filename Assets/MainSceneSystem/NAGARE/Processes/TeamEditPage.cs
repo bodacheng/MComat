@@ -2,7 +2,6 @@
 using dataAccess;
 using System.Collections.Generic;
 using DummyLayerSystem;
-using UnityEngine;
 
 public class TeamEditPage : MSceneProcess
 {
@@ -30,7 +29,7 @@ public class TeamEditPage : MSceneProcess
         {
             case "arcade":
                 teamSingleSelectLayer = UILayerLoader.Load<TeamSingleSelectLayer>();
-                teamSingleSelectLayer.Ini(teamMode, Save, Legal, PlayerAccountInfo.Me.tutorialProgress != "Finished");
+                teamSingleSelectLayer.Ini(teamMode, Save, TeamSet.Legal, PlayerAccountInfo.Me.tutorialProgress != "Finished");
                 unitsLayer.SetDisplayUnitIconsAfterAction(() =>
                 {
                     unitsLayer.SetUnitsIconOnClick(
@@ -47,7 +46,7 @@ public class TeamEditPage : MSceneProcess
                 break;
             default:
                 teamEditLayer = UILayerLoader.Load<TeamEditLayer>();
-                teamEditLayer.Ini(teamMode, Save, Legal, PlayerAccountInfo.Me.tutorialProgress != "Finished");
+                teamEditLayer.Ini(teamMode, Save, TeamSet.Legal, PlayerAccountInfo.Me.tutorialProgress != "Finished");
                 unitsLayer.SetDisplayUnitIconsAfterAction(() =>
                 {
                     unitsLayer.SetUnitsIconOnClick((x) => teamEditLayer.UnitIconClick(x, this._teamMode));
@@ -112,60 +111,6 @@ public class TeamEditPage : MSceneProcess
         UILayerLoader.Remove<TeamSingleSelectLayer>();
     }
     
-    private bool Legal(string teamMode)
-    {
-        var qualified = true;
-        var unitCount = 0;
-        PosKeySet targetTeamSet = null;
-        switch (teamMode)
-        {
-            case "arena":
-                targetTeamSet = TeamSet.Arena3V3;
-                break;
-            case "arcade":
-                targetTeamSet = TeamSet.Default;
-                break;
-            case "origin":
-                targetTeamSet = TeamSet.Origin;
-                break;
-            case "gangbang":
-                targetTeamSet = TeamSet.Gangbang;
-                break;
-        }
-        
-        var teamDic = targetTeamSet.LoadTeamDic();
-        qualified = FightMembers.TeamLegal(teamDic);
-        if (!qualified)
-            return false;
-        foreach (var kv in teamDic.mDict)
-        {
-            if (kv.Value.id != null && dataAccess.Units.Get(kv.Value.id) != null)
-            {
-                qualified = qualified && (Stones.GetEquippingStones(kv.Value.id).Count == 9);
-                unitCount += 1;
-            }
-            else
-            {
-                qualified = false;
-            }
-            if (!qualified)
-                break;
-        }
-        
-        switch (teamMode)
-        {
-            case "arena":
-            case "origin":
-                qualified = qualified && unitCount == 3;
-                break;
-            case "arcade":
-            case "gangbang":
-                qualified = qualified && unitCount > 0;
-                break;
-        }
-        return qualified;
-    }
-    
     void Save()
     {
         ProgressLayer.Loading(string.Empty);
@@ -181,7 +126,7 @@ public class TeamEditPage : MSceneProcess
                     }
                 );
                 
-                bool qualified = Legal(_teamMode);
+                bool qualified = TeamSet.Legal(_teamMode);
                 if (qualified)
                 {
                     CloudScript.ArenaDefendTeamSave(TeamSet.Arena3V3.LoadTeamDic(), TeamSaveFinished);

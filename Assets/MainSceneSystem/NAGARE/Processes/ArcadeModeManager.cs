@@ -40,6 +40,7 @@ public class ArcadeModeManager
             return null;
         var fightInfo = await AddressablesLogic.LoadT<FightInfo>(location);
         fightInfo.EventType = FightEventType.Quest;
+        fightInfo.FightMembers.EnemySets.ConvertSerializableArrayToDictionary();
         fightInfo.SetUnitLevelByRefLevel();
         return fightInfo;
     }

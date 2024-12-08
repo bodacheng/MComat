@@ -230,7 +230,7 @@ Player,Player,味方,我方
 Enemy,Enemy,敵,敌方
 Edit,Edit,編成,编成
 MakeYourTeam,Choose characters,キャラクターを選ぶ,选择出战角色
-HasExtraSeat,Warrior available for battle,参戦できる戦士がいます,有可以参战的角色
+HasExtraSeat,Edit the team,チームを編集する,编辑队伍
 HasExtraSeatButFight,You have fighters available for battle that haven't been added to the team. Do you still want to start the fight?,参戦できる戦士が編成されていません。それでも戦いを開始しますか？,你有可以参战的战士未编辑入队，仍然开始战斗吗
 HasExtraSeatForGangbangButFight,"The number of fighters participating in the battle has not reached the maximum limit. 
 Do you still want to start the fight?","戦士の数が設定上限に達していません。
