@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using dataAccess;
 using mainMenu;
-using UnityEngine;
 
 public class TutorialRunner
 {
@@ -46,7 +45,7 @@ public class TutorialRunner
         _tutorialProcesses.Add(waitFighting);
         ArcadeModeManager.Instance.DirectToArcadeStage(PlayerAccountInfo.Me.arcadeProcess + 1, false);
     }
-
+    
     void GenerateStep3Tutorial()
     {
         if (ProcessesRunner.Main.currentProcess == null || ProcessesRunner.Main.currentProcess.Step != MainSceneStep.FrontPage)
