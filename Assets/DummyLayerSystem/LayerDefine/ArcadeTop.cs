@@ -143,6 +143,38 @@ public class ArcadeTop : UILayer
             }
         }
         stageBtn.SetFightModeFlg(one.FightMode);
+        var getUnitRId = UnitGetChart(stageNo);
+        var unitCheck = dataAccess.Units.GetByRId(getUnitRId);
+        if (unitCheck == null)
+            stageBtn.ShowUnitGetInfo(getUnitRId);
+        
+        string UnitGetChart(int stageNo)
+        {
+            string unitAward = null;
+            switch (stageNo) {
+                case 1:
+                    unitAward = "1";
+                    break;
+                case 5:
+                    unitAward = "2";
+                    break;
+                case 20:
+                    unitAward = "4";
+                    break;
+                case 35:
+                    unitAward = "7";
+                    break;
+                case 50:
+                    unitAward = "6";
+                    break;
+                case 100:
+                    unitAward = "5";
+                    break;
+                default:
+                    break;
+            }
+            return unitAward;
+        }
     }
 
     void Refresh(int progress, IDictionary<string, Award> stageAwards)

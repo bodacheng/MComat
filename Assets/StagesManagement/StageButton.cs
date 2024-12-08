@@ -21,6 +21,9 @@ public partial class StageButton : MonoBehaviour
     [SerializeField] GameObject eModeFlg;
     [SerializeField] GameObject gModeFlg;
     
+    [SerializeField] GameObject unitGetChanceFlg;
+    [SerializeField] HeroIcon unitGetIcon;
+    
     public Button Button => button;
     public RewardUI RewardUI => rewardUI;
     
@@ -51,7 +54,7 @@ public partial class StageButton : MonoBehaviour
         id.color = new Color(id.color.r, id.color.g, id.color.b, on ? 1 : 0.3f);
         button.interactable = on;
     }
-
+    
     public void SetFightModeFlg(FightMode fightMode)
     {
         gModeFlg.SetActive(fightMode == FightMode.Group);
@@ -104,5 +107,13 @@ public partial class StageButton : MonoBehaviour
             icons[i].iconButton.targetGraphic.raycastTarget = true;
         }
         return icons;
+    }
+
+    public void ShowUnitGetInfo(string unitGetId)
+    {
+        if (string.IsNullOrEmpty(unitGetId))
+            return;
+        unitGetChanceFlg.SetActive(true);
+        unitGetIcon.ChangeIcon(unitGetId);
     }
 }
