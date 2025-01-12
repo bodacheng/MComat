@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf3bb8ad816a44358eca5831d97217e, type: 3}
   m_Name: 31
   m_EditorClassIdentifier: 
-  battleGroundID: 2
+  battleGroundID: 1
   fightBGM: 0
   storyKey: 
   unitsData:
   - id: 0
     r_id: 12
-    level: 0.8
+    level: 1.5
     set:
       a1: 182
       a2: 99
@@ -31,7 +31,7 @@ MonoBehaviour:
       c3: 37
   - id: 1
     r_id: 12
-    level: 0.8
+    level: 1.5
     set:
       a1: 80
       a2: 89
@@ -44,7 +44,7 @@ MonoBehaviour:
       c3: 42
   - id: 2
     r_id: 12
-    level: 0.8
+    level: 1.5
     set:
       a1: 10
       a2: 159
@@ -57,7 +57,7 @@ MonoBehaviour:
       c3: 39
   - id: 3
     r_id: 6
-    level: 0.8
+    level: 1.5
     set:
       a1: 42
       a2: 148
@@ -68,7 +68,7 @@ MonoBehaviour:
       c1: 167
       c2: 3
       c3: 179
-  fightMode: 1
+  fightMode: 3
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0

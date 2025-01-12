@@ -18,7 +18,7 @@ MonoBehaviour:
   unitsData:
   - id: 0
     r_id: 16
-    level: 0.9
+    level: 2
     set:
       a1: 125
       a2: 3
@@ -31,7 +31,7 @@ MonoBehaviour:
       c3: 42
   - id: 1
     r_id: 16
-    level: 0.9
+    level: 2
     set:
       a1: 42
       a2: 102
@@ -44,7 +44,7 @@ MonoBehaviour:
       c3: 55
   - id: 2
     r_id: 16
-    level: 0.9
+    level: 2
     set:
       a1: 5
       a2: 4
@@ -57,7 +57,7 @@ MonoBehaviour:
       c3: 53
   - id: 3
     r_id: 3
-    level: 0.9
+    level: 2
     set:
       a1: 53
       a2: 150
@@ -68,7 +68,7 @@ MonoBehaviour:
       c1: 80
       c2: 45
       c3: 172
-  fightMode: 1
+  fightMode: 2
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0

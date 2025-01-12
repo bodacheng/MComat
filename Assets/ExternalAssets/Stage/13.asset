@@ -68,7 +68,7 @@ MonoBehaviour:
       c1: 162
       c2: 137
       c3: 42
-  fightMode: 1
+  fightMode: 2
   team1HpRate: 1
   team2HpRate: 1
   team1CGMode: 0
