@@ -8,11 +8,11 @@
       "hash": "f9fd769be7c634610f2a61aa914a1a55f34740e1"
     },
     "com.google.external-dependency-manager": {
-      "version": "https://github.com/google-unity/external-dependency-manager.git",
+      "version": "https://github.com/googlesamples/unity-jar-resolver.git?path=upm",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "d5ff67d7b8fe2aea1ae801aaba2d6f2dbad39917"
+      "hash": "53512416fb0ec45712442c7e04f2b8084b2ac92a"
     },
     "com.heurekagames.assethunterpro": {
       "version": "file:com.heurekagames.assethunterpro",
