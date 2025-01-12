@@ -98,7 +98,9 @@ public class ArcadeTop : UILayer
         var tasks = new List<UniTask>();
         for (var index = 0; index < _currentStages.Count; index++)
         {
-            tasks.Add(LoadStage(_currentStages[index]));
+            tasks.Add(LoadStage(_currentStages[index], 
+                _currentStages[index] == 
+                (step == MainSceneStep.ArcadeFront ? PlayerAccountInfo.Me.arcadeProcess : PlayerAccountInfo.Me.gangbangProcess) + 1));
         }
         await UniTask.WhenAll(tasks);
         Refresh(step == MainSceneStep.ArcadeFront ? PlayerAccountInfo.Me.arcadeProcess : PlayerAccountInfo.Me.gangbangProcess,  
@@ -108,7 +110,7 @@ public class ArcadeTop : UILayer
         ProgressLayer.Close();
     }
     
-    async UniTask LoadStage(int stageNo)
+    async UniTask LoadStage(int stageNo, bool isNewStage = false)
     {
         var one = await LoadStageMethod(stageNo);
         if (one == null)
@@ -127,6 +129,7 @@ public class ArcadeTop : UILayer
         stageBtn.name = "Stage" + stageNo;
         stageBtn.StageNo = stageNo;
         stageBtn.CriticalGaugeMode = one.FightMode == FightMode.Evolve ? CriticalGaugeMode.Normal : one.team2CGMode;
+        stageBtn.NewFlg.SetActive(isNewStage);
         if (one.FightMembers != null)
         {
             if (one.FightMode is FightMode.Group)

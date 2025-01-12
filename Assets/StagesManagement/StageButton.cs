@@ -20,12 +20,14 @@ public partial class StageButton : MonoBehaviour
     [SerializeField] GameObject mModeFlg;
     [SerializeField] GameObject eModeFlg;
     [SerializeField] GameObject gModeFlg;
-    
+
+    [SerializeField] GameObject newFlg;
     [SerializeField] GameObject unitGetChanceFlg;
     [SerializeField] HeroIcon unitGetIcon;
     
     public Button Button => button;
     public RewardUI RewardUI => rewardUI;
+    public GameObject NewFlg => newFlg;
     
     public CriticalGaugeMode CriticalGaugeMode
     {
