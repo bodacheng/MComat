@@ -97,16 +97,17 @@ public class ReturnLayer : UILayer
         var layer = UILayerLoader.Get<ReturnLayer>();
         if (layer != null)
         {
-            void triggerCts()
+            void TriggerCts()
             {
                 if (cts != null && !cts.IsCancellationRequested)
                     cts.Cancel();
+                cts = null;
             }
             
             layer.returnButton.onClick.AddListener(() =>
             {
-                triggerCts();
-                layer.returnButton.onClick.RemoveListener(triggerCts);
+                TriggerCts();
+                layer.returnButton.onClick.RemoveListener(TriggerCts);
             });
         }
     }

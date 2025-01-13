@@ -14,10 +14,9 @@ public class OnDestroyCallback : MonoBehaviour {
         onDestroyCallback.onDestroy += callback;
     }
 
-    private void OnDestroy() {
-        if (onDestroy != null) {
-            onDestroy();
-        }
+    private void OnDestroy()
+    {
+        onDestroy?.Invoke();
     }
 }
 

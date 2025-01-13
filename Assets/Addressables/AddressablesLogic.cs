@@ -296,11 +296,12 @@ public static class AddressablesLogic
             if (_cancellationTokenSource != null)
             {
                 await handle.ToUniTask(cancellationToken: _cancellationTokenSource.Token);
-                // 检查是否已取消
-                _cancellationTokenSource.Token.ThrowIfCancellationRequested();
             }
-        
-            await handle.Task;
+            else
+            {
+                await handle.Task;
+            }
+            
             if (handle.IsValid() && handle.Status != AsyncOperationStatus.Succeeded)
             {
                 Debug.Log($"Failed to load : {prefabPathName}");
