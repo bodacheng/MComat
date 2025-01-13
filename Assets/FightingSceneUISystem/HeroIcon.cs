@@ -75,7 +75,7 @@ public class HeroIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     
     public async void ChangeIcon(string recordId)
     {
-        this.unitConfig = Units.GetUnitConfig(recordId);
+        unitConfig = Units.GetUnitConfig(recordId);
         var pic = await UnitIconDic.Load(recordId, gameObject);
         ChangeIcon(pic, unitConfig.element);
     }

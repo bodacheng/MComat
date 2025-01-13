@@ -147,14 +147,16 @@ public class ArcadeTop : UILayer
         }
         stageBtn.SetFightModeFlg(one.FightMode);
         var getUnitRId = UnitGetChart(stageNo);
-        var unitCheck = dataAccess.Units.GetByRId(getUnitRId);
-        if (unitCheck == null)
+        var unitCheck = Units.GetUnitConfig(getUnitRId);
+        if (unitCheck != null)
+        {
             stageBtn.ShowUnitGetInfo(getUnitRId);
+        }
         
-        string UnitGetChart(int stageNo)
+        string UnitGetChart(int stage)
         {
             string unitAward = null;
-            switch (stageNo) {
+            switch (stage) {
                 case 1:
                     unitAward = "1";
                     break;
