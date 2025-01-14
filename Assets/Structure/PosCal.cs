@@ -21,6 +21,19 @@ public static class PosCal
         resolution.y = (int)(resolution.y * (Screen.height / (float)Screen.safeArea.height));
         CanvasScaler.referenceResolution = resolution;
     }
+
+    public static (float, float) GetSafeAreaWidthAndHeightInCanvas()
+    {
+        Rect safeArea = Screen.safeArea;
+        
+        // 获取 Canvas 缩放因子
+        float scaleFactor = Canvas.scaleFactor;
+
+        // 将 safeArea 的宽高转换为 Canvas 的坐标
+        float safeAreaWidthInCanvas = safeArea.width / scaleFactor;
+        float safeAreaHeightInCanvas = safeArea.height / scaleFactor;
+        return (safeAreaWidthInCanvas, safeAreaHeightInCanvas);
+    }
     
     /// <summary>
     /// 九宫格的slot特效在比1920x1080更长的设备上并不会出现尺寸变不匹配问题

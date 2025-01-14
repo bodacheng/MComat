@@ -16,6 +16,8 @@ public class InBattleEvolution : UILayer
     [SerializeField] private GameObject selectedFrame;
     [SerializeField] private float animEndInSeconds = 0.5f;
     [SerializeField] private float animEndOutSeconds = 0.2f;
+
+    [SerializeField] private float atLeastTwoSideSizeInterval = 50;
     
     public async void Setup(Data_Center focusUnit, Action onFinishedSkillEvolution, string upperText, string bottomText)
     {
@@ -23,15 +25,15 @@ public class InBattleEvolution : UILayer
         // 取原本的 y，不改它
         float currentY = skillOptionsT.anchoredPosition.y;
         // 新的 X 值
-        float newX = PosCal.CanvasWidth - PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1;
-        skillOptionsT.anchoredPosition = new Vector2(newX, currentY);
+        float leftInteral = Mathf.Max(PosCal.CanvasWidth - PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1, atLeastTwoSideSizeInterval);
+        skillOptionsT.anchoredPosition = new Vector2(leftInteral, currentY);
 
-        newX = PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1 - PosCal.CanvasWidth;
+        float rightInteral = Mathf.Min((PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1 - PosCal.CanvasWidth), - atLeastTwoSideSizeInterval);
         var nineSlotRect = nineForShow.transform.GetComponent<RectTransform>();
-        nineSlotRect.anchoredPosition = new Vector2(newX, currentY);
-
+        nineSlotRect.anchoredPosition = new Vector2(rightInteral, currentY);
+        
         var leftMaxWidthForNineSlots = PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1 -
-                                       skillOptionsT.rect.width;
+                                       skillOptionsT.rect.width - leftInteral + rightInteral;
         float nineSlotWidth = MathF.Min(leftMaxWidthForNineSlots, nineSlotRect.rect.height);
         nineSlotRect.sizeDelta = new Vector2(nineSlotWidth, nineSlotWidth);
         float cellSize = nineSlotWidth / 3;
