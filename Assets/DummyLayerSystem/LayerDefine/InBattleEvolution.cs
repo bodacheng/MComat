@@ -11,16 +11,30 @@ public class InBattleEvolution : UILayer
     [SerializeField] private NineForShow nineForShow;
     [SerializeField] private Text upperText;
     [SerializeField] private Text bottomText;
+    [SerializeField] private RectTransform skillOptionsT;
     [SerializeField] private EvolutionSkill[] skillOptions;
     [SerializeField] private GameObject selectedFrame;
     [SerializeField] private float animEndInSeconds = 0.5f;
     [SerializeField] private float animEndOutSeconds = 0.2f;
+    
     public async void Setup(Data_Center focusUnit, Action onFinishedSkillEvolution, string upperText, string bottomText)
     {
         var set = focusUnit.UnitInfo.set;
+        // 取原本的 y，不改它
+        float currentY = skillOptionsT.anchoredPosition.y;
+        // 新的 X 值
+        float newX = PosCal.CanvasWidth - PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1;
+        skillOptionsT.anchoredPosition = new Vector2(newX, currentY);
 
+        newX = PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1 - PosCal.CanvasWidth;
         var nineSlotRect = nineForShow.transform.GetComponent<RectTransform>();
-        float cellSize = nineSlotRect.rect.height / 3;
+        nineSlotRect.anchoredPosition = new Vector2(newX, currentY);
+
+        var leftMaxWidthForNineSlots = PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1 -
+                                       skillOptionsT.rect.width;
+        float nineSlotWidth = MathF.Min(leftMaxWidthForNineSlots, nineSlotRect.rect.height);
+        nineSlotRect.sizeDelta = new Vector2(nineSlotWidth, nineSlotWidth);
+        float cellSize = nineSlotWidth / 3;
         var gridLayoutGroup = nineForShow.transform.GetComponent<GridLayoutGroup>();
         gridLayoutGroup.cellSize = new Vector2(cellSize, cellSize); 
         
