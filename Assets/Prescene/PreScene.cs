@@ -17,14 +17,13 @@ namespace mainMenu
         public Camera postProcessCamera;
         public Camera noPostProcessCamera;
         
-        [Header("T")]
-        [SerializeField] GameObject T;
         [Header("AudioSource")]
         [SerializeField] AudioSource audioSource;
         [Header("UIAudioSource")]
         [SerializeField] AudioSource uiAudioSource;
         [Header("Canvas")] 
         [SerializeField] Canvas Canvas;
+        [SerializeField] RectTransform safeAreaRect;
 
         public RectTransform stonesTempContainer;
 
@@ -55,6 +54,7 @@ namespace mainMenu
         {
             target = this;
             PosCal.Canvas = this.Canvas;
+            PosCal.SafeAreaRect = safeAreaRect;
             PosCal.TestIni();
             SetBgRenderTexture();
         }
@@ -128,9 +128,9 @@ namespace mainMenu
             );
             CashClear();
             UILayerLoader.Clear();
-            if (T != null)
+            if (safeAreaRect != null)
             {
-                UILayerLoader.SetHanger(T.transform);
+                UILayerLoader.SetHanger(safeAreaRect);
             }
             else
             {

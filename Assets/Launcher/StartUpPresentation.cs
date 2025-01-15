@@ -8,11 +8,11 @@ using UnityEngine.SceneManagement;
 public class StartUpPresentation : MonoBehaviour
 {
     [SerializeField] Starter starter;
-    [SerializeField] RectTransform t;
     [SerializeField] bool frontSceneFight;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioSource uiAudioSource;
     [SerializeField] Canvas canvas;
+    [SerializeField] RectTransform safeAreaRect;
     
     void OpenAppStoreLink()
     {
@@ -39,8 +39,9 @@ public class StartUpPresentation : MonoBehaviour
     void Start()
     {
         PosCal.Canvas = this.canvas;
+        PosCal.SafeAreaRect = safeAreaRect;
         PosCal.TestIni();
-        UILayerLoader.SetHanger(t);
+        UILayerLoader.SetHanger(safeAreaRect);
         AppSetting.Load();
         AppSetting.BGMSource = audioSource;
         AppSetting.BGMSource.volume = AppSetting.Value.BgmVolume;

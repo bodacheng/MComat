@@ -17,7 +17,7 @@ public class InBattleEvolution : UILayer
     [SerializeField] private float animEndInSeconds = 0.5f;
     [SerializeField] private float animEndOutSeconds = 0.2f;
 
-    [SerializeField] private float atLeastTwoSideSizeInterval = 50;
+    [SerializeField] private float atLeastTwoSideSizeInterval = 10;
     
     public async void Setup(Data_Center focusUnit, Action onFinishedSkillEvolution, string upperText, string bottomText)
     {
@@ -25,6 +25,7 @@ public class InBattleEvolution : UILayer
         // 取原本的 y，不改它
         float currentY = skillOptionsT.anchoredPosition.y;
         // 新的 X 值
+        //这个leftInteral和rightInteral的计算本身其实是没多大正确道理的，它没有考虑不同设备下atLeastTwoSideSizeInterval在实际画面中所占比例的问题
         float leftInteral = Mathf.Max(PosCal.CanvasWidth - PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1, atLeastTwoSideSizeInterval);
         skillOptionsT.anchoredPosition = new Vector2(leftInteral, currentY);
 

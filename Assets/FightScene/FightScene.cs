@@ -11,6 +11,7 @@ namespace FightScene
     public class FightScene : MonoBehaviour
     {
         [SerializeField] Canvas canvas;
+        [SerializeField] RectTransform safeAreaRect;
         [SerializeField] AudioSource audioSource;
         [SerializeField] AudioSource uiAudioSource;
         
@@ -70,13 +71,14 @@ namespace FightScene
         {
             target = this;
             PosCal.Canvas = this.canvas;
+            PosCal.SafeAreaRect = safeAreaRect;
             PosCal.TestIni();
         }
         
         void Start()
         {
             UILayerLoader.Clear();
-            UILayerLoader.SetHanger(canvas.GetComponent<RectTransform>());
+            UILayerLoader.SetHanger(safeAreaRect);
             
             //HighLightLayer.DarkOff(Color.white, 0, true);
             Time.timeScale = 1;

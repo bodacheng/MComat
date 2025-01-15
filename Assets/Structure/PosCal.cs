@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public static class PosCal
 {
     public static Canvas Canvas;
+    public static RectTransform SafeAreaRect;
     static CanvasScaler CanvasScaler => Canvas.GetComponent<CanvasScaler>();
     public static float CanvasWidth => Canvas.GetComponent<RectTransform>().rect.width;
     public static float CanvasHeight => Canvas.GetComponent<RectTransform>().rect.height;
@@ -20,6 +21,28 @@ public static class PosCal
         resolution.x = (int)(resolution.x * (Screen.width / (float)Screen.safeArea.width));
         resolution.y = (int)(resolution.y * (Screen.height / (float)Screen.safeArea.height));
         CanvasScaler.referenceResolution = resolution;
+        
+        // 以下chatgpt
+        
+        // 获取当前设备的安全区域（单位：屏幕像素）
+        Rect safeArea = Screen.safeArea;
+
+        // 计算锚点（归一化到 0~1 范围）
+        Vector2 anchorMin = new Vector2(
+            safeArea.xMin / Screen.width,
+            safeArea.yMin / Screen.height
+        );
+        Vector2 anchorMax = new Vector2(
+            (safeArea.xMin + safeArea.width) / Screen.width,
+            (safeArea.yMin + safeArea.height) / Screen.height
+        );
+
+        // 假设 safeAreaRect 是我们刚刚创建的子物体的 RectTransform
+        SafeAreaRect.anchorMin = anchorMin;
+        SafeAreaRect.anchorMax = anchorMax;
+        // 保持 offset 为 0，让它刚好铺满 safeArea 对应的区域
+        SafeAreaRect.offsetMin = Vector2.zero;
+        SafeAreaRect.offsetMax = Vector2.zero;
     }
 
     public static (float, float) GetSafeAreaWidthAndHeightInCanvas()
