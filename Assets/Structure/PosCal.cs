@@ -139,10 +139,9 @@ public static class PosCal
     //     return new Vector3(newX, newY, 0);
     // }
     
-    public static Vector2 CalculateAnchoredPositionInNewAnchor(RectTransform uiElement, Vector2 targetAnchor)
+    public static Vector2 CalculateAnchoredPositionInNewAnchor(RectTransform uiElement, Vector2 targetAnchor, RectTransform refParent)
     {
-        RectTransform parent = uiElement.parent as RectTransform;
-        Vector2 parentSize = parent.rect.size;
+        Vector2 parentSize = refParent.rect.size;
         
         // Calculate the current position in the parent RectTransform space.
         Vector2 currentPositionInParentSpace = uiElement.anchorMin * parentSize + uiElement.anchoredPosition;

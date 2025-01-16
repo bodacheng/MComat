@@ -128,14 +128,7 @@ namespace mainMenu
             );
             CashClear();
             UILayerLoader.Clear();
-            if (safeAreaRect != null)
-            {
-                UILayerLoader.SetHanger(safeAreaRect);
-            }
-            else
-            {
-                Debug.Log("不可理解的错误");
-            }
+            UILayerLoader.SetHanger(safeAreaRect, Canvas.transform);
             
             AppSetting.UiAudioSource = uiAudioSource;
             AppSetting.BGMSource = audioSource;

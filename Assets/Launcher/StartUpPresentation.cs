@@ -41,7 +41,7 @@ public class StartUpPresentation : MonoBehaviour
         PosCal.Canvas = this.canvas;
         PosCal.SafeAreaRect = safeAreaRect;
         PosCal.TestIni();
-        UILayerLoader.SetHanger(safeAreaRect);
+        UILayerLoader.SetHanger(safeAreaRect, canvas.transform);
         AppSetting.Load();
         AppSetting.BGMSource = audioSource;
         AppSetting.BGMSource.volume = AppSetting.Value.BgmVolume;

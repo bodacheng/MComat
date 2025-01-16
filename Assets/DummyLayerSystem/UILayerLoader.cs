@@ -62,9 +62,11 @@ namespace DummyLayerSystem
         };
 
         private static Transform _hanger;
-        public static void SetHanger(Transform target)
+        private static Transform _fullScreenHanger;
+        public static void SetHanger(Transform target, Transform fullScreenHanger)
         {
             _hanger = target;
+            _fullScreenHanger = fullScreenHanger;
         }
 
         private static RectTransform effectBg;
@@ -110,9 +112,10 @@ namespace DummyLayerSystem
             }
         }
         
-        public static T Load<T>(bool insertToTop = false, string key = null)
+        public static T Load<T>(bool insertToTop = false, string key = null, bool loadToFullScreen = false)
         {
-            if (_hanger == null)
+            Transform targetHanger = loadToFullScreen ? _fullScreenHanger : _hanger;
+            if (targetHanger == null)
                 return default;
             string className = typeof(T).Name;
             var layerName = key != null ? key : className;
@@ -131,7 +134,7 @@ namespace DummyLayerSystem
             var UILayerPrefab = Resources.Load<UILayer>(path);
             var t = GameObject.Instantiate(UILayerPrefab);
             t.Index = className;
-            t.transform.SetParent(_hanger.transform);
+            t.transform.SetParent(targetHanger);
             t.transform.localPosition = Vector3.zero;
             var rt = t.GetComponent<RectTransform>();
             rt.anchorMax = Vector2.one;
@@ -145,7 +148,7 @@ namespace DummyLayerSystem
             
             if (effectBg != null)
             {
-                effectBg.transform.SetParent(_hanger);
+                effectBg.transform.SetParent(targetHanger);
                 effectBg.transform.SetAsLastSibling();
             }
             

@@ -78,7 +78,7 @@ namespace FightScene
         void Start()
         {
             UILayerLoader.Clear();
-            UILayerLoader.SetHanger(safeAreaRect);
+            UILayerLoader.SetHanger(safeAreaRect, canvas.transform);
             
             //HighLightLayer.DarkOff(Color.white, 0, true);
             Time.timeScale = 1;

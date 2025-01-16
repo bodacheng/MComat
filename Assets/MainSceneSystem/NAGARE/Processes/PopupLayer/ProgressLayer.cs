@@ -15,7 +15,7 @@ public class ProgressLayer : UILayer
     // 「正在读取」画面
     public static void Loading(string description, float curtainAlpha = 0.8f)
     {
-        var layer = UILayerLoader.Load<ProgressLayer>(true);
+        var layer = UILayerLoader.Load<ProgressLayer>(true, null, true);
         if (layer != null)
         {
             layer.DarkOff(curtainAlpha,0.5f);
