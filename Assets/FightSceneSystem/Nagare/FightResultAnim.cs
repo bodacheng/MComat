@@ -55,7 +55,7 @@ namespace FightScene
                 }
             }
             Time.timeScale = 1f;
-            var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
+            var arenaFightOver = UILayerLoader.Load<ArenaFightOver>(false, null, true);
 
             async UniTask EndPart()
             {
