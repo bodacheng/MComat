@@ -202,7 +202,7 @@ public class PreparingProcess : FSceneProcess
     public override void ProcessEnter()
     {
         //HighLightLayer.DarkOff(Color.white, 0, true);
-        var unitInstructionLayer = UILayerLoader.Load<UnitInstructionLayer>();
+        var unitInstructionLayer = UILayerLoader.Load<UnitInstructionLayer>(false, null, true);
         unitInstructionLayer.LoadUnitImage();
         EnterProcess().Forget();
     }

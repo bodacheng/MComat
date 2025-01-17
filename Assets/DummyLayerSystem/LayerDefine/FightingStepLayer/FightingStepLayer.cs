@@ -69,9 +69,9 @@ public class FightingStepLayer : UILayer
             {
                 FightScenePauseSupport pauseLayer;
 #if UNITY_IOS || UNITY_ANDROID
-                pauseLayer = UILayerLoader.Load<FightScenePauseSupport>();
+                pauseLayer = UILayerLoader.Load<FightScenePauseSupport>(false, null, true);
 #else
-                pauseLayer = UILayerLoader.Load<FightScenePauseSupport>(false, "FightScenePauseSupport_st");
+                pauseLayer = UILayerLoader.Load<FightScenePauseSupport>(false, "FightScenePauseSupport_st", true);
 #endif
                 pauseLayer.Setup(
                     ()=> { Time.timeScale = 0; },

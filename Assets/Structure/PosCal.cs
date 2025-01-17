@@ -63,17 +63,30 @@ public static class PosCal
     /// 但是如果在长宽比例更低的设备上，比如ipad，就是出现尺寸错误
     /// 我们没有理清内部的具体逻辑，但是我们认为更低的长宽比设备上，这个设备长宽比/参考长宽比的数字就是slot特效的scale应该乘以的数字
     /// 而事实证明似乎没错
+    ///
+    /// 目前都不是理论完美解决方案。这个特效逻辑本身太复杂
     /// </summary>
     /// <returns></returns>
     public static float TempRate()
     {
+        //方案1
         float screenAspect = (float)Screen.width / Screen.height;
         float refAspect = CanvasScaler.referenceResolution.x / CanvasScaler.referenceResolution.y;
-        if (screenAspect >= refAspect) // 这个处理（分歧，这种情况返回1）在横版项目是需要的，纵版却不需要，原因还没理解
-        {
-            return 1;
-        }
-        return screenAspect / refAspect;
+        // if (screenAspect >= refAspect) // 这个处理（分歧，这种情况返回1）在横版项目是需要的，纵版却不需要，原因还没理解
+        // {
+        //     return 1;
+        // }
+        // return screenAspect / refAspect;
+        
+        //方案2
+        return (screenAspect / refAspect) > 1 ?
+            Mathf.Max((CanvasWidth / CanvasScaler.referenceResolution.x), (CanvasHeight/CanvasScaler.referenceResolution.y)):
+            Mathf.Min((CanvasWidth / CanvasScaler.referenceResolution.x), (CanvasHeight/CanvasScaler.referenceResolution.y));
+        
+        //方案3
+        // float screenAspect = CanvasWidth / CanvasHeight;
+        // float refAspect = CanvasScaler.referenceResolution.x / CanvasScaler.referenceResolution.y;
+        // return screenAspect / refAspect;
     }
     
     public static float TempToko() // 这完全是个主观数值，目的是让手机比较长的时候立绘更靠中间一点。没有太多道理
