@@ -30,7 +30,7 @@ namespace FightScene
                             FightLoad.Fight.Team2LeaderboardEntry,
                             (x,y, z) =>
                             {
-                                var a = UILayerLoader.Load<ArenaFightOver>();
+                                var a = UILayerLoader.Load<ArenaFightOver>(false, null, true);
                                 a.Setup();
                                 a.Step2Anim();
                                 a.ShowAward(z,0, 0);
@@ -40,7 +40,7 @@ namespace FightScene
                     }
                     else
                     {
-                        var a = UILayerLoader.Load<ArenaFightOver>();
+                        var a = UILayerLoader.Load<ArenaFightOver>(false, null, true);
                         a.Setup();
                         a.Step2Anim();
                     }
@@ -61,7 +61,7 @@ namespace FightScene
                                         var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                                         var hasReward = jsonResult.ContainsKey("has_reward") ? jsonResult["has_reward"] : false;
                                         var hasRewardBool = (bool)hasReward;
-                                        var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
+                                        var arenaFightOver = UILayerLoader.Load<ArenaFightOver>(false, null, true);
                                         arenaFightOver.Setup();
                                         arenaFightOver.Step2Anim();
                                         if (hasRewardBool)
@@ -116,7 +116,7 @@ namespace FightScene
                         }
                         else
                         {
-                            var a = UILayerLoader.Load<ArenaFightOver>();
+                            var a = UILayerLoader.Load<ArenaFightOver>(false, null, true);
                             a.Setup();
                             a.Step2Anim();
                             a.ShowAward(0, 0, PlayFabSetting._adNormalFightRewardDM, -1, true);
@@ -124,7 +124,7 @@ namespace FightScene
                     }
                     else
                     {
-                        var a = UILayerLoader.Load<ArenaFightOver>();
+                        var a = UILayerLoader.Load<ArenaFightOver>(false, null, true);
                         a.Setup();
                         a.Step2Anim();
                         a.AgainBtn.gameObject.SetActive(true);
@@ -181,7 +181,7 @@ namespace FightScene
                 //     }
                 //     break;
                 case FightEventType.Self:
-                    var c = UILayerLoader.Load<CommonFightResult>();
+                    var c = UILayerLoader.Load<CommonFightResult>(false, null, true);
                     c.Setup(
                         ()=>FightScene.target.ReturnToFront(), 
                         () =>
@@ -219,7 +219,7 @@ namespace FightScene
                                     var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
                                     var hasReward = jsonResult.TryGetValue("has_reward", out var value) ? value : false;
                                     var hasRewardBool = (bool)hasReward;
-                                    var arenaFightOver = UILayerLoader.Load<ArenaFightOver>();
+                                    var arenaFightOver = UILayerLoader.Load<ArenaFightOver>(false, null, true);
                                     arenaFightOver.Setup();
                                     arenaFightOver.Step2Anim();
                                     if (hasRewardBool)
@@ -237,14 +237,14 @@ namespace FightScene
                         }
                         else
                         {
-                            var a = UILayerLoader.Load<ArenaFightOver>();
+                            var a = UILayerLoader.Load<ArenaFightOver>(false, null, true);
                             a.Setup();
                             a.Step2Anim();
                         }
                     }
                     else
                     {
-                        var a = UILayerLoader.Load<ArenaFightOver>();
+                        var a = UILayerLoader.Load<ArenaFightOver>(false, null, true);
                         a.Setup();
                         a.Step2Anim();
                         a.AgainBtn.gameObject.SetActive(true);

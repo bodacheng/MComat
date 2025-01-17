@@ -11,7 +11,7 @@ public class ArenaAwardPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        layer = UILayerLoader.Load<ArenaAwardLayer>();
+        layer = UILayerLoader.Load<ArenaAwardLayer>(false, null, true);
         layer.SetUp(PlayFabReadClient.ArenaAwards);
     }
     
