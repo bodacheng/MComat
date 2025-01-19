@@ -26,7 +26,7 @@ public class ReturnLayer : UILayer
             returnAction = ()=> returnAct(step)
         };
         ReturnMissionList.Add(returnAction);
-        var returnLayer = UILayerLoader.Load<ReturnLayer>(false, null, true);
+        var returnLayer = UILayerLoader.Load<ReturnLayer>(true, null, true);
         returnLayer.Setup();
     }
     
@@ -47,7 +47,7 @@ public class ReturnLayer : UILayer
             }
             else
             {
-                var returnLayer = UILayerLoader.Load<ReturnLayer>(false, null, true);
+                var returnLayer = UILayerLoader.Load<ReturnLayer>(true, null, true);
                 returnLayer.Setup();
             }
         }
@@ -61,7 +61,7 @@ public class ReturnLayer : UILayer
             if (exist != null)
                 ReturnMissionList.Remove(exist);
             ReturnMissionList.Add(returnAction);
-            var returnLayer = UILayerLoader.Load<ReturnLayer>(false, null, true);
+            var returnLayer = UILayerLoader.Load<ReturnLayer>(true, null, true);
             returnLayer.Setup();
         }
         if (ReturnMissionList.Count > 0)

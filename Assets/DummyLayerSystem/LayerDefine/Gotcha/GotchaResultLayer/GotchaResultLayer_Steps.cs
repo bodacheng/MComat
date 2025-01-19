@@ -85,7 +85,7 @@ public partial class GotchaResultLayer : UILayer
                     break;
             }
         
-        var returnLayer = UILayerLoader.Load<ReturnLayer>();
+        var returnLayer = UILayerLoader.Load<ReturnLayer>(true, null, true);
         if (returnLayer != null)
         {
             returnLayer.gameObject.SetActive(true);

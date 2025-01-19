@@ -63,7 +63,7 @@ public class GotchaResult : MSceneProcess
                 }
                 break;
         }
-        var returnLayer = UILayerLoader.Load<ReturnLayer>();
+        var returnLayer = UILayerLoader.Load<ReturnLayer>(true, null, true);
         if (returnLayer != null)
         {
             returnLayer.gameObject.SetActive(false);

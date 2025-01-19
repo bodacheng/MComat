@@ -327,7 +327,6 @@ namespace mainMenu
                 var returnToStep = ProcessesRunner.Main.currentProcess.Step;
                 bool ReturnToCurrent()
                 {
-                    Debug.Log("返回："+ returnToStep);
                     return trySwitchToStep(returnToStep, false);
                 }
                 
