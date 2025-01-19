@@ -936,6 +936,7 @@ GameObject:
   - component: {fileID: 2498640933226189415}
   - component: {fileID: 2498640933226189417}
   - component: {fileID: 1719270384847353591}
+  - component: {fileID: 3472449089494155579}
   m_Layer: 5
   m_Name: Placeholder
   m_TagString: Untagged
@@ -1024,6 +1025,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Password
+--- !u!114 &3472449089494155579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2498640933226189419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: AccountPassword
+  target: {fileID: 1719270384847353591}
 --- !u!1 &2498640933229833015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,6 +1103,7 @@ GameObject:
   - component: {fileID: 2498640933309262304}
   - component: {fileID: 2498640933309262306}
   - component: {fileID: 3740430586527620430}
+  - component: {fileID: 2834560789652837991}
   m_Layer: 5
   m_Name: Placeholder
   m_TagString: Untagged
@@ -1176,6 +1192,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: mail address
+--- !u!114 &2834560789652837991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2498640933309262308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ade8f94e534fe988a129c38348848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languageCode: MailAddress
+  target: {fileID: 3740430586527620430}
 --- !u!1 &2498640933804124190
 GameObject:
   m_ObjectHideFlags: 0
