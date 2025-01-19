@@ -122,10 +122,25 @@ namespace DummyLayerSystem
             var existed = Get<T>();
             if (existed != null)
             {
-                if (insertToTop)
+                if (loadToFullScreen)
                 {
                     var target = existed as GameObject;
-                    target?.transform.SetAsLastSibling();
+                    if (insertToTop)
+                    {
+                        target?.transform.SetAsLastSibling();// 在_hanger（saferect）之下
+                    }
+                    else
+                    {
+                        target?.transform.SetAsFirstSibling();// 在_hanger（saferect）之上
+                    }
+                }
+                else
+                {
+                    if (insertToTop)
+                    {
+                        var target = existed as GameObject;
+                        target?.transform.SetAsLastSibling();
+                    }
                 }
                 return existed;
             }
@@ -136,6 +151,26 @@ namespace DummyLayerSystem
             t.Index = className;
             t.transform.SetParent(targetHanger);
             t.transform.localPosition = Vector3.zero;
+            
+            if (loadToFullScreen)
+            {
+                if (insertToTop)
+                {
+                    t.transform.SetAsLastSibling();// 在_hanger（saferect）之下
+                }
+                else
+                {
+                    t.transform.SetAsFirstSibling();// 在_hanger（saferect）之上
+                }
+            }
+            else
+            {
+                if (insertToTop)
+                {
+                    t.transform.SetAsLastSibling();// 在_hanger（saferect）之内
+                }
+            }
+            
             var rt = t.GetComponent<RectTransform>();
             rt.anchorMax = Vector2.one;
             rt.anchorMin = Vector2.zero;

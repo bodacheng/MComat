@@ -21,7 +21,7 @@ public partial class PopupLayer : UILayer
     /// <param name="intro"></param>
     public static void ArrangeWarnWindow(string intro)
     {
-        var layer = UILayerLoader.Load<PopupLayer>(true);
+        var layer = UILayerLoader.Load<PopupLayer>(true, null, true);
         
         layer.bigCurtain.color = windowBgColor;
         layer.ValidationWindow.gameObject.SetActive(true);
@@ -34,7 +34,7 @@ public partial class PopupLayer : UILayer
     
     public static void ArrangeWarnWindow(UnityEngine.Events.UnityAction action, string intro)
     {
-        var layer = UILayerLoader.Load<PopupLayer>(true);
+        var layer = UILayerLoader.Load<PopupLayer>(true, null, true);
         
         layer.bigCurtain.color = windowBgColor;
         layer.ValidationWindow.gameObject.SetActive(true);
@@ -63,7 +63,7 @@ public partial class PopupLayer : UILayer
             return;
         }
         
-        var layer = UILayerLoader.Load<PopupLayer>(true);
+        var layer = UILayerLoader.Load<PopupLayer>(true, null, true);
         layer.unitIcon.ChangeIcon(unitConfig.RECORD_ID);
         layer.unitIcon.gameObject.SetActive(true);
         layer.bigCurtain.color = windowBgColor;
@@ -83,7 +83,7 @@ public partial class PopupLayer : UILayer
             return;
         }
         
-        var layer = UILayerLoader.Load<PopupLayer>(true);
+        var layer = UILayerLoader.Load<PopupLayer>(true, null, true);
         layer.unitIcon.ChangeIcon(unitConfig.RECORD_ID);
         layer.unitIcon.gameObject.SetActive(true);
         layer.bigCurtain.color = windowBgColor;
@@ -101,7 +101,7 @@ public partial class PopupLayer : UILayer
     
     public static void ArrangeConfirmWindow(UnityEngine.Events.UnityAction action, string intro)
     {
-        var layer = UILayerLoader.Load<PopupLayer>(true);
+        var layer = UILayerLoader.Load<PopupLayer>(true, null, true);
         
         layer.bigCurtain.color = windowBgColor;
         layer.ValidationWindow.gameObject.SetActive(true);
@@ -121,7 +121,7 @@ public partial class PopupLayer : UILayer
     
     public static void ArrangeConfirmWindow(UnityEngine.Events.UnityAction action, UnityEngine.Events.UnityAction cancel_action, string intro)
     {
-        var layer = UILayerLoader.Load<PopupLayer>(true);
+        var layer = UILayerLoader.Load<PopupLayer>(true, null, true);
         
         layer.bigCurtain.color = windowBgColor;
         layer.ValidationWindow.gameObject.SetActive(true);
