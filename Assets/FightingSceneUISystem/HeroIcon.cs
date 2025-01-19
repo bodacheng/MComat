@@ -13,6 +13,7 @@ public class HeroIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     [SerializeField] Image frame;
     [SerializeField] Image cooldownCurtain;
     [SerializeField] GameObject warnFlag;
+    [SerializeField] bool canDrag = true; // 控制是否允许拖动的标志
     
     public UnitConfig unitConfig;
     public GameObject WarnFlag => warnFlag;
@@ -238,6 +239,11 @@ public class HeroIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     /// <param name="data"></param>
     public void OnDrag(PointerEventData data)
     {
+        if (!canDrag)
+        {
+            return;
+        }
+        
         if (dragging != null)
         {
             dragging.transform.position = Input.mousePosition;                          // Item's icon follows to cursor in screen pixels
