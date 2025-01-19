@@ -1153,6 +1153,97 @@ handlers.RankClear = function (args, context) {
     return { arenapoint : targetPoint };
 }
 
+handlers.modifyRandomStatForPlayers = function (args, context) {
+    // 从 args 中读取参数
+    var statisticName = args.statName;      // 要修改的 Statistic 名称
+    var minValue      = args.minValue;      // 随机值下限（包含）
+    var maxValue      = args.maxValue;      // 随机值上限（包含）
+    var nameList      = args.nameList;      // 目标昵称列表（DisplayName 列表）
+    var segmentId     = args.segmentId;     // 需要遍历的玩家 Segment Id
+
+    if (!statisticName || minValue == null || maxValue == null || !nameList || !segmentId) {
+        return { error: "缺少必要参数，请确保传入了 statisticName, minValue, maxValue, nameList, segmentId 等。" };
+    }
+
+    // 获取目标 Segment 中的所有玩家
+    var allPlayers = getAllPlayersInSegment(segmentId);
+
+    // 统计更新结果
+    var updatedPlayers = [];
+
+    // 遍历玩家，匹配昵称并更新 Statistic
+    for (var i = 0; i < allPlayers.length; i++) {
+        var playerProfile = allPlayers[i];
+        var playerDisplayName = playerProfile.DisplayName;
+        var playerId = playerProfile.PlayerId;
+
+        // 如果 DisplayName 在我们传入的 nameList 里面，则更新该玩家的Statistic
+        if (nameList.indexOf(playerDisplayName) !== -1) {
+            // 生成随机值（在 [minValue, maxValue] 区间内）
+            var randomValue = getRandomInt(minValue, maxValue);
+
+            // 调用 UpdatePlayerStatistics
+            var updateResult = server.UpdatePlayerStatistics({
+                PlayFabId: playerId,
+                Statistics: [{
+                    StatisticName: statisticName,
+                    Value: randomValue
+                }]
+            });
+
+            // 记录到返回结果中
+            updatedPlayers.push({
+                PlayFabId: playerId,
+                DisplayName: playerDisplayName,
+                newValue: randomValue
+            });
+        }
+    }
+
+    return {
+        message: "更新完成",
+        updatedCount: updatedPlayers.length,
+        updatedPlayers: updatedPlayers
+    };
+};
+
+/**
+ * 根据 segmentId，遍历并返回该分段下的所有玩家列表（playerProfiles）。
+ * 请注意，如果玩家量巨大，该方式可能会有性能或时间限制，应按需优化或分段执行。
+ */
+function getAllPlayersInSegment(segmentId) {
+    var allPlayers = [];
+    var request = { SegmentId: segmentId };
+    var continueToken = null;
+
+    do {
+        if (continueToken) {
+            request.ContinuationToken = continueToken;
+        }
+        var response = server.GetPlayersInSegment(request);
+
+        if (response && response.PlayerProfiles) {
+            allPlayers = allPlayers.concat(response.PlayerProfiles);
+        }
+
+        continueToken = response.ContinuationToken;
+    } while (continueToken);
+
+    return allPlayers;
+}
+
+/**
+ * 生成 [min, max] 范围内的随机整数
+ */
+function getRandomInt(min, max) {
+    // 确保参数为整数
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    // 这里的随机包含 min、包含 max
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
 handlers.DeleteNoDisplayNameUser = function (args, context) {
     var getRequest = {
         PlayFabId: currentPlayerId
