@@ -1179,15 +1179,19 @@ handlers.modifyRandomStatForPlayers = function (args, context) {
 
         // 如果 DisplayName 在我们传入的 nameList 里面，则更新该玩家的Statistic
         if (nameList.indexOf(playerDisplayName) !== -1) {
+
+            var existingValue = getCurrentStatValue(playerId, statisticName);
+            
             // 生成随机值（在 [minValue, maxValue] 区间内）
             var randomValue = getRandomInt(minValue, maxValue);
-
+            var newValue = existingValue + randomValue;
+            
             // 调用 UpdatePlayerStatistics
             var updateResult = server.UpdatePlayerStatistics({
                 PlayFabId: playerId,
                 Statistics: [{
                     StatisticName: statisticName,
-                    Value: randomValue
+                    Value: newValue
                 }]
             });
 
@@ -1195,7 +1199,7 @@ handlers.modifyRandomStatForPlayers = function (args, context) {
             updatedPlayers.push({
                 PlayFabId: playerId,
                 DisplayName: playerDisplayName,
-                newValue: randomValue
+                newValue: newValue
             });
         }
     }
@@ -1206,6 +1210,25 @@ handlers.modifyRandomStatForPlayers = function (args, context) {
         updatedPlayers: updatedPlayers
     };
 };
+
+/**
+ * 获取玩家当前的某个 Statistic 值，如果不存在则返回 0
+ */
+function getCurrentStatValue(playFabId, statName) {
+    var result = server.GetPlayerStatistics({ PlayFabId: playFabId });
+    if (!result || !result.Statistics) {
+        return 0;
+    }
+
+    for (var i = 0; i < result.Statistics.length; i++) {
+        var stat = result.Statistics[i];
+        if (stat.StatisticName === statName) {
+            return stat.Value || 0;
+        }
+    }
+    return 0;
+}
+
 
 /**
  * 根据 segmentId，遍历并返回该分段下的所有玩家列表（playerProfiles）。
