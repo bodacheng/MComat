@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 namespace Soul
@@ -161,13 +163,29 @@ namespace Soul
             return (nearestEnemyMeat != null && Vector3.Distance(nearestEnemyMeat.transform.position, this._DATA_CENTER.WholeT.position) < 5f) || Sensor.GetSuddenThreatInRange(0,8) != null;
         }
         
+        // 缓存方法名与委托的映射
+        private static readonly Dictionary<string, Func<Behavior, bool>> _methodCache = new Dictionary<string, Func<Behavior, bool>>();
         public bool CheckTriggerCondition(string conditionFunctionName)
         {
-            var T = typeof(Behavior);
-            var theMethod = T.GetMethod(conditionFunctionName); //激活同名函数
-            return theMethod != null && (bool)theMethod.Invoke(this, null);
-        }
+            if (!_methodCache.TryGetValue(conditionFunctionName, out var methodDelegate))
+            {
+                // 获取方法信息
+                var methodInfo = typeof(Behavior).GetMethod(conditionFunctionName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
+                if (methodInfo == null)
+                {
+                    throw new InvalidOperationException($"方法 '{conditionFunctionName}' 未找到。");
+                }
+
+                // 创建委托并添加到缓存
+                methodDelegate = (Func<Behavior, bool>)Delegate.CreateDelegate(typeof(Func<Behavior, bool>), null, methodInfo);
+                _methodCache[conditionFunctionName] = methodDelegate;
+            }
+
+            // 调用委托
+            return methodDelegate(this);
+        }
+        
         public bool CheckExitCondition(string stateKey)
         {
             _AIStateRunner.BehaviourAndStrategicExitCondition.TryGetValue(stateKey, out string exitCondition);

@@ -91,56 +91,55 @@ public partial class Sensor
     List<GameObject> FindTargetsByDistance(Team[] tags, IDictionary<Team, List<Data_Center>> targetDic)
     {
         var targetList = new List<GameObject>();
-        if (tags != null)
+        if (tags == null) return targetList;
+        for (var i = 0; i < tags.Length; i++)
         {
-            for (var i = 0; i < tags.Length; i++)
+            if (targetDic != null)
             {
-                if (targetDic != null)
+                for (var y = 0; y < tags.Length; y++)
                 {
-                    for (var y = 0; y < tags.Length; y++)
+                    targetDic.TryGetValue(tags[y], out var searchingMembers);
+                    if (searchingMembers != null)
                     {
-                        targetDic.TryGetValue(tags[y], out var searchingMembers);
-                        if (searchingMembers != null)
+                        for (var k = 0; k < searchingMembers.Count; k++)
                         {
-                            for (var k = 0; k < searchingMembers.Count; k++)
-                            {
-                                if (searchingMembers[k] != null)
-                                    targetList.Add(searchingMembers[k].WholeT.gameObject);
-                                else
-                                    Debug.Log("检测逻辑错误");
-                            }
+                            if (searchingMembers[k] != null)
+                                targetList.Add(searchingMembers[k].WholeT.gameObject);
+                            else
+                                Debug.Log("检测逻辑错误");
                         }
                     }
                 }
             }
-            if (targetList.Count > 1)
-            {
-                targetList.Sort((a, b) => HorizontalDistanceCompare(a.transform.position, b.transform.position));
-                return targetList;
-            }
-            else
-            {
-                return targetList;
-            }
         }
-        return targetList;
+        if (targetList.Count > 1)
+        {
+            targetList.Sort((a, b) => HorizontalDistanceCompare(a.transform.position, b.transform.position));
+            return targetList;
+        }
+        else
+        {
+            return targetList;
+        }
     }
     
     public void SensorDetectionResultSortProcess(Collider[] hits) //这个函数的调用必须要确保每次都在update函数之后
     {
         float sensorRadiusSqr = SensorRadius * SensorRadius;  // 预计算半径的平方
+        Vector3 centerPosition = Center.position;
         foreach (Collider hit in hits)
         {
-            if (hit == null || (hit.transform.position - Center.position).sqrMagnitude > sensorRadiusSqr)
+            if (hit == null || (hit.transform.position - centerPosition).sqrMagnitude > sensorRadiusSqr)
             {
                 continue;
             }
             
-            if (_teamConfig.enemyLayerMask == (_teamConfig.enemyLayerMask | (1 << hit.gameObject.layer)) || _teamConfig.enemyShieldLayerMask == (_teamConfig.enemyShieldLayerMask | (1 << hit.gameObject.layer)))
+            var hitLayer = hit.gameObject.layer;
+            if (_teamConfig.enemyLayerMask == (_teamConfig.enemyLayerMask | (1 << hitLayer)) || _teamConfig.enemyShieldLayerMask == (_teamConfig.enemyShieldLayerMask | (1 << hitLayer)))
             {
                 _detectedEnemies.Add(hit);
             }
-            if (_teamConfig.enemyWeaponLayerMask == (_teamConfig.enemyWeaponLayerMask | (1 << hit.gameObject.layer)))
+            if (_teamConfig.enemyWeaponLayerMask == (_teamConfig.enemyWeaponLayerMask | (1 << hitLayer)))
             {
                 _damagingWeaponAround.Add(hit);
             }
@@ -148,17 +147,20 @@ public partial class Sensor
         _nearestEnemyCollider = FindNearestCollider(_detectedEnemies);
         _nearestDamagingWeapon = FindNearestCollider(_damagingWeaponAround);
     }
-    
+
+    private Vector3 _center;
+    private float _p1ToCenterSqr;
+    private float _p2ToCenterSqr;
     int HorizontalDistanceCompare(Vector3 p1, Vector3 p2)
     {
-        Vector3 center = Center.position;  // 只获取一次中心位置，提高效率
+        _center = Center.position;  // 只获取一次中心位置，提高效率
         // 计算平方距离，避免使用开方
-        float p1ToCenterSqr = (p1.x - center.x) * (p1.x - center.x) + (p1.z - center.z) * (p1.z - center.z);
-        float p2ToCenterSqr = (p2.x - center.x) * (p2.x - center.x) + (p2.z - center.z) * (p2.z - center.z);
-
+        _p1ToCenterSqr = (p1.x - _center.x) * (p1.x - _center.x) + (p1.z - _center.z) * (p1.z - _center.z);
+        _p2ToCenterSqr = (p2.x - _center.x) * (p2.x - _center.x) + (p2.z - _center.z) * (p2.z - _center.z);
+        
         // 简化比较逻辑，直接返回结果
-        if (p1ToCenterSqr > p2ToCenterSqr) return 1;
-        if (p1ToCenterSqr < p2ToCenterSqr) return -1;
+        if (_p1ToCenterSqr > _p2ToCenterSqr) return 1;
+        if (_p1ToCenterSqr < _p2ToCenterSqr) return -1;
         return 0;
     }
     

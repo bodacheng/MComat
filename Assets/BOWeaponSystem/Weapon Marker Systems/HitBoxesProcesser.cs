@@ -7,7 +7,7 @@ public class HitBoxesProcesser : MonoBehaviour
     public static HitBoxesProcesser Instance;
     
     private static readonly Dictionary<Collider, HitBoxManager> ColliderHitBox = new Dictionary<Collider, HitBoxManager>();
-    private readonly List<Decomposition> _processingDecompositions = new List<Decomposition>();
+    private readonly HashSet<Decomposition> _processingDecompositions = new HashSet<Decomposition>();
     
     void Awake()
     {
@@ -42,9 +42,9 @@ public class HitBoxesProcesser : MonoBehaviour
     
     public void AllProcessingFade()
     {
-        for (var i = 0; i < _processingDecompositions.Count; i++)
+        foreach (var item in _processingDecompositions)
         {
-            _processingDecompositions[i].Phase = -1;
+            item.Phase = -1;
         }
     }
 
@@ -52,17 +52,17 @@ public class HitBoxesProcesser : MonoBehaviour
     {
         if (_processingDecompositions.Count > 0)
         {
-            for (var i = 0; i < _processingDecompositions.Count; i++)
+            foreach (var item in _processingDecompositions)
             {
-                _processingDecompositions[i].Step1();
+                item.Step1();
             }
-            for (var i = 0; i < _processingDecompositions.Count; i++)
+            foreach (var item in _processingDecompositions)
             {
-                _processingDecompositions[i].Step2();
+                item.Step2();
             }
-            for (var i = 0; i < _processingDecompositions.Count; i++)
+            foreach (var item in _processingDecompositions)
             {
-                _processingDecompositions[i].Life();
+                item.Life();
             }
             _processingDecompositions.Clear();
         }
@@ -70,7 +70,6 @@ public class HitBoxesProcesser : MonoBehaviour
 
     void AddToHitBoxesProcessorList(Decomposition poolObject)
     {
-        if (!_processingDecompositions.Contains(poolObject))
-            _processingDecompositions.Add(poolObject);
+        _processingDecompositions.Add(poolObject);
     }
 }

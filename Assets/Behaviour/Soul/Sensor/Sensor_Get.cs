@@ -7,14 +7,19 @@ public partial class Sensor
     public List<Collider> GetTargetRangeEnemyCollider(float min, float max)
     {
         var returnValue = new List<Collider>();
-        for (var i = 0; i < _detectedEnemies.Count; i++)
+        float minSqr = min * min;
+        float maxSqr = max * max;
+        Vector3 centerPosition = Center.position;
+
+        foreach (var enemy in _detectedEnemies)
         {
-            var to_me = Vector3.Distance(Center.position, _detectedEnemies[i].transform.position);
-            if (to_me >= min && to_me <= max)
+            float sqrDistance = (enemy.transform.position - centerPosition).sqrMagnitude;
+            if (sqrDistance >= minSqr && sqrDistance <= maxSqr)
             {
-                returnValue.Add(_detectedEnemies[i]);
+                returnValue.Add(enemy);
             }
         }
+
         return returnValue;
     }
     
@@ -94,11 +99,12 @@ public partial class Sensor
         }
         
         Collider target = list[0];
+        Vector3 targetPosition = target.transform.position;
         for (var i = 1; i < list.Count; i++)
         {
             if (list[i] == null)
                 continue;
-            if (HorizontalDistanceCompare(target.transform.position, list[i].transform.position) == 1)
+            if (HorizontalDistanceCompare(targetPosition, list[i].transform.position) == 1)
             {
                 target = list[i];
             }
