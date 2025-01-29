@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Serialization;
@@ -54,12 +55,12 @@ namespace FightScene
         
         public async UniTask _UnitsLoad(MultiDic<int, int, UnitInfo> membersSets, IDictionary<Data_Center, UnitInfo> unitInfoRef)
         {
-            async UniTask LoadOneUnit(int key1, int key2, UnitInfo info)
+            async UniTask LoadOneUnit(int key1, int key2, UnitInfo info, int preloadCount)
             {
                 var center = teamMembers.Get(key1, key2);
                 if (center == null)
                 {
-                    center = await UnitCreator.CreateUnit(info, 1);
+                    center = await UnitCreator.CreateUnit(info, preloadCount);
                 }
                 teamMembers.Set(key1, key2, center);
                 DicAdd<Data_Center, UnitInfo>.Add(unitInfoRef, center, info);
@@ -67,7 +68,9 @@ namespace FightScene
             var tasks = new List<UniTask>();
             foreach (var kv in membersSets.mDict)
             {
-                tasks.Add(LoadOneUnit(kv.Key.Item1, kv.Key.Item2, kv.Value));
+                var sameUnits = membersSets.mDict.Values.ToList().FindAll(x => x.r_id == kv.Value.r_id && x.level == kv.Value.level);
+                // 上面给的这个统计相同种类角色的逻辑并不精确。如果一个队伍里有两个同masterid角色，等级还一样，问题就出来了，但现在我们的代码构造造成没有别的做法。
+                tasks.Add(LoadOneUnit(kv.Key.Item1, kv.Key.Item2, kv.Value, sameUnits.Count));
             }
             await UniTask.WhenAll(tasks);
         }

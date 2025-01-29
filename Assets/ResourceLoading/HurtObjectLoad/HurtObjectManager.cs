@@ -80,8 +80,6 @@ public static class HurtObjectManager
                         await ConstructHurtObjectPool(decomposition.Attachments[i], element, preloadCount);
                     }
                 }
-            }else{
-                Debug.Log(resourceName + "没有Decompositioner！？");
             }
             return;
         }
@@ -157,7 +155,10 @@ public static class HurtObjectManager
         if (prefab != null)
         {
             var poolToConstruct = new DecompositionPool(prefab);
-            poolToConstruct.PreloadAsync(iniCount, 1).Subscribe(_ => {});
+            poolToConstruct.PreloadAsync(iniCount, 1).Subscribe(_ =>
+            {
+                //Debug.Log(key+ " count："+ poolToConstruct.Count);
+            });
             DicAdd<string, DecompositionPool>.Add(HurtPoolDic, key, poolToConstruct);
             return poolToConstruct;
         }
