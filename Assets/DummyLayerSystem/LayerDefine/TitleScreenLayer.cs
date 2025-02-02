@@ -1,6 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 
 /// <summary>
 /// 这个layer的问题在于，它必须灵活的适应未来可能做出的一些改动
@@ -10,7 +14,7 @@ public class TitleScreenLayer : UILayer
 {
     // Main
     [SerializeField] RectTransform mainTab;
-    [SerializeField] Image title;
+    [SerializeField] List<Image> title;
     [SerializeField] BOButton touchScreenBtn;
     [SerializeField] BOButton accountLoginBtn;
     
@@ -29,6 +33,7 @@ public class TitleScreenLayer : UILayer
     [SerializeField] Text version;
     
     private float titleAnimFactor = 0;
+    private TweenerCore<float, float, FloatOptions> titleTween;
     public void Initialise()
     {
         version.text = Application.version;
@@ -43,9 +48,12 @@ public class TitleScreenLayer : UILayer
             devLoginBtn.onClick.AddListener(DevUserLogin);
         }
         
-        DOTween.To(() => titleAnimFactor, (x) => titleAnimFactor = x, 2, 10).OnUpdate(() =>
+        titleTween = DOTween.To(() => titleAnimFactor, (x) => titleAnimFactor = x, 2, 10).OnUpdate(() =>
         {
-            title.material.SetFloat("_Animation_Factor", titleAnimFactor);
+            title.ToList().ForEach(x =>
+                {
+                    x.material.SetFloat("_Animation_Factor", titleAnimFactor);
+                });
         });
     }
     
@@ -82,5 +90,11 @@ public class TitleScreenLayer : UILayer
         PlayFabReadClient.LoginByCustomId(
             devId.text,
             PlayFabReadClient.LoginSuccess);
+    }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+        titleTween?.Kill();
     }
 }
