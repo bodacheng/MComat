@@ -54,32 +54,44 @@ public class PreparingProcess : FSceneProcess
             EffectsManager.IniEffectsPool(CommonSetting.WallCrackEffectCode, null, effectPreloadCount)
         };
         
-        List<Element> allElements = new List<Element>();
+        IDictionary<Element, int> effectCount = new Dictionary<Element, int>();
         void AddBasicEffectLoadingTask(List<UnitInfo> list)
         {
             foreach (var unit in list)
             {
                 var unitConfig = Units.RowToUnitConfigInfo(Units.Find_RECORD_ID(unit.r_id));
-                if (!allElements.Contains(unitConfig.element))
+                if (!effectCount.TryAdd(unitConfig.element, 1))
                 {
-                    allElements.Add(unitConfig.element);
-                    tasks.AddRange(
-                        new UniTask[]
-                        {
-                            EffectsManager.IniEffectsPool("light_hit", FightGlobalSetting.EffectPathDefine(unitConfig.element), effectPreloadCount),
-                            EffectsManager.IniEffectsPool("heavy_hit", FightGlobalSetting.EffectPathDefine(unitConfig.element), effectPreloadCount),
-                            EffectsManager.IniEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(unitConfig.element), effectPreloadCount),
-                            EffectsManager.IniEffectsPool("electric_s_e", FightGlobalSetting.EffectPathDefine(unitConfig.element), effectPreloadCount),
-                            EffectsManager.IniEffectsPool("super_combo_explosion", null, effectPreloadCount),
-                            EffectsManager.IniEffectsPool("dream_buff", null, effectPreloadCount)
-                        }
-                    );
+                    effectCount[unitConfig.element]++;
                 }
+            }
+            
+            foreach (var kv in effectCount)
+            {
+                tasks.AddRange(
+                    new UniTask[]
+                    {
+                        EffectsManager.IniEffectsPool("light_hit", FightGlobalSetting.EffectPathDefine(kv.Key), kv.Value),
+                        EffectsManager.IniEffectsPool("heavy_hit", FightGlobalSetting.EffectPathDefine(kv.Key), kv.Value),
+                        EffectsManager.IniEffectsPool("super_hit", FightGlobalSetting.EffectPathDefine(kv.Key), kv.Value),
+                        EffectsManager.IniEffectsPool("electric_s_e", FightGlobalSetting.EffectPathDefine(kv.Key), kv.Value),
+                        EffectsManager.IniEffectsPool("super_combo_explosion", null, kv.Value),
+                        EffectsManager.IniEffectsPool("dream_buff", null, kv.Value)
+                    }
+                );
             }
         }
         
         AddBasicEffectLoadingTask(FightLoad.Fight.FightMembers.HeroSets.GetValues());
         AddBasicEffectLoadingTask(FightLoad.Fight.FightMembers.EnemySets.GetValues());
+        
+        tasks.AddRange(
+            new UniTask[]
+            {
+                EffectsManager.IniEffectsPool("super_combo_explosion", null, effectPreloadCount),
+                EffectsManager.IniEffectsPool("dream_buff", null, effectPreloadCount)
+            }
+        );
         
         if ( FightLoad.Fight.FightMode is (FightMode.Rotate or FightMode.Evolve))
         {
