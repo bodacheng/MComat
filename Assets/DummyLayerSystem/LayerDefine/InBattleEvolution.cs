@@ -29,7 +29,7 @@ public class InBattleEvolution : UILayer
         float leftInteral = Mathf.Max(PosCal.CanvasWidth - PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1, atLeastTwoSideSizeInterval);
         skillOptionsT.anchoredPosition = new Vector2(leftInteral, currentY);
 
-        float rightInteral = Mathf.Min((PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1 - PosCal.CanvasWidth), - atLeastTwoSideSizeInterval);
+        float rightInteral = Mathf.Min((PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1 - PosCal.CanvasWidth)/2, - atLeastTwoSideSizeInterval);
         var nineSlotRect = nineForShow.transform.GetComponent<RectTransform>();
         nineSlotRect.anchoredPosition = new Vector2(rightInteral, currentY);
         
