@@ -395,6 +395,11 @@ handlers.grantDevItems = function (args, context) {
 // 给予玩家基本财产
 handlers.grantBasicItems = function (args, context) {
     
+    var getRequest = {
+        PlayFabId: currentPlayerId
+    };
+    var accountInfo = server.GetUserAccountInfo(getRequest);
+    
     var AddUserVirtualCurrencyResult = server.AddUserVirtualCurrency(
         {
             PlayFabId :currentPlayerId,
@@ -405,6 +410,10 @@ handlers.grantBasicItems = function (args, context) {
     
     var GrantedItems = GrantItemToCurrentUser(args.unit_ids, "unit");
     var GrantedStones = GrantItemToCurrentUser(args.stone_ids, "stone");
+
+    if (accountInfo.UserInfo.TitleInfo.Origination === "Steam") {
+        GrantedPacks = GrantItemToCurrentUser(args.stone_package_ids, "stone");
+    }
     
     return { result: true };
 };
