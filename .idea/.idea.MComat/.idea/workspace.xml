@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8d35965f-97cc-4db1-bf97-1dc49bab43ba" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/PlayFabEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/PlayFabEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Resources/PlayFabEditorPrefsSO.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Components/SubMenuComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Components/TitleDataEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Components/TitleDataEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Components/TitleDataViewer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Components/TitleDataViewer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Components/TitleInternalDataEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Components/TitleInternalDataEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Components/TitleInternalDataViewer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Components/TitleInternalDataViewer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorAuthenticate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorAuthenticate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorHeader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorHeader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorHelpMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorHelpMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorSDKTools.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorSDKTools.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorVersion.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/Scripts/Utils/PlayFabEditorVersion.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Fonts/Avalon Bold.ttf.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Fonts/Avalon Bold.ttf.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Black.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Black.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Clear.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Clear.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Gray_base.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Gray_base.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Gray_dk1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Gray_dk1.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Gray_lt1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Gray_lt1.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Gray_lt2.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Gray_lt2.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Orange.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Orange.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Square.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/Square.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/White.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/White.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/azure-playfab-logo.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/azure-playfab-logo.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/checkmark.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/checkmark.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/checkmark.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/checkmark.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/checkmark_off.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/checkmark_off.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/checkmark_on.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/checkmark_on.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/checkmark_on.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/checkmark_on.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/dashboardIcon.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/dashboardIcon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/dashboardIcon.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/dashboardIcon.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/dashboardIconHover.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/dashboardIconHover.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/dashboardIconHover.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/dashboardIconHover.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/dn_colored.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/dn_colored.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/dn_gray.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/dn_gray.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/green.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/green.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/pfFullLogo_O.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/pfFullLogo_O.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/pfFullLogo_W.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/pfFullLogo_W.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/playfablogo.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/playfablogo.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/r_colored.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/r_colored.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/r_colored.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/r_colored.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/r_gray.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/r_gray.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/red.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/red.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/yellow.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/Images/yellow.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/PlayFabStyles.guiskin" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayFabEditorExtensions/Editor/UI/PlayFabStyles.guiskin" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2tDAMxLp8JgSlJHnk9AGP8nKKCa" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/2022.3.49f1/Unity.app/Contents/MacOS/Unity" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath $PROJECT_DIR$ -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/2022.3.49f1/Unity.app/Contents/MacOS/Unity" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath $PROJECT_DIR$ -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8d35965f-97cc-4db1-bf97-1dc49bab43ba" name="Changes" comment="" />
+      <created>1739876227909</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739876227909</updated>
+      <workItem from="1739876229696" duration="2448000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
+    <option name="unityProject" value="true" />
+    <option name="unityProjectFolder" value="true" />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="VcsManagerConfiguration">
+    <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
