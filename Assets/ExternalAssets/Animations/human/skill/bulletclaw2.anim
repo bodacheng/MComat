@@ -104215,7 +104215,7 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 5
+    intParameter: 1
     messageOptions: 0
   - time: 0.06666667
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
@@ -104254,10 +104254,10 @@ AnimationClip:
     messageOptions: 0
   - time: 0.9
     functionName: SetOverrideOnEnemyDrag
-    data: -1
+    data: 0
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
+    intParameter: -1
     messageOptions: 0
   - time: 0.9166667
     functionName: CloseOnProcessEnergyFromBodyWeapons
