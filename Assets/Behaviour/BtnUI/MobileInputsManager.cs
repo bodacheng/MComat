@@ -35,6 +35,13 @@ public class MobileInputsManager : MonoBehaviour {
     [SerializeField] RadialSegmentedHealthBar radialSegmentedHealthBar;
     [SerializeField] float buttonStretchEdgeDis = 5f;
 
+    #region pc indicator
+    [SerializeField] private Text a1Indicator;
+    [SerializeField] private Text a2Indicator;
+    [SerializeField] private Text a3Indicator;
+    [SerializeField] private Text dashIndicator;
+    #endregion
+    
     public Camera FXCamera { get; set; }
     
     //攻击键系成员

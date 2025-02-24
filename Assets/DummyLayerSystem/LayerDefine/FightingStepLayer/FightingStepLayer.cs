@@ -38,11 +38,15 @@ public class FightingStepLayer : UILayer
     
     public static FightingStepLayer Open()
     {
-        var fightingLayer = UILayerLoader.Load<FightingStepLayer>();
+        FightingStepLayer fightingLayer;
+#if UNITY_IOS || UNITY_ANDROID
+        fightingLayer = UILayerLoader.Load<FightingStepLayer>();
+#else
+        fightingLayer = UILayerLoader.Load<FightingStepLayer>(true, "FightingStepLayer_st", true);
+#endif
         fightingLayer.InputsManager.FXCamera = FightScene.FightScene.target.fxCamera;
         return fightingLayer;
     }
-
     
     public void PreparingMode(bool preparingMode)
     {

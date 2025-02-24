@@ -27,6 +27,7 @@ namespace DummyLayerSystem
             {"FightResultAnimLayer", "DummyLayerSystem/FightResultAnimLayer"},
             {"CountDownLayer", "DummyLayerSystem/CountDownLayer"},
             {"FightingStepLayer", "DummyLayerSystem/FightingStepLayer"},
+            {"FightingStepLayer_st", "DummyLayerSystem/FightingStepLayer_st"},
             {"InBattleEvolution", "DummyLayerSystem/InBattleEvolution"},
             {"SettingLayer", "DummyLayerSystem/Setting/SettingLayer"},
             {"SettingLayer_st", "DummyLayerSystem/Setting/SettingLayer_st"},
