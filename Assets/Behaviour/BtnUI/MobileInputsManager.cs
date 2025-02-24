@@ -36,13 +36,11 @@ public class MobileInputsManager : MonoBehaviour {
     [SerializeField] float buttonStretchEdgeDis = 5f;
 
     #region pc indicator
-    [SerializeField] private Text a1Indicator;
-    [SerializeField] private Text a2Indicator;
-    [SerializeField] private Text a3Indicator;
-    [SerializeField] private Text dashIndicator;
+    [SerializeField] private EasyKeyBinding.KeyBindingUpdater keyBindingUpdater;
     #endregion
     
     public Camera FXCamera { get; set; }
+    public EasyKeyBinding.KeyBindingUpdater KeyBindingUpdater => keyBindingUpdater;
     
     //攻击键系成员
     readonly IDictionary<string, GameObject> _aIcons = new Dictionary<string, GameObject>();
@@ -51,6 +49,7 @@ public class MobileInputsManager : MonoBehaviour {
     IDictionary<Button, IDictionary<string, GameObject>> btnIcons = new Dictionary<Button, IDictionary<string, GameObject>>();
     readonly IDictionary<Element, ElementEffectsGroup> _elementEffects = new Dictionary<Element, ElementEffectsGroup>();
     Element _focusing;
+
     
     async UniTask AddGemIcon(string skillID, IDictionary<string, GameObject> dic, Button btn)
     {
@@ -292,12 +291,19 @@ public class MobileInputsManager : MonoBehaviour {
         {
             return;
         }
+#if UNITY_IOS || UNITY_ANDROID
         h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
             (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f) +                                    
             UltimateJoystick.GetHorizontalAxis("joystick");
         v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
             (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f) +
             UltimateJoystick.GetVerticalAxis("joystick");
+#else
+        h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
+            (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f);
+        v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
+            (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f);
+#endif
         _inputting = (h > 0f || h < 0 || v > 0f || v < 0f);
     }
     

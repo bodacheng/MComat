@@ -22,6 +22,8 @@ namespace FightScene
         public override void ProcessEnter()
         {
             _layer = UILayerLoader.Get<FightingStepLayer>();
+            if (_layer.InputsManager.KeyBindingUpdater != null)
+                _layer.InputsManager.KeyBindingUpdater.INI();
             if (FightLoad.Fight.EventType == FightEventType.Screensaver)
             {
                 var titleScreenLayer = UILayerLoader.Load<TitleScreenLayer>();

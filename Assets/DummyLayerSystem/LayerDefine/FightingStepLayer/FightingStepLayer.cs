@@ -85,6 +85,9 @@ public class FightingStepLayer : UILayer
                         Time.timeScale = 1;
                         UILayerLoader.Remove<FightScenePauseSupport>();
                         AppSetting.Save();
+                        
+                        if (InputsManager.KeyBindingUpdater != null)
+                            InputsManager.KeyBindingUpdater.INI();
                     }
                 );
             });

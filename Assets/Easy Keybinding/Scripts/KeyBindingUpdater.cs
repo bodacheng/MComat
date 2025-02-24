@@ -1,13 +1,14 @@
 // Copyright 2024 Charged Software LLC
 
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace EasyKeyBinding
 {
     public class KeyBindingUpdater : MonoBehaviour
     {
-        [SerializeField] InputController InputController;
+        [FormerlySerializedAs("InputController")] [SerializeField] InputController inputController;
 
         // These text objects indicate the saved key binding below each indicator in the sample scene.  This text will display the letter or key name associated with that key binding.
         [Header("Keybinding Button Prefab Text Objects")]
@@ -21,12 +22,13 @@ namespace EasyKeyBinding
         [SerializeField] public Text Fire3IndicatorText;
         [SerializeField] public Text DreamComboIndicatorText;
 
-        bool initkeybindingindicators = false;
+        public InputController InputController => inputController;
+        private bool _initKeyBindingIndicators = false;
 
         void Update()
         {
             // Update the key binding indicator text at startup for the sample scene indicators.  Only needed for sample scene.
-            if (!initkeybindingindicators)
+            if (!_initKeyBindingIndicators)
             {
                 INI();
             }
@@ -37,7 +39,7 @@ namespace EasyKeyBinding
             if (KeyBindings.KeyBindArray != null)
             {
                 UpdateKeyBindings();
-                initkeybindingindicators = true;
+                _initKeyBindingIndicators = true;
             }
         }
 
@@ -46,15 +48,15 @@ namespace EasyKeyBinding
         public void UpdateKeyBindings()
         {
             // Updates each text indicator with the appropriate key binding, based on the key binding index for each action.
-            UpIndicatorText.text = InputController.KeyBindingText(0);
-            DownIndicatorText.text = InputController.KeyBindingText(1);
-            LeftIndicatorText.text = InputController.KeyBindingText(2);
-            RightIndicatorText.text = InputController.KeyBindingText(3);
-            JumpIndicatorText.text = InputController.KeyBindingText(4);
-            Fire1IndicatorText.text = InputController.KeyBindingText(5);
-            Fire2IndicatorText.text = InputController.KeyBindingText(6);
-            Fire3IndicatorText.text = InputController.KeyBindingText(7);
-            DreamComboIndicatorText.text = InputController.KeyBindingText(8);
+            UpIndicatorText.text = inputController.KeyBindingText(0);
+            DownIndicatorText.text = inputController.KeyBindingText(1);
+            LeftIndicatorText.text = inputController.KeyBindingText(2);
+            RightIndicatorText.text = inputController.KeyBindingText(3);
+            JumpIndicatorText.text = inputController.KeyBindingText(4);
+            Fire1IndicatorText.text = inputController.KeyBindingText(5);
+            Fire2IndicatorText.text = inputController.KeyBindingText(6);
+            Fire3IndicatorText.text = inputController.KeyBindingText(7);
+            DreamComboIndicatorText.text = inputController.KeyBindingText(8);
         }
     }
 }
