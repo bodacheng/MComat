@@ -30,6 +30,8 @@ public class FightingStepLayer : UILayer
 
     [Header("fps")] 
     [SerializeField] private Text fps;
+
+    [SerializeField] private Animator animator;
     
     public TeamUIManager Team1UI => team1UI;
     public TeamUIManager Team2UI => team2UI;
@@ -46,6 +48,12 @@ public class FightingStepLayer : UILayer
 #endif
         fightingLayer.InputsManager.FXCamera = FightScene.FightScene.target.fxCamera;
         return fightingLayer;
+    }
+    private readonly int _indicatorFlash = Animator.StringToHash("WinIndicatorFlash");
+    public void WinIndicatorFlash()
+    {
+        if (animator != null)
+            animator.SetTrigger(_indicatorFlash);
     }
     
     public void PreparingMode(bool preparingMode)
@@ -88,6 +96,8 @@ public class FightingStepLayer : UILayer
                         
                         if (InputsManager.KeyBindingUpdater != null)
                             InputsManager.KeyBindingUpdater.INI();
+                        
+                        WinIndicatorFlash();
                     }
                 );
             });
@@ -183,6 +193,7 @@ public class FightingStepLayer : UILayer
     }
 
     bool preTeam1AIState;
+    
     public void TutorialModeForceOnClickDreamCombo()
     {
         clickTriggerDreamCombo.SetActive(false);

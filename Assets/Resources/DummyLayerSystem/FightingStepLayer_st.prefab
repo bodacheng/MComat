@@ -4949,6 +4949,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5714480302156832991}
   - component: {fileID: 7920603356055692426}
+  - component: {fileID: 6542518008932856091}
   m_Layer: 5
   m_Name: FightingStepLayer_st
   m_TagString: Untagged
@@ -5024,6 +5025,28 @@ MonoBehaviour:
   clickTriggerDreamCombo: {fileID: 2389958440708511477}
   forceClickAutoBtnBlackMask: {fileID: 2984390701738761425}
   fps: {fileID: 7479497211164954626}
+  animator: {fileID: 6542518008932856091}
+--- !u!95 &6542518008932856091
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5714480302156832987}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5c2d77210822b52418ed7941bc828554, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6207434856886532327
 GameObject:
   m_ObjectHideFlags: 0
