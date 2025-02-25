@@ -53,7 +53,8 @@ namespace Soul
             _useDirection.y = 0;
             _useDirection = _useDirection.normalized;
         }
-        
+
+        private float h, v;
         void _c_State_Update_SP()
         {
             //get movement axis relative to camera
@@ -62,12 +63,23 @@ namespace Soul
             _screenMovementRight = _screenMovementSpace * Vector3.right;
             //get movement input, set direction to move in
 
-            var h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
+            if (!CommonSetting.PcMode)
+            {
+                h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
                         (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f) +                                    
                         UltimateJoystick.GetHorizontalAxis("joystick");
-            var v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
-                    (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f) +
-                    UltimateJoystick.GetVerticalAxis("joystick");
+                v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
+                        (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f) +
+                        UltimateJoystick.GetVerticalAxis("joystick");
+            }
+            else
+            {
+                h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
+                    (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f);
+                v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
+                    (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f);
+            }
+            
             _useDirection = (_screenMovementForward * v) + (_screenMovementRight * h);
             _useDirection.y = 0;
             _useDirection = _useDirection.normalized;

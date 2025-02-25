@@ -32,7 +32,7 @@ public partial class ArenaPage : MSceneProcess
         int lastSeasonPoint = PlayerPrefs.GetInt(PlayFabSetting._arenaPointCode, -1);
         if (lastSeasonPoint > PlayerAccountInfo.Me.arenaPoint)
         {
-            var arenaNewSeason = UILayerLoader.Load<ArenaNewSeason>();
+            var arenaNewSeason = UILayerLoader.Load<ArenaNewSeason>(true, null, true);
             arenaNewSeason.Setup(
                 Mathf.Clamp(lastSeasonPoint,0, Int32.MaxValue), 
                 Mathf.Clamp(PlayerAccountInfo.Me.arenaPoint, 0, Int32.MaxValue), 

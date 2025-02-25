@@ -77,7 +77,7 @@ public class FightingStepLayer : UILayer
             },
             ()=>
             {
-                var pauseLayer = CommonSetting.PcMode ? UILayerLoader.Load<FightScenePauseSupport>(true, null, true):
+                var pauseLayer = !CommonSetting.PcMode ? UILayerLoader.Load<FightScenePauseSupport>(true, null, true):
                     UILayerLoader.Load<FightScenePauseSupport>(true, "FightScenePauseSupport_st", true);
                 
                 pauseLayer.Setup(

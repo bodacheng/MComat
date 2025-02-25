@@ -291,19 +291,23 @@ public class MobileInputsManager : MonoBehaviour {
         {
             return;
         }
-#if UNITY_IOS || UNITY_ANDROID
-        h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
-            (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f) +                                    
-            UltimateJoystick.GetHorizontalAxis("joystick");
-        v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
-            (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f) +
-            UltimateJoystick.GetVerticalAxis("joystick");
-#else
-        h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
-            (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f);
-        v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
-            (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f);
-#endif
+
+        if (!CommonSetting.PcMode)
+        {
+            h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
+                (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f) +                                    
+                UltimateJoystick.GetHorizontalAxis("joystick");
+            v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
+                (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f) +
+                UltimateJoystick.GetVerticalAxis("joystick");
+        }
+        else
+        {
+            h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
+                (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f);
+            v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
+                (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f);
+        }
         _inputting = (h > 0f || h < 0 || v > 0f || v < 0f);
     }
     

@@ -142,7 +142,7 @@ namespace mainMenu
             
             if (PlayerAccountInfo.Me.tutorialProgress == "Started")
             {
-                var titleBgLayer = UILayerLoader.Load<TitleBgLayer>();
+                var titleBgLayer = UILayerLoader.Load<TitleBgLayer>(false, null, true);
                 titleBgLayer.Setup(1);
                 titleBgLayer.Rotate(true, ToInitialPhase);
             }

@@ -187,10 +187,10 @@ public class StartUpPresentation : MonoBehaviour
         else
         {
             await AppSetting.PlayBGM(CommonSetting.StartThemeAddressKey);
-            var titleBgLayer= UILayerLoader.Load<TitleBgLayer>();
+            var titleBgLayer= UILayerLoader.Load<TitleBgLayer>(true, null, true);
             titleBgLayer.Setup(1);
             titleBgLayer.Rotate(false);
-            var titleScreenLayer = UILayerLoader.Load<TitleScreenLayer>();
+            var titleScreenLayer = UILayerLoader.Load<TitleScreenLayer>(true, null, true);
             titleScreenLayer.Initialise();
         }
     }
