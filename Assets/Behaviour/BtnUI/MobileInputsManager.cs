@@ -455,7 +455,8 @@ public class MobileInputsManager : MonoBehaviour {
         fire1 = false;
         fire2 = false;
         acc = false;
-        joystick.gameObject.SetActive(true);
+        if (!CommonSetting.PcMode)
+            joystick.gameObject.SetActive(true);
         if (FightGlobalSetting.HasDefend)
         {
             defendBtn.gameObject.SetActive(true);

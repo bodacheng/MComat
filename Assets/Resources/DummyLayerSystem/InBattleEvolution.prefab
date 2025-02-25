@@ -469,7 +469,7 @@ MonoBehaviour:
   selectedFrame: {fileID: 2523835564432070104}
   animEndInSeconds: 0.5
   animEndOutSeconds: 0.2
-  atLeastTwoSideSizeInterval: 5
+  atLeastTwoSideSizeInterval: 50
 --- !u!95 &2589679708960391902
 Animator:
   serializedVersion: 5

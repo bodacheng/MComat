@@ -188,7 +188,7 @@ public class CommonSetting : ScriptableObject
 #if UNITY_IOS || UNITY_ANDROID
         PcMode = true;
 #else
-        PcMode = false;
+        PcMode = true;
 #endif
         MaxStoneCount = maxStoneCount;
         GangbangModeMaxUnitPerTeam1 = gangbangModeMaxUnitPerTeam1;
