@@ -13,11 +13,10 @@ public class SettingPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-#if UNITY_IOS || UNITY_ANDROID
-        _layer = UILayerLoader.Load<SettingLayer>();
-#else
-        _layer = UILayerLoader.Load<SettingLayer>(false, "SettingLayer_st");
-#endif
+        _layer = !CommonSetting.PcMode ? 
+            UILayerLoader.Load<SettingLayer>() : 
+            UILayerLoader.Load<SettingLayer>(false, "SettingLayer_st");
+        
         _layer.Initialise();
         PlayFabReadClient.GetAccountInfo(
             (x) =>

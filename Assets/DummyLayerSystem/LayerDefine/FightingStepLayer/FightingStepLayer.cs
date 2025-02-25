@@ -40,12 +40,10 @@ public class FightingStepLayer : UILayer
     
     public static FightingStepLayer Open()
     {
-        FightingStepLayer fightingLayer;
-#if UNITY_IOS || UNITY_ANDROID
-        fightingLayer = UILayerLoader.Load<FightingStepLayer>();
-#else
-        fightingLayer = UILayerLoader.Load<FightingStepLayer>(true, "FightingStepLayer_st", true);
-#endif
+        var fightingLayer = CommonSetting.PcMode ? 
+            UILayerLoader.Load<FightingStepLayer>(true, "FightingStepLayer_st", true):
+            UILayerLoader.Load<FightingStepLayer>();
+
         fightingLayer.InputsManager.FXCamera = FightScene.FightScene.target.fxCamera;
         return fightingLayer;
     }
@@ -79,12 +77,9 @@ public class FightingStepLayer : UILayer
             },
             ()=>
             {
-                FightScenePauseSupport pauseLayer;
-#if UNITY_IOS || UNITY_ANDROID
-                pauseLayer = UILayerLoader.Load<FightScenePauseSupport>(true, null, true);
-#else
-                pauseLayer = UILayerLoader.Load<FightScenePauseSupport>(true, "FightScenePauseSupport_st", true);
-#endif
+                var pauseLayer = CommonSetting.PcMode ? UILayerLoader.Load<FightScenePauseSupport>(true, null, true):
+                    UILayerLoader.Load<FightScenePauseSupport>(true, "FightScenePauseSupport_st", true);
+                
                 pauseLayer.Setup(
                     ()=> { Time.timeScale = 0; },
                     ()=>FightScene.FightScene.target.ReturnToFront(),

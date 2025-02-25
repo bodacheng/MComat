@@ -115,6 +115,7 @@ public class CommonSetting : ScriptableObject
     public List<string> DownLoadLabels => downLoadLabels;
     
     public static bool DevMode;
+    public static bool PcMode;
     public static int GangbangModeMaxUnitPerTeam1;
     public static int GangbangModeMaxUnitPerTeam2;
     public static int GangbangModeMaxUnitPerTeam3;
@@ -184,6 +185,11 @@ public class CommonSetting : ScriptableObject
     public void Initialise()
     {
         DevMode = devMode;
+#if UNITY_IOS || UNITY_ANDROID
+        PcMode = true;
+#else
+        PcMode = false;
+#endif
         MaxStoneCount = maxStoneCount;
         GangbangModeMaxUnitPerTeam1 = gangbangModeMaxUnitPerTeam1;
         GangbangModeMaxUnitPerTeam2 = gangbangModeMaxUnitPerTeam2;
