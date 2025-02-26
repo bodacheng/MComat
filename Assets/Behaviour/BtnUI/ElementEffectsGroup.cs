@@ -25,7 +25,7 @@ public class ElementEffectsGroup
         }
         else
         {
-            _dreamComboBtn.Stop(true,ParticleSystemStopBehavior.StopEmittingAndClear);
+            _dreamComboBtn.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
     }
     
@@ -171,7 +171,7 @@ public class ElementEffectsGroup
         };
 
         var results2 = await UniTask.WhenAll(tasks2);
-
+        
         _rushBtn = results2[0];
         var a1Refresh = results2[1];
         var a2Refresh = results2[2];
@@ -189,6 +189,11 @@ public class ElementEffectsGroup
             { a2Btn, a2Refresh },
             { a3Btn, a3Refresh }
         };
+        
+        foreach (var p in results2)
+        {
+            p.transform.SetParent(targetRectT);
+        }
     }
     
     public void RefreshSlotEffect(Button button, string skillId, Vector3 pos)
