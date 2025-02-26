@@ -123,14 +123,17 @@ public class MobileInputsManager : MonoBehaviour {
                 (x) =>
                 {
                     var percent = (float)x / FightGlobalSetting.DreamComboGaugeMax;
-                    if (percent == 1)
+                    if (percent >= 1)
                     {
                         DreamComboEffectOn();
+                        StopSlot(dreamComboBtn);
                     }
                     else
                     {
                         DreamComboEffectOff();
+                        RefreshPattern(dreamComboBtn, String.Empty);
                     }
+                    
                     radialSegmentedHealthBar.SetPercent(percent);
                 }
             ).AddTo(this.gameObject);
@@ -187,7 +190,7 @@ public class MobileInputsManager : MonoBehaviour {
         if (!_elementEffects.ContainsKey(element))
         {
             var elementEffect = new ElementEffectsGroup();
-            await elementEffect.InitializeCommon(effectsParent, element, a1Btn, a2Btn, a3Btn);
+            await elementEffect.InitializeCommon(effectsParent, element, a1Btn, a2Btn, a3Btn, dreamComboBtn);
             DicAdd<Element,ElementEffectsGroup>.Add(_elementEffects, element, elementEffect);
         }
         
@@ -225,7 +228,6 @@ public class MobileInputsManager : MonoBehaviour {
     {
         if (!_elementEffects.ContainsKey(_focusing))
         {
-            Debug.Log("读取流程产生错误："+_focusing);
             return;
         }
         var targetExplode = _elementEffects[_focusing].GetExplosionEffect(spLevel);
@@ -571,7 +573,6 @@ public class MobileInputsManager : MonoBehaviour {
     
     void RefreshPattern(Button button, string skillId) //按钮切换也可以在这里做文章
     {
-        Vector3 targetPos = PosCal.GetWorldPos(FXCamera, button.GetComponent<RectTransform>(), 5);
         if (btnIcons.ContainsKey(button))
         {
             var target = btnIcons[button];
@@ -580,18 +581,19 @@ public class MobileInputsManager : MonoBehaviour {
                 pair.Value.gameObject.SetActive(pair.Key == skillId);
             }
         }
-        else
-        {
-            Debug.Log("战斗按键指示器逻辑错误："+ button);
-        }
         
         if (_elementEffects.ContainsKey(_focusing))
         {
+            Vector3 targetPos = PosCal.GetWorldPos(FXCamera, button.GetComponent<RectTransform>(), 5);
             _elementEffects[_focusing].RefreshSlotEffect(button, skillId, targetPos);
         }
-        else
+    }
+
+    void StopSlot(Button button)
+    {
+        if (_elementEffects.ContainsKey(_focusing))
         {
-            Debug.Log("error button effect："+　skillId);
+            _elementEffects[_focusing].RefreshSlotEffect(button, "empty", Vector3.zero);
         }
     }
 

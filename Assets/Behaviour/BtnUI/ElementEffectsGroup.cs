@@ -121,12 +121,13 @@ public class ElementEffectsGroup
         }
     }
 
-    public async UniTask InitializeCommon(Transform targetRectT, Element element, Button a1Btn, Button a2Btn, Button a3Btn)
+    public async UniTask InitializeCommon(Transform targetRectT, Element element, Button a1Btn, Button a2Btn, Button a3Btn, Button dreamComboBtn)
     {
         var path = FightGlobalSetting.EffectPathDefine(element);
         
         var tasks = new List<UniTask<ParticleSystem>> 
         {
+            AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab"),
             AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab"),
             AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab"),
             AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab")
@@ -135,16 +136,19 @@ public class ElementEffectsGroup
         var attackSlot = results[0];
         var fire1Slot = results[1];
         var fire2Slot = results[2];
+        var dreamSlot = results[3];
         
         attackSlot.transform.SetParent(targetRectT);
         fire1Slot.transform.SetParent(targetRectT);
         fire2Slot.transform.SetParent(targetRectT);
+        dreamSlot.transform.SetParent(targetRectT);
         
         _buttonSlotEffects = new Dictionary<Button, ParticleSystem>
         {
             { a1Btn, attackSlot },
             { a2Btn, fire1Slot },
-            { a3Btn, fire2Slot }
+            { a3Btn, fire2Slot },
+            { dreamComboBtn, dreamSlot }
         };
 
         if (FightGlobalSetting.HasDefend)
@@ -189,7 +193,7 @@ public class ElementEffectsGroup
     
     public void RefreshSlotEffect(Button button, string skillId, Vector3 pos)
     {
-        if (skillId == String.Empty)
+        if (String.IsNullOrEmpty(skillId))
         {
             _buttonSlotEffects[button].transform.position = pos;
             _buttonSlotEffects[button].Play(true);
