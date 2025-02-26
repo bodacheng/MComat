@@ -4969,6 +4969,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2858343127841185195}
+  - {fileID: 3055386941463535759}
   - {fileID: 244302911975311304}
   - {fileID: 8460920772145953737}
   - {fileID: 8536256549423714821}
@@ -4976,7 +4977,6 @@ RectTransform:
   - {fileID: 1057972598011090183}
   - {fileID: 7415628284493325746}
   - {fileID: 7415628285627410666}
-  - {fileID: 3055386941463535759}
   - {fileID: 5714480302127526370}
   - {fileID: 5714480301895743147}
   - {fileID: 5714480301642041439}
@@ -6972,6 +6972,11 @@ PrefabInstance:
       propertyPath: DreamComboIndicatorText
       value: 
       objectReference: {fileID: 7049174314373220551}
+    - target: {fileID: 2891544220159513395, guid: 8930a9117b630bf448af514934ff470e,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4979927519730048295, guid: 8930a9117b630bf448af514934ff470e,
         type: 3}
       propertyPath: m_Name
@@ -7108,7 +7113,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 0
   m_Interactable: 0
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &8834364962488868561 stripped
 MonoBehaviour:
