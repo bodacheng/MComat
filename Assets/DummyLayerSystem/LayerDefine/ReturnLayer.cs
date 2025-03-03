@@ -18,6 +18,14 @@ public class ReturnLayer : UILayer
         returnButton.SetListener(POP);
     }
 
+    private void Update()
+    {
+        if (CommonSetting.PcMode && Input.GetKeyDown(KeyCode.Escape))
+        {
+            returnButton.onClick.Invoke();
+        }
+    }
+
     public static void Stack(MainSceneStep step, Func<MainSceneStep, bool> returnAct)
     {
         ReturnAction returnAction = new ReturnAction
