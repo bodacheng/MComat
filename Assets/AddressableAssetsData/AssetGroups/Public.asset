@@ -35,6 +35,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 136398b09ad2c4d7f857703d5f87c9e3
+    m_Address: Glow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 14d86213d7eb66d488a487dc38bc79d1
     m_Address: Snow4cg
     m_ReadOnly: 0
@@ -83,6 +89,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2ac6e0bb814992b4f9cd0c6c2159bec0
+    m_Address: storm_sharpswirl
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2c907c722ddf34d509edf8a32522caee
+    m_Address: eff_smoke_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2dbe75cf06e0c6842b4eae60ddda63ef
     m_Address: Snow4
     m_ReadOnly: 0
@@ -103,6 +121,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2ea55beb9345a33498fc16106277de3a
     m_Address: fire4x4_purple
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2fbac1fb84fe14c79944e97176473868
+    m_Address: eff_ring_1
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -137,6 +161,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44a6f271d8af00945aa1879221ab56da
+    m_Address: drop
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4568d446846012c4bb50c348fa2aaf21
     m_Address: fire4x4_modular
     m_ReadOnly: 0
@@ -151,6 +181,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4ba51bcdd8b1423449a7cc578297fd18
     m_Address: Dark_bllue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 52b767eecc2845a429e0e9e2155a8ea5
+    m_Address: Smoke3
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -179,6 +215,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60c4f99d55be7ee44a8521d1da5a59c6
+    m_Address: Trail21cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 61e68320eb0a34646ae9e7855bba9d92
     m_Address: Gradient17
     m_ReadOnly: 0
@@ -197,8 +239,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64c774a016e044548b7752ac7e5d088c
+    m_Address: LightParticle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 68be60b9f51e6b447a28cdb9af6a52cf
     m_Address: CircleRainbow10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a8d78cb95270dd45b35a1cf85ada012
+    m_Address: ground_light03
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -245,6 +299,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7203fed567fe20343b5ca1cb3357cd90
+    m_Address: fire_ring
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 72da916cf60fb554c9ca50a281f0494b
     m_Address: Flare2cg
     m_ReadOnly: 0
@@ -269,14 +329,32 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c707bedfbf7942459e20471e6f8d740
+    m_Address: FireRing
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7d68a918c0765ff46bd6aa7513519399
     m_Address: Noise53
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7dcb8a9c3f171064387b66c3e553ab24
+    m_Address: Circle8
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7f0f54f5368099247ae0c0d9749775ef
     m_Address: Flare_Slash_Yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f29dd3789e247d42b71f88ff4aff20a
+    m_Address: modular_aura03
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -347,6 +425,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95bfaff9c1365cf48bd6530d62ea553a
+    m_Address: Wind Spell 2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9ee27d8670d11a149a37ab74ca7d8b11
     m_Address: TC_kouqiang_D
     m_ReadOnly: 0
@@ -367,6 +451,18 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ac39884ca65698c46ab28cb5f1445d69
     m_Address: Flare21cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: acdebe7a41b31aa4ea14d91f14bfbc0a
+    m_Address: Circle102cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae879f5ee624349a4b6adc3591a232c6
+    m_Address: rush
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -395,6 +491,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6bb4a16fa5a7a343a966b02286b332d
+    m_Address: len_ring02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b9e879cde921eb241bbc716410ae2b8e
     m_Address: modular_aura06
     m_ReadOnly: 0
@@ -403,6 +505,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bafdb712bebb28d40988e5644ed9bf5b
     m_Address: smallglow01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be9d5ac190c892843bfdb397f48ff9b2
+    m_Address: S_Thunder_horn_1
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -439,6 +547,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d752321c319e6e848822bd54f453c5bd
     m_Address: ElectricLine01_4x4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8a148aefc3bb3446a8478f7a2d60d0f
+    m_Address: light_sprinkles
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -523,6 +637,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f8d5c193cad8f5449a28999e5ca04652
     m_Address: Green
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe3fbcea8e93fec468be670c547e0aa1
+    m_Address: Smoke3cg
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
