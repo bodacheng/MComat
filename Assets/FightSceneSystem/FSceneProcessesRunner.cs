@@ -86,7 +86,6 @@ namespace FightScene
             {
                 if (SceneProcessDictionary.ContainsKey(sceneStep))
                 {
-                    Debug.Log(sceneStep + "倒是在字典里");
                     Debug.Log(currentProcess);
                 }
             }

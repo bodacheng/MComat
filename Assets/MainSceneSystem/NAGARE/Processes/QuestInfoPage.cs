@@ -187,7 +187,7 @@ public class QuestInfoPage : MSceneProcess
                 {
                     if (fight.FightMode == FightMode.Evolve)
                     {
-                        if (fight.FightMembers.HeroSets.GetValues().Count != 1)
+                        if (fight.FightMembers.HeroSets.GetValues().Count < 1)
                         {
                             return false;
                         }

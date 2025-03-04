@@ -121,7 +121,7 @@ namespace ModelView
                 }
                 Initialize(false,_focusingC.WholeT.gameObject.transform, transform);
                 _focusingC.AnimationManger.CasualFace();
-                ItemDetailStartDirection(0,0,0);
+                ItemDetailStartDirection(-30,0,0);
             }
         }
         

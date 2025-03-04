@@ -76,7 +76,6 @@ namespace FightScene
                                                 levelInt);
                                         }
                                         arenaFightOver.LoadNextArcadeStage();
-                                        PlayFabReadClient.LoadItems(null);
                                     }
                                     
                                     if (FightLoad.Fight.ID == "1")

@@ -125,7 +125,27 @@ public partial class ArenaFightOver : UILayer
         Int32.TryParse(FightLoad.Fight.ID, out var nowStageNo);
         var nextStageNo = nowStageNo + 1;
         var nextFight = await ArcadeModeManager.Instance.LoadStage(nextStageNo);
+        if (nextFight == null) return;
         
+        string teamKey;
+        if (nextFight.FightMode == FightMode.Group)
+        {
+            teamKey = "gangbang";
+        }
+        else
+        {
+            switch (FightLoad.Fight.FightMode)
+            {
+                case FightMode.Evolve:
+                    teamKey = "arcade";
+                    break;
+                default:
+                    teamKey = "origin";
+                    break;
+            }
+        }
+        
+        nextFight.FightMembers.HeroSets = TeamSet.GetTargetSet(teamKey).LoadTeamDic();
         if (nextFight != null && QuestInfoPage.CanFightCheck(nextFight) && PlayerAccountInfo.Me.tutorialProgress == "Finished" && nowStageNo != 5)
         {
             nextTab.SetUp("Stage " + nextStageNo);
