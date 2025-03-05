@@ -1,4 +1,5 @@
-﻿using DummyLayerSystem;
+﻿using System.Collections.Generic;
+using DummyLayerSystem;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,7 @@ public class SettingLayer : UILayer
     #region Btns
     [SerializeField] BOButton accountBtn;
     [SerializeField] BOButton volumeBtn;
+    [SerializeField] BOButton graphicBtn;
     [SerializeField] BOButton deviceBtn;
     [SerializeField] BOButton supportBtn;
     [SerializeField] BOButton languageBtn;
@@ -19,6 +21,7 @@ public class SettingLayer : UILayer
     
     #region Panels
     [SerializeField] RectTransform volumePanel;
+    [SerializeField] RectTransform graphicPanel;
     [SerializeField] RectTransform accountPanel;
     [SerializeField] RectTransform devicePanel;
     [SerializeField] RectTransform supportPanel;
@@ -68,6 +71,32 @@ public class SettingLayer : UILayer
     [SerializeField] Text nickName;
     [SerializeField] BOButton resetNickNameBtn;
     #endregion
+    
+    #region Graphics
+    [SerializeField] Toggle fullScreenToggle;
+    [SerializeField] List<ResolutionOption> resolutionOptions;
+    
+    [System.Serializable]
+    public struct ResolutionOption
+    {
+        public int width;
+        public int height;
+        public Toggle toggle;
+
+        public void Toggle(bool isOn)
+        {
+            if (isOn)
+            {
+                Screen.SetResolution(width, height, Screen.fullScreen);
+            }
+        }
+    }
+    #endregion
+    
+    public void ToggleFullScreen()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+    }
     
     public void AccountPhase_EmailToBeSet()
     {
@@ -140,6 +169,7 @@ public class SettingLayer : UILayer
             nickNamePanel.gameObject.SetActive(false);
             languagePanel.gameObject.SetActive(false);
             controlPanel.gameObject.SetActive(false);
+            graphicPanel.gameObject.SetActive(false);
         }
         
         volumeBtn.onClick.AddListener(() =>
@@ -169,7 +199,32 @@ public class SettingLayer : UILayer
             supportPanel.gameObject.SetActive(true);
             SetSelectedFrame(supportBtn.GetComponent<RectTransform>());
         });
+        
+        graphicBtn.onClick.AddListener(() =>
+        {
+            CloseAllPanels();
+            graphicPanel.gameObject.SetActive(true);
+            SetSelectedFrame(graphicBtn.GetComponent<RectTransform>());
+        });
+        
+        // 获取当前屏幕设置
+        int currentWidth = Screen.width;
+        int currentHeight = Screen.height;
+        bool isFullscreen = Screen.fullScreen;
 
+        // 设置全屏 Toggle 的初始状态
+        fullScreenToggle.isOn = isFullscreen;
+
+        // 根据当前分辨率设置对应的 Toggle
+        foreach (var option in resolutionOptions)
+        {
+            if (option.width == currentWidth && option.height == currentHeight)
+            {
+                option.toggle.isOn = true;
+                break;
+            }
+        }
+        
         void LanguageIndicator()
         {
             switch (AppSetting.Value.Language)
