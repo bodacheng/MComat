@@ -169,7 +169,8 @@ public class SettingLayer : UILayer
             nickNamePanel.gameObject.SetActive(false);
             languagePanel.gameObject.SetActive(false);
             controlPanel.gameObject.SetActive(false);
-            graphicPanel.gameObject.SetActive(false);
+            if (CommonSetting.PcMode)
+                graphicPanel.gameObject.SetActive(false);
         }
         
         volumeBtn.onClick.AddListener(() =>
@@ -199,29 +200,43 @@ public class SettingLayer : UILayer
             supportPanel.gameObject.SetActive(true);
             SetSelectedFrame(supportBtn.GetComponent<RectTransform>());
         });
-        
-        graphicBtn.onClick.AddListener(() =>
-        {
-            CloseAllPanels();
-            graphicPanel.gameObject.SetActive(true);
-            SetSelectedFrame(graphicBtn.GetComponent<RectTransform>());
-        });
-        
-        // 获取当前屏幕设置
-        int currentWidth = Screen.width;
-        int currentHeight = Screen.height;
-        bool isFullscreen = Screen.fullScreen;
 
-        // 设置全屏 Toggle 的初始状态
-        fullScreenToggle.isOn = isFullscreen;
-
-        // 根据当前分辨率设置对应的 Toggle
-        foreach (var option in resolutionOptions)
+        if (CommonSetting.PcMode)
         {
-            if (option.width == currentWidth && option.height == currentHeight)
+            graphicBtn.onClick.AddListener(() =>
             {
-                option.toggle.isOn = true;
-                break;
+                CloseAllPanels();
+                graphicPanel.gameObject.SetActive(true);
+                SetSelectedFrame(graphicBtn.GetComponent<RectTransform>());
+            });
+            
+            // 获取当前屏幕设置
+            int currentWidth = Screen.width;
+            int currentHeight = Screen.height;
+            bool isFullscreen = Screen.fullScreen;
+
+            // 设置全屏 Toggle 的初始状态
+            fullScreenToggle.SetIsOnWithoutNotify(isFullscreen);
+
+            // 根据当前分辨率设置对应的 Toggle
+            foreach (var option in resolutionOptions)
+            {
+                option.toggle.onValueChanged.AddListener((isOn) =>
+                {
+                    if (isOn)
+                    {
+                        Screen.SetResolution(option.width, option.height, Screen.fullScreen);
+                    }
+                });
+            
+                if (option.width == currentWidth && option.height == currentHeight)
+                {
+                    option.toggle.SetIsOnWithoutNotify(true);
+                }
+                else
+                {
+                    option.toggle.SetIsOnWithoutNotify(false);
+                }
             }
         }
         
@@ -352,6 +367,8 @@ public class SettingLayer : UILayer
     public static void Close()
     {
         AppSetting.Save();
+        if (CommonSetting.PcMode)
+            AppSetting.Value.SaveSettings();
         UILayerLoader.Remove<SettingLayer>();
     }
     

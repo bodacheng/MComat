@@ -40,9 +40,12 @@ public class Starter : MonoBehaviour
     
     public async UniTask Initialise()
     {
-#if UNITY_STANDALONE_WIN
-        SteamManager.gameObject.SetActive(true);
-#endif
+        if (CommonSetting.PcMode)
+        {
+            SteamManager.gameObject.SetActive(true);
+            AppSetting.Value.LoadSettings();
+        }
+        
         ConfigInitialised = false;
         AddressablesLogic.ReleaseAsyncOperationHandles();
         inGameDebugConsole.gameObject.SetActive(CommonSetting.DevMode);

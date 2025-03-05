@@ -148,4 +148,28 @@ public class AppSetting
             }
         );
     }
+
+    #region pc settings
+
+    public void SaveSettings()
+    {
+        PlayerPrefs.SetInt("ResolutionWidth", Screen.width);
+        PlayerPrefs.SetInt("ResolutionHeight", Screen.height);
+        PlayerPrefs.SetInt("Fullscreen", Screen.fullScreen ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadSettings()
+    {
+        if (PlayerPrefs.HasKey("ResolutionWidth") && PlayerPrefs.HasKey("ResolutionHeight"))
+        {
+            int width = PlayerPrefs.GetInt("ResolutionWidth");
+            int height = PlayerPrefs.GetInt("ResolutionHeight");
+            bool isFullscreen = PlayerPrefs.GetInt("Fullscreen") == 1;
+
+            Screen.SetResolution(width, height, isFullscreen);
+        }
+    }
+    #endregion
+
 }
