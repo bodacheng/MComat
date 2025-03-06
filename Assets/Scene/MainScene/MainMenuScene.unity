@@ -1001,7 +1001,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 588c5b960b402429c8d66a51df170a47, type: 3}
+  m_Texture: {fileID: 2800000, guid: 96c891bf74e0e4df3a9f2d15e199a2f5, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1023,7 +1023,7 @@ MonoBehaviour:
   scrollSpeed: 1
   img: {fileID: 785572749}
   _x: 0.01
-  _y: 0.01
+  _y: 0
 --- !u!222 &785572751
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1346,7 +1346,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   postProcessCamera: {fileID: 8663558840509552357}
   noPostProcessCamera: {fileID: 1616407342}
-  T: {fileID: 228857932}
   audioSource: {fileID: 746885324}
   uiAudioSource: {fileID: 72263034}
   Canvas: {fileID: 228857934}
@@ -2230,7 +2229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollSpeed: 1
   img: {fileID: 1911195684}
-  _x: -0.01
+  _x: 0.01
   _y: -0.01
 --- !u!114 &1911195684
 MonoBehaviour:
@@ -2245,14 +2244,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
+  m_Color: {r: 0.8509804, g: 0.8509804, b: 0.8509804, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: aecbe827dead24b9190ebcba6f00abeb, type: 3}
+  m_Texture: {fileID: 2800000, guid: a19de1b93c5004ef1abfd26d32bbd64d, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
