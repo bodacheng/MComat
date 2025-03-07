@@ -16,7 +16,6 @@ public class FightBeginBtn : MonoBehaviour
     {
         btn.interactable = on;
         animator.SetBool("On", on);
-        animator.SetBool("Guide", guide);
     }
 }
 

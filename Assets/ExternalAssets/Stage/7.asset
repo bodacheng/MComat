@@ -78,4 +78,12 @@ MonoBehaviour:
   dumbAIDecisionDelay: 20
   dreamComboAIRateNum: 100
   stageRefLevel: 0.5
-  team2GroupSet: []
+  team2GroupSet:
+  - id: 0
+    Count: 7
+  - id: 1
+    Count: 7
+  - id: 2
+    Count: 7
+  - id: 3
+    Count: 3

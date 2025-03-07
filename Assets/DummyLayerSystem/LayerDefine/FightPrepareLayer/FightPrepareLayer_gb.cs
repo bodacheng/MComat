@@ -49,6 +49,7 @@ public partial class FightPrepareLayer : UILayer
             _selectedMaxTeamCount = maxUnitPerTeam;
             var team1UnitCount = stage.GangbangAutoAdjustTeamUnitByMaxCount(1, stage.FightMembers.HeroSets.GetValues(), _selectedMaxTeamCount, true);
             var team2UnitCount = stage.GangbangAutoAdjustTeamUnitByMaxCount(2, stage.FightMembers.EnemySets.GetValues(), _selectedMaxTeamCount, true);
+            
             RefreshCountDisplay(1, team1UnitCount, _selectedMaxTeamCount);
             RefreshCountDisplay(2, team2UnitCount, _selectedMaxTeamCount);
             foreach (var icon in _gangbangHeroIconsE)
@@ -173,11 +174,21 @@ public partial class FightPrepareLayer : UILayer
         {
             team1Flg.text = Translate.Get("Player") + Translate.Get("WholeUnitCount");
             team1WholeCount.text = currentTeamUnitCount + "/" + maxTeamCount;
+            if (_gangbangHeroIconsM == null) return;
+            foreach (var icon in _gangbangHeroIconsM)
+            {
+                icon.RefreshCount();
+            }
         }
         else
         {
             team2Flg.text = Translate.Get("Enemy") + Translate.Get("WholeUnitCount");
             team2WholeCount.text = currentTeamUnitCount + "/" + maxTeamCount;
+            if (_gangbangHeroIconsE == null) return;
+            foreach (var icon in _gangbangHeroIconsE)
+            {
+                icon.RefreshCount();
+            }
         }
     }
 }

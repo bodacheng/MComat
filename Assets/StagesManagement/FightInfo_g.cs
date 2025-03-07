@@ -35,11 +35,16 @@ public partial class FightInfo : ScriptableObject
 
     public int SetTeamUnitCount(int team, string instanceID, int count, int teamMaxCount)
     {
-        //var ifWholeCount = GetIfGroupWholeUnitCount(team, instanceID, count);
-        //if (ifWholeCount <= teamMaxCount)
+        if (count < 0) { count = 0; }
+        var set = GetSoldierGroupSet(instanceID, team);
+        var ifWholeCount = GetIfGroupWholeUnitCount(team, instanceID, count);
+        if (ifWholeCount <= teamMaxCount)
         {
-            var set = GetSoldierGroupSet(instanceID, team);
             set.Count = count;
+        }
+        else
+        {
+            set.Count = Mathf.Clamp((count - (ifWholeCount - teamMaxCount)), 0, Int32.MaxValue);
         }
         return GetGroupWholeUnitCount(team);
     }
@@ -149,14 +154,6 @@ public partial class FightInfo : ScriptableObject
     
     public int GangbangAutoAdjustTeamUnitByMaxCount(int team, List<UnitInfo> unitSets, int selectedMaxTeamCount, bool adaptMode = false)
     {
-        // reset to orgin first;
-        if (team != 1)
-            foreach(var unitInfo in unitSets)
-            {
-                var set = GetSoldierGroupSet(unitInfo.id, team);
-                SetTeamUnitCount(team, unitInfo.id, set.OriginCount, selectedMaxTeamCount);
-            }
-        
         int wholeTeamCount = 0;
         foreach(var unitInfo in unitSets)
         {
@@ -165,24 +162,28 @@ public partial class FightInfo : ScriptableObject
         
         if (adaptMode)
         {
-            if (wholeTeamCount > selectedMaxTeamCount)
+            foreach(var unitInfo in unitSets)
             {
-                wholeTeamCount = 0;
-                foreach (var unitInfo in unitSets)
+                wholeTeamCount = SetTeamUnitCount(team, unitInfo.id, 0, selectedMaxTeamCount);
+            }
+            // reset to origin first;
+            if (team == 2)
+            {
+                foreach(var unitInfo in unitSets)
                 {
-                    wholeTeamCount = SetTeamUnitCount(team, unitInfo.id, selectedMaxTeamCount / unitSets.Count, selectedMaxTeamCount);
+                    var set = GetSoldierGroupSet(unitInfo.id, team);
+                    wholeTeamCount = SetTeamUnitCount(team, unitInfo.id, set.OriginCount, selectedMaxTeamCount);
                 }
             }
+            
             var toBeAdd = selectedMaxTeamCount - wholeTeamCount;
-            if (toBeAdd > 0)
+            for (var index = 0; index < unitSets.Count; index++)
             {
-                wholeTeamCount = 0;
-                for (var index = 0; index < unitSets.Count; index++)
+                if (toBeAdd > 0)
                 {
                     var unitInfo = unitSets[index];
-                    var setCount = (index != unitSets.Count - 1) ? (toBeAdd / (unitSets.Count - index)) : toBeAdd;
-                    SetTeamUnitCount(team, unitInfo.id, setCount, selectedMaxTeamCount);
-                    wholeTeamCount += GetTeamUnitCount(team, unitInfo.id);
+                    var addCount = (index != unitSets.Count - 1) ? (int)((float)toBeAdd / unitSets.Count) : toBeAdd;
+                    wholeTeamCount = SetTeamUnitCount(team, unitInfo.id,  GetTeamUnitCount(team, unitInfo.id) + addCount, selectedMaxTeamCount);
                     toBeAdd = selectedMaxTeamCount - wholeTeamCount;
                 }
             }

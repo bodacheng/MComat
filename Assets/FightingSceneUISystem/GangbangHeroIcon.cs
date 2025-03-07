@@ -16,25 +16,11 @@ public class GangbangHeroIcon : HeroIcon
         RefreshCount();
         if (enableCountSet)
         {
-            void ShowActive(int newCount)
-            {
-                if (newCount > 0)
-                {
-                    LightOn();
-                }
-                else
-                {
-                    Grey();
-                }
-            }
-            
             void Plus()
             {
                 var currentCount = countGet();
                 countSet(currentCount + 1);
-                var newCount = countGet();
                 RefreshCount();
-                ShowActive(newCount);
             }
             plusBtn.SetListener(Plus);
             plusBtn.onHold.AddListener(Plus);
@@ -43,14 +29,11 @@ public class GangbangHeroIcon : HeroIcon
             {
                 var currentCount = countGet();
                 countSet(currentCount - 1);
-                var newCount = countGet();
                 RefreshCount();
-                ShowActive(newCount);
             }
             
             minusBtn.SetListener(Minus);
             minusBtn.onHold.AddListener(Minus);
-            ShowActive(countGet());
         }
         else
         {
@@ -61,7 +44,16 @@ public class GangbangHeroIcon : HeroIcon
 
     public void RefreshCount()
     {
-        count.text = countGet().ToString();
+        var value = countGet();
+        count.text = value.ToString();
+        if (value > 0)
+        {
+            LightOn();
+        }
+        else
+        {
+            Grey();
+        }
     }
     
     public static GangbangHeroIcon ArrangeGangbangHeroIconToParent(
