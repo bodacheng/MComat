@@ -162,6 +162,11 @@ namespace MagicaCloth2
         /// </summary>
         void PreRenderingUpdate()
         {
+            // 帧率低时候不运行
+            if ((1.0f / Time.deltaTime) < 50)
+            {
+                return;
+            }
             // メッシュへの反映
             foreach (var rdata in renderDataDict.Values)
                 rdata?.WriteMesh();

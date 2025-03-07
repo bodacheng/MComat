@@ -3,6 +3,7 @@
 // https://magicasoft.jp
 using System.Collections.Generic;
 using Unity.Jobs;
+using UnityEngine;
 
 namespace MagicaCloth2
 {
@@ -117,6 +118,12 @@ namespace MagicaCloth2
             if (MagicaManager.Team.ActiveTeamCount > 0)
             {
                 ClearMasterJob();
+                // 帧率低时候不运行
+                if ((1.0f / Time.deltaTime) < 50)
+                {
+                    return;
+                }
+                
                 masterJob = MagicaManager.Bone.RestoreTransform(masterJob);
                 CompleteMasterJob();
             }
@@ -131,7 +138,13 @@ namespace MagicaCloth2
         {
             if (MagicaManager.IsPlaying() == false)
                 return;
-
+            
+            // 帧率低时候不运行
+            if ((1.0f / Time.deltaTime) < 50)
+            {
+                return;
+            }
+            
             //-----------------------------------------------------------------
             // シミュレーション開始イベント
             MagicaManager.OnPreSimulation?.Invoke();
