@@ -75,3 +75,4 @@ b,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,EV
 194,El_Attack_FireBreath_Swipe,e_dragon,3,1,3,GI,
 195,El_Attack_Bite_Front,e_dragon,0,1,3,GR,
 196,El_Fly_Backwards,e_dragon,0,0,3,CT,
+197,twowayboltp_boss,human,3,1,3,GI,BOSS

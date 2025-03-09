@@ -204,6 +204,18 @@ public partial class Decomposition : MonoBehaviour {
                 BO_Ani_E.hiddenMethods.MagicForward_core("lightningspray", hitBoxSubEventManger.transform.position, hitBoxSubEventManger.transform.rotation, 0, _HitBox.GeneratedByStateKey);
                 Phase = -1;
                 break;
+            case "twowayboltp1":
+                BO_Ani_E.hiddenMethods.MagicForward_core("twowayboltp1", hitBoxSubEventManger.transform.position, hitBoxSubEventManger.transform.rotation, 3, _HitBox.GeneratedByStateKey);
+                break;
+            case "twowayboltp2":
+                BO_Ani_E.hiddenMethods.MagicForward_core("twowayboltp2", hitBoxSubEventManger.transform.position, hitBoxSubEventManger.transform.rotation, 3, _HitBox.GeneratedByStateKey);
+                break;
+            case "twowayboltp3":
+                BO_Ani_E.hiddenMethods.MagicForward_core("twowayboltp3", hitBoxSubEventManger.transform.position, hitBoxSubEventManger.transform.rotation, 3, _HitBox.GeneratedByStateKey);
+                break;
+            case "twowayboltp4":
+                BO_Ani_E.hiddenMethods.MagicForward_core("twowayboltp4", hitBoxSubEventManger.transform.position, hitBoxSubEventManger.transform.rotation, 3, _HitBox.GeneratedByStateKey);
+                break;
         }
     }
 }
