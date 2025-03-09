@@ -29,10 +29,11 @@ namespace mainMenu
             public string Type;
             public BehaviorType BType = BehaviorType.NONE;
             public int[] ExType = { 0, 1, 2, 3 };
+            public bool BossSkill = false;
             public bool Close;
             public bool Near;
             public bool Far;
-
+            
             public StoneFilterForm()
             {
             }

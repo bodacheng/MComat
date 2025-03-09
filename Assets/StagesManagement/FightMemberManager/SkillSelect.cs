@@ -12,6 +12,7 @@ public partial class StageEditor {
     readonly string[] _exLevelShows = { "ALL", "普攻", "一级必杀", "二级必杀", "三级必杀" };
     int[] _spSelected = { 0, 1, 2, 3 };
     readonly bool[] _rangeFilter = { false, false, false };
+    bool bossSKill = false;
     bool _skillSelectFilter;
     bool _filterRanges = true;
     IDictionary<string, string> _skillIDsAndNames = new Dictionary<string, string>();
@@ -42,6 +43,8 @@ public partial class StageEditor {
                 break;
             }
             
+            bossSKill = EditorGUILayout.Toggle("BOSS技能", bossSKill);
+            
             _filterRanges = EditorGUILayout.BeginToggleGroup("限定攻击范围", _filterRanges);
             if (!_filterRanges)
             {
@@ -65,6 +68,7 @@ public partial class StageEditor {
             Near = _rangeFilter[1],
             Far = _rangeFilter[2],
             ExType = _spSelected,
+            BossSkill = bossSKill,
             BType = Skill.BehaviorType.NONE
         };        
         _skillIDsAndNames = SkillList(filterForm);// 待研究

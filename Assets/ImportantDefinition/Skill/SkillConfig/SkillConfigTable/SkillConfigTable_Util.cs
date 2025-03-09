@@ -163,6 +163,12 @@ public partial class SkillConfigTable
         {
             if (filterForm.BType != BehaviorType.NONE && filterForm.BType != one.STATE_TYPE)
                 continue;
+
+            if (!filterForm.BossSkill && one.EVENT_CODE == "BOSS")
+            {
+                continue;
+            }
+            
             if (!SkillConfig.RangeLimit(one.AIAttrs.AI_MIN_DIS, one.AIAttrs.AI_MAX_DIS, filterForm.Close,
                 filterForm.Near, filterForm.Far) || !filterForm.ExType.ToList().Contains(one.SP_LEVEL)) 
                 continue;

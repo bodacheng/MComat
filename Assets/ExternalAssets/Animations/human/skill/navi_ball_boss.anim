@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: highlevelbo
+  m_Name: navi_ball_boss
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -149422,11 +149422,18 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.06666667
-    functionName: EffectOnBodyPart
-    data: left_hand
+    functionName: PrepareOneEffect
+    data: electric_s_e
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 3
+    messageOptions: 0
+  - time: 0.35
+    functionName: ReleasePreparedEffect
+    data: left_hand
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
     messageOptions: 0
   - time: 0.55
     functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
@@ -149435,14 +149442,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 1
     messageOptions: 0
-  - time: 0.5833333
-    functionName: Bullet_shoot_from_body_part
+  - time: 0.56666666
+    functionName: PrepareOneMagic
+    data: navi_ball_boss
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.6166667
+    functionName: ReleasePreparedMagicToAir
     data: left_hand
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 30
-    intParameter: 3
+    floatParameter: 0
+    intParameter: 0
     messageOptions: 0
-  - time: 0.6666667
+  - time: 0.8333333
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

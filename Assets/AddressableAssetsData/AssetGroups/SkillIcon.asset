@@ -143,6 +143,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - skill_icon
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c7cceeaef94547779b1ed6dc0998cee
+    m_Address: 198
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - skill_icon
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4cefa11fb1ff74554ad1aea291bb40a9
     m_Address: 107
     m_ReadOnly: 0
